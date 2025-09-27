@@ -1,0 +1,139 @@
+---
+id: "tco-asking-questions"
+title: "Asking Questions"
+domainSlug: "asking-questions"
+domainEnum: ASKING_QUESTIONS
+difficulty: "Beginner"
+estimatedTime: "45 min"
+blueprintWeight: 0.22
+description: "Master the art of querying in Tanium - learn natural language query construction, sensor mastery, and saved question management."
+tags: ["queries", "sensors", "natural-language", "saved-questions"]
+lastUpdated: "2024-09-05"
+version: 1
+status: published
+# author: "TCO Study Platform" # This field is not in the schema
+# objectives: 4 # This field is not in the schema - moved to meta export
+objectives:
+  - "Construct effective natural language queries in the Tanium console"
+  - "Master the 500+ built-in sensors and create custom sensors"
+  - "Manage saved questions lifecycle and sharing workflows"
+  - "Interpret query results and troubleshoot performance issues"
+---
+
+import InfoBox from '../../components/mdx/InfoBox';
+import PracticeButton from '../../components/mdx/PracticeButton';
+
+export const meta = {
+  id: 'tco-asking-questions',
+  title: 'Asking Questions',
+  objectives: 4,
+  domainSlug: 'asking-questions'
+};
+
+# Asking Questions: Foundation of Tanium Operations
+
+## 🎯 Domain Overview
+
+**Domain Weight**: 22% of TAN-1000 exam | **Difficulty**: Beginner to Intermediate
+
+The "Asking Questions" domain forms the foundation of all Tanium operations. Every administrative task, security investigation, and system management action begins with asking the right question in the right way.
+
+## 🧠 Core Concepts
+
+### Natural Language Query Construction
+
+Tanium's revolutionary approach uses **natural language processing** to convert human-readable questions into powerful system queries.
+
+<InfoBox title="Key Insight">
+  The Tanium question format follows: **Get [sensor] from [targets] where [filters]**
+</InfoBox>
+
+**Example Query Patterns**:
+
+- `Get Computer Name from all machines`
+- `Get Running Services from all machines where IP Address contains "192.168"`
+- `Get Installed Applications from all machines where Computer Name contains "SERVER"`
+
+### The 500+ Sensor Library
+
+**Built-in Sensors** provide immediate access to system information:
+
+- **System Sensors**: Computer Name, IP Address, Operating System, Uptime
+- **Security Sensors**: Running Processes, Open Ports, User Rights, Services
+- **Application Sensors**: Installed Applications, Running Applications, Browser Extensions
+- **Hardware Sensors**: CPU Usage, Memory Usage, Disk Space, Network Interface
+
+<InfoBox title="Pro Tip">
+  Use the **Sensor Library** to explore available sensors and understand their parameters before
+  constructing queries.
+</InfoBox>
+
+### Custom Sensor Creation
+
+When built-in sensors don't meet your needs, create **custom sensors**:
+
+```bash
+# Example: Custom Registry Sensor
+Sensor Name: Custom Registry Check
+Platform: Windows
+Script: reg query "HKEY_LOCAL_MACHINE\SOFTWARE\MyApp" /v Version 2>nul
+```
+
+## 🎮 Interactive Learning
+
+<PracticeButton
+  type="flashcard"
+  title="Query Construction Practice"
+  difficulty="beginner"
+  estimatedTime="10 minutes"
+>
+  Master basic query patterns with interactive flashcards
+</PracticeButton>
+
+## 📊 Saved Question Management
+
+### Creation and Deployment
+
+1. **Create**: Construct and test your query
+2. **Validate**: Ensure query returns expected results
+3. **Save**: Store with descriptive metadata
+4. **Share**: Deploy to appropriate user groups
+5. **Monitor**: Track usage and performance
+
+### Best Practices
+
+- **Descriptive Names**: Use clear, searchable naming conventions
+- **Documentation**: Add context and usage instructions
+- **Performance**: Monitor execution time and resource usage
+- **Lifecycle**: Regular review and cleanup of unused questions
+
+## 🔧 Hands-On Lab Preview
+
+**LAB-AQ-001: Natural Language Query Construction (12 minutes)**
+
+- Practice essential query patterns
+- Explore sensor parameters and filtering
+- Validate query performance and accuracy
+
+## ✅ Key Takeaways
+
+1. **Natural Language**: Tanium queries use intuitive human language patterns
+2. **Sensor Mastery**: Understanding the 500+ sensors is crucial for effective querying
+3. **Custom Solutions**: Create custom sensors when built-in options are insufficient
+4. **Question Lifecycle**: Proper management ensures scalable, maintainable query operations
+
+---
+
+**Next Module**: [Refining Questions & Targeting](../02-refining-questions) - Learn advanced targeting and filtering techniques
+- Validate query performance and accuracy
+
+## ✅ Key Takeaways
+
+1. **Natural Language**: Tanium queries use intuitive human language patterns
+2. **Sensor Mastery**: Understanding the 500+ sensors is crucial for effective querying
+3. **Custom Solutions**: Create custom sensors when built-in options are insufficient
+4. **Question Lifecycle**: Proper management ensures scalable, maintainable query operations
+
+---
+
+**Next Module**: [Refining Questions & Targeting](../02-refining-questions) - Learn advanced targeting and filtering techniques

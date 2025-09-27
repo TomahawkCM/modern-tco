@@ -1,0 +1,275 @@
+?? Tanium TCO PowerShell Development Environment Loaded!
+?? Type 'tco-status' for available commands
+src/components/study/StudyModuleViewer.tsx(110,30): error TS2339: Property 'id' does not exist on type 'never'.
+src/components/study/StudyModuleViewer.tsx(111,33): error TS2339: Property 'title' does not exist on type 'never'.
+src/components/study/StudyModuleViewer.tsx(112,39): error TS2339: Property 'description' does not exist on type 'never'.
+src/components/study/StudyModuleViewer.tsx(113,34): error TS2339: Property 'domain' does not exist on type 'never'.
+src/components/study/StudyModuleViewer.tsx(114,44): error TS2339: Property 'estimated_time_minutes' does not exist on type 'never'.
+src/components/study/StudyModuleViewer.tsx(115,48): error TS2339: Property 'estimated_time_minutes' does not exist on type 'never'.
+src/components/study/StudyModuleViewer.tsx(116,38): error TS2339: Property 'exam_weight' does not exist on type 'never'.
+src/components/study/StudyModuleViewer.tsx(117,60): error TS2339: Property 'learning_objectives' does not exist on type 'never'.
+src/components/study/StudyModuleViewer.tsx(118,30): error TS2339: Property 'learning_objectives' does not exist on type 'never'.
+src/components/study/StudyModuleViewer.tsx(121,29): error TS2339: Property 'id' does not exist on type 'never'.
+src/components/study/StudyModuleViewer.tsx(122,32): error TS2339: Property 'title' does not exist on type 'never'.
+src/components/study/StudyModuleViewer.tsx(123,34): error TS2339: Property 'content' does not exist on type 'never'.
+src/components/study/StudyModuleViewer.tsx(124,38): error TS2339: Property 'section_type' does not exist on type 'never'.
+src/components/study/StudyModuleViewer.tsx(125,37): error TS2339: Property 'order_index' does not exist on type 'never'.
+src/components/study/StudyModuleViewer.tsx(126,40): error TS2339: Property 'estimated_time_minutes' does not exist on type 'never'.
+src/components/study/StudyModuleViewer.tsx(127,47): error TS2339: Property 'estimated_time_minutes' does not exist on type 'never'.
+src/components/study/StudyModuleViewer.tsx(128,50): error TS2339: Property 'key_points' does not exist on type 'never'.
+src/components/study/StudyModuleViewer.tsx(129,29): error TS2339: Property 'key_points' does not exist on type 'never'.
+src/components/study/StudyModuleViewer.tsx(131,51): error TS2339: Property 'procedures' does not exist on type 'never'.
+src/components/study/StudyModuleViewer.tsx(132,29): error TS2339: Property 'procedures' does not exist on type 'never'.
+src/components/study/StudyModuleViewer.tsx(134,56): error TS2339: Property 'troubleshooting' does not exist on type 'never'.
+src/components/study/StudyModuleViewer.tsx(135,29): error TS2339: Property 'troubleshooting' does not exist on type 'never'.
+src/components/study/StudyModuleViewer.tsx(137,51): error TS2339: Property 'references' does not exist on type 'never'.
+src/components/study/StudyModuleViewer.tsx(138,29): error TS2339: Property 'references' does not exist on type 'never'.
+src/components/study/StudyModuleViewer.tsx(140,35): error TS2339: Property 'playbook' does not exist on type 'never'.
+src/components/study/StudySectionCard.tsx(58,16): error TS18047: 'section.content' is possibly 'null'.
+src/components/study/StudySectionCard.tsx(58,32): error TS2339: Property 'substring' does not exist on type 'string | number | boolean | { [key: string]: Json | undefined; } | Json[]'.
+  Property 'substring' does not exist on type 'number'.
+src/contexts/ExamContext.tsx(197,45): error TS2339: Property 'id' does not exist on type 'never'.
+src/contexts/ExamContext.tsx(276,81): error TS2339: Property 'id' does not exist on type 'never'.
+src/contexts/ExamContext.tsx(277,53): error TS2339: Property 'id' does not exist on type 'never'.
+src/contexts/ModuleContext.tsx(389,18): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(values: never, options?: { onConflict?: string | undefined; ignoreDuplicates?: boolean | undefined; count?: "exact" | "planned" | "estimated" | undefined; } | undefined): PostgrestFilterBuilder<{ ...; }, ... 5 more ..., "POST">', gave the following error.
+    Argument of type '{ user_id: string; module_id: string; time_spent_minutes: number; completed_at: string | null; status: string; notes: null; section_id: null; }' is not assignable to parameter of type 'never'.
+  Overload 2 of 2, '(values: never[], options?: { onConflict?: string | undefined; ignoreDuplicates?: boolean | undefined; count?: "exact" | "planned" | "estimated" | undefined; defaultToNull?: boolean | undefined; } | undefined): PostgrestFilterBuilder<...>', gave the following error.
+    Object literal may only specify known properties, and 'user_id' does not exist in type 'never[]'.
+src/contexts/QuestionsContext.tsx(381,11): error TS2741: Property 'Expert' is missing in type '{ Beginner: number; Intermediate: number; Advanced: number; }' but required in type 'Record<Difficulty, number>'.
+src/data/sample-questions.ts(60,65): error TS2339: Property 'message' does not exist on type '{}'.
+src/hooks/useAssessment.ts(9,3): error TS2305: Module '"../types/assessment"' has no exported member 'QuestionAnswer'.
+src/hooks/useAssessment.ts(47,68): error TS2345: Argument of type 'import("C:/Users/robne/Documents/mapmydeals-gpt5/Tanium TCO/modern-tco/src/types/assessment").AssessmentConfig' is not assignable to parameter of type 'import("C:/Users/robne/Documents/mapmydeals-gpt5/Tanium TCO/modern-tco/src/lib/assessment/assessment-engine").AssessmentConfig'.
+  Types of property 'type' are incompatible.
+    Type '"practice" | "mock-exam" | "domain-specific" | "adaptive" | "domain-test" | "module-quiz" | "practice-test"' is not assignable to type '"practice" | "mock-exam" | "domain-specific" | "adaptive"'.
+      Type '"domain-test"' is not assignable to type '"practice" | "mock-exam" | "domain-specific" | "adaptive"'.
+src/hooks/useAssessment.ts(51,9): error TS2353: Object literal may only specify known properties, and 'assessmentId' does not exist in type 'AssessmentSession'.
+src/hooks/useAssessment.ts(69,30): error TS2339: Property 'track' does not exist on type 'typeof AnalyticsServiceClass'.
+src/hooks/useAssessment.ts(99,51): error TS2339: Property 'answers' does not exist on type 'AssessmentSession'.
+src/hooks/useAssessment.ts(116,32): error TS2339: Property 'updateSession' does not exist on type 'AssessmentEngineClass'.
+src/hooks/useAssessment.ts(121,32): error TS2339: Property 'track' does not exist on type 'typeof AnalyticsServiceClass'.
+src/hooks/useAssessment.ts(123,34): error TS2339: Property 'userId' does not exist on type 'AssessmentSession'.
+src/hooks/useAssessment.ts(151,62): error TS2345: Argument of type 'AssessmentSession' is not assignable to parameter of type 'AssessmentSessionData'.
+  Type 'AssessmentSession' is missing the following properties from type 'AssessmentSessionData': sessionId, timeSpent, currentQuestionIndex, isCompleted, isPaused
+src/hooks/useAssessment.ts(166,29): error TS2339: Property 'updateAssessmentProgress' does not exist on type 'typeof ProgressServiceClass'.
+src/hooks/useAssessment.ts(167,32): error TS2339: Property 'userId' does not exist on type 'AssessmentSession'.
+src/hooks/useAssessment.ts(169,38): error TS2339: Property 'assessmentId' does not exist on type 'AssessmentSession'.
+src/hooks/useAssessment.ts(173,27): error TS2339: Property 'timeSpent' does not exist on type 'AssessmentResult'.
+src/hooks/useAssessment.ts(178,30): error TS2339: Property 'track' does not exist on type 'typeof AnalyticsServiceClass'.
+src/hooks/useAssessment.ts(180,32): error TS2339: Property 'userId' does not exist on type 'AssessmentSession'.
+src/hooks/useAssessment.ts(185,29): error TS2339: Property 'timeSpent' does not exist on type 'AssessmentResult'.
+src/hooks/useAssessment.ts(187,34): error TS2339: Property 'totalQuestions' does not exist on type 'AssessmentResult'.
+src/hooks/useAssessment.ts(206,24): error TS2339: Property 'track' does not exist on type 'typeof AnalyticsServiceClass'.
+src/hooks/useAssessment.ts(208,32): error TS2339: Property 'userId' does not exist on type 'AssessmentSession'.
+src/hooks/useAssessment.ts(211,45): error TS2339: Property 'answers' does not exist on type 'AssessmentSession'.
+src/hooks/useAssessment.ts(227,29): error TS2339: Property 'updateQuestionProgress' does not exist on type 'typeof ProgressServiceClass'.
+src/hooks/useAssessment.ts(235,36): error TS2339: Property 'getUserProgress' does not exist on type 'typeof ProgressServiceClass'.
+src/hooks/useAssessment.ts(244,30): error TS2339: Property 'track' does not exist on type 'typeof AnalyticsServiceClass'.
+src/hooks/useAssessment.ts(252,37): error TS2339: Property 'getUserAnalytics' does not exist on type 'typeof AnalyticsServiceClass'.
+src/hooks/useBookmarks.ts(105,44): error TS2304: Cannot find name 'UserStudyBookmark'.
+src/hooks/useBookmarks.ts(120,52): error TS2304: Cannot find name 'UserStudyBookmark'.
+src/hooks/useBookmarks.ts(121,52): error TS2339: Property 'module_id' does not exist on type 'UserBookmarkWithDetails'.
+src/hooks/useBookmarks.ts(130,51): error TS2304: Cannot find name 'UserStudyBookmark'.
+src/hooks/useDatabase.ts(7,27): error TS2339: Property 'exam_sessions' does not exist on type '{ command_validation_results: { Row: { command_text: string; command_type: string; doc_file_path: string; error_message: string | null; id: string; tested_at: string | null; tested_by: string | null; validation_result: string; }; Insert: { ...; }; Update: { ...; }; Relationships: []; }; ... 7 more ...; user_study_pr...'.
+src/hooks/useDatabase.ts(8,28): error TS2339: Property 'user_progress' does not exist on type '{ command_validation_results: { Row: { command_text: string; command_type: string; doc_file_path: string; error_message: string | null; id: string; tested_at: string | null; tested_by: string | null; validation_result: string; }; Insert: { ...; }; Update: { ...; }; Relationships: []; }; ... 7 more ...; user_study_pr...'.
+src/hooks/useDatabase.ts(9,30): error TS2339: Property 'user_statistics' does not exist on type '{ command_validation_results: { Row: { command_text: string; command_type: string; doc_file_path: string; error_message: string | null; id: string; tested_at: string | null; tested_by: string | null; validation_result: string; }; Insert: { ...; }; Update: { ...; }; Relationships: []; }; ... 7 more ...; user_study_pr...'.
+src/hooks/useDatabase.ts(17,37): error TS2339: Property 'exam_sessions' does not exist on type '{ command_validation_results: { Row: { command_text: string; command_type: string; doc_file_path: string; error_message: string | null; id: string; tested_at: string | null; tested_by: string | null; validation_result: string; }; Insert: { ...; }; Update: { ...; }; Relationships: []; }; ... 7 more ...; user_study_pr...'.
+src/hooks/useDatabase.ts(22,10): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(values: never, options?: { count?: "exact" | "planned" | "estimated" | undefined; } | undefined): PostgrestFilterBuilder<{ PostgrestVersion: "13.0.4"; }, never, never, null, "exam_sessions", never, "POST">', gave the following error.
+    Argument of type '{ user_id: string; }' is not assignable to parameter of type 'never'.
+  Overload 2 of 2, '(values: never[], options?: { count?: "exact" | "planned" | "estimated" | undefined; defaultToNull?: boolean | undefined; } | undefined): PostgrestFilterBuilder<{ PostgrestVersion: "13.0.4"; }, never, ... 4 more ..., "POST">', gave the following error.
+    Object literal may only specify known properties, and 'user_id' does not exist in type 'never[]'.
+src/hooks/useDatabase.ts(36,47): error TS2339: Property 'exam_sessions' does not exist on type '{ command_validation_results: { Row: { command_text: string; command_type: string; doc_file_path: string; error_message: string | null; id: string; tested_at: string | null; tested_by: string | null; validation_result: string; }; Insert: { ...; }; Update: { ...; }; Relationships: []; }; ... 7 more ...; user_study_pr...'.
+src/hooks/useDatabase.ts(41,17): error TS2345: Argument of type 'any' is not assignable to parameter of type 'never'.
+src/hooks/useDatabase.ts(54,38): error TS2339: Property 'user_progress' does not exist on type '{ command_validation_results: { Row: { command_text: string; command_type: string; doc_file_path: string; error_message: string | null; id: string; tested_at: string | null; tested_by: string | null; validation_result: string; }; Insert: { ...; }; Update: { ...; }; Relationships: []; }; ... 7 more ...; user_study_pr...'.
+src/hooks/useDatabase.ts(59,10): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(values: never, options?: { count?: "exact" | "planned" | "estimated" | undefined; } | undefined): PostgrestFilterBuilder<{ PostgrestVersion: "13.0.4"; }, never, never, null, "user_progress", never, "POST">', gave the following error.
+    Argument of type '{ user_id: string; }' is not assignable to parameter of type 'never'.
+  Overload 2 of 2, '(values: never[], options?: { count?: "exact" | "planned" | "estimated" | undefined; defaultToNull?: boolean | undefined; } | undefined): PostgrestFilterBuilder<{ PostgrestVersion: "13.0.4"; }, never, ... 4 more ..., "POST">', gave the following error.
+    Object literal may only specify known properties, and 'user_id' does not exist in type 'never[]'.
+src/hooks/useDatabase.ts(85,35): error TS2339: Property 'user_statistics' does not exist on type '{ command_validation_results: { Row: { command_text: string; command_type: string; doc_file_path: string; error_message: string | null; id: string; tested_at: string | null; tested_by: string | null; validation_result: string; }; Insert: { ...; }; Update: { ...; }; Relationships: []; }; ... 7 more ...; user_study_pr...'.
+src/hooks/useDatabase.ts(90,10): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(values: never, options?: { onConflict?: string | undefined; ignoreDuplicates?: boolean | undefined; count?: "exact" | "planned" | "estimated" | undefined; } | undefined): PostgrestFilterBuilder<{ ...; }, ... 5 more ..., "POST">', gave the following error.
+    Argument of type '{ user_id: string; }' is not assignable to parameter of type 'never'.
+  Overload 2 of 2, '(values: never[], options?: { onConflict?: string | undefined; ignoreDuplicates?: boolean | undefined; count?: "exact" | "planned" | "estimated" | undefined; defaultToNull?: boolean | undefined; } | undefined): PostgrestFilterBuilder<...>', gave the following error.
+    Object literal may only specify known properties, and 'user_id' does not exist in type 'never[]'.
+src/hooks/useStudyProgress.ts(81,5): error TS2322: Type 'string' is not assignable to type 'StudyStatus'.
+src/hooks/useStudyProgress.ts(87,29): error TS2339: Property 'completion_percentage' does not exist on type '{ completed_at: string | null; created_at: string; id: string; module_id: string; notes: string | null; section_id: string | null; status: string; time_spent_minutes: number; updated_at: string; user_id: string; }'.
+src/lib/assessment-engine.ts(85,5): error TS2739: Type '{ sessionId: string; moduleId: string | undefined; domain: TCODomain; score: AssessmentScore; performance: PerformanceMetrics; remediation: RemediationPlan; passed: boolean; completedAt: Date; }' is missing the following properties from type 'AssessmentResult': overallScore, correctAnswers
+src/lib/assessment-engine.ts(412,27): error TS18048: 'config.passThreshold' is possibly 'undefined'.
+src/lib/assessment-engine.ts(581,11): error TS7034: Variable 'studyItems' implicitly has type 'any[]' in some locations where its type cannot be determined.
+src/lib/assessment-engine.ts(617,12): error TS7005: Variable 'studyItems' implicitly has an 'any[]' type.
+src/lib/assessment-engine.ts(621,40): error TS18048: 'config.passThreshold' is possibly 'undefined'.
+src/lib/assessment-engine.ts(642,40): error TS18048: 'session.config.passThreshold' is possibly 'undefined'.
+src/lib/assessment-engine.ts(644,5): error TS2739: Type '{ sessionId: string; moduleId: string | undefined; domain: TCODomain; score: AssessmentScore; performance: PerformanceMetrics; remediation: RemediationPlan; passed: boolean; completedAt: Date; }' is missing the following properties from type 'AssessmentResult': overallScore, correctAnswers
+src/lib/assessment/assessment-engine.ts(88,45): error TS2345: Argument of type '{ type: "session_start"; timestamp: Date; data: { assessmentType: "practice" | "mock-exam" | "domain-specific" | "adaptive"; questionCount: number; moduleId: string | undefined; domainFilter: string[] | undefined; }; }' is not assignable to parameter of type 'AnalyticsEvent'.
+  Type '{ type: "session_start"; timestamp: Date; data: { assessmentType: "practice" | "mock-exam" | "domain-specific" | "adaptive"; questionCount: number; moduleId: string | undefined; domainFilter: string[] | undefined; }; }' is missing the following properties from type 'AnalyticsEvent': event_id, user_id, created_at
+src/lib/assessment/assessment-engine.ts(121,45): error TS2345: Argument of type '{ type: "question_answered"; timestamp: Date; data: { questionId: string; selectedAnswers: string[]; timeSpent: number; confidence: number | undefined; questionIndex: number; }; }' is not assignable to parameter of type 'AnalyticsEvent'.
+  Type '{ type: "question_answered"; timestamp: Date; data: { questionId: string; selectedAnswers: string[]; timeSpent: number; confidence: number | undefined; questionIndex: number; }; }' is missing the following properties from type 'AnalyticsEvent': event_id, user_id, created_at
+src/lib/assessment/assessment-engine.ts(195,9): error TS2322: Type '"assessment_completed"' is not assignable to type '"pause" | "session_start" | "question_view" | "answer_select" | "answer_change" | "question_skip" | "question_answered" | "confidence_rate" | "review_start" | "session_end" | "resume" | "help_request" | "user_rating" | "difficulty_adjusted"'.
+src/lib/assessment/assessment-engine.ts(200,35): error TS2339: Property 'timeSpent' does not exist on type 'AssessmentResult'.
+src/lib/assessment/assessment-engine.ts(262,7): error TS2561: Object literal may only specify known properties, but 'assessmentType' does not exist in type 'AssessmentResult'. Did you mean to write 'assessment'?
+src/lib/assessment/assessment-engine.ts(348,44): error TS2367: This comparison appears to be unintentional because the types '"pause" | "session_start" | "question_view" | "answer_select" | "answer_change" | "question_skip" | "question_answered" | "confidence_rate" | "review_start" | "session_end" | "resume" | "help_request" | "user_rating" | "difficulty_adjusted"' and '"answer_changed"' have no overlap.
+src/lib/assessment/assessment-engine.ts(349,46): error TS2367: This comparison appears to be unintentional because the types '"pause" | "session_start" | "question_view" | "answer_select" | "answer_change" | "question_skip" | "question_answered" | "confidence_rate" | "review_start" | "session_end" | "resume" | "help_request" | "user_rating" | "difficulty_adjusted"' and '"question_skipped"' have no overlap.
+src/lib/assessment/assessment-engine.ts(350,46): error TS2367: This comparison appears to be unintentional because the types '"pause" | "session_start" | "question_view" | "answer_select" | "answer_change" | "question_skip" | "question_answered" | "confidence_rate" | "review_start" | "session_end" | "resume" | "help_request" | "user_rating" | "difficulty_adjusted"' and '"question_flagged"' have no overlap.
+src/lib/assessment/assessment-engine.ts(373,40): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(o: { [s: string]: { score: number; correct: number; total: number; }; } | ArrayLike<{ score: number; correct: number; total: number; }>): [string, { score: number; correct: number; total: number; }][]', gave the following error.
+    Argument of type 'Record<string, { score: number; correct: number; total: number; }> | undefined' is not assignable to parameter of type '{ [s: string]: { score: number; correct: number; total: number; }; } | ArrayLike<{ score: number; correct: number; total: number; }>'.
+      Type 'undefined' is not assignable to type '{ [s: string]: { score: number; correct: number; total: number; }; } | ArrayLike<{ score: number; correct: number; total: number; }>'.
+  Overload 2 of 2, '(o: {}): [string, any][]', gave the following error.
+    Argument of type 'Record<string, { score: number; correct: number; total: number; }> | undefined' is not assignable to parameter of type '{}'.
+      Type 'undefined' is not assignable to type '{}'.
+src/lib/assessment/assessment-engine.ts(380,26): error TS18048: 'result.domainBreakdown' is possibly 'undefined'.
+src/lib/assessment/assessment-engine.ts(383,11): error TS2322: Type 'string' is not assignable to type 'TCODomain | undefined'.
+src/lib/assessment/assessment-engine.ts(395,39): error TS2538: Type 'undefined' cannot be used as an index type.
+src/lib/assessment/assessment-engine.ts(396,39): error TS2538: Type 'undefined' cannot be used as an index type.
+src/lib/assessment/assessment-engine.ts(405,7): error TS2353: Object literal may only specify known properties, and 'nextSteps' does not exist in type 'RemediationPlan'.
+src/lib/assessment/assessment-engine.ts(465,43): error TS2345: Argument of type '{ type: "difficulty_adjusted"; timestamp: Date; data: { adjustment: string; reason: string; }; }' is not assignable to parameter of type 'AnalyticsEvent'.
+  Type '{ type: "difficulty_adjusted"; timestamp: Date; data: { adjustment: string; reason: string; }; }' is missing the following properties from type 'AnalyticsEvent': event_id, user_id, created_at
+src/lib/assessment/assessment-engine.ts(474,43): error TS2345: Argument of type '{ type: "difficulty_adjusted"; timestamp: Date; data: { adjustment: string; reason: string; }; }' is not assignable to parameter of type 'AnalyticsEvent'.
+  Type '{ type: "difficulty_adjusted"; timestamp: Date; data: { adjustment: string; reason: string; }; }' is missing the following properties from type 'AnalyticsEvent': event_id, user_id, created_at
+src/lib/examLogic.ts(341,46): error TS2345: Argument of type 'Difficulty' is not assignable to parameter of type '"Beginner" | "Intermediate" | "Advanced"'.
+  Type '"Expert"' is not assignable to type '"Beginner" | "Intermediate" | "Advanced"'.
+src/lib/examLogic.ts(342,46): error TS2345: Argument of type 'Difficulty' is not assignable to parameter of type '"Beginner" | "Intermediate" | "Advanced"'.
+  Type '"Expert"' is not assignable to type '"Beginner" | "Intermediate" | "Advanced"'.
+src/lib/examLogic.ts(345,46): error TS2345: Argument of type 'Difficulty' is not assignable to parameter of type '"Beginner" | "Intermediate" | "Advanced"'.
+  Type '"Expert"' is not assignable to type '"Beginner" | "Intermediate" | "Advanced"'.
+src/lib/examLogic.ts(436,5): error TS2322: Type '"Beginner"' is not assignable to type '"Intermediate"'.
+src/lib/examLogic.ts(438,5): error TS2322: Type '"Advanced"' is not assignable to type '"Intermediate"'.
+src/lib/learning-flow-state-machine.ts(318,20): error TS2341: Property 'evaluateCanProceed' is private and only accessible within class 'LearningFlowStateMachine'.
+src/lib/mdx-loader.ts(6,15): error TS2305: Module '"@mdx-js/react"' has no exported member 'MDXProps'.
+src/lib/mdx-schema.ts(52,35): error TS2339: Property 'errors' does not exist on type 'ZodError<unknown>'.
+src/lib/mdx-schema.ts(53,15): error TS7006: Parameter 'err' implicitly has an 'any' type.
+src/lib/mdx/module-schema.ts(94,28): error TS2339: Property 'errors' does not exist on type 'ZodError<unknown>'.
+src/lib/mdx/module-schema.ts(94,40): error TS7006: Parameter 'err' implicitly has an 'any' type.
+src/lib/practice-question-targeting.ts(230,11): error TS2739: Type '{ "Asking Questions": number; "Refining Questions": number; "Taking Action": number; "Navigation and Basic Module Functions": number; "Report Generation and Data Export": number; }' is missing the following properties from type 'Record<TCODomain, number>': "Refining Questions & Targeting", Security, Fundamentals, Troubleshooting
+src/lib/practice-question-targeting.ts(238,11): error TS2741: Property 'Expert' is missing in type '{ Beginner: number; Intermediate: number; Advanced: number; }' but required in type 'Record<Difficulty, number>'.
+src/lib/practice-question-targeting.ts(255,7): error TS2322: Type '"mixed-practice"' is not assignable to type '"expand-criteria" | "use-similar-modules" | "mixed-content" | undefined'.
+src/lib/practice-question-targeting.ts(346,11): error TS2739: Type '{ "Asking Questions": never[]; "Refining Questions": never[]; "Taking Action": never[]; "Navigation and Basic Module Functions": never[]; "Report Generation and Data Export": never[]; }' is missing the following properties from type 'Record<TCODomain, Question[]>': "Refining Questions & Targeting", Security, Fundamentals, Troubleshooting
+src/lib/practice-session-manager.ts(38,9): error TS2532: Object is possibly 'undefined'.
+src/lib/practice-session-manager.ts(38,46): error TS2532: Object is possibly 'undefined'.
+src/lib/practice-session-manager.ts(189,11): error TS2739: Type '{ "Asking Questions": { correct: number; total: number; percentage: number; }; "Refining Questions": { correct: number; total: number; percentage: number; }; "Taking Action": { correct: number; total: number; percentage: number; }; "Navigation and Basic Module Functions": { ...; }; "Report Generation and Data Export...' is missing the following properties from type 'Record<TCODomain, { correct: number; total: number; percentage: number; }>': "Refining Questions & Targeting", Security, Fundamentals, Troubleshooting
+src/lib/practice-session-manager.ts(201,11): error TS2741: Property 'Expert' is missing in type '{ Beginner: { correct: number; total: number; percentage: number; }; Intermediate: { correct: number; total: number; percentage: number; }; Advanced: { correct: number; total: number; percentage: number; }; }' but required in type 'Record<Difficulty, { correct: number; total: number; percentage: number; }>'.
+src/lib/questionLoader.ts(704,5): error TS2769: No overload matches this call.
+  Overload 1 of 3, '(callbackfn: (previousValue: unknown, currentValue: unknown, currentIndex: number, array: unknown[]) => unknown, initialValue: unknown): unknown', gave the following error.
+    Argument of type '(sum: number, weight: number) => number' is not assignable to parameter of type '(previousValue: unknown, currentValue: unknown, currentIndex: number, array: unknown[]) => unknown'.
+      Types of parameters 'sum' and 'previousValue' are incompatible.
+        Type 'unknown' is not assignable to type 'number'.
+  Overload 2 of 3, '(callbackfn: (previousValue: number, currentValue: unknown, currentIndex: number, array: unknown[]) => number, initialValue: number): number', gave the following error.
+    Argument of type '(sum: number, weight: number) => number' is not assignable to parameter of type '(previousValue: number, currentValue: unknown, currentIndex: number, array: unknown[]) => number'.
+      Types of parameters 'weight' and 'currentValue' are incompatible.
+        Type 'unknown' is not assignable to type 'number'.
+src/lib/questionLoader.ts(711,60): error TS18046: 'totalWeight' is of type 'unknown'.
+src/lib/questionService.ts(81,81): error TS2345: Argument of type '{ question_count: number; }' is not assignable to parameter of type 'undefined'.
+src/lib/questionService.ts(91,41): error TS2352: Conversion of type 'string | number | boolean | { [key: string]: Json | undefined; } | Json[] | null' to type 'Question' may be a mistake because neither type sufficiently overlaps with the other. If this was intentional, convert the expression to 'unknown' first.
+  Type 'Json[]' is missing the following properties from type 'Question': id, question, choices, correctAnswerId, and 3 more.
+src/lib/questionService.ts(170,30): error TS2339: Property 'domain' does not exist on type 'never'.
+src/lib/questionService.ts(170,57): error TS2339: Property 'question_count' does not exist on type 'never'.
+src/lib/questionService.ts(175,34): error TS2339: Property 'difficulty' does not exist on type 'never'.
+src/lib/questionService.ts(180,32): error TS2339: Property 'category' does not exist on type 'never'.
+src/lib/questionService.ts(253,15): error TS2339: Property 'options' does not exist on type 'never'.
+src/lib/questionService.ts(253,42): error TS2339: Property 'options' does not exist on type 'never'.
+src/lib/questionService.ts(254,32): error TS2339: Property 'options' does not exist on type 'never'.
+src/lib/questionService.ts(255,37): error TS2339: Property 'correct_answer' does not exist on type 'never'.
+src/lib/questionService.ts(258,29): error TS2339: Property 'id' does not exist on type 'never'.
+src/lib/questionService.ts(258,57): error TS2339: Property 'correct_answer' does not exist on type 'never'.
+src/lib/questionService.ts(262,37): error TS2339: Property 'id' does not exist on type 'never'.
+src/lib/questionService.ts(339,69): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(values: never, options?: { count?: "exact" | "planned" | "estimated" | undefined; } | undefined): PostgrestFilterBuilder<{ PostgrestVersion: "13.0.4"; }, never, never, null, "questions", never, "POST">', gave the following error.
+    Argument of type '{ id?: string | undefined; question: string; options: Json; correct_answer: string; explanation?: string | null | undefined; difficulty?: string | undefined; category: string; tags?: string[] | undefined; ... 7 more ...; reference?: string | ... 1 more ... | undefined; }' is not assignable to parameter of type 'never'.
+  Overload 2 of 2, '(values: never[], options?: { count?: "exact" | "planned" | "estimated" | undefined; defaultToNull?: boolean | undefined; } | undefined): PostgrestFilterBuilder<{ PostgrestVersion: "13.0.4"; }, never, ... 4 more ..., "POST">', gave the following error.
+    Argument of type '{ id?: string | undefined; question: string; options: Json; correct_answer: string; explanation?: string | null | undefined; difficulty?: string | undefined; category: string; tags?: string[] | undefined; ... 7 more ...; reference?: string | ... 1 more ... | undefined; }' is not assignable to parameter of type 'never[]'.
+      Type '{ id?: string | undefined; question: string; options: Json; correct_answer: string; explanation?: string | null | undefined; difficulty?: string | undefined; category: string; tags?: string[] | undefined; ... 7 more ...; reference?: string | ... 1 more ... | undefined; }' is missing the following properties from type 'never[]': length, pop, push, concat, and 28 more.
+src/lib/questionService.ts(345,5): error TS2740: Type 'Question[]' is missing the following properties from type 'Question': id, question, choices, correctAnswerId, and 3 more.
+src/lib/questionService.ts(345,44): error TS2345: Argument of type '{ id: string; question: string; options: Json; correct_answer: string; explanation: string | null; difficulty: string; category: string; tags: string[]; domain: string; module_id: string | null; ... 6 more ...; reference: string | null; }' is not assignable to parameter of type 'any[]'.
+  Type '{ id: string; question: string; options: Json; correct_answer: string; explanation: string | null; difficulty: string; category: string; tags: string[]; domain: string; module_id: string | null; ... 6 more ...; reference: string | null; }' is missing the following properties from type 'any[]': length, pop, push, concat, and 28 more.
+src/lib/questionService.ts(371,15): error TS2345: Argument of type '{ id?: string | undefined; question?: string | undefined; options?: Json | undefined; correct_answer?: string | undefined; explanation?: string | null | undefined; difficulty?: string | undefined; ... 7 more ...; created_by?: string | ... 1 more ... | undefined; }' is not assignable to parameter of type 'never'.
+src/lib/questionService.ts(380,5): error TS2740: Type 'Question[]' is missing the following properties from type 'Question': id, question, choices, correctAnswerId, and 3 more.
+src/lib/questionService.ts(380,44): error TS2345: Argument of type '{ id: string; question: string; options: Json; correct_answer: string; explanation: string | null; difficulty: string; category: string; tags: string[]; domain: string; module_id: string | null; ... 6 more ...; reference: string | null; }' is not assignable to parameter of type 'any[]'.
+  Type '{ id: string; question: string; options: Json; correct_answer: string; explanation: string | null; difficulty: string; category: string; tags: string[]; domain: string; module_id: string | null; ... 6 more ...; reference: string | null; }' is missing the following properties from type 'any[]': length, pop, push, concat, and 28 more.
+src/lib/services/analytics-service.ts(39,63): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(values: never, options?: { count?: "exact" | "planned" | "estimated" | undefined; } | undefined): PostgrestFilterBuilder<{ PostgrestVersion: "13.0.4"; }, never, never, null, "analytics_events", never, "POST">', gave the following error.
+    Argument of type '{ event_id: string; user_id: any; session_id: string | undefined; event_type: "pause" | "session_start" | "question_view" | "answer_select" | "answer_change" | "question_skip" | ... 7 more ... | "difficulty_adjusted"; event_timestamp: string; event_data: Record<...> | undefined; }' is not assignable to parameter of type 'never'.
+  Overload 2 of 2, '(values: never[], options?: { count?: "exact" | "planned" | "estimated" | undefined; defaultToNull?: boolean | undefined; } | undefined): PostgrestFilterBuilder<{ PostgrestVersion: "13.0.4"; }, never, ... 4 more ..., "POST">', gave the following error.
+    Object literal may only specify known properties, and 'event_id' does not exist in type 'never[]'.
+src/lib/study-modules.ts(291,15): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(values: never, options?: { onConflict?: string | undefined; ignoreDuplicates?: boolean | undefined; count?: "exact" | "planned" | "estimated" | undefined; } | undefined): PostgrestFilterBuilder<{ ...; }, ... 5 more ..., "POST">', gave the following error.
+    Argument of type '{ completed_at?: string | null | undefined; created_at?: string | undefined; id?: string | undefined; module_id: string; notes?: Json | undefined; section_id?: string | null | undefined; ... 5 more ...; last_accessed?: string | undefined; }' is not assignable to parameter of type 'never'.
+  Overload 2 of 2, '(values: never[], options?: { onConflict?: string | undefined; ignoreDuplicates?: boolean | undefined; count?: "exact" | "planned" | "estimated" | undefined; defaultToNull?: boolean | undefined; } | undefined): PostgrestFilterBuilder<...>', gave the following error.
+    Argument of type '{ completed_at?: string | null | undefined; created_at?: string | undefined; id?: string | undefined; module_id: string; notes?: Json | undefined; section_id?: string | null | undefined; ... 5 more ...; last_accessed?: string | undefined; }' is not assignable to parameter of type 'never[]'.
+      Type '{ completed_at?: string | null | undefined; created_at?: string | undefined; id?: string | undefined; module_id: string; notes?: Json | undefined; section_id?: string | null | undefined; ... 5 more ...; last_accessed?: string | undefined; }' is missing the following properties from type 'never[]': length, pop, push, concat, and 28 more.
+src/lib/study-modules.ts(379,15): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(values: never, options?: { count?: "exact" | "planned" | "estimated" | undefined; } | undefined): PostgrestFilterBuilder<{ PostgrestVersion: "13.0.4"; }, never, never, null, "user_study_bookmarks", never, "POST">', gave the following error.
+    Argument of type '{ created_at?: string | undefined; id?: string | undefined; note?: string | null | undefined; position?: number | undefined; section_id: string; updated_at?: string | undefined; user_id: string; }' is not assignable to parameter of type 'never'.
+  Overload 2 of 2, '(values: never[], options?: { count?: "exact" | "planned" | "estimated" | undefined; defaultToNull?: boolean | undefined; } | undefined): PostgrestFilterBuilder<{ PostgrestVersion: "13.0.4"; }, never, ... 4 more ..., "POST">', gave the following error.
+    Argument of type '{ created_at?: string | undefined; id?: string | undefined; note?: string | null | undefined; position?: number | undefined; section_id: string; updated_at?: string | undefined; user_id: string; }' is not assignable to parameter of type 'never[]'.
+      Type '{ created_at?: string | undefined; id?: string | undefined; note?: string | null | undefined; position?: number | undefined; section_id: string; updated_at?: string | undefined; user_id: string; }' is missing the following properties from type 'never[]': length, pop, push, concat, and 28 more.
+src/lib/study-modules.ts(420,15): error TS2345: Argument of type '{ created_at?: string | undefined; id?: string | undefined; note?: string | null | undefined; position?: number | undefined; section_id: string; updated_at?: string | undefined; user_id: string; }' is not assignable to parameter of type 'never'.
+src/lib/study-modules.ts(485,79): error TS2339: Property 'section' does not exist on type '{ completed_at: string | null; created_at: string; id: string; module_id: string; notes: string | null; section_id: string | null; status: string; time_spent_minutes: number; updated_at: string; user_id: string; }'.
+src/lib/supabase-flow-persistence.ts(39,10): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(values: never, options?: { onConflict?: string | undefined; ignoreDuplicates?: boolean | undefined; count?: "exact" | "planned" | "estimated" | undefined; } | undefined): PostgrestFilterBuilder<{ ...; }, ... 5 more ..., "POST">', gave the following error.
+    Argument of type '{ user_id: string; module_id: string; status: StudyStatus; created_at: string; completed_at: string | null; time_spent_minutes: number; notes: string; updated_at: string; }' is not assignable to parameter of type 'never'.
+  Overload 2 of 2, '(values: never[], options?: { onConflict?: string | undefined; ignoreDuplicates?: boolean | undefined; count?: "exact" | "planned" | "estimated" | undefined; defaultToNull?: boolean | undefined; } | undefined): PostgrestFilterBuilder<...>', gave the following error.
+    Object literal may only specify known properties, and 'user_id' does not exist in type 'never[]'.
+src/lib/validation/realTimeValidationService.ts(150,24): error TS18048: 'feedback.failure' is possibly 'undefined'.
+src/scripts/generate-questions.ts(94,9): error TS2322: Type '{ difficulty: { Beginner: number; Intermediate: number; Advanced: number; }; category: Record<QuestionCategory, number>; }' is not assignable to type '{ difficulty: Record<Difficulty, number>; category: Record<QuestionCategory, number>; }'.
+  Types of property 'difficulty' are incompatible.
+    Property 'Expert' is missing in type '{ Beginner: number; Intermediate: number; Advanced: number; }' but required in type 'Record<Difficulty, number>'.
+src/services/enhanced-anthropic-service.ts(448,7): error TS2353: Object literal may only specify known properties, and 'originalError' does not exist in type 'TCOQuestionGeneration'.
+src/services/QuestionGeneratorService.ts(277,12): error TS7053: Element implicitly has an 'any' type because expression of type 'Difficulty' can't be used to index type '{ Beginner: string; Intermediate: string; Advanced: string; }'.
+  Property 'Expert' does not exist on type '{ Beginner: string; Intermediate: string; Advanced: string; }'.
+src/services/QuestionGeneratorService.ts(364,28): error TS7053: Element implicitly has an 'any' type because expression of type 'Difficulty' can't be used to index type '{ Beginner: string; Intermediate: string; Advanced: string; }'.
+  Property 'Expert' does not exist on type '{ Beginner: string; Intermediate: string; Advanced: string; }'.
+src/services/studyContentService.ts(41,27): error TS2339: Property 'sections' does not exist on type '{ created_at: string; description: string | null; domain: string; estimated_time_minutes: number; exam_prep: Json; exam_weight: number; id: string; learning_objectives: Json; references: Json; title: string; updated_at: string; version: string; }'.
+src/services/studyContentService.ts(85,25): error TS2339: Property 'sections' does not exist on type 'never'.
+src/services/studyContentService.ts(223,66): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(values: never, options?: { onConflict?: string | undefined; ignoreDuplicates?: boolean | undefined; count?: "exact" | "planned" | "estimated" | undefined; } | undefined): PostgrestFilterBuilder<{ ...; }, ... 5 more ..., "POST">', gave the following error.
+    Argument of type '{ user_id: string; module_id: string; section_id: string | undefined; status: "not_started" | "in_progress" | "completed" | "needs_review"; time_spent_minutes: number; completed_at: string | null; updated_at: string; }' is not assignable to parameter of type 'never'.
+  Overload 2 of 2, '(values: never[], options?: { onConflict?: string | undefined; ignoreDuplicates?: boolean | undefined; count?: "exact" | "planned" | "estimated" | undefined; defaultToNull?: boolean | undefined; } | undefined): PostgrestFilterBuilder<...>', gave the following error.
+    Object literal may only specify known properties, and 'user_id' does not exist in type 'never[]'.
+tests/assessment-workflow.test.ts(11,10): error TS2305: Module '"../src/types/assessment"' has no exported member 'Difficulty'.
+tests/assessment-workflow.test.ts(11,22): error TS2305: Module '"../src/types/assessment"' has no exported member 'QuestionCategory'.
+tests/assessment-workflow.test.ts(11,40): error TS2459: Module '"../src/types/assessment"' declares 'TCODomain' locally, but it is not exported.
+tests/assessment-workflow.test.ts(32,3): error TS2353: Object literal may only specify known properties, and 'showFeedback' does not exist in type 'AssessmentConfig'.
+tests/assessment-workflow.test.ts(40,3): error TS2353: Object literal may only specify known properties, and 'assessmentId' does not exist in type 'AssessmentSession'.
+tests/assessment-workflow.test.ts(130,7): error TS2739: Type '{ order: number; title: string; description: string; type: "review"; activities: { type: string; content: string; duration: number; }[]; }' is missing the following properties from type 'StudyPlanItem': estimatedTime, objectiveIds, completed
+tests/assessment-workflow.test.ts(143,5): error TS2322: Type 'boolean' is not assignable to type 'RetakeEligibility'.
+tests/assessment-workflow.test.ts(161,62): error TS2345: Argument of type '{ sessionId: string; questions: Question[]; }' is not assignable to parameter of type 'AssessmentSessionData'.
+  Type '{ sessionId: string; questions: Question[]; }' is missing the following properties from type 'AssessmentSessionData': config, responses, startTime, timeSpent, and 3 more.
+tests/assessment-workflow.test.ts(167,26): error TS2339: Property 'updateSession' does not exist on type 'MockedObject<AssessmentEngineClass>'.
+tests/assessment-workflow.test.ts(170,25): error TS2339: Property 'updateAssessmentProgress' does not exist on type 'MockedClass<typeof ProgressServiceClass>'.
+tests/assessment-workflow.test.ts(171,25): error TS2339: Property 'updateQuestionProgress' does not exist on type 'MockedClass<typeof ProgressServiceClass>'.
+tests/assessment-workflow.test.ts(173,26): error TS2339: Property 'track' does not exist on type 'MockedClass<typeof AnalyticsServiceClass>'.
+tests/assessment-workflow.test.ts(198,35): error TS2339: Property 'track' does not exist on type 'MockedClass<typeof AnalyticsServiceClass>'.
+tests/assessment-workflow.test.ts(236,35): error TS2339: Property 'updateSession' does not exist on type 'MockedObject<AssessmentEngineClass>'.
+tests/assessment-workflow.test.ts(243,35): error TS2339: Property 'track' does not exist on type 'MockedClass<typeof AnalyticsServiceClass>'.
+tests/assessment-workflow.test.ts(291,34): error TS2339: Property 'updateAssessmentProgress' does not exist on type 'MockedClass<typeof ProgressServiceClass>'.
+tests/assessment-workflow.test.ts(298,48): error TS2339: Property 'totalQuestions' does not exist on type 'AssessmentResult'.
+tests/assessment-workflow.test.ts(299,43): error TS2339: Property 'timeSpent' does not exist on type 'AssessmentResult'.
+tests/assessment-workflow.test.ts(307,35): error TS2339: Property 'track' does not exist on type 'MockedClass<typeof AnalyticsServiceClass>'.
+tests/assessment-workflow.test.ts(315,50): error TS2339: Property 'totalQuestions' does not exist on type 'AssessmentResult'.
+tests/assessment-workflow.test.ts(316,45): error TS2339: Property 'timeSpent' does not exist on type 'AssessmentResult'.
+tests/assessment-workflow.test.ts(342,35): error TS2339: Property 'track' does not exist on type 'MockedClass<typeof AnalyticsServiceClass>'.
+tests/assessment-workflow.test.ts(381,28): error TS2339: Property 'updateSession' does not exist on type 'MockedObject<AssessmentEngineClass>'.
+tests/assessment-workflow.test.ts(442,34): error TS2339: Property 'updateQuestionProgress' does not exist on type 'MockedClass<typeof ProgressServiceClass>'.
+tests/assessment-workflow.test.ts(470,35): error TS2339: Property 'track' does not exist on type 'MockedClass<typeof AnalyticsServiceClass>'.
+tests/assessment-workflow.test.ts(483,27): error TS2339: Property 'getUserProgress' does not exist on type 'MockedClass<typeof ProgressServiceClass>'.
+tests/assessment-workflow.test.ts(490,34): error TS2339: Property 'getUserProgress' does not exist on type 'MockedClass<typeof ProgressServiceClass>'.
+tests/assessment-workflow.test.ts(505,28): error TS2339: Property 'getUserAnalytics' does not exist on type 'MockedClass<typeof AnalyticsServiceClass>'.
+tests/assessment-workflow.test.ts(512,35): error TS2339: Property 'getUserAnalytics' does not exist on type 'MockedClass<typeof AnalyticsServiceClass>'.
+tests/assessment-workflow.test.ts(545,32): error TS2339: Property 'passed' does not exist on type 'never'.
+tests/assessment-workflow.test.ts(546,32): error TS2339: Property 'overallScore' does not exist on type 'never'.
+tests/assessment-workflow.test.ts(549,34): error TS2339: Property 'updateAssessmentProgress' does not exist on type 'MockedClass<typeof ProgressServiceClass>'.
+tests/assessment-workflow.test.ts(588,63): error TS2345: Argument of type '{ overallScore: number; passed: boolean; remediation: { weakAreas: any[]; recommendedStudyTime: number; suggestedResources: { type: string; title: string; url: string; estimatedTime: number; }[]; studyPlan: { ...; }[]; overallRecommendation: string; objectiveRemediation: never[]; retakeEligibility: boolean; }; ... 1...' is not assignable to parameter of type 'AssessmentResult'.
+  The types of 'remediation.studyPlan' are incompatible between these types.
+    Type '{ order: number; title: string; description: string; type: string; activities: { type: string; content: string; duration: number; }[]; }[]' is not assignable to type 'StudyPlanItem[]'.
+      Type '{ order: number; title: string; description: string; type: string; activities: { type: string; content: string; duration: number; }[]; }' is missing the following properties from type 'StudyPlanItem': estimatedTime, objectiveIds, completed
+tests/assessment-workflow.test.ts(601,32): error TS2339: Property 'remediation' does not exist on type 'never'.
+tests/assessment-workflow.test.ts(605,32): error TS2339: Property 'remediation' does not exist on type 'never'.
+tests/assessment-workflow.test.ts(606,32): error TS2339: Property 'remediation' does not exist on type 'never'.
+tests/assessment-workflow.test.ts(607,32): error TS2339: Property 'remediation' does not exist on type 'never'.
+tests/practice-integration.test.tsx(2,27): error TS2724: '"@/contexts/PracticeContext"' has no exported member named 'PracticeContextType'. Did you mean 'PracticeContext'?
+tests/practice-integration.test.tsx(245,50): error TS2345: Argument of type 'never[]' is not assignable to parameter of type '(progress: PracticeProgress) => void'.
+  Type 'never[]' provides no match for the signature '(progress: PracticeProgress): void'.
+tests/practice-integration.test.tsx(288,71): error TS2345: Argument of type 'never[]' is not assignable to parameter of type '(progress: PracticeProgress) => void'.
+  Type 'never[]' provides no match for the signature '(progress: PracticeProgress): void'.

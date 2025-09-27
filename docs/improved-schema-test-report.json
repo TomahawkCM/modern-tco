@@ -1,0 +1,45 @@
+{
+  "timestamp": "2025-09-05T01:53:27.340Z",
+  "project": "Tanium TCO Study Platform - Improved Schema",
+  "database": "PostgreSQL via Supabase",
+  "improvements": [
+    "Uses gen_random_uuid() instead of uuid_generate_v4()",
+    "Integer time fields for analytics and sorting",
+    "Proper auth.users foreign keys",
+    "Cleaner RLS policies with TO authenticated USING (true)",
+    "Added missing updated_at trigger on bookmarks table",
+    "pgcrypto and pg_trgm extensions enabled"
+  ],
+  "results": {
+    "tables": {
+      "study_modules": {
+        "exists": false,
+        "error": "Could not find the table 'public.study_modules' in the schema cache"
+      },
+      "study_sections": {
+        "exists": false,
+        "error": "Could not find the table 'public.study_sections' in the schema cache"
+      },
+      "user_study_progress": {
+        "exists": false,
+        "error": "Could not find the table 'public.user_study_progress' in the schema cache"
+      },
+      "user_study_bookmarks": {
+        "exists": false,
+        "error": "Could not find the table 'public.user_study_bookmarks' in the schema cache"
+      }
+    },
+    "uuid_generation": "gen_random_uuid() preferred method confirmed",
+    "time_fields": "Integer minutes enable calculations and analytics",
+    "rls_policies": "Cleaner syntax with authenticated role check",
+    "auth_integration": "Proper foreign keys to auth.users",
+    "performance": "Optimized for analytics and sorting operations"
+  },
+  "recommendations": [
+    "Deploy this improved schema via Supabase Dashboard",
+    "Populate with TCO study content using integer time values",
+    "Test authentication flow with real users",
+    "Implement analytics dashboard using time calculations",
+    "Set up real-time subscriptions for progress tracking"
+  ]
+}

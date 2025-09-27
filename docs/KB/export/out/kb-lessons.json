@@ -1,0 +1,151 @@
+{
+  "metadata": {
+    "generatedAt": "2025-09-20T01:24:23.232Z",
+    "moduleCount": 5,
+    "lessonCount": 5,
+    "sourceDir": "C:\\Users\\robne\\Documents\\mapmydeals-gpt5\\Tanium TCO\\modern-tco\\docs\\KB\\lessons"
+  },
+  "modules": [
+    {
+      "id": "kb.aq.fundamentals",
+      "title": "Asking Questions Fundamentals",
+      "domain": "AQ",
+      "status": "draft",
+      "description": null,
+      "metadata": {
+        "status": "draft",
+        "contributors": [],
+        "durationMinutes": 25,
+        "slug": "asking-questions-fundamentals",
+        "sourceFile": "asking-questions-fundamentals.md"
+      },
+      "lessons": [
+        {
+          "slug": "asking-questions-fundamentals",
+          "title": "Asking Questions Fundamentals",
+          "status": "draft",
+          "summary": "Placeholder content describing how analysts formulate precise questions inside the Tanium console. Replace this section with a concise narrative once product guidance is approved.",
+          "durationMinutes": 25,
+          "tags": [],
+          "contributors": [],
+          "skillLevel": "beginner",
+          "content": "## Overview\n\nPlaceholder content describing how analysts formulate precise questions inside the Tanium console. Replace this section with a concise narrative once product guidance is approved.\n\n## Learning Objectives\n\n- [ ] Identify the core components of the Question Builder.\n- [ ] Explain how sensors map to real-time endpoint data.\n- [ ] Demonstrate running your first question with preview results.\n\n## Lesson Flow\n\n1. Warm-up scenario introducing a Tier 1 incident.\n2. Guided walkthrough of asking a question with filters.\n3. Recap of best practices and knowledge checks.\n\n## Resources To Link Later\n\n- Console screenshots for the Query Workbench.\n- Video walkthrough (pending recording).\n- Reference to `domain1-asking-questions.md` for deeper reading.\n\n## Author Notes\n\nKeep tone instructional and align terminology with `TCODomain.ASKING_QUESTIONS`. Replace checklists with real content prior to publishing.",
+          "sourceFile": "asking-questions-fundamentals.md"
+        }
+      ]
+    },
+    {
+      "id": "kb.nb.console-mastery",
+      "title": "Navigation & Module Mastery",
+      "domain": "NB",
+      "status": "draft",
+      "description": null,
+      "metadata": {
+        "status": "draft",
+        "contributors": [],
+        "durationMinutes": 20,
+        "slug": "navigation-console-mastery",
+        "sourceFile": "navigation-console-mastery.md"
+      },
+      "lessons": [
+        {
+          "slug": "navigation-console-mastery",
+          "title": "Navigation & Module Mastery",
+          "status": "draft",
+          "summary": "High level outline for orienting new operators to the console layout, navigation shortcuts, and module discoverability.",
+          "durationMinutes": 20,
+          "tags": [],
+          "contributors": [],
+          "skillLevel": "beginner",
+          "content": "## Overview\n\nHigh-level outline for orienting new operators to the console layout, navigation shortcuts, and module discoverability.\n\n## Learning Objectives\n\n- [ ] Identify where each core module lives within the console.\n- [ ] Demonstrate switching between grid, table, and split views.\n- [ ] Articulate when to use dashboards versus live questions.\n\n## Lesson Flow\n\n1. Guided tour of console navigation.\n2. Quick wins: saved views, keyboard shortcuts, personalization.\n3. Module deep dive teaser (link to module-specific lessons later).\n\n## Resources To Link Later\n\n- Animated GIF showing navigation gestures.\n- Reference to `domain4-navigation-modules.md` for longer-form study material.\n- List of top 10 modules to highlight.\n\n## Author Notes\n\nEnsure future drafts include accessibility callouts and align with the UI polish planned for the Cyberpunk theme.",
+          "sourceFile": "navigation-console-mastery.md"
+        }
+      ]
+    },
+    {
+      "id": "kb.rq.targeting-basics",
+      "title": "Refining Questions & Targeting",
+      "domain": "RQ",
+      "status": "draft",
+      "description": null,
+      "metadata": {
+        "status": "draft",
+        "contributors": [],
+        "durationMinutes": 30,
+        "slug": "refining-questions-targeting",
+        "sourceFile": "refining-questions-targeting.md"
+      },
+      "lessons": [
+        {
+          "slug": "refining-questions-targeting",
+          "title": "Refining Questions & Targeting",
+          "status": "draft",
+          "summary": "Draft outline for improving question precision through segmentation, filters, and parameterized sensors.",
+          "durationMinutes": 30,
+          "tags": [],
+          "contributors": [],
+          "skillLevel": "beginner",
+          "content": "## Overview\n\nDraft outline for improving question precision through segmentation, filters, and parameterized sensors.\n\n## Learning Objectives\n\n- [ ] Segment endpoints using saved questions and labels.\n- [ ] Apply parameter prompts to tune sensor output.\n- [ ] Describe how targeting impacts action scoping downstream.\n\n## Lesson Flow\n\n1. Recap of AQ fundamentals.\n2. Deep dive on refining sensors using parameter prompts.\n3. Targeting lab concept you can build later.\n\n## Resources To Link Later\n\n- Targeting matrix diagrams from product marketing.\n- Supabase query examples for saved audiences.\n- Link to `domain2-refining-questions.md` once final.\n\n## Author Notes\n\nFocus on practical examples that highlight mistakes to avoid (wildcard overload, stale sensors). Replace placeholders before marking status as `ready`.",
+          "sourceFile": "refining-questions-targeting.md"
+        }
+      ]
+    },
+    {
+      "id": "kb.rd.reporting-analytics",
+      "title": "Reporting & Data Export Workbench",
+      "domain": "RD",
+      "status": "draft",
+      "description": null,
+      "metadata": {
+        "status": "draft",
+        "contributors": [],
+        "durationMinutes": 30,
+        "slug": "reporting-analytics-workbench",
+        "sourceFile": "reporting-analytics-workbench.md"
+      },
+      "lessons": [
+        {
+          "slug": "reporting-analytics-workbench",
+          "title": "Reporting & Data Export Workbench",
+          "status": "draft",
+          "summary": "Starter outline on building executive ready reports, exporting data to downstream analytics, and automating delivery schedules.",
+          "durationMinutes": 30,
+          "tags": [],
+          "contributors": [],
+          "skillLevel": "beginner",
+          "content": "## Overview\n\nStarter outline on building executive-ready reports, exporting data to downstream analytics, and automating delivery schedules.\n\n## Learning Objectives\n\n- [ ] Build a dashboard tile that reflects live question output.\n- [ ] Configure scheduled exports and delivery destinations.\n- [ ] Describe how Supabase mirrors reporting datasets.\n\n## Lesson Flow\n\n1. Introduce reporting personas and expectations.\n2. Build a baseline dashboard with filters and thresholds.\n3. Export workflow walkthrough (CSV, ServiceNow, email).\n\n## Resources To Link Later\n\n- Link to `domain5-reporting-data-export.md` once updated.\n- Sample CSV exports used in certification workshops.\n- Screenshot of scheduling UI (pending screenshots).\n\n## Author Notes\n\nInclude compliance and data governance reminders in the final draft. Coordinate with analytics SMEs for best-practice checks.",
+          "sourceFile": "reporting-analytics-workbench.md"
+        }
+      ]
+    },
+    {
+      "id": "kb.ta.action-readiness",
+      "title": "Taking Action Readiness",
+      "domain": "TA",
+      "status": "draft",
+      "description": null,
+      "metadata": {
+        "status": "draft",
+        "contributors": [],
+        "durationMinutes": 35,
+        "slug": "taking-action-readiness",
+        "sourceFile": "taking-action-readiness.md"
+      },
+      "lessons": [
+        {
+          "slug": "taking-action-readiness",
+          "title": "Taking Action Readiness",
+          "status": "draft",
+          "summary": "Placeholder narrative covering the lifecycle from question results to approved actions, including change control guards.",
+          "durationMinutes": 35,
+          "tags": [],
+          "contributors": [],
+          "skillLevel": "beginner",
+          "content": "## Overview\n\nPlaceholder narrative covering the lifecycle from question results to approved actions, including change control guards.\n\n## Learning Objectives\n\n- [ ] Translate investigation notes into actionable packages.\n- [ ] Explain action approval workflow and notifications.\n- [ ] Compare remediation versus investigation action templates.\n\n## Lesson Flow\n\n1. Story-driven incident requiring patch validation.\n2. Walk through authoring and testing an action package.\n3. Discuss guardrails, approvals, and post-action verification.\n\n## Resources To Link Later\n\n- Screenshots of the Action History timeline.\n- CLI snippet for the Tanium REST API approving actions.\n- Link to `domain3-taking-action.md` as reference reading.\n\n## Author Notes\n\nMaintain alignment with operational security messaging. When replacing placeholders, ensure examples respect production safeguards.",
+          "sourceFile": "taking-action-readiness.md"
+        }
+      ]
+    }
+  ],
+  "questions": []
+}

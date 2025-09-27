@@ -1,0 +1,417 @@
+---
+id: module-taking-action
+title: Taking Action — Packages & Actions
+domainSlug: taking-action-packages-actions
+domainEnum: TAKING_ACTION
+difficulty: Intermediate
+estimatedTime: "120 min"
+prerequisites:
+  - module-refining-questions-targeting
+objectives:
+  - "Deploy basic packages with simple parameters"
+  - "Monitor action status and understand basic exit codes"
+  - "Perform simple rollback procedures when needed"
+tags: ["TCO", "Domain3", "Packages", "Actions", "Deploy", "Monitoring", "ExitCodes", "Rollback"]
+blueprintWeight: 0.15
+version: 1
+status: published
+lastUpdated: "2025-09-24"
+description: "Basic package deployment and action monitoring for TCO operators"
+---
+
+# Learn
+
+## Key Concepts
+
+- Basic package parameters and simple configuration
+- Computer group targeting and basic action monitoring
+- Common exit codes and basic troubleshooting steps
+- Simple rollback procedures for failed deployments
+
+<InfoBox title="Exam Relevance">
+  This domain represents 15% of the TCO exam weight and focuses on basic package
+  deployment and monitoring skills needed for entry-level operators.
+</InfoBox>
+
+## Package Basics (25 minutes)
+
+### What are Packages?
+
+Packages are pre-built software components that can be deployed to endpoint computers through Tanium. They contain the files and instructions needed to install, update, or configure software on target systems.
+
+**Key Package Components:**
+- **Executable files**: The main program or script to run
+- **Parameters**: Settings that control how the package behaves
+- **Dependencies**: Other software that must be present
+- **Installation instructions**: Steps to deploy the package
+
+### Basic Parameter Configuration
+
+Parameters allow you to customize how a package works without changing the package itself:
+
+**Common Parameter Types:**
+- **Text parameters**: File paths, usernames, configuration values
+- **Number parameters**: Timeout values, port numbers, sizes
+- **Yes/No parameters**: Enable/disable features, confirmation flags
+
+**Example - Software Installation Package:**
+```
+Package: Install Chrome Browser
+Parameters:
+- Install Path: C:\Program Files\Chrome (text)
+- Silent Install: Yes (yes/no)
+- Create Desktop Shortcut: No (yes/no)
+```
+
+### Package Selection and Preparation
+
+**Steps for Basic Package Deployment:**
+
+1. **Choose the Right Package**
+   - Verify package matches your operating system
+   - Check that package version is compatible
+   - Review package description and requirements
+
+2. **Configure Parameters**
+   - Fill in required parameters (marked with asterisks)
+   - Use default values for optional parameters when starting
+   - Double-check parameter values before deployment
+
+3. **Select Target Systems**
+   - Start with a small test group (5-10 computers)
+   - Choose representative systems from different locations
+   - Avoid critical production systems for initial testing
+
+### Basic Validation and Testing
+
+Before deploying to many systems, always test first:
+
+**Testing Checklist:**
+- [ ] Package downloads successfully to test systems
+- [ ] Package installs without errors
+- [ ] Software functions as expected after installation
+- [ ] No conflicts with existing software
+- [ ] System performance remains normal
+
+## Action Deployment (20 minutes)
+
+### Simple Action Deployment Procedures
+
+Actions are how packages get deployed to endpoint computers. The basic deployment process:
+
+1. **Open Tanium Console**
+   - Navigate to Interact tab
+   - Select "Deploy Action" or similar option
+
+2. **Configure Action Settings**
+   - Choose the package to deploy
+   - Set parameters as configured
+   - Select target computer group
+   - Set action name for tracking
+
+3. **Review and Deploy**
+   - Double-check target systems and parameters
+   - Click Deploy to start the action
+   - Action begins running on target systems
+
+### Target Selection and Validation
+
+**Computer Group Selection:**
+- **All Computers**: Deploys to every managed system (use carefully!)
+- **Custom Groups**: Predefined groups like "Windows 10 Workstations"
+- **Manual Selection**: Choose specific computers by name
+- **Filter Groups**: Use questions to create dynamic targeting
+
+**Validation Steps:**
+1. Check group membership count before deploying
+2. Verify group includes the right types of systems
+3. Ensure no critical systems in test deployments
+4. Confirm systems are online and reachable
+
+### Deployment Monitoring Basics
+
+**Action Status Grid:**
+The Action Status grid shows real-time deployment progress:
+
+- **Waiting**: Action queued but not started yet
+- **Running**: Currently executing on the endpoint
+- **Completed**: Finished successfully (exit code 0)
+- **Failed**: Encountered an error during execution
+- **Not Applicable**: System doesn't meet deployment criteria
+
+**Basic Monitoring Tasks:**
+- Check overall completion percentage
+- Identify failed systems for troubleshooting
+- Monitor network impact during large deployments
+- Verify completion before proceeding to next phase
+
+### Basic Result Interpretation
+
+**Success Indicators:**
+- High percentage of "Completed" status
+- Exit code 0 from most systems
+- Expected changes visible on target systems
+- No significant performance impact
+
+**Warning Signs:**
+- Many systems showing "Failed" status
+- High number of timeout errors
+- Unexpected exit codes
+- User complaints about system performance
+
+## Exit Codes and Troubleshooting (15 minutes)
+
+### Understanding Basic Exit Codes
+
+Exit codes tell you what happened when a package ran. Think of them as simple status messages:
+
+**Standard Exit Codes:**
+- **0**: Success - Everything worked correctly
+- **1**: General Error - Something went wrong (check logs)
+- **2**: File Not Found - Package couldn't find required files
+- **3**: Permission Denied - Not enough rights to install
+- **126**: Cannot Execute - Package file damaged or blocked
+- **127**: Command Not Found - Required software missing
+
+**Tanium-Specific Exit Codes:**
+- **1001**: Network Error - Couldn't download package
+- **1002**: No Disk Space - Not enough room to install
+- **1003**: Missing Requirements - Need other software first
+- **1005**: Timeout - Package took too long to complete
+
+### Common Failure Scenarios
+
+**Scenario 1: "Permission Denied" (Exit Code 3)**
+- **Cause**: User account doesn't have admin rights
+- **Solution**: Run deployment with administrator account
+- **Prevention**: Verify account permissions before deployment
+
+**Scenario 2: "Network Error" (Exit Code 1001)**
+- **Cause**: Endpoint can't reach Tanium server
+- **Solution**: Check network connectivity and firewall rules
+- **Prevention**: Test connectivity before large deployments
+
+**Scenario 3: "Not Enough Disk Space" (Exit Code 1002)**
+- **Cause**: Target system lacks storage space
+- **Solution**: Free up disk space or choose smaller package
+- **Prevention**: Check disk space with sensors first
+
+### Simple Troubleshooting Steps
+
+**Basic Troubleshooting Process:**
+
+1. **Check Exit Codes**
+   - Look at failed systems in action status
+   - Note most common exit codes
+   - Group similar failures together
+
+2. **Review Error Messages**
+   - Read full error text when available
+   - Look for specific file names or paths
+   - Note any permission or access issues
+
+3. **Test on Single System**
+   - Try deployment on one failed system
+   - Watch the process more closely
+   - Check system-specific issues
+
+4. **Common Fixes**
+   - Restart Tanium client service
+   - Verify network connectivity
+   - Check available disk space
+   - Confirm user permissions
+
+## Scheduled Actions (15 minutes)
+
+### Creating Recurring Actions
+
+Scheduled actions let you run deployments automatically at specific times:
+
+**Common Scheduling Scenarios:**
+- **Patch Deployments**: Monthly security updates
+- **Software Updates**: Quarterly application updates
+- **Maintenance Tasks**: Weekly cleanup operations
+- **Monitoring**: Daily health checks
+
+### Basic Scheduling Options
+
+**Simple Schedule Types:**
+
+1. **One-Time Execution**
+   - Run once at specific date/time
+   - Good for emergency patches
+   - Can schedule for off-hours deployment
+
+2. **Daily Recurring**
+   - Repeat every day at same time
+   - Often used for maintenance tasks
+   - Avoid business hours for better performance
+
+3. **Weekly Recurring**
+   - Repeat same day each week
+   - Common for patch deployments
+   - Usually scheduled for weekends
+
+**Example Schedule Configuration:**
+```
+Schedule: Weekly Patch Deployment
+Frequency: Every Tuesday
+Time: 3:00 AM local time
+Duration: Allow up to 4 hours for completion
+Retry failed systems: Yes, after 24 hours
+```
+
+### Monitoring Scheduled Tasks
+
+**Regular Monitoring Tasks:**
+- Check scheduled actions completed successfully
+- Review any systems that failed deployment
+- Verify scheduled time worked for organization
+- Adjust timing if conflicts occur
+
+**Basic Health Checks:**
+- Weekly review of all scheduled actions
+- Monthly analysis of success rates
+- Quarterly review of schedule effectiveness
+- Annual schedule optimization
+
+## Basic Rollback (10 minutes)
+
+### When to Rollback
+
+Rollback means removing or undoing a failed deployment. Consider rollback when:
+
+**Clear Rollback Triggers:**
+- More than 20% of deployments failed
+- Critical system functionality is broken
+- Security issues were introduced
+- Business operations are impacted
+
+**Simple Decision Process:**
+1. Stop ongoing deployment immediately
+2. Assess scope of problem (how many systems affected?)
+3. Determine if issue is fixable quickly
+4. If not fixable in 30 minutes, plan rollback
+
+### Simple Rollback Procedures
+
+**Basic Rollback Steps:**
+
+1. **Pause Current Deployment**
+   - Stop action from spreading to more systems
+   - Prevent additional systems from being affected
+
+2. **Identify Affected Systems**
+   - List all systems that completed the action
+   - Separate successful from failed deployments
+   - Focus rollback on successful installations that caused problems
+
+3. **Deploy Rollback Package**
+   - Use pre-built uninstall or restore package
+   - Target only systems that need rollback
+   - Monitor rollback process like original deployment
+
+4. **Verify System Recovery**
+   - Check that original functionality is restored
+   - Confirm no side effects from rollback
+   - Test critical business functions
+
+### Verification Steps
+
+**Post-Rollback Validation:**
+- [ ] Target systems are functioning normally
+- [ ] Business applications work as expected
+- [ ] No remaining files from failed deployment
+- [ ] System performance has returned to normal
+- [ ] Users can perform their regular tasks
+
+**Basic Recovery Testing:**
+- Test key applications on rolled-back systems
+- Verify network connectivity is working
+- Check that security software is functioning
+- Confirm user access to required resources
+
+## Troubleshooting Playbook
+
+**Quick Reference for Common Issues:**
+
+- **High failure rate?** Check network connectivity and system requirements
+- **Permission errors?** Verify service account has admin rights
+- **Network timeouts?** Check firewall rules and bandwidth availability
+- **Disk space errors?** Clean up temporary files or use smaller packages
+- **Package not found?** Verify package availability and download paths
+- **Slow deployment?** Reduce concurrent targets or schedule during off-hours
+- **Rollback needed?** Stop deployment, assess impact, deploy restore package
+
+## Videos
+
+Use these short clips to learn basic concepts:
+
+- Package Basics and Parameter Configuration (8m)
+- Simple Action Deployment Process (6m)
+- Understanding Exit Codes (5m)
+- Basic Troubleshooting Steps (7m)
+- Simple Rollback Procedures (4m)
+
+## Console Steps
+
+**Basic Deployment Workflow:**
+
+1. **Prepare Package**
+   - Select appropriate package from library
+   - Configure required parameters
+   - Review package requirements
+
+2. **Select Targets**
+   - Choose small test group first (5-10 systems)
+   - Verify group membership
+   - Ensure systems are online
+
+3. **Deploy and Monitor**
+   - Start deployment action
+   - Watch status in action grid
+   - Note any immediate failures
+
+4. **Handle Issues**
+   - Check exit codes for failed systems
+   - Apply basic troubleshooting steps
+   - Rollback if problems affect business
+
+5. **Expand Deployment**
+   - After successful pilot, expand to larger groups
+   - Continue monitoring throughout process
+   - Document any issues and solutions
+
+> **Tip**: Always start with small test groups and have a rollback plan ready before beginning any deployment.
+
+# Practice
+
+<PracticeButton
+  moduleId="module-taking-action"
+  domainEnum="TAKING_ACTION"
+  targetTags={[
+    "Packages",
+    "Actions",
+    "Deploy",
+    "Monitoring",
+    "ExitCodes",
+    "Rollback",
+  ]}
+  objectiveIds={["obj-taking-parameters", "obj-taking-monitoring", "obj-taking-rollback"]}
+  difficulty="intermediate"
+>
+  Start Module Practice
+</PracticeButton>
+
+- Practice scenarios focus on basic package deployment and simple troubleshooting.
+- Coverage includes parameter configuration, target selection, and exit code interpretation.
+
+# Assess
+
+- 8-10 items focusing on basic package deployment, monitoring, and simple rollback procedures.
+- Passing threshold: 75%; covers entry-level operator skills only.
+
+# References
+
+- Tanium Packages & Actions User Guide
+- Basic Troubleshooting Quick Reference

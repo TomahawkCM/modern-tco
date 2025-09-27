@@ -1,0 +1,87 @@
+{
+  "version": 1,
+  "modules": [
+    {
+      "slug": "asking-questions",
+      "objectives": [
+        "Formulate effective natural-language questions",
+        "Understand sensors and result interpretation",
+        "Iterate and refine queries"
+      ],
+      "topics": [
+        "Question grammar",
+        "Common sensors",
+        "Result grid basics"
+      ],
+      "labs": [
+        { "title": "Your First Question", "description": "Run a basic inventory question and export results." },
+        { "title": "Refining by OS", "description": "Filter endpoints to a specific platform and compare outputs." }
+      ]
+    },
+    {
+      "slug": "refining-questions",
+      "objectives": [
+        "Use boolean logic to combine filters",
+        "Build and apply dynamic computer groups",
+        "Optimize targeting for large environments"
+      ],
+      "topics": [
+        "AND/OR/NOT",
+        "Grouping and precedence",
+        "Dynamic vs static groups"
+      ],
+      "labs": [
+        { "title": "Browser Presence Query", "description": "Target endpoints with Chrome OR Firefox installed on Windows." }
+      ]
+    },
+    {
+      "slug": "taking-action",
+      "objectives": [
+        "Plan safe action rollouts",
+        "Use approvals and maintenance windows",
+        "Verify results and remediate"
+      ],
+      "topics": [
+        "Package execution",
+        "Approvals",
+        "Rollbacks"
+      ],
+      "labs": [
+        { "title": "Pilot Deployment", "description": "Deploy to a pilot group, then review status." }
+      ]
+    },
+    {
+      "slug": "navigation-modules",
+      "objectives": [
+        "Navigate core console areas",
+        "Use search to find modules",
+        "Manage saved questions"
+      ],
+      "topics": [
+        "Sidebar navigation",
+        "Search",
+        "Saved Questions"
+      ],
+      "labs": [
+        { "title": "Finding Modules", "description": "Use global search to locate the correct module." }
+      ]
+    },
+    {
+      "slug": "reporting-export",
+      "objectives": [
+        "Build reproducible reports",
+        "Export data for analysis",
+        "Share safely with RBAC"
+      ],
+      "topics": [
+        "CSV/JSON exports",
+        "Timestamps and filters",
+        "Dashboards"
+      ],
+      "labs": [
+        { "title": "Weekly Summary", "description": "Export a weekly dataset and document filters used." }
+      ]
+    }
+  ]
+}
+

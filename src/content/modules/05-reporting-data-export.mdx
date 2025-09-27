@@ -1,0 +1,779 @@
+---
+id: module-reporting-data-export
+title: Reporting & Data Export
+domainSlug: reporting-data-export
+domainEnum: REPORTING_EXPORT
+difficulty: Intermediate
+estimatedTime: "180 min"
+prerequisites:
+  - module-navigation-basic-modules
+objectives:
+  - obj-reporting-build
+  - obj-reporting-export
+  - obj-reporting-quality
+tags: [TCO, Domain5, Reporting, Export, DataQuality, Scheduling, CSV, JSON, Automation, Performance, API, Dashboards, Compliance]
+blueprintWeight: 0.17
+version: 2
+status: published
+lastUpdated: "2025-09-24"
+---
+
+# Learn
+
+## Module Overview
+
+This comprehensive module covers the critical Domain 5 skills for Tanium Console Operations Certification, representing **17% of the exam weight**. You'll master enterprise-grade reporting and data export capabilities, from basic report building to advanced automation and troubleshooting.
+
+**Learning Path**: 3 hours of intensive hands-on training covering report building fundamentals, advanced features, scheduling, data export procedures, and troubleshooting.
+
+## Section A: Report Building Fundamentals (45 minutes)
+
+### Report Types and Strategic Use Cases
+
+Understanding when and how to use different report types is crucial for operational success:
+
+**Operational Reports**:
+- Real-time system status and health monitoring
+- Incident response and security event tracking
+- Performance metrics and capacity planning
+- Endpoint compliance and patch status
+
+**Compliance Reports**:
+- Regulatory requirement adherence (SOX, HIPAA, PCI-DSS)
+- Security policy compliance verification
+- Audit trail documentation and evidence
+- Risk assessment and vulnerability tracking
+
+**Executive Reports**:
+- High-level KPI dashboards and metrics
+- Strategic decision-making data summaries
+- Budget and resource allocation insights
+- Business impact and ROI measurements
+
+<InfoBox type="tip">
+**Best Practice**: Always align report type selection with stakeholder needs. Operational teams need detailed, real-time data while executives need summarized trends and business impact metrics.
+</InfoBox>
+
+### Data Source Selection and Configuration
+
+**Primary Data Sources**:
+- **Sensor Data**: Real-time endpoint information collection
+- **Asset Intelligence**: Hardware and software inventory data
+- **Patch Status**: Update compliance and vulnerability data
+- **User and Access**: Identity and permission tracking
+- **Network Analysis**: Traffic patterns and security events
+- **Custom Saved Questions**: Specialized data queries
+
+**Configuration Best Practices**:
+```console
+Navigate to: Reports > Create Report > Data Sources
+1. Select primary data source (e.g., Asset Intelligence)
+2. Choose related tables for comprehensive data
+3. Configure refresh intervals based on data volatility
+4. Set data retention policies for historical reporting
+5. Validate data relationships and join conditions
+```
+
+<InfoBox type="warning">
+**Performance Consideration**: Selecting too many data sources can significantly impact report generation time. Start with essential sources and expand based on actual reporting needs.
+</InfoBox>
+
+### Dynamic Filtering and Parameter Setup
+
+**Filter Categories**:
+
+**Time-Based Filters**:
+- Absolute dates for historical analysis
+- Relative dates for rolling reports (last 30 days)
+- Custom date ranges for specific incidents
+- Scheduled intervals for automated reports
+
+**Organizational Filters**:
+- Computer groups and organizational units
+- Geographic locations and site divisions
+- Asset tags and classification labels
+- User groups and department structures
+
+**Condition-Based Filters**:
+- Status conditions (online/offline, compliant/non-compliant)
+- Value ranges (disk space, memory usage)
+- Pattern matching (software versions, naming conventions)
+- Boolean logic for complex filtering scenarios
+
+**Dynamic Parameter Configuration**:
+```console
+Reports > Filter Setup > Dynamic Parameters
+1. Define parameter types (dropdown, text input, date picker)
+2. Set default values and validation rules
+3. Configure cascading filters for hierarchical data
+4. Test parameter interactions and dependencies
+5. Document parameter usage for end users
+```
+
+<PracticeButton
+  moduleId="module-reporting-data-export"
+  domainEnum="REPORTING_EXPORT"
+  targetTags={["Reporting", "Filtering", "DataSources", "Parameters"]}
+  objectiveIds={["obj-reporting-build"]}
+  difficulty="intermediate"
+>
+  Practice Report Building Fundamentals
+</PracticeButton>
+
+### Layout and Formatting Excellence
+
+**Professional Report Layout**:
+- **Header Section**: Report title, generation timestamp, parameter values
+- **Summary Section**: Key metrics, alerts, and executive overview
+- **Detail Section**: Comprehensive data tables and drill-down options
+- **Footer Section**: Data sources, refresh information, contact details
+
+**Formatting Standards**:
+- Consistent column widths and data alignment
+- Color coding for status indicators and severity levels
+- Professional fonts and spacing for readability
+- Company branding and logo integration
+
+**Template Management Strategy**:
+```console
+Reports > Templates > Create Template
+1. Design master template with standard formatting
+2. Define reusable components and sections
+3. Create template variants for different audiences
+4. Implement version control for template updates
+5. Share templates across teams and departments
+```
+
+## Section B: Advanced Reporting Features (60 minutes)
+
+### Conditional Formatting and Business Rules
+
+**Status-Based Formatting**:
+- **Critical Status**: Red highlighting for urgent issues
+- **Warning Status**: Yellow/orange for attention items
+- **Success Status**: Green for compliant/healthy systems
+- **Information Status**: Blue for standard operational data
+
+**Performance-Based Rules**:
+```console
+Reports > Formatting > Conditional Rules
+1. Define thresholds for performance metrics
+2. Set color schemes and visual indicators
+3. Configure alert symbols and icons
+4. Test formatting across different data scenarios
+5. Document business rules for consistency
+```
+
+**Advanced Formatting Techniques**:
+- Data bars for quick visual comparison
+- Heat maps for trend analysis
+- Sparklines for mini-trend indicators
+- Custom icons for categorical data
+
+<InfoBox type="pro">
+**Enterprise Tip**: Use conditional formatting sparingly and consistently. Too many colors and formats can overwhelm users and reduce report effectiveness.
+</InfoBox>
+
+### Dynamic Content and Advanced Calculations
+
+**Calculated Fields and Metrics**:
+- **Percentage Calculations**: Compliance rates, availability percentages
+- **Trend Analysis**: Week-over-week, month-over-month comparisons
+- **Aggregations**: Sums, averages, min/max values across groups
+- **Custom Formulas**: Business-specific calculations and KPIs
+
+**Dynamic Content Integration**:
+```console
+Reports > Content > Dynamic Elements
+1. Insert real-time timestamps and user information
+2. Add conditional text based on data values
+3. Include dynamic charts and visualizations
+4. Configure responsive content for different outputs
+5. Test dynamic elements across various scenarios
+```
+
+**Performance Optimization Strategies**:
+- Use indexed fields for filtering and sorting
+- Limit result sets with appropriate date ranges
+- Cache frequently accessed data elements
+- Optimize query logic for faster execution
+
+### Multi-Source Reports and Data Integration
+
+**Data Join Strategies**:
+- **Inner Joins**: Records matching in both sources
+- **Left Joins**: All records from primary source
+- **Outer Joins**: Records from either source
+- **Cross Joins**: Cartesian product for analysis matrices
+
+**Integration Patterns**:
+```console
+Reports > Data Integration > Multi-Source Setup
+1. Identify common keys between data sources
+2. Configure join relationships and constraints
+3. Handle missing data and null values appropriately
+4. Validate joined data accuracy and completeness
+5. Test performance with large datasets
+```
+
+**Enterprise Integration Examples**:
+- **ITSM Integration**: Combine Tanium data with ServiceNow incidents
+- **SIEM Integration**: Correlate endpoint data with security events
+- **CMDB Integration**: Enrich asset data with configuration items
+- **HR Integration**: Link endpoint ownership with employee data
+
+<PracticeButton
+  moduleId="module-reporting-data-export"
+  domainEnum="REPORTING_EXPORT"
+  targetTags={["AdvancedReporting", "Integration", "Calculations", "Formatting"]}
+  objectiveIds={["obj-reporting-build", "obj-reporting-quality"]}
+  difficulty="advanced"
+>
+  Practice Advanced Reporting Features
+</PracticeButton>
+
+### Interactive Dashboards and Drill-Down Capabilities
+
+**Dashboard Design Principles**:
+- **Information Hierarchy**: Most critical data prominently displayed
+- **Visual Balance**: Appropriate use of charts, tables, and metrics
+- **Interactive Elements**: Click-through navigation and filtering
+- **Responsive Design**: Optimal viewing across devices and screen sizes
+
+**Drill-Down Configuration**:
+```console
+Dashboards > Interactive Elements > Drill-Down Setup
+1. Define hierarchical data relationships
+2. Configure click-through navigation paths
+3. Set up contextual filtering for detailed views
+4. Test drill-down performance and usability
+5. Document navigation paths for end users
+```
+
+**Real-Time Dashboard Features**:
+- Auto-refresh capabilities for live monitoring
+- Alert integration and notification systems
+- Mobile-responsive design for field access
+- Role-based view customization and access control
+
+## Section C: Scheduling and Distribution (45 minutes)
+
+### Automated Report Scheduling Configuration
+
+**Schedule Pattern Options**:
+- **Daily Reports**: Business day reports, weekend summaries
+- **Weekly Reports**: Monday morning status, Friday wrap-ups
+- **Monthly Reports**: Executive summaries, compliance reports
+- **Quarterly Reports**: Strategic reviews, audit preparations
+- **Event-Driven Reports**: Triggered by incidents or thresholds
+
+**Advanced Scheduling Features**:
+```console
+Reports > Scheduling > Advanced Configuration
+1. Set multiple schedule patterns for different audiences
+2. Configure time zone handling for global organizations
+3. Define holiday and exception handling rules
+4. Set up retry logic for failed report generations
+5. Monitor scheduling queue health and performance
+```
+
+**Performance Optimization for Scheduled Reports**:
+- Stagger report generation times to avoid resource conflicts
+- Use incremental data updates where possible
+- Configure appropriate timeout values for large reports
+- Implement queue prioritization for critical reports
+
+<InfoBox type="important">
+**Production Consideration**: Schedule resource-intensive reports during off-peak hours to minimize impact on system performance and user experience.
+</InfoBox>
+
+### Distribution Lists and Delivery Excellence
+
+**Distribution Strategy**:
+- **Role-Based Distribution**: Different content for different roles
+- **Escalation Paths**: Automatic escalation for critical findings
+- **Stakeholder Mapping**: Ensure right information reaches right people
+- **Delivery Method Selection**: Email, portal, API, or file share
+
+**Multi-Channel Delivery Configuration**:
+```console
+Reports > Distribution > Channel Setup
+1. Configure email templates and formatting
+2. Set up secure file sharing and portal access
+3. Define API endpoints for system integration
+4. Test delivery methods and troubleshoot issues
+5. Monitor delivery success rates and failures
+```
+
+**Enterprise Distribution Features**:
+- Digital signatures for sensitive reports
+- Encryption for confidential data transmission
+- Audit trails for distribution tracking
+- Automatic archival and retention management
+
+### Report Governance and Access Control
+
+**Access Control Framework**:
+- **View Permissions**: Who can access which reports
+- **Edit Permissions**: Who can modify report configurations
+- **Distribution Permissions**: Who can change distribution lists
+- **Administrative Permissions**: Full report management capabilities
+
+**Governance Best Practices**:
+```console
+Reports > Governance > Access Management
+1. Implement least-privilege access principles
+2. Regular review and recertification of permissions
+3. Audit trail maintenance for all modifications
+4. Change management processes for report updates
+5. Documentation standards for report purposes and owners
+```
+
+<PracticeButton
+  moduleId="module-reporting-data-export"
+  domainEnum="REPORTING_EXPORT"
+  targetTags={["Scheduling", "Distribution", "Governance", "AccessControl"]}
+  objectiveIds={["obj-reporting-build", "obj-reporting-quality"]}
+  difficulty="intermediate"
+>
+  Practice Scheduling and Distribution
+</PracticeButton>
+
+## Section D: Data Export Procedures (60 minutes)
+
+### Export Format Mastery and Use Cases
+
+**CSV (Comma-Separated Values)**:
+- **Best For**: Excel analysis, database imports, data manipulation
+- **Limitations**: No formatting, limited character encoding support
+- **Configuration**: Field separators, text qualifiers, encoding options
+- **Performance**: Fastest export option for large datasets
+
+**JSON (JavaScript Object Notation)**:
+- **Best For**: API integration, web applications, modern data processing
+- **Advantages**: Hierarchical data support, wide compatibility
+- **Configuration**: Pretty printing, nested object handling, array formatting
+- **Use Cases**: Real-time data feeds, microservice integration
+
+**Excel (XLSX)**:
+- **Best For**: Executive reports, formatted presentations, complex analysis
+- **Features**: Multiple worksheets, charts, conditional formatting
+- **Limitations**: File size constraints, processing overhead
+- **Configuration**: Template integration, formula preservation
+
+**XML (Extensible Markup Language)**:
+- **Best For**: System integration, legacy application support
+- **Features**: Schema validation, namespace support, complex hierarchies
+- **Configuration**: DTD/XSD validation, custom element naming
+- **Performance**: Higher overhead but maximum compatibility
+
+**API Integration**:
+```console
+Data Export > API Configuration > REST Endpoints
+1. Configure authentication and authorization
+2. Set up data transformation and mapping
+3. Define rate limiting and throttling rules
+4. Implement error handling and retry logic
+5. Test integration with target systems
+```
+
+<InfoBox type="technical">
+**API Best Practice**: Always implement proper authentication, rate limiting, and error handling when setting up API exports. Consider using webhooks for real-time data delivery.
+</InfoBox>
+
+### Large Dataset Handling and Performance Optimization
+
+**Pagination Strategies**:
+- **Offset-Based Pagination**: Simple but performance degrades with large offsets
+- **Cursor-Based Pagination**: Better performance for large datasets
+- **Time-Window Pagination**: Efficient for time-series data
+- **Hybrid Approaches**: Combining strategies for optimal performance
+
+**Performance Optimization Techniques**:
+```console
+Export > Performance Settings > Optimization
+1. Configure appropriate batch sizes (typically 1000-10000 records)
+2. Use indexed columns for filtering and sorting
+3. Implement parallel processing where supported
+4. Configure memory usage limits and disk caching
+5. Monitor export performance and adjust parameters
+```
+
+**Large Dataset Best Practices**:
+- **Incremental Exports**: Only export changed data since last run
+- **Compression**: Use GZIP or similar compression for large files
+- **Chunking**: Split large exports into manageable pieces
+- **Progress Monitoring**: Provide progress updates for long-running exports
+- **Resume Capability**: Allow resuming interrupted exports
+
+### Export Automation and Enterprise Integration
+
+**Automated Export Patterns**:
+- **Schedule-Driven**: Regular exports at predetermined intervals
+- **Event-Driven**: Exports triggered by system events or thresholds
+- **On-Demand**: User-initiated exports with automated processing
+- **Continuous**: Real-time streaming exports for live integration
+
+**Enterprise Integration Architecture**:
+```console
+Export > Integration > Enterprise Setup
+1. Configure secure communication channels (HTTPS, SFTP, etc.)
+2. Set up authentication and authorization mechanisms
+3. Implement data transformation and mapping rules
+4. Configure error handling and notification systems
+5. Test end-to-end integration workflows
+```
+
+**Integration Patterns**:
+- **ETL Processes**: Extract, Transform, Load for data warehouses
+- **Data Lakes**: Raw data storage for analytics and ML
+- **Real-Time Streaming**: Apache Kafka, Azure Event Hubs
+- **API Gateways**: Centralized API management and security
+
+<PracticeButton
+  moduleId="module-reporting-data-export"
+  domainEnum="REPORTING_EXPORT"
+  targetTags={["DataExport", "API", "Integration", "Performance", "Automation"]}
+  objectiveIds={["obj-reporting-export"]}
+  difficulty="advanced"
+>
+  Practice Data Export Procedures
+</PracticeButton>
+
+### Data Validation and Quality Assurance
+
+**Validation Frameworks**:
+- **Schema Validation**: Ensure data structure consistency
+- **Data Type Validation**: Verify field types and formats
+- **Range Validation**: Check numeric ranges and boundaries
+- **Referential Integrity**: Validate relationships between data elements
+- **Business Rule Validation**: Apply domain-specific validation rules
+
+**Quality Check Procedures**:
+```console
+Export > Quality Assurance > Validation Setup
+1. Define validation rules and acceptance criteria
+2. Configure automated quality checks and alerts
+3. Set up data profiling and anomaly detection
+4. Implement data cleansing and transformation rules
+5. Generate quality reports and metrics
+```
+
+**Data Quality Metrics**:
+- **Completeness**: Percentage of non-null, non-empty values
+- **Accuracy**: Correctness compared to source systems
+- **Consistency**: Uniformity across different data sources
+- **Timeliness**: Data freshness and update frequency
+- **Validity**: Conformance to defined formats and rules
+
+### Export Security and Compliance
+
+**Security Controls**:
+- **Data Classification**: Identify and label sensitive data appropriately
+- **Access Controls**: Role-based permissions for export operations
+- **Encryption**: At-rest and in-transit data protection
+- **Audit Logging**: Complete trails of export activities
+- **Data Masking**: Protection of sensitive information in non-production exports
+
+**Compliance Considerations**:
+```console
+Export > Security > Compliance Configuration
+1. Implement data retention and deletion policies
+2. Configure geographic data residency controls
+3. Set up consent management for personal data
+4. Implement right-to-be-forgotten capabilities
+5. Generate compliance reports and certifications
+```
+
+**Regulatory Requirements**:
+- **GDPR**: Personal data protection and privacy rights
+- **HIPAA**: Healthcare information security and privacy
+- **SOX**: Financial data integrity and audit requirements
+- **PCI-DSS**: Payment card industry security standards
+
+<InfoBox type="security">
+**Compliance Reminder**: Always validate that exported data meets regulatory requirements for your industry and geography. Implement appropriate controls for data classification, access, and retention.
+</InfoBox>
+
+## Section E: Troubleshooting Export Operations (30 minutes)
+
+### Common Export Failures and Resolution Strategies
+
+**Timeout and Performance Issues**:
+- **Symptoms**: Exports failing after extended processing time
+- **Causes**: Large datasets, complex queries, resource constraints
+- **Solutions**: Implement pagination, optimize queries, increase timeouts
+- **Prevention**: Monitor performance metrics, set appropriate limits
+
+**Data Quality and Integrity Problems**:
+```console
+Troubleshooting > Data Quality > Issue Resolution
+1. Identify data anomalies and inconsistencies
+2. Trace data lineage to source systems
+3. Implement data validation and cleansing rules
+4. Test with sample data sets before full export
+5. Monitor ongoing data quality metrics
+```
+
+**Format and Encoding Issues**:
+- **Character Encoding**: UTF-8 vs. legacy encodings (ASCII, Latin-1)
+- **Special Characters**: Handling of quotes, commas, line breaks
+- **Number Formatting**: Decimal separators, thousand separators
+- **Date Formats**: International standards vs. local conventions
+
+**Network and Connectivity Failures**:
+- **Intermittent Connectivity**: Implement retry logic and circuit breakers
+- **Bandwidth Limitations**: Use compression and chunking strategies
+- **Firewall and Proxy Issues**: Configure appropriate network settings
+- **Authentication Failures**: Validate credentials and permissions
+
+<InfoBox type="troubleshooting">
+**Quick Diagnosis**: Start with the most common issues - check logs, verify connectivity, validate permissions, and test with small datasets before investigating complex scenarios.
+</InfoBox>
+
+### Performance Issues and Optimization Techniques
+
+**Performance Monitoring and Metrics**:
+- **Export Duration**: Track processing times and identify trends
+- **Resource Utilization**: Monitor CPU, memory, and I/O usage
+- **Queue Health**: Track backlog and processing rates
+- **Error Rates**: Monitor failure frequencies and patterns
+
+**Optimization Strategies**:
+```console
+Performance > Optimization > Configuration
+1. Analyze query execution plans and optimize SQL
+2. Implement appropriate indexing strategies
+3. Configure caching for frequently accessed data
+4. Use parallel processing where available
+5. Monitor and tune system resources
+```
+
+**Scalability Planning**:
+- **Horizontal Scaling**: Distribute load across multiple servers
+- **Vertical Scaling**: Increase server resources as needed
+- **Load Balancing**: Distribute requests efficiently
+- **Capacity Planning**: Forecast growth and resource requirements
+
+### Data Integrity Verification and Auditing
+
+**Verification Procedures**:
+- **Record Count Validation**: Compare source and export record counts
+- **Checksum Verification**: Validate data integrity during transfer
+- **Sample Validation**: Spot-check random records for accuracy
+- **Cross-System Validation**: Compare data across multiple systems
+
+**Audit Trail Maintenance**:
+```console
+Auditing > Trails > Configuration Setup
+1. Log all export operations with timestamps and users
+2. Track data access and modification activities
+3. Monitor system changes and configuration updates
+4. Generate audit reports for compliance requirements
+5. Implement automated alerting for suspicious activities
+```
+
+**Continuous Monitoring Framework**:
+- **Real-Time Alerting**: Immediate notification of critical issues
+- **Dashboard Monitoring**: Visual tracking of key metrics and KPIs
+- **Trending Analysis**: Historical analysis for capacity planning
+- **Proactive Maintenance**: Scheduled maintenance and optimization
+
+<PracticeButton
+  moduleId="module-reporting-data-export"
+  domainEnum="REPORTING_EXPORT"
+  targetTags={["Troubleshooting", "Performance", "DataIntegrity", "Monitoring"]}
+  objectiveIds={["obj-reporting-quality"]}
+  difficulty="advanced"
+>
+  Practice Troubleshooting Export Operations
+</PracticeButton>
+
+### Export Monitoring and Maintenance Excellence
+
+**Proactive Monitoring Strategy**:
+- **Health Checks**: Regular validation of export system components
+- **Capacity Planning**: Monitor growth trends and resource utilization
+- **Performance Baselines**: Establish and track performance benchmarks
+- **Predictive Maintenance**: Identify and address issues before failures
+
+**Maintenance Best Practices**:
+```console
+Maintenance > Scheduled Tasks > Routine Operations
+1. Regular cleanup of temporary files and logs
+2. Archive old export data according to retention policies
+3. Update export configurations based on changing requirements
+4. Test disaster recovery and backup procedures
+5. Review and optimize system performance regularly
+```
+
+**Documentation and Knowledge Management**:
+- **Runbooks**: Step-by-step procedures for common operations
+- **Troubleshooting Guides**: Decision trees for issue resolution
+- **Configuration Documentation**: Complete system configuration records
+- **Training Materials**: Keep team skills current with system updates
+
+<InfoBox type="maintenance">
+**Production Excellence**: Establish regular maintenance schedules, document all procedures, and maintain current system documentation. Proactive maintenance prevents most critical issues.
+</InfoBox>
+
+# Practice
+
+<PracticeButton
+  moduleId="module-reporting-data-export"
+  domainEnum="REPORTING_EXPORT"
+  targetTags={[
+    "Reporting",
+    "Export",
+    "DataQuality",
+    "Scheduling",
+    "CSV",
+    "JSON",
+    "Automation",
+    "Performance",
+    "API",
+    "Dashboards",
+    "Compliance",
+    "Integration",
+    "Troubleshooting"
+  ]}
+  objectiveIds={["obj-reporting-build", "obj-reporting-export", "obj-reporting-quality"]}
+  difficulty="intermediate"
+>
+  Start Comprehensive Practice Session
+</PracticeButton>
+
+## Comprehensive Practice Scenarios
+
+### **Section A Practice: Report Building Mastery**
+- **Report Type Selection**: Identify optimal report types for different stakeholders (operational, compliance, executive)
+- **Data Source Configuration**: Practice configuring multiple data sources with appropriate joins and relationships
+- **Dynamic Filtering**: Implement complex filtering scenarios with cascading parameters and conditional logic
+- **Template Design**: Create professional report layouts with consistent formatting and branding
+- **Performance Optimization**: Optimize report queries for large datasets and complex data relationships
+
+### **Section B Practice: Advanced Features Implementation**
+- **Conditional Formatting**: Apply business rules and visual indicators for different data scenarios
+- **Calculated Fields**: Implement complex calculations, percentages, and trend analysis
+- **Multi-Source Integration**: Practice joining data from multiple sources (ITSM, SIEM, CMDB)
+- **Interactive Dashboards**: Create dashboards with drill-down capabilities and real-time updates
+- **Dynamic Content**: Implement responsive content that adapts to different audiences and devices
+
+### **Section C Practice: Enterprise Scheduling & Distribution**
+- **Schedule Configuration**: Set up complex scheduling patterns with time zones and holiday handling
+- **Distribution Management**: Configure multi-channel delivery with role-based distribution lists
+- **Access Control**: Implement proper governance and permission structures
+- **Performance Tuning**: Optimize scheduled reports for resource efficiency
+- **Failure Recovery**: Practice troubleshooting and implementing retry logic for failed distributions
+
+### **Section D Practice: Advanced Export Operations**
+- **Format Optimization**: Choose appropriate export formats for different use cases (CSV, JSON, Excel, XML, API)
+- **Large Dataset Handling**: Implement pagination, compression, and chunking strategies
+- **API Integration**: Configure secure API exports with authentication and rate limiting
+- **Data Validation**: Implement quality checks and validation frameworks
+- **Compliance Implementation**: Apply security controls and regulatory compliance measures
+
+### **Section E Practice: Expert Troubleshooting**
+- **Performance Diagnosis**: Identify and resolve export performance issues
+- **Data Integrity Verification**: Implement comprehensive validation and auditing procedures
+- **Error Resolution**: Practice systematic troubleshooting approaches for common export failures
+- **Monitoring Setup**: Configure proactive monitoring and alerting systems
+- **Documentation Creation**: Develop runbooks and troubleshooting guides for operations teams
+
+**Practice Focus Areas**: Advanced scenarios covering all exam objectives with emphasis on real-world enterprise implementation. Tag items to `REPORTING_EXPORT`, `Enterprise_Implementation`, `Performance_Optimization`, `Compliance`, `Troubleshooting`.
+
+# Assess
+
+## Comprehensive Assessment Framework
+
+**Assessment Structure**: 18-22 items covering all five major sections with weighted emphasis on practical implementation and troubleshooting scenarios.
+
+### **Assessment Categories and Weighting**
+
+**Report Building Fundamentals (25% - 4-5 items)**:
+- Report type selection and use case alignment
+- Data source configuration and optimization
+- Dynamic filtering and parameter implementation
+- Template design and formatting standards
+
+**Advanced Reporting Features (30% - 5-6 items)**:
+- Conditional formatting and business rule implementation
+- Dynamic content and advanced calculations
+- Multi-source data integration and joins
+- Interactive dashboard design and drill-down configuration
+
+**Scheduling and Distribution (20% - 4 items)**:
+- Advanced scheduling configuration and optimization
+- Multi-channel distribution and delivery management
+- Access control and governance implementation
+- Performance tuning for scheduled operations
+
+**Data Export Procedures (35% - 6-7 items)**:
+- Export format selection and optimization
+- Large dataset handling and performance strategies
+- API integration and enterprise connectivity
+- Data validation and quality assurance
+- Security and compliance implementation
+
+**Troubleshooting and Maintenance (15% - 3 items)**:
+- Performance issue diagnosis and resolution
+- Data integrity verification and auditing
+- Proactive monitoring and maintenance strategies
+
+### **Assessment Standards**
+
+**Passing Threshold**: 85% (reflecting enterprise-grade proficiency requirements)
+**Remediation Triggers**:
+- Less than 70% overall score requires complete module review
+- Less than 75% in any individual section requires targeted remediation
+- Specific focus on performance optimization and troubleshooting scenarios
+
+**Remediation Areas**:
+- **Performance Optimization**: Advanced query optimization and resource management
+- **Enterprise Integration**: Complex multi-source reporting and API integration
+- **Compliance Implementation**: Regulatory requirements and security controls
+- **Troubleshooting Mastery**: Systematic problem resolution and root cause analysis
+
+**Assessment Delivery**:
+- Scenario-based questions requiring practical implementation knowledge
+- Performance optimization case studies
+- Troubleshooting simulations with multiple-step resolution paths
+- Enterprise integration challenges requiring end-to-end solution design
+
+# References
+
+## Official Documentation and Resources
+
+### **Tanium Official Documentation**
+- **Reporting Module User Guide**: Comprehensive coverage of report building, scheduling, and management
+- **Data Export API Reference**: Complete API documentation with examples and best practices
+- **Performance Optimization Guide**: Advanced techniques for large-scale reporting environments
+- **Security and Compliance Documentation**: Regulatory compliance and security control implementation
+
+### **Enterprise Integration Guides**
+- **ITSM Integration Patterns**: ServiceNow, Remedy, and other ITSM platform integration
+- **SIEM Integration Documentation**: Splunk, QRadar, and ArcSight connectivity guides
+- **Data Lake and ETL Integration**: Modern data architecture integration patterns
+- **API Management Best Practices**: Enterprise API gateway and security implementation
+
+### **Performance and Troubleshooting Resources**
+- **Tanium Performance Tuning Guide**: System optimization and capacity planning
+- **Troubleshooting Runbooks**: Step-by-step resolution procedures for common issues
+- **Monitoring and Alerting Configuration**: Proactive system health monitoring setup
+- **Disaster Recovery Procedures**: Backup and recovery strategies for reporting infrastructure
+
+### **Compliance and Security References**
+- **GDPR Compliance Implementation Guide**: Personal data protection and privacy rights
+- **HIPAA Security Controls**: Healthcare data protection requirements
+- **SOX Compliance Documentation**: Financial data integrity and audit requirements
+- **Industry-Specific Compliance Guides**: Sector-specific regulatory requirement implementation
+
+### **Advanced Training Resources**
+- **Tanium University Advanced Reporting Course**: Instructor-led training for complex scenarios
+- **Enterprise Architecture Patterns**: Design patterns for large-scale deployment
+- **API Integration Workshops**: Hands-on training for system integration scenarios
+- **Performance Engineering Certification**: Advanced performance optimization techniques
+
+<InfoBox type="reference">
+**Documentation Access**: All official Tanium documentation is available through the Tanium Support Portal with your enterprise license. Community forums and user groups provide additional real-world implementation examples and best practices.
+</InfoBox>

@@ -1,0 +1,27 @@
+backups/
+node_modules/
+.next/
+.git/
+*.log
+.env.local
+.env.mcp
+.mcp-servers-master.json
+.claude-flow/
+logs/
+.serena/
+.vercel/
+.vscode/
+docs/
+scripts/
+tests/
+harness/
+memory/
+Tanium TCO/
+.bmad-config.yaml
+tmp*.txt
+tsc-output.txt
+dev_output.txt
+nul
+*.bak
+*.sql
+*.js.map

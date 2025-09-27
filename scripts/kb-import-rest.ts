@@ -1,0 +1,134 @@
+#!/usr/bin/env tsx
+
+import path from 'path'
+import dotenv from 'dotenv'
+import { createClient } from '@supabase/supabase-js'
+
+import { buildModuleIndex, loadKbLessons } from './lib/kb-lesson-loader'
+
+dotenv.config({ path: path.join(process.cwd(), '.env.local') })
+
+type Result<T> = { ok: true; data: T } | { ok: false; error: string }
+
+async function main(): Promise<void> {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL
+  const serviceRole = process.env.SUPABASE_SERVICE_ROLE_KEY
+
+  if (!url || !serviceRole) {
+    throw new Error('Missing NEXT_PUBLIC_SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY in .env.local')
+  }
+
+  const supabase = createClient(url, serviceRole)
+
+  console.log('KB Import (REST)')
+  console.log('• Using REST with service role (RLS bypass)')
+
+  // Load lessons from docs/KB/lessons
+  const lessons = loadKbLessons()
+  const modulesIndex = buildModuleIndex(lessons)
+  const modules = Object.values(modulesIndex).sort((a, b) => a.order - b.order)
+
+  console.log(`• Discovered ${modules.length} module(s), ${lessons.length} lesson(s) from docs/KB/lessons`)
+
+  // Probe public.kb_modules shape — attempt a safe select *; if it fails, we’ll still upsert minimal columns
+  const probe = await supabase.from('kb_modules').select('*').limit(1)
+  const kbModulesColumns = probe.data && probe.data[0] ? Object.keys(probe.data[0]) : []
+  const hasDescription = kbModulesColumns.includes('description') || kbModulesColumns.length === 0
+
+  // Upsert modules (id/title/domain/[description]) into public.kb_modules
+  console.log('• Upserting modules into public.kb_modules ...')
+  for (const mod of modules) {
+    const payload: Record<string, unknown> = {
+      id: mod.id,
+      title: mod.title,
+      domain: mod.domain,
+    }
+    if (hasDescription && mod.description) payload.description = mod.description
+
+    const res = await supabase.from('kb_modules').upsert(payload, { onConflict: 'id' })
+    if (res.error) {
+      console.warn(`  ! Failed: ${mod.id} — ${res.error.message}`)
+    } else {
+      console.log(`  ✓ ${mod.id}`)
+    }
+
+    // Attach lessons into metadata.lessons for quick access without a separate table
+    const lessonSummaries = mod.lessons.map((l) => ({
+      slug: l.slug,
+      title: l.title,
+      status: l.status,
+      durationMinutes: l.durationMinutes ?? null,
+      tags: l.tags,
+      skillLevel: l.skillLevel,
+    }))
+    // Merge metadata (fetch existing)
+    const existing = await supabase.from('kb_modules').select('metadata').eq('id', mod.id).single()
+    const currentMeta = existing.data?.metadata && typeof existing.data.metadata === 'object' ? existing.data.metadata : {}
+    const newMeta = { ...currentMeta, lessons: lessonSummaries }
+    const upd = await supabase.from('kb_modules').update({ metadata: newMeta }).eq('id', mod.id)
+    if (upd.error) {
+      console.warn(`  ! Metadata update failed for ${mod.id}: ${upd.error.message}`)
+    }
+  }
+
+  // Check if public.kb_lessons exists; if not, skip importing lessons
+  const lessonProbe = await supabase.from('kb_lessons').select('count', { count: 'exact', head: true })
+  if (lessonProbe.error) {
+    console.log('• public.kb_lessons not available — skipping lesson import (create table or expose schema to enable).')
+  } else {
+    console.log('• Upserting lessons into public.kb_lessons ...')
+    for (const lesson of lessons) {
+      const payload = {
+        module_id: lesson.moduleId,
+        slug: lesson.slug,
+        title: lesson.title,
+        summary: lesson.summary,
+        duration_minutes: lesson.durationMinutes ?? null,
+        content: lesson.content,
+        tags: lesson.tags,
+        contributors: lesson.contributors,
+        status: lesson.status,
+        skill_level: lesson.skillLevel,
+      }
+      const res = await supabase.from('kb_lessons').upsert(payload, { onConflict: 'module_id,slug' })
+      if (res.error) {
+        console.warn(`  ! Failed: ${lesson.moduleId}/${lesson.slug} — ${res.error.message}`)
+      } else {
+        console.log(`  ✓ ${lesson.moduleId}/${lesson.slug}`)
+      }
+    }
+  }
+
+  // Summarize
+  const summary = await summarize(supabase)
+  if (summary.ok) {
+    console.log('\nSummary:')
+    console.log(`  Modules in public.kb_modules: ${summary.data.modules}`)
+    console.log(`  Lessons in public.kb_lessons: ${summary.data.lessons ?? 'N/A'}`)
+  } else {
+    console.log('Summary failed:', summary.error)
+  }
+}
+
+// Use an untyped client here to avoid versioned type mismatches during project-wide type checks
+async function summarize(supabase: any): Promise<Result<{ modules: number; lessons?: number }>> {
+  try {
+    const m = await supabase.from('kb_modules').select('count', { count: 'exact', head: true })
+    if (m.error) throw new Error(m.error.message)
+
+    let lCount: number | undefined
+    const l = await supabase.from('kb_lessons').select('count', { count: 'exact', head: true })
+    if (!l.error) lCount = l.count ?? 0
+
+    return { ok: true, data: { modules: m.count ?? 0, lessons: lCount } }
+  } catch (e) {
+    return { ok: false, error: (e as Error).message }
+  }
+}
+
+if (require.main === module) {
+  main().catch((err) => {
+    console.error(err)
+    process.exit(1)
+  })
+}

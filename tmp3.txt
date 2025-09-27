@@ -1,0 +1,8 @@
+  analyticsService
+);
+(AnalyticsServiceClass as any).getContentAnalytics = analyticsService.getContentAnalytics.bind(
+  analyticsService
+);
+
+export { AnalyticsServiceClass as AnalyticsService }; // Keep class alias export for tests/mocks
+export default analyticsService;

@@ -1,0 +1,39 @@
+{
+  "examples": [
+    {
+      "id": "aq-basics-count",
+      "title": "Count machines by OS platform",
+      "domain": "AQ",
+      "difficulty": 1,
+      "question": "Get count() from all machines group by OS Platform",
+      "expect": {
+        "headers": [
+          "OS Platform",
+          "count()"
+        ],
+        "rows": []
+      }
+    },
+    {
+      "id": "aq-performance-cpu",
+      "title": "High CPU Windows workstations",
+      "domain": "AQ",
+      "difficulty": 2,
+      "question": "Get Computer Name and CPU Percent from machines with Operating System contains \"Windows\" and Computer Role equals \"Workstation\" and CPU Percent is greater than \"65\" order by CPU Percent desc limit 5"
+    },
+    {
+      "id": "rq-laptops-group",
+      "title": "Laptop disk capacity",
+      "domain": "RQ",
+      "difficulty": 2,
+      "question": "Get Computer Name, Disk Free GB, Memory GB from group \"Laptops\" order by Disk Free GB"
+    },
+    {
+      "id": "rd-avg-disk",
+      "title": "Average disk free by group",
+      "domain": "RD",
+      "difficulty": 2,
+      "question": "Get avg(Disk Free GB), max(Disk Free GB) from all machines group by Group"
+    }
+  ]
+}

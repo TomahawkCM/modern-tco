@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyberpunk Navigation - Standalone Demo</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Custom Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        archon: {
+                            'bg-start': '#0a0a0f',
+                            'bg-end': '#1a1a2e',
+                            'bg-card': 'rgba(26, 26, 46, 0.8)',
+                            'bg-panel': 'rgba(16, 16, 24, 0.9)',
+                            'cyan-bright': '#00d4ff',
+                            'cyan-primary': '#0ea5e9',
+                            'cyan-hover': '#0284c7',
+                            'blue-electric': '#3b82f6',
+                            'cyan-primary-alt': '#22d3ee',
+                            'cyan-secondary': '#0ea5e9',
+                            'cyan-hover-alt': '#0284c7',
+                            'text-primary': '#ffffff',
+                            'text-secondary': 'rgba(255, 255, 255, 0.8)',
+                            'text-muted': 'rgba(255, 255, 255, 0.6)',
+                            'text-accent': '#00d4ff',
+                            'border': 'rgba(255, 255, 255, 0.1)',
+                            'border-bright': 'rgba(0, 212, 255, 0.3)',
+                            'glass': 'rgba(255, 255, 255, 0.05)',
+                        }
+                    },
+                    animation: {
+                        'pulse': 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'glow': 'glow 2s ease-in-out infinite alternate'
+                    },
+                    keyframes: {
+                        glow: {
+                            '0%': { boxShadow: '0 0 20px rgba(34, 211, 238, 0.3)' },
+                            '100%': { boxShadow: '0 0 40px rgba(34, 211, 238, 0.6)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Circuit Pattern Styles */
+        .circuit-pattern {
+            position: absolute;
+            inset: 0;
+            opacity: 0.2;
+        }
+
+        /* Holographic Text Effect */
+        .holographic-text {
+            position: relative;
+        }
+
+        .holographic-text::before {
+            content: attr(data-text);
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, #22d3ee, #0ea5e9, #22d3ee);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: blur(1px);
+            animation: holographic-shimmer 3s ease-in-out infinite;
+        }
+
+        .holographic-text-content {
+            background: linear-gradient(90deg, #22d3ee, #0ea5e9, #22d3ee);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        @keyframes holographic-shimmer {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 1; }
+        }
+
+        /* Glass morphism effects */
+        .glass-nav {
+            background: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(34, 211, 238, 0.2);
+            box-shadow: 0 0 50px rgba(34, 211, 238, 0.1);
+        }
+
+        .glass-button {
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(34, 211, 238, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .glass-button:hover {
+            background: rgba(34, 211, 238, 0.1);
+            border-color: rgba(34, 211, 238, 0.5);
+            box-shadow: 0 0 30px rgba(34, 211, 238, 0.3);
+        }
+
+        /* Active tab styling */
+        .active-tab {
+            background: linear-gradient(135deg, rgba(34, 211, 238, 0.2), rgba(14, 165, 233, 0.2));
+            color: #22d3ee;
+        }
+
+        /* Mobile menu animation */
+        .mobile-menu {
+            transform: translateY(-20px);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* Particle canvas */
+        #particle-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* Icon styles for better visibility */
+        .nav-icon {
+            width: 1rem;
+            height: 1rem;
+            color: currentColor;
+        }
+
+        /* Glow animation for brand icon */
+        .brand-icon {
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .mobile-nav-item {
+                transform: translateX(-10px);
+                transition: transform 0.2s ease;
+            }
+
+            .mobile-nav-item:hover {
+                transform: translateX(5px);
+            }
+        }
+    </style>
+</head>
+<body class="dark min-h-screen">
+    <!-- Animated Background Canvas -->
+    <canvas id="particle-canvas"></canvas>
+
+    <!-- Demo Content Area -->
+    <div class="relative z-10 min-h-screen p-4">
+        <!-- Navigation Component -->
+        <nav class="fixed top-1 left-0 right-0 z-40 mx-4" id="cyberpunk-nav">
+            <!-- Circuit Pattern Background -->
+            <div class="circuit-pattern">
+                <svg width="100%" height="100%" viewBox="0 0 100 100" class="w-full h-full">
+                    <defs>
+                        <pattern id="circuit" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+                            <path
+                                d="M10 0v5h5v5h-5v5h5v5h-5M0 10h5v5h5v-5h5"
+                                stroke="url(#circuitGradient)"
+                                stroke-width="0.5"
+                                fill="none"
+                            />
+                        </pattern>
+                        <linearGradient id="circuitGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#00ffff" />
+                            <stop offset="50%" stop-color="#0ea5e9" />
+                            <stop offset="100%" stop-color="#22d3ee" />
+                        </linearGradient>
+                    </defs>
+                    <rect width="100%" height="100%" fill="url(#circuit)" />
+                </svg>
+            </div>
+
+            <div class="relative glass-nav rounded-2xl">
+                <div class="absolute -inset-[1px] bg-gradient-to-r from-cyan-500 via-sky-400 to-cyan-500 rounded-2xl opacity-20 blur-sm animate-pulse"></div>
+
+                <div class="relative px-6 py-4">
+                    <div class="flex items-center justify-between">
+                        <!-- Logo/Brand -->
+                        <div class="flex items-center space-x-3">
+                            <div class="relative">
+                                <div class="w-8 h-8 bg-gradient-to-r from-cyan-500 to-sky-400 rounded-lg flex items-center justify-center brand-icon">
+                                    <!-- Zap Icon -->
+                                    <svg class="h-5 w-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                                    </svg>
+                                </div>
+                                <div class="absolute inset-0 bg-gradient-to-r from-cyan-500 to-sky-400 rounded-lg blur animate-pulse opacity-50"></div>
+                            </div>
+                            <div class="holographic-text text-xl font-bold hidden sm:block" data-text="ARCHON">
+                                <span class="holographic-text-content">ARCHON</span>
+                            </div>
+                        </div>
+
+                        <!-- Desktop Navigation -->
+                        <div class="hidden lg:flex items-center space-x-1" id="desktop-nav">
+                            <!-- Navigation items will be generated by JavaScript -->
+                        </div>
+
+                        <!-- Right side actions -->
+                        <div class="flex items-center space-x-4">
+                            <!-- Notification Bell -->
+                            <button class="relative group glass-button w-10 h-10 rounded-full flex items-center justify-center">
+                                <div class="absolute -inset-1 bg-gradient-to-r from-cyan-500 to-sky-400 rounded-full blur opacity-25 group-hover:opacity-75 transition duration-300"></div>
+                                <div class="relative">
+                                    <!-- Bell Icon -->
+                                    <svg class="nav-icon text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>
+                                    </svg>
+                                </div>
+                            </button>
+
+                            <!-- Mobile Menu Toggle -->
+                            <button id="mobile-menu-toggle" class="lg:hidden relative group glass-button w-10 h-10 rounded-full flex items-center justify-center">
+                                <div class="absolute -inset-1 bg-gradient-to-r from-cyan-500 to-sky-400 rounded-full blur opacity-25 group-hover:opacity-75 transition duration-300"></div>
+                                <div class="relative">
+                                    <!-- Menu/X Icon -->
+                                    <svg id="menu-icon" class="nav-icon text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                                    </svg>
+                                    <svg id="close-icon" class="nav-icon text-cyan-400 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                                    </svg>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mobile Navigation Menu -->
+            <div id="mobile-menu" class="lg:hidden mt-2 mobile-menu glass-nav rounded-2xl">
+                <div class="relative p-4">
+                    <div class="circuit-pattern opacity-10">
+                        <svg width="100%" height="100%" viewBox="0 0 100 100" class="w-full h-full">
+                            <rect width="100%" height="100%" fill="url(#circuit)" />
+                        </svg>
+                    </div>
+                    <div class="relative space-y-2" id="mobile-nav-items">
+                        <!-- Mobile navigation items will be generated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Demo Content -->
+        <div class="pt-32 px-4 max-w-4xl mx-auto">
+            <div class="text-center space-y-8">
+                <h1 class="holographic-text text-4xl md:text-6xl font-bold" data-text="Cyberpunk Navigation">
+                    <span class="holographic-text-content">Cyberpunk Navigation</span>
+                </h1>
+
+                <p class="text-lg text-archon-text-secondary max-w-2xl mx-auto">
+                    This is a standalone implementation of the CyberpunkNavigation React component,
+                    featuring interactive particle backgrounds, glassmorphism design, and responsive navigation.
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
+                    <div class="glass-nav rounded-lg p-6">
+                        <h3 class="text-xl font-semibold text-archon-cyan-bright mb-3">Interactive Particles</h3>
+                        <p class="text-archon-text-muted">Canvas-based particle system that responds to mouse movement with dynamic connections.</p>
+                    </div>
+
+                    <div class="glass-nav rounded-lg p-6">
+                        <h3 class="text-xl font-semibold text-archon-cyan-bright mb-3">Glassmorphism Design</h3>
+                        <p class="text-archon-text-muted">Modern glass-like UI elements with backdrop blur and transparency effects.</p>
+                    </div>
+
+                    <div class="glass-nav rounded-lg p-6">
+                        <h3 class="text-xl font-semibold text-archon-cyan-bright mb-3">Responsive Navigation</h3>
+                        <p class="text-archon-text-muted">Adaptive navigation that works seamlessly on desktop and mobile devices.</p>
+                    </div>
+                </div>
+
+                <!-- Active Tab Display -->
+                <div class="mt-12 glass-nav rounded-lg p-6">
+                    <h3 class="text-xl font-semibold text-archon-cyan-bright mb-3">Current Tab</h3>
+                    <p id="active-tab-display" class="text-2xl text-archon-text-primary font-mono">Dashboard</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Navigation data
+        const navItems = [
+            { name: "Dashboard", href: "#", icon: "cpu" },
+            { name: "Neural Net", href: "#", icon: "zap" },
+            { name: "Security", href: "#", icon: "shield" },
+            { name: "Analytics", href: "#", icon: "activity" },
+        ];
+
+        // State management
+        let activeTab = navItems[0].name;
+        let isMenuOpen = false;
+
+        // Icon SVG paths
+        const icons = {
+            cpu: "M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z",
+            zap: "M13 10V3L4 14h7v7l9-11h-7z",
+            shield: "M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z",
+            activity: "M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+        };
+
+        // Create icon SVG element
+        function createIcon(iconType) {
+            return `
+                <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="${icons[iconType]}"/>
+                </svg>
+            `;
+        }
+
+        // Handle tab change
+        function handleTabChange(tabName) {
+            activeTab = tabName;
+            updateActiveTab();
+            document.getElementById('active-tab-display').textContent = tabName;
+
+            // Close mobile menu if open
+            if (isMenuOpen) {
+                toggleMobileMenu();
+            }
+        }
+
+        // Update active tab styling
+        function updateActiveTab() {
+            // Update desktop nav
+            const desktopButtons = document.querySelectorAll('#desktop-nav button');
+            desktopButtons.forEach(button => {
+                if (button.textContent.trim() === activeTab) {
+                    button.classList.add('active-tab');
+                } else {
+                    button.classList.remove('active-tab');
+                }
+            });
+
+            // Update mobile nav
+            const mobileButtons = document.querySelectorAll('#mobile-nav-items button');
+            mobileButtons.forEach(button => {
+                if (button.textContent.trim() === activeTab) {
+                    button.classList.add('active-tab');
+                } else {
+                    button.classList.remove('active-tab');
+                }
+            });
+        }
+
+        // Toggle mobile menu
+        function toggleMobileMenu() {
+            isMenuOpen = !isMenuOpen;
+            const mobileMenu = document.getElementById('mobile-menu');
+            const menuIcon = document.getElementById('menu-icon');
+            const closeIcon = document.getElementById('close-icon');
+
+            if (isMenuOpen) {
+                mobileMenu.classList.add('show');
+                menuIcon.classList.add('hidden');
+                closeIcon.classList.remove('hidden');
+            } else {
+                mobileMenu.classList.remove('show');
+                menuIcon.classList.remove('hidden');
+                closeIcon.classList.add('hidden');
+            }
+        }
+
+        // Generate navigation items
+        function generateNavigation() {
+            // Desktop navigation
+            const desktopNav = document.getElementById('desktop-nav');
+            desktopNav.innerHTML = navItems.map(item => `
+                <button onclick="handleTabChange('${item.name}')"
+                        class="relative px-4 py-2 rounded-lg transition-all duration-300 flex items-center space-x-2 text-cyan-100/80 hover:text-cyan-400 hover:bg-cyan-500/5 ${item.name === activeTab ? 'active-tab' : ''}">
+                    ${createIcon(item.icon)}
+                    <span class="text-sm font-medium">${item.name}</span>
+                </button>
+            `).join('');
+
+            // Mobile navigation
+            const mobileNav = document.getElementById('mobile-nav-items');
+            mobileNav.innerHTML = navItems.map(item => `
+                <button onclick="handleTabChange('${item.name}')"
+                        class="mobile-nav-item w-full text-left px-4 py-3 rounded-lg transition-all duration-300 flex items-center space-x-3 text-cyan-100/80 hover:text-cyan-400 hover:bg-cyan-500/5 ${item.name === activeTab ? 'active-tab' : ''}">
+                    ${createIcon(item.icon)}
+                    <span class="font-medium">${item.name}</span>
+                </button>
+            `).join('');
+        }
+
+        // Particle system
+        class ParticleSystem {
+            constructor(canvas) {
+                this.canvas = canvas;
+                this.ctx = canvas.getContext('2d');
+                this.particles = [];
+                this.mouse = { x: 0, y: 0 };
+                this.animationId = null;
+
+                this.resize();
+                this.createParticles();
+                this.bindEvents();
+                this.animate();
+            }
+
+            resize() {
+                this.canvas.width = window.innerWidth;
+                this.canvas.height = window.innerHeight;
+            }
+
+            createParticles() {
+                const particleCount = Math.floor((window.innerWidth * window.innerHeight) / 20000);
+                this.particles = [];
+
+                for (let i = 0; i < particleCount; i++) {
+                    const baseOpacity = Math.random() * 0.3 + 0.1;
+                    this.particles.push({
+                        x: Math.random() * window.innerWidth,
+                        y: Math.random() * window.innerHeight,
+                        vx: (Math.random() - 0.5) * 0.3,
+                        vy: (Math.random() - 0.5) * 0.3,
+                        size: Math.random() * 2 + 1,
+                        opacity: baseOpacity,
+                        baseOpacity: baseOpacity
+                    });
+                }
+            }
+
+            bindEvents() {
+                window.addEventListener('mousemove', (e) => {
+                    this.mouse.x = e.clientX;
+                    this.mouse.y = e.clientY;
+                });
+
+                window.addEventListener('resize', () => {
+                    this.resize();
+                    this.createParticles();
+                });
+            }
+
+            animate() {
+                this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+                // Update particles
+                this.particles.forEach(particle => {
+                    particle.x += particle.vx;
+                    particle.y += particle.vy;
+
+                    if (particle.x < 0 || particle.x > this.canvas.width) particle.vx *= -1;
+                    if (particle.y < 0 || particle.y > this.canvas.height) particle.vy *= -1;
+
+                    particle.x = Math.max(0, Math.min(this.canvas.width, particle.x));
+                    particle.y = Math.max(0, Math.min(this.canvas.height, particle.y));
+
+                    const dx = this.mouse.x - particle.x;
+                    const dy = this.mouse.y - particle.y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < 100) {
+                        particle.opacity = Math.min(0.8, particle.baseOpacity + (100 - distance) / 100 * 0.5);
+                    } else {
+                        particle.opacity = particle.baseOpacity;
+                    }
+                });
+
+                // Draw connections
+                for (let i = 0; i < this.particles.length; i++) {
+                    for (let j = i + 1; j < this.particles.length; j++) {
+                        const dx = this.particles[i].x - this.particles[j].x;
+                        const dy = this.particles[i].y - this.particles[j].y;
+                        const distance = Math.sqrt(dx * dx + dy * dy);
+
+                        if (distance < 120) {
+                            const opacity = (120 - distance) / 120 * 0.15;
+                            this.ctx.strokeStyle = `rgba(34, 211, 238, ${opacity})`;
+                            this.ctx.lineWidth = 0.5;
+                            this.ctx.beginPath();
+                            this.ctx.moveTo(this.particles[i].x, this.particles[i].y);
+                            this.ctx.lineTo(this.particles[j].x, this.particles[j].y);
+                            this.ctx.stroke();
+                        }
+                    }
+
+                    // Mouse connections
+                    const dx = this.mouse.x - this.particles[i].x;
+                    const dy = this.mouse.y - this.particles[i].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < 150) {
+                        const opacity = (150 - distance) / 150 * 0.3;
+                        this.ctx.strokeStyle = `rgba(14, 165, 233, ${opacity})`;
+                        this.ctx.lineWidth = 1;
+                        this.ctx.beginPath();
+                        this.ctx.moveTo(this.particles[i].x, this.particles[i].y);
+                        this.ctx.lineTo(this.mouse.x, this.mouse.y);
+                        this.ctx.stroke();
+                    }
+                }
+
+                // Draw particles
+                this.particles.forEach(particle => {
+                    this.ctx.beginPath();
+                    this.ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+                    this.ctx.fillStyle = `rgba(34, 211, 238, ${particle.opacity})`;
+                    this.ctx.fill();
+
+                    if (particle.opacity > 0.3) {
+                        this.ctx.beginPath();
+                        this.ctx.arc(particle.x, particle.y, particle.size * 2, 0, Math.PI * 2);
+                        this.ctx.fillStyle = `rgba(14, 165, 233, ${particle.opacity * 0.2})`;
+                        this.ctx.fill();
+                    }
+                });
+
+                // Draw mouse glow
+                if (this.mouse.x !== 0 && this.mouse.y !== 0) {
+                    const gradient = this.ctx.createRadialGradient(
+                        this.mouse.x, this.mouse.y, 0,
+                        this.mouse.x, this.mouse.y, 50
+                    );
+                    gradient.addColorStop(0, 'rgba(14, 165, 233, 0.1)');
+                    gradient.addColorStop(1, 'rgba(14, 165, 233, 0)');
+
+                    this.ctx.fillStyle = gradient;
+                    this.ctx.beginPath();
+                    this.ctx.arc(this.mouse.x, this.mouse.y, 50, 0, Math.PI * 2);
+                    this.ctx.fill();
+                }
+
+                this.animationId = requestAnimationFrame(() => this.animate());
+            }
+
+            destroy() {
+                if (this.animationId) {
+                    cancelAnimationFrame(this.animationId);
+                }
+            }
+        }
+
+        // Initialize the application
+        document.addEventListener('DOMContentLoaded', () => {
+            // Generate navigation
+            generateNavigation();
+
+            // Initialize particle system
+            const canvas = document.getElementById('particle-canvas');
+            new ParticleSystem(canvas);
+
+            // Setup mobile menu toggle
+            document.getElementById('mobile-menu-toggle').addEventListener('click', toggleMobileMenu);
+
+            // Set initial active tab
+            updateActiveTab();
+        });
+    </script>
+</body>
+</html>

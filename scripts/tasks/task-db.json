@@ -1,0 +1,100 @@
+{
+  "tasks": [
+    {
+      "id": "task-001",
+      "title": "Fix ProgressContext Domain Mismatch",
+      "category": "critical-fixes",
+      "priority": 1,
+      "status": "completed",
+      "effort": "15min",
+      "file": "src/contexts/ProgressContext.tsx",
+      "lines": "75-81",
+      "dependencies": [],
+      "description": "Update domain names from old format (FUNDAMENTALS, DEPLOYMENT) to TCO format (ASKING_QUESTIONS, REFINING_TARGETING)",
+      "created": "2025-08-31T00:28:48.509Z",
+      "updated": "2025-08-31T00:29:07.810Z"
+    },
+    {
+      "id": "task-002",
+      "title": "Update Domain Page Info Object",
+      "category": "critical-fixes",
+      "priority": 1,
+      "status": "completed",
+      "effort": "20min",
+      "file": "src/app/domains/[domain]/page.tsx",
+      "lines": "36-142",
+      "dependencies": [],
+      "description": "Create new TCO-specific domainInfo with proper learning objectives",
+      "created": "2025-08-31T00:28:48.513Z",
+      "updated": "2025-08-31T00:36:13.571Z"
+    },
+    {
+      "id": "task-003",
+      "title": "Fix Domain Question Filtering",
+      "category": "critical-fixes",
+      "priority": 1,
+      "status": "completed",
+      "effort": "10min",
+      "file": "src/app/domains/[domain]/page.tsx",
+      "lines": "166-168",
+      "dependencies": [],
+      "description": "Update filter logic to handle TCO domain enums properly",
+      "created": "2025-08-31T00:28:48.518Z",
+      "updated": "2025-08-31T00:36:15.720Z"
+    },
+    {
+      "id": "task-004",
+      "title": "Import legacy questions",
+      "category": "question-import",
+      "priority": 2,
+      "status": "completed",
+      "effort": "30min",
+      "file": null,
+      "lines": null,
+      "dependencies": [],
+      "description": "Import all questions from legacy system to modern format",
+      "created": "2025-08-31T00:31:53.278Z",
+      "updated": "2025-08-31T00:37:20.868Z"
+    }
+  ],
+  "categories": {
+    "critical-fixes": {
+      "priority": 1,
+      "color": "red"
+    },
+    "question-import": {
+      "priority": 2,
+      "color": "orange"
+    },
+    "module-content": {
+      "priority": 3,
+      "color": "blue"
+    },
+    "interactive-labs": {
+      "priority": 4,
+      "color": "green"
+    },
+    "advanced-features": {
+      "priority": 5,
+      "color": "purple"
+    },
+    "ui-polish": {
+      "priority": 6,
+      "color": "teal"
+    },
+    "data-persistence": {
+      "priority": 7,
+      "color": "indigo"
+    },
+    "integration": {
+      "priority": 8,
+      "color": "gray"
+    }
+  },
+  "metadata": {
+    "total": 4,
+    "completed": 4,
+    "lastUpdated": "2025-08-31T00:37:20.869Z",
+    "version": "1.0.0"
+  }
+}

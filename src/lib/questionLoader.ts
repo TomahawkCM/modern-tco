@@ -1,0 +1,836 @@
+/* eslint-disable @typescript-eslint/no-require-imports */
+import { Difficulty, QuestionCategory, TCODomain, type Question } from "@/types/exam";
+
+/**
+ * Question Loader Service - Centralized question management
+ * Extracts and loads questions from study content and external sources
+ */
+
+interface DomainQuestions {
+  domain: TCODomain;
+  questions: Question[];
+}
+
+// Domain 2: Refining Questions & Targeting (23% exam weight)
+const domain2Questions: Question[] = [
+  {
+    id: "domain2-q1",
+    question:
+      "What is the primary advantage of using Dynamic Computer Groups in Tanium over Static Computer Groups for large-scale enterprise environments?",
+    choices: [
+      { id: "a", text: "Dynamic groups require less network bandwidth" },
+      {
+        id: "b",
+        text: "Dynamic groups automatically update membership based on real-time endpoint properties, reducing manual management overhead",
+      },
+      { id: "c", text: "Dynamic groups can only be created by administrators" },
+      { id: "d", text: "Dynamic groups store more historical data than static groups" },
+    ],
+    correctAnswerId: "b",
+    domain: TCODomain.REFINING_QUESTIONS,
+    difficulty: Difficulty.INTERMEDIATE,
+    category: QuestionCategory.PLATFORM_FUNDAMENTALS,
+    explanation:
+      "Dynamic Computer Groups automatically update their membership based on real-time endpoint properties (like OS version, installed software, IP ranges). This eliminates the need for manual maintenance of group membership as endpoints change, making them highly valuable in large enterprise environments where endpoints frequently change state.",
+    tags: ["dynamic-groups", "rbac", "automation"],
+    studyGuideRef: "/domains/domain2#computer-group-management",
+  },
+  {
+    id: "domain2-q2",
+    question:
+      'When creating a complex filter with multiple logical conditions, which operators should be used to combine criteria for "Windows endpoints that have either Chrome OR Firefox installed AND are not domain controllers"?',
+    choices: [
+      { id: "a", text: "AND, OR, NOT - with proper parentheses grouping" },
+      { id: "b", text: "Only AND operators in sequence" },
+      { id: "c", text: "OR operators only" },
+      { id: "d", text: "NOT operators with simple conditions" },
+    ],
+    correctAnswerId: "a",
+    domain: TCODomain.REFINING_QUESTIONS,
+    difficulty: Difficulty.ADVANCED,
+    category: QuestionCategory.CONSOLE_PROCEDURES,
+    explanation:
+      "Complex filters require proper logical operator combination: (Chrome OR Firefox) AND Windows AND NOT DomainController. The parentheses ensure proper grouping so the OR condition for browsers is evaluated first, then combined with AND conditions. Without proper grouping, the logic would be interpreted incorrectly.",
+    tags: ["filtering", "logical-operators", "boolean-logic"],
+    studyGuideRef: "/domains/domain2#advanced-filtering",
+  },
+  {
+    id: "domain2-q3",
+    question:
+      "In a Role-Based Access Control (RBAC) implementation, what is the recommended approach for granting question refinement permissions to operators who need to modify targeting for specific geographic regions?",
+    choices: [
+      { id: "a", text: "Grant full administrative access to all operators" },
+      {
+        id: "b",
+        text: "Create region-specific roles with computer group management permissions limited to their geographic scope",
+      },
+      { id: "c", text: "Use shared administrator accounts for all operators" },
+      { id: "d", text: "Disable RBAC for operational efficiency" },
+    ],
+    correctAnswerId: "b",
+    domain: TCODomain.REFINING_QUESTIONS,
+    difficulty: Difficulty.INTERMEDIATE,
+    category: QuestionCategory.PLATFORM_FUNDAMENTALS,
+    explanation:
+      "RBAC best practices require role-based permissions that follow the principle of least privilege. Region-specific roles ensure operators can only manage computer groups and targeting within their assigned geographic scope, maintaining security while enabling operational efficiency. This prevents unauthorized access to other regions while providing necessary functionality.",
+    tags: ["rbac", "security", "least-privilege"],
+    studyGuideRef: "/domains/domain2#rbac-implementation",
+  },
+  {
+    id: "domain2-q4",
+    question:
+      "During query optimization for targeting refinement, what is the most effective strategy to improve performance when working with a question that targets 50,000+ endpoints?",
+    choices: [
+      { id: "a", text: "Run the question multiple times to average the results" },
+      {
+        id: "b",
+        text: "Use specific computer groups to pre-filter endpoints and reduce the target scope before applying additional refinement criteria",
+      },
+      { id: "c", text: "Increase the question timeout to maximum value" },
+      { id: "d", text: "Run the question during peak hours for better network utilization" },
+    ],
+    correctAnswerId: "b",
+    domain: TCODomain.REFINING_QUESTIONS,
+    difficulty: Difficulty.ADVANCED,
+    category: QuestionCategory.PRACTICAL_SCENARIOS,
+    explanation:
+      "Pre-filtering using computer groups significantly reduces the initial target scope before applying additional refinement criteria. This approach leverages Tanium's efficient computer group evaluation to minimize the number of endpoints that need to be evaluated for complex refinement logic, resulting in faster question execution and reduced network load.",
+    tags: ["optimization", "performance", "targeting"],
+    studyGuideRef: "/domains/domain2#query-optimization",
+  },
+  {
+    id: "domain2-q5",
+    question:
+      "What is the correct troubleshooting approach when a computer group's membership appears inconsistent with its defined criteria?",
+    choices: [
+      { id: "a", text: "Delete and recreate the computer group immediately" },
+      {
+        id: "b",
+        text: "Systematically verify endpoint sensor data, refresh group membership, check for conflicting filters, and validate RBAC permissions",
+      },
+      { id: "c", text: "Ignore the issue as it will resolve automatically" },
+      { id: "d", text: "Increase the group evaluation timeout only" },
+    ],
+    correctAnswerId: "b",
+    domain: TCODomain.REFINING_QUESTIONS,
+    difficulty: Difficulty.INTERMEDIATE,
+    category: QuestionCategory.TROUBLESHOOTING,
+    explanation:
+      "Systematic troubleshooting requires checking multiple potential causes: 1) Verify sensor data accuracy on endpoints, 2) Force refresh group membership evaluation, 3) Check for conflicting or overlapping filter criteria, 4) Validate RBAC permissions for group access. This methodical approach identifies root causes rather than masking symptoms.",
+    tags: ["troubleshooting", "computer-groups", "validation"],
+    studyGuideRef: "/domains/domain2#troubleshooting",
+  },
+];
+
+// Domain 4: Navigation & Module Functions (23% exam weight)
+const domain4Questions: Question[] = [
+  {
+    id: "domain4-q1",
+    question:
+      "In Tanium Platform 7.5+, what is the correct navigation sequence to access the Deploy module's package deployment interface from the main console homepage?",
+    choices: [
+      { id: "a", text: "Main Menu → Deploy → Packages → Deploy Package" },
+      { id: "b", text: "Modules → Deploy → Package Library → Deploy" },
+      { id: "c", text: "Tools → Deployment → Package Selection → Deploy" },
+      { id: "d", text: "Administration → Deploy → Package Management" },
+    ],
+    correctAnswerId: "a",
+    domain: TCODomain.NAVIGATION_MODULES,
+    difficulty: Difficulty.BEGINNER,
+    category: QuestionCategory.CONSOLE_PROCEDURES,
+    explanation:
+      "The correct navigation path in Platform 7.5+ is Main Menu → Deploy → Packages → Deploy Package. This follows the standard module access pattern where modules are accessed through the main menu, then specific functions are accessed within each module. The Deploy module's package deployment interface is located under the Packages section.",
+    tags: ["navigation", "deploy-module", "console"],
+    studyGuideRef: "/domains/domain4#console-navigation",
+  },
+  {
+    id: "domain4-q2",
+    question:
+      "Which core modules must be configured in a specific sequence during initial Tanium platform setup to ensure proper inter-module dependencies?",
+    choices: [
+      { id: "a", text: "Deploy → Patch → Asset → Threat Response → Interact" },
+      { id: "b", text: "Interact → Asset → Deploy → Patch → Threat Response" },
+      { id: "c", text: "Asset → Interact → Deploy → Threat Response → Patch" },
+      { id: "d", text: "All modules can be configured independently in any order" },
+    ],
+    correctAnswerId: "b",
+    domain: TCODomain.NAVIGATION_MODULES,
+    difficulty: Difficulty.ADVANCED,
+    category: QuestionCategory.PLATFORM_FUNDAMENTALS,
+    explanation:
+      "Module dependencies require this sequence: Interact (foundation for querying), Asset (endpoint inventory), Deploy (software deployment), Patch (uses Deploy for patches), Threat Response (uses all previous modules for response actions). Each module builds upon capabilities provided by previous modules in this chain.",
+    tags: ["modules", "dependencies", "setup"],
+    studyGuideRef: "/domains/domain4#module-integration",
+  },
+  {
+    id: "domain4-q3",
+    question:
+      "In the workflow management interface, what is the recommended task prioritization strategy for managing competing resource demands across multiple modules?",
+    choices: [
+      { id: "a", text: "Always prioritize Threat Response tasks above all others" },
+      {
+        id: "b",
+        text: "Use dynamic prioritization based on business impact, security risk, and resource availability with configurable escalation rules",
+      },
+      { id: "c", text: "Process all tasks in first-in-first-out order" },
+      { id: "d", text: "Manually assign priorities without systematic criteria" },
+    ],
+    correctAnswerId: "b",
+    domain: TCODomain.NAVIGATION_MODULES,
+    difficulty: Difficulty.ADVANCED,
+    category: QuestionCategory.PRACTICAL_SCENARIOS,
+    explanation:
+      "Enterprise workflow management requires dynamic prioritization considering multiple factors: business impact assessment, security risk levels, and available system resources. Configurable escalation rules ensure critical issues receive appropriate attention while maintaining operational efficiency. This approach balances competing demands systematically rather than using fixed priority hierarchies.",
+    tags: ["workflow", "prioritization", "resource-management"],
+    studyGuideRef: "/domains/domain4#workflow-management",
+  },
+  {
+    id: "domain4-q4",
+    question:
+      "When configuring role-based dashboard customization, what elements can be modified to optimize the user experience for operators with different functional responsibilities?",
+    choices: [
+      { id: "a", text: "Only widget placement and size" },
+      {
+        id: "b",
+        text: "Widget selection, data filters, refresh rates, visual themes, and contextual access permissions based on role requirements",
+      },
+      { id: "c", text: "Only color themes and fonts" },
+      { id: "d", text: "Dashboard elements cannot be customized per role" },
+    ],
+    correctAnswerId: "b",
+    domain: TCODomain.NAVIGATION_MODULES,
+    difficulty: Difficulty.INTERMEDIATE,
+    category: QuestionCategory.PLATFORM_FUNDAMENTALS,
+    explanation:
+      "Role-based dashboard customization includes comprehensive personalization: widget selection (relevant data for role), data filters (scoped to permissions), refresh rates (based on operational needs), visual themes (accessibility/preference), and contextual access (only showing permitted functions). This creates optimized workflows for different operator responsibilities.",
+    tags: ["dashboard", "rbac", "customization"],
+    studyGuideRef: "/domains/domain4#ui-customization",
+  },
+  {
+    id: "domain4-q5",
+    question:
+      "What is the correct troubleshooting sequence when a module integration fails to load properly in the Tanium console?",
+    choices: [
+      { id: "a", text: "Restart the Tanium server immediately" },
+      {
+        id: "b",
+        text: "Check module service status → verify dependencies → review integration logs → validate configurations → test connectivity → escalate if needed",
+      },
+      { id: "c", text: "Reinstall the entire Tanium platform" },
+      { id: "d", text: "Contact support without preliminary investigation" },
+    ],
+    correctAnswerId: "b",
+    domain: TCODomain.NAVIGATION_MODULES,
+    difficulty: Difficulty.INTERMEDIATE,
+    category: QuestionCategory.TROUBLESHOOTING,
+    explanation:
+      "Systematic troubleshooting follows this logical sequence: 1) Check if module services are running, 2) Verify prerequisite modules are functional, 3) Review integration and error logs for specific issues, 4) Validate module configurations and permissions, 5) Test network connectivity between components, 6) Escalate with collected evidence if issues persist.",
+    tags: ["troubleshooting", "modules", "integration"],
+    studyGuideRef: "/domains/domain4#troubleshooting",
+  },
+];
+
+// Domain 1: Asking Questions (22% exam weight)
+const domain1Questions: Question[] = [
+  {
+    id: "domain1-q1",
+    question:
+      "When constructing a natural language query in Tanium, what is the correct syntax to find all Windows endpoints that have been offline for more than 7 days?",
+    choices: [
+      {
+        id: "a",
+        text: 'Get Computer Name from all machines where Operating System contains "Windows" and Last Contact is greater than 7 days',
+      },
+      {
+        id: "b",
+        text: 'Get Computer Name from all machines where Operating System contains "Windows" and Days Since Last Contact is greater than 7',
+      },
+      { id: "c", text: 'Get Computer Name where OS="Windows" and Offline > 7' },
+      { id: "d", text: "Find Windows computers offline more than week" },
+    ],
+    correctAnswerId: "b",
+    domain: TCODomain.ASKING_QUESTIONS,
+    difficulty: Difficulty.INTERMEDIATE,
+    category: QuestionCategory.CONSOLE_PROCEDURES,
+    explanation:
+      'The correct syntax uses "Days Since Last Contact" sensor with "is greater than" comparison operator. This sensor specifically measures offline duration in days. The query structure follows Tanium\'s natural language format: "Get [desired data] from all machines where [condition1] and [condition2]".',
+    tags: ["natural-language", "sensors", "query-syntax"],
+    studyGuideRef: "/domains/domain1#query-construction",
+  },
+  {
+    id: "domain1-q2",
+    question:
+      "Which built-in sensor category would you use to identify endpoints with specific software vulnerabilities for security assessment purposes?",
+    choices: [
+      { id: "a", text: "System Information sensors only" },
+      {
+        id: "b",
+        text: "Software sensors combined with Configuration sensors for comprehensive vulnerability assessment",
+      },
+      { id: "c", text: "Network sensors exclusively" },
+      { id: "d", text: "Hardware sensors for vulnerability detection" },
+    ],
+    correctAnswerId: "b",
+    domain: TCODomain.ASKING_QUESTIONS,
+    difficulty: Difficulty.ADVANCED,
+    category: QuestionCategory.PRACTICAL_SCENARIOS,
+    explanation:
+      "Vulnerability assessment requires combining Software sensors (to identify installed applications and versions) with Configuration sensors (to check security settings, patch levels, and misconfigurations). This comprehensive approach provides complete vulnerability context rather than relying on single sensor categories.",
+    tags: ["sensors", "vulnerability", "security"],
+    studyGuideRef: "/domains/domain1#sensor-library",
+  },
+  {
+    id: "domain1-q3",
+    question:
+      "When creating a custom sensor with parameters, what is the correct approach for parameter validation to ensure query reliability?",
+    choices: [
+      { id: "a", text: "Parameters do not require validation" },
+      {
+        id: "b",
+        text: "Implement input validation, type checking, range verification, and provide clear parameter descriptions with examples",
+      },
+      { id: "c", text: "Only check if parameters are not empty" },
+      { id: "d", text: "Validation is handled automatically by Tanium" },
+    ],
+    correctAnswerId: "b",
+    domain: TCODomain.ASKING_QUESTIONS,
+    difficulty: Difficulty.ADVANCED,
+    category: QuestionCategory.CONSOLE_PROCEDURES,
+    explanation:
+      "Robust custom sensors require comprehensive parameter validation: input validation (format/content), type checking (string/number/boolean), range verification (min/max values), and clear documentation. This prevents query failures, improves reliability, and makes sensors easier to use correctly by other operators.",
+    tags: ["custom-sensors", "validation", "parameters"],
+    studyGuideRef: "/domains/domain1#custom-sensors",
+  },
+  {
+    id: "domain1-q4",
+    question:
+      "What is the recommended lifecycle management approach for Saved Questions in an enterprise environment?",
+    choices: [
+      { id: "a", text: "Create questions without any organization or lifecycle management" },
+      {
+        id: "b",
+        text: "Implement naming conventions, categorization, regular review cycles, ownership assignment, and archival procedures",
+      },
+      { id: "c", text: "Delete all questions after single use" },
+      { id: "d", text: "Allow unlimited question creation without management" },
+    ],
+    correctAnswerId: "b",
+    domain: TCODomain.ASKING_QUESTIONS,
+    difficulty: Difficulty.INTERMEDIATE,
+    category: QuestionCategory.PLATFORM_FUNDAMENTALS,
+    explanation:
+      "Enterprise Saved Question management requires: standardized naming conventions for discoverability, logical categorization by purpose/domain, regular review cycles to identify obsolete questions, clear ownership assignment for maintenance, and archival procedures to maintain performance while preserving historical context.",
+    tags: ["saved-questions", "lifecycle", "enterprise"],
+    studyGuideRef: "/domains/domain1#saved-questions",
+  },
+  {
+    id: "domain1-q5",
+    question:
+      "When interpreting query results show unexpected data patterns, what is the correct systematic validation approach?",
+    choices: [
+      { id: "a", text: "Accept results without validation" },
+      {
+        id: "b",
+        text: "Verify sensor accuracy, check query syntax, validate data collection timing, cross-reference with known baselines, and investigate anomalies systematically",
+      },
+      { id: "c", text: "Rerun the query multiple times only" },
+      { id: "d", text: "Ignore unexpected patterns as system errors" },
+    ],
+    correctAnswerId: "b",
+    domain: TCODomain.ASKING_QUESTIONS,
+    difficulty: Difficulty.ADVANCED,
+    category: QuestionCategory.TROUBLESHOOTING,
+    explanation:
+      "Systematic result validation requires: sensor accuracy verification (correct data collection), query syntax validation (proper construction), timing consideration (data freshness/collection windows), baseline comparison (expected vs. actual patterns), and methodical anomaly investigation to identify root causes.",
+    tags: ["validation", "troubleshooting", "data-analysis"],
+    studyGuideRef: "/domains/domain1#result-interpretation",
+  },
+  {
+    id: "domain1-q6",
+    question:
+      "For performance optimization of complex queries involving multiple sensors, which strategy provides the most significant improvement?",
+    choices: [
+      { id: "a", text: "Always use all available sensors for comprehensive data" },
+      {
+        id: "b",
+        text: "Optimize sensor selection, use efficient filtering, implement proper question staging, and leverage computer groups for pre-filtering",
+      },
+      { id: "c", text: "Increase query timeout values only" },
+      { id: "d", text: "Run queries during peak network hours" },
+    ],
+    correctAnswerId: "b",
+    domain: TCODomain.ASKING_QUESTIONS,
+    difficulty: Difficulty.ADVANCED,
+    category: QuestionCategory.PRACTICAL_SCENARIOS,
+    explanation:
+      "Query optimization requires multiple strategies: selective sensor usage (only necessary data), efficient filtering (reduce processing overhead), staged questioning (complex queries in phases), and computer group pre-filtering (target scope reduction). These combined approaches significantly improve performance over single optimization methods.",
+    tags: ["optimization", "performance", "query-design"],
+    studyGuideRef: "/domains/domain1#performance-optimization",
+  },
+  {
+    id: "domain1-q7",
+    question:
+      "What is the correct diagnostic approach when a query fails to return expected results from a known subset of endpoints?",
+    choices: [
+      { id: "a", text: "Assume the endpoints are offline and ignore the issue" },
+      {
+        id: "b",
+        text: "Check endpoint connectivity, verify sensor compatibility, validate question syntax, review targeting criteria, and test with simplified queries",
+      },
+      { id: "c", text: "Restart all endpoints immediately" },
+      { id: "d", text: "Modify the question syntax randomly until it works" },
+    ],
+    correctAnswerId: "b",
+    domain: TCODomain.ASKING_QUESTIONS,
+    difficulty: Difficulty.INTERMEDIATE,
+    category: QuestionCategory.TROUBLESHOOTING,
+    explanation:
+      "Systematic diagnostics follow this sequence: 1) Verify endpoint connectivity and health, 2) Check sensor compatibility with endpoint OS/versions, 3) Validate question syntax accuracy, 4) Review targeting criteria for scope issues, 5) Test simplified versions to isolate problems. This methodical approach identifies specific failure points.",
+    tags: ["diagnostics", "troubleshooting", "connectivity"],
+    studyGuideRef: "/domains/domain1#troubleshooting",
+  },
+];
+
+// Domain 5: Reporting & Data Export (17% exam weight)
+const domain5Questions: Question[] = [
+  {
+    id: "domain5-q1",
+    question:
+      "When creating a report for executive stakeholders, which combination of formats and customization options provides the most professional presentation?",
+    choices: [
+      { id: "a", text: "CSV format with raw data only" },
+      {
+        id: "b",
+        text: "PDF format with executive summary, visual charts, trend analysis, and branded templates with appropriate data aggregation",
+      },
+      { id: "c", text: "XML format with technical details" },
+      { id: "d", text: "Plain text format with minimal formatting" },
+    ],
+    correctAnswerId: "b",
+    domain: TCODomain.REPORTING_EXPORT,
+    difficulty: Difficulty.INTERMEDIATE,
+    category: QuestionCategory.PRACTICAL_SCENARIOS,
+    explanation:
+      "Executive reports require professional presentation with PDF format offering: executive summaries (key insights without technical details), visual charts (trends/patterns), historical analysis (context), and branded templates (professional appearance). Data should be aggregated and contextualized for strategic decision-making rather than raw technical output.",
+    tags: ["reporting", "pdf", "executive"],
+    studyGuideRef: "/domains/domain5#report-creation",
+  },
+  {
+    id: "domain5-q2",
+    question:
+      "What is the correct approach for implementing automated data export with multiple format support and error handling?",
+    choices: [
+      { id: "a", text: "Manual exports only to ensure accuracy" },
+      {
+        id: "b",
+        text: "Configure scheduled exports with format validation, delivery confirmation, failure notification, and automatic retry mechanisms",
+      },
+      { id: "c", text: "Single format exports without monitoring" },
+      { id: "d", text: "Export data only when requested" },
+    ],
+    correctAnswerId: "b",
+    domain: TCODomain.REPORTING_EXPORT,
+    difficulty: Difficulty.ADVANCED,
+    category: QuestionCategory.PLATFORM_FUNDAMENTALS,
+    explanation:
+      "Enterprise automation requires comprehensive export management: scheduled execution (consistent delivery), format validation (data integrity), delivery confirmation (successful completion), failure notification (immediate error alerts), and retry mechanisms (handling temporary failures). This ensures reliable data delivery without manual intervention.",
+    tags: ["automation", "scheduling", "error-handling"],
+    studyGuideRef: "/domains/domain5#automated-reporting",
+  },
+  {
+    id: "domain5-q3",
+    question:
+      "For compliance reporting requirements, what data integrity measures should be implemented throughout the export process?",
+    choices: [
+      { id: "a", text: "Basic file generation without validation" },
+      {
+        id: "b",
+        text: "Implement data validation, checksum verification, audit trails, access logging, and tamper-evident controls throughout the export pipeline",
+      },
+      { id: "c", text: "Simple file creation with manual review" },
+      { id: "d", text: "Export data without integrity checks" },
+    ],
+    correctAnswerId: "b",
+    domain: TCODomain.REPORTING_EXPORT,
+    difficulty: Difficulty.ADVANCED,
+    category: QuestionCategory.PRACTICAL_SCENARIOS,
+    explanation:
+      "Compliance-grade data integrity requires: validation checks (data accuracy/completeness), checksum verification (file integrity), comprehensive audit trails (who/what/when), access logging (compliance tracking), and tamper-evident controls (unauthorized modification detection). These measures ensure regulatory compliance and data trustworthiness.",
+    tags: ["compliance", "integrity", "audit-trails"],
+    studyGuideRef: "/domains/domain5#data-integrity",
+  },
+  {
+    id: "domain5-q4",
+    question:
+      "When designing distribution strategies for automated reports, what factors should determine the delivery method selection?",
+    choices: [
+      { id: "a", text: "Always use email for all reports" },
+      {
+        id: "b",
+        text: "Consider data sensitivity, recipient requirements, file size limitations, delivery speed needs, and integration capabilities with recipient systems",
+      },
+      { id: "c", text: "Use the same method for all recipients" },
+      { id: "d", text: "Manual delivery only for security" },
+    ],
+    correctAnswerId: "b",
+    domain: TCODomain.REPORTING_EXPORT,
+    difficulty: Difficulty.INTERMEDIATE,
+    category: QuestionCategory.PLATFORM_FUNDAMENTALS,
+    explanation:
+      "Distribution method selection requires analysis of: data sensitivity (encryption/security needs), recipient requirements (preferred formats/channels), file size limitations (email limits vs. secure transfer), delivery speed requirements (real-time vs. batch), and system integration needs (API vs. file-based delivery).",
+    tags: ["distribution", "delivery", "requirements"],
+    studyGuideRef: "/domains/domain5#distribution",
+  },
+  {
+    id: "domain5-q5",
+    question:
+      "What is the recommended strategy for handling large-scale data exports (>100MB) while maintaining system performance?",
+    choices: [
+      { id: "a", text: "Export all data in single large files during business hours" },
+      {
+        id: "b",
+        text: "Implement data segmentation, compression, off-peak scheduling, streaming exports, and performance monitoring with adaptive throttling",
+      },
+      { id: "c", text: "Avoid large exports completely" },
+      { id: "d", text: "Export data without size considerations" },
+    ],
+    correctAnswerId: "b",
+    domain: TCODomain.REPORTING_EXPORT,
+    difficulty: Difficulty.ADVANCED,
+    category: QuestionCategory.PRACTICAL_SCENARIOS,
+    explanation:
+      "Large-scale export optimization requires: data segmentation (manageable chunks), compression (reduced transfer size), off-peak scheduling (minimal impact), streaming exports (memory efficiency), and adaptive throttling (performance monitoring with automatic adjustment). This approach maintains system responsiveness while handling large datasets.",
+    tags: ["performance", "large-data", "optimization"],
+    studyGuideRef: "/domains/domain5#performance-optimization",
+  },
+];
+
+// Domain 3: Taking Action (15% exam weight)
+const domain3Questions: Question[] = [
+  {
+    id: "domain3-q1",
+    question:
+      "During package deployment validation, what is the correct sequence of verification steps to ensure safe deployment?",
+    choices: [
+      { id: "a", text: "Deploy immediately without validation" },
+      {
+        id: "b",
+        text: "Verify package integrity, validate targeting criteria, confirm deployment prerequisites, test on pilot group, and review rollback procedures before full deployment",
+      },
+      { id: "c", text: "Only check package file size" },
+      { id: "d", text: "Deploy to all endpoints simultaneously" },
+    ],
+    correctAnswerId: "b",
+    domain: TCODomain.TAKING_ACTION,
+    difficulty: Difficulty.ADVANCED,
+    category: QuestionCategory.CONSOLE_PROCEDURES,
+    explanation:
+      "Safe deployment validation requires comprehensive verification: package integrity (checksums/signatures), targeting validation (correct scope), prerequisite confirmation (dependencies met), pilot testing (controlled validation), and rollback readiness (recovery procedures). This systematic approach prevents widespread deployment failures.",
+    tags: ["validation", "deployment", "safety"],
+    studyGuideRef: "/domains/domain3#package-deployment",
+  },
+  {
+    id: "domain3-q2",
+    question:
+      "What is the recommended approach for real-time action execution monitoring in enterprise environments?",
+    choices: [
+      { id: "a", text: "Check status manually after deployment completion" },
+      {
+        id: "b",
+        text: "Implement continuous monitoring with progress tracking, success/failure notifications, performance metrics, and automated escalation for critical issues",
+      },
+      { id: "c", text: "Only monitor failed actions" },
+      { id: "d", text: "No monitoring required for simple actions" },
+    ],
+    correctAnswerId: "b",
+    domain: TCODomain.TAKING_ACTION,
+    difficulty: Difficulty.INTERMEDIATE,
+    category: QuestionCategory.PLATFORM_FUNDAMENTALS,
+    explanation:
+      "Enterprise action monitoring requires: continuous progress tracking (real-time status updates), comprehensive notifications (success/failure alerts), performance metrics (execution time/resource usage), and automated escalation (critical issue management). This provides operational visibility and rapid incident response.",
+    tags: ["monitoring", "real-time", "notifications"],
+    studyGuideRef: "/domains/domain3#action-execution",
+  },
+  {
+    id: "domain3-q3",
+    question:
+      "In multi-tier approval workflows, what criteria should determine escalation paths and approval authority levels?",
+    choices: [
+      { id: "a", text: "All actions require the same approval level" },
+      {
+        id: "b",
+        text: "Risk assessment, business impact, affected system criticality, regulatory requirements, and operational urgency with clear escalation triggers",
+      },
+      { id: "c", text: "Only senior management can approve any action" },
+      { id: "d", text: "No approval workflows needed" },
+    ],
+    correctAnswerId: "b",
+    domain: TCODomain.TAKING_ACTION,
+    difficulty: Difficulty.ADVANCED,
+    category: QuestionCategory.PLATFORM_FUNDAMENTALS,
+    explanation:
+      "Approval workflows must consider: risk assessment (potential impact), business criticality (operational importance), system importance (infrastructure dependencies), regulatory compliance (legal requirements), and operational urgency (time sensitivity). Clear escalation triggers ensure appropriate oversight while maintaining operational efficiency.",
+    tags: ["approvals", "workflows", "escalation"],
+    studyGuideRef: "/domains/domain3#approval-workflows",
+  },
+  {
+    id: "domain3-q4",
+    question:
+      "When troubleshooting failed action deployment, what is the systematic root cause analysis approach?",
+    choices: [
+      { id: "a", text: "Retry the action immediately without investigation" },
+      {
+        id: "b",
+        text: "Analyze deployment logs, verify endpoint prerequisites, check network connectivity, validate permissions, examine resource constraints, and document findings",
+      },
+      { id: "c", text: "Assume network issues and wait" },
+      { id: "d", text: "Escalate to vendor support immediately" },
+    ],
+    correctAnswerId: "b",
+    domain: TCODomain.TAKING_ACTION,
+    difficulty: Difficulty.INTERMEDIATE,
+    category: QuestionCategory.TROUBLESHOOTING,
+    explanation:
+      "Systematic troubleshooting requires: log analysis (error identification), prerequisite verification (dependencies met), connectivity testing (network access), permission validation (security constraints), resource assessment (CPU/memory/disk), and documentation (knowledge retention). This methodical approach identifies specific failure causes.",
+    tags: ["troubleshooting", "root-cause", "systematic"],
+    studyGuideRef: "/domains/domain3#troubleshooting",
+  },
+  {
+    id: "domain3-q5",
+    question:
+      "For batch action deployment with dependencies, what scheduling strategy ensures optimal execution while minimizing risk?",
+    choices: [
+      { id: "a", text: "Execute all actions simultaneously" },
+      {
+        id: "b",
+        text: "Implement dependency-aware sequencing, staged rollouts, resource-based scheduling, and failure isolation with automatic rollback capabilities",
+      },
+      { id: "c", text: "Random execution order" },
+      { id: "d", text: "Execute during peak business hours only" },
+    ],
+    correctAnswerId: "b",
+    domain: TCODomain.TAKING_ACTION,
+    difficulty: Difficulty.ADVANCED,
+    category: QuestionCategory.PRACTICAL_SCENARIOS,
+    explanation:
+      "Optimal batch deployment requires: dependency sequencing (prerequisite ordering), staged rollouts (phased execution), resource scheduling (system load management), failure isolation (contained impact), and rollback automation (rapid recovery). This approach maximizes success rates while minimizing operational disruption.",
+    tags: ["scheduling", "dependencies", "batch-deployment"],
+    studyGuideRef: "/domains/domain3#scheduling",
+  },
+  {
+    id: "domain3-q6",
+    question:
+      "What validation criteria should be applied before executing high-risk actions in production environments?",
+    choices: [
+      { id: "a", text: "No special validation needed" },
+      {
+        id: "b",
+        text: "Comprehensive testing in non-production, stakeholder approval, backup verification, rollback planning, maintenance window scheduling, and emergency contact preparation",
+      },
+      { id: "c", text: "Basic syntax checking only" },
+      { id: "d", text: "Execute immediately for urgent issues" },
+    ],
+    correctAnswerId: "b",
+    domain: TCODomain.TAKING_ACTION,
+    difficulty: Difficulty.ADVANCED,
+    category: QuestionCategory.PRACTICAL_SCENARIOS,
+    explanation:
+      "High-risk production actions require: comprehensive pre-production testing (validation), stakeholder approval (risk acceptance), backup verification (recovery readiness), detailed rollback planning (failure recovery), maintenance window coordination (impact minimization), and emergency response preparation (incident management).",
+    tags: ["high-risk", "validation", "production"],
+    studyGuideRef: "/domains/domain3#validation",
+  },
+];
+
+/**
+ * Centralized question database organized by domain
+ */
+export const QUESTION_DATABASE: DomainQuestions[] = [
+  {
+    domain: TCODomain.REFINING_QUESTIONS,
+    questions: domain2Questions,
+  },
+  {
+    domain: TCODomain.NAVIGATION_MODULES,
+    questions: domain4Questions,
+  },
+  {
+    domain: TCODomain.ASKING_QUESTIONS,
+    questions: domain1Questions,
+  },
+  {
+    domain: TCODomain.REPORTING_EXPORT,
+    questions: domain5Questions,
+  },
+  {
+    domain: TCODomain.TAKING_ACTION,
+    questions: domain3Questions,
+  },
+];
+
+/**
+ * Get all questions from all domains
+ */
+export function getAllQuestions(): Question[] {
+  return QUESTION_DATABASE.flatMap((domain) => domain.questions);
+}
+
+/**
+ * Get questions by specific domain
+ */
+export function getQuestionsByDomain(domain: TCODomain): Question[] {
+  const domainData = QUESTION_DATABASE.find((d) => d.domain === domain);
+  return domainData ? domainData.questions : [];
+}
+
+/**
+ * Get questions by difficulty level
+ */
+export function getQuestionsByDifficulty(difficulty: Difficulty): Question[] {
+  return getAllQuestions().filter((q) => q.difficulty === difficulty);
+}
+
+/**
+ * Get questions by category
+ */
+export function getQuestionsByCategory(category: QuestionCategory): Question[] {
+  return getAllQuestions().filter((q) => q.category === category);
+}
+
+/**
+ * Get random selection of questions with domain weighting based on exam percentages
+ */
+export function getWeightedRandomQuestions(count: number): Question[] {
+  const { TCO_DOMAIN_WEIGHTS } = require("@/types/exam");
+  const totalWeight = (Object.values(TCO_DOMAIN_WEIGHTS) as number[]).reduce<number>(
+    (sum, weight) => sum + weight,
+    0
+  );
+  const questions: Question[] = [];
+
+  QUESTION_DATABASE.forEach((domain) => {
+    const domainWeight = TCO_DOMAIN_WEIGHTS[domain.domain];
+    const domainQuestionCount = Math.round((domainWeight / totalWeight) * count);
+    const domainQuestions = domain.questions
+      .sort(() => 0.5 - Math.random())
+      .slice(0, domainQuestionCount);
+
+    questions.push(...domainQuestions);
+  });
+
+  // Fill remaining slots if needed
+  if (questions.length < count) {
+    const allQuestions = getAllQuestions();
+    const usedIds = new Set(questions.map((q) => q.id));
+    const remainingQuestions = allQuestions
+      .filter((q) => !usedIds.has(q.id))
+      .sort(() => 0.5 - Math.random())
+      .slice(0, count - questions.length);
+
+    questions.push(...remainingQuestions);
+  }
+
+  return questions.sort(() => 0.5 - Math.random()).slice(0, count);
+}
+
+/**
+ * Get statistics about the question database
+ */
+export function getQuestionStats(): {
+  totalQuestions: number;
+  domainDistribution: Record<TCODomain, number>;
+  difficultyDistribution: Record<Difficulty, number>;
+  categoryDistribution: Record<QuestionCategory, number>;
+} {
+  const allQuestions = getAllQuestions();
+
+  const domainDistribution: Record<TCODomain, number> = Object.fromEntries(
+    Object.values(TCODomain).map((domain) => [domain, 0])
+  ) as Record<TCODomain, number>;
+  const difficultyDistribution: Record<Difficulty, number> = Object.fromEntries(
+    Object.values(Difficulty).map((difficulty) => [difficulty, 0])
+  ) as Record<Difficulty, number>;
+  const categoryDistribution: Record<QuestionCategory, number> = Object.fromEntries(
+    Object.values(QuestionCategory).map((category) => [category, 0])
+  ) as Record<QuestionCategory, number>;
+
+  // Initialize counts
+  Object.values(TCODomain).forEach((domain) => {
+    domainDistribution[domain] = 0;
+  });
+  Object.values(Difficulty).forEach((difficulty) => {
+    difficultyDistribution[difficulty] = 0;
+  });
+  Object.values(QuestionCategory).forEach((category) => {
+    categoryDistribution[category] = 0;
+  });
+
+  // Count questions
+  allQuestions.forEach((question) => {
+    domainDistribution[question.domain]++;
+    difficultyDistribution[question.difficulty]++;
+    categoryDistribution[question.category]++;
+  });
+
+  return {
+    totalQuestions: allQuestions.length,
+    domainDistribution,
+    difficultyDistribution,
+    categoryDistribution,
+  };
+}
+
+/**
+ * Validate question data integrity
+ */
+export function validateQuestionDatabase(): {
+  isValid: boolean;
+  errors: string[];
+  warnings: string[];
+} {
+  const errors: string[] = [];
+  const warnings: string[] = [];
+  const allQuestions = getAllQuestions();
+  const usedIds = new Set<string>();
+
+  allQuestions.forEach((question, index) => {
+    // Check for duplicate IDs
+    if (usedIds.has(question.id)) {
+      errors.push(`Duplicate question ID: ${question.id}`);
+    }
+    usedIds.add(question.id);
+
+    // Validate required fields
+    if (!question.question || question.question.trim() === "") {
+      errors.push(`Question ${question.id}: Missing question text`);
+    }
+
+    if (!question.choices || question.choices.length < 2) {
+      errors.push(`Question ${question.id}: Must have at least 2 choices`);
+    }
+
+    if (!question.correctAnswerId) {
+      errors.push(`Question ${question.id}: Missing correct answer ID`);
+    }
+
+    // Validate correct answer exists in choices
+    if (question.choices && !question.choices.find((c) => c.id === question.correctAnswerId)) {
+      errors.push(`Question ${question.id}: Correct answer ID not found in choices`);
+    }
+
+    // Warnings for missing optional fields
+    if (!question.explanation) {
+      warnings.push(`Question ${question.id}: Missing explanation`);
+    }
+
+    if (!question.tags || question.tags.length === 0) {
+      warnings.push(`Question ${question.id}: No tags specified`);
+    }
+  });
+
+  return {
+    isValid: errors.length === 0,
+    errors,
+    warnings,
+  };
+}
+/* eslint-disable @typescript-eslint/no-require-imports */

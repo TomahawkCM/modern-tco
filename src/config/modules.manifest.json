@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "updatedAt": "2025-09-21T00:00:00.000Z",
+  "modules": [
+    {
+      "id": "asking-questions",
+      "slug": "asking-questions",
+      "title": "Asking Questions",
+      "description": "Master natural language questions and sensor basics",
+      "domain": "Asking Questions",
+      "order": 1
+    },
+    {
+      "id": "refining-questions",
+      "slug": "refining-questions",
+      "title": "Refining Questions & Targeting",
+      "description": "Advanced targeting with groups and filters",
+      "domain": "Refining Questions & Targeting",
+      "order": 2
+    },
+    {
+      "id": "taking-action",
+      "slug": "taking-action",
+      "title": "Taking Action",
+      "description": "Safe package deployment and action execution",
+      "domain": "Taking Action",
+      "order": 3
+    },
+    {
+      "id": "navigation-modules",
+      "slug": "navigation-modules",
+      "title": "Navigation & Basic Modules",
+      "description": "Navigate the console and core modules",
+      "domain": "Navigation and Basic Module Functions",
+      "order": 4
+    },
+    {
+      "id": "reporting-export",
+      "slug": "reporting-export",
+      "title": "Reporting & Data Export",
+      "description": "Report creation and data export",
+      "domain": "Report Generation and Data Export",
+      "order": 5
+    }
+  ]
+}
+

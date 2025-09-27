@@ -1,0 +1,131 @@
+[2025-09-01T02:10:09.914Z] [INFO] Listing all Node.js processes...
+[2025-09-01T02:10:54.936Z] [INFO] Starting DRY RUN of orphaned Node.js processes...
+[2025-09-01T02:10:55.460Z] [INFO] Found 23 total Node.js processes, 0 orphans
+[2025-09-01T02:10:55.463Z] [INFO] No orphan processes found
+[2025-09-01T02:11:15.194Z] [INFO] Listing all Node.js processes...
+[2025-09-01T02:11:15.342Z] [ERROR] Failed to list processes: Command failed: wmic process where "name like '%node%'" get ProcessId,CommandLine,Name /format:csv
+Node - POWERSTATION
+ERROR:
+Description = Invalid query
+
+[2025-09-01T02:11:33.666Z] [INFO] Listing all Node.js processes...
+[2025-09-01T02:14:37.548Z] [INFO] Starting CLEANUP of orphaned Node.js processes...
+[2025-09-01T02:14:38.050Z] [INFO] Found 25 total Node.js processes, 0 orphans
+[2025-09-01T02:14:38.052Z] [INFO] No orphan processes found
+[2025-09-01T02:20:59.456Z] [INFO] Starting CLEANUP of orphaned Node.js processes...
+[2025-09-01T02:20:59.954Z] [INFO] Found 24 total Node.js processes, 0 orphans
+[2025-09-01T02:20:59.956Z] [INFO] No orphan processes found
+[2025-09-01T03:22:59.902Z] [INFO] Starting CLEANUP of orphaned Node.js processes...
+[2025-09-01T03:23:00.486Z] [INFO] Found 25 total Node.js processes, 0 orphans
+[2025-09-01T03:23:00.488Z] [INFO] No orphan processes found
+[2025-09-01T03:23:19.013Z] [WARN] Starting AGGRESSIVE CLEANUP of ALL Node.js processes...
+[2025-09-01T03:23:19.514Z] [INFO] Found 24 total processes, 24 killable
+[2025-09-01T03:23:19.517Z] [INFO] Killing: PID 135884 - "C:\Program Files\nodejs\node.exe" C:\Users\robne\AppData\Roaming\npm/node_modules/@anthropic-ai/claude-code/cli.js
+[2025-09-01T03:23:19.944Z] [INFO] Successfully killed process 135884
+[2025-09-01T03:23:20.149Z] [INFO] Killing: PID 125036 - "C:\Program Files\nodejs\\node.exe"  "C:\Program Files\nodejs\\node_modules\npm\bin\npx-cli.js" -y @modelcontextprotocol/server-sequential-thinking
+[2025-09-01T03:23:20.587Z] [WARN] Failed to kill process 125036: Command failed: taskkill /PID 125036 /F
+ERROR: The process "125036" not found.
+
+[2025-09-01T03:23:20.791Z] [INFO] Killing: PID 128156 - "C:\Program Files\nodejs\\node.exe"  "C:\Program Files\nodejs\\node_modules\npm\bin\npx-cli.js" -y @upstash/context7-mcp
+[2025-09-01T03:23:21.151Z] [WARN] Failed to kill process 128156: Command failed: taskkill /PID 128156 /F
+ERROR: The process "128156" not found.
+
+[2025-09-01T03:23:21.363Z] [INFO] Killing: PID 21892 - "C:\Program Files\nodejs\\node.exe"  "C:\Program Files\nodejs\\node_modules\npm\bin\npx-cli.js" -y @21st-dev/magic
+[2025-09-01T03:23:21.740Z] [WARN] Failed to kill process 21892: Command failed: taskkill /PID 21892 /F
+ERROR: The process "21892" not found.
+
+[2025-09-01T03:23:21.955Z] [INFO] Killing: PID 122876 - "node"   "C:\Users\robne\AppData\Roaming\npm\\node_modules\@modelcontextprotocol\server-sequential-thinking\dist\index.js"
+[2025-09-01T03:23:22.300Z] [WARN] Failed to kill process 122876: Command failed: taskkill /PID 122876 /F
+ERROR: The process "122876" not found.
+
+[2025-09-01T03:23:22.502Z] [INFO] Killing: PID 131356 - "node"   "C:\Users\robne\AppData\Local\npm-cache\_npx\eea2bd7412d4593b\node_modules\.bin\\..\@upstash\context7-mcp\dist\index.js"
+[2025-09-01T03:23:22.863Z] [WARN] Failed to kill process 131356: Command failed: taskkill /PID 131356 /F
+ERROR: The process "131356" not found.
+
+[2025-09-01T03:23:23.069Z] [INFO] Killing: PID 139968 - "node"   "C:\Users\robne\AppData\Local\npm-cache\_npx\41d1713f86af43bb\node_modules\.bin\\..\@21st-dev\magic\dist\index.js"
+[2025-09-01T03:23:23.423Z] [WARN] Failed to kill process 139968: Command failed: taskkill /PID 139968 /F
+ERROR: The process "139968" not found.
+
+[2025-09-01T03:23:23.632Z] [INFO] Killing: PID 119416 - "C:\Program Files\nodejs\\node.exe"  "C:\Program Files\nodejs\\node_modules\npm\bin\npx-cli.js" -y @playwright/mcp@latest
+[2025-09-01T03:23:23.973Z] [WARN] Failed to kill process 119416: Command failed: taskkill /PID 119416 /F
+ERROR: The process "119416" not found.
+
+[2025-09-01T03:23:24.179Z] [INFO] Killing: PID 145792 - "C:\Program Files\nodejs\\node.exe"  "C:\Program Files\nodejs\\node_modules\npm\bin\npx-cli.js" -y shadcn-ui-mcp-server
+[2025-09-01T03:23:24.541Z] [WARN] Failed to kill process 145792: Command failed: taskkill /PID 145792 /F
+ERROR: The process "145792" not found.
+
+[2025-09-01T03:23:24.757Z] [INFO] Killing: PID 140172 - "C:\Program Files\nodejs\\node.exe"  "C:\Program Files\nodejs\\node_modules\npm\bin\npx-cli.js" -y @browsermcp/mcp
+[2025-09-01T03:23:25.099Z] [WARN] Failed to kill process 140172: Command failed: taskkill /PID 140172 /F
+ERROR: The process "140172" not found.
+
+[2025-09-01T03:23:25.305Z] [INFO] Killing: PID 133044 - "node"   "C:\Users\robne\AppData\Local\npm-cache\_npx\9833c18b2d85bc59\node_modules\.bin\\..\@playwright\mcp\cli.js"
+[2025-09-01T03:23:25.683Z] [WARN] Failed to kill process 133044: Command failed: taskkill /PID 133044 /F
+ERROR: The process "133044" not found.
+
+[2025-09-01T03:23:25.892Z] [INFO] Killing: PID 131696 - "node"   "C:\Users\robne\AppData\Local\npm-cache\_npx\5cdd0e695595afa2\node_modules\.bin\\..\shadcn-ui-mcp-server\build\index.js"
+[2025-09-01T03:23:26.384Z] [WARN] Failed to kill process 131696: Command failed: taskkill /PID 131696 /F
+ERROR: The process "131696" not found.
+
+[2025-09-01T03:23:26.590Z] [INFO] Killing: PID 139404 - "node"   "C:\Users\robne\AppData\Local\npm-cache\_npx\eab4ee736ad7e120\node_modules\.bin\\..\@browsermcp\mcp\dist\index.js"
+[2025-09-01T03:23:27.006Z] [WARN] Failed to kill process 139404: Command failed: taskkill /PID 139404 /F
+ERROR: The process "139404" not found.
+
+[2025-09-01T03:23:27.218Z] [INFO] Killing: PID 148288 - "C:\Program Files\nodejs\\node.exe"  "C:\Program Files\nodejs\\node_modules\npm\bin\npx-cli.js" -y @supabase/mcp-server-supabase --project-ref=huvgbelulauauxvlqjvz --read-only
+[2025-09-01T03:23:27.617Z] [WARN] Failed to kill process 148288: Command failed: taskkill /PID 148288 /F
+ERROR: The process "148288" not found.
+
+[2025-09-01T03:23:27.834Z] [INFO] Killing: PID 128120 - "C:\Program Files\nodejs\\node.exe"  "C:\Program Files\nodejs\\node_modules\npm\bin\npx-cli.js" ruv-swarm mcp start
+[2025-09-01T03:23:28.198Z] [WARN] Failed to kill process 128120: Command failed: taskkill /PID 128120 /F
+ERROR: The process "128120" not found.
+
+[2025-09-01T03:23:28.413Z] [INFO] Killing: PID 144724 - "node"   "C:\Users\robne\Documents\mapmydeals-gpt5\node_modules\.bin\\..\ruv-swarm\bin\ruv-swarm-secure.js" mcp start
+[2025-09-01T03:23:28.801Z] [WARN] Failed to kill process 144724: Command failed: taskkill /PID 144724 /F
+ERROR: The process "144724" not found.
+
+[2025-09-01T03:23:29.007Z] [INFO] Killing: PID 136412 - "node"   "C:\Users\robne\AppData\Roaming\npm\\node_modules\@supabase\mcp-server-supabase\dist\transports\stdio.js" --project-ref=huvgbelulauauxvlqjvz --read-only
+[2025-09-01T03:23:29.369Z] [WARN] Failed to kill process 136412: Command failed: taskkill /PID 136412 /F
+ERROR: The process "136412" not found.
+
+[2025-09-01T03:23:29.576Z] [INFO] Killing: PID 148488 - node "C:\Users\robne\Documents\mapmydeals-gpt5\Tanium TCO\scripts\gemini-mcp-server.js"
+[2025-09-01T03:23:29.927Z] [WARN] Failed to kill process 148488: Command failed: taskkill /PID 148488 /F
+ERROR: The process "148488" not found.
+
+[2025-09-01T03:23:30.136Z] [INFO] Killing: PID 126004 - "node"   "C:\Users\robne\AppData\Roaming\npm\\node_modules\@anthropic-ai\claude-code\cli.js" mcp serve
+[2025-09-01T03:23:30.463Z] [INFO] Successfully killed process 126004
+[2025-09-01T03:23:30.667Z] [INFO] Killing: PID 145456 - "node"   "C:\Users\robne\.serena\language_servers\static\TypeScriptLanguageServer\ts-lsp\node_modules\.bin\\..\typescript-language-server\lib\cli.mjs" --stdio
+[2025-09-01T03:31:59.637Z] [INFO] Starting CLEANUP of orphaned Node.js processes...
+[2025-09-01T03:32:00.203Z] [INFO] Found 25 total Node.js processes, 0 orphans
+[2025-09-01T03:32:00.205Z] [INFO] No orphan processes found
+[2025-09-01T04:55:18.214Z] [INFO] Starting CLEANUP of orphaned Node.js processes...
+[2025-09-01T04:55:18.863Z] [INFO] Found 29 total Node.js processes, 0 orphans
+[2025-09-01T04:55:18.866Z] [INFO] No orphan processes found
+[2025-09-01T05:04:27.288Z] [INFO] Starting CLEANUP of orphaned Node.js processes...
+[2025-09-01T05:04:27.799Z] [INFO] Found 33 total Node.js processes, 0 orphans
+[2025-09-01T05:04:27.801Z] [INFO] No orphan processes found
+[2025-09-01T05:05:06.628Z] [INFO] Starting CLEANUP of orphaned Node.js processes...
+[2025-09-01T05:05:07.158Z] [INFO] Found 33 total Node.js processes, 0 orphans
+[2025-09-01T05:05:07.161Z] [INFO] No orphan processes found
+[2025-09-01T06:24:10.985Z] [INFO] Starting CLEANUP of orphaned Node.js processes...
+[2025-09-01T06:24:11.528Z] [INFO] Found 37 total Node.js processes, 0 orphans
+[2025-09-01T06:24:11.530Z] [INFO] No orphan processes found
+[2025-09-01T14:43:55.438Z] [INFO] Starting CLEANUP of orphaned Node.js processes...
+[2025-09-01T14:43:56.094Z] [INFO] Found 41 total Node.js processes, 0 orphans
+[2025-09-01T14:43:56.097Z] [INFO] No orphan processes found
+[2025-09-01T14:47:30.431Z] [INFO] Starting CLEANUP of orphaned Node.js processes...
+[2025-09-01T14:47:31.062Z] [INFO] Found 41 total Node.js processes, 0 orphans
+[2025-09-01T14:47:31.065Z] [INFO] No orphan processes found
+[2025-09-01T14:59:48.910Z] [INFO] Starting CLEANUP of orphaned Node.js processes...
+[2025-09-01T14:59:49.517Z] [INFO] Found 45 total Node.js processes, 0 orphans
+[2025-09-01T14:59:49.520Z] [INFO] No orphan processes found
+[2025-09-01T15:42:13.098Z] [INFO] Starting CLEANUP of orphaned Node.js processes...
+[2025-09-01T15:42:13.761Z] [INFO] Found 70 total Node.js processes, 0 orphans
+[2025-09-01T15:42:13.764Z] [INFO] No orphan processes found
+[2025-09-01T15:55:31.176Z] [INFO] Starting CLEANUP of orphaned Node.js processes...
+[2025-09-01T15:55:31.877Z] [INFO] Found 49 total Node.js processes, 0 orphans
+[2025-09-01T15:55:31.881Z] [INFO] No orphan processes found
+[2025-09-01T15:56:00.310Z] [INFO] Starting CLEANUP of orphaned Node.js processes...
+[2025-09-01T15:56:00.952Z] [INFO] Found 49 total Node.js processes, 0 orphans
+[2025-09-01T15:56:00.955Z] [INFO] No orphan processes found
+[2025-09-01T16:08:03.559Z] [INFO] Starting CLEANUP of orphaned Node.js processes...
+[2025-09-01T16:08:04.453Z] [INFO] Found 49 total Node.js processes, 0 orphans
+[2025-09-01T16:08:04.458Z] [INFO] No orphan processes found

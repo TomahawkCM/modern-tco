@@ -1,0 +1,15 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "C:\\Users\\robne\\Documents\\mapmydeals-gpt5\\Tanium TCO\\modern-tco\\logs\\.63374605e17527e96c464f6d9325017491651ba9-audit.json",
+    "files": [
+        {
+            "date": 1758382058078,
+            "name": "C:\\Users\\robne\\Documents\\mapmydeals-gpt5\\Tanium TCO\\modern-tco\\logs\\mcp-puppeteer-2025-09-20.log",
+            "hash": "5cf36615d2690915a36e7877259d2a25ae9002ab1ad5550bf9e60efceb25f4c9"
+        }
+    ],
+    "hashType": "sha256"
+}

@@ -1,0 +1,30 @@
+{
+  "timestamp": "2025-09-05T02:02:17.480Z",
+  "issue": "PostgreSQL syntax error at or near \"NOT\"",
+  "cause": "IF NOT EXISTS not supported with ADD CONSTRAINT",
+  "solution": "Use DROP CONSTRAINT IF EXISTS followed by ADD CONSTRAINT",
+  "before": {
+    "syntax": "ALTER TABLE ... ADD CONSTRAINT IF NOT EXISTS ...",
+    "status": "❌ Causes syntax error",
+    "error": "syntax error at or near \"NOT\""
+  },
+  "after": {
+    "syntax": "DROP CONSTRAINT IF EXISTS ...; ADD CONSTRAINT ...",
+    "status": "✅ PostgreSQL compatible",
+    "approach": "Idempotent drop-then-add pattern"
+  },
+  "deployment": {
+    "file": "005_fixed_study_content_tables.sql",
+    "status": "Ready for deployment",
+    "tested": true,
+    "compatible": "PostgreSQL 12+ and Supabase"
+  },
+  "features": {
+    "extensions": "pgcrypto, pg_trgm",
+    "uuid": "gen_random_uuid()",
+    "timeFields": "Integer minutes",
+    "foreignKeys": "auth.users(id)",
+    "rls": "Clean authenticated policies",
+    "triggers": "All tables including bookmarks"
+  }
+}

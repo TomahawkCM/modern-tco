@@ -1,0 +1,83 @@
+[
+  {
+    "id": "aq-001",
+    "question": "What is the primary purpose of asking a Tanium Question?",
+    "choices": [
+      { "id": "a", "text": "To schedule software deployments" },
+      { "id": "b", "text": "To retrieve real-time endpoint data" },
+      { "id": "c", "text": "To manage user accounts" },
+      { "id": "d", "text": "To back up Tanium Server" }
+    ],
+    "correctAnswerId": "b",
+    "domain": "Asking Questions",
+    "difficulty": "Beginner",
+    "category": "Platform Fundamentals",
+    "explanation": "Tanium Questions query endpoints for current state in real time.",
+    "tags": ["basics", "questions", "real-time"]
+  },
+  {
+    "id": "aq-002",
+    "question": "Which component interprets natural-language questions into sensor queries?",
+    "choices": [
+      { "id": "a", "text": "Package Service" },
+      { "id": "b", "text": "Question Parser" },
+      { "id": "c", "text": "Action Broker" },
+      { "id": "d", "text": "Reporting Engine" }
+    ],
+    "correctAnswerId": "b",
+    "domain": "Asking Questions",
+    "difficulty": "Intermediate",
+    "category": "Console Procedures",
+    "explanation": "The parsing layer maps plain language to sensors and parameters.",
+    "tags": ["parser", "sensors"]
+  },
+  {
+    "id": "aq-003",
+    "question": "What is the best practice when wording a new question?",
+    "choices": [
+      { "id": "a", "text": "Use multiple unrelated clauses" },
+      { "id": "b", "text": "Start simple and add constraints incrementally" },
+      { "id": "c", "text": "Always include all filters at once" },
+      { "id": "d", "text": "Avoid using sensors" }
+    ],
+    "correctAnswerId": "b",
+    "domain": "Asking Questions",
+    "difficulty": "Beginner",
+    "category": "Platform Fundamentals",
+    "explanation": "Start with a basic query to validate results, then refine.",
+    "tags": ["best-practice", "iteration"]
+  },
+  {
+    "id": "aq-004",
+    "question": "Which result characteristic indicates a sensor returns current endpoint state?",
+    "choices": [
+      { "id": "a", "text": "Results increase only once per day" },
+      { "id": "b", "text": "Data reflects near real-time values" },
+      { "id": "c", "text": "Results exist only in offline cache" },
+      { "id": "d", "text": "Values are user-entered" }
+    ],
+    "correctAnswerId": "b",
+    "domain": "Asking Questions",
+    "difficulty": "Intermediate",
+    "category": "Platform Fundamentals",
+    "explanation": "Sensors execute on endpoints and respond with current values.",
+    "tags": ["sensors", "real-time"]
+  },
+  {
+    "id": "aq-005",
+    "question": "When validating a new question, which UI feature helps confirm expected targets?",
+    "choices": [
+      { "id": "a", "text": "Action approval queue" },
+      { "id": "b", "text": "Preview results grid" },
+      { "id": "c", "text": "Package gallery" },
+      { "id": "d", "text": "Module catalog" }
+    ],
+    "correctAnswerId": "b",
+    "domain": "Asking Questions",
+    "difficulty": "Beginner",
+    "category": "Console Procedures",
+    "explanation": "Use the results grid to validate that your question returns correct data.",
+    "tags": ["validation", "ui"]
+  }
+]
+

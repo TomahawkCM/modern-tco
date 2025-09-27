@@ -1,0 +1,205 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e1]:
+  - generic [ref=e2]:
+    - generic [ref=e3]:
+      - navigation [ref=e4]:
+        - generic:
+          - img
+        - generic [ref=e8]:
+          - generic [ref=e9]:
+            - img [ref=e12]
+            - generic [ref=e15]:
+              - generic [ref=e16]: TANIUM TCO
+              - generic [ref=e17]: TANIUM TCO
+          - generic [ref=e18]:
+            - button "Dashboard" [ref=e19] [cursor=pointer]:
+              - img [ref=e20] [cursor=pointer]
+              - generic [ref=e23] [cursor=pointer]: Dashboard
+            - button "Study" [ref=e24] [cursor=pointer]:
+              - img [ref=e25] [cursor=pointer]
+              - generic [ref=e27] [cursor=pointer]: Study
+            - button "Videos" [ref=e28] [cursor=pointer]:
+              - img [ref=e29] [cursor=pointer]
+              - generic [ref=e32] [cursor=pointer]: Videos
+            - button "Labs" [ref=e33] [cursor=pointer]:
+              - img [ref=e34] [cursor=pointer]
+              - generic [ref=e36] [cursor=pointer]: Labs
+            - button "Practice" [ref=e37] [cursor=pointer]:
+              - img [ref=e38] [cursor=pointer]
+              - generic [ref=e42] [cursor=pointer]: Practice
+            - button "Review" [ref=e43] [cursor=pointer]:
+              - img [ref=e44] [cursor=pointer]
+              - generic [ref=e46] [cursor=pointer]: Review
+            - button "Simulator" [ref=e47] [cursor=pointer]:
+              - img [ref=e48] [cursor=pointer]
+              - generic [ref=e50] [cursor=pointer]: Simulator
+            - button "Analytics" [ref=e51] [cursor=pointer]:
+              - img [ref=e52] [cursor=pointer]
+              - generic [ref=e54] [cursor=pointer]: Analytics
+            - button "KB" [ref=e55] [cursor=pointer]:
+              - img [ref=e56] [cursor=pointer]
+              - generic [ref=e58] [cursor=pointer]: KB
+            - button "Notes" [ref=e59] [cursor=pointer]:
+              - img [ref=e60] [cursor=pointer]
+              - generic [ref=e62] [cursor=pointer]: Notes
+            - button "Settings" [ref=e64] [cursor=pointer]:
+              - img [ref=e65] [cursor=pointer]
+              - generic [ref=e68] [cursor=pointer]: Settings
+          - button [ref=e70] [cursor=pointer]:
+            - img [ref=e73] [cursor=pointer]
+      - navigation "Main navigation" [ref=e76]:
+        - generic [ref=e78]:
+          - generic [ref=e80]:
+            - generic [ref=e81]:
+              - img [ref=e83]
+              - generic [ref=e86]:
+                - paragraph [ref=e87]: Study Progress
+                - generic [ref=e88]:
+                  - img [ref=e89]
+                  - generic [ref=e95]: Level 3 Learner
+            - generic [ref=e97]:
+              - generic [ref=e98]: Overall Progress
+              - generic [ref=e99]:
+                - generic [ref=e100]: 62%
+                - generic [ref=e101]: 62%
+          - navigation [ref=e104]:
+            - generic [ref=e105]:
+              - button "Dashboard" [ref=e107] [cursor=pointer]:
+                - img [ref=e108] [cursor=pointer]
+                - generic [ref=e111] [cursor=pointer]: Dashboard
+              - generic [ref=e112]:
+                - button "Study" [expanded] [ref=e113] [cursor=pointer]:
+                  - img [ref=e114] [cursor=pointer]
+                  - generic [ref=e116] [cursor=pointer]: Study
+                  - img [ref=e117] [cursor=pointer]
+                - generic [ref=e119]:
+                  - button "Learning Modules" [ref=e121] [cursor=pointer]:
+                    - img [ref=e122] [cursor=pointer]
+                    - generic [ref=e124] [cursor=pointer]: Learning Modules
+                  - button "Practice Mode" [ref=e126] [cursor=pointer]:
+                    - img [ref=e127] [cursor=pointer]
+                    - generic [ref=e131] [cursor=pointer]: Practice Mode
+                  - button "Mock Exam" [ref=e133] [cursor=pointer]:
+                    - img [ref=e134] [cursor=pointer]
+                    - generic [ref=e137] [cursor=pointer]: Mock Exam
+                  - button "Review" [ref=e139] [cursor=pointer]:
+                    - img [ref=e140] [cursor=pointer]
+                    - generic [ref=e142] [cursor=pointer]: Review
+              - generic [ref=e143]:
+                - button "TCO Domains" [expanded] [ref=e144] [cursor=pointer]:
+                  - img [ref=e145] [cursor=pointer]
+                  - generic [ref=e149] [cursor=pointer]: TCO Domains
+                  - img [ref=e150] [cursor=pointer]
+                - generic [ref=e152]:
+                  - button "Asking Questions" [ref=e154] [cursor=pointer]:
+                    - img [ref=e155] [cursor=pointer]
+                    - generic [ref=e157] [cursor=pointer]: Asking Questions
+                  - button "Refining Questions" [ref=e159] [cursor=pointer]:
+                    - img [ref=e160] [cursor=pointer]
+                    - generic [ref=e164] [cursor=pointer]: Refining Questions
+                  - button "Taking Action" [ref=e166] [cursor=pointer]:
+                    - img [ref=e167] [cursor=pointer]
+                    - generic [ref=e169] [cursor=pointer]: Taking Action
+                  - button "Navigation and Basic Module Functions" [ref=e171] [cursor=pointer]:
+                    - img [ref=e172] [cursor=pointer]
+                    - generic [ref=e176] [cursor=pointer]: Navigation and Basic Module Functions
+                  - button "Report Generation and Data Export" [ref=e178] [cursor=pointer]:
+                    - img [ref=e179] [cursor=pointer]
+                    - generic [ref=e181] [cursor=pointer]: Report Generation and Data Export
+              - button "Interactive Labs NEW" [ref=e183] [cursor=pointer]:
+                - img [ref=e184] [cursor=pointer]
+                - generic [ref=e186] [cursor=pointer]: Interactive Labs
+                - generic [ref=e187] [cursor=pointer]: NEW
+              - button "Analytics" [ref=e189] [cursor=pointer]:
+                - img [ref=e190] [cursor=pointer]
+                - generic [ref=e192] [cursor=pointer]: Analytics
+              - button "Settings" [ref=e194] [cursor=pointer]:
+                - img [ref=e195] [cursor=pointer]
+                - generic [ref=e198] [cursor=pointer]: Settings
+            - separator [ref=e199]
+            - generic [ref=e200]:
+              - heading "Domain Progress" [level=3] [ref=e201]
+              - generic [ref=e203]:
+                - generic [ref=e204]: Asking Questions
+                - generic [ref=e205]: 85%
+              - generic [ref=e209]:
+                - generic [ref=e210]: Refining Questions
+                - generic [ref=e211]: 72%
+              - generic [ref=e215]:
+                - generic [ref=e216]: Taking Action
+                - generic [ref=e217]: 68%
+              - generic [ref=e221]:
+                - generic [ref=e222]: Navigation and Basic Module Functions
+                - generic [ref=e223]: 45%
+              - generic [ref=e227]:
+                - generic [ref=e228]: Report Generation and Data Export
+                - generic [ref=e229]: 38%
+            - generic [ref=e233]:
+              - generic [ref=e234]:
+                - img [ref=e235]
+                - generic [ref=e238]: Study Streak
+              - generic [ref=e239]: 7 days
+      - main "Main content" [ref=e240]:
+        - generic [ref=e241]:
+          - navigation "breadcrumb" [ref=e242]:
+            - list [ref=e243]:
+              - listitem [ref=e245]:
+                - link "Dashboard" [ref=e246] [cursor=pointer]:
+                  - /url: /dashboard
+                  - img [ref=e247] [cursor=pointer]
+                  - text: Dashboard
+              - generic [ref=e250]:
+                - listitem [ref=e251]:
+                  - img [ref=e252]
+                - listitem [ref=e254]:
+                  - link "Notes" [disabled] [ref=e255]
+          - generic [ref=e256]:
+            - generic [ref=e258]:
+              - button "Skip to main content" [ref=e259] [cursor=pointer]
+              - button "Skip to navigation" [ref=e260] [cursor=pointer]
+            - generic [ref=e261]:
+              - heading "Notes & Spaced Repetition (MVP)" [level=1] [ref=e262]
+              - generic [ref=e263]:
+                - generic [ref=e264]:
+                  - generic [ref=e266]: Add Note
+                  - generic [ref=e267]:
+                    - textbox "Write your note, summary, or key fact..." [ref=e268]
+                    - generic [ref=e269]:
+                      - generic [ref=e270]: Section (optional)
+                      - combobox [ref=e271] [cursor=pointer]:
+                        - generic: Unassigned
+                        - img [ref=e272] [cursor=pointer]
+                    - textbox "Tags (comma-separated), e.g. fundamentals, sensors" [ref=e274]
+                    - button "Add" [active] [ref=e276] [cursor=pointer]
+                - generic [ref=e277]:
+                  - generic [ref=e279]: Review Queue (1 due)
+                  - generic [ref=e281]:
+                    - generic [ref=e282]: Next due due now
+                    - generic [ref=e283]: E2E test note
+                    - generic [ref=e284]:
+                      - button "Again" [ref=e285] [cursor=pointer]
+                      - button "Hard" [ref=e286] [cursor=pointer]
+                      - button "Good" [ref=e287] [cursor=pointer]
+                      - button "Easy" [ref=e288] [cursor=pointer]
+              - generic [ref=e289]:
+                - generic [ref=e291]: Your Notes (1) — Grouped by Section
+                - generic [ref=e294]:
+                  - generic [ref=e295]: Unassigned
+                  - list [ref=e296]:
+                    - listitem [ref=e297]:
+                      - generic [ref=e298]:
+                        - generic [ref=e299]: E2E test note
+                        - generic [ref=e300]:
+                          - text: "Next review:"
+                          - generic [ref=e301]: due now
+                      - generic [ref=e302]:
+                        - button "Edit" [ref=e303] [cursor=pointer]
+                        - button "Delete" [ref=e304] [cursor=pointer]
+    - region "Notifications (F8)":
+      - list
+  - button "Open Next.js Dev Tools" [ref=e310] [cursor=pointer]:
+    - img [ref=e311] [cursor=pointer]
+  - alert [ref=e314]
+```

@@ -1,0 +1,4 @@
+#!/bin/bash
+# Quick Playwright test command
+source ~/.playwright-wsl2-env 2>/dev/null
+npx playwright test "$@" --browser=chromium --headed=false

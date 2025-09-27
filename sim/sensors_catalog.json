@@ -1,0 +1,93 @@
+{
+  "sensors": [
+    {
+      "name": "Computer Name",
+      "category": "Core",
+      "description": "Returns the endpoint hostname."
+    },
+    {
+      "name": "Operating System",
+      "category": "Core",
+      "description": "Human-readable OS platform string."
+    },
+    {
+      "name": "OS Platform",
+      "category": "Core",
+      "description": "Normalized OS platform (Windows, macOS, Linux)."
+    },
+    {
+      "name": "OS Version",
+      "category": "Core",
+      "description": "Version information for the current OS."
+    },
+    {
+      "name": "CPU Percent",
+      "category": "Performance",
+      "description": "Current CPU utilization percentage."
+    },
+    {
+      "name": "Memory GB",
+      "category": "Performance",
+      "description": "Physical memory in gigabytes."
+    },
+    {
+      "name": "Disk Free GB",
+      "category": "Performance",
+      "description": "Available disk capacity in gigabytes."
+    },
+    {
+      "name": "Compliance Score",
+      "category": "Governance",
+      "description": "Composite score for patching and configuration compliance."
+    },
+    {
+      "name": "Service Status",
+      "category": "Core",
+      "description": "Status of a given service on the endpoint."
+    },
+    {
+      "name": "Last Reboot",
+      "category": "Core",
+      "description": "Timestamp of the last reboot."
+    },
+    {
+      "name": "Group",
+      "category": "Metadata",
+      "description": "Logical group membership for the endpoint."
+    },
+    {
+      "name": "Location",
+      "category": "Metadata",
+      "description": "Geographic or network zone indicator."
+    }
+  ],
+  "aggregates": [
+    "count()",
+    "min()",
+    "max()",
+    "avg()",
+    "sum()"
+  ],
+  "domains": [
+    {
+      "code": "AQ",
+      "label": "Asking Questions"
+    },
+    {
+      "code": "RQ",
+      "label": "Refining Questions"
+    },
+    {
+      "code": "TA",
+      "label": "Taking Action"
+    },
+    {
+      "code": "NB",
+      "label": "Navigation & Modules"
+    },
+    {
+      "code": "RD",
+      "label": "Reporting & Data Export"
+    }
+  ]
+}

@@ -1,0 +1,83 @@
+[
+  {
+    "id": "ta-001",
+    "question": "What is the safest way to deploy a package to production endpoints?",
+    "choices": [
+      { "id": "a", "text": "Deploy to all endpoints immediately" },
+      { "id": "b", "text": "Test on a pilot group, then staged rollout" },
+      { "id": "c", "text": "Disable approvals" },
+      { "id": "d", "text": "Run at peak business hours" }
+    ],
+    "correctAnswerId": "b",
+    "domain": "Taking Action",
+    "difficulty": "Intermediate",
+    "category": "Practical Scenarios",
+    "explanation": "Pilot testing reduces risk; phased rollouts limit blast radius.",
+    "tags": ["safety", "rollout"]
+  },
+  {
+    "id": "ta-002",
+    "question": "Which setting helps prevent unintended package execution on critical systems?",
+    "choices": [
+      { "id": "a", "text": "Disable confirmation prompts" },
+      { "id": "b", "text": "Require approval for actions" },
+      { "id": "c", "text": "Enable random execution" },
+      { "id": "d", "text": "Increase timeout only" }
+    ],
+    "correctAnswerId": "b",
+    "domain": "Taking Action",
+    "difficulty": "Beginner",
+    "category": "Console Procedures",
+    "explanation": "Approval workflows add control gates for sensitive actions.",
+    "tags": ["approvals", "governance"]
+  },
+  {
+    "id": "ta-003",
+    "question": "What should you verify before scheduling a broad package deployment?",
+    "choices": [
+      { "id": "a", "text": "Endpoint timezone alignment and maintenance windows" },
+      { "id": "b", "text": "User email preferences" },
+      { "id": "c", "text": "Server backup schedule only" },
+      { "id": "d", "text": "Console theme" }
+    ],
+    "correctAnswerId": "a",
+    "domain": "Taking Action",
+    "difficulty": "Intermediate",
+    "category": "Platform Fundamentals",
+    "explanation": "Respect windows to avoid disrupting business operations.",
+    "tags": ["scheduling", "windows"]
+  },
+  {
+    "id": "ta-004",
+    "question": "Which report confirms action success across targets?",
+    "choices": [
+      { "id": "a", "text": "Module catalog" },
+      { "id": "b", "text": "Action results and status dashboard" },
+      { "id": "c", "text": "Question parser log" },
+      { "id": "d", "text": "Profile settings" }
+    ],
+    "correctAnswerId": "b",
+    "domain": "Taking Action",
+    "difficulty": "Beginner",
+    "category": "Console Procedures",
+    "explanation": "Use action status views to verify reach and outcomes.",
+    "tags": ["verification", "status"]
+  },
+  {
+    "id": "ta-005",
+    "question": "What is an appropriate rollback planning step?",
+    "choices": [
+      { "id": "a", "text": "None if the pilot succeeded" },
+      { "id": "b", "text": "Prepare inverse package or remediation path" },
+      { "id": "c", "text": "Disable monitoring" },
+      { "id": "d", "text": "Ignore user impact" }
+    ],
+    "correctAnswerId": "b",
+    "domain": "Taking Action",
+    "difficulty": "Advanced",
+    "category": "Practical Scenarios",
+    "explanation": "Always plan a remediation path to quickly revert changes.",
+    "tags": ["rollback", "planning"]
+  }
+]
+

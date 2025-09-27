@@ -1,0 +1,83 @@
+[
+  {
+    "id": "rd-001",
+    "question": "Which output formats are commonly supported for exporting question results?",
+    "choices": [
+      { "id": "a", "text": "CSV and JSON" },
+      { "id": "b", "text": "MP3 and WAV" },
+      { "id": "c", "text": "PNG and JPG" },
+      { "id": "d", "text": "DOCX only" }
+    ],
+    "correctAnswerId": "a",
+    "domain": "Report Generation and Data Export",
+    "difficulty": "Beginner",
+    "category": "Console Procedures",
+    "explanation": "Structured exports like CSV/JSON enable downstream analysis.",
+    "tags": ["export", "formats"]
+  },
+  {
+    "id": "rd-002",
+    "question": "What practice helps maintain data integrity when building reports?",
+    "choices": [
+      { "id": "a", "text": "Mix unrelated sensors arbitrarily" },
+      { "id": "b", "text": "Document filters and include timestamps" },
+      { "id": "c", "text": "Avoid including metadata" },
+      { "id": "d", "text": "Export screenshots only" }
+    ],
+    "correctAnswerId": "b",
+    "domain": "Report Generation and Data Export",
+    "difficulty": "Intermediate",
+    "category": "Platform Fundamentals",
+    "explanation": "Clear filters and timing context make reports reproducible.",
+    "tags": ["integrity", "metadata"]
+  },
+  {
+    "id": "rd-003",
+    "question": "Which approach scales best for recurring executive summaries?",
+    "choices": [
+      { "id": "a", "text": "Manual copy/paste each week" },
+      { "id": "b", "text": "Automate exports and template the summary" },
+      { "id": "c", "text": "Email raw sensor data only" },
+      { "id": "d", "text": "Disable filtering" }
+    ],
+    "correctAnswerId": "b",
+    "domain": "Report Generation and Data Export",
+    "difficulty": "Intermediate",
+    "category": "Practical Scenarios",
+    "explanation": "Automation and templating reduce effort and errors over time.",
+    "tags": ["automation", "reporting"]
+  },
+  {
+    "id": "rd-004",
+    "question": "Before sharing exported data externally, what should you verify?",
+    "choices": [
+      { "id": "a", "text": "RBAC scope and data sensitivity" },
+      { "id": "b", "text": "Console theme" },
+      { "id": "c", "text": "User avatar" },
+      { "id": "d", "text": "Module icon color" }
+    ],
+    "correctAnswerId": "a",
+    "domain": "Report Generation and Data Export",
+    "difficulty": "Beginner",
+    "category": "Platform Fundamentals",
+    "explanation": "Ensure only appropriate data leaves the environment.",
+    "tags": ["security", "rbac"]
+  },
+  {
+    "id": "rd-005",
+    "question": "Which feature helps align reports with initiative goals?",
+    "choices": [
+      { "id": "a", "text": "Saved Questions and dashboards tracking key metrics" },
+      { "id": "b", "text": "Random sampling" },
+      { "id": "c", "text": "Hiding timestamps" },
+      { "id": "d", "text": "Ignoring stakeholders" }
+    ],
+    "correctAnswerId": "a",
+    "domain": "Report Generation and Data Export",
+    "difficulty": "Beginner",
+    "category": "Console Procedures",
+    "explanation": "Persistent queries and dashboards ensure consistent focus.",
+    "tags": ["dashboards", "metrics"]
+  }
+]
+

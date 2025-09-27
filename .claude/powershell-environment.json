@@ -1,0 +1,44 @@
+{
+  "shellConfiguration": {
+    "forceShell": "powershell",
+    "shellExecutable": "pwsh.exe",
+    "fallbackShell": "powershell.exe",
+    "disallowedShells": ["bash", "sh", "zsh", "git-bash", "mingw64"],
+    "environmentOverride": {
+      "CLAUDE_SHELL": "powershell",
+      "FORCE_POWERSHELL": "true",
+      "DISABLE_BASH": "true"
+    }
+  },
+  "projectSpecific": {
+    "taniumTCO": {
+      "npmScripts": {
+        "preferPowerShellVariants": true,
+        "usePwshSuffixCommands": true,
+        "exampleCommands": [
+          "npm run lint:pwsh",
+          "npm run format:pwsh",
+          "npm run quality:pwsh"
+        ]
+      },
+      "developmentCommands": [
+        "Set-Location modern-tco",
+        "npm run dev",
+        "npm run test",
+        "npm run build"
+      ]
+    }
+  },
+  "mcpIntegration": {
+    "preserveConfiguration": true,
+    "agentCompatibility": "maintained",
+    "supabaseIntegration": "active",
+    "routingRules": "intact"
+  },
+  "validationRules": {
+    "requirePowerShellForDevCommands": true,
+    "validateWindowsPathSeparators": true,
+    "enforceEnvironmentVariableSyntax": true,
+    "preventUnixShellFallback": true
+  }
+}

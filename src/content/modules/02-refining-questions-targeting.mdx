@@ -1,0 +1,141 @@
+---
+id: module-refining-questions-targeting
+title: Refining Questions & Targeting
+domainSlug: refining-questions-targeting
+domainEnum: REFINING_QUESTIONS
+difficulty: Intermediate
+estimatedTime: "90 min"
+prerequisites:
+  - module-asking-questions
+objectives:
+  - obj-refining-groups
+  - obj-refining-filters
+  - obj-refining-rbac
+tags: [TCO, Domain2, Targeting, RBAC, Groups, DynamicGroups, StaticGroups, Filters]
+blueprintWeight: 0.23
+version: 1
+status: published
+lastUpdated: "2025-09-05"
+---
+
+# Learn
+
+## Key Concepts
+
+- RBAC principles and content sets
+- Group types: dynamic vs static; performance implications
+- Advanced filters: AND/OR/NOT; nested conditions
+
+<InfoBox title="Exam Relevance">
+  This domain carries the highest weight on the blueprint (≈23%). Mastery of
+  targeting logic and safety practices is essential to pass the real exam.
+</InfoBox>
+
+## Advanced Filtering Deep‑Dive
+
+- Boolean logic ordering and short‑circuit behavior (AND before OR; use parentheses generously)
+- Common patterns:
+  - OS "Windows" AND (Patch Status = "Missing" OR Last Scan > 14 days)
+  - Regex filters for version ranges (e.g., `^10\.(2[2-9]|[3-9][0-9])`)
+  - NOT filters to exclude test/staging cohorts
+- Performance tactics:
+  - Prefer indexed sensor data when available; avoid overly broad string contains on huge datasets
+  - Constrain with pre‑filters first (e.g., platform or ownership) then add specifics
+  - Validate result set with sampled cohorts before scaling
+
+### Dynamic vs Static Groups (When and Why)
+
+- Dynamic: rules‑based, auto‑updated membership; ideal for posture and fleet segmentation
+- Static: manually curated; ideal for change windows, high‑risk actions, or incident cohorts
+- Hybrid: seed a static cohort, then gate with a dynamic condition for increased safety
+
+### RBAC & Content Sets
+
+- Separate duties: who can create groups vs who can target actions
+- Content sets per domain of control (e.g., Patch, Asset, Deploy) with limited scope
+- Checklist for least‑privilege:
+  1. Content set alignment verified for group owners
+  2. Reviewer role assigned for change approval
+  3. Audit trail enabled for group edits and action usage
+
+## Safety Guardrails (Real‑World)
+
+1. Start narrow → expand gradually; never blast unbounded groups
+2. Use labels or tags on groups to indicate risk level and owner
+3. Add a "dry‑run" question to verify the membership before deploying actions
+4. Establish rollback cohorts (static) for all high‑risk activities
+5. Document assumptions and data sources per group rule
+
+## Console Steps
+
+1. Navigate to Computer Groups → Create Dynamic Group
+2. Define conditions (e.g., OS contains "Windows" AND Patch Status = "Missing")
+3. Save to appropriate content set and assign roles
+4. In Interact, select the group under Targeting
+5. Validate scope on a small cohort before full rollout
+
+> Tip: Document group criteria and owners; review performance on large estates.
+
+## Troubleshooting Playbook
+
+- Over‑scoped group? Add exclusion rules with explicit NOT filters and confirm with sample devices
+- Under‑scoped? Verify sensor freshness and rule logic; check operator precedence
+- Slow queries? Reduce wildcards and `contains` scans; limit to platform or subnet first
+- Inconsistent membership? Confirm sensor availability across OS variants; verify permissions
+
+## Videos
+
+Use these short clips to solidify concepts (also visible on the domain page):
+
+- Targeting with Filters (15m)
+- Groups at Scale: Dynamic vs Static (8m)
+- Safety Guardrails: Rollbacks and Dry‑Runs (6m)
+
+# Practice
+
+<PracticeButton
+  moduleId="module-refining-questions-targeting"
+  domainEnum="REFINING_QUESTIONS"
+  targetTags={["RBAC", "Groups", "DynamicGroups", "StaticGroups", "Filters"]}
+  objectiveIds={["obj-refining-groups", "obj-refining-filters", "obj-refining-rbac"]}
+  difficulty="intermediate"
+>
+  Start Module Practice
+</PracticeButton>
+
+- Drills on complex filters and nested conditions; map items to `REFINING_QUESTIONS` and `RBAC`, `Groups` tags.
+- Include troubleshooting items for over/under-scoped groups.
+
+### Knowledge Checks (sample)
+
+1. Given `OS = Windows AND (Patch Missing OR AV Disabled)`, which change yields the largest
+   reduction in scope? Why?
+2. You must target only servers in `us-east` with an approved change window. Propose a hybrid
+   static+dynamic strategy and validation steps.
+3. A group unexpectedly includes macOS devices. Identify the likely rule flaw and fix it.
+
+# Assess
+
+- 10-12 items covering group creation, targeting flow, and RBAC alignment.
+- Passing threshold: 80%; remediation suggested for missed logic patterns.
+
+# References
+
+- RBAC and Content Sets (official docs)
+- Targeting best practices and performance notes
+
+---
+
+# Labs
+
+1) RT‑101 Dynamic Groups: Windows servers missing critical patch
+   - Build dynamic rule; verify with dry‑run question
+   - Add owner metadata; publish in correct content set
+
+2) RT‑201 Advanced Filtering: Regex and nested logic
+   - Create filtered cohort by version pattern and last‑seen recency
+   - Validate sample devices and performance
+
+3) RT‑301 Scope Validation and Rollback
+   - Establish static rollback cohort
+   - Run safe no‑op action across dynamic group; confirm telemetry

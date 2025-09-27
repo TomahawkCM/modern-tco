@@ -1,0 +1,268 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 210 79% 46%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222.2 84% 4.9%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96%;
+    --accent-foreground: 222.2 84% 4.9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 210 79% 46%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    /* Archon cyberpunk dark theme */
+    --background: 240 100% 3%; /* #0a0a0f equivalent */
+    --foreground: 0 0% 100%; /* Pure white text */
+    --card: 240 23% 9%; /* Semi-transparent dark card */
+    --card-foreground: 0 0% 100%;
+    --popover: 240 23% 9%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 195 100% 50%; /* Electric cyan #00d4ff */
+    --primary-foreground: 240 100% 3%;
+    --secondary: 195 100% 50%; /* Cyan accent #00d4ff */
+    --secondary-foreground: 0 0% 100%;
+    --muted: 240 23% 9%;
+    --muted-foreground: 0 0% 60%; /* Muted white for secondary text */
+    --accent: 195 100% 50%; /* Electric cyan accent */
+    --accent-foreground: 240 100% 3%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 0 0% 10%; /* Subtle border */
+    --input: 240 23% 9%;
+    --ring: 195 100% 50%; /* Cyan focus ring */
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  
+  /* Force dark mode with archon cyberpunk theme */
+html {
+    color-scheme: dark;
+    overflow-y: auto !important;
+    scroll-behavior: smooth;
+}
+  
+body {
+    @apply bg-archon-bg;
+    background-attachment: fixed;
+    overflow-y: auto !important;
+    overflow-x: hidden;
+}
+
+/* Allow natural content expansion for scrolling */
+#__next, body, html {
+  min-height: 100vh;
+}
+
+main#main-content {
+  overflow-y: visible;
+}
+}
+
+/* Archon cyberpunk glass morphism effects */
+.glass {
+  @apply bg-archon-glass backdrop-blur-lg;
+  border: 1px solid rgba(0, 212, 255, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 212, 255, 0.1);
+}
+
+.archon-card {
+  @apply bg-archon-card backdrop-blur-xl border border-archon-border rounded-lg;
+  box-shadow: 
+    0 4px 24px rgba(0, 212, 255, 0.1),
+    0 2px 12px rgba(139, 92, 246, 0.05);
+}
+
+.archon-button {
+  @apply bg-archon-button text-archon-text-primary font-semibold rounded-lg;
+  border: 1px solid rgba(0, 212, 255, 0.3);
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 212, 255, 0.2);
+}
+
+.archon-button:hover {
+  box-shadow: 0 4px 16px rgba(0, 212, 255, 0.4);
+  transform: translateY(-1px);
+}
+
+.archon-accent-button {
+  @apply bg-archon-accent text-archon-text-primary font-semibold rounded-lg;
+  border: 1px solid rgba(139, 92, 246, 0.3);
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(139, 92, 246, 0.2);
+}
+
+.archon-text-glow {
+  color: #00d4ff;
+  text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+}
+
+/* Legacy styles preserved */
+.tanium-gradient {
+  @apply bg-tanium-gradient;
+}
+
+/* Enhanced exam-specific styles with archon theme */
+.question-card {
+  @apply archon-card p-6 shadow-xl;
+}
+
+.progress-ring {
+  transform: rotate(-90deg);
+  transform-origin: 50% 50%;
+}
+
+/* Cyberpunk animations */
+@keyframes cyber-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+.cyber-pulse {
+  animation: cyber-pulse 2s ease-in-out infinite;
+}
+
+@keyframes neon-glow {
+  0%, 100% { 
+    text-shadow: 0 0 5px rgba(0, 212, 255, 0.5);
+  }
+  50% { 
+    text-shadow: 0 0 20px rgba(0, 212, 255, 0.8), 0 0 30px rgba(0, 212, 255, 0.6);
+  }
+}
+
+.neon-glow {
+  animation: neon-glow 3s ease-in-out infinite;
+}
+
+/* Enhanced cyberpunk animations for study cards */
+@keyframes particle-float {
+  0%, 100% { 
+    transform: translateY(0px) translateX(0px);
+    opacity: 0.3;
+  }
+  25% { 
+    transform: translateY(-10px) translateX(5px);
+    opacity: 0.6;
+  }
+  50% { 
+    transform: translateY(-20px) translateX(-3px);
+    opacity: 0.8;
+  }
+  75% { 
+    transform: translateY(-15px) translateX(8px);
+    opacity: 0.5;
+  }
+}
+
+.particle-float {
+  animation: particle-float 6s ease-in-out infinite;
+}
+
+@keyframes cyber-border {
+  0% { 
+    border-color: rgba(0, 212, 255, 0.3);
+    box-shadow: 0 0 10px rgba(0, 212, 255, 0.2);
+  }
+  50% { 
+    border-color: rgba(147, 51, 234, 0.5);
+    box-shadow: 0 0 20px rgba(147, 51, 234, 0.3);
+  }
+  100% { 
+    border-color: rgba(0, 212, 255, 0.3);
+    box-shadow: 0 0 10px rgba(0, 212, 255, 0.2);
+  }
+}
+
+.cyber-border {
+  animation: cyber-border 4s ease-in-out infinite;
+}
+
+@keyframes hologram-shimmer {
+  0% { 
+    background-position: -200% 0;
+  }
+  100% { 
+    background-position: 200% 0;
+  }
+}
+
+.hologram-shimmer {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(0, 212, 255, 0.1),
+    transparent
+  );
+  background-size: 200% 100%;
+  animation: hologram-shimmer 3s ease-in-out infinite;
+}
+
+@keyframes progress-glow {
+  0%, 100% { 
+    box-shadow: 0 0 5px rgba(0, 212, 255, 0.5);
+  }
+  50% { 
+    box-shadow: 0 0 15px rgba(0, 212, 255, 0.8), 0 0 25px rgba(0, 212, 255, 0.4);
+  }
+}
+
+.progress-glow {
+  animation: progress-glow 2.5s ease-in-out infinite;
+}
+
+/* 3D transform utilities */
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+/* Glassmorphism enhancements */
+.glass-card {
+  background: rgba(10, 10, 15, 0.8);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(0, 212, 255, 0.2);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    0 4px 16px rgba(0, 212, 255, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.glass-button {
+  background: rgba(0, 212, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 212, 255, 0.3);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-button:hover {
+  background: rgba(0, 212, 255, 0.2);
+  box-shadow: 0 4px 20px rgba(0, 212, 255, 0.3);
+  transform: translateY(-2px) scale(1.02);
+}
