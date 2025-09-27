@@ -12,7 +12,7 @@
     "build": "cross-env NODE_OPTIONS=--max-old-space-size=8192 next build",
     "build:gpu": "cross-env NODE_OPTIONS=--max-old-space-size=8192 CUDA_VISIBLE_DEVICES=0 GPU_ACCELERATION=true next build",
     "start": "next start",
-    "prepare": "husky",
+    "prepare": "husky || true",
     "lint": "ESLINT_USE_FLAT_CONFIG=false eslint src --max-warnings 9999 --cache --rule \"@typescript-eslint/no-explicit-any: off\" --rule \"@typescript-eslint/ban-ts-comment: warn\" --rule \"react-hooks/exhaustive-deps: off\"",
     "lint:quick": "ESLINT_USE_FLAT_CONFIG=false eslint src --max-warnings 9999 --rule \"@typescript-eslint/no-explicit-any: off\" --rule \"@typescript-eslint/ban-ts-comment: warn\" --rule \"react-hooks/exhaustive-deps: off\"",
     "lint:fix": "ESLINT_USE_FLAT_CONFIG=false eslint src --fix --cache --rule \"@typescript-eslint/no-explicit-any: off\" --rule \"@typescript-eslint/ban-ts-comment: warn\" --rule \"react-hooks/exhaustive-deps: off\"",
