@@ -19,11 +19,58 @@ if (isProd) {
 
 // Debug logging removed for production compliance
 
-// Create a typed client. Call-sites may cast to `any` where strict types are too narrow.
-export const supabase = createClient<Database>(
-  (supabaseUrl || "") as string,
-  (supabaseAnonKey || "") as string
-) as unknown as SupabaseClient<Database>;
+// Create a typed client with proper error handling
+// If environment variables are missing, create a no-op client to prevent runtime errors
+let supabaseClient: SupabaseClient<Database>;
+
+try {
+  if (supabaseUrl && supabaseAnonKey) {
+    supabaseClient = createClient<Database>(
+      supabaseUrl,
+      supabaseAnonKey,
+      {
+        auth: {
+          persistSession: true,
+          autoRefreshToken: true,
+        },
+      }
+    ) as unknown as SupabaseClient<Database>;
+  } else {
+    // Create a mock client that won't crash but logs warnings
+    console.warn("Supabase environment variables not configured. Database features will be disabled.");
+    supabaseClient = {
+      auth: {
+        signIn: async () => ({ data: null, error: new Error("Supabase not configured") }),
+        signOut: async () => ({ error: null }),
+        getSession: async () => ({ data: null, error: null }),
+      },
+      from: () => ({
+        select: () => ({ data: [], error: new Error("Supabase not configured") }),
+        insert: () => ({ data: null, error: new Error("Supabase not configured") }),
+        update: () => ({ data: null, error: new Error("Supabase not configured") }),
+        delete: () => ({ data: null, error: new Error("Supabase not configured") }),
+      }),
+    } as any;
+  }
+} catch (error) {
+  console.error("Failed to initialize Supabase client:", error);
+  // Provide fallback client
+  supabaseClient = {
+    auth: {
+      signIn: async () => ({ data: null, error: new Error("Supabase initialization failed") }),
+      signOut: async () => ({ error: null }),
+      getSession: async () => ({ data: null, error: null }),
+    },
+    from: () => ({
+      select: () => ({ data: [], error: new Error("Supabase initialization failed") }),
+      insert: () => ({ data: null, error: new Error("Supabase initialization failed") }),
+      update: () => ({ data: null, error: new Error("Supabase initialization failed") }),
+      delete: () => ({ data: null, error: new Error("Supabase initialization failed") }),
+    }),
+  } as any;
+}
+
+export const supabase = supabaseClient;
 
 // Server-side client for admin operations
 export const supabaseAdmin = process.env.SUPABASE_SERVICE_ROLE_KEY

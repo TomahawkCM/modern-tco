@@ -200,7 +200,7 @@ export function SearchHeader() {
                     : "text-gray-300 hover:bg-white/10 hover:text-white"
                 )}
               >
-                {domain.split(" ")[0]} {/* Show first word */}
+                {domain ? domain.split(" ")[0] : domain} {/* Show first word */}
               </Button>
             );
           })}

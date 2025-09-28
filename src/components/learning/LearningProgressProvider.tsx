@@ -314,7 +314,7 @@ export function LearningProgressProvider({ children }: LearningProgressProviderP
     );
     const percentage = totalModules > 0 ? Math.round((completedModules / totalModules) * 100) : 0;
     const estimatedTime = domains.reduce((acc, domain) => 
-      acc + parseInt(domain.estimatedTime.split(' ')[0]) || 0, 0
+      acc + (domain.estimatedTime ? parseInt(domain.estimatedTime.split(' ')[0]) || 0 : 0), 0
     );
     
     return {

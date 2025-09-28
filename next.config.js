@@ -99,7 +99,8 @@ const nextConfig = {
         "object-src 'none'",
         "form-action 'self'",
         // Next inline hydration is generally safe; we avoid 'unsafe-eval'
-        "script-src 'self' https://browser.sentry-cdn.com",
+        // Add 'unsafe-inline' for Next.js hydration scripts - necessary for production
+        "script-src 'self' 'unsafe-inline' https://browser.sentry-cdn.com",
         "style-src 'self' 'unsafe-inline'",
         "img-src 'self' data: blob: https://i.ytimg.com https://img.youtube.com",
         [

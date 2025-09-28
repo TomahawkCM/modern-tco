@@ -4,6 +4,8 @@ import { useEffect, useState, Suspense } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { MDXProvider } from "@mdx-js/react";
 import { StudyModuleWrapper } from "@/components/learning/StudyModuleWrapper";
+import { StudyModuleViewer } from "@/components/study/StudyModuleViewer";
+import { studyModuleService } from "@/services/studyModuleService";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -75,6 +77,8 @@ export default function StudyDomainPage() {
   const [error, setError] = useState<string | null>(null);
   const [mdxModule, setMdxModule] = useState<MDXModule | null>(null);
   const [mdxMetadata, setMdxMetadata] = useState<any>(null);
+  const [useDatabase, setUseDatabase] = useState(true);
+  const [module, setModule] = useState<any>(null);
 
   const raw = (params?.domain ?? "") as string | string[];
   const domainSlug = Array.isArray(raw) ? raw[0] : raw;
@@ -85,19 +89,44 @@ export default function StudyDomainPage() {
   const domainConfig = DOMAIN_CONFIG[domainSlug as DomainKey];
 
   useEffect(() => {
-    // Validate domain exists
-    if (!domainConfig) {
-      setError("Domain not found");
-      setIsLoading(false);
-      return;
-    }
-
-    // Load MDX content directly
+    // First try to load from database
     const loadContent = async () => {
       try {
+        setIsLoading(true);
+
+        // Try to get module from database first
+        const domainVariants = [
+          domainSlug,
+          domainSlug.replace(/-/g, '_').toUpperCase(),
+          domainSlug.split('-').map((word: string, idx: number) =>
+            word.charAt(0).toUpperCase() + word.slice(1)
+          ).join(' ').replace(' And ', ' & ')
+        ];
+
+        let dbModule = null;
+        for (const variant of domainVariants) {
+          dbModule = await studyModuleService.getModuleByDomain(variant);
+          if (dbModule) break;
+        }
+
+        if (dbModule) {
+          setModule(dbModule);
+          setUseDatabase(true);
+          setIsLoading(false);
+          return;
+        }
+
+        // Fall back to MDX if database doesn't have module
+        if (!domainConfig) {
+          setError("Domain not found");
+          setIsLoading(false);
+          return;
+        }
+
         const module = await loadMDXContent(domainSlug);
 
         if (module) {
+          setUseDatabase(false);
           setMdxModule(module);
           setMdxMetadata(getMDXMetadata(module));
           console.log("MDX Content loaded successfully:", {
@@ -187,13 +216,56 @@ export default function StudyDomainPage() {
     );
   }
 
+  // If using database content, render StudyModuleViewer
+  if (useDatabase && module) {
+    // Map domain slug to TCODomain enum
+    const domainMapping: Record<string, any> = {
+      'platform-foundation': 'PLATFORM_FOUNDATION',
+      'asking-questions': 'ASKING_QUESTIONS',
+      'refining-questions-targeting': 'REFINING_QUESTIONS',
+      'refining-questions': 'REFINING_QUESTIONS',
+      'taking-action': 'TAKING_ACTION',
+      'navigation-modules': 'NAVIGATION_MODULES',
+      'navigation-and-basic-module-functions': 'NAVIGATION_MODULES',
+      'reporting-export': 'REPORTING_EXPORT',
+      'report-generation-and-data-export': 'REPORTING_EXPORT',
+    };
+
+    return (
+      <div className="container mx-auto px-4 py-8">
+        <div className="mb-8">
+          <Button
+            onClick={() => router.push("/study")}
+            variant="outline"
+            className="mb-4 border-white/20 text-white hover:bg-white/10"
+          >
+            <ArrowLeft className="mr-2 h-4 w-4" />
+            Back to Study Center
+          </Button>
+        </div>
+
+        <StudyModuleViewer
+          domain={domainMapping[domainSlug] || domainSlug}
+          onComplete={() => {
+            router.push("/study");
+          }}
+          onNavigateToQuestions={() => {
+            router.push(`/practice/${domainSlug}`);
+          }}
+        />
+      </div>
+    );
+  }
+
   const objectives = mdxMetadata?.objectives || [
     "Master natural language query construction and sensor library usage",
     "Learn saved question management and result interpretation techniques",
     "Understand query optimization and performance best practices"
   ];
 
-  const estimatedTimeMinutes = parseInt(domainConfig.estimatedTime.split(" ")[0]) || 45;
+  const estimatedTimeMinutes = domainConfig?.estimatedTime
+    ? parseInt(domainConfig.estimatedTime.split(" ")[0]) || 45
+    : 45;
 
   return (
     <StudyModuleWrapper
@@ -262,8 +334,9 @@ export default function StudyDomainPage() {
                   </div>
                   <p className="text-sm text-blue-200">
                     {domainConfig.title} (
-                    {Math.round((domainConfig.estimatedTime?.split(" ")[0] as any) * 0.22 * 100) /
-                      100}
+                    {domainConfig?.estimatedTime
+                      ? Math.round((parseInt(domainConfig.estimatedTime.split(" ")[0]) || 45) * 0.22 * 100) / 100
+                      : 10}
                     % exam weight) - {domainConfig.description}
                   </p>
                 </div>

@@ -216,7 +216,7 @@ export function PracticeProvider({ children }: { children: ReactNode }) {
           module.objectives.map((obj) => obj.id || obj.description),
           {
             requiredTags: [],
-            optionalTags: [`Domain${module.domain.split(" ")[0]}`],
+            optionalTags: module.domain ? [`Domain${module.domain.split(" ")[0]}`] : [],
             minQuestions: config?.questionCount
               ? Math.max(5, Math.floor(config.questionCount * 0.5))
               : 5,
