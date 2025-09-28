@@ -12,7 +12,6 @@ logs/
 .vercel/
 .vscode/
 docs/
-scripts/
 tests/
 harness/
 memory/
@@ -24,4 +23,4 @@ dev_output.txt
 nul
 *.bak
 *.sql
-*.js.map
+*.js.map.chrome/
