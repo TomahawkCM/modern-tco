@@ -139,4 +139,6 @@ export const SLUG_TO_DOMAIN_ENUM: Record<string, ModuleFrontmatter["domainEnum"]
   "navigation-basic-modules": "NAVIGATION_MODULES",
   "reporting-data-export": "REPORTING_EXPORT",
   "platform-foundation": "PLATFORM_FOUNDATION",
+  // Also support the filename-generated slug
+  "tanium-platform-foundation": "PLATFORM_FOUNDATION",
 };

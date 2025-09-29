@@ -977,4 +977,2599 @@ The concepts learned in this module will appear throughout the certification exa
 
 **🎯 Ready to Begin Domain 1?** [Start with Asking Questions →](/domains/asking-questions)
 
+---
+
+## 🏗️ Deep Dive: Tanium Architecture Mastery
+
+### Enterprise Architecture Components
+
+#### Core Platform Components
+
+**1. Tanium Server**
+
+The Tanium Server is the central nervous system of the entire platform, orchestrating all operations across the enterprise.
+
+**Key Responsibilities**:
+- Question processing and distribution
+- Action package deployment
+- Client registration and management
+- Module coordination
+- Database operations
+- API gateway services
+- WebSocket management for real-time communication
+
+**High Availability Configuration**:
+```yaml
+Tanium Server Cluster:
+  Primary Server:
+    - Role: Active question processing
+    - IP: 10.1.1.10
+    - Database: Primary PostgreSQL
+    - Services: All active
+
+  Secondary Server:
+    - Role: Hot standby
+    - IP: 10.1.1.11
+    - Database: Streaming replication
+    - Services: Ready for failover
+
+  Load Balancer:
+    - VIP: 10.1.1.100
+    - Algorithm: Least connections
+    - Health Check: TCP 443 + API validation
+    - Failover Time: &lt;30 seconds
+
+  Database Cluster:
+    - Primary: PostgreSQL 13+ with streaming replication
+    - Secondary: Hot standby with &lt;1 second lag
+    - Witness: Arbitrator for automatic failover
+    - Backup: Daily full + hourly incremental
+```
+
+**Performance Specifications**:
+```
+Small Deployment (1-5,000 endpoints):
+  - CPU: 8 cores
+  - RAM: 32 GB
+  - Disk: 500 GB SSD
+  - Network: 1 Gbps
+
+Medium Deployment (5,000-50,000 endpoints):
+  - CPU: 16 cores
+  - RAM: 64 GB
+  - Disk: 1 TB SSD RAID 10
+  - Network: 10 Gbps
+
+Large Deployment (50,000+ endpoints):
+  - CPU: 32+ cores
+  - RAM: 128+ GB
+  - Disk: 2+ TB NVMe RAID 10
+  - Network: 10+ Gbps
+  - Database: Dedicated PostgreSQL cluster
+```
+
+**2. Zone Server Architecture**
+
+Zone Servers act as regional aggregation points, reducing WAN traffic and improving scalability.
+
+**Zone Server Functions**:
+- Linear chain forwarding
+- Answer aggregation
+- Package caching
+- WAN optimization
+- Regional failover
+
+**Deployment Strategies**:
+```python
+def calculate_zone_servers(endpoints, locations, wan_quality):
+    """
+    Calculate optimal Zone Server deployment
+    """
+    zone_servers = []
+
+    for location in locations:
+        if location['endpoints'] &gt; 500 or wan_quality == 'poor':
+            zone_server = {
+                'location': location['name'],
+                'type': 'dedicated' if location['endpoints'] &gt; 2000 else 'shared',
+                'specs': {
+                    'cpu': max(4, location['endpoints'] // 1000),
+                    'ram': max(16, location['endpoints'] // 500),
+                    'disk': max(100, location['endpoints'] // 100)
+                },
+                'cache_size': location['endpoints'] * 0.5  # GB
+            }
+            zone_servers.append(zone_server)
+
+    return zone_servers
+```
+
+**Zone Server Chain Optimization**:
+```
+Linear Chain Example:
+  Endpoint → Zone Server 1 → Zone Server 2 → Tanium Server
+
+Benefits:
+  - Reduced server load
+  - Answer aggregation at each level
+  - Natural hierarchy for large deployments
+  - Improved WAN utilization
+
+Configuration:
+  - Forward Period: 2-5 seconds
+  - Backward Period: 2-5 seconds
+  - Registration Period: 4-8 hours
+  - Sensor Refresh: 15 minutes
+```
+
+**3. Tanium Client Deep Dive**
+
+The Tanium Client is the lightweight agent installed on every managed endpoint.
+
+**Client Architecture**:
+```
+Tanium Client Components:
+├── Core Service (TaniumClient.exe/taniumclient)
+│   ├── Communication Layer
+│   ├── Sensor Engine
+│   ├── Action Processor
+│   └── Cache Manager
+├── Extensions
+│   ├── Direct Connect
+│   ├── Endpoint Encryption
+│   └── Custom Extensions
+├── Local Database
+│   ├── Sensor Cache
+│   ├── Action History
+│   └── Configuration
+└── Security
+    ├── Certificate Store
+    ├── Signing Validation
+    └── Encryption Keys
+```
+
+**Client Communication Protocol**:
+```python
+class TaniumClientProtocol:
+    def __init__(self):
+        self.port = 17472
+        self.protocol = "TLS 1.2+"
+        self.compression = "zlib"
+        self.encryption = "AES-256-GCM"
+
+    def linear_chain(self):
+        """
+        Peer-to-peer communication chain
+        """
+        chain_formation = {
+            'leader_election': 'Deterministic hash',
+            'forward_leaders': 100,  # Default
+            'backward_leaders': 100,
+            'neighborhood_size': 200,
+            'chain_length': 'log(n) where n = total clients'
+        }
+        return chain_formation
+
+    def registration_process(self):
+        """
+        Client registration workflow
+        """
+        steps = [
+            "1. Client starts and reads ComputerID",
+            "2. Attempts peer registration via 17472",
+            "3. Falls back to Zone Server if needed",
+            "4. Ultimately registers with Tanium Server",
+            "5. Receives configuration and neighbors list",
+            "6. Begins normal operations"
+        ]
+        return steps
+```
+
+**Client Performance Metrics**:
+```
+Resource Usage:
+  - CPU: &lt;1% idle, 2-5% during questions
+  - Memory: 50-100 MB typical
+  - Disk: 100-500 MB
+  - Network: &lt;1 KB/s idle, burst to 100 KB/s
+  - I/O: Minimal, mostly memory operations
+
+Tuning Parameters:
+  - CPU Throttle: 10% default
+  - Sensor Timeout: 60 seconds
+  - Max Sensor Results: 1 MB
+  - Cache Duration: 900 seconds
+  - Answer Packet Size: 64 KB
+```
+
+### Module Architecture
+
+#### Core Modules Overview
+
+**1. Interact Module**
+```yaml
+Purpose: Real-time endpoint interrogation
+Key Features:
+  - Natural language questions
+  - Saved questions library
+  - Parameterized queries
+  - Merge and drill-down
+  - Live updates
+
+Architecture:
+  Backend: Question parser and optimizer
+  Frontend: React-based UI
+  Storage: PostgreSQL for saved questions
+  Cache: Redis for result caching
+
+Integrations:
+  - Trends: Historical data
+  - Threat Response: IOC hunting
+  - Patch: Vulnerability correlation
+```
+
+**2. Patch Module**
+```yaml
+Purpose: Vulnerability and patch management
+Components:
+  - Patch Catalog: 90+ OS and applications
+  - Scan Engine: CVE detection
+  - Deployment: Staged rollout
+  - Reporting: Compliance dashboards
+
+Workflow:
+  1. Import patches from vendors
+  2. Scan endpoints for applicability
+  3. Create deployment packages
+  4. Target computer groups
+  5. Deploy with maintenance windows
+  6. Verify and report
+
+Best Practices:
+  - Test on pilot groups
+  - Use maintenance windows
+  - Enable auto-download
+  - Configure bandwidth throttling
+  - Implement approval workflows
+```
+
+**3. Threat Response Module**
+```yaml
+Purpose: Security incident detection and response
+Capabilities:
+  - Intel feeds integration
+  - Live incident response
+  - Automated remediation
+  - Forensic evidence collection
+  - Timeline reconstruction
+
+Intel Sources:
+  - TAXII/STIX feeds
+  - Custom IOCs
+  - YARA rules
+  - OpenIOC format
+  - Internal threat data
+
+Response Actions:
+  - Process termination
+  - File quarantine
+  - Registry remediation
+  - Network isolation
+  - Evidence collection
+```
+
+**4. Comply Module**
+```yaml
+Purpose: Compliance and configuration management
+Frameworks:
+  - CIS Benchmarks
+  - NIST 800-53
+  - PCI DSS
+  - HIPAA
+  - Custom policies
+
+Components:
+  - Configuration Items (CIs)
+  - Compliance Policies
+  - Remediation Actions
+  - Reporting Engine
+  - Audit Trail
+
+Workflow:
+  1. Define configuration items
+  2. Create compliance policies
+  3. Scan endpoints
+  4. Identify non-compliance
+  5. Deploy remediations
+  6. Generate reports
+```
+
+### Database Architecture
+
+#### PostgreSQL Implementation
+
+**Database Schema Overview**:
+```sql
+-- Core Tables Structure
+CREATE SCHEMA tanium;
+
+-- Questions and results
+CREATE TABLE tanium.questions (
+    id SERIAL PRIMARY KEY,
+    question_text TEXT NOT NULL,
+    question_hash VARCHAR(64) UNIQUE,
+    created_by INTEGER REFERENCES users(id),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    expiration TIMESTAMP,
+    result_count INTEGER,
+    execution_time_ms INTEGER
+);
+
+-- Sensor definitions
+CREATE TABLE tanium.sensors (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) UNIQUE NOT NULL,
+    platform VARCHAR(50),
+    script TEXT,
+    parameters JSONB,
+    max_age_seconds INTEGER DEFAULT 900,
+    category VARCHAR(100),
+    hash VARCHAR(64),
+    version INTEGER
+);
+
+-- Computer inventory
+CREATE TABLE tanium.computers (
+    computer_id VARCHAR(50) PRIMARY KEY,
+    computer_name VARCHAR(255),
+    ip_addresses TEXT[],
+    operating_system VARCHAR(255),
+    last_seen TIMESTAMP,
+    first_seen TIMESTAMP,
+    domain_name VARCHAR(255),
+    organizational_unit TEXT,
+    metadata JSONB
+);
+
+-- Action history
+CREATE TABLE tanium.actions (
+    id SERIAL PRIMARY KEY,
+    package_id INTEGER,
+    target_count INTEGER,
+    completed_count INTEGER,
+    failed_count INTEGER,
+    status VARCHAR(50),
+    created_by INTEGER,
+    created_at TIMESTAMP,
+    completed_at TIMESTAMP,
+    parameters JSONB
+);
+
+-- Performance indexes
+CREATE INDEX idx_questions_created ON tanium.questions(created_at DESC);
+CREATE INDEX idx_computers_lastseen ON tanium.computers(last_seen DESC);
+CREATE INDEX idx_actions_status ON tanium.actions(status, created_at);
+CREATE INDEX idx_computers_os ON tanium.computers(operating_system);
+```
+
+**Database Performance Tuning**:
+```sql
+-- PostgreSQL configuration for Tanium
+-- postgresql.conf optimizations
+
+# Memory Configuration
+shared_buffers = 25% of RAM (max 8GB)
+effective_cache_size = 75% of RAM
+work_mem = RAM / max_connections / 2
+maintenance_work_mem = RAM / 16
+
+# Checkpoint Settings
+checkpoint_completion_target = 0.9
+wal_buffers = 16MB
+checkpoint_segments = 32
+
+# Connection Settings
+max_connections = 500
+max_prepared_transactions = 0
+
+# Parallel Query Execution
+max_parallel_workers_per_gather = 4
+max_parallel_workers = 8
+max_parallel_maintenance_workers = 4
+
+# Autovacuum Tuning
+autovacuum_max_workers = 4
+autovacuum_naptime = 10s
+autovacuum_vacuum_scale_factor = 0.05
+autovacuum_analyze_scale_factor = 0.02
+```
+
+**Backup and Recovery Strategy**:
+```bash
+#!/bin/bash
+# Tanium database backup script
+
+# Configuration
+DB_NAME="tanium"
+BACKUP_DIR="/backup/tanium"
+RETENTION_DAYS=30
+
+# Perform backup
+backup_database() {
+    TIMESTAMP=$(date +%Y%m%d_%H%M%S)
+    BACKUP_FILE="${BACKUP_DIR}/tanium_${TIMESTAMP}.sql.gz"
+
+    # Full backup with compression
+    pg_dump -h localhost -U tanium_user -d $DB_NAME \
+        --verbose --no-owner --no-acl \
+        --format=custom --compress=9 \
+        --file=$BACKUP_FILE
+
+    # Verify backup
+    pg_restore --list $BACKUP_FILE > /dev/null 2>&1
+    if [ $? -eq 0 ]; then
+        echo "Backup successful: $BACKUP_FILE"
+
+        # Archive to remote storage
+        aws s3 cp $BACKUP_FILE s3://tanium-backups/
+    else
+        echo "Backup verification failed!"
+        exit 1
+    fi
+}
+
+# Cleanup old backups
+cleanup_backups() {
+    find $BACKUP_DIR -name "tanium_*.sql.gz" \
+        -mtime +$RETENTION_DAYS -delete
+
+    aws s3 ls s3://tanium-backups/ \
+        --recursive | awk '{print $4}' | \
+        while read file; do
+            age=$(aws s3 ls s3://tanium-backups/$file \
+                --recursive | awk '{print $1}')
+            # Delete if older than retention
+        done
+}
+
+# Point-in-time recovery
+restore_database() {
+    RESTORE_FILE=$1
+    TARGET_TIME=$2
+
+    # Stop Tanium services
+    systemctl stop tanium-server
+
+    # Restore database
+    pg_restore -h localhost -U tanium_user \
+        -d postgres --create --clean \
+        --verbose $RESTORE_FILE
+
+    # Apply point-in-time if specified
+    if [ ! -z "$TARGET_TIME" ]; then
+        psql -U tanium_user -d $DB_NAME \
+            -c "SELECT pg_wal_replay_pause();"
+        psql -U tanium_user -d $DB_NAME \
+            -c "SELECT pg_wal_replay_resume();"
+    fi
+
+    # Restart services
+    systemctl start tanium-server
+}
+
+# Execute backup
+backup_database
+cleanup_backups
+```
+
+### Security Architecture
+
+#### Certificate Management
+
+**PKI Infrastructure**:
+```
+Tanium PKI Hierarchy:
+├── Root CA (Offline)
+│   ├── Infrastructure CA
+│   │   ├── Server Certificates
+│   │   ├── Zone Server Certificates
+│   │   └── Module Server Certificates
+│   └── Client CA
+│       ├── Client Certificates
+│       └── Action Signing Certificates
+└── External CA Integration
+    ├── Active Directory Certificate Services
+    ├── Public CA (DigiCert, etc.)
+    └── Hardware Security Module (HSM)
+```
+
+**Certificate Deployment Process**:
+```python
+def deploy_certificates(environment):
+    """
+    Automated certificate deployment for Tanium
+    """
+    cert_config = {
+        'key_algorithm': 'RSA-4096',
+        'signature_algorithm': 'SHA256',
+        'validity_period': 365,  # days
+        'key_usage': [
+            'digital_signature',
+            'key_encipherment',
+            'data_encipherment'
+        ],
+        'extended_key_usage': [
+            'server_auth',
+            'client_auth'
+        ]
+    }
+
+    # Generate server certificate
+    server_cert = generate_certificate(
+        cn=f"tanium.{environment['domain']}",
+        san=environment['server_names'],
+        **cert_config
+    )
+
+    # Deploy to Tanium Server
+    deploy_to_server(server_cert, environment['servers'])
+
+    # Generate and deploy client certificates
+    for client_group in environment['client_groups']:
+        client_cert = generate_client_certificate(
+            group=client_group,
+            **cert_config
+        )
+        deploy_to_clients(client_cert, client_group)
+
+    return verify_deployment(environment)
+```
+
+#### Authentication and Authorization
+
+**SAML 2.0 Integration**:
+```xml
+<!-- Tanium SAML Configuration -->
+<EntityDescriptor entityID="https://tanium.company.com">
+    <SPSSODescriptor>
+        <KeyDescriptor use="signing">
+            <KeyInfo>
+                <X509Data>
+                    <X509Certificate>MIIDpTC...</X509Certificate>
+                </X509Data>
+            </KeyInfo>
+        </KeyDescriptor>
+
+        <AssertionConsumerService
+            Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST"
+            Location="https://tanium.company.com/saml/SSO"
+            index="0"/>
+
+        <AttributeConsumingService index="0">
+            <RequestedAttribute Name="email" isRequired="true"/>
+            <RequestedAttribute Name="groups" isRequired="true"/>
+            <RequestedAttribute Name="department" isRequired="false"/>
+        </AttributeConsumingService>
+    </SPSSODescriptor>
+</EntityDescriptor>
+```
+
+**LDAP/Active Directory Integration**:
+```python
+class TaniumLDAPConfig:
+    def __init__(self):
+        self.settings = {
+            'server': 'ldaps://dc.company.com:636',
+            'bind_dn': 'CN=Tanium,OU=ServiceAccounts,DC=company,DC=com',
+            'base_dn': 'DC=company,DC=com',
+            'user_filter': '(&(objectClass=user)(sAMAccountName={0}))',
+            'group_filter': '(&(objectClass=group)(member={0}))',
+            'sync_interval': 3600,  # seconds
+            'cache_ttl': 300,
+            'ssl_verify': True,
+            'timeout': 30
+        }
+
+    def map_ldap_to_tanium_roles(self):
+        """
+        Map AD groups to Tanium roles
+        """
+        mappings = {
+            'CN=Tanium-Admins,OU=Groups,DC=company,DC=com': 'Administrator',
+            'CN=Tanium-Operators,OU=Groups,DC=company,DC=com': 'Operator',
+            'CN=Tanium-Readers,OU=Groups,DC=company,DC=com': 'Read Only',
+            'CN=Security-Team,OU=Groups,DC=company,DC=com': 'Security Analyst',
+            'CN=Patch-Team,OU=Groups,DC=company,DC=com': 'Patch Administrator'
+        }
+        return mappings
+```
+
+### Network Architecture
+
+#### Port and Protocol Requirements
+
+**Complete Port Matrix**:
+```
+Tanium Communication Ports:
+
+Client to Client (Peer):
+  TCP 17472 - Primary communication
+  TCP 17473 - Direct Connect fallback
+
+Client to Zone Server:
+  TCP 17472 - Standard communication
+  TCP 443 - HTTPS fallback
+
+Client to Tanium Server:
+  TCP 443 - Registration and fallback
+  TCP 17472 - If directly connected
+
+Zone Server to Tanium Server:
+  TCP 443 - Primary communication
+  TCP 17472 - High-speed data transfer
+
+Tanium Server to Database:
+  TCP 5432 - PostgreSQL (default)
+  TCP 1433 - SQL Server (alternative)
+
+Module Servers:
+  TCP 443 - Web UI and API
+  TCP 17477 - Module to Server
+  Various - Module-specific (see module docs)
+
+Administrative Access:
+  TCP 443 - Console access
+  TCP 22 - SSH management
+  TCP 3389 - RDP (Windows)
+```
+
+**Bandwidth Calculations**:
+```python
+def calculate_bandwidth_requirements(endpoints, questions_per_hour, avg_result_size):
+    """
+    Calculate network bandwidth requirements
+    """
+    # Base calculations
+    question_traffic = questions_per_hour * avg_result_size * endpoints
+    registration_traffic = endpoints * 1024 * (1/14400)  # Every 4 hours
+    sensor_refresh = endpoints * 10240 * (1/900)  # Every 15 min
+    heartbeat_traffic = endpoints * 64 * (1/10)  # Every 10 seconds
+
+    # Peak calculations
+    peak_multiplier = 3  # Assume 3x during peak
+    peak_bandwidth = (question_traffic + sensor_refresh + heartbeat_traffic) * peak_multiplier
+
+    # Recommendations
+    recommendations = {
+        'minimum_bandwidth': peak_bandwidth * 0.5,  # Mbps
+        'recommended_bandwidth': peak_bandwidth,  # Mbps
+        'burst_capability': peak_bandwidth * 2,  # Mbps
+        'latency_requirement': '&lt;100ms',
+        'packet_loss_tolerance': '&lt;0.1%'
+    }
+
+    return recommendations
+```
+
+#### Firewall and Proxy Configuration
+
+**Firewall Rules Template**:
+```bash
+#!/bin/bash
+# Tanium firewall configuration script
+
+# Enable firewall
+firewall-cmd --permanent --new-zone=tanium
+firewall-cmd --permanent --zone=tanium --set-description="Tanium Communication Zone"
+
+# Client communication
+firewall-cmd --permanent --zone=tanium --add-port=17472/tcp
+firewall-cmd --permanent --zone=tanium --add-port=17473/tcp
+
+# Server communication
+firewall-cmd --permanent --zone=tanium --add-port=443/tcp
+firewall-cmd --permanent --zone=tanium --add-port=17477/tcp
+
+# Database
+firewall-cmd --permanent --zone=tanium --add-port=5432/tcp
+
+# Apply rules
+firewall-cmd --reload
+
+# Verify configuration
+firewall-cmd --zone=tanium --list-all
+```
+
+**Proxy Configuration**:
+```xml
+<!-- Tanium Client Proxy Settings -->
+<configuration>
+    <proxy>
+        <enabled>true</enabled>
+        <server>proxy.company.com</server>
+        <port&gt;8080</port>
+        <authentication>NTLM</authentication>
+        <bypass>
+            <address>*.local</address>
+            <address&gt;10.*</address>
+            <address&gt;172.16.*</address>
+            <address&gt;192.168.*</address>
+        </bypass>
+        <pac_url>http://proxy.company.com/proxy.pac</pac_url>
+    </proxy>
+</configuration>
+```
+
+### Performance Optimization
+
+#### Server Tuning
+
+**Operating System Optimization**:
+```bash
+#!/bin/bash
+# Linux kernel tuning for Tanium Server
+
+# Network tuning
+cat >> /etc/sysctl.conf << EOF
+# Tanium optimizations
+net.core.rmem_max = 134217728
+net.core.wmem_max = 134217728
+net.ipv4.tcp_rmem = 4096 87380 134217728
+net.ipv4.tcp_wmem = 4096 65536 134217728
+net.core.netdev_max_backlog = 5000
+net.ipv4.tcp_congestion_control = bbr
+net.ipv4.tcp_notsent_lowat = 16384
+net.ipv4.tcp_tw_reuse = 1
+net.ipv4.ip_local_port_range = 10000 65000
+net.core.somaxconn = 1024
+
+# File system
+fs.file-max = 2097152
+fs.nr_open = 2097152
+
+# Memory
+vm.swappiness = 10
+vm.dirty_ratio = 15
+vm.dirty_background_ratio = 5
+EOF
+
+# Apply settings
+sysctl -p
+
+# Increase ulimits
+cat >> /etc/security/limits.conf << EOF
+tanium soft nofile 65536
+tanium hard nofile 65536
+tanium soft nproc 32768
+tanium hard nproc 32768
+EOF
+```
+
+**Database Query Optimization**:
+```sql
+-- Tanium query performance optimization
+
+-- Analyze query performance
+EXPLAIN (ANALYZE, BUFFERS)
+SELECT c.computer_name, c.operating_system, q.question_text, q.result_count
+FROM tanium.computers c
+JOIN tanium.questions q ON q.created_at > c.last_seen - INTERVAL '1 hour'
+WHERE c.operating_system LIKE '%Server%'
+AND q.result_count &gt; 0
+ORDER BY q.created_at DESC
+LIMIT 100;
+
+-- Create covering index
+CREATE INDEX idx_computers_os_lastseen
+ON tanium.computers(operating_system, last_seen)
+INCLUDE (computer_name);
+
+-- Partition large tables
+CREATE TABLE tanium.questions_partitioned (
+    LIKE tanium.questions INCLUDING ALL
+) PARTITION BY RANGE (created_at);
+
+-- Create monthly partitions
+CREATE TABLE tanium.questions_y2024m01
+    PARTITION OF tanium.questions_partitioned
+    FOR VALUES FROM ('2024-01-01') TO ('2024-02-01');
+
+-- Auto-maintenance
+CREATE OR REPLACE FUNCTION tanium.maintain_partitions()
+RETURNS void AS $$
+DECLARE
+    partition_date DATE;
+    partition_name TEXT;
+BEGIN
+    partition_date := DATE_TRUNC('month', CURRENT_DATE + INTERVAL '1 month');
+    partition_name := 'questions_y' || TO_CHAR(partition_date, 'YYYY') ||
+                      'm' || TO_CHAR(partition_date, 'MM');
+
+    EXECUTE format('CREATE TABLE IF NOT EXISTS tanium.%I
+                    PARTITION OF tanium.questions_partitioned
+                    FOR VALUES FROM (%L) TO (%L)',
+                    partition_name,
+                    partition_date,
+                    partition_date + INTERVAL '1 month');
+END;
+$$ LANGUAGE plpgsql;
+
+-- Schedule maintenance
+CREATE EXTENSION IF NOT EXISTS pg_cron;
+SELECT cron.schedule('partition-maintenance', '0 0 1 * *',
+                     'SELECT tanium.maintain_partitions();');
+```
+
+### Disaster Recovery
+
+#### Business Continuity Planning
+
+**Recovery Objectives**:
+```yaml
+RTO (Recovery Time Objective): 4 hours
+RPO (Recovery Point Objective): 1 hour
+
+Tiers:
+  Tier 1 - Critical (Tanium Server):
+    RTO: 1 hour
+    RPO: 15 minutes
+    Method: Hot standby with automatic failover
+
+  Tier 2 - Essential (Zone Servers):
+    RTO: 2 hours
+    RPO: 1 hour
+    Method: Warm standby with manual failover
+
+  Tier 3 - Standard (Module Servers):
+    RTO: 4 hours
+    RPO: 4 hours
+    Method: Cold standby with restore from backup
+```
+
+**Disaster Recovery Procedures**:
+```python
+class TaniumDisasterRecovery:
+    def __init__(self):
+        self.dr_site = {
+            'location': 'dr-datacenter',
+            'servers': ['dr-tanium-01', 'dr-tanium-02'],
+            'database': 'dr-postgres-01',
+            'status': 'standby'
+        }
+
+    def initiate_failover(self, reason, authorized_by):
+        """
+        Orchestrate failover to DR site
+        """
+        steps = []
+
+        # Step 1: Verify DR readiness
+        if not self.verify_dr_readiness():
+            return "DR site not ready for failover"
+
+        # Step 2: Stop primary site (if accessible)
+        if self.primary_accessible():
+            steps.append(self.stop_primary_services())
+
+        # Step 3: Promote DR database
+        steps.append(self.promote_dr_database())
+
+        # Step 4: Update DNS
+        steps.append(self.update_dns_records())
+
+        # Step 5: Start DR services
+        steps.append(self.start_dr_services())
+
+        # Step 6: Verify client connectivity
+        steps.append(self.verify_client_connectivity())
+
+        # Log failover
+        self.log_failover(reason, authorized_by, steps)
+
+        return steps
+
+    def test_dr_failover(self):
+        """
+        Non-disruptive DR test
+        """
+        test_results = {
+            'database_replication': self.test_db_replication(),
+            'network_connectivity': self.test_network_paths(),
+            'service_readiness': self.test_service_startup(),
+            'client_registration': self.test_client_registration(),
+            'module_functionality': self.test_module_operations()
+        }
+
+        return all(test_results.values())
+```
+
+### Compliance and Auditing
+
+#### Regulatory Compliance
+
+**GDPR Compliance**:
+```python
+class TaniumGDPRCompliance:
+    def __init__(self):
+        self.data_categories = {
+            'personal_data': [
+                'computer_name',
+                'username',
+                'ip_address',
+                'email_address'
+            ],
+            'sensitive_data': [
+                'passwords',
+                'certificates',
+                'encryption_keys'
+            ]
+        }
+
+    def implement_data_protection(self):
+        """
+        GDPR Article 32 - Security of processing
+        """
+        protections = {
+            'encryption_at_rest': self.enable_database_encryption(),
+            'encryption_in_transit': self.enforce_tls_everywhere(),
+            'access_control': self.implement_rbac(),
+            'audit_logging': self.enable_comprehensive_logging(),
+            'data_minimization': self.configure_data_retention(),
+            'pseudonymization': self.implement_data_masking()
+        }
+        return protections
+
+    def handle_data_subject_request(self, request_type, subject_id):
+        """
+        GDPR Articles 15-22 - Data subject rights
+        """
+        if request_type == 'access':  # Article 15
+            return self.export_subject_data(subject_id)
+        elif request_type == 'rectification':  # Article 16
+            return self.correct_subject_data(subject_id)
+        elif request_type == 'erasure':  # Article 17
+            return self.delete_subject_data(subject_id)
+        elif request_type == 'portability':  # Article 20
+            return self.export_portable_data(subject_id)
+```
+
+**SOX Compliance**:
+```sql
+-- SOX compliance audit queries
+
+-- User access audit
+SELECT
+    u.username,
+    u.role,
+    u.last_login,
+    u.password_changed,
+    COUNT(DISTINCT a.action_id) as actions_performed,
+    COUNT(DISTINCT q.question_id) as questions_asked
+FROM tanium.users u
+LEFT JOIN tanium.actions a ON u.user_id = a.created_by
+LEFT JOIN tanium.questions q ON u.user_id = q.created_by
+WHERE u.last_login > CURRENT_DATE - INTERVAL '90 days'
+GROUP BY u.username, u.role, u.last_login, u.password_changed
+ORDER BY u.role, u.username;
+
+-- Privilege changes audit
+SELECT
+    audit_timestamp,
+    performed_by,
+    action_type,
+    target_user,
+    old_role,
+    new_role,
+    justification
+FROM tanium.audit_log
+WHERE action_type IN ('role_change', 'permission_grant', 'permission_revoke')
+AND audit_timestamp > CURRENT_DATE - INTERVAL '365 days'
+ORDER BY audit_timestamp DESC;
+
+-- Configuration changes
+SELECT
+    change_date,
+    changed_by,
+    configuration_item,
+    old_value,
+    new_value,
+    change_ticket,
+    approval_status
+FROM tanium.configuration_changes
+WHERE change_date > CURRENT_DATE - INTERVAL '90 days'
+ORDER BY change_date DESC;
+```
+
+### Integration Patterns
+
+#### SIEM Integration
+
+**Splunk Integration**:
+```python
+class TaniumSplunkConnector:
+    def __init__(self):
+        self.splunk_config = {
+            'host': 'splunk.company.com',
+            'port': 8089,
+            'token': 'your-hec-token',
+            'index': 'tanium',
+            'sourcetype': 'tanium:events'
+        }
+
+    def stream_events_to_splunk(self):
+        """
+        Stream Tanium events to Splunk
+        """
+        event_stream = '''
+        SELECT
+            event_time,
+            event_type,
+            computer_name,
+            user_name,
+            action_taken,
+            result,
+            metadata
+        FROM tanium.security_events
+        WHERE event_time > NOW() - INTERVAL '5 minutes'
+        ORDER BY event_time
+        '''
+
+        for event in self.query_tanium(event_stream):
+            splunk_event = {
+                'time': event['event_time'],
+                'source': 'tanium',
+                'sourcetype': self.splunk_config['sourcetype'],
+                'event': event
+            }
+            self.send_to_splunk(splunk_event)
+
+    def create_splunk_alerts(self):
+        """
+        Define Splunk alerts for Tanium events
+        """
+        alerts = [
+            {
+                'name': 'Critical Patch Missing',
+                'search': 'index=tanium sourcetype="tanium:events" '
+                         'event_type="patch_scan" critical_missing&gt;0',
+                'threshold': 1,
+                'window': '5m'
+            },
+            {
+                'name': 'Suspicious Process',
+                'search': 'index=tanium sourcetype="tanium:events" '
+                         'event_type="process_start" '
+                         'process_name IN ("mimikatz", "psexec", "wmic")',
+                'threshold': 1,
+                'window': '1m'
+            }
+        ]
+        return alerts
+```
+
+#### ServiceNow Integration
+
+**CMDB Synchronization**:
+```javascript
+// ServiceNow Integration Script
+var TaniumCMDBSync = Class.create();
+TaniumCMDBSync.prototype = {
+    initialize: function() {
+        this.taniumAPI = 'https://tanium.company.com/api/v2';
+        this.mapping = {
+            'Computer Name': 'name',
+            'Operating System': 'os',
+            'IP Address': 'ip_address',
+            'Serial Number': 'serial_number',
+            'Model': 'model_id',
+            'Last Seen': 'last_discovered'
+        };
+    },
+
+    syncComputers: function() {
+        var computers = this.getTaniumComputers();
+        var results = {
+            created: 0,
+            updated: 0,
+            errors: 0
+        };
+
+        computers.forEach(function(computer) {
+            try {
+                var ci = this.findOrCreateCI(computer);
+                if (ci.isNewRecord()) {
+                    results.created++;
+                } else {
+                    results.updated++;
+                }
+                this.updateCI(ci, computer);
+            } catch (e) {
+                results.errors++;
+                gs.error('Failed to sync: ' + computer['Computer Name']);
+            }
+        }, this);
+
+        return results;
+    },
+
+    createIncidentFromTanium: function(alert) {
+        var incident = new GlideRecord('incident');
+        incident.initialize();
+        incident.short_description = alert.title;
+        incident.description = alert.description;
+        incident.impact = this.mapSeverity(alert.severity);
+        incident.urgency = this.mapUrgency(alert.severity);
+        incident.assignment_group = 'Security Operations';
+        incident.category = 'Security';
+        incident.subcategory = 'Endpoint';
+        incident.insert();
+        return incident.getUniqueValue();
+    }
+};
+```
+
+---
+
+## 🎓 TCO Certification Exam Preparation
+
+### Exam Format and Structure
+
+**Exam Details**:
+- Duration: 90 minutes
+- Questions: 60-65
+- Passing Score: 70%
+- Format: Multiple choice, multiple select, drag and drop
+- Delivery: Online proctored
+
+**Domain Weightings**:
+1. Asking Questions (22%): 13-14 questions
+2. Refining Questions & Targeting (23%): 14-15 questions
+3. Taking Action (15%): 9-10 questions
+4. Navigation & Modules (23%): 14-15 questions
+5. Reporting & Export (17%): 10-11 questions
+
+### Study Strategy
+
+**12-Week Study Plan**:
+```
+Weeks 1-2: Foundation
+- Platform architecture
+- Core components
+- Basic navigation
+- Lab environment setup
+
+Weeks 3-4: Asking Questions
+- Sensor fundamentals
+- Query syntax
+- Natural language questions
+- Practice labs
+
+Weeks 5-6: Refining & Targeting
+- Advanced filtering
+- Computer groups
+- RBAC configuration
+- Safety procedures
+
+Weeks 7-8: Taking Action
+- Package deployment
+- Action approval
+- Maintenance windows
+- Rollback procedures
+
+Weeks 9-10: Modules & Navigation
+- Core module functions
+- Integration points
+- Advanced features
+- Customization
+
+Weeks 11-12: Reporting & Review
+- Report creation
+- Data export
+- Practice exams
+- Weak area focus
+```
+
+### Practice Questions
+
+<PracticeButton moduleId="foundation" difficulty="certification" />
+
+**Sample Certification Questions**:
+
+1. **What is the default port used for Tanium Client peer-to-peer communication?**
+   - A) 443
+   - B) 17472 ✓
+   - C) 17477
+   - D) 8080
+
+2. **Which component is responsible for aggregating answers before sending to the Tanium Server?**
+   - A) Module Server
+   - B) Zone Server ✓
+   - C) Tanium Client
+   - D) Database Server
+
+3. **In a linear chain, what determines which client becomes a leader?**
+   - A) Random selection
+   - B) First to register
+   - C) Deterministic hash ✓
+   - D) Manual configuration
+
+4. **What is the maximum recommended number of Zone Servers in a linear chain?**
+   - A) 3
+   - B) 5
+   - C) 10 ✓
+   - D) Unlimited
+
+5. **Which database is used by default in Tanium 7.5+?**
+   - A) MySQL
+   - B) SQL Server
+   - C) PostgreSQL ✓
+   - D) Oracle
+
+### Lab Exercises
+
+<InfoBox type="tip">
+**Lab Environment Setup**:
+Minimum requirements for TCO practice lab:
+- 1 Tanium Server (8 CPU, 32GB RAM)
+- 1 Zone Server (4 CPU, 16GB RAM)
+- 10+ Clients (mixed OS)
+- PostgreSQL database
+- 100GB storage
+</InfoBox>
+
+**Lab 1: Platform Installation**
+1. Install Tanium Server on Windows/Linux
+2. Configure PostgreSQL database
+3. Generate and deploy certificates
+4. Install Zone Server
+5. Deploy Tanium Clients
+6. Verify linear chain formation
+
+**Lab 2: High Availability Configuration**
+1. Set up database replication
+2. Configure server clustering
+3. Implement load balancing
+4. Test failover scenarios
+5. Verify client reconnection
+
+**Lab 3: Module Deployment**
+1. License activation
+2. Install core modules
+3. Configure module services
+4. Set up integrations
+5. Verify functionality
+
+---
+
+## 🎯 Certification Success Tips
+
+### Key Areas to Focus
+
+1. **Architecture Understanding**
+   - Know all components and their roles
+   - Understand communication flows
+   - Master port requirements
+   - Learn scaling considerations
+
+2. **Hands-On Experience**
+   - Practice in lab environment
+   - Complete all module tutorials
+   - Work through troubleshooting scenarios
+   - Build muscle memory for common tasks
+
+3. **Concept Mastery**
+   - Linear chain mechanics
+   - Question/answer flow
+   - RBAC and security model
+   - Performance optimization
+
+### Common Exam Mistakes to Avoid
+
+1. **Confusing Component Roles**
+   - Zone Server vs Module Server
+   - Client vs Server responsibilities
+   - Database vs Application tier
+
+2. **Port Number Confusion**
+   - Mixing up 17472, 17473, 17477
+   - Forgetting fallback ports
+   - Missing database ports
+
+3. **Overlooking Best Practices**
+   - Not considering maintenance windows
+   - Ignoring approval workflows
+   - Skipping validation steps
+
+### Final Preparation Checklist
+
+- [ ] Complete all 5 domain study modules
+- [ ] Pass practice exams with 80%+
+- [ ] Hands-on lab experience (40+ hours)
+- [ ] Review official documentation
+- [ ] Understand troubleshooting workflows
+- [ ] Master query syntax
+- [ ] Know module-specific functions
+- [ ] Practice time management
+
+---
+
+<InfoBox type="success">
+**Foundation Module Complete!** You now have a comprehensive understanding of the Tanium platform architecture, components, and enterprise deployment considerations. This foundation is essential for TCO certification success.
+</InfoBox>
+
+<PracticeButton moduleId="platform-foundation" difficulty="final-review" />
+
 *Your Tanium expertise journey begins now! The foundation you've built here will support everything that follows.*
+
+---
+
+## 🔧 Advanced Troubleshooting Guide
+
+### Common Platform Issues and Resolution
+
+#### Client Registration Problems
+
+**Issue: Clients Not Registering**
+```bash
+# Diagnostic Steps
+1. Check client service status
+   Windows: sc query "Tanium Client"
+   Linux: systemctl status taniumclient
+
+2. Verify network connectivity
+   telnet tanium-server.company.com 443
+   telnet peer-client 17472
+
+3. Review client logs
+   Windows: C:\Program Files\Tanium\Tanium Client\Logs\
+   Linux: /var/log/tanium/
+
+4. Check certificate validity
+   openssl x509 -in client.crt -text -noout
+
+5. Verify registration string
+   TaniumClient.exe config get ServerNameList
+```
+
+**Common Causes and Solutions**:
+```python
+def diagnose_registration_failure(client_logs):
+    """
+    Analyze client logs for registration issues
+    """
+    issues = []
+
+    if "Connection refused" in client_logs:
+        issues.append({
+            'problem': 'Connection refused',
+            'causes': [
+                'Firewall blocking port 17472',
+                'Server not listening',
+                'Wrong server address'
+            ],
+            'solutions': [
+                'firewall-cmd --add-port=17472/tcp',
+                'Verify server service running',
+                'Check ServerNameList configuration'
+            ]
+        })
+
+    if "Certificate verification failed" in client_logs:
+        issues.append({
+            'problem': 'Certificate issue',
+            'causes': [
+                'Expired certificate',
+                'Wrong CA certificate',
+                'Certificate mismatch'
+            ],
+            'solutions': [
+                'Regenerate client certificate',
+                'Deploy correct CA certificate',
+                'Verify certificate chain'
+            ]
+        })
+
+    if "Registration timeout" in client_logs:
+        issues.append({
+            'problem': 'Registration timeout',
+            'causes': [
+                'Network latency',
+                'Server overloaded',
+                'Proxy misconfiguration'
+            ],
+            'solutions': [
+                'Increase RegistrationTimeout',
+                'Scale server resources',
+                'Configure proxy bypass'
+            ]
+        })
+
+    return issues
+```
+
+#### Linear Chain Formation Issues
+
+**Troubleshooting Chain Problems**:
+```bash
+#!/bin/bash
+# Linear chain diagnostic script
+
+echo "=== Tanium Linear Chain Diagnostics ==="
+
+# Check local client status
+check_client_status() {
+    echo "Checking client status..."
+
+    # Windows
+    if [[ "$OSTYPE" == "msys" ]]; then
+        tasklist | findstr TaniumClient
+        netstat -an | findstr 17472
+    # Linux
+    else
+        ps aux | grep taniumclient
+        netstat -tuln | grep 17472
+    fi
+}
+
+# Test peer connectivity
+test_peer_connection() {
+    echo "Testing peer connections..."
+
+    # Get peer list from client
+    PEERS=$(TaniumClient config get PeerList)
+
+    for peer in $PEERS; do
+        echo "Testing $peer..."
+        timeout 5 bash -c "echo > /dev/tcp/$peer/17472" 2>/dev/null
+        if [ $? -eq 0 ]; then
+            echo "✓ $peer reachable"
+        else
+            echo "✗ $peer unreachable"
+        fi
+    done
+}
+
+# Analyze chain metrics
+analyze_chain_metrics() {
+    echo "Analyzing chain metrics..."
+
+    # Get chain statistics
+    TaniumClient info | grep -E "Forward|Backward|Leader"
+
+    # Check answer forwarding
+    FORWARD_COUNT=$(TaniumClient stats | grep "Answers Forwarded" | awk '{print $3}')
+    BACKWARD_COUNT=$(TaniumClient stats | grep "Answers Backward" | awk '{print $3}')
+
+    echo "Forward answers: $FORWARD_COUNT"
+    echo "Backward answers: $BACKWARD_COUNT"
+
+    if [ $FORWARD_COUNT -eq 0 ] && [ $BACKWARD_COUNT -eq 0 ]; then
+        echo "WARNING: No answer flow detected - chain may be broken"
+    fi
+}
+
+# Run diagnostics
+check_client_status
+test_peer_connection
+analyze_chain_metrics
+```
+
+#### Performance Degradation
+
+**Performance Troubleshooting Matrix**:
+```python
+class PerformanceTroubleshooter:
+    def __init__(self):
+        self.thresholds = {
+            'query_time': 15,  # seconds
+            'cpu_usage': 80,   # percent
+            'memory_usage': 90, # percent
+            'disk_io': 100,    # MB/s
+            'network_latency': 100  # ms
+        }
+
+    def diagnose_slow_queries(self, metrics):
+        """
+        Diagnose slow query performance
+        """
+        diagnostics = []
+
+        # Check database performance
+        if metrics['db_query_time'] > 1000:  # ms
+            diagnostics.append({
+                'issue': 'Database bottleneck',
+                'impact': 'High',
+                'solutions': [
+                    'VACUUM ANALYZE tanium.questions;',
+                    'REINDEX INDEX CONCURRENTLY idx_questions_created;',
+                    'Increase shared_buffers in postgresql.conf',
+                    'Add more database replicas'
+                ]
+            })
+
+        # Check network latency
+        if metrics['avg_network_latency'] > self.thresholds['network_latency']:
+            diagnostics.append({
+                'issue': 'Network latency',
+                'impact': 'Medium',
+                'solutions': [
+                    'Deploy Zone Servers closer to endpoints',
+                    'Optimize WAN routes',
+                    'Enable network compression',
+                    'Increase ForwardPeriod/BackwardPeriod'
+                ]
+            })
+
+        # Check server resources
+        if metrics['server_cpu'] > self.thresholds['cpu_usage']:
+            diagnostics.append({
+                'issue': 'Server CPU bottleneck',
+                'impact': 'High',
+                'solutions': [
+                    'Scale server vertically (more CPUs)',
+                    'Distribute load with multiple servers',
+                    'Optimize sensor scripts',
+                    'Reduce question frequency'
+                ]
+            })
+
+        return diagnostics
+
+    def optimize_sensor_performance(self, sensor_name, execution_time):
+        """
+        Optimize slow sensor execution
+        """
+        if execution_time > 10000:  # ms
+            optimizations = {
+                'caching': f'''
+                    -- Add sensor caching
+                    UPDATE sensors
+                    SET max_age_seconds = 3600
+                    WHERE name = '{sensor_name}'
+                    AND execution_time_avg > 10000;
+                ''',
+                'script_optimization': '''
+                    # Optimize PowerShell sensor
+                    # Before:
+                    Get-WmiObject Win32_Product | Select Name, Version
+
+                    # After (much faster):
+                    Get-ItemProperty HKLM:\\Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\* |
+                    Select DisplayName, DisplayVersion
+                ''',
+                'parallel_execution': '''
+                    # Enable parallel execution for multi-value sensors
+                    [System.Threading.Tasks.Parallel]::ForEach($items, {
+                        # Process each item
+                    })
+                '''
+            }
+            return optimizations
+```
+
+### Migration Strategies
+
+#### Migrating from SCCM to Tanium
+
+**Migration Planning Framework**:
+```yaml
+SCCM to Tanium Migration:
+  Phase 1 - Assessment (Week 1-2):
+    - Inventory SCCM collections
+    - Document current workflows
+    - Map SCCM features to Tanium modules
+    - Identify integration requirements
+    - Plan coexistence period
+
+  Phase 2 - Tanium Deployment (Week 3-4):
+    - Deploy Tanium infrastructure
+    - Install Tanium clients alongside SCCM
+    - Configure initial modules
+    - Set up basic computer groups
+    - Establish monitoring
+
+  Phase 3 - Parallel Operations (Week 5-8):
+    - Run both systems in parallel
+    - Migrate patch management first
+    - Transfer software deployment
+    - Replicate compliance baselines
+    - Validate data accuracy
+
+  Phase 4 - Cutover (Week 9-10):
+    - Disable SCCM client functions
+    - Complete data migration
+    - Update processes and procedures
+    - Train operations team
+    - Decommission SCCM infrastructure
+```
+
+**SCCM Collection to Computer Group Mapping**:
+```python
+class SCCMToTaniumMigrator:
+    def __init__(self):
+        self.sccm_connection = self.connect_to_sccm()
+        self.tanium_api = self.connect_to_tanium()
+
+    def migrate_collections(self):
+        """
+        Migrate SCCM collections to Tanium computer groups
+        """
+        sccm_collections = self.get_sccm_collections()
+
+        for collection in sccm_collections:
+            # Convert SCCM WQL to Tanium filter
+            tanium_filter = self.convert_wql_to_tanium(collection['query'])
+
+            # Create computer group in Tanium
+            computer_group = {
+                'name': f"Migrated_{collection['name']}",
+                'description': f"Migrated from SCCM: {collection['description']}",
+                'filter': tanium_filter,
+                'type': 'dynamic' if collection['is_dynamic'] else 'manual'
+            }
+
+            self.create_computer_group(computer_group)
+
+            # Validate membership
+            sccm_members = self.get_collection_members(collection['id'])
+            tanium_members = self.get_group_members(computer_group['name'])
+
+            discrepancies = set(sccm_members) - set(tanium_members)
+            if discrepancies:
+                self.log_migration_issue(collection['name'], discrepancies)
+
+    def convert_wql_to_tanium(self, wql_query):
+        """
+        Convert SCCM WQL to Tanium natural language
+        """
+        # Parse WQL
+        # Example: SELECT * FROM SMS_R_System WHERE OperatingSystem LIKE '%Server%'
+
+        conversions = {
+            'SMS_R_System.OperatingSystem': 'Operating System',
+            'SMS_R_System.Name': 'Computer Name',
+            'SMS_R_System.IPAddress': 'IP Address',
+            'SMS_R_System.ADSiteName': 'AD Site Name',
+            'SMS_R_System.SystemOUName': 'Organizational Unit'
+        }
+
+        tanium_filter = wql_query
+        for sccm_prop, tanium_sensor in conversions.items():
+            tanium_filter = tanium_filter.replace(sccm_prop, tanium_sensor)
+
+        # Convert operators
+        tanium_filter = tanium_filter.replace('LIKE', 'contains')
+        tanium_filter = tanium_filter.replace('=', 'equals')
+        tanium_filter = tanium_filter.replace('!=', 'does not equal')
+
+        return tanium_filter
+```
+
+#### Migrating from BigFix to Tanium
+
+**BigFix Fixlet to Tanium Package Conversion**:
+```xml
+<!-- BigFix Fixlet Example -->
+<BES>
+  <Fixlet>
+    <Title>Install Chrome Browser</Title>
+    <Description>Installs Google Chrome</Description>
+    <Relevance>not exists key "Chrome" of registry</Relevance>
+    <Action>
+      <ActionScript>
+        download http://server/chrome.exe
+        wait chrome.exe /silent /install
+      </ActionScript>
+    </Action>
+  </Fixlet>
+</BES>
+```
+
+```python
+def convert_bigfix_to_tanium(fixlet_xml):
+    """
+    Convert BigFix Fixlet to Tanium Package
+    """
+    import xml.etree.ElementTree as ET
+
+    tree = ET.parse(fixlet_xml)
+    root = tree.getroot()
+
+    fixlet = root.find('Fixlet')
+
+    # Create Tanium package structure
+    tanium_package = {
+        'name': fixlet.find('Title').text,
+        'description': fixlet.find('Description').text,
+        'command': convert_actionscript_to_tanium(
+            fixlet.find('Action/ActionScript').text
+        ),
+        'applicability_rule': convert_relevance_to_sensor(
+            fixlet.find('Relevance').text
+        ),
+        'files': extract_downloads(fixlet.find('Action/ActionScript').text)
+    }
+
+    return tanium_package
+
+def convert_relevance_to_sensor(relevance):
+    """
+    Convert BigFix relevance to Tanium sensor
+    """
+    # Map BigFix inspectors to Tanium sensors
+    mappings = {
+        'exists key': 'Registry Value Exists',
+        'exists file': 'File Exists',
+        'version of file': 'File Version',
+        'exists process': 'Running Processes contains'
+    }
+
+    tanium_sensor = relevance
+    for bigfix_term, tanium_term in mappings.items():
+        tanium_sensor = tanium_sensor.replace(bigfix_term, tanium_term)
+
+    return tanium_sensor
+```
+
+### Advanced Deployment Patterns
+
+#### Multi-Tenant Architecture
+
+**Enterprise Multi-Tenant Deployment**:
+```yaml
+Multi-Tenant Tanium Architecture:
+  Shared Infrastructure Model:
+    Central Services:
+      - Shared Tanium Server cluster
+      - Centralized PostgreSQL database
+      - Common certificate authority
+      - Unified console access
+
+    Tenant Isolation:
+      - Dedicated computer groups per tenant
+      - RBAC-enforced boundaries
+      - Separate content sets
+      - Isolated action approval chains
+      - Per-tenant reporting
+
+    Benefits:
+      - Reduced infrastructure costs
+      - Centralized management
+      - Simplified upgrades
+      - Shared threat intelligence
+
+  Dedicated Infrastructure Model:
+    Per-Tenant Components:
+      - Dedicated Tanium Server
+      - Isolated database
+      - Separate Module Servers
+      - Independent Zone Servers
+
+    Integration Layer:
+      - Central reporting aggregation
+      - Unified threat intelligence
+      - Cross-tenant analytics
+      - Consolidated compliance dashboard
+```
+
+**Multi-Tenant RBAC Configuration**:
+```sql
+-- Create tenant isolation in database
+CREATE SCHEMA tenant_a;
+CREATE SCHEMA tenant_b;
+
+-- Tenant-specific tables
+CREATE TABLE tenant_a.computers AS
+SELECT * FROM tanium.computers
+WHERE computer_name LIKE 'TENANT-A-%';
+
+CREATE TABLE tenant_b.computers AS
+SELECT * FROM tanium.computers
+WHERE computer_name LIKE 'TENANT-B-%';
+
+-- Row-level security policies
+CREATE POLICY tenant_isolation_policy ON tanium.computers
+  FOR ALL
+  USING (
+    CASE
+      WHEN current_user = 'tenant_a_user'
+        THEN computer_name LIKE 'TENANT-A-%'
+      WHEN current_user = 'tenant_b_user'
+        THEN computer_name LIKE 'TENANT-B-%'
+      WHEN current_user = 'tanium_admin'
+        THEN true
+      ELSE false
+    END
+  );
+
+-- Enable RLS
+ALTER TABLE tanium.computers ENABLE ROW LEVEL SECURITY;
+```
+
+#### Air-Gapped Deployment
+
+**Disconnected Network Configuration**:
+```python
+class AirGappedTaniumDeployment:
+    def __init__(self):
+        self.deployment_config = {
+            'network_type': 'air-gapped',
+            'update_method': 'manual',
+            'sync_frequency': 'weekly'
+        }
+
+    def prepare_offline_content(self):
+        """
+        Prepare content for air-gapped deployment
+        """
+        offline_package = {
+            'patches': self.download_all_patches(),
+            'sensors': self.export_sensor_definitions(),
+            'packages': self.export_packages(),
+            'intel_docs': self.download_threat_intel(),
+            'certificates': self.generate_offline_certs()
+        }
+
+        # Create encrypted bundle
+        self.create_encrypted_bundle(offline_package)
+
+        return offline_package
+
+    def configure_offline_updates(self):
+        """
+        Configure offline update mechanism
+        """
+        update_script = '''
+        #!/bin/bash
+        # Offline Tanium update script
+
+        MEDIA_PATH="/media/tanium-updates"
+        TANIUM_HOME="/opt/Tanium/TaniumServer"
+
+        # Verify media signature
+        gpg --verify $MEDIA_PATH/signature.asc $MEDIA_PATH/content.tar.gz
+
+        if [ $? -eq 0 ]; then
+            # Extract updates
+            tar -xzf $MEDIA_PATH/content.tar.gz -C /tmp/tanium-update
+
+            # Stop services
+            systemctl stop tanium-server
+
+            # Apply updates
+            cp -r /tmp/tanium-update/sensors/* $TANIUM_HOME/sensors/
+            cp -r /tmp/tanium-update/packages/* $TANIUM_HOME/packages/
+
+            # Update database
+            psql -U tanium -d tanium < /tmp/tanium-update/schema-updates.sql
+
+            # Start services
+            systemctl start tanium-server
+
+            # Verify update
+            $TANIUM_HOME/bin/TaniumServerCLI verify-update
+        else
+            echo "ERROR: Invalid signature on update media"
+            exit 1
+        fi
+        '''
+
+        return update_script
+```
+
+### Advanced Monitoring and Alerting
+
+#### Comprehensive Monitoring Framework
+
+**Monitoring Stack Integration**:
+```yaml
+Tanium Monitoring Stack:
+  Metrics Collection:
+    Prometheus Integration:
+      - Custom Tanium exporter
+      - Metrics endpoint: /metrics
+      - Scrape interval: 30s
+      - Key metrics:
+        - tanium_query_duration_seconds
+        - tanium_active_clients_total
+        - tanium_chain_depth
+        - tanium_answer_rate_per_second
+
+  Visualization:
+    Grafana Dashboards:
+      - Platform Health Dashboard
+      - Client Distribution Map
+      - Query Performance Analytics
+      - Module Activity Monitor
+      - Security Operations Center
+
+  Alerting:
+    Alert Rules:
+      - Client offline > 10%
+      - Query time > 30 seconds
+      - Database connection pool exhausted
+      - Certificate expiry < 30 days
+      - Disk usage > 90%
+```
+
+**Custom Prometheus Exporter**:
+```python
+from prometheus_client import Gauge, Counter, Histogram, start_http_server
+import time
+import psycopg2
+
+class TaniumPrometheusExporter:
+    def __init__(self):
+        # Define metrics
+        self.client_count = Gauge('tanium_clients_total',
+                                 'Total number of Tanium clients',
+                                 ['status'])
+        self.query_duration = Histogram('tanium_query_duration_seconds',
+                                       'Query execution time in seconds')
+        self.action_count = Counter('tanium_actions_total',
+                                   'Total number of actions deployed',
+                                   ['status'])
+        self.chain_depth = Gauge('tanium_chain_depth',
+                               'Current linear chain depth')
+
+    def collect_metrics(self):
+        """
+        Collect metrics from Tanium
+        """
+        while True:
+            # Query Tanium database
+            conn = psycopg2.connect("dbname=tanium user=monitoring")
+            cur = conn.cursor()
+
+            # Client metrics
+            cur.execute("""
+                SELECT
+                    CASE
+                        WHEN last_seen > NOW() - INTERVAL '4 minutes' THEN 'online'
+                        ELSE 'offline'
+                    END as status,
+                    COUNT(*)
+                FROM tanium.computers
+                GROUP BY status
+            """)
+
+            for row in cur.fetchall():
+                self.client_count.labels(status=row[0]).set(row[1])
+
+            # Query performance
+            cur.execute("""
+                SELECT AVG(execution_time_ms) / 1000.0
+                FROM tanium.questions
+                WHERE created_at > NOW() - INTERVAL '5 minutes'
+            """)
+
+            avg_query_time = cur.fetchone()[0]
+            if avg_query_time:
+                self.query_duration.observe(avg_query_time)
+
+            # Action metrics
+            cur.execute("""
+                SELECT status, COUNT(*)
+                FROM tanium.actions
+                WHERE created_at > NOW() - INTERVAL '1 hour'
+                GROUP BY status
+            """)
+
+            for row in cur.fetchall():
+                self.action_count.labels(status=row[0]).inc(row[1])
+
+            conn.close()
+            time.sleep(30)  # Collect every 30 seconds
+
+    def start(self):
+        """
+        Start the exporter
+        """
+        start_http_server(9100)  # Prometheus scraping port
+        self.collect_metrics()
+
+# Run exporter
+if __name__ == '__main__':
+    exporter = TaniumPrometheusExporter()
+    exporter.start()
+```
+
+**Grafana Dashboard JSON**:
+```json
+{
+  "dashboard": {
+    "title": "Tanium Platform Monitoring",
+    "panels": [
+      {
+        "id": 1,
+        "title": "Client Status",
+        "type": "piechart",
+        "targets": [
+          {
+            "expr": "tanium_clients_total",
+            "legendFormat": "{{ status }}"
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "title": "Query Performance (95th percentile)",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "histogram_quantile(0.95, rate(tanium_query_duration_seconds_bucket[5m]))",
+            "legendFormat": "95th percentile"
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "title": "Actions Deployed",
+        "type": "stat",
+        "targets": [
+          {
+            "expr": "sum(rate(tanium_actions_total[1h]))",
+            "legendFormat": "Actions/hour"
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "title": "Linear Chain Depth",
+        "type": "gauge",
+        "targets": [
+          {
+            "expr": "tanium_chain_depth",
+            "legendFormat": "Chain Depth"
+          }
+        ],
+        "thresholds": [
+          {"value": 10, "color": "green"},
+          {"value": 20, "color": "yellow"},
+          {"value": 30, "color": "red"}
+        ]
+      }
+    ]
+  }
+}
+```
+
+### Capacity Planning
+
+#### Sizing Calculator
+
+**Enterprise Capacity Planning Tool**:
+```python
+class TaniumCapacityPlanner:
+    def __init__(self):
+        self.sizing_matrix = {
+            'small': {'endpoints': 5000, 'cpu': 8, 'ram': 32, 'disk': 500},
+            'medium': {'endpoints': 50000, 'cpu': 16, 'ram': 64, 'disk': 1000},
+            'large': {'endpoints': 200000, 'cpu': 32, 'ram': 128, 'disk': 2000},
+            'xlarge': {'endpoints': 1000000, 'cpu': 64, 'ram': 256, 'disk': 5000}
+        }
+
+    def calculate_requirements(self, endpoints, growth_rate, modules):
+        """
+        Calculate infrastructure requirements
+        """
+        # Base requirements
+        base = self.get_base_requirements(endpoints)
+
+        # Growth projection (3 years)
+        future_endpoints = endpoints * (1 + growth_rate) ** 3
+        future_base = self.get_base_requirements(future_endpoints)
+
+        # Module overhead
+        module_overhead = self.calculate_module_overhead(modules)
+
+        # Network requirements
+        network = self.calculate_network_requirements(endpoints)
+
+        # Storage requirements
+        storage = self.calculate_storage_requirements(endpoints, modules)
+
+        requirements = {
+            'current': {
+                'tanium_servers': base['servers'],
+                'zone_servers': base['zones'],
+                'database': base['database'],
+                'total_cpu': base['cpu'],
+                'total_ram': base['ram'],
+                'total_storage': storage['current']
+            },
+            'three_year': {
+                'tanium_servers': future_base['servers'],
+                'zone_servers': future_base['zones'],
+                'database': future_base['database'],
+                'total_cpu': future_base['cpu'],
+                'total_ram': future_base['ram'],
+                'total_storage': storage['projected']
+            },
+            'network': network,
+            'module_requirements': module_overhead
+        }
+
+        return requirements
+
+    def get_base_requirements(self, endpoints):
+        """
+        Calculate base server requirements
+        """
+        if endpoints <= 5000:
+            tier = 'small'
+        elif endpoints <= 50000:
+            tier = 'medium'
+        elif endpoints <= 200000:
+            tier = 'large'
+        else:
+            tier = 'xlarge'
+
+        base = self.sizing_matrix[tier].copy()
+
+        # Calculate number of servers needed
+        servers = 2  # HA pair minimum
+        zones = max(1, endpoints // 25000)  # One zone server per 25k endpoints
+
+        # Database sizing
+        db_cpu = max(8, endpoints // 10000)
+        db_ram = max(32, endpoints // 1000)
+        db_storage = max(500, endpoints // 100)
+
+        return {
+            'servers': servers,
+            'zones': zones,
+            'cpu': base['cpu'] * servers + db_cpu,
+            'ram': base['ram'] * servers + db_ram,
+            'database': {
+                'cpu': db_cpu,
+                'ram': db_ram,
+                'storage': db_storage
+            }
+        }
+
+    def calculate_storage_requirements(self, endpoints, modules):
+        """
+        Calculate detailed storage requirements
+        """
+        # Base storage per component
+        storage = {
+            'tanium_server': 100,  # GB
+            'database': endpoints * 0.01,  # 10MB per endpoint
+            'packages': len(modules) * 10,  # 10GB per module
+            'logs': endpoints * 0.001 * 365,  # 1MB per endpoint per year
+            'backups': 0  # Calculated below
+        }
+
+        # Calculate backup storage (3 generations)
+        storage['backups'] = sum(storage.values()) * 3
+
+        return {
+            'current': sum(storage.values()),
+            'projected': sum(storage.values()) * 1.5,  # 50% growth
+            'breakdown': storage
+        }
+```
+
+### Advanced Lab Exercises
+
+#### Lab 4: Enterprise High Availability
+
+**Objective**: Configure complete HA solution with automatic failover
+
+**Steps**:
+```bash
+# Lab 4: Enterprise HA Configuration
+
+# Step 1: Configure database replication
+sudo -u postgres psql << EOF
+-- On primary server
+CREATE USER replicator REPLICATION LOGIN ENCRYPTED PASSWORD 'secure_password';
+
+-- Configure replication slots
+SELECT pg_create_physical_replication_slot('tanium_standby');
+
+-- Verify replication
+SELECT slot_name, active, restart_lsn
+FROM pg_replication_slots;
+EOF
+
+# Step 2: Setup standby server
+pg_basebackup -h primary-server -U replicator -D /var/lib/postgresql/13/main -P -R
+
+# Step 3: Configure automatic failover with Patroni
+cat > /etc/patroni/patroni.yml << EOF
+scope: tanium-cluster
+namespace: /service/
+name: tanium-db-1
+
+restapi:
+  listen: 0.0.0.0:8008
+  connect_address: $(hostname -i):8008
+
+etcd:
+  hosts: etcd1:2379,etcd2:2379,etcd3:2379
+
+bootstrap:
+  dcs:
+    ttl: 30
+    loop_wait: 10
+    retry_timeout: 10
+    maximum_lag_on_failover: 1048576
+  initdb:
+    - encoding: UTF8
+    - data-checksums
+  pg_hba:
+    - host replication replicator 0.0.0.0/0 md5
+    - host all all 0.0.0.0/0 md5
+
+postgresql:
+  listen: 0.0.0.0:5432
+  connect_address: $(hostname -i):5432
+  data_dir: /var/lib/postgresql/13/main
+  authentication:
+    replication:
+      username: replicator
+      password: secure_password
+    superuser:
+      username: postgres
+      password: admin_password
+  parameters:
+    max_connections: 500
+    shared_buffers: 8GB
+    effective_cache_size: 24GB
+    maintenance_work_mem: 2GB
+EOF
+
+# Step 4: Configure HAProxy load balancing
+cat > /etc/haproxy/haproxy.cfg << EOF
+global
+    maxconn 500
+
+defaults
+    mode tcp
+    timeout connect 10s
+    timeout client 30m
+    timeout server 30m
+
+listen tanium_cluster
+    bind *:5000
+    option httpchk GET /master
+    http-check expect status 200
+    default-server inter 3s fall 3 rise 2 on-marked-down shutdown-sessions
+    server db1 10.1.1.10:5432 maxconn 100 check port 8008
+    server db2 10.1.1.11:5432 maxconn 100 check port 8008
+    server db3 10.1.1.12:5432 maxconn 100 check port 8008
+EOF
+
+# Step 5: Test failover
+systemctl stop postgresql@13-main
+sleep 30
+psql -h localhost -p 5000 -U tanium -c "SELECT pg_is_in_recovery();"
+```
+
+**Expected Results**:
+- Automatic failover within 30 seconds
+- Zero data loss (RPO = 0)
+- Client connections automatically redirected
+- No manual intervention required
+
+#### Lab 5: Security Hardening
+
+**Objective**: Implement enterprise security controls
+
+**Implementation**:
+```python
+#!/usr/bin/env python3
+"""
+Lab 5: Tanium Security Hardening Script
+"""
+
+import os
+import subprocess
+import ssl
+import hashlib
+
+class TaniumSecurityHardening:
+    def __init__(self):
+        self.config_path = '/etc/tanium'
+        self.ssl_path = '/etc/tanium/ssl'
+
+    def harden_ssl_configuration(self):
+        """
+        Configure strong SSL/TLS settings
+        """
+        ssl_config = """
+        # Tanium SSL Configuration
+        SSLProtocol -all +TLSv1.2 +TLSv1.3
+        SSLCipherSuite ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384
+        SSLHonorCipherOrder On
+        SSLCompression off
+        SSLSessionTickets off
+
+        # OCSP Stapling
+        SSLUseStapling on
+        SSLStaplingResponderTimeout 5
+        SSLStaplingReturnResponderErrors off
+        """
+
+        with open(f'{self.config_path}/ssl.conf', 'w') as f:
+            f.write(ssl_config)
+
+        # Generate strong DH parameters
+        subprocess.run(['openssl', 'dhparam', '-out',
+                       f'{self.ssl_path}/dhparam.pem', '4096'])
+
+    def implement_certificate_pinning(self):
+        """
+        Implement certificate pinning for client connections
+        """
+        # Extract certificate fingerprint
+        cert_path = f'{self.ssl_path}/tanium-server.crt'
+        with open(cert_path, 'rb') as f:
+            cert_data = f.read()
+
+        # Calculate SHA256 fingerprint
+        fingerprint = hashlib.sha256(cert_data).hexdigest()
+
+        # Configure client certificate pinning
+        pinning_config = f"""
+        [Security]
+        CertificatePinning=true
+        PinnedCertificates={fingerprint}
+        EnforcePinning=true
+        PinningFailureAction=Reject
+        """
+
+        with open(f'{self.config_path}/pinning.conf', 'w') as f:
+            f.write(pinning_config)
+
+    def configure_selinux_policy(self):
+        """
+        Configure SELinux policy for Tanium
+        """
+        selinux_policy = """
+        module tanium 1.0;
+
+        require {
+            type tanium_t;
+            type tanium_port_t;
+            type tanium_log_t;
+            type tanium_config_t;
+            class tcp_socket { bind connect listen accept };
+            class file { read write create unlink };
+            class dir { read write add_name remove_name };
+        }
+
+        # Allow Tanium to bind to its ports
+        allow tanium_t tanium_port_t:tcp_socket { bind listen accept };
+
+        # Allow Tanium to manage its files
+        allow tanium_t tanium_config_t:file { read write };
+        allow tanium_t tanium_log_t:file { read write create unlink };
+        allow tanium_t tanium_log_t:dir { read write add_name remove_name };
+        """
+
+        # Compile and install policy
+        with open('/tmp/tanium.te', 'w') as f:
+            f.write(selinux_policy)
+
+        subprocess.run(['checkmodule', '-M', '-m', '-o',
+                       '/tmp/tanium.mod', '/tmp/tanium.te'])
+        subprocess.run(['semodule_package', '-o',
+                       '/tmp/tanium.pp', '-m', '/tmp/tanium.mod'])
+        subprocess.run(['semodule', '-i', '/tmp/tanium.pp'])
+
+    def enable_audit_logging(self):
+        """
+        Configure comprehensive audit logging
+        """
+        audit_rules = """
+        # Tanium audit rules
+        -w /opt/Tanium/ -p wa -k tanium_changes
+        -w /etc/tanium/ -p wa -k tanium_config
+        -a always,exit -F path=/usr/bin/TaniumClient -F perm=x -k tanium_exec
+        -a always,exit -F arch=b64 -S connect -F a0=17472 -k tanium_network
+        """
+
+        with open('/etc/audit/rules.d/tanium.rules', 'w') as f:
+            f.write(audit_rules)
+
+        # Restart auditd
+        subprocess.run(['systemctl', 'restart', 'auditd'])
+
+    def run_security_scan(self):
+        """
+        Run security compliance scan
+        """
+        scan_results = {
+            'ssl_configuration': self.verify_ssl_config(),
+            'certificate_validity': self.check_certificates(),
+            'file_permissions': self.audit_file_permissions(),
+            'network_exposure': self.scan_network_exposure(),
+            'authentication': self.verify_authentication()
+        }
+
+        return scan_results
+
+# Execute hardening
+if __name__ == '__main__':
+    hardener = TaniumSecurityHardening()
+    hardener.harden_ssl_configuration()
+    hardener.implement_certificate_pinning()
+    hardener.configure_selinux_policy()
+    hardener.enable_audit_logging()
+    results = hardener.run_security_scan()
+    print(f"Security hardening complete: {results}")
+```
+
+---
+
+## 🚀 Mini-Project: Map Your Network
+
+Apply your foundation knowledge in a practical scenario.
+
+<MiniProject
+  title="Network Discovery & Architecture Mapping"
+  description="Use your understanding of Tanium's architecture to design a deployment strategy for a fictional enterprise network."
+  estimatedTime="30 minutes"
+  difficulty="beginner"
+  objectives={[
+    "Apply linear chain technology concepts to a real scenario",
+    "Identify key sensors needed for network discovery",
+    "Design basic queries for system inventory",
+    "Understand console navigation requirements",
+    "Plan for network efficiency at scale"
+  ]}
+  tasks={[
+    {
+      id: "task1",
+      title: "Map the Network Topology",
+      description: "Design how Tanium's linear chain would work in a network with 5,000 endpoints across 3 locations.",
+      hints: [
+        "Consider how endpoints would form chains within each location",
+        "Think about WAN links between locations",
+        "Remember that network load remains constant"
+      ],
+      validation: "Document should show chains forming within subnets first"
+    },
+    {
+      id: "task2",
+      title: "Identify Essential Sensors",
+      description: "List the top 10 sensors you would use for initial network discovery and inventory.",
+      hints: [
+        "Start with basic identification sensors",
+        "Include both hardware and software sensors",
+        "Consider security-relevant sensors"
+      ],
+      validation: "Must include Computer Name, IP Address, Operating System, and Installed Applications"
+    },
+    {
+      id: "task3",
+      title: "Write Basic Discovery Queries",
+      description: "Create 5 Tanium queries to discover: all Windows servers, all laptops, machines with low disk space, machines missing antivirus, and high CPU usage systems.",
+      hints: [
+        "Use 'Get Computer Name from all machines where...' format",
+        "Remember to use 'contains' for partial matches",
+        "Use comparison operators for numeric values"
+      ],
+      validation: "Queries must follow proper Tanium syntax"
+    },
+    {
+      id: "task4",
+      title: "Plan Console Access Structure",
+      description: "Design a role-based access plan with at least 3 different user roles and their console permissions.",
+      hints: [
+        "Consider IT operations, security team, and management roles",
+        "Think about who needs to run queries vs just view results",
+        "Remember the principle of least privilege"
+      ],
+      validation: "Must include Administrator, Operator, and Read-Only roles minimum"
+    },
+    {
+      id: "task5",
+      title: "Calculate Network Impact",
+      description: "Estimate the network bandwidth usage for your 5,000 endpoint deployment during peak query times.",
+      hints: [
+        "Remember Tanium uses less than 0.1% bandwidth typically",
+        "Consider your available WAN bandwidth",
+        "Factor in the 15-second query response time"
+      ],
+      validation: "Calculation should show minimal impact even during peak usage"
+    }
+  ]}
+  successCriteria={[
+    "All 5 tasks completed with proper documentation",
+    "Queries follow correct Tanium syntax",
+    "Network design leverages linear chain benefits",
+    "Role-based access follows security best practices",
+    "Demonstrates understanding of Tanium's efficiency"
+  ]}
+/>
+
+## 📝 Foundation Knowledge Checkpoint
+
+Before moving on to the next module, let's ensure you've mastered the foundational concepts.
+
+<SkillGate
+  title="Foundation Module Checkpoint"
+  requiredScore={80}
+  nextSection="Module 01: Asking Questions"
+  questions={[
+    {
+      question: "What is the primary advantage of Tanium's Linear Chain Technology?",
+      options: [
+        "It requires more servers for redundancy",
+        "It maintains constant network load regardless of endpoint count",
+        "It stores more historical data",
+        "It uses encrypted databases"
+      ],
+      correctAnswer: 1,
+      explanation: "Linear Chain Technology ensures network load remains constant as endpoints scale, unlike hub-and-spoke architectures."
+    },
+    {
+      question: "In a Tanium environment with 100,000 endpoints, how long does it typically take to get query results?",
+      options: [
+        "Several hours",
+        "30-60 minutes",
+        "15 seconds",
+        "5-10 minutes"
+      ],
+      correctAnswer: 2,
+      explanation: "Tanium's architecture delivers results in approximately 15 seconds, regardless of scale."
+    },
+    {
+      question: "What is the basic format of a Tanium question?",
+      options: [
+        "SELECT [data] FROM [computers] WHERE [condition]",
+        "Get [sensor] from [targets] where [filters]",
+        "QUERY [information] ON [machines] IF [criteria]",
+        "FETCH [results] FROM [endpoints] WHEN [condition]"
+      ],
+      correctAnswer: 1,
+      explanation: "Tanium uses natural language format: Get [sensor] from [targets] where [filters]"
+    },
+    {
+      question: "Which component collects specific types of information from endpoints?",
+      options: [
+        "Actions",
+        "Packages",
+        "Sensors",
+        "Modules"
+      ],
+      correctAnswer: 2,
+      explanation: "Sensors are the components that collect specific types of information from endpoints."
+    },
+    {
+      question: "What is the typical network bandwidth utilization for Tanium?",
+      options: [
+        "10-15% of available bandwidth",
+        "5-10% of available bandwidth",
+        "Less than 0.1% of bandwidth",
+        "2-5% of available bandwidth"
+      ],
+      correctAnswer: 2,
+      explanation: "Tanium typically uses less than 0.1% of network bandwidth due to its efficient architecture."
+    }
+  ]}
+/>
+
+---
+
+## 🎯 Foundation Module Complete
+
+You've successfully completed the comprehensive Tanium Platform Foundation module! This enterprise-grade foundation prepares you for advanced platform management and TCO certification success.
+
+**Key Takeaways**:
+- Master understanding of linear chain architecture
+- Complete platform component knowledge
+- Enterprise deployment patterns
+- Advanced troubleshooting capabilities
+- Security hardening expertise
+- Migration and integration strategies
+
+**Next Steps**: Continue to [Domain 1: Asking Questions →](/study/asking-questions)
+
+<InfoBox type="success">
+**Foundation Complete!** With 3000+ lines of enterprise content, you're fully prepared for the TCO certification journey ahead.
+</InfoBox>

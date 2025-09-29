@@ -26,6 +26,14 @@ import path from 'node:path';
 import matter from 'gray-matter';
 import { createClient } from '@supabase/supabase-js';
 import { parseArgs } from 'node:util';
+import crypto from 'node:crypto';
+import dotenv from 'dotenv';
+
+// Load env from .env.local if present
+try {
+  const envPath = path.join(process.cwd(), '.env.local');
+  dotenv.config({ path: envPath });
+} catch {}
 
 // Terminal colors for better output
 const colors = {
@@ -54,6 +62,22 @@ type CLIOptions = {
   verbose: boolean;
   help: boolean;
 };
+
+// Generate a deterministic UUID from a string ID
+function generateDeterministicUUID(id: string): string {
+  // Create a namespace UUID (using a fixed namespace for TCO modules)
+  const namespace = '6ba7b810-9dad-11d1-80b4-00c04fd430c8'; // Standard namespace UUID
+  const hash = crypto.createHash('sha256').update(namespace + id).digest('hex');
+
+  // Format as UUID v4
+  return [
+    hash.substring(0, 8),
+    hash.substring(8, 12),
+    '4' + hash.substring(13, 16), // Version 4
+    ((parseInt(hash.substring(16, 18), 16) & 0x3f) | 0x80).toString(16) + hash.substring(18, 20), // Variant
+    hash.substring(20, 32)
+  ].join('-');
+}
 
 function printHelp(): void {
   console.log(`
@@ -222,6 +246,15 @@ async function main() {
   const serviceKey = assertEnv('SUPABASE_SERVICE_ROLE_KEY');
   const supabase = createClient(supabaseUrl, serviceKey);
 
+  // Detect optional columns
+  let supportsMdxId = true;
+  try {
+    const test = await supabase.from('study_modules').select('mdx_id').limit(1);
+    if (test.error) supportsMdxId = false;
+  } catch {
+    supportsMdxId = false;
+  }
+
   const dir = path.join(process.cwd(), 'src', 'content', 'modules');
   const files = fs.readdirSync(dir).filter((f) => f.endsWith('.mdx'));
 
@@ -241,7 +274,7 @@ async function main() {
     const raw = fs.readFileSync(full, 'utf8');
     const { data: fm, content } = matter(raw);
 
-    const id: string = String(fm.id || '').trim();
+    const mdxId: string = String(fm.id || '').trim();
     const title: string = String(fm.title || path.basename(f, '.mdx'));
     const rawDomain: string = String(fm.domainEnum || fm.domainSlug || fm.domain || 'unknown');
     const domain = formatDomain(rawDomain);
@@ -257,21 +290,27 @@ async function main() {
 
     const description: string | null = fm.description ? String(fm.description) : null;
     const weightRaw = typeof fm.blueprintWeight === 'number' ? fm.blueprintWeight : undefined;
-    const examWeight = weightRaw && weightRaw <= 1 ? Math.round(weightRaw * 100) : weightRaw || 0;
+    let examWeight = weightRaw && weightRaw <= 1 ? Math.round(weightRaw * 100) : weightRaw || 0;
+    // Ensure exam_weight is at least 1 for database constraint
+    if (examWeight === 0) examWeight = 1;
     const est = parseEstimatedMinutes(fm.estimatedTime);
     const learningObjectives: string[] = Array.isArray(fm.learningObjectives)
       ? fm.learningObjectives
       : (Array.isArray(fm.objectives) ? fm.objectives : []);
     const version = String(fm.version || '1');
 
-    if (!id) {
+    if (!mdxId) {
       console.warn(`${colors.yellow}⚠️  Skipping ${f}: missing id in frontmatter${colors.reset}`);
       skippedCount++;
       continue;
     }
 
-    console.log(`\n${colors.cyan}📦 Processing module:${colors.reset} ${colors.bright}${id}${colors.reset} (${title})`);
+    // Generate UUID from the MDX ID for database
+    const id = generateDeterministicUUID(mdxId);
+
+    console.log(`\n${colors.cyan}📦 Processing module:${colors.reset} ${colors.bright}${mdxId}${colors.reset} (${title})`);
     console.log(`   ${colors.dim}Domain: ${domain}${colors.reset}`);
+    console.log(`   ${colors.dim}UUID: ${id}${colors.reset}`);
 
     if (options.verbose) {
       console.log(`   ${colors.dim}Description: ${description || 'None'}${colors.reset}`);
@@ -310,8 +349,9 @@ async function main() {
         estimated_time_minutes: est ?? null,
         learning_objectives: learningObjectives,
         references: [],
-        exam_prep: [],
+        exam_prep: {},
         version,
+        ...(supportsMdxId ? { mdx_id: mdxId } : {}),
         updated_at: new Date().toISOString(),
       };
 
@@ -352,7 +392,7 @@ async function main() {
         content: s.content,
         section_type: s.type,
         order_index: s.order,
-        estimated_time_minutes: s.estimated ?? null,
+        estimated_time_minutes: s.estimated ?? 10, // Default to 10 minutes if not specified
         key_points: s.keyPoints || [],
         procedures: [],
         troubleshooting: [],

@@ -14,8 +14,13 @@ import fs from 'fs';
 import path from 'path';
 import dotenv from 'dotenv';
 import { Client } from 'pg';
+import dns from 'node:dns/promises';
+import { setDefaultResultOrder } from 'dns';
 
 dotenv.config({ path: path.join(process.cwd(), '.env.local') });
+
+// Prefer IPv4 to avoid IPv6 connectivity issues in some environments
+try { setDefaultResultOrder('ipv4first'); } catch {}
 
 function parseArgs(argv: string[]): { file?: string } {
   const out: { file?: string } = {};
@@ -53,8 +58,27 @@ async function main() {
 
   const sql = fs.readFileSync(filePath, 'utf8');
 
-  const client = new Client({ connectionString: conn, ssl, statement_timeout: 0 });
   console.log(`Applying SQL file: ${path.relative(process.cwd(), filePath)}`);
+  // Parse connection string to force IPv4 if needed
+  let client: Client | null = null;
+  try {
+    const u = new URL(conn);
+    const host = u.hostname;
+    const port = Number(u.port || 5432);
+    const user = decodeURIComponent(u.username);
+    const password = decodeURIComponent(u.password);
+    const database = decodeURIComponent(u.pathname.replace(/^\//, ''));
+    let hostAddr = host;
+    try {
+      const v4 = await dns.lookup(host, { family: 4 });
+      hostAddr = v4.address || host;
+    } catch {}
+    client = new Client({ host: hostAddr, port, user, password, database, ssl, statement_timeout: 0 as any });
+  } catch {
+    // Fallback: use connection string as-is
+    client = new Client({ connectionString: conn, ssl, statement_timeout: 0 as any });
+  }
+
   try {
     await client.connect();
     await client.query('BEGIN');
@@ -71,4 +95,3 @@ async function main() {
 }
 
 main();
-

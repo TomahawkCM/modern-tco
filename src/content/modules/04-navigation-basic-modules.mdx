@@ -114,6 +114,54 @@ The Tanium console follows a hierarchical navigation structure designed for rapi
   Practice Console Navigation
 </PracticeButton>
 
+---
+
+## Visual Appendix
+
+### Console Architecture Overview
+
+```mermaid
+graph LR
+  UI[Console UI] --> Interact
+  UI --> Trends
+  UI --> Reporting
+  UI --> Connect
+  Interact -- Live Questions --> Clients[Endpoints]
+  Trends -- Historical Data --> Store[(Data Store)]
+  Reporting -- Dashboards --> Stakeholders
+  Connect -- Pipelines --> External[External Systems]
+```
+
+### Module Data Flow
+
+```mermaid
+flowchart TD
+  Q[Question] --> L[Live Results]
+  L --> T[Trends Persistence]
+  T --> D[Dashboards]
+  D --> E[Exports]
+  E --> X[External BI/Storage]
+```
+
+### Administrative Workflow
+
+```mermaid
+flowchart LR
+  A[Request Access] --> B[Role Assignment]
+  B --> C[Content Set Mapping]
+  C --> D[Review + Attestation]
+  D --> E[Adjustment/Removal]
+```
+
+### Module Feature Quick Map
+
+| Module | Primary Purpose | Live vs Historic | Typical Outputs | Notes |
+|---|---|---|---|---|
+| Interact | Live inquiry | Live | Tables | Great for exploration |
+| Trends | Time-series | Historic | Panels/Alerts | Baselines and alerts |
+| Reporting | Communication | Both | Dashboards/Exports | Audience-focused |
+| Connect | Integration | N/A | Pipelines | Data movement/governance |
+
 #### Widget Configuration and Dashboard Layouts
 
 **Dashboard Design Principles**
@@ -156,7 +204,7 @@ Understanding when to use each module is crucial for efficient operations and ex
 4. **Documentation**: Save significant findings as saved questions
 
 <InfoBox title="Interact Performance Tip">
-  Interact questions run against live endpoints. Large-scale questions (>10,000 endpoints)
+  Interact questions run against live endpoints. Large-scale questions (&gt;10,000 endpoints)
   should use question scheduling or be broken into smaller batches to avoid performance
   impact. Use computer groups to scope questions appropriately.
 </InfoBox>
@@ -249,6 +297,19 @@ Understanding when to use each module is crucial for efficient operations and ex
    - Create panels for CPU, memory, and disk utilization
    - Set performance thresholds based on historical data
    - Validate alert conditions with test scenarios
+
+<QueryPlayground
+  id="navigation-practice-1"
+  title="Practice: Module Selection Decision Tree"
+  description="Given various scenarios, select the most appropriate Tanium module and explain your reasoning."
+  initialQuery="Which module would you use to investigate a security incident that happened 3 days ago?"
+  expectedAnswers={[
+    "Trends Module - For historical analysis of security events that occurred in the past",
+    "Look for time-series data showing the incident timeline and impact scope"
+  ]}
+  difficulty="intermediate"
+  category="Module Selection"
+/>
 
 2. **Connect Phase**: Integrate with service management
    - Configure Connect to create tickets for threshold violations
@@ -1115,6 +1176,13 @@ Higher-order thinking and business alignment:
 - **Monitoring Scripts**: Automated performance tracking and alerting solutions
 - **Training Materials**: Comprehensive resources for team education and knowledge transfer
 
+<ModuleTransition
+  currentModule="navigation-basic-modules"
+  nextModule="reporting-data-export"
+  celebrationType="major"
+  customMessage="Outstanding work! You've mastered navigation and the four core modules, which represents 23% of the TCO exam. Your expertise in module selection and workflow optimization will be critical for certification success!"
+/>
+
 ---
 
 # Labs
@@ -1283,3 +1351,997 @@ The expanded lab sequence provides hands-on experience with all aspects of conso
 - Integration of new features and capabilities
 - User feedback collection and implementation
 - Performance tracking and optimization over time
+
+---
+
+## Section 6: Administrative Workflows (40 minutes)
+
+<InfoBox title="Scope">
+  Administrative workflows ensure the platform remains secure, performant, and audit-ready. These tasks
+  often require elevated roles and strict change control.
+</InfoBox>
+
+### User Management Procedures
+
+- User onboarding checklist
+  1) Verify business need and content set scope
+  2) Create user or federate via SSO
+  3) Assign role(s) based on least privilege
+  4) Add to appropriate content sets (Interact/Trends/Reporting/Connect)
+  5) Provide training resources and owner contact
+
+- Role lifecycle management
+  - Quarterly role review and attestation
+  - Temporary elevated access for change windows only
+  - Remove dormant accounts; rotate service account credentials
+
+- Access troubleshooting
+  - Map permission errors to role/content set gaps
+  - Use audit logs to verify access attempts and denials
+
+### System Configuration
+
+- Platform settings
+  - Time zone, localization, notification defaults
+  - Data retention policies per module
+  - Client communication and proxy settings
+
+- Security configuration
+  - SSO/OIDC/SAML setup with group mappings
+  - Certificate management and key rotation
+  - Logging destinations and SIEM integrations
+
+- Performance configuration
+  - Indexing and caching policies for high-volume datasets
+  - Scheduled maintenance windows and job staggering
+  - Concurrency limits and queue priorities
+
+### Backup and Recovery
+
+- Configuration export cadence (weekly) and secure storage
+- Runbook for disaster recovery (RPO/RTO targets defined)
+- Validation drills: periodic restore in staging environment
+- Post-restore verification checklist (roles, content sets, pipelines)
+
+### Maintenance Tasks
+
+- Quarterly cleanup
+  - Archive stale saved questions, panels, and dashboards
+  - Retire unused Connect pipelines and rotate tokens
+  - Reindex frequently queried datasets
+
+- Health checks
+  - Monitor client check-ins, action queues, and error rates
+  - Validate scheduled jobs and report deliveries
+  - Track capacity metrics (storage, CPU, memory)
+
+<PracticeButton
+  moduleId="module-navigation-basic-modules"
+  domainEnum="NAVIGATION_MODULES"
+  targetTags={["Administration", "Users", "Configuration", "Maintenance", "Backup"]}
+  objectiveIds={["obj-admin-workflows"]}
+  difficulty="advanced"
+>
+  Practice Administrative Workflows
+  </PracticeButton>
+
+---
+
+## Section 7: Integration Strategies (30 minutes)
+
+<InfoBox title="Module interconnections">
+  Interact produces live datasets; Trends persists historical aggregates; Reporting packages insights
+  for stakeholders; Connect moves data across system boundaries. Design flows that respect each
+  module's strengths.
+</InfoBox>
+
+### Interconnection Patterns
+
+- Interact → Trends: promote recurring questions to historical monitoring
+- Trends → Reporting: convert panels to stakeholder dashboards
+- Interact → Reporting: ad-hoc findings summarized for leadership
+- Trends → Connect: stream curated time-series to warehouses/SIEM
+- Connect → Reporting: enrich dashboards with third-party metrics
+
+### Data Flow and Governance
+
+- Establish data ownership and stewards for each domain
+- Define PII handling and minimization in Connect exports
+- Version schemas and maintain transformation documentation
+- Implement quality checks at panel/report/pipeline boundaries
+
+### Optimization Techniques
+
+- Use saved questions as cache layers for expensive logic
+- Align refresh schedules to avoid contention and load spikes
+- Partition large datasets by region/BU for better parallelism
+- Measure end-to-end latency and failure modes per flow
+
+---
+
+## Section 8: Best Practices and Pitfalls (20 minutes)
+
+### Organizational Best Practices
+
+1) Least privilege with clear ownership and review cadence
+2) Standard naming conventions across questions, panels, and reports
+3) Template libraries for repeatable workflows and visuals
+4) Ring-based deployment for changes to data collection/exports
+5) Documentation embedded close to the object (descriptions, links)
+6) Health dashboards for platform and pipeline monitoring
+7) Scheduled hygiene: archive, rotate, reindex, and validate
+8) Cross-team change windows and comms playbooks
+9) Post-incident reviews feeding into configuration improvements
+10) Regular training on shortcuts, efficiency, and safety
+
+### Common Pitfalls (and Fixes)
+
+- Over-scoped permissions → tighten content sets; add reviewer roles
+- Ad-hoc queries at fleet scale → scope with groups; validate on pilots
+- Dashboard sprawl → enforce owner + last-reviewed metadata; archive policy
+- No rollback for pipeline changes → versioned configs; staged promotion
+- Alert fatigue in Trends → tune thresholds; require owner and runbooks
+- Connect schema drift → contract tests; schema registry; change control
+- Unlabeled risk → labels/tags on groups and reports; risk register
+- Single maintainer knowledge silo → shared templates and documentation
+
+<InfoBox title="Quick win">
+  Add owners and review dates to the top 20 saved questions, panels, dashboards, and pipelines this
+  week. Most navigation and reliability issues trace back to unlabeled or unowned content.
+</InfoBox>
+
+---
+
+## Quick Interactive Drills
+
+### Navigation Exercises
+
+1) Switch between Interact and Trends using keyboard only; open, run, and save a question in 90 seconds
+2) Create a two-panel workspace and bind a filter across both panels
+3) Bookmark five deep-linked views and organize them into a workflow folder
+
+### Module Exploration Labs
+
+1) Build a Trends panel from a saved question; add an alert and document the runbook
+2) Create a lightweight Connect pipeline exporting a curated dataset; validate schema and filters
+3) Publish a reporting dashboard for a BU with an executive summary and drill-downs
+
+<PracticeButton
+  moduleId="module-navigation-basic-modules"
+  domainEnum="NAVIGATION_MODULES"
+  targetTags={["Navigation", "Integrations", "BestPractices", "Exercises"]}
+  objectiveIds={["obj-console-mastery", "obj-module-selection", "obj-admin-workflows"]}
+  difficulty="intermediate"
+>
+  Start Quick Drills
+</PracticeButton>
+
+---
+
+## Section 9: Enterprise Console Operations (45 minutes)
+
+### Advanced Console Architecture
+
+#### Multi-Tenant Considerations
+
+**Tenant Isolation Architecture**
+- **Data Segregation**: Complete separation of tenant data at database level
+- **Role Boundaries**: Tenant-specific role hierarchies preventing cross-access
+- **Resource Quotas**: CPU, memory, and storage limits per tenant
+- **Network Segmentation**: Isolated network paths for tenant communications
+
+**Cross-Tenant Management**
+1. **Global Administrator View**: Unified dashboard showing all tenant health metrics
+2. **Tenant Switching**: Rapid context switching with preserved session state
+3. **Bulk Operations**: Apply configurations across multiple tenants simultaneously
+4. **Compliance Reporting**: Aggregate compliance posture across all tenants
+
+<InfoBox title="Multi-Tenant Security">
+  Always verify tenant context before executing administrative actions. Implement
+  additional confirmation dialogs for operations that affect multiple tenants.
+  Use audit logging to track all cross-tenant activities for compliance purposes.
+</InfoBox>
+
+#### Console Performance at Scale
+
+**Large Enterprise Optimization (10,000+ Endpoints)**
+- **Question Sharding**: Automatic distribution across multiple platform servers
+- **Result Aggregation**: Hierarchical collection through zone servers
+- **Cache Strategies**: Multi-tier caching for frequently accessed data
+- **Load Balancing**: Round-robin and weighted distribution algorithms
+
+**Performance Monitoring Dashboard**
+```
+Key Metrics to Track:
+- Average question response time (target: &lt;30 seconds)
+- Panel render time (target: &lt;5 seconds)
+- Concurrent user sessions (monitor for capacity planning)
+- Database query latency (target: &lt;100ms for indexed queries)
+- Network throughput utilization (alert at 80% capacity)
+- Memory pressure indicators (warning at 75%, critical at 90%)
+```
+
+#### High Availability Configuration
+
+**Console Redundancy Architecture**
+1. **Active-Active Setup**: Multiple console servers with shared state
+2. **Session Persistence**: Sticky sessions with failover capability
+3. **Database Clustering**: Multi-master replication for zero downtime
+4. **Load Balancer Configuration**: Health checks and automatic failover
+
+**Disaster Recovery Procedures**
+- **RPO Target**: 15 minutes maximum data loss
+- **RTO Target**: 2 hours maximum recovery time
+- **Backup Strategy**: Hourly snapshots with offsite replication
+- **Failover Testing**: Monthly DR drills with documented procedures
+
+### Console Security Hardening
+
+#### Authentication and Authorization Enhancement
+
+**Multi-Factor Authentication (MFA)**
+- **TOTP Integration**: Time-based one-time passwords via authenticator apps
+- **Hardware Tokens**: YubiKey and smartcard support
+- **Biometric Options**: Fingerprint and facial recognition for mobile access
+- **Adaptive Authentication**: Risk-based challenges for suspicious activities
+
+**Role-Based Access Control (RBAC) Advanced Configuration**
+```powershell
+# Advanced RBAC Configuration Script
+$advancedRole = @{
+    Name = "SecurityAnalyst_Tier2"
+    Permissions = @(
+        "interact.read",
+        "interact.write.scoped",
+        "trends.read",
+        "reporting.read",
+        "connect.read"
+    )
+    ContentSets = @(
+        "Security_Investigations",
+        "Threat_Intelligence"
+    )
+    TimeRestriction = "BusinessHours"
+    IPRestriction = "10.0.0.0/8"
+    MFARequired = $true
+}
+
+New-TaniumRole @advancedRole
+```
+
+#### Audit and Compliance Features
+
+**Comprehensive Audit Logging**
+- **User Actions**: Every click, query, and configuration change
+- **System Events**: Logins, logouts, permission changes, errors
+- **Data Access**: Record of all data viewed or exported
+- **Integration Events**: External system connections and data transfers
+
+**Compliance Reporting Templates**
+1. **GDPR Compliance**: Data access logs with purpose documentation
+2. **HIPAA Compliance**: PHI access tracking with encryption verification
+3. **PCI-DSS Compliance**: Cardholder data environment monitoring
+4. **SOC 2 Compliance**: Security control effectiveness reports
+
+### Advanced Console Customization
+
+#### Custom Dashboard Development
+
+**Widget Development Framework**
+```javascript
+// Custom Widget Template
+class CustomMetricWidget extends TaniumWidget {
+    constructor(config) {
+        super(config);
+        this.dataSource = config.dataSource;
+        this.refreshInterval = config.refreshInterval || 60000;
+        this.thresholds = config.thresholds;
+    }
+
+    async fetchData() {
+        const data = await this.dataSource.query({
+            sensors: this.config.sensors,
+            filters: this.config.filters,
+            aggregation: this.config.aggregation
+        });
+        return this.processData(data);
+    }
+
+    render() {
+        return `
+            <div class="custom-widget">
+                <h3>${this.config.title}</h3>
+                <div class="metric-value">${this.currentValue}</div>
+                <div class="trend-indicator">${this.trendArrow}</div>
+            </div>
+        `;
+    }
+}
+```
+
+#### Branding and White-Labeling
+
+**Enterprise Branding Configuration**
+- **Logo Replacement**: Custom logos for login and navigation
+- **Color Scheme**: Corporate colors applied consistently
+- **Custom CSS**: Override default styles with corporate guidelines
+- **Welcome Messages**: Personalized login messages and announcements
+
+---
+
+## Section 10: Complex Module Integration Patterns (50 minutes)
+
+### Enterprise Integration Architectures
+
+#### Hub-and-Spoke Pattern
+
+**Central Hub Configuration**
+- **Tanium as Master**: All data flows through Tanium first
+- **Data Enrichment**: Add context before distribution
+- **Policy Enforcement**: Apply security and compliance rules centrally
+- **Routing Logic**: Intelligent routing based on data classification
+
+**Spoke Systems Integration**
+```mermaid
+graph TD
+    T[Tanium Platform] --> SIEM[SIEM Platform]
+    T --> ITSM[ServiceNow]
+    T --> DW[Data Warehouse]
+    T --> BI[Business Intelligence]
+    T --> SOAR[SOAR Platform]
+    SIEM --> A[Alerts]
+    ITSM --> T[Tickets]
+    DW --> R[Reports]
+    BI --> D[Dashboards]
+    SOAR --> P[Playbooks]
+```
+
+#### Event-Driven Architecture
+
+**Real-Time Event Streaming**
+1. **Event Generation**: Sensors detect state changes
+2. **Event Processing**: Filter and enrich event data
+3. **Event Distribution**: Route to appropriate consumers
+4. **Event Storage**: Persist for audit and replay capability
+
+**Kafka Integration Pattern**
+```python
+# Tanium to Kafka Producer
+from kafka import KafkaProducer
+import json
+
+class TaniumKafkaProducer:
+    def __init__(self, bootstrap_servers):
+        self.producer = KafkaProducer(
+            bootstrap_servers=bootstrap_servers,
+            value_serializer=lambda v: json.dumps(v).encode('utf-8'),
+            compression_type='gzip',
+            batch_size=16384,
+            linger_ms=100
+        )
+
+    def send_event(self, topic, event_data):
+        # Add metadata
+        event = {
+            'timestamp': datetime.utcnow().isoformat(),
+            'source': 'tanium',
+            'event_type': event_data.get('type'),
+            'severity': self.calculate_severity(event_data),
+            'data': event_data
+        }
+
+        # Send to Kafka
+        future = self.producer.send(topic, event)
+        return future.get(timeout=10)
+```
+
+### Advanced Connect Pipeline Engineering
+
+#### Data Transformation Pipelines
+
+**Complex ETL Operations**
+```javascript
+// Advanced Transform Function
+function transformTaniumData(record) {
+    // Data validation
+    if (!validateSchema(record)) {
+        throw new ValidationError('Schema validation failed');
+    }
+
+    // Field mapping
+    const transformed = {
+        id: generateUUID(),
+        timestamp: parseTimestamp(record.timestamp),
+        hostname: normalizeHostname(record.computer_name),
+        ip_address: extractPrimaryIP(record.ip_addresses),
+
+        // Complex transformations
+        risk_score: calculateRiskScore({
+            vulnerabilities: record.cve_count,
+            patch_age: record.days_since_patch,
+            exposure: record.internet_facing
+        }),
+
+        // Enrichment
+        geo_location: lookupGeoIP(record.ip_address),
+        business_unit: mapToBusinessUnit(record.ou_path),
+        criticality: determineAssetCriticality(record)
+    };
+
+    // Data quality checks
+    validateTransformedData(transformed);
+
+    return transformed;
+}
+```
+
+#### Multi-Destination Routing
+
+**Intelligent Data Distribution**
+- **Content-Based Routing**: Route based on data characteristics
+- **Priority Queuing**: High-priority events bypass normal queues
+- **Failure Handling**: Dead letter queues for failed transmissions
+- **Rate Limiting**: Prevent overwhelming destination systems
+
+**Router Configuration Example**
+```yaml
+pipeline:
+  name: multi_destination_router
+  sources:
+    - type: tanium_saved_question
+      question_id: security_events
+      interval: 60s
+
+  processors:
+    - type: filter
+      condition: severity >= 'high'
+
+    - type: router
+      routes:
+        - condition: event_type == 'malware'
+          destination: siem_high_priority
+
+        - condition: event_type == 'vulnerability'
+          destination: vulnerability_management
+
+        - condition: event_type == 'compliance'
+          destination: grc_platform
+
+        - condition: default
+          destination: data_lake
+
+  destinations:
+    - name: siem_high_priority
+      type: splunk
+      index: security_critical
+
+    - name: vulnerability_management
+      type: qualys
+      api_endpoint: /api/2.0/vulnerabilities
+
+    - name: grc_platform
+      type: servicenow
+      table: compliance_findings
+
+    - name: data_lake
+      type: s3
+      bucket: tanium-archive
+      compression: gzip
+```
+
+### Module Performance Optimization Strategies
+
+#### Query Optimization Techniques
+
+**Sensor Query Optimization**
+1. **Sensor Selection**: Choose lightweight sensors first
+2. **Filter Early**: Apply filters at sensor level, not in post-processing
+3. **Limit Scope**: Use computer groups to reduce target count
+4. **Cache Results**: Leverage parameterized sensors with caching
+
+**Database Query Tuning**
+```sql
+-- Optimized query with proper indexing
+CREATE INDEX idx_computer_last_seen
+ON computers(last_seen_time, computer_id)
+WHERE deleted = false;
+
+-- Use query hints for large datasets
+SELECT /*+ PARALLEL(4) */
+    c.computer_name,
+    c.ip_address,
+    s.sensor_value
+FROM computers c
+JOIN sensor_results s ON c.computer_id = s.computer_id
+WHERE c.last_seen_time > NOW() - INTERVAL '1 hour'
+    AND s.sensor_name = 'Running Processes'
+ORDER BY c.computer_name;
+```
+
+#### Memory Management Best Practices
+
+**Browser Memory Optimization**
+- **Pagination**: Load data in chunks, not all at once
+- **Virtual Scrolling**: Render only visible rows in tables
+- **Lazy Loading**: Defer loading of non-critical components
+- **Memory Profiling**: Regular profiling to identify leaks
+
+**Server Memory Configuration**
+```bash
+# JVM tuning for Tanium Server
+JAVA_OPTS="-Xmx8g -Xms8g \
+    -XX:+UseG1GC \
+    -XX:MaxGCPauseMillis=200 \
+    -XX:+ParallelRefProcEnabled \
+    -XX:+AlwaysPreTouch \
+    -XX:+UnlockExperimentalVMOptions \
+    -XX:G1NewSizePercent=30 \
+    -XX:G1MaxNewSizePercent=40"
+```
+
+---
+
+## Section 11: Real-World Case Studies (40 minutes)
+
+### Case Study 1: Global Financial Institution
+
+**Challenge**: Manage 250,000 endpoints across 50 countries with strict compliance requirements
+
+**Solution Architecture**:
+1. **Regional Zone Servers**: Deployed in each major region for local processing
+2. **Hierarchical Console Structure**: Regional consoles reporting to global dashboard
+3. **Automated Compliance Reporting**: Daily compliance scorecards per region
+4. **Follow-the-Sun Support**: Console handoff procedures between regions
+
+**Implementation Details**:
+```yaml
+Global Architecture:
+  Regions:
+    - name: Americas
+      zone_servers: 3
+      endpoints: 75000
+      console: americas.tanium.finance.com
+
+    - name: EMEA
+      zone_servers: 4
+      endpoints: 100000
+      console: emea.tanium.finance.com
+
+    - name: APAC
+      zone_servers: 3
+      endpoints: 75000
+      console: apac.tanium.finance.com
+
+  Global_Dashboard:
+    url: global.tanium.finance.com
+    aggregation_interval: 5_minutes
+    kpis:
+      - compliance_score
+      - patch_coverage
+      - security_incidents
+      - performance_metrics
+```
+
+**Results**:
+- 60% reduction in incident response time
+- 99.9% visibility across global fleet
+- 40% improvement in patch compliance
+- $2M annual cost savings from automation
+
+### Case Study 2: Healthcare Network
+
+**Challenge**: HIPAA compliance with 500+ locations and mixed device types
+
+**Navigation Workflow Optimization**:
+1. **Role-Based Dashboards**: Separate views for clinical vs IT staff
+2. **PHI Data Protection**: Automatic masking in console displays
+3. **Audit Trail Integration**: Every query logged with purpose code
+4. **Emergency Override**: Break-glass procedures for critical care
+
+**Custom Module Configuration**:
+```javascript
+// HIPAA-Compliant Query Wrapper
+class HIPAACompliantQuery {
+    constructor(query, user, purpose) {
+        this.query = query;
+        this.user = user;
+        this.purpose = purpose;
+        this.timestamp = new Date();
+        this.auditLog = new AuditLogger();
+    }
+
+    async execute() {
+        // Log query attempt
+        await this.auditLog.logQueryAttempt({
+            user: this.user,
+            query: this.sanitizeQuery(this.query),
+            purpose: this.purpose,
+            timestamp: this.timestamp
+        });
+
+        // Execute with PHI protection
+        const results = await tanium.executeQuery(this.query);
+        const maskedResults = this.maskPHI(results);
+
+        // Log data access
+        await this.auditLog.logDataAccess({
+            user: this.user,
+            recordCount: results.length,
+            purpose: this.purpose,
+            timestamp: new Date()
+        });
+
+        return maskedResults;
+    }
+
+    maskPHI(data) {
+        // Mask sensitive fields
+        return data.map(record => ({
+            ...record,
+            patient_name: '***MASKED***',
+            ssn: '***-**-' + record.ssn.slice(-4),
+            medical_record: '***MASKED***'
+        }));
+    }
+}
+```
+
+### Case Study 3: Manufacturing Conglomerate
+
+**Challenge**: OT/IT convergence with 100+ factories and critical infrastructure
+
+**Module Integration Strategy**:
+1. **Interact**: Real-time monitoring of production systems
+2. **Trends**: Historical analysis of production metrics
+3. **Reporting**: Executive dashboards for factory performance
+4. **Connect**: Integration with MES and SCADA systems
+
+**Production Line Monitoring**:
+```python
+# OT Device Monitoring Integration
+class OTDeviceMonitor:
+    def __init__(self, tanium_client):
+        self.tanium = tanium_client
+        self.critical_devices = self.load_critical_devices()
+        self.alert_thresholds = self.load_thresholds()
+
+    def monitor_production_line(self, line_id):
+        # Query OT devices on production line
+        query = f"""
+            Get Computer Name and IP Address and
+            Custom Tags[Production Line] and
+            CPU Usage and Memory Usage and
+            Network Throughput and
+            Process Status containing "SCADA"
+            from all machines where
+            Custom Tags[Production Line] = "{line_id}"
+        """
+
+        results = self.tanium.run_question(query)
+
+        # Analyze for anomalies
+        anomalies = self.detect_anomalies(results)
+
+        if anomalies:
+            self.trigger_production_alert(line_id, anomalies)
+            self.initiate_failover(line_id)
+
+        return {
+            'line_id': line_id,
+            'status': 'critical' if anomalies else 'normal',
+            'devices': len(results),
+            'anomalies': anomalies
+        }
+```
+
+**Results**:
+- 75% reduction in production downtime
+- Real-time visibility into OT environments
+- Automated incident response for critical systems
+- Integration with existing MES/ERP systems
+
+### Case Study 4: Government Agency
+
+**Challenge**: Zero Trust implementation with classified networks
+
+**Console Security Configuration**:
+1. **Air-Gapped Deployment**: Separate consoles for classified/unclassified
+2. **Cross-Domain Guards**: Controlled data flow between security levels
+3. **Attribute-Based Access**: Dynamic permissions based on clearance
+4. **Continuous Verification**: Re-authentication for sensitive operations
+
+**Zero Trust Navigation Model**:
+```javascript
+// Zero Trust Navigation Controller
+class ZeroTrustNavigator {
+    constructor() {
+        this.sessionManager = new SecureSessionManager();
+        this.policyEngine = new PolicyEngine();
+        this.riskCalculator = new RiskCalculator();
+    }
+
+    async navigateToModule(user, module, context) {
+        // Continuous verification
+        const verificationResult = await this.verifyUser(user);
+        if (!verificationResult.verified) {
+            throw new SecurityException('User verification failed');
+        }
+
+        // Calculate risk score
+        const riskScore = await this.riskCalculator.calculate({
+            user: user,
+            module: module,
+            location: context.location,
+            device: context.device,
+            time: new Date(),
+            behavior: await this.getUserBehavior(user)
+        });
+
+        // Policy decision
+        const decision = await this.policyEngine.evaluate({
+            user: user,
+            resource: module,
+            action: 'access',
+            risk: riskScore,
+            context: context
+        });
+
+        if (decision.allow) {
+            // Grant access with conditions
+            return this.grantAccess(module, decision.conditions);
+        } else {
+            // Deny with audit
+            await this.auditDenial(user, module, decision.reason);
+            throw new AccessDeniedException(decision.reason);
+        }
+    }
+}
+```
+
+---
+
+## Section 12: Advanced Troubleshooting Scenarios (35 minutes)
+
+### Complex Performance Issues
+
+#### Scenario 1: Intermittent Console Freezing
+
+**Symptoms**:
+- Console becomes unresponsive for 30-60 seconds
+- Occurs randomly throughout the day
+- Affects multiple users simultaneously
+
+**Diagnostic Approach**:
+```bash
+# Performance diagnostics script
+#!/bin/bash
+
+# Check server resources
+echo "=== Server Resource Check ==="
+top -bn1 | head -20
+iostat -x 1 5
+netstat -an | grep ESTABLISHED | wc -l
+
+# Check database performance
+echo "=== Database Performance ==="
+psql -c "SELECT query, calls, mean_time
+         FROM pg_stat_statements
+         WHERE mean_time > 1000
+         ORDER BY mean_time DESC
+         LIMIT 10;"
+
+# Check Tanium processes
+echo "=== Tanium Process Status ==="
+ps aux | grep tanium | grep -v grep
+systemctl status tanium-*
+
+# Network connectivity
+echo "=== Network Latency Check ==="
+for server in console1 console2 db1 db2; do
+    ping -c 5 $server | tail -1
+done
+
+# Browser performance (client-side)
+echo "=== Client-Side Instructions ==="
+echo "1. Open browser DevTools (F12)"
+echo "2. Go to Performance tab"
+echo "3. Start recording before freeze"
+echo "4. Export trace after freeze"
+```
+
+**Root Cause Analysis**:
+1. **Database Lock Contention**: Long-running queries blocking console queries
+2. **Memory Pressure**: Server swapping due to insufficient RAM
+3. **Network Saturation**: Bandwidth exhaustion during peak hours
+4. **Browser Memory Leak**: Accumulated memory usage over time
+
+**Resolution Steps**:
+```sql
+-- Fix database lock contention
+-- Identify blocking queries
+SELECT
+    pid,
+    usename,
+    pg_blocking_pids(pid) as blocked_by,
+    query,
+    query_start
+FROM pg_stat_activity
+WHERE pg_blocking_pids(pid)::text != '{}';
+
+-- Terminate blocking query
+SELECT pg_terminate_backend(pid)
+FROM pg_stat_activity
+WHERE pid = <blocking_pid>;
+
+-- Add missing indexes
+CREATE INDEX CONCURRENTLY idx_sensor_results_timestamp
+ON sensor_results(result_timestamp)
+WHERE result_timestamp > NOW() - INTERVAL '7 days';
+```
+
+#### Scenario 2: Question Results Inconsistency
+
+**Symptoms**:
+- Same question returns different results
+- Missing endpoints in results
+- Data appears stale or outdated
+
+**Systematic Troubleshooting**:
+```powershell
+# PowerShell diagnostic script
+function Test-QuestionConsistency {
+    param(
+        [string]$QuestionText,
+        [int]$Iterations = 5
+    )
+
+    $results = @()
+
+    for ($i = 1; $i -le $Iterations; $i++) {
+        Write-Host "Iteration $i of $Iterations"
+
+        # Run question
+        $result = Invoke-TaniumQuestion -Question $QuestionText
+
+        # Collect metrics
+        $results += @{
+            Iteration = $i
+            Timestamp = Get-Date
+            RowCount = $result.RowCount
+            EndpointCount = $result.EndpointCount
+            ResponseRate = $result.ResponseRate
+            Duration = $result.Duration
+            Hash = Get-Hash $result.Data
+        }
+
+        Start-Sleep -Seconds 30
+    }
+
+    # Analyze consistency
+    $uniqueHashes = $results.Hash | Select-Object -Unique
+    if ($uniqueHashes.Count -gt 1) {
+        Write-Warning "Inconsistent results detected!"
+        $results | Format-Table
+
+        # Deep analysis
+        Analyze-Inconsistency -Results $results
+    }
+}
+```
+
+### Integration Troubleshooting
+
+#### Connect Pipeline Failures
+
+**Common Failure Patterns**:
+1. **Authentication Expiry**: Token/certificate expiration
+2. **Schema Mismatch**: Destination expects different format
+3. **Rate Limiting**: Destination throttling requests
+4. **Network Issues**: Firewall changes or routing problems
+
+**Diagnostic Workflow**:
+```javascript
+// Pipeline Health Check
+class PipelineHealthCheck {
+    async diagnose(pipelineId) {
+        const diagnostics = {
+            timestamp: new Date(),
+            pipeline: pipelineId,
+            checks: []
+        };
+
+        // Test authentication
+        diagnostics.checks.push(
+            await this.testAuthentication(pipelineId)
+        );
+
+        // Validate schema
+        diagnostics.checks.push(
+            await this.validateSchema(pipelineId)
+        );
+
+        // Check network connectivity
+        diagnostics.checks.push(
+            await this.testConnectivity(pipelineId)
+        );
+
+        // Verify data flow
+        diagnostics.checks.push(
+            await this.verifyDataFlow(pipelineId)
+        );
+
+        // Generate remediation plan
+        const plan = this.generateRemediationPlan(diagnostics);
+
+        return {
+            diagnostics,
+            plan,
+            severity: this.calculateSeverity(diagnostics)
+        };
+    }
+
+    async testAuthentication(pipelineId) {
+        const pipeline = await this.getPipeline(pipelineId);
+        const auth = pipeline.authentication;
+
+        try {
+            if (auth.type === 'token') {
+                const response = await this.validateToken(auth.token);
+                return {
+                    check: 'authentication',
+                    status: 'pass',
+                    details: `Token valid until ${response.expiry}`
+                };
+            } else if (auth.type === 'certificate') {
+                const cert = await this.validateCertificate(auth.certificate);
+                return {
+                    check: 'authentication',
+                    status: cert.valid ? 'pass' : 'fail',
+                    details: cert.message
+                };
+            }
+        } catch (error) {
+            return {
+                check: 'authentication',
+                status: 'fail',
+                error: error.message,
+                remediation: this.getAuthRemediationSteps(auth.type)
+            };
+        }
+    }
+}
+```
+
+---
+
+## TCO Exam Preparation Summary
+
+### Critical Navigation Concepts for Certification
+
+**Must-Know Topics (High Frequency on Exam)**:
+1. **Module Selection Criteria**: When to use each module based on requirements
+2. **Performance Optimization**: Techniques for large-scale deployments
+3. **Integration Patterns**: Common workflows across modules
+4. **Troubleshooting Methodology**: Systematic approach to problem resolution
+5. **Security Best Practices**: RBAC, audit logging, compliance features
+
+**Common Exam Scenarios**:
+- Design multi-module workflow for incident response
+- Optimize console performance for 50,000+ endpoints
+- Troubleshoot integration failures with external systems
+- Implement compliance reporting for regulatory requirements
+- Configure high availability console architecture
+
+**Time Management Strategy**:
+- Navigation questions: 2-3 minutes each (factual)
+- Scenario questions: 4-5 minutes each (analytical)
+- Troubleshooting questions: 3-4 minutes each (procedural)
+
+**Key Metrics to Remember**:
+- Question timeout: 5 minutes default, 30 minutes maximum
+- Panel refresh: 30 seconds minimum, 24 hours maximum
+- Result limits: 100, 500, 1000, 5000, unlimited
+- Session timeout: 15 minutes default (configurable)
+- Export formats: CSV, JSON, XML, Excel
+
+---

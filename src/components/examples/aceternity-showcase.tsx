@@ -1,7 +1,7 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { CardBody, CardContainer, CardItem } from "@/components/ui/3d-card";
-import { AnimatedTestimonials } from "@/components/ui/animated-testimonials";
 import { BackgroundBeams } from "@/components/ui/background-beams";
 import { Sparkles } from "@/components/ui/sparkles";
 import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
@@ -9,7 +9,16 @@ import { FloatingNav } from "@/components/ui/floating-navbar";
 import { HeroParallax } from "@/components/ui/hero-parallax";
 import { BentoGrid, BentoGridItem } from "@/components/ui/bento-grid";
 import { Meteors } from "@/components/ui/meteors";
-import { InfiniteMovingCards } from "@/components/ui/infinite-moving-cards";
+
+const AnimatedTestimonials = dynamic(
+  () => import("@/components/ui/animated-testimonials").then((m) => m.AnimatedTestimonials),
+  { ssr: false, loading: () => <div className="h-24" /> }
+);
+
+const InfiniteMovingCards = dynamic(
+  () => import("@/components/ui/infinite-moving-cards").then((m) => m.InfiniteMovingCards),
+  { ssr: false, loading: () => <div className="h-24" /> }
+);
 
 // Example showcase component to demonstrate Aceternity UI components
 export default function AceternityShowcase() {

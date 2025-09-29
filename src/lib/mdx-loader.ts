@@ -29,6 +29,7 @@ export interface MDXModule {
 // Domain slug to MDX file mapping
 const domainToMDXMap: Record<string, () => Promise<MDXModule>> = {
   "platform-foundation": () => import("@/content/modules/00-tanium-platform-foundation.mdx"),
+  "tanium-platform-foundation": () => import("@/content/modules/00-tanium-platform-foundation.mdx"),
   "asking-questions": () => import("@/content/modules/01-asking-questions.mdx"),
   "refining-questions-targeting": () =>
     import("@/content/modules/02-refining-questions-targeting.mdx"),

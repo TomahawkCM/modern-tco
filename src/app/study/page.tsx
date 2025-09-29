@@ -1,7 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { studyModuleService } from "@/services/studyModuleService";
+import { supabase } from "@/lib/supabase";
 import { StudyModeSelector } from "@/components/study/StudyModeSelector";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -44,10 +46,32 @@ interface StudyDomain {
   isFoundation?: boolean;
   beginnerBonus?: string;
   confidenceLevel?: "building" | "growing" | "strong";
+  domain?: string;
+  examWeight?: number;
 }
 
-// Study domains prioritized for complete beginners - Phase 0 Foundation comes first
-const studyDomains: StudyDomain[] = [
+// Domain icon mapping
+const DOMAIN_ICONS: Record<string, string> = {
+  "PLATFORM_FOUNDATION": "🎓",
+  "Asking Questions": "❓",
+  "Refining Questions & Targeting": "🎯",
+  "Taking Action": "⚡",
+  "NAVIGATION_MODULES": "🧭",
+  "REPORTING_EXPORT": "📊",
+};
+
+// Domain difficulty mapping
+const DOMAIN_DIFFICULTY: Record<string, "Foundation" | "Beginner" | "Intermediate" | "Advanced"> = {
+  "PLATFORM_FOUNDATION": "Foundation",
+  "Asking Questions": "Beginner",
+  "Refining Questions & Targeting": "Intermediate",
+  "Taking Action": "Intermediate",
+  "NAVIGATION_MODULES": "Beginner",
+  "REPORTING_EXPORT": "Intermediate",
+};
+
+// Placeholder for static domains - will be replaced by database data
+const defaultStudyDomains: StudyDomain[] = [
   // PHASE 0: FOUNDATION (NEW FOR BEGINNERS)
   {
     id: "phase-0-foundation",
@@ -159,6 +183,101 @@ const studyDomains: StudyDomain[] = [
 export default function StudyPage() {
   const router = useRouter();
   const [viewMode, setViewMode] = useState<"overview" | "domains">("overview");
+  const [studyDomains, setStudyDomains] = useState<StudyDomain[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [user, setUser] = useState<any>(null);
+
+  useEffect(() => {
+    loadModules();
+    checkUser();
+  }, []);
+
+  const checkUser = async () => {
+    const { data: { user } } = await supabase.auth.getUser();
+    setUser(user);
+  };
+
+  const loadModules = async () => {
+    try {
+      setIsLoading(true);
+
+      // Get user ID for progress tracking
+      const { data: { user } } = await supabase.auth.getUser();
+
+      // Fetch modules with progress
+      const modules = await studyModuleService.getModulesWithProgress(user?.id);
+
+      // Get section counts for each module
+      const modulesWithSections = await Promise.all(
+        modules.map(async (module) => {
+          const sections = await studyModuleService.getModuleSections(module.id);
+          return { ...module, totalSections: sections.length };
+        })
+      );
+
+      // Transform database modules to UI format
+      const transformedDomains: StudyDomain[] = modulesWithSections.map((module, index) => {
+        const progress = module.progress || 0;
+        const completedSections = module.completedSections || 0;
+        const totalSections = module.totalSections || 1;
+
+        // Determine status based on progress
+        let status: StudyDomain["status"] = "available";
+        if (module.domain === "PLATFORM_FOUNDATION") {
+          status = "foundation";
+        } else if (progress >= 80) {
+          status = "almost-complete";
+        } else if (progress === 100) {
+          status = "completed";
+        } else if (progress > 0) {
+          status = "in_progress";
+        }
+
+        // Determine beginner-friendliness and confidence level
+        const difficulty = DOMAIN_DIFFICULTY[module.domain] || "Intermediate";
+        const isBeginnerFriendly = difficulty === "Foundation" || difficulty === "Beginner";
+        let confidenceLevel: "building" | "growing" | "strong" = "strong";
+        if (difficulty === "Foundation") confidenceLevel = "building";
+        else if (difficulty === "Beginner") confidenceLevel = "growing";
+
+        return {
+          id: module.id,
+          title: module.title,
+          description: module.description || "",
+          icon: DOMAIN_ICONS[module.domain] || "\ud83d\udcda",
+          progress,
+          totalSections,
+          completedSections,
+          estimatedTime: module.estimated_time_minutes ? `${module.estimated_time_minutes} min` : "45 min",
+          difficulty,
+          status,
+          lastAccessed: progress > 0 ? "Recently" : "Never",
+          isBeginnerFriendly,
+          prerequisites: index === 0 ? [] : index === 1 ? ["Complete Phase 0: Foundation"] : [`Complete ${modulesWithSections[index - 1].title}`],
+          isFoundation: module.domain === "PLATFORM_FOUNDATION",
+          beginnerBonus: isBeginnerFriendly ? "Interactive examples and guided practice!" : undefined,
+          confidenceLevel,
+          domain: module.domain,
+          examWeight: module.exam_weight,
+        };
+      });
+
+      // Sort domains to put foundation first, then by order
+      transformedDomains.sort((a, b) => {
+        if (a.isFoundation) return -1;
+        if (b.isFoundation) return 1;
+        return 0;
+      });
+
+      setStudyDomains(transformedDomains);
+    } catch (error) {
+      console.error("Error loading study modules:", error);
+      // Fall back to default domains if database fails
+      setStudyDomains(defaultStudyDomains);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const overallProgress = Math.round(
     studyDomains.reduce((acc, domain) => acc + domain.progress, 0) / studyDomains.length
@@ -228,6 +347,17 @@ export default function StudyPage() {
         return null;
     }
   };
+
+  if (isLoading) {
+    return (
+      <div className="mx-auto max-w-6xl flex items-center justify-center min-h-[400px]">
+        <div className="text-center">
+          <div className="mx-auto mb-4 h-12 w-12 animate-spin rounded-full border-b-2 border-blue-600"></div>
+          <p className="text-gray-200">Loading study modules...</p>
+        </div>
+      </div>
+    );
+  }
 
   if (viewMode === "overview") {
   return (
@@ -337,7 +467,11 @@ export default function StudyPage() {
                 "glass cursor-pointer border-2 transition-all hover:border-opacity-50",
                 getStatusColor(domain.status)
               )}
-              onClick={() => router.push(`/study/${domain.id}`)}
+              onClick={() => {
+                // Use domain slug for routing
+                const domainSlug = domain.domain?.toLowerCase().replace(/ & /g, '-').replace(/ /g, '-').replace(/_/g, '-') || domain.id;
+                router.push(`/study/${domainSlug}`);
+              }}
             >
               <CardHeader>
                 <div className="flex items-start justify-between">
@@ -429,7 +563,8 @@ export default function StudyPage() {
                 <Button
                   onClick={(e) => {
                     e.stopPropagation();
-                    router.push(`/study/${domain.id}`);
+                    const domainSlug = domain.domain?.toLowerCase().replace(/ & /g, '-').replace(/ /g, '-').replace(/_/g, '-') || domain.id;
+                    router.push(`/study/${domainSlug}`);
                   }}
                   className="w-full"
                   variant={domain.progress > 0 ? "default" : "outline"}

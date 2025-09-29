@@ -447,6 +447,36 @@ Export > Integration > Enterprise Setup
 - **Data Type Validation**: Verify field types and formats
 - **Range Validation**: Check numeric ranges and boundaries
 - **Referential Integrity**: Validate relationships between data elements
+
+<QueryPlayground
+  id="reporting-practice-1"
+  title="Practice: Report Format Selection"
+  description="Given different business requirements, select the most appropriate export format and justify your choice."
+  initialQuery="Your compliance team needs weekly security posture data that will be analyzed in Excel with charts and pivot tables. What export format should you use and why?"
+  expectedAnswers={[
+    "Excel (XLSX) format - Supports native charts, pivot tables, and formatting",
+    "Includes multiple worksheets for organized data presentation",
+    "Preserves formulas and conditional formatting for analysis"
+  ]}
+  difficulty="intermediate"
+  category="Export Formats"
+/>
+
+<QueryPlayground
+  id="reporting-practice-2"
+  title="Practice: Performance Optimization Strategy"
+  description="Design an efficient export strategy for large datasets with performance considerations."
+  initialQuery="You need to export 5 million records daily to a data warehouse. How would you optimize this export for performance and reliability?"
+  expectedAnswers={[
+    "Use incremental exports to only transfer changed data",
+    "Implement cursor-based pagination for efficient processing",
+    "Enable compression (GZIP) to reduce transfer size",
+    "Schedule during off-peak hours to minimize system impact",
+    "Add resume capability for handling interruptions"
+  ]}
+  difficulty="advanced"
+  category="Performance Optimization"
+/>
 - **Business Rule Validation**: Apply domain-specific validation rules
 
 **Quality Check Procedures**:
@@ -617,6 +647,58 @@ Maintenance > Scheduled Tasks > Routine Operations
 **Production Excellence**: Establish regular maintenance schedules, document all procedures, and maintain current system documentation. Proactive maintenance prevents most critical issues.
 </InfoBox>
 
+# Visuals and Comparisons
+
+### Architecture: Export Pipeline
+
+```mermaid
+graph LR
+  Sources[Sources: Sensors/Saved Questions] --> Transform[Transform/Map]
+  Transform --> Export[Export Engine]
+  Export --> Channels[Channels: Email/SFTP/API]
+  Export --> Storage[Object Store / Data Lake]
+  Channels --> Consumers[Stakeholders/Systems]
+```
+
+### Architecture: Analytics Integration
+
+```mermaid
+graph TD
+  Dashboards --> Events[Analytics Events]
+  Events --> PostHog[(PostHog)]
+  PostHog --> Insights[Funnels/Retention]
+  Exports --> Warehouse[(Data Warehouse)]
+  Warehouse --> BI[BI Tools]
+```
+
+### Export Formats Comparison
+
+| Format | Strengths | Limits | Best For |
+|---|---|---|---|
+| CSV | Fast, universal | No hierarchy | Bulk tabular analysis |
+| JSON/NDJSON | Hierarchical, APIs | Larger size | Services/streaming |
+| XLSX | Presentation | Heavy at scale | Executive delivery |
+| Parquet | Columnar, compressed | Needs pipeline | Data lakes/warehouses |
+
+### Distribution Channels vs Use Cases
+
+| Channel | Use Case | Security | Notes |
+|---|---|---|---|
+| Email | Executive summaries | S/MIME | Keep size small |
+| Portal | Self-service dashboards | SSO/RBAC | Versioned templates |
+| SFTP | System ingestion | Key-based | Batch windows |
+| API | Real-time integrations | OAuth2 | Rate limits |
+
+### Data Quality Metrics Cheat Sheet
+
+| Metric | Definition | Target | Validation |
+|---|---|---|---|
+| Completeness | Non-null proportion | &gt; 99% | Count nulls per field |
+| Accuracy | Correct vs source | &gt; 98% | Sample cross-check |
+| Consistency | Uniform across sources | High | Cross-source diff |
+| Timeliness | Freshness vs SLA | Within SLA | Timestamps |
+| Validity | Conforms to schema | &gt; 99% | Schema checks |
+
 # Practice
 
 <PracticeButton
@@ -740,6 +822,13 @@ Maintenance > Scheduled Tasks > Routine Operations
 - Troubleshooting simulations with multiple-step resolution paths
 - Enterprise integration challenges requiring end-to-end solution design
 
+<ModuleTransition
+  currentModule="reporting-data-export"
+  nextModule="complete"
+  celebrationType="grand-finale"
+  customMessage="🎉 Incredible achievement! You've completed ALL TCO certification modules! Your mastery of reporting and data export completes your comprehensive Tanium expertise. You're now fully prepared for the TCO certification exam!"
+/>
+
 # References
 
 ## Official Documentation and Resources
@@ -777,3 +866,882 @@ Maintenance > Scheduled Tasks > Routine Operations
 <InfoBox type="reference">
 **Documentation Access**: All official Tanium documentation is available through the Tanium Support Portal with your enterprise license. Community forums and user groups provide additional real-world implementation examples and best practices.
 </InfoBox>
+
+---
+
+## Supplemental: Report Types Catalog (Expanded)
+
+<InfoBox title="Purpose">
+  A practical catalog to map stakeholder needs to concrete report types, fields, visuals, and distribution patterns.
+</InfoBox>
+
+### Executive Reports
+
+- Purpose: Strategic overview, risk posture, progress against goals
+- Common Fields: Top KPIs, trend deltas, exception counts, SLA status
+- Visuals: Scorecards, time-series trends, stacked bars, heat maps
+- Cadence: Monthly/Quarterly; on-demand for steering committees
+- Distribution: Email PDF + portal dashboard; 1-page executive summary
+- Quality Gates: Clear definitions, annotated trends, callouts for action
+
+### Operational Reports
+
+- Purpose: Daily execution and issue triage
+- Common Fields: Failures by cause, age buckets, queue depth, MTTR
+- Visuals: Tables with conditional formatting, stacked bars, Pareto charts
+- Cadence: Daily/Weekly; near real-time dashboard for NOC/SOC
+- Distribution: Portal dashboard + CSV extracts for analysis
+- Quality Gates: Drill-down links, runbooks linked, owner shown
+
+### Compliance/Audit Reports
+
+- Purpose: Evidence for auditors; control health
+- Common Fields: Control IDs, pass/fail counts, remediation status, exceptions
+- Visuals: Heat maps, control matrices, stacked compliance bars
+- Cadence: Monthly/Quarterly; on audit demand
+- Distribution: Secure portal; access-controlled PDFs; retention policy
+- Quality Gates: Traceability to sources; timestamped evidence; sign-offs
+
+### Technical Deep-Dive Reports
+
+- Purpose: Engineering analysis; problem investigation
+- Common Fields: Detailed metrics, correlation fields, error codes, device lists
+- Visuals: Detailed tables, correlation scatter plots, histograms
+- Cadence: Ad-hoc; during incidents and root cause analysis
+- Distribution: CSV/JSON for notebooks; embedded charts for context
+- Quality Gates: Reproducibility, sampling notes, data lineage documented
+
+### Example Catalog Entries
+
+1) Patch Compliance Executive Overview
+   - Fields: Overall compliance %, delinquent cohorts, trend 90 days
+   - Visuals: KPI cards, trend line, pie by BU
+   - Cadence/Dist: Monthly PDF + dashboard; owners CC’d
+
+2) Failed Deployments Operational Drill‑Down
+   - Fields: Exit codes, package names, site/BU, last seen
+   - Visuals: Pareto by exit code, table with conditional formatting
+   - Cadence/Dist: Daily CSV + dashboard; ticket links
+
+3) Audit Evidence: Disk Encryption Coverage
+   - Fields: Device, owner, encryption status, exemption reason
+   - Visuals: Heat map by site, coverage trend
+   - Cadence/Dist: Quarterly PDF; retention 7 years
+
+4) Performance Triage: High CPU Endpoints
+   - Fields: CPU %, top processes, uptime, region
+   - Visuals: Histogram, table, process breakdown
+   - Cadence/Dist: Weekly dashboard; CSV for remediation team
+
+---
+
+## Supplemental: Data Export Mastery (Advanced)
+
+<InfoBox title="Decision matrix">
+  Choose the export format by consumer, schema stability, size, and latency requirements. Use CSV for bulk tabular analysis; JSON for APIs; XLSX for presentation; Parquet/NDJSON for big data.
+</InfoBox>
+
+### Format Selection Guide
+
+- CSV: fastest, wide tooling support; watch for commas/encoding
+- JSON/NDJSON: hierarchical/streaming; friendly for microservices
+- XLSX: formatted consumption; heavier to generate at scale
+- Parquet: columnar, highly compressed; best for data lakes/warehouses
+
+### Schema and Mapping
+
+- Define canonical field names and data types; publish a data dictionary
+- Use versioned schemas; include `schema_version` in exports
+- Map Tanium fields to enterprise domains (CMDB, HR, ITSM)
+
+### API and Streaming Patterns
+
+```console
+Export > API > Outbound Setup
+1. Select data model (e.g., compliance_summary_v2)
+2. Choose format (JSON/NDJSON) and pagination or stream
+3. Configure auth (OAuth2/service token) and retries (exponential backoff)
+4. Set rate limits and concurrency per endpoint
+5. Validate with contract tests against consumer mock
+```
+
+### Performance and Partitioning
+
+- Partition by date/site/BU for parallel processing
+- Compress large payloads (gzip/zstd); chunk multi‑GB files
+- Use incremental exports keyed by `updated_at`
+- Stage to durable storage (S3/GCS) with lifecycle policies
+
+### Validation and Observability
+
+- Emit export metrics: records, duration, error rate, bytes
+- Write manifest files with counts and checksums
+- Correlate export IDs across systems for traceability
+
+---
+
+## Supplemental: Dashboard Creation (Design System)
+
+<InfoBox title="Design principles">
+  Start with questions stakeholders ask weekly. Place answers as KPI cards, then add trends and drill‑downs. Keep visual grammar consistent across dashboards.
+</InfoBox>
+
+### Step‑by‑Step Creation
+
+1) Define audience and top 3 questions to answer
+2) Select 3–5 KPIs with unambiguous definitions
+3) Add trend charts and variance indicators per KPI
+4) Provide drill‑downs to operational tables
+5) Add annotations and ownership metadata
+6) Test on laptop and mobile; verify accessibility
+
+### Widget Catalog
+
+- KPI Card: value, delta, target; supports thresholds
+- Time‑Series: line/area with rolling averages
+- Categorical: stacked bars/treemaps for composition
+- Tables: sortable with conditional formatting and export
+- Alerts: surfaced exceptions with runbook links
+
+### Governance
+
+- Dashboard owner, last‑reviewed date, change log
+- Versioned templates; reuse across BUs
+- Feedback mechanism for users to request changes
+
+---
+
+## Supplemental: Automation Setup (End‑to‑End)
+
+<InfoBox title="Reliability first">
+  Automations must fail safe, notify owners, and provide retry paths. Treat schedules as production code.
+</InfoBox>
+
+### Scheduling and Orchestration
+
+- Chain pre‑checks → export → validation → distribution
+- Define blackout windows and maintenance exclusions
+- Use retries with jitter; cap attempts and escalate
+
+### Conditional Reporting
+
+- Send “all clear” weekly; send detailed report only on threshold breach
+- Branch by audience: exec summary vs. operator detail
+- Attach CSV for operators; PDF for leadership
+
+### Alert Triggers
+
+- Threshold: compliance &lt; 95% or failures &gt; 50
+- Anomaly: variance &gt; 2σ vs. baseline
+- Freshness: data older than SLA
+
+### Failure Handling
+
+- On failure: snapshot logs, keep artifacts, open ticket
+- Auto‑rollback to previous stable template when applicable
+- Pager/Chat notifications with runbook link
+
+---
+
+## Supplemental: Analytics Integration (PostHog and External)
+
+<InfoBox title="Analytics goals">
+  Track how stakeholders use dashboards and reports to improve design and prioritization.
+</InfoBox>
+
+### PostHog Setup
+
+```console
+Analytics > PostHog > Configure
+1. Add project key and server endpoint
+2. Define events: report_viewed, export_downloaded, drilldown_clicked
+3. Attach dashboard/report IDs as properties
+4. Enable session recording for opt‑in pilot group
+5. Build funnels: "Home → Dashboard → Drilldown → Export"
+```
+
+### External Tools
+
+- BI: Power BI/Tableau for executive consumption
+- Data Warehouse: BigQuery/Snowflake for cross‑domain analytics
+- Notebooks: Jupyter for ad‑hoc analysis; share via portal
+
+### Privacy and Compliance
+
+- Respect user privacy; mask PII in analytics
+- Provide opt‑out controls; retain per policy
+
+---
+
+## Supplemental: Practice Components
+
+<PracticeButton
+  moduleId="module-reporting-data-export"
+  domainEnum="REPORTING_EXPORT"
+  targetTags={["Catalog", "DashboardDesign", "Automation", "Analytics"]}
+  objectiveIds={["obj-reporting-build", "obj-reporting-export", "obj-reporting-quality"]}
+  difficulty="intermediate"
+>
+  Start Supplemental Practice
+</PracticeButton>
+
+### Exercises
+
+1) Map stakeholder needs to catalog entries; propose visuals and cadence
+2) Build a dashboard with 3 KPIs, trends, and drill‑downs; add ownership metadata
+3) Create an end‑to‑end automation with conditional distribution and alert triggers
+4) Instrument analytics events and build a funnel; propose improvements based on findings
+
+---
+
+## Section F: Enterprise Report Architecture (45 minutes)
+
+### Distributed Reporting Infrastructure
+
+**Multi-Site Reporting Architecture**
+- **Regional Report Servers**: Localized processing for performance
+- **Global Aggregation**: Centralized data consolidation
+- **Load Balancing**: Distributed report generation across servers
+- **Failover Configuration**: High availability for critical reports
+
+**Architecture Components**:
+```console
+Infrastructure > Distributed > Configuration
+1. Deploy regional report servers in major data centers
+2. Configure data replication and synchronization
+3. Implement global load balancer with health checks
+4. Set up cross-region failover and recovery
+5. Monitor inter-region latency and performance
+```
+
+<InfoBox type="architecture">
+**Scale Strategy**: Deploy report servers close to data sources to minimize latency. Use regional aggregation before global consolidation for optimal performance.
+</InfoBox>
+
+### Report Caching and Performance Optimization
+
+**Multi-Layer Caching Strategy**:
+```yaml
+cache_configuration:
+  l1_cache:
+    type: memory
+    size: 2GB
+    ttl: 300s
+    scope: per_server
+
+  l2_cache:
+    type: redis
+    size: 20GB
+    ttl: 3600s
+    scope: shared_cluster
+
+  l3_cache:
+    type: object_storage
+    size: unlimited
+    ttl: 86400s
+    scope: global
+
+  invalidation_rules:
+    - trigger: data_update
+      action: invalidate_affected
+    - trigger: schema_change
+      action: full_invalidation
+    - trigger: scheduled
+      action: refresh_popular
+```
+
+**Cache Optimization Techniques**:
+- **Query Result Caching**: Store frequently accessed query results
+- **Report Fragment Caching**: Cache reusable report components
+- **Pre-computation**: Generate common aggregations in advance
+- **Smart Invalidation**: Selective cache clearing based on data changes
+
+### Advanced Data Pipeline Architecture
+
+**ETL Pipeline Components**:
+```python
+class EnterpriseETLPipeline:
+    def __init__(self, config):
+        self.extractors = self.init_extractors(config.sources)
+        self.transformers = self.init_transformers(config.rules)
+        self.loaders = self.init_loaders(config.destinations)
+        self.orchestrator = PipelineOrchestrator(config.workflow)
+
+    def execute(self):
+        # Extract phase with parallel processing
+        raw_data = self.parallel_extract()
+
+        # Transform with validation and enrichment
+        transformed = self.transform_with_quality_checks(raw_data)
+
+        # Load with error handling and rollback
+        results = self.load_with_recovery(transformed)
+
+        # Generate execution report
+        return self.generate_pipeline_report(results)
+
+    def parallel_extract(self):
+        with ThreadPoolExecutor(max_workers=10) as executor:
+            futures = []
+            for extractor in self.extractors:
+                future = executor.submit(extractor.extract)
+                futures.append(future)
+
+            results = []
+            for future in as_completed(futures):
+                try:
+                    data = future.result(timeout=300)
+                    results.append(data)
+                except TimeoutError:
+                    self.handle_extraction_timeout()
+
+            return self.merge_extracted_data(results)
+```
+
+**Pipeline Monitoring and Observability**:
+- **Metrics Collection**: Track throughput, latency, error rates
+- **Data Lineage**: Trace data flow from source to destination
+- **Quality Monitoring**: Automated data quality checks at each stage
+- **Alert Configuration**: Proactive notification of pipeline issues
+
+---
+
+## Section G: Advanced Security and Compliance (40 minutes)
+
+### Data Privacy and Protection
+
+**Privacy-Preserving Techniques**:
+```javascript
+class PrivacyEngine {
+    constructor(config) {
+        this.piiDetector = new PIIDetector(config.patterns);
+        this.masker = new DataMasker(config.maskingRules);
+        this.encryptor = new FieldEncryptor(config.encryption);
+        this.auditor = new PrivacyAuditor(config.logging);
+    }
+
+    processReportData(data) {
+        // Detect PII in data
+        const piiFields = this.piiDetector.scan(data);
+
+        // Apply masking based on user role and context
+        const maskedData = this.applyContextualMasking(data, piiFields);
+
+        // Encrypt sensitive fields
+        const encryptedData = this.encryptSensitiveFields(maskedData);
+
+        // Audit data access
+        this.auditor.logDataAccess({
+            timestamp: new Date(),
+            data: this.getDataFingerprint(data),
+            user: this.getCurrentUser(),
+            purpose: this.getAccessPurpose()
+        });
+
+        return encryptedData;
+    }
+
+    applyContextualMasking(data, piiFields) {
+        const userRole = this.getUserRole();
+        const accessContext = this.getAccessContext();
+
+        return this.masker.mask(data, piiFields, {
+            role: userRole,
+            context: accessContext,
+            regulations: this.getApplicableRegulations()
+        });
+    }
+}
+```
+
+**Regulatory Compliance Frameworks**:
+
+**GDPR Compliance**:
+```console
+Compliance > GDPR > Configuration
+1. Enable consent management for personal data
+2. Implement right-to-erasure procedures
+3. Configure data portability exports
+4. Set up breach notification workflows
+5. Generate compliance audit reports
+```
+
+**HIPAA Compliance**:
+```console
+Compliance > HIPAA > Security Controls
+1. Implement access controls with minimum necessary
+2. Configure audit logging for all PHI access
+3. Enable encryption for data at rest and in transit
+4. Set up automatic logoff and session management
+5. Generate security risk assessments
+```
+
+### Advanced Access Control and Governance
+
+**Attribute-Based Access Control (ABAC)**:
+```python
+class ABACEngine:
+    def __init__(self):
+        self.policy_store = PolicyStore()
+        self.attribute_resolver = AttributeResolver()
+        self.decision_engine = DecisionEngine()
+
+    def authorize_report_access(self, user, report, context):
+        # Resolve user attributes
+        user_attributes = self.attribute_resolver.get_user_attributes(user)
+
+        # Resolve report attributes
+        report_attributes = self.attribute_resolver.get_report_attributes(report)
+
+        # Resolve environmental attributes
+        env_attributes = self.attribute_resolver.get_environment_attributes(context)
+
+        # Combine all attributes
+        request_context = {
+            'user': user_attributes,
+            'resource': report_attributes,
+            'environment': env_attributes,
+            'action': 'view_report'
+        }
+
+        # Evaluate policies
+        decision = self.decision_engine.evaluate(
+            self.policy_store.get_applicable_policies(request_context),
+            request_context
+        )
+
+        # Log decision
+        self.audit_authorization_decision(decision, request_context)
+
+        return decision
+```
+
+**Data Governance Framework**:
+- **Data Classification**: Automatic classification based on content analysis
+- **Retention Policies**: Automated enforcement of data retention rules
+- **Access Certification**: Regular review and recertification of access rights
+- **Lineage Tracking**: Complete data flow documentation and impact analysis
+
+---
+
+## Section H: Real-World Implementation Case Studies (35 minutes)
+
+### Case Study 1: Global Financial Services Implementation
+
+**Challenge**:
+- 500,000+ endpoints across 80 countries
+- Strict regulatory requirements (SOX, Basel III, GDPR)
+- Real-time risk reporting requirements
+- Multi-language support needs
+
+**Solution Architecture**:
+```yaml
+deployment:
+  regions:
+    americas:
+      primary_dc: us-east-1
+      dr_dc: us-west-2
+      report_servers: 8
+      cache_nodes: 16
+
+    emea:
+      primary_dc: eu-central-1
+      dr_dc: eu-west-1
+      report_servers: 10
+      cache_nodes: 20
+
+    apac:
+      primary_dc: ap-southeast-1
+      dr_dc: ap-northeast-1
+      report_servers: 6
+      cache_nodes: 12
+
+  global_aggregation:
+    location: us-east-1
+    servers: 4
+    database: postgres_cluster
+    cache: redis_cluster
+
+  performance_metrics:
+    report_generation: &lt;5_seconds
+    export_throughput: 100k_records/second
+    availability: 99.99%
+```
+
+**Results Achieved**:
+- 80% reduction in report generation time
+- 99.99% availability for critical compliance reports
+- $3M annual savings from automation
+- Zero compliance violations in 3 years
+
+### Case Study 2: Healthcare Network Implementation
+
+**Challenge**:
+- 200 hospitals and 1000+ clinics
+- HIPAA compliance requirements
+- Integration with 15+ EMR systems
+- Real-time patient safety reporting
+
+**Implementation Approach**:
+```javascript
+// Healthcare Report Pipeline
+class HealthcareReportPipeline {
+    constructor() {
+        this.emrConnectors = this.initializeEMRConnectors();
+        this.deidentifier = new HIPAADeidentifier();
+        this.qualityEngine = new ClinicalQualityEngine();
+        this.alertSystem = new PatientSafetyAlerts();
+    }
+
+    async generatePatientSafetyReport() {
+        // Collect data from multiple EMR systems
+        const clinicalData = await this.collectFromEMRs();
+
+        // De-identify patient information
+        const deidentified = await this.deidentifier.process(clinicalData);
+
+        // Apply clinical quality measures
+        const qualityMetrics = await this.qualityEngine.calculate(deidentified);
+
+        // Check for safety alerts
+        const alerts = await this.alertSystem.evaluate(qualityMetrics);
+
+        // Generate report with appropriate access controls
+        return this.generateReport({
+            metrics: qualityMetrics,
+            alerts: alerts,
+            compliance: this.checkCompliance(qualityMetrics),
+            timestamp: new Date()
+        });
+    }
+}
+```
+
+**Outcomes**:
+- 60% reduction in patient safety incidents
+- 100% HIPAA compliance audit success
+- Real-time alerting for critical conditions
+- Improved clinical quality scores across network
+
+### Case Study 3: Manufacturing Enterprise
+
+**Challenge**:
+- 150 manufacturing facilities globally
+- OT/IT convergence requirements
+- Real-time production monitoring
+- Supply chain visibility needs
+
+**Production Monitoring Dashboard**:
+```python
+class ProductionMonitoringSystem:
+    def __init__(self):
+        self.scada_collectors = self.init_scada_connections()
+        self.mes_integration = MESIntegration()
+        self.supply_chain = SupplyChainConnector()
+        self.analytics_engine = ProductionAnalytics()
+
+    def generate_production_dashboard(self):
+        # Collect real-time production data
+        production_data = self.collect_production_metrics()
+
+        # Analyze for anomalies and efficiency
+        analysis = self.analytics_engine.analyze(production_data)
+
+        # Generate predictive insights
+        predictions = self.predict_maintenance_needs(production_data)
+
+        # Create executive dashboard
+        dashboard = {
+            'oee': self.calculate_oee(production_data),
+            'quality_metrics': analysis['quality'],
+            'efficiency_trends': analysis['efficiency'],
+            'maintenance_schedule': predictions['maintenance'],
+            'supply_chain_status': self.supply_chain.get_status(),
+            'alerts': self.generate_alerts(analysis)
+        }
+
+        return self.format_dashboard(dashboard)
+
+    def calculate_oee(self, data):
+        # Overall Equipment Effectiveness calculation
+        availability = data['uptime'] / data['planned_time']
+        performance = data['actual_output'] / data['theoretical_output']
+        quality = data['good_units'] / data['total_units']
+
+        return {
+            'oee_score': availability * performance * quality,
+            'availability': availability,
+            'performance': performance,
+            'quality': quality
+        }
+```
+
+**Results**:
+- 25% improvement in OEE across facilities
+- 40% reduction in unplanned downtime
+- Real-time supply chain visibility
+- $10M annual savings from optimization
+
+---
+
+## Section I: Advanced Troubleshooting Scenarios (30 minutes)
+
+### Complex Performance Troubleshooting
+
+**Scenario: Report Generation Timeout in Production**
+
+**Symptoms**:
+- Reports timing out after 5 minutes
+- Database CPU at 95%+
+- Users experiencing browser crashes
+- Export queue backing up
+
+**Diagnostic Approach**:
+```bash
+#!/bin/bash
+# Advanced Performance Diagnostics
+
+echo "=== Database Query Analysis ==="
+psql -c "
+SELECT
+    query,
+    calls,
+    mean_time,
+    total_time,
+    stddev_time
+FROM pg_stat_statements
+WHERE mean_time > 5000
+ORDER BY total_time DESC
+LIMIT 20;
+"
+
+echo "=== Active Connections and Locks ==="
+psql -c "
+SELECT
+    pid,
+    usename,
+    application_name,
+    state,
+    query_start,
+    state_change,
+    wait_event_type,
+    wait_event,
+    pg_blocking_pids(pid) as blocked_by
+FROM pg_stat_activity
+WHERE state != 'idle'
+ORDER BY query_start;
+"
+
+echo "=== Index Usage Analysis ==="
+psql -c "
+SELECT
+    schemaname,
+    tablename,
+    indexname,
+    idx_scan,
+    idx_tup_read,
+    idx_tup_fetch,
+    pg_size_pretty(pg_relation_size(indexrelid)) as index_size
+FROM pg_stat_user_indexes
+WHERE idx_scan = 0
+AND indexrelid NOT IN (
+    SELECT indexrelid
+    FROM pg_stat_user_indexes
+    WHERE idx_scan > 0
+)
+ORDER BY pg_relation_size(indexrelid) DESC;
+"
+
+echo "=== Report Server Memory Analysis ==="
+ps aux | grep report_server | awk '{sum+=$6} END {print "Total RSS: " sum/1024 " MB"}'
+
+echo "=== Network Latency Check ==="
+for server in db1 db2 cache1 cache2; do
+    echo -n "$server: "
+    ping -c 5 -q $server | tail -1 | awk '{print $4}'
+done
+```
+
+**Root Cause Analysis Process**:
+1. **Query Optimization**: Identify and optimize slow queries
+2. **Index Analysis**: Add missing indexes, remove unused ones
+3. **Resource Allocation**: Adjust memory and CPU allocation
+4. **Caching Strategy**: Implement aggressive caching for static data
+5. **Partitioning**: Implement table partitioning for large datasets
+
+**Resolution Implementation**:
+```sql
+-- Performance optimization queries
+-- Add missing indexes
+CREATE INDEX CONCURRENTLY idx_report_data_composite
+ON report_data(report_date, status, organization_id)
+WHERE deleted = false;
+
+-- Partition large tables
+CREATE TABLE report_data_2024_q4 PARTITION OF report_data
+FOR VALUES FROM ('2024-10-01') TO ('2025-01-01');
+
+-- Update statistics
+ANALYZE report_data;
+VACUUM ANALYZE report_data;
+
+-- Optimize query planner
+SET random_page_cost = 1.1;
+SET effective_cache_size = '24GB';
+```
+
+### Data Integrity Crisis Management
+
+**Scenario: Inconsistent Report Data Across Regions**
+
+**Investigation Framework**:
+```python
+class DataIntegrityInvestigator:
+    def __init__(self):
+        self.regions = ['us-east', 'eu-central', 'ap-south']
+        self.validator = DataValidator()
+        self.reconciler = DataReconciler()
+
+    def investigate_discrepancy(self, report_id, date_range):
+        discrepancies = []
+
+        # Collect data from all regions
+        regional_data = {}
+        for region in self.regions:
+            regional_data[region] = self.fetch_regional_data(
+                region, report_id, date_range
+            )
+
+        # Compare data across regions
+        for i, region1 in enumerate(self.regions):
+            for region2 in self.regions[i+1:]:
+                diff = self.compare_datasets(
+                    regional_data[region1],
+                    regional_data[region2]
+                )
+                if diff:
+                    discrepancies.append({
+                        'regions': [region1, region2],
+                        'differences': diff,
+                        'impact': self.assess_impact(diff)
+                    })
+
+        # Identify root cause
+        root_cause = self.analyze_root_cause(discrepancies)
+
+        # Generate remediation plan
+        remediation = self.create_remediation_plan(root_cause, discrepancies)
+
+        return {
+            'discrepancies': discrepancies,
+            'root_cause': root_cause,
+            'remediation': remediation,
+            'estimated_resolution_time': self.estimate_resolution_time(remediation)
+        }
+```
+
+### Export Pipeline Failure Recovery
+
+**Scenario: Critical Export Pipeline Failure During Month-End**
+
+**Recovery Procedure**:
+```yaml
+recovery_playbook:
+  immediate_actions:
+    - identify_failure_point:
+        command: check_pipeline_status.sh
+        timeout: 30s
+    - preserve_state:
+        command: snapshot_pipeline_state.sh
+        output: /recovery/state_backup
+    - notify_stakeholders:
+        channels: [email, slack, pagerduty]
+        severity: critical
+
+  diagnostic_steps:
+    - check_dependencies:
+        services: [database, cache, message_queue]
+        networks: [internal, external_apis]
+    - validate_credentials:
+        systems: [source_db, target_api, file_storage]
+    - review_recent_changes:
+        sources: [git_commits, config_changes, deployments]
+
+  recovery_options:
+    option_1:
+      name: "Rollback and Replay"
+      steps:
+        - rollback_to_last_known_good
+        - replay_from_checkpoint
+        - validate_output
+      estimated_time: 2_hours
+
+    option_2:
+      name: "Manual Recovery"
+      steps:
+        - export_data_manually
+        - transform_using_scripts
+        - load_to_destination
+      estimated_time: 4_hours
+
+    option_3:
+      name: "Failover to DR"
+      steps:
+        - activate_dr_pipeline
+        - redirect_traffic
+        - sync_when_recovered
+      estimated_time: 30_minutes
+
+  validation:
+    - verify_data_completeness
+    - check_data_quality
+    - confirm_delivery
+    - update_monitoring
+```
+
+---
+
+## TCO Exam Preparation: Critical Topics
+
+### Must-Know Concepts for Domain 5 (17% of exam)
+
+**High-Frequency Exam Topics**:
+1. **Report Type Selection**: Matching report types to stakeholder needs
+2. **Performance Optimization**: Query optimization and caching strategies
+3. **Export Format Selection**: When to use CSV vs JSON vs API
+4. **Data Quality Assurance**: Validation frameworks and quality metrics
+5. **Troubleshooting Methodology**: Systematic approach to report/export issues
+
+**Common Exam Scenarios**:
+- Design reporting architecture for 100,000+ endpoint environment
+- Optimize slow-running reports with performance constraints
+- Implement compliance reporting for multiple regulations
+- Troubleshoot export pipeline failures systematically
+- Select appropriate export formats for integration scenarios
+
+**Key Metrics to Remember**:
+- Report timeout: Default 5 minutes, max 30 minutes
+- Export batch sizes: 1000-10000 records optimal
+- Cache TTL: L1 (5 min), L2 (1 hour), L3 (24 hours)
+- Data retention: Compliance typically 7 years
+- Performance targets: &lt;5 second report generation
+
+**Time Management Strategy**:
+- Basic concepts: 1-2 minutes per question
+- Scenario analysis: 3-4 minutes per question
+- Troubleshooting: 4-5 minutes per question
+- Architecture design: 5-6 minutes per question
+
+---
+
+## Final Module Summary
+
+This comprehensive module has equipped you with enterprise-grade reporting and data export capabilities essential for TCO certification success. You've mastered:
+
+- **Report Building Excellence**: From basic configuration to advanced multi-source integration
+- **Export Mastery**: All formats, performance optimization, and enterprise integration
+- **Troubleshooting Expertise**: Systematic approaches to complex production issues
+- **Enterprise Architecture**: Scalable, secure, compliant reporting infrastructures
+- **Real-World Application**: Case studies from financial, healthcare, and manufacturing sectors
+
+Remember: Domain 5 represents 17% of your TCO exam. Focus on practical implementation, performance optimization, and troubleshooting scenarios for exam success.

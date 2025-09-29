@@ -602,11 +602,17 @@ export default function ModuleRenderer({ moduleData }: ModuleRendererProps) {
 
       {/* Mobile TOC toggle */}
       <div className="mb-4 lg:hidden">
-        <Button variant="outline" className="border-cyan-600/40 text-cyan-200 hover:bg-cyan-900/30" onClick={() => setShowToc((v) => !v)}>
+        <Button
+          variant="outline"
+          className="border-cyan-600/40 text-cyan-200 hover:bg-cyan-900/30"
+          onClick={() => setShowToc((v) => !v)}
+          aria-expanded={showToc}
+          aria-controls="module-toc"
+        >
           {showToc ? 'Hide' : 'Show'} Section List
         </Button>
         {showToc && (
-          <Card className="mt-3 border-cyan-500/30 bg-gradient-to-b from-gray-900/50 to-cyan-900/20">
+          <Card className="mt-3 border-cyan-500/30 bg-gradient-to-b from-gray-900/50 to-cyan-900/20" id="module-toc">
             <CardContent className="pt-4">
               <ul className="space-y-2">
                 {sections.map((s) => (
@@ -637,8 +643,8 @@ export default function ModuleRenderer({ moduleData }: ModuleRendererProps) {
       <div className="relative flex gap-8">
         <div ref={containerRef} className="prose prose-lg prose-invert max-w-none flex-1 overflow-y-auto max-h-[70vh] pr-2">
           {/* Sticky current section header */}
-          <div className="sticky top-0 z-10 -mx-2 mb-2 border-b border-cyan-900/40 bg-gray-950/60 px-2 py-2 backdrop-blur">
-            <div className="flex items-center justify-between">
+          <div className="sticky top-0 z-10 -mx-2 mb-2 border-b border-cyan-900/40 bg-gray-950/60 px-2 backdrop-blur">
+            <div className="flex h-10 items-center justify-between">
               <div className="truncate text-sm text-cyan-200">
                 {stripEtaSuffix((sections.find((s) => s.id === activeId)?.title || sections[0]?.title || frontmatter.title))}
               </div>

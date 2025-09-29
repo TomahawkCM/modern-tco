@@ -2,10 +2,11 @@
 
 import { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
+import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { AppHeader } from "./app-header";
 import { Sidebar } from "./sidebar";
 import { BreadcrumbNav } from "./breadcrumb-nav";
-import { CyberpunkNavBar, type NavItem } from "../CyberpunkNavigation";
+import { CyberpunkNavBar, type NavItem } from "../CyberpunkNavigationFixed";
 import { Cpu, BookOpen, ClipboardCheck, BarChart3, Settings, Menu, Terminal, PlayCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -29,19 +30,57 @@ const tcoNavItems: NavItem[] = [
 ];
 
 export function MainLayout({ children, asGlobal = false }: MainLayoutProps) {
+  // Debug mode disabled - using full layout
+  const ENABLE_DEBUG_MODE = false;
+
+  if (ENABLE_DEBUG_MODE) {
+    console.log('[MainLayout] Running in DEBUG mode - simple layout');
+    return (
+      <div className="min-h-screen bg-gray-900">
+        {/* Simple test header */}
+        <div className="fixed top-0 left-0 right-0 z-50 bg-blue-900 text-white p-4">
+          <h1 className="text-xl font-bold">TANIUM TCO - DEBUG MODE</h1>
+          <p className="text-sm">If you see this, the basic layout is working</p>
+        </div>
+
+        {/* Simple sidebar */}
+        <div className="fixed left-0 top-16 bottom-0 w-64 bg-gray-800 text-white p-4">
+          <h2 className="font-bold mb-4">Navigation</h2>
+          <ul className="space-y-2">
+            <li><a href="/" className="hover:text-blue-400">Dashboard</a></li>
+            <li><a href="/study" className="hover:text-blue-400">Study</a></li>
+            <li><a href="/practice" className="hover:text-blue-400">Practice</a></li>
+          </ul>
+        </div>
+
+        {/* Main content */}
+        <div className="pl-64 pt-16">
+          <div className="p-8">
+            {children}
+          </div>
+        </div>
+      </div>
+    );
+  }
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [isDesktop, setIsDesktop] = useState(false);
   const [showBackground, setShowBackground] = useState(false);
   const AnimatedBackground = dynamic(
-    () => import("../CyberpunkNavigation").then((m) => m.AnimatedBackground),
-    { ssr: false }
+    () => import("../CyberpunkNavigationFixed").then((m) => m.AnimatedBackground),
+    { ssr: false, loading: () => null }
   );
   const globalNavActive = useGlobalNavActive();
 
   // If global nav is already active elsewhere and this isn't the global shell, collapse to passthrough
+  // DEBUG: Log when this happens
+  // TEMPORARILY DISABLED TO DEBUG RENDERING ISSUE
+  /*
   if (!asGlobal && globalNavActive) {
+    console.log('[MainLayout] Bypassing layout - asGlobal:', asGlobal, 'globalNavActive:', globalNavActive);
     return <>{children}</>;
   }
+  */
+  console.log('[MainLayout] Rendering full layout - asGlobal:', asGlobal, 'globalNavActive:', globalNavActive);
 
   // Detect screen size for responsive behavior
   useEffect(() => {
@@ -68,18 +107,19 @@ export function MainLayout({ children, asGlobal = false }: MainLayoutProps) {
 
   return (
     <div className="relative min-h-screen">
-      {/* Particle Background (deferred, desktop-only) */}
-      {showBackground && <AnimatedBackground />}
-      
-      {/* Enhanced Cyberpunk Navigation with Mobile Menu */}
-      <div className="relative z-20">
-        <CyberpunkNavBar 
-          navItems={tcoNavItems}
-          brandName="TANIUM TCO"
-          onTabChange={(tabName) => {
-            console.log(`Navigating to: ${tabName}`);
-          }}
-        />
+      {/* Particle Background (deferred, desktop-only) - Set to background layer */}
+      {showBackground && <div className="fixed inset-0 z-0"><AnimatedBackground /></div>}
+
+      {/* Enhanced Cyberpunk Navigation with Mobile Menu - Higher z-index */}
+      <ErrorBoundary name="CyberpunkNavBar">
+        <div className="relative z-30">
+          <CyberpunkNavBar
+            navItems={tcoNavItems}
+            brandName="TANIUM TCO"
+            onTabChange={(tabName) => {
+              console.log(`Navigating to: ${tabName}`);
+            }}
+          />
         
         {/* Mobile Menu Button */}
         <Button
@@ -91,19 +131,24 @@ export function MainLayout({ children, asGlobal = false }: MainLayoutProps) {
         >
           <Menu className="h-5 w-5 text-white" />
         </Button>
-      </div>
+        </div>
+      </ErrorBoundary>
 
-      {/* Modern Responsive Sidebar */}
-      <Sidebar 
-        isOpen={sidebarOpen || isDesktop} 
-        onClose={() => setSidebarOpen(false)} 
-      />
+      {/* Modern Responsive Sidebar - Ensure proper z-index */}
+      <ErrorBoundary name="Sidebar">
+        <div className="relative z-40">
+          <Sidebar
+            isOpen={sidebarOpen || isDesktop}
+            onClose={() => setSidebarOpen(false)}
+          />
+        </div>
+      </ErrorBoundary>
 
-      {/* Main content with proper responsive spacing */}
+      {/* Main content with proper responsive spacing - Higher than background */}
       <main
         id="main-content"
         className={cn(
-          "relative z-10 pt-24 px-4 pb-8 transition-all duration-300",
+          "relative z-20 pt-24 px-4 pb-8 transition-all duration-300",
           // Desktop: Add left margin for persistent sidebar
           isDesktop ? "md:ml-64" : "",
           // Mobile: Full width
@@ -119,7 +164,9 @@ export function MainLayout({ children, asGlobal = false }: MainLayoutProps) {
           
           {/* Content wrapper - transparent to show background */}
           <div className="p-6">
-            {children}
+            <ErrorBoundary name="MainContent">
+              {children}
+            </ErrorBoundary>
           </div>
         </div>
       </main>

@@ -4,6 +4,10 @@ import React from "react";
 import { MDXRemote } from "next-mdx-remote";
 import type { ModuleData } from "@/lib/mdx/module-loader";
 import PracticeButton from "@/components/mdx/PracticeButton";
+import MiniProject from "@/components/mdx/MiniProject";
+import QueryPlayground from "@/components/mdx/QueryPlayground";
+import SkillGate from "@/components/mdx/SkillGate";
+import ModuleTransition from "@/components/mdx/ModuleTransition";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -26,6 +30,10 @@ interface ClientMDXContentProps {
 const mdxComponents = {
   // Custom components available in MDX
   PracticeButton: (props: React.ComponentProps<typeof PracticeButton>) => <PracticeButton {...props} />,
+  MiniProject: (props: React.ComponentProps<typeof MiniProject>) => <MiniProject {...props} />,
+  QueryPlayground: (props: React.ComponentProps<typeof QueryPlayground>) => <QueryPlayground {...props} />,
+  SkillGate: (props: React.ComponentProps<typeof SkillGate>) => <SkillGate {...props} />,
+  ModuleTransition: (props: React.ComponentProps<typeof ModuleTransition>) => <ModuleTransition {...props} />,
 
   // Enhanced typography
   h1: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (

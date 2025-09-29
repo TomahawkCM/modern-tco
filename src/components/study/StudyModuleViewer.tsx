@@ -90,11 +90,21 @@ export function StudyModuleViewer({
 
       // Try to load from database first
       try {
+        // Try multiple domain formats to match database
+        const domainVariants = [
+          domain,
+          domain.replace(/-/g, '_').toUpperCase(),
+          domain.split('-').map((word, idx) =>
+            word.charAt(0).toUpperCase() + word.slice(1)
+          ).join(' ').replace(' And ', ' & ')
+        ];
+
         const { data: moduleData, error: moduleError } = await (supabase as any)
           .from("study_modules")
           .select("*")
-          .eq("domain", domain)
-          .single();
+          .in("domain", domainVariants)
+          .limit(1)
+          .maybeSingle();
 
         if (!moduleError && moduleData) {
           // Load study sections

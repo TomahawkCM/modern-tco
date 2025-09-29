@@ -61,6 +61,8 @@ export const FloatingNav = ({
             className={cn(
               "relative flex items-center space-x-1 text-neutral-600 hover:text-neutral-500 dark:text-neutral-50 dark:hover:text-neutral-300"
             )}
+            aria-label={navItem.name}
+            title={navItem.name}
           >
             <span className="block sm:hidden">{navItem.icon}</span>
             <span className="hidden text-sm sm:block">{navItem.name}</span>

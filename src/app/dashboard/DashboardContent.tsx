@@ -13,6 +13,7 @@ import type { StudyModuleWithSections } from "@/types/supabase";
 import { BookOpen, BookmarkIcon, Clock, LogOut, TrendingUp, Trophy, User } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import LearningProgressTracker from "@/components/learning/LearningProgressTracker";
 
 export function DashboardContent() {
   const { user, signOut } = useAuth();
@@ -169,6 +170,11 @@ export function DashboardContent() {
             <p className="mt-2 text-xs text-cyan-600 dark:text-cyan-400">Saved for later</p>
           </CardContent>
         </Card>
+      </div>
+
+      {/* Learning Progress Tracker */}
+      <div className="mb-8">
+        <LearningProgressTracker />
       </div>
 
       {/* Quick Actions */}

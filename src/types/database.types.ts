@@ -268,6 +268,7 @@ export interface Database {
           references: Json;
           exam_prep: Json;
           version: string;
+          mdx_id?: string | null;
           created_at: string;
           updated_at: string;
         };
@@ -282,6 +283,7 @@ export interface Database {
           references?: Json;
           exam_prep?: Json;
           version?: string;
+          mdx_id?: string | null;
           created_at?: string;
           updated_at?: string;
         };
@@ -296,6 +298,7 @@ export interface Database {
           references?: Json;
           exam_prep?: Json;
           version?: string;
+          mdx_id?: string | null;
           created_at?: string;
           updated_at?: string;
         };
