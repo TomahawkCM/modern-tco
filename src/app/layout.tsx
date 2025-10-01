@@ -48,10 +48,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           crossOrigin="anonymous"
         />
 
-        {/* Initialize accessibility settings BEFORE React hydration to prevent mismatch */}
+        {/* Initialize accessibility settings BEFORE React hydration - CSS handles styling */}
         <script
           dangerouslySetInnerHTML={{
-            __html: `(() => { try { var v = localStorage.getItem('tco-large-text'); if (v === '1') { document.documentElement.style.fontSize='18px'; document.documentElement.setAttribute('data-large-text','1'); } var hc = localStorage.getItem('tco-high-contrast'); if (hc === '1') { document.documentElement.setAttribute('data-high-contrast','1'); } } catch (e) {} })();`,
+            __html: `(() => { try { var v = localStorage.getItem('tco-large-text'); if (v === '1') { document.documentElement.setAttribute('data-large-text','1'); } var hc = localStorage.getItem('tco-high-contrast'); if (hc === '1') { document.documentElement.setAttribute('data-high-contrast','1'); } } catch (e) {} })();`,
           }}
         />
       </head>
@@ -69,8 +69,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <Toaster />
           </Providers>
         </div>
-        {/* High-contrast minimal global styles */}
+        {/* Accessibility global styles - CSS-based to avoid hydration errors */}
         <style>{`
+          html[data-large-text="1"] { font-size: 18px; }
           html[data-high-contrast="1"] body { filter: contrast(1.15) saturate(1.1); }
           html[data-high-contrast="1"] :focus-visible { outline: 2px solid #38bdf8; outline-offset: 2px; }
         `}</style>
