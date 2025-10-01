@@ -50,6 +50,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body className="font-sans antialiased">
+        {/* HYDRATION FIX: AccessibilityInitializer applies settings AFTER React hydration
+            Previously had inline script in <head> that caused React Error #418
+            See HYDRATION_FIX_SUMMARY.md and AccessibilityInitializer.tsx for details */}
         <AccessibilityInitializer />
         <div className="min-h-screen bg-gradient-to-br from-black via-black to-black">
           <Providers>

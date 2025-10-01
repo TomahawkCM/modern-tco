@@ -8,13 +8,16 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 export function HeroSection() {
+  // HYDRATION FIX: mounted state prevents React Error #418
+  // See HYDRATION_FIX_SUMMARY.md for details
+  // Without this, server renders different time-based text than client, causing mismatch
   const [mounted, setMounted] = useState(false);
   const [currentTime, setCurrentTime] = useState(new Date());
   const [typedText, setTypedText] = useState("");
   const fullText = "WELCOME TO YOUR TCO MASTERY JOURNEY";
 
   useEffect(() => {
-    setMounted(true);
+    setMounted(true); // Mark as client-side, enables time-based greeting
     const timer = setInterval(() => setCurrentTime(new Date()), 1000);
     return () => clearInterval(timer);
   }, []);
@@ -32,8 +35,10 @@ export function HeroSection() {
     return () => clearInterval(typeTimer);
   }, []);
 
+  // HYDRATION FIX: Returns consistent "Welcome" during SSR, then updates to time-based greeting
+  // This prevents server/client text mismatch that caused React Error #418
   const getGreeting = () => {
-    if (!mounted) return "Welcome"; // Default during SSR
+    if (!mounted) return "Welcome"; // Consistent text for SSR/hydration
     const hour = currentTime.getHours();
     if (hour < 12) return "Good morning";
     if (hour < 18) return "Good afternoon";
