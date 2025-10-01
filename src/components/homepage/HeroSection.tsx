@@ -8,11 +8,13 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 export function HeroSection() {
+  const [mounted, setMounted] = useState(false);
   const [currentTime, setCurrentTime] = useState(new Date());
   const [typedText, setTypedText] = useState("");
   const fullText = "WELCOME TO YOUR TCO MASTERY JOURNEY";
 
   useEffect(() => {
+    setMounted(true);
     const timer = setInterval(() => setCurrentTime(new Date()), 1000);
     return () => clearInterval(timer);
   }, []);
@@ -31,6 +33,7 @@ export function HeroSection() {
   }, []);
 
   const getGreeting = () => {
+    if (!mounted) return "Welcome"; // Default during SSR
     const hour = currentTime.getHours();
     if (hour < 12) return "Good morning";
     if (hour < 18) return "Good afternoon";
