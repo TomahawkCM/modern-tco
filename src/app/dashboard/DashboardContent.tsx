@@ -112,14 +112,9 @@ export function DashboardContent() {
               ? bookmark.section.title
               : "Untitled Section",
           moduleTitle:
-            typeof bookmark.module?.title === "string"
-              ? bookmark.module.title
-              : "Unknown Module",
+            typeof bookmark.module?.title === "string" ? bookmark.module.title : "Unknown Module",
           notes: bookmark.notes ?? undefined,
-          href:
-            moduleId && sectionId
-              ? `/study/modules/${moduleId}/sections/${sectionId}`
-              : "#",
+          href: moduleId && sectionId ? `/study/modules/${moduleId}/sections/${sectionId}` : "#",
         };
       }),
     [recentBookmarks]
@@ -161,7 +156,11 @@ export function DashboardContent() {
             <div className="mb-1 text-2xl font-bold text-blue-700 dark:text-blue-300">
               {overallStats.completionRate}%
             </div>
-            <Progress value={overallStats.completionRate} className="h-2" />
+            <Progress
+              value={overallStats.completionRate}
+              className="h-2"
+              aria-label={`Overall study progress: ${overallStats.completionRate}% complete`}
+            />
             <p className="mt-2 text-xs text-blue-600 dark:text-blue-400">
               {overallStats.completed} of {totalSections} sections
             </p>
@@ -280,9 +279,7 @@ export function DashboardContent() {
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="mb-2 text-xs text-muted-foreground">
-                    {bookmark.moduleTitle}
-                  </p>
+                  <p className="mb-2 text-xs text-muted-foreground">{bookmark.moduleTitle}</p>
                   {bookmark.notes && (
                     <p className="line-clamp-2 text-xs text-slate-600 dark:text-slate-400">
                       {bookmark.notes}

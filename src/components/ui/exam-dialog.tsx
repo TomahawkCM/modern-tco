@@ -308,7 +308,11 @@ export function ExamPauseSheet({
                 {currentQuestion}/{totalQuestions} questions
               </span>
             </div>
-            <Progress value={(currentQuestion / totalQuestions) * 100} className="h-2" />
+            <Progress
+              value={(currentQuestion / totalQuestions) * 100}
+              className="h-2"
+              aria-label={`Exam progress: Question ${currentQuestion} of ${totalQuestions}`}
+            />
           </div>
 
           {/* Time remaining */}

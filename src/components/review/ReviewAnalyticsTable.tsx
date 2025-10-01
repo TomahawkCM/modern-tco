@@ -198,9 +198,9 @@ export function ReviewAnalyticsTable({
   const SortIcon = ({ field }: { field: SortField }) => {
     if (sortField !== field) return null;
     return sortOrder === "asc" ? (
-      <ChevronUp className="ml-1 h-3 w-3 inline" />
+      <ChevronUp className="ml-1 inline h-3 w-3" />
     ) : (
-      <ChevronDown className="ml-1 h-3 w-3 inline" />
+      <ChevronDown className="ml-1 inline h-3 w-3" />
     );
   };
 
@@ -208,11 +208,12 @@ export function ReviewAnalyticsTable({
   const totalQuestions = analyticsData.reduce((sum, row) => sum + row.total, 0);
   const totalReviewed = analyticsData.reduce((sum, row) => sum + row.reviewed, 0);
   const totalPending = analyticsData.reduce((sum, row) => sum + row.pending, 0);
-  const overallPercentage = totalQuestions > 0 ? Math.round((totalReviewed / totalQuestions) * 100) : 0;
+  const overallPercentage =
+    totalQuestions > 0 ? Math.round((totalReviewed / totalQuestions) * 100) : 0;
 
   return (
     <Card className="glass border-white/10">
-      <CardHeader className="sticky top-0 z-10 glass border-b border-white/10">
+      <CardHeader className="glass sticky top-0 z-10 border-b border-white/10">
         <div className="flex items-center justify-between">
           <CardTitle className="flex items-center gap-2 text-white">
             <AlertTriangle className="h-5 w-5 text-yellow-400" />
@@ -241,13 +242,17 @@ export function ReviewAnalyticsTable({
           </div>
         </div>
         <div className="mt-2">
-          <Progress value={overallPercentage} className="h-2" />
+          <Progress
+            value={overallPercentage}
+            className="h-2"
+            aria-label={`Overall review progress: ${overallPercentage}% complete`}
+          />
           <p className="mt-1 text-xs text-gray-400">{overallPercentage}% Complete</p>
         </div>
       </CardHeader>
       <CardContent className="p-0">
         <Table>
-          <TableHeader className="sticky top-24 z-9 glass">
+          <TableHeader className="z-9 glass sticky top-24">
             <TableRow className="border-white/10">
               <TableHead
                 className="cursor-pointer text-white hover:text-tanium-accent"
@@ -336,7 +341,11 @@ export function ReviewAnalyticsTable({
                   </TableCell>
                   <TableCell>
                     <div className="flex items-center gap-2">
-                      <Progress value={row.percentageReviewed} className="h-2 flex-1" />
+                      <Progress
+                        value={row.percentageReviewed}
+                        className="h-2 flex-1"
+                        aria-label={`${row.domain} review progress: ${row.percentageReviewed}% complete`}
+                      />
                       <span className="text-xs text-gray-400">{row.percentageReviewed}%</span>
                     </div>
                   </TableCell>
@@ -347,7 +356,7 @@ export function ReviewAnalyticsTable({
                       className="text-tanium-accent hover:bg-tanium-accent/20"
                       onClick={() => onDomainFilter?.(row.domain)}
                     >
-                      <Filter className="h-3 w-3 mr-1" />
+                      <Filter className="mr-1 h-3 w-3" />
                       Filter
                     </Button>
                   </TableCell>

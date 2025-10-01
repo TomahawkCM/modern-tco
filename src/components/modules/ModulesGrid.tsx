@@ -24,19 +24,25 @@ type ModuleMeta = {
 
 export function ModulesGrid({ modules }: { modules: ModuleMeta[] }) {
   const { user } = useAuth();
-  const {
-    getModuleProgress,
-    getStudyNeedsReviewMap,
-    getLastViewedSectionsMap
-  } = useDatabase();
+  const { getModuleProgress, getStudyNeedsReviewMap, getLastViewedSectionsMap } = useDatabase();
 
-  const [progress, setProgress] = useState<Record<string, {
-    completed_sections?: number;
-    total_sections?: number;
-    status?: string;
-    last_updated?: string;
-  }>>({});
-  const [local, setLocal] = useState<Record<string, { lastViewed?: string | null; completed?: number; total?: number; needs?: number }>>({});
+  const [progress, setProgress] = useState<
+    Record<
+      string,
+      {
+        completed_sections?: number;
+        total_sections?: number;
+        status?: string;
+        last_updated?: string;
+      }
+    >
+  >({});
+  const [local, setLocal] = useState<
+    Record<
+      string,
+      { lastViewed?: string | null; completed?: number; total?: number; needs?: number }
+    >
+  >({});
   const [error, setError] = useState<string | null>(null);
   const [needsMap, setNeedsMap] = useState<Record<string, number>>({});
   const [lastMap, setLastMap] = useState<Record<string, string>>({});
@@ -77,7 +83,10 @@ export function ModulesGrid({ modules }: { modules: ModuleMeta[] }) {
 
       // Load local fallback progress saved by ModuleRenderer
       try {
-        const out: Record<string, { lastViewed?: string | null; completed?: number; total?: number }> = {};
+        const out: Record<
+          string,
+          { lastViewed?: string | null; completed?: number; total?: number }
+        > = {};
         for (const m of modules) {
           const key = `tco-study-progress:${m.frontmatter.id}`;
           try {
@@ -88,7 +97,12 @@ export function ModulesGrid({ modules }: { modules: ModuleMeta[] }) {
             const completed = sections.filter((s: any) => s?.completed).length;
             const total = sections.length ?? undefined;
             const needs = sections.filter((s: any) => s?.needsReview && !s?.completed).length;
-            (out as any)[m.frontmatter.id] = { lastViewed: parsed?.lastViewed ?? null, completed, total, needs };
+            (out as any)[m.frontmatter.id] = {
+              lastViewed: parsed?.lastViewed ?? null,
+              completed,
+              total,
+              needs,
+            };
           } catch {}
         }
         if (mounted) setLocal(out);
@@ -122,46 +136,54 @@ export function ModulesGrid({ modules }: { modules: ModuleMeta[] }) {
             const lc = local[frontmatter.id];
             percent = lc.total! > 0 ? Math.round(((lc.completed ?? 0) / lc.total!) * 100) : 0;
           }
-          const status = (p?.status as string) || (percent >= 100 ? "completed" : percent > 0 ? "in_progress" : "not_started");
-          const needs = needsMap[frontmatter.id] ?? (local[frontmatter.id]?.needs ?? 0);
+          const status =
+            (p?.status as string) ||
+            (percent >= 100 ? "completed" : percent > 0 ? "in_progress" : "not_started");
+          const needs = needsMap[frontmatter.id] ?? local[frontmatter.id]?.needs ?? 0;
           const lastViewed = lastMap[frontmatter.id] || (local[frontmatter.id]?.lastViewed ?? null);
 
           const statusColor =
             status === "completed"
               ? "border-green-500/50 bg-green-900/50 text-green-200"
               : status === "in_progress"
-              ? "border-yellow-500/50 bg-yellow-900/50 text-yellow-200"
-              : status === "bookmarked"
-              ? "border-cyan-500/50 bg-cyan-900/50 text-cyan-200"
-              : "border-gray-500/50 bg-gray-900/50 text-gray-200";
+                ? "border-yellow-500/50 bg-yellow-900/50 text-yellow-200"
+                : status === "bookmarked"
+                  ? "border-cyan-500/50 bg-cyan-900/50 text-cyan-200"
+                  : "border-gray-500/50 bg-gray-900/50 text-gray-200";
 
           return (
             <Link key={slug} href={`/modules/${slug}`} className="no-underline">
               <Card className="h-full border-blue-500/20 bg-gradient-to-br from-gray-900/60 to-blue-900/40 transition hover:border-blue-500/40 hover:shadow-lg hover:shadow-blue-900/20">
                 <CardHeader className="space-y-1">
                   <div className="mb-2 flex flex-wrap items-center gap-2">
-                    <Badge variant="outline" className="border-blue-500/50 bg-blue-900/50 text-blue-200">
-                      {frontmatter.domainEnum.replace(/_/g, " ")}
-                    </Badge>
-                    <Badge variant="outline" className="border-cyan-500/40 bg-cyan-900/40 text-cyan-200">
-                      {frontmatter.difficulty}
-                    </Badge>
-                  <span className="flex items-center gap-1 text-sm text-gray-300">
-                    <Clock className="h-4 w-4" /> {frontmatter.estimatedTime ?? "—"}
-                  </span>
-                  <Badge variant="outline" className={statusColor}>
-                    {status.replace(/_/g, " ")}
-                  </Badge>
-                  {needs > 0 && (
                     <Badge
                       variant="outline"
-                      className="border-yellow-500/60 bg-yellow-900/40 text-yellow-200"
-                      aria-label={`Needs review ${needs}`}
-                      title={`Needs review: ${needs}`}
+                      className="border-blue-500/50 bg-blue-900/50 text-blue-200"
                     >
-                      Review {needs}
+                      {frontmatter.domainEnum.replace(/_/g, " ")}
                     </Badge>
-                  )}
+                    <Badge
+                      variant="outline"
+                      className="border-cyan-500/40 bg-cyan-900/40 text-cyan-200"
+                    >
+                      {frontmatter.difficulty}
+                    </Badge>
+                    <span className="flex items-center gap-1 text-sm text-gray-300">
+                      <Clock className="h-4 w-4" /> {frontmatter.estimatedTime ?? "—"}
+                    </span>
+                    <Badge variant="outline" className={statusColor}>
+                      {status.replace(/_/g, " ")}
+                    </Badge>
+                    {needs > 0 && (
+                      <Badge
+                        variant="outline"
+                        className="border-yellow-500/60 bg-yellow-900/40 text-yellow-200"
+                        aria-label={`Needs review ${needs}`}
+                        title={`Needs review: ${needs}`}
+                      >
+                        Review {needs}
+                      </Badge>
+                    )}
                   </div>
                   <CardTitle className="text-xl text-white">{frontmatter.title}</CardTitle>
                   {frontmatter.description && (
@@ -176,7 +198,10 @@ export function ModulesGrid({ modules }: { modules: ModuleMeta[] }) {
                       <span>Progress</span>
                       <span>{percent}%</span>
                     </div>
-                    <Progress value={percent} />
+                    <Progress
+                      value={percent}
+                      aria-label={`${frontmatter.title} progress: ${percent}% complete`}
+                    />
                   </div>
                   {frontmatter.learningObjectives && frontmatter.learningObjectives.length > 0 && (
                     <ul className="ml-5 list-disc space-y-1 text-gray-200">

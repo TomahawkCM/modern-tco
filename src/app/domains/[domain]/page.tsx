@@ -108,8 +108,7 @@ const DOMAIN_DETAILS: Record<string, DomainDetails> = {
   },
   security: {
     title: "Security & Risk",
-    description:
-      "Apply Tanium security modules to detect, investigate, and remediate threats.",
+    description: "Apply Tanium security modules to detect, investigate, and remediate threats.",
     examWeight: 9,
     icon: Shield,
     color: "text-red-400",
@@ -129,8 +128,7 @@ const DOMAIN_DETAILS: Record<string, DomainDetails> = {
   },
   troubleshooting: {
     title: "Troubleshooting",
-    description:
-      "Diagnose and resolve common Tanium platform and endpoint issues.",
+    description: "Diagnose and resolve common Tanium platform and endpoint issues.",
     examWeight: 8,
     icon: AlertTriangle,
     color: "text-orange-400",
@@ -153,7 +151,11 @@ const DOMAIN_DETAILS: Record<string, DomainDetails> = {
 export default function DomainPage() {
   const params = useParams<{ domain: string }>();
   const router = useRouter();
-  const domainKey = params?.domain ? (Array.isArray(params.domain) ? params.domain[0] : params.domain) : null;
+  const domainKey = params?.domain
+    ? Array.isArray(params.domain)
+      ? params.domain[0]
+      : params.domain
+    : null;
 
   const details = useMemo(() => {
     if (!domainKey) {
@@ -187,7 +189,7 @@ export default function DomainPage() {
     <div className="space-y-8">
       <header className="flex items-center justify-between">
         <div className="space-y-2">
-          <h1 className="text-3xl font-bold text-white flex items-center gap-3">
+          <h1 className="flex items-center gap-3 text-3xl font-bold text-white">
             <span className={`${details.color}`}>
               <Icon className="h-8 w-8" />
             </span>
@@ -255,10 +257,14 @@ export default function DomainPage() {
         <h2 className="text-xl font-semibold text-white">Readiness Gauge</h2>
         <div className="rounded-lg border border-white/10 p-6">
           <p className="mb-4 text-sm text-slate-200">
-            Track your confidence as you master each topic. Aim for 80% or higher before moving on to
-            the next domain.
+            Track your confidence as you master each topic. Aim for 80% or higher before moving on
+            to the next domain.
           </p>
-          <Progress value={details.examWeight} className="h-2" />
+          <Progress
+            value={details.examWeight}
+            className="h-2"
+            aria-label={`${details.title} exam weight: ${details.examWeight}% of certification exam`}
+          />
         </div>
       </section>
     </div>

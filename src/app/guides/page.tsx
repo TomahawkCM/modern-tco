@@ -326,7 +326,11 @@ export default function GuidesPage() {
                       </div>
                       <div className="space-y-1">
                         <p className="text-2xl font-bold">{overallProgress}%</p>
-                        <Progress value={overallProgress} className="h-2" />
+                        <Progress
+                          value={overallProgress}
+                          className="h-2"
+                          aria-label={`Overall guides progress: ${overallProgress}% complete`}
+                        />
                       </div>
                     </div>
                   </div>

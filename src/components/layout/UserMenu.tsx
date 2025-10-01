@@ -17,7 +17,12 @@ export function UserMenu() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" size="icon" className="text-white hover:bg-white/10">
+        <Button
+          variant="ghost"
+          size="icon"
+          className="text-white hover:bg-white/10"
+          aria-label="Open user menu"
+        >
           <User className="h-5 w-5" />
         </Button>
       </DropdownMenuTrigger>
@@ -30,15 +35,14 @@ export function UserMenu() {
         <DropdownMenuItem onClick={() => router.push("/settings")}>
           <Settings className="mr-2 h-4 w-4" /> Settings
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => router.push("/kb") }>
+        <DropdownMenuItem onClick={() => router.push("/kb")}>
           <HelpCircle className="mr-2 h-4 w-4" /> Help Center
         </DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuItem onClick={() => router.push("/auth") }>
+        <DropdownMenuItem onClick={() => router.push("/auth")}>
           <LogOut className="mr-2 h-4 w-4" /> Sign out
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );
 }
-
