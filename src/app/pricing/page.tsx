@@ -9,7 +9,7 @@ type Plan = "free" | "pro" | "team";
 
 async function startCheckout(plan: Plan) {
   try {
-    analytics.capture("checkout_start", { plan });
+    void analytics.capture("checkout_start", { plan });
     const res = await fetch("/api/stripe/create-checkout-session", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -22,7 +22,7 @@ async function startCheckout(plan: Plan) {
       return;
     }
     throw new Error("No redirect URL returned");
-  } catch (e) {
+  } catch (error) {
     alert("Unable to start checkout right now. Please try again later.");
   }
 }

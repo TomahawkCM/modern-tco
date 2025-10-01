@@ -211,7 +211,7 @@ export default function NavigationHelper({
   // Get current page tip
   useEffect(() => {
     const tip = navigationTips.find(t => t.path === pathname);
-    setCurrentTip(tip || null);
+    setCurrentTip(tip ?? null);
     
     // Track visited paths
     if (pathname && !visitedPaths.includes(pathname)) {

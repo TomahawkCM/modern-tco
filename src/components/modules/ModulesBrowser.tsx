@@ -33,7 +33,7 @@ export function ModulesBrowser({ modules }: { modules: ModuleMeta[] }) {
     title: m.frontmatter.title,
     domain: m.frontmatter.domainEnum.replace(/_/g, ' '),
     difficulty: m.frontmatter.difficulty,
-    estimatedTimeMinutes: parseInt(String(m.frontmatter.estimatedTime || '0').split(' ')[0]) || 0,
+    estimatedTimeMinutes: parseInt(String(m.frontmatter.estimatedTime ?? '0').split(' ')[0]) || 0,
     slug: m.slug,
   })), [modules]);
 

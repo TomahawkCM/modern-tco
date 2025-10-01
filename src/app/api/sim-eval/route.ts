@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { type NextRequest, NextResponse } from 'next/server';
 import { TaniumQueryEngine } from '@/lib/tanium-query-engine';
 
 // Initialize the query engine with sample data
@@ -22,7 +22,7 @@ export async function POST(request: NextRequest) {
   let payload: EvalPayload;
   try {
     payload = await request.json();
-  } catch (error) {
+  } catch {
     return NextResponse.json({ ok: false, error: 'Invalid JSON body' }, { status: 400 });
   }
 
@@ -33,7 +33,7 @@ export async function POST(request: NextRequest) {
   try {
     // Execute query using TypeScript engine
     const result = await queryEngine.query(payload.question, {
-      format: payload.format || 'json',
+      format: payload.format ?? 'json',
       useCache: true,
       timeout: 5000
     });

@@ -198,7 +198,7 @@ export default async function AssessmentsPage({ searchParams }: AssessmentPagePr
                 if (config.moduleId) params.set("moduleId", config.moduleId);
                 if (config.assessmentId) params.set("assessmentId", config.assessmentId);
                 // Respect basePath when navigating from client components
-                const base = process.env.NEXT_PUBLIC_BASE_PATH || "";
+                const base = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
                 window.location.href = `${base}/assessments?${params.toString()}`;
               }}
               onRequirementClick={(requirement) => {
@@ -219,10 +219,10 @@ export default async function AssessmentsPage({ searchParams }: AssessmentPagePr
                 const params = new URLSearchParams({
                   mode: "review",
                   userId,
-                  moduleId: moduleId || "",
+                  moduleId: moduleId ?? "",
                   sessionId: result.sessionId,
                 });
-                const base = process.env.NEXT_PUBLIC_BASE_PATH || "";
+                const base = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
                 window.location.href = `${base}/assessments?${params.toString()}`;
               }}
               onExit={() => {
@@ -230,9 +230,9 @@ export default async function AssessmentsPage({ searchParams }: AssessmentPagePr
                 const params = new URLSearchParams({
                   mode: "gating",
                   userId,
-                  moduleId: moduleId || "",
+                  moduleId: moduleId ?? "",
                 });
-                const base = process.env.NEXT_PUBLIC_BASE_PATH || "";
+                const base = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
                 window.location.href = `${base}/assessments?${params.toString()}`;
               }}
             />
@@ -249,7 +249,7 @@ export default async function AssessmentsPage({ searchParams }: AssessmentPagePr
                 if (userId) params.set("userId", userId);
                 if (moduleId) params.set("moduleId", moduleId);
                 if (assessmentId) params.set("assessmentId", assessmentId);
-                const base = process.env.NEXT_PUBLIC_BASE_PATH || "";
+                const base = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
                 window.location.href = `${base}/assessments?${params.toString()}`;
               }}
               onStartRemediation={(plan) => {
@@ -261,9 +261,9 @@ export default async function AssessmentsPage({ searchParams }: AssessmentPagePr
                 const params = new URLSearchParams({
                   mode: "gating",
                   userId,
-                  moduleId: moduleId || "",
+                  moduleId: moduleId ?? "",
                 });
-                const base = process.env.NEXT_PUBLIC_BASE_PATH || "";
+                const base = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
                 window.location.href = `${base}/assessments?${params.toString()}`;
               }}
             />

@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import {
+import type {
   UseQueryValidation,
   PartialQuery,
   ValidationState,
@@ -203,7 +203,7 @@ export function useQueryValidation(): UseQueryValidation {
     const parts: string[] = [];
 
     // Handle raw query
-    if (query.rawQuery && query.rawQuery.trim()) {
+    if (query.rawQuery?.trim()) {
       return query.rawQuery;
     }
 

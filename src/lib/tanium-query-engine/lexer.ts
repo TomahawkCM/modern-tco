@@ -3,7 +3,7 @@
  * High-performance lexical analyzer for TQL syntax
  */
 
-import { Token, TokenType, QueryError } from './types';
+import { type Token, TokenType, QueryError } from './types';
 
 export class Lexer {
   private input: string;

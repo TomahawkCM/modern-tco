@@ -21,7 +21,7 @@ function convertDBQuestionToQuestion(dbQuestion: DBQuestion): Question {
   // Parse JSON fields
   const choices =
     typeof dbQuestion.options === "string"
-      ? JSON.parse(dbQuestion.options as string)
+      ? JSON.parse(dbQuestion.options)
       : dbQuestion.options;
 
   const tags =

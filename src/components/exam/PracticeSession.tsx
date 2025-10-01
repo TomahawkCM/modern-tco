@@ -113,7 +113,7 @@ export function PracticeSession({
       return;
     }
 
-    startExam(ExamMode.PRACTICE, selectedQuestions);
+    void startExam(ExamMode.PRACTICE, selectedQuestions);
     setSessionStarted(true);
     setTimeSpent(0);
   };
@@ -355,7 +355,7 @@ export function PracticeSession({
               variant="outline"
               size="sm"
               onClick={async () => {
-                const text = `Q: ${currentQuestion.question}\nAnswer: ${currentQuestion.choices.find((c) => c.id === currentQuestion.correctAnswerId)?.text || ""}${currentQuestion.explanation ? `\nWhy: ${currentQuestion.explanation}` : ""}`;
+                const text = `Q: ${currentQuestion.question}\nAnswer: ${currentQuestion.choices.find((c) => c.id === currentQuestion.correctAnswerId)?.text ?? ""}${currentQuestion.explanation ? `\nWhy: ${currentQuestion.explanation}` : ""}`;
                 await saveQuickNote(text, { tags: ["practice", currentQuestion.domain, currentQuestion.difficulty], user });
                 toast({ title: "Added to Notes", description: "View it under Notes for spaced review." });
               }}

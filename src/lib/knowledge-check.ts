@@ -334,7 +334,7 @@ export class KnowledgeAssessment {
 
     // Calculate category scores
     questionsUsed.forEach(question => {
-      const category = question.category;
+      const {category} = question;
       const questionScore = this.results.get(question.id) || 0;
       const maxQuestionScore = question.weight;
 

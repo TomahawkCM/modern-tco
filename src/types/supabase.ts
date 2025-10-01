@@ -20,9 +20,9 @@ export type Database = {
 };
 
 // Relaxed helpers: return `any` to pragmatically unblock many call-sites.
-export type Tables<Name extends string = string> = any;
-export type TablesInsert<Name extends string = string> = any;
-export type TablesUpdate<Name extends string = string> = any;
+export type Tables<_Name extends string = string> = any;
+export type TablesInsert<_Name extends string = string> = any;
+export type TablesUpdate<_Name extends string = string> = any;
 
 // Common table helpers used across the codebase
 export type StudyModule = Tables<'study_modules'>;

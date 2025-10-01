@@ -48,7 +48,7 @@ export async function getModuleProgress(
       total: (svc as any)?.totalQuestions ?? undefined,
       updatedAt: (svc as any)?.lastActivity ?? undefined,
     };
-  } catch {
+  } catch (error) {
     return { moduleId, percentage: 0 };
   }
 }
@@ -89,7 +89,7 @@ export async function getAttemptHistory(userId: string, limit: number = 10): Pro
     // Placeholder: return empty until backend persists attempts
     void analytics; // silence unused
     return [];
-  } catch {
+  } catch (error) {
     return [];
   }
 }

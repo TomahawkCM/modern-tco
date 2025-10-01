@@ -4,23 +4,23 @@
  */
 
 import {
-  Token,
+  type Token,
   TokenType,
-  QueryNode,
-  SelectNode,
-  FromNode,
-  WhereNode,
-  GroupByNode,
-  OrderByNode,
-  LimitNode,
-  ColumnNode,
-  AggregateNode,
-  FilterNode,
-  ScopeNode,
-  FilterOperator,
+  type QueryNode,
+  type SelectNode,
+  type FromNode,
+  type WhereNode,
+  type GroupByNode,
+  type OrderByNode,
+  type LimitNode,
+  type ColumnNode,
+  type AggregateNode,
+  type FilterNode,
+  type ScopeNode,
+  type FilterOperator,
   ParseError,
-  ParserOptions,
-  SourceLocation
+  type ParserOptions,
+  type SourceLocation
 } from './types';
 import { Lexer } from './lexer';
 
@@ -457,7 +457,7 @@ export class Parser {
         if (this.check(TokenType.IDENTIFIER)) {
           const dir = this.peekValue()?.toLowerCase();
           if (dir === 'asc' || dir === 'desc') {
-            direction = dir as 'asc' | 'desc';
+            direction = dir;
             this.advance();
           }
         }

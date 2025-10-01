@@ -1,3 +1,5 @@
+'use client';
+
 import videoManifest from "@/content/videos/manifest.json";
 import type { ModuleManifest } from "@/types/manifest";
 import VideoEmbed from "@/components/videos/VideoEmbed";
@@ -35,7 +37,7 @@ export function ModuleVideos({ slug }: ModuleVideosProps) {
 
   // Environment override: comma-separated YouTube IDs or URLs
   const envKey = toEnvKey(slug);
-  const envValue = process.env[envKey] as string | undefined;
+  const envValue = process.env[envKey];
   let videos = entry?.videos ?? [];
   if (envValue && envValue.trim().length > 0) {
     const ids = envValue.split(",").map((s) => parseYouTubeId(s)).filter(Boolean) as string[];

@@ -6,7 +6,7 @@ import {
   type PracticeProgress,
   type PracticeQuestion,
 } from "@/types/practice-session";
-import { type Question, TCODomain, Difficulty } from "@/types/exam";
+import { type Question, TCODomain, type Difficulty } from "@/types/exam";
 import { createId } from "@paralleldrive/cuid2";
 import { defaultDifficultyRecord } from '@/lib/difficulty';
 

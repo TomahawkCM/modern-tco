@@ -607,9 +607,9 @@ export const AssessmentEngine: any = new AssessmentEngineClass();
 export default AssessmentEngine;
 
 // Static forwarding for existing call-sites that import the class/instance directly
-;(AssessmentEngine as any).initializeSession = AssessmentEngine.initializeSession.bind(AssessmentEngine);
-;(AssessmentEngine as any).recordResponse = AssessmentEngine.recordResponse?.bind(AssessmentEngine);
-;(AssessmentEngine as any).navigateToNext = AssessmentEngine.navigateToNext?.bind(AssessmentEngine);
-;(AssessmentEngine as any).completeAssessment = AssessmentEngine.completeAssessment.bind(AssessmentEngine);
-;(AssessmentEngine as any).calculateResults = AssessmentEngine.calculateResults.bind(AssessmentEngine);
-;(AssessmentEngine as any).updateSession = AssessmentEngine.updateSession.bind(AssessmentEngine);
+;(AssessmentEngine).initializeSession = AssessmentEngine.initializeSession.bind(AssessmentEngine);
+;(AssessmentEngine).recordResponse = AssessmentEngine.recordResponse?.bind(AssessmentEngine);
+;(AssessmentEngine).navigateToNext = AssessmentEngine.navigateToNext?.bind(AssessmentEngine);
+;(AssessmentEngine).completeAssessment = AssessmentEngine.completeAssessment.bind(AssessmentEngine);
+;(AssessmentEngine).calculateResults = AssessmentEngine.calculateResults.bind(AssessmentEngine);
+;(AssessmentEngine).updateSession = AssessmentEngine.updateSession.bind(AssessmentEngine);

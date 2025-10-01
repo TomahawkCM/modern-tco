@@ -186,7 +186,7 @@ export const TCOVideoPlayer: React.FC<TCOVideoPlayerProps> = ({
       const key = String(m);
       if (!milestonesRef.current[key] && p >= m) {
         milestonesRef.current[key] = true;
-        analytics.capture('video_progress', { id: videoObj.id, title: videoObj.title, moduleId: videoObj.moduleId, domain: videoObj.domain, milestone: m });
+        void analytics.capture('video_progress', { id: videoObj.id, title: videoObj.title, moduleId: videoObj.moduleId, domain: videoObj.domain, milestone: m });
       }
     };
     mark(25); mark(50); mark(75); mark(100);

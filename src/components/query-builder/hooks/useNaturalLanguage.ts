@@ -1,5 +1,5 @@
 import { useState, useCallback, useMemo } from 'react';
-import {
+import type {
   UseNaturalLanguage,
   NaturalLanguageResult,
   QuerySuggestion,
@@ -8,7 +8,7 @@ import {
   FilterSelection,
   QueryAlternative
 } from '../types/queryBuilder';
-import { Sensor } from '@/lib/tanium-query-engine/types';
+import type { Sensor } from '@/lib/tanium-query-engine/types';
 import { SENSORS_CATALOG } from '@/lib/tanium-query-engine/field-mappings';
 
 // Common query patterns for recognition

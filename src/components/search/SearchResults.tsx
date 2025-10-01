@@ -254,7 +254,7 @@ function QuestionResultCard({
             )}
 
             {/* Study References */}
-            {(question.studyGuideRef || question.officialRef) && (
+            {(question.studyGuideRef ?? question.officialRef) && (
               <div className="border-t border-white/10 pt-4">
                 <h4 className="mb-2 flex items-center gap-2 text-sm font-medium text-white">
                   <BookOpen className="h-4 w-4" />

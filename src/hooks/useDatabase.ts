@@ -224,7 +224,7 @@ export function useDatabase(user?: User | null) {
       const { data, error } = res;
       if (error) throw error;
       const map: Record<string, number> = {};
-      for (const row of (data || []) as any[]) {
+      for (const row of (data ?? []) as any[]) {
         const id = row.module_id as string;
         map[id] = (map[id] || 0) + 1;
       }
@@ -242,7 +242,7 @@ export function useDatabase(user?: User | null) {
       const { data, error } = res;
       if (error) throw error;
       const map: Record<string, string> = {};
-      for (const row of (data || []) as any[]) {
+      for (const row of (data ?? []) as any[]) {
         const mid = row.module_id as string;
         const sid = row.section_id as string | null;
         if (sid && !map[mid]) map[mid] = sid;
@@ -347,7 +347,7 @@ export function useRealtimeSubscription<T = any>(
         if (fetchError) {
           setError(fetchError.message);
         } else {
-          setData(((initialData || []) as unknown) as T[]);
+          setData(((initialData ?? []) as unknown) as T[]);
         }
 
         // Set up real-time subscription
@@ -393,7 +393,7 @@ export function useRealtimeSubscription<T = any>(
       }
     };
 
-    setupSubscription();
+    void setupSubscription();
 
     return () => {
       if (subscription) {

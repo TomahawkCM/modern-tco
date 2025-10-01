@@ -86,12 +86,12 @@ export function StudyGuideList({ studyGuides, onGuideSelect, className }: StudyG
   const getProgressInfo = (guide: StudyGuide) => {
     const progress = undefined as any;
     return {
-      progress: progress?.readingProgress || 0,
-      sectionsRead: progress?.sectionsRead?.length || 0,
+      progress: progress?.readingProgress ?? 0,
+      sectionsRead: progress?.sectionsRead?.length ?? 0,
       totalSections: guide.sections.length,
-      checkpointsCompleted: progress?.checkpointsCompleted?.length || 0,
+      checkpointsCompleted: progress?.checkpointsCompleted?.length ?? 0,
       totalCheckpoints: guide.checkpoints.length,
-      totalReadingTime: progress?.totalReadingTime || 0,
+      totalReadingTime: progress?.totalReadingTime ?? 0,
       lastPosition: progress?.lastPosition,
       hasStarted: !!progress,
     };

@@ -30,7 +30,7 @@ import {
   ToggleLeft,
 } from 'lucide-react';
 
-import {
+import type {
   FilterBuilderProps,
   FilterSelection,
   FilterOperator
@@ -300,7 +300,7 @@ function FilterGroup({
                 filters={filters}
                 parentId={groupId}
                 depth={depth + 1}
-                logic={groupFilter.logic || 'AND'}
+                logic={groupFilter.logic ?? 'AND'}
                 onAdd={onAdd}
                 onRemove={onRemove}
                 onUpdate={onUpdate}

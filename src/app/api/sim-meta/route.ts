@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 import { TaniumQueryEngine } from '@/lib/tanium-query-engine';
 
 // Initialize the query engine

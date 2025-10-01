@@ -31,7 +31,7 @@ export default function AdminQuestionsPage() {
     const q = filter.trim().toLowerCase();
     if (!q) return questions;
     return questions.filter((x) =>
-      [x.question, x.explanation || "", x.category || "", x.domain || "", (x.tags || []).join(",")]
+      [x.question, x.explanation ?? "", x.category ?? "", x.domain ?? "", (x.tags ?? []).join(",")]
         .join("\n")
         .toLowerCase()
         .includes(q)
@@ -46,7 +46,7 @@ export default function AdminQuestionsPage() {
   async function save() {
     if (!current) return;
     const saved = await contentService.upsert(current);
-    analytics.capture("admin_question_save", { id: saved.id });
+    void analytics.capture("admin_question_save", { id: saved.id });
     setQuestions((prev) => {
       const idx = prev.findIndex((p) => p.id === saved.id);
       const copy = [...prev];
@@ -57,7 +57,7 @@ export default function AdminQuestionsPage() {
 
   async function remove(id: string) {
     await contentService.remove(id);
-    analytics.capture("admin_question_delete", { id });
+    void analytics.capture("admin_question_delete", { id });
     setQuestions((prev) => prev.filter((p) => p.id !== id));
     if (current?.id === id) setCurrent(null);
   }
@@ -71,7 +71,7 @@ export default function AdminQuestionsPage() {
             <CardTitle className="text-white">Questions</CardTitle>
           </CardHeader>
           <CardContent className="space-y-2">
-            <Input placeholder="Filter…" value={filter} onChange={(e) => setFilter(e.target.value)} />
+            <Input placeholder="Filter..." value={filter} onChange={(e) => setFilter(e.target.value)} />
             <div className="max-h-[60vh] overflow-auto">
               <ul className="divide-y divide-white/10">
                 {filtered.map((q) => (
@@ -104,7 +104,7 @@ export default function AdminQuestionsPage() {
               <form
                 onSubmit={(e) => {
                   e.preventDefault();
-                  save();
+                  void save();
                 }}
                 className="space-y-3"
               >
@@ -134,29 +134,29 @@ export default function AdminQuestionsPage() {
                   </div>
                   <div>
                     <Label className="text-gray-300">Domain</Label>
-                    <Input value={current.domain || ""} onChange={(e) => setCurrent({ ...current, domain: e.target.value })} />
+                    <Input value={current.domain ?? ""} onChange={(e) => setCurrent({ ...current, domain: e.target.value })} />
                   </div>
                 </div>
                 <div className="grid gap-2 md:grid-cols-3">
                   <div>
                     <Label className="text-gray-300">Difficulty</Label>
-                    <Input value={current.difficulty || ""} onChange={(e) => setCurrent({ ...current, difficulty: e.target.value })} />
+                    <Input value={current.difficulty ?? ""} onChange={(e) => setCurrent({ ...current, difficulty: e.target.value })} />
                   </div>
                   <div>
                     <Label className="text-gray-300">Category</Label>
-                    <Input value={current.category || ""} onChange={(e) => setCurrent({ ...current, category: e.target.value })} />
+                    <Input value={current.category ?? ""} onChange={(e) => setCurrent({ ...current, category: e.target.value })} />
                   </div>
                   <div>
                     <Label className="text-gray-300">Tags (comma)</Label>
                     <Input
-                      value={(current.tags || []).join(", ")}
+                      value={(current.tags ?? []).join(", ")}
                       onChange={(e) => setCurrent({ ...current, tags: e.target.value.split(",").map((t) => t.trim()).filter(Boolean) })}
                     />
                   </div>
                 </div>
                 <div>
                   <Label className="text-gray-300">Explanation</Label>
-                  <Textarea value={current.explanation || ""} onChange={(e) => setCurrent({ ...current, explanation: e.target.value })} className="min-h-[80px]" />
+                  <Textarea value={current.explanation ?? ""} onChange={(e) => setCurrent({ ...current, explanation: e.target.value })} className="min-h-[80px]" />
                 </div>
                 <div className="flex gap-2">
                   <Button type="submit" className="bg-tanium-accent">Save</Button>

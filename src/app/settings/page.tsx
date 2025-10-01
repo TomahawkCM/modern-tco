@@ -72,7 +72,7 @@ export default function SettingsPage() {
       html.removeAttribute("data-large-text");
     }
     try { localStorage.setItem("tco-large-text", on ? "1" : "0"); } catch {}
-    analytics.capture("a11y_large_text_toggle", { enabled: on });
+    void analytics.capture("a11y_large_text_toggle", { enabled: on });
   }
 
   function applyHighContrast(on: boolean) {
@@ -80,7 +80,7 @@ export default function SettingsPage() {
     if (on) html.setAttribute("data-high-contrast", "1");
     else html.removeAttribute("data-high-contrast");
     try { localStorage.setItem("tco-high-contrast", on ? "1" : "0"); } catch {}
-    analytics.capture("a11y_high_contrast_toggle", { enabled: on });
+    void analytics.capture("a11y_high_contrast_toggle", { enabled: on });
   }
 
   // Show loading state if settings are not yet loaded

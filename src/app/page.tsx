@@ -1,3 +1,5 @@
+'use client';
+
 import { Suspense, lazy } from 'react'
 import { AuthGuard } from '@/components/auth/AuthGuard'
 import { HeroSection } from '@/components/homepage/HeroSection'

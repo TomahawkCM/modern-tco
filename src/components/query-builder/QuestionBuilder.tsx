@@ -39,20 +39,20 @@ import { useDebouncedCallback } from './utils/performance';
 
 // Query engine integration
 import { TaniumQueryEngine } from '@/lib/tanium-query-engine';
-import { QueryResult } from '@/lib/tanium-query-engine/types';
+import type { QueryResult } from '@/lib/tanium-query-engine/types';
 
 // Types
 import {
-  QuestionBuilderProps,
-  QueryBuilderState,
-  QueryBuilderAction,
-  BuilderMode,
-  PartialQuery,
+  type QuestionBuilderProps,
+  type QueryBuilderState,
+  type QueryBuilderAction,
+  type BuilderMode,
+  type PartialQuery,
   SensorSelection,
   FilterSelection,
-  QueryHistoryItem,
-  ValidationState,
-  ScopeSelection,
+  type QueryHistoryItem,
+  type ValidationState,
+  type ScopeSelection,
 } from './types/queryBuilder';
 
 // Query builder reducer

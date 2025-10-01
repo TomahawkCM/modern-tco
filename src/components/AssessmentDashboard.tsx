@@ -323,7 +323,7 @@ export function AssessmentDashboard({
       }
     };
 
-    loadDashboardData();
+    void loadDashboardData();
   }, [userId, timeRange]);
 
   const handleExportData = async () => {

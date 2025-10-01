@@ -145,8 +145,8 @@ export default function LearningProgressTracker() {
         completedSections: 0,
         totalExercises: 0,
         completedExercises: 0,
-        checkpointPassed: gateProgress['Foundation Module Checkpoint']?.completed || false,
-        miniProjectComplete: projectProgress['Network Discovery & Architecture Mapping']?.completed || false,
+        checkpointPassed: gateProgress['Foundation Module Checkpoint']?.completed ?? false,
+        miniProjectComplete: projectProgress['Network Discovery & Architecture Mapping']?.completed ?? false,
         timeSpent: 180,
         lastAccessed: new Date().toISOString()
       },
@@ -348,7 +348,7 @@ export default function LearningProgressTracker() {
                     <div>
                       <p className="text-sm text-gray-600">Accuracy</p>
                       <p className="text-2xl font-bold">
-                        {learningStats.averageAccuracy || 85}%
+                        {learningStats.averageAccuracy ?? 85}%
                       </p>
                     </div>
                     <TrendingUp className="w-8 h-8 text-green-500" />

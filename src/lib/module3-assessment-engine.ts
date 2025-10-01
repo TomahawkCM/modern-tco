@@ -8,7 +8,7 @@ import {
   MODULE_3_SECTIONS,
   getSectionCoverage
 } from "@/lib/module3-section-definitions";
-import { type Question, type TCODomain } from "@/types/exam";
+import type { Question, TCODomain } from "@/types/exam";
 
 /**
  * Module 3 specific assessment configuration

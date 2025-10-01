@@ -1,5 +1,5 @@
 import { TCODomain } from "@/types/exam";
-import { TCOVideo } from "@/components/video/TCOVideoPlayer";
+import type { TCOVideo } from "@/components/video/TCOVideoPlayer";
 
 export interface ModuleObjective {
   id: string;

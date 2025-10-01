@@ -15,13 +15,13 @@ import {
   AGGREGATE_FUNCTIONS
 } from './field-mappings';
 import {
-  QueryResult,
-  QueryNode,
-  MachineData,
-  ParserOptions,
-  ExecutorOptions,
-  SavedQuery,
-  QueryTemplate,
+  type QueryResult,
+  type QueryNode,
+  type MachineData,
+  type ParserOptions,
+  type ExecutorOptions,
+  type SavedQuery,
+  type QueryTemplate,
   QueryError,
   ParseError,
   ExecutionError

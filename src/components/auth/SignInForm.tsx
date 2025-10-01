@@ -46,7 +46,7 @@ export function SignInForm({ onSuccess }: SignInFormProps = {}) {
         onSuccess?.();
         router.push("/dashboard");
       }
-    } catch (err) {
+    } catch (error) {
       setError("An unexpected error occurred");
     }
   };

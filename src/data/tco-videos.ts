@@ -1,4 +1,4 @@
-import { TCOVideo } from '@/components/video/TCOVideoPlayer';
+import type { TCOVideo } from '@/components/video/TCOVideoPlayer';
 
 // TCO-specific video library based on research findings
 export const tcoVideos: TCOVideo[] = [

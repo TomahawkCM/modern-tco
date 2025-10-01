@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import type { DomainStatRow } from "./types";
-import { ColumnDef, getCoreRowModel, getFilteredRowModel, getSortedRowModel, SortingState, useReactTable, flexRender, ColumnFiltersState, VisibilityState, FilterFn } from "@tanstack/react-table";
+import { type ColumnDef, getCoreRowModel, getFilteredRowModel, getSortedRowModel, type SortingState, useReactTable, flexRender, type ColumnFiltersState, type VisibilityState, type FilterFn } from "@tanstack/react-table";
 import { domainColumns } from "./columns";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -53,7 +53,7 @@ export function DomainStatsTable({ rows }: { rows: DomainStatRow[] }) {
     filterFns: {
       minNumber: (row, columnId, filterValue) => {
         const v = Number(row.getValue(columnId));
-        const min = Number((filterValue as any)?.min ?? 0);
+        const min = Number((filterValue)?.min ?? 0);
         return v >= min;
       },
       domainIn,

@@ -72,7 +72,8 @@ export function QuestionsProvider({ children }: { children: React.ReactNode }) {
   const [questions, setQuestions] = useState<Question[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const pathname = typeof window !== 'undefined' ? usePathname() : null;
+  // Always call hooks at top level - handle SSR in the useMemo instead
+  const pathname = usePathname();
 
   // Only load questions on routes that actually need the full bank.
   // This avoids fetching hundreds of questions on pages like /welcome, /mock, /review.

@@ -80,14 +80,11 @@ export default function StudyDomainPage() {
   const [useDatabase, setUseDatabase] = useState(true);
   const [module, setModule] = useState<any>(null);
 
-  const raw = (params?.domain ?? "") as string | string[];
+  const raw = (params?.domain ?? "");
   const domainSlug = Array.isArray(raw) ? raw[0] : raw;
-  if (!domainSlug) {
-    if (typeof window !== "undefined") router.replace("/study");
-    return null;
-  }
-  const domainConfig = DOMAIN_CONFIG[domainSlug as DomainKey];
+  const domainConfig = domainSlug ? DOMAIN_CONFIG[domainSlug as DomainKey] : null;
 
+  // ALL HOOKS MUST BE CALLED BEFORE ANY EARLY RETURNS (Rules of Hooks)
   useEffect(() => {
     // First try to load from database
     const loadContent = async () => {
@@ -145,8 +142,14 @@ export default function StudyDomainPage() {
       }
     };
 
-    loadContent();
+    void loadContent();
   }, [domainConfig, domainSlug]);
+
+  // Early return AFTER all hooks are called (satisfies Rules of Hooks)
+  if (!domainSlug) {
+    if (typeof window !== "undefined") router.replace("/study");
+    return null;
+  }
 
   const getDifficultyColor = (difficulty: string) => {
     switch (difficulty) {
@@ -257,7 +260,7 @@ export default function StudyDomainPage() {
     );
   }
 
-  const objectives = mdxMetadata?.objectives || [
+  const objectives = mdxMetadata?.objectives ?? [
     "Master natural language query construction and sensor library usage",
     "Learn saved question management and result interpretation techniques",
     "Understand query optimization and performance best practices"

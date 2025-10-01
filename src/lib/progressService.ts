@@ -44,7 +44,7 @@ export async function upsertUserModuleProgress(opts: {
     .select('id', { count: 'exact', head: true })
     .eq('module_id', opts.moduleId)
   if (totalErr) throw new Error(`Failed to count total sections: ${totalErr.message}`)
-  const total = (totalRows as any)?.length ?? (totalErr ? 0 : (totalErr as any))
+  const total = (totalRows)?.length ?? (totalErr ? 0 : (totalErr))
 
   // Count completed sections for this user
   const { count: completed, error: compErr } = await (client as any)

@@ -61,21 +61,21 @@ export default function ReviewCenter({ modules }: { modules: ModuleMap }) {
               const secs = Array.isArray(v?.sections) ? v.sections : [];
               for (const s of secs) {
                 if (s?.needsReview && !s?.completed) {
-                  out.push({ module_id: mid, module_title: meta.title, slug: meta.slug, section_id: s.id || "", section_title: s.title || "Section" });
+                  out.push({ module_id: mid, module_title: meta.title, slug: meta.slug, section_id: s.id ?? "", section_title: s.title ?? "Section" });
                 }
               }
             } catch {}
           }
           if (mounted) setItems(out);
         }
-      } catch {
+      } catch (error) {
         if (mounted) setItems([]);
       } finally {
         if (mounted) setLoading(false);
       }
     };
 
-    load();
+    void load();
     return () => {
       mounted = false;
     };
@@ -91,16 +91,11 @@ export default function ReviewCenter({ modules }: { modules: ModuleMap }) {
     return Array.from(g.entries()).map(([id, v]) => ({ id, ...v }));
   }, [items]);
 
-  if (loading) {
-    return (
-      <div className="text-center text-gray-300">Loading review items…</div>
-    );
-  }
-
+  // ALL HOOKS MUST BE CALLED BEFORE ANY EARLY RETURNS (Rules of Hooks)
   const uniqueDomains = useMemo(() => {
     const set = new Set<string>();
     for (const it of items) {
-      const slug = it.slug;
+      const {slug} = it;
       const slugToDomain: Record<string, string> = {
         'platform-foundation': 'Fundamentals',
         'asking-questions': 'Asking Questions',
@@ -118,9 +113,16 @@ export default function ReviewCenter({ modules }: { modules: ModuleMap }) {
   const mixedPracticeHref = useMemo(() => {
     if (uniqueDomains.length === 0) return null;
     const domainsParam = encodeURIComponent(uniqueDomains.join(','));
-    const count = Math.min(items.length || 25, 25);
+    const count = Math.min(items.length ?? 25, 25);
     return `/practice?domains=${domainsParam}&count=${count}&quick=1&reveal=1`;
   }, [uniqueDomains, items.length]);
+
+  // Early return AFTER all hooks are called
+  if (loading) {
+    return (
+      <div className="text-center text-gray-300">Loading review items…</div>
+    );
+  }
 
   return (
     <div className="space-y-6">

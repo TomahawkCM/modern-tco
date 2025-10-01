@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { type NextRequest, NextResponse } from 'next/server';
 import { runSimulator } from '@/lib/simulator-runner';
 
 type RunPayload = {
@@ -16,7 +16,7 @@ export async function POST(request: NextRequest) {
   let payload: RunPayload;
   try {
     payload = await request.json();
-  } catch (error) {
+  } catch {
     return NextResponse.json({ ok: false, error: 'Invalid JSON body' }, { status: 400 });
   }
 

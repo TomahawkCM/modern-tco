@@ -99,7 +99,7 @@ export const AnimatedBackground: React.FC = () => {
 
     const createParticles = () => {
       // Adaptive particle density for performance (smaller screens / high DPR → fewer particles)
-      const dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1))
+      const dpr = Math.max(1, Math.min(2, window.devicePixelRatio ?? 1))
       const area = window.innerWidth * window.innerHeight
       const smallScreen = window.innerWidth < 768
       const baseDivisor = smallScreen ? 50000 : 25000
@@ -116,7 +116,7 @@ export const AnimatedBackground: React.FC = () => {
           vy: (Math.random() - 0.5) * 0.25,
           size: Math.random() * 2 + 1,
           opacity: baseOpacity,
-          baseOpacity: baseOpacity,
+          baseOpacity,
           id: i
         })
       }
@@ -290,7 +290,7 @@ export const CyberpunkNavBar: React.FC<CyberpunkNavBarProps> = ({
   const router = useRouter()
   const pathname = usePathname()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [activeTab, setActiveTab] = useState(navItems[0]?.name || "Dashboard")
+  const [activeTab, setActiveTab] = useState(navItems[0]?.name ?? "Dashboard")
 
   // Create route-to-tab mapping for detecting active tab from URL
   const routeToTabMapping: Record<string, string> = React.useMemo(() => {
@@ -305,7 +305,7 @@ export const CyberpunkNavBar: React.FC<CyberpunkNavBarProps> = ({
 
   // Sync activeTab with current route
   useEffect(() => {
-    const currentPath = pathname || "";
+    const currentPath = pathname ?? "";
     // Normalize for basePath in production (e.g., '/tanium')
     const normalized = currentPath.startsWith("/tanium") ? currentPath.slice("/tanium".length) || "/" : currentPath;
     const currentTab = routeToTabMapping[currentPath] ?? routeToTabMapping[normalized];

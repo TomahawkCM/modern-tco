@@ -28,8 +28,8 @@ export default function SearchPage() {
     if (state.selectedQuestions.length === 0) return;
 
     // Start practice with selected questions
-    startExam(ExamMode.PRACTICE, state.selectedQuestions);
-    analytics.capture("search_practice_start", { count: state.selectedQuestions.length });
+    void startExam(ExamMode.PRACTICE, state.selectedQuestions);
+    void analytics.capture("search_practice_start", { count: state.selectedQuestions.length });
     clearSelection();
     router.push("/practice");
   };
@@ -38,8 +38,8 @@ export default function SearchPage() {
     if (state.selectedQuestions.length === 0) return;
 
     // Start mock exam with selected questions
-    startExam(ExamMode.MOCK, state.selectedQuestions);
-    analytics.capture("search_mock_start", { count: state.selectedQuestions.length });
+    void startExam(ExamMode.MOCK, state.selectedQuestions);
+    void analytics.capture("search_mock_start", { count: state.selectedQuestions.length });
     clearSelection();
     router.push("/mock");
   };

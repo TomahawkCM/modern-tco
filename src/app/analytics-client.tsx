@@ -5,6 +5,27 @@ import { usePathname, useSearchParams } from "next/navigation";
 import { analytics } from "@/lib/analytics";
 import { useAuth } from "@/contexts/AuthContext";
 
+type IdleScheduler = (callback: () => void) => void;
+
+const scheduleIdle: IdleScheduler = (callback) => {
+  if (typeof window === "undefined") {
+    return;
+  }
+
+  const win = window as typeof window & {
+    requestIdleCallback?: (cb: () => void) => number;
+  };
+
+  if (typeof win.requestIdleCallback === "function") {
+    win.requestIdleCallback(() => {
+      callback();
+    });
+    return;
+  }
+
+  window.setTimeout(callback, 300);
+};
+
 export function AnalyticsClient() {
   const pathname = usePathname();
   const search = useSearchParams();
@@ -12,24 +33,26 @@ export function AnalyticsClient() {
 
   // Init + identify
   useEffect(() => {
-    const idle = (window as any).requestIdleCallback as undefined | ((cb: any) => void);
-    const start = () => analytics.init();
-    if (idle) idle(start); else setTimeout(start, 300);
+    scheduleIdle(() => {
+      void analytics.init();
+    });
   }, []);
 
   useEffect(() => {
     if (!user?.id) return;
-    const idle = (window as any).requestIdleCallback as undefined | ((cb: any) => void);
-    const start = () => analytics.identify(user.id!, { email: user.email || undefined });
-    if (idle) idle(start); else setTimeout(start, 300);
-  }, [user?.id]);
+    scheduleIdle(() => {
+      void analytics.identify(user.id, { email: user.email || undefined });
+    });
+  }, [user?.email, user?.id]);
 
   // Capture pageviews on route changes
   useEffect(() => {
-    const path = pathname + (search?.toString() ? `?${search.toString()}` : "");
-    const idle = (window as any).requestIdleCallback as undefined | ((cb: any) => void);
-    const send = () => analytics.pageview(path);
-    if (idle) idle(send); else setTimeout(send, 300);
+    if (!pathname) return;
+    const query = search ? search.toString() : '';
+    const path = query ? `${pathname}?${query}` : pathname;
+    scheduleIdle(() => {
+      void analytics.pageview(path);
+    });
   }, [pathname, search]);
 
   return null;

@@ -38,7 +38,7 @@ export const QuestionCard = memo(function QuestionCard({
   mode,
   disabled = false,
 }: QuestionCardProps) {
-  const [localAnswer, setLocalAnswer] = useState(selectedAnswer || "");
+  const [localAnswer, setLocalAnswer] = useState(selectedAnswer ?? "");
 
   const handleAnswerChange = (value: string) => {
     setLocalAnswer(value);
@@ -116,7 +116,7 @@ export const QuestionCard = memo(function QuestionCard({
                     value={choice.id}
                     checked={isSelected}
                     onChange={() => handleAnswerChange(choice.id)}
-                    disabled={isSubmitted || disabled}
+                    disabled={isSubmitted ?? disabled}
                     className={cn("sr-only")}
                   />
                   <div
@@ -125,7 +125,7 @@ export const QuestionCard = memo(function QuestionCard({
                       isSelected ? "border-primary bg-primary" : "border-muted-foreground",
                       isCorrectChoice && "border-green-600 bg-green-600",
                       isIncorrectChoice && "border-red-600 bg-red-600",
-                      (isSubmitted || disabled) && "opacity-50"
+                      (isSubmitted ?? disabled) && "opacity-50"
                     )}
                   >
                     {isSelected && <div className="h-1.5 w-1.5 rounded-full bg-white" />}

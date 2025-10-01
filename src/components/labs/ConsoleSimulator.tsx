@@ -29,12 +29,12 @@ import {
 } from "lucide-react";
 
 import {
-  ConsoleState,
-  TaniumModule,
-  SavedQuery,
-  ComputerGroup,
+  type ConsoleState,
+  type TaniumModule,
+  type SavedQuery,
+  type ComputerGroup,
   ActionHistory,
-  ConsoleAction,
+  type ConsoleAction,
 } from "@/types/lab";
 
 interface ConsoleSimulatorProps {
@@ -136,7 +136,7 @@ export function ConsoleSimulator({
   readOnly = false,
 }: ConsoleSimulatorProps) {
   const [consoleState, setConsoleState] = useState<ConsoleState>(initialState);
-  const [activeModule, setActiveModule] = useState(initialState.currentModule || "interact");
+  const [activeModule, setActiveModule] = useState(initialState.currentModule ?? "interact");
   const [queryInput, setQueryInput] = useState("");
   const [queryResults, setQueryResults] = useState<any[]>([]);
   const [isExecuting, setIsExecuting] = useState(false);
@@ -383,7 +383,7 @@ export function ConsoleSimulator({
                     />
                     <Button
                       onClick={handleQueryExecution}
-                      disabled={readOnly || isExecuting || !queryInput.trim()}
+                      disabled={(readOnly ?? isExecuting) || !queryInput.trim()}
                       className="bg-tanium-accent hover:bg-blue-600"
                     >
                       {isExecuting ? (
@@ -551,17 +551,17 @@ export function ConsoleSimulator({
                     <div
                       key={action.id}
                       className={`flex items-center space-x-2 p-2 rounded text-sm ${
-                        index < (currentStep || 0) 
+                        index < (currentStep ?? 0) 
                           ? "bg-green-500/10 border border-green-500/50" 
                           : "bg-gray-500/10 border border-gray-500/50"
                       }`}
                     >
-                      {index < (currentStep || 0) ? (
+                      {index < (currentStep ?? 0) ? (
                         <CheckCircle className="h-4 w-4 text-green-400" />
                       ) : (
                         <Clock className="h-4 w-4 text-gray-400" />
                       )}
-                      <span className={index < (currentStep || 0) ? "text-green-300" : "text-gray-300"}>
+                      <span className={index < (currentStep ?? 0) ? "text-green-300" : "text-gray-300"}>
                         {action.description}
                       </span>
                     </div>

@@ -90,7 +90,7 @@ export function StudyModuleWrapper({
       // Update progress when leaving module
       if (timeSpent > 0) {
         updateModuleProgress(domainId, moduleId, {
-          timeSpent: Math.max(timeSpent, moduleProgress.timeSpent || 0),
+          timeSpent: Math.max(timeSpent, moduleProgress.timeSpent ?? 0),
           lastAccessed: new Date().toISOString()
         });
       }
@@ -111,7 +111,7 @@ export function StudyModuleWrapper({
     updateModuleProgress(domainId, moduleId, {
       status: 'completed',
       completedAt: new Date().toISOString(),
-      timeSpent: timeSpent,
+      timeSpent,
       score: 100 // Default completion score
     });
   };
@@ -312,7 +312,7 @@ export function StudyModuleWrapper({
               disabled={!nextModule && moduleProgress.status !== 'completed'}
               className={cn(
                 "inline-flex items-center gap-2 px-3 py-2 rounded-lg transition-colors",
-                (nextModule || moduleProgress.status === 'completed')
+                (nextModule ?? moduleProgress.status === 'completed')
                   ? "bg-cyan-500 hover:bg-cyan-600 text-white"
                   : "bg-gray-800 text-gray-500 cursor-not-allowed"
               )}

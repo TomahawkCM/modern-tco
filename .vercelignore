@@ -23,4 +23,5 @@ dev_output.txt
 nul
 *.bak
 *.sql
-*.js.map.chrome/
+*.js.map
+.chrome/

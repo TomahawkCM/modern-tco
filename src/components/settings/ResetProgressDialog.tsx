@@ -29,7 +29,7 @@ import { useModules } from "@/contexts/ModuleContext";
 import { useProgress } from "@/contexts/ProgressContext";
 import { useIncorrectAnswers } from "@/contexts/IncorrectAnswersContext";
 import { cn } from "@/lib/utils";
-import { TCODomain } from "@/types/exam";
+import type { TCODomain } from "@/types/exam";
 
 interface ResetProgressDialogProps {
   open: boolean;

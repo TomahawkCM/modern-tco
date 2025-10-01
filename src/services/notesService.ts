@@ -1,6 +1,6 @@
 import { supabase } from "@/lib/supabase";
 import { createInitialState, schedule, type SRCardState, type SRRating } from "@/lib/sr";
-import { User } from "@supabase/supabase-js";
+import type { User } from "@supabase/supabase-js";
 
 export type Note = {
   id: string;

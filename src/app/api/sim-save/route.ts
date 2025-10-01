@@ -1,10 +1,9 @@
-import { NextRequest } from 'next/server';
+import type { NextRequest } from 'next/server';
 import { runSimulator } from '@/lib/simulator-runner';
 import {
   withErrorTracking,
   ApiError,
   apiSuccess,
-  apiError,
   validateBody
 } from '@/lib/error-tracking';
 
@@ -24,7 +23,7 @@ export const POST = withErrorTracking(
     let payload: unknown;
     try {
       payload = await request.json();
-    } catch (error) {
+    } catch {
       throw new ApiError('Invalid JSON body', 400, 'INVALID_JSON');
     }
 
@@ -54,7 +53,7 @@ export const POST = withErrorTracking(
 
       if (result?.ok === false) {
         throw new ApiError(
-          result.error || 'Simulator execution failed',
+          result.error ?? 'Simulator execution failed',
           400,
           'SIMULATOR_ERROR'
         );

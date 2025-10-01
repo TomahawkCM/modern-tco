@@ -312,10 +312,10 @@ export default function ModuleRenderer({ moduleData }: ModuleRendererProps) {
   useEffect(() => {
     const el = containerRef.current;
     if (!el) return;
-    const heads = Array.from(el.querySelectorAll("h1, h2, h3")) as HTMLHeadingElement[];
+    const heads = Array.from(el.querySelectorAll("h1, h2, h3"));
     const discovered: SectionState[] = heads.map((h) => {
-      const title = h.innerText.trim();
-      const id = h.id || slugify(title);
+      const title = (h as HTMLElement).innerText.trim();
+      const id = h.id ?? slugify(title);
       if (!h.id) h.id = id;
       const level = h.tagName === "H3" ? 3 : h.tagName === 'H2' ? 2 : 1;
       let etaMin: number | undefined;
@@ -331,7 +331,7 @@ export default function ModuleRenderer({ moduleData }: ModuleRendererProps) {
       const existing = sections.find((s) => s.id === id);
       const norm = stripEtaSuffix(title).toLowerCase();
       const dbEta = dbEtaMap[norm];
-      return existing || { id, title, level, completed: false, needsReview: false, etaMin: dbEta ?? etaMin };
+      return existing ?? { id, title, level, completed: false, needsReview: false, etaMin: dbEta ?? etaMin };
     });
     setSections(discovered);
 
@@ -342,7 +342,7 @@ export default function ModuleRenderer({ moduleData }: ModuleRendererProps) {
           .filter((e) => e.isIntersecting)
           .sort((a, b) => (a.target as HTMLElement).offsetTop - (b.target as HTMLElement).offsetTop);
         if (visible[0]) {
-          const id = (visible[0].target as HTMLElement).id;
+          const {id} = (visible[0].target as HTMLElement);
           if (id) setActiveId(id);
         }
       },
@@ -372,7 +372,7 @@ export default function ModuleRenderer({ moduleData }: ModuleRendererProps) {
     const el = containerRef.current;
     if (!el) return;
     const onScroll = () => {
-      const heads = Array.from(el.querySelectorAll("h2, h3")) as HTMLHeadingElement[];
+      const heads = Array.from(el.querySelectorAll("h2, h3"));
       const top = heads.find((h) => h.getBoundingClientRect().top >= 0 && h.getBoundingClientRect().top < 200);
       if (top) setLastViewed(top.id);
     };
@@ -445,7 +445,7 @@ export default function ModuleRenderer({ moduleData }: ModuleRendererProps) {
   // Handle deep-link hash on initial load
   useEffect(() => {
     try {
-      const hash = decodeURIComponent((window.location.hash || "").replace(/^#/, ""));
+      const hash = decodeURIComponent((window.location.hash ?? "").replace(/^#/, ""));
       if (!hash) return;
       const target = document.getElementById(hash);
       if (target) {
@@ -464,17 +464,17 @@ export default function ModuleRenderer({ moduleData }: ModuleRendererProps) {
       );
       return nextSections;
     });
-    analytics.capture("study_section_mark", { moduleId, id, status });
+    void analytics.capture("study_section_mark", { moduleId, id, status });
     if (!user) return;
     try {
       await db.upsertUserStudyProgress({ module_id: moduleId, section_id: id, status });
       // Update module summary
-      const total = nextSections.length || 0;
+      const total = nextSections.length ?? 0;
       const completedCount = nextSections.filter((s) => s.completed).length;
       await db.upsertModuleProgress({
         module_id: moduleId,
-        total_sections: total || undefined,
-        completed_sections: completedCount || undefined,
+        total_sections: total ?? undefined,
+        completed_sections: completedCount ?? undefined,
         status: completedCount >= total && total > 0 ? 'completed' : (completedCount > 0 ? 'in_progress' : 'not_started'),
       });
     } catch {}
@@ -573,8 +573,8 @@ export default function ModuleRenderer({ moduleData }: ModuleRendererProps) {
             <span className="text-sm">Remaining</span>
             <div className="text-lg font-semibold">
               {(() => {
-                const total = sections.reduce((sum, s) => sum + (s.etaMin || 0), 0);
-                const done = sections.reduce((sum, s) => sum + (s.completed ? (s.etaMin || 0) : 0), 0);
+                const total = sections.reduce((sum, s) => sum + (s.etaMin ?? 0), 0);
+                const done = sections.reduce((sum, s) => sum + (s.completed ? (s.etaMin ?? 0) : 0), 0);
                 return formatMinutes(Math.max(0, total - done));
               })()}
             </div>
@@ -625,7 +625,7 @@ export default function ModuleRenderer({ moduleData }: ModuleRendererProps) {
                           el.scrollIntoView({ behavior: 'smooth', block: 'start' });
                           setLastViewed(s.id);
                           setShowToc(false);
-                          analytics.capture('study_section_view', { moduleId, id: s.id });
+                          void analytics.capture('study_section_view', { moduleId, id: s.id });
                         }
                       }}
                     >
@@ -646,7 +646,7 @@ export default function ModuleRenderer({ moduleData }: ModuleRendererProps) {
           <div className="sticky top-0 z-10 -mx-2 mb-2 border-b border-cyan-900/40 bg-gray-950/60 px-2 backdrop-blur">
             <div className="flex h-10 items-center justify-between">
               <div className="truncate text-sm text-cyan-200">
-                {stripEtaSuffix((sections.find((s) => s.id === activeId)?.title || sections[0]?.title || frontmatter.title))}
+                {stripEtaSuffix((sections.find((s) => s.id === activeId)?.title ?? sections[0]?.title ?? frontmatter.title))}
               </div>
               <div className="text-xs text-cyan-300">
                 {formatMinutes(sections.find((s) => s.id === activeId)?.etaMin)}
@@ -677,7 +677,7 @@ export default function ModuleRenderer({ moduleData }: ModuleRendererProps) {
                               setActiveTab('content');
                               el.scrollIntoView({ behavior: 'smooth', block: 'start' });
                               setLastViewed(s.id);
-                              analytics.capture('study_section_view', { moduleId, id: s.id, from: 'reviewTab' });
+                              void analytics.capture('study_section_view', { moduleId, id: s.id, from: 'reviewTab' });
                             }
                           }}
                         >
@@ -715,7 +715,7 @@ export default function ModuleRenderer({ moduleData }: ModuleRendererProps) {
                     for (const s of sections) {
                       if (!s.completed) await markSection(s.id, 'completed');
                     }
-                    analytics.capture('study_mark_all_complete', { moduleId });
+                    void analytics.capture('study_mark_all_complete', { moduleId });
                   }}
                 >
                   Mark all complete
@@ -728,7 +728,7 @@ export default function ModuleRenderer({ moduleData }: ModuleRendererProps) {
                     for (const s of sections) {
                       if (s.needsReview) await markSection(s.id, 'in_progress');
                     }
-                    analytics.capture('study_clear_all_review', { moduleId });
+                    void analytics.capture('study_clear_all_review', { moduleId });
                   }}
                 >
                   Clear all review
@@ -746,7 +746,7 @@ export default function ModuleRenderer({ moduleData }: ModuleRendererProps) {
                         for (const s of sections) {
                           await markSection(s.id, 'not_started');
                         }
-                        analytics.capture('study_reset_progress', { moduleId });
+                        void analytics.capture('study_reset_progress', { moduleId });
                       } catch {}
                     }
                     // Update local storage immediately
@@ -764,7 +764,7 @@ export default function ModuleRenderer({ moduleData }: ModuleRendererProps) {
                     size="sm"
                     className="mt-2 bg-cyan-700 hover:bg-cyan-600"
                     onClick={() => {
-                      const el = document.getElementById(lastViewed!);
+                      const el = document.getElementById(lastViewed);
                       if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
                     }}
                   >
@@ -791,7 +791,7 @@ export default function ModuleRenderer({ moduleData }: ModuleRendererProps) {
                         if (el) {
                           el.scrollIntoView({ behavior: 'smooth', block: 'start' });
                           setLastViewed(s.id);
-                          analytics.capture('study_section_view', { moduleId, id: s.id });
+                          void analytics.capture('study_section_view', { moduleId, id: s.id });
                         }
                       }}
                       aria-current={activeId === s.id ? "true" : undefined}

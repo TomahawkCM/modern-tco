@@ -8,8 +8,8 @@ import { Progress } from '@/components/ui/progress';
 import { Badge } from '@/components/ui/badge';
 import { 
   KnowledgeAssessment, 
-  KnowledgeQuestion, 
-  AssessmentResult,
+  type KnowledgeQuestion, 
+  type AssessmentResult,
   LearningPath,
   LEARNING_PATHS 
 } from '@/lib/knowledge-check';

@@ -14,9 +14,9 @@ import {
   createPracticeTargeting,
 } from "@/lib/practice-question-targeting";
 import { PracticeSessionManager } from "@/lib/practice-session-manager";
-import { type PracticeTargeting, type QuestionPool, TCODomain } from "@/types/exam";
+import type { PracticeTargeting, QuestionPool, TCODomain } from "@/types/exam";
 import {
-  Module3Section,
+  type Module3Section,
   MODULE_3_SECTIONS,
   createSectionPracticeTargeting
 } from "@/lib/module3-section-definitions";

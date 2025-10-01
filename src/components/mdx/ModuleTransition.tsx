@@ -67,11 +67,11 @@ export default function ModuleTransition({
     const savedProgress = localStorage.getItem(`transition-${currentModuleId}-${nextModuleId}`);
     if (savedProgress) {
       const progress = JSON.parse(savedProgress);
-      setSkills(progress.skills || requiredSkills);
-      setScore(progress.score || 0);
-      setCompleted(progress.completed || false);
-      setUnlocked(progress.unlocked || false);
-      setAttempts(progress.attempts || 0);
+      setSkills(progress.skills ?? requiredSkills);
+      setScore(progress.score ?? 0);
+      setCompleted(progress.completed ?? false);
+      setUnlocked(progress.unlocked ?? false);
+      setAttempts(progress.attempts ?? 0);
     }
   }, [currentModuleId, nextModuleId, requiredSkills]);
 
@@ -104,7 +104,7 @@ export default function ModuleTransition({
         return {
           ...skill,
           tested: true,
-          passed: isCorrect || skill.passed // Keep passed if already passed
+          passed: isCorrect ?? skill.passed // Keep passed if already passed
         };
       }
       return skill;

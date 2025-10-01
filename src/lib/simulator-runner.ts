@@ -6,7 +6,7 @@ const platformDefaults = process.platform === 'win32' ? ['python3', 'python', 'p
 const pythonCandidates = Array.from(
   new Set(
     [...envCandidates, ...platformDefaults]
-      .filter((candidate): candidate is string => Boolean(candidate && candidate.trim()))
+      .filter((candidate): candidate is string => Boolean(candidate?.trim()))
       .map((candidate) => candidate.trim()),
   ),
 );

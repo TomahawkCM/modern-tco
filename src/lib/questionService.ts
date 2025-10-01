@@ -1,4 +1,4 @@
-import { Choice, Difficulty, Question, QuestionCategory, TCODomain } from "@/types/exam";
+import { type Choice, Difficulty, type Question, QuestionCategory, TCODomain } from "@/types/exam";
 import type { Json, QuestionInsert, QuestionUpdate, Tables } from "../types/supabase"; // Import Json
 import { supabase } from "./supabase";
 
@@ -15,7 +15,7 @@ export class QuestionService {
     const map: Record<string, number> = { a: 0, b: 1, c: 2, d: 3 };
     if (v in map) return map[v];
     const n = Number(v);
-    return Number.isFinite(n) ? (n as number) : v;
+    return Number.isFinite(n) ? (n) : v;
   }
   // --- Mapping helpers: DB <-> App enums ---
   private mapDbDifficultyToUi(value: string | null | undefined): Difficulty {
@@ -98,7 +98,7 @@ export class QuestionService {
   };
 
   private mapUiDomainToDb(value: TCODomain | string): string {
-    const display = value as string;
+    const display = value;
     // Preferred: store/display domain text as-is (matches current DB)
     if (Object.values(TCODomain).includes(display as TCODomain)) return display;
     // Fallback: map to legacy code
@@ -322,7 +322,7 @@ export class QuestionService {
 
     // Count from domain statistics view
     domainRows.forEach((row) => {
-      const uiDomain = this.mapDbDomainToUi((row.domain || undefined) as string | undefined);
+      const uiDomain = this.mapDbDomainToUi((row.domain || undefined));
       domainDistribution[uiDomain] = (domainDistribution[uiDomain] || 0) + 1;
     });
 
@@ -413,7 +413,7 @@ export class QuestionService {
         if (q.options && Array.isArray(q.options)) {
           // Normalize choice ids as strings
           const choiceIds = (q.options as unknown as Array<any>).map((c, idx) => {
-            if (c && typeof c === 'object' && 'id' in c) return String((c as any).id);
+            if (c && typeof c === 'object' && 'id' in c) return String((c).id);
             // fallback: index-based ids a/b/c/d
             return ['a','b','c','d'][idx] || String(idx);
           });
@@ -475,7 +475,7 @@ export class QuestionService {
     const list = Array.isArray(dbQuestions) ? dbQuestions : dbQuestions ? [dbQuestions] : [];
 
     return list.map((dbQ: any) => {
-      const rawCorrect: any = (dbQ as any).correct_answer;
+      const rawCorrect: any = (dbQ).correct_answer;
       let correctAnswerId: string;
       if (typeof rawCorrect === 'number') {
         const map = ['a','b','c','d'];
@@ -524,7 +524,7 @@ export class QuestionService {
       updated_at: question.updatedAt?.toISOString() || new Date().toISOString(),
     };
 
-    const res: any = await supabase.from("questions").insert(dbQuestion as any).select().single();
+    const res: any = await supabase.from("questions").insert(dbQuestion).select().single();
     const { data, error } = res;
 
     if (error) {
@@ -544,7 +544,7 @@ export class QuestionService {
       ...(updates.question && { question: updates.question }),
       ...(updates.choices && { options: updates.choices as unknown as Json }), // Cast choices to Json
       ...(updates.correctAnswerId && {
-        correct_answer: this.mapChoiceIdToDb(updates.correctAnswerId as string) as any,
+        correct_answer: this.mapChoiceIdToDb(updates.correctAnswerId) as any,
       }),
       ...(updates.domain && { domain: this.mapUiDomainToDb(updates.domain) }),
       ...(updates.difficulty && { difficulty: this.mapUiDifficultyToDb(updates.difficulty) }),
@@ -558,7 +558,7 @@ export class QuestionService {
 
     const res: any = await (supabase as any)
       .from("questions")
-      .update(dbUpdates as any)
+      .update(dbUpdates)
       .eq("id", id)
       .select()
       .single();

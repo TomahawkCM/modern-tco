@@ -37,7 +37,7 @@ export default function SideNav() {
         setProgress(next);
       }
     }
-    load();
+    void load();
     return () => {
       cancelled = true;
     };

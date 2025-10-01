@@ -39,7 +39,7 @@ export async function getKbModules(): Promise<KbModule[]> {
       .order("id");
     if (error) return [];
     return (data as KbModule[]) || [];
-  } catch {
+  } catch (error) {
     return [];
   }
 }
@@ -55,7 +55,7 @@ export async function getKbSummary(): Promise<KbSummary> {
       .from("kb_modules")
       .select("*", { count: "exact", head: true });
     if (!mErr && typeof mCount === "number") modulesCount = mCount;
-  } catch {
+  } catch (error) {
     hasKbTables = false;
   }
 
@@ -64,7 +64,7 @@ export async function getKbSummary(): Promise<KbSummary> {
       .from("kb_questions")
       .select("*", { count: "exact", head: true });
     if (!qErr && typeof qCount === "number") questionsCount = qCount;
-  } catch {
+  } catch (error) {
     hasKbTables = false;
   }
 
@@ -80,7 +80,7 @@ export async function getKbSummary(): Promise<KbSummary> {
         byDomain[d] = (byDomain[d] || 0) + c;
       }
     }
-  } catch {
+  } catch (error) {
     // ignore
   }
 

@@ -60,7 +60,7 @@ export function LearningFlowContainer({
     };
 
     if (moduleId && user) {
-      initializeFlow();
+      void initializeFlow();
     }
   }, [moduleId, user, getLearningFlow, startLearningFlow]);
 

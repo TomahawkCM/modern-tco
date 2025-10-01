@@ -1,4 +1,4 @@
-import {
+import type {
   ActionHistory,
   ConsoleState,
   CriteriaResult,
@@ -147,7 +147,7 @@ class RealTimeValidationService {
           level: "beginner",
           tone: "corrective",
           content: {
-            immediate: (feedback.failure && feedback.failure.content) || "Validation system error",
+            immediate: (feedback.failure?.content) || "Validation system error",
             detailed: "Please check your connection or contact support.",
             nextSteps: [],
           },
@@ -666,7 +666,7 @@ class RealTimeValidationService {
     if (typeof feedback === 'object') {
       // If it already looks like a feedback object, return as-is
       if ('success' in feedback || 'failure' in feedback || 'partial' in feedback || 'hints' in feedback) {
-        return feedback as any;
+        return feedback;
       }
 
       // Unknown object shape - serialize into failure message
@@ -682,7 +682,7 @@ class RealTimeValidationService {
 
   private feedbackMessageContent(feedback: any, key: 'success' | 'failure' | 'partial'): string {
     const obj = this.feedbackToObject(feedback);
-    return (obj && obj[key] && obj[key].content) || '';
+    return (obj?.[key]?.content) || '';
   }
 
   private selectFeedback(

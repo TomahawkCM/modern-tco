@@ -44,7 +44,7 @@ async function getModuleContent(slug: string) {
     // Check if file exists
     try {
       await fs.access(modulePath);
-    } catch {
+    } catch (error) {
       return null;
     }
 

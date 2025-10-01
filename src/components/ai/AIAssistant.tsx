@@ -172,7 +172,7 @@ export default function AIAssistant({ moduleSlug, isOpen, onClose }: AIAssistant
       ]
     };
 
-    let responseArray = responses[type || 'general'] || responses.general;
+    let responseArray = responses[type ?? 'general'] || responses.general;
     
     if (moduleSlug && moduleSpecificResponses[moduleSlug]) {
       responseArray = [...moduleSpecificResponses[moduleSlug], ...responseArray];
@@ -183,11 +183,11 @@ export default function AIAssistant({ moduleSlug, isOpen, onClose }: AIAssistant
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    sendMessage(inputValue);
+    void sendMessage(inputValue);
   };
 
   const handleQuickAction = (action: typeof quickActions[0]) => {
-    sendMessage(action.prompt, action.type);
+    void sendMessage(action.prompt, action.type);
   };
 
   const clearMessages = () => {

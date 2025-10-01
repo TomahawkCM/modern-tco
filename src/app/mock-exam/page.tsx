@@ -44,7 +44,7 @@ export default function MockExamPage() {
   };
 
   const handleStartExam = () => {
-    analytics.capture("mock_exam_start", { duration: defaultConfig.duration, questions: defaultConfig.questionCount });
+    void analytics.capture("mock_exam_start", { duration: defaultConfig.duration, questions: defaultConfig.questionCount });
     // Redirect to the working mock exam flow
     router.push("/mock");
   };

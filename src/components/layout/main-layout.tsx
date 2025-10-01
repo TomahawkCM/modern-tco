@@ -30,9 +30,43 @@ const tcoNavItems: NavItem[] = [
 ];
 
 export function MainLayout({ children, asGlobal = false }: MainLayoutProps) {
+  // ALL HOOKS MUST BE CALLED BEFORE ANY EARLY RETURNS (Rules of Hooks)
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [isDesktop, setIsDesktop] = useState(false);
+  const [showBackground, setShowBackground] = useState(false);
+  const AnimatedBackground = dynamic(
+    () => import("../CyberpunkNavigationFixed").then((m) => m.AnimatedBackground),
+    { ssr: false, loading: () => null }
+  );
+  const globalNavActive = useGlobalNavActive();
+
+  // Detect screen size for responsive behavior
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsDesktop(window.innerWidth >= 768); // md breakpoint
+    };
+
+    checkScreenSize();
+    window.addEventListener('resize', checkScreenSize);
+    return () => window.removeEventListener('resize', checkScreenSize);
+  }, []);
+
+  // Defer particle background for performance and honor reduced motion
+  useEffect(() => {
+    const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReduced) return;
+    // Only render on desktop-sized viewports
+    if (!isDesktop) return;
+    const idle = (window as any).requestIdleCallback as undefined | ((cb: any) => void);
+    const start = () => setShowBackground(true);
+    if (idle) idle(start);
+    else setTimeout(start, 200);
+  }, [isDesktop]);
+
   // Debug mode disabled - using full layout
   const ENABLE_DEBUG_MODE = false;
 
+  // Early return for DEBUG mode - AFTER all hooks
   if (ENABLE_DEBUG_MODE) {
     console.log('[MainLayout] Running in DEBUG mode - simple layout');
     return (
@@ -62,14 +96,6 @@ export function MainLayout({ children, asGlobal = false }: MainLayoutProps) {
       </div>
     );
   }
-  const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [isDesktop, setIsDesktop] = useState(false);
-  const [showBackground, setShowBackground] = useState(false);
-  const AnimatedBackground = dynamic(
-    () => import("../CyberpunkNavigationFixed").then((m) => m.AnimatedBackground),
-    { ssr: false, loading: () => null }
-  );
-  const globalNavActive = useGlobalNavActive();
 
   // If global nav is already active elsewhere and this isn't the global shell, collapse to passthrough
   // DEBUG: Log when this happens
@@ -81,29 +107,6 @@ export function MainLayout({ children, asGlobal = false }: MainLayoutProps) {
   }
   */
   console.log('[MainLayout] Rendering full layout - asGlobal:', asGlobal, 'globalNavActive:', globalNavActive);
-
-  // Detect screen size for responsive behavior
-  useEffect(() => {
-    const checkScreenSize = () => {
-      setIsDesktop(window.innerWidth >= 768); // md breakpoint
-    };
-    
-    checkScreenSize();
-    window.addEventListener('resize', checkScreenSize);
-    return () => window.removeEventListener('resize', checkScreenSize);
-  }, []);
-
-  // Defer particle background for performance and honor reduced motion
-  useEffect(() => {
-    const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReduced) return;
-    // Only render on desktop-sized viewports
-    if (!isDesktop) return;
-    const idle = (window as any).requestIdleCallback as undefined | ((cb: any) => void);
-    const start = () => setShowBackground(true);
-    if (idle) idle(start);
-    else setTimeout(start, 200);
-  }, [isDesktop]);
 
   return (
     <div className="relative min-h-screen">

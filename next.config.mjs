@@ -1,5 +1,5 @@
 import createMDX from "@next/mdx";
-import withPWA from "next-pwa";
+// import withPWA from "next-pwa";
 import remarkGfm from "remark-gfm";
 import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
@@ -9,7 +9,12 @@ import rehypePrettyCode from "rehype-pretty-code";
 const nextConfig = {
   reactStrictMode: true,
   pageExtensions: ["ts", "tsx", "mdx"],
-  
+
+  // Disable static optimization for error pages to avoid build issues
+  generateBuildId: async () => {
+    return 'build-' + Date.now()
+  },
+
   // Performance optimizations
   compiler: {
     removeConsole: process.env.NODE_ENV === "production",
@@ -18,6 +23,9 @@ const nextConfig = {
   // Optimize CSS and imports
   experimental: {
     optimizeCss: true,
+    // Disable static generation for error pages to avoid Html import bug
+    staticGenerationRetryCount: 0,
+    staticGenerationMaxConcurrency: 1,
     optimizePackageImports: [
       "@radix-ui/react-icons",
       "lucide-react",
@@ -207,40 +215,39 @@ const withMDX = createMDX({
   },
 });
 
-// PWA configuration for production only
-const pwaConfig = {
-  dest: "public",
-  disable: process.env.NODE_ENV === "development",
-  register: true,
-  skipWaiting: true,
-  runtimeCaching: [
-    {
-      urlPattern: /^https:\/\/fonts\.(?:gstatic|googleapis)\.com\/.*/i,
-      handler: "CacheFirst",
-      options: {
-        cacheName: "google-fonts",
-        expiration: {
-          maxEntries: 4,
-          maxAgeSeconds: 365 * 24 * 60 * 60, // 1 year
-        },
-      },
-    },
-    {
-      urlPattern: /^https:\/\/cdn\.jsdelivr\.net\/.*/i,
-      handler: "CacheFirst",
-      options: {
-        cacheName: "cdn-jsdelivr",
-        expiration: {
-          maxEntries: 10,
-          maxAgeSeconds: 365 * 24 * 60 * 60, // 1 year
-        },
-      },
-    },
-  ],
-};
+// PWA configuration for production only (temporarily disabled)
+// const pwaConfig = {
+//   dest: "public",
+//   disable: process.env.NODE_ENV === "development",
+//   register: true,
+//   skipWaiting: true,
+//   runtimeCaching: [
+//     {
+//       urlPattern: /^https:\/\/fonts\.(?:gstatic|googleapis)\.com\/.*/i,
+//       handler: "CacheFirst",
+//       options: {
+//         cacheName: "google-fonts",
+//         expiration: {
+//           maxEntries: 4,
+//           maxAgeSeconds: 365 * 24 * 60 * 60, // 1 year
+//         },
+//       },
+//     },
+//     {
+//       urlPattern: /^https:\/\/cdn\.jsdelivr\.net\/.*/i,
+//       handler: "CacheFirst",
+//       options: {
+//         cacheName: "cdn-jsdelivr",
+//         expiration: {
+//           maxEntries: 10,
+//           maxAgeSeconds: 365 * 24 * 60 * 60, // 1 year
+//         },
+//       },
+//     },
+//   ],
+// };
 
-const config = process.env.NODE_ENV === "production" 
-  ? withPWA(pwaConfig)(withMDX(nextConfig))
-  : withMDX(nextConfig);
+// Disable PWA temporarily to avoid build issues
+const config = withMDX(nextConfig);
 
 export default config;

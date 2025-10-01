@@ -49,20 +49,20 @@ export default function TeamPage() {
       return;
     }
     const seat = await teamService.invite(e, user);
-    analytics.capture("team_invite", { email: e });
+    void analytics.capture("team_invite", { email: e });
     setSeats((prev) => [seat, ...prev]);
     setEmail("");
   }
 
   async function handleRevoke(id: string) {
     await teamService.revoke(id, user);
-    analytics.capture("team_revoke", { id });
+    void analytics.capture("team_revoke", { id });
     setSeats((prev) => prev.map((s) => (s.id === id ? { ...s, status: "revoked" } : s)));
   }
 
   async function handleActivate(id: string) {
     await teamService.activate(id, user);
-    analytics.capture("team_activate", { id });
+    void analytics.capture("team_activate", { id });
     setSeats((prev) => prev.map((s) => (s.id === id ? { ...s, status: "active", acceptedAt: new Date().toISOString() } : s)));
   }
 

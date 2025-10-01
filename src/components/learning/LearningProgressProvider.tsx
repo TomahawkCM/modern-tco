@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { createContext, useContext, useState, useEffect, type ReactNode } from 'react';
 import { usePathname } from 'next/navigation';
 
 // Types for learning progress management
@@ -329,7 +329,7 @@ export function LearningProgressProvider({ children }: LearningProgressProviderP
   useEffect(() => {
     // Parse pathname to determine current domain and module
     // Patterns: /study/domain-id or /learning/domain-id or /learning/domain-id/module-id
-    const currentPath = pathname || '';
+    const currentPath = pathname ?? '';
     const pathParts = currentPath.split('/').filter(Boolean);
     
     if (pathParts.length >= 2 && (pathParts[0] === 'learning' || pathParts[0] === 'study')) {
@@ -342,7 +342,7 @@ export function LearningProgressProvider({ children }: LearningProgressProviderP
         
         if (moduleId) {
           const module = domain.modules.find(m => m.id === moduleId);
-          setCurrentModule(module || null);
+          setCurrentModule(module ?? null);
         } else {
           setCurrentModule(null);
         }
@@ -354,8 +354,8 @@ export function LearningProgressProvider({ children }: LearningProgressProviderP
   }, [pathname, domains]);
 
   const contextValue: LearningProgressContextType = {
-    currentDomain: currentDomain?.id || null,
-    currentModule: currentModule?.id || null,
+    currentDomain: currentDomain?.id ?? null,
+    currentModule: currentModule?.id ?? null,
     domains,
     allDomains: domains,
     overallProgress,

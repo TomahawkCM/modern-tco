@@ -3,7 +3,7 @@
  * Maps Tanium sensor names to database columns and types
  */
 
-import { FieldMapping, Sensor } from './types';
+import type { FieldMapping, Sensor } from './types';
 
 /**
  * Field mappings for common Tanium sensors

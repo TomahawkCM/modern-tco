@@ -88,7 +88,7 @@ export function PracticeSessionContainer({
     }
 
     const startTime = currentSession.startedAt.getTime();
-    const timeLimitMs = currentSession.config.timeLimit * 1000;
+    const timeLimitMs = (currentSession.config.timeLimit || 0) * 1000;
 
     const interval = setInterval(() => {
       const elapsed = Date.now() - startTime;
@@ -205,7 +205,7 @@ export function PracticeSessionContainer({
   }, [sessionManager]);
 
   // Loading state
-  if (questionsLoading || loading) {
+  if (questionsLoading ?? loading) {
     return (
       <div className={cn("space-y-6", className)}>
         <Card>
@@ -320,7 +320,7 @@ export function PracticeSessionContainer({
             </div>
             <div>
               <span className="font-medium">Domain:</span>
-              <span className="ml-2 text-muted-foreground">{domain || "Mixed"}</span>
+              <span className="ml-2 text-muted-foreground">{domain ?? "Mixed"}</span>
             </div>
           </div>
 

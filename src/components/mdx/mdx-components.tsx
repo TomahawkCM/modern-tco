@@ -228,6 +228,6 @@ export const serverSafeMdxComponents = {
   ),
 
   // Interactive learning components (client-side)
-  QueryPlayground: QueryPlayground,
-  SkillGate: SkillGate,
+  QueryPlayground,
+  SkillGate,
 };

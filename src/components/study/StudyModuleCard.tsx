@@ -18,7 +18,7 @@ interface StudyModuleCardProps {
 }
 
 export function StudyModuleCard({ module, progress, className }: StudyModuleCardProps) {
-  const progressPercentage = progress?.percentage || 0
+  const progressPercentage = progress?.percentage ?? 0
   const isCompleted = progressPercentage === 100
   const hasStarted = progressPercentage > 0
 
@@ -88,7 +88,7 @@ export function StudyModuleCard({ module, progress, className }: StudyModuleCard
           <div className="grid grid-cols-3 gap-4 text-sm">
             <div className="flex items-center gap-2 text-cyan-100/60">
               <BookOpen className="h-4 w-4 text-cyan-400" />
-              <span>{module.sections?.length || 0} sections</span>
+              <span>{module.sections?.length ?? 0} sections</span>
             </div>
             <div className="flex items-center gap-2 text-cyan-100/60">
               <Clock className="h-4 w-4 text-cyan-400" />

@@ -10,7 +10,7 @@ import type {
   UserStudyProgress,
   UserStudyProgressInsert,
 } from "@/types/supabase";
-import { Tables } from "@/types/supabase";
+import type { Tables } from "@/types/supabase";
 import { supabase } from "./supabase";
 
 export class StudyModulesService {
@@ -288,7 +288,7 @@ export class StudyModulesService {
 
     const { data, error } = await supabase
       .from("user_study_progress")
-      .upsert(progressData as any, {
+      .upsert(progressData, {
         onConflict: "user_id,section_id",
       })
       .select()
@@ -334,11 +334,11 @@ export class StudyModulesService {
         ...bookmarkData,
         section: bookmarkData.section
           ? {
-              ...(bookmarkData.section as StudySection),
+              ...(bookmarkData.section),
               content:
-                typeof (bookmarkData.section as StudySection).content === "object" &&
-                (bookmarkData.section as StudySection).content !== null
-                  ? ((bookmarkData.section as StudySection)
+                typeof (bookmarkData.section).content === "object" &&
+                (bookmarkData.section).content !== null
+                  ? ((bookmarkData.section)
                       .content as StudySectionWithModule["content"])
                   : {
                       overview: "",
@@ -347,17 +347,17 @@ export class StudyModulesService {
                       troubleshooting: [],
                       references: [],
                     },
-              key_points: Array.isArray((bookmarkData.section as StudySection).key_points)
-                ? ((bookmarkData.section as StudySection).key_points as string[])
+              key_points: Array.isArray((bookmarkData.section).key_points)
+                ? ((bookmarkData.section).key_points as string[])
                 : [],
-              procedures: Array.isArray((bookmarkData.section as StudySection).procedures)
-                ? ((bookmarkData.section as StudySection).procedures as string[])
+              procedures: Array.isArray((bookmarkData.section).procedures)
+                ? ((bookmarkData.section).procedures as string[])
                 : [],
-              troubleshooting: Array.isArray((bookmarkData.section as StudySection).troubleshooting)
-                ? ((bookmarkData.section as StudySection).troubleshooting as string[])
+              troubleshooting: Array.isArray((bookmarkData.section).troubleshooting)
+                ? ((bookmarkData.section).troubleshooting as string[])
                 : [],
-              references: Array.isArray((bookmarkData.section as StudySection).references)
-                ? ((bookmarkData.section as StudySection).references as string[])
+              references: Array.isArray((bookmarkData.section).references)
+                ? ((bookmarkData.section).references as string[])
                 : [],
             }
           : undefined,
@@ -427,7 +427,7 @@ export class StudyModulesService {
       throw new Error(`Failed to update bookmark notes: ${error.message}`);
     }
 
-    return data as UserStudyBookmark; // Explicitly cast data
+    return data; // Explicitly cast data
   }
 
   /**

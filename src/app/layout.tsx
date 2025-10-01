@@ -8,6 +8,7 @@ import { MainLayout } from "@/components/layout/main-layout";
 import { SkipLinks } from "@/components/accessibility/skip-links";
 import { AnalyticsClient } from "@/app/analytics-client";
 import { MonitoringClient } from "@/app/monitoring-client";
+import { AccessibilityInitializer } from "@/components/AccessibilityInitializer";
 
 // Force dynamic rendering to prevent static generation issues with React hooks
 export const dynamic = 'force-dynamic';
@@ -27,7 +28,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en">
       <head>
         {/* Preconnect to external domains for performance */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -47,15 +48,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           type="font/woff2"
           crossOrigin="anonymous"
         />
-
-        {/* Initialize accessibility settings BEFORE React hydration - CSS handles styling */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `(() => { try { var v = localStorage.getItem('tco-large-text'); if (v === '1') { document.documentElement.setAttribute('data-large-text','1'); } var hc = localStorage.getItem('tco-high-contrast'); if (hc === '1') { document.documentElement.setAttribute('data-high-contrast','1'); } } catch (e) {} })();`,
-          }}
-        />
       </head>
-      <body className="font-sans antialiased" suppressHydrationWarning>
+      <body className="font-sans antialiased">
+        <AccessibilityInitializer />
         <div className="min-h-screen bg-gradient-to-br from-black via-black to-black">
           <Providers>
             <MainLayout asGlobal>

@@ -12,16 +12,18 @@ import { studyModulesService } from "@/lib/study-modules";
 import type { StudyModuleWithSections } from "@/types/supabase";
 import { BookOpen, BookmarkIcon, Clock, LogOut, TrendingUp, Trophy, User } from "lucide-react";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import LearningProgressTracker from "@/components/learning/LearningProgressTracker";
+import type { UserBookmarkWithDetails } from "@/types/supabase";
 
 export function DashboardContent() {
   const { user, signOut } = useAuth();
-  const { progress, getOverallStats } = useStudyProgress();
+  const { getOverallStats } = useStudyProgress();
   const { getBookmarksCount, getRecentBookmarks } = useBookmarks();
   const [modules, setModules] = useState<StudyModuleWithSections[]>([]);
   const [loading, setLoading] = useState(true);
-  const [stats, setStats] = useState<any>(null);
+  type UserStats = Awaited<ReturnType<typeof studyModulesService.getUserStats>>;
+  const [stats, setStats] = useState<UserStats | null>(null);
 
   useEffect(() => {
     const loadData = async () => {
@@ -44,43 +46,89 @@ export function DashboardContent() {
       }
     };
 
-    loadData();
+    void loadData();
   }, [user]);
 
   const overallStats = getOverallStats();
   const bookmarksCount = getBookmarksCount();
   const recentBookmarks = getRecentBookmarks(3);
+  const totalSections = stats?.totalSections ?? 0;
 
-  const handleSignOut = async () => {
-    try {
-      await signOut();
-    } catch (error) {
+  const handleSignOut = useCallback(() => {
+    void signOut().catch((error) => {
       console.error("Error signing out:", error);
-    }
-  };
+    });
+  }, [signOut]);
 
+  // Calculate module progress - MUST be before early return to satisfy Rules of Hooks
+  const moduleProgress = useMemo(() => {
+    const progressByModule: Record<string, { completed: number; total: number }> =
+      stats?.progressByModule ?? {};
+
+    return modules.map((module) => {
+      const moduleId = String(module.id);
+      const moduleStats = progressByModule[moduleId] ?? {
+        completed: 0,
+        total: module.sections?.length ?? 0,
+      };
+
+      const percentage =
+        moduleStats.total > 0 ? Math.round((moduleStats.completed / moduleStats.total) * 100) : 0;
+
+      const normalizedModule: StudyModuleWithSections = {
+        ...module,
+        sections: Array.isArray(module.sections) ? module.sections : [],
+      };
+
+      return {
+        module: normalizedModule,
+        progress: {
+          completed: moduleStats.completed,
+          total: moduleStats.total,
+          percentage,
+        },
+      };
+    });
+  }, [modules, stats]);
+
+  interface BookmarkEntry {
+    id: string;
+    title: string;
+    moduleTitle: string;
+    notes?: string;
+    href: string;
+  }
+
+  const recentBookmarkEntries = useMemo<BookmarkEntry[]>(
+    () =>
+      recentBookmarks.map((bookmark: UserBookmarkWithDetails) => {
+        const moduleId = bookmark.module_id ?? undefined;
+        const sectionId = bookmark.section_id ?? undefined;
+
+        return {
+          id: String(bookmark.id),
+          title:
+            typeof bookmark.section?.title === "string"
+              ? bookmark.section.title
+              : "Untitled Section",
+          moduleTitle:
+            typeof bookmark.module?.title === "string"
+              ? bookmark.module.title
+              : "Unknown Module",
+          notes: bookmark.notes ?? undefined,
+          href:
+            moduleId && sectionId
+              ? `/study/modules/${moduleId}/sections/${sectionId}`
+              : "#",
+        };
+      }),
+    [recentBookmarks]
+  );
+
+  // Early return AFTER all hooks are called (satisfies Rules of Hooks)
   if (loading) {
     return <div>Loading dashboard...</div>;
   }
-
-  // Calculate module progress
-  const moduleProgress = modules.map((module) => {
-    const moduleStats = stats?.progressByModule[module.id] || {
-      completed: 0,
-      total: module.sections?.length || 0,
-    };
-    const percentage =
-      moduleStats.total > 0 ? Math.round((moduleStats.completed / moduleStats.total) * 100) : 0;
-
-    return {
-      ...(module as any),
-      progress: {
-        completed: moduleStats.completed,
-        total: moduleStats.total,
-        percentage,
-      },
-    };
-  });
 
   return (
     <div className="w-full space-y-8 pb-12">
@@ -115,7 +163,7 @@ export function DashboardContent() {
             </div>
             <Progress value={overallStats.completionRate} className="h-2" />
             <p className="mt-2 text-xs text-blue-600 dark:text-blue-400">
-              {overallStats.completed} of {stats?.totalSections || 0} sections
+              {overallStats.completed} of {totalSections} sections
             </p>
           </CardContent>
         </Card>
@@ -211,29 +259,29 @@ export function DashboardContent() {
         </div>
 
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {moduleProgress.map((module) => (
-            <StudyModuleCard key={module.id} module={module} progress={module.progress} />
+          {moduleProgress.map(({ module, progress }) => (
+            <StudyModuleCard key={module.id} module={module} progress={progress} />
           ))}
         </div>
       </div>
 
       {/* Recent Bookmarks */}
-      {recentBookmarks.length > 0 && (
+      {recentBookmarkEntries.length > 0 && (
         <div>
           <h3 className="mb-4 text-xl font-semibold text-slate-900 dark:text-slate-100">
             Recent Bookmarks
           </h3>
           <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-            {recentBookmarks.map((bookmark) => (
+            {recentBookmarkEntries.map((bookmark) => (
               <Card key={bookmark.id} className="transition-shadow hover:shadow-md">
                 <CardHeader className="pb-2">
                   <CardTitle className="line-clamp-2 text-sm font-medium">
-                    {bookmark.section?.title || "Untitled Section"}
+                    {bookmark.title}
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="mb-2 text-xs text-muted-foreground">
-                    {bookmark.module?.title || "Unknown Module"}
+                    {bookmark.moduleTitle}
                   </p>
                   {bookmark.notes && (
                     <p className="line-clamp-2 text-xs text-slate-600 dark:text-slate-400">
@@ -241,11 +289,7 @@ export function DashboardContent() {
                     </p>
                   )}
                   <Button asChild size="sm" className="mt-2 w-full">
-                    <Link
-                      href={`/study/modules/${bookmark.module_id}/sections/${bookmark.section_id}`}
-                    >
-                      Continue Reading
-                    </Link>
+                    <Link href={bookmark.href}>Continue Reading</Link>
                   </Button>
                 </CardContent>
               </Card>

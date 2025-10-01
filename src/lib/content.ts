@@ -22,7 +22,7 @@ function lsGet(): AdminQuestion[] {
     if (!raw) return [];
     const parsed = JSON.parse(raw);
     return Array.isArray(parsed) ? parsed : [];
-  } catch {
+  } catch (error) {
     return [];
   }
 }
@@ -79,7 +79,7 @@ export const contentService = {
       }));
       if (remote.length) lsSet(remote);
       return remote.length ? remote : local;
-    } catch {
+    } catch (error) {
       return local;
     }
   },

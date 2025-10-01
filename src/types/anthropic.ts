@@ -1,257 +1,399 @@
 /**
- * Anthropic AI Integration Types for Modern TCO Study System
- * Enhanced TypeScript definitions for Next.js application
+ * Anthropic AI SDK Type Definitions
+ * Comprehensive TypeScript definitions for Claude API integration
  */
 
-import Anthropic from "@anthropic-ai/sdk";
+import { Anthropic } from "@anthropic-ai/sdk";
+import type {
+  Tool,
+  ToolUseBlock,
+  ToolResultBlockParam,
+  ContentBlock,
+  TextBlock,
+  Message,
+  MessageCreateParams,
+  ImageBlockParam,
+} from "@anthropic-ai/sdk/resources/messages/messages";
+import type {
+  APIError,
+  APIConnectionError,
+  APIUserAbortError,
+  BadRequestError,
+  AuthenticationError,
+  PermissionDeniedError,
+  NotFoundError,
+  RateLimitError,
+  InternalServerError,
+} from "@anthropic-ai/sdk/core/error";
 
-// Core Anthropic SDK configuration
-export interface AnthropicConfig {
-  apiKey: string;
-  maxRetries?: number;
-  timeout?: number;
-  baseURL?: string;
-}
+// Re-export core Anthropic types
+export type {
+  MessageCreateParams,
+  Message,
+  TextBlock,
+  ImageBlockParam,
+  ToolUseBlock,
+  ToolResultBlockParam,
+  ContentBlock,
+  Tool,
+  APIError,
+  APIConnectionError,
+  APIUserAbortError,
+  BadRequestError,
+  AuthenticationError,
+  PermissionDeniedError,
+  NotFoundError,
+  RateLimitError,
+  InternalServerError,
+};
 
-// Token management and optimization
+// Re-export with legacy names for backward compatibility
+export type ImageBlock = ImageBlockParam;
+export type ToolResultBlock = ToolResultBlockParam;
+
+// Difficulty levels for questions and content
+export type DifficultyLevel = "beginner" | "intermediate" | "advanced" | "easy" | "medium" | "hard";
+
+// AI Model types
+export type AIModel = "claude-3-5-sonnet-20241022" | "claude-3-5-haiku-20241022" | "claude-3-opus-20240229";
+
+// Token counting and information
 export interface TokenInfo {
   count: number;
-  tokens: number[];
+  tokens: string[];
   text: string;
-  estimatedCost?: number;
+  estimatedCost: number;
 }
 
-// TCO Study-specific response types
-export interface StudyResponse {
-  content: string;
-  tokenCount: number;
-  model: string;
-  timestamp: Date;
-  metadata?: Record<string, any>;
-}
-
-// Enhanced question generation for TCO certification
+// TCO Question Generation
 export interface TCOQuestionGeneration {
-  id: string;
+  id?: string;
+  topic?: string;
+  subtopic?: string;
   question: string;
   answers: string[];
   correctAnswer: number;
   explanation: string;
-  difficulty: "easy" | "medium" | "hard";
-  topic: string;
-  subtopic?: string;
-  taniumVersion?: string;
-  practicalScenario: boolean;
-  estimatedTime: number; // seconds
-  learningObjectives: string[];
+  difficulty?: DifficultyLevel;
+  practicalScenario?: boolean;
+  estimatedTime?: number;
+  learningObjectives?: string[];
   references?: string[];
-  isPlaceholder?: boolean; // Add this property
+  taniumVersion?: string;
+  isPlaceholder?: boolean;
 }
 
-// Comprehensive study explanations
+// Study Explanation
 export interface StudyExplanation {
   concept: string;
   explanation: string;
-  examples: string[];
-  relatedTopics: string[];
-  practicalApplications: string[];
-  commonMistakes: string[];
-  tips: string[];
-  difficulty: "beginner" | "intermediate" | "advanced";
+  examples?: string[];
+  references?: string[];
+  relatedTopics?: string[];
+  practicalApplications?: string[];
+  commonMistakes?: string[];
+  tips?: string[];
+  difficulty: DifficultyLevel;
 }
 
-// Advanced learning analytics
+// Learning Analytics
 export interface LearningAnalytics {
-  userId: string;
-  sessionId: string;
-  topic: string;
-  performanceScore: number;
-  timeSpent: number;
-  questionsAttempted: number;
-  correctAnswers: number;
-  weakAreas: string[];
-  strongAreas: string[];
-  recommendedActions: string[];
-  nextTopics: string[];
-  confidenceLevel: number;
-  masteryLevel: "novice" | "developing" | "proficient" | "expert";
+  userId?: string;
+  sessionId?: string;
+  topic?: string;
+  overallScore?: number;
+  performanceScore?: number;
+  domainScores?: Record<string, number>;
+  strengths?: string[];
+  weaknesses?: string[];
+  weakAreas?: string[];
+  strongAreas?: string[];
+  recommendations?: string[];
+  recommendedActions?: string[];
+  nextTopics?: string[];
+  timeSpent?: number;
+  questionsAttempted?: number;
+  correctAnswers?: number;
+  confidenceLevel?: number;
+  masteryLevel?: string;
+  questionStats?: {
+    total: number;
+    correct: number;
+    incorrect: number;
+    skipped: number;
+    averageTime: number;
+  };
 }
 
-// Study session tracking
+// Study Session
 export interface StudySession {
   id: string;
   userId: string;
   startTime: Date;
   endTime?: Date;
   topics: string[];
-  questionsAnswered: TCOQuestionGeneration[];
-  userAnswers: number[];
-  score: number;
-  timeSpent: number;
-  analytics: LearningAnalytics;
+  questionsAttempted: number;
+  correctAnswers: number;
+  duration: number;
+  questionsAnswered?: any[];
+  userAnswers?: any[];
+  timeSpent?: number;
 }
 
-// Bedrock configuration for enterprise deployment
-export interface BedrockConfig extends AnthropicConfig {
-  region: string;
-  accessKeyId?: string;
-  secretAccessKey?: string;
-  sessionToken?: string;
-  modelId?: string;
-}
-
-// AI-powered study plan
+// Study Plan
 export interface StudyPlan {
-  id: string;
-  userId: string;
-  title: string;
-  description: string;
-  estimatedDuration: number; // hours
-  topics: StudyPlanTopic[];
-  prerequisites: string[];
-  difficulty: "beginner" | "intermediate" | "advanced";
-  createdAt: Date;
-  updatedAt: Date;
+  id?: string;
+  title?: string;
+  description?: string;
+  userId?: string;
+  currentLevel?: DifficultyLevel;
+  difficulty?: DifficultyLevel;
+  completedModules?: string[];
+  weakAreas?: string[];
+  recommendedNext?: string[];
+  topics?: string[];
+  estimatedTime?: number;
+  estimatedDuration?: number;
+  prerequisites?: string[];
+  createdAt?: Date;
+  updatedAt?: Date;
+  studyPath?: {
+    moduleId: string;
+    priority: "high" | "medium" | "low";
+    estimatedTime: number;
+    prerequisites?: string[];
+  }[];
 }
 
-export interface StudyPlanTopic {
-  topic: string;
-  subtopics: string[];
-  estimatedTime: number; // minutes
-  priority: "low" | "medium" | "high";
-  completed: boolean;
-  score?: number;
-  notes?: string;
-}
-
-// Real-time chat assistance
+// Chat Message
 export interface ChatMessage {
-  id: string;
+  id?: string;
   role: "user" | "assistant" | "system";
   content: string;
   timestamp: Date;
-  metadata?: {
-    tokens?: number;
-    model?: string;
-    confidence?: number;
-    relatedTopics?: string[];
-  };
+  metadata?: any;
 }
 
+// Chat Session Context
+export interface ChatSessionContext {
+  currentTopic?: string;
+  userLevel?: DifficultyLevel;
+  studyGoals?: string[];
+}
+
+// Chat Session
 export interface ChatSession {
   id: string;
   userId: string;
   messages: ChatMessage[];
-  context: {
-    currentTopic?: string;
-    userLevel?: string;
-    studyGoals?: string[];
-  };
+  context?: string | ChatSessionContext;
   createdAt: Date;
   updatedAt: Date;
 }
 
-// Utility type definitions
-export type AIModel =
-  | "claude-3-5-sonnet-20241022"
-  | "claude-3-5-haiku-20241022"
-  | "claude-3-opus-20240229";
-
-export type DifficultyLevel = "easy" | "medium" | "hard";
-export type TopicCategory =
-  | "tanium-core"
-  | "endpoint-management"
-  | "threat-response"
-  | "patch-management"
-  | "compliance"
-  | "architecture"
-  | "administration"
-  | "troubleshooting";
-
-// Enhanced TCO Study AI class interface
+// TCO Study AI Interface
 export interface ITCOStudyAI {
-  // Core functionality
   countTokens(text: string): TokenInfo;
-  optimizePrompt(prompt: string, maxTokens: number): Promise<string>;
-
-  // Question generation
   generateQuestion(
     topic: string,
-    difficulty?: DifficultyLevel,
-    options?: {
-      practicalScenario?: boolean;
-      taniumVersion?: string;
-      subtopic?: string;
-    }
+    difficulty: DifficultyLevel,
+    options?: { practicalScenario?: boolean; taniumVersion?: string; subtopic?: string }
   ): Promise<TCOQuestionGeneration>;
-
-  generateQuestionBatch(
-    topics: string[],
-    count: number,
-    difficulty?: DifficultyLevel
-  ): Promise<TCOQuestionGeneration[]>;
-
-  // Content explanation
-  explainConcept(
-    concept: string,
-    userLevel?: "beginner" | "intermediate" | "advanced"
-  ): Promise<StudyExplanation>;
-
-  // Analytics and recommendations
-  analyzePerformance(userId: string, sessions: StudySession[]): Promise<LearningAnalytics>;
-
-  // Study planning
-  createStudyPlan(
-    userId: string,
-    weakAreas: string[],
-    timeAvailable: number,
-    targetDate?: Date
-  ): Promise<StudyPlan>;
-
-  // Real-time assistance
-  chatAssist(message: string, context: ChatSession["context"]): Promise<ChatMessage>;
-
-  // Content validation
-  validateContent(content: string): Promise<{
-    isValid: boolean;
-    issues: string[];
-    suggestions: string[];
-  }>;
 }
 
-// React hook types for AI integration
-export interface UseAIChat {
-  messages: ChatMessage[];
-  isLoading: boolean;
-  error: string | null;
-  sendMessage: (content: string) => Promise<void>;
-  clearChat: () => void;
+// Extended types for our application
+export interface AnthropicConfig {
+  apiKey: string;
+  baseURL?: string;
+  maxTokens?: number;
+  temperature?: number;
+  topP?: number;
+  topK?: number;
+  timeout?: number;
+  maxRetries?: number;
 }
 
-export interface UseQuestionGenerator {
-  isGenerating: boolean;
-  error: string | null;
-  generateQuestion: (topic: string, difficulty?: DifficultyLevel) => Promise<TCOQuestionGeneration>;
-  generateBatch: (topics: string[], count: number) => Promise<TCOQuestionGeneration[]>;
+export interface StudyAssistantConfig extends AnthropicConfig {
+  systemPrompt?: string;
+  studyContext?: string;
+  userLevel?: "beginner" | "intermediate" | "advanced";
+  examMode?: boolean;
 }
 
-export interface UseStudyAnalytics {
-  analytics: LearningAnalytics | null;
-  isAnalyzing: boolean;
-  error: string | null;
-  analyzeSession: (session: StudySession) => Promise<void>;
-  getRecommendations: () => string[];
+export interface QuestionGenerationParams {
+  topic: string;
+  difficulty: "beginner" | "intermediate" | "advanced";
+  questionType: "multiple-choice" | "true-false" | "scenario" | "fill-blank";
+  count: number;
+  examWeight?: number;
+  objectives?: string[];
+  context?: string;
 }
 
-// Utility functions
-export declare function countTokens(text: string): number;
-export declare function optimizePrompt(prompt: string, maxTokens: number): string;
-export declare function validateTokenLimit(content: string, limit: number): boolean;
-export declare function estimateTokenCost(tokenCount: number, model: AIModel): number;
-export declare function formatTime(seconds: number): string;
-export declare function calculateMasteryLevel(
-  score: number,
-  attempts: number
-): LearningAnalytics["masteryLevel"];
+export interface GeneratedQuestion {
+  id: string;
+  type: "multiple-choice" | "true-false" | "scenario" | "fill-blank";
+  difficulty: "beginner" | "intermediate" | "advanced";
+  topic: string;
+  question: string;
+  options?: string[];
+  correctAnswer: string | string[];
+  explanation: string;
+  references?: string[];
+  timeEstimate?: number;
+  examWeight: number;
+}
 
+export interface ExplanationRequest {
+  concept: string;
+  userLevel: "beginner" | "intermediate" | "advanced";
+  context?: string;
+  includeExamples?: boolean;
+  includeReferences?: boolean;
+}
+
+export interface StudyPathRecommendation {
+  currentLevel: "beginner" | "intermediate" | "advanced";
+  completedModules: string[];
+  weakAreas: string[];
+  recommendedNext: string[];
+  estimatedTime: number;
+  studyPlan: {
+    moduleId: string;
+    priority: "high" | "medium" | "low";
+    estimatedTime: number;
+    prerequisites?: string[];
+  }[];
+}
+
+export interface PerformanceAnalysis {
+  overallScore: number;
+  domainScores: Record<string, number>;
+  strengths: string[];
+  weaknesses: string[];
+  recommendations: string[];
+  timeSpent: number;
+  questionStats: {
+    total: number;
+    correct: number;
+    incorrect: number;
+    skipped: number;
+    averageTime: number;
+  };
+}
+
+// AI Service Response Types
+export interface AIServiceResponse<T = any> {
+  success: boolean;
+  data?: T;
+  error?: string;
+  usage?: {
+    inputTokens: number;
+    outputTokens: number;
+    totalTokens: number;
+    cost?: number;
+  };
+  metadata?: {
+    model: string;
+    temperature: number;
+    maxTokens: number;
+    requestId: string;
+    timestamp: string;
+  };
+}
+
+export interface StreamingResponse {
+  content: string;
+  isComplete: boolean;
+  usage?: {
+    inputTokens: number;
+    outputTokens: number;
+  };
+}
+
+// Tool definitions for function calling
+export interface StudyTool extends Tool {
+  name: "generate_question" | "explain_concept" | "analyze_performance" | "recommend_study_path";
+  description: string;
+  input_schema: {
+    type: "object";
+    properties: Record<string, any>;
+    required: string[];
+  };
+}
+
+// Error types specific to our application
+export interface StudyServiceError {
+  code: "INVALID_CONFIG" | "API_ERROR" | "RATE_LIMIT" | "QUOTA_EXCEEDED" | "NETWORK_ERROR";
+  message: string;
+  details?: any;
+  retryAfter?: number;
+}
+
+// Token counting and optimization
+export interface TokenUsage {
+  inputTokens: number;
+  outputTokens: number;
+  totalTokens: number;
+  estimatedCost: number;
+}
+
+export interface TokenOptimizationSettings {
+  maxContextLength: number;
+  reserveTokensForResponse: number;
+  truncationStrategy: "beginning" | "end" | "middle" | "smart";
+  compressionLevel: "none" | "light" | "moderate" | "aggressive";
+}
+
+// Streaming types
+export interface StreamingOptions {
+  onChunk?: (chunk: string) => void;
+  onComplete?: (fullResponse: string) => void;
+  onError?: (error: Error) => void;
+  onTokenUsage?: (usage: TokenUsage) => void;
+}
+
+// Utility types
+export type APIMethod = "POST" | "GET" | "PUT" | "DELETE";
+export type ContentType = "text" | "image" | "tool_use" | "tool_result";
+
+// Model-specific configurations
+export interface ModelCapabilities {
+  maxTokens: number;
+  supportsImages: boolean;
+  supportsFunctions: boolean;
+  supportsStreaming: boolean;
+  costPerToken: {
+    input: number;
+    output: number;
+  };
+}
+
+export const CLAUDE_MODELS: Record<string, ModelCapabilities> = {
+  "claude-3-5-sonnet-20241022": {
+    maxTokens: 200000,
+    supportsImages: true,
+    supportsFunctions: true,
+    supportsStreaming: true,
+    costPerToken: {
+      input: 0.003,
+      output: 0.015,
+    },
+  },
+  "claude-3-haiku-20240307": {
+    maxTokens: 200000,
+    supportsImages: true,
+    supportsFunctions: true,
+    supportsStreaming: true,
+    costPerToken: {
+      input: 0.00025,
+      output: 0.00125,
+    },
+  },
+};
+
+// Export the main Anthropic client type
+export type AnthropicClient = Anthropic;
+
+// Default export for the main types
 export default Anthropic;

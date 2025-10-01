@@ -6,10 +6,10 @@
 import {
   QueryNode,
   FilterNode,
-  Sensor,
-  QueryResult,
-  FieldMapping,
-  FilterOperator
+  type Sensor,
+  type QueryResult,
+  type FieldMapping,
+  type FilterOperator
 } from '@/lib/tanium-query-engine/types';
 
 // Re-export imported types

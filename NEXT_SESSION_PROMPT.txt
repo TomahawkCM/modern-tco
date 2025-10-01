@@ -1,0 +1,9 @@
+Test the hardware optimizations we configured:
+
+1. Verify WSL2 config: Run `free -h`, `nproc`, `swapon --show`, `nvidia-smi`
+2. Test dev server: `time npm run dev` - should start in 5-8s with Turbopack
+3. Test build: `time npm run build` - should complete in 40-60s
+4. Monitor resources during both operations
+5. Create performance comparison report
+
+Expected: 25GB RAM, 12 CPUs, Turbopack active, 50-70% faster startup, 50-66% faster builds.

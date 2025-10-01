@@ -49,7 +49,7 @@ export function ExamTooltip({ type, context, side = "top", children }: ExamToolt
       <Tooltip>
         <TooltipTrigger>
           <div className="inline-flex items-center">
-            {children || getIcon()}
+            {children ?? getIcon()}
           </div>
         </TooltipTrigger>
         <TooltipContent side={side}>

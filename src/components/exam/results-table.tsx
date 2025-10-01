@@ -302,7 +302,7 @@ export function ResultsTable() {
                       {result.date.toLocaleDateString()}
                     </TableCell>
                     <TableCell>{getModeBadge(result.mode)}</TableCell>
-                    <TableCell>{result.domain || "-"}</TableCell>
+                    <TableCell>{result.domain ?? "-"}</TableCell>
                     <TableCell>
                       <div className="flex items-center space-x-2">
                         <span className={cn("font-medium", getScoreColor(result.score))}>

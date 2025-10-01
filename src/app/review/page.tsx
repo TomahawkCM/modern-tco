@@ -59,7 +59,7 @@ export default function ReviewPage() {
         difficulty: Difficulty.INTERMEDIATE,
         category: QuestionCategory.PRACTICAL_SCENARIOS,
         explanation:
-          answer.explanation || "Review the correct answer and study the related concepts.",
+          answer.explanation ?? "Review the correct answer and study the related concepts.",
         userAnswer: "user", // Reference to the choice that was selected
         timestamp: answer.timestamp,
         reviewed: answer.reviewed,

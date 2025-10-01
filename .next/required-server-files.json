@@ -15,11 +15,11 @@
     "typedRoutes": false,
     "distDir": ".next",
     "cleanDistDir": true,
-    "assetPrefix": "/tanium",
+    "assetPrefix": "",
     "cacheMaxMemorySize": 52428800,
     "configOrigin": "next.config.js",
     "useFileSystemPublicRoutes": true,
-    "generateEtags": true,
+    "generateEtags": false,
     "pageExtensions": [
       "js",
       "jsx",
@@ -51,7 +51,7 @@
         256,
         384
       ],
-      "path": "/tanium/_next/image",
+      "path": "/_next/image",
       "loader": "default",
       "loaderFile": "",
       "domains": [],
@@ -91,9 +91,9 @@
       "pagesBufferLength": 5
     },
     "amp": {
-      "canonicalBase": "/tanium"
+      "canonicalBase": ""
     },
-    "basePath": "/tanium",
+    "basePath": "",
     "sassOptions": {},
     "trailingSlash": false,
     "i18n": null,
@@ -307,18 +307,34 @@
     "htmlLimitedBots": "[\\w-]+-Google|Google-[\\w-]+|Chrome-Lighthouse|Slurp|DuckDuckBot|baiduspider|yandex|sogou|bitlybot|tumblr|vkShare|quora link preview|redditbot|ia_archiver|Bingbot|BingPreview|applebot|facebookexternalhit|facebookcatalog|Twitterbot|LinkedInBot|Slackbot|Discordbot|WhatsApp|SkypeUriPreview|Yeti|googleweblight",
     "bundlePagesRouterDependencies": false,
     "configFileName": "next.config.js",
+    "skipTrailingSlashRedirect": true,
     "turbopack": {
       "root": "/home/robne/projects/active/tanium-tco/modern-tco"
     },
     "_originalRedirects": [
       {
-        "source": "/exam",
-        "destination": "/mock",
+        "source": "/tanium",
+        "destination": "/",
         "permanent": true
       },
       {
-        "source": "/tanium/exam",
-        "destination": "/tanium/mock",
+        "source": "/tanium/:path*",
+        "destination": "/:path*",
+        "permanent": true
+      },
+      {
+        "source": "/Tanium",
+        "destination": "/",
+        "permanent": true
+      },
+      {
+        "source": "/Tanium/:path*",
+        "destination": "/:path*",
+        "permanent": true
+      },
+      {
+        "source": "/exam",
+        "destination": "/mock",
         "permanent": true
       }
     ]
@@ -346,8 +362,8 @@
     ".next/server/next-font-manifest.js",
     ".next/server/next-font-manifest.json",
     ".next/required-server-files.json",
-    ".next/static/css/cbc648967cc44ce8.css",
-    ".next/static/css/d00ccf3c7fb606c6.css"
+    ".next/static/css/d00ccf3c7fb606c6.css",
+    ".next/static/css/d07dfcf68ff6af4c.css"
   ],
   "ignore": [
     "node_modules/next/dist/compiled/@ampproject/toolbox-optimizer/**/*"

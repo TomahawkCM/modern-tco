@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { ColumnDef, flexRender, getCoreRowModel, getFilteredRowModel, getSortedRowModel, SortingState, useReactTable, ColumnFiltersState, VisibilityState } from "@tanstack/react-table";
+import { type ColumnDef, flexRender, getCoreRowModel, getFilteredRowModel, getSortedRowModel, type SortingState, useReactTable, type ColumnFiltersState, type VisibilityState } from "@tanstack/react-table";
 import type { ModuleListRow } from "./module-table-types";
 import { moduleColumnsWithProgress } from "./module-table-columns";
 import { Input } from "@/components/ui/input";

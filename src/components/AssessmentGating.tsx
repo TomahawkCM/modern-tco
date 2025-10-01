@@ -263,7 +263,7 @@ function AssessmentGateCard({
 
   const unmetRequirements = gate.requirements.filter((req) => !req.met);
   const canAttempt =
-    gate.unlocked && (gate.maxAttempts === undefined || gate.currentAttempts < gate.maxAttempts);
+    gate.unlocked && (gate.maxAttempts === undefined || gate.currentAttempts < (gate.maxAttempts ?? Infinity));
 
   return (
     <Card
@@ -420,7 +420,7 @@ export function AssessmentGating({
 
               case "time_spent":
                 // Get study time
-                const timeSpent = userProgress?.timeSpent || 0;
+                const timeSpent = userProgress?.timeSpent ?? 0;
                 return { ...req, current: timeSpent, met: timeSpent >= req.threshold };
 
               case "streak":
@@ -443,7 +443,7 @@ export function AssessmentGating({
             assessmentConfig: {
               ...gate.assessmentConfig,
               userId,
-              moduleId: moduleId || "",
+              moduleId: moduleId ?? "",
             },
           };
         });
@@ -456,7 +456,7 @@ export function AssessmentGating({
       }
     };
 
-    loadGatingData();
+    void loadGatingData();
   }, [userId, moduleId]);
 
   const handleAssessmentStart = (gate: AssessmentGate) => {

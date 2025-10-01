@@ -86,7 +86,7 @@ export default function ModuleProgressTracker({
       }
 
       const existing = sections.find((s) => s.id === id);
-      return existing || { id, title, level, completed: false, needsReview: false, etaMin };
+      return existing ?? { id, title, level, completed: false, needsReview: false, etaMin };
     });
 
     setSections(discovered);
@@ -126,7 +126,7 @@ export default function ModuleProgressTracker({
       )
     );
 
-    analytics.capture("study_section_mark", { moduleId, id, status });
+    void analytics.capture("study_section_mark", { moduleId, id, status });
 
     if (!user) return;
     try {
@@ -146,14 +146,14 @@ export default function ModuleProgressTracker({
       element.scrollIntoView({ behavior: "smooth", block: "start" });
       setLastViewed(sectionId);
       setActiveId(sectionId);
-      analytics.capture("study_section_view", { moduleId, id: sectionId });
+      void analytics.capture("study_section_view", { moduleId, id: sectionId });
     }
   };
 
   const completedCount = sections.filter((s) => s.completed).length;
   const progress = sections.length > 0 ? Math.round((completedCount / sections.length) * 100) : 0;
-  const totalEta = sections.reduce((sum, s) => sum + (s.etaMin || 0), 0);
-  const remainingEta = sections.reduce((sum, s) => sum + (s.completed ? 0 : s.etaMin || 0), 0);
+  const totalEta = sections.reduce((sum, s) => sum + (s.etaMin ?? 0), 0);
+  const remainingEta = sections.reduce((sum, s) => sum + (s.completed ? 0 : s.etaMin ?? 0), 0);
 
   return (
     <div className="sticky top-24 space-y-4">

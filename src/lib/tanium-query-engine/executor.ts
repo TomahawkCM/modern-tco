@@ -4,16 +4,16 @@
  */
 
 import {
-  QueryNode,
-  QueryResult,
-  QueryPlan,
+  type QueryNode,
+  type QueryResult,
+  type QueryPlan,
   ExecutionError,
-  ExecutorOptions,
-  MachineData,
-  ExecutionMetrics,
-  QueryWarning,
-  FilterNode,
-  AggregateNode
+  type ExecutorOptions,
+  type MachineData,
+  type ExecutionMetrics,
+  type QueryWarning,
+  type FilterNode,
+  type AggregateNode
 } from './types';
 import { getFieldMapping, getDbColumn, validateFieldOperator, resolveGroupAlias } from './field-mappings';
 
@@ -229,7 +229,7 @@ export class QueryExecutor {
    * Apply scope filtering
    */
   private applyScope(data: MachineData[], query: QueryNode): MachineData[] {
-    const scope = query.from.scope;
+    const {scope} = query.from;
 
     if (scope.scopeType === 'all') {
       return data;
@@ -316,7 +316,7 @@ export class QueryExecutor {
     headers: string[];
     rows: Array<Array<string | number | null>>;
   } {
-    const columns = query.select.columns;
+    const {columns} = query.select;
     const headers = columns.length > 0
       ? columns.map(col => col.name)
       : ['Computer Name']; // Default column
@@ -341,7 +341,7 @@ export class QueryExecutor {
     rows: Array<Array<string | number | null>>;
   } {
     const headers: string[] = [];
-    const aggregates = query.select.aggregates;
+    const {aggregates} = query.select;
     const groupBy = query.groupBy?.columns[0]; // Support single group by for now
 
     // Add group by column to headers

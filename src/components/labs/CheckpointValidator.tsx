@@ -21,12 +21,12 @@ import {
 } from "lucide-react";
 
 import {
-  LabStep,
-  ValidationResult,
-  ValidationCriteria,
-  CriteriaResult,
-  ConsoleState,
-  ConsoleAction,
+  type LabStep,
+  type ValidationResult,
+  type ValidationCriteria,
+  type CriteriaResult,
+  type ConsoleState,
+  type ConsoleAction,
   StepValidation,
   ProgressCheckpoint,
 } from "@/types/lab";
@@ -134,7 +134,7 @@ class AdvancedValidationEngine implements ValidationEngine {
   ): { passed: boolean; score: number; feedback: string } {
     try {
       // Parse condition as JSON path or simple property check
-      const condition = criteria.condition;
+      const {condition} = criteria;
       
       if (condition.includes("currentModule")) {
         const expectedModule = condition.split("=")[1]?.trim().replace(/['"]/g, "");
@@ -215,7 +215,7 @@ class AdvancedValidationEngine implements ValidationEngine {
     if (criteria.condition.includes("contains")) {
       const expectedText = criteria.condition.split("contains:")[1]?.trim().replace(/['"]/g, "");
       const matchingInputs = inputActions.filter(action =>
-        action.value && action.value.toLowerCase().includes(expectedText.toLowerCase())
+        action.value?.toLowerCase().includes(expectedText.toLowerCase())
       );
 
       const passed = matchingInputs.length > 0;
@@ -255,7 +255,7 @@ class AdvancedValidationEngine implements ValidationEngine {
 
     if (criteria.condition.includes("resultCount")) {
       const expectedCount = parseInt(criteria.condition.split(">=")[1] || "1");
-      const totalResults = consoleState.queries.reduce((sum, q) => sum + (q.results?.length || 0), 0);
+      const totalResults = consoleState.queries.reduce((sum, q) => sum + (q.results?.length ?? 0), 0);
       const passed = totalResults >= expectedCount;
 
       return {
@@ -394,10 +394,10 @@ class AdvancedValidationEngine implements ValidationEngine {
     if (typeof f === "object") {
       if ("content" in f && typeof f.content === "string") return f.content;
       const parts: string[] = [];
-      if (f.success) parts.push(typeof f.success === "string" ? f.success : f.success.content || "");
-      if (f.failure) parts.push(typeof f.failure === "string" ? f.failure : f.failure.content || "");
-      if (f.partial) parts.push(typeof f.partial === "string" ? f.partial : f.partial.content || "");
-      if (Array.isArray(f.hints)) parts.push(...f.hints.map((h: any) => (typeof h === "string" ? h : h.content || "")));
+      if (f.success) parts.push(typeof f.success === "string" ? f.success : f.success.content ?? "");
+      if (f.failure) parts.push(typeof f.failure === "string" ? f.failure : f.failure.content ?? "");
+      if (f.partial) parts.push(typeof f.partial === "string" ? f.partial : f.partial.content ?? "");
+      if (Array.isArray(f.hints)) parts.push(...f.hints.map((h: any) => (typeof h === "string" ? h : h.content ?? "")));
       return parts.filter(Boolean).join(" ");
     }
     return String(f);
@@ -443,7 +443,7 @@ export function CheckpointValidator({
   // Auto-validate when external validation is triggered
   useEffect(() => {
     if (isValidating) {
-      runValidation();
+      void runValidation();
     }
   }, [isValidating]);
 
@@ -484,7 +484,7 @@ export function CheckpointValidator({
         else if (f.partial.content) parts.push(f.partial.content);
       }
       if (Array.isArray(f.hints)) {
-        parts.push(...f.hints.map((h: any) => (typeof h === "string" ? h : h.content || "")));
+        parts.push(...f.hints.map((h: any) => (typeof h === "string" ? h : h.content ?? "")));
       }
 
       return parts.filter(Boolean).join(" \n");
@@ -499,7 +499,7 @@ export function CheckpointValidator({
     if (typeof f === "string") return f;
     if (React.isValidElement(f)) return f;
     if (typeof f === "object") {
-      if ("content" in f && (f.content || f.title)) {
+      if ("content" in f && (f.content ?? f.title)) {
         return (
           <div>
             {f.title && <div className="font-medium">{f.title}</div>}

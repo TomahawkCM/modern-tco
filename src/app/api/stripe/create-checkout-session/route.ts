@@ -6,21 +6,32 @@ function originFrom(req: Request): string {
   try {
     const u = new URL(req.url);
     return `${u.protocol}//${u.host}`;
-  } catch {
+  } catch (error) {
     return "";
   }
 }
 
 export async function POST(req: Request) {
-  const { plan } = (await req.json().catch(() => ({}))) as { plan?: Plan };
-  const selected = plan || "pro";
+  let selected: Plan = "pro";
+  try {
+    const payload = (await req.json()) as unknown;
+    if (payload && typeof payload === "object" && "plan" in payload) {
+      const desiredPlan = (payload as { plan?: Plan }).plan;
+      if (desiredPlan) {
+        selected = desiredPlan;
+      }
+    }
+  } catch (error) {
+    // ignore malformed JSON payloads and use default
+  }
+
   const origin = originFrom(req);
 
-  const secret = process.env['STRIPE_SECRET_KEY'];
+  const secret = process.env.STRIPE_SECRET_KEY ?? "";
   const priceMap: Record<Plan, string | undefined> = {
-    free: process.env['STRIPE_PRICE_FREE'],
-    pro: process.env['STRIPE_PRICE_PRO'],
-    team: process.env['STRIPE_PRICE_TEAM'],
+    free: process.env.STRIPE_PRICE_FREE,
+    pro: process.env.STRIPE_PRICE_PRO,
+    team: process.env.STRIPE_PRICE_TEAM,
   };
 
   // Fallback: mock redirect when not configured

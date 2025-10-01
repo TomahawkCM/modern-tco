@@ -68,7 +68,7 @@ export function ModulesGrid({ modules }: { modules: ModuleMeta[] }) {
           } catch {}
         } catch (e: any) {
           // Fail gracefully if table/policies aren’t ready
-          setError(e?.message || "Unable to load progress");
+          setError(e?.message ?? "Unable to load progress");
           setProgress({});
         }
       } else {
@@ -86,15 +86,15 @@ export function ModulesGrid({ modules }: { modules: ModuleMeta[] }) {
             const parsed = JSON.parse(raw);
             const sections = Array.isArray(parsed?.sections) ? parsed.sections : [];
             const completed = sections.filter((s: any) => s?.completed).length;
-            const total = sections.length || undefined;
+            const total = sections.length ?? undefined;
             const needs = sections.filter((s: any) => s?.needsReview && !s?.completed).length;
-            (out as any)[m.frontmatter.id] = { lastViewed: parsed?.lastViewed || null, completed, total, needs };
+            (out as any)[m.frontmatter.id] = { lastViewed: parsed?.lastViewed ?? null, completed, total, needs };
           } catch {}
         }
         if (mounted) setLocal(out);
       } catch {}
     }
-    load();
+    void load();
     return () => {
       mounted = false;
     };
@@ -119,12 +119,12 @@ export function ModulesGrid({ modules }: { modules: ModuleMeta[] }) {
           const total = p?.total_sections ?? 0;
           let percent = total > 0 ? Math.round((completed / total) * 100) : 0;
           if (!p && local[frontmatter.id]?.total) {
-            const lc = local[frontmatter.id]!;
-            percent = lc.total! > 0 ? Math.round(((lc.completed || 0) / lc.total!) * 100) : 0;
+            const lc = local[frontmatter.id];
+            percent = lc.total! > 0 ? Math.round(((lc.completed ?? 0) / lc.total!) * 100) : 0;
           }
           const status = (p?.status as string) || (percent >= 100 ? "completed" : percent > 0 ? "in_progress" : "not_started");
-          const needs = needsMap[frontmatter.id] ?? (local[frontmatter.id]?.needs || 0);
-          const lastViewed = lastMap[frontmatter.id] || local[frontmatter.id]?.lastViewed || null;
+          const needs = needsMap[frontmatter.id] ?? (local[frontmatter.id]?.needs ?? 0);
+          const lastViewed = lastMap[frontmatter.id] || (local[frontmatter.id]?.lastViewed ?? null);
 
           const statusColor =
             status === "completed"
@@ -147,7 +147,7 @@ export function ModulesGrid({ modules }: { modules: ModuleMeta[] }) {
                       {frontmatter.difficulty}
                     </Badge>
                   <span className="flex items-center gap-1 text-sm text-gray-300">
-                    <Clock className="h-4 w-4" /> {frontmatter.estimatedTime || "—"}
+                    <Clock className="h-4 w-4" /> {frontmatter.estimatedTime ?? "—"}
                   </span>
                   <Badge variant="outline" className={statusColor}>
                     {status.replace(/_/g, " ")}

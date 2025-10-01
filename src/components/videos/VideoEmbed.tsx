@@ -38,8 +38,8 @@ export default function VideoEmbed({ youtubeId, title, start, moduleSlug }: Vide
   function enqueueAttach(task: () => void) {
     if (typeof window === "undefined") return task();
     const w = window as any;
-    w.__ytAttachQueue = w.__ytAttachQueue || [];
-    w.__ytAttachRunning = w.__ytAttachRunning || false;
+    w.__ytAttachQueue = w.__ytAttachQueue ?? [];
+    w.__ytAttachRunning = w.__ytAttachRunning ?? false;
     w.__ytAttachQueue.push(task);
     const run = () => {
       if (w.__ytAttachRunning) return;
@@ -61,15 +61,15 @@ export default function VideoEmbed({ youtubeId, title, start, moduleSlug }: Vide
 
   // Impression/visibility analytics
   useEffect(() => {
-    analytics.capture("video_impression", { provider: "youtube", youtubeId, title, moduleSlug });
-    const el = containerRef.current;
+    void analytics.capture("video_impression", { provider: "youtube", youtubeId, title, moduleSlug });
+    const el = containerRef.current!;
     if (!el || typeof window === "undefined") return;
     let seen = false;
     const io = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
           if (!seen && entry.isIntersecting && entry.intersectionRatio >= 0.5) {
-            analytics.capture("video_visible", { provider: "youtube", youtubeId, title, moduleSlug });
+            void analytics.capture("video_visible", { provider: "youtube", youtubeId, title, moduleSlug });
             seen = true;
             try { io.disconnect(); } catch {}
             break;
@@ -78,7 +78,7 @@ export default function VideoEmbed({ youtubeId, title, start, moduleSlug }: Vide
       },
       { threshold: [0.5] }
     );
-    io.observe(el);
+    io.observe(el as Element);
     return () => { try { io.disconnect(); } catch {} };
   }, [youtubeId, title, moduleSlug]);
 
@@ -90,7 +90,7 @@ export default function VideoEmbed({ youtubeId, title, start, moduleSlug }: Vide
     const attach = async () => {
       await loadYT();
       const w = window as any;
-      const el = containerRef.current;
+      const el = containerRef.current!;
       if (!el) return;
 
       const doCreate = () => {
@@ -132,7 +132,7 @@ export default function VideoEmbed({ youtubeId, title, start, moduleSlug }: Vide
               onStateChange: (e: any) => {
                 const state = e.data; // 0 ended, 1 playing, 2 paused
                 if (state === 1) {
-                  analytics.capture("video_play", { provider: "youtube", youtubeId, title, moduleSlug });
+                  void analytics.capture("video_play", { provider: "youtube", youtubeId, title, moduleSlug });
                   if (!interval) {
                     interval = setInterval(() => {
                       try {
@@ -143,7 +143,7 @@ export default function VideoEmbed({ youtubeId, title, start, moduleSlug }: Vide
                           [25, 50, 75, 100].forEach((m) => {
                             if (!milestones[m] && p >= m) {
                               milestones[m] = true;
-                              analytics.capture("video_progress", { provider: "youtube", youtubeId, title, moduleSlug, milestone: m });
+                              void analytics.capture("video_progress", { provider: "youtube", youtubeId, title, moduleSlug, milestone: m });
                             }
                           });
                         }
@@ -155,13 +155,13 @@ export default function VideoEmbed({ youtubeId, title, start, moduleSlug }: Vide
                     const dur = playerRef.current?.getDuration?.() || 0;
                     const cur = playerRef.current?.getCurrentTime?.() || 0;
                     const percent = dur ? Math.round((cur / dur) * 100) : 0;
-                    analytics.capture("video_pause", { provider: "youtube", youtubeId, title, moduleSlug, position: Math.floor(cur), percent });
+                    void analytics.capture("video_pause", { provider: "youtube", youtubeId, title, moduleSlug, position: Math.floor(cur), percent });
                   } catch {}
                   if (interval) { clearInterval(interval); interval = null; }
                 } else if (state === 0) {
                   try {
                     const dur = playerRef.current?.getDuration?.() || 0;
-                    analytics.capture("video_complete", { provider: "youtube", youtubeId, title, moduleSlug, duration: Math.floor(dur) });
+                    void analytics.capture("video_complete", { provider: "youtube", youtubeId, title, moduleSlug, duration: Math.floor(dur) });
                   } catch {}
                   if (interval) { clearInterval(interval); interval = null; }
                 }
@@ -183,7 +183,7 @@ export default function VideoEmbed({ youtubeId, title, start, moduleSlug }: Vide
       enqueueAttach(doCreate);
     };
 
-    attach();
+    void attach();
 
     return () => {
       try { if (interval) clearInterval(interval); } catch {}

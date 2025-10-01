@@ -1,15 +1,15 @@
 import { supabase } from "@/lib/supabase";
 import {
-  Choice,
+  type Choice,
   Difficulty,
-  QuestionCategory,
+  type QuestionCategory,
   TCODomain,
   TCO_DOMAIN_WEIGHTS,
   type ExamSession,
   type Question,
 } from "@/types/exam";
 import { ALL_DIFFICULTIES } from "./difficulty";
-import { Tables } from "@/types/supabase";
+import type { Tables } from "@/types/supabase";
 import {
   getAllQuestions,
   getQuestionsByDomain,

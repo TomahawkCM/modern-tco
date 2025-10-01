@@ -50,7 +50,7 @@ export const CyberpunkNavBar: React.FC<CyberpunkNavBarProps> = ({
   const router = useRouter()
   const pathname = usePathname()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [activeTab, setActiveTab] = useState(navItems[0]?.name || "Dashboard")
+  const [activeTab, setActiveTab] = useState(navItems[0]?.name ?? "Dashboard")
   const [mounted, setMounted] = useState(false)
 
   // Prevent hydration issues
@@ -72,7 +72,7 @@ export const CyberpunkNavBar: React.FC<CyberpunkNavBarProps> = ({
   // Sync activeTab with current route
   useEffect(() => {
     if (!mounted) return
-    const currentPath = pathname || "/"
+    const currentPath = pathname ?? "/"
     const currentTab = routeToTabMapping[currentPath]
     if (currentTab) {
       setActiveTab(currentTab)

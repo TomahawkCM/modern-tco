@@ -33,7 +33,7 @@ export function useBookmarks() {
       }
     };
 
-    loadBookmarks();
+    void loadBookmarks();
   }, [user]);
 
   // Add a bookmark

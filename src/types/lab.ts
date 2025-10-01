@@ -3,7 +3,7 @@
  * Enhanced for Interactive Console Simulation Framework
  */
 
-import { TCODomain } from "./exam";
+import type { TCODomain } from "./exam";
 import type React from 'react';
 
 // Core lab exercise types

@@ -84,7 +84,7 @@ function mmss(value: number) {
   const seconds = Math.floor(value % 60)
     .toString()
     .padStart(2, '0');
-  return minutes + ':' + seconds;
+  return `${minutes  }:${  seconds}`;
 }
 
 
@@ -96,7 +96,7 @@ async function fetchJson<T>(url: string, init?: RequestInit): Promise<T> {
   });
   const data = (await response.json()) as T;
   if (!response.ok) {
-    throw new Error((data as any)?.error || 'Request failed');
+    throw new Error((data as any)?.error ?? 'Request failed');
   }
   return data;
 }
@@ -181,7 +181,7 @@ export default function SimulatorPage() {
     (async () => {
       try {
         // Ensure Promise.all infers a tuple result
-        const base = process.env.NEXT_PUBLIC_BASE_PATH || '';
+        const base = process.env.NEXT_PUBLIC_BASE_PATH ?? '';
         const [meta, saved] = await Promise.all(
           [
             fetchJson<MetadataResponse>(`${base}/api/sim-meta`),
@@ -190,10 +190,10 @@ export default function SimulatorPage() {
         );
         if (meta.ok) {
           setSensorsCatalog(meta.catalog);
-          setExamples(meta.examples?.examples || []);
+          setExamples(meta.examples?.examples ?? []);
         }
         if (saved.ok) {
-          setSavedQuestions(saved.saved || []);
+          setSavedQuestions(saved.saved ?? []);
         }
       } catch (error) {
         console.error('Failed to load simulator metadata', error);
@@ -252,19 +252,19 @@ export default function SimulatorPage() {
             setEvalError(null);
             if (countExam) {
               setExamAttempts((prev) => prev + 1);
-              if ((data.rows?.length || 0) > 0) {
+              if ((data.rows?.length ?? 0) > 0) {
                 setExamWins((prev) => prev + 1);
               }
             }
           } else {
-            setEvalError(data.error || 'Simulation failed');
+            setEvalError(data.error ?? 'Simulation failed');
           }
           applyMarkers(input, data);
         } catch (error) {
           if ((error as Error).name === 'AbortError') {
             return;
           }
-          setEvalError((error as Error).message || 'Evaluation failed');
+          setEvalError((error as Error).message ?? 'Evaluation failed');
         } finally {
           setIsEvaluating(false);
         }
@@ -301,18 +301,18 @@ export default function SimulatorPage() {
 
   useEffect(() => {
     const monaco = monacoRef.current;
-    const sensors = sensorsCatalog.sensors;
+    const {sensors} = sensorsCatalog;
     if (!monaco || sensors.length === 0) return;
     completionDisposable.current?.dispose();
     completionDisposable.current = monaco.languages.registerCompletionItemProvider('plaintext', {
       provideCompletionItems: (model, position) => {
         const word = model.getWordUntilPosition(position);
-        const range = new monaco.Range(
-          position.lineNumber,
-          word.startColumn,
-          position.lineNumber,
-          word.endColumn
-        );
+        const range = {
+          startLineNumber: position.lineNumber,
+          startColumn: word.startColumn,
+          endLineNumber: position.lineNumber,
+          endColumn: word.endColumn,
+        };
 
         const sensorSuggestions = sensors.map((sensor) => ({
           label: sensor.name,
@@ -323,7 +323,7 @@ export default function SimulatorPage() {
           range,
         }));
 
-        const aggregateSuggestions = (sensorsCatalog.aggregates || []).map((agg) => ({
+        const aggregateSuggestions = (sensorsCatalog.aggregates ?? []).map((agg) => ({
           label: agg,
           kind: monaco.languages.CompletionItemKind.Function,
           insertText: agg,
@@ -349,10 +349,10 @@ export default function SimulatorPage() {
 
   const handleRefreshSaved = async () => {
     try {
-      const base = process.env.NEXT_PUBLIC_BASE_PATH || '';
+      const base = process.env.NEXT_PUBLIC_BASE_PATH ?? '';
       const saved = await fetchJson<SavedResponse>(`${base}/api/sim-saved`);
       if (saved.ok) {
-        setSavedQuestions(saved.saved || []);
+        setSavedQuestions(saved.saved ?? []);
       }
     } catch (error) {
       console.error('Failed to refresh saved questions', error);
@@ -363,7 +363,7 @@ export default function SimulatorPage() {
     if (!saveName.trim() || !question.trim()) return;
     setSaving(true);
     try {
-      const base = process.env.NEXT_PUBLIC_BASE_PATH || '';
+      const base = process.env.NEXT_PUBLIC_BASE_PATH ?? '';
       const response = await fetchJson<EvalResponse>(`${base}/api/sim-save`, {
         method: 'POST',
         body: JSON.stringify({ name: saveName.trim(), question }),
@@ -381,7 +381,7 @@ export default function SimulatorPage() {
 
   const handleExport = async (format: 'csv' | 'json') => {
     try {
-      const base = process.env.NEXT_PUBLIC_BASE_PATH || '';
+      const base = process.env.NEXT_PUBLIC_BASE_PATH ?? '';
       const response = await fetchJson<EvalResponse>(`${base}/api/sim-eval`, {
         method: 'POST',
         body: JSON.stringify({ question, format }),
@@ -478,7 +478,7 @@ export default function SimulatorPage() {
               <div className="flex flex-wrap items-center justify-between gap-3 text-sm text-cyan-200/80">
                 <div className="flex items-center gap-3">
                   <span className="font-mono text-xs uppercase tracking-widest text-cyan-300/70">
-                    {result?.metadata?.scope || 'all machines'}
+                    {result?.metadata?.scope ?? 'all machines'}
                   </span>
                   {result?.metadata?.aggregations?.length ? (
                     <Badge variant="outline" className="border-cyan-500/30 text-cyan-200">
@@ -638,7 +638,7 @@ export default function SimulatorPage() {
               </div>
             ) : (
               <div className="rounded-xl border border-cyan-500/20 bg-black/30 p-6 text-sm text-cyan-300/80">
-                {result?.ok ? 'No rows returned. Adjust filters or scope.' : evalError || 'Start typing to evaluate your question.'}
+                {result?.ok ? 'No rows returned. Adjust filters or scope.' : evalError ?? 'Start typing to evaluate your question.'}
               </div>
             )}
             <div className="grid gap-4 lg:grid-cols-3">
@@ -716,7 +716,7 @@ export default function SimulatorPage() {
               <div>
                 <div className="text-xs uppercase tracking-wide text-cyan-300/70">Aggregates</div>
                 <div className="mt-2 flex flex-wrap gap-2">
-                  {(sensorsCatalog.aggregates || []).map((agg) => (
+                  {(sensorsCatalog.aggregates ?? []).map((agg) => (
                     <Badge key={agg} variant="outline" className="border-cyan-500/30 text-cyan-200">
                       {agg}
                     </Badge>

@@ -112,7 +112,7 @@ export const LabExercisePlayer: React.FC<LabExercisePlayerProps> = ({
       }
     };
 
-    initializeSession();
+    void initializeSession();
   }, [userId, exercise.id]);
 
   // Timer effect
@@ -185,7 +185,7 @@ export const LabExercisePlayer: React.FC<LabExercisePlayerProps> = ({
       }));
 
       // Check for achievements
-      checkAchievements(stepResult, newStepResults);
+      void checkAchievements(stepResult, newStepResults);
 
       if (stepResult.success) {
         // Auto-advance to next step after a brief delay
@@ -193,7 +193,7 @@ export const LabExercisePlayer: React.FC<LabExercisePlayerProps> = ({
           if (!isLastStep) {
             nextStep();
           } else {
-            completeExercise(newStepResults);
+            void completeExercise(newStepResults);
           }
         }, 1500);
       }
@@ -232,7 +232,7 @@ export const LabExercisePlayer: React.FC<LabExercisePlayerProps> = ({
     }
 
     // Speed achievements
-    const expectedTime = (currentStep.timeLimit || 300) * 1000; // Convert seconds to milliseconds
+    const expectedTime = (currentStep.timeLimit ?? 300) * 1000; // Convert seconds to milliseconds
     const timeSpent = state.timer.elapsed; // Use timer elapsed time
     if (timeSpent < expectedTime * 0.5) {
       newAchievements.push({

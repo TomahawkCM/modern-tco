@@ -9,7 +9,7 @@ import { useCallback, useState } from "react";
 import { ChevronRight, ChevronDown, CheckCircle, Circle, Lock, BookOpen, Clock } from "lucide-react";
 import { cn } from "@/lib/utils";
 import {
-  Module3Section,
+  type Module3Section,
   MODULE_3_SECTIONS,
   getModule3LearningPath,
   getSectionCoverage
@@ -77,7 +77,7 @@ export function Module3Navigation({
 
     return section.prerequisites.some(prereq => {
       const prereqProgress = userProgress[prereq];
-      return !prereqProgress || !prereqProgress.completed;
+      return !prereqProgress?.completed;
     });
   };
 

@@ -27,7 +27,7 @@ function lsGet(): TeamSeat[] {
     if (!raw) return [];
     const parsed = JSON.parse(raw);
     return Array.isArray(parsed) ? parsed : [];
-  } catch {
+  } catch (error) {
     return [];
   }
 }
@@ -60,7 +60,7 @@ export const teamService = {
       }));
       if (remote.length && typeof window !== "undefined") lsSet(remote);
       return remote.length ? remote : local;
-    } catch {
+    } catch (error) {
       return local;
     }
   },

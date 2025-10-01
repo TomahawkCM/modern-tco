@@ -79,8 +79,8 @@ export default function KbPage() {
             <div className="text-cyan-200 font-medium mb-3">Modules</div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
               {modules.map((m) => {
-                const lessonCount = Array.isArray((m as any).metadata?.lessons)
-                  ? (m as any).metadata.lessons.length
+                const lessonCount = Array.isArray((m).metadata?.lessons)
+                  ? (m).metadata.lessons.length
                   : 0;
                 return (
                   <div key={m.id} className="p-3 rounded-lg bg-black/20 border border-cyan-500/10">

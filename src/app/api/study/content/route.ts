@@ -31,22 +31,22 @@ interface ParsedModule {
 class ServerSideContentParser {
   private static extractExamWeight(content: string): number {
     const weightMatch = content.match(/(\d+)%\s+Exam\s+Weight/i);
-    return weightMatch ? parseInt(weightMatch[1] || '0') : 0;
+    return weightMatch ? Number.parseInt(weightMatch?.[1] ?? "0", 10) : 0;
   }
 
   private static extractLearningObjectives(content: string): string[] {
     const objectives: string[] = [];
     const objectivesMatch = content.match(/## 📋 Learning Objectives\n\n(.*?)\n\n---/s);
 
-    if (objectivesMatch) {
-      const objectivesText = objectivesMatch[1];
-      const matches = objectivesText ? objectivesText.match(/\d+\.\s+\*\*(.*?)\*\*\s+-\s+(.*?)(?=\n\d+\.|$)/g) : null;
+    const objectivesText = objectivesMatch?.[1];
+    if (objectivesText) {
+      const matches = objectivesText.match(/\d+\.\s+\*\*(.*?)\*\*\s+-\s+(.*?)(?=\n\d+\.|$)/g);
 
       if (matches) {
-        matches.forEach((match) => {
-          const cleanMatch = match.replace(/^\d+\.\s+\*\*(.*?)\*\*\s+-\s+/, "");
-          objectives.push(cleanMatch.trim());
-        });
+        for (const match of matches) {
+          const cleanMatch = match.replace(/^\d+\.\s+\*\*(.*?)\*\*\s+-\s+/, "").trim();
+          objectives.push(cleanMatch);
+        }
       }
     }
 
@@ -71,22 +71,15 @@ class ServerSideContentParser {
       let sectionType: "overview" | "concepts" | "procedures" | "examples" | "exam_prep" =
         "concepts";
 
-      if (title.toLowerCase().includes("fundamental") || title.toLowerCase().includes("basic")) {
+      const normalizedTitle = title.toLowerCase();
+
+      if (normalizedTitle.includes("fundamental") || normalizedTitle.includes("basic")) {
         sectionType = "concepts";
-      } else if (
-        title.toLowerCase().includes("procedure") ||
-        title.toLowerCase().includes("step")
-      ) {
+      } else if (normalizedTitle.includes("procedure") || normalizedTitle.includes("step")) {
         sectionType = "procedures";
-      } else if (
-        title.toLowerCase().includes("example") ||
-        title.toLowerCase().includes("practice")
-      ) {
+      } else if (normalizedTitle.includes("example") || normalizedTitle.includes("practice")) {
         sectionType = "examples";
-      } else if (
-        title.toLowerCase().includes("exam") ||
-        title.toLowerCase().includes("assessment")
-      ) {
+      } else if (normalizedTitle.includes("exam") || normalizedTitle.includes("assessment")) {
         sectionType = "exam_prep";
       }
 
@@ -104,10 +97,10 @@ class ServerSideContentParser {
       const procedures: string[] = [];
       const procedureMatches = moduleContent.match(/^\d+\.\s+(.+)$/gm);
       if (procedureMatches) {
-        procedureMatches.forEach((match) => {
+        for (const match of procedureMatches) {
           const procedure = match.replace(/^\d+\.\s+/, "").trim();
           procedures.push(procedure);
-        });
+        }
       }
 
       sections.push({
@@ -134,8 +127,9 @@ class ServerSideContentParser {
     const title = titleMatch ? `Domain 1: ${titleMatch[1]}` : "Domain 1: Asking Questions";
 
     const descriptionMatch = content.match(/\*\*TCO Certification Domain 1\*\*: (.+)/);
-    const description = descriptionMatch
-      ? `Master ${descriptionMatch[1].toLowerCase()} for real-time endpoint data collection. Learn sensor selection, query construction, and result interpretation for effective information gathering across enterprise environments.`
+    const descriptionExcerpt = descriptionMatch?.[1];
+    const description = descriptionExcerpt
+      ? `Master ${descriptionExcerpt.toLowerCase()} for real-time endpoint data collection. Learn sensor selection, query construction, and result interpretation for effective information gathering across enterprise environments.`
       : "Master natural language questioning in Tanium for real-time endpoint data collection.";
 
     return {

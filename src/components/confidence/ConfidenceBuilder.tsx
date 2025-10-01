@@ -303,7 +303,7 @@ export default function ConfidenceBuilder({
     
     if (savedBooster) {
       const booster = confidenceBoosters.find(b => b.id === savedBooster);
-      setDailyBooster(booster || null);
+      setDailyBooster(booster ?? null);
     } else {
       const randomBooster = confidenceBoosters[Math.floor(Math.random() * confidenceBoosters.length)];
       setDailyBooster(randomBooster);

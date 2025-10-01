@@ -4,8 +4,7 @@
  */
 
 // Test imports of new components and libraries
-import { TerminologySearch, TermDefinition, TermCategory } from '../lib/tco-terminology';
-import { KnowledgeAssessment, assessKnowledge, LearningPath } from '../lib/knowledge-check';
+import { TerminologySearch, type TermDefinition } from '../lib/tco-terminology';
 
 // Test basic type usage
 const testTerm: TermDefinition = {

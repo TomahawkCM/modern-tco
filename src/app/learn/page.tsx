@@ -1,3 +1,5 @@
+'use client';
+
 import Link from "next/link";
 import manifest from "@/config/modules.manifest.json";
 import type { ModuleManifest } from "@/types/manifest";

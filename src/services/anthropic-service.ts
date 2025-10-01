@@ -243,26 +243,26 @@ Always include:
       throw new Error("No study sessions provided for analysis");
     }
 
-    const totalQuestions = sessions.reduce((sum, s) => sum + s.questionsAnswered.length, 0);
+    const totalQuestions = sessions.reduce((sum, s) => sum + (s.questionsAnswered?.length ?? 0), 0);
     const correctAnswers = sessions.reduce(
       (sum, s) =>
         sum +
-        s.userAnswers.filter((ans, idx) => ans === s.questionsAnswered[idx]?.correctAnswer).length,
+        (s.userAnswers?.filter((ans, idx) => ans === s.questionsAnswered?.[idx]?.correctAnswer).length ?? 0),
       0
     );
-    const totalTime = sessions.reduce((sum, s) => sum + s.timeSpent, 0);
+    const totalTime = sessions.reduce((sum, s) => sum + (s.timeSpent ?? 0), 0);
     const performanceScore = (correctAnswers / totalQuestions) * 100;
 
     // Analyze weak areas
     const topicPerformance: Record<string, { correct: number; total: number }> = {};
     sessions.forEach((session) => {
-      session.questionsAnswered.forEach((question, idx) => {
+      session.questionsAnswered?.forEach((question, idx) => {
         const { topic } = question;
         if (!topicPerformance[topic]) {
           topicPerformance[topic] = { correct: 0, total: 0 };
         }
         topicPerformance[topic].total++;
-        if (session.userAnswers[idx] === question.correctAnswer) {
+        if (session.userAnswers?.[idx] === question.correctAnswer) {
           topicPerformance[topic].correct++;
         }
       });
@@ -440,12 +440,15 @@ Format as JSON with topics array containing:
    * Real-time chat assistance with context awareness
    */
   async chatAssist(message: string, context: ChatSession["context"]): Promise<ChatMessage> {
+    // Type guard for ChatSessionContext
+    const sessionContext = typeof context === 'string' ? undefined : context;
+
     const prompt = `User question: "${message}"
 
 Context:
-- Current topic: ${context.currentTopic || "General TCO study"}
-- User level: ${context.userLevel || "intermediate"}
-- Study goals: ${context.studyGoals?.join(", ") || "TCO certification"}
+- Current topic: ${sessionContext?.currentTopic || "General TCO study"}
+- User level: ${sessionContext?.userLevel || "intermediate"}
+- Study goals: ${sessionContext?.studyGoals?.join(", ") || "TCO certification"}
 
 Provide helpful, accurate response as a Tanium TCO expert. 
 Be conversational but authoritative.

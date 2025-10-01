@@ -38,7 +38,7 @@ export async function getStudyModules(): Promise<StudyModuleWithSections[]> {
     const modulesWithSections: StudyModuleWithSections[] =
       modules?.map((module: any) => ({
         ...(module as StudyModule),
-        sections: ((module as any).sections as StudySection[]) || [],
+        sections: ((module).sections as StudySection[]) || [],
         domain_name:
           module.domain?.replace(/_/g, " ").replace(/\b\w/g, (l: string) => l.toUpperCase()) ||
           module.domain,

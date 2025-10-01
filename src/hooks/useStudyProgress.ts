@@ -31,7 +31,7 @@ export function useStudyProgress() {
       }
     };
 
-    loadProgress();
+    void loadProgress();
   }, [user]);
 
   // Update section progress
@@ -78,13 +78,13 @@ export function useStudyProgress() {
   // Get progress status for a section
   const getSectionStatus = (sectionId: string): StudyStatus => {
     const sectionProgress = getSectionProgress(sectionId);
-    return sectionProgress?.status || "not_started";
+    return sectionProgress?.status ?? "not_started";
   };
 
   // Get completion percentage for a section
   const getSectionCompletion = (sectionId: string): number => {
     const sectionProgress = getSectionProgress(sectionId);
-    return sectionProgress?.completion_percentage || 0;
+    return sectionProgress?.completion_percentage ?? 0;
   };
 
   // Check if section is completed

@@ -7,12 +7,12 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { useQuestions } from "@/contexts/QuestionsContext";
 import { AssessmentEngine } from "@/lib/assessment-engine";
-import {
-  type AssessmentResult,
-  type AssessmentSession as AssessmentSessionType,
-  type AssessmentType,
+import type {
+  AssessmentResult,
+  AssessmentSession as AssessmentSessionType,
+  AssessmentType,
 } from "@/types/assessment";
-import { TCODomain } from "@/types/exam";
+import type { TCODomain } from "@/types/exam";
 import { AnimatePresence, motion } from "framer-motion";
 import { AlertCircle, Clock, Target } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
@@ -74,10 +74,10 @@ export function AssessmentSession({
       };
 
       setSession(newSession);
-      setTimeRemaining((newSession.timeLimit || 30) * 60); // Convert to seconds, default to 30 minutes
+      setTimeRemaining((newSession.timeLimit ?? 30) * 60); // Convert to seconds, default to 30 minutes
     };
 
-    initializeAssessment();
+    void initializeAssessment();
   }, [assessmentType, moduleId, domainFilter, getAssessmentQuestions]);
 
   // Timer effect
@@ -88,7 +88,7 @@ export function AssessmentSession({
       setTimeRemaining((prev) => {
         if (prev <= 1) {
           // Auto-submit when time runs out
-          handleSubmitAssessment();
+          void handleSubmitAssessment();
           return 0;
         }
         return prev - 1;
@@ -157,7 +157,7 @@ export function AssessmentSession({
     if (currentQuestionIndex < session.questions.length - 1) {
       setCurrentQuestionIndex((prev) => prev + 1);
     } else {
-      handleSubmitAssessment();
+      void handleSubmitAssessment();
     }
   };
 
@@ -176,6 +176,7 @@ export function AssessmentSession({
       const endTime = new Date();
       const completedSession: AssessmentSessionType = {
         ...session,
+        id: session.id || `assessment-${Date.now()}`,
         endTime,
         status: "completed",
       };
@@ -309,7 +310,7 @@ export function AssessmentSession({
               </CardHeader>
 
               <CardContent className="space-y-3">
-                {(currentQuestion.options || currentQuestion.choices || []).map((option: any, index: number) => {
+                {(currentQuestion.options ?? currentQuestion.choices ?? []).map((option: any, index: number) => {
                   const optionLetter = String.fromCharCode(65 + index); // A, B, C, D
                   const currentResponse = session.responses.find((r: any) => r.questionId === currentQuestion.id);
                   const isSelected = currentResponse?.selectedAnswer === option.id;

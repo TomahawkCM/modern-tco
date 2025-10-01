@@ -59,7 +59,7 @@ export function PracticeQuestion({
   timeRemaining,
   className,
 }: PracticeQuestionProps) {
-  const [selectedChoice, setSelectedChoice] = useState<string>(question.userAnswer || "");
+  const [selectedChoice, setSelectedChoice] = useState<string>(question.userAnswer ?? "");
   const [questionStartTime] = useState<number>(Date.now());
   const [timeSpent, setTimeSpent] = useState<number>(0);
 
@@ -233,7 +233,7 @@ export function PracticeQuestion({
               </div>
 
               {/* Additional Resources */}
-              {(question.studyGuideRef || question.officialRef) && (
+              {(question.studyGuideRef ?? question.officialRef) && (
                 <div className="flex items-start gap-3 rounded-lg border border-blue-200 bg-blue-50 p-4">
                   <BookOpen className="mt-0.5 h-5 w-5 text-blue-600" />
                   <div className="space-y-1">

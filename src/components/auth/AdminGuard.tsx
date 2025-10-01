@@ -1,13 +1,13 @@
 "use client";
 
-import { ReactNode, useMemo } from "react";
+import { type ReactNode, useMemo } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 
 function getAdminSet(): Set<string> {
-  const raw = (process.env.NEXT_PUBLIC_ADMIN_EMAILS || "").trim();
+  const raw = (process.env.NEXT_PUBLIC_ADMIN_EMAILS ?? "").trim();
   if (!raw) return new Set();
   return new Set(raw.split(",").map((s) => s.trim().toLowerCase()).filter(Boolean));
 }
@@ -16,7 +16,7 @@ export function AdminGuard({ children }: { children: ReactNode }) {
   const { user } = useAuth();
   const router = useRouter();
   const admins = useMemo(() => getAdminSet(), []);
-  const email = (user?.email || "").toLowerCase();
+  const email = (user?.email ?? "").toLowerCase();
   const allowed = !!email && (admins.size === 0 ? false : admins.has(email));
 
   if (!user) {
@@ -43,7 +43,7 @@ export function AdminGuard({ children }: { children: ReactNode }) {
             <CardTitle className="text-white">Access denied</CardTitle>
           </CardHeader>
           <CardContent className="text-gray-200">
-            Your account ({email || "unknown"}) is not authorized to access admin tools.
+            Your account ({email ?? "unknown"}) is not authorized to access admin tools.
           </CardContent>
         </Card>
       </div>

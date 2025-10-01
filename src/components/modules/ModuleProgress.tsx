@@ -1,6 +1,6 @@
 "use client";
 
-import { TCODomain } from "@/types/exam";
+import type { TCODomain } from "@/types/exam";
 import type { ModuleProgress as ModuleProgressType } from "@/types/module";
 import { getDomainRouteSlug } from "@/utils/domainMapper";
 import { motion } from "framer-motion";

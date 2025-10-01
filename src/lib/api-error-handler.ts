@@ -161,7 +161,7 @@ export function withErrorHandling<T extends (...args: any[]) => Promise<NextResp
 ): T {
   return (async (...args: Parameters<T>) => {
     const request = args[0] as Request;
-    const method = request.method;
+    const {method} = request;
 
     try {
       return await handler(...args);

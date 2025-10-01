@@ -11,17 +11,17 @@ function loadSentry(dsn: string, environment?: string) {
   script.crossOrigin = 'anonymous';
   script.onload = () => {
     try {
-      const Sentry = (window as any).Sentry;
+      const {Sentry} = (window as any);
       if (Sentry && !((window as any).__sentry_init)) {
         Sentry.init({
           dsn,
           tracesSampleRate: 0.05,
-          environment: environment || process.env.NODE_ENV || 'production',
+          environment: environment ?? process.env.NODE_ENV ?? 'production',
           integrations: [new Sentry.BrowserTracing()],
         });
         (window as any).__sentry_init = true;
       }
-    } catch {
+    } catch (error) {
       // ignore
     }
   };
@@ -31,11 +31,11 @@ function loadSentry(dsn: string, environment?: string) {
 export function MonitoringClient() {
   useEffect(() => {
     initClientMonitoring();
-    const dsn = (process.env.NEXT_PUBLIC_SENTRY_DSN || '').toString();
+    const dsn = (process.env.NEXT_PUBLIC_SENTRY_DSN ?? '').toString();
     // Defer Sentry bundle load until the browser is idle for better TTI
     if (dsn) {
       const idle = (window as any).requestIdleCallback as undefined | ((cb: any) => void);
-      const start = () => loadSentry(dsn, (process.env.NEXT_PUBLIC_ENV || '').toString());
+      const start = () => loadSentry(dsn, (process.env.NEXT_PUBLIC_ENV ?? '').toString());
       if (idle) idle(start); else setTimeout(start, 300);
     }
   }, []);

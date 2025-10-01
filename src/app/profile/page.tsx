@@ -32,8 +32,8 @@ export default function ProfilePage() {
   const { user } = useAuth();
   const [isEditing, setIsEditing] = useState(false);
   const [profileData, setProfileData] = useState({
-    name: user?.user_metadata?.name || "TCO Student",
-    email: user?.email || "student@example.com",
+    name: user?.user_metadata?.name ?? "TCO Student",
+    email: user?.email ?? "student@example.com",
     bio: "Preparing for Tanium Certified Operator certification",
     joinDate: "2024-01-15",
     studyStreak: 7,

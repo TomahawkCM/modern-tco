@@ -4,7 +4,7 @@
  */
 
 import { createHash } from 'crypto';
-import { QueryResult, QueryNode, CacheEntry } from './types';
+import type { QueryResult, QueryNode, CacheEntry } from './types';
 
 interface CacheStats {
   hits: number;

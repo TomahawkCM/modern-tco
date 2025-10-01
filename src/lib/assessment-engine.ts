@@ -41,7 +41,7 @@ export class AssessmentEngine {
 
     const inferredDomain: TCODomain = (
       (sessionLike?.domain as TCODomain) ||
-      (sessionLike?.domainFilter as any) ||
+      (sessionLike?.domainFilter) ||
       (sessionLike?.questions?.[0]?.domain as TCODomain) ||
       ("ASKING_QUESTIONS" as TCODomain)
     );
@@ -57,7 +57,7 @@ export class AssessmentEngine {
       status: sessionLike?.status || "completed",
       timeLimit: sessionLike?.timeLimit,
       config: {
-        type: (sessionLike?.type as any) || "practice",
+        type: (sessionLike?.type) || "practice",
         moduleId: sessionLike?.moduleId,
         domainFilter: Array.isArray(sessionLike?.domainFilter)
           ? sessionLike.domainFilter[0]
@@ -84,9 +84,9 @@ export class AssessmentEngine {
       (remediation as any).canRetake = false;
     }
   const safePassThreshold = (
-    (properSession.config?.passThreshold as number | undefined) ??
+    (properSession.config?.passThreshold) ??
     (properSession.config?.type === "practice-test" ? 0.6 : 0.7)
-  ) as number;
+  );
   const passed = score.percentage >= safePassThreshold * 100;
 
     const result: AssessmentResult = {
@@ -698,9 +698,9 @@ export class AssessmentEngine {
       (remediation as any).canRetake = false;
     }
   const safeThreshold = (
-    (session.config?.passThreshold as number | undefined) ??
+    (session.config?.passThreshold) ??
     (session.config?.type === "practice-test" ? 0.6 : 0.7)
-  ) as number;
+  );
   const passed = score.percentage >= safeThreshold * 100;
 
     const result: AssessmentResult = {

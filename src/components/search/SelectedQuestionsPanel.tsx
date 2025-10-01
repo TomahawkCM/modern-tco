@@ -31,7 +31,7 @@ export function SelectedQuestionsPanel() {
   const handleStartPractice = () => {
     if (state.selectedQuestions.length === 0) return;
 
-    startExam(ExamMode.PRACTICE, state.selectedQuestions);
+    void startExam(ExamMode.PRACTICE, state.selectedQuestions);
     clearSelection();
     router.push("/practice");
   };
@@ -39,7 +39,7 @@ export function SelectedQuestionsPanel() {
   const handleCreateMockExam = () => {
     if (state.selectedQuestions.length === 0) return;
 
-    startExam(ExamMode.MOCK, state.selectedQuestions);
+    void startExam(ExamMode.MOCK, state.selectedQuestions);
     clearSelection();
     router.push("/mock");
   };

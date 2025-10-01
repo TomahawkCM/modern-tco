@@ -57,7 +57,7 @@ export default function AnalyticsEventsPage() {
   }
 
   useEffect(() => {
-    load();
+    void load();
   }, []);
 
   return (

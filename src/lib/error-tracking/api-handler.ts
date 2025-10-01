@@ -3,8 +3,8 @@
  * Provides consistent error handling and tracking for all API routes
  */
 
-import { NextRequest, NextResponse } from 'next/server';
-import { trackError, trackWarning, ErrorContext } from './error-tracker';
+import { type NextRequest, NextResponse } from 'next/server';
+import { trackError, trackWarning, type ErrorContext } from './error-tracker';
 
 export type ApiHandler = (
   request: NextRequest,

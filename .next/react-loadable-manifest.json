@@ -21,7 +21,7 @@
       "static/chunks/7510-0ca50fea8ab1d4f4.js",
       "static/chunks/7086-6b484f4c68d48413.js",
       "static/chunks/7715.386495a0c1708903.js",
-      "static/chunks/8757.829bccb1c218d430.js"
+      "static/chunks/8757.27284dde41a360c9.js"
     ]
   },
   "app/assessments/page.tsx -> ../../components/AssessmentGating": {
@@ -29,7 +29,7 @@
     "files": [
       "static/chunks/1733-50d8dd25d364c77c.js",
       "static/chunks/6104.478c90a64411b967.js",
-      "static/chunks/7491.bed1076311fc63d7.js"
+      "static/chunks/7491.4f01354048f86906.js"
     ]
   },
   "app/assessments/page.tsx -> ../../components/AssessmentSession": {
@@ -38,7 +38,7 @@
       "static/css/d00ccf3c7fb606c6.css",
       "static/chunks/1733-50d8dd25d364c77c.js",
       "static/chunks/2195.32105485de1aed07.js",
-      "static/chunks/8837.7fd0b1f4d2d92a5b.js"
+      "static/chunks/8837.ea256b51eb30f1f4.js"
     ]
   },
   "app/assessments/page.tsx -> ../../components/ReviewMode": {
@@ -46,7 +46,7 @@
     "files": [
       "static/chunks/7510-0ca50fea8ab1d4f4.js",
       "static/chunks/7109.c0d7c3c87ae14d3f.js",
-      "static/chunks/5704.14350342b7da8595.js"
+      "static/chunks/5704.552ac8c04736a164.js"
     ]
   },
   "app/mock/page.tsx -> @/components/exam/exam-timer": {
@@ -54,13 +54,13 @@
     "files": [
       "static/chunks/6093-da8af415b686f250.js",
       "static/chunks/6991-f65f0495c17cbbb1.js",
-      "static/chunks/9769.21c6ec3e011cb9ee.js"
+      "static/chunks/9769.08c1fdfec7c38df2.js"
     ]
   },
   "app/mock/page.tsx -> @/components/exam/question-card": {
     "id": 87078,
     "files": [
-      "static/chunks/4697.01ba26f8c5bba5fa.js"
+      "static/chunks/4697.2e217c5eeb229672.js"
     ]
   },
   "app/mock/page.tsx -> @/lib/questionLoader": {
@@ -71,10 +71,23 @@
     "id": 6521,
     "files": []
   },
+  "app/page.tsx -> @/components/homepage/GameificationSection": {
+    "id": 61410,
+    "files": [
+      "static/chunks/1410-515b7c7a8a336388.js"
+    ]
+  },
+  "app/page.tsx -> @/components/homepage/LearningPath": {
+    "id": 80055,
+    "files": [
+      "static/chunks/55-4852a7c0330bf3ed.js",
+      "static/chunks/9644.c595efc4e8da999c.js"
+    ]
+  },
   "app/practice/page.tsx -> @/components/exam/question-card": {
     "id": 87078,
     "files": [
-      "static/chunks/4697.01ba26f8c5bba5fa.js"
+      "static/chunks/4697.2e217c5eeb229672.js"
     ]
   },
   "app/practice/page.tsx -> @/lib/questionLoader": {
@@ -88,7 +101,7 @@
   "app/review/page.tsx -> @/components/exam/question-card": {
     "id": 87078,
     "files": [
-      "static/chunks/7078.751c11751b6544ee.js"
+      "static/chunks/7078.326c3077c72e0de2.js"
     ]
   },
   "app/simulator/page.tsx -> @monaco-editor/react": {
@@ -106,9 +119,9 @@
       "static/chunks/7510-0ca50fea8ab1d4f4.js",
       "static/chunks/4058-6b3c9b850ae2be3d.js",
       "static/chunks/2305-4a4923f52518f1f2.js",
-      "static/chunks/1199-ca4db3a0d7532f28.js",
+      "static/chunks/1199-aced0595f299baa0.js",
       "static/chunks/6005.fbd9fa81bc38f25c.js",
-      "static/chunks/8268.b04603b025f4735a.js"
+      "static/chunks/8268.95116913803ae175.js"
     ]
   },
   "components/home/HomePage.tsx -> @/lib/questionLoader": {
@@ -129,14 +142,14 @@
       "static/chunks/4058-6b3c9b850ae2be3d.js",
       "static/chunks/2305-4a4923f52518f1f2.js",
       "static/chunks/2368.e7b2ab9f2888c62a.js",
-      "static/chunks/1199-ca4db3a0d7532f28.js",
-      "static/chunks/4543.b8f478cf95f24e33.js"
+      "static/chunks/1199-aced0595f299baa0.js",
+      "static/chunks/4543.b2c73e0e2cc2213d.js"
     ]
   },
   "components/query-builder/QuestionBuilder.tsx -> ./NaturalLanguageInput": {
     "id": 75059,
     "files": [
-      "static/chunks/5059.11ab925084815637.js"
+      "static/chunks/5059.533fe8a56187ab13.js"
     ]
   },
   "contexts/ExamContext.tsx -> @/lib/questionLoader": {
@@ -152,7 +165,7 @@
   "contexts/QuestionsContext.tsx -> @/data/sample-questions": {
     "id": 80687,
     "files": [
-      "static/chunks/687-3fc5a93724e020cf.js"
+      "static/chunks/687.e73eb3696b769ce5.js"
     ]
   },
   "data/sample-questions.ts -> ./tco-aligned-questions": {
@@ -167,7 +180,7 @@
       "static/chunks/7510-0ca50fea8ab1d4f4.js",
       "static/chunks/4058-6b3c9b850ae2be3d.js",
       "static/chunks/2305-4a4923f52518f1f2.js",
-      "static/chunks/1199-ca4db3a0d7532f28.js",
+      "static/chunks/1199-aced0595f299baa0.js",
       "static/chunks/9097.7f2bfcbf18fc1fb5.js"
     ]
   },
@@ -179,7 +192,7 @@
       "static/chunks/7510-0ca50fea8ab1d4f4.js",
       "static/chunks/4058-6b3c9b850ae2be3d.js",
       "static/chunks/2305-4a4923f52518f1f2.js",
-      "static/chunks/1199-ca4db3a0d7532f28.js",
+      "static/chunks/1199-aced0595f299baa0.js",
       "static/chunks/6005.fbd9fa81bc38f25c.js"
     ]
   },
@@ -191,7 +204,7 @@
       "static/chunks/7510-0ca50fea8ab1d4f4.js",
       "static/chunks/4058-6b3c9b850ae2be3d.js",
       "static/chunks/2305-4a4923f52518f1f2.js",
-      "static/chunks/1199-ca4db3a0d7532f28.js",
+      "static/chunks/1199-aced0595f299baa0.js",
       "static/chunks/1217.8f9345e8e098be20.js"
     ]
   },
@@ -203,7 +216,7 @@
       "static/chunks/7510-0ca50fea8ab1d4f4.js",
       "static/chunks/4058-6b3c9b850ae2be3d.js",
       "static/chunks/2305-4a4923f52518f1f2.js",
-      "static/chunks/1199-ca4db3a0d7532f28.js",
+      "static/chunks/1199-aced0595f299baa0.js",
       "static/chunks/2063.c491b16bbb9b7de7.js"
     ]
   },
@@ -215,7 +228,7 @@
       "static/chunks/7510-0ca50fea8ab1d4f4.js",
       "static/chunks/4058-6b3c9b850ae2be3d.js",
       "static/chunks/2305-4a4923f52518f1f2.js",
-      "static/chunks/1199-ca4db3a0d7532f28.js",
+      "static/chunks/1199-aced0595f299baa0.js",
       "static/chunks/5802.cbba115a3cd717a1.js"
     ]
   },
@@ -227,7 +240,7 @@
       "static/chunks/7510-0ca50fea8ab1d4f4.js",
       "static/chunks/4058-6b3c9b850ae2be3d.js",
       "static/chunks/2305-4a4923f52518f1f2.js",
-      "static/chunks/1199-ca4db3a0d7532f28.js",
+      "static/chunks/1199-aced0595f299baa0.js",
       "static/chunks/1614.8bd1cb8434c98401.js"
     ]
   },

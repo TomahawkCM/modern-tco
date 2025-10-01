@@ -10,7 +10,7 @@ import {
   QuestionCategory,
   TCO_DOMAIN_WEIGHTS,
 } from "@/types/exam";
-import { questionBank, combinedQuestionBankMetadata } from "@/data/sample-questions";
+import { questionBank } from "@/data/sample-questions";
 
 export interface ValidationResult {
   isValid: boolean;

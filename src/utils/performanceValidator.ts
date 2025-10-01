@@ -64,12 +64,12 @@ function testCurrentPerformance(): PerformanceMetrics {
 
   // Test domain filtering
   const searchStart = performance.now();
-  const askingQuestions = questions.filter((q) => q.domain === TCODomain.ASKING_QUESTIONS);
+  const _askingQuestions = questions.filter((q) => q.domain === TCODomain.ASKING_QUESTIONS);
   const searchTime = performance.now() - searchStart;
 
   // Test complex filtering (multiple criteria)
   const filterStart = performance.now();
-  const complexFilter = questions.filter(
+  const _complexFilter = questions.filter(
     (q) =>
       q.difficulty === Difficulty.INTERMEDIATE &&
       q.category === QuestionCategory.CONSOLE_PROCEDURES &&
@@ -80,7 +80,7 @@ function testCurrentPerformance(): PerformanceMetrics {
 
   // Test validation performance
   const validationStart = performance.now();
-  const validationResult = validateQuestionBank();
+  const _validationResult = validateQuestionBank();
   const validationTime = performance.now() - validationStart;
 
   const endMemory = getMemoryUsage();

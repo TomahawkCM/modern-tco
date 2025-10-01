@@ -37,14 +37,14 @@ export default function ExamSimulator() {
   // Timer management: initialize on session start
   useEffect(() => {
     if (!currentSession?.timeLimit || !currentSession?.startTime) return;
-    const endAt = currentSession.startTime.getTime() + (currentSession.timeLimit || 0) * 60 * 1000;
+    const endAt = currentSession.startTime.getTime() + (currentSession.timeLimit ?? 0) * 60 * 1000;
     const tick = () => {
       const now = Date.now();
       const remaining = Math.max(0, Math.floor((endAt - now) / 1000));
       setTimeRemaining(remaining);
       if (remaining === 0) {
         // Auto-submit when time runs out
-        submitAssessment();
+        void submitAssessment();
       }
     };
     tick();
@@ -61,7 +61,7 @@ export default function ExamSimulator() {
       const parsed = JSON.parse(raw) as { answers?: Record<string, string>; index?: number };
       if (parsed.answers) setAnswers(parsed.answers);
       if (typeof parsed.index === "number") setIndex(Math.max(0, Math.min((currentSession?.questions?.length ?? 1) - 1, parsed.index)));
-    } catch {
+    } catch (error) {
       // ignore
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -85,10 +85,10 @@ export default function ExamSimulator() {
         const existing = localStorage.getItem(storageKey);
         const parsed = existing ? JSON.parse(existing) : {};
         parsed.index = index;
-        parsed.answers = parsed.answers || answers;
+        parsed.answers = parsed.answers ?? answers;
         localStorage.setItem(storageKey, JSON.stringify(parsed));
       }
-    } catch {
+    } catch (error) {
       // ignore storage errors
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -115,7 +115,7 @@ export default function ExamSimulator() {
           const parsed = existing ? JSON.parse(existing) : {};
           localStorage.setItem(storageKey, JSON.stringify({ ...parsed, answers: next, index }));
         }
-      } catch {
+      } catch (error) {
         // ignore
       }
       return next;
@@ -174,7 +174,7 @@ export default function ExamSimulator() {
                   variant="outline"
                   size="sm"
                   onClick={async () => {
-                    const text = `Q: ${question.question}\nAnswer: ${question.choices?.find((c) => c.id === question.correctAnswerId)?.text || ""}${question.explanation ? `\nWhy: ${question.explanation}` : ""}`;
+                    const text = `Q: ${question.question}\nAnswer: ${question.choices?.find((c) => c.id === question.correctAnswerId)?.text ?? ""}${question.explanation ? `\nWhy: ${question.explanation}` : ""}`;
                     await saveQuickNote(text, { tags: ["exam", question.domain, question.difficulty], user });
                     toast({ title: "Added to Notes", description: "View it under Notes for spaced review." });
                   }}
@@ -300,7 +300,7 @@ export default function ExamSimulator() {
               const selected = answers[q.id];
               const correct = q.correctAnswerId;
               const isCorrect = selected === correct;
-              const getText = (id?: string) => q.choices.find((c) => c.id === id)?.text || '';
+              const getText = (id?: string) => q.choices.find((c) => c.id === id)?.text ?? '';
               return (
                 <div key={q.id} className="border rounded p-3" data-testid="review-item">
                   <div className="mb-2">{q.question}</div>

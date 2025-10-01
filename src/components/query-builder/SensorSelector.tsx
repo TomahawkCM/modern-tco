@@ -38,9 +38,9 @@ import {
 } from 'lucide-react';
 
 import {
-  SensorSelectorProps,
-  SensorSelection,
-  SensorCatalogEntry,
+  type SensorSelectorProps,
+  type SensorSelection,
+  type SensorCatalogEntry,
   ParameterDefinition
 } from './types/queryBuilder';
 

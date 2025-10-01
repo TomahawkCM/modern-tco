@@ -18,7 +18,7 @@ import {
   Loader2
 } from 'lucide-react';
 
-import {
+import type {
   NaturalLanguageInputProps,
   QuerySuggestion
 } from './types/queryBuilder';
@@ -246,7 +246,7 @@ export function NaturalLanguageInput({
                       <div className="mt-1">
                         <code className="text-xs text-gray-500">
                           {suggestion.text.length > 80
-                            ? suggestion.text.substring(0, 80) + '...'
+                            ? `${suggestion.text.substring(0, 80)  }...`
                             : suggestion.text}
                         </code>
                       </div>

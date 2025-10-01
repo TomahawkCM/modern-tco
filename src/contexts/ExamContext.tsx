@@ -240,7 +240,7 @@ export function ExamProvider({ children }: { children: React.ReactNode }) {
                 // Track incorrect answers for review functionality
                 if (!isCorrect) {
                   addIncorrectAnswer({
-                    questionId: questionId,
+                    questionId,
                     questionText: question.question,
                     userAnswer: question.choices[parseInt(answerId)]?.text || '',
                     correctAnswer: question.choices[parseInt(question.correctAnswerId)]?.text || '',
@@ -266,7 +266,7 @@ export function ExamProvider({ children }: { children: React.ReactNode }) {
             const question = state.currentSession.questions.find((q) => q.id === questionId);
             if (question && answerId !== question.correctAnswerId) {
               addIncorrectAnswer({
-                questionId: questionId,
+                questionId,
                 questionText: question.question,
                 userAnswer: question.choices[parseInt(answerId)]?.text || '',
                 correctAnswer: question.choices[parseInt(question.correctAnswerId)]?.text || '',

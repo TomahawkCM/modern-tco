@@ -75,7 +75,7 @@ export const supabase = supabaseClient;
 // Server-side client for admin operations
 export const supabaseAdmin = process.env.SUPABASE_SERVICE_ROLE_KEY
   ? ((createClient<Database>(
-      (supabaseUrl || "") as string,
+      (supabaseUrl || ""),
       process.env.SUPABASE_SERVICE_ROLE_KEY,
       {
         auth: {

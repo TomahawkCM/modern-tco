@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { Search, BookOpen, Filter, Star, Clock, Target, ChevronRight, ArrowUpRight, CheckCircle, Info } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { TerminologySearch, TermDefinition, TermCategory } from '@/lib/tco-terminology';
+import { TerminologySearch, type TermDefinition, type TermCategory } from '@/lib/tco-terminology';
 
 interface InteractiveGlossaryProps {
   className?: string;
@@ -433,7 +433,7 @@ export function InteractiveGlossary({
                             onClick={() => related && handleTermSelect(related)}
                             className="px-3 py-1 text-sm bg-cyan-100 text-cyan-700 rounded-full hover:bg-cyan-200 transition-colors"
                           >
-                            {related?.term || relatedTerm}
+                            {related?.term ?? relatedTerm}
                           </button>
                         );
                       })}

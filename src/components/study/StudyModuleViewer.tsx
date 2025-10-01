@@ -54,12 +54,12 @@ export function StudyModuleViewer({
   const domainRef = useRef<string | null>(null);
 
   useEffect(() => {
-    loadStudyContent();
+    void loadStudyContent();
   }, [domain]);
 
   useEffect(() => {
     if (sections.length > 0) {
-      loadUserProgress();
+      void loadUserProgress();
     }
   }, [sections, usingFallback]);
 
@@ -111,17 +111,17 @@ export function StudyModuleViewer({
           const { data: sectionsData, error: sectionsError } = await (supabase as any)
             .from("study_sections")
             .select("*")
-            .eq("module_id", (moduleData as any).id)
+            .eq("module_id", (moduleData).id)
             .order("order_index");
 
           if (!sectionsError && sectionsData && sectionsData.length > 0) {
             // Successfully loaded from database - convert to StudyModuleContent format
-            const md = moduleData as any;
+            const md = moduleData;
             const sd = sectionsData as any[];
             const convertedModule: StudyModuleContent = {
               id: md.id,
               title: md.title,
-              description: md.description || '',
+              description: md.description ?? '',
               domain: md.domain as TCODomain,
               estimatedTime: `${md.estimated_time_minutes} min`,
               estimatedTimeMinutes: md.estimated_time_minutes,
@@ -139,7 +139,7 @@ export function StudyModuleViewer({
                 procedures: Array.isArray(section.procedures) ? (section.procedures as string[]) : [],
                 troubleshooting: Array.isArray(section.troubleshooting) ? (section.troubleshooting as string[]) : [],
                 references: Array.isArray(section.references) ? (section.references as string[]) : [],
-                playbook: section.playbook || {},
+                playbook: section.playbook ?? {},
               })),
             };
             
@@ -227,11 +227,11 @@ export function StudyModuleViewer({
 
       if (progressData) {
         setUserProgress(progressData as any);
-        setCompletedSections(new Set((progressData as any).completed_sections || []));
+        setCompletedSections(new Set((progressData as any).completed_sections ?? []));
 
         // Find first incomplete section
         const incompleteIndex = sections.findIndex(
-          (section) => !((progressData as any).completed_sections || []).includes(section.id)
+          (section) => !((progressData as any).completed_sections ?? []).includes(section.id)
         );
         if (incompleteIndex !== -1) {
           setCurrentSectionIndex(incompleteIndex);
@@ -343,7 +343,7 @@ export function StudyModuleViewer({
             Study Content Not Available
           </CardTitle>
           <CardDescription className="text-red-600">
-            {error || "No study content found for this domain."}
+            {error ?? "No study content found for this domain."}
           </CardDescription>
         </CardHeader>
         <CardContent>

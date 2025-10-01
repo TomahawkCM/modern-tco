@@ -27,10 +27,10 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import {
-  Module3Section,
+  type Module3Section,
   MODULE_3_SECTIONS
 } from "@/lib/module3-section-definitions";
-import { type Module3AssessmentResult } from "@/lib/module3-assessment-engine";
+import type { Module3AssessmentResult } from "@/lib/module3-assessment-engine";
 
 interface Module3AssessmentResultsProps {
   result: Module3AssessmentResult;

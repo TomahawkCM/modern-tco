@@ -13,6 +13,6 @@ export const withBase = (p: string) => {
     p.startsWith('//')
   )
     return p;
-  return `${BASE_PATH}${p.startsWith('/') ? p : '/' + p}`;
+  return `${BASE_PATH}${p.startsWith('/') ? p : `/${  p}`}`;
 };
 

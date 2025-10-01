@@ -48,7 +48,7 @@ export function ReviewMode({
   const [showExplanations, setShowExplanations] = useState(true);
 
   const currentQuestion = session.questions[currentQuestionIndex];
-  const currentResponse = (session.responses as any)[currentQuestion.id];
+  const currentResponse = (session.responses)[currentQuestion.id];
   const isCorrect = currentResponse?.selectedAnswer === currentQuestion.correctAnswer;
 
   const formatTime = (seconds: number): string => {
@@ -81,9 +81,9 @@ export function ReviewMode({
   const handleExportResults = () => {
     const exportData = {
       assessment: {
-        type: result.assessment?.type || "practice",
+        type: result.assessment?.type ?? "practice",
         completedAt: result.completedAt,
-        duration: result.totalTime || 0,
+        duration: result.totalTime ?? 0,
       },
       score: {
         overall: result.overallScore,
@@ -152,7 +152,7 @@ export function ReviewMode({
             </div>
             <div className="rounded-lg bg-blue-50 p-3">
               <div className="text-2xl font-bold text-blue-700">
-                {formatTime(result.totalTime || 0)}
+                {formatTime(result.totalTime ?? 0)}
               </div>
               <div className="text-sm text-gray-600">Time Taken</div>
             </div>
@@ -180,14 +180,14 @@ export function ReviewMode({
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  {Object.entries(result.domainBreakdown || {}).map(([domain, breakdown]) => (
+                  {Object.entries(result.domainBreakdown ?? {}).map(([domain, breakdown]) => (
                     <div key={domain} className="space-y-2">
                       <div className="flex items-center justify-between">
                         <span className="text-sm font-medium">{domain}</span>
                         <span
-                          className={`text-sm font-semibold ${getScoreColor(breakdown.score || 0)}`}
+                          className={`text-sm font-semibold ${getScoreColor(breakdown.score ?? 0)}`}
                         >
-                          {formatPercentage(breakdown.score || 0)}
+                          {formatPercentage(breakdown.score ?? 0)}
                         </span>
                       </div>
                       <Progress value={breakdown.score * 100} className="h-2" />
@@ -212,14 +212,14 @@ export function ReviewMode({
                     <span className="text-sm">Average Time per Question</span>
                     <span className="font-semibold">
                       {formatTime(
-                        Math.round((result.totalTime || 0) / Math.max(1, session.questions.length))
+                        Math.round((result.totalTime ?? 0) / Math.max(1, session.questions.length))
                       )}
                     </span>
                   </div>
                   <div className="flex items-center justify-between">
                     <span className="text-sm">Confidence Alignment</span>
                     <span className="font-semibold">
-                      {formatPercentage(result.performance?.confidenceAlignment || 0)}
+                      {formatPercentage(result.performance?.confidenceAlignment ?? 0)}
                     </span>
                   </div>
                   <div className="flex items-center justify-between">
@@ -249,7 +249,7 @@ export function ReviewMode({
                   )}
                   <Button
                     variant="outline"
-                    onClick={() => onStartRemediation(result.remediationPlan || result.remediation)}
+                    onClick={() => onStartRemediation(result.remediationPlan ?? result.remediation)}
                     className="flex items-center"
                   >
                     <BookOpen className="mr-2 h-4 w-4" />
@@ -274,7 +274,7 @@ export function ReviewMode({
                 <CardContent>
                   <div className="mb-4 grid grid-cols-5 gap-2">
                     {session.questions.map((question, index) => {
-                      const response = (session.responses as any)[question.id];
+                      const response = (session.responses)[question.id];
                       const isCurrentQuestion = index === currentQuestionIndex;
                       const isAnswerCorrect = response?.selectedAnswer === question.correctAnswer;
 
@@ -351,7 +351,7 @@ export function ReviewMode({
                   </div>
 
                   <div className="space-y-3">
-                    {(currentQuestion.options || currentQuestion.choices || []).map(
+                    {(currentQuestion.options ?? currentQuestion.choices ?? []).map(
                       (option, index) => {
                         const optionLetter = String.fromCharCode(65 + index);
                         const isCorrectAnswer = option.id === currentQuestion.correctAnswerId;
@@ -464,17 +464,17 @@ export function ReviewMode({
                   <CardTitle>Objective Performance</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  {Object.entries(result.objectiveBreakdown || {}).map(([objective, breakdown]) => (
+                  {Object.entries(result.objectiveBreakdown ?? {}).map(([objective, breakdown]) => (
                     <div key={objective} className="space-y-2">
                       <div className="flex items-center justify-between">
                         <span className="text-sm font-medium">{objective}</span>
                         <span
-                          className={`text-sm font-semibold ${getScoreColor(breakdown.score || 0)}`}
+                          className={`text-sm font-semibold ${getScoreColor(breakdown.score ?? 0)}`}
                         >
-                          {formatPercentage(breakdown.score || 0)}
+                          {formatPercentage(breakdown.score ?? 0)}
                         </span>
                       </div>
-                      <Progress value={(breakdown.score || 0) * 100} className="h-2" />
+                      <Progress value={(breakdown.score ?? 0) * 100} className="h-2" />
                       <div className="text-xs text-gray-500">
                         {breakdown.correct} / {breakdown.total} correct
                       </div>
@@ -492,14 +492,14 @@ export function ReviewMode({
                   <div className="space-y-3">
                     <div className="flex justify-between">
                       <span className="text-sm">Total Time</span>
-                      <span className="font-semibold">{formatTime(result.totalTime || 0)}</span>
+                      <span className="font-semibold">{formatTime(result.totalTime ?? 0)}</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-sm">Average per Question</span>
                       <span className="font-semibold">
                         {formatTime(
                           Math.round(
-                            (result.totalTime || 0) / Math.max(1, session.questions.length)
+                            (result.totalTime ?? 0) / Math.max(1, session.questions.length)
                           )
                         )}
                       </span>
@@ -508,7 +508,7 @@ export function ReviewMode({
                       <span className="text-sm">Time Remaining</span>
                       <span className="font-semibold">
                         {formatTime(
-                          Math.max(0, (session.timeLimit || 0) * 60 - (result.totalTime || 0))
+                          Math.max(0, (session.timeLimit ?? 0) * 60 - (result.totalTime ?? 0))
                         )}
                       </span>
                     </div>
@@ -536,7 +536,7 @@ export function ReviewMode({
                 <div>
                   <h3 className="mb-4 text-lg font-semibold">Priority Areas for Improvement</h3>
                   <div className="space-y-4">
-                    {(result.remediationPlan || result.remediation)?.priorityObjectives?.map(
+                    {(result.remediationPlan ?? result.remediation)?.priorityObjectives?.map(
                       (objective, index) => (
                         <div key={index} className="rounded-lg border p-4">
                           <div className="mb-2 flex items-center justify-between">
@@ -552,7 +552,7 @@ export function ReviewMode({
                           <div className="space-y-2">
                             <div className="text-sm font-medium">Recommended Resources:</div>
                             <ul className="space-y-1 text-sm text-gray-600">
-                              {(objective.resources || []).map((resource, resourceIndex) => (
+                              {(objective.resources ?? []).map((resource, resourceIndex) => (
                                 <li key={resourceIndex} className="flex items-center">
                                   <span className="mr-2 h-2 w-2 rounded-full bg-blue-400"></span>
                                   {resource}
@@ -578,20 +578,20 @@ export function ReviewMode({
                     <div className="grid grid-cols-1 gap-4 text-center md:grid-cols-3">
                       <div>
                         <div className="text-2xl font-bold text-blue-600">
-                          {(result.remediationPlan || result.remediation)?.estimatedStudyTime || 0}h
+                          {(result.remediationPlan ?? result.remediation)?.estimatedStudyTime ?? 0}h
                         </div>
                         <div className="text-sm text-gray-600">Total Study Time</div>
                       </div>
                       <div>
                         <div className="text-2xl font-bold text-green-600">
-                          {(result.remediationPlan || result.remediation)?.priorityObjectives
-                            ?.length || 0}
+                          {(result.remediationPlan ?? result.remediation)?.priorityObjectives
+                            ?.length ?? 0}
                         </div>
                         <div className="text-sm text-gray-600">Focus Areas</div>
                       </div>
                       <div>
                         <div className="text-2xl font-bold text-orange-600">
-                          {(result.remediationPlan || result.remediation)?.canRetake ? "Yes" : "No"}
+                          {(result.remediationPlan ?? result.remediation)?.canRetake ? "Yes" : "No"}
                         </div>
                         <div className="text-sm text-gray-600">Ready to Retake</div>
                       </div>
@@ -602,7 +602,7 @@ export function ReviewMode({
                 {/* Action Buttons */}
                 <div className="flex space-x-3 pt-4">
                   <Button
-                    onClick={() => onStartRemediation(result.remediationPlan || result.remediation)}
+                    onClick={() => onStartRemediation(result.remediationPlan ?? result.remediation)}
                     className="flex items-center"
                   >
                     <BookOpen className="mr-2 h-4 w-4" />

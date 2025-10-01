@@ -10,7 +10,7 @@ import { useRouter } from "next/navigation";
 import { usePractice } from "@/contexts/PracticeContext";
 import { useAuth } from "@/contexts/AuthContext";
 import {
-  Module3Section,
+  type Module3Section,
   MODULE_3_SECTIONS,
   getSectionCoverage,
   getModule3LearningPath
@@ -118,7 +118,7 @@ export function Module3PracticeSession({
   // Auto-start session if requested
   useEffect(() => {
     if (autoStart && initialSectionId && selectedSections.includes(initialSectionId)) {
-      handleStartSession();
+      void handleStartSession();
     }
   }, [autoStart, initialSectionId]);
 
@@ -308,7 +308,7 @@ export function Module3PracticeSession({
                       </div>
                       <div className="flex items-center gap-4 mt-1">
                         <span className="text-xs text-muted-foreground">
-                          {availability?.questionCount || 0} questions ({coverage}% coverage)
+                          {availability?.questionCount ?? 0} questions ({coverage}% coverage)
                         </span>
                         {progress && (
                           <span className="text-xs text-muted-foreground">

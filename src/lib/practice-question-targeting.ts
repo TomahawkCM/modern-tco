@@ -4,7 +4,7 @@
  */
 
 import {
-  Difficulty,
+  type Difficulty,
   TCODomain,
   TCO_DOMAIN_WEIGHTS,
   type PracticeTargeting,

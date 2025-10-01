@@ -17,7 +17,7 @@ export function HomePage() {
       try {
         const mod = await import("@/lib/questionLoader");
         if (active) setTotalQuestions(mod.getAllQuestions().length);
-      } catch {
+      } catch (error) {
         // swallow; keep 0 if not available
       }
     };
@@ -41,9 +41,9 @@ export function HomePage() {
     }
     return tcoDomains.map((d) => ({
       domain: d,
-      score: map.get(d)?.score || 0,
-      answered: map.get(d)?.answered || 0,
-      correct: map.get(d)?.correct || 0,
+      score: map.get(d)?.score ?? 0,
+      answered: map.get(d)?.answered ?? 0,
+      correct: map.get(d)?.correct ?? 0,
     }));
   }, [getDomainStats]);
 
@@ -57,7 +57,7 @@ export function HomePage() {
   // Trend (delta of last two sessions per domain)
   const domainTrends = useMemo(() => {
     const trends = new Map<string, number>();
-    const recent = progressState.progress.recentSessions || [];
+    const recent = progressState.progress.recentSessions ?? [];
     for (const d of tcoDomains) {
       const ds = recent.filter((s) => s.domain === d).slice(0, 2);
       const delta = ds.length >= 2 ? ds[0].score - ds[1].score : 0;
@@ -209,21 +209,21 @@ export function HomePage() {
         <div className="space-y-6 mt-10">
           <h2 className="text-2xl font-bold text-white text-center">Recent Sessions</h2>
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {(progressState.progress.recentSessions || []).slice(0,6).map((s, idx) => (
+            {(progressState.progress.recentSessions ?? []).slice(0,6).map((s, idx) => (
               <div key={idx} className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-4">
                 <div className="flex items-center justify-between">
                   <div className="text-sm text-blue-200">
-                    {s.domain || 'Mixed'}
+                    {s.domain ?? 'Mixed'}
                   </div>
                   <div className="text-white text-xl font-semibold">{s.score}%</div>
                 </div>
                 <div className="mt-1 text-xs text-gray-300">
-                  {s.questions} questions • {Math.round((s.time||0)/60)} min • {new Date(s.at).toLocaleString()}
+                  {s.questions} questions • {Math.round((s.time ?? 0)/60)} min • {new Date(s.at).toLocaleString()}
                 </div>
                 <div className="mt-3 flex justify-end">
                   {s.domain ? (
                     <button
-                      onClick={() => router.push(`/practice?domain=${encodeURIComponent(s.domain || '')}&count=${s.questions || 25}&quick=1&reveal=1`)}
+                      onClick={() => router.push(`/practice?domain=${encodeURIComponent(s.domain ?? '')}&count=${s.questions ?? 25}&quick=1&reveal=1`)}
                       className="text-xs bg-blue-600 hover:bg-blue-700 text-white px-2 py-1 rounded"
                     >
                       Repeat Drill
@@ -239,7 +239,7 @@ export function HomePage() {
                 </div>
               </div>
             ))}
-            {((progressState.progress.recentSessions || []).length === 0) && (
+            {((progressState.progress.recentSessions ?? []).length === 0) && (
               <div className="text-center text-gray-300 bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-6">
                 No recent sessions yet. Start a Quick Drill to see your history here.
               </div>

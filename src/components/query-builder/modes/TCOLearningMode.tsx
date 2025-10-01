@@ -182,7 +182,7 @@ export function TCOLearningMode({ onQuerySubmit, onProgressUpdate }: TCOLearning
     if (queryLower.includes('get') && queryLower.includes('from all machines')) {
       setFeedback({
         type: 'success',
-        message: 'Excellent! Your query correctly addresses the scenario. Key concepts mastered: ' + currentScenario.learningPoints.join(', ')
+        message: `Excellent! Your query correctly addresses the scenario. Key concepts mastered: ${  currentScenario.learningPoints.join(', ')}`
       });
 
       // Update progress

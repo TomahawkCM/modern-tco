@@ -44,7 +44,7 @@ import {
 } from 'lucide-react';
 import { VirtualScrollTable } from './components/VirtualScrollTable';
 
-import { ResultsViewerProps } from './types/queryBuilder';
+import type { ResultsViewerProps } from './types/queryBuilder';
 import { QueryResult } from '@/lib/tanium-query-engine/types';
 
 export function ResultsViewer({
@@ -64,7 +64,7 @@ export function ResultsViewer({
 
   // Filter and sort data
   const processedData = useMemo(() => {
-    if (!result || !result.rows) return [];
+    if (!result?.rows) return [];
 
     let data = [...result.rows];
 
@@ -108,7 +108,7 @@ export function ResultsViewer({
 
   // Convert data for VirtualScrollTable
   const tableData = useMemo(() => {
-    if (!result || !result.headers || !processedData) return [];
+    if (!result?.headers || !processedData) return [];
 
     return processedData.map(row => {
       const obj: Record<string, any> = {};
@@ -121,7 +121,7 @@ export function ResultsViewer({
 
   // Prepare columns for VirtualScrollTable
   const virtualColumns = useMemo(() => {
-    if (!result || !result.headers) return [];
+    if (!result?.headers) return [];
 
     return result.headers.map(header => ({
       key: header,
@@ -170,7 +170,7 @@ export function ResultsViewer({
 
   // Handle export
   const handleExport = useCallback((format: 'csv' | 'json') => {
-    if (!result || !result.rows || !onExport) return;
+    if (!result?.rows || !onExport) return;
 
     if (format === 'csv' && result.csv) {
       // Use pre-generated CSV if available
@@ -236,7 +236,7 @@ export function ResultsViewer({
   }
 
   // No results
-  if (!result || !result.rows || result.rows.length === 0) {
+  if (!result?.rows || result.rows.length === 0) {
     return (
       <Card className={`glass border-white/10 ${className}`}>
         <CardHeader>
@@ -249,7 +249,7 @@ export function ResultsViewer({
           <div className="text-center py-8 text-gray-400">
             <Database className="h-12 w-12 mx-auto mb-3 opacity-50" />
             <p>No results found</p>
-            {result && result.execution && (
+            {result?.execution && (
               <p className="text-sm mt-2">
                 Query executed in {result.execution.totalTimeMs}ms
               </p>

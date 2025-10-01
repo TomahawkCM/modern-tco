@@ -1,4 +1,4 @@
-import { LabExercise, LabStep, ValidationCriteria, TaniumModule } from '@/types/lab';
+import { type LabExercise, LabStep, ValidationCriteria, TaniumModule } from '@/types/lab';
 import { TCODomain } from '@/types/exam';
 
 /**

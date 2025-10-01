@@ -59,7 +59,7 @@ async function loadFullQuestionBank() {
     }
   } catch (error) {
     const e = error as any;
-    console.log("Using fallback questions for testing:", e?.message || "Unknown error");
+    console.log("Using fallback questions for testing:", e?.message ?? "Unknown error");
     // Keep fallback questions and metadata as defined above
     return false;
   }

@@ -101,7 +101,7 @@ export function StudySectionCard({ section, moduleId, className }: StudySectionC
           <div className="space-y-2">
             <h4 className="text-sm font-medium">Overview:</h4>
             <p className="text-sm text-muted-foreground line-clamp-3">
-              {(section.content as any).overview}
+              {(section.content).overview}
             </p>
           </div>
         )}

@@ -80,10 +80,10 @@ export default function NotesPage() {
         ]);
         if (!active) return;
         const modMap: Record<string, string> = {};
-        for (const m of mods || []) modMap[m.id] = m.title;
+        for (const m of mods ?? []) modMap[m.id] = m.title;
         setModulesMap(modMap);
-        setSections((secs || []).map((s: any) => ({ id: s.id, title: s.title, module_id: s.module_id })));
-      } catch {
+        setSections((secs ?? []).map((s: any) => ({ id: s.id, title: s.title, module_id: s.module_id })));
+      } catch (error) {
         // ignore fetch errors; selection will be disabled
       }
     })();
@@ -125,7 +125,7 @@ export default function NotesPage() {
       const note = notesService.buildNote(trimmed, tags, { moduleId, sectionId });
       notesService.setLocal([note, ...notes]);
       setNotes((prev) => [note, ...prev]);
-      analytics.capture("note_add", { tags: note.tags, hasSection: Boolean(note.sectionId) });
+      void analytics.capture("note_add", { tags: note.tags, hasSection: Boolean(note.sectionId) });
       // fire-and-forget remote upsert
       if (user?.id) {
         try { await (await import("@/services/notesService")).notesRemote.upsert(user.id, note); } catch {}
@@ -140,7 +140,7 @@ export default function NotesPage() {
     setEditingId(n.id);
     setText(n.text);
     setTagsInput(n.tags.join(", "));
-    setSelectedSectionId(n.sectionId || UNASSIGNED);
+    setSelectedSectionId(n.sectionId ?? UNASSIGNED);
   }
 
   async function handleDelete(id: string) {
@@ -173,7 +173,7 @@ export default function NotesPage() {
   const groupedBySection = useMemo(() => {
     const groups: Record<string, Note[]> = {};
     for (const n of sortedNotes) {
-      const key = n.sectionId || "__unassigned__";
+      const key = n.sectionId ?? "__unassigned__";
       if (!groups[key]) groups[key] = [];
       groups[key].push(n);
     }
@@ -181,7 +181,7 @@ export default function NotesPage() {
       if (key === "__unassigned__") return { key, label: "Unassigned", items };
       const sec = sectionsById.get(key);
       const modTitle = sec ? modulesMap[sec.module_id] : undefined;
-      const label = sec ? `${modTitle ? modTitle + " — " : ""}${sec.title}` : "Unknown Section";
+      const label = sec ? `${modTitle ? `${modTitle  } — ` : ""}${sec.title}` : "Unknown Section";
       return { key, label, items };
     });
     // Sort groups by label

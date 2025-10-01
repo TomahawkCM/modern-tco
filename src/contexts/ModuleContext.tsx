@@ -1,6 +1,6 @@
 "use client";
 
-import { type ModuleProgress } from "@/types/module";
+import type { ModuleProgress } from "@/types/module";
 import {
   createContext,
   useCallback,
@@ -150,7 +150,7 @@ const createInitialProgress = (userId: string = "anonymous"): Record<string, Mod
   modules.forEach((module) => {
     progress[module.id] = {
       moduleId: module.id,
-      userId: userId,
+      userId,
       startedAt: new Date(),
       lastAccessedAt: new Date(),
       totalTimeSpent: 0,
@@ -526,7 +526,7 @@ export function ModuleProvider({ children }: { children: ReactNode }) {
       domainProgress[module.domain as TCODomain].total++;
 
       const progress = state.moduleProgress[module.id];
-      if (progress && progress.completedAt) {
+      if (progress?.completedAt) {
         domainProgress[module.domain as TCODomain].completed++;
       }
     });

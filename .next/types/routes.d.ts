@@ -5,7 +5,7 @@ type AppRoutes = "/" | "/admin/questions" | "/analytics" | "/analytics/events" |
 type AppRouteHandlerRoutes = "/api/health" | "/api/sim-eval" | "/api/sim-meta" | "/api/sim-run" | "/api/sim-save" | "/api/sim-saved" | "/api/stripe/create-checkout-session" | "/api/study/content"
 type PageRoutes = never
 type LayoutRoutes = "/" | "/learn" | "/learning" | "/study" | "/test-minimal"
-type RedirectRoutes = "/exam" | "/tanium/exam"
+type RedirectRoutes = "/Tanium" | "/Tanium/[[...path]]" | "/exam" | "/tanium" | "/tanium/[[...path]]"
 type RewriteRoutes = never
 type Routes = AppRoutes | PageRoutes | LayoutRoutes | RedirectRoutes | RewriteRoutes | AppRouteHandlerRoutes
 
@@ -60,7 +60,10 @@ interface ParamMap {
   "/study": {}
   "/study/[domain]": { "domain": string; }
   "/study/review": {}
-  "/tanium/exam": {}
+  "/tanium": {}
+  "/Tanium": {}
+  "/tanium/[[...path]]": { "path"?: string[]; }
+  "/Tanium/[[...path]]": { "path"?: string[]; }
   "/team": {}
   "/test": {}
   "/test-db": {}

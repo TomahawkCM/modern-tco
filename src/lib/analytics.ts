@@ -27,7 +27,7 @@ function getDistinctId(): string {
     localStorage.setItem(STORAGE_ID, id);
     cachedId = id;
     return id;
-  } catch {
+  } catch (error) {
     return (cachedId = uuid());
   }
 }
@@ -71,7 +71,7 @@ async function sendEvent(name: string, props?: AnalyticsProps) {
         keepalive: true,
       });
     }
-  } catch {
+  } catch (error) {
     // swallow
   }
 }

@@ -241,7 +241,7 @@ class ErrorTracker {
       // Append to log file
       await fs.appendFile(
         logFile,
-        JSON.stringify(logEntry) + '\n',
+        `${JSON.stringify(logEntry)  }\n`,
         'utf-8'
       );
     } catch (fileError) {

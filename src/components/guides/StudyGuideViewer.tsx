@@ -47,7 +47,7 @@ export function StudyGuideViewer({
   const isLastSection = currentSectionIndex === guide.sections.length - 1;
 
   // Calculate progress
-  const completedSections = progress?.sectionsRead || [];
+  const completedSections = progress?.sectionsRead ?? [];
   const guideProgress = Math.round((completedSections.length / guide.sections.length) * 100);
 
   useEffect(() => {

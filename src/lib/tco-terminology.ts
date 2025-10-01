@@ -644,7 +644,7 @@ export class TerminologySearch {
    */
   getRelatedTerms(termId: string): TermDefinition[] {
     const term = this.getById(termId);
-    if (!term || !term.relatedTerms) return [];
+    if (!term?.relatedTerms) return [];
 
     return term.relatedTerms
       .map(relatedId => this.getById(relatedId))

@@ -1,9 +1,9 @@
 import { useMemo, useCallback } from 'react';
-import {
+import type {
   UseSensorCatalog,
   SensorCatalogEntry
 } from '../types/queryBuilder';
-import { Sensor } from '@/lib/tanium-query-engine/types';
+import type { Sensor } from '@/lib/tanium-query-engine/types';
 import {
   SENSORS_CATALOG,
   getAllFieldNames,

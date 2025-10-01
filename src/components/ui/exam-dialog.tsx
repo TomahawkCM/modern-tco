@@ -195,7 +195,7 @@ export function ExamStartDialog({ trigger, mode, onStart }: ExamStartDialogProps
               <div className="space-y-2">
                 <label className="text-sm font-medium text-gray-200">Focus Domain (Optional)</label>
                 <select
-                  value={config.domain || ""}
+                  value={config.domain ?? ""}
                   onChange={(e) =>
                     setConfig({
                       ...config,

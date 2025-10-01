@@ -16,7 +16,7 @@ import {
 } from 'lucide-react';
 
 import {
-  QueryPreviewProps,
+  type QueryPreviewProps,
   PartialQuery,
   ValidationState
 } from './types/queryBuilder';
@@ -33,7 +33,7 @@ export function QueryPreview({
 
   // Build query string from partial query
   const queryString = useMemo(() => {
-    if (query.rawQuery && query.rawQuery.trim()) {
+    if (query.rawQuery?.trim()) {
       return query.rawQuery;
     }
 
@@ -45,7 +45,7 @@ export function QueryPreview({
 
       // Add sensors
       const sensorParts = query.sensors.map(s => {
-        let sensorStr = 'name' in s.sensor ? (s.sensor.name || '') : '';
+        let sensorStr = 'name' in s.sensor ? (s.sensor.name ?? '') : '';
         if (s.filter) {
           sensorStr += ` ${s.filter.operator} "${s.filter.value}"`;
         }
@@ -54,7 +54,7 @@ export function QueryPreview({
 
       // Add aggregates
       const aggregateParts = query.aggregates.map(a => {
-        return `${a.function}(${a.sensor || ''})`;
+        return `${a.function}(${a.sensor ?? ''})`;
       });
 
       parts.push([...sensorParts, ...aggregateParts].join(' and '));

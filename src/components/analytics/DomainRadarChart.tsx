@@ -74,7 +74,7 @@ export function DomainRadarChart({ domainScores }: DomainRadarChartProps) {
 
   const data: DomainData[] = Object.entries(domainScores).map(([domain, stats]) => ({
     domain: domainLabels[domain as TCODomain],
-    score: (stats?.score as number) || 0,
+    score: (stats?.score) || 0,
     fullMark: 100,
     weight: TCO_DOMAIN_WEIGHTS[domain as TCODomain] || 0,
   }));

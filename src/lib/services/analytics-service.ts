@@ -53,7 +53,7 @@ class AnalyticsServiceClass {
     } as TablesInsert<'analytics_events'>;
 
     // Cast to any at call-site to avoid overly-strict generated Supabase insert overloads
-    const { error } = await (supabase as any).from("analytics_events").insert(payload as any);
+    const { error } = await (supabase as any).from("analytics_events").insert(payload);
 
     if (error) {
       console.error("Failed to track analytics event:", error.message);

@@ -3,10 +3,10 @@
  * Provides robust localStorage/sessionStorage operations with corruption prevention
  */
 
-export interface StorageOptions {
-  fallback?: unknown;
-  validate?: (data: unknown) => boolean;
-  sanitize?: (data: unknown) => unknown;
+export interface StorageOptions<TValue = unknown> {
+  fallback?: TValue;
+  validate?: (data: unknown) => data is TValue;
+  sanitize?: (data: unknown) => TValue;
   maxRetries?: number;
   backupKey?: string;
 }
@@ -15,12 +15,49 @@ export class StorageError extends Error {
   constructor(
     public key: string,
     public operation: "get" | "set" | "remove",
-    public originalError?: Error
+    public originalError?: unknown
   ) {
     super(`Storage operation failed: ${operation} ${key}`);
     this.name = "StorageError";
   }
 }
+
+const isRecord = (value: unknown): value is Record<string, unknown> => {
+  return typeof value === "object" && value !== null && !Array.isArray(value);
+};
+
+const isString = (value: unknown): value is string => typeof value === "string";
+
+const isNumber = (value: unknown): value is number => {
+  return typeof value === "number" && !Number.isNaN(value);
+};
+
+const isBoolean = (value: unknown): value is boolean => typeof value === "boolean";
+
+const isStringArray = (value: unknown): value is string[] => {
+  return Array.isArray(value) && value.every(isString);
+};
+
+const parseJson = (raw: string): unknown => {
+  try {
+    return JSON.parse(raw) as unknown;
+  } catch {
+    return null;
+  }
+};
+
+const isQuotaExceededError = (error: unknown): boolean => {
+  return (
+    error instanceof DOMException &&
+    (error.code === 22 ||
+      error.name === "QuotaExceededError" ||
+      error.name === "NS_ERROR_DOM_QUOTA_REACHED")
+  );
+};
+
+const clampNumber = (value: number, min: number, max: number): number => {
+  return Math.min(max, Math.max(min, value));
+};
 
 /**
  * Enhanced localStorage operations with validation and error recovery
@@ -29,61 +66,57 @@ export const safeLocalStorage = {
   /**
    * Get item with comprehensive error handling
    */
-  getItem<T = unknown>(key: string, options: StorageOptions = {}): T | null {
-    const { validate, sanitize, maxRetries = 1, backupKey } = options;
-    const fallbackValue = (options.fallback as T | null) ?? null;
+  getItem<TValue = unknown>(key: string, options: StorageOptions<TValue> = {}): TValue | null {
+    const { validate, sanitize, maxRetries = 1, backupKey, fallback } = options;
+    const fallbackValue = fallback ?? null;
 
-    for (let attempt = 0; attempt < maxRetries; attempt++) {
+    for (let attempt = 0; attempt < maxRetries; attempt += 1) {
       try {
-        // Check if localStorage is available
-        if (typeof window === "undefined" || !window.localStorage) {
+        if (typeof window === "undefined") {
           return fallbackValue;
         }
 
-        const item = window.localStorage.getItem(key);
-        if (item === null) {
+        const storage = window.localStorage;
+        const rawValue = storage.getItem(key);
+        if (rawValue === null) {
           return fallbackValue;
         }
 
-        let parsedData: T;
-        try {
-          parsedData = JSON.parse(item);
-        } catch (parseError) {
-          // Try backup key if available
-          if (backupKey && attempt === 0) {
-            const backupItem = window.localStorage.getItem(backupKey);
-            if (backupItem) {
-              parsedData = JSON.parse(backupItem);
-            } else {
-              throw parseError;
-            }
-          } else {
-            throw parseError;
+        let parsedValue = parseJson(rawValue);
+
+        if (parsedValue === null && backupKey && attempt === 0) {
+          const backupRaw = storage.getItem(backupKey);
+          parsedValue = backupRaw !== null ? parseJson(backupRaw) : null;
+        }
+
+        if (parsedValue === null) {
+          throw new StorageError(key, "get");
+        }
+
+        if (validate && !validate(parsedValue)) {
+          safeLocalStorage.removeItem(key);
+          if (backupKey) {
+            safeLocalStorage.removeItem(backupKey);
           }
-        }
-
-        // Validate data structure if validator provided
-        if (validate && !validate(parsedData)) {
-          this.removeItem(key); // Remove corrupted data
           return fallbackValue;
         }
 
-        // Sanitize data if sanitizer provided
-        if (sanitize) {
-          parsedData = sanitize(parsedData) as T;
-        }
-
-        return parsedData;
-      } catch {
+        const result = sanitize ? sanitize(parsedValue) : (parsedValue as TValue);
+        return result ?? fallbackValue;
+      } catch (error) {
         if (attempt === maxRetries - 1) {
-          // Final attempt failed, clean up corrupted data
           try {
-            this.removeItem(key);
+            safeLocalStorage.removeItem(key);
             if (backupKey) {
-              this.removeItem(backupKey);
+              safeLocalStorage.removeItem(backupKey);
             }
           } catch {
-            // Silently handle cleanup errors in production
+            // ignore cleanup failure
+          }
+
+          if (error instanceof StorageError && error.originalError) {
+            // Swallow error but preserve context for debugging
+            console.warn(error);
           }
 
           return fallbackValue;
@@ -97,53 +130,48 @@ export const safeLocalStorage = {
   /**
    * Set item with validation and backup creation
    */
-  setItem<T = unknown>(key: string, value: T, options: StorageOptions = {}): boolean {
+  setItem<TValue = unknown>(key: string, value: TValue, options: StorageOptions<TValue> = {}): boolean {
     const { validate, sanitize, backupKey } = options;
 
     try {
-      if (typeof window === "undefined" || !window.localStorage) {
+      if (typeof window === "undefined") {
         return false;
       }
 
-      let dataToStore = value;
+      const storage = window.localStorage;
+      const candidate: unknown = value;
 
-      // Validate data before storing
-      if (validate && !validate(dataToStore)) {
+      if (validate && !validate(candidate)) {
         return false;
       }
 
-      // Sanitize data if sanitizer provided
-      if (sanitize) {
-        dataToStore = sanitize(dataToStore) as T;
-      }
+      const sanitizedValue = sanitize ? sanitize(candidate) : candidate;
+      const serialized = JSON.stringify(sanitizedValue);
 
-      const serializedData = JSON.stringify(dataToStore);
-
-      // Create backup before overwriting if backup key provided
       if (backupKey) {
-        const existingData = window.localStorage.getItem(key);
-        if (existingData) {
+        const existing = storage.getItem(key);
+        if (existing !== null) {
           try {
-            window.localStorage.setItem(backupKey, existingData);
+            storage.setItem(backupKey, existing);
           } catch {
-            // Silently handle backup errors in production
+            // ignore backup failure
           }
         }
       }
 
-      window.localStorage.setItem(key, serializedData);
+      storage.setItem(key, serialized);
       return true;
     } catch (error) {
-      // If quota exceeded, try to free up space
-      if (error instanceof DOMException && error.code === 22) {
+      if (isQuotaExceededError(error)) {
         this.cleanup();
-
-        // Retry once after cleanup
         try {
+          if (typeof window === "undefined") {
+            return false;
+          }
           window.localStorage.setItem(key, JSON.stringify(value));
           return true;
         } catch {
-          // Silently handle retry errors in production
+          return false;
         }
       }
 
@@ -155,11 +183,11 @@ export const safeLocalStorage = {
    * Remove item with error handling
    */
   removeItem(key: string): boolean {
-    try {
-      if (typeof window === "undefined" || !window.localStorage) {
-        return false;
-      }
+    if (typeof window === "undefined") {
+      return false;
+    }
 
+    try {
       window.localStorage.removeItem(key);
       return true;
     } catch {
@@ -170,7 +198,7 @@ export const safeLocalStorage = {
   /**
    * Check if key exists and has valid data
    */
-  hasValidItem(key: string, validate?: (data: unknown) => boolean): boolean {
+  hasValidItem(key: string, validate?: (data: unknown) => data is unknown): boolean {
     try {
       const item = this.getItem(key, { validate });
       return item !== null;
@@ -183,52 +211,51 @@ export const safeLocalStorage = {
    * Clean up corrupted or old data
    */
   cleanup(): void {
-    try {
-      if (typeof window === "undefined" || !window.localStorage) {
-        return;
-      }
+    if (typeof window === "undefined") {
+      return;
+    }
 
+    try {
+      const storage = window.localStorage;
       const keysToRemove: string[] = [];
       const now = Date.now();
       const maxAge = 30 * 24 * 60 * 60 * 1000; // 30 days
 
-      for (let i = 0; i < window.localStorage.length; i++) {
-        const key = window.localStorage.key(i);
-        if (!key) continue;
+      for (let index = 0; index < storage.length; index += 1) {
+        const key = storage.key(index);
+        if (!key) {
+          continue;
+        }
 
-        try {
-          const item = window.localStorage.getItem(key);
-          if (!item) {
-            keysToRemove.push(key);
-            continue;
-          }
-
-          // Try to parse to check if corrupted
-          JSON.parse(item);
-
-          // Check if it's a timestamped item and too old
-          if (key.includes("-timestamp") || key.includes("-backup")) {
-            const data = JSON.parse(item);
-            if (typeof data === "object" && data.timestamp && now - data.timestamp > maxAge) {
-              keysToRemove.push(key);
-            }
-          }
-        } catch {
-          // Corrupted data, mark for removal
+        const rawValue = storage.getItem(key);
+        if (rawValue === null) {
           keysToRemove.push(key);
+          continue;
+        }
+
+        const parsedValue = parseJson(rawValue);
+        if (!isRecord(parsedValue)) {
+          keysToRemove.push(key);
+          continue;
+        }
+
+        if (key.includes("-timestamp") || key.includes("-backup")) {
+          const { timestamp } = parsedValue as { timestamp?: unknown };
+          if (isNumber(timestamp) && now - timestamp > maxAge) {
+            keysToRemove.push(key);
+          }
         }
       }
 
-      // Remove identified items
       keysToRemove.forEach((key) => {
         try {
-          window.localStorage.removeItem(key);
+          storage.removeItem(key);
         } catch {
-          // Silently handle removal errors in production
+          // ignore removal failure
         }
       });
     } catch {
-      // Silently handle cleanup errors in production
+      // ignore cleanup failure
     }
   },
 
@@ -236,24 +263,31 @@ export const safeLocalStorage = {
    * Get storage usage statistics
    */
   getUsageStats(): { used: number; total: number; percentage: number } {
-    try {
-      if (typeof window === "undefined" || !window.localStorage) {
-        return { used: 0, total: 0, percentage: 0 };
-      }
+    if (typeof window === "undefined") {
+      return { used: 0, total: 0, percentage: 0 };
+    }
 
+    try {
+      const storage = window.localStorage;
       let used = 0;
-      for (const key in window.localStorage) {
-        if (window.localStorage.hasOwnProperty(key)) {
-          used += window.localStorage[key].length + key.length;
+
+      for (let index = 0; index < storage.length; index += 1) {
+        const key = storage.key(index);
+        if (!key) {
+          continue;
+        }
+
+        const rawValue = storage.getItem(key);
+        if (rawValue !== null) {
+          used += key.length + rawValue.length;
         }
       }
 
-      // Most browsers have 5-10MB localStorage limit
       const estimated = 5 * 1024 * 1024; // 5MB estimate
       return {
         used,
         total: estimated,
-        percentage: Math.round((used / estimated) * 100),
+        percentage: estimated === 0 ? 0 : Math.round((used / estimated) * 100),
       };
     } catch {
       return { used: 0, total: 0, percentage: 0 };
@@ -265,45 +299,55 @@ export const safeLocalStorage = {
  * Enhanced sessionStorage operations with same safety features
  */
 export const safeSessionStorage = {
-  getItem<T = unknown>(key: string, options: StorageOptions = {}): T | null {
-    const { validate, sanitize } = options;
-    const fallbackValue = (options.fallback as T | null) ?? null;
+  getItem<TValue = unknown>(key: string, options: StorageOptions<TValue> = {}): TValue | null {
+    const { validate, sanitize, fallback } = options;
+    const fallbackValue = fallback ?? null;
 
     try {
-      if (typeof window === "undefined" || !window.sessionStorage) {
+      if (typeof window === "undefined") {
         return fallbackValue;
       }
 
-      const item = window.sessionStorage.getItem(key);
-      if (item === null) {
+      const storage = window.sessionStorage;
+      const rawValue = storage.getItem(key);
+      if (rawValue === null) {
         return fallbackValue;
       }
 
-      let parsedData: T = JSON.parse(item);
-
-      if (validate && !validate(parsedData)) {
+      const parsedValue = parseJson(rawValue);
+      if (parsedValue === null) {
         this.removeItem(key);
         return fallbackValue;
       }
 
-      if (sanitize) {
-        parsedData = sanitize(parsedData) as T;
+      if (validate && !validate(parsedValue)) {
+        this.removeItem(key);
+        return fallbackValue;
       }
 
-      return parsedData;
+      const result = sanitize ? sanitize(parsedValue) : (parsedValue as TValue);
+      return result ?? fallbackValue;
     } catch {
       this.removeItem(key);
       return fallbackValue;
     }
   },
 
-  setItem<T = unknown>(key: string, value: T): boolean {
+  setItem<TValue = unknown>(key: string, value: TValue, options: StorageOptions<TValue> = {}): boolean {
+    const { validate, sanitize } = options;
+
     try {
-      if (typeof window === "undefined" || !window.sessionStorage) {
+      if (typeof window === "undefined") {
         return false;
       }
 
-      window.sessionStorage.setItem(key, JSON.stringify(value));
+      const candidate: unknown = value;
+      if (validate && !validate(candidate)) {
+        return false;
+      }
+
+      const sanitizedValue = sanitize ? sanitize(candidate) : candidate;
+      window.sessionStorage.setItem(key, JSON.stringify(sanitizedValue));
       return true;
     } catch {
       return false;
@@ -311,11 +355,11 @@ export const safeSessionStorage = {
   },
 
   removeItem(key: string): boolean {
-    try {
-      if (typeof window === "undefined" || !window.sessionStorage) {
-        return false;
-      }
+    if (typeof window === "undefined") {
+      return false;
+    }
 
+    try {
       window.sessionStorage.removeItem(key);
       return true;
     } catch {
@@ -329,42 +373,54 @@ export const safeSessionStorage = {
  */
 export const validators = {
   examSession: (data: unknown): data is Record<string, unknown> => {
+    if (!isRecord(data)) {
+      return false;
+    }
+
+    const { questions, answers, startTime } = data as {
+      questions?: unknown;
+      answers?: unknown;
+      startTime?: unknown;
+    };
+
     return (
-      data !== null &&
-      typeof data === "object" &&
-      data !== null &&
-      typeof (data as Record<string, unknown>).id === "string" &&
-      typeof (data as Record<string, unknown>).mode === "string" &&
-      Array.isArray((data as Record<string, unknown>).questions) &&
-      typeof (data as Record<string, unknown>).currentIndex === "number" &&
-      typeof (data as Record<string, unknown>).answers === "object" &&
-      Boolean((data as Record<string, unknown>).startTime)
+      isString(data.id) &&
+      isString(data.mode) &&
+      Array.isArray(questions) &&
+      isNumber(data.currentIndex) &&
+      isRecord(answers) &&
+      (startTime instanceof Date || isString(startTime) || isNumber(startTime)) &&
+      ("completed" in data ? isBoolean(data.completed) : true)
     );
   },
 
   settings: (data: unknown): data is Record<string, unknown> => {
+    if (!isRecord(data)) {
+      return false;
+    }
+
     return (
-      data !== null &&
-      typeof data === "object" &&
-      typeof (data as Record<string, unknown>).theme === "string" &&
-      typeof (data as Record<string, unknown>).language === "string" &&
-      typeof (data as Record<string, unknown>).difficulty === "string"
+      isString(data.theme) &&
+      isString(data.language) &&
+      isString(data.difficulty)
     );
   },
 
   progress: (data: unknown): data is Record<string, unknown> => {
+    if (!isRecord(data)) {
+      return false;
+    }
+
     return (
-      data !== null &&
-      typeof data === "object" &&
-      typeof (data as Record<string, unknown>).totalQuestions === "number" &&
-      typeof (data as Record<string, unknown>).correctAnswers === "number" &&
-      typeof (data as Record<string, unknown>).averageScore === "number" &&
-      typeof (data as Record<string, unknown>).domainScores === "object"
+      isNumber(data.totalQuestions) &&
+      isNumber(data.correctAnswers) &&
+      isNumber(data.averageScore) &&
+      isRecord(data.domainScores)
     );
   },
 
   searchHistory: (data: unknown): data is string[] => {
-    return Array.isArray(data) && data.every((item) => typeof item === "string");
+    return isStringArray(data);
   },
 };
 
@@ -373,30 +429,95 @@ export const validators = {
  */
 export const sanitizers = {
   examSession: (data: unknown): Record<string, unknown> => {
-    const obj = data as Record<string, unknown>;
+    const record = isRecord(data) ? data : {};
+    const {
+      id: rawId,
+      mode: rawMode,
+      questions: rawQuestions,
+      currentIndex: rawCurrentIndex,
+      answers: rawAnswers,
+      startTime: rawStartTime,
+      score: rawScore,
+      completed: rawCompleted,
+    } = record as {
+      id?: unknown;
+      mode?: unknown;
+      questions?: unknown;
+      currentIndex?: unknown;
+      answers?: unknown;
+      startTime?: unknown;
+      score?: unknown;
+      completed?: unknown;
+    };
+
+    const id = isString(rawId) ? rawId : `session-${Date.now()}`;
+    const mode = isString(rawMode) ? rawMode : "practice";
+    const questions = Array.isArray(rawQuestions) ? rawQuestions : [];
+    const currentIndex = isNumber(rawCurrentIndex) ? Math.max(0, rawCurrentIndex) : 0;
+    const answers = isRecord(rawAnswers) ? rawAnswers : {};
+
+    const startValue = rawStartTime;
+    let startTime: Date;
+    if (startValue instanceof Date && !Number.isNaN(startValue.getTime())) {
+      startTime = startValue;
+    } else if (isString(startValue) || isNumber(startValue)) {
+      const parsedDate = new Date(startValue);
+      startTime = Number.isNaN(parsedDate.getTime()) ? new Date() : parsedDate;
+    } else {
+      startTime = new Date();
+    }
+
+    const scoreValue = isNumber(rawScore) ? rawScore : 0;
+    const normalizedScore = clampNumber(scoreValue, 0, 100);
+
     return {
-      id: (typeof obj?.id === "string" ? obj.id : null) ?? `session-${Date.now()}`,
-      mode: (typeof obj?.mode === "string" ? obj.mode : null) ?? "practice",
-      questions: Array.isArray(obj?.questions) ? obj.questions : [],
-      currentIndex: Math.max(0, (typeof obj?.currentIndex === "number" ? obj.currentIndex : null) ?? 0),
-      answers: (typeof obj?.answers === "object" && obj?.answers !== null ? obj.answers : null) ?? {},
-      startTime: obj?.startTime ? new Date(obj.startTime as string | number | Date) : new Date(),
-      completed: Boolean(obj?.completed),
-      score: Math.max(0, Math.min(100, (typeof obj?.score === "number" ? obj.score : null) ?? 0)),
+      id,
+      mode,
+      questions,
+      currentIndex,
+      answers,
+      startTime,
+      completed: rawCompleted === true,
+      score: normalizedScore,
     };
   },
 
   settings: (data: unknown): Record<string, unknown> => {
-    const obj = data as Record<string, unknown>;
-    const theme = typeof obj?.theme === "string" ? obj.theme : "light";
-    const difficulty = typeof obj?.difficulty === "string" ? obj.difficulty : "medium";
-    
+    const record = isRecord(data) ? data : {};
+    const {
+      theme: rawTheme,
+      difficulty: rawDifficulty,
+      language: rawLanguage,
+      notifications: rawNotifications,
+      autoSave: rawAutoSave,
+    } = record as {
+      theme?: unknown;
+      difficulty?: unknown;
+      language?: unknown;
+      notifications?: unknown;
+      autoSave?: unknown;
+    };
+
+    const allowedThemes = new Set(["light", "dark"]);
+    const theme = isString(rawTheme) && allowedThemes.has(rawTheme)
+      ? rawTheme
+      : "light";
+
+    const allowedDifficulty = new Set(["easy", "medium", "hard"]);
+    const difficulty = isString(rawDifficulty) && allowedDifficulty.has(rawDifficulty)
+      ? rawDifficulty
+      : "medium";
+
+    const language = isString(rawLanguage) ? rawLanguage : "en";
+
     return {
-      theme: ["light", "dark"].includes(theme as string) ? theme : "light",
-      language: typeof obj?.language === "string" ? obj.language : "en",
-      difficulty: ["easy", "medium", "hard"].includes(difficulty as string) ? difficulty : "medium",
-      notifications: Boolean(obj?.notifications),
-      autoSave: Boolean(obj?.autoSave),
+      theme,
+      language,
+      difficulty,
+      notifications: isBoolean(rawNotifications)
+        ? rawNotifications
+        : Boolean(rawNotifications),
+      autoSave: isBoolean(rawAutoSave) ? rawAutoSave : Boolean(rawAutoSave),
     };
   },
 };

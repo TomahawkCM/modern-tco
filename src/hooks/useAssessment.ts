@@ -175,14 +175,14 @@ export function useAssessment(): UseAssessmentReturn {
         userId: (currentSession.userId ?? "") as any,
         moduleId: currentSession.moduleId as any,
         assessmentId: currentSession.assessmentId as any,
-        score: (result as any).overallScore as any,
-        passed: (result as any).passed as any,
-        completedAt: (result as any).completedAt as any,
-        timeSpent: (result as any).timeSpent ?? (result as any).totalTime ?? 0,
-        correctAnswers: (result as any).correctAnswers ?? 0,
-        incorrectAnswers: (result as any).incorrectAnswers ?? 0,
-        totalQuestions: (result as any).totalQuestions ?? 0,
-        domainBreakdown: (result as any).domainBreakdown,
+        score: (result).overallScore,
+        passed: (result).passed,
+        completedAt: (result).completedAt,
+        timeSpent: (result).timeSpent ?? (result).totalTime ?? 0,
+        correctAnswers: (result).correctAnswers ?? 0,
+        incorrectAnswers: (result).incorrectAnswers ?? 0,
+        totalQuestions: (result).totalQuestions ?? 0,
+        domainBreakdown: (result).domainBreakdown,
       } as any);
 
       // Track assessment completion
@@ -197,7 +197,7 @@ export function useAssessment(): UseAssessmentReturn {
           timeSpent: result.timeSpent,
           correctAnswers: result.correctAnswers,
           totalQuestions: result.totalQuestions,
-          domainBreakdown: (result as any).domainBreakdown,
+          domainBreakdown: (result).domainBreakdown,
         },
         timestamp: new Date(),
       });

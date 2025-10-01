@@ -4,11 +4,11 @@ import { motion } from "motion/react";
 import React from "react";
 
 export const Meteors = ({ number, className }: { number?: number; className?: string }) => {
-  const meteors = new Array(number || 20).fill(true);
+  const meteors = new Array(number ?? 20).fill(true);
   return (
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
       {meteors.map((el, idx) => {
-        const meteorCount = number || 20;
+        const meteorCount = number ?? 20;
         // Calculate position to evenly distribute meteors across container width
         const position = idx * (800 / meteorCount) - 400; // Spread across 800px range, centered
 
