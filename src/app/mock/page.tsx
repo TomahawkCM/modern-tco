@@ -68,7 +68,7 @@ function MockExamContent() {
   // Initialize variant from URL
   useEffect(() => {
     const v = (search?.get('variant') || '').toUpperCase();
-    if (v === 'A' || v === 'B' || v === 'C') setVariant(v as 'A'|'B'|'C');
+    if (v === 'A' || v === 'B' || v === 'C') setVariant(v);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const reportedCompletion = useRef(false);
@@ -83,7 +83,7 @@ function MockExamContent() {
   useEffect(() => {
     if (currentQuestion && state.currentSession) {
       const existingAnswer = state.currentSession.answers[currentQuestion.id];
-      setSelectedAnswer(existingAnswer || "");
+      setSelectedAnswer(existingAnswer ?? "");
     }
   }, [currentQuestion, state.currentSession]);
 
@@ -126,14 +126,14 @@ function MockExamContent() {
       // Fetch more than needed then apply seeded shuffle for deterministic variants
       const pool = await questionService.getWeightedRandomQuestions(130);
       const qs = seededShuffle(pool, `${variant}-TCO`).slice(0, 105);
-      analytics.capture("mock_exam_start", { count: qs.length, variant });
+      void analytics.capture("mock_exam_start", { count: qs.length, variant });
       await startExam(ExamMode.MOCK, qs);
     } catch (e) {
       console.warn("Falling back to static weighted questions", e);
       const { getWeightedRandomQuestions } = await import("@/lib/questionLoader");
       const pool = getWeightedRandomQuestions(130);
       const qs = seededShuffle(pool, `${variant}-TCO`).slice(0, 105);
-      analytics.capture("mock_exam_start", { count: qs.length, variant, fallback: true });
+      void analytics.capture("mock_exam_start", { count: qs.length, variant, fallback: true });
       await startExam(ExamMode.MOCK, qs);
     }
     setTimeRemaining(105 * 60);
@@ -181,7 +181,7 @@ function MockExamContent() {
         ? questions.filter((q: any) => answers[q.id] === q.correctAnswerId).length
         : 0;
       const totalCount = Array.isArray(questions) ? questions.length : 0;
-      analytics.capture("mock_exam_complete", { score, correctCount, totalCount });
+      void analytics.capture("mock_exam_complete", { score, correctCount, totalCount });
       reportedCompletion.current = true;
       const timeSpent = state.currentSession.endTime && state.currentSession.startTime
         ? Math.max(0, Math.floor((state.currentSession.endTime.getTime() - state.currentSession.startTime.getTime()) / 1000))
@@ -345,7 +345,11 @@ function MockExamContent() {
                   <div className="mb-4 text-gray-300">
                     {correctCount} out of {totalCount} correct
                   </div>
-                  <Progress value={score} className="h-4" />
+                  <Progress
+                    value={score}
+                    className="h-4"
+                    aria-label={`Mock exam score: ${score}%`}
+                  />
                 </div>
 
                 {/* Time section */}
@@ -448,7 +452,11 @@ function MockExamContent() {
         </div>
 
         {/* Progress bar */}
-        <Progress value={progress.percentage} className="h-3" />
+        <Progress
+          value={progress.percentage}
+          className="h-3"
+          aria-label={`Exam progress: ${progress.percentage}%`}
+        />
 
         {/* Question card */}
         {currentQuestion && (

@@ -42,7 +42,7 @@ const QuestionCard = dynamic(
 
 function PracticeContent() {
   const router = useRouter();
-  const TEST_HOOKS = (process.env.NEXT_PUBLIC_TEST_HOOKS || "").toString() === '1';
+  const TEST_HOOKS = (process.env.NEXT_PUBLIC_TEST_HOOKS ?? "").toString() === '1';
   const search = useSearchParams();
   const {
     state,
@@ -75,7 +75,7 @@ function PracticeContent() {
   useEffect(() => {
     if (currentQuestion && state.currentSession) {
       const existingAnswer = state.currentSession.answers[currentQuestion.id];
-      setSelectedAnswer(existingAnswer || "");
+      setSelectedAnswer(existingAnswer ?? "");
     }
   }, [currentQuestion, state.currentSession]);
 
@@ -88,7 +88,7 @@ function PracticeContent() {
       let qs;
       if (override?.domains && override.domains.length > 0) {
         // Multi-domain selection: allocate evenly and merge
-        const doms = override.domains as string[];
+        const doms = override.domains;
         const per = Math.max(1, Math.ceil(useCount / doms.length));
         const collected: any[] = [];
         for (const d of doms) {
@@ -104,7 +104,7 @@ function PracticeContent() {
           ? await questionService.getPracticeQuestions(useDomain as TCODomain, useCount)
           : await questionService.getRandomQuestions(useCount);
       }
-      analytics.capture("practice_start", { count: qs.length });
+      void analytics.capture("practice_start", { count: qs.length });
       await startExam(ExamMode.PRACTICE, qs);
       if (override?.autofinish && TEST_HOOKS) {
         // test helper: allow e2e to fast finish practice flows
@@ -125,7 +125,7 @@ function PracticeContent() {
       } else {
         qs = getWeightedRandomQuestions(useCount);
       }
-      analytics.capture("practice_start", { count: qs.length, fallback: true });
+      void analytics.capture("practice_start", { count: qs.length, fallback: true });
       await startExam(ExamMode.PRACTICE, qs);
       if (override?.autofinish && TEST_HOOKS) {
         setTimeout(() => finishExam(), 50);
@@ -188,13 +188,13 @@ function PracticeContent() {
     if (quick === '1' && !quickStarted.current && !state.currentSession) {
       quickStarted.current = true;
       const d = domainParam ?? selectedDomain;
-      const c = countParam || questionCount;
+      const c = countParam ?? questionCount;
       // Defer to allow state updates to flush
       setTimeout(() => {
         if (domainsParam) {
-          handleStartPractice({ domains: domainsParam, count: c, autofinish: TEST_HOOKS && autofinishParam === '1' });
+          void handleStartPractice({ domains: domainsParam, count: c, autofinish: TEST_HOOKS && autofinishParam === '1' });
         } else {
-          handleStartPractice({ domain: d, count: c, autofinish: TEST_HOOKS && autofinishParam === '1' });
+          void handleStartPractice({ domain: d, count: c, autofinish: TEST_HOOKS && autofinishParam === '1' });
         }
       }, 0);
     }
@@ -215,7 +215,7 @@ function PracticeContent() {
       for (let i = 0; i < n; i++) {
         const q = sess.questions[i];
         // Pick a wrong answer id (first choice not equal to correct)
-        const wrong = q.choices.find((c) => c.id !== q.correctAnswerId)?.id || 'a';
+        const wrong = q.choices.find((c) => c.id !== q.correctAnswerId)?.id ?? 'a';
         answerQuestion(q.id, wrong);
       }
     } catch {}
@@ -254,7 +254,7 @@ function PracticeContent() {
         ? questions.filter((q: any) => answers[q.id] === q.correctAnswerId).length
         : 0;
       const totalCount = Array.isArray(questions) ? questions.length : 0;
-      analytics.capture("practice_complete", { score, correctCount, totalCount });
+      void analytics.capture("practice_complete", { score, correctCount, totalCount });
       reportedCompletion.current = true;
       // Update progress analytics
       const timeSpent = state.currentSession.endTime && state.currentSession.startTime
@@ -414,7 +414,11 @@ function PracticeContent() {
               </div>
 
               {/* Progress bar */}
-              <Progress value={score} className="h-4" />
+              <Progress
+                value={score}
+                className="h-4"
+                aria-label={`Practice score: ${score}%`}
+              />
 
               {/* Performance message */}
               <Alert
@@ -490,7 +494,11 @@ function PracticeContent() {
         </div>
 
         {/* Progress bar */}
-        <Progress value={progress.percentage} className="h-3" />
+        <Progress
+          value={progress.percentage}
+          className="h-3"
+          aria-label={`Session progress: ${progress.percentage}%`}
+        />
 
         {/* Question card */}
         {currentQuestion && (

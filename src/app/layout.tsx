@@ -9,6 +9,9 @@ import { SkipLinks } from "@/components/accessibility/skip-links";
 import { AnalyticsClient } from "@/app/analytics-client";
 import { MonitoringClient } from "@/app/monitoring-client";
 
+// Force dynamic rendering to prevent static generation issues with React hooks
+export const dynamic = 'force-dynamic';
+
 export const metadata: Metadata = {
   title: "Tanium Certified Operator Exam System",
   description: "Master the Tanium Certified Operator certification with interactive practice and comprehensive study modules",
@@ -24,7 +27,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning data-large-text="" data-high-contrast="">
       <head>
         {/* Preconnect to external domains for performance */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -35,7 +38,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="dns-prefetch" href="https://www.youtube.com" />
         <link rel="preconnect" href="https://app.posthog.com" />
         <link rel="dns-prefetch" href="https://app.posthog.com" />
-        
+
         {/* Preload critical font - include basePath in production */}
         <link
           rel="preload"
@@ -44,14 +47,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           type="font/woff2"
           crossOrigin="anonymous"
         />
-      </head>
-      <body className="font-sans antialiased">
-        {/* Initialize large-text mode early to avoid FOUC */}
+
+        {/* Initialize accessibility settings BEFORE React hydration to prevent mismatch */}
         <script
           dangerouslySetInnerHTML={{
             __html: `(() => { try { var v = localStorage.getItem('tco-large-text'); if (v === '1') { document.documentElement.style.fontSize='18px'; document.documentElement.setAttribute('data-large-text','1'); } var hc = localStorage.getItem('tco-high-contrast'); if (hc === '1') { document.documentElement.setAttribute('data-high-contrast','1'); } } catch (e) {} })();`,
           }}
         />
+      </head>
+      <body className="font-sans antialiased" suppressHydrationWarning>
         <div className="min-h-screen bg-gradient-to-br from-black via-black to-black">
           <Providers>
             <MainLayout asGlobal>

@@ -188,8 +188,8 @@ export default function StudyPage() {
   const [user, setUser] = useState<any>(null);
 
   useEffect(() => {
-    loadModules();
-    checkUser();
+    void loadModules();
+    void checkUser();
   }, []);
 
   const checkUser = async () => {
@@ -217,9 +217,9 @@ export default function StudyPage() {
 
       // Transform database modules to UI format
       const transformedDomains: StudyDomain[] = modulesWithSections.map((module, index) => {
-        const progress = module.progress || 0;
-        const completedSections = module.completedSections || 0;
-        const totalSections = module.totalSections || 1;
+        const progress = module.progress ?? 0;
+        const completedSections = module.completedSections ?? 0;
+        const totalSections = module.totalSections ?? 1;
 
         // Determine status based on progress
         let status: StudyDomain["status"] = "available";
@@ -243,7 +243,7 @@ export default function StudyPage() {
         return {
           id: module.id,
           title: module.title,
-          description: module.description || "",
+          description: module.description ?? "",
           icon: DOMAIN_ICONS[module.domain] || "\ud83d\udcda",
           progress,
           totalSections,
@@ -454,7 +454,11 @@ export default function StudyPage() {
                 <div className="text-sm text-gray-300">Time Remaining</div>
               </div>
             </div>
-            <Progress value={overallProgress} className="mt-4 h-3" />
+            <Progress
+              value={overallProgress}
+              className="mt-4 h-3"
+              aria-label={`Overall study progress: ${overallProgress}%`}
+            />
           </CardContent>
         </Card>
 
@@ -535,7 +539,11 @@ export default function StudyPage() {
                     <span className="text-sm text-gray-300">Progress</span>
                     <span className="text-sm font-medium text-white">{domain.progress}%</span>
                   </div>
-                  <Progress value={domain.progress} className="h-2" />
+                  <Progress
+                    value={domain.progress}
+                    className="h-2"
+                    aria-label={`${domain.title} progress: ${domain.progress}%`}
+                  />
                   <div className="flex justify-between text-xs text-gray-400">
                     <span>
                       {domain.completedSections}/{domain.totalSections} sections

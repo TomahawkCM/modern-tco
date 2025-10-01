@@ -91,6 +91,7 @@ export function AppHeader({ onMenuClick, currentScore = 0, studyStreak = 0 }: Ap
             size="icon"
             className="mr-2 text-white hover:bg-white/10 md:hidden"
             onClick={onMenuClick}
+            aria-label="Open navigation menu"
           >
             <Menu className="h-5 w-5" />
           </Button>
@@ -157,6 +158,7 @@ export function AppHeader({ onMenuClick, currentScore = 0, studyStreak = 0 }: Ap
                 size="icon"
                 className="text-white hover:bg-white/10"
                 onClick={() => router.push("/settings")}
+                aria-label="Open settings"
               >
                 <Settings className="h-5 w-5" />
               </Button>

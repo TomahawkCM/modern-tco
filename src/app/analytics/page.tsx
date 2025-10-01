@@ -5,7 +5,6 @@ import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { ScoreChart } from "@/components/analytics/ScoreChart";
 import { DomainRadarChart } from "@/components/analytics/DomainRadarChart";
 import { StudyRecommendations } from "@/components/analytics/StudyRecommendations";
 import { DataExport } from "@/components/analytics/DataExport";
@@ -19,14 +18,11 @@ import { useAuth } from "@/contexts/AuthContext";
 import { usePersistentState } from "@/lib/usePersistentState";
 import {
   BarChart3,
-  TrendingUp,
   Trophy,
   Clock,
   Target,
   Calendar,
   BookOpen,
-  CheckCircle,
-  XCircle,
   Zap,
   Brain,
   Shield,
@@ -78,11 +74,11 @@ export default function AnalyticsPage() {
       achievements: state.progress.achievements,
       strongestDomain:
         domainStats.length > 0
-          ? domainStats.reduce((max, domain) => (domain.score > (max?.score || 0) ? domain : max), domainStats[0])?.domain || "None"
+          ? domainStats.reduce((max, domain) => (domain.score > (max?.score ?? 0) ? domain : max), domainStats[0])?.domain ?? "None"
           : "None",
       weakestDomain:
         domainStats.length > 0
-          ? domainStats.reduce((min, domain) => (domain.score < (min?.score || 100) ? domain : min), domainStats[0])?.domain || "None"
+          ? domainStats.reduce((min, domain) => (domain.score < (min?.score ?? 100) ? domain : min), domainStats[0])?.domain ?? "None"
           : "None",
     };
   }, [overallStats, domainStats, state.progress.sessionCount, state.progress.achievements]);
@@ -134,55 +130,55 @@ export default function AnalyticsPage() {
     const find = (dom: TCODomain) => domainStats.find((d) => d.domain === dom);
     return {
       [TCODomain.ASKING_QUESTIONS]: {
-        score: find(TCODomain.ASKING_QUESTIONS)?.score || 0,
-        questionsAnswered: find(TCODomain.ASKING_QUESTIONS)?.questionsAnswered || 0,
-        correctAnswers: find(TCODomain.ASKING_QUESTIONS)?.correctAnswers || 0,
-        timeSpent: find(TCODomain.ASKING_QUESTIONS)?.timeSpent || 0,
+        score: find(TCODomain.ASKING_QUESTIONS)?.score ?? 0,
+        questionsAnswered: find(TCODomain.ASKING_QUESTIONS)?.questionsAnswered ?? 0,
+        correctAnswers: find(TCODomain.ASKING_QUESTIONS)?.correctAnswers ?? 0,
+        timeSpent: find(TCODomain.ASKING_QUESTIONS)?.timeSpent ?? 0,
       },
       [TCODomain.REFINING_QUESTIONS]: {
-        score: (find(TCODomain.REFINING_TARGETING) || find(TCODomain.REFINING_QUESTIONS))?.score || 0,
+        score: (find(TCODomain.REFINING_TARGETING) || find(TCODomain.REFINING_QUESTIONS))?.score ?? 0,
         questionsAnswered:
-          (find(TCODomain.REFINING_TARGETING) || find(TCODomain.REFINING_QUESTIONS))?.questionsAnswered || 0,
+          (find(TCODomain.REFINING_TARGETING) || find(TCODomain.REFINING_QUESTIONS))?.questionsAnswered ?? 0,
         correctAnswers:
-          (find(TCODomain.REFINING_TARGETING) || find(TCODomain.REFINING_QUESTIONS))?.correctAnswers || 0,
+          (find(TCODomain.REFINING_TARGETING) || find(TCODomain.REFINING_QUESTIONS))?.correctAnswers ?? 0,
         timeSpent:
-          (find(TCODomain.REFINING_TARGETING) || find(TCODomain.REFINING_QUESTIONS))?.timeSpent || 0,
+          (find(TCODomain.REFINING_TARGETING) || find(TCODomain.REFINING_QUESTIONS))?.timeSpent ?? 0,
       },
       [TCODomain.TAKING_ACTION]: {
-        score: find(TCODomain.TAKING_ACTION)?.score || 0,
-        questionsAnswered: find(TCODomain.TAKING_ACTION)?.questionsAnswered || 0,
-        correctAnswers: find(TCODomain.TAKING_ACTION)?.correctAnswers || 0,
-        timeSpent: find(TCODomain.TAKING_ACTION)?.timeSpent || 0,
+        score: find(TCODomain.TAKING_ACTION)?.score ?? 0,
+        questionsAnswered: find(TCODomain.TAKING_ACTION)?.questionsAnswered ?? 0,
+        correctAnswers: find(TCODomain.TAKING_ACTION)?.correctAnswers ?? 0,
+        timeSpent: find(TCODomain.TAKING_ACTION)?.timeSpent ?? 0,
       },
       [TCODomain.NAVIGATION_MODULES]: {
-        score: find(TCODomain.NAVIGATION_MODULES)?.score || 0,
-        questionsAnswered: find(TCODomain.NAVIGATION_MODULES)?.questionsAnswered || 0,
-        correctAnswers: find(TCODomain.NAVIGATION_MODULES)?.correctAnswers || 0,
-        timeSpent: find(TCODomain.NAVIGATION_MODULES)?.timeSpent || 0,
+        score: find(TCODomain.NAVIGATION_MODULES)?.score ?? 0,
+        questionsAnswered: find(TCODomain.NAVIGATION_MODULES)?.questionsAnswered ?? 0,
+        correctAnswers: find(TCODomain.NAVIGATION_MODULES)?.correctAnswers ?? 0,
+        timeSpent: find(TCODomain.NAVIGATION_MODULES)?.timeSpent ?? 0,
       },
       [TCODomain.REPORTING_EXPORT]: {
-        score: find(TCODomain.REPORTING_EXPORT)?.score || 0,
-        questionsAnswered: find(TCODomain.REPORTING_EXPORT)?.questionsAnswered || 0,
-        correctAnswers: find(TCODomain.REPORTING_EXPORT)?.correctAnswers || 0,
-        timeSpent: find(TCODomain.REPORTING_EXPORT)?.timeSpent || 0,
+        score: find(TCODomain.REPORTING_EXPORT)?.score ?? 0,
+        questionsAnswered: find(TCODomain.REPORTING_EXPORT)?.questionsAnswered ?? 0,
+        correctAnswers: find(TCODomain.REPORTING_EXPORT)?.correctAnswers ?? 0,
+        timeSpent: find(TCODomain.REPORTING_EXPORT)?.timeSpent ?? 0,
       },
       [TCODomain.SECURITY]: {
-        score: find(TCODomain.SECURITY)?.score || 0,
-        questionsAnswered: find(TCODomain.SECURITY)?.questionsAnswered || 0,
-        correctAnswers: find(TCODomain.SECURITY)?.correctAnswers || 0,
-        timeSpent: find(TCODomain.SECURITY)?.timeSpent || 0,
+        score: find(TCODomain.SECURITY)?.score ?? 0,
+        questionsAnswered: find(TCODomain.SECURITY)?.questionsAnswered ?? 0,
+        correctAnswers: find(TCODomain.SECURITY)?.correctAnswers ?? 0,
+        timeSpent: find(TCODomain.SECURITY)?.timeSpent ?? 0,
       },
       [TCODomain.FUNDAMENTALS]: {
-        score: find(TCODomain.FUNDAMENTALS)?.score || 0,
-        questionsAnswered: find(TCODomain.FUNDAMENTALS)?.questionsAnswered || 0,
-        correctAnswers: find(TCODomain.FUNDAMENTALS)?.correctAnswers || 0,
-        timeSpent: find(TCODomain.FUNDAMENTALS)?.timeSpent || 0,
+        score: find(TCODomain.FUNDAMENTALS)?.score ?? 0,
+        questionsAnswered: find(TCODomain.FUNDAMENTALS)?.questionsAnswered ?? 0,
+        correctAnswers: find(TCODomain.FUNDAMENTALS)?.correctAnswers ?? 0,
+        timeSpent: find(TCODomain.FUNDAMENTALS)?.timeSpent ?? 0,
       },
       [TCODomain.TROUBLESHOOTING]: {
-        score: find(TCODomain.TROUBLESHOOTING)?.score || 0,
-        questionsAnswered: find(TCODomain.TROUBLESHOOTING)?.questionsAnswered || 0,
-        correctAnswers: find(TCODomain.TROUBLESHOOTING)?.correctAnswers || 0,
-        timeSpent: find(TCODomain.TROUBLESHOOTING)?.timeSpent || 0,
+        score: find(TCODomain.TROUBLESHOOTING)?.score ?? 0,
+        questionsAnswered: find(TCODomain.TROUBLESHOOTING)?.questionsAnswered ?? 0,
+        correctAnswers: find(TCODomain.TROUBLESHOOTING)?.correctAnswers ?? 0,
+        timeSpent: find(TCODomain.TROUBLESHOOTING)?.timeSpent ?? 0,
       },
     };
   }, [domainStats]);
@@ -203,7 +199,8 @@ export default function AnalyticsPage() {
     [state.progress.sessionCount, overallStats.averageScore, overallStats.totalQuestions, overallStats.hoursStudied]
   );
 
-  const weeklyProgress = [
+  // Weekly progress data for future use
+  const _weeklyProgress = [
     { week: "Week 1", score: 65, questions: 42 },
     { week: "Week 2", score: 71, questions: 56 },
     { week: "Week 3", score: 76, questions: 68 },
@@ -354,7 +351,11 @@ export default function AnalyticsPage() {
                     </div>
                     <p className="text-sm text-gray-300">Average Score</p>
                   </div>
-                  <Progress value={overallStats.averageScore} className="h-4" />
+                  <Progress
+                    value={overallStats.averageScore}
+                    className="h-4"
+                    aria-label={`Average score: ${overallStats.averageScore}%`}
+                  />
                   <div className="grid grid-cols-2 gap-4 text-sm">
                     <div className="text-center">
                       <div className="text-lg font-bold text-green-400">
@@ -522,7 +523,11 @@ export default function AnalyticsPage() {
                       </CardTitle>
                     </CardHeader>
                     <CardContent className="space-y-4">
-                      <Progress value={domain.score} className="h-3" />
+                      <Progress
+                        value={domain.score}
+                        className="h-3"
+                        aria-label={`${domain.domain} score: ${domain.score}%`}
+                      />
                       <div className="grid grid-cols-3 gap-4 text-sm">
                         <div className="text-center">
                           <div className="text-lg font-bold text-white">{domain.questions}</div>
@@ -574,125 +579,119 @@ export default function AnalyticsPage() {
                 domainScores={{
                   [TCODomain.ASKING_QUESTIONS]: {
                     score:
-                      domainStats.find((d) => d.domain === TCODomain.ASKING_QUESTIONS)?.score || 0,
+                      domainStats.find((d) => d.domain === TCODomain.ASKING_QUESTIONS)?.score ?? 0,
                     questionsAnswered:
                       domainStats.find((d) => d.domain === TCODomain.ASKING_QUESTIONS)
-                        ?.questionsAnswered || 0,
+                        ?.questionsAnswered ?? 0,
                     correctAnswers:
                       domainStats.find((d) => d.domain === TCODomain.ASKING_QUESTIONS)
-                        ?.correctAnswers || 0,
+                        ?.correctAnswers ?? 0,
                     timeSpent:
-                      domainStats.find((d) => d.domain === TCODomain.ASKING_QUESTIONS)?.timeSpent ||
-                      0,
+                      domainStats.find((d) => d.domain === TCODomain.ASKING_QUESTIONS)?.timeSpent ?? 0,
                   },
                   [TCODomain.REFINING_QUESTIONS]: {
                     score:
-                      domainStats.find((d) => d.domain === TCODomain.REFINING_QUESTIONS)?.score ||
-                      0,
+                      domainStats.find((d) => d.domain === TCODomain.REFINING_QUESTIONS)?.score ?? 0,
                     questionsAnswered:
                       domainStats.find((d) => d.domain === TCODomain.REFINING_QUESTIONS)
-                        ?.questionsAnswered || 0,
+                        ?.questionsAnswered ?? 0,
                     correctAnswers:
                       domainStats.find((d) => d.domain === TCODomain.REFINING_QUESTIONS)
-                        ?.correctAnswers || 0,
+                        ?.correctAnswers ?? 0,
                     timeSpent:
                       domainStats.find((d) => d.domain === TCODomain.REFINING_QUESTIONS)
-                        ?.timeSpent || 0,
+                        ?.timeSpent ?? 0,
                   },
                   [TCODomain.REFINING_TARGETING]: {
                     score:
                       (
                         domainStats.find((d) => d.domain === TCODomain.REFINING_TARGETING) ||
                         domainStats.find((d) => d.domain === TCODomain.REFINING_QUESTIONS)
-                      )?.score || 0,
+                      )?.score ?? 0,
                     questionsAnswered:
                       (
                         domainStats.find((d) => d.domain === TCODomain.REFINING_TARGETING) ||
                         domainStats.find((d) => d.domain === TCODomain.REFINING_QUESTIONS)
-                      )?.questionsAnswered || 0,
+                      )?.questionsAnswered ?? 0,
                     correctAnswers:
                       (
                         domainStats.find((d) => d.domain === TCODomain.REFINING_TARGETING) ||
                         domainStats.find((d) => d.domain === TCODomain.REFINING_QUESTIONS)
-                      )?.correctAnswers || 0,
+                      )?.correctAnswers ?? 0,
                     timeSpent:
                       (
                         domainStats.find((d) => d.domain === TCODomain.REFINING_TARGETING) ||
                         domainStats.find((d) => d.domain === TCODomain.REFINING_QUESTIONS)
-                      )?.timeSpent || 0,
+                      )?.timeSpent ?? 0,
                   },
                   [TCODomain.TAKING_ACTION]: {
                     score:
-                      domainStats.find((d) => d.domain === TCODomain.TAKING_ACTION)?.score || 0,
+                      domainStats.find((d) => d.domain === TCODomain.TAKING_ACTION)?.score ?? 0,
                     questionsAnswered:
                       domainStats.find((d) => d.domain === TCODomain.TAKING_ACTION)
-                        ?.questionsAnswered || 0,
+                        ?.questionsAnswered ?? 0,
                     correctAnswers:
                       domainStats.find((d) => d.domain === TCODomain.TAKING_ACTION)
-                        ?.correctAnswers || 0,
+                        ?.correctAnswers ?? 0,
                     timeSpent:
-                      domainStats.find((d) => d.domain === TCODomain.TAKING_ACTION)?.timeSpent || 0,
+                      domainStats.find((d) => d.domain === TCODomain.TAKING_ACTION)?.timeSpent ?? 0,
                   },
                   [TCODomain.NAVIGATION_MODULES]: {
                     score:
-                      domainStats.find((d) => d.domain === TCODomain.NAVIGATION_MODULES)?.score ||
-                      0,
+                      domainStats.find((d) => d.domain === TCODomain.NAVIGATION_MODULES)?.score ?? 0,
                     questionsAnswered:
                       domainStats.find((d) => d.domain === TCODomain.NAVIGATION_MODULES)
-                        ?.questionsAnswered || 0,
+                        ?.questionsAnswered ?? 0,
                     correctAnswers:
                       domainStats.find((d) => d.domain === TCODomain.NAVIGATION_MODULES)
-                        ?.correctAnswers || 0,
+                        ?.correctAnswers ?? 0,
                     timeSpent:
                       domainStats.find((d) => d.domain === TCODomain.NAVIGATION_MODULES)
-                        ?.timeSpent || 0,
+                        ?.timeSpent ?? 0,
                   },
                   [TCODomain.REPORTING_EXPORT]: {
                     score:
-                      domainStats.find((d) => d.domain === TCODomain.REPORTING_EXPORT)?.score || 0,
+                      domainStats.find((d) => d.domain === TCODomain.REPORTING_EXPORT)?.score ?? 0,
                     questionsAnswered:
                       domainStats.find((d) => d.domain === TCODomain.REPORTING_EXPORT)
-                        ?.questionsAnswered || 0,
+                        ?.questionsAnswered ?? 0,
                     correctAnswers:
                       domainStats.find((d) => d.domain === TCODomain.REPORTING_EXPORT)
-                        ?.correctAnswers || 0,
+                        ?.correctAnswers ?? 0,
                     timeSpent:
-                      domainStats.find((d) => d.domain === TCODomain.REPORTING_EXPORT)?.timeSpent ||
-                      0,
+                      domainStats.find((d) => d.domain === TCODomain.REPORTING_EXPORT)?.timeSpent ?? 0,
                   },
                   [TCODomain.SECURITY]: {
-                    score: domainStats.find((d) => d.domain === TCODomain.SECURITY)?.score || 0,
+                    score: domainStats.find((d) => d.domain === TCODomain.SECURITY)?.score ?? 0,
                     questionsAnswered:
-                      domainStats.find((d) => d.domain === TCODomain.SECURITY)?.questionsAnswered ||
-                      0,
+                      domainStats.find((d) => d.domain === TCODomain.SECURITY)?.questionsAnswered ?? 0,
                     correctAnswers:
-                      domainStats.find((d) => d.domain === TCODomain.SECURITY)?.correctAnswers || 0,
+                      domainStats.find((d) => d.domain === TCODomain.SECURITY)?.correctAnswers ?? 0,
                     timeSpent:
-                      domainStats.find((d) => d.domain === TCODomain.SECURITY)?.timeSpent || 0,
+                      domainStats.find((d) => d.domain === TCODomain.SECURITY)?.timeSpent ?? 0,
                   },
                   [TCODomain.FUNDAMENTALS]: {
-                    score: domainStats.find((d) => d.domain === TCODomain.FUNDAMENTALS)?.score || 0,
+                    score: domainStats.find((d) => d.domain === TCODomain.FUNDAMENTALS)?.score ?? 0,
                     questionsAnswered:
                       domainStats.find((d) => d.domain === TCODomain.FUNDAMENTALS)
-                        ?.questionsAnswered || 0,
+                        ?.questionsAnswered ?? 0,
                     correctAnswers:
                       domainStats.find((d) => d.domain === TCODomain.FUNDAMENTALS)
-                        ?.correctAnswers || 0,
+                        ?.correctAnswers ?? 0,
                     timeSpent:
-                      domainStats.find((d) => d.domain === TCODomain.FUNDAMENTALS)?.timeSpent || 0,
+                      domainStats.find((d) => d.domain === TCODomain.FUNDAMENTALS)?.timeSpent ?? 0,
                   },
                   [TCODomain.TROUBLESHOOTING]: {
                     score:
-                      domainStats.find((d) => d.domain === TCODomain.TROUBLESHOOTING)?.score || 0,
+                      domainStats.find((d) => d.domain === TCODomain.TROUBLESHOOTING)?.score ?? 0,
                     questionsAnswered:
                       domainStats.find((d) => d.domain === TCODomain.TROUBLESHOOTING)
-                        ?.questionsAnswered || 0,
+                        ?.questionsAnswered ?? 0,
                     correctAnswers:
                       domainStats.find((d) => d.domain === TCODomain.TROUBLESHOOTING)
-                        ?.correctAnswers || 0,
+                        ?.correctAnswers ?? 0,
                     timeSpent:
-                      domainStats.find((d) => d.domain === TCODomain.TROUBLESHOOTING)?.timeSpent ||
-                      0,
+                      domainStats.find((d) => d.domain === TCODomain.TROUBLESHOOTING)?.timeSpent ?? 0,
                   },
                 }}
               />
