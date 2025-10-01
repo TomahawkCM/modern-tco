@@ -289,7 +289,9 @@ export function GameificationSection() {
                         </div>
                         <div className="min-w-0 flex-1">
                           <div className="mb-1 flex items-center gap-2">
-                            <h4 className="truncate font-medium text-white">{achievement.title}</h4>
+                            <div className="truncate font-medium text-white">
+                              {achievement.title}
+                            </div>
                             {achievement.unlocked && (
                               <CheckCircle2 className="h-4 w-4 flex-shrink-0 text-green-400" />
                             )}

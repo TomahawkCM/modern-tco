@@ -197,7 +197,7 @@ export function LearningPath() {
 
                   {/* Key Skills */}
                   <div className="space-y-2">
-                    <h4 className="text-sm font-medium text-slate-300">Key Skills</h4>
+                    <div className="text-sm font-medium text-slate-300">Key Skills</div>
                     <div className="flex flex-wrap gap-1">
                       {domain.skills.slice(0, 2).map((skill, skillIndex) => (
                         <Badge
