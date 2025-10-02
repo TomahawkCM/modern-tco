@@ -2,12 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Performance: Optimize font loading */
+/* Performance: Optimize font loading with optional display for faster initial render */
 @font-face {
   font-family: 'Inter';
   font-style: normal;
   font-weight: 100 900;
-  font-display: swap;
+  font-display: optional;
   src: url('/fonts/inter-var.woff2') format('woff2');
 }
 

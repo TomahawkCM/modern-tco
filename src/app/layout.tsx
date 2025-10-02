@@ -40,13 +40,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="preconnect" href="https://app.posthog.com" />
         <link rel="dns-prefetch" href="https://app.posthog.com" />
 
-        {/* Preload critical font */}
+        {/* Preload critical font with high priority to ensure immediate usage */}
         <link
           rel="preload"
           href="/fonts/inter-var.woff2"
           as="font"
           type="font/woff2"
           crossOrigin="anonymous"
+          fetchPriority="high"
         />
       </head>
       <body className="font-sans antialiased">

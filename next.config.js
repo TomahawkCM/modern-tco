@@ -105,10 +105,11 @@ const nextConfig = {
         "frame-ancestors 'self'",
         "object-src 'none'",
         "form-action 'self'",
-        // Next inline hydration is generally safe; we avoid 'unsafe-eval'
+        // Next inline hydration is generally safe
         // Add 'unsafe-inline' for Next.js hydration scripts - necessary for production
-        // Add YouTube for iframe API loading
-        "script-src 'self' 'unsafe-inline' https://browser.sentry-cdn.com https://www.youtube.com",
+        // Add 'unsafe-eval' for Sentry monitoring bundle (required for error tracking)
+        // Add YouTube for iframe API loading and PostHog for analytics
+        "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://browser.sentry-cdn.com https://www.youtube.com https://app.posthog.com https://us.i.posthog.com",
         "style-src 'self' 'unsafe-inline'",
         "img-src 'self' data: blob: https://i.ytimg.com https://img.youtube.com",
         [

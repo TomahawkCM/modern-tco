@@ -154,26 +154,24 @@ export function IncorrectAnswersProvider({ children }: { children: ReactNode }) 
 
   // Load incorrect answers from database or localStorage on mount
   useEffect(() => {
-    // Simple localStorage loading for now - debug server startup issues
     dispatch({ type: "SET_LOADING", payload: true });
-    
+
     try {
       const savedAnswers = localStorage.getItem("tco-incorrect-answers");
-      console.log("Loading from localStorage:", savedAnswers ? `${JSON.parse(savedAnswers).length} answers` : "no data");
-      
+
       if (savedAnswers) {
         const answers = JSON.parse(savedAnswers).map((answer: any) => ({
           ...answer,
           timestamp: new Date(answer.timestamp),
         }));
-        console.log("Parsed answers:", answers.length);
         dispatch({ type: "LOAD_ANSWERS", payload: answers });
       } else {
-        console.log("No saved answers found");
         dispatch({ type: "LOAD_ANSWERS", payload: [] });
       }
     } catch (error) {
-      console.error("Failed to load incorrect answers from localStorage:", error);
+      if (process.env.NODE_ENV === 'development') {
+        console.error("Failed to load incorrect answers from localStorage:", error);
+      }
       dispatch({ type: "LOAD_ANSWERS", payload: [] });
     } finally {
       dispatch({ type: "SET_LOADING", payload: false });
@@ -212,12 +210,14 @@ export function IncorrectAnswersProvider({ children }: { children: ReactNode }) 
           // const { error } = await db.supabase.from("incorrect_answers").insert({...});
           const error = null; // Placeholder
 
-          if (error) {
+          if (error && process.env.NODE_ENV === 'development') {
             console.error("Failed to save incorrect answer to database:", error);
             // Still keep in local state even if database save fails
           }
         } catch (error) {
-          console.error("Error saving incorrect answer:", error);
+          if (process.env.NODE_ENV === 'development') {
+            console.error("Error saving incorrect answer:", error);
+          }
         }
       } else {
         // Save to localStorage if not authenticated
@@ -238,11 +238,13 @@ export function IncorrectAnswersProvider({ children }: { children: ReactNode }) 
           // const { error } = await db.supabase.from("incorrect_answers").update({...});
           const error = null; // Placeholder
 
-          if (error) {
+          if (error && process.env.NODE_ENV === 'development') {
             console.error("Failed to update review status in database:", error);
           }
         } catch (error) {
-          console.error("Error updating review status:", error);
+          if (process.env.NODE_ENV === 'development') {
+            console.error("Error updating review status:", error);
+          }
         }
       }
     },
@@ -275,11 +277,13 @@ export function IncorrectAnswersProvider({ children }: { children: ReactNode }) 
         // const { error } = await db.supabase.from("incorrect_answers").delete().eq("user_id", user.id);
         const error = null; // Placeholder
 
-        if (error) {
+        if (error && process.env.NODE_ENV === 'development') {
           console.error("Failed to clear incorrect answers from database:", error);
         }
       } catch (error) {
-        console.error("Error clearing incorrect answers:", error);
+        if (process.env.NODE_ENV === 'development') {
+          console.error("Error clearing incorrect answers:", error);
+        }
       }
     } else {
       localStorage.removeItem("tco-incorrect-answers");
@@ -296,11 +300,13 @@ export function IncorrectAnswersProvider({ children }: { children: ReactNode }) 
           // const { error } = await db.supabase.from("incorrect_answers").delete().eq("id", answerId).eq("user_id", user.id);
           const error = null; // Placeholder
 
-          if (error) {
+          if (error && process.env.NODE_ENV === 'development') {
             console.error("Failed to remove incorrect answer from database:", error);
           }
         } catch (error) {
-          console.error("Error removing incorrect answer:", error);
+          if (process.env.NODE_ENV === 'development') {
+            console.error("Error removing incorrect answer:", error);
+          }
         }
       } else {
         // Update localStorage if not authenticated
