@@ -14,7 +14,10 @@
 ```bash
 ./deploy-to-vercel.sh
 ```
-📖 **See:** [HOW_TO_DEPLOY_TO_VERCEL.md](./HOW_TO_DEPLOY_TO_VERCEL.md) for complete deployment guide
+📖 **Deployment Guides:**
+- **Quick Start:** [VERCEL_QUICKSTART.md](./VERCEL_QUICKSTART.md) (1 min)
+- **Complete Guide:** [HOW_TO_DEPLOY_TO_VERCEL.md](./HOW_TO_DEPLOY_TO_VERCEL.md) (5 min)
+- **All Guides:** [DEPLOYMENT_GUIDES_INDEX.md](./DEPLOYMENT_GUIDES_INDEX.md)
 
 ### Run Locally
 ```bash
