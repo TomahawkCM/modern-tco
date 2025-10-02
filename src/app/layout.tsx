@@ -40,10 +40,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="preconnect" href="https://app.posthog.com" />
         <link rel="dns-prefetch" href="https://app.posthog.com" />
 
-        {/* Preload critical font - include basePath in production */}
+        {/* Preload critical font */}
         <link
           rel="preload"
-          href={`${process.env.NODE_ENV === 'production' ? '/tanium' : ''}/fonts/inter-var.woff2`}
+          href="/fonts/inter-var.woff2"
           as="font"
           type="font/woff2"
           crossOrigin="anonymous"

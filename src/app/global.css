@@ -3,14 +3,12 @@
 @tailwind utilities;
 
 /* Performance: Optimize font loading */
-/* Try production path first, fallback to development path */
 @font-face {
   font-family: 'Inter';
   font-style: normal;
   font-weight: 100 900;
   font-display: swap;
-  src: url('/tanium/fonts/inter-var.woff2') format('woff2'),
-       url('/fonts/inter-var.woff2') format('woff2');
+  src: url('/fonts/inter-var.woff2') format('woff2');
 }
 
 @layer base {
