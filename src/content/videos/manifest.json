@@ -1,11 +1,38 @@
 {
-  "version": 1,
-  "updatedAt": "2025-09-21T00:00:00.000Z",
+  "version": 2,
+  "updatedAt": "2025-10-02T23:30:00.000Z",
   "modules": [
-    { "slug": "asking-questions", "videos": [] },
-    { "slug": "refining-questions", "videos": [] },
-    { "slug": "taking-action", "videos": [] },
-    { "slug": "navigation-modules", "videos": [] },
-    { "slug": "reporting-export", "videos": [] }
+    {
+      "slug": "asking-questions",
+      "videos": [
+        { "id": "asking-1", "title": "Asking Questions - Part 1", "youtubeId": "aoLJYG3lV8o" },
+        { "id": "asking-2", "title": "Asking Questions - Part 2", "youtubeId": "A7g9Y_EKmHU" }
+      ]
+    },
+    {
+      "slug": "refining-questions",
+      "videos": [
+        { "id": "refining-1", "title": "Refining Questions & Targeting", "youtubeId": "22H_oUgPgZI" }
+      ]
+    },
+    {
+      "slug": "taking-action",
+      "videos": [
+        { "id": "taking-1", "title": "Taking Action - Packages & Actions", "youtubeId": "dP4dar1ftFg" }
+      ]
+    },
+    {
+      "slug": "navigation-modules",
+      "videos": [
+        { "id": "nav-1", "title": "Navigation - Part 1", "youtubeId": "n9rNuvAYSlM" },
+        { "id": "nav-2", "title": "Navigation - Part 2", "youtubeId": "wF36rD7dIT8" }
+      ]
+    },
+    {
+      "slug": "reporting-export",
+      "videos": [
+        { "id": "reporting-1", "title": "Reporting & Data Export", "youtubeId": "wF36rD7dIT8" }
+      ]
+    }
   ]
 }
