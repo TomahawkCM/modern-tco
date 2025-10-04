@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useIncorrectAnswers } from "@/contexts/IncorrectAnswersContext";
+import { useStudySession } from "@/contexts/StudySessionContext";
+import { StudyProgressPanel } from "@/components/study/StudyProgressPanel";
 import {
   BookOpen,
   FileText,
@@ -26,6 +28,7 @@ import {
   Monitor,
   BookMarked,
   StickyNote,
+  ChevronDown,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
@@ -50,8 +53,10 @@ interface NavItem {
 export function Sidebar({ isOpen = true, onClose, className }: SidebarProps) {
   const router = useRouter();
   const { getTotalIncorrectCount } = useIncorrectAnswers();
+  const studySession = useStudySession();
   const [expandedItems, setExpandedItems] = useState<string[]>(["study", "domains"]);
   const [activeItem, setActiveItem] = useState("dashboard");
+  const [isStudyProgressExpanded, setIsStudyProgressExpanded] = useState(true);
 
   // Get the actual incorrect answers count
   const incorrectAnswersCount = getTotalIncorrectCount();
@@ -290,6 +295,31 @@ export function Sidebar({ isOpen = true, onClose, className }: SidebarProps) {
         <div className="space-y-2">{navigationItems.map((item) => renderNavItem(item))}</div>
 
         <hr className="my-4 h-[1px] w-full shrink-0 bg-archon-border-bright/30" />
+
+        {/* Study Progress - Only show when actively studying a module */}
+        {studySession && (
+          <div className="mb-4">
+            <Collapsible open={isStudyProgressExpanded} onOpenChange={setIsStudyProgressExpanded}>
+              <CollapsibleTrigger asChild>
+                <button
+                  className={cn(
+                    "inline-flex h-9 w-full items-center justify-start gap-2 whitespace-nowrap rounded-md px-2 py-2 text-left text-sm font-medium transition-all duration-200",
+                    "text-archon-text-secondary hover:bg-archon-cyan-primary/10 hover:text-archon-cyan-bright"
+                  )}
+                >
+                  <span className="text-xs font-semibold text-archon-cyan-bright">CURRENT MODULE</span>
+                  <ChevronDown
+                    className={cn("ml-auto h-4 w-4 transition-transform", isStudyProgressExpanded && "rotate-180")}
+                  />
+                </button>
+              </CollapsibleTrigger>
+              <CollapsibleContent className="pt-2">
+                <StudyProgressPanel />
+              </CollapsibleContent>
+            </Collapsible>
+            <hr className="my-4 h-[1px] w-full shrink-0 bg-archon-border-bright/30" />
+          </div>
+        )}
 
         {/* Domain Progress Summary */}
         <div className="space-y-3">

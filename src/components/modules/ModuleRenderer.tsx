@@ -24,6 +24,7 @@ import { Difficulty } from "@/types/exam";
 import { useAuth } from "@/contexts/AuthContext";
 import { useDatabase } from "@/contexts/DatabaseContext";
 import { analytics } from "@/lib/analytics";
+import { StudySessionProvider } from "@/contexts/StudySessionContext";
 
 interface ModuleRendererProps {
   moduleData: ModuleData;
@@ -480,6 +481,35 @@ export default function ModuleRenderer({ moduleData }: ModuleRendererProps) {
     } catch {}
   };
 
+  const markAllComplete = async () => {
+    for (const s of sections) {
+      if (!s.completed) await markSection(s.id, 'completed');
+    }
+  };
+
+  const clearAllReview = async () => {
+    for (const s of sections) {
+      if (s.needsReview) await markSection(s.id, 'in_progress');
+    }
+  };
+
+  const resetProgress = async () => {
+    // Reset local section state
+    setSections((prev) => prev.map((s) => ({ ...s, completed: false, needsReview: false })));
+    // Persist to DB best-effort
+    if (user) {
+      try {
+        for (const s of sections) {
+          await markSection(s.id, 'not_started');
+        }
+      } catch {}
+    }
+    // Update local storage immediately
+    try {
+      localStorage.setItem(storageKey, JSON.stringify({ sections: sections.map((s) => ({ ...s, completed: false, needsReview: false })), lastViewed }));
+    } catch {}
+  };
+
   const domainForPractice = useMemo(() => {
     const map: Record<string, string> = {
       ASKING_QUESTIONS: "Asking Questions",
@@ -493,7 +523,21 @@ export default function ModuleRenderer({ moduleData }: ModuleRendererProps) {
   }, [frontmatter.domainEnum]);
 
   return (
-    <div className="container mx-auto max-w-4xl px-4 py-8">
+    <StudySessionProvider
+      moduleId={moduleId}
+      sections={sections}
+      activeId={activeId}
+      lastViewed={lastViewed}
+      activeTab={activeTab}
+      onMarkSection={markSection}
+      onSetLastViewed={setLastViewed}
+      onSetActiveId={setActiveId}
+      onSetActiveTab={setActiveTab}
+      onMarkAllComplete={markAllComplete}
+      onClearAllReview={clearAllReview}
+      onResetProgress={resetProgress}
+    >
+      <div className="container mx-auto px-4 py-8">
       {/* Module Header */}
       <div className="mb-8">
         <div className="mb-4 flex flex-wrap items-center gap-3">
@@ -639,9 +683,8 @@ export default function ModuleRenderer({ moduleData }: ModuleRendererProps) {
         )}
       </div>
 
-      {/* Content + Sidebar */}
-      <div className="relative flex gap-8">
-        <div ref={containerRef} className="prose prose-lg prose-invert max-w-none flex-1 overflow-y-auto max-h-[70vh] pr-2">
+      {/* Content */}
+      <div ref={containerRef} className="prose prose-lg prose-invert max-w-none">
           {/* Sticky current section header */}
           <div className="sticky top-0 z-10 -mx-2 mb-2 border-b border-cyan-900/40 bg-gray-950/60 px-2 backdrop-blur">
             <div className="flex h-10 items-center justify-between">
@@ -700,125 +743,6 @@ export default function ModuleRenderer({ moduleData }: ModuleRendererProps) {
           {/* Main content */}
           <ClientMDXContent content={content} />
         </div>
-        {/* Study progress sidebar */}
-        <aside className="sticky top-24 hidden w-80 shrink-0 lg:block">
-          <Card className="border-blue-500/30 bg-gradient-to-b from-gray-900/50 to-blue-900/30">
-            <CardHeader className="pb-3">
-              <CardTitle className="flex items-center gap-2 text-blue-200">
-                <Book className="h-5 w-5" /> Study Progress
-              </CardTitle>
-              <div className="mt-2 flex gap-2">
-                <Button
-                  size="sm"
-                  className="bg-green-700 hover:bg-green-600"
-                  onClick={async () => {
-                    for (const s of sections) {
-                      if (!s.completed) await markSection(s.id, 'completed');
-                    }
-                    void analytics.capture('study_mark_all_complete', { moduleId });
-                  }}
-                >
-                  Mark all complete
-                </Button>
-                <Button
-                  size="sm"
-                  variant="outline"
-                  className="border-yellow-600 text-yellow-200 hover:bg-yellow-900/30"
-                  onClick={async () => {
-                    for (const s of sections) {
-                      if (s.needsReview) await markSection(s.id, 'in_progress');
-                    }
-                    void analytics.capture('study_clear_all_review', { moduleId });
-                  }}
-                >
-                  Clear all review
-                </Button>
-                <Button
-                  size="sm"
-                  variant="outline"
-                  className="border-gray-600 text-gray-200 hover:bg-gray-900/30"
-                  onClick={async () => {
-                    // Reset local section state
-                    setSections((prev) => prev.map((s) => ({ ...s, completed: false, needsReview: false })));
-                    // Persist to DB best-effort
-                    if (user) {
-                      try {
-                        for (const s of sections) {
-                          await markSection(s.id, 'not_started');
-                        }
-                        void analytics.capture('study_reset_progress', { moduleId });
-                      } catch {}
-                    }
-                    // Update local storage immediately
-                    try {
-                      localStorage.setItem(storageKey, JSON.stringify({ sections: sections.map((s) => ({ ...s, completed: false, needsReview: false })), lastViewed }));
-                    } catch {}
-                  }}
-                >
-                  Reset progress
-                </Button>
-              </div>
-              {lastViewed && (
-                <CardDescription>
-                  <Button
-                    size="sm"
-                    className="mt-2 bg-cyan-700 hover:bg-cyan-600"
-                    onClick={() => {
-                      const el = document.getElementById(lastViewed);
-                      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    }}
-                  >
-                    Continue where you left off
-                  </Button>
-                </CardDescription>
-              )}
-            </CardHeader>
-            <CardContent>
-              <ul className="space-y-2">
-                {sections.map((s) => (
-                  <li key={s.id} className={cn("flex items-start gap-2", activeId === s.id ? "opacity-100" : "opacity-80")}> 
-                    <input
-                      type="checkbox"
-                      className="mt-1"
-                      checked={s.completed}
-                      onChange={(e) => markSection(s.id, e.target.checked ? 'completed' : 'in_progress')}
-                      aria-label={`Mark ${s.title} complete`}
-                    />
-                    <button
-                      className={cn("text-left text-sm hover:underline", activeId === s.id ? "text-cyan-300" : "text-blue-100")}
-                      onClick={() => {
-                        const el = document.getElementById(s.id);
-                        if (el) {
-                          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                          setLastViewed(s.id);
-                          void analytics.capture('study_section_view', { moduleId, id: s.id });
-                        }
-                      }}
-                      aria-current={activeId === s.id ? "true" : undefined}
-                    >
-                      {s.title}
-                    </button>
-                    {typeof s.etaMin === 'number' && (
-                      <span className="ml-2 inline-flex items-center gap-1 text-[11px] text-gray-300">
-                        <Clock className="h-3 w-3" /> {s.etaMin}m
-                      </span>
-                    )}
-                    {!s.completed && (
-                      <button
-                        className="ml-auto text-[11px] text-yellow-300 hover:underline"
-                        onClick={() => markSection(s.id, 'needs_review')}
-                        aria-label={`Mark ${s.title} needs review`}
-                      >
-                        needs review
-                      </button>
-                    )}
-                  </li>
-                ))}
-              </ul>
-            </CardContent>
-          </Card>
-        </aside>
-      </div>
 
       {/* Module Footer - Practice Button */}
       {frontmatter.practiceConfig && (
@@ -846,6 +770,7 @@ export default function ModuleRenderer({ moduleData }: ModuleRendererProps) {
           </Card>
         </div>
       )}
-    </div>
+      </div>
+    </StudySessionProvider>
   );
 }
