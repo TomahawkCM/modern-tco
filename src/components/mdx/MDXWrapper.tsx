@@ -5,6 +5,9 @@
 
 import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
+import MicroQuizMDX from "./MicroQuizMDX";
+import MicroSection from "./MicroSection";
+import QuickCheckQuiz from "../study/QuickCheckQuiz";
 
 interface MDXWrapperProps {
   children: ReactNode;
@@ -93,4 +96,8 @@ export const mdxComponents = {
       {children}
     </pre>
   ),
+  // Interactive learning components
+  MicroQuizMDX,
+  MicroSection,
+  QuickCheckQuiz,
 };

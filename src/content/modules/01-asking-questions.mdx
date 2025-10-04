@@ -22,6 +22,9 @@ objectives:
 
 import InfoBox from '../../components/mdx/InfoBox';
 import PracticeButton from '../../components/mdx/PracticeButton';
+import MicroQuizMDX from '../../components/mdx/MicroQuizMDX';
+import QueryPlayground from '../../components/mdx/QueryPlayground';
+import ModuleTransition from '../../components/mdx/ModuleTransition';
 
 export const meta = {
   id: 'tco-asking-questions',
@@ -93,6 +96,19 @@ Windows Server 2016 Standard
   constructing queries.
 </InfoBox>
 
+<MicroQuizMDX
+  question="What is the primary purpose of Tanium sensors?"
+  options={[
+    "To monitor network traffic patterns",
+    "To collect real-time endpoint data and system information",
+    "To deploy software updates to endpoints",
+    "To scan for network vulnerabilities"
+  ]}
+  correctAnswer="To collect real-time endpoint data and system information"
+  explanation="Sensors in Tanium are the core mechanism for querying and collecting specific pieces of information from endpoints in real-time. They can gather system data, security information, hardware details, and application status across thousands of endpoints simultaneously."
+  concept="Sensors"
+/>
+
 ### Custom Sensor Creation
 
 When built-in sensors don't meet your needs, create **custom sensors**:
@@ -157,6 +173,19 @@ DESKTOP-FINANCE01
 - **Documentation**: Add context and usage instructions
 - **Performance**: Monitor execution time and resource usage
 - **Lifecycle**: Regular review and cleanup of unused questions
+
+<MicroQuizMDX
+  question="What is the correct lifecycle order for managing a saved question in Tanium?"
+  options={[
+    "Save → Create → Validate → Share → Monitor",
+    "Create → Save → Validate → Monitor → Share",
+    "Create → Validate → Save → Share → Monitor",
+    "Validate → Create → Save → Share → Monitor"
+  ]}
+  correctAnswer="Create → Validate → Save → Share → Monitor"
+  explanation="The correct lifecycle follows a logical progression: First, CREATE your query by constructing it. Then VALIDATE that it returns expected results. Next, SAVE it with descriptive metadata. Then SHARE it with appropriate user groups. Finally, continuously MONITOR its usage and performance to ensure it remains effective and efficient."
+  concept="Saved Questions"
+/>
 
 ## 🔧 Hands-On Lab Preview
 

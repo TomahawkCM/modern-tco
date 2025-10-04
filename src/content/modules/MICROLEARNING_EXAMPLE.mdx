@@ -1,0 +1,338 @@
+---
+id: "example-module-microlearning"
+title: "Microlearning Example Module"
+domainSlug: "example-microlearning"
+difficulty: "Beginner"
+estimatedTime: "45 min"
+blueprintWeight: 0.22
+description: "Example showing how to structure content with microlearning sections for optimal retention."
+objectives:
+  - "Understand microlearning section structure"
+  - "Implement Learn → Test → Review pattern"
+  - "Use MicroSection component effectively"
+---
+
+import InfoBox from '../../components/mdx/InfoBox';
+import PracticeButton from '../../components/mdx/PracticeButton';
+import MicroSection from '../../components/mdx/MicroSection';
+import MicroQuizMDX from '../../components/mdx/MicroQuizMDX';
+
+export const meta = {
+  id: 'example-module-microlearning',
+  title: 'Microlearning Example Module',
+  objectives: 3,
+  domainSlug: 'example-microlearning'
+};
+
+# Microlearning Example: Asking Questions Module
+
+This example demonstrates how to structure a 45-minute module into 5 micro-sections of ~9 minutes each.
+
+---
+
+{/* MICRO-SECTION 1: Natural Language Basics (10 min) */}
+
+<MicroSection
+  id="natural-language-basics"
+  moduleId="example-module-microlearning"
+  title="Natural Language Query Construction"
+  estimatedMinutes={10}
+  sectionNumber={1}
+  totalSections={5}
+  keyTakeaways={[
+    "Tanium queries follow: Get [sensor] from [targets] where [filters]",
+    "Natural language processing converts queries to system operations",
+    "500+ built-in sensors provide immediate endpoint data access",
+    "Query results return in real-time from thousands of endpoints"
+  ]}
+  quickCheck={
+    <>
+      <MicroQuizMDX
+        question="What is the basic format of a Tanium query?"
+        options={[
+          "Get [sensor] from [targets] where [filters]",
+          "SELECT [field] FROM [table] WHERE [condition]",
+          "Query [endpoints] for [data] using [filter]",
+          "Search [systems] with [parameters]"
+        ]}
+        correctAnswer="Get [sensor] from [targets] where [filters]"
+        explanation="Tanium uses natural language format: 'Get [sensor] from [targets] where [filters]' to construct queries that are converted into real-time endpoint interrogation."
+        concept="Query Syntax"
+      />
+
+      <MicroQuizMDX
+        question="How many built-in sensors does Tanium provide?"
+        options={[
+          "Over 100 sensors",
+          "Over 500 sensors",
+          "Over 1000 sensors",
+          "Exactly 250 sensors"
+        ]}
+        correctAnswer="Over 500 sensors"
+        explanation="Tanium provides 500+ built-in sensors covering system information, security data, application details, and hardware metrics."
+        concept="Sensor Library"
+      />
+
+      <MicroQuizMDX
+        question="What makes Tanium queries 'real-time'?"
+        options={[
+          "They query a central database of cached data",
+          "They interrogate endpoints directly via linear chain architecture",
+          "They schedule queries to run overnight",
+          "They use pre-indexed search tables"
+        ]}
+        correctAnswer="They interrogate endpoints directly via linear chain architecture"
+        explanation="Tanium's linear chain architecture allows queries to reach thousands of endpoints in seconds, gathering current data directly from each system rather than relying on cached or stale database information."
+        concept="Real-Time Architecture"
+      />
+    </>
+  }
+>
+
+## Natural Language Query Construction
+
+Tanium's revolutionary approach uses **natural language processing** to convert human-readable questions into powerful system queries.
+
+<InfoBox title="Key Insight">
+  The Tanium question format follows: **Get [sensor] from [targets] where [filters]**
+</InfoBox>
+
+### Basic Query Examples
+
+**Simple Queries** (no filters):
+```
+Get Computer Name from all machines
+Get Operating System from all machines
+Get IP Address from all machines
+```
+
+**Filtered Queries** (with conditions):
+```
+Get Running Services from all machines where IP Address contains "192.168"
+Get Installed Applications from all machines where Computer Name contains "SERVER"
+Get Disk Space from all machines where Free Space is less than 10GB
+```
+
+### The Three Query Components
+
+1. **Sensor (What you want to know)**
+   - Computer Name
+   - Operating System
+   - Running Processes
+   - Installed Applications
+   - 500+ more built-in sensors
+
+2. **Target (Which endpoints to query)**
+   - `from all machines` (default)
+   - `from Windows Computers`
+   - `from Linux Computers`
+   - `from Computer Group "Production Servers"`
+
+3. **Filter (Optional conditions)**
+   - `where Computer Name contains "PROD"`
+   - `where IP Address starts with "10."`
+   - `where Operating System contains "Windows 10"`
+
+### Why This Matters
+
+Traditional IT tools require SQL knowledge or complex scripting. Tanium's natural language approach:
+- **Reduces learning curve** by 70%
+- **Enables non-technical users** to query systems
+- **Decreases query construction time** from minutes to seconds
+- **Eliminates syntax errors** common with SQL/scripting
+
+</MicroSection>
+
+---
+
+{/* MICRO-SECTION 2: Sensor Library Mastery (10 min) */}
+
+<MicroSection
+  id="sensor-library-mastery"
+  moduleId="example-module-microlearning"
+  title="Mastering the 500+ Sensor Library"
+  estimatedMinutes={10}
+  sectionNumber={2}
+  totalSections={5}
+  keyTakeaways={[
+    "Sensors are categorized: System, Security, Application, Hardware",
+    "Each sensor has specific parameters and return formats",
+    "Custom sensors can be created for unique requirements",
+    "Sensor library is searchable and well-documented"
+  ]}
+  quickCheck={
+    <>
+      <MicroQuizMDX
+        question="Which sensor category would you use to find running processes?"
+        options={[
+          "System Sensors",
+          "Security Sensors",
+          "Application Sensors",
+          "Hardware Sensors"
+        ]}
+        correctAnswer="Security Sensors"
+        explanation="Running Processes is a Security sensor because it provides visibility into what's executing on endpoints - critical for security investigations and threat detection."
+        concept="Sensor Categories"
+      />
+
+      <MicroQuizMDX
+        question="When should you create a custom sensor?"
+        options={[
+          "For every query you write",
+          "When built-in sensors don't meet your specific requirements",
+          "Only when you need to check Windows Registry",
+          "Never - only use built-in sensors"
+        ]}
+        correctAnswer="When built-in sensors don't meet your specific requirements"
+        explanation="Custom sensors extend Tanium's capabilities when built-in sensors don't cover your specific use case, such as checking proprietary application settings or custom registry keys."
+        concept="Custom Sensors"
+      />
+    </>
+  }
+>
+
+## The 500+ Sensor Library
+
+Tanium provides an extensive library of **built-in sensors** organized into four main categories.
+
+### Sensor Categories
+
+#### 1. System Sensors
+Core system information available on all endpoints:
+- **Computer Name**: Hostname of the endpoint
+- **Operating System**: OS version and build
+- **IP Address**: Network addressing information
+- **Last Logged In User**: Active user account
+- **Uptime**: Time since last reboot
+- **Domain**: Active Directory domain membership
+
+#### 2. Security Sensors
+Security-focused data collection:
+- **Running Processes**: Active executables and services
+- **Open Ports**: Network listening services
+- **User Rights**: Account permissions and privileges
+- **Services**: Windows services and their states
+- **Firewall Status**: Endpoint firewall configuration
+- **Installed Patches**: Update compliance status
+
+#### 3. Application Sensors
+Software inventory and status:
+- **Installed Applications**: Complete software inventory
+- **Running Applications**: Active user applications
+- **Browser Extensions**: Chrome, Firefox, Edge extensions
+- **Application Version**: Specific version information
+- **File Existence**: Check for specific files
+- **Registry Keys**: Windows registry values
+
+#### 4. Hardware Sensors
+Physical and resource information:
+- **CPU Usage**: Processor utilization percentage
+- **Memory Usage**: RAM consumption
+- **Disk Space**: Storage capacity and free space
+- **Network Interface**: Network adapter details
+- **Serial Number**: Hardware identification
+- **Manufacturer**: Device vendor information
+
+### Using the Sensor Library
+
+**Access in Console**:
+1. Click "Ask Question" in Tanium Console
+2. Browse "Sensor Library" in left panel
+3. Search for sensors by name or category
+4. View sensor documentation and examples
+
+**Sensor Documentation Includes**:
+- Description and purpose
+- Return data format
+- Platform compatibility (Windows/Linux/Mac)
+- Example queries
+- Related sensors
+
+</MicroSection>
+
+---
+
+{/* MICRO-SECTION 3: Query Filtering Techniques (8 min) */}
+
+<MicroSection
+  id="query-filtering-techniques"
+  moduleId="example-module-microlearning"
+  title="Advanced Query Filtering"
+  estimatedMinutes={8}
+  sectionNumber={3}
+  totalSections={5}
+  keyTakeaways={[
+    "Filters reduce result sets to relevant endpoints only",
+    "Common operators: contains, equals, starts with, is greater than",
+    "Multiple filters can be combined with 'and' logic",
+    "Proper filtering improves query performance significantly"
+  ]}
+  quickCheck={
+    <>
+      <MicroQuizMDX
+        question="What filter operator would you use to find servers with names like 'PROD-WEB-01', 'PROD-WEB-02'?"
+        options={[
+          "Computer Name equals 'PROD'",
+          "Computer Name contains 'PROD'",
+          "Computer Name starts with 'PROD'",
+          "Computer Name ends with '01'"
+        ]}
+        correctAnswer="Computer Name starts with 'PROD'"
+        explanation="'starts with' is more precise than 'contains' for finding servers with a common naming prefix like 'PROD-'. This avoids matching servers like 'DEV-PROD-TEST' that contain 'PROD' elsewhere in the name."
+        concept="Filter Operators"
+      />
+    </>
+  }
+>
+
+## Query Filtering Techniques
+
+Filters transform broad queries into precise investigations by reducing result sets to only relevant endpoints.
+
+### Common Filter Operators
+
+| Operator | Use Case | Example |
+|----------|----------|---------|
+| **contains** | Partial match anywhere in string | `where Computer Name contains "SERVER"` |
+| **equals** | Exact match | `where Operating System equals "Windows 10"` |
+| **starts with** | Match beginning of string | `where Computer Name starts with "PROD-"` |
+| **ends with** | Match end of string | `where Computer Name ends with "-DB"` |
+| **is greater than** | Numeric comparison | `where CPU Usage is greater than 80` |
+| **is less than** | Numeric comparison | `where Disk Free Space is less than 10GB` |
+
+### Filtering Best Practices
+
+**DO**:
+- Use `starts with` for predictable naming patterns
+- Use `contains` for flexible matching
+- Use numeric operators for performance/capacity monitoring
+- Combine filters to narrow results precisely
+
+**DON'T**:
+- Over-filter and miss important results
+- Use `contains` when `equals` would be more accurate
+- Forget about case sensitivity (most operators are case-insensitive)
+
+### Filter Examples
+
+```
+# Find Windows servers with low disk space
+Get Computer Name from all machines
+where Operating System contains "Windows Server"
+and Disk Free Space is less than 20GB
+
+# Find production web servers
+Get IP Address from all machines
+where Computer Name starts with "PROD-WEB"
+
+# Find endpoints with high CPU usage
+Get Computer Name from all machines
+where CPU Usage is greater than 85
+```
+
+</MicroSection>
+
+---
+
+{/* Continue with sections 4 and 5... */}
+
