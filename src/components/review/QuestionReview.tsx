@@ -143,7 +143,7 @@ export default function QuestionReview({ onComplete }: QuestionReviewProps) {
     try {
       // Get or create review record
       let reviewId: string | undefined = currentReview?.id;
-      let srsState = currentReview
+      const srsState = currentReview
         ? {
             id: currentReview.id,
             due: new Date(currentReview.srs_due).getTime(),
@@ -212,7 +212,7 @@ export default function QuestionReview({ onComplete }: QuestionReviewProps) {
           question_id: currentQuestion.id,
           is_correct: isCorrect,
           time_spent_seconds: timeSpent,
-          rating: rating,
+          rating,
           srs_interval_before: srsState.interval,
           srs_interval_after: newState.interval,
           srs_ease_before: srsState.ease,

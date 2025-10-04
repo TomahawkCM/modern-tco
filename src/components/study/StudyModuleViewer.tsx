@@ -27,6 +27,7 @@ import {
   type StudySectionContent,
 } from "@/data/study-content";
 import ReactMarkdown from "react-markdown";
+import ModuleFlashcardPrompt from "@/components/study/ModuleFlashcardPrompt";
 
 interface StudyModuleViewerProps {
   domain: TCODomain;
@@ -507,6 +508,15 @@ export function StudyModuleViewer({
                   <div className="prose prose-slate max-w-none">
                     <ReactMarkdown>{currentSection.content}</ReactMarkdown>
                   </div>
+
+                  {/* Flashcard Active Recall Integration */}
+                  {module?.id && (
+                    <ModuleFlashcardPrompt
+                      moduleId={module.id}
+                      sectionId={currentSection.id}
+                      sectionTitle={currentSection.title}
+                    />
+                  )}
                 </ScrollArea>
 
                 <Separator className="my-6" />

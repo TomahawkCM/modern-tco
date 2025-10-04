@@ -106,7 +106,7 @@ export async function getStudySections(moduleId: string): Promise<StudySection[]
       throw error;
     }
 
-    return sections || [];
+    return (sections || []) as any;
   } catch (error) {
     console.error("Failed to fetch study sections:", error);
     throw new Error("Failed to load study sections");
@@ -171,7 +171,7 @@ export async function searchStudyContent(query: string): Promise<{
 
     return {
       modules: modules || [],
-      sections: sections || [],
+      sections: (sections || []) as any,
     };
   } catch (error) {
     console.error("Failed to search study content:", error);

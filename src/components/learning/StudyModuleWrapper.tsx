@@ -155,23 +155,23 @@ export function StudyModuleWrapper({
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="bg-black/40 backdrop-blur-sm rounded-xl border border-cyan-500/30 p-6"
+        className="glass-card border-archon-border-bright/30 rounded-xl p-6 cyber-border"
       >
         <div className="flex items-start justify-between mb-4">
           <div className="flex-1">
             <div className="flex items-center gap-3 mb-2">
-              <div className="p-2 bg-cyan-500/20 rounded-lg">
-                <BookOpen className="h-5 w-5 text-cyan-400" />
+              <div className="p-2 bg-archon-cyan-primary/20 rounded-lg shadow-[0_0_15px_rgba(0,212,255,0.3)]">
+                <BookOpen className="h-5 w-5 text-archon-cyan-bright" />
               </div>
               <div>
-                <h1 className="text-2xl font-bold text-white">{title}</h1>
-                <div className="text-sm text-gray-400">
+                <h1 className="text-2xl font-bold text-archon-text-primary archon-text-glow">{title}</h1>
+                <div className="text-sm text-archon-text-muted">
                   Module {currentModuleIndex + 1} of {domain?.modules.length}
                 </div>
               </div>
             </div>
             {description && (
-              <p className="text-gray-300 mb-4">{description}</p>
+              <p className="text-archon-text-secondary mb-4">{description}</p>
             )}
           </div>
 
@@ -179,16 +179,16 @@ export function StudyModuleWrapper({
           <div className="flex items-center gap-4">
             <div className="text-right">
               <div className="flex items-center gap-2 text-sm">
-                <Clock className="h-4 w-4 text-cyan-400" />
-                <span className="text-gray-300">
+                <Clock className="h-4 w-4 text-archon-cyan-bright" />
+                <span className="text-archon-text-primary font-medium">
                   {timeSpent}min / {estimatedTime}min
                 </span>
               </div>
-              <div className="text-xs text-gray-400 mt-1">
+              <div className="text-xs text-archon-text-muted mt-1">
                 Status: <span className={cn(
-                  moduleProgress.status === 'completed' && 'text-green-400',
-                  moduleProgress.status === 'in_progress' && 'text-blue-400',
-                  moduleProgress.status === 'not_started' && 'text-gray-400'
+                  moduleProgress.status === 'completed' && 'text-green-400 font-bold',
+                  moduleProgress.status === 'in_progress' && 'text-archon-cyan-bright font-bold',
+                  moduleProgress.status === 'not_started' && 'text-archon-text-muted'
                 )}>
                   {moduleProgress.status === 'completed' ? 'Completed' :
                    moduleProgress.status === 'in_progress' ? 'In Progress' : 'Not Started'}
@@ -199,9 +199,9 @@ export function StudyModuleWrapper({
         </div>
 
         {/* Progress Bar */}
-        <div className="w-full bg-gray-700 rounded-full h-2 mb-4">
+        <div className="w-full bg-archon-cyan-primary/20 rounded-full h-2 mb-4 border border-archon-cyan-bright/30">
           <motion.div
-            className="bg-gradient-to-r from-cyan-500 to-blue-500 h-2 rounded-full"
+            className="bg-gradient-to-r from-archon-cyan-bright to-archon-purple-primary h-2 rounded-full progress-glow"
             initial={{ width: 0 }}
             animate={{ width: `${progressPercentage}%` }}
             transition={{ duration: 0.5 }}
@@ -248,7 +248,7 @@ export function StudyModuleWrapper({
             {moduleProgress.status === 'not_started' && (
               <button
                 onClick={handleStartModule}
-                className="inline-flex items-center gap-2 px-4 py-2 bg-cyan-500 hover:bg-cyan-600 text-white rounded-lg transition-colors"
+                className="glass-button inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-archon-cyan-primary to-archon-cyan-hover text-white rounded-lg"
               >
                 <Play className="h-4 w-4" />
                 Start Module
@@ -332,7 +332,7 @@ export function StudyModuleWrapper({
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: -20 }}
           transition={{ duration: 0.3 }}
-          className="bg-black/40 backdrop-blur-sm rounded-xl border border-cyan-500/30 p-6"
+          className="glass-card border-archon-border-bright/30 rounded-xl p-6"
         >
           {children}
         </motion.div>

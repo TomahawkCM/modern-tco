@@ -172,7 +172,7 @@ export class QuestionService {
    * Get questions by difficulty level
    */
   async getQuestionsByDifficulty(difficulty: Difficulty): Promise<Question[]> {
-    const dbDifficulty = this.mapUiDifficultyToDb(difficulty);
+    const dbDifficulty = this.mapUiDifficultyToDb(difficulty) as "beginner" | "intermediate" | "advanced";
     const res: any = await supabase
       .from("questions")
       .select("*")

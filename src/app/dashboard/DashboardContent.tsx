@@ -114,7 +114,7 @@ export function DashboardContent() {
           moduleTitle:
             typeof bookmark.module?.title === "string" ? bookmark.module.title : "Unknown Module",
           notes: bookmark.notes ?? undefined,
-          href: moduleId && sectionId ? `/study/modules/${moduleId}/sections/${sectionId}` : "#",
+          href: moduleId && sectionId ? `/study/${moduleId}#${sectionId}` : "#",
         };
       }),
     [recentBookmarks]

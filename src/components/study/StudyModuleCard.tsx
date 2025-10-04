@@ -123,7 +123,7 @@ export function StudyModuleCard({ module, progress, className }: StudyModuleCard
           {/* Action Button */}
           <div className="pt-2">
             <Button asChild className="w-full bg-cyan-600 hover:bg-cyan-500 text-white border-cyan-500/50">
-              <Link href={`/study/modules/${module.id}`}>
+              <Link href={`/study/${module.domain_slug || module.id}`}>
                 {isCompleted ? 'Review Module' : hasStarted ? 'Continue Learning' : 'Start Learning'}
               </Link>
             </Button>

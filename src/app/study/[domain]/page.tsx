@@ -23,9 +23,19 @@ import {
 import { cn } from "@/lib/utils";
 import { MDXWrapper, mdxComponents } from "@/components/mdx/MDXWrapper";
 import { loadMDXContent, getMDXMetadata, type MDXModule } from "@/lib/mdx-loader";
+import FlashcardDashboard from "@/components/flashcards/FlashcardDashboard";
+import MicrolearningProgress from "@/components/study/MicrolearningProgress";
 
 // Domain mapping - matches the TCODomain enum values from domainMapper.ts
 const DOMAIN_CONFIG = {
+  "platform-foundation": {
+    title: "Tanium Platform Foundation",
+    description: "Complete foundation for zero-knowledge students - understand architecture, terminology, and console basics",
+    icon: "🏗️",
+    difficulty: "Beginner",
+    estimatedTime: "180 min",
+    practiceRoute: "/practice/platform-foundation",
+  },
   "asking-questions": {
     title: "Asking Questions",
     description: "Learn how to effectively query the Tanium platform for system information",
@@ -34,37 +44,37 @@ const DOMAIN_CONFIG = {
     estimatedTime: "45 min",
     practiceRoute: "/practice/asking-questions",
   },
-  "refining-questions": {
+  "refining-questions-targeting": {
     title: "Refining Questions and Targeting",
     description: "Master advanced filtering and targeting techniques for precise queries",
     icon: "🎯",
     difficulty: "Intermediate",
-    estimatedTime: "50 min",
-    practiceRoute: "/practice/refining-questions",
+    estimatedTime: "90 min",
+    practiceRoute: "/practice/refining-questions-targeting",
   },
-  "taking-action": {
+  "taking-action-packages-actions": {
     title: "Taking Action",
     description: "Learn how to execute actions and deploy solutions using Tanium",
     icon: "⚡",
     difficulty: "Intermediate",
-    estimatedTime: "55 min",
-    practiceRoute: "/practice/taking-action",
+    estimatedTime: "120 min",
+    practiceRoute: "/practice/taking-action-packages-actions",
   },
-  "navigation-modules": {
+  "navigation-basic-modules": {
     title: "Navigation and Basic Module Functions",
     description: "Master the Tanium interface navigation and core module functionality",
     icon: "🧭",
-    difficulty: "Beginner",
-    estimatedTime: "40 min",
-    practiceRoute: "/practice/navigation-modules",
+    difficulty: "Intermediate",
+    estimatedTime: "210 min",
+    practiceRoute: "/practice/navigation-basic-modules",
   },
-  "reporting-export": {
+  "reporting-data-export": {
     title: "Report Generation and Data Export",
     description: "Learn to create reports and export data for analysis and compliance",
     icon: "📊",
     difficulty: "Intermediate",
-    estimatedTime: "50 min",
-    practiceRoute: "/practice/reporting-export",
+    estimatedTime: "180 min",
+    practiceRoute: "/practice/reporting-data-export",
   },
 };
 
@@ -86,55 +96,33 @@ export default function StudyDomainPage() {
 
   // ALL HOOKS MUST BE CALLED BEFORE ANY EARLY RETURNS (Rules of Hooks)
   useEffect(() => {
-    // First try to load from database
+    // FORCE MDX LOADING - Database migration in progress
     const loadContent = async () => {
       try {
         setIsLoading(true);
 
-        // Try to get module from database first
-        const domainVariants = [
-          domainSlug,
-          domainSlug.replace(/-/g, '_').toUpperCase(),
-          domainSlug.split('-').map((word: string, idx: number) =>
-            word.charAt(0).toUpperCase() + word.slice(1)
-          ).join(' ').replace(' And ', ' & ')
-        ];
-
-        let dbModule = null;
-        for (const variant of domainVariants) {
-          dbModule = await studyModuleService.getModuleByDomain(variant);
-          if (dbModule) break;
-        }
-
-        if (dbModule) {
-          setModule(dbModule);
-          setUseDatabase(true);
-          setIsLoading(false);
-          return;
-        }
-
-        // Fall back to MDX if database doesn't have module
-        if (!domainConfig) {
+        if (!domainSlug) {
           setError("Domain not found");
           setIsLoading(false);
           return;
         }
 
+        // Load directly from MDX - world-class content ready to deploy
         const module = await loadMDXContent(domainSlug);
 
         if (module) {
           setUseDatabase(false);
           setMdxModule(module);
           setMdxMetadata(getMDXMetadata(module));
-          console.log("MDX Content loaded successfully:", {
+          console.log("✅ MDX Content loaded successfully:", {
             id: getMDXMetadata(module).id,
             title: getMDXMetadata(module).title,
             objectives: getMDXMetadata(module).objectives.length,
           });
+          setIsLoading(false);
         } else {
-          throw new Error("Failed to load MDX content");
+          throw new Error(`No MDX content found for domain: ${domainSlug}`);
         }
-        setIsLoading(false);
       } catch (err) {
         console.error("Error loading MDX content:", err);
         setError(err instanceof Error ? err.message : "Failed to load MDX content");
@@ -143,7 +131,7 @@ export default function StudyDomainPage() {
     };
 
     void loadContent();
-  }, [domainConfig, domainSlug]);
+  }, [domainSlug]);
 
   // Early return AFTER all hooks are called (satisfies Rules of Hooks)
   if (!domainSlug) {
@@ -280,62 +268,52 @@ export default function StudyDomainPage() {
       objectives={objectives}
       prerequisites={[]}
     >
-      <div className="space-y-6">
+      <div className="space-y-6 max-w-full">
 
-        {/* Study Progress Overview */}
-        <Card className="glass border-white/10">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-3 text-white">
-              <Trophy className="h-5 w-5 text-yellow-400" />
-              Study Progress
+        {/* Microlearning Progress Tracker - Top Banner */}
+        {mdxMetadata?.id && (
+          <MicrolearningProgress
+            moduleId={mdxMetadata.id}
+            totalSections={8}
+            estimatedMinutes={estimatedTimeMinutes}
+          />
+        )}
+
+        {/* Study Content Viewer - Full Width */}
+        <Card className="glass-card border-archon-border-bright/30">
+          <CardHeader className="border-b border-archon-border/30">
+            <CardTitle className="flex items-center gap-3 text-archon-text-primary">
+              <div className="p-2 bg-archon-cyan-primary/20 rounded-lg">
+                <BookOpen className="h-5 w-5 text-archon-cyan-bright" />
+              </div>
+              <span className="archon-text-glow">Study Content</span>
             </CardTitle>
           </CardHeader>
-          <CardContent>
-            <div className="grid gap-4 md:grid-cols-3">
-              <div className="text-center">
-                <div className="mb-1 text-2xl font-bold text-tanium-accent">65%</div>
-                <div className="text-sm text-gray-300">Completion</div>
-              </div>
-              <div className="text-center">
-                <div className="mb-1 text-2xl font-bold text-green-400">5/7</div>
-                <div className="text-sm text-gray-300">Sections Read</div>
-              </div>
-              <div className="text-center">
-                <div className="mb-1 text-2xl font-bold text-blue-400">3</div>
-                <div className="text-sm text-gray-300">Bookmarks</div>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Study Content Viewer */}
-        <Card className="glass border-white/10">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-3 text-white">
-              <BookOpen className="h-5 w-5 text-blue-400" />
-              Study Content
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-6">
-              {/* MDX Content Rendering */}
+          <CardContent className="pt-6">
+            <div className="space-y-6 max-w-none">
+              {/* MDX Content Rendering - Full Width with Archon Theme */}
               {mdxModule ? (
-                <div className="rounded-lg border border-slate-700/50 bg-slate-800/30 p-6">
+                <div className="rounded-lg border border-archon-border/50 bg-archon-bg-panel/50 p-6 backdrop-blur-sm">
                   <MDXProvider components={mdxComponents}>
                     <MDXWrapper>
-                      <Suspense fallback={<div className="text-white">Loading content...</div>}>
+                      <Suspense fallback={
+                        <div className="text-archon-text-primary flex items-center gap-2">
+                          <div className="h-4 w-4 animate-spin rounded-full border-2 border-archon-cyan-bright border-t-transparent"></div>
+                          Loading content...
+                        </div>
+                      }>
                         <mdxModule.default />
                       </Suspense>
                     </MDXWrapper>
                   </MDXProvider>
                 </div>
               ) : (
-                <div className="rounded-lg border border-blue-500/20 bg-blue-500/10 p-4">
-                  <div className="mb-2 flex items-center gap-2 text-blue-300">
+                <div className="rounded-lg border border-archon-cyan-primary/30 bg-archon-cyan-primary/10 p-4">
+                  <div className="mb-2 flex items-center gap-2 text-archon-cyan-bright">
                     <BookOpen className="h-4 w-4" />
                     <span className="font-medium">Study Content Loading</span>
                   </div>
-                  <p className="text-sm text-blue-200">
+                  <p className="text-sm text-archon-text-secondary">
                     {domainConfig.title} (
                     {domainConfig?.estimatedTime
                       ? Math.round((parseInt(domainConfig.estimatedTime.split(" ")[0]) || 45) * 0.22 * 100) / 100
@@ -345,10 +323,17 @@ export default function StudyDomainPage() {
                 </div>
               )}
 
+              {/* Active Recall Flashcards */}
+              {mdxMetadata?.id && (
+                <div className="mt-8">
+                  <FlashcardDashboard moduleId={mdxMetadata.id} />
+                </div>
+              )}
+
               <div className="flex gap-4">
                 <Button
                   onClick={() => router.push(domainConfig.practiceRoute)}
-                  className="bg-green-600 hover:bg-green-700"
+                  className="glass-button bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-500 hover:to-emerald-500 text-white border-green-400/30"
                 >
                   <Target className="mr-2 h-4 w-4" />
                   Start Practice Questions
@@ -360,24 +345,26 @@ export default function StudyDomainPage() {
         </Card>
 
         {/* Next Steps */}
-        <Card className="glass border-white/10">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-3 text-white">
-              <CheckCircle className="h-5 w-5 text-green-400" />
-              Ready for Practice?
+        <Card className="glass-card border-archon-border-bright/30">
+          <CardHeader className="border-b border-archon-border/30">
+            <CardTitle className="flex items-center gap-3 text-archon-text-primary">
+              <div className="p-2 bg-green-500/20 rounded-lg">
+                <CheckCircle className="h-5 w-5 text-green-400" />
+              </div>
+              <span>Ready for Practice?</span>
             </CardTitle>
           </CardHeader>
-          <CardContent>
+          <CardContent className="pt-6">
             <div className="space-y-4">
-              <p className="text-gray-300">
+              <p className="text-archon-text-secondary">
                 Once you've completed this study module, reinforce your learning with practice
                 questions specifically designed for this domain.
               </p>
 
-              <div className="flex gap-4">
+              <div className="flex flex-wrap gap-4">
                 <Button
                   onClick={() => router.push(domainConfig.practiceRoute)}
-                  className="bg-green-600 hover:bg-green-700"
+                  className="glass-button bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-500 hover:to-emerald-500 text-white border-green-400/30"
                 >
                   <Target className="mr-2 h-4 w-4" />
                   Practice Questions
@@ -387,7 +374,7 @@ export default function StudyDomainPage() {
                 <Button
                   variant="outline"
                   onClick={() => router.push("/study")}
-                  className="border-white/20 text-white hover:bg-white/10"
+                  className="border-archon-border-bright/30 text-archon-text-primary hover:bg-archon-cyan-primary/10 hover:text-archon-cyan-bright hover:border-archon-cyan-bright/50"
                 >
                   <BookOpen className="mr-2 h-4 w-4" />
                   Browse Other Domains
@@ -398,10 +385,12 @@ export default function StudyDomainPage() {
         </Card>
 
         {/* Study Tips for this Domain */}
-        <Alert className="border-blue-200 bg-blue-50/10 dark:border-blue-800 dark:bg-blue-900/20">
-          <BookOpen className="h-4 w-4 text-blue-400" />
-          <AlertDescription className="text-blue-200">
-            <strong>Study Tip:</strong> Take your time with each section and use the bookmark
+        <Alert className="border-archon-cyan-primary/30 bg-archon-cyan-primary/10 backdrop-blur-sm">
+          <div className="p-1.5 bg-archon-cyan-primary/20 rounded-md inline-block">
+            <BookOpen className="h-4 w-4 text-archon-cyan-bright" />
+          </div>
+          <AlertDescription className="text-archon-text-secondary mt-2">
+            <strong className="text-archon-cyan-bright">Study Tip:</strong> Take your time with each section and use the bookmark
             feature to save important concepts you want to review later. The practice questions will
             test your understanding of the key points covered in this module.
           </AlertDescription>

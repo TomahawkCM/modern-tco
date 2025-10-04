@@ -3,6 +3,8 @@
 import React, { createContext, useContext, useState, useCallback, useMemo, useRef } from "react";
 import { AssessmentEngine } from "@/lib/assessment-engine";
 import { useQuestions } from "@/contexts/QuestionsContext";
+import { useAuth } from "@/contexts/AuthContext";
+import { questionReviewService } from "@/services/questionReviewService";
 import type {
   AssessmentSession,
   AssessmentResult,
@@ -81,6 +83,7 @@ const DEFAULT_TIME_LIMITS: Record<string, number> = {
 
 export function AssessmentProvider({ children }: { children: React.ReactNode }) {
   const { getAssessmentQuestions } = useQuestions();
+  const { user } = useAuth();
 
   const [currentAssessment, setCurrentAssessment] = useState<AssessmentSession | null>(null);
   const [currentResult, setCurrentResult] = useState<AssessmentResult | null>(null);
@@ -202,22 +205,33 @@ export function AssessmentProvider({ children }: { children: React.ReactNode }) 
   };
 
   const answerQuestion = useCallback((questionId: string, answer: string) => {
+    let isCorrect = false;
+    let timeSpent = 0;
+
     setCurrentAssessment((prev) => {
       if (!prev) return prev;
       // Find the question to determine correctness
       const question = prev.questions.find((q) => q.id === questionId);
       if (!question) return prev;
-      const isCorrect = Array.isArray(answer)
+      isCorrect = Array.isArray(answer)
         ? Array.isArray(question.correctAnswerId)
           ? JSON.stringify(answer.sort()) ===
             JSON.stringify((question.correctAnswerId as string[]).sort())
           : false
         : answer === question.correctAnswerId;
+
+      // Calculate time spent (rough estimate based on session time)
+      const sessionStartTime = prev.startTime.getTime();
+      const now = new Date().getTime();
+      const totalElapsed = Math.floor((now - sessionStartTime) / 1000);
+      const responsesCount = ((prev.responses as unknown as QuestionResponse[]) ?? []).length;
+      timeSpent = responsesCount > 0 ? Math.floor(totalElapsed / (responsesCount + 1)) : 30;
+
       const response: QuestionResponse = {
         questionId,
         selectedAnswer: answer,
         isCorrect,
-        timeSpent: 0,
+        timeSpent,
         timestamp: new Date(),
       };
       const updatedResponses = upsertResponse(
@@ -226,12 +240,25 @@ export function AssessmentProvider({ children }: { children: React.ReactNode }) 
       );
       return { ...prev, responses: updatedResponses as any };
     });
+
+    // Track question review for spaced repetition (async, non-blocking)
+    if (user) {
+      questionReviewService.reviewQuestion(
+        questionId,
+        user.id,
+        isCorrect,
+        timeSpent
+      ).catch((err) => {
+        console.error("Failed to track question review:", err);
+      });
+    }
+
     recordAnalytics({
       type: "answer_selected",
-      data: { questionId, answer },
+      data: { questionId, answer, isCorrect, timeSpent },
       timestamp: new Date(),
     });
-  }, []);
+  }, [user]);
 
   const navigateToQuestion = useCallback(
     (questionIndex: number) => {

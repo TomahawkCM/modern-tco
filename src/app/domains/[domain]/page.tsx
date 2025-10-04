@@ -242,7 +242,7 @@ export default function DomainPage() {
         <h2 className="text-xl font-semibold text-white">Next Steps</h2>
         <div className="flex flex-wrap gap-3">
           <Button asChild>
-            <Link href={`/study/modules/${domainKey}`}>Explore Study Module</Link>
+            <Link href={`/study/${domainKey}`}>Explore Study Module</Link>
           </Button>
           <Button asChild variant="outline">
             <Link href={`/practice?domain=${domainKey}`}>Start Practice Session</Link>

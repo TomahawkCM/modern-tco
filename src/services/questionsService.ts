@@ -159,7 +159,7 @@ export async function fetchQuestionsByDifficulty(difficulty: Difficulty): Promis
     const res: any = await supabase
       .from("questions")
       .select("*")
-      .eq("difficulty", difficulty)
+      .eq("difficulty", difficulty.toLowerCase() as "beginner" | "intermediate" | "advanced")
       .order("created_at", { ascending: false });
 
     const { data, error } = res;
@@ -266,7 +266,7 @@ export async function fetchQuestionsWithFilters(filters: {
     }
 
     if (filters.difficulties && filters.difficulties.length > 0) {
-      query = query.in("difficulty", filters.difficulties);
+      query = query.in("difficulty", filters.difficulties.map(d => d.toLowerCase() as "beginner" | "intermediate" | "advanced"));
     }
 
     if (filters.categories && filters.categories.length > 0) {
@@ -294,7 +294,7 @@ export async function fetchQuestionsWithFilters(filters: {
       throw error;
     }
 
-    let questions = (data || []).map(convertDBQuestionToQuestion);
+    let questions = ((data || []) as any[]).map(convertDBQuestionToQuestion);
 
     // Client-side tag filtering if needed
     if (filters.tags && filters.tags.length > 0) {

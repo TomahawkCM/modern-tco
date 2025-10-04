@@ -2,6 +2,12 @@
 
 import { useEffect, useRef } from "react";
 import { analytics } from "@/lib/analytics";
+import {
+  trackVideoImpression,
+  startVideoSession,
+  updateVideoProgress,
+  endVideoSession,
+} from "@/lib/videoAnalytics";
 
 interface VideoEmbedProps {
   youtubeId: string;
@@ -62,6 +68,8 @@ export default function VideoEmbed({ youtubeId, title, start, moduleSlug }: Vide
   // Impression/visibility analytics
   useEffect(() => {
     void analytics.capture("video_impression", { provider: "youtube", youtubeId, title, moduleSlug });
+    trackVideoImpression(youtubeId, title, moduleSlug);
+
     const el = containerRef.current!;
     if (!el || typeof window === "undefined") return;
     let seen = false;
@@ -85,6 +93,9 @@ export default function VideoEmbed({ youtubeId, title, start, moduleSlug }: Vide
   // Create player using API (no pre-rendered iframe)
   useEffect(() => {
     let interval: any = null;
+    let sessionId: string | null = null;
+    let sessionStartTime: number = 0;
+    let totalWatchTime: number = 0;
     const milestones: Record<number, boolean> = { 25: false, 50: false, 75: false, 100: false };
 
     const attach = async () => {
@@ -133,6 +144,13 @@ export default function VideoEmbed({ youtubeId, title, start, moduleSlug }: Vide
                 const state = e.data; // 0 ended, 1 playing, 2 paused
                 if (state === 1) {
                   void analytics.capture("video_play", { provider: "youtube", youtubeId, title, moduleSlug });
+
+                  // Start video session if not already started
+                  if (!sessionId) {
+                    sessionId = startVideoSession(youtubeId, title, moduleSlug);
+                    sessionStartTime = Date.now();
+                  }
+
                   if (!interval) {
                     interval = setInterval(() => {
                       try {
@@ -144,6 +162,11 @@ export default function VideoEmbed({ youtubeId, title, start, moduleSlug }: Vide
                             if (!milestones[m] && p >= m) {
                               milestones[m] = true;
                               void analytics.capture("video_progress", { provider: "youtube", youtubeId, title, moduleSlug, milestone: m });
+
+                              // Track milestone in video analytics
+                              if (sessionId) {
+                                updateVideoProgress(youtubeId, sessionId, cur, m);
+                              }
                             }
                           });
                         }
@@ -156,12 +179,30 @@ export default function VideoEmbed({ youtubeId, title, start, moduleSlug }: Vide
                     const cur = playerRef.current?.getCurrentTime?.() || 0;
                     const percent = dur ? Math.round((cur / dur) * 100) : 0;
                     void analytics.capture("video_pause", { provider: "youtube", youtubeId, title, moduleSlug, position: Math.floor(cur), percent });
+
+                    // Update watch time
+                    if (sessionStartTime > 0) {
+                      totalWatchTime += (Date.now() - sessionStartTime) / 1000;
+                      sessionStartTime = 0;
+                    }
                   } catch {}
                   if (interval) { clearInterval(interval); interval = null; }
                 } else if (state === 0) {
                   try {
                     const dur = playerRef.current?.getDuration?.() || 0;
+                    const cur = playerRef.current?.getCurrentTime?.() || 0;
                     void analytics.capture("video_complete", { provider: "youtube", youtubeId, title, moduleSlug, duration: Math.floor(dur) });
+
+                    // End video session
+                    if (sessionId) {
+                      if (sessionStartTime > 0) {
+                        totalWatchTime += (Date.now() - sessionStartTime) / 1000;
+                      }
+                      endVideoSession(youtubeId, sessionId, cur, totalWatchTime);
+                      sessionId = null;
+                      sessionStartTime = 0;
+                      totalWatchTime = 0;
+                    }
                   } catch {}
                   if (interval) { clearInterval(interval); interval = null; }
                 }

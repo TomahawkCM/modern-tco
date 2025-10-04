@@ -109,11 +109,11 @@ export function StudySectionCard({ section, moduleId, className }: StudySectionC
         {/* Action Button */}
         <div className="pt-2">
           <Button asChild className="w-full" variant={status === 'completed' ? 'outline' : 'default'}>
-            <Link href={`/study/modules/${moduleId}/sections/${section.id}`}>
-              {status === 'completed' 
-                ? 'Review Section' 
-                : status === 'in_progress' 
-                  ? 'Continue Reading' 
+            <Link href={`/study/${moduleId}#${section.id}`}>
+              {status === 'completed'
+                ? 'Review Section'
+                : status === 'in_progress'
+                  ? 'Continue Reading'
                   : 'Start Section'
               }
             </Link>
