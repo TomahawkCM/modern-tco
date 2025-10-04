@@ -3,7 +3,7 @@
  */
 
 import { supabase } from "@/lib/supabase";
-import type { Database } from "@/types/database.types";
+import type { Database } from "@/lib/database.types";
 
 type StudyModule = Database["public"]["Tables"]["study_modules"]["Row"];
 type StudySection = Database["public"]["Tables"]["study_sections"]["Row"];

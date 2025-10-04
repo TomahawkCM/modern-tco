@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { supabase } from "@/lib/supabase";
-import type { Database } from "@/types/database.types";
+import type { Database } from "@/lib/database.types";
 import type { User } from "@supabase/supabase-js";
 
 type Tables = Database["public"]["Tables"];

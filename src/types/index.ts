@@ -232,7 +232,7 @@ export type {
 } from "./learning-flow";
 
 // Database Types
-export type { Database } from "./database.types";
+export type { Database } from "../lib/database.types";
 
 // Supabase Types
 export type { Database as SupabaseDatabase } from "./supabase";

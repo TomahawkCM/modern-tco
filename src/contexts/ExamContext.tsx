@@ -232,7 +232,7 @@ export function ExamProvider({ children }: { children: React.ReactNode }) {
                 await db.insertUserProgress({
                   question_id: questionId,
                   is_correct: isCorrect,
-                  selected_answer: String(answerId),
+                  selected_answer: answerId,
                   time_taken: 0, // Could be enhanced to track individual question time
                   exam_session_id: currentDbSessionId,
                 });

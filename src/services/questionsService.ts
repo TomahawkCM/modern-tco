@@ -5,7 +5,7 @@
 
 import { supabase } from "@/lib/supabase";
 import type { Difficulty, Question, QuestionCategory, TCODomain } from "@/types/exam";
-import type { Database } from "@/types/database.types";
+import type { Database } from "@/lib/database.types";
 
 type DBQuestion = Database["public"]["Tables"]["questions"]["Row"];
 
@@ -37,7 +37,6 @@ function convertDBQuestionToQuestion(dbQuestion: DBQuestion): Question {
     category: dbQuestion.category as QuestionCategory,
     explanation: dbQuestion.explanation || "",
     tags,
-    studyGuideRef: dbQuestion.study_guide_ref || undefined,
     createdAt: dbQuestion.created_at ? new Date(dbQuestion.created_at) : undefined,
     updatedAt: dbQuestion.updated_at ? new Date(dbQuestion.updated_at) : undefined,
   };
