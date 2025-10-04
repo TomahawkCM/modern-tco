@@ -1,5 +1,5 @@
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
-import type { Database } from "@/types/database.types";
+import type { Database } from "./database.types";
 
 // Environment variable validation - NO FALLBACK VALUES for security
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
@@ -34,7 +34,7 @@ try {
           autoRefreshToken: true,
         },
       }
-    ) as unknown as SupabaseClient<Database>;
+    );
   } else {
     // Create a mock client that won't crash but logs warnings
     console.warn("Supabase environment variables not configured. Database features will be disabled.");
@@ -74,7 +74,7 @@ export const supabase = supabaseClient;
 
 // Server-side client for admin operations
 export const supabaseAdmin = process.env.SUPABASE_SERVICE_ROLE_KEY
-  ? ((createClient<Database>(
+  ? createClient<Database>(
       (supabaseUrl || ""),
       process.env.SUPABASE_SERVICE_ROLE_KEY,
       {
@@ -83,5 +83,5 @@ export const supabaseAdmin = process.env.SUPABASE_SERVICE_ROLE_KEY
           persistSession: false,
         },
       }
-    ) as unknown) as SupabaseClient<Database>)
+    )
   : null;
