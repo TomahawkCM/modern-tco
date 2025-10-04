@@ -8,6 +8,10 @@ import { cn } from "@/lib/utils";
 import MicroQuizMDX from "./MicroQuizMDX";
 import MicroSection from "./MicroSection";
 import QuickCheckQuiz from "../study/QuickCheckQuiz";
+import InfoBox from "./InfoBox";
+import PracticeButton from "./PracticeButton";
+import QueryPlayground from "./QueryPlayground";
+import ModuleTransition from "./ModuleTransition";
 
 interface MDXWrapperProps {
   children: ReactNode;
@@ -100,4 +104,8 @@ export const mdxComponents = {
   MicroQuizMDX,
   MicroSection,
   QuickCheckQuiz,
+  InfoBox,
+  PracticeButton,
+  QueryPlayground,
+  ModuleTransition,
 };
