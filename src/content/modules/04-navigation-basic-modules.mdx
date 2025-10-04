@@ -1182,10 +1182,24 @@ Higher-order thinking and business alignment:
 - **Training Materials**: Comprehensive resources for team education and knowledge transfer
 
 <ModuleTransition
-  currentModule="navigation-basic-modules"
-  nextModule="reporting-data-export"
-  celebrationType="major"
-  customMessage="Outstanding work! You've mastered navigation and the four core modules, which represents 23% of the TCO exam. Your expertise in module selection and workflow optimization will be critical for certification success!"
+  currentModuleId="navigation-basic-modules"
+  currentModuleTitle="Navigation & Basic Module Functions"
+  nextModuleId="reporting-data-export"
+  nextModuleTitle="Reporting & Data Export"
+  requiredSkills={[
+    { id: "nav-console", name: "Console Navigation", description: "Master console layout and navigation", tested: false, passed: false },
+    { id: "nav-modules", name: "Module Selection", description: "Choose the right module for each task", tested: false, passed: false }
+  ]}
+  challenges={[
+    {
+      question: "Which module would you use to create a custom scheduled report?",
+      options: ["Interact", "Trends", "Reporting", "Connect"],
+      correctAnswer: 2,
+      explanation: "The Reporting module is designed specifically for creating, scheduling, and managing custom reports.",
+      skillId: "nav-modules"
+    }
+  ]}
+  minimumScore={0.75}
 />
 
 ---

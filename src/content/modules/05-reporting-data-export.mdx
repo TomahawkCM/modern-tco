@@ -828,10 +828,24 @@ graph TD
 - Enterprise integration challenges requiring end-to-end solution design
 
 <ModuleTransition
-  currentModule="reporting-data-export"
-  nextModule="complete"
-  celebrationType="grand-finale"
-  customMessage="🎉 Incredible achievement! You've completed ALL TCO certification modules! Your mastery of reporting and data export completes your comprehensive Tanium expertise. You're now fully prepared for the TCO certification exam!"
+  currentModuleId="reporting-data-export"
+  currentModuleTitle="Reporting & Data Export"
+  nextModuleId="complete"
+  nextModuleTitle="TCO Certification Complete"
+  requiredSkills={[
+    { id: "report-build", name: "Report Building", description: "Create comprehensive reports", tested: false, passed: false },
+    { id: "data-export", name: "Data Export", description: "Export data in multiple formats", tested: false, passed: false }
+  ]}
+  challenges={[
+    {
+      question: "What is the recommended format for large-scale data exports requiring downstream processing?",
+      options: ["PDF", "Excel", "CSV", "HTML"],
+      correctAnswer: 2,
+      explanation: "CSV is the optimal format for large-scale exports because it's lightweight, universally compatible, and easily processed by automation tools.",
+      skillId: "data-export"
+    }
+  ]}
+  minimumScore={0.75}
 />
 
 # References
