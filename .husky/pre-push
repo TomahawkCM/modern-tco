@@ -1,0 +1,4 @@
+#!/bin/sh
+echo "🔍 Running comprehensive checks before push..."
+npm run check:all-parallel
+echo "✅ Pre-push checks passed!"

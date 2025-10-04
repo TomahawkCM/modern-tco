@@ -1,22 +1,4 @@
-#!/usr/bin/env sh
-. "$(dirname -- "$0")/_/husky.sh"
-
-echo "🔍 Running pre-commit quality checks..."
-
-# Run type checking
-echo "📝 Type checking..."
-npm run typecheck
-
-# Run linting
-echo "🔧 Linting..."
-npm run lint:check
-
-# Run formatting check
-echo "💅 Format checking..."
-npm run format:check
-
-# Run lint-staged for staged files
+#!/bin/sh
 echo "🎯 Checking staged files..."
 npx lint-staged
-
 echo "✅ Pre-commit checks passed!"
