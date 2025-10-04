@@ -35,6 +35,10 @@ interface UserProgress {
   weeklyGoal: number;
   weeklyProgress: number;
   timeSpent?: number; // Total time spent studying in minutes
+  // Review-specific streak tracking (Phase 2)
+  reviewStreak: number;
+  lastReviewDate: string | null; // ISO date (YYYY-MM-DD)
+  longestReviewStreak: number;
   // Additional properties that components expect
   moduleProgress?: Record<
     string,
@@ -69,6 +73,7 @@ type ProgressAction =
       payload: { score: number; questionsCount: number; timeSpent: number; domain?: TCODomain };
     }
   | { type: "UPDATE_STUDY_STREAK" }
+  | { type: "UPDATE_REVIEW_STREAK"; payload: { current: number; longest: number } }
   | { type: "SET_WEEKLY_GOAL"; payload: number }
   | { type: "ADD_ACHIEVEMENT"; payload: string }
   | { type: "SET_LOADING"; payload: boolean }
@@ -83,6 +88,7 @@ interface ProgressContextType {
     timeSpent: number,
     domain?: TCODomain
   ) => void;
+  updateReviewStreak: (current: number, longest: number) => void;
   setWeeklyGoal: (goal: number) => void;
   getOverallStats: () => {
     totalQuestions: number;
@@ -172,6 +178,9 @@ const initialProgress: UserProgress = {
   weeklyGoal: 5,
   weeklyProgress: 0,
   timeSpent: 0,
+  reviewStreak: 0,
+  lastReviewDate: null,
+  longestReviewStreak: 0,
   moduleProgress: {},
   assessmentScores: {},
   streak: 0,
@@ -270,6 +279,21 @@ function progressReducer(state: ProgressState, action: ProgressAction): Progress
           ...state.progress,
           studyStreak: newStreak,
           lastStudyDate: today,
+        },
+      };
+    }
+
+    case "UPDATE_REVIEW_STREAK": {
+      const today = new Date().toISOString().split("T")[0];
+      const { current, longest } = action.payload;
+
+      return {
+        ...state,
+        progress: {
+          ...state.progress,
+          reviewStreak: current,
+          longestReviewStreak: Math.max(state.progress.longestReviewStreak, longest),
+          lastReviewDate: today,
         },
       };
     }
@@ -421,6 +445,8 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
     state.progress.averageScore,
     state.progress.weeklyProgress,
     state.progress.achievements.length,
+    state.progress.reviewStreak,
+    state.progress.longestReviewStreak,
   ]);
 
   const updateSessionStats = (
@@ -449,6 +475,21 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
 
   const setWeeklyGoal = (goal: number) => {
     dispatch({ type: "SET_WEEKLY_GOAL", payload: goal });
+  };
+
+  const updateReviewStreak = (current: number, longest: number) => {
+    dispatch({ type: "UPDATE_REVIEW_STREAK", payload: { current, longest } });
+
+    // Check for review streak achievements
+    if (current >= 7) {
+      dispatch({ type: "ADD_ACHIEVEMENT", payload: "Review Warrior - 7 Day Streak" });
+    }
+    if (current >= 30) {
+      dispatch({ type: "ADD_ACHIEVEMENT", payload: "Review Master - 30 Day Streak" });
+    }
+    if (current >= 100) {
+      dispatch({ type: "ADD_ACHIEVEMENT", payload: "Review Legend - 100 Day Streak" });
+    }
   };
 
   const getOverallStats = useCallback(
@@ -502,6 +543,7 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
       value={{
         state,
         updateSessionStats,
+        updateReviewStreak,
         setWeeklyGoal,
         getOverallStats,
         getDomainStats,
@@ -514,7 +556,7 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
   );
 }
 
-export function useProgress() {
+export function useProgress(): ProgressContextType {
   const context = useContext(ProgressContext);
   if (context === undefined) {
     throw new Error("useProgress must be used within a ProgressProvider");
