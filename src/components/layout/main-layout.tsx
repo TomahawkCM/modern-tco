@@ -6,28 +6,13 @@ import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { AppHeader } from "./app-header";
 import { Sidebar } from "./sidebar";
 import { BreadcrumbNav } from "./breadcrumb-nav";
-import { CyberpunkNavBar, type NavItem } from "../CyberpunkNavigationFixed";
-import { Cpu, BookOpen, ClipboardCheck, BarChart3, Settings, Menu, Terminal, PlayCircle } from "lucide-react";
+import { CyberpunkNavBar } from "../CyberpunkNavigationFixed";
+import { Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useGlobalNavActive } from "@/contexts/GlobalNavContext";
 
 interface MainLayoutProps { children: React.ReactNode; asGlobal?: boolean }
-
-// Define TCO-specific navigation items
-const tcoNavItems: NavItem[] = [
-  { name: "Dashboard", href: "/", icon: <Cpu className="h-4 w-4" /> },
-  { name: "Study", href: "/modules", icon: <BookOpen className="h-4 w-4" /> },
-  { name: "Videos", href: "/videos", icon: <PlayCircle className="h-4 w-4" /> },
-  { name: "Labs", href: "/labs", icon: <Terminal className="h-4 w-4" /> },
-  { name: "Practice", href: "/practice", icon: <ClipboardCheck className="h-4 w-4" /> },
-  { name: "Review", href: "/study/review", icon: <BookOpen className="h-4 w-4" /> },
-  { name: "Simulator", href: "/simulator", icon: <Terminal className="h-4 w-4" /> },
-  { name: "Analytics", href: "/analytics", icon: <BarChart3 className="h-4 w-4" /> },
-  { name: "KB", href: "/kb", icon: <BookOpen className="h-4 w-4" /> },
-  { name: "Notes", href: "/notes", icon: <BookOpen className="h-4 w-4" /> },
-  { name: "Settings", href: "/settings", icon: <Settings className="h-4 w-4" /> },
-];
 
 export function MainLayout({ children, asGlobal = false }: MainLayoutProps) {
   // ALL HOOKS MUST BE CALLED BEFORE ANY EARLY RETURNS (Rules of Hooks)
@@ -117,7 +102,7 @@ export function MainLayout({ children, asGlobal = false }: MainLayoutProps) {
       <ErrorBoundary name="CyberpunkNavBar">
         <div className="relative z-30">
           <CyberpunkNavBar
-            navItems={tcoNavItems}
+            navItems={[]}
             brandName="TANIUM TCO"
             onTabChange={(tabName) => {
               console.log(`Navigating to: ${tabName}`);
