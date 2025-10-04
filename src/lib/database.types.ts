@@ -862,6 +862,33 @@ export type Database = {
           },
         ]
       }
+      mv_refresh_log: {
+        Row: {
+          completed_at: string | null
+          error_message: string | null
+          id: string
+          started_at: string | null
+          status: string | null
+          view_name: string
+        }
+        Insert: {
+          completed_at?: string | null
+          error_message?: string | null
+          id?: string
+          started_at?: string | null
+          status?: string | null
+          view_name: string
+        }
+        Update: {
+          completed_at?: string | null
+          error_message?: string | null
+          id?: string
+          started_at?: string | null
+          status?: string | null
+          view_name?: string
+        }
+        Relationships: []
+      }
       powershell_command_reference: {
         Row: {
           command_category: string | null
@@ -1618,6 +1645,20 @@ export type Database = {
           priority_score: number
         }[]
       }
+      get_unified_review_queue_fast: {
+        Args: { p_limit?: number; p_user_id: string }
+        Returns: {
+          content_id: string
+          days_overdue: number
+          item_type: string
+          mastery: number
+          priority_score: number
+          review_id: string
+          srs_due: string
+          srs_ease: number
+          srs_interval: number
+        }[]
+      }
       get_weighted_random_questions: {
         Args: { question_count: number }
         Returns: {
@@ -1643,6 +1684,14 @@ export type Database = {
       gtrgm_out: {
         Args: { "": unknown }
         Returns: unknown
+      }
+      log_mv_refresh_complete: {
+        Args: { p_error?: string; p_log_id: string; p_status: string }
+        Returns: undefined
+      }
+      log_mv_refresh_start: {
+        Args: { p_view_name: string }
+        Returns: string
       }
       refresh_review_queue: {
         Args: Record<PropertyKey, never>
