@@ -95,9 +95,11 @@ export const CyberpunkNavBar: React.FC<CyberpunkNavBarProps> = ({
         <div className="px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
-              <div className="w-8 h-8 bg-gradient-to-r from-cyan-500 to-sky-400 rounded-lg flex items-center justify-center">
-                <Zap className="h-5 w-5 text-white" />
-              </div>
+              <img
+                src="/tco-logo.png"
+                alt="TCO Logo"
+                className="w-10 h-10 object-contain"
+              />
               <div className="text-xl font-bold text-cyan-400">
                 {brandName}
               </div>
@@ -133,76 +135,72 @@ export const CyberpunkNavBar: React.FC<CyberpunkNavBarProps> = ({
           <div className="flex items-center justify-between">
             {/* Logo/Brand */}
             <motion.div
-              className="flex items-center space-x-3"
+              className="flex items-center space-x-2 sm:space-x-3 min-w-0"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              <div className="relative">
-                <div className="w-8 h-8 bg-gradient-to-r from-cyan-500 to-sky-400 rounded-lg flex items-center justify-center">
-                  <Zap className="h-5 w-5 text-white" />
-                </div>
-                <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-sky-400 rounded-lg blur animate-pulse opacity-50"></div>
+              <div className="relative flex-shrink-0">
+                <img
+                  src="/tco-logo.png"
+                  alt="TCO Logo"
+                  className="w-10 h-10 sm:w-12 sm:h-12 object-contain"
+                />
+                <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-purple-500 rounded-full blur animate-pulse opacity-30"></div>
               </div>
-              <HolographicText className="text-xl font-bold hidden sm:block">
-                {brandName}
+              <HolographicText className="text-base sm:text-lg lg:text-xl font-bold whitespace-nowrap hidden xs:block">
+                <span className="hidden lg:inline">{brandName}</span>
+                <span className="lg:hidden">TCO</span>
               </HolographicText>
             </motion.div>
 
-            {/* Desktop Navigation */}
-            <div className="hidden lg:flex items-center space-x-1">
-              {navItems.map((item) => (
-                <motion.button
-                  key={item.name}
-                  onClick={() => handleTabChange(item.name, item.href)}
-                  className={`relative px-4 py-2 rounded-lg transition-all duration-300 flex items-center space-x-2 ${
-                    activeTab === item.name
-                      ? 'text-cyan-400 bg-cyan-500/10'
-                      : 'text-cyan-100/80 hover:text-cyan-400 hover:bg-cyan-500/5'
-                  }`}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  {item.icon}
-                  <span className="text-sm font-medium">{item.name}</span>
-
-                  {activeTab === item.name && (
-                    <motion.div
-                      layoutId="activeTab"
-                      className="absolute inset-0 bg-gradient-to-r from-cyan-500/20 via-sky-400/20 to-cyan-500/20 rounded-lg -z-10"
-                      initial={false}
-                      transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                    />
-                  )}
-                </motion.button>
-              ))}
+            {/* Desktop Navigation - Simplified to just search bar */}
+            <div className="hidden md:flex items-center flex-1 max-w-md mx-4">
+              <div className="relative w-full">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-cyan-400/60" />
+                <input
+                  type="text"
+                  placeholder="Search modules, questions..."
+                  className="w-full pl-10 pr-4 py-2 bg-black/40 border border-cyan-500/20 rounded-lg text-sm text-cyan-100 placeholder-cyan-400/40 focus:outline-none focus:border-cyan-400/50 focus:ring-2 focus:ring-cyan-500/20 transition-all"
+                />
+              </div>
             </div>
 
             {/* Right side actions */}
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-2 sm:space-x-3 flex-shrink-0">
+              {/* Search icon for mobile */}
               <motion.button
-                className="relative group"
+                className="md:hidden relative group"
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
               >
                 <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500 to-sky-400 rounded-full blur opacity-25 group-hover:opacity-75 transition duration-300"></div>
-                <div className="relative w-10 h-10 bg-black/60 backdrop-blur-xl border border-cyan-500/30 rounded-full flex items-center justify-center">
-                  <Bell className="h-4 w-4 text-cyan-400" />
+                <div className="relative w-9 h-9 bg-black/60 backdrop-blur-xl border border-cyan-500/30 rounded-full flex items-center justify-center">
+                  <Search className="h-4 w-4 text-cyan-400" />
                 </div>
               </motion.button>
 
+              {/* Notifications */}
               <motion.button
-                onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="lg:hidden relative group"
+                className="relative group hidden sm:flex"
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
               >
                 <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500 to-sky-400 rounded-full blur opacity-25 group-hover:opacity-75 transition duration-300"></div>
-                <div className="relative w-10 h-10 bg-black/60 backdrop-blur-xl border border-cyan-500/30 rounded-full flex items-center justify-center">
-                  {isMenuOpen ? (
-                    <X className="h-4 w-4 text-cyan-400" />
-                  ) : (
-                    <Menu className="h-4 w-4 text-cyan-400" />
-                  )}
+                <div className="relative w-9 h-9 bg-black/60 backdrop-blur-xl border border-cyan-500/30 rounded-full flex items-center justify-center">
+                  <Bell className="h-4 w-4 text-cyan-400" />
+                  <span className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full text-[10px] text-white flex items-center justify-center font-bold">3</span>
+                </div>
+              </motion.button>
+
+              {/* Profile */}
+              <motion.button
+                className="relative group hidden sm:flex"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+              >
+                <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500 to-sky-400 rounded-full blur opacity-25 group-hover:opacity-75 transition duration-300"></div>
+                <div className="relative w-9 h-9 bg-black/60 backdrop-blur-xl border border-cyan-500/30 rounded-full flex items-center justify-center">
+                  <User className="h-4 w-4 text-cyan-400" />
                 </div>
               </motion.button>
             </div>
@@ -210,40 +208,7 @@ export const CyberpunkNavBar: React.FC<CyberpunkNavBarProps> = ({
         </div>
       </div>
 
-      {/* Mobile Navigation Menu */}
-      <AnimatePresence>
-        {isMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -20, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: -20, scale: 0.95 }}
-            className="lg:hidden mt-2 bg-black/80 backdrop-blur-xl border border-cyan-500/20 rounded-2xl shadow-[0_0_50px_rgba(34,211,238,0.1)]"
-          >
-            <div className="relative p-4">
-              <div className="relative space-y-2">
-                {navItems.map((item) => (
-                  <motion.button
-                    key={item.name}
-                    onClick={() => {
-                      handleTabChange(item.name, item.href)
-                      setIsMenuOpen(false)
-                    }}
-                    className={`w-full text-left px-4 py-3 rounded-lg transition-all duration-300 flex items-center space-x-3 ${
-                      activeTab === item.name
-                        ? 'text-cyan-400 bg-cyan-500/10'
-                        : 'text-cyan-100/80 hover:text-cyan-400 hover:bg-cyan-500/5'
-                    }`}
-                    whileHover={{ x: 5 }}
-                  >
-                    {item.icon}
-                    <span className="font-medium">{item.name}</span>
-                  </motion.button>
-                ))}
-              </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* Mobile Navigation - Removed (navigation now in sidebar) */}
     </motion.nav>
   )
 }
