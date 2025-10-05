@@ -20,6 +20,7 @@ export default function FlashcardDashboard({ moduleId }: FlashcardDashboardProps
   const [stats, setStats] = useState<FlashcardStats | null>(null);
   const [activeTab, setActiveTab] = useState("review");
   const [isLoading, setIsLoading] = useState(true);
+  const [isSeeding, setIsSeeding] = useState(false);
 
   useEffect(() => {
     loadStats();
@@ -32,10 +33,47 @@ export default function FlashcardDashboard({ moduleId }: FlashcardDashboardProps
     try {
       const data = await flashcardService.getFlashcardStats(user.id);
       setStats(data);
+
+      // Auto-seed if user has no flashcards
+      if (data.totalCards === 0) {
+        await autoSeedFlashcards();
+      }
     } catch (error) {
       console.error("Error loading stats:", error);
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  const autoSeedFlashcards = async () => {
+    if (!user?.id || isSeeding) return;
+
+    setIsSeeding(true);
+    try {
+      const response = await fetch('/api/flashcards/seed', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ user_id: user.id }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok && data.count > 0) {
+        console.log(`✅ Auto-seeded ${data.count} flashcards`);
+        // Reload stats to show the new flashcards
+        const newStats = await flashcardService.getFlashcardStats(user.id);
+        setStats(newStats);
+      } else if (data.alreadySeeded) {
+        console.log('Flashcards already seeded');
+      } else {
+        console.error('Failed to auto-seed flashcards:', data);
+      }
+    } catch (error) {
+      console.error('Error auto-seeding flashcards:', error);
+    } finally {
+      setIsSeeding(false);
     }
   };
 
@@ -50,10 +88,15 @@ export default function FlashcardDashboard({ moduleId }: FlashcardDashboardProps
     loadStats();
   };
 
-  if (isLoading) {
+  if (isLoading || isSeeding) {
     return (
-      <div className="flex items-center justify-center p-8">
+      <div className="flex flex-col items-center justify-center p-8 space-y-4">
         <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+        {isSeeding && (
+          <p className="text-sm text-muted-foreground">
+            Loading your 331 TCO flashcards...
+          </p>
+        )}
       </div>
     );
   }
