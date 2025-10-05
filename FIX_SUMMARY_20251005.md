@@ -89,7 +89,64 @@ because it violates Content Security Policy directive
 
 **Rationale**: Monaco Editor uses CDN scripts from jsdelivr.net for code editor functionality.
 
-### 4. Updated Documentation
+### 4. Additional Monaco Editor CSP Fixes (Style & Source Maps)
+
+**File**: `next.config.js` (lines 113, 124)
+
+**Issue**: Additional CSP violations for Monaco Editor stylesheets and source maps:
+
+```
+Refused to load stylesheet 'https://cdn.jsdelivr.net/npm/monaco-editor@0.52.2/min/vs/editor/editor.main.css'
+because it violates the Content Security Policy directive: "style-src 'self' 'unsafe-inline'"
+
+Refused to connect to 'https://cdn.jsdelivr.net/npm/monaco-editor@0.52.2/min-maps/...'
+because it violates the Content Security Policy directive: "connect-src ..."
+```
+
+**Fixes Applied**:
+
+**Line 113 - style-src directive:**
+
+```javascript
+// Before:
+"style-src 'self' 'unsafe-inline'",
+
+// After:
+"style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net",
+```
+
+**Line 124 - connect-src directive:**
+
+```javascript
+// Before:
+[
+  "connect-src 'self'",
+  connectSupabase,
+  "https://*.supabase.co",
+  "wss://*.supabase.co",
+  "https://us.i.posthog.com",
+  "https://*.posthog.com",
+  "https://sentry.io",
+  "https://*.sentry.io",
+]
+
+// After:
+[
+  "connect-src 'self'",
+  connectSupabase,
+  "https://*.supabase.co",
+  "wss://*.supabase.co",
+  "https://us.i.posthog.com",
+  "https://*.posthog.com",
+  "https://sentry.io",
+  "https://*.sentry.io",
+  "https://cdn.jsdelivr.net",
+]
+```
+
+**Rationale**: Monaco Editor requires CSS files and source maps from jsdelivr.net CDN for proper functionality and debugging.
+
+### 5. Updated Documentation
 
 **File**: `docs/VERCEL_DEPLOYMENT.md`
 

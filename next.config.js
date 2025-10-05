@@ -110,7 +110,7 @@ const nextConfig = {
         // Add 'unsafe-eval' for Sentry monitoring bundle (required for error tracking)
         // Add YouTube for iframe API loading and PostHog for analytics
         "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://browser.sentry-cdn.com https://www.youtube.com https://app.posthog.com https://us.i.posthog.com https://cdn.jsdelivr.net",
-        "style-src 'self' 'unsafe-inline'",
+        "style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net",
         "img-src 'self' data: blob: https://i.ytimg.com https://img.youtube.com",
         [
           "connect-src 'self'",
@@ -121,6 +121,7 @@ const nextConfig = {
           "https://*.posthog.com",
           "https://sentry.io",
           "https://*.sentry.io",
+          "https://cdn.jsdelivr.net",
         ]
           .filter(Boolean)
           .join(" "),
