@@ -194,6 +194,7 @@ const nextConfig = {
 const withMDX = createMDX({
   extension: /\.mdx?$/,
   options: {
+    providerImportSource: false, // Disable provider - use explicit imports in MDX files
     remarkPlugins: [remarkGfm],
     rehypePlugins: [
       rehypeSlug,

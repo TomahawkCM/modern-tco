@@ -2,7 +2,7 @@
 
 import { useEffect, useState, Suspense } from "react";
 import { useParams, useRouter } from "next/navigation";
-import { MDXProvider } from "@mdx-js/react";
+// import { MDXProvider } from "@mdx-js/react"; // Not needed - MDX uses explicit imports
 import { StudyModuleWrapper } from "@/components/learning/StudyModuleWrapper";
 import { StudyModuleViewer } from "@/components/study/StudyModuleViewer";
 import { studyModuleService } from "@/services/studyModuleService";
@@ -21,7 +21,7 @@ import {
   ArrowRight,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { MDXWrapper, mdxComponents } from "@/components/mdx/MDXWrapper";
+import { MDXWrapper } from "@/components/mdx/MDXWrapper";
 import { loadMDXContent, getMDXMetadata, type MDXModule } from "@/lib/mdx-loader";
 import FlashcardDashboard from "@/components/flashcards/FlashcardDashboard";
 import MicrolearningProgress from "@/components/study/MicrolearningProgress";
@@ -294,18 +294,16 @@ export default function StudyDomainPage() {
               {/* MDX Content Rendering - Full Width with Archon Theme */}
               {mdxModule ? (
                 <div className="rounded-lg border border-archon-border/50 bg-archon-bg-panel/50 p-6 backdrop-blur-sm">
-                  <MDXProvider components={mdxComponents}>
-                    <MDXWrapper>
-                      <Suspense fallback={
-                        <div className="text-archon-text-primary flex items-center gap-2">
-                          <div className="h-4 w-4 animate-spin rounded-full border-2 border-archon-cyan-bright border-t-transparent"></div>
-                          Loading content...
-                        </div>
-                      }>
-                        <mdxModule.default />
-                      </Suspense>
-                    </MDXWrapper>
-                  </MDXProvider>
+                  <MDXWrapper>
+                    <Suspense fallback={
+                      <div className="text-archon-text-primary flex items-center gap-2">
+                        <div className="h-4 w-4 animate-spin rounded-full border-2 border-archon-cyan-bright border-t-transparent"></div>
+                        Loading content...
+                      </div>
+                    }>
+                      <mdxModule.default />
+                    </Suspense>
+                  </MDXWrapper>
                 </div>
               ) : (
                 <div className="rounded-lg border border-archon-cyan-primary/30 bg-archon-cyan-primary/10 p-4">
