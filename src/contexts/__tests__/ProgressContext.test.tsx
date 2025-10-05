@@ -11,10 +11,8 @@ import { ProgressProvider, useProgress } from '../ProgressContext';
 import { TCODomain } from '@/types/exam';
 
 // Mock dependencies
-const mockUseAuth = jest.fn(() => ({ user: null }));
-const mockUseDatabase = jest.fn(() => ({
-  upsertUserStatistics: jest.fn().mockResolvedValue({}),
-}));
+const mockUseAuth = jest.fn();
+const mockUseDatabase = jest.fn();
 
 jest.mock('@/contexts/AuthContext', () => ({
   useAuth: () => mockUseAuth(),
@@ -55,6 +53,22 @@ describe('ProgressContext', () => {
   beforeEach(() => {
     localStorageMock.clear();
     jest.clearAllMocks();
+
+    mockUseAuth.mockReturnValue({
+      user: null,
+      session: null,
+      loading: false,
+      error: null,
+      signIn: jest.fn(),
+      signUp: jest.fn(),
+      signOut: jest.fn(),
+      resetPassword: jest.fn(),
+      updateProfile: jest.fn(),
+    });
+
+    mockUseDatabase.mockReturnValue({
+      upsertUserStatistics: jest.fn().mockResolvedValue({}),
+    });
   });
 
   describe('Initial State', () => {

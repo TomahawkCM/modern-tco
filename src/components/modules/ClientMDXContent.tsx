@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useMemo } from "react";
 import { MDXRemote } from "next-mdx-remote";
 import type { ModuleData } from "@/lib/mdx/module-loader";
 import PracticeButton from "@/components/mdx/PracticeButton";
@@ -11,6 +11,8 @@ import ModuleTransition from "@/components/mdx/ModuleTransition";
 import MicroSection from "@/components/mdx/MicroSection";
 import MicroQuizMDX from "@/components/mdx/MicroQuizMDX";
 import InfoBox from "@/components/mdx/InfoBox";
+import * as MDXReact from "@mdx-js/react";
+import * as ReactJsxRuntime from "react/jsx-runtime";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -27,6 +29,19 @@ import { cn } from "@/lib/utils";
 
 interface ClientMDXContentProps {
   content: ModuleData["content"];
+}
+
+function createRuntimeWithDevSupport() {
+  const baseRuntime = { ...MDXReact, ...ReactJsxRuntime } as Record<string, unknown>;
+
+  if (typeof baseRuntime.jsxDEV !== "function") {
+    const jsx = ReactJsxRuntime.jsx as typeof ReactJsxRuntime.jsx;
+    baseRuntime.jsxDEV = function jsxDEV(type: unknown, props: unknown, key?: unknown) {
+      return jsx(type as any, props as any, key as any);
+    };
+  }
+
+  return baseRuntime;
 }
 
 // MDX Components that can be used within the module content
@@ -223,5 +238,18 @@ const mdxComponents = {
 };
 
 export default function ClientMDXContent({ content }: ClientMDXContentProps) {
-  return <MDXRemote {...content} components={mdxComponents} />;
+  const mdxRuntime = useMemo(createRuntimeWithDevSupport, []);
+
+  const mdxRemoteContent = useMemo(() => {
+    const scope = { ...(content.scope || {}) } as Record<string, unknown>;
+    const existingOpts = (scope.opts as Record<string, unknown>) || {};
+    scope.opts = { ...mdxRuntime, ...existingOpts };
+
+    return {
+      ...content,
+      scope,
+    };
+  }, [content, mdxRuntime]);
+
+  return <MDXRemote {...mdxRemoteContent} components={mdxComponents} />;
 }

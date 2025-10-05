@@ -45,6 +45,7 @@ async function bundleAllMDX() {
         mdxOptions: {
           remarkPlugins: [],
           rehypePlugins: [],
+          development: false,
         },
       });
 

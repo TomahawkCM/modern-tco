@@ -118,6 +118,7 @@ async function getModuleContent(slug: string) {
         mdxOptions: {
           remarkPlugins: [],
           rehypePlugins: [],
+          development: false,
         },
       });
 

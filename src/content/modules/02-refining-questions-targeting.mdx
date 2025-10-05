@@ -151,12 +151,12 @@ PROD-CENTOS03 - CentOS 7.9 - Internal
 <QueryPlayground
   title="Practice: Regex for Computer Names"
   instruction="Find all servers that follow the naming convention: PRD-[LOCATION]-SRV[NUMBER] where location is 2-3 letters and number is 3-4 digits."
-  expectedQuery="Get Computer Name from all machines where Computer Name matches ^PRD-[A-Z]{2,3}-SRV[0-9]{3,4}$"
+  expectedQuery="Get Computer Name from all machines where Computer Name matches ^PRD-[A-Z]&#123;2,3&#125;-SRV[0-9]&#123;3,4&#125;$"
   expectedResult="PRD-NYC-SRV001
 PRD-LON-SRV0042
 PRD-TKY-SRV103
 ... (showing 156 correctly named production servers)"
-  hint="Use ^ and $ to anchor the pattern, {2,3} for letter count"
+  hint="Use ^ and $ to anchor the pattern, &#123;2,3&#125; for letter count"
   difficulty="advanced"
 />
 
@@ -737,7 +737,7 @@ Certificate Subject matches "CN=.*\\.internal\\.company\\.com"
 | Anchored (^$) | Low | When exact position matters |
 | Wildcards (.*) | High | Avoid in large datasets |
 | Character classes [A-Z] | Medium | Good for validation |
-| Quantifiers {n,m} | Medium | Precise matching |
+| Quantifiers `{n,m}` | Medium | Precise matching |
 | Lookahead/Lookbehind | Very High | Use sparingly |
 
 ### Complex Filtering Scenarios

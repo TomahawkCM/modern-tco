@@ -11,6 +11,22 @@ import { ExamProvider, useExam } from '../ExamContext';
 import type { Question } from '@/types';
 
 // Mock dependencies
+const mockUseAuth = jest.fn();
+const mockUseIncorrectAnswers = jest.fn();
+const mockUseDatabase = jest.fn();
+
+jest.mock('@/contexts/AuthContext', () => ({
+  useAuth: () => mockUseAuth(),
+}));
+
+jest.mock('@/contexts/IncorrectAnswersContext', () => ({
+  useIncorrectAnswers: () => mockUseIncorrectAnswers(),
+}));
+
+jest.mock('@/hooks/useDatabase', () => ({
+  useDatabase: (...args: unknown[]) => mockUseDatabase(...args),
+}));
+
 jest.mock('@/lib/supabase/client', () => ({
   supabase: {
     from: jest.fn(() => ({
@@ -40,6 +56,34 @@ const wrapper = ({ children }: { children: React.ReactNode }) => (
 );
 
 describe('ExamContext', () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+
+    mockUseAuth.mockReturnValue({
+      user: null,
+      session: null,
+      loading: false,
+      error: null,
+      signIn: jest.fn(),
+      signOut: jest.fn(),
+      signUp: jest.fn(),
+      resetPassword: jest.fn(),
+      updateProfile: jest.fn(),
+    });
+
+    mockUseIncorrectAnswers.mockReturnValue({
+      addIncorrectAnswer: jest.fn(),
+      clearIncorrectAnswers: jest.fn(),
+    });
+
+    mockUseDatabase.mockReturnValue({
+      insertExamSession: jest.fn().mockResolvedValue({ id: 'db-session-1' }),
+      updateExamSession: jest.fn().mockResolvedValue({}),
+      insertUserProgress: jest.fn().mockResolvedValue({}),
+      getExamSessions: jest.fn().mockResolvedValue([]),
+    });
+  });
+
   describe('Initial State', () => {
     it('should provide default exam state', () => {
       const { result } = renderHook(() => useExam(), { wrapper });
