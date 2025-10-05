@@ -127,6 +127,7 @@ export default function FlashcardDashboard({ moduleId }: FlashcardDashboardProps
         <TabsContent value="review" className="mt-6">
           <FlashcardReview
             moduleId={moduleId}
+            totalCards={stats?.totalCards || 0}
             onComplete={handleReviewComplete}
           />
         </TabsContent>

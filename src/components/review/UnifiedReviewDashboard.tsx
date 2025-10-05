@@ -106,7 +106,10 @@ export default function UnifiedReviewDashboard() {
         <Button variant="ghost" onClick={() => setActiveSession(null)}>
           ← Back to Dashboard
         </Button>
-        <FlashcardReview onComplete={handleReviewComplete} />
+        <FlashcardReview
+          totalCards={stats?.flashcards_total || 0}
+          onComplete={handleReviewComplete}
+        />
       </div>
     );
   }

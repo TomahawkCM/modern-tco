@@ -65,8 +65,14 @@ Configure under Project → Settings → Git → Ignored Build Step.
 
 ## Simulator Endpoints (Production)
 
-- Endpoints under `/api/sim-*` are disabled in production by default and return 501.
-- To enable them, set `ENABLE_SIMULATOR=true`. Warning: these endpoints require Python and are not supported on Vercel serverless.
+- `/api/sim-eval` - ✅ **Enabled** in production (uses TypeScript engine, no Python dependency)
+- `/api/sim-meta` - ✅ **Enabled** in production (returns sensor catalog and examples)
+- `/api/sim-saved` - ✅ **Enabled** in production (returns saved queries list)
+- `/api/sim-save` - ❌ **Disabled** in production (requires Python subprocess, not supported on Vercel)
+- `/api/sim-run` - ❌ **Disabled** in production (requires Python subprocess, not supported on Vercel)
+
+**What Works**: Query evaluation, examples, sensor catalog, export (CSV/JSON)
+**What Doesn't**: Saving queries to disk (requires Python subprocess)
 
 ## Troubleshooting
 

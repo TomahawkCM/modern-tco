@@ -11,13 +11,8 @@ type EvalPayload = {
 };
 
 export async function POST(request: NextRequest) {
-  // Allow simulator in development or with explicit flag
-  if (process.env.NODE_ENV === 'production' && process.env['ENABLE_SIMULATOR'] !== 'true') {
-    return NextResponse.json(
-      { ok: false, error: 'Simulator endpoints are disabled in production.' },
-      { status: 501 }
-    );
-  }
+  // Note: This endpoint uses TypeScript TaniumQueryEngine (no Python dependency)
+  // Safe to run in production on Vercel serverless
 
   let payload: EvalPayload;
   try {

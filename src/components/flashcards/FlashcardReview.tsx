@@ -9,11 +9,12 @@ import { useAuth } from "@/contexts/AuthContext";
 import { flashcardService } from "@/services/flashcardService";
 import type { Flashcard } from "@/types/flashcard";
 import type { SRRating } from "@/lib/sr";
-import { Brain, Check, X, AlertCircle, Clock, TrendingUp } from "lucide-react";
+import { Brain, Check, X, AlertCircle, Clock, TrendingUp, BookOpen, Target } from "lucide-react";
 
 interface FlashcardReviewProps {
   moduleId?: string; // Filter by module
   deckId?: string; // Filter by deck
+  totalCards?: number; // Total flashcards user has ever created
   onComplete?: (stats: ReviewStats) => void;
 }
 
@@ -24,7 +25,7 @@ interface ReviewStats {
   newCardsLearned: number;
 }
 
-export default function FlashcardReview({ moduleId, deckId, onComplete }: FlashcardReviewProps) {
+export default function FlashcardReview({ moduleId, deckId, totalCards = 0, onComplete }: FlashcardReviewProps) {
   const { user } = useAuth();
   const [cards, setCards] = useState<Flashcard[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -119,6 +120,47 @@ export default function FlashcardReview({ moduleId, deckId, onComplete }: Flashc
   }
 
   if (cards.length === 0) {
+    // Differentiate between "no cards exist" vs "all caught up"
+    const isFirstTime = totalCards === 0;
+
+    if (isFirstTime) {
+      // New user - no flashcards created yet
+      return (
+        <Card className="w-full max-w-2xl mx-auto">
+          <CardContent className="flex flex-col items-center justify-center p-12 text-center">
+            <Brain className="h-16 w-16 text-primary mb-4" />
+            <h3 className="text-2xl font-bold mb-2">No Flashcards Yet</h3>
+            <p className="text-muted-foreground mb-6">
+              Create your first flashcard to start using spaced repetition for better retention!
+            </p>
+
+            {/* Onboarding CTAs */}
+            <div className="space-y-3 w-full max-w-md">
+              <p className="text-sm font-medium text-left">Get started by:</p>
+              <div className="grid gap-3">
+                <a href="/study" className="block">
+                  <Button variant="outline" className="w-full justify-start">
+                    <BookOpen className="h-4 w-4 mr-2" />
+                    Browse Study Modules → Auto-generate cards
+                  </Button>
+                </a>
+                <a href="/practice" className="block">
+                  <Button variant="outline" className="w-full justify-start">
+                    <Target className="h-4 w-4 mr-2" />
+                    Practice Questions → Convert mistakes
+                  </Button>
+                </a>
+                <div className="pt-2 border-t">
+                  <p className="text-xs text-muted-foreground mb-2">Or create one manually using the "Create Cards" tab above</p>
+                </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      );
+    }
+
+    // Experienced user - all caught up
     return (
       <Card className="w-full max-w-2xl mx-auto">
         <CardContent className="flex flex-col items-center justify-center p-12 text-center">

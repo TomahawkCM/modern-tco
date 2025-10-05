@@ -361,6 +361,14 @@ export default function SimulatorPage() {
 
   const handleSaveQuestion = async () => {
     if (!saveName.trim() || !question.trim()) return;
+
+    // Save functionality requires Python subprocess, not available in production
+    if (process.env.NODE_ENV === 'production') {
+      console.warn('Save functionality is disabled in production (requires Python)');
+      alert('Save functionality is not available in production. Use query evaluation and export features instead.');
+      return;
+    }
+
     setSaving(true);
     try {
       const base = process.env.NEXT_PUBLIC_BASE_PATH ?? '';
