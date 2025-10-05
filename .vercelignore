@@ -2,10 +2,14 @@
 backups/
 node_modules/
 
-# IMPORTANT: Only ignore .next/cache, NOT .next/mdx-cache
-# .next/mdx-cache contains pre-bundled MDX files needed for Vercel
+# Build cache (ignore these)
 .next/cache/
 .next/trace/
+
+# CRITICAL: Include .mdx-cache/ in Vercel deployments
+# The prebuild script creates this directory with pre-bundled MDX files
+# It's in .gitignore (correct) but MUST be deployed to Vercel
+!.mdx-cache/
 
 # Version control
 .git/
@@ -43,5 +47,5 @@ nul
 *.js.map
 .chrome/
 
-# NOTE: src/content/modules is NOT ignored - needed for build process
-# The prebuild script reads MDX files and creates .next/mdx-cache/
+# NOTE: src/content/modules is NOT ignored - needed for prebuild script
+# The prebuild script reads MDX files from src/content/modules/ and creates .mdx-cache/
