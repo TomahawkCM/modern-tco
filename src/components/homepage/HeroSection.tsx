@@ -49,30 +49,8 @@ export function HeroSection() {
     <div className="relative min-h-[80vh] flex items-center justify-center overflow-hidden">
       {/* Animated Background Elements */}
       <div className="absolute inset-0 pointer-events-none">
-        {/* Floating Orbs */}
-        {[...Array(6)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-32 h-32 rounded-full"
-            style={{
-              background: `radial-gradient(circle, rgba(34,211,238,0.1), transparent)`,
-              left: `${20 + i * 15}%`,
-              top: `${10 + (i % 3) * 30}%`,
-            }}
-            animate={{
-              y: [-10, 10, -10],
-            }}
-            transition={{
-              duration: 4,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: i * 0.5,
-            }}
-          />
-        ))}
-
         {/* Grid Pattern */}
-        <div 
+        <div
           className="absolute inset-0 opacity-10"
           style={{
             backgroundImage: `
