@@ -5,13 +5,6 @@
 
 import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
-import MicroQuizMDX from "./MicroQuizMDX";
-import MicroSection from "./MicroSection";
-import QuickCheckQuiz from "../study/QuickCheckQuiz";
-import InfoBox from "./InfoBox";
-import PracticeButton from "./PracticeButton";
-import QueryPlayground from "./QueryPlayground";
-import ModuleTransition from "./ModuleTransition";
 
 interface MDXWrapperProps {
   children: ReactNode;
@@ -100,12 +93,6 @@ export const mdxComponents = {
       {children}
     </pre>
   ),
-  // Interactive learning components
-  MicroQuizMDX,
-  MicroSection,
-  QuickCheckQuiz,
-  InfoBox,
-  PracticeButton,
-  QueryPlayground,
-  ModuleTransition,
+  // Custom components should be imported directly in MDX files
+  // to prevent webpack commons chunk extraction issues
 };
