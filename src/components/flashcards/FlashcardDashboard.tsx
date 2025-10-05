@@ -21,6 +21,7 @@ export default function FlashcardDashboard({ moduleId }: FlashcardDashboardProps
   const [activeTab, setActiveTab] = useState("review");
   const [isLoading, setIsLoading] = useState(true);
   const [isSeeding, setIsSeeding] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     loadStats();
@@ -49,7 +50,11 @@ export default function FlashcardDashboard({ moduleId }: FlashcardDashboardProps
     if (!user?.id || isSeeding) return;
 
     setIsSeeding(true);
+    setError(null);
+
     try {
+      console.log('🔄 Attempting to auto-seed flashcards...');
+
       const response = await fetch('/api/flashcards/seed', {
         method: 'POST',
         headers: {
@@ -61,17 +66,20 @@ export default function FlashcardDashboard({ moduleId }: FlashcardDashboardProps
       const data = await response.json();
 
       if (response.ok && data.count > 0) {
-        console.log(`✅ Auto-seeded ${data.count} flashcards`);
-        // Reload stats to show the new flashcards
+        console.log(`✅ Auto-seeded ${data.count} flashcards`, data);
         const newStats = await flashcardService.getFlashcardStats(user.id);
         setStats(newStats);
       } else if (data.alreadySeeded) {
-        console.log('Flashcards already seeded');
+        console.log('ℹ️ Flashcards already seeded');
       } else {
-        console.error('Failed to auto-seed flashcards:', data);
+        const errorMsg = data.details || data.error || 'Unknown error';
+        console.error('❌ Failed to auto-seed flashcards:', data);
+        setError(`Failed to load flashcards: ${errorMsg}${data.suggestion ? ` (${data.suggestion})` : ''}`);
       }
-    } catch (error) {
-      console.error('Error auto-seeding flashcards:', error);
+    } catch (err) {
+      const errorMsg = err instanceof Error ? err.message : 'Unknown error';
+      console.error('❌ Error auto-seeding flashcards:', err);
+      setError(`Network error: ${errorMsg}`);
     } finally {
       setIsSeeding(false);
     }
@@ -98,6 +106,27 @@ export default function FlashcardDashboard({ moduleId }: FlashcardDashboardProps
           </p>
         )}
       </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <Card className="border-destructive">
+        <CardHeader>
+          <CardTitle className="text-destructive">⚠️ Error Loading Flashcards</CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <p className="text-sm text-muted-foreground">{error}</p>
+          <div className="flex gap-2">
+            <Button onClick={() => { setError(null); loadStats(); }}>
+              Retry
+            </Button>
+            <Button variant="outline" onClick={() => window.open('/api/flashcards/debug', '_blank')}>
+              View Debug Info
+            </Button>
+          </div>
+        </CardContent>
+      </Card>
     );
   }
 
