@@ -126,7 +126,7 @@ const nextConfig = {
           .filter(Boolean)
           .join(" "),
         "frame-src https://www.youtube.com https://www.youtube-nocookie.com",
-        "font-src 'self' data:",
+        "font-src 'self' data: https://cdn.jsdelivr.net",
         "worker-src 'self' blob:",
       ];
       const csp = parts.join("; ");

@@ -18,12 +18,16 @@ export async function POST(request: NextRequest) {
   try {
     payload = await request.json();
   } catch {
+    console.error('[sim-eval] Invalid JSON body');
     return NextResponse.json({ ok: false, error: 'Invalid JSON body' }, { status: 400 });
   }
 
   if (!payload?.question || typeof payload.question !== 'string') {
+    console.error('[sim-eval] Missing or invalid question:', payload);
     return NextResponse.json({ ok: false, error: 'Question is required.' }, { status: 400 });
   }
+
+  console.log('[sim-eval] Processing query:', payload.question);
 
   try {
     // Execute query using TypeScript engine
@@ -31,6 +35,15 @@ export async function POST(request: NextRequest) {
       format: payload.format ?? 'json',
       useCache: true,
       timeout: 5000
+    });
+
+    console.log('[sim-eval] Query result:', {
+      ok: result.ok,
+      hasHeaders: !!result.headers,
+      headersCount: result.headers?.length,
+      hasRows: !!result.rows,
+      rowsCount: result.rows?.length,
+      error: result.error
     });
 
     // Add saved property if this was a save operation
@@ -54,6 +67,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(result, { status });
   } catch (error) {
     const message = error instanceof Error ? error.message : 'Simulator invocation failed';
+    console.error('[sim-eval] Execution error:', error);
     return NextResponse.json({ ok: false, error: message }, { status: 500 });
   }
 }

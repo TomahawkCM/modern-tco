@@ -302,12 +302,101 @@ const data = await fetchJson<EvalResponse>(
 
 **Rationale**: Consistent API path handling across all fetch calls. Without base path, the API request would fail silently in environments with a configured base path.
 
+### 6. Fixed Monaco Editor Font Loading (Final CSP Fix)
+
+**File**: `next.config.js` (line 129)
+
+**Issue**: Monaco Editor fonts blocked by Content Security Policy.
+
+**Console Error**:
+```
+Refused to load the font 'https://cdn.jsdelivr.net/npm/monaco-editor@0.52.2/min/vs/base/browser/ui/codicons/codicon/codicon.ttf'
+because it violates the following Content Security Policy directive: "font-src 'self' data:"
+```
+
+**Root Cause**: font-src CSP directive missing jsdelivr.net CDN source.
+
+**Fix Applied**:
+
+**Before**:
+```javascript
+"font-src 'self' data:",
+```
+
+**After**:
+```javascript
+"font-src 'self' data: https://cdn.jsdelivr.net",
+```
+
+**Rationale**: Monaco Editor requires font files from jsdelivr.net CDN. This completes the CSP configuration for Monaco Editor (scripts, styles, source maps, and now fonts).
+
+### 7. Added Comprehensive Debug Logging
+
+**Files**:
+- `src/app/simulator/page.tsx` (lines 244, 255-263, 275, 283)
+- `src/app/api/sim-eval/route.ts` (lines 21, 26, 30, 40-47, 70)
+
+**Issue**: Difficult to diagnose "no results" issues without proper logging.
+
+**Debug Logging Added**:
+
+**Frontend (Simulator Page)**:
+```typescript
+// Log API requests
+console.log('[Simulator] API Request:', { url: apiUrl, question: input });
+
+// Log API responses with detailed structure
+console.log('[Simulator] API Response:', {
+  ok: data.ok,
+  hasHeaders: !!data.headers,
+  headersCount: data.headers?.length,
+  hasRows: !!data.rows,
+  rowsCount: data.rows?.length,
+  error: data.error,
+  fullResponse: data
+});
+
+// Log errors
+console.error('[Simulator] Query Error:', data.error);
+console.error('[Simulator] Fetch Error:', error);
+```
+
+**Backend (API Route)**:
+```typescript
+// Log incoming queries
+console.log('[sim-eval] Processing query:', payload.question);
+
+// Log query results
+console.log('[sim-eval] Query result:', {
+  ok: result.ok,
+  hasHeaders: !!result.headers,
+  headersCount: result.headers?.length,
+  hasRows: !!result.rows,
+  rowsCount: result.rows?.length,
+  error: result.error
+});
+
+// Log errors
+console.error('[sim-eval] Invalid JSON body');
+console.error('[sim-eval] Missing or invalid question:', payload);
+console.error('[sim-eval] Execution error:', error);
+```
+
+**Rationale**: Comprehensive logging enables quick diagnosis of API issues, response structure problems, and execution errors. Logs are prefixed with `[Simulator]` and `[sim-eval]` for easy filtering in production console.
+
 ---
 
 **Summary**: The simulator now works fully in production for query evaluation, the primary use case. The fixes include:
 
 1. Removed outdated production restriction from TypeScript query engine endpoint
 2. Added graceful degradation for Python-dependent save functionality
-3. Fixed Content Security Policy to allow Monaco Editor CDN scripts (scripts, styles, source maps)
+3. Fixed Content Security Policy to allow Monaco Editor CDN resources:
+   - ✅ Scripts (jsdelivr.net)
+   - ✅ Stylesheets (jsdelivr.net)
+   - ✅ Source maps (jsdelivr.net)
+   - ✅ Fonts (jsdelivr.net) **[NEW]**
 4. Fixed "Run now" button API path to include base path prefix
-5. Updated documentation for production deployment clarity
+5. Added comprehensive debug logging for both frontend and backend
+6. Updated documentation for production deployment clarity
+
+**Debugging Support**: All API requests and responses now logged with `[Simulator]` and `[sim-eval]` prefixes for easy troubleshooting in production console.

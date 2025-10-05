@@ -240,14 +240,28 @@ export default function SimulatorPage() {
       const execute = async () => {
         try {
           const base = process.env.NEXT_PUBLIC_BASE_PATH ?? '';
+          const apiUrl = `${base}/api/sim-eval`;
+          console.log('[Simulator] API Request:', { url: apiUrl, question: input });
+
           const data = await fetchJson<EvalResponse>(
-            `${base}/api/sim-eval`,
+            apiUrl,
             {
               method: 'POST',
               body: JSON.stringify({ question: input }),
               signal: controller.signal,
             }
           );
+
+          console.log('[Simulator] API Response:', {
+            ok: data.ok,
+            hasHeaders: !!data.headers,
+            headersCount: data.headers?.length,
+            hasRows: !!data.rows,
+            rowsCount: data.rows?.length,
+            error: data.error,
+            fullResponse: data
+          });
+
           setResult(data);
           if (data.ok) {
             setEvalError(null);
@@ -258,6 +272,7 @@ export default function SimulatorPage() {
               }
             }
           } else {
+            console.error('[Simulator] Query Error:', data.error);
             setEvalError(data.error ?? 'Simulation failed');
           }
           applyMarkers(input, data);
@@ -265,6 +280,7 @@ export default function SimulatorPage() {
           if ((error as Error).name === 'AbortError') {
             return;
           }
+          console.error('[Simulator] Fetch Error:', error);
           setEvalError((error as Error).message ?? 'Evaluation failed');
         } finally {
           setIsEvaluating(false);
