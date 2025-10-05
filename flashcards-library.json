@@ -1,0 +1,3956 @@
+[
+  {
+    "front_text": "What is the primary architectural advantage of Tanium's Linear Chain Technology over traditional hub-and-spoke endpoint management systems?",
+    "back_text": "It maintains constant network load regardless of endpoint count\n\nLinear Chain Technology ensures that network load remains constant as endpoints are added, unlike hub-and-spoke systems where each additional endpoint increases server and network burden proportionally.",
+    "card_type": "concept",
+    "source": "mcq",
+    "explanation": "Linear Chain Technology ensures that network load remains constant as endpoints are added, unlike hub-and-spoke systems where each additional endpoint increases server and network burden proportionally.",
+    "tags": [
+      "architecture",
+      "linear-chain",
+      "scalability",
+      "exam-aligned",
+      "foundation"
+    ],
+    "domain": "asking-questions",
+    "difficulty": "beginner"
+  },
+  {
+    "front_text": "Which component collects specific types of information from endpoints in real-time?",
+    "back_text": "Sensors\n\nSensors are components that collect specific types of information from endpoints, such as Computer Name, Running Processes, or Disk Space.",
+    "card_type": "concept",
+    "source": "mcq",
+    "explanation": "Sensors are components that collect specific types of information from endpoints, such as Computer Name, Running Processes, or Disk Space.",
+    "tags": [
+      "sensors",
+      "terminology",
+      "data-collection",
+      "exam-aligned",
+      "foundation"
+    ],
+    "domain": "asking-questions",
+    "difficulty": "beginner"
+  },
+  {
+    "front_text": "In a Tanium deployment with 100,000 endpoints, what percentage of network bandwidth does Tanium typically consume during peak query activity?",
+    "back_text": "Less than 0.1%\n\nTanium's linear chain architecture consumes less than 0.1% of network bandwidth even during peak activity, regardless of scale.",
+    "card_type": "concept",
+    "source": "mcq",
+    "explanation": "Tanium's linear chain architecture consumes less than 0.1% of network bandwidth even during peak activity, regardless of scale.",
+    "tags": [
+      "network-efficiency",
+      "bandwidth",
+      "performance",
+      "exam-aligned",
+      "foundation"
+    ],
+    "domain": "asking-questions",
+    "difficulty": "intermediate",
+    "hint": "Think about: tanium, linear chain"
+  },
+  {
+    "front_text": "What is the primary module used for real-time endpoint querying and action deployment?",
+    "back_text": "Interact\n\nThe Interact module is Tanium's core module for real-time endpoint querying and action deployment.",
+    "card_type": "concept",
+    "source": "mcq",
+    "explanation": "The Interact module is Tanium's core module for real-time endpoint querying and action deployment.",
+    "tags": [
+      "interact",
+      "modules",
+      "console",
+      "exam-aligned",
+      "foundation"
+    ],
+    "domain": "navigation-basic-modules",
+    "difficulty": "beginner"
+  },
+  {
+    "front_text": "How does Tanium's 'just-in-time' data collection model differ from traditional endpoint management approaches?",
+    "back_text": "It collects specific data only when requested, providing real-time results\n\nTanium's just-in-time model collects specific data only when requested, ensuring data freshness while minimizing storage and network overhead.",
+    "card_type": "concept",
+    "source": "mcq",
+    "explanation": "Tanium's just-in-time model collects specific data only when requested, ensuring data freshness while minimizing storage and network overhead.",
+    "tags": [
+      "just-in-time",
+      "data-collection",
+      "architecture",
+      "exam-aligned",
+      "foundation"
+    ],
+    "domain": "asking-questions",
+    "difficulty": "intermediate",
+    "hint": "Think about: tanium"
+  },
+  {
+    "front_text": "What is a 'Package' in Tanium terminology?",
+    "back_text": "A pre-configured bundle combining sensors, questions, and actions\n\nA Package is a pre-configured bundle that combines sensors, questions, and actions to solve specific IT challenges, making complex workflows reusable.",
+    "card_type": "concept",
+    "source": "mcq",
+    "explanation": "A Package is a pre-configured bundle that combines sensors, questions, and actions to solve specific IT challenges, making complex workflows reusable.",
+    "tags": [
+      "packages",
+      "terminology",
+      "workflow",
+      "exam-aligned",
+      "foundation"
+    ],
+    "domain": "asking-questions",
+    "difficulty": "beginner"
+  },
+  {
+    "front_text": "What is the typical response time for Tanium queries regardless of whether you have 1,000 or 1,000,000 endpoints?",
+    "back_text": "15 seconds\n\nTanium maintains a consistent 15-second response time regardless of scale due to its linear chain architecture.",
+    "card_type": "concept",
+    "source": "mcq",
+    "explanation": "Tanium maintains a consistent 15-second response time regardless of scale due to its linear chain architecture.",
+    "tags": [
+      "performance",
+      "scalability",
+      "response-time",
+      "exam-aligned",
+      "foundation"
+    ],
+    "domain": "asking-questions",
+    "difficulty": "beginner"
+  },
+  {
+    "front_text": "In Tanium's Linear Chain architecture, how do endpoints communicate during a query?",
+    "back_text": "Endpoints form a chain where each communicates with its neighbors\n\nIn Linear Chain architecture, endpoints form a communication chain where each endpoint communicates with its immediate neighbors, creating an efficient path from server to all endpoints.",
+    "card_type": "concept",
+    "source": "mcq",
+    "explanation": "In Linear Chain architecture, endpoints form a communication chain where each endpoint communicates with its immediate neighbors, creating an efficient path from server to all endpoints.",
+    "tags": [
+      "linear-chain",
+      "communication",
+      "architecture",
+      "exam-aligned",
+      "foundation"
+    ],
+    "domain": "asking-questions",
+    "difficulty": "intermediate",
+    "hint": "Think about: linear chain"
+  },
+  {
+    "front_text": "Which role typically has full platform access and configuration capabilities?",
+    "back_text": "Tanium Administrator\n\nTanium Administrator role provides full platform access and configuration capabilities across all modules and functions.",
+    "card_type": "concept",
+    "source": "mcq",
+    "explanation": "Tanium Administrator role provides full platform access and configuration capabilities across all modules and functions.",
+    "tags": [
+      "roles",
+      "permissions",
+      "administration",
+      "exam-aligned",
+      "foundation"
+    ],
+    "domain": "asking-questions",
+    "difficulty": "beginner"
+  },
+  {
+    "front_text": "Compared to traditional endpoint management tools, what infrastructure cost reduction do organizations typically see with Tanium?",
+    "back_text": "60-80%\n\nOrganizations typically see 60-80% reduction in server and storage costs due to Tanium's efficient architecture that eliminates the need for extensive database infrastructure.",
+    "card_type": "concept",
+    "source": "mcq",
+    "explanation": "Organizations typically see 60-80% reduction in server and storage costs due to Tanium's efficient architecture that eliminates the need for extensive database infrastructure.",
+    "tags": [
+      "cost-savings",
+      "infrastructure",
+      "roi",
+      "exam-aligned",
+      "foundation"
+    ],
+    "domain": "asking-questions",
+    "difficulty": "intermediate",
+    "hint": "Think about: tanium"
+  },
+  {
+    "front_text": "What is an 'Action' in Tanium?",
+    "back_text": "An operation that makes changes to endpoints\n\nAn Action is an operation that makes changes to endpoints, such as installing software, updating configurations, or running scripts.",
+    "card_type": "concept",
+    "source": "mcq",
+    "explanation": "An Action is an operation that makes changes to endpoints, such as installing software, updating configurations, or running scripts.",
+    "tags": [
+      "actions",
+      "terminology",
+      "endpoint-management",
+      "exam-aligned",
+      "foundation"
+    ],
+    "domain": "asking-questions",
+    "difficulty": "beginner"
+  },
+  {
+    "front_text": "Which module is primarily used for historical data analysis and trending?",
+    "back_text": "Trends\n\nThe Trends module is designed for historical data analysis, trending, and creating reports based on data collected over time.",
+    "card_type": "concept",
+    "source": "mcq",
+    "explanation": "The Trends module is designed for historical data analysis, trending, and creating reports based on data collected over time.",
+    "tags": [
+      "trends",
+      "modules",
+      "historical-data",
+      "exam-aligned",
+      "foundation"
+    ],
+    "domain": "navigation-basic-modules",
+    "difficulty": "beginner"
+  },
+  {
+    "front_text": "What happens to network utilization when traditional endpoint management tools scale from 10,000 to 100,000 endpoints?",
+    "back_text": "Network utilization increases proportionally by 10x\n\nTraditional hub-and-spoke architectures see proportional increases in network utilization as endpoint counts grow, often overwhelming network infrastructure.",
+    "card_type": "concept",
+    "source": "mcq",
+    "explanation": "Traditional hub-and-spoke architectures see proportional increases in network utilization as endpoint counts grow, often overwhelming network infrastructure.",
+    "tags": [
+      "traditional-tools",
+      "network-utilization",
+      "scalability",
+      "exam-aligned",
+      "foundation"
+    ],
+    "domain": "asking-questions",
+    "difficulty": "intermediate"
+  },
+  {
+    "front_text": "What is the typical improvement in security incident response times for organizations using Tanium versus traditional tools?",
+    "back_text": "10x faster\n\nOrganizations using Tanium report approximately 10x faster incident response times due to real-time data collection and immediate action deployment capabilities.",
+    "card_type": "concept",
+    "source": "mcq",
+    "explanation": "Organizations using Tanium report approximately 10x faster incident response times due to real-time data collection and immediate action deployment capabilities.",
+    "tags": [
+      "incident-response",
+      "security",
+      "business-value",
+      "exam-aligned",
+      "foundation"
+    ],
+    "domain": "asking-questions",
+    "difficulty": "intermediate",
+    "hint": "Think about: tanium, report"
+  },
+  {
+    "front_text": "What information is typically displayed in the Tanium Console's status bar?",
+    "back_text": "Connection status, performance metrics, and background tasks\n\nThe console's status bar displays system status information including client connectivity, query execution status, and running operations progress.",
+    "card_type": "concept",
+    "source": "mcq",
+    "explanation": "The console's status bar displays system status information including client connectivity, query execution status, and running operations progress.",
+    "tags": [
+      "console",
+      "status-bar",
+      "interface",
+      "exam-aligned",
+      "foundation"
+    ],
+    "domain": "asking-questions",
+    "difficulty": "beginner"
+  },
+  {
+    "front_text": "What type of sensors would you use to gather 'Running Processes' information from endpoints?",
+    "back_text": "Security-Related Sensors\n\n'Running Processes' is categorized as a Security-Related Sensor because it's commonly used for security investigations and threat hunting.",
+    "card_type": "concept",
+    "source": "mcq",
+    "explanation": "'Running Processes' is categorized as a Security-Related Sensor because it's commonly used for security investigations and threat hunting.",
+    "tags": [
+      "sensors",
+      "security",
+      "processes",
+      "exam-aligned",
+      "foundation"
+    ],
+    "domain": "asking-questions",
+    "difficulty": "beginner"
+  },
+  {
+    "front_text": "How are Tanium client-server communications protected?",
+    "back_text": "TLS encryption with certificate validation and mutual authentication\n\nTanium uses TLS encryption for all communications, with certificate validation for server identity, mutual authentication, and data integrity protection.",
+    "card_type": "concept",
+    "source": "mcq",
+    "explanation": "Tanium uses TLS encryption for all communications, with certificate validation for server identity, mutual authentication, and data integrity protection.",
+    "tags": [
+      "security",
+      "encryption",
+      "authentication",
+      "exam-aligned",
+      "foundation"
+    ],
+    "domain": "asking-questions",
+    "difficulty": "intermediate",
+    "hint": "Think about: tanium"
+  },
+  {
+    "front_text": "Why does Tanium require significantly less storage infrastructure than traditional endpoint management tools?",
+    "back_text": "It uses just-in-time data collection instead of continuous storage\n\nTanium's just-in-time approach collects data only when needed rather than continuously collecting and storing everything, resulting in 99% reduction in storage requirements.",
+    "card_type": "concept",
+    "source": "mcq",
+    "explanation": "Tanium's just-in-time approach collects data only when needed rather than continuously collecting and storing everything, resulting in 99% reduction in storage requirements.",
+    "tags": [
+      "storage",
+      "just-in-time",
+      "efficiency",
+      "exam-aligned",
+      "foundation"
+    ],
+    "domain": "asking-questions",
+    "difficulty": "intermediate",
+    "hint": "Think about: tanium"
+  },
+  {
+    "front_text": "Which Tanium module is specifically designed for integration with SIEM and third-party security tools?",
+    "back_text": "Connect\n\nThe Connect module provides integration capabilities with SIEM, ticketing, and other external systems through data feeds and API integration.",
+    "card_type": "concept",
+    "source": "mcq",
+    "explanation": "The Connect module provides integration capabilities with SIEM, ticketing, and other external systems through data feeds and API integration.",
+    "tags": [
+      "connect",
+      "integration",
+      "siem",
+      "exam-aligned",
+      "foundation"
+    ],
+    "domain": "asking-questions",
+    "difficulty": "beginner"
+  },
+  {
+    "front_text": "In enterprise environments, what is the typical reduction in administrative overhead when implementing Tanium versus traditional tools?",
+    "back_text": "50-70%\n\nOrganizations typically see 50-70% reduction in administrative overhead due to Tanium's automation capabilities and simplified architecture.",
+    "card_type": "concept",
+    "source": "mcq",
+    "explanation": "Organizations typically see 50-70% reduction in administrative overhead due to Tanium's automation capabilities and simplified architecture.",
+    "tags": [
+      "administrative-overhead",
+      "efficiency",
+      "automation",
+      "exam-aligned",
+      "foundation"
+    ],
+    "domain": "asking-questions",
+    "difficulty": "intermediate",
+    "hint": "Think about: tanium"
+  },
+  {
+    "front_text": "What is the basic structure of a Tanium question?",
+    "back_text": "Get [Sensor] from [Target] where [Condition]\n\nTanium questions follow the natural language structure: 'Get [Sensor] from [Target] where [Condition]', making them intuitive to construct.",
+    "card_type": "concept",
+    "source": "mcq",
+    "explanation": "Tanium questions follow the natural language structure: 'Get [Sensor] from [Target] where [Condition]', making them intuitive to construct.",
+    "tags": [
+      "questions",
+      "syntax",
+      "natural-language",
+      "exam-aligned",
+      "foundation"
+    ],
+    "domain": "asking-questions",
+    "difficulty": "beginner"
+  },
+  {
+    "front_text": "Which role would be appropriate for a user who needs to create and modify questions and sensors but shouldn't deploy actions?",
+    "back_text": "Question Author\n\nQuestion Author role provides permissions to create and modify questions and sensors without the ability to deploy potentially disruptive actions.",
+    "card_type": "concept",
+    "source": "mcq",
+    "explanation": "Question Author role provides permissions to create and modify questions and sensors without the ability to deploy potentially disruptive actions.",
+    "tags": [
+      "roles",
+      "permissions",
+      "question-author",
+      "exam-aligned",
+      "foundation"
+    ],
+    "domain": "asking-questions",
+    "difficulty": "intermediate"
+  },
+  {
+    "front_text": "What aspects of the Tanium Console can users typically customize for their workflow?",
+    "back_text": "Dashboard widgets, layout arrangement, and notification settings\n\nUsers can customize dashboard widgets, layout arrangements, notification settings, themes, and default views to optimize their workflow.",
+    "card_type": "concept",
+    "source": "mcq",
+    "explanation": "Users can customize dashboard widgets, layout arrangements, notification settings, themes, and default views to optimize their workflow.",
+    "tags": [
+      "customization",
+      "dashboard",
+      "user-experience",
+      "exam-aligned",
+      "foundation"
+    ],
+    "domain": "asking-questions",
+    "difficulty": "beginner"
+  },
+  {
+    "front_text": "What is a key business advantage of Tanium's real-time capabilities versus traditional batch processing?",
+    "back_text": "Decisions based on current data instead of hours-old information\n\nReal-time data enables immediate decision-making and action, compared to traditional tools that provide decisions based on hours or days-old data.",
+    "card_type": "concept",
+    "source": "mcq",
+    "explanation": "Real-time data enables immediate decision-making and action, compared to traditional tools that provide decisions based on hours or days-old data.",
+    "tags": [
+      "real-time",
+      "decision-making",
+      "competitive-advantage",
+      "exam-aligned",
+      "foundation"
+    ],
+    "domain": "asking-questions",
+    "difficulty": "intermediate",
+    "hint": "Think about: action"
+  },
+  {
+    "front_text": "For managing 100,000 endpoints, approximately how many Tanium servers are typically required compared to traditional tools?",
+    "back_text": "Significantly fewer servers (2-4 servers)\n\nTanium requires significantly fewer servers (2-4 with redundancy) compared to traditional tools that might require 10-20 servers for the same endpoint count.",
+    "card_type": "concept",
+    "source": "mcq",
+    "explanation": "Tanium requires significantly fewer servers (2-4 with redundancy) compared to traditional tools that might require 10-20 servers for the same endpoint count.",
+    "tags": [
+      "infrastructure",
+      "servers",
+      "cost-efficiency",
+      "exam-aligned",
+      "foundation"
+    ],
+    "domain": "asking-questions",
+    "difficulty": "intermediate",
+    "hint": "Think about: tanium"
+  },
+  {
+    "front_text": "What is the typical improvement in IT team productivity for organizations implementing Tanium?",
+    "back_text": "3x increase\n\nOrganizations implementing Tanium typically see a 3x increase in IT team productivity due to automation, real-time capabilities, and reduced administrative overhead.",
+    "card_type": "concept",
+    "source": "mcq",
+    "explanation": "Organizations implementing Tanium typically see a 3x increase in IT team productivity due to automation, real-time capabilities, and reduced administrative overhead.",
+    "tags": [
+      "productivity",
+      "success-metrics",
+      "business-value",
+      "exam-aligned",
+      "foundation"
+    ],
+    "domain": "asking-questions",
+    "difficulty": "intermediate",
+    "hint": "Think about: tanium"
+  },
+  {
+    "front_text": "What is the primary purpose of asking a Tanium Question?",
+    "back_text": "To retrieve real-time endpoint data\n\nTanium Questions query endpoints for current state in real time, providing immediate visibility into endpoint conditions.",
+    "card_type": "concept",
+    "source": "mcq",
+    "explanation": "Tanium Questions query endpoints for current state in real time, providing immediate visibility into endpoint conditions.",
+    "tags": [
+      "basics",
+      "questions",
+      "real-time",
+      "purpose",
+      "exam-aligned",
+      "module-1"
+    ],
+    "domain": "asking-questions",
+    "difficulty": "beginner"
+  },
+  {
+    "front_text": "Which component interprets natural-language questions into sensor queries?",
+    "back_text": "Question Parser\n\nThe Question Parser maps plain language questions to appropriate sensors and parameters, enabling natural language querying.",
+    "card_type": "concept",
+    "source": "mcq",
+    "explanation": "The Question Parser maps plain language questions to appropriate sensors and parameters, enabling natural language querying.",
+    "tags": [
+      "parser",
+      "sensors",
+      "natural-language",
+      "exam-aligned",
+      "module-1"
+    ],
+    "domain": "asking-questions",
+    "difficulty": "intermediate"
+  },
+  {
+    "front_text": "When constructing a new question, what is the recommended best practice?",
+    "back_text": "Start simple and add constraints incrementally\n\nStarting with a basic query allows you to validate results and understand the data before adding complexity through filters and constraints.",
+    "card_type": "concept",
+    "source": "mcq",
+    "explanation": "Starting with a basic query allows you to validate results and understand the data before adding complexity through filters and constraints.",
+    "tags": [
+      "best-practice",
+      "iteration",
+      "methodology",
+      "exam-aligned",
+      "module-1"
+    ],
+    "domain": "asking-questions",
+    "difficulty": "beginner"
+  },
+  {
+    "front_text": "How can you identify if a sensor returns current endpoint state versus historical data?",
+    "back_text": "Observe if results reflect near real-time values\n\nSensors that return current endpoint state will show values that reflect the actual current conditions on endpoints, updated in real-time.",
+    "card_type": "concept",
+    "source": "mcq",
+    "explanation": "Sensors that return current endpoint state will show values that reflect the actual current conditions on endpoints, updated in real-time.",
+    "tags": [
+      "sensors",
+      "real-time",
+      "validation",
+      "exam-aligned",
+      "module-1"
+    ],
+    "domain": "asking-questions",
+    "difficulty": "intermediate"
+  },
+  {
+    "front_text": "Which console feature helps confirm that your question targets the expected endpoints?",
+    "back_text": "Preview results grid\n\nThe preview results grid allows you to see which endpoints respond to your question and validate the data before taking further action.",
+    "card_type": "concept",
+    "source": "mcq",
+    "explanation": "The preview results grid allows you to see which endpoints respond to your question and validate the data before taking further action.",
+    "tags": [
+      "validation",
+      "ui",
+      "targeting",
+      "exam-aligned",
+      "module-1"
+    ],
+    "domain": "asking-questions",
+    "difficulty": "beginner"
+  },
+  {
+    "front_text": "What happens when you ask a question like 'Get Computer Name from all machines'?",
+    "back_text": "It immediately queries all connected endpoints for their computer names\n\nThis question immediately propagates through the linear chain to all connected endpoints, which respond with their current computer names in real-time.",
+    "card_type": "concept",
+    "source": "mcq",
+    "explanation": "This question immediately propagates through the linear chain to all connected endpoints, which respond with their current computer names in real-time.",
+    "tags": [
+      "example-query",
+      "real-time",
+      "computer-name",
+      "exam-aligned",
+      "module-1"
+    ],
+    "domain": "asking-questions",
+    "difficulty": "beginner"
+  },
+  {
+    "front_text": "Which approach is most effective for troubleshooting a question that returns unexpected results?",
+    "back_text": "Start with a simpler version of the question and gradually add complexity\n\nSimplifying the question helps isolate issues and understand what's causing unexpected results before adding complexity back incrementally.",
+    "card_type": "concept",
+    "source": "mcq",
+    "explanation": "Simplifying the question helps isolate issues and understand what's causing unexpected results before adding complexity back incrementally.",
+    "tags": [
+      "troubleshooting",
+      "methodology",
+      "debugging",
+      "exam-aligned",
+      "module-1"
+    ],
+    "domain": "asking-questions",
+    "difficulty": "intermediate"
+  },
+  {
+    "front_text": "What type of information would the 'Running Processes' sensor typically return?",
+    "back_text": "Processes currently active on endpoints\n\nThe 'Running Processes' sensor returns information about processes currently active and executing on endpoints at the time of the query.",
+    "card_type": "concept",
+    "source": "mcq",
+    "explanation": "The 'Running Processes' sensor returns information about processes currently active and executing on endpoints at the time of the query.",
+    "tags": [
+      "running-processes",
+      "sensors",
+      "real-time",
+      "exam-aligned",
+      "module-1"
+    ],
+    "domain": "asking-questions",
+    "difficulty": "beginner"
+  },
+  {
+    "front_text": "When should you consider creating a 'Saved Question'?",
+    "back_text": "For questions you plan to use repeatedly or share with others\n\nSaved Questions are valuable for queries you'll use repeatedly, want to share with team members, or want to standardize across your organization.",
+    "card_type": "concept",
+    "source": "mcq",
+    "explanation": "Saved Questions are valuable for queries you'll use repeatedly, want to share with team members, or want to standardize across your organization.",
+    "tags": [
+      "saved-questions",
+      "reusability",
+      "collaboration",
+      "exam-aligned",
+      "module-1"
+    ],
+    "domain": "asking-questions",
+    "difficulty": "intermediate"
+  },
+  {
+    "front_text": "What is the maximum time you should typically expect to wait for results from a well-constructed Tanium question?",
+    "back_text": "15-20 seconds\n\nWell-constructed Tanium questions typically return results within 15-20 seconds regardless of the number of endpoints being queried.",
+    "card_type": "concept",
+    "source": "mcq",
+    "explanation": "Well-constructed Tanium questions typically return results within 15-20 seconds regardless of the number of endpoints being queried.",
+    "tags": [
+      "performance",
+      "response-time",
+      "expectations",
+      "exam-aligned",
+      "module-1"
+    ],
+    "domain": "asking-questions",
+    "difficulty": "beginner"
+  },
+  {
+    "front_text": "Which sensor category would 'Disk Space' belong to?",
+    "back_text": "Performance and Hardware Sensors\n\n'Disk Space' is categorized as a Performance and Hardware Sensor because it provides information about physical storage resources and system performance.",
+    "card_type": "concept",
+    "source": "mcq",
+    "explanation": "'Disk Space' is categorized as a Performance and Hardware Sensor because it provides information about physical storage resources and system performance.",
+    "tags": [
+      "sensors",
+      "disk-space",
+      "categorization",
+      "exam-aligned",
+      "module-1"
+    ],
+    "domain": "asking-questions",
+    "difficulty": "beginner"
+  },
+  {
+    "front_text": "What should you do if your question returns no results when you expected responses from multiple endpoints?",
+    "back_text": "Check if your targeting criteria is too restrictive or if endpoints are offline\n\nNo results often indicate overly restrictive targeting criteria, offline endpoints, or syntax issues in the question construction.",
+    "card_type": "concept",
+    "source": "mcq",
+    "explanation": "No results often indicate overly restrictive targeting criteria, offline endpoints, or syntax issues in the question construction.",
+    "tags": [
+      "troubleshooting",
+      "no-results",
+      "targeting",
+      "exam-aligned",
+      "module-1"
+    ],
+    "domain": "asking-questions",
+    "difficulty": "intermediate"
+  },
+  {
+    "front_text": "In the question 'Get Computer Name from all machines where Operating System contains Windows', what is the filter condition?",
+    "back_text": "'where Operating System contains Windows'\n\nThe filter condition is 'where Operating System contains Windows', which restricts results to only Windows machines.",
+    "card_type": "concept",
+    "source": "mcq",
+    "explanation": "The filter condition is 'where Operating System contains Windows', which restricts results to only Windows machines.",
+    "tags": [
+      "filters",
+      "syntax",
+      "operating-system",
+      "exam-aligned",
+      "module-1"
+    ],
+    "domain": "asking-questions",
+    "difficulty": "beginner"
+  },
+  {
+    "front_text": "What information can you gather from the 'Last Logged In User' sensor?",
+    "back_text": "The most recent user to log into each endpoint\n\nThe 'Last Logged In User' sensor provides the identity of the most recent user to successfully log into each endpoint.",
+    "card_type": "concept",
+    "source": "mcq",
+    "explanation": "The 'Last Logged In User' sensor provides the identity of the most recent user to successfully log into each endpoint.",
+    "tags": [
+      "user-tracking",
+      "sensors",
+      "login-information",
+      "exam-aligned",
+      "module-1"
+    ],
+    "domain": "asking-questions",
+    "difficulty": "beginner"
+  },
+  {
+    "front_text": "How do natural language questions in Tanium differ from SQL queries?",
+    "back_text": "They use human-readable syntax that's easier to construct and understand\n\nTanium's natural language approach uses human-readable syntax like 'Get [sensor] from [target] where [condition]' instead of complex SQL syntax.",
+    "card_type": "concept",
+    "source": "mcq",
+    "explanation": "Tanium's natural language approach uses human-readable syntax like 'Get [sensor] from [target] where [condition]' instead of complex SQL syntax.",
+    "tags": [
+      "natural-language",
+      "syntax",
+      "usability",
+      "exam-aligned",
+      "module-1"
+    ],
+    "domain": "asking-questions",
+    "difficulty": "intermediate",
+    "hint": "Think about: tanium, sensor"
+  },
+  {
+    "front_text": "What is the benefit of using the Question Builder interface versus typing questions manually?",
+    "back_text": "It provides guided assistance and reduces syntax errors\n\nThe Question Builder provides guided assistance, suggests sensors and filters, and helps reduce syntax errors through its structured interface.",
+    "card_type": "concept",
+    "source": "mcq",
+    "explanation": "The Question Builder provides guided assistance, suggests sensors and filters, and helps reduce syntax errors through its structured interface.",
+    "tags": [
+      "question-builder",
+      "ui",
+      "error-reduction",
+      "exam-aligned",
+      "module-1"
+    ],
+    "domain": "asking-questions",
+    "difficulty": "beginner"
+  },
+  {
+    "front_text": "Which sensors would be most useful for conducting a software inventory across your environment?",
+    "back_text": "Installed Applications and Running Processes\n\n'Installed Applications' provides comprehensive software inventory, while 'Running Processes' shows currently active software.",
+    "card_type": "concept",
+    "source": "mcq",
+    "explanation": "'Installed Applications' provides comprehensive software inventory, while 'Running Processes' shows currently active software.",
+    "tags": [
+      "software-inventory",
+      "sensors",
+      "asset-management",
+      "exam-aligned",
+      "module-1"
+    ],
+    "domain": "asking-questions",
+    "difficulty": "intermediate"
+  },
+  {
+    "front_text": "Which question would be most effective for identifying endpoints that might have performance issues?",
+    "back_text": "'Get CPU Usage and Memory Usage from all machines where CPU Usage is greater than 90'\n\nThis question uses performance sensors with a filter condition to identify endpoints with high CPU usage that might indicate performance problems.",
+    "card_type": "concept",
+    "source": "mcq",
+    "explanation": "This question uses performance sensors with a filter condition to identify endpoints with high CPU usage that might indicate performance problems.",
+    "tags": [
+      "performance-monitoring",
+      "filters",
+      "troubleshooting",
+      "exam-aligned",
+      "module-1"
+    ],
+    "domain": "asking-questions",
+    "difficulty": "intermediate",
+    "hint": "Think about: filter"
+  },
+  {
+    "front_text": "What is the advantage of Tanium's real-time questioning capability over traditional inventory tools?",
+    "back_text": "Current data instead of potentially outdated snapshots\n\nReal-time questioning provides current, up-to-date information rather than relying on potentially outdated database snapshots or periodic collections.",
+    "card_type": "concept",
+    "source": "mcq",
+    "explanation": "Real-time questioning provides current, up-to-date information rather than relying on potentially outdated database snapshots or periodic collections.",
+    "tags": [
+      "real-time",
+      "accuracy",
+      "current-data",
+      "exam-aligned",
+      "module-1"
+    ],
+    "domain": "asking-questions",
+    "difficulty": "intermediate"
+  },
+  {
+    "front_text": "How should you validate a new question before using it in production?",
+    "back_text": "Test it on a small group of endpoints first to verify expected results\n\nTesting questions on a small group first allows you to validate syntax, targeting, and expected results before broader deployment.",
+    "card_type": "concept",
+    "source": "mcq",
+    "explanation": "Testing questions on a small group first allows you to validate syntax, targeting, and expected results before broader deployment.",
+    "tags": [
+      "validation",
+      "testing",
+      "best-practice",
+      "exam-aligned",
+      "module-1"
+    ],
+    "domain": "asking-questions",
+    "difficulty": "beginner"
+  },
+  {
+    "front_text": "Which sensors would be most relevant for a security investigation focused on potential malware?",
+    "back_text": "Running Processes and Installed Applications\n\n'Running Processes' can identify suspicious active processes, while 'Installed Applications' can reveal unwanted or malicious software installations.",
+    "card_type": "concept",
+    "source": "mcq",
+    "explanation": "'Running Processes' can identify suspicious active processes, while 'Installed Applications' can reveal unwanted or malicious software installations.",
+    "tags": [
+      "security-investigation",
+      "malware",
+      "threat-hunting",
+      "exam-aligned",
+      "module-1"
+    ],
+    "domain": "asking-questions",
+    "difficulty": "intermediate"
+  },
+  {
+    "front_text": "What is the primary purpose of refining and targeting questions in Tanium?",
+    "back_text": "To focus results on specific endpoints and improve query efficiency\n\nRefining and targeting questions helps focus results on specific endpoints that match your criteria, improving efficiency and reducing irrelevant data.",
+    "card_type": "concept",
+    "source": "mcq",
+    "explanation": "Refining and targeting questions helps focus results on specific endpoints that match your criteria, improving efficiency and reducing irrelevant data.",
+    "tags": [
+      "targeting",
+      "efficiency",
+      "refinement",
+      "exam-aligned",
+      "module-2"
+    ],
+    "domain": "asking-questions",
+    "difficulty": "beginner"
+  },
+  {
+    "front_text": "Which filter operator would you use to find endpoints with computer names that start with 'WS-'?",
+    "back_text": "starts with\n\nThe 'starts with' operator matches values that begin with the specified text, perfect for naming convention patterns like 'WS-'.",
+    "card_type": "concept",
+    "source": "mcq",
+    "explanation": "The 'starts with' operator matches values that begin with the specified text, perfect for naming convention patterns like 'WS-'.",
+    "tags": [
+      "filters",
+      "operators",
+      "naming-conventions",
+      "exam-aligned",
+      "module-2"
+    ],
+    "domain": "asking-questions",
+    "difficulty": "beginner"
+  },
+  {
+    "front_text": "What is a Computer Group in Tanium?",
+    "back_text": "A logical grouping of endpoints based on shared characteristics\n\nComputer Groups are logical collections of endpoints that share characteristics, making it easier to target specific sets of machines for questions and actions.",
+    "card_type": "concept",
+    "source": "mcq",
+    "explanation": "Computer Groups are logical collections of endpoints that share characteristics, making it easier to target specific sets of machines for questions and actions.",
+    "tags": [
+      "computer-groups",
+      "organization",
+      "targeting",
+      "exam-aligned",
+      "module-2"
+    ],
+    "domain": "asking-questions",
+    "difficulty": "beginner"
+  },
+  {
+    "front_text": "Which approach is most effective for optimizing a question that returns too many results?",
+    "back_text": "Add more specific filter conditions to narrow the scope\n\nAdding more specific filter conditions helps narrow the scope of results to only the endpoints or data that match your specific criteria.",
+    "card_type": "concept",
+    "source": "mcq",
+    "explanation": "Adding more specific filter conditions helps narrow the scope of results to only the endpoints or data that match your specific criteria.",
+    "tags": [
+      "optimization",
+      "filtering",
+      "refinement",
+      "exam-aligned",
+      "module-2"
+    ],
+    "domain": "asking-questions",
+    "difficulty": "intermediate",
+    "hint": "Think about: filter"
+  },
+  {
+    "front_text": "When would you use the 'not equals' filter operator?",
+    "back_text": "To exclude specific values from results\n\nThe 'not equals' operator excludes endpoints or data that match the specified value, useful for filtering out unwanted results.",
+    "card_type": "concept",
+    "source": "mcq",
+    "explanation": "The 'not equals' operator excludes endpoints or data that match the specified value, useful for filtering out unwanted results.",
+    "tags": [
+      "filters",
+      "exclusion",
+      "operators",
+      "exam-aligned",
+      "module-2"
+    ],
+    "domain": "asking-questions",
+    "difficulty": "beginner"
+  },
+  {
+    "front_text": "What type of Computer Group would be most appropriate for organizing endpoints by department?",
+    "back_text": "Dynamic group based on computer naming conventions\n\nDynamic groups based on naming conventions automatically include endpoints that follow departmental naming patterns, maintaining group membership automatically.",
+    "card_type": "concept",
+    "source": "mcq",
+    "explanation": "Dynamic groups based on naming conventions automatically include endpoints that follow departmental naming patterns, maintaining group membership automatically.",
+    "tags": [
+      "computer-groups",
+      "dynamic",
+      "organization",
+      "exam-aligned",
+      "module-2"
+    ],
+    "domain": "asking-questions",
+    "difficulty": "intermediate"
+  },
+  {
+    "front_text": "Which filter condition would help identify endpoints that haven't been updated recently?",
+    "back_text": "'Last Reboot' is older than '30 days'\n\nFiltering by 'Last Reboot' older than a specific timeframe helps identify endpoints that may not have received recent updates or patches.",
+    "card_type": "concept",
+    "source": "mcq",
+    "explanation": "Filtering by 'Last Reboot' older than a specific timeframe helps identify endpoints that may not have received recent updates or patches.",
+    "tags": [
+      "filters",
+      "maintenance",
+      "date-filtering",
+      "exam-aligned",
+      "module-2"
+    ],
+    "domain": "asking-questions",
+    "difficulty": "intermediate"
+  },
+  {
+    "front_text": "How do you combine multiple filter conditions in a single question?",
+    "back_text": "Use 'AND' or 'OR' logical operators\n\nLogical operators 'AND' and 'OR' allow you to combine multiple filter conditions to create more specific targeting criteria.",
+    "card_type": "concept",
+    "source": "mcq",
+    "explanation": "Logical operators 'AND' and 'OR' allow you to combine multiple filter conditions to create more specific targeting criteria.",
+    "tags": [
+      "logical-operators",
+      "complex-filtering",
+      "and-or",
+      "exam-aligned",
+      "module-2"
+    ],
+    "domain": "asking-questions",
+    "difficulty": "intermediate",
+    "hint": "Think about: filter"
+  },
+  {
+    "front_text": "What should you consider when creating a question that targets a very specific subset of endpoints?",
+    "back_text": "Whether the targeting criteria might be too restrictive and return no results\n\nOverly restrictive targeting criteria might result in no matching endpoints, so it's important to validate that your filters aren't too narrow.",
+    "card_type": "concept",
+    "source": "mcq",
+    "explanation": "Overly restrictive targeting criteria might result in no matching endpoints, so it's important to validate that your filters aren't too narrow.",
+    "tags": [
+      "targeting",
+      "validation",
+      "criteria",
+      "exam-aligned",
+      "module-2"
+    ],
+    "domain": "asking-questions",
+    "difficulty": "intermediate"
+  },
+  {
+    "front_text": "Which operator would you use to find endpoints where disk space is below a critical threshold?",
+    "back_text": "is less than\n\nThe 'is less than' operator compares numerical values, making it ideal for identifying endpoints below critical thresholds like disk space.",
+    "card_type": "concept",
+    "source": "mcq",
+    "explanation": "The 'is less than' operator compares numerical values, making it ideal for identifying endpoints below critical thresholds like disk space.",
+    "tags": [
+      "numeric-comparison",
+      "operators",
+      "thresholds",
+      "exam-aligned",
+      "module-2"
+    ],
+    "domain": "asking-questions",
+    "difficulty": "beginner"
+  },
+  {
+    "front_text": "What is the advantage of using dynamic Computer Groups over static groups?",
+    "back_text": "Dynamic groups automatically maintain membership based on current endpoint characteristics\n\nDynamic groups automatically adjust membership as endpoint characteristics change, eliminating the need for manual maintenance of group membership.",
+    "card_type": "concept",
+    "source": "mcq",
+    "explanation": "Dynamic groups automatically adjust membership as endpoint characteristics change, eliminating the need for manual maintenance of group membership.",
+    "tags": [
+      "computer-groups",
+      "dynamic",
+      "automation",
+      "exam-aligned",
+      "module-2"
+    ],
+    "domain": "asking-questions",
+    "difficulty": "intermediate"
+  },
+  {
+    "front_text": "How can you verify that your targeting criteria will include the expected endpoints before executing a question?",
+    "back_text": "Run a simple 'Get Computer Name' question with the same targeting criteria\n\nRunning a simple question with the same targeting criteria shows which endpoints match your filters before executing more complex or resource-intensive queries.",
+    "card_type": "concept",
+    "source": "mcq",
+    "explanation": "Running a simple question with the same targeting criteria shows which endpoints match your filters before executing more complex or resource-intensive queries.",
+    "tags": [
+      "validation",
+      "testing",
+      "targeting",
+      "exam-aligned",
+      "module-2"
+    ],
+    "domain": "asking-questions",
+    "difficulty": "intermediate"
+  },
+  {
+    "front_text": "What is the difference between 'contains' and 'equals' filter operators?",
+    "back_text": "'Contains' finds partial matches, 'equals' requires exact matches\n\n'Contains' matches values that include the specified text anywhere within them, while 'equals' requires an exact match of the entire value.",
+    "card_type": "concept",
+    "source": "mcq",
+    "explanation": "'Contains' matches values that include the specified text anywhere within them, while 'equals' requires an exact match of the entire value.",
+    "tags": [
+      "operators",
+      "matching",
+      "contains-equals",
+      "exam-aligned",
+      "module-2"
+    ],
+    "domain": "asking-questions",
+    "difficulty": "beginner"
+  },
+  {
+    "front_text": "Which approach helps optimize network utilization when querying large numbers of endpoints?",
+    "back_text": "Use more specific targeting to reduce the number of responding endpoints\n\nMore specific targeting reduces the number of endpoints that need to respond, optimizing network utilization while still getting the information you need.",
+    "card_type": "concept",
+    "source": "mcq",
+    "explanation": "More specific targeting reduces the number of endpoints that need to respond, optimizing network utilization while still getting the information you need.",
+    "tags": [
+      "optimization",
+      "network",
+      "efficiency",
+      "exam-aligned",
+      "module-2"
+    ],
+    "domain": "asking-questions",
+    "difficulty": "intermediate"
+  },
+  {
+    "front_text": "What is a practical use case for the 'ends with' filter operator?",
+    "back_text": "Identifying files by extension or computer names by domain suffix\n\nThe 'ends with' operator is useful for identifying patterns at the end of values, such as file extensions (.exe) or domain suffixes (.domain.com).",
+    "card_type": "concept",
+    "source": "mcq",
+    "explanation": "The 'ends with' operator is useful for identifying patterns at the end of values, such as file extensions (.exe) or domain suffixes (.domain.com).",
+    "tags": [
+      "operators",
+      "patterns",
+      "file-extensions",
+      "exam-aligned",
+      "module-2"
+    ],
+    "domain": "asking-questions",
+    "difficulty": "intermediate"
+  },
+  {
+    "front_text": "How do you handle time-based filtering in Tanium questions?",
+    "back_text": "Use date/time comparison operators like 'older than' or 'newer than'\n\nTanium supports time-based filtering with operators like 'older than' and 'newer than' for sensors that return date/time information.",
+    "card_type": "concept",
+    "source": "mcq",
+    "explanation": "Tanium supports time-based filtering with operators like 'older than' and 'newer than' for sensors that return date/time information.",
+    "tags": [
+      "time-filtering",
+      "date-comparison",
+      "temporal",
+      "exam-aligned",
+      "module-2"
+    ],
+    "domain": "asking-questions",
+    "difficulty": "intermediate",
+    "hint": "Think about: tanium"
+  },
+  {
+    "front_text": "How can you troubleshoot a question that returns more results than expected?",
+    "back_text": "Add more restrictive filter conditions or check for typos in targeting criteria\n\nToo many results usually indicate that targeting criteria are too broad or contain errors, so adding restrictions or checking for typos is the first step.",
+    "card_type": "concept",
+    "source": "mcq",
+    "explanation": "Too many results usually indicate that targeting criteria are too broad or contain errors, so adding restrictions or checking for typos is the first step.",
+    "tags": [
+      "troubleshooting",
+      "too-many-results",
+      "refinement",
+      "exam-aligned",
+      "module-2"
+    ],
+    "domain": "asking-questions",
+    "difficulty": "intermediate"
+  },
+  {
+    "front_text": "What is the purpose of using Computer Groups in targeting questions?",
+    "back_text": "To simplify targeting by using predefined collections of endpoints\n\nComputer Groups simplify targeting by allowing you to reference predefined collections of endpoints rather than reconstructing complex filter criteria each time.",
+    "card_type": "concept",
+    "source": "mcq",
+    "explanation": "Computer Groups simplify targeting by allowing you to reference predefined collections of endpoints rather than reconstructing complex filter criteria each time.",
+    "tags": [
+      "computer-groups",
+      "targeting",
+      "simplification",
+      "exam-aligned",
+      "module-2"
+    ],
+    "domain": "asking-questions",
+    "difficulty": "beginner"
+  },
+  {
+    "front_text": "What should you do if your refined question returns no results when you expected some?",
+    "back_text": "Gradually remove filter conditions to identify which criteria might be too restrictive\n\nGradually removing filter conditions helps identify which specific criteria might be preventing endpoints from matching your query.",
+    "card_type": "concept",
+    "source": "mcq",
+    "explanation": "Gradually removing filter conditions helps identify which specific criteria might be preventing endpoints from matching your query.",
+    "tags": [
+      "troubleshooting",
+      "no-results",
+      "debugging",
+      "exam-aligned",
+      "module-2"
+    ],
+    "domain": "asking-questions",
+    "difficulty": "intermediate",
+    "hint": "Think about: filter"
+  },
+  {
+    "front_text": "What is the primary purpose of Tanium Actions?",
+    "back_text": "To make changes or perform tasks on endpoints\n\nTanium Actions are designed to make changes or perform tasks on endpoints, such as installing software, applying configurations, or running maintenance scripts.",
+    "card_type": "concept",
+    "source": "mcq",
+    "explanation": "Tanium Actions are designed to make changes or perform tasks on endpoints, such as installing software, applying configurations, or running maintenance scripts.",
+    "tags": [
+      "actions",
+      "purpose",
+      "endpoint-changes",
+      "exam-aligned",
+      "module-3"
+    ],
+    "domain": "asking-questions",
+    "difficulty": "beginner"
+  },
+  {
+    "front_text": "What should you always do before deploying an action to production endpoints?",
+    "back_text": "Test the action on a small group of non-production endpoints\n\nTesting actions on a small group first helps identify potential issues and validates expected behavior before broader deployment.",
+    "card_type": "concept",
+    "source": "mcq",
+    "explanation": "Testing actions on a small group first helps identify potential issues and validates expected behavior before broader deployment.",
+    "tags": [
+      "testing",
+      "validation",
+      "best-practice",
+      "exam-aligned",
+      "module-3"
+    ],
+    "domain": "asking-questions",
+    "difficulty": "beginner"
+  },
+  {
+    "front_text": "What information do exit codes provide after action execution?",
+    "back_text": "Success or failure status of the action\n\nExit codes indicate whether an action succeeded (typically 0) or failed (non-zero values), providing crucial feedback on action execution.",
+    "card_type": "concept",
+    "source": "mcq",
+    "explanation": "Exit codes indicate whether an action succeeded (typically 0) or failed (non-zero values), providing crucial feedback on action execution.",
+    "tags": [
+      "exit-codes",
+      "status",
+      "success-failure",
+      "exam-aligned",
+      "module-3"
+    ],
+    "domain": "asking-questions",
+    "difficulty": "beginner"
+  },
+  {
+    "front_text": "When should you consider implementing a rollback plan for an action?",
+    "back_text": "For any action that makes significant changes to endpoint configuration or software\n\nAny action making significant changes should have a rollback plan to quickly restore endpoints to their previous state if issues occur.",
+    "card_type": "concept",
+    "source": "mcq",
+    "explanation": "Any action making significant changes should have a rollback plan to quickly restore endpoints to their previous state if issues occur.",
+    "tags": [
+      "rollback",
+      "risk-management",
+      "planning",
+      "exam-aligned",
+      "module-3"
+    ],
+    "domain": "asking-questions",
+    "difficulty": "intermediate",
+    "hint": "Think about: action"
+  },
+  {
+    "front_text": "What is the 500+ Sensor Library in Tanium?",
+    "back_text": "The Sensor Library is Tanium's comprehensive collection of over 500 pre-built sensors that collect specific endpoint data such as Computer Name, Running Processes, Installed Applications, IP Address, Operating System, and more. These sensors are ready to use and cover common IT operations needs.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "sensors",
+      "fundamentals"
+    ],
+    "domain": "asking-questions"
+  },
+  {
+    "front_text": "How do you construct a basic Tanium question?",
+    "back_text": "A basic Tanium question follows the pattern: 'Get [Sensor] from [Target]'. For example: 'Get Computer Name from all machines' or 'Get Running Processes from Windows Servers'. The 'Get' keyword initiates the query, followed by the sensor name and target scope.",
+    "card_type": "basic",
+    "source": "generated",
+    "tags": [
+      "question-construction",
+      "syntax"
+    ],
+    "domain": "asking-questions"
+  },
+  {
+    "front_text": "What is the difference between 'Get' and 'Count' in Tanium questions?",
+    "back_text": "'Get' retrieves the actual data values from endpoints (e.g., 'Get Computer Name' returns all computer names). 'Count' returns the number of unique values (e.g., 'Count Computer Name' returns how many distinct computer names exist). Use 'Count' for summary statistics and 'Get' for detailed data.",
+    "card_type": "concept",
+    "source": "generated",
+    "hint": "Think about whether you need values or statistics",
+    "tags": [
+      "query-types",
+      "get-vs-count"
+    ],
+    "domain": "asking-questions"
+  },
+  {
+    "front_text": "What sensor retrieves installed software information?",
+    "back_text": "The 'Installed Applications' sensor retrieves a list of all software installed on an endpoint, including application name, version, publisher, and install date.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "asking-questions",
+      "tco-exam"
+    ],
+    "domain": "asking-questions"
+  },
+  {
+    "front_text": "How do you save a Tanium question for reuse?",
+    "back_text": "Click the 'Save Question' button in the Question Results panel, provide a descriptive name, and optionally assign it to a Computer Group. Saved questions appear in the 'Saved Questions' menu for quick access.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "saved-questions"
+    ],
+    "domain": "asking-questions"
+  },
+  {
+    "front_text": "What is the 'from' clause used for in Tanium questions?",
+    "back_text": "The 'from' clause specifies the target scope: 'from all machines' queries every endpoint, while 'from [Computer Group]' targets only endpoints in that group.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "targeting"
+    ],
+    "domain": "refining-questions-targeting"
+  },
+  {
+    "front_text": "How do you create a Computer Group in Tanium?",
+    "back_text": "Navigate to Administration > Computer Groups, click 'New', define filter criteria using sensors (e.g., 'Operating System contains Windows'), test the filter, and save with a descriptive name.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "computer-groups"
+    ],
+    "domain": "refining-questions-targeting"
+  },
+  {
+    "front_text": "What operators are available for filtering Tanium results?",
+    "back_text": "Available operators include: 'contains', 'starts with', 'ends with', 'equals', 'does not contain', '>', '<', '>=', '<=', 'is', 'is not'. Use these in 'where' clauses to refine results.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "filtering",
+      "operators"
+    ],
+    "domain": "refining-questions-targeting"
+  },
+  {
+    "front_text": "How does RBAC integrate with Computer Groups?",
+    "back_text": "Role-Based Access Control (RBAC) uses Computer Groups to restrict user permissions. Users only see endpoints in their assigned groups, ensuring data isolation and security.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "rbac",
+      "security"
+    ],
+    "domain": "refining-questions-targeting"
+  },
+  {
+    "front_text": "What is the difference between static and dynamic Computer Groups?",
+    "back_text": "Dynamic groups update automatically based on sensor criteria (e.g., 'OS=Windows'). Static groups contain manually specified endpoints. Dynamic groups adapt to infrastructure changes, while static groups remain fixed.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "computer-groups",
+      "types"
+    ],
+    "domain": "refining-questions-targeting"
+  },
+  {
+    "front_text": "What is the 'from' clause used for in Tanium questions?",
+    "back_text": "The 'from' clause specifies the target scope: 'from all machines' queries every endpoint, while 'from [Computer Group]' targets only endpoints in that group.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "targeting"
+    ],
+    "domain": "refining-questions-targeting"
+  },
+  {
+    "front_text": "How do you create a Computer Group in Tanium?",
+    "back_text": "Navigate to Administration > Computer Groups, click 'New', define filter criteria using sensors (e.g., 'Operating System contains Windows'), test the filter, and save with a descriptive name.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "computer-groups"
+    ],
+    "domain": "refining-questions-targeting"
+  },
+  {
+    "front_text": "What operators are available for filtering Tanium results?",
+    "back_text": "Available operators include: 'contains', 'starts with', 'ends with', 'equals', 'does not contain', '>', '<', '>=', '<=', 'is', 'is not'. Use these in 'where' clauses to refine results.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "filtering",
+      "operators"
+    ],
+    "domain": "refining-questions-targeting"
+  },
+  {
+    "front_text": "How does RBAC integrate with Computer Groups?",
+    "back_text": "Role-Based Access Control (RBAC) uses Computer Groups to restrict user permissions. Users only see endpoints in their assigned groups, ensuring data isolation and security.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "rbac",
+      "security"
+    ],
+    "domain": "refining-questions-targeting"
+  },
+  {
+    "front_text": "What is the difference between static and dynamic Computer Groups?",
+    "back_text": "Dynamic groups update automatically based on sensor criteria (e.g., 'OS=Windows'). Static groups contain manually specified endpoints. Dynamic groups adapt to infrastructure changes, while static groups remain fixed.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "computer-groups",
+      "types"
+    ],
+    "domain": "refining-questions-targeting"
+  },
+  {
+    "front_text": "What is the 'from' clause used for in Tanium questions?",
+    "back_text": "The 'from' clause specifies the target scope: 'from all machines' queries every endpoint, while 'from [Computer Group]' targets only endpoints in that group.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "targeting"
+    ],
+    "domain": "refining-questions-targeting"
+  },
+  {
+    "front_text": "How do you create a Computer Group in Tanium?",
+    "back_text": "Navigate to Administration > Computer Groups, click 'New', define filter criteria using sensors (e.g., 'Operating System contains Windows'), test the filter, and save with a descriptive name.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "computer-groups"
+    ],
+    "domain": "refining-questions-targeting"
+  },
+  {
+    "front_text": "What operators are available for filtering Tanium results?",
+    "back_text": "Available operators include: 'contains', 'starts with', 'ends with', 'equals', 'does not contain', '>', '<', '>=', '<=', 'is', 'is not'. Use these in 'where' clauses to refine results.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "filtering",
+      "operators"
+    ],
+    "domain": "refining-questions-targeting"
+  },
+  {
+    "front_text": "How does RBAC integrate with Computer Groups?",
+    "back_text": "Role-Based Access Control (RBAC) uses Computer Groups to restrict user permissions. Users only see endpoints in their assigned groups, ensuring data isolation and security.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "rbac",
+      "security"
+    ],
+    "domain": "refining-questions-targeting"
+  },
+  {
+    "front_text": "What is the difference between static and dynamic Computer Groups?",
+    "back_text": "Dynamic groups update automatically based on sensor criteria (e.g., 'OS=Windows'). Static groups contain manually specified endpoints. Dynamic groups adapt to infrastructure changes, while static groups remain fixed.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "computer-groups",
+      "types"
+    ],
+    "domain": "refining-questions-targeting"
+  },
+  {
+    "front_text": "What is the 'from' clause used for in Tanium questions?",
+    "back_text": "The 'from' clause specifies the target scope: 'from all machines' queries every endpoint, while 'from [Computer Group]' targets only endpoints in that group.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "targeting"
+    ],
+    "domain": "refining-questions-targeting"
+  },
+  {
+    "front_text": "How do you create a Computer Group in Tanium?",
+    "back_text": "Navigate to Administration > Computer Groups, click 'New', define filter criteria using sensors (e.g., 'Operating System contains Windows'), test the filter, and save with a descriptive name.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "computer-groups"
+    ],
+    "domain": "refining-questions-targeting"
+  },
+  {
+    "front_text": "What operators are available for filtering Tanium results?",
+    "back_text": "Available operators include: 'contains', 'starts with', 'ends with', 'equals', 'does not contain', '>', '<', '>=', '<=', 'is', 'is not'. Use these in 'where' clauses to refine results.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "filtering",
+      "operators"
+    ],
+    "domain": "refining-questions-targeting"
+  },
+  {
+    "front_text": "How does RBAC integrate with Computer Groups?",
+    "back_text": "Role-Based Access Control (RBAC) uses Computer Groups to restrict user permissions. Users only see endpoints in their assigned groups, ensuring data isolation and security.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "rbac",
+      "security"
+    ],
+    "domain": "refining-questions-targeting"
+  },
+  {
+    "front_text": "What is the difference between static and dynamic Computer Groups?",
+    "back_text": "Dynamic groups update automatically based on sensor criteria (e.g., 'OS=Windows'). Static groups contain manually specified endpoints. Dynamic groups adapt to infrastructure changes, while static groups remain fixed.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "computer-groups",
+      "types"
+    ],
+    "domain": "refining-questions-targeting"
+  },
+  {
+    "front_text": "What is the 'from' clause used for in Tanium questions?",
+    "back_text": "The 'from' clause specifies the target scope: 'from all machines' queries every endpoint, while 'from [Computer Group]' targets only endpoints in that group.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "targeting"
+    ],
+    "domain": "refining-questions-targeting"
+  },
+  {
+    "front_text": "How do you create a Computer Group in Tanium?",
+    "back_text": "Navigate to Administration > Computer Groups, click 'New', define filter criteria using sensors (e.g., 'Operating System contains Windows'), test the filter, and save with a descriptive name.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "computer-groups"
+    ],
+    "domain": "refining-questions-targeting"
+  },
+  {
+    "front_text": "What operators are available for filtering Tanium results?",
+    "back_text": "Available operators include: 'contains', 'starts with', 'ends with', 'equals', 'does not contain', '>', '<', '>=', '<=', 'is', 'is not'. Use these in 'where' clauses to refine results.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "filtering",
+      "operators"
+    ],
+    "domain": "refining-questions-targeting"
+  },
+  {
+    "front_text": "How does RBAC integrate with Computer Groups?",
+    "back_text": "Role-Based Access Control (RBAC) uses Computer Groups to restrict user permissions. Users only see endpoints in their assigned groups, ensuring data isolation and security.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "rbac",
+      "security"
+    ],
+    "domain": "refining-questions-targeting"
+  },
+  {
+    "front_text": "What is the difference between static and dynamic Computer Groups?",
+    "back_text": "Dynamic groups update automatically based on sensor criteria (e.g., 'OS=Windows'). Static groups contain manually specified endpoints. Dynamic groups adapt to infrastructure changes, while static groups remain fixed.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "computer-groups",
+      "types"
+    ],
+    "domain": "refining-questions-targeting"
+  },
+  {
+    "front_text": "What is the 'from' clause used for in Tanium questions?",
+    "back_text": "The 'from' clause specifies the target scope: 'from all machines' queries every endpoint, while 'from [Computer Group]' targets only endpoints in that group.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "targeting"
+    ],
+    "domain": "refining-questions-targeting"
+  },
+  {
+    "front_text": "How do you create a Computer Group in Tanium?",
+    "back_text": "Navigate to Administration > Computer Groups, click 'New', define filter criteria using sensors (e.g., 'Operating System contains Windows'), test the filter, and save with a descriptive name.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "computer-groups"
+    ],
+    "domain": "refining-questions-targeting"
+  },
+  {
+    "front_text": "What operators are available for filtering Tanium results?",
+    "back_text": "Available operators include: 'contains', 'starts with', 'ends with', 'equals', 'does not contain', '>', '<', '>=', '<=', 'is', 'is not'. Use these in 'where' clauses to refine results.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "filtering",
+      "operators"
+    ],
+    "domain": "refining-questions-targeting"
+  },
+  {
+    "front_text": "How does RBAC integrate with Computer Groups?",
+    "back_text": "Role-Based Access Control (RBAC) uses Computer Groups to restrict user permissions. Users only see endpoints in their assigned groups, ensuring data isolation and security.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "rbac",
+      "security"
+    ],
+    "domain": "refining-questions-targeting"
+  },
+  {
+    "front_text": "What is the difference between static and dynamic Computer Groups?",
+    "back_text": "Dynamic groups update automatically based on sensor criteria (e.g., 'OS=Windows'). Static groups contain manually specified endpoints. Dynamic groups adapt to infrastructure changes, while static groups remain fixed.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "computer-groups",
+      "types"
+    ],
+    "domain": "refining-questions-targeting"
+  },
+  {
+    "front_text": "What is the 'from' clause used for in Tanium questions?",
+    "back_text": "The 'from' clause specifies the target scope: 'from all machines' queries every endpoint, while 'from [Computer Group]' targets only endpoints in that group.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "targeting"
+    ],
+    "domain": "refining-questions-targeting"
+  },
+  {
+    "front_text": "How do you create a Computer Group in Tanium?",
+    "back_text": "Navigate to Administration > Computer Groups, click 'New', define filter criteria using sensors (e.g., 'Operating System contains Windows'), test the filter, and save with a descriptive name.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "computer-groups"
+    ],
+    "domain": "refining-questions-targeting"
+  },
+  {
+    "front_text": "What operators are available for filtering Tanium results?",
+    "back_text": "Available operators include: 'contains', 'starts with', 'ends with', 'equals', 'does not contain', '>', '<', '>=', '<=', 'is', 'is not'. Use these in 'where' clauses to refine results.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "filtering",
+      "operators"
+    ],
+    "domain": "refining-questions-targeting"
+  },
+  {
+    "front_text": "How does RBAC integrate with Computer Groups?",
+    "back_text": "Role-Based Access Control (RBAC) uses Computer Groups to restrict user permissions. Users only see endpoints in their assigned groups, ensuring data isolation and security.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "rbac",
+      "security"
+    ],
+    "domain": "refining-questions-targeting"
+  },
+  {
+    "front_text": "What is the difference between static and dynamic Computer Groups?",
+    "back_text": "Dynamic groups update automatically based on sensor criteria (e.g., 'OS=Windows'). Static groups contain manually specified endpoints. Dynamic groups adapt to infrastructure changes, while static groups remain fixed.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "computer-groups",
+      "types"
+    ],
+    "domain": "refining-questions-targeting"
+  },
+  {
+    "front_text": "What is the 'from' clause used for in Tanium questions?",
+    "back_text": "The 'from' clause specifies the target scope: 'from all machines' queries every endpoint, while 'from [Computer Group]' targets only endpoints in that group.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "targeting"
+    ],
+    "domain": "refining-questions-targeting"
+  },
+  {
+    "front_text": "How do you create a Computer Group in Tanium?",
+    "back_text": "Navigate to Administration > Computer Groups, click 'New', define filter criteria using sensors (e.g., 'Operating System contains Windows'), test the filter, and save with a descriptive name.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "computer-groups"
+    ],
+    "domain": "refining-questions-targeting"
+  },
+  {
+    "front_text": "What operators are available for filtering Tanium results?",
+    "back_text": "Available operators include: 'contains', 'starts with', 'ends with', 'equals', 'does not contain', '>', '<', '>=', '<=', 'is', 'is not'. Use these in 'where' clauses to refine results.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "filtering",
+      "operators"
+    ],
+    "domain": "refining-questions-targeting"
+  },
+  {
+    "front_text": "How does RBAC integrate with Computer Groups?",
+    "back_text": "Role-Based Access Control (RBAC) uses Computer Groups to restrict user permissions. Users only see endpoints in their assigned groups, ensuring data isolation and security.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "rbac",
+      "security"
+    ],
+    "domain": "refining-questions-targeting"
+  },
+  {
+    "front_text": "What is the difference between static and dynamic Computer Groups?",
+    "back_text": "Dynamic groups update automatically based on sensor criteria (e.g., 'OS=Windows'). Static groups contain manually specified endpoints. Dynamic groups adapt to infrastructure changes, while static groups remain fixed.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "computer-groups",
+      "types"
+    ],
+    "domain": "refining-questions-targeting"
+  },
+  {
+    "front_text": "What is the 'from' clause used for in Tanium questions?",
+    "back_text": "The 'from' clause specifies the target scope: 'from all machines' queries every endpoint, while 'from [Computer Group]' targets only endpoints in that group.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "targeting"
+    ],
+    "domain": "refining-questions-targeting"
+  },
+  {
+    "front_text": "How do you create a Computer Group in Tanium?",
+    "back_text": "Navigate to Administration > Computer Groups, click 'New', define filter criteria using sensors (e.g., 'Operating System contains Windows'), test the filter, and save with a descriptive name.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "computer-groups"
+    ],
+    "domain": "refining-questions-targeting"
+  },
+  {
+    "front_text": "What operators are available for filtering Tanium results?",
+    "back_text": "Available operators include: 'contains', 'starts with', 'ends with', 'equals', 'does not contain', '>', '<', '>=', '<=', 'is', 'is not'. Use these in 'where' clauses to refine results.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "filtering",
+      "operators"
+    ],
+    "domain": "refining-questions-targeting"
+  },
+  {
+    "front_text": "How does RBAC integrate with Computer Groups?",
+    "back_text": "Role-Based Access Control (RBAC) uses Computer Groups to restrict user permissions. Users only see endpoints in their assigned groups, ensuring data isolation and security.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "rbac",
+      "security"
+    ],
+    "domain": "refining-questions-targeting"
+  },
+  {
+    "front_text": "What is the difference between static and dynamic Computer Groups?",
+    "back_text": "Dynamic groups update automatically based on sensor criteria (e.g., 'OS=Windows'). Static groups contain manually specified endpoints. Dynamic groups adapt to infrastructure changes, while static groups remain fixed.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "computer-groups",
+      "types"
+    ],
+    "domain": "refining-questions-targeting"
+  },
+  {
+    "front_text": "What is the 'from' clause used for in Tanium questions?",
+    "back_text": "The 'from' clause specifies the target scope: 'from all machines' queries every endpoint, while 'from [Computer Group]' targets only endpoints in that group.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "targeting"
+    ],
+    "domain": "refining-questions-targeting"
+  },
+  {
+    "front_text": "How do you create a Computer Group in Tanium?",
+    "back_text": "Navigate to Administration > Computer Groups, click 'New', define filter criteria using sensors (e.g., 'Operating System contains Windows'), test the filter, and save with a descriptive name.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "computer-groups"
+    ],
+    "domain": "refining-questions-targeting"
+  },
+  {
+    "front_text": "What operators are available for filtering Tanium results?",
+    "back_text": "Available operators include: 'contains', 'starts with', 'ends with', 'equals', 'does not contain', '>', '<', '>=', '<=', 'is', 'is not'. Use these in 'where' clauses to refine results.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "filtering",
+      "operators"
+    ],
+    "domain": "refining-questions-targeting"
+  },
+  {
+    "front_text": "How does RBAC integrate with Computer Groups?",
+    "back_text": "Role-Based Access Control (RBAC) uses Computer Groups to restrict user permissions. Users only see endpoints in their assigned groups, ensuring data isolation and security.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "rbac",
+      "security"
+    ],
+    "domain": "refining-questions-targeting"
+  },
+  {
+    "front_text": "What is the difference between static and dynamic Computer Groups?",
+    "back_text": "Dynamic groups update automatically based on sensor criteria (e.g., 'OS=Windows'). Static groups contain manually specified endpoints. Dynamic groups adapt to infrastructure changes, while static groups remain fixed.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "computer-groups",
+      "types"
+    ],
+    "domain": "refining-questions-targeting"
+  },
+  {
+    "front_text": "What is the 'from' clause used for in Tanium questions?",
+    "back_text": "The 'from' clause specifies the target scope: 'from all machines' queries every endpoint, while 'from [Computer Group]' targets only endpoints in that group.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "targeting"
+    ],
+    "domain": "refining-questions-targeting"
+  },
+  {
+    "front_text": "How do you create a Computer Group in Tanium?",
+    "back_text": "Navigate to Administration > Computer Groups, click 'New', define filter criteria using sensors (e.g., 'Operating System contains Windows'), test the filter, and save with a descriptive name.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "computer-groups"
+    ],
+    "domain": "refining-questions-targeting"
+  },
+  {
+    "front_text": "What operators are available for filtering Tanium results?",
+    "back_text": "Available operators include: 'contains', 'starts with', 'ends with', 'equals', 'does not contain', '>', '<', '>=', '<=', 'is', 'is not'. Use these in 'where' clauses to refine results.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "filtering",
+      "operators"
+    ],
+    "domain": "refining-questions-targeting"
+  },
+  {
+    "front_text": "How does RBAC integrate with Computer Groups?",
+    "back_text": "Role-Based Access Control (RBAC) uses Computer Groups to restrict user permissions. Users only see endpoints in their assigned groups, ensuring data isolation and security.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "rbac",
+      "security"
+    ],
+    "domain": "refining-questions-targeting"
+  },
+  {
+    "front_text": "What is the difference between static and dynamic Computer Groups?",
+    "back_text": "Dynamic groups update automatically based on sensor criteria (e.g., 'OS=Windows'). Static groups contain manually specified endpoints. Dynamic groups adapt to infrastructure changes, while static groups remain fixed.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "computer-groups",
+      "types"
+    ],
+    "domain": "refining-questions-targeting"
+  },
+  {
+    "front_text": "What is the 'from' clause used for in Tanium questions?",
+    "back_text": "The 'from' clause specifies the target scope: 'from all machines' queries every endpoint, while 'from [Computer Group]' targets only endpoints in that group.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "targeting"
+    ],
+    "domain": "refining-questions-targeting"
+  },
+  {
+    "front_text": "How do you create a Computer Group in Tanium?",
+    "back_text": "Navigate to Administration > Computer Groups, click 'New', define filter criteria using sensors (e.g., 'Operating System contains Windows'), test the filter, and save with a descriptive name.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "computer-groups"
+    ],
+    "domain": "refining-questions-targeting"
+  },
+  {
+    "front_text": "What operators are available for filtering Tanium results?",
+    "back_text": "Available operators include: 'contains', 'starts with', 'ends with', 'equals', 'does not contain', '>', '<', '>=', '<=', 'is', 'is not'. Use these in 'where' clauses to refine results.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "filtering",
+      "operators"
+    ],
+    "domain": "refining-questions-targeting"
+  },
+  {
+    "front_text": "How does RBAC integrate with Computer Groups?",
+    "back_text": "Role-Based Access Control (RBAC) uses Computer Groups to restrict user permissions. Users only see endpoints in their assigned groups, ensuring data isolation and security.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "rbac",
+      "security"
+    ],
+    "domain": "refining-questions-targeting"
+  },
+  {
+    "front_text": "What is the difference between static and dynamic Computer Groups?",
+    "back_text": "Dynamic groups update automatically based on sensor criteria (e.g., 'OS=Windows'). Static groups contain manually specified endpoints. Dynamic groups adapt to infrastructure changes, while static groups remain fixed.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "computer-groups",
+      "types"
+    ],
+    "domain": "refining-questions-targeting"
+  },
+  {
+    "front_text": "What is the 'from' clause used for in Tanium questions?",
+    "back_text": "The 'from' clause specifies the target scope: 'from all machines' queries every endpoint, while 'from [Computer Group]' targets only endpoints in that group.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "targeting"
+    ],
+    "domain": "refining-questions-targeting"
+  },
+  {
+    "front_text": "How do you create a Computer Group in Tanium?",
+    "back_text": "Navigate to Administration > Computer Groups, click 'New', define filter criteria using sensors (e.g., 'Operating System contains Windows'), test the filter, and save with a descriptive name.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "computer-groups"
+    ],
+    "domain": "refining-questions-targeting"
+  },
+  {
+    "front_text": "What operators are available for filtering Tanium results?",
+    "back_text": "Available operators include: 'contains', 'starts with', 'ends with', 'equals', 'does not contain', '>', '<', '>=', '<=', 'is', 'is not'. Use these in 'where' clauses to refine results.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "filtering",
+      "operators"
+    ],
+    "domain": "refining-questions-targeting"
+  },
+  {
+    "front_text": "How does RBAC integrate with Computer Groups?",
+    "back_text": "Role-Based Access Control (RBAC) uses Computer Groups to restrict user permissions. Users only see endpoints in their assigned groups, ensuring data isolation and security.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "rbac",
+      "security"
+    ],
+    "domain": "refining-questions-targeting"
+  },
+  {
+    "front_text": "What is the difference between static and dynamic Computer Groups?",
+    "back_text": "Dynamic groups update automatically based on sensor criteria (e.g., 'OS=Windows'). Static groups contain manually specified endpoints. Dynamic groups adapt to infrastructure changes, while static groups remain fixed.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "computer-groups",
+      "types"
+    ],
+    "domain": "refining-questions-targeting"
+  },
+  {
+    "front_text": "What is the 'from' clause used for in Tanium questions?",
+    "back_text": "The 'from' clause specifies the target scope: 'from all machines' queries every endpoint, while 'from [Computer Group]' targets only endpoints in that group.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "targeting"
+    ],
+    "domain": "refining-questions-targeting"
+  },
+  {
+    "front_text": "How do you create a Computer Group in Tanium?",
+    "back_text": "Navigate to Administration > Computer Groups, click 'New', define filter criteria using sensors (e.g., 'Operating System contains Windows'), test the filter, and save with a descriptive name.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "computer-groups"
+    ],
+    "domain": "refining-questions-targeting"
+  },
+  {
+    "front_text": "What operators are available for filtering Tanium results?",
+    "back_text": "Available operators include: 'contains', 'starts with', 'ends with', 'equals', 'does not contain', '>', '<', '>=', '<=', 'is', 'is not'. Use these in 'where' clauses to refine results.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "filtering",
+      "operators"
+    ],
+    "domain": "refining-questions-targeting"
+  },
+  {
+    "front_text": "How does RBAC integrate with Computer Groups?",
+    "back_text": "Role-Based Access Control (RBAC) uses Computer Groups to restrict user permissions. Users only see endpoints in their assigned groups, ensuring data isolation and security.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "rbac",
+      "security"
+    ],
+    "domain": "refining-questions-targeting"
+  },
+  {
+    "front_text": "What is the difference between static and dynamic Computer Groups?",
+    "back_text": "Dynamic groups update automatically based on sensor criteria (e.g., 'OS=Windows'). Static groups contain manually specified endpoints. Dynamic groups adapt to infrastructure changes, while static groups remain fixed.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "computer-groups",
+      "types"
+    ],
+    "domain": "refining-questions-targeting"
+  },
+  {
+    "front_text": "What is the 'from' clause used for in Tanium questions?",
+    "back_text": "The 'from' clause specifies the target scope: 'from all machines' queries every endpoint, while 'from [Computer Group]' targets only endpoints in that group.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "targeting"
+    ],
+    "domain": "refining-questions-targeting"
+  },
+  {
+    "front_text": "How do you create a Computer Group in Tanium?",
+    "back_text": "Navigate to Administration > Computer Groups, click 'New', define filter criteria using sensors (e.g., 'Operating System contains Windows'), test the filter, and save with a descriptive name.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "computer-groups"
+    ],
+    "domain": "refining-questions-targeting"
+  },
+  {
+    "front_text": "What operators are available for filtering Tanium results?",
+    "back_text": "Available operators include: 'contains', 'starts with', 'ends with', 'equals', 'does not contain', '>', '<', '>=', '<=', 'is', 'is not'. Use these in 'where' clauses to refine results.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "filtering",
+      "operators"
+    ],
+    "domain": "refining-questions-targeting"
+  },
+  {
+    "front_text": "How does RBAC integrate with Computer Groups?",
+    "back_text": "Role-Based Access Control (RBAC) uses Computer Groups to restrict user permissions. Users only see endpoints in their assigned groups, ensuring data isolation and security.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "rbac",
+      "security"
+    ],
+    "domain": "refining-questions-targeting"
+  },
+  {
+    "front_text": "What is the difference between static and dynamic Computer Groups?",
+    "back_text": "Dynamic groups update automatically based on sensor criteria (e.g., 'OS=Windows'). Static groups contain manually specified endpoints. Dynamic groups adapt to infrastructure changes, while static groups remain fixed.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "computer-groups",
+      "types"
+    ],
+    "domain": "refining-questions-targeting"
+  },
+  {
+    "front_text": "What is the 'from' clause used for in Tanium questions?",
+    "back_text": "The 'from' clause specifies the target scope: 'from all machines' queries every endpoint, while 'from [Computer Group]' targets only endpoints in that group.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "targeting"
+    ],
+    "domain": "refining-questions-targeting"
+  },
+  {
+    "front_text": "What is the difference between a Package and an Action?",
+    "back_text": "A Package is the deployment unit (script/command/files to execute). An Action is the execution instance that applies a Package to specific endpoints. One Package can be used in multiple Actions.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "packages",
+      "actions"
+    ],
+    "domain": "taking-action-packages-actions"
+  },
+  {
+    "front_text": "How do you deploy a Package to specific endpoints?",
+    "back_text": "Create an Action by selecting a Package, specify target endpoints using Computer Groups or filters, set deployment parameters (schedule, timeout, reissue), and click 'Deploy Action'.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "deployment"
+    ],
+    "domain": "taking-action-packages-actions"
+  },
+  {
+    "front_text": "What is the Action Status dashboard used for?",
+    "back_text": "Action Status shows real-time deployment progress: pending/running/completed/failed counts, detailed endpoint results, error messages, and performance metrics. Use it to monitor and troubleshoot deployments.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "monitoring",
+      "action-status"
+    ],
+    "domain": "taking-action-packages-actions"
+  },
+  {
+    "front_text": "How do you perform a rollback after a failed Package deployment?",
+    "back_text": "Create a new Action with a rollback Package that reverses the changes (e.g., uninstall software, restore configuration). Target the same endpoints, verify success in Action Status, then confirm state with verification questions.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "rollback",
+      "remediation"
+    ],
+    "domain": "taking-action-packages-actions"
+  },
+  {
+    "front_text": "What is the purpose of Package parameters?",
+    "back_text": "Package parameters allow customization at deployment time. For example, a 'Software Install' package might accept parameters for install path, license key, or configuration options without modifying the Package itself.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "packages",
+      "parameters"
+    ],
+    "domain": "taking-action-packages-actions"
+  },
+  {
+    "front_text": "What is the difference between a Package and an Action?",
+    "back_text": "A Package is the deployment unit (script/command/files to execute). An Action is the execution instance that applies a Package to specific endpoints. One Package can be used in multiple Actions.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "packages",
+      "actions"
+    ],
+    "domain": "taking-action-packages-actions"
+  },
+  {
+    "front_text": "How do you deploy a Package to specific endpoints?",
+    "back_text": "Create an Action by selecting a Package, specify target endpoints using Computer Groups or filters, set deployment parameters (schedule, timeout, reissue), and click 'Deploy Action'.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "deployment"
+    ],
+    "domain": "taking-action-packages-actions"
+  },
+  {
+    "front_text": "What is the Action Status dashboard used for?",
+    "back_text": "Action Status shows real-time deployment progress: pending/running/completed/failed counts, detailed endpoint results, error messages, and performance metrics. Use it to monitor and troubleshoot deployments.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "monitoring",
+      "action-status"
+    ],
+    "domain": "taking-action-packages-actions"
+  },
+  {
+    "front_text": "How do you perform a rollback after a failed Package deployment?",
+    "back_text": "Create a new Action with a rollback Package that reverses the changes (e.g., uninstall software, restore configuration). Target the same endpoints, verify success in Action Status, then confirm state with verification questions.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "rollback",
+      "remediation"
+    ],
+    "domain": "taking-action-packages-actions"
+  },
+  {
+    "front_text": "What is the purpose of Package parameters?",
+    "back_text": "Package parameters allow customization at deployment time. For example, a 'Software Install' package might accept parameters for install path, license key, or configuration options without modifying the Package itself.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "packages",
+      "parameters"
+    ],
+    "domain": "taking-action-packages-actions"
+  },
+  {
+    "front_text": "What is the difference between a Package and an Action?",
+    "back_text": "A Package is the deployment unit (script/command/files to execute). An Action is the execution instance that applies a Package to specific endpoints. One Package can be used in multiple Actions.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "packages",
+      "actions"
+    ],
+    "domain": "taking-action-packages-actions"
+  },
+  {
+    "front_text": "How do you deploy a Package to specific endpoints?",
+    "back_text": "Create an Action by selecting a Package, specify target endpoints using Computer Groups or filters, set deployment parameters (schedule, timeout, reissue), and click 'Deploy Action'.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "deployment"
+    ],
+    "domain": "taking-action-packages-actions"
+  },
+  {
+    "front_text": "What is the Action Status dashboard used for?",
+    "back_text": "Action Status shows real-time deployment progress: pending/running/completed/failed counts, detailed endpoint results, error messages, and performance metrics. Use it to monitor and troubleshoot deployments.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "monitoring",
+      "action-status"
+    ],
+    "domain": "taking-action-packages-actions"
+  },
+  {
+    "front_text": "How do you perform a rollback after a failed Package deployment?",
+    "back_text": "Create a new Action with a rollback Package that reverses the changes (e.g., uninstall software, restore configuration). Target the same endpoints, verify success in Action Status, then confirm state with verification questions.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "rollback",
+      "remediation"
+    ],
+    "domain": "taking-action-packages-actions"
+  },
+  {
+    "front_text": "What is the purpose of Package parameters?",
+    "back_text": "Package parameters allow customization at deployment time. For example, a 'Software Install' package might accept parameters for install path, license key, or configuration options without modifying the Package itself.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "packages",
+      "parameters"
+    ],
+    "domain": "taking-action-packages-actions"
+  },
+  {
+    "front_text": "What is the difference between a Package and an Action?",
+    "back_text": "A Package is the deployment unit (script/command/files to execute). An Action is the execution instance that applies a Package to specific endpoints. One Package can be used in multiple Actions.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "packages",
+      "actions"
+    ],
+    "domain": "taking-action-packages-actions"
+  },
+  {
+    "front_text": "How do you deploy a Package to specific endpoints?",
+    "back_text": "Create an Action by selecting a Package, specify target endpoints using Computer Groups or filters, set deployment parameters (schedule, timeout, reissue), and click 'Deploy Action'.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "deployment"
+    ],
+    "domain": "taking-action-packages-actions"
+  },
+  {
+    "front_text": "What is the Action Status dashboard used for?",
+    "back_text": "Action Status shows real-time deployment progress: pending/running/completed/failed counts, detailed endpoint results, error messages, and performance metrics. Use it to monitor and troubleshoot deployments.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "monitoring",
+      "action-status"
+    ],
+    "domain": "taking-action-packages-actions"
+  },
+  {
+    "front_text": "How do you perform a rollback after a failed Package deployment?",
+    "back_text": "Create a new Action with a rollback Package that reverses the changes (e.g., uninstall software, restore configuration). Target the same endpoints, verify success in Action Status, then confirm state with verification questions.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "rollback",
+      "remediation"
+    ],
+    "domain": "taking-action-packages-actions"
+  },
+  {
+    "front_text": "What is the purpose of Package parameters?",
+    "back_text": "Package parameters allow customization at deployment time. For example, a 'Software Install' package might accept parameters for install path, license key, or configuration options without modifying the Package itself.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "packages",
+      "parameters"
+    ],
+    "domain": "taking-action-packages-actions"
+  },
+  {
+    "front_text": "What is the difference between a Package and an Action?",
+    "back_text": "A Package is the deployment unit (script/command/files to execute). An Action is the execution instance that applies a Package to specific endpoints. One Package can be used in multiple Actions.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "packages",
+      "actions"
+    ],
+    "domain": "taking-action-packages-actions"
+  },
+  {
+    "front_text": "How do you deploy a Package to specific endpoints?",
+    "back_text": "Create an Action by selecting a Package, specify target endpoints using Computer Groups or filters, set deployment parameters (schedule, timeout, reissue), and click 'Deploy Action'.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "deployment"
+    ],
+    "domain": "taking-action-packages-actions"
+  },
+  {
+    "front_text": "What is the Action Status dashboard used for?",
+    "back_text": "Action Status shows real-time deployment progress: pending/running/completed/failed counts, detailed endpoint results, error messages, and performance metrics. Use it to monitor and troubleshoot deployments.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "monitoring",
+      "action-status"
+    ],
+    "domain": "taking-action-packages-actions"
+  },
+  {
+    "front_text": "How do you perform a rollback after a failed Package deployment?",
+    "back_text": "Create a new Action with a rollback Package that reverses the changes (e.g., uninstall software, restore configuration). Target the same endpoints, verify success in Action Status, then confirm state with verification questions.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "rollback",
+      "remediation"
+    ],
+    "domain": "taking-action-packages-actions"
+  },
+  {
+    "front_text": "What is the purpose of Package parameters?",
+    "back_text": "Package parameters allow customization at deployment time. For example, a 'Software Install' package might accept parameters for install path, license key, or configuration options without modifying the Package itself.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "packages",
+      "parameters"
+    ],
+    "domain": "taking-action-packages-actions"
+  },
+  {
+    "front_text": "What is the difference between a Package and an Action?",
+    "back_text": "A Package is the deployment unit (script/command/files to execute). An Action is the execution instance that applies a Package to specific endpoints. One Package can be used in multiple Actions.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "packages",
+      "actions"
+    ],
+    "domain": "taking-action-packages-actions"
+  },
+  {
+    "front_text": "How do you deploy a Package to specific endpoints?",
+    "back_text": "Create an Action by selecting a Package, specify target endpoints using Computer Groups or filters, set deployment parameters (schedule, timeout, reissue), and click 'Deploy Action'.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "deployment"
+    ],
+    "domain": "taking-action-packages-actions"
+  },
+  {
+    "front_text": "What is the Action Status dashboard used for?",
+    "back_text": "Action Status shows real-time deployment progress: pending/running/completed/failed counts, detailed endpoint results, error messages, and performance metrics. Use it to monitor and troubleshoot deployments.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "monitoring",
+      "action-status"
+    ],
+    "domain": "taking-action-packages-actions"
+  },
+  {
+    "front_text": "How do you perform a rollback after a failed Package deployment?",
+    "back_text": "Create a new Action with a rollback Package that reverses the changes (e.g., uninstall software, restore configuration). Target the same endpoints, verify success in Action Status, then confirm state with verification questions.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "rollback",
+      "remediation"
+    ],
+    "domain": "taking-action-packages-actions"
+  },
+  {
+    "front_text": "What is the purpose of Package parameters?",
+    "back_text": "Package parameters allow customization at deployment time. For example, a 'Software Install' package might accept parameters for install path, license key, or configuration options without modifying the Package itself.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "packages",
+      "parameters"
+    ],
+    "domain": "taking-action-packages-actions"
+  },
+  {
+    "front_text": "What is the difference between a Package and an Action?",
+    "back_text": "A Package is the deployment unit (script/command/files to execute). An Action is the execution instance that applies a Package to specific endpoints. One Package can be used in multiple Actions.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "packages",
+      "actions"
+    ],
+    "domain": "taking-action-packages-actions"
+  },
+  {
+    "front_text": "How do you deploy a Package to specific endpoints?",
+    "back_text": "Create an Action by selecting a Package, specify target endpoints using Computer Groups or filters, set deployment parameters (schedule, timeout, reissue), and click 'Deploy Action'.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "deployment"
+    ],
+    "domain": "taking-action-packages-actions"
+  },
+  {
+    "front_text": "What is the Action Status dashboard used for?",
+    "back_text": "Action Status shows real-time deployment progress: pending/running/completed/failed counts, detailed endpoint results, error messages, and performance metrics. Use it to monitor and troubleshoot deployments.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "monitoring",
+      "action-status"
+    ],
+    "domain": "taking-action-packages-actions"
+  },
+  {
+    "front_text": "How do you perform a rollback after a failed Package deployment?",
+    "back_text": "Create a new Action with a rollback Package that reverses the changes (e.g., uninstall software, restore configuration). Target the same endpoints, verify success in Action Status, then confirm state with verification questions.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "rollback",
+      "remediation"
+    ],
+    "domain": "taking-action-packages-actions"
+  },
+  {
+    "front_text": "What is the purpose of Package parameters?",
+    "back_text": "Package parameters allow customization at deployment time. For example, a 'Software Install' package might accept parameters for install path, license key, or configuration options without modifying the Package itself.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "packages",
+      "parameters"
+    ],
+    "domain": "taking-action-packages-actions"
+  },
+  {
+    "front_text": "What is the difference between a Package and an Action?",
+    "back_text": "A Package is the deployment unit (script/command/files to execute). An Action is the execution instance that applies a Package to specific endpoints. One Package can be used in multiple Actions.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "packages",
+      "actions"
+    ],
+    "domain": "taking-action-packages-actions"
+  },
+  {
+    "front_text": "How do you deploy a Package to specific endpoints?",
+    "back_text": "Create an Action by selecting a Package, specify target endpoints using Computer Groups or filters, set deployment parameters (schedule, timeout, reissue), and click 'Deploy Action'.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "deployment"
+    ],
+    "domain": "taking-action-packages-actions"
+  },
+  {
+    "front_text": "What is the Action Status dashboard used for?",
+    "back_text": "Action Status shows real-time deployment progress: pending/running/completed/failed counts, detailed endpoint results, error messages, and performance metrics. Use it to monitor and troubleshoot deployments.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "monitoring",
+      "action-status"
+    ],
+    "domain": "taking-action-packages-actions"
+  },
+  {
+    "front_text": "How do you perform a rollback after a failed Package deployment?",
+    "back_text": "Create a new Action with a rollback Package that reverses the changes (e.g., uninstall software, restore configuration). Target the same endpoints, verify success in Action Status, then confirm state with verification questions.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "rollback",
+      "remediation"
+    ],
+    "domain": "taking-action-packages-actions"
+  },
+  {
+    "front_text": "What is the purpose of Package parameters?",
+    "back_text": "Package parameters allow customization at deployment time. For example, a 'Software Install' package might accept parameters for install path, license key, or configuration options without modifying the Package itself.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "packages",
+      "parameters"
+    ],
+    "domain": "taking-action-packages-actions"
+  },
+  {
+    "front_text": "What is the difference between a Package and an Action?",
+    "back_text": "A Package is the deployment unit (script/command/files to execute). An Action is the execution instance that applies a Package to specific endpoints. One Package can be used in multiple Actions.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "packages",
+      "actions"
+    ],
+    "domain": "taking-action-packages-actions"
+  },
+  {
+    "front_text": "How do you deploy a Package to specific endpoints?",
+    "back_text": "Create an Action by selecting a Package, specify target endpoints using Computer Groups or filters, set deployment parameters (schedule, timeout, reissue), and click 'Deploy Action'.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "deployment"
+    ],
+    "domain": "taking-action-packages-actions"
+  },
+  {
+    "front_text": "What is the Action Status dashboard used for?",
+    "back_text": "Action Status shows real-time deployment progress: pending/running/completed/failed counts, detailed endpoint results, error messages, and performance metrics. Use it to monitor and troubleshoot deployments.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "monitoring",
+      "action-status"
+    ],
+    "domain": "taking-action-packages-actions"
+  },
+  {
+    "front_text": "How do you perform a rollback after a failed Package deployment?",
+    "back_text": "Create a new Action with a rollback Package that reverses the changes (e.g., uninstall software, restore configuration). Target the same endpoints, verify success in Action Status, then confirm state with verification questions.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "rollback",
+      "remediation"
+    ],
+    "domain": "taking-action-packages-actions"
+  },
+  {
+    "front_text": "What is the purpose of Package parameters?",
+    "back_text": "Package parameters allow customization at deployment time. For example, a 'Software Install' package might accept parameters for install path, license key, or configuration options without modifying the Package itself.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "packages",
+      "parameters"
+    ],
+    "domain": "taking-action-packages-actions"
+  },
+  {
+    "front_text": "What is the difference between a Package and an Action?",
+    "back_text": "A Package is the deployment unit (script/command/files to execute). An Action is the execution instance that applies a Package to specific endpoints. One Package can be used in multiple Actions.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "packages",
+      "actions"
+    ],
+    "domain": "taking-action-packages-actions"
+  },
+  {
+    "front_text": "How do you deploy a Package to specific endpoints?",
+    "back_text": "Create an Action by selecting a Package, specify target endpoints using Computer Groups or filters, set deployment parameters (schedule, timeout, reissue), and click 'Deploy Action'.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "deployment"
+    ],
+    "domain": "taking-action-packages-actions"
+  },
+  {
+    "front_text": "What is the Action Status dashboard used for?",
+    "back_text": "Action Status shows real-time deployment progress: pending/running/completed/failed counts, detailed endpoint results, error messages, and performance metrics. Use it to monitor and troubleshoot deployments.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "monitoring",
+      "action-status"
+    ],
+    "domain": "taking-action-packages-actions"
+  },
+  {
+    "front_text": "How do you perform a rollback after a failed Package deployment?",
+    "back_text": "Create a new Action with a rollback Package that reverses the changes (e.g., uninstall software, restore configuration). Target the same endpoints, verify success in Action Status, then confirm state with verification questions.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "rollback",
+      "remediation"
+    ],
+    "domain": "taking-action-packages-actions"
+  },
+  {
+    "front_text": "What is the purpose of Package parameters?",
+    "back_text": "Package parameters allow customization at deployment time. For example, a 'Software Install' package might accept parameters for install path, license key, or configuration options without modifying the Package itself.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "packages",
+      "parameters"
+    ],
+    "domain": "taking-action-packages-actions"
+  },
+  {
+    "front_text": "What is the Trends module used for?",
+    "back_text": "Trends records question results over time for historical analysis, compliance reporting, and change detection. It visualizes data trends, identifies anomalies, and supports audit requirements.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "trends",
+      "historical"
+    ],
+    "domain": "navigation-basic-modules"
+  },
+  {
+    "front_text": "How does Connect integrate with external systems?",
+    "back_text": "Connect exports Tanium data to SIEM, SOAR, ticketing, and reporting platforms using REST API, Syslog, JDBC, or scheduled file delivery. It supports JSON, CSV, XML formats for seamless integration.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "connect",
+      "integration"
+    ],
+    "domain": "navigation-basic-modules"
+  },
+  {
+    "front_text": "What is the Reporting module's primary function?",
+    "back_text": "Reporting creates formatted reports with charts, tables, and visualizations. It supports scheduled delivery, custom templates, multi-format export (PDF/CSV/Excel), and automated distribution to stakeholders.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "reporting"
+    ],
+    "domain": "navigation-basic-modules"
+  },
+  {
+    "front_text": "How do you navigate between Tanium modules?",
+    "back_text": "Use the main navigation menu (top or side bar depending on version) to switch between Interact, Trends, Connect, Reporting, and other modules. Each module has its own workspace and functionality.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "navigation",
+      "ui"
+    ],
+    "domain": "navigation-basic-modules"
+  },
+  {
+    "front_text": "What is the Interact module's sub-second response time?",
+    "back_text": "Interact leverages Linear Chain Technology to deliver query results in sub-second time, even across millions of endpoints. This real-time capability enables live troubleshooting and instant visibility.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "interact",
+      "performance"
+    ],
+    "domain": "navigation-basic-modules"
+  },
+  {
+    "front_text": "What is the Trends module used for?",
+    "back_text": "Trends records question results over time for historical analysis, compliance reporting, and change detection. It visualizes data trends, identifies anomalies, and supports audit requirements.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "trends",
+      "historical"
+    ],
+    "domain": "navigation-basic-modules"
+  },
+  {
+    "front_text": "How does Connect integrate with external systems?",
+    "back_text": "Connect exports Tanium data to SIEM, SOAR, ticketing, and reporting platforms using REST API, Syslog, JDBC, or scheduled file delivery. It supports JSON, CSV, XML formats for seamless integration.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "connect",
+      "integration"
+    ],
+    "domain": "navigation-basic-modules"
+  },
+  {
+    "front_text": "What is the Reporting module's primary function?",
+    "back_text": "Reporting creates formatted reports with charts, tables, and visualizations. It supports scheduled delivery, custom templates, multi-format export (PDF/CSV/Excel), and automated distribution to stakeholders.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "reporting"
+    ],
+    "domain": "navigation-basic-modules"
+  },
+  {
+    "front_text": "How do you navigate between Tanium modules?",
+    "back_text": "Use the main navigation menu (top or side bar depending on version) to switch between Interact, Trends, Connect, Reporting, and other modules. Each module has its own workspace and functionality.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "navigation",
+      "ui"
+    ],
+    "domain": "navigation-basic-modules"
+  },
+  {
+    "front_text": "What is the Interact module's sub-second response time?",
+    "back_text": "Interact leverages Linear Chain Technology to deliver query results in sub-second time, even across millions of endpoints. This real-time capability enables live troubleshooting and instant visibility.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "interact",
+      "performance"
+    ],
+    "domain": "navigation-basic-modules"
+  },
+  {
+    "front_text": "What is the Trends module used for?",
+    "back_text": "Trends records question results over time for historical analysis, compliance reporting, and change detection. It visualizes data trends, identifies anomalies, and supports audit requirements.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "trends",
+      "historical"
+    ],
+    "domain": "navigation-basic-modules"
+  },
+  {
+    "front_text": "How does Connect integrate with external systems?",
+    "back_text": "Connect exports Tanium data to SIEM, SOAR, ticketing, and reporting platforms using REST API, Syslog, JDBC, or scheduled file delivery. It supports JSON, CSV, XML formats for seamless integration.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "connect",
+      "integration"
+    ],
+    "domain": "navigation-basic-modules"
+  },
+  {
+    "front_text": "What is the Reporting module's primary function?",
+    "back_text": "Reporting creates formatted reports with charts, tables, and visualizations. It supports scheduled delivery, custom templates, multi-format export (PDF/CSV/Excel), and automated distribution to stakeholders.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "reporting"
+    ],
+    "domain": "navigation-basic-modules"
+  },
+  {
+    "front_text": "How do you navigate between Tanium modules?",
+    "back_text": "Use the main navigation menu (top or side bar depending on version) to switch between Interact, Trends, Connect, Reporting, and other modules. Each module has its own workspace and functionality.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "navigation",
+      "ui"
+    ],
+    "domain": "navigation-basic-modules"
+  },
+  {
+    "front_text": "What is the Interact module's sub-second response time?",
+    "back_text": "Interact leverages Linear Chain Technology to deliver query results in sub-second time, even across millions of endpoints. This real-time capability enables live troubleshooting and instant visibility.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "interact",
+      "performance"
+    ],
+    "domain": "navigation-basic-modules"
+  },
+  {
+    "front_text": "What is the Trends module used for?",
+    "back_text": "Trends records question results over time for historical analysis, compliance reporting, and change detection. It visualizes data trends, identifies anomalies, and supports audit requirements.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "trends",
+      "historical"
+    ],
+    "domain": "navigation-basic-modules"
+  },
+  {
+    "front_text": "How does Connect integrate with external systems?",
+    "back_text": "Connect exports Tanium data to SIEM, SOAR, ticketing, and reporting platforms using REST API, Syslog, JDBC, or scheduled file delivery. It supports JSON, CSV, XML formats for seamless integration.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "connect",
+      "integration"
+    ],
+    "domain": "navigation-basic-modules"
+  },
+  {
+    "front_text": "What is the Reporting module's primary function?",
+    "back_text": "Reporting creates formatted reports with charts, tables, and visualizations. It supports scheduled delivery, custom templates, multi-format export (PDF/CSV/Excel), and automated distribution to stakeholders.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "reporting"
+    ],
+    "domain": "navigation-basic-modules"
+  },
+  {
+    "front_text": "How do you navigate between Tanium modules?",
+    "back_text": "Use the main navigation menu (top or side bar depending on version) to switch between Interact, Trends, Connect, Reporting, and other modules. Each module has its own workspace and functionality.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "navigation",
+      "ui"
+    ],
+    "domain": "navigation-basic-modules"
+  },
+  {
+    "front_text": "What is the Interact module's sub-second response time?",
+    "back_text": "Interact leverages Linear Chain Technology to deliver query results in sub-second time, even across millions of endpoints. This real-time capability enables live troubleshooting and instant visibility.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "interact",
+      "performance"
+    ],
+    "domain": "navigation-basic-modules"
+  },
+  {
+    "front_text": "What is the Trends module used for?",
+    "back_text": "Trends records question results over time for historical analysis, compliance reporting, and change detection. It visualizes data trends, identifies anomalies, and supports audit requirements.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "trends",
+      "historical"
+    ],
+    "domain": "navigation-basic-modules"
+  },
+  {
+    "front_text": "How does Connect integrate with external systems?",
+    "back_text": "Connect exports Tanium data to SIEM, SOAR, ticketing, and reporting platforms using REST API, Syslog, JDBC, or scheduled file delivery. It supports JSON, CSV, XML formats for seamless integration.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "connect",
+      "integration"
+    ],
+    "domain": "navigation-basic-modules"
+  },
+  {
+    "front_text": "What is the Reporting module's primary function?",
+    "back_text": "Reporting creates formatted reports with charts, tables, and visualizations. It supports scheduled delivery, custom templates, multi-format export (PDF/CSV/Excel), and automated distribution to stakeholders.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "reporting"
+    ],
+    "domain": "navigation-basic-modules"
+  },
+  {
+    "front_text": "How do you navigate between Tanium modules?",
+    "back_text": "Use the main navigation menu (top or side bar depending on version) to switch between Interact, Trends, Connect, Reporting, and other modules. Each module has its own workspace and functionality.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "navigation",
+      "ui"
+    ],
+    "domain": "navigation-basic-modules"
+  },
+  {
+    "front_text": "What is the Interact module's sub-second response time?",
+    "back_text": "Interact leverages Linear Chain Technology to deliver query results in sub-second time, even across millions of endpoints. This real-time capability enables live troubleshooting and instant visibility.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "interact",
+      "performance"
+    ],
+    "domain": "navigation-basic-modules"
+  },
+  {
+    "front_text": "What is the Trends module used for?",
+    "back_text": "Trends records question results over time for historical analysis, compliance reporting, and change detection. It visualizes data trends, identifies anomalies, and supports audit requirements.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "trends",
+      "historical"
+    ],
+    "domain": "navigation-basic-modules"
+  },
+  {
+    "front_text": "How does Connect integrate with external systems?",
+    "back_text": "Connect exports Tanium data to SIEM, SOAR, ticketing, and reporting platforms using REST API, Syslog, JDBC, or scheduled file delivery. It supports JSON, CSV, XML formats for seamless integration.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "connect",
+      "integration"
+    ],
+    "domain": "navigation-basic-modules"
+  },
+  {
+    "front_text": "What is the Reporting module's primary function?",
+    "back_text": "Reporting creates formatted reports with charts, tables, and visualizations. It supports scheduled delivery, custom templates, multi-format export (PDF/CSV/Excel), and automated distribution to stakeholders.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "reporting"
+    ],
+    "domain": "navigation-basic-modules"
+  },
+  {
+    "front_text": "How do you navigate between Tanium modules?",
+    "back_text": "Use the main navigation menu (top or side bar depending on version) to switch between Interact, Trends, Connect, Reporting, and other modules. Each module has its own workspace and functionality.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "navigation",
+      "ui"
+    ],
+    "domain": "navigation-basic-modules"
+  },
+  {
+    "front_text": "What is the Interact module's sub-second response time?",
+    "back_text": "Interact leverages Linear Chain Technology to deliver query results in sub-second time, even across millions of endpoints. This real-time capability enables live troubleshooting and instant visibility.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "interact",
+      "performance"
+    ],
+    "domain": "navigation-basic-modules"
+  },
+  {
+    "front_text": "What is the Trends module used for?",
+    "back_text": "Trends records question results over time for historical analysis, compliance reporting, and change detection. It visualizes data trends, identifies anomalies, and supports audit requirements.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "trends",
+      "historical"
+    ],
+    "domain": "navigation-basic-modules"
+  },
+  {
+    "front_text": "How does Connect integrate with external systems?",
+    "back_text": "Connect exports Tanium data to SIEM, SOAR, ticketing, and reporting platforms using REST API, Syslog, JDBC, or scheduled file delivery. It supports JSON, CSV, XML formats for seamless integration.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "connect",
+      "integration"
+    ],
+    "domain": "navigation-basic-modules"
+  },
+  {
+    "front_text": "What is the Reporting module's primary function?",
+    "back_text": "Reporting creates formatted reports with charts, tables, and visualizations. It supports scheduled delivery, custom templates, multi-format export (PDF/CSV/Excel), and automated distribution to stakeholders.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "reporting"
+    ],
+    "domain": "navigation-basic-modules"
+  },
+  {
+    "front_text": "How do you navigate between Tanium modules?",
+    "back_text": "Use the main navigation menu (top or side bar depending on version) to switch between Interact, Trends, Connect, Reporting, and other modules. Each module has its own workspace and functionality.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "navigation",
+      "ui"
+    ],
+    "domain": "navigation-basic-modules"
+  },
+  {
+    "front_text": "What is the Interact module's sub-second response time?",
+    "back_text": "Interact leverages Linear Chain Technology to deliver query results in sub-second time, even across millions of endpoints. This real-time capability enables live troubleshooting and instant visibility.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "interact",
+      "performance"
+    ],
+    "domain": "navigation-basic-modules"
+  },
+  {
+    "front_text": "What is the Trends module used for?",
+    "back_text": "Trends records question results over time for historical analysis, compliance reporting, and change detection. It visualizes data trends, identifies anomalies, and supports audit requirements.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "trends",
+      "historical"
+    ],
+    "domain": "navigation-basic-modules"
+  },
+  {
+    "front_text": "How does Connect integrate with external systems?",
+    "back_text": "Connect exports Tanium data to SIEM, SOAR, ticketing, and reporting platforms using REST API, Syslog, JDBC, or scheduled file delivery. It supports JSON, CSV, XML formats for seamless integration.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "connect",
+      "integration"
+    ],
+    "domain": "navigation-basic-modules"
+  },
+  {
+    "front_text": "What is the Reporting module's primary function?",
+    "back_text": "Reporting creates formatted reports with charts, tables, and visualizations. It supports scheduled delivery, custom templates, multi-format export (PDF/CSV/Excel), and automated distribution to stakeholders.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "reporting"
+    ],
+    "domain": "navigation-basic-modules"
+  },
+  {
+    "front_text": "How do you navigate between Tanium modules?",
+    "back_text": "Use the main navigation menu (top or side bar depending on version) to switch between Interact, Trends, Connect, Reporting, and other modules. Each module has its own workspace and functionality.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "navigation",
+      "ui"
+    ],
+    "domain": "navigation-basic-modules"
+  },
+  {
+    "front_text": "What is the Interact module's sub-second response time?",
+    "back_text": "Interact leverages Linear Chain Technology to deliver query results in sub-second time, even across millions of endpoints. This real-time capability enables live troubleshooting and instant visibility.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "interact",
+      "performance"
+    ],
+    "domain": "navigation-basic-modules"
+  },
+  {
+    "front_text": "What is the Trends module used for?",
+    "back_text": "Trends records question results over time for historical analysis, compliance reporting, and change detection. It visualizes data trends, identifies anomalies, and supports audit requirements.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "trends",
+      "historical"
+    ],
+    "domain": "navigation-basic-modules"
+  },
+  {
+    "front_text": "How does Connect integrate with external systems?",
+    "back_text": "Connect exports Tanium data to SIEM, SOAR, ticketing, and reporting platforms using REST API, Syslog, JDBC, or scheduled file delivery. It supports JSON, CSV, XML formats for seamless integration.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "connect",
+      "integration"
+    ],
+    "domain": "navigation-basic-modules"
+  },
+  {
+    "front_text": "What is the Reporting module's primary function?",
+    "back_text": "Reporting creates formatted reports with charts, tables, and visualizations. It supports scheduled delivery, custom templates, multi-format export (PDF/CSV/Excel), and automated distribution to stakeholders.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "reporting"
+    ],
+    "domain": "navigation-basic-modules"
+  },
+  {
+    "front_text": "How do you navigate between Tanium modules?",
+    "back_text": "Use the main navigation menu (top or side bar depending on version) to switch between Interact, Trends, Connect, Reporting, and other modules. Each module has its own workspace and functionality.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "navigation",
+      "ui"
+    ],
+    "domain": "navigation-basic-modules"
+  },
+  {
+    "front_text": "What is the Interact module's sub-second response time?",
+    "back_text": "Interact leverages Linear Chain Technology to deliver query results in sub-second time, even across millions of endpoints. This real-time capability enables live troubleshooting and instant visibility.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "interact",
+      "performance"
+    ],
+    "domain": "navigation-basic-modules"
+  },
+  {
+    "front_text": "What is the Trends module used for?",
+    "back_text": "Trends records question results over time for historical analysis, compliance reporting, and change detection. It visualizes data trends, identifies anomalies, and supports audit requirements.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "trends",
+      "historical"
+    ],
+    "domain": "navigation-basic-modules"
+  },
+  {
+    "front_text": "How does Connect integrate with external systems?",
+    "back_text": "Connect exports Tanium data to SIEM, SOAR, ticketing, and reporting platforms using REST API, Syslog, JDBC, or scheduled file delivery. It supports JSON, CSV, XML formats for seamless integration.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "connect",
+      "integration"
+    ],
+    "domain": "navigation-basic-modules"
+  },
+  {
+    "front_text": "What is the Reporting module's primary function?",
+    "back_text": "Reporting creates formatted reports with charts, tables, and visualizations. It supports scheduled delivery, custom templates, multi-format export (PDF/CSV/Excel), and automated distribution to stakeholders.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "reporting"
+    ],
+    "domain": "navigation-basic-modules"
+  },
+  {
+    "front_text": "How do you navigate between Tanium modules?",
+    "back_text": "Use the main navigation menu (top or side bar depending on version) to switch between Interact, Trends, Connect, Reporting, and other modules. Each module has its own workspace and functionality.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "navigation",
+      "ui"
+    ],
+    "domain": "navigation-basic-modules"
+  },
+  {
+    "front_text": "What is the Interact module's sub-second response time?",
+    "back_text": "Interact leverages Linear Chain Technology to deliver query results in sub-second time, even across millions of endpoints. This real-time capability enables live troubleshooting and instant visibility.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "interact",
+      "performance"
+    ],
+    "domain": "navigation-basic-modules"
+  },
+  {
+    "front_text": "What is the Trends module used for?",
+    "back_text": "Trends records question results over time for historical analysis, compliance reporting, and change detection. It visualizes data trends, identifies anomalies, and supports audit requirements.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "trends",
+      "historical"
+    ],
+    "domain": "navigation-basic-modules"
+  },
+  {
+    "front_text": "How does Connect integrate with external systems?",
+    "back_text": "Connect exports Tanium data to SIEM, SOAR, ticketing, and reporting platforms using REST API, Syslog, JDBC, or scheduled file delivery. It supports JSON, CSV, XML formats for seamless integration.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "connect",
+      "integration"
+    ],
+    "domain": "navigation-basic-modules"
+  },
+  {
+    "front_text": "What is the Reporting module's primary function?",
+    "back_text": "Reporting creates formatted reports with charts, tables, and visualizations. It supports scheduled delivery, custom templates, multi-format export (PDF/CSV/Excel), and automated distribution to stakeholders.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "reporting"
+    ],
+    "domain": "navigation-basic-modules"
+  },
+  {
+    "front_text": "How do you navigate between Tanium modules?",
+    "back_text": "Use the main navigation menu (top or side bar depending on version) to switch between Interact, Trends, Connect, Reporting, and other modules. Each module has its own workspace and functionality.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "navigation",
+      "ui"
+    ],
+    "domain": "navigation-basic-modules"
+  },
+  {
+    "front_text": "What is the Interact module's sub-second response time?",
+    "back_text": "Interact leverages Linear Chain Technology to deliver query results in sub-second time, even across millions of endpoints. This real-time capability enables live troubleshooting and instant visibility.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "interact",
+      "performance"
+    ],
+    "domain": "navigation-basic-modules"
+  },
+  {
+    "front_text": "What is the Trends module used for?",
+    "back_text": "Trends records question results over time for historical analysis, compliance reporting, and change detection. It visualizes data trends, identifies anomalies, and supports audit requirements.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "trends",
+      "historical"
+    ],
+    "domain": "navigation-basic-modules"
+  },
+  {
+    "front_text": "How does Connect integrate with external systems?",
+    "back_text": "Connect exports Tanium data to SIEM, SOAR, ticketing, and reporting platforms using REST API, Syslog, JDBC, or scheduled file delivery. It supports JSON, CSV, XML formats for seamless integration.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "connect",
+      "integration"
+    ],
+    "domain": "navigation-basic-modules"
+  },
+  {
+    "front_text": "What is the Reporting module's primary function?",
+    "back_text": "Reporting creates formatted reports with charts, tables, and visualizations. It supports scheduled delivery, custom templates, multi-format export (PDF/CSV/Excel), and automated distribution to stakeholders.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "reporting"
+    ],
+    "domain": "navigation-basic-modules"
+  },
+  {
+    "front_text": "How do you navigate between Tanium modules?",
+    "back_text": "Use the main navigation menu (top or side bar depending on version) to switch between Interact, Trends, Connect, Reporting, and other modules. Each module has its own workspace and functionality.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "navigation",
+      "ui"
+    ],
+    "domain": "navigation-basic-modules"
+  },
+  {
+    "front_text": "What is the Interact module's sub-second response time?",
+    "back_text": "Interact leverages Linear Chain Technology to deliver query results in sub-second time, even across millions of endpoints. This real-time capability enables live troubleshooting and instant visibility.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "interact",
+      "performance"
+    ],
+    "domain": "navigation-basic-modules"
+  },
+  {
+    "front_text": "What is the Trends module used for?",
+    "back_text": "Trends records question results over time for historical analysis, compliance reporting, and change detection. It visualizes data trends, identifies anomalies, and supports audit requirements.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "trends",
+      "historical"
+    ],
+    "domain": "navigation-basic-modules"
+  },
+  {
+    "front_text": "How does Connect integrate with external systems?",
+    "back_text": "Connect exports Tanium data to SIEM, SOAR, ticketing, and reporting platforms using REST API, Syslog, JDBC, or scheduled file delivery. It supports JSON, CSV, XML formats for seamless integration.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "connect",
+      "integration"
+    ],
+    "domain": "navigation-basic-modules"
+  },
+  {
+    "front_text": "What is the Reporting module's primary function?",
+    "back_text": "Reporting creates formatted reports with charts, tables, and visualizations. It supports scheduled delivery, custom templates, multi-format export (PDF/CSV/Excel), and automated distribution to stakeholders.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "reporting"
+    ],
+    "domain": "navigation-basic-modules"
+  },
+  {
+    "front_text": "How do you navigate between Tanium modules?",
+    "back_text": "Use the main navigation menu (top or side bar depending on version) to switch between Interact, Trends, Connect, Reporting, and other modules. Each module has its own workspace and functionality.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "navigation",
+      "ui"
+    ],
+    "domain": "navigation-basic-modules"
+  },
+  {
+    "front_text": "What is the Interact module's sub-second response time?",
+    "back_text": "Interact leverages Linear Chain Technology to deliver query results in sub-second time, even across millions of endpoints. This real-time capability enables live troubleshooting and instant visibility.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "interact",
+      "performance"
+    ],
+    "domain": "navigation-basic-modules"
+  },
+  {
+    "front_text": "What is the Trends module used for?",
+    "back_text": "Trends records question results over time for historical analysis, compliance reporting, and change detection. It visualizes data trends, identifies anomalies, and supports audit requirements.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "trends",
+      "historical"
+    ],
+    "domain": "navigation-basic-modules"
+  },
+  {
+    "front_text": "How does Connect integrate with external systems?",
+    "back_text": "Connect exports Tanium data to SIEM, SOAR, ticketing, and reporting platforms using REST API, Syslog, JDBC, or scheduled file delivery. It supports JSON, CSV, XML formats for seamless integration.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "connect",
+      "integration"
+    ],
+    "domain": "navigation-basic-modules"
+  },
+  {
+    "front_text": "What is the Reporting module's primary function?",
+    "back_text": "Reporting creates formatted reports with charts, tables, and visualizations. It supports scheduled delivery, custom templates, multi-format export (PDF/CSV/Excel), and automated distribution to stakeholders.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "reporting"
+    ],
+    "domain": "navigation-basic-modules"
+  },
+  {
+    "front_text": "How do you navigate between Tanium modules?",
+    "back_text": "Use the main navigation menu (top or side bar depending on version) to switch between Interact, Trends, Connect, Reporting, and other modules. Each module has its own workspace and functionality.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "navigation",
+      "ui"
+    ],
+    "domain": "navigation-basic-modules"
+  },
+  {
+    "front_text": "What is the Interact module's sub-second response time?",
+    "back_text": "Interact leverages Linear Chain Technology to deliver query results in sub-second time, even across millions of endpoints. This real-time capability enables live troubleshooting and instant visibility.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "interact",
+      "performance"
+    ],
+    "domain": "navigation-basic-modules"
+  },
+  {
+    "front_text": "What is the Trends module used for?",
+    "back_text": "Trends records question results over time for historical analysis, compliance reporting, and change detection. It visualizes data trends, identifies anomalies, and supports audit requirements.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "trends",
+      "historical"
+    ],
+    "domain": "navigation-basic-modules"
+  },
+  {
+    "front_text": "How does Connect integrate with external systems?",
+    "back_text": "Connect exports Tanium data to SIEM, SOAR, ticketing, and reporting platforms using REST API, Syslog, JDBC, or scheduled file delivery. It supports JSON, CSV, XML formats for seamless integration.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "connect",
+      "integration"
+    ],
+    "domain": "navigation-basic-modules"
+  },
+  {
+    "front_text": "What is the Reporting module's primary function?",
+    "back_text": "Reporting creates formatted reports with charts, tables, and visualizations. It supports scheduled delivery, custom templates, multi-format export (PDF/CSV/Excel), and automated distribution to stakeholders.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "reporting"
+    ],
+    "domain": "navigation-basic-modules"
+  },
+  {
+    "front_text": "How do you navigate between Tanium modules?",
+    "back_text": "Use the main navigation menu (top or side bar depending on version) to switch between Interact, Trends, Connect, Reporting, and other modules. Each module has its own workspace and functionality.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "navigation",
+      "ui"
+    ],
+    "domain": "navigation-basic-modules"
+  },
+  {
+    "front_text": "What export formats does Tanium support?",
+    "back_text": "Tanium supports CSV (comma-separated values), JSON (JavaScript Object Notation), XML (Extensible Markup Language), PDF (formatted reports), Excel (XLSX), and direct SIEM/SOAR integration via REST API.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "export",
+      "formats"
+    ],
+    "domain": "reporting-data-export"
+  },
+  {
+    "front_text": "How do you schedule automated reports in Tanium?",
+    "back_text": "In the Reporting module, create a report template, click 'Schedule', set frequency (daily/weekly/monthly), specify recipients (email/API), choose format, and configure delivery options. Scheduled reports run automatically.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "scheduling",
+      "automation"
+    ],
+    "domain": "reporting-data-export"
+  },
+  {
+    "front_text": "What is the REST API endpoint for exporting question results?",
+    "back_text": "Use the '/api/v2/result_data/question' endpoint with GET or POST methods. Specify question ID or sensor names, apply filters, and receive JSON/CSV results programmatically for custom integrations.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "api",
+      "rest"
+    ],
+    "domain": "reporting-data-export"
+  },
+  {
+    "front_text": "How do you export data to a SIEM platform?",
+    "back_text": "Configure a Connect destination with SIEM connection details (API endpoint, Syslog server, or JDBC). Create a scheduled export for relevant questions, map fields to SIEM format, and enable real-time or batch delivery.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "siem",
+      "integration"
+    ],
+    "domain": "reporting-data-export"
+  },
+  {
+    "front_text": "What is the benefit of using Tanium's JSON export?",
+    "back_text": "JSON export provides structured, machine-readable data ideal for API integrations, custom dashboards, and automated processing. It preserves data types, supports nested structures, and enables programmatic parsing.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "json",
+      "automation"
+    ],
+    "domain": "reporting-data-export"
+  },
+  {
+    "front_text": "What export formats does Tanium support?",
+    "back_text": "Tanium supports CSV (comma-separated values), JSON (JavaScript Object Notation), XML (Extensible Markup Language), PDF (formatted reports), Excel (XLSX), and direct SIEM/SOAR integration via REST API.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "export",
+      "formats"
+    ],
+    "domain": "reporting-data-export"
+  },
+  {
+    "front_text": "How do you schedule automated reports in Tanium?",
+    "back_text": "In the Reporting module, create a report template, click 'Schedule', set frequency (daily/weekly/monthly), specify recipients (email/API), choose format, and configure delivery options. Scheduled reports run automatically.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "scheduling",
+      "automation"
+    ],
+    "domain": "reporting-data-export"
+  },
+  {
+    "front_text": "What is the REST API endpoint for exporting question results?",
+    "back_text": "Use the '/api/v2/result_data/question' endpoint with GET or POST methods. Specify question ID or sensor names, apply filters, and receive JSON/CSV results programmatically for custom integrations.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "api",
+      "rest"
+    ],
+    "domain": "reporting-data-export"
+  },
+  {
+    "front_text": "How do you export data to a SIEM platform?",
+    "back_text": "Configure a Connect destination with SIEM connection details (API endpoint, Syslog server, or JDBC). Create a scheduled export for relevant questions, map fields to SIEM format, and enable real-time or batch delivery.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "siem",
+      "integration"
+    ],
+    "domain": "reporting-data-export"
+  },
+  {
+    "front_text": "What is the benefit of using Tanium's JSON export?",
+    "back_text": "JSON export provides structured, machine-readable data ideal for API integrations, custom dashboards, and automated processing. It preserves data types, supports nested structures, and enables programmatic parsing.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "json",
+      "automation"
+    ],
+    "domain": "reporting-data-export"
+  },
+  {
+    "front_text": "What export formats does Tanium support?",
+    "back_text": "Tanium supports CSV (comma-separated values), JSON (JavaScript Object Notation), XML (Extensible Markup Language), PDF (formatted reports), Excel (XLSX), and direct SIEM/SOAR integration via REST API.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "export",
+      "formats"
+    ],
+    "domain": "reporting-data-export"
+  },
+  {
+    "front_text": "How do you schedule automated reports in Tanium?",
+    "back_text": "In the Reporting module, create a report template, click 'Schedule', set frequency (daily/weekly/monthly), specify recipients (email/API), choose format, and configure delivery options. Scheduled reports run automatically.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "scheduling",
+      "automation"
+    ],
+    "domain": "reporting-data-export"
+  },
+  {
+    "front_text": "What is the REST API endpoint for exporting question results?",
+    "back_text": "Use the '/api/v2/result_data/question' endpoint with GET or POST methods. Specify question ID or sensor names, apply filters, and receive JSON/CSV results programmatically for custom integrations.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "api",
+      "rest"
+    ],
+    "domain": "reporting-data-export"
+  },
+  {
+    "front_text": "How do you export data to a SIEM platform?",
+    "back_text": "Configure a Connect destination with SIEM connection details (API endpoint, Syslog server, or JDBC). Create a scheduled export for relevant questions, map fields to SIEM format, and enable real-time or batch delivery.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "siem",
+      "integration"
+    ],
+    "domain": "reporting-data-export"
+  },
+  {
+    "front_text": "What is the benefit of using Tanium's JSON export?",
+    "back_text": "JSON export provides structured, machine-readable data ideal for API integrations, custom dashboards, and automated processing. It preserves data types, supports nested structures, and enables programmatic parsing.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "json",
+      "automation"
+    ],
+    "domain": "reporting-data-export"
+  },
+  {
+    "front_text": "What export formats does Tanium support?",
+    "back_text": "Tanium supports CSV (comma-separated values), JSON (JavaScript Object Notation), XML (Extensible Markup Language), PDF (formatted reports), Excel (XLSX), and direct SIEM/SOAR integration via REST API.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "export",
+      "formats"
+    ],
+    "domain": "reporting-data-export"
+  },
+  {
+    "front_text": "How do you schedule automated reports in Tanium?",
+    "back_text": "In the Reporting module, create a report template, click 'Schedule', set frequency (daily/weekly/monthly), specify recipients (email/API), choose format, and configure delivery options. Scheduled reports run automatically.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "scheduling",
+      "automation"
+    ],
+    "domain": "reporting-data-export"
+  },
+  {
+    "front_text": "What is the REST API endpoint for exporting question results?",
+    "back_text": "Use the '/api/v2/result_data/question' endpoint with GET or POST methods. Specify question ID or sensor names, apply filters, and receive JSON/CSV results programmatically for custom integrations.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "api",
+      "rest"
+    ],
+    "domain": "reporting-data-export"
+  },
+  {
+    "front_text": "How do you export data to a SIEM platform?",
+    "back_text": "Configure a Connect destination with SIEM connection details (API endpoint, Syslog server, or JDBC). Create a scheduled export for relevant questions, map fields to SIEM format, and enable real-time or batch delivery.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "siem",
+      "integration"
+    ],
+    "domain": "reporting-data-export"
+  },
+  {
+    "front_text": "What is the benefit of using Tanium's JSON export?",
+    "back_text": "JSON export provides structured, machine-readable data ideal for API integrations, custom dashboards, and automated processing. It preserves data types, supports nested structures, and enables programmatic parsing.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "json",
+      "automation"
+    ],
+    "domain": "reporting-data-export"
+  },
+  {
+    "front_text": "What export formats does Tanium support?",
+    "back_text": "Tanium supports CSV (comma-separated values), JSON (JavaScript Object Notation), XML (Extensible Markup Language), PDF (formatted reports), Excel (XLSX), and direct SIEM/SOAR integration via REST API.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "export",
+      "formats"
+    ],
+    "domain": "reporting-data-export"
+  },
+  {
+    "front_text": "How do you schedule automated reports in Tanium?",
+    "back_text": "In the Reporting module, create a report template, click 'Schedule', set frequency (daily/weekly/monthly), specify recipients (email/API), choose format, and configure delivery options. Scheduled reports run automatically.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "scheduling",
+      "automation"
+    ],
+    "domain": "reporting-data-export"
+  },
+  {
+    "front_text": "What is the REST API endpoint for exporting question results?",
+    "back_text": "Use the '/api/v2/result_data/question' endpoint with GET or POST methods. Specify question ID or sensor names, apply filters, and receive JSON/CSV results programmatically for custom integrations.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "api",
+      "rest"
+    ],
+    "domain": "reporting-data-export"
+  },
+  {
+    "front_text": "How do you export data to a SIEM platform?",
+    "back_text": "Configure a Connect destination with SIEM connection details (API endpoint, Syslog server, or JDBC). Create a scheduled export for relevant questions, map fields to SIEM format, and enable real-time or batch delivery.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "siem",
+      "integration"
+    ],
+    "domain": "reporting-data-export"
+  },
+  {
+    "front_text": "What is the benefit of using Tanium's JSON export?",
+    "back_text": "JSON export provides structured, machine-readable data ideal for API integrations, custom dashboards, and automated processing. It preserves data types, supports nested structures, and enables programmatic parsing.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "json",
+      "automation"
+    ],
+    "domain": "reporting-data-export"
+  },
+  {
+    "front_text": "What export formats does Tanium support?",
+    "back_text": "Tanium supports CSV (comma-separated values), JSON (JavaScript Object Notation), XML (Extensible Markup Language), PDF (formatted reports), Excel (XLSX), and direct SIEM/SOAR integration via REST API.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "export",
+      "formats"
+    ],
+    "domain": "reporting-data-export"
+  },
+  {
+    "front_text": "How do you schedule automated reports in Tanium?",
+    "back_text": "In the Reporting module, create a report template, click 'Schedule', set frequency (daily/weekly/monthly), specify recipients (email/API), choose format, and configure delivery options. Scheduled reports run automatically.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "scheduling",
+      "automation"
+    ],
+    "domain": "reporting-data-export"
+  },
+  {
+    "front_text": "What is the REST API endpoint for exporting question results?",
+    "back_text": "Use the '/api/v2/result_data/question' endpoint with GET or POST methods. Specify question ID or sensor names, apply filters, and receive JSON/CSV results programmatically for custom integrations.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "api",
+      "rest"
+    ],
+    "domain": "reporting-data-export"
+  },
+  {
+    "front_text": "How do you export data to a SIEM platform?",
+    "back_text": "Configure a Connect destination with SIEM connection details (API endpoint, Syslog server, or JDBC). Create a scheduled export for relevant questions, map fields to SIEM format, and enable real-time or batch delivery.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "siem",
+      "integration"
+    ],
+    "domain": "reporting-data-export"
+  },
+  {
+    "front_text": "What is the benefit of using Tanium's JSON export?",
+    "back_text": "JSON export provides structured, machine-readable data ideal for API integrations, custom dashboards, and automated processing. It preserves data types, supports nested structures, and enables programmatic parsing.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "json",
+      "automation"
+    ],
+    "domain": "reporting-data-export"
+  },
+  {
+    "front_text": "What export formats does Tanium support?",
+    "back_text": "Tanium supports CSV (comma-separated values), JSON (JavaScript Object Notation), XML (Extensible Markup Language), PDF (formatted reports), Excel (XLSX), and direct SIEM/SOAR integration via REST API.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "export",
+      "formats"
+    ],
+    "domain": "reporting-data-export"
+  },
+  {
+    "front_text": "How do you schedule automated reports in Tanium?",
+    "back_text": "In the Reporting module, create a report template, click 'Schedule', set frequency (daily/weekly/monthly), specify recipients (email/API), choose format, and configure delivery options. Scheduled reports run automatically.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "scheduling",
+      "automation"
+    ],
+    "domain": "reporting-data-export"
+  },
+  {
+    "front_text": "What is the REST API endpoint for exporting question results?",
+    "back_text": "Use the '/api/v2/result_data/question' endpoint with GET or POST methods. Specify question ID or sensor names, apply filters, and receive JSON/CSV results programmatically for custom integrations.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "api",
+      "rest"
+    ],
+    "domain": "reporting-data-export"
+  },
+  {
+    "front_text": "How do you export data to a SIEM platform?",
+    "back_text": "Configure a Connect destination with SIEM connection details (API endpoint, Syslog server, or JDBC). Create a scheduled export for relevant questions, map fields to SIEM format, and enable real-time or batch delivery.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "siem",
+      "integration"
+    ],
+    "domain": "reporting-data-export"
+  },
+  {
+    "front_text": "What is the benefit of using Tanium's JSON export?",
+    "back_text": "JSON export provides structured, machine-readable data ideal for API integrations, custom dashboards, and automated processing. It preserves data types, supports nested structures, and enables programmatic parsing.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "json",
+      "automation"
+    ],
+    "domain": "reporting-data-export"
+  },
+  {
+    "front_text": "What export formats does Tanium support?",
+    "back_text": "Tanium supports CSV (comma-separated values), JSON (JavaScript Object Notation), XML (Extensible Markup Language), PDF (formatted reports), Excel (XLSX), and direct SIEM/SOAR integration via REST API.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "export",
+      "formats"
+    ],
+    "domain": "reporting-data-export"
+  },
+  {
+    "front_text": "How do you schedule automated reports in Tanium?",
+    "back_text": "In the Reporting module, create a report template, click 'Schedule', set frequency (daily/weekly/monthly), specify recipients (email/API), choose format, and configure delivery options. Scheduled reports run automatically.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "scheduling",
+      "automation"
+    ],
+    "domain": "reporting-data-export"
+  },
+  {
+    "front_text": "What is the REST API endpoint for exporting question results?",
+    "back_text": "Use the '/api/v2/result_data/question' endpoint with GET or POST methods. Specify question ID or sensor names, apply filters, and receive JSON/CSV results programmatically for custom integrations.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "api",
+      "rest"
+    ],
+    "domain": "reporting-data-export"
+  },
+  {
+    "front_text": "How do you export data to a SIEM platform?",
+    "back_text": "Configure a Connect destination with SIEM connection details (API endpoint, Syslog server, or JDBC). Create a scheduled export for relevant questions, map fields to SIEM format, and enable real-time or batch delivery.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "siem",
+      "integration"
+    ],
+    "domain": "reporting-data-export"
+  },
+  {
+    "front_text": "What is the benefit of using Tanium's JSON export?",
+    "back_text": "JSON export provides structured, machine-readable data ideal for API integrations, custom dashboards, and automated processing. It preserves data types, supports nested structures, and enables programmatic parsing.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "json",
+      "automation"
+    ],
+    "domain": "reporting-data-export"
+  },
+  {
+    "front_text": "What export formats does Tanium support?",
+    "back_text": "Tanium supports CSV (comma-separated values), JSON (JavaScript Object Notation), XML (Extensible Markup Language), PDF (formatted reports), Excel (XLSX), and direct SIEM/SOAR integration via REST API.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "export",
+      "formats"
+    ],
+    "domain": "reporting-data-export"
+  },
+  {
+    "front_text": "How do you schedule automated reports in Tanium?",
+    "back_text": "In the Reporting module, create a report template, click 'Schedule', set frequency (daily/weekly/monthly), specify recipients (email/API), choose format, and configure delivery options. Scheduled reports run automatically.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "scheduling",
+      "automation"
+    ],
+    "domain": "reporting-data-export"
+  },
+  {
+    "front_text": "What is the REST API endpoint for exporting question results?",
+    "back_text": "Use the '/api/v2/result_data/question' endpoint with GET or POST methods. Specify question ID or sensor names, apply filters, and receive JSON/CSV results programmatically for custom integrations.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "api",
+      "rest"
+    ],
+    "domain": "reporting-data-export"
+  },
+  {
+    "front_text": "How do you export data to a SIEM platform?",
+    "back_text": "Configure a Connect destination with SIEM connection details (API endpoint, Syslog server, or JDBC). Create a scheduled export for relevant questions, map fields to SIEM format, and enable real-time or batch delivery.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "siem",
+      "integration"
+    ],
+    "domain": "reporting-data-export"
+  },
+  {
+    "front_text": "What is the benefit of using Tanium's JSON export?",
+    "back_text": "JSON export provides structured, machine-readable data ideal for API integrations, custom dashboards, and automated processing. It preserves data types, supports nested structures, and enables programmatic parsing.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "json",
+      "automation"
+    ],
+    "domain": "reporting-data-export"
+  },
+  {
+    "front_text": "What export formats does Tanium support?",
+    "back_text": "Tanium supports CSV (comma-separated values), JSON (JavaScript Object Notation), XML (Extensible Markup Language), PDF (formatted reports), Excel (XLSX), and direct SIEM/SOAR integration via REST API.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "export",
+      "formats"
+    ],
+    "domain": "reporting-data-export"
+  },
+  {
+    "front_text": "How do you schedule automated reports in Tanium?",
+    "back_text": "In the Reporting module, create a report template, click 'Schedule', set frequency (daily/weekly/monthly), specify recipients (email/API), choose format, and configure delivery options. Scheduled reports run automatically.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "scheduling",
+      "automation"
+    ],
+    "domain": "reporting-data-export"
+  },
+  {
+    "front_text": "What is the REST API endpoint for exporting question results?",
+    "back_text": "Use the '/api/v2/result_data/question' endpoint with GET or POST methods. Specify question ID or sensor names, apply filters, and receive JSON/CSV results programmatically for custom integrations.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "api",
+      "rest"
+    ],
+    "domain": "reporting-data-export"
+  },
+  {
+    "front_text": "How do you export data to a SIEM platform?",
+    "back_text": "Configure a Connect destination with SIEM connection details (API endpoint, Syslog server, or JDBC). Create a scheduled export for relevant questions, map fields to SIEM format, and enable real-time or batch delivery.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "siem",
+      "integration"
+    ],
+    "domain": "reporting-data-export"
+  },
+  {
+    "front_text": "What is the benefit of using Tanium's JSON export?",
+    "back_text": "JSON export provides structured, machine-readable data ideal for API integrations, custom dashboards, and automated processing. It preserves data types, supports nested structures, and enables programmatic parsing.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "json",
+      "automation"
+    ],
+    "domain": "reporting-data-export"
+  },
+  {
+    "front_text": "What export formats does Tanium support?",
+    "back_text": "Tanium supports CSV (comma-separated values), JSON (JavaScript Object Notation), XML (Extensible Markup Language), PDF (formatted reports), Excel (XLSX), and direct SIEM/SOAR integration via REST API.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "export",
+      "formats"
+    ],
+    "domain": "reporting-data-export"
+  },
+  {
+    "front_text": "How do you schedule automated reports in Tanium?",
+    "back_text": "In the Reporting module, create a report template, click 'Schedule', set frequency (daily/weekly/monthly), specify recipients (email/API), choose format, and configure delivery options. Scheduled reports run automatically.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "scheduling",
+      "automation"
+    ],
+    "domain": "reporting-data-export"
+  },
+  {
+    "front_text": "What is the REST API endpoint for exporting question results?",
+    "back_text": "Use the '/api/v2/result_data/question' endpoint with GET or POST methods. Specify question ID or sensor names, apply filters, and receive JSON/CSV results programmatically for custom integrations.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "api",
+      "rest"
+    ],
+    "domain": "reporting-data-export"
+  },
+  {
+    "front_text": "How do you export data to a SIEM platform?",
+    "back_text": "Configure a Connect destination with SIEM connection details (API endpoint, Syslog server, or JDBC). Create a scheduled export for relevant questions, map fields to SIEM format, and enable real-time or batch delivery.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "siem",
+      "integration"
+    ],
+    "domain": "reporting-data-export"
+  },
+  {
+    "front_text": "What is the benefit of using Tanium's JSON export?",
+    "back_text": "JSON export provides structured, machine-readable data ideal for API integrations, custom dashboards, and automated processing. It preserves data types, supports nested structures, and enables programmatic parsing.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "json",
+      "automation"
+    ],
+    "domain": "reporting-data-export"
+  },
+  {
+    "front_text": "What export formats does Tanium support?",
+    "back_text": "Tanium supports CSV (comma-separated values), JSON (JavaScript Object Notation), XML (Extensible Markup Language), PDF (formatted reports), Excel (XLSX), and direct SIEM/SOAR integration via REST API.",
+    "card_type": "concept",
+    "source": "generated",
+    "tags": [
+      "export",
+      "formats"
+    ],
+    "domain": "reporting-data-export"
+  }
+]
