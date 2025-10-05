@@ -5,6 +5,9 @@ import QueryPlayground from '@/components/mdx/QueryPlayground'
 import SkillGate from '@/components/mdx/SkillGate'
 import MiniProject from '@/components/mdx/MiniProject'
 import ModuleTransition from '@/components/mdx/ModuleTransition'
+import MicroQuizMDX from '@/components/mdx/MicroQuizMDX'
+import MicroSection from '@/components/mdx/MicroSection'
+import QuickCheckQuiz from '@/components/study/QuickCheckQuiz'
 import React from 'react'
 
 function Anchor(props: React.AnchorHTMLAttributes<HTMLAnchorElement>) {
@@ -25,5 +28,8 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     SkillGate,
     MiniProject,
     ModuleTransition,
+    MicroQuizMDX,
+    MicroSection,
+    QuickCheckQuiz,
   }
 }

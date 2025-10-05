@@ -69,15 +69,16 @@ export async function getKbSummary(): Promise<KbSummary> {
   }
 
   try {
-    // PostgREST aggregates with implicit GROUP BY when mixing columns and aggregates
+    // Fetch all questions and aggregate client-side (PostgREST group-by syntax varies)
     const { data, error } = await supabase
       .from("kb_questions")
-      .select("domain, count:count()");
+      .select("domain");
     if (!error && Array.isArray(data)) {
       for (const row of data as any[]) {
         const d = row.domain as string;
-        const c = Number(row.count ?? 0);
-        byDomain[d] = (byDomain[d] || 0) + c;
+        if (d) {
+          byDomain[d] = (byDomain[d] || 0) + 1;
+        }
       }
     }
   } catch (error) {
