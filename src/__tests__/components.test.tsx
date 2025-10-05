@@ -7,32 +7,31 @@
  * Priority: MEDIUM - Expands test coverage beyond critical components
  */
 
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import '@testing-library/jest-dom';
+import "@testing-library/jest-dom";
 
 // Mock Next.js router
-jest.mock('next/navigation', () => ({
+jest.mock("next/navigation", () => ({
   useRouter: () => ({
     push: jest.fn(),
     replace: jest.fn(),
     prefetch: jest.fn(),
   }),
-  usePathname: () => '/',
+  usePathname: () => "/",
   useSearchParams: () => new URLSearchParams(),
 }));
 
-describe('UI Component Tests', () => {
-  describe('Button Component Behavior', () => {
-    test('should handle button click events', () => {
+describe("UI Component Tests", () => {
+  describe("Button Component Behavior", () => {
+    test("should handle button click events", () => {
       const handleClick = jest.fn();
-      const button = document.createElement('button');
+      const button = document.createElement("button");
       button.onclick = handleClick;
       button.click();
 
       expect(handleClick).toHaveBeenCalledTimes(1);
     });
 
-    test('should prevent double-click on submit', () => {
+    test("should prevent double-click on submit", () => {
       let clickCount = 0;
       let isDisabled = false;
 
@@ -40,7 +39,9 @@ describe('UI Component Tests', () => {
         if (isDisabled) return;
         clickCount++;
         isDisabled = true;
-        setTimeout(() => { isDisabled = false; }, 1000);
+        setTimeout(() => {
+          isDisabled = false;
+        }, 1000);
       };
 
       handleClick(); // First click
@@ -49,11 +50,11 @@ describe('UI Component Tests', () => {
       expect(clickCount).toBe(1);
     });
 
-    test('should support keyboard navigation (Enter key)', () => {
+    test("should support keyboard navigation (Enter key)", () => {
       const handleKeyPress = jest.fn();
-      const event = { key: 'Enter', preventDefault: jest.fn() };
+      const event = { key: "Enter", preventDefault: jest.fn() };
 
-      if (event.key === 'Enter') {
+      if (event.key === "Enter") {
         handleKeyPress();
       }
 
@@ -61,52 +62,59 @@ describe('UI Component Tests', () => {
     });
   });
 
-  describe('Form Validation', () => {
-    test('should validate email format before submission', () => {
+  describe("Form Validation", () => {
+    test("should validate email format before submission", () => {
       const validateEmail = (email: string) => {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return emailRegex.test(email);
       };
 
-      expect(validateEmail('user@example.com')).toBe(true);
-      expect(validateEmail('invalid-email')).toBe(false);
-      expect(validateEmail('user@domain')).toBe(false);
-      expect(validateEmail('@domain.com')).toBe(false);
+      expect(validateEmail("user@example.com")).toBe(true);
+      expect(validateEmail("invalid-email")).toBe(false);
+      expect(validateEmail("user@domain")).toBe(false);
+      expect(validateEmail("@domain.com")).toBe(false);
     });
 
-    test('should validate required fields', () => {
+    test("should validate required fields", () => {
       const formData = {
-        email: 'user@example.com',
-        password: 'password123',
+        email: "user@example.com",
+        password: "password123",
       };
 
-      const isValid = formData.email && formData.password &&
-        formData.email.length > 0 && formData.password.length >= 8;
+      const isValid =
+        formData.email &&
+        formData.password &&
+        formData.email.length > 0 &&
+        formData.password.length >= 8;
 
       expect(isValid).toBe(true);
     });
 
-    test('should show validation errors', () => {
-      const errors: string[] = [];
+    test("should show validation errors", () => {
+      const validateForm = (email: string, password: string) => {
+        const errors: string[] = [];
+        if (!email) errors.push("Email is required");
+        if (password.length < 8) errors.push("Password must be at least 8 characters");
+        return errors;
+      };
 
-      const email = '';
-      const password = '123'; // Too short
-
-      if (!email) errors.push('Email is required');
-      if (password.length < 8) errors.push('Password must be at least 8 characters');
-
+      const errors = validateForm("", "123");
       expect(errors).toHaveLength(2);
-      expect(errors).toContain('Email is required');
-      expect(errors).toContain('Password must be at least 8 characters');
+      expect(errors).toContain("Email is required");
+      expect(errors).toContain("Password must be at least 8 characters");
     });
   });
 
-  describe('Modal Dialog Behavior', () => {
-    test('should open and close modal', () => {
+  describe("Modal Dialog Behavior", () => {
+    test("should open and close modal", () => {
       let isOpen = false;
 
-      const openModal = () => { isOpen = true; };
-      const closeModal = () => { isOpen = false; };
+      const openModal = () => {
+        isOpen = true;
+      };
+      const closeModal = () => {
+        isOpen = false;
+      };
 
       expect(isOpen).toBe(false);
       openModal();
@@ -115,34 +123,34 @@ describe('UI Component Tests', () => {
       expect(isOpen).toBe(false);
     });
 
-    test('should prevent body scroll when modal is open', () => {
-      const bodyStyle = { overflow: 'auto' };
+    test("should prevent body scroll when modal is open", () => {
+      const bodyStyle = { overflow: "auto" };
 
       // Open modal
-      bodyStyle.overflow = 'hidden';
-      expect(bodyStyle.overflow).toBe('hidden');
+      bodyStyle.overflow = "hidden";
+      expect(bodyStyle.overflow).toBe("hidden");
 
       // Close modal
-      bodyStyle.overflow = 'auto';
-      expect(bodyStyle.overflow).toBe('auto');
+      bodyStyle.overflow = "auto";
+      expect(bodyStyle.overflow).toBe("auto");
     });
 
-    test('should close on Escape key', () => {
+    test("should close on Escape key", () => {
       let isOpen = true;
 
       const handleKeyDown = (event: { key: string }) => {
-        if (event.key === 'Escape') {
+        if (event.key === "Escape") {
           isOpen = false;
         }
       };
 
-      handleKeyDown({ key: 'Escape' });
+      handleKeyDown({ key: "Escape" });
       expect(isOpen).toBe(false);
     });
   });
 
-  describe('List and Pagination', () => {
-    test('should paginate large datasets correctly', () => {
+  describe("List and Pagination", () => {
+    test("should paginate large datasets correctly", () => {
       const items = Array.from({ length: 100 }, (_, i) => i + 1);
       const pageSize = 10;
       const currentPage = 3;
@@ -155,7 +163,7 @@ describe('UI Component Tests', () => {
       expect(paginatedItems[9]).toBe(30); // Page 3 ends at item 30
     });
 
-    test('should calculate total pages correctly', () => {
+    test("should calculate total pages correctly", () => {
       const totalItems = 95;
       const pageSize = 10;
       const totalPages = Math.ceil(totalItems / pageSize);
@@ -163,7 +171,7 @@ describe('UI Component Tests', () => {
       expect(totalPages).toBe(10); // 95 items = 10 pages
     });
 
-    test('should handle first and last page navigation', () => {
+    test("should handle first and last page navigation", () => {
       let currentPage = 1;
       const totalPages = 10;
 
@@ -177,48 +185,44 @@ describe('UI Component Tests', () => {
     });
   });
 
-  describe('Search Functionality', () => {
-    test('should filter items by search query', () => {
+  describe("Search Functionality", () => {
+    test("should filter items by search query", () => {
       const items = [
-        { id: 1, title: 'Introduction to Tanium', domain: 1 },
-        { id: 2, title: 'Advanced Sensors', domain: 2 },
-        { id: 3, title: 'Tanium Console Navigation', domain: 1 },
+        { id: 1, title: "Introduction to Tanium", domain: 1 },
+        { id: 2, title: "Advanced Sensors", domain: 2 },
+        { id: 3, title: "Tanium Console Navigation", domain: 1 },
       ];
 
-      const query = 'tanium';
-      const filteredItems = items.filter(item =>
+      const query = "tanium";
+      const filteredItems = items.filter((item) =>
         item.title.toLowerCase().includes(query.toLowerCase())
       );
 
       expect(filteredItems).toHaveLength(2);
-      expect(filteredItems[0].title).toContain('Tanium');
+      expect(filteredItems[0].title).toContain("Tanium");
     });
 
-    test('should handle case-insensitive search', () => {
-      const items = [{ title: 'Test Item' }];
-      const query = 'test';
+    test("should handle case-insensitive search", () => {
+      const items = [{ title: "Test Item" }];
+      const query = "test";
 
-      const result = items.filter(item =>
-        item.title.toLowerCase().includes(query.toLowerCase())
-      );
+      const result = items.filter((item) => item.title.toLowerCase().includes(query.toLowerCase()));
 
       expect(result).toHaveLength(1);
     });
 
-    test('should return empty array for no matches', () => {
-      const items = [{ title: 'Test Item' }];
-      const query = 'nonexistent';
+    test("should return empty array for no matches", () => {
+      const items = [{ title: "Test Item" }];
+      const query = "nonexistent";
 
-      const result = items.filter(item =>
-        item.title.toLowerCase().includes(query.toLowerCase())
-      );
+      const result = items.filter((item) => item.title.toLowerCase().includes(query.toLowerCase()));
 
       expect(result).toHaveLength(0);
     });
   });
 
-  describe('Loading States', () => {
-    test('should show loading indicator while fetching', () => {
+  describe("Loading States", () => {
+    test("should show loading indicator while fetching", () => {
       let isLoading = true;
 
       // Simulate data fetch
@@ -229,7 +233,7 @@ describe('UI Component Tests', () => {
       expect(isLoading).toBe(true);
 
       // After fetch completes
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         setTimeout(() => {
           expect(isLoading).toBe(false);
           resolve(true);
@@ -237,7 +241,7 @@ describe('UI Component Tests', () => {
       });
     });
 
-    test('should disable submit button while loading', () => {
+    test("should disable submit button while loading", () => {
       let isLoading = true;
       const isButtonDisabled = isLoading;
 
@@ -250,17 +254,17 @@ describe('UI Component Tests', () => {
     });
   });
 
-  describe('Error Handling UI', () => {
-    test('should display error messages', () => {
-      const errorMessage = 'Failed to load data';
+  describe("Error Handling UI", () => {
+    test("should display error messages", () => {
+      const errorMessage = "Failed to load data";
       const hasError = !!errorMessage;
 
       expect(hasError).toBe(true);
-      expect(errorMessage).toBe('Failed to load data');
+      expect(errorMessage).toBe("Failed to load data");
     });
 
-    test('should clear error on retry', () => {
-      let error: string | null = 'Network error';
+    test("should clear error on retry", () => {
+      let error: string | null = "Network error";
 
       // Retry action
       error = null;
@@ -268,32 +272,33 @@ describe('UI Component Tests', () => {
       expect(error).toBeNull();
     });
 
-    test('should show fallback UI on error', () => {
-      const hasError = true;
-      const fallbackContent = hasError ? 'Something went wrong' : 'Content';
+    test("should show fallback UI on error", () => {
+      const getFallbackContent = (hasError: boolean) =>
+        hasError ? "Something went wrong" : "Content";
 
-      expect(fallbackContent).toBe('Something went wrong');
+      expect(getFallbackContent(true)).toBe("Something went wrong");
+      expect(getFallbackContent(false)).toBe("Content");
     });
   });
 
-  describe('Toast Notifications', () => {
-    test('should add notification to queue', () => {
+  describe("Toast Notifications", () => {
+    test("should add notification to queue", () => {
       const notifications: string[] = [];
 
       const showNotification = (message: string) => {
         notifications.push(message);
       };
 
-      showNotification('Success!');
-      showNotification('Error occurred');
+      showNotification("Success!");
+      showNotification("Error occurred");
 
       expect(notifications).toHaveLength(2);
-      expect(notifications[0]).toBe('Success!');
+      expect(notifications[0]).toBe("Success!");
     });
 
-    test('should remove notification after timeout', () => {
+    test("should remove notification after timeout", () => {
       return new Promise<void>((resolve) => {
-        let notification: string | null = 'Message';
+        let notification: string | null = "Message";
 
         setTimeout(() => {
           notification = null;
@@ -307,8 +312,8 @@ describe('UI Component Tests', () => {
     });
   });
 
-  describe('Theme and Accessibility', () => {
-    test('should toggle large text mode', () => {
+  describe("Theme and Accessibility", () => {
+    test("should toggle large text mode", () => {
       let isLargeText = false;
 
       const toggleLargeText = () => {
@@ -322,7 +327,7 @@ describe('UI Component Tests', () => {
       expect(isLargeText).toBe(false);
     });
 
-    test('should toggle high contrast mode', () => {
+    test("should toggle high contrast mode", () => {
       let isHighContrast = false;
 
       const toggleHighContrast = () => {
@@ -333,7 +338,7 @@ describe('UI Component Tests', () => {
       expect(isHighContrast).toBe(true);
     });
 
-    test('should persist settings to localStorage', () => {
+    test("should persist settings to localStorage", () => {
       const settings = {
         largeText: true,
         highContrast: false,
@@ -342,45 +347,45 @@ describe('UI Component Tests', () => {
       const serialized = JSON.stringify(settings);
       expect(serialized).toBe('{"largeText":true,"highContrast":false}');
 
-      const deserialized = JSON.parse(serialized);
+      const deserialized = JSON.parse(serialized) as typeof settings;
       expect(deserialized.largeText).toBe(true);
     });
   });
 
-  describe('Data Formatting', () => {
-    test('should format dates correctly', () => {
-      const date = new Date('2025-10-01T10:30:00Z');
-      const formatted = date.toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
+  describe("Data Formatting", () => {
+    test("should format dates correctly", () => {
+      const date = new Date("2025-10-01T10:30:00Z");
+      const formatted = date.toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
       });
 
-      expect(formatted).toContain('2025');
-      expect(formatted).toContain('October');
+      expect(formatted).toContain("2025");
+      expect(formatted).toContain("October");
     });
 
-    test('should format percentage correctly', () => {
+    test("should format percentage correctly", () => {
       const score = 0.875; // 87.5%
       const percentage = Math.round(score * 100);
 
       expect(percentage).toBe(88); // Rounded
     });
 
-    test('should format time duration', () => {
+    test("should format time duration", () => {
       const formatDuration = (minutes: number) => {
         const hours = Math.floor(minutes / 60);
         const mins = minutes % 60;
         return `${hours}h ${mins}m`;
       };
 
-      expect(formatDuration(125)).toBe('2h 5m');
-      expect(formatDuration(45)).toBe('0h 45m');
+      expect(formatDuration(125)).toBe("2h 5m");
+      expect(formatDuration(45)).toBe("0h 45m");
     });
   });
 
-  describe('Array and Object Manipulation', () => {
-    test('should sort items by property', () => {
+  describe("Array and Object Manipulation", () => {
+    test("should sort items by property", () => {
       const items = [
         { id: 3, score: 85 },
         { id: 1, score: 95 },
@@ -393,24 +398,28 @@ describe('UI Component Tests', () => {
       expect(sorted[2].score).toBe(85);
     });
 
-    test('should group items by property', () => {
+    test("should group items by property", () => {
       const items = [
-        { domain: 1, question: 'Q1' },
-        { domain: 2, question: 'Q2' },
-        { domain: 1, question: 'Q3' },
+        { domain: 1, question: "Q1" },
+        { domain: 2, question: "Q2" },
+        { domain: 1, question: "Q3" },
       ];
 
-      const grouped = items.reduce((acc, item) => {
-        if (!acc[item.domain]) acc[item.domain] = [];
-        acc[item.domain].push(item);
-        return acc;
-      }, {} as Record<number, typeof items>);
+      const grouped = items.reduce(
+        (acc, item) => {
+          const { domain } = item;
+          acc[domain] = acc[domain] || [];
+          acc[domain].push(item);
+          return acc;
+        },
+        {} as Record<number, typeof items>
+      );
 
       expect(grouped[1]).toHaveLength(2);
       expect(grouped[2]).toHaveLength(1);
     });
 
-    test('should remove duplicates from array', () => {
+    test("should remove duplicates from array", () => {
       const items = [1, 2, 2, 3, 3, 3, 4];
       const unique = [...new Set(items)];
 
@@ -419,22 +428,22 @@ describe('UI Component Tests', () => {
     });
   });
 
-  describe('Conditional Rendering Logic', () => {
-    test('should render based on authentication state', () => {
-      const isAuthenticated = true;
-      const content = isAuthenticated ? 'Dashboard' : 'Login';
+  describe("Conditional Rendering Logic", () => {
+    test("should render based on authentication state", () => {
+      const getContent = (isAuthenticated: boolean) => (isAuthenticated ? "Dashboard" : "Login");
 
-      expect(content).toBe('Dashboard');
+      expect(getContent(true)).toBe("Dashboard");
+      expect(getContent(false)).toBe("Login");
     });
 
-    test('should render based on user role', () => {
-      const userRole = 'admin';
-      const canAccess = userRole === 'admin';
+    test("should render based on user role", () => {
+      const userRole = "admin";
+      const canAccess = userRole === "admin";
 
       expect(canAccess).toBe(true);
     });
 
-    test('should render based on data availability', () => {
+    test("should render based on data availability", () => {
       const data = [1, 2, 3];
       const hasData = data.length > 0;
 
@@ -443,12 +452,12 @@ describe('UI Component Tests', () => {
   });
 });
 
-describe('Integration Scenarios', () => {
-  test('should handle complete user flow: browse → select → answer', () => {
+describe("Integration Scenarios", () => {
+  test("should handle complete user flow: browse → select → answer", () => {
     // User browses questions
     const questions = [
-      { id: 1, text: 'Question 1' },
-      { id: 2, text: 'Question 2' },
+      { id: 1, text: "Question 1" },
+      { id: 2, text: "Question 2" },
     ];
 
     expect(questions).toHaveLength(2);
@@ -458,7 +467,7 @@ describe('Integration Scenarios', () => {
     expect(selectedQuestion.id).toBe(1);
 
     // User answers question
-    const answer = 'A';
+    const answer = "A";
     const submission = {
       questionId: selectedQuestion.id,
       answer,
@@ -466,10 +475,10 @@ describe('Integration Scenarios', () => {
     };
 
     expect(submission.questionId).toBe(1);
-    expect(submission.answer).toBe('A');
+    expect(submission.answer).toBe("A");
   });
 
-  test('should track session progress accurately', () => {
+  test("should track session progress accurately", () => {
     const session = {
       questionsAttempted: 0,
       correctAnswers: 0,
