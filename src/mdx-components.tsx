@@ -1,16 +1,15 @@
 import type { MDXComponents } from "mdx/types";
 import React from "react";
-import dynamic from "next/dynamic";
 
-// Dynamic imports to prevent webpack commons extraction issues
+// Direct imports required for MDX - dynamic imports don't work with useMDXComponents
 // All MDX components registered globally - no explicit imports needed in .mdx files
-const InfoBox = dynamic(() => import("@/components/mdx/InfoBox"));
-const MicroQuizMDX = dynamic(() => import("@/components/mdx/MicroQuizMDX"));
-const MicroSection = dynamic(() => import("@/components/mdx/MicroSection"));
-const MiniProject = dynamic(() => import("@/components/mdx/MiniProject"));
-const ModuleTransition = dynamic(() => import("@/components/mdx/ModuleTransition"));
-const PracticeButton = dynamic(() => import("@/components/mdx/PracticeButton"));
-const QueryPlayground = dynamic(() => import("@/components/mdx/QueryPlayground"));
+import InfoBox from "@/components/mdx/InfoBox";
+import MicroQuizMDX from "@/components/mdx/MicroQuizMDX";
+import MicroSection from "@/components/mdx/MicroSection";
+import MiniProject from "@/components/mdx/MiniProject";
+import ModuleTransition from "@/components/mdx/ModuleTransition";
+import PracticeButton from "@/components/mdx/PracticeButton";
+import QueryPlayground from "@/components/mdx/QueryPlayground";
 
 function Anchor(props: React.AnchorHTMLAttributes<HTMLAnchorElement>) {
   const href = props.href || "";
