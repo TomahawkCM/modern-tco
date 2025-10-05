@@ -239,8 +239,9 @@ export default function SimulatorPage() {
 
       const execute = async () => {
         try {
+          const base = process.env.NEXT_PUBLIC_BASE_PATH ?? '';
           const data = await fetchJson<EvalResponse>(
-            '/api/sim-eval',
+            `${base}/api/sim-eval`,
             {
               method: 'POST',
               body: JSON.stringify({ question: input }),

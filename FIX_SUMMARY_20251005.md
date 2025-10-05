@@ -277,11 +277,37 @@ Route (app)                                   Size     First Load JS
 - Save functionality gracefully degrades with user-friendly message
 - Future work: Migrate sim-save to Supabase for full production support
 
+### 5. Fixed "Run Now" Button API Path
+
+**File**: `src/app/simulator/page.tsx` (line 242)
+
+**Issue**: "Run now" button did nothing when clicked - API call was missing base path prefix.
+
+**Root Cause**: The `scheduleEvaluation` function hardcoded `/api/sim-eval` instead of using `${base}/api/sim-eval` like other API calls in the file.
+
+**Fix Applied**:
+
+```typescript
+// Added base path configuration (line 242)
+const base = process.env.NEXT_PUBLIC_BASE_PATH ?? '';
+const data = await fetchJson<EvalResponse>(
+  `${base}/api/sim-eval`,  // Now includes base path
+  {
+    method: 'POST',
+    body: JSON.stringify({ question: input }),
+    signal: controller.signal,
+  }
+);
+```
+
+**Rationale**: Consistent API path handling across all fetch calls. Without base path, the API request would fail silently in environments with a configured base path.
+
 ---
 
 **Summary**: The simulator now works fully in production for query evaluation, the primary use case. The fixes include:
 
 1. Removed outdated production restriction from TypeScript query engine endpoint
 2. Added graceful degradation for Python-dependent save functionality
-3. Fixed Content Security Policy to allow Monaco Editor CDN scripts
-4. Updated documentation for production deployment clarity
+3. Fixed Content Security Policy to allow Monaco Editor CDN scripts (scripts, styles, source maps)
+4. Fixed "Run now" button API path to include base path prefix
+5. Updated documentation for production deployment clarity
