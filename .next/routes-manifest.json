@@ -5,30 +5,6 @@
   "basePath": "",
   "redirects": [
     {
-      "source": "/tanium",
-      "destination": "/",
-      "statusCode": 308,
-      "regex": "^(?!/_next)/tanium(?:/)?$"
-    },
-    {
-      "source": "/tanium/:path*",
-      "destination": "/:path*",
-      "statusCode": 308,
-      "regex": "^(?!/_next)/tanium(?:/((?:[^/]+?)(?:/(?:[^/]+?))*))?(?:/)?$"
-    },
-    {
-      "source": "/Tanium",
-      "destination": "/",
-      "statusCode": 308,
-      "regex": "^(?!/_next)/Tanium(?:/)?$"
-    },
-    {
-      "source": "/Tanium/:path*",
-      "destination": "/:path*",
-      "statusCode": 308,
-      "regex": "^(?!/_next)/Tanium(?:/((?:[^/]+?)(?:/(?:[^/]+?))*))?(?:/)?$"
-    },
-    {
       "source": "/exam",
       "destination": "/mock",
       "statusCode": 308,
@@ -54,6 +30,10 @@
         {
           "key": "Permissions-Policy",
           "value": "geolocation=(), microphone=(), camera=()"
+        },
+        {
+          "key": "Content-Security-Policy",
+          "value": "default-src 'self'; base-uri 'self'; frame-ancestors 'self'; object-src 'none'; form-action 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://browser.sentry-cdn.com https://www.youtube.com https://app.posthog.com https://us.i.posthog.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://i.ytimg.com https://img.youtube.com; connect-src 'self' https://qnwcwoutgarhqxlgsjzs.supabase.co https://*.supabase.co wss://*.supabase.co https://us.i.posthog.com https://*.posthog.com https://sentry.io https://*.sentry.io; frame-src https://www.youtube.com https://www.youtube-nocookie.com; font-src 'self' data:; worker-src 'self' blob:"
         }
       ],
       "regex": "^(?:/(.*))(?:/)?$"
@@ -176,6 +156,12 @@
       "regex": "^/beginner(?:/)?$",
       "routeKeys": {},
       "namedRegex": "^/beginner(?:/)?$"
+    },
+    {
+      "page": "/daily-review",
+      "regex": "^/daily\\-review(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/daily\\-review(?:/)?$"
     },
     {
       "page": "/dashboard",

@@ -313,26 +313,6 @@
     },
     "_originalRedirects": [
       {
-        "source": "/tanium",
-        "destination": "/",
-        "permanent": true
-      },
-      {
-        "source": "/tanium/:path*",
-        "destination": "/:path*",
-        "permanent": true
-      },
-      {
-        "source": "/Tanium",
-        "destination": "/",
-        "permanent": true
-      },
-      {
-        "source": "/Tanium/:path*",
-        "destination": "/:path*",
-        "permanent": true
-      },
-      {
         "source": "/exam",
         "destination": "/mock",
         "permanent": true
@@ -362,8 +342,9 @@
     ".next/server/next-font-manifest.js",
     ".next/server/next-font-manifest.json",
     ".next/required-server-files.json",
-    ".next/static/css/d00ccf3c7fb606c6.css",
-    ".next/static/css/d07dfcf68ff6af4c.css"
+    ".next/static/css/796a6daa418d1b2d.css",
+    ".next/static/css/7e7d96b1e6991756.css",
+    ".next/static/css/d00ccf3c7fb606c6.css"
   ],
   "ignore": [
     "node_modules/next/dist/compiled/@ampproject/toolbox-optimizer/**/*"

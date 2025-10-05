@@ -172,10 +172,11 @@ export const CyberpunkNavBar: React.FC<CyberpunkNavBarProps> = ({
                 className="md:hidden relative group"
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
+                aria-label="Search modules and questions"
               >
                 <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500 to-sky-400 rounded-full blur opacity-25 group-hover:opacity-75 transition duration-300"></div>
                 <div className="relative w-9 h-9 bg-black/60 backdrop-blur-xl border border-cyan-500/30 rounded-full flex items-center justify-center">
-                  <Search className="h-4 w-4 text-cyan-400" />
+                  <Search className="h-4 w-4 text-cyan-400" aria-hidden="true" />
                 </div>
               </motion.button>
 
@@ -184,11 +185,12 @@ export const CyberpunkNavBar: React.FC<CyberpunkNavBarProps> = ({
                 className="relative group hidden sm:flex"
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
+                aria-label="Notifications (3 unread)"
               >
                 <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500 to-sky-400 rounded-full blur opacity-25 group-hover:opacity-75 transition duration-300"></div>
                 <div className="relative w-9 h-9 bg-black/60 backdrop-blur-xl border border-cyan-500/30 rounded-full flex items-center justify-center">
-                  <Bell className="h-4 w-4 text-cyan-400" />
-                  <span className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full text-[10px] text-white flex items-center justify-center font-bold">3</span>
+                  <Bell className="h-4 w-4 text-cyan-400" aria-hidden="true" />
+                  <span className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full text-[10px] text-white flex items-center justify-center font-bold" aria-hidden="true">3</span>
                 </div>
               </motion.button>
 
@@ -197,10 +199,11 @@ export const CyberpunkNavBar: React.FC<CyberpunkNavBarProps> = ({
                 className="relative group hidden sm:flex"
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
+                aria-label="User profile settings"
               >
                 <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500 to-sky-400 rounded-full blur opacity-25 group-hover:opacity-75 transition duration-300"></div>
                 <div className="relative w-9 h-9 bg-black/60 backdrop-blur-xl border border-cyan-500/30 rounded-full flex items-center justify-center">
-                  <User className="h-4 w-4 text-cyan-400" />
+                  <User className="h-4 w-4 text-cyan-400" aria-hidden="true" />
                 </div>
               </motion.button>
             </div>

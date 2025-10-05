@@ -5,6 +5,15 @@
 
 import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
+import dynamic from "next/dynamic";
+
+// Dynamic imports to prevent commons chunk extraction
+const MicroQuizMDX = dynamic(() => import("./MicroQuizMDX"));
+const InfoBox = dynamic(() => import("./InfoBox"));
+const PracticeButton = dynamic(() => import("./PracticeButton"));
+const QueryPlayground = dynamic(() => import("./QueryPlayground"));
+const MicroSection = dynamic(() => import("./MicroSection"));
+const ModuleTransition = dynamic(() => import("./ModuleTransition"));
 
 interface MDXWrapperProps {
   children: ReactNode;
@@ -93,6 +102,11 @@ export const mdxComponents = {
       {children}
     </pre>
   ),
-  // Custom components should be imported directly in MDX files
-  // to prevent webpack commons chunk extraction issues
+  // Interactive components - dynamically imported to prevent commons extraction
+  MicroQuizMDX,
+  InfoBox,
+  PracticeButton,
+  QueryPlayground,
+  MicroSection,
+  ModuleTransition,
 };

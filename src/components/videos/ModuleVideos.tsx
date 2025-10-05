@@ -2,7 +2,23 @@
 
 import videoManifest from "@/content/videos/manifest.json";
 import type { ModuleManifest } from "@/types/manifest";
-import VideoEmbed from "@/components/videos/VideoEmbed";
+import dynamic from "next/dynamic";
+
+// Lazy load VideoEmbed to reduce initial bundle size (saves ~20-30 KB)
+const VideoEmbed = dynamic(
+  () => import("@/components/videos/VideoEmbed"),
+  {
+    loading: () => (
+      <div className="aspect-video flex items-center justify-center bg-gray-900 rounded-lg">
+        <div className="text-center space-y-2">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-cyan-500 mx-auto"></div>
+          <p className="text-gray-400 text-xs">Loading video player...</p>
+        </div>
+      </div>
+    ),
+    ssr: false
+  }
+);
 
 function toEnvKey(slug: string) {
   return `NEXT_PUBLIC_VIDEOS_${slug.replace(/[^a-z0-9]/gi, "_").toUpperCase()}`;

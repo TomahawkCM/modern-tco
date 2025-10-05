@@ -5,17 +5,89 @@ import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { DomainRadarChart } from "@/components/analytics/DomainRadarChart";
-import { StudyRecommendations } from "@/components/analytics/StudyRecommendations";
-import { DataExport } from "@/components/analytics/DataExport";
-import { AdaptiveDifficulty } from "@/components/analytics/AdaptiveDifficulty";
-import { PerformancePredictions } from "@/components/analytics/PerformancePredictions";
+import dynamic from "next/dynamic";
 import { useProgress } from "@/contexts/ProgressContext";
 import { TCODomain } from "@/types/exam";
 import { useMemo } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/contexts/AuthContext";
 import { usePersistentState } from "@/lib/usePersistentState";
+
+// Lazy load analytics charts to reduce initial bundle size (saves ~100 KB)
+const DomainRadarChart = dynamic(
+  () => import("@/components/analytics/DomainRadarChart").then(mod => ({ default: mod.DomainRadarChart })),
+  {
+    loading: () => (
+      <div className="flex items-center justify-center p-8">
+        <div className="text-center space-y-3">
+          <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-cyan-500 mx-auto"></div>
+          <p className="text-gray-400 text-sm">Loading chart...</p>
+        </div>
+      </div>
+    ),
+    ssr: false
+  }
+);
+
+const StudyRecommendations = dynamic(
+  () => import("@/components/analytics/StudyRecommendations").then(mod => ({ default: mod.StudyRecommendations })),
+  {
+    loading: () => (
+      <div className="flex items-center justify-center p-8">
+        <div className="text-center space-y-3">
+          <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-cyan-500 mx-auto"></div>
+          <p className="text-gray-400 text-sm">Loading recommendations...</p>
+        </div>
+      </div>
+    ),
+    ssr: false
+  }
+);
+
+const DataExport = dynamic(
+  () => import("@/components/analytics/DataExport").then(mod => ({ default: mod.DataExport })),
+  {
+    loading: () => (
+      <div className="flex items-center justify-center p-8">
+        <div className="text-center space-y-3">
+          <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-cyan-500 mx-auto"></div>
+          <p className="text-gray-400 text-sm">Loading export...</p>
+        </div>
+      </div>
+    ),
+    ssr: false
+  }
+);
+
+const AdaptiveDifficulty = dynamic(
+  () => import("@/components/analytics/AdaptiveDifficulty").then(mod => ({ default: mod.AdaptiveDifficulty })),
+  {
+    loading: () => (
+      <div className="flex items-center justify-center p-8">
+        <div className="text-center space-y-3">
+          <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-cyan-500 mx-auto"></div>
+          <p className="text-gray-400 text-sm">Loading analytics...</p>
+        </div>
+      </div>
+    ),
+    ssr: false
+  }
+);
+
+const PerformancePredictions = dynamic(
+  () => import("@/components/analytics/PerformancePredictions").then(mod => ({ default: mod.PerformancePredictions })),
+  {
+    loading: () => (
+      <div className="flex items-center justify-center p-8">
+        <div className="text-center space-y-3">
+          <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-cyan-500 mx-auto"></div>
+          <p className="text-gray-400 text-sm">Loading predictions...</p>
+        </div>
+      </div>
+    ),
+    ssr: false
+  }
+);
 import {
   BarChart3,
   Trophy,

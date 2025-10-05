@@ -190,6 +190,63 @@ node scripts/verify-postgresql-schema.js
 node scripts/run-native-postgresql.js
 ```
 
+### Git Hooks & Code Quality
+
+**Automated Quality Enforcement (All Platforms):**
+
+This project uses **Husky v9.1.7** to automatically validate code quality on commit and push:
+
+```bash
+# Git hooks are configured automatically after npm install
+# No manual setup required
+
+# Pre-commit hook (fast, ~2-3 seconds)
+# Runs automatically on: git commit
+# - Lints and formats staged files only
+# - Auto-fixes TypeScript/ESLint issues
+# - Optimized for fast iteration
+
+# Pre-push hook (comprehensive, ~6 seconds)
+# Runs automatically on: git push
+# - TypeScript type checking (parallel)
+# - ESLint validation (parallel)
+# - Note: Prettier check excluded (handled by pre-commit)
+```
+
+**Manual Testing:**
+
+**PowerShell (Windows):**
+
+```powershell
+# Test pre-commit hook
+.husky/pre-commit
+
+# Test pre-push hook
+.husky/pre-push
+
+# Verify hooks are configured
+git config core.hooksPath  # Should output: .husky
+```
+
+**Unix/Linux:**
+
+```bash
+# Test pre-commit hook
+.husky/pre-commit
+
+# Test pre-push hook
+.husky/pre-push
+
+# Verify hooks are configured
+git config core.hooksPath  # Should output: .husky
+```
+
+**Benefits:**
+- ✅ Fast commits (2-3s) with auto-formatting
+- ✅ Comprehensive validation before push
+- ✅ Team-wide code consistency
+- ✅ No manual quality checks needed
+
 ### Database Operations
 
 **PowerShell (Windows):**
@@ -240,6 +297,7 @@ npm run test:db
 
 - [ ] Project running locally (`npm run dev`)
 - [ ] Database connection working
+- [ ] Git hooks configured and working (`git config core.hooksPath`)
 - [ ] Key documentation bookmarked
 - [ ] Understanding of 9 React contexts
 - [ ] Basic CRUD operations tested

@@ -571,6 +571,59 @@ npm run db:verify
 node -e "require('./src/lib/supabase').testConnection()"
 ```
 
+### Git Hooks & Pre-commit Validation
+
+**Automated Code Quality Enforcement:**
+
+This project uses **Husky v9.1.7** for automated git hooks that ensure code quality before commits and pushes.
+
+```bash
+# Git hooks are automatically configured after npm install
+# Husky is installed and git config core.hooksPath is set to .husky
+
+# Pre-commit hook (fast, <3 seconds)
+# Automatically runs on: git commit
+# - Lints and formats staged files only (via lint-staged)
+# - TypeScript/ESLint fixes applied automatically
+# - Fast iteration workflow optimized
+
+# Pre-push hook (comprehensive checks, ~6 seconds)
+# Automatically runs on: git push
+# - TypeScript type checking (parallel)
+# - ESLint validation (parallel)
+# - Note: Prettier format check excluded (handled by pre-commit)
+# - Fast execution optimized for developer workflow
+```
+
+**Manual Hook Testing:**
+
+```bash
+# Test pre-commit hook manually
+.husky/pre-commit
+
+# Test pre-push hook manually
+.husky/pre-push
+
+# Verify git hooks configuration
+git config core.hooksPath  # Should output: .husky
+
+# Check husky installation
+npm list husky  # Should show: husky@9.1.7
+```
+
+**Hook Configuration:**
+
+- **Pre-commit** (`.husky/pre-commit`): Runs `lint-staged` for fast, staged-file-only validation
+- **Pre-push** (`.husky/pre-push`): Runs comprehensive parallel checks before pushing to remote
+- **No deprecated warnings**: Husky v9 compliant (removed deprecated `husky.sh` pattern)
+
+**Benefits:**
+
+- ✅ **Fast commits** - Pre-commit completes in ~2-3 seconds
+- ✅ **Comprehensive validation** - Pre-push ensures production-ready code
+- ✅ **Auto-formatting** - Code formatted automatically on commit
+- ✅ **Team consistency** - Same quality checks for all developers
+
 ### MCP Integration Testing
 
 ```bash

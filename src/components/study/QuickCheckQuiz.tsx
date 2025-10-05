@@ -208,9 +208,9 @@ export function QuickCheckQuiz({
 
         <CardContent className="space-y-6">
           {/* Score Display */}
-          <div className="text-center">
+          <div className="text-center" role="status" aria-live="polite" aria-atomic="true">
             <div className="mb-4">
-              <div className="mb-2 text-5xl font-bold text-white">{score}%</div>
+              <div className="mb-2 text-5xl font-bold text-white" aria-label={`Quiz score: ${score} percent`}>{score}%</div>
               <p className="text-sm text-gray-400">
                 {questions.filter((q) => isAnswerCorrect(q.id, selectedAnswers[q.id])).length} of{" "}
                 {totalQuestions} correct
@@ -222,10 +222,10 @@ export function QuickCheckQuiz({
               className={cn("h-3", isPassed ? "bg-green-900/30" : "bg-orange-900/30")}
             />
 
-            <div className="mt-4">
+            <div className="mt-4" role="alert" aria-live="assertive" aria-atomic="true">
               {isPassed ? (
                 <div className="rounded-lg border border-green-500/30 bg-green-500/10 p-4">
-                  <CheckCircle2 className="mx-auto mb-2 h-8 w-8 text-green-500" />
+                  <CheckCircle2 className="mx-auto mb-2 h-8 w-8 text-green-500" aria-hidden="true" />
                   <p className="font-bold text-green-300">Excellent Work! 🎉</p>
                   <p className="text-sm text-green-400 mt-1">
                     You've demonstrated strong understanding of this section. You can now mark it
@@ -234,7 +234,7 @@ export function QuickCheckQuiz({
                 </div>
               ) : (
                 <div className="rounded-lg border border-orange-500/30 bg-orange-500/10 p-4">
-                  <AlertCircle className="mx-auto mb-2 h-8 w-8 text-orange-500" />
+                  <AlertCircle className="mx-auto mb-2 h-8 w-8 text-orange-500" aria-hidden="true" />
                   <p className="font-bold text-orange-300">
                     Score below {passThreshold}% - Review and Retry
                   </p>

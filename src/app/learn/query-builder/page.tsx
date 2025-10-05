@@ -1,10 +1,26 @@
 "use client";
 
 import React from 'react';
-import { QuestionBuilder } from '@/components/query-builder/QuestionBuilder';
+import dynamic from 'next/dynamic';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Info } from 'lucide-react';
+
+// Lazy load QuestionBuilder to reduce initial bundle size (saves ~150 KB)
+const QuestionBuilder = dynamic(
+  () => import('@/components/query-builder/QuestionBuilder').then(mod => ({ default: mod.QuestionBuilder })),
+  {
+    loading: () => (
+      <div className="flex items-center justify-center p-12">
+        <div className="text-center space-y-4">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-cyan-500 mx-auto"></div>
+          <p className="text-gray-400">Loading Query Builder...</p>
+        </div>
+      </div>
+    ),
+    ssr: false
+  }
+);
 
 export default function QueryBuilderPage() {
   return (

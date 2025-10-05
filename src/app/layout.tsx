@@ -9,6 +9,13 @@ import { SkipLinks } from "@/components/accessibility/skip-links";
 import { AnalyticsClient } from "@/app/analytics-client";
 import { MonitoringClient } from "@/app/monitoring-client";
 import { AccessibilityInitializer } from "@/components/AccessibilityInitializer";
+import { Inter } from "next/font/google";
+
+const inter = Inter({
+  subsets: ['latin'],
+  display: 'swap',
+  preload: true,
+});
 
 // Force dynamic rendering to prevent static generation issues with React hooks
 export const dynamic = 'force-dynamic';
@@ -28,27 +35,15 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" className={inter.className}>
       <head>
         {/* Preconnect to external domains for performance */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://qnwcwoutgarhqxlgsjzs.supabase.co" />
         <link rel="dns-prefetch" href="https://qnwcwoutgarhqxlgsjzs.supabase.co" />
         <link rel="preconnect" href="https://www.youtube.com" />
         <link rel="dns-prefetch" href="https://www.youtube.com" />
         <link rel="preconnect" href="https://app.posthog.com" />
         <link rel="dns-prefetch" href="https://app.posthog.com" />
-
-        {/* Preload critical font with high priority to ensure immediate usage */}
-        <link
-          rel="preload"
-          href="/fonts/inter-var.woff2"
-          as="font"
-          type="font/woff2"
-          crossOrigin="anonymous"
-          fetchPriority="high"
-        />
       </head>
       <body className="font-sans antialiased">
         {/* HYDRATION FIX: AccessibilityInitializer applies settings AFTER React hydration

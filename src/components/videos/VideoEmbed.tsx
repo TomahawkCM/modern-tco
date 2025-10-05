@@ -235,7 +235,14 @@ export default function VideoEmbed({ youtubeId, title, start, moduleSlug }: Vide
   return (
     <div
       ref={containerRef}
-      className="w-full aspect-video overflow-hidden rounded-lg border border-slate-200 dark:border-slate-800 bg-black"
+      style={{
+        aspectRatio: '16/9',
+        minHeight: '315px',
+        maxWidth: '100%',
+        position: 'relative',
+        backgroundColor: '#000',
+      }}
+      className="overflow-hidden rounded-lg border border-slate-200 dark:border-slate-800"
       aria-label={title}
     />
   );

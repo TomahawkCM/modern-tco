@@ -1,4 +1,9 @@
 #!/bin/sh
 echo "🔍 Running comprehensive checks before push..."
-npm run check:all-parallel
+
+# Run typecheck and lint in parallel (fast, ~6 seconds total)
+# Note: format:check excluded due to performance issues with large file trees
+# Formatting is already enforced by pre-commit hook via lint-staged
+npx concurrently --raw "npm run typecheck" "npm run lint:check"
+
 echo "✅ Pre-push checks passed!"
