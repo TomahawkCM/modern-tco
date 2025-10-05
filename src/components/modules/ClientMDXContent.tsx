@@ -8,6 +8,9 @@ import MiniProject from "@/components/mdx/MiniProject";
 import QueryPlayground from "@/components/mdx/QueryPlayground";
 import SkillGate from "@/components/mdx/SkillGate";
 import ModuleTransition from "@/components/mdx/ModuleTransition";
+import MicroSection from "@/components/mdx/MicroSection";
+import MicroQuizMDX from "@/components/mdx/MicroQuizMDX";
+import InfoBox from "@/components/mdx/InfoBox";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -34,6 +37,9 @@ const mdxComponents = {
   QueryPlayground: (props: React.ComponentProps<typeof QueryPlayground>) => <QueryPlayground {...props} />,
   SkillGate: (props: React.ComponentProps<typeof SkillGate>) => <SkillGate {...props} />,
   ModuleTransition: (props: React.ComponentProps<typeof ModuleTransition>) => <ModuleTransition {...props} />,
+  MicroSection: (props: React.ComponentProps<typeof MicroSection>) => <MicroSection {...props} />,
+  MicroQuizMDX: (props: React.ComponentProps<typeof MicroQuizMDX>) => <MicroQuizMDX {...props} />,
+  InfoBox: (props: React.ComponentProps<typeof InfoBox>) => <InfoBox {...props} />,
 
   // Enhanced typography
   h1: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
@@ -117,8 +123,8 @@ const mdxComponents = {
     />
   ),
 
-  // Custom callout components
-  InfoBox: ({
+  // Enhanced InfoBox with variants
+  EnhancedInfoBox: ({
     title,
     children,
     variant = "info",

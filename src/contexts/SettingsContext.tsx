@@ -157,7 +157,7 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
   const { user } = useAuth();
   const db = useDatabase();
   const dbInitialized = useRef(false);
-  const saveTimeout = useRef<NodeJS.Timeout>();
+  const saveTimeout = useRef<NodeJS.Timeout | undefined>(undefined);
 
   // Load settings from database or localStorage on mount
   useEffect(() => {

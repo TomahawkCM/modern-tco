@@ -91,7 +91,7 @@ export const CyberpunkNavBar: React.FC<CyberpunkNavBarProps> = ({
   // Return simple nav during SSR to prevent hydration mismatch
   if (!mounted) {
     return (
-      <nav className={`fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-xl border-b border-cyan-500/20 ${className}`}>
+      <nav className={`fixed top-0 left-0 right-0 z-50 bg-white/[0.02] backdrop-blur-xl backdrop-saturate-150 border-b border-white/10 shadow-lg shadow-black/5 ${className}`}>
         <div className="px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
@@ -128,8 +128,8 @@ export const CyberpunkNavBar: React.FC<CyberpunkNavBarProps> = ({
       transition={{ duration: 0.5, ease: "easeOut" }}
       className={`fixed top-1 left-0 right-0 z-50 mx-4 ${className}`}
     >
-      <div className="relative bg-black/80 backdrop-blur-xl border border-cyan-500/20 rounded-2xl shadow-[0_0_50px_rgba(34,211,238,0.1)]">
-        <div className="absolute -inset-[1px] bg-gradient-to-r from-cyan-500 via-sky-400 to-cyan-500 rounded-2xl opacity-20 blur-sm"></div>
+      <div className="relative bg-white/[0.02] backdrop-blur-xl backdrop-saturate-150 border border-white/10 rounded-2xl shadow-lg shadow-black/5">
+        <div className="absolute -inset-[1px] bg-gradient-to-r from-cyan-500 via-sky-400 to-cyan-500 rounded-2xl opacity-5 blur-sm"></div>
 
         <div className="relative px-6 py-4">
           <div className="flex items-center justify-between">
@@ -145,7 +145,7 @@ export const CyberpunkNavBar: React.FC<CyberpunkNavBarProps> = ({
                   alt="TCO Logo"
                   className="w-10 h-10 sm:w-12 sm:h-12 object-contain"
                 />
-                <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-purple-500 rounded-full blur animate-pulse opacity-30"></div>
+                <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-purple-500 rounded-full blur animate-pulse opacity-10"></div>
               </div>
               <HolographicText className="text-base sm:text-lg lg:text-xl font-bold whitespace-nowrap hidden xs:block">
                 <span className="hidden lg:inline">{brandName}</span>
@@ -160,7 +160,7 @@ export const CyberpunkNavBar: React.FC<CyberpunkNavBarProps> = ({
                 <input
                   type="text"
                   placeholder="Search modules, questions..."
-                  className="w-full pl-10 pr-4 py-2 bg-black/40 border border-cyan-500/20 rounded-lg text-sm text-cyan-100 placeholder-cyan-400/40 focus:outline-none focus:border-cyan-400/50 focus:ring-2 focus:ring-cyan-500/20 transition-all"
+                  className="w-full pl-10 pr-4 py-2 bg-white/[0.03] backdrop-blur-md border border-white/10 rounded-lg text-sm text-cyan-100 placeholder-cyan-400/40 focus:outline-none focus:border-white/20 focus:ring-2 focus:ring-white/10 transition-all"
                 />
               </div>
             </div>
@@ -174,8 +174,8 @@ export const CyberpunkNavBar: React.FC<CyberpunkNavBarProps> = ({
                 whileTap={{ scale: 0.9 }}
                 aria-label="Search modules and questions"
               >
-                <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500 to-sky-400 rounded-full blur opacity-25 group-hover:opacity-75 transition duration-300"></div>
-                <div className="relative w-9 h-9 bg-black/60 backdrop-blur-xl border border-cyan-500/30 rounded-full flex items-center justify-center">
+                <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500 to-sky-400 rounded-full blur opacity-10 group-hover:opacity-30 transition duration-300"></div>
+                <div className="relative w-9 h-9 bg-white/[0.05] backdrop-blur-xl border border-white/10 rounded-full flex items-center justify-center">
                   <Search className="h-4 w-4 text-cyan-400" aria-hidden="true" />
                 </div>
               </motion.button>
@@ -187,8 +187,8 @@ export const CyberpunkNavBar: React.FC<CyberpunkNavBarProps> = ({
                 whileTap={{ scale: 0.9 }}
                 aria-label="Notifications (3 unread)"
               >
-                <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500 to-sky-400 rounded-full blur opacity-25 group-hover:opacity-75 transition duration-300"></div>
-                <div className="relative w-9 h-9 bg-black/60 backdrop-blur-xl border border-cyan-500/30 rounded-full flex items-center justify-center">
+                <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500 to-sky-400 rounded-full blur opacity-10 group-hover:opacity-30 transition duration-300"></div>
+                <div className="relative w-9 h-9 bg-white/[0.05] backdrop-blur-xl border border-white/10 rounded-full flex items-center justify-center">
                   <Bell className="h-4 w-4 text-cyan-400" aria-hidden="true" />
                   <span className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full text-[10px] text-white flex items-center justify-center font-bold" aria-hidden="true">3</span>
                 </div>
@@ -201,8 +201,8 @@ export const CyberpunkNavBar: React.FC<CyberpunkNavBarProps> = ({
                 whileTap={{ scale: 0.9 }}
                 aria-label="User profile settings"
               >
-                <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500 to-sky-400 rounded-full blur opacity-25 group-hover:opacity-75 transition duration-300"></div>
-                <div className="relative w-9 h-9 bg-black/60 backdrop-blur-xl border border-cyan-500/30 rounded-full flex items-center justify-center">
+                <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500 to-sky-400 rounded-full blur opacity-10 group-hover:opacity-30 transition duration-300"></div>
+                <div className="relative w-9 h-9 bg-white/[0.05] backdrop-blur-xl border border-white/10 rounded-full flex items-center justify-center">
                   <User className="h-4 w-4 text-cyan-400" aria-hidden="true" />
                 </div>
               </motion.button>

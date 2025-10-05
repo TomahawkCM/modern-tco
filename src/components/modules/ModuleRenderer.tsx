@@ -4,6 +4,9 @@ import React, { useState, useEffect, useMemo, useRef } from "react";
 import dynamic from "next/dynamic";
 import type { ModuleData } from "@/lib/mdx/module-loader";
 import PracticeButton from "@/components/mdx/PracticeButton";
+import MicroSection from "@/components/mdx/MicroSection";
+import MicroQuizMDX from "@/components/mdx/MicroQuizMDX";
+import QueryPlayground from "@/components/mdx/QueryPlayground";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -48,6 +51,9 @@ const ClientMDXContent = dynamic(
 const mdxComponents = {
   // Custom components available in MDX
   PracticeButton: (props: React.ComponentProps<typeof PracticeButton>) => <PracticeButton {...props} />,
+  MicroSection: (props: React.ComponentProps<typeof MicroSection>) => <MicroSection {...props} />,
+  MicroQuizMDX: (props: React.ComponentProps<typeof MicroQuizMDX>) => <MicroQuizMDX {...props} />,
+  QueryPlayground: (props: React.ComponentProps<typeof QueryPlayground>) => <QueryPlayground {...props} />,
 
   // Enhanced typography
   h1: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
