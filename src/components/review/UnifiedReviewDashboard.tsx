@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -18,6 +19,7 @@ import {
   Clock,
   CheckCircle2,
   AlertCircle,
+  ExternalLink,
 } from "lucide-react";
 
 interface ReviewStats {
@@ -46,6 +48,7 @@ interface ReviewQueueItem {
 
 export default function UnifiedReviewDashboard() {
   const { user } = useAuth();
+  const router = useRouter();
   const [stats, setStats] = useState<ReviewStats | null>(null);
   const [queue, setQueue] = useState<ReviewQueueItem[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -237,6 +240,17 @@ export default function UnifiedReviewDashboard() {
               size="lg"
             >
               {flashcardCount > 0 ? "Start Flashcard Review" : "All Caught Up!"}
+            </Button>
+
+            <Button
+              onClick={() => router.push("/flashcards")}
+              variant="outline"
+              className="w-full"
+              size="sm"
+            >
+              <Brain className="h-4 w-4 mr-2" />
+              Manage Flashcards
+              <ExternalLink className="h-3 w-3 ml-2" />
             </Button>
 
             <div className="text-xs text-muted-foreground">

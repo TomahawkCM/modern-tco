@@ -29,6 +29,7 @@ import {
   BookMarked,
   StickyNote,
   ChevronDown,
+  Brain,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
@@ -141,6 +142,13 @@ export function Sidebar({ isOpen = true, onClose, className }: SidebarProps) {
       label: "Daily Review",
       icon: Calendar,
       href: "/daily-review",
+    },
+    {
+      id: "flashcards",
+      label: "Flashcards",
+      icon: Brain,
+      badge: "NEW",
+      href: "/flashcards",
     },
     {
       id: "kb",
