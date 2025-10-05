@@ -14,9 +14,8 @@
     "src/__tests__/**/*.tsx",
     "src/**/*.test.ts",
     "src/**/*.test.tsx",
-    "scripts/**/*.ts"
+    "scripts/**/*.ts",
+    "scripts/**/*.js"
   ],
-  "exclude": [
-    "node_modules"
-  ]
+  "exclude": ["node_modules"]
 }
