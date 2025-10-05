@@ -71,7 +71,7 @@ PROD-CENTOS03 - CentOS 7.9 - Internal
 
 - Boolean logic ordering and short‑circuit behavior (AND before OR; use parentheses generously)
 - Common patterns:
-  - OS "Windows" AND (Patch Status = "Missing" OR Last Scan &gt; 14 days)
+  - OS "Windows" AND (Patch Status = "Missing" OR Last Scan > 14 days)
   - Regex filters for version ranges (e.g., `^10\.(2[2-9]|[3-9][0-9])`)
   - NOT filters to exclude test/staging cohorts
 - Performance tactics:
@@ -122,7 +122,7 @@ PROD-CENTOS03 - CentOS 7.9 - Internal
    - Get Computer Name from all machines where (Tags contains "prod" AND NOT Tags contains "canary")
 
 9) High resource usage cohort
-   - Get Computer Name from all machines where (CPU Utilization &gt; 85 OR Memory Utilization &gt; 90) AND Uptime &gt; 7 days
+   - Get Computer Name from all machines where (CPU Utilization > 85 OR Memory Utilization > 90) AND Uptime > 7 days
 
 10) Risk posture by encryption or secure boot
     - Get Computer Name from all machines where (Disk Encryption Status != "Enabled" OR Secure Boot State != "On")
@@ -184,7 +184,7 @@ WORKSTATION-15 - Google Chrome 129.0.6668.89
 - Chrome versions 120–129: `^12[0-9]\.`
 - IPv6 link‑local: `^fe80::`
 - Serial prefix: `^(DEL|LEN|HP)[A-Z0-9]+`
-- App semantic version &lt; 2.5.x: `^2\.(0|1|2\.[0-4])`
+- App semantic version < 2.5.x: `^2\.(0|1|2\.[0-4])`
 
 ### Performance Considerations for Filtering
 
@@ -407,7 +407,7 @@ PROD-WEB03 - Last Backup: 48 hours ago - 12GB free
 ### Rollback Planning
 
 - Pre‑create static rollback cohort and uninstall packages
-- Define stop criteria (e.g., &gt;10% failure within first 15 minutes)
+- Define stop criteria (e.g., >10% failure within first 15 minutes)
 - Assign on‑call approver and communication channels
 
 ### Risk Assessment Matrix (quick guide)
@@ -676,7 +676,7 @@ Get Computer Name from all machines where
   (Missing Critical Patches = 0 and Anti-Virus Enabled = "Yes")
   and
   // Tier 2: Access Control
-  (Local Administrators count &lt; 5 and Password Policy Compliant = "Yes")
+  (Local Administrators count < 5 and Password Policy Compliant = "Yes")
   and
   // Tier 3: Monitoring
   (Event Log Service = "Running" and Remote Management Enabled = "Yes")
@@ -758,7 +758,7 @@ Get Computer Name and Installed Applications and Services from all machines wher
 ) and (
   // Common requirements
   Domain Name = "production.local" and
-  Last Reboot Time &lt; 30 days ago
+  Last Reboot Time < 30 days ago
 )
 ```
 
@@ -812,9 +812,9 @@ Definition: (
    Installed Applications containing "Customer Database")
   and
   // Security gaps
-  (Missing Critical Patches &gt; 0 or
+  (Missing Critical Patches > 0 or
    Anti-Virus Out of Date = "Yes" or
-   Local Administrators count &gt; 5)
+   Local Administrators count > 5)
 )
 Update: Every 1 minute
 Use: Priority remediation and monitoring
@@ -824,10 +824,10 @@ Use: Priority remediation and monitoring
 
 | Group Size | Update Frequency | Performance Impact | Recommendation |
 |-----------|-----------------|-------------------|----------------|
-| &lt;1,000 | 1 minute | Minimal | Safe for critical groups |
+| `<1,000` | 1 minute | Minimal | Safe for critical groups |
 | 1,000-10,000 | 5 minutes | Low | Standard configuration |
 | 10,000-50,000 | 15 minutes | Medium | Use for broad categorization |
-| &gt;50,000 | 30 minutes | High | Consider static or hybrid |
+| `>50,000` | 30 minutes | High | Consider static or hybrid |
 
 ### Static Groups Management
 
@@ -842,6 +842,7 @@ Use: Priority remediation and monitoring
 
 **Static Group Creation via API**:
 ```python
+# Static group creation via Tanium API
 import tanium
 
 def create_static_group(name, computer_list):
@@ -1011,7 +1012,7 @@ Permissions:
   Restrictions:
     - Max Targets: 1000
     - Time Windows: Business Hours Only
-    - Require Approval: For &gt;100 targets
+    - Require Approval: For >100 targets
 ```
 
 ### Content Set Configuration
@@ -1101,18 +1102,18 @@ where Roles containing "Administrator"
 
 // Recent permission changes
 Get Audit Log[User Management] from system
-where Timestamp &gt; 7 days ago
+where Timestamp > 7 days ago
 and Action containing "Role Assignment"
 
 // Inactive users with active permissions
 Get User Name and Last Login from all users
-where Last Login &gt; 90 days ago
+where Last Login > 90 days ago
 and Account Status = "Active"
 
 // Permission creep detection
 Get User Name and Role Count and Content Set Count
 from all users where
-Role Count &gt; 3 or Content Set Count &gt; 5
+Role Count > 3 or Content Set Count > 5
 ```
 
 #### Compliance Frameworks
@@ -1199,8 +1200,8 @@ exit 0
 // Verify targets before deployment
 Get Computer Name and Validation Status from all machines where
 Computer Name in Target Group "Production Servers"
-and Last Backup &lt; 24 hours ago
-and Disk Free Space &gt; 10GB
+and Last Backup < 24 hours ago
+and Disk Free Space > 10GB
 and Not in Exclusion List "Do Not Patch"
 ```
 
@@ -1245,7 +1246,7 @@ Ring 3 - Production (89%):
 // Monitor for failure conditions
 Get Computer Name and Error Count from all machines
 where Deployment ID = "DEPLOY-2024-001"
-and (Error Count &gt; 5 or Status = "Failed")
+and (Error Count > 5 or Status = "Failed")
 | Deploy "Rollback Package" immediately
 ```
 
@@ -1262,12 +1263,12 @@ and (Error Count &gt; 5 or Status = "Failed")
 
 | Factor | Low Risk (1) | Medium Risk (3) | High Risk (5) |
 |--------|-------------|-----------------|---------------|
-| Target Count | &lt;100 | 100-1000 | &gt;1000 |
+| Target Count | `<100` | 100-1000 | `>1000` |
 | System Criticality | Dev/Test | Standard Prod | Business Critical |
 | Change Type | Config | Software Update | OS Upgrade |
 | Time of Day | Business Hours | After Hours | Emergency |
 | Rollback Complexity | Simple | Moderate | Complex |
-| Testing Coverage | &gt;90% | 50-90% | &lt;50% |
+| Testing Coverage | `>90%` | 50-90% | `<50%` |
 
 **Risk Score Interpretation**:
 - 6-10: Standard approval
@@ -1405,9 +1406,9 @@ where Computer Name in "Compromised Systems"
 ```tanium
 Get Computer Name and Security Score from all machines where
 (
-  (Missing Critical Patches &gt; 0 or Operating System containing "2012")
+  (Missing Critical Patches > 0 or Operating System containing "2012")
   and
-  (Local Administrators count &gt; 5 or RDP Enabled = "Yes")
+  (Local Administrators count > 5 or RDP Enabled = "Yes")
   and not
   (Computer Name containing "DEV" or Domain Name = "development.local")
 )
@@ -1552,34 +1553,34 @@ Deploy Package "Any" to Any Group  // Access Denied
 
 | Operation | Target Count | Expected Time | Warning Threshold |
 |-----------|-------------|---------------|------------------|
-| Simple Filter | 1,000 | &lt;1 sec | &gt;3 sec |
-| Simple Filter | 10,000 | &lt;2 sec | &gt;5 sec |
-| Simple Filter | 50,000 | &lt;5 sec | &gt;10 sec |
-| Complex Filter | 1,000 | &lt;3 sec | &gt;8 sec |
-| Complex Filter | 10,000 | &lt;8 sec | &gt;20 sec |
-| Complex Filter | 50,000 | &lt;20 sec | &gt;60 sec |
-| Group Update | Any size | &lt;30 sec | &gt;2 min |
-| Action Deploy | 1,000 | &lt;10 sec | &gt;30 sec |
-| Action Deploy | 10,000 | &lt;30 sec | &gt;2 min |
+| Simple Filter | 1,000 | `<1 sec` | `>3 sec` |
+| Simple Filter | 10,000 | `<2 sec` | `>5 sec` |
+| Simple Filter | 50,000 | `<5 sec` | `>10 sec` |
+| Complex Filter | 1,000 | `<3 sec` | `>8 sec` |
+| Complex Filter | 10,000 | `<8 sec` | `>20 sec` |
+| Complex Filter | 50,000 | `<20 sec` | `>60 sec` |
+| Group Update | Any size | `<30 sec` | `>2 min` |
+| Action Deploy | 1,000 | `<10 sec` | `>30 sec` |
+| Action Deploy | 10,000 | `<30 sec` | `>2 min` |
 
 ### Monitoring Dashboard Queries
 
 ```tanium
 // Group membership changes
 Get Computer Groups and Member Count and Last Updated
-from all groups where Last Updated &lt; 1 hour ago
+from all groups where Last Updated < 1 hour ago
 order by Member Count desc
 
 // Failed targeting operations
 Get Action Name and Target Count and Success Rate
 from all actions where
-Success Rate &lt; 95% and
-Deployed Time &gt; 24 hours ago
+Success Rate < 95% and
+Deployed Time > 24 hours ago
 
 // Performance bottlenecks
 Get Question Text and Execution Time and Result Count
 from all questions where
-Execution Time &gt; 30 seconds
+Execution Time > 30 seconds
 order by Execution Time desc
 ```
 
@@ -1644,7 +1645,7 @@ After completing Module 2, you should be able to:
 
 **Continue to Module 3**: Taking Action - Packages & Actions
 
-<InfoBox type="success">
+<InfoBox>
 **Module 2 Complete!** You've mastered advanced targeting and filtering - the foundation of precise endpoint management. Ready for Module 3: Taking Action!
 </InfoBox>
 
@@ -1775,7 +1776,7 @@ and tag as "Advanced_NonCompliant"
 
 | Scenario | Optimization Technique | Performance Gain | Implementation |
 |----------|----------------------|------------------|----------------|
-| Large Dataset (&gt;50K) | Indexed filtering + Sharding | 70-80% | Use Computer ID ranges |
+| Large Dataset (>50K) | Indexed filtering + Sharding | 70-80% | Use Computer ID ranges |
 | Complex Logic | Staged queries with caching | 60-70% | Break into sub-queries |
 | Real-time Data | Sensor pre-computation | 50-60% | Deploy collection sensors |
 | Historical Analysis | Trend data aggregation | 80-90% | Use Trends module |
@@ -1815,7 +1816,7 @@ def execute_sharded_query(query_template, total_endpoints=75000, shard_size=5000
         })
 
         # Adaptive delay to prevent overload
-        if execution_time &gt; 5:
+        if execution_time > 5:
             time.sleep(2)  # Slow down if queries are taking long
 
     return consolidate_results(results)
@@ -1860,22 +1861,22 @@ def execute_sharded_query(query_template, total_endpoints=75000, shard_size=5000
 1. **Which query correctly identifies Windows servers missing critical patches but excludes test systems?**
 ```tanium
 A) Get Computer Name from all machines where
-   Missing Critical Patches &gt; 0 and
+   Missing Critical Patches > 0 and
    Operating System containing "Server" and
    not Computer Name containing "TEST"
 
 B) Get Computer Name from all machines where
    Operating System containing "Server" and
-   Missing Critical Patches &gt; 0 and
+   Missing Critical Patches > 0 and
    not (Computer Name containing "TEST" or Computer Name containing "DEV")
 
 C) Get Computer Name where
    Operating System = "Windows Server" and
-   Critical Patches &gt; 0 and
+   Critical Patches > 0 and
    Computer Name != "TEST*"
 
 D) Get Computer Name from all machines where
-   (Operating System containing "Server" and Missing Critical Patches &gt; 0)
+   (Operating System containing "Server" and Missing Critical Patches > 0)
    and not Computer Name containing "TEST"
 ```
 **Answer: B** - Proper use of parentheses and complete exclusion logic
@@ -1973,7 +1974,7 @@ Step 2: Validation query
 Get Computer Name and Last Backup and Disk Space
 from all machines where
 Computer Groups containing "Emergency_Patch_*" and
-(Last Backup &gt; 48 hours or Disk Space &lt; 5GB)
+(Last Backup > 48 hours or Disk Space < 5GB)
 
 Step 3: Phased deployment
 Phase 1 (0-30 min): Emergency_Patch_Deferred (test)
@@ -2099,8 +2100,8 @@ group by User Role
 ### Success Criteria
 
 ✅ **Performance Targets Met**:
-- 95% of queries complete in &lt;5 seconds
-- 99% of group updates complete in &lt;30 seconds
+- 95% of queries complete in `<5 seconds`
+- 99% of group updates complete in `<30 seconds`
 - Zero permission escalation incidents
 
 ✅ **Operational Excellence**:
@@ -2147,7 +2148,7 @@ group by User Role
 
 ---
 
-<InfoBox type="success">
+<InfoBox>
 **Module 2 Complete!** You've mastered advanced targeting and filtering techniques essential for enterprise Tanium deployments. These skills are critical for the TCO exam and real-world operations.
 </InfoBox>
 

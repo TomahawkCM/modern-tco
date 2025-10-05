@@ -28,55 +28,113 @@ const SLUG_TO_FILENAME: Record<string, string> = {
   "navigation": "04-navigation-basic-modules.mdx",
   "reporting-data-export": "05-reporting-data-export.mdx",
   "reporting": "05-reporting-data-export.mdx",
+  "microlearning-example": "MICROLEARNING_EXAMPLE.mdx",
+  "example-module-microlearning": "MICROLEARNING_EXAMPLE.mdx",
+  "MICROLEARNING_EXAMPLE": "MICROLEARNING_EXAMPLE.mdx",
 };
 
 async function getModuleContent(slug: string) {
+  const isProduction = process.env.NODE_ENV === "production";
+  const isVercel = !!process.env.VERCEL;
+
+  // Debug logging for Vercel
+  if (isVercel || isProduction) {
+    console.log("[Module] Loading:", {
+      slug,
+      environment: process.env.NODE_ENV,
+      platform: isVercel ? "Vercel" : "Other",
+      cwd: process.cwd(),
+    });
+  }
+
   try {
     // Get the filename from slug mapping
     const filename = SLUG_TO_FILENAME[slug];
     if (!filename) {
+      console.error(`[Module Error] No filename mapping for slug: ${slug}`);
       return null;
     }
 
-    // Construct the full path
-    const modulePath = path.join(process.cwd(), "src", "content", "modules", filename);
+    // Try to read from pre-bundled cache (Vercel-compatible)
+    // Located in .mdx-cache/ which persists across builds
+    const cachePath = path.join(process.cwd(), ".mdx-cache", `${filename}.json`);
 
-    // Check if file exists
     try {
-      await fs.access(modulePath);
-    } catch (error) {
-      return null;
+      const cacheContent = await fs.readFile(cachePath, "utf8");
+      const bundled = JSON.parse(cacheContent);
+
+      // Validate frontmatter
+      const validation = validateModuleFrontmatter(bundled.frontmatter, filename);
+      if (!validation.success || !validation.data) {
+        console.error(`[Module Error] Invalid cached frontmatter in ${filename}:`, validation.errors);
+        return null;
+      }
+
+      if (isVercel || isProduction) {
+        console.log(`[Module] ✓ Loaded from cache: ${filename}`);
+      }
+
+      return {
+        frontmatter: validation.data,
+        content: bundled.content,
+        slug,
+        filePath: cachePath,
+      };
+    } catch (cacheError) {
+      // Cache miss - fall back to reading source file (local development)
+      if (isVercel) {
+        console.error(`[Module Error] Cache miss on Vercel for ${filename}:`, {
+          error: cacheError instanceof Error ? cacheError.message : cacheError,
+          cachePath,
+          expectedFile: `${filename}.json`,
+        });
+        return null; // No fallback on Vercel - cache should always exist
+      }
+
+      console.warn(`[Module Warning] Cache miss, reading source file: ${filename}`);
+
+      // Development fallback: read from source
+      const modulePath = path.join(process.cwd(), "src", "content", "modules", filename);
+
+      try {
+        await fs.access(modulePath);
+      } catch (error) {
+        console.error(`[Module Error] Source file not found: ${modulePath}`);
+        return null;
+      }
+
+      const fileContent = await fs.readFile(modulePath, "utf8");
+      const { data: frontmatter, content } = matter(fileContent);
+
+      // Validate frontmatter
+      const validation = validateModuleFrontmatter(frontmatter, modulePath);
+      if (!validation.success || !validation.data) {
+        console.error(`[Module Error] Invalid frontmatter in ${filename}:`, validation.errors);
+        return null;
+      }
+
+      // Serialize the MDX content
+      const mdxSource = await serialize(content, {
+        mdxOptions: {
+          remarkPlugins: [],
+          rehypePlugins: [],
+        },
+      });
+
+      console.log(`[Module] ✓ Loaded from source: ${filename}`);
+
+      return {
+        frontmatter: validation.data,
+        content: mdxSource,
+        slug,
+        filePath: modulePath,
+      };
     }
-
-    // Read the file
-    const fileContent = await fs.readFile(modulePath, "utf8");
-
-    // Parse frontmatter and content
-    const { data: frontmatter, content } = matter(fileContent);
-
-    // Validate frontmatter
-    const validation = validateModuleFrontmatter(frontmatter, modulePath);
-    if (!validation.success || !validation.data) {
-      console.error(`Invalid frontmatter in ${filename}:`, validation.errors);
-      return null;
-    }
-
-    // Serialize the MDX content for client-side hydration
-    const mdxSource = await serialize(content, {
-      mdxOptions: {
-        remarkPlugins: [],
-        rehypePlugins: [],
-      },
-    });
-
-    return {
-      frontmatter: validation.data,
-      content: mdxSource,
-      slug,
-      filePath: modulePath,
-    };
   } catch (error) {
-    console.error(`Error loading module ${slug}:`, error);
+    console.error(`[Module Error] Failed to load module ${slug}:`, {
+      error: error instanceof Error ? error.message : error,
+      stack: error instanceof Error ? error.stack : undefined,
+    });
     return null;
   }
 }
