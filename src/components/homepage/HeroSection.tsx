@@ -183,25 +183,6 @@ export function HeroSection() {
           </motion.div>
         </motion.div>
 
-        {/* Trust Indicators */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 1.2 }}
-          className="mt-12 pt-8 border-t border-slate-700/50"
-        >
-          <p className="text-sm text-slate-400 mb-4">Trusted by professionals at</p>
-          <div className="flex flex-wrap justify-center items-center gap-8 opacity-60">
-            {["Microsoft", "IBM", "Cisco", "Amazon", "Google"].map((company) => (
-              <div
-                key={company}
-                className="text-slate-500 font-semibold text-lg tracking-wider"
-              >
-                {company}
-              </div>
-            ))}
-          </div>
-        </motion.div>
       </motion.div>
 
       {/* Scroll Indicator */}
