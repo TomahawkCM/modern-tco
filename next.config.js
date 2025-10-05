@@ -7,7 +7,7 @@ const withMDX = require("@next/mdx")({
 });
 
 /** @type {import('next').NextConfig} */
-const isProd = process.env.NODE_ENV === 'production';
+const isProd = process.env.NODE_ENV === "production";
 const supabaseHost = (() => {
   try {
     const u = new URL(process.env.NEXT_PUBLIC_SUPABASE_URL || "");
@@ -52,10 +52,10 @@ const nextConfig = {
 
   images: {
     remotePatterns: [
-      { protocol: 'https', hostname: 'i.ytimg.com' },
-      { protocol: 'https', hostname: 'img.youtube.com' },
-      { protocol: 'https', hostname: 'help.tanium.com' },
-      ...(supabaseHost ? [{ protocol: 'https', hostname: supabaseHost }] : []),
+      { protocol: "https", hostname: "i.ytimg.com" },
+      { protocol: "https", hostname: "img.youtube.com" },
+      { protocol: "https", hostname: "help.tanium.com" },
+      ...(supabaseHost ? [{ protocol: "https", hostname: supabaseHost }] : []),
     ],
   },
 
@@ -98,7 +98,7 @@ const nextConfig = {
     // Build CSP (enabled only in production to reduce DX friction)
     const cspDirectives = [];
     if (isProd) {
-      const connectSupabase = supabaseHost ? `https://${supabaseHost}` : '';
+      const connectSupabase = supabaseHost ? `https://${supabaseHost}` : "";
       const parts = [
         "default-src 'self'",
         "base-uri 'self'",
@@ -109,7 +109,7 @@ const nextConfig = {
         // Add 'unsafe-inline' for Next.js hydration scripts - necessary for production
         // Add 'unsafe-eval' for Sentry monitoring bundle (required for error tracking)
         // Add YouTube for iframe API loading and PostHog for analytics
-        "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://browser.sentry-cdn.com https://www.youtube.com https://app.posthog.com https://us.i.posthog.com",
+        "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://browser.sentry-cdn.com https://www.youtube.com https://app.posthog.com https://us.i.posthog.com https://cdn.jsdelivr.net",
         "style-src 'self' 'unsafe-inline'",
         "img-src 'self' data: blob: https://i.ytimg.com https://img.youtube.com",
         [
@@ -121,13 +121,15 @@ const nextConfig = {
           "https://*.posthog.com",
           "https://sentry.io",
           "https://*.sentry.io",
-        ].filter(Boolean).join(' '),
+        ]
+          .filter(Boolean)
+          .join(" "),
         "frame-src https://www.youtube.com https://www.youtube-nocookie.com",
         "font-src 'self' data:",
         "worker-src 'self' blob:",
       ];
-      const csp = parts.join('; ');
-      cspDirectives.push({ key: 'Content-Security-Policy', value: csp });
+      const csp = parts.join("; ");
+      cspDirectives.push({ key: "Content-Security-Policy", value: csp });
     }
 
     const commonSecurity = [
@@ -140,7 +142,10 @@ const nextConfig = {
 
     return [
       { source: "/(.*)", headers: commonSecurity },
-      { source: "/sw.js", headers: [{ key: "Cache-Control", value: "public, max-age=0, must-revalidate" }] },
+      {
+        source: "/sw.js",
+        headers: [{ key: "Cache-Control", value: "public, max-age=0, must-revalidate" }],
+      },
     ];
   },
   async redirects() {
@@ -165,4 +170,3 @@ const nextConfig = {
 };
 
 module.exports = withMDX(nextConfig);
-
