@@ -6,6 +6,28 @@
 
 **✅ PROJECT STATUS**: **ENTERPRISE-GRADE LMS ACHIEVED** - Complete rewrite from basic HTML to production-ready Learning Management System!
 
+---
+
+## 🚀 Quick Start
+
+### Deploy to Production
+```bash
+./deploy-to-vercel.sh
+```
+📖 **Deployment Guides:**
+- **Quick Start:** [VERCEL_QUICKSTART.md](./VERCEL_QUICKSTART.md) (1 min)
+- **Complete Guide:** [HOW_TO_DEPLOY_TO_VERCEL.md](./HOW_TO_DEPLOY_TO_VERCEL.md) (5 min)
+- **All Guides:** [DEPLOYMENT_GUIDES_INDEX.md](./DEPLOYMENT_GUIDES_INDEX.md)
+
+### Run Locally
+```bash
+npm install
+npm run dev
+# App runs at http://localhost:3000
+```
+
+---
+
 ### 🚀 **Enterprise Architecture Transformation**
 
 - **Framework Evolution**: Complete migration from HTML/CSS/JS → **Next.js 15.5.4 + TypeScript + Enterprise Stack**
@@ -348,6 +370,18 @@ See docs index: **`docs/README.md`**. For production and operations guidance, se
 - **`docs/OPS/SECRETS.md`**
 
 ### Deployment (Vercel)
+
+**🚀 Quick Deploy:**
+
+```bash
+# One-command deployment (Recommended)
+./deploy-to-vercel.sh
+```
+
+**📚 Deployment Guides:**
+- **Quick Start:** [VERCEL_QUICKSTART.md](./VERCEL_QUICKSTART.md) - Deploy in 1 minute
+- **Complete Guide:** [HOW_TO_DEPLOY_TO_VERCEL.md](./HOW_TO_DEPLOY_TO_VERCEL.md) - Full instructions, troubleshooting & monitoring
+- **Detailed Docs:** [DEPLOYMENT_INSTRUCTIONS.md](./DEPLOYMENT_INSTRUCTIONS.md) - Technical specifications
 
 **⚠️ CRITICAL: basePath Temporarily Disabled (September 2025)**
 
