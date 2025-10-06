@@ -96,6 +96,21 @@ class FlashcardService {
     return data as Flashcard[];
   }
 
+  async getFlashcardsByDomain(userId: string, domain: string): Promise<Flashcard[]> {
+    console.log('[flashcardService] getFlashcardsByDomain:', { userId, domain });
+
+    const { data, error } = await supabase
+      .from("flashcards")
+      .select()
+      .eq("user_id", userId)
+      .contains("tags", [domain])
+      .order("created_at", { ascending: false });
+
+    console.log('[flashcardService] getFlashcardsByDomain result:', { count: data?.length || 0, error: error?.message });
+    if (error || !data) return [];
+    return data as Flashcard[];
+  }
+
   async updateFlashcard(flashcardId: string, updates: Partial<Flashcard>): Promise<boolean> {
     const { error } = await supabase
       .from("flashcards")

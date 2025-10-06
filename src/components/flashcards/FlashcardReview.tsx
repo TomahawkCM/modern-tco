@@ -5,7 +5,6 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useAuth } from "@/contexts/AuthContext";
 import { flashcardService } from "@/services/flashcardService";
 import type { Flashcard } from "@/types/flashcard";
@@ -79,8 +78,8 @@ export default function FlashcardReview({ moduleId, deckId, totalCards = 0, onCo
         dueCards = deckCards.filter(c => new Date(c.srs_due) <= new Date());
         console.log('[FlashcardReview] Deck cards loaded:', deckCards.length, 'due:', dueCards.length);
       } else if (selectedDomain) {
-        // Get cards filtered by domain
-        const domainCards = await flashcardService.getFlashcardsByModule(effectiveUserId, selectedDomain);
+        // Get cards filtered by domain (stored in tags array)
+        const domainCards = await flashcardService.getFlashcardsByDomain(effectiveUserId, selectedDomain);
         dueCards = domainCards.filter(c => new Date(c.srs_due) <= new Date()).slice(0, effectiveLimit);
         console.log('[FlashcardReview] Domain cards loaded:', domainCards.length, 'due:', dueCards.length);
       } else {
@@ -97,9 +96,9 @@ export default function FlashcardReview({ moduleId, deckId, totalCards = 0, onCo
       let newCards: Flashcard[] = [];
       if (newCardsCount > 0) {
         if (selectedDomain) {
-          // Get new cards from specific domain
+          // Get new cards from specific domain (filter by tags containing domain)
           const allNewCards = await flashcardService.getNewFlashcards(effectiveUserId, 1000);
-          newCards = allNewCards.filter(c => c.domain === selectedDomain).slice(0, newCardsCount);
+          newCards = allNewCards.filter(c => c.tags && c.tags.includes(selectedDomain)).slice(0, newCardsCount);
         } else {
           newCards = await flashcardService.getNewFlashcards(effectiveUserId, newCardsCount);
         }
@@ -247,53 +246,59 @@ export default function FlashcardReview({ moduleId, deckId, totalCards = 0, onCo
 
       {/* Session Customization Controls */}
       <Card>
-        <CardContent className="py-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {/* Session Size Selector */}
-            <div className="space-y-2">
-              <label className="text-sm font-medium flex items-center gap-2">
-                <Hash className="h-4 w-4" />
-                Cards per session
-              </label>
-              <Select
-                value={sessionLimit.toString()}
-                onValueChange={(value) => setSessionLimit(parseInt(value))}
-              >
-                <SelectTrigger>
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="10">10 cards</SelectItem>
-                  <SelectItem value="25">25 cards</SelectItem>
-                  <SelectItem value="50">50 cards</SelectItem>
-                  <SelectItem value="100">100 cards</SelectItem>
-                  <SelectItem value="9999">All cards</SelectItem>
-                </SelectContent>
-              </Select>
+        <CardContent className="py-4 space-y-4">
+          {/* Session Size Selector - Button Group */}
+          <div className="space-y-2">
+            <label className="text-sm font-medium flex items-center gap-2">
+              <Hash className="h-4 w-4" />
+              Cards per session
+            </label>
+            <div className="flex flex-wrap gap-2">
+              {[
+                { value: 10, label: "10" },
+                { value: 25, label: "25" },
+                { value: 50, label: "50" },
+                { value: 100, label: "100" },
+                { value: 9999, label: "All" }
+              ].map((option) => (
+                <Button
+                  key={option.value}
+                  variant={sessionLimit === option.value ? "default" : "outline"}
+                  size="sm"
+                  onClick={() => setSessionLimit(option.value)}
+                  className="min-w-[60px]"
+                >
+                  {option.label}
+                </Button>
+              ))}
             </div>
+          </div>
 
-            {/* Domain Filter */}
-            <div className="space-y-2">
-              <label className="text-sm font-medium flex items-center gap-2">
-                <Filter className="h-4 w-4" />
-                Study module
-              </label>
-              <Select
-                value={selectedDomain || "random"}
-                onValueChange={(value) => setSelectedDomain(value === "random" ? null : value)}
-              >
-                <SelectTrigger>
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="random">Random (All domains)</SelectItem>
-                  <SelectItem value="asking-questions">Asking Questions</SelectItem>
-                  <SelectItem value="refining-questions-targeting">Refining & Targeting</SelectItem>
-                  <SelectItem value="taking-action-packages-actions">Taking Action</SelectItem>
-                  <SelectItem value="navigation-basic-modules">Navigation & Modules</SelectItem>
-                  <SelectItem value="reporting-data-export">Reporting & Export</SelectItem>
-                </SelectContent>
-              </Select>
+          {/* Domain Filter - Button Group */}
+          <div className="space-y-2">
+            <label className="text-sm font-medium flex items-center gap-2">
+              <Filter className="h-4 w-4" />
+              Study module
+            </label>
+            <div className="flex flex-wrap gap-2">
+              {[
+                { value: null, label: "Random" },
+                { value: "asking-questions", label: "Asking Questions" },
+                { value: "refining-questions-targeting", label: "Refining & Targeting" },
+                { value: "taking-action-packages-actions", label: "Taking Action" },
+                { value: "navigation-basic-modules", label: "Navigation" },
+                { value: "reporting-data-export", label: "Reporting" }
+              ].map((option) => (
+                <Button
+                  key={option.value || "random"}
+                  variant={selectedDomain === option.value ? "default" : "outline"}
+                  size="sm"
+                  onClick={() => setSelectedDomain(option.value)}
+                  className="text-xs"
+                >
+                  {option.label}
+                </Button>
+              ))}
             </div>
           </div>
         </CardContent>

@@ -86,15 +86,27 @@ export async function POST(request: Request) {
         ...(card.difficulty ? [`difficulty:${card.difficulty}`] : [])
       ];
 
+      // Map source values to valid enum
+      const sourceMapping: Record<string, 'manual' | 'auto_generated' | 'quiz_failure' | 'video_concept'> = {
+        'manual': 'manual',
+        'auto_generated': 'auto_generated',
+        'generated': 'auto_generated', // Map "generated" to "auto_generated"
+        'quiz_failure': 'quiz_failure',
+        'mcq': 'quiz_failure', // Map "mcq" to "quiz_failure"
+        'video_concept': 'video_concept'
+      };
+
       return {
         user_id: userId,
         front_text: card.front_text,
         back_text: card.back_text,
         card_type: (card.card_type || 'concept') as 'basic' | 'cloze' | 'concept' | 'diagram' | 'code',
-        source: (card.source || 'auto_generated') as 'manual' | 'auto_generated' | 'quiz_failure' | 'video_concept',
+        source: sourceMapping[card.source || 'auto_generated'] || 'auto_generated',
         hint: card.hint || null,
         explanation: card.explanation || null,
         tags: enhancedTags,
+        // Note: domain is stored in tags array (e.g., "asking-questions")
+        // Future: Add dedicated domain column to database schema for faster queries
 
         // Initialize SM-2 spaced repetition values
         srs_due: new Date().toISOString(),
