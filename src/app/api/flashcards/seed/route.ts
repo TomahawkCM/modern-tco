@@ -29,24 +29,43 @@ export async function POST(request: Request) {
     }
 
     // Check if flashcards already exist for this user (idempotent)
-    const { data: existing, error: checkError } = await supabaseAdmin
+    // Only skip if we have the full set of 331 flashcards
+    const { count: existingCount, error: checkError } = await supabaseAdmin
       .from('flashcards')
-      .select('id')
-      .eq('user_id', userId)
-      .limit(1);
+      .select('*', { count: 'exact', head: true })
+      .eq('user_id', userId);
+
+    console.log(`[SEED] Checking flashcards for user ${userId}:`, { existingCount, checkError });
 
     if (checkError) {
       console.error('Error checking existing flashcards:', checkError);
       return NextResponse.json({ error: 'Database error' }, { status: 500 });
     }
 
-    if (existing && existing.length > 0) {
+    if (existingCount && existingCount >= 331) {
       return NextResponse.json({
         message: 'Flashcards already seeded for this user',
-        count: 0,
+        count: existingCount,
         alreadySeeded: true
       });
     }
+
+    // If partial seed exists, delete them to ensure clean state
+    if (existingCount && existingCount > 0) {
+      console.log(`[SEED] Found ${existingCount} partial flashcards, deleting for clean seed...`);
+      const { error: deleteError } = await supabaseAdmin
+        .from('flashcards')
+        .delete()
+        .eq('user_id', userId);
+
+      if (deleteError) {
+        console.error('Error deleting partial flashcards:', deleteError);
+      } else {
+        console.log('[SEED] Partial flashcards deleted successfully');
+      }
+    }
+
+    console.log('[SEED] No existing flashcards found, proceeding with seed...');
 
     // Load flashcard library from file system
     const libraryPath = path.join(process.cwd(), 'flashcards-library.json');

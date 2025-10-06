@@ -118,6 +118,8 @@ class FlashcardService {
 
   async getDueFlashcards(userId: string, limit: number = 20): Promise<Flashcard[]> {
     const now = new Date().toISOString();
+    console.log('[flashcardService] getDueFlashcards:', { userId, limit, now });
+
     const { data, error } = await supabase
       .from("flashcards")
       .select()
@@ -126,6 +128,7 @@ class FlashcardService {
       .order("srs_due", { ascending: true })
       .limit(limit);
 
+    console.log('[flashcardService] getDueFlashcards result:', { count: data?.length || 0, error: error?.message });
     if (error || !data) return [];
     return data as Flashcard[];
   }
@@ -204,6 +207,8 @@ class FlashcardService {
   }
 
   async getNewFlashcards(userId: string, limit: number = 5): Promise<Flashcard[]> {
+    console.log('[flashcardService] getNewFlashcards:', { userId, limit });
+
     const { data, error } = await supabase
       .from("flashcards")
       .select()
@@ -212,17 +217,23 @@ class FlashcardService {
       .order("created_at", { ascending: false })
       .limit(limit);
 
+    console.log('[flashcardService] getNewFlashcards result:', { count: data?.length || 0, error: error?.message });
     if (error || !data) return [];
     return data as Flashcard[];
   }
 
   async getFlashcardStats(userId: string): Promise<FlashcardStats> {
-    const { data: allCards } = await supabase
+    console.log('[flashcardService] getFlashcardStats:', { userId });
+
+    const { data: allCards, error } = await supabase
       .from("flashcards")
       .select()
       .eq("user_id", userId);
 
+    console.log('[flashcardService] getFlashcardStats result:', { count: allCards?.length || 0, error: error?.message });
+
     if (!allCards || allCards.length === 0) {
+      console.log('[flashcardService] No cards found, returning empty stats');
       return {
         totalCards: 0,
         dueToday: 0,

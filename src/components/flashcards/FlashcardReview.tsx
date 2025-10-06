@@ -50,8 +50,12 @@ export default function FlashcardReview({ moduleId, deckId, totalCards = 0, onCo
   }, [effectiveUserId, moduleId, deckId]);
 
   const loadCards = async () => {
-    if (!effectiveUserId) return;
+    if (!effectiveUserId) {
+      console.log('[FlashcardReview] No effectiveUserId, skipping load');
+      return;
+    }
 
+    console.log('[FlashcardReview] Loading cards for user:', effectiveUserId);
     setIsLoading(true);
     try {
       let dueCards: Flashcard[] = [];
@@ -60,18 +64,26 @@ export default function FlashcardReview({ moduleId, deckId, totalCards = 0, onCo
         // Get all cards for module and filter by due date
         const moduleCards = await flashcardService.getFlashcardsByModule(effectiveUserId, moduleId);
         dueCards = moduleCards.filter(c => new Date(c.srs_due) <= new Date());
+        console.log('[FlashcardReview] Module cards loaded:', moduleCards.length, 'due:', dueCards.length);
       } else if (deckId) {
         // Get deck cards and filter by due date
         const deckCards = await flashcardService.getDeckCards(deckId);
         dueCards = deckCards.filter(c => new Date(c.srs_due) <= new Date());
+        console.log('[FlashcardReview] Deck cards loaded:', deckCards.length, 'due:', dueCards.length);
       } else {
         // Get all due cards
         dueCards = await flashcardService.getDueFlashcards(effectiveUserId, 20);
+        console.log('[FlashcardReview] Due cards loaded:', dueCards.length);
       }
 
       // Mix in some new cards (20% of queue)
-      const newCards = await flashcardService.getNewFlashcards(effectiveUserId, Math.max(1, Math.floor(dueCards.length * 0.2)));
+      const newCardsCount = Math.max(1, Math.floor(dueCards.length * 0.2));
+      console.log('[FlashcardReview] Requesting', newCardsCount, 'new cards');
+      const newCards = await flashcardService.getNewFlashcards(effectiveUserId, newCardsCount);
+      console.log('[FlashcardReview] New cards loaded:', newCards.length);
+
       const allCards = [...dueCards, ...newCards];
+      console.log('[FlashcardReview] Total cards:', allCards.length);
 
       setCards(allCards);
     } catch (error) {
