@@ -31,8 +31,8 @@ const IS_DEV_MODE = process.env.NODE_ENV === 'development' || process.env.NEXT_P
 export default function FlashcardReview({ moduleId, deckId, totalCards = 0, onComplete }: FlashcardReviewProps) {
   const { user } = useAuth();
 
-  // Use dev user ID if in development mode and no real user
-  const effectiveUserId = user?.id || (IS_DEV_MODE ? DEV_USER_ID : null);
+  // Always use dev user ID as fallback when no authenticated user (no auth required)
+  const effectiveUserId = user?.id || DEV_USER_ID;
   const [cards, setCards] = useState<Flashcard[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showAnswer, setShowAnswer] = useState(false);

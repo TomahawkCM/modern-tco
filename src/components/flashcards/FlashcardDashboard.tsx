@@ -26,8 +26,8 @@ export default function FlashcardDashboard({ moduleId }: FlashcardDashboardProps
   const [isSeeding, setIsSeeding] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  // Use dev user ID if in development mode and no real user
-  const effectiveUserId = user?.id || (IS_DEV_MODE ? DEV_USER_ID : null);
+  // Always use dev user ID as fallback when no authenticated user (no auth required)
+  const effectiveUserId = user?.id || DEV_USER_ID;
 
   useEffect(() => {
     loadStats();
