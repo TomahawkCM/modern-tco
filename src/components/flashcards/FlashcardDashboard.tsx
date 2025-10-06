@@ -15,6 +15,9 @@ interface FlashcardDashboardProps {
   moduleId?: string;
 }
 
+const DEV_USER_ID = 'dev-user-123'; // Development mode user ID
+const IS_DEV_MODE = process.env.NODE_ENV === 'development' || process.env.NEXT_PUBLIC_DEV_MODE === 'true';
+
 export default function FlashcardDashboard({ moduleId }: FlashcardDashboardProps) {
   const { user } = useAuth();
   const [stats, setStats] = useState<FlashcardStats | null>(null);
@@ -23,16 +26,19 @@ export default function FlashcardDashboard({ moduleId }: FlashcardDashboardProps
   const [isSeeding, setIsSeeding] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  // Use dev user ID if in development mode and no real user
+  const effectiveUserId = user?.id || (IS_DEV_MODE ? DEV_USER_ID : null);
+
   useEffect(() => {
     loadStats();
-  }, [user?.id]);
+  }, [effectiveUserId]);
 
   const loadStats = async () => {
-    if (!user?.id) return;
+    if (!effectiveUserId) return;
 
     setIsLoading(true);
     try {
-      const data = await flashcardService.getFlashcardStats(user.id);
+      const data = await flashcardService.getFlashcardStats(effectiveUserId);
       setStats(data);
 
       // Auto-seed if user has no flashcards
@@ -47,27 +53,30 @@ export default function FlashcardDashboard({ moduleId }: FlashcardDashboardProps
   };
 
   const autoSeedFlashcards = async () => {
-    if (!user?.id || isSeeding) return;
+    if (!effectiveUserId || isSeeding) return;
 
     setIsSeeding(true);
     setError(null);
 
     try {
       console.log('🔄 Attempting to auto-seed flashcards...');
+      if (IS_DEV_MODE && !user) {
+        console.log('📝 Development mode: Using dev user ID', DEV_USER_ID);
+      }
 
       const response = await fetch('/api/flashcards/seed', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ user_id: user.id }),
+        body: JSON.stringify({ user_id: effectiveUserId }),
       });
 
       const data = await response.json();
 
       if (response.ok && data.count > 0) {
         console.log(`✅ Auto-seeded ${data.count} flashcards`, data);
-        const newStats = await flashcardService.getFlashcardStats(user.id);
+        const newStats = await flashcardService.getFlashcardStats(effectiveUserId);
         setStats(newStats);
       } else if (data.alreadySeeded) {
         console.log('ℹ️ Flashcards already seeded');
@@ -132,6 +141,17 @@ export default function FlashcardDashboard({ moduleId }: FlashcardDashboardProps
 
   return (
     <div className="space-y-6">
+      {/* Development Mode Banner */}
+      {IS_DEV_MODE && !user && (
+        <Card className="border-yellow-500 bg-yellow-500/10">
+          <CardContent className="py-3">
+            <p className="text-sm text-yellow-600 dark:text-yellow-400">
+              ⚠️ <strong>Development Mode</strong> - Using mock user ID ({DEV_USER_ID}). Real authentication not required.
+            </p>
+          </CardContent>
+        </Card>
+      )}
+
       {/* Stats Overview */}
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
         <Card>
