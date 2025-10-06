@@ -20,6 +20,7 @@ export interface Flashcard {
   module_id?: string;
   section_id?: string;
   question_id?: string;
+  domain?: string; // TCO certification domain
 
   // Additional content
   hint?: string;

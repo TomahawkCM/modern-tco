@@ -5,11 +5,12 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useAuth } from "@/contexts/AuthContext";
 import { flashcardService } from "@/services/flashcardService";
 import type { Flashcard } from "@/types/flashcard";
 import type { SRRating } from "@/lib/sr";
-import { Brain, Check, X, AlertCircle, Clock, TrendingUp, BookOpen, Target } from "lucide-react";
+import { Brain, Check, X, AlertCircle, Clock, TrendingUp, BookOpen, Target, Filter, Hash } from "lucide-react";
 
 interface FlashcardReviewProps {
   moduleId?: string; // Filter by module
@@ -45,9 +46,13 @@ export default function FlashcardReview({ moduleId, deckId, totalCards = 0, onCo
   });
   const [isLoading, setIsLoading] = useState(true);
 
+  // User preferences for session customization
+  const [sessionLimit, setSessionLimit] = useState<number>(20);
+  const [selectedDomain, setSelectedDomain] = useState<string | null>(null);
+
   useEffect(() => {
     loadCards();
-  }, [effectiveUserId, moduleId, deckId]);
+  }, [effectiveUserId, moduleId, deckId, sessionLimit, selectedDomain]);
 
   const loadCards = async () => {
     if (!effectiveUserId) {
@@ -55,10 +60,13 @@ export default function FlashcardReview({ moduleId, deckId, totalCards = 0, onCo
       return;
     }
 
-    console.log('[FlashcardReview] Loading cards for user:', effectiveUserId);
+    console.log('[FlashcardReview] Loading cards:', { effectiveUserId, sessionLimit, selectedDomain });
     setIsLoading(true);
     try {
       let dueCards: Flashcard[] = [];
+
+      // Determine effective limit (9999 means "all")
+      const effectiveLimit = sessionLimit === 9999 ? 1000 : sessionLimit;
 
       if (moduleId) {
         // Get all cards for module and filter by due date
@@ -70,20 +78,36 @@ export default function FlashcardReview({ moduleId, deckId, totalCards = 0, onCo
         const deckCards = await flashcardService.getDeckCards(deckId);
         dueCards = deckCards.filter(c => new Date(c.srs_due) <= new Date());
         console.log('[FlashcardReview] Deck cards loaded:', deckCards.length, 'due:', dueCards.length);
+      } else if (selectedDomain) {
+        // Get cards filtered by domain
+        const domainCards = await flashcardService.getFlashcardsByModule(effectiveUserId, selectedDomain);
+        dueCards = domainCards.filter(c => new Date(c.srs_due) <= new Date()).slice(0, effectiveLimit);
+        console.log('[FlashcardReview] Domain cards loaded:', domainCards.length, 'due:', dueCards.length);
       } else {
-        // Get all due cards
-        dueCards = await flashcardService.getDueFlashcards(effectiveUserId, 20);
+        // Get all due cards with custom limit
+        dueCards = await flashcardService.getDueFlashcards(effectiveUserId, effectiveLimit);
         console.log('[FlashcardReview] Due cards loaded:', dueCards.length);
       }
 
-      // Mix in some new cards (20% of queue)
-      const newCardsCount = Math.max(1, Math.floor(dueCards.length * 0.2));
+      // Mix in some new cards (20% of queue, respecting session limit)
+      const remainingSlots = effectiveLimit - dueCards.length;
+      const newCardsCount = Math.max(0, Math.min(remainingSlots, Math.floor(effectiveLimit * 0.2)));
       console.log('[FlashcardReview] Requesting', newCardsCount, 'new cards');
-      const newCards = await flashcardService.getNewFlashcards(effectiveUserId, newCardsCount);
-      console.log('[FlashcardReview] New cards loaded:', newCards.length);
 
-      const allCards = [...dueCards, ...newCards];
-      console.log('[FlashcardReview] Total cards:', allCards.length);
+      let newCards: Flashcard[] = [];
+      if (newCardsCount > 0) {
+        if (selectedDomain) {
+          // Get new cards from specific domain
+          const allNewCards = await flashcardService.getNewFlashcards(effectiveUserId, 1000);
+          newCards = allNewCards.filter(c => c.domain === selectedDomain).slice(0, newCardsCount);
+        } else {
+          newCards = await flashcardService.getNewFlashcards(effectiveUserId, newCardsCount);
+        }
+        console.log('[FlashcardReview] New cards loaded:', newCards.length);
+      }
+
+      const allCards = [...dueCards, ...newCards].slice(0, effectiveLimit);
+      console.log('[FlashcardReview] Total cards after limit:', allCards.length);
 
       setCards(allCards);
     } catch (error) {
@@ -220,6 +244,61 @@ export default function FlashcardReview({ moduleId, deckId, totalCards = 0, onCo
           </CardContent>
         </Card>
       )}
+
+      {/* Session Customization Controls */}
+      <Card>
+        <CardContent className="py-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {/* Session Size Selector */}
+            <div className="space-y-2">
+              <label className="text-sm font-medium flex items-center gap-2">
+                <Hash className="h-4 w-4" />
+                Cards per session
+              </label>
+              <Select
+                value={sessionLimit.toString()}
+                onValueChange={(value) => setSessionLimit(parseInt(value))}
+              >
+                <SelectTrigger>
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="10">10 cards</SelectItem>
+                  <SelectItem value="25">25 cards</SelectItem>
+                  <SelectItem value="50">50 cards</SelectItem>
+                  <SelectItem value="100">100 cards</SelectItem>
+                  <SelectItem value="9999">All cards</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+
+            {/* Domain Filter */}
+            <div className="space-y-2">
+              <label className="text-sm font-medium flex items-center gap-2">
+                <Filter className="h-4 w-4" />
+                Study module
+              </label>
+              <Select
+                value={selectedDomain || "random"}
+                onValueChange={(value) => setSelectedDomain(value === "random" ? null : value)}
+              >
+                <SelectTrigger>
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="random">Random (All domains)</SelectItem>
+                  <SelectItem value="asking-questions">Asking Questions</SelectItem>
+                  <SelectItem value="refining-questions-targeting">Refining & Targeting</SelectItem>
+                  <SelectItem value="taking-action-packages-actions">Taking Action</SelectItem>
+                  <SelectItem value="navigation-basic-modules">Navigation & Modules</SelectItem>
+                  <SelectItem value="reporting-data-export">Reporting & Export</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
       {/* Progress Bar */}
       <div className="flex items-center gap-3">
         <Progress value={progress} className="flex-1" />
@@ -261,7 +340,7 @@ export default function FlashcardReview({ moduleId, deckId, totalCards = 0, onCo
         <CardHeader>
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <Badge variant={currentCard.srs_reps === 0 ? "default" : "secondary"}>
+              <Badge variant={currentCard.srs_reps === 0 ? "default" : "secondary"} className="text-white">
                 {currentCard.srs_reps === 0 ? "New" : `Review ${currentCard.total_reviews}`}
               </Badge>
               <Badge variant="outline">{currentCard.card_type}</Badge>
@@ -411,7 +490,7 @@ export default function FlashcardReview({ moduleId, deckId, totalCards = 0, onCo
       {currentCard.tags && currentCard.tags.length > 0 && (
         <div className="flex gap-2 flex-wrap">
           {currentCard.tags.map((tag) => (
-            <Badge key={tag} variant="secondary" className="text-xs">
+            <Badge key={tag} variant="secondary" className="text-xs text-white">
               {tag}
             </Badge>
           ))}
