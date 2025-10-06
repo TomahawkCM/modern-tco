@@ -289,11 +289,11 @@ Route (app)                                   Size     First Load JS
 
 ```typescript
 // Added base path configuration (line 242)
-const base = process.env.NEXT_PUBLIC_BASE_PATH ?? '';
+const base = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 const data = await fetchJson<EvalResponse>(
-  `${base}/api/sim-eval`,  // Now includes base path
+  `${base}/api/sim-eval`, // Now includes base path
   {
-    method: 'POST',
+    method: "POST",
     body: JSON.stringify({ question: input }),
     signal: controller.signal,
   }
@@ -309,6 +309,7 @@ const data = await fetchJson<EvalResponse>(
 **Issue**: Monaco Editor fonts blocked by Content Security Policy.
 
 **Console Error**:
+
 ```
 Refused to load the font 'https://cdn.jsdelivr.net/npm/monaco-editor@0.52.2/min/vs/base/browser/ui/codicons/codicon/codicon.ttf'
 because it violates the following Content Security Policy directive: "font-src 'self' data:"
@@ -319,11 +320,13 @@ because it violates the following Content Security Policy directive: "font-src '
 **Fix Applied**:
 
 **Before**:
+
 ```javascript
 "font-src 'self' data:",
 ```
 
 **After**:
+
 ```javascript
 "font-src 'self' data: https://cdn.jsdelivr.net",
 ```
@@ -333,6 +336,7 @@ because it violates the following Content Security Policy directive: "font-src '
 ### 7. Added Comprehensive Debug Logging
 
 **Files**:
+
 - `src/app/simulator/page.tsx` (lines 244, 255-263, 275, 283)
 - `src/app/api/sim-eval/route.ts` (lines 21, 26, 30, 40-47, 70)
 
@@ -341,45 +345,47 @@ because it violates the following Content Security Policy directive: "font-src '
 **Debug Logging Added**:
 
 **Frontend (Simulator Page)**:
+
 ```typescript
 // Log API requests
-console.log('[Simulator] API Request:', { url: apiUrl, question: input });
+console.log("[Simulator] API Request:", { url: apiUrl, question: input });
 
 // Log API responses with detailed structure
-console.log('[Simulator] API Response:', {
+console.log("[Simulator] API Response:", {
   ok: data.ok,
   hasHeaders: !!data.headers,
   headersCount: data.headers?.length,
   hasRows: !!data.rows,
   rowsCount: data.rows?.length,
   error: data.error,
-  fullResponse: data
+  fullResponse: data,
 });
 
 // Log errors
-console.error('[Simulator] Query Error:', data.error);
-console.error('[Simulator] Fetch Error:', error);
+console.error("[Simulator] Query Error:", data.error);
+console.error("[Simulator] Fetch Error:", error);
 ```
 
 **Backend (API Route)**:
+
 ```typescript
 // Log incoming queries
-console.log('[sim-eval] Processing query:', payload.question);
+console.log("[sim-eval] Processing query:", payload.question);
 
 // Log query results
-console.log('[sim-eval] Query result:', {
+console.log("[sim-eval] Query result:", {
   ok: result.ok,
   hasHeaders: !!result.headers,
   headersCount: result.headers?.length,
   hasRows: !!result.rows,
   rowsCount: result.rows?.length,
-  error: result.error
+  error: result.error,
 });
 
 // Log errors
-console.error('[sim-eval] Invalid JSON body');
-console.error('[sim-eval] Missing or invalid question:', payload);
-console.error('[sim-eval] Execution error:', error);
+console.error("[sim-eval] Invalid JSON body");
+console.error("[sim-eval] Missing or invalid question:", payload);
+console.error("[sim-eval] Execution error:", error);
 ```
 
 **Rationale**: Comprehensive logging enables quick diagnosis of API issues, response structure problems, and execution errors. Logs are prefixed with `[Simulator]` and `[sim-eval]` for easy filtering in production console.
@@ -396,15 +402,90 @@ console.error('[sim-eval] Execution error:', error);
    - ✅ Source maps (jsdelivr.net)
    - ✅ Fonts (jsdelivr.net)
 4. Fixed "Run now" button API path to include base path prefix
-5. Added comprehensive debug logging for both frontend and backend
-6. Updated documentation for production deployment clarity
-7. Enhanced "Run now" button with visual feedback and detailed instrumentation **[NEW]**
+5. Fixed parser to recognize AND keyword in column lists ("Get Computer Name and CPU Percent")
+6. Added comprehensive debug logging for both frontend and backend
+7. Updated documentation for production deployment clarity
+8. Enhanced "Run now" button with visual feedback and detailed instrumentation
    - ✅ Button onClick debug logging (tracks click events with question state)
    - ✅ scheduleEvaluation entry logging (confirms function execution)
    - ✅ Empty input warning logging (identifies empty question scenarios)
    - ✅ Visual feedback (disabled state during execution, loading text)
+9. Fixed ORDER BY parser to properly handle direction keywords (asc/desc) **[NEW]**
+   - ✅ Stops column name parsing at "asc"/"desc" keywords
+   - ✅ Prevents direction keywords from being consumed as column names
+   - ✅ Fixes queries like "order by CPU Percent desc" that previously failed validation
 
 **Debugging Support**: All API requests and responses now logged with `[Simulator]` and `[sim-eval]` prefixes for easy troubleshooting in production console. Button interactions now fully instrumented for production diagnosis.
+
+### 9. Fixed ORDER BY Parser to Handle Direction Keywords (asc/desc)
+
+**File**: `src/lib/tanium-query-engine/parser.ts` (lines 450-488, 633-640)
+
+**Issue**: Parser incorrectly included direction keywords ("asc"/"desc") as part of column names in ORDER BY clauses.
+
+**Query Example**:
+
+```
+Get Computer Name and CPU Percent from all machines order by CPU Percent desc limit 5
+```
+
+**Error Before Fix**:
+
+```
+ORDER BY column "CPU Percent desc" must appear in SELECT or GROUP BY clause
+```
+
+**Root Cause**:
+
+- `parseColumn()` function consumed ALL identifier tokens including "desc"
+- `checkColumnContinuation()` didn't recognize "asc"/"desc" as stop keywords
+- Result: "CPU Percent desc" treated as single column name
+
+**Fix Applied**:
+
+**1. Manual Column Parsing in ORDER BY Context** (lines 452-469):
+
+```typescript
+// Parse column name manually to stop at asc/desc keywords
+let columnName = "";
+while (this.check(TokenType.IDENTIFIER)) {
+  const value = this.peekValue()?.toLowerCase();
+
+  // Stop if we hit asc/desc direction keywords
+  if (value === "asc" || value === "desc") {
+    break;
+  }
+
+  if (columnName) columnName += " ";
+  columnName += this.advance().value;
+
+  // Check if next token continues the column name
+  if (!this.checkOrderByColumnContinuation()) {
+    break;
+  }
+}
+```
+
+**2. New Helper Function** (lines 633-640):
+
+```typescript
+private checkOrderByColumnContinuation(): boolean {
+  // In ORDER BY context, also stop at LIMIT (and comma is handled by outer loop)
+  const stopTokens = [
+    TokenType.LIMIT,
+    TokenType.COMMA,
+  ];
+  return !stopTokens.includes(this.peek().type);
+}
+```
+
+**Expected Behavior After Fix**:
+
+- Column name: "CPU Percent" ✅
+- Direction: "desc" ✅
+- Validation passes because "CPU Percent" is in SELECT clause ✅
+
+**Rationale**: ORDER BY clause requires special parsing logic that recognizes direction keywords as modifiers, not column name continuations. This fix ensures "asc" and "desc" are never consumed as part of the column identifier.
 
 ### 8. Enhanced "Run now" Button with Debug Logging and Visual Feedback
 
@@ -415,6 +496,7 @@ console.error('[sim-eval] Execution error:', error);
 **Enhancements Applied**:
 
 **Button onClick Debug Logging (lines 525-528)**:
+
 ```typescript
 onClick={() => {
   console.log('[Simulator] Run now clicked', { question, examMode, questionLength: question.length });
@@ -423,19 +505,25 @@ onClick={() => {
 ```
 
 **scheduleEvaluation Entry Logging (line 224)**:
+
 ```typescript
-console.log('[Simulator] scheduleEvaluation called', { input, inputLength: input.length, options });
+console.log("[Simulator] scheduleEvaluation called", { input, inputLength: input.length, options });
 ```
 
 **Empty Input Warning (line 230)**:
+
 ```typescript
 if (!input.trim()) {
-  console.warn('[Simulator] Empty input, skipping evaluation', { input, inputLength: input.length });
+  console.warn("[Simulator] Empty input, skipping evaluation", {
+    input,
+    inputLength: input.length,
+  });
   // ... rest of early return logic
 }
 ```
 
 **Visual Feedback Enhancements (lines 524, 530)**:
+
 ```typescript
 <Button
   size="sm"
@@ -449,12 +537,14 @@ if (!input.trim()) {
 ```
 
 **Rationale**:
+
 - **Comprehensive Logging**: Track exact execution flow from button click → function entry → API call
 - **Empty Input Detection**: Identify if question state is empty/whitespace when button clicked
 - **Visual Feedback**: Disabled state prevents double-clicks, loading text confirms execution
 - **Production Debugging**: Console logs enable real-time diagnosis in production without code changes
 
 **Expected Debug Output** (when button clicked):
+
 ```
 [Simulator] Run now clicked { question: "Get Computer Name from all machines", examMode: false, questionLength: 41 }
 [Simulator] scheduleEvaluation called { input: "Get Computer Name from all machines", inputLength: 41, options: { immediate: true, countExam: false } }
@@ -463,6 +553,7 @@ if (!input.trim()) {
 ```
 
 **Empty Input Scenario**:
+
 ```
 [Simulator] Run now clicked { question: "", examMode: false, questionLength: 0 }
 [Simulator] scheduleEvaluation called { input: "", inputLength: 0, options: { immediate: true, countExam: false } }
