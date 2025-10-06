@@ -449,8 +449,26 @@ export class Parser {
 
     const columns: OrderByNode["columns"] = [];
     do {
-      const col = this.parseColumn();
-      if (col) {
+      // Parse column name manually to stop at asc/desc keywords
+      let columnName = "";
+      while (this.check(TokenType.IDENTIFIER)) {
+        const value = this.peekValue()?.toLowerCase();
+
+        // Stop if we hit asc/desc direction keywords
+        if (value === "asc" || value === "desc") {
+          break;
+        }
+
+        if (columnName) columnName += " ";
+        columnName += this.advance().value;
+
+        // Check if next token continues the column name
+        if (!this.checkOrderByColumnContinuation()) {
+          break;
+        }
+      }
+
+      if (columnName) {
         let direction: "asc" | "desc" = "asc";
 
         // Check for ASC/DESC
@@ -463,7 +481,7 @@ export class Parser {
         }
 
         columns.push({
-          column: col.name,
+          column: columnName,
           direction,
         });
       }
@@ -607,6 +625,15 @@ export class Parser {
       TokenType.ORDER_BY,
       TokenType.LIMIT,
       TokenType.AND,
+      TokenType.COMMA,
+    ];
+    return !stopTokens.includes(this.peek().type);
+  }
+
+  private checkOrderByColumnContinuation(): boolean {
+    // In ORDER BY context, also stop at LIMIT (and comma is handled by outer loop)
+    const stopTokens = [
+      TokenType.LIMIT,
       TokenType.COMMA,
     ];
     return !stopTokens.includes(this.peek().type);
