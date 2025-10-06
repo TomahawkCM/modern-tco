@@ -296,68 +296,110 @@ export default function FlashcardReview({ moduleId, deckId, totalCards = 0, onCo
 
           {/* Show Answer Button */}
           {!showAnswer && (
-            <Button
-              onClick={() => setShowAnswer(true)}
-              size="lg"
-              className="w-full mt-4"
-            >
-              Show Answer
-            </Button>
+            <div className="space-y-2 mt-4">
+              <Button
+                onClick={() => setShowAnswer(true)}
+                size="lg"
+                className="w-full"
+              >
+                Show Answer
+              </Button>
+              <Button
+                onClick={() => handleRating('good')}
+                variant="outline"
+                size="sm"
+                className="w-full"
+              >
+                Skip → Next Card
+              </Button>
+            </div>
           )}
 
           {/* Rating Buttons (SM-2 Algorithm) */}
           {showAnswer && (
-            <div className="grid grid-cols-4 gap-2 mt-6">
-              <Button
-                variant="destructive"
-                onClick={() => handleRating('again')}
-                className="flex flex-col h-auto py-3"
-              >
-                <X className="h-5 w-5 mb-1" />
-                <span className="text-xs">Again</span>
-                <span className="text-xs opacity-70">&lt;1d</span>
-              </Button>
-              <Button
-                variant="outline"
-                onClick={() => handleRating('hard')}
-                className="flex flex-col h-auto py-3"
-              >
-                <AlertCircle className="h-5 w-5 mb-1" />
-                <span className="text-xs">Hard</span>
-                <span className="text-xs opacity-70">~3d</span>
-              </Button>
-              <Button
-                variant="secondary"
-                onClick={() => handleRating('good')}
-                className="flex flex-col h-auto py-3"
-              >
-                <Check className="h-5 w-5 mb-1" />
-                <span className="text-xs">Good</span>
-                <span className="text-xs opacity-70">
-                  ~{currentCard.srs_reps === 0 ? 1 : currentCard.srs_reps === 1 ? 6 : Math.round(currentCard.srs_interval * currentCard.srs_ease)}d
-                </span>
-              </Button>
-              <Button
-                variant="default"
-                onClick={() => handleRating('easy')}
-                className="flex flex-col h-auto py-3"
-              >
-                <TrendingUp className="h-5 w-5 mb-1" />
-                <span className="text-xs">Easy</span>
-                <span className="text-xs opacity-70">
-                  ~{currentCard.srs_reps === 0 ? 3 : Math.round(currentCard.srs_interval * currentCard.srs_ease * 1.3)}d
-                </span>
-              </Button>
+            <div className="space-y-3 mt-6">
+              <p className="text-xs text-center text-muted-foreground">Rate your recall (optional):</p>
+              <div className="grid grid-cols-4 gap-2">
+                <Button
+                  variant="destructive"
+                  onClick={() => handleRating('again')}
+                  className="flex flex-col h-auto py-3"
+                >
+                  <X className="h-5 w-5 mb-1" />
+                  <span className="text-xs">Again</span>
+                  <span className="text-xs opacity-70">&lt;1d</span>
+                </Button>
+                <Button
+                  variant="outline"
+                  onClick={() => handleRating('hard')}
+                  className="flex flex-col h-auto py-3"
+                >
+                  <AlertCircle className="h-5 w-5 mb-1" />
+                  <span className="text-xs">Hard</span>
+                  <span className="text-xs opacity-70">~3d</span>
+                </Button>
+                <Button
+                  variant="secondary"
+                  onClick={() => handleRating('good')}
+                  className="flex flex-col h-auto py-3"
+                >
+                  <Check className="h-5 w-5 mb-1" />
+                  <span className="text-xs">Good</span>
+                  <span className="text-xs opacity-70">
+                    ~{currentCard.srs_reps === 0 ? 1 : currentCard.srs_reps === 1 ? 6 : Math.round(currentCard.srs_interval * currentCard.srs_ease)}d
+                  </span>
+                </Button>
+                <Button
+                  variant="default"
+                  onClick={() => handleRating('easy')}
+                  className="flex flex-col h-auto py-3"
+                >
+                  <TrendingUp className="h-5 w-5 mb-1" />
+                  <span className="text-xs">Easy</span>
+                  <span className="text-xs opacity-70">
+                    ~{currentCard.srs_reps === 0 ? 3 : Math.round(currentCard.srs_interval * currentCard.srs_ease * 1.3)}d
+                  </span>
+                </Button>
+              </div>
+
+              {/* Navigation Controls */}
+              <div className="grid grid-cols-2 gap-2 pt-2">
+                <Button
+                  variant="outline"
+                  onClick={() => {
+                    if (currentIndex > 0) {
+                      setCurrentIndex(currentIndex - 1);
+                      setShowAnswer(false);
+                      setReviewStartTime(Date.now());
+                    }
+                  }}
+                  disabled={currentIndex === 0}
+                >
+                  ← Previous Card
+                </Button>
+                <Button
+                  onClick={() => {
+                    if (currentIndex < cards.length - 1) {
+                      setCurrentIndex(currentIndex + 1);
+                      setShowAnswer(false);
+                      setReviewStartTime(Date.now());
+                    }
+                  }}
+                  disabled={currentIndex === cards.length - 1}
+                >
+                  Next Card →
+                </Button>
+              </div>
             </div>
           )}
         </CardContent>
       </Card>
 
-      {/* Card Tags */}
+      {/* Card Tags - with better visibility */}
       {currentCard.tags && currentCard.tags.length > 0 && (
         <div className="flex gap-2 flex-wrap">
           {currentCard.tags.map((tag) => (
-            <Badge key={tag} variant="outline" className="text-xs">
+            <Badge key={tag} variant="secondary" className="text-xs">
               {tag}
             </Badge>
           ))}
