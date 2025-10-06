@@ -394,9 +394,77 @@ console.error('[sim-eval] Execution error:', error);
    - ✅ Scripts (jsdelivr.net)
    - ✅ Stylesheets (jsdelivr.net)
    - ✅ Source maps (jsdelivr.net)
-   - ✅ Fonts (jsdelivr.net) **[NEW]**
+   - ✅ Fonts (jsdelivr.net)
 4. Fixed "Run now" button API path to include base path prefix
 5. Added comprehensive debug logging for both frontend and backend
 6. Updated documentation for production deployment clarity
+7. Enhanced "Run now" button with visual feedback and detailed instrumentation **[NEW]**
+   - ✅ Button onClick debug logging (tracks click events with question state)
+   - ✅ scheduleEvaluation entry logging (confirms function execution)
+   - ✅ Empty input warning logging (identifies empty question scenarios)
+   - ✅ Visual feedback (disabled state during execution, loading text)
 
-**Debugging Support**: All API requests and responses now logged with `[Simulator]` and `[sim-eval]` prefixes for easy troubleshooting in production console.
+**Debugging Support**: All API requests and responses now logged with `[Simulator]` and `[sim-eval]` prefixes for easy troubleshooting in production console. Button interactions now fully instrumented for production diagnosis.
+
+### 8. Enhanced "Run now" Button with Debug Logging and Visual Feedback
+
+**File**: `src/app/simulator/page.tsx` (lines 520-531, 224, 230)
+
+**Issue**: "Run now" button reported as having no effect - difficult to diagnose without proper instrumentation.
+
+**Enhancements Applied**:
+
+**Button onClick Debug Logging (lines 525-528)**:
+```typescript
+onClick={() => {
+  console.log('[Simulator] Run now clicked', { question, examMode, questionLength: question.length });
+  scheduleEvaluation(question, { immediate: true, countExam: examMode });
+}}
+```
+
+**scheduleEvaluation Entry Logging (line 224)**:
+```typescript
+console.log('[Simulator] scheduleEvaluation called', { input, inputLength: input.length, options });
+```
+
+**Empty Input Warning (line 230)**:
+```typescript
+if (!input.trim()) {
+  console.warn('[Simulator] Empty input, skipping evaluation', { input, inputLength: input.length });
+  // ... rest of early return logic
+}
+```
+
+**Visual Feedback Enhancements (lines 524, 530)**:
+```typescript
+<Button
+  size="sm"
+  variant="outline"
+  className="border-cyan-500/40 text-cyan-100 hover:bg-cyan-500/10"
+  disabled={isEvaluating}  // ← Prevents double-clicks during execution
+  onClick={...}
+>
+  {isEvaluating ? 'Running...' : 'Run now'}  // ← Clear visual state
+</Button>
+```
+
+**Rationale**:
+- **Comprehensive Logging**: Track exact execution flow from button click → function entry → API call
+- **Empty Input Detection**: Identify if question state is empty/whitespace when button clicked
+- **Visual Feedback**: Disabled state prevents double-clicks, loading text confirms execution
+- **Production Debugging**: Console logs enable real-time diagnosis in production without code changes
+
+**Expected Debug Output** (when button clicked):
+```
+[Simulator] Run now clicked { question: "Get Computer Name from all machines", examMode: false, questionLength: 41 }
+[Simulator] scheduleEvaluation called { input: "Get Computer Name from all machines", inputLength: 41, options: { immediate: true, countExam: false } }
+[Simulator] API Request: { url: "/api/sim-eval", question: "Get Computer Name from all machines" }
+[Simulator] API Response: { ok: true, hasHeaders: true, headersCount: 1, hasRows: true, rowsCount: 10, error: undefined, fullResponse: {...} }
+```
+
+**Empty Input Scenario**:
+```
+[Simulator] Run now clicked { question: "", examMode: false, questionLength: 0 }
+[Simulator] scheduleEvaluation called { input: "", inputLength: 0, options: { immediate: true, countExam: false } }
+[Simulator] Empty input, skipping evaluation { input: "", inputLength: 0 }
+```

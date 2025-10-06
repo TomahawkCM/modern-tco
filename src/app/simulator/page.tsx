@@ -221,11 +221,13 @@ export default function SimulatorPage() {
 
   const scheduleEvaluation = useCallback(
     (input: string, options: { immediate?: boolean; countExam?: boolean } = {}) => {
+      console.log('[Simulator] scheduleEvaluation called', { input, inputLength: input.length, options });
       const { immediate = false, countExam = false } = options;
       if (abortRef.current) {
         abortRef.current.abort();
       }
       if (!input.trim()) {
+        console.warn('[Simulator] Empty input, skipping evaluation', { input, inputLength: input.length });
         setResult(null);
         setEvalError(null);
         if (editorRef.current && monacoRef.current) {
@@ -517,8 +519,17 @@ export default function SimulatorPage() {
                   )}
                 </div>
                 <div className="flex items-center gap-2">
-                  <Button size="sm" variant="outline" className="border-cyan-500/40 text-cyan-100 hover:bg-cyan-500/10" onClick={() => scheduleEvaluation(question, { immediate: true, countExam: examMode })}>
-                    Run now
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    className="border-cyan-500/40 text-cyan-100 hover:bg-cyan-500/10"
+                    disabled={isEvaluating}
+                    onClick={() => {
+                      console.log('[Simulator] Run now clicked', { question, examMode, questionLength: question.length });
+                      scheduleEvaluation(question, { immediate: true, countExam: examMode });
+                    }}
+                  >
+                    {isEvaluating ? 'Running...' : 'Run now'}
                   </Button>
                   <Button size="sm" variant="outline" className="border-cyan-500/40 text-cyan-100 hover:bg-cyan-500/10" onClick={() => handleExport('csv')}>
                     Export CSV
