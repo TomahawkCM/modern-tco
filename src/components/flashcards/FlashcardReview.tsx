@@ -25,7 +25,7 @@ interface ReviewStats {
   newCardsLearned: number;
 }
 
-const DEV_USER_ID = 'dev-user-123'; // Development mode user ID
+const DEV_USER_ID = '5e244287-40af-4cad-aa90-5a7be354940a'; // Development mode user ID (actual dev user in database)
 const IS_DEV_MODE = process.env.NODE_ENV === 'development' || process.env.NEXT_PUBLIC_DEV_MODE === 'true';
 
 export default function FlashcardReview({ moduleId, deckId, totalCards = 0, onComplete }: FlashcardReviewProps) {
