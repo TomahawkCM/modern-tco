@@ -74,16 +74,26 @@ export default function FlashcardDashboard({ moduleId }: FlashcardDashboardProps
 
       const data = await response.json();
 
-      if (response.ok && data.count > 0) {
-        console.log(`✅ Auto-seeded ${data.count} flashcards`, data);
-        const newStats = await flashcardService.getFlashcardStats(effectiveUserId);
-        setStats(newStats);
-      } else if (data.alreadySeeded) {
-        console.log('ℹ️ Flashcards already seeded');
+      if (response.ok) {
+        const seededCount = typeof data?.count === "number" ? data.count : 0;
+
+        if (seededCount > 0) {
+          console.log(`✅ Auto-seeded ${seededCount} flashcards`, data);
+          const newStats = await flashcardService.getFlashcardStats(effectiveUserId);
+          setStats(newStats);
+        } else if (data?.alreadySeeded) {
+          console.log("ℹ️ Flashcards already seeded");
+        } else {
+          console.info("ℹ️ No flashcards were seeded automatically", data);
+        }
       } else {
-        const errorMsg = data.details || data.error || 'Unknown error';
-        console.error('❌ Failed to auto-seed flashcards:', data);
-        setError(`Failed to load flashcards: ${errorMsg}${data.suggestion ? ` (${data.suggestion})` : ''}`);
+        const errorMsg = data?.details || data?.error || response.statusText || "Unknown error";
+        console.error("❌ Failed to auto-seed flashcards:", data);
+        setError(
+          `Failed to load flashcards: ${errorMsg}${
+            data?.suggestion ? ` (${data.suggestion})` : ""
+          }`
+        );
       }
     } catch (err) {
       const errorMsg = err instanceof Error ? err.message : 'Unknown error';

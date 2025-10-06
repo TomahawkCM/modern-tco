@@ -25,8 +25,14 @@ interface ReviewStats {
   newCardsLearned: number;
 }
 
+const DEV_USER_ID = 'dev-user-123'; // Development mode user ID
+const IS_DEV_MODE = process.env.NODE_ENV === 'development' || process.env.NEXT_PUBLIC_DEV_MODE === 'true';
+
 export default function FlashcardReview({ moduleId, deckId, totalCards = 0, onComplete }: FlashcardReviewProps) {
   const { user } = useAuth();
+
+  // Use dev user ID if in development mode and no real user
+  const effectiveUserId = user?.id || (IS_DEV_MODE ? DEV_USER_ID : null);
   const [cards, setCards] = useState<Flashcard[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showAnswer, setShowAnswer] = useState(false);
@@ -41,10 +47,10 @@ export default function FlashcardReview({ moduleId, deckId, totalCards = 0, onCo
 
   useEffect(() => {
     loadCards();
-  }, [user?.id, moduleId, deckId]);
+  }, [effectiveUserId, moduleId, deckId]);
 
   const loadCards = async () => {
-    if (!user?.id) return;
+    if (!effectiveUserId) return;
 
     setIsLoading(true);
     try {
@@ -52,7 +58,7 @@ export default function FlashcardReview({ moduleId, deckId, totalCards = 0, onCo
 
       if (moduleId) {
         // Get all cards for module and filter by due date
-        const moduleCards = await flashcardService.getFlashcardsByModule(user.id, moduleId);
+        const moduleCards = await flashcardService.getFlashcardsByModule(effectiveUserId, moduleId);
         dueCards = moduleCards.filter(c => new Date(c.srs_due) <= new Date());
       } else if (deckId) {
         // Get deck cards and filter by due date
@@ -60,11 +66,11 @@ export default function FlashcardReview({ moduleId, deckId, totalCards = 0, onCo
         dueCards = deckCards.filter(c => new Date(c.srs_due) <= new Date());
       } else {
         // Get all due cards
-        dueCards = await flashcardService.getDueFlashcards(user.id, 20);
+        dueCards = await flashcardService.getDueFlashcards(effectiveUserId, 20);
       }
 
       // Mix in some new cards (20% of queue)
-      const newCards = await flashcardService.getNewFlashcards(user.id, Math.max(1, Math.floor(dueCards.length * 0.2)));
+      const newCards = await flashcardService.getNewFlashcards(effectiveUserId, Math.max(1, Math.floor(dueCards.length * 0.2)));
       const allCards = [...dueCards, ...newCards];
 
       setCards(allCards);
@@ -76,13 +82,13 @@ export default function FlashcardReview({ moduleId, deckId, totalCards = 0, onCo
   };
 
   const handleRating = async (rating: SRRating) => {
-    if (!user?.id || !currentCard) return;
+    if (!effectiveUserId || !currentCard) return;
 
     const timeSpent = Math.floor((Date.now() - reviewStartTime) / 1000);
     const isCorrect = rating === 'good' || rating === 'easy';
 
     // Update card with SRS algorithm
-    await flashcardService.reviewFlashcard(currentCard.id, user.id, rating, timeSpent);
+    await flashcardService.reviewFlashcard(currentCard.id, effectiveUserId, rating, timeSpent);
 
     // Update session stats
     const newStats = {
@@ -192,6 +198,16 @@ export default function FlashcardReview({ moduleId, deckId, totalCards = 0, onCo
 
   return (
     <div className="w-full max-w-2xl mx-auto space-y-4">
+      {/* Development Mode Banner */}
+      {IS_DEV_MODE && !user && (
+        <Card className="border-yellow-500 bg-yellow-500/10">
+          <CardContent className="py-3">
+            <p className="text-sm text-yellow-600 dark:text-yellow-400">
+              ⚠️ <strong>Development Mode</strong> - Using mock user ID ({DEV_USER_ID}). Real authentication not required.
+            </p>
+          </CardContent>
+        </Card>
+      )}
       {/* Progress Bar */}
       <div className="flex items-center gap-3">
         <Progress value={progress} className="flex-1" />
