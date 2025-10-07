@@ -141,4 +141,11 @@ export const SLUG_TO_DOMAIN_ENUM: Record<string, ModuleFrontmatter["domainEnum"]
   "platform-foundation": "PLATFORM_FOUNDATION",
   // Also support the filename-generated slug
   "tanium-platform-foundation": "PLATFORM_FOUNDATION",
+
+  // Experimental learn-style modules
+  "asking-questions-learn": "ASKING_QUESTIONS",
+  "refining-targeting-learn-experimental": "REFINING_QUESTIONS",
+  "taking-action-learn-experimental": "TAKING_ACTION",
+  "navigation-basic-modules-learn-experimental": "NAVIGATION_MODULES",
+  "reporting-export-learn-experimental": "REPORTING_EXPORT",
 };
