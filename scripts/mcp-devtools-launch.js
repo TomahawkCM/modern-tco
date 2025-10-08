@@ -86,7 +86,7 @@ function ensureChromeBinary(baseDir, platform = os.platform()) {
     return chromeBin;
   }
 
-  console.log(`[mcp-devtools] Chrome for Testing not found. Installing to ${baseDir} ...`);
+  console.error(`[mcp-devtools] Chrome for Testing not found. Installing to ${baseDir} ...`);
   fs.mkdirSync(baseDir, { recursive: true });
 
   const installResult = spawnSync(resolveCommand('npx', platform), [
@@ -126,7 +126,7 @@ function launchChromeDevtoolsMcp() {
   const platform = os.platform();
   const chromeBin = ensureChromeBinary(chromeDir, platform);
 
-  console.log(`[mcp-devtools] Using Chrome: ${chromeBin}`);
+  console.error(`[mcp-devtools] Using Chrome: ${chromeBin}`);
 
   const args = [
     '-y',

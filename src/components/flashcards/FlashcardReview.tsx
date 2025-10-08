@@ -25,14 +25,10 @@ interface ReviewStats {
   newCardsLearned: number;
 }
 
-const DEV_USER_ID = '5e244287-40af-4cad-aa90-5a7be354940a'; // Development mode user ID (actual dev user in database)
-const IS_DEV_MODE = process.env.NODE_ENV === 'development' || process.env.NEXT_PUBLIC_DEV_MODE === 'true';
-
 export default function FlashcardReview({ moduleId, deckId, totalCards = 0, onComplete }: FlashcardReviewProps) {
   const { user } = useAuth();
+  const isStaticMode = !user;
 
-  // Always use dev user ID as fallback when no authenticated user (no auth required)
-  const effectiveUserId = user?.id || DEV_USER_ID;
   const [cards, setCards] = useState<Flashcard[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showAnswer, setShowAnswer] = useState(false);
@@ -51,15 +47,17 @@ export default function FlashcardReview({ moduleId, deckId, totalCards = 0, onCo
 
   useEffect(() => {
     loadCards();
-  }, [effectiveUserId, moduleId, deckId, sessionLimit, selectedDomain]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user?.id, moduleId, deckId, sessionLimit, selectedDomain]);
 
   const loadCards = async () => {
-    if (!effectiveUserId) {
-      console.log('[FlashcardReview] No effectiveUserId, skipping load');
-      return;
-    }
+    const userId = user?.id;
 
-    console.log('[FlashcardReview] Loading cards:', { effectiveUserId, sessionLimit, selectedDomain });
+    console.log('[FlashcardReview] Loading cards:', {
+      userId: userId || 'static-shared',
+      sessionLimit,
+      selectedDomain,
+    });
     setIsLoading(true);
     try {
       let dueCards: Flashcard[] = [];
@@ -69,22 +67,22 @@ export default function FlashcardReview({ moduleId, deckId, totalCards = 0, onCo
 
       if (moduleId) {
         // Get all cards for module and filter by due date
-        const moduleCards = await flashcardService.getFlashcardsByModule(effectiveUserId, moduleId);
+        const moduleCards = await flashcardService.getFlashcardsByModule(userId, moduleId);
         dueCards = moduleCards.filter(c => new Date(c.srs_due) <= new Date());
         console.log('[FlashcardReview] Module cards loaded:', moduleCards.length, 'due:', dueCards.length);
       } else if (deckId) {
         // Get deck cards and filter by due date
-        const deckCards = await flashcardService.getDeckCards(deckId);
+        const deckCards = await flashcardService.getDeckCards(deckId, userId);
         dueCards = deckCards.filter(c => new Date(c.srs_due) <= new Date());
         console.log('[FlashcardReview] Deck cards loaded:', deckCards.length, 'due:', dueCards.length);
       } else if (selectedDomain) {
         // Get cards filtered by domain (stored in tags array)
-        const domainCards = await flashcardService.getFlashcardsByDomain(effectiveUserId, selectedDomain);
+        const domainCards = await flashcardService.getFlashcardsByDomain(userId, selectedDomain);
         dueCards = domainCards.filter(c => new Date(c.srs_due) <= new Date()).slice(0, effectiveLimit);
         console.log('[FlashcardReview] Domain cards loaded:', domainCards.length, 'due:', dueCards.length);
       } else {
         // Get all due cards with custom limit
-        dueCards = await flashcardService.getDueFlashcards(effectiveUserId, effectiveLimit);
+        dueCards = await flashcardService.getDueFlashcards(userId, effectiveLimit);
         console.log('[FlashcardReview] Due cards loaded:', dueCards.length);
       }
 
@@ -97,10 +95,10 @@ export default function FlashcardReview({ moduleId, deckId, totalCards = 0, onCo
       if (newCardsCount > 0) {
         if (selectedDomain) {
           // Get new cards from specific domain (filter by tags containing domain)
-          const allNewCards = await flashcardService.getNewFlashcards(effectiveUserId, 1000);
+          const allNewCards = await flashcardService.getNewFlashcards(userId, 1000);
           newCards = allNewCards.filter(c => c.tags && c.tags.includes(selectedDomain)).slice(0, newCardsCount);
         } else {
-          newCards = await flashcardService.getNewFlashcards(effectiveUserId, newCardsCount);
+          newCards = await flashcardService.getNewFlashcards(userId, newCardsCount);
         }
         console.log('[FlashcardReview] New cards loaded:', newCards.length);
       }
@@ -117,13 +115,13 @@ export default function FlashcardReview({ moduleId, deckId, totalCards = 0, onCo
   };
 
   const handleRating = async (rating: SRRating) => {
-    if (!effectiveUserId || !currentCard) return;
+    if (!currentCard) return;
 
     const timeSpent = Math.floor((Date.now() - reviewStartTime) / 1000);
     const isCorrect = rating === 'good' || rating === 'easy';
 
     // Update card with SRS algorithm
-    await flashcardService.reviewFlashcard(currentCard.id, effectiveUserId, rating, timeSpent);
+    await flashcardService.reviewFlashcard(currentCard.id, user?.id, rating, timeSpent);
 
     // Update session stats
     const newStats = {
@@ -167,13 +165,13 @@ export default function FlashcardReview({ moduleId, deckId, totalCards = 0, onCo
     if (isFirstTime) {
       // New user - no flashcards created yet
       return (
-        <Card className="w-full max-w-2xl mx-auto">
-          <CardContent className="flex flex-col items-center justify-center p-12 text-center">
-            <Brain className="h-16 w-16 text-primary mb-4" />
-            <h3 className="text-2xl font-bold mb-2">No Flashcards Yet</h3>
-            <p className="text-muted-foreground mb-6">
+      <Card className="w-full max-w-2xl mx-auto">
+        <CardContent className="flex flex-col items-center justify-center p-12 text-center">
+          <Brain className="h-16 w-16 text-primary mb-4" />
+          <h3 className="text-2xl font-bold mb-2">No Flashcards Yet</h3>
+          <p className="text-muted-foreground mb-6">
               Create your first flashcard to start using spaced repetition for better retention!
-            </p>
+          </p>
 
             {/* Onboarding CTAs */}
             <div className="space-y-3 w-full max-w-md">
@@ -234,11 +232,11 @@ export default function FlashcardReview({ moduleId, deckId, totalCards = 0, onCo
   return (
     <div className="w-full max-w-2xl mx-auto space-y-4">
       {/* Development Mode Banner */}
-      {IS_DEV_MODE && !user && (
+      {isStaticMode && (
         <Card className="border-yellow-500 bg-yellow-500/10">
           <CardContent className="py-3">
             <p className="text-sm text-yellow-600 dark:text-yellow-400">
-              ⚠️ <strong>Development Mode</strong> - Using mock user ID ({DEV_USER_ID}). Real authentication not required.
+              ⚠️ <strong>Shared Flashcard Library</strong> - Reviewing static TCO cards without signing in.
             </p>
           </CardContent>
         </Card>

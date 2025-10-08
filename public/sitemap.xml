@@ -2,241 +2,241 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://your-domain.com/tanium</loc>
-    <lastmod>2025-10-05</lastmod>
+    <lastmod>2025-10-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://your-domain.com/tanium/welcome</loc>
-    <lastmod>2025-10-05</lastmod>
+    <lastmod>2025-10-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://your-domain.com/tanium/auth/signin</loc>
-    <lastmod>2025-10-05</lastmod>
+    <lastmod>2025-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://your-domain.com/tanium/auth/signup</loc>
-    <lastmod>2025-10-05</lastmod>
+    <lastmod>2025-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://your-domain.com/tanium/pricing</loc>
-    <lastmod>2025-10-05</lastmod>
+    <lastmod>2025-10-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://your-domain.com/tanium/dashboard</loc>
-    <lastmod>2025-10-05</lastmod>
+    <lastmod>2025-10-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://your-domain.com/tanium/practice</loc>
-    <lastmod>2025-10-05</lastmod>
+    <lastmod>2025-10-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://your-domain.com/tanium/mock</loc>
-    <lastmod>2025-10-05</lastmod>
+    <lastmod>2025-10-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://your-domain.com/tanium/review</loc>
-    <lastmod>2025-10-05</lastmod>
+    <lastmod>2025-10-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://your-domain.com/tanium/exam</loc>
-    <lastmod>2025-10-05</lastmod>
+    <lastmod>2025-10-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://your-domain.com/tanium/simulator</loc>
-    <lastmod>2025-10-05</lastmod>
+    <lastmod>2025-10-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://your-domain.com/tanium/study</loc>
-    <lastmod>2025-10-05</lastmod>
+    <lastmod>2025-10-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://your-domain.com/tanium/learn</loc>
-    <lastmod>2025-10-05</lastmod>
+    <lastmod>2025-10-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://your-domain.com/tanium/modules</loc>
-    <lastmod>2025-10-05</lastmod>
+    <lastmod>2025-10-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://your-domain.com/tanium/videos</loc>
-    <lastmod>2025-10-05</lastmod>
+    <lastmod>2025-10-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://your-domain.com/tanium/kb</loc>
-    <lastmod>2025-10-05</lastmod>
+    <lastmod>2025-10-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://your-domain.com/tanium/guides</loc>
-    <lastmod>2025-10-05</lastmod>
+    <lastmod>2025-10-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://your-domain.com/tanium/progress</loc>
-    <lastmod>2025-10-05</lastmod>
+    <lastmod>2025-10-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://your-domain.com/tanium/analytics</loc>
-    <lastmod>2025-10-05</lastmod>
+    <lastmod>2025-10-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://your-domain.com/tanium/assessments</loc>
-    <lastmod>2025-10-05</lastmod>
+    <lastmod>2025-10-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://your-domain.com/tanium/notes</loc>
-    <lastmod>2025-10-05</lastmod>
+    <lastmod>2025-10-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://your-domain.com/tanium/profile</loc>
-    <lastmod>2025-10-05</lastmod>
+    <lastmod>2025-10-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://your-domain.com/tanium/settings</loc>
-    <lastmod>2025-10-05</lastmod>
+    <lastmod>2025-10-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://your-domain.com/tanium/team</loc>
-    <lastmod>2025-10-05</lastmod>
+    <lastmod>2025-10-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://your-domain.com/tanium/learn/asking-questions</loc>
-    <lastmod>2025-10-05</lastmod>
+    <lastmod>2025-10-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://your-domain.com/tanium/learn/refining-questions</loc>
-    <lastmod>2025-10-05</lastmod>
+    <lastmod>2025-10-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://your-domain.com/tanium/learn/taking-action</loc>
-    <lastmod>2025-10-05</lastmod>
+    <lastmod>2025-10-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://your-domain.com/tanium/learn/navigation-modules</loc>
-    <lastmod>2025-10-05</lastmod>
+    <lastmod>2025-10-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://your-domain.com/tanium/learn/reporting-export</loc>
-    <lastmod>2025-10-05</lastmod>
+    <lastmod>2025-10-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://your-domain.com/tanium/learn/query-builder</loc>
-    <lastmod>2025-10-05</lastmod>
+    <lastmod>2025-10-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://your-domain.com/tanium/domains/tanium-console-navigation</loc>
-    <lastmod>2025-10-05</lastmod>
+    <lastmod>2025-10-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://your-domain.com/tanium/domains/asking-questions</loc>
-    <lastmod>2025-10-05</lastmod>
+    <lastmod>2025-10-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://your-domain.com/tanium/domains/refining-questions</loc>
-    <lastmod>2025-10-05</lastmod>
+    <lastmod>2025-10-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://your-domain.com/tanium/domains/taking-action-and-remediating</loc>
-    <lastmod>2025-10-05</lastmod>
+    <lastmod>2025-10-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://your-domain.com/tanium/domains/reporting-and-data-export</loc>
-    <lastmod>2025-10-05</lastmod>
+    <lastmod>2025-10-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://your-domain.com/tanium/videos/asking-questions</loc>
-    <lastmod>2025-10-05</lastmod>
+    <lastmod>2025-10-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://your-domain.com/tanium/videos/refining-questions</loc>
-    <lastmod>2025-10-05</lastmod>
+    <lastmod>2025-10-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://your-domain.com/tanium/videos/taking-action</loc>
-    <lastmod>2025-10-05</lastmod>
+    <lastmod>2025-10-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://your-domain.com/tanium/videos/navigation-modules</loc>
-    <lastmod>2025-10-05</lastmod>
+    <lastmod>2025-10-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://your-domain.com/tanium/videos/reporting-export</loc>
-    <lastmod>2025-10-05</lastmod>
+    <lastmod>2025-10-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>

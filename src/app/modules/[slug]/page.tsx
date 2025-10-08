@@ -20,6 +20,7 @@ const SLUG_TO_FILENAME: Record<string, string> = {
   "tanium-platform-foundation": "00-tanium-platform-foundation.mdx",
   "platform-foundation": "00-tanium-platform-foundation.mdx",
   "asking-questions": "01-asking-questions.mdx",
+  "asking-questions-learn": "01-asking-questions-learn.mdx",
   "refining-questions-targeting": "02-refining-questions-targeting.mdx",
   "refining-questions": "02-refining-questions-targeting.mdx",
   "taking-action-packages-actions": "03-taking-action-packages-actions.mdx",

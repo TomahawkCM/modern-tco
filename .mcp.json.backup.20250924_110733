@@ -31,7 +31,7 @@
       "command": "npx",
       "args": ["-y", "firecrawl-mcp"],
       "env": {
-        "FIRECRAWL_API_KEY": "fc-752485b3ef264377acd98f7f6f966dd1"
+        "FIRECRAWL_API_KEY": "${FIRECRAWL_API_KEY}"
       }
     },
     "playwright": {

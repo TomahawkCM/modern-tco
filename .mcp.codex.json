@@ -6,12 +6,24 @@
       "env": {
         "SUPABASE_URL": "${SUPABASE_URL}",
         "SUPABASE_ANON_KEY": "${SUPABASE_ANON_KEY}",
-        "SUPABASE_SERVICE_KEY": "${SUPABASE_SERVICE_KEY}"
+        "SUPABASE_SERVICE_ROLE_KEY": "${SUPABASE_SERVICE_ROLE_KEY}",
+        "MCP_API_KEY": "${MCP_API_KEY}"
       }
     },
     "shadcn": {
       "command": "npx",
       "args": ["shadcn@latest", "mcp"]
+    },
+    "firecrawl": {
+      "command": "npx",
+      "args": ["-y", "firecrawl-mcp"],
+      "env": {
+        "FIRECRAWL_API_KEY": "${FIRECRAWL_API_KEY}"
+      }
+    },
+    "chrome-devtools": {
+      "command": "node",
+      "args": ["scripts/mcp-devtools-launch.js"]
     },
     "postgresql": {
       "command": "npx",

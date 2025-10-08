@@ -84,7 +84,17 @@ class FlashcardService {
     return data as Flashcard[];
   }
 
-  async getFlashcardsByModule(userId: string, moduleId: string): Promise<Flashcard[]> {
+  async getFlashcardsByModule(userId: string | undefined, moduleId: string): Promise<Flashcard[]> {
+    if (!userId) {
+      const response = await this.callStaticEndpoint<{ cards: Flashcard[] }>("cards", {
+        method: "GET",
+        query: {
+          moduleId,
+        },
+      });
+      return response?.cards || [];
+    }
+
     const { data, error } = await supabase
       .from("flashcards")
       .select()
@@ -96,7 +106,17 @@ class FlashcardService {
     return data as Flashcard[];
   }
 
-  async getFlashcardsByDomain(userId: string, domain: string): Promise<Flashcard[]> {
+  async getFlashcardsByDomain(userId: string | undefined, domain: string): Promise<Flashcard[]> {
+    if (!userId) {
+      const response = await this.callStaticEndpoint<{ cards: Flashcard[] }>("cards", {
+        method: "GET",
+        query: {
+          domain,
+        },
+      });
+      return response?.cards || [];
+    }
+
     console.log('[flashcardService] getFlashcardsByDomain:', { userId, domain });
 
     const { data, error } = await supabase
@@ -131,7 +151,18 @@ class FlashcardService {
 
   // ==================== SRS (SPACED REPETITION) ====================
 
-  async getDueFlashcards(userId: string, limit: number = 20): Promise<Flashcard[]> {
+  async getDueFlashcards(userId: string | undefined, limit: number = 20): Promise<Flashcard[]> {
+    if (!userId) {
+      const response = await this.callStaticEndpoint<{ cards: Flashcard[] }>("cards", {
+        method: "GET",
+        query: {
+          dueOnly: "true",
+          limit: String(limit),
+        },
+      });
+      return response?.cards || [];
+    }
+
     const now = new Date().toISOString();
     console.log('[flashcardService] getDueFlashcards:', { userId, limit, now });
 
@@ -150,10 +181,25 @@ class FlashcardService {
 
   async reviewFlashcard(
     flashcardId: string,
-    userId: string,
+    userId: string | undefined,
     rating: SRRating,
     timeSpentSeconds: number
   ): Promise<{ flashcard: Flashcard; review: FlashcardReview } | null> {
+    if (!userId) {
+      const response = await this.callStaticEndpoint<{
+        flashcard: Flashcard;
+        review: FlashcardReview;
+      }>("review", {
+        method: "POST",
+        body: {
+          flashcardId,
+          rating,
+          timeSpentSeconds,
+        },
+      });
+      return response ?? null;
+    }
+
     // Get current flashcard
     const flashcard = await this.getFlashcard(flashcardId);
     if (!flashcard || flashcard.user_id !== userId) return null;
@@ -221,7 +267,18 @@ class FlashcardService {
     };
   }
 
-  async getNewFlashcards(userId: string, limit: number = 5): Promise<Flashcard[]> {
+  async getNewFlashcards(userId: string | undefined, limit: number = 5): Promise<Flashcard[]> {
+    if (!userId) {
+      const response = await this.callStaticEndpoint<{ cards: Flashcard[] }>("cards", {
+        method: "GET",
+        query: {
+          newOnly: "true",
+          limit: String(limit),
+        },
+      });
+      return response?.cards || [];
+    }
+
     console.log('[flashcardService] getNewFlashcards:', { userId, limit });
 
     const { data, error } = await supabase
@@ -237,7 +294,24 @@ class FlashcardService {
     return data as Flashcard[];
   }
 
-  async getFlashcardStats(userId: string): Promise<FlashcardStats> {
+  async getFlashcardStats(userId: string | undefined): Promise<FlashcardStats> {
+    if (!userId) {
+      const response = await this.callStaticEndpoint<FlashcardStats>("stats");
+      if (response) {
+        return response;
+      }
+      return {
+        totalCards: 0,
+        dueToday: 0,
+        newCards: 0,
+        learningCards: 0,
+        matureCards: 0,
+        avgRetentionRate: 0,
+        longestStreak: 0,
+        currentStreak: 0,
+      };
+    }
+
     console.log('[flashcardService] getFlashcardStats:', { userId });
 
     const { data: allCards, error } = await supabase
@@ -350,7 +424,17 @@ class FlashcardService {
     return data as FlashcardDeck[];
   }
 
-  async getDeckCards(deckId: string): Promise<Flashcard[]> {
+  async getDeckCards(deckId: string, userId?: string): Promise<Flashcard[]> {
+    if (!userId) {
+      const response = await this.callStaticEndpoint<{ cards: Flashcard[] }>("cards", {
+        method: "GET",
+        query: {
+          deckId,
+        },
+      });
+      return response?.cards || [];
+    }
+
     const { data, error } = await supabase
       .from("flashcard_deck_cards")
       .select(`
@@ -422,6 +506,68 @@ class FlashcardService {
   }
 
   // ==================== HELPER METHODS ====================
+
+  private readonly staticApiPath = "/api/flashcards/public";
+
+  private async callStaticEndpoint<T>(
+    action: string,
+    options: {
+      method?: "GET" | "POST";
+      query?: Record<string, string | number | undefined>;
+      body?: Record<string, unknown>;
+    } = {}
+  ): Promise<T | null> {
+    const method = options.method ?? "GET";
+
+    try {
+      if (method === "GET") {
+        const params = new URLSearchParams({ action });
+        if (options.query) {
+          for (const [key, value] of Object.entries(options.query)) {
+            if (value !== undefined && value !== null) {
+              params.set(key, String(value));
+            }
+          }
+        }
+
+        const response = await fetch(`${this.staticApiPath}?${params.toString()}`, {
+          method: "GET",
+          cache: "no-store",
+        });
+
+        if (!response.ok) {
+          console.error(`[flashcardService] Static GET ${action} failed`, await response.text());
+          return null;
+        }
+
+        return (await response.json()) as T;
+      }
+
+      const body = {
+        action,
+        ...(options.body || {}),
+      };
+
+      const response = await fetch(this.staticApiPath, {
+        method: "POST",
+        cache: "no-store",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body),
+      });
+
+      if (!response.ok) {
+        console.error(`[flashcardService] Static POST ${action} failed`, await response.text());
+        return null;
+      }
+
+      return (await response.json()) as T;
+    } catch (error) {
+      console.error(`[flashcardService] Static endpoint ${action} error:`, error);
+      return null;
+    }
+  }
 
   private calculateStreaks(reviewDates: string[]): { longest: number; current: number } {
     if (reviewDates.length === 0) return { longest: 0, current: 0 };

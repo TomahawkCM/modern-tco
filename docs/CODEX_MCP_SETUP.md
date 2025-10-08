@@ -1,10 +1,10 @@
 # Codex-Only MCP Configuration
 
-This project includes a Codex-specific MCP config that does not touch or override any other AI tooling.
+This project includes a Codex-specific MCP config that does not touch or override any other AI tooling. The config now ships with dedicated servers for open-web research and live page diagnostics so Codex can review staging builds without enabling the full 30-server stack.
 
 ## Files
 
-- `.mcp.codex.json` — Minimal MCP set: `supabase`, `shadcn`, `postgresql`.
+- `.mcp.codex.json` — Codex-only MCP set: `supabase`, `shadcn`, `firecrawl`, `chrome-devtools`, `postgresql`.
 - `scripts/codex-run-mcp.ps1` — PowerShell runner that uses the Codex MCP config.
 - `scripts/codex-run-mcp.sh` — Bash/WSL runner that uses the Codex MCP config.
 
@@ -51,6 +51,39 @@ Both scripts:
   - `SUPABASE_URL`, `SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_KEY`
   - `DATABASE_URL` (falls back to `SUPABASE_DB_URL` if not set)
 
+## Available servers
+
+- `supabase` — Supabase REST/database automation.
+- `postgresql` — Direct SQL access when needed.
+- `shadcn` — UI component scaffolding.
+- `firecrawl` — Open-web crawling + search for diagnostics and competitive research.
+- `chrome-devtools` — Headless Chrome session for live page snapshots, console logs, and Lighthouse-style traces.
+
+### Environment requirements
+
+Populate `.env.local` (or export into your shell) with:
+
+```
+SUPABASE_URL=...
+SUPABASE_ANON_KEY=...
+SUPABASE_SERVICE_KEY=...
+DATABASE_URL=...            # optional; falls back to SUPABASE_DB_URL
+FIRECRAWL_API_KEY=...       # required for the firecrawl MCP server
+```
+
+The runner scripts now auto-inject these values so you do not have to export them manually.
+
+### Chrome DevTools server
+
+- First run will install Chrome for Testing into `.chrome/`.
+- Launches `chrome-devtools-mcp@latest` via `scripts/mcp-devtools-launch.js`.
+- Provides tools for DOM snapshots, screenshot capture, console output, and trace collection ideal for checking regressions in staging builds.
+
+### Firecrawl server
+
+- Wraps the `firecrawl-mcp` package, enabling web crawling/search directly inside Codex prompts.
+- Supports summarizing competitors, scraping staging pages behind a token, or comparing Lighthouse scores against public benchmarks.
+
 ## Why this approach
 
 - No changes to `.mcp.json` or any existing AI configs.
@@ -59,6 +92,7 @@ Both scripts:
 ## Notes
 
 - Ensure your `.env.local` contains valid Supabase credentials. The scripts do not write or persist any secrets.
+- If you have not added Firecrawl credentials before, request a key and place it in `.env.local`; without it the server registers but will return auth errors on first use.
 - If your `codex` binary supports `--mcp-config`, the scripts will use it; otherwise, they fall back to standard MCP config env vars.
 
 Tip: `codex mcp list --json` shows what Codex has registered globally. Project-local `.mcp.codex.json` is not read by `codex mcp list` until you run the sync step above.

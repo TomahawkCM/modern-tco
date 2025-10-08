@@ -10,7 +10,7 @@ if (!(Test-Path $mcpConfig)) { Write-Error "Missing MCP config: $mcpConfig"; exi
 # Backup env vars to avoid polluting the shell session
 $backup = @{}
 foreach ($k in @(
-  'SUPABASE_URL','SUPABASE_ANON_KEY','SUPABASE_SERVICE_KEY','DATABASE_URL',
+  'SUPABASE_URL','SUPABASE_ANON_KEY','SUPABASE_SERVICE_KEY','SUPABASE_SERVICE_ROLE_KEY','DATABASE_URL','FIRECRAWL_API_KEY','MCP_API_KEY',
   'MCP_CONFIG_PATH','ANTHROPIC_MCP_CONFIG','CLAUDE_MCP_CONFIG'
 )) { $backup[$k] = $env:$k }
 
@@ -25,10 +25,13 @@ if (Test-Path $dotenv) {
   if (-not $env:SUPABASE_URL) { $env:SUPABASE_URL = GetEnvFromDotenv "SUPABASE_URL" }
   if (-not $env:SUPABASE_ANON_KEY) { $env:SUPABASE_ANON_KEY = GetEnvFromDotenv "SUPABASE_ANON_KEY" }
   if (-not $env:SUPABASE_SERVICE_KEY) { $env:SUPABASE_SERVICE_KEY = GetEnvFromDotenv "SUPABASE_SERVICE_KEY" }
+  if (-not $env:SUPABASE_SERVICE_ROLE_KEY) { $env:SUPABASE_SERVICE_ROLE_KEY = GetEnvFromDotenv "SUPABASE_SERVICE_ROLE_KEY" }
   if (-not $env:DATABASE_URL) {
     $db = GetEnvFromDotenv "SUPABASE_DB_URL"
     if ($db) { $env:DATABASE_URL = $db }
   }
+  if (-not $env:FIRECRAWL_API_KEY) { $env:FIRECRAWL_API_KEY = GetEnvFromDotenv "FIRECRAWL_API_KEY" }
+  if (-not $env:MCP_API_KEY) { $env:MCP_API_KEY = GetEnvFromDotenv "MCP_API_KEY" }
 }
 
 # Hint the Codex runtime about which MCP config to use

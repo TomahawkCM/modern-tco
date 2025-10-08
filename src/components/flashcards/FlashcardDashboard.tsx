@@ -15,34 +15,28 @@ interface FlashcardDashboardProps {
   moduleId?: string;
 }
 
-const DEV_USER_ID = '5e244287-40af-4cad-aa90-5a7be354940a'; // Development mode user ID (actual dev user in database)
-const IS_DEV_MODE = process.env.NODE_ENV === 'development' || process.env.NEXT_PUBLIC_DEV_MODE === 'true';
-
 export default function FlashcardDashboard({ moduleId }: FlashcardDashboardProps) {
   const { user } = useAuth();
+  const isStaticMode = !user;
   const [stats, setStats] = useState<FlashcardStats | null>(null);
   const [activeTab, setActiveTab] = useState("review");
   const [isLoading, setIsLoading] = useState(true);
   const [isSeeding, setIsSeeding] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  // Always use dev user ID as fallback when no authenticated user (no auth required)
-  const effectiveUserId = user?.id || DEV_USER_ID;
-
   useEffect(() => {
     loadStats();
-  }, [effectiveUserId]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user?.id]);
 
   const loadStats = async () => {
-    if (!effectiveUserId) return;
-
     setIsLoading(true);
     try {
-      const data = await flashcardService.getFlashcardStats(effectiveUserId);
+      const data = await flashcardService.getFlashcardStats(user?.id);
       setStats(data);
 
       // Auto-seed if user has no flashcards
-      if (data.totalCards === 0) {
+      if (user?.id && data.totalCards === 0) {
         await autoSeedFlashcards();
       }
     } catch (error) {
@@ -53,23 +47,20 @@ export default function FlashcardDashboard({ moduleId }: FlashcardDashboardProps
   };
 
   const autoSeedFlashcards = async () => {
-    if (!effectiveUserId || isSeeding) return;
+    if (!user?.id || isSeeding) return;
 
     setIsSeeding(true);
     setError(null);
 
     try {
       console.log('🔄 Attempting to auto-seed flashcards...');
-      if (IS_DEV_MODE && !user) {
-        console.log('📝 Development mode: Using dev user ID', DEV_USER_ID);
-      }
 
       const response = await fetch('/api/flashcards/seed', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ user_id: effectiveUserId }),
+        body: JSON.stringify({ user_id: user.id }),
       });
 
       const data = await response.json();
@@ -79,7 +70,7 @@ export default function FlashcardDashboard({ moduleId }: FlashcardDashboardProps
 
         if (seededCount > 0) {
           console.log(`✅ Auto-seeded ${seededCount} flashcards`, data);
-          const newStats = await flashcardService.getFlashcardStats(effectiveUserId);
+          const newStats = await flashcardService.getFlashcardStats(user.id);
           setStats(newStats);
         } else if (data?.alreadySeeded) {
           console.log("ℹ️ Flashcards already seeded");
@@ -152,11 +143,11 @@ export default function FlashcardDashboard({ moduleId }: FlashcardDashboardProps
   return (
     <div className="space-y-6">
       {/* Development Mode Banner */}
-      {IS_DEV_MODE && !user && (
+      {isStaticMode && (
         <Card className="border-yellow-500 bg-yellow-500/10">
           <CardContent className="py-3">
             <p className="text-sm text-yellow-600 dark:text-yellow-400">
-              ⚠️ <strong>Development Mode</strong> - Using mock user ID ({DEV_USER_ID}). Real authentication not required.
+              ⚠️ <strong>Shared Flashcard Library</strong> - Showing read-only TCO flashcards without authentication.
             </p>
           </CardContent>
         </Card>

@@ -407,6 +407,15 @@ type RouteHandlerConfig<Route extends AppRouteHandlerRoutes = AppRouteHandlerRou
   type __Unused = __Check
 }
 
+// Validate ../../src/app/study/labs/[...slug]/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/study/labs/[...slug]">> = Specific
+  const handler = {} as typeof import("../../src/app/study/labs/[...slug]/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
 // Validate ../../src/app/study/page.tsx
 {
   type __IsExpected<Specific extends AppPageConfig<"/study">> = Specific
@@ -501,6 +510,42 @@ type RouteHandlerConfig<Route extends AppRouteHandlerRoutes = AppRouteHandlerRou
 {
   type __IsExpected<Specific extends AppPageConfig<"/welcome">> = Specific
   const handler = {} as typeof import("../../src/app/welcome/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../src/app/api/flashcards/debug/route.ts
+{
+  type __IsExpected<Specific extends RouteHandlerConfig<"/api/flashcards/debug">> = Specific
+  const handler = {} as typeof import("../../src/app/api/flashcards/debug/route.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../src/app/api/flashcards/public/route.ts
+{
+  type __IsExpected<Specific extends RouteHandlerConfig<"/api/flashcards/public">> = Specific
+  const handler = {} as typeof import("../../src/app/api/flashcards/public/route.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../src/app/api/flashcards/seed/route.ts
+{
+  type __IsExpected<Specific extends RouteHandlerConfig<"/api/flashcards/seed">> = Specific
+  const handler = {} as typeof import("../../src/app/api/flashcards/seed/route.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../src/app/api/flashcards/test/route.ts
+{
+  type __IsExpected<Specific extends RouteHandlerConfig<"/api/flashcards/test">> = Specific
+  const handler = {} as typeof import("../../src/app/api/flashcards/test/route.js")
   type __Check = __IsExpected<typeof handler>
   // @ts-ignore
   type __Unused = __Check

@@ -1,0 +1,183 @@
+---
+title: "Navigation & Basic Modules (Learn-style, Experimental)"
+id: "module-04L"
+domainSlug: "navigation-basic-modules"
+difficulty: "Beginner"
+estimatedTime: 80
+tags: ["console", "navigation", "modules", "experiment"]
+status: "experimental"
+lastUpdated: "2025-10-05"
+---
+
+import { MicroSection } from "@/components/mdx/MicroSection";
+import PracticeButton from "@/components/mdx/PracticeButton";
+import { MicroQuizMDX } from "@/components/learn-experimental/LearnExperimentalQuizGroup";
+import { getReadOnlyQuestions } from "@/lib/quiz/readOnlyQuestions";
+import { emitLearnExp } from "@/lib/telemetry/learnExperimental";
+
+# Navigation & Basic Modules (Learn Experimental Track)
+
+<MicroSection
+  id="unit-04L-01"
+  moduleId="module-04L"
+  title="Console Orientation"
+  estimatedMinutes={12}
+  sectionNumber={1}
+  totalSections={5}
+  keyTakeaways={[
+    "Use global navigation, breadcrumbs, and search to move without losing context.",
+    "Personalize the console with favorites and saved views.",
+    "Track session notifications to stay ahead of change."
+  ]}
+  quickCheck={
+    <MicroQuizMDX
+      moduleId="module-04L"
+      unitId="unit-04L-01"
+      quizIdPrefix="module-04L-unit-01"
+      questions={getReadOnlyQuestions({ domain: "navigation-basic-modules", tags: ["navigation"], limit: 3 })}
+    />
+  }
+>
+
+<PracticeButton
+  href="/study/labs/04-l/console-tour"
+  onClick={() => emitLearnExp({ moduleId: "module-04L", unitId: "unit-04L-01", action: "practice_start" })}
+>
+  Practice: Run a Five-Minute Console Tour
+</PracticeButton>
+
+</MicroSection>
+
+<MicroSection
+  id="unit-04L-02"
+  moduleId="module-04L"
+  title="Key Module Deep Dive"
+  estimatedMinutes={16}
+  sectionNumber={2}
+  totalSections={5}
+  keyTakeaways={[
+    "Understand the purpose of Discover, Deploy, and Enforce modules.",
+    "Identify entry points for security versus operations personas.",
+    "Document default dashboards and their refresh cadence."
+  ]}
+  quickCheck={
+    <MicroQuizMDX
+      moduleId="module-04L"
+      unitId="unit-04L-02"
+      quizIdPrefix="module-04L-unit-02"
+      questions={getReadOnlyQuestions({ domain: "navigation-basic-modules", tags: ["modules"], limit: 3 })}
+    />
+  }
+>
+
+<PracticeButton
+  href="/study/labs/04-l/module-map"
+  onClick={() => emitLearnExp({ moduleId: "module-04L", unitId: "unit-04L-02", action: "practice_start" })}
+>
+  Practice: Map Module Relationships
+</PracticeButton>
+
+</MicroSection>
+
+<MicroSection
+  id="unit-04L-03"
+  moduleId="module-04L"
+  title="Saved Questions & Favorites"
+  estimatedMinutes={14}
+  sectionNumber={3}
+  totalSections={5}
+  keyTakeaways={[
+    "Organize saved questions with naming conventions and tags.",
+    "Use favorites to speed up daily hygiene checks.",
+    "Monitor health status to catch broken or stale questions."
+  ]}
+  quickCheck={
+    <MicroQuizMDX
+      moduleId="module-04L"
+      unitId="unit-04L-03"
+      quizIdPrefix="module-04L-unit-03"
+      questions={getReadOnlyQuestions({ domain: "navigation-basic-modules", tags: ["saved-questions"], limit: 3 })}
+    />
+  }
+>
+
+<PracticeButton
+  href="/study/labs/04-l/saved-question-refresh"
+  onClick={() => emitLearnExp({ moduleId: "module-04L", unitId: "unit-04L-03", action: "practice_start" })}
+>
+  Practice: Refresh Saved Questions
+</PracticeButton>
+
+</MicroSection>
+
+<MicroSection
+  id="unit-04L-04"
+  moduleId="module-04L"
+  title="Module Hygiene & Baselines"
+  estimatedMinutes={18}
+  sectionNumber={4}
+  totalSections={5}
+  keyTakeaways={[
+    "Use health dashboards to detect module drift.",
+    "Log maintenance tasks for each foundational module.",
+    "Measure adoption with baseline metrics."
+  ]}
+  quickCheck={
+    <MicroQuizMDX
+      moduleId="module-04L"
+      unitId="unit-04L-04"
+      quizIdPrefix="module-04L-unit-04"
+      questions={getReadOnlyQuestions({ domain: "navigation-basic-modules", tags: ["hygiene"], limit: 3 })}
+    />
+  }
+>
+
+<PracticeButton
+  href="/study/labs/04-l/module-hygiene"
+  onClick={() => emitLearnExp({ moduleId: "module-04L", unitId: "unit-04L-04", action: "practice_start" })}
+>
+  Practice: Run a Module Hygiene Sweep
+</PracticeButton>
+
+</MicroSection>
+
+<MicroSection
+  id="unit-04L-05"
+  moduleId="module-04L"
+  title="Enablement & Storytelling"
+  estimatedMinutes={10}
+  sectionNumber={5}
+  totalSections={5}
+  keyTakeaways={[
+    "Teach the console flow to new teammates with a guided story.",
+    "Document quick wins linked to navigation shortcuts.",
+    "Capture feedback for continuous console improvement."
+  ]}
+  quickCheck={
+    <MicroQuizMDX
+      moduleId="module-04L"
+      unitId="unit-04L-05"
+      quizIdPrefix="module-04L-unit-05"
+      questions={getReadOnlyQuestions({ domain: "navigation-basic-modules", limit: 3 })}
+    />
+  }
+>
+
+<PracticeButton
+  href="/study/labs/04-l/enablement-storyboard"
+  onClick={() => emitLearnExp({ moduleId: "module-04L", unitId: "unit-04L-05", action: "practice_start" })}
+>
+  Practice: Create an Enablement Storyboard
+</PracticeButton>
+
+</MicroSection>
+
+## End-module knowledge check
+
+<MicroQuizMDX
+  moduleId="module-04L"
+  unitId="unit-04L-summary"
+  quizIdPrefix="module-04L-summary"
+  questions={getReadOnlyQuestions({ domain: "navigation-basic-modules", limit: 6 })}
+/>
+
