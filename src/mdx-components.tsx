@@ -1,4 +1,4 @@
-import type { MDXComponents } from "mdx/types";
+import type { MDXComponents } from "@mdx-js/react";
 import React from "react";
 
 // Direct imports required for MDX - dynamic imports don't work with useMDXComponents
