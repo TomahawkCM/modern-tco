@@ -36,3 +36,4 @@ hive-mind-prompt-*.txt
 .next/
 C:\Users\*
 .mdx-cache/
+pnpm-lock.yaml
