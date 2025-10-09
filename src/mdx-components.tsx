@@ -1,5 +1,9 @@
-import type { MDXComponents } from "@mdx-js/react";
 import React from "react";
+
+// Type definition for MDX components
+type MDXComponents = {
+  [key: string]: React.ComponentType<any>;
+};
 
 // Direct imports required for MDX - dynamic imports don't work with useMDXComponents
 // All MDX components registered globally - no explicit imports needed in .mdx files
@@ -20,7 +24,7 @@ function Anchor(props: React.AnchorHTMLAttributes<HTMLAnchorElement>) {
   return <a {...props} rel={rel} target={target} />;
 }
 
-export function useMDXComponents(components: MDXComponents): MDXComponents {
+export function useMDXComponents(components: MDXComponents = {}): MDXComponents {
   return {
     ...components,
     a: Anchor,
