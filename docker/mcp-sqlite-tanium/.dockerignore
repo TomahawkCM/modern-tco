@@ -1,0 +1,46 @@
+# Docker ignore file for sqlite-tanium MCP
+# Optimizes build performance and security
+
+# Git files
+.git
+.gitignore
+.gitattributes
+
+# Documentation
+README.md
+*.md
+
+# IDE files
+.vscode
+.idea
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Test files
+test/
+tests/
+*.test.js
+*.spec.js
+
+# Build artifacts
+node_modules/
+dist/
+build/
+*.log
+
+# Database files (should be in volumes, not image)
+*.db
+*.db-shm
+*.db-wal
+*.sqlite
+*.sqlite3
+
+# Environment files
+.env
+.env.*
+!.env.example

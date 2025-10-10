@@ -8,12 +8,12 @@
  */
 
 import React, { useState, useEffect, useRef } from 'react';
-import { Send, ThumbsUp, ThumbsDown, Sparkles, Book, Video, Flask, FileText } from 'lucide-react';
+import { Send, ThumbsUp, ThumbsDown, Sparkles, Book, Video, TestTube, FileText } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Card } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
-import { toast } from '@/components/ui/use-toast';
+import { toast } from '@/hooks/use-toast';
 import {
   sendMessage,
   createConversation,
@@ -305,7 +305,7 @@ export function AITutorChat({
               >
                 {resource.type === 'module' && <Book className="w-3 h-3" />}
                 {resource.type === 'video' && <Video className="w-3 h-3" />}
-                {resource.type === 'lab' && <Flask className="w-3 h-3" />}
+                {resource.type === 'lab' && <TestTube className="w-3 h-3" />}
                 {resource.type === 'practice' && <FileText className="w-3 h-3" />}
                 {resource.title}
               </a>

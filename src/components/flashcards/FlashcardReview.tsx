@@ -211,11 +211,11 @@ export default function FlashcardReview({ moduleId, deckId, totalCards = 0, onCo
           <div className="grid grid-cols-2 gap-4 w-full max-w-md">
             <div className="p-4 bg-muted rounded-lg">
               <p className="text-sm text-muted-foreground">Cards Reviewed Today</p>
-              <p className="text-2xl font-bold">{sessionStats.totalReviewed}</p>
+              <p className="text-2xl font-bold text-foreground">{sessionStats.totalReviewed}</p>
             </div>
             <div className="p-4 bg-muted rounded-lg">
               <p className="text-sm text-muted-foreground">Accuracy</p>
-              <p className="text-2xl font-bold">
+              <p className="text-2xl font-bold text-foreground">
                 {sessionStats.totalReviewed > 0
                   ? Math.round((sessionStats.correct / sessionStats.totalReviewed) * 100)
                   : 0}%
@@ -315,17 +315,17 @@ export default function FlashcardReview({ moduleId, deckId, totalCards = 0, onCo
         <div className="p-3 bg-muted rounded-md text-center">
           <Brain className="h-4 w-4 mx-auto mb-1 text-primary" />
           <p className="text-xs text-muted-foreground">Reviewed</p>
-          <p className="text-sm font-bold">{sessionStats.totalReviewed}</p>
+          <p className="text-sm font-bold text-foreground">{sessionStats.totalReviewed}</p>
         </div>
         <div className="p-3 bg-muted rounded-md text-center">
           <Check className="h-4 w-4 mx-auto mb-1 text-green-500" />
           <p className="text-xs text-muted-foreground">Correct</p>
-          <p className="text-sm font-bold">{sessionStats.correct}</p>
+          <p className="text-sm font-bold text-foreground">{sessionStats.correct}</p>
         </div>
         <div className="p-3 bg-muted rounded-md text-center">
           <TrendingUp className="h-4 w-4 mx-auto mb-1 text-blue-500" />
           <p className="text-xs text-muted-foreground">Accuracy</p>
-          <p className="text-sm font-bold">
+          <p className="text-sm font-bold text-foreground">
             {sessionStats.totalReviewed > 0
               ? Math.round((sessionStats.correct / sessionStats.totalReviewed) * 100)
               : 0}%
@@ -334,7 +334,7 @@ export default function FlashcardReview({ moduleId, deckId, totalCards = 0, onCo
         <div className="p-3 bg-muted rounded-md text-center">
           <Clock className="h-4 w-4 mx-auto mb-1 text-orange-500" />
           <p className="text-xs text-muted-foreground">Avg Time</p>
-          <p className="text-sm font-bold">{sessionStats.avgTimePerCard}s</p>
+          <p className="text-sm font-bold text-foreground">{sessionStats.avgTimePerCard}s</p>
         </div>
       </div>
 
@@ -343,7 +343,7 @@ export default function FlashcardReview({ moduleId, deckId, totalCards = 0, onCo
         <CardHeader>
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <Badge variant={currentCard.srs_reps === 0 ? "default" : "secondary"} className="text-white">
+              <Badge variant={currentCard.srs_reps === 0 ? "default" : "secondary"}>
                 {currentCard.srs_reps === 0 ? "New" : `Review ${currentCard.total_reviews}`}
               </Badge>
               <Badge variant="outline">{currentCard.card_type}</Badge>
@@ -364,7 +364,7 @@ export default function FlashcardReview({ moduleId, deckId, totalCards = 0, onCo
           {/* Front of card */}
           <div className="mb-6">
             <p className="text-sm text-muted-foreground mb-2">Question:</p>
-            <h2 className="text-2xl font-bold">{currentCard.front_text}</h2>
+            <h2 className="text-2xl font-bold text-foreground">{currentCard.front_text}</h2>
             {currentCard.image_url && (
               <img
                 src={currentCard.image_url}
@@ -378,10 +378,10 @@ export default function FlashcardReview({ moduleId, deckId, totalCards = 0, onCo
           {showAnswer && (
             <div className="border-t pt-6 animate-in fade-in-50 duration-300">
               <p className="text-sm text-muted-foreground mb-2">Answer:</p>
-              <p className="text-lg">{currentCard.back_text}</p>
+              <p className="text-lg text-foreground">{currentCard.back_text}</p>
               {currentCard.explanation && (
                 <div className="mt-4 p-3 bg-muted rounded-md">
-                  <p className="text-sm font-medium mb-1">Explanation:</p>
+                  <p className="text-sm font-medium text-foreground mb-1">Explanation:</p>
                   <p className="text-sm text-muted-foreground">{currentCard.explanation}</p>
                 </div>
               )}
@@ -493,7 +493,7 @@ export default function FlashcardReview({ moduleId, deckId, totalCards = 0, onCo
       {currentCard.tags && currentCard.tags.length > 0 && (
         <div className="flex gap-2 flex-wrap">
           {currentCard.tags.map((tag) => (
-            <Badge key={tag} variant="secondary" className="text-xs text-white">
+            <Badge key={tag} variant="secondary" className="text-xs">
               {tag}
             </Badge>
           ))}

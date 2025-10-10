@@ -158,7 +158,7 @@ export default function FlashcardDashboard({ moduleId }: FlashcardDashboardProps
         <Card>
           <CardContent className="pt-6 text-center">
             <Brain className="h-6 w-6 mx-auto mb-2 text-primary" />
-            <p className="text-2xl font-bold">{stats?.totalCards || 0}</p>
+            <p className="text-2xl font-bold text-foreground">{stats?.totalCards || 0}</p>
             <p className="text-xs text-muted-foreground">Total Cards</p>
           </CardContent>
         </Card>
@@ -166,7 +166,7 @@ export default function FlashcardDashboard({ moduleId }: FlashcardDashboardProps
         <Card>
           <CardContent className="pt-6 text-center">
             <Clock className="h-6 w-6 mx-auto mb-2 text-orange-500" />
-            <p className="text-2xl font-bold">{stats?.dueToday || 0}</p>
+            <p className="text-2xl font-bold text-foreground">{stats?.dueToday || 0}</p>
             <p className="text-xs text-muted-foreground">Due Today</p>
           </CardContent>
         </Card>
@@ -174,7 +174,7 @@ export default function FlashcardDashboard({ moduleId }: FlashcardDashboardProps
         <Card>
           <CardContent className="pt-6 text-center">
             <Target className="h-6 w-6 mx-auto mb-2 text-green-500" />
-            <p className="text-2xl font-bold">{stats?.newCards || 0}</p>
+            <p className="text-2xl font-bold text-foreground">{stats?.newCards || 0}</p>
             <p className="text-xs text-muted-foreground">New Cards</p>
           </CardContent>
         </Card>
@@ -182,7 +182,7 @@ export default function FlashcardDashboard({ moduleId }: FlashcardDashboardProps
         <Card>
           <CardContent className="pt-6 text-center">
             <BookOpen className="h-6 w-6 mx-auto mb-2 text-blue-500" />
-            <p className="text-2xl font-bold">{stats?.learningCards || 0}</p>
+            <p className="text-2xl font-bold text-foreground">{stats?.learningCards || 0}</p>
             <p className="text-xs text-muted-foreground">Learning</p>
           </CardContent>
         </Card>
@@ -190,7 +190,7 @@ export default function FlashcardDashboard({ moduleId }: FlashcardDashboardProps
         <Card>
           <CardContent className="pt-6 text-center">
             <TrendingUp className="h-6 w-6 mx-auto mb-2 text-purple-500" />
-            <p className="text-2xl font-bold">{stats?.avgRetentionRate || 0}%</p>
+            <p className="text-2xl font-bold text-foreground">{stats?.avgRetentionRate || 0}%</p>
             <p className="text-xs text-muted-foreground">Retention</p>
           </CardContent>
         </Card>
@@ -198,7 +198,7 @@ export default function FlashcardDashboard({ moduleId }: FlashcardDashboardProps
         <Card>
           <CardContent className="pt-6 text-center">
             <Flame className="h-6 w-6 mx-auto mb-2 text-red-500" />
-            <p className="text-2xl font-bold">{stats?.currentStreak || 0}</p>
+            <p className="text-2xl font-bold text-foreground">{stats?.currentStreak || 0}</p>
             <p className="text-xs text-muted-foreground">Day Streak</p>
           </CardContent>
         </Card>

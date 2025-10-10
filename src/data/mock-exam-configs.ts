@@ -337,10 +337,11 @@ export function getNextRecommendedExam(
 
 /**
  * Calculate question count per domain based on distribution
+ * Returns database-compatible domain keys (snake_case)
  */
 export function calculateDomainQuestionCounts(
   template: MockExamTemplate
-): Record<TCODomain, number> {
+): Record<string, number> {
   const { totalQuestions, domainDistribution } = template;
 
   return {

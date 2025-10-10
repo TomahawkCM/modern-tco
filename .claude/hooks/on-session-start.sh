@@ -104,6 +104,7 @@ MCP_SERVERS=(
   "playwright"
   "sqlite-tanium"
   "shadcn"
+  "pv-bhat-vibe-check-mcp-server"
 )
 
 echo "  ℹ️  Required MCP servers:"
@@ -114,7 +115,23 @@ done
 echo "  ✅ MCP servers configured in Claude Code settings"
 
 ###############################################################################
-# 5. Set up monitoring and analytics
+# 5. Initialize Vibe Check MCP Server (Metacognitive Guardrails)
+###############################################################################
+echo ""
+echo "🧠 Vibe Check MCP Server:"
+
+# Check if vibe-check initialization script exists
+VIBE_CHECK_SCRIPT="$PROJECT_ROOT/.claude/scripts/init-vibe-check.sh"
+if [ -f "$VIBE_CHECK_SCRIPT" ]; then
+  # Run the vibe-check initialization script
+  bash "$VIBE_CHECK_SCRIPT"
+else
+  echo "  ⚠️  Vibe Check initialization script not found"
+  echo "  ℹ️  Expected: $VIBE_CHECK_SCRIPT"
+fi
+
+###############################################################################
+# 6. Set up monitoring and analytics
 ###############################################################################
 echo ""
 echo "📊 Monitoring Configuration:"
@@ -154,7 +171,7 @@ else
 fi
 
 ###############################################################################
-# 6. Enable cross-session memory
+# 7. Enable cross-session memory
 ###############################################################################
 echo ""
 echo "💾 Cross-Session Memory:"
@@ -169,7 +186,7 @@ else
 fi
 
 ###############################################################################
-# 7. Display quick start commands
+# 8. Display quick start commands
 ###############################################################################
 echo ""
 echo "🚀 Available Agent Teams:"
@@ -191,12 +208,13 @@ echo "✅ Session initialization complete!"
 echo ""
 
 ###############################################################################
-# 8. Set environment variables for Claude context
+# 9. Set environment variables for Claude context
 ###############################################################################
 export TANIUM_TCO_LMS=true
 export HIVE_MIND_ENABLED=true
 export AGENT_COORDINATION=hierarchical
 export MCP_AGENT_COUNT=240
+export VIBE_CHECK_ENABLED=true
 
 # Return success
 exit 0

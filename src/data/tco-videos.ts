@@ -16,6 +16,19 @@ export const tcoVideos: TCOVideo[] = [
     thumbnail: '/thumbnails/tco-navigation.jpg',
     transcriptUrl: '/transcripts/tco-navigation-basics.vtt'
   },
+  {
+    id: 'single-endpoint-view-helpdesk',
+    title: 'Single Endpoint View - Tanium for Help Desk - Tanium Tech Talks #129',
+    description: 'Master the single endpoint view feature for efficient help desk operations. Learn to access detailed endpoint information, manage offline data, create custom panels, and take actions directly on endpoints. Covers endpoint overview, management, investigation, and customization for your specific needs.',
+    url: 'https://www.youtube.com/watch?v=C0DMVxI4sGE',
+    duration: 2229, // 37 minutes 9 seconds
+    moduleId: 'navigation_basic_functions',
+    domain: 'Navigation & Modules',
+    difficulty: 'Intermediate',
+    tags: ['navigation', 'help-desk', 'endpoint-management', 'single-endpoint-view', 'custom-panels', 'rbac', 'tco'],
+    thumbnail: 'https://i.ytimg.com/vi/C0DMVxI4sGE/maxresdefault.jpg',
+    transcriptUrl: '/transcripts/single-endpoint-view-helpdesk.vtt'
+  },
 
   // Asking Questions (22% exam weight)
   {

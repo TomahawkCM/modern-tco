@@ -64,6 +64,18 @@ export const TCODomain = {
 
 export type TCODomain = typeof TCODomain[keyof typeof TCODomain];
 
+/**
+ * Database domain format (snake_case) aligned with content population schema
+ * Used by: flashcard_library, questions (with domain field), mock exam builder
+ */
+export type DatabaseDomain =
+  | 'asking_questions'
+  | 'refining_targeting'
+  | 'taking_action'
+  | 'navigation'
+  | 'reporting'
+  | 'troubleshooting';
+
 // Official TCO Exam Domain Weightings - using core enum only
 export const TCO_DOMAIN_WEIGHTS: Record<TCODomain, number> = {
   [TCODomain.ASKING_QUESTIONS]: 22,
