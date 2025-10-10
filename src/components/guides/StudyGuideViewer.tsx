@@ -6,6 +6,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
@@ -79,10 +81,12 @@ export function StudyGuideViewer({
   };
 
   const renderMarkdownContent = (content: string) => {
-    // Simple markdown-like rendering (for more complex markdown, use a library like react-markdown)
+    // Secure markdown rendering using react-markdown (prevents XSS attacks)
     return (
       <div className="prose prose-slate dark:prose-invert max-w-none">
-        <div dangerouslySetInnerHTML={{ __html: content.replace(/\n/g, "<br/>") }} />
+        <ReactMarkdown remarkPlugins={[remarkGfm]}>
+          {content}
+        </ReactMarkdown>
       </div>
     );
   };

@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useMemo } from 'react';
+import DOMPurify from 'dompurify';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Alert, AlertDescription } from '@/components/ui/alert';
@@ -232,7 +233,12 @@ export function QueryPreview({
               ) : (
                 <div
                   className="text-gray-300"
-                  dangerouslySetInnerHTML={{ __html: highlightedQuery }}
+                  dangerouslySetInnerHTML={{
+                    __html: DOMPurify.sanitize(highlightedQuery, {
+                      ALLOWED_TAGS: ['span', 'div'],
+                      ALLOWED_ATTR: ['class']
+                    })
+                  }}
                 />
               )
             ) : (
