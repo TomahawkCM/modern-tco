@@ -131,7 +131,7 @@ export async function getDatabaseWeightedQuestions(count: number = 65): Promise<
         explanation: dbQuestion.explanation || undefined,
         tags: dbQuestion.tags || [],
         studyGuideRef: dbQuestion.study_guide_ref || undefined,
-        reference: dbQuestion.reference || undefined,
+        reference: dbQuestion.study_guide_ref || dbQuestion.official_ref || undefined,
       };
 
       if (!questionsByDomain[question.domain]) {
@@ -176,7 +176,7 @@ export async function getDatabaseWeightedQuestions(count: number = 65): Promise<
             explanation: dbQ.explanation || undefined,
             tags: dbQ.tags || [],
             studyGuideRef: dbQ.study_guide_ref || undefined,
-            reference: dbQ.reference || undefined,
+            reference: dbQ.study_guide_ref || dbQ.official_ref || undefined,
           } as Question;
         })
         .filter((q) => !usedIds.has(q.id));
@@ -512,6 +512,6 @@ function transformDatabaseQuestion(dbQ: Tables<"questions">): Question {
     explanation: dbQ.explanation || undefined,
     tags,
     studyGuideRef: dbQ.study_guide_ref || undefined,
-    reference: dbQ.reference || undefined, // Include reference property
+    reference: dbQ.study_guide_ref || dbQ.official_ref || undefined, // Include reference property
   };
 }

@@ -102,8 +102,8 @@ export function DashboardContent() {
   const recentBookmarkEntries = useMemo<BookmarkEntry[]>(
     () =>
       recentBookmarks.map((bookmark: UserBookmarkWithDetails) => {
-        const moduleId = bookmark.module_id ?? undefined;
         const sectionId = bookmark.section_id ?? undefined;
+        const moduleId = bookmark.section?.module_id ?? bookmark.section?.module?.id ?? undefined;
 
         return {
           id: String(bookmark.id),
@@ -112,8 +112,10 @@ export function DashboardContent() {
               ? bookmark.section.title
               : "Untitled Section",
           moduleTitle:
-            typeof bookmark.module?.title === "string" ? bookmark.module.title : "Unknown Module",
-          notes: bookmark.notes ?? undefined,
+            typeof bookmark.section?.module?.title === "string"
+              ? bookmark.section.module.title
+              : "Unknown Module",
+          notes: bookmark.note ?? undefined,
           href: moduleId && sectionId ? `/study/${moduleId}#${sectionId}` : "#",
         };
       }),

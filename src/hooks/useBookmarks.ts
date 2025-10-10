@@ -120,7 +120,11 @@ export function useBookmarks() {
 
   // Get bookmarks by module
   const getBookmarksByModule = (moduleId: string): UserStudyBookmark[] => {
-    return bookmarks.filter((bookmark) => bookmark.module_id === moduleId);
+    return bookmarks.filter((bookmark) => {
+      // Access module_id through the section relationship
+      const bookmarkModuleId = (bookmark as any).section?.module_id;
+      return bookmarkModuleId === moduleId;
+    });
   };
 
   // Get bookmarks count

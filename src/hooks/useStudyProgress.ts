@@ -78,13 +78,18 @@ export function useStudyProgress() {
   // Get progress status for a section
   const getSectionStatus = (sectionId: string): StudyStatus => {
     const sectionProgress = getSectionProgress(sectionId);
-    return sectionProgress?.status ?? "not_started";
+    return (sectionProgress?.status as StudyStatus) ?? "not_started";
   };
 
   // Get completion percentage for a section
   const getSectionCompletion = (sectionId: string): number => {
     const sectionProgress = getSectionProgress(sectionId);
-    return sectionProgress?.completion_percentage ?? 0;
+    // Database doesn't have completion_percentage field
+    // Calculate based on status: completed = 100%, in_progress = 50%, not_started = 0%
+    if (!sectionProgress) return 0;
+    if (sectionProgress.status === 'completed' || sectionProgress.completed_at) return 100;
+    if (sectionProgress.status === 'in_progress') return 50;
+    return 0;
   };
 
   // Check if section is completed

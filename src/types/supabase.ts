@@ -54,18 +54,18 @@ export type TCODomain =
 export type Difficulty = 'Beginner' | 'Intermediate' | 'Advanced' | 'Expert';
 
 // Lightweight enhanced interfaces frequently used in the app
-export interface StudyModuleWithSections extends StudyModule {
+export type StudyModuleWithSections = Omit<StudyModule, 'exam_prep' | 'learning_objectives' | 'references'> & {
   sections?: StudySection[];
-  learning_objectives?: string[];
-  references?: string[];
+  learning_objectives?: string[] | Json;
+  references?: string[] | Json;
   exam_prep?: {
     description?: string;
     exam_focus?: string[];
     practice_labs?: string[];
-  };
-}
+  } | Json;
+};
 
-export interface StudySectionWithModule extends StudySection {
+export type StudySectionWithModule = Omit<StudySection, 'content' | 'key_points' | 'procedures' | 'troubleshooting' | 'references' | 'playbook'> & {
   module?: StudyModule;
   content?: {
     overview?: string;
@@ -73,13 +73,13 @@ export interface StudySectionWithModule extends StudySection {
     procedures?: string[];
     troubleshooting?: string[];
     references?: string[];
-  };
-  key_points?: string[];
-  procedures?: string[];
-  troubleshooting?: string[];
-  references?: string[];
+  } | string;
+  key_points?: string[] | Json;
+  procedures?: string[] | Json;
+  troubleshooting?: string[] | Json;
+  references?: string[] | Json;
   playbook?: Json;
-}
+};
 
 export interface UserProgressWithDetails extends UserStudyProgress {
   module?: StudyModule;
