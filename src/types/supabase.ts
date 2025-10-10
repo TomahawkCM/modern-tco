@@ -1,28 +1,14 @@
-export type Json = string | number | boolean | null | { [key: string]: Json | undefined } | Json[];
+// Import generated types from production database schema
+import { Database as GeneratedDatabase, Json as GeneratedJson } from './supabase-generated';
 
-// Simplified permissive Database typing to avoid `never` errors at supabase call-sites.
-export type Database = {
-  public: {
-    Tables: Record<
-      string,
-      {
-        Row: Record<string, any>;
-        Insert: Record<string, any>;
-        Update: Record<string, any>;
-        Relationships: any[];
-      }
-    >;
-    Views: Record<string, { Row: Record<string, any> }>;
-    Functions: Record<string, { Args: any; Returns: any }>;
-    Enums: Record<string, any>;
-    CompositeTypes: Record<string, any>;
-  };
-};
+// Re-export the generated types
+export type Database = GeneratedDatabase;
+export type Json = GeneratedJson;
 
-// Relaxed helpers: return `any` to pragmatically unblock many call-sites.
-export type Tables<_Name extends string = string> = any;
-export type TablesInsert<_Name extends string = string> = any;
-export type TablesUpdate<_Name extends string = string> = any;
+// Type-safe table helpers
+export type Tables<T extends keyof Database['public']['Tables']> = Database['public']['Tables'][T]['Row'];
+export type TablesInsert<T extends keyof Database['public']['Tables']> = Database['public']['Tables'][T]['Insert'];
+export type TablesUpdate<T extends keyof Database['public']['Tables']> = Database['public']['Tables'][T]['Update'];
 
 // Common table helpers used across the codebase
 export type StudyModule = Tables<'study_modules'>;
