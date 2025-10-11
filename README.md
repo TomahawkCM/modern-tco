@@ -34,6 +34,7 @@ Enterprise-grade Learning Management System ready for large-scale deployment wit
 ### 📊 **Production Build Status** (September 2025)
 
 **Build Output:**
+
 ```
 ✓ Compiled successfully
 ✓ Type checking complete: 0 errors
@@ -43,6 +44,7 @@ Enterprise-grade Learning Management System ready for large-scale deployment wit
 ```
 
 **Quality Metrics:**
+
 - **TypeScript Compliance**: 100% (650+ errors resolved)
 - **React Hooks Compliance**: 100% (12 violations fixed)
 - **Client/Server Boundaries**: 100% App Router compliance
@@ -95,11 +97,78 @@ Enterprise-grade Learning Management System ready for large-scale deployment wit
 ├── docs/                       # Comprehensive documentation (80+ files)
 │   ├── supabase/               # Database integration guides
 │   ├── postgresql/             # Advanced database features
-│   └── knowledge-base/         # TCO certification research
-├── .mcp.json                   # MCP server configuration (8 servers)
+│   ├── MIGRATION_INVENTORY.md  # Database migration documentation
+│   └── MIGRATION_LINEAGE.md    # Migration evolution guide
+├── archive/                    # Historical documentation
+│   ├── deployment/             # Archived deployment guides
+│   ├── reports/                # Test and QA reports
+│   └── summaries/              # Point-in-time summaries
+├── .mcp.json                   # MCP server configuration (11 servers)
 ├── .env.local                  # Environment variables with MCP integration
+├── DEPLOYMENT.md               # Master deployment guide
+├── ARCHITECTURE.md             # Technical architecture documentation
 ├── package.json                # Dependencies and scripts
 └── README.md                   # ← YOU ARE HERE
+```
+
+## 📚 Documentation
+
+### Master Documentation (Oct 11, 2025 - Consolidated)
+
+**Core Guides:**
+
+- 📖 **[DEPLOYMENT.md](./DEPLOYMENT.md)** - Complete deployment guide (Vercel, environment setup, rollback)
+- 🏗️ **[ARCHITECTURE.md](./ARCHITECTURE.md)** - System architecture, tech stack, database schema
+- 📋 **[README.md](./README.md)** - This file (project overview, quick start)
+
+**Database Documentation:**
+
+- 🗄️ **[docs/MIGRATION_INVENTORY.md](./docs/MIGRATION_INVENTORY.md)** - Complete audit of 24 migrations
+- 🔄 **[docs/MIGRATION_LINEAGE.md](./docs/MIGRATION_LINEAGE.md)** - Migration evolution & best practices
+
+**Analysis Reports:**
+
+- 🔍 **[PRODUCTION_VS_DEV_ANALYSIS_REPORT.md](./PRODUCTION_VS_DEV_ANALYSIS_REPORT.md)** - Production comparison & cleanup
+- ✅ **[DATABASE_MIGRATION_CONSOLIDATION_COMPLETE.md](./DATABASE_MIGRATION_CONSOLIDATION_COMPLETE.md)** - Migration consolidation
+
+**Historical Documentation:**
+
+- 📂 **[archive/deployment/](./archive/deployment/)** - 8 historical deployment guides (Sept-Oct 2025)
+- 📊 **[archive/reports/](./archive/reports/)** - 25+ test reports, QA validations
+- 📝 **[archive/summaries/](./archive/summaries/)** - 12 point-in-time fix summaries
+
+**Documentation Cleanup (Oct 11, 2025):**
+
+- ✅ Consolidated 66 MD files → 3 master docs (95% reduction)
+- ✅ Archived 45 redundant docs to `/archive`
+- ✅ Deleted 9 backup files (.bak, .backup)
+- ✅ Created comprehensive migration documentation
+
+### Quick Reference
+
+**Getting Started:**
+
+```bash
+# See DEPLOYMENT.md for complete setup
+npm install
+cp .env.example .env.local  # Add Supabase credentials
+npm run dev
+```
+
+**Database Setup:**
+
+```bash
+# See docs/MIGRATION_INVENTORY.md for details
+npx supabase db push  # Apply migrations
+npm run content:seed  # Seed questions
+```
+
+**Deployment:**
+
+```bash
+# See DEPLOYMENT.md for complete guide
+npm run build         # Test build
+vercel --prod         # Deploy to Vercel
 ```
 
 ## 🎯 Project Status & Goals
@@ -107,6 +176,7 @@ Enterprise-grade Learning Management System ready for large-scale deployment wit
 ### 🎯 Latest Update - September 30, 2025
 
 #### ✅ **PRODUCTION BUILD SUCCESS - ALL ERRORS RESOLVED**
+
 - **Build Status**: TypeScript 0 errors, ESLint 0 errors, 72 routes generated
 - **React Compliance**: All React Hooks violations fixed (12 → 0)
 - **Type Safety**: 650+ TypeScript errors resolved for production quality
@@ -114,6 +184,7 @@ Enterprise-grade Learning Management System ready for large-scale deployment wit
 - **Enterprise Quality**: Production-ready with comprehensive testing validation
 
 #### ✅ **MAJOR CONTENT EXPANSION COMPLETE**
+
 - **NEW Foundation Module**: 3-hour prerequisite course for zero-knowledge students
 - **Module Expansion**: Navigation (3.5 hours) and Reporting (3 hours) fully developed
 - **Assessment Bank**: 140+ comprehensive questions with weighted scoring
@@ -123,6 +194,7 @@ Enterprise-grade Learning Management System ready for large-scale deployment wit
 ### 🚀 Recent Production Build Fixes (September 2025)
 
 #### React Hooks Compliance
+
 - **QuestionsContext.tsx**: Fixed conditional hook call (usePathname)
 - **DashboardContent.tsx**: Moved useMemo hooks before early return
 - **study/[domain]/page.tsx**: Relocated useEffect before conditional logic
@@ -130,16 +202,18 @@ Enterprise-grade Learning Management System ready for large-scale deployment wit
 - **ReviewCenter.tsx**: Positioned useMemo hooks before loading state
 
 #### TypeScript & SDK Integration
+
 - **anthropic.ts**: Renamed from .d.ts, fixed SDK imports from submodules
 - **Optional Properties**: Added extensive optional properties across 22+ types
 - **Type Guards**: Implemented null-safety for ChatSession.context union type
 - **Service Layer**: Added null-safety operators in anthropic-service.ts
 
 #### Next.js App Router Compliance
+
 - **Client Components**: Added 'use client' to page.tsx, learn/page.tsx, ModuleVideos.tsx
 - **Route Config**: Removed invalid exports from error.tsx, global-error.tsx, not-found.tsx
 - **Dynamic Rendering**: Added `export const dynamic = 'force-dynamic'` to root layout
-- **Custom Error Page**: Created pages/_error.tsx without Html import
+- **Custom Error Page**: Created pages/\_error.tsx without Html import
 
 ### Repository State & Achievements
 
@@ -153,6 +227,7 @@ Enterprise-grade Learning Management System ready for large-scale deployment wit
 ### ✅ Recently Completed - LATEST FEATURES
 
 #### 🎯 Query Builder Major Enhancements (September 25, 2024)
+
 - **⚡ Performance Optimizations**: 30% faster rendering with React.memo, debouncing, and lazy loading
 - **📚 TCO Learning Mode**: New certification-aligned learning interface with scenario-based training
 - **📊 Virtual Scrolling**: Handles 5,000+ query results with <100ms render time
@@ -161,6 +236,7 @@ Enterprise-grade Learning Management System ready for large-scale deployment wit
 - **📝 Comprehensive Documentation**: Created `docs/QUERY_BUILDER_ENHANCEMENTS.md` with full implementation details
 
 #### Previous Query Builder Features
+
 - **🚀 Interactive Question Builder**: Full Tanium query builder with natural language processing
 - **TypeScript Query Engine**: Complete query parser, executor, and validation system
 - **Three Query Modes**: Guided visual building, natural language input, and advanced syntax
@@ -175,6 +251,7 @@ Enterprise-grade Learning Management System ready for large-scale deployment wit
 ### ✅ Primary Objective - ACHIEVED!
 
 **COMPLETED**: Comprehensive exam preparation platform for **Tanium Certified Operator (TAN-1000) certification** with:
+
 - ✅ Interactive learning modules and practice assessments
 - ✅ Real mistake tracking and review system
 - ✅ Domain-specific study paths with progress analytics
@@ -263,6 +340,7 @@ Enterprise-grade Learning Management System ready for large-scale deployment wit
 📄 **Assessment File**: `src/content/questions/comprehensive-assessment-bank.json`
 
 **Distribution by Module:**
+
 - Foundation Module: 30 questions (prerequisite knowledge)
 - Domain 1 (Asking Questions): 25 questions (22% weight)
 - Domain 2 (Refining Questions): 25 questions (23% weight)
@@ -271,6 +349,7 @@ Enterprise-grade Learning Management System ready for large-scale deployment wit
 - Domain 5 (Reporting): 15 questions (17% weight)
 
 **Question Features:**
+
 - Multiple choice format with 4 options
 - Scenario-based real-world applications
 - Weighted scoring (1.0-1.5x based on difficulty)
@@ -341,6 +420,7 @@ Enterprise-grade Learning Management System ready for large-scale deployment wit
 ### Session Management
 
 See docs index: **`docs/README.md`**. For production and operations guidance, see:
+
 - **`docs/OPS/PRODUCTION_READINESS_PLAYBOOK.md`**
 - **`docs/OPS/PRODUCTION_DESIGN.md`**
 - **`docs/OPS/GO_LIVE_CHECKLIST.md`**
@@ -352,12 +432,14 @@ See docs index: **`docs/README.md`**. For production and operations guidance, se
 **⚠️ CRITICAL: basePath Temporarily Disabled (September 2025)**
 
 The `/tanium` basePath has been **temporarily disabled** in `next.config.js` to resolve Next.js 15.5.4 build compatibility issues. This means:
+
 - **Production URLs**: App will serve at **root** (`/`) instead of `/tanium`
 - **Sitemap Update Required**: `public/sitemap.xml` URLs need to be updated from `https://your-domain.com/tanium/*` to `https://your-domain.com/*`
 - **Font Preload Path**: Already conditionally configured in `src/app/layout.tsx` (line 45)
 - **TODO**: Re-enable basePath after Next.js version update or compatibility fix
 
 **Configuration Notes:**
+
 - Base path in production: **DISABLED** (configured in `next.config.js` line 26)
 - Rewrites for this project live in `modern-tco/vercel.json` so they don't affect other apps in the repo.
 - Required env vars (Production):
@@ -744,6 +826,7 @@ npm run typecheck
 ```
 
 **Common TypeScript Issues Resolved:**
+
 - **SDK Imports**: Fixed imports from `@anthropic-ai/sdk` submodules (messages, errors)
 - **Optional Properties**: Added extensive `?:` properties to match service layer usage
 - **Type Guards**: Implemented null-safety for union types (e.g., `ChatSession.context`)
@@ -791,12 +874,14 @@ if (loading) return <div>Loading...</div>;
 ```
 
 **Rules of Hooks (React Compliance):**
+
 1. **Always call hooks at the top level** - Never inside loops, conditions, or nested functions
 2. **Call hooks before early returns** - All hook calls must execute on every render
 3. **No conditional hook calls** - Even with `typeof window !== 'undefined'` checks
 4. **Use `'use client'` directive** - Required for components using React hooks or browser APIs
 
 **Files Previously Fixed:**
+
 - `src/contexts/QuestionsContext.tsx` (line 76)
 - `src/app/dashboard/DashboardContent.tsx` (lines 64-131)
 - `src/app/study/[domain]/page.tsx` (lines 83-152)
@@ -845,6 +930,7 @@ if (loading) return <div>Loading...</div>;
 ## 🎉 PROJECT MILESTONES ACHIEVED - September 24, 2025
 
 ### ✅ **Content Development Complete**
+
 - **Foundation Module**: 3-hour prerequisite course created from scratch
 - **Module Expansions**: Navigation (3.5 hours) and Reporting (3 hours) fully developed
 - **Module Simplification**: Taking Action reduced to appropriate TCO level
@@ -852,12 +938,14 @@ if (loading) return <div>Loading...</div>;
 - **Assessment Bank**: 140+ questions with weighted scoring system
 
 ### 📈 **Key Metrics**
+
 - **Content Growth**: 48.7% increase (7.8 → 11.6 hours)
 - **Question Bank**: 5x increase (28 → 140+ questions)
 - **Module Coverage**: 100% blueprint alignment achieved
 - **Quality Level**: Enterprise-grade with official documentation integration
 
 ### 🚀 **Production Status**
+
 - **LMS Platform**: Enterprise-ready with full feature parity
 - **Content Quality**: Professional TCO certification preparation
 - **Assessment Engine**: Comprehensive with weighted scoring
@@ -868,6 +956,7 @@ if (loading) return <div>Loading...</div>;
 **Last Updated**: September 30, 2025
 **Development Efficiency**: 10x faster with AI agent assistance
 **Success Rate**: 100% milestone completion
+
 ## 📚 Content & Scripts Locations
 
 ### Content Storage
@@ -921,6 +1010,7 @@ if (loading) return <div>Loading...</div>;
   - `npx tsx scripts/test-weighted-rpc.ts [count]`
 
 Notes
+
 - The app reads content from the database for runtime (Supabase `questions`).
 - The JSON bank in `src/content/questions` can be used as an import/export artifact.
 - MDX modules live in the repository and are rendered directly by the app.
@@ -949,5 +1039,6 @@ Notes
     - Sticky header with scrollable body
 
 Shortcuts
+
 - Open Command Palette: Ctrl/Cmd+K
 - Close dialogs/command: Escape

@@ -8,12 +8,12 @@
 
 ## 📊 Current Status
 
-| Metric | Current | Target | Gap |
-|--------|---------|--------|-----|
-| Performance | 67 | 90 | -23 |
-| Accessibility | 89 | 95 | -6 |
-| Best Practices | 96 | 90 | ✅ |
-| SEO | 63 | 90 | -27 |
+| Metric         | Current | Target | Gap |
+| -------------- | ------- | ------ | --- |
+| Performance    | 67      | 90     | -23 |
+| Accessibility  | 89      | 95     | -6  |
+| Best Practices | 96      | 90     | ✅  |
+| SEO            | 63      | 90     | -27 |
 
 ---
 
@@ -24,6 +24,7 @@
 **Root Cause:** The inline script in `layout.tsx` (line 55) modifies `document.documentElement` based on localStorage, but this happens DURING hydration, causing React to detect a mismatch.
 
 **Current Code (src/app/layout.tsx:30, 53-57):**
+
 ```tsx
 <html lang="en" suppressHydrationWarning>
   {/* ... */}
@@ -46,6 +47,7 @@
 ```
 
 **Why It's Broken:**
+
 1. Server renders HTML with default font size
 2. Script runs on client and changes fontSize
 3. React hydration sees mismatch → Error #418
@@ -63,6 +65,7 @@ The script needs to run BEFORE React loads, in the `<head>`, and we need to ensu
 **File:** `src/app/layout.tsx`
 
 **Change:**
+
 ```tsx
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -99,6 +102,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 ```
 
 **Why This Works:**
+
 - Script runs in `<head>` BEFORE body renders
 - React hydration sees consistent state
 - `suppressHydrationWarning` on both `<html>` and `<body>` prevents warnings
@@ -115,6 +119,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 **Files to Update:**
 
 1. **src/app/study/page.tsx (2 instances)**
+
 ```tsx
 // Line 457
 <Progress
@@ -132,6 +137,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 ```
 
 2. **src/app/practice/page.tsx (2 instances)**
+
 ```tsx
 // Line 417
 <Progress
@@ -149,6 +155,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 ```
 
 3. **src/app/analytics/page.tsx (2 instances)**
+
 ```tsx
 // Line 354
 <Progress
@@ -166,6 +173,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 ```
 
 4. **src/app/mock/page.tsx (2 instances)**
+
 ```tsx
 // Line 348
 <Progress
@@ -191,6 +199,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 **Issue:** 2 buttons missing accessible names (likely icon-only buttons)
 
 **Common Pattern to Fix:**
+
 ```tsx
 // ❌ Bad - Screen reader can't announce
 <button onClick={handleClick}>
@@ -204,12 +213,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 ```
 
 **Files to Check:**
+
 - Navigation menu toggle (mobile)
 - Search button
 - User menu button
 - Any icon-only action buttons
 
 **Search Command:**
+
 ```bash
 # Find potential icon-only buttons
 grep -rn "<button" src/ --include="*.tsx" | grep -i "icon" | head -20
@@ -224,12 +235,14 @@ grep -rn "<button" src/ --include="*.tsx" | grep -i "icon" | head -20
 ### Fix 4: Investigate 404 Error
 
 **Action:**
+
 1. Open production URL in browser
 2. Open DevTools → Network tab
 3. Filter by "4xx" or "404"
 4. Identify missing resource
 
 **Common Causes:**
+
 - Missing favicon
 - Font file 404
 - Image path error
@@ -244,6 +257,7 @@ grep -rn "<button" src/ --include="*.tsx" | grep -i "icon" | head -20
 ### Fix 5: Reduce Unused JavaScript
 
 **Bundles with Waste:**
+
 - `5040-944346c613642967.js` - 25KB wasted (75% unused)
 - `1733-50d8dd25d364c77c.js` - 21KB wasted (55% unused)
 
@@ -251,18 +265,19 @@ grep -rn "<button" src/ --include="*.tsx" | grep -i "icon" | head -20
 
 ```tsx
 // Before - Eager load
-import { HeavyComponent } from '@/components/HeavyComponent';
+import { HeavyComponent } from "@/components/HeavyComponent";
 
 // After - Lazy load
-import dynamic from 'next/dynamic';
+import dynamic from "next/dynamic";
 
-const HeavyComponent = dynamic(() => import('@/components/HeavyComponent'), {
+const HeavyComponent = dynamic(() => import("@/components/HeavyComponent"), {
   loading: () => <Skeleton />,
   ssr: false, // If component doesn't need SSR
 });
 ```
 
 **Candidates for Lazy Loading:**
+
 - Analytics components (not needed immediately)
 - Chart libraries (load on demand)
 - Modal/Dialog content (load when opened)
@@ -275,6 +290,7 @@ const HeavyComponent = dynamic(() => import('@/components/HeavyComponent'), {
 ## 📋 Deployment Checklist
 
 ### Before Deploy:
+
 - [ ] Update `layout.tsx` - move script to head, fix typo, add suppressHydrationWarning to body
 - [ ] Add `aria-label` to all 8 Progress components
 - [ ] Add `aria-label` to icon-only buttons (find and fix)
@@ -282,6 +298,7 @@ const HeavyComponent = dynamic(() => import('@/components/HeavyComponent'), {
 - [ ] Verify no hydration errors in console
 
 ### Deploy:
+
 ```bash
 # Build and verify
 npm run build
@@ -294,6 +311,7 @@ vercel logs --prod
 ```
 
 ### After Deploy:
+
 - [ ] Run Lighthouse again
 - [ ] Verify scores improved
 - [ ] Check browser console for errors
@@ -303,34 +321,38 @@ vercel logs --prod
 
 ## 🎯 Expected Results After P0 Fixes
 
-| Metric | Before | After P0 | Target | Status |
-|--------|--------|----------|--------|--------|
-| Performance | 67 | 85-92 | 90 | ✅ Expected |
-| Accessibility | 89 | 97-100 | 95 | ✅ Expected |
-| Best Practices | 96 | 96 | 90 | ✅ Maintained |
-| SEO | 63 | 65-70 | 90 | ⚠️ P2 work |
+| Metric         | Before | After P0 | Target | Status        |
+| -------------- | ------ | -------- | ------ | ------------- |
+| Performance    | 67     | 85-92    | 90     | ✅ Expected   |
+| Accessibility  | 89     | 97-100   | 95     | ✅ Expected   |
+| Best Practices | 96     | 96       | 90     | ✅ Maintained |
+| SEO            | 63     | 65-70    | 90     | ⚠️ P2 work    |
 
 ---
 
 ## 🔄 Quick Implementation Commands
 
 ### 1. Find All Progress Components to Fix:
+
 ```bash
 grep -rn "<Progress" src/app --include="*.tsx" -B 2 -A 1 > progress-fix-list.txt
 cat progress-fix-list.txt
 ```
 
 ### 2. Find Icon-Only Buttons:
+
 ```bash
 grep -rn "<button" src/ --include="*.tsx" | grep -E "(Icon|Svg|<svg)" | grep -v "aria-label"
 ```
 
 ### 3. Test Build Locally:
+
 ```bash
 npm run build 2>&1 | grep -i "error\|warning" | head -20
 ```
 
 ### 4. Test for Hydration Errors:
+
 ```bash
 # Start production build locally
 npm run start
@@ -347,6 +369,7 @@ npm run start
 ## 📊 Validation After Fixes
 
 ### Run Lighthouse Locally:
+
 ```bash
 lighthouse http://localhost:3000 \
   --only-categories=performance,accessibility \
@@ -359,6 +382,7 @@ open lighthouse-after-fixes.html
 ```
 
 ### Compare Before/After:
+
 ```bash
 # Before (current):
 # Performance: 67
@@ -374,11 +398,13 @@ open lighthouse-after-fixes.html
 ## 🚀 Next Steps After P0
 
 ### P1 (This Week):
+
 1. Lazy load heavy components
 2. Fix 404 errors
 3. Optimize images (WebP/AVIF)
 
 ### P2 (Next Sprint):
+
 1. SEO optimization (meta descriptions, alt text)
 2. Further bundle optimization
 3. CDN optimization for fonts/images
@@ -386,6 +412,7 @@ open lighthouse-after-fixes.html
 ---
 
 **Files to Modify:**
+
 1. ✅ `src/app/layout.tsx` - Move script, fix typo, add suppressHydrationWarning
 2. ✅ `src/app/study/page.tsx` - Add 2 aria-labels
 3. ✅ `src/app/practice/page.tsx` - Add 2 aria-labels

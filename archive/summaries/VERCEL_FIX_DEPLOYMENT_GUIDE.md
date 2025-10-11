@@ -15,12 +15,14 @@
 Created a build script that runs **before** `next build` to serialize all MDX files into JSON format.
 
 **What it does:**
+
 - Reads all `.mdx` files from `src/content/modules/`
 - Uses `next-mdx-remote/serialize` to compile MDX (same as runtime)
 - Writes serialized content to `.mdx-cache/*.json`
 - Creates an index file for quick lookup
 
 **Why it works:**
+
 - MDX content is now **bundled at build time** instead of read at runtime
 - `.mdx-cache/` persists across builds (not cleared by Next.js)
 - Vercel deployment includes the cache directory
@@ -28,11 +30,13 @@ Created a build script that runs **before** `next build` to serialize all MDX fi
 ### 2. **Updated Page Component** (`src/app/modules/[slug]/page.tsx`)
 
 Modified `getModuleContent()` to:
+
 - ✅ **Primary:** Read from `.mdx-cache/*.json` (Vercel-compatible)
 - ✅ **Fallback:** Read from source MDX files (local development only)
 - ✅ **Logging:** Detailed error logs for Vercel Function debugging
 
 **Key Changes:**
+
 ```typescript
 // OLD: Runtime file read (fails on Vercel)
 const fileContent = await fs.readFile(modulePath, "utf8");
@@ -45,6 +49,7 @@ const bundled = JSON.parse(await fs.readFile(cachePath, "utf8"));
 ### 3. **Build Script Integration** (`package.json`)
 
 Added `prebuild` script that runs automatically before `npm run build`:
+
 ```json
 {
   "prebuild": "node scripts/bundle-mdx.js",
@@ -55,6 +60,7 @@ Added `prebuild` script that runs automatically before `npm run build`:
 ### 4. **Vercel Ignore Configuration** (`.vercelignore`)
 
 Updated to:
+
 - ❌ Ignore `.next/cache/` (temporary build cache)
 - ✅ **Include** `.mdx-cache/` (critical for deployment)
 - ✅ Include `src/content/modules/` (needed for build process)
@@ -122,6 +128,7 @@ curl http://localhost:3000/modules/refining-questions-targeting
 Before deploying to Vercel:
 
 1. **Verify .mdx-cache is NOT in .gitignore for deployment**
+
    ```bash
    git add .mdx-cache/
    git commit -m "chore: Add pre-bundled MDX cache for Vercel"
@@ -140,11 +147,13 @@ Before deploying to Vercel:
 
 4. **Check Vercel Function Logs**
    After deployment, visit:
+
    ```
    https://modern-tco.vercel.app/modules/refining-questions-targeting
    ```
 
    If it still fails, check Vercel Function logs for:
+
    ```
    [Module] Loading: { slug: 'refining-questions-targeting', ... }
    [Module] ✓ Loaded from cache: 02-refining-questions-targeting.mdx
@@ -190,6 +199,7 @@ git push
 ### Issue: Cache Files Not Found on Vercel
 
 If Vercel logs show:
+
 ```
 [Module Error] Cache miss on Vercel for 02-refining-questions-targeting.mdx
 ```
@@ -205,6 +215,7 @@ If Vercel logs show:
 If MDX content changes but Vercel shows old content:
 
 **Solution:**
+
 ```bash
 # Rebuild cache
 npm run prebuild
@@ -220,11 +231,13 @@ git push
 ## Performance Impact
 
 ### Before (Runtime File Read)
+
 - ❌ 404 error on Vercel
 - ❌ File system reads on every request
 - ❌ MDX serialization on every request
 
 ### After (Pre-Bundled Cache)
+
 - ✅ Works on Vercel serverless
 - ✅ Zero file system reads (faster!)
 - ✅ Zero runtime serialization (faster!)
@@ -238,11 +251,13 @@ git push
 ### When to Rebuild Cache
 
 Run `npm run prebuild` manually when:
+
 - ✅ MDX content changes
 - ✅ Frontmatter schema changes
 - ✅ MDX compiler options change
 
 Or let it run automatically:
+
 - ✅ Automatically runs before `npm run build`
 - ✅ Automatically runs on Vercel deployment
 
@@ -257,13 +272,13 @@ Or let it run automatically:
 
 ## Related Files Modified
 
-| File | Change | Purpose |
-|------|--------|---------|
-| `scripts/bundle-mdx.js` | Created | Pre-bundle MDX at build time |
-| `package.json` | Added `prebuild` | Auto-run bundling before build |
-| `src/app/modules/[slug]/page.tsx` | Modified | Read from cache instead of source |
-| `.vercelignore` | Updated | Allow `.mdx-cache/` deployment |
-| `.gitignore` | Added `.mdx-cache/` | Exclude cache from git (optional) |
+| File                              | Change              | Purpose                           |
+| --------------------------------- | ------------------- | --------------------------------- |
+| `scripts/bundle-mdx.js`           | Created             | Pre-bundle MDX at build time      |
+| `package.json`                    | Added `prebuild`    | Auto-run bundling before build    |
+| `src/app/modules/[slug]/page.tsx` | Modified            | Read from cache instead of source |
+| `.vercelignore`                   | Updated             | Allow `.mdx-cache/` deployment    |
+| `.gitignore`                      | Added `.mdx-cache/` | Exclude cache from git (optional) |
 
 ---
 
@@ -281,6 +296,7 @@ Or let it run automatically:
 ## Next Steps
 
 1. **Deploy to Vercel:**
+
    ```bash
    git add .
    git commit -m "fix: Pre-bundle MDX for Vercel deployment (fixes 404)"
@@ -301,6 +317,7 @@ Or let it run automatically:
 ## Contact & Support
 
 If issues persist after deployment:
+
 1. Check Vercel Function logs for detailed error messages
 2. Verify `.mdx-cache/` is present in deployment files
 3. Test locally with `npm run build && npm run start`

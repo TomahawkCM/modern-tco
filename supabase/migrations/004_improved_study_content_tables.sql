@@ -1,3 +1,15 @@
+-- ⚠️⚠️⚠️ DEPRECATED MIGRATION - DO NOT USE ⚠️⚠️⚠️
+-- This migration has SYNTAX ERRORS and should NOT be used
+-- USE migration 005_fixed_study_content_tables.sql instead
+--
+-- Issues with this migration:
+-- 1. Contains syntax error: ALTER TABLE ... ADD CONSTRAINT IF NOT EXISTS (not valid in PostgreSQL)
+-- 2. Although it fixes issues from 003, the syntax errors prevent successful execution
+--
+-- See docs/MIGRATION_LINEAGE.md for full explanation
+-- Kept for migration history only - NOT FOR PRODUCTION USE
+-- ⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️
+--
 -- Migration 004: Improved study content tables with Supabase best practices
 -- Uses pgcrypto, proper auth.users FKs, cleaner RLS policies, and integer time fields
 

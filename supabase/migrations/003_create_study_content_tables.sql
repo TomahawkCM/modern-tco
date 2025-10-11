@@ -1,3 +1,17 @@
+-- ⚠️⚠️⚠️ DEPRECATED MIGRATION - DO NOT USE ⚠️⚠️⚠️
+-- This migration has CRITICAL ISSUES and should NOT be used
+-- USE migration 005_fixed_study_content_tables.sql instead
+--
+-- Issues with this migration:
+-- 1. Uses uuid_generate_v4() instead of gen_random_uuid() (Supabase best practice)
+-- 2. estimated_time is TEXT instead of INTEGER (prevents calculations/sorting)
+-- 3. Missing proper auth.users foreign key constraints
+-- 4. Uses TIMESTAMP instead of TIMESTAMPTZ
+--
+-- See docs/MIGRATION_LINEAGE.md for full explanation
+-- Kept for migration history only - NOT FOR PRODUCTION USE
+-- ⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️
+--
 -- Migration 003: Create study content tables for TCO certification study materials
 -- This migration creates tables to store comprehensive study content migrated from legacy app
 

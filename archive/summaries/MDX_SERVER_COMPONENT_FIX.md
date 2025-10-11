@@ -1,13 +1,16 @@
 # MDX Server Component Issue - RESOLVED
 
 ## Problem
+
 The application was using a workaround with dynamic imports and `ssr: false` to handle MDX content rendering, causing:
+
 - Client-side only rendering (no SSR benefits)
 - Hydration mismatches
 - Performance issues with large MDX files
 - React version conflicts when mixing server/client components
 
 ## Root Cause
+
 - Attempted to use `next-mdx-remote/rsc` (React Server Components) incorrectly
 - Mixed server and client rendering without proper boundaries
 - Version mismatch between MDX serialization methods
@@ -15,11 +18,13 @@ The application was using a workaround with dynamic imports and `ssr: false` to 
 ## Solution Implemented
 
 ### 1. Proper Server/Client Separation
+
 - Created clear boundaries between server and client components
 - Server components handle MDX parsing and serialization
 - Client components handle interactivity and state
 
 ### 2. File Structure
+
 ```
 src/
 ├── app/modules/[slug]/page.tsx        # Server component (fetches and serializes MDX)
@@ -37,6 +42,7 @@ src/
 ### 3. Implementation Details
 
 #### Server Component (page.tsx)
+
 ```typescript
 // Fetch and serialize MDX on the server
 const mdxSource = await serialize(content, {
@@ -51,6 +57,7 @@ return <ModuleRenderer moduleData={moduleData} />;
 ```
 
 #### Client Component (ModuleRenderer.tsx)
+
 ```typescript
 // Use dynamic import with proper loading state
 const ClientMDXContent = dynamic(

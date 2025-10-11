@@ -1,3 +1,8 @@
+-- ✅✅✅ CANONICAL VERSION - USE THIS MIGRATION ✅✅✅
+-- This is the CORRECT and WORKING version of study content tables
+-- Migrations 003 and 004 are deprecated (see docs/MIGRATION_LINEAGE.md)
+-- ✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅
+--
 -- Migration 005: Fixed study content tables - Syntax Error Corrected
 -- Uses pgcrypto, proper auth.users FKs, cleaner RLS policies, and integer time fields
 -- FIXED: Removed IF NOT EXISTS from ADD CONSTRAINT (not supported in PostgreSQL)
