@@ -115,7 +115,7 @@ export function GameificationSection() {
       case "Gold":
         return "from-yellow-400 to-yellow-600";
       case "Platinum":
-        return "from-cyan-400 to-blue-600";
+        return "from-primary to-primary";
       default:
         return "from-slate-500 to-slate-700";
     }
@@ -124,15 +124,15 @@ export function GameificationSection() {
   const getRarityColor = (rarity: string) => {
     switch (rarity) {
       case "Common":
-        return "text-slate-400 border-slate-500/30";
+        return "text-muted-foreground border-border";
       case "Rare":
-        return "text-blue-400 border-blue-500/30";
+        return "text-primary border-primary/30";
       case "Epic":
-        return "text-purple-400 border-purple-500/30";
+        return "text-accent-foreground border-accent/30";
       case "Legendary":
-        return "text-yellow-400 border-yellow-500/30";
+        return "text-[#f97316] border-[#f97316]/30";
       default:
-        return "text-slate-400 border-slate-500/30";
+        return "text-muted-foreground border-border";
     }
   };
 
@@ -158,14 +158,14 @@ export function GameificationSection() {
           transition={{ duration: 0.6 }}
           className="mb-12 text-center"
         >
-          <Badge className="mb-4 border-yellow-500/20 bg-yellow-500/10 text-yellow-400">
+          <Badge className="mb-4 border-[#f97316]/20 bg-[#f97316]/10 text-[#f97316]">
             <Trophy className="mr-2 h-4 w-4" />
             Gamified Learning
           </Badge>
-          <h2 className="mb-6 bg-gradient-to-r from-yellow-200 via-cyan-100 to-purple-200 bg-clip-text text-4xl font-bold text-transparent md:text-5xl">
+          <h2 className="mb-6 bg-gradient-to-r from-[#f97316] via-primary to-accent bg-clip-text text-4xl font-bold text-transparent md:text-5xl">
             Level Up Your Skills
           </h2>
-          <p className="mx-auto max-w-3xl text-xl leading-relaxed text-slate-300">
+          <p className="mx-auto max-w-3xl text-xl leading-relaxed text-muted-foreground">
             Earn points, unlock achievements, and compete with peers as you master the TCO
             certification. Our gamified approach makes learning engaging and tracks your progress in
             real-time.
@@ -185,10 +185,10 @@ export function GameificationSection() {
               <CardHeader>
                 <div className="mb-2 flex items-center gap-3">
                   <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-orange-500 to-red-500">
-                    <Flame className="h-5 w-5 text-white" />
+                    <Flame className="h-5 w-5 text-foreground" />
                   </div>
                   <div>
-                    <CardTitle className="text-white">Study Streak</CardTitle>
+                    <CardTitle className="text-foreground">Study Streak</CardTitle>
                     <CardDescription>Keep the momentum going!</CardDescription>
                   </div>
                 </div>
@@ -199,13 +199,13 @@ export function GameificationSection() {
                   <div className="mb-2 text-4xl font-bold text-orange-400">
                     {studyStreak.current}
                   </div>
-                  <div className="text-sm text-slate-400">Days in a row</div>
+                  <div className="text-sm text-muted-foreground">Days in a row</div>
                 </div>
 
                 {/* Streak Progress */}
                 <div className="space-y-2">
                   <div className="flex justify-between text-sm">
-                    <span className="text-slate-400">Goal: {studyStreak.target} days</span>
+                    <span className="text-muted-foreground">Goal: {studyStreak.target} days</span>
                     <span className="text-orange-400">
                       {Math.round((studyStreak.current / studyStreak.target) * 100)}%
                     </span>
@@ -218,26 +218,26 @@ export function GameificationSection() {
                 </div>
 
                 {/* Stats */}
-                <div className="grid grid-cols-2 gap-4 border-t border-slate-700/50 pt-4">
+                <div className="grid grid-cols-2 gap-4 border-t border-border/50 pt-4">
                   <div className="text-center">
-                    <div className="text-2xl font-bold text-cyan-400">{studyStreak.longest}</div>
-                    <div className="text-xs text-slate-400">Longest Streak</div>
+                    <div className="text-2xl font-bold text-primary">{studyStreak.longest}</div>
+                    <div className="text-xs text-muted-foreground">Longest Streak</div>
                   </div>
                   <div className="text-center">
-                    <div className="text-2xl font-bold text-green-400">8.7k</div>
-                    <div className="text-xs text-slate-400">Total XP</div>
+                    <div className="text-2xl font-bold text-[#22c55e]">8.7k</div>
+                    <div className="text-xs text-muted-foreground">Total XP</div>
                   </div>
                 </div>
 
                 {/* Streak Bonus */}
                 <div className="rounded-lg border border-orange-500/20 bg-gradient-to-r from-orange-500/10 to-red-500/10 p-4">
                   <div className="mb-2 flex items-center gap-2">
-                    <Star className="h-4 w-4 text-yellow-400" />
-                    <span className="text-sm font-medium text-yellow-400">
-                      Streak Bonus Active!
-                    </span>
+                    <Star className="h-4 w-4 text-[#f97316]" />
+                    <span className="text-sm font-medium text-[#f97316]">Streak Bonus Active!</span>
                   </div>
-                  <div className="text-xs text-slate-300">Earning 2x XP for all activities</div>
+                  <div className="text-xs text-muted-foreground">
+                    Earning 2x XP for all activities
+                  </div>
                 </div>
               </CardContent>
             </Card>
@@ -250,17 +250,17 @@ export function GameificationSection() {
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
                     <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-purple-500 to-pink-500">
-                      <Award className="h-5 w-5 text-white" />
+                      <Award className="h-5 w-5 text-foreground" />
                     </div>
                     <div>
-                      <CardTitle className="text-white">Achievements</CardTitle>
+                      <CardTitle className="text-foreground">Achievements</CardTitle>
                       <CardDescription>Unlock badges as you progress</CardDescription>
                     </div>
                   </div>
                   <Button
                     variant="outline"
                     size="sm"
-                    className="border-cyan-500/50 text-cyan-300"
+                    className="border-primary/50 text-primary"
                     asChild
                   >
                     <Link href="/achievements">
@@ -277,26 +277,28 @@ export function GameificationSection() {
                       key={achievement.id}
                       className={`rounded-lg border p-4 transition-all duration-300 ${
                         achievement.unlocked
-                          ? "border-cyan-500/30 bg-gradient-to-br from-cyan-900/20 to-purple-900/20"
-                          : "border-slate-700/50 bg-slate-800/30 opacity-75"
+                          ? "border-primary/30 bg-gradient-to-br from-primary/20 to-accent/20"
+                          : "border-border/50 bg-card/80 opacity-75"
                       }`}
                     >
                       <div className="flex items-start gap-3">
                         <div
                           className={`h-12 w-12 rounded-lg bg-gradient-to-br ${getTierColor(achievement.tier)} flex flex-shrink-0 items-center justify-center`}
                         >
-                          <achievement.icon className="h-6 w-6 text-white" />
+                          <achievement.icon className="h-6 w-6 text-foreground" />
                         </div>
                         <div className="min-w-0 flex-1">
                           <div className="mb-1 flex items-center gap-2">
-                            <div className="truncate font-medium text-white">
+                            <div className="truncate font-medium text-foreground">
                               {achievement.title}
                             </div>
                             {achievement.unlocked && (
-                              <CheckCircle2 className="h-4 w-4 flex-shrink-0 text-green-400" />
+                              <CheckCircle2 className="h-4 w-4 flex-shrink-0 text-[#22c55e]" />
                             )}
                           </div>
-                          <p className="mb-2 text-xs text-slate-400">{achievement.description}</p>
+                          <p className="mb-2 text-xs text-muted-foreground">
+                            {achievement.description}
+                          </p>
 
                           <div className="flex items-center justify-between">
                             <Badge
@@ -305,7 +307,7 @@ export function GameificationSection() {
                             >
                               {achievement.rarity}
                             </Badge>
-                            <div className="text-xs font-medium text-yellow-400">
+                            <div className="text-xs font-medium text-[#f97316]">
                               +{achievement.points} XP
                             </div>
                           </div>
@@ -317,7 +319,7 @@ export function GameificationSection() {
                                 className="h-1"
                                 aria-label={`${achievement.title} achievement progress: ${achievement.progress}% complete`}
                               />
-                              <div className="mt-1 text-xs text-slate-400">
+                              <div className="mt-1 text-xs text-muted-foreground">
                                 {achievement.progress}% complete
                               </div>
                             </div>
@@ -338,10 +340,10 @@ export function GameificationSection() {
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
                     <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-green-500 to-teal-500">
-                      <TrendingUp className="h-5 w-5 text-white" />
+                      <TrendingUp className="h-5 w-5 text-foreground" />
                     </div>
                     <div>
-                      <CardTitle className="text-white">Community Leaderboard</CardTitle>
+                      <CardTitle className="text-foreground">Community Leaderboard</CardTitle>
                       <CardDescription>See how you rank among peers</CardDescription>
                     </div>
                   </div>
@@ -357,8 +359,8 @@ export function GameificationSection() {
                       key={user.rank}
                       className={`flex items-center gap-4 rounded-lg p-4 transition-all duration-300 ${
                         user.name === "You"
-                          ? "border border-cyan-500/30 bg-gradient-to-r from-cyan-500/10 to-purple-500/10"
-                          : "bg-slate-800/30 hover:bg-slate-800/50"
+                          ? "border border-primary/30 bg-gradient-to-r from-primary/10 to-accent/10"
+                          : "bg-card/80 hover:bg-card"
                       }`}
                     >
                       {/* Rank */}
@@ -373,10 +375,10 @@ export function GameificationSection() {
                                   : "from-amber-600 to-yellow-600"
                             } flex items-center justify-center`}
                           >
-                            <Crown className="h-3 w-3 text-white" />
+                            <Crown className="h-3 w-3 text-foreground" />
                           </div>
                         ) : (
-                          <span className="font-medium text-slate-400">#{user.rank}</span>
+                          <span className="font-medium text-muted-foreground">#{user.rank}</span>
                         )}
                       </div>
 
@@ -384,25 +386,25 @@ export function GameificationSection() {
                       <div
                         className={`h-10 w-10 rounded-full bg-gradient-to-br ${getAvatarColor(user.name)} flex items-center justify-center`}
                       >
-                        <span className="text-sm font-semibold text-white">{user.avatar}</span>
+                        <span className="text-sm font-semibold text-foreground">{user.avatar}</span>
                       </div>
 
                       {/* User Info */}
                       <div className="flex-1">
                         <div className="flex items-center gap-2">
                           <span
-                            className={`font-medium ${user.name === "You" ? "text-cyan-300" : "text-white"}`}
+                            className={`font-medium ${user.name === "You" ? "text-primary" : "text-foreground"}`}
                           >
                             {user.name}
                           </span>
                           <Badge
                             variant="outline"
-                            className="border-slate-600 bg-slate-700/50 text-xs text-slate-300"
+                            className="border-border bg-card/50 text-xs text-muted-foreground"
                           >
                             Level {user.level}
                           </Badge>
                         </div>
-                        <div className="flex items-center gap-4 text-sm text-slate-400">
+                        <div className="flex items-center gap-4 text-sm text-muted-foreground">
                           <span>{user.points.toLocaleString()} XP</span>
                           <div className="flex items-center gap-1">
                             <Flame className="h-3 w-3 text-orange-400" />
@@ -416,7 +418,7 @@ export function GameificationSection() {
                         <Button
                           variant="outline"
                           size="sm"
-                          className="border-slate-600 text-slate-300 hover:bg-slate-700"
+                          className="border-border text-muted-foreground hover:bg-card"
                         >
                           <Users className="mr-2 h-4 w-4" />
                           Connect
@@ -427,13 +429,13 @@ export function GameificationSection() {
                 </div>
 
                 {/* Leaderboard CTA */}
-                <div className="mt-6 border-t border-slate-700/50 pt-4 text-center">
-                  <p className="mb-3 text-sm text-slate-400">
+                <div className="mt-6 border-t border-border/50 pt-4 text-center">
+                  <p className="mb-3 text-sm text-muted-foreground">
                     Join study groups to climb the rankings faster!
                   </p>
                   <Button
                     variant="outline"
-                    className="border-cyan-500/50 text-cyan-300 hover:bg-cyan-500/10"
+                    className="border-primary/50 text-primary hover:bg-primary/10"
                     asChild
                   >
                     <Link href="/community">
