@@ -34,7 +34,7 @@ const categoryIcons: Record<TermCategory, React.ComponentType<{ className?: stri
 
 const categoryColors: Record<TermCategory, string> = {
   'basic-it': 'text-blue-600 bg-blue-50',
-  'networking': 'text-green-600 bg-green-50',
+  'networking': 'text-[#22c55e] bg-green-50',
   'security': 'text-red-600 bg-red-50',
   'endpoints': 'text-cyan-600 bg-cyan-50',
   'tanium-core': 'text-sky-600 bg-sky-50',
@@ -45,7 +45,7 @@ const categoryColors: Record<TermCategory, string> = {
 };
 
 const difficultyColors = {
-  'beginner': 'text-green-600 bg-green-100',
+  'beginner': 'text-[#22c55e] bg-green-100',
   'intermediate': 'text-yellow-600 bg-yellow-100',
   'advanced': 'text-red-600 bg-red-100'
 };
@@ -134,12 +134,12 @@ export function InteractiveGlossary({
   return (
     <div className={`bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden ${className}`}>
       {/* Header */}
-      <div className="bg-gradient-to-r from-cyan-500 to-sky-600 px-6 py-4">
+      <div className="bg-gradient-to-r from-primary to-sky-600 px-6 py-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-3">
-            <BookOpen className="w-6 h-6 text-white" />
+            <BookOpen className="w-6 h-6 text-foreground" />
             <div>
-              <h2 className="text-xl font-bold text-white">Interactive Glossary</h2>
+              <h2 className="text-xl font-bold text-foreground">Interactive Glossary</h2>
               <p className="text-cyan-100 text-sm">
                 {filteredTerms.length} terms • Search and explore TCO terminology
               </p>
@@ -153,7 +153,7 @@ export function InteractiveGlossary({
         <div className="space-y-4">
           {/* Search Bar */}
           <div className="relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-5 h-5" />
             <input
               type="text"
               value={searchTerm}
@@ -164,7 +164,7 @@ export function InteractiveGlossary({
             {searchTerm && (
               <button
                 onClick={() => setSearchTerm('')}
-                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-muted-foreground hover:text-gray-600"
               >
                 ×
               </button>
@@ -180,7 +180,7 @@ export function InteractiveGlossary({
               <Filter className="w-4 h-4" />
               <span>Filters</span>
               {activeFilterCount > 0 && (
-                <span className="bg-cyan-500 text-white text-xs rounded-full px-2 py-1">
+                <span className="bg-cyan-500 text-foreground text-xs rounded-full px-2 py-1">
                   {activeFilterCount}
                 </span>
               )}
@@ -302,7 +302,7 @@ export function InteractiveGlossary({
               <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-cyan-500"></div>
             </div>
           ) : filteredTerms.length === 0 ? (
-            <div className="flex flex-col items-center justify-center h-full text-gray-500 p-6">
+            <div className="flex flex-col items-center justify-center h-full text-muted-foreground p-6">
               <Search className="w-12 h-12 mb-4" />
               <p className="text-lg font-medium">No terms found</p>
               <p className="text-sm text-center">Try adjusting your search or filters</p>
@@ -327,7 +327,7 @@ export function InteractiveGlossary({
                     <div className="flex items-start justify-between">
                       <div className="flex-1">
                         <div className="flex items-center space-x-2">
-                          <IconComponent className="w-4 h-4 text-gray-500" />
+                          <IconComponent className="w-4 h-4 text-muted-foreground" />
                           <h3 className="font-medium text-gray-900">{term.term}</h3>
                         </div>
                         <p className="text-sm text-gray-600 mt-1 line-clamp-2">
@@ -347,7 +347,7 @@ export function InteractiveGlossary({
                           )}
                         </div>
                       </div>
-                      <ChevronRight className="w-4 h-4 text-gray-400" />
+                      <ChevronRight className="w-4 h-4 text-muted-foreground" />
                     </div>
                   </motion.div>
                 );
@@ -412,7 +412,7 @@ export function InteractiveGlossary({
                     <ul className="space-y-1">
                       {selectedTerm.examples.map((example, index) => (
                         <li key={index} className="flex items-start space-x-2">
-                          <span className="text-cyan-500 mt-1">•</span>
+                          <span className="text-primary mt-1">•</span>
                           <span className="text-gray-700">{example}</span>
                         </li>
                       ))}
@@ -443,7 +443,7 @@ export function InteractiveGlossary({
               </div>
             </div>
           ) : (
-            <div className="flex flex-col items-center justify-center h-full text-gray-500 p-6">
+            <div className="flex flex-col items-center justify-center h-full text-muted-foreground p-6">
               <BookOpen className="w-16 h-16 mb-4" />
               <h3 className="text-lg font-medium mb-2">Select a term to learn more</h3>
               <p className="text-sm text-center">

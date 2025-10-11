@@ -192,7 +192,7 @@ export default function NotesPage() {
 
   return (
     <div className="mx-auto max-w-6xl p-6 text-gray-900">
-      <h1 className="mb-6 text-2xl font-semibold text-white">Notes & Spaced Repetition (MVP)</h1>
+      <h1 className="mb-6 text-2xl font-semibold text-foreground">Notes & Spaced Repetition (MVP)</h1>
 
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
         <Card>
@@ -207,7 +207,7 @@ export default function NotesPage() {
               className="min-h-[120px]"
             />
             <div className="grid grid-cols-1 gap-2">
-              <Label className="text-sm text-gray-200">Section (optional)</Label>
+              <Label className="text-sm text-muted-foreground">Section (optional)</Label>
               <Select value={selectedSectionId} onValueChange={(v) => setSelectedSectionId(v)}>
                 <SelectTrigger>
                   <SelectValue placeholder={sections.length ? "Select a section" : "No sections available"} />
@@ -276,13 +276,13 @@ export default function NotesPage() {
             <div className="space-y-6">
               {groupedBySection.map((grp) => (
                 <div key={grp.key}>
-                  <div className="mb-2 text-sm font-medium text-gray-200">{grp.label}</div>
+                  <div className="mb-2 text-sm font-medium text-muted-foreground">{grp.label}</div>
                   <ul className="divide-y divide-gray-200">
                     {grp.items.map((n) => (
                       <li key={n.id} className="flex items-start justify-between gap-4 py-3">
                         <div className="min-w-0 flex-1">
                           <div className="whitespace-pre-wrap break-words text-gray-100">{n.text}</div>
-                          <div className="mt-1 text-xs text-gray-400">
+                          <div className="mt-1 text-xs text-muted-foreground">
                             Next review: {isDue(n.srs) ? (
                               <span className="font-medium text-red-400">due now</span>
                             ) : (

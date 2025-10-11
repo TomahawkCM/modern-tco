@@ -114,11 +114,11 @@ export function BeginnerLayout({ children }: BeginnerLayoutProps) {
           
           {/* Beginner Welcome Message */}
           {isBeginnerMode && studyProgress < 10 && (
-            <div className="mb-6 rounded-lg bg-gradient-to-r from-blue-500/20 to-cyan-500/20 border border-blue-500/30 p-6">
+            <div className="mb-6 rounded-lg bg-gradient-to-r from-blue-500/20 to-primary/20 border border-primary/30 p-6">
               <div className="flex items-start space-x-4">
                 <div className="text-2xl">👋</div>
                 <div>
-                  <h3 className="text-lg font-semibold text-white mb-2">
+                  <h3 className="text-lg font-semibold text-foreground mb-2">
                     Welcome to Your Tanium Journey!
                   </h3>
                   <p className="text-blue-100 mb-4">
@@ -126,13 +126,13 @@ export function BeginnerLayout({ children }: BeginnerLayoutProps) {
                     Don't worry if you're completely new to Tanium - we'll guide you every step of the way.
                   </p>
                   <div className="flex flex-wrap gap-2">
-                    <div className="px-3 py-1 bg-white/10 rounded-full text-xs text-white">
+                    <div className="px-3 py-1 bg-white/10 rounded-full text-xs text-foreground">
                       🎯 No prior experience required
                     </div>
-                    <div className="px-3 py-1 bg-white/10 rounded-full text-xs text-white">
+                    <div className="px-3 py-1 bg-white/10 rounded-full text-xs text-foreground">
                       📚 Step-by-step learning
                     </div>
-                    <div className="px-3 py-1 bg-white/10 rounded-full text-xs text-white">
+                    <div className="px-3 py-1 bg-white/10 rounded-full text-xs text-foreground">
                       🏆 Certification-focused
                     </div>
                   </div>

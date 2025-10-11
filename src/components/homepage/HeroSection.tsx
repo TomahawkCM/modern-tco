@@ -155,7 +155,7 @@ export function HeroSection() {
             <Button
               asChild
               size="lg"
-              className="text-lg px-8 py-4 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700 text-white shadow-2xl shadow-cyan-500/25 transition-all duration-300"
+              className="text-lg px-8 py-4 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700 text-foreground shadow-2xl shadow-cyan-500/25 transition-all duration-300"
             >
               <Link href="/study">
                 <BookOpen className="w-5 h-5 mr-2" />
@@ -172,7 +172,7 @@ export function HeroSection() {
             <Button
               variant="outline"
               size="lg"
-              className="text-lg px-8 py-4 border-2 border-cyan-500/50 text-cyan-300 hover:bg-cyan-500/10 backdrop-blur-md transition-all duration-300"
+              className="text-lg px-8 py-4 border-2 border-primary/50 text-primary hover:bg-primary/10 backdrop-blur-md transition-all duration-300"
               asChild
             >
               <Link href="/demo">
@@ -191,7 +191,7 @@ export function HeroSection() {
         animate={{ y: [0, 10, 0] }}
         transition={{ duration: 2, repeat: Infinity }}
       >
-        <div className="w-6 h-10 border-2 border-cyan-500/50 rounded-full flex justify-center">
+        <div className="w-6 h-10 border-2 border-primary/50 rounded-full flex justify-center">
           <motion.div
             className="w-1 h-3 bg-cyan-400 rounded-full mt-2"
             animate={{ y: [0, 12, 0] }}

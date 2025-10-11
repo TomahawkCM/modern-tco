@@ -41,14 +41,14 @@ export function ModulesBrowser({ modules }: { modules: ModuleMeta[] }) {
     <div className="space-y-4">
       <div className="flex items-center gap-2">
         <button
-          className={`rounded px-2 py-1 text-sm ${view === 'grid' ? 'bg-primary/20 text-primary' : 'bg-white/5 text-gray-300'}`}
+          className={`rounded px-2 py-1 text-sm ${view === 'grid' ? 'bg-primary/20 text-primary' : 'bg-white/5 text-muted-foreground'}`}
           onClick={() => setView('grid')}
           aria-pressed={view === 'grid'}
         >
           Grid
         </button>
         <button
-          className={`rounded px-2 py-1 text-sm ${view === 'table' ? 'bg-primary/20 text-primary' : 'bg-white/5 text-gray-300'}`}
+          className={`rounded px-2 py-1 text-sm ${view === 'table' ? 'bg-primary/20 text-primary' : 'bg-white/5 text-muted-foreground'}`}
           onClick={() => setView('table')}
           aria-pressed={view === 'table'}
         >

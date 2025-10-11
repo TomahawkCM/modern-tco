@@ -111,13 +111,13 @@ const STUDY_MODULES = [
 const getDifficultyColor = (difficulty: string) => {
   switch (difficulty) {
     case "Beginner":
-      return "border-green-200 bg-green-50 text-green-700 dark:border-green-800 dark:bg-green-950 dark:text-green-300";
+      return "border-green-200 bg-green-50 text-green-700 dark:border-green-800 dark:bg-green-950 dark:text-[#22c55e]";
     case "Intermediate":
-      return "border-yellow-200 bg-yellow-50 text-yellow-700 dark:border-yellow-800 dark:bg-yellow-950 dark:text-yellow-300";
+      return "border-yellow-200 bg-yellow-50 text-yellow-700 dark:border-yellow-800 dark:bg-yellow-950 dark:text-[#f97316]";
     case "Advanced":
       return "border-red-200 bg-red-50 text-red-700 dark:border-red-800 dark:bg-red-950 dark:text-red-300";
     default:
-      return "border-gray-200 bg-gray-50 text-gray-700 dark:border-gray-800 dark:bg-gray-950 dark:text-gray-300";
+      return "border-gray-200 bg-gray-50 text-gray-700 dark:border-gray-800 dark:bg-gray-950 dark:text-muted-foreground";
   }
 };
 
@@ -134,56 +134,56 @@ export default function StudyPage() {
       <div className="space-y-4 text-center">
         <div className="flex items-center justify-center gap-3">
           <GraduationCap className="h-12 w-12 text-blue-600" />
-          <h1 className="text-4xl font-bold text-white">Tanium TCO Study Center</h1>
+          <h1 className="text-4xl font-bold text-foreground">Tanium TCO Study Center</h1>
         </div>
-        <p className="mx-auto max-w-2xl text-lg text-gray-300">
+        <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
           World-class certification preparation with 11.6 hours of comprehensive study content.
           Master the Tanium platform with learning science-based modules.
         </p>
 
         <div className="flex flex-wrap items-center justify-center gap-4 pt-4">
-          <div className="flex items-center gap-2 rounded-lg border border-blue-500/20 bg-blue-500/10 px-4 py-2">
-            <BookOpen className="h-5 w-5 text-blue-400" />
+          <div className="flex items-center gap-2 rounded-lg border border-primary/20 bg-primary/10 px-4 py-2">
+            <BookOpen className="h-5 w-5 text-primary" />
             <div className="text-left">
-              <div className="text-sm font-medium text-blue-300">6 Core Modules</div>
-              <div className="text-xs text-blue-400/80">Complete curriculum</div>
+              <div className="text-sm font-medium text-primary">6 Core Modules</div>
+              <div className="text-xs text-primary/80">Complete curriculum</div>
             </div>
           </div>
 
-          <div className="flex items-center gap-2 rounded-lg border border-green-500/20 bg-green-500/10 px-4 py-2">
-            <Clock className="h-5 w-5 text-green-400" />
+          <div className="flex items-center gap-2 rounded-lg border border-[#22c55e]/20 bg-[#22c55e]/10 px-4 py-2">
+            <Clock className="h-5 w-5 text-[#22c55e]" />
             <div className="text-left">
-              <div className="text-sm font-medium text-green-300">
+              <div className="text-sm font-medium text-[#22c55e]">
                 {Math.floor(totalTime / 60)}h {totalTime % 60}m Total
               </div>
-              <div className="text-xs text-green-400/80">Estimated time</div>
+              <div className="text-xs text-[#22c55e]/80">Estimated time</div>
             </div>
           </div>
 
-          <div className="flex items-center gap-2 rounded-lg border border-purple-500/20 bg-purple-500/10 px-4 py-2">
-            <Target className="h-5 w-5 text-purple-400" />
+          <div className="flex items-center gap-2 rounded-lg border border-accent/20 bg-accent/10 px-4 py-2">
+            <Target className="h-5 w-5 text-accent-foreground" />
             <div className="text-left">
-              <div className="text-sm font-medium text-purple-300">85%+ Pass Rate</div>
-              <div className="text-xs text-purple-400/80">Expected outcome</div>
+              <div className="text-sm font-medium text-accent-foreground">85%+ Pass Rate</div>
+              <div className="text-xs text-accent-foreground/80">Expected outcome</div>
             </div>
           </div>
         </div>
       </div>
 
       {/* Learning Path Notice */}
-      <Card className="border-blue-500/20 bg-gradient-to-r from-blue-500/10 to-indigo-500/10">
+      <Card className="border-primary/20 bg-gradient-to-r from-blue-500/10 to-indigo-500/10">
         <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-blue-300">
-            <Lightbulb className="h-5 w-5 text-blue-400" />
+          <CardTitle className="flex items-center gap-2 text-primary">
+            <Lightbulb className="h-5 w-5 text-primary" />
             Recommended Learning Path
           </CardTitle>
         </CardHeader>
-        <CardContent className="text-gray-300">
+        <CardContent className="text-muted-foreground">
           <p className="mb-3">
-            <strong className="text-blue-300">New to Tanium?</strong> Start with the Platform Foundation module for a
+            <strong className="text-primary">New to Tanium?</strong> Start with the Platform Foundation module for a
             complete introduction. Then progress through each module in order.
           </p>
-          <p className="text-sm text-gray-400">
+          <p className="text-sm text-muted-foreground">
             Each module includes interactive examples, practice questions, and active recall
             flashcards for optimal retention.
           </p>
@@ -195,7 +195,7 @@ export default function StudyPage() {
         {STUDY_MODULES.map((module) => (
           <Card
             key={module.slug}
-            className="group cursor-pointer border-white/10 bg-slate-900/50 transition-all hover:border-blue-500/30 hover:shadow-lg hover:shadow-blue-500/10"
+            className="group cursor-pointer border-white/10 bg-card/50 transition-all hover:border-primary/30 hover:shadow-lg hover:shadow-blue-500/10"
             onClick={() => router.push(`/study/${module.slug}`)}
           >
             <CardHeader>
@@ -205,10 +205,10 @@ export default function StudyPage() {
                   {module.difficulty}
                 </Badge>
               </div>
-              <CardTitle className="text-xl text-white group-hover:text-blue-400">
+              <CardTitle className="text-xl text-foreground group-hover:text-primary">
                 {module.title}
               </CardTitle>
-              <CardDescription className="line-clamp-2 text-gray-400">
+              <CardDescription className="line-clamp-2 text-muted-foreground">
                 {module.description}
               </CardDescription>
             </CardHeader>
@@ -216,32 +216,32 @@ export default function StudyPage() {
             <CardContent className="space-y-4">
               <div className="space-y-2">
                 <div className="flex items-center justify-between text-sm">
-                  <span className="flex items-center gap-1 text-gray-400">
+                  <span className="flex items-center gap-1 text-muted-foreground">
                     <Clock className="h-4 w-4" />
                     {module.estimatedTime}
                   </span>
                   {module.examWeight !== "0%" && (
-                    <span className="font-medium text-blue-400">{module.examWeight} exam</span>
+                    <span className="font-medium text-primary">{module.examWeight} exam</span>
                   )}
                 </div>
               </div>
 
               <div className="space-y-1.5">
-                <p className="text-xs font-medium text-gray-500">Learning Objectives:</p>
+                <p className="text-xs font-medium text-muted-foreground">Learning Objectives:</p>
                 {module.objectives.slice(0, 2).map((objective, idx) => (
-                  <div key={idx} className="flex items-start gap-2 text-xs text-gray-400">
-                    <CheckCircle2 className="mt-0.5 h-3 w-3 flex-shrink-0 text-green-500" />
+                  <div key={idx} className="flex items-start gap-2 text-xs text-muted-foreground">
+                    <CheckCircle2 className="mt-0.5 h-3 w-3 flex-shrink-0 text-[#22c55e]" />
                     <span>{objective}</span>
                   </div>
                 ))}
                 {module.objectives.length > 2 && (
-                  <p className="text-xs text-gray-500">
+                  <p className="text-xs text-muted-foreground">
                     +{module.objectives.length - 2} more objectives
                   </p>
                 )}
               </div>
 
-              <Button className="w-full bg-blue-600 hover:bg-blue-700 group-hover:bg-blue-500">
+              <Button className="w-full bg-blue-600 hover:bg-blue-700 group-hover:bg-primary">
                 Start Learning
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
@@ -251,14 +251,14 @@ export default function StudyPage() {
       </div>
 
       {/* Bottom CTA */}
-      <Card className="border-green-500/20 bg-gradient-to-r from-green-500/10 to-emerald-500/10">
+      <Card className="border-[#22c55e]/20 bg-gradient-to-r from-green-500/10 to-emerald-500/10">
         <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-green-300">
-            <Target className="h-5 w-5 text-green-400" />
+          <CardTitle className="flex items-center gap-2 text-[#22c55e]">
+            <Target className="h-5 w-5 text-[#22c55e]" />
             Ready to Get Started?
           </CardTitle>
         </CardHeader>
-        <CardContent className="text-gray-300">
+        <CardContent className="text-muted-foreground">
           <p className="mb-4">
             Begin your journey to Tanium TCO certification. All modules are ready with
             enterprise-grade content, interactive examples, and spaced repetition for maximum
@@ -266,7 +266,7 @@ export default function StudyPage() {
           </p>
           <Button
             onClick={() => router.push("/study/platform-foundation")}
-            className="bg-green-600 hover:bg-green-700"
+            className="bg-[#22c55e] hover:bg-green-700"
           >
             Start with Platform Foundation
             <ArrowRight className="ml-2 h-4 w-4" />

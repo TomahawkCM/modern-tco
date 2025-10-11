@@ -57,7 +57,7 @@ export function ExamModeTabs({
         timeLimit: null,
         difficulty: "mixed",
         icon: BookOpen,
-        color: "text-blue-500",
+        color: "text-primary",
         bgColor: "bg-blue-50 dark:bg-blue-900/20",
       },
       {
@@ -68,7 +68,7 @@ export function ExamModeTabs({
         timeLimit: null,
         difficulty: "basic",
         icon: Brain,
-        color: "text-green-500",
+        color: "text-[#22c55e]",
         bgColor: "bg-green-50 dark:bg-green-900/20",
       },
       {
@@ -79,8 +79,8 @@ export function ExamModeTabs({
         timeLimit: null,
         difficulty: "advanced",
         icon: Zap,
-        color: "text-cyan-500",
-        bgColor: "bg-cyan-50 dark:bg-cyan-900/20",
+        color: "text-primary",
+        bgColor: "bg-cyan-50 dark:bg-primary/20",
       },
     ],
     mock: [
@@ -103,7 +103,7 @@ export function ExamModeTabs({
         timeLimit: 30,
         difficulty: "mixed",
         icon: Clock,
-        color: "text-yellow-500",
+        color: "text-[#f97316]",
         bgColor: "bg-yellow-50 dark:bg-yellow-900/20",
       },
       {
@@ -149,7 +149,7 @@ export function ExamModeTabs({
         timeLimit: null,
         difficulty: "mixed",
         icon: BarChart3,
-        color: "text-blue-500",
+        color: "text-primary",
         bgColor: "bg-blue-50 dark:bg-blue-900/20",
       },
     ],
@@ -270,19 +270,19 @@ export function ExamModeTabs({
               <CardContent>
                 <ul className="space-y-2 text-sm">
                   <li className="flex items-center space-x-2">
-                    <CheckCircle className="h-4 w-4 text-green-500" />
+                    <CheckCircle className="h-4 w-4 text-[#22c55e]" />
                     <span>Immediate feedback on each question</span>
                   </li>
                   <li className="flex items-center space-x-2">
-                    <CheckCircle className="h-4 w-4 text-green-500" />
+                    <CheckCircle className="h-4 w-4 text-[#22c55e]" />
                     <span>Detailed explanations for correct answers</span>
                   </li>
                   <li className="flex items-center space-x-2">
-                    <CheckCircle className="h-4 w-4 text-green-500" />
+                    <CheckCircle className="h-4 w-4 text-[#22c55e]" />
                     <span>No time pressure - learn at your pace</span>
                   </li>
                   <li className="flex items-center space-x-2">
-                    <CheckCircle className="h-4 w-4 text-green-500" />
+                    <CheckCircle className="h-4 w-4 text-[#22c55e]" />
                     <span>Track progress across all domains</span>
                   </li>
                 </ul>
@@ -330,15 +330,15 @@ export function ExamModeTabs({
                     <span>Timed conditions matching real exam</span>
                   </li>
                   <li className="flex items-center space-x-2">
-                    <Trophy className="h-4 w-4 text-yellow-500" />
+                    <Trophy className="h-4 w-4 text-[#f97316]" />
                     <span>Comprehensive scoring and analysis</span>
                   </li>
                   <li className="flex items-center space-x-2">
-                    <BarChart3 className="h-4 w-4 text-blue-500" />
+                    <BarChart3 className="h-4 w-4 text-primary" />
                     <span>Performance tracking across attempts</span>
                   </li>
                   <li className="flex items-center space-x-2">
-                    <Users className="h-4 w-4 text-green-500" />
+                    <Users className="h-4 w-4 text-[#22c55e]" />
                     <span>Compare with other candidates</span>
                   </li>
                 </ul>
@@ -373,7 +373,7 @@ export function ExamModeTabs({
             <Card className="glass border-green-200 bg-green-50/50 dark:bg-green-900/10">
               <CardHeader>
                 <CardTitle className="flex items-center space-x-2">
-                  <RotateCcw className="h-5 w-5 text-green-600" />
+                  <RotateCcw className="h-5 w-5 text-[#22c55e]" />
                   <span>Review Mode Strategy</span>
                 </CardTitle>
               </CardHeader>
@@ -384,11 +384,11 @@ export function ExamModeTabs({
                     <span>Focus on previously missed questions</span>
                   </li>
                   <li className="flex items-center space-x-2">
-                    <Brain className="h-4 w-4 text-cyan-500" />
+                    <Brain className="h-4 w-4 text-primary" />
                     <span>Reinforce learning with explanations</span>
                   </li>
                   <li className="flex items-center space-x-2">
-                    <BarChart3 className="h-4 w-4 text-blue-500" />
+                    <BarChart3 className="h-4 w-4 text-primary" />
                     <span>Identify and strengthen weak areas</span>
                   </li>
                   <li className="flex items-center space-x-2">

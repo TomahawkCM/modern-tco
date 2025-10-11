@@ -52,7 +52,7 @@ export const LEVELS: Level[] = [
     name: "Beginner",
     minPoints: 0,
     maxPoints: 499,
-    color: "text-gray-500",
+    color: "text-muted-foreground",
     description: "Starting your TCO journey",
   },
   {
@@ -60,7 +60,7 @@ export const LEVELS: Level[] = [
     name: "Apprentice",
     minPoints: 500,
     maxPoints: 1499,
-    color: "text-green-500",
+    color: "text-[#22c55e]",
     description: "Building foundational knowledge",
   },
   {
@@ -68,7 +68,7 @@ export const LEVELS: Level[] = [
     name: "Intermediate",
     minPoints: 1500,
     maxPoints: 2999,
-    color: "text-blue-500",
+    color: "text-primary",
     description: "Developing expertise",
   },
   {
@@ -122,7 +122,7 @@ export const BADGES: Badge[] = [
     category: "progress",
     tier: "gold",
     icon: "Building2Icon",
-    color: "text-cyan-500",
+    color: "text-primary",
     criteria: {
       type: "module_completed",
       threshold: 1,
@@ -137,7 +137,7 @@ export const BADGES: Badge[] = [
     category: "progress",
     tier: "gold",
     icon: "MessageSquareQuoteIcon",
-    color: "text-blue-500",
+    color: "text-primary",
     criteria: {
       type: "module_completed",
       threshold: 2,
@@ -182,7 +182,7 @@ export const BADGES: Badge[] = [
     category: "progress",
     tier: "gold",
     icon: "CompassIcon",
-    color: "text-green-500",
+    color: "text-[#22c55e]",
     criteria: {
       type: "module_completed",
       threshold: 5,
@@ -212,7 +212,7 @@ export const BADGES: Badge[] = [
     category: "progress",
     tier: "silver",
     icon: "TrendingUpIcon",
-    color: "text-gray-400",
+    color: "text-muted-foreground",
     criteria: {
       type: "sections_completed",
       threshold: 42,
@@ -227,7 +227,7 @@ export const BADGES: Badge[] = [
     category: "progress",
     tier: "platinum",
     icon: "TrophyIcon",
-    color: "text-yellow-500",
+    color: "text-[#f97316]",
     criteria: {
       type: "sections_completed",
       threshold: 83,
@@ -307,7 +307,7 @@ export const BADGES: Badge[] = [
     category: "mastery",
     tier: "bronze",
     icon: "BrainIcon",
-    color: "text-green-500",
+    color: "text-[#22c55e]",
     criteria: {
       type: "quiz_perfect",
       threshold: 1,
@@ -322,7 +322,7 @@ export const BADGES: Badge[] = [
     category: "mastery",
     tier: "gold",
     icon: "StarIcon",
-    color: "text-yellow-500",
+    color: "text-[#f97316]",
     criteria: {
       type: "domain_mastery",
       threshold: 90,
@@ -354,7 +354,7 @@ export const BADGES: Badge[] = [
     category: "practice",
     tier: "bronze",
     icon: "BookOpenIcon",
-    color: "text-blue-400",
+    color: "text-primary",
     criteria: {
       type: "questions_answered",
       threshold: 50,
@@ -369,7 +369,7 @@ export const BADGES: Badge[] = [
     category: "practice",
     tier: "silver",
     icon: "BookOpenIcon",
-    color: "text-blue-500",
+    color: "text-primary",
     criteria: {
       type: "questions_answered",
       threshold: 200,
@@ -431,7 +431,7 @@ export const BADGES: Badge[] = [
     category: "excellence",
     tier: "bronze",
     icon: "SunriseIcon",
-    color: "text-yellow-400",
+    color: "text-[#f97316]",
     criteria: {
       type: "early_session",
       threshold: 1,
@@ -463,7 +463,7 @@ export const BADGES: Badge[] = [
     category: "excellence",
     tier: "silver",
     icon: "CalendarIcon",
-    color: "text-green-500",
+    color: "text-[#22c55e]",
     criteria: {
       type: "weekend_study",
       threshold: 1,

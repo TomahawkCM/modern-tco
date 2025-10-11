@@ -118,7 +118,7 @@ const CyberpunkStudyCard = ({
       onClick={onClick}
     >
       {/* Glass morphism background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-gray-900/90 via-black/95 to-gray-900/90 backdrop-blur-xl border border-cyan-500/20 rounded-2xl" />
+      <div className="absolute inset-0 bg-gradient-to-br from-gray-900/90 via-black/95 to-gray-900/90 backdrop-blur-xl border border-primary/20 rounded-2xl" />
       
       {/* Authentic Archon gradient overlay */}
       <div 
@@ -207,19 +207,19 @@ const CyberpunkStudyCard = ({
         </h3>
 
         {/* Description */}
-        <p className="text-gray-300 text-sm leading-relaxed mb-4 flex-1">
+        <p className="text-muted-foreground text-sm leading-relaxed mb-4 flex-1">
           {description}
         </p>
 
         {/* Progress bar */}
         <div className="mb-4">
           <div className="flex justify-between items-center mb-2">
-            <span className="text-xs text-gray-400">Progress</span>
-            <span className="text-xs text-cyan-400 font-medium">{progress}%</span>
+            <span className="text-xs text-muted-foreground">Progress</span>
+            <span className="text-xs text-primary font-medium">{progress}%</span>
           </div>
-          <div className="w-full bg-gray-800 rounded-full h-2 overflow-hidden">
+          <div className="w-full bg-card rounded-full h-2 overflow-hidden">
             <motion.div
-              className="h-full rounded-full bg-gradient-to-r from-cyan-400 to-sky-500"
+              className="h-full rounded-full bg-gradient-to-r from-primary to-sky-500"
               initial={{ width: 0 }}
               animate={{ width: `${progress}%` }}
               transition={{ duration: 1, delay: 0.5 }}
@@ -229,7 +229,7 @@ const CyberpunkStudyCard = ({
 
         {/* Footer */}
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-4 text-xs text-gray-400">
+          <div className="flex items-center gap-4 text-xs text-muted-foreground">
             <div className="flex items-center gap-1">
               <Clock className="w-3 h-3" />
               <span>{duration}</span>
@@ -241,7 +241,7 @@ const CyberpunkStudyCard = ({
           </div>
 
           <motion.button
-            className="flex items-center gap-1 px-3 py-1 rounded-lg bg-cyan-500/20 border border-cyan-500/30 text-cyan-400 text-xs font-medium hover:bg-cyan-500/30 transition-colors"
+            className="flex items-center gap-1 px-3 py-1 rounded-lg bg-primary/20 border border-primary/30 text-primary text-xs font-medium hover:bg-cyan-500/30 transition-colors"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             disabled={isLocked}

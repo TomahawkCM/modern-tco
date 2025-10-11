@@ -129,7 +129,7 @@ export function VirtualScrollTable({
         <div className="flex items-center justify-center h-96">
           <div className="text-center">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-tanium-accent mx-auto"></div>
-            <p className="mt-4 text-gray-400">Loading results...</p>
+            <p className="mt-4 text-muted-foreground">Loading results...</p>
           </div>
         </div>
       </Card>
@@ -140,7 +140,7 @@ export function VirtualScrollTable({
     return (
       <Card className={`glass border-white/10 ${className}`}>
         <div className="flex items-center justify-center h-96">
-          <div className="text-center text-gray-400">
+          <div className="text-center text-muted-foreground">
             <Database className="h-12 w-12 mx-auto mb-3 opacity-50" />
             <p>{emptyMessage}</p>
           </div>
@@ -154,7 +154,7 @@ export function VirtualScrollTable({
       <div className="flex items-center justify-between p-4 border-b border-gray-700">
         <div className="flex items-center gap-2">
           <Database className="h-5 w-5 text-tanium-accent" />
-          <span className="font-medium text-white">Query Results</span>
+          <span className="font-medium text-foreground">Query Results</span>
           <Badge variant="secondary">{data.length.toLocaleString()} rows</Badge>
         </div>
         {visibleItems.length < data.length && (
@@ -166,7 +166,7 @@ export function VirtualScrollTable({
 
       <div className="relative">
         {/* Fixed header */}
-        <div className="sticky top-0 z-10 bg-gray-800 border-b border-gray-700">
+        <div className="sticky top-0 z-10 bg-card border-b border-gray-700">
           <Table>
             <TableHeader>
               <TableRow className="hover:bg-transparent">
@@ -174,14 +174,14 @@ export function VirtualScrollTable({
                   <TableHead
                     key={column.key}
                     style={{ width: column.width }}
-                    className="text-gray-300"
+                    className="text-muted-foreground"
                   >
                     {column.sortable !== false ? (
                       <Button
                         variant="ghost"
                         size="sm"
                         onClick={() => handleSort(column.key)}
-                        className="h-auto p-0 font-medium text-gray-300 hover:text-white"
+                        className="h-auto p-0 font-medium text-muted-foreground hover:text-foreground"
                       >
                         {column.label}
                         {sortConfig.key === column.key && (
@@ -230,7 +230,7 @@ export function VirtualScrollTable({
                       <TableRow
                         key={actualIndex}
                         className={`
-                          ${striped && actualIndex % 2 === 0 ? 'bg-gray-800/50' : ''}
+                          ${striped && actualIndex % 2 === 0 ? 'bg-card/50' : ''}
                           ${highlightOnHover ? 'hover:bg-gray-700/50' : ''}
                           ${onRowClick ? 'cursor-pointer' : ''}
                           transition-colors
@@ -246,7 +246,7 @@ export function VirtualScrollTable({
                           <TableCell
                             key={column.key}
                             style={{ width: column.width }}
-                            className="text-gray-300"
+                            className="text-muted-foreground"
                           >
                             {column.render
                               ? column.render(row[column.key], row)
@@ -265,8 +265,8 @@ export function VirtualScrollTable({
 
       {/* Performance indicator */}
       {data.length > 1000 && (
-        <div className="p-2 border-t border-gray-700 bg-gray-800/50">
-          <div className="flex items-center gap-2 text-xs text-gray-400">
+        <div className="p-2 border-t border-gray-700 bg-card/50">
+          <div className="flex items-center gap-2 text-xs text-muted-foreground">
             <AlertCircle className="h-3 w-3" />
             <span>Virtual scrolling enabled for optimal performance with {data.length.toLocaleString()} rows</span>
           </div>

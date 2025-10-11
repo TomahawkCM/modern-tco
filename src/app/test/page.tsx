@@ -37,7 +37,7 @@ export default function TestPage() {
             </p>
             <p>
               <strong>Status:</strong>{" "}
-              <span className="font-semibold text-green-600">Connected</span>
+              <span className="font-semibold text-[#22c55e]">Connected</span>
             </p>
           </div>
         </div>

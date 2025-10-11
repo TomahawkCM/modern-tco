@@ -269,12 +269,12 @@ export function Sidebar({ isOpen = true, onClose, className }: SidebarProps) {
         <div className="glass-card rounded-lg p-3 border-archon-border-bright cyber-border">
           <div className="flex items-center space-x-3">
             <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-archon-cyan-bright to-archon-cyan-primary shadow-[0_0_20px_rgba(0,212,255,0.3)]">
-              <User className="h-5 w-5 text-white" />
+              <User className="h-5 w-5 text-foreground" />
             </div>
             <div>
               <p className="text-sm font-medium text-archon-text-primary archon-text-glow">Study Progress</p>
               <div className="flex items-center space-x-2 text-xs text-archon-text-secondary">
-                <Trophy className="h-3 w-3 text-yellow-400 drop-shadow-[0_0_5px_rgba(250,204,21,0.5)]" />
+                <Trophy className="h-3 w-3 text-[#f97316] drop-shadow-[0_0_5px_rgba(250,204,21,0.5)]" />
                 <span>Level 3 Learner</span>
               </div>
             </div>
@@ -360,7 +360,7 @@ export function Sidebar({ isOpen = true, onClose, className }: SidebarProps) {
               </div>
               <span className="text-sm text-archon-text-primary font-medium">Study Streak</span>
             </div>
-            <Badge className="text-xs bg-gradient-to-r from-archon-cyan-primary to-archon-purple-primary border-archon-cyan-bright/30 text-white">
+            <Badge className="text-xs bg-gradient-to-r from-archon-cyan-primary to-archon-purple-primary border-archon-cyan-bright/30 text-foreground">
               7 days
             </Badge>
           </div>

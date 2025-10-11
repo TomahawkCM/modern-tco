@@ -12,8 +12,8 @@ export default async function StudyReviewPage() {
   return (
     <div className="container mx-auto max-w-4xl px-4 py-8">
       <div className="mb-6 text-center">
-        <h1 className="mb-2 text-3xl font-bold text-white">Review Center</h1>
-        <p className="text-blue-200">All sections you've flagged for review, across modules.</p>
+        <h1 className="mb-2 text-3xl font-bold text-foreground">Review Center</h1>
+        <p className="text-muted-foreground">All sections you've flagged for review, across modules.</p>
       </div>
       <ReviewCenter modules={modules} />
     </div>

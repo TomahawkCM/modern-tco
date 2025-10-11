@@ -150,8 +150,8 @@ export default function BeginnerModeToggle({
             onMouseLeave={() => showTooltip && setShowFeatures(false)}
             className={`relative flex items-center space-x-2 px-4 py-2 rounded-full shadow-lg transition-all backdrop-blur-sm ${
               isEnabled 
-                ? 'border border-cyan-400/30 text-white shadow-cyan-400/20'
-                : 'bg-white/10 border border-gray-300/30 text-gray-200 hover:bg-white/20'
+                ? 'border border-cyan-400/30 text-foreground shadow-cyan-400/20'
+                : 'bg-white/10 border border-gray-300/30 text-muted-foreground hover:bg-white/20'
             }`}
             style={isEnabled ? {
               background: getArchonOverlay().background,
@@ -198,8 +198,8 @@ export default function BeginnerModeToggle({
               {/* Header */}
               <div className={`p-4 ${
                 isEnabled 
-                  ? 'text-white border-b border-cyan-400/30'
-                  : 'bg-black/40 text-gray-300 border-b border-gray-600/30'
+                  ? 'text-foreground border-b border-cyan-400/30'
+                  : 'bg-black/40 text-muted-foreground border-b border-gray-600/30'
               }`}
               style={isEnabled ? {
                 background: getArchonOverlay().background
@@ -217,14 +217,14 @@ export default function BeginnerModeToggle({
                     className={`p-1 rounded-full transition-colors ${
                       isEnabled 
                         ? 'hover:bg-cyan-400/20 text-cyan-200 hover:text-cyan-100'
-                        : 'hover:bg-gray-600/30 text-gray-400 hover:text-gray-300'
+                        : 'hover:bg-muted/30 text-muted-foreground hover:text-muted-foreground'
                     }`}
                   >
                     <X className="w-4 h-4" />
                   </button>
                 </div>
                 <p className={`text-sm mt-1 ${
-                  isEnabled ? 'text-white/90' : 'text-gray-600'
+                  isEnabled ? 'text-foreground/90' : 'text-gray-600'
                 }`}>
                   {isEnabled 
                     ? 'Enhanced guidance and support enabled'
@@ -254,24 +254,24 @@ export default function BeginnerModeToggle({
                   >
                     <div className={`flex-shrink-0 p-2 rounded-lg ${
                       feature.enabled 
-                        ? 'bg-cyan-400/20 text-cyan-300'
-                        : 'bg-gray-600/30 text-gray-400'
+                        ? 'bg-cyan-400/20 text-primary'
+                        : 'bg-muted/30 text-muted-foreground'
                     }`}>
                       <feature.icon className="w-4 h-4" />
                     </div>
                     <div className="flex-1">
                       <div className="flex items-center space-x-2">
                         <h4 className={`text-sm font-semibold ${
-                          feature.enabled ? 'text-white' : 'text-gray-400'
+                          feature.enabled ? 'text-foreground' : 'text-muted-foreground'
                         }`}>
                           {feature.title}
                         </h4>
                         {feature.enabled && (
-                          <Check className="w-4 h-4 text-cyan-400" />
+                          <Check className="w-4 h-4 text-primary" />
                         )}
                       </div>
                       <p className={`text-xs mt-1 ${
-                        feature.enabled ? 'text-cyan-100' : 'text-gray-500'
+                        feature.enabled ? 'text-cyan-100' : 'text-muted-foreground'
                       }`}>
                         {feature.description}
                       </p>
@@ -288,7 +288,7 @@ export default function BeginnerModeToggle({
                      WebkitBackdropFilter: 'blur(8px)'
                    }}>
                 <div className="flex items-start space-x-2">
-                  <Info className="w-4 h-4 text-cyan-400 flex-shrink-0 mt-0.5" />
+                  <Info className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
                   <p className="text-xs text-cyan-100">
                     {isEnabled 
                       ? 'Perfect for beginners! Switch off when you feel confident.'
@@ -336,7 +336,7 @@ export default function BeginnerModeToggle({
               </motion.div>
               
               <div className="space-y-2">
-                <h2 className="text-2xl font-bold text-white">
+                <h2 className="text-2xl font-bold text-foreground">
                   Beginner Mode Activated! 🎉
                 </h2>
                 <p className="text-cyan-100">
@@ -353,8 +353,8 @@ export default function BeginnerModeToggle({
                          backdropFilter: 'blur(8px)',
                          WebkitBackdropFilter: 'blur(8px)'
                        }}>
-                    <feature.icon className="w-6 h-6 text-cyan-300 mx-auto mb-1" />
-                    <p className="text-xs font-medium text-white">{feature.title}</p>
+                    <feature.icon className="w-6 h-6 text-primary mx-auto mb-1" />
+                    <p className="text-xs font-medium text-foreground">{feature.title}</p>
                   </div>
                 ))}
               </div>
@@ -363,7 +363,7 @@ export default function BeginnerModeToggle({
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setIsFirstVisit(false)}
-                className="w-full px-6 py-3 text-white font-semibold rounded-lg transition-colors border border-cyan-400/30"
+                className="w-full px-6 py-3 text-foreground font-semibold rounded-lg transition-colors border border-cyan-400/30"
                 style={{
                   background: getHoverGradient(),
                   boxShadow: '0 0 20px rgba(0, 255, 255, 0.3), 0 0 40px rgba(147, 51, 234, 0.2)'

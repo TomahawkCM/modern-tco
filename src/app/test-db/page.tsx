@@ -310,22 +310,22 @@ export default function TestDatabasePage() {
   const getStatusIcon = (status: TestResult["status"]) => {
     switch (status) {
       case "success":
-        return <CheckCircle2 className="h-5 w-5 text-green-400" />;
+        return <CheckCircle2 className="h-5 w-5 text-[#22c55e]" />;
       case "error":
         return <XCircle className="h-5 w-5 text-red-400" />;
       case "testing":
-        return <Loader2 className="h-5 w-5 animate-spin text-blue-400" />;
+        return <Loader2 className="h-5 w-5 animate-spin text-primary" />;
       default:
-        return <AlertCircle className="h-5 w-5 text-gray-400" />;
+        return <AlertCircle className="h-5 w-5 text-muted-foreground" />;
     }
   };
 
   const getStatusBadge = (status: TestResult["status"]) => {
     const variants = {
-      success: "bg-green-500/20 text-green-300",
+      success: "bg-[#22c55e]/20 text-[#22c55e]",
       error: "bg-red-500/20 text-red-300",
-      testing: "bg-blue-500/20 text-blue-300",
-      pending: "bg-gray-500/20 text-gray-300",
+      testing: "bg-primary/20 text-primary",
+      pending: "bg-gray-500/20 text-muted-foreground",
     };
 
     return <Badge className={cn("ml-auto", variants[status])}>{status}</Badge>;
@@ -335,14 +335,14 @@ export default function TestDatabasePage() {
     
       <div className="container mx-auto max-w-6xl px-4 py-8">
         <div className="mb-8">
-          <h1 className="mb-4 text-4xl font-bold text-white">Database Integration Test</h1>
-          <p className="text-white/70">Verify all database connections and context integrations</p>
+          <h1 className="mb-4 text-4xl font-bold text-foreground">Database Integration Test</h1>
+          <p className="text-foreground/70">Verify all database connections and context integrations</p>
         </div>
 
         {/* Authentication Status */}
         <Card className="glass mb-6 border-white/10">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-white">
+            <CardTitle className="flex items-center gap-2 text-foreground">
               <User className="h-5 w-5" />
               Authentication Status
             </CardTitle>
@@ -350,25 +350,25 @@ export default function TestDatabasePage() {
           <CardContent>
             {user ? (
               <div className="space-y-2">
-                <Alert className="border-green-500/30 bg-green-500/10">
-                  <CheckCircle2 className="h-4 w-4 text-green-400" />
-                  <AlertDescription className="text-white">
+                <Alert className="border-[#22c55e]/30 bg-[#22c55e]/10">
+                  <CheckCircle2 className="h-4 w-4 text-[#22c55e]" />
+                  <AlertDescription className="text-foreground">
                     Signed in as <strong>{user.email}</strong>
                   </AlertDescription>
                 </Alert>
                 <Button
                   onClick={signOut}
                   variant="outline"
-                  className="border-white/20 text-white hover:bg-white/10"
+                  className="border-white/20 text-foreground hover:bg-white/10"
                 >
                   Sign Out
                 </Button>
               </div>
             ) : (
               <div className="space-y-2">
-                <Alert className="border-yellow-500/30 bg-yellow-500/10">
-                  <AlertCircle className="h-4 w-4 text-yellow-400" />
-                  <AlertDescription className="text-white">
+                <Alert className="border-[#f97316]/30 bg-[#f97316]/10">
+                  <AlertCircle className="h-4 w-4 text-[#f97316]" />
+                  <AlertDescription className="text-foreground">
                     Not authenticated. Sign in to test database features.
                   </AlertDescription>
                 </Alert>
@@ -380,7 +380,7 @@ export default function TestDatabasePage() {
         {/* Test Controls */}
         <Card className="glass mb-6 border-white/10">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-white">
+            <CardTitle className="flex items-center gap-2 text-foreground">
               <Database className="h-5 w-5" />
               Test Controls
             </CardTitle>
@@ -411,7 +411,7 @@ export default function TestDatabasePage() {
         {/* Test Results */}
         <Card className="glass border-white/10">
           <CardHeader>
-            <CardTitle className="text-white">Test Results</CardTitle>
+            <CardTitle className="text-foreground">Test Results</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-3">
@@ -420,12 +420,12 @@ export default function TestDatabasePage() {
                   {getStatusIcon(test.status)}
                   <div className="flex-1">
                     <div className="flex items-center">
-                      <h3 className="font-medium text-white">{test.name}</h3>
+                      <h3 className="font-medium text-foreground">{test.name}</h3>
                       {getStatusBadge(test.status)}
                     </div>
-                    {test.message && <p className="mt-1 text-sm text-white/70">{test.message}</p>}
+                    {test.message && <p className="mt-1 text-sm text-foreground/70">{test.message}</p>}
                     {test.details && (
-                      <pre className="mt-2 rounded bg-black/20 p-2 text-xs text-white/50">
+                      <pre className="mt-2 rounded bg-black/20 p-2 text-xs text-foreground/50">
                         {JSON.stringify(test.details, null, 2)}
                       </pre>
                     )}

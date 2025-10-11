@@ -144,7 +144,7 @@ export default function StudySession({ onComplete, onExit }: StudySessionProps) 
       <Card className="max-w-2xl mx-auto">
         <CardHeader>
           <div className="text-center">
-            <CheckCircle2 className="h-16 w-16 mx-auto mb-4 text-green-500" />
+            <CheckCircle2 className="h-16 w-16 mx-auto mb-4 text-[#22c55e]" />
             <CardTitle className="text-2xl">Session Complete!</CardTitle>
           </div>
         </CardHeader>
@@ -375,7 +375,7 @@ export default function StudySession({ onComplete, onExit }: StudySessionProps) 
                 >
                   <span className="flex-1">{choice.text}</span>
                   {showAnswer && choice.id === currentItem.question?.correctAnswerId && (
-                    <CheckCircle2 className="h-5 w-5 text-green-500" />
+                    <CheckCircle2 className="h-5 w-5 text-[#22c55e]" />
                   )}
                   {showAnswer && selectedAnswer === choice.id && choice.id !== currentItem.question?.correctAnswerId && (
                     <XCircle className="h-5 w-5 text-red-500" />

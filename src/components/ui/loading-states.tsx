@@ -222,7 +222,7 @@ export function LoadingOverlay({ message = "Loading..." }: { message?: string })
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
       <div className="glass space-y-4 rounded-2xl border border-white/20 p-6 text-center">
         <LoadingSpinner size="large" />
-        <p className="font-medium text-white">{message}</p>
+        <p className="font-medium text-foreground">{message}</p>
       </div>
     </div>
   );

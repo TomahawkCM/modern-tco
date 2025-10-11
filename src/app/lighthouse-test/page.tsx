@@ -15,7 +15,7 @@ export default function LighthouseTestPage() {
         >
           <Card className="mb-8">
             <CardHeader>
-              <CardTitle className="text-3xl font-bold text-cyan-300">
+              <CardTitle className="text-3xl font-bold text-primary">
                 Lighthouse Performance Test Page
               </CardTitle>
               <CardDescription>
@@ -24,10 +24,10 @@ export default function LighthouseTestPage() {
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
-                <p className="text-gray-300">
+                <p className="text-muted-foreground">
                   This page includes all production optimizations:
                 </p>
-                <ul className="list-disc list-inside space-y-2 text-sm text-gray-400">
+                <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
                   <li>✅ Optimized package imports (20+ packages)</li>
                   <li>✅ Advanced webpack bundle splitting</li>
                   <li>✅ Self-hosted fonts with preloading</li>
@@ -49,7 +49,7 @@ export default function LighthouseTestPage() {
                   <CardDescription>Optimized component</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-sm text-gray-400">
+                  <p className="text-sm text-muted-foreground">
                     This is a sample card demonstrating the optimized UI components
                     with minimal JavaScript overhead.
                   </p>
@@ -61,33 +61,33 @@ export default function LighthouseTestPage() {
             ))}
           </div>
 
-          <Card className="bg-green-500/10 border-green-500/20">
+          <Card className="bg-[#22c55e]/10 border-[#22c55e]/20">
             <CardHeader>
-              <CardTitle className="text-green-300">Performance Metrics Target</CardTitle>
+              <CardTitle className="text-[#22c55e]">Performance Metrics Target</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <div>
-                  <p className="text-sm text-gray-400">Performance</p>
-                  <p className="text-2xl font-bold text-green-400">≥90%</p>
+                  <p className="text-sm text-muted-foreground">Performance</p>
+                  <p className="text-2xl font-bold text-[#22c55e]">≥90%</p>
                 </div>
                 <div>
-                  <p className="text-sm text-gray-400">Accessibility</p>
-                  <p className="text-2xl font-bold text-green-400">≥85%</p>
+                  <p className="text-sm text-muted-foreground">Accessibility</p>
+                  <p className="text-2xl font-bold text-[#22c55e]">≥85%</p>
                 </div>
                 <div>
-                  <p className="text-sm text-gray-400">Best Practices</p>
-                  <p className="text-2xl font-bold text-green-400">100%</p>
+                  <p className="text-sm text-muted-foreground">Best Practices</p>
+                  <p className="text-2xl font-bold text-[#22c55e]">100%</p>
                 </div>
                 <div>
-                  <p className="text-sm text-gray-400">SEO</p>
-                  <p className="text-2xl font-bold text-green-400">100%</p>
+                  <p className="text-sm text-muted-foreground">SEO</p>
+                  <p className="text-2xl font-bold text-[#22c55e]">100%</p>
                 </div>
               </div>
             </CardContent>
           </Card>
 
-          <div className="mt-8 text-center text-sm text-gray-500">
+          <div className="mt-8 text-center text-sm text-muted-foreground">
             <p>Production Build • All Optimizations Active • Ready for Lighthouse Testing</p>
           </div>
         </motion.div>

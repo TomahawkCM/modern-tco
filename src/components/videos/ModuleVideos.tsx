@@ -12,7 +12,7 @@ const VideoEmbed = dynamic(
       <div className="aspect-video flex items-center justify-center bg-gray-900 rounded-lg">
         <div className="text-center space-y-2">
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-cyan-500 mx-auto"></div>
-          <p className="text-gray-400 text-xs">Loading video player...</p>
+          <p className="text-muted-foreground text-xs">Loading video player...</p>
         </div>
       </div>
     ),
@@ -83,7 +83,7 @@ export function ModuleVideos({ slug }: ModuleVideosProps) {
         <h2 id="videos-title" className="text-lg font-semibold">
           Videos
         </h2>
-        <p className="text-sm text-slate-600 dark:text-slate-400">
+        <p className="text-sm text-slate-600 dark:text-muted-foreground">
           No videos available yet for this module.
           {envValue ? (
             <>
@@ -105,7 +105,7 @@ export function ModuleVideos({ slug }: ModuleVideosProps) {
         {videos.map((v) => (
           <div key={v.id} className="space-y-2">
             <VideoEmbed youtubeId={v.youtubeId} title={v.title} start={v.start} moduleSlug={slug} />
-            <div className="text-sm text-slate-700 dark:text-slate-300">{v.title}</div>
+            <div className="text-sm text-slate-700 dark:text-muted-foreground">{v.title}</div>
           </div>
         ))}
       </div>

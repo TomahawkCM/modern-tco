@@ -224,9 +224,9 @@ function RequirementCard({
       <div className="mb-2 flex items-start justify-between">
         <div className="flex items-center gap-2">
           {requirement.met ? (
-            <CheckCircle className="h-4 w-4 text-green-600 dark:text-green-400" />
+            <CheckCircle className="h-4 w-4 text-[#22c55e] dark:text-[#22c55e]" />
           ) : (
-            <XCircle className="h-4 w-4 text-gray-400" />
+            <XCircle className="h-4 w-4 text-muted-foreground" />
           )}
           <span className="text-sm font-medium">{requirement.name}</span>
         </div>
@@ -235,11 +235,11 @@ function RequirementCard({
         </Badge>
       </div>
 
-      <p className="mb-3 text-xs text-gray-600 dark:text-gray-400">{requirement.description}</p>
+      <p className="mb-3 text-xs text-gray-600 dark:text-muted-foreground">{requirement.description}</p>
 
       <div className="space-y-1">
         <Progress value={progress} className="h-2" />
-        <p className="text-right text-xs text-gray-500">{progress.toFixed(0)}% Complete</p>
+        <p className="text-right text-xs text-muted-foreground">{progress.toFixed(0)}% Complete</p>
       </div>
     </motion.div>
   );
@@ -256,7 +256,7 @@ function AssessmentGateCard({
 }) {
   const difficultyColors = {
     beginner: "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200",
-    intermediate: "bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200",
+    intermediate: "bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-[#f97316]",
     advanced: "bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200",
     expert: "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200",
   };
@@ -275,9 +275,9 @@ function AssessmentGateCard({
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
             {gate.unlocked ? (
-              <Unlock className="h-5 w-5 text-green-600 dark:text-green-400" />
+              <Unlock className="h-5 w-5 text-[#22c55e] dark:text-[#22c55e]" />
             ) : (
-              <Lock className="h-5 w-5 text-gray-400" />
+              <Lock className="h-5 w-5 text-muted-foreground" />
             )}
             <CardTitle className="text-lg">{gate.name}</CardTitle>
           </div>
@@ -291,7 +291,7 @@ function AssessmentGateCard({
             </Badge>
           </div>
         </div>
-        <p className="text-sm text-gray-600 dark:text-gray-400">{gate.description}</p>
+        <p className="text-sm text-gray-600 dark:text-muted-foreground">{gate.description}</p>
       </CardHeader>
 
       <CardContent className="space-y-4">
@@ -490,7 +490,7 @@ export function AssessmentGating({
     <div className="space-y-6">
       <div className="space-y-2 text-center">
         <h2 className="text-2xl font-bold tracking-tight">Assessment Center</h2>
-        <p className="text-gray-600 dark:text-gray-400">
+        <p className="text-gray-600 dark:text-muted-foreground">
           Progressive assessments to validate your Tanium expertise
         </p>
       </div>
@@ -518,15 +518,15 @@ export function AssessmentGating({
           <div className="flex items-center justify-between">
             <div>
               <h3 className="mb-1 text-lg font-semibold">Assessment Progress</h3>
-              <p className="text-sm text-gray-600 dark:text-gray-400">
+              <p className="text-sm text-gray-600 dark:text-muted-foreground">
                 {gates.filter((g) => g.unlocked).length} of {gates.length} assessments unlocked
               </p>
             </div>
             <div className="text-right">
-              <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">
+              <div className="text-2xl font-bold text-blue-600 dark:text-primary">
                 {Math.round((gates.filter((g) => g.unlocked).length / gates.length) * 100)}%
               </div>
-              <div className="text-xs text-gray-500">Complete</div>
+              <div className="text-xs text-muted-foreground">Complete</div>
             </div>
           </div>
           <Progress

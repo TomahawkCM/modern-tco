@@ -65,13 +65,13 @@ export function SelectedQuestionsPanel() {
   const getDifficultyColor = (difficulty: string) => {
     switch (difficulty) {
       case "Beginner":
-        return "text-green-400";
+        return "text-[#22c55e]";
       case "Intermediate":
-        return "text-yellow-400";
+        return "text-[#f97316]";
       case "Advanced":
         return "text-red-400";
       default:
-        return "text-gray-400";
+        return "text-muted-foreground";
     }
   };
 
@@ -98,10 +98,10 @@ export function SelectedQuestionsPanel() {
     return (
       <div className="py-8 text-center">
         <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-white/5">
-          <CheckCircle className="h-8 w-8 text-gray-400" />
+          <CheckCircle className="h-8 w-8 text-muted-foreground" />
         </div>
-        <h3 className="mb-2 text-sm font-medium text-white">No questions selected</h3>
-        <p className="text-xs leading-relaxed text-gray-400">
+        <h3 className="mb-2 text-sm font-medium text-foreground">No questions selected</h3>
+        <p className="text-xs leading-relaxed text-muted-foreground">
           Select questions from the search results to create a custom practice session or mock exam.
         </p>
       </div>
@@ -113,7 +113,7 @@ export function SelectedQuestionsPanel() {
       {/* Selected Count & Actions */}
       <div className="space-y-3">
         <div className="flex items-center justify-between">
-          <h3 className="font-medium text-white">
+          <h3 className="font-medium text-foreground">
             {state.selectedQuestions.length} Question
             {state.selectedQuestions.length !== 1 ? "s" : ""}
           </h3>
@@ -121,7 +121,7 @@ export function SelectedQuestionsPanel() {
             onClick={clearSelection}
             variant="ghost"
             size="sm"
-            className="h-auto p-1 text-gray-400 hover:text-white"
+            className="h-auto p-1 text-muted-foreground hover:text-foreground"
           >
             <RotateCcw className="h-3 w-3" />
           </Button>
@@ -133,17 +133,17 @@ export function SelectedQuestionsPanel() {
             className={cn(
               "flex items-start gap-2 rounded-lg p-3 text-xs",
               recommendation.type === "success"
-                ? "border border-green-500/20 bg-green-500/10"
-                : "border border-yellow-500/20 bg-yellow-500/10"
+                ? "border border-[#22c55e]/20 bg-[#22c55e]/10"
+                : "border border-[#f97316]/20 bg-[#f97316]/10"
             )}
           >
             {recommendation.type === "success" ? (
-              <CheckCircle className="mt-0.5 h-3 w-3 shrink-0 text-green-400" />
+              <CheckCircle className="mt-0.5 h-3 w-3 shrink-0 text-[#22c55e]" />
             ) : (
-              <AlertCircle className="mt-0.5 h-3 w-3 shrink-0 text-yellow-400" />
+              <AlertCircle className="mt-0.5 h-3 w-3 shrink-0 text-[#f97316]" />
             )}
             <span
-              className={recommendation.type === "success" ? "text-green-300" : "text-yellow-300"}
+              className={recommendation.type === "success" ? "text-[#22c55e]" : "text-[#f97316]"}
             >
               {recommendation.message}
             </span>
@@ -154,7 +154,7 @@ export function SelectedQuestionsPanel() {
         <div className="grid grid-cols-1 gap-2">
           <Button
             onClick={handleStartPractice}
-            className="justify-center bg-tanium-accent text-white hover:bg-blue-600"
+            className="justify-center bg-tanium-accent text-foreground hover:bg-blue-600"
             disabled={state.selectedQuestions.length === 0}
           >
             <Play className="mr-2 h-4 w-4" />
@@ -164,7 +164,7 @@ export function SelectedQuestionsPanel() {
           <Button
             onClick={handleCreateMockExam}
             variant="outline"
-            className="justify-center border-white/20 text-white hover:bg-white/10"
+            className="justify-center border-white/20 text-foreground hover:bg-white/10"
             disabled={state.selectedQuestions.length === 0}
           >
             <FileText className="mr-2 h-4 w-4" />
@@ -180,16 +180,16 @@ export function SelectedQuestionsPanel() {
         {/* Domain Distribution */}
         {domainStats.length > 0 && (
           <div>
-            <h4 className="mb-2 text-xs font-medium text-gray-300">Domain Coverage</h4>
+            <h4 className="mb-2 text-xs font-medium text-muted-foreground">Domain Coverage</h4>
             <div className="space-y-2">
               {domainStats.map(({ domain, count, percentage }) => (
                 <div key={domain} className="flex items-center justify-between text-xs">
-                  <span className="mr-2 flex-1 truncate text-gray-300">
+                  <span className="mr-2 flex-1 truncate text-muted-foreground">
                     {domain.length > 20 ? `${domain.substring(0, 17)}...` : domain}
                   </span>
                   <div className="flex items-center gap-1">
-                    <span className="font-medium text-white">{count}</span>
-                    <span className="text-gray-400">({percentage}%)</span>
+                    <span className="font-medium text-foreground">{count}</span>
+                    <span className="text-muted-foreground">({percentage}%)</span>
                   </div>
                 </div>
               ))}
@@ -200,7 +200,7 @@ export function SelectedQuestionsPanel() {
         {/* Difficulty Distribution */}
         {difficultyStats.length > 0 && (
           <div>
-            <h4 className="mb-2 text-xs font-medium text-gray-300">Difficulty Mix</h4>
+            <h4 className="mb-2 text-xs font-medium text-muted-foreground">Difficulty Mix</h4>
             <div className="space-y-2">
               {difficultyStats.map(({ difficulty, count, percentage }) => (
                 <div key={difficulty} className="flex items-center justify-between text-xs">
@@ -208,8 +208,8 @@ export function SelectedQuestionsPanel() {
                     {difficulty}
                   </span>
                   <div className="flex items-center gap-1">
-                    <span className="font-medium text-white">{count}</span>
-                    <span className="text-gray-400">({percentage}%)</span>
+                    <span className="font-medium text-foreground">{count}</span>
+                    <span className="text-muted-foreground">({percentage}%)</span>
                   </div>
                 </div>
               ))}
@@ -224,7 +224,7 @@ export function SelectedQuestionsPanel() {
       <div>
         <button
           onClick={() => setIsExpanded(!isExpanded)}
-          className="flex w-full items-center justify-between text-xs font-medium text-gray-300 transition-colors hover:text-white"
+          className="flex w-full items-center justify-between text-xs font-medium text-muted-foreground transition-colors hover:text-foreground"
         >
           <span>Selected Questions</span>
           {isExpanded ? <ChevronUp className="h-3 w-3" /> : <ChevronDown className="h-3 w-3" />}
@@ -236,9 +236,9 @@ export function SelectedQuestionsPanel() {
               {state.selectedQuestions.map((question, index) => (
                 <Card key={question.id} className="border-white/10 bg-white/5 p-3">
                   <div className="flex items-start gap-2">
-                    <span className="mt-1 shrink-0 text-xs text-gray-400">{index + 1}.</span>
+                    <span className="mt-1 shrink-0 text-xs text-muted-foreground">{index + 1}.</span>
                     <div className="min-w-0 flex-1">
-                      <p className="mb-2 line-clamp-2 text-xs leading-relaxed text-gray-200">
+                      <p className="mb-2 line-clamp-2 text-xs leading-relaxed text-muted-foreground">
                         {question.question}
                       </p>
                       <div className="flex items-center justify-between">
@@ -248,9 +248,9 @@ export function SelectedQuestionsPanel() {
                             className={cn(
                               "px-1 py-0 text-xs",
                               question.difficulty === "Beginner" &&
-                                "bg-green-500/20 text-green-300",
+                                "bg-[#22c55e]/20 text-[#22c55e]",
                               question.difficulty === "Intermediate" &&
-                                "bg-yellow-500/20 text-yellow-300",
+                                "bg-[#f97316]/20 text-[#f97316]",
                               question.difficulty === "Advanced" && "bg-red-500/20 text-red-300"
                             )}
                           >
@@ -261,7 +261,7 @@ export function SelectedQuestionsPanel() {
                           onClick={() => removeFromSelection(question.id)}
                           variant="ghost"
                           size="sm"
-                          className="h-auto p-1 text-gray-400 hover:text-red-400"
+                          className="h-auto p-1 text-muted-foreground hover:text-red-400"
                         >
                           <X className="h-3 w-3" />
                         </Button>

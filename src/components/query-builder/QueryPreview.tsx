@@ -119,7 +119,7 @@ export function QueryPreview({
     ];
     keywords.forEach(keyword => {
       const regex = new RegExp(`\\b(${keyword})\\b`, 'gi');
-      highlighted = highlighted.replace(regex, `<span class="text-blue-400 font-semibold">$1</span>`);
+      highlighted = highlighted.replace(regex, `<span class="text-primary font-semibold">$1</span>`);
     });
 
     // Operators
@@ -129,18 +129,18 @@ export function QueryPreview({
     ];
     operators.forEach(op => {
       const regex = new RegExp(`\\b(${op})\\b`, 'gi');
-      highlighted = highlighted.replace(regex, `<span class="text-purple-400">$1</span>`);
+      highlighted = highlighted.replace(regex, `<span class="text-accent-foreground">$1</span>`);
     });
 
     // Aggregate functions
     const aggregates = ['count', 'min', 'max', 'avg', 'sum'];
     aggregates.forEach(func => {
       const regex = new RegExp(`\\b(${func})\\(`, 'gi');
-      highlighted = highlighted.replace(regex, `<span class="text-green-400">$1</span>(`);
+      highlighted = highlighted.replace(regex, `<span class="text-[#22c55e]">$1</span>(`);
     });
 
     // Strings (quoted values)
-    highlighted = highlighted.replace(/"([^"]*)"/g, `<span class="text-yellow-400">"$1"</span>`);
+    highlighted = highlighted.replace(/"([^"]*)"/g, `<span class="text-[#f97316]">"$1"</span>`);
 
     // Numbers
     highlighted = highlighted.replace(/\b(\d+)\b/g, `<span class="text-orange-400">$1</span>`);
@@ -152,7 +152,7 @@ export function QueryPreview({
     ];
     commonSensors.forEach(sensor => {
       const regex = new RegExp(`\\b(${sensor})\\b`, 'gi');
-      highlighted = highlighted.replace(regex, `<span class="text-cyan-400">$1</span>`);
+      highlighted = highlighted.replace(regex, `<span class="text-primary">$1</span>`);
     });
 
     return highlighted;
@@ -171,16 +171,16 @@ export function QueryPreview({
       return <AlertCircle className="h-4 w-4 text-red-500" />;
     }
     if (validation.warnings.length > 0) {
-      return <Info className="h-4 w-4 text-yellow-500" />;
+      return <Info className="h-4 w-4 text-[#f97316]" />;
     }
-    return <CheckCircle className="h-4 w-4 text-green-500" />;
+    return <CheckCircle className="h-4 w-4 text-[#22c55e]" />;
   };
 
   return (
     <Card className={`glass border-white/10 ${className}`}>
       <CardHeader>
         <div className="flex items-center justify-between">
-          <CardTitle className="flex items-center text-white">
+          <CardTitle className="flex items-center text-foreground">
             <Code className="mr-2 h-5 w-5" />
             Query Preview
           </CardTitle>
@@ -190,7 +190,7 @@ export function QueryPreview({
               size="sm"
               variant="ghost"
               onClick={() => setShowRaw(!showRaw)}
-              className="text-gray-400 hover:text-white"
+              className="text-muted-foreground hover:text-foreground"
             >
               {showRaw ? (
                 <>
@@ -208,10 +208,10 @@ export function QueryPreview({
               size="sm"
               variant="ghost"
               onClick={handleCopy}
-              className="text-gray-400 hover:text-white"
+              className="text-muted-foreground hover:text-foreground"
             >
               {copied ? (
-                <CheckCircle className="h-4 w-4 text-green-400" />
+                <CheckCircle className="h-4 w-4 text-[#22c55e]" />
               ) : (
                 <Copy className="h-4 w-4" />
               )}
@@ -229,10 +229,10 @@ export function QueryPreview({
           >
             {queryString ? (
               showRaw ? (
-                <pre className="text-gray-300 whitespace-pre-wrap">{queryString}</pre>
+                <pre className="text-muted-foreground whitespace-pre-wrap">{queryString}</pre>
               ) : (
                 <div
-                  className="text-gray-300"
+                  className="text-muted-foreground"
                   dangerouslySetInnerHTML={{
                     __html: DOMPurify.sanitize(highlightedQuery, {
                       ALLOWED_TAGS: ['span', 'div'],
@@ -242,7 +242,7 @@ export function QueryPreview({
                 />
               )
             ) : (
-              <span className="text-gray-500 italic">
+              <span className="text-muted-foreground italic">
                 Start building your query above...
               </span>
             )}
@@ -251,7 +251,7 @@ export function QueryPreview({
           {/* Validation overlay for empty query */}
           {!queryString && (
             <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-              <Badge variant="outline" className="border-gray-600 text-gray-400">
+              <Badge variant="outline" className="border-gray-600 text-muted-foreground">
                 Empty Query
               </Badge>
             </div>
@@ -278,9 +278,9 @@ export function QueryPreview({
 
         {/* Validation warnings */}
         {showWarnings && validation.warnings.length > 0 && (
-          <Alert className="border-yellow-500 bg-yellow-500/10">
-            <Info className="h-4 w-4 text-yellow-500" />
-            <AlertDescription className="text-yellow-400">
+          <Alert className="border-yellow-500 bg-[#f97316]/10">
+            <Info className="h-4 w-4 text-[#f97316]" />
+            <AlertDescription className="text-[#f97316]">
               <div className="font-semibold mb-1">Warnings:</div>
               <ul className="list-disc list-inside space-y-1">
                 {validation.warnings.map((warning, index) => (
@@ -288,7 +288,7 @@ export function QueryPreview({
                     {warning.field && <span className="font-mono">{warning.field}: </span>}
                     {warning.message}
                     {warning.suggestion && (
-                      <div className="ml-4 text-xs text-yellow-300 mt-0.5">
+                      <div className="ml-4 text-xs text-[#f97316] mt-0.5">
                         💡 {warning.suggestion}
                       </div>
                     )}
@@ -301,9 +301,9 @@ export function QueryPreview({
 
         {/* Success message */}
         {validation.isValid && queryString && (
-          <Alert className="border-green-500 bg-green-500/10">
-            <CheckCircle className="h-4 w-4 text-green-500" />
-            <AlertDescription className="text-green-400">
+          <Alert className="border-green-500 bg-[#22c55e]/10">
+            <CheckCircle className="h-4 w-4 text-[#22c55e]" />
+            <AlertDescription className="text-[#22c55e]">
               Query is valid and ready to execute
             </AlertDescription>
           </Alert>

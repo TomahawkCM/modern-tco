@@ -58,9 +58,9 @@ export function PointsDisplay({ compact = false, className }: PointsDisplayProps
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger asChild>
-              <div className="flex items-center gap-1 rounded-full bg-yellow-500/10 px-3 py-1">
-                <Star className="h-4 w-4 text-yellow-500" />
-                <span className="font-semibold text-yellow-500">
+              <div className="flex items-center gap-1 rounded-full bg-[#f97316]/10 px-3 py-1">
+                <Star className="h-4 w-4 text-[#f97316]" />
+                <span className="font-semibold text-[#f97316]">
                   {userPoints.totalPoints.toLocaleString()}
                 </span>
               </div>
@@ -89,10 +89,10 @@ export function PointsDisplay({ compact = false, className }: PointsDisplayProps
   }
 
   return (
-    <Card className={cn("border-yellow-500/20 bg-gradient-to-br from-yellow-500/5 to-orange-500/5", className)}>
+    <Card className={cn("border-[#f97316]/20 bg-gradient-to-br from-yellow-500/5 to-orange-500/5", className)}>
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
-          <Trophy className="h-5 w-5 text-yellow-500" />
+          <Trophy className="h-5 w-5 text-[#f97316]" />
           Your Progress
         </CardTitle>
       </CardHeader>
@@ -100,10 +100,10 @@ export function PointsDisplay({ compact = false, className }: PointsDisplayProps
         {/* Total Points */}
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <Star className="h-5 w-5 text-yellow-500" />
-            <span className="text-sm text-gray-400">Total Points</span>
+            <Star className="h-5 w-5 text-[#f97316]" />
+            <span className="text-sm text-muted-foreground">Total Points</span>
           </div>
-          <span className="text-2xl font-bold text-yellow-500">
+          <span className="text-2xl font-bold text-[#f97316]">
             {userPoints.totalPoints.toLocaleString()}
           </span>
         </div>
@@ -113,9 +113,9 @@ export function PointsDisplay({ compact = false, className }: PointsDisplayProps
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <Trophy className="h-5 w-5 text-purple-500" />
-              <span className="text-sm text-gray-400">Level</span>
+              <span className="text-sm text-muted-foreground">Level</span>
             </div>
-            <Badge variant="outline" className="gap-1 bg-purple-500/10 text-purple-300">
+            <Badge variant="outline" className="gap-1 bg-accent/10 text-accent-foreground">
               <span className="text-xl font-bold">{levelInfo.level}</span>
             </Badge>
           </div>
@@ -123,7 +123,7 @@ export function PointsDisplay({ compact = false, className }: PointsDisplayProps
           {/* Level Progress Bar */}
           <div className="space-y-1">
             <Progress value={levelInfo.progress} className="h-2" />
-            <div className="flex justify-between text-xs text-gray-500">
+            <div className="flex justify-between text-xs text-muted-foreground">
               <span>{(userPoints.totalPoints - levelInfo.currentLevelPoints).toLocaleString()} pts</span>
               <span>{Math.round(levelInfo.progress)}%</span>
               <span>{(levelInfo.nextLevelPoints - levelInfo.currentLevelPoints).toLocaleString()} pts</span>
@@ -132,23 +132,23 @@ export function PointsDisplay({ compact = false, className }: PointsDisplayProps
         </div>
 
         {/* Weekly Points */}
-        <div className="flex items-center justify-between rounded-lg border border-blue-500/20 bg-blue-500/5 p-3">
+        <div className="flex items-center justify-between rounded-lg border border-primary/20 bg-primary/5 p-3">
           <div className="flex items-center gap-2">
-            <TrendingUp className="h-4 w-4 text-blue-400" />
-            <span className="text-sm text-gray-400">This Week</span>
+            <TrendingUp className="h-4 w-4 text-primary" />
+            <span className="text-sm text-muted-foreground">This Week</span>
           </div>
-          <span className="font-semibold text-blue-400">
+          <span className="font-semibold text-primary">
             +{userPoints.pointsThisWeek.toLocaleString()}
           </span>
         </div>
 
         {/* Monthly Points */}
-        <div className="flex items-center justify-between rounded-lg border border-green-500/20 bg-green-500/5 p-3">
+        <div className="flex items-center justify-between rounded-lg border border-[#22c55e]/20 bg-[#22c55e]/5 p-3">
           <div className="flex items-center gap-2">
-            <Zap className="h-4 w-4 text-green-400" />
-            <span className="text-sm text-gray-400">This Month</span>
+            <Zap className="h-4 w-4 text-[#22c55e]" />
+            <span className="text-sm text-muted-foreground">This Month</span>
           </div>
-          <span className="font-semibold text-green-400">
+          <span className="font-semibold text-[#22c55e]">
             +{userPoints.pointsThisMonth.toLocaleString()}
           </span>
         </div>
@@ -156,20 +156,20 @@ export function PointsDisplay({ compact = false, className }: PointsDisplayProps
         {/* Recent Activity */}
         {userPoints.pointsHistory.length > 0 && (
           <div className="space-y-2">
-            <h4 className="text-sm font-semibold text-gray-400">Recent Activity</h4>
+            <h4 className="text-sm font-semibold text-muted-foreground">Recent Activity</h4>
             <div className="space-y-1">
               {userPoints.pointsHistory.slice(-3).reverse().map((entry, idx) => (
                 <div
                   key={idx}
-                  className="flex items-center justify-between rounded border border-gray-700/50 bg-gray-800/30 px-2 py-1 text-xs"
+                  className="flex items-center justify-between rounded border border-gray-700/50 bg-card/30 px-2 py-1 text-xs"
                 >
-                  <span className="text-gray-400">
+                  <span className="text-muted-foreground">
                     {formatPointsReason(entry.reason)}
                     {entry.multiplier && entry.multiplier > 1 && (
-                      <span className="ml-1 text-yellow-400">×{entry.multiplier.toFixed(1)}</span>
+                      <span className="ml-1 text-[#f97316]">×{entry.multiplier.toFixed(1)}</span>
                     )}
                   </span>
-                  <span className="font-semibold text-green-400">+{entry.points}</span>
+                  <span className="font-semibold text-[#22c55e]">+{entry.points}</span>
                 </div>
               ))}
             </div>

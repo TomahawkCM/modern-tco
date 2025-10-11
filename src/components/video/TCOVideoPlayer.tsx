@@ -198,7 +198,7 @@ export const TCOVideoPlayer: React.FC<TCOVideoPlayerProps> = ({
         <div className="flex items-center justify-between">
           <CardTitle className="flex items-center gap-2">
             {video.title}
-            {isCompleted && <CheckCircle className="w-5 h-5 text-green-500" />}
+            {isCompleted && <CheckCircle className="w-5 h-5 text-[#22c55e]" />}
           </CardTitle>
           <Badge variant="secondary">{video.domain}</Badge>
         </div>
@@ -239,13 +239,13 @@ export const TCOVideoPlayer: React.FC<TCOVideoPlayerProps> = ({
               <Progress value={progressPercentage} className="h-1" />
               
               {/* Controls */}
-              <div className="flex items-center justify-between text-white">
+              <div className="flex items-center justify-between text-foreground">
                 <div className="flex items-center gap-2">
                   <Button
                     variant="ghost"
                     size="sm"
                     onClick={togglePlay}
-                    className="text-white hover:bg-white/20"
+                    className="text-foreground hover:bg-white/20"
                   >
                     {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
                   </Button>
@@ -255,7 +255,7 @@ export const TCOVideoPlayer: React.FC<TCOVideoPlayerProps> = ({
                       variant="ghost"
                       size="sm"
                       onClick={toggleMute}
-                      className="text-white hover:bg-white/20"
+                      className="text-foreground hover:bg-white/20"
                     >
                       {isMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
                     </Button>
@@ -280,7 +280,7 @@ export const TCOVideoPlayer: React.FC<TCOVideoPlayerProps> = ({
                   variant="ghost"
                   size="sm"
                   onClick={toggleFullscreen}
-                  className="text-white hover:bg-white/20"
+                  className="text-foreground hover:bg-white/20"
                 >
                   <Maximize className="w-4 h-4" />
                 </Button>

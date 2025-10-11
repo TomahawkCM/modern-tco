@@ -69,7 +69,7 @@ const mdxComponents = {
   h2: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
     <h2
       className={cn(
-        "mb-4 flex scroll-m-20 items-center gap-2 text-3xl font-semibold tracking-tight text-white",
+        "mb-4 flex scroll-m-20 items-center gap-2 text-3xl font-semibold tracking-tight text-foreground",
         className
       )}
       {...props}
@@ -78,7 +78,7 @@ const mdxComponents = {
   h3: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
     <h3
       className={cn(
-        "mb-3 flex scroll-m-20 items-center gap-2 text-2xl font-semibold tracking-tight text-blue-200",
+        "mb-3 flex scroll-m-20 items-center gap-2 text-2xl font-semibold tracking-tight text-muted-foreground",
         className
       )}
       {...props}
@@ -88,7 +88,7 @@ const mdxComponents = {
   // Enhanced paragraph
   p: ({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) => (
     <p
-      className={cn("mb-4 leading-7 text-gray-200 [&:not(:first-child)]:mt-4", className)}
+      className={cn("mb-4 leading-7 text-muted-foreground [&:not(:first-child)]:mt-4", className)}
       {...props}
     />
   ),
@@ -96,13 +96,13 @@ const mdxComponents = {
   // Enhanced lists
   ul: ({ className, ...props }: React.HTMLAttributes<HTMLUListElement>) => (
     <ul
-      className={cn("my-4 ml-6 list-disc space-y-2 text-gray-200 [&>li]:mt-2", className)}
+      className={cn("my-4 ml-6 list-disc space-y-2 text-muted-foreground [&>li]:mt-2", className)}
       {...props}
     />
   ),
   ol: ({ className, ...props }: React.HTMLAttributes<HTMLOListElement>) => (
     <ol
-      className={cn("my-4 ml-6 list-decimal space-y-2 text-gray-200 [&>li]:mt-2", className)}
+      className={cn("my-4 ml-6 list-decimal space-y-2 text-muted-foreground [&>li]:mt-2", className)}
       {...props}
     />
   ),
@@ -111,7 +111,7 @@ const mdxComponents = {
   code: ({ className, ...props }: React.HTMLAttributes<HTMLElement>) => (
     <code
       className={cn(
-        "relative rounded border border-gray-700 bg-gray-800 px-2 py-1 font-mono text-sm text-blue-200",
+        "relative rounded border border-gray-700 bg-card px-2 py-1 font-mono text-sm text-muted-foreground",
         className
       )}
       {...props}
@@ -120,7 +120,7 @@ const mdxComponents = {
   pre: ({ className, ...props }: React.HTMLAttributes<HTMLPreElement>) => (
     <pre
       className={cn(
-        "mb-4 mt-6 overflow-x-auto rounded-lg border border-gray-700 bg-gray-900 p-4 text-gray-200",
+        "mb-4 mt-6 overflow-x-auto rounded-lg border border-gray-700 bg-gray-900 p-4 text-muted-foreground",
         className
       )}
       {...props}
@@ -172,22 +172,22 @@ const mdxComponents = {
 
   // Learning objective component
   LearningObjective: ({ children }: { children: React.ReactNode }) => (
-    <Card className="my-6 border-blue-500/30 bg-gradient-to-r from-blue-950/50 to-cyan-950/50">
+    <Card className="my-6 border-primary/30 bg-gradient-to-r from-blue-950/50 to-cyan-950/50">
       <CardHeader className="pb-3">
-        <CardTitle className="flex items-center gap-2 text-blue-200">
+        <CardTitle className="flex items-center gap-2 text-muted-foreground">
           <Target className="h-5 w-5" />
           Learning Objective
         </CardTitle>
       </CardHeader>
       <CardContent className="pt-0">
-        <div className="text-gray-200">{children}</div>
+        <div className="text-muted-foreground">{children}</div>
       </CardContent>
     </Card>
   ),
 
   // Key concept component
   KeyConcept: ({ title, children }: { title: string; children: React.ReactNode }) => (
-    <Card className="my-6 border-cyan-500/30 bg-gradient-to-r from-cyan-950/50 to-sky-950/50">
+    <Card className="my-6 border-primary/30 bg-gradient-to-r from-cyan-950/50 to-sky-950/50">
       <CardHeader className="pb-3">
         <CardTitle className="flex items-center gap-2 text-cyan-200">
           <Brain className="h-5 w-5" />
@@ -195,7 +195,7 @@ const mdxComponents = {
         </CardTitle>
       </CardHeader>
       <CardContent className="pt-0">
-        <div className="text-gray-200">{children}</div>
+        <div className="text-muted-foreground">{children}</div>
       </CardContent>
     </Card>
   ),
@@ -212,7 +212,7 @@ const mdxComponents = {
     duration: string;
     children: React.ReactNode;
   }) => (
-    <Card className="my-6 border-green-500/30 bg-gradient-to-r from-green-950/50 to-emerald-950/50">
+    <Card className="my-6 border-[#22c55e]/30 bg-gradient-to-r from-green-950/50 to-emerald-950/50">
       <CardHeader>
         <div className="flex items-center justify-between">
           <CardTitle className="flex items-center gap-2 text-green-200">
@@ -223,7 +223,7 @@ const mdxComponents = {
             <Badge variant="outline" className="border-green-500/50 bg-green-900/50 text-green-200">
               {id}
             </Badge>
-            <div className="flex items-center gap-1 text-green-300">
+            <div className="flex items-center gap-1 text-[#22c55e]">
               <Clock className="h-4 w-4" />
               <span className="text-sm">{duration}</span>
             </div>
@@ -231,7 +231,7 @@ const mdxComponents = {
         </div>
       </CardHeader>
       <CardContent>
-        <div className="text-gray-200">{children}</div>
+        <div className="text-muted-foreground">{children}</div>
       </CardContent>
     </Card>
   ),

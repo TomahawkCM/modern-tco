@@ -113,7 +113,7 @@ export function GameificationSection() {
       case "Silver":
         return "from-slate-400 to-slate-600";
       case "Gold":
-        return "from-yellow-400 to-yellow-600";
+        return "from-[#f97316] to-yellow-600";
       case "Platinum":
         return "from-primary to-primary";
       default:
@@ -139,7 +139,7 @@ export function GameificationSection() {
   const getAvatarColor = (name: string) => {
     const colors = [
       "from-red-500 to-pink-500",
-      "from-blue-500 to-cyan-500",
+      "from-blue-500 to-primary",
       "from-green-500 to-teal-500",
       "from-purple-500 to-indigo-500",
       "from-yellow-500 to-orange-500",
@@ -347,7 +347,7 @@ export function GameificationSection() {
                       <CardDescription>See how you rank among peers</CardDescription>
                     </div>
                   </div>
-                  <Badge variant="secondary" className="bg-green-500/10 text-green-400">
+                  <Badge variant="secondary" className="bg-[#22c55e]/10 text-[#22c55e]">
                     Weekly Rankings
                   </Badge>
                 </div>
@@ -369,7 +369,7 @@ export function GameificationSection() {
                           <div
                             className={`h-6 w-6 rounded-full bg-gradient-to-br ${
                               user.rank === 1
-                                ? "from-yellow-400 to-yellow-600"
+                                ? "from-[#f97316] to-yellow-600"
                                 : user.rank === 2
                                   ? "from-slate-400 to-slate-600"
                                   : "from-amber-600 to-yellow-600"

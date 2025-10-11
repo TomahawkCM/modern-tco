@@ -34,11 +34,11 @@ export function ScoreChart({ data, title, type = "line", showTrend = true }: Sco
   const CustomTooltip = ({ active, payload, label }: any) => {
     if (active && payload?.length) {
       return (
-        <div className="rounded-lg border border-white/10 bg-gray-900/95 p-3 text-white">
+        <div className="rounded-lg border border-white/10 bg-gray-900/95 p-3 text-foreground">
           <p className="font-medium">{label}</p>
           <p className="text-tanium-accent">Score: {payload[0].value}%</p>
           {payload[0].payload.questions && (
-            <p className="text-sm text-gray-300">Questions: {payload[0].payload.questions}</p>
+            <p className="text-sm text-muted-foreground">Questions: {payload[0].payload.questions}</p>
           )}
         </div>
       );
@@ -49,7 +49,7 @@ export function ScoreChart({ data, title, type = "line", showTrend = true }: Sco
   return (
     <Card className="glass border-white/10">
       <CardHeader>
-        <CardTitle className="flex items-center justify-between text-white">
+        <CardTitle className="flex items-center justify-between text-foreground">
           <div className="flex items-center gap-2">
             {type === "line" ? (
               <TrendingUp className="h-5 w-5 text-tanium-accent" />
@@ -60,9 +60,9 @@ export function ScoreChart({ data, title, type = "line", showTrend = true }: Sco
           </div>
           {showTrend && (
             <div className="flex items-center gap-2 text-sm">
-              <span className="text-gray-300">Avg: {averageScore}%</span>
+              <span className="text-muted-foreground">Avg: {averageScore}%</span>
               {trend !== 0 && (
-                <span className={trend > 0 ? "text-green-400" : "text-red-400"}>
+                <span className={trend > 0 ? "text-[#22c55e]" : "text-red-400"}>
                   {trend > 0 ? "+" : ""}
                   {trend}%
                 </span>

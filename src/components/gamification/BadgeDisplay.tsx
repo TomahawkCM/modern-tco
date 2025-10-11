@@ -127,14 +127,14 @@ export default function BadgeDisplay({
       {/* Earned Indicator */}
       {earned && (
         <div className="absolute top-2 right-2">
-          <CheckCircle2 className="h-4 w-4 text-green-500" />
+          <CheckCircle2 className="h-4 w-4 text-[#22c55e]" />
         </div>
       )}
 
       {/* Locked Indicator */}
       {!earned && (
         <div className="absolute top-2 right-2">
-          <Lock className="h-4 w-4 text-gray-500" />
+          <Lock className="h-4 w-4 text-muted-foreground" />
         </div>
       )}
 
@@ -143,12 +143,12 @@ export default function BadgeDisplay({
         <div
           className={`
           rounded-full p-4
-          ${earned ? tierGradients[badge.tier] : "bg-gray-800/50"}
+          ${earned ? tierGradients[badge.tier] : "bg-card/50"}
           border-2
           ${earned ? tierBorderColors[badge.tier] : "border-gray-600"}
         `}
         >
-          <Icon className={`${classes.icon} ${earned ? badge.color : "text-gray-500"}`} />
+          <Icon className={`${classes.icon} ${earned ? badge.color : "text-muted-foreground"}`} />
         </div>
 
         {/* Badge Details */}
@@ -168,8 +168,8 @@ export default function BadgeDisplay({
 
           {/* Points */}
           <div className="flex items-center justify-center gap-1 pt-1">
-            <Star className="h-3 w-3 text-yellow-500" />
-            <span className={`${classes.points} font-bold text-yellow-500`}>
+            <Star className="h-3 w-3 text-[#f97316]" />
+            <span className={`${classes.points} font-bold text-[#f97316]`}>
               {badge.points} points
             </span>
           </div>

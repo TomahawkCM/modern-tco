@@ -38,7 +38,7 @@ const NAVIGATION_CONFIG = {
     description: "Review the learning content and understand the concepts",
     nextLabel: "Start Practice",
     nextEvent: LearningFlowEvent.COMPLETE_LEARN,
-    color: "bg-blue-500",
+    color: "bg-primary",
     canGoBack: false,
   },
   [LearningFlowState.PRACTICE]: {
@@ -68,7 +68,7 @@ const NAVIGATION_CONFIG = {
     nextEvent: null,
     prevLabel: undefined,
     prevEvent: undefined,
-    color: "bg-green-500",
+    color: "bg-[#22c55e]",
     canGoBack: false,
   },
 };
@@ -114,7 +114,7 @@ export function LearningFlowNavigation({
           <div className="space-y-1">
             <div className="flex items-center gap-2">
               <CardTitle className="text-xl">{config.title}</CardTitle>
-              <Badge className={cn("text-white", config.color)} variant="secondary">
+              <Badge className={cn("text-foreground", config.color)} variant="secondary">
                 {flowContext.currentState.charAt(0).toUpperCase() +
                   flowContext.currentState.slice(1)}
               </Badge>
@@ -122,7 +122,7 @@ export function LearningFlowNavigation({
             <CardDescription>{config.description}</CardDescription>
           </div>
 
-          {isCompleted && <CheckCircle className="h-8 w-8 text-green-500" />}
+          {isCompleted && <CheckCircle className="h-8 w-8 text-[#22c55e]" />}
         </div>
       </CardHeader>
 
@@ -203,7 +203,7 @@ export function LearningFlowNavigation({
                 disabled={!canAdvance}
                 className={cn(
                   "flex min-w-fit items-center gap-2",
-                  isCompleted ? "bg-green-600 hover:bg-green-700" : ""
+                  isCompleted ? "bg-[#22c55e] hover:bg-green-700" : ""
                 )}
               >
                 {isCompleted ? (

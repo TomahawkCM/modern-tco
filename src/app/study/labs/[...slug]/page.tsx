@@ -112,7 +112,7 @@ export default async function LabPage({
       <Card className="border-border/40 bg-slate-950/40 text-slate-100">
         <CardHeader className="flex items-start justify-between gap-3">
           <div>
-            <CardTitle className="text-2xl text-white">{title}</CardTitle>
+            <CardTitle className="text-2xl text-foreground">{title}</CardTitle>
             <Badge variant="outline" className="mt-2 uppercase tracking-wide">
               Lab Exercise
             </Badge>

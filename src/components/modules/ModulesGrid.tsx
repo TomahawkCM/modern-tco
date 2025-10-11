@@ -117,12 +117,12 @@ export function ModulesGrid({ modules }: { modules: ModuleMeta[] }) {
   return (
     <>
       {!user && (
-        <div className="mb-4 rounded border border-blue-500/30 bg-blue-950/30 p-3 text-blue-100">
+        <div className="mb-4 rounded border border-primary/30 bg-blue-950/30 p-3 text-blue-100">
           Sign in to track module progress.
         </div>
       )}
       {error && (
-        <div className="mb-4 rounded border border-yellow-500/30 bg-yellow-950/30 p-3 text-yellow-100">
+        <div className="mb-4 rounded border border-[#f97316]/30 bg-yellow-950/30 p-3 text-yellow-100">
           Progress unavailable right now. Content remains accessible.
         </div>
       )}
@@ -146,19 +146,19 @@ export function ModulesGrid({ modules }: { modules: ModuleMeta[] }) {
             status === "completed"
               ? "border-green-500/50 bg-green-900/50 text-green-200"
               : status === "in_progress"
-                ? "border-yellow-500/50 bg-yellow-900/50 text-yellow-200"
+                ? "border-yellow-500/50 bg-yellow-900/50 text-[#f97316]"
                 : status === "bookmarked"
-                  ? "border-cyan-500/50 bg-cyan-900/50 text-cyan-200"
-                  : "border-gray-500/50 bg-gray-900/50 text-gray-200";
+                  ? "border-primary/50 bg-cyan-900/50 text-cyan-200"
+                  : "border-gray-500/50 bg-gray-900/50 text-muted-foreground";
 
           return (
             <Link key={slug} href={`/modules/${slug}`} className="no-underline">
-              <Card className="h-full border-blue-500/20 bg-gradient-to-br from-gray-900/60 to-blue-900/40 transition hover:border-blue-500/40 hover:shadow-lg hover:shadow-blue-900/20">
+              <Card className="h-full border-primary/20 bg-gradient-to-br from-gray-900/60 to-blue-900/40 transition hover:border-blue-500/40 hover:shadow-lg hover:shadow-blue-900/20">
                 <CardHeader className="space-y-1">
                   <div className="mb-2 flex flex-wrap items-center gap-2">
                     <Badge
                       variant="outline"
-                      className="border-blue-500/50 bg-blue-900/50 text-blue-200"
+                      className="border-blue-500/50 bg-blue-900/50 text-muted-foreground"
                     >
                       {frontmatter.domainEnum.replace(/_/g, " ")}
                     </Badge>
@@ -168,7 +168,7 @@ export function ModulesGrid({ modules }: { modules: ModuleMeta[] }) {
                     >
                       {frontmatter.difficulty}
                     </Badge>
-                    <span className="flex items-center gap-1 text-sm text-gray-300">
+                    <span className="flex items-center gap-1 text-sm text-muted-foreground">
                       <Clock className="h-4 w-4" /> {frontmatter.estimatedTime ?? "—"}
                     </span>
                     <Badge variant="outline" className={statusColor}>
@@ -177,7 +177,7 @@ export function ModulesGrid({ modules }: { modules: ModuleMeta[] }) {
                     {needs > 0 && (
                       <Badge
                         variant="outline"
-                        className="border-yellow-500/60 bg-yellow-900/40 text-yellow-200"
+                        className="border-yellow-500/60 bg-yellow-900/40 text-[#f97316]"
                         aria-label={`Needs review ${needs}`}
                         title={`Needs review: ${needs}`}
                       >
@@ -185,16 +185,16 @@ export function ModulesGrid({ modules }: { modules: ModuleMeta[] }) {
                       </Badge>
                     )}
                   </div>
-                  <CardTitle className="text-xl text-white">{frontmatter.title}</CardTitle>
+                  <CardTitle className="text-xl text-foreground">{frontmatter.title}</CardTitle>
                   {frontmatter.description && (
-                    <CardDescription className="text-gray-300">
+                    <CardDescription className="text-muted-foreground">
                       {frontmatter.description}
                     </CardDescription>
                   )}
                 </CardHeader>
                 <CardContent>
                   <div className="mb-3">
-                    <div className="mb-1 flex justify-between text-sm text-gray-300">
+                    <div className="mb-1 flex justify-between text-sm text-muted-foreground">
                       <span>Progress</span>
                       <span>{percent}%</span>
                     </div>
@@ -204,12 +204,12 @@ export function ModulesGrid({ modules }: { modules: ModuleMeta[] }) {
                     />
                   </div>
                   {frontmatter.learningObjectives && frontmatter.learningObjectives.length > 0 && (
-                    <ul className="ml-5 list-disc space-y-1 text-gray-200">
+                    <ul className="ml-5 list-disc space-y-1 text-muted-foreground">
                       {frontmatter.learningObjectives.slice(0, 3).map((o, i) => (
                         <li key={i}>{o}</li>
                       ))}
                       {frontmatter.learningObjectives.length > 3 && (
-                        <li className="italic text-gray-400">More inside…</li>
+                        <li className="italic text-muted-foreground">More inside…</li>
                       )}
                     </ul>
                   )}
@@ -217,7 +217,7 @@ export function ModulesGrid({ modules }: { modules: ModuleMeta[] }) {
                     <div className="mt-3 text-right">
                       <Link
                         href={`/modules/${slug}#${encodeURIComponent(lastViewed)}`}
-                        className="text-xs text-cyan-300 hover:underline"
+                        className="text-xs text-primary hover:underline"
                         onClick={(e) => e.stopPropagation()}
                       >
                         Continue where you left off →

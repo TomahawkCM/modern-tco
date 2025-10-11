@@ -318,9 +318,9 @@ export default function ConfidenceBuilder({
 
   const getConfidenceColor = (level: string): string => {
     switch (level) {
-      case 'building': return 'from-blue-500 to-cyan-500';
+      case 'building': return 'from-blue-500 to-primary';
       case 'growing': return 'from-green-500 to-emerald-500';
-      case 'strong': return 'from-cyan-500 to-sky-500';
+      case 'strong': return 'from-primary to-sky-500';
       case 'expert': return 'from-yellow-500 to-orange-500';
       default: return 'from-gray-500 to-slate-500';
     }
@@ -356,25 +356,25 @@ export default function ConfidenceBuilder({
                 transition={{ duration: 2, ease: "easeInOut", repeat: Infinity, repeatDelay: 3 }}
                 className="flex-shrink-0 p-3 bg-white/20 rounded-xl backdrop-blur-sm"
               >
-                <activeMessage.icon className="w-8 h-8 text-white" />
+                <activeMessage.icon className="w-8 h-8 text-foreground" />
               </motion.div>
               
               <div className="flex-1 space-y-2">
                 <div className="flex items-center justify-between">
-                  <span className="px-3 py-1 text-xs font-semibold text-white/90 bg-white/20 rounded-full backdrop-blur-sm">
+                  <span className="px-3 py-1 text-xs font-semibold text-foreground/90 bg-white/20 rounded-full backdrop-blur-sm">
                     {getConfidenceMessage(currentConfidence)}
                   </span>
                   <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     onClick={() => setActiveMessage(null)}
-                    className="p-1 text-white/70 hover:text-white rounded-full hover:bg-white/10 transition-colors"
+                    className="p-1 text-foreground/70 hover:text-foreground rounded-full hover:bg-white/10 transition-colors"
                   >
                     ✕
                   </motion.button>
                 </div>
                 
-                <p className="text-lg font-medium text-white leading-relaxed">
+                <p className="text-lg font-medium text-foreground leading-relaxed">
                   {activeMessage.message}
                 </p>
                 
@@ -383,7 +383,7 @@ export default function ConfidenceBuilder({
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                     onClick={handleBoostConfidence}
-                    className="inline-flex items-center space-x-2 px-4 py-2 mt-3 text-sm font-semibold text-white bg-white/20 rounded-lg hover:bg-white/30 transition-colors backdrop-blur-sm"
+                    className="inline-flex items-center space-x-2 px-4 py-2 mt-3 text-sm font-semibold text-foreground bg-white/20 rounded-lg hover:bg-white/30 transition-colors backdrop-blur-sm"
                   >
                     <Smile className="w-4 h-4" />
                     <span>Get More Tips</span>
@@ -417,7 +417,7 @@ export default function ConfidenceBuilder({
                 <span className="px-2 py-1 text-xs font-semibold text-cyan-700 bg-cyan-100 rounded-full">
                   Today's Boost
                 </span>
-                <span className="text-xs text-gray-500 capitalize">
+                <span className="text-xs text-muted-foreground capitalize">
                   {dailyBooster.category.replace('-', ' ')}
                 </span>
               </div>
@@ -462,7 +462,7 @@ export default function ConfidenceBuilder({
             >
               <div className="text-center space-y-4">
                 <div className="mx-auto w-16 h-16 bg-green-100 rounded-full flex items-center justify-center">
-                  <Lightbulb className="w-8 h-8 text-green-600" />
+                  <Lightbulb className="w-8 h-8 text-[#22c55e]" />
                 </div>
                 
                 <h3 className="text-xl font-semibold text-gray-900">
@@ -491,7 +491,7 @@ export default function ConfidenceBuilder({
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={() => setShowTip(false)}
-                  className="w-full px-6 py-3 bg-gradient-to-r from-cyan-500 to-sky-500 text-white font-semibold rounded-lg hover:from-cyan-600 hover:to-sky-600 transition-colors"
+                  className="w-full px-6 py-3 bg-gradient-to-r from-primary to-sky-500 text-foreground font-semibold rounded-lg hover:from-cyan-600 hover:to-sky-600 transition-colors"
                 >
                   Got It! 💪
                 </motion.button>
@@ -525,7 +525,7 @@ export default function ConfidenceBuilder({
           className="p-4 bg-gradient-to-r from-green-50 to-emerald-50 border border-green-100 rounded-xl hover:from-green-100 hover:to-emerald-100 transition-colors text-left"
         >
           <div className="flex items-center space-x-3">
-            <Heart className="w-6 h-6 text-green-600" />
+            <Heart className="w-6 h-6 text-[#22c55e]" />
             <div>
               <h4 className="font-semibold text-gray-900">Confidence Boost</h4>
               <p className="text-sm text-gray-600">Feel motivated & ready</p>

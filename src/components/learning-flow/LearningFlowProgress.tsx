@@ -18,7 +18,7 @@ interface LearningFlowProgressProps {
 const STATE_CONFIG = {
   [LearningFlowState.LEARN]: {
     label: "Learn",
-    color: "bg-blue-500",
+    color: "bg-primary",
     icon: Circle,
     description: "Study the material",
   },
@@ -36,7 +36,7 @@ const STATE_CONFIG = {
   },
   [LearningFlowState.COMPLETED]: {
     label: "Completed",
-    color: "bg-green-500",
+    color: "bg-[#22c55e]",
     icon: CheckCircle,
     description: "Module completed",
   },
@@ -71,7 +71,7 @@ export function LearningFlowProgress({
             variant={
               flowContext.currentState === LearningFlowState.COMPLETED ? "default" : "secondary"
             }
-            className={cn("text-white", STATE_CONFIG[flowContext.currentState].color)}
+            className={cn("text-foreground", STATE_CONFIG[flowContext.currentState].color)}
           >
             {STATE_CONFIG[flowContext.currentState].label}
           </Badge>
@@ -108,8 +108,8 @@ export function LearningFlowProgress({
               >
                 <div
                   className={cn(
-                    "flex h-8 w-8 items-center justify-center rounded-full text-sm font-medium text-white",
-                    isCompleted ? "bg-green-500" : isActive ? config.color : "bg-muted",
+                    "flex h-8 w-8 items-center justify-center rounded-full text-sm font-medium text-foreground",
+                    isCompleted ? "bg-[#22c55e]" : isActive ? config.color : "bg-muted",
                     isPending && "border-2 border-dashed border-muted-foreground/30 bg-muted"
                   )}
                 >
@@ -117,7 +117,7 @@ export function LearningFlowProgress({
                     <CheckCircle className="h-4 w-4" />
                   ) : (
                     <Icon
-                      className={cn("h-4 w-4", isPending ? "text-muted-foreground" : "text-white")}
+                      className={cn("h-4 w-4", isPending ? "text-muted-foreground" : "text-foreground")}
                     />
                   )}
                 </div>
@@ -138,7 +138,7 @@ export function LearningFlowProgress({
 
                 {isActive && <Badge variant="outline">Active</Badge>}
                 {isCompleted && (
-                  <Badge variant="outline" className="border-green-600 text-green-600">
+                  <Badge variant="outline" className="border-green-600 text-[#22c55e]">
                     Done
                   </Badge>
                 )}

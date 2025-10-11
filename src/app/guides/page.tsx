@@ -298,7 +298,7 @@ export default function GuidesPage() {
                   <div className="grid grid-cols-1 gap-6 md:grid-cols-4">
                     <div className="space-y-2">
                       <div className="flex items-center space-x-2">
-                        <BookOpen className="h-4 w-4 text-blue-500" />
+                        <BookOpen className="h-4 w-4 text-primary" />
                         <span className="text-sm font-medium">Total Guides</span>
                       </div>
                       <p className="text-2xl font-bold">{totalGuides}</p>
@@ -306,7 +306,7 @@ export default function GuidesPage() {
 
                     <div className="space-y-2">
                       <div className="flex items-center space-x-2">
-                        <FileText className="h-4 w-4 text-yellow-500" />
+                        <FileText className="h-4 w-4 text-[#f97316]" />
                         <span className="text-sm font-medium">In Progress</span>
                       </div>
                       <p className="text-2xl font-bold">{inProgressGuides}</p>
@@ -314,7 +314,7 @@ export default function GuidesPage() {
 
                     <div className="space-y-2">
                       <div className="flex items-center space-x-2">
-                        <BookOpen className="h-4 w-4 text-green-500" />
+                        <BookOpen className="h-4 w-4 text-[#22c55e]" />
                         <span className="text-sm font-medium">Completed</span>
                       </div>
                       <p className="text-2xl font-bold">{completedGuides}</p>

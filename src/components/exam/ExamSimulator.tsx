@@ -160,7 +160,7 @@ export default function ExamSimulator() {
 
       {currentSession ? (
         <div data-testid="exam-session" className="rounded border p-4 space-y-4">
-          <div className="flex items-center justify-between text-sm text-slate-600 dark:text-slate-300">
+          <div className="flex items-center justify-between text-sm text-slate-600 dark:text-muted-foreground">
             <span>Session: {currentSession.id} · Type: {mode}</span>
             <span aria-live="polite" aria-label="Time remaining">⏱ {formatTime(timeRemaining)}</span>
           </div>
@@ -201,17 +201,17 @@ export default function ExamSimulator() {
 
               {/* Mini-map navigation */}
               <div className="mt-4">
-                <div className="text-xs text-slate-500 mb-1">Jump to question</div>
+                <div className="text-xs text-muted-foreground mb-1">Jump to question</div>
                 <div className="flex flex-wrap gap-2" data-testid="mini-map">
                   {currentSession.questions.map((q, i) => {
                     const sel = answers[q.id];
                     const completed = !!currentSession.completedAt;
                     const isCurrent = i === index;
                     let cls = "px-2 py-1 rounded text-xs";
-                    if (isCurrent) cls += " bg-blue-600 text-white";
+                    if (isCurrent) cls += " bg-blue-600 text-foreground";
                     else if (completed) {
                       const correct = sel && sel === q.correctAnswerId;
-                      cls += correct ? " bg-green-600 text-white" : sel ? " bg-red-600 text-white" : " bg-slate-200 dark:bg-slate-700";
+                      cls += correct ? " bg-[#22c55e] text-foreground" : sel ? " bg-red-600 text-foreground" : " bg-slate-200 dark:bg-slate-700";
                     } else {
                       cls += sel ? " bg-blue-100 dark:bg-blue-900 text-blue-700" : " bg-slate-200 dark:bg-slate-700";
                     }
@@ -304,9 +304,9 @@ export default function ExamSimulator() {
               return (
                 <div key={q.id} className="border rounded p-3" data-testid="review-item">
                   <div className="mb-2">{q.question}</div>
-                  <div className="text-sm">Your answer: <span className={isCorrect ? 'text-green-600' : 'text-red-600'}>{getText(selected)}</span></div>
+                  <div className="text-sm">Your answer: <span className={isCorrect ? 'text-[#22c55e]' : 'text-red-600'}>{getText(selected)}</span></div>
                   {!isCorrect && (
-                    <div className="text-sm">Correct answer: <span className="text-green-600">{getText(correct)}</span></div>
+                    <div className="text-sm">Correct answer: <span className="text-[#22c55e]">{getText(correct)}</span></div>
                   )}
                 </div>
               );
@@ -325,7 +325,7 @@ function ReviewSummary({ result }: { result: any | null }) {
   const minutes = Math.floor(time / 60);
   const seconds = time % 60;
   return (
-    <div className="rounded bg-slate-50 dark:bg-slate-900 border p-3 text-sm">
+    <div className="rounded bg-slate-50 dark:bg-card border p-3 text-sm">
       <div>Score: {percent !== null ? `${percent}%` : '—'} · Passed: {String(result.passed)}</div>
       <div>
         Questions: {result.correctAnswers ?? 0} correct / {result.incorrectAnswers ?? 0} incorrect of {result.totalQuestions ?? 0}
@@ -349,7 +349,7 @@ function ReviewSummary({ result }: { result: any | null }) {
           </ul>
         </div>
       ) : null}
-      <div className="mt-2 text-slate-500">
+      <div className="mt-2 text-muted-foreground">
         Progress saved via ProgressService (score, totals, domain breakdown).
       </div>
     </div>

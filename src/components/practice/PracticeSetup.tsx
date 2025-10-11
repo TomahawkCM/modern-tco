@@ -61,16 +61,16 @@ export function PracticeSetup({ onStart, moduleId: initialModuleId, concept: ini
     <div className="space-y-6">
       {/* Recommendations */}
       {recommendations.length > 0 && (
-        <Card className="border-blue-500/20 bg-blue-500/5">
+        <Card className="border-primary/20 bg-primary/5">
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-base">
-              <AlertCircle className="h-5 w-5 text-blue-400" />
+              <AlertCircle className="h-5 w-5 text-primary" />
               Practice Recommendations
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-2">
             {recommendations.map((rec, idx) => (
-              <div key={idx} className="text-sm text-gray-300">
+              <div key={idx} className="text-sm text-muted-foreground">
                 {rec}
               </div>
             ))}
@@ -92,15 +92,15 @@ export function PracticeSetup({ onStart, moduleId: initialModuleId, concept: ini
                 onClick={() => setMode("random")}
                 className={`rounded-lg border-2 p-4 text-left transition-colors ${
                   mode === "random"
-                    ? "border-purple-500 bg-purple-500/10"
+                    ? "border-purple-500 bg-accent/10"
                     : "border-gray-700 hover:border-gray-600"
                 }`}
               >
                 <div className="flex items-center gap-2 mb-2">
-                  <Shuffle className="h-5 w-5 text-purple-400" />
+                  <Shuffle className="h-5 w-5 text-accent-foreground" />
                   <span className="font-semibold">Random</span>
                 </div>
-                <p className="text-sm text-gray-400">
+                <p className="text-sm text-muted-foreground">
                   Mix of questions from all topics
                 </p>
               </button>
@@ -109,15 +109,15 @@ export function PracticeSetup({ onStart, moduleId: initialModuleId, concept: ini
                 onClick={() => setMode("concept")}
                 className={`rounded-lg border-2 p-4 text-left transition-colors ${
                   mode === "concept"
-                    ? "border-blue-500 bg-blue-500/10"
+                    ? "border-blue-500 bg-primary/10"
                     : "border-gray-700 hover:border-gray-600"
                 }`}
               >
                 <div className="flex items-center gap-2 mb-2">
-                  <Target className="h-5 w-5 text-blue-400" />
+                  <Target className="h-5 w-5 text-primary" />
                   <span className="font-semibold">Specific Concept</span>
                 </div>
-                <p className="text-sm text-gray-400">
+                <p className="text-sm text-muted-foreground">
                   Focus on one concept
                 </p>
               </button>
@@ -126,15 +126,15 @@ export function PracticeSetup({ onStart, moduleId: initialModuleId, concept: ini
                 onClick={() => setMode("module")}
                 className={`rounded-lg border-2 p-4 text-left transition-colors ${
                   mode === "module"
-                    ? "border-green-500 bg-green-500/10"
+                    ? "border-green-500 bg-[#22c55e]/10"
                     : "border-gray-700 hover:border-gray-600"
                 }`}
               >
                 <div className="flex items-center gap-2 mb-2">
-                  <Book className="h-5 w-5 text-green-400" />
+                  <Book className="h-5 w-5 text-[#22c55e]" />
                   <span className="font-semibold">Module</span>
                 </div>
-                <p className="text-sm text-gray-400">
+                <p className="text-sm text-muted-foreground">
                   Practice entire module
                 </p>
               </button>
@@ -151,7 +151,7 @@ export function PracticeSetup({ onStart, moduleId: initialModuleId, concept: ini
                   <AlertCircle className="h-5 w-5 text-orange-400" />
                   <span className="font-semibold">Missed Questions</span>
                 </div>
-                <p className="text-sm text-gray-400">
+                <p className="text-sm text-muted-foreground">
                   Review incorrect answers
                 </p>
               </button>
@@ -187,9 +187,9 @@ export function PracticeSetup({ onStart, moduleId: initialModuleId, concept: ini
                 value={concept}
                 onChange={(e) => setConcept(e.target.value)}
                 placeholder="e.g., Linear Chain Architecture"
-                className="w-full rounded-md border border-gray-700 bg-gray-800 px-3 py-2 text-sm"
+                className="w-full rounded-md border border-gray-700 bg-card px-3 py-2 text-sm"
               />
-              <p className="text-xs text-gray-500">
+              <p className="text-xs text-muted-foreground">
                 Enter the specific concept you want to practice
               </p>
             </div>
@@ -255,7 +255,7 @@ export function PracticeSetup({ onStart, moduleId: initialModuleId, concept: ini
           <Button
             onClick={handleStart}
             disabled={!canStart()}
-            className="w-full bg-purple-600 hover:bg-purple-700"
+            className="w-full bg-accent hover:bg-purple-700"
             size="lg"
           >
             <Play className="mr-2 h-5 w-5" />

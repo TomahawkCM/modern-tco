@@ -56,10 +56,10 @@ export function Module3Navigation({
 
   const getSectionIcon = (sectionId: Module3Section) => {
     const progress = userProgress[sectionId];
-    if (!progress) return <Circle className="w-4 h-4 text-gray-400" />;
-    if (progress.completed) return <CheckCircle className="w-4 h-4 text-green-500" />;
-    if (progress.progress > 0) return <Circle className="w-4 h-4 text-blue-500" />;
-    return <Circle className="w-4 h-4 text-gray-400" />;
+    if (!progress) return <Circle className="w-4 h-4 text-muted-foreground" />;
+    if (progress.completed) return <CheckCircle className="w-4 h-4 text-[#22c55e]" />;
+    if (progress.progress > 0) return <Circle className="w-4 h-4 text-primary" />;
+    return <Circle className="w-4 h-4 text-muted-foreground" />;
   };
 
   const getDifficultyColor = (difficulty: string) => {
@@ -165,7 +165,7 @@ export function Module3Navigation({
                         <span className="font-medium">Question Coverage</span>
                         <span className={cn(
                           "font-medium",
-                          coverage === 100 ? "text-green-600" :
+                          coverage === 100 ? "text-[#22c55e]" :
                           coverage > 50 ? "text-yellow-600" : "text-red-600"
                         )}>
                           {section.currentQuestionCount} / {section.questionTargetCount} questions ({coverage}%)

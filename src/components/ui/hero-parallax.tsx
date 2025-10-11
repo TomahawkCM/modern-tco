@@ -69,7 +69,7 @@ export const HeroParallax = ({
 export const Header = () => {
   return (
     <div className="relative left-0 top-0 mx-auto w-full max-w-7xl px-4 py-20 md:py-40">
-      <h1 className="text-2xl font-bold dark:text-white md:text-7xl">
+      <h1 className="text-2xl font-bold dark:text-foreground md:text-7xl">
         The Ultimate <br /> development studio
       </h1>
       <p className="mt-8 max-w-2xl text-base dark:text-neutral-200 md:text-xl">
@@ -112,7 +112,7 @@ export const ProductCard = ({
         />
       </a>
       <div className="pointer-events-none absolute inset-0 h-full w-full bg-black opacity-0 group-hover/product:opacity-80"></div>
-      <h2 className="absolute bottom-4 left-4 text-white opacity-0 group-hover/product:opacity-100">
+      <h2 className="absolute bottom-4 left-4 text-foreground opacity-0 group-hover/product:opacity-100">
         {product.title}
       </h2>
     </motion.div>

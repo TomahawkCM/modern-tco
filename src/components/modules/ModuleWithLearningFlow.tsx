@@ -47,7 +47,7 @@ export function ModuleWithLearningFlow({
           <Card>
             <CardHeader>
               <div className="flex items-center gap-2">
-                <BookOpen className="h-5 w-5 text-blue-500" />
+                <BookOpen className="h-5 w-5 text-primary" />
                 <CardTitle className="text-xl">Learning Material</CardTitle>
                 <Badge variant="secondary" className="bg-blue-100 text-blue-700">
                   {domain}
@@ -101,7 +101,7 @@ export function ModuleWithLearningFlow({
           <Card>
             <CardHeader>
               <div className="flex items-center gap-2">
-                <FileCheck className="h-5 w-5 text-cyan-500" />
+                <FileCheck className="h-5 w-5 text-primary" />
                 <CardTitle className="text-xl">Assessment</CardTitle>
                 <Badge variant="secondary" className="bg-cyan-100 text-cyan-700">
                   Formal Assessment
@@ -134,7 +134,7 @@ export function ModuleWithLearningFlow({
           <Card className="border-green-200 bg-green-50/50">
             <CardHeader>
               <div className="flex items-center gap-2">
-                <Trophy className="h-5 w-5 text-green-600" />
+                <Trophy className="h-5 w-5 text-[#22c55e]" />
                 <CardTitle className="text-xl text-green-800">Module Completed!</CardTitle>
                 <Badge variant="secondary" className="bg-green-100 text-green-700">
                   Success

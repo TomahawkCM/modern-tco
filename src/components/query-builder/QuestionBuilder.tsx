@@ -340,12 +340,12 @@ export function QuestionBuilder({
       return { icon: AlertCircle, color: 'text-red-500', text: 'Invalid query' };
     }
     if (state.validation.warnings.length > 0) {
-      return { icon: Info, color: 'text-yellow-500', text: 'Query has warnings' };
+      return { icon: Info, color: 'text-[#f97316]', text: 'Query has warnings' };
     }
     if (state.validation.isValid) {
-      return { icon: CheckCircle, color: 'text-green-500', text: 'Valid query' };
+      return { icon: CheckCircle, color: 'text-[#22c55e]', text: 'Valid query' };
     }
-    return { icon: AlertCircle, color: 'text-gray-500', text: 'Incomplete query' };
+    return { icon: AlertCircle, color: 'text-muted-foreground', text: 'Incomplete query' };
   };
 
   const validationStatus = getValidationStatus();
@@ -354,7 +354,7 @@ export function QuestionBuilder({
     <Card className={`glass border-white/10 ${className}`}>
       <CardHeader>
         <div className="flex items-center justify-between">
-          <CardTitle className="flex items-center text-white">
+          <CardTitle className="flex items-center text-foreground">
             <Search className="mr-2 h-5 w-5 text-tanium-accent" />
             Tanium Question Builder
           </CardTitle>
@@ -418,7 +418,7 @@ export function QuestionBuilder({
           value={state.mode}
           onValueChange={(value) => dispatch({ type: 'SET_MODE', mode: value as BuilderMode })}
         >
-          <TabsList className="grid w-full grid-cols-3 bg-gray-800">
+          <TabsList className="grid w-full grid-cols-3 bg-card">
             <TabsTrigger value="guided" className="flex items-center">
               <MousePointer className="mr-2 h-4 w-4" />
               Guided
@@ -481,7 +481,7 @@ export function QuestionBuilder({
               <div className="flex items-center justify-center p-8">
                 <div className="flex items-center space-x-2">
                   <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-tanium-accent"></div>
-                  <span className="text-gray-400">Loading Natural Language mode...</span>
+                  <span className="text-muted-foreground">Loading Natural Language mode...</span>
                 </div>
               </div>
             }>
@@ -512,7 +512,7 @@ export function QuestionBuilder({
           <TabsContent value="advanced" className="space-y-4">
             <div className="space-y-4">
               <textarea
-                className="w-full h-32 p-3 bg-gray-800 border border-gray-600 rounded text-white font-mono text-sm"
+                className="w-full h-32 p-3 bg-card border border-gray-600 rounded text-foreground font-mono text-sm"
                 placeholder="Enter Tanium query directly (e.g., Get Computer Name from all machines)"
                 value={state.query.rawQuery}
                 onChange={(e) => dispatch({ type: 'SET_RAW_QUERY', query: e.target.value })}
@@ -549,28 +549,28 @@ export function QuestionBuilder({
         {showHistory && showHistoryPanel && (
           <Card className="glass border-white/10 mt-4">
             <CardHeader>
-              <CardTitle className="text-white text-sm">Query History</CardTitle>
+              <CardTitle className="text-foreground text-sm">Query History</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-2 max-h-64 overflow-y-auto">
                 {state.history.map((item) => (
                   <div
                     key={item.id}
-                    className="p-2 bg-gray-800 rounded hover:bg-gray-700 cursor-pointer"
+                    className="p-2 bg-card rounded hover:bg-gray-700 cursor-pointer"
                     onClick={() => handleLoadFromHistory(item)}
                   >
                     <div className="flex justify-between items-start">
                       <div className="flex-1">
-                        <code className="text-xs text-gray-300 block">
+                        <code className="text-xs text-muted-foreground block">
                           {item.query}
                         </code>
                       </div>
-                      <div className="text-xs text-gray-500 ml-2">
+                      <div className="text-xs text-muted-foreground ml-2">
                         {new Date(item.timestamp).toLocaleTimeString()}
                       </div>
                     </div>
                     {item.resultCount !== undefined && (
-                      <div className="text-xs text-gray-500 mt-1">
+                      <div className="text-xs text-muted-foreground mt-1">
                         {item.resultCount} results • {item.executionTime}ms
                       </div>
                     )}

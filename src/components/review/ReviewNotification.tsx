@@ -66,7 +66,7 @@ export default function ReviewNotification({
     low: {
       bgClass: "bg-blue-50 dark:bg-blue-950/20 border-blue-200 dark:border-blue-900",
       textClass: "text-blue-900 dark:text-blue-100",
-      iconClass: "text-blue-600 dark:text-blue-400",
+      iconClass: "text-blue-600 dark:text-primary",
       buttonVariant: "default" as const,
     },
     medium: {
@@ -161,7 +161,7 @@ export default function ReviewNotification({
                 variant="secondary"
                 className={cn(
                   "gap-1",
-                  urgency === "high" && "bg-red-600 text-white dark:bg-red-700"
+                  urgency === "high" && "bg-red-600 text-foreground dark:bg-red-700"
                 )}
               >
                 <Clock className="h-3 w-3" />

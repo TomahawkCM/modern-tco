@@ -21,7 +21,7 @@ const DomainRadarChart = dynamic(
       <div className="flex items-center justify-center p-8">
         <div className="text-center space-y-3">
           <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-cyan-500 mx-auto"></div>
-          <p className="text-gray-400 text-sm">Loading chart...</p>
+          <p className="text-muted-foreground text-sm">Loading chart...</p>
         </div>
       </div>
     ),
@@ -36,7 +36,7 @@ const StudyRecommendations = dynamic(
       <div className="flex items-center justify-center p-8">
         <div className="text-center space-y-3">
           <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-cyan-500 mx-auto"></div>
-          <p className="text-gray-400 text-sm">Loading recommendations...</p>
+          <p className="text-muted-foreground text-sm">Loading recommendations...</p>
         </div>
       </div>
     ),
@@ -51,7 +51,7 @@ const DataExport = dynamic(
       <div className="flex items-center justify-center p-8">
         <div className="text-center space-y-3">
           <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-cyan-500 mx-auto"></div>
-          <p className="text-gray-400 text-sm">Loading export...</p>
+          <p className="text-muted-foreground text-sm">Loading export...</p>
         </div>
       </div>
     ),
@@ -66,7 +66,7 @@ const AdaptiveDifficulty = dynamic(
       <div className="flex items-center justify-center p-8">
         <div className="text-center space-y-3">
           <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-cyan-500 mx-auto"></div>
-          <p className="text-gray-400 text-sm">Loading analytics...</p>
+          <p className="text-muted-foreground text-sm">Loading analytics...</p>
         </div>
       </div>
     ),
@@ -81,7 +81,7 @@ const PerformancePredictions = dynamic(
       <div className="flex items-center justify-center p-8">
         <div className="text-center space-y-3">
           <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-cyan-500 mx-auto"></div>
-          <p className="text-gray-400 text-sm">Loading predictions...</p>
+          <p className="text-muted-foreground text-sm">Loading predictions...</p>
         </div>
       </div>
     ),
@@ -169,14 +169,14 @@ export default function AnalyticsPage() {
       [TCODomain.TROUBLESHOOTING]: AlertTriangle,
     };
     const colorMap = {
-      [TCODomain.ASKING_QUESTIONS]: "text-green-400",
-      [TCODomain.REFINING_QUESTIONS]: "text-blue-400",
-      [TCODomain.REFINING_TARGETING]: "text-blue-400", // Same as REFINING_QUESTIONS
-      [TCODomain.TAKING_ACTION]: "text-cyan-400",
+      [TCODomain.ASKING_QUESTIONS]: "text-[#22c55e]",
+      [TCODomain.REFINING_QUESTIONS]: "text-primary",
+      [TCODomain.REFINING_TARGETING]: "text-primary", // Same as REFINING_QUESTIONS
+      [TCODomain.TAKING_ACTION]: "text-primary",
       [TCODomain.NAVIGATION_MODULES]: "text-red-400",
-      [TCODomain.REPORTING_EXPORT]: "text-yellow-400",
+      [TCODomain.REPORTING_EXPORT]: "text-[#f97316]",
       [TCODomain.SECURITY]: "text-orange-400",
-      [TCODomain.FUNDAMENTALS]: "text-cyan-400",
+      [TCODomain.FUNDAMENTALS]: "text-primary",
       [TCODomain.TROUBLESHOOTING]: "text-pink-400",
     };
     return {
@@ -282,20 +282,20 @@ export default function AnalyticsPage() {
   const getReadinessColor = (level: string) => {
     switch (level) {
       case "Excellent":
-        return "text-green-400 border-green-400";
+        return "text-[#22c55e] border-green-400";
       case "Good":
-        return "text-blue-400 border-blue-400";
+        return "text-primary border-blue-400";
       case "Fair":
-        return "text-yellow-400 border-yellow-400";
+        return "text-[#f97316] border-yellow-400";
       default:
         return "text-red-400 border-red-400";
     }
   };
 
   const getScoreColor = (score: number) => {
-    if (score >= 80) return "text-green-400";
-    if (score >= 70) return "text-blue-400";
-    if (score >= 60) return "text-yellow-400";
+    if (score >= 80) return "text-[#22c55e]";
+    if (score >= 70) return "text-primary";
+    if (score >= 60) return "text-[#f97316]";
     return "text-red-400";
   };
 
@@ -303,8 +303,8 @@ export default function AnalyticsPage() {
       <div className="mx-auto max-w-6xl space-y-8">
         {/* Header */}
         <div className="text-center">
-          <h1 className="mb-4 text-4xl font-bold text-white">Performance Analytics</h1>
-          <p className="mb-6 text-xl text-gray-200">
+          <h1 className="mb-4 text-4xl font-bold text-foreground">Performance Analytics</h1>
+          <p className="mb-6 text-xl text-muted-foreground">
             Track your progress and identify areas for improvement
           </p>
         </div>
@@ -313,45 +313,45 @@ export default function AnalyticsPage() {
         <div className="grid gap-6 md:grid-cols-4">
           <Card className="glass border-white/10">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-gray-200">Total Questions</CardTitle>
+              <CardTitle className="text-sm font-medium text-muted-foreground">Total Questions</CardTitle>
               <Target className="h-4 w-4 text-tanium-accent" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-white">{overallStats.totalQuestions}</div>
-              <p className="text-xs text-gray-400">practiced this month</p>
+              <div className="text-2xl font-bold text-foreground">{overallStats.totalQuestions}</div>
+              <p className="text-xs text-muted-foreground">practiced this month</p>
             </CardContent>
           </Card>
 
           <Card className="glass border-white/10">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-gray-200">Average Score</CardTitle>
-              <Trophy className="h-4 w-4 text-yellow-400" />
+              <CardTitle className="text-sm font-medium text-muted-foreground">Average Score</CardTitle>
+              <Trophy className="h-4 w-4 text-[#f97316]" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-white">{overallStats.averageScore}%</div>
-              <p className="text-xs text-green-400">+5% from last week</p>
+              <div className="text-2xl font-bold text-foreground">{overallStats.averageScore}%</div>
+              <p className="text-xs text-[#22c55e]">+5% from last week</p>
             </CardContent>
           </Card>
 
           <Card className="glass border-white/10">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-gray-200">Study Streak</CardTitle>
+              <CardTitle className="text-sm font-medium text-muted-foreground">Study Streak</CardTitle>
               <Clock className="h-4 w-4 text-orange-400" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-white">{overallStats.studyStreak}</div>
-              <p className="text-xs text-gray-400">days in a row</p>
+              <div className="text-2xl font-bold text-foreground">{overallStats.studyStreak}</div>
+              <p className="text-xs text-muted-foreground">days in a row</p>
             </CardContent>
           </Card>
 
           <Card className="glass border-white/10">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-gray-200">Exam Readiness</CardTitle>
-              <Brain className="h-4 w-4 text-cyan-400" />
+              <CardTitle className="text-sm font-medium text-muted-foreground">Exam Readiness</CardTitle>
+              <Brain className="h-4 w-4 text-primary" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-white">{overallStats.readinessLevel}</div>
-              <p className="text-xs text-gray-400">based on performance</p>
+              <div className="text-2xl font-bold text-foreground">{overallStats.readinessLevel}</div>
+              <p className="text-xs text-muted-foreground">based on performance</p>
             </CardContent>
           </Card>
         </div>
@@ -360,46 +360,46 @@ export default function AnalyticsPage() {
           <TabsList className="glass grid w-full grid-cols-7 border border-white/10">
             <TabsTrigger
               value="overview"
-              className="text-white data-[state=active]:bg-tanium-accent"
+              className="text-foreground data-[state=active]:bg-tanium-accent"
             >
               <BarChart3 className="mr-2 h-4 w-4" />
               Overview
             </TabsTrigger>
             <TabsTrigger
               value="domains"
-              className="text-white data-[state=active]:bg-tanium-accent"
+              className="text-foreground data-[state=active]:bg-tanium-accent"
             >
               <Layers className="mr-2 h-4 w-4" />
               Domains
             </TabsTrigger>
             <TabsTrigger
               value="predictions"
-              className="text-white data-[state=active]:bg-tanium-accent"
+              className="text-foreground data-[state=active]:bg-tanium-accent"
             >
               <Brain className="mr-2 h-4 w-4" />
               Predictions
             </TabsTrigger>
             <TabsTrigger
               value="adaptive"
-              className="text-white data-[state=active]:bg-tanium-accent"
+              className="text-foreground data-[state=active]:bg-tanium-accent"
             >
               <Zap className="mr-2 h-4 w-4" />
               Adaptive
             </TabsTrigger>
             <TabsTrigger
               value="recommendations"
-              className="text-white data-[state=active]:bg-tanium-accent"
+              className="text-foreground data-[state=active]:bg-tanium-accent"
             >
               <Target className="mr-2 h-4 w-4" />
               Insights
             </TabsTrigger>
-            <TabsTrigger value="export" className="text-white data-[state=active]:bg-tanium-accent">
+            <TabsTrigger value="export" className="text-foreground data-[state=active]:bg-tanium-accent">
               <Download className="mr-2 h-4 w-4" />
               Export
             </TabsTrigger>
             <TabsTrigger
               value="activity"
-              className="text-white data-[state=active]:bg-tanium-accent"
+              className="text-foreground data-[state=active]:bg-tanium-accent"
             >
               <Calendar className="mr-2 h-4 w-4" />
               Activity
@@ -411,8 +411,8 @@ export default function AnalyticsPage() {
               {/* Overall Performance */}
               <Card className="glass border-white/10">
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-2 text-white">
-                    <Trophy className="h-5 w-5 text-yellow-400" />
+                  <CardTitle className="flex items-center gap-2 text-foreground">
+                    <Trophy className="h-5 w-5 text-[#f97316]" />
                     Overall Performance
                   </CardTitle>
                 </CardHeader>
@@ -421,7 +421,7 @@ export default function AnalyticsPage() {
                     <div className="mb-2 text-4xl font-bold text-tanium-accent">
                       {overallStats.averageScore}%
                     </div>
-                    <p className="text-sm text-gray-300">Average Score</p>
+                    <p className="text-sm text-muted-foreground">Average Score</p>
                   </div>
                   <Progress
                     value={overallStats.averageScore}
@@ -430,16 +430,16 @@ export default function AnalyticsPage() {
                   />
                   <div className="grid grid-cols-2 gap-4 text-sm">
                     <div className="text-center">
-                      <div className="text-lg font-bold text-green-400">
+                      <div className="text-lg font-bold text-[#22c55e]">
                         {enhancedStats.correctAnswers}
                       </div>
-                      <div className="text-gray-400">Correct</div>
+                      <div className="text-muted-foreground">Correct</div>
                     </div>
                     <div className="text-center">
                       <div className="text-lg font-bold text-red-400">
                         {enhancedStats.incorrectAnswers}
                       </div>
-                      <div className="text-gray-400">Incorrect</div>
+                      <div className="text-muted-foreground">Incorrect</div>
                     </div>
                   </div>
                 </CardContent>
@@ -448,8 +448,8 @@ export default function AnalyticsPage() {
               {/* Readiness Assessment */}
               <Card className="glass border-white/10">
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-2 text-white">
-                    <Brain className="h-5 w-5 text-cyan-400" />
+                  <CardTitle className="flex items-center gap-2 text-foreground">
+                    <Brain className="h-5 w-5 text-primary" />
                     Exam Readiness
                   </CardTitle>
                 </CardHeader>
@@ -467,20 +467,20 @@ export default function AnalyticsPage() {
                   </div>
                   <div className="space-y-3 text-sm">
                     <div className="flex items-center justify-between">
-                      <span className="text-gray-300">Strongest Domain</span>
-                      <Badge variant="secondary" className="bg-green-900/20 text-green-400">
+                      <span className="text-muted-foreground">Strongest Domain</span>
+                      <Badge variant="secondary" className="bg-green-900/20 text-[#22c55e]">
                         {enhancedStats.strongestDomain}
                       </Badge>
                     </div>
                     <div className="flex items-center justify-between">
-                      <span className="text-gray-300">Needs Improvement</span>
+                      <span className="text-muted-foreground">Needs Improvement</span>
                       <Badge variant="secondary" className="bg-red-900/20 text-red-400">
                         {enhancedStats.weakestDomain}
                       </Badge>
                     </div>
                     <div className="flex items-center justify-between">
-                      <span className="text-gray-300">Study Time</span>
-                      <span className="font-medium text-white">
+                      <span className="text-muted-foreground">Study Time</span>
+                      <span className="font-medium text-foreground">
                         {overallStats.hoursStudied}h total
                       </span>
                     </div>
@@ -492,7 +492,7 @@ export default function AnalyticsPage() {
             {/* Quick Actions */}
             <Card className="glass border-white/10">
               <CardHeader>
-                <CardTitle className="text-white">Recommended Actions</CardTitle>
+                <CardTitle className="text-foreground">Recommended Actions</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="grid gap-4 md:grid-cols-3">
@@ -504,7 +504,7 @@ export default function AnalyticsPage() {
                         )}`
                       )
                     }
-                    className="h-auto bg-red-600 p-4 text-white hover:bg-red-700"
+                    className="h-auto bg-red-600 p-4 text-foreground hover:bg-red-700"
                   >
                     <div className="text-center">
                       <Shield className="mx-auto mb-2 h-6 w-6" />
@@ -514,7 +514,7 @@ export default function AnalyticsPage() {
                   </Button>
                   <Button
                     onClick={() => router.push("/mock")}
-                    className="h-auto bg-tanium-accent p-4 text-white hover:bg-blue-600"
+                    className="h-auto bg-tanium-accent p-4 text-foreground hover:bg-blue-600"
                   >
                     <div className="text-center">
                       <Clock className="mx-auto mb-2 h-6 w-6" />
@@ -524,7 +524,7 @@ export default function AnalyticsPage() {
                   </Button>
                   <Button
                     onClick={() => router.push("/review")}
-                    className="h-auto bg-cyan-600 p-4 text-white hover:bg-cyan-700"
+                    className="h-auto bg-primary p-4 text-foreground hover:bg-cyan-700"
                   >
                     <div className="text-center">
                       <AlertTriangle className="mx-auto mb-2 h-6 w-6" />
@@ -546,7 +546,7 @@ export default function AnalyticsPage() {
               <ResizablePanel defaultSize={panelSizes[0]} minSize={30}>
                 <Card className="glass border-white/10">
                   <CardHeader>
-                    <CardTitle className="text-white">Domain Performance</CardTitle>
+                    <CardTitle className="text-foreground">Domain Performance</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <DomainStatsTable rows={domainRows} />
@@ -557,7 +557,7 @@ export default function AnalyticsPage() {
               <ResizablePanel defaultSize={panelSizes[1]} minSize={30}>
                 <Card className="glass border-white/10 h-full">
                   <CardHeader>
-                    <CardTitle className="text-white">Domain Radar</CardTitle>
+                    <CardTitle className="text-foreground">Domain Radar</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <DomainRadarChart domainScores={radarScores} />
@@ -569,7 +569,7 @@ export default function AnalyticsPage() {
 
             <Card className="glass border-white/10">
               <CardHeader>
-                <CardTitle className="text-gray-200">Blueprint Coverage (Content)</CardTitle>
+                <CardTitle className="text-muted-foreground">Blueprint Coverage (Content)</CardTitle>
               </CardHeader>
               <CardContent>
                 <BlueprintMeter source="content" compact />
@@ -583,7 +583,7 @@ export default function AnalyticsPage() {
                 return (
                   <Card key={domain.domain} className="glass border-white/10">
                     <CardHeader>
-                      <CardTitle className="flex items-center gap-3 text-white">
+                      <CardTitle className="flex items-center gap-3 text-foreground">
                         <Icon className={cn("h-5 w-5", domain.color)} />
                         {domain.domain}
                         <Badge
@@ -602,18 +602,18 @@ export default function AnalyticsPage() {
                       />
                       <div className="grid grid-cols-3 gap-4 text-sm">
                         <div className="text-center">
-                          <div className="text-lg font-bold text-white">{domain.questions}</div>
-                          <div className="text-gray-400">Total Questions</div>
+                          <div className="text-lg font-bold text-foreground">{domain.questions}</div>
+                          <div className="text-muted-foreground">Total Questions</div>
                         </div>
                         <div className="text-center">
-                          <div className="text-lg font-bold text-green-400">{domain.correct}</div>
-                          <div className="text-gray-400">Correct</div>
+                          <div className="text-lg font-bold text-[#22c55e]">{domain.correct}</div>
+                          <div className="text-muted-foreground">Correct</div>
                         </div>
                         <div className="text-center">
                           <div className="text-lg font-bold text-red-400">
                             {domain.questions - domain.correct}
                           </div>
-                          <div className="text-gray-400">Incorrect</div>
+                          <div className="text-muted-foreground">Incorrect</div>
                         </div>
                       </div>
                       <div className="flex justify-end">
@@ -777,7 +777,7 @@ export default function AnalyticsPage() {
           <TabsContent value="activity" className="space-y-6">
             <Card className="glass border-white/10">
               <CardHeader>
-                <CardTitle className="text-white">Recent Study Sessions</CardTitle>
+                <CardTitle className="text-foreground">Recent Study Sessions</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
@@ -797,8 +797,8 @@ export default function AnalyticsPage() {
                           )}
                         </div>
                         <div>
-                          <div className="font-medium text-white">{session.activity}</div>
-                          <div className="text-sm text-gray-400">
+                          <div className="font-medium text-foreground">{session.activity}</div>
+                          <div className="text-sm text-muted-foreground">
                             {session.date} • {session.time}
                           </div>
                         </div>
@@ -807,7 +807,7 @@ export default function AnalyticsPage() {
                         <Badge variant="outline" className={cn(getScoreColor(session.score))}>
                           {session.score}%
                         </Badge>
-                        <div className="mt-1 text-sm text-gray-400">
+                        <div className="mt-1 text-sm text-muted-foreground">
                           {session.questions} questions
                         </div>
                       </div>

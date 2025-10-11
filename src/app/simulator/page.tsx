@@ -452,13 +452,13 @@ export default function SimulatorPage() {
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div>
             <h1 className="text-2xl font-semibold text-cyan-200">Tanium Simulator</h1>
-            <p className="text-sm text-cyan-300/70">
+            <p className="text-sm text-primary/70">
               Validate questions, surface warnings, and rehearse exam scenarios with live feedback.
             </p>
           </div>
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-2">
-              <span className="text-xs uppercase tracking-wide text-cyan-300/80">Exam Mode</span>
+              <span className="text-xs uppercase tracking-wide text-primary/80">Exam Mode</span>
               <Switch checked={examMode} onCheckedChange={(checked) => (checked ? startExamChallenge() : stopExam())} />
             </div>
             {examMode && (
@@ -476,14 +476,14 @@ export default function SimulatorPage() {
               <CardTitle className="flex items-center justify-between text-lg text-cyan-100">
                 Query Editor
                 {currentPrompt && (
-                  <Badge variant="outline" className="border-cyan-500/50 text-cyan-200">
+                  <Badge variant="outline" className="border-primary/50 text-cyan-200">
                     {currentPrompt.title}
                   </Badge>
                 )}
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
-              <div className="rounded-xl border border-cyan-500/20 bg-black/40">
+              <div className="rounded-xl border border-primary/20 bg-black/40">
                 <MonacoEditorComponent
                   height="320px"
                   defaultLanguage="plaintext"
@@ -504,11 +504,11 @@ export default function SimulatorPage() {
               </div>
               <div className="flex flex-wrap items-center justify-between gap-3 text-sm text-cyan-200/80">
                 <div className="flex items-center gap-3">
-                  <span className="font-mono text-xs uppercase tracking-widest text-cyan-300/70">
+                  <span className="font-mono text-xs uppercase tracking-widest text-primary/70">
                     {result?.metadata?.scope ?? 'all machines'}
                   </span>
                   {result?.metadata?.aggregations?.length ? (
-                    <Badge variant="outline" className="border-cyan-500/30 text-cyan-200">
+                    <Badge variant="outline" className="border-primary/30 text-cyan-200">
                       Aggregates: {result.metadata.aggregations.join(', ')}
                     </Badge>
                   ) : null}
@@ -522,7 +522,7 @@ export default function SimulatorPage() {
                   <Button
                     size="sm"
                     variant="outline"
-                    className="border-cyan-500/40 text-cyan-100 hover:bg-cyan-500/10"
+                    className="border-cyan-500/40 text-cyan-100 hover:bg-primary/10"
                     disabled={isEvaluating}
                     onClick={() => {
                       console.log('[Simulator] Run now clicked', { question, examMode, questionLength: question.length });
@@ -531,10 +531,10 @@ export default function SimulatorPage() {
                   >
                     {isEvaluating ? 'Running...' : 'Run now'}
                   </Button>
-                  <Button size="sm" variant="outline" className="border-cyan-500/40 text-cyan-100 hover:bg-cyan-500/10" onClick={() => handleExport('csv')}>
+                  <Button size="sm" variant="outline" className="border-cyan-500/40 text-cyan-100 hover:bg-primary/10" onClick={() => handleExport('csv')}>
                     Export CSV
                   </Button>
-                  <Button size="sm" variant="outline" className="border-cyan-500/40 text-cyan-100 hover:bg-cyan-500/10" onClick={() => handleExport('json')}>
+                  <Button size="sm" variant="outline" className="border-cyan-500/40 text-cyan-100 hover:bg-primary/10" onClick={() => handleExport('json')}>
                     Export JSON
                   </Button>
                 </div>
@@ -555,18 +555,18 @@ export default function SimulatorPage() {
                         key={example.id}
                         variant="outline"
                         className={cn(
-                          'justify-start border-cyan-500/30 text-left text-cyan-200 hover:bg-cyan-500/10',
-                          currentPrompt?.id === example.id && 'border-cyan-400 bg-cyan-500/10'
+                          'justify-start border-primary/30 text-left text-cyan-200 hover:bg-primary/10',
+                          currentPrompt?.id === example.id && 'border-cyan-400 bg-primary/10'
                         )}
                         onClick={() => handleExampleSelect(example)}
                       >
                         <div className="flex flex-col">
                           <span className="text-sm font-medium">{example.title}</span>
-                          <span className="text-xs text-cyan-300/80">{example.domain} · diff {example.difficulty ?? 1}</span>
+                          <span className="text-xs text-primary/80">{example.domain} · diff {example.difficulty ?? 1}</span>
                         </div>
                       </Button>
                     ))}
-                    {examples.length === 0 && <p className="text-sm text-cyan-300/70">No examples loaded.</p>}
+                    {examples.length === 0 && <p className="text-sm text-primary/70">No examples loaded.</p>}
                   </div>
                 </ScrollArea>
               </CardContent>
@@ -582,7 +582,7 @@ export default function SimulatorPage() {
                     value={saveName}
                     onChange={(event) => setSaveName(event.target.value)}
                     placeholder="Name"
-                    className="h-9 border-cyan-500/30 bg-black/40 text-cyan-100 placeholder:text-cyan-300/50"
+                    className="h-9 border-primary/30 bg-black/40 text-cyan-100 placeholder:text-primary/50"
                   />
                   <Button size="sm" disabled={saving || !saveName.trim() || !question.trim()} onClick={handleSaveQuestion}>
                     {saving ? 'Saving…' : 'Save'}
@@ -594,16 +594,16 @@ export default function SimulatorPage() {
                       <Button
                         key={item.name}
                         variant="outline"
-                        className="justify-start border-cyan-500/30 text-cyan-200 hover:bg-cyan-500/10"
+                        className="justify-start border-primary/30 text-cyan-200 hover:bg-primary/10"
                         onClick={() => handleSavedSelect(item)}
                       >
                         <div className="flex flex-col">
                           <span className="text-sm font-medium">{item.name}</span>
-                          {item.savedAt && <span className="text-xs text-cyan-300/70">{new Date(item.savedAt).toLocaleString()}</span>}
+                          {item.savedAt && <span className="text-xs text-primary/70">{new Date(item.savedAt).toLocaleString()}</span>}
                         </div>
                       </Button>
                     ))}
-                    {savedQuestions.length === 0 && <p className="text-sm text-cyan-300/70">No saved questions yet.</p>}
+                    {savedQuestions.length === 0 && <p className="text-sm text-primary/70">No saved questions yet.</p>}
                   </div>
                 </ScrollArea>
               </CardContent>
@@ -613,7 +613,7 @@ export default function SimulatorPage() {
               <CardHeader className="pb-3">
                 <CardTitle className="text-base text-cyan-100">Exam Stats</CardTitle>
               </CardHeader>
-              <CardContent className="space-y-2 text-sm text-cyan-300/80">
+              <CardContent className="space-y-2 text-sm text-primary/80">
                 <div className="flex items-center justify-between">
                   <span>Attempts</span>
                   <span className="font-semibold text-cyan-100">{examAttempts}</span>
@@ -628,7 +628,7 @@ export default function SimulatorPage() {
                     {examAttempts === 0 ? '—' : `${Math.round((examWins / examAttempts) * 100)}%`}
                   </span>
                 </div>
-                <Separator className="my-2 border-cyan-500/20" />
+                <Separator className="my-2 border-primary/20" />
                 <div className="flex gap-2">
                   <Button size="sm" className="flex-1" onClick={startExamChallenge}>
                     New challenge
@@ -648,9 +648,9 @@ export default function SimulatorPage() {
           </CardHeader>
           <CardContent className="space-y-4">
             {result?.ok && result.headers && result.rows && result.rows.length > 0 ? (
-              <div className="overflow-x-auto rounded-xl border border-cyan-500/20">
+              <div className="overflow-x-auto rounded-xl border border-primary/20">
                 <table className="min-w-full divide-y divide-cyan-500/20 text-sm">
-                  <thead className="bg-cyan-500/10">
+                  <thead className="bg-primary/10">
                     <tr>
                       {result.headers.map((header) => (
                         <th key={header} className="px-4 py-2 text-left font-semibold text-cyan-100">
@@ -661,7 +661,7 @@ export default function SimulatorPage() {
                   </thead>
                   <tbody>
                     {result.rows.map((row, index) => (
-                      <tr key={index} className="border-b border-cyan-500/10 bg-black/30">
+                      <tr key={index} className="border-b border-primary/10 bg-black/30">
                         {row.map((cell, cellIndex) => (
                           <td key={cellIndex} className="px-4 py-2 text-cyan-100/90">
                             {cell ?? '—'}
@@ -673,29 +673,29 @@ export default function SimulatorPage() {
                 </table>
               </div>
             ) : (
-              <div className="rounded-xl border border-cyan-500/20 bg-black/30 p-6 text-sm text-cyan-300/80">
+              <div className="rounded-xl border border-primary/20 bg-black/30 p-6 text-sm text-primary/80">
                 {result?.ok ? 'No rows returned. Adjust filters or scope.' : evalError ?? 'Start typing to evaluate your question.'}
               </div>
             )}
             <div className="grid gap-4 lg:grid-cols-3">
-              <div className="rounded-lg border border-cyan-500/20 bg-black/30 p-4 text-sm text-cyan-200">
-                <div className="text-xs uppercase tracking-wide text-cyan-300/70">Execution</div>
+              <div className="rounded-lg border border-primary/20 bg-black/30 p-4 text-sm text-cyan-200">
+                <div className="text-xs uppercase tracking-wide text-primary/70">Execution</div>
                 <div className="mt-2 space-y-1">
                   <div className="flex justify-between"><span>Scoped</span><span>{result?.execution?.scoped ?? '—'}</span></div>
                   <div className="flex justify-between"><span>Filtered</span><span>{result?.execution?.filtered ?? '—'}</span></div>
                   <div className="flex justify-between"><span>Limit</span><span>{result?.metadata?.limit ?? '—'}</span></div>
                 </div>
               </div>
-              <div className="rounded-lg border border-cyan-500/20 bg-black/30 p-4 text-sm text-cyan-200">
-                <div className="text-xs uppercase tracking-wide text-cyan-300/70">Ordering</div>
+              <div className="rounded-lg border border-primary/20 bg-black/30 p-4 text-sm text-cyan-200">
+                <div className="text-xs uppercase tracking-wide text-primary/70">Ordering</div>
                 <div className="mt-2 space-y-1">
                   <div className="flex justify-between"><span>Order by</span><span>{result?.metadata?.orderBy ?? '—'}</span></div>
                   <div className="flex justify-between"><span>Direction</span><span>{result?.metadata?.orderDir ?? '—'}</span></div>
                   <div className="flex justify-between"><span>Group by</span><span>{result?.metadata?.groupBy ?? '—'}</span></div>
                 </div>
               </div>
-              <div className="rounded-lg border border-cyan-500/20 bg-black/30 p-4 text-sm text-cyan-200">
-                <div className="text-xs uppercase tracking-wide text-cyan-300/70">Warnings</div>
+              <div className="rounded-lg border border-primary/20 bg-black/30 p-4 text-sm text-cyan-200">
+                <div className="text-xs uppercase tracking-wide text-primary/70">Warnings</div>
                 <div className="mt-2 space-y-1">
                   {result?.warnings?.length ? (
                     result.warnings.map((warning, index) => (
@@ -704,7 +704,7 @@ export default function SimulatorPage() {
                       </div>
                     ))
                   ) : (
-                    <div className="text-cyan-300/70">No simulator warnings.</div>
+                    <div className="text-primary/70">No simulator warnings.</div>
                   )}
                 </div>
               </div>
@@ -721,23 +721,23 @@ export default function SimulatorPage() {
               <ScrollArea className="max-h-64 pr-2">
                 <div className="space-y-3">
                   {loadingMeta ? (
-                    <p className="text-sm text-cyan-300/80">Loading sensors…</p>
+                    <p className="text-sm text-primary/80">Loading sensors…</p>
                   ) : sensorsCatalog.sensors.length ? (
                     sensorsCatalog.sensors.map((sensor) => (
-                      <div key={sensor.name} className="rounded border border-cyan-500/20 bg-black/30 p-3">
+                      <div key={sensor.name} className="rounded border border-primary/20 bg-black/30 p-3">
                         <div className="flex items-center justify-between">
                           <span className="font-medium text-cyan-100">{sensor.name}</span>
-                          <Badge variant="outline" className="border-cyan-500/30 text-cyan-200">
+                          <Badge variant="outline" className="border-primary/30 text-cyan-200">
                             {sensor.category}
                           </Badge>
                         </div>
                         {sensor.description && (
-                          <p className="mt-1 text-sm text-cyan-300/80">{sensor.description}</p>
+                          <p className="mt-1 text-sm text-primary/80">{sensor.description}</p>
                         )}
                       </div>
                     ))
                   ) : (
-                    <p className="text-sm text-cyan-300/80">No sensors available.</p>
+                    <p className="text-sm text-primary/80">No sensors available.</p>
                   )}
                 </div>
               </ScrollArea>
@@ -750,17 +750,17 @@ export default function SimulatorPage() {
             </CardHeader>
             <CardContent className="space-y-3 text-sm text-cyan-200">
               <div>
-                <div className="text-xs uppercase tracking-wide text-cyan-300/70">Aggregates</div>
+                <div className="text-xs uppercase tracking-wide text-primary/70">Aggregates</div>
                 <div className="mt-2 flex flex-wrap gap-2">
                   {(sensorsCatalog.aggregates ?? []).map((agg) => (
-                    <Badge key={agg} variant="outline" className="border-cyan-500/30 text-cyan-200">
+                    <Badge key={agg} variant="outline" className="border-primary/30 text-cyan-200">
                       {agg}
                     </Badge>
                   ))}
                 </div>
               </div>
-              <Separator className="border-cyan-500/20" />
-              <ul className="list-disc space-y-1 pl-5 text-cyan-300/80">
+              <Separator className="border-primary/20" />
+              <ul className="list-disc space-y-1 pl-5 text-primary/80">
                 <li>Always scope to a group before applying heavy sensors.</li>
                 <li>Use parentheses for complex boolean logic and set explicit limits for exports.</li>
                 <li>Warnings flag potentially risky patterns (like numeric contains) before production runs.</li>

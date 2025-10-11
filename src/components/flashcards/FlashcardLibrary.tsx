@@ -133,7 +133,7 @@ export default function FlashcardLibrary({ userId, onStartReview }: FlashcardLib
             <CardTitle className="text-sm font-medium text-muted-foreground">Accuracy</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-green-600">
+            <div className="text-2xl font-bold text-[#22c55e]">
               {stats?.overallAccuracy || 0}%
             </div>
             <Progress value={stats?.overallAccuracy || 0} className="mt-2" />
@@ -270,11 +270,11 @@ export default function FlashcardLibrary({ userId, onStartReview }: FlashcardLib
                       </div>
                       <div className="ml-2">
                         {item.isNew ? (
-                          <Circle className="h-5 w-5 text-blue-500" />
+                          <Circle className="h-5 w-5 text-primary" />
                         ) : item.isDue ? (
                           <Clock className="h-5 w-5 text-orange-500" />
                         ) : (
-                          <CheckCircle2 className="h-5 w-5 text-green-500" />
+                          <CheckCircle2 className="h-5 w-5 text-[#22c55e]" />
                         )}
                       </div>
                     </div>
@@ -335,7 +335,7 @@ export default function FlashcardLibrary({ userId, onStartReview }: FlashcardLib
             <CardContent className="space-y-4">
               {dueFlashcards.length === 0 ? (
                 <div className="text-center py-8">
-                  <CheckCircle2 className="h-12 w-12 text-green-500 mx-auto mb-4" />
+                  <CheckCircle2 className="h-12 w-12 text-[#22c55e] mx-auto mb-4" />
                   <p className="text-lg font-medium">All caught up!</p>
                   <p className="text-sm text-muted-foreground mt-1">
                     No flashcards due for review today. Great job!

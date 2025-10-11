@@ -51,10 +51,10 @@ export const HolographicText: React.FC<{ children: React.ReactNode; className?: 
 }) => {
   return (
     <div className={`relative ${className}`}>
-      <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 via-sky-400 to-cyan-500 bg-clip-text text-transparent blur-sm">
+      <div className="absolute inset-0 bg-gradient-to-r from-primary via-sky-400 to-primary bg-clip-text text-transparent blur-sm">
         {children}
       </div>
-      <div className="relative bg-gradient-to-r from-cyan-400 via-sky-400 to-cyan-500 bg-clip-text text-transparent">
+      <div className="relative bg-gradient-to-r from-primary via-sky-400 to-primary bg-clip-text text-transparent">
         {children}
       </div>
     </div>
@@ -329,12 +329,12 @@ export const CyberpunkNavBar: React.FC<CyberpunkNavBarProps> = ({
 
   // TEMPORARY: Return simple nav for debugging
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 bg-blue-900 text-white p-4 ${className}`}>
+    <nav className={`fixed top-0 left-0 right-0 z-50 bg-blue-900 text-foreground p-4 ${className}`}>
       <div className="flex items-center justify-between">
         <h1 className="text-xl font-bold">{brandName}</h1>
         <div className="flex gap-4">
           {navItems.map((item) => (
-            <a key={item.name} href={item.href} className="hover:text-cyan-400">
+            <a key={item.name} href={item.href} className="hover:text-primary">
               {item.name}
             </a>
           ))}

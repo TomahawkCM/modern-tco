@@ -68,7 +68,7 @@ export default function AdminQuestionsPage() {
       <div className="space-y-4">
         <Card className="glass border-white/10">
           <CardHeader>
-            <CardTitle className="text-white">Questions</CardTitle>
+            <CardTitle className="text-foreground">Questions</CardTitle>
           </CardHeader>
           <CardContent className="space-y-2">
             <Input placeholder="Filter..." value={filter} onChange={(e) => setFilter(e.target.value)} />
@@ -77,7 +77,7 @@ export default function AdminQuestionsPage() {
                 {filtered.map((q) => (
                   <li key={q.id} className="flex items-center justify-between py-2">
                     <button className="text-left text-sm text-gray-100 hover:underline" onClick={() => setCurrent(q)}>
-                      {q.question || <span className="italic text-gray-400">(untitled)</span>}
+                      {q.question || <span className="italic text-muted-foreground">(untitled)</span>}
                     </button>
                     <div className="flex items-center gap-2">
                       {q.domain && <Badge variant="secondary">{q.domain}</Badge>}
@@ -95,11 +95,11 @@ export default function AdminQuestionsPage() {
       <div className="space-y-4">
         <Card className="glass border-white/10">
           <CardHeader>
-            <CardTitle className="text-white">Editor</CardTitle>
+            <CardTitle className="text-foreground">Editor</CardTitle>
           </CardHeader>
           <CardContent className="space-y-3">
             {!current ? (
-              <div className="text-sm text-gray-300">Select a question or create a new one.</div>
+              <div className="text-sm text-muted-foreground">Select a question or create a new one.</div>
             ) : (
               <form
                 onSubmit={(e) => {
@@ -109,13 +109,13 @@ export default function AdminQuestionsPage() {
                 className="space-y-3"
               >
                 <div>
-                  <Label className="text-gray-300">Question</Label>
+                  <Label className="text-muted-foreground">Question</Label>
                   <Textarea value={current.question} onChange={(e) => setCurrent({ ...current, question: e.target.value })} className="min-h-[100px]" />
                 </div>
                 <div className="grid gap-2 md:grid-cols-2">
                   {current.options.map((opt, i) => (
                     <div key={opt.id}>
-                      <Label className="text-gray-300">Option {opt.id}</Label>
+                      <Label className="text-muted-foreground">Option {opt.id}</Label>
                       <Input
                         value={opt.text}
                         onChange={(e) => {
@@ -129,25 +129,25 @@ export default function AdminQuestionsPage() {
                 </div>
                 <div className="grid gap-2 md:grid-cols-2">
                   <div>
-                    <Label className="text-gray-300">Correct Answer (A-D)</Label>
+                    <Label className="text-muted-foreground">Correct Answer (A-D)</Label>
                     <Input value={current.correctAnswer} onChange={(e) => setCurrent({ ...current, correctAnswer: e.target.value.toUpperCase() })} />
                   </div>
                   <div>
-                    <Label className="text-gray-300">Domain</Label>
+                    <Label className="text-muted-foreground">Domain</Label>
                     <Input value={current.domain ?? ""} onChange={(e) => setCurrent({ ...current, domain: e.target.value })} />
                   </div>
                 </div>
                 <div className="grid gap-2 md:grid-cols-3">
                   <div>
-                    <Label className="text-gray-300">Difficulty</Label>
+                    <Label className="text-muted-foreground">Difficulty</Label>
                     <Input value={current.difficulty ?? ""} onChange={(e) => setCurrent({ ...current, difficulty: e.target.value })} />
                   </div>
                   <div>
-                    <Label className="text-gray-300">Category</Label>
+                    <Label className="text-muted-foreground">Category</Label>
                     <Input value={current.category ?? ""} onChange={(e) => setCurrent({ ...current, category: e.target.value })} />
                   </div>
                   <div>
-                    <Label className="text-gray-300">Tags (comma)</Label>
+                    <Label className="text-muted-foreground">Tags (comma)</Label>
                     <Input
                       value={(current.tags ?? []).join(", ")}
                       onChange={(e) => setCurrent({ ...current, tags: e.target.value.split(",").map((t) => t.trim()).filter(Boolean) })}
@@ -155,7 +155,7 @@ export default function AdminQuestionsPage() {
                   </div>
                 </div>
                 <div>
-                  <Label className="text-gray-300">Explanation</Label>
+                  <Label className="text-muted-foreground">Explanation</Label>
                   <Textarea value={current.explanation ?? ""} onChange={(e) => setCurrent({ ...current, explanation: e.target.value })} className="min-h-[80px]" />
                 </div>
                 <div className="flex gap-2">

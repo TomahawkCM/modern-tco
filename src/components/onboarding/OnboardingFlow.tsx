@@ -172,10 +172,10 @@ export function OnboardingFlow({
         <div className="py-6">
           {completed ? (
             <div className="text-center space-y-4">
-              <div className="mx-auto w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center">
-                <Check className="h-8 w-8 text-green-500" />
+              <div className="mx-auto w-16 h-16 bg-[#22c55e]/20 rounded-full flex items-center justify-center">
+                <Check className="h-8 w-8 text-[#22c55e]" />
               </div>
-              <p className="text-lg text-gray-300">
+              <p className="text-lg text-muted-foreground">
                 Onboarding complete! Redirecting you to your dashboard...
               </p>
             </div>
@@ -202,7 +202,7 @@ export function OnboardingFlow({
               <Button
                 variant="ghost"
                 onClick={handleSkip}
-                className="text-gray-400"
+                className="text-muted-foreground"
               >
                 Skip for now
               </Button>
@@ -233,35 +233,35 @@ function WelcomeStep({ userName }: { userName: string }) {
   return (
     <div className="space-y-6 text-center">
       <div className="mx-auto w-20 h-20 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
-        <GraduationCap className="h-10 w-10 text-white" />
+        <GraduationCap className="h-10 w-10 text-foreground" />
       </div>
       <div className="space-y-2">
         <h2 className="text-2xl font-bold">Welcome, {userName}!</h2>
-        <p className="text-gray-400 max-w-lg mx-auto">
+        <p className="text-muted-foreground max-w-lg mx-auto">
           You're about to experience an enterprise-grade learning platform
           designed specifically for Tanium Core Operator certification. Let's
           take a quick tour to get you started!
         </p>
       </div>
       <div className="grid grid-cols-2 gap-4 max-w-md mx-auto">
-        <div className="text-left p-4 rounded-lg border border-blue-500/20 bg-blue-500/5">
-          <div className="text-3xl font-bold text-blue-400">42%</div>
-          <div className="text-xs text-gray-400">Better retention</div>
+        <div className="text-left p-4 rounded-lg border border-primary/20 bg-primary/5">
+          <div className="text-3xl font-bold text-primary">42%</div>
+          <div className="text-xs text-muted-foreground">Better retention</div>
         </div>
-        <div className="text-left p-4 rounded-lg border border-purple-500/20 bg-purple-500/5">
-          <div className="text-3xl font-bold text-purple-400">34%</div>
-          <div className="text-xs text-gray-400">Higher learning</div>
+        <div className="text-left p-4 rounded-lg border border-accent/20 bg-accent/5">
+          <div className="text-3xl font-bold text-accent-foreground">34%</div>
+          <div className="text-xs text-muted-foreground">Higher learning</div>
         </div>
-        <div className="text-left p-4 rounded-lg border border-green-500/20 bg-green-500/5">
-          <div className="text-3xl font-bold text-green-400">48%</div>
-          <div className="text-xs text-gray-400">More engagement</div>
+        <div className="text-left p-4 rounded-lg border border-[#22c55e]/20 bg-[#22c55e]/5">
+          <div className="text-3xl font-bold text-[#22c55e]">48%</div>
+          <div className="text-xs text-muted-foreground">More engagement</div>
         </div>
-        <div className="text-left p-4 rounded-lg border border-yellow-500/20 bg-yellow-500/5">
-          <div className="text-3xl font-bold text-yellow-400">45%</div>
-          <div className="text-xs text-gray-400">Study effectiveness</div>
+        <div className="text-left p-4 rounded-lg border border-[#f97316]/20 bg-yellow-500/5">
+          <div className="text-3xl font-bold text-[#f97316]">45%</div>
+          <div className="text-xs text-muted-foreground">Study effectiveness</div>
         </div>
       </div>
-      <p className="text-sm text-gray-500 italic">
+      <p className="text-sm text-muted-foreground italic">
         All metrics backed by peer-reviewed research
       </p>
     </div>
@@ -299,7 +299,7 @@ function LearningTechniquesStep() {
 
   return (
     <div className="space-y-4">
-      <p className="text-gray-300 text-center mb-6">
+      <p className="text-muted-foreground text-center mb-6">
         This platform uses <strong>four research-backed techniques</strong> to
         maximize your learning efficiency:
       </p>
@@ -311,9 +311,9 @@ function LearningTechniquesStep() {
               key={technique.title}
               className={cn(
                 "border-l-4",
-                technique.color === "blue" && "border-l-blue-500 bg-blue-500/5",
-                technique.color === "purple" && "border-l-purple-500 bg-purple-500/5",
-                technique.color === "green" && "border-l-green-500 bg-green-500/5",
+                technique.color === "blue" && "border-l-blue-500 bg-primary/5",
+                technique.color === "purple" && "border-l-purple-500 bg-accent/5",
+                technique.color === "green" && "border-l-green-500 bg-[#22c55e]/5",
                 technique.color === "yellow" && "border-l-yellow-500 bg-yellow-500/5"
               )}
             >
@@ -322,17 +322,17 @@ function LearningTechniquesStep() {
                   <Icon
                     className={cn(
                       "h-5 w-5",
-                      technique.color === "blue" && "text-blue-400",
-                      technique.color === "purple" && "text-purple-400",
-                      technique.color === "green" && "text-green-400",
-                      technique.color === "yellow" && "text-yellow-400"
+                      technique.color === "blue" && "text-primary",
+                      technique.color === "purple" && "text-accent-foreground",
+                      technique.color === "green" && "text-[#22c55e]",
+                      technique.color === "yellow" && "text-[#f97316]"
                     )}
                   />
                   {technique.title}
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-sm text-gray-400">{technique.description}</p>
+                <p className="text-sm text-muted-foreground">{technique.description}</p>
               </CardContent>
             </Card>
           );
@@ -352,9 +352,9 @@ function ExamDateStep({
   return (
     <div className="space-y-6">
       <div className="text-center space-y-2">
-        <CalendarIcon className="mx-auto h-12 w-12 text-blue-400" />
+        <CalendarIcon className="mx-auto h-12 w-12 text-primary" />
         <h3 className="text-xl font-semibold">When is your exam?</h3>
-        <p className="text-gray-400 max-w-md mx-auto">
+        <p className="text-muted-foreground max-w-md mx-auto">
           Setting your exam date helps the platform create a personalized study
           schedule and pace your learning appropriately. You can change this
           later in Settings.
@@ -370,12 +370,12 @@ function ExamDateStep({
         />
       </div>
       {examDate && (
-        <div className="text-center p-4 bg-green-500/10 border border-green-500/20 rounded-lg">
-          <p className="text-sm text-green-400">
+        <div className="text-center p-4 bg-[#22c55e]/10 border border-[#22c55e]/20 rounded-lg">
+          <p className="text-sm text-[#22c55e]">
             Exam date set:{" "}
             <strong>{examDate.toLocaleDateString()}</strong>
           </p>
-          <p className="text-xs text-gray-400 mt-1">
+          <p className="text-xs text-muted-foreground mt-1">
             {Math.ceil(
               (examDate.getTime() - new Date().getTime()) /
                 (1000 * 60 * 60 * 24)
@@ -416,7 +416,7 @@ function DashboardStep() {
     <div className="space-y-6">
       <div className="text-center space-y-2">
         <h3 className="text-xl font-semibold">Your Learning Dashboard</h3>
-        <p className="text-gray-400">
+        <p className="text-muted-foreground">
           Your Dashboard is mission control for your certification journey. Here's
           what you'll find:
         </p>
@@ -425,22 +425,22 @@ function DashboardStep() {
         {features.map((feature) => {
           const Icon = feature.icon;
           return (
-            <Card key={feature.title} className="bg-gray-800/30">
+            <Card key={feature.title} className="bg-card/30">
               <CardHeader className="pb-3">
                 <CardTitle className="flex items-center gap-2 text-sm">
-                  <Icon className="h-4 w-4 text-blue-400" />
+                  <Icon className="h-4 w-4 text-primary" />
                   {feature.title}
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-xs text-gray-400">{feature.description}</p>
+                <p className="text-xs text-muted-foreground">{feature.description}</p>
               </CardContent>
             </Card>
           );
         })}
       </div>
-      <div className="p-4 bg-blue-500/10 border border-blue-500/20 rounded-lg">
-        <p className="text-sm text-blue-300">
+      <div className="p-4 bg-primary/10 border border-primary/20 rounded-lg">
+        <p className="text-sm text-primary">
           💡 <strong>Pro tip:</strong> Check your Dashboard daily to stay on
           track. The platform adapts to your performance and suggests what to
           study next.
@@ -482,7 +482,7 @@ function FirstStepsStep() {
     <div className="space-y-6">
       <div className="text-center space-y-2">
         <h3 className="text-xl font-semibold">Your Next Steps</h3>
-        <p className="text-gray-400">
+        <p className="text-muted-foreground">
           Here's how to get started with your certification journey:
         </p>
       </div>
@@ -492,24 +492,24 @@ function FirstStepsStep() {
           return (
             <div
               key={step.number}
-              className="flex gap-4 p-4 rounded-lg border border-gray-700 bg-gray-800/30 hover:bg-gray-800/50 transition-colors"
+              className="flex gap-4 p-4 rounded-lg border border-gray-700 bg-card/30 hover:bg-card/50 transition-colors"
             >
               <div className="flex-shrink-0 w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center font-bold">
                 {step.number}
               </div>
               <div className="flex-1 space-y-1">
                 <div className="flex items-center gap-2">
-                  <Icon className="h-4 w-4 text-blue-400" />
+                  <Icon className="h-4 w-4 text-primary" />
                   <h4 className="font-semibold text-sm">{step.title}</h4>
                 </div>
-                <p className="text-xs text-gray-400">{step.description}</p>
+                <p className="text-xs text-muted-foreground">{step.description}</p>
               </div>
             </div>
           );
         })}
       </div>
-      <div className="p-4 bg-yellow-500/10 border border-yellow-500/20 rounded-lg">
-        <p className="text-sm text-yellow-300">
+      <div className="p-4 bg-[#f97316]/10 border border-[#f97316]/20 rounded-lg">
+        <p className="text-sm text-[#f97316]">
           ⚡ <strong>Remember:</strong> Consistency beats intensity. Study 30
           minutes daily rather than cramming 3.5 hours once a week.
         </p>
@@ -522,46 +522,46 @@ function CompletionStep() {
   return (
     <div className="space-y-6 text-center">
       <div className="mx-auto w-20 h-20 bg-gradient-to-br from-green-500 to-blue-600 rounded-full flex items-center justify-center">
-        <Check className="h-10 w-10 text-white" />
+        <Check className="h-10 w-10 text-foreground" />
       </div>
       <div className="space-y-2">
         <h2 className="text-2xl font-bold">You're ready to begin!</h2>
-        <p className="text-gray-400 max-w-lg mx-auto">
+        <p className="text-muted-foreground max-w-lg mx-auto">
           You now know how to use the platform effectively. Click "Complete" to
           go to your Dashboard and start your first module.
         </p>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-2xl mx-auto">
-        <div className="p-4 rounded-lg border border-blue-500/20 bg-blue-500/5">
-          <div className="text-2xl font-bold text-blue-400 mb-1">
+        <div className="p-4 rounded-lg border border-primary/20 bg-primary/5">
+          <div className="text-2xl font-bold text-primary mb-1">
             Study Daily
           </div>
-          <div className="text-xs text-gray-400">
+          <div className="text-xs text-muted-foreground">
             Build a consistent review habit
           </div>
         </div>
-        <div className="p-4 rounded-lg border border-purple-500/20 bg-purple-500/5">
-          <div className="text-2xl font-bold text-purple-400 mb-1">
+        <div className="p-4 rounded-lg border border-accent/20 bg-accent/5">
+          <div className="text-2xl font-bold text-accent-foreground mb-1">
             Trust the System
           </div>
-          <div className="text-xs text-gray-400">
+          <div className="text-xs text-muted-foreground">
             Let spaced repetition work its magic
           </div>
         </div>
-        <div className="p-4 rounded-lg border border-green-500/20 bg-green-500/5">
-          <div className="text-2xl font-bold text-green-400 mb-1">
+        <div className="p-4 rounded-lg border border-[#22c55e]/20 bg-[#22c55e]/5">
+          <div className="text-2xl font-bold text-[#22c55e] mb-1">
             Track Progress
           </div>
-          <div className="text-xs text-gray-400">
+          <div className="text-xs text-muted-foreground">
             Monitor your exam readiness
           </div>
         </div>
       </div>
-      <div className="p-6 bg-gradient-to-br from-blue-500/10 to-purple-500/10 border border-blue-500/20 rounded-lg">
-        <p className="text-lg font-semibold text-blue-300 mb-2">
+      <div className="p-6 bg-gradient-to-br from-blue-500/10 to-purple-500/10 border border-primary/20 rounded-lg">
+        <p className="text-lg font-semibold text-primary mb-2">
           Good luck on your certification journey! 🚀
         </p>
-        <p className="text-sm text-gray-400">
+        <p className="text-sm text-muted-foreground">
           You can replay this onboarding anytime from Settings → Help →
           Restart Tour
         </p>

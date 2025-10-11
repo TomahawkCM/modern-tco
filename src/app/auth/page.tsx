@@ -49,10 +49,10 @@ export default function AuthPage() {
       <motion.div initial="hidden" animate="visible" variants={cardVariants}>
         <Card className="w-full max-w-md bg-white/10 p-6 shadow-xl backdrop-blur-sm">
           <CardHeader className="text-center">
-            <CardTitle className="text-3xl font-bold text-white">
+            <CardTitle className="text-3xl font-bold text-foreground">
               {isSignUp ? "Create Account" : "Welcome Back"}
             </CardTitle>
-            <CardDescription className="text-blue-200">
+            <CardDescription className="text-muted-foreground">
               {isSignUp
                 ? "Join the Tanium TCO study community."
                 : "Sign in to continue your learning journey."}
@@ -68,7 +68,7 @@ export default function AuthPage() {
                     value={firstName}
                     onChange={(e) => setFirstName(e.target.value)}
                     required
-                    className="bg-white/20 text-white placeholder-blue-200 focus:border-blue-500"
+                    className="bg-white/20 text-foreground placeholder-blue-200 focus:border-blue-500"
                   />
                   <Input
                     type="text"
@@ -76,7 +76,7 @@ export default function AuthPage() {
                     value={lastName}
                     onChange={(e) => setLastName(e.target.value)}
                     required
-                    className="bg-white/20 text-white placeholder-blue-200 focus:border-blue-500"
+                    className="bg-white/20 text-foreground placeholder-blue-200 focus:border-blue-500"
                   />
                 </>
               )}
@@ -86,7 +86,7 @@ export default function AuthPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="bg-white/20 text-white placeholder-blue-200 focus:border-blue-500"
+                className="bg-white/20 text-foreground placeholder-blue-200 focus:border-blue-500"
               />
               <Input
                 type="password"
@@ -94,12 +94,12 @@ export default function AuthPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                className="bg-white/20 text-white placeholder-blue-200 focus:border-blue-500"
+                className="bg-white/20 text-foreground placeholder-blue-200 focus:border-blue-500"
               />
               {authError && <p className="text-center text-red-400">{authError}</p>}
               <Button
                 type="submit"
-                className="w-full bg-blue-600 text-white hover:bg-blue-700"
+                className="w-full bg-blue-600 text-foreground hover:bg-blue-700"
                 disabled={loading}
               >
                 {loading ? "Loading..." : isSignUp ? "Sign Up" : "Sign In"}
@@ -108,7 +108,7 @@ export default function AuthPage() {
                 type="button"
                 variant="link"
                 onClick={() => setIsSignUp(!isSignUp)}
-                className="w-full text-blue-300 hover:text-blue-100"
+                className="w-full text-primary hover:text-blue-100"
               >
                 {isSignUp ? "Already have an account? Sign In" : "Don't have an account? Sign Up"}
               </Button>

@@ -177,7 +177,7 @@ export function AITutorChat({
     return (
       <Card className="flex flex-col h-full p-6">
         <div className="flex items-center gap-2 mb-6">
-          <Sparkles className="w-6 h-6 text-blue-500" />
+          <Sparkles className="w-6 h-6 text-primary" />
           <h2 className="text-2xl font-bold">AI Tutor</h2>
         </div>
         <div className="flex-1 space-y-4">
@@ -194,7 +194,7 @@ export function AITutorChat({
       {/* Header */}
       <div className="flex items-center justify-between p-4 border-b">
         <div className="flex items-center gap-2">
-          <Sparkles className="w-6 h-6 text-blue-500" />
+          <Sparkles className="w-6 h-6 text-primary" />
           <div>
             <h2 className="text-lg font-semibold">AI Tutor</h2>
             <p className="text-sm text-muted-foreground">
@@ -224,7 +224,7 @@ export function AITutorChat({
             <div
               className={`max-w-[80%] rounded-lg p-4 ${
                 message.role === 'user'
-                  ? 'bg-blue-500 text-white'
+                  ? 'bg-primary text-foreground'
                   : 'bg-muted'
               }`}
             >

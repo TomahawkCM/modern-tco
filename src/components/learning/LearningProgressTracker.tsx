@@ -61,9 +61,9 @@ interface Achievement {
 }
 
 const SKILL_LEVELS = [
-  { level: 'beginner', minProgress: 0, color: 'bg-green-500', icon: BookOpen },
-  { level: 'intermediate', minProgress: 30, color: 'bg-blue-500', icon: Target },
-  { level: 'advanced', minProgress: 60, color: 'bg-purple-500', icon: Brain },
+  { level: 'beginner', minProgress: 0, color: 'bg-[#22c55e]', icon: BookOpen },
+  { level: 'intermediate', minProgress: 30, color: 'bg-primary', icon: Target },
+  { level: 'advanced', minProgress: 60, color: 'bg-accent', icon: Brain },
   { level: 'expert', minProgress: 90, color: 'bg-orange-500', icon: Rocket }
 ];
 
@@ -263,12 +263,12 @@ export default function LearningProgressTracker() {
 
   const getModuleStatus = (module: ModuleProgress) => {
     if (module.checkpointPassed && module.miniProjectComplete) {
-      return { icon: CheckCircle2, color: 'text-green-600', label: 'Complete' };
+      return { icon: CheckCircle2, color: 'text-[#22c55e]', label: 'Complete' };
     }
     if (module.completedExercises > 0 || module.timeSpent > 0) {
       return { icon: Circle, color: 'text-blue-600', label: 'In Progress' };
     }
-    return { icon: Lock, color: 'text-gray-400', label: 'Not Started' };
+    return { icon: Lock, color: 'text-muted-foreground', label: 'Not Started' };
   };
 
   const getCurrentLevel = () => {
@@ -337,7 +337,7 @@ export default function LearningProgressTracker() {
                         {learningStats.completedExercises}/{learningStats.totalExercises}
                       </p>
                     </div>
-                    <Target className="w-8 h-8 text-blue-500" />
+                    <Target className="w-8 h-8 text-primary" />
                   </div>
                 </CardContent>
               </Card>
@@ -351,7 +351,7 @@ export default function LearningProgressTracker() {
                         {learningStats.averageAccuracy ?? 85}%
                       </p>
                     </div>
-                    <TrendingUp className="w-8 h-8 text-green-500" />
+                    <TrendingUp className="w-8 h-8 text-[#22c55e]" />
                   </div>
                 </CardContent>
               </Card>
@@ -365,7 +365,7 @@ export default function LearningProgressTracker() {
                         {learningStats.currentStreak} days
                       </p>
                     </div>
-                    <Zap className="w-8 h-8 text-yellow-500" />
+                    <Zap className="w-8 h-8 text-[#f97316]" />
                   </div>
                 </CardContent>
               </Card>
@@ -443,7 +443,7 @@ export default function LearningProgressTracker() {
                           </Badge>
                         )}
                         {module.timeSpent > 0 && (
-                          <span className="text-sm text-gray-500">
+                          <span className="text-sm text-muted-foreground">
                             {formatTime(module.timeSpent)}
                           </span>
                         )}
@@ -481,19 +481,19 @@ export default function LearningProgressTracker() {
                     <div className="flex items-start gap-3">
                       <achievement.icon className={cn(
                         'w-8 h-8',
-                        achievement.unlocked ? 'text-orange-500' : 'text-gray-400'
+                        achievement.unlocked ? 'text-orange-500' : 'text-muted-foreground'
                       )} />
                       <div className="flex-1">
                         <h4 className="font-semibold">{achievement.title}</h4>
                         <p className="text-sm text-gray-600 mt-1">{achievement.description}</p>
                         {achievement.unlocked && achievement.unlockedDate && (
-                          <p className="text-xs text-gray-500 mt-2">
+                          <p className="text-xs text-muted-foreground mt-2">
                             Unlocked {new Date(achievement.unlockedDate).toLocaleDateString()}
                           </p>
                         )}
                       </div>
                       {achievement.unlocked && (
-                        <CheckCircle2 className="w-5 h-5 text-green-600" />
+                        <CheckCircle2 className="w-5 h-5 text-[#22c55e]" />
                       )}
                     </div>
                   </CardContent>

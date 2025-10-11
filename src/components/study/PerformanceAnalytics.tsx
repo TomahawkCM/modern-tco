@@ -57,13 +57,13 @@ export function PerformanceAnalytics({ moduleId }: PerformanceAnalyticsProps) {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <Card className="border-blue-500/20 bg-blue-500/5">
+      <Card className="border-primary/20 bg-primary/5">
         <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-blue-300">
+          <CardTitle className="flex items-center gap-2 text-primary">
             <BarChart3 className="h-6 w-6" />
             Performance Analytics - Adaptive Difficulty
           </CardTitle>
-          <p className="text-sm text-gray-400">
+          <p className="text-sm text-muted-foreground">
             Personalized learning intervals based on your retention performance
           </p>
         </CardHeader>
@@ -72,8 +72,8 @@ export function PerformanceAnalytics({ moduleId }: PerformanceAnalyticsProps) {
       {/* Difficulty Distribution */}
       <Card className="border-gray-700">
         <CardHeader>
-          <CardTitle className="text-sm text-white">Difficulty Distribution</CardTitle>
-          <p className="text-xs text-gray-400">
+          <CardTitle className="text-sm text-foreground">Difficulty Distribution</CardTitle>
+          <p className="text-xs text-muted-foreground">
             How concepts are categorized based on your retention
           </p>
         </CardHeader>
@@ -83,16 +83,16 @@ export function PerformanceAnalytics({ moduleId }: PerformanceAnalyticsProps) {
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <AlertTriangle className="h-4 w-4 text-red-400" />
-                <span className="text-sm font-medium text-white">
+                <span className="text-sm font-medium text-foreground">
                   Struggling (retention &lt; 70%)
                 </span>
               </div>
-              <Badge className="bg-red-600 text-white">
+              <Badge className="bg-red-600 text-foreground">
                 {analytics.struggling} item{analytics.struggling !== 1 ? "s" : ""}
               </Badge>
             </div>
             <Progress value={strugglingPercentage} className="h-2 bg-red-900/30" />
-            <p className="text-xs text-gray-500">
+            <p className="text-xs text-muted-foreground">
               Reviewed more frequently (70% shorter intervals)
             </p>
           </div>
@@ -101,34 +101,34 @@ export function PerformanceAnalytics({ moduleId }: PerformanceAnalyticsProps) {
           <div className="space-y-2">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <Target className="h-4 w-4 text-blue-400" />
-                <span className="text-sm font-medium text-white">
+                <Target className="h-4 w-4 text-primary" />
+                <span className="text-sm font-medium text-foreground">
                   Normal (retention 70-90%)
                 </span>
               </div>
-              <Badge variant="outline" className="border-blue-500/30 text-blue-400">
+              <Badge variant="outline" className="border-primary/30 text-primary">
                 {analytics.normal} item{analytics.normal !== 1 ? "s" : ""}
               </Badge>
             </div>
             <Progress value={normalPercentage} className="h-2 bg-blue-900/30" />
-            <p className="text-xs text-gray-500">Standard 2357 intervals</p>
+            <p className="text-xs text-muted-foreground">Standard 2357 intervals</p>
           </div>
 
           {/* Mastered */}
           <div className="space-y-2">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <Award className="h-4 w-4 text-green-400" />
-                <span className="text-sm font-medium text-white">
+                <Award className="h-4 w-4 text-[#22c55e]" />
+                <span className="text-sm font-medium text-foreground">
                   Mastered (retention &gt; 90%)
                 </span>
               </div>
-              <Badge className="bg-green-600 text-white">
+              <Badge className="bg-[#22c55e] text-foreground">
                 {analytics.mastered} item{analytics.mastered !== 1 ? "s" : ""}
               </Badge>
             </div>
             <Progress value={masteredPercentage} className="h-2 bg-green-900/30" />
-            <p className="text-xs text-gray-500">
+            <p className="text-xs text-muted-foreground">
               Reviewed less frequently (30% longer intervals)
             </p>
           </div>
@@ -138,15 +138,15 @@ export function PerformanceAnalytics({ moduleId }: PerformanceAnalyticsProps) {
       {/* Performance Trends */}
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
         {/* Improving Items */}
-        <Card className="border-green-500/20 bg-green-500/5">
+        <Card className="border-[#22c55e]/20 bg-[#22c55e]/5">
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-gray-400">Improving</p>
-                <p className="text-3xl font-bold text-white">{analytics.improvingItems}</p>
-                <p className="mt-1 text-xs text-gray-500">Getting better with practice</p>
+                <p className="text-sm font-medium text-muted-foreground">Improving</p>
+                <p className="text-3xl font-bold text-foreground">{analytics.improvingItems}</p>
+                <p className="mt-1 text-xs text-muted-foreground">Getting better with practice</p>
               </div>
-              <TrendingUp className="h-8 w-8 text-green-500" />
+              <TrendingUp className="h-8 w-8 text-[#22c55e]" />
             </div>
           </CardContent>
         </Card>
@@ -156,9 +156,9 @@ export function PerformanceAnalytics({ moduleId }: PerformanceAnalyticsProps) {
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-gray-400">Declining</p>
-                <p className="text-3xl font-bold text-white">{analytics.decliningItems}</p>
-                <p className="mt-1 text-xs text-gray-500">Need extra attention</p>
+                <p className="text-sm font-medium text-muted-foreground">Declining</p>
+                <p className="text-3xl font-bold text-foreground">{analytics.decliningItems}</p>
+                <p className="mt-1 text-xs text-muted-foreground">Need extra attention</p>
               </div>
               <TrendingDown className="h-8 w-8 text-orange-500" />
             </div>
@@ -167,24 +167,24 @@ export function PerformanceAnalytics({ moduleId }: PerformanceAnalyticsProps) {
       </div>
 
       {/* Retention Trend */}
-      <Card className="border-purple-500/20 bg-purple-500/5">
+      <Card className="border-accent/20 bg-accent/5">
         <CardHeader>
-          <CardTitle className="text-sm text-purple-300">
+          <CardTitle className="text-sm text-accent-foreground">
             Recent Retention Trend
           </CardTitle>
         </CardHeader>
         <CardContent>
           <div className="mb-2 flex items-baseline gap-2">
-            <span className="text-4xl font-bold text-white">
+            <span className="text-4xl font-bold text-foreground">
               {analytics.averageRetentionTrend}%
             </span>
-            <span className="text-sm text-gray-400">(last 10 sessions)</span>
+            <span className="text-sm text-muted-foreground">(last 10 sessions)</span>
           </div>
           <Progress
             value={analytics.averageRetentionTrend}
             className="h-3 bg-purple-900/30"
           />
-          <p className="mt-2 text-xs text-gray-500">
+          <p className="mt-2 text-xs text-muted-foreground">
             {analytics.averageRetentionTrend >= 80
               ? "🎯 Excellent! Keep up the consistent review schedule"
               : analytics.averageRetentionTrend >= 70
@@ -196,9 +196,9 @@ export function PerformanceAnalytics({ moduleId }: PerformanceAnalyticsProps) {
 
       {/* Personalized Recommendations */}
       {recommendations.length > 0 && (
-        <Card className="border-yellow-500/20 bg-yellow-500/5">
+        <Card className="border-[#f97316]/20 bg-yellow-500/5">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-sm text-yellow-300">
+            <CardTitle className="flex items-center gap-2 text-sm text-[#f97316]">
               <Lightbulb className="h-5 w-5" />
               Personalized Recommendations
             </CardTitle>
@@ -208,9 +208,9 @@ export function PerformanceAnalytics({ moduleId }: PerformanceAnalyticsProps) {
               {recommendations.map((rec, idx) => (
                 <li
                   key={idx}
-                  className="flex items-start gap-2 text-sm text-gray-300"
+                  className="flex items-start gap-2 text-sm text-muted-foreground"
                 >
-                  <span className="mt-0.5 text-yellow-400">•</span>
+                  <span className="mt-0.5 text-[#f97316]">•</span>
                   <span>{rec}</span>
                 </li>
               ))}
@@ -222,16 +222,16 @@ export function PerformanceAnalytics({ moduleId }: PerformanceAnalyticsProps) {
       {/* How Adaptive Difficulty Works */}
       <Card className="border-gray-700">
         <CardHeader>
-          <CardTitle className="text-sm text-white">
+          <CardTitle className="text-sm text-foreground">
             How Adaptive Difficulty Works
           </CardTitle>
         </CardHeader>
-        <CardContent className="space-y-3 text-sm text-gray-300">
+        <CardContent className="space-y-3 text-sm text-muted-foreground">
           <div className="rounded-lg border border-red-500/30 bg-red-500/5 p-3">
             <p className="mb-1 font-semibold text-red-300">
               Struggling (&lt; 70% retention)
             </p>
-            <p className="text-xs text-gray-400">
+            <p className="text-xs text-muted-foreground">
               • Intervals are 30% shorter (e.g., Day 3 → Day 2)
               <br />
               • Stay at current interval until performance improves
@@ -239,11 +239,11 @@ export function PerformanceAnalytics({ moduleId }: PerformanceAnalyticsProps) {
             </p>
           </div>
 
-          <div className="rounded-lg border border-blue-500/30 bg-blue-500/5 p-3">
-            <p className="mb-1 font-semibold text-blue-300">
+          <div className="rounded-lg border border-primary/30 bg-primary/5 p-3">
+            <p className="mb-1 font-semibold text-primary">
               Normal (70-90% retention)
             </p>
-            <p className="text-xs text-gray-400">
+            <p className="text-xs text-muted-foreground">
               • Standard 2357 intervals (Day 1, 3, 7, 16, 35)
               <br />
               • Progress one level when correct
@@ -251,11 +251,11 @@ export function PerformanceAnalytics({ moduleId }: PerformanceAnalyticsProps) {
             </p>
           </div>
 
-          <div className="rounded-lg border border-green-500/30 bg-green-500/5 p-3">
-            <p className="mb-1 font-semibold text-green-300">
+          <div className="rounded-lg border border-[#22c55e]/30 bg-[#22c55e]/5 p-3">
+            <p className="mb-1 font-semibold text-[#22c55e]">
               Mastered (&gt; 90% retention)
             </p>
-            <p className="text-xs text-gray-400">
+            <p className="text-xs text-muted-foreground">
               • Intervals are 30% longer (e.g., Day 7 → Day 9)
               <br />
               • Can skip ahead 2 levels when consistently correct

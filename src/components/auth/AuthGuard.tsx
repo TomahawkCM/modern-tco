@@ -40,7 +40,7 @@ export function AuthGuard({ children, fallback, requireAuth = true }: AuthGuardP
             <Card className="w-full max-w-md">
               <CardHeader className="text-center">
                 <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-blue-100 dark:bg-blue-900">
-                  <Shield className="h-6 w-6 text-blue-600 dark:text-blue-400" />
+                  <Shield className="h-6 w-6 text-blue-600 dark:text-primary" />
                 </div>
                 <CardTitle>Authentication Required</CardTitle>
                 <CardDescription>
@@ -68,12 +68,12 @@ export function AuthGuard({ children, fallback, requireAuth = true }: AuthGuardP
 
         {showAuthModal && (
           <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
-            <div className="w-full max-w-md rounded-lg bg-white p-6 dark:bg-slate-800">
+            <div className="w-full max-w-md rounded-lg bg-white p-6 dark:bg-card">
               <div className="mb-4 flex items-center justify-between">
                 <h2 className="text-xl font-semibold">Sign In</h2>
                 <button
                   onClick={() => setShowAuthModal(false)}
-                  className="text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200"
+                  className="text-muted-foreground hover:text-slate-700 dark:text-muted-foreground dark:hover:text-muted-foreground"
                 >
                   ✕
                 </button>

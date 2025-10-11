@@ -48,7 +48,7 @@ export function PracticeSessionSummary({
   });
 
   const getPerformanceColor = (percentage: number) => {
-    if (percentage >= 80) return "text-green-600";
+    if (percentage >= 80) return "text-[#22c55e]";
     if (percentage >= 70) return "text-yellow-600";
     return "text-red-600";
   };
@@ -97,8 +97,8 @@ export function PracticeSessionSummary({
           <div className="grid grid-cols-3 gap-4">
             <div className="space-y-1 text-center">
               <div className="flex items-center justify-center">
-                <CheckCircle2 className="mr-1 h-4 w-4 text-green-600" />
-                <span className="font-semibold text-green-600">{correctAnswers}</span>
+                <CheckCircle2 className="mr-1 h-4 w-4 text-[#22c55e]" />
+                <span className="font-semibold text-[#22c55e]">{correctAnswers}</span>
               </div>
               <p className="text-xs text-muted-foreground">Correct</p>
             </div>

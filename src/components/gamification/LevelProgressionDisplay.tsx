@@ -71,7 +71,7 @@ export default function LevelProgressionDisplay({
     <Card>
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
-          <Trophy className="h-5 w-5 text-yellow-500" />
+          <Trophy className="h-5 w-5 text-[#f97316]" />
           Level & Progression
         </CardTitle>
       </CardHeader>
@@ -99,7 +99,7 @@ export default function LevelProgressionDisplay({
           <div className="flex items-center justify-center gap-4">
             <div className="text-center">
               <div className="flex items-center gap-1 justify-center">
-                <Star className="h-4 w-4 text-yellow-500" />
+                <Star className="h-4 w-4 text-[#f97316]" />
                 <p className="text-2xl font-bold text-primary">
                   {currentPoints.toLocaleString()}
                 </p>
@@ -130,9 +130,9 @@ export default function LevelProgressionDisplay({
             </div>
 
             {progressPercentage >= 80 && (
-              <div className="flex items-center gap-2 p-2 bg-green-500/10 border border-green-500/20 rounded-md">
-                <Sparkles className="h-4 w-4 text-green-500" />
-                <p className="text-xs text-green-500 font-medium">
+              <div className="flex items-center gap-2 p-2 bg-[#22c55e]/10 border border-[#22c55e]/20 rounded-md">
+                <Sparkles className="h-4 w-4 text-[#22c55e]" />
+                <p className="text-xs text-[#22c55e] font-medium">
                   Almost there! Just {pointsNeeded.toLocaleString()} more points!
                 </p>
               </div>
@@ -142,9 +142,9 @@ export default function LevelProgressionDisplay({
 
         {/* Max Level Achievement */}
         {!nextLevel && (
-          <div className="p-4 bg-gradient-to-r from-yellow-500/10 to-purple-500/10 border-2 border-yellow-500/20 rounded-lg text-center">
-            <Award className="h-8 w-8 text-yellow-500 mx-auto mb-2" />
-            <p className="text-sm font-bold text-yellow-500">
+          <div className="p-4 bg-gradient-to-r from-yellow-500/10 to-purple-500/10 border-2 border-[#f97316]/20 rounded-lg text-center">
+            <Award className="h-8 w-8 text-[#f97316] mx-auto mb-2" />
+            <p className="text-sm font-bold text-[#f97316]">
               Maximum Level Achieved!
             </p>
             <p className="text-xs text-muted-foreground mt-1">

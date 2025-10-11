@@ -72,19 +72,19 @@ export function WelcomeToTanium({ onComplete, onSkip, className }: WelcomeToTani
       icon: Monitor,
       title: "Endpoints",
       description: "Computers, servers, and devices connected to your network that need monitoring and management.",
-      color: "text-blue-400"
+      color: "text-primary"
     },
     {
       icon: Shield,
       title: "Security Management",
       description: "Protecting your organization's digital assets from threats and ensuring compliance with policies.",
-      color: "text-green-400"
+      color: "text-[#22c55e]"
     },
     {
       icon: Network,
       title: "Real-Time Visibility",
       description: "Seeing what's happening across all your endpoints instantly, not waiting hours or days for reports.",
-      color: "text-cyan-400"
+      color: "text-primary"
     },
     {
       icon: Settings,
@@ -100,17 +100,17 @@ export function WelcomeToTanium({ onComplete, onSkip, className }: WelcomeToTani
       title: "Welcome to Your Certification Journey!",
       subtitle: "Let's start with the absolute basics",
       icon: Trophy,
-      color: "text-yellow-400",
+      color: "text-[#f97316]",
       bgColor: "bg-yellow-900/20",
       completable: true,
       content: (
         <div className="space-y-6">
           <div className="text-center">
-            <Trophy className="mx-auto mb-4 h-16 w-16 text-yellow-400" />
-            <h3 className="mb-2 text-2xl font-bold text-white">
+            <Trophy className="mx-auto mb-4 h-16 w-16 text-[#f97316]" />
+            <h3 className="mb-2 text-2xl font-bold text-foreground">
               Congratulations on Starting Your TCO Journey!
             </h3>
-            <p className="text-lg text-gray-300">
+            <p className="text-lg text-muted-foreground">
               You're about to become a <strong>Tanium Certified Operator</strong> - 
               a valuable skill that organizations worldwide need.
             </p>
@@ -121,15 +121,15 @@ export function WelcomeToTanium({ onComplete, onSkip, className }: WelcomeToTani
               <div className="grid gap-4 md:grid-cols-3">
                 <div className="text-center">
                   <div className="mb-2 text-2xl font-bold text-tanium-accent">$95K+</div>
-                  <div className="text-sm text-gray-300">Average TCO Salary</div>
+                  <div className="text-sm text-muted-foreground">Average TCO Salary</div>
                 </div>
                 <div className="text-center">
-                  <div className="mb-2 text-2xl font-bold text-green-400">90%</div>
-                  <div className="text-sm text-gray-300">Job Placement Rate</div>
+                  <div className="mb-2 text-2xl font-bold text-[#22c55e]">90%</div>
+                  <div className="text-sm text-muted-foreground">Job Placement Rate</div>
                 </div>
                 <div className="text-center">
-                  <div className="mb-2 text-2xl font-bold text-blue-400">2 Weeks</div>
-                  <div className="text-sm text-gray-300">Typical Study Time</div>
+                  <div className="mb-2 text-2xl font-bold text-primary">2 Weeks</div>
+                  <div className="text-sm text-muted-foreground">Typical Study Time</div>
                 </div>
               </div>
             </CardContent>
@@ -137,10 +137,10 @@ export function WelcomeToTanium({ onComplete, onSkip, className }: WelcomeToTani
 
           <div className="rounded-lg bg-green-900/20 border border-green-400/20 p-4">
             <div className="flex items-start gap-3">
-              <Lightbulb className="mt-1 h-5 w-5 text-green-400 shrink-0" />
+              <Lightbulb className="mt-1 h-5 w-5 text-[#22c55e] shrink-0" />
               <div>
-                <div className="font-semibold text-green-400">Perfect for Beginners</div>
-                <div className="text-sm text-gray-300">
+                <div className="font-semibold text-[#22c55e]">Perfect for Beginners</div>
+                <div className="text-sm text-muted-foreground">
                   This course assumes zero prior knowledge of Tanium or endpoint management. 
                   We'll start with the very basics and build your expertise step by step.
                 </div>
@@ -155,20 +155,20 @@ export function WelcomeToTanium({ onComplete, onSkip, className }: WelcomeToTani
       title: "What is Endpoint Management?",
       subtitle: "Understanding the fundamentals",
       icon: Monitor,
-      color: "text-blue-400",
+      color: "text-primary",
       bgColor: "bg-blue-900/20",
       completable: true,
       content: (
         <div className="space-y-6">
           <div className="text-center">
-            <Monitor className="mx-auto mb-4 h-12 w-12 text-blue-400" />
-            <h3 className="mb-4 text-xl font-bold text-white">
+            <Monitor className="mx-auto mb-4 h-12 w-12 text-primary" />
+            <h3 className="mb-4 text-xl font-bold text-foreground">
               Think of Your Organization's Digital Ecosystem
             </h3>
           </div>
 
           <div className="space-y-4">
-            <p className="text-gray-300 leading-relaxed">
+            <p className="text-muted-foreground leading-relaxed">
               Imagine you're responsible for the health and security of <strong>thousands of computers</strong> 
               across multiple offices, remote workers, and data centers. How do you:
             </p>
@@ -176,25 +176,25 @@ export function WelcomeToTanium({ onComplete, onSkip, className }: WelcomeToTani
             <div className="space-y-3 ml-4">
               <div className="flex items-start gap-3">
                 <Target className="mt-1 h-4 w-4 text-orange-400 shrink-0" />
-                <span className="text-gray-300">Know which computers have outdated software?</span>
+                <span className="text-muted-foreground">Know which computers have outdated software?</span>
               </div>
               <div className="flex items-start gap-3">
                 <Target className="mt-1 h-4 w-4 text-orange-400 shrink-0" />
-                <span className="text-gray-300">Detect security threats in real-time?</span>
+                <span className="text-muted-foreground">Detect security threats in real-time?</span>
               </div>
               <div className="flex items-start gap-3">
                 <Target className="mt-1 h-4 w-4 text-orange-400 shrink-0" />
-                <span className="text-gray-300">Update software on all machines simultaneously?</span>
+                <span className="text-muted-foreground">Update software on all machines simultaneously?</span>
               </div>
               <div className="flex items-start gap-3">
                 <Target className="mt-1 h-4 w-4 text-orange-400 shrink-0" />
-                <span className="text-gray-300">Ensure compliance with security policies?</span>
+                <span className="text-muted-foreground">Ensure compliance with security policies?</span>
               </div>
             </div>
 
             <div className="rounded-lg bg-blue-900/20 border border-blue-400/20 p-4">
-              <div className="font-semibold text-blue-400 mb-2">This is Endpoint Management!</div>
-              <div className="text-sm text-gray-300">
+              <div className="font-semibold text-primary mb-2">This is Endpoint Management!</div>
+              <div className="text-sm text-muted-foreground">
                 It's the practice of managing, monitoring, and securing all the computers and devices 
                 (called "endpoints") in an organization's network - and doing it efficiently at scale.
               </div>
@@ -208,20 +208,20 @@ export function WelcomeToTanium({ onComplete, onSkip, className }: WelcomeToTani
       title: "What Makes Tanium Special?",
       subtitle: "Understanding the platform you'll master",
       icon: Network,
-      color: "text-cyan-400", 
-      bgColor: "bg-cyan-900/20",
+      color: "text-primary", 
+      bgColor: "bg-primary/20",
       completable: true,
       content: (
         <div className="space-y-6">
           <div className="text-center">
-            <Network className="mx-auto mb-4 h-12 w-12 text-cyan-400" />
-            <h3 className="mb-4 text-xl font-bold text-white">
+            <Network className="mx-auto mb-4 h-12 w-12 text-primary" />
+            <h3 className="mb-4 text-xl font-bold text-foreground">
               Tanium: The Real-Time Endpoint Platform
             </h3>
           </div>
 
           <div className="space-y-4">
-            <p className="text-gray-300 leading-relaxed">
+            <p className="text-muted-foreground leading-relaxed">
               While traditional tools take <strong>hours or days</strong> to collect information from endpoints, 
               Tanium provides answers in <strong>15 seconds or less</strong> - across millions of endpoints.
             </p>
@@ -233,8 +233,8 @@ export function WelcomeToTanium({ onComplete, onSkip, className }: WelcomeToTani
                     <div className="flex items-start gap-3">
                       <concept.icon className={cn("h-8 w-8 shrink-0", concept.color)} />
                       <div>
-                        <div className="font-semibold text-white mb-1">{concept.title}</div>
-                        <div className="text-sm text-gray-300">{concept.description}</div>
+                        <div className="font-semibold text-foreground mb-1">{concept.title}</div>
+                        <div className="text-sm text-muted-foreground">{concept.description}</div>
                       </div>
                     </div>
                   </CardContent>
@@ -242,9 +242,9 @@ export function WelcomeToTanium({ onComplete, onSkip, className }: WelcomeToTani
               ))}
             </div>
 
-            <div className="rounded-lg bg-cyan-900/20 border border-cyan-400/20 p-4">
-              <div className="font-semibold text-cyan-400 mb-2">Why Companies Choose Tanium</div>
-              <div className="text-sm text-gray-300">
+            <div className="rounded-lg bg-primary/20 border border-cyan-400/20 p-4">
+              <div className="font-semibold text-primary mb-2">Why Companies Choose Tanium</div>
+              <div className="text-sm text-muted-foreground">
                 Fortune 500 companies, government agencies, and organizations worldwide use Tanium 
                 because it provides unmatched speed, scale, and accuracy for endpoint management.
               </div>
@@ -258,48 +258,48 @@ export function WelcomeToTanium({ onComplete, onSkip, className }: WelcomeToTani
       title: "Your Role as a TCO",
       subtitle: "What you'll be able to do",
       icon: Users,
-      color: "text-green-400",
+      color: "text-[#22c55e]",
       bgColor: "bg-green-900/20", 
       completable: true,
       content: (
         <div className="space-y-6">
           <div className="text-center">
-            <Users className="mx-auto mb-4 h-12 w-12 text-green-400" />
-            <h3 className="mb-4 text-xl font-bold text-white">
+            <Users className="mx-auto mb-4 h-12 w-12 text-[#22c55e]" />
+            <h3 className="mb-4 text-xl font-bold text-foreground">
               Tanium Certified Operator Responsibilities
             </h3>
           </div>
 
           <div className="space-y-4">
-            <p className="text-gray-300 leading-relaxed">
+            <p className="text-muted-foreground leading-relaxed">
               As a <strong>Tanium Certified Operator</strong>, you'll be the expert who can:
             </p>
             
             <div className="grid gap-3 md:grid-cols-2">
               <div className="rounded-lg bg-green-900/20 border border-green-400/20 p-3">
-                <div className="font-semibold text-green-400 text-sm mb-1">Ask Questions</div>
-                <div className="text-xs text-gray-300">Query endpoints for real-time information</div>
+                <div className="font-semibold text-[#22c55e] text-sm mb-1">Ask Questions</div>
+                <div className="text-xs text-muted-foreground">Query endpoints for real-time information</div>
               </div>
               <div className="rounded-lg bg-blue-900/20 border border-blue-400/20 p-3">
-                <div className="font-semibold text-blue-400 text-sm mb-1">Refine & Target</div>
-                <div className="text-xs text-gray-300">Filter and target specific endpoint groups</div>
+                <div className="font-semibold text-primary text-sm mb-1">Refine & Target</div>
+                <div className="text-xs text-muted-foreground">Filter and target specific endpoint groups</div>
               </div>
               <div className="rounded-lg bg-orange-900/20 border border-orange-400/20 p-3">
                 <div className="font-semibold text-orange-400 text-sm mb-1">Take Action</div>
-                <div className="text-xs text-gray-300">Deploy updates and remediate issues</div>
+                <div className="text-xs text-muted-foreground">Deploy updates and remediate issues</div>
               </div>
-              <div className="rounded-lg bg-cyan-900/20 border border-cyan-400/20 p-3">
-                <div className="font-semibold text-cyan-400 text-sm mb-1">Generate Reports</div>
-                <div className="text-xs text-gray-300">Create compliance and status reports</div>
+              <div className="rounded-lg bg-primary/20 border border-cyan-400/20 p-3">
+                <div className="font-semibold text-primary text-sm mb-1">Generate Reports</div>
+                <div className="text-xs text-muted-foreground">Create compliance and status reports</div>
               </div>
             </div>
 
             <div className="rounded-lg bg-yellow-900/20 border border-yellow-400/20 p-4">
               <div className="flex items-start gap-3">
-                <Trophy className="mt-1 h-5 w-5 text-yellow-400 shrink-0" />
+                <Trophy className="mt-1 h-5 w-5 text-[#f97316] shrink-0" />
                 <div>
-                  <div className="font-semibold text-yellow-400">Career Impact</div>
-                  <div className="text-sm text-gray-300">
+                  <div className="font-semibold text-[#f97316]">Career Impact</div>
+                  <div className="text-sm text-muted-foreground">
                     TCO certification opens doors to cybersecurity, IT operations, and compliance roles 
                     with significantly higher earning potential.
                   </div>
@@ -322,35 +322,35 @@ export function WelcomeToTanium({ onComplete, onSkip, className }: WelcomeToTani
         <div className="space-y-6">
           <div className="text-center">
             <BookOpen className="mx-auto mb-4 h-12 w-12 text-tanium-accent" />
-            <h3 className="mb-4 text-xl font-bold text-white">
+            <h3 className="mb-4 text-xl font-bold text-foreground">
               Your Learning Path Awaits
             </h3>
           </div>
 
           <div className="space-y-4">
-            <p className="text-gray-300 leading-relaxed">
+            <p className="text-muted-foreground leading-relaxed">
               You now understand the <strong>what</strong> and <strong>why</strong> of endpoint management and Tanium. 
               Next, we'll dive into the <strong>how</strong> - building your practical skills step by step.
             </p>
 
             <div className="space-y-3">
               <div className="flex items-center gap-3 p-3 rounded-lg bg-gray-900/50">
-                <CheckCircle className="h-5 w-5 text-green-400" />
-                <span className="text-sm text-gray-300">Foundation concepts mastered</span>
+                <CheckCircle className="h-5 w-5 text-[#22c55e]" />
+                <span className="text-sm text-muted-foreground">Foundation concepts mastered</span>
               </div>
               <div className="flex items-center gap-3 p-3 rounded-lg bg-blue-900/20 border border-blue-400/20">
-                <ArrowRight className="h-5 w-5 text-blue-400" />
-                <span className="text-sm text-gray-300">Next: Prerequisites assessment</span>
+                <ArrowRight className="h-5 w-5 text-primary" />
+                <span className="text-sm text-muted-foreground">Next: Prerequisites assessment</span>
               </div>
-              <div className="flex items-center gap-3 p-3 rounded-lg bg-gray-800/50">
-                <Target className="h-5 w-5 text-gray-400" />
-                <span className="text-sm text-gray-400">Then: Hands-on learning modules</span>
+              <div className="flex items-center gap-3 p-3 rounded-lg bg-card/50">
+                <Target className="h-5 w-5 text-muted-foreground" />
+                <span className="text-sm text-muted-foreground">Then: Hands-on learning modules</span>
               </div>
             </div>
 
             <div className="rounded-lg bg-tanium-accent/10 border border-tanium-accent/20 p-4">
               <div className="font-semibold text-tanium-accent mb-2">Confidence Boost</div>
-              <div className="text-sm text-gray-300">
+              <div className="text-sm text-muted-foreground">
                 Remember: Every expert was once a beginner. You've already taken the most important step 
                 by starting this journey. We'll guide you every step of the way!
               </div>
@@ -414,8 +414,8 @@ export function WelcomeToTanium({ onComplete, onSkip, className }: WelcomeToTani
     <div className={cn("mx-auto max-w-4xl space-y-6", className)}>
       {/* Progress Header */}
       <div className="text-center">
-        <h1 className="mb-2 text-3xl font-bold text-white">Welcome to TCO Certification</h1>
-        <p className="mb-4 text-gray-300">Foundation building for complete beginners</p>
+        <h1 className="mb-2 text-3xl font-bold text-foreground">Welcome to TCO Certification</h1>
+        <p className="mb-4 text-muted-foreground">Foundation building for complete beginners</p>
         <div className="flex items-center justify-center gap-4 mb-4">
           <Progress value={progressPercentage} className="h-2 w-48" />
           <Badge variant="outline" className="text-tanium-accent border-tanium-accent">
@@ -432,8 +432,8 @@ export function WelcomeToTanium({ onComplete, onSkip, className }: WelcomeToTani
               <currentStep.icon className={cn("h-6 w-6", currentStep.color)} />
             </div>
             <div>
-              <CardTitle className="text-white">{currentStep.title}</CardTitle>
-              <p className="text-sm text-gray-400">{currentStep.subtitle}</p>
+              <CardTitle className="text-foreground">{currentStep.title}</CardTitle>
+              <p className="text-sm text-muted-foreground">{currentStep.subtitle}</p>
             </div>
           </div>
         </CardHeader>
@@ -449,7 +449,7 @@ export function WelcomeToTanium({ onComplete, onSkip, className }: WelcomeToTani
           variant="outline"
           onClick={goToPreviousStep}
           disabled={isFirstStep}
-          className="border-white/20 text-white hover:bg-white/10"
+          className="border-white/20 text-foreground hover:bg-white/10"
         >
           <ArrowLeft className="mr-2 h-4 w-4" />
           Previous
@@ -460,7 +460,7 @@ export function WelcomeToTanium({ onComplete, onSkip, className }: WelcomeToTani
             <Button
               variant="ghost"
               onClick={onSkip}
-              className="text-gray-400 hover:text-white"
+              className="text-muted-foreground hover:text-foreground"
             >
               Skip Introduction
             </Button>
@@ -501,7 +501,7 @@ export function WelcomeToTanium({ onComplete, onSkip, className }: WelcomeToTani
                 ? "bg-tanium-accent w-6"
                 : progress.completedSteps.has(index)
                 ? "bg-green-400"
-                : "bg-gray-600"
+                : "bg-muted"
             )}
           />
         ))}

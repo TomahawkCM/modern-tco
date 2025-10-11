@@ -41,14 +41,14 @@ const difficultyLevels: Record<string, DifficultyLevel> = {
     level: "beginner",
     label: "Beginner",
     description: "Basic concepts and fundamental knowledge",
-    color: "text-green-400 border-green-400",
+    color: "text-[#22c55e] border-green-400",
     icon: Shield,
   },
   intermediate: {
     level: "intermediate",
     label: "Intermediate",
     description: "Practical application and common scenarios",
-    color: "text-blue-400 border-blue-400",
+    color: "text-primary border-blue-400",
     icon: Target,
   },
   advanced: {
@@ -193,13 +193,13 @@ export function AdaptiveDifficulty() {
   return (
     <Card className="glass border-white/10">
       <CardHeader>
-        <CardTitle className="flex items-center justify-between text-white">
+        <CardTitle className="flex items-center justify-between text-foreground">
           <div className="flex items-center gap-2">
             <Brain className="h-5 w-5 text-tanium-accent" />
             Adaptive Difficulty System
           </div>
           <div className="flex items-center gap-2">
-            <span className="text-sm text-gray-300">Auto-Adjust</span>
+            <span className="text-sm text-muted-foreground">Auto-Adjust</span>
             <Switch
               checked={settings.enabled}
               onCheckedChange={(enabled) => setSettings((prev) => ({ ...prev, enabled }))}
@@ -211,7 +211,7 @@ export function AdaptiveDifficulty() {
         {/* Current Status */}
         <div className="grid gap-4 md:grid-cols-2">
           <div className="space-y-3">
-            <h4 className="font-medium text-white">Current Difficulty Settings</h4>
+            <h4 className="font-medium text-foreground">Current Difficulty Settings</h4>
             {Object.entries(domainDifficulty).map(([domain, level]) => {
               const difficultyInfo = difficultyLevels[level];
               const Icon = difficultyInfo.icon;
@@ -223,7 +223,7 @@ export function AdaptiveDifficulty() {
                 >
                   <div className="flex items-center gap-3">
                     <Icon className="h-4 w-4 text-tanium-accent" />
-                    <span className="text-sm text-white">{domain}</span>
+                    <span className="text-sm text-foreground">{domain}</span>
                   </div>
                   <Badge variant="outline" className={difficultyInfo.color}>
                     {difficultyInfo.label}
@@ -234,10 +234,10 @@ export function AdaptiveDifficulty() {
           </div>
 
           <div className="space-y-3">
-            <h4 className="font-medium text-white">Adjustment Settings</h4>
+            <h4 className="font-medium text-foreground">Adjustment Settings</h4>
             <div className="glass space-y-4 rounded-lg border border-white/5 p-4">
               <div>
-                <label htmlFor="sensitivity-select" className="mb-2 block text-sm text-gray-300">
+                <label htmlFor="sensitivity-select" className="mb-2 block text-sm text-muted-foreground">
                   Sensitivity
                 </label>
                 <select
@@ -246,7 +246,7 @@ export function AdaptiveDifficulty() {
                   onChange={(e) =>
                     setSettings((prev) => ({ ...prev, sensitivity: e.target.value as any }))
                   }
-                  className="w-full rounded border border-gray-600 bg-gray-800 p-2 text-sm text-white"
+                  className="w-full rounded border border-gray-600 bg-card p-2 text-sm text-foreground"
                   aria-label="Select sensitivity level for adaptive difficulty adjustments"
                 >
                   <option value="conservative">Conservative</option>
@@ -255,13 +255,13 @@ export function AdaptiveDifficulty() {
                 </select>
               </div>
               <div>
-                <label className="mb-2 block text-sm text-gray-300">
+                <label className="mb-2 block text-sm text-muted-foreground">
                   Target Accuracy: {settings.targetAccuracy}%
                 </label>
                 <Progress value={settings.targetAccuracy} className="h-2" />
               </div>
               <div>
-                <label className="mb-2 block text-sm text-gray-300">
+                <label className="mb-2 block text-sm text-muted-foreground">
                   Min Accuracy: {settings.minAccuracy}%
                 </label>
                 <Progress value={settings.minAccuracy} className="h-2" />
@@ -274,7 +274,7 @@ export function AdaptiveDifficulty() {
         {settings.enabled && (
           <div className="space-y-4">
             <div className="flex items-center justify-between">
-              <h4 className="font-medium text-white">Recommended Adjustments</h4>
+              <h4 className="font-medium text-foreground">Recommended Adjustments</h4>
               {hasRecommendations && (
                 <Button
                   size="sm"
@@ -288,9 +288,9 @@ export function AdaptiveDifficulty() {
 
             {!hasRecommendations ? (
               <div className="py-8 text-center">
-                <Gauge className="mx-auto mb-4 h-12 w-12 text-green-400" />
-                <h3 className="mb-2 font-medium text-white">Difficulty Levels Optimal</h3>
-                <p className="text-gray-400">
+                <Gauge className="mx-auto mb-4 h-12 w-12 text-[#22c55e]" />
+                <h3 className="mb-2 font-medium text-foreground">Difficulty Levels Optimal</h3>
+                <p className="text-muted-foreground">
                   Current difficulty settings are well-suited to your performance across all
                   domains.
                 </p>
@@ -310,8 +310,8 @@ export function AdaptiveDifficulty() {
                     <div key={domain} className="glass rounded-lg border border-white/10 p-4">
                       <div className="mb-3 flex items-start justify-between">
                         <div>
-                          <h5 className="font-medium text-white">{domain}</h5>
-                          <p className="text-sm text-gray-400">{adjustment.reason}</p>
+                          <h5 className="font-medium text-foreground">{domain}</h5>
+                          <p className="text-sm text-muted-foreground">{adjustment.reason}</p>
                         </div>
                         <Button
                           size="sm"
@@ -336,7 +336,7 @@ export function AdaptiveDifficulty() {
                           {isIncrease ? (
                             <TrendingUp className="h-4 w-4 text-orange-400" />
                           ) : (
-                            <TrendingDown className="h-4 w-4 text-blue-400" />
+                            <TrendingDown className="h-4 w-4 text-primary" />
                           )}
                         </div>
 
@@ -356,11 +356,11 @@ export function AdaptiveDifficulty() {
 
         {/* Information Panel */}
         <div className="glass rounded-lg border border-white/10 p-4">
-          <h4 className="mb-3 flex items-center gap-2 font-medium text-white">
+          <h4 className="mb-3 flex items-center gap-2 font-medium text-foreground">
             <Settings className="h-4 w-4 text-tanium-accent" />
             How Adaptive Difficulty Works
           </h4>
-          <ul className="space-y-2 text-sm text-gray-400">
+          <ul className="space-y-2 text-sm text-muted-foreground">
             <li>
               • <strong>Performance Analysis:</strong> Monitors your accuracy and response patterns
             </li>

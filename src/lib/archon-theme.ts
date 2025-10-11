@@ -62,8 +62,8 @@ export const archonTheme = {
   // Glassmorphism Effects
   glassmorphism: {
     background: 'bg-gradient-to-br from-gray-900/90 via-black/95 to-gray-900/90 backdrop-blur-xl',
-    border: 'border border-cyan-500/20',
-    card: 'bg-black/60 backdrop-blur-xl border border-cyan-500/20'
+    border: 'border border-primary/20',
+    card: 'bg-black/60 backdrop-blur-xl border border-primary/20'
   },
 
   // Animation Configurations
@@ -100,8 +100,8 @@ export const archonTheme = {
 
   // Difficulty Level Colors
   difficulty: {
-    'Beginner': 'text-cyan-400',
-    'Intermediate': 'text-cyan-400', 
+    'Beginner': 'text-primary',
+    'Intermediate': 'text-primary', 
     'Advanced': 'text-pink-400',
     'Expert': 'text-red-400'
   },
@@ -109,20 +109,20 @@ export const archonTheme = {
   // Module Type Icons & Colors
   moduleTypes: {
     'theory': { 
-      color: 'text-cyan-400',
-      background: 'bg-cyan-500/20 border-cyan-500/30'
+      color: 'text-primary',
+      background: 'bg-primary/20 border-primary/30'
     },
     'practical': { 
-      color: 'text-cyan-400',
-      background: 'bg-cyan-500/20 border-cyan-500/30'
+      color: 'text-primary',
+      background: 'bg-primary/20 border-primary/30'
     },
     'assessment': { 
       color: 'text-pink-400',
       background: 'bg-pink-500/20 border-pink-500/30'
     },
     'lab': { 
-      color: 'text-cyan-400',
-      background: 'bg-cyan-500/20 border-cyan-500/30'
+      color: 'text-primary',
+      background: 'bg-primary/20 border-primary/30'
     }
   }
 };
@@ -141,7 +141,7 @@ export const getHoverGradient = (mouseX?: number, mouseY?: number) => {
 };
 
 export const getDifficultyColor = (difficulty: string) => 
-  archonTheme.difficulty[difficulty as keyof typeof archonTheme.difficulty] || 'text-cyan-400';
+  archonTheme.difficulty[difficulty as keyof typeof archonTheme.difficulty] || 'text-primary';
 
 export const getModuleTypeStyle = (type: string) => {
   const moduleType = archonTheme.moduleTypes[type as keyof typeof archonTheme.moduleTypes] || archonTheme.moduleTypes.theory;

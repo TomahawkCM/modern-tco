@@ -163,17 +163,17 @@ export default function ReviewPage() {
   return (
         <div className="mx-auto max-w-4xl space-y-8">
           <div className="text-center">
-            <h1 className="mb-4 text-4xl font-bold text-white">Review</h1>
-            <p className="mb-8 text-xl text-gray-200">
+            <h1 className="mb-4 text-4xl font-bold text-foreground">Review</h1>
+            <p className="mb-8 text-xl text-muted-foreground">
               Review your incorrect answers and learn from mistakes
             </p>
           </div>
 
           <Card className="glass border-white/10">
             <CardContent className="py-12 text-center">
-              <CheckCircle className="mx-auto mb-4 h-16 w-16 text-green-400" />
-              <h2 className="mb-2 text-2xl font-bold text-white">Great job!</h2>
-              <p className="mb-6 text-gray-300">
+              <CheckCircle className="mx-auto mb-4 h-16 w-16 text-[#22c55e]" />
+              <h2 className="mb-2 text-2xl font-bold text-foreground">Great job!</h2>
+              <p className="mb-6 text-muted-foreground">
                 You don&rsquo;t have any incorrect answers to review yet. Take some practice tests
                 to see questions here.
               </p>
@@ -188,7 +188,7 @@ export default function ReviewPage() {
                 <Button
                   variant="outline"
                   onClick={() => router.push("/mock")}
-                  className="border-white/20 text-white hover:bg-white/10"
+                  className="border-white/20 text-foreground hover:bg-white/10"
                 >
                   <BookOpen className="mr-2 h-4 w-4" />
                   Take Mock Exam
@@ -206,8 +206,8 @@ export default function ReviewPage() {
       <div className="mx-auto max-w-6xl space-y-6">
         {/* Header */}
         <div className="text-center">
-          <h1 className="mb-4 text-4xl font-bold text-white">Review Center</h1>
-          <p className="mb-6 text-xl text-gray-200">
+          <h1 className="mb-4 text-4xl font-bold text-foreground">Review Center</h1>
+          <p className="mb-6 text-xl text-muted-foreground">
             Learn from your mistakes and improve your performance
           </p>
         </div>
@@ -219,7 +219,7 @@ export default function ReviewPage() {
               onClick={() => setActiveTab("questions")}
               className={cn(
                 "flex items-center justify-center gap-2 rounded-md px-4 py-2 text-sm font-medium transition-all",
-                "text-white hover:bg-white/10",
+                "text-foreground hover:bg-white/10",
                 activeTab === "questions" ? "bg-tanium-accent" : "bg-transparent"
               )}
             >
@@ -230,7 +230,7 @@ export default function ReviewPage() {
               onClick={() => setActiveTab("analytics")}
               className={cn(
                 "flex items-center justify-center gap-2 rounded-md px-4 py-2 text-sm font-medium transition-all",
-                "text-white hover:bg-white/10",
+                "text-foreground hover:bg-white/10",
                 activeTab === "analytics" ? "bg-tanium-accent" : "bg-transparent"
               )}
             >
@@ -245,7 +245,7 @@ export default function ReviewPage() {
               {/* Filters */}
               <Card className="glass border-white/10">
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-2 text-white">
+                  <CardTitle className="flex items-center gap-2 text-foreground">
                     <Filter className="h-5 w-5" />
                     Filter Questions
                   </CardTitle>
@@ -253,13 +253,13 @@ export default function ReviewPage() {
                 <CardContent>
                   <div className="grid gap-4 md:grid-cols-3">
                     <div>
-                      <label className="mb-2 block text-sm text-gray-300">Domain</label>
+                      <label className="mb-2 block text-sm text-muted-foreground">Domain</label>
                       <select
                         value={selectedFilters.domain}
                         onChange={(e) =>
                           setSelectedFilters((prev) => ({ ...prev, domain: e.target.value }))
                         }
-                        className="h-10 w-full rounded-md border border-white/20 bg-black/40 px-3 py-2 text-sm text-white focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="h-10 w-full rounded-md border border-white/20 bg-black/40 px-3 py-2 text-sm text-foreground focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500"
                       >
                         <option value="all">All Domains</option>
                         <option value={TCODomain.ASKING_QUESTIONS}>Asking Questions</option>
@@ -275,13 +275,13 @@ export default function ReviewPage() {
                     </div>
 
                     <div>
-                      <label className="mb-2 block text-sm text-gray-300">Difficulty</label>
+                      <label className="mb-2 block text-sm text-muted-foreground">Difficulty</label>
                       <select
                         value={selectedFilters.difficulty}
                         onChange={(e) =>
                           setSelectedFilters((prev) => ({ ...prev, difficulty: e.target.value }))
                         }
-                        className="h-10 w-full rounded-md border border-white/20 bg-black/40 px-3 py-2 text-sm text-white focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="h-10 w-full rounded-md border border-white/20 bg-black/40 px-3 py-2 text-sm text-foreground focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500"
                       >
                         <option value="all">All Levels</option>
                         <option value={Difficulty.BEGINNER}>Beginner</option>
@@ -291,13 +291,13 @@ export default function ReviewPage() {
                     </div>
 
                     <div>
-                      <label className="mb-2 block text-sm text-gray-300">Time Period</label>
+                      <label className="mb-2 block text-sm text-muted-foreground">Time Period</label>
                       <select
                         value={selectedFilters.recent}
                         onChange={(e) =>
                           setSelectedFilters((prev) => ({ ...prev, recent: e.target.value }))
                         }
-                        className="h-10 w-full rounded-md border border-white/20 bg-black/40 px-3 py-2 text-sm text-white focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="h-10 w-full rounded-md border border-white/20 bg-black/40 px-3 py-2 text-sm text-foreground focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500"
                       >
                         <option value="all">All Time</option>
                         <option value="1">Last 24 hours</option>
@@ -308,7 +308,7 @@ export default function ReviewPage() {
                   </div>
 
                   <div className="mt-4 flex items-center justify-between">
-                    <div className="text-sm text-gray-300">
+                    <div className="text-sm text-muted-foreground">
                       Showing {filteredQuestionsComputed.length} of {incorrectAnswersRaw.length} incorrect
                       answers
                     </div>
@@ -318,7 +318,7 @@ export default function ReviewPage() {
                       onClick={() =>
                         setSelectedFilters({ domain: "all", difficulty: "all", recent: "all" })
                       }
-                      className="border-white/20 text-white hover:bg-white/10"
+                      className="border-white/20 text-foreground hover:bg-white/10"
                     >
                       <RotateCcw className="mr-2 h-4 w-4" />
                       Reset Filters
@@ -332,10 +332,10 @@ export default function ReviewPage() {
                   {/* Current question display */}
                   <div className="flex items-center justify-between">
                     <div>
-                      <h2 className="text-xl font-bold text-white">
+                      <h2 className="text-xl font-bold text-foreground">
                         Question {currentQuestionIndex + 1} of {filteredQuestionsComputed.length}
                       </h2>
-                      <p className="text-gray-300">Review and understand the correct answer</p>
+                      <p className="text-muted-foreground">Review and understand the correct answer</p>
                     </div>
                     <div className="flex items-center gap-2">
                       <Badge
@@ -345,7 +345,7 @@ export default function ReviewPage() {
                         <XCircle className="mr-1 h-3 w-3" />
                         Incorrect
                       </Badge>
-                      <Badge variant="outline" className="border-white/20 text-white">
+                      <Badge variant="outline" className="border-white/20 text-foreground">
                         {currentQuestion?.domain}
                       </Badge>
                     </div>
@@ -368,8 +368,8 @@ export default function ReviewPage() {
 
                       {/* Additional info */}
                       <Alert className="border-blue-200 bg-blue-50/10 dark:border-blue-800 dark:bg-blue-900/20">
-                        <AlertTriangle className="h-4 w-4 text-blue-400" />
-                        <AlertDescription className="text-blue-200">
+                        <AlertTriangle className="h-4 w-4 text-primary" />
+                        <AlertDescription className="text-muted-foreground">
                           <strong>Study Tip:</strong> Re-read the question carefully and note the
                           key concepts mentioned in the explanation above.
                         </AlertDescription>
@@ -383,7 +383,7 @@ export default function ReviewPage() {
                       variant="outline"
                       onClick={handlePrevious}
                       disabled={currentQuestionIndex === 0}
-                      className="border-white/20 text-white hover:bg-white/10 disabled:opacity-50"
+                      className="border-white/20 text-foreground hover:bg-white/10 disabled:opacity-50"
                     >
                       <ArrowLeft className="mr-2 h-4 w-4" />
                       Previous
@@ -401,7 +401,7 @@ export default function ReviewPage() {
                       variant="outline"
                       onClick={handleNext}
                       disabled={currentQuestionIndex === filteredQuestionsComputed.length - 1}
-                      className="border-white/20 text-white hover:bg-white/10 disabled:opacity-50"
+                      className="border-white/20 text-foreground hover:bg-white/10 disabled:opacity-50"
                     >
                       Next
                       <ArrowRight className="ml-2 h-4 w-4" />
@@ -411,11 +411,11 @@ export default function ReviewPage() {
               ) : (
                 <Card className="glass border-white/10">
                   <CardContent className="py-12 text-center">
-                    <Filter className="mx-auto mb-4 h-12 w-12 text-gray-400" />
-                    <h3 className="mb-2 text-xl font-bold text-white">
+                    <Filter className="mx-auto mb-4 h-12 w-12 text-muted-foreground" />
+                    <h3 className="mb-2 text-xl font-bold text-foreground">
                       No questions match your filters
                     </h3>
-                    <p className="mb-4 text-gray-300">
+                    <p className="mb-4 text-muted-foreground">
                       Try adjusting your filter criteria to see more questions.
                     </p>
                     <Button
@@ -423,7 +423,7 @@ export default function ReviewPage() {
                       onClick={() =>
                         setSelectedFilters({ domain: "all", difficulty: "all", recent: "all" })
                       }
-                      className="border-white/20 text-white hover:bg-white/10"
+                      className="border-white/20 text-foreground hover:bg-white/10"
                     >
                       Clear Filters
                     </Button>
@@ -457,14 +457,14 @@ export default function ReviewPage() {
                 {/* Domain breakdown */}
                 <Card className="glass border-white/10">
                   <CardHeader>
-                    <CardTitle className="text-white">Incorrect by Domain</CardTitle>
+                    <CardTitle className="text-foreground">Incorrect by Domain</CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-4">
                     {localDomainStats.map(({ domain, count, percentage }) => (
                       <div key={domain} className="space-y-2">
                         <div className="flex justify-between text-sm">
-                          <span className="text-gray-200">{domain}</span>
-                          <span className="text-white">
+                          <span className="text-muted-foreground">{domain}</span>
+                          <span className="text-foreground">
                             {count} ({percentage}%)
                           </span>
                         </div>
@@ -482,14 +482,14 @@ export default function ReviewPage() {
                 {/* Difficulty breakdown */}
                 <Card className="glass border-white/10">
                   <CardHeader>
-                    <CardTitle className="text-white">Incorrect by Difficulty</CardTitle>
+                    <CardTitle className="text-foreground">Incorrect by Difficulty</CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-4">
                     {difficultyStats.map(({ difficulty, count, percentage }) => (
                       <div key={difficulty} className="space-y-2">
                         <div className="flex justify-between text-sm">
-                          <span className="text-gray-200">{difficulty}</span>
-                          <span className="text-white">
+                          <span className="text-muted-foreground">{difficulty}</span>
+                          <span className="text-foreground">
                             {count} ({percentage}%)
                           </span>
                         </div>
@@ -508,7 +508,7 @@ export default function ReviewPage() {
               {/* Recommendations */}
               <Card className="glass border-white/10">
                 <CardHeader>
-                  <CardTitle className="text-white">Study Recommendations</CardTitle>
+                  <CardTitle className="text-foreground">Study Recommendations</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
@@ -520,8 +520,8 @@ export default function ReviewPage() {
                           key={domain}
                           className="border-yellow-200 bg-yellow-50/10 dark:bg-yellow-900/20"
                         >
-                          <BookOpen className="h-4 w-4 text-yellow-400" />
-                          <AlertDescription className="text-yellow-200">
+                          <BookOpen className="h-4 w-4 text-[#f97316]" />
+                          <AlertDescription className="text-[#f97316]">
                             <strong>Focus on {domain}</strong>
                             <br />
                             You missed {count} questions in this domain. Consider additional study.

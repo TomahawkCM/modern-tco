@@ -59,8 +59,8 @@ export function ConceptMasteryHeatmap({
           </CardTitle>
         </CardHeader>
         <CardContent className="text-center py-12">
-          <p className="text-gray-400">No concept data yet</p>
-          <p className="text-sm text-gray-500 mt-2">
+          <p className="text-muted-foreground">No concept data yet</p>
+          <p className="text-sm text-muted-foreground mt-2">
             Start reviewing to see your concept mastery
           </p>
         </CardContent>
@@ -85,15 +85,15 @@ export function ConceptMasteryHeatmap({
   const getMasteryColor = (level: string) => {
     switch (level) {
       case "mastered":
-        return "bg-green-500/20 border-green-500 text-green-400";
+        return "bg-[#22c55e]/20 border-green-500 text-[#22c55e]";
       case "advanced":
-        return "bg-blue-500/20 border-blue-500 text-blue-400";
+        return "bg-primary/20 border-blue-500 text-primary";
       case "intermediate":
-        return "bg-yellow-500/20 border-yellow-500 text-yellow-400";
+        return "bg-[#f97316]/20 border-yellow-500 text-[#f97316]";
       case "beginner":
         return "bg-orange-500/20 border-orange-500 text-orange-400";
       default:
-        return "bg-gray-500/20 border-gray-500 text-gray-400";
+        return "bg-gray-500/20 border-gray-500 text-muted-foreground";
     }
   };
 
@@ -115,11 +115,11 @@ export function ConceptMasteryHeatmap({
   const getTrendIcon = (trend: string) => {
     switch (trend) {
       case "improving":
-        return <TrendingUp className="h-3 w-3 text-green-400" />;
+        return <TrendingUp className="h-3 w-3 text-[#22c55e]" />;
       case "declining":
         return <TrendingDown className="h-3 w-3 text-orange-400" />;
       default:
-        return <Minus className="h-3 w-3 text-gray-400" />;
+        return <Minus className="h-3 w-3 text-muted-foreground" />;
     }
   };
 
@@ -139,7 +139,7 @@ export function ConceptMasteryHeatmap({
             <Flame className="h-5 w-5 text-orange-500" />
             Concept Mastery
           </CardTitle>
-          <Badge variant="outline" className="text-gray-400">
+          <Badge variant="outline" className="text-muted-foreground">
             {concepts.length} concepts
           </Badge>
         </div>
@@ -147,20 +147,20 @@ export function ConceptMasteryHeatmap({
       <CardContent className="space-y-6">
         {/* Summary Stats */}
         <div className="grid grid-cols-4 gap-3">
-          <div className="rounded border border-green-500/30 bg-green-500/10 p-3 text-center">
-            <div className="text-xs text-gray-400 mb-1">Mastered</div>
-            <div className="text-xl font-bold text-green-400">{stats.mastered}</div>
+          <div className="rounded border border-[#22c55e]/30 bg-[#22c55e]/10 p-3 text-center">
+            <div className="text-xs text-muted-foreground mb-1">Mastered</div>
+            <div className="text-xl font-bold text-[#22c55e]">{stats.mastered}</div>
           </div>
-          <div className="rounded border border-blue-500/30 bg-blue-500/10 p-3 text-center">
-            <div className="text-xs text-gray-400 mb-1">Advanced</div>
-            <div className="text-xl font-bold text-blue-400">{stats.advanced}</div>
+          <div className="rounded border border-primary/30 bg-primary/10 p-3 text-center">
+            <div className="text-xs text-muted-foreground mb-1">Advanced</div>
+            <div className="text-xl font-bold text-primary">{stats.advanced}</div>
           </div>
-          <div className="rounded border border-yellow-500/30 bg-yellow-500/10 p-3 text-center">
-            <div className="text-xs text-gray-400 mb-1">Learning</div>
-            <div className="text-xl font-bold text-yellow-400">{stats.intermediate}</div>
+          <div className="rounded border border-[#f97316]/30 bg-[#f97316]/10 p-3 text-center">
+            <div className="text-xs text-muted-foreground mb-1">Learning</div>
+            <div className="text-xl font-bold text-[#f97316]">{stats.intermediate}</div>
           </div>
           <div className="rounded border border-orange-500/30 bg-orange-500/10 p-3 text-center">
-            <div className="text-xs text-gray-400 mb-1">Beginner</div>
+            <div className="text-xs text-muted-foreground mb-1">Beginner</div>
             <div className="text-xl font-bold text-orange-400">{stats.beginner}</div>
           </div>
         </div>
@@ -171,8 +171,8 @@ export function ConceptMasteryHeatmap({
             onClick={() => setView("all")}
             className={`px-3 py-1 rounded text-sm transition-colors ${
               view === "all"
-                ? "bg-purple-600 text-white"
-                : "bg-gray-800 text-gray-400 hover:bg-gray-700"
+                ? "bg-accent text-foreground"
+                : "bg-card text-muted-foreground hover:bg-gray-700"
             }`}
           >
             All ({concepts.length})
@@ -181,8 +181,8 @@ export function ConceptMasteryHeatmap({
             onClick={() => setView("mastered")}
             className={`px-3 py-1 rounded text-sm transition-colors ${
               view === "mastered"
-                ? "bg-green-600 text-white"
-                : "bg-gray-800 text-gray-400 hover:bg-gray-700"
+                ? "bg-[#22c55e] text-foreground"
+                : "bg-card text-muted-foreground hover:bg-gray-700"
             }`}
           >
             Mastered ({stats.mastered})
@@ -191,8 +191,8 @@ export function ConceptMasteryHeatmap({
             onClick={() => setView("learning")}
             className={`px-3 py-1 rounded text-sm transition-colors ${
               view === "learning"
-                ? "bg-blue-600 text-white"
-                : "bg-gray-800 text-gray-400 hover:bg-gray-700"
+                ? "bg-blue-600 text-foreground"
+                : "bg-card text-muted-foreground hover:bg-gray-700"
             }`}
           >
             Learning ({stats.advanced + stats.intermediate})
@@ -201,8 +201,8 @@ export function ConceptMasteryHeatmap({
             onClick={() => setView("struggling")}
             className={`px-3 py-1 rounded text-sm transition-colors ${
               view === "struggling"
-                ? "bg-orange-600 text-white"
-                : "bg-gray-800 text-gray-400 hover:bg-gray-700"
+                ? "bg-orange-600 text-foreground"
+                : "bg-card text-muted-foreground hover:bg-gray-700"
             }`}
           >
             Focus ({stats.beginner})
@@ -212,7 +212,7 @@ export function ConceptMasteryHeatmap({
         {/* Heatmap Grid */}
         <div className="space-y-2">
           {filteredConcepts.length === 0 ? (
-            <div className="text-center py-8 text-gray-400">
+            <div className="text-center py-8 text-muted-foreground">
               No concepts in this category
             </div>
           ) : (
@@ -243,11 +243,11 @@ export function ConceptMasteryHeatmap({
                       variant="outline"
                       className={`text-xs ${
                         concept.masteryLevel === "mastered"
-                          ? "border-green-500 text-green-400"
+                          ? "border-green-500 text-[#22c55e]"
                           : concept.masteryLevel === "advanced"
-                          ? "border-blue-500 text-blue-400"
+                          ? "border-blue-500 text-primary"
                           : concept.masteryLevel === "intermediate"
-                          ? "border-yellow-500 text-yellow-400"
+                          ? "border-yellow-500 text-[#f97316]"
                           : "border-orange-500 text-orange-400"
                       }`}
                     >
@@ -261,9 +261,9 @@ export function ConceptMasteryHeatmap({
                   <div
                     className={`h-full transition-all ${
                       concept.masteryLevel === "mastered"
-                        ? "bg-green-500"
+                        ? "bg-[#22c55e]"
                         : concept.masteryLevel === "advanced"
-                        ? "bg-blue-500"
+                        ? "bg-primary"
                         : concept.masteryLevel === "intermediate"
                         ? "bg-yellow-500"
                         : "bg-orange-500"
@@ -277,24 +277,24 @@ export function ConceptMasteryHeatmap({
         </div>
 
         {/* Legend */}
-        <div className="rounded-lg border border-gray-700 bg-gray-800/30 p-3">
-          <div className="text-xs text-gray-400 mb-2">Mastery Levels:</div>
+        <div className="rounded-lg border border-gray-700 bg-card/30 p-3">
+          <div className="text-xs text-muted-foreground mb-2">Mastery Levels:</div>
           <div className="grid grid-cols-2 gap-2 text-xs">
             <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded bg-green-500" />
-              <span className="text-gray-400">Mastered (90%+)</span>
+              <div className="w-3 h-3 rounded bg-[#22c55e]" />
+              <span className="text-muted-foreground">Mastered (90%+)</span>
             </div>
             <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded bg-blue-500" />
-              <span className="text-gray-400">Advanced (70-89%)</span>
+              <div className="w-3 h-3 rounded bg-primary" />
+              <span className="text-muted-foreground">Advanced (70-89%)</span>
             </div>
             <div className="flex items-center gap-2">
               <div className="w-3 h-3 rounded bg-yellow-500" />
-              <span className="text-gray-400">Learning (50-69%)</span>
+              <span className="text-muted-foreground">Learning (50-69%)</span>
             </div>
             <div className="flex items-center gap-2">
               <div className="w-3 h-3 rounded bg-orange-500" />
-              <span className="text-gray-400">Beginner (&lt;50%)</span>
+              <span className="text-muted-foreground">Beginner (&lt;50%)</span>
             </div>
           </div>
         </div>

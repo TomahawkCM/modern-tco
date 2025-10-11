@@ -158,7 +158,7 @@ export default function ModuleProgressTracker({
   return (
     <div className="sticky top-24 space-y-4">
       {/* Progress Summary Card */}
-      <Card className="border-cyan-500/30 bg-gradient-to-r from-cyan-950/30 to-blue-950/20">
+      <Card className="border-primary/30 bg-gradient-to-r from-cyan-950/30 to-blue-950/20">
         <CardContent className="pt-4">
           <div className="space-y-3">
             <div className="flex justify-between items-center">
@@ -186,16 +186,16 @@ export default function ModuleProgressTracker({
       </Card>
 
       {/* Study Progress Card */}
-      <Card className="border-blue-500/30 bg-gradient-to-b from-gray-900/50 to-blue-900/30">
+      <Card className="border-primary/30 bg-gradient-to-b from-gray-900/50 to-blue-900/30">
         <CardHeader className="pb-3">
-          <CardTitle className="flex items-center gap-2 text-blue-200 text-base">
+          <CardTitle className="flex items-center gap-2 text-muted-foreground text-base">
             <Book className="h-4 w-4" /> Study Progress
           </CardTitle>
           {lastViewed && (
             <CardDescription>
               <Button
                 size="sm"
-                className="mt-2 bg-cyan-700 hover:bg-cyan-600"
+                className="mt-2 bg-cyan-700 hover:bg-primary"
                 onClick={() => scrollToSection(lastViewed)}
               >
                 Continue where you left off
@@ -207,7 +207,7 @@ export default function ModuleProgressTracker({
           <div className="space-y-2 mb-4">
             <Button
               size="sm"
-              className="w-full bg-green-700 hover:bg-green-600"
+              className="w-full bg-green-700 hover:bg-[#22c55e]"
               onClick={async () => {
                 for (const s of sections) {
                   if (!s.completed) await markSection(s.id, "completed");
@@ -219,7 +219,7 @@ export default function ModuleProgressTracker({
             <Button
               size="sm"
               variant="outline"
-              className="w-full border-gray-600 text-gray-200 hover:bg-gray-900/30"
+              className="w-full border-gray-600 text-muted-foreground hover:bg-gray-900/30"
               onClick={() => {
                 setSections((prev) => prev.map((s) => ({ ...s, completed: false, needsReview: false })));
               }}
@@ -241,20 +241,20 @@ export default function ModuleProgressTracker({
                 <button
                   className={cn(
                     "text-left text-sm hover:underline flex-1",
-                    activeId === s.id ? "text-cyan-300" : "text-blue-100"
+                    activeId === s.id ? "text-primary" : "text-blue-100"
                   )}
                   onClick={() => scrollToSection(s.id)}
                 >
                   {stripEtaSuffix(s.title)}
                 </button>
                 {typeof s.etaMin === "number" && s.etaMin > 0 && (
-                  <span className="ml-2 inline-flex items-center gap-1 text-[11px] text-gray-300">
+                  <span className="ml-2 inline-flex items-center gap-1 text-[11px] text-muted-foreground">
                     <Clock className="h-3 w-3" /> {s.etaMin}m
                   </span>
                 )}
                 {!s.completed && (
                   <button
-                    className="ml-auto text-[11px] text-yellow-300 hover:underline"
+                    className="ml-auto text-[11px] text-[#f97316] hover:underline"
                     onClick={() => markSection(s.id, "needs_review")}
                     aria-label={`Mark ${s.title} needs review`}
                   >

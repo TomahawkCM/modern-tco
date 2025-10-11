@@ -181,7 +181,7 @@ export function ModulesStaticTable({ rows }: { rows: ModuleListRow[] }) {
                 {hg.headers.map((header) => (
                   <th
                     key={header.id}
-                    className="px-3 py-2 text-left font-medium text-gray-200 select-none"
+                    className="px-3 py-2 text-left font-medium text-muted-foreground select-none"
                     onClick={header.column.getToggleSortingHandler()}
                   >
                     {flexRender(header.column.columnDef.header, header.getContext())}
@@ -195,7 +195,7 @@ export function ModulesStaticTable({ rows }: { rows: ModuleListRow[] }) {
             {filteredRows.map((row) => (
               <tr key={row.id} className="border-t border-white/5 hover:bg-white/[0.02]">
                 {row.getVisibleCells().map((cell) => (
-                  <td key={cell.id} className="px-3 py-2 text-gray-300">
+                  <td key={cell.id} className="px-3 py-2 text-muted-foreground">
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </td>
                 ))}

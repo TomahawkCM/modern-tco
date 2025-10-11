@@ -47,22 +47,22 @@ export default function StreakCalendar({
 
   // Get color for a day based on review count
   const getDayColor = (date: Date): string => {
-    if (date > today) return "bg-gray-800"; // Future dates
+    if (date > today) return "bg-card"; // Future dates
 
     const reviewData = getReviewData(date);
     if (!reviewData || reviewData.reviewCount === 0) {
-      return "bg-gray-800"; // No reviews
+      return "bg-card"; // No reviews
     }
 
     if (reviewData.goalMet) {
-      return "bg-green-500"; // Met daily goal
+      return "bg-[#22c55e]"; // Met daily goal
     }
 
     if (reviewData.reviewCount > 0) {
       return "bg-yellow-500/50"; // Some reviews but didn't meet goal
     }
 
-    return "bg-gray-800";
+    return "bg-card";
   };
 
   const weekdays = ["S", "M", "T", "W", "T", "F", "S"];
@@ -168,7 +168,7 @@ export default function StreakCalendar({
         <div className="flex items-center justify-between pt-4 border-t">
           <div className="flex items-center gap-4 text-xs">
             <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded bg-gray-800" />
+              <div className="w-3 h-3 rounded bg-card" />
               <span className="text-muted-foreground">No activity</span>
             </div>
             <div className="flex items-center gap-2">
@@ -176,7 +176,7 @@ export default function StreakCalendar({
               <span className="text-muted-foreground">Some reviews</span>
             </div>
             <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded bg-green-500" />
+              <div className="w-3 h-3 rounded bg-[#22c55e]" />
               <span className="text-muted-foreground">Goal met ({dailyGoal}+)</span>
             </div>
           </div>
@@ -208,8 +208,8 @@ export default function StreakCalendar({
         )}
 
         {currentStreak === longestStreak && currentStreak >= 7 && (
-          <div className="p-3 bg-green-500/10 border border-green-500/20 rounded-lg text-center">
-            <p className="text-sm font-medium text-green-500">
+          <div className="p-3 bg-[#22c55e]/10 border border-[#22c55e]/20 rounded-lg text-center">
+            <p className="text-sm font-medium text-[#22c55e]">
               🔥 Personal best! You're on fire!
             </p>
           </div>

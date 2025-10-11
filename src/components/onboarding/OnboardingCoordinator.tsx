@@ -86,12 +86,12 @@ export function OnboardingCoordinator({ onComplete }: OnboardingCoordinatorProps
   if (completedSteps === steps.length) {
     return (
       <div className="text-center space-y-6 p-8">
-        <div className="mx-auto w-16 h-16 bg-green-500 rounded-full flex items-center justify-center">
-          <Trophy className="h-8 w-8 text-white" />
+        <div className="mx-auto w-16 h-16 bg-[#22c55e] rounded-full flex items-center justify-center">
+          <Trophy className="h-8 w-8 text-foreground" />
         </div>
         <div>
-          <h2 className="text-2xl font-bold text-white mb-2">You're All Set!</h2>
-          <p className="text-gray-300 mb-6">
+          <h2 className="text-2xl font-bold text-foreground mb-2">You're All Set!</h2>
+          <p className="text-muted-foreground mb-6">
             Your beginner-friendly learning environment is ready. Let's start your Tanium journey!
           </p>
           <Button 
@@ -112,13 +112,13 @@ export function OnboardingCoordinator({ onComplete }: OnboardingCoordinatorProps
     <div className="max-w-2xl mx-auto space-y-8">
       {/* Progress Header */}
       <div className="text-center">
-        <h1 className="text-3xl font-bold text-white mb-4">Let's Get You Started</h1>
-        <p className="text-gray-300 mb-6">
+        <h1 className="text-3xl font-bold text-foreground mb-4">Let's Get You Started</h1>
+        <p className="text-muted-foreground mb-6">
           We'll set up your personalized learning experience in just a few steps
         </p>
         <div className="space-y-2">
           <Progress value={progress} className="h-2" />
-          <p className="text-sm text-gray-400">
+          <p className="text-sm text-muted-foreground">
             Step {currentStep + 1} of {steps.length}
           </p>
         </div>
@@ -127,28 +127,28 @@ export function OnboardingCoordinator({ onComplete }: OnboardingCoordinatorProps
       {/* Current Step */}
       <Card className="glass border-white/10">
         <CardHeader className="text-center">
-          <div className="mx-auto w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center mb-4">
-            <currentStepData.icon className="h-8 w-8 text-white" />
+          <div className="mx-auto w-16 h-16 bg-primary rounded-full flex items-center justify-center mb-4">
+            <currentStepData.icon className="h-8 w-8 text-foreground" />
           </div>
-          <CardTitle className="text-2xl text-white">{currentStepData.title}</CardTitle>
-          <p className="text-gray-300">{currentStepData.description}</p>
+          <CardTitle className="text-2xl text-foreground">{currentStepData.title}</CardTitle>
+          <p className="text-muted-foreground">{currentStepData.description}</p>
         </CardHeader>
         <CardContent className="text-center">
           {currentStep === 0 && (
             <div className="space-y-4">
-              <p className="text-gray-200">
+              <p className="text-muted-foreground">
                 Tanium helps IT teams see, control, and secure every endpoint instantly. 
                 Whether you're completely new to endpoint management or just new to Tanium, 
                 we'll guide you every step of the way.
               </p>
               <div className="grid grid-cols-2 gap-4 my-6">
                 <div className="bg-white/5 rounded-lg p-4">
-                  <Target className="h-6 w-6 text-blue-400 mx-auto mb-2" />
-                  <p className="text-sm text-gray-300">Beginner-Friendly</p>
+                  <Target className="h-6 w-6 text-primary mx-auto mb-2" />
+                  <p className="text-sm text-muted-foreground">Beginner-Friendly</p>
                 </div>
                 <div className="bg-white/5 rounded-lg p-4">
-                  <BookOpen className="h-6 w-6 text-green-400 mx-auto mb-2" />
-                  <p className="text-sm text-gray-300">Step-by-Step</p>
+                  <BookOpen className="h-6 w-6 text-[#22c55e] mx-auto mb-2" />
+                  <p className="text-sm text-muted-foreground">Step-by-Step</p>
                 </div>
               </div>
             </div>
@@ -156,24 +156,24 @@ export function OnboardingCoordinator({ onComplete }: OnboardingCoordinatorProps
           
           {currentStep === 1 && (
             <div className="space-y-4">
-              <p className="text-gray-200">
+              <p className="text-muted-foreground">
                 Beginner Mode adds helpful features like:
               </p>
               <ul className="text-left space-y-2 max-w-md mx-auto">
-                <li className="flex items-center text-gray-300">
-                  <CheckCircle className="h-4 w-4 text-green-400 mr-2" />
+                <li className="flex items-center text-muted-foreground">
+                  <CheckCircle className="h-4 w-4 text-[#22c55e] mr-2" />
                   Extra explanations and context
                 </li>
-                <li className="flex items-center text-gray-300">
-                  <CheckCircle className="h-4 w-4 text-green-400 mr-2" />
+                <li className="flex items-center text-muted-foreground">
+                  <CheckCircle className="h-4 w-4 text-[#22c55e] mr-2" />
                   Confidence-building encouragement
                 </li>
-                <li className="flex items-center text-gray-300">
-                  <CheckCircle className="h-4 w-4 text-green-400 mr-2" />
+                <li className="flex items-center text-muted-foreground">
+                  <CheckCircle className="h-4 w-4 text-[#22c55e] mr-2" />
                   Navigation assistance
                 </li>
-                <li className="flex items-center text-gray-300">
-                  <CheckCircle className="h-4 w-4 text-green-400 mr-2" />
+                <li className="flex items-center text-muted-foreground">
+                  <CheckCircle className="h-4 w-4 text-[#22c55e] mr-2" />
                   Progress celebration
                 </li>
               </ul>
@@ -182,11 +182,11 @@ export function OnboardingCoordinator({ onComplete }: OnboardingCoordinatorProps
           
           {currentStep === 2 && (
             <div className="space-y-4">
-              <p className="text-gray-200">
+              <p className="text-muted-foreground">
                 Your foundation learning covers everything you need to know about Tanium, 
                 starting from the very beginning. Perfect for complete beginners!
               </p>
-              <div className="bg-gradient-to-r from-blue-500/20 to-cyan-500/20 rounded-lg p-4 border border-blue-500/30">
+              <div className="bg-gradient-to-r from-blue-500/20 to-primary/20 rounded-lg p-4 border border-primary/30">
                 <p className="text-blue-100 text-sm">
                   <strong>5 modules • 85 minutes • No prerequisites</strong>
                 </p>
@@ -220,20 +220,20 @@ export function OnboardingCoordinator({ onComplete }: OnboardingCoordinatorProps
           <Card 
             key={step.id} 
             className={`glass border-white/10 ${
-              index === currentStep ? 'border-blue-500/50 bg-blue-500/10' : ''
-            } ${step.completed ? 'border-green-500/50 bg-green-500/5' : ''}`}
+              index === currentStep ? 'border-blue-500/50 bg-primary/10' : ''
+            } ${step.completed ? 'border-green-500/50 bg-[#22c55e]/5' : ''}`}
           >
             <CardContent className="p-4 text-center">
               <div className={`mx-auto w-8 h-8 rounded-full flex items-center justify-center mb-2 ${
-                step.completed ? 'bg-green-500' : index === currentStep ? 'bg-blue-500' : 'bg-gray-600'
+                step.completed ? 'bg-[#22c55e]' : index === currentStep ? 'bg-primary' : 'bg-muted'
               }`}>
                 {step.completed ? (
-                  <CheckCircle className="h-4 w-4 text-white" />
+                  <CheckCircle className="h-4 w-4 text-foreground" />
                 ) : (
-                  <step.icon className="h-4 w-4 text-white" />
+                  <step.icon className="h-4 w-4 text-foreground" />
                 )}
               </div>
-              <p className="text-xs text-gray-300 font-medium">{step.title}</p>
+              <p className="text-xs text-muted-foreground font-medium">{step.title}</p>
             </CardContent>
           </Card>
         ))}

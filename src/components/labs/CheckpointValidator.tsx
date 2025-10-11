@@ -448,14 +448,14 @@ export function CheckpointValidator({
   }, [isValidating]);
 
   const getScoreColor = (score: number) => {
-    if (score >= 90) return "text-green-400";
-    if (score >= 70) return "text-yellow-400";
+    if (score >= 90) return "text-[#22c55e]";
+    if (score >= 70) return "text-[#f97316]";
     return "text-red-400";
   };
 
   const getScoreBadgeColor = (score: number) => {
-    if (score >= 90) return "border-green-500 text-green-400";
-    if (score >= 70) return "border-yellow-500 text-yellow-400";
+    if (score >= 90) return "border-green-500 text-[#22c55e]";
+    if (score >= 70) return "border-yellow-500 text-[#f97316]";
     return "border-red-500 text-red-400";
   };
 
@@ -524,7 +524,7 @@ export function CheckpointValidator({
       <Card className="glass border-white/10">
         <CardHeader>
           <div className="flex items-center justify-between">
-            <CardTitle className="flex items-center text-white">
+            <CardTitle className="flex items-center text-foreground">
               <Target className="mr-2 h-5 w-5" />
               Step Validation
             </CardTitle>
@@ -551,10 +551,10 @@ export function CheckpointValidator({
         {validationResult && (
           <CardContent className="space-y-4">
             {/* Overall Result */}
-            <Alert className={validationResult.success ? "border-green-500/50 bg-green-500/10" : "border-red-500/50 bg-red-500/10"}>
+            <Alert className={validationResult.success ? "border-green-500/50 bg-[#22c55e]/10" : "border-red-500/50 bg-red-500/10"}>
               <div className="flex items-center space-x-3">
                 {validationResult.success ? (
-                  <CheckCircle className="h-5 w-5 text-green-400" />
+                  <CheckCircle className="h-5 w-5 text-[#22c55e]" />
                 ) : (
                   <XCircle className="h-5 w-5 text-red-400" />
                 )}
@@ -577,7 +577,7 @@ export function CheckpointValidator({
             {/* Progress Bar */}
             <div className="space-y-2">
               <div className="flex justify-between text-sm">
-                <span className="text-gray-400">Overall Progress</span>
+                <span className="text-muted-foreground">Overall Progress</span>
                 <span className={`font-medium ${getScoreColor(validationResult.score)}`}>
                   {validationResult.score}%
                 </span>
@@ -604,7 +604,7 @@ export function CheckpointValidator({
           <TabsContent value="criteria">
             <Card className="glass border-white/10">
               <CardHeader>
-                <CardTitle className="text-white">Validation Details</CardTitle>
+                <CardTitle className="text-foreground">Validation Details</CardTitle>
               </CardHeader>
               <CardContent className="space-y-3">
                 {(validationResult.criteria ?? []).map((criteria) => (
@@ -612,18 +612,18 @@ export function CheckpointValidator({
                     key={criteria.id}
                     className={`p-3 rounded border ${
                       criteria.passed 
-                        ? "border-green-500/50 bg-green-500/5" 
+                        ? "border-green-500/50 bg-[#22c55e]/5" 
                         : "border-red-500/50 bg-red-500/5"
                     }`}
                   >
                     <div className="flex items-center justify-between">
                       <div className="flex items-center space-x-2">
                         {criteria.passed ? (
-                          <CheckCircle className="h-4 w-4 text-green-400" />
+                          <CheckCircle className="h-4 w-4 text-[#22c55e]" />
                         ) : (
                           <XCircle className="h-4 w-4 text-red-400" />
                         )}
-                        <span className="font-medium text-white">
+                        <span className="font-medium text-foreground">
                           Criteria {criteria.id}
                         </span>
                       </div>
@@ -631,7 +631,7 @@ export function CheckpointValidator({
                         {criteria.score}%
                       </Badge>
                     </div>
-                    <p className="mt-1 text-sm text-gray-300">
+                    <p className="mt-1 text-sm text-muted-foreground">
                       {feedbackToNode(criteria.feedback)}
                     </p>
                   </div>
@@ -644,7 +644,7 @@ export function CheckpointValidator({
           <TabsContent value="suggestions">
             <Card className="glass border-white/10">
               <CardHeader>
-                <CardTitle className="flex items-center text-white">
+                <CardTitle className="flex items-center text-foreground">
                   <TrendingUp className="mr-2 h-5 w-5" />
                   Next Steps & Suggestions
                 </CardTitle>
@@ -655,14 +655,14 @@ export function CheckpointValidator({
                     {validationResult.suggestions.map((suggestion, index) => (
                       <Alert key={index}>
                         <Zap className="h-4 w-4" />
-                        <AlertDescription className="text-gray-300">
+                        <AlertDescription className="text-muted-foreground">
                           {suggestion}
                         </AlertDescription>
                       </Alert>
                     ))}
                   </div>
                 ) : (
-                  <div className="text-gray-400 italic">No suggestions available</div>
+                  <div className="text-muted-foreground italic">No suggestions available</div>
                 )}
               </CardContent>
             </Card>
@@ -672,7 +672,7 @@ export function CheckpointValidator({
           <TabsContent value="actions">
             <Card className="glass border-white/10">
               <CardHeader>
-                <CardTitle className="flex items-center text-white">
+                <CardTitle className="flex items-center text-foreground">
                   <Eye className="mr-2 h-5 w-5" />
                   Recorded Actions ({userActions.length})
                 </CardTitle>
@@ -683,20 +683,20 @@ export function CheckpointValidator({
                     {userActions.map((action, index) => (
                       <div
                         key={index}
-                        className="flex items-center justify-between p-2 rounded bg-gray-800/50 border border-gray-600"
+                        className="flex items-center justify-between p-2 rounded bg-card/50 border border-gray-600"
                       >
                         <div>
-                          <span className="font-medium text-white">{action.type}</span>
-                          <span className="ml-2 text-gray-400">→ {action.target}</span>
+                          <span className="font-medium text-foreground">{action.type}</span>
+                          <span className="ml-2 text-muted-foreground">→ {action.target}</span>
                         </div>
-                        <div className="text-sm text-gray-400">
+                        <div className="text-sm text-muted-foreground">
                           {action.value && `"${action.value}"`}
                         </div>
                       </div>
                     ))}
                   </div>
                 ) : (
-                  <div className="text-gray-400 italic">No actions recorded yet</div>
+                  <div className="text-muted-foreground italic">No actions recorded yet</div>
                 )}
               </CardContent>
             </Card>
@@ -708,7 +708,7 @@ export function CheckpointValidator({
       {step.hints && step.hints.length > 0 && (
         <Card className="glass border-white/10">
           <CardHeader>
-            <CardTitle className="flex items-center text-white">
+            <CardTitle className="flex items-center text-foreground">
               <Award className="mr-2 h-5 w-5" />
               Available Hints
             </CardTitle>
@@ -726,7 +726,7 @@ export function CheckpointValidator({
                   <AlertTriangle className="mr-2 h-4 w-4" />
                   {hint.level.charAt(0).toUpperCase() + hint.level.slice(1)} Hint
                   {hint.penaltyPoints > 0 && (
-                    <Badge variant="outline" className="ml-2 border-yellow-500 text-yellow-400">
+                    <Badge variant="outline" className="ml-2 border-yellow-500 text-[#f97316]">
                       -{hint.penaltyPoints} pts
                     </Badge>
                   )}

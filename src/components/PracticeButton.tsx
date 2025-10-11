@@ -46,7 +46,7 @@ export default function PracticeButton({
     <Button
       onClick={handleStartPractice}
       disabled={authLoading || !!practiceLoading}
-      className={`w-full transform rounded-lg bg-gradient-to-r from-blue-600 to-cyan-600 px-6 py-3 font-semibold text-white transition-all duration-200 hover:scale-105 hover:from-blue-700 hover:to-cyan-700 ${className}`}
+      className={`w-full transform rounded-lg bg-gradient-to-r from-blue-600 to-cyan-600 px-6 py-3 font-semibold text-foreground transition-all duration-200 hover:scale-105 hover:from-blue-700 hover:to-cyan-700 ${className}`}
       size="lg"
     >
       <div className="flex items-center gap-2">

@@ -28,9 +28,9 @@ export default function ProgressPage() {
         </CardHeader>
         <CardContent>
           {attempts === null ? (
-            <div className="text-sm text-slate-600 dark:text-slate-400">Loading…</div>
+            <div className="text-sm text-slate-600 dark:text-muted-foreground">Loading…</div>
           ) : attempts.length === 0 ? (
-            <div className="text-sm text-slate-600 dark:text-slate-400">No attempts recorded.</div>
+            <div className="text-sm text-slate-600 dark:text-muted-foreground">No attempts recorded.</div>
           ) : (
             <ul className="divide-y divide-slate-200 dark:divide-slate-800">
               {attempts.map((a) => (
@@ -38,11 +38,11 @@ export default function ProgressPage() {
                   <div className="flex items-center justify-between">
                     <div>
                       <div className="font-medium">{a.type}</div>
-                      <div className="text-slate-500 dark:text-slate-400">{new Date(a.date).toLocaleString()}</div>
+                      <div className="text-muted-foreground dark:text-muted-foreground">{new Date(a.date).toLocaleString()}</div>
                     </div>
                     <div className="text-right">
                       {typeof a.score === "number" && <div className="font-medium">{Math.round(a.score * 100)}%</div>}
-                      {typeof a.questions === "number" && <div className="text-slate-500 dark:text-slate-400">{a.questions} questions</div>}
+                      {typeof a.questions === "number" && <div className="text-muted-foreground dark:text-muted-foreground">{a.questions} questions</div>}
                     </div>
                   </div>
                 </li>

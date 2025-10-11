@@ -57,13 +57,13 @@ export function LearningNavigation() {
   const progress = getProgress();
 
   return (
-    <div className="bg-black/40 backdrop-blur-sm border-b border-cyan-500/30 sticky top-0 z-40">
+    <div className="bg-black/40 backdrop-blur-sm border-b border-primary/30 sticky top-0 z-40">
       <div className="px-6 py-4">
         {/* Back Navigation */}
         <div className="flex items-center gap-4 mb-4">
           <Link
             href="/study"
-            className="inline-flex items-center gap-2 text-cyan-400 hover:text-cyan-300 transition-colors"
+            className="inline-flex items-center gap-2 text-primary hover:text-primary transition-colors"
           >
             <ArrowLeft className="h-4 w-4" />
             <span>Back to Study Dashboard</span>
@@ -75,18 +75,18 @@ export function LearningNavigation() {
           {breadcrumbs.map((item, index) => (
             <React.Fragment key={index}>
               {index > 0 && (
-                <ChevronRight className="h-4 w-4 text-gray-400" />
+                <ChevronRight className="h-4 w-4 text-muted-foreground" />
               )}
               {item.href && !item.current ? (
                 <Link
                   href={item.href}
-                  className="text-cyan-400 hover:text-cyan-300 transition-colors"
+                  className="text-primary hover:text-primary transition-colors"
                 >
                   {item.label}
                 </Link>
               ) : (
                 <span className={cn(
-                  item.current ? 'text-white font-medium' : 'text-gray-300'
+                  item.current ? 'text-foreground font-medium' : 'text-muted-foreground'
                 )}>
                   {item.label}
                 </span>
@@ -101,14 +101,14 @@ export function LearningNavigation() {
             <div className="flex items-center gap-6">
               {/* Domain Progress */}
               <div className="flex items-center gap-3">
-                <div className="p-2 bg-cyan-500/20 rounded-lg">
-                  <BookOpen className="h-5 w-5 text-cyan-400" />
+                <div className="p-2 bg-primary/20 rounded-lg">
+                  <BookOpen className="h-5 w-5 text-primary" />
                 </div>
                 <div>
-                  <div className="text-white font-medium">
+                  <div className="text-foreground font-medium">
                     {domains.find(d => d.id === currentDomain)?.title}
                   </div>
-                  <div className="text-sm text-gray-400">
+                  <div className="text-sm text-muted-foreground">
                     {progress.completedModules} of {progress.totalModules} modules completed
                   </div>
                 </div>
@@ -118,11 +118,11 @@ export function LearningNavigation() {
               <div className="flex items-center gap-3">
                 <div className="w-32 bg-gray-700 rounded-full h-2">
                   <div
-                    className="bg-gradient-to-r from-cyan-500 to-blue-500 h-2 rounded-full transition-all duration-300"
+                    className="bg-gradient-to-r from-primary to-blue-500 h-2 rounded-full transition-all duration-300"
                     style={{ width: `${progress.percentage}%` }}
                   />
                 </div>
-                <span className="text-sm text-gray-400">
+                <span className="text-sm text-muted-foreground">
                   {Math.round(progress.percentage)}%
                 </span>
               </div>
@@ -130,11 +130,11 @@ export function LearningNavigation() {
 
             {/* Quick Stats */}
             <div className="flex items-center gap-6 text-sm">
-              <div className="flex items-center gap-2 text-green-400">
+              <div className="flex items-center gap-2 text-[#22c55e]">
                 <CheckCircle className="h-4 w-4" />
                 <span>{progress.completedModules} Complete</span>
               </div>
-              <div className="flex items-center gap-2 text-blue-400">
+              <div className="flex items-center gap-2 text-primary">
                 <Target className="h-4 w-4" />
                 <span>{progress.totalModules - progress.completedModules} Remaining</span>
               </div>
@@ -175,11 +175,11 @@ function ModuleNavigation() {
         {previousModule && (
           <button
             onClick={() => navigateToPreviousModule()}
-            className="inline-flex items-center gap-2 text-sm text-gray-400 hover:text-cyan-400 transition-colors"
+            className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
           >
             <ArrowLeft className="h-4 w-4" />
             <div className="text-left">
-              <div className="text-xs text-gray-500">Previous</div>
+              <div className="text-xs text-muted-foreground">Previous</div>
               <div>{previousModule.title}</div>
             </div>
           </button>
@@ -187,8 +187,8 @@ function ModuleNavigation() {
       </div>
 
       <div className="flex-1 text-center">
-        <div className="text-xs text-gray-500">Module {currentModuleIndex + 1} of {domain.modules.length}</div>
-        <div className="text-sm font-medium text-white">
+        <div className="text-xs text-muted-foreground">Module {currentModuleIndex + 1} of {domain.modules.length}</div>
+        <div className="text-sm font-medium text-foreground">
           {domain.modules[currentModuleIndex]?.title}
         </div>
       </div>
@@ -197,10 +197,10 @@ function ModuleNavigation() {
         {nextModule && (
           <button
             onClick={() => navigateToNextModule()}
-            className="inline-flex items-center gap-2 text-sm text-gray-400 hover:text-cyan-400 transition-colors"
+            className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
           >
             <div className="text-right">
-              <div className="text-xs text-gray-500">Next</div>
+              <div className="text-xs text-muted-foreground">Next</div>
               <div>{nextModule.title}</div>
             </div>
             <ChevronRight className="h-4 w-4" />

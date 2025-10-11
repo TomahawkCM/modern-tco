@@ -41,7 +41,7 @@ const ClientMDXContent = dynamic(
     loading: () => (
       <div className="flex items-center justify-center p-8">
         <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-cyan-500"></div>
-        <span className="ml-3 text-cyan-400">Loading content...</span>
+        <span className="ml-3 text-primary">Loading content...</span>
       </div>
     )
   }
@@ -68,7 +68,7 @@ const mdxComponents = {
   h2: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
     <h2
       className={cn(
-        "mb-4 flex scroll-m-20 items-center gap-2 text-3xl font-semibold tracking-tight text-white",
+        "mb-4 flex scroll-m-20 items-center gap-2 text-3xl font-semibold tracking-tight text-foreground",
         className
       )}
       {...props}
@@ -77,7 +77,7 @@ const mdxComponents = {
   h3: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
     <h3
       className={cn(
-        "mb-3 flex scroll-m-20 items-center gap-2 text-2xl font-semibold tracking-tight text-blue-200",
+        "mb-3 flex scroll-m-20 items-center gap-2 text-2xl font-semibold tracking-tight text-muted-foreground",
         className
       )}
       {...props}
@@ -87,7 +87,7 @@ const mdxComponents = {
   // Enhanced paragraph
   p: ({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) => (
     <p
-      className={cn("mb-4 leading-7 text-gray-200 [&:not(:first-child)]:mt-4", className)}
+      className={cn("mb-4 leading-7 text-muted-foreground [&:not(:first-child)]:mt-4", className)}
       {...props}
     />
   ),
@@ -95,13 +95,13 @@ const mdxComponents = {
   // Enhanced lists
   ul: ({ className, ...props }: React.HTMLAttributes<HTMLUListElement>) => (
     <ul
-      className={cn("my-4 ml-6 list-disc space-y-2 text-gray-200 [&>li]:mt-2", className)}
+      className={cn("my-4 ml-6 list-disc space-y-2 text-muted-foreground [&>li]:mt-2", className)}
       {...props}
     />
   ),
   ol: ({ className, ...props }: React.HTMLAttributes<HTMLOListElement>) => (
     <ol
-      className={cn("my-4 ml-6 list-decimal space-y-2 text-gray-200 [&>li]:mt-2", className)}
+      className={cn("my-4 ml-6 list-decimal space-y-2 text-muted-foreground [&>li]:mt-2", className)}
       {...props}
     />
   ),
@@ -110,7 +110,7 @@ const mdxComponents = {
   code: ({ className, ...props }: React.HTMLAttributes<HTMLElement>) => (
     <code
       className={cn(
-        "relative rounded border border-gray-700 bg-gray-800 px-2 py-1 font-mono text-sm text-blue-200",
+        "relative rounded border border-gray-700 bg-card px-2 py-1 font-mono text-sm text-muted-foreground",
         className
       )}
       {...props}
@@ -119,7 +119,7 @@ const mdxComponents = {
   pre: ({ className, ...props }: React.HTMLAttributes<HTMLPreElement>) => (
     <pre
       className={cn(
-        "mb-4 mt-6 overflow-x-auto rounded-lg border border-gray-700 bg-gray-900 p-4 text-gray-200",
+        "mb-4 mt-6 overflow-x-auto rounded-lg border border-gray-700 bg-gray-900 p-4 text-muted-foreground",
         className
       )}
       {...props}
@@ -171,22 +171,22 @@ const mdxComponents = {
 
   // Learning objective component
   LearningObjective: ({ children }: { children: React.ReactNode }) => (
-    <Card className="my-6 border-blue-500/30 bg-gradient-to-r from-blue-950/50 to-cyan-950/50">
+    <Card className="my-6 border-primary/30 bg-gradient-to-r from-blue-950/50 to-cyan-950/50">
       <CardHeader className="pb-3">
-        <CardTitle className="flex items-center gap-2 text-blue-200">
+        <CardTitle className="flex items-center gap-2 text-muted-foreground">
           <Target className="h-5 w-5" />
           Learning Objective
         </CardTitle>
       </CardHeader>
       <CardContent className="pt-0">
-        <div className="text-gray-200">{children}</div>
+        <div className="text-muted-foreground">{children}</div>
       </CardContent>
     </Card>
   ),
 
   // Key concept component
   KeyConcept: ({ title, children }: { title: string; children: React.ReactNode }) => (
-    <Card className="my-6 border-cyan-500/30 bg-gradient-to-r from-cyan-950/50 to-sky-950/50">
+    <Card className="my-6 border-primary/30 bg-gradient-to-r from-cyan-950/50 to-sky-950/50">
       <CardHeader className="pb-3">
         <CardTitle className="flex items-center gap-2 text-cyan-200">
           <Brain className="h-5 w-5" />
@@ -194,7 +194,7 @@ const mdxComponents = {
         </CardTitle>
       </CardHeader>
       <CardContent className="pt-0">
-        <div className="text-gray-200">{children}</div>
+        <div className="text-muted-foreground">{children}</div>
       </CardContent>
     </Card>
   ),
@@ -211,7 +211,7 @@ const mdxComponents = {
     duration: string;
     children: React.ReactNode;
   }) => (
-    <Card className="my-6 border-green-500/30 bg-gradient-to-r from-green-950/50 to-emerald-950/50">
+    <Card className="my-6 border-[#22c55e]/30 bg-gradient-to-r from-green-950/50 to-emerald-950/50">
       <CardHeader>
         <div className="flex items-center justify-between">
           <CardTitle className="flex items-center gap-2 text-green-200">
@@ -222,7 +222,7 @@ const mdxComponents = {
             <Badge variant="outline" className="border-green-500/50 bg-green-900/50 text-green-200">
               {id}
             </Badge>
-            <div className="flex items-center gap-1 text-green-300">
+            <div className="flex items-center gap-1 text-[#22c55e]">
               <Clock className="h-4 w-4" />
               <span className="text-sm">{duration}</span>
             </div>
@@ -230,7 +230,7 @@ const mdxComponents = {
         </div>
       </CardHeader>
       <CardContent>
-        <div className="text-gray-200">{children}</div>
+        <div className="text-muted-foreground">{children}</div>
       </CardContent>
     </Card>
   ),
@@ -241,11 +241,11 @@ const getDifficultyColor = (difficulty: string) => {
     case "Beginner":
       return "bg-green-900/50 text-green-200 border-green-500/50";
     case "Intermediate":
-      return "bg-yellow-900/50 text-yellow-200 border-yellow-500/50";
+      return "bg-yellow-900/50 text-[#f97316] border-yellow-500/50";
     case "Advanced":
       return "bg-red-900/50 text-red-200 border-red-500/50";
     default:
-      return "bg-gray-900/50 text-gray-200 border-gray-500/50";
+      return "bg-gray-900/50 text-muted-foreground border-gray-500/50";
   }
 };
 
@@ -547,13 +547,13 @@ export default function ModuleRenderer({ moduleData }: ModuleRendererProps) {
       {/* Module Header */}
       <div className="mb-8">
         <div className="mb-4 flex flex-wrap items-center gap-3">
-          <Badge variant="outline" className="border-blue-500/50 bg-blue-900/50 text-blue-200">
+          <Badge variant="outline" className="border-blue-500/50 bg-blue-900/50 text-muted-foreground">
             {frontmatter.domainEnum.replace(/_/g, " ")}
           </Badge>
           <Badge variant="outline" className={getDifficultyColor(frontmatter.difficulty)}>
             {frontmatter.difficulty}
           </Badge>
-          <div className="flex items-center gap-1 text-gray-400">
+          <div className="flex items-center gap-1 text-muted-foreground">
             <Clock className="h-4 w-4" />
             <span className="text-sm">{frontmatter.estimatedTime}</span>
           </div>
@@ -564,14 +564,14 @@ export default function ModuleRenderer({ moduleData }: ModuleRendererProps) {
         </h1>
 
         {frontmatter.description && (
-          <p className="mb-6 text-xl leading-relaxed text-gray-300">{frontmatter.description}</p>
+          <p className="mb-6 text-xl leading-relaxed text-muted-foreground">{frontmatter.description}</p>
         )}
 
         {/* Learning Objectives */}
         {frontmatter.learningObjectives && frontmatter.learningObjectives.length > 0 && (
-          <Card className="mb-6 border-blue-500/30 bg-gradient-to-r from-blue-950/30 to-cyan-950/30">
+          <Card className="mb-6 border-primary/30 bg-gradient-to-r from-blue-950/30 to-cyan-950/30">
             <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-blue-200">
+              <CardTitle className="flex items-center gap-2 text-muted-foreground">
                 <Target className="h-5 w-5" />
                 Learning Objectives
               </CardTitle>
@@ -579,8 +579,8 @@ export default function ModuleRenderer({ moduleData }: ModuleRendererProps) {
             <CardContent>
               <ul className="space-y-2">
                 {frontmatter.learningObjectives.map((objective, index) => (
-                  <li key={index} className="flex items-start gap-2 text-gray-200">
-                    <CheckCircle className="mt-0.5 h-5 w-5 flex-shrink-0 text-green-400" />
+                  <li key={index} className="flex items-start gap-2 text-muted-foreground">
+                    <CheckCircle className="mt-0.5 h-5 w-5 flex-shrink-0 text-[#22c55e]" />
                     <span>{objective}</span>
                   </li>
                 ))}
@@ -591,7 +591,7 @@ export default function ModuleRenderer({ moduleData }: ModuleRendererProps) {
       </div>
 
       {/* Mini Progress HUD */}
-      <Card className="mb-6 border-cyan-500/30 bg-gradient-to-r from-cyan-950/30 to-blue-950/20">
+      <Card className="mb-6 border-primary/30 bg-gradient-to-r from-cyan-950/30 to-blue-950/20">
         <CardContent className="flex flex-wrap items-center justify-between gap-4 pt-4">
           <div className="text-cyan-100">
             <span className="text-sm">Sections</span>
@@ -636,14 +636,14 @@ export default function ModuleRenderer({ moduleData }: ModuleRendererProps) {
       <div className="mb-4 flex gap-2">
         <Button
           variant={activeTab === 'content' ? 'default' : 'outline'}
-          className={activeTab === 'content' ? 'bg-cyan-700 hover:bg-cyan-600' : 'border-cyan-700 text-cyan-200 hover:bg-cyan-900/30'}
+          className={activeTab === 'content' ? 'bg-cyan-700 hover:bg-primary' : 'border-cyan-700 text-cyan-200 hover:bg-cyan-900/30'}
           onClick={() => setActiveTab('content')}
         >
           Content
         </Button>
         <Button
           variant={activeTab === 'review' ? 'default' : 'outline'}
-          className={activeTab === 'review' ? 'bg-cyan-700 hover:bg-cyan-600' : 'border-cyan-700 text-cyan-200 hover:bg-cyan-900/30'}
+          className={activeTab === 'review' ? 'bg-cyan-700 hover:bg-primary' : 'border-cyan-700 text-cyan-200 hover:bg-cyan-900/30'}
           onClick={() => setActiveTab('review')}
         >
           Review ({sections.filter(s => s.needsReview && !s.completed).length})
@@ -662,13 +662,13 @@ export default function ModuleRenderer({ moduleData }: ModuleRendererProps) {
           {showToc ? 'Hide' : 'Show'} Section List
         </Button>
         {showToc && (
-          <Card className="mt-3 border-cyan-500/30 bg-gradient-to-b from-gray-900/50 to-cyan-900/20" id="module-toc">
+          <Card className="mt-3 border-primary/30 bg-gradient-to-b from-gray-900/50 to-cyan-900/20" id="module-toc">
             <CardContent className="pt-4">
               <ul className="space-y-2">
                 {sections.map((s) => (
                   <li key={s.id}>
                     <button
-                      className={cn('text-left text-sm hover:underline', activeId === s.id ? 'text-cyan-300' : 'text-blue-100')}
+                      className={cn('text-left text-sm hover:underline', activeId === s.id ? 'text-primary' : 'text-blue-100')}
                       onClick={() => {
                         const el = document.getElementById(s.id);
                         if (el) {
@@ -697,29 +697,29 @@ export default function ModuleRenderer({ moduleData }: ModuleRendererProps) {
               <div className="truncate text-sm text-cyan-200">
                 {stripEtaSuffix((sections.find((s) => s.id === activeId)?.title ?? sections[0]?.title ?? frontmatter.title))}
               </div>
-              <div className="text-xs text-cyan-300">
+              <div className="text-xs text-primary">
                 {formatMinutes(sections.find((s) => s.id === activeId)?.etaMin)}
               </div>
             </div>
           </div>
           {/* Review panel */}
           {activeTab === 'review' && (
-            <Card className="mb-4 border-yellow-500/40 bg-yellow-900/20">
+            <Card className="mb-4 border-[#f97316]/40 bg-yellow-900/20">
               <CardHeader className="pb-3">
-                <CardTitle className="flex items-center gap-2 text-yellow-200">
+                <CardTitle className="flex items-center gap-2 text-[#f97316]">
                   <AlertCircle className="h-5 w-5" />
                   Needs Review
                 </CardTitle>
               </CardHeader>
               <CardContent>
                 {sections.filter(s => s.needsReview && !s.completed).length === 0 ? (
-                  <div className="text-gray-200">No sections flagged for review.</div>
+                  <div className="text-muted-foreground">No sections flagged for review.</div>
                 ) : (
                   <ul className="space-y-2">
                     {sections.filter(s => s.needsReview && !s.completed).map((s) => (
                       <li key={s.id} className="flex items-center gap-3">
                         <button
-                          className="text-left text-sm text-yellow-200 hover:underline"
+                          className="text-left text-sm text-[#f97316] hover:underline"
                           onClick={() => {
                             const el = document.getElementById(s.id);
                             if (el) {
@@ -732,10 +732,10 @@ export default function ModuleRenderer({ moduleData }: ModuleRendererProps) {
                         >
                           {s.title}
                         </button>
-                        <Button size="sm" className="ml-auto bg-green-700 hover:bg-green-600" onClick={() => markSection(s.id, 'completed')}>
+                        <Button size="sm" className="ml-auto bg-green-700 hover:bg-[#22c55e]" onClick={() => markSection(s.id, 'completed')}>
                           Mark complete
                         </Button>
-                        <Button size="sm" variant="outline" className="border-yellow-600 text-yellow-200 hover:bg-yellow-900/30" onClick={() => markSection(s.id, 'in_progress')}>
+                        <Button size="sm" variant="outline" className="border-yellow-600 text-[#f97316] hover:bg-[#f97316]/10" onClick={() => markSection(s.id, 'in_progress')}>
                           Clear flag
                         </Button>
                       </li>
@@ -753,13 +753,13 @@ export default function ModuleRenderer({ moduleData }: ModuleRendererProps) {
       {/* Module Footer - Practice Button */}
       {frontmatter.practiceConfig && (
         <div className="mt-12 border-t border-gray-700 pt-8">
-          <Card className="border-blue-500/30 bg-gradient-to-r from-gray-900/50 to-blue-900/50">
+          <Card className="border-primary/30 bg-gradient-to-r from-gray-900/50 to-blue-900/50">
             <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-blue-200">
+              <CardTitle className="flex items-center gap-2 text-muted-foreground">
                 <BookOpen className="h-5 w-5" />
                 Ready to Practice?
               </CardTitle>
-              <CardDescription className="text-gray-300">
+              <CardDescription className="text-muted-foreground">
                 Test your knowledge with practice questions based on this module's content.
               </CardDescription>
             </CardHeader>

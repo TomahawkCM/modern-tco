@@ -73,23 +73,23 @@ export function HomePage() {
         <div className="text-center mb-12">
           <div className="flex items-center justify-center space-x-3 mb-4">
             <Heart className="h-8 w-8 text-pink-400" />
-            <h1 className="text-4xl font-bold text-white">Welcome to TCO Preparation</h1>
-            <Sparkles className="h-8 w-8 text-yellow-400" />
+            <h1 className="text-4xl font-bold text-foreground">Welcome to TCO Preparation</h1>
+            <Sparkles className="h-8 w-8 text-[#f97316]" />
           </div>
-          <p className="text-xl text-gray-200 max-w-3xl mx-auto">
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
             Master the Tanium Certified Operator exam with interactive practice and comprehensive study modules
           </p>
         </div>
 
         {/* Weakest Domain Callout */}
         <div className="mb-6 flex items-center justify-center">
-          <div className="rounded-lg border border-yellow-400/40 bg-yellow-500/10 px-4 py-3 text-yellow-200">
+          <div className="rounded-lg border border-yellow-400/40 bg-[#f97316]/10 px-4 py-3 text-[#f97316]">
             {weakest ? (
               <span>
                 Weakest domain: <span className="font-semibold">{weakest.domain}</span> — accuracy {weakest.score}%
                 <button
                   onClick={() => router.push(`/practice?domain=${encodeURIComponent(weakest.domain)}&count=25&quick=1&reveal=1`)}
-                  className="ml-3 inline-flex items-center rounded bg-yellow-500/20 px-2 py-1 text-xs text-yellow-100 hover:bg-yellow-500/30"
+                  className="ml-3 inline-flex items-center rounded bg-[#f97316]/20 px-2 py-1 text-xs text-yellow-100 hover:bg-yellow-500/30"
                 >
                   Drill now
                 </button>
@@ -103,27 +103,27 @@ export function HomePage() {
         {/* Quick Stats */}
           <div className="grid gap-6 md:grid-cols-3 mb-12">
             <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-6 text-center">
-              <Trophy className="h-8 w-8 text-yellow-400 mx-auto mb-2" />
-              <div className="text-2xl font-bold text-white">{totalQuestions}</div>
-              <p className="text-gray-300">Practice Questions</p>
+              <Trophy className="h-8 w-8 text-[#f97316] mx-auto mb-2" />
+              <div className="text-2xl font-bold text-foreground">{totalQuestions}</div>
+              <p className="text-muted-foreground">Practice Questions</p>
             </div>
           
           <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-6 text-center">
-            <BookOpen className="h-8 w-8 text-blue-400 mx-auto mb-2" />
-            <div className="text-2xl font-bold text-white">5</div>
-            <p className="text-gray-300">Study Domains</p>
+            <BookOpen className="h-8 w-8 text-primary mx-auto mb-2" />
+            <div className="text-2xl font-bold text-foreground">5</div>
+            <p className="text-muted-foreground">Study Domains</p>
           </div>
           
           <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-6 text-center">
-            <Target className="h-8 w-8 text-green-400 mx-auto mb-2" />
-            <div className="text-2xl font-bold text-white">78%</div>
-            <p className="text-gray-300">Average Score</p>
+            <Target className="h-8 w-8 text-[#22c55e] mx-auto mb-2" />
+            <div className="text-2xl font-bold text-foreground">78%</div>
+            <p className="text-muted-foreground">Average Score</p>
           </div>
         </div>
 
         {/* Study Domains */}
         <div className="space-y-6">
-          <h2 className="text-2xl font-bold text-white text-center">Study Domains</h2>
+          <h2 className="text-2xl font-bold text-foreground text-center">Study Domains</h2>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {[
               { title: "Asking Questions", desc: "Master Tanium's query system", progress: 72, domain: TCODomain.ASKING_QUESTIONS },
@@ -134,16 +134,16 @@ export function HomePage() {
               { title: "Mock Exam", desc: "Full TCO simulation", progress: 0, domain: null }
             ].map((d, index) => (
               <div key={index} className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-6 hover:bg-white/15 transition-colors cursor-pointer">
-                <h3 className="text-lg font-semibold text-white mb-2">{d.title}</h3>
-                <p className="text-gray-300 text-sm mb-4">{d.desc}</p>
+                <h3 className="text-lg font-semibold text-foreground mb-2">{d.title}</h3>
+                <p className="text-muted-foreground text-sm mb-4">{d.desc}</p>
                 <div className="space-y-2">
                   <div className="flex justify-between text-sm">
-                    <span className="text-gray-300">Progress</span>
-                    <span className="text-white font-medium">{d.progress}%</span>
+                    <span className="text-muted-foreground">Progress</span>
+                    <span className="text-foreground font-medium">{d.progress}%</span>
                   </div>
                   <div className="w-full bg-gray-700 rounded-full h-2">
                     <div 
-                      className="bg-gradient-to-r from-blue-500 to-cyan-500 h-2 rounded-full transition-all duration-300" 
+                      className="bg-gradient-to-r from-blue-500 to-primary h-2 rounded-full transition-all duration-300" 
                       style={{ width: `${d.progress}%` }}
                     ></div>
                   </div>
@@ -152,7 +152,7 @@ export function HomePage() {
                   <div className="mt-4 flex justify-end">
                     <button
                       onClick={() => router.push(`/practice?domain=${encodeURIComponent(d.domain)}&count=25&quick=1&reveal=1`)}
-                      className="bg-blue-600 hover:bg-blue-700 text-white px-3 py-2 rounded-md text-sm"
+                      className="bg-blue-600 hover:bg-blue-700 text-foreground px-3 py-2 rounded-md text-sm"
                     >
                       Quick Drill (25)
                     </button>
@@ -161,7 +161,7 @@ export function HomePage() {
                   <div className="mt-4 flex justify-end">
                     <button
                       onClick={() => router.push("/mock?variant=A")}
-                      className="bg-purple-600 hover:bg-purple-700 text-white px-3 py-2 rounded-md text-sm"
+                      className="bg-accent hover:bg-purple-700 text-foreground px-3 py-2 rounded-md text-sm"
                     >
                       Start Mock Exam
                     </button>
@@ -174,28 +174,28 @@ export function HomePage() {
 
         {/* Your Domain Performance */}
         <div className="space-y-6">
-          <h2 className="text-2xl font-bold text-white text-center">Your Domain Performance</h2>
+          <h2 className="text-2xl font-bold text-foreground text-center">Your Domain Performance</h2>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-5">
             {domainPerf.map((d) => (
               <div key={d.domain} className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-4">
-                <div className="text-sm text-blue-200 mb-1">{d.domain}</div>
-                <div className="text-white text-2xl font-bold">{d.score}%</div>
-                <div className="text-xs text-gray-300">Accuracy</div>
-                <div className="mt-1 text-xs text-gray-300 flex items-center gap-1">
+                <div className="text-sm text-muted-foreground mb-1">{d.domain}</div>
+                <div className="text-foreground text-2xl font-bold">{d.score}%</div>
+                <div className="text-xs text-muted-foreground">Accuracy</div>
+                <div className="mt-1 text-xs text-muted-foreground flex items-center gap-1">
                   {(() => {
                     const delta = domainTrends.get(d.domain) || 0;
-                    if (delta > 0) return (<><ArrowUpRight className="h-3 w-3 text-green-400" /> <span className="text-green-400">+{delta}</span></>);
+                    if (delta > 0) return (<><ArrowUpRight className="h-3 w-3 text-[#22c55e]" /> <span className="text-[#22c55e]">+{delta}</span></>);
                     if (delta < 0) return (<><ArrowDownRight className="h-3 w-3 text-red-400" /> <span className="text-red-400">{delta}</span></>);
-                    return (<><Minus className="h-3 w-3 text-gray-400" /> <span className="text-gray-400">0</span></>);
+                    return (<><Minus className="h-3 w-3 text-muted-foreground" /> <span className="text-muted-foreground">0</span></>);
                   })()}
                 </div>
-                <div className="mt-2 text-white/90 text-sm">
+                <div className="mt-2 text-foreground/90 text-sm">
                   {d.correct}/{d.answered} correct
                 </div>
                 <div className="mt-3 flex justify-end">
                   <button
                     onClick={() => router.push(`/practice?domain=${encodeURIComponent(d.domain)}&count=25&quick=1&reveal=1`)}
-                    className="text-xs bg-blue-600 hover:bg-blue-700 text-white px-2 py-1 rounded"
+                    className="text-xs bg-blue-600 hover:bg-blue-700 text-foreground px-2 py-1 rounded"
                   >
                     Drill 25
                   </button>
@@ -207,31 +207,31 @@ export function HomePage() {
 
         {/* Recent Sessions */}
         <div className="space-y-6 mt-10">
-          <h2 className="text-2xl font-bold text-white text-center">Recent Sessions</h2>
+          <h2 className="text-2xl font-bold text-foreground text-center">Recent Sessions</h2>
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             {(progressState.progress.recentSessions ?? []).slice(0,6).map((s, idx) => (
               <div key={idx} className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-4">
                 <div className="flex items-center justify-between">
-                  <div className="text-sm text-blue-200">
+                  <div className="text-sm text-muted-foreground">
                     {s.domain ?? 'Mixed'}
                   </div>
-                  <div className="text-white text-xl font-semibold">{s.score}%</div>
+                  <div className="text-foreground text-xl font-semibold">{s.score}%</div>
                 </div>
-                <div className="mt-1 text-xs text-gray-300">
+                <div className="mt-1 text-xs text-muted-foreground">
                   {s.questions} questions • {Math.round((s.time ?? 0)/60)} min • {new Date(s.at).toLocaleString()}
                 </div>
                 <div className="mt-3 flex justify-end">
                   {s.domain ? (
                     <button
                       onClick={() => router.push(`/practice?domain=${encodeURIComponent(s.domain ?? '')}&count=${s.questions ?? 25}&quick=1&reveal=1`)}
-                      className="text-xs bg-blue-600 hover:bg-blue-700 text-white px-2 py-1 rounded"
+                      className="text-xs bg-blue-600 hover:bg-blue-700 text-foreground px-2 py-1 rounded"
                     >
                       Repeat Drill
                     </button>
                   ) : (
                     <button
                       onClick={() => router.push(`/mock?variant=A`)}
-                      className="text-xs bg-purple-600 hover:bg-purple-700 text-white px-2 py-1 rounded"
+                      className="text-xs bg-accent hover:bg-purple-700 text-foreground px-2 py-1 rounded"
                     >
                       Take Mock
                     </button>
@@ -240,7 +240,7 @@ export function HomePage() {
               </div>
             ))}
             {((progressState.progress.recentSessions ?? []).length === 0) && (
-              <div className="text-center text-gray-300 bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-6">
+              <div className="text-center text-muted-foreground bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-6">
                 No recent sessions yet. Start a Quick Drill to see your history here.
               </div>
             )}
@@ -249,23 +249,23 @@ export function HomePage() {
 
         {/* Quick Actions */}
         <div className="mt-12 text-center space-y-4">
-          <h3 className="text-xl font-semibold text-white">Quick Actions</h3>
+          <h3 className="text-xl font-semibold text-foreground">Quick Actions</h3>
           <div className="flex flex-wrap justify-center gap-4">
             <button
               onClick={() => router.push("/modules")}
-              className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition-colors"
+              className="bg-blue-600 hover:bg-blue-700 text-foreground px-6 py-3 rounded-lg font-medium transition-colors"
             >
               Browse Study Modules
             </button>
             <button
               onClick={() => router.push("/practice")}
-              className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-medium transition-colors"
+              className="bg-[#22c55e] hover:bg-green-700 text-foreground px-6 py-3 rounded-lg font-medium transition-colors"
             >
               Start Practice Session
             </button>
             <button
               onClick={() => router.push("/mock")}
-              className="bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-lg font-medium transition-colors"
+              className="bg-accent hover:bg-purple-700 text-foreground px-6 py-3 rounded-lg font-medium transition-colors"
             >
               Take Mock Exam
             </button>

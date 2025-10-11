@@ -84,16 +84,16 @@ export function DomainRadarChart({ domainScores }: DomainRadarChartProps) {
   const weakestDomain = data.reduce((min, item) => (item.score < min.score ? item : min));
 
   const getScoreColor = (score: number) => {
-    if (score >= 80) return "text-green-400 border-green-400";
-    if (score >= 70) return "text-blue-400 border-blue-400";
-    if (score >= 60) return "text-yellow-400 border-yellow-400";
+    if (score >= 80) return "text-[#22c55e] border-green-400";
+    if (score >= 70) return "text-primary border-blue-400";
+    if (score >= 60) return "text-[#f97316] border-yellow-400";
     return "text-red-400 border-red-400";
   };
 
   return (
     <Card className="glass border-white/10">
       <CardHeader>
-        <CardTitle className="flex items-center gap-2 text-white">
+        <CardTitle className="flex items-center gap-2 text-foreground">
           <Shield className="h-5 w-5 text-tanium-accent" />
           Domain Performance Overview
         </CardTitle>
@@ -127,13 +127,13 @@ export function DomainRadarChart({ domainScores }: DomainRadarChartProps) {
             {/* Overall Stats */}
             <div className="text-center">
               <div className="mb-1 text-2xl font-bold text-tanium-accent">{averageScore}%</div>
-              <div className="text-sm text-gray-400">Overall Average</div>
+              <div className="text-sm text-muted-foreground">Overall Average</div>
             </div>
           </div>
 
           {/* Domain Breakdown */}
           <div className="space-y-4">
-            <h4 className="font-medium text-white">Domain Breakdown</h4>
+            <h4 className="font-medium text-foreground">Domain Breakdown</h4>
             <div className="space-y-3">
               {Object.entries(domainScores).map(([domain, stats]) => {
                 const Icon = domainIcons[domain as TCODomain];
@@ -147,8 +147,8 @@ export function DomainRadarChart({ domainScores }: DomainRadarChartProps) {
                     <div className="flex items-center gap-3">
                       <Icon className="h-4 w-4 text-tanium-accent" />
                       <div>
-                        <div className="text-sm font-medium text-white">{label}</div>
-                        <div className="text-xs text-gray-400">
+                        <div className="text-sm font-medium text-foreground">{label}</div>
+                        <div className="text-xs text-muted-foreground">
                           {stats.questionsAnswered} questions
                         </div>
                       </div>
@@ -164,13 +164,13 @@ export function DomainRadarChart({ domainScores }: DomainRadarChartProps) {
             {/* Quick Insights */}
             <div className="mt-6 space-y-3">
               <div className="flex items-center justify-between text-sm">
-                <span className="text-gray-300">Strongest Domain</span>
-                <Badge variant="secondary" className="bg-green-900/20 text-green-400">
+                <span className="text-muted-foreground">Strongest Domain</span>
+                <Badge variant="secondary" className="bg-green-900/20 text-[#22c55e]">
                   {strongestDomain.domain}
                 </Badge>
               </div>
               <div className="flex items-center justify-between text-sm">
-                <span className="text-gray-300">Needs Focus</span>
+                <span className="text-muted-foreground">Needs Focus</span>
                 <Badge variant="secondary" className="bg-red-900/20 text-red-400">
                   {weakestDomain.domain}
                 </Badge>

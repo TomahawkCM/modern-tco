@@ -123,9 +123,9 @@ export function NaturalLanguageInput({
 
   // Get confidence color
   const getConfidenceColor = (confidence: number) => {
-    if (confidence >= 0.8) return 'text-green-400';
-    if (confidence >= 0.5) return 'text-yellow-400';
-    return 'text-gray-400';
+    if (confidence >= 0.8) return 'text-[#22c55e]';
+    if (confidence >= 0.5) return 'text-[#f97316]';
+    return 'text-muted-foreground';
   };
 
   return (
@@ -152,7 +152,7 @@ export function NaturalLanguageInput({
           }}
           placeholder={placeholder}
           disabled={isProcessing}
-          className="pl-10 pr-24 bg-gray-800 border-gray-600 text-white placeholder-gray-400 focus:border-tanium-accent"
+          className="pl-10 pr-24 bg-card border-gray-600 text-foreground placeholder-gray-400 focus:border-tanium-accent"
         />
 
         <div className="absolute inset-y-0 right-0 flex items-center pr-2">
@@ -178,11 +178,11 @@ export function NaturalLanguageInput({
       {showSuggestions && (
         <Card
           ref={suggestionsRef}
-          className="absolute z-50 w-full mt-1 bg-gray-800 border-gray-600 shadow-lg"
+          className="absolute z-50 w-full mt-1 bg-card border-gray-600 shadow-lg"
         >
           <ScrollArea className="max-h-80">
             <div className="p-1">
-              <div className="text-xs text-gray-400 px-3 py-1 mb-1">
+              <div className="text-xs text-muted-foreground px-3 py-1 mb-1">
                 Suggested queries
               </div>
 
@@ -203,11 +203,11 @@ export function NaturalLanguageInput({
                   <div className="flex-1 min-w-0">
                     <div className="flex items-start justify-between">
                       <div className="flex-1">
-                        <div className="text-sm text-white">
+                        <div className="text-sm text-foreground">
                           {suggestion.displayText}
                         </div>
                         {suggestion.description && (
-                          <div className="text-xs text-gray-400 mt-0.5">
+                          <div className="text-xs text-muted-foreground mt-0.5">
                             {suggestion.description}
                           </div>
                         )}
@@ -219,9 +219,9 @@ export function NaturalLanguageInput({
                             variant="outline"
                             className={`text-xs ${
                               suggestion.runtime < 100
-                                ? 'border-green-500 text-green-400'
+                                ? 'border-green-500 text-[#22c55e]'
                                 : suggestion.runtime < 500
-                                ? 'border-yellow-500 text-yellow-400'
+                                ? 'border-yellow-500 text-[#f97316]'
                                 : 'border-red-500 text-red-400'
                             }`}
                           >
@@ -244,7 +244,7 @@ export function NaturalLanguageInput({
                     {/* Preview of the actual query */}
                     {suggestion.text !== suggestion.displayText && (
                       <div className="mt-1">
-                        <code className="text-xs text-gray-500">
+                        <code className="text-xs text-muted-foreground">
                           {suggestion.text.length > 80
                             ? `${suggestion.text.substring(0, 80)  }...`
                             : suggestion.text}
@@ -257,7 +257,7 @@ export function NaturalLanguageInput({
 
               {/* Help text */}
               <div className="border-t border-gray-700 mt-1 pt-1">
-                <div className="px-3 py-1 text-xs text-gray-500">
+                <div className="px-3 py-1 text-xs text-muted-foreground">
                   Press <kbd className="px-1 py-0.5 bg-gray-700 rounded">↑</kbd>{' '}
                   <kbd className="px-1 py-0.5 bg-gray-700 rounded">↓</kbd> to navigate,{' '}
                   <kbd className="px-1 py-0.5 bg-gray-700 rounded">Enter</kbd> to select,{' '}
@@ -271,7 +271,7 @@ export function NaturalLanguageInput({
 
       {/* AI assistance note */}
       {!isProcessing && !showSuggestions && localValue && (
-        <div className="absolute mt-1 text-xs text-gray-500">
+        <div className="absolute mt-1 text-xs text-muted-foreground">
           Press Enter or click Generate to convert to Tanium query
         </div>
       )}

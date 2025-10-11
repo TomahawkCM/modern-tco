@@ -154,10 +154,10 @@ export default function TimeInvestmentTracker({
 
         {/* Pace Analysis */}
         {daysToCompletion !== null && progressPercentage < 100 && (
-          <div className="p-3 bg-blue-500/10 border border-blue-500/20 rounded-lg">
+          <div className="p-3 bg-primary/10 border border-primary/20 rounded-lg">
             <div className="flex items-center gap-2 mb-2">
-              <TrendingUp className="h-4 w-4 text-blue-500" />
-              <p className="text-sm font-medium text-blue-500">
+              <TrendingUp className="h-4 w-4 text-primary" />
+              <p className="text-sm font-medium text-primary">
                 Pace Analysis
               </p>
             </div>
@@ -177,9 +177,9 @@ export default function TimeInvestmentTracker({
 
         {/* Completion Message */}
         {progressPercentage >= 100 && (
-          <div className="p-3 bg-green-500/10 border border-green-500/20 rounded-lg text-center">
-            <Award className="h-6 w-6 text-green-500 mx-auto mb-2" />
-            <p className="text-sm font-medium text-green-500">
+          <div className="p-3 bg-[#22c55e]/10 border border-[#22c55e]/20 rounded-lg text-center">
+            <Award className="h-6 w-6 text-[#22c55e] mx-auto mb-2" />
+            <p className="text-sm font-medium text-[#22c55e]">
               🎉 Goal Achieved!
             </p>
             <p className="text-xs text-muted-foreground mt-1">
@@ -204,8 +204,8 @@ export default function TimeInvestmentTracker({
             )}
 
             {avgDailyMinutes >= 60 && avgDailyMinutes < 120 && (
-              <div className="p-3 bg-green-500/10 border border-green-500/20 rounded-lg">
-                <p className="text-sm font-medium text-green-500">
+              <div className="p-3 bg-[#22c55e]/10 border border-[#22c55e]/20 rounded-lg">
+                <p className="text-sm font-medium text-[#22c55e]">
                   Great Pace!
                 </p>
                 <p className="text-xs text-muted-foreground mt-1">
@@ -216,7 +216,7 @@ export default function TimeInvestmentTracker({
             )}
 
             {avgDailyMinutes >= 120 && (
-              <div className="p-3 bg-purple-500/10 border border-purple-500/20 rounded-lg">
+              <div className="p-3 bg-accent/10 border border-accent/20 rounded-lg">
                 <p className="text-sm font-medium text-purple-500">
                   Exceptional Dedication!
                 </p>

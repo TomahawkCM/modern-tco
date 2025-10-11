@@ -118,7 +118,7 @@ export default function ReviewDashboard() {
 
         <Card>
           <CardContent className="pt-6 text-center">
-            <Target className="h-6 w-6 mx-auto mb-2 text-blue-500" />
+            <Target className="h-6 w-6 mx-auto mb-2 text-primary" />
             <p className="text-2xl font-bold">{questionsDue}</p>
             <p className="text-xs text-muted-foreground">Questions</p>
           </CardContent>
@@ -134,7 +134,7 @@ export default function ReviewDashboard() {
 
         <Card>
           <CardContent className="pt-6 text-center">
-            <TrendingUp className="h-6 w-6 mx-auto mb-2 text-green-500" />
+            <TrendingUp className="h-6 w-6 mx-auto mb-2 text-[#22c55e]" />
             <p className="text-2xl font-bold">{avgRetention}%</p>
             <p className="text-xs text-muted-foreground">Card Retention</p>
           </CardContent>
@@ -236,7 +236,7 @@ export default function ReviewDashboard() {
               </p>
               {totalDue === 0 ? (
                 <div className="text-center py-8">
-                  <CheckCircle2 className="h-12 w-12 mx-auto mb-3 text-green-500" />
+                  <CheckCircle2 className="h-12 w-12 mx-auto mb-3 text-[#22c55e]" />
                   <p className="text-lg font-semibold">All caught up!</p>
                   <p className="text-sm text-muted-foreground mt-1">
                     No items due for review right now. Great work!
@@ -257,7 +257,7 @@ export default function ReviewDashboard() {
               </p>
               {flashcardsDue === 0 ? (
                 <div className="text-center py-8">
-                  <CheckCircle2 className="h-12 w-12 mx-auto mb-3 text-green-500" />
+                  <CheckCircle2 className="h-12 w-12 mx-auto mb-3 text-[#22c55e]" />
                   <p className="text-lg font-semibold">No flashcards due!</p>
                   <p className="text-sm text-muted-foreground mt-1">
                     Check back later or create new flashcards.
@@ -278,7 +278,7 @@ export default function ReviewDashboard() {
               </p>
               {questionsDue === 0 ? (
                 <div className="text-center py-8">
-                  <CheckCircle2 className="h-12 w-12 mx-auto mb-3 text-green-500" />
+                  <CheckCircle2 className="h-12 w-12 mx-auto mb-3 text-[#22c55e]" />
                   <p className="text-lg font-semibold">No questions due!</p>
                   <p className="text-sm text-muted-foreground mt-1">
                     All practice questions are up to date.

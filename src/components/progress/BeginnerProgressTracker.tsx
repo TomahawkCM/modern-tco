@@ -117,15 +117,15 @@ const getConfidenceLevelConfig = (level: string) => {
   switch (level) {
     case "building":
       return {
-        color: "text-cyan-400",
-        bgColor: "bg-cyan-900/20",
+        color: "text-primary",
+        bgColor: "bg-primary/20",
         borderColor: "border-cyan-400",
         icon: Sparkles,
         message: "Building confidence step by step!",
       };
     case "growing":
       return {
-        color: "text-green-400",
+        color: "text-[#22c55e]",
         bgColor: "bg-green-900/20", 
         borderColor: "border-green-400",
         icon: Zap,
@@ -133,7 +133,7 @@ const getConfidenceLevelConfig = (level: string) => {
       };
     case "strong":
       return {
-        color: "text-yellow-400",
+        color: "text-[#f97316]",
         bgColor: "bg-yellow-900/20",
         borderColor: "border-yellow-400",
         icon: Star,
@@ -149,7 +149,7 @@ const getConfidenceLevelConfig = (level: string) => {
       };
     default:
       return {
-        color: "text-gray-400",
+        color: "text-muted-foreground",
         bgColor: "bg-gray-900/20",
         borderColor: "border-gray-400",
         icon: Target,
@@ -164,15 +164,15 @@ const getPhaseConfig = (phase: string) => {
       return {
         title: "Phase 0: Foundation",
         description: "Building your IT security foundation",
-        color: "text-cyan-400",
-        bgColor: "bg-cyan-900/20",
+        color: "text-primary",
+        bgColor: "bg-primary/20",
         icon: GraduationCap,
       };
     case "fundamentals":
       return {
         title: "Phase 1: Fundamentals", 
         description: "Learning Tanium core concepts",
-        color: "text-blue-400",
+        color: "text-primary",
         bgColor: "bg-blue-900/20",
         icon: Star,
       };
@@ -180,7 +180,7 @@ const getPhaseConfig = (phase: string) => {
       return {
         title: "Phase 2: Questions",
         description: "Mastering query techniques",
-        color: "text-green-400",
+        color: "text-[#22c55e]",
         bgColor: "bg-green-900/20", 
         icon: Target,
       };
@@ -188,7 +188,7 @@ const getPhaseConfig = (phase: string) => {
       return {
         title: "Phase 3: Mastery",
         description: "Advanced skills and certification",
-        color: "text-yellow-400",
+        color: "text-[#f97316]",
         bgColor: "bg-yellow-900/20",
         icon: Trophy,
       };
@@ -196,7 +196,7 @@ const getPhaseConfig = (phase: string) => {
       return {
         title: "Getting Started",
         description: "Ready to begin your journey",
-        color: "text-gray-400",
+        color: "text-muted-foreground",
         bgColor: "bg-gray-900/20",
         icon: GraduationCap,
       };
@@ -223,10 +223,10 @@ export function BeginnerProgressTracker({
                 <ConfidenceIcon className={cn("h-4 w-4", confidenceConfig.color)} />
               </div>
               <div>
-                <div className="text-sm font-medium text-white">
+                <div className="text-sm font-medium text-foreground">
                   {mockProgressData.overallProgress}% Complete
                 </div>
-                <div className="text-xs text-gray-400">
+                <div className="text-xs text-muted-foreground">
                   {mockProgressData.completedMilestones}/{mockProgressData.totalMilestones} milestones
                 </div>
               </div>
@@ -246,7 +246,7 @@ export function BeginnerProgressTracker({
       {/* Main Progress Card */}
       <Card className="glass border-white/10">
         <CardHeader>
-          <CardTitle className="flex items-center gap-3 text-white">
+          <CardTitle className="flex items-center gap-3 text-foreground">
             <Heart className="h-5 w-5 text-red-400" />
             Your Learning Journey - Built for Beginners!
           </CardTitle>
@@ -257,16 +257,16 @@ export function BeginnerProgressTracker({
             <div className="flex items-center gap-3 mb-3">
               <PhaseIcon className={cn("h-6 w-6", phaseConfig.color)} />
               <div>
-                <h3 className="text-lg font-semibold text-white">{phaseConfig.title}</h3>
-                <p className="text-sm text-gray-300">{phaseConfig.description}</p>
+                <h3 className="text-lg font-semibold text-foreground">{phaseConfig.title}</h3>
+                <p className="text-sm text-muted-foreground">{phaseConfig.description}</p>
               </div>
             </div>
             
             {/* Progress Bar */}
             <div className="space-y-2">
               <div className="flex items-center justify-between">
-                <span className="text-sm text-gray-300">Overall Progress</span>
-                <span className="text-sm font-medium text-white">{mockProgressData.overallProgress}%</span>
+                <span className="text-sm text-muted-foreground">Overall Progress</span>
+                <span className="text-sm font-medium text-foreground">{mockProgressData.overallProgress}%</span>
               </div>
               <Progress value={mockProgressData.overallProgress} className="h-3" />
             </div>
@@ -278,25 +278,25 @@ export function BeginnerProgressTracker({
               <div className="text-2xl font-bold text-tanium-accent">
                 {mockProgressData.completedMilestones}
               </div>
-              <div className="text-xs text-gray-400">Milestones</div>
+              <div className="text-xs text-muted-foreground">Milestones</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-green-400">
+              <div className="text-2xl font-bold text-[#22c55e]">
                 {mockProgressData.studyTimeSpent}
               </div>
-              <div className="text-xs text-gray-400">Study Time</div>
+              <div className="text-xs text-muted-foreground">Study Time</div>
             </div>
             <div className="text-center">
               <div className={cn("text-2xl font-bold", confidenceConfig.color)}>
                 {mockProgressData.confidenceLevel}
               </div>
-              <div className="text-xs text-gray-400">Confidence</div>
+              <div className="text-xs text-muted-foreground">Confidence</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-yellow-400">
+              <div className="text-2xl font-bold text-[#f97316]">
                 {mockProgressData.achievements.length}
               </div>
-              <div className="text-xs text-gray-400">Achievements</div>
+              <div className="text-xs text-muted-foreground">Achievements</div>
             </div>
           </div>
 
@@ -304,10 +304,10 @@ export function BeginnerProgressTracker({
           {showCelebration && (
             <div className="rounded-lg bg-gradient-to-r from-cyan-900/30 to-blue-900/30 border border-cyan-400/20 p-4">
               <div className="flex items-start gap-3">
-                <Sparkles className="h-5 w-5 text-cyan-400 mt-0.5 shrink-0" />
+                <Sparkles className="h-5 w-5 text-primary mt-0.5 shrink-0" />
                 <div>
                   <p className="text-sm text-cyan-200 font-medium mb-1">Keep Going!</p>
-                  <p className="text-sm text-gray-300">{mockProgressData.encouragementMessage}</p>
+                  <p className="text-sm text-muted-foreground">{mockProgressData.encouragementMessage}</p>
                 </div>
               </div>
             </div>
@@ -315,10 +315,10 @@ export function BeginnerProgressTracker({
 
           {/* Next Goal */}
           <div className="flex items-start gap-3 rounded-lg bg-blue-900/20 border border-blue-400/20 p-4">
-            <Target className="h-5 w-5 text-blue-400 mt-0.5 shrink-0" />
+            <Target className="h-5 w-5 text-primary mt-0.5 shrink-0" />
             <div>
-              <p className="text-sm font-medium text-blue-200 mb-1">Next Goal:</p>
-              <p className="text-sm text-gray-300">{mockProgressData.nextGoal}</p>
+              <p className="text-sm font-medium text-muted-foreground mb-1">Next Goal:</p>
+              <p className="text-sm text-muted-foreground">{mockProgressData.nextGoal}</p>
             </div>
           </div>
         </CardContent>
@@ -327,8 +327,8 @@ export function BeginnerProgressTracker({
       {/* Milestones Progress */}
       <Card className="glass border-white/10">
         <CardHeader>
-          <CardTitle className="flex items-center gap-3 text-white">
-            <TrendingUp className="h-5 w-5 text-green-400" />
+          <CardTitle className="flex items-center gap-3 text-foreground">
+            <TrendingUp className="h-5 w-5 text-[#22c55e]" />
             Learning Milestones
           </CardTitle>
         </CardHeader>
@@ -351,9 +351,9 @@ export function BeginnerProgressTracker({
                     milestone.isCompleted ? "bg-green-900/30" : "bg-gray-900/30"
                   )}>
                     {milestone.isCompleted ? (
-                      <CheckCircle className="h-5 w-5 text-green-400" />
+                      <CheckCircle className="h-5 w-5 text-[#22c55e]" />
                     ) : (
-                      <MilestoneIcon className="h-5 w-5 text-gray-400" />
+                      <MilestoneIcon className="h-5 w-5 text-muted-foreground" />
                     )}
                   </div>
                   
@@ -361,25 +361,25 @@ export function BeginnerProgressTracker({
                     <div className="flex items-center gap-2 mb-1">
                       <h4 className={cn(
                         "font-medium",
-                        milestone.isCompleted ? "text-green-200" : "text-gray-300"
+                        milestone.isCompleted ? "text-green-200" : "text-muted-foreground"
                       )}>
                         {milestone.title}
                       </h4>
                       {milestone.isCompleted && (
-                        <Badge variant="outline" className="text-xs text-green-300 border-green-400/20">
+                        <Badge variant="outline" className="text-xs text-[#22c55e] border-green-400/20">
                           ✓ Complete
                         </Badge>
                       )}
                     </div>
-                    <p className="text-sm text-gray-400 mb-2">{milestone.description}</p>
+                    <p className="text-sm text-muted-foreground mb-2">{milestone.description}</p>
                     <p className={cn(
                       "text-xs font-medium",
-                      milestone.isCompleted ? "text-green-300" : "text-blue-300"
+                      milestone.isCompleted ? "text-[#22c55e]" : "text-primary"
                     )}>
                       💪 {milestone.confidenceBoost}
                     </p>
                     {milestone.celebrationMessage && milestone.isCompleted && (
-                      <p className="text-xs text-yellow-300 mt-1">{milestone.celebrationMessage}</p>
+                      <p className="text-xs text-[#f97316] mt-1">{milestone.celebrationMessage}</p>
                     )}
                   </div>
                 </div>
@@ -393,8 +393,8 @@ export function BeginnerProgressTracker({
       {mockProgressData.achievements.length > 0 && (
         <Card className="glass border-white/10">
           <CardHeader>
-            <CardTitle className="flex items-center gap-3 text-white">
-              <Award className="h-5 w-5 text-yellow-400" />
+            <CardTitle className="flex items-center gap-3 text-foreground">
+              <Award className="h-5 w-5 text-[#f97316]" />
               Recent Achievements
             </CardTitle>
           </CardHeader>
@@ -404,7 +404,7 @@ export function BeginnerProgressTracker({
                 <Badge
                   key={index}
                   variant="outline"
-                  className="text-xs text-yellow-300 border-yellow-400/20 bg-yellow-900/20"
+                  className="text-xs text-[#f97316] border-yellow-400/20 bg-yellow-900/20"
                 >
                   🏆 {achievement}
                 </Badge>

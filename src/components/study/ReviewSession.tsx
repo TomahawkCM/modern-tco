@@ -277,10 +277,10 @@ export function ReviewSession({ items, onComplete, onExit }: ReviewSessionProps)
     const seconds = sessionDuration % 60;
 
     return (
-      <Card className="border-2 border-green-500/30 bg-green-500/5">
+      <Card className="border-2 border-[#22c55e]/30 bg-[#22c55e]/5">
         <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-green-300">
-            <Trophy className="h-6 w-6 text-yellow-500" />
+          <CardTitle className="flex items-center gap-2 text-[#22c55e]">
+            <Trophy className="h-6 w-6 text-[#f97316]" />
             Review Session Complete!
           </CardTitle>
         </CardHeader>
@@ -289,8 +289,8 @@ export function ReviewSession({ items, onComplete, onExit }: ReviewSessionProps)
           {/* Score Display */}
           <div className="text-center">
             <div className="mb-4">
-              <div className="mb-2 text-5xl font-bold text-white">{scorePercentage}%</div>
-              <p className="text-sm text-gray-400">
+              <div className="mb-2 text-5xl font-bold text-foreground">{scorePercentage}%</div>
+              <p className="text-sm text-muted-foreground">
                 {itemsCorrect} of {items.length} correct
               </p>
             </div>
@@ -300,29 +300,29 @@ export function ReviewSession({ items, onComplete, onExit }: ReviewSessionProps)
 
           {/* Statistics */}
           <div className="grid grid-cols-2 gap-4">
-            <Card className="border-blue-500/20 bg-blue-500/5">
+            <Card className="border-primary/20 bg-primary/5">
               <CardContent className="pt-4 text-center">
-                <Clock className="mx-auto mb-2 h-6 w-6 text-blue-400" />
-                <p className="text-sm text-gray-400">Duration</p>
-                <p className="text-lg font-bold text-white">
+                <Clock className="mx-auto mb-2 h-6 w-6 text-primary" />
+                <p className="text-sm text-muted-foreground">Duration</p>
+                <p className="text-lg font-bold text-foreground">
                   {minutes}m {seconds}s
                 </p>
               </CardContent>
             </Card>
 
-            <Card className="border-green-500/20 bg-green-500/5">
+            <Card className="border-[#22c55e]/20 bg-[#22c55e]/5">
               <CardContent className="pt-4 text-center">
-                <TrendingUp className="mx-auto mb-2 h-6 w-6 text-green-400" />
-                <p className="text-sm text-gray-400">Items Reviewed</p>
-                <p className="text-lg font-bold text-white">{items.length}</p>
+                <TrendingUp className="mx-auto mb-2 h-6 w-6 text-[#22c55e]" />
+                <p className="text-sm text-muted-foreground">Items Reviewed</p>
+                <p className="text-lg font-bold text-foreground">{items.length}</p>
               </CardContent>
             </Card>
           </div>
 
           {/* Next Review Schedule */}
-          <Card className="border-purple-500/20 bg-purple-500/5">
+          <Card className="border-accent/20 bg-accent/5">
             <CardHeader>
-              <CardTitle className="text-sm text-purple-300">Next Review Schedule</CardTitle>
+              <CardTitle className="text-sm text-accent-foreground">Next Review Schedule</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-2 text-sm">
@@ -343,13 +343,13 @@ export function ReviewSession({ items, onComplete, onExit }: ReviewSessionProps)
                     >
                       <div className="flex items-center gap-2">
                         {answer.correct ? (
-                          <CheckCircle2 className="h-4 w-4 text-green-500" />
+                          <CheckCircle2 className="h-4 w-4 text-[#22c55e]" />
                         ) : (
                           <XCircle className="h-4 w-4 text-red-500" />
                         )}
-                        <span className="text-gray-300">{item.title}</span>
+                        <span className="text-muted-foreground">{item.title}</span>
                       </div>
-                      <Badge variant="outline" className="text-xs border-purple-500/30 text-purple-400">
+                      <Badge variant="outline" className="text-xs border-accent/30 text-accent-foreground">
                         {daysUntil} day{daysUntil !== 1 ? "s" : ""}
                       </Badge>
                     </div>
@@ -376,11 +376,11 @@ export function ReviewSession({ items, onComplete, onExit }: ReviewSessionProps)
 
   // Review in progress
   return (
-    <Card className="border-purple-500/20 bg-purple-500/5">
+    <Card className="border-accent/20 bg-accent/5">
       <CardHeader>
         <div className="mb-2 flex items-center justify-between">
-          <CardTitle className="text-sm text-purple-300">Review Session</CardTitle>
-          <Badge variant="outline" className="border-purple-500/30 text-purple-400">
+          <CardTitle className="text-sm text-accent-foreground">Review Session</CardTitle>
+          <Badge variant="outline" className="border-accent/30 text-accent-foreground">
             {currentIndex + 1} of {items.length}
           </Badge>
         </div>
@@ -391,30 +391,30 @@ export function ReviewSession({ items, onComplete, onExit }: ReviewSessionProps)
         {/* Current Item */}
         <div>
           <div className="mb-4">
-            <Badge variant="outline" className="mb-2 text-xs border-blue-500/30 text-blue-400">
+            <Badge variant="outline" className="mb-2 text-xs border-primary/30 text-primary">
               {currentItem.type === "micro-section" ? "Micro-Section" : "Weak Concept"}
             </Badge>
-            <h3 className="text-lg font-semibold text-white">{currentItem.title}</h3>
-            <p className="mt-1 text-sm text-gray-400">Concept: {currentItem.concept}</p>
+            <h3 className="text-lg font-semibold text-foreground">{currentItem.title}</h3>
+            <p className="mt-1 text-sm text-muted-foreground">Concept: {currentItem.concept}</p>
           </div>
 
           {/* Review Prompt */}
           {!showResult && (
-            <Card className="border-blue-500/20 bg-blue-500/5">
+            <Card className="border-primary/20 bg-primary/5">
               <CardContent className="py-6">
                 {currentQuestion ? (
                   /* Question Bank Mode */
                   <div className="space-y-4">
                     <div className="mb-4">
                       <div className="mb-2 flex items-center justify-between">
-                        <Badge variant="outline" className="text-xs border-purple-500/30 text-purple-400">
+                        <Badge variant="outline" className="text-xs border-accent/30 text-accent-foreground">
                           {currentQuestion.type === "true-false" ? "True/False" : "Multiple Choice"}
                         </Badge>
-                        <Badge variant="outline" className="text-xs border-yellow-500/30 text-yellow-400">
+                        <Badge variant="outline" className="text-xs border-[#f97316]/30 text-[#f97316]">
                           Difficulty: {currentQuestion.difficulty}
                         </Badge>
                       </div>
-                      <p className="text-base font-medium text-white">{currentQuestion.question}</p>
+                      <p className="text-base font-medium text-foreground">{currentQuestion.question}</p>
                     </div>
 
                     <div className="space-y-2">
@@ -426,8 +426,8 @@ export function ReviewSession({ items, onComplete, onExit }: ReviewSessionProps)
                             className={cn(
                               "flex-1 rounded-lg border-2 p-4 text-center transition-all",
                               selectedAnswer === "True"
-                                ? "border-purple-500 bg-purple-500/20 text-white"
-                                : "border-gray-700 bg-gray-800/50 text-gray-300 hover:border-purple-500/50 hover:bg-purple-500/10"
+                                ? "border-purple-500 bg-accent/20 text-foreground"
+                                : "border-gray-700 bg-card/50 text-muted-foreground hover:border-purple-500/50 hover:bg-accent/10"
                             )}
                           >
                             <CheckCircle2 className="mx-auto mb-1 h-6 w-6" />
@@ -438,8 +438,8 @@ export function ReviewSession({ items, onComplete, onExit }: ReviewSessionProps)
                             className={cn(
                               "flex-1 rounded-lg border-2 p-4 text-center transition-all",
                               selectedAnswer === "False"
-                                ? "border-purple-500 bg-purple-500/20 text-white"
-                                : "border-gray-700 bg-gray-800/50 text-gray-300 hover:border-purple-500/50 hover:bg-purple-500/10"
+                                ? "border-purple-500 bg-accent/20 text-foreground"
+                                : "border-gray-700 bg-card/50 text-muted-foreground hover:border-purple-500/50 hover:bg-accent/10"
                             )}
                           >
                             <XCircle className="mx-auto mb-1 h-6 w-6" />
@@ -455,8 +455,8 @@ export function ReviewSession({ items, onComplete, onExit }: ReviewSessionProps)
                             className={cn(
                               "w-full rounded-lg border-2 p-4 text-left transition-all",
                               selectedAnswer === option
-                                ? "border-purple-500 bg-purple-500/20 text-white"
-                                : "border-gray-700 bg-gray-800/50 text-gray-300 hover:border-purple-500/50 hover:bg-purple-500/10"
+                                ? "border-purple-500 bg-accent/20 text-foreground"
+                                : "border-gray-700 bg-card/50 text-muted-foreground hover:border-purple-500/50 hover:bg-accent/10"
                             )}
                           >
                             <div className="flex items-center gap-3">
@@ -464,8 +464,8 @@ export function ReviewSession({ items, onComplete, onExit }: ReviewSessionProps)
                                 className={cn(
                                   "flex h-6 w-6 items-center justify-center rounded-full border-2 text-xs font-bold",
                                   selectedAnswer === option
-                                    ? "border-purple-400 bg-purple-500 text-white"
-                                    : "border-gray-600 text-gray-500"
+                                    ? "border-purple-400 bg-accent text-foreground"
+                                    : "border-gray-600 text-muted-foreground"
                                 )}
                               >
                                 {String.fromCharCode(65 + idx)}
@@ -480,7 +480,7 @@ export function ReviewSession({ items, onComplete, onExit }: ReviewSessionProps)
                     <Button
                       onClick={handleSubmitAnswer}
                       disabled={!selectedAnswer}
-                      className="w-full bg-purple-600 hover:bg-purple-700 disabled:bg-gray-600 disabled:cursor-not-allowed"
+                      className="w-full bg-accent hover:bg-purple-700 disabled:bg-muted disabled:cursor-not-allowed"
                     >
                       Submit Answer
                     </Button>
@@ -488,7 +488,7 @@ export function ReviewSession({ items, onComplete, onExit }: ReviewSessionProps)
                 ) : (
                   /* Fallback: Generic Active Recall */
                   <div className="text-center">
-                    <p className="mb-6 text-white">
+                    <p className="mb-6 text-foreground">
                       Can you recall the key points about <strong>{currentItem.concept}</strong>?
                     </p>
 
@@ -503,7 +503,7 @@ export function ReviewSession({ items, onComplete, onExit }: ReviewSessionProps)
                       </Button>
                       <Button
                         onClick={() => handleAnswer(true)}
-                        className="flex-1 bg-green-600 hover:bg-green-700"
+                        className="flex-1 bg-[#22c55e] hover:bg-green-700"
                       >
                         <CheckCircle2 className="mr-2 h-4 w-4" />
                         Remembered
@@ -520,16 +520,16 @@ export function ReviewSession({ items, onComplete, onExit }: ReviewSessionProps)
             <Card className={cn(
               "border-2",
               currentAnswer
-                ? "border-green-500/30 bg-green-500/5"
+                ? "border-[#22c55e]/30 bg-[#22c55e]/5"
                 : "border-orange-500/30 bg-orange-500/5"
             )}>
               <CardContent className="py-6">
                 <div className="mb-4 text-center">
                   {currentAnswer ? (
                     <>
-                      <CheckCircle2 className="mx-auto mb-2 h-12 w-12 text-green-500" />
-                      <h4 className="text-lg font-semibold text-green-300">Great Job! 🎉</h4>
-                      <p className="mt-1 text-sm text-gray-400">
+                      <CheckCircle2 className="mx-auto mb-2 h-12 w-12 text-[#22c55e]" />
+                      <h4 className="text-lg font-semibold text-[#22c55e]">Great Job! 🎉</h4>
+                      <p className="mt-1 text-sm text-muted-foreground">
                         You'll see this again in {getNextIntervalDays(currentItem.intervalIndex + 1)} days
                       </p>
                     </>
@@ -537,7 +537,7 @@ export function ReviewSession({ items, onComplete, onExit }: ReviewSessionProps)
                     <>
                       <RotateCcw className="mx-auto mb-2 h-12 w-12 text-orange-500" />
                       <h4 className="text-lg font-semibold text-orange-300">Review Needed</h4>
-                      <p className="mt-1 text-sm text-gray-400">
+                      <p className="mt-1 text-sm text-muted-foreground">
                         You'll see this again at the same interval for more practice
                       </p>
                     </>
@@ -546,19 +546,19 @@ export function ReviewSession({ items, onComplete, onExit }: ReviewSessionProps)
 
                 {/* Points Earned */}
                 {pointsEarned > 0 && (
-                  <div className="mb-4 rounded-lg border border-yellow-500/20 bg-yellow-500/5 p-3">
+                  <div className="mb-4 rounded-lg border border-[#f97316]/20 bg-yellow-500/5 p-3">
                     <div className="flex items-center justify-between mb-2">
                       <div className="flex items-center gap-2">
-                        <Trophy className="h-5 w-5 text-yellow-500" />
-                        <span className="font-semibold text-yellow-400">
+                        <Trophy className="h-5 w-5 text-[#f97316]" />
+                        <span className="font-semibold text-[#f97316]">
                           +{pointsEarned} Points
                         </span>
                       </div>
-                      <Badge variant="outline" className="text-yellow-400">
+                      <Badge variant="outline" className="text-[#f97316]">
                         Total: {sessionPoints}
                       </Badge>
                     </div>
-                    <div className="text-xs text-gray-400 space-y-1">
+                    <div className="text-xs text-muted-foreground space-y-1">
                       {pointsBreakdown.map((line, idx) => (
                         <div key={idx}>{line}</div>
                       ))}
@@ -568,7 +568,7 @@ export function ReviewSession({ items, onComplete, onExit }: ReviewSessionProps)
 
                 {/* Question Explanation (if question was used) */}
                 {currentQuestion && (
-                  <div className="mb-4 rounded-lg border border-blue-500/20 bg-blue-500/5 p-4">
+                  <div className="mb-4 rounded-lg border border-primary/20 bg-primary/5 p-4">
                     <div className="mb-3">
                       <div className="mb-2 flex items-center gap-2">
                         <Badge variant="outline" className="text-xs">
@@ -578,17 +578,17 @@ export function ReviewSession({ items, onComplete, onExit }: ReviewSessionProps)
                           {currentQuestion.difficulty}
                         </Badge>
                       </div>
-                      <p className="text-sm font-medium text-gray-300">
+                      <p className="text-sm font-medium text-muted-foreground">
                         {currentQuestion.question}
                       </p>
                     </div>
 
-                    <div className="mb-3 rounded bg-green-500/10 px-3 py-2">
+                    <div className="mb-3 rounded bg-[#22c55e]/10 px-3 py-2">
                       <div className="mb-1 flex items-center gap-2">
-                        <CheckCircle2 className="h-4 w-4 text-green-500" />
-                        <span className="text-xs font-semibold text-green-400">Correct Answer:</span>
+                        <CheckCircle2 className="h-4 w-4 text-[#22c55e]" />
+                        <span className="text-xs font-semibold text-[#22c55e]">Correct Answer:</span>
                       </div>
-                      <p className="text-sm text-gray-200">{currentQuestion.correctAnswer}</p>
+                      <p className="text-sm text-muted-foreground">{currentQuestion.correctAnswer}</p>
                     </div>
 
                     {selectedAnswer && selectedAnswer !== currentQuestion.correctAnswer && (
@@ -597,16 +597,16 @@ export function ReviewSession({ items, onComplete, onExit }: ReviewSessionProps)
                           <XCircle className="h-4 w-4 text-orange-500" />
                           <span className="text-xs font-semibold text-orange-400">Your Answer:</span>
                         </div>
-                        <p className="text-sm text-gray-200">{selectedAnswer}</p>
+                        <p className="text-sm text-muted-foreground">{selectedAnswer}</p>
                       </div>
                     )}
 
-                    <div className="rounded bg-blue-500/10 px-3 py-2">
+                    <div className="rounded bg-primary/10 px-3 py-2">
                       <div className="mb-1 flex items-center gap-2">
-                        <BookOpen className="h-4 w-4 text-blue-400" />
-                        <span className="text-xs font-semibold text-blue-400">Explanation:</span>
+                        <BookOpen className="h-4 w-4 text-primary" />
+                        <span className="text-xs font-semibold text-primary">Explanation:</span>
                       </div>
-                      <p className="text-sm leading-relaxed text-gray-300">
+                      <p className="text-sm leading-relaxed text-muted-foreground">
                         {currentQuestion.explanation}
                       </p>
                     </div>
@@ -616,7 +616,7 @@ export function ReviewSession({ items, onComplete, onExit }: ReviewSessionProps)
                 <div className="mt-6">
                   <Button
                     onClick={handleNext}
-                    className="w-full bg-purple-600 hover:bg-purple-700"
+                    className="w-full bg-accent hover:bg-purple-700"
                   >
                     {isLastItem ? "Complete Session" : "Next Item"}
                     <ArrowRight className="ml-2 h-4 w-4" />
@@ -628,7 +628,7 @@ export function ReviewSession({ items, onComplete, onExit }: ReviewSessionProps)
         </div>
 
         {/* Progress Stats */}
-        <div className="flex items-center justify-between text-sm text-gray-500">
+        <div className="flex items-center justify-between text-sm text-muted-foreground">
           <span>
             Current retention: {currentItem.retention}%
           </span>

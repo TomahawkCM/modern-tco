@@ -55,7 +55,7 @@ export function MicrolearningProgress({
           </div>
         </div>
 
-        <Badge className="bg-gradient-to-r from-archon-cyan-primary to-archon-purple-primary border-archon-cyan-bright/30 text-white font-bold px-3 py-1">
+        <Badge className="bg-gradient-to-r from-archon-cyan-primary to-archon-purple-primary border-archon-cyan-bright/30 text-foreground font-bold px-3 py-1">
           {completionPercentage}% Complete
         </Badge>
       </div>
@@ -71,8 +71,8 @@ export function MicrolearningProgress({
       {/* Compact Stats Row */}
       <div className="grid grid-cols-3 gap-4">
         <div className="flex items-center gap-2">
-          <div className="p-1.5 bg-yellow-500/20 rounded-md">
-            <Trophy className="h-4 w-4 text-yellow-400 drop-shadow-[0_0_8px_rgba(250,204,21,0.5)]" />
+          <div className="p-1.5 bg-[#f97316]/20 rounded-md">
+            <Trophy className="h-4 w-4 text-[#f97316] drop-shadow-[0_0_8px_rgba(250,204,21,0.5)]" />
           </div>
           <div>
             <div className="text-lg font-bold text-archon-cyan-bright">{completedSections}</div>
@@ -103,12 +103,12 @@ export function MicrolearningProgress({
 
       {/* Completion Badge */}
       {completionPercentage === 100 && (
-        <div className="mt-4 rounded-lg border border-green-400/30 bg-green-500/10 p-3 text-center backdrop-blur-sm">
+        <div className="mt-4 rounded-lg border border-green-400/30 bg-[#22c55e]/10 p-3 text-center backdrop-blur-sm">
           <div className="flex items-center justify-center gap-2 mb-1">
-            <Trophy className="h-6 w-6 text-yellow-400 drop-shadow-[0_0_10px_rgba(250,204,21,0.7)]" />
-            <p className="font-bold text-green-300">Module Complete!</p>
+            <Trophy className="h-6 w-6 text-[#f97316] drop-shadow-[0_0_10px_rgba(250,204,21,0.7)]" />
+            <p className="font-bold text-[#22c55e]">Module Complete!</p>
           </div>
-          <p className="text-sm text-green-400">
+          <p className="text-sm text-[#22c55e]">
             Ready for practice questions and assessment
           </p>
         </div>

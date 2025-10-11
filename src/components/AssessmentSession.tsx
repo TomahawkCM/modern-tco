@@ -383,7 +383,7 @@ export function AssessmentSession({
             disabled={isSubmitting}
             className={
               currentQuestionIndex === session.questions.length - 1
-                ? "bg-green-600 hover:bg-green-700"
+                ? "bg-[#22c55e] hover:bg-green-700"
                 : ""
             }
           >

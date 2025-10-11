@@ -103,40 +103,40 @@ export function ModulesPage() {
     <div className="container mx-auto px-4 py-8">
         {/* Enhanced Header */}
         <div className="mb-12 text-center">
-          <h1 className="mb-4 text-5xl font-bold text-white">TCO Study Center</h1>
-          <p className="mx-auto max-w-3xl text-xl text-blue-200">
+          <h1 className="mb-4 text-5xl font-bold text-foreground">TCO Study Center</h1>
+          <p className="mx-auto max-w-3xl text-xl text-muted-foreground">
             🌟 Unified study experience! Master the Tanium Certified Operator certification 
             with comprehensive modules, progress tracking, and beginner-friendly content.
           </p>
-          <p className="mx-auto max-w-2xl text-lg text-gray-300 mt-4">
+          <p className="mx-auto max-w-2xl text-lg text-muted-foreground mt-4">
             Each module aligns with the official exam blueprint. Start with foundations if you're new!
           </p>
         </div>
 
         {/* Progress Overview - New Feature */}
         <div className="mb-8 rounded-lg bg-white/5 p-6 backdrop-blur-sm">
-          <h2 className="mb-4 text-2xl font-bold text-white flex items-center gap-2">
-            <Target className="h-6 w-6 text-cyan-400" />
+          <h2 className="mb-4 text-2xl font-bold text-foreground flex items-center gap-2">
+            <Target className="h-6 w-6 text-primary" />
             Your Learning Progress
           </h2>
           <div className="grid grid-cols-1 gap-6 text-center md:grid-cols-4">
             <div>
-              <div className="mb-2 text-3xl font-bold text-cyan-400">{overallProgress}%</div>
-              <div className="text-gray-300">Overall Progress</div>
+              <div className="mb-2 text-3xl font-bold text-primary">{overallProgress}%</div>
+              <div className="text-muted-foreground">Overall Progress</div>
             </div>
             <div>
-              <div className="mb-2 text-3xl font-bold text-green-400">
+              <div className="mb-2 text-3xl font-bold text-[#22c55e]">
                 {completedModules}/{localModules.length}
               </div>
-              <div className="text-gray-300">Modules Complete</div>
+              <div className="text-muted-foreground">Modules Complete</div>
             </div>
             <div>
-              <div className="mb-2 text-3xl font-bold text-yellow-400">{totalStudyTime}h</div>
-              <div className="text-gray-300">Total Study Time</div>
+              <div className="mb-2 text-3xl font-bold text-[#f97316]">{totalStudyTime}h</div>
+              <div className="text-muted-foreground">Total Study Time</div>
             </div>
             <div>
-              <div className="mb-2 text-3xl font-bold text-blue-400">100%</div>
-              <div className="text-gray-300">Exam Coverage</div>
+              <div className="mb-2 text-3xl font-bold text-primary">100%</div>
+              <div className="text-muted-foreground">Exam Coverage</div>
             </div>
           </div>
         </div>
@@ -150,24 +150,24 @@ export function ModulesPage() {
             >
               <div className="p-6">
                 <div className="mb-4 flex items-start justify-between">
-                  <div className="rounded-lg bg-green-500/20 p-3 transition-colors group-hover:bg-green-500/30">
-                    <BookOpen className="h-6 w-6 text-green-400" />
+                  <div className="rounded-lg bg-[#22c55e]/20 p-3 transition-colors group-hover:bg-[#22c55e]/30">
+                    <BookOpen className="h-6 w-6 text-[#22c55e]" />
                   </div>
                   <div className="text-right">
-                    <span className="text-sm font-medium text-green-300">
+                    <span className="text-sm font-medium text-[#22c55e]">
                       {module.exam_weight}% Exam Weight
                     </span>
-                    <div className="mt-1 text-xs text-gray-400">{module.difficulty_level}</div>
+                    <div className="mt-1 text-xs text-muted-foreground">{module.difficulty_level}</div>
                   </div>
                 </div>
 
-                <h3 className="mb-2 text-xl font-bold text-white transition-colors group-hover:text-green-300">
+                <h3 className="mb-2 text-xl font-bold text-foreground transition-colors group-hover:text-[#22c55e]">
                   {module.title}
                 </h3>
 
-                <p className="mb-4 text-sm text-gray-300">{module.description}</p>
+                <p className="mb-4 text-sm text-muted-foreground">{module.description}</p>
 
-                <div className="mb-4 flex items-center gap-4 text-sm text-gray-400">
+                <div className="mb-4 flex items-center gap-4 text-sm text-muted-foreground">
                   <div className="flex items-center gap-1">
                     <Clock className="h-4 w-4" />
                     <span>{Math.round(module.estimated_time_minutes / 60)}h</span>
@@ -180,7 +180,7 @@ export function ModulesPage() {
 
                 <Link
                   href={`/modules/${toSlug(module.domain)}`}
-                  className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-green-600 px-4 py-2 text-white transition-colors hover:bg-green-700"
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-[#22c55e] px-4 py-2 text-foreground transition-colors hover:bg-green-700"
                 >
                   Start Learning
                   <BookOpen className="h-4 w-4" />
@@ -194,28 +194,28 @@ export function ModulesPage() {
         <div className="mt-12 rounded-lg bg-white/5 p-6 backdrop-blur-sm">
           <div className="grid grid-cols-1 gap-6 text-center md:grid-cols-4">
             <div>
-              <div className="mb-2 text-3xl font-bold text-blue-400">
+              <div className="mb-2 text-3xl font-bold text-primary">
                 {localModules.length}
               </div>
-              <div className="text-gray-300">Total Modules</div>
+              <div className="text-muted-foreground">Total Modules</div>
             </div>
             <div>
-              <div className="mb-2 text-3xl font-bold text-green-400">
+              <div className="mb-2 text-3xl font-bold text-[#22c55e]">
                 {Math.round(
                   localModules.reduce((acc, m) => acc + m.estimated_time_minutes, 0) / 60
                 )}h
               </div>
-              <div className="text-gray-300">Study Time</div>
+              <div className="text-muted-foreground">Study Time</div>
             </div>
             <div>
-              <div className="mb-2 text-3xl font-bold text-cyan-400">
+              <div className="mb-2 text-3xl font-bold text-primary">
                 {localModules.reduce((acc, m) => acc + m.sections.length, 0)}
               </div>
-              <div className="text-gray-300">Total Sections</div>
+              <div className="text-muted-foreground">Total Sections</div>
             </div>
             <div>
-              <div className="mb-2 text-3xl font-bold text-yellow-400">100%</div>
-              <div className="text-gray-300">Exam Coverage</div>
+              <div className="mb-2 text-3xl font-bold text-[#f97316]">100%</div>
+              <div className="text-muted-foreground">Exam Coverage</div>
             </div>
           </div>
         </div>

@@ -146,8 +146,8 @@ function SensorSelectorComponent({
   // Get runtime badge color
   const getRuntimeBadge = (runtime: string, runtimeMs?: number) => {
     const colors: Record<string, string> = {
-      fast: 'border-green-500 text-green-400',
-      medium: 'border-yellow-500 text-yellow-400',
+      fast: 'border-green-500 text-[#22c55e]',
+      medium: 'border-yellow-500 text-[#f97316]',
       slow: 'border-red-500 text-red-400'
     };
 
@@ -163,7 +163,7 @@ function SensorSelectorComponent({
     <Card className={`glass border-white/10 ${className}`}>
       <CardHeader>
         <div className="flex items-center justify-between">
-          <CardTitle className="flex items-center text-white">
+          <CardTitle className="flex items-center text-foreground">
             <Database className="mr-2 h-5 w-5" />
             Select Sensors
             <Badge variant="secondary" className="ml-2">
@@ -183,8 +183,8 @@ function SensorSelectorComponent({
             </DialogTrigger>
             <DialogContent className="max-w-3xl bg-gray-900 border-gray-700">
               <DialogHeader>
-                <DialogTitle className="text-white">Browse Sensors</DialogTitle>
-                <DialogDescription className="text-gray-400">
+                <DialogTitle className="text-foreground">Browse Sensors</DialogTitle>
+                <DialogDescription className="text-muted-foreground">
                   Select sensors to include in your query
                 </DialogDescription>
               </DialogHeader>
@@ -193,19 +193,19 @@ function SensorSelectorComponent({
               <div className="space-y-4">
                 {/* Search bar */}
                 <div className="relative">
-                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                   <Input
                     type="text"
                     placeholder="Search sensors..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="pl-10 bg-gray-800 border-gray-600 text-white"
+                    className="pl-10 bg-card border-gray-600 text-foreground"
                   />
                 </div>
 
                 {/* Category tabs */}
                 <Tabs value={selectedCategory} onValueChange={setSelectedCategory}>
-                  <TabsList className="bg-gray-800">
+                  <TabsList className="bg-card">
                     {categories.map(category => (
                       <TabsTrigger key={category} value={category}>
                         {category === 'all' ? 'All' : category}
@@ -217,7 +217,7 @@ function SensorSelectorComponent({
                     {/* Popular sensors */}
                     {selectedCategory === 'all' && searchQuery === '' && (
                       <div className="mb-4">
-                        <h4 className="text-sm font-medium text-gray-400 mb-2 flex items-center">
+                        <h4 className="text-sm font-medium text-muted-foreground mb-2 flex items-center">
                           <Star className="mr-1 h-4 w-4" />
                           Popular Sensors
                         </h4>
@@ -231,7 +231,7 @@ function SensorSelectorComponent({
                               className="justify-start text-left"
                             >
                               <div className="flex items-center justify-between w-full">
-                                <span className="text-white">{'name' in entry.sensor ? entry.sensor.name : ''}</span>
+                                <span className="text-foreground">{'name' in entry.sensor ? entry.sensor.name : ''}</span>
                                 {getRuntimeBadge(entry.runtime, entry.runtimeMs)}
                               </div>
                             </Button>
@@ -252,7 +252,7 @@ function SensorSelectorComponent({
                             <div className="flex items-start justify-between">
                               <div className="flex-1">
                                 <div className="flex items-center space-x-2">
-                                  <span className="font-medium text-white">
+                                  <span className="font-medium text-foreground">
                                     {'name' in entry.sensor ? entry.sensor.name : ''}
                                   </span>
                                   {entry.parameters && entry.parameters.length > 0 && (
@@ -262,18 +262,18 @@ function SensorSelectorComponent({
                                     </Badge>
                                   )}
                                 </div>
-                                <p className="text-sm text-gray-400 mt-1">
+                                <p className="text-sm text-muted-foreground mt-1">
                                   {entry.description}
                                 </p>
                                 {entry.examples && entry.examples.length > 0 && (
-                                  <div className="mt-1 text-xs text-gray-500">
+                                  <div className="mt-1 text-xs text-muted-foreground">
                                     Example: {entry.examples[0]}
                                   </div>
                                 )}
                               </div>
                               <div className="flex items-center space-x-2 ml-4">
                                 {getRuntimeBadge(entry.runtime, entry.runtimeMs)}
-                                <ChevronRight className="h-4 w-4 text-gray-400" />
+                                <ChevronRight className="h-4 w-4 text-muted-foreground" />
                               </div>
                             </div>
                           </div>
@@ -290,7 +290,7 @@ function SensorSelectorComponent({
 
       <CardContent>
         {selectedSensors.length === 0 ? (
-          <div className="text-center py-8 text-gray-400">
+          <div className="text-center py-8 text-muted-foreground">
             <Database className="h-12 w-12 mx-auto mb-3 opacity-50" />
             <p>No sensors selected</p>
             <p className="text-sm mt-1">Click "Add Sensor" to get started</p>
@@ -300,11 +300,11 @@ function SensorSelectorComponent({
             {selectedSensors.map((sensor, index) => (
               <div
                 key={index}
-                className="flex items-start space-x-3 p-3 bg-gray-800 rounded border border-gray-700"
+                className="flex items-start space-x-3 p-3 bg-card rounded border border-gray-700"
               >
                 <div className="flex-1">
                   <div className="flex items-center space-x-2">
-                    <span className="font-medium text-white">
+                    <span className="font-medium text-foreground">
                       {'name' in sensor.sensor ? sensor.sensor.name : ''}
                     </span>
                     {sensor.filter && (
@@ -326,14 +326,14 @@ function SensorSelectorComponent({
                     <div className="mt-2 space-y-2">
                       {Object.entries(sensor.parameters).map(([key, value]) => (
                         <div key={key} className="flex items-center space-x-2">
-                          <label className="text-sm text-gray-400 w-24">
+                          <label className="text-sm text-muted-foreground w-24">
                             {key}:
                           </label>
                           <Input
                             type="text"
                             value={value}
                             onChange={(e) => handleParameterChange(index, key, e.target.value)}
-                            className="flex-1 h-8 bg-gray-700 border-gray-600 text-white"
+                            className="flex-1 h-8 bg-gray-700 border-gray-600 text-foreground"
                           />
                         </div>
                       ))}
@@ -342,7 +342,7 @@ function SensorSelectorComponent({
 
                   {/* Filter */}
                   {sensor.filter && (
-                    <div className="mt-2 text-sm text-gray-400">
+                    <div className="mt-2 text-sm text-muted-foreground">
                       Filter: {sensor.filter.operator} "{sensor.filter.value}"
                     </div>
                   )}
@@ -352,7 +352,7 @@ function SensorSelectorComponent({
                   size="sm"
                   variant="ghost"
                   onClick={() => onRemove(index)}
-                  className="text-gray-400 hover:text-white"
+                  className="text-muted-foreground hover:text-foreground"
                 >
                   <X className="h-4 w-4" />
                 </Button>

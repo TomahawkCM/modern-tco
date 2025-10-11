@@ -49,7 +49,7 @@ export function SearchHeader() {
         {/* Main Search Input */}
         <div className="relative flex-1">
           <div className="relative">
-            <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 transform text-gray-400" />
+            <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 transform text-muted-foreground" />
             <Input
               type="text"
               placeholder="Search questions, domains, or topics..."
@@ -57,7 +57,7 @@ export function SearchHeader() {
               onChange={(e) => handleInputChange(e.target.value)}
               onFocus={() => setShowSuggestions(inputValue.length > 0)}
               onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
-              className="border-white/20 bg-white/5 pl-10 pr-10 text-white placeholder:text-gray-400 focus:border-tanium-accent"
+              className="border-white/20 bg-white/5 pl-10 pr-10 text-foreground placeholder:text-muted-foreground focus:border-tanium-accent"
             />
             {inputValue && (
               <Button
@@ -65,7 +65,7 @@ export function SearchHeader() {
                 variant="ghost"
                 size="sm"
                 onClick={handleClear}
-                className="absolute right-1 top-1/2 h-8 w-8 -translate-y-1/2 transform p-0 text-gray-400 hover:text-white"
+                className="absolute right-1 top-1/2 h-8 w-8 -translate-y-1/2 transform p-0 text-muted-foreground hover:text-foreground"
               >
                 <X className="h-4 w-4" />
               </Button>
@@ -74,12 +74,12 @@ export function SearchHeader() {
 
           {/* Search Suggestions Dropdown */}
           {showSuggestions && (state.suggestions.length > 0 || state.searchHistory.length > 0) && (
-            <Card className="glass absolute left-0 right-0 top-full z-50 mt-2 border-white/10 bg-slate-900/95 backdrop-blur-md">
+            <Card className="glass absolute left-0 right-0 top-full z-50 mt-2 border-white/10 bg-card/95 backdrop-blur-md">
               <div className="space-y-3 p-4">
                 {/* Suggestions */}
                 {state.suggestions.length > 0 && (
                   <div>
-                    <div className="mb-2 flex items-center gap-2 text-sm text-gray-400">
+                    <div className="mb-2 flex items-center gap-2 text-sm text-muted-foreground">
                       <TrendingUp className="h-4 w-4" />
                       Suggestions
                     </div>
@@ -88,7 +88,7 @@ export function SearchHeader() {
                         <button
                           key={index}
                           onClick={() => handleSuggestionClick(suggestion)}
-                          className="block w-full rounded-md px-3 py-2 text-left text-white transition-colors hover:bg-white/10"
+                          className="block w-full rounded-md px-3 py-2 text-left text-foreground transition-colors hover:bg-white/10"
                         >
                           {suggestion}
                         </button>
@@ -100,7 +100,7 @@ export function SearchHeader() {
                 {/* Search History */}
                 {state.searchHistory.length > 0 && state.suggestions.length > 0 && (
                   <div className="border-t border-white/10 pt-3">
-                    <div className="mb-2 flex items-center gap-2 text-sm text-gray-400">
+                    <div className="mb-2 flex items-center gap-2 text-sm text-muted-foreground">
                       <Clock className="h-4 w-4" />
                       Recent Searches
                     </div>
@@ -109,7 +109,7 @@ export function SearchHeader() {
                         <button
                           key={index}
                           onClick={() => handleSuggestionClick(query)}
-                          className="block w-full rounded-md px-3 py-2 text-left text-gray-300 transition-colors hover:bg-white/10"
+                          className="block w-full rounded-md px-3 py-2 text-left text-muted-foreground transition-colors hover:bg-white/10"
                         >
                           {query}
                         </button>
@@ -126,7 +126,7 @@ export function SearchHeader() {
         <Button
           onClick={handleShowAll}
           variant="outline"
-          className="border-white/20 text-white hover:bg-white/10"
+          className="border-white/20 text-foreground hover:bg-white/10"
         >
           Show All
         </Button>
@@ -136,15 +136,15 @@ export function SearchHeader() {
       <div className="mt-4 flex items-center justify-between">
         <div className="flex items-center gap-4">
           {state.isSearching && (
-            <div className="flex items-center gap-2 text-gray-300">
+            <div className="flex items-center gap-2 text-muted-foreground">
               <div className="h-4 w-4 animate-spin rounded-full border-b-2 border-tanium-accent"></div>
               <span className="text-sm">Searching...</span>
             </div>
           )}
 
           {!state.isSearching && state.totalResults > 0 && (
-            <div className="text-sm text-gray-300">
-              Found <span className="font-medium text-white">{state.totalResults}</span> question
+            <div className="text-sm text-muted-foreground">
+              Found <span className="font-medium text-foreground">{state.totalResults}</span> question
               {state.totalResults !== 1 ? "s" : ""}
               {state.query && (
                 <span>
@@ -196,8 +196,8 @@ export function SearchHeader() {
                 className={cn(
                   "text-xs transition-colors",
                   isActive
-                    ? "bg-tanium-accent text-white hover:bg-blue-600"
-                    : "text-gray-300 hover:bg-white/10 hover:text-white"
+                    ? "bg-tanium-accent text-foreground hover:bg-blue-600"
+                    : "text-muted-foreground hover:bg-white/10 hover:text-foreground"
                 )}
               >
                 {domain ? domain.split(" ")[0] : domain} {/* Show first word */}

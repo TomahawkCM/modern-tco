@@ -19,8 +19,8 @@ export default function LabsPage() {
       <div className="space-y-8">
         {/* Page Header */}
         <div className="text-center">
-          <h1 className="mb-4 text-4xl font-bold text-white">Interactive Lab Exercises</h1>
-          <p className="mb-8 text-xl text-gray-200">
+          <h1 className="mb-4 text-4xl font-bold text-foreground">Interactive Lab Exercises</h1>
+          <p className="mb-8 text-xl text-muted-foreground">
             Practice real Tanium procedures with step-by-step guided simulations
           </p>
         </div>
@@ -29,13 +29,13 @@ export default function LabsPage() {
         <div className="mb-8 grid gap-6 md:grid-cols-3">
           <Card className="glass border-white/10">
             <CardHeader className="text-center">
-              <div className="mx-auto mb-2 w-fit rounded-lg bg-blue-500 p-3">
-                <Terminal className="h-8 w-8 text-white" />
+              <div className="mx-auto mb-2 w-fit rounded-lg bg-primary p-3">
+                <Terminal className="h-8 w-8 text-foreground" />
               </div>
-              <CardTitle className="text-lg text-white">Real Console Simulation</CardTitle>
+              <CardTitle className="text-lg text-foreground">Real Console Simulation</CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-center text-sm text-gray-300">
+              <p className="text-center text-sm text-muted-foreground">
                 Practice with realistic Tanium console interfaces and workflows
               </p>
             </CardContent>
@@ -43,13 +43,13 @@ export default function LabsPage() {
 
           <Card className="glass border-white/10">
             <CardHeader className="text-center">
-              <div className="mx-auto mb-2 w-fit rounded-lg bg-green-500 p-3">
-                <Code className="h-8 w-8 text-white" />
+              <div className="mx-auto mb-2 w-fit rounded-lg bg-[#22c55e] p-3">
+                <Code className="h-8 w-8 text-foreground" />
               </div>
-              <CardTitle className="text-lg text-white">Step-by-Step Validation</CardTitle>
+              <CardTitle className="text-lg text-foreground">Step-by-Step Validation</CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-center text-sm text-gray-300">
+              <p className="text-center text-sm text-muted-foreground">
                 Get instant feedback with automated validation of your inputs
               </p>
             </CardContent>
@@ -58,12 +58,12 @@ export default function LabsPage() {
           <Card className="glass border-white/10">
             <CardHeader className="text-center">
               <div className="mx-auto mb-2 w-fit rounded-lg bg-cyan-500 p-3">
-                <Trophy className="h-8 w-8 text-white" />
+                <Trophy className="h-8 w-8 text-foreground" />
               </div>
-              <CardTitle className="text-lg text-white">Progress Tracking</CardTitle>
+              <CardTitle className="text-lg text-foreground">Progress Tracking</CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-center text-sm text-gray-300">
+              <p className="text-center text-sm text-muted-foreground">
                 Track completion times and mastery across all lab exercises
               </p>
             </CardContent>
@@ -71,32 +71,32 @@ export default function LabsPage() {
         </div>
 
         {/* Lab System Info */}
-        <Card className="glass border-blue-500/30 bg-blue-500/10">
+        <Card className="glass border-primary/30 bg-primary/10">
           <CardHeader>
-            <CardTitle className="flex items-center text-white">
-              <Zap className="mr-2 h-5 w-5 text-blue-400" />
+            <CardTitle className="flex items-center text-foreground">
+              <Zap className="mr-2 h-5 w-5 text-primary" />
               Lab System Overview
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="grid gap-4 md:grid-cols-2">
               <div>
-                <h4 className="mb-2 font-semibold text-white">Available Lab Exercises:</h4>
-                <ul className="space-y-1 text-sm text-gray-300">
+                <h4 className="mb-2 font-semibold text-foreground">Available Lab Exercises:</h4>
+                <ul className="space-y-1 text-sm text-muted-foreground">
                   <li className="flex items-center space-x-2">
-                    <Target className="h-4 w-4 text-green-400" />
+                    <Target className="h-4 w-4 text-[#22c55e]" />
                     <span>Natural Language Query Construction (12 min)</span>
                   </li>
                   <li className="flex items-center space-x-2">
-                    <Target className="h-4 w-4 text-yellow-400" />
+                    <Target className="h-4 w-4 text-[#f97316]" />
                     <span>Advanced Targeting & Refinement (15 min)</span>
                   </li>
                   <li className="flex items-center space-x-2">
-                    <Target className="h-4 w-4 text-blue-400" />
+                    <Target className="h-4 w-4 text-primary" />
                     <span>Safe Action Deployment (18 min)</span>
                   </li>
                   <li className="flex items-center space-x-2">
-                    <Target className="h-4 w-4 text-cyan-400" />
+                    <Target className="h-4 w-4 text-primary" />
                     <span>Platform Navigation & Role Management (10 min)</span>
                   </li>
                   <li className="flex items-center space-x-2">
@@ -106,18 +106,18 @@ export default function LabsPage() {
                 </ul>
               </div>
               <div>
-                <h4 className="mb-2 font-semibold text-white">Features:</h4>
+                <h4 className="mb-2 font-semibold text-foreground">Features:</h4>
                 <div className="space-y-2">
-                  <Badge variant="outline" className="mr-2 border-green-500 text-green-400">
+                  <Badge variant="outline" className="mr-2 border-green-500 text-[#22c55e]">
                     Real-time Validation
                   </Badge>
-                  <Badge variant="outline" className="mr-2 border-blue-500 text-blue-400">
+                  <Badge variant="outline" className="mr-2 border-blue-500 text-primary">
                     Progress Tracking
                   </Badge>
-                  <Badge variant="outline" className="mr-2 border-cyan-500 text-cyan-400">
+                  <Badge variant="outline" className="mr-2 border-cyan-500 text-primary">
                     Hint System
                   </Badge>
-                  <Badge variant="outline" className="mr-2 border-yellow-500 text-yellow-400">
+                  <Badge variant="outline" className="mr-2 border-yellow-500 text-[#f97316]">
                     Timer & Scoring
                   </Badge>
                 </div>

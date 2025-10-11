@@ -25,10 +25,10 @@ export default function DomainMasteryWheel({
 }: DomainMasteryWheelProps) {
   // TCO Certification color scheme
   const domainColors = [
-    "bg-blue-500", // Asking Questions (22%)
-    "bg-purple-500", // Refining & Targeting (23%)
+    "bg-primary", // Asking Questions (22%)
+    "bg-accent", // Refining & Targeting (23%)
     "bg-orange-500", // Taking Action (15%)
-    "bg-green-500", // Navigation (23%)
+    "bg-[#22c55e]", // Navigation (23%)
     "bg-pink-500", // Reporting (17%)
     "bg-cyan-500", // Foundation (0% but still important)
   ];
@@ -36,13 +36,13 @@ export default function DomainMasteryWheel({
   const getConfidenceColor = (level: string) => {
     switch (level) {
       case "high":
-        return "text-green-500";
+        return "text-[#22c55e]";
       case "medium":
-        return "text-yellow-500";
+        return "text-[#f97316]";
       case "low":
         return "text-red-500";
       default:
-        return "text-gray-500";
+        return "text-muted-foreground";
     }
   };
 
@@ -126,7 +126,7 @@ export default function DomainMasteryWheel({
                     }
                   />
                   {completionPercentage === 100 && (
-                    <CheckCircle2 className="absolute right-1 top-1/2 -translate-y-1/2 h-4 w-4 text-green-500" />
+                    <CheckCircle2 className="absolute right-1 top-1/2 -translate-y-1/2 h-4 w-4 text-[#22c55e]" />
                   )}
                 </div>
 
@@ -136,7 +136,7 @@ export default function DomainMasteryWheel({
                     Mastery: {Math.round(domain.masteryPercentage)}%
                   </span>
                   {domain.masteryPercentage >= 80 && (
-                    <span className="text-green-500 flex items-center gap-1">
+                    <span className="text-[#22c55e] flex items-center gap-1">
                       <TrendingUp className="h-3 w-3" />
                       Ready for exam
                     </span>

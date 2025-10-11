@@ -72,14 +72,14 @@ export default function TeamPage() {
 
   return (
     <div className="mx-auto max-w-5xl p-6">
-      <h1 className="mb-4 text-3xl font-bold text-white">Team Seats (Beta)</h1>
-      <p className="mb-6 text-gray-300">Invite teammates to use your Team plan. This MVP stores seats in your account with Supabase when available, with a local fallback for development.</p>
+      <h1 className="mb-4 text-3xl font-bold text-foreground">Team Seats (Beta)</h1>
+      <p className="mb-6 text-muted-foreground">Invite teammates to use your Team plan. This MVP stores seats in your account with Supabase when available, with a local fallback for development.</p>
 
       <Card className="glass border-white/10">
         <CardHeader>
-          <CardTitle className="text-white">Seat Summary</CardTitle>
+          <CardTitle className="text-foreground">Seat Summary</CardTitle>
         </CardHeader>
-        <CardContent className="flex items-center justify-between text-sm text-gray-200">
+        <CardContent className="flex items-center justify-between text-sm text-muted-foreground">
           <div>
             <div><span className="font-medium">Limit:</span> {limit}</div>
             <div><span className="font-medium">Used:</span> {used}</div>
@@ -92,35 +92,35 @@ export default function TeamPage() {
 
       <Card className="mt-6 glass border-white/10">
         <CardHeader>
-          <CardTitle className="text-white">Invite a teammate</CardTitle>
+          <CardTitle className="text-foreground">Invite a teammate</CardTitle>
         </CardHeader>
         <CardContent className="space-y-3">
           <div className="grid gap-2 sm:grid-cols-[1fr_auto] sm:items-end">
             <div>
-              <Label htmlFor="invite-email" className="text-gray-300">Email</Label>
+              <Label htmlFor="invite-email" className="text-muted-foreground">Email</Label>
               <Input id="invite-email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="teammate@company.com" disabled={!user} />
             </div>
             <Button onClick={handleInvite} disabled={!email.trim() || !user} className="sm:ml-2">Invite</Button>
           </div>
-          {!user && <div className="text-sm text-yellow-300">Sign in to invite and manage seats.</div>}
+          {!user && <div className="text-sm text-[#f97316]">Sign in to invite and manage seats.</div>}
           {error && <div className="text-sm text-red-400">{error}</div>}
         </CardContent>
       </Card>
 
       <Card className="mt-6 glass border-white/10">
         <CardHeader>
-          <CardTitle className="text-white">Seats</CardTitle>
+          <CardTitle className="text-foreground">Seats</CardTitle>
         </CardHeader>
         <CardContent>
           {sorted.length === 0 ? (
-            <div className="text-sm text-gray-300">No seats yet. Invite your first teammate above.</div>
+            <div className="text-sm text-muted-foreground">No seats yet. Invite your first teammate above.</div>
           ) : (
             <ul className="divide-y divide-white/10">
               {sorted.map((s) => (
                 <li key={s.id} className="flex items-center justify-between py-3">
                   <div>
-                    <div className="text-white">{s.email}</div>
-                    <div className="text-xs text-gray-400">
+                    <div className="text-foreground">{s.email}</div>
+                    <div className="text-xs text-muted-foreground">
                       Invited {new Date(s.invitedAt).toLocaleString()} • Status: {s.status}
                       {s.acceptedAt ? ` • Activated ${new Date(s.acceptedAt).toLocaleString()}` : ""}
                     </div>

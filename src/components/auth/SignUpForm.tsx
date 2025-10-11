@@ -94,7 +94,7 @@ export function SignUpForm({ onSuccess, onSwitchToLogin }: SignUpFormProps) {
     return (
       <Card className="mx-auto w-full max-w-md">
         <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-green-600">
+          <CardTitle className="flex items-center gap-2 text-[#22c55e]">
             <CheckCircle className="h-5 w-5" />
             Check Your Email
           </CardTitle>
@@ -196,9 +196,9 @@ export function SignUpForm({ onSuccess, onSwitchToLogin }: SignUpFormProps) {
                 disabled={isSubmitting}
               >
                 {showPassword ? (
-                  <EyeOff className="h-4 w-4 text-gray-400" />
+                  <EyeOff className="h-4 w-4 text-muted-foreground" />
                 ) : (
-                  <Eye className="h-4 w-4 text-gray-400" />
+                  <Eye className="h-4 w-4 text-muted-foreground" />
                 )}
               </button>
             </div>
@@ -206,34 +206,34 @@ export function SignUpForm({ onSuccess, onSwitchToLogin }: SignUpFormProps) {
             {password && (
               <div className="space-y-1 text-xs">
                 <div
-                  className={`flex items-center gap-1 ${passwordValidation.minLength ? "text-green-600" : "text-gray-400"}`}
+                  className={`flex items-center gap-1 ${passwordValidation.minLength ? "text-[#22c55e]" : "text-muted-foreground"}`}
                 >
                   <div
-                    className={`h-2 w-2 rounded-full ${passwordValidation.minLength ? "bg-green-600" : "bg-gray-300"}`}
+                    className={`h-2 w-2 rounded-full ${passwordValidation.minLength ? "bg-[#22c55e]" : "bg-gray-300"}`}
                   />
                   At least 8 characters
                 </div>
                 <div
-                  className={`flex items-center gap-1 ${passwordValidation.hasUpperCase ? "text-green-600" : "text-gray-400"}`}
+                  className={`flex items-center gap-1 ${passwordValidation.hasUpperCase ? "text-[#22c55e]" : "text-muted-foreground"}`}
                 >
                   <div
-                    className={`h-2 w-2 rounded-full ${passwordValidation.hasUpperCase ? "bg-green-600" : "bg-gray-300"}`}
+                    className={`h-2 w-2 rounded-full ${passwordValidation.hasUpperCase ? "bg-[#22c55e]" : "bg-gray-300"}`}
                   />
                   One uppercase letter
                 </div>
                 <div
-                  className={`flex items-center gap-1 ${passwordValidation.hasLowerCase ? "text-green-600" : "text-gray-400"}`}
+                  className={`flex items-center gap-1 ${passwordValidation.hasLowerCase ? "text-[#22c55e]" : "text-muted-foreground"}`}
                 >
                   <div
-                    className={`h-2 w-2 rounded-full ${passwordValidation.hasLowerCase ? "bg-green-600" : "bg-gray-300"}`}
+                    className={`h-2 w-2 rounded-full ${passwordValidation.hasLowerCase ? "bg-[#22c55e]" : "bg-gray-300"}`}
                   />
                   One lowercase letter
                 </div>
                 <div
-                  className={`flex items-center gap-1 ${passwordValidation.hasNumbers ? "text-green-600" : "text-gray-400"}`}
+                  className={`flex items-center gap-1 ${passwordValidation.hasNumbers ? "text-[#22c55e]" : "text-muted-foreground"}`}
                 >
                   <div
-                    className={`h-2 w-2 rounded-full ${passwordValidation.hasNumbers ? "bg-green-600" : "bg-gray-300"}`}
+                    className={`h-2 w-2 rounded-full ${passwordValidation.hasNumbers ? "bg-[#22c55e]" : "bg-gray-300"}`}
                   />
                   One number
                 </div>
@@ -263,19 +263,19 @@ export function SignUpForm({ onSuccess, onSwitchToLogin }: SignUpFormProps) {
                 disabled={isSubmitting}
               >
                 {showConfirmPassword ? (
-                  <EyeOff className="h-4 w-4 text-gray-400" />
+                  <EyeOff className="h-4 w-4 text-muted-foreground" />
                 ) : (
-                  <Eye className="h-4 w-4 text-gray-400" />
+                  <Eye className="h-4 w-4 text-muted-foreground" />
                 )}
               </button>
             </div>
 
             {confirmPassword && (
               <div
-                className={`flex items-center gap-1 text-xs ${passwordsMatch ? "text-green-600" : "text-red-500"}`}
+                className={`flex items-center gap-1 text-xs ${passwordsMatch ? "text-[#22c55e]" : "text-red-500"}`}
               >
                 <div
-                  className={`h-2 w-2 rounded-full ${passwordsMatch ? "bg-green-600" : "bg-red-500"}`}
+                  className={`h-2 w-2 rounded-full ${passwordsMatch ? "bg-[#22c55e]" : "bg-red-500"}`}
                 />
                 {passwordsMatch ? "Passwords match" : "Passwords do not match"}
               </div>

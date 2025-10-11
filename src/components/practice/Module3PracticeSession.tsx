@@ -189,12 +189,12 @@ export function Module3PracticeSession({
       return <AlertCircle className="w-4 h-4 text-red-500" />;
     }
     if (progress?.accuracy >= 0.8) {
-      return <CheckCircle className="w-4 h-4 text-green-500" />;
+      return <CheckCircle className="w-4 h-4 text-[#22c55e]" />;
     }
     if (progress?.questionsAttempted > 0) {
-      return <TrendingUp className="w-4 h-4 text-blue-500" />;
+      return <TrendingUp className="w-4 h-4 text-primary" />;
     }
-    return <Target className="w-4 h-4 text-gray-400" />;
+    return <Target className="w-4 h-4 text-muted-foreground" />;
   };
 
   const getEstimatedTime = () => {

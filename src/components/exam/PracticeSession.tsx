@@ -164,7 +164,7 @@ export function PracticeSession({
     return (
       <div className="flex items-center justify-center p-8">
         <div className="border-tanium-orange h-8 w-8 animate-spin rounded-full border-b-2"></div>
-        <span className="ml-2 text-gray-400">Loading practice session...</span>
+        <span className="ml-2 text-muted-foreground">Loading practice session...</span>
       </div>
     );
   }
@@ -187,21 +187,21 @@ export function PracticeSession({
           <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
             <div className="text-center">
               <div className="text-tanium-orange text-2xl font-bold">{questionCount}</div>
-              <div className="text-sm text-gray-400">Questions</div>
+              <div className="text-sm text-muted-foreground">Questions</div>
             </div>
             <div className="text-center">
               <div className="text-tanium-orange text-2xl font-bold">
                 ~{Math.ceil(questionCount * 1.5)}
               </div>
-              <div className="text-sm text-gray-400">Minutes</div>
+              <div className="text-sm text-muted-foreground">Minutes</div>
             </div>
             <div className="text-center">
               <div className="text-tanium-orange text-2xl font-bold">Mixed</div>
-              <div className="text-sm text-gray-400">Difficulty</div>
+              <div className="text-sm text-muted-foreground">Difficulty</div>
             </div>
             <div className="text-center">
               <div className="text-tanium-orange text-2xl font-bold">✓</div>
-              <div className="text-sm text-gray-400">Feedback</div>
+              <div className="text-sm text-muted-foreground">Feedback</div>
             </div>
           </div>
           <Button
@@ -233,7 +233,7 @@ export function PracticeSession({
           <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
             <div className="text-center">
               <div className="text-tanium-orange text-3xl font-bold">{score}%</div>
-              <div className="text-sm text-gray-400">Score</div>
+              <div className="text-sm text-muted-foreground">Score</div>
             </div>
             <div className="text-center">
               <div className="text-tanium-orange text-3xl font-bold">
@@ -243,22 +243,22 @@ export function PracticeSession({
                   ).length
                 }
               </div>
-              <div className="text-sm text-gray-400">Correct</div>
+              <div className="text-sm text-muted-foreground">Correct</div>
             </div>
             <div className="text-center">
               <div className="text-tanium-orange text-3xl font-bold">{formatTime(timeSpent)}</div>
-              <div className="text-sm text-gray-400">Time</div>
+              <div className="text-sm text-muted-foreground">Time</div>
             </div>
             <div className="text-center">
               <div className="text-tanium-orange text-3xl font-bold">
                 {Math.round(timeSpent / state.currentSession.questions.length)}
               </div>
-              <div className="text-sm text-gray-400">Avg/Question</div>
+              <div className="text-sm text-muted-foreground">Avg/Question</div>
             </div>
           </div>
 
           <div className="space-y-2">
-            <h3 className="text-lg font-semibold text-white">Performance by Domain</h3>
+            <h3 className="text-lg font-semibold text-foreground">Performance by Domain</h3>
             {Object.values(TCODomain).map((domain) => {
               const domainQuestions = state.currentSession!.questions.filter(
                 (q) => q.domain === domain
@@ -272,7 +272,7 @@ export function PracticeSession({
 
               return (
                 <div key={domain} className="flex items-center justify-between">
-                  <span className="text-gray-300">{domain}</span>
+                  <span className="text-muted-foreground">{domain}</span>
                   <div className="flex items-center gap-2">
                     <span className="text-tanium-orange">
                       {domainCorrect}/{domainQuestions.length}
@@ -303,7 +303,7 @@ export function PracticeSession({
   }
 
   if (!currentQuestion) {
-    return <div className="text-center text-gray-400">No questions available</div>;
+    return <div className="text-center text-muted-foreground">No questions available</div>;
   }
 
   const isAnswered = selectedAnswer !== "";
@@ -335,7 +335,7 @@ export function PracticeSession({
               </Badge>
             </div>
             <div className="flex items-center gap-4">
-              <div className="flex items-center gap-2 text-gray-400">
+              <div className="flex items-center gap-2 text-muted-foreground">
                 <Clock className="h-4 w-4" />
                 <span>{formatTime(timeSpent)}</span>
               </div>
@@ -350,7 +350,7 @@ export function PracticeSession({
       <Card className="border-tanium-secondary/20 bg-tanium-dark/50">
         <CardHeader>
           <div className="flex items-start justify-between gap-3">
-            <CardTitle className="leading-relaxed text-white">{currentQuestion.question}</CardTitle>
+            <CardTitle className="leading-relaxed text-foreground">{currentQuestion.question}</CardTitle>
             <Button
               variant="outline"
               size="sm"
@@ -378,12 +378,12 @@ export function PracticeSession({
                   className={`flex-1 cursor-pointer rounded-lg border p-3 transition-colors ${
                     isAnswered
                       ? choice.id === currentQuestion.correctAnswerId
-                        ? "border-green-500 bg-green-500/10 text-green-400"
+                        ? "border-green-500 bg-[#22c55e]/10 text-[#22c55e]"
                         : choice.id === selectedAnswer &&
                             choice.id !== currentQuestion.correctAnswerId
                           ? "border-red-500 bg-red-500/10 text-red-400"
-                          : "border-tanium-secondary/20 text-gray-300"
-                      : "hover:border-tanium-orange/50 border-tanium-secondary/20 text-gray-300 hover:text-white"
+                          : "border-tanium-secondary/20 text-muted-foreground"
+                      : "hover:border-tanium-orange/50 border-tanium-secondary/20 text-muted-foreground hover:text-foreground"
                   }`}
                 >
                   <div className="flex items-center justify-between">
@@ -391,7 +391,7 @@ export function PracticeSession({
                     {isAnswered && (
                       <>
                         {choice.id === currentQuestion.correctAnswerId && (
-                          <CheckCircle className="h-4 w-4 text-green-500" />
+                          <CheckCircle className="h-4 w-4 text-[#22c55e]" />
                         )}
                         {choice.id === selectedAnswer &&
                           choice.id !== currentQuestion.correctAnswerId && (
@@ -409,20 +409,20 @@ export function PracticeSession({
           {showExplanation && currentQuestion.explanation && isAnswered && (
             <div
               className={`mt-4 rounded-lg border p-4 ${
-                isCorrect ? "border-green-500/20 bg-green-500/5" : "border-red-500/20 bg-red-500/5"
+                isCorrect ? "border-[#22c55e]/20 bg-[#22c55e]/5" : "border-red-500/20 bg-red-500/5"
               }`}
             >
               <div className="mb-2 flex items-center gap-2">
                 {isCorrect ? (
-                  <CheckCircle className="h-5 w-5 text-green-500" />
+                  <CheckCircle className="h-5 w-5 text-[#22c55e]" />
                 ) : (
                   <XCircle className="h-5 w-5 text-red-500" />
                 )}
-                <span className={`font-semibold ${isCorrect ? "text-green-400" : "text-red-400"}`}>
+                <span className={`font-semibold ${isCorrect ? "text-[#22c55e]" : "text-red-400"}`}>
                   {isCorrect ? "Correct!" : "Incorrect"}
                 </span>
               </div>
-              <p className="text-gray-300">{currentQuestion.explanation}</p>
+              <p className="text-muted-foreground">{currentQuestion.explanation}</p>
             </div>
           )}
 

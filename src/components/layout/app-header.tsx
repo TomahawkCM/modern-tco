@@ -44,8 +44,8 @@ export function AppHeader({ onMenuClick, currentScore = 0, studyStreak = 0 }: Ap
   const settingsTooltipContent = (
     <div className="space-y-2">
       <div className="font-medium">Settings & Preferences</div>
-      <div className="text-sm text-gray-300">Customize your exam experience:</div>
-      <ul className="space-y-1 text-xs text-gray-300">
+      <div className="text-sm text-muted-foreground">Customize your exam experience:</div>
+      <ul className="space-y-1 text-xs text-muted-foreground">
         <li>• Theme and appearance settings</li>
         <li>• Study mode preferences</li>
         <li>• Notification settings</li>
@@ -89,7 +89,7 @@ export function AppHeader({ onMenuClick, currentScore = 0, studyStreak = 0 }: Ap
           <Button
             variant="ghost"
             size="icon"
-            className="mr-2 text-white hover:bg-white/10 md:hidden"
+            className="mr-2 text-foreground hover:bg-white/10 md:hidden"
             onClick={onMenuClick}
             aria-label="Open navigation menu"
           >
@@ -100,11 +100,11 @@ export function AppHeader({ onMenuClick, currentScore = 0, studyStreak = 0 }: Ap
           <div className="flex items-center space-x-4">
             <div className="flex items-center space-x-2">
               <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-tanium-accent">
-                <Target className="h-5 w-5 text-white" />
+                <Target className="h-5 w-5 text-foreground" />
               </div>
               <div className="hidden sm:block">
-                <h1 className="text-xl font-bold text-white">TCO Exam</h1>
-                <p className="text-xs text-gray-300">Tanium Certified Operator</p>
+                <h1 className="text-xl font-bold text-foreground">TCO Exam</h1>
+                <p className="text-xs text-muted-foreground">Tanium Certified Operator</p>
               </div>
             </div>
           </div>
@@ -114,7 +114,7 @@ export function AppHeader({ onMenuClick, currentScore = 0, studyStreak = 0 }: Ap
             <div className="flex items-center gap-1">
               <Button
                 variant="outline"
-                className="glass w-full max-w-sm justify-start border-white/20 text-white hover:bg-white/10"
+                className="glass w-full max-w-sm justify-start border-white/20 text-foreground hover:bg-white/10"
                 onClick={() => setCommandOpen(true)}
               >
                 <Search className="mr-2 h-4 w-4" />
@@ -131,18 +131,18 @@ export function AppHeader({ onMenuClick, currentScore = 0, studyStreak = 0 }: Ap
             <div className="glass hidden items-center space-x-2 rounded-lg px-3 py-1.5 md:flex">
               <Clock className="h-4 w-4 text-orange-400" />
               <div className="text-sm">
-                <span className="font-medium text-white">{studyStreak}</span>
-                <span className="ml-1 text-gray-300">day streak</span>
+                <span className="font-medium text-foreground">{studyStreak}</span>
+                <span className="ml-1 text-muted-foreground">day streak</span>
               </div>
               {/* <ExamTooltip type="mode" context="Consecutive days of study activity" /> */}
             </div>
 
             {/* Current score */}
             <div className="glass hidden items-center space-x-2 rounded-lg px-3 py-1.5 sm:flex">
-              <Trophy className="h-4 w-4 text-yellow-400" />
+              <Trophy className="h-4 w-4 text-[#f97316]" />
               <div className="text-sm">
-                <span className="font-medium text-white">{currentScore}%</span>
-                <span className="ml-1 text-gray-300">avg</span>
+                <span className="font-medium text-foreground">{currentScore}%</span>
+                <span className="ml-1 text-muted-foreground">avg</span>
               </div>
               {/* <QuickTips.Score score={currentScore} /> - Component removed for now */}
             </div>
@@ -156,7 +156,7 @@ export function AppHeader({ onMenuClick, currentScore = 0, studyStreak = 0 }: Ap
               <Button
                 variant="ghost"
                 size="icon"
-                className="text-white hover:bg-white/10"
+                className="text-foreground hover:bg-white/10"
                 onClick={() => router.push("/settings")}
                 aria-label="Open settings"
               >

@@ -186,7 +186,7 @@ export function StudyModuleWrapper({
               </div>
               <div className="text-xs text-archon-text-muted mt-1">
                 Status: <span className={cn(
-                  moduleProgress.status === 'completed' && 'text-green-400 font-bold',
+                  moduleProgress.status === 'completed' && 'text-[#22c55e] font-bold',
                   moduleProgress.status === 'in_progress' && 'text-archon-cyan-bright font-bold',
                   moduleProgress.status === 'not_started' && 'text-archon-text-muted'
                 )}>
@@ -212,14 +212,14 @@ export function StudyModuleWrapper({
         {objectives.length > 0 && (
           <div className="grid md:grid-cols-2 gap-4 mb-4">
             <div>
-              <h3 className="text-sm font-medium text-white mb-2 flex items-center gap-2">
-                <Target className="h-4 w-4 text-cyan-400" />
+              <h3 className="text-sm font-medium text-foreground mb-2 flex items-center gap-2">
+                <Target className="h-4 w-4 text-primary" />
                 Learning Objectives
               </h3>
               <ul className="space-y-1">
                 {objectives.map((objective, index) => (
-                  <li key={index} className="text-sm text-gray-300 flex items-start gap-2">
-                    <CheckCircle className="h-3 w-3 text-green-400 mt-0.5 flex-shrink-0" />
+                  <li key={index} className="text-sm text-muted-foreground flex items-start gap-2">
+                    <CheckCircle className="h-3 w-3 text-[#22c55e] mt-0.5 flex-shrink-0" />
                     {objective}
                   </li>
                 ))}
@@ -229,10 +229,10 @@ export function StudyModuleWrapper({
             {/* Prerequisites */}
             {prerequisites.length > 0 && (
               <div>
-                <h3 className="text-sm font-medium text-white mb-2">Prerequisites</h3>
+                <h3 className="text-sm font-medium text-foreground mb-2">Prerequisites</h3>
                 <ul className="space-y-1">
                   {prerequisites.map((prereq, index) => (
-                    <li key={index} className="text-sm text-gray-400">
+                    <li key={index} className="text-sm text-muted-foreground">
                       • {prereq}
                     </li>
                   ))}
@@ -248,7 +248,7 @@ export function StudyModuleWrapper({
             {moduleProgress.status === 'not_started' && (
               <button
                 onClick={handleStartModule}
-                className="glass-button inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-archon-cyan-primary to-archon-cyan-hover text-white rounded-lg"
+                className="glass-button inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-archon-cyan-primary to-archon-cyan-hover text-foreground rounded-lg"
               >
                 <Play className="h-4 w-4" />
                 Start Module
@@ -259,14 +259,14 @@ export function StudyModuleWrapper({
               <div className="flex items-center gap-2">
                 <button
                   onClick={() => setIsActive(!isActive)}
-                  className="inline-flex items-center gap-2 px-3 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition-colors"
+                  className="inline-flex items-center gap-2 px-3 py-2 bg-primary hover:bg-blue-600 text-foreground rounded-lg transition-colors"
                 >
                   {isActive ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}
                   {isActive ? 'Pause' : 'Resume'}
                 </button>
                 <button
                   onClick={handleCompleteModule}
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded-lg transition-colors"
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-[#22c55e] hover:bg-[#22c55e] text-foreground rounded-lg transition-colors"
                 >
                   <CheckCircle className="h-4 w-4" />
                   Complete Module
@@ -276,13 +276,13 @@ export function StudyModuleWrapper({
 
             {moduleProgress.status === 'completed' && (
               <div className="flex items-center gap-2">
-                <div className="inline-flex items-center gap-2 px-3 py-2 bg-green-500/20 text-green-400 rounded-lg">
+                <div className="inline-flex items-center gap-2 px-3 py-2 bg-[#22c55e]/20 text-[#22c55e] rounded-lg">
                   <Award className="h-4 w-4" />
                   Completed
                 </div>
                 <button
                   onClick={handleResetProgress}
-                  className="inline-flex items-center gap-2 px-3 py-2 bg-gray-600 hover:bg-gray-700 text-white rounded-lg transition-colors"
+                  className="inline-flex items-center gap-2 px-3 py-2 bg-muted hover:bg-gray-700 text-foreground rounded-lg transition-colors"
                 >
                   <RotateCcw className="h-4 w-4" />
                   Reset
@@ -299,8 +299,8 @@ export function StudyModuleWrapper({
               className={cn(
                 "inline-flex items-center gap-2 px-3 py-2 rounded-lg transition-colors",
                 previousModule
-                  ? "bg-gray-600 hover:bg-gray-700 text-white"
-                  : "bg-gray-800 text-gray-500 cursor-not-allowed"
+                  ? "bg-muted hover:bg-gray-700 text-foreground"
+                  : "bg-card text-muted-foreground cursor-not-allowed"
               )}
             >
               <ChevronLeft className="h-4 w-4" />
@@ -313,8 +313,8 @@ export function StudyModuleWrapper({
               className={cn(
                 "inline-flex items-center gap-2 px-3 py-2 rounded-lg transition-colors",
                 (nextModule ?? moduleProgress.status === 'completed')
-                  ? "bg-cyan-500 hover:bg-cyan-600 text-white"
-                  : "bg-gray-800 text-gray-500 cursor-not-allowed"
+                  ? "bg-cyan-500 hover:bg-primary text-foreground"
+                  : "bg-card text-muted-foreground cursor-not-allowed"
               )}
             >
               {nextModule ? 'Next' : 'Finish'}

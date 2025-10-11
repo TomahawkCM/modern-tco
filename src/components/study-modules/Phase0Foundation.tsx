@@ -446,7 +446,7 @@ export default function Phase0Foundation({
           </div>
           <div className="w-full bg-gray-200 rounded-full h-3">
             <motion.div
-              className="bg-gradient-to-r from-cyan-500 to-sky-600 h-3 rounded-full"
+              className="bg-gradient-to-r from-primary to-sky-600 h-3 rounded-full"
               initial={{ width: 0 }}
               animate={{ width: `${overallProgress}%` }}
               transition={{ duration: 1, ease: "easeOut" }}
@@ -478,12 +478,12 @@ export default function Phase0Foundation({
                       {module.title}
                     </h3>
                     {module.isCompleted && (
-                      <CheckCircle className="w-5 h-5 text-green-500" />
+                      <CheckCircle className="w-5 h-5 text-[#22c55e]" />
                     )}
                   </div>
                   
                   <div className="flex items-center space-x-3">
-                    <span className="flex items-center text-sm text-gray-500">
+                    <span className="flex items-center text-sm text-muted-foreground">
                       <Clock className="w-4 h-4 mr-1" />
                       {module.duration}
                     </span>
@@ -518,7 +518,7 @@ export default function Phase0Foundation({
                   <div key={section.id} className="flex items-center space-x-3">
                     <div className={`w-2 h-2 rounded-full ${
                       completedSections.includes(section.id) 
-                        ? 'bg-green-500' 
+                        ? 'bg-[#22c55e]' 
                         : 'bg-gray-300'
                     }`} />
                     <span className={`text-sm ${
@@ -529,7 +529,7 @@ export default function Phase0Foundation({
                       {section.title}
                     </span>
                     {completedSections.includes(section.id) && (
-                      <CheckCircle className="w-4 h-4 text-green-500" />
+                      <CheckCircle className="w-4 h-4 text-[#22c55e]" />
                     )}
                   </div>
                 ))}
@@ -540,7 +540,7 @@ export default function Phase0Foundation({
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 onClick={() => setActiveModule(activeModule === module.id ? null : module.id)}
-                className="w-full flex items-center justify-center space-x-2 px-4 py-3 bg-gradient-to-r from-cyan-500 to-sky-600 text-white font-semibold rounded-lg hover:from-cyan-600 hover:to-sky-700 transition-colors"
+                className="w-full flex items-center justify-center space-x-2 px-4 py-3 bg-gradient-to-r from-primary to-sky-600 text-foreground font-semibold rounded-lg hover:from-cyan-600 hover:to-sky-700 transition-colors"
               >
                 <PlayCircle className="w-4 h-4" />
                 <span>
@@ -567,13 +567,13 @@ export default function Phase0Foundation({
                             {section.title}
                           </h4>
                           {completedSections.includes(section.id) ? (
-                            <CheckCircle className="w-5 h-5 text-green-500" />
+                            <CheckCircle className="w-5 h-5 text-[#22c55e]" />
                           ) : (
                             <motion.button
                               whileHover={{ scale: 1.1 }}
                               whileTap={{ scale: 0.9 }}
                               onClick={() => handleSectionComplete(module.id, section.id)}
-                              className="px-3 py-1 text-xs bg-blue-500 text-white rounded-full hover:bg-blue-600 transition-colors"
+                              className="px-3 py-1 text-xs bg-primary text-foreground rounded-full hover:bg-blue-600 transition-colors"
                             >
                               Complete
                             </motion.button>
@@ -589,7 +589,7 @@ export default function Phase0Foundation({
                           <ul className="space-y-1">
                             {section.keyPoints.map((point, idx) => (
                               <li key={idx} className="text-sm text-gray-600 flex items-start space-x-2">
-                                <div className="w-1.5 h-1.5 bg-blue-500 rounded-full mt-2 flex-shrink-0" />
+                                <div className="w-1.5 h-1.5 bg-primary rounded-full mt-2 flex-shrink-0" />
                                 <span>{point}</span>
                               </li>
                             ))}
@@ -655,22 +655,22 @@ export default function Phase0Foundation({
               }}
               className={`p-4 rounded-lg border text-center space-y-2 ${
                 milestone.isCompleted 
-                  ? 'bg-gradient-to-r from-yellow-400 to-orange-400 border-yellow-500 text-white'
+                  ? 'bg-gradient-to-r from-[#f97316] to-orange-400 border-yellow-500 text-foreground'
                   : milestone.isUnlocked
                     ? 'bg-white border-cyan-200 shadow-sm'
                     : 'bg-gray-100 border-gray-300'
               }`}
             >
               <milestone.icon className={`w-8 h-8 mx-auto ${
-                milestone.isCompleted ? 'text-white' : 'text-cyan-600'
+                milestone.isCompleted ? 'text-foreground' : 'text-cyan-600'
               }`} />
               <h3 className={`font-semibold ${
-                milestone.isCompleted ? 'text-white' : 'text-gray-900'
+                milestone.isCompleted ? 'text-foreground' : 'text-gray-900'
               }`}>
                 {milestone.title}
               </h3>
               <p className={`text-xs ${
-                milestone.isCompleted ? 'text-white/90' : 'text-gray-600'
+                milestone.isCompleted ? 'text-foreground/90' : 'text-gray-600'
               }`}>
                 {milestone.description}
               </p>
@@ -705,9 +705,9 @@ export default function Phase0Foundation({
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
                 transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
-                className="mx-auto w-20 h-20 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-full flex items-center justify-center"
+                className="mx-auto w-20 h-20 bg-gradient-to-r from-[#f97316] to-orange-400 rounded-full flex items-center justify-center"
               >
-                <showMilestone.icon className="w-10 h-10 text-white" />
+                <showMilestone.icon className="w-10 h-10 text-foreground" />
               </motion.div>
               
               <div className="space-y-2">
@@ -735,7 +735,7 @@ export default function Phase0Foundation({
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setShowMilestone(null)}
-                className="w-full px-6 py-3 bg-gradient-to-r from-cyan-500 to-sky-500 text-white font-semibold rounded-lg hover:from-cyan-600 hover:to-sky-600 transition-colors"
+                className="w-full px-6 py-3 bg-gradient-to-r from-primary to-sky-500 text-foreground font-semibold rounded-lg hover:from-cyan-600 hover:to-sky-600 transition-colors"
               >
                 Continue Learning! 🚀
               </motion.button>
@@ -749,20 +749,20 @@ export default function Phase0Foundation({
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-gradient-to-r from-green-500 to-emerald-600 rounded-xl p-8 text-white text-center"
+          className="bg-gradient-to-r from-green-500 to-emerald-600 rounded-xl p-8 text-foreground text-center"
         >
           <Heart className="w-12 h-12 mx-auto mb-4" />
           <h2 className="text-3xl font-bold mb-2">
             🎉 Foundation Complete!
           </h2>
-          <p className="text-xl text-white/90 mb-6">
+          <p className="text-xl text-foreground/90 mb-6">
             Amazing work! You've built a solid foundation in Tanium concepts. 
             You're ready for Phase 1: Core Fundamentals!
           </p>
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="px-8 py-4 bg-white text-green-600 font-bold rounded-xl hover:bg-green-50 transition-colors"
+            className="px-8 py-4 bg-white text-[#22c55e] font-bold rounded-xl hover:bg-green-50 transition-colors"
           >
             Start Phase 1: Core Fundamentals
           </motion.button>

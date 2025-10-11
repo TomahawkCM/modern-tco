@@ -62,7 +62,7 @@ export default async function Modules() {
         return (
           <script
             dangerouslySetInnerHTML={{
-              __html: `(() => { try { const map = ${mapping}; const keys = Object.keys(localStorage).filter(k => k.startsWith('tco-study-progress:')); for (const k of keys) { const v = JSON.parse(localStorage.getItem(k) || 'null'); if (v && v.lastViewed) { const moduleId = k.split(':')[1]; const slug = map[moduleId] || ''; if (slug) { const el = document.getElementById('resume-banner'); if (el) { el.innerHTML = '<a class="text-cyan-300 hover:underline" href="/modules/' + slug + '#' + encodeURIComponent(v.lastViewed) + '">Continue where you left off →</a>'; } break; } } } } catch {} })();`,
+              __html: `(() => { try { const map = ${mapping}; const keys = Object.keys(localStorage).filter(k => k.startsWith('tco-study-progress:')); for (const k of keys) { const v = JSON.parse(localStorage.getItem(k) || 'null'); if (v && v.lastViewed) { const moduleId = k.split(':')[1]; const slug = map[moduleId] || ''; if (slug) { const el = document.getElementById('resume-banner'); if (el) { el.innerHTML = '<a class="text-primary hover:underline" href="/modules/' + slug + '#' + encodeURIComponent(v.lastViewed) + '">Continue where you left off →</a>'; } break; } } } } catch {} })();`,
             }}
           />
         );

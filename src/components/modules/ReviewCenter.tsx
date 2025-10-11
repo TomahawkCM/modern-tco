@@ -120,7 +120,7 @@ export default function ReviewCenter({ modules }: { modules: ModuleMap }) {
   // Early return AFTER all hooks are called
   if (loading) {
     return (
-      <div className="text-center text-gray-300">Loading review items…</div>
+      <div className="text-center text-muted-foreground">Loading review items…</div>
     );
   }
 
@@ -128,13 +128,13 @@ export default function ReviewCenter({ modules }: { modules: ModuleMap }) {
     <div className="space-y-6">
       {mixedPracticeHref && (
         <div className="flex justify-end">
-          <Button className="bg-cyan-700 hover:bg-cyan-600" asChild>
+          <Button className="bg-cyan-700 hover:bg-primary" asChild>
             <Link href={mixedPracticeHref}>Start Mixed Review</Link>
           </Button>
         </div>
       )}
       {grouped.length === 0 ? (
-        <Card className="border-green-500/30 bg-green-900/20">
+        <Card className="border-[#22c55e]/30 bg-green-900/20">
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-green-200">
               <BookOpen className="h-5 w-5" /> You're all caught up!
@@ -144,11 +144,11 @@ export default function ReviewCenter({ modules }: { modules: ModuleMap }) {
         </Card>
       ) : (
         grouped.map((m) => (
-          <Card key={m.id} className="border-yellow-500/30 bg-yellow-900/20">
+          <Card key={m.id} className="border-[#f97316]/30 bg-yellow-900/20">
             <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-yellow-200">
+              <CardTitle className="flex items-center gap-2 text-[#f97316]">
                 <AlertTriangle className="h-5 w-5" /> {m.title}
-                <Badge variant="outline" className="ml-2 border-yellow-500/50 text-yellow-200">
+                <Badge variant="outline" className="ml-2 border-yellow-500/50 text-[#f97316]">
                   {m.items.length} to review
                 </Badge>
               </CardTitle>
@@ -167,7 +167,7 @@ export default function ReviewCenter({ modules }: { modules: ModuleMap }) {
                   const domain = slugToDomain[m.slug] || '';
                   return domain ? (
                     <Button
-                      className="bg-cyan-700 hover:bg-cyan-600"
+                      className="bg-cyan-700 hover:bg-primary"
                       asChild
                       title={`Start practice for ${m.title}`}
                     >

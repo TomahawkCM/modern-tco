@@ -42,15 +42,15 @@ export function GlobalProgressIndicator({
   });
 
   const getReadinessColor = (progress: number) => {
-    if (progress >= 80) return "text-green-400";
-    if (progress >= 60) return "text-blue-400";
-    if (progress >= 40) return "text-yellow-400";
-    return "text-gray-400";
+    if (progress >= 80) return "text-[#22c55e]";
+    if (progress >= 60) return "text-primary";
+    if (progress >= 40) return "text-[#f97316]";
+    return "text-muted-foreground";
   };
 
   const getProgressColor = (progress: number) => {
-    if (progress >= 80) return "bg-green-500";
-    if (progress >= 60) return "bg-blue-500";
+    if (progress >= 80) return "bg-[#22c55e]";
+    if (progress >= 60) return "bg-primary";
     if (progress >= 40) return "bg-yellow-500";
     return "bg-gray-500";
   };
@@ -60,7 +60,7 @@ export function GlobalProgressIndicator({
       <div className={cn("flex items-center gap-3", className)}>
         <div className="flex items-center gap-2">
           <TrendingUp className="h-4 w-4 text-tanium-accent" />
-          <span className="text-sm font-medium text-white">{progressData.overallProgress}%</span>
+          <span className="text-sm font-medium text-foreground">{progressData.overallProgress}%</span>
         </div>
         <div className="w-24">
           <Progress value={progressData.overallProgress} className="h-2" />
@@ -86,7 +86,7 @@ export function GlobalProgressIndicator({
         <div className="flex items-center gap-3">
           <TrendingUp className="h-5 w-5 text-tanium-accent" />
           <div>
-            <div className="text-lg font-semibold text-white">
+            <div className="text-lg font-semibold text-foreground">
               {progressData.overallProgress}% Complete
             </div>
             <div className={cn("text-sm", getReadinessColor(progressData.overallProgress))}>
@@ -98,8 +98,8 @@ export function GlobalProgressIndicator({
         {showNextStep && (
           <div className="flex items-center gap-2">
             <div className="text-right">
-              <div className="text-sm font-medium text-white">Next Step</div>
-              <div className="text-xs text-gray-400">{progressData.nextStep.title}</div>
+              <div className="text-sm font-medium text-foreground">Next Step</div>
+              <div className="text-xs text-muted-foreground">{progressData.nextStep.title}</div>
             </div>
             <Button
               size="sm"
@@ -115,7 +115,7 @@ export function GlobalProgressIndicator({
       <div className="space-y-2">
         <Progress value={progressData.overallProgress} className="h-2" />
 
-        <div className="flex justify-between text-xs text-gray-400">
+        <div className="flex justify-between text-xs text-muted-foreground">
           <div className="flex items-center gap-1">
             <BookOpen className="h-3 w-3" />
             <span>Study: {progressData.studyProgress}%</span>
@@ -134,12 +134,12 @@ export function GlobalProgressIndicator({
       {showNextStep && (
         <div className="mt-3 border-t border-white/10 pt-3">
           <div className="flex items-center justify-between">
-            <div className="text-xs text-gray-300">{progressData.nextStep.description}</div>
+            <div className="text-xs text-muted-foreground">{progressData.nextStep.description}</div>
             <Button
               size="sm"
               variant="outline"
               onClick={() => router.push(progressData.nextStep.path)}
-              className="h-6 border-white/20 text-xs text-white hover:bg-white/10"
+              className="h-6 border-white/20 text-xs text-foreground hover:bg-white/10"
             >
               Continue
               <ArrowRight className="ml-1 h-3 w-3" />

@@ -204,7 +204,7 @@ function FilterGroup({
                   <Badge
                     variant="outline"
                     className={`text-xs ${
-                      logic === 'AND' ? 'border-blue-500 text-blue-400' : 'border-orange-500 text-orange-400'
+                      logic === 'AND' ? 'border-blue-500 text-primary' : 'border-orange-500 text-orange-400'
                     }`}
                   >
                     {logic}
@@ -213,7 +213,7 @@ function FilterGroup({
               )}
 
               {/* Filter row */}
-              <div className={`flex-1 flex items-start space-x-2 p-2 bg-gray-800 rounded border border-gray-700 ${index === 0 ? '' : 'ml-12'}`}>
+              <div className={`flex-1 flex items-start space-x-2 p-2 bg-card rounded border border-gray-700 ${index === 0 ? '' : 'ml-12'}`}>
                 {/* Sensor selector */}
                 <Select
                   value={filter.sensor}
@@ -274,7 +274,7 @@ function FilterGroup({
                     value={typeof filter.value === 'boolean' ? String(filter.value) : filter.value}
                     onChange={(e) => onUpdate(filter.id, { ...filter, value: e.target.value })}
                     placeholder={`Enter ${filter.dataType} value`}
-                    className="flex-1 bg-gray-700 border-gray-600 text-white"
+                    className="flex-1 bg-gray-700 border-gray-600 text-foreground"
                   />
                 )}
 
@@ -283,7 +283,7 @@ function FilterGroup({
                   size="sm"
                   variant="ghost"
                   onClick={() => onRemove(filter.id)}
-                  className="text-gray-400 hover:text-white"
+                  className="text-muted-foreground hover:text-foreground"
                 >
                   <X className="h-4 w-4" />
                 </Button>
@@ -317,7 +317,7 @@ function FilterGroup({
               size="sm"
               variant="outline"
               onClick={handleAddFilter}
-              className="text-gray-400 hover:text-white"
+              className="text-muted-foreground hover:text-foreground"
             >
               <Plus className="mr-1 h-3 w-3" />
               Add Filter
@@ -327,7 +327,7 @@ function FilterGroup({
                 size="sm"
                 variant="outline"
                 onClick={handleAddGroup}
-                className="text-gray-400 hover:text-white"
+                className="text-muted-foreground hover:text-foreground"
               >
                 <Layers className="mr-1 h-3 w-3" />
                 Add Group
@@ -355,13 +355,13 @@ export function FilterBuilder({
     <Card className={`glass border-white/10 ${className}`}>
       <CardHeader>
         <div className="flex items-center justify-between">
-          <CardTitle className="flex items-center text-white">
+          <CardTitle className="flex items-center text-foreground">
             <Filter className="mr-2 h-5 w-5" />
             Filter Conditions
           </CardTitle>
           {filters.length > 1 && (
             <div className="flex items-center space-x-2">
-              <span className="text-sm text-gray-400">Logic:</span>
+              <span className="text-sm text-muted-foreground">Logic:</span>
               <Select value={filterLogic} onValueChange={(value) => onLogicChange(value as 'AND' | 'OR')}>
                 <SelectTrigger className="w-20 h-8 bg-gray-700 border-gray-600">
                   <SelectValue />
@@ -378,7 +378,7 @@ export function FilterBuilder({
 
       <CardContent>
         {filters.length === 0 ? (
-          <div className="text-center py-8 text-gray-400">
+          <div className="text-center py-8 text-muted-foreground">
             <Filter className="h-12 w-12 mx-auto mb-3 opacity-50" />
             <p>No filters applied</p>
             <p className="text-sm mt-1">Add filters to narrow down results</p>

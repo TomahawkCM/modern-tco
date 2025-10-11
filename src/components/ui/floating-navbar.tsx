@@ -69,7 +69,7 @@ export const FloatingNav = ({
           </a>
         ))}
         <button 
-          className="relative rounded-full border border-neutral-200 px-4 py-2 text-sm font-medium text-black dark:border-white/[0.2] dark:text-white"
+          className="relative rounded-full border border-neutral-200 px-4 py-2 text-sm font-medium text-black dark:border-white/[0.2] dark:text-foreground"
           aria-label="Login to your account"
           title="Login"
         >

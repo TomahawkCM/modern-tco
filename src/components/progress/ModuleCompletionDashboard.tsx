@@ -71,8 +71,8 @@ export function ModuleCompletionDashboard({
           </CardTitle>
         </CardHeader>
         <CardContent className="text-center py-12">
-          <p className="text-gray-400">No module data yet</p>
-          <p className="text-sm text-gray-500 mt-2">
+          <p className="text-muted-foreground">No module data yet</p>
+          <p className="text-sm text-muted-foreground mt-2">
             Start reviewing to track your module progress
           </p>
         </CardContent>
@@ -81,16 +81,16 @@ export function ModuleCompletionDashboard({
   }
 
   const getCompletionColor = (percentage: number) => {
-    if (percentage >= 80) return "text-green-400 border-green-400";
-    if (percentage >= 60) return "text-blue-400 border-blue-400";
-    if (percentage >= 40) return "text-yellow-400 border-yellow-400";
+    if (percentage >= 80) return "text-[#22c55e] border-green-400";
+    if (percentage >= 60) return "text-primary border-blue-400";
+    if (percentage >= 40) return "text-[#f97316] border-yellow-400";
     return "text-orange-400 border-orange-400";
   };
 
   const getRetentionColor = (retention: number) => {
-    if (retention >= 90) return "text-green-400";
-    if (retention >= 70) return "text-blue-400";
-    if (retention >= 50) return "text-yellow-400";
+    if (retention >= 90) return "text-[#22c55e]";
+    if (retention >= 70) return "text-primary";
+    if (retention >= 50) return "text-[#f97316]";
     return "text-orange-400";
   };
 
@@ -103,7 +103,7 @@ export function ModuleCompletionDashboard({
             Module Progress
           </CardTitle>
           {!moduleId && (
-            <Badge variant="outline" className="text-purple-400">
+            <Badge variant="outline" className="text-accent-foreground">
               {Math.round(totalProgress)}% Overall
             </Badge>
           )}
@@ -112,11 +112,11 @@ export function ModuleCompletionDashboard({
       <CardContent className="space-y-6">
         {/* Overall Summary (if viewing all modules) */}
         {!moduleId && modules.length > 1 && (
-          <div className="rounded-lg border border-purple-500/20 bg-purple-500/5 p-4">
+          <div className="rounded-lg border border-accent/20 bg-accent/5 p-4">
             <div className="mb-3">
               <div className="flex items-center justify-between mb-2">
-                <span className="text-sm text-gray-400">Overall Completion</span>
-                <span className="text-sm font-semibold text-purple-400">
+                <span className="text-sm text-muted-foreground">Overall Completion</span>
+                <span className="text-sm font-semibold text-accent-foreground">
                   {Math.round(totalProgress)}%
                 </span>
               </div>
@@ -124,18 +124,18 @@ export function ModuleCompletionDashboard({
             </div>
             <div className="grid grid-cols-3 gap-4 text-center">
               <div>
-                <div className="text-xs text-gray-500 mb-1">Modules</div>
-                <div className="text-lg font-bold text-purple-400">{modules.length}</div>
+                <div className="text-xs text-muted-foreground mb-1">Modules</div>
+                <div className="text-lg font-bold text-accent-foreground">{modules.length}</div>
               </div>
               <div>
-                <div className="text-xs text-gray-500 mb-1">Completed</div>
-                <div className="text-lg font-bold text-green-400">
+                <div className="text-xs text-muted-foreground mb-1">Completed</div>
+                <div className="text-lg font-bold text-[#22c55e]">
                   {modules.filter(m => m.completionPercentage >= 80).length}
                 </div>
               </div>
               <div>
-                <div className="text-xs text-gray-500 mb-1">In Progress</div>
-                <div className="text-lg font-bold text-blue-400">
+                <div className="text-xs text-muted-foreground mb-1">In Progress</div>
+                <div className="text-lg font-bold text-primary">
                   {modules.filter(m => m.completionPercentage > 0 && m.completionPercentage < 80).length}
                 </div>
               </div>
@@ -148,18 +148,18 @@ export function ModuleCompletionDashboard({
           {modules.map((module, idx) => (
             <div
               key={idx}
-              className="rounded-lg border border-gray-700/50 bg-gray-800/30 p-4 space-y-3"
+              className="rounded-lg border border-gray-700/50 bg-card/30 p-4 space-y-3"
             >
               {/* Module Header */}
               <div className="flex items-start justify-between">
                 <div className="flex-1">
                   <div className="flex items-center gap-2 mb-1">
-                    <h4 className="font-semibold text-gray-200">{module.moduleName}</h4>
+                    <h4 className="font-semibold text-muted-foreground">{module.moduleName}</h4>
                     {module.completionPercentage >= 80 && (
-                      <CheckCircle2 className="h-4 w-4 text-green-400" />
+                      <CheckCircle2 className="h-4 w-4 text-[#22c55e]" />
                     )}
                   </div>
-                  <div className="flex items-center gap-3 text-xs text-gray-500">
+                  <div className="flex items-center gap-3 text-xs text-muted-foreground">
                     <span className="flex items-center gap-1">
                       <Target className="h-3 w-3" />
                       {module.totalConcepts} concepts
@@ -185,20 +185,20 @@ export function ModuleCompletionDashboard({
 
               {/* Module Stats */}
               <div className="grid grid-cols-3 gap-3">
-                <div className="rounded border border-gray-700 bg-gray-800/50 p-2 text-center">
-                  <div className="text-xs text-gray-500 mb-1">Started</div>
-                  <div className="text-sm font-semibold text-blue-400">
+                <div className="rounded border border-gray-700 bg-card/50 p-2 text-center">
+                  <div className="text-xs text-muted-foreground mb-1">Started</div>
+                  <div className="text-sm font-semibold text-primary">
                     {module.conceptsStarted}
                   </div>
                 </div>
-                <div className="rounded border border-gray-700 bg-gray-800/50 p-2 text-center">
-                  <div className="text-xs text-gray-500 mb-1">Mastered</div>
-                  <div className="text-sm font-semibold text-green-400">
+                <div className="rounded border border-gray-700 bg-card/50 p-2 text-center">
+                  <div className="text-xs text-muted-foreground mb-1">Mastered</div>
+                  <div className="text-sm font-semibold text-[#22c55e]">
                     {module.conceptsMastered}
                   </div>
                 </div>
-                <div className="rounded border border-gray-700 bg-gray-800/50 p-2 text-center">
-                  <div className="text-xs text-gray-500 mb-1">Retention</div>
+                <div className="rounded border border-gray-700 bg-card/50 p-2 text-center">
+                  <div className="text-xs text-muted-foreground mb-1">Retention</div>
                   <div className={`text-sm font-semibold ${getRetentionColor(module.averageRetention)}`}>
                     {Math.round(module.averageRetention)}%
                   </div>
@@ -208,20 +208,20 @@ export function ModuleCompletionDashboard({
               {/* Progress Breakdown */}
               <div className="flex items-center gap-2 text-xs">
                 <div className="flex-1 flex items-center gap-1">
-                  <div className="w-2 h-2 rounded-full bg-green-500" />
-                  <span className="text-gray-400">
+                  <div className="w-2 h-2 rounded-full bg-[#22c55e]" />
+                  <span className="text-muted-foreground">
                     Mastered: {module.conceptsMastered}
                   </span>
                 </div>
                 <div className="flex-1 flex items-center gap-1">
-                  <div className="w-2 h-2 rounded-full bg-blue-500" />
-                  <span className="text-gray-400">
+                  <div className="w-2 h-2 rounded-full bg-primary" />
+                  <span className="text-muted-foreground">
                     In Progress: {module.conceptsStarted - module.conceptsMastered}
                   </span>
                 </div>
                 <div className="flex-1 flex items-center gap-1">
-                  <div className="w-2 h-2 rounded-full bg-gray-600" />
-                  <span className="text-gray-400">
+                  <div className="w-2 h-2 rounded-full bg-muted" />
+                  <span className="text-muted-foreground">
                     Remaining: {module.totalConcepts - module.conceptsStarted}
                   </span>
                 </div>
@@ -229,19 +229,19 @@ export function ModuleCompletionDashboard({
 
               {/* Completion Status */}
               {module.completionPercentage >= 80 ? (
-                <div className="text-xs text-green-400 bg-green-500/10 border border-green-500/20 rounded px-2 py-1">
+                <div className="text-xs text-[#22c55e] bg-[#22c55e]/10 border border-[#22c55e]/20 rounded px-2 py-1">
                   ✓ Module Complete - Excellent Work!
                 </div>
               ) : module.completionPercentage >= 50 ? (
-                <div className="text-xs text-blue-400 bg-blue-500/10 border border-blue-500/20 rounded px-2 py-1">
+                <div className="text-xs text-primary bg-primary/10 border border-primary/20 rounded px-2 py-1">
                   ⚡ Making Great Progress!
                 </div>
               ) : module.completionPercentage > 0 ? (
-                <div className="text-xs text-yellow-400 bg-yellow-500/10 border border-yellow-500/20 rounded px-2 py-1">
+                <div className="text-xs text-[#f97316] bg-[#f97316]/10 border border-[#f97316]/20 rounded px-2 py-1">
                   📚 Keep Going!
                 </div>
               ) : (
-                <div className="text-xs text-gray-400 bg-gray-500/10 border border-gray-500/20 rounded px-2 py-1">
+                <div className="text-xs text-muted-foreground bg-gray-500/10 border border-gray-500/20 rounded px-2 py-1">
                   🎯 Ready to Start
                 </div>
               )}

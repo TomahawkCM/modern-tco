@@ -188,21 +188,21 @@ export const PrerequisitesCheck: React.FC<PrerequisitesCheckProps> = ({
             <div className="grid md:grid-cols-2 gap-6 mb-8">
               <div className="space-y-4">
                 <div className="flex items-start space-x-3">
-                  <CheckCircle className="h-5 w-5 text-green-500 mt-1" />
+                  <CheckCircle className="h-5 w-5 text-[#22c55e] mt-1" />
                   <div>
                     <h3 className="font-semibold text-gray-900">Personalized Learning Path</h3>
                     <p className="text-sm text-gray-600">Get recommendations based on your current knowledge level</p>
                   </div>
                 </div>
                 <div className="flex items-start space-x-3">
-                  <Target className="h-5 w-5 text-blue-500 mt-1" />
+                  <Target className="h-5 w-5 text-primary mt-1" />
                   <div>
                     <h3 className="font-semibold text-gray-900">Focused Study Plan</h3>
                     <p className="text-sm text-gray-600">Identify your strengths and areas for improvement</p>
                   </div>
                 </div>
                 <div className="flex items-start space-x-3">
-                  <Clock className="h-5 w-5 text-cyan-500 mt-1" />
+                  <Clock className="h-5 w-5 text-primary mt-1" />
                   <div>
                     <h3 className="font-semibold text-gray-900">Quick Assessment</h3>
                     <p className="text-sm text-gray-600">Only 10 questions, takes about 5-7 minutes</p>
@@ -241,7 +241,7 @@ export const PrerequisitesCheck: React.FC<PrerequisitesCheckProps> = ({
               <Button 
                 onClick={startAssessment}
                 size="lg"
-                className="bg-blue-600 hover:bg-blue-700 text-white px-8"
+                className="bg-blue-600 hover:bg-blue-700 text-foreground px-8"
               >
                 <Brain className="h-4 w-4 mr-2" />
                 Start Assessment
@@ -259,7 +259,7 @@ export const PrerequisitesCheck: React.FC<PrerequisitesCheckProps> = ({
             </div>
 
             <div className="mt-6 text-center">
-              <p className="text-xs text-gray-500">
+              <p className="text-xs text-muted-foreground">
                 Don't worry - there's no pressure! This helps us customize your learning experience.
               </p>
             </div>
@@ -284,7 +284,7 @@ export const PrerequisitesCheck: React.FC<PrerequisitesCheckProps> = ({
           <CardContent className="p-8">
             <div className="text-center mb-8">
               <div className="inline-flex items-center justify-center w-16 h-16 bg-green-100 rounded-full mb-4">
-                <Award className="h-8 w-8 text-green-600" />
+                <Award className="h-8 w-8 text-[#22c55e]" />
               </div>
               <h1 className="text-3xl font-bold text-gray-900 mb-2">
                 Assessment Complete!
@@ -302,7 +302,7 @@ export const PrerequisitesCheck: React.FC<PrerequisitesCheckProps> = ({
                     {result.percentage}%
                   </div>
                   <p className="text-sm text-gray-600">Overall Score</p>
-                  <p className="text-xs text-gray-500 mt-1">
+                  <p className="text-xs text-muted-foreground mt-1">
                     {result.totalScore} of {result.maxScore} points
                   </p>
                 </CardContent>
@@ -310,11 +310,11 @@ export const PrerequisitesCheck: React.FC<PrerequisitesCheckProps> = ({
 
               <Card>
                 <CardContent className="p-6 text-center">
-                  <div className="text-3xl font-bold text-green-600 mb-1">
+                  <div className="text-3xl font-bold text-[#22c55e] mb-1">
                     {assessmentStats.correct}
                   </div>
                   <p className="text-sm text-gray-600">Correct Answers</p>
-                  <p className="text-xs text-gray-500 mt-1">
+                  <p className="text-xs text-muted-foreground mt-1">
                     out of {assessmentStats.total} questions
                   </p>
                 </CardContent>
@@ -326,7 +326,7 @@ export const PrerequisitesCheck: React.FC<PrerequisitesCheckProps> = ({
                     {Math.round(assessmentStats.timePerQuestion.reduce((a, b) => a + b, 0) / assessmentStats.timePerQuestion.length / 1000)}s
                   </div>
                   <p className="text-sm text-gray-600">Avg. Time</p>
-                  <p className="text-xs text-gray-500 mt-1">
+                  <p className="text-xs text-muted-foreground mt-1">
                     per question
                   </p>
                 </CardContent>
@@ -362,11 +362,11 @@ export const PrerequisitesCheck: React.FC<PrerequisitesCheckProps> = ({
                     <h4 className="font-semibold text-gray-900 mb-2">Duration & Difficulty</h4>
                     <div className="space-y-2">
                       <div className="flex items-center space-x-2">
-                        <Clock className="h-4 w-4 text-gray-500" />
+                        <Clock className="h-4 w-4 text-muted-foreground" />
                         <span className="text-sm text-gray-600">{result.recommendedPath.duration}</span>
                       </div>
                       <div className="flex items-center space-x-2">
-                        <TrendingUp className="h-4 w-4 text-gray-500" />
+                        <TrendingUp className="h-4 w-4 text-muted-foreground" />
                         <span className="text-sm text-gray-600 capitalize">
                           {result.recommendedPath.difficulty.replace('-', ' ')} level
                         </span>
@@ -379,7 +379,7 @@ export const PrerequisitesCheck: React.FC<PrerequisitesCheckProps> = ({
                     <ul className="space-y-1">
                       {result.recommendedPath.outcomes.slice(0, 3).map((outcome, index) => (
                         <li key={index} className="flex items-start space-x-2">
-                          <CheckCircle className="h-4 w-4 text-green-500 mt-0.5 flex-shrink-0" />
+                          <CheckCircle className="h-4 w-4 text-[#22c55e] mt-0.5 flex-shrink-0" />
                           <span className="text-sm text-gray-600">{outcome}</span>
                         </li>
                       ))}
@@ -395,7 +395,7 @@ export const PrerequisitesCheck: React.FC<PrerequisitesCheckProps> = ({
               <Card>
                 <CardContent className="p-6">
                   <div className="flex items-center space-x-2 mb-4">
-                    <CheckCircle className="h-5 w-5 text-green-500" />
+                    <CheckCircle className="h-5 w-5 text-[#22c55e]" />
                     <h3 className="font-semibold text-gray-900">Your Strengths</h3>
                   </div>
                   {result.strengths.length > 0 ? (
@@ -409,7 +409,7 @@ export const PrerequisitesCheck: React.FC<PrerequisitesCheckProps> = ({
                       ))}
                     </div>
                   ) : (
-                    <p className="text-sm text-gray-500">
+                    <p className="text-sm text-muted-foreground">
                       Focus areas identified for targeted improvement
                     </p>
                   )}
@@ -434,7 +434,7 @@ export const PrerequisitesCheck: React.FC<PrerequisitesCheckProps> = ({
                       ))}
                     </div>
                   ) : (
-                    <p className="text-sm text-gray-500">
+                    <p className="text-sm text-muted-foreground">
                       Great job! No major focus areas identified
                     </p>
                   )}
@@ -446,7 +446,7 @@ export const PrerequisitesCheck: React.FC<PrerequisitesCheckProps> = ({
             <Card className="mb-6">
               <CardContent className="p-6">
                 <div className="flex items-center space-x-2 mb-4">
-                  <Lightbulb className="h-5 w-5 text-yellow-500" />
+                  <Lightbulb className="h-5 w-5 text-[#f97316]" />
                   <h3 className="font-semibold text-gray-900">Recommended Next Steps</h3>
                 </div>
                 <div className="grid gap-3">
@@ -467,7 +467,7 @@ export const PrerequisitesCheck: React.FC<PrerequisitesCheckProps> = ({
               <Button 
                 onClick={() => onComplete(result)}
                 size="lg"
-                className="bg-green-600 hover:bg-green-700 text-white px-8"
+                className="bg-[#22c55e] hover:bg-green-700 text-foreground px-8"
               >
                 <ArrowRight className="h-4 w-4 mr-2" />
                 Start Learning Path
@@ -507,7 +507,7 @@ export const PrerequisitesCheck: React.FC<PrerequisitesCheckProps> = ({
             Question {questionState.currentQuestionIndex + 1} of {questions.length}
           </span>
           <div className="flex items-center space-x-2">
-            <span className="text-sm text-gray-500">
+            <span className="text-sm text-muted-foreground">
               {Math.round(progress)}% Complete
             </span>
           </div>
@@ -567,9 +567,9 @@ export const PrerequisitesCheck: React.FC<PrerequisitesCheckProps> = ({
                   <div className="flex items-center space-x-3">
                     <div className={`
                       w-6 h-6 rounded-full border-2 flex items-center justify-center text-sm font-semibold
-                      ${isSelected && !questionState.showFeedback ? 'border-blue-500 bg-blue-500 text-white' : 'border-gray-300'}
-                      ${isCorrect ? 'border-green-500 bg-green-500 text-white' : ''}
-                      ${isWrong ? 'border-red-500 bg-red-500 text-white' : ''}
+                      ${isSelected && !questionState.showFeedback ? 'border-blue-500 bg-primary text-foreground' : 'border-gray-300'}
+                      ${isCorrect ? 'border-green-500 bg-[#22c55e] text-foreground' : ''}
+                      ${isWrong ? 'border-red-500 bg-red-500 text-foreground' : ''}
                     `}>
                       {questionState.showFeedback ? (
                         isCorrect ? <CheckCircle className="h-4 w-4" /> :
@@ -603,7 +603,7 @@ export const PrerequisitesCheck: React.FC<PrerequisitesCheckProps> = ({
                 <Card className={`border-2 ${questionState.isCorrect ? 'border-green-200 bg-green-50' : 'border-orange-200 bg-orange-50'}`}>
                   <CardContent className="p-4">
                     <div className="flex items-start space-x-3">
-                      <div className={`flex-shrink-0 ${questionState.isCorrect ? 'text-green-600' : 'text-orange-600'}`}>
+                      <div className={`flex-shrink-0 ${questionState.isCorrect ? 'text-[#22c55e]' : 'text-orange-600'}`}>
                         {questionState.isCorrect ? (
                           <CheckCircle className="h-5 w-5" />
                         ) : (
@@ -627,7 +627,7 @@ export const PrerequisitesCheck: React.FC<PrerequisitesCheckProps> = ({
 
           {/* Navigation */}
           <div className="flex justify-between items-center">
-            <div className="flex items-center space-x-4 text-sm text-gray-500">
+            <div className="flex items-center space-x-4 text-sm text-muted-foreground">
               <span>
                 Score: {assessmentStats.correct}/{questionState.currentQuestionIndex + (questionState.showFeedback ? 1 : 0)}
               </span>

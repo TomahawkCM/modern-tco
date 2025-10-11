@@ -78,7 +78,7 @@ export default function MiniProject({
 
   const getDifficultyColor = () => {
     switch(difficulty) {
-      case 'beginner': return 'text-green-600 bg-green-50';
+      case 'beginner': return 'text-[#22c55e] bg-green-50';
       case 'intermediate': return 'text-yellow-600 bg-yellow-50';
       case 'advanced': return 'text-red-600 bg-red-50';
     }
@@ -99,7 +99,7 @@ export default function MiniProject({
             <span className={`px-3 py-1 rounded-full text-sm font-medium ${getDifficultyColor()}`}>
               {difficulty.charAt(0).toUpperCase() + difficulty.slice(1)}
             </span>
-            <span className="text-sm text-gray-500">⏱️ {estimatedTime}</span>
+            <span className="text-sm text-muted-foreground">⏱️ {estimatedTime}</span>
           </div>
         </div>
       </CardHeader>
@@ -126,7 +126,7 @@ export default function MiniProject({
             <div className="space-y-4">
               <div className="mb-4">
                 <Progress value={progressPercentage} className="h-2" />
-                <p className="text-sm text-gray-500 mt-1">
+                <p className="text-sm text-muted-foreground mt-1">
                   {completedTasks.size} of {tasks.length} tasks completed
                 </p>
               </div>
@@ -149,7 +149,7 @@ export default function MiniProject({
                       <label
                         htmlFor={task.id}
                         className={`font-medium cursor-pointer ${
-                          completedTasks.has(task.id) ? 'line-through text-gray-500' : ''
+                          completedTasks.has(task.id) ? 'line-through text-muted-foreground' : ''
                         }`}
                       >
                         {task.title}
@@ -196,7 +196,7 @@ export default function MiniProject({
             <h3 className="font-semibold mb-3">Success Criteria</h3>
             {successCriteria.map((criterion, index) => (
               <div key={index} className="flex items-start gap-2">
-                <CheckCircle2 className="w-4 h-4 text-green-600 mt-0.5" />
+                <CheckCircle2 className="w-4 h-4 text-[#22c55e] mt-0.5" />
                 <span className="text-sm">{criterion}</span>
               </div>
             ))}
@@ -205,7 +205,7 @@ export default function MiniProject({
 
         {projectComplete && (
           <Alert className="mt-6 border-green-500 bg-green-50">
-            <Trophy className="w-5 h-5 text-green-600" />
+            <Trophy className="w-5 h-5 text-[#22c55e]" />
             <AlertDescription className="text-green-700">
               <strong>Congratulations!</strong> You've completed all tasks in this mini-project.
               You're ready to move on to the next module!

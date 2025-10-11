@@ -405,12 +405,12 @@ export function StudyModuleViewer({
             </div>
             <Progress value={completionPercentage} className="h-2" />
             <div className="mt-2 flex items-center justify-between">
-              <span className="text-sm text-gray-500">{completionPercentage}% Complete</span>
+              <span className="text-sm text-muted-foreground">{completionPercentage}% Complete</span>
               {completionPercentage === 100 && onNavigateToQuestions && (
                 <Button
                   onClick={onNavigateToQuestions}
                   size="sm"
-                  className="bg-green-600 hover:bg-green-700"
+                  className="bg-[#22c55e] hover:bg-green-700"
                 >
                   <Target className="mr-1 h-4 w-4" />
                   Start Practice Questions
@@ -442,9 +442,9 @@ export function StudyModuleViewer({
                     >
                       <div className="flex items-start gap-3">
                         {isCompleted ? (
-                          <CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-green-600" />
+                          <CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-[#22c55e]" />
                         ) : (
-                          <Circle className="mt-0.5 h-5 w-5 flex-shrink-0 text-gray-400" />
+                          <Circle className="mt-0.5 h-5 w-5 flex-shrink-0 text-muted-foreground" />
                         )}
                         <div className="min-w-0 flex-1">
                           <p
@@ -454,7 +454,7 @@ export function StudyModuleViewer({
                           >
                             {section.title}
                           </p>
-                          <p className="mt-1 text-xs text-gray-500">
+                          <p className="mt-1 text-xs text-muted-foreground">
                             Section {index + 1} of {sections.length}
                           </p>
                         </div>
@@ -487,7 +487,7 @@ export function StudyModuleViewer({
                       <Button
                         onClick={() => markSectionComplete(currentSection.id)}
                         size="sm"
-                        className="bg-green-600 hover:bg-green-700"
+                        className="bg-[#22c55e] hover:bg-green-700"
                       >
                         <CheckCircle2 className="mr-1 h-4 w-4" />
                         Mark Complete
@@ -533,7 +533,7 @@ export function StudyModuleViewer({
                     Previous
                   </Button>
 
-                  <div className="flex items-center gap-2 text-sm text-gray-500">
+                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
                     <BookMarked className="h-4 w-4" />
                     <span>
                       Section {currentSectionIndex + 1} of {sections.length}

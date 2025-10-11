@@ -54,8 +54,8 @@ export default function SearchPage() {
         {/* Header */}
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold text-white">Search Questions</h1>
-            <p className="mt-1 text-gray-300">
+            <h1 className="text-3xl font-bold text-foreground">Search Questions</h1>
+            <p className="mt-1 text-muted-foreground">
               Find specific topics and create custom practice sessions
             </p>
           </div>
@@ -64,7 +64,7 @@ export default function SearchPage() {
           <div className="md:hidden">
             <Sheet open={isMobileFiltersOpen} onOpenChange={setIsMobileFiltersOpen}>
               <SheetTrigger asChild>
-                <Button variant="outline" size="sm" className="border-white/20 text-white">
+                <Button variant="outline" size="sm" className="border-white/20 text-foreground">
                   <Filter className="mr-2 h-4 w-4" />
                   Filters
                   {activeFilterCount > 0 && (
@@ -74,9 +74,9 @@ export default function SearchPage() {
                   )}
                 </Button>
               </SheetTrigger>
-              <SheetContent side="left" className="w-80 border-white/10 bg-slate-900">
+              <SheetContent side="left" className="w-80 border-white/10 bg-card">
                 <SheetHeader>
-                  <SheetTitle className="flex items-center gap-2 text-white">
+                  <SheetTitle className="flex items-center gap-2 text-foreground">
                     <Filter className="h-5 w-5" />
                     Search Filters
                   </SheetTitle>
@@ -99,7 +99,7 @@ export default function SearchPage() {
               <div className="p-6">
                 <div className="mb-6 flex items-center gap-2">
                   <Filter className="h-5 w-5 text-tanium-accent" />
-                  <h3 className="font-semibold text-white">Filters</h3>
+                  <h3 className="font-semibold text-foreground">Filters</h3>
                   {activeFilterCount > 0 && (
                     <Badge variant="secondary" className="text-xs">
                       {activeFilterCount}
@@ -122,7 +122,7 @@ export default function SearchPage() {
               <div className="p-6">
                 <div className="mb-6 flex items-center gap-2">
                   <BookOpen className="h-5 w-5 text-tanium-accent" />
-                  <h3 className="font-semibold text-white">Selected</h3>
+                  <h3 className="font-semibold text-foreground">Selected</h3>
                   {state.selectedQuestions.length > 0 && (
                     <Badge variant="secondary" className="text-xs">
                       {state.selectedQuestions.length}
@@ -142,7 +142,7 @@ export default function SearchPage() {
               <div className="p-6">
                 <div className="mb-4 flex items-center gap-2">
                   <BookOpen className="h-5 w-5 text-tanium-accent" />
-                  <h3 className="font-semibold text-white">Selected Questions</h3>
+                  <h3 className="font-semibold text-foreground">Selected Questions</h3>
                   <Badge variant="secondary" className="text-xs">
                     {state.selectedQuestions.length}
                   </Badge>
@@ -156,11 +156,11 @@ export default function SearchPage() {
         {/* Floating Action Bar */}
         {state.selectedQuestions.length > 0 && (
           <div className="fixed bottom-6 left-1/2 z-50 -translate-x-1/2 transform">
-            <Card className="glass border-white/10 bg-slate-900/95 backdrop-blur-md">
+            <Card className="glass border-white/10 bg-card/95 backdrop-blur-md">
               <div className="p-4">
                 <div className="flex items-center gap-4">
-                  <div className="text-sm text-gray-300">
-                    <span className="font-medium text-white">{state.selectedQuestions.length}</span>{" "}
+                  <div className="text-sm text-muted-foreground">
+                    <span className="font-medium text-foreground">{state.selectedQuestions.length}</span>{" "}
                     question{state.selectedQuestions.length !== 1 ? "s" : ""} selected
                   </div>
                   <Separator orientation="vertical" className="h-6 bg-white/20" />
@@ -177,7 +177,7 @@ export default function SearchPage() {
                       onClick={handleCreateMockExam}
                       size="sm"
                       variant="outline"
-                      className="border-white/20 text-white hover:bg-white/10"
+                      className="border-white/20 text-foreground hover:bg-white/10"
                     >
                       <FileText className="mr-2 h-4 w-4" />
                       Mock Exam
@@ -186,7 +186,7 @@ export default function SearchPage() {
                       onClick={clearSelection}
                       size="sm"
                       variant="ghost"
-                      className="text-gray-400 hover:bg-white/10 hover:text-white"
+                      className="text-muted-foreground hover:bg-white/10 hover:text-foreground"
                     >
                       Clear
                     </Button>
@@ -202,9 +202,9 @@ export default function SearchPage() {
           <div className="py-12 text-center">
             <Card className="glass mx-auto max-w-md border-white/10">
               <div className="p-8">
-                <Search className="mx-auto mb-4 h-12 w-12 text-gray-400" />
-                <h3 className="mb-2 text-lg font-medium text-white">No questions found</h3>
-                <p className="mb-4 text-sm text-gray-300">
+                <Search className="mx-auto mb-4 h-12 w-12 text-muted-foreground" />
+                <h3 className="mb-2 text-lg font-medium text-foreground">No questions found</h3>
+                <p className="mb-4 text-sm text-muted-foreground">
                   Try adjusting your search query or filters to find more results.
                 </p>
                 <Button
@@ -214,7 +214,7 @@ export default function SearchPage() {
                   }}
                   variant="outline"
                   size="sm"
-                  className="border-white/20 text-white hover:bg-white/10"
+                  className="border-white/20 text-foreground hover:bg-white/10"
                 >
                   Show All Questions
                 </Button>

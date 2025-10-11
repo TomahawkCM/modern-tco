@@ -129,7 +129,7 @@ export default function MicroQuiz({
           {isSubmitted && (
             <Badge
               variant={isCorrect ? "default" : "destructive"}
-              className={isCorrect ? "bg-green-600" : ""}
+              className={isCorrect ? "bg-[#22c55e]" : ""}
             >
               {isCorrect ? (
                 <>
@@ -166,7 +166,7 @@ export default function MicroQuiz({
                 key={index}
                 className={`flex items-center space-x-3 rounded-lg border-2 p-3 transition-all ${
                   showCorrect
-                    ? "border-green-500 bg-green-500/10"
+                    ? "border-green-500 bg-[#22c55e]/10"
                     : showIncorrect
                       ? "border-red-500 bg-red-500/10"
                       : isSelected
@@ -181,7 +181,7 @@ export default function MicroQuiz({
                 >
                   {option}
                   {showCorrect && (
-                    <CheckCircle2 className="ml-2 inline h-4 w-4 text-green-600" />
+                    <CheckCircle2 className="ml-2 inline h-4 w-4 text-[#22c55e]" />
                   )}
                   {showIncorrect && (
                     <XCircle className="ml-2 inline h-4 w-4 text-red-600" />
@@ -195,11 +195,11 @@ export default function MicroQuiz({
         {/* Explanation (shown after submission) */}
         {isSubmitted && explanation && (
           <div className="rounded-lg border border-blue-200 bg-blue-50/50 p-4 dark:border-blue-800 dark:bg-blue-900/20">
-            <div className="mb-2 flex items-center gap-2 text-sm font-medium text-blue-700 dark:text-blue-300">
+            <div className="mb-2 flex items-center gap-2 text-sm font-medium text-blue-700 dark:text-primary">
               <AlertCircle className="h-4 w-4" />
               Explanation
             </div>
-            <p className="text-sm text-blue-600 dark:text-blue-400">{explanation}</p>
+            <p className="text-sm text-blue-600 dark:text-primary">{explanation}</p>
           </div>
         )}
 

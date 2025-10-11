@@ -9,7 +9,7 @@ export const moduleColumnsStatic: ColumnDef<ModuleListRow>[] = [
     accessorKey: "title",
     header: "Title",
     cell: ({ row }) => (
-      <Link href={`/modules/${row.original.slug}`} className="text-cyan-300 hover:underline">
+      <Link href={`/modules/${row.original.slug}`} className="text-primary hover:underline">
         {row.original.title}
       </Link>
     ),

@@ -50,22 +50,22 @@ export function ModuleViewer({
   const getDomainColors = (domain: string) => {
     const colors = {
       ASKING_QUESTIONS: {
-        color: "text-green-400",
+        color: "text-[#22c55e]",
         bgColor: "bg-green-900/20",
         borderColor: "border-green-400",
       },
       REFINING_QUESTIONS: {
-        color: "text-blue-400",
+        color: "text-primary",
         bgColor: "bg-blue-900/20",
         borderColor: "border-blue-400",
       },
       TAKING_ACTION: {
-        color: "text-cyan-400",
-        bgColor: "bg-cyan-900/20",
+        color: "text-primary",
+        bgColor: "bg-primary/20",
         borderColor: "border-cyan-400",
       },
       NAVIGATION_MODULES: {
-        color: "text-yellow-400",
+        color: "text-[#f97316]",
         bgColor: "bg-yellow-900/20",
         borderColor: "border-yellow-400",
       },
@@ -123,8 +123,8 @@ export function ModuleViewer({
             <div className="flex items-center gap-4">
               <div className="text-4xl">{module.icon}</div>
               <div>
-                <CardTitle className="text-2xl text-white">{module.title}</CardTitle>
-                <p className="mt-2 text-gray-300">{module.description}</p>
+                <CardTitle className="text-2xl text-foreground">{module.title}</CardTitle>
+                <p className="mt-2 text-muted-foreground">{module.description}</p>
                 <div className="mt-3 flex items-center gap-4">
                   <Badge variant="outline" className={cn("border-white/20", domainColors.color)}>
                     <Clock className="mr-1 h-3 w-3" />
@@ -142,8 +142,8 @@ export function ModuleViewer({
               </div>
             </div>
             <div className="text-right">
-              <div className="text-3xl font-bold text-white">{overallProgress}%</div>
-              <div className="text-sm text-gray-300">Complete</div>
+              <div className="text-3xl font-bold text-foreground">{overallProgress}%</div>
+              <div className="text-sm text-muted-foreground">Complete</div>
             </div>
           </div>
         </CardHeader>
@@ -152,19 +152,19 @@ export function ModuleViewer({
             <Progress value={overallProgress} className="h-3" />
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <div className="mb-1 text-sm text-gray-300">Objectives</div>
+                <div className="mb-1 text-sm text-muted-foreground">Objectives</div>
                 <div className="flex items-center gap-2">
                   <Progress value={objectiveProgress} className="h-2 flex-1" />
-                  <span className="text-sm text-white">
+                  <span className="text-sm text-foreground">
                     {completedObjectives.size}/{module.objectives.length}
                   </span>
                 </div>
               </div>
               <div>
-                <div className="mb-1 text-sm text-gray-300">Sections</div>
+                <div className="mb-1 text-sm text-muted-foreground">Sections</div>
                 <div className="flex items-center gap-2">
                   <Progress value={sectionProgress} className="h-2 flex-1" />
-                  <span className="text-sm text-white">
+                  <span className="text-sm text-foreground">
                     {completedSections.size}/{module.sections.length}
                   </span>
                 </div>
@@ -177,18 +177,18 @@ export function ModuleViewer({
       {/* Module Content Tabs */}
       <Tabs defaultValue="content" className="space-y-6">
         <TabsList className="glass grid w-full grid-cols-3 border border-white/10">
-          <TabsTrigger value="content" className="text-white data-[state=active]:bg-tanium-accent">
+          <TabsTrigger value="content" className="text-foreground data-[state=active]:bg-tanium-accent">
             <BookOpen className="mr-2 h-4 w-4" />
             Content
           </TabsTrigger>
           <TabsTrigger
             value="objectives"
-            className="text-white data-[state=active]:bg-tanium-accent"
+            className="text-foreground data-[state=active]:bg-tanium-accent"
           >
             <Target className="mr-2 h-4 w-4" />
             Objectives
           </TabsTrigger>
-          <TabsTrigger value="progress" className="text-white data-[state=active]:bg-tanium-accent">
+          <TabsTrigger value="progress" className="text-foreground data-[state=active]:bg-tanium-accent">
             <Trophy className="mr-2 h-4 w-4" />
             Progress
           </TabsTrigger>
@@ -199,11 +199,11 @@ export function ModuleViewer({
           <Card className="glass border-white/10">
             <CardHeader>
               <div className="flex items-center justify-between">
-                <CardTitle className="flex items-center gap-2 text-white">
+                <CardTitle className="flex items-center gap-2 text-foreground">
                   <span className="text-tanium-accent">Section {currentSection + 1}:</span>
                   {currentSectionData.title}
                 </CardTitle>
-                <Badge variant="outline" className="border-white/20 text-white">
+                <Badge variant="outline" className="border-white/20 text-foreground">
                   <Clock className="mr-1 h-3 w-3" />
                   {currentSectionData.estimatedTime} min
                 </Badge>
@@ -212,7 +212,7 @@ export function ModuleViewer({
             <CardContent className="space-y-6">
               {/* Section Content */}
               <div className="prose prose-invert max-w-none">
-                <p className="text-lg leading-relaxed text-gray-300">
+                <p className="text-lg leading-relaxed text-muted-foreground">
                   {currentSectionData.content}
                 </p>
               </div>
@@ -223,20 +223,20 @@ export function ModuleViewer({
                   variant="outline"
                   onClick={prevSection}
                   disabled={isFirstSection}
-                  className="border-white/20 text-white hover:bg-white/10 disabled:opacity-50"
+                  className="border-white/20 text-foreground hover:bg-white/10 disabled:opacity-50"
                 >
                   <ArrowLeft className="mr-2 h-4 w-4" />
                   Previous Section
                 </Button>
 
                 <div className="text-center">
-                  <div className="mb-2 text-sm text-gray-400">
+                  <div className="mb-2 text-sm text-muted-foreground">
                     Section {currentSection + 1} of {module.sections.length}
                   </div>
                   <Button
                     onClick={() => handleSectionComplete(currentSectionData.id)}
                     disabled={completedSections.has(currentSectionData.id)}
-                    className="bg-green-600 text-white hover:bg-green-700 disabled:bg-green-800"
+                    className="bg-[#22c55e] text-foreground hover:bg-green-700 disabled:bg-green-800"
                   >
                     {completedSections.has(currentSectionData.id) ? (
                       <>
@@ -267,7 +267,7 @@ export function ModuleViewer({
           {/* Section Overview */}
           <Card className="glass border-white/10">
             <CardHeader>
-              <CardTitle className="text-white">All Sections</CardTitle>
+              <CardTitle className="text-foreground">All Sections</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="grid gap-3">
@@ -287,15 +287,15 @@ export function ModuleViewer({
                       <div className="flex items-center gap-2">
                         <span className="font-medium text-tanium-accent">{index + 1}</span>
                         {completedSections.has(section.id) && (
-                          <CheckCircle className="h-4 w-4 text-green-400" />
+                          <CheckCircle className="h-4 w-4 text-[#22c55e]" />
                         )}
                       </div>
                       <div>
-                        <div className="font-medium text-white">{section.title}</div>
-                        <div className="text-sm text-gray-400">{section.content}</div>
+                        <div className="font-medium text-foreground">{section.title}</div>
+                        <div className="text-sm text-muted-foreground">{section.content}</div>
                       </div>
                     </div>
-                    <Badge variant="outline" className="border-white/20 text-white">
+                    <Badge variant="outline" className="border-white/20 text-foreground">
                       {section.estimatedTime}m
                     </Badge>
                   </div>
@@ -309,8 +309,8 @@ export function ModuleViewer({
         <TabsContent value="objectives" className="space-y-6">
           <Card className="glass border-white/10">
             <CardHeader>
-              <CardTitle className="text-white">Learning Objectives</CardTitle>
-              <p className="text-gray-300">
+              <CardTitle className="text-foreground">Learning Objectives</CardTitle>
+              <p className="text-muted-foreground">
                 Track your progress through the key learning objectives for this module.
               </p>
             </CardHeader>
@@ -347,7 +347,7 @@ export function ModuleViewer({
                     <div className="flex-1">
                       <p
                         className={cn(
-                          "leading-relaxed text-white",
+                          "leading-relaxed text-foreground",
                           completedObjectives.has(objective.id) && "line-through opacity-60"
                         )}
                       >
@@ -367,22 +367,22 @@ export function ModuleViewer({
             {/* Progress Stats */}
             <Card className="glass border-white/10">
               <CardHeader>
-                <CardTitle className="text-white">Progress Statistics</CardTitle>
+                <CardTitle className="text-foreground">Progress Statistics</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="space-y-3">
                   <div>
                     <div className="mb-1 flex justify-between text-sm">
-                      <span className="text-gray-300">Overall Progress</span>
-                      <span className="text-white">{overallProgress}%</span>
+                      <span className="text-muted-foreground">Overall Progress</span>
+                      <span className="text-foreground">{overallProgress}%</span>
                     </div>
                     <Progress value={overallProgress} className="h-2" />
                   </div>
 
                   <div>
                     <div className="mb-1 flex justify-between text-sm">
-                      <span className="text-gray-300">Objectives Completed</span>
-                      <span className="text-white">
+                      <span className="text-muted-foreground">Objectives Completed</span>
+                      <span className="text-foreground">
                         {completedObjectives.size}/{module.objectives.length}
                       </span>
                     </div>
@@ -391,8 +391,8 @@ export function ModuleViewer({
 
                   <div>
                     <div className="mb-1 flex justify-between text-sm">
-                      <span className="text-gray-300">Sections Completed</span>
-                      <span className="text-white">
+                      <span className="text-muted-foreground">Sections Completed</span>
+                      <span className="text-foreground">
                         {completedSections.size}/{module.sections.length}
                       </span>
                     </div>
@@ -404,7 +404,7 @@ export function ModuleViewer({
                 {overallProgress === 100 && (
                   <Button
                     onClick={onModuleComplete}
-                    className="w-full bg-green-600 text-white hover:bg-green-700"
+                    className="w-full bg-[#22c55e] text-foreground hover:bg-green-700"
                   >
                     <Trophy className="mr-2 h-4 w-4" />
                     Complete Module
@@ -416,44 +416,44 @@ export function ModuleViewer({
             {/* Module Info */}
             <Card className="glass border-white/10">
               <CardHeader>
-                <CardTitle className="text-white">Module Information</CardTitle>
+                <CardTitle className="text-foreground">Module Information</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="space-y-3">
                   <div className="flex justify-between">
-                    <span className="text-gray-300">Domain</span>
+                    <span className="text-muted-foreground">Domain</span>
                     <Badge className={cn("text-xs", domainColors.color, domainColors.bgColor)}>
                       {module.domain.replace("_", " ")}
                     </Badge>
                   </div>
 
                   <div className="flex justify-between">
-                    <span className="text-gray-300">Difficulty</span>
-                    <Badge variant="outline" className="border-white/20 text-xs text-white">
+                    <span className="text-muted-foreground">Difficulty</span>
+                    <Badge variant="outline" className="border-white/20 text-xs text-foreground">
                       {module.difficulty}
                     </Badge>
                   </div>
 
                   <div className="flex justify-between">
-                    <span className="text-gray-300">Exam Weight</span>
-                    <span className="text-white">{module.examWeight}%</span>
+                    <span className="text-muted-foreground">Exam Weight</span>
+                    <span className="text-foreground">{module.examWeight}%</span>
                   </div>
 
                   <div className="flex justify-between">
-                    <span className="text-gray-300">Total Time</span>
-                    <span className="text-white">{module.totalMinutes} minutes</span>
+                    <span className="text-muted-foreground">Total Time</span>
+                    <span className="text-foreground">{module.totalMinutes} minutes</span>
                   </div>
                 </div>
 
                 {/* Tags */}
                 <div className="border-t border-white/10 pt-4">
-                  <div className="mb-2 text-sm text-gray-300">Tags</div>
+                  <div className="mb-2 text-sm text-muted-foreground">Tags</div>
                   <div className="flex flex-wrap gap-2">
                     {module.tags.map((tag) => (
                       <Badge
                         key={tag}
                         variant="outline"
-                        className="border-white/20 text-xs text-white"
+                        className="border-white/20 text-xs text-foreground"
                       >
                         {tag}
                       </Badge>

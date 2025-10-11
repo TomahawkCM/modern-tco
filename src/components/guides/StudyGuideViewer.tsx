@@ -168,7 +168,7 @@ export function StudyGuideViewer({
                     >
                       <div className="flex w-full items-start">
                         {isRead ? (
-                          <CheckCircle className="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-green-600" />
+                          <CheckCircle className="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-[#22c55e]" />
                         ) : (
                           <Circle className="mr-2 mt-0.5 h-4 w-4 flex-shrink-0" />
                         )}

@@ -24,9 +24,9 @@ export function AdminGuard({ children }: { children: ReactNode }) {
       <div className="mx-auto max-w-2xl p-6">
         <Card className="glass border-white/10">
           <CardHeader>
-            <CardTitle className="text-white">Sign in required</CardTitle>
+            <CardTitle className="text-foreground">Sign in required</CardTitle>
           </CardHeader>
-          <CardContent className="flex items-center justify-between text-gray-200">
+          <CardContent className="flex items-center justify-between text-muted-foreground">
             <div>Sign in with an admin account to access this page.</div>
             <Button onClick={() => router.push("/auth/signin")}>Sign in</Button>
           </CardContent>
@@ -40,9 +40,9 @@ export function AdminGuard({ children }: { children: ReactNode }) {
       <div className="mx-auto max-w-2xl p-6">
         <Card className="glass border-white/10">
           <CardHeader>
-            <CardTitle className="text-white">Access denied</CardTitle>
+            <CardTitle className="text-foreground">Access denied</CardTitle>
           </CardHeader>
-          <CardContent className="text-gray-200">
+          <CardContent className="text-muted-foreground">
             Your account ({email ?? "unknown"}) is not authorized to access admin tools.
           </CardContent>
         </Card>

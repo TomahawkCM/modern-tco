@@ -89,7 +89,7 @@ export default function SettingsPage() {
         <div className="flex items-center justify-center py-20">
           <div className="text-center">
             <div className="mx-auto mb-4 h-8 w-8 animate-spin rounded-full border-b-2 border-white"></div>
-            <p className="text-white/70">Loading settings...</p>
+            <p className="text-foreground/70">Loading settings...</p>
           </div>
         </div>
     );
@@ -115,13 +115,13 @@ export default function SettingsPage() {
         {/* Accessibility */}
         <Card className="glass border-white/10">
           <CardHeader>
-            <CardTitle className="text-white">Accessibility</CardTitle>
+            <CardTitle className="text-foreground">Accessibility</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="flex items-center justify-between">
               <div>
-                <div className="font-medium text-white">Large text</div>
-                <div className="text-sm text-gray-300">Increase base font size for better readability</div>
+                <div className="font-medium text-foreground">Large text</div>
+                <div className="text-sm text-muted-foreground">Increase base font size for better readability</div>
               </div>
               <Switch
                 checked={largeText}
@@ -131,8 +131,8 @@ export default function SettingsPage() {
             </div>
             <div className="flex items-center justify-between">
               <div>
-                <div className="font-medium text-white">High contrast</div>
-                <div className="text-sm text-gray-300">Boost contrast for low-vision accessibility</div>
+                <div className="font-medium text-foreground">High contrast</div>
+                <div className="text-sm text-muted-foreground">Boost contrast for low-vision accessibility</div>
               </div>
               <Switch
                 checked={highContrast}
@@ -144,8 +144,8 @@ export default function SettingsPage() {
         </Card>
         {/* Header */}
         <div className="text-center">
-          <h1 className="mb-4 text-4xl font-bold text-white">Settings</h1>
-          <p className="mb-6 text-xl text-gray-200">
+          <h1 className="mb-4 text-4xl font-bold text-foreground">Settings</h1>
+          <p className="mb-6 text-xl text-muted-foreground">
             Customize your study experience and preferences
           </p>
         </div>
@@ -153,7 +153,7 @@ export default function SettingsPage() {
         {/* Save status */}
         {saveStatus === "saved" && (
           <Alert className="border-green-200 bg-green-50/10 dark:border-green-800 dark:bg-green-900/20">
-            <CheckCircle className="h-4 w-4 text-green-400" />
+            <CheckCircle className="h-4 w-4 text-[#22c55e]" />
             <AlertDescription className="text-green-200">
               Settings are automatically saved!
             </AlertDescription>
@@ -163,7 +163,7 @@ export default function SettingsPage() {
         {state.isLoading && (
           <Alert className="border-blue-200 bg-blue-50/10 dark:border-blue-800 dark:bg-blue-900/20">
             <div className="h-4 w-4 animate-spin rounded-full border-b-2 border-blue-400" />
-            <AlertDescription className="text-blue-200">Loading settings...</AlertDescription>
+            <AlertDescription className="text-muted-foreground">Loading settings...</AlertDescription>
           </Alert>
         )}
 
@@ -171,27 +171,27 @@ export default function SettingsPage() {
           <TabsList className="glass grid w-full grid-cols-5 border border-white/10">
             <TabsTrigger
               value="general"
-              className="text-white data-[state=active]:bg-tanium-accent"
+              className="text-foreground data-[state=active]:bg-tanium-accent"
             >
               <User className="mr-2 h-4 w-4" />
               General
             </TabsTrigger>
-            <TabsTrigger value="study" className="text-white data-[state=active]:bg-tanium-accent">
+            <TabsTrigger value="study" className="text-foreground data-[state=active]:bg-tanium-accent">
               <BookOpen className="mr-2 h-4 w-4" />
               Study
             </TabsTrigger>
-            <TabsTrigger value="exam" className="text-white data-[state=active]:bg-tanium-accent">
+            <TabsTrigger value="exam" className="text-foreground data-[state=active]:bg-tanium-accent">
               <Clock className="mr-2 h-4 w-4" />
               Exam
             </TabsTrigger>
             <TabsTrigger
               value="accessibility"
-              className="text-white data-[state=active]:bg-tanium-accent"
+              className="text-foreground data-[state=active]:bg-tanium-accent"
             >
               <Shield className="mr-2 h-4 w-4" />
               Accessibility
             </TabsTrigger>
-            <TabsTrigger value="data" className="text-white data-[state=active]:bg-tanium-accent">
+            <TabsTrigger value="data" className="text-foreground data-[state=active]:bg-tanium-accent">
               <Database className="mr-2 h-4 w-4" />
               Data
             </TabsTrigger>
@@ -200,21 +200,21 @@ export default function SettingsPage() {
           <TabsContent value="general" className="space-y-6">
             <Card className="glass border-white/10">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-white">
+                <CardTitle className="flex items-center gap-2 text-foreground">
                   <Palette className="h-5 w-5" />
                   Appearance
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-6">
                 <div className="space-y-2">
-                  <Label className="text-white">Theme</Label>
+                  <Label className="text-foreground">Theme</Label>
                   <Select
                     value={state.settings.theme}
                     onValueChange={(value) =>
                       updateSetting("theme", value as "dark" | "light" | "system")
                     }
                   >
-                    <SelectTrigger className="glass border-white/20 text-white">
+                    <SelectTrigger className="glass border-white/20 text-foreground">
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent className="glass border-white/20">
@@ -244,7 +244,7 @@ export default function SettingsPage() {
 
             <Card className="glass border-white/10">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-white">
+                <CardTitle className="flex items-center gap-2 text-foreground">
                   <Bell className="h-5 w-5" />
                   Notifications
                 </CardTitle>
@@ -252,8 +252,8 @@ export default function SettingsPage() {
               <CardContent className="space-y-6">
                 <div className="flex items-center justify-between">
                   <div className="space-y-0.5">
-                    <Label className="text-white">Enable Notifications</Label>
-                    <div className="text-sm text-gray-400">
+                    <Label className="text-foreground">Enable Notifications</Label>
+                    <div className="text-sm text-muted-foreground">
                       Get notified about study reminders and achievements
                     </div>
                   </div>
@@ -265,8 +265,8 @@ export default function SettingsPage() {
 
                 <div className="flex items-center justify-between">
                   <div className="space-y-0.5">
-                    <Label className="text-white">Sound Effects</Label>
-                    <div className="text-sm text-gray-400">
+                    <Label className="text-foreground">Sound Effects</Label>
+                    <div className="text-sm text-muted-foreground">
                       Play sounds for interactions and feedback
                     </div>
                   </div>
@@ -282,21 +282,21 @@ export default function SettingsPage() {
           <TabsContent value="study" className="space-y-6">
             <Card className="glass border-white/10">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-white">
+                <CardTitle className="flex items-center gap-2 text-foreground">
                   <BookOpen className="h-5 w-5" />
                   Practice Settings
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-6">
                 <div className="space-y-2">
-                  <Label className="text-white">Practice Mode</Label>
+                  <Label className="text-foreground">Practice Mode</Label>
                   <Select
                     value={state.settings.practiceMode}
                     onValueChange={(value) =>
                       updateSetting("practiceMode", value as "adaptive" | "random" | "sequential")
                     }
                   >
-                    <SelectTrigger className="glass border-white/20 text-white">
+                    <SelectTrigger className="glass border-white/20 text-foreground">
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent className="glass border-white/20">
@@ -310,8 +310,8 @@ export default function SettingsPage() {
 
                 <div className="flex items-center justify-between">
                   <div className="space-y-0.5">
-                    <Label className="text-white">Show Explanations</Label>
-                    <div className="text-sm text-gray-400">
+                    <Label className="text-foreground">Show Explanations</Label>
+                    <div className="text-sm text-muted-foreground">
                       Display explanations after answering questions
                     </div>
                   </div>
@@ -323,8 +323,8 @@ export default function SettingsPage() {
 
                 <div className="flex items-center justify-between">
                   <div className="space-y-0.5">
-                    <Label className="text-white">Auto-Advance</Label>
-                    <div className="text-sm text-gray-400">
+                    <Label className="text-foreground">Auto-Advance</Label>
+                    <div className="text-sm text-muted-foreground">
                       Automatically move to next question after answering
                     </div>
                   </div>
@@ -336,8 +336,8 @@ export default function SettingsPage() {
 
                 <div className="flex items-center justify-between">
                   <div className="space-y-0.5">
-                    <Label className="text-white">Study Reminders</Label>
-                    <div className="text-sm text-gray-400">
+                    <Label className="text-foreground">Study Reminders</Label>
+                    <div className="text-sm text-muted-foreground">
                       Get daily reminders to maintain your study streak
                     </div>
                   </div>
@@ -353,7 +353,7 @@ export default function SettingsPage() {
           <TabsContent value="exam" className="space-y-6">
             <Card className="glass border-white/10">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-white">
+                <CardTitle className="flex items-center gap-2 text-foreground">
                   <Clock className="h-5 w-5" />
                   Exam Simulation
                 </CardTitle>
@@ -361,8 +361,8 @@ export default function SettingsPage() {
               <CardContent className="space-y-6">
                 <div className="flex items-center justify-between">
                   <div className="space-y-0.5">
-                    <Label className="text-white">Timer Visible</Label>
-                    <div className="text-sm text-gray-400">
+                    <Label className="text-foreground">Timer Visible</Label>
+                    <div className="text-sm text-muted-foreground">
                       Show countdown timer during practice
                     </div>
                   </div>
@@ -374,8 +374,8 @@ export default function SettingsPage() {
 
                 <div className="flex items-center justify-between">
                   <div className="space-y-0.5">
-                    <Label className="text-white">Strict Timing</Label>
-                    <div className="text-sm text-gray-400">Enforce time limits in mock exams</div>
+                    <Label className="text-foreground">Strict Timing</Label>
+                    <div className="text-sm text-muted-foreground">Enforce time limits in mock exams</div>
                   </div>
                   <Switch
                     checked={state.settings.strictTiming}
@@ -385,8 +385,8 @@ export default function SettingsPage() {
 
                 <div className="flex items-center justify-between">
                   <div className="space-y-0.5">
-                    <Label className="text-white">Randomize Questions</Label>
-                    <div className="text-sm text-gray-400">Present questions in random order</div>
+                    <Label className="text-foreground">Randomize Questions</Label>
+                    <div className="text-sm text-muted-foreground">Present questions in random order</div>
                   </div>
                   <Switch
                     checked={state.settings.randomizeQuestions}
@@ -396,8 +396,8 @@ export default function SettingsPage() {
 
                 <div className="flex items-center justify-between">
                   <div className="space-y-0.5">
-                    <Label className="text-white">Randomize Answers</Label>
-                    <div className="text-sm text-gray-400">Shuffle answer choices</div>
+                    <Label className="text-foreground">Randomize Answers</Label>
+                    <div className="text-sm text-muted-foreground">Shuffle answer choices</div>
                   </div>
                   <Switch
                     checked={state.settings.randomizeAnswers}
@@ -411,7 +411,7 @@ export default function SettingsPage() {
           <TabsContent value="accessibility" className="space-y-6">
             <Card className="glass border-white/10">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-white">
+                <CardTitle className="flex items-center gap-2 text-foreground">
                   <Shield className="h-5 w-5" />
                   Accessibility Options
                 </CardTitle>
@@ -419,8 +419,8 @@ export default function SettingsPage() {
               <CardContent className="space-y-6">
                 <div className="flex items-center justify-between">
                   <div className="space-y-0.5">
-                    <Label className="text-white">High Contrast</Label>
-                    <div className="text-sm text-gray-400">
+                    <Label className="text-foreground">High Contrast</Label>
+                    <div className="text-sm text-muted-foreground">
                       Increase contrast for better visibility
                     </div>
                   </div>
@@ -432,8 +432,8 @@ export default function SettingsPage() {
 
                 <div className="flex items-center justify-between">
                   <div className="space-y-0.5">
-                    <Label className="text-white">Large Text</Label>
-                    <div className="text-sm text-gray-400">
+                    <Label className="text-foreground">Large Text</Label>
+                    <div className="text-sm text-muted-foreground">
                       Increase font size for better readability
                     </div>
                   </div>
@@ -445,8 +445,8 @@ export default function SettingsPage() {
 
                 <div className="flex items-center justify-between">
                   <div className="space-y-0.5">
-                    <Label className="text-white">Screen Reader Support</Label>
-                    <div className="text-sm text-gray-400">Enhanced support for screen readers</div>
+                    <Label className="text-foreground">Screen Reader Support</Label>
+                    <div className="text-sm text-muted-foreground">Enhanced support for screen readers</div>
                   </div>
                   <Switch
                     checked={state.settings.screenReader}
@@ -456,8 +456,8 @@ export default function SettingsPage() {
 
                 <div className="flex items-center justify-between">
                   <div className="space-y-0.5">
-                    <Label className="text-white">Keyboard Navigation</Label>
-                    <div className="text-sm text-gray-400">Enable full keyboard navigation</div>
+                    <Label className="text-foreground">Keyboard Navigation</Label>
+                    <div className="text-sm text-muted-foreground">Enable full keyboard navigation</div>
                   </div>
                   <Switch
                     checked={state.settings.keyboardNav}
@@ -471,7 +471,7 @@ export default function SettingsPage() {
           <TabsContent value="data" className="space-y-6">
             <Card className="glass border-white/10">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-white">
+                <CardTitle className="flex items-center gap-2 text-foreground">
                   <Database className="h-5 w-5" />
                   Data & Privacy
                 </CardTitle>
@@ -479,8 +479,8 @@ export default function SettingsPage() {
               <CardContent className="space-y-6">
                 <div className="flex items-center justify-between">
                   <div className="space-y-0.5">
-                    <Label className="text-white">Track Progress</Label>
-                    <div className="text-sm text-gray-400">Store your study progress locally</div>
+                    <Label className="text-foreground">Track Progress</Label>
+                    <div className="text-sm text-muted-foreground">Store your study progress locally</div>
                   </div>
                   <Switch
                     checked={state.settings.trackProgress}
@@ -490,8 +490,8 @@ export default function SettingsPage() {
 
                 <div className="flex items-center justify-between">
                   <div className="space-y-0.5">
-                    <Label className="text-white">Detailed Statistics</Label>
-                    <div className="text-sm text-gray-400">
+                    <Label className="text-foreground">Detailed Statistics</Label>
+                    <div className="text-sm text-muted-foreground">
                       Collect detailed performance analytics
                     </div>
                   </div>
@@ -504,12 +504,12 @@ export default function SettingsPage() {
                 <Separator className="bg-white/10" />
 
                 <div className="space-y-4">
-                  <h3 className="font-medium text-white">Data Management</h3>
+                  <h3 className="font-medium text-foreground">Data Management</h3>
                   <div className="grid gap-3 md:grid-cols-2">
                     <Button
                       variant="outline"
                       onClick={exportSettings}
-                      className="border-white/20 text-white hover:bg-white/10"
+                      className="border-white/20 text-foreground hover:bg-white/10"
                     >
                       <Download className="mr-2 h-4 w-4" />
                       Export Data
@@ -517,7 +517,7 @@ export default function SettingsPage() {
                     <Button
                       variant="outline"
                       disabled
-                      className="border-white/20 text-white hover:bg-white/10"
+                      className="border-white/20 text-foreground hover:bg-white/10"
                     >
                       <Upload className="mr-2 h-4 w-4" />
                       Import Data
@@ -527,9 +527,9 @@ export default function SettingsPage() {
                   <Separator className="bg-white/10" />
 
                   <div className="space-y-4">
-                    <h3 className="font-medium text-white">Danger Zone</h3>
+                    <h3 className="font-medium text-foreground">Danger Zone</h3>
                     <Alert className="border-yellow-200 bg-yellow-50/10">
-                      <AlertTriangle className="h-4 w-4 text-yellow-400" />
+                      <AlertTriangle className="h-4 w-4 text-[#f97316]" />
                       <AlertDescription>
                         Resetting progress will permanently delete all your study data, including module progress, quiz scores, and practice history.
                       </AlertDescription>
@@ -554,7 +554,7 @@ export default function SettingsPage() {
           <Button
             variant="outline"
             onClick={handleReset}
-            className="border-white/20 text-white hover:bg-white/10"
+            className="border-white/20 text-foreground hover:bg-white/10"
           >
             <RotateCcw className="mr-2 h-4 w-4" />
             Reset to Defaults
@@ -565,7 +565,7 @@ export default function SettingsPage() {
             disabled={saveStatus === "saving"}
             className={cn(
               "bg-tanium-accent hover:bg-blue-600",
-              saveStatus === "saved" && "bg-green-600 hover:bg-green-700"
+              saveStatus === "saved" && "bg-[#22c55e] hover:bg-green-700"
             )}
           >
             {saveStatus === "saving" && (

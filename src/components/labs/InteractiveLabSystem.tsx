@@ -274,8 +274,8 @@ export function InteractiveLabSystem({ labId, onComplete }: InteractiveLabSystem
     return (
       <div className="space-y-6">
         <div className="text-center">
-          <h2 className="mb-4 text-3xl font-bold text-white">Interactive Lab System</h2>
-          <p className="mb-8 text-gray-300">
+          <h2 className="mb-4 text-3xl font-bold text-foreground">Interactive Lab System</h2>
+          <p className="mb-8 text-muted-foreground">
             Practice real Tanium procedures with step-by-step guided exercises
           </p>
         </div>
@@ -289,27 +289,27 @@ export function InteractiveLabSystem({ labId, onComplete }: InteractiveLabSystem
               <CardHeader>
                 <div className="flex items-start justify-between">
                   <div>
-                    <CardTitle className="text-lg text-white">{lab.title}</CardTitle>
-                    <p className="mt-1 text-sm text-gray-400">{lab.domain}</p>
+                    <CardTitle className="text-lg text-foreground">{lab.title}</CardTitle>
+                    <p className="mt-1 text-sm text-muted-foreground">{lab.domain}</p>
                   </div>
                   <Badge
                     variant="outline"
                     className={
                       lab.difficulty === "Beginner"
-                        ? "border-green-500 text-green-400"
+                        ? "border-green-500 text-[#22c55e]"
                         : lab.difficulty === "Intermediate"
-                          ? "border-yellow-500 text-yellow-400"
+                          ? "border-yellow-500 text-[#f97316]"
                           : "border-red-500 text-red-400"
                     }
                   >
                     {lab.difficulty}
                   </Badge>
                 </div>
-                <p className="mt-2 text-sm text-gray-300">{lab.description}</p>
+                <p className="mt-2 text-sm text-muted-foreground">{lab.description}</p>
               </CardHeader>
               <CardContent>
                 <div className="mb-4 flex items-center justify-between">
-                  <div className="flex items-center space-x-4 text-sm text-gray-400">
+                  <div className="flex items-center space-x-4 text-sm text-muted-foreground">
                     <div className="flex items-center space-x-1">
                       <Clock className="h-4 w-4" />
                       <span>{lab.estimatedTime} min</span>
@@ -343,13 +343,13 @@ export function InteractiveLabSystem({ labId, onComplete }: InteractiveLabSystem
       {/* Lab Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-2xl font-bold text-white">{selectedLab.title}</h2>
-          <p className="text-gray-400">{selectedLab.domain}</p>
+          <h2 className="text-2xl font-bold text-foreground">{selectedLab.title}</h2>
+          <p className="text-muted-foreground">{selectedLab.domain}</p>
         </div>
         <div className="flex items-center space-x-4">
           <div className="text-right">
-            <div className="text-sm text-gray-400">Elapsed Time</div>
-            <div className="font-mono text-lg text-white">{formatTime(elapsedTime)}</div>
+            <div className="text-sm text-muted-foreground">Elapsed Time</div>
+            <div className="font-mono text-lg text-foreground">{formatTime(elapsedTime)}</div>
           </div>
           <Button variant="outline" size="sm" onClick={resetLab}>
             <RotateCcw className="h-4 w-4" />
@@ -360,8 +360,8 @@ export function InteractiveLabSystem({ labId, onComplete }: InteractiveLabSystem
       {/* Progress Bar */}
       <div className="space-y-2">
         <div className="flex justify-between text-sm">
-          <span className="text-gray-400">Progress</span>
-          <span className="text-white">
+          <span className="text-muted-foreground">Progress</span>
+          <span className="text-foreground">
             {completedSteps.size}/{selectedLab.steps.length} steps
           </span>
         </div>
@@ -370,11 +370,11 @@ export function InteractiveLabSystem({ labId, onComplete }: InteractiveLabSystem
 
       {isCompleted ? (
         // Completion Screen
-        <Card className="glass border-green-500/50 bg-green-500/10">
+        <Card className="glass border-green-500/50 bg-[#22c55e]/10">
           <CardContent className="p-8 text-center">
-            <Trophy className="mx-auto mb-4 h-16 w-16 text-yellow-400" />
-            <h3 className="mb-2 text-2xl font-bold text-white">Lab Completed!</h3>
-            <p className="mb-4 text-gray-300">
+            <Trophy className="mx-auto mb-4 h-16 w-16 text-[#f97316]" />
+            <h3 className="mb-2 text-2xl font-bold text-foreground">Lab Completed!</h3>
+            <p className="mb-4 text-muted-foreground">
               You successfully completed {selectedLab.title} in {formatTime(elapsedTime)}
             </p>
             <div className="flex justify-center space-x-4">
@@ -391,7 +391,7 @@ export function InteractiveLabSystem({ labId, onComplete }: InteractiveLabSystem
           {/* Instructions Panel */}
           <Card className="glass border-white/10">
             <CardHeader>
-              <CardTitle className="flex items-center text-white">
+              <CardTitle className="flex items-center text-foreground">
                 <Terminal className="mr-2 h-5 w-5" />
                 Step {currentStep + 1}: {currentStepData.title}
               </CardTitle>
@@ -399,14 +399,14 @@ export function InteractiveLabSystem({ labId, onComplete }: InteractiveLabSystem
             <CardContent className="space-y-4">
               <Alert>
                 <Code className="h-4 w-4" />
-                <AlertDescription className="text-gray-300">
+                <AlertDescription className="text-muted-foreground">
                   {currentStepData.instruction}
                 </AlertDescription>
               </Alert>
 
               <div className="space-y-2">
-                <h4 className="font-semibold text-white">Expected Result:</h4>
-                <p className="rounded bg-gray-800/50 p-3 text-sm text-gray-300">
+                <h4 className="font-semibold text-foreground">Expected Result:</h4>
+                <p className="rounded bg-card/50 p-3 text-sm text-muted-foreground">
                   {currentStepData.expectedResult}
                 </p>
               </div>
@@ -414,7 +414,7 @@ export function InteractiveLabSystem({ labId, onComplete }: InteractiveLabSystem
               {currentStepData.hint && (
                 <Alert className="border-yellow-500/50">
                   <Zap className="h-4 w-4" />
-                  <AlertDescription className="text-yellow-200">
+                  <AlertDescription className="text-[#f97316]">
                     <strong>Hint:</strong> {currentStepData.hint}
                   </AlertDescription>
                 </Alert>
@@ -425,14 +425,14 @@ export function InteractiveLabSystem({ labId, onComplete }: InteractiveLabSystem
           {/* Validation Panel */}
           <Card className="glass border-white/10">
             <CardHeader>
-              <CardTitle className="text-white">Validation</CardTitle>
+              <CardTitle className="text-foreground">Validation</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               {currentStepData.validation.type === "code" && (
                 <div className="space-y-2">
-                  <label className="text-sm text-gray-400">Enter your query/command:</label>
+                  <label className="text-sm text-muted-foreground">Enter your query/command:</label>
                   <textarea
-                    className="w-full rounded border border-gray-600 bg-gray-800 p-3 font-mono text-white"
+                    className="w-full rounded border border-gray-600 bg-card p-3 font-mono text-foreground"
                     rows={3}
                     value={userInput}
                     onChange={(e) => setUserInput(e.target.value)}
@@ -445,17 +445,17 @@ export function InteractiveLabSystem({ labId, onComplete }: InteractiveLabSystem
                 <Alert
                   className={
                     validationResult.success
-                      ? "border-green-500/50 bg-green-500/10"
+                      ? "border-green-500/50 bg-[#22c55e]/10"
                       : "border-red-500/50 bg-red-500/10"
                   }
                 >
                   {validationResult.success ? (
-                    <CheckCircle className="h-4 w-4 text-green-400" />
+                    <CheckCircle className="h-4 w-4 text-[#22c55e]" />
                   ) : (
                     <XCircle className="h-4 w-4 text-red-400" />
                   )}
                   <AlertDescription
-                    className={validationResult.success ? "text-green-300" : "text-red-300"}
+                    className={validationResult.success ? "text-[#22c55e]" : "text-red-300"}
                   >
                     {validationResult.message}
                   </AlertDescription>
@@ -494,10 +494,10 @@ export function InteractiveLabSystem({ labId, onComplete }: InteractiveLabSystem
               key={step.id}
               className={`flex h-8 w-8 items-center justify-center rounded-full text-sm font-medium ${
                 completedSteps.has(step.id)
-                  ? "bg-green-500 text-white"
+                  ? "bg-[#22c55e] text-foreground"
                   : index === currentStep
-                    ? "bg-tanium-accent text-white"
-                    : "bg-gray-700 text-gray-400"
+                    ? "bg-tanium-accent text-foreground"
+                    : "bg-gray-700 text-muted-foreground"
               }`}
             >
               {completedSteps.has(step.id) ? <CheckCircle className="h-4 w-4" /> : index + 1}
@@ -508,7 +508,7 @@ export function InteractiveLabSystem({ labId, onComplete }: InteractiveLabSystem
         <Button
           variant="ghost"
           onClick={() => setSelectedLab(null)}
-          className="text-gray-400 hover:text-white"
+          className="text-muted-foreground hover:text-foreground"
         >
           Exit Lab
         </Button>

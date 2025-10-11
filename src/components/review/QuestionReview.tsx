@@ -314,7 +314,7 @@ export default function QuestionReview({ onComplete }: QuestionReviewProps) {
                     key={option.id}
                     className={`flex items-center space-x-3 p-4 rounded-lg border-2 transition-colors ${
                       showCorrect
-                        ? "border-green-500 bg-green-500/10"
+                        ? "border-green-500 bg-[#22c55e]/10"
                         : showIncorrect
                         ? "border-red-500 bg-red-500/10"
                         : isSelected
@@ -329,7 +329,7 @@ export default function QuestionReview({ onComplete }: QuestionReviewProps) {
                     >
                       {option.text}
                     </Label>
-                    {showCorrect && <Check className="h-5 w-5 text-green-500" />}
+                    {showCorrect && <Check className="h-5 w-5 text-[#22c55e]" />}
                     {showIncorrect && <X className="h-5 w-5 text-red-500" />}
                   </div>
                 );
@@ -356,7 +356,7 @@ export default function QuestionReview({ onComplete }: QuestionReviewProps) {
                 <CardContent className="pt-6">
                   <div className="flex items-start gap-3 mb-3">
                     {isCorrect ? (
-                      <div className="flex items-center gap-2 text-green-600">
+                      <div className="flex items-center gap-2 text-[#22c55e]">
                         <Check className="h-5 w-5" />
                         <span className="font-semibold">Correct!</span>
                       </div>
@@ -391,14 +391,14 @@ export default function QuestionReview({ onComplete }: QuestionReviewProps) {
                   <Button
                     onClick={() => handleRating("good")}
                     variant="outline"
-                    className="border-blue-500 hover:bg-blue-500/10"
+                    className="border-blue-500 hover:bg-primary/10"
                   >
                     Good
                   </Button>
                   <Button
                     onClick={() => handleRating("easy")}
                     variant="outline"
-                    className="border-green-500 hover:bg-green-500/10"
+                    className="border-green-500 hover:bg-[#22c55e]/10"
                   >
                     Easy
                   </Button>

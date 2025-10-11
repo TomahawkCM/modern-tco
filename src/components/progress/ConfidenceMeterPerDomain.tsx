@@ -38,26 +38,26 @@ export default function ConfidenceMeterPerDomain({
 
   // Domain colors matching DomainMasteryWheel
   const domainColors: Record<string, string> = {
-    "Asking Questions": "bg-blue-500",
+    "Asking Questions": "bg-primary",
     Fundamentals: "bg-cyan-500",
-    "Navigation and Basic Module Functions": "bg-green-500",
-    "Refining Questions & Targeting": "bg-purple-500",
+    "Navigation and Basic Module Functions": "bg-[#22c55e]",
+    "Refining Questions & Targeting": "bg-accent",
     "Report Generation and Data Export": "bg-pink-500",
     "Taking Action": "bg-orange-500",
   };
 
   const getConfidenceLevel = (confidence: number) => {
-    if (confidence >= 80) return { label: "High", color: "text-green-500" };
+    if (confidence >= 80) return { label: "High", color: "text-[#22c55e]" };
     if (confidence >= 50)
-      return { label: "Moderate", color: "text-yellow-500" };
+      return { label: "Moderate", color: "text-[#f97316]" };
     return { label: "Low", color: "text-red-500" };
   };
 
   const getConfidenceIcon = (confidence: number) => {
     if (confidence >= 80)
-      return <CheckCircle2 className="h-4 w-4 text-green-500" />;
+      return <CheckCircle2 className="h-4 w-4 text-[#22c55e]" />;
     if (confidence >= 50)
-      return <AlertCircle className="h-4 w-4 text-yellow-500" />;
+      return <AlertCircle className="h-4 w-4 text-[#f97316]" />;
     return <AlertCircle className="h-4 w-4 text-red-500" />;
   };
 
@@ -104,9 +104,9 @@ export default function ConfidenceMeterPerDomain({
         </div>
 
         {/* Info Box */}
-        <div className="mt-4 p-3 bg-blue-500/10 border border-blue-500/20 rounded-lg">
+        <div className="mt-4 p-3 bg-primary/10 border border-primary/20 rounded-lg">
           <div className="flex items-start gap-2">
-            <Info className="h-4 w-4 text-blue-500 mt-0.5 flex-shrink-0" />
+            <Info className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
             <p className="text-xs text-muted-foreground">
               Self-assessment is a powerful learning tool. Rate your confidence
               honestly to identify areas for focused study. Update as you
@@ -253,10 +253,10 @@ export default function ConfidenceMeterPerDomain({
         {/* High Confidence Domains */}
         {showRecommendations &&
           domains.filter((d) => d.confidence >= 80).length > 0 && (
-            <div className="p-3 bg-green-500/10 border border-green-500/20 rounded-lg">
+            <div className="p-3 bg-[#22c55e]/10 border border-[#22c55e]/20 rounded-lg">
               <div className="flex items-start gap-2 mb-2">
-                <CheckCircle2 className="h-4 w-4 text-green-500 mt-0.5" />
-                <p className="text-sm font-medium text-green-500">
+                <CheckCircle2 className="h-4 w-4 text-[#22c55e] mt-0.5" />
+                <p className="text-sm font-medium text-[#22c55e]">
                   Strong Areas
                 </p>
               </div>
@@ -273,13 +273,13 @@ export default function ConfidenceMeterPerDomain({
           <p className="text-xs font-medium mb-2">Confidence Scale Guide:</p>
           <div className="grid grid-cols-3 gap-2 text-xs">
             <div>
-              <p className="font-medium text-green-500">80-100% - High</p>
+              <p className="font-medium text-[#22c55e]">80-100% - High</p>
               <p className="text-muted-foreground">
                 Ready for practice exams
               </p>
             </div>
             <div>
-              <p className="font-medium text-yellow-500">50-79% - Moderate</p>
+              <p className="font-medium text-[#f97316]">50-79% - Moderate</p>
               <p className="text-muted-foreground">
                 Continue focused study
               </p>

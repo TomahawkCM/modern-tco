@@ -65,8 +65,8 @@ export function StudyPathwayGuide({ className }: StudyPathwayGuideProps) {
       description:
         "🌟 NEW FOR BEGINNERS! Build your IT foundation with endpoint management basics, terminology, and confidence-building exercises - designed for complete newcomers",
       icon: Lightbulb,
-      color: "text-cyan-400",
-      bgColor: "bg-cyan-900/20",
+      color: "text-primary",
+      bgColor: "bg-primary/20",
       borderColor: "border-cyan-400",
       estimatedTime: "2-4 hours",
       status: "available",
@@ -94,7 +94,7 @@ export function StudyPathwayGuide({ className }: StudyPathwayGuideProps) {
       description:
         "Learn essential concepts through comprehensive study modules covering all 5 TCO domains with beginner-friendly explanations and examples",
       icon: BookOpen,
-      color: "text-blue-400",
+      color: "text-primary",
       bgColor: "bg-blue-900/20",
       borderColor: "border-blue-400",
       estimatedTime: "8-12 hours",
@@ -123,7 +123,7 @@ export function StudyPathwayGuide({ className }: StudyPathwayGuideProps) {
       description:
         "Test your knowledge with guided practice questions, instant feedback, and adaptive difficulty to build confidence progressively",
       icon: Target,
-      color: "text-green-400",
+      color: "text-[#22c55e]",
       bgColor: "bg-green-900/20",
       borderColor: "border-green-400",
       estimatedTime: "4-6 hours",
@@ -151,7 +151,7 @@ export function StudyPathwayGuide({ className }: StudyPathwayGuideProps) {
       title: "Certification Readiness",
       description: "Take full-length timed mock exams to simulate real certification conditions - recommended only after mastering foundations",
       icon: GraduationCap,
-      color: "text-yellow-400",
+      color: "text-[#f97316]",
       bgColor: "bg-yellow-900/20",
       borderColor: "border-yellow-400",
       estimatedTime: "90 minutes",
@@ -181,13 +181,13 @@ export function StudyPathwayGuide({ className }: StudyPathwayGuideProps) {
   const getStatusIcon = (status: StudyPhase["status"]) => {
     switch (status) {
       case "completed":
-        return <CheckCircle className="h-5 w-5 text-green-400" />;
+        return <CheckCircle className="h-5 w-5 text-[#22c55e]" />;
       case "in_progress":
-        return <Play className="h-5 w-5 text-blue-400" />;
+        return <Play className="h-5 w-5 text-primary" />;
       case "available":
-        return <AlertCircle className="h-5 w-5 text-yellow-400" />;
+        return <AlertCircle className="h-5 w-5 text-[#f97316]" />;
       case "locked":
-        return <Clock className="h-5 w-5 text-gray-500" />;
+        return <Clock className="h-5 w-5 text-muted-foreground" />;
       default:
         return null;
     }
@@ -214,24 +214,24 @@ export function StudyPathwayGuide({ className }: StudyPathwayGuideProps) {
     if (progress >= 80)
       return {
         level: "Exam Ready",
-        color: "text-green-400",
+        color: "text-[#22c55e]",
         description: "You're well-prepared for certification!",
       };
     if (progress >= 60)
       return {
         level: "Good Progress",
-        color: "text-blue-400",
+        color: "text-primary",
         description: "Continue practicing to build confidence",
       };
     if (progress >= 40)
       return {
         level: "Building Up",
-        color: "text-yellow-400",
+        color: "text-[#f97316]",
         description: "Keep studying to strengthen your foundation",
       };
     return {
       level: "Getting Started",
-      color: "text-gray-400",
+      color: "text-muted-foreground",
       description: "Focus on completing study modules first",
     };
   };
@@ -243,7 +243,7 @@ export function StudyPathwayGuide({ className }: StudyPathwayGuideProps) {
       {/* Overall Progress Header */}
       <Card className="glass border-white/10">
         <CardHeader>
-          <CardTitle className="flex items-center gap-3 text-white">
+          <CardTitle className="flex items-center gap-3 text-foreground">
             <TrendingUp className="h-6 w-6 text-tanium-accent" />
             Your TCO Certification Journey
           </CardTitle>
@@ -251,15 +251,15 @@ export function StudyPathwayGuide({ className }: StudyPathwayGuideProps) {
         <CardContent className="space-y-4">
           <div className="flex items-center justify-between">
             <div>
-              <div className="mb-1 text-2xl font-bold text-white">
+              <div className="mb-1 text-2xl font-bold text-foreground">
                 {Math.round(overallProgress)}% Complete
               </div>
               <div className={cn("text-sm font-medium", readiness.color)}>{readiness.level}</div>
-              <div className="text-xs text-gray-400">{readiness.description}</div>
+              <div className="text-xs text-muted-foreground">{readiness.description}</div>
             </div>
             <div className="text-right">
-              <Trophy className="mb-2 h-8 w-8 text-yellow-400" />
-              <div className="text-xs text-gray-400">
+              <Trophy className="mb-2 h-8 w-8 text-[#f97316]" />
+              <div className="text-xs text-muted-foreground">
                 Tanium Certified
                 <br />
                 Operator Goal
@@ -274,7 +274,7 @@ export function StudyPathwayGuide({ className }: StudyPathwayGuideProps) {
       <div className="space-y-4">
         <div className="mb-4 flex items-center gap-2">
           <Brain className="h-5 w-5 text-tanium-accent" />
-          <h3 className="text-lg font-semibold text-white">Recommended Study Path</h3>
+          <h3 className="text-lg font-semibold text-foreground">Recommended Study Path</h3>
         </div>
 
         <div className="space-y-4">
@@ -318,7 +318,7 @@ export function StudyPathwayGuide({ className }: StudyPathwayGuideProps) {
                       {/* Phase Content */}
                       <div className="flex-1">
                         <div className="mb-2 flex items-center gap-3">
-                          <h4 className="text-xl font-semibold text-white">
+                          <h4 className="text-xl font-semibold text-foreground">
                             {index + 1}. {phase.title}
                           </h4>
                           <Badge variant="outline" className="text-xs">
@@ -327,9 +327,9 @@ export function StudyPathwayGuide({ className }: StudyPathwayGuideProps) {
                           </Badge>
                         </div>
 
-                        <p className="mb-3 text-gray-300">{phase.description}</p>
+                        <p className="mb-3 text-muted-foreground">{phase.description}</p>
 
-                        <div className="mb-4 flex items-center gap-4 text-sm text-gray-400">
+                        <div className="mb-4 flex items-center gap-4 text-sm text-muted-foreground">
                           <div className="flex items-center gap-1">
                             <Clock className="h-4 w-4" />
                             <span>{phase.estimatedTime}</span>
@@ -348,7 +348,7 @@ export function StudyPathwayGuide({ className }: StudyPathwayGuideProps) {
                               className={cn(
                                 action.type === "primary"
                                   ? `${phase.bgColor} ${phase.borderColor} hover:bg-opacity-30`
-                                  : "border-white/20 text-white hover:bg-white/10"
+                                  : "border-white/20 text-foreground hover:bg-white/10"
                               )}
                             >
                               {action.label}
@@ -363,7 +363,7 @@ export function StudyPathwayGuide({ className }: StudyPathwayGuideProps) {
                 {/* Connection Arrow */}
                 {!isLast && (
                   <div className="flex justify-center py-2">
-                    <ArrowRight className="h-5 w-5 text-gray-500" />
+                    <ArrowRight className="h-5 w-5 text-muted-foreground" />
                   </div>
                 )}
               </div>
@@ -375,34 +375,34 @@ export function StudyPathwayGuide({ className }: StudyPathwayGuideProps) {
       {/* Study Tips */}
       <Card className="glass border-white/10">
         <CardHeader>
-          <CardTitle className="flex items-center gap-3 text-white">
-            <AlertCircle className="h-5 w-5 text-blue-400" />
+          <CardTitle className="flex items-center gap-3 text-foreground">
+            <AlertCircle className="h-5 w-5 text-primary" />
             Study Tips for Success
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <ul className="space-y-3 text-sm text-gray-300">
+          <ul className="space-y-3 text-sm text-muted-foreground">
             <li className="flex items-start gap-2">
-              <CheckCircle className="mt-0.5 h-4 w-4 shrink-0 text-green-400" />
+              <CheckCircle className="mt-0.5 h-4 w-4 shrink-0 text-[#22c55e]" />
               <span>
                 <strong>Study First:</strong> Complete at least 60% of modules before heavy practice
               </span>
             </li>
             <li className="flex items-start gap-2">
-              <CheckCircle className="mt-0.5 h-4 w-4 shrink-0 text-blue-400" />
+              <CheckCircle className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
               <span>
                 <strong>Domain Focus:</strong> Achieve 70%+ in each domain practice before mock
                 exams
               </span>
             </li>
             <li className="flex items-start gap-2">
-              <CheckCircle className="mt-0.5 h-4 w-4 shrink-0 text-yellow-400" />
+              <CheckCircle className="mt-0.5 h-4 w-4 shrink-0 text-[#f97316]" />
               <span>
                 <strong>Mock Readiness:</strong> Take mock exams only after 80%+ overall readiness
               </span>
             </li>
             <li className="flex items-start gap-2">
-              <CheckCircle className="mt-0.5 h-4 w-4 shrink-0 text-cyan-400" />
+              <CheckCircle className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
               <span>
                 <strong>Review Mistakes:</strong> Focus extra study time on areas where you score
                 lowest

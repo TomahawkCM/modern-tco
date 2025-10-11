@@ -126,7 +126,7 @@ export function ResultsTable() {
         );
       case "in_progress":
         return (
-          <Badge className="bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200">
+          <Badge className="bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-muted-foreground">
             In Progress
           </Badge>
         );
@@ -168,38 +168,38 @@ export function ResultsTable() {
       <div className="grid gap-4 md:grid-cols-4">
         <Card className="glass border-white/10">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium text-gray-200">Total Sessions</CardTitle>
+            <CardTitle className="text-sm font-medium text-muted-foreground">Total Sessions</CardTitle>
             <Calendar className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-white">{results.length}</div>
-            <p className="text-xs text-gray-400">exam sessions</p>
+            <div className="text-2xl font-bold text-foreground">{results.length}</div>
+            <p className="text-xs text-muted-foreground">exam sessions</p>
           </CardContent>
         </Card>
 
         <Card className="glass border-white/10">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium text-gray-200">Average Score</CardTitle>
-            <CheckCircle className="h-4 w-4 text-green-400" />
+            <CardTitle className="text-sm font-medium text-muted-foreground">Average Score</CardTitle>
+            <CheckCircle className="h-4 w-4 text-[#22c55e]" />
           </CardHeader>
           <CardContent>
             <div className={cn("text-2xl font-bold", getScoreColor(averageScore))}>
               {averageScore}%
             </div>
-            <p className="text-xs text-gray-400">across all sessions</p>
+            <p className="text-xs text-muted-foreground">across all sessions</p>
           </CardContent>
         </Card>
 
         <Card className="glass border-white/10">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium text-gray-200">Questions Answered</CardTitle>
-            <CheckCircle className="h-4 w-4 text-blue-400" />
+            <CardTitle className="text-sm font-medium text-muted-foreground">Questions Answered</CardTitle>
+            <CheckCircle className="h-4 w-4 text-primary" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-white">
+            <div className="text-2xl font-bold text-foreground">
               {totalCorrect}/{totalQuestions}
             </div>
-            <p className="text-xs text-gray-400">
+            <p className="text-xs text-muted-foreground">
               {Math.round((totalCorrect / totalQuestions) * 100)}% accuracy
             </p>
           </CardContent>
@@ -207,14 +207,14 @@ export function ResultsTable() {
 
         <Card className="glass border-white/10">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium text-gray-200">Time Invested</CardTitle>
+            <CardTitle className="text-sm font-medium text-muted-foreground">Time Invested</CardTitle>
             <Clock className="h-4 w-4 text-orange-400" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-white">
+            <div className="text-2xl font-bold text-foreground">
               {Math.round(results.reduce((sum, result) => sum + result.timeSpent, 0) / 3600)}h
             </div>
-            <p className="text-xs text-gray-400">total study time</p>
+            <p className="text-xs text-muted-foreground">total study time</p>
           </CardContent>
         </Card>
       </div>
@@ -222,25 +222,25 @@ export function ResultsTable() {
       {/* Filters and Search */}
       <Card className="glass border-white/10">
         <CardHeader>
-          <CardTitle className="text-white">Exam Results</CardTitle>
+          <CardTitle className="text-foreground">Exam Results</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="mb-6 flex flex-col gap-4 sm:flex-row">
             <div className="flex-1">
               <div className="relative">
-                <Search className="absolute left-2 top-2.5 h-4 w-4 text-gray-400" />
+                <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
                 <Input
                   placeholder="Search by domain or mode..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="glass border-white/20 pl-8 text-white placeholder:text-gray-400"
+                  className="glass border-white/20 pl-8 text-foreground placeholder:text-muted-foreground"
                 />
               </div>
             </div>
 
             <Select value={filterMode} onValueChange={setFilterMode}>
               <SelectTrigger 
-                className="glass w-full border-white/20 text-white sm:w-[180px]"
+                className="glass w-full border-white/20 text-foreground sm:w-[180px]"
                 aria-label="Filter exam results by mode"
               >
                 <SelectValue placeholder="Filter by mode" />
@@ -254,7 +254,7 @@ export function ResultsTable() {
             </Select>
 
             <Select value={filterStatus} onValueChange={setFilterStatus}>
-              <SelectTrigger className="glass w-full border-white/20 text-white sm:w-[180px]">
+              <SelectTrigger className="glass w-full border-white/20 text-foreground sm:w-[180px]">
                 <SelectValue placeholder="Filter by status" />
               </SelectTrigger>
               <SelectContent>
@@ -267,7 +267,7 @@ export function ResultsTable() {
 
             <Button
               variant="outline"
-              className="glass border-white/20 text-white hover:bg-white/10"
+              className="glass border-white/20 text-foreground hover:bg-white/10"
             >
               <Download className="mr-2 h-4 w-4" />
               Export
@@ -277,26 +277,26 @@ export function ResultsTable() {
           {/* Results Table */}
           <div className="overflow-hidden rounded-lg border border-white/10">
             <Table>
-              <TableCaption className="text-gray-400">
+              <TableCaption className="text-muted-foreground">
                 {filteredResults.length} of {results.length} exam sessions
               </TableCaption>
               <TableHeader>
                 <TableRow className="border-white/10 hover:bg-white/5">
-                  <TableHead className="text-gray-200">Date</TableHead>
-                  <TableHead className="text-gray-200">Mode</TableHead>
-                  <TableHead className="text-gray-200">Domain</TableHead>
-                  <TableHead className="text-gray-200">Score</TableHead>
-                  <TableHead className="text-gray-200">Questions</TableHead>
-                  <TableHead className="text-gray-200">Time</TableHead>
-                  <TableHead className="text-gray-200">Status</TableHead>
-                  <TableHead className="text-gray-200">Actions</TableHead>
+                  <TableHead className="text-muted-foreground">Date</TableHead>
+                  <TableHead className="text-muted-foreground">Mode</TableHead>
+                  <TableHead className="text-muted-foreground">Domain</TableHead>
+                  <TableHead className="text-muted-foreground">Score</TableHead>
+                  <TableHead className="text-muted-foreground">Questions</TableHead>
+                  <TableHead className="text-muted-foreground">Time</TableHead>
+                  <TableHead className="text-muted-foreground">Status</TableHead>
+                  <TableHead className="text-muted-foreground">Actions</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
                 {filteredResults.map((result) => (
                   <TableRow
                     key={result.id}
-                    className="border-white/10 text-gray-200 hover:bg-white/5"
+                    className="border-white/10 text-muted-foreground hover:bg-white/5"
                   >
                     <TableCell className="font-medium">
                       {result.date.toLocaleDateString()}
@@ -309,7 +309,7 @@ export function ResultsTable() {
                           {result.score}%
                         </span>
                         {result.score >= 80 ? (
-                          <CheckCircle className="h-4 w-4 text-green-400" />
+                          <CheckCircle className="h-4 w-4 text-[#22c55e]" />
                         ) : (
                           <XCircle className="h-4 w-4 text-red-400" />
                         )}
@@ -324,7 +324,7 @@ export function ResultsTable() {
                       <Button
                         variant="ghost"
                         size="sm"
-                        className="text-gray-300 hover:bg-white/10 hover:text-white"
+                        className="text-muted-foreground hover:bg-white/10 hover:text-foreground"
                       >
                         <Eye className="h-4 w-4" />
                       </Button>
@@ -337,7 +337,7 @@ export function ResultsTable() {
 
           {filteredResults.length === 0 && (
             <div className="py-8 text-center">
-              <p className="text-gray-400">No results match your filters.</p>
+              <p className="text-muted-foreground">No results match your filters.</p>
             </div>
           )}
         </CardContent>

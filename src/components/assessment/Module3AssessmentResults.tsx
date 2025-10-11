@@ -70,14 +70,14 @@ export function Module3AssessmentResults({
   };
 
   const getScoreColor = (score: number) => {
-    if (score >= 0.85) return "text-green-600";
+    if (score >= 0.85) return "text-[#22c55e]";
     if (score >= 0.75) return "text-yellow-600";
     return "text-red-600";
   };
 
   const getReadinessColor = (readiness: string) => {
     switch (readiness) {
-      case "ready": return "text-green-600 bg-green-50 border-green-200";
+      case "ready": return "text-[#22c55e] bg-green-50 border-green-200";
       case "almost_ready": return "text-yellow-600 bg-yellow-50 border-yellow-200";
       case "needs_work": return "text-red-600 bg-red-50 border-red-200";
       default: return "text-gray-600 bg-gray-50 border-gray-200";
@@ -96,7 +96,7 @@ export function Module3AssessmentResults({
           <div className="flex items-center justify-between">
             <CardTitle className="text-2xl flex items-center gap-2">
               {passed ? (
-                <CheckCircle className="w-8 h-8 text-green-600" />
+                <CheckCircle className="w-8 h-8 text-[#22c55e]" />
               ) : (
                 <XCircle className="w-8 h-8 text-red-600" />
               )}
@@ -181,7 +181,7 @@ export function Module3AssessmentResults({
                   <div className="flex items-center gap-3">
                     <div className="flex items-center gap-2">
                       {sectionResult.passed ? (
-                        <CheckCircle className="w-4 h-4 text-green-500" />
+                        <CheckCircle className="w-4 h-4 text-[#22c55e]" />
                       ) : (
                         <XCircle className="w-4 h-4 text-red-500" />
                       )}
@@ -274,7 +274,7 @@ export function Module3AssessmentResults({
         {/* Strengths */}
         <Card>
           <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-green-600">
+            <CardTitle className="flex items-center gap-2 text-[#22c55e]">
               <TrendingUp className="w-5 h-5" />
               Strengths
             </CardTitle>
@@ -284,7 +284,7 @@ export function Module3AssessmentResults({
               <ul className="space-y-2">
                 {strengths.map(sectionId => (
                   <li key={sectionId} className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-green-500" />
+                    <CheckCircle className="w-4 h-4 text-[#22c55e]" />
                     <span>{MODULE_3_SECTIONS[sectionId].title}</span>
                   </li>
                 ))}
@@ -326,7 +326,7 @@ export function Module3AssessmentResults({
                     <ul className="space-y-1">
                       {gapsIdentified.map(sectionId => (
                         <li key={sectionId} className="flex items-center gap-2 text-sm">
-                          <AlertTriangle className="w-3 h-3 text-yellow-500" />
+                          <AlertTriangle className="w-3 h-3 text-[#f97316]" />
                           <span>{MODULE_3_SECTIONS[sectionId].title}</span>
                         </li>
                       ))}

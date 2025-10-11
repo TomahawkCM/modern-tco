@@ -281,7 +281,7 @@ export default function ColorTestPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           <Card>
             <CardContent className="pt-6 flex items-center gap-3">
-              <CheckCircle2 className="h-8 w-8 text-green-500" />
+              <CheckCircle2 className="h-8 w-8 text-[#22c55e]" />
               <div>
                 <p className="font-medium text-foreground">Success</p>
                 <p className="text-sm text-muted-foreground">Operation completed</p>
@@ -301,7 +301,7 @@ export default function ColorTestPage() {
 
           <Card>
             <CardContent className="pt-6 flex items-center gap-3">
-              <AlertCircle className="h-8 w-8 text-yellow-500" />
+              <AlertCircle className="h-8 w-8 text-[#f97316]" />
               <div>
                 <p className="font-medium text-foreground">Warning</p>
                 <p className="text-sm text-muted-foreground">Proceed with caution</p>
@@ -327,7 +327,7 @@ export default function ColorTestPage() {
         <Card className="border-primary/30">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              <CheckCircle2 className="h-5 w-5 text-green-500" />
+              <CheckCircle2 className="h-5 w-5 text-[#22c55e]" />
               All Color Combinations Meet WCAG AA Standards
             </CardTitle>
             <CardDescription>Contrast ratios verified for accessibility</CardDescription>

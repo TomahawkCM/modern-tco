@@ -173,7 +173,7 @@ export default function FlashcardDashboard({ moduleId }: FlashcardDashboardProps
 
         <Card>
           <CardContent className="pt-6 text-center">
-            <Target className="h-6 w-6 mx-auto mb-2 text-green-500" />
+            <Target className="h-6 w-6 mx-auto mb-2 text-[#22c55e]" />
             <p className="text-2xl font-bold text-foreground">{stats?.newCards || 0}</p>
             <p className="text-xs text-muted-foreground">New Cards</p>
           </CardContent>
@@ -181,7 +181,7 @@ export default function FlashcardDashboard({ moduleId }: FlashcardDashboardProps
 
         <Card>
           <CardContent className="pt-6 text-center">
-            <BookOpen className="h-6 w-6 mx-auto mb-2 text-blue-500" />
+            <BookOpen className="h-6 w-6 mx-auto mb-2 text-primary" />
             <p className="text-2xl font-bold text-foreground">{stats?.learningCards || 0}</p>
             <p className="text-xs text-muted-foreground">Learning</p>
           </CardContent>

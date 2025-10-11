@@ -312,21 +312,21 @@ export function ConsoleSimulator({
             <div className="flex items-center space-x-4">
               <div className="flex items-center space-x-2">
                 <Server className="h-5 w-5 text-tanium-accent" />
-                <CardTitle className="text-white">Tanium Console</CardTitle>
-                <Badge variant="outline" className="border-green-500 text-green-400">
+                <CardTitle className="text-foreground">Tanium Console</CardTitle>
+                <Badge variant="outline" className="border-green-500 text-[#22c55e]">
                   Platform 7.5
                 </Badge>
               </div>
-              <div className="text-sm text-gray-400">
+              <div className="text-sm text-muted-foreground">
                 {formatTime(currentTime)}
               </div>
             </div>
             <div className="flex items-center space-x-2">
-              <Badge variant="outline" className="border-blue-500 text-blue-400">
+              <Badge variant="outline" className="border-blue-500 text-primary">
                 Simulation Mode
               </Badge>
               {readOnly && (
-                <Badge variant="outline" className="border-yellow-500 text-yellow-400">
+                <Badge variant="outline" className="border-yellow-500 text-[#f97316]">
                   Read Only
                 </Badge>
               )}
@@ -346,7 +346,7 @@ export function ConsoleSimulator({
                 className={`flex items-center space-x-2 ${
                   activeModule === module.id 
                     ? "bg-tanium-accent hover:bg-blue-600" 
-                    : "text-gray-400 hover:text-white"
+                    : "text-muted-foreground hover:text-foreground"
                 }`}
               >
                 {getModuleIcon(module.id)}
@@ -366,7 +366,7 @@ export function ConsoleSimulator({
             <TabsContent value="interact" className="space-y-4">
               <Card className="glass border-white/10">
                 <CardHeader>
-                  <CardTitle className="flex items-center text-white">
+                  <CardTitle className="flex items-center text-foreground">
                     <Search className="mr-2 h-5 w-5" />
                     Question Builder
                   </CardTitle>
@@ -378,7 +378,7 @@ export function ConsoleSimulator({
                       value={queryInput}
                       onChange={(e) => setQueryInput(e.target.value)}
                       disabled={readOnly}
-                      className="flex-1 bg-gray-800/50 border-gray-600 text-white"
+                      className="flex-1 bg-card/50 border-gray-600 text-foreground"
                       onKeyPress={(e) => e.key === 'Enter' && handleQueryExecution()}
                     />
                     <Button
@@ -397,27 +397,27 @@ export function ConsoleSimulator({
                   {queryResults.length > 0 && (
                     <div className="space-y-2">
                       <div className="flex items-center justify-between">
-                        <h4 className="font-medium text-white">
+                        <h4 className="font-medium text-foreground">
                           Query Results ({queryResults.length} endpoints)
                         </h4>
-                        <Badge variant="outline" className="border-green-500 text-green-400">
+                        <Badge variant="outline" className="border-green-500 text-[#22c55e]">
                           <CheckCircle className="mr-1 h-3 w-3" />
                           Complete
                         </Badge>
                       </div>
-                      <ScrollArea className="h-48 rounded border border-gray-600 bg-gray-800/50">
+                      <ScrollArea className="h-48 rounded border border-gray-600 bg-card/50">
                         <div className="p-2">
                           {queryResults.slice(0, 10).map((result, index) => (
                             <div
                               key={index}
                               className="flex justify-between py-1 text-sm border-b border-gray-700 last:border-0"
                             >
-                              <span className="text-white">{result.computerName}</span>
-                              <span className="text-gray-400">{result.data["Operating System"]}</span>
+                              <span className="text-foreground">{result.computerName}</span>
+                              <span className="text-muted-foreground">{result.data["Operating System"]}</span>
                             </div>
                           ))}
                           {queryResults.length > 10 && (
-                            <div className="py-2 text-center text-gray-400 text-sm">
+                            <div className="py-2 text-center text-muted-foreground text-sm">
                               ... and {queryResults.length - 10} more results
                             </div>
                           )}
@@ -431,7 +431,7 @@ export function ConsoleSimulator({
               {/* Saved Questions */}
               <Card className="glass border-white/10">
                 <CardHeader>
-                  <CardTitle className="text-white">Saved Questions</CardTitle>
+                  <CardTitle className="text-foreground">Saved Questions</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-2">
@@ -441,8 +441,8 @@ export function ConsoleSimulator({
                         className="flex items-center justify-between p-3 rounded border border-gray-600 hover:border-gray-500"
                       >
                         <div>
-                          <div className="font-medium text-white">{query.name}</div>
-                          <div className="text-sm text-gray-400">{query.question}</div>
+                          <div className="font-medium text-foreground">{query.name}</div>
+                          <div className="text-sm text-muted-foreground">{query.question}</div>
                         </div>
                         <div className="flex items-center space-x-2">
                           {query.shared && (
@@ -464,7 +464,7 @@ export function ConsoleSimulator({
               <Card className="glass border-white/10">
                 <CardHeader>
                   <div className="flex items-center justify-between">
-                    <CardTitle className="flex items-center text-white">
+                    <CardTitle className="flex items-center text-foreground">
                       <Users className="mr-2 h-5 w-5" />
                       Computer Groups
                     </CardTitle>
@@ -487,19 +487,19 @@ export function ConsoleSimulator({
                       >
                         <div>
                           <div className="flex items-center space-x-2">
-                            <span className="font-medium text-white">{group.name}</span>
+                            <span className="font-medium text-foreground">{group.name}</span>
                             <Badge 
                               variant="outline" 
-                              className={group.type === 'dynamic' ? "border-blue-500 text-blue-400" : "border-gray-500 text-gray-400"}
+                              className={group.type === 'dynamic' ? "border-blue-500 text-primary" : "border-gray-500 text-muted-foreground"}
                             >
                               {group.type}
                             </Badge>
                           </div>
-                          <div className="text-sm text-gray-400">{group.description}</div>
+                          <div className="text-sm text-muted-foreground">{group.description}</div>
                         </div>
                         <div className="text-right">
-                          <div className="font-medium text-white">{group.memberCount.toLocaleString()}</div>
-                          <div className="text-xs text-gray-400">endpoints</div>
+                          <div className="font-medium text-foreground">{group.memberCount.toLocaleString()}</div>
+                          <div className="text-xs text-muted-foreground">endpoints</div>
                         </div>
                       </div>
                     ))}
@@ -514,7 +514,7 @@ export function ConsoleSimulator({
         <div className="space-y-4">
           <Card className="glass border-white/10">
             <CardHeader>
-              <CardTitle className="flex items-center text-white">
+              <CardTitle className="flex items-center text-foreground">
                 <Activity className="mr-2 h-5 w-5" />
                 Activity Log
               </CardTitle>
@@ -522,11 +522,11 @@ export function ConsoleSimulator({
             <CardContent>
               <ScrollArea ref={terminalRef} className="h-64 font-mono text-xs">
                 {actionLog.length === 0 ? (
-                  <div className="text-gray-500 italic">No activities logged yet</div>
+                  <div className="text-muted-foreground italic">No activities logged yet</div>
                 ) : (
                   <div className="space-y-1">
                     {actionLog.map((log, index) => (
-                      <div key={index} className="text-gray-300">
+                      <div key={index} className="text-muted-foreground">
                         {log}
                       </div>
                     ))}
@@ -540,7 +540,7 @@ export function ConsoleSimulator({
           {expectedActions && expectedActions.length > 0 && (
             <Card className="glass border-white/10">
               <CardHeader>
-                <CardTitle className="flex items-center text-white">
+                <CardTitle className="flex items-center text-foreground">
                   <CheckCircle className="mr-2 h-5 w-5" />
                   Expected Actions
                 </CardTitle>
@@ -552,16 +552,16 @@ export function ConsoleSimulator({
                       key={action.id}
                       className={`flex items-center space-x-2 p-2 rounded text-sm ${
                         index < (currentStep ?? 0) 
-                          ? "bg-green-500/10 border border-green-500/50" 
+                          ? "bg-[#22c55e]/10 border border-green-500/50" 
                           : "bg-gray-500/10 border border-gray-500/50"
                       }`}
                     >
                       {index < (currentStep ?? 0) ? (
-                        <CheckCircle className="h-4 w-4 text-green-400" />
+                        <CheckCircle className="h-4 w-4 text-[#22c55e]" />
                       ) : (
-                        <Clock className="h-4 w-4 text-gray-400" />
+                        <Clock className="h-4 w-4 text-muted-foreground" />
                       )}
-                      <span className={index < (currentStep ?? 0) ? "text-green-300" : "text-gray-300"}>
+                      <span className={index < (currentStep ?? 0) ? "text-[#22c55e]" : "text-muted-foreground"}>
                         {action.description}
                       </span>
                     </div>

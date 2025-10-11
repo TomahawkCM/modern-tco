@@ -25,10 +25,10 @@ export const HolographicText: React.FC<{ children: React.ReactNode; className?: 
 }) => {
   return (
     <div className={`relative ${className}`}>
-      <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 via-sky-400 to-cyan-500 bg-clip-text text-transparent blur-sm">
+      <div className="absolute inset-0 bg-gradient-to-r from-primary via-sky-400 to-primary bg-clip-text text-transparent blur-sm">
         {children}
       </div>
-      <div className="relative bg-gradient-to-r from-cyan-400 via-sky-400 to-cyan-500 bg-clip-text text-transparent">
+      <div className="relative bg-gradient-to-r from-primary via-sky-400 to-primary bg-clip-text text-transparent">
         {children}
       </div>
     </div>
@@ -100,7 +100,7 @@ export const CyberpunkNavBar: React.FC<CyberpunkNavBarProps> = ({
                 alt="TCO Logo"
                 className="w-10 h-10 object-contain"
               />
-              <div className="text-xl font-bold text-cyan-400">
+              <div className="text-xl font-bold text-primary">
                 {brandName}
               </div>
             </div>
@@ -108,7 +108,7 @@ export const CyberpunkNavBar: React.FC<CyberpunkNavBarProps> = ({
               {navItems.map((item) => (
                 <button
                   key={item.name}
-                  className="px-4 py-2 rounded-lg text-cyan-100/80 hover:text-cyan-400 flex items-center space-x-2"
+                  className="px-4 py-2 rounded-lg text-cyan-100/80 hover:text-primary flex items-center space-x-2"
                 >
                   {item.icon}
                   <span className="text-sm font-medium">{item.name}</span>
@@ -129,7 +129,7 @@ export const CyberpunkNavBar: React.FC<CyberpunkNavBarProps> = ({
       className={`fixed top-1 left-0 right-0 z-50 mx-4 ${className}`}
     >
       <div className="relative bg-white/[0.02] backdrop-blur-xl backdrop-saturate-150 border border-white/10 rounded-2xl shadow-lg shadow-black/5">
-        <div className="absolute -inset-[1px] bg-gradient-to-r from-cyan-500 via-sky-400 to-cyan-500 rounded-2xl opacity-5 blur-sm"></div>
+        <div className="absolute -inset-[1px] bg-gradient-to-r from-primary via-sky-400 to-primary rounded-2xl opacity-5 blur-sm"></div>
 
         <div className="relative px-6 py-4">
           <div className="flex items-center justify-between">
@@ -145,7 +145,7 @@ export const CyberpunkNavBar: React.FC<CyberpunkNavBarProps> = ({
                   alt="TCO Logo"
                   className="w-10 h-10 sm:w-12 sm:h-12 object-contain"
                 />
-                <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-purple-500 rounded-full blur animate-pulse opacity-10"></div>
+                <div className="absolute inset-0 bg-gradient-to-r from-primary to-purple-500 rounded-full blur animate-pulse opacity-10"></div>
               </div>
               <HolographicText className="text-base sm:text-lg lg:text-xl font-bold whitespace-nowrap hidden xs:block">
                 <span className="hidden lg:inline">{brandName}</span>
@@ -156,7 +156,7 @@ export const CyberpunkNavBar: React.FC<CyberpunkNavBarProps> = ({
             {/* Desktop Navigation - Simplified to just search bar */}
             <div className="hidden md:flex items-center flex-1 max-w-md mx-4">
               <div className="relative w-full">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-cyan-400/60" />
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-primary/60" />
                 <input
                   type="text"
                   placeholder="Search modules, questions..."
@@ -174,9 +174,9 @@ export const CyberpunkNavBar: React.FC<CyberpunkNavBarProps> = ({
                 whileTap={{ scale: 0.9 }}
                 aria-label="Search modules and questions"
               >
-                <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500 to-sky-400 rounded-full blur opacity-10 group-hover:opacity-30 transition duration-300"></div>
+                <div className="absolute -inset-1 bg-gradient-to-r from-primary to-sky-400 rounded-full blur opacity-10 group-hover:opacity-30 transition duration-300"></div>
                 <div className="relative w-9 h-9 bg-white/[0.05] backdrop-blur-xl border border-white/10 rounded-full flex items-center justify-center">
-                  <Search className="h-4 w-4 text-cyan-400" aria-hidden="true" />
+                  <Search className="h-4 w-4 text-primary" aria-hidden="true" />
                 </div>
               </motion.button>
 
@@ -187,10 +187,10 @@ export const CyberpunkNavBar: React.FC<CyberpunkNavBarProps> = ({
                 whileTap={{ scale: 0.9 }}
                 aria-label="Notifications (3 unread)"
               >
-                <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500 to-sky-400 rounded-full blur opacity-10 group-hover:opacity-30 transition duration-300"></div>
+                <div className="absolute -inset-1 bg-gradient-to-r from-primary to-sky-400 rounded-full blur opacity-10 group-hover:opacity-30 transition duration-300"></div>
                 <div className="relative w-9 h-9 bg-white/[0.05] backdrop-blur-xl border border-white/10 rounded-full flex items-center justify-center">
-                  <Bell className="h-4 w-4 text-cyan-400" aria-hidden="true" />
-                  <span className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full text-[10px] text-white flex items-center justify-center font-bold" aria-hidden="true">3</span>
+                  <Bell className="h-4 w-4 text-primary" aria-hidden="true" />
+                  <span className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full text-[10px] text-foreground flex items-center justify-center font-bold" aria-hidden="true">3</span>
                 </div>
               </motion.button>
 
@@ -201,9 +201,9 @@ export const CyberpunkNavBar: React.FC<CyberpunkNavBarProps> = ({
                 whileTap={{ scale: 0.9 }}
                 aria-label="User profile settings"
               >
-                <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500 to-sky-400 rounded-full blur opacity-10 group-hover:opacity-30 transition duration-300"></div>
+                <div className="absolute -inset-1 bg-gradient-to-r from-primary to-sky-400 rounded-full blur opacity-10 group-hover:opacity-30 transition duration-300"></div>
                 <div className="relative w-9 h-9 bg-white/[0.05] backdrop-blur-xl border border-white/10 rounded-full flex items-center justify-center">
-                  <User className="h-4 w-4 text-cyan-400" aria-hidden="true" />
+                  <User className="h-4 w-4 text-primary" aria-hidden="true" />
                 </div>
               </motion.button>
             </div>

@@ -280,7 +280,7 @@ export function AdvancedAnalyticsDashboard({ userId }: AdvancedAnalyticsDashboar
                           <span>{domain.domainLabel}</span>
                           <span
                             className={`font-semibold ${
-                              domain.difference > 0 ? 'text-green-600' : domain.difference < 0 ? 'text-red-600' : ''
+                              domain.difference > 0 ? 'text-[#22c55e]' : domain.difference < 0 ? 'text-red-600' : ''
                             }`}
                           >
                             {domain.personalScore.toFixed(1)}% (
@@ -304,7 +304,7 @@ export function AdvancedAnalyticsDashboard({ userId }: AdvancedAnalyticsDashboar
                 <div className="grid md:grid-cols-2 gap-4">
                   {comparativeReport.strengths.length > 0 && (
                     <div className="border border-green-200 bg-green-50 dark:bg-green-950 rounded-lg p-4">
-                      <h4 className="font-semibold text-green-700 dark:text-green-400 mb-2">
+                      <h4 className="font-semibold text-green-700 dark:text-[#22c55e] mb-2">
                         Your Strengths
                       </h4>
                       <ul className="space-y-1">
@@ -536,7 +536,7 @@ function MasteryPlanView({ plan, onBack }: MasteryPlanViewProps) {
           </div>
           <div>
             <p className="text-sm text-muted-foreground">Target Level</p>
-            <p className="text-2xl font-bold text-green-600">{plan.targetLevel.toFixed(0)}%</p>
+            <p className="text-2xl font-bold text-[#22c55e]">{plan.targetLevel.toFixed(0)}%</p>
           </div>
         </div>
       </div>
@@ -580,7 +580,7 @@ function MasteryPlanView({ plan, onBack }: MasteryPlanViewProps) {
 
       {/* Success Factors */}
       <div className="border border-green-200 bg-green-50 dark:bg-green-950 rounded-lg p-4">
-        <h4 className="font-semibold text-green-700 dark:text-green-400 mb-2">
+        <h4 className="font-semibold text-green-700 dark:text-[#22c55e] mb-2">
           Critical Success Factors
         </h4>
         <ul className="space-y-1">

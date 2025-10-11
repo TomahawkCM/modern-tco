@@ -203,7 +203,7 @@ export default function FlashcardReview({ moduleId, deckId, totalCards = 0, onCo
     return (
       <Card className="w-full max-w-2xl mx-auto">
         <CardContent className="flex flex-col items-center justify-center p-12 text-center">
-          <Check className="h-16 w-16 text-green-500 mb-4" />
+          <Check className="h-16 w-16 text-[#22c55e] mb-4" />
           <h3 className="text-2xl font-bold mb-2">All Caught Up!</h3>
           <p className="text-muted-foreground mb-6">
             No flashcards are due for review right now. Great work staying on top of your studies!

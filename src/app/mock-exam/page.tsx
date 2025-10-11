@@ -57,8 +57,8 @@ export default function MockExamPage() {
               <div className="bg-tanium-orange/20 mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full">
                 <Timer className="text-tanium-orange h-8 w-8" />
               </div>
-              <h2 className="mb-2 text-xl font-semibold text-white">Redirecting to Mock Exam…</h2>
-              <p className="mb-6 text-white/70">Launching the timed exam experience.</p>
+              <h2 className="mb-2 text-xl font-semibold text-foreground">Redirecting to Mock Exam…</h2>
+              <p className="mb-6 text-foreground/70">Launching the timed exam experience.</p>
               <div className="animate-pulse">
                 <div className="bg-tanium-orange/30 h-2 overflow-hidden rounded-full">
                   <div className="bg-tanium-orange h-full w-3/4 rounded-full transition-all duration-1000"></div>
@@ -80,8 +80,8 @@ export default function MockExamPage() {
               <Target className="text-tanium-orange h-6 w-6" />
             </div>
             <div>
-              <h1 className="text-2xl font-bold text-white">Mock Examination</h1>
-              <p className="text-white/70">
+              <h1 className="text-2xl font-bold text-foreground">Mock Examination</h1>
+              <p className="text-foreground/70">
                 Full-length timed practice exam simulating real TCO conditions
               </p>
             </div>
@@ -89,7 +89,7 @@ export default function MockExamPage() {
 
           <Alert className="border-tanium-orange/30 bg-tanium-orange/10">
             <AlertCircle className="text-tanium-orange h-4 w-4" />
-            <AlertDescription className="text-white">
+            <AlertDescription className="text-foreground">
               <strong>Exam Simulation:</strong> This mock exam replicates the actual TCO
               certification exam format, timing, and difficulty level.
             </AlertDescription>
@@ -99,7 +99,7 @@ export default function MockExamPage() {
         {/* Exam Overview */}
         <Card className="glass-card border-tanium-blue/20">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-white">
+            <CardTitle className="flex items-center gap-2 text-foreground">
               <Brain className="h-5 w-5" />
               Examination Overview
             </CardTitle>
@@ -108,38 +108,38 @@ export default function MockExamPage() {
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
               <div className="rounded-lg border border-white/10 bg-white/5 p-4 text-center">
                 <Clock className="text-tanium-blue mx-auto mb-2 h-8 w-8" />
-                <div className="text-2xl font-bold text-white">{defaultConfig.duration}</div>
-                <div className="text-sm text-white/60">Minutes</div>
+                <div className="text-2xl font-bold text-foreground">{defaultConfig.duration}</div>
+                <div className="text-sm text-foreground/60">Minutes</div>
               </div>
               <div className="rounded-lg border border-white/10 bg-white/5 p-4 text-center">
                 <BookOpen className="text-tanium-green mx-auto mb-2 h-8 w-8" />
-                <div className="text-2xl font-bold text-white">{defaultConfig.questionCount}</div>
-                <div className="text-sm text-white/60">Questions</div>
+                <div className="text-2xl font-bold text-foreground">{defaultConfig.questionCount}</div>
+                <div className="text-sm text-foreground/60">Questions</div>
               </div>
               <div className="rounded-lg border border-white/10 bg-white/5 p-4 text-center">
                 <CheckCircle className="text-tanium-orange mx-auto mb-2 h-8 w-8" />
-                <div className="text-2xl font-bold text-white">{defaultConfig.passingScore}%</div>
-                <div className="text-sm text-white/60">Passing Score</div>
+                <div className="text-2xl font-bold text-foreground">{defaultConfig.passingScore}%</div>
+                <div className="text-sm text-foreground/60">Passing Score</div>
               </div>
               <div className="rounded-lg border border-white/10 bg-white/5 p-4 text-center">
-                <Shield className="text-cyan-500 mx-auto mb-2 h-8 w-8" />
-                <div className="text-2xl font-bold capitalize text-white">
+                <Shield className="text-primary mx-auto mb-2 h-8 w-8" />
+                <div className="text-2xl font-bold capitalize text-foreground">
                   {defaultConfig.difficulty}
                 </div>
-                <div className="text-sm text-white/60">Difficulty</div>
+                <div className="text-sm text-foreground/60">Difficulty</div>
               </div>
             </div>
 
             <Separator className="bg-white/10" />
 
             <div>
-              <h3 className="mb-3 flex items-center gap-2 font-semibold text-white">
+              <h3 className="mb-3 flex items-center gap-2 font-semibold text-foreground">
                 <Target className="h-4 w-4" />
                 Exam Coverage
               </h3>
               <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
                 <div className="flex items-center justify-between rounded-lg border border-white/10 bg-white/5 p-3">
-                  <span className="text-white/80">Asking Questions</span>
+                  <span className="text-foreground/80">Asking Questions</span>
                   <Badge
                     variant="secondary"
                     className="bg-tanium-blue/20 text-tanium-blue border-tanium-blue/30"
@@ -148,7 +148,7 @@ export default function MockExamPage() {
                   </Badge>
                 </div>
                 <div className="flex items-center justify-between rounded-lg border border-white/10 bg-white/5 p-3">
-                  <span className="text-white/80">Refining Questions</span>
+                  <span className="text-foreground/80">Refining Questions</span>
                   <Badge
                     variant="secondary"
                     className="bg-tanium-green/20 text-tanium-green border-tanium-green/30"
@@ -157,7 +157,7 @@ export default function MockExamPage() {
                   </Badge>
                 </div>
                 <div className="flex items-center justify-between rounded-lg border border-white/10 bg-white/5 p-3">
-                  <span className="text-white/80">Taking Action</span>
+                  <span className="text-foreground/80">Taking Action</span>
                   <Badge
                     variant="secondary"
                     className="bg-tanium-orange/20 text-tanium-orange border-tanium-orange/30"
@@ -166,7 +166,7 @@ export default function MockExamPage() {
                   </Badge>
                 </div>
                 <div className="flex items-center justify-between rounded-lg border border-white/10 bg-white/5 p-3">
-                  <span className="text-white/80">Navigation and Basic Module Functions</span>
+                  <span className="text-foreground/80">Navigation and Basic Module Functions</span>
                   <Badge
                     variant="secondary"
                     className="bg-tanium-red/20 text-tanium-red border-tanium-red/30"
@@ -175,10 +175,10 @@ export default function MockExamPage() {
                   </Badge>
                 </div>
                 <div className="flex items-center justify-between rounded-lg border border-white/10 bg-white/5 p-3">
-                  <span className="text-white/80">Report Generation and Data Export</span>
+                  <span className="text-foreground/80">Report Generation and Data Export</span>
                   <Badge
                     variant="secondary"
-                    className="bg-cyan-500/20 text-cyan-500 border-cyan-500/30"
+                    className="bg-primary/20 text-primary border-primary/30"
                   >
                     17%
                   </Badge>
@@ -191,7 +191,7 @@ export default function MockExamPage() {
         {/* Exam Rules */}
         <Card className="glass-card border-tanium-red/20">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-white">
+            <CardTitle className="flex items-center gap-2 text-foreground">
               <AlertCircle className="text-tanium-red h-5 w-5" />
               Examination Rules
             </CardTitle>
@@ -201,8 +201,8 @@ export default function MockExamPage() {
               <div className="flex items-start gap-3">
                 <div className="bg-tanium-red mt-2 h-2 w-2 flex-shrink-0 rounded-full"></div>
                 <div>
-                  <strong className="text-white">Time Limit:</strong>
-                  <p className="text-sm text-white/70">
+                  <strong className="text-foreground">Time Limit:</strong>
+                  <p className="text-sm text-foreground/70">
                     You have exactly {defaultConfig.duration} minutes to complete all{" "}
                     {defaultConfig.questionCount} questions.
                   </p>
@@ -211,8 +211,8 @@ export default function MockExamPage() {
               <div className="flex items-start gap-3">
                 <div className="bg-tanium-orange mt-2 h-2 w-2 flex-shrink-0 rounded-full"></div>
                 <div>
-                  <strong className="text-white">No Pausing:</strong>
-                  <p className="text-sm text-white/70">
+                  <strong className="text-foreground">No Pausing:</strong>
+                  <p className="text-sm text-foreground/70">
                     Once started, the exam cannot be paused. Closing the browser will end your
                     session.
                   </p>
@@ -221,8 +221,8 @@ export default function MockExamPage() {
               <div className="flex items-start gap-3">
                 <div className="bg-tanium-blue mt-2 h-2 w-2 flex-shrink-0 rounded-full"></div>
                 <div>
-                  <strong className="text-white">Review Allowed:</strong>
-                  <p className="text-sm text-white/70">
+                  <strong className="text-foreground">Review Allowed:</strong>
+                  <p className="text-sm text-foreground/70">
                     You can review and change answers before final submission.
                   </p>
                 </div>
@@ -230,8 +230,8 @@ export default function MockExamPage() {
               <div className="flex items-start gap-3">
                 <div className="bg-tanium-green mt-2 h-2 w-2 flex-shrink-0 rounded-full"></div>
                 <div>
-                  <strong className="text-white">Immediate Results:</strong>
-                  <p className="text-sm text-white/70">
+                  <strong className="text-foreground">Immediate Results:</strong>
+                  <p className="text-sm text-foreground/70">
                     Your score and detailed feedback will be provided immediately upon completion.
                   </p>
                 </div>
@@ -244,7 +244,7 @@ export default function MockExamPage() {
         <div className="flex flex-col justify-center gap-4 sm:flex-row">
           <Button
             onClick={handleStartExam}
-            className="bg-tanium-orange hover:bg-tanium-orange/80 px-8 py-3 text-lg font-semibold text-white"
+            className="bg-tanium-orange hover:bg-tanium-orange/80 px-8 py-3 text-lg font-semibold text-foreground"
             size="lg"
           >
             <Play className="mr-2 h-5 w-5" />
@@ -254,7 +254,7 @@ export default function MockExamPage() {
           <Button
             variant="outline"
             onClick={() => setShowConfiguration(!showConfiguration)}
-            className="border-white/20 px-8 py-3 text-white hover:bg-white/5"
+            className="border-white/20 px-8 py-3 text-foreground hover:bg-white/5"
             size="lg"
           >
             <Settings className="mr-2 h-4 w-4" />
@@ -264,17 +264,17 @@ export default function MockExamPage() {
 
         {/* Configuration Panel (if shown) */}
         {showConfiguration && (
-          <Card className="glass-card border-cyan-500/20">
+          <Card className="glass-card border-primary/20">
             <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-white">
+              <CardTitle className="flex items-center gap-2 text-foreground">
                 <Settings className="h-5 w-5" />
                 Exam Configuration
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <Alert className="border-cyan-500/30 bg-cyan-500/10">
-                <AlertCircle className="text-cyan-500 h-4 w-4" />
-                <AlertDescription className="text-white">
+              <Alert className="border-primary/30 bg-primary/10">
+                <AlertCircle className="text-primary h-4 w-4" />
+                <AlertDescription className="text-foreground">
                   <strong>Coming Soon:</strong> Custom exam configurations will be available in a
                   future update.
                 </AlertDescription>

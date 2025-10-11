@@ -101,7 +101,7 @@ export function ModulesProgressTable({ rows }: { rows: ModuleListRow[] }) {
             {table.getHeaderGroups().map((hg) => (
               <tr key={hg.id}>
                 {hg.headers.map((header) => (
-                  <th key={header.id} className="px-3 py-2 text-left font-medium text-gray-200 select-none" onClick={header.column.getToggleSortingHandler()}>
+                  <th key={header.id} className="px-3 py-2 text-left font-medium text-muted-foreground select-none" onClick={header.column.getToggleSortingHandler()}>
                     {flexRender(header.column.columnDef.header, header.getContext())}
                     {header.column.getIsSorted() === "asc" ? " ↑" : header.column.getIsSorted() === "desc" ? " ↓" : ""}
                   </th>
@@ -113,7 +113,7 @@ export function ModulesProgressTable({ rows }: { rows: ModuleListRow[] }) {
             {table.getRowModel().rows.map((row) => (
               <tr key={row.id} className="border-t border-white/5 hover:bg-white/[0.02]">
                 {row.getVisibleCells().map((cell) => (
-                  <td key={cell.id} className="px-3 py-2 text-gray-300">{flexRender(cell.column.columnDef.cell, cell.getContext())}</td>
+                  <td key={cell.id} className="px-3 py-2 text-muted-foreground">{flexRender(cell.column.columnDef.cell, cell.getContext())}</td>
                 ))}
               </tr>
             ))}

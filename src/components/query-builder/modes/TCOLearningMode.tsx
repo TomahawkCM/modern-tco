@@ -217,14 +217,14 @@ export function TCOLearningMode({ onQuerySubmit, onProgressUpdate }: TCOLearning
         <CardHeader>
           <div className="flex items-center justify-between">
             <div>
-              <CardTitle className="text-white">TCO Certification Preparation</CardTitle>
+              <CardTitle className="text-foreground">TCO Certification Preparation</CardTitle>
               <CardDescription>
                 Master query building aligned with certification objectives
               </CardDescription>
             </div>
             <div className="text-right">
               <div className="text-2xl font-bold text-tanium-accent">{overallProgress}%</div>
-              <div className="text-sm text-gray-400">Overall Progress</div>
+              <div className="text-sm text-muted-foreground">Overall Progress</div>
             </div>
           </div>
         </CardHeader>
@@ -247,8 +247,8 @@ export function TCOLearningMode({ onQuerySubmit, onProgressUpdate }: TCOLearning
                   }`}
                 >
                   <DomainIcon className="h-5 w-5 mb-1 text-tanium-accent" />
-                  <div className="text-xs font-medium text-white">{domain.weight}%</div>
-                  <div className="text-xs text-gray-400">{domain.name}</div>
+                  <div className="text-xs font-medium text-foreground">{domain.weight}%</div>
+                  <div className="text-xs text-muted-foreground">{domain.name}</div>
                   <Progress value={progress} className="mt-2 h-1" />
                 </button>
               );
@@ -265,7 +265,7 @@ export function TCOLearningMode({ onQuerySubmit, onProgressUpdate }: TCOLearning
             <CardHeader>
               <div className="flex items-center justify-between">
                 <div>
-                  <CardTitle className="text-white flex items-center gap-2">
+                  <CardTitle className="text-foreground flex items-center gap-2">
                     <Target className="h-5 w-5 text-tanium-accent" />
                     {currentScenario.title}
                   </CardTitle>
@@ -277,7 +277,7 @@ export function TCOLearningMode({ onQuerySubmit, onProgressUpdate }: TCOLearning
                     }>
                       {currentScenario.difficulty}
                     </Badge>
-                    <span className="text-sm text-gray-400">
+                    <span className="text-sm text-muted-foreground">
                       Domain: {selectedDomain.name}
                     </span>
                   </div>
@@ -286,29 +286,29 @@ export function TCOLearningMode({ onQuerySubmit, onProgressUpdate }: TCOLearning
             </CardHeader>
             <CardContent className="space-y-4">
               {/* Scenario description */}
-              <Alert className="border-blue-500 bg-blue-500/10">
-                <AlertTriangle className="h-4 w-4 text-blue-400" />
-                <AlertDescription className="text-blue-300">
+              <Alert className="border-blue-500 bg-primary/10">
+                <AlertTriangle className="h-4 w-4 text-primary" />
+                <AlertDescription className="text-primary">
                   <strong>Scenario:</strong> {currentScenario.scenario}
                 </AlertDescription>
               </Alert>
 
               {/* Query input */}
               <div className="space-y-2">
-                <label className="text-sm font-medium text-gray-300">Your Query:</label>
+                <label className="text-sm font-medium text-muted-foreground">Your Query:</label>
                 <textarea
                   value={userQuery}
                   onChange={(e) => setUserQuery(e.target.value)}
                   placeholder="Type your Tanium query here..."
-                  className="w-full h-32 px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:ring-2 focus:ring-tanium-accent focus:border-transparent"
+                  className="w-full h-32 px-4 py-2 bg-card border border-gray-700 rounded-lg text-foreground placeholder-gray-500 focus:ring-2 focus:ring-tanium-accent focus:border-transparent"
                 />
               </div>
 
               {/* Hints */}
               {showHints && (
-                <Alert className="border-yellow-500 bg-yellow-500/10">
-                  <Lightbulb className="h-4 w-4 text-yellow-400" />
-                  <AlertDescription className="text-yellow-300">
+                <Alert className="border-yellow-500 bg-[#f97316]/10">
+                  <Lightbulb className="h-4 w-4 text-[#f97316]" />
+                  <AlertDescription className="text-[#f97316]">
                     <strong>Hints:</strong>
                     <ul className="list-disc list-inside mt-2">
                       {currentScenario.hints.map((hint, idx) => (
@@ -323,7 +323,7 @@ export function TCOLearningMode({ onQuerySubmit, onProgressUpdate }: TCOLearning
               {feedback.type && (
                 <Alert className={`border-${feedback.type === 'success' ? 'green' : 'red'}-500 bg-${feedback.type === 'success' ? 'green' : 'red'}-500/10`}>
                   {feedback.type === 'success' ? (
-                    <CheckCircle className="h-4 w-4 text-green-400" />
+                    <CheckCircle className="h-4 w-4 text-[#22c55e]" />
                   ) : (
                     <XCircle className="h-4 w-4 text-red-400" />
                   )}
@@ -338,7 +338,7 @@ export function TCOLearningMode({ onQuerySubmit, onProgressUpdate }: TCOLearning
                 <Button
                   variant="outline"
                   onClick={() => setShowHints(!showHints)}
-                  className="text-yellow-400 border-yellow-400"
+                  className="text-[#f97316] border-yellow-400"
                 >
                   <Lightbulb className="h-4 w-4 mr-2" />
                   {showHints ? 'Hide Hints' : 'Show Hints'}
@@ -347,7 +347,7 @@ export function TCOLearningMode({ onQuerySubmit, onProgressUpdate }: TCOLearning
                   <Button
                     variant="outline"
                     onClick={() => setUserQuery(currentScenario.expectedQuery)}
-                    className="text-gray-400"
+                    className="text-muted-foreground"
                   >
                     Show Solution
                   </Button>
@@ -369,7 +369,7 @@ export function TCOLearningMode({ onQuerySubmit, onProgressUpdate }: TCOLearning
           {/* Domain objectives */}
           <Card className="glass border-white/10">
             <CardHeader>
-              <CardTitle className="text-white text-sm flex items-center gap-2">
+              <CardTitle className="text-foreground text-sm flex items-center gap-2">
                 <BookOpen className="h-4 w-4 text-tanium-accent" />
                 Learning Objectives
               </CardTitle>
@@ -379,7 +379,7 @@ export function TCOLearningMode({ onQuerySubmit, onProgressUpdate }: TCOLearning
                 {selectedDomain.objectives.map((obj, idx) => (
                   <li key={idx} className="flex items-start gap-2">
                     <CheckCircle className="h-4 w-4 text-tanium-accent mt-0.5" />
-                    <span className="text-sm text-gray-300">{obj}</span>
+                    <span className="text-sm text-muted-foreground">{obj}</span>
                   </li>
                 ))}
               </ul>
@@ -389,7 +389,7 @@ export function TCOLearningMode({ onQuerySubmit, onProgressUpdate }: TCOLearning
           {/* Key concepts */}
           <Card className="glass border-white/10">
             <CardHeader>
-              <CardTitle className="text-white text-sm flex items-center gap-2">
+              <CardTitle className="text-foreground text-sm flex items-center gap-2">
                 <Trophy className="h-4 w-4 text-tanium-accent" />
                 Key Concepts
               </CardTitle>
@@ -408,10 +408,10 @@ export function TCOLearningMode({ onQuerySubmit, onProgressUpdate }: TCOLearning
           {/* Quick tips */}
           <Card className="glass border-white/10">
             <CardHeader>
-              <CardTitle className="text-white text-sm">Quick Tips</CardTitle>
+              <CardTitle className="text-foreground text-sm">Quick Tips</CardTitle>
             </CardHeader>
             <CardContent>
-              <ul className="space-y-2 text-sm text-gray-400">
+              <ul className="space-y-2 text-sm text-muted-foreground">
                 <li>• Start with basic sensors</li>
                 <li>• Add filters incrementally</li>
                 <li>• Test queries in small groups</li>

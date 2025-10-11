@@ -108,7 +108,7 @@ export function BreadcrumbNav({ className }: BreadcrumbNavProps) {
                 <BreadcrumbLink asChild>
                   <Link
                     href={item.href}
-                    className="flex items-center gap-1 text-slate-200 hover:text-white transition-colors"
+                    className="flex items-center gap-1 text-muted-foreground hover:text-foreground transition-colors"
                   >
                     {index === 0 && <Home className="h-4 w-4" />}
                     {item.title}

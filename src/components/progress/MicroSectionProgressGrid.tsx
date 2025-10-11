@@ -49,24 +49,24 @@ export default function MicroSectionProgressGrid({
   // Module colors matching DomainMasteryWheel
   const moduleColors: Record<string, string> = {
     foundation: "bg-cyan-500",
-    "module-1": "bg-blue-500",
-    "module-2": "bg-purple-500",
+    "module-1": "bg-primary",
+    "module-2": "bg-accent",
     "module-3": "bg-orange-500",
-    "module-4": "bg-green-500",
+    "module-4": "bg-[#22c55e]",
     "module-5": "bg-pink-500",
   };
 
   const getSectionIcon = (section: MicroSection) => {
     if (section.completed) {
-      return <CheckCircle2 className="h-4 w-4 text-green-500" />;
+      return <CheckCircle2 className="h-4 w-4 text-[#22c55e]" />;
     }
     if (section.inProgress) {
-      return <Clock className="h-4 w-4 text-yellow-500" />;
+      return <Clock className="h-4 w-4 text-[#f97316]" />;
     }
     if (section.locked) {
       return <Circle className="h-4 w-4 text-gray-600" />;
     }
-    return <Circle className="h-4 w-4 text-gray-400" />;
+    return <Circle className="h-4 w-4 text-muted-foreground" />;
   };
 
   const getSectionClasses = (section: MicroSection) => {
@@ -74,10 +74,10 @@ export default function MicroSectionProgressGrid({
       "flex items-center gap-2 p-2 rounded-md transition-all cursor-pointer hover:bg-accent";
 
     if (section.completed) {
-      return `${baseClasses} bg-green-500/10 border border-green-500/20`;
+      return `${baseClasses} bg-[#22c55e]/10 border border-[#22c55e]/20`;
     }
     if (section.inProgress) {
-      return `${baseClasses} bg-yellow-500/10 border border-yellow-500/20`;
+      return `${baseClasses} bg-[#f97316]/10 border border-[#f97316]/20`;
     }
     if (section.locked) {
       return `${baseClasses} opacity-50 cursor-not-allowed`;
@@ -176,15 +176,15 @@ export default function MicroSectionProgressGrid({
         <div className="pt-4 border-t">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-xs">
             <div className="flex items-center gap-2">
-              <CheckCircle2 className="h-4 w-4 text-green-500" />
+              <CheckCircle2 className="h-4 w-4 text-[#22c55e]" />
               <span className="text-muted-foreground">Completed</span>
             </div>
             <div className="flex items-center gap-2">
-              <Clock className="h-4 w-4 text-yellow-500" />
+              <Clock className="h-4 w-4 text-[#f97316]" />
               <span className="text-muted-foreground">In Progress</span>
             </div>
             <div className="flex items-center gap-2">
-              <Circle className="h-4 w-4 text-gray-400" />
+              <Circle className="h-4 w-4 text-muted-foreground" />
               <span className="text-muted-foreground">Available</span>
             </div>
             <div className="flex items-center gap-2">
@@ -209,8 +209,8 @@ export default function MicroSectionProgressGrid({
         )}
 
         {overallProgress === 100 && (
-          <div className="p-3 bg-green-500/10 border border-green-500/20 rounded-lg text-center">
-            <p className="text-sm font-medium text-green-500">
+          <div className="p-3 bg-[#22c55e]/10 border border-[#22c55e]/20 rounded-lg text-center">
+            <p className="text-sm font-medium text-[#22c55e]">
               🎉 All Sections Complete!
             </p>
             <p className="text-xs text-muted-foreground mt-1">

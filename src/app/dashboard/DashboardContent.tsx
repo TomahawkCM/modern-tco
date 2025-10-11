@@ -137,7 +137,7 @@ export function DashboardContent() {
           </div>
           <div>
             <h2 className="font-semibold text-slate-900 dark:text-slate-100">Welcome back!</h2>
-            <p className="text-sm text-slate-600 dark:text-slate-400">{user?.email}</p>
+            <p className="text-sm text-slate-600 dark:text-muted-foreground">{user?.email}</p>
           </div>
         </div>
         <Button variant="outline" onClick={handleSignOut}>
@@ -150,12 +150,12 @@ export function DashboardContent() {
       <div className="grid grid-cols-1 gap-6 md:grid-cols-4">
         <Card className="border-blue-200 bg-gradient-to-br from-blue-50 to-blue-100 dark:border-blue-800 dark:from-blue-900/20 dark:to-blue-800/20">
           <CardHeader className="pb-2">
-            <CardDescription className="text-blue-600 dark:text-blue-400">
+            <CardDescription className="text-blue-600 dark:text-primary">
               Total Progress
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="mb-1 text-2xl font-bold text-blue-700 dark:text-blue-300">
+            <div className="mb-1 text-2xl font-bold text-blue-700 dark:text-primary">
               {overallStats.completionRate}%
             </div>
             <Progress
@@ -163,7 +163,7 @@ export function DashboardContent() {
               className="h-2"
               aria-label={`Overall study progress: ${overallStats.completionRate}% complete`}
             />
-            <p className="mt-2 text-xs text-blue-600 dark:text-blue-400">
+            <p className="mt-2 text-xs text-blue-600 dark:text-primary">
               {overallStats.completed} of {totalSections} sections
             </p>
           </CardContent>
@@ -171,18 +171,18 @@ export function DashboardContent() {
 
         <Card className="border-green-200 bg-gradient-to-br from-green-50 to-green-100 dark:border-green-800 dark:from-green-900/20 dark:to-green-800/20">
           <CardHeader className="pb-2">
-            <CardDescription className="text-green-600 dark:text-green-400">
+            <CardDescription className="text-[#22c55e] dark:text-[#22c55e]">
               Completed
             </CardDescription>
           </CardHeader>
           <CardContent>
             <div className="flex items-center gap-2">
-              <Trophy className="h-5 w-5 text-green-600 dark:text-green-400" />
-              <span className="text-2xl font-bold text-green-700 dark:text-green-300">
+              <Trophy className="h-5 w-5 text-[#22c55e] dark:text-[#22c55e]" />
+              <span className="text-2xl font-bold text-green-700 dark:text-[#22c55e]">
                 {overallStats.completed}
               </span>
             </div>
-            <p className="mt-2 text-xs text-green-600 dark:text-green-400">Sections mastered</p>
+            <p className="mt-2 text-xs text-[#22c55e] dark:text-[#22c55e]">Sections mastered</p>
           </CardContent>
         </Card>
 
@@ -205,18 +205,18 @@ export function DashboardContent() {
 
         <Card className="border-cyan-200 bg-gradient-to-br from-cyan-50 to-cyan-100 dark:border-cyan-800 dark:from-cyan-900/20 dark:to-cyan-800/20">
           <CardHeader className="pb-2">
-            <CardDescription className="text-cyan-600 dark:text-cyan-400">
+            <CardDescription className="text-cyan-600 dark:text-primary">
               Bookmarks
             </CardDescription>
           </CardHeader>
           <CardContent>
             <div className="flex items-center gap-2">
-              <BookmarkIcon className="h-5 w-5 text-cyan-600 dark:text-cyan-400" />
-              <span className="text-2xl font-bold text-cyan-700 dark:text-cyan-300">
+              <BookmarkIcon className="h-5 w-5 text-cyan-600 dark:text-primary" />
+              <span className="text-2xl font-bold text-cyan-700 dark:text-primary">
                 {bookmarksCount}
               </span>
             </div>
-            <p className="mt-2 text-xs text-cyan-600 dark:text-cyan-400">Saved for later</p>
+            <p className="mt-2 text-xs text-cyan-600 dark:text-primary">Saved for later</p>
           </CardContent>
         </Card>
       </div>
@@ -283,7 +283,7 @@ export function DashboardContent() {
                 <CardContent>
                   <p className="mb-2 text-xs text-muted-foreground">{bookmark.moduleTitle}</p>
                   {bookmark.notes && (
-                    <p className="line-clamp-2 text-xs text-slate-600 dark:text-slate-400">
+                    <p className="line-clamp-2 text-xs text-slate-600 dark:text-muted-foreground">
                       {bookmark.notes}
                     </p>
                   )}

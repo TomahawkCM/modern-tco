@@ -87,7 +87,7 @@ const getDifficultyColor = (difficulty: string) => {
     case 'Advanced':
       return 'bg-red-100 text-red-700 border-red-300 dark:bg-red-900/50 dark:text-red-200 dark:border-red-500/50';
     default:
-      return 'bg-slate-100 text-slate-700 border-slate-300 dark:bg-slate-900/50 dark:text-slate-200 dark:border-slate-500/50';
+      return 'bg-slate-100 text-slate-700 border-slate-300 dark:bg-card/50 dark:text-muted-foreground dark:border-slate-500/50';
   }
 };
 
@@ -110,7 +110,7 @@ export default function ModuleNavigation({ currentSlug, showAllModules = false }
           <h2 className="mb-2 text-3xl font-bold text-slate-900 dark:text-slate-100">
             TCO Study Modules
           </h2>
-          <p className="text-slate-600 dark:text-slate-400">
+          <p className="text-slate-600 dark:text-muted-foreground">
             Complete certification preparation across all 5 domains
           </p>
         </div>
@@ -138,13 +138,13 @@ export default function ModuleNavigation({ currentSlug, showAllModules = false }
             const getIconColor = (difficulty: string) => {
               switch (difficulty) {
                 case 'Beginner':
-                  return 'text-green-600 dark:text-green-400';
+                  return 'text-[#22c55e] dark:text-[#22c55e]';
                 case 'Intermediate':
                   return 'text-orange-600 dark:text-orange-400';
                 case 'Advanced':
                   return 'text-red-600 dark:text-red-400';
                 default:
-                  return 'text-blue-600 dark:text-blue-400';
+                  return 'text-blue-600 dark:text-primary';
               }
             };
 
@@ -158,34 +158,34 @@ export default function ModuleNavigation({ currentSlug, showAllModules = false }
                   <CardContent className="p-6">
                     <div className="flex items-center gap-3 mb-3">
                       <div className={cn("p-2 rounded-lg", 
-                        module.difficulty === 'Beginner' ? 'bg-green-500/20' :
+                        module.difficulty === 'Beginner' ? 'bg-[#22c55e]/20' :
                         module.difficulty === 'Intermediate' ? 'bg-orange-500/20' :
-                        module.difficulty === 'Advanced' ? 'bg-red-500/20' : 'bg-blue-500/20'
+                        module.difficulty === 'Advanced' ? 'bg-red-500/20' : 'bg-primary/20'
                       )}>
                         <Icon className={cn("h-6 w-6", getIconColor(module.difficulty))} />
                       </div>
                       <div className="flex-1">
-                        <h3 className="font-semibold text-slate-900 dark:text-slate-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                        <h3 className="font-semibold text-slate-900 dark:text-slate-100 group-hover:text-blue-600 dark:group-hover:text-primary transition-colors">
                           {module.title}
                         </h3>
                         <div className="flex items-center gap-2 mt-1">
                           <Badge variant="outline" className={getDifficultyColor(module.difficulty)}>
                             {module.difficulty}
                           </Badge>
-                          <span className="text-sm text-slate-600 dark:text-slate-400">{module.estimatedTime}</span>
+                          <span className="text-sm text-slate-600 dark:text-muted-foreground">{module.estimatedTime}</span>
                         </div>
                       </div>
                     </div>
                     
-                    <p className="text-sm text-slate-700 dark:text-slate-300 mb-3">
+                    <p className="text-sm text-slate-700 dark:text-muted-foreground mb-3">
                       {module.description}
                     </p>
                     
                     <div className="flex items-center justify-between">
-                      <span className="text-xs text-slate-600 dark:text-slate-400">
+                      <span className="text-xs text-slate-600 dark:text-muted-foreground">
                         Exam Weight: {module.weight}%
                       </span>
-                      <ChevronRight className="h-4 w-4 text-slate-400 group-hover:text-blue-500 transition-colors" />
+                      <ChevronRight className="h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors" />
                     </div>
                   </CardContent>
                 </Card>
@@ -198,20 +198,20 @@ export default function ModuleNavigation({ currentSlug, showAllModules = false }
         <Card className="border-cyan-200 bg-gradient-to-br from-cyan-50 to-cyan-100 dark:border-cyan-800 dark:from-cyan-900/20 dark:to-cyan-800/20">
           <CardContent className="p-6">
             <div className="flex items-center gap-3 mb-3">
-              <div className="p-2 rounded-lg bg-cyan-500/20">
-                <Brain className="h-6 w-6 text-cyan-600 dark:text-cyan-400" />
+              <div className="p-2 rounded-lg bg-primary/20">
+                <Brain className="h-6 w-6 text-cyan-600 dark:text-primary" />
               </div>
               <div>
-                <h3 className="font-semibold text-cyan-700 dark:text-cyan-300 flex items-center gap-2">
+                <h3 className="font-semibold text-cyan-700 dark:text-primary flex items-center gap-2">
                   AI Study Assistant
-                  <Sparkles className="h-4 w-4 text-yellow-500" />
+                  <Sparkles className="h-4 w-4 text-[#f97316]" />
                 </h3>
-                <p className="text-sm text-cyan-600 dark:text-cyan-400">
+                <p className="text-sm text-cyan-600 dark:text-primary">
                   Get personalized help, explanations, and practice questions
                 </p>
               </div>
             </div>
-            <Button className="w-full bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700 text-white">
+            <Button className="w-full bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700 text-foreground">
               Launch AI Assistant
             </Button>
           </CardContent>
@@ -224,18 +224,18 @@ export default function ModuleNavigation({ currentSlug, showAllModules = false }
   return (
     <div className="space-y-4">
       {/* Breadcrumb */}
-      <nav className="flex items-center space-x-2 text-sm text-gray-400">
-        <Link href="/" className="hover:text-blue-400 transition-colors">
+      <nav className="flex items-center space-x-2 text-sm text-muted-foreground">
+        <Link href="/" className="hover:text-primary transition-colors">
           <Home className="h-4 w-4" />
         </Link>
         <ChevronRight className="h-4 w-4" />
-        <Link href="/modules" className="hover:text-blue-400 transition-colors">
+        <Link href="/modules" className="hover:text-primary transition-colors">
           Study Modules
         </Link>
         {currentSlug && (
           <>
             <ChevronRight className="h-4 w-4" />
-            <span className="text-blue-400 font-medium">
+            <span className="text-primary font-medium">
               {modules.find(m => m.slug === currentSlug)?.title}
             </span>
           </>
@@ -250,7 +250,7 @@ export default function ModuleNavigation({ currentSlug, showAllModules = false }
               <Button variant="outline" className="flex items-center gap-2">
                 <ChevronLeft className="h-4 w-4" />
                 <div className="text-left">
-                  <div className="text-xs text-gray-400">Previous</div>
+                  <div className="text-xs text-muted-foreground">Previous</div>
                   <div className="text-sm">{previousModule.title}</div>
                 </div>
               </Button>
@@ -260,7 +260,7 @@ export default function ModuleNavigation({ currentSlug, showAllModules = false }
           )}
 
           <Link href="/modules">
-            <Button variant="ghost" className="text-blue-400 hover:text-blue-300">
+            <Button variant="ghost" className="text-primary hover:text-primary">
               All Modules
             </Button>
           </Link>
@@ -269,7 +269,7 @@ export default function ModuleNavigation({ currentSlug, showAllModules = false }
             <Link href={`/modules/${nextModule.slug}`}>
               <Button variant="outline" className="flex items-center gap-2">
                 <div className="text-right">
-                  <div className="text-xs text-gray-400">Next</div>
+                  <div className="text-xs text-muted-foreground">Next</div>
                   <div className="text-sm">{nextModule.title}</div>
                 </div>
                 <ChevronRight className="h-4 w-4" />

@@ -67,7 +67,7 @@ export function ReviewMode({
   };
 
   const getScoreColor = (score: number): string => {
-    if (score >= 0.8) return "text-green-600";
+    if (score >= 0.8) return "text-[#22c55e]";
     if (score >= 0.7) return "text-yellow-600";
     return "text-red-600";
   };
@@ -191,7 +191,7 @@ export function ReviewMode({
                         </span>
                       </div>
                       <Progress value={breakdown.score * 100} className="h-2" />
-                      <div className="text-xs text-gray-500">
+                      <div className="text-xs text-muted-foreground">
                         {breakdown.correct} / {breakdown.total} correct
                       </div>
                     </div>
@@ -284,12 +284,12 @@ export function ReviewMode({
                           onClick={() => setCurrentQuestionIndex(index)}
                           className={`h-10 w-10 rounded-lg text-sm font-semibold transition-all ${
                             isCurrentQuestion
-                              ? "bg-blue-600 text-white"
+                              ? "bg-blue-600 text-foreground"
                               : isAnswerCorrect
                                 ? "border border-green-300 bg-green-100 text-green-700"
                                 : response
                                   ? "border border-red-300 bg-red-100 text-red-700"
-                                  : "bg-gray-100 text-gray-500"
+                                  : "bg-gray-100 text-muted-foreground"
                           }`}
                         >
                           {index + 1}
@@ -332,7 +332,7 @@ export function ReviewMode({
                     </CardTitle>
                     <div className="flex items-center space-x-2">
                       {isCorrect ? (
-                        <CheckCircle className="h-6 w-6 text-green-600" />
+                        <CheckCircle className="h-6 w-6 text-[#22c55e]" />
                       ) : (
                         <XCircle className="h-6 w-6 text-red-600" />
                       )}
@@ -372,10 +372,10 @@ export function ReviewMode({
                               <div
                                 className={`flex h-6 w-6 items-center justify-center rounded-full border-2 text-xs font-semibold ${
                                   isCorrectAnswer
-                                    ? "border-green-500 bg-green-500 text-white"
+                                    ? "border-green-500 bg-[#22c55e] text-foreground"
                                     : isSelectedAnswer
-                                      ? "border-red-500 bg-red-500 text-white"
-                                      : "border-gray-300 text-gray-500"
+                                      ? "border-red-500 bg-red-500 text-foreground"
+                                      : "border-gray-300 text-muted-foreground"
                                 }`}
                               >
                                 {optionLetter}
@@ -387,7 +387,7 @@ export function ReviewMode({
                                   {option.text}
                                 </span>
                                 {isCorrectAnswer && (
-                                  <span className="ml-2 text-xs font-medium text-green-600">
+                                  <span className="ml-2 text-xs font-medium text-[#22c55e]">
                                     ✓ Correct
                                   </span>
                                 )}
@@ -475,7 +475,7 @@ export function ReviewMode({
                         </span>
                       </div>
                       <Progress value={(breakdown.score ?? 0) * 100} className="h-2" />
-                      <div className="text-xs text-gray-500">
+                      <div className="text-xs text-muted-foreground">
                         {breakdown.correct} / {breakdown.total} correct
                       </div>
                     </div>
@@ -583,7 +583,7 @@ export function ReviewMode({
                         <div className="text-sm text-gray-600">Total Study Time</div>
                       </div>
                       <div>
-                        <div className="text-2xl font-bold text-green-600">
+                        <div className="text-2xl font-bold text-[#22c55e]">
                           {(result.remediationPlan ?? result.remediation)?.priorityObjectives
                             ?.length ?? 0}
                         </div>

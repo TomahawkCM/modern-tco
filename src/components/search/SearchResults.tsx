@@ -43,7 +43,7 @@ function QuestionResultCard({
   const getDifficultyColor = (difficulty: string) => {
     switch (difficulty) {
       case "Beginner":
-        return "bg-green-500";
+        return "bg-[#22c55e]";
       case "Intermediate":
         return "bg-yellow-500";
       case "Advanced":
@@ -83,16 +83,16 @@ function QuestionResultCard({
             <div className="mb-2 flex flex-wrap items-center gap-2">
               <Badge
                 variant="secondary"
-                className={cn("text-xs text-white", getDifficultyColor(question.difficulty))}
+                className={cn("text-xs text-foreground", getDifficultyColor(question.difficulty))}
               >
                 {question.difficulty}
               </Badge>
 
-              <Badge variant="outline" className="border-white/20 text-xs text-gray-300">
+              <Badge variant="outline" className="border-white/20 text-xs text-muted-foreground">
                 {question.domain}
               </Badge>
 
-              <Badge variant="outline" className="border-white/20 text-xs text-gray-300">
+              <Badge variant="outline" className="border-white/20 text-xs text-muted-foreground">
                 {question.category}
               </Badge>
 
@@ -108,14 +108,14 @@ function QuestionResultCard({
             </div>
 
             {/* Question Text */}
-            <h3 className="mb-3 font-medium leading-relaxed text-white">
+            <h3 className="mb-3 font-medium leading-relaxed text-foreground">
               {highlightText(question.question, searchQuery)}
             </h3>
 
             {/* Matched Fields */}
             {matchedFields.length > 0 && (
               <div className="mb-3 flex items-center gap-1">
-                <span className="text-xs text-gray-400">Matches in:</span>
+                <span className="text-xs text-muted-foreground">Matches in:</span>
                 {matchedFields.map((field, index) => (
                   <Badge
                     key={index}
@@ -129,7 +129,7 @@ function QuestionResultCard({
             )}
 
             {/* Features */}
-            <div className="flex items-center gap-4 text-xs text-gray-400">
+            <div className="flex items-center gap-4 text-xs text-muted-foreground">
               {question.explanation && (
                 <div className="flex items-center gap-1">
                   <Lightbulb className="h-3 w-3" />
@@ -159,7 +159,7 @@ function QuestionResultCard({
               <Button
                 onClick={onToggleSelection}
                 size="sm"
-                className="bg-tanium-accent text-white hover:bg-blue-600"
+                className="bg-tanium-accent text-foreground hover:bg-blue-600"
               >
                 <Check className="mr-1 h-4 w-4" />
                 Selected
@@ -169,7 +169,7 @@ function QuestionResultCard({
                 onClick={onToggleSelection}
                 variant="outline"
                 size="sm"
-                className="border-white/20 text-white hover:bg-white/10"
+                className="border-white/20 text-foreground hover:bg-white/10"
               >
                 <Plus className="mr-1 h-4 w-4" />
                 Select
@@ -180,7 +180,7 @@ function QuestionResultCard({
               onClick={() => setIsExpanded(!isExpanded)}
               variant="ghost"
               size="sm"
-              className="p-2 text-gray-400 hover:text-white"
+              className="p-2 text-muted-foreground hover:text-foreground"
             >
               {isExpanded ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
             </Button>
@@ -192,7 +192,7 @@ function QuestionResultCard({
           <CollapsibleContent className="space-y-4">
             {/* Answer Choices */}
             <div className="border-t border-white/10 pt-4">
-              <h4 className="mb-3 text-sm font-medium text-white">Answer Choices:</h4>
+              <h4 className="mb-3 text-sm font-medium text-foreground">Answer Choices:</h4>
               <div className="space-y-2">
                 {question.choices.map((choice, index) => (
                   <div
@@ -200,19 +200,19 @@ function QuestionResultCard({
                     className={cn(
                       "rounded-lg border p-3 transition-colors",
                       choice.id === question.correctAnswerId
-                        ? "border-green-500/50 bg-green-500/10"
+                        ? "border-green-500/50 bg-[#22c55e]/10"
                         : "border-white/10 bg-white/5"
                     )}
                   >
                     <div className="flex items-start gap-3">
-                      <span className="mt-1 text-sm font-medium text-gray-400">
+                      <span className="mt-1 text-sm font-medium text-muted-foreground">
                         {String.fromCharCode(65 + index)}.
                       </span>
-                      <span className="flex-1 text-sm text-gray-300">
+                      <span className="flex-1 text-sm text-muted-foreground">
                         {highlightText(choice.text, searchQuery)}
                       </span>
                       {choice.id === question.correctAnswerId && (
-                        <Badge variant="secondary" className="bg-green-500 text-xs text-white">
+                        <Badge variant="secondary" className="bg-[#22c55e] text-xs text-foreground">
                           Correct
                         </Badge>
                       )}
@@ -225,11 +225,11 @@ function QuestionResultCard({
             {/* Explanation */}
             {question.explanation && (
               <div className="border-t border-white/10 pt-4">
-                <h4 className="mb-2 flex items-center gap-2 text-sm font-medium text-white">
+                <h4 className="mb-2 flex items-center gap-2 text-sm font-medium text-foreground">
                   <Lightbulb className="h-4 w-4" />
                   Explanation:
                 </h4>
-                <p className="text-sm leading-relaxed text-gray-300">
+                <p className="text-sm leading-relaxed text-muted-foreground">
                   {highlightText(question.explanation, searchQuery)}
                 </p>
               </div>
@@ -238,15 +238,15 @@ function QuestionResultCard({
             {/* Console Steps */}
             {question.consoleSteps && question.consoleSteps.length > 0 && (
               <div className="border-t border-white/10 pt-4">
-                <h4 className="mb-2 flex items-center gap-2 text-sm font-medium text-white">
+                <h4 className="mb-2 flex items-center gap-2 text-sm font-medium text-foreground">
                   <Terminal className="h-4 w-4" />
                   Console Steps:
                 </h4>
                 <div className="space-y-2">
                   {question.consoleSteps.map((step, index) => (
-                    <div key={index} className="flex items-start gap-3 rounded bg-slate-800/50 p-2">
-                      <span className="mt-1 font-mono text-xs text-gray-400">{index + 1}.</span>
-                      <code className="flex-1 font-mono text-xs text-green-400">{step}</code>
+                    <div key={index} className="flex items-start gap-3 rounded bg-card/50 p-2">
+                      <span className="mt-1 font-mono text-xs text-muted-foreground">{index + 1}.</span>
+                      <code className="flex-1 font-mono text-xs text-[#22c55e]">{step}</code>
                     </div>
                   ))}
                 </div>
@@ -256,19 +256,19 @@ function QuestionResultCard({
             {/* Study References */}
             {(question.studyGuideRef ?? question.officialRef) && (
               <div className="border-t border-white/10 pt-4">
-                <h4 className="mb-2 flex items-center gap-2 text-sm font-medium text-white">
+                <h4 className="mb-2 flex items-center gap-2 text-sm font-medium text-foreground">
                   <BookOpen className="h-4 w-4" />
                   References:
                 </h4>
                 <div className="space-y-1">
                   {question.studyGuideRef && (
-                    <p className="text-xs text-gray-400">
+                    <p className="text-xs text-muted-foreground">
                       Study Guide:{" "}
                       <span className="text-tanium-accent">{question.studyGuideRef}</span>
                     </p>
                   )}
                   {question.officialRef && (
-                    <p className="text-xs text-gray-400">
+                    <p className="text-xs text-muted-foreground">
                       Official Docs:{" "}
                       <span className="text-tanium-accent">{question.officialRef}</span>
                     </p>
@@ -321,7 +321,7 @@ export function SearchResults() {
   if (state.isSearching) {
     return (
       <div className="flex items-center justify-center py-12">
-        <div className="flex items-center gap-3 text-gray-300">
+        <div className="flex items-center gap-3 text-muted-foreground">
           <div className="h-6 w-6 animate-spin rounded-full border-b-2 border-tanium-accent"></div>
           <span>Searching questions...</span>
         </div>
@@ -339,9 +339,9 @@ export function SearchResults() {
       <div className="py-12 text-center">
         <Card className="glass mx-auto max-w-md border-white/10">
           <div className="p-8">
-            <Search className="mx-auto mb-4 h-12 w-12 text-gray-400" />
-            <h3 className="mb-2 text-lg font-medium text-white">Ready to Search</h3>
-            <p className="text-sm text-gray-300">
+            <Search className="mx-auto mb-4 h-12 w-12 text-muted-foreground" />
+            <h3 className="mb-2 text-lg font-medium text-foreground">Ready to Search</h3>
+            <p className="text-sm text-muted-foreground">
               Enter keywords or apply filters to find specific questions from the TCO exam bank.
             </p>
           </div>
@@ -355,9 +355,9 @@ export function SearchResults() {
       <div className="py-12 text-center">
         <Card className="glass mx-auto max-w-md border-white/10">
           <div className="p-8">
-            <Search className="mx-auto mb-4 h-12 w-12 text-gray-400" />
-            <h3 className="mb-2 text-lg font-medium text-white">No questions found</h3>
-            <p className="mb-4 text-sm text-gray-300">
+            <Search className="mx-auto mb-4 h-12 w-12 text-muted-foreground" />
+            <h3 className="mb-2 text-lg font-medium text-foreground">No questions found</h3>
+            <p className="mb-4 text-sm text-muted-foreground">
               Try different keywords or adjust your filters to find more results.
             </p>
           </div>
@@ -376,13 +376,13 @@ export function SearchResults() {
             onCheckedChange={handleSelectAll}
             className="border-white/20 data-[state=checked]:bg-tanium-accent"
           />
-          <span className="text-sm text-gray-300">
+          <span className="text-sm text-muted-foreground">
             Select all ({paginatedResults.length} questions)
           </span>
         </div>
 
         {/* Results Info */}
-        <div className="text-sm text-gray-400">
+        <div className="text-sm text-muted-foreground">
           Showing {startIndex + 1}-{Math.min(endIndex, totalResults)} of {totalResults}
         </div>
       </div>
@@ -410,7 +410,7 @@ export function SearchResults() {
             disabled={currentPage <= 1}
             variant="outline"
             size="sm"
-            className="border-white/20 text-white hover:bg-white/10 disabled:opacity-50"
+            className="border-white/20 text-foreground hover:bg-white/10 disabled:opacity-50"
           >
             Previous
           </Button>
@@ -429,7 +429,7 @@ export function SearchResults() {
                   className={cn(
                     isActive
                       ? "bg-tanium-accent hover:bg-blue-600"
-                      : "border-white/20 text-white hover:bg-white/10"
+                      : "border-white/20 text-foreground hover:bg-white/10"
                   )}
                 >
                   {page}
@@ -439,12 +439,12 @@ export function SearchResults() {
 
             {totalPages > 5 && (
               <>
-                <span className="px-2 text-gray-400">...</span>
+                <span className="px-2 text-muted-foreground">...</span>
                 <Button
                   onClick={() => setPage(totalPages)}
                   variant="outline"
                   size="sm"
-                  className="border-white/20 text-white hover:bg-white/10"
+                  className="border-white/20 text-foreground hover:bg-white/10"
                 >
                   {totalPages}
                 </Button>
@@ -457,7 +457,7 @@ export function SearchResults() {
             disabled={currentPage >= totalPages}
             variant="outline"
             size="sm"
-            className="border-white/20 text-white hover:bg-white/10 disabled:opacity-50"
+            className="border-white/20 text-foreground hover:bg-white/10 disabled:opacity-50"
           >
             Next
           </Button>

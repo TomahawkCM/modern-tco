@@ -40,25 +40,25 @@ export default function VideosAdminPage() {
   return (
     <div className="container mx-auto px-4 py-8 space-y-6">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold text-white">Videos Admin (local override)</h1>
+        <h1 className="text-2xl font-bold text-foreground">Videos Admin (local override)</h1>
         <button
           onClick={save}
-          className="rounded bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700"
+          className="rounded bg-blue-600 px-4 py-2 text-sm font-medium text-foreground hover:bg-blue-700"
         >
           Save
         </button>
       </div>
-      {status && <div className="text-green-300">{status}</div>}
-      <p className="text-blue-200">
+      {status && <div className="text-[#22c55e]">{status}</div>}
+      <p className="text-muted-foreground">
         Paste YouTube links or IDs per module (one per line). This stores locally in your browser and overrides the
         default manifest. For production-wide changes, set NEXT_PUBLIC_VIDEOS_&lt;SLUG&gt; env vars in Vercel.
       </p>
       <div className="grid gap-6 md:grid-cols-2">
         {data.modules.map((m) => (
           <div key={m.slug} className="space-y-2 rounded border border-white/10 p-4">
-            <div className="text-white">{m.slug}</div>
+            <div className="text-foreground">{m.slug}</div>
             <textarea
-              className="h-40 w-full rounded border border-white/10 bg-slate-900 p-2 text-sm text-white"
+              className="h-40 w-full rounded border border-white/10 bg-card p-2 text-sm text-foreground"
               placeholder="https://www.youtube.com/watch?v=...\nhttps://youtu.be/...\n<videoId>"
               value={getFor(m.slug)}
               onChange={(e) => setFor(m.slug, e.target.value)}

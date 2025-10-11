@@ -99,16 +99,16 @@ export function ExamStartDialog({ trigger, mode, onStart }: ExamStartDialogProps
           title: "Practice Mode",
           description: "Interactive learning with instant feedback",
           icon: BookOpen,
-          color: "text-blue-400",
-          bgColor: "bg-blue-500",
+          color: "text-primary",
+          bgColor: "bg-primary",
         };
       case ExamMode.MOCK:
         return {
           title: "Mock Exam",
           description: "Full certification exam simulation",
           icon: FileText,
-          color: "text-green-400",
-          bgColor: "bg-green-500",
+          color: "text-[#22c55e]",
+          bgColor: "bg-[#22c55e]",
         };
       case ExamMode.REVIEW:
         return {
@@ -123,8 +123,8 @@ export function ExamStartDialog({ trigger, mode, onStart }: ExamStartDialogProps
           title: "Exam",
           description: "Test your knowledge",
           icon: BookOpen,
-          color: "text-blue-400",
-          bgColor: "bg-blue-500",
+          color: "text-primary",
+          bgColor: "bg-primary",
         };
     }
   };
@@ -135,15 +135,15 @@ export function ExamStartDialog({ trigger, mode, onStart }: ExamStartDialogProps
   return (
     <Dialog>
       <DialogTrigger asChild>{trigger}</DialogTrigger>
-      <DialogContent className="glass max-w-2xl border-white/20 text-white">
+      <DialogContent className="glass max-w-2xl border-white/20 text-foreground">
         <DialogHeader>
           <div className="flex items-center space-x-3">
             <div className={cn("rounded-lg p-3", modeInfo.bgColor)}>
-              <Icon className="h-6 w-6 text-white" />
+              <Icon className="h-6 w-6 text-foreground" />
             </div>
             <div>
-              <DialogTitle className="text-xl text-white">{modeInfo.title}</DialogTitle>
-              <DialogDescription className="text-gray-300">
+              <DialogTitle className="text-xl text-foreground">{modeInfo.title}</DialogTitle>
+              <DialogDescription className="text-muted-foreground">
                 {modeInfo.description}
               </DialogDescription>
             </div>
@@ -153,15 +153,15 @@ export function ExamStartDialog({ trigger, mode, onStart }: ExamStartDialogProps
         <div className="space-y-6 py-4">
           {/* Configuration Options */}
           <div className="space-y-4">
-            <h3 className="text-lg font-medium text-white">Configuration</h3>
+            <h3 className="text-lg font-medium text-foreground">Configuration</h3>
 
             <div className="grid gap-4 md:grid-cols-2">
               <div className="space-y-2">
-                <label className="text-sm font-medium text-gray-200">Number of Questions</label>
+                <label className="text-sm font-medium text-muted-foreground">Number of Questions</label>
                 <select
                   value={config.questionCount}
                   onChange={(e) => setConfig({ ...config, questionCount: Number(e.target.value) })}
-                  className="glass w-full rounded-lg border border-white/20 p-2 text-white"
+                  className="glass w-full rounded-lg border border-white/20 p-2 text-foreground"
                 >
                   {mode === ExamMode.MOCK ? (
                     <option value={65}>65 (Full Exam)</option>
@@ -177,11 +177,11 @@ export function ExamStartDialog({ trigger, mode, onStart }: ExamStartDialogProps
               </div>
 
               <div className="space-y-2">
-                <label className="text-sm font-medium text-gray-200">Difficulty Level</label>
+                <label className="text-sm font-medium text-muted-foreground">Difficulty Level</label>
                 <select
                   value={config.difficulty}
                   onChange={(e) => setConfig({ ...config, difficulty: e.target.value as any })}
-                  className="glass w-full rounded-lg border border-white/20 p-2 text-white"
+                  className="glass w-full rounded-lg border border-white/20 p-2 text-foreground"
                 >
                   <option value="mixed">Mixed Difficulty</option>
                   <option value="beginner">Beginner</option>
@@ -193,7 +193,7 @@ export function ExamStartDialog({ trigger, mode, onStart }: ExamStartDialogProps
 
             {mode === ExamMode.PRACTICE && (
               <div className="space-y-2">
-                <label className="text-sm font-medium text-gray-200">Focus Domain (Optional)</label>
+                <label className="text-sm font-medium text-muted-foreground">Focus Domain (Optional)</label>
                 <select
                   value={config.domain ?? ""}
                   onChange={(e) =>
@@ -202,7 +202,7 @@ export function ExamStartDialog({ trigger, mode, onStart }: ExamStartDialogProps
                       domain: e.target.value ? (e.target.value as TCODomain) : undefined,
                     })
                   }
-                  className="glass w-full rounded-lg border border-white/20 p-2 text-white"
+                  className="glass w-full rounded-lg border border-white/20 p-2 text-foreground"
                 >
                   <option value="">All Domains</option>
                   {Object.values(TCODomain).map((domain) => (
@@ -222,8 +222,8 @@ export function ExamStartDialog({ trigger, mode, onStart }: ExamStartDialogProps
             <div className="flex items-center space-x-2">
               <Clock className={modeInfo.color} size={16} />
               <div>
-                <p className="text-sm text-gray-300">Time Limit</p>
-                <p className="font-medium text-white">
+                <p className="text-sm text-muted-foreground">Time Limit</p>
+                <p className="font-medium text-foreground">
                   {mode === ExamMode.MOCK ? "90 minutes" : "Unlimited"}
                 </p>
               </div>
@@ -232,16 +232,16 @@ export function ExamStartDialog({ trigger, mode, onStart }: ExamStartDialogProps
             <div className="flex items-center space-x-2">
               <Trophy className={modeInfo.color} size={16} />
               <div>
-                <p className="text-sm text-gray-300">Passing Score</p>
-                <p className="font-medium text-white">70%</p>
+                <p className="text-sm text-muted-foreground">Passing Score</p>
+                <p className="font-medium text-foreground">70%</p>
               </div>
             </div>
 
             <div className="flex items-center space-x-2">
               <Settings className={modeInfo.color} size={16} />
               <div>
-                <p className="text-sm text-gray-300">Format</p>
-                <p className="font-medium text-white">Multiple Choice</p>
+                <p className="text-sm text-muted-foreground">Format</p>
+                <p className="font-medium text-foreground">Multiple Choice</p>
               </div>
             </div>
           </div>
@@ -291,10 +291,10 @@ export function ExamPauseSheet({
 }: ExamPauseSheetProps) {
   return (
     <Sheet open={isOpen} onOpenChange={onOpenChange}>
-      <SheetContent side="right" className="glass w-96 border-white/20 text-white">
+      <SheetContent side="right" className="glass w-96 border-white/20 text-foreground">
         <SheetHeader>
-          <SheetTitle className="text-white">Exam Paused</SheetTitle>
-          <SheetDescription className="text-gray-300">
+          <SheetTitle className="text-foreground">Exam Paused</SheetTitle>
+          <SheetDescription className="text-muted-foreground">
             Your progress has been saved
           </SheetDescription>
         </SheetHeader>
@@ -303,8 +303,8 @@ export function ExamPauseSheet({
           {/* Progress */}
           <div className="space-y-4">
             <div className="flex justify-between text-sm">
-              <span className="text-gray-300">Progress</span>
-              <span className="text-white">
+              <span className="text-muted-foreground">Progress</span>
+              <span className="text-foreground">
                 {currentQuestion}/{totalQuestions} questions
               </span>
             </div>
@@ -321,9 +321,9 @@ export function ExamPauseSheet({
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-2">
                   <Clock className="h-4 w-4 text-orange-400" />
-                  <span className="text-sm text-gray-300">Time Remaining</span>
+                  <span className="text-sm text-muted-foreground">Time Remaining</span>
                 </div>
-                <span className="text-lg font-medium text-white">
+                <span className="text-lg font-medium text-foreground">
                   {Math.floor(timeRemaining / 60)}:
                   {(timeRemaining % 60).toString().padStart(2, "0")}
                 </span>
@@ -333,7 +333,7 @@ export function ExamPauseSheet({
 
           {/* Actions */}
           <div className="space-y-3">
-            <Button onClick={onResume} className="w-full bg-green-600 hover:bg-green-700" size="lg">
+            <Button onClick={onResume} className="w-full bg-[#22c55e] hover:bg-green-700" size="lg">
               <Play className="mr-2 h-4 w-4" />
               Resume Exam
             </Button>
@@ -341,7 +341,7 @@ export function ExamPauseSheet({
             <Button
               onClick={onRestart}
               variant="outline"
-              className="glass w-full border-white/20 text-white hover:bg-white/10"
+              className="glass w-full border-white/20 text-foreground hover:bg-white/10"
             >
               <RotateCcw className="mr-2 h-4 w-4" />
               Restart Exam
@@ -375,26 +375,26 @@ export function ExamResultsDialog({
 
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
-      <DialogContent className="glass max-w-2xl border-white/20 text-white">
+      <DialogContent className="glass max-w-2xl border-white/20 text-foreground">
         <DialogHeader>
           <div className="space-y-4 text-center">
             <div className="flex justify-center">
               {passed ? (
-                <div className="rounded-full bg-green-500 p-4">
-                  <CheckCircle className="h-12 w-12 text-white" />
+                <div className="rounded-full bg-[#22c55e] p-4">
+                  <CheckCircle className="h-12 w-12 text-foreground" />
                 </div>
               ) : (
                 <div className="rounded-full bg-red-500 p-4">
-                  <XCircle className="h-12 w-12 text-white" />
+                  <XCircle className="h-12 w-12 text-foreground" />
                 </div>
               )}
             </div>
 
             <div>
-              <DialogTitle className="text-2xl text-white">
+              <DialogTitle className="text-2xl text-foreground">
                 {passed ? "Congratulations!" : "Keep Studying!"}
               </DialogTitle>
-              <DialogDescription className="text-lg text-gray-300">
+              <DialogDescription className="text-lg text-muted-foreground">
                 {passed ? "You passed the exam!" : `You need ${results.passingScore}% to pass`}
               </DialogDescription>
             </div>
@@ -405,11 +405,11 @@ export function ExamResultsDialog({
           {/* Score Display */}
           <div className="text-center">
             <div
-              className={cn("mb-2 text-6xl font-bold", passed ? "text-green-400" : "text-red-400")}
+              className={cn("mb-2 text-6xl font-bold", passed ? "text-[#22c55e]" : "text-red-400")}
             >
               {Math.round(percentage)}%
             </div>
-            <p className="text-gray-300">
+            <p className="text-muted-foreground">
               {results.correctAnswers} of {results.totalQuestions} questions correct
             </p>
           </div>
@@ -417,23 +417,23 @@ export function ExamResultsDialog({
           {/* Statistics */}
           <div className="grid gap-4 md:grid-cols-3">
             <div className="glass rounded-lg p-4 text-center">
-              <Trophy className="mx-auto mb-2 h-6 w-6 text-yellow-400" />
-              <div className="text-xl font-bold text-white">{results.score}%</div>
-              <div className="text-sm text-gray-300">Final Score</div>
+              <Trophy className="mx-auto mb-2 h-6 w-6 text-[#f97316]" />
+              <div className="text-xl font-bold text-foreground">{results.score}%</div>
+              <div className="text-sm text-muted-foreground">Final Score</div>
             </div>
 
             <div className="glass rounded-lg p-4 text-center">
-              <Clock className="mx-auto mb-2 h-6 w-6 text-blue-400" />
-              <div className="text-xl font-bold text-white">
+              <Clock className="mx-auto mb-2 h-6 w-6 text-primary" />
+              <div className="text-xl font-bold text-foreground">
                 {Math.floor(results.timeSpent / 60)}m {results.timeSpent % 60}s
               </div>
-              <div className="text-sm text-gray-300">Time Spent</div>
+              <div className="text-sm text-muted-foreground">Time Spent</div>
             </div>
 
             <div className="glass rounded-lg p-4 text-center">
-              <BookOpen className="mx-auto mb-2 h-6 w-6 text-cyan-400" />
-              <div className="text-xl font-bold text-white">{results.mode}</div>
-              <div className="text-sm text-gray-300">Exam Mode</div>
+              <BookOpen className="mx-auto mb-2 h-6 w-6 text-primary" />
+              <div className="text-xl font-bold text-foreground">{results.mode}</div>
+              <div className="text-sm text-muted-foreground">Exam Mode</div>
             </div>
           </div>
 
@@ -441,7 +441,7 @@ export function ExamResultsDialog({
           <div
             className={cn(
               "glass rounded-lg p-4",
-              passed ? "border-green-500/20 bg-green-500/5" : "border-red-500/20 bg-red-500/5"
+              passed ? "border-[#22c55e]/20 bg-[#22c55e]/5" : "border-red-500/20 bg-red-500/5"
             )}
           >
             <p className="text-center text-sm">
@@ -463,7 +463,7 @@ export function ExamResultsDialog({
             <Button
               onClick={onReview}
               variant="outline"
-              className="glass flex-1 border-white/20 text-white hover:bg-white/10"
+              className="glass flex-1 border-white/20 text-foreground hover:bg-white/10"
             >
               <BookOpen className="mr-2 h-4 w-4" />
               Review Answers
@@ -472,7 +472,7 @@ export function ExamResultsDialog({
             <Button
               onClick={onRestart}
               variant="outline"
-              className="glass flex-1 border-white/20 text-white hover:bg-white/10"
+              className="glass flex-1 border-white/20 text-foreground hover:bg-white/10"
             >
               <RotateCcw className="mr-2 h-4 w-4" />
               Retake Exam

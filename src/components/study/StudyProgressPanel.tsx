@@ -57,12 +57,12 @@ export function StudyProgressPanel() {
   const progressPercent = totalSections > 0 ? Math.round((completedCount / totalSections) * 100) : 0;
 
   return (
-    <Card className="border-blue-500/30 bg-gradient-to-b from-gray-900/50 to-blue-900/30">
+    <Card className="border-primary/30 bg-gradient-to-b from-gray-900/50 to-blue-900/30">
       <CardHeader className="pb-3">
-        <CardTitle className="flex items-center gap-2 text-sm text-blue-200">
+        <CardTitle className="flex items-center gap-2 text-sm text-muted-foreground">
           <Book className="h-4 w-4" /> Study Progress
         </CardTitle>
-        <CardDescription className="text-xs text-gray-400">
+        <CardDescription className="text-xs text-muted-foreground">
           {completedCount} of {totalSections} sections ({progressPercent}%)
         </CardDescription>
 
@@ -70,7 +70,7 @@ export function StudyProgressPanel() {
         <div className="mt-3 flex flex-col gap-2">
           <Button
             size="sm"
-            className="w-full bg-green-700 hover:bg-green-600 text-xs h-8"
+            className="w-full bg-green-700 hover:bg-[#22c55e] text-xs h-8"
             onClick={handleMarkAllComplete}
           >
             Mark all complete
@@ -78,7 +78,7 @@ export function StudyProgressPanel() {
           <Button
             size="sm"
             variant="outline"
-            className="w-full border-yellow-600 text-yellow-200 hover:bg-yellow-900/30 text-xs h-8"
+            className="w-full border-yellow-600 text-[#f97316] hover:bg-[#f97316]/10 text-xs h-8"
             onClick={handleClearAllReview}
           >
             Clear all review
@@ -86,7 +86,7 @@ export function StudyProgressPanel() {
           <Button
             size="sm"
             variant="outline"
-            className="w-full border-gray-600 text-gray-200 hover:bg-gray-900/30 text-xs h-8"
+            className="w-full border-gray-600 text-muted-foreground hover:bg-gray-900/30 text-xs h-8"
             onClick={handleResetProgress}
           >
             Reset progress
@@ -98,7 +98,7 @@ export function StudyProgressPanel() {
           <div className="mt-3">
             <Button
               size="sm"
-              className="w-full bg-cyan-700 hover:bg-cyan-600 text-xs h-8"
+              className="w-full bg-cyan-700 hover:bg-primary text-xs h-8"
               onClick={() => handleScrollToSection(lastViewed)}
             >
               Continue where you left off
@@ -128,7 +128,7 @@ export function StudyProgressPanel() {
               <button
                 className={cn(
                   "flex-1 text-left text-xs hover:underline",
-                  activeId === s.id ? "text-cyan-300 font-medium" : "text-blue-100"
+                  activeId === s.id ? "text-primary font-medium" : "text-blue-100"
                 )}
                 onClick={() => handleScrollToSection(s.id)}
                 aria-current={activeId === s.id ? "true" : undefined}
@@ -136,13 +136,13 @@ export function StudyProgressPanel() {
                 {s.title}
               </button>
               {typeof s.etaMin === 'number' && (
-                <span className="flex items-center gap-0.5 text-[10px] text-gray-400">
+                <span className="flex items-center gap-0.5 text-[10px] text-muted-foreground">
                   <Clock className="h-2.5 w-2.5" /> {s.etaMin}m
                 </span>
               )}
               {!s.completed && (
                 <button
-                  className="text-[10px] text-yellow-300 hover:underline"
+                  className="text-[10px] text-[#f97316] hover:underline"
                   onClick={() => markSection(s.id, 'needs_review')}
                   aria-label={`Mark ${s.title} needs review`}
                 >

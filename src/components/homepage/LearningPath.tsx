@@ -26,7 +26,7 @@ const tcoDomains = [
     description: "Master the art of querying endpoints and gathering intelligence",
     weight: "22%",
     icon: Target,
-    color: "from-blue-500 to-cyan-500",
+    color: "from-blue-500 to-primary",
     skills: ["Question syntax", "Sensor deployment", "Data collection", "Performance optimization"],
     estimatedTime: "6-8 hours",
     difficulty: "Beginner",
@@ -39,7 +39,7 @@ const tcoDomains = [
     description: "Learn to precisely target endpoints for maximum operational efficiency",
     weight: "23%",
     icon: Users,
-    color: "from-cyan-500 to-teal-500",
+    color: "from-primary to-teal-500",
     skills: ["Group creation", "Dynamic targeting", "Filter logic", "Saved question groups"],
     estimatedTime: "7-9 hours",
     difficulty: "Intermediate",
@@ -91,13 +91,13 @@ export function LearningPath() {
   const getDifficultyColor = (difficulty: string) => {
     switch (difficulty) {
       case "Beginner":
-        return "bg-green-500/20 text-green-400 border-green-500/30";
+        return "bg-[#22c55e]/20 text-[#22c55e] border-[#22c55e]/30";
       case "Intermediate":
-        return "bg-yellow-500/20 text-yellow-400 border-yellow-500/30";
+        return "bg-[#f97316]/20 text-[#f97316] border-[#f97316]/30";
       case "Advanced":
         return "bg-red-500/20 text-red-400 border-red-500/30";
       default:
-        return "bg-slate-500/20 text-slate-400 border-slate-500/30";
+        return "bg-slate-500/20 text-muted-foreground border-slate-500/30";
     }
   };
 
@@ -112,14 +112,14 @@ export function LearningPath() {
           transition={{ duration: 0.6 }}
           className="mb-12 text-center"
         >
-          <Badge className="mb-4 border-purple-500/20 bg-purple-500/10 text-purple-400">
+          <Badge className="mb-4 border-accent/20 bg-accent/10 text-accent-foreground">
             <Star className="mr-2 h-4 w-4" />
             AI-Powered Learning Path
           </Badge>
-          <h2 className="mb-6 bg-gradient-to-r from-white via-cyan-100 to-purple-200 bg-clip-text text-4xl font-bold text-transparent md:text-5xl">
+          <h2 className="mb-6 bg-gradient-to-r from-white via-primary to-purple-200 bg-clip-text text-4xl font-bold text-transparent md:text-5xl">
             Master All 5 TCO Domains
           </h2>
-          <p className="mx-auto max-w-3xl text-xl leading-relaxed text-slate-300">
+          <p className="mx-auto max-w-3xl text-xl leading-relaxed text-muted-foreground">
             Our comprehensive curriculum covers every aspect of the Tanium Certified Operator exam.
             Each domain is carefully structured with hands-on labs, real-world scenarios, and expert
             guidance.
@@ -145,18 +145,18 @@ export function LearningPath() {
                     <div
                       className={`h-12 w-12 rounded-lg bg-gradient-to-br ${domain.color} flex items-center justify-center`}
                     >
-                      <domain.icon className="h-6 w-6 text-white" />
+                      <domain.icon className="h-6 w-6 text-foreground" />
                     </div>
                     <Badge className={getDifficultyColor(domain.difficulty)}>
                       {domain.difficulty}
                     </Badge>
                   </div>
 
-                  <CardTitle className="text-xl text-white transition-colors group-hover:text-cyan-300">
+                  <CardTitle className="text-xl text-foreground transition-colors group-hover:text-primary">
                     {domain.title}
                   </CardTitle>
 
-                  <CardDescription className="leading-relaxed text-slate-400">
+                  <CardDescription className="leading-relaxed text-muted-foreground">
                     {domain.description}
                   </CardDescription>
                 </CardHeader>
@@ -164,8 +164,8 @@ export function LearningPath() {
                 <CardContent className="space-y-4">
                   {/* Exam Weight */}
                   <div className="flex items-center justify-between">
-                    <span className="text-sm text-slate-400">Exam Weight</span>
-                    <Badge variant="secondary" className="bg-cyan-500/10 text-cyan-400">
+                    <span className="text-sm text-muted-foreground">Exam Weight</span>
+                    <Badge variant="secondary" className="bg-primary/10 text-primary">
                       {domain.weight}
                     </Badge>
                   </div>
@@ -173,8 +173,8 @@ export function LearningPath() {
                   {/* Progress Bar */}
                   <div className="space-y-2">
                     <div className="flex items-center justify-between text-sm">
-                      <span className="text-slate-400">Progress</span>
-                      <span className="text-slate-300">{domain.progress}%</span>
+                      <span className="text-muted-foreground">Progress</span>
+                      <span className="text-muted-foreground">{domain.progress}%</span>
                     </div>
                     <Progress
                       value={domain.progress}
@@ -185,11 +185,11 @@ export function LearningPath() {
 
                   {/* Stats Row */}
                   <div className="grid grid-cols-2 gap-4 text-sm">
-                    <div className="flex items-center gap-2 text-slate-400">
+                    <div className="flex items-center gap-2 text-muted-foreground">
                       <Clock className="h-4 w-4" />
                       {domain.estimatedTime}
                     </div>
-                    <div className="flex items-center gap-2 text-slate-400">
+                    <div className="flex items-center gap-2 text-muted-foreground">
                       <BookOpen className="h-4 w-4" />
                       {domain.labs} Labs
                     </div>
@@ -197,13 +197,13 @@ export function LearningPath() {
 
                   {/* Key Skills */}
                   <div className="space-y-2">
-                    <div className="text-sm font-medium text-slate-300">Key Skills</div>
+                    <div className="text-sm font-medium text-muted-foreground">Key Skills</div>
                     <div className="flex flex-wrap gap-1">
                       {domain.skills.slice(0, 2).map((skill, skillIndex) => (
                         <Badge
                           key={skillIndex}
                           variant="outline"
-                          className="border-slate-600 bg-slate-800/50 text-xs text-slate-300"
+                          className="border-border bg-card/50 text-xs text-muted-foreground"
                         >
                           {skill}
                         </Badge>
@@ -211,7 +211,7 @@ export function LearningPath() {
                       {domain.skills.length > 2 && (
                         <Badge
                           variant="outline"
-                          className="border-slate-600 bg-slate-800/50 text-xs text-slate-400"
+                          className="border-border bg-card/50 text-xs text-muted-foreground"
                         >
                           +{domain.skills.length - 2} more
                         </Badge>
@@ -222,7 +222,7 @@ export function LearningPath() {
                   {/* Action Button */}
                   <Button
                     asChild
-                    className="mt-4 w-full border border-cyan-500/30 bg-gradient-to-r from-cyan-600/20 to-blue-600/20 text-cyan-300 transition-all duration-300 hover:from-cyan-600/30 hover:to-blue-600/30"
+                    className="mt-4 w-full border border-primary/30 bg-gradient-to-r from-cyan-600/20 to-blue-600/20 text-primary transition-all duration-300 hover:from-cyan-600/30 hover:to-blue-600/30"
                     variant="outline"
                   >
                     <Link href={`/study/domains/${domain.id}`}>
@@ -249,10 +249,10 @@ export function LearningPath() {
             className="mx-auto max-w-2xl bg-gradient-to-br from-purple-900/20 to-cyan-900/20 p-8"
           >
             <div className="mb-4 flex items-center justify-center">
-              <CheckCircle className="mr-3 h-8 w-8 text-green-400" />
-              <h3 className="text-2xl font-bold text-white">Ready to Begin?</h3>
+              <CheckCircle className="mr-3 h-8 w-8 text-[#22c55e]" />
+              <h3 className="text-2xl font-bold text-foreground">Ready to Begin?</h3>
             </div>
-            <p className="mb-6 leading-relaxed text-slate-300">
+            <p className="mb-6 leading-relaxed text-muted-foreground">
               Start with our personalized assessment to identify your strengths and create a custom
               learning path tailored to your experience level.
             </p>
@@ -260,7 +260,7 @@ export function LearningPath() {
               <Button
                 asChild
                 size="lg"
-                className="bg-gradient-to-r from-purple-600 to-cyan-600 text-white hover:from-purple-700 hover:to-cyan-700"
+                className="bg-gradient-to-r from-purple-600 to-cyan-600 text-foreground hover:from-purple-700 hover:to-cyan-700"
               >
                 <Link href="/assessment">
                   Take Assessment
@@ -270,7 +270,7 @@ export function LearningPath() {
               <Button
                 variant="outline"
                 size="lg"
-                className="border-cyan-500/50 text-cyan-300 hover:bg-cyan-500/10"
+                className="border-primary/50 text-primary hover:bg-primary/10"
                 asChild
               >
                 <Link href="/study">Browse All Modules</Link>

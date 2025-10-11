@@ -29,7 +29,7 @@ export default function PracticeButton({
     const base =
         'inline-flex items-center rounded-md px-4 py-2 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2';
     const variants: Record<NonNullable<PracticeButtonProps['variant']>, string> = {
-        primary: 'bg-blue-600 text-white hover:bg-blue-700 focus:ring-blue-500',
+        primary: 'bg-blue-600 text-foreground hover:bg-blue-700 focus:ring-blue-500',
         secondary: 'bg-gray-200 text-gray-900 hover:bg-gray-300 focus:ring-gray-400',
         outline: 'border border-gray-300 text-gray-900 hover:bg-gray-50 focus:ring-gray-400'
     };

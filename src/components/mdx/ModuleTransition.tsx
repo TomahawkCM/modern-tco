@@ -160,7 +160,7 @@ export default function ModuleTransition({
           <CardTitle className="flex items-center gap-2 text-xl">
             {unlocked ? (
               <>
-                <Trophy className="w-6 h-6 text-yellow-500" />
+                <Trophy className="w-6 h-6 text-[#f97316]" />
                 Module Transition Complete!
               </>
             ) : (
@@ -196,7 +196,7 @@ export default function ModuleTransition({
               <div key={skill.id} className="flex items-center justify-between p-2 rounded-lg bg-gray-50">
                 <span className="text-sm">{skill.name}</span>
                 {skill.passed ? (
-                  <CheckCircle2 className="w-4 h-4 text-green-600" />
+                  <CheckCircle2 className="w-4 h-4 text-[#22c55e]" />
                 ) : (
                   <XCircle className="w-4 h-4 text-red-600" />
                 )}
@@ -208,7 +208,7 @@ export default function ModuleTransition({
           <div className="space-y-3">
             {unlocked ? (
               <Button
-                className="w-full bg-green-600 hover:bg-green-700"
+                className="w-full bg-[#22c55e] hover:bg-green-700"
                 onClick={() => window.location.href = `/modules/${nextModuleId}`}
               >
                 <Unlock className="w-4 h-4 mr-2" />
@@ -237,7 +237,7 @@ export default function ModuleTransition({
 
           {/* Attempt History */}
           {attempts > 1 && (
-            <div className="text-center text-sm text-gray-500">
+            <div className="text-center text-sm text-muted-foreground">
               Attempts made: {attempts}
             </div>
           )}
@@ -312,7 +312,7 @@ export default function ModuleTransition({
                       {showExplanation && (
                         <>
                           {index === currentChallenge.correctAnswer && (
-                            <CheckCircle2 className="w-5 h-5 text-green-600" />
+                            <CheckCircle2 className="w-5 h-5 text-[#22c55e]" />
                           )}
                           {index === selectedAnswer && index !== currentChallenge.correctAnswer && (
                             <XCircle className="w-5 h-5 text-red-600" />
@@ -393,7 +393,7 @@ export default function ModuleTransition({
                     <div className="mt-1">
                       {skill.tested ? (
                         skill.passed ? (
-                          <CheckCircle2 className="w-5 h-5 text-green-600" />
+                          <CheckCircle2 className="w-5 h-5 text-[#22c55e]" />
                         ) : (
                           <XCircle className="w-5 h-5 text-red-600" />
                         )

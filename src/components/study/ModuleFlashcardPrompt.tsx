@@ -170,8 +170,8 @@ export default function ModuleFlashcardPrompt({
         ) : (
           // All caught up
           <div className="space-y-3">
-            <div className="p-4 bg-green-500/10 border border-green-500/20 rounded-lg text-center">
-              <p className="font-medium text-green-600 dark:text-green-400">
+            <div className="p-4 bg-[#22c55e]/10 border border-[#22c55e]/20 rounded-lg text-center">
+              <p className="font-medium text-[#22c55e] dark:text-[#22c55e]">
                 ✅ All caught up!
               </p>
               <p className="text-sm text-muted-foreground mt-1">

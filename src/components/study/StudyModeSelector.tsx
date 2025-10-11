@@ -45,7 +45,7 @@ export function StudyModeSelector({ className }: StudyModeSelectorProps) {
       title: "Study Content",
       description: "Learn core concepts through comprehensive modules before practicing",
       icon: BookOpen,
-      color: "text-blue-400",
+      color: "text-primary",
       bgColor: "bg-blue-900/20",
       borderColor: "border-blue-400",
       estimatedTime: "30-60 min per module",
@@ -59,7 +59,7 @@ export function StudyModeSelector({ className }: StudyModeSelectorProps) {
       title: "Practice Questions",
       description: "Test your knowledge with domain-specific practice questions",
       icon: Target,
-      color: "text-green-400",
+      color: "text-[#22c55e]",
       bgColor: "bg-green-900/20",
       borderColor: "border-green-400",
       estimatedTime: "10-20 min per session",
@@ -73,7 +73,7 @@ export function StudyModeSelector({ className }: StudyModeSelectorProps) {
       title: "Mock Examinations",
       description: "Full-length timed exams simulating real certification conditions",
       icon: FileText,
-      color: "text-yellow-400",
+      color: "text-[#f97316]",
       bgColor: "bg-yellow-900/20",
       borderColor: "border-yellow-400",
       estimatedTime: "90 minutes",
@@ -87,13 +87,13 @@ export function StudyModeSelector({ className }: StudyModeSelectorProps) {
   const getDifficultyColor = (difficulty: StudyMode["difficulty"]) => {
     switch (difficulty) {
       case "Beginner":
-        return "text-green-400";
+        return "text-[#22c55e]";
       case "Intermediate":
-        return "text-yellow-400";
+        return "text-[#f97316]";
       case "Advanced":
         return "text-red-400";
       default:
-        return "text-gray-400";
+        return "text-muted-foreground";
     }
   };
 
@@ -108,8 +108,8 @@ export function StudyModeSelector({ className }: StudyModeSelectorProps) {
   return (
     <div className={cn("space-y-6", className)}>
       <div className="text-center">
-        <h2 className="mb-4 text-3xl font-bold text-white">Choose Your Study Mode</h2>
-        <p className="mx-auto max-w-2xl text-lg text-gray-200">
+        <h2 className="mb-4 text-3xl font-bold text-foreground">Choose Your Study Mode</h2>
+        <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
           Follow the recommended learning path: Study content first, then practice questions, and
           finally take mock exams when you're ready.
         </p>
@@ -157,13 +157,13 @@ export function StudyModeSelector({ className }: StudyModeSelectorProps) {
                   </div>
                 </div>
 
-                <CardTitle className="text-xl text-white">{mode.title}</CardTitle>
+                <CardTitle className="text-xl text-foreground">{mode.title}</CardTitle>
               </CardHeader>
 
               <CardContent className="space-y-4">
-                <p className="text-sm leading-relaxed text-gray-300">{mode.description}</p>
+                <p className="text-sm leading-relaxed text-muted-foreground">{mode.description}</p>
 
-                <div className="flex items-center gap-2 text-sm text-gray-400">
+                <div className="flex items-center gap-2 text-sm text-muted-foreground">
                   <Clock className="h-4 w-4" />
                   <span>{mode.estimatedTime}</span>
                 </div>
@@ -171,11 +171,11 @@ export function StudyModeSelector({ className }: StudyModeSelectorProps) {
                 {/* Progress Section */}
                 <div className="space-y-2">
                   <div className="flex items-center justify-between">
-                    <span className="text-sm text-gray-300">Progress</span>
+                    <span className="text-sm text-muted-foreground">Progress</span>
                     <span className={cn("text-sm font-medium", mode.color)}>{mode.progress}%</span>
                   </div>
                   <Progress value={mode.progress} className="h-2" />
-                  <p className="text-xs text-gray-400">{getProgressMessage(mode.progress)}</p>
+                  <p className="text-xs text-muted-foreground">{getProgressMessage(mode.progress)}</p>
                 </div>
 
                 {/* Action Button */}
@@ -205,7 +205,7 @@ export function StudyModeSelector({ className }: StudyModeSelectorProps) {
 
                 {/* Prerequisites Info for Locked Modes */}
                 {!mode.available && (
-                  <div className="rounded bg-gray-900/50 p-2 text-xs text-gray-400">
+                  <div className="rounded bg-gray-900/50 p-2 text-xs text-muted-foreground">
                     <strong>Unlock by:</strong> Complete 60%+ of study content and achieve 70%+
                     average in practice questions
                   </div>

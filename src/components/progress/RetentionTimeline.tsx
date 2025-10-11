@@ -73,13 +73,13 @@ export function RetentionTimeline({
       <Card className={className}>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
-            <Calendar className="h-5 w-5 text-blue-500" />
+            <Calendar className="h-5 w-5 text-primary" />
             Retention Timeline
           </CardTitle>
         </CardHeader>
         <CardContent className="text-center py-12">
-          <p className="text-gray-400">No review data yet</p>
-          <p className="text-sm text-gray-500 mt-2">
+          <p className="text-muted-foreground">No review data yet</p>
+          <p className="text-sm text-muted-foreground mt-2">
             Start reviewing to see your progress over time
           </p>
         </CardContent>
@@ -109,17 +109,17 @@ export function RetentionTimeline({
       <CardHeader>
         <div className="flex items-center justify-between">
           <CardTitle className="flex items-center gap-2">
-            <Calendar className="h-5 w-5 text-blue-500" />
+            <Calendar className="h-5 w-5 text-primary" />
             Retention Timeline
           </CardTitle>
           <Badge
             variant="outline"
             className={
               trend === "improving"
-                ? "text-green-400 border-green-400"
+                ? "text-[#22c55e] border-green-400"
                 : trend === "declining"
                 ? "text-orange-400 border-orange-400"
-                : "text-gray-400"
+                : "text-muted-foreground"
             }
           >
             {trend === "improving" && <TrendingUp className="h-3 w-3 mr-1" />}
@@ -133,23 +133,23 @@ export function RetentionTimeline({
         {/* Summary Stats */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           <div>
-            <div className="text-sm text-gray-400 mb-1">Avg Retention</div>
-            <div className="text-2xl font-bold text-blue-400">
+            <div className="text-sm text-muted-foreground mb-1">Avg Retention</div>
+            <div className="text-2xl font-bold text-primary">
               {Math.round(averageRetention)}%
             </div>
           </div>
           <div>
-            <div className="text-sm text-gray-400 mb-1">Active Days</div>
-            <div className="text-2xl font-bold text-green-400">{totalDaysActive}</div>
+            <div className="text-sm text-muted-foreground mb-1">Active Days</div>
+            <div className="text-2xl font-bold text-[#22c55e]">{totalDaysActive}</div>
           </div>
           <div>
-            <div className="text-sm text-gray-400 mb-1">Peak</div>
-            <div className="text-2xl font-bold text-purple-400">
+            <div className="text-sm text-muted-foreground mb-1">Peak</div>
+            <div className="text-2xl font-bold text-accent-foreground">
               {Math.round(maxRetention)}%
             </div>
           </div>
           <div>
-            <div className="text-sm text-gray-400 mb-1">Low</div>
+            <div className="text-sm text-muted-foreground mb-1">Low</div>
             <div className="text-2xl font-bold text-orange-400">
               {minRetention > 0 ? Math.round(minRetention) : 0}%
             </div>
@@ -158,7 +158,7 @@ export function RetentionTimeline({
 
         {/* Sparkline Chart */}
         <div className="relative">
-          <div className="text-sm text-gray-400 mb-3">Retention Trend (Last {daysBack} Days)</div>
+          <div className="text-sm text-muted-foreground mb-3">Retention Trend (Last {daysBack} Days)</div>
           <svg
             viewBox={`0 0 ${chartWidth} ${chartHeight}`}
             className="w-full h-32"
@@ -209,7 +209,7 @@ export function RetentionTimeline({
               fill="none"
               stroke="currentColor"
               strokeWidth="2"
-              className="text-blue-400"
+              className="text-primary"
             />
 
             {/* Gradient definition */}
@@ -222,7 +222,7 @@ export function RetentionTimeline({
           </svg>
 
           {/* Y-axis labels */}
-          <div className="absolute left-0 top-0 h-32 flex flex-col justify-between text-xs text-gray-500">
+          <div className="absolute left-0 top-0 h-32 flex flex-col justify-between text-xs text-muted-foreground">
             <span>100%</span>
             <span>75%</span>
             <span>50%</span>
@@ -233,28 +233,28 @@ export function RetentionTimeline({
 
         {/* Recent Activity */}
         <div>
-          <div className="text-sm text-gray-400 mb-2">Recent Activity</div>
+          <div className="text-sm text-muted-foreground mb-2">Recent Activity</div>
           <div className="space-y-2">
             {timeline.slice(-7).reverse().filter(d => d.itemsReviewed > 0).slice(0, 5).map((day, idx) => (
               <div
                 key={idx}
-                className="flex items-center justify-between text-sm p-2 rounded border border-gray-700/50 bg-gray-800/30"
+                className="flex items-center justify-between text-sm p-2 rounded border border-gray-700/50 bg-card/30"
               >
-                <span className="text-gray-400">
+                <span className="text-muted-foreground">
                   {new Date(day.date).toLocaleDateString("en-US", {
                     month: "short",
                     day: "numeric",
                   })}
                 </span>
                 <div className="flex items-center gap-3">
-                  <span className="text-gray-500">{day.itemsReviewed} reviews</span>
+                  <span className="text-muted-foreground">{day.itemsReviewed} reviews</span>
                   <Badge
                     variant="outline"
                     className={
                       day.averageRetention >= 80
-                        ? "text-green-400"
+                        ? "text-[#22c55e]"
                         : day.averageRetention >= 60
-                        ? "text-blue-400"
+                        ? "text-primary"
                         : "text-orange-400"
                     }
                   >

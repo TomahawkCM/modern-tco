@@ -41,7 +41,7 @@ export function LargeTextToggle() {
       size="icon"
       aria-pressed={enabled}
       aria-label={enabled ? "Disable large text" : "Enable large text"}
-      className="text-white hover:bg-white/10"
+      className="text-foreground hover:bg-white/10"
       onClick={() => setEnabled((v) => !v)}
     >
       <Type className="h-5 w-5" />

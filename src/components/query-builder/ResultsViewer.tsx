@@ -129,13 +129,13 @@ export function ResultsViewer({
       sortable: true,
       render: (value: any) => {
         if (value === null || value === undefined) {
-          return <span className="text-gray-500 italic">null</span>;
+          return <span className="text-muted-foreground italic">null</span>;
         }
         if (typeof value === 'boolean') {
           return (
             <Badge
               variant="outline"
-              className={value ? 'border-green-500 text-green-400' : 'border-red-500 text-red-400'}
+              className={value ? 'border-green-500 text-[#22c55e]' : 'border-red-500 text-red-400'}
             >
               {String(value)}
             </Badge>
@@ -205,7 +205,7 @@ export function ResultsViewer({
         <CardContent className="flex items-center justify-center py-12">
           <div className="text-center">
             <Loader2 className="h-8 w-8 animate-spin text-tanium-accent mx-auto mb-3" />
-            <p className="text-gray-400">Executing query...</p>
+            <p className="text-muted-foreground">Executing query...</p>
           </div>
         </CardContent>
       </Card>
@@ -217,7 +217,7 @@ export function ResultsViewer({
     return (
       <Card className={`glass border-white/10 ${className}`}>
         <CardHeader>
-          <CardTitle className="flex items-center text-white">
+          <CardTitle className="flex items-center text-foreground">
             <Database className="mr-2 h-5 w-5" />
             Query Results
           </CardTitle>
@@ -240,13 +240,13 @@ export function ResultsViewer({
     return (
       <Card className={`glass border-white/10 ${className}`}>
         <CardHeader>
-          <CardTitle className="flex items-center text-white">
+          <CardTitle className="flex items-center text-foreground">
             <Database className="mr-2 h-5 w-5" />
             Query Results
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="text-center py-8 text-gray-400">
+          <div className="text-center py-8 text-muted-foreground">
             <Database className="h-12 w-12 mx-auto mb-3 opacity-50" />
             <p>No results found</p>
             {result?.execution && (
@@ -264,7 +264,7 @@ export function ResultsViewer({
     <Card className={`glass border-white/10 ${className}`}>
       <CardHeader>
         <div className="flex items-center justify-between">
-          <CardTitle className="flex items-center text-white">
+          <CardTitle className="flex items-center text-foreground">
             <Database className="mr-2 h-5 w-5" />
             Query Results
             <Badge variant="secondary" className="ml-2">
@@ -274,7 +274,7 @@ export function ResultsViewer({
           <div className="flex items-center space-x-2">
             {/* Search */}
             <div className="relative">
-              <Search className="absolute left-2 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+              <Search className="absolute left-2 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
               <Input
                 type="text"
                 placeholder="Search results..."
@@ -283,7 +283,7 @@ export function ResultsViewer({
                   setSearchTerm(e.target.value);
                   setCurrentPage(1);
                 }}
-                className="pl-8 w-48 h-8 bg-gray-800 border-gray-600 text-white"
+                className="pl-8 w-48 h-8 bg-card border-gray-600 text-foreground"
               />
             </div>
 
@@ -294,7 +294,7 @@ export function ResultsViewer({
                   size="sm"
                   variant="ghost"
                   onClick={() => handleExport('csv')}
-                  className="text-gray-400 hover:text-white"
+                  className="text-muted-foreground hover:text-foreground"
                 >
                   <FileText className="mr-1 h-3 w-3" />
                   CSV
@@ -303,7 +303,7 @@ export function ResultsViewer({
                   size="sm"
                   variant="ghost"
                   onClick={() => handleExport('json')}
-                  className="text-gray-400 hover:text-white"
+                  className="text-muted-foreground hover:text-foreground"
                 >
                   <FileJson className="mr-1 h-3 w-3" />
                   JSON
@@ -318,7 +318,7 @@ export function ResultsViewer({
         {/* Execution metrics */}
         {result.execution && (
           <div className="flex flex-wrap gap-2">
-            <Badge variant="outline" className="text-xs border-green-500 text-green-400">
+            <Badge variant="outline" className="text-xs border-green-500 text-[#22c55e]">
               <CheckCircle className="mr-1 h-3 w-3" />
               Success
             </Badge>
@@ -326,7 +326,7 @@ export function ResultsViewer({
               Execution: {result.execution.totalTimeMs}ms
             </Badge>
             {result.execution.cacheHit && (
-              <Badge variant="outline" className="text-xs border-blue-500 text-blue-400">
+              <Badge variant="outline" className="text-xs border-blue-500 text-primary">
                 Cached
               </Badge>
             )}
@@ -341,7 +341,7 @@ export function ResultsViewer({
         {/* View mode tabs for large datasets */}
         {processedData.length > 100 && (
           <Tabs value={viewMode} onValueChange={(v) => setViewMode(v as any)}>
-            <TabsList className="bg-gray-800">
+            <TabsList className="bg-card">
               <TabsTrigger value="table">
                 <TableIcon className="h-4 w-4 mr-2" />
                 Paginated
@@ -372,7 +372,7 @@ export function ResultsViewer({
                   {result.headers?.map((header, index) => (
                     <TableHead
                       key={index}
-                      className="text-gray-300 cursor-pointer hover:text-white"
+                      className="text-muted-foreground cursor-pointer hover:text-foreground"
                       onClick={() => handleSort(header)}
                     >
                       <div className="flex items-center space-x-1">
@@ -387,13 +387,13 @@ export function ResultsViewer({
                 {paginatedData.map((row, rowIndex) => (
                   <TableRow key={rowIndex} className="border-gray-700">
                     {row.map((cell, cellIndex) => (
-                      <TableCell key={cellIndex} className="text-gray-300">
+                      <TableCell key={cellIndex} className="text-muted-foreground">
                         {cell === null || cell === undefined ? (
-                          <span className="text-gray-500 italic">null</span>
+                          <span className="text-muted-foreground italic">null</span>
                         ) : typeof cell === 'boolean' ? (
                           <Badge
                             variant="outline"
-                            className={cell ? 'border-green-500 text-green-400' : 'border-red-500 text-red-400'}
+                            className={cell ? 'border-green-500 text-[#22c55e]' : 'border-red-500 text-red-400'}
                           >
                             {String(cell)}
                           </Badge>
@@ -428,29 +428,29 @@ export function ResultsViewer({
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               <Card className="glass border-white/10">
                 <CardContent className="p-4">
-                  <div className="text-2xl font-bold text-white">{processedData.length}</div>
-                  <div className="text-sm text-gray-400">Total Rows</div>
+                  <div className="text-2xl font-bold text-foreground">{processedData.length}</div>
+                  <div className="text-sm text-muted-foreground">Total Rows</div>
                 </CardContent>
               </Card>
               <Card className="glass border-white/10">
                 <CardContent className="p-4">
-                  <div className="text-2xl font-bold text-white">{result.headers?.length || 0}</div>
-                  <div className="text-sm text-gray-400">Columns</div>
+                  <div className="text-2xl font-bold text-foreground">{result.headers?.length || 0}</div>
+                  <div className="text-sm text-muted-foreground">Columns</div>
                 </CardContent>
               </Card>
               {result.execution && (
                 <>
                   <Card className="glass border-green-500/50">
                     <CardContent className="p-4">
-                      <div className="text-2xl font-bold text-green-400">{result.execution.totalTimeMs}ms</div>
-                      <div className="text-sm text-gray-400">Query Time</div>
+                      <div className="text-2xl font-bold text-[#22c55e]">{result.execution.totalTimeMs}ms</div>
+                      <div className="text-sm text-muted-foreground">Query Time</div>
                     </CardContent>
                   </Card>
                   {result.execution.rowsExamined !== undefined && (
                     <Card className="glass border-blue-500/50">
                       <CardContent className="p-4">
-                        <div className="text-2xl font-bold text-blue-400">{result.execution.rowsExamined}</div>
-                        <div className="text-sm text-gray-400">Rows Examined</div>
+                        <div className="text-2xl font-bold text-primary">{result.execution.rowsExamined}</div>
+                        <div className="text-sm text-muted-foreground">Rows Examined</div>
                       </CardContent>
                     </Card>
                   )}
@@ -460,9 +460,9 @@ export function ResultsViewer({
 
             {/* Sample data preview */}
             <div className="mt-4">
-              <h4 className="text-sm font-medium text-gray-400 mb-2">Data Preview (First 10 rows)</h4>
-              <div className="bg-gray-800 rounded-lg p-4 overflow-auto max-h-64">
-                <pre className="text-xs text-gray-300 font-mono">
+              <h4 className="text-sm font-medium text-muted-foreground mb-2">Data Preview (First 10 rows)</h4>
+              <div className="bg-card rounded-lg p-4 overflow-auto max-h-64">
+                <pre className="text-xs text-muted-foreground font-mono">
                   {JSON.stringify(tableData.slice(0, 10), null, 2)}
                 </pre>
               </div>
@@ -473,7 +473,7 @@ export function ResultsViewer({
         {/* Pagination - only for table view */}
         {viewMode === 'table' && totalPages > 1 && (
           <div className="flex items-center justify-between">
-            <div className="text-sm text-gray-400">
+            <div className="text-sm text-muted-foreground">
               Showing {((currentPage - 1) * pageSize) + 1} to{' '}
               {Math.min(currentPage * pageSize, processedData.length)} of{' '}
               {processedData.length} results
@@ -491,7 +491,7 @@ export function ResultsViewer({
                 value={String(currentPage)}
                 onValueChange={(value) => setCurrentPage(Number(value))}
               >
-                <SelectTrigger className="w-20 h-8 bg-gray-800 border-gray-600">
+                <SelectTrigger className="w-20 h-8 bg-card border-gray-600">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
@@ -502,7 +502,7 @@ export function ResultsViewer({
                   ))}
                 </SelectContent>
               </Select>
-              <span className="text-sm text-gray-400">of {totalPages}</span>
+              <span className="text-sm text-muted-foreground">of {totalPages}</span>
               <Button
                 size="sm"
                 variant="ghost"

@@ -18,8 +18,8 @@ export default async function VideosByModulePage({ params }: { params: Promise<{
   return (
     <div className="container mx-auto px-4 py-8 space-y-6">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold text-white">{title} — Videos</h1>
-        <Link href={`/learn/${slug}`} className="text-sm text-blue-300 hover:underline">
+        <h1 className="text-2xl font-bold text-foreground">{title} — Videos</h1>
+        <Link href={`/learn/${slug}`} className="text-sm text-primary hover:underline">
           Open Study Module
         </Link>
       </div>

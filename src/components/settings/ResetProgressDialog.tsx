@@ -126,7 +126,7 @@ export function ResetProgressDialog({
       <DialogContent className="max-w-3xl max-h-[80vh] overflow-hidden flex flex-col">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
-            <AlertTriangle className="h-5 w-5 text-yellow-400" />
+            <AlertTriangle className="h-5 w-5 text-[#f97316]" />
             Reset All Progress
           </DialogTitle>
           <DialogDescription>
@@ -184,7 +184,7 @@ export function ResetProgressDialog({
               </Card>
 
               <Alert className="border-yellow-200 bg-yellow-50/10">
-                <AlertTriangle className="h-4 w-4 text-yellow-400" />
+                <AlertTriangle className="h-4 w-4 text-[#f97316]" />
                 <AlertDescription>
                   <strong>You will lose:</strong>
                   <ul className="mt-2 space-y-1 list-disc list-inside">

@@ -57,18 +57,18 @@ export function MainLayout({ children, asGlobal = false }: MainLayoutProps) {
     return (
       <div className="min-h-screen bg-gray-900">
         {/* Simple test header */}
-        <div className="fixed top-0 left-0 right-0 z-50 bg-blue-900 text-white p-4">
+        <div className="fixed top-0 left-0 right-0 z-50 bg-blue-900 text-foreground p-4">
           <h1 className="text-xl font-bold">TANIUM TCO - DEBUG MODE</h1>
           <p className="text-sm">If you see this, the basic layout is working</p>
         </div>
 
         {/* Simple sidebar */}
-        <div className="fixed left-0 top-16 bottom-0 w-64 bg-gray-800 text-white p-4">
+        <div className="fixed left-0 top-16 bottom-0 w-64 bg-card text-foreground p-4">
           <h2 className="font-bold mb-4">Navigation</h2>
           <ul className="space-y-2">
-            <li><a href="/" className="hover:text-blue-400">Dashboard</a></li>
-            <li><a href="/study" className="hover:text-blue-400">Study</a></li>
-            <li><a href="/practice" className="hover:text-blue-400">Practice</a></li>
+            <li><a href="/" className="hover:text-primary">Dashboard</a></li>
+            <li><a href="/study" className="hover:text-primary">Study</a></li>
+            <li><a href="/practice" className="hover:text-primary">Practice</a></li>
           </ul>
         </div>
 
@@ -117,7 +117,7 @@ export function MainLayout({ children, asGlobal = false }: MainLayoutProps) {
           onClick={() => setSidebarOpen(true)}
           aria-label="Open navigation menu"
         >
-          <Menu className="h-5 w-5 text-white" />
+          <Menu className="h-5 w-5 text-foreground" />
         </Button>
         </div>
       </ErrorBoundary>

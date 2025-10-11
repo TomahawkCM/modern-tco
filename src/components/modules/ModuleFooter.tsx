@@ -30,13 +30,13 @@ export default function ModuleFooter({ frontmatter, slug }: ModuleFooterProps) {
 
   return (
     <div className="mt-12 border-t border-gray-700 pt-8">
-      <Card className="border-blue-500/30 bg-gradient-to-r from-gray-900/50 to-blue-900/50">
+      <Card className="border-primary/30 bg-gradient-to-r from-gray-900/50 to-blue-900/50">
         <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-blue-200">
+          <CardTitle className="flex items-center gap-2 text-muted-foreground">
             <BookOpen className="h-5 w-5" />
             Ready to Practice?
           </CardTitle>
-          <CardDescription className="text-gray-300">
+          <CardDescription className="text-muted-foreground">
             Test your knowledge with practice questions based on this module's content.
           </CardDescription>
         </CardHeader>

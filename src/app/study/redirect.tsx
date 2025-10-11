@@ -15,7 +15,7 @@ export default function StudyRedirect() {
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-blue-900 to-cyan-900">
       <div className="text-center">
         <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-cyan-400 mx-auto mb-4"></div>
-        <p className="text-cyan-300">Redirecting to unified study experience...</p>
+        <p className="text-primary">Redirecting to unified study experience...</p>
       </div>
     </div>
   );

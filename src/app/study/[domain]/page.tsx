@@ -142,13 +142,13 @@ export default function StudyDomainPage() {
   const getDifficultyColor = (difficulty: string) => {
     switch (difficulty) {
       case "Beginner":
-        return "text-green-400 border-green-400 bg-green-900/20";
+        return "text-[#22c55e] border-green-400 bg-green-900/20";
       case "Intermediate":
-        return "text-yellow-400 border-yellow-400 bg-yellow-900/20";
+        return "text-[#f97316] border-yellow-400 bg-yellow-900/20";
       case "Advanced":
         return "text-red-400 border-red-400 bg-red-900/20";
       default:
-        return "text-gray-400 border-gray-400 bg-gray-900/20";
+        return "text-muted-foreground border-gray-400 bg-gray-900/20";
     }
   };
 
@@ -159,7 +159,7 @@ export default function StudyDomainPage() {
           <Card className="glass border-white/10 p-8">
             <div className="space-y-4 text-center">
               <div className="mx-auto h-12 w-12 animate-spin rounded-full border-b-2 border-tanium-accent"></div>
-              <p className="text-white">Loading study content...</p>
+              <p className="text-foreground">Loading study content...</p>
             </div>
           </Card>
         </div>
@@ -175,7 +175,7 @@ export default function StudyDomainPage() {
             <Button
               variant="outline"
               onClick={() => router.push("/study")}
-              className="border-white/20 text-white hover:bg-white/10"
+              className="border-white/20 text-foreground hover:bg-white/10"
             >
               <ArrowLeft className="mr-2 h-4 w-4" />
               Back to Study
@@ -191,8 +191,8 @@ export default function StudyDomainPage() {
           </Alert>
 
           <div className="text-center">
-            <h1 className="mb-4 text-2xl font-bold text-white">Study Domain Not Found</h1>
-            <p className="mb-6 text-gray-300">
+            <h1 className="mb-4 text-2xl font-bold text-foreground">Study Domain Not Found</h1>
+            <p className="mb-6 text-muted-foreground">
               The domain you're looking for doesn't exist or may have been moved.
             </p>
             <Button
@@ -228,7 +228,7 @@ export default function StudyDomainPage() {
           <Button
             onClick={() => router.push("/study")}
             variant="outline"
-            className="mb-4 border-white/20 text-white hover:bg-white/10"
+            className="mb-4 border-white/20 text-foreground hover:bg-white/10"
           >
             <ArrowLeft className="mr-2 h-4 w-4" />
             Back to Study Center
@@ -331,7 +331,7 @@ export default function StudyDomainPage() {
               <div className="flex gap-4">
                 <Button
                   onClick={() => router.push(domainConfig.practiceRoute)}
-                  className="glass-button bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-500 hover:to-emerald-500 text-white border-green-400/30"
+                  className="glass-button bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-500 hover:to-emerald-500 text-foreground border-green-400/30"
                 >
                   <Target className="mr-2 h-4 w-4" />
                   Start Practice Questions
@@ -346,8 +346,8 @@ export default function StudyDomainPage() {
         <Card className="glass-card border-archon-border-bright/30">
           <CardHeader className="border-b border-archon-border/30">
             <CardTitle className="flex items-center gap-3 text-archon-text-primary">
-              <div className="p-2 bg-green-500/20 rounded-lg">
-                <CheckCircle className="h-5 w-5 text-green-400" />
+              <div className="p-2 bg-[#22c55e]/20 rounded-lg">
+                <CheckCircle className="h-5 w-5 text-[#22c55e]" />
               </div>
               <span>Ready for Practice?</span>
             </CardTitle>
@@ -362,7 +362,7 @@ export default function StudyDomainPage() {
               <div className="flex flex-wrap gap-4">
                 <Button
                   onClick={() => router.push(domainConfig.practiceRoute)}
-                  className="glass-button bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-500 hover:to-emerald-500 text-white border-green-400/30"
+                  className="glass-button bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-500 hover:to-emerald-500 text-foreground border-green-400/30"
                 >
                   <Target className="mr-2 h-4 w-4" />
                   Practice Questions

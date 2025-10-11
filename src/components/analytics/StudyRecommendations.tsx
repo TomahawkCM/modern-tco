@@ -121,7 +121,7 @@ export function StudyRecommendations() {
         action: "Continue Streak",
         link: "/practice",
         icon: Clock,
-        color: "text-yellow-400 border-yellow-400",
+        color: "text-[#f97316] border-yellow-400",
       });
     }
 
@@ -136,7 +136,7 @@ export function StudyRecommendations() {
         action: "Review Basics",
         link: "/domains/fundamentals",
         icon: BookOpen,
-        color: "text-blue-400 border-blue-400",
+        color: "text-primary border-blue-400",
       });
     } else if (overallStats.averageScore >= 80) {
       recommendations.push({
@@ -147,7 +147,7 @@ export function StudyRecommendations() {
         action: "Take Mock Exam",
         link: "/mock",
         icon: CheckCircle,
-        color: "text-green-400 border-green-400",
+        color: "text-[#22c55e] border-green-400",
       });
     }
 
@@ -162,7 +162,7 @@ export function StudyRecommendations() {
         action: "Start Practice",
         link: "/practice",
         icon: Target,
-        color: "text-blue-400 border-blue-400",
+        color: "text-primary border-blue-400",
       });
     }
 
@@ -208,7 +208,7 @@ export function StudyRecommendations() {
         action: "Work Toward Goal",
         link: "/practice",
         icon: Trophy,
-        color: "text-cyan-400 border-cyan-400",
+        color: "text-primary border-cyan-400",
       });
     }
 
@@ -238,16 +238,16 @@ export function StudyRecommendations() {
     return (
       <Card className="glass border-white/10">
         <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-white">
-            <CheckCircle className="h-5 w-5 text-green-400" />
+          <CardTitle className="flex items-center gap-2 text-foreground">
+            <CheckCircle className="h-5 w-5 text-[#22c55e]" />
             Excellent Progress!
           </CardTitle>
         </CardHeader>
         <CardContent>
           <div className="py-8 text-center">
-            <CheckCircle className="mx-auto mb-4 h-12 w-12 text-green-400" />
-            <h3 className="mb-2 font-medium text-white">You&rsquo;re on track!</h3>
-            <p className="mb-4 text-gray-400">
+            <CheckCircle className="mx-auto mb-4 h-12 w-12 text-[#22c55e]" />
+            <h3 className="mb-2 font-medium text-foreground">You&rsquo;re on track!</h3>
+            <p className="mb-4 text-muted-foreground">
               Your performance is strong across all areas. Continue with regular practice to
               maintain your readiness.
             </p>
@@ -266,7 +266,7 @@ export function StudyRecommendations() {
   return (
     <Card className="glass border-white/10">
       <CardHeader>
-        <CardTitle className="flex items-center gap-2 text-white">
+        <CardTitle className="flex items-center gap-2 text-foreground">
           <Brain className="h-5 w-5 text-tanium-accent" />
           Personalized Study Recommendations
         </CardTitle>
@@ -286,8 +286,8 @@ export function StudyRecommendations() {
                 <div className="min-w-0 flex-1">
                   <div className="flex items-start justify-between gap-2">
                     <div>
-                      <h4 className="mb-1 font-medium text-white">{rec.title}</h4>
-                      <p className="mb-3 text-sm text-gray-400">{rec.description}</p>
+                      <h4 className="mb-1 font-medium text-foreground">{rec.title}</h4>
+                      <p className="mb-3 text-sm text-muted-foreground">{rec.description}</p>
                     </div>
                     <Badge
                       variant="outline"
@@ -296,8 +296,8 @@ export function StudyRecommendations() {
                         rec.priority === "high"
                           ? "border-red-400 text-red-400"
                           : rec.priority === "medium"
-                            ? "border-yellow-400 text-yellow-400"
-                            : "border-gray-400 text-gray-400"
+                            ? "border-yellow-400 text-[#f97316]"
+                            : "border-gray-400 text-muted-foreground"
                       )}
                     >
                       {rec.priority}

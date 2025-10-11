@@ -28,11 +28,11 @@ export default async function LearnModulePage({ params }: { params: Promise<{ sl
       <header>
         <h1 className="text-2xl font-semibold tracking-tight">{module.title}</h1>
         {module.description ? (
-          <p className="text-slate-600 dark:text-slate-400">{module.description}</p>
+          <p className="text-slate-600 dark:text-muted-foreground">{module.description}</p>
         ) : null}
       </header>
-      <section className="rounded border border-dashed border-slate-300 p-4 dark:border-slate-700">
-        <p className="text-sm text-slate-600 dark:text-slate-400">
+      <section className="rounded border border-dashed border-slate-300 p-4 dark:border-border">
+        <p className="text-sm text-slate-600 dark:text-muted-foreground">
           Lesson outline and labs are in progress. Below is a scaffold for this module.
         </p>
       </section>
@@ -46,7 +46,7 @@ export default async function LearnModulePage({ params }: { params: Promise<{ sl
             ))}
           </ul>
         ) : (
-          <p className="text-sm text-slate-600 dark:text-slate-400">Objectives will be added soon.</p>
+          <p className="text-sm text-slate-600 dark:text-muted-foreground">Objectives will be added soon.</p>
         )}
       </section>
 
@@ -59,7 +59,7 @@ export default async function LearnModulePage({ params }: { params: Promise<{ sl
             ))}
           </ul>
         ) : (
-          <p className="text-sm text-slate-600 dark:text-slate-400">Topics will be added soon.</p>
+          <p className="text-sm text-slate-600 dark:text-muted-foreground">Topics will be added soon.</p>
         )}
       </section>
       <ModuleVideos slug={module.slug} />
@@ -71,7 +71,7 @@ export default async function LearnModulePage({ params }: { params: Promise<{ sl
               <div key={i} className="rounded border p-3">
                 <div className="font-medium">{lab.title}</div>
                 {lab.description ? (
-                  <p className="text-sm text-slate-600 dark:text-slate-400">{lab.description}</p>
+                  <p className="text-sm text-slate-600 dark:text-muted-foreground">{lab.description}</p>
                 ) : null}
                 <div className="mt-2">
                   <button className="text-sm text-blue-600 hover:underline" disabled>
@@ -82,7 +82,7 @@ export default async function LearnModulePage({ params }: { params: Promise<{ sl
             ))}
           </div>
         ) : (
-          <p className="text-sm text-slate-600 dark:text-slate-400">Labs will be added soon.</p>
+          <p className="text-sm text-slate-600 dark:text-muted-foreground">Labs will be added soon.</p>
         )}
       </section>
     </div>

@@ -517,7 +517,7 @@ export const LabExercisePlayer: React.FC<LabExercisePlayerProps> = ({
               <Button
                 onClick={handleValidateStep}
                 disabled={state.isValidating}
-                className="bg-green-600 hover:bg-green-700"
+                className="bg-[#22c55e] hover:bg-green-700"
               >
                 {state.isValidating ? (
                   <>
@@ -601,7 +601,7 @@ export const LabExercisePlayer: React.FC<LabExercisePlayerProps> = ({
                   <div className="mb-2 flex items-center justify-between">
                     <span className="text-sm font-medium">Step {index + 1}</span>
                     {result.success ? (
-                      <CheckCircle className="h-4 w-4 text-green-600" />
+                      <CheckCircle className="h-4 w-4 text-[#22c55e]" />
                     ) : (
                       <XCircle className="h-4 w-4 text-red-600" />
                     )}

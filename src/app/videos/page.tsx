@@ -10,8 +10,8 @@ export default function VideosIndexPage() {
   return (
     <div className="container mx-auto px-4 py-8 space-y-6">
       <div className="text-center">
-        <h1 className="mb-3 text-3xl font-bold text-white">Video Library</h1>
-        <p className="mx-auto max-w-2xl text-blue-200">
+        <h1 className="mb-3 text-3xl font-bold text-foreground">Video Library</h1>
+        <p className="mx-auto max-w-2xl text-muted-foreground">
           Curated videos organized by module. Play inline and track progress.
         </p>
       </div>
@@ -20,10 +20,10 @@ export default function VideosIndexPage() {
         {data.modules.map((m) => (
           <section key={m.slug} className="space-y-3">
             <div className="flex items-center justify-between">
-              <h2 className="text-xl font-semibold capitalize text-white">{m.slug.replace(/-/g, " ")}</h2>
+              <h2 className="text-xl font-semibold capitalize text-foreground">{m.slug.replace(/-/g, " ")}</h2>
               <Link
                 href={`/videos/${m.slug}`}
-                className="text-sm text-blue-300 hover:underline"
+                className="text-sm text-primary hover:underline"
                 aria-label={`View all videos for ${m.slug}`}
               >
                 View all

@@ -86,7 +86,7 @@ export function SearchFilters() {
             onClick={clearAllFilters}
             variant="ghost"
             size="sm"
-            className="h-auto p-2 text-gray-400 hover:text-white"
+            className="h-auto p-2 text-muted-foreground hover:text-foreground"
           >
             <RotateCcw className="mr-1 h-3 w-3" />
             Clear
@@ -98,7 +98,7 @@ export function SearchFilters() {
       <Collapsible open={expandedSections.domains} onOpenChange={() => toggleSection("domains")}>
         <CollapsibleTrigger asChild>
           <Button variant="ghost" className="h-auto w-full justify-between p-0 text-left">
-            <span className="text-sm font-medium text-white">TCO Domains</span>
+            <span className="text-sm font-medium text-foreground">TCO Domains</span>
             {expandedSections.domains ? (
               <ChevronDown className="h-4 w-4" />
             ) : (
@@ -121,7 +121,7 @@ export function SearchFilters() {
                   htmlFor={`domain-${domain}`}
                   className={cn(
                     "flex-1 cursor-pointer text-sm transition-colors",
-                    isChecked ? "text-white" : "text-gray-300"
+                    isChecked ? "text-foreground" : "text-muted-foreground"
                   )}
                 >
                   {domain}
@@ -146,7 +146,7 @@ export function SearchFilters() {
       >
         <CollapsibleTrigger asChild>
           <Button variant="ghost" className="h-auto w-full justify-between p-0 text-left">
-            <span className="text-sm font-medium text-white">Difficulty</span>
+            <span className="text-sm font-medium text-foreground">Difficulty</span>
             {expandedSections.difficulties ? (
               <ChevronDown className="h-4 w-4" />
             ) : (
@@ -171,7 +171,7 @@ export function SearchFilters() {
                   htmlFor={`difficulty-${difficulty}`}
                   className={cn(
                     "flex-1 cursor-pointer text-sm transition-colors",
-                    isChecked ? "text-white" : "text-gray-300"
+                    isChecked ? "text-foreground" : "text-muted-foreground"
                   )}
                 >
                   {difficulty}
@@ -179,7 +179,7 @@ export function SearchFilters() {
                 <div className="flex items-center gap-1">
                   {difficulty === "Beginner" && (
                     <div className="flex gap-px">
-                      <div className="h-2 w-2 rounded-full bg-green-500"></div>
+                      <div className="h-2 w-2 rounded-full bg-[#22c55e]"></div>
                       <div className="h-2 w-2 rounded-full bg-gray-400"></div>
                       <div className="h-2 w-2 rounded-full bg-gray-400"></div>
                     </div>
@@ -214,7 +214,7 @@ export function SearchFilters() {
       >
         <CollapsibleTrigger asChild>
           <Button variant="ghost" className="h-auto w-full justify-between p-0 text-left">
-            <span className="text-sm font-medium text-white">Categories</span>
+            <span className="text-sm font-medium text-foreground">Categories</span>
             {expandedSections.categories ? (
               <ChevronDown className="h-4 w-4" />
             ) : (
@@ -237,7 +237,7 @@ export function SearchFilters() {
                   htmlFor={`category-${category}`}
                   className={cn(
                     "flex-1 cursor-pointer text-sm transition-colors",
-                    isChecked ? "text-white" : "text-gray-300"
+                    isChecked ? "text-foreground" : "text-muted-foreground"
                   )}
                 >
                   {category}
@@ -254,7 +254,7 @@ export function SearchFilters() {
       <Collapsible open={expandedSections.features} onOpenChange={() => toggleSection("features")}>
         <CollapsibleTrigger asChild>
           <Button variant="ghost" className="h-auto w-full justify-between p-0 text-left">
-            <span className="text-sm font-medium text-white">Features</span>
+            <span className="text-sm font-medium text-foreground">Features</span>
             {expandedSections.features ? (
               <ChevronDown className="h-4 w-4" />
             ) : (
@@ -274,7 +274,7 @@ export function SearchFilters() {
             />
             <Label
               htmlFor="has-explanation"
-              className="flex-1 cursor-pointer text-sm text-gray-300"
+              className="flex-1 cursor-pointer text-sm text-muted-foreground"
             >
               Has detailed explanation
             </Label>
@@ -291,7 +291,7 @@ export function SearchFilters() {
             />
             <Label
               htmlFor="has-console-steps"
-              className="flex-1 cursor-pointer text-sm text-gray-300"
+              className="flex-1 cursor-pointer text-sm text-muted-foreground"
             >
               Includes console steps
             </Label>

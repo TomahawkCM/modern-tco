@@ -33,7 +33,7 @@ const QuestionCard = dynamic(
   {
     ssr: false,
     loading: () => (
-      <div className="glass border-white/10 p-6 text-white/80">Loading question…</div>
+      <div className="glass border-white/10 p-6 text-foreground/80">Loading question…</div>
     ),
   }
 );
@@ -204,7 +204,7 @@ function MockExamContent() {
           <Card className="glass border-white/10 p-8">
             <div className="space-y-4 text-center">
               <div className="mx-auto h-12 w-12 animate-spin rounded-full border-b-2 border-tanium-accent"></div>
-              <p className="text-white">Preparing your mock exam...</p>
+              <p className="text-foreground">Preparing your mock exam...</p>
             </div>
           </Card>
         </div>
@@ -217,14 +217,14 @@ function MockExamContent() {
         <div className="mx-auto max-w-4xl space-y-8">
           {/* Header */}
           <div className="text-center">
-            <h1 className="mb-4 text-4xl font-bold text-white">Mock Exam</h1>
-            <p className="mb-8 text-xl text-gray-200">Full-length timed examination simulation</p>
+            <h1 className="mb-4 text-4xl font-bold text-foreground">Mock Exam</h1>
+            <p className="mb-8 text-xl text-muted-foreground">Full-length timed examination simulation</p>
           </div>
 
           {/* Exam info card */}
           <Card className="glass border-white/10">
             <CardHeader>
-              <CardTitle className="flex items-center gap-3 text-white">
+              <CardTitle className="flex items-center gap-3 text-foreground">
                 <FileText className="h-6 w-6 text-tanium-accent" />
                 Mock Exam Overview
               </CardTitle>
@@ -233,21 +233,21 @@ function MockExamContent() {
               <div className="grid gap-4 md:grid-cols-3">
                 <div className="text-center">
                   <div className="mb-2 text-2xl font-bold text-tanium-accent">105</div>
-                  <div className="text-sm text-gray-300">Questions</div>
+                  <div className="text-sm text-muted-foreground">Questions</div>
                 </div>
                 <div className="text-center">
-                  <div className="mb-2 text-2xl font-bold text-yellow-400">105</div>
-                  <div className="text-sm text-gray-300">Minutes</div>
+                  <div className="mb-2 text-2xl font-bold text-[#f97316]">105</div>
+                  <div className="text-sm text-muted-foreground">Minutes</div>
                 </div>
                 <div className="text-center">
                   <div className="mb-2 text-2xl font-bold text-red-400">Timed</div>
-                  <div className="text-sm text-gray-300">Auto-submit</div>
+                  <div className="text-sm text-muted-foreground">Auto-submit</div>
                 </div>
               </div>
 
               <Alert className="border-yellow-200 bg-yellow-50/10 dark:border-yellow-800 dark:bg-yellow-900/20">
-                <AlertTriangle className="h-4 w-4 text-yellow-400" />
-                <AlertDescription className="text-yellow-200">
+                <AlertTriangle className="h-4 w-4 text-[#f97316]" />
+                <AlertDescription className="text-[#f97316]">
                   <strong>Mock Exam Conditions:</strong> This is a timed exam that simulates real
                   exam conditions. You will have 90 minutes to complete all questions. The exam will
                   auto-submit when time expires.
@@ -255,10 +255,10 @@ function MockExamContent() {
               </Alert>
 
               <div className="space-y-4">
-                <h4 className="font-medium text-white">Exam Rules:</h4>
-                <ul className="space-y-2 text-sm text-gray-300">
+                <h4 className="font-medium text-foreground">Exam Rules:</h4>
+                <ul className="space-y-2 text-sm text-muted-foreground">
                   <li className="flex items-start space-x-2">
-                    <Clock className="mt-0.5 h-4 w-4 shrink-0 text-blue-400" />
+                    <Clock className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
                     <span>90-minute time limit with visible countdown timer</span>
                   </li>
                   <li className="flex items-start space-x-2">
@@ -266,11 +266,11 @@ function MockExamContent() {
                     <span>Automatic submission when time expires</span>
                   </li>
                   <li className="flex items-start space-x-2">
-                    <ArrowRight className="mt-0.5 h-4 w-4 shrink-0 text-green-400" />
+                    <ArrowRight className="mt-0.5 h-4 w-4 shrink-0 text-[#22c55e]" />
                     <span>Navigate between questions freely</span>
                   </li>
                   <li className="flex items-start space-x-2">
-                    <CheckCircle className="mt-0.5 h-4 w-4 shrink-0 text-cyan-400" />
+                    <CheckCircle className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
                     <span>Review and change answers before submitting</span>
                   </li>
                 </ul>
@@ -279,7 +279,7 @@ function MockExamContent() {
               <div className="flex flex-col items-center gap-4">
                 {/* Variant selector */}
                 <div className="flex items-center gap-2">
-                  <span className="text-white/80 text-sm">Exam Variant:</span>
+                  <span className="text-foreground/80 text-sm">Exam Variant:</span>
                   {["A","B","C"].map((v) => (
                     <button
                       key={v}
@@ -290,7 +290,7 @@ function MockExamContent() {
                         const q = qs.toString();
                         router.replace(`/mock${q ? `?${q}` : ''}`);
                       }}
-                      className={`rounded-md border px-3 py-1 text-sm ${variant===v ? 'bg-white/10 border-white/30 text-white' : 'border-white/20 text-white/80 hover:bg-white/5'}`}
+                      className={`rounded-md border px-3 py-1 text-sm ${variant===v ? 'bg-white/10 border-white/30 text-foreground' : 'border-white/20 text-foreground/80 hover:bg-white/5'}`}
                       aria-pressed={variant===v}
                     >
                       {v}
@@ -300,7 +300,7 @@ function MockExamContent() {
                 <Button
                   onClick={handleStartMockExam}
                   size="lg"
-                  className="bg-green-600 text-white hover:bg-green-700"
+                  className="bg-[#22c55e] text-foreground hover:bg-green-700"
                 >
                   <Play className="mr-2 h-5 w-5" />
                   Start Mock Exam
@@ -325,15 +325,15 @@ function MockExamContent() {
         <div className="mx-auto max-w-4xl space-y-8">
           {/* Results header */}
           <div className="text-center">
-            <h1 className="mb-4 text-4xl font-bold text-white">Mock Exam Complete!</h1>
-            <p className="text-xl text-gray-200">Here&rsquo;s your exam performance</p>
+            <h1 className="mb-4 text-4xl font-bold text-foreground">Mock Exam Complete!</h1>
+            <p className="text-xl text-muted-foreground">Here&rsquo;s your exam performance</p>
           </div>
 
           {/* Results card */}
           <Card className="glass border-white/10">
             <CardHeader>
-              <CardTitle className="flex items-center gap-3 text-white">
-                <Trophy className="h-6 w-6 text-yellow-400" />
+              <CardTitle className="flex items-center gap-3 text-foreground">
+                <Trophy className="h-6 w-6 text-[#f97316]" />
                 Your Mock Exam Results
               </CardTitle>
             </CardHeader>
@@ -342,7 +342,7 @@ function MockExamContent() {
                 {/* Score section */}
                 <div className="text-center">
                   <div className="mb-2 text-5xl font-bold text-tanium-accent">{score}%</div>
-                  <div className="mb-4 text-gray-300">
+                  <div className="mb-4 text-muted-foreground">
                     {correctCount} out of {totalCount} correct
                   </div>
                   <Progress
@@ -355,18 +355,18 @@ function MockExamContent() {
                 {/* Time section */}
                 <div className="space-y-4">
                   <div className="flex items-center justify-between text-sm">
-                    <span className="text-gray-300">Time Taken</span>
-                    <span className="font-medium text-white">
+                    <span className="text-muted-foreground">Time Taken</span>
+                    <span className="font-medium text-foreground">
                       {timeMinutes}m {timeSeconds}s
                     </span>
                   </div>
                   <div className="flex items-center justify-between text-sm">
-                    <span className="text-gray-300">Time Remaining</span>
-                    <span className="font-medium text-white">{formatTime(timeRemaining)}</span>
+                    <span className="text-muted-foreground">Time Remaining</span>
+                    <span className="font-medium text-foreground">{formatTime(timeRemaining)}</span>
                   </div>
                   <div className="flex items-center justify-between text-sm">
-                    <span className="text-gray-300">Passing Score</span>
-                    <span className="font-medium text-white">70%</span>
+                    <span className="text-muted-foreground">Passing Score</span>
+                    <span className="font-medium text-foreground">70%</span>
                   </div>
                 </div>
               </div>
@@ -379,9 +379,9 @@ function MockExamContent() {
                 )}
               >
                 <CheckCircle
-                  className={cn("h-4 w-4", score >= 70 ? "text-green-400" : "text-red-400")}
+                  className={cn("h-4 w-4", score >= 70 ? "text-[#22c55e]" : "text-red-400")}
                 />
-                <AlertDescription className="text-gray-200">
+                <AlertDescription className="text-muted-foreground">
                   {score >= 70
                     ? `🎉 Congratulations! You passed with ${score}%. You're ready for the real exam!`
                     : `You scored ${score}%. The passing score is 70%. Keep studying and try again!`}
@@ -397,7 +397,7 @@ function MockExamContent() {
                 <Button
                   variant="outline"
                   onClick={() => router.push("/review")}
-                  className="border-white/20 text-white hover:bg-white/10"
+                  className="border-white/20 text-foreground hover:bg-white/10"
                 >
                   <FileText className="mr-2 h-4 w-4" />
                   Review Answers
@@ -405,7 +405,7 @@ function MockExamContent() {
                 <Button
                   variant="outline"
                   onClick={() => router.push("/")}
-                  className="border-white/20 text-white hover:bg-white/10"
+                  className="border-white/20 text-foreground hover:bg-white/10"
                 >
                   <ArrowLeft className="mr-2 h-4 w-4" />
                   Back to Dashboard
@@ -423,8 +423,8 @@ function MockExamContent() {
         {/* Progress header with timer */}
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-2xl font-bold text-white">Mock Exam</h1>
-            <p className="text-gray-300">
+            <h1 className="text-2xl font-bold text-foreground">Mock Exam</h1>
+            <p className="text-muted-foreground">
               Question {progress.current} of {progress.total}
             </p>
           </div>
@@ -443,7 +443,7 @@ function MockExamContent() {
               variant="outline"
               className={cn(
                 "border-white/20",
-                timeRemaining < 10 * 60 ? "border-red-400 text-red-400" : "text-white"
+                timeRemaining < 10 * 60 ? "border-red-400 text-red-400" : "text-foreground"
               )}
             >
               {formatTime(timeRemaining)} left
@@ -477,14 +477,14 @@ function MockExamContent() {
             variant="outline"
             onClick={handlePrevious}
             disabled={isFirstQuestion}
-            className="border-white/20 text-white hover:bg-white/10 disabled:opacity-50"
+            className="border-white/20 text-foreground hover:bg-white/10 disabled:opacity-50"
           >
             <ArrowLeft className="mr-2 h-4 w-4" />
             Previous
           </Button>
 
           <div className="flex items-center gap-4">
-            <div className="text-sm text-gray-400">
+            <div className="text-sm text-muted-foreground">
               {selectedAnswer ? "Answer selected" : "Select an answer"}
             </div>
             <Button
@@ -524,7 +524,7 @@ export default function MockExamPage() {
   return (
     <Suspense fallback={
       <div className="min-h-screen flex items-center justify-center">
-        <div className="glass border-white/10 p-6 text-white/80">Loading...</div>
+        <div className="glass border-white/10 p-6 text-foreground/80">Loading...</div>
       </div>
     }>
       <MockExamContent />

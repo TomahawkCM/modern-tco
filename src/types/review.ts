@@ -291,11 +291,11 @@ export function getMasteryLabel(mastery: number): string {
  * Get mastery level color
  */
 export function getMasteryColor(mastery: number): string {
-  if (mastery >= 0.9) return 'text-green-600';
+  if (mastery >= 0.9) return 'text-[#22c55e]';
   if (mastery >= 0.7) return 'text-blue-600';
   if (mastery >= 0.5) return 'text-yellow-600';
   if (mastery >= 0.3) return 'text-orange-600';
-  return 'text-gray-400';
+  return 'text-muted-foreground';
 }
 
 /**

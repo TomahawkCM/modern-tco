@@ -98,9 +98,9 @@ export function StudyGuideList({ studyGuides, onGuideSelect, className }: StudyG
   };
 
   const getStatusColor = (progress: number) => {
-    if (progress >= 100) return "text-green-600 dark:text-green-400";
-    if (progress > 0) return "text-blue-600 dark:text-blue-400";
-    return "text-gray-600 dark:text-gray-400";
+    if (progress >= 100) return "text-[#22c55e] dark:text-[#22c55e]";
+    if (progress > 0) return "text-blue-600 dark:text-primary";
+    return "text-gray-600 dark:text-muted-foreground";
   };
 
   const getStatusIcon = (progress: number) => {

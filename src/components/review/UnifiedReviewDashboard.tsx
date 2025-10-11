@@ -178,7 +178,7 @@ export default function UnifiedReviewDashboard() {
               {totalDue > 0 ? (
                 <AlertCircle className="h-6 w-6 text-orange-500" />
               ) : (
-                <CheckCircle2 className="h-6 w-6 text-green-500" />
+                <CheckCircle2 className="h-6 w-6 text-[#22c55e]" />
               )}
             </div>
             <p className="text-3xl font-bold">{totalDue}</p>
@@ -188,7 +188,7 @@ export default function UnifiedReviewDashboard() {
 
         <Card>
           <CardContent className="pt-6 text-center">
-            <Brain className="h-6 w-6 mx-auto mb-2 text-blue-500" />
+            <Brain className="h-6 w-6 mx-auto mb-2 text-primary" />
             <p className="text-3xl font-bold">{flashcardCount}</p>
             <p className="text-xs text-muted-foreground">Flashcards</p>
           </CardContent>
@@ -204,7 +204,7 @@ export default function UnifiedReviewDashboard() {
 
         <Card>
           <CardContent className="pt-6 text-center">
-            <TrendingUp className="h-6 w-6 mx-auto mb-2 text-green-500" />
+            <TrendingUp className="h-6 w-6 mx-auto mb-2 text-[#22c55e]" />
             <p className="text-3xl font-bold">
               {Math.round(((stats?.avg_flashcard_retention || 0) + (stats?.avg_question_mastery || 0)) / 2)}%
             </p>
@@ -219,7 +219,7 @@ export default function UnifiedReviewDashboard() {
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              <Brain className="h-5 w-5 text-blue-500" />
+              <Brain className="h-5 w-5 text-primary" />
               Flashcard Review
             </CardTitle>
           </CardHeader>
@@ -341,7 +341,7 @@ export default function UnifiedReviewDashboard() {
                   <div className="flex items-center gap-3">
                     <span className="text-sm font-mono text-muted-foreground">#{idx + 1}</span>
                     {item.item_type === "flashcard" ? (
-                      <Brain className="h-4 w-4 text-blue-500" />
+                      <Brain className="h-4 w-4 text-primary" />
                     ) : (
                       <BookOpen className="h-4 w-4 text-purple-500" />
                     )}

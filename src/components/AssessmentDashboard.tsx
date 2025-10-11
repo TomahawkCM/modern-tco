@@ -177,9 +177,9 @@ function MetricCard({
       <CardContent className="p-6">
         <div className="flex items-center justify-between">
           <div>
-            <p className="text-sm font-medium text-gray-600 dark:text-gray-400">{title}</p>
+            <p className="text-sm font-medium text-gray-600 dark:text-muted-foreground">{title}</p>
             <p className="text-2xl font-bold">{value}</p>
-            {subtitle && <p className="mt-1 text-xs text-gray-500">{subtitle}</p>}
+            {subtitle && <p className="mt-1 text-xs text-muted-foreground">{subtitle}</p>}
           </div>
           <div className={`rounded-full p-3 bg-${color}-100 dark:bg-${color}-900`}>
             <Icon className={`h-6 w-6 text-${color}-600 dark:text-${color}-400`} />
@@ -189,17 +189,17 @@ function MetricCard({
         {trend && (
           <div className="mt-4 flex items-center border-t pt-4">
             <TrendingUp
-              className={`mr-1 h-4 w-4 ${trend.value >= 0 ? "text-green-600" : "text-red-600"}`}
+              className={`mr-1 h-4 w-4 ${trend.value >= 0 ? "text-[#22c55e]" : "text-red-600"}`}
             />
             <span
               className={`text-sm font-medium ${
-                trend.value >= 0 ? "text-green-600" : "text-red-600"
+                trend.value >= 0 ? "text-[#22c55e]" : "text-red-600"
               }`}
             >
               {trend.value >= 0 ? "+" : ""}
               {trend.value}%
             </span>
-            <span className="ml-1 text-sm text-gray-500">{trend.label}</span>
+            <span className="ml-1 text-sm text-muted-foreground">{trend.label}</span>
           </div>
         )}
       </CardContent>
@@ -366,7 +366,7 @@ export function AssessmentDashboard({
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="text-2xl font-bold tracking-tight">Assessment Analytics</h1>
-          <p className="text-gray-600 dark:text-gray-400">
+          <p className="text-gray-600 dark:text-muted-foreground">
             Track your learning progress and performance insights
           </p>
         </div>
@@ -376,7 +376,7 @@ export function AssessmentDashboard({
           <select
             value={timeRange}
             onChange={(e) => onTimeRangeChange?.(e.target.value as "7d" | "30d" | "90d" | "1y")}
-            className="rounded-lg border bg-white px-3 py-2 text-sm dark:bg-gray-800"
+            className="rounded-lg border bg-white px-3 py-2 text-sm dark:bg-card"
           >
             <option value="7d">Last 7 days</option>
             <option value="30d">Last 30 days</option>
@@ -493,7 +493,7 @@ export function AssessmentDashboard({
                     <div className="text-right">
                       <div
                         className={`flex items-center gap-1 ${
-                          trend.change >= 0 ? "text-green-600" : "text-red-600"
+                          trend.change >= 0 ? "text-[#22c55e]" : "text-red-600"
                         }`}
                       >
                         <TrendingUp className="h-4 w-4" />
@@ -502,7 +502,7 @@ export function AssessmentDashboard({
                           {trend.change}%
                         </span>
                       </div>
-                      <p className="text-xs text-gray-500">vs previous</p>
+                      <p className="text-xs text-muted-foreground">vs previous</p>
                     </div>
                   </div>
                 ))}
@@ -559,16 +559,16 @@ export function AssessmentDashboard({
                     <div>
                       <h4 className="flex items-center gap-2 font-semibold">
                         {achievement.earned ? (
-                          <Award className="h-5 w-5 text-green-600" />
+                          <Award className="h-5 w-5 text-[#22c55e]" />
                         ) : (
-                          <Award className="h-5 w-5 text-gray-400" />
+                          <Award className="h-5 w-5 text-muted-foreground" />
                         )}
                         {achievement.name}
                       </h4>
                       <p className="mt-1 text-sm text-gray-600">{achievement.description}</p>
                     </div>
                     {achievement.earned && (
-                      <Badge variant="default" className="bg-green-600 hover:bg-green-700">
+                      <Badge variant="default" className="bg-[#22c55e] hover:bg-green-700">
                         Earned
                       </Badge>
                     )}
@@ -577,7 +577,7 @@ export function AssessmentDashboard({
                   {!achievement.earned && (
                     <div className="space-y-2">
                       <Progress value={achievement.progress} className="h-2" />
-                      <p className="text-right text-xs text-gray-500">
+                      <p className="text-right text-xs text-muted-foreground">
                         {achievement.progress}% Complete
                       </p>
                     </div>

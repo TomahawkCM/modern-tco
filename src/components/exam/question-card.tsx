@@ -123,7 +123,7 @@ export const QuestionCard = memo(function QuestionCard({
                     className={cn(
                       "flex h-4 w-4 items-center justify-center rounded-full border-2 transition-all",
                       isSelected ? "border-primary bg-primary" : "border-muted-foreground",
-                      isCorrectChoice && "border-green-600 bg-green-600",
+                      isCorrectChoice && "border-green-600 bg-[#22c55e]",
                       isIncorrectChoice && "border-red-600 bg-red-600",
                       (isSubmitted ?? disabled) && "opacity-50"
                     )}
@@ -138,7 +138,7 @@ export const QuestionCard = memo(function QuestionCard({
                   {choice.text}
                 </label>
                 {showResult && isCorrectChoice && (
-                  <CheckCircle className="h-5 w-5 text-green-600" />
+                  <CheckCircle className="h-5 w-5 text-[#22c55e]" />
                 )}
                 {showResult && isIncorrectChoice && <XCircle className="h-5 w-5 text-red-600" />}
               </div>
@@ -149,7 +149,7 @@ export const QuestionCard = memo(function QuestionCard({
         {showResult && question.explanation && (
           <Alert className="border-blue-200 bg-blue-50 dark:border-blue-800 dark:bg-blue-900/20">
             <BookOpen className="h-4 w-4 text-blue-600" />
-            <AlertDescription className="text-blue-800 dark:text-blue-200">
+            <AlertDescription className="text-blue-800 dark:text-muted-foreground">
               <strong>Explanation:</strong> {question.explanation}
             </AlertDescription>
           </Alert>
@@ -175,7 +175,7 @@ export const QuestionCard = memo(function QuestionCard({
             <div
               className={cn(
                 "flex items-center gap-2 text-lg font-medium",
-                isCorrect ? "text-green-600" : "text-red-600"
+                isCorrect ? "text-[#22c55e]" : "text-red-600"
               )}
             >
               {isCorrect ? (

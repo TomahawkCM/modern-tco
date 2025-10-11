@@ -31,21 +31,21 @@ export function shuffleArray<T>(array: T[]): T[] {
 }
 
 export function getScoreColor(score: number): string {
-  if (score >= 90) return "text-green-600 dark:text-green-400";
-  if (score >= 80) return "text-blue-600 dark:text-blue-400";
-  if (score >= 70) return "text-yellow-600 dark:text-yellow-400";
+  if (score >= 90) return "text-[#22c55e] dark:text-[#22c55e]";
+  if (score >= 80) return "text-blue-600 dark:text-primary";
+  if (score >= 70) return "text-yellow-600 dark:text-[#f97316]";
   return "text-red-600 dark:text-red-400";
 }
 
 export function getDifficultyColor(difficulty: string): string {
   switch (difficulty.toLowerCase()) {
     case "beginner":
-      return "text-green-600 dark:text-green-400";
+      return "text-[#22c55e] dark:text-[#22c55e]";
     case "intermediate":
-      return "text-yellow-600 dark:text-yellow-400";
+      return "text-yellow-600 dark:text-[#f97316]";
     case "advanced":
       return "text-red-600 dark:text-red-400";
     default:
-      return "text-gray-600 dark:text-gray-400";
+      return "text-gray-600 dark:text-muted-foreground";
   }
 }

@@ -109,7 +109,7 @@ function useModuleProgress(config: LearnExperimentalModuleConfig, enabled: boole
       {
         moduleId: config.moduleId,
         moduleName: config.title,
-        color: config.accentColor ?? "bg-blue-500",
+        color: config.accentColor ?? "bg-primary",
         totalSections,
         completedSections,
         totalMinutes,
@@ -237,9 +237,9 @@ export function createLearnExperimentalModulePage(config: LearnExperimentalModul
             <CardContent className="space-y-3 text-sm text-muted-foreground">
               <p>
                 The Learn-style modules are behind a feature flag. Launch the dev server with
-                <code className="ml-1 rounded bg-slate-900 px-2 py-1 text-xs">NEXT_PUBLIC_LEARN_EXPERIMENTAL=1</code>
+                <code className="ml-1 rounded bg-card px-2 py-1 text-xs">NEXT_PUBLIC_LEARN_EXPERIMENTAL=1</code>
                 or append
-                <code className="ml-1 rounded bg-slate-900 px-2 py-1 text-xs">?path=learn-experimental</code>
+                <code className="ml-1 rounded bg-card px-2 py-1 text-xs">?path=learn-experimental</code>
                 to the URL.
               </p>
               <div className="pt-2">
@@ -274,9 +274,9 @@ export function createLearnExperimentalModulePage(config: LearnExperimentalModul
             const baseClasses =
               "inline-flex items-center gap-2 rounded-lg px-3 py-1.5 text-sm transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60";
             const activeClasses =
-              "bg-gradient-to-r from-primary/30 via-primary/20 to-primary/30 text-white border border-primary/60 shadow-[0_8px_22px_-12px_rgba(96,165,250,0.85)]";
+              "bg-gradient-to-r from-primary/30 via-primary/20 to-primary/30 text-foreground border border-primary/60 shadow-[0_8px_22px_-12px_rgba(96,165,250,0.85)]";
             const inactiveClasses = item.subtle
-              ? "text-slate-300 hover:text-primary/90 focus-visible:ring-1 focus-visible:ring-primary/40"
+              ? "text-muted-foreground hover:text-primary/90 focus-visible:ring-1 focus-visible:ring-primary/40"
               : "text-slate-100 border border-transparent hover:border-primary/40 hover:bg-primary/10 hover:text-primary";
 
             return (
@@ -296,7 +296,7 @@ export function createLearnExperimentalModulePage(config: LearnExperimentalModul
         <header className="space-y-3">
           <div className="flex items-center gap-3">
             <Badge
-              className="border border-white/10 bg-gradient-to-r from-purple-500/80 via-fuchsia-500/70 to-pink-500/70 text-white shadow-[0_12px_26px_-16px_rgba(217,70,239,0.65)]"
+              className="border border-white/10 bg-gradient-to-r from-purple-500/80 via-fuchsia-500/70 to-pink-500/70 text-foreground shadow-[0_12px_26px_-16px_rgba(217,70,239,0.65)]"
               aria-label="Experimental badge"
             >
               Experimental
@@ -305,7 +305,7 @@ export function createLearnExperimentalModulePage(config: LearnExperimentalModul
               Learn-style pilot track
             </span>
           </div>
-          <h1 className="text-3xl font-semibold text-white">{config.title}</h1>
+          <h1 className="text-3xl font-semibold text-foreground">{config.title}</h1>
           <p className="max-w-3xl text-base text-muted-foreground">{config.description}</p>
           <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
             <span>Total units: {config.sections.length}</span>
@@ -322,14 +322,14 @@ export function createLearnExperimentalModulePage(config: LearnExperimentalModul
 
         <section className="space-y-4">
           <div className="flex items-center justify-between">
-            <h2 className="text-2xl font-semibold text-white">Labs</h2>
+            <h2 className="text-2xl font-semibold text-foreground">Labs</h2>
             <span className="text-sm text-muted-foreground">Quick, 5–10 minute practice reps</span>
           </div>
           <div className="grid gap-4 md:grid-cols-2">
             {config.labs.map((lab) => (
               <Card key={lab.href} className="border-border/50 bg-slate-950/40 transition hover:border-primary/50">
                 <CardHeader>
-                  <CardTitle className="text-lg text-white">{lab.title}</CardTitle>
+                  <CardTitle className="text-lg text-foreground">{lab.title}</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-3 text-sm text-muted-foreground">
                   {lab.description ? <p>{lab.description}</p> : null}

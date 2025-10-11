@@ -58,7 +58,7 @@ export function VideoAnalyticsDashboard({
     return (
       <Card className={className}>
         <CardContent className="py-12 text-center">
-          <p className="text-gray-400">Loading video analytics...</p>
+          <p className="text-muted-foreground">Loading video analytics...</p>
         </CardContent>
       </Card>
     );
@@ -75,8 +75,8 @@ export function VideoAnalyticsDashboard({
         </CardHeader>
         <CardContent className="text-center py-12">
           <Video className="mx-auto mb-4 h-16 w-16 text-gray-600 opacity-50" />
-          <p className="text-gray-400 mb-2">No videos watched yet</p>
-          <p className="text-sm text-gray-500">
+          <p className="text-muted-foreground mb-2">No videos watched yet</p>
+          <p className="text-sm text-muted-foreground">
             Start watching videos to see your progress here
           </p>
         </CardContent>
@@ -85,16 +85,16 @@ export function VideoAnalyticsDashboard({
   }
 
   const getCompletionColor = (rate: number) => {
-    if (rate >= 80) return "text-green-400";
-    if (rate >= 60) return "text-blue-400";
-    if (rate >= 40) return "text-yellow-400";
+    if (rate >= 80) return "text-[#22c55e]";
+    if (rate >= 60) return "text-primary";
+    if (rate >= 40) return "text-[#f97316]";
     return "text-orange-400";
   };
 
   return (
     <div className={`space-y-6 ${className}`}>
       {/* Main Summary Card */}
-      <Card className="border-purple-500/20 bg-gradient-to-br from-purple-500/5 to-blue-500/5">
+      <Card className="border-accent/20 bg-gradient-to-br from-purple-500/5 to-blue-500/5">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Video className="h-5 w-5 text-purple-500" />
@@ -104,36 +104,36 @@ export function VideoAnalyticsDashboard({
         <CardContent className="space-y-6">
           {/* Key Metrics Grid */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div className="rounded-lg border border-blue-500/20 bg-blue-500/5 p-4">
+            <div className="rounded-lg border border-primary/20 bg-primary/5 p-4">
               <div className="flex items-center gap-2 mb-2">
-                <Video className="h-4 w-4 text-blue-400" />
-                <span className="text-xs text-gray-400">Videos Watched</span>
+                <Video className="h-4 w-4 text-primary" />
+                <span className="text-xs text-muted-foreground">Videos Watched</span>
               </div>
-              <div className="text-3xl font-bold text-blue-400">{analytics.totalVideos}</div>
+              <div className="text-3xl font-bold text-primary">{analytics.totalVideos}</div>
             </div>
 
-            <div className="rounded-lg border border-green-500/20 bg-green-500/5 p-4">
+            <div className="rounded-lg border border-[#22c55e]/20 bg-[#22c55e]/5 p-4">
               <div className="flex items-center gap-2 mb-2">
-                <CheckCircle2 className="h-4 w-4 text-green-400" />
-                <span className="text-xs text-gray-400">Completed</span>
+                <CheckCircle2 className="h-4 w-4 text-[#22c55e]" />
+                <span className="text-xs text-muted-foreground">Completed</span>
               </div>
-              <div className="text-3xl font-bold text-green-400">{analytics.videosCompleted}</div>
+              <div className="text-3xl font-bold text-[#22c55e]">{analytics.videosCompleted}</div>
             </div>
 
-            <div className="rounded-lg border border-purple-500/20 bg-purple-500/5 p-4">
+            <div className="rounded-lg border border-accent/20 bg-accent/5 p-4">
               <div className="flex items-center gap-2 mb-2">
-                <Clock className="h-4 w-4 text-purple-400" />
-                <span className="text-xs text-gray-400">Watch Time</span>
+                <Clock className="h-4 w-4 text-accent-foreground" />
+                <span className="text-xs text-muted-foreground">Watch Time</span>
               </div>
-              <div className="text-3xl font-bold text-purple-400">
+              <div className="text-3xl font-bold text-accent-foreground">
                 {analytics.totalWatchTime.toFixed(1)}h
               </div>
             </div>
 
-            <div className="rounded-lg border border-yellow-500/20 bg-yellow-500/5 p-4">
+            <div className="rounded-lg border border-[#f97316]/20 bg-yellow-500/5 p-4">
               <div className="flex items-center gap-2 mb-2">
-                <TrendingUp className="h-4 w-4 text-yellow-400" />
-                <span className="text-xs text-gray-400">Completion Rate</span>
+                <TrendingUp className="h-4 w-4 text-[#f97316]" />
+                <span className="text-xs text-muted-foreground">Completion Rate</span>
               </div>
               <div className={`text-3xl font-bold ${getCompletionColor(analytics.completionRate)}`}>
                 {Math.round(analytics.completionRate)}%
@@ -144,7 +144,7 @@ export function VideoAnalyticsDashboard({
           {/* Overall Completion Progress */}
           <div>
             <div className="mb-2 flex justify-between text-sm">
-              <span className="text-gray-400">Overall Video Completion</span>
+              <span className="text-muted-foreground">Overall Video Completion</span>
               <span className={getCompletionColor(analytics.completionRate)}>
                 {analytics.videosCompleted} / {analytics.totalVideos}
               </span>
@@ -159,7 +159,7 @@ export function VideoAnalyticsDashboard({
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-base">
-              <Play className="h-5 w-5 text-blue-400" />
+              <Play className="h-5 w-5 text-primary" />
               Video Completion by Module
             </CardTitle>
           </CardHeader>
@@ -169,11 +169,11 @@ export function VideoAnalyticsDashboard({
               .map(([module, stats]) => (
                 <div key={module} className="space-y-1">
                   <div className="flex items-center justify-between">
-                    <span className="text-sm text-gray-300 capitalize">
+                    <span className="text-sm text-muted-foreground capitalize">
                       {module.replace(/-/g, " ")}
                     </span>
                     <div className="flex items-center gap-2">
-                      <span className="text-xs text-gray-500">
+                      <span className="text-xs text-muted-foreground">
                         {stats.completed} / {stats.total}
                       </span>
                       <Badge
@@ -196,7 +196,7 @@ export function VideoAnalyticsDashboard({
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-base">
-              <Clock className="h-5 w-5 text-gray-400" />
+              <Clock className="h-5 w-5 text-muted-foreground" />
               Recently Watched
             </CardTitle>
           </CardHeader>
@@ -204,11 +204,11 @@ export function VideoAnalyticsDashboard({
             {analytics.recentVideos.slice(0, 5).map((video, idx) => (
               <div
                 key={idx}
-                className="flex items-center justify-between rounded border border-gray-700/50 bg-gray-800/30 p-3"
+                className="flex items-center justify-between rounded border border-gray-700/50 bg-card/30 p-3"
               >
                 <div className="flex-1">
-                  <div className="text-sm text-gray-300 mb-1">{video.title}</div>
-                  <div className="flex items-center gap-3 text-xs text-gray-500">
+                  <div className="text-sm text-muted-foreground mb-1">{video.title}</div>
+                  <div className="flex items-center gap-3 text-xs text-muted-foreground">
                     <span>{new Date(video.lastWatched).toLocaleDateString()}</span>
                     {video.moduleSlug && (
                       <>
@@ -220,12 +220,12 @@ export function VideoAnalyticsDashboard({
                 </div>
                 <div className="flex items-center gap-2">
                   {video.completed ? (
-                    <Badge variant="outline" className="text-green-400 border-green-400">
+                    <Badge variant="outline" className="text-[#22c55e] border-green-400">
                       <CheckCircle2 className="h-3 w-3 mr-1" />
                       Complete
                     </Badge>
                   ) : (
-                    <Badge variant="outline" className="text-blue-400 border-blue-400">
+                    <Badge variant="outline" className="text-primary border-blue-400">
                       {Object.entries(video.milestones)
                         .reverse()
                         .find(([_, reached]) => reached)?.[0] || "0"}%
@@ -251,18 +251,18 @@ export function VideoAnalyticsDashboard({
             {analytics.mostWatched.slice(0, 5).map((video, idx) => (
               <div
                 key={idx}
-                className="flex items-center justify-between rounded border border-gray-700/50 bg-gray-800/30 p-3"
+                className="flex items-center justify-between rounded border border-gray-700/50 bg-card/30 p-3"
               >
                 <div className="flex-1">
-                  <div className="text-sm text-gray-300 mb-1">{video.title}</div>
-                  <div className="flex items-center gap-3 text-xs text-gray-500">
+                  <div className="text-sm text-muted-foreground mb-1">{video.title}</div>
+                  <div className="flex items-center gap-3 text-xs text-muted-foreground">
                     <span>{video.viewCount} views</span>
                     <span>•</span>
                     <span>{Math.round(video.totalWatchTime / 60)} min total</span>
                   </div>
                 </div>
                 {video.completed && (
-                  <CheckCircle2 className="h-5 w-5 text-green-400" />
+                  <CheckCircle2 className="h-5 w-5 text-[#22c55e]" />
                 )}
               </div>
             ))}

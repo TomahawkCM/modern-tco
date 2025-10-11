@@ -66,13 +66,13 @@ export function AchievementNotification({ achievement, onClose }: AchievementNot
         <div className="flex items-start gap-3">
           {/* Icon */}
           <div className="flex-shrink-0">
-            <Trophy className="h-6 w-6 text-yellow-500 animate-bounce" />
+            <Trophy className="h-6 w-6 text-[#f97316] animate-bounce" />
           </div>
 
           {/* Content */}
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2 mb-1">
-              <h4 className="font-bold text-white">Achievement Unlocked!</h4>
+              <h4 className="font-bold text-foreground">Achievement Unlocked!</h4>
               <Badge variant="outline" className="text-xs">
                 {achievement.rarity}
               </Badge>
@@ -80,10 +80,10 @@ export function AchievementNotification({ achievement, onClose }: AchievementNot
 
             <div className="flex items-center gap-2 mb-2">
               <span className="text-2xl">{achievement.icon}</span>
-              <span className="font-semibold text-gray-200">{achievement.name}</span>
+              <span className="font-semibold text-muted-foreground">{achievement.name}</span>
             </div>
 
-            <p className="text-sm text-gray-400 mb-2">
+            <p className="text-sm text-muted-foreground mb-2">
               {achievement.description}
             </p>
 
@@ -101,7 +101,7 @@ export function AchievementNotification({ achievement, onClose }: AchievementNot
             }}
             className="flex-shrink-0 rounded-full p-1 hover:bg-white/10 transition-colors"
           >
-            <X className="h-4 w-4 text-gray-400" />
+            <X className="h-4 w-4 text-muted-foreground" />
           </button>
         </div>
       </Card>

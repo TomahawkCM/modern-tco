@@ -28,7 +28,7 @@ const DOMAIN_DETAILS: Record<string, DomainDetails> = {
       "Master the fundamentals of creating and executing questions in Tanium to gather real-time endpoint data.",
     examWeight: 22,
     icon: BookOpen,
-    color: "text-green-400",
+    color: "text-[#22c55e]",
     background: "bg-green-900/20",
     topics: [
       "Natural language question syntax",
@@ -49,7 +49,7 @@ const DOMAIN_DETAILS: Record<string, DomainDetails> = {
       "Advanced targeting techniques and question refinement strategies for precise endpoint management.",
     examWeight: 23,
     icon: Target,
-    color: "text-blue-400",
+    color: "text-primary",
     background: "bg-blue-900/20",
     topics: [
       "Dynamic computer groups",
@@ -70,8 +70,8 @@ const DOMAIN_DETAILS: Record<string, DomainDetails> = {
       "Deploy packages and execute actions across your environment safely and efficiently.",
     examWeight: 15,
     icon: Zap,
-    color: "text-cyan-400",
-    background: "bg-cyan-900/20",
+    color: "text-primary",
+    background: "bg-primary/20",
     topics: [
       "Package creation basics",
       "Action deployment workflows",
@@ -91,7 +91,7 @@ const DOMAIN_DETAILS: Record<string, DomainDetails> = {
       "Navigate the Tanium Console efficiently and leverage core modules for endpoint management.",
     examWeight: 23,
     icon: Layers,
-    color: "text-yellow-400",
+    color: "text-[#f97316]",
     background: "bg-yellow-900/20",
     topics: [
       "Console layout and customization",
@@ -167,8 +167,8 @@ export default function DomainPage() {
   if (!details || !domainKey) {
     return (
       <div className="space-y-4">
-        <h1 className="text-3xl font-bold text-white">Domain Not Found</h1>
-        <p className="text-slate-200">
+        <h1 className="text-3xl font-bold text-foreground">Domain Not Found</h1>
+        <p className="text-muted-foreground">
           The requested domain does not exist. Please return to the dashboard and choose a supported
           study area.
         </p>
@@ -189,13 +189,13 @@ export default function DomainPage() {
     <div className="space-y-8">
       <header className="flex items-center justify-between">
         <div className="space-y-2">
-          <h1 className="flex items-center gap-3 text-3xl font-bold text-white">
+          <h1 className="flex items-center gap-3 text-3xl font-bold text-foreground">
             <span className={`${details.color}`}>
               <Icon className="h-8 w-8" />
             </span>
             {details.title}
           </h1>
-          <p className="text-slate-200">{details.description}</p>
+          <p className="text-muted-foreground">{details.description}</p>
         </div>
         <Badge variant="secondary" className="text-sm">
           Exam Weight: {details.examWeight}%
@@ -209,7 +209,7 @@ export default function DomainPage() {
             <CardDescription>Focus on these areas to build core competency.</CardDescription>
           </CardHeader>
           <CardContent>
-            <ul className="space-y-3 text-sm text-slate-200">
+            <ul className="space-y-3 text-sm text-muted-foreground">
               {details.topics.map((topic) => (
                 <li key={topic} className="flex items-start gap-2">
                   <span className="mt-1 h-2 w-2 rounded-full bg-cyan-400" />
@@ -226,7 +226,7 @@ export default function DomainPage() {
             <CardDescription>Practice these outcomes to prepare for the exam.</CardDescription>
           </CardHeader>
           <CardContent>
-            <ul className="space-y-3 text-sm text-slate-200">
+            <ul className="space-y-3 text-sm text-muted-foreground">
               {details.objectives.map((objective) => (
                 <li key={objective} className="flex items-start gap-2">
                   <span className="mt-1 h-2 w-2 rounded-full bg-cyan-400" />
@@ -239,7 +239,7 @@ export default function DomainPage() {
       </section>
 
       <section className="space-y-4">
-        <h2 className="text-xl font-semibold text-white">Next Steps</h2>
+        <h2 className="text-xl font-semibold text-foreground">Next Steps</h2>
         <div className="flex flex-wrap gap-3">
           <Button asChild>
             <Link href={`/study/${domainKey}`}>Explore Study Module</Link>
@@ -254,9 +254,9 @@ export default function DomainPage() {
       </section>
 
       <section className="space-y-4">
-        <h2 className="text-xl font-semibold text-white">Readiness Gauge</h2>
+        <h2 className="text-xl font-semibold text-foreground">Readiness Gauge</h2>
         <div className="rounded-lg border border-white/10 p-6">
-          <p className="mb-4 text-sm text-slate-200">
+          <p className="mb-4 text-sm text-muted-foreground">
             Track your confidence as you master each topic. Aim for 80% or higher before moving on
             to the next domain.
           </p>

@@ -41,12 +41,12 @@ const domainLabels: Record<TCODomain, string> = {
 };
 
 const domainColors: Record<TCODomain, string> = {
-  [TCODomain.ASKING_QUESTIONS]: "text-blue-400",
-  [TCODomain.REFINING_QUESTIONS]: "text-green-400",
-  [TCODomain.REFINING_TARGETING]: "text-green-400", // Alias uses same color
+  [TCODomain.ASKING_QUESTIONS]: "text-primary",
+  [TCODomain.REFINING_QUESTIONS]: "text-[#22c55e]",
+  [TCODomain.REFINING_TARGETING]: "text-[#22c55e]", // Alias uses same color
   [TCODomain.TAKING_ACTION]: "text-red-400",
-  [TCODomain.NAVIGATION_MODULES]: "text-cyan-400",
-  [TCODomain.REPORTING_EXPORT]: "text-yellow-400",
+  [TCODomain.NAVIGATION_MODULES]: "text-primary",
+  [TCODomain.REPORTING_EXPORT]: "text-[#f97316]",
   // Additional domain colors
   [TCODomain.SECURITY]: "text-orange-400",
   [TCODomain.FUNDAMENTALS]: "text-sky-400",
@@ -170,13 +170,13 @@ function ModuleList({ onModuleSelect, className = "" }: ModuleListProps) {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="rounded-xl border border-blue-500/30 bg-gradient-to-r from-blue-500/20 to-blue-600/20 p-4"
+          className="rounded-xl border border-primary/30 bg-gradient-to-r from-blue-500/20 to-blue-600/20 p-4"
         >
           <div className="flex items-center gap-3">
-            <BookOpen className="h-8 w-8 text-blue-400" />
+            <BookOpen className="h-8 w-8 text-primary" />
             <div>
-              <div className="text-2xl font-bold text-white">{overallStats.totalModules}</div>
-              <div className="text-sm text-blue-200">Total Modules</div>
+              <div className="text-2xl font-bold text-foreground">{overallStats.totalModules}</div>
+              <div className="text-sm text-muted-foreground">Total Modules</div>
             </div>
           </div>
         </motion.div>
@@ -185,12 +185,12 @@ function ModuleList({ onModuleSelect, className = "" }: ModuleListProps) {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="rounded-xl border border-green-500/30 bg-gradient-to-r from-green-500/20 to-green-600/20 p-4"
+          className="rounded-xl border border-[#22c55e]/30 bg-gradient-to-r from-green-500/20 to-green-600/20 p-4"
         >
           <div className="flex items-center gap-3">
-            <CheckCircle2 className="h-8 w-8 text-green-400" />
+            <CheckCircle2 className="h-8 w-8 text-[#22c55e]" />
             <div>
-              <div className="text-2xl font-bold text-white">{overallStats.completedModules}</div>
+              <div className="text-2xl font-bold text-foreground">{overallStats.completedModules}</div>
               <div className="text-sm text-green-200">Completed</div>
             </div>
           </div>
@@ -200,13 +200,13 @@ function ModuleList({ onModuleSelect, className = "" }: ModuleListProps) {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="rounded-xl border border-yellow-500/30 bg-gradient-to-r from-yellow-500/20 to-yellow-600/20 p-4"
+          className="rounded-xl border border-[#f97316]/30 bg-gradient-to-r from-yellow-500/20 to-yellow-600/20 p-4"
         >
           <div className="flex items-center gap-3">
-            <Play className="h-8 w-8 text-yellow-400" />
+            <Play className="h-8 w-8 text-[#f97316]" />
             <div>
-              <div className="text-2xl font-bold text-white">{overallStats.inProgressModules}</div>
-              <div className="text-sm text-yellow-200">In Progress</div>
+              <div className="text-2xl font-bold text-foreground">{overallStats.inProgressModules}</div>
+              <div className="text-sm text-[#f97316]">In Progress</div>
             </div>
           </div>
         </motion.div>
@@ -215,12 +215,12 @@ function ModuleList({ onModuleSelect, className = "" }: ModuleListProps) {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
-          className="rounded-xl border border-cyan-500/30 bg-gradient-to-r from-cyan-500/20 to-cyan-600/20 p-4"
+          className="rounded-xl border border-primary/30 bg-gradient-to-r from-primary/20 to-cyan-600/20 p-4"
         >
           <div className="flex items-center gap-3">
-            <BarChart3 className="h-8 w-8 text-cyan-400" />
+            <BarChart3 className="h-8 w-8 text-primary" />
             <div>
-              <div className="text-2xl font-bold text-white">
+              <div className="text-2xl font-bold text-foreground">
                 {Math.round(overallStats.averageCompletion)}%
               </div>
               <div className="text-sm text-cyan-200">Overall Progress</div>
@@ -234,13 +234,13 @@ function ModuleList({ onModuleSelect, className = "" }: ModuleListProps) {
         <div className="flex flex-1 flex-col gap-4 sm:flex-row">
           {/* Search */}
           <div className="relative max-w-md flex-1">
-            <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 transform text-gray-400" />
+            <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 transform text-muted-foreground" />
             <input
               type="text"
               placeholder="Search modules, objectives, or tags..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full rounded-lg border border-white/10 bg-black/20 py-2 pl-10 pr-4 text-white placeholder-gray-400 focus:border-blue-500/50 focus:outline-none focus:ring-2 focus:ring-blue-500/50"
+              className="w-full rounded-lg border border-white/10 bg-black/20 py-2 pl-10 pr-4 text-foreground placeholder-gray-400 focus:border-blue-500/50 focus:outline-none focus:ring-2 focus:ring-blue-500/50"
             />
           </div>
 
@@ -249,7 +249,7 @@ function ModuleList({ onModuleSelect, className = "" }: ModuleListProps) {
             value={selectedDomain}
             onChange={(e) => setSelectedDomain(e.target.value as TCODomain | "all")}
             aria-label="Filter modules by domain"
-            className="rounded-lg border border-white/10 bg-black/20 px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50"
+            className="rounded-lg border border-white/10 bg-black/20 px-3 py-2 text-foreground focus:outline-none focus:ring-2 focus:ring-blue-500/50"
           >
             <option value="all">All Domains</option>
             {Object.entries(domainLabels).map(([value, label]) => (
@@ -264,7 +264,7 @@ function ModuleList({ onModuleSelect, className = "" }: ModuleListProps) {
             value={selectedFilter}
             onChange={(e) => setSelectedFilter(e.target.value as FilterType)}
             aria-label="Filter modules by status"
-            className="rounded-lg border border-white/10 bg-black/20 px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50"
+            className="rounded-lg border border-white/10 bg-black/20 px-3 py-2 text-foreground focus:outline-none focus:ring-2 focus:ring-blue-500/50"
           >
             <option value="all">All Status</option>
             <option value="not_started">Not Started</option>
@@ -277,7 +277,7 @@ function ModuleList({ onModuleSelect, className = "" }: ModuleListProps) {
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value as SortType)}
             aria-label="Sort modules by"
-            className="rounded-lg border border-white/10 bg-black/20 px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50"
+            className="rounded-lg border border-white/10 bg-black/20 px-3 py-2 text-foreground focus:outline-none focus:ring-2 focus:ring-blue-500/50"
           >
             <option value="order">TCO Order</option>
             <option value="title">Title</option>
@@ -295,8 +295,8 @@ function ModuleList({ onModuleSelect, className = "" }: ModuleListProps) {
             aria-label="Switch to grid view"
             className={`rounded-md p-2 transition-colors ${
               viewMode === "grid"
-                ? "bg-blue-500/20 text-blue-400"
-                : "text-gray-400 hover:text-white"
+                ? "bg-primary/20 text-primary"
+                : "text-muted-foreground hover:text-foreground"
             }`}
           >
             <Grid className="h-4 w-4" />
@@ -307,8 +307,8 @@ function ModuleList({ onModuleSelect, className = "" }: ModuleListProps) {
             aria-label="Switch to list view"
             className={`rounded-md p-2 transition-colors ${
               viewMode === "list"
-                ? "bg-blue-500/20 text-blue-400"
-                : "text-gray-400 hover:text-white"
+                ? "bg-primary/20 text-primary"
+                : "text-muted-foreground hover:text-foreground"
             }`}
           >
             <List className="h-4 w-4" />
@@ -318,7 +318,7 @@ function ModuleList({ onModuleSelect, className = "" }: ModuleListProps) {
 
       {/* Results Count */}
       <div className="flex items-center justify-between">
-        <div className="text-sm text-gray-400">
+        <div className="text-sm text-muted-foreground">
           Showing {filteredAndSortedModules.length} of {modules.length} modules
         </div>
         {searchTerm && (
@@ -329,7 +329,7 @@ function ModuleList({ onModuleSelect, className = "" }: ModuleListProps) {
               setSelectedFilter("all");
               setSortBy("order");
             }}
-            className="text-sm text-blue-400 transition-colors hover:text-blue-300"
+            className="text-sm text-primary transition-colors hover:text-primary"
           >
             Clear all filters
           </button>
@@ -346,8 +346,8 @@ function ModuleList({ onModuleSelect, className = "" }: ModuleListProps) {
             className="py-12 text-center"
           >
             <Filter className="mx-auto mb-4 h-12 w-12 text-gray-600" />
-            <h3 className="mb-2 text-lg font-medium text-gray-400">No modules found</h3>
-            <p className="text-gray-500">Try adjusting your search or filters</p>
+            <h3 className="mb-2 text-lg font-medium text-muted-foreground">No modules found</h3>
+            <p className="text-muted-foreground">Try adjusting your search or filters</p>
           </motion.div>
         ) : (
           <motion.div

@@ -165,7 +165,7 @@ export default function StreakCalendar({
                       day.isToday && "ring-2 ring-primary ring-offset-2",
                       // Review day styling
                       day.isReviewed
-                        ? "bg-green-500 dark:bg-green-600 text-white font-semibold"
+                        ? "bg-[#22c55e] dark:bg-[#22c55e] text-foreground font-semibold"
                         : day.isCurrentMonth
                         ? "bg-muted/30 hover:bg-muted/50"
                         : "bg-transparent",
@@ -191,7 +191,7 @@ export default function StreakCalendar({
         {/* Legend */}
         <div className="flex items-center justify-center gap-4 pt-2 text-xs text-muted-foreground">
           <div className="flex items-center gap-1.5">
-            <div className="w-4 h-4 rounded bg-green-500 dark:bg-green-600"></div>
+            <div className="w-4 h-4 rounded bg-[#22c55e] dark:bg-[#22c55e]"></div>
             <span>Reviewed</span>
           </div>
           <div className="flex items-center gap-1.5">
@@ -207,7 +207,7 @@ export default function StreakCalendar({
         {/* Motivational Message */}
         {currentStreak > 0 && (
           <div className="pt-2 text-center">
-            <p className="text-sm font-medium text-green-600 dark:text-green-400">
+            <p className="text-sm font-medium text-[#22c55e] dark:text-[#22c55e]">
               {currentStreak === 1
                 ? "Great start! Keep it up tomorrow! 🎯"
                 : currentStreak < 7

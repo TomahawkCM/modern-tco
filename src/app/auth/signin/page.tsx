@@ -10,14 +10,14 @@ export default function SignInPage() {
             <h1 className="text-3xl font-bold text-slate-900 dark:text-slate-100 mb-2">
               TCO Study Platform
             </h1>
-            <p className="text-slate-600 dark:text-slate-400">
+            <p className="text-slate-600 dark:text-muted-foreground">
               Tanium Certified Operator Exam Preparation
             </p>
           </div>
           
           <SignInForm />
           
-          <div className="mt-8 text-center text-sm text-slate-600 dark:text-slate-400">
+          <div className="mt-8 text-center text-sm text-slate-600 dark:text-muted-foreground">
             <p>
               Prepare for the TAN-1000 certification exam with interactive learning modules,
               hands-on labs, and comprehensive practice assessments.

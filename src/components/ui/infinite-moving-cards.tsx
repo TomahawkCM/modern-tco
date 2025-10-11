@@ -94,10 +94,10 @@ export const InfiniteMovingCards = ({
               </span>
               <div className="relative z-20 mt-6 flex flex-row items-center">
                 <span className="flex flex-col gap-1">
-                  <span className="text-sm font-normal leading-[1.6] text-neutral-500 dark:text-gray-400">
+                  <span className="text-sm font-normal leading-[1.6] text-neutral-500 dark:text-muted-foreground">
                     {item.name}
                   </span>
-                  <span className="text-sm font-normal leading-[1.6] text-neutral-500 dark:text-gray-400">
+                  <span className="text-sm font-normal leading-[1.6] text-neutral-500 dark:text-muted-foreground">
                     {item.title}
                   </span>
                 </span>

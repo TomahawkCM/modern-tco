@@ -90,17 +90,17 @@ export function AchievementsPanel({ moduleId, className }: AchievementsPanelProp
   const getRarityColor = (rarity: string) => {
     switch (rarity) {
       case "common":
-        return "text-gray-400 border-gray-600";
+        return "text-muted-foreground border-gray-600";
       case "uncommon":
-        return "text-green-400 border-green-600";
+        return "text-[#22c55e] border-green-600";
       case "rare":
-        return "text-blue-400 border-blue-600";
+        return "text-primary border-blue-600";
       case "epic":
-        return "text-purple-400 border-purple-600";
+        return "text-accent-foreground border-purple-600";
       case "legendary":
-        return "text-yellow-400 border-yellow-600";
+        return "text-[#f97316] border-yellow-600";
       default:
-        return "text-gray-400 border-gray-600";
+        return "text-muted-foreground border-gray-600";
     }
   };
 
@@ -124,7 +124,7 @@ export function AchievementsPanel({ moduleId, className }: AchievementsPanelProp
   };
 
   return (
-    <Card className={cn("border-purple-500/20 bg-gradient-to-br from-purple-500/5 to-blue-500/5", className)}>
+    <Card className={cn("border-accent/20 bg-gradient-to-br from-purple-500/5 to-blue-500/5", className)}>
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           <Award className="h-5 w-5 text-purple-500" />
@@ -147,7 +147,7 @@ export function AchievementsPanel({ moduleId, className }: AchievementsPanelProp
 
           <TabsContent value="unlocked" className="space-y-3 mt-4">
             {unlocked.length === 0 ? (
-              <div className="py-8 text-center text-gray-500">
+              <div className="py-8 text-center text-muted-foreground">
                 <Lock className="mx-auto mb-2 h-12 w-12 opacity-50" />
                 <p className="text-sm">No achievements unlocked yet</p>
                 <p className="text-xs mt-1">Complete reviews to earn achievements!</p>
@@ -174,18 +174,18 @@ export function AchievementsPanel({ moduleId, className }: AchievementsPanelProp
                         <span className="text-3xl">{achievementDef.icon}</span>
                         <div className="flex-1 min-w-0">
                           <div className="flex items-center gap-2 mb-1">
-                            <h4 className="font-semibold text-white">
+                            <h4 className="font-semibold text-foreground">
                               {achievementDef.name}
                             </h4>
                             <Badge variant="outline" className="text-xs">
                               {achievementDef.rarity}
                             </Badge>
                           </div>
-                          <p className="text-sm text-gray-400 mb-2">
+                          <p className="text-sm text-muted-foreground mb-2">
                             {achievementDef.description}
                           </p>
                           <div className="flex items-center justify-between text-xs">
-                            <span className="text-gray-500">
+                            <span className="text-muted-foreground">
                               {achievement.unlockedAt
                                 ? new Date(achievement.unlockedAt).toLocaleDateString()
                                 : ""}
@@ -205,7 +205,7 @@ export function AchievementsPanel({ moduleId, className }: AchievementsPanelProp
 
           <TabsContent value="locked" className="space-y-3 mt-4">
             {progress.length === 0 ? (
-              <div className="py-8 text-center text-gray-500">
+              <div className="py-8 text-center text-muted-foreground">
                 <Award className="mx-auto mb-2 h-12 w-12 opacity-50" />
                 <p className="text-sm">All achievements unlocked!</p>
               </div>
@@ -217,30 +217,30 @@ export function AchievementsPanel({ moduleId, className }: AchievementsPanelProp
                 return (
                   <div
                     key={achievement.id}
-                    className="rounded-lg border border-gray-700 bg-gray-800/30 p-4"
+                    className="rounded-lg border border-gray-700 bg-card/30 p-4"
                   >
                     <div className="flex items-start gap-3">
                       <div className="relative">
                         <span className="text-3xl opacity-50">{achievement.icon}</span>
-                        <Lock className="absolute -right-1 -bottom-1 h-4 w-4 text-gray-500" />
+                        <Lock className="absolute -right-1 -bottom-1 h-4 w-4 text-muted-foreground" />
                       </div>
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-2 mb-1">
-                          <h4 className="font-semibold text-gray-300">
+                          <h4 className="font-semibold text-muted-foreground">
                             {achievement.name}
                           </h4>
                           <Badge variant="outline" className="text-xs opacity-70">
                             {achievement.rarity}
                           </Badge>
                         </div>
-                        <p className="text-sm text-gray-500 mb-2">
+                        <p className="text-sm text-muted-foreground mb-2">
                           {achievement.description}
                         </p>
 
                         {/* Progress Bar */}
                         <div className="space-y-1">
                           <Progress value={prog.percentage} className="h-2" />
-                          <div className="flex justify-between text-xs text-gray-500">
+                          <div className="flex justify-between text-xs text-muted-foreground">
                             <span>
                               {prog.currentValue} / {prog.requiredValue}
                             </span>
@@ -249,7 +249,7 @@ export function AchievementsPanel({ moduleId, className }: AchievementsPanelProp
                         </div>
 
                         <div className="flex items-center justify-between mt-2">
-                          <span className="text-xs text-gray-500">
+                          <span className="text-xs text-muted-foreground">
                             {getCategoryIcon(achievement.category)} {achievement.category}
                           </span>
                           <Badge variant="secondary" className="gap-1 text-xs opacity-70">

@@ -23,7 +23,7 @@ const quickActions = [
     title: "Start Learning",
     description: "Jump into your personalized learning path",
     icon: BookOpen,
-    color: "from-blue-500 to-cyan-500",
+    color: "from-blue-500 to-primary",
     href: "/study",
     badge: "Recommended",
     estimatedTime: "5 min setup"
@@ -63,7 +63,7 @@ const quickActions = [
     title: "Skill Assessment",
     description: "Identify your strengths and focus areas",
     icon: Brain,
-    color: "from-cyan-500 to-blue-500",
+    color: "from-primary to-blue-500",
     href: "/assessment",
     badge: "AI-Powered",
     estimatedTime: "15 min"
@@ -84,19 +84,19 @@ export function QuickActions() {
   const getBadgeColor = (badge: string) => {
     switch (badge) {
       case "Recommended":
-        return "bg-blue-500/10 text-blue-400 border-blue-500/20";
+        return "bg-primary/10 text-primary border-primary/20";
       case "Popular":
-        return "bg-green-500/10 text-green-400 border-green-500/20";
+        return "bg-[#22c55e]/10 text-[#22c55e] border-[#22c55e]/20";
       case "Interactive":
-        return "bg-purple-500/10 text-purple-400 border-purple-500/20";
+        return "bg-accent/10 text-accent-foreground border-accent/20";
       case "Social":
         return "bg-orange-500/10 text-orange-400 border-orange-500/20";
       case "AI-Powered":
-        return "bg-cyan-500/10 text-cyan-400 border-cyan-500/20";
+        return "bg-primary/10 text-primary border-primary/20";
       case "Realistic":
-        return "bg-yellow-500/10 text-yellow-400 border-yellow-500/20";
+        return "bg-[#f97316]/10 text-[#f97316] border-[#f97316]/20";
       default:
-        return "bg-slate-500/10 text-slate-400 border-slate-500/20";
+        return "bg-slate-500/10 text-muted-foreground border-slate-500/20";
     }
   };
 
@@ -111,14 +111,14 @@ export function QuickActions() {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <Badge className="mb-4 bg-cyan-500/10 text-cyan-400 border-cyan-500/20">
+          <Badge className="mb-4 bg-primary/10 text-primary border-primary/20">
             <Sparkles className="w-4 h-4 mr-2" />
             Quick Start
           </Badge>
           <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-cyan-200 via-blue-100 to-purple-200 bg-clip-text text-transparent">
             Jump Into Action
           </h2>
-          <p className="text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
             Get started immediately with these curated learning activities. 
             Each action is designed to move you closer to TCO certification success.
           </p>
@@ -141,25 +141,25 @@ export function QuickActions() {
                 <CardHeader className="pb-4">
                   <div className="flex items-center justify-between mb-3">
                     <div className={`w-12 h-12 rounded-lg bg-gradient-to-br ${action.color} flex items-center justify-center`}>
-                      <action.icon className="w-6 h-6 text-white" />
+                      <action.icon className="w-6 h-6 text-foreground" />
                     </div>
                     <Badge className={getBadgeColor(action.badge)}>
                       {action.badge}
                     </Badge>
                   </div>
                   
-                  <CardTitle className="text-xl text-white group-hover:text-cyan-300 transition-colors">
+                  <CardTitle className="text-xl text-foreground group-hover:text-primary transition-colors">
                     {action.title}
                   </CardTitle>
                   
-                  <CardDescription className="text-slate-400 leading-relaxed">
+                  <CardDescription className="text-muted-foreground leading-relaxed">
                     {action.description}
                   </CardDescription>
                 </CardHeader>
 
                 <CardContent>
                   <div className="flex items-center justify-between mb-4">
-                    <div className="flex items-center gap-2 text-sm text-slate-400">
+                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
                       <Clock className="w-4 h-4" />
                       {action.estimatedTime}
                     </div>
@@ -167,7 +167,7 @@ export function QuickActions() {
 
                   <Button
                     asChild
-                    className="w-full bg-gradient-to-r from-cyan-600/20 to-blue-600/20 hover:from-cyan-600/30 hover:to-blue-600/30 text-cyan-300 border border-cyan-500/30 transition-all duration-300"
+                    className="w-full bg-gradient-to-r from-cyan-600/20 to-blue-600/20 hover:from-cyan-600/30 hover:to-blue-600/30 text-primary border border-primary/30 transition-all duration-300"
                     variant="outline"
                   >
                     <Link href={action.href}>

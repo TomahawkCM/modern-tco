@@ -138,7 +138,7 @@ export default function DueCardsBadge({
               "h-5 w-5",
               isUrgent
                 ? "text-orange-600 dark:text-orange-400"
-                : "text-blue-600 dark:text-blue-400"
+                : "text-blue-600 dark:text-primary"
             )} />
           </div>
 

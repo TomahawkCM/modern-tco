@@ -114,7 +114,7 @@ export default function SkillGate({
       <Card className="my-6 border-2 border-green-500 bg-green-50">
         <CardContent className="pt-6">
           <div className="flex items-center justify-center space-x-3">
-            <Unlock className="w-6 h-6 text-green-600" />
+            <Unlock className="w-6 h-6 text-[#22c55e]" />
             <p className="text-green-700 font-medium">
               ✓ Checkpoint Complete - {nextSection} is unlocked!
             </p>
@@ -136,7 +136,7 @@ export default function SkillGate({
               <Lock className="w-5 h-5" />
               {title}
             </CardTitle>
-            <span className="text-sm text-gray-500">
+            <span className="text-sm text-muted-foreground">
               Question {currentQuestion + 1} of {questions.length}
             </span>
           </div>
@@ -177,7 +177,7 @@ export default function SkillGate({
             Previous
           </Button>
 
-          <span className="text-sm text-gray-500">
+          <span className="text-sm text-muted-foreground">
             {selectedAnswers.filter(a => a !== null).length} of {questions.length} answered
           </span>
 
@@ -211,7 +211,7 @@ export default function SkillGate({
         <CardTitle className="flex items-center gap-2">
           {passed ? (
             <>
-              <Trophy className="w-6 h-6 text-green-600" />
+              <Trophy className="w-6 h-6 text-[#22c55e]" />
               Checkpoint Passed!
             </>
           ) : (
@@ -233,7 +233,7 @@ export default function SkillGate({
 
         {passed ? (
           <Alert className="border-green-500 bg-green-50">
-            <CheckCircle2 className="w-5 h-5 text-green-600" />
+            <CheckCircle2 className="w-5 h-5 text-[#22c55e]" />
             <AlertDescription className="text-green-700">
               Excellent work! You've demonstrated mastery of this content.
               You can now proceed to {nextSection}.
@@ -257,7 +257,7 @@ export default function SkillGate({
               <div key={index} className={`p-3 rounded-lg ${isCorrect ? 'bg-green-50' : 'bg-red-50'}`}>
                 <div className="flex items-start gap-2">
                   {isCorrect ? (
-                    <CheckCircle2 className="w-5 h-5 text-green-600 mt-0.5" />
+                    <CheckCircle2 className="w-5 h-5 text-[#22c55e] mt-0.5" />
                   ) : (
                     <XCircle className="w-5 h-5 text-red-600 mt-0.5" />
                   )}
@@ -286,7 +286,7 @@ export default function SkillGate({
         {passed ? (
           <Button
             onClick={() => setShowResults(false)}
-            className="bg-green-600 hover:bg-green-700"
+            className="bg-[#22c55e] hover:bg-green-700"
           >
             Continue to {nextSection}
           </Button>

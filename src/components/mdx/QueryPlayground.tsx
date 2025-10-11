@@ -79,7 +79,7 @@ export default function QueryPlayground({
 
   const getDifficultyColor = () => {
     switch(difficulty) {
-      case 'beginner': return 'text-green-600';
+      case 'beginner': return 'text-[#22c55e]';
       case 'intermediate': return 'text-yellow-600';
       case 'advanced': return 'text-red-600';
       default: return 'text-gray-600';
@@ -121,7 +121,7 @@ export default function QueryPlayground({
             <div className="flex items-center gap-2">
               {feedback === 'correct' ? (
                 <>
-                  <CheckCircle2 className="w-5 h-5 text-green-600" />
+                  <CheckCircle2 className="w-5 h-5 text-[#22c55e]" />
                   <AlertDescription className="text-green-700">
                     Excellent! Your query is correct.
                   </AlertDescription>

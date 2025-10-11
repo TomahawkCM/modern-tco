@@ -242,7 +242,7 @@ export default function VideoEmbed({ youtubeId, title, start, moduleSlug }: Vide
         position: 'relative',
         backgroundColor: '#000',
       }}
-      className="overflow-hidden rounded-lg border border-slate-200 dark:border-slate-800"
+      className="overflow-hidden rounded-lg border border-slate-200 dark:border-border"
       aria-label={title}
     />
   );

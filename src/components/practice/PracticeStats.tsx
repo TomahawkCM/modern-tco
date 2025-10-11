@@ -55,7 +55,7 @@ export function PracticeStats({ className }: PracticeStatsProps) {
     return (
       <Card className={className}>
         <CardContent className="py-12 text-center">
-          <p className="text-gray-400">Loading practice statistics...</p>
+          <p className="text-muted-foreground">Loading practice statistics...</p>
         </CardContent>
       </Card>
     );
@@ -72,8 +72,8 @@ export function PracticeStats({ className }: PracticeStatsProps) {
         </CardHeader>
         <CardContent className="text-center py-12">
           <Target className="mx-auto mb-4 h-16 w-16 text-gray-600 opacity-50" />
-          <p className="text-gray-400 mb-2">No practice sessions yet</p>
-          <p className="text-sm text-gray-500">
+          <p className="text-muted-foreground mb-2">No practice sessions yet</p>
+          <p className="text-sm text-muted-foreground">
             Start practicing to see your statistics here!
           </p>
         </CardContent>
@@ -82,16 +82,16 @@ export function PracticeStats({ className }: PracticeStatsProps) {
   }
 
   const getAccuracyColor = (accuracy: number) => {
-    if (accuracy >= 90) return "text-green-400";
-    if (accuracy >= 70) return "text-blue-400";
-    if (accuracy >= 50) return "text-yellow-400";
+    if (accuracy >= 90) return "text-[#22c55e]";
+    if (accuracy >= 70) return "text-primary";
+    if (accuracy >= 50) return "text-[#f97316]";
     return "text-orange-400";
   };
 
   return (
     <div className={`space-y-6 ${className}`}>
       {/* Overall Stats */}
-      <Card className="border-purple-500/20 bg-gradient-to-br from-purple-500/5 to-blue-500/5">
+      <Card className="border-accent/20 bg-gradient-to-br from-purple-500/5 to-blue-500/5">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <BarChart3 className="h-5 w-5 text-purple-500" />
@@ -102,22 +102,22 @@ export function PracticeStats({ className }: PracticeStatsProps) {
           {/* Main Stats Grid */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div>
-              <div className="text-sm text-gray-400 mb-1">Total Sessions</div>
-              <div className="text-2xl font-bold text-purple-400">{stats.totalSessions}</div>
+              <div className="text-sm text-muted-foreground mb-1">Total Sessions</div>
+              <div className="text-2xl font-bold text-accent-foreground">{stats.totalSessions}</div>
             </div>
             <div>
-              <div className="text-sm text-gray-400 mb-1">Questions</div>
-              <div className="text-2xl font-bold text-blue-400">{stats.totalQuestions}</div>
+              <div className="text-sm text-muted-foreground mb-1">Questions</div>
+              <div className="text-2xl font-bold text-primary">{stats.totalQuestions}</div>
             </div>
             <div>
-              <div className="text-sm text-gray-400 mb-1">Accuracy</div>
+              <div className="text-sm text-muted-foreground mb-1">Accuracy</div>
               <div className={`text-2xl font-bold ${getAccuracyColor(stats.accuracyRate)}`}>
                 {Math.round(stats.accuracyRate)}%
               </div>
             </div>
             <div>
-              <div className="text-sm text-gray-400 mb-1">Avg Time</div>
-              <div className="text-2xl font-bold text-green-400">
+              <div className="text-sm text-muted-foreground mb-1">Avg Time</div>
+              <div className="text-2xl font-bold text-[#22c55e]">
                 {Math.round(stats.averageTimePerQuestion)}s
               </div>
             </div>
@@ -126,7 +126,7 @@ export function PracticeStats({ className }: PracticeStatsProps) {
           {/* Accuracy Progress Bar */}
           <div>
             <div className="mb-2 flex justify-between text-sm">
-              <span className="text-gray-400">Overall Accuracy</span>
+              <span className="text-muted-foreground">Overall Accuracy</span>
               <span className={getAccuracyColor(stats.accuracyRate)}>
                 {stats.totalCorrect} / {stats.totalQuestions} correct
               </span>
@@ -138,44 +138,44 @@ export function PracticeStats({ className }: PracticeStatsProps) {
 
       {/* Practice vs Review Comparison */}
       {comparison && comparison.review.sessions > 0 && (
-        <Card className="border-blue-500/20 bg-blue-500/5">
+        <Card className="border-primary/20 bg-primary/5">
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-base">
-              <TrendingUp className="h-5 w-5 text-blue-400" />
+              <TrendingUp className="h-5 w-5 text-primary" />
               Practice vs Review Performance
             </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-2 gap-4">
-              <div className="rounded-lg border border-purple-500/20 bg-purple-500/5 p-4">
-                <div className="text-sm text-gray-400 mb-2">Practice</div>
-                <div className="text-3xl font-bold text-purple-400">
+              <div className="rounded-lg border border-accent/20 bg-accent/5 p-4">
+                <div className="text-sm text-muted-foreground mb-2">Practice</div>
+                <div className="text-3xl font-bold text-accent-foreground">
                   {Math.round(comparison.practice.accuracy)}%
                 </div>
-                <div className="text-xs text-gray-500 mt-1">
+                <div className="text-xs text-muted-foreground mt-1">
                   {comparison.practice.sessions} sessions
                 </div>
               </div>
-              <div className="rounded-lg border border-green-500/20 bg-green-500/5 p-4">
-                <div className="text-sm text-gray-400 mb-2">Review</div>
-                <div className="text-3xl font-bold text-green-400">
+              <div className="rounded-lg border border-[#22c55e]/20 bg-[#22c55e]/5 p-4">
+                <div className="text-sm text-muted-foreground mb-2">Review</div>
+                <div className="text-3xl font-bold text-[#22c55e]">
                   {Math.round(comparison.review.accuracy)}%
                 </div>
-                <div className="text-xs text-gray-500 mt-1">
+                <div className="text-xs text-muted-foreground mt-1">
                   {comparison.review.sessions} sessions
                 </div>
               </div>
             </div>
 
             {comparison.difference !== 0 && (
-              <div className="mt-4 rounded border border-gray-700 bg-gray-800/30 p-3 text-sm">
+              <div className="mt-4 rounded border border-gray-700 bg-card/30 p-3 text-sm">
                 {comparison.difference > 0 ? (
-                  <p className="text-blue-400">
+                  <p className="text-primary">
                     🎯 Your practice accuracy is {Math.abs(Math.round(comparison.difference))}%
                     higher than review! Great preparation work.
                   </p>
                 ) : (
-                  <p className="text-yellow-400">
+                  <p className="text-[#f97316]">
                     📚 Your review accuracy is {Math.abs(Math.round(comparison.difference))}%
                     higher. Practice helps build confidence!
                   </p>
@@ -199,13 +199,13 @@ export function PracticeStats({ className }: PracticeStatsProps) {
             {weakConcepts.slice(0, 5).map((concept, idx) => (
               <div key={idx} className="space-y-1">
                 <div className="flex items-center justify-between">
-                  <span className="text-sm text-gray-300">{concept.concept}</span>
+                  <span className="text-sm text-muted-foreground">{concept.concept}</span>
                   <Badge variant="outline" className="text-orange-400">
                     {Math.round(concept.accuracy)}%
                   </Badge>
                 </div>
                 <Progress value={concept.accuracy} className="h-1" />
-                <div className="text-xs text-gray-500">
+                <div className="text-xs text-muted-foreground">
                   {concept.correct} / {concept.questions} correct
                 </div>
               </div>
@@ -216,10 +216,10 @@ export function PracticeStats({ className }: PracticeStatsProps) {
 
       {/* Strong Concepts */}
       {strongConcepts.length > 0 && (
-        <Card className="border-green-500/20 bg-green-500/5">
+        <Card className="border-[#22c55e]/20 bg-[#22c55e]/5">
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-base">
-              <Award className="h-5 w-5 text-green-400" />
+              <Award className="h-5 w-5 text-[#22c55e]" />
               Your Strongest Concepts
             </CardTitle>
           </CardHeader>
@@ -227,13 +227,13 @@ export function PracticeStats({ className }: PracticeStatsProps) {
             {strongConcepts.slice(0, 5).map((concept, idx) => (
               <div key={idx} className="space-y-1">
                 <div className="flex items-center justify-between">
-                  <span className="text-sm text-gray-300">{concept.concept}</span>
-                  <Badge variant="outline" className="text-green-400">
+                  <span className="text-sm text-muted-foreground">{concept.concept}</span>
+                  <Badge variant="outline" className="text-[#22c55e]">
                     {Math.round(concept.accuracy)}%
                   </Badge>
                 </div>
                 <Progress value={concept.accuracy} className="h-1" />
-                <div className="text-xs text-gray-500">
+                <div className="text-xs text-muted-foreground">
                   {concept.correct} / {concept.questions} correct
                 </div>
               </div>
@@ -247,7 +247,7 @@ export function PracticeStats({ className }: PracticeStatsProps) {
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-base">
-              <Target className="h-5 w-5 text-blue-400" />
+              <Target className="h-5 w-5 text-primary" />
               Performance by Module
             </CardTitle>
           </CardHeader>
@@ -255,11 +255,11 @@ export function PracticeStats({ className }: PracticeStatsProps) {
             {Object.values(stats.byModule).map((moduleStats, idx) => (
               <div key={idx} className="space-y-1">
                 <div className="flex items-center justify-between">
-                  <span className="text-sm text-gray-300 capitalize">
+                  <span className="text-sm text-muted-foreground capitalize">
                     {moduleStats.moduleId.replace(/-/g, " ")}
                   </span>
                   <div className="flex items-center gap-2">
-                    <span className="text-xs text-gray-500">
+                    <span className="text-xs text-muted-foreground">
                       {moduleStats.questions} questions
                     </span>
                     <Badge variant="outline" className={getAccuracyColor(moduleStats.accuracy)}>
@@ -279,7 +279,7 @@ export function PracticeStats({ className }: PracticeStatsProps) {
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-base">
-              <Clock className="h-5 w-5 text-gray-400" />
+              <Clock className="h-5 w-5 text-muted-foreground" />
               Recent Practice Sessions
             </CardTitle>
           </CardHeader>
@@ -292,10 +292,10 @@ export function PracticeStats({ className }: PracticeStatsProps) {
               return (
                 <div
                   key={idx}
-                  className="flex items-center justify-between rounded border border-gray-700/50 bg-gray-800/30 p-3"
+                  className="flex items-center justify-between rounded border border-gray-700/50 bg-card/30 p-3"
                 >
                   <div className="flex-1">
-                    <div className="text-sm text-gray-300">
+                    <div className="text-sm text-muted-foreground">
                       {session.mode === "concept"
                         ? `📍 ${session.concept}`
                         : session.mode === "module"
@@ -304,12 +304,12 @@ export function PracticeStats({ className }: PracticeStatsProps) {
                         ? "🎯 Missed Questions"
                         : "🎲 Random"}
                     </div>
-                    <div className="text-xs text-gray-500">
+                    <div className="text-xs text-muted-foreground">
                       {new Date(session.startTime).toLocaleDateString()}
                     </div>
                   </div>
                   <div className="flex items-center gap-3">
-                    <span className="text-sm text-gray-400">
+                    <span className="text-sm text-muted-foreground">
                       {session.score} / {session.questions.length}
                     </span>
                     <Badge

@@ -16,11 +16,11 @@ const getDifficultyColor = (difficulty: string) => {
     case "Beginner":
       return "bg-green-900/50 text-green-200 border-green-500/50";
     case "Intermediate":
-      return "bg-yellow-900/50 text-yellow-200 border-yellow-500/50";
+      return "bg-yellow-900/50 text-[#f97316] border-yellow-500/50";
     case "Advanced":
       return "bg-red-900/50 text-red-200 border-red-500/50";
     default:
-      return "bg-gray-900/50 text-gray-200 border-gray-500/50";
+      return "bg-gray-900/50 text-muted-foreground border-gray-500/50";
   }
 };
 
@@ -28,13 +28,13 @@ export default function ModuleHeader({ frontmatter }: ModuleHeaderProps) {
   return (
     <div className="mb-8">
       <div className="mb-4 flex flex-wrap items-center gap-3">
-        <Badge variant="outline" className="border-blue-500/50 bg-blue-900/50 text-blue-200">
+        <Badge variant="outline" className="border-blue-500/50 bg-blue-900/50 text-muted-foreground">
           {frontmatter.domainEnum.replace(/_/g, " ")}
         </Badge>
         <Badge variant="outline" className={getDifficultyColor(frontmatter.difficulty)}>
           {frontmatter.difficulty}
         </Badge>
-        <div className="flex items-center gap-1 text-gray-400">
+        <div className="flex items-center gap-1 text-muted-foreground">
           <Clock className="h-4 w-4" />
           <span className="text-sm">{frontmatter.estimatedTime}</span>
         </div>
@@ -45,14 +45,14 @@ export default function ModuleHeader({ frontmatter }: ModuleHeaderProps) {
       </h1>
 
       {frontmatter.description && (
-        <p className="mb-6 text-xl leading-relaxed text-gray-300">{frontmatter.description}</p>
+        <p className="mb-6 text-xl leading-relaxed text-muted-foreground">{frontmatter.description}</p>
       )}
 
       {/* Learning Objectives */}
       {frontmatter.learningObjectives && frontmatter.learningObjectives.length > 0 && (
-        <Card className="mb-6 border-blue-500/30 bg-gradient-to-r from-blue-950/30 to-cyan-950/30">
+        <Card className="mb-6 border-primary/30 bg-gradient-to-r from-blue-950/30 to-cyan-950/30">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-blue-200">
+            <CardTitle className="flex items-center gap-2 text-muted-foreground">
               <Target className="h-5 w-5" />
               Learning Objectives
             </CardTitle>
@@ -60,8 +60,8 @@ export default function ModuleHeader({ frontmatter }: ModuleHeaderProps) {
           <CardContent>
             <ul className="space-y-2">
               {frontmatter.learningObjectives.map((objective, index) => (
-                <li key={index} className="flex items-start gap-2 text-gray-200">
-                  <CheckCircle className="mt-0.5 h-5 w-5 flex-shrink-0 text-green-400" />
+                <li key={index} className="flex items-start gap-2 text-muted-foreground">
+                  <CheckCircle className="mt-0.5 h-5 w-5 flex-shrink-0 text-[#22c55e]" />
                   <span>{objective}</span>
                 </li>
               ))}

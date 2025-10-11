@@ -43,7 +43,7 @@ const DIFFICULTY_COLORS: Record<Difficulty, string> = {
   [Difficulty.BEGINNER]: "bg-gray-100 text-gray-600",
   [Difficulty.INTERMEDIATE]: "bg-yellow-100 text-yellow-700",
   [Difficulty.ADVANCED]: "bg-red-100 text-red-700",
-  [Difficulty.EXPERT]: "bg-black text-white",
+  [Difficulty.EXPERT]: "bg-black text-foreground",
 };
 
 export function PracticeQuestion({
@@ -87,7 +87,7 @@ export function PracticeQuestion({
     if (!showFeedback || !question.userAnswer) return null;
 
     if (choiceId === question.correctAnswerId) {
-      return <CheckCircle className="h-4 w-4 text-green-600" />;
+      return <CheckCircle className="h-4 w-4 text-[#22c55e]" />;
     } else if (choiceId === question.userAnswer && choiceId !== question.correctAnswerId) {
       return <XCircle className="h-4 w-4 text-red-600" />;
     }
@@ -206,7 +206,7 @@ export function PracticeQuestion({
                 )}
               >
                 {question.isCorrect ? (
-                  <CheckCircle className="mt-0.5 h-5 w-5 text-green-600" />
+                  <CheckCircle className="mt-0.5 h-5 w-5 text-[#22c55e]" />
                 ) : (
                   <XCircle className="mt-0.5 h-5 w-5 text-red-600" />
                 )}

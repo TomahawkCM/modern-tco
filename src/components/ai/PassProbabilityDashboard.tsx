@@ -230,7 +230,7 @@ export function PassProbabilityDashboard({
                   value={score}
                   className="h-2"
                   // @ts-ignore
-                  indicatorClassName={score >= 75 ? 'bg-green-500' : score >= 60 ? 'bg-yellow-500' : 'bg-red-500'}
+                  indicatorClassName={score >= 75 ? 'bg-[#22c55e]' : score >= 60 ? 'bg-yellow-500' : 'bg-red-500'}
                 />
               </div>
             ))}
@@ -244,7 +244,7 @@ export function PassProbabilityDashboard({
         {prediction.strengths.length > 0 && (
           <Card>
             <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-green-600">
+              <CardTitle className="flex items-center gap-2 text-[#22c55e]">
                 <CheckCircle2 className="w-5 h-5" />
                 Your Strengths
               </CardTitle>
@@ -253,7 +253,7 @@ export function PassProbabilityDashboard({
               <ul className="space-y-2">
                 {prediction.strengths.map((strength, idx) => (
                   <li key={idx} className="flex items-start gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" />
+                    <CheckCircle2 className="w-4 h-4 text-[#22c55e] mt-0.5 flex-shrink-0" />
                     <div className="text-sm">
                       <span className="font-semibold">{strength.domain}</span>
                       <span className="text-muted-foreground ml-2">

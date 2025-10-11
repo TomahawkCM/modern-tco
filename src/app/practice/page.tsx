@@ -35,7 +35,7 @@ const QuestionCard = dynamic(
   {
     ssr: false,
     loading: () => (
-      <div className="glass border-white/10 p-6 text-white/80">Loading question…</div>
+      <div className="glass border-white/10 p-6 text-foreground/80">Loading question…</div>
     ),
   }
 );
@@ -272,7 +272,7 @@ function PracticeContent() {
           <Card className="glass border-white/10 p-8">
             <div className="space-y-4 text-center">
               <div className="mx-auto h-12 w-12 animate-spin rounded-full border-b-2 border-tanium-accent"></div>
-              <p className="text-white">Preparing your practice session...</p>
+              <p className="text-foreground">Preparing your practice session...</p>
             </div>
           </Card>
         </div>
@@ -285,8 +285,8 @@ function PracticeContent() {
         <div className="mx-auto max-w-4xl space-y-8">
           {/* Header */}
           <div className="text-center">
-            <h1 className="mb-4 text-4xl font-bold text-white">Practice Mode</h1>
-            <p className="mb-8 text-xl text-gray-200">
+            <h1 className="mb-4 text-4xl font-bold text-foreground">Practice Mode</h1>
+            <p className="mb-8 text-xl text-muted-foreground">
               Test your knowledge with interactive questions and instant feedback
             </p>
           </div>
@@ -294,7 +294,7 @@ function PracticeContent() {
           {/* Practice info card */}
           <Card className="glass border-white/10">
             <CardHeader>
-              <CardTitle className="flex items-center gap-3 text-white">
+              <CardTitle className="flex items-center gap-3 text-foreground">
                 <Target className="h-6 w-6 text-tanium-accent" />
                 Practice Session Overview
               </CardTitle>
@@ -303,27 +303,27 @@ function PracticeContent() {
               <div className="grid gap-4 md:grid-cols-3">
                 <div className="text-center">
                   <div className="mb-2 text-2xl font-bold text-tanium-accent">{questionCount}</div>
-                  <div className="text-sm text-gray-300">Questions</div>
+                  <div className="text-sm text-muted-foreground">Questions</div>
                 </div>
                 <div className="text-center">
-                  <div className="mb-2 text-2xl font-bold text-green-400">~{Math.max(8, Math.round(questionCount * 1))}</div>
-                  <div className="text-sm text-gray-300">Minutes</div>
+                  <div className="mb-2 text-2xl font-bold text-[#22c55e]">~{Math.max(8, Math.round(questionCount * 1))}</div>
+                  <div className="text-sm text-muted-foreground">Minutes</div>
                 </div>
                 <div className="text-center">
-                  <div className="mb-2 text-2xl font-bold text-yellow-400">Mixed</div>
-                  <div className="text-sm text-gray-300">Difficulty</div>
+                  <div className="mb-2 text-2xl font-bold text-[#f97316]">Mixed</div>
+                  <div className="text-sm text-muted-foreground">Difficulty</div>
                 </div>
               </div>
 
               {/* Domain selector */}
               <div className="grid gap-3 md:grid-cols-2">
                 <div className="space-y-2">
-                  <div className="text-sm text-gray-300">Domain</div>
+                  <div className="text-sm text-muted-foreground">Domain</div>
                   <Select value={selectedDomain} onValueChange={setSelectedDomain}>
-                    <SelectTrigger className="border-white/20 bg-black/40 text-white">
+                    <SelectTrigger className="border-white/20 bg-black/40 text-foreground">
                       <SelectValue placeholder="All Domains" />
                     </SelectTrigger>
-                    <SelectContent className="bg-black/80 text-white">
+                    <SelectContent className="bg-black/80 text-foreground">
                       <SelectItem value="all">All Domains</SelectItem>
                       <SelectItem value={TCODomain.ASKING_QUESTIONS}>Asking Questions</SelectItem>
                       <SelectItem value={TCODomain.REFINING_TARGETING}>Refining Questions & Targeting</SelectItem>
@@ -336,14 +336,14 @@ function PracticeContent() {
 
                 {/* Question count selector (25/50/75/100) */}
                 <div className="space-y-2">
-                  <div className="text-sm text-gray-300">Number of questions</div>
+                  <div className="text-sm text-muted-foreground">Number of questions</div>
                   <RadioGroup
                     value={String(questionCount)}
                     onValueChange={(v) => setQuestionCount(parseInt(v, 10))}
                     className="grid grid-cols-4 gap-2"
                   >
                     {[25, 50, 75, 100].map((n) => (
-                      <label key={n} className="flex cursor-pointer items-center justify-center rounded-md border border-white/20 px-2 py-2 text-white hover:bg-white/10">
+                      <label key={n} className="flex cursor-pointer items-center justify-center rounded-md border border-white/20 px-2 py-2 text-foreground hover:bg-white/10">
                         <RadioGroupItem value={String(n)} id={`count-${n}`} className="peer sr-only" />
                         <span className="peer-data-[state=checked]:font-semibold">{n}</span>
                       </label>
@@ -354,13 +354,13 @@ function PracticeContent() {
 
               {/* Reveal answers toggle */}
               <div className="flex items-center justify-between">
-                <div className="text-sm text-gray-300">Reveal correct answer and explanation after selection</div>
+                <div className="text-sm text-muted-foreground">Reveal correct answer and explanation after selection</div>
                 <Switch checked={revealAnswers} onCheckedChange={setRevealAnswers} />
               </div>
 
               <Alert className="border-blue-200 bg-blue-50/10 dark:border-blue-800 dark:bg-blue-900/20">
-                <Target className="h-4 w-4 text-blue-400" />
-                <AlertDescription className="text-blue-200">
+                <Target className="h-4 w-4 text-primary" />
+                <AlertDescription className="text-muted-foreground">
                   <strong>Practice Mode Features:</strong> Immediate feedback, explanations for
                   answers, no time pressure, and the ability to review questions.
                 </AlertDescription>
@@ -370,7 +370,7 @@ function PracticeContent() {
                 <Button
                   onClick={() => handleStartPractice()}
                   size="lg"
-                  className="bg-tanium-accent text-white hover:bg-blue-600"
+                  className="bg-tanium-accent text-foreground hover:bg-blue-600"
                 >
                   <Play className="mr-2 h-5 w-5" />
                   Start Practice Session
@@ -392,15 +392,15 @@ function PracticeContent() {
         <div className="mx-auto max-w-4xl space-y-8">
           {/* Results header */}
           <div className="text-center">
-            <h1 className="mb-4 text-4xl font-bold text-white">Practice Complete!</h1>
-            <p className="text-xl text-gray-200">Here&rsquo;s how you performed</p>
+            <h1 className="mb-4 text-4xl font-bold text-foreground">Practice Complete!</h1>
+            <p className="text-xl text-muted-foreground">Here&rsquo;s how you performed</p>
           </div>
 
           {/* Results card */}
           <Card className="glass border-white/10">
             <CardHeader>
-              <CardTitle className="flex items-center gap-3 text-white">
-                <Trophy className="h-6 w-6 text-yellow-400" />
+              <CardTitle className="flex items-center gap-3 text-foreground">
+                <Trophy className="h-6 w-6 text-[#f97316]" />
                 Your Results
               </CardTitle>
             </CardHeader>
@@ -408,7 +408,7 @@ function PracticeContent() {
               {/* Score display */}
               <div className="text-center">
                 <div className="mb-2 text-6xl font-bold text-tanium-accent">{score}%</div>
-                <div className="text-gray-300">
+                <div className="text-muted-foreground">
                   {correctCount} out of {totalCount} correct
                 </div>
               </div>
@@ -435,13 +435,13 @@ function PracticeContent() {
                   className={cn(
                     "h-4 w-4",
                     score >= 80
-                      ? "text-green-400"
+                      ? "text-[#22c55e]"
                       : score >= 60
-                        ? "text-yellow-400"
+                        ? "text-[#f97316]"
                         : "text-red-400"
                   )}
                 />
-                <AlertDescription className="text-gray-200">
+                <AlertDescription className="text-muted-foreground">
                   {score >= 80
                     ? "Excellent work! You're well prepared."
                     : score >= 60
@@ -459,7 +459,7 @@ function PracticeContent() {
                 <Button
                   variant="outline"
                   onClick={() => router.push("/")}
-                  className="border-white/20 text-white hover:bg-white/10"
+                  className="border-white/20 text-foreground hover:bg-white/10"
                 >
                   <ArrowLeft className="mr-2 h-4 w-4" />
                   Back to Dashboard
@@ -477,16 +477,16 @@ function PracticeContent() {
         {/* Progress header */}
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-2xl font-bold text-white">Practice Mode</h1>
-            <p className="text-gray-300">
+            <h1 className="text-2xl font-bold text-foreground">Practice Mode</h1>
+            <p className="text-muted-foreground">
               Question {progress.current} of {progress.total}
             </p>
           </div>
           <div className="flex items-center gap-4">
-            <Badge variant="outline" className="border-white/20 text-white">
+            <Badge variant="outline" className="border-white/20 text-foreground">
               Score: {currentScore}%
             </Badge>
-            <div className="flex items-center gap-2 text-gray-300">
+            <div className="flex items-center gap-2 text-muted-foreground">
               <Clock className="h-4 w-4" />
               <span>No time limit</span>
             </div>
@@ -519,13 +519,13 @@ function PracticeContent() {
             variant="outline"
             onClick={handlePrevious}
             disabled={isFirstQuestion}
-            className="border-white/20 text-white hover:bg-white/10 disabled:opacity-50"
+            className="border-white/20 text-foreground hover:bg-white/10 disabled:opacity-50"
           >
             <ArrowLeft className="mr-2 h-4 w-4" />
             Previous
           </Button>
 
-          <div className="text-sm text-gray-400">
+          <div className="text-sm text-muted-foreground">
             {selectedAnswer ? "Answer selected" : "Select an answer to continue"}
           </div>
 
@@ -556,7 +556,7 @@ export default function PracticePage() {
   return (
     <Suspense fallback={
       <div className="min-h-screen flex items-center justify-center">
-        <div className="glass border-white/10 p-6 text-white/80">Loading...</div>
+        <div className="glass border-white/10 p-6 text-foreground/80">Loading...</div>
       </div>
     }>
       <PracticeContent />

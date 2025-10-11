@@ -20,7 +20,7 @@ export function UserMenu() {
         <Button
           variant="ghost"
           size="icon"
-          className="text-white hover:bg-white/10"
+          className="text-foreground hover:bg-white/10"
           aria-label="Open user menu"
         >
           <User className="h-5 w-5" />

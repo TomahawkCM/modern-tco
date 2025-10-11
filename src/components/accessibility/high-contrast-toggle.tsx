@@ -38,7 +38,7 @@ export function HighContrastToggle() {
       size="icon"
       aria-pressed={enabled}
       aria-label={enabled ? "Disable high contrast" : "Enable high contrast"}
-      className="text-white hover:bg-white/10"
+      className="text-foreground hover:bg-white/10"
       onClick={() => setEnabled((v) => !v)}
     >
       <Contrast className="h-5 w-5" />

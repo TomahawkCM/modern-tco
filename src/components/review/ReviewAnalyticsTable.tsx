@@ -182,17 +182,17 @@ export function ReviewAnalyticsTable({
 
   const getDomainColor = (domain: TCODomain) => {
     const colorMap = {
-      [TCODomain.ASKING_QUESTIONS]: "text-green-400",
-      [TCODomain.REFINING_QUESTIONS]: "text-blue-400",
-      [TCODomain.REFINING_TARGETING]: "text-blue-400",
-      [TCODomain.TAKING_ACTION]: "text-cyan-400",
+      [TCODomain.ASKING_QUESTIONS]: "text-[#22c55e]",
+      [TCODomain.REFINING_QUESTIONS]: "text-primary",
+      [TCODomain.REFINING_TARGETING]: "text-primary",
+      [TCODomain.TAKING_ACTION]: "text-primary",
       [TCODomain.NAVIGATION_MODULES]: "text-red-400",
-      [TCODomain.REPORTING_EXPORT]: "text-yellow-400",
+      [TCODomain.REPORTING_EXPORT]: "text-[#f97316]",
       [TCODomain.SECURITY]: "text-orange-400",
-      [TCODomain.FUNDAMENTALS]: "text-cyan-400",
+      [TCODomain.FUNDAMENTALS]: "text-primary",
       [TCODomain.TROUBLESHOOTING]: "text-pink-400",
     };
-    return colorMap[domain] || "text-gray-400";
+    return colorMap[domain] || "text-muted-foreground";
   };
 
   const SortIcon = ({ field }: { field: SortField }) => {
@@ -215,13 +215,13 @@ export function ReviewAnalyticsTable({
     <Card className="glass border-white/10">
       <CardHeader className="glass sticky top-0 z-10 border-b border-white/10">
         <div className="flex items-center justify-between">
-          <CardTitle className="flex items-center gap-2 text-white">
-            <AlertTriangle className="h-5 w-5 text-yellow-400" />
+          <CardTitle className="flex items-center gap-2 text-foreground">
+            <AlertTriangle className="h-5 w-5 text-[#f97316]" />
             Review Analytics
           </CardTitle>
           <div className="flex items-center gap-2">
             <div className="relative">
-              <Search className="absolute left-2 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
+              <Search className="absolute left-2 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
               <Input
                 type="search"
                 placeholder="Search domains..."
@@ -230,13 +230,13 @@ export function ReviewAnalyticsTable({
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
             </div>
-            <Badge variant="outline" className="text-white">
+            <Badge variant="outline" className="text-foreground">
               {totalQuestions} Total
             </Badge>
-            <Badge variant="outline" className="text-green-400">
+            <Badge variant="outline" className="text-[#22c55e]">
               {totalReviewed} Reviewed
             </Badge>
-            <Badge variant="outline" className="text-yellow-400">
+            <Badge variant="outline" className="text-[#f97316]">
               {totalPending} Pending
             </Badge>
           </div>
@@ -247,7 +247,7 @@ export function ReviewAnalyticsTable({
             className="h-2"
             aria-label={`Overall review progress: ${overallPercentage}% complete`}
           />
-          <p className="mt-1 text-xs text-gray-400">{overallPercentage}% Complete</p>
+          <p className="mt-1 text-xs text-muted-foreground">{overallPercentage}% Complete</p>
         </div>
       </CardHeader>
       <CardContent className="p-0">
@@ -255,37 +255,37 @@ export function ReviewAnalyticsTable({
           <TableHeader className="z-9 glass sticky top-24">
             <TableRow className="border-white/10">
               <TableHead
-                className="cursor-pointer text-white hover:text-tanium-accent"
+                className="cursor-pointer text-foreground hover:text-tanium-accent"
                 onClick={() => handleSort("domain")}
               >
                 Domain <SortIcon field="domain" />
               </TableHead>
               <TableHead
-                className="cursor-pointer text-center text-white hover:text-tanium-accent"
+                className="cursor-pointer text-center text-foreground hover:text-tanium-accent"
                 onClick={() => handleSort("total")}
               >
                 Total <SortIcon field="total" />
               </TableHead>
               <TableHead
-                className="cursor-pointer text-center text-white hover:text-tanium-accent"
+                className="cursor-pointer text-center text-foreground hover:text-tanium-accent"
                 onClick={() => handleSort("reviewed")}
               >
                 Reviewed <SortIcon field="reviewed" />
               </TableHead>
               <TableHead
-                className="cursor-pointer text-center text-white hover:text-tanium-accent"
+                className="cursor-pointer text-center text-foreground hover:text-tanium-accent"
                 onClick={() => handleSort("pending")}
               >
                 Pending <SortIcon field="pending" />
               </TableHead>
-              <TableHead className="text-center text-white">By Difficulty</TableHead>
+              <TableHead className="text-center text-foreground">By Difficulty</TableHead>
               <TableHead
-                className="cursor-pointer text-center text-white hover:text-tanium-accent"
+                className="cursor-pointer text-center text-foreground hover:text-tanium-accent"
                 onClick={() => handleSort("percentage")}
               >
                 Progress <SortIcon field="percentage" />
               </TableHead>
-              <TableHead className="text-center text-white">Action</TableHead>
+              <TableHead className="text-center text-foreground">Action</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -297,33 +297,33 @@ export function ReviewAnalyticsTable({
                   <TableCell>
                     <div className="flex items-center gap-2">
                       <Icon className={cn("h-4 w-4", color)} />
-                      <span className="text-white">{row.domain}</span>
+                      <span className="text-foreground">{row.domain}</span>
                     </div>
                   </TableCell>
                   <TableCell className="text-center">
-                    <Badge variant="outline" className="text-white">
+                    <Badge variant="outline" className="text-foreground">
                       {row.total}
                     </Badge>
                   </TableCell>
                   <TableCell className="text-center">
-                    <Badge variant="outline" className="text-green-400">
+                    <Badge variant="outline" className="text-[#22c55e]">
                       {row.reviewed}
                     </Badge>
                   </TableCell>
                   <TableCell className="text-center">
-                    <Badge variant="outline" className="text-yellow-400">
+                    <Badge variant="outline" className="text-[#f97316]">
                       {row.pending}
                     </Badge>
                   </TableCell>
                   <TableCell>
                     <div className="flex items-center justify-center gap-1">
                       {row.byDifficulty[Difficulty.BEGINNER] > 0 && (
-                        <Badge variant="secondary" className="bg-green-900/20 text-green-400">
+                        <Badge variant="secondary" className="bg-green-900/20 text-[#22c55e]">
                           B:{row.byDifficulty[Difficulty.BEGINNER]}
                         </Badge>
                       )}
                       {row.byDifficulty[Difficulty.INTERMEDIATE] > 0 && (
-                        <Badge variant="secondary" className="bg-yellow-900/20 text-yellow-400">
+                        <Badge variant="secondary" className="bg-yellow-900/20 text-[#f97316]">
                           I:{row.byDifficulty[Difficulty.INTERMEDIATE]}
                         </Badge>
                       )}
@@ -333,7 +333,7 @@ export function ReviewAnalyticsTable({
                         </Badge>
                       )}
                       {row.byDifficulty[Difficulty.EXPERT] > 0 && (
-                        <Badge variant="secondary" className="bg-purple-900/20 text-purple-400">
+                        <Badge variant="secondary" className="bg-accent/20 text-accent-foreground">
                           E:{row.byDifficulty[Difficulty.EXPERT]}
                         </Badge>
                       )}
@@ -346,7 +346,7 @@ export function ReviewAnalyticsTable({
                         className="h-2 flex-1"
                         aria-label={`${row.domain} review progress: ${row.percentageReviewed}% complete`}
                       />
-                      <span className="text-xs text-gray-400">{row.percentageReviewed}%</span>
+                      <span className="text-xs text-muted-foreground">{row.percentageReviewed}%</span>
                     </div>
                   </TableCell>
                   <TableCell className="text-center">

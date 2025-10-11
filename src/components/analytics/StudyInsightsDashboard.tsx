@@ -54,16 +54,16 @@ export function StudyInsightsDashboard({
     return (
       <Card className={className}>
         <CardContent className="py-12 text-center">
-          <p className="text-gray-400">Loading study insights...</p>
+          <p className="text-muted-foreground">Loading study insights...</p>
         </CardContent>
       </Card>
     );
   }
 
   const getQualityColor = (score: number) => {
-    if (score >= 80) return "text-green-400 border-green-400";
-    if (score >= 60) return "text-blue-400 border-blue-400";
-    if (score >= 40) return "text-yellow-400 border-yellow-400";
+    if (score >= 80) return "text-[#22c55e] border-green-400";
+    if (score >= 60) return "text-primary border-blue-400";
+    if (score >= 40) return "text-[#f97316] border-yellow-400";
     return "text-orange-400 border-orange-400";
   };
 
@@ -77,50 +77,50 @@ export function StudyInsightsDashboard({
   return (
     <div className={`space-y-6 ${className}`}>
       {/* Main Stats Card */}
-      <Card className="border-blue-500/20 bg-gradient-to-br from-blue-500/5 to-purple-500/5">
+      <Card className="border-primary/20 bg-gradient-to-br from-blue-500/5 to-purple-500/5">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
-            <BookOpen className="h-5 w-5 text-blue-500" />
+            <BookOpen className="h-5 w-5 text-primary" />
             Study Insights (Last {daysBack} Days)
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-6">
           {/* Key Metrics Grid */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div className="rounded-lg border border-purple-500/20 bg-purple-500/5 p-4">
+            <div className="rounded-lg border border-accent/20 bg-accent/5 p-4">
               <div className="flex items-center gap-2 mb-2">
-                <Activity className="h-4 w-4 text-purple-400" />
-                <span className="text-xs text-gray-400">Sessions</span>
+                <Activity className="h-4 w-4 text-accent-foreground" />
+                <span className="text-xs text-muted-foreground">Sessions</span>
               </div>
-              <div className="text-3xl font-bold text-purple-400">
+              <div className="text-3xl font-bold text-accent-foreground">
                 {analytics.totalSessions}
               </div>
             </div>
 
-            <div className="rounded-lg border border-blue-500/20 bg-blue-500/5 p-4">
+            <div className="rounded-lg border border-primary/20 bg-primary/5 p-4">
               <div className="flex items-center gap-2 mb-2">
-                <Clock className="h-4 w-4 text-blue-400" />
-                <span className="text-xs text-gray-400">Study Time</span>
+                <Clock className="h-4 w-4 text-primary" />
+                <span className="text-xs text-muted-foreground">Study Time</span>
               </div>
-              <div className="text-3xl font-bold text-blue-400">
+              <div className="text-3xl font-bold text-primary">
                 {analytics.totalStudyTime.toFixed(1)}h
               </div>
             </div>
 
-            <div className="rounded-lg border border-green-500/20 bg-green-500/5 p-4">
+            <div className="rounded-lg border border-[#22c55e]/20 bg-[#22c55e]/5 p-4">
               <div className="flex items-center gap-2 mb-2">
-                <TrendingUp className="h-4 w-4 text-green-400" />
-                <span className="text-xs text-gray-400">Avg Session</span>
+                <TrendingUp className="h-4 w-4 text-[#22c55e]" />
+                <span className="text-xs text-muted-foreground">Avg Session</span>
               </div>
-              <div className="text-3xl font-bold text-green-400">
+              <div className="text-3xl font-bold text-[#22c55e]">
                 {Math.round(analytics.averageSessionDuration)}m
               </div>
             </div>
 
-            <div className="rounded-lg border border-yellow-500/20 bg-yellow-500/5 p-4">
+            <div className="rounded-lg border border-[#f97316]/20 bg-yellow-500/5 p-4">
               <div className="flex items-center gap-2 mb-2">
-                <Target className="h-4 w-4 text-yellow-400" />
-                <span className="text-xs text-gray-400">Quality</span>
+                <Target className="h-4 w-4 text-[#f97316]" />
+                <span className="text-xs text-muted-foreground">Quality</span>
               </div>
               <div className={`text-3xl font-bold ${getQualityColor(analytics.averageQualityScore).split(" ")[0]}`}>
                 {Math.round(analytics.averageQualityScore)}
@@ -129,11 +129,11 @@ export function StudyInsightsDashboard({
           </div>
 
           {/* Quality Score Badge */}
-          <div className="rounded-lg border border-gray-700 bg-gray-800/30 p-4">
+          <div className="rounded-lg border border-gray-700 bg-card/30 p-4">
             <div className="flex items-center justify-between">
               <div>
-                <div className="text-sm text-gray-400 mb-1">Session Quality Score</div>
-                <p className="text-xs text-gray-500">
+                <div className="text-sm text-muted-foreground mb-1">Session Quality Score</div>
+                <p className="text-xs text-muted-foreground">
                   Based on activity variety and performance
                 </p>
               </div>
@@ -153,7 +153,7 @@ export function StudyInsightsDashboard({
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-base">
-              <Activity className="h-5 w-5 text-purple-400" />
+              <Activity className="h-5 w-5 text-accent-foreground" />
               Activity Distribution
             </CardTitle>
           </CardHeader>
@@ -165,24 +165,24 @@ export function StudyInsightsDashboard({
                 .map(([type, percentage]) => (
                   <div key={type} className="space-y-1">
                     <div className="flex items-center justify-between text-sm">
-                      <span className="text-gray-300 capitalize flex items-center gap-2">
+                      <span className="text-muted-foreground capitalize flex items-center gap-2">
                         {type === "video" && "📺"}
                         {type === "practice" && "✍️"}
                         {type === "review" && "🔄"}
                         {type === "reading" && "📚"}
                         {type}
                       </span>
-                      <span className="text-gray-400">{Math.round(percentage as number)}%</span>
+                      <span className="text-muted-foreground">{Math.round(percentage as number)}%</span>
                     </div>
                     <div className="h-2 bg-gray-700/50 rounded-full overflow-hidden">
                       <div
                         className={`h-full transition-all ${
                           type === "video"
-                            ? "bg-purple-500"
+                            ? "bg-accent"
                             : type === "practice"
-                            ? "bg-blue-500"
+                            ? "bg-primary"
                             : type === "review"
-                            ? "bg-green-500"
+                            ? "bg-[#22c55e]"
                             : "bg-yellow-500"
                         }`}
                         style={{ width: `${percentage}%` }}
@@ -194,7 +194,7 @@ export function StudyInsightsDashboard({
 
             {/* Recommendation for balanced studying */}
             {Object.keys(analytics.activityBreakdown).length < 3 && (
-              <div className="text-xs text-yellow-400 bg-yellow-500/10 border border-yellow-500/20 rounded px-3 py-2">
+              <div className="text-xs text-[#f97316] bg-[#f97316]/10 border border-[#f97316]/20 rounded px-3 py-2">
                 💡 Tip: Mix videos, practice, and reviews for optimal learning
               </div>
             )}
@@ -207,7 +207,7 @@ export function StudyInsightsDashboard({
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-base">
-              <Clock className="h-5 w-5 text-blue-400" />
+              <Clock className="h-5 w-5 text-primary" />
               Study Frequency (Last {daysBack} Days)
             </CardTitle>
           </CardHeader>
@@ -224,19 +224,19 @@ export function StudyInsightsDashboard({
                     <div key={date} className="flex-1 flex flex-col items-center">
                       <div className="flex-1 flex items-end w-full">
                         <div
-                          className="w-full bg-blue-500 rounded-t transition-all hover:bg-blue-400"
+                          className="w-full bg-primary rounded-t transition-all hover:bg-blue-400"
                           style={{ height: `${height}%` }}
                           title={`${dateObj.toLocaleDateString()}: ${count} session${count !== 1 ? 's' : ''}`}
                         />
                       </div>
-                      <div className="text-[10px] text-gray-500 mt-1 text-center">
+                      <div className="text-[10px] text-muted-foreground mt-1 text-center">
                         {dateObj.getDate()}
                       </div>
                     </div>
                   );
                 })}
             </div>
-            <div className="text-xs text-gray-400 mt-3 text-center">
+            <div className="text-xs text-muted-foreground mt-3 text-center">
               Daily study sessions
             </div>
           </CardContent>
@@ -245,10 +245,10 @@ export function StudyInsightsDashboard({
 
       {/* Personalized Recommendations */}
       {recommendations.length > 0 && (
-        <Card className="border-yellow-500/20 bg-yellow-500/5">
+        <Card className="border-[#f97316]/20 bg-yellow-500/5">
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-base">
-              <Lightbulb className="h-5 w-5 text-yellow-400" />
+              <Lightbulb className="h-5 w-5 text-[#f97316]" />
               Personalized Recommendations
             </CardTitle>
           </CardHeader>
@@ -256,7 +256,7 @@ export function StudyInsightsDashboard({
             {recommendations.map((rec, idx) => (
               <div
                 key={idx}
-                className="text-sm text-gray-300 bg-gray-800/30 border border-gray-700/50 rounded p-3"
+                className="text-sm text-muted-foreground bg-card/30 border border-gray-700/50 rounded p-3"
               >
                 {rec}
               </div>
@@ -270,8 +270,8 @@ export function StudyInsightsDashboard({
         <Card>
           <CardContent className="text-center py-12">
             <BookOpen className="mx-auto mb-4 h-16 w-16 text-gray-600 opacity-50" />
-            <p className="text-gray-400 mb-2">No study sessions yet</p>
-            <p className="text-sm text-gray-500">
+            <p className="text-muted-foreground mb-2">No study sessions yet</p>
+            <p className="text-sm text-muted-foreground">
               Start studying to see insights and recommendations
             </p>
           </CardContent>

@@ -19,7 +19,7 @@ export default function KbPage() {
   }, []);
 
   const Card = ({ className, children }: { className?: string; children: React.ReactNode }) => (
-    <div className={cn("rounded-xl border border-cyan-500/20 bg-black/30 backdrop-blur px-5 py-4", className)}>
+    <div className={cn("rounded-xl border border-primary/20 bg-black/30 backdrop-blur px-5 py-4", className)}>
       {children}
     </div>
   );
@@ -28,7 +28,7 @@ export default function KbPage() {
       <div className="space-y-6">
         <div className="flex items-center justify-between">
           <h1 className="text-2xl font-semibold text-cyan-200">Knowledge Base (KB)</h1>
-          <span className="text-xs text-cyan-300/70">Read-only integration</span>
+          <span className="text-xs text-primary/70">Read-only integration</span>
         </div>
 
         {loading && (
@@ -49,15 +49,15 @@ export default function KbPage() {
         {!loading && summary && (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <Card>
-              <div className="text-cyan-300 text-sm">Modules</div>
+              <div className="text-primary text-sm">Modules</div>
               <div className="text-3xl text-cyan-100 font-bold">{summary.modulesCount}</div>
             </Card>
             <Card>
-              <div className="text-cyan-300 text-sm">Questions</div>
+              <div className="text-primary text-sm">Questions</div>
               <div className="text-3xl text-cyan-100 font-bold">{summary.questionsCount}</div>
             </Card>
             <Card>
-              <div className="text-cyan-300 text-sm">Domains</div>
+              <div className="text-primary text-sm">Domains</div>
               <div className="mt-2 space-y-1">
                 {Object.keys(summary.byDomain || {}).length === 0 ? (
                   <div className="text-cyan-100/70 text-sm">No question distribution available</div>
@@ -83,9 +83,9 @@ export default function KbPage() {
                   ? (m).metadata.lessons.length
                   : 0;
                 return (
-                  <div key={m.id} className="p-3 rounded-lg bg-black/20 border border-cyan-500/10">
+                  <div key={m.id} className="p-3 rounded-lg bg-black/20 border border-primary/10">
                     <div className="text-cyan-100 font-semibold">{m.title}</div>
-                    <div className="text-xs text-cyan-300/70 mt-1">
+                    <div className="text-xs text-primary/70 mt-1">
                       {mapKbDomain(m.domain)} ({m.domain})
                       {lessonCount > 0 && (
                         <span className="ml-2 text-cyan-200/80">• {lessonCount} lesson{lessonCount>1?'s':''}</span>
