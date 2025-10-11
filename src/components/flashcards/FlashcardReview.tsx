@@ -233,9 +233,9 @@ export default function FlashcardReview({ moduleId, deckId, totalCards = 0, onCo
     <div className="w-full max-w-2xl mx-auto space-y-4">
       {/* Development Mode Banner */}
       {isStaticMode && (
-        <Card className="border-yellow-500 bg-yellow-500/10">
+        <Card className="border-[#f97316] bg-[#f97316]/10">
           <CardContent className="py-3">
-            <p className="text-sm text-yellow-600 dark:text-yellow-400">
+            <p className="text-sm text-[#f97316]">
               ⚠️ <strong>Shared Flashcard Library</strong> - Reviewing static TCO cards without signing in.
             </p>
           </CardContent>
@@ -318,12 +318,12 @@ export default function FlashcardReview({ moduleId, deckId, totalCards = 0, onCo
           <p className="text-sm font-bold text-foreground">{sessionStats.totalReviewed}</p>
         </div>
         <div className="p-3 bg-muted rounded-md text-center">
-          <Check className="h-4 w-4 mx-auto mb-1 text-green-500" />
+          <Check className="h-4 w-4 mx-auto mb-1 text-[#22c55e]" />
           <p className="text-xs text-muted-foreground">Correct</p>
           <p className="text-sm font-bold text-foreground">{sessionStats.correct}</p>
         </div>
         <div className="p-3 bg-muted rounded-md text-center">
-          <TrendingUp className="h-4 w-4 mx-auto mb-1 text-blue-500" />
+          <TrendingUp className="h-4 w-4 mx-auto mb-1 text-primary" />
           <p className="text-xs text-muted-foreground">Accuracy</p>
           <p className="text-sm font-bold text-foreground">
             {sessionStats.totalReviewed > 0
