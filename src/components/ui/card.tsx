@@ -10,10 +10,10 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
   ({ className, variant = "cyberpunk", ...props }, ref) => {
     const baseClasses = "rounded-xl border text-card-foreground shadow";
     const variantClasses = {
-      default: "bg-card",
-      cyberpunk: "relative bg-black/20 backdrop-blur-xl border-cyan-500/20 text-cyan-100 shadow-[0_0_50px_rgba(34,211,238,0.1)] transition-all duration-200 ease-out hover:shadow-[0_0_80px_rgba(34,211,238,0.15)] hover:scale-[1.03] hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/50"
+      default: "bg-card border-border",
+      cyberpunk: "relative bg-card/80 backdrop-blur-xl border-primary/20 shadow-[0_0_50px_hsl(var(--primary)/0.1)] transition-all duration-200 ease-out hover:shadow-[0_0_80px_hsl(var(--primary)/0.15)] hover:scale-[1.03] hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
     };
-    
+
     return (
       <div
         ref={ref}

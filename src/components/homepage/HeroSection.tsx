@@ -75,9 +75,9 @@ export function HeroSection() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="mb-6"
         >
-          <Badge 
-            variant="secondary" 
-            className="px-4 py-2 text-sm bg-cyan-500/10 border-cyan-500/20 text-cyan-300 backdrop-blur-md"
+          <Badge
+            variant="secondary"
+            className="px-4 py-2 text-sm bg-primary/10 border-primary/20 text-primary backdrop-blur-md"
           >
             <Star className="w-4 h-4 mr-2" />
             {getGreeting()}, Future TCO Expert
@@ -89,11 +89,11 @@ export function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}
-          className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 bg-gradient-to-r from-cyan-300 via-blue-300 to-purple-300 bg-clip-text text-transparent leading-tight"
+          className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 bg-gradient-to-r from-primary via-primary/80 to-accent bg-clip-text text-transparent leading-tight"
         >
           {typedText}
           <motion.span
-            className="inline-block w-1 h-16 bg-cyan-400 ml-2"
+            className="inline-block w-1 h-16 bg-primary ml-2"
             animate={{ opacity: [1, 0, 1] }}
             transition={{ duration: 1, repeat: Infinity }}
           />
@@ -104,12 +104,12 @@ export function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.6 }}
-          className="text-xl md:text-2xl text-slate-300 mb-8 max-w-4xl mx-auto leading-relaxed"
+          className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-4xl mx-auto leading-relaxed"
         >
           Master the{" "}
-          <span className="text-cyan-400 font-semibold">Tanium Certified Operator</span>{" "}
+          <span className="text-primary font-semibold">Tanium Certified Operator</span>{" "}
           certification with our AI-powered learning platform. Join{" "}
-          <span className="text-purple-400 font-semibold">thousands of professionals</span>{" "}
+          <span className="text-accent-foreground font-semibold">thousands of professionals</span>{" "}
           who've accelerated their cybersecurity careers.
         </motion.p>
 
@@ -132,11 +132,11 @@ export function HeroSection() {
               whileHover={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 300 }}
             >
-              <div className="w-16 h-16 mx-auto mb-2 rounded-full bg-gradient-to-br from-cyan-500/20 to-purple-500/20 flex items-center justify-center border border-cyan-500/30">
-                <stat.icon className="w-8 h-8 text-cyan-400" />
+              <div className="w-16 h-16 mx-auto mb-2 rounded-full bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center border border-primary/30">
+                <stat.icon className="w-8 h-8 text-primary" />
               </div>
-              <div className="text-2xl font-bold text-white">{stat.label}</div>
-              <div className="text-sm text-slate-400">{stat.sublabel}</div>
+              <div className="text-2xl font-bold text-foreground">{stat.label}</div>
+              <div className="text-sm text-muted-foreground">{stat.sublabel}</div>
             </motion.div>
           ))}
         </motion.div>

@@ -18,35 +18,36 @@ const config: Config = {
     },
     extend: {
       colors: {
-        // Archon cyberpunk color scheme
+        // Archon cyberpunk color scheme - Aligned with shadcn semantic tokens
+        // Use sparingly - prefer semantic tokens (bg-background, text-foreground, etc.)
         archon: {
           // Background gradients - deep dark blues/blacks
-          'bg-start': '#0a0a0f',
-          'bg-end': '#1a1a2e',
-          'bg-card': 'rgba(26, 26, 46, 0.8)',
-          'bg-panel': 'rgba(16, 16, 24, 0.9)',
-          
+          'bg-start': '#09090c', // Matches --background
+          'bg-end': '#1a1a20', // Slightly lighter for gradients
+          'bg-card': '#121216', // Matches --card
+          'bg-panel': '#1a1a20', // Matches --muted
+
           // Primary electric cyan/blue accents
-          'cyan-bright': '#00d4ff',
-          'cyan-primary': '#0ea5e9',
-          'cyan-hover': '#0284c7',
-          'blue-electric': '#3b82f6',
-          
+          'cyan-bright': '#1adfff', // Matches updated --primary
+          'cyan-primary': '#66e6ff', // Matches --secondary-foreground
+          'cyan-hover': '#0dcbf0', // Slightly darker for hover states
+          'blue-electric': '#5badff', // Adjusted for better contrast
+
           // Secondary purple/violet highlights
-          'purple-primary': '#8b5cf6',
-          'purple-secondary': '#a855f7',
-          'purple-hover': '#7c3aed',
-          
-          // Text colors
-          'text-primary': '#ffffff',
-          'text-secondary': 'rgba(255, 255, 255, 0.8)',
-          'text-muted': 'rgba(255, 255, 255, 0.6)',
-          'text-accent': '#00d4ff',
-          
+          'purple-primary': '#8b5cf6', // Matches --accent
+          'purple-secondary': '#a78bfa', // Lighter variant
+          'purple-hover': '#7c3aed', // Darker for hover states
+
+          // Text colors - MAP TO SEMANTIC TOKENS
+          'text-primary': '#fafafa', // Matches --foreground
+          'text-secondary': '#d4d4d8', // 85% opacity equivalent
+          'text-muted': '#a6a6a6', // Matches --muted-foreground
+          'text-accent': '#1adfff', // Matches --primary
+
           // Border and accent colors
-          'border': 'rgba(255, 255, 255, 0.1)',
-          'border-bright': 'rgba(0, 212, 255, 0.3)',
-          'glass': 'rgba(255, 255, 255, 0.05)',
+          'border': '#28282f', // Matches --border
+          'border-bright': 'rgba(26, 223, 255, 0.3)', // Primary with transparency
+          'glass': 'rgba(255, 255, 255, 0.05)', // Glass morphism effect
         },
         tanium: {
           primary: "#1a365d",
@@ -126,12 +127,12 @@ const config: Config = {
         "glass-gradient":
           "linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0))",
         "tanium-gradient": "linear-gradient(135deg, #1a365d, #3182ce)",
-        // Archon cyberpunk gradients
-        "archon-bg": "linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 100%)",
-        "archon-card": "linear-gradient(135deg, rgba(26, 26, 46, 0.8), rgba(16, 16, 24, 0.9))",
-        "archon-glass": "linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(139, 92, 246, 0.05))",
-        "archon-button": "linear-gradient(135deg, #00d4ff, #0ea5e9)",
-        "archon-accent": "linear-gradient(135deg, #8b5cf6, #a855f7)",
+        // Archon cyberpunk gradients - Updated for better contrast
+        "archon-bg": "linear-gradient(135deg, #09090c 0%, #1a1a20 100%)",
+        "archon-card": "linear-gradient(135deg, #121216 0%, #1a1a20 100%)",
+        "archon-glass": "linear-gradient(135deg, rgba(26, 223, 255, 0.1), rgba(139, 92, 246, 0.05))",
+        "archon-button": "linear-gradient(135deg, #1adfff, #0dcbf0)",
+        "archon-accent": "linear-gradient(135deg, #8b5cf6, #a78bfa)",
       },
     },
   },

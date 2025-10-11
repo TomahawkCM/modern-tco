@@ -144,9 +144,9 @@ export default function FlashcardDashboard({ moduleId }: FlashcardDashboardProps
     <div className="space-y-6">
       {/* Development Mode Banner */}
       {isStaticMode && (
-        <Card className="border-yellow-500 bg-yellow-500/10">
+        <Card className="border-accent/50 bg-accent/10">
           <CardContent className="py-3">
-            <p className="text-sm text-yellow-600 dark:text-yellow-400">
+            <p className="text-sm text-accent-foreground">
               ⚠️ <strong>Shared Flashcard Library</strong> - Showing read-only TCO flashcards without authentication.
             </p>
           </CardContent>

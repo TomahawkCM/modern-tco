@@ -38,21 +38,21 @@ export default async function Modules() {
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="mb-8 text-center">
-        <h1 className="mb-3 text-4xl font-bold text-white">TCO Study Center</h1>
-        <p className="mx-auto max-w-3xl text-blue-200">
+        <h1 className="mb-3 text-4xl font-bold text-foreground">TCO Study Center</h1>
+        <p className="mx-auto max-w-3xl text-muted-foreground">
           Explore interactive study modules powered by MDX content.
         </p>
         <div className="mt-4">
           <a
             href="/study/review"
-            className="inline-flex items-center rounded-md border border-yellow-500/40 bg-yellow-900/30 px-3 py-1 text-sm text-yellow-200 hover:bg-yellow-900/50"
+            className="inline-flex items-center rounded-md border border-accent/40 bg-accent/20 px-3 py-1 text-sm text-accent-foreground hover:bg-accent/30 transition-colors"
           >
             Go to Review Center →
           </a>
         </div>
       </div>
       {/* Lightweight resume banner using localStorage (client-side only). */}
-      <div className="mb-6 text-center text-sm text-gray-300">
+      <div className="mb-6 text-center text-sm text-muted-foreground">
         <noscript />
         <span id="resume-banner" />
       </div>

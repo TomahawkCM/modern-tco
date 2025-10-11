@@ -23,19 +23,19 @@ export default function FlashcardsPage() {
         <Button
           onClick={() => router.push("/dashboard")}
           variant="outline"
-          className="mb-4 border-white/20 text-white hover:bg-white/10"
+          className="mb-4"
         >
           <ArrowLeft className="mr-2 h-4 w-4" />
           Back to Dashboard
         </Button>
 
         <div className="flex items-center gap-3 mb-4">
-          <div className="p-3 bg-purple-500/20 rounded-lg">
-            <Brain className="h-8 w-8 text-purple-400" />
+          <div className="p-3 bg-accent/20 rounded-lg">
+            <Brain className="h-8 w-8 text-accent-foreground" />
           </div>
           <div>
-            <h1 className="text-3xl font-bold text-white">Active Recall Flashcards</h1>
-            <p className="text-gray-400">
+            <h1 className="text-3xl font-bold text-foreground">Active Recall Flashcards</h1>
+            <p className="text-muted-foreground">
               Spaced repetition system for long-term retention
             </p>
           </div>
@@ -43,9 +43,9 @@ export default function FlashcardsPage() {
       </div>
 
       {/* Info Banner */}
-      <Alert className="mb-6 border-blue-500/30 bg-blue-500/10">
-        <Info className="h-4 w-4 text-blue-400" />
-        <AlertDescription className="text-blue-200">
+      <Alert className="mb-6 border-primary/30 bg-primary/10">
+        <Info className="h-4 w-4 text-primary" />
+        <AlertDescription className="text-foreground">
           <strong>How it works:</strong> Flashcards use the SM-2 spaced repetition algorithm to
           schedule reviews at optimal intervals. Rate each card honestly (Again/Hard/Good/Easy)
           and the system will adapt to your learning pace.
@@ -54,40 +54,41 @@ export default function FlashcardsPage() {
 
       {/* Quick Actions */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-        <Card className="border-white/10 bg-gradient-to-br from-green-900/20 to-emerald-900/20">
+        <Card className="border-primary/20 bg-gradient-to-br from-primary/10 to-primary/5">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-white">
-              <BookOpen className="h-5 w-5 text-green-400" />
+            <CardTitle className="flex items-center gap-2">
+              <BookOpen className="h-5 w-5 text-primary" />
               Create from Study Modules
             </CardTitle>
-            <CardDescription className="text-gray-300">
+            <CardDescription>
               Auto-generate flashcards from learning objectives
             </CardDescription>
           </CardHeader>
           <CardContent>
             <Button
               onClick={() => router.push("/study")}
-              className="w-full bg-green-600 hover:bg-green-500"
+              className="w-full"
             >
               Browse Study Modules
             </Button>
           </CardContent>
         </Card>
 
-        <Card className="border-white/10 bg-gradient-to-br from-purple-900/20 to-pink-900/20">
+        <Card className="border-accent/20 bg-gradient-to-br from-accent/10 to-accent/5">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-white">
-              <Sparkles className="h-5 w-5 text-purple-400" />
+            <CardTitle className="flex items-center gap-2">
+              <Sparkles className="h-5 w-5 text-accent-foreground" />
               Convert Mistakes to Cards
             </CardTitle>
-            <CardDescription className="text-gray-300">
+            <CardDescription>
               Turn quiz mistakes into flashcards automatically
             </CardDescription>
           </CardHeader>
           <CardContent>
             <Button
               onClick={() => router.push("/practice")}
-              className="w-full bg-purple-600 hover:bg-purple-500"
+              variant="secondary"
+              className="w-full"
             >
               Practice Questions
             </Button>
@@ -99,36 +100,36 @@ export default function FlashcardsPage() {
       <FlashcardDashboard />
 
       {/* Study Tips */}
-      <Card className="mt-8 border-white/10 bg-gradient-to-br from-orange-900/20 to-yellow-900/20">
+      <Card className="mt-8 border-accent/20 bg-gradient-to-br from-accent/10 to-accent/5">
         <CardHeader>
-          <CardTitle className="text-white">💡 Maximizing Flashcard Effectiveness</CardTitle>
+          <CardTitle>💡 Maximizing Flashcard Effectiveness</CardTitle>
         </CardHeader>
-        <CardContent className="space-y-3 text-gray-300">
+        <CardContent className="space-y-3 text-muted-foreground">
           <div className="flex gap-3">
             <div className="text-2xl">🧠</div>
             <div>
-              <strong className="text-white">Active Recall:</strong> Try to remember the answer
+              <strong className="text-foreground">Active Recall:</strong> Try to remember the answer
               before revealing it. This strengthens neural pathways.
             </div>
           </div>
           <div className="flex gap-3">
             <div className="text-2xl">📅</div>
             <div>
-              <strong className="text-white">Daily Consistency:</strong> Review for 10-15 minutes
+              <strong className="text-foreground">Daily Consistency:</strong> Review for 10-15 minutes
               daily rather than long cramming sessions.
             </div>
           </div>
           <div className="flex gap-3">
             <div className="text-2xl">⭐</div>
             <div>
-              <strong className="text-white">Honest Ratings:</strong> Rate cards based on actual
+              <strong className="text-foreground">Honest Ratings:</strong> Rate cards based on actual
               recall difficulty - the algorithm adapts to your true performance.
             </div>
           </div>
           <div className="flex gap-3">
             <div className="text-2xl">🎯</div>
             <div>
-              <strong className="text-white">Create from Mistakes:</strong> When you get a practice
+              <strong className="text-foreground">Create from Mistakes:</strong> When you get a practice
               question wrong, immediately create a flashcard to reinforce that concept.
             </div>
           </div>
