@@ -27,42 +27,50 @@
   }
 
   .dark {
-    /* Archon cyberpunk dark theme - WCAG AA compliant */
-    --background: 240 10% 4%; /* #09090c - Very dark blue-black (improved from 3%) */
+    /* Archon cyberpunk dark theme - WCAG AA compliant - Updated to archon.png palette */
+    --background: 0 0% 4%; /* #0a0a0a - Very dark neutral background */
     --foreground: 0 0% 98%; /* #fafafa - High contrast white (18:1 ratio) */
 
-    /* Card colors - Slightly lighter for hierarchy */
-    --card: 240 10% 8%; /* #121216 - Dark card background */
+    /* Card colors - Blue-gray from archon.png */
+    --card: 220 20% 15%; /* #1a1f2e - Dark blue-gray card background (KEY CHANGE) */
     --card-foreground: 0 0% 98%; /* #fafafa - Consistent text (16:1 ratio) */
 
     /* Popover colors */
-    --popover: 240 10% 8%; /* Match card for consistency */
+    --popover: 220 20% 15%; /* Match card for consistency */
     --popover-foreground: 0 0% 98%;
 
-    /* Primary - Electric cyan with proper contrast */
-    --primary: 195 100% 55%; /* #1adfff - Brighter cyan for better visibility */
-    --primary-foreground: 240 10% 4%; /* Dark text on bright cyan (10:1 ratio) */
+    /* Primary - Standard blue accent (replaces electric cyan) */
+    --primary: 217 91% 60%; /* #3b82f6 - Standard Tailwind blue-500 */
+    --primary-foreground: 0 0% 100%; /* White text on blue (10:1 ratio) */
 
-    /* Secondary - Muted cyan for less emphasis */
-    --secondary: 240 10% 12%; /* #1a1a20 - Dark secondary background */
-    --secondary-foreground: 195 100% 70%; /* #66e6ff - Lighter cyan text (9:1 ratio) */
+    /* Secondary - Dark blue-gray for subtle emphasis */
+    --secondary: 220 20% 12%; /* #181d28 - Darker blue-gray */
+    --secondary-foreground: 217 91% 70%; /* #6ba3ff - Lighter blue text */
 
     /* Muted - For less prominent UI elements */
-    --muted: 240 10% 12%; /* #1a1a20 - Slightly lighter than background */
+    --muted: 220 20% 12%; /* #181d28 - Match secondary */
     --muted-foreground: 0 0% 65%; /* #a6a6a6 - Medium gray (7:1 ratio - WCAG AAA) */
 
     /* Accent - Purple highlight maintaining cyberpunk theme */
-    --accent: 270 70% 55%; /* #8b5cf6 - Purple accent */
+    --accent: 270 70% 55%; /* #8b5cf6 - Purple accent (unchanged) */
     --accent-foreground: 0 0% 98%; /* White text on purple (8:1 ratio) */
 
     /* Destructive - Error states */
     --destructive: 0 72% 51%; /* #dc2626 - Red with good contrast */
     --destructive-foreground: 0 0% 98%; /* White text on red (6:1 ratio) */
 
+    /* Success - Green for Active/success status (NEW from archon.png) */
+    --success: 142 71% 45%; /* #22c55e - Tailwind green-500 */
+    --success-foreground: 0 0% 100%; /* White text on green */
+
+    /* Warning - Orange for stats/numbers (NEW from archon.png) */
+    --warning: 25 95% 53%; /* #f97316 - Tailwind orange-500 */
+    --warning-foreground: 0 0% 100%; /* White text on orange */
+
     /* Borders and inputs */
-    --border: 240 10% 18%; /* #28282f - Subtle but visible border (3.2:1 ratio) */
-    --input: 240 10% 12%; /* #1a1a20 - Match muted */
-    --ring: 195 100% 55%; /* #1adfff - Match primary for focus rings */
+    --border: 220 20% 20%; /* #292f3d - Subtle blue-gray border */
+    --input: 220 20% 12%; /* Match muted */
+    --ring: 217 91% 60%; /* Match primary for focus rings */
   }
 }
 
@@ -98,29 +106,29 @@ main#main-content {
 }
 }
 
-/* Archon cyberpunk glass morphism effects */
+/* Archon cyberpunk glass morphism effects - Updated to blue palette */
 .glass {
   @apply bg-archon-glass backdrop-blur-lg;
-  border: 1px solid rgba(0, 212, 255, 0.2);
-  box-shadow: 0 8px 32px rgba(0, 212, 255, 0.1);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  box-shadow: 0 8px 32px rgba(59, 130, 246, 0.1);
 }
 
 .archon-card {
   @apply bg-archon-card backdrop-blur-xl border border-archon-border rounded-lg;
-  box-shadow: 
-    0 4px 24px rgba(0, 212, 255, 0.1),
+  box-shadow:
+    0 4px 24px rgba(59, 130, 246, 0.1),
     0 2px 12px rgba(139, 92, 246, 0.05);
 }
 
 .archon-button {
   @apply bg-archon-button text-archon-text-primary font-semibold rounded-lg;
-  border: 1px solid rgba(0, 212, 255, 0.3);
+  border: 1px solid rgba(59, 130, 246, 0.3);
   transition: all 0.3s ease;
-  box-shadow: 0 2px 8px rgba(0, 212, 255, 0.2);
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.2);
 }
 
 .archon-button:hover {
-  box-shadow: 0 4px 16px rgba(0, 212, 255, 0.4);
+  box-shadow: 0 4px 16px rgba(59, 130, 246, 0.4);
   transform: translateY(-1px);
 }
 
@@ -132,8 +140,8 @@ main#main-content {
 }
 
 .archon-text-glow {
-  color: #00d4ff;
-  text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+  color: #3b82f6;
+  text-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
 }
 
 /* Legacy styles preserved */
@@ -151,7 +159,7 @@ main#main-content {
   transform-origin: 50% 50%;
 }
 
-/* Cyberpunk animations */
+/* Cyberpunk animations - Updated to blue palette */
 @keyframes cyber-pulse {
   0%, 100% { opacity: 1; }
   50% { opacity: 0.7; }
@@ -162,11 +170,11 @@ main#main-content {
 }
 
 @keyframes neon-glow {
-  0%, 100% { 
-    text-shadow: 0 0 5px rgba(0, 212, 255, 0.5);
+  0%, 100% {
+    text-shadow: 0 0 5px rgba(59, 130, 246, 0.5);
   }
-  50% { 
-    text-shadow: 0 0 20px rgba(0, 212, 255, 0.8), 0 0 30px rgba(0, 212, 255, 0.6);
+  50% {
+    text-shadow: 0 0 20px rgba(59, 130, 246, 0.8), 0 0 30px rgba(59, 130, 246, 0.6);
   }
 }
 
@@ -199,17 +207,17 @@ main#main-content {
 }
 
 @keyframes cyber-border {
-  0% { 
-    border-color: rgba(0, 212, 255, 0.3);
-    box-shadow: 0 0 10px rgba(0, 212, 255, 0.2);
+  0% {
+    border-color: rgba(59, 130, 246, 0.3);
+    box-shadow: 0 0 10px rgba(59, 130, 246, 0.2);
   }
-  50% { 
+  50% {
     border-color: rgba(147, 51, 234, 0.5);
     box-shadow: 0 0 20px rgba(147, 51, 234, 0.3);
   }
-  100% { 
-    border-color: rgba(0, 212, 255, 0.3);
-    box-shadow: 0 0 10px rgba(0, 212, 255, 0.2);
+  100% {
+    border-color: rgba(59, 130, 246, 0.3);
+    box-shadow: 0 0 10px rgba(59, 130, 246, 0.2);
   }
 }
 
@@ -218,10 +226,10 @@ main#main-content {
 }
 
 @keyframes hologram-shimmer {
-  0% { 
+  0% {
     background-position: -200% 0;
   }
-  100% { 
+  100% {
     background-position: 200% 0;
   }
 }
@@ -230,7 +238,7 @@ main#main-content {
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(0, 212, 255, 0.1),
+    rgba(59, 130, 246, 0.1),
     transparent
   );
   background-size: 200% 100%;
@@ -238,11 +246,11 @@ main#main-content {
 }
 
 @keyframes progress-glow {
-  0%, 100% { 
-    box-shadow: 0 0 5px rgba(0, 212, 255, 0.5);
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(59, 130, 246, 0.5);
   }
-  50% { 
-    box-shadow: 0 0 15px rgba(0, 212, 255, 0.8), 0 0 25px rgba(0, 212, 255, 0.4);
+  50% {
+    box-shadow: 0 0 15px rgba(59, 130, 246, 0.8), 0 0 25px rgba(59, 130, 246, 0.4);
   }
 }
 
@@ -259,26 +267,26 @@ main#main-content {
   perspective: 1000px;
 }
 
-/* Glassmorphism enhancements */
+/* Glassmorphism enhancements - Updated to blue palette */
 .glass-card {
   background: rgba(10, 10, 15, 0.8);
   backdrop-filter: blur(20px);
-  border: 1px solid rgba(0, 212, 255, 0.2);
-  box-shadow: 
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  box-shadow:
     0 8px 32px rgba(0, 0, 0, 0.3),
-    0 4px 16px rgba(0, 212, 255, 0.1),
+    0 4px 16px rgba(59, 130, 246, 0.1),
     inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
 .glass-button {
-  background: rgba(0, 212, 255, 0.1);
+  background: rgba(59, 130, 246, 0.1);
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(0, 212, 255, 0.3);
+  border: 1px solid rgba(59, 130, 246, 0.3);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .glass-button:hover {
-  background: rgba(0, 212, 255, 0.2);
-  box-shadow: 0 4px 20px rgba(0, 212, 255, 0.3);
+  background: rgba(59, 130, 246, 0.2);
+  box-shadow: 0 4px 20px rgba(59, 130, 246, 0.3);
   transform: translateY(-2px) scale(1.02);
 }

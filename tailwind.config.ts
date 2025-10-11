@@ -18,22 +18,26 @@ const config: Config = {
     },
     extend: {
       colors: {
-        // Archon cyberpunk color scheme - Aligned with shadcn semantic tokens
+        // Archon cyberpunk color scheme - Updated to archon.png blue palette
         // Use sparingly - prefer semantic tokens (bg-background, text-foreground, etc.)
         archon: {
-          // Background gradients - deep dark blues/blacks
-          'bg-start': '#09090c', // Matches --background
-          'bg-end': '#1a1a20', // Slightly lighter for gradients
-          'bg-card': '#121216', // Matches --card
-          'bg-panel': '#1a1a20', // Matches --muted
+          // Background gradients - deep dark neutrals and blue-grays
+          'bg-start': '#0a0a0a', // Matches updated --background
+          'bg-end': '#1a1f2e', // Blue-gray gradient end
+          'bg-card': '#1a1f2e', // Matches updated --card (blue-gray)
+          'bg-panel': '#181d28', // Matches --muted
 
-          // Primary electric cyan/blue accents
-          'cyan-bright': '#1adfff', // Matches updated --primary
-          'cyan-primary': '#66e6ff', // Matches --secondary-foreground
-          'cyan-hover': '#0dcbf0', // Slightly darker for hover states
-          'blue-electric': '#5badff', // Adjusted for better contrast
+          // Primary standard blue accents (replaces electric cyan)
+          'blue-primary': '#3b82f6', // Matches updated --primary (Tailwind blue-500)
+          'blue-bright': '#60a5fa', // Lighter blue for hover states
+          'blue-hover': '#2563eb', // Darker blue for hover states (blue-600)
+          'blue-electric': '#3b82f6', // Consistent with primary
 
-          // Secondary purple/violet highlights
+          // New accent colors from archon.png
+          'orange-stats': '#f97316', // Orange for stats/numbers (Tailwind orange-500)
+          'green-status': '#22c55e', // Green for Active/success (Tailwind green-500)
+
+          // Secondary purple/violet highlights (unchanged)
           'purple-primary': '#8b5cf6', // Matches --accent
           'purple-secondary': '#a78bfa', // Lighter variant
           'purple-hover': '#7c3aed', // Darker for hover states
@@ -42,11 +46,11 @@ const config: Config = {
           'text-primary': '#fafafa', // Matches --foreground
           'text-secondary': '#d4d4d8', // 85% opacity equivalent
           'text-muted': '#a6a6a6', // Matches --muted-foreground
-          'text-accent': '#1adfff', // Matches --primary
+          'text-accent': '#3b82f6', // Matches updated --primary
 
           // Border and accent colors
-          'border': '#28282f', // Matches --border
-          'border-bright': 'rgba(26, 223, 255, 0.3)', // Primary with transparency
+          'border': '#292f3d', // Matches updated --border (blue-gray)
+          'border-bright': 'rgba(59, 130, 246, 0.3)', // Blue primary with transparency
           'glass': 'rgba(255, 255, 255, 0.05)', // Glass morphism effect
         },
         tanium: {
@@ -92,6 +96,14 @@ const config: Config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        success: {
+          DEFAULT: "hsl(var(--success))",
+          foreground: "hsl(var(--success-foreground))",
+        },
+        warning: {
+          DEFAULT: "hsl(var(--warning))",
+          foreground: "hsl(var(--warning-foreground))",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -127,11 +139,11 @@ const config: Config = {
         "glass-gradient":
           "linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0))",
         "tanium-gradient": "linear-gradient(135deg, #1a365d, #3182ce)",
-        // Archon cyberpunk gradients - Updated for better contrast
-        "archon-bg": "linear-gradient(135deg, #09090c 0%, #1a1a20 100%)",
-        "archon-card": "linear-gradient(135deg, #121216 0%, #1a1a20 100%)",
-        "archon-glass": "linear-gradient(135deg, rgba(26, 223, 255, 0.1), rgba(139, 92, 246, 0.05))",
-        "archon-button": "linear-gradient(135deg, #1adfff, #0dcbf0)",
+        // Archon cyberpunk gradients - Updated to archon.png blue palette
+        "archon-bg": "linear-gradient(135deg, #0a0a0a 0%, #1a1f2e 100%)",
+        "archon-card": "linear-gradient(135deg, #1a1f2e 0%, #181d28 100%)",
+        "archon-glass": "linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.05))",
+        "archon-button": "linear-gradient(135deg, #3b82f6, #2563eb)",
         "archon-accent": "linear-gradient(135deg, #8b5cf6, #a78bfa)",
       },
     },
