@@ -215,8 +215,8 @@ export function Sidebar({ isOpen = true, onClose, className }: SidebarProps) {
           <CollapsibleTrigger asChild>
             <button
               className={cn(
-                "inline-flex h-9 w-full items-center justify-start gap-2 whitespace-nowrap rounded-md px-4 py-2 text-left text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-archon-cyan-primary disabled:pointer-events-none disabled:opacity-50",
-                "text-archon-text-secondary hover:bg-archon-cyan-primary/10 hover:text-archon-cyan-bright hover:border-l-2 hover:border-archon-cyan-bright",
+                "inline-flex h-9 w-full items-center justify-start gap-2 whitespace-nowrap rounded-md px-4 py-2 text-left text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary disabled:pointer-events-none disabled:opacity-50",
+                "text-muted-foreground hover:bg-primary/10 hover:text-primary hover:border-l-2 hover:border-primary",
                 level > 0 && "ml-6 w-[calc(100%-1.5rem)]"
               )}
             >
@@ -243,10 +243,10 @@ export function Sidebar({ isOpen = true, onClose, className }: SidebarProps) {
       <div key={item.id}>
         <button
           className={cn(
-            "inline-flex h-9 w-full items-center justify-start gap-2 whitespace-nowrap rounded-md px-4 py-2 text-left text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-archon-cyan-primary disabled:pointer-events-none disabled:opacity-50",
+            "inline-flex h-9 w-full items-center justify-start gap-2 whitespace-nowrap rounded-md px-4 py-2 text-left text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary disabled:pointer-events-none disabled:opacity-50",
             level > 0 && "ml-6 w-[calc(100%-1.5rem)]",
-            isActive && "bg-gradient-to-r from-archon-cyan-primary/20 to-archon-purple-primary/10 text-archon-cyan-bright border-l-2 border-archon-cyan-bright shadow-[0_0_15px_rgba(0,212,255,0.2)]",
-            !isActive && "text-archon-text-secondary hover:bg-archon-cyan-primary/10 hover:text-archon-cyan-bright hover:border-l-2 hover:border-archon-cyan-bright/50"
+            isActive && "bg-gradient-to-r from-primary/20 to-accent/10 text-primary border-l-2 border-primary shadow-[0_0_15px_hsl(var(--primary)/0.2)]",
+            !isActive && "text-muted-foreground hover:bg-primary/10 hover:text-primary hover:border-l-2 hover:border-primary/50"
           )}
           onClick={() => handleItemClick(item)}
         >
@@ -268,12 +268,12 @@ export function Sidebar({ isOpen = true, onClose, className }: SidebarProps) {
       <div className="p-4 flex-shrink-0">
         <div className="glass-card rounded-lg p-3 border-archon-border-bright cyber-border">
           <div className="flex items-center space-x-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-archon-cyan-bright to-archon-cyan-primary shadow-[0_0_20px_rgba(0,212,255,0.3)]">
+            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-primary to-primary/80 shadow-[0_0_20px_hsl(var(--primary)/0.3)]">
               <User className="h-5 w-5 text-foreground" />
             </div>
             <div>
-              <p className="text-sm font-medium text-archon-text-primary archon-text-glow">Study Progress</p>
-              <div className="flex items-center space-x-2 text-xs text-archon-text-secondary">
+              <p className="text-sm font-medium text-foreground">Study Progress</p>
+              <div className="flex items-center space-x-2 text-xs text-muted-foreground">
                 <Trophy className="h-3 w-3 text-[#f97316] drop-shadow-[0_0_5px_rgba(250,204,21,0.5)]" />
                 <span>Level 3 Learner</span>
               </div>
@@ -282,15 +282,15 @@ export function Sidebar({ isOpen = true, onClose, className }: SidebarProps) {
 
           {/* Overall progress */}
           <div className="mt-3">
-            <div className="mb-1 flex justify-between text-xs text-archon-text-secondary">
+            <div className="mb-1 flex justify-between text-xs text-muted-foreground">
               <span>Overall Progress</span>
               <div className="flex items-center gap-1">
-                <span className="text-sm font-medium text-archon-cyan-bright">62%</span>
+                <span className="text-sm font-medium text-primary">62%</span>
               </div>
             </div>
-            <div className="relative h-2 w-full overflow-hidden rounded-full bg-archon-cyan-primary/20 border border-archon-cyan-bright/30">
+            <div className="relative h-2 w-full overflow-hidden rounded-full bg-primary/20 border border-primary/30">
               <div
-                className="h-full bg-gradient-to-r from-archon-cyan-bright to-archon-cyan-primary transition-all progress-glow"
+                className="h-full bg-gradient-to-r from-primary to-primary/80 transition-all progress-glow"
                 style={{ width: '62%' }}
               />
             </div>
@@ -299,7 +299,7 @@ export function Sidebar({ isOpen = true, onClose, className }: SidebarProps) {
       </div>
 
       {/* Navigation - Scrollable */}
-      <nav className="flex-1 px-4 pb-4 overflow-y-auto scrollbar-thin scrollbar-thumb-archon-cyan-primary/30 scrollbar-track-transparent">
+      <nav className="flex-1 px-4 pb-4 overflow-y-auto scrollbar-thin scrollbar-thumb-primary/30 scrollbar-track-transparent">
         <div className="space-y-2">{navigationItems.map((item) => renderNavItem(item))}</div>
 
         <hr className="my-4 h-[1px] w-full shrink-0 bg-archon-border-bright/30" />
@@ -312,10 +312,10 @@ export function Sidebar({ isOpen = true, onClose, className }: SidebarProps) {
                 <button
                   className={cn(
                     "inline-flex h-9 w-full items-center justify-start gap-2 whitespace-nowrap rounded-md px-2 py-2 text-left text-sm font-medium transition-all duration-200",
-                    "text-archon-text-secondary hover:bg-archon-cyan-primary/10 hover:text-archon-cyan-bright"
+                    "text-muted-foreground hover:bg-primary/10 hover:text-primary"
                   )}
                 >
-                  <span className="text-xs font-semibold text-archon-cyan-bright">CURRENT MODULE</span>
+                  <span className="text-xs font-semibold text-primary">CURRENT MODULE</span>
                   <ChevronDown
                     className={cn("ml-auto h-4 w-4 transition-transform", isStudyProgressExpanded && "rotate-180")}
                   />
@@ -331,19 +331,19 @@ export function Sidebar({ isOpen = true, onClose, className }: SidebarProps) {
 
         {/* Domain Progress Summary */}
         <div className="space-y-3">
-          <h3 className="px-2 text-sm font-medium text-archon-text-accent flex items-center gap-2">
-            <div className="h-[2px] w-2 bg-archon-cyan-bright rounded-full"></div>
+          <h3 className="px-2 text-sm font-medium text-primary flex items-center gap-2">
+            <div className="h-[2px] w-2 bg-primary rounded-full"></div>
             Domain Progress
           </h3>
           {domainProgress.map((domain) => (
             <div key={domain.name} className="space-y-1 px-2 group">
-              <div className="flex justify-between text-xs text-archon-text-secondary group-hover:text-archon-cyan-bright transition-colors">
+              <div className="flex justify-between text-xs text-muted-foreground group-hover:text-primary transition-colors">
                 <span className="truncate">{domain.name}</span>
                 <span className="font-medium">{domain.progress}%</span>
               </div>
-              <div className="relative h-1.5 w-full overflow-hidden rounded-full bg-archon-cyan-primary/20 border border-archon-border/50">
+              <div className="relative h-1.5 w-full overflow-hidden rounded-full bg-primary/20 border border-border">
                 <div
-                  className="h-full bg-gradient-to-r from-archon-purple-primary to-archon-cyan-primary transition-all duration-500"
+                  className="h-full bg-gradient-to-r from-accent to-primary transition-all duration-500"
                   style={{ width: `${domain.progress || 0}%` }}
                 />
               </div>
@@ -352,15 +352,15 @@ export function Sidebar({ isOpen = true, onClose, className }: SidebarProps) {
         </div>
 
         {/* Study streak */}
-        <div className="glass-card mt-4 rounded-lg p-3 border-archon-border-bright/30 hover:border-archon-cyan-bright/50 transition-all">
+        <div className="glass-card mt-4 rounded-lg p-3 border-border hover:border-primary/50 transition-all">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
               <div className="p-1.5 bg-orange-500/20 rounded-md">
                 <Clock className="h-4 w-4 text-orange-400 drop-shadow-[0_0_8px_rgba(251,146,60,0.5)]" />
               </div>
-              <span className="text-sm text-archon-text-primary font-medium">Study Streak</span>
+              <span className="text-sm text-foreground font-medium">Study Streak</span>
             </div>
-            <Badge className="text-xs bg-gradient-to-r from-archon-cyan-primary to-archon-purple-primary border-archon-cyan-bright/30 text-foreground">
+            <Badge className="text-xs bg-gradient-to-r from-primary to-accent border-primary/30 text-foreground">
               7 days
             </Badge>
           </div>

@@ -42,8 +42,8 @@ export function MicrolearningProgress({
       {/* Compact Header Row */}
       <div className="flex flex-wrap items-center justify-between gap-4 mb-3">
         <div className="flex items-center gap-3">
-          <div className="p-2 bg-archon-cyan-primary/20 rounded-lg">
-            <TrendingUp className="h-5 w-5 text-archon-cyan-bright" />
+          <div className="p-2 bg-primary/20 rounded-lg">
+            <TrendingUp className="h-5 w-5 text-primary" />
           </div>
           <div>
             <h3 className="text-sm font-bold text-archon-text-primary archon-text-glow">
@@ -55,15 +55,15 @@ export function MicrolearningProgress({
           </div>
         </div>
 
-        <Badge className="bg-gradient-to-r from-archon-cyan-primary to-archon-purple-primary border-archon-cyan-bright/30 text-foreground font-bold px-3 py-1">
+        <Badge className="bg-gradient-to-r from-primary to-accent border-primary/30 text-foreground font-bold px-3 py-1">
           {completionPercentage}% Complete
         </Badge>
       </div>
 
       {/* Progress Bar */}
-      <div className="relative h-2 w-full overflow-hidden rounded-full bg-archon-cyan-primary/20 border border-archon-cyan-bright/30 mb-4">
+      <div className="relative h-2 w-full overflow-hidden rounded-full bg-primary/20 border border-primary/30 mb-4">
         <div
-          className="h-full bg-gradient-to-r from-archon-cyan-bright to-archon-purple-primary transition-all progress-glow"
+          className="h-full bg-gradient-to-r from-primary to-accent transition-all progress-glow"
           style={{ width: `${completionPercentage}%` }}
         />
       </div>
@@ -75,14 +75,14 @@ export function MicrolearningProgress({
             <Trophy className="h-4 w-4 text-[#f97316] drop-shadow-[0_0_8px_rgba(250,204,21,0.5)]" />
           </div>
           <div>
-            <div className="text-lg font-bold text-archon-cyan-bright">{completedSections}</div>
-            <div className="text-xs text-archon-text-muted">Completed</div>
+            <div className="text-lg font-bold text-primary">{completedSections}</div>
+            <div className="text-xs text-muted-foreground">Completed</div>
           </div>
         </div>
 
         <div className="flex items-center gap-2">
-          <div className="p-1.5 bg-archon-cyan-primary/20 rounded-md">
-            <Target className="h-4 w-4 text-archon-cyan-bright" />
+          <div className="p-1.5 bg-primary/20 rounded-md">
+            <Target className="h-4 w-4 text-primary" />
           </div>
           <div>
             <div className="text-lg font-bold text-archon-text-primary">{totalSections - completedSections}</div>

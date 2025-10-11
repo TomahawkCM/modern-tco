@@ -282,9 +282,9 @@ export default function StudyDomainPage() {
         {/* Study Content Viewer - Full Width */}
         <Card className="glass-card border-archon-border-bright/30">
           <CardHeader className="border-b border-archon-border/30">
-            <CardTitle className="flex items-center gap-3 text-archon-text-primary">
-              <div className="p-2 bg-archon-cyan-primary/20 rounded-lg">
-                <BookOpen className="h-5 w-5 text-archon-cyan-bright" />
+            <CardTitle className="flex items-center gap-3 text-foreground">
+              <div className="p-2 bg-primary/20 rounded-lg">
+                <BookOpen className="h-5 w-5 text-primary" />
               </div>
               <span className="archon-text-glow">Study Content</span>
             </CardTitle>
@@ -296,8 +296,8 @@ export default function StudyDomainPage() {
                 <div className="rounded-lg border border-archon-border/50 bg-archon-bg-panel/50 p-6 backdrop-blur-sm">
                   <MDXWrapper>
                     <Suspense fallback={
-                      <div className="text-archon-text-primary flex items-center gap-2">
-                        <div className="h-4 w-4 animate-spin rounded-full border-2 border-archon-cyan-bright border-t-transparent"></div>
+                      <div className="text-foreground flex items-center gap-2">
+                        <div className="h-4 w-4 animate-spin rounded-full border-2 border-primary border-t-transparent"></div>
                         Loading content...
                       </div>
                     }>
@@ -306,8 +306,8 @@ export default function StudyDomainPage() {
                   </MDXWrapper>
                 </div>
               ) : (
-                <div className="rounded-lg border border-archon-cyan-primary/30 bg-archon-cyan-primary/10 p-4">
-                  <div className="mb-2 flex items-center gap-2 text-archon-cyan-bright">
+                <div className="rounded-lg border border-primary/30 bg-primary/10 p-4">
+                  <div className="mb-2 flex items-center gap-2 text-primary">
                     <BookOpen className="h-4 w-4" />
                     <span className="font-medium">Study Content Loading</span>
                   </div>
@@ -372,7 +372,7 @@ export default function StudyDomainPage() {
                 <Button
                   variant="outline"
                   onClick={() => router.push("/study")}
-                  className="border-archon-border-bright/30 text-archon-text-primary hover:bg-archon-cyan-primary/10 hover:text-archon-cyan-bright hover:border-archon-cyan-bright/50"
+                  className="border-border text-foreground hover:bg-primary/10 hover:text-primary hover:border-primary/50"
                 >
                   <BookOpen className="mr-2 h-4 w-4" />
                   Browse Other Domains
@@ -383,12 +383,12 @@ export default function StudyDomainPage() {
         </Card>
 
         {/* Study Tips for this Domain */}
-        <Alert className="border-archon-cyan-primary/30 bg-archon-cyan-primary/10 backdrop-blur-sm">
-          <div className="p-1.5 bg-archon-cyan-primary/20 rounded-md inline-block">
-            <BookOpen className="h-4 w-4 text-archon-cyan-bright" />
+        <Alert className="border-primary/30 bg-primary/10 backdrop-blur-sm">
+          <div className="p-1.5 bg-primary/20 rounded-md inline-block">
+            <BookOpen className="h-4 w-4 text-primary" />
           </div>
-          <AlertDescription className="text-archon-text-secondary mt-2">
-            <strong className="text-archon-cyan-bright">Study Tip:</strong> Take your time with each section and use the bookmark
+          <AlertDescription className="text-muted-foreground mt-2">
+            <strong className="text-primary">Study Tip:</strong> Take your time with each section and use the bookmark
             feature to save important concepts you want to review later. The practice questions will
             test your understanding of the key points covered in this module.
           </AlertDescription>

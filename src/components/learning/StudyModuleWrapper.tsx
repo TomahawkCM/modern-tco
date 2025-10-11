@@ -160,8 +160,8 @@ export function StudyModuleWrapper({
         <div className="flex items-start justify-between mb-4">
           <div className="flex-1">
             <div className="flex items-center gap-3 mb-2">
-              <div className="p-2 bg-archon-cyan-primary/20 rounded-lg shadow-[0_0_15px_rgba(0,212,255,0.3)]">
-                <BookOpen className="h-5 w-5 text-archon-cyan-bright" />
+              <div className="p-2 bg-primary/20 rounded-lg shadow-[0_0_15px_hsl(var(--primary)/0.3)]">
+                <BookOpen className="h-5 w-5 text-primary" />
               </div>
               <div>
                 <h1 className="text-2xl font-bold text-archon-text-primary archon-text-glow">{title}</h1>
@@ -179,16 +179,16 @@ export function StudyModuleWrapper({
           <div className="flex items-center gap-4">
             <div className="text-right">
               <div className="flex items-center gap-2 text-sm">
-                <Clock className="h-4 w-4 text-archon-cyan-bright" />
-                <span className="text-archon-text-primary font-medium">
+                <Clock className="h-4 w-4 text-primary" />
+                <span className="text-foreground font-medium">
                   {timeSpent}min / {estimatedTime}min
                 </span>
               </div>
-              <div className="text-xs text-archon-text-muted mt-1">
+              <div className="text-xs text-muted-foreground mt-1">
                 Status: <span className={cn(
                   moduleProgress.status === 'completed' && 'text-[#22c55e] font-bold',
-                  moduleProgress.status === 'in_progress' && 'text-archon-cyan-bright font-bold',
-                  moduleProgress.status === 'not_started' && 'text-archon-text-muted'
+                  moduleProgress.status === 'in_progress' && 'text-primary font-bold',
+                  moduleProgress.status === 'not_started' && 'text-muted-foreground'
                 )}>
                   {moduleProgress.status === 'completed' ? 'Completed' :
                    moduleProgress.status === 'in_progress' ? 'In Progress' : 'Not Started'}
@@ -199,9 +199,9 @@ export function StudyModuleWrapper({
         </div>
 
         {/* Progress Bar */}
-        <div className="w-full bg-archon-cyan-primary/20 rounded-full h-2 mb-4 border border-archon-cyan-bright/30">
+        <div className="w-full bg-primary/20 rounded-full h-2 mb-4 border border-primary/30">
           <motion.div
-            className="bg-gradient-to-r from-archon-cyan-bright to-archon-purple-primary h-2 rounded-full progress-glow"
+            className="bg-gradient-to-r from-primary to-accent h-2 rounded-full progress-glow"
             initial={{ width: 0 }}
             animate={{ width: `${progressPercentage}%` }}
             transition={{ duration: 0.5 }}
@@ -248,7 +248,7 @@ export function StudyModuleWrapper({
             {moduleProgress.status === 'not_started' && (
               <button
                 onClick={handleStartModule}
-                className="glass-button inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-archon-cyan-primary to-archon-cyan-hover text-foreground rounded-lg"
+                className="glass-button inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-primary to-primary/80 text-foreground rounded-lg"
               >
                 <Play className="h-4 w-4" />
                 Start Module
