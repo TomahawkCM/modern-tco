@@ -172,6 +172,11 @@ export const CyberpunkNavBar: React.FC<CyberpunkNavBarProps> = ({
                 className="md:hidden relative group"
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
+                onClick={() => {
+                  // Focus the search input on desktop or navigate to search page on mobile
+                  const searchInput = document.querySelector('input[type="text"]') as HTMLInputElement;
+                  if (searchInput) searchInput.focus();
+                }}
                 aria-label="Search modules and questions"
               >
                 <div className="absolute -inset-1 bg-gradient-to-r from-primary to-sky-400 rounded-full blur opacity-10 group-hover:opacity-30 transition duration-300"></div>
@@ -185,6 +190,7 @@ export const CyberpunkNavBar: React.FC<CyberpunkNavBarProps> = ({
                 className="relative group hidden sm:flex"
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
+                onClick={() => router.push("/notifications")}
                 aria-label="Notifications (3 unread)"
               >
                 <div className="absolute -inset-1 bg-gradient-to-r from-primary to-sky-400 rounded-full blur opacity-10 group-hover:opacity-30 transition duration-300"></div>
@@ -199,6 +205,7 @@ export const CyberpunkNavBar: React.FC<CyberpunkNavBarProps> = ({
                 className="relative group hidden sm:flex"
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
+                onClick={() => router.push("/profile")}
                 aria-label="User profile settings"
               >
                 <div className="absolute -inset-1 bg-gradient-to-r from-primary to-sky-400 rounded-full blur opacity-10 group-hover:opacity-30 transition duration-300"></div>

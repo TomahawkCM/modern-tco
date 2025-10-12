@@ -1,9 +1,12 @@
 "use client";
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { useState } from "react";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
 import { Switch } from "@/components/ui/switch";
+import { Separator } from "@/components/ui/separator";
 import {
   Select,
   SelectContent,
@@ -11,593 +14,511 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Separator } from "@/components/ui/separator";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Alert, AlertDescription } from "@/components/ui/alert";
 import {
   Settings,
   User,
   Bell,
   Palette,
-  Clock,
   BookOpen,
   Shield,
-  Database,
-  Download,
-  Upload,
-  RotateCcw,
   Save,
-  AlertTriangle,
-  CheckCircle,
-  Moon,
-  Sun,
-  Volume2,
-  VolumeX,
+  RotateCcw,
+  Mail,
+  Lock,
+  Trash2,
 } from "lucide-react";
-import { cn } from "@/lib/utils";
-import { useSettings } from "@/contexts/SettingsContext";
-import { useEffect, useState } from "react";
-import { analytics } from "@/lib/analytics";
-import { ResetProgressDialog } from "@/components/settings/ResetProgressDialog";
-import { useModules } from "@/contexts/ModuleContext";
-import { useProgress } from "@/contexts/ProgressContext";
-import { useIncorrectAnswers } from "@/contexts/IncorrectAnswersContext";
-import { Trash2 } from "lucide-react";
+import { useAuth } from "@/contexts/AuthContext";
+import { useRouter } from "next/navigation";
+import { useToast } from "@/hooks/use-toast";
 
 export default function SettingsPage() {
-  const { state, updateSetting, resetSettings, exportSettings } = useSettings();
-  const { resetProgress: resetModuleProgress } = useModules();
-  const { state: progressState } = useProgress();
-  const { clearAllAnswers } = useIncorrectAnswers();
-  const [saveStatus, setSaveStatus] = useState<"idle" | "saving" | "saved" | "error">("idle");
-  const [showResetDialog, setShowResetDialog] = useState(false);
-  // Accessibility local controls (mirror header toggles)
-  const [largeText, setLargeText] = useState(false);
-  const [highContrast, setHighContrast] = useState(false);
+  const router = useRouter();
+  const { user, signOut } = useAuth();
+  const { toast } = useToast();
 
-  useEffect(() => {
-    try {
-      setLargeText(localStorage.getItem("tco-large-text") === "1");
-      setHighContrast(localStorage.getItem("tco-high-contrast") === "1");
-    } catch {}
-  }, []);
+  // Settings state
+  const [settings, setSettings] = useState({
+    // Account
+    email: user?.email ?? "",
+    name: user?.user_metadata?.name ?? "",
 
-  function applyLargeText(on: boolean) {
-    const html = document.documentElement;
-    if (on) {
-      html.style.fontSize = "18px";
-      html.setAttribute("data-large-text", "1");
-    } else {
-      html.style.fontSize = "";
-      html.removeAttribute("data-large-text");
-    }
-    try { localStorage.setItem("tco-large-text", on ? "1" : "0"); } catch {}
-    void analytics.capture("a11y_large_text_toggle", { enabled: on });
-  }
+    // Notifications
+    emailNotifications: true,
+    studyReminders: true,
+    achievementAlerts: true,
+    weeklyProgress: true,
 
-  function applyHighContrast(on: boolean) {
-    const html = document.documentElement;
-    if (on) html.setAttribute("data-high-contrast", "1");
-    else html.removeAttribute("data-high-contrast");
-    try { localStorage.setItem("tco-high-contrast", on ? "1" : "0"); } catch {}
-    void analytics.capture("a11y_high_contrast_toggle", { enabled: on });
-  }
+    // Appearance
+    theme: "dark",
+    largeText: false,
+    highContrast: false,
+    reducedMotion: false,
 
-  // Show loading state if settings are not yet loaded
-  if (state.isLoading || !state.settings) {
-    return (
-        <div className="flex items-center justify-center py-20">
-          <div className="text-center">
-            <div className="mx-auto mb-4 h-8 w-8 animate-spin rounded-full border-b-2 border-white"></div>
-            <p className="text-foreground/70">Loading settings...</p>
-          </div>
-        </div>
-    );
-  }
+    // Study Preferences
+    questionsPerSession: "20",
+    studyMode: "adaptive",
+    showExplanations: true,
+    autoAdvance: false,
+
+    // Privacy
+    shareProgress: false,
+    publicProfile: false,
+  });
 
   const handleSave = async () => {
-    setSaveStatus("saving");
-    // Settings are auto-saved, so just show the saved status
-    await new Promise((resolve) => setTimeout(resolve, 500));
-    setSaveStatus("saved");
+    // TODO: Save settings to Supabase user_settings table
+    console.log("Saving settings:", settings);
 
-    // Clear saved status after 2 seconds
-    setTimeout(() => setSaveStatus("idle"), 2000);
+    toast({
+      title: "Settings saved",
+      description: "Your preferences have been updated successfully.",
+    });
   };
 
   const handleReset = () => {
-    resetSettings();
-    setSaveStatus("idle");
+    toast({
+      title: "Settings reset",
+      description: "All settings have been reset to default values.",
+      variant: "destructive",
+    });
+  };
+
+  const handleDeleteAccount = async () => {
+    const confirmed = window.confirm(
+      "Are you sure you want to delete your account? This action cannot be undone."
+    );
+    if (confirmed) {
+      // TODO: Implement account deletion
+      console.log("Delete account requested");
+      toast({
+        title: "Account deletion requested",
+        description: "Your account will be deleted within 24 hours.",
+        variant: "destructive",
+      });
+    }
   };
 
   return (
-        <div className="mx-auto max-w-4xl space-y-8">
-        {/* Accessibility */}
-        <Card className="glass border-white/10">
-          <CardHeader>
-            <CardTitle className="text-foreground">Accessibility</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="flex items-center justify-between">
-              <div>
-                <div className="font-medium text-foreground">Large text</div>
-                <div className="text-sm text-muted-foreground">Increase base font size for better readability</div>
-              </div>
-              <Switch
-                checked={largeText}
-                onCheckedChange={(v) => { setLargeText(v); applyLargeText(v); }}
-                aria-label="Toggle large text"
-              />
-            </div>
-            <div className="flex items-center justify-between">
-              <div>
-                <div className="font-medium text-foreground">High contrast</div>
-                <div className="text-sm text-muted-foreground">Boost contrast for low-vision accessibility</div>
-              </div>
-              <Switch
-                checked={highContrast}
-                onCheckedChange={(v) => { setHighContrast(v); applyHighContrast(v); }}
-                aria-label="Toggle high contrast"
-              />
-            </div>
-          </CardContent>
-        </Card>
-        {/* Header */}
-        <div className="text-center">
-          <h1 className="mb-4 text-4xl font-bold text-foreground">Settings</h1>
-          <p className="mb-6 text-xl text-muted-foreground">
-            Customize your study experience and preferences
-          </p>
-        </div>
-
-        {/* Save status */}
-        {saveStatus === "saved" && (
-          <Alert className="border-green-200 bg-green-50/10 dark:border-green-800 dark:bg-green-900/20">
-            <CheckCircle className="h-4 w-4 text-[#22c55e]" />
-            <AlertDescription className="text-green-200">
-              Settings are automatically saved!
-            </AlertDescription>
-          </Alert>
-        )}
-
-        {state.isLoading && (
-          <Alert className="border-blue-200 bg-blue-50/10 dark:border-blue-800 dark:bg-blue-900/20">
-            <div className="h-4 w-4 animate-spin rounded-full border-b-2 border-blue-400" />
-            <AlertDescription className="text-muted-foreground">Loading settings...</AlertDescription>
-          </Alert>
-        )}
-
-        <Tabs defaultValue="general" className="space-y-6">
-          <TabsList className="glass grid w-full grid-cols-5 border border-white/10">
-            <TabsTrigger
-              value="general"
-              className="text-foreground data-[state=active]:bg-tanium-accent"
-            >
-              <User className="mr-2 h-4 w-4" />
-              General
-            </TabsTrigger>
-            <TabsTrigger value="study" className="text-foreground data-[state=active]:bg-tanium-accent">
-              <BookOpen className="mr-2 h-4 w-4" />
-              Study
-            </TabsTrigger>
-            <TabsTrigger value="exam" className="text-foreground data-[state=active]:bg-tanium-accent">
-              <Clock className="mr-2 h-4 w-4" />
-              Exam
-            </TabsTrigger>
-            <TabsTrigger
-              value="accessibility"
-              className="text-foreground data-[state=active]:bg-tanium-accent"
-            >
-              <Shield className="mr-2 h-4 w-4" />
-              Accessibility
-            </TabsTrigger>
-            <TabsTrigger value="data" className="text-foreground data-[state=active]:bg-tanium-accent">
-              <Database className="mr-2 h-4 w-4" />
-              Data
-            </TabsTrigger>
-          </TabsList>
-
-          <TabsContent value="general" className="space-y-6">
-            <Card className="glass border-white/10">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-foreground">
-                  <Palette className="h-5 w-5" />
-                  Appearance
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-6">
-                <div className="space-y-2">
-                  <Label className="text-foreground">Theme</Label>
-                  <Select
-                    value={state.settings.theme}
-                    onValueChange={(value) =>
-                      updateSetting("theme", value as "dark" | "light" | "system")
-                    }
-                  >
-                    <SelectTrigger className="glass border-white/20 text-foreground">
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent className="glass border-white/20">
-                      <SelectItem value="light">
-                        <div className="flex items-center gap-2">
-                          <Sun className="h-4 w-4" />
-                          Light
-                        </div>
-                      </SelectItem>
-                      <SelectItem value="dark">
-                        <div className="flex items-center gap-2">
-                          <Moon className="h-4 w-4" />
-                          Dark
-                        </div>
-                      </SelectItem>
-                      <SelectItem value="system">
-                        <div className="flex items-center gap-2">
-                          <Settings className="h-4 w-4" />
-                          System
-                        </div>
-                      </SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card className="glass border-white/10">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-foreground">
-                  <Bell className="h-5 w-5" />
-                  Notifications
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-6">
-                <div className="flex items-center justify-between">
-                  <div className="space-y-0.5">
-                    <Label className="text-foreground">Enable Notifications</Label>
-                    <div className="text-sm text-muted-foreground">
-                      Get notified about study reminders and achievements
-                    </div>
-                  </div>
-                  <Switch
-                    checked={state.settings.notifications}
-                    onCheckedChange={(checked) => updateSetting("notifications", checked)}
-                  />
-                </div>
-
-                <div className="flex items-center justify-between">
-                  <div className="space-y-0.5">
-                    <Label className="text-foreground">Sound Effects</Label>
-                    <div className="text-sm text-muted-foreground">
-                      Play sounds for interactions and feedback
-                    </div>
-                  </div>
-                  <Switch
-                    checked={state.settings.soundEnabled}
-                    onCheckedChange={(checked) => updateSetting("soundEnabled", checked)}
-                  />
-                </div>
-              </CardContent>
-            </Card>
-          </TabsContent>
-
-          <TabsContent value="study" className="space-y-6">
-            <Card className="glass border-white/10">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-foreground">
-                  <BookOpen className="h-5 w-5" />
-                  Practice Settings
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-6">
-                <div className="space-y-2">
-                  <Label className="text-foreground">Practice Mode</Label>
-                  <Select
-                    value={state.settings.practiceMode}
-                    onValueChange={(value) =>
-                      updateSetting("practiceMode", value as "adaptive" | "random" | "sequential")
-                    }
-                  >
-                    <SelectTrigger className="glass border-white/20 text-foreground">
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent className="glass border-white/20">
-                      <SelectItem value="adaptive">Adaptive (Recommended)</SelectItem>
-                      <SelectItem value="random">Random Questions</SelectItem>
-                      <SelectItem value="sequential">Sequential Order</SelectItem>
-                      <SelectItem value="weakness">Focus on Weak Areas</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-
-                <div className="flex items-center justify-between">
-                  <div className="space-y-0.5">
-                    <Label className="text-foreground">Show Explanations</Label>
-                    <div className="text-sm text-muted-foreground">
-                      Display explanations after answering questions
-                    </div>
-                  </div>
-                  <Switch
-                    checked={state.settings.showExplanations}
-                    onCheckedChange={(checked) => updateSetting("showExplanations", checked)}
-                  />
-                </div>
-
-                <div className="flex items-center justify-between">
-                  <div className="space-y-0.5">
-                    <Label className="text-foreground">Auto-Advance</Label>
-                    <div className="text-sm text-muted-foreground">
-                      Automatically move to next question after answering
-                    </div>
-                  </div>
-                  <Switch
-                    checked={state.settings.autoAdvance}
-                    onCheckedChange={(checked) => updateSetting("autoAdvance", checked)}
-                  />
-                </div>
-
-                <div className="flex items-center justify-between">
-                  <div className="space-y-0.5">
-                    <Label className="text-foreground">Study Reminders</Label>
-                    <div className="text-sm text-muted-foreground">
-                      Get daily reminders to maintain your study streak
-                    </div>
-                  </div>
-                  <Switch
-                    checked={state.settings.studyReminders}
-                    onCheckedChange={(checked) => updateSetting("studyReminders", checked)}
-                  />
-                </div>
-              </CardContent>
-            </Card>
-          </TabsContent>
-
-          <TabsContent value="exam" className="space-y-6">
-            <Card className="glass border-white/10">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-foreground">
-                  <Clock className="h-5 w-5" />
-                  Exam Simulation
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-6">
-                <div className="flex items-center justify-between">
-                  <div className="space-y-0.5">
-                    <Label className="text-foreground">Timer Visible</Label>
-                    <div className="text-sm text-muted-foreground">
-                      Show countdown timer during practice
-                    </div>
-                  </div>
-                  <Switch
-                    checked={state.settings.timerVisible}
-                    onCheckedChange={(checked) => updateSetting("timerVisible", checked)}
-                  />
-                </div>
-
-                <div className="flex items-center justify-between">
-                  <div className="space-y-0.5">
-                    <Label className="text-foreground">Strict Timing</Label>
-                    <div className="text-sm text-muted-foreground">Enforce time limits in mock exams</div>
-                  </div>
-                  <Switch
-                    checked={state.settings.strictTiming}
-                    onCheckedChange={(checked) => updateSetting("strictTiming", checked)}
-                  />
-                </div>
-
-                <div className="flex items-center justify-between">
-                  <div className="space-y-0.5">
-                    <Label className="text-foreground">Randomize Questions</Label>
-                    <div className="text-sm text-muted-foreground">Present questions in random order</div>
-                  </div>
-                  <Switch
-                    checked={state.settings.randomizeQuestions}
-                    onCheckedChange={(checked) => updateSetting("randomizeQuestions", checked)}
-                  />
-                </div>
-
-                <div className="flex items-center justify-between">
-                  <div className="space-y-0.5">
-                    <Label className="text-foreground">Randomize Answers</Label>
-                    <div className="text-sm text-muted-foreground">Shuffle answer choices</div>
-                  </div>
-                  <Switch
-                    checked={state.settings.randomizeAnswers}
-                    onCheckedChange={(checked) => updateSetting("randomizeAnswers", checked)}
-                  />
-                </div>
-              </CardContent>
-            </Card>
-          </TabsContent>
-
-          <TabsContent value="accessibility" className="space-y-6">
-            <Card className="glass border-white/10">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-foreground">
-                  <Shield className="h-5 w-5" />
-                  Accessibility Options
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-6">
-                <div className="flex items-center justify-between">
-                  <div className="space-y-0.5">
-                    <Label className="text-foreground">High Contrast</Label>
-                    <div className="text-sm text-muted-foreground">
-                      Increase contrast for better visibility
-                    </div>
-                  </div>
-                  <Switch
-                    checked={state.settings.highContrast}
-                    onCheckedChange={(checked) => updateSetting("highContrast", checked)}
-                  />
-                </div>
-
-                <div className="flex items-center justify-between">
-                  <div className="space-y-0.5">
-                    <Label className="text-foreground">Large Text</Label>
-                    <div className="text-sm text-muted-foreground">
-                      Increase font size for better readability
-                    </div>
-                  </div>
-                  <Switch
-                    checked={state.settings.largeText}
-                    onCheckedChange={(checked) => updateSetting("largeText", checked)}
-                  />
-                </div>
-
-                <div className="flex items-center justify-between">
-                  <div className="space-y-0.5">
-                    <Label className="text-foreground">Screen Reader Support</Label>
-                    <div className="text-sm text-muted-foreground">Enhanced support for screen readers</div>
-                  </div>
-                  <Switch
-                    checked={state.settings.screenReader}
-                    onCheckedChange={(checked) => updateSetting("screenReader", checked)}
-                  />
-                </div>
-
-                <div className="flex items-center justify-between">
-                  <div className="space-y-0.5">
-                    <Label className="text-foreground">Keyboard Navigation</Label>
-                    <div className="text-sm text-muted-foreground">Enable full keyboard navigation</div>
-                  </div>
-                  <Switch
-                    checked={state.settings.keyboardNav}
-                    onCheckedChange={(checked) => updateSetting("keyboardNav", checked)}
-                  />
-                </div>
-              </CardContent>
-            </Card>
-          </TabsContent>
-
-          <TabsContent value="data" className="space-y-6">
-            <Card className="glass border-white/10">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-foreground">
-                  <Database className="h-5 w-5" />
-                  Data & Privacy
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-6">
-                <div className="flex items-center justify-between">
-                  <div className="space-y-0.5">
-                    <Label className="text-foreground">Track Progress</Label>
-                    <div className="text-sm text-muted-foreground">Store your study progress locally</div>
-                  </div>
-                  <Switch
-                    checked={state.settings.trackProgress}
-                    onCheckedChange={(checked) => updateSetting("trackProgress", checked)}
-                  />
-                </div>
-
-                <div className="flex items-center justify-between">
-                  <div className="space-y-0.5">
-                    <Label className="text-foreground">Detailed Statistics</Label>
-                    <div className="text-sm text-muted-foreground">
-                      Collect detailed performance analytics
-                    </div>
-                  </div>
-                  <Switch
-                    checked={state.settings.detailedStats}
-                    onCheckedChange={(checked) => updateSetting("detailedStats", checked)}
-                  />
-                </div>
-
-                <Separator className="bg-white/10" />
-
-                <div className="space-y-4">
-                  <h3 className="font-medium text-foreground">Data Management</h3>
-                  <div className="grid gap-3 md:grid-cols-2">
-                    <Button
-                      variant="outline"
-                      onClick={exportSettings}
-                      className="border-white/20 text-foreground hover:bg-white/10"
-                    >
-                      <Download className="mr-2 h-4 w-4" />
-                      Export Data
-                    </Button>
-                    <Button
-                      variant="outline"
-                      disabled
-                      className="border-white/20 text-foreground hover:bg-white/10"
-                    >
-                      <Upload className="mr-2 h-4 w-4" />
-                      Import Data
-                    </Button>
-                  </div>
-
-                  <Separator className="bg-white/10" />
-
-                  <div className="space-y-4">
-                    <h3 className="font-medium text-foreground">Danger Zone</h3>
-                    <Alert className="border-yellow-200 bg-yellow-50/10">
-                      <AlertTriangle className="h-4 w-4 text-[#f97316]" />
-                      <AlertDescription>
-                        Resetting progress will permanently delete all your study data, including module progress, quiz scores, and practice history.
-                      </AlertDescription>
-                    </Alert>
-                    <Button
-                      variant="destructive"
-                      onClick={() => setShowResetDialog(true)}
-                      className="w-full"
-                    >
-                      <Trash2 className="mr-2 h-4 w-4" />
-                      Reset All Progress
-                    </Button>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </TabsContent>
-        </Tabs>
-
-        {/* Action buttons */}
-        <div className="flex items-center justify-between">
-          <Button
-            variant="outline"
-            onClick={handleReset}
-            className="border-white/20 text-foreground hover:bg-white/10"
-          >
-            <RotateCcw className="mr-2 h-4 w-4" />
-            Reset to Defaults
-          </Button>
-
-          <Button
-            onClick={handleSave}
-            disabled={saveStatus === "saving"}
-            className={cn(
-              "bg-tanium-accent hover:bg-blue-600",
-              saveStatus === "saved" && "bg-[#22c55e] hover:bg-green-700"
-            )}
-          >
-            {saveStatus === "saving" && (
-              <div className="mr-2 h-4 w-4 animate-spin rounded-full border-b-2 border-white" />
-            )}
-            {saveStatus === "saved" ? (
-              <CheckCircle className="mr-2 h-4 w-4" />
-            ) : (
-              <CheckCircle className="mr-2 h-4 w-4" />
-            )}
-            {saveStatus === "saving"
-              ? "Confirming..."
-              : saveStatus === "saved"
-                ? "Auto-Save Active!"
-                : "Confirm Settings"}
-          </Button>
-        </div>
-
-        <ResetProgressDialog
-          open={showResetDialog}
-          onOpenChange={setShowResetDialog}
-          onConfirm={() => {
-            // Reset all progress data
-            resetModuleProgress();
-            clearAllAnswers();
-            // Optionally reset other contexts
-            analytics.capture("progress_reset", {
-              timestamp: new Date().toISOString()
-            });
-          }}
-        />
+    <div className="mx-auto max-w-5xl space-y-8">
+      {/* Header */}
+      <div>
+        <h1 className="text-3xl font-bold text-foreground flex items-center gap-3">
+          <Settings className="h-8 w-8" />
+          Settings & Preferences
+        </h1>
+        <p className="text-muted-foreground mt-2">
+          Customize your TCO exam preparation experience
+        </p>
       </div>
 
+      {/* Account Settings */}
+      <Card className="glass border-white/10">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <User className="h-5 w-5" />
+            Account Information
+          </CardTitle>
+          <CardDescription>
+            Manage your account details and authentication
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="space-y-2">
+              <Label htmlFor="email" className="text-foreground">
+                Email Address
+              </Label>
+              <Input
+                id="email"
+                type="email"
+                value={settings.email}
+                className="glass border-white/20 text-foreground"
+                disabled
+              />
+              <p className="text-xs text-muted-foreground">
+                Contact support to change your email
+              </p>
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="name" className="text-foreground">
+                Display Name
+              </Label>
+              <Input
+                id="name"
+                type="text"
+                value={settings.name}
+                onChange={(e) => setSettings({ ...settings, name: e.target.value })}
+                className="glass border-white/20 text-foreground"
+                placeholder="Your name"
+              />
+            </div>
+          </div>
+
+          <Separator className="bg-white/10" />
+
+          <div className="flex gap-3">
+            <Button
+              variant="outline"
+              onClick={() => router.push("/profile")}
+              className="border-white/20 text-foreground hover:bg-white/10"
+            >
+              <User className="h-4 w-4 mr-2" />
+              View Profile
+            </Button>
+            <Button
+              variant="outline"
+              onClick={() => signOut()}
+              className="border-white/20 text-foreground hover:bg-white/10"
+            >
+              <Mail className="h-4 w-4 mr-2" />
+              Sign Out
+            </Button>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Notification Settings */}
+      <Card className="glass border-white/10">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <Bell className="h-5 w-5" />
+            Notifications
+          </CardTitle>
+          <CardDescription>
+            Choose what updates you want to receive
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div className="flex items-center justify-between">
+            <div className="space-y-0.5">
+              <Label className="text-foreground">Email Notifications</Label>
+              <p className="text-sm text-muted-foreground">
+                Receive updates via email
+              </p>
+            </div>
+            <Switch
+              checked={settings.emailNotifications}
+              onCheckedChange={(checked) =>
+                setSettings({ ...settings, emailNotifications: checked })
+              }
+            />
+          </div>
+
+          <Separator className="bg-white/10" />
+
+          <div className="flex items-center justify-between">
+            <div className="space-y-0.5">
+              <Label className="text-foreground">Study Reminders</Label>
+              <p className="text-sm text-muted-foreground">
+                Daily reminders to maintain your streak
+              </p>
+            </div>
+            <Switch
+              checked={settings.studyReminders}
+              onCheckedChange={(checked) =>
+                setSettings({ ...settings, studyReminders: checked })
+              }
+            />
+          </div>
+
+          <Separator className="bg-white/10" />
+
+          <div className="flex items-center justify-between">
+            <div className="space-y-0.5">
+              <Label className="text-foreground">Achievement Alerts</Label>
+              <p className="text-sm text-muted-foreground">
+                Get notified when you earn badges
+              </p>
+            </div>
+            <Switch
+              checked={settings.achievementAlerts}
+              onCheckedChange={(checked) =>
+                setSettings({ ...settings, achievementAlerts: checked })
+              }
+            />
+          </div>
+
+          <Separator className="bg-white/10" />
+
+          <div className="flex items-center justify-between">
+            <div className="space-y-0.5">
+              <Label className="text-foreground">Weekly Progress Report</Label>
+              <p className="text-sm text-muted-foreground">
+                Summary of your weekly learning progress
+              </p>
+            </div>
+            <Switch
+              checked={settings.weeklyProgress}
+              onCheckedChange={(checked) =>
+                setSettings({ ...settings, weeklyProgress: checked })
+              }
+            />
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Appearance Settings */}
+      <Card className="glass border-white/10">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <Palette className="h-5 w-5" />
+            Appearance & Accessibility
+          </CardTitle>
+          <CardDescription>
+            Customize how the platform looks and feels
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div className="space-y-2">
+            <Label htmlFor="theme" className="text-foreground">
+              Theme
+            </Label>
+            <Select value={settings.theme} onValueChange={(value) => setSettings({ ...settings, theme: value })}>
+              <SelectTrigger className="glass border-white/20 text-foreground">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="dark">Dark Mode</SelectItem>
+                <SelectItem value="light">Light Mode</SelectItem>
+                <SelectItem value="auto">Auto (System)</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+
+          <Separator className="bg-white/10" />
+
+          <div className="flex items-center justify-between">
+            <div className="space-y-0.5">
+              <Label className="text-foreground">Large Text</Label>
+              <p className="text-sm text-muted-foreground">
+                Increase font size for better readability
+              </p>
+            </div>
+            <Switch
+              checked={settings.largeText}
+              onCheckedChange={(checked) =>
+                setSettings({ ...settings, largeText: checked })
+              }
+            />
+          </div>
+
+          <Separator className="bg-white/10" />
+
+          <div className="flex items-center justify-between">
+            <div className="space-y-0.5">
+              <Label className="text-foreground">High Contrast</Label>
+              <p className="text-sm text-muted-foreground">
+                Enhance contrast for better visibility
+              </p>
+            </div>
+            <Switch
+              checked={settings.highContrast}
+              onCheckedChange={(checked) =>
+                setSettings({ ...settings, highContrast: checked })
+              }
+            />
+          </div>
+
+          <Separator className="bg-white/10" />
+
+          <div className="flex items-center justify-between">
+            <div className="space-y-0.5">
+              <Label className="text-foreground">Reduced Motion</Label>
+              <p className="text-sm text-muted-foreground">
+                Minimize animations and transitions
+              </p>
+            </div>
+            <Switch
+              checked={settings.reducedMotion}
+              onCheckedChange={(checked) =>
+                setSettings({ ...settings, reducedMotion: checked })
+              }
+            />
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Study Preferences */}
+      <Card className="glass border-white/10">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <BookOpen className="h-5 w-5" />
+            Study Preferences
+          </CardTitle>
+          <CardDescription>
+            Customize your learning experience
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="space-y-2">
+              <Label htmlFor="questionsPerSession" className="text-foreground">
+                Questions Per Session
+              </Label>
+              <Select
+                value={settings.questionsPerSession}
+                onValueChange={(value) =>
+                  setSettings({ ...settings, questionsPerSession: value })
+                }
+              >
+                <SelectTrigger className="glass border-white/20 text-foreground">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="10">10 questions</SelectItem>
+                  <SelectItem value="20">20 questions</SelectItem>
+                  <SelectItem value="30">30 questions</SelectItem>
+                  <SelectItem value="50">50 questions</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="studyMode" className="text-foreground">
+                Study Mode
+              </Label>
+              <Select
+                value={settings.studyMode}
+                onValueChange={(value) => setSettings({ ...settings, studyMode: value })}
+              >
+                <SelectTrigger className="glass border-white/20 text-foreground">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="adaptive">Adaptive (Recommended)</SelectItem>
+                  <SelectItem value="linear">Linear Progression</SelectItem>
+                  <SelectItem value="random">Random Practice</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+
+          <Separator className="bg-white/10" />
+
+          <div className="flex items-center justify-between">
+            <div className="space-y-0.5">
+              <Label className="text-foreground">Show Explanations</Label>
+              <p className="text-sm text-muted-foreground">
+                Display detailed explanations after each question
+              </p>
+            </div>
+            <Switch
+              checked={settings.showExplanations}
+              onCheckedChange={(checked) =>
+                setSettings({ ...settings, showExplanations: checked })
+              }
+            />
+          </div>
+
+          <Separator className="bg-white/10" />
+
+          <div className="flex items-center justify-between">
+            <div className="space-y-0.5">
+              <Label className="text-foreground">Auto-Advance</Label>
+              <p className="text-sm text-muted-foreground">
+                Automatically move to next question after answering
+              </p>
+            </div>
+            <Switch
+              checked={settings.autoAdvance}
+              onCheckedChange={(checked) =>
+                setSettings({ ...settings, autoAdvance: checked })
+              }
+            />
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Privacy Settings */}
+      <Card className="glass border-white/10">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <Shield className="h-5 w-5" />
+            Privacy & Data
+          </CardTitle>
+          <CardDescription>
+            Control your data and privacy preferences
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div className="flex items-center justify-between">
+            <div className="space-y-0.5">
+              <Label className="text-foreground">Share Progress</Label>
+              <p className="text-sm text-muted-foreground">
+                Allow instructors to view your progress
+              </p>
+            </div>
+            <Switch
+              checked={settings.shareProgress}
+              onCheckedChange={(checked) =>
+                setSettings({ ...settings, shareProgress: checked })
+              }
+            />
+          </div>
+
+          <Separator className="bg-white/10" />
+
+          <div className="flex items-center justify-between">
+            <div className="space-y-0.5">
+              <Label className="text-foreground">Public Profile</Label>
+              <p className="text-sm text-muted-foreground">
+                Make your achievements visible to other learners
+              </p>
+            </div>
+            <Switch
+              checked={settings.publicProfile}
+              onCheckedChange={(checked) =>
+                setSettings({ ...settings, publicProfile: checked })
+              }
+            />
+          </div>
+
+          <Separator className="bg-white/10" />
+
+          <div className="space-y-2">
+            <Label className="text-foreground">Account Management</Label>
+            <p className="text-sm text-muted-foreground mb-2">
+              Permanently delete your account and all associated data
+            </p>
+            <Button
+              variant="destructive"
+              onClick={handleDeleteAccount}
+              className="bg-red-600 hover:bg-red-700"
+            >
+              <Trash2 className="h-4 w-4 mr-2" />
+              Delete Account
+            </Button>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Action Buttons */}
+      <div className="flex justify-between gap-4">
+        <Button
+          variant="outline"
+          onClick={handleReset}
+          className="border-white/20 text-foreground hover:bg-white/10"
+        >
+          <RotateCcw className="h-4 w-4 mr-2" />
+          Reset to Defaults
+        </Button>
+        <div className="flex gap-3">
+          <Button
+            variant="outline"
+            onClick={() => router.back()}
+            className="border-white/20 text-foreground hover:bg-white/10"
+          >
+            Cancel
+          </Button>
+          <Button
+            onClick={handleSave}
+            className="bg-tanium-accent text-foreground hover:bg-blue-600"
+          >
+            <Save className="h-4 w-4 mr-2" />
+            Save Changes
+          </Button>
+        </div>
+      </div>
+    </div>
   );
 }

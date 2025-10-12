@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
@@ -22,54 +22,154 @@ import {
   Edit3,
   Save,
   X,
+  Loader2,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useAuth } from "@/contexts/AuthContext";
 import { useRouter } from "next/navigation";
+import { useToast } from "@/hooks/use-toast";
+import {
+  getUserProfile,
+  getUserStats,
+  getUserAchievements,
+  updateUserProfile,
+} from "@/lib/profileService";
 
 export default function ProfilePage() {
   const router = useRouter();
   const { user } = useAuth();
+  const { toast } = useToast();
   const [isEditing, setIsEditing] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [profileData, setProfileData] = useState({
-    name: user?.user_metadata?.name ?? "TCO Student",
-    email: user?.email ?? "student@example.com",
+    name: "",
+    email: "",
     bio: "Preparing for Tanium Certified Operator certification",
-    joinDate: "2024-01-15",
-    studyStreak: 7,
-    totalScore: 78,
-    questionsCompleted: 156,
-    studyTimeHours: 42,
+    joinDate: "",
+    studyStreak: 0,
+    totalScore: 0,
+    questionsCompleted: 0,
+    studyTimeHours: 0,
   });
+  const [achievements, setAchievements] = useState<any[]>([]);
 
-  const handleSave = () => {
-    setIsEditing(false);
-    // TODO: Save profile data to database
-    console.log("Profile updated:", profileData);
+  // Fetch user profile and stats on mount
+  useEffect(() => {
+    async function fetchProfileData() {
+      if (!user?.id) {
+        setLoading(false);
+        return;
+      }
+
+      try {
+        // Fetch profile
+        const profile = await getUserProfile(user.id);
+
+        // Fetch stats
+        const stats = await getUserStats(user.id);
+
+        // Fetch achievements
+        const userAchievements = await getUserAchievements(user.id);
+
+        setProfileData({
+          name: profile?.name || user.user_metadata?.name || "TCO Student",
+          email: profile?.email || user.email || "",
+          bio: "Preparing for Tanium Certified Operator certification",
+          joinDate: profile?.created_at || new Date().toISOString(),
+          studyStreak: stats.studyStreak,
+          totalScore: stats.totalScore,
+          questionsCompleted: stats.questionsCompleted,
+          studyTimeHours: stats.studyTimeHours,
+        });
+
+        setAchievements(userAchievements);
+      } catch (error) {
+        console.error("Error fetching profile data:", error);
+        toast({
+          title: "Error loading profile",
+          description: "Could not load your profile data. Please try again.",
+          variant: "destructive",
+        });
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchProfileData();
+  }, [user, toast]);
+
+  const handleSave = async () => {
+    if (!user?.id) return;
+
+    try {
+      const result = await updateUserProfile(user.id, {
+        name: profileData.name,
+        bio: profileData.bio,
+      });
+
+      if (result.success) {
+        setIsEditing(false);
+        toast({
+          title: "Profile updated",
+          description: "Your profile has been updated successfully.",
+        });
+      } else {
+        toast({
+          title: "Update failed",
+          description: result.error || "Could not update profile.",
+          variant: "destructive",
+        });
+      }
+    } catch (error) {
+      console.error("Error updating profile:", error);
+      toast({
+        title: "Update failed",
+        description: "An unexpected error occurred.",
+        variant: "destructive",
+      });
+    }
   };
 
   const handleCancel = () => {
     setIsEditing(false);
-    // Reset any unsaved changes
+    // Reload original data
+    if (user?.id) {
+      getUserProfile(user.id).then((profile) => {
+        if (profile) {
+          setProfileData((prev) => ({
+            ...prev,
+            name: profile.name || user.user_metadata?.name || "TCO Student",
+          }));
+        }
+      });
+    }
   };
 
-  const achievements = [
-    {
-      name: "First Steps",
-      description: "Completed first practice session",
-      icon: Trophy,
-      earned: true,
-    },
-    { name: "Week Warrior", description: "7-day study streak", icon: Calendar, earned: true },
-    { name: "Question Master", description: "Answered 100+ questions", icon: Target, earned: true },
-    {
-      name: "Domain Expert",
-      description: "Mastered a certification domain",
-      icon: Award,
-      earned: false,
-    },
-    { name: "Mock Master", description: "Passed a mock exam", icon: BookOpen, earned: false },
-  ];
+  // Loading state
+  if (loading) {
+    return (
+      <div className="flex min-h-[400px] items-center justify-center">
+        <div className="text-center">
+          <Loader2 className="mx-auto mb-4 h-8 w-8 animate-spin text-primary" />
+          <p className="text-muted-foreground">Loading your profile...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Map icon names to components
+  const iconMap: { [key: string]: any } = {
+    Trophy,
+    Calendar,
+    Target,
+    Award,
+    BookOpen,
+  };
+
+  const achievementComponents = achievements.map((a) => ({
+    ...a,
+    icon: iconMap[a.icon] || Trophy,
+  }));
 
   const studyStats = [
     {
@@ -242,7 +342,7 @@ export default function ProfilePage() {
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-              {achievements.map((achievement, index) => (
+              {achievementComponents.map((achievement, index) => (
                 <div
                   key={index}
                   className={cn(

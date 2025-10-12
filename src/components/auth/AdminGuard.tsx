@@ -42,8 +42,35 @@ export function AdminGuard({ children }: { children: ReactNode }) {
           <CardHeader>
             <CardTitle className="text-foreground">Access denied</CardTitle>
           </CardHeader>
-          <CardContent className="text-muted-foreground">
-            Your account ({email ?? "unknown"}) is not authorized to access admin tools.
+          <CardContent className="space-y-4">
+            <p className="text-muted-foreground">
+              Your account <strong className="text-foreground">({email ?? "unknown"})</strong> is not authorized to access admin tools.
+            </p>
+            <div className="rounded-lg bg-yellow-500/10 border border-yellow-500/20 p-4">
+              <p className="text-sm text-yellow-400 font-medium mb-2">Admin Access Setup</p>
+              <p className="text-sm text-muted-foreground">
+                To grant admin access, add your email to the <code className="text-xs bg-black/30 px-1 py-0.5 rounded">NEXT_PUBLIC_ADMIN_EMAILS</code> environment variable in <code className="text-xs bg-black/30 px-1 py-0.5 rounded">.env.local</code>
+              </p>
+              <p className="text-xs text-muted-foreground/70 mt-2">
+                Example: <code className="text-xs bg-black/30 px-1 py-0.5 rounded">NEXT_PUBLIC_ADMIN_EMAILS=admin@example.com,user@example.com</code>
+              </p>
+            </div>
+            <div className="flex gap-3">
+              <Button
+                variant="outline"
+                onClick={() => router.push("/")}
+                className="border-white/20 text-foreground hover:bg-white/10"
+              >
+                Return to Dashboard
+              </Button>
+              <Button
+                variant="outline"
+                onClick={() => router.push("/profile")}
+                className="border-white/20 text-foreground hover:bg-white/10"
+              >
+                View Profile
+              </Button>
+            </div>
           </CardContent>
         </Card>
       </div>
