@@ -5,7 +5,7 @@ export interface UserProfile {
   id: string;
   email: string;
   name: string | null;
-  created_at: string;
+  created_at: string | null;
   last_login: string | null;
 }
 
@@ -86,8 +86,10 @@ export async function getUserStats(userId: string): Promise<UserStats> {
   const totalTimeSeconds = sessions.reduce((sum, s) => sum + (s.time_spent || 0), 0);
   const studyTimeHours = Math.round((totalTimeSeconds / 3600) * 10) / 10;
 
-  // Calculate study streak
-  const studyStreak = calculateStudyStreak(sessions.map((s) => s.started_at));
+  // Calculate study streak (filter out null dates)
+  const studyStreak = calculateStudyStreak(
+    sessions.map((s) => s.started_at).filter((date): date is string => date !== null)
+  );
 
   // Get last study date
   const lastStudyDate = sessions.length > 0 ? sessions[0].started_at : null;
@@ -108,15 +110,13 @@ function calculateStudyStreak(studyDates: string[]): number {
   if (studyDates.length === 0) return 0;
 
   // Sort dates in descending order
-  const sortedDates = studyDates
-    .map((d) => new Date(d))
-    .sort((a, b) => b.getTime() - a.getTime());
+  const sortedDates = studyDates.map((d) => new Date(d)).sort((a, b) => b.getTime() - a.getTime());
 
   const today = new Date();
   today.setHours(0, 0, 0, 0);
 
   let streak = 0;
-  let currentDate = new Date(today);
+  const currentDate = new Date(today);
 
   for (const studyDate of sortedDates) {
     const study = new Date(studyDate);
