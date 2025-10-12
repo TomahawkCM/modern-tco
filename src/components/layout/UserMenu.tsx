@@ -10,10 +10,13 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
-import { User, Settings, HelpCircle, LogOut } from "lucide-react";
+import { User, Settings, HelpCircle, LogOut, Shield } from "lucide-react";
+import { useIsAdmin } from "@/contexts/AuthContext";
 
 export function UserMenu() {
   const router = useRouter();
+  const isAdmin = useIsAdmin();
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -35,6 +38,11 @@ export function UserMenu() {
         <DropdownMenuItem onClick={() => router.push("/settings")}>
           <Settings className="mr-2 h-4 w-4" /> Settings
         </DropdownMenuItem>
+        {isAdmin && (
+          <DropdownMenuItem onClick={() => router.push("/admin/questions")}>
+            <Shield className="mr-2 h-4 w-4 text-primary" /> Admin Dashboard
+          </DropdownMenuItem>
+        )}
         <DropdownMenuItem onClick={() => router.push("/kb")}>
           <HelpCircle className="mr-2 h-4 w-4" /> Help Center
         </DropdownMenuItem>

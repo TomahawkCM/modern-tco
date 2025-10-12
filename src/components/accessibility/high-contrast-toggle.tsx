@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Contrast } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 const STORAGE_KEY = "tco-high-contrast";
 
@@ -38,7 +39,11 @@ export function HighContrastToggle() {
       size="icon"
       aria-pressed={enabled}
       aria-label={enabled ? "Disable high contrast" : "Enable high contrast"}
-      className="text-foreground hover:bg-white/10"
+      className={cn(
+        "relative z-50 text-foreground hover:bg-white/10 transition-all duration-200",
+        "active:scale-95 pointer-events-auto",
+        enabled && "bg-primary/20 ring-2 ring-primary/50"
+      )}
       onClick={() => setEnabled((v) => !v)}
     >
       <Contrast className="h-5 w-5" />

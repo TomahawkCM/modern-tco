@@ -33,9 +33,20 @@ interface AuthContextType extends AuthState {
     firstName?: string;
     lastName?: string;
   }) => Promise<{ error: AuthError | null }>;
+  isAdmin: boolean;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
+
+/** Helper function to check if email is in admin list */
+function checkIsAdmin(email: string | null | undefined): boolean {
+  if (!email) return false;
+  const adminEmails = (process.env.NEXT_PUBLIC_ADMIN_EMAILS || "")
+    .split(",")
+    .map((e) => e.trim().toLowerCase())
+    .filter(Boolean);
+  return adminEmails.includes(email.toLowerCase());
+}
 
 export function useAuth() {
   const context = useContext(AuthContext);
@@ -43,6 +54,12 @@ export function useAuth() {
     throw new Error("useAuth must be used within an AuthProvider");
   }
   return context;
+}
+
+/** Hook to check if current user is an admin */
+export function useIsAdmin(): boolean {
+  const { user } = useAuth();
+  return checkIsAdmin(user?.email);
 }
 
 interface AuthProviderProps {
@@ -242,6 +259,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     signOut,
     resetPassword,
     updateProfile,
+    isAdmin: checkIsAdmin(state.user?.email),
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

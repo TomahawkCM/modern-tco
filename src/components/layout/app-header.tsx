@@ -148,8 +148,10 @@ export function AppHeader({ onMenuClick, currentScore = 0, studyStreak = 0 }: Ap
             </div>
 
             {/* Accessibility toggles */}
-            <HighContrastToggle />
-            <LargeTextToggle />
+            <div className="relative z-50 flex items-center gap-2 pointer-events-auto">
+              <HighContrastToggle />
+              <LargeTextToggle />
+            </div>
 
             {/* Settings */}
             <div className="flex items-center">

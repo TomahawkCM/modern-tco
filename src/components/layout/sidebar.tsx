@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useIncorrectAnswers } from "@/contexts/IncorrectAnswersContext";
 import { useStudySession } from "@/contexts/StudySessionContext";
+import { useIsAdmin } from "@/contexts/AuthContext";
 import { StudyProgressPanel } from "@/components/study/StudyProgressPanel";
 import {
   BookOpen,
@@ -30,6 +31,9 @@ import {
   StickyNote,
   ChevronDown,
   Brain,
+  Plus,
+  Upload,
+  Sparkles,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
@@ -55,6 +59,7 @@ export function Sidebar({ isOpen = true, onClose, className }: SidebarProps) {
   const router = useRouter();
   const { getTotalIncorrectCount } = useIncorrectAnswers();
   const studySession = useStudySession();
+  const isAdmin = useIsAdmin();
   const [expandedItems, setExpandedItems] = useState<string[]>(["study", "domains"]);
   const [activeItem, setActiveItem] = useState("dashboard");
   const [isStudyProgressExpanded, setIsStudyProgressExpanded] = useState(true);
@@ -168,6 +173,42 @@ export function Sidebar({ isOpen = true, onClose, className }: SidebarProps) {
       icon: BarChart3,
       href: "/analytics",
     },
+    ...(isAdmin
+      ? [
+          {
+            id: "admin",
+            label: "Admin",
+            icon: Shield,
+            badge: "ADMIN",
+            items: [
+              {
+                id: "question-bank",
+                label: "Question Bank",
+                icon: FileText,
+                href: "/admin/questions",
+              },
+              {
+                id: "create-question",
+                label: "Create Question",
+                icon: Plus,
+                href: "/admin/questions/new",
+              },
+              {
+                id: "bulk-import",
+                label: "Bulk Import",
+                icon: Upload,
+                href: "/admin/questions/bulk-import",
+              },
+              {
+                id: "ai-generate",
+                label: "AI Generate",
+                icon: Sparkles,
+                href: "/admin/questions/ai-generate",
+              },
+            ],
+          },
+        ]
+      : []),
     {
       id: "settings",
       label: "Settings",

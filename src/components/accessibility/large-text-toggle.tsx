@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Type } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 const STORAGE_KEY = "tco-large-text";
 
@@ -41,7 +42,11 @@ export function LargeTextToggle() {
       size="icon"
       aria-pressed={enabled}
       aria-label={enabled ? "Disable large text" : "Enable large text"}
-      className="text-foreground hover:bg-white/10"
+      className={cn(
+        "relative z-50 text-foreground hover:bg-white/10 transition-all duration-200",
+        "active:scale-95 pointer-events-auto",
+        enabled && "bg-primary/20 ring-2 ring-primary/50"
+      )}
       onClick={() => setEnabled((v) => !v)}
     >
       <Type className="h-5 w-5" />
