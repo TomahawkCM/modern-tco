@@ -7,6 +7,7 @@ type MDXComponents = {
 
 // Direct imports required for MDX - dynamic imports don't work with useMDXComponents
 // All MDX components registered globally - no explicit imports needed in .mdx files
+import Callout from "@/components/mdx/Callout";
 import InfoBox from "@/components/mdx/InfoBox";
 import MicroQuizMDX from "@/components/mdx/MicroQuizMDX";
 import MicroSection from "@/components/mdx/MicroSection";
@@ -28,6 +29,7 @@ export function useMDXComponents(components: MDXComponents = {}): MDXComponents 
   return {
     ...components,
     a: Anchor,
+    Callout,
     InfoBox,
     MicroQuizMDX,
     MicroSection,
