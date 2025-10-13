@@ -11,6 +11,8 @@ import ModuleTransition from "@/components/mdx/ModuleTransition";
 import MicroSection from "@/components/mdx/MicroSection";
 import MicroQuizMDX from "@/components/mdx/MicroQuizMDX";
 import InfoBox from "@/components/mdx/InfoBox";
+import Callout from "@/components/mdx/Callout";
+import { Steps, Step } from "@/components/mdx/Steps";
 import * as MDXReact from "@mdx-js/react";
 import * as ReactJsxRuntime from "react/jsx-runtime";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -55,6 +57,9 @@ const mdxComponents = {
   MicroSection: (props: React.ComponentProps<typeof MicroSection>) => <MicroSection {...props} />,
   MicroQuizMDX: (props: React.ComponentProps<typeof MicroQuizMDX>) => <MicroQuizMDX {...props} />,
   InfoBox: (props: React.ComponentProps<typeof InfoBox>) => <InfoBox {...props} />,
+  Callout: (props: React.ComponentProps<typeof Callout>) => <Callout {...props} />,
+  Steps: (props: React.ComponentProps<typeof Steps>) => <Steps {...props} />,
+  Step: (props: React.ComponentProps<typeof Step>) => <Step {...props} />,
 
   // Enhanced typography
   h1: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (

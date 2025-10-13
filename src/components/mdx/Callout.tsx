@@ -1,6 +1,6 @@
 import React from "react";
 
-type CalloutType = "note" | "definition" | "info" | "try" | "warning" | "tip";
+type CalloutType = "note" | "definition" | "info" | "try" | "warning" | "tip" | "caution" | "lab" | "summary" | "next";
 
 type CalloutProps = {
   type?: CalloutType;
@@ -46,6 +46,30 @@ const calloutStyles: Record<
       "border-emerald-200 bg-emerald-50 dark:border-emerald-800 dark:bg-emerald-950",
     icon: "✨",
     iconColor: "text-emerald-600 dark:text-emerald-400",
+  },
+  caution: {
+    container:
+      "border-orange-200 bg-orange-50 dark:border-orange-800 dark:bg-orange-950",
+    icon: "⚠️",
+    iconColor: "text-orange-600 dark:text-orange-400",
+  },
+  lab: {
+    container:
+      "border-teal-200 bg-teal-50 dark:border-teal-800 dark:bg-teal-950",
+    icon: "🧪",
+    iconColor: "text-teal-600 dark:text-teal-400",
+  },
+  summary: {
+    container:
+      "border-indigo-200 bg-indigo-50 dark:border-indigo-800 dark:bg-indigo-950",
+    icon: "📝",
+    iconColor: "text-indigo-600 dark:text-indigo-400",
+  },
+  next: {
+    container:
+      "border-violet-200 bg-violet-50 dark:border-violet-800 dark:bg-violet-950",
+    icon: "➡️",
+    iconColor: "text-violet-600 dark:text-violet-400",
   },
 };
 
