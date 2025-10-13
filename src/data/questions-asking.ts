@@ -1599,10 +1599,10 @@ export const askingQuestions: Question[] = [
 
 export const askingQuestionMetadata = {
   domain: TCODomain.AQ,
-  totalQuestions: 50,
+  totalQuestions: 63,
   difficultyBreakdown: {
-    beginner: 17,
-    intermediate: 22,
+    beginner: 23, // +6 from module v2 upgrade
+    intermediate: 26, // +4 from module v2 upgrade
     advanced: 11,
   },
 };
