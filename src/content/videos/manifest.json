@@ -6,19 +6,32 @@
       "slug": "asking-questions",
       "videos": [
         { "id": "asking-1", "title": "Asking Questions - Part 1", "youtubeId": "aoLJYG3lV8o" },
-        { "id": "asking-2", "title": "Asking Questions - Part 2", "youtubeId": "A7g9Y_EKmHU" }
+        { "id": "asking-2", "title": "Asking Questions - Part 2", "youtubeId": "A7g9Y_EKmHU" },
+        {
+          "id": "asking-3",
+          "title": "Tanium Ask Agent - Autonomous Endpoint Management - Tanium Tech Talks #142",
+          "youtubeId": "gyEKEjfh9sM"
+        }
       ]
     },
     {
       "slug": "refining-questions",
       "videos": [
-        { "id": "refining-1", "title": "Refining Questions & Targeting", "youtubeId": "22H_oUgPgZI" }
+        {
+          "id": "refining-1",
+          "title": "Refining Questions & Targeting",
+          "youtubeId": "22H_oUgPgZI"
+        }
       ]
     },
     {
       "slug": "taking-action",
       "videos": [
-        { "id": "taking-1", "title": "Taking Action - Packages & Actions", "youtubeId": "dP4dar1ftFg" }
+        {
+          "id": "taking-1",
+          "title": "Taking Action - Packages & Actions",
+          "youtubeId": "dP4dar1ftFg"
+        }
       ]
     },
     {
