@@ -328,7 +328,7 @@ export default function ModuleRendererLite({ moduleData }: ModuleRendererLitePro
       )}
 
       <div ref={containerRef} className="prose prose-lg prose-invert max-w-none">
-        <MDXRemote {...content} components={mdxComponents} scope={{}} options={{}} />
+        <MDXRemote {...content} components={mdxComponents} />
       </div>
 
       {frontmatter.practiceConfig?.href && (

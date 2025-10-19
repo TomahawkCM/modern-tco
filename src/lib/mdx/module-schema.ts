@@ -54,6 +54,7 @@ export const ModuleFrontmatterSchema = z.object({
       objectiveIds: z.array(z.string()),
       // Accept any string to allow lowercase values in content files
       difficulty: z.string(),
+      href: z.string().min(1, "Practice link is required"),
     })
     .optional(),
 
