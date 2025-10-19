@@ -7,7 +7,7 @@
  *
  * Usage:
  *   npx tsx scripts/bulk-import-flashcards.ts <file-path>
- *   npx tsx scripts/bulk-import-flashcards.ts src/data/generated/generated-flashcards-*.ts
+ *   npx tsx scripts/bulk-import-flashcards.ts data-archive/generated/generated-flashcards-*.ts
  *   npx tsx scripts/bulk-import-flashcards.ts --all
  *
  * Features:
@@ -262,7 +262,7 @@ async function main() {
     console.error('  npx tsx scripts/bulk-import-flashcards.ts <file-path>');
     console.error('  npx tsx scripts/bulk-import-flashcards.ts --all');
     console.error('\nExamples:');
-    console.error('  npx tsx scripts/bulk-import-flashcards.ts src/data/generated/generated-flashcards-asking_questions-medium-2025-10-10.ts');
+    console.error('  npx tsx scripts/bulk-import-flashcards.ts data-archive/generated/generated-flashcards-asking_questions-medium-2025-10-10.ts');
     console.error('  npx tsx scripts/bulk-import-flashcards.ts --all');
     process.exit(1);
   }
@@ -276,7 +276,7 @@ async function main() {
     // Handle --all flag
     if (args[0] === '--all') {
       console.log('🔍 Finding all generated flashcard files...');
-      const generatedDir = path.join(__dirname, '..', 'src', 'data', 'generated');
+      const generatedDir = path.join(__dirname, '..', 'data-archive', 'generated');
       const pattern = path.join(generatedDir, 'generated-flashcards-*.ts');
       filePaths = glob.sync(pattern);
 

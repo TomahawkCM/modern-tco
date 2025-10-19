@@ -95,14 +95,9 @@ export function QuestionsProvider({ children }: { children: React.ReactNode }) {
       setQuestions(loadedQuestions);
     } catch (err) {
       console.error("Failed to load questions:", err);
-      setError("Failed to load questions. Please try again.");
-      // Even on error, try to have some questions available
-      try {
-        const { questionBank } = await import("@/data/sample-questions");
-        setQuestions(questionBank);
-      } catch {
-        setQuestions([]);
-      }
+      setError("Failed to load questions. Please refresh the page or contact support.");
+      // No fallback to static data to prevent bundle bloat
+      setQuestions([]);
     } finally {
       setLoading(false);
     }

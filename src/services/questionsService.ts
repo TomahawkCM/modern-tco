@@ -340,43 +340,40 @@ export function subscribeToQuestions(callback: (payload: any) => void) {
 }
 
 /**
- * Load questions with fallback to static data
- * This is a transitional function that tries Supabase first,
- * then falls back to static data if needed
+ * Load questions from Supabase database only
+ * No fallback to static data to prevent bundle bloat
  */
 export async function loadQuestionsWithFallback(): Promise<Question[]> {
   try {
-    // Try to fetch from Supabase first
+    // Fetch from Supabase database
     const questions = await fetchQuestions();
 
     if (questions.length > 0) {
-      console.log(`Loaded ${questions.length} questions from Supabase`);
+      console.log(`✅ Loaded ${questions.length} questions from Supabase database`);
       return questions;
     }
 
-    // If no questions in database, silently fall back to full imported question bank
-    // Dynamic import to avoid circular dependencies
-    const { importedQuestionBank } = await import("@/data/imported-questions-master");
-    console.log(`Falling back to imported question bank: ${importedQuestionBank.length} questions`);
-    return importedQuestionBank;
+    // Database is empty - log warning but don't fall back to static data
+    console.warn(
+      "⚠️ No questions found in database. Please run: npx tsx scripts/bulk-import-questions.ts --all"
+    );
+    return [];
   } catch (error) {
-    // Check if it's a table missing error (expected)
+    // Check if it's a table missing error
     const isTableMissing =
       error &&
       ((error as any).code === "PGRST116" ||
         (error as any).message?.includes('relation "public.questions" does not exist') ||
         (error as any).message?.includes("table 'public.questions' in the schema"));
 
-    if (!isTableMissing) {
-      // Only log unexpected errors
-      console.error("Unexpected error loading questions:", (error as Error).message);
+    if (isTableMissing) {
+      console.warn(
+        "⚠️ Questions table does not exist in database. Please run Supabase migrations."
+      );
+    } else {
+      console.error("❌ Error loading questions from database:", (error as Error).message);
     }
 
-    // Fall back to full imported question bank
-    const { importedQuestionBank } = await import("@/data/imported-questions-master");
-    console.log(
-      `Emergency fallback to imported question bank: ${importedQuestionBank.length} questions`
-    );
-    return importedQuestionBank;
+    return [];
   }
 }

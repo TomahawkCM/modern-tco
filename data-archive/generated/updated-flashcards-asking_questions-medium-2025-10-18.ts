@@ -1,0 +1,460 @@
+import type { CreateFlashcardLibraryCard } from "@/types/flashcard-library";
+
+/**
+ * Updated Medium Flashcards - Asking Questions (Domain 1)
+ *
+ * Domain: asking_questions
+ * Difficulty: medium
+ * Count: 27 (removed 1 wrong-domain card)
+ * Updated: 2025-10-18
+ * Spec Kit Compliant: YES
+ * Based on: Phase 5 navigation transformation methodology
+ *
+ * Changes from original (2025-10-11):
+ * - Removed 1 navigation-domain card (wrong module!)
+ * - Updated all cards for conversational tone and analogies
+ * - Enhanced hints with practical context
+ * - Fixed difficulty levels (removed easy-marked cards or upgraded them)
+ * - Added "Why this matters" elements to complex concepts
+ * - Updated study guide references to tco-study-path format
+ */
+
+export const generatedFlashcards: CreateFlashcardLibraryCard[] = [
+  // ===== QUESTION SYNTAX CARDS (5) =====
+  {
+    front: "How do you ask questions in Tanium using natural language?",
+    back: "Think of it like talking to a computer the way you'd talk to a person. You say what information you want and which computers to ask. For example: 'Get Computer Name from all machines' or 'Get Operating System from Windows computers.' It's sentence-like, not code!",
+    hint: "Think about how you'd ask a friend a question - Tanium works the same way...",
+    domain: "asking_questions",
+    category: "syntax",
+    difficulty: "medium",
+    tags: [
+      "natural-language",
+      "question-syntax",
+      "query-structure"
+    ],
+    study_guide_ref: "tco-study-path/asking_questions/question-syntax",
+    source: "ai_generated"
+  },
+  {
+    front: "What's the format for building a natural language question with a sensor?",
+    back: "Use the pattern: [Action] [Sensor] from [Targets]. For example: 'Get Computer Name from all machines' or 'Get IP Address from laptops'. The action is usually 'Get', the sensor is what data you want, and targets are which computers to ask.",
+    hint: "Think [Action] [What you want] from [Who you're asking]...",
+    domain: "asking_questions",
+    category: "syntax",
+    difficulty: "medium",
+    tags: [
+      "natural-language-formatting",
+      "sensor-queries",
+      "query-formatting",
+      "question-pattern"
+    ],
+    study_guide_ref: "tco-study-path/asking_questions/question-syntax",
+    source: "ai_generated"
+  },
+  {
+    front: "How do you use the 'IP Address' sensor in a question?",
+    back: "The IP Address sensor grabs the network address of each computer. Use it like: 'Get IP Address from all machines' or 'Get IP Address from Windows computers'. Super useful for network troubleshooting or finding machines on specific subnets!",
+    hint: "Think about what identifies a computer on your network...",
+    domain: "asking_questions",
+    category: "syntax",
+    difficulty: "medium",
+    tags: [
+      "ip-address-sensor",
+      "query-examples",
+      "network-management"
+    ],
+    study_guide_ref: "tco-study-path/asking_questions/common-sensors",
+    source: "ai_generated"
+  },
+  {
+    front: "When would you use the 'Computer Name' sensor and what should you watch out for?",
+    back: "Use Computer Name to identify specific machines (like 'Get Computer Name from all machines'). Watch out for: (1) Naming conventions (do names include location codes?), (2) Potential duplicates (two machines named 'PC-001'), (3) Case sensitivity in filters. Always test first!",
+    hint: "Think about what makes each computer unique in your network...",
+    domain: "asking_questions",
+    category: "syntax",
+    difficulty: "medium",
+    tags: [
+      "computer-name-sensor",
+      "naming-conventions",
+      "accuracy",
+      "best-practices"
+    ],
+    study_guide_ref: "tco-study-path/asking_questions/common-sensors",
+    source: "ai_generated"
+  },
+  {
+    front: "Why is understanding a sensor's data type important?",
+    back: "Data types determine how you can filter and analyze results! String sensors (like Computer Name) let you use 'contains' or 'starts with'. Number sensors (like Disk Space) let you use '>' or '<'. Date sensors let you compare timestamps. Wrong data type assumptions = broken questions!",
+    hint: "Think about the difference between searching names vs numbers...",
+    domain: "asking_questions",
+    category: "syntax",
+    difficulty: "medium",
+    tags: [
+      "data-types",
+      "sensor-outputs",
+      "result-interpretation",
+      "filtering"
+    ],
+    study_guide_ref: "tco-study-path/asking_questions/sensor-library",
+    source: "ai_generated"
+  },
+
+  // ===== SENSOR LIBRARY CARDS (4) =====
+  {
+    front: "What is the Tanium sensor library and why should you use it?",
+    back: "Think of it like a toolbox of 500+ data collectors. Instead of creating sensors from scratch, you grab pre-built ones (CPU usage, installed software, running processes, etc.). These are tested, optimized, and updated by Tanium. Why reinvent the wheel?",
+    hint: "Think about the advantage of using pre-built tools vs building your own...",
+    domain: "asking_questions",
+    category: "terminology",
+    difficulty: "medium",
+    tags: [
+      "sensor-library",
+      "predefined-sensors",
+      "endpoint-data",
+      "efficiency"
+    ],
+    study_guide_ref: "tco-study-path/asking_questions/sensor-library",
+    source: "ai_generated"
+  },
+  {
+    front: "Why should you use existing sensors instead of creating custom ones?",
+    back: "Three big reasons: (1) SPEED - Pre-built sensors are ready to use NOW, (2) ACCURACY - They're already tested and validated, (3) UPDATES - Tanium keeps them current with new OS versions and threats. Only create custom sensors when you absolutely need data that doesn't exist!",
+    hint: "Think about why you'd use a pre-built app vs coding one yourself...",
+    domain: "asking_questions",
+    category: "best_practices",
+    difficulty: "medium",
+    tags: [
+      "existing-sensors",
+      "question-construction",
+      "data-accuracy",
+      "efficiency"
+    ],
+    study_guide_ref: "tco-study-path/asking_questions/sensor-library",
+    source: "ai_generated"
+  },
+  {
+    front: "How does the version of a sensor affect your question results?",
+    back: "Sensor versions = software updates for your data collectors. Newer versions might: (1) Support new OS releases (Windows 11, macOS 14), (2) Fix bugs in data collection, (3) Add new detection capabilities. Old sensor version = might miss new threats or return incomplete data!",
+    hint: "Think about why you update your phone apps - same reason!",
+    domain: "asking_questions",
+    category: "terminology",
+    difficulty: "medium",
+    tags: [
+      "sensor-versions",
+      "question-results",
+      "data-collection",
+      "maintenance"
+    ],
+    study_guide_ref: "tco-study-path/asking_questions/sensor-library",
+    source: "ai_generated"
+  },
+  {
+    front: "When should you consider creating a custom sensor in Tanium?",
+    back: "Only create custom sensors when: (1) The data you need doesn't exist in the library, (2) You need very specific business logic, (3) You've checked for similar sensors first! Also consider: How often does this data change? What's the performance impact? Keep it simple and document it well.",
+    hint: "Think about the 'buy vs build' decision in software...",
+    domain: "asking_questions",
+    category: "best_practices",
+    difficulty: "medium",
+    tags: [
+      "custom-sensors",
+      "sensor-creation",
+      "performance-impact",
+      "decision-making"
+    ],
+    study_guide_ref: "tco-study-path/asking_questions/advanced-techniques",
+    source: "ai_generated"
+  },
+
+  // ===== SAVED QUESTIONS CARDS (4) =====
+  {
+    front: "What are Saved Questions and when should you use them?",
+    back: "Saved Questions are like bookmarks for queries you run repeatedly. Instead of retyping 'Get Installed Applications from all machines' every day, save it once and reuse it! Great for: Daily security checks, compliance reports, recurring investigations. Save 5-10 minutes every time!",
+    hint: "Think about bookmarks in your browser - same concept!",
+    domain: "asking_questions",
+    category: "terminology",
+    difficulty: "medium",
+    tags: [
+      "saved-questions",
+      "query-reuse",
+      "efficiency",
+      "time-saving"
+    ],
+    study_guide_ref: "tco-study-path/asking_questions/saved-questions",
+    source: "ai_generated"
+  },
+  {
+    front: "Where do you manage your Saved Questions and what can you do with them?",
+    back: "Go to the Interact module → Saved Questions section. You can: (1) Organize into folders by topic, (2) Edit questions if requirements change, (3) Delete outdated ones, (4) Share with team members, (5) Schedule to run automatically. Keep them organized like files on your computer!",
+    hint: "Think about where you'd manage your browser bookmarks...",
+    domain: "asking_questions",
+    category: "best_practices",
+    difficulty: "medium",
+    tags: [
+      "saved-questions",
+      "interact-module",
+      "question-management",
+      "organization"
+    ],
+    study_guide_ref: "tco-study-path/asking_questions/saved-questions",
+    source: "ai_generated"
+  },
+  {
+    front: "Why is organizing your Saved Questions important?",
+    back: "Imagine 200+ saved questions with no folders or naming system - nightmare! Good organization: (1) SPEED - Find the right question in seconds, (2) TEAMWORK - Others can find your questions, (3) MAINTENANCE - Easy to spot outdated queries. Use folders like: Security Checks, Compliance, Patching, Daily Tasks.",
+    hint: "Think about finding one email among 5,000 - organization matters!",
+    domain: "asking_questions",
+    category: "best_practices",
+    difficulty: "medium",
+    tags: [
+      "saved-questions",
+      "organization",
+      "operational-efficiency",
+      "team-collaboration"
+    ],
+    study_guide_ref: "tco-study-path/asking_questions/saved-questions",
+    source: "ai_generated"
+  },
+  {
+    front: "How do Saved Questions improve your team's efficiency?",
+    back: "Three ways: (1) STANDARDIZATION - Everyone uses the same proven query for 'Show unpatched servers', (2) SPEED - No retyping, just click and run, (3) KNOWLEDGE SHARING - Senior analysts share their best questions with the team. Result: 30-50% faster daily tasks!",
+    hint: "Think about templates at work - they make everyone faster and consistent...",
+    domain: "asking_questions",
+    category: "best_practices",
+    difficulty: "medium",
+    tags: [
+      "saved-questions",
+      "operational-efficiency",
+      "standardization",
+      "team-productivity"
+    ],
+    study_guide_ref: "tco-study-path/asking_questions/saved-questions",
+    source: "ai_generated"
+  },
+
+  // ===== BEST PRACTICES CARDS (7) =====
+  {
+    front: "What are the three golden rules for building good Tanium questions?",
+    back: "1) BE SPECIFIC - 'Get Installed Applications' is better than 'Get Software'. 2) USE EXISTING SENSORS - Don't reinvent the wheel! 3) TEST SMALL FIRST - Run on 10 machines before asking 10,000. Think: Clear → Reuse → Verify.",
+    hint: "Think about the recipe for a good Google search, same principles...",
+    domain: "asking_questions",
+    category: "best_practices",
+    difficulty: "medium",
+    tags: [
+      "question-construction",
+      "clarity",
+      "sensor-utilization",
+      "testing"
+    ],
+    study_guide_ref: "tco-study-path/asking_questions/best-practices",
+    source: "ai_generated"
+  },
+  {
+    front: "Why should you test questions on a small group of computers first?",
+    back: "Testing small (10-50 machines) before going big prevents disasters! You'll catch: (1) Syntax errors, (2) Unexpected results (wrong sensor?), (3) Performance issues (query too slow?), (4) Targeting mistakes (hitting wrong machines!). Fix problems before impacting 10,000 endpoints!",
+    hint: "Think about testing a new recipe on family before serving at a wedding...",
+    domain: "asking_questions",
+    category: "best_practices",
+    difficulty: "medium",
+    tags: [
+      "testing-questions",
+      "efficiency",
+      "broad-deployment",
+      "risk-mitigation"
+    ],
+    study_guide_ref: "tco-study-path/asking_questions/best-practices",
+    source: "ai_generated"
+  },
+  {
+    front: "How do you refine a question that's not giving you the results you need?",
+    back: "The refining process: (1) Check your sensor - Is 'Running Processes' better than 'Installed Applications'?, (2) Add filters - Narrow to Windows 10 only?, (3) Adjust syntax - More specific keywords?, (4) Check targeting - Wrong computer group? Like tuning a radio to get a clear signal!",
+    hint: "Think about adjusting a Google search when you don't find what you want...",
+    domain: "asking_questions",
+    category: "best_practices",
+    difficulty: "medium",
+    tags: [
+      "question-refinement",
+      "precise-results",
+      "filters",
+      "troubleshooting"
+    ],
+    study_guide_ref: "tco-study-path/asking_questions/refining-questions",
+    source: "ai_generated"
+  },
+  {
+    front: "How does narrowing your question scope improve performance?",
+    back: "Narrower scope = faster results! Instead of 'Get all data from all 50,000 machines', try: 'Get Patch Status from Windows Servers in Building A'. You'll go from 5 minutes to 30 seconds! Focus on: (1) Specific sensors only, (2) Relevant computer groups, (3) Recent data (not full history).",
+    hint: "Think about searching your entire hard drive vs one folder...",
+    domain: "asking_questions",
+    category: "best_practices",
+    difficulty: "medium",
+    tags: [
+      "question-scope",
+      "performance-improvement",
+      "efficient-results",
+      "targeting"
+    ],
+    study_guide_ref: "tco-study-path/asking_questions/performance-optimization",
+    source: "ai_generated"
+  },
+  {
+    front: "How do you make sure your question targets the right computers?",
+    back: "Three-step verification: (1) USE FILTERS - Be specific: 'Windows 10 laptops in Sales department', (2) TEST SMALL - Run on 5 machines first, verify they're correct ones, (3) CHECK RESULTS - Do the computer names match what you expected? Like aiming before shooting!",
+    hint: "Think about addressing an email - check recipients before sending...",
+    domain: "asking_questions",
+    category: "best_practices",
+    difficulty: "medium",
+    tags: [
+      "targeting-endpoints",
+      "sensor-criteria",
+      "testing-verification",
+      "accuracy"
+    ],
+    study_guide_ref: "tco-study-path/asking_questions/targeting",
+    source: "ai_generated"
+  },
+
+  // ===== RESULT INTERPRETATION CARDS (4) =====
+  {
+    front: "What are the key steps for interpreting question results?",
+    back: "The analysis process: (1) SCAN - Does the data look complete? Missing machines?, (2) FILTER - Apply criteria to focus on problems (show only 'Critical' status), (3) ANALYZE - Look for patterns or outliers, (4) ACT - Refine the question or take action. Like detective work!",
+    hint: "Think about reading a dashboard - what catches your attention first?",
+    domain: "asking_questions",
+    category: "best_practices",
+    difficulty: "medium",
+    tags: [
+      "result-interpretation",
+      "data-analysis",
+      "question-refinement",
+      "workflow"
+    ],
+    study_guide_ref: "tco-study-path/asking_questions/interpreting-results",
+    source: "ai_generated"
+  },
+  {
+    front: "Why is interpreting question results crucial for security and operations?",
+    back: "Your decisions depend on accurate data! Example: If your 'Show unpatched servers' question returns incomplete data, you might: (1) Miss vulnerable machines, (2) Get breached, (3) Fail compliance audits. Good interpretation = Informed decisions = Better security = Fewer incidents!",
+    hint: "Think about making medical decisions based on test results - accuracy matters!",
+    domain: "asking_questions",
+    category: "best_practices",
+    difficulty: "medium",
+    tags: [
+      "result-interpretation",
+      "informed-decisions",
+      "data-analysis",
+      "security"
+    ],
+    study_guide_ref: "tco-study-path/asking_questions/interpreting-results",
+    source: "ai_generated"
+  },
+  {
+    front: "How do you use filters effectively when analyzing large result sets?",
+    back: "Filters are like Excel filters for Tanium data! Use them to: (1) SEGMENT - Show only 'Critical' patch status, (2) FOCUS - Hide known good results, show problems only, (3) COMPARE - Server results vs workstation results. With 10,000 results, filters = your best friend!",
+    hint: "Think about filtering your email inbox to find important messages...",
+    domain: "asking_questions",
+    category: "best_practices",
+    difficulty: "medium",
+    tags: [
+      "filters",
+      "data-segmentation",
+      "large-datasets",
+      "analysis"
+    ],
+    study_guide_ref: "tco-study-path/asking_questions/filtering-results",
+    source: "ai_generated"
+  },
+  {
+    front: "Why is real-time querying so important in Tanium?",
+    back: "Real-time = RIGHT NOW data, not last week's cache! Critical for: (1) INCIDENTS - Is the malware still running? (2) COMPLIANCE - Which servers need patches TODAY?, (3) INVESTIGATIONS - Where did the attack spread in the last hour? Minutes matter when you're defending against threats!",
+    hint: "Think about checking your bank balance - you want the current number, not yesterday's!",
+    domain: "asking_questions",
+    category: "terminology",
+    difficulty: "medium",
+    tags: [
+      "real-time-querying",
+      "situational-awareness",
+      "incident-response",
+      "speed"
+    ],
+    study_guide_ref: "tco-study-path/asking_questions/real-time-capabilities",
+    source: "ai_generated"
+  },
+
+  // ===== TROUBLESHOOTING CARDS (3) =====
+  {
+    front: "Your Tanium question returns unexpected results. What's your troubleshooting checklist?",
+    back: "The 4-step debug process: (1) VERIFY SYNTAX - Typos? Wrong sensor name?, (2) CHECK SENSOR - Is 'Running Processes' the right choice vs 'Services'?, (3) TEST CONNECTIVITY - Are offline machines skewing results?, (4) READ DOCS - Does this sensor have quirks or requirements? Like debugging code!",
+    hint: "Think about troubleshooting a GPS when it gives wrong directions...",
+    domain: "asking_questions",
+    category: "troubleshooting",
+    difficulty: "medium",
+    tags: [
+      "troubleshooting",
+      "unexpected-results",
+      "sensor-verification",
+      "debugging"
+    ],
+    study_guide_ref: "tco-study-path/asking_questions/troubleshooting",
+    source: "ai_generated"
+  },
+  {
+    front: "A sensor isn't returning the data you expected. What should you check?",
+    back: "The sensor debugging checklist: (1) RIGHT SENSOR? - 'Installed Applications' vs 'Running Processes' different!, (2) CORRECT SYNTAX? - Typo in sensor name?, (3) ENDPOINT HEALTH? - Are those machines even online?, (4) SENSOR DOCS? - Some sensors need admin rights or specific OS versions!",
+    hint: "Think about why a tool isn't working - wrong tool? broken? using it wrong?",
+    domain: "asking_questions",
+    category: "troubleshooting",
+    difficulty: "medium",
+    tags: [
+      "unexpected-sensor-data",
+      "question-validation",
+      "sensor-documentation",
+      "debugging"
+    ],
+    study_guide_ref: "tco-study-path/asking_questions/troubleshooting",
+    source: "ai_generated"
+  },
+  {
+    front: "How does endpoint communication status affect your question results?",
+    back: "Offline machines = missing data = skewed results! Example: You ask 'Get Patch Status from all servers'. If 20% are offline, your report says '80% patched' when reality is '64% patched'! ALWAYS check: (1) How many responded?, (2) Which machines are missing?, (3) Are critical machines offline?",
+    hint: "Think about a survey where 20% of people didn't respond - incomplete picture!",
+    domain: "asking_questions",
+    category: "troubleshooting",
+    difficulty: "medium",
+    tags: [
+      "communication-status",
+      "endpoint-availability",
+      "data-skew",
+      "accuracy"
+    ],
+    study_guide_ref: "tco-study-path/asking_questions/connectivity-issues",
+    source: "ai_generated"
+  }
+];
+
+export const askingQuestionsMediumFlashcardsMetadata = {
+  domain: "asking_questions",
+  source: "updated_for_spec_kit_compliance",
+  difficulty: "medium",
+  totalCards: 27,
+  questionSyntaxCards: 5,
+  sensorLibraryCards: 4,
+  savedQuestionsCards: 4,
+  bestPracticesCards: 7,
+  resultInterpretationCards: 4,
+  troubleshootingCards: 3,
+  updatedAt: "2025-10-18",
+  specKitCompliant: true,
+  basedOn: "phase_5_navigation_transformation",
+  changes: [
+    "Removed 1 navigation-domain card (Card 2: How to navigate to Interact - wrong domain!)",
+    "Updated all 27 remaining cards with conversational tone",
+    "Added analogies to all term and concept cards",
+    "Enhanced hints with practical, contextual guidance",
+    "Fixed difficulty levels (removed easy-marked cards from medium set)",
+    "Updated all study guide references to tco-study-path format",
+    "Added 'Why this matters' context to complex concepts",
+    "Organized into clear categories for easier navigation"
+  ]
+};
+
+export default generatedFlashcards;
