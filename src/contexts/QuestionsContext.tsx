@@ -116,12 +116,16 @@ export function QuestionsProvider({ children }: { children: React.ReactNode }) {
     }
 
     let unsub: { unsubscribe: () => void } | null = null;
-    loadInitialQuestions();
+    void loadInitialQuestions().catch((error) => {
+      console.error('Failed to load initial questions:', error);
+    });
 
     // Subscribe to real-time updates only when loading is enabled
     unsub = subscribeToQuestions((payload) => {
-      console.log("Questions updated:", payload);
-      loadInitialQuestions();
+      console.warn("Questions updated:", payload);
+      void loadInitialQuestions().catch((error) => {
+        console.error('Failed to reload questions:', error);
+      });
     });
 
     return () => {
@@ -416,6 +420,12 @@ export function QuestionsProvider({ children }: { children: React.ReactNode }) {
       [QuestionCategory.TROUBLESHOOTING]: 0,
       [QuestionCategory.PRACTICAL_SCENARIOS]: 0,
       [QuestionCategory.LINEAR_CHAIN]: 0,
+      [QuestionCategory.BEST_PRACTICES]: 0,
+      [QuestionCategory.ADVANCED_CONCEPTS]: 0,
+      [QuestionCategory.QUESTION_CONSTRUCTION]: 0,
+      [QuestionCategory.QUESTION_SHARING]: 0,
+      [QuestionCategory.PERFORMANCE_OPTIMIZATION]: 0,
+      [QuestionCategory.QUESTION_PERFORMANCE_OPTIMIZATION]: 0,
     };
 
     if (questions && Array.isArray(questions)) {

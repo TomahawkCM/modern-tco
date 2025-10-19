@@ -10,12 +10,15 @@ export default function KbPage() {
   const [summary, setSummary] = useState<{ hasKbTables: boolean; modulesCount: number; questionsCount: number; byDomain: Record<string, number>; } | null>(null);
 
   useEffect(() => {
-    (async () => {
+    void (async () => {
       const [mods, sum] = await Promise.all([getKbModules(), getKbSummary()]);
       setModules(mods);
       setSummary(sum);
       setLoading(false);
-    })();
+    })().catch((error) => {
+      console.error('Failed to load KB data:', error);
+      setLoading(false);
+    });
   }, []);
 
   const Card = ({ className, children }: { className?: string; children: React.ReactNode }) => (

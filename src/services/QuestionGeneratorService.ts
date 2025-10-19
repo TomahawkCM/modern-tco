@@ -301,6 +301,24 @@ Focus on real-world use cases, business scenarios, and practical application of 
 
       [QuestionCategory.LINEAR_CHAIN]: `
 Focus on Linear Chain Architecture concepts, question flow, and data processing.`,
+
+      [QuestionCategory.BEST_PRACTICES]: `
+Focus on industry best practices, recommended approaches, and optimal usage patterns.`,
+
+      [QuestionCategory.ADVANCED_CONCEPTS]: `
+Focus on advanced topics, complex scenarios, and deep technical understanding.`,
+
+      [QuestionCategory.QUESTION_CONSTRUCTION]: `
+Focus on how to construct effective Tanium questions, syntax, and query building.`,
+
+      [QuestionCategory.QUESTION_SHARING]: `
+Focus on collaboration features, sharing questions, and team workflows.`,
+
+      [QuestionCategory.PERFORMANCE_OPTIMIZATION]: `
+Focus on optimization techniques, performance tuning, and efficiency improvements.`,
+
+      [QuestionCategory.QUESTION_PERFORMANCE_OPTIMIZATION]: `
+Focus on optimizing question performance, query efficiency, and resource usage.`,
     };
 
     return contexts[category];

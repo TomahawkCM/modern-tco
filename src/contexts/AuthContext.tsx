@@ -5,7 +5,7 @@ import type { AuthError, Session, User } from "@supabase/supabase-js";
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
 
 /** Minimal shape used to build payloads */
-type UsersRow = {
+type _UsersRow = {
   id: string;
   email: string | null;
   first_name: string | null;
@@ -69,15 +69,18 @@ export function useIsAdmin(): boolean {
 
       try {
         const response = await fetch('/api/auth/check-admin');
-        const data = await response.json();
-        setIsAdmin(data.isAdmin || false);
+        const data: { isAdmin?: boolean } = await response.json();
+        setIsAdmin(data.isAdmin ?? false);
       } catch (error) {
         console.error('Failed to check admin status:', error);
         setIsAdmin(false);
       }
     }
 
-    fetchAdminStatus();
+    void fetchAdminStatus().catch((error) => {
+      console.error('Failed to fetch admin status:', error);
+      setIsAdmin(false);
+    });
   }, [user]);
 
   return isAdmin;
@@ -125,12 +128,14 @@ export function AuthProvider({ children }: AuthProviderProps) {
       }
     };
 
-    getInitialSession();
+    void getInitialSession().catch((error) => {
+      console.error('Failed to get initial session:', error);
+    });
 
     const {
       data: { subscription },
-    } = supabase.auth.onAuthStateChange(async (event, session) => {
-      console.log("Auth state changed:", event, session?.user?.id);
+    } = supabase.auth.onAuthStateChange((event, session) => {
+      console.warn("Auth state changed:", event, session?.user.id);
 
       setState((prev) => ({
         ...prev,
@@ -204,8 +209,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
         password,
         options: {
           data: {
-            first_name: options?.firstName || "",
-            last_name: options?.lastName || "",
+            first_name: options?.firstName ?? "",
+            last_name: options?.lastName ?? "",
           },
         },
       });
@@ -233,7 +238,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
   const resetPassword = async (email: string) => {
     try {
-      const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+      const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
       const { error } = await supabase.auth.resetPasswordForEmail(email, {
         redirectTo: `${window.location.origin}${basePath}/auth/reset-password`,
       });

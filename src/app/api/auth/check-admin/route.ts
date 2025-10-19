@@ -1,4 +1,5 @@
-import { NextRequest, NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
+import { NextResponse } from "next/server";
 import { supabase } from "@/lib/supabase";
 
 /**
@@ -9,18 +10,18 @@ import { supabase } from "@/lib/supabase";
  *   const response = await fetch('/api/auth/check-admin');
  *   const { isAdmin } = await response.json();
  */
-export async function GET(request: NextRequest) {
+export async function GET(_request: NextRequest) {
   try {
     // Get authenticated user from Supabase session
     const { data: { user }, error: authError } = await supabase.auth.getUser();
 
-    if (authError || !user || !user.email) {
+    if (authError || !user?.email) {
       return NextResponse.json({ isAdmin: false }, { status: 200 });
     }
 
     // Server-side admin email check (NOT exposed to client)
     // Uses non-public environment variable
-    const adminEmails = (process.env.ADMIN_EMAILS || "")
+    const adminEmails = (process.env.ADMIN_EMAILS ?? "")
       .split(",")
       .map((e) => e.trim().toLowerCase())
       .filter(Boolean);

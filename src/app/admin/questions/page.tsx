@@ -18,12 +18,14 @@ export default function AdminQuestionsPage() {
 
   useEffect(() => {
     let active = true;
-    (async () => {
+    void (async () => {
       const list = await contentService.list();
       if (!active) return;
       setQuestions(list);
       if (list.length) setCurrent(list[0] || null);
-    })();
+    })().catch((error) => {
+      console.error('Failed to load questions:', error);
+    });
     return () => { active = false; };
   }, []);
 
@@ -81,7 +83,7 @@ export default function AdminQuestionsPage() {
                     </button>
                     <div className="flex items-center gap-2">
                       {q.domain && <Badge variant="secondary">{q.domain}</Badge>}
-                      <Button size="sm" variant="destructive" onClick={() => remove(q.id)}>Delete</Button>
+                      <Button size="sm" variant="destructive" onClick={() => void remove(q.id)}>Delete</Button>
                     </div>
                   </li>
                 ))}
