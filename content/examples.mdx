@@ -1,0 +1,48 @@
+---
+title: "MDX Component Usage Examples"
+---
+
+import Callout from '@/components/mdx/Callout'
+import InfoBox from '@/components/mdx/InfoBox'
+import MicroQuizMDX from '@/components/mdx/MicroQuizMDX'
+import PracticeButton from '@/components/mdx/PracticeButton'
+import Steps from '@/components/mdx/Steps'
+
+# MDX Examples
+
+<Callout type="tip" title="Analogy Anchor">
+Tanium is like a city-wide radio network: one message reaches every station instantly.
+</Callout>
+
+<InfoBox title="Key Term" theme="definition">
+**Endpoint** — Any computer, server, or device managed by Tanium. Think of it as a citizen in your city.
+</InfoBox>
+
+<Steps>
+  <Steps.Step title="Open the Console">
+    Sign into Tanium and choose **Interact** from the main navigation.
+  </Steps.Step>
+  <Steps.Step title="Ask your first question">
+    Select *Question Builder*, pick **Computer Name**, then click **Ask Question**.
+  </Steps.Step>
+  <Steps.Step title="Review live results">
+    Watch the response list populate across all reachable endpoints.
+  </Steps.Step>
+</Steps>
+
+<MicroQuizMDX
+  id="module00-why-01"
+  question="Why is Tanium compared to a city-wide radio?"
+  answers={[
+    "Because it delivers updates simultaneously across the environment",
+    "Because it relies on satellites for coverage",
+    "Because it only works for small teams",
+    "Because it requires manual polling"
+  ]}
+  correct={0}
+  rationale="Tanium’s linear chain and peer-to-peer communications let a single request reach every endpoint quickly, similar to one radio broadcast reaching every listener."
+/>
+
+<PracticeButton href="/practice/first-question">
+  Try the guided "Ask Your First Question" walkthrough
+</PracticeButton>
