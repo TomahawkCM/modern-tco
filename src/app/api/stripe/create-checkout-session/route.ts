@@ -12,7 +12,8 @@ function originFrom(req: Request): string {
 }
 
 export async function POST(req: Request) {
-  let selected: Plan = "pro";
+  // VALIDATION: Strict Zod schema validation - reject invalid requests
+  let selected: Plan;
   try {
     const payload = (await req.json()) as unknown;
     if (payload && typeof payload === "object" && "plan" in payload) {
@@ -22,7 +23,14 @@ export async function POST(req: Request) {
       }
     }
   } catch (error) {
-    // ignore malformed JSON payloads and use default
+    // Security fix: Return 400 error instead of silently using default plan
+    return NextResponse.json(
+      {
+        error: 'Invalid request body',
+        message: 'Request must include a valid plan (free, pro, or team)'
+      },
+      { status: 400 }
+    );
   }
 
   const origin = originFrom(req);

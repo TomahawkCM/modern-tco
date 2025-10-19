@@ -38,15 +38,11 @@ interface AuthContextType extends AuthState {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-/** Helper function to check if email is in admin list */
-function checkIsAdmin(email: string | null | undefined): boolean {
-  if (!email) return false;
-  const adminEmails = (process.env.NEXT_PUBLIC_ADMIN_EMAILS || "")
-    .split(",")
-    .map((e) => e.trim().toLowerCase())
-    .filter(Boolean);
-  return adminEmails.includes(email.toLowerCase());
-}
+/**
+ * Security Fix: Removed client-side admin check
+ * Admin status is now verified server-side via /api/auth/check-admin
+ * This prevents exposing admin email list in browser JavaScript bundle
+ */
 
 export function useAuth() {
   const context = useContext(AuthContext);
@@ -56,10 +52,35 @@ export function useAuth() {
   return context;
 }
 
-/** Hook to check if current user is an admin */
+/**
+ * Hook to check if current user is an admin
+ * Security Fix: Uses server-side API instead of client-side check
+ */
 export function useIsAdmin(): boolean {
   const { user } = useAuth();
-  return checkIsAdmin(user?.email);
+  const [isAdmin, setIsAdmin] = useState(false);
+
+  useEffect(() => {
+    async function fetchAdminStatus() {
+      if (!user) {
+        setIsAdmin(false);
+        return;
+      }
+
+      try {
+        const response = await fetch('/api/auth/check-admin');
+        const data = await response.json();
+        setIsAdmin(data.isAdmin || false);
+      } catch (error) {
+        console.error('Failed to check admin status:', error);
+        setIsAdmin(false);
+      }
+    }
+
+    fetchAdminStatus();
+  }, [user]);
+
+  return isAdmin;
 }
 
 interface AuthProviderProps {
@@ -259,7 +280,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
     signOut,
     resetPassword,
     updateProfile,
-    isAdmin: checkIsAdmin(state.user?.email),
+    // Security: Admin check moved to server-side API (use useIsAdmin() hook)
+    isAdmin: false,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

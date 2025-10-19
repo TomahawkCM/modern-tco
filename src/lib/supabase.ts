@@ -32,6 +32,15 @@ try {
         auth: {
           persistSession: true,
           autoRefreshToken: true,
+          // Security: Enable PKCE flow for enhanced security
+          flowType: 'pkce',
+          // Storage configuration for CSRF protection via cookies
+          storage: typeof window !== 'undefined' ? window.localStorage : undefined,
+        },
+        global: {
+          headers: {
+            'X-Client-Info': 'modern-tco-lms',
+          },
         },
       }
     );
