@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 import {
   ArrowRight,
   BookOpenCheck,
@@ -16,14 +16,20 @@ import { BeginnerLayout } from "@/components/layout/BeginnerLayout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { analytics } from "@/lib/analytics";
 
 export default function BeginnerOnboardingPage() {
+  const router = useRouter();
   useEffect(() => {
     try {
       localStorage.setItem("tanium-onboarding-viewed", "true");
     } catch {
       // no-op in environments without localStorage
     }
+
+    analytics.capture("beginner_onboarding_view", {
+      section: "overview",
+    });
   }, []);
 
   return (
@@ -40,13 +46,17 @@ export default function BeginnerOnboardingPage() {
             </div>
             <div className="flex flex-col items-start gap-3">
               <Button
-                asChild
                 size="lg"
                 className="w-full justify-between gap-2 border border-white/10 bg-[#22c55e]/90 text-gray-900 hover:bg-[#22c55e] md:w-auto"
+                onClick={() => {
+                  analytics.capture("beginner_onboarding_cta", {
+                    cta: "jump_to_module_00",
+                    location: "hero",
+                  });
+                  router.push("/modules/00-tanium-platform-foundation-v2");
+                }}
               >
-                <Link href="/modules/00-tanium-platform-foundation-v2">
-                  Jump to Module 00 <ArrowRight className="h-4 w-4" />
-                </Link>
+                Jump to Module 00 <ArrowRight className="h-4 w-4" />
               </Button>
               <p className="text-sm text-muted-foreground">
                 Prefer to explore first? Scroll down for the guided tour.
@@ -194,11 +204,31 @@ export default function BeginnerOnboardingPage() {
                 <li>Share questions in the learner Slack channel; every onboarding question improves the next iteration.</li>
               </ul>
               <div className="flex flex-wrap gap-3 pt-2">
-                <Button asChild variant="outline" className="border-white/20 text-white">
-                  <Link href="/modules/00-tanium-platform-foundation-v2">Start Module 00</Link>
+                <Button
+                  variant="outline"
+                  className="border-white/20 text-white"
+                  onClick={() => {
+                    analytics.capture("beginner_onboarding_cta", {
+                      cta: "start_module_00",
+                      location: "next_steps",
+                    });
+                    router.push("/modules/00-tanium-platform-foundation-v2");
+                  }}
+                >
+                  Start Module 00
                 </Button>
-                <Button asChild variant="ghost" className="border-white/20 text-white">
-                  <Link href="/flashcards?deck=module-00-v2">Open Module 00 flashcards</Link>
+                <Button
+                  variant="ghost"
+                  className="border-white/20 text-white"
+                  onClick={() => {
+                    analytics.capture("beginner_onboarding_cta", {
+                      cta: "open_module_00_flashcards",
+                      location: "next_steps",
+                    });
+                    router.push("/flashcards?deck=module-00-v2");
+                  }}
+                >
+                  Open Module 00 flashcards
                 </Button>
               </div>
             </CardContent>

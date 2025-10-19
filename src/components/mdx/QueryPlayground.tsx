@@ -6,6 +6,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { CheckCircle2, XCircle, HelpCircle, Play, RotateCcw, Lightbulb } from 'lucide-react';
 import { Textarea } from '@/components/ui/textarea';
+import { analytics } from '@/lib/analytics';
 
 interface QueryPlaygroundProps {
   title?: string;
@@ -57,6 +58,13 @@ export default function QueryPlayground({
     setShowResult(isCorrect);
     setAttempts(prev => prev + 1);
 
+    analytics.capture('query_playground_result', {
+      title,
+      difficulty,
+      correct: isCorrect,
+      attempts: attempts + 1,
+    });
+
     // Save progress to localStorage
     if (isCorrect) {
       const progress = JSON.parse(localStorage.getItem('queryPlaygroundProgress') || '{}');
@@ -75,6 +83,11 @@ export default function QueryPlayground({
     setFeedback(null);
     setShowHint(false);
     setAttempts(0);
+
+    analytics.capture('query_playground_reset', {
+      title,
+      difficulty,
+    });
   };
 
   const getDifficultyColor = () => {
@@ -185,7 +198,14 @@ export default function QueryPlayground({
 
         {hint && !showHint && attempts >= 1 && feedback !== 'correct' && (
           <Button
-            onClick={() => setShowHint(true)}
+            onClick={() => {
+              setShowHint(true);
+              analytics.capture('query_playground_hint', {
+                title,
+                difficulty,
+                attempts,
+              });
+            }}
             variant="ghost"
             className="flex items-center gap-2"
           >

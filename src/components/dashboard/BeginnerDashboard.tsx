@@ -22,6 +22,7 @@ import {
   Trophy,
   Zap,
 } from "lucide-react";
+import { analytics } from "@/lib/analytics";
 
 interface BeginnerDashboardProps {
   studyProgress?: number;
@@ -62,6 +63,10 @@ export function BeginnerDashboard({
       localStorage.setItem('tanium-onboarding-viewed', 'true');
     } catch {}
     setHasViewedOnboarding(true);
+    analytics.capture('beginner_onboarding_cta', {
+      cta: hasViewedOnboarding ? 'revisit_onboarding' : 'start_onboarding',
+      location: 'dashboard',
+    });
     router.push('/beginner/onboarding');
   };
 
@@ -72,6 +77,10 @@ export function BeginnerDashboard({
     localStorage.setItem('tanium-foundation-completed', 'true');
     localStorage.setItem('tanium-foundation-progress', '100');
     onProgressUpdate?.(25); // Foundation is 25% of overall progress
+
+    analytics.capture('beginner_foundation_completed', {
+      progress: 100,
+    });
   };
 
   // Beginner-specific motivational messages
