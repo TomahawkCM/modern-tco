@@ -13,7 +13,7 @@ function originFrom(req: Request): string {
 
 export async function POST(req: Request) {
   // VALIDATION: Strict Zod schema validation - reject invalid requests
-  let selected: Plan;
+  let selected: Plan | null = null;
   try {
     const payload = (await req.json()) as unknown;
     if (payload && typeof payload === "object" && "plan" in payload) {
@@ -27,6 +27,17 @@ export async function POST(req: Request) {
     return NextResponse.json(
       {
         error: 'Invalid request body',
+        message: 'Request must include a valid plan (free, pro, or team)'
+      },
+      { status: 400 }
+    );
+  }
+
+  // Ensure plan was provided
+  if (selected === null) {
+    return NextResponse.json(
+      {
+        error: 'Missing plan parameter',
         message: 'Request must include a valid plan (free, pro, or team)'
       },
       { status: 400 }

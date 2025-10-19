@@ -96,6 +96,12 @@ export const QuestionCategory = {
   TROUBLESHOOTING: "Troubleshooting",
   PRACTICAL_SCENARIOS: "Practical Scenarios",
   LINEAR_CHAIN: "Linear Chain Architecture",
+  BEST_PRACTICES: "Best Practices",
+  ADVANCED_CONCEPTS: "Advanced Concepts",
+  QUESTION_CONSTRUCTION: "Question Construction",
+  QUESTION_SHARING: "Question Sharing",
+  PERFORMANCE_OPTIMIZATION: "Performance Optimization",
+  QUESTION_PERFORMANCE_OPTIMIZATION: "Question Performance Optimization",
 } as const;
 
 export type QuestionCategory = typeof QuestionCategory[keyof typeof QuestionCategory];
