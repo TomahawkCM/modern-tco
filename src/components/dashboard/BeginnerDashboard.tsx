@@ -2,24 +2,27 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import Phase0Foundation from "@/components/study-modules/Phase0Foundation";
 import {
+  ArrowRight,
   BookOpen,
-  Clock,
-  Trophy,
-  Target,
-  Zap,
-  Star,
-  CheckCircle,
   Brain,
-  Lightbulb,
+  CheckCircle,
+  Clock,
+  Compass,
   Heart,
+  Lightbulb,
   Rocket,
+  Star,
+  Target,
+  Trophy,
+  Zap,
 } from "lucide-react";
+import { analytics } from "@/lib/analytics";
 
 interface BeginnerDashboardProps {
   studyProgress?: number;
@@ -34,22 +37,38 @@ export function BeginnerDashboard({
   const [hasCompletedFoundation, setHasCompletedFoundation] = useState(false);
   const [foundationProgress, setFoundationProgress] = useState(0);
   const [showFoundation, setShowFoundation] = useState(false);
+  const [hasViewedOnboarding, setHasViewedOnboarding] = useState(false);
 
   // Initialize from localStorage
   useEffect(() => {
     const foundationCompleted = localStorage.getItem('tanium-foundation-completed') === 'true';
     const foundationProgressStored = localStorage.getItem('tanium-foundation-progress');
-    
+    const onboardingViewed = localStorage.getItem('tanium-onboarding-viewed') === 'true';
+
     setHasCompletedFoundation(foundationCompleted);
     if (foundationProgressStored) {
       setFoundationProgress(parseInt(foundationProgressStored, 10));
     }
-    
+
+    setHasViewedOnboarding(onboardingViewed);
+
     // Show foundation if not completed
     if (!foundationCompleted) {
       setShowFoundation(true);
     }
   }, []);
+
+  const handleOpenOnboarding = () => {
+    try {
+      localStorage.setItem('tanium-onboarding-viewed', 'true');
+    } catch {}
+    setHasViewedOnboarding(true);
+    analytics.capture('beginner_onboarding_cta', {
+      cta: hasViewedOnboarding ? 'revisit_onboarding' : 'start_onboarding',
+      location: 'dashboard',
+    });
+    router.push('/beginner/onboarding');
+  };
 
   // Handle foundation completion
   const handleFoundationComplete = () => {
@@ -58,6 +77,10 @@ export function BeginnerDashboard({
     localStorage.setItem('tanium-foundation-completed', 'true');
     localStorage.setItem('tanium-foundation-progress', '100');
     onProgressUpdate?.(25); // Foundation is 25% of overall progress
+
+    analytics.capture('beginner_foundation_completed', {
+      progress: 100,
+    });
   };
 
   // Beginner-specific motivational messages
@@ -98,6 +121,31 @@ export function BeginnerDashboard({
           )}
         </div>
       </div>
+
+      <Card className="border-white/10 bg-white/5 backdrop-blur-sm">
+        <CardHeader className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
+          <div>
+            <CardTitle className="flex items-center gap-2 text-foreground">
+              <Compass className="h-5 w-5 text-primary" />
+              Guided onboarding tour
+            </CardTitle>
+            <CardDescription className="text-left text-sm text-muted-foreground">
+              Learn the course structure, glossary, and first-success steps in about ten minutes.
+            </CardDescription>
+          </div>
+          <div className="flex items-center gap-3">
+            {hasViewedOnboarding ? (
+              <Badge className="border-[#22c55e]/40 bg-[#22c55e]/20 text-[#22c55e]">Viewed</Badge>
+            ) : (
+              <Badge className="border-[#f97316]/40 bg-[#f97316]/20 text-[#f97316]">Recommended</Badge>
+            )}
+            <Button onClick={handleOpenOnboarding} className="gap-2">
+              {hasViewedOnboarding ? 'Revisit onboarding' : 'Start onboarding tour'}
+              <ArrowRight className="h-4 w-4" />
+            </Button>
+          </div>
+        </CardHeader>
+      </Card>
 
       {/* Foundation Module - Priority for Beginners */}
       {!hasCompletedFoundation && showFoundation && (

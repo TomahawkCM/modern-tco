@@ -51,6 +51,7 @@
     "codex:mcp": "node scripts/codex-run-mcp.js",
     "codex:mcp:sync": "node scripts/codex-sync-mcp.js",
     "codex:mcp:sync:global": "node scripts/codex-sync-mcp.js --with-env --force",
+    "axe:module00": "tsx scripts/accessibility/run-axe-playwright.ts",
     "setup:chrome": "bash ./scripts/setup-chrome-for-testing.sh",
     "mcp:devtools": "node ./scripts/mcp-devtools-launch.js",
     "typecheck": "tsc --noEmit",
@@ -226,6 +227,7 @@
     "zod": "^4.1.11"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.10.2",
     "@eslint/js": "^9.35.0",
     "@next/eslint-plugin-next": "^15.5.2",
     "@playwright/test": "^1.55.1",

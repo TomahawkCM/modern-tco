@@ -8,7 +8,6 @@ import fs from "fs/promises";
 import path from "path";
 import matter from "gray-matter";
 import { serialize } from "next-mdx-remote/serialize";
-import ModuleRenderer from "@/components/modules/ModuleRenderer";
 import { validateModuleFrontmatter } from "@/lib/mdx/module-schema";
 
 interface ModulePageProps {
@@ -151,7 +150,11 @@ export default async function ModulePage({ params }: ModulePageProps) {
     notFound();
   }
 
-  // Use the existing ModuleRenderer component which handles client-side MDX
+  const useLiteRenderer = moduleData.frontmatter?.id === "module-tanium-platform-foundation-v2";
+  const ModuleRenderer = useLiteRenderer
+    ? (await import("@/components/modules/ModuleRendererLite")).default
+    : (await import("@/components/modules/ModuleRenderer")).default;
+
   return <ModuleRenderer moduleData={moduleData} />;
 }
 

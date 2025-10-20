@@ -1,5 +1,6 @@
 "use client";
 
+import type { ReactNode } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Home, ChevronRight } from "lucide-react";
@@ -95,10 +96,15 @@ export function BreadcrumbNav({ className }: BreadcrumbNavProps) {
   return (
     <Breadcrumb className={className}>
       <BreadcrumbList>
-        {breadcrumbItems.map((item, index) => (
-          <div key={item.href} className="flex items-center">
-            {index > 0 && <BreadcrumbSeparator />}
-            <BreadcrumbItem>
+        {breadcrumbItems.flatMap((item, index) => {
+          const nodes: ReactNode[] = [];
+
+          if (index > 0) {
+            nodes.push(<BreadcrumbSeparator key={`separator-${item.href}`} />);
+          }
+
+          nodes.push(
+            <BreadcrumbItem key={item.href} className="flex items-center gap-1">
               {item.isLast ? (
                 <BreadcrumbPage className="flex items-center gap-1">
                   {index === 0 && <Home className="h-4 w-4" />}
@@ -116,8 +122,10 @@ export function BreadcrumbNav({ className }: BreadcrumbNavProps) {
                 </BreadcrumbLink>
               )}
             </BreadcrumbItem>
-          </div>
-        ))}
+          );
+
+          return nodes;
+        })}
       </BreadcrumbList>
     </Breadcrumb>
   );

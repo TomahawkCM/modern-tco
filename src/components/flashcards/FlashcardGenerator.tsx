@@ -18,6 +18,7 @@ import { flashcardService } from "@/services/flashcardService";
 import type { FlashcardType } from "@/types/flashcard";
 import { Sparkles, Plus, Loader2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { analytics } from "@/lib/analytics";
 
 interface FlashcardGeneratorProps {
   moduleId?: string;
@@ -67,6 +68,13 @@ export default function FlashcardGenerator({ moduleId, sectionId, onCardCreated 
           description: "Your flashcard has been added to your review queue.",
         });
 
+        analytics.capture("flashcard_created", {
+          source: "manual",
+          moduleId,
+          sectionId,
+          cardType,
+        });
+
         // Reset form
         setFront("");
         setBack("");
@@ -79,17 +87,23 @@ export default function FlashcardGenerator({ moduleId, sectionId, onCardCreated 
       } else {
         throw new Error("Failed to create flashcard");
       }
-    } catch (error) {
-      console.error("Error creating flashcard:", error);
-      toast({
-        title: "Error",
-        description: "Failed to create flashcard. Please try again.",
-        variant: "destructive",
-      });
-    } finally {
-      setIsCreating(false);
-    }
-  };
+      } catch (error) {
+        console.error("Error creating flashcard:", error);
+        toast({
+          title: "Error",
+          description: "Failed to create flashcard. Please try again.",
+          variant: "destructive",
+        });
+
+        analytics.capture("flashcard_create_error", {
+          source: "manual",
+          moduleId,
+          sectionId,
+        });
+      } finally {
+        setIsCreating(false);
+      }
+    };
 
   const handleAutoGenerate = async () => {
     if (!user?.id || !moduleId) {
@@ -110,18 +124,27 @@ export default function FlashcardGenerator({ moduleId, sectionId, onCardCreated 
         description: `Created ${cards.length} flashcards from module learning objectives.`,
       });
 
-      onCardCreated?.();
-    } catch (error) {
-      console.error("Error auto-generating flashcards:", error);
-      toast({
-        title: "Error",
-        description: "Failed to generate flashcards. Please try again.",
-        variant: "destructive",
+      analytics.capture("flashcard_autogen", {
+        moduleId,
+        count: cards.length,
       });
-    } finally {
-      setIsAutoGenerating(false);
-    }
-  };
+
+      onCardCreated?.();
+      } catch (error) {
+        console.error("Error auto-generating flashcards:", error);
+        toast({
+          title: "Error",
+          description: "Failed to generate flashcards. Please try again.",
+          variant: "destructive",
+        });
+
+        analytics.capture("flashcard_autogen_error", {
+          moduleId,
+        });
+      } finally {
+        setIsAutoGenerating(false);
+      }
+    };
 
   return (
     <Card>

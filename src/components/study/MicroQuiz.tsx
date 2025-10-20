@@ -10,6 +10,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { flashcardService } from "@/services/flashcardService";
 import { CheckCircle2, XCircle, HelpCircle, Sparkles, AlertCircle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { analytics } from "@/lib/analytics";
 
 interface MicroQuizProps {
   question: string;
@@ -51,6 +52,14 @@ export default function MicroQuiz({
     setIsCorrect(correct);
     setIsSubmitted(true);
 
+    analytics.capture("micro_quiz_answered", {
+      question,
+      correct,
+      moduleId,
+      sectionId,
+      concept,
+    });
+
     // Track analytics (PostHog integration point)
     if (typeof window !== 'undefined' && (window as any).posthog) {
       (window as any).posthog.capture('micro_quiz_answered', {
@@ -88,6 +97,13 @@ export default function MicroQuiz({
         description: "This question has been added to your review queue for spaced repetition.",
       });
 
+      analytics.capture("flashcard_created", {
+        source: "micro_quiz",
+        moduleId,
+        sectionId,
+        concept,
+      });
+
       // Track flashcard creation
       if (typeof window !== 'undefined' && (window as any).posthog) {
         (window as any).posthog.capture('flashcard_created_from_micro_quiz', {
@@ -102,6 +118,13 @@ export default function MicroQuiz({
         title: "Error",
         description: "Failed to create flashcard. Please try again.",
         variant: "destructive",
+      });
+
+      analytics.capture("flashcard_create_error", {
+        source: "micro_quiz",
+        moduleId,
+        sectionId,
+        concept,
       });
     }
   };
