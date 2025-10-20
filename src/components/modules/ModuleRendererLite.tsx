@@ -9,7 +9,17 @@ import * as ReactJsxRuntime from "react/jsx-runtime";
 import { cn } from "@/lib/utils";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Clock, Target, Brain, Info, AlertCircle, CheckCircle, Lightbulb, Zap, BookOpen } from "lucide-react";
+import {
+  Clock,
+  Target,
+  Brain,
+  Info,
+  AlertCircle,
+  CheckCircle,
+  Lightbulb,
+  Zap,
+  BookOpen,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const DynamicPracticeButton = dynamic(() => import("@/components/mdx/PracticeButton"), {
@@ -44,10 +54,24 @@ const DynamicMicroQuiz = dynamic(() => import("@/components/mdx/MicroQuizMDX"), 
 
 const DynamicQueryPlayground = dynamic(() => import("@/components/mdx/QueryPlayground"), {
   ssr: false,
-  loading: () => <div className="rounded border border-cyan-600/40 p-4 text-sm text-muted-foreground">Loading Query Playground…</div>,
+  loading: () => (
+    <div className="rounded border border-cyan-600/40 p-4 text-sm text-muted-foreground">
+      Loading Query Playground…
+    </div>
+  ),
 });
 
 const DynamicInfoBox = dynamic(() => import("@/components/mdx/InfoBox"), {
+  ssr: false,
+  loading: () => null,
+});
+
+const DynamicCallout = dynamic(() => import("@/components/mdx/Callout"), {
+  ssr: false,
+  loading: () => null,
+});
+
+const DynamicSteps = dynamic(() => import("@/components/mdx/Steps"), {
   ssr: false,
   loading: () => null,
 });
@@ -56,7 +80,7 @@ function createRuntimeWithDevSupport() {
   const baseRuntime = { ...MDXReact, ...ReactJsxRuntime } as Record<string, unknown>;
 
   if (typeof baseRuntime.jsxDEV !== "function") {
-    const jsx = ReactJsxRuntime.jsx as typeof ReactJsxRuntime.jsx;
+    const { jsx } = ReactJsxRuntime;
     baseRuntime.jsxDEV = function jsxDEV(type: unknown, props: unknown, key?: unknown) {
       return jsx(type as any, props as any, key as any);
     };
@@ -79,7 +103,7 @@ export default function ModuleRendererLite({ moduleData }: ModuleRendererLitePro
   useEffect(() => {
     const el = containerRef.current;
     if (!el) return;
-    const headings = Array.from(el.querySelectorAll("h1, h2, h3")) as HTMLElement[];
+    const headings = Array.from(el.querySelectorAll("h1, h2, h3"));
     const entries = headings.map((heading) => ({
       id: heading.id,
       title: heading.innerText.trim(),
@@ -98,7 +122,9 @@ export default function ModuleRendererLite({ moduleData }: ModuleRendererLitePro
       MiniProject: (props: React.ComponentProps<typeof DynamicMiniProject>) => (
         <DynamicMiniProject {...props} />
       ),
-      SkillGate: (props: React.ComponentProps<typeof DynamicSkillGate>) => <DynamicSkillGate {...props} />,
+      SkillGate: (props: React.ComponentProps<typeof DynamicSkillGate>) => (
+        <DynamicSkillGate {...props} />
+      ),
       ModuleTransition: (props: React.ComponentProps<typeof DynamicModuleTransition>) => (
         <DynamicModuleTransition {...props} />
       ),
@@ -111,7 +137,13 @@ export default function ModuleRendererLite({ moduleData }: ModuleRendererLitePro
       QueryPlayground: (props: React.ComponentProps<typeof DynamicQueryPlayground>) => (
         <DynamicQueryPlayground {...props} />
       ),
-      InfoBox: (props: React.ComponentProps<typeof DynamicInfoBox>) => <DynamicInfoBox {...props} />,
+      InfoBox: (props: React.ComponentProps<typeof DynamicInfoBox>) => (
+        <DynamicInfoBox {...props} />
+      ),
+      Callout: (props: React.ComponentProps<typeof DynamicCallout>) => (
+        <DynamicCallout {...props} />
+      ),
+      Steps: (props: React.ComponentProps<typeof DynamicSteps>) => <DynamicSteps {...props} />,
       h1: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
         <h1
           className={cn(
@@ -140,14 +172,29 @@ export default function ModuleRendererLite({ moduleData }: ModuleRendererLitePro
         />
       ),
       p: ({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) => (
-        <p className={cn("mb-4 leading-7 text-muted-foreground [&:not(:first-child)]:mt-4", className)} {...props} />
+        <p
+          className={cn(
+            "mb-4 leading-7 text-muted-foreground [&:not(:first-child)]:mt-4",
+            className
+          )}
+          {...props}
+        />
       ),
       ul: ({ className, ...props }: React.HTMLAttributes<HTMLUListElement>) => (
-        <ul className={cn("my-4 ml-6 list-disc space-y-2 text-muted-foreground [&>li]:mt-2", className)} {...props} />
+        <ul
+          className={cn(
+            "my-4 ml-6 list-disc space-y-2 text-muted-foreground [&>li]:mt-2",
+            className
+          )}
+          {...props}
+        />
       ),
       ol: ({ className, ...props }: React.HTMLAttributes<HTMLOListElement>) => (
         <ol
-          className={cn("my-4 ml-6 list-decimal space-y-2 text-muted-foreground [&>li]:mt-2", className)}
+          className={cn(
+            "my-4 ml-6 list-decimal space-y-2 text-muted-foreground [&>li]:mt-2",
+            className
+          )}
           {...props}
         />
       ),
@@ -211,13 +258,18 @@ export default function ModuleRendererLite({ moduleData }: ModuleRendererLitePro
       }) => {
         const variants = {
           info: { icon: Info, colors: "bg-blue-950/30 border-blue-500 text-blue-100" },
-          warning: { icon: AlertCircle, colors: "bg-yellow-950/30 border-yellow-500 text-yellow-100" },
+          warning: {
+            icon: AlertCircle,
+            colors: "bg-yellow-950/30 border-yellow-500 text-yellow-100",
+          },
           success: { icon: CheckCircle, colors: "bg-green-950/30 border-green-500 text-green-100" },
           tip: { icon: Lightbulb, colors: "bg-cyan-950/30 border-cyan-500 text-cyan-100" },
         };
         const { icon: Icon, colors } = variants[variant];
         return (
-          <div className={cn("my-6 rounded-r-lg border-l-4 py-4 pl-6 pr-4 backdrop-blur-sm", colors)}>
+          <div
+            className={cn("my-6 rounded-r-lg border-l-4 py-4 pl-6 pr-4 backdrop-blur-sm", colors)}
+          >
             {title && (
               <div className="mb-2 flex items-center gap-2 font-semibold">
                 <Icon className="h-5 w-5" />
@@ -247,7 +299,10 @@ export default function ModuleRendererLite({ moduleData }: ModuleRendererLitePro
                 {title}
               </CardTitle>
               <div className="flex items-center gap-3 text-[#22c55e]">
-                <Badge variant="outline" className="border-green-500/50 bg-green-900/50 text-green-200">
+                <Badge
+                  variant="outline"
+                  className="border-green-500/50 bg-green-900/50 text-green-200"
+                >
                   {id}
                 </Badge>
                 <div className="flex items-center gap-1 text-sm">
@@ -272,7 +327,9 @@ export default function ModuleRendererLite({ moduleData }: ModuleRendererLitePro
             <p className="text-sm uppercase tracking-wide text-cyan-300">Module</p>
             <h1 className="text-3xl font-bold text-white md:text-4xl">{frontmatter.title}</h1>
             {frontmatter.description && (
-              <p className="mt-2 max-w-2xl text-base text-muted-foreground">{frontmatter.description}</p>
+              <p className="mt-2 max-w-2xl text-base text-muted-foreground">
+                {frontmatter.description}
+              </p>
             )}
           </div>
           <div className="flex flex-wrap gap-2">
@@ -287,7 +344,10 @@ export default function ModuleRendererLite({ moduleData }: ModuleRendererLitePro
                 {frontmatter.estimatedTime}
               </Badge>
             )}
-            <Badge variant="outline" className="border-purple-600/40 bg-purple-900/40 text-purple-200">
+            <Badge
+              variant="outline"
+              className="border-purple-600/40 bg-purple-900/40 text-purple-200"
+            >
               Version {frontmatter.version ?? "1"}
             </Badge>
           </div>
@@ -308,7 +368,10 @@ export default function ModuleRendererLite({ moduleData }: ModuleRendererLitePro
           <CardContent>
             <ul className="space-y-2 text-sm text-muted-foreground">
               {toc.map((entry) => (
-                <li key={entry.id} className={cn(entry.level > 1 ? "ml-4" : "", entry.level > 2 ? "ml-8" : "")}>
+                <li
+                  key={entry.id}
+                  className={cn(entry.level > 1 ? "ml-4" : "", entry.level > 2 ? "ml-8" : "")}
+                >
                   <button
                     className="hover:text-primary hover:underline"
                     onClick={() => {
@@ -343,7 +406,11 @@ export default function ModuleRendererLite({ moduleData }: ModuleRendererLitePro
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <DynamicPracticeButton variant="primary" className="w-full" href={frontmatter.practiceConfig.href}>
+            <DynamicPracticeButton
+              variant="primary"
+              className="w-full"
+              href={frontmatter.practiceConfig.href}
+            >
               Start Practice Session
             </DynamicPracticeButton>
           </CardContent>
