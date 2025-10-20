@@ -18,6 +18,8 @@ interface ModulePageProps {
 const SLUG_TO_FILENAME: Record<string, string> = {
   "tanium-platform-foundation": "00-tanium-platform-foundation.mdx",
   "platform-foundation": "00-tanium-platform-foundation.mdx",
+  "tanium-platform-foundation-v2": "00-tanium-platform-foundation-v2.mdx",
+  "platform-foundation-v2": "00-tanium-platform-foundation-v2.mdx",
   "asking-questions": "01-asking-questions.mdx",
   "asking-questions-learn": "01-asking-questions-learn.mdx",
   "refining-questions-targeting": "02-refining-questions-targeting.mdx",
@@ -25,12 +27,12 @@ const SLUG_TO_FILENAME: Record<string, string> = {
   "taking-action-packages-actions": "03-taking-action-packages-actions.mdx",
   "taking-action": "03-taking-action-packages-actions.mdx",
   "navigation-basic-modules": "04-navigation-basic-modules.mdx",
-  "navigation": "04-navigation-basic-modules.mdx",
+  navigation: "04-navigation-basic-modules.mdx",
   "reporting-data-export": "05-reporting-data-export.mdx",
-  "reporting": "05-reporting-data-export.mdx",
+  reporting: "05-reporting-data-export.mdx",
   "microlearning-example": "MICROLEARNING_EXAMPLE.mdx",
   "example-module-microlearning": "MICROLEARNING_EXAMPLE.mdx",
-  "MICROLEARNING_EXAMPLE": "MICROLEARNING_EXAMPLE.mdx",
+  MICROLEARNING_EXAMPLE: "MICROLEARNING_EXAMPLE.mdx",
 };
 
 async function getModuleContent(slug: string) {
@@ -66,7 +68,10 @@ async function getModuleContent(slug: string) {
       // Validate frontmatter
       const validation = validateModuleFrontmatter(bundled.frontmatter, filename);
       if (!validation.success || !validation.data) {
-        console.error(`[Module Error] Invalid cached frontmatter in ${filename}:`, validation.errors);
+        console.error(
+          `[Module Error] Invalid cached frontmatter in ${filename}:`,
+          validation.errors
+        );
         return null;
       }
 
@@ -178,6 +183,7 @@ export async function generateMetadata({ params }: ModulePageProps) {
 
   return {
     title: `${moduleData.frontmatter.title} | Tanium TCO Study`,
-    description: moduleData.frontmatter.description || `Study module for ${moduleData.frontmatter.title}`,
+    description:
+      moduleData.frontmatter.description || `Study module for ${moduleData.frontmatter.title}`,
   };
 }
