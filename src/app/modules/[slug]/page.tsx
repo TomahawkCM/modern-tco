@@ -58,8 +58,8 @@ async function getModuleContent(slug: string) {
     }
 
     // Try to read from pre-bundled cache (Vercel-compatible)
-    // Located in .mdx-cache/ which persists across builds
-    const cachePath = path.join(process.cwd(), ".mdx-cache", `${filename}.json`);
+    // Located in public/.mdx-cache/ which is included in deployment
+    const cachePath = path.join(process.cwd(), "public", ".mdx-cache", `${filename}.json`);
 
     try {
       const cacheContent = await fs.readFile(cachePath, "utf8");
