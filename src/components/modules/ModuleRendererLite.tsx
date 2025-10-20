@@ -103,7 +103,7 @@ export default function ModuleRendererLite({ moduleData }: ModuleRendererLitePro
   useEffect(() => {
     const el = containerRef.current;
     if (!el) return;
-    const headings = Array.from(el.querySelectorAll("h1, h2, h3"));
+    const headings = Array.from(el.querySelectorAll<HTMLHeadingElement>("h1, h2, h3"));
     const entries = headings.map((heading) => ({
       id: heading.id,
       title: heading.innerText.trim(),
