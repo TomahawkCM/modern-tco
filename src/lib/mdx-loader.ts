@@ -30,6 +30,9 @@ export interface MDXModule {
 const domainToMDXMap: Record<string, () => Promise<MDXModule>> = {
   "platform-foundation": () => import("@/content/modules/00-tanium-platform-foundation.mdx"),
   "tanium-platform-foundation": () => import("@/content/modules/00-tanium-platform-foundation.mdx"),
+  "platform-foundation-v2": () => import("@/content/modules/00-tanium-platform-foundation-v2.mdx"),
+  "tanium-platform-foundation-v2": () =>
+    import("@/content/modules/00-tanium-platform-foundation-v2.mdx"),
   "asking-questions": () => import("@/content/modules/01-asking-questions.mdx"),
   // "asking-questions-learn": () =>
   //   import("@/content/modules/01-asking-questions-learn.mdx"),

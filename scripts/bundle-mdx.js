@@ -18,8 +18,8 @@ async function bundleAllMDX() {
   console.log("📦 Starting MDX bundling process...\n");
 
   const modulesDir = path.join(process.cwd(), "src", "content", "modules");
-  // Use a persistent location that Next.js won't clear during build
-  const outputDir = path.join(process.cwd(), ".mdx-cache");
+  // Use public/.mdx-cache which is accessible at runtime and deployed to Vercel
+  const outputDir = path.join(process.cwd(), "public", ".mdx-cache");
 
   // Create output directory
   await fs.mkdir(outputDir, { recursive: true });
@@ -86,10 +86,7 @@ async function bundleAllMDX() {
     cachedFile: `${file}.json`,
   }));
 
-  await fs.writeFile(
-    path.join(outputDir, "_index.json"),
-    JSON.stringify(index, null, 2)
-  );
+  await fs.writeFile(path.join(outputDir, "_index.json"), JSON.stringify(index, null, 2));
 
   console.log(`✅ Created cache index at ${outputDir}/_index.json\n`);
 
