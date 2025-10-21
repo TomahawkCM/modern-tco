@@ -272,6 +272,7 @@
     "puppeteer": "^24.22.3",
     "rimraf": "^6.0.1",
     "shadcn": "^3.4.0",
+    "supabase": "^2.51.0",
     "ts-jest": "^29.4.1",
     "tsx": "^4.19.2",
     "type-coverage": "^2.29.7",
