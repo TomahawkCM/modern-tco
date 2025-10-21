@@ -1,24 +1,24 @@
-"use client";
+'use client';
 
-import React, { useState, useEffect } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Progress } from "@/components/ui/progress";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Alert, AlertDescription } from "@/components/ui/alert";
 import {
-  Play,
-  CheckCircle,
-  XCircle,
-  Clock,
-  Terminal,
-  Code,
-  Zap,
   ArrowRight,
+  CheckCircle,
+  Clock,
+  Code,
+  Play,
   RotateCcw,
+  Terminal,
   Trophy,
-} from "lucide-react";
+  XCircle,
+  Zap,
+} from 'lucide-react';
+import React, { useEffect, useState } from 'react';
+import { Alert, AlertDescription } from '@/components/ui/alert';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Progress } from '@/components/ui/progress';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 interface LabStep {
   id: string;
@@ -26,7 +26,7 @@ interface LabStep {
   instruction: string;
   expectedResult: string;
   validation: {
-    type: "code" | "interface" | "result";
+    type: 'code' | 'interface' | 'result';
     pattern: string;
     feedback: string;
   };
@@ -41,113 +41,113 @@ interface Lab {
   description: string;
   learningObjectives: string[];
   steps: LabStep[];
-  difficulty: "Beginner" | "Intermediate" | "Advanced";
+  difficulty: 'Beginner' | 'Intermediate' | 'Advanced';
   prerequisites?: string[];
 }
 
 // Sample Lab Definitions
 const sampleLabs: Lab[] = [
   {
-    id: "LAB-AQ-001",
-    title: "Natural Language Query Construction",
-    domain: "Asking Questions",
+    id: 'LAB-AQ-001',
+    title: 'Natural Language Query Construction',
+    domain: 'Asking Questions',
     estimatedTime: 12,
-    difficulty: "Beginner",
+    difficulty: 'Beginner',
     description:
-      "Master Tanium console query procedures with sensor selection and real-time validation",
+      'Master Tanium console query procedures with sensor selection and real-time validation',
     learningObjectives: [
-      "Construct natural language queries using Tanium syntax",
-      "Select appropriate sensors for specific data collection needs",
-      "Validate query results and troubleshoot common issues",
-      "Optimize query performance for enterprise environments",
+      'Construct natural language queries using Tanium syntax',
+      'Select appropriate sensors for specific data collection needs',
+      'Validate query results and troubleshoot common issues',
+      'Optimize query performance for enterprise environments',
     ],
     steps: [
       {
-        id: "step1",
-        title: "Access Interact Module",
+        id: 'step1',
+        title: 'Access Interact Module',
         instruction:
-          "Navigate to the Interact module in Tanium Console and locate the question input field",
-        expectedResult: "Question input field is visible and ready for input",
+          'Navigate to the Interact module in Tanium Console and locate the question input field',
+        expectedResult: 'Question input field is visible and ready for input',
         validation: {
-          type: "interface",
-          pattern: "interact-module-loaded",
-          feedback: "Successfully accessed Interact module!",
+          type: 'interface',
+          pattern: 'interact-module-loaded',
+          feedback: 'Successfully accessed Interact module!',
         },
         hint: 'Look for the "Ask a Question" interface at the top of the Interact module',
       },
       {
-        id: "step2",
-        title: "Basic Sensor Query",
+        id: 'step2',
+        title: 'Basic Sensor Query',
         instruction:
           'Enter the query "Get Computer Name from all machines" and observe the auto-completion',
-        expectedResult: "Query auto-completes with proper sensor syntax",
+        expectedResult: 'Query auto-completes with proper sensor syntax',
         validation: {
-          type: "code",
-          pattern: "^Get Computer Name from all machines$",
+          type: 'code',
+          pattern: '^Get Computer Name from all machines$',
           feedback: "Perfect! You've constructed a basic sensor query using natural language.",
         },
       },
       {
-        id: "step3",
-        title: "Execute and Validate",
+        id: 'step3',
+        title: 'Execute and Validate',
         instruction:
-          "Execute the query and verify results show computer names from your environment",
-        expectedResult: "Results display with computer names in tabular format",
+          'Execute the query and verify results show computer names from your environment',
+        expectedResult: 'Results display with computer names in tabular format',
         validation: {
-          type: "result",
-          pattern: "computer-names-displayed",
-          feedback: "Excellent! Query executed successfully with valid results.",
+          type: 'result',
+          pattern: 'computer-names-displayed',
+          feedback: 'Excellent! Query executed successfully with valid results.',
         },
-        hint: "Results should appear in the lower pane with computer names listed",
+        hint: 'Results should appear in the lower pane with computer names listed',
       },
     ],
   },
   {
-    id: "LAB-RQ-001",
-    title: "Advanced Targeting and Refinement",
-    domain: "Refining Questions & Targeting",
+    id: 'LAB-RQ-001',
+    title: 'Advanced Targeting and Refinement',
+    domain: 'Refining Questions & Targeting',
     estimatedTime: 15,
-    difficulty: "Intermediate",
-    description: "Create dynamic computer groups with automated rules and complex filter logic",
+    difficulty: 'Intermediate',
+    description: 'Create dynamic computer groups with automated rules and complex filter logic',
     learningObjectives: [
-      "Create dynamic computer groups with RBAC integration",
-      "Implement complex filter logic using boolean operations",
-      "Apply least privilege targeting principles",
-      "Optimize targeting for enterprise-scale environments",
+      'Create dynamic computer groups with RBAC integration',
+      'Implement complex filter logic using boolean operations',
+      'Apply least privilege targeting principles',
+      'Optimize targeting for enterprise-scale environments',
     ],
     steps: [
       {
-        id: "step1",
-        title: "Create Computer Group",
-        instruction: "Navigate to Administration > Computer Groups and create a new dynamic group",
-        expectedResult: "New computer group creation dialog is open",
+        id: 'step1',
+        title: 'Create Computer Group',
+        instruction: 'Navigate to Administration > Computer Groups and create a new dynamic group',
+        expectedResult: 'New computer group creation dialog is open',
         validation: {
-          type: "interface",
-          pattern: "computer-group-dialog",
-          feedback: "Computer group creation interface accessed successfully!",
+          type: 'interface',
+          pattern: 'computer-group-dialog',
+          feedback: 'Computer group creation interface accessed successfully!',
         },
       },
       {
-        id: "step2",
-        title: "Configure Filter Logic",
+        id: 'step2',
+        title: 'Configure Filter Logic',
         instruction:
           'Set up filter: Operating System contains "Windows" AND Installed Applications contains "Chrome"',
-        expectedResult: "Complex filter with AND logic is configured",
+        expectedResult: 'Complex filter with AND logic is configured',
         validation: {
-          type: "code",
-          pattern: "windows.*AND.*chrome",
-          feedback: "Excellent boolean logic configuration!",
+          type: 'code',
+          pattern: 'windows.*AND.*chrome',
+          feedback: 'Excellent boolean logic configuration!',
         },
       },
       {
-        id: "step3",
-        title: "Test and Validate Group",
-        instruction: "Save the group and verify it populates with matching endpoints",
-        expectedResult: "Dynamic group shows matching computers based on criteria",
+        id: 'step3',
+        title: 'Test and Validate Group',
+        instruction: 'Save the group and verify it populates with matching endpoints',
+        expectedResult: 'Dynamic group shows matching computers based on criteria',
         validation: {
-          type: "result",
-          pattern: "group-population-success",
-          feedback: "Dynamic computer group created and validated successfully!",
+          type: 'result',
+          pattern: 'group-population-success',
+          feedback: 'Dynamic computer group created and validated successfully!',
         },
       },
     ],
@@ -163,7 +163,7 @@ export function InteractiveLabSystem({ labId, onComplete }: InteractiveLabSystem
   const [selectedLab, setSelectedLab] = useState<Lab | null>(null);
   const [currentStep, setCurrentStep] = useState(0);
   const [completedSteps, setCompletedSteps] = useState<Set<string>>(new Set());
-  const [userInput, setUserInput] = useState("");
+  const [userInput, setUserInput] = useState('');
   const [isValidating, setIsValidating] = useState(false);
   const [validationResult, setValidationResult] = useState<{
     success: boolean;
@@ -197,7 +197,7 @@ export function InteractiveLabSystem({ labId, onComplete }: InteractiveLabSystem
     setSelectedLab(lab);
     setCurrentStep(0);
     setCompletedSteps(new Set());
-    setUserInput("");
+    setUserInput('');
     setValidationResult(null);
     setLabStartTime(new Date());
   };
@@ -212,11 +212,11 @@ export function InteractiveLabSystem({ labId, onComplete }: InteractiveLabSystem
 
     // Simple validation simulation
     switch (step.validation.type) {
-      case "code":
-        success = new RegExp(step.validation.pattern, "i").test(userInput);
+      case 'code':
+        success = new RegExp(step.validation.pattern, 'i').test(userInput);
         break;
-      case "interface":
-      case "result":
+      case 'interface':
+      case 'result':
         // Simulate successful validation for demo
         success = true;
         break;
@@ -226,7 +226,7 @@ export function InteractiveLabSystem({ labId, onComplete }: InteractiveLabSystem
       success,
       message: success
         ? step.validation.feedback
-        : "Validation failed. Please check your input and try again.",
+        : 'Validation failed. Please check your input and try again.',
     });
 
     if (success) {
@@ -236,7 +236,7 @@ export function InteractiveLabSystem({ labId, onComplete }: InteractiveLabSystem
       setTimeout(() => {
         if (currentStep < selectedLab!.steps.length - 1) {
           setCurrentStep((prev) => prev + 1);
-          setUserInput("");
+          setUserInput('');
           setValidationResult(null);
         } else {
           // Lab completed
@@ -254,7 +254,7 @@ export function InteractiveLabSystem({ labId, onComplete }: InteractiveLabSystem
   const resetLab = () => {
     setCurrentStep(0);
     setCompletedSteps(new Set());
-    setUserInput("");
+    setUserInput('');
     setValidationResult(null);
     setLabStartTime(new Date());
   };
@@ -262,7 +262,7 @@ export function InteractiveLabSystem({ labId, onComplete }: InteractiveLabSystem
   const formatTime = (seconds: number) => {
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;
-    return `${mins}:${secs.toString().padStart(2, "0")}`;
+    return `${mins}:${secs.toString().padStart(2, '0')}`;
   };
 
   const calculateProgress = () => {
@@ -295,11 +295,11 @@ export function InteractiveLabSystem({ labId, onComplete }: InteractiveLabSystem
                   <Badge
                     variant="outline"
                     className={
-                      lab.difficulty === "Beginner"
-                        ? "border-green-500 text-[#22c55e]"
-                        : lab.difficulty === "Intermediate"
-                          ? "border-yellow-500 text-[#f97316]"
-                          : "border-red-500 text-red-400"
+                      lab.difficulty === 'Beginner'
+                        ? 'border-green-500 text-[#22c55e]'
+                        : lab.difficulty === 'Intermediate'
+                          ? 'border-yellow-500 text-[#f97316]'
+                          : 'border-red-500 text-red-400'
                     }
                   >
                     {lab.difficulty}
@@ -428,7 +428,7 @@ export function InteractiveLabSystem({ labId, onComplete }: InteractiveLabSystem
               <CardTitle className="text-foreground">Validation</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
-              {currentStepData.validation.type === "code" && (
+              {currentStepData.validation.type === 'code' && (
                 <div className="space-y-2">
                   <label className="text-sm text-muted-foreground">Enter your query/command:</label>
                   <textarea
@@ -445,8 +445,8 @@ export function InteractiveLabSystem({ labId, onComplete }: InteractiveLabSystem
                 <Alert
                   className={
                     validationResult.success
-                      ? "border-green-500/50 bg-[#22c55e]/10"
-                      : "border-red-500/50 bg-red-500/10"
+                      ? 'border-green-500/50 bg-[#22c55e]/10'
+                      : 'border-red-500/50 bg-red-500/10'
                   }
                 >
                   {validationResult.success ? (
@@ -455,7 +455,7 @@ export function InteractiveLabSystem({ labId, onComplete }: InteractiveLabSystem
                     <XCircle className="h-4 w-4 text-red-400" />
                   )}
                   <AlertDescription
-                    className={validationResult.success ? "text-[#22c55e]" : "text-red-300"}
+                    className={validationResult.success ? 'text-[#22c55e]' : 'text-red-300'}
                   >
                     {validationResult.message}
                   </AlertDescription>
@@ -466,7 +466,7 @@ export function InteractiveLabSystem({ labId, onComplete }: InteractiveLabSystem
                 className="w-full"
                 onClick={() => validateStep(currentStepData)}
                 disabled={
-                  isValidating || (currentStepData.validation.type === "code" && !userInput.trim())
+                  isValidating || (currentStepData.validation.type === 'code' && !userInput.trim())
                 }
               >
                 {isValidating ? (
@@ -494,10 +494,10 @@ export function InteractiveLabSystem({ labId, onComplete }: InteractiveLabSystem
               key={step.id}
               className={`flex h-8 w-8 items-center justify-center rounded-full text-sm font-medium ${
                 completedSteps.has(step.id)
-                  ? "bg-[#22c55e] text-foreground"
+                  ? 'bg-[#22c55e] text-foreground'
                   : index === currentStep
-                    ? "bg-tanium-accent text-foreground"
-                    : "bg-gray-700 text-muted-foreground"
+                    ? 'bg-tanium-accent text-foreground'
+                    : 'bg-gray-700 text-muted-foreground'
               }`}
             >
               {completedSteps.has(step.id) ? <CheckCircle className="h-4 w-4" /> : index + 1}

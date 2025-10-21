@@ -3,39 +3,45 @@
  * Enhanced practice session interface for the expanded 9-section structure
  */
 
-"use client";
+'use client';
 
-import { useState, useEffect, useCallback } from "react";
-import { useRouter } from "next/navigation";
-import { usePractice } from "@/contexts/PracticeContext";
-import { useAuth } from "@/contexts/AuthContext";
 import {
-  type Module3Section,
-  MODULE_3_SECTIONS,
-  getSectionCoverage,
-  getModule3LearningPath
-} from "@/lib/module3-section-definitions";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Progress } from "@/components/ui/progress";
-import { Badge } from "@/components/ui/badge";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Slider } from "@/components/ui/slider";
-import { Separator } from "@/components/ui/separator";
-import {
-  Play,
-  Target,
-  Brain,
-  Clock,
-  TrendingUp,
-  Settings,
-  CheckCircle,
   AlertCircle,
   BookOpen,
-  Zap
-} from "lucide-react";
-import { cn } from "@/lib/utils";
+  Brain,
+  CheckCircle,
+  Clock,
+  Play,
+  Settings,
+  Target,
+  TrendingUp,
+  Zap,
+} from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { useCallback, useEffect, useState } from 'react';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Checkbox } from '@/components/ui/checkbox';
+import { Progress } from '@/components/ui/progress';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import { Separator } from '@/components/ui/separator';
+import { Slider } from '@/components/ui/slider';
+import { useAuth } from '@/contexts/AuthContext';
+import { usePractice } from '@/contexts/PracticeContext';
+import {
+  getModule3LearningPath,
+  getSectionCoverage,
+  MODULE_3_SECTIONS,
+  type Module3Section,
+} from '@/lib/module3-section-definitions';
+import { cn } from '@/lib/utils';
 
 interface Module3PracticeSessionProps {
   initialSectionId?: Module3Section;
@@ -46,7 +52,7 @@ interface Module3PracticeSessionProps {
 export function Module3PracticeSession({
   initialSectionId,
   autoStart = false,
-  className
+  className,
 }: Module3PracticeSessionProps) {
   const router = useRouter();
   const { user } = useAuth();
@@ -57,11 +63,11 @@ export function Module3PracticeSession({
     getModule3Recommendations,
     validateModule3SectionAvailability,
     currentSession,
-    isLoading
+    isLoading,
   } = usePractice();
 
   // Session Configuration State
-  const [sessionType, setSessionType] = useState<"single" | "multiple" | "comprehensive">("single");
+  const [sessionType, setSessionType] = useState<'single' | 'multiple' | 'comprehensive'>('single');
   const [selectedSections, setSelectedSections] = useState<Module3Section[]>(
     initialSectionId ? [initialSectionId] : []
   );
@@ -77,7 +83,9 @@ export function Module3PracticeSession({
   // Progress and Recommendations
   const [sectionProgress, setSectionProgress] = useState<Partial<Record<Module3Section, any>>>({});
   const [recommendations, setRecommendations] = useState<any>(null);
-  const [availabilitySummary, setAvailabilitySummary] = useState<Partial<Record<Module3Section, any>>>({});
+  const [availabilitySummary, setAvailabilitySummary] = useState<
+    Partial<Record<Module3Section, any>>
+  >({});
 
   const learningPath = getModule3LearningPath();
 
@@ -97,14 +105,14 @@ export function Module3PracticeSession({
         setSelectedSections([recs.prioritySections[0]]);
       }
     } catch (error) {
-      console.error("Failed to load Module 3 progress:", error);
+      console.error('Failed to load Module 3 progress:', error);
     }
   }, [user, getModule3SectionProgress, getModule3Recommendations]);
 
   // Validate section availability
   useEffect(() => {
     const summary: Partial<Record<Module3Section, any>> = {};
-    learningPath.forEach(sectionId => {
+    learningPath.forEach((sectionId) => {
       try {
         summary[sectionId] = validateModule3SectionAvailability(sectionId);
       } catch (error) {
@@ -123,38 +131,38 @@ export function Module3PracticeSession({
   }, [autoStart, initialSectionId]);
 
   const handleSectionToggle = useCallback((sectionId: Module3Section, checked: boolean) => {
-    setSelectedSections(prev => {
+    setSelectedSections((prev) => {
       if (checked) {
         return [...prev, sectionId];
       } else {
-        return prev.filter(id => id !== sectionId);
+        return prev.filter((id) => id !== sectionId);
       }
     });
   }, []);
 
   const handleStartSession = useCallback(async () => {
     if (selectedSections.length === 0) {
-      alert("Please select at least one section to practice.");
+      alert('Please select at least one section to practice.');
       return;
     }
 
     try {
       let success = false;
 
-      if (sessionType === "single" && selectedSections.length === 1) {
+      if (sessionType === 'single' && selectedSections.length === 1) {
         success = await startModule3SectionPractice(selectedSections[0], {
           includePrerequisites,
           includeRelatedSections,
           adaptiveDifficulty,
           focusOnGaps,
-          questionCount: questionCount[0]
+          questionCount: questionCount[0],
         });
       } else {
         success = await startModule3ComprehensivePractice(selectedSections, {
           questionsPerSection: Math.floor(questionCount[0] / selectedSections.length),
           randomizeOrder,
           focusOnWeakAreas: focusOnGaps,
-          timeLimit: timeLimit[0]
+          timeLimit: timeLimit[0],
         });
       }
 
@@ -162,8 +170,8 @@ export function Module3PracticeSession({
         router.push(`/practice/session/${currentSession.id}`);
       }
     } catch (error) {
-      console.error("Failed to start Module 3 practice session:", error);
-      alert("Failed to start practice session. Please try again.");
+      console.error('Failed to start Module 3 practice session:', error);
+      alert('Failed to start practice session. Please try again.');
     }
   }, [
     selectedSections,
@@ -178,7 +186,7 @@ export function Module3PracticeSession({
     startModule3SectionPractice,
     startModule3ComprehensivePractice,
     currentSession,
-    router
+    router,
   ]);
 
   const getSectionStatusIcon = (sectionId: Module3Section) => {
@@ -198,14 +206,14 @@ export function Module3PracticeSession({
   };
 
   const getEstimatedTime = () => {
-    if (sessionType === "single") {
+    if (sessionType === 'single') {
       return Math.ceil(questionCount[0] * 1.5); // 1.5 minutes per question
     }
     return Math.ceil((questionCount[0] / selectedSections.length) * selectedSections.length * 1.5);
   };
 
   return (
-    <div className={cn("space-y-6", className)}>
+    <div className={cn('space-y-6', className)}>
       {/* Header with Recommendations */}
       {recommendations && (
         <Card className="border-blue-200 bg-blue-50/50">
@@ -229,7 +237,7 @@ export function Module3PracticeSession({
               {recommendations.prioritySections.map((sectionId: Module3Section, index: number) => (
                 <span key={sectionId}>
                   {MODULE_3_SECTIONS[sectionId].title}
-                  {index < recommendations.prioritySections.length - 1 && ", "}
+                  {index < recommendations.prioritySections.length - 1 && ', '}
                 </span>
               ))}
             </div>
@@ -277,7 +285,7 @@ export function Module3PracticeSession({
           <div className="space-y-3">
             <label className="text-sm font-medium">Select Sections</label>
             <div className="grid grid-cols-1 gap-2 max-h-64 overflow-y-auto">
-              {learningPath.map(sectionId => {
+              {learningPath.map((sectionId) => {
                 const section = MODULE_3_SECTIONS[sectionId];
                 const availability = availabilitySummary[sectionId];
                 const progress = sectionProgress[sectionId];
@@ -288,14 +296,16 @@ export function Module3PracticeSession({
                   <div
                     key={sectionId}
                     className={cn(
-                      "flex items-center space-x-3 p-3 rounded-lg border transition-colors",
-                      isSelected ? "bg-accent border-accent" : "hover:bg-muted/50",
-                      !availability?.available && "opacity-50"
+                      'flex items-center space-x-3 p-3 rounded-lg border transition-colors',
+                      isSelected ? 'bg-accent border-accent' : 'hover:bg-muted/50',
+                      !availability?.available && 'opacity-50'
                     )}
                   >
                     <Checkbox
                       checked={isSelected}
-                      onCheckedChange={(checked) => handleSectionToggle(sectionId, checked as boolean)}
+                      onCheckedChange={(checked) =>
+                        handleSectionToggle(sectionId, checked as boolean)
+                      }
                       disabled={!availability?.available}
                     />
                     <div className="flex-1 min-w-0">
@@ -357,7 +367,7 @@ export function Module3PracticeSession({
               className="w-full justify-between"
             >
               Advanced Options
-              <span className={cn("transition-transform", showAdvanced && "rotate-180")}>▼</span>
+              <span className={cn('transition-transform', showAdvanced && 'rotate-180')}>▼</span>
             </Button>
 
             {showAdvanced && (
@@ -432,7 +442,7 @@ export function Module3PracticeSession({
             size="lg"
           >
             {isLoading ? (
-              "Starting..."
+              'Starting...'
             ) : (
               <>
                 <Play className="w-4 h-4 mr-2" />

@@ -1,25 +1,25 @@
-"use client";
+'use client';
 
-import React, { useState, useEffect, useCallback } from "react";
-import { useQuestions } from "@/contexts/QuestionsContext";
-import { useModule } from "@/contexts/ModuleContext";
-import { useAuth } from "@/contexts/AuthContext";
-import { PracticeQuestion } from "./PracticeQuestion";
-import { PracticeSessionSummary } from "./PracticeSessionSummary";
-import { PracticeSessionManager } from "@/lib/practice-session-manager";
+import { AlertTriangle, Play, RotateCcw, Target } from 'lucide-react';
+import React, { useCallback, useEffect, useState } from 'react';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Skeleton } from '@/components/ui/skeleton';
+import { useAuth } from '@/contexts/AuthContext';
+import { useModule } from '@/contexts/ModuleContext';
+import { useQuestions } from '@/contexts/QuestionsContext';
+import { PracticeSessionManager } from '@/lib/practice-session-manager';
+import { cn } from '@/lib/utils';
+import { Difficulty, type TCODomain } from '@/types/exam';
 import {
   type PracticeSession,
   type PracticeSessionConfig,
   PracticeSessionState,
   type PracticeSessionSummary as SessionSummary,
-} from "@/types/practice-session";
-import { type TCODomain, Difficulty } from "@/types/exam";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Skeleton } from "@/components/ui/skeleton";
-import { AlertTriangle, Play, RotateCcw, Target } from "lucide-react";
-import { cn } from "@/lib/utils";
+} from '@/types/practice-session';
+import { PracticeQuestion } from './PracticeQuestion';
+import { PracticeSessionSummary } from './PracticeSessionSummary';
 
 interface PracticeSessionContainerProps {
   moduleId: string;
@@ -29,7 +29,7 @@ interface PracticeSessionContainerProps {
   onPassingScoreAchieved?: () => void;
 }
 
-const DEFAULT_CONFIG: Omit<PracticeSessionConfig, "moduleId"> = {
+const DEFAULT_CONFIG: Omit<PracticeSessionConfig, 'moduleId'> = {
   questionCount: 10,
   passingScore: 70, // 70% needed to unlock assessment
   timeLimit: undefined, // No time limit for practice
@@ -62,7 +62,7 @@ export function PracticeSessionContainer({
   // Setup session manager callbacks
   useEffect(() => {
     sessionManager.setProgressCallback((progress: any) => {
-      console.log("Practice progress updated:", progress);
+      console.log('Practice progress updated:', progress);
     });
 
     sessionManager.setCompleteCallback((summary: any) => {
@@ -107,7 +107,7 @@ export function PracticeSessionContainer({
 
   const startPracticeSession = useCallback(async () => {
     if (!user) {
-      setError("User not authenticated");
+      setError('User not authenticated');
       return;
     }
 
@@ -124,7 +124,7 @@ export function PracticeSessionContainer({
           });
 
       if (questions.length === 0) {
-        throw new Error("No questions available for practice");
+        throw new Error('No questions available for practice');
       }
 
       // Create session config
@@ -140,8 +140,8 @@ export function PracticeSessionContainer({
       setSessionState(PracticeSessionState.IN_PROGRESS);
       setSessionSummary(null);
     } catch (err) {
-      console.error("Failed to start practice session:", err);
-      setError(err instanceof Error ? err.message : "Failed to start practice session");
+      console.error('Failed to start practice session:', err);
+      setError(err instanceof Error ? err.message : 'Failed to start practice session');
     } finally {
       setLoading(false);
     }
@@ -207,7 +207,7 @@ export function PracticeSessionContainer({
   // Loading state
   if (questionsLoading ?? loading) {
     return (
-      <div className={cn("space-y-6", className)}>
+      <div className={cn('space-y-6', className)}>
         <Card>
           <CardContent className="p-6">
             <div className="space-y-4">
@@ -224,7 +224,7 @@ export function PracticeSessionContainer({
   // Error state
   if (error) {
     return (
-      <Card className={cn("border-destructive", className)}>
+      <Card className={cn('border-destructive', className)}>
         <CardContent className="p-6">
           <div className="flex items-start gap-3">
             <AlertTriangle className="mt-0.5 h-5 w-5 text-destructive" />
@@ -244,7 +244,7 @@ export function PracticeSessionContainer({
   // Session completed - show summary
   if (sessionState === PracticeSessionState.COMPLETED && sessionSummary) {
     return (
-      <div className={cn("space-y-6", className)}>
+      <div className={cn('space-y-6', className)}>
         <PracticeSessionSummary session={currentSession as any} onRestart={handleRestartSession} />
       </div>
     );
@@ -288,7 +288,7 @@ export function PracticeSessionContainer({
 
   // Not started - show start screen
   return (
-    <div className={cn("space-y-6", className)}>
+    <div className={cn('space-y-6', className)}>
       <Card>
         <CardHeader>
           <div className="flex items-center gap-2">
@@ -297,7 +297,7 @@ export function PracticeSessionContainer({
             {domain && <Badge variant="secondary">{domain}</Badge>}
           </div>
           <CardDescription>
-            Test your understanding with practice questions. You need to score{" "}
+            Test your understanding with practice questions. You need to score{' '}
             {DEFAULT_CONFIG.passingScore}% or higher to unlock the assessment.
           </CardDescription>
         </CardHeader>
@@ -315,12 +315,12 @@ export function PracticeSessionContainer({
             <div>
               <span className="font-medium">Time Limit:</span>
               <span className="ml-2 text-muted-foreground">
-                {DEFAULT_CONFIG.timeLimit ? `${DEFAULT_CONFIG.timeLimit / 60} minutes` : "None"}
+                {DEFAULT_CONFIG.timeLimit ? `${DEFAULT_CONFIG.timeLimit / 60} minutes` : 'None'}
               </span>
             </div>
             <div>
               <span className="font-medium">Domain:</span>
-              <span className="ml-2 text-muted-foreground">{domain ?? "Mixed"}</span>
+              <span className="ml-2 text-muted-foreground">{domain ?? 'Mixed'}</span>
             </div>
           </div>
 

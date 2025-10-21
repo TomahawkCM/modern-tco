@@ -6,27 +6,27 @@
  * Visual dashboard showing ML-predicted exam pass probability with actionable insights.
  */
 
-import React, { useState, useEffect } from 'react';
 import {
-  TrendingUp,
-  TrendingDown,
   AlertCircle,
+  BarChart3,
   CheckCircle2,
   Clock,
-  Target,
-  BarChart3,
   Lightbulb,
+  Target,
+  TrendingDown,
+  TrendingUp,
 } from 'lucide-react';
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Progress } from '@/components/ui/progress';
+import React, { useEffect, useState } from 'react';
 import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Progress } from '@/components/ui/progress';
 import { Skeleton } from '@/components/ui/skeleton';
 import { toast } from '@/hooks/use-toast';
 import {
-  predictPassProbability,
   getLatestPrediction,
   type PassProbability,
+  predictPassProbability,
 } from '@/lib/ai/passProbabilityPredictor';
 
 interface PassProbabilityDashboardProps {
@@ -136,12 +136,7 @@ export function PassProbabilityDashboard({
                 ML-powered prediction based on your current performance
               </CardDescription>
             </div>
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={handleGenerate}
-              disabled={isGenerating}
-            >
+            <Button variant="outline" size="sm" onClick={handleGenerate} disabled={isGenerating}>
               {isGenerating ? 'Updating...' : 'Refresh'}
             </Button>
           </div>
@@ -183,10 +178,7 @@ export function PassProbabilityDashboard({
               </div>
             </div>
 
-            <Badge
-              variant={probabilityLabel.variant as any}
-              className="mt-4 text-base px-4 py-1"
-            >
+            <Badge variant={probabilityLabel.variant as any} className="mt-4 text-base px-4 py-1">
               {probabilityLabel.text}
             </Badge>
 
@@ -205,9 +197,7 @@ export function PassProbabilityDashboard({
                 <Target className="w-5 h-5 text-primary" />
                 <span className="font-semibold">Recommended Study Time</span>
               </div>
-              <p className="text-2xl font-bold">
-                {prediction.estimatedStudyHoursNeeded} hours
-              </p>
+              <p className="text-2xl font-bold">{prediction.estimatedStudyHoursNeeded} hours</p>
               <p className="text-sm text-muted-foreground">
                 Additional study time to reach 80% pass probability
               </p>
@@ -229,8 +219,10 @@ export function PassProbabilityDashboard({
                 <Progress
                   value={score}
                   className="h-2"
-                  // @ts-ignore
-                  indicatorClassName={score >= 75 ? 'bg-[#22c55e]' : score >= 60 ? 'bg-yellow-500' : 'bg-red-500'}
+                  // @ts-expect-error
+                  indicatorClassName={
+                    score >= 75 ? 'bg-[#22c55e]' : score >= 60 ? 'bg-yellow-500' : 'bg-red-500'
+                  }
                 />
               </div>
             ))}
@@ -325,9 +317,7 @@ export function PassProbabilityDashboard({
               <Lightbulb className="w-5 h-5 text-yellow-600" />
               Recommended Actions
             </CardTitle>
-            <CardDescription>
-              Prioritized actions to improve your pass probability
-            </CardDescription>
+            <CardDescription>Prioritized actions to improve your pass probability</CardDescription>
           </CardHeader>
           <CardContent>
             <ul className="space-y-3">
@@ -338,8 +328,8 @@ export function PassProbabilityDashboard({
                     action.priority === 'high'
                       ? 'bg-red-50 border-red-200 dark:bg-red-950 dark:border-red-800'
                       : action.priority === 'medium'
-                      ? 'bg-yellow-50 border-yellow-200 dark:bg-yellow-950 dark:border-yellow-800'
-                      : 'bg-blue-50 border-blue-200 dark:bg-blue-950 dark:border-blue-800'
+                        ? 'bg-yellow-50 border-yellow-200 dark:bg-yellow-950 dark:border-yellow-800'
+                        : 'bg-blue-50 border-blue-200 dark:bg-blue-950 dark:border-blue-800'
                   }`}
                 >
                   <div className="flex items-start gap-3">
@@ -348,8 +338,8 @@ export function PassProbabilityDashboard({
                         action.priority === 'high'
                           ? 'destructive'
                           : action.priority === 'medium'
-                          ? 'default'
-                          : 'secondary'
+                            ? 'default'
+                            : 'secondary'
                       }
                       className="mt-0.5"
                     >
@@ -371,8 +361,8 @@ export function PassProbabilityDashboard({
 
       {/* Metadata */}
       <div className="text-xs text-muted-foreground text-center">
-        Last updated: {new Date(prediction.createdAt).toLocaleString()} •
-        Model: {prediction.modelVersion} ({prediction.predictionMethod})
+        Last updated: {new Date(prediction.createdAt).toLocaleString()} • Model:{' '}
+        {prediction.modelVersion} ({prediction.predictionMethod})
       </div>
     </div>
   );
@@ -391,12 +381,9 @@ function getProbabilityLabel(probability: number): {
   text: string;
   variant: string;
 } {
-  if (probability >= 85)
-    return { text: 'Excellent - Exam Ready!', variant: 'default' };
-  if (probability >= 75)
-    return { text: 'Good - Nearly Ready', variant: 'default' };
-  if (probability >= 65)
-    return { text: 'Fair - More Prep Needed', variant: 'secondary' };
+  if (probability >= 85) return { text: 'Excellent - Exam Ready!', variant: 'default' };
+  if (probability >= 75) return { text: 'Good - Nearly Ready', variant: 'default' };
+  if (probability >= 65) return { text: 'Fair - More Prep Needed', variant: 'secondary' };
   if (probability >= 55)
     return { text: 'At Risk - Significant Prep Required', variant: 'destructive' };
   return { text: 'High Risk - Consider Delaying Exam', variant: 'destructive' };
@@ -413,19 +400,7 @@ function describeArc(
   const end = polarToCartesian(x, y, radius, startAngle);
   const largeArcFlag = endAngle - startAngle <= 180 ? '0' : '1';
 
-  return [
-    'M',
-    start.x,
-    start.y,
-    'A',
-    radius,
-    radius,
-    0,
-    largeArcFlag,
-    0,
-    end.x,
-    end.y,
-  ].join(' ');
+  return ['M', start.x, start.y, 'A', radius, radius, 0, largeArcFlag, 0, end.x, end.y].join(' ');
 }
 
 function polarToCartesian(

@@ -1,18 +1,19 @@
-"use client";
+'use client';
 
-import React, { createContext, useContext, useState, useCallback, useMemo, useRef } from "react";
-import { AssessmentEngine } from "@/lib/assessment-engine";
-import { useQuestions } from "@/contexts/QuestionsContext";
-import { useAuth } from "@/contexts/AuthContext";
-import { questionReviewService } from "@/services/questionReviewService";
+import type React from 'react';
+import { createContext, useCallback, useContext, useMemo, useRef, useState } from 'react';
+import { useAuth } from '@/contexts/AuthContext';
+import { useQuestions } from '@/contexts/QuestionsContext';
+import { AssessmentEngine } from '@/lib/assessment-engine';
+import { questionReviewService } from '@/services/questionReviewService';
 import type {
-  AssessmentSession,
   AssessmentResult,
+  AssessmentSession,
   AssessmentType,
   Question,
   QuestionResponse,
   RemediationPlan,
-} from "@/types/assessment";
+} from '@/types/assessment';
 
 /* ----------------------------- Public API ----------------------------- */
 
@@ -55,7 +56,7 @@ interface AssessmentProgress {
 }
 
 interface AnalyticsEvent {
-  type: "question_viewed" | "answer_selected" | "answer_changed" | "navigation" | "time_warning";
+  type: 'question_viewed' | 'answer_selected' | 'answer_changed' | 'navigation' | 'time_warning';
   data: Record<string, any>;
   timestamp: Date;
 }
@@ -139,7 +140,7 @@ export function AssessmentProvider({ children }: { children: React.ReactNode }) 
         count: config.questionCount ?? getDefaultQuestionCount(config.type),
       });
       if (!questions || questions.length === 0) {
-        throw new Error("No questions available for the selected configuration.");
+        throw new Error('No questions available for the selected configuration.');
       }
 
       // Build session (align to your AssessmentSession type)
@@ -149,7 +150,7 @@ export function AssessmentProvider({ children }: { children: React.ReactNode }) 
         responses: [] as any, // array model
         startTime: new Date(),
         timeLimit: config.timeLimit ?? getDefaultTimeLimit(config.type),
-        status: "in_progress",
+        status: 'in_progress',
 
         // Required by your AssessmentSession type:
         domain: normalizedDomain as any,
@@ -167,7 +168,7 @@ export function AssessmentProvider({ children }: { children: React.ReactNode }) 
 
       // Start countdown
       if (session.timeLimit === undefined) {
-        throw new Error("Assessment time limit is not defined.");
+        throw new Error('Assessment time limit is not defined.');
       }
       const totalSeconds = session.timeLimit * 60;
       setTimeRemaining(totalSeconds);
@@ -181,7 +182,7 @@ export function AssessmentProvider({ children }: { children: React.ReactNode }) 
           }
           if (prev === 5 * 60) {
             recordAnalytics({
-              type: "time_warning",
+              type: 'time_warning',
               data: { remaining: prev },
               timestamp: new Date(),
             });
@@ -204,61 +205,61 @@ export function AssessmentProvider({ children }: { children: React.ReactNode }) 
     return [...arr, next];
   };
 
-  const answerQuestion = useCallback((questionId: string, answer: string) => {
-    let isCorrect = false;
-    let timeSpent = 0;
+  const answerQuestion = useCallback(
+    (questionId: string, answer: string) => {
+      let isCorrect = false;
+      let timeSpent = 0;
 
-    setCurrentAssessment((prev) => {
-      if (!prev) return prev;
-      // Find the question to determine correctness
-      const question = prev.questions.find((q) => q.id === questionId);
-      if (!question) return prev;
-      isCorrect = Array.isArray(answer)
-        ? Array.isArray(question.correctAnswerId)
-          ? JSON.stringify(answer.sort()) ===
-            JSON.stringify((question.correctAnswerId as string[]).sort())
-          : false
-        : answer === question.correctAnswerId;
+      setCurrentAssessment((prev) => {
+        if (!prev) return prev;
+        // Find the question to determine correctness
+        const question = prev.questions.find((q) => q.id === questionId);
+        if (!question) return prev;
+        isCorrect = Array.isArray(answer)
+          ? Array.isArray(question.correctAnswerId)
+            ? JSON.stringify(answer.sort()) ===
+              JSON.stringify((question.correctAnswerId as string[]).sort())
+            : false
+          : answer === question.correctAnswerId;
 
-      // Calculate time spent (rough estimate based on session time)
-      const sessionStartTime = prev.startTime.getTime();
-      const now = new Date().getTime();
-      const totalElapsed = Math.floor((now - sessionStartTime) / 1000);
-      const responsesCount = ((prev.responses as unknown as QuestionResponse[]) ?? []).length;
-      timeSpent = responsesCount > 0 ? Math.floor(totalElapsed / (responsesCount + 1)) : 30;
+        // Calculate time spent (rough estimate based on session time)
+        const sessionStartTime = prev.startTime.getTime();
+        const now = new Date().getTime();
+        const totalElapsed = Math.floor((now - sessionStartTime) / 1000);
+        const responsesCount = ((prev.responses as unknown as QuestionResponse[]) ?? []).length;
+        timeSpent = responsesCount > 0 ? Math.floor(totalElapsed / (responsesCount + 1)) : 30;
 
-      const response: QuestionResponse = {
-        questionId,
-        selectedAnswer: answer,
-        isCorrect,
-        timeSpent,
-        timestamp: new Date(),
-      };
-      const updatedResponses = upsertResponse(
-        (prev.responses as unknown as QuestionResponse[]) ?? [],
-        response
-      );
-      return { ...prev, responses: updatedResponses as any };
-    });
-
-    // Track question review for spaced repetition (async, non-blocking)
-    if (user) {
-      questionReviewService.reviewQuestion(
-        questionId,
-        user.id,
-        isCorrect,
-        timeSpent
-      ).catch((err) => {
-        console.error("Failed to track question review:", err);
+        const response: QuestionResponse = {
+          questionId,
+          selectedAnswer: answer,
+          isCorrect,
+          timeSpent,
+          timestamp: new Date(),
+        };
+        const updatedResponses = upsertResponse(
+          (prev.responses as unknown as QuestionResponse[]) ?? [],
+          response
+        );
+        return { ...prev, responses: updatedResponses as any };
       });
-    }
 
-    recordAnalytics({
-      type: "answer_selected",
-      data: { questionId, answer, isCorrect, timeSpent },
-      timestamp: new Date(),
-    });
-  }, [user]);
+      // Track question review for spaced repetition (async, non-blocking)
+      if (user) {
+        questionReviewService
+          .reviewQuestion(questionId, user.id, isCorrect, timeSpent)
+          .catch((err) => {
+            console.error('Failed to track question review:', err);
+          });
+      }
+
+      recordAnalytics({
+        type: 'answer_selected',
+        data: { questionId, answer, isCorrect, timeSpent },
+        timestamp: new Date(),
+      });
+    },
+    [user]
+  );
 
   const navigateToQuestion = useCallback(
     (questionIndex: number) => {
@@ -267,7 +268,7 @@ export function AssessmentProvider({ children }: { children: React.ReactNode }) 
         const next = Math.max(0, Math.min(questionIndex, maxIdx));
         if (next !== idx) {
           recordAnalytics({
-            type: "navigation",
+            type: 'navigation',
             data: { from: idx, to: next },
             timestamp: new Date(),
           });
@@ -293,7 +294,7 @@ export function AssessmentProvider({ children }: { children: React.ReactNode }) 
   }, [currentAssessment]);
 
   const submitAssessment = useCallback(async (): Promise<AssessmentResult> => {
-    if (!currentAssessment) throw new Error("No active assessment to submit.");
+    if (!currentAssessment) throw new Error('No active assessment to submit.');
     clearTimer();
 
     // Use AssessmentEngine.completeAssessment instead of missing evaluate
@@ -301,23 +302,23 @@ export function AssessmentProvider({ children }: { children: React.ReactNode }) 
     const result = engine.completeAssessment({
       ...currentAssessment,
       endTime: new Date(),
-      status: "completed",
+      status: 'completed',
     });
 
     setCurrentResult(result);
     setHistory((prev) => [result, ...prev]);
-    setCurrentAssessment((prev) => (prev ? { ...prev, status: "completed" } : prev));
+    setCurrentAssessment((prev) => (prev ? { ...prev, status: 'completed' } : prev));
     return result;
   }, [currentAssessment]);
 
   const pauseAssessment = useCallback(() => {
     clearTimer();
-    setCurrentAssessment((prev) => (prev ? { ...prev, status: "paused" } : prev));
+    setCurrentAssessment((prev) => (prev ? { ...prev, status: 'paused' } : prev));
   }, []);
 
   const resumeAssessment = useCallback(() => {
     if (!currentAssessment) return;
-    if (currentAssessment.status !== "paused") return;
+    if (currentAssessment.status !== 'paused') return;
     clearTimer();
     timerRef.current = setInterval(() => {
       setTimeRemaining((prev) => {
@@ -329,7 +330,7 @@ export function AssessmentProvider({ children }: { children: React.ReactNode }) 
         return prev - 1;
       });
     }, 1000);
-    setCurrentAssessment((prev) => (prev ? { ...prev, status: "in_progress" } : prev));
+    setCurrentAssessment((prev) => (prev ? { ...prev, status: 'in_progress' } : prev));
   }, [currentAssessment, submitAssessment]);
 
   const exitAssessment = useCallback(() => {
@@ -352,8 +353,8 @@ export function AssessmentProvider({ children }: { children: React.ReactNode }) 
 
   const recordAnalytics = useCallback((event: AnalyticsEvent) => {
     // Replace with your telemetry pipeline
-     
-    console.debug("[Assessment Analytics]", event.type, event.data);
+
+    console.debug('[Assessment Analytics]', event.type, event.data);
   }, []);
 
   const value = useMemo<AssessmentContextType>(
@@ -403,7 +404,7 @@ export function AssessmentProvider({ children }: { children: React.ReactNode }) 
 export function useAssessment(): AssessmentContextType {
   const ctx = useContext(AssessmentContext);
   if (!ctx) {
-    throw new Error("useAssessment must be used within an AssessmentProvider");
+    throw new Error('useAssessment must be used within an AssessmentProvider');
   }
   return ctx;
 }

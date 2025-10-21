@@ -7,29 +7,29 @@
  * Shows priority-sorted recommendations with action buttons.
  */
 
-import React, { useState, useEffect } from 'react';
 import {
   AlertTriangle,
-  TrendingUp,
-  Calendar,
-  BookOpen,
-  Lightbulb,
   Bell,
-  X,
+  BookOpen,
+  Calendar,
   CheckCircle,
   ChevronRight,
+  Lightbulb,
+  TrendingUp,
+  X,
 } from 'lucide-react';
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
+import React, { useEffect, useState } from 'react';
 import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
 import { toast } from '@/hooks/use-toast';
 import {
-  getActiveRecommendations,
-  dismissRecommendation,
   completeRecommendation,
-  generateRecommendations,
+  dismissRecommendation,
   gatherRecommendationContext,
+  generateRecommendations,
+  getActiveRecommendations,
   type Recommendation,
 } from '@/lib/ai/smartRecommendations';
 
@@ -188,16 +188,9 @@ export function SmartRecommendationsPanel({
         <div className="flex items-center justify-between">
           <div>
             <CardTitle>Smart Recommendations</CardTitle>
-            <CardDescription>
-              AI-powered suggestions based on your progress
-            </CardDescription>
+            <CardDescription>AI-powered suggestions based on your progress</CardDescription>
           </div>
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={handleGenerateNew}
-            disabled={isGenerating}
-          >
+          <Button variant="outline" size="sm" onClick={handleGenerateNew} disabled={isGenerating}>
             {isGenerating ? 'Generating...' : 'Refresh'}
           </Button>
         </div>

@@ -8,7 +8,12 @@
     "estimatedTime": "45 min",
     "blueprintWeight": 0.22,
     "description": "Master the art of querying in Tanium - learn natural language query construction, sensor mastery, and saved question management.",
-    "tags": ["queries", "sensors", "natural-language", "saved-questions"],
+    "tags": [
+      "queries",
+      "sensors",
+      "natural-language",
+      "saved-questions"
+    ],
     "lastUpdated": "2024-09-05",
     "version": 1,
     "status": "published",
@@ -26,5 +31,5 @@
   },
   "filename": "01-asking-questions.mdx",
   "slug": "tco-asking-questions",
-  "bundledAt": "2025-10-21T01:03:57.465Z"
+  "bundledAt": "2025-10-21T03:26:37.588Z"
 }

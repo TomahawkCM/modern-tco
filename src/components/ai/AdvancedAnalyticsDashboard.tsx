@@ -11,44 +11,44 @@
  * Provides students with deep insights into their learning progress and actionable recommendations.
  */
 
-import React, { useState, useEffect } from 'react';
 import {
-  TrendingUp,
-  TrendingDown,
-  BarChart3,
-  Clock,
-  Target,
-  Users,
-  Award,
   AlertCircle,
-  RefreshCw,
+  Award,
+  BarChart3,
   Calendar,
+  Clock,
+  RefreshCw,
+  Target,
+  TrendingDown,
+  TrendingUp,
+  Users,
 } from 'lucide-react';
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
+import React, { useEffect, useState } from 'react';
 import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { toast } from '@/hooks/use-toast';
 
 import {
-  getComparativeAnalytics,
-  getDomainComparisons,
   type ComparativeReport,
   type DomainComparison,
+  getComparativeAnalytics,
+  getDomainComparisons,
 } from '@/lib/ai/comparativeAnalytics';
 import {
-  getOrGenerateHeatmap,
+  generateMasteryPlan,
+  type MasteryPlan,
+  type MasteryPrediction,
+  predictAllDomains,
+} from '@/lib/ai/masteryPredictions';
+import {
   getHeatmapColor,
+  getOrGenerateHeatmap,
   type PerformanceHeatmap,
 } from '@/lib/ai/performanceHeatmaps';
-import {
-  predictAllDomains,
-  generateMasteryPlan,
-  type MasteryPrediction,
-  type MasteryPlan,
-} from '@/lib/ai/masteryPredictions';
 
 interface AdvancedAnalyticsDashboardProps {
   userId: string;
@@ -188,12 +188,7 @@ export function AdvancedAnalyticsDashboard({ userId }: AdvancedAnalyticsDashboar
             <CardTitle>Advanced Analytics</CardTitle>
             <CardDescription>Deep insights into your learning progress</CardDescription>
           </div>
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={handleRefresh}
-            disabled={isRefreshing}
-          >
+          <Button variant="outline" size="sm" onClick={handleRefresh} disabled={isRefreshing}>
             <RefreshCw className={`w-4 h-4 mr-2 ${isRefreshing ? 'animate-spin' : ''}`} />
             Refresh
           </Button>
@@ -246,12 +241,16 @@ export function AdvancedAnalyticsDashboard({ userId }: AdvancedAnalyticsDashboar
                             comp.status === 'above_average'
                               ? 'default'
                               : comp.status === 'below_average'
-                              ? 'destructive'
-                              : 'secondary'
+                                ? 'destructive'
+                                : 'secondary'
                           }
                         >
-                          {comp.status === 'above_average' && <TrendingUp className="w-3 h-3 mr-1" />}
-                          {comp.status === 'below_average' && <TrendingDown className="w-3 h-3 mr-1" />}
+                          {comp.status === 'above_average' && (
+                            <TrendingUp className="w-3 h-3 mr-1" />
+                          )}
+                          {comp.status === 'below_average' && (
+                            <TrendingDown className="w-3 h-3 mr-1" />
+                          )}
                           {comp.percentile ? `${comp.percentile}th` : comp.status}
                         </Badge>
                       </div>
@@ -280,11 +279,14 @@ export function AdvancedAnalyticsDashboard({ userId }: AdvancedAnalyticsDashboar
                           <span>{domain.domainLabel}</span>
                           <span
                             className={`font-semibold ${
-                              domain.difference > 0 ? 'text-[#22c55e]' : domain.difference < 0 ? 'text-red-600' : ''
+                              domain.difference > 0
+                                ? 'text-[#22c55e]'
+                                : domain.difference < 0
+                                  ? 'text-red-600'
+                                  : ''
                             }`}
                           >
-                            {domain.personalScore.toFixed(1)}% (
-                            {domain.difference > 0 ? '+' : ''}
+                            {domain.personalScore.toFixed(1)}% ({domain.difference > 0 ? '+' : ''}
                             {domain.difference.toFixed(1)}%)
                           </span>
                         </div>
@@ -365,8 +367,8 @@ export function AdvancedAnalyticsDashboard({ userId }: AdvancedAnalyticsDashboar
               <>
                 <div className="bg-muted p-4 rounded-lg">
                   <p className="text-sm">
-                    AI-powered predictions showing how long it will take to master each TCO domain at
-                    80% proficiency.
+                    AI-powered predictions showing how long it will take to master each TCO domain
+                    at 80% proficiency.
                   </p>
                 </div>
 
@@ -382,8 +384,8 @@ export function AdvancedAnalyticsDashboard({ userId }: AdvancedAnalyticsDashboar
                             prediction.currentMasteryLevel >= 80
                               ? 'default'
                               : prediction.currentMasteryLevel >= 60
-                              ? 'secondary'
-                              : 'destructive'
+                                ? 'secondary'
+                                : 'destructive'
                           }
                         >
                           {prediction.currentMasteryLevel.toFixed(0)}% Current
@@ -417,7 +419,8 @@ export function AdvancedAnalyticsDashboard({ userId }: AdvancedAnalyticsDashboar
                       <div className="bg-muted p-3 rounded text-sm mb-3">
                         <p className="font-semibold mb-1">Recommended Schedule:</p>
                         <p>
-                          {prediction.recommendedDailyMinutes} min/day, {prediction.recommendedWeeklySessions} days/week
+                          {prediction.recommendedDailyMinutes} min/day,{' '}
+                          {prediction.recommendedWeeklySessions} days/week
                         </p>
                       </div>
 

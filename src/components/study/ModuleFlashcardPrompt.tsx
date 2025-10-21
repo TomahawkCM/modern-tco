@@ -1,13 +1,13 @@
-"use client";
+'use client';
 
-import React, { useState, useEffect } from "react";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { useAuth } from "@/contexts/AuthContext";
-import { flashcardService } from "@/services/flashcardService";
-import { Brain, Sparkles, ArrowRight, Loader2 } from "lucide-react";
-import FlashcardReview from "@/components/flashcards/FlashcardReview";
+import { ArrowRight, Brain, Loader2, Sparkles } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
+import FlashcardReview from '@/components/flashcards/FlashcardReview';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { useAuth } from '@/contexts/AuthContext';
+import { flashcardService } from '@/services/flashcardService';
 
 interface ModuleFlashcardPromptProps {
   moduleId: string;
@@ -18,7 +18,7 @@ interface ModuleFlashcardPromptProps {
 export default function ModuleFlashcardPrompt({
   moduleId,
   sectionId,
-  sectionTitle
+  sectionTitle,
 }: ModuleFlashcardPromptProps) {
   const { user } = useAuth();
   const [dueCount, setDueCount] = useState<number>(0);
@@ -38,12 +38,12 @@ export default function ModuleFlashcardPrompt({
     try {
       // Get all flashcards for this module
       const moduleCards = await flashcardService.getFlashcardsByModule(user.id, moduleId);
-      const dueCards = moduleCards.filter(c => new Date(c.srs_due) <= new Date());
+      const dueCards = moduleCards.filter((c) => new Date(c.srs_due) <= new Date());
 
       setTotalCards(moduleCards.length);
       setDueCount(dueCards.length);
     } catch (error) {
-      console.error("Error loading flashcard stats:", error);
+      console.error('Error loading flashcard stats:', error);
     } finally {
       setIsLoading(false);
     }
@@ -57,7 +57,7 @@ export default function ModuleFlashcardPrompt({
       await flashcardService.autoGenerateFromModule(user.id, moduleId);
       await loadModuleFlashcardStats();
     } catch (error) {
-      console.error("Error generating flashcards:", error);
+      console.error('Error generating flashcards:', error);
     } finally {
       setIsGenerating(false);
     }
@@ -71,17 +71,10 @@ export default function ModuleFlashcardPrompt({
   if (showReview) {
     return (
       <div className="my-8">
-        <Button
-          variant="ghost"
-          onClick={() => setShowReview(false)}
-          className="mb-4"
-        >
+        <Button variant="ghost" onClick={() => setShowReview(false)} className="mb-4">
           ← Back to Module
         </Button>
-        <FlashcardReview
-          moduleId={moduleId}
-          onComplete={handleReviewComplete}
-        />
+        <FlashcardReview moduleId={moduleId} onComplete={handleReviewComplete} />
       </div>
     );
   }
@@ -114,7 +107,7 @@ export default function ModuleFlashcardPrompt({
             <CardDescription className="mt-2">
               {sectionTitle
                 ? `Review flashcards for "${sectionTitle}"`
-                : "Reinforce your learning with active recall"}
+                : 'Reinforce your learning with active recall'}
             </CardDescription>
           </div>
         </div>
@@ -124,7 +117,8 @@ export default function ModuleFlashcardPrompt({
           // No flashcards exist - prompt to generate
           <div className="space-y-3">
             <p className="text-sm text-muted-foreground">
-              No flashcards created yet for this module. Auto-generate flashcards from the learning objectives to start practicing.
+              No flashcards created yet for this module. Auto-generate flashcards from the learning
+              objectives to start practicing.
             </p>
             <Button
               onClick={handleAutoGenerate}
@@ -155,10 +149,7 @@ export default function ModuleFlashcardPrompt({
                   {dueCount} card{dueCount !== 1 ? 's' : ''} due now • {totalCards} total
                 </p>
               </div>
-              <Button
-                onClick={() => setShowReview(true)}
-                size="lg"
-              >
+              <Button onClick={() => setShowReview(true)} size="lg">
                 Start Review
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
@@ -171,18 +162,13 @@ export default function ModuleFlashcardPrompt({
           // All caught up
           <div className="space-y-3">
             <div className="p-4 bg-[#22c55e]/10 border border-[#22c55e]/20 rounded-lg text-center">
-              <p className="font-medium text-[#22c55e] dark:text-[#22c55e]">
-                ✅ All caught up!
-              </p>
+              <p className="font-medium text-[#22c55e] dark:text-[#22c55e]">✅ All caught up!</p>
               <p className="text-sm text-muted-foreground mt-1">
-                {totalCards} card{totalCards !== 1 ? 's' : ''} in this module • Next review coming soon
+                {totalCards} card{totalCards !== 1 ? 's' : ''} in this module • Next review coming
+                soon
               </p>
             </div>
-            <Button
-              variant="outline"
-              onClick={() => setShowReview(true)}
-              className="w-full"
-            >
+            <Button variant="outline" onClick={() => setShowReview(true)} className="w-full">
               <Brain className="mr-2 h-4 w-4" />
               Practice Anyway
             </Button>

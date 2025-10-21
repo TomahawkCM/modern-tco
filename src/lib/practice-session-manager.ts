@@ -1,14 +1,14 @@
+import { createId } from '@paralleldrive/cuid2';
+import { defaultDifficultyRecord } from '@/lib/difficulty';
+import { type Difficulty, type Question, TCODomain } from '@/types/exam';
 import {
+  type PracticeProgress,
+  type PracticeQuestion,
   type PracticeSession,
   type PracticeSessionConfig,
   PracticeSessionState,
   type PracticeSessionSummary,
-  type PracticeProgress,
-  type PracticeQuestion,
-} from "@/types/practice-session";
-import { type Question, TCODomain, type Difficulty } from "@/types/exam";
-import { createId } from "@paralleldrive/cuid2";
-import { defaultDifficultyRecord } from '@/lib/difficulty';
+} from '@/types/practice-session';
 
 export class PracticeSessionManager {
   private session: PracticeSession | null = null;
@@ -34,7 +34,7 @@ export class PracticeSessionManager {
     questions: Question[]
   ): Promise<PracticeSession> {
     if (this.session && this.session.currentQuestionIndex < this.session.questions.length - 1) {
-      throw new Error("Another practice session is already in progress");
+      throw new Error('Another practice session is already in progress');
     }
 
     // Shuffle questions for variety
@@ -81,12 +81,12 @@ export class PracticeSessionManager {
 
   answerQuestion(questionId: string, choiceId: string): boolean {
     if (!this.session) {
-      throw new Error("No active practice session");
+      throw new Error('No active practice session');
     }
 
     const question = this.session.questions.find((q) => q.id === questionId);
     if (!question) {
-      throw new Error("Question not found in current session");
+      throw new Error('Question not found in current session');
     }
 
     // Record the answer
@@ -117,7 +117,7 @@ export class PracticeSessionManager {
 
   nextQuestion(): PracticeQuestion | null {
     if (!this.session) {
-      throw new Error("No active practice session");
+      throw new Error('No active practice session');
     }
 
     if (this.session.currentQuestionIndex < this.session.questions.length - 1) {
@@ -132,7 +132,7 @@ export class PracticeSessionManager {
 
   previousQuestion(): PracticeQuestion | null {
     if (!this.session) {
-      throw new Error("No active practice session");
+      throw new Error('No active practice session');
     }
 
     if (this.session.currentQuestionIndex > 0) {
@@ -180,7 +180,7 @@ export class PracticeSessionManager {
 
   private generateSessionSummary(): PracticeSessionSummary {
     if (!this.session) {
-      throw new Error("No active session to summarize");
+      throw new Error('No active session to summarize');
     }
 
     // Calculate domain breakdown
@@ -188,10 +188,13 @@ export class PracticeSessionManager {
     const domainBreakdown: Record<
       TCODomain,
       { correct: number; total: number; percentage: number }
-    > = domainValues.reduce((acc, d) => {
-      acc[d] = { correct: 0, total: 0, percentage: 0 };
-      return acc;
-    }, {} as Record<TCODomain, { correct: number; total: number; percentage: number }>);
+    > = domainValues.reduce(
+      (acc, d) => {
+        acc[d] = { correct: 0, total: 0, percentage: 0 };
+        return acc;
+      },
+      {} as Record<TCODomain, { correct: number; total: number; percentage: number }>
+    );
 
     // Calculate difficulty breakdown
     const difficultyBreakdown: Record<

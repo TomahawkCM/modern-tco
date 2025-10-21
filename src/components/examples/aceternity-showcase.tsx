@@ -166,7 +166,10 @@ export default function AceternityShowcase() {
                 Experience interactive labs, real-time progress tracking, and adaptive learning
                 powered by modern animations.
               </p>
-              <button type="button" className="rounded-lg border border-gray-500 px-4 py-1 text-muted-foreground">
+              <button
+                type="button"
+                className="rounded-lg border border-gray-500 px-4 py-1 text-muted-foreground"
+              >
                 Explore Features
               </button>
               <Meteors number={20} />

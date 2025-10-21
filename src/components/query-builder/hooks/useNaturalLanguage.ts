@@ -1,15 +1,15 @@
-import { useState, useCallback, useMemo } from 'react';
-import type {
-  UseNaturalLanguage,
-  NaturalLanguageResult,
-  QuerySuggestion,
-  PartialQuery,
-  SensorSelection,
-  FilterSelection,
-  QueryAlternative
-} from '../types/queryBuilder';
-import type { Sensor } from '@/lib/tanium-query-engine/types';
+import { useCallback, useMemo, useState } from 'react';
 import { SENSORS_CATALOG } from '@/lib/tanium-query-engine/field-mappings';
+import type { Sensor } from '@/lib/tanium-query-engine/types';
+import type {
+  FilterSelection,
+  NaturalLanguageResult,
+  PartialQuery,
+  QueryAlternative,
+  QuerySuggestion,
+  SensorSelection,
+  UseNaturalLanguage,
+} from '../types/queryBuilder';
 
 // Common query patterns for recognition
 const queryPatterns = [
@@ -39,12 +39,12 @@ const sensorMappings: Record<string, string[]> = {
 
 // Operator mappings
 const operatorMappings: Record<string, string[]> = {
-  'contains': ['contains', 'containing', 'includes', 'including', 'with'],
-  'equals': ['equals', 'is', 'equal to', 'exactly'],
-  'greater_than': ['greater than', 'more than', 'higher than', 'above', '>'],
-  'less_than': ['less than', 'lower than', 'below', 'under', '<'],
-  'starts_with': ['starts with', 'beginning with', 'starting'],
-  'ends_with': ['ends with', 'ending with', 'ending'],
+  contains: ['contains', 'containing', 'includes', 'including', 'with'],
+  equals: ['equals', 'is', 'equal to', 'exactly'],
+  greater_than: ['greater than', 'more than', 'higher than', 'above', '>'],
+  less_than: ['less than', 'lower than', 'below', 'under', '<'],
+  starts_with: ['starts with', 'beginning with', 'starting'],
+  ends_with: ['ends with', 'ending with', 'ending'],
 };
 
 export function useNaturalLanguage(): UseNaturalLanguage {
@@ -56,7 +56,7 @@ export function useNaturalLanguage(): UseNaturalLanguage {
 
     try {
       // Simulate processing delay
-      await new Promise(resolve => setTimeout(resolve, 500));
+      await new Promise((resolve) => setTimeout(resolve, 500));
 
       const query: PartialQuery = {
         sensors: [],
@@ -66,7 +66,7 @@ export function useNaturalLanguage(): UseNaturalLanguage {
         filterLogic: 'AND',
         groupBy: [],
         orderBy: [],
-        limit: undefined
+        limit: undefined,
       };
 
       const alternatives: QueryAlternative[] = [];
@@ -79,59 +79,78 @@ export function useNaturalLanguage(): UseNaturalLanguage {
         if (match) {
           switch (type) {
             case 'list':
-            case 'query':
+            case 'query': {
               // Extract sensors
               const sensorText = match[1] || match[2];
               const sensors = extractSensors(sensorText);
-              sensors.forEach(sensor => {
+              sensors.forEach((sensor) => {
                 query.sensors.push({
-                  sensor: { name: sensor, key: sensor.toLowerCase().replace(/\s+/g, '_'), type: 'text', category: 'General' } as Sensor,
-                  isValid: true
+                  sensor: {
+                    name: sensor,
+                    key: sensor.toLowerCase().replace(/\s+/g, '_'),
+                    type: 'text',
+                    category: 'General',
+                  } as Sensor,
+                  isValid: true,
                 });
               });
               confidence = 0.8;
               interpretation = `Query for ${sensors.join(', ')}`;
               break;
+            }
 
             case 'filter':
             case 'contains':
-            case 'comparison':
+            case 'comparison': {
               // Extract filters
               const filterInfo = extractFilters(text);
               query.filters = filterInfo.filters;
               query.sensors = filterInfo.sensors;
               confidence = 0.75;
-              interpretation = `Filter by ${filterInfo.filters.map(f => f.sensor).join(', ')}`;
+              interpretation = `Filter by ${filterInfo.filters.map((f) => f.sensor).join(', ')}`;
               break;
+            }
 
             case 'count':
-            case 'aggregate':
+            case 'aggregate': {
               // Add count aggregate
               query.aggregates.push({ function: 'count' });
               const countSensors = extractSensors(match[1]);
-              countSensors.forEach(sensor => {
+              countSensors.forEach((sensor) => {
                 query.sensors.push({
-                  sensor: { name: sensor, key: sensor.toLowerCase().replace(/\s+/g, '_'), type: 'text', category: 'General' } as Sensor,
-                  isValid: true
+                  sensor: {
+                    name: sensor,
+                    key: sensor.toLowerCase().replace(/\s+/g, '_'),
+                    type: 'text',
+                    category: 'General',
+                  } as Sensor,
+                  isValid: true,
                 });
               });
               confidence = 0.85;
               interpretation = `Count ${countSensors.join(', ')}`;
               break;
+            }
 
-            case 'limit':
+            case 'limit': {
               // Extract limit
               query.limit = parseInt(match[1]);
               const limitSensors = extractSensors(match[2]);
-              limitSensors.forEach(sensor => {
+              limitSensors.forEach((sensor) => {
                 query.sensors.push({
-                  sensor: { name: sensor, key: sensor.toLowerCase().replace(/\s+/g, '_'), type: 'text', category: 'General' } as Sensor,
-                  isValid: true
+                  sensor: {
+                    name: sensor,
+                    key: sensor.toLowerCase().replace(/\s+/g, '_'),
+                    type: 'text',
+                    category: 'General',
+                  } as Sensor,
+                  isValid: true,
                 });
               });
               confidence = 0.9;
               interpretation = `Top ${query.limit} ${limitSensors.join(', ')}`;
               break;
+            }
           }
           break;
         }
@@ -141,10 +160,15 @@ export function useNaturalLanguage(): UseNaturalLanguage {
       if (query.sensors.length === 0) {
         const sensors = extractSensors(text);
         if (sensors.length > 0) {
-          sensors.forEach(sensor => {
+          sensors.forEach((sensor) => {
             query.sensors.push({
-              sensor: { name: sensor, key: sensor.toLowerCase().replace(/\s+/g, '_'), type: 'text', category: 'General' } as Sensor,
-              isValid: true
+              sensor: {
+                name: sensor,
+                key: sensor.toLowerCase().replace(/\s+/g, '_'),
+                type: 'text',
+                category: 'General',
+              } as Sensor,
+              isValid: true,
             });
           });
           confidence = 0.5;
@@ -152,8 +176,13 @@ export function useNaturalLanguage(): UseNaturalLanguage {
         } else {
           // Default to Computer Name
           query.sensors.push({
-            sensor: { name: 'Computer Name', key: 'computer_name', type: 'text', category: 'System' } as Sensor,
-            isValid: true
+            sensor: {
+              name: 'Computer Name',
+              key: 'computer_name',
+              type: 'text',
+              category: 'System',
+            } as Sensor,
+            isValid: true,
           });
           confidence = 0.3;
           interpretation = 'Default query for Computer Name';
@@ -166,28 +195,56 @@ export function useNaturalLanguage(): UseNaturalLanguage {
           query: {
             ...query,
             sensors: [
-              { sensor: { name: 'Computer Name', key: 'computer_name', type: 'text', category: 'System' } as Sensor, isValid: true },
-              { sensor: { name: 'Operating System', key: 'os_platform', type: 'text', category: 'System' } as Sensor, isValid: true }
-            ]
+              {
+                sensor: {
+                  name: 'Computer Name',
+                  key: 'computer_name',
+                  type: 'text',
+                  category: 'System',
+                } as Sensor,
+                isValid: true,
+              },
+              {
+                sensor: {
+                  name: 'Operating System',
+                  key: 'os_platform',
+                  type: 'text',
+                  category: 'System',
+                } as Sensor,
+                isValid: true,
+              },
+            ],
           },
           confidence: 0.6,
-          explanation: 'Show computer names and operating systems'
+          explanation: 'Show computer names and operating systems',
         });
 
         alternatives.push({
           query: {
             ...query,
-            sensors: [{ sensor: { name: 'Computer Name', key: 'computer_name', type: 'text', category: 'System' } as Sensor, isValid: true }],
-            filters: [{
-              id: 'filter-1',
-              sensor: 'Operating System',
-              operator: 'contains',
-              value: 'Windows',
-              dataType: 'text'
-            }]
+            sensors: [
+              {
+                sensor: {
+                  name: 'Computer Name',
+                  key: 'computer_name',
+                  type: 'text',
+                  category: 'System',
+                } as Sensor,
+                isValid: true,
+              },
+            ],
+            filters: [
+              {
+                id: 'filter-1',
+                sensor: 'Operating System',
+                operator: 'contains',
+                value: 'Windows',
+                dataType: 'text',
+              },
+            ],
           },
           confidence: 0.5,
-          explanation: 'Show Windows computers'
+          explanation: 'Show Windows computers',
         });
       }
 
@@ -195,7 +252,7 @@ export function useNaturalLanguage(): UseNaturalLanguage {
         query,
         confidence,
         alternatives,
-        interpretation
+        interpretation,
       };
     } finally {
       setIsProcessing(false);
@@ -220,40 +277,51 @@ export function useNaturalLanguage(): UseNaturalLanguage {
   }, []);
 
   // Extract filters from text
-  const extractFilters = useCallback((text: string): { filters: FilterSelection[], sensors: SensorSelection[] } => {
-    const filters: FilterSelection[] = [];
-    const sensors: SensorSelection[] = [];
-    const lowerText = text.toLowerCase();
+  const extractFilters = useCallback(
+    (text: string): { filters: FilterSelection[]; sensors: SensorSelection[] } => {
+      const filters: FilterSelection[] = [];
+      const sensors: SensorSelection[] = [];
+      const lowerText = text.toLowerCase();
 
-    // Look for filter conditions
-    for (const [operator, keywords] of Object.entries(operatorMappings)) {
-      for (const keyword of keywords) {
-        if (lowerText.includes(keyword)) {
-          // Try to extract sensor and value
-          const pattern = new RegExp(`(\\w+(?:\\s+\\w+)*?)\\s+${keyword}\\s+["']?([^"']+)["']?`, 'i');
-          const match = text.match(pattern);
+      // Look for filter conditions
+      for (const [operator, keywords] of Object.entries(operatorMappings)) {
+        for (const keyword of keywords) {
+          if (lowerText.includes(keyword)) {
+            // Try to extract sensor and value
+            const pattern = new RegExp(
+              `(\\w+(?:\\s+\\w+)*?)\\s+${keyword}\\s+["']?([^"']+)["']?`,
+              'i'
+            );
+            const match = text.match(pattern);
 
-          if (match) {
-            const sensorName = extractSensors(match[1])[0] || 'Computer Name';
-            filters.push({
-              id: `filter-${Date.now()}`,
-              sensor: sensorName,
-              operator: operator as any,
-              value: match[2].trim(),
-              dataType: 'text'
-            });
+            if (match) {
+              const sensorName = extractSensors(match[1])[0] || 'Computer Name';
+              filters.push({
+                id: `filter-${Date.now()}`,
+                sensor: sensorName,
+                operator: operator as any,
+                value: match[2].trim(),
+                dataType: 'text',
+              });
 
-            sensors.push({
-              sensor: { name: sensorName, key: sensorName.toLowerCase().replace(/\s+/g, '_'), type: 'text', category: 'General' } as Sensor,
-              isValid: true
-            });
+              sensors.push({
+                sensor: {
+                  name: sensorName,
+                  key: sensorName.toLowerCase().replace(/\s+/g, '_'),
+                  type: 'text',
+                  category: 'General',
+                } as Sensor,
+                isValid: true,
+              });
+            }
           }
         }
       }
-    }
 
-    return { filters, sensors };
-  }, [extractSensors]);
+      return { filters, sensors };
+    },
+    [extractSensors]
+  );
 
   // Get suggestions based on partial input
   const getSuggestions = useCallback((text: string, context: PartialQuery): QuerySuggestion[] => {
@@ -264,7 +332,7 @@ export function useNaturalLanguage(): UseNaturalLanguage {
 
     // Suggest sensors
     for (const [sensor, keywords] of Object.entries(sensorMappings)) {
-      if (keywords.some(k => k.includes(lowerText) || lowerText.includes(k))) {
+      if (keywords.some((k) => k.includes(lowerText) || lowerText.includes(k))) {
         suggestions.push({
           id: `sensor-${sensor}`,
           type: 'sensor',
@@ -272,7 +340,7 @@ export function useNaturalLanguage(): UseNaturalLanguage {
           displayText: sensor,
           description: `Add ${sensor} sensor to query`,
           confidence: 0.8,
-          category: 'Sensors'
+          category: 'Sensors',
         });
       }
     }
@@ -287,7 +355,7 @@ export function useNaturalLanguage(): UseNaturalLanguage {
         description: 'Find machines with CPU > 80%',
         confidence: 0.9,
         category: 'Templates',
-        runtime: 150
+        runtime: 150,
       });
     }
 
@@ -300,7 +368,7 @@ export function useNaturalLanguage(): UseNaturalLanguage {
         description: 'Find machines with < 50GB free',
         confidence: 0.9,
         category: 'Templates',
-        runtime: 120
+        runtime: 120,
       });
     }
 
@@ -312,7 +380,7 @@ export function useNaturalLanguage(): UseNaturalLanguage {
         displayText: 'Filter Windows machines',
         description: 'Add Windows filter',
         confidence: 0.85,
-        category: 'Filters'
+        category: 'Filters',
       });
     }
 
@@ -325,6 +393,6 @@ export function useNaturalLanguage(): UseNaturalLanguage {
   return {
     parse,
     getSuggestions,
-    isProcessing
+    isProcessing,
   };
 }
