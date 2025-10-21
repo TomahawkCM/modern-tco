@@ -6,14 +6,8 @@
     "domainEnum": "REFINING_QUESTIONS",
     "difficulty": "Intermediate",
     "estimatedTime": "90 min",
-    "prerequisites": [
-      "module-asking-questions"
-    ],
-    "objectives": [
-      "obj-refining-groups",
-      "obj-refining-filters",
-      "obj-refining-rbac"
-    ],
+    "prerequisites": ["module-asking-questions"],
+    "objectives": ["obj-refining-groups", "obj-refining-filters", "obj-refining-rbac"],
     "tags": [
       "TCO",
       "Domain2",
@@ -36,5 +30,5 @@
   },
   "filename": "02-refining-questions-targeting.mdx",
   "slug": "module-refining-questions-targeting",
-  "bundledAt": "2025-10-21T03:26:37.742Z"
+  "bundledAt": "2025-10-21T23:26:56.683Z"
 }

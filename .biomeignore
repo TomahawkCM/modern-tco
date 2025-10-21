@@ -14,6 +14,15 @@ dist/
 coverage/
 .nyc_output/
 
+# Backup directories
+backups/
+
+# Temporary files
+tmp/
+
+# Metrics
+.claude-flow/metrics/
+
 # IDE and editors
 .vscode/
 .idea/
@@ -52,3 +61,10 @@ C:/
 # Reports
 reports/
 *.log
+
+# Auto-generated files
+src/types/supabase-generated.ts
+
+# Test scripts
+test-*.mjs
+test-*.js

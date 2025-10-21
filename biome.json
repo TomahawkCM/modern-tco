@@ -22,11 +22,17 @@
         "noUnusedVariables": {
           "level": "warn",
           "fix": "none"
+        },
+        "useExhaustiveDependencies": {
+          "level": "warn",
+          "fix": "none"
         }
       },
       "suspicious": {
         "noImplicitAnyLet": "warn",
-        "noArrayIndexKey": "warn"
+        "noArrayIndexKey": "warn",
+        "noUnknownAtRules": "off",
+        "useIterableCallbackReturn": "off"
       },
       "a11y": {
         "useButtonType": "warn",

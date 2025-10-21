@@ -2,7 +2,7 @@
 'use client';
 
 import { Brain, Check, X } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -66,11 +66,7 @@ export default function QuestionReview({ onComplete }: QuestionReviewProps) {
   });
   const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    loadDueQuestions();
-  }, [loadDueQuestions]);
-
-  const loadDueQuestions = async () => {
+  const loadDueQuestions = useCallback(async () => {
     if (!user?.id) return;
 
     setIsLoading(true);
@@ -112,7 +108,11 @@ export default function QuestionReview({ onComplete }: QuestionReviewProps) {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [user?.id]);
+
+  useEffect(() => {
+    loadDueQuestions();
+  }, [loadDueQuestions]);
 
   const handleAnswerSelect = (answerIndex: number) => {
     if (showResult) return; // Already answered
@@ -239,8 +239,8 @@ export default function QuestionReview({ onComplete }: QuestionReviewProps) {
     return (
       <Card>
         <CardContent className="flex items-center justify-center p-12">
-          <div className="text-center space-y-4">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
+          <div className="space-y-4 text-center">
+            <div className="mx-auto h-12 w-12 animate-spin rounded-full border-b-2 border-primary"></div>
             <p className="text-muted-foreground">Loading questions...</p>
           </div>
         </CardContent>
@@ -252,8 +252,8 @@ export default function QuestionReview({ onComplete }: QuestionReviewProps) {
     return (
       <Card>
         <CardContent className="p-12 text-center">
-          <Brain className="h-16 w-16 mx-auto mb-4 text-muted-foreground" />
-          <h3 className="text-xl font-semibold mb-2">No Questions Due</h3>
+          <Brain className="mx-auto mb-4 h-16 w-16 text-muted-foreground" />
+          <h3 className="mb-2 text-xl font-semibold">No Questions Due</h3>
           <p className="text-muted-foreground">All caught up! Check back tomorrow.</p>
           <Button onClick={onComplete} className="mt-4">
             Back to Dashboard
@@ -289,7 +289,7 @@ export default function QuestionReview({ onComplete }: QuestionReviewProps) {
             <Badge variant="outline">{currentQuestion.domain || 'General'}</Badge>
             <Badge variant="secondary">{currentQuestion.difficulty}</Badge>
           </div>
-          <CardTitle className="text-xl mt-4">{currentQuestion.question}</CardTitle>
+          <CardTitle className="mt-4 text-xl">{currentQuestion.question}</CardTitle>
         </CardHeader>
 
         <CardContent className="space-y-6">
@@ -309,7 +309,7 @@ export default function QuestionReview({ onComplete }: QuestionReviewProps) {
                 return (
                   <div
                     key={option.id}
-                    className={`flex items-center space-x-3 p-4 rounded-lg border-2 transition-colors ${
+                    className={`flex items-center space-x-3 rounded-lg border-2 p-4 transition-colors ${
                       showCorrect
                         ? 'border-green-500 bg-[#22c55e]/10'
                         : showIncorrect
@@ -348,7 +348,7 @@ export default function QuestionReview({ onComplete }: QuestionReviewProps) {
             <div className="space-y-4">
               <Card className={isCorrect ? 'border-green-500/50' : 'border-red-500/50'}>
                 <CardContent className="pt-6">
-                  <div className="flex items-start gap-3 mb-3">
+                  <div className="mb-3 flex items-start gap-3">
                     {isCorrect ? (
                       <div className="flex items-center gap-2 text-[#22c55e]">
                         <Check className="h-5 w-5" />

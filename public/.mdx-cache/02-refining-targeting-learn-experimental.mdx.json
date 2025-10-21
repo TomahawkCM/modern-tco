@@ -5,11 +5,7 @@
     "domainSlug": "refining-targeting",
     "difficulty": "Intermediate",
     "estimatedTime": 75,
-    "tags": [
-      "microlearning",
-      "targeting",
-      "experiment"
-    ],
+    "tags": ["microlearning", "targeting", "experiment"],
     "status": "experimental",
     "lastUpdated": "2025-10-05"
   },
@@ -20,5 +16,5 @@
   },
   "filename": "02-refining-targeting-learn-experimental.mdx",
   "slug": "module-02L",
-  "bundledAt": "2025-10-21T03:26:37.774Z"
+  "bundledAt": "2025-10-21T23:26:56.714Z"
 }
