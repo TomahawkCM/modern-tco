@@ -40,5 +40,6 @@ export function useMDXComponents(components: MDXComponents = {}): MDXComponents 
     QueryPlayground,
     SkillGate,
     Steps,
+    'Steps.Step': Steps.Step,
   };
 }
