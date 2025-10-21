@@ -6,7 +6,7 @@ function originFrom(req: Request): string {
   try {
     const u = new URL(req.url);
     return `${u.protocol}//${u.host}`;
-  } catch (error) {
+  } catch (_error) {
     return '';
   }
 }
@@ -22,7 +22,7 @@ export async function POST(req: Request) {
         selected = desiredPlan;
       }
     }
-  } catch (error) {
+  } catch (_error) {
     // Security fix: Return 400 error instead of silently using default plan
     return NextResponse.json(
       {

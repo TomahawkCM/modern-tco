@@ -78,9 +78,6 @@ describe('Critical Component Tests', () => {
 
       const shuffled = [...questions].sort(() => Math.random() - 0.5);
 
-      // Very unlikely to be in same order after shuffle
-      const isSameOrder = questions.every((val, idx) => val === shuffled[idx]);
-
       // Note: This test has small chance of false positive
       // In production, use a seeded random for deterministic tests
       expect(questions).toHaveLength(shuffled.length);

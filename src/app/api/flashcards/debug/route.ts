@@ -52,7 +52,7 @@ export async function GET() {
   if (supabaseAdmin) {
     try {
       // Try to query the flashcards table
-      const { data, error } = await supabaseAdmin.from('flashcards').select('id').limit(1);
+      const { data: _, error } = await supabaseAdmin.from('flashcards').select('id').limit(1);
 
       (diagnostics.checks as Record<string, unknown>).database = {
         connected: true,
