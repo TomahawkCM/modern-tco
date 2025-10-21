@@ -361,6 +361,7 @@ export function AssessmentSession({
           <div className="flex items-center space-x-2">
             {session.questions.map((_: any, index: number) => (
               <button
+                type="button"
                 key={index}
                 onClick={() => setCurrentQuestionIndex(index)}
                 aria-label={`Go to question ${index + 1}${session.responses.find((r: any) => r.questionId === session.questions[index].id) ? ' (answered)' : ''}`}

@@ -55,6 +55,7 @@ export function AuthGuard({ children, fallback, requireAuth = true }: AuthGuardP
                 <p className="text-center text-sm text-muted-foreground">
                   Don&rsquo;t have an account?{' '}
                   <button
+                    type="button"
                     onClick={() => setShowAuthModal(true)}
                     className="text-primary hover:underline"
                   >
@@ -72,6 +73,7 @@ export function AuthGuard({ children, fallback, requireAuth = true }: AuthGuardP
               <div className="mb-4 flex items-center justify-between">
                 <h2 className="text-xl font-semibold">Sign In</h2>
                 <button
+                  type="button"
                   onClick={() => setShowAuthModal(false)}
                   className="text-muted-foreground hover:text-slate-700 dark:text-muted-foreground dark:hover:text-muted-foreground"
                 >

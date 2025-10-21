@@ -272,6 +272,7 @@ export function ReviewMode({
 
                       return (
                         <button
+                          type="button"
                           key={index}
                           onClick={() => setCurrentQuestionIndex(index)}
                           className={`h-10 w-10 rounded-lg text-sm font-semibold transition-all ${

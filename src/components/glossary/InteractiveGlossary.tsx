@@ -200,7 +200,11 @@ export function InteractiveGlossary({
               )}
             </button>
             {activeFilterCount > 0 && (
-              <button onClick={resetFilters} className="text-sm text-cyan-600 hover:text-cyan-800">
+              <button
+                type="button"
+                onClick={resetFilters}
+                className="text-sm text-cyan-600 hover:text-cyan-800"
+              >
                 Clear all filters
               </button>
             )}

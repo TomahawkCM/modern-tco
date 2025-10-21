@@ -226,6 +226,7 @@ export default function ReviewPage() {
         {/* Custom Tabs Header */}
         <div className="glass grid w-full grid-cols-2 rounded-lg border border-white/10 p-1">
           <button
+            type="button"
             onClick={() => setActiveTab('questions')}
             className={cn(
               'flex items-center justify-center gap-2 rounded-md px-4 py-2 text-sm font-medium transition-all',
@@ -237,6 +238,7 @@ export default function ReviewPage() {
             Review Questions
           </button>
           <button
+            type="button"
             onClick={() => setActiveTab('analytics')}
             className={cn(
               'flex items-center justify-center gap-2 rounded-md px-4 py-2 text-sm font-medium transition-all',

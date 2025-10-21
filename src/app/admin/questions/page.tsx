@@ -86,6 +86,7 @@ export default function AdminQuestionsPage() {
                   {filtered.map((q) => (
                     <li key={q.id} className="flex items-center justify-between py-2">
                       <button
+                        type="button"
                         className="text-left text-sm text-gray-100 hover:underline"
                         onClick={() => setCurrent(q)}
                       >

@@ -103,6 +103,7 @@ export const CyberpunkNavBar: React.FC<CyberpunkNavBarProps> = ({
             <div className="hidden lg:flex items-center space-x-1">
               {navItems.map((item) => (
                 <button
+                  type="button"
                   key={item.name}
                   className="px-4 py-2 rounded-lg text-cyan-100/80 hover:text-primary flex items-center space-x-2"
                 >

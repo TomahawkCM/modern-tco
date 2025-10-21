@@ -90,7 +90,7 @@ export default async function LearnModulePage({ params }: { params: Promise<{ sl
                   </p>
                 ) : null}
                 <div className="mt-2">
-                  <button className="text-sm text-blue-600 hover:underline" disabled>
+                  <button type="button" className="text-sm text-blue-600 hover:underline" disabled>
                     Coming soon
                   </button>
                 </div>

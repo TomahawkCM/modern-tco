@@ -282,6 +282,7 @@ function MockExamContent() {
                   <span className="text-foreground/80 text-sm">Exam Variant:</span>
                   {["A","B","C"].map((v) => (
                     <button
+                      type="button"
                       key={v}
                       onClick={() => {
                         setVariant(v as 'A'|'B'|'C');
