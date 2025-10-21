@@ -1,20 +1,20 @@
 // Flashcard Service - Active Recall & Spaced Repetition
 // Integrates SM-2 algorithm with Supabase storage
 
-import { supabase } from "@/lib/supabase";
-import { schedule, type SRRating } from "@/lib/sr";
+import { type SRRating, schedule } from '@/lib/sr';
+import { supabase } from '@/lib/supabase';
 import type {
   Flashcard,
-  FlashcardReview,
   FlashcardDeck,
+  FlashcardReview,
+  FlashcardSource,
   FlashcardStats,
   FlashcardType,
-  FlashcardSource,
-  AutoGenerateOptions,
-  toSRCardState,
-  fromSRCardState,
-} from "@/types/flashcard";
-import { toSRCardState as convertToSRS, fromSRCardState as convertFromSRS } from "@/types/flashcard";
+} from '@/types/flashcard';
+import {
+  fromSRCardState as convertFromSRS,
+  toSRCardState as convertToSRS,
+} from '@/types/flashcard';
 
 class FlashcardService {
   // ==================== FLASHCARD CRUD ====================
@@ -36,7 +36,7 @@ class FlashcardService {
     }
   ): Promise<Flashcard | null> {
     const { data, error } = await supabase
-      .from("flashcards")
+      .from('flashcards')
       .insert({
         user_id: userId,
         front_text: front,
@@ -55,7 +55,7 @@ class FlashcardService {
       .single();
 
     if (error) {
-      console.error("Error creating flashcard:", error);
+      console.error('Error creating flashcard:', error);
       return null;
     }
 
@@ -64,9 +64,9 @@ class FlashcardService {
 
   async getFlashcard(flashcardId: string): Promise<Flashcard | null> {
     const { data, error } = await supabase
-      .from("flashcards")
+      .from('flashcards')
       .select()
-      .eq("id", flashcardId)
+      .eq('id', flashcardId)
       .single();
 
     if (error || !data) return null;
@@ -75,10 +75,10 @@ class FlashcardService {
 
   async getUserFlashcards(userId: string): Promise<Flashcard[]> {
     const { data, error } = await supabase
-      .from("flashcards")
+      .from('flashcards')
       .select()
-      .eq("user_id", userId)
-      .order("created_at", { ascending: false });
+      .eq('user_id', userId)
+      .order('created_at', { ascending: false });
 
     if (error || !data) return [];
     return data as Flashcard[];
@@ -86,8 +86,8 @@ class FlashcardService {
 
   async getFlashcardsByModule(userId: string | undefined, moduleId: string): Promise<Flashcard[]> {
     if (!userId) {
-      const response = await this.callStaticEndpoint<{ cards: Flashcard[] }>("cards", {
-        method: "GET",
+      const response = await this.callStaticEndpoint<{ cards: Flashcard[] }>('cards', {
+        method: 'GET',
         query: {
           moduleId,
         },
@@ -96,11 +96,11 @@ class FlashcardService {
     }
 
     const { data, error } = await supabase
-      .from("flashcards")
+      .from('flashcards')
       .select()
-      .eq("user_id", userId)
-      .eq("module_id", moduleId)
-      .order("created_at", { ascending: false });
+      .eq('user_id', userId)
+      .eq('module_id', moduleId)
+      .order('created_at', { ascending: false });
 
     if (error || !data) return [];
     return data as Flashcard[];
@@ -108,8 +108,8 @@ class FlashcardService {
 
   async getFlashcardsByDomain(userId: string | undefined, domain: string): Promise<Flashcard[]> {
     if (!userId) {
-      const response = await this.callStaticEndpoint<{ cards: Flashcard[] }>("cards", {
-        method: "GET",
+      const response = await this.callStaticEndpoint<{ cards: Flashcard[] }>('cards', {
+        method: 'GET',
         query: {
           domain,
         },
@@ -120,31 +120,28 @@ class FlashcardService {
     console.log('[flashcardService] getFlashcardsByDomain:', { userId, domain });
 
     const { data, error } = await supabase
-      .from("flashcards")
+      .from('flashcards')
       .select()
-      .eq("user_id", userId)
-      .contains("tags", [domain])
-      .order("created_at", { ascending: false });
+      .eq('user_id', userId)
+      .contains('tags', [domain])
+      .order('created_at', { ascending: false });
 
-    console.log('[flashcardService] getFlashcardsByDomain result:', { count: data?.length || 0, error: error?.message });
+    console.log('[flashcardService] getFlashcardsByDomain result:', {
+      count: data?.length || 0,
+      error: error?.message,
+    });
     if (error || !data) return [];
     return data as Flashcard[];
   }
 
   async updateFlashcard(flashcardId: string, updates: Partial<Flashcard>): Promise<boolean> {
-    const { error } = await supabase
-      .from("flashcards")
-      .update(updates)
-      .eq("id", flashcardId);
+    const { error } = await supabase.from('flashcards').update(updates).eq('id', flashcardId);
 
     return !error;
   }
 
   async deleteFlashcard(flashcardId: string): Promise<boolean> {
-    const { error } = await supabase
-      .from("flashcards")
-      .delete()
-      .eq("id", flashcardId);
+    const { error } = await supabase.from('flashcards').delete().eq('id', flashcardId);
 
     return !error;
   }
@@ -153,10 +150,10 @@ class FlashcardService {
 
   async getDueFlashcards(userId: string | undefined, limit: number = 20): Promise<Flashcard[]> {
     if (!userId) {
-      const response = await this.callStaticEndpoint<{ cards: Flashcard[] }>("cards", {
-        method: "GET",
+      const response = await this.callStaticEndpoint<{ cards: Flashcard[] }>('cards', {
+        method: 'GET',
         query: {
-          dueOnly: "true",
+          dueOnly: 'true',
           limit: String(limit),
         },
       });
@@ -167,14 +164,17 @@ class FlashcardService {
     console.log('[flashcardService] getDueFlashcards:', { userId, limit, now });
 
     const { data, error } = await supabase
-      .from("flashcards")
+      .from('flashcards')
       .select()
-      .eq("user_id", userId)
-      .lte("srs_due", now)
-      .order("srs_due", { ascending: true })
+      .eq('user_id', userId)
+      .lte('srs_due', now)
+      .order('srs_due', { ascending: true })
       .limit(limit);
 
-    console.log('[flashcardService] getDueFlashcards result:', { count: data?.length || 0, error: error?.message });
+    console.log('[flashcardService] getDueFlashcards result:', {
+      count: data?.length || 0,
+      error: error?.message,
+    });
     if (error || !data) return [];
     return data as Flashcard[];
   }
@@ -189,8 +189,8 @@ class FlashcardService {
       const response = await this.callStaticEndpoint<{
         flashcard: Flashcard;
         review: FlashcardReview;
-      }>("review", {
-        method: "POST",
+      }>('review', {
+        method: 'POST',
         body: {
           flashcardId,
           rating,
@@ -224,7 +224,7 @@ class FlashcardService {
 
     // Update flashcard in database
     const { data: updatedFlashcard, error: updateError } = await supabase
-      .from("flashcards")
+      .from('flashcards')
       .update({
         ...srsUpdates,
         total_reviews: newTotalReviews,
@@ -232,18 +232,18 @@ class FlashcardService {
         average_recall_time_seconds: newAvgTime,
         last_reviewed_at: new Date().toISOString(),
       })
-      .eq("id", flashcardId)
+      .eq('id', flashcardId)
       .select()
       .single();
 
     if (updateError || !updatedFlashcard) {
-      console.error("Error updating flashcard:", updateError);
+      console.error('Error updating flashcard:', updateError);
       return null;
     }
 
     // Record review in history
     const { data: review, error: reviewError } = await supabase
-      .from("flashcard_reviews")
+      .from('flashcard_reviews')
       .insert({
         flashcard_id: flashcardId,
         user_id: userId,
@@ -258,7 +258,7 @@ class FlashcardService {
       .single();
 
     if (reviewError) {
-      console.error("Error creating review:", reviewError);
+      console.error('Error creating review:', reviewError);
     }
 
     return {
@@ -269,10 +269,10 @@ class FlashcardService {
 
   async getNewFlashcards(userId: string | undefined, limit: number = 5): Promise<Flashcard[]> {
     if (!userId) {
-      const response = await this.callStaticEndpoint<{ cards: Flashcard[] }>("cards", {
-        method: "GET",
+      const response = await this.callStaticEndpoint<{ cards: Flashcard[] }>('cards', {
+        method: 'GET',
         query: {
-          newOnly: "true",
+          newOnly: 'true',
           limit: String(limit),
         },
       });
@@ -282,21 +282,24 @@ class FlashcardService {
     console.log('[flashcardService] getNewFlashcards:', { userId, limit });
 
     const { data, error } = await supabase
-      .from("flashcards")
+      .from('flashcards')
       .select()
-      .eq("user_id", userId)
-      .eq("srs_reps", 0)
-      .order("created_at", { ascending: false })
+      .eq('user_id', userId)
+      .eq('srs_reps', 0)
+      .order('created_at', { ascending: false })
       .limit(limit);
 
-    console.log('[flashcardService] getNewFlashcards result:', { count: data?.length || 0, error: error?.message });
+    console.log('[flashcardService] getNewFlashcards result:', {
+      count: data?.length || 0,
+      error: error?.message,
+    });
     if (error || !data) return [];
     return data as Flashcard[];
   }
 
   async getFlashcardStats(userId: string | undefined): Promise<FlashcardStats> {
     if (!userId) {
-      const response = await this.callStaticEndpoint<FlashcardStats>("stats");
+      const response = await this.callStaticEndpoint<FlashcardStats>('stats');
       if (response) {
         return response;
       }
@@ -315,11 +318,14 @@ class FlashcardService {
     console.log('[flashcardService] getFlashcardStats:', { userId });
 
     const { data: allCards, error } = await supabase
-      .from("flashcards")
+      .from('flashcards')
       .select()
-      .eq("user_id", userId);
+      .eq('user_id', userId);
 
-    console.log('[flashcardService] getFlashcardStats result:', { count: allCards?.length || 0, error: error?.message });
+    console.log('[flashcardService] getFlashcardStats result:', {
+      count: allCards?.length || 0,
+      error: error?.message,
+    });
 
     if (!allCards || allCards.length === 0) {
       console.log('[flashcardService] No cards found, returning empty stats');
@@ -339,10 +345,10 @@ class FlashcardService {
     const now = new Date().toISOString();
 
     const totalCards = cards.length;
-    const dueToday = cards.filter(c => c.srs_due <= now).length;
-    const newCards = cards.filter(c => c.srs_reps === 0).length;
-    const learningCards = cards.filter(c => c.srs_reps > 0 && c.srs_reps < 2).length;
-    const matureCards = cards.filter(c => c.srs_reps >= 2).length;
+    const dueToday = cards.filter((c) => c.srs_due <= now).length;
+    const newCards = cards.filter((c) => c.srs_reps === 0).length;
+    const learningCards = cards.filter((c) => c.srs_reps > 0 && c.srs_reps < 2).length;
+    const matureCards = cards.filter((c) => c.srs_reps >= 2).length;
 
     const totalReviews = cards.reduce((sum, c) => sum + c.total_reviews, 0);
     const totalCorrect = cards.reduce((sum, c) => sum + c.correct_reviews, 0);
@@ -350,12 +356,12 @@ class FlashcardService {
 
     // Get streak info from review history
     const { data: reviews } = await supabase
-      .from("flashcard_reviews")
-      .select("reviewed_at")
-      .eq("user_id", userId)
-      .order("reviewed_at", { ascending: false });
+      .from('flashcard_reviews')
+      .select('reviewed_at')
+      .eq('user_id', userId)
+      .order('reviewed_at', { ascending: false });
 
-    const streaks = this.calculateStreaks(reviews?.map(r => r.reviewed_at) || []);
+    const streaks = this.calculateStreaks(reviews?.map((r) => r.reviewed_at) || []);
 
     return {
       totalCards,
@@ -382,7 +388,7 @@ class FlashcardService {
     }
   ): Promise<FlashcardDeck | null> {
     const { data, error } = await supabase
-      .from("flashcard_decks")
+      .from('flashcard_decks')
       .insert({
         user_id: userId,
         name,
@@ -395,7 +401,7 @@ class FlashcardService {
       .single();
 
     if (error) {
-      console.error("Error creating deck:", error);
+      console.error('Error creating deck:', error);
       return null;
     }
 
@@ -403,22 +409,20 @@ class FlashcardService {
   }
 
   async addCardToDeck(deckId: string, flashcardId: string): Promise<boolean> {
-    const { error } = await supabase
-      .from("flashcard_deck_cards")
-      .insert({
-        deck_id: deckId,
-        flashcard_id: flashcardId,
-      });
+    const { error } = await supabase.from('flashcard_deck_cards').insert({
+      deck_id: deckId,
+      flashcard_id: flashcardId,
+    });
 
     return !error;
   }
 
   async getDecks(userId: string): Promise<FlashcardDeck[]> {
     const { data, error } = await supabase
-      .from("flashcard_decks")
+      .from('flashcard_decks')
       .select()
-      .eq("user_id", userId)
-      .order("created_at", { ascending: false });
+      .eq('user_id', userId)
+      .order('created_at', { ascending: false });
 
     if (error || !data) return [];
     return data as FlashcardDeck[];
@@ -426,8 +430,8 @@ class FlashcardService {
 
   async getDeckCards(deckId: string, userId?: string): Promise<Flashcard[]> {
     if (!userId) {
-      const response = await this.callStaticEndpoint<{ cards: Flashcard[] }>("cards", {
-        method: "GET",
+      const response = await this.callStaticEndpoint<{ cards: Flashcard[] }>('cards', {
+        method: 'GET',
         query: {
           deckId,
         },
@@ -436,12 +440,12 @@ class FlashcardService {
     }
 
     const { data, error } = await supabase
-      .from("flashcard_deck_cards")
+      .from('flashcard_deck_cards')
       .select(`
         flashcard_id,
         flashcards(*)
       `)
-      .eq("deck_id", deckId);
+      .eq('deck_id', deckId);
 
     if (error || !data) return [];
     return data.map((item: any) => item.flashcards).filter(Boolean) as Flashcard[];
@@ -452,16 +456,14 @@ class FlashcardService {
   async autoGenerateFromModule(userId: string, moduleId: string): Promise<Flashcard[]> {
     // Get module learning objectives
     const { data: module } = await supabase
-      .from("study_modules")
-      .select("learning_objectives, title, domain")
-      .eq("id", moduleId)
+      .from('study_modules')
+      .select('learning_objectives, title, domain')
+      .eq('id', moduleId)
       .single();
 
-    if (!module || !module.learning_objectives) return [];
+    if (!module?.learning_objectives) return [];
 
-    const objectives = Array.isArray(module.learning_objectives)
-      ? module.learning_objectives
-      : [];
+    const objectives = Array.isArray(module.learning_objectives) ? module.learning_objectives : [];
 
     const createdCards: Flashcard[] = [];
 
@@ -491,36 +493,31 @@ class FlashcardService {
     correctAnswer: string,
     explanation?: string
   ): Promise<Flashcard | null> {
-    return this.createFlashcard(
-      userId,
-      question,
-      correctAnswer,
-      {
-        type: 'basic',
-        source: 'quiz_failure',
-        questionId,
-        explanation,
-        tags: ['quiz-remediation'],
-      }
-    );
+    return this.createFlashcard(userId, question, correctAnswer, {
+      type: 'basic',
+      source: 'quiz_failure',
+      questionId,
+      explanation,
+      tags: ['quiz-remediation'],
+    });
   }
 
   // ==================== HELPER METHODS ====================
 
-  private readonly staticApiPath = "/api/flashcards/public";
+  private readonly staticApiPath = '/api/flashcards/public';
 
   private async callStaticEndpoint<T>(
     action: string,
     options: {
-      method?: "GET" | "POST";
+      method?: 'GET' | 'POST';
       query?: Record<string, string | number | undefined>;
       body?: Record<string, unknown>;
     } = {}
   ): Promise<T | null> {
-    const method = options.method ?? "GET";
+    const method = options.method ?? 'GET';
 
     try {
-      if (method === "GET") {
+      if (method === 'GET') {
         const params = new URLSearchParams({ action });
         if (options.query) {
           for (const [key, value] of Object.entries(options.query)) {
@@ -531,8 +528,8 @@ class FlashcardService {
         }
 
         const response = await fetch(`${this.staticApiPath}?${params.toString()}`, {
-          method: "GET",
-          cache: "no-store",
+          method: 'GET',
+          cache: 'no-store',
         });
 
         if (!response.ok) {
@@ -549,10 +546,10 @@ class FlashcardService {
       };
 
       const response = await fetch(this.staticApiPath, {
-        method: "POST",
-        cache: "no-store",
+        method: 'POST',
+        cache: 'no-store',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify(body),
       });
@@ -573,12 +570,10 @@ class FlashcardService {
     if (reviewDates.length === 0) return { longest: 0, current: 0 };
 
     // Group reviews by day
-    const reviewDays = new Set(
-      reviewDates.map(date => new Date(date).toDateString())
-    );
+    const reviewDays = new Set(reviewDates.map((date) => new Date(date).toDateString()));
 
-    const sortedDays = Array.from(reviewDays).sort((a, b) =>
-      new Date(b).getTime() - new Date(a).getTime()
+    const sortedDays = Array.from(reviewDays).sort(
+      (a, b) => new Date(b).getTime() - new Date(a).getTime()
     );
 
     let currentStreak = 0;
@@ -588,9 +583,7 @@ class FlashcardService {
 
     for (const dayStr of sortedDays) {
       const day = new Date(dayStr);
-      const diffDays = Math.floor(
-        (prevDate.getTime() - day.getTime()) / (1000 * 60 * 60 * 24)
-      );
+      const diffDays = Math.floor((prevDate.getTime() - day.getTime()) / (1000 * 60 * 60 * 24));
 
       if (diffDays <= 1) {
         streakCount++;
@@ -611,9 +604,7 @@ class FlashcardService {
       for (let i = 1; i < sortedDays.length; i++) {
         const prevDay = new Date(sortedDays[i - 1]);
         const currDay = new Date(sortedDays[i]);
-        const diff = Math.floor(
-          (prevDay.getTime() - currDay.getTime()) / (1000 * 60 * 60 * 24)
-        );
+        const diff = Math.floor((prevDay.getTime() - currDay.getTime()) / (1000 * 60 * 60 * 24));
         if (diff === 1) currentStreak++;
         else break;
       }

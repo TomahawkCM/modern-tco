@@ -5,38 +5,38 @@
  * Solves session persistence, environment management, and credential automation
  */
 
-const fs = require("fs");
-const path = require("path");
-const { spawn, exec } = require("child_process");
-const os = require("os");
+const fs = require('fs');
+const path = require('path');
+const { spawn, exec } = require('child_process');
+const os = require('os');
 
 class SupabaseEnvironmentManager {
   constructor() {
-    this.projectRoot = path.resolve(__dirname, "../..");
+    this.projectRoot = path.resolve(__dirname, '../..');
     this.scriptsDir = __dirname;
     this.envFiles = {
-      local: path.join(this.projectRoot, ".env.local"),
-      dev: path.join(this.projectRoot, ".env"),
-      backup: path.join(this.projectRoot, ".env.backup"),
+      local: path.join(this.projectRoot, '.env.local'),
+      dev: path.join(this.projectRoot, '.env'),
+      backup: path.join(this.projectRoot, '.env.backup'),
     };
 
     // Supabase project configurations
     this.projects = {
       primary: {
-        name: "TCO Primary",
-        url: "https://qnwcwoutgarhqxlgsjzs.supabase.co",
+        name: 'TCO Primary',
+        url: 'https://qnwcwoutgarhqxlgsjzs.supabase.co',
         anonKey:
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFud2N3b3V0Z2FyaHF4bGdzanpzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTY2NzM0MjgsImV4cCI6MjA3MjI0OTQyOH0.nooeC4pyNsoRok5zKat9iwUk9rgCfz_b5SWqZ7_dgtQ",
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFud2N3b3V0Z2FyaHF4bGdzanpzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTY2NzM0MjgsImV4cCI6MjA3MjI0OTQyOH0.nooeC4pyNsoRok5zKat9iwUk9rgCfz_b5SWqZ7_dgtQ',
         serviceRoleKey:
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFud2N3b3V0Z2FyaHF4bGdzanpzIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc1NjY3MzQyOCwiZXhwIjoyMDcyMjQ5NDI4fQ.U_FDgUC__dtFPVd5jrTpmwaWiDWJ701w4lRbe4qy1T4",
-        projectId: "qnwcwoutgarhqxlgsjzs",
-        accessToken: "sbp_984dfc579739dd6c4ece2bfa74f74a1dcb340206",
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFud2N3b3V0Z2FyaHF4bGdzanpzIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc1NjY3MzQyOCwiZXhwIjoyMDcyMjQ5NDI4fQ.U_FDgUC__dtFPVd5jrTpmwaWiDWJ701w4lRbe4qy1T4',
+        projectId: 'qnwcwoutgarhqxlgsjzs',
+        accessToken: 'sbp_984dfc579739dd6c4ece2bfa74f74a1dcb340206',
       },
     };
   }
 
   async setupSystemEnvironment() {
-    console.log("🔧 Setting up system-level environment variables...");
+    console.log('🔧 Setting up system-level environment variables...');
 
     try {
       // Set Windows system environment variables for session persistence
@@ -52,10 +52,10 @@ class SupabaseEnvironmentManager {
         await this.setSystemEnvVar(key, value);
       }
 
-      console.log("✅ System environment variables configured");
+      console.log('✅ System environment variables configured');
       return true;
     } catch (error) {
-      console.error("❌ Failed to set system environment:", error.message);
+      console.error('❌ Failed to set system environment:', error.message);
       return false;
     }
   }
@@ -86,7 +86,7 @@ class SupabaseEnvironmentManager {
   }
 
   async createProjectEnvFiles() {
-    console.log("📄 Creating project environment files...");
+    console.log('📄 Creating project environment files...');
 
     const envContent = this.generateEnvContent();
 
@@ -94,20 +94,20 @@ class SupabaseEnvironmentManager {
       // Create backup of existing .env.local if it exists
       if (fs.existsSync(this.envFiles.local)) {
         fs.copyFileSync(this.envFiles.local, this.envFiles.backup);
-        console.log("📦 Backed up existing .env.local");
+        console.log('📦 Backed up existing .env.local');
       }
 
       // Write new .env.local
       fs.writeFileSync(this.envFiles.local, envContent);
-      console.log("✅ Created .env.local with Supabase configuration");
+      console.log('✅ Created .env.local with Supabase configuration');
 
       // Also create .env for compatibility
       fs.writeFileSync(this.envFiles.dev, envContent);
-      console.log("✅ Created .env for compatibility");
+      console.log('✅ Created .env for compatibility');
 
       return true;
     } catch (error) {
-      console.error("❌ Failed to create environment files:", error.message);
+      console.error('❌ Failed to create environment files:', error.message);
       return false;
     }
   }
@@ -142,25 +142,25 @@ NEXT_PUBLIC_SITE_URL=http://localhost:3000
   }
 
   async validateEnvironment() {
-    console.log("🔍 Validating environment configuration...");
+    console.log('🔍 Validating environment configuration...');
 
     const checks = [
       {
-        name: "System SUPABASE_URL",
+        name: 'System SUPABASE_URL',
         check: () => process.env.SUPABASE_URL === this.projects.primary.url,
       },
       {
-        name: "System SUPABASE_ACCESS_TOKEN",
+        name: 'System SUPABASE_ACCESS_TOKEN',
         check: () => process.env.SUPABASE_ACCESS_TOKEN === this.projects.primary.accessToken,
       },
-      { name: ".env.local exists", check: () => fs.existsSync(this.envFiles.local) },
-      { name: ".env exists", check: () => fs.existsSync(this.envFiles.dev) },
+      { name: '.env.local exists', check: () => fs.existsSync(this.envFiles.local) },
+      { name: '.env exists', check: () => fs.existsSync(this.envFiles.dev) },
     ];
 
     let allValid = true;
     for (const { name, check } of checks) {
       const isValid = check();
-      console.log(`${isValid ? "✅" : "❌"} ${name}`);
+      console.log(`${isValid ? '✅' : '❌'} ${name}`);
       if (!isValid) allValid = false;
     }
 
@@ -168,16 +168,16 @@ NEXT_PUBLIC_SITE_URL=http://localhost:3000
   }
 
   async setupSessionPersistence() {
-    console.log("🔄 Setting up session persistence...");
+    console.log('🔄 Setting up session persistence...');
 
     try {
       // Create PowerShell profile script for session restoration
       const profileScript = this.generateProfileScript();
       const profilePath = path.join(
         os.homedir(),
-        "Documents",
-        "WindowsPowerShell",
-        "supabase-session.ps1"
+        'Documents',
+        'WindowsPowerShell',
+        'supabase-session.ps1'
       );
 
       // Ensure directory exists
@@ -187,7 +187,7 @@ NEXT_PUBLIC_SITE_URL=http://localhost:3000
       }
 
       fs.writeFileSync(profilePath, profileScript);
-      console.log("✅ Created PowerShell session persistence script");
+      console.log('✅ Created PowerShell session persistence script');
 
       // Create batch file for easy session restoration
       const batchScript = `@echo off
@@ -196,13 +196,13 @@ powershell -ExecutionPolicy Bypass -File "${profilePath}"
 echo Session environment restored!
 `;
 
-      const batchPath = path.join(this.projectRoot, "restore-supabase-session.bat");
+      const batchPath = path.join(this.projectRoot, 'restore-supabase-session.bat');
       fs.writeFileSync(batchPath, batchScript);
-      console.log("✅ Created session restoration batch file");
+      console.log('✅ Created session restoration batch file');
 
       return true;
     } catch (error) {
-      console.error("❌ Failed to setup session persistence:", error.message);
+      console.error('❌ Failed to setup session persistence:', error.message);
       return false;
     }
   }
@@ -226,14 +226,14 @@ Write-Host "📍 ID: ${project.projectId}" -ForegroundColor Cyan
   }
 
   async run() {
-    console.log("🚀 Starting Supabase Environment Setup...");
-    console.log("=====================================");
+    console.log('🚀 Starting Supabase Environment Setup...');
+    console.log('=====================================');
 
     const steps = [
-      { name: "Setup system environment", fn: () => this.setupSystemEnvironment() },
-      { name: "Create project environment files", fn: () => this.createProjectEnvFiles() },
-      { name: "Setup session persistence", fn: () => this.setupSessionPersistence() },
-      { name: "Validate environment", fn: () => this.validateEnvironment() },
+      { name: 'Setup system environment', fn: () => this.setupSystemEnvironment() },
+      { name: 'Create project environment files', fn: () => this.createProjectEnvFiles() },
+      { name: 'Setup session persistence', fn: () => this.setupSessionPersistence() },
+      { name: 'Validate environment', fn: () => this.validateEnvironment() },
     ];
 
     let allSuccess = true;
@@ -246,15 +246,15 @@ Write-Host "📍 ID: ${project.projectId}" -ForegroundColor Cyan
       }
     }
 
-    console.log("\n=====================================");
+    console.log('\n=====================================');
     if (allSuccess) {
-      console.log("🎉 Supabase environment setup completed successfully!");
-      console.log("\n📋 Next Steps:");
-      console.log("1. Restart your terminal to load new environment variables");
-      console.log("2. Run: npm run dev");
-      console.log("3. Test Supabase connection with test-supabase-connection.js");
+      console.log('🎉 Supabase environment setup completed successfully!');
+      console.log('\n📋 Next Steps:');
+      console.log('1. Restart your terminal to load new environment variables');
+      console.log('2. Run: npm run dev');
+      console.log('3. Test Supabase connection with test-supabase-connection.js');
     } else {
-      console.log("❌ Some setup steps failed. Check the logs above.");
+      console.log('❌ Some setup steps failed. Check the logs above.');
     }
 
     return allSuccess;

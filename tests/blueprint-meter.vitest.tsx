@@ -1,10 +1,10 @@
-import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import React from 'react';
+import { describe, expect, it } from 'vitest';
 
 import BlueprintMeter from '@/components/BlueprintMeter';
-import { coverageFromContent, loadContentQuestions, computeCoverage } from '@/lib/blueprint';
 import BlueprintMeter from '@/components/BlueprintMeter';
+import { computeCoverage, coverageFromContent, loadContentQuestions } from '@/lib/blueprint';
 import { TCODomain } from '@/types/exam';
 
 describe('BlueprintMeter + coverage', () => {
@@ -40,8 +40,26 @@ describe('BlueprintMeter + coverage', () => {
 
   it('renders objective coverage when objectives are present', () => {
     const custom = [
-      { id: 'q1', question: 'x', choices: [{id:'a',text:'a'}], correctAnswerId: 'a', domain: TCODomain.ASKING_QUESTIONS, difficulty: 'Beginner', category: 'Platform Fundamentals', objectiveId: 'OBJ-1' },
-      { id: 'q2', question: 'y', choices: [{id:'a',text:'a'}], correctAnswerId: 'a', domain: TCODomain.ASKING_QUESTIONS, difficulty: 'Beginner', category: 'Platform Fundamentals', objectiveIds: ['OBJ-1','OBJ-2'] },
+      {
+        id: 'q1',
+        question: 'x',
+        choices: [{ id: 'a', text: 'a' }],
+        correctAnswerId: 'a',
+        domain: TCODomain.ASKING_QUESTIONS,
+        difficulty: 'Beginner',
+        category: 'Platform Fundamentals',
+        objectiveId: 'OBJ-1',
+      },
+      {
+        id: 'q2',
+        question: 'y',
+        choices: [{ id: 'a', text: 'a' }],
+        correctAnswerId: 'a',
+        domain: TCODomain.ASKING_QUESTIONS,
+        difficulty: 'Beginner',
+        category: 'Platform Fundamentals',
+        objectiveIds: ['OBJ-1', 'OBJ-2'],
+      },
     ] as any;
     const cov = computeCoverage(custom);
     expect(cov.objectives?.length).toBeGreaterThan(0);

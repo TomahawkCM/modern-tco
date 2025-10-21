@@ -1,19 +1,19 @@
-const { createClient } = require("@supabase/supabase-js");
+const { createClient } = require('@supabase/supabase-js');
 
 // Use correct project from .env.local
-const supabaseUrl = "https://qnwcwoutgarhqxlgsjzs.supabase.co";
+const supabaseUrl = 'https://qnwcwoutgarhqxlgsjzs.supabase.co';
 const supabaseServiceKey =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFud2N3b3V0Z2FyaHF4bGdzanpzIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc1NjY3MzQyOCwiZXhwIjoyMDcyMjQ5NDI4fQ.U_FDgUC__dtFPVd5jrTpmwaWiDWJ701w4lRbe4qy1T4";
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFud2N3b3V0Z2FyaHF4bGdzanpzIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc1NjY3MzQyOCwiZXhwIjoyMDcyMjQ5NDI4fQ.U_FDgUC__dtFPVd5jrTpmwaWiDWJ701w4lRbe4qy1T4';
 
-console.log("🚀 Direct TCO Schema Deployment");
-console.log("📍 Project: qnwcwoutgarhqxlgsjzs\n");
+console.log('🚀 Direct TCO Schema Deployment');
+console.log('📍 Project: qnwcwoutgarhqxlgsjzs\n');
 
 const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
 async function executeSQL(query, description) {
   console.log(`📝 ${description}...`);
   try {
-    const { data, error } = await supabase.rpc("exec", { sql: query });
+    const { data, error } = await supabase.rpc('exec', { sql: query });
     if (error) {
       console.log(`❌ ${description}: ${error.message}`);
       return false;
@@ -28,7 +28,7 @@ async function executeSQL(query, description) {
 
 async function deploy() {
   // Create tables directly
-  await executeSQL('CREATE EXTENSION IF NOT EXISTS "uuid-ossp";', "UUID Extension");
+  await executeSQL('CREATE EXTENSION IF NOT EXISTS "uuid-ossp";', 'UUID Extension');
 
   await executeSQL(
     `
@@ -42,7 +42,7 @@ async function deploy() {
       updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
     );
   `,
-    "study_domains table"
+    'study_domains table'
   );
 
   await executeSQL(
@@ -60,7 +60,7 @@ async function deploy() {
       updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
     );
   `,
-    "study_modules table"
+    'study_modules table'
   );
 
   await executeSQL(
@@ -75,7 +75,7 @@ async function deploy() {
       updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
     );
   `,
-    "study_sections table"
+    'study_sections table'
   );
 
   await executeSQL(
@@ -94,7 +94,7 @@ async function deploy() {
       updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
     );
   `,
-    "practice_questions table"
+    'practice_questions table'
   );
 
   await executeSQL(
@@ -111,7 +111,7 @@ async function deploy() {
       estimated_time_minutes = EXCLUDED.estimated_time_minutes,
       updated_at = NOW();
   `,
-    "TCO Domain Data"
+    'TCO Domain Data'
   );
 
   // Enable RLS and policies
@@ -122,7 +122,7 @@ async function deploy() {
     ALTER TABLE study_sections ENABLE ROW LEVEL SECURITY;
     ALTER TABLE practice_questions ENABLE ROW LEVEL SECURITY;
   `,
-    "Row Level Security"
+    'Row Level Security'
   );
 
   await executeSQL(
@@ -137,19 +137,19 @@ async function deploy() {
     CREATE POLICY "Enable read access for all users" ON study_sections FOR SELECT USING (true);
     CREATE POLICY "Enable read access for all users" ON practice_questions FOR SELECT USING (true);
   `,
-    "Public Access Policies"
+    'Public Access Policies'
   );
 
   // Verify deployment
-  console.log("\n🔍 Verifying deployment...");
+  console.log('\n🔍 Verifying deployment...');
   try {
     const { data: domains, error } = await supabase
-      .from("study_domains")
-      .select("*")
-      .order("domain_number");
+      .from('study_domains')
+      .select('*')
+      .order('domain_number');
 
     if (error) {
-      console.log("❌ Verification error:", error.message);
+      console.log('❌ Verification error:', error.message);
     } else {
       console.log(`✅ Success! Found ${domains.length} TCO domains:`);
       domains.forEach((domain) => {
@@ -159,10 +159,10 @@ async function deploy() {
       });
     }
   } catch (err) {
-    console.log("❌ Verification failed:", err.message);
+    console.log('❌ Verification failed:', err.message);
   }
 
-  console.log("\n🎉 TCO Database Schema Deployment Complete!");
+  console.log('\n🎉 TCO Database Schema Deployment Complete!');
 }
 
 deploy().catch(console.error);

@@ -1,7 +1,7 @@
+import * as fs from 'node:fs';
+import * as path from 'node:path';
 import { NextResponse } from 'next/server';
 import { supabaseAdmin } from '@/lib/supabase';
-import * as fs from 'fs';
-import * as path from 'path';
 
 interface FlashcardLibraryItem {
   front_text: string;
@@ -46,7 +46,7 @@ export async function POST(request: Request) {
       return NextResponse.json({
         message: 'Flashcards already seeded for this user',
         count: existingCount,
-        alreadySeeded: true
+        alreadySeeded: true,
       });
     }
 
@@ -83,24 +83,32 @@ export async function POST(request: Request) {
       const enhancedTags = [
         ...(card.tags || []),
         ...(card.domain ? [card.domain] : []),
-        ...(card.difficulty ? [`difficulty:${card.difficulty}`] : [])
+        ...(card.difficulty ? [`difficulty:${card.difficulty}`] : []),
       ];
 
       // Map source values to valid enum
-      const sourceMapping: Record<string, 'manual' | 'auto_generated' | 'quiz_failure' | 'video_concept'> = {
-        'manual': 'manual',
-        'auto_generated': 'auto_generated',
-        'generated': 'auto_generated', // Map "generated" to "auto_generated"
-        'quiz_failure': 'quiz_failure',
-        'mcq': 'quiz_failure', // Map "mcq" to "quiz_failure"
-        'video_concept': 'video_concept'
+      const sourceMapping: Record<
+        string,
+        'manual' | 'auto_generated' | 'quiz_failure' | 'video_concept'
+      > = {
+        manual: 'manual',
+        auto_generated: 'auto_generated',
+        generated: 'auto_generated', // Map "generated" to "auto_generated"
+        quiz_failure: 'quiz_failure',
+        mcq: 'quiz_failure', // Map "mcq" to "quiz_failure"
+        video_concept: 'video_concept',
       };
 
       return {
         user_id: userId,
         front_text: card.front_text,
         back_text: card.back_text,
-        card_type: (card.card_type || 'concept') as 'basic' | 'cloze' | 'concept' | 'diagram' | 'code',
+        card_type: (card.card_type || 'concept') as
+          | 'basic'
+          | 'cloze'
+          | 'concept'
+          | 'diagram'
+          | 'code',
         source: sourceMapping[card.source || 'auto_generated'] || 'auto_generated',
         hint: card.hint || null,
         explanation: card.explanation || null,
@@ -129,10 +137,7 @@ export async function POST(request: Request) {
     for (let i = 0; i < flashcardsToInsert.length; i += batchSize) {
       const batch = flashcardsToInsert.slice(i, i + batchSize);
 
-      const { data, error } = await supabaseAdmin
-        .from('flashcards')
-        .insert(batch)
-        .select();
+      const { data, error } = await supabaseAdmin.from('flashcards').insert(batch).select();
 
       if (error) {
         console.error(`Error inserting batch ${i / batchSize + 1}:`, error);
@@ -144,11 +149,11 @@ export async function POST(request: Request) {
 
     // Calculate domain distribution for response
     const distribution = {
-      'asking-questions': flashcards.filter(c => c.domain === 'asking-questions').length,
-      'refining-targeting': flashcards.filter(c => c.domain === 'refining-targeting').length,
-      'taking-action': flashcards.filter(c => c.domain === 'taking-action').length,
-      'navigation': flashcards.filter(c => c.domain === 'navigation').length,
-      'reporting': flashcards.filter(c => c.domain === 'reporting').length,
+      'asking-questions': flashcards.filter((c) => c.domain === 'asking-questions').length,
+      'refining-targeting': flashcards.filter((c) => c.domain === 'refining-targeting').length,
+      'taking-action': flashcards.filter((c) => c.domain === 'taking-action').length,
+      navigation: flashcards.filter((c) => c.domain === 'navigation').length,
+      reporting: flashcards.filter((c) => c.domain === 'reporting').length,
     };
 
     return NextResponse.json({
@@ -157,13 +162,15 @@ export async function POST(request: Request) {
       distribution,
       errors: errors.length > 0 ? errors : undefined,
     });
-
   } catch (error) {
     console.error('Error seeding flashcards:', error);
-    return NextResponse.json({
-      error: 'Internal server error',
-      details: error instanceof Error ? error.message : 'Unknown error'
-    }, { status: 500 });
+    return NextResponse.json(
+      {
+        error: 'Internal server error',
+        details: error instanceof Error ? error.message : 'Unknown error',
+      },
+      { status: 500 }
+    );
   }
 }
 
@@ -194,14 +201,16 @@ export async function GET(request: Request) {
 
     return NextResponse.json({
       seeded: data && data.length > 0,
-      count: data?.length || 0
+      count: data?.length || 0,
     });
-
   } catch (error) {
     console.error('Error checking seed status:', error);
-    return NextResponse.json({
-      error: 'Internal server error',
-      details: error instanceof Error ? error.message : 'Unknown error'
-    }, { status: 500 });
+    return NextResponse.json(
+      {
+        error: 'Internal server error',
+        details: error instanceof Error ? error.message : 'Unknown error',
+      },
+      { status: 500 }
+    );
   }
 }

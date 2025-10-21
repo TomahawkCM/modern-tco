@@ -5,29 +5,29 @@
  * Target: 100% coverage for critical exam workflow
  */
 
-import React from "react";
-import { renderHook, act, waitFor } from "@testing-library/react";
-import { ExamProvider, useExam } from "../ExamContext";
-import { ExamMode, type Question } from "@/types/exam";
+import { act, renderHook, waitFor } from '@testing-library/react';
+import type React from 'react';
+import { ExamMode, type Question } from '@/types/exam';
+import { ExamProvider, useExam } from '../ExamContext';
 
 // Mock dependencies
 const mockUseAuth = jest.fn();
 const mockUseIncorrectAnswers = jest.fn();
 const mockUseDatabase = jest.fn();
 
-jest.mock("@/contexts/AuthContext", () => ({
+jest.mock('@/contexts/AuthContext', () => ({
   useAuth: () => mockUseAuth(),
 }));
 
-jest.mock("@/contexts/IncorrectAnswersContext", () => ({
+jest.mock('@/contexts/IncorrectAnswersContext', () => ({
   useIncorrectAnswers: () => mockUseIncorrectAnswers(),
 }));
 
-jest.mock("@/hooks/useDatabase", () => ({
+jest.mock('@/hooks/useDatabase', () => ({
   useDatabase: (...args: unknown[]) => mockUseDatabase(...args),
 }));
 
-jest.mock("@/lib/supabase/client", () => ({
+jest.mock('@/lib/supabase/client', () => ({
   supabase: {
     from: jest.fn(() => ({
       select: jest.fn().mockResolvedValue({ data: [], error: null }),
@@ -40,18 +40,18 @@ jest.mock("@/lib/supabase/client", () => ({
 // Test data factory
 const createMockQuestion = (overrides: Partial<Question> = {}): Question => ({
   id: `q-${Math.random()}`,
-  domain: "asking-questions",
-  question: "What is Tanium?",
+  domain: 'asking-questions',
+  question: 'What is Tanium?',
   choices: [
-    { id: "0", text: "Option A" },
-    { id: "1", text: "Option B" },
-    { id: "2", text: "Option C" },
-    { id: "3", text: "Option D" },
+    { id: '0', text: 'Option A' },
+    { id: '1', text: 'Option B' },
+    { id: '2', text: 'Option C' },
+    { id: '3', text: 'Option D' },
   ],
-  correctAnswerId: "0",
-  explanation: "Test explanation",
-  difficulty: "medium",
-  learningObjective: "test-objective",
+  correctAnswerId: '0',
+  explanation: 'Test explanation',
+  difficulty: 'medium',
+  learningObjective: 'test-objective',
   ...overrides,
 });
 
@@ -60,7 +60,7 @@ const wrapper = ({ children }: { children: React.ReactNode }) => (
   <ExamProvider>{children}</ExamProvider>
 );
 
-describe("ExamContext", () => {
+describe('ExamContext', () => {
   beforeEach(() => {
     jest.clearAllMocks();
 
@@ -82,15 +82,15 @@ describe("ExamContext", () => {
     });
 
     mockUseDatabase.mockReturnValue({
-      insertExamSession: jest.fn().mockResolvedValue({ id: "db-session-1" }),
+      insertExamSession: jest.fn().mockResolvedValue({ id: 'db-session-1' }),
       updateExamSession: jest.fn().mockResolvedValue({}),
       insertUserProgress: jest.fn().mockResolvedValue({}),
       getExamSessions: jest.fn().mockResolvedValue([]),
     });
   });
 
-  describe("Initial State", () => {
-    it("should provide default exam state", () => {
+  describe('Initial State', () => {
+    it('should provide default exam state', () => {
       const { result } = renderHook(() => useExam(), { wrapper });
 
       expect(result.current.state).toEqual({
@@ -100,7 +100,7 @@ describe("ExamContext", () => {
       });
     });
 
-    it("should provide all required context methods", () => {
+    it('should provide all required context methods', () => {
       const { result } = renderHook(() => useExam(), { wrapper });
 
       expect(result.current.startExam).toBeDefined();
@@ -115,8 +115,8 @@ describe("ExamContext", () => {
     });
   });
 
-  describe("startExam", () => {
-    it("should initialize exam with practice mode", async () => {
+  describe('startExam', () => {
+    it('should initialize exam with practice mode', async () => {
       const { result } = renderHook(() => useExam(), { wrapper });
       const questions = [createMockQuestion(), createMockQuestion()];
 
@@ -135,7 +135,7 @@ describe("ExamContext", () => {
       expect(result.current.state.currentSession?.completed).toBe(false);
     });
 
-    it("should initialize exam with mock mode", async () => {
+    it('should initialize exam with mock mode', async () => {
       const { result } = renderHook(() => useExam(), { wrapper });
       const questions = Array.from({ length: 75 }, (_, i) => createMockQuestion({ id: `q-${i}` }));
 
@@ -151,10 +151,10 @@ describe("ExamContext", () => {
       expect(result.current.state.currentSession?.questions).toHaveLength(75);
     });
 
-    it("should reset previous exam state", async () => {
+    it('should reset previous exam state', async () => {
       const { result } = renderHook(() => useExam(), { wrapper });
-      const q1 = createMockQuestion({ id: "q1" });
-      const q2 = createMockQuestion({ id: "q2" });
+      const q1 = createMockQuestion({ id: 'q1' });
+      const q2 = createMockQuestion({ id: 'q2' });
 
       // Start first exam
       await act(async () => {
@@ -167,10 +167,10 @@ describe("ExamContext", () => {
 
       // Answer a question
       act(() => {
-        result.current.answerQuestion("q1", "0");
+        result.current.answerQuestion('q1', '0');
       });
 
-      expect(result.current.state.currentSession?.answers).toHaveProperty("q1");
+      expect(result.current.state.currentSession?.answers).toHaveProperty('q1');
 
       // Start second exam - should reset
       await act(async () => {
@@ -182,14 +182,14 @@ describe("ExamContext", () => {
       });
 
       expect(result.current.state.currentSession?.currentIndex).toBe(0);
-      expect(result.current.state.currentSession?.questions[0].id).toBe("q2");
+      expect(result.current.state.currentSession?.questions[0].id).toBe('q2');
     });
   });
 
-  describe("answerQuestion", () => {
-    it("should record answer for current question", async () => {
+  describe('answerQuestion', () => {
+    it('should record answer for current question', async () => {
       const { result } = renderHook(() => useExam(), { wrapper });
-      const q = createMockQuestion({ id: "q1" });
+      const q = createMockQuestion({ id: 'q1' });
 
       await act(async () => {
         await result.current.startExam(ExamMode.PRACTICE, [q]);
@@ -200,15 +200,15 @@ describe("ExamContext", () => {
       });
 
       act(() => {
-        result.current.answerQuestion("q1", "2");
+        result.current.answerQuestion('q1', '2');
       });
 
-      expect(result.current.state.currentSession?.answers["q1"]).toBe("2");
+      expect(result.current.state.currentSession?.answers.q1).toBe('2');
     });
 
-    it("should allow changing answer", async () => {
+    it('should allow changing answer', async () => {
       const { result } = renderHook(() => useExam(), { wrapper });
-      const q = createMockQuestion({ id: "q1" });
+      const q = createMockQuestion({ id: 'q1' });
 
       await act(async () => {
         await result.current.startExam(ExamMode.PRACTICE, [q]);
@@ -219,24 +219,24 @@ describe("ExamContext", () => {
       });
 
       act(() => {
-        result.current.answerQuestion("q1", "1");
+        result.current.answerQuestion('q1', '1');
       });
 
-      expect(result.current.state.currentSession?.answers["q1"]).toBe("1");
+      expect(result.current.state.currentSession?.answers.q1).toBe('1');
 
       act(() => {
-        result.current.answerQuestion("q1", "3");
+        result.current.answerQuestion('q1', '3');
       });
 
-      expect(result.current.state.currentSession?.answers["q1"]).toBe("3");
+      expect(result.current.state.currentSession?.answers.q1).toBe('3');
     });
 
-    it("should record answers for multiple questions", async () => {
+    it('should record answers for multiple questions', async () => {
       const { result } = renderHook(() => useExam(), { wrapper });
       const questions = [
-        createMockQuestion({ id: "q1" }),
-        createMockQuestion({ id: "q2" }),
-        createMockQuestion({ id: "q3" }),
+        createMockQuestion({ id: 'q1' }),
+        createMockQuestion({ id: 'q2' }),
+        createMockQuestion({ id: 'q3' }),
       ];
 
       await act(async () => {
@@ -248,21 +248,21 @@ describe("ExamContext", () => {
       });
 
       act(() => {
-        result.current.answerQuestion("q1", "0");
-        result.current.answerQuestion("q2", "1");
-        result.current.answerQuestion("q3", "2");
+        result.current.answerQuestion('q1', '0');
+        result.current.answerQuestion('q2', '1');
+        result.current.answerQuestion('q3', '2');
       });
 
       expect(result.current.state.currentSession?.answers).toEqual({
-        q1: "0",
-        q2: "1",
-        q3: "2",
+        q1: '0',
+        q2: '1',
+        q3: '2',
       });
     });
   });
 
-  describe("Navigation", () => {
-    it("should navigate to next question", async () => {
+  describe('Navigation', () => {
+    it('should navigate to next question', async () => {
       const { result } = renderHook(() => useExam(), { wrapper });
       const questions = [createMockQuestion(), createMockQuestion()];
 
@@ -283,7 +283,7 @@ describe("ExamContext", () => {
       expect(result.current.state.currentSession?.currentIndex).toBe(1);
     });
 
-    it("should not navigate past last question", async () => {
+    it('should not navigate past last question', async () => {
       const { result } = renderHook(() => useExam(), { wrapper });
       const questions = [createMockQuestion()];
 
@@ -302,7 +302,7 @@ describe("ExamContext", () => {
       expect(result.current.state.currentSession?.currentIndex).toBe(0);
     });
 
-    it("should navigate to previous question", async () => {
+    it('should navigate to previous question', async () => {
       const { result } = renderHook(() => useExam(), { wrapper });
       const questions = [createMockQuestion(), createMockQuestion()];
 
@@ -327,7 +327,7 @@ describe("ExamContext", () => {
       expect(result.current.state.currentSession?.currentIndex).toBe(0);
     });
 
-    it("should not navigate before first question", async () => {
+    it('should not navigate before first question', async () => {
       const { result } = renderHook(() => useExam(), { wrapper });
       const questions = [createMockQuestion()];
 
@@ -347,12 +347,12 @@ describe("ExamContext", () => {
     });
   });
 
-  describe("finishExam", () => {
-    it("should finish exam and mark as completed", async () => {
+  describe('finishExam', () => {
+    it('should finish exam and mark as completed', async () => {
       const { result } = renderHook(() => useExam(), { wrapper });
       const questions = [
-        createMockQuestion({ id: "q1", correctAnswerId: "0" }),
-        createMockQuestion({ id: "q2", correctAnswerId: "1" }),
+        createMockQuestion({ id: 'q1', correctAnswerId: '0' }),
+        createMockQuestion({ id: 'q2', correctAnswerId: '1' }),
       ];
 
       await act(async () => {
@@ -364,8 +364,8 @@ describe("ExamContext", () => {
       });
 
       act(() => {
-        result.current.answerQuestion("q1", "0"); // Correct
-        result.current.answerQuestion("q2", "2"); // Incorrect
+        result.current.answerQuestion('q1', '0'); // Correct
+        result.current.answerQuestion('q2', '2'); // Incorrect
       });
 
       act(() => {
@@ -376,13 +376,13 @@ describe("ExamContext", () => {
       expect(result.current.state.currentSession?.endTime).toBeTruthy();
     });
 
-    it("should calculate correct score", async () => {
+    it('should calculate correct score', async () => {
       const { result } = renderHook(() => useExam(), { wrapper });
       const questions = [
-        createMockQuestion({ id: "q1", correctAnswerId: "0" }),
-        createMockQuestion({ id: "q2", correctAnswerId: "1" }),
-        createMockQuestion({ id: "q3", correctAnswerId: "2" }),
-        createMockQuestion({ id: "q4", correctAnswerId: "3" }),
+        createMockQuestion({ id: 'q1', correctAnswerId: '0' }),
+        createMockQuestion({ id: 'q2', correctAnswerId: '1' }),
+        createMockQuestion({ id: 'q3', correctAnswerId: '2' }),
+        createMockQuestion({ id: 'q4', correctAnswerId: '3' }),
       ];
 
       await act(async () => {
@@ -394,10 +394,10 @@ describe("ExamContext", () => {
       });
 
       act(() => {
-        result.current.answerQuestion("q1", "0"); // Correct
-        result.current.answerQuestion("q2", "1"); // Correct
-        result.current.answerQuestion("q3", "0"); // Incorrect
-        result.current.answerQuestion("q4", "3"); // Correct
+        result.current.answerQuestion('q1', '0'); // Correct
+        result.current.answerQuestion('q2', '1'); // Correct
+        result.current.answerQuestion('q3', '0'); // Incorrect
+        result.current.answerQuestion('q4', '3'); // Correct
       });
 
       act(() => {
@@ -408,12 +408,12 @@ describe("ExamContext", () => {
     });
   });
 
-  describe("Score Calculation", () => {
-    it("should calculate score with all correct answers", async () => {
+  describe('Score Calculation', () => {
+    it('should calculate score with all correct answers', async () => {
       const { result } = renderHook(() => useExam(), { wrapper });
       const questions = [
-        createMockQuestion({ id: "q1", correctAnswerId: "0" }),
-        createMockQuestion({ id: "q2", correctAnswerId: "1" }),
+        createMockQuestion({ id: 'q1', correctAnswerId: '0' }),
+        createMockQuestion({ id: 'q2', correctAnswerId: '1' }),
       ];
 
       await act(async () => {
@@ -425,19 +425,19 @@ describe("ExamContext", () => {
       });
 
       act(() => {
-        result.current.answerQuestion("q1", "0");
-        result.current.answerQuestion("q2", "1");
+        result.current.answerQuestion('q1', '0');
+        result.current.answerQuestion('q2', '1');
       });
 
       const score = result.current.getScore();
       expect(score).toBe(100);
     });
 
-    it("should calculate score with all incorrect answers", async () => {
+    it('should calculate score with all incorrect answers', async () => {
       const { result } = renderHook(() => useExam(), { wrapper });
       const questions = [
-        createMockQuestion({ id: "q1", correctAnswerId: "0" }),
-        createMockQuestion({ id: "q2", correctAnswerId: "1" }),
+        createMockQuestion({ id: 'q1', correctAnswerId: '0' }),
+        createMockQuestion({ id: 'q2', correctAnswerId: '1' }),
       ];
 
       await act(async () => {
@@ -449,20 +449,20 @@ describe("ExamContext", () => {
       });
 
       act(() => {
-        result.current.answerQuestion("q1", "2");
-        result.current.answerQuestion("q2", "3");
+        result.current.answerQuestion('q1', '2');
+        result.current.answerQuestion('q2', '3');
       });
 
       const score = result.current.getScore();
       expect(score).toBe(0);
     });
 
-    it("should calculate score with unanswered questions", async () => {
+    it('should calculate score with unanswered questions', async () => {
       const { result } = renderHook(() => useExam(), { wrapper });
       const questions = [
-        createMockQuestion({ id: "q1", correctAnswerId: "0" }),
-        createMockQuestion({ id: "q2", correctAnswerId: "1" }),
-        createMockQuestion({ id: "q3", correctAnswerId: "2" }),
+        createMockQuestion({ id: 'q1', correctAnswerId: '0' }),
+        createMockQuestion({ id: 'q2', correctAnswerId: '1' }),
+        createMockQuestion({ id: 'q3', correctAnswerId: '2' }),
       ];
 
       await act(async () => {
@@ -474,7 +474,7 @@ describe("ExamContext", () => {
       });
 
       act(() => {
-        result.current.answerQuestion("q1", "0"); // Correct
+        result.current.answerQuestion('q1', '0'); // Correct
         // Question 2 and 3 unanswered
       });
 
@@ -483,8 +483,8 @@ describe("ExamContext", () => {
     });
   });
 
-  describe("Edge Cases", () => {
-    it("should handle empty question list with fallback", async () => {
+  describe('Edge Cases', () => {
+    it('should handle empty question list with fallback', async () => {
       const { result } = renderHook(() => useExam(), { wrapper });
 
       await act(async () => {
@@ -499,9 +499,9 @@ describe("ExamContext", () => {
       expect(result.current.state.currentSession?.questions.length).toBeGreaterThan(0);
     });
 
-    it("should handle rapid state changes", async () => {
+    it('should handle rapid state changes', async () => {
       const { result } = renderHook(() => useExam(), { wrapper });
-      const questions = [createMockQuestion({ id: "q1" }), createMockQuestion({ id: "q2" })];
+      const questions = [createMockQuestion({ id: 'q1' }), createMockQuestion({ id: 'q2' })];
 
       await act(async () => {
         await result.current.startExam(ExamMode.PRACTICE, questions);
@@ -512,22 +512,22 @@ describe("ExamContext", () => {
       });
 
       act(() => {
-        result.current.answerQuestion("q1", "0");
+        result.current.answerQuestion('q1', '0');
         result.current.nextQuestion();
-        result.current.answerQuestion("q2", "1");
+        result.current.answerQuestion('q2', '1');
         result.current.previousQuestion();
-        result.current.answerQuestion("q1", "2");
+        result.current.answerQuestion('q1', '2');
       });
 
-      expect(result.current.state.currentSession?.answers["q1"]).toBe("2");
-      expect(result.current.state.currentSession?.answers["q2"]).toBe("1");
+      expect(result.current.state.currentSession?.answers.q1).toBe('2');
+      expect(result.current.state.currentSession?.answers.q2).toBe('1');
     });
   });
 
-  describe("Context Provider Error Handling", () => {
-    it("should throw error when useExam is used outside provider", () => {
+  describe('Context Provider Error Handling', () => {
+    it('should throw error when useExam is used outside provider', () => {
       // Suppress console.error for this test
-      const consoleSpy = jest.spyOn(console, "error").mockImplementation();
+      const consoleSpy = jest.spyOn(console, 'error').mockImplementation();
 
       expect(() => {
         renderHook(() => useExam());

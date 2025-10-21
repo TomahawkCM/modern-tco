@@ -2,10 +2,10 @@
  * Server Component for Module Footer
  */
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { BookOpen } from "lucide-react";
-import PracticeButton from "@/components/mdx/PracticeButton";
-import type { ModuleFrontmatter } from "@/lib/mdx/module-schema";
+import { BookOpen } from 'lucide-react';
+import PracticeButton from '@/components/mdx/PracticeButton';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import type { ModuleFrontmatter } from '@/lib/mdx/module-schema';
 
 interface ModuleFooterProps {
   frontmatter: ModuleFrontmatter;
@@ -16,12 +16,12 @@ export default function ModuleFooter({ frontmatter, slug }: ModuleFooterProps) {
   // Map domain enum to practice domain name
   const domainForPractice = (() => {
     const map: Record<string, string> = {
-      ASKING_QUESTIONS: "Asking Questions",
-      REFINING_QUESTIONS: "Refining Questions & Targeting",
-      TAKING_ACTION: "Taking Action",
-      NAVIGATION_MODULES: "Navigation and Basic Module Functions",
-      REPORTING_EXPORT: "Report Generation and Data Export",
-      PLATFORM_FOUNDATION: "Fundamentals",
+      ASKING_QUESTIONS: 'Asking Questions',
+      REFINING_QUESTIONS: 'Refining Questions & Targeting',
+      TAKING_ACTION: 'Taking Action',
+      NAVIGATION_MODULES: 'Navigation and Basic Module Functions',
+      REPORTING_EXPORT: 'Report Generation and Data Export',
+      PLATFORM_FOUNDATION: 'Fundamentals',
     };
     return map[String(frontmatter.domainEnum)] || String(frontmatter.domainEnum);
   })();

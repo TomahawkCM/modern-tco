@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { expect, test } from '@playwright/test';
 
 test('modules grid continue link deep-links to last viewed section', async ({ page }) => {
   // Seed local progress for Asking Questions with lastViewed core-concepts
@@ -28,4 +28,3 @@ test('modules grid continue link deep-links to last viewed section', async ({ pa
   // Verify visible heading text contains "Core Concepts"
   await expect(page.getByText(/Core Concepts/i).first()).toBeVisible();
 });
-

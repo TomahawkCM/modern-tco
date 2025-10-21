@@ -1,19 +1,19 @@
-"use client";
+'use client';
 
-import { StudyModuleCard } from "@/components/study/StudyModuleCard";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Progress } from "@/components/ui/progress";
-import { useAuth } from "@/contexts/AuthContext";
-import { useBookmarks } from "@/hooks/useBookmarks";
-import { useStudyProgress } from "@/hooks/useStudyProgress";
-import { studyModulesService } from "@/lib/study-modules";
-import type { StudyModuleWithSections } from "@/types/supabase";
-import { BookOpen, BookmarkIcon, Clock, LogOut, TrendingUp, Trophy, User } from "lucide-react";
-import Link from "next/link";
-import { useEffect, useState } from "react";
-import LearningProgressTracker from "@/components/learning/LearningProgressTracker";
+import { BookmarkIcon, BookOpen, Clock, LogOut, TrendingUp, Trophy, User } from 'lucide-react';
+import Link from 'next/link';
+import { useEffect, useState } from 'react';
+import LearningProgressTracker from '@/components/learning/LearningProgressTracker';
+import { StudyModuleCard } from '@/components/study/StudyModuleCard';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Progress } from '@/components/ui/progress';
+import { useAuth } from '@/contexts/AuthContext';
+import { useBookmarks } from '@/hooks/useBookmarks';
+import { useStudyProgress } from '@/hooks/useStudyProgress';
+import { studyModulesService } from '@/lib/study-modules';
+import type { StudyModuleWithSections } from '@/types/supabase';
 
 export function DashboardContent() {
   const { user, signOut } = useAuth();
@@ -38,7 +38,7 @@ export function DashboardContent() {
           setStats(userStats);
         }
       } catch (error) {
-        console.error("Error loading dashboard data:", error);
+        console.error('Error loading dashboard data:', error);
       } finally {
         setLoading(false);
       }
@@ -55,7 +55,7 @@ export function DashboardContent() {
     try {
       await signOut();
     } catch (error) {
-      console.error("Error signing out:", error);
+      console.error('Error signing out:', error);
     }
   };
 
@@ -228,12 +228,12 @@ export function DashboardContent() {
               <Card key={bookmark.id} className="transition-shadow hover:shadow-md">
                 <CardHeader className="pb-2">
                   <CardTitle className="line-clamp-2 text-sm font-medium">
-                    {bookmark.section?.title || "Untitled Section"}
+                    {bookmark.section?.title || 'Untitled Section'}
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="mb-2 text-xs text-muted-foreground">
-                    {bookmark.module?.title || "Unknown Module"}
+                    {bookmark.module?.title || 'Unknown Module'}
                   </p>
                   {bookmark.notes && (
                     <p className="line-clamp-2 text-xs text-slate-600 dark:text-slate-400">

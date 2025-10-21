@@ -1,9 +1,9 @@
-"use client"
+'use client';
 
-import React from "react"
+import type React from 'react';
 
 export interface CircuitPatternProps {
-  className?: string
+  className?: string;
 }
 
 export const CircuitPattern: React.FC<CircuitPatternProps> = ({ className }) => {
@@ -28,7 +28,7 @@ export const CircuitPattern: React.FC<CircuitPatternProps> = ({ className }) => 
         <rect width="100%" height="100%" fill="url(#circuit)" />
       </svg>
     </div>
-  )
-}
+  );
+};
 
-export default CircuitPattern
+export default CircuitPattern;

@@ -1,26 +1,24 @@
-"use client";
+'use client';
 
-import React, { useState, useMemo } from 'react';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Progress } from '@/components/ui/progress';
 import {
-  Shield,
-  AlertTriangle,
   Activity,
-  Database,
-  Settings,
-  ChevronRight,
-  Trophy,
-  Target,
-  Lightbulb,
+  AlertTriangle,
   BookOpen,
   CheckCircle,
-  XCircle
+  ChevronRight,
+  Database,
+  Lightbulb,
+  Settings,
+  Target,
+  Trophy,
+  XCircle,
 } from 'lucide-react';
+import { useMemo, useState } from 'react';
+import { Alert, AlertDescription } from '@/components/ui/alert';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Progress } from '@/components/ui/progress';
 
 // TCO Domain definitions aligned with certification blueprint
 const TCO_DOMAINS = [
@@ -34,8 +32,8 @@ const TCO_DOMAINS = [
       'Construct basic queries using sensors',
       'Apply filters and conditions',
       'Use aggregate functions',
-      'Optimize query performance'
-    ]
+      'Optimize query performance',
+    ],
   },
   {
     id: 'refining_questions',
@@ -47,8 +45,8 @@ const TCO_DOMAINS = [
       'Merge and filter questions',
       'Use advanced operators',
       'Create parameterized queries',
-      'Implement drill-down logic'
-    ]
+      'Implement drill-down logic',
+    ],
   },
   {
     id: 'taking_action',
@@ -60,8 +58,8 @@ const TCO_DOMAINS = [
       'Deploy packages',
       'Execute remediation actions',
       'Schedule recurring actions',
-      'Monitor action progress'
-    ]
+      'Monitor action progress',
+    ],
   },
   {
     id: 'navigation',
@@ -73,8 +71,8 @@ const TCO_DOMAINS = [
       'Navigate between modules',
       'Use saved questions',
       'Manage computer groups',
-      'Configure user permissions'
-    ]
+      'Configure user permissions',
+    ],
   },
   {
     id: 'reporting',
@@ -86,9 +84,9 @@ const TCO_DOMAINS = [
       'Create custom reports',
       'Export data in various formats',
       'Schedule automated reports',
-      'Use dashboard widgets'
-    ]
-  }
+      'Use dashboard widgets',
+    ],
+  },
 ];
 
 // Scenario templates for each domain
@@ -99,39 +97,62 @@ const SCENARIOS = {
       title: 'Asset Inventory Query',
       difficulty: 'beginner',
       scenario: 'Your security team needs a quick inventory of all Windows servers in production.',
-      expectedQuery: 'Get Computer Name and Operating System and IP Address from all machines with Operating System containing "Windows Server"',
-      hints: ['Use Operating System sensor', 'Filter for Windows Server', 'Include IP Address for network context'],
-      learningPoints: ['Basic sensor selection', 'Text filtering with contains', 'Multiple sensor queries']
+      expectedQuery:
+        'Get Computer Name and Operating System and IP Address from all machines with Operating System containing "Windows Server"',
+      hints: [
+        'Use Operating System sensor',
+        'Filter for Windows Server',
+        'Include IP Address for network context',
+      ],
+      learningPoints: [
+        'Basic sensor selection',
+        'Text filtering with contains',
+        'Multiple sensor queries',
+      ],
     },
     {
       id: 'high-cpu',
       title: 'Performance Monitoring',
       difficulty: 'intermediate',
-      scenario: 'Identify systems with CPU usage above 80% that might indicate performance issues or cryptomining.',
-      expectedQuery: 'Get Computer Name and CPU Percent and Running Processes from all machines with CPU Percent greater than 80',
-      hints: ['Use CPU Percent sensor', 'Apply numeric comparison', 'Include process information for context'],
-      learningPoints: ['Numeric comparisons', 'Performance sensors', 'Correlating metrics']
+      scenario:
+        'Identify systems with CPU usage above 80% that might indicate performance issues or cryptomining.',
+      expectedQuery:
+        'Get Computer Name and CPU Percent and Running Processes from all machines with CPU Percent greater than 80',
+      hints: [
+        'Use CPU Percent sensor',
+        'Apply numeric comparison',
+        'Include process information for context',
+      ],
+      learningPoints: ['Numeric comparisons', 'Performance sensors', 'Correlating metrics'],
     },
     {
       id: 'compliance-check',
       title: 'Compliance Validation',
       difficulty: 'advanced',
-      scenario: 'Verify that all financial systems have the latest security patches and encryption enabled.',
-      expectedQuery: 'Get Computer Name and Windows Updates and Registry Value[key="HKLM\\Software\\Policies\\Microsoft\\Windows\\BitLocker",value="EncryptionMethod"] from all machines with Computer Group equals "Financial Systems"',
-      hints: ['Target specific computer group', 'Check Windows Updates', 'Query registry for encryption settings'],
-      learningPoints: ['Computer group targeting', 'Registry queries', 'Compliance validation']
-    }
+      scenario:
+        'Verify that all financial systems have the latest security patches and encryption enabled.',
+      expectedQuery:
+        'Get Computer Name and Windows Updates and Registry Value[key="HKLM\\Software\\Policies\\Microsoft\\Windows\\BitLocker",value="EncryptionMethod"] from all machines with Computer Group equals "Financial Systems"',
+      hints: [
+        'Target specific computer group',
+        'Check Windows Updates',
+        'Query registry for encryption settings',
+      ],
+      learningPoints: ['Computer group targeting', 'Registry queries', 'Compliance validation'],
+    },
   ],
   refining_questions: [
     {
       id: 'merge-filter',
       title: 'Merge and Filter Results',
       difficulty: 'intermediate',
-      scenario: 'Combine results from multiple queries to identify vulnerable systems missing critical patches.',
-      expectedQuery: 'Get Computer Name and Operating System and Windows Updates from all machines with Windows Updates not containing "KB5001234" and Last Reboot greater than 30 days ago',
+      scenario:
+        'Combine results from multiple queries to identify vulnerable systems missing critical patches.',
+      expectedQuery:
+        'Get Computer Name and Operating System and Windows Updates from all machines with Windows Updates not containing "KB5001234" and Last Reboot greater than 30 days ago',
       hints: ['Combine multiple conditions', 'Use negative filtering', 'Check reboot time'],
-      learningPoints: ['Complex filtering', 'Negative conditions', 'Time-based queries']
-    }
+      learningPoints: ['Complex filtering', 'Negative conditions', 'Time-based queries'],
+    },
   ],
   taking_action: [
     {
@@ -139,11 +160,12 @@ const SCENARIOS = {
       title: 'Deploy Critical Patch',
       difficulty: 'intermediate',
       scenario: 'Deploy a critical security patch to all vulnerable Windows 10 machines.',
-      expectedQuery: 'Deploy Package "Critical Security Update" to all machines with Operating System equals "Windows 10" and Windows Updates not containing "KB5001234"',
+      expectedQuery:
+        'Deploy Package "Critical Security Update" to all machines with Operating System equals "Windows 10" and Windows Updates not containing "KB5001234"',
       hints: ['Target specific OS version', 'Check for missing update', 'Use deploy action'],
-      learningPoints: ['Package deployment', 'Targeted actions', 'Patch management']
-    }
-  ]
+      learningPoints: ['Package deployment', 'Targeted actions', 'Patch management'],
+    },
+  ],
 };
 
 interface TCOLearningModeProps {
@@ -156,7 +178,10 @@ export function TCOLearningMode({ onQuerySubmit, onProgressUpdate }: TCOLearning
   const [currentScenario, setCurrentScenario] = useState(SCENARIOS.asking_questions[0]);
   const [userQuery, setUserQuery] = useState('');
   const [showHints, setShowHints] = useState(false);
-  const [feedback, setFeedback] = useState<{ type: 'success' | 'error' | null; message: string }>({ type: null, message: '' });
+  const [feedback, setFeedback] = useState<{ type: 'success' | 'error' | null; message: string }>({
+    type: null,
+    message: '',
+  });
   const [domainProgress, setDomainProgress] = useState<Record<string, number>>({});
 
   // Get scenarios for selected domain
@@ -169,7 +194,7 @@ export function TCOLearningMode({ onQuerySubmit, onProgressUpdate }: TCOLearning
     const totalWeight = TCO_DOMAINS.reduce((sum, d) => sum + d.weight, 0);
     const weightedProgress = TCO_DOMAINS.reduce((sum, d) => {
       const progress = domainProgress[d.id] || 0;
-      return sum + (progress * d.weight);
+      return sum + progress * d.weight;
     }, 0);
     return Math.round(weightedProgress / totalWeight);
   }, [domainProgress]);
@@ -182,12 +207,12 @@ export function TCOLearningMode({ onQuerySubmit, onProgressUpdate }: TCOLearning
     if (queryLower.includes('get') && queryLower.includes('from all machines')) {
       setFeedback({
         type: 'success',
-        message: `Excellent! Your query correctly addresses the scenario. Key concepts mastered: ${  currentScenario.learningPoints.join(', ')}`
+        message: `Excellent! Your query correctly addresses the scenario. Key concepts mastered: ${currentScenario.learningPoints.join(', ')}`,
       });
 
       // Update progress
       const newProgress = Math.min(100, (domainProgress[selectedDomain.id] || 0) + 20);
-      setDomainProgress(prev => ({ ...prev, [selectedDomain.id]: newProgress }));
+      setDomainProgress((prev) => ({ ...prev, [selectedDomain.id]: newProgress }));
       onProgressUpdate?.(selectedDomain.id, newProgress);
 
       // Move to next scenario after delay
@@ -203,7 +228,8 @@ export function TCOLearningMode({ onQuerySubmit, onProgressUpdate }: TCOLearning
     } else {
       setFeedback({
         type: 'error',
-        message: 'Not quite right. Review the scenario requirements and try again. Consider using the hints if you\'re stuck.'
+        message:
+          "Not quite right. Review the scenario requirements and try again. Consider using the hints if you're stuck.",
       });
     }
 
@@ -233,7 +259,7 @@ export function TCOLearningMode({ onQuerySubmit, onProgressUpdate }: TCOLearning
 
           {/* Domain progress breakdown */}
           <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
-            {TCO_DOMAINS.map(domain => {
+            {TCO_DOMAINS.map((domain) => {
               const DomainIcon = domain.icon;
               const progress = domainProgress[domain.id] || 0;
               return (
@@ -270,11 +296,15 @@ export function TCOLearningMode({ onQuerySubmit, onProgressUpdate }: TCOLearning
                     {currentScenario.title}
                   </CardTitle>
                   <div className="flex items-center gap-2 mt-2">
-                    <Badge variant={
-                      currentScenario.difficulty === 'beginner' ? 'default' :
-                      currentScenario.difficulty === 'intermediate' ? 'secondary' :
-                      'destructive'
-                    }>
+                    <Badge
+                      variant={
+                        currentScenario.difficulty === 'beginner'
+                          ? 'default'
+                          : currentScenario.difficulty === 'intermediate'
+                            ? 'secondary'
+                            : 'destructive'
+                      }
+                    >
                       {currentScenario.difficulty}
                     </Badge>
                     <span className="text-sm text-muted-foreground">
@@ -321,13 +351,17 @@ export function TCOLearningMode({ onQuerySubmit, onProgressUpdate }: TCOLearning
 
               {/* Feedback */}
               {feedback.type && (
-                <Alert className={`border-${feedback.type === 'success' ? 'green' : 'red'}-500 bg-${feedback.type === 'success' ? 'green' : 'red'}-500/10`}>
+                <Alert
+                  className={`border-${feedback.type === 'success' ? 'green' : 'red'}-500 bg-${feedback.type === 'success' ? 'green' : 'red'}-500/10`}
+                >
                   {feedback.type === 'success' ? (
                     <CheckCircle className="h-4 w-4 text-[#22c55e]" />
                   ) : (
                     <XCircle className="h-4 w-4 text-red-400" />
                   )}
-                  <AlertDescription className={`text-${feedback.type === 'success' ? 'green' : 'red'}-300`}>
+                  <AlertDescription
+                    className={`text-${feedback.type === 'success' ? 'green' : 'red'}-300`}
+                  >
                     {feedback.message}
                   </AlertDescription>
                 </Alert>

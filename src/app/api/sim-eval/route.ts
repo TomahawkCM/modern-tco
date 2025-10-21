@@ -34,7 +34,7 @@ export async function POST(request: NextRequest) {
     const result = await queryEngine.query(payload.question, {
       format: payload.format ?? 'json',
       useCache: true,
-      timeout: 5000
+      timeout: 5000,
     });
 
     console.log('[sim-eval] Query result:', {
@@ -43,7 +43,7 @@ export async function POST(request: NextRequest) {
       headersCount: result.headers?.length,
       hasRows: !!result.rows,
       rowsCount: result.rows?.length,
-      error: result.error
+      error: result.error,
     });
 
     // Add saved property if this was a save operation

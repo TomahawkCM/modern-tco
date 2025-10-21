@@ -12,13 +12,21 @@
     {
       "slug": "refining-questions",
       "videos": [
-        { "id": "refining-1", "title": "Refining Questions & Targeting", "youtubeId": "22H_oUgPgZI" }
+        {
+          "id": "refining-1",
+          "title": "Refining Questions & Targeting",
+          "youtubeId": "22H_oUgPgZI"
+        }
       ]
     },
     {
       "slug": "taking-action",
       "videos": [
-        { "id": "taking-1", "title": "Taking Action - Packages & Actions", "youtubeId": "dP4dar1ftFg" }
+        {
+          "id": "taking-1",
+          "title": "Taking Action - Packages & Actions",
+          "youtubeId": "dP4dar1ftFg"
+        }
       ]
     },
     {

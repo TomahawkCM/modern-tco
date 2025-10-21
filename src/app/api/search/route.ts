@@ -1,5 +1,6 @@
-import { NextRequest, NextResponse } from "next/server";
-import { supabase } from "@/lib/supabase";
+import type { NextRequest } from 'next/server';
+import { NextResponse } from 'next/server';
+import { supabase } from '@/lib/supabase';
 
 type SearchEventInsert = {
   query: string;
@@ -41,12 +42,12 @@ export async function GET(req: NextRequest) {
 
   // Parse query parameters
   const { searchParams } = new URL(req.url);
-  const q = searchParams.get("q")?.trim() || "";
-  const limit = Number(searchParams.get("limit") || 8);
-  const offset = Number(searchParams.get("offset") || 0);
-  const domain = searchParams.get("domain") || null;
-  const difficulty = searchParams.get("difficulty") || null;
-  const updatedAfter = searchParams.get("updated_after") || null;
+  const q = searchParams.get('q')?.trim() ?? '';
+  const limit = Number(searchParams.get('limit') ?? 8);
+  const offset = Number(searchParams.get('offset') ?? 0);
+  const domain = searchParams.get('domain') ?? null;
+  const difficulty = searchParams.get('difficulty') ?? null;
+  const updatedAfter = searchParams.get('updated_after') ?? null;
 
   // Validate required parameters
   if (!q) {
@@ -63,26 +64,22 @@ export async function GET(req: NextRequest) {
   }
 
   // Validate limit
-  if (isNaN(limit) || limit < 1 || limit > 50) {
+  if (Number.isNaN(limit) || limit < 1 || limit > 50) {
     return NextResponse.json(
-      { error: "Invalid limit parameter. Must be between 1 and 50." },
+      { error: 'Invalid limit parameter. Must be between 1 and 50.' },
       { status: 400 }
     );
   }
 
   // Validate offset
-  if (isNaN(offset) || offset < 0) {
-    return NextResponse.json(
-      { error: "Invalid offset parameter. Must be >= 0." },
-      { status: 400 }
-    );
+  if (Number.isNaN(offset) || offset < 0) {
+    return NextResponse.json({ error: 'Invalid offset parameter. Must be >= 0.' }, { status: 400 });
   }
 
   try {
-    const client = supabase as any;
-
     // Call unified search RPC function
-    const { data, error } = await client.rpc("search_all", {
+
+    const { data, error } = await (supabase as any).rpc('search_all', {
       q,
       p_limit: limit,
       p_offset: offset,
@@ -92,11 +89,8 @@ export async function GET(req: NextRequest) {
     });
 
     if (error) {
-      console.error("[Search API] Database error:", error);
-      return NextResponse.json(
-        { error: "Search failed. Please try again." },
-        { status: 500 }
-      );
+      console.error('[Search API] Database error:', error);
+      return NextResponse.json({ error: 'Search failed. Please try again.' }, { status: 500 });
     }
 
     // Calculate response time
@@ -113,8 +107,9 @@ export async function GET(req: NextRequest) {
 
     // Log analytics (fire-and-forget, don't await)
     // Only log if user is authenticated (privacy consideration)
-    client
-      .from("search_events")
+
+    (supabase as any)
+      .from('search_events')
       .insert({
         query: q,
         result_count: totalResults,
@@ -130,37 +125,34 @@ export async function GET(req: NextRequest) {
       .then((response: { error?: { message: string } | null }) => {
         const analyticsError = response?.error;
         if (analyticsError) {
-          console.warn("[Search API] Analytics logging failed:", analyticsError.message);
+          console.warn('[Search API] Analytics logging failed:', analyticsError.message);
         }
       });
 
     // Return results
-    return NextResponse.json(data || {}, {
+    return NextResponse.json(data ?? {}, {
       status: 200,
       headers: {
-        "X-Response-Time-Ms": responseTime.toString(),
-        "X-Result-Count": totalResults.toString(),
+        'X-Response-Time-Ms': responseTime.toString(),
+        'X-Result-Count': totalResults.toString(),
       },
     });
   } catch (error) {
-    console.error("[Search API] Unexpected error:", error);
-    return NextResponse.json(
-      { error: "An unexpected error occurred." },
-      { status: 500 }
-    );
+    console.error('[Search API] Unexpected error:', error);
+    return NextResponse.json({ error: 'An unexpected error occurred.' }, { status: 500 });
   }
 }
 
 /**
  * OPTIONS handler for CORS preflight
  */
-export async function OPTIONS() {
+export function OPTIONS() {
   return new NextResponse(null, {
     status: 204,
     headers: {
-      Allow: "GET, OPTIONS",
-      "Access-Control-Allow-Methods": "GET, OPTIONS",
-      "Access-Control-Allow-Headers": "Content-Type, Authorization",
+      Allow: 'GET, OPTIONS',
+      'Access-Control-Allow-Methods': 'GET, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type, Authorization',
     },
   });
 }

@@ -4,4 +4,3 @@ export type DomainStatRow = {
   questions: number;
   correct: number;
 };
-

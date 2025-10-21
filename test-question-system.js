@@ -5,26 +5,26 @@
 
 // Mock the question loader functions since we're in a Node environment
 const TCODomain = {
-  ASKING_QUESTIONS: "asking_questions",
-  REFINING_QUESTIONS: "refining_questions",
-  TAKING_ACTION: "taking_action",
-  NAVIGATION_MODULES: "navigation_modules",
-  REPORTING_EXPORT: "reporting_export",
+  ASKING_QUESTIONS: 'asking_questions',
+  REFINING_QUESTIONS: 'refining_questions',
+  TAKING_ACTION: 'taking_action',
+  NAVIGATION_MODULES: 'navigation_modules',
+  REPORTING_EXPORT: 'reporting_export',
 };
 
 const Difficulty = {
-  BEGINNER: "beginner",
-  INTERMEDIATE: "intermediate",
-  ADVANCED: "advanced",
-  EXPERT: "expert",
+  BEGINNER: 'beginner',
+  INTERMEDIATE: 'intermediate',
+  ADVANCED: 'advanced',
+  EXPERT: 'expert',
 };
 
 const QuestionCategory = {
-  PLATFORM_FUNDAMENTALS: "platform_fundamentals",
-  CONSOLE_PROCEDURES: "console_procedures",
-  TROUBLESHOOTING: "troubleshooting",
-  PRACTICAL_SCENARIOS: "practical_scenarios",
-  LINEAR_CHAIN: "linear_chain",
+  PLATFORM_FUNDAMENTALS: 'platform_fundamentals',
+  CONSOLE_PROCEDURES: 'console_procedures',
+  TROUBLESHOOTING: 'troubleshooting',
+  PRACTICAL_SCENARIOS: 'practical_scenarios',
+  LINEAR_CHAIN: 'linear_chain',
 };
 
 // Simulate the question database structure
@@ -33,31 +33,31 @@ const mockQuestionDatabase = [
     domain: TCODomain.REFINING_QUESTIONS,
     questions: [
       {
-        id: "rq-001",
+        id: 'rq-001',
         domain: TCODomain.REFINING_QUESTIONS,
         difficulty: Difficulty.INTERMEDIATE,
         category: QuestionCategory.CONSOLE_PROCEDURES,
       },
       {
-        id: "rq-002",
+        id: 'rq-002',
         domain: TCODomain.REFINING_QUESTIONS,
         difficulty: Difficulty.ADVANCED,
         category: QuestionCategory.PRACTICAL_SCENARIOS,
       },
       {
-        id: "rq-003",
+        id: 'rq-003',
         domain: TCODomain.REFINING_QUESTIONS,
         difficulty: Difficulty.INTERMEDIATE,
         category: QuestionCategory.PLATFORM_FUNDAMENTALS,
       },
       {
-        id: "rq-004",
+        id: 'rq-004',
         domain: TCODomain.REFINING_QUESTIONS,
         difficulty: Difficulty.ADVANCED,
         category: QuestionCategory.TROUBLESHOOTING,
       },
       {
-        id: "rq-005",
+        id: 'rq-005',
         domain: TCODomain.REFINING_QUESTIONS,
         difficulty: Difficulty.INTERMEDIATE,
         category: QuestionCategory.LINEAR_CHAIN,
@@ -68,31 +68,31 @@ const mockQuestionDatabase = [
     domain: TCODomain.NAVIGATION_MODULES,
     questions: [
       {
-        id: "nm-001",
+        id: 'nm-001',
         domain: TCODomain.NAVIGATION_MODULES,
         difficulty: Difficulty.BEGINNER,
         category: QuestionCategory.CONSOLE_PROCEDURES,
       },
       {
-        id: "nm-002",
+        id: 'nm-002',
         domain: TCODomain.NAVIGATION_MODULES,
         difficulty: Difficulty.INTERMEDIATE,
         category: QuestionCategory.PLATFORM_FUNDAMENTALS,
       },
       {
-        id: "nm-003",
+        id: 'nm-003',
         domain: TCODomain.NAVIGATION_MODULES,
         difficulty: Difficulty.ADVANCED,
         category: QuestionCategory.PRACTICAL_SCENARIOS,
       },
       {
-        id: "nm-004",
+        id: 'nm-004',
         domain: TCODomain.NAVIGATION_MODULES,
         difficulty: Difficulty.INTERMEDIATE,
         category: QuestionCategory.TROUBLESHOOTING,
       },
       {
-        id: "nm-005",
+        id: 'nm-005',
         domain: TCODomain.NAVIGATION_MODULES,
         difficulty: Difficulty.BEGINNER,
         category: QuestionCategory.LINEAR_CHAIN,
@@ -103,43 +103,43 @@ const mockQuestionDatabase = [
     domain: TCODomain.ASKING_QUESTIONS,
     questions: [
       {
-        id: "aq-001",
+        id: 'aq-001',
         domain: TCODomain.ASKING_QUESTIONS,
         difficulty: Difficulty.BEGINNER,
         category: QuestionCategory.PLATFORM_FUNDAMENTALS,
       },
       {
-        id: "aq-002",
+        id: 'aq-002',
         domain: TCODomain.ASKING_QUESTIONS,
         difficulty: Difficulty.INTERMEDIATE,
         category: QuestionCategory.CONSOLE_PROCEDURES,
       },
       {
-        id: "aq-003",
+        id: 'aq-003',
         domain: TCODomain.ASKING_QUESTIONS,
         difficulty: Difficulty.ADVANCED,
         category: QuestionCategory.PRACTICAL_SCENARIOS,
       },
       {
-        id: "aq-004",
+        id: 'aq-004',
         domain: TCODomain.ASKING_QUESTIONS,
         difficulty: Difficulty.INTERMEDIATE,
         category: QuestionCategory.TROUBLESHOOTING,
       },
       {
-        id: "aq-005",
+        id: 'aq-005',
         domain: TCODomain.ASKING_QUESTIONS,
         difficulty: Difficulty.BEGINNER,
         category: QuestionCategory.LINEAR_CHAIN,
       },
       {
-        id: "aq-006",
+        id: 'aq-006',
         domain: TCODomain.ASKING_QUESTIONS,
         difficulty: Difficulty.ADVANCED,
         category: QuestionCategory.PLATFORM_FUNDAMENTALS,
       },
       {
-        id: "aq-007",
+        id: 'aq-007',
         domain: TCODomain.ASKING_QUESTIONS,
         difficulty: Difficulty.INTERMEDIATE,
         category: QuestionCategory.CONSOLE_PROCEDURES,
@@ -150,31 +150,31 @@ const mockQuestionDatabase = [
     domain: TCODomain.REPORTING_EXPORT,
     questions: [
       {
-        id: "re-001",
+        id: 're-001',
         domain: TCODomain.REPORTING_EXPORT,
         difficulty: Difficulty.BEGINNER,
         category: QuestionCategory.CONSOLE_PROCEDURES,
       },
       {
-        id: "re-002",
+        id: 're-002',
         domain: TCODomain.REPORTING_EXPORT,
         difficulty: Difficulty.INTERMEDIATE,
         category: QuestionCategory.PRACTICAL_SCENARIOS,
       },
       {
-        id: "re-003",
+        id: 're-003',
         domain: TCODomain.REPORTING_EXPORT,
         difficulty: Difficulty.ADVANCED,
         category: QuestionCategory.TROUBLESHOOTING,
       },
       {
-        id: "re-004",
+        id: 're-004',
         domain: TCODomain.REPORTING_EXPORT,
         difficulty: Difficulty.INTERMEDIATE,
         category: QuestionCategory.PLATFORM_FUNDAMENTALS,
       },
       {
-        id: "re-005",
+        id: 're-005',
         domain: TCODomain.REPORTING_EXPORT,
         difficulty: Difficulty.BEGINNER,
         category: QuestionCategory.LINEAR_CHAIN,
@@ -185,31 +185,31 @@ const mockQuestionDatabase = [
     domain: TCODomain.TAKING_ACTION,
     questions: [
       {
-        id: "ta-001",
+        id: 'ta-001',
         domain: TCODomain.TAKING_ACTION,
         difficulty: Difficulty.INTERMEDIATE,
         category: QuestionCategory.CONSOLE_PROCEDURES,
       },
       {
-        id: "ta-002",
+        id: 'ta-002',
         domain: TCODomain.TAKING_ACTION,
         difficulty: Difficulty.ADVANCED,
         category: QuestionCategory.PRACTICAL_SCENARIOS,
       },
       {
-        id: "ta-003",
+        id: 'ta-003',
         domain: TCODomain.TAKING_ACTION,
         difficulty: Difficulty.BEGINNER,
         category: QuestionCategory.PLATFORM_FUNDAMENTALS,
       },
       {
-        id: "ta-004",
+        id: 'ta-004',
         domain: TCODomain.TAKING_ACTION,
         difficulty: Difficulty.INTERMEDIATE,
         category: QuestionCategory.TROUBLESHOOTING,
       },
       {
-        id: "ta-005",
+        id: 'ta-005',
         domain: TCODomain.TAKING_ACTION,
         difficulty: Difficulty.ADVANCED,
         category: QuestionCategory.LINEAR_CHAIN,
@@ -255,9 +255,9 @@ function getWeightedRandomQuestions(count = 65) {
 }
 
 // Test the system
-console.log("🧪 Testing Centralized Question System\n");
+console.log('🧪 Testing Centralized Question System\n');
 
-console.log("📊 Question Database Statistics:");
+console.log('📊 Question Database Statistics:');
 let totalQuestions = 0;
 mockQuestionDatabase.forEach((domainData) => {
   console.log(`  ${domainData.domain}: ${domainData.questions.length} questions`);
@@ -265,7 +265,7 @@ mockQuestionDatabase.forEach((domainData) => {
 });
 console.log(`  Total: ${totalQuestions} questions\n`);
 
-console.log("🎯 Mock Exam Question Selection (65 questions):");
+console.log('🎯 Mock Exam Question Selection (65 questions):');
 const mockExamQuestions = getWeightedRandomQuestions(65);
 console.log(`Selected: ${mockExamQuestions.length} questions`);
 
@@ -275,7 +275,7 @@ mockExamQuestions.forEach((q) => {
   distribution[q.domain] = (distribution[q.domain] || 0) + 1;
 });
 
-console.log("\n📈 Distribution by Domain:");
+console.log('\n📈 Distribution by Domain:');
 Object.entries(DOMAIN_WEIGHTS).forEach(([domain, expectedWeight]) => {
   const actual = distribution[domain] || 0;
   const expected = Math.round(65 * expectedWeight);
@@ -291,7 +291,7 @@ mockExamQuestions.forEach((q) => {
   difficultyDist[q.difficulty] = (difficultyDist[q.difficulty] || 0) + 1;
 });
 
-console.log("\n🎚️ Distribution by Difficulty:");
+console.log('\n🎚️ Distribution by Difficulty:');
 Object.entries(difficultyDist).forEach(([difficulty, count]) => {
   const percentage = ((count / mockExamQuestions.length) * 100).toFixed(1);
   console.log(`  ${difficulty}: ${count} (${percentage}%)`);
@@ -303,17 +303,17 @@ mockExamQuestions.forEach((q) => {
   categoryDist[q.category] = (categoryDist[q.category] || 0) + 1;
 });
 
-console.log("\n📚 Distribution by Category:");
+console.log('\n📚 Distribution by Category:');
 Object.entries(categoryDist).forEach(([category, count]) => {
   const percentage = ((count / mockExamQuestions.length) * 100).toFixed(1);
   console.log(`  ${category}: ${count} (${percentage}%)`);
 });
 
-console.log("\n✅ Mock Exam System Test Complete!");
+console.log('\n✅ Mock Exam System Test Complete!');
 console.log(`Successfully generated ${mockExamQuestions.length} weighted questions for mock exam`);
 
 // Test practice questions too
-console.log("\n🏃 Testing Practice Questions (10 questions):");
+console.log('\n🏃 Testing Practice Questions (10 questions):');
 const practiceQuestions = getWeightedRandomQuestions(10);
 console.log(`Practice questions generated: ${practiceQuestions.length}`);
 
@@ -322,9 +322,9 @@ practiceQuestions.forEach((q) => {
   practiceDistribution[q.domain] = (practiceDistribution[q.domain] || 0) + 1;
 });
 
-console.log("Practice distribution:");
+console.log('Practice distribution:');
 Object.entries(practiceDistribution).forEach(([domain, count]) => {
   console.log(`  ${domain}: ${count}`);
 });
 
-console.log("\n🎉 All tests passed! Question system is working correctly.");
+console.log('\n🎉 All tests passed! Question system is working correctly.');

@@ -1,23 +1,15 @@
-"use client";
+'use client';
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Progress } from "@/components/ui/progress";
-import { Badge } from "@/components/ui/badge";
-import {
-  Trophy,
-  TrendingUp,
-  Star,
-  Sparkles,
-  Award,
-  ChevronRight,
-} from "lucide-react";
+import { Award, ChevronRight, Sparkles, Star, TrendingUp, Trophy } from 'lucide-react';
+import { Badge } from '@/components/ui/badge';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Progress } from '@/components/ui/progress';
 import {
   getLevelFromPoints,
   getNextLevel,
   getProgressToNextLevel,
   LEVELS,
-  type Level,
-} from "@/lib/achievements";
+} from '@/lib/achievements';
 
 interface LevelProgressionDisplayProps {
   currentPoints: number;
@@ -34,9 +26,7 @@ export default function LevelProgressionDisplay({
   const nextLevel = getNextLevel(currentPoints);
   const progressPercentage = getProgressToNextLevel(currentPoints);
 
-  const pointsNeeded = nextLevel
-    ? nextLevel.minPoints - currentPoints
-    : 0;
+  const pointsNeeded = nextLevel ? nextLevel.minPoints - currentPoints : 0;
 
   if (compact) {
     return (
@@ -45,9 +35,7 @@ export default function LevelProgressionDisplay({
           <Award className={`h-6 w-6 ${currentLevel.color}`} />
           <div>
             <p className="text-sm font-bold">{currentLevel.name}</p>
-            <p className="text-xs text-muted-foreground">
-              {currentPoints.toLocaleString()} points
-            </p>
+            <p className="text-xs text-muted-foreground">{currentPoints.toLocaleString()} points</p>
           </div>
         </div>
 
@@ -81,28 +69,20 @@ export default function LevelProgressionDisplay({
         <div className="text-center space-y-3">
           <div className="inline-flex items-center justify-center w-24 h-24 rounded-full bg-gradient-to-br from-primary/20 to-primary/5 border-2 border-primary">
             <div className="text-center">
-              <p className={`text-3xl font-bold ${currentLevel.color}`}>
-                {currentLevel.id}
-              </p>
+              <p className={`text-3xl font-bold ${currentLevel.color}`}>{currentLevel.id}</p>
             </div>
           </div>
 
           <div>
-            <h3 className={`text-2xl font-bold ${currentLevel.color}`}>
-              {currentLevel.name}
-            </h3>
-            <p className="text-sm text-muted-foreground">
-              {currentLevel.description}
-            </p>
+            <h3 className={`text-2xl font-bold ${currentLevel.color}`}>{currentLevel.name}</h3>
+            <p className="text-sm text-muted-foreground">{currentLevel.description}</p>
           </div>
 
           <div className="flex items-center justify-center gap-4">
             <div className="text-center">
               <div className="flex items-center gap-1 justify-center">
                 <Star className="h-4 w-4 text-[#f97316]" />
-                <p className="text-2xl font-bold text-primary">
-                  {currentPoints.toLocaleString()}
-                </p>
+                <p className="text-2xl font-bold text-primary">{currentPoints.toLocaleString()}</p>
               </div>
               <p className="text-xs text-muted-foreground">Total Points</p>
             </div>
@@ -144,12 +124,9 @@ export default function LevelProgressionDisplay({
         {!nextLevel && (
           <div className="p-4 bg-gradient-to-r from-yellow-500/10 to-purple-500/10 border-2 border-[#f97316]/20 rounded-lg text-center">
             <Award className="h-8 w-8 text-[#f97316] mx-auto mb-2" />
-            <p className="text-sm font-bold text-[#f97316]">
-              Maximum Level Achieved!
-            </p>
+            <p className="text-sm font-bold text-[#f97316]">Maximum Level Achieved!</p>
             <p className="text-xs text-muted-foreground mt-1">
-              You've reached the highest level. Continue earning points to
-              maintain your mastery!
+              You've reached the highest level. Continue earning points to maintain your mastery!
             </p>
           </div>
         )}
@@ -168,27 +145,26 @@ export default function LevelProgressionDisplay({
                   key={level.id}
                   className={`
                     flex items-center justify-between p-2 rounded-md
-                    ${isCurrentLevel ? "bg-primary/10 border border-primary/20" : ""}
-                    ${isPastLevel && !isCurrentLevel ? "opacity-60" : ""}
-                    ${isFutureLevel ? "opacity-40" : ""}
+                    ${isCurrentLevel ? 'bg-primary/10 border border-primary/20' : ''}
+                    ${isPastLevel && !isCurrentLevel ? 'opacity-60' : ''}
+                    ${isFutureLevel ? 'opacity-40' : ''}
                   `}
                 >
                   <div className="flex items-center gap-3">
                     <div
                       className={`
                       w-8 h-8 rounded-full flex items-center justify-center
-                      ${isPastLevel ? "bg-primary text-primary-foreground" : "bg-muted"}
+                      ${isPastLevel ? 'bg-primary text-primary-foreground' : 'bg-muted'}
                     `}
                     >
                       <span className="text-sm font-bold">{level.id}</span>
                     </div>
                     <div>
-                      <p className={`text-sm font-medium ${level.color}`}>
-                        {level.name}
-                      </p>
+                      <p className={`text-sm font-medium ${level.color}`}>{level.name}</p>
                       <p className="text-xs text-muted-foreground">
-                        {level.minPoints.toLocaleString()}{" "}
-                        {level.maxPoints !== Infinity && `- ${level.maxPoints.toLocaleString()}`} points
+                        {level.minPoints.toLocaleString()}{' '}
+                        {level.maxPoints !== Infinity && `- ${level.maxPoints.toLocaleString()}`}{' '}
+                        points
                       </p>
                     </div>
                   </div>

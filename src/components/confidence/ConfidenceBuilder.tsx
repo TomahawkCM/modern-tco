@@ -1,27 +1,28 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  Heart, 
-  Star, 
-  Trophy, 
-  Target, 
-  CheckCircle, 
-  Lightbulb,
-  Sparkles,
-  Award,
-  TrendingUp,
-  Smile,
-  MessageCircle,
-  BookOpen,
-  Users,
-  Clock,
+import { AnimatePresence, motion } from 'framer-motion';
+import {
   ArrowRight,
-  Zap,
+  Award,
+  BookOpen,
+  CheckCircle,
+  Clock,
+  Compass,
+  Heart,
+  Lightbulb,
+  MessageCircle,
   Shield,
-  Compass
+  Smile,
+  Sparkles,
+  Star,
+  Target,
+  TrendingUp,
+  Trophy,
+  Users,
+  Zap,
 } from 'lucide-react';
+import type React from 'react';
+import { useEffect, useState } from 'react';
 
 // TypeScript interfaces for confidence building system
 interface EncouragementMessage {
@@ -65,7 +66,7 @@ export default function ConfidenceBuilder({
   studyProgress,
   recentStruggle,
   showEncouragement = true,
-  onBoostConfidence
+  onBoostConfidence,
 }: ConfidenceBuilderProps) {
   const [activeMessage, setActiveMessage] = useState<EncouragementMessage | null>(null);
   const [showTip, setShowTip] = useState(false);
@@ -80,31 +81,33 @@ export default function ConfidenceBuilder({
       icon: Sparkles,
       type: 'motivational',
       confidenceLevel: 'building',
-      trigger: 'login'
+      trigger: 'login',
     },
     {
       id: 'progress-building',
-      message: "Look at you go! Each concept you learn makes you stronger. Keep building! 💪",
+      message: 'Look at you go! Each concept you learn makes you stronger. Keep building! 💪',
       icon: TrendingUp,
       type: 'progress',
       confidenceLevel: 'building',
-      trigger: 'progress'
+      trigger: 'progress',
     },
     {
       id: 'struggle-building',
-      message: "It's okay to find this challenging - that means you're learning! Take it one step at a time. 🚀",
+      message:
+        "It's okay to find this challenging - that means you're learning! Take it one step at a time. 🚀",
       icon: Heart,
       type: 'motivational',
       confidenceLevel: 'building',
-      trigger: 'struggle'
+      trigger: 'struggle',
     },
     {
       id: 'milestone-building',
-      message: "Amazing! You just completed another milestone. Your confidence is growing with every step! ⭐",
+      message:
+        'Amazing! You just completed another milestone. Your confidence is growing with every step! ⭐',
       icon: Trophy,
       type: 'celebration',
       confidenceLevel: 'building',
-      trigger: 'milestone'
+      trigger: 'milestone',
     },
     {
       id: 'tip-building',
@@ -112,23 +115,25 @@ export default function ConfidenceBuilder({
       icon: Lightbulb,
       type: 'tip',
       confidenceLevel: 'building',
-      trigger: 'random'
+      trigger: 'random',
     },
     {
       id: 'welcome-growing',
-      message: "Your confidence is growing! You're building real expertise in Tanium. Keep going! 🌟",
+      message:
+        "Your confidence is growing! You're building real expertise in Tanium. Keep going! 🌟",
       icon: Star,
       type: 'motivational',
       confidenceLevel: 'growing',
-      trigger: 'login'
+      trigger: 'login',
     },
     {
       id: 'progress-growing',
-      message: "Excellent progress! You're connecting the dots and it shows. Your journey is inspiring! 🎯",
+      message:
+        "Excellent progress! You're connecting the dots and it shows. Your journey is inspiring! 🎯",
       icon: Target,
       type: 'progress',
       confidenceLevel: 'growing',
-      trigger: 'progress'
+      trigger: 'progress',
     },
     {
       id: 'achievement-growing',
@@ -136,15 +141,16 @@ export default function ConfidenceBuilder({
       icon: Award,
       type: 'achievement',
       confidenceLevel: 'growing',
-      trigger: 'milestone'
+      trigger: 'milestone',
     },
     {
       id: 'welcome-strong',
-      message: "Strong confidence level detected! You're becoming a Tanium expert. Impressive work! 💪",
+      message:
+        "Strong confidence level detected! You're becoming a Tanium expert. Impressive work! 💪",
       icon: Shield,
       type: 'motivational',
       confidenceLevel: 'strong',
-      trigger: 'login'
+      trigger: 'login',
     },
     {
       id: 'expert-level',
@@ -152,8 +158,8 @@ export default function ConfidenceBuilder({
       icon: Compass,
       type: 'celebration',
       confidenceLevel: 'expert',
-      trigger: 'milestone'
-    }
+      trigger: 'milestone',
+    },
   ];
 
   // Confidence boosters for different scenarios
@@ -165,7 +171,7 @@ export default function ConfidenceBuilder({
       icon: Target,
       action: 'Focus on one concept at a time',
       benefit: 'Reduces overwhelm and builds steady progress',
-      category: 'learning'
+      category: 'learning',
     },
     {
       id: 'practice-makes-progress',
@@ -174,7 +180,7 @@ export default function ConfidenceBuilder({
       icon: TrendingUp,
       action: 'Try one practice question right now',
       benefit: 'Builds familiarity and reduces exam anxiety',
-      category: 'learning'
+      category: 'learning',
     },
     {
       id: 'growth-mindset',
@@ -183,7 +189,7 @@ export default function ConfidenceBuilder({
       icon: Lightbulb,
       action: 'Embrace mistakes as learning opportunities',
       benefit: 'Transforms setbacks into stepping stones',
-      category: 'mindset'
+      category: 'mindset',
     },
     {
       id: 'celebrate-small-wins',
@@ -192,16 +198,16 @@ export default function ConfidenceBuilder({
       icon: Trophy,
       action: 'Acknowledge your progress today',
       benefit: 'Builds positive momentum and motivation',
-      category: 'progress'
+      category: 'progress',
     },
     {
       id: 'join-community',
-      title: 'You\'re Not Alone',
+      title: "You're Not Alone",
       description: 'Thousands of beginners have successfully passed the TCO exam',
       icon: Users,
       action: 'Connect with other learners',
       benefit: 'Reduces isolation and provides support',
-      category: 'community'
+      category: 'community',
     },
     {
       id: 'time-management',
@@ -210,8 +216,8 @@ export default function ConfidenceBuilder({
       icon: Clock,
       action: 'Study for 25 minutes, then take a 5-minute break',
       benefit: 'Improves retention and prevents burnout',
-      category: 'learning'
-    }
+      category: 'learning',
+    },
   ];
 
   // Beginner tips for confidence building
@@ -219,26 +225,29 @@ export default function ConfidenceBuilder({
     {
       id: 'foundation-first',
       title: 'Start with Foundation',
-      content: 'Complete Phase 0: Foundation before moving to advanced topics. This builds unshakeable confidence.',
+      content:
+        'Complete Phase 0: Foundation before moving to advanced topics. This builds unshakeable confidence.',
       icon: BookOpen,
       isImportant: true,
-      category: 'study-strategy'
+      category: 'study-strategy',
     },
     {
       id: 'progress-over-perfection',
       title: 'Progress Over Perfection',
-      content: 'It\'s better to understand 80% of all topics than 100% of just a few. Keep moving forward!',
+      content:
+        "It's better to understand 80% of all topics than 100% of just a few. Keep moving forward!",
       icon: ArrowRight,
       isImportant: false,
-      category: 'confidence'
+      category: 'confidence',
     },
     {
       id: 'exam-day-ready',
       title: 'Exam Day Success',
-      content: 'Take practice exams when you feel 70% ready. This identifies gaps while building test confidence.',
+      content:
+        'Take practice exams when you feel 70% ready. This identifies gaps while building test confidence.',
       icon: CheckCircle,
       isImportant: true,
-      category: 'exam-prep'
+      category: 'exam-prep',
     },
     {
       id: 'consistent-study',
@@ -246,15 +255,15 @@ export default function ConfidenceBuilder({
       content: 'Study 30 minutes daily rather than 3 hours once a week. Your brain loves routine!',
       icon: Zap,
       isImportant: false,
-      category: 'time-management'
-    }
+      category: 'time-management',
+    },
   ];
 
   // Select appropriate encouragement message based on context
   useEffect(() => {
     const getContextualMessage = (): EncouragementMessage | null => {
       let trigger: EncouragementMessage['trigger'] = 'random';
-      
+
       if (recentStruggle) {
         trigger = 'struggle';
       } else if (studyProgress > 0 && studyProgress % 20 === 0) {
@@ -266,21 +275,22 @@ export default function ConfidenceBuilder({
       }
 
       const relevantMessages = encouragementMessages.filter(
-        msg => msg.confidenceLevel === currentConfidence && 
-               (msg.trigger === trigger || msg.trigger === 'random')
+        (msg) =>
+          msg.confidenceLevel === currentConfidence &&
+          (msg.trigger === trigger || msg.trigger === 'random')
       );
 
       if (relevantMessages.length === 0) {
         // Fallback to any message for current confidence level
         const fallbackMessages = encouragementMessages.filter(
-          msg => msg.confidenceLevel === currentConfidence
+          (msg) => msg.confidenceLevel === currentConfidence
         );
         return fallbackMessages[Math.floor(Math.random() * fallbackMessages.length)] || null;
       }
 
       // Avoid repeating recent messages
       const freshMessages = relevantMessages.filter(
-        msg => !encouragementHistory.includes(msg.id)
+        (msg) => !encouragementHistory.includes(msg.id)
       );
 
       const selectedMessages = freshMessages.length > 0 ? freshMessages : relevantMessages;
@@ -291,25 +301,33 @@ export default function ConfidenceBuilder({
       const message = getContextualMessage();
       if (message) {
         setActiveMessage(message);
-        setEncouragementHistory(prev => [...prev.slice(-4), message.id]);
+        setEncouragementHistory((prev) => [...prev.slice(-4), message.id]);
       }
     }
-  }, [currentConfidence, studyProgress, recentStruggle, showEncouragement, encouragementHistory]);
+  }, [
+    currentConfidence,
+    studyProgress,
+    recentStruggle,
+    showEncouragement,
+    encouragementHistory,
+    encouragementMessages,
+  ]);
 
   // Select daily confidence booster
   useEffect(() => {
     const today = new Date().toDateString();
     const savedBooster = localStorage.getItem(`daily-booster-${today}`);
-    
+
     if (savedBooster) {
-      const booster = confidenceBoosters.find(b => b.id === savedBooster);
+      const booster = confidenceBoosters.find((b) => b.id === savedBooster);
       setDailyBooster(booster ?? null);
     } else {
-      const randomBooster = confidenceBoosters[Math.floor(Math.random() * confidenceBoosters.length)];
+      const randomBooster =
+        confidenceBoosters[Math.floor(Math.random() * confidenceBoosters.length)];
       setDailyBooster(randomBooster);
       localStorage.setItem(`daily-booster-${today}`, randomBooster.id);
     }
-  }, []);
+  }, [confidenceBoosters]);
 
   const handleBoostConfidence = () => {
     setShowTip(true);
@@ -318,21 +336,31 @@ export default function ConfidenceBuilder({
 
   const getConfidenceColor = (level: string): string => {
     switch (level) {
-      case 'building': return 'from-blue-500 to-primary';
-      case 'growing': return 'from-green-500 to-emerald-500';
-      case 'strong': return 'from-primary to-sky-500';
-      case 'expert': return 'from-yellow-500 to-orange-500';
-      default: return 'from-gray-500 to-slate-500';
+      case 'building':
+        return 'from-blue-500 to-primary';
+      case 'growing':
+        return 'from-green-500 to-emerald-500';
+      case 'strong':
+        return 'from-primary to-sky-500';
+      case 'expert':
+        return 'from-yellow-500 to-orange-500';
+      default:
+        return 'from-gray-500 to-slate-500';
     }
   };
 
   const getConfidenceMessage = (level: string): string => {
     switch (level) {
-      case 'building': return 'Building Foundation';
-      case 'growing': return 'Growing Knowledge';
-      case 'strong': return 'Strong Understanding';
-      case 'expert': return 'Expert Level';
-      default: return 'Getting Started';
+      case 'building':
+        return 'Building Foundation';
+      case 'growing':
+        return 'Growing Knowledge';
+      case 'strong':
+        return 'Strong Understanding';
+      case 'expert':
+        return 'Expert Level';
+      default:
+        return 'Getting Started';
     }
   };
 
@@ -346,19 +374,19 @@ export default function ConfidenceBuilder({
             initial={{ opacity: 0, y: 20, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -20, scale: 0.95 }}
-            transition={{ duration: 0.5, ease: "easeOut" }}
+            transition={{ duration: 0.5, ease: 'easeOut' }}
             className={`relative p-6 rounded-2xl bg-gradient-to-r ${getConfidenceColor(currentConfidence)} shadow-lg`}
           >
             <div className="flex items-start space-x-4">
               <motion.div
                 initial={{ rotate: 0 }}
                 animate={{ rotate: [0, 10, -10, 0] }}
-                transition={{ duration: 2, ease: "easeInOut", repeat: Infinity, repeatDelay: 3 }}
+                transition={{ duration: 2, ease: 'easeInOut', repeat: Infinity, repeatDelay: 3 }}
                 className="flex-shrink-0 p-3 bg-white/20 rounded-xl backdrop-blur-sm"
               >
                 <activeMessage.icon className="w-8 h-8 text-foreground" />
               </motion.div>
-              
+
               <div className="flex-1 space-y-2">
                 <div className="flex items-center justify-between">
                   <span className="px-3 py-1 text-xs font-semibold text-foreground/90 bg-white/20 rounded-full backdrop-blur-sm">
@@ -373,11 +401,11 @@ export default function ConfidenceBuilder({
                     ✕
                   </motion.button>
                 </div>
-                
+
                 <p className="text-lg font-medium text-foreground leading-relaxed">
                   {activeMessage.message}
                 </p>
-                
+
                 {activeMessage.type !== 'tip' && (
                   <motion.button
                     whileHover={{ scale: 1.02 }}
@@ -411,7 +439,7 @@ export default function ConfidenceBuilder({
             <div className="flex-shrink-0 p-3 bg-cyan-50 rounded-lg">
               <dailyBooster.icon className="w-6 h-6 text-cyan-600" />
             </div>
-            
+
             <div className="flex-1 space-y-2">
               <div className="flex items-center space-x-2">
                 <span className="px-2 py-1 text-xs font-semibold text-cyan-700 bg-cyan-100 rounded-full">
@@ -421,22 +449,14 @@ export default function ConfidenceBuilder({
                   {dailyBooster.category.replace('-', ' ')}
                 </span>
               </div>
-              
-              <h3 className="text-lg font-semibold text-gray-900">
-                {dailyBooster.title}
-              </h3>
-              
-              <p className="text-gray-600">
-                {dailyBooster.description}
-              </p>
-              
+
+              <h3 className="text-lg font-semibold text-gray-900">{dailyBooster.title}</h3>
+
+              <p className="text-gray-600">{dailyBooster.description}</p>
+
               <div className="space-y-1">
-                <p className="text-sm font-medium text-gray-900">
-                  Action: {dailyBooster.action}
-                </p>
-                <p className="text-sm text-gray-600">
-                  Benefit: {dailyBooster.benefit}
-                </p>
+                <p className="text-sm font-medium text-gray-900">Action: {dailyBooster.action}</p>
+                <p className="text-sm text-gray-600">Benefit: {dailyBooster.benefit}</p>
               </div>
             </div>
           </div>
@@ -464,12 +484,10 @@ export default function ConfidenceBuilder({
                 <div className="mx-auto w-16 h-16 bg-green-100 rounded-full flex items-center justify-center">
                   <Lightbulb className="w-8 h-8 text-[#22c55e]" />
                 </div>
-                
-                <h3 className="text-xl font-semibold text-gray-900">
-                  Quick Confidence Tip
-                </h3>
-                
-                {beginnerTips.slice(0, 1).map(tip => (
+
+                <h3 className="text-xl font-semibold text-gray-900">Quick Confidence Tip</h3>
+
+                {beginnerTips.slice(0, 1).map((tip) => (
                   <div key={tip.id} className="space-y-3">
                     <div className="flex items-center justify-center space-x-2">
                       <tip.icon className="w-5 h-5 text-cyan-600" />
@@ -480,13 +498,11 @@ export default function ConfidenceBuilder({
                         </span>
                       )}
                     </div>
-                    
-                    <p className="text-gray-600 leading-relaxed">
-                      {tip.content}
-                    </p>
+
+                    <p className="text-gray-600 leading-relaxed">{tip.content}</p>
                   </div>
                 ))}
-                
+
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}

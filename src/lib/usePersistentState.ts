@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
 export function usePersistentState<T>(key: string, initial: T) {
   const [state, setState] = useState<T>(() => {
-    if (typeof window === "undefined") return initial;
+    if (typeof window === 'undefined') return initial;
     try {
       const raw = localStorage.getItem(key);
       if (raw != null) return JSON.parse(raw) as T;
@@ -20,14 +20,13 @@ export function usePersistentState<T>(key: string, initial: T) {
 
   // Reload state when the key changes (e.g., when scoping to a different user)
   useEffect(() => {
-    if (typeof window === "undefined") return;
+    if (typeof window === 'undefined') return;
     try {
       const raw = localStorage.getItem(key);
       if (raw != null) setState(JSON.parse(raw) as T);
       else setState(initial);
     } catch {}
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [key]);
+  }, [key, initial]);
 
   return [state, setState] as const;
 }

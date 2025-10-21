@@ -1,10 +1,10 @@
-import { useState } from "react";
-import { useAuth } from "@/contexts/AuthContext";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Alert, AlertDescription } from "@/components/ui/alert";
-import { Loader2, Eye, EyeOff } from "lucide-react";
+import { Eye, EyeOff, Loader2 } from 'lucide-react';
+import { useState } from 'react';
+import { Alert, AlertDescription } from '@/components/ui/alert';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { useAuth } from '@/contexts/AuthContext';
 
 interface LoginFormProps {
   onSuccess?: () => void;
@@ -12,8 +12,8 @@ interface LoginFormProps {
 }
 
 export function LoginForm({ onSuccess, onSwitchToSignUp }: LoginFormProps) {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -36,7 +36,7 @@ export function LoginForm({ onSuccess, onSwitchToSignUp }: LoginFormProps) {
         onSuccess?.();
       }
     } catch (error) {
-      setError("An unexpected error occurred. Please try again.");
+      setError('An unexpected error occurred. Please try again.');
     } finally {
       setIsSubmitting(false);
     }
@@ -80,7 +80,7 @@ export function LoginForm({ onSuccess, onSwitchToSignUp }: LoginFormProps) {
             <div className="relative">
               <Input
                 id="password"
-                type={showPassword ? "text" : "password"}
+                type={showPassword ? 'text' : 'password'}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Enter your password"
@@ -110,7 +110,7 @@ export function LoginForm({ onSuccess, onSwitchToSignUp }: LoginFormProps) {
                 Signing In...
               </>
             ) : (
-              "Sign In"
+              'Sign In'
             )}
           </Button>
 

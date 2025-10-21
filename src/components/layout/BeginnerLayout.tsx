@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
-import { useState, useEffect } from "react";
-import { AppHeader } from "./app-header";
-import { Sidebar } from "./sidebar";
-import { BreadcrumbNav } from "./breadcrumb-nav";
-import NavigationHelper from "@/components/navigation/NavigationHelper";
-import BeginnerModeToggle from "@/components/navigation/BeginnerModeToggle";
-import ConfidenceBuilder from "@/components/confidence/ConfidenceBuilder";
+import { useEffect, useState } from 'react';
+import ConfidenceBuilder from '@/components/confidence/ConfidenceBuilder';
+import BeginnerModeToggle from '@/components/navigation/BeginnerModeToggle';
+import NavigationHelper from '@/components/navigation/NavigationHelper';
+import { AppHeader } from './app-header';
+import { BreadcrumbNav } from './breadcrumb-nav';
+import { Sidebar } from './sidebar';
 
 interface BeginnerLayoutProps {
   children: React.ReactNode;
@@ -15,7 +15,9 @@ interface BeginnerLayoutProps {
 export function BeginnerLayout({ children }: BeginnerLayoutProps) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [isBeginnerMode, setIsBeginnerMode] = useState(true);
-  const [currentConfidence, setCurrentConfidence] = useState<'building' | 'growing' | 'strong' | 'expert'>('building');
+  const [currentConfidence, setCurrentConfidence] = useState<
+    'building' | 'growing' | 'strong' | 'expert'
+  >('building');
   const [studyProgress, setStudyProgress] = useState(0);
   const [showConfidenceBuilder, setShowConfidenceBuilder] = useState(false);
 
@@ -24,15 +26,15 @@ export function BeginnerLayout({ children }: BeginnerLayoutProps) {
     const beginnerModeStored = localStorage.getItem('tanium-beginner-mode');
     const confidenceStored = localStorage.getItem('tanium-confidence-level');
     const progressStored = localStorage.getItem('tanium-study-progress');
-    
+
     if (beginnerModeStored !== null) {
       setIsBeginnerMode(JSON.parse(beginnerModeStored));
     }
-    
+
     if (confidenceStored) {
       setCurrentConfidence(confidenceStored as 'building' | 'growing' | 'strong' | 'expert');
     }
-    
+
     if (progressStored) {
       setStudyProgress(parseInt(progressStored, 10));
     }
@@ -53,8 +55,12 @@ export function BeginnerLayout({ children }: BeginnerLayoutProps) {
 
   // Handle confidence boost
   const handleBoostConfidence = () => {
-    const confidenceLevels: Array<'building' | 'growing' | 'strong' | 'expert'> = 
-      ['building', 'growing', 'strong', 'expert'];
+    const confidenceLevels: Array<'building' | 'growing' | 'strong' | 'expert'> = [
+      'building',
+      'growing',
+      'strong',
+      'expert',
+    ];
     const currentIndex = confidenceLevels.indexOf(currentConfidence);
     if (currentIndex < confidenceLevels.length - 1) {
       const newLevel = confidenceLevels[currentIndex + 1];
@@ -67,10 +73,7 @@ export function BeginnerLayout({ children }: BeginnerLayoutProps) {
     <div className="min-h-screen bg-gradient-to-br from-tanium-dark via-tanium-secondary to-tanium-primary relative">
       {/* Beginner Mode Toggle - Fixed Position */}
       <div className="fixed top-20 right-4 z-40">
-        <BeginnerModeToggle 
-          defaultEnabled={isBeginnerMode}
-          onToggle={handleBeginnerModeChange}
-        />
+        <BeginnerModeToggle defaultEnabled={isBeginnerMode} onToggle={handleBeginnerModeChange} />
       </div>
 
       {/* Header */}
@@ -92,9 +95,7 @@ export function BeginnerLayout({ children }: BeginnerLayoutProps) {
       )}
 
       {/* Navigation Helper - Only show in beginner mode */}
-      {isBeginnerMode && (
-        <NavigationHelper />
-      )}
+      {isBeginnerMode && <NavigationHelper />}
 
       {/* Main content */}
       <main
@@ -103,15 +104,14 @@ export function BeginnerLayout({ children }: BeginnerLayoutProps) {
           isBeginnerMode ? 'md:ml-64 mr-4' : 'md:ml-64'
         }`}
         tabIndex={-1}
-        role="main"
         aria-label="Main content"
       >
         <div className="container mx-auto px-4 py-8">
           {/* Beginner-friendly breadcrumb with extra context */}
-          <BreadcrumbNav 
+          <BreadcrumbNav
             className={`mb-6 ${isBeginnerMode ? 'bg-white/5 backdrop-blur-sm rounded-lg px-4 py-2 border border-white/10' : ''}`}
           />
-          
+
           {/* Beginner Welcome Message */}
           {isBeginnerMode && studyProgress < 10 && (
             <div className="mb-6 rounded-lg bg-gradient-to-r from-blue-500/20 to-primary/20 border border-primary/30 p-6">
@@ -122,8 +122,9 @@ export function BeginnerLayout({ children }: BeginnerLayoutProps) {
                     Welcome to Your Tanium Journey!
                   </h3>
                   <p className="text-blue-100 mb-4">
-                    You're about to master one of the most powerful endpoint management platforms in the world. 
-                    Don't worry if you're completely new to Tanium - we'll guide you every step of the way.
+                    You're about to master one of the most powerful endpoint management platforms in
+                    the world. Don't worry if you're completely new to Tanium - we'll guide you
+                    every step of the way.
                   </p>
                   <div className="flex flex-wrap gap-2">
                     <div className="px-3 py-1 bg-white/10 rounded-full text-xs text-foreground">
@@ -140,7 +141,7 @@ export function BeginnerLayout({ children }: BeginnerLayoutProps) {
               </div>
             </div>
           )}
-          
+
           {children}
         </div>
       </main>

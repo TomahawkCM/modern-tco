@@ -1,11 +1,6 @@
 import type { NextRequest } from 'next/server';
+import { ApiError, apiSuccess, validateBody, withErrorTracking } from '@/lib/error-tracking';
 import { runSimulator } from '@/lib/simulator-runner';
-import {
-  withErrorTracking,
-  ApiError,
-  apiSuccess,
-  validateBody
-} from '@/lib/error-tracking';
 
 type SavePayload = {
   name: string;
@@ -15,8 +10,12 @@ type SavePayload = {
 export const POST = withErrorTracking(
   async (request: NextRequest) => {
     // Check if simulator is enabled in production
-    if (process.env.NODE_ENV === 'production' && process.env['ENABLE_SIMULATOR'] !== 'true') {
-      throw new ApiError('Simulator endpoints are disabled in production', 501, 'SIMULATOR_DISABLED');
+    if (process.env.NODE_ENV === 'production' && process.env.ENABLE_SIMULATOR !== 'true') {
+      throw new ApiError(
+        'Simulator endpoints are disabled in production',
+        501,
+        'SIMULATOR_DISABLED'
+      );
     }
 
     // Parse and validate request body
@@ -32,13 +31,13 @@ export const POST = withErrorTracking(
       name: {
         required: true,
         type: 'string',
-        validate: (v) => v.length > 0 && v.length <= 100
+        validate: (v) => v.length > 0 && v.length <= 100,
       },
       question: {
         required: true,
         type: 'string',
-        validate: (v) => v.length > 0 && v.length <= 1000
-      }
+        validate: (v) => v.length > 0 && v.length <= 1000,
+      },
     });
 
     // Run the simulator
@@ -48,15 +47,11 @@ export const POST = withErrorTracking(
         '--save',
         validatedPayload.name,
         '-q',
-        validatedPayload.question
+        validatedPayload.question,
       ]);
 
       if (result?.ok === false) {
-        throw new ApiError(
-          result.error ?? 'Simulator execution failed',
-          400,
-          'SIMULATOR_ERROR'
-        );
+        throw new ApiError(result.error ?? 'Simulator execution failed', 400, 'SIMULATOR_ERROR');
       }
 
       return apiSuccess(result);
@@ -67,11 +62,7 @@ export const POST = withErrorTracking(
       }
 
       // Wrap other errors
-      throw new ApiError(
-        'Simulator invocation failed',
-        500,
-        'SIMULATOR_INVOCATION_FAILED'
-      );
+      throw new ApiError('Simulator invocation failed', 500, 'SIMULATOR_INVOCATION_FAILED');
     }
   },
   { endpoint: '/api/sim-save' }

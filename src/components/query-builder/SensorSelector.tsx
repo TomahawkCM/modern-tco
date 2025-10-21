@@ -1,12 +1,21 @@
-"use client";
+'use client';
 
-import React, { useState, useMemo, useCallback, memo } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
+import {
+  AlertCircle,
+  ChevronRight,
+  Clock,
+  Database,
+  Filter,
+  Plus,
+  Search,
+  Settings,
+  Star,
+  X,
+} from 'lucide-react';
+import { memo, useCallback, useMemo, useState } from 'react';
 import { Badge } from '@/components/ui/badge';
-import { ScrollArea } from '@/components/ui/scroll-area';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import {
   Dialog,
   DialogContent,
@@ -15,33 +24,14 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
-import {
-  Plus,
-  Search,
-  X,
-  Database,
-  Clock,
-  Star,
-  Filter,
-  Settings,
-  ChevronRight,
-  Info,
-  Zap,
-  AlertCircle
-} from 'lucide-react';
+import { Input } from '@/components/ui/input';
+import { ScrollArea } from '@/components/ui/scroll-area';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
-import {
-  type SensorSelectorProps,
-  type SensorSelection,
-  type SensorCatalogEntry,
-  ParameterDefinition
+import type {
+  SensorCatalogEntry,
+  SensorSelection,
+  SensorSelectorProps,
 } from './types/queryBuilder';
 
 function SensorSelectorComponent({
@@ -51,7 +41,7 @@ function SensorSelectorComponent({
   onUpdate,
   catalog,
   maxSensors = 10,
-  className = ""
+  className = '',
 }: SensorSelectorProps) {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
@@ -60,7 +50,7 @@ function SensorSelectorComponent({
 
   // Get unique categories
   const categories = useMemo(() => {
-    const cats = ['all', ...new Set(catalog.map(item => item.category))];
+    const cats = ['all', ...new Set(catalog.map((item) => item.category))];
     return cats;
   }, [catalog]);
 
@@ -69,13 +59,13 @@ function SensorSelectorComponent({
     let filtered = catalog;
 
     if (selectedCategory !== 'all') {
-      filtered = filtered.filter(item => item.category === selectedCategory);
+      filtered = filtered.filter((item) => item.category === selectedCategory);
     }
 
     if (searchQuery) {
       const query = searchQuery.toLowerCase();
       filtered = filtered.filter(
-        item =>
+        (item) =>
           ('name' in item.sensor && item.sensor.name?.toLowerCase().includes(query)) ||
           item.description?.toLowerCase().includes(query) ||
           item.category.toLowerCase().includes(query)
@@ -99,46 +89,48 @@ function SensorSelectorComponent({
   // Get popular sensors
   const popularSensors = useMemo(() => {
     return catalog
-      .filter(item => item.popularity > 0.7)
+      .filter((item) => item.popularity > 0.7)
       .sort((a, b) => b.popularity - a.popularity)
       .slice(0, 6);
   }, [catalog]);
 
   // Handle adding a sensor
-  const handleAddSensor = useCallback((entry: SensorCatalogEntry) => {
-    if (selectedSensors.length >= maxSensors) {
-      alert(`Maximum ${maxSensors} sensors allowed`);
-      return;
-    }
+  const handleAddSensor = useCallback(
+    (entry: SensorCatalogEntry) => {
+      if (selectedSensors.length >= maxSensors) {
+        alert(`Maximum ${maxSensors} sensors allowed`);
+        return;
+      }
 
-    const newSensor: SensorSelection = {
-      sensor: entry.sensor,
-      parameters: entry.parameters?.reduce((acc, param) => {
-        if (param.default !== undefined) {
-          acc[param.name] = param.default;
-        }
-        return acc;
-      }, {} as Record<string, any>),
-      isValid: true
-    };
+      const newSensor: SensorSelection = {
+        sensor: entry.sensor,
+        parameters: entry.parameters?.reduce(
+          (acc, param) => {
+            if (param.default !== undefined) {
+              acc[param.name] = param.default;
+            }
+            return acc;
+          },
+          {} as Record<string, any>
+        ),
+        isValid: true,
+      };
 
-    onAdd(newSensor);
-    setShowBrowser(false);
-  }, [selectedSensors.length, maxSensors, onAdd]);
+      onAdd(newSensor);
+      setShowBrowser(false);
+    },
+    [selectedSensors.length, maxSensors, onAdd]
+  );
 
   // Handle parameter change
-  const handleParameterChange = (
-    sensorIndex: number,
-    paramName: string,
-    value: any
-  ) => {
+  const handleParameterChange = (sensorIndex: number, paramName: string, value: any) => {
     const sensor = selectedSensors[sensorIndex];
     const updatedSensor = {
       ...sensor,
       parameters: {
         ...sensor.parameters,
-        [paramName]: value
-      }
+        [paramName]: value,
+      },
     };
     onUpdate(sensorIndex, updatedSensor);
   };
@@ -148,7 +140,7 @@ function SensorSelectorComponent({
     const colors: Record<string, string> = {
       fast: 'border-green-500 text-[#22c55e]',
       medium: 'border-yellow-500 text-[#f97316]',
-      slow: 'border-red-500 text-red-400'
+      slow: 'border-red-500 text-red-400',
     };
 
     return (
@@ -206,7 +198,7 @@ function SensorSelectorComponent({
                 {/* Category tabs */}
                 <Tabs value={selectedCategory} onValueChange={setSelectedCategory}>
                   <TabsList className="bg-card">
-                    {categories.map(category => (
+                    {categories.map((category) => (
                       <TabsTrigger key={category} value={category}>
                         {category === 'all' ? 'All' : category}
                       </TabsTrigger>
@@ -224,14 +216,19 @@ function SensorSelectorComponent({
                         <div className="grid grid-cols-2 gap-2">
                           {popularSensors.map((entry) => (
                             <Button
-                              key={entry.sensor.key || ('name' in entry.sensor ? entry.sensor.name : '')}
+                              key={
+                                entry.sensor.key ||
+                                ('name' in entry.sensor ? entry.sensor.name : '')
+                              }
                               variant="outline"
                               size="sm"
                               onClick={() => handleAddSensor(entry)}
                               className="justify-start text-left"
                             >
                               <div className="flex items-center justify-between w-full">
-                                <span className="text-foreground">{'name' in entry.sensor ? entry.sensor.name : ''}</span>
+                                <span className="text-foreground">
+                                  {'name' in entry.sensor ? entry.sensor.name : ''}
+                                </span>
                                 {getRuntimeBadge(entry.runtime, entry.runtimeMs)}
                               </div>
                             </Button>
@@ -245,7 +242,9 @@ function SensorSelectorComponent({
                       <div className="space-y-2">
                         {filteredCatalog.map((entry) => (
                           <div
-                            key={entry.sensor.key || ('name' in entry.sensor ? entry.sensor.name : '')}
+                            key={
+                              entry.sensor.key || ('name' in entry.sensor ? entry.sensor.name : '')
+                            }
                             className="p-3 border border-gray-700 rounded hover:border-gray-600 cursor-pointer"
                             onClick={() => handleAddSensor(entry)}
                           >
@@ -326,9 +325,7 @@ function SensorSelectorComponent({
                     <div className="mt-2 space-y-2">
                       {Object.entries(sensor.parameters).map(([key, value]) => (
                         <div key={key} className="flex items-center space-x-2">
-                          <label className="text-sm text-muted-foreground w-24">
-                            {key}:
-                          </label>
+                          <label className="text-sm text-muted-foreground w-24">{key}:</label>
                           <Input
                             type="text"
                             value={value}

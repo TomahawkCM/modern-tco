@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import UnifiedReviewDashboard from "@/components/review/UnifiedReviewDashboard";
+import UnifiedReviewDashboard from '@/components/review/UnifiedReviewDashboard';
 
 export default function DailyReviewPage() {
   return (

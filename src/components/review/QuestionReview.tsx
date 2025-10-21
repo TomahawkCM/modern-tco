@@ -1,17 +1,17 @@
 // @ts-nocheck - Type errors in this file will be fixed post-deployment
-"use client";
+'use client';
 
-import React, { useState, useEffect } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Progress } from "@/components/ui/progress";
-import { Badge } from "@/components/ui/badge";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Label } from "@/components/ui/label";
-import { useAuth } from "@/contexts/AuthContext";
-import { supabase } from "@/lib/supabase";
-import { schedule, type SRRating } from "@/lib/sr";
-import { Check, X, Clock, Brain, TrendingUp } from "lucide-react";
+import { Brain, Check, X } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Label } from '@/components/ui/label';
+import { Progress } from '@/components/ui/progress';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { useAuth } from '@/contexts/AuthContext';
+import { type SRRating, schedule } from '@/lib/sr';
+import { supabase } from '@/lib/supabase';
 
 interface Question {
   id: string;
@@ -20,7 +20,7 @@ interface Question {
   correct_answer: number;
   explanation: string;
   domain: string | null;
-  difficulty: "beginner" | "intermediate" | "advanced";
+  difficulty: 'beginner' | 'intermediate' | 'advanced';
   category: string;
   tags?: string[];
   created_at?: string | null;
@@ -68,7 +68,7 @@ export default function QuestionReview({ onComplete }: QuestionReviewProps) {
 
   useEffect(() => {
     loadDueQuestions();
-  }, [user?.id]);
+  }, [loadDueQuestions]);
 
   const loadDueQuestions = async () => {
     if (!user?.id) return;
@@ -77,21 +77,18 @@ export default function QuestionReview({ onComplete }: QuestionReviewProps) {
     try {
       // Get due question reviews
       const { data: reviewData, error: reviewError } = await supabase
-        .from("question_reviews")
-        .select("*")
-        .eq("user_id", user.id)
-        .lte("srs_due", new Date().toISOString())
-        .order("srs_due", { ascending: true })
+        .from('question_reviews')
+        .select('*')
+        .eq('user_id', user.id)
+        .lte('srs_due', new Date().toISOString())
+        .order('srs_due', { ascending: true })
         .limit(20);
 
       if (reviewError) throw reviewError;
 
       if (!reviewData || reviewData.length === 0) {
         // No reviews yet - create some from random questions
-        const { data: randomQuestions } = await supabase
-          .from("questions")
-          .select("*")
-          .limit(10);
+        const { data: randomQuestions } = await supabase.from('questions').select('*').limit(10);
 
         if (randomQuestions) {
           setQuestions(randomQuestions as Question[]);
@@ -101,9 +98,9 @@ export default function QuestionReview({ onComplete }: QuestionReviewProps) {
         // Get the actual questions
         const questionIds = reviewData.map((r) => r.question_id);
         const { data: questionData } = await supabase
-          .from("questions")
-          .select("*")
-          .in("id", questionIds);
+          .from('questions')
+          .select('*')
+          .in('id', questionIds);
 
         if (questionData) {
           setQuestions(questionData as Question[]);
@@ -111,7 +108,7 @@ export default function QuestionReview({ onComplete }: QuestionReviewProps) {
         }
       }
     } catch (error) {
-      console.error("Error loading questions:", error);
+      console.error('Error loading questions:', error);
     } finally {
       setIsLoading(false);
     }
@@ -154,7 +151,7 @@ export default function QuestionReview({ onComplete }: QuestionReviewProps) {
             lapses: currentReview.srs_lapses,
           }
         : {
-            id: "",
+            id: '',
             due: Date.now(),
             interval: 0,
             ease: 2.5,
@@ -171,7 +168,7 @@ export default function QuestionReview({ onComplete }: QuestionReviewProps) {
       if (!reviewId) {
         // Create new review record
         const { data: newReview } = await supabase
-          .from("question_reviews")
+          .from('question_reviews')
           .insert({
             user_id: user.id,
             question_id: currentQuestion.id,
@@ -191,7 +188,7 @@ export default function QuestionReview({ onComplete }: QuestionReviewProps) {
       } else {
         // Update existing review
         await supabase
-          .from("question_reviews")
+          .from('question_reviews')
           .update({
             srs_due: new Date(newState.due).toISOString(),
             srs_interval: newState.interval,
@@ -202,13 +199,13 @@ export default function QuestionReview({ onComplete }: QuestionReviewProps) {
             correct_attempts: currentReview.correct_attempts + (isCorrect ? 1 : 0),
             last_reviewed_at: new Date().toISOString(),
           })
-          .eq("id", reviewId);
+          .eq('id', reviewId);
       }
 
       // Record attempt in history
       if (reviewId) {
-        await supabase.from("question_review_attempts").insert({
-          review_id: reviewId as string,
+        await supabase.from('question_review_attempts').insert({
+          review_id: reviewId,
           user_id: user.id,
           question_id: currentQuestion.id,
           is_correct: isCorrect,
@@ -221,7 +218,7 @@ export default function QuestionReview({ onComplete }: QuestionReviewProps) {
         });
       }
     } catch (error) {
-      console.error("Error updating review:", error);
+      console.error('Error updating review:', error);
     }
 
     // Move to next question
@@ -289,7 +286,7 @@ export default function QuestionReview({ onComplete }: QuestionReviewProps) {
       <Card>
         <CardHeader>
           <div className="flex items-center justify-between">
-            <Badge variant="outline">{currentQuestion.domain || "General"}</Badge>
+            <Badge variant="outline">{currentQuestion.domain || 'General'}</Badge>
             <Badge variant="secondary">{currentQuestion.difficulty}</Badge>
           </div>
           <CardTitle className="text-xl mt-4">{currentQuestion.question}</CardTitle>
@@ -299,7 +296,7 @@ export default function QuestionReview({ onComplete }: QuestionReviewProps) {
           {/* Answer Options */}
           <RadioGroup
             value={selectedAnswer?.toString()}
-            onValueChange={(value) => handleAnswerSelect(parseInt(value))}
+            onValueChange={(value) => handleAnswerSelect(parseInt(value, 10))}
             disabled={showResult}
           >
             <div className="space-y-3">
@@ -314,19 +311,16 @@ export default function QuestionReview({ onComplete }: QuestionReviewProps) {
                     key={option.id}
                     className={`flex items-center space-x-3 p-4 rounded-lg border-2 transition-colors ${
                       showCorrect
-                        ? "border-green-500 bg-[#22c55e]/10"
+                        ? 'border-green-500 bg-[#22c55e]/10'
                         : showIncorrect
-                        ? "border-red-500 bg-red-500/10"
-                        : isSelected
-                        ? "border-primary bg-primary/10"
-                        : "border-border hover:border-primary/50"
+                          ? 'border-red-500 bg-red-500/10'
+                          : isSelected
+                            ? 'border-primary bg-primary/10'
+                            : 'border-border hover:border-primary/50'
                     }`}
                   >
                     <RadioGroupItem value={idx.toString()} id={`option-${idx}`} />
-                    <Label
-                      htmlFor={`option-${idx}`}
-                      className="flex-1 cursor-pointer font-normal"
-                    >
+                    <Label htmlFor={`option-${idx}`} className="flex-1 cursor-pointer font-normal">
                       {option.text}
                     </Label>
                     {showCorrect && <Check className="h-5 w-5 text-[#22c55e]" />}
@@ -352,7 +346,7 @@ export default function QuestionReview({ onComplete }: QuestionReviewProps) {
           {/* Explanation & Rating */}
           {showResult && (
             <div className="space-y-4">
-              <Card className={isCorrect ? "border-green-500/50" : "border-red-500/50"}>
+              <Card className={isCorrect ? 'border-green-500/50' : 'border-red-500/50'}>
                 <CardContent className="pt-6">
                   <div className="flex items-start gap-3 mb-3">
                     {isCorrect ? (
@@ -375,28 +369,28 @@ export default function QuestionReview({ onComplete }: QuestionReviewProps) {
                 <p className="text-sm font-medium">How well did you know this?</p>
                 <div className="grid grid-cols-4 gap-2">
                   <Button
-                    onClick={() => handleRating("again")}
+                    onClick={() => handleRating('again')}
                     variant="outline"
                     className="border-red-500 hover:bg-red-500/10"
                   >
                     Again
                   </Button>
                   <Button
-                    onClick={() => handleRating("hard")}
+                    onClick={() => handleRating('hard')}
                     variant="outline"
                     className="border-orange-500 hover:bg-orange-500/10"
                   >
                     Hard
                   </Button>
                   <Button
-                    onClick={() => handleRating("good")}
+                    onClick={() => handleRating('good')}
                     variant="outline"
                     className="border-blue-500 hover:bg-primary/10"
                   >
                     Good
                   </Button>
                   <Button
-                    onClick={() => handleRating("easy")}
+                    onClick={() => handleRating('easy')}
                     variant="outline"
                     className="border-green-500 hover:bg-[#22c55e]/10"
                   >

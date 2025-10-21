@@ -5,30 +5,30 @@
  * Executes PostgreSQL schema using Supabase client with proper authentication
  */
 
-import { createClient } from "@supabase/supabase-js";
-import { readFileSync } from "fs";
-import { join } from "path";
-import { fileURLToPath } from "url";
-import { dirname } from "path";
+import { createClient } from '@supabase/supabase-js';
+import { readFileSync } from 'fs';
+import { dirname, join } from 'path';
+import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 // Load environment variables from .env.local
-import dotenv from "dotenv";
-const envPath = join(__dirname, "..", ".env.local");
+import dotenv from 'dotenv';
+
+const envPath = join(__dirname, '..', '.env.local');
 dotenv.config({ path: envPath });
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
 if (!supabaseUrl || !supabaseServiceKey) {
-  console.error("❌ Missing Supabase configuration in .env.local");
-  console.error("Required: NEXT_PUBLIC_SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY");
+  console.error('❌ Missing Supabase configuration in .env.local');
+  console.error('Required: NEXT_PUBLIC_SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY');
   process.exit(1);
 }
 
-console.log("🚀 TCO Schema Deployment Starting...");
+console.log('🚀 TCO Schema Deployment Starting...');
 console.log(`📡 Supabase URL: ${supabaseUrl}`);
 console.log(`🔑 Service Key: ${supabaseServiceKey.substring(0, 20)}...`);
 
@@ -43,11 +43,11 @@ const supabase = createClient(supabaseUrl, supabaseServiceKey, {
 /**
  * Execute SQL with proper error handling and logging
  */
-async function executeSQL(sql, description = "SQL execution") {
+async function executeSQL(sql, description = 'SQL execution') {
   try {
     console.log(`\n📋 Executing: ${description}`);
 
-    const { data, error } = await supabase.rpc("exec_sql", {
+    const { data, error } = await supabase.rpc('exec_sql', {
       sql_query: sql,
     });
 
@@ -57,7 +57,7 @@ async function executeSQL(sql, description = "SQL execution") {
     }
 
     console.log(`✅ ${description} completed successfully`);
-    if (data) console.log("📊 Result:", data);
+    if (data) console.log('📊 Result:', data);
     return true;
   } catch (err) {
     console.error(`❌ ${description} threw error:`, err);
@@ -84,18 +84,18 @@ async function createExecFunction() {
     $$;
   `;
 
-  return executeSQL(funcSQL, "Creating exec_sql function");
+  return executeSQL(funcSQL, 'Creating exec_sql function');
 }
 
 /**
  * Deploy complete TCO schema with all tables, indexes, and policies
  */
 async function deploySchema() {
-  console.log("\n🏗️  Deploying TCO Database Schema...");
+  console.log('\n🏗️  Deploying TCO Database Schema...');
 
   // Step 1: Create UUID extension
   const uuidSQL = `CREATE EXTENSION IF NOT EXISTS "uuid-ossp";`;
-  if (!(await executeSQL(uuidSQL, "Creating UUID extension"))) return false;
+  if (!(await executeSQL(uuidSQL, 'Creating UUID extension'))) return false;
 
   // Step 2: Create study_domains table
   const domainsTableSQL = `
@@ -109,7 +109,7 @@ async function deploySchema() {
       updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
     );
   `;
-  if (!(await executeSQL(domainsTableSQL, "Creating study_domains table"))) return false;
+  if (!(await executeSQL(domainsTableSQL, 'Creating study_domains table'))) return false;
 
   // Step 3: Create study_modules table
   const modulesTableSQL = `
@@ -126,7 +126,7 @@ async function deploySchema() {
       updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
     );
   `;
-  if (!(await executeSQL(modulesTableSQL, "Creating study_modules table"))) return false;
+  if (!(await executeSQL(modulesTableSQL, 'Creating study_modules table'))) return false;
 
   // Step 4: Create study_sections table
   const sectionsTableSQL = `
@@ -140,7 +140,7 @@ async function deploySchema() {
       updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
     );
   `;
-  if (!(await executeSQL(sectionsTableSQL, "Creating study_sections table"))) return false;
+  if (!(await executeSQL(sectionsTableSQL, 'Creating study_sections table'))) return false;
 
   // Step 5: Create practice_questions table
   const questionsTableSQL = `
@@ -158,7 +158,7 @@ async function deploySchema() {
       updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
     );
   `;
-  if (!(await executeSQL(questionsTableSQL, "Creating practice_questions table"))) return false;
+  if (!(await executeSQL(questionsTableSQL, 'Creating practice_questions table'))) return false;
 
   // Step 6: Create performance indexes
   const indexesSQL = `
@@ -167,7 +167,7 @@ async function deploySchema() {
     CREATE INDEX IF NOT EXISTS idx_practice_questions_domain_id ON practice_questions(domain_id);
     CREATE INDEX IF NOT EXISTS idx_practice_questions_module_id ON practice_questions(module_id);
   `;
-  if (!(await executeSQL(indexesSQL, "Creating performance indexes"))) return false;
+  if (!(await executeSQL(indexesSQL, 'Creating performance indexes'))) return false;
 
   // Step 7: Insert TCO certification domains
   const domainsDataSQL = `
@@ -183,7 +183,7 @@ async function deploySchema() {
       estimated_time_minutes = EXCLUDED.estimated_time_minutes,
       updated_at = NOW();
   `;
-  if (!(await executeSQL(domainsDataSQL, "Inserting TCO certification domains"))) return false;
+  if (!(await executeSQL(domainsDataSQL, 'Inserting TCO certification domains'))) return false;
 
   // Step 8: Enable Row Level Security
   const rlsSQL = `
@@ -192,7 +192,7 @@ async function deploySchema() {
     ALTER TABLE study_sections ENABLE ROW LEVEL SECURITY;
     ALTER TABLE practice_questions ENABLE ROW LEVEL SECURITY;
   `;
-  if (!(await executeSQL(rlsSQL, "Enabling Row Level Security"))) return false;
+  if (!(await executeSQL(rlsSQL, 'Enabling Row Level Security'))) return false;
 
   // Step 9: Create public read policies
   const policiesSQL = `
@@ -201,7 +201,7 @@ async function deploySchema() {
     CREATE POLICY IF NOT EXISTS "Enable read access for all users" ON study_sections FOR SELECT USING (true);
     CREATE POLICY IF NOT EXISTS "Enable read access for all users" ON practice_questions FOR SELECT USING (true);
   `;
-  if (!(await executeSQL(policiesSQL, "Creating public read policies"))) return false;
+  if (!(await executeSQL(policiesSQL, 'Creating public read policies'))) return false;
 
   return true;
 }
@@ -210,7 +210,7 @@ async function deploySchema() {
  * Verify schema deployment by checking tables and data
  */
 async function verifyDeployment() {
-  console.log("\n🔍 Verifying Schema Deployment...");
+  console.log('\n🔍 Verifying Schema Deployment...');
 
   // Check tables exist
   const tablesQuery = `
@@ -221,29 +221,29 @@ async function verifyDeployment() {
     ORDER BY table_name;
   `;
 
-  const { data: tables, error: tablesError } = await supabase.rpc("exec_sql", {
+  const { data: tables, error: tablesError } = await supabase.rpc('exec_sql', {
     sql_query: tablesQuery,
   });
 
   if (tablesError) {
-    console.error("❌ Table verification failed:", tablesError);
+    console.error('❌ Table verification failed:', tablesError);
     return false;
   }
 
-  console.log("✅ Tables verified:", tables);
+  console.log('✅ Tables verified:', tables);
 
   // Check domains data
   const { data: domains, error: domainsError } = await supabase
-    .from("study_domains")
-    .select("domain_number, title, exam_weight")
-    .order("domain_number");
+    .from('study_domains')
+    .select('domain_number, title, exam_weight')
+    .order('domain_number');
 
   if (domainsError) {
-    console.error("❌ Domains verification failed:", domainsError);
+    console.error('❌ Domains verification failed:', domainsError);
     return false;
   }
 
-  console.log("✅ TCO Domains verified:", domains);
+  console.log('✅ TCO Domains verified:', domains);
   return true;
 }
 
@@ -252,7 +252,7 @@ async function verifyDeployment() {
  */
 async function main() {
   try {
-    console.log("🎯 Starting TCO Database Schema Deployment");
+    console.log('🎯 Starting TCO Database Schema Deployment');
 
     // Step 1: Create exec function if needed
     await createExecFunction();
@@ -260,26 +260,26 @@ async function main() {
     // Step 2: Deploy complete schema
     const schemaSuccess = await deploySchema();
     if (!schemaSuccess) {
-      console.error("❌ Schema deployment failed");
+      console.error('❌ Schema deployment failed');
       process.exit(1);
     }
 
     // Step 3: Verify deployment
     const verifySuccess = await verifyDeployment();
     if (!verifySuccess) {
-      console.error("❌ Schema verification failed");
+      console.error('❌ Schema verification failed');
       process.exit(1);
     }
 
-    console.log("\n🎉 TCO Database Schema Deployment Completed Successfully!");
+    console.log('\n🎉 TCO Database Schema Deployment Completed Successfully!');
     console.log(
-      "📊 4 tables created: study_domains, study_modules, study_sections, practice_questions"
+      '📊 4 tables created: study_domains, study_modules, study_sections, practice_questions'
     );
-    console.log("🎯 5 TCO certification domains populated");
-    console.log("🔒 Row Level Security policies configured");
-    console.log("⚡ Performance indexes optimized");
+    console.log('🎯 5 TCO certification domains populated');
+    console.log('🔒 Row Level Security policies configured');
+    console.log('⚡ Performance indexes optimized');
   } catch (error) {
-    console.error("❌ Deployment failed with error:", error);
+    console.error('❌ Deployment failed with error:', error);
     process.exit(1);
   }
 }

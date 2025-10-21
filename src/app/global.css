@@ -4,11 +4,11 @@
 
 /* Performance: Optimize font loading with optional display for faster initial render */
 @font-face {
-  font-family: 'Inter';
+  font-family: "Inter";
   font-style: normal;
   font-weight: 100 900;
   font-display: optional;
-  src: url('/fonts/inter-var.woff2') format('woff2');
+  src: url("/fonts/inter-var.woff2") format("woff2");
 }
 
 @layer base {
@@ -72,17 +72,24 @@
   * {
     @apply border-border;
   }
-  
+
   body {
     @apply bg-background text-foreground;
-    font-feature-settings: "rlig" 1, "calt" 1;
+    font-feature-settings:
+      "rlig" 1,
+      "calt" 1;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
   }
 
   /* Prevent CLS - Reserve space for common elements */
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     text-wrap: balance;
   }
 
@@ -96,7 +103,10 @@
   }
 
   /* Optimize images */
-  img, video, canvas, svg {
+  img,
+  video,
+  canvas,
+  svg {
     display: block;
     max-width: 100%;
     height: auto;
@@ -113,9 +123,9 @@
   *,
   *::before,
   *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms;
+    animation-iteration-count: 1;
+    transition-duration: 0.01ms;
   }
 }
 
@@ -165,10 +175,10 @@
   *,
   *::before,
   *::after {
-    background: transparent !important;
-    color: #000 !important;
-    box-shadow: none !important;
-    text-shadow: none !important;
+    background: transparent;
+    color: #000;
+    box-shadow: none;
+    text-shadow: none;
   }
 
   a,
@@ -177,7 +187,7 @@
   }
 
   img {
-    max-width: 100% !important;
+    max-width: 100%;
   }
 
   @page {

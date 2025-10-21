@@ -4,7 +4,7 @@ const fs = require('fs');
 
 async function runLighthouse() {
   const chrome = await chromeLauncher.launch({
-    chromeFlags: ['--headless', '--no-sandbox', '--disable-dev-shm-usage']
+    chromeFlags: ['--headless', '--no-sandbox', '--disable-dev-shm-usage'],
   });
 
   const options = {
@@ -37,26 +37,27 @@ async function runLighthouse() {
   // Get top opportunities for improvement
   console.log('\n=== Top Opportunities ===\n');
   const opportunities = Object.values(runnerResult.lhr.audits)
-    .filter(audit => audit.details && audit.details.type === 'opportunity' && audit.score < 1)
+    .filter((audit) => audit.details && audit.details.type === 'opportunity' && audit.score < 1)
     .sort((a, b) => b.details.overallSavingsMs - a.details.overallSavingsMs)
     .slice(0, 5);
 
-  opportunities.forEach(opp => {
+  opportunities.forEach((opp) => {
     console.log(`- ${opp.title}: Potential savings of ${opp.details.overallSavingsMs}ms`);
   });
 
   // Get accessibility issues
   const accessibilityIssues = Object.values(runnerResult.lhr.audits)
-    .filter(audit =>
-      audit.details &&
-      runnerResult.lhr.categories.accessibility.auditRefs.some(ref => ref.id === audit.id) &&
-      audit.score < 1
+    .filter(
+      (audit) =>
+        audit.details &&
+        runnerResult.lhr.categories.accessibility.auditRefs.some((ref) => ref.id === audit.id) &&
+        audit.score < 1
     )
     .slice(0, 5);
 
   if (accessibilityIssues.length > 0) {
     console.log('\n=== Accessibility Issues ===\n');
-    accessibilityIssues.forEach(issue => {
+    accessibilityIssues.forEach((issue) => {
       console.log(`- ${issue.title}: ${issue.description}`);
     });
   }

@@ -1,20 +1,19 @@
-"use client";
+'use client';
 
-import { StudyModuleCard } from "@/components/study/StudyModuleCard";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Progress } from "@/components/ui/progress";
-import { useAuth } from "@/contexts/AuthContext";
-import { useBookmarks } from "@/hooks/useBookmarks";
-import { useStudyProgress } from "@/hooks/useStudyProgress";
-import { studyModulesService } from "@/lib/study-modules";
-import type { StudyModuleWithSections } from "@/types/supabase";
-import { BookOpen, BookmarkIcon, Clock, LogOut, TrendingUp, Trophy, User } from "lucide-react";
-import Link from "next/link";
-import { useCallback, useEffect, useMemo, useState } from "react";
-import LearningProgressTracker from "@/components/learning/LearningProgressTracker";
-import type { UserBookmarkWithDetails } from "@/types/supabase";
+import { BookmarkIcon, BookOpen, Clock, LogOut, TrendingUp, Trophy, User } from 'lucide-react';
+import Link from 'next/link';
+import { useCallback, useEffect, useMemo, useState } from 'react';
+import LearningProgressTracker from '@/components/learning/LearningProgressTracker';
+import { StudyModuleCard } from '@/components/study/StudyModuleCard';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Progress } from '@/components/ui/progress';
+import { useAuth } from '@/contexts/AuthContext';
+import { useBookmarks } from '@/hooks/useBookmarks';
+import { useStudyProgress } from '@/hooks/useStudyProgress';
+import { studyModulesService } from '@/lib/study-modules';
+import type { StudyModuleWithSections, UserBookmarkWithDetails } from '@/types/supabase';
 
 export function DashboardContent() {
   const { user, signOut } = useAuth();
@@ -40,7 +39,7 @@ export function DashboardContent() {
           setStats(userStats);
         }
       } catch (error) {
-        console.error("Error loading dashboard data:", error);
+        console.error('Error loading dashboard data:', error);
       } finally {
         setLoading(false);
       }
@@ -56,7 +55,7 @@ export function DashboardContent() {
 
   const handleSignOut = useCallback(() => {
     void signOut().catch((error) => {
-      console.error("Error signing out:", error);
+      console.error('Error signing out:', error);
     });
   }, [signOut]);
 
@@ -108,15 +107,15 @@ export function DashboardContent() {
         return {
           id: String(bookmark.id),
           title:
-            typeof bookmark.section?.title === "string"
+            typeof bookmark.section?.title === 'string'
               ? bookmark.section.title
-              : "Untitled Section",
+              : 'Untitled Section',
           moduleTitle:
-            typeof bookmark.section?.module?.title === "string"
+            typeof bookmark.section?.module?.title === 'string'
               ? bookmark.section.module.title
-              : "Unknown Module",
+              : 'Unknown Module',
           notes: bookmark.note ?? undefined,
-          href: moduleId && sectionId ? `/study/${moduleId}#${sectionId}` : "#",
+          href: moduleId && sectionId ? `/study/${moduleId}#${sectionId}` : '#',
         };
       }),
     [recentBookmarks]
@@ -205,9 +204,7 @@ export function DashboardContent() {
 
         <Card className="border-cyan-200 bg-gradient-to-br from-cyan-50 to-cyan-100 dark:border-cyan-800 dark:from-cyan-900/20 dark:to-cyan-800/20">
           <CardHeader className="pb-2">
-            <CardDescription className="text-cyan-600 dark:text-primary">
-              Bookmarks
-            </CardDescription>
+            <CardDescription className="text-cyan-600 dark:text-primary">Bookmarks</CardDescription>
           </CardHeader>
           <CardContent>
             <div className="flex items-center gap-2">

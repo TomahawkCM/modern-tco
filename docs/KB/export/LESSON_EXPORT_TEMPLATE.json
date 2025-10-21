@@ -41,10 +41,7 @@
       "moduleId": "kb.aq.basics",
       "domain": "AQ",
       "question": "Placeholder question?",
-      "choices": [
-        { "id": "a", "text": "Choice A" },
-        { "id": "b", "text": "Choice B" }
-      ],
+      "choices": [{ "id": "a", "text": "Choice A" }, { "id": "b", "text": "Choice B" }],
       "correctAnswerId": "a",
       "difficulty": "beginner",
       "tags": ["stub"],

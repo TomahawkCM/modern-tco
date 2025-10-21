@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import type React from 'react';
 import { LearningProgressProvider } from '@/components/learning/LearningProgressProvider';
 
 interface StudyLayoutProps {
@@ -8,9 +8,5 @@ interface StudyLayoutProps {
 }
 
 export default function StudyLayout({ children }: StudyLayoutProps) {
-  return (
-    <LearningProgressProvider>
-      {children}
-    </LearningProgressProvider>
-  );
+  return <LearningProgressProvider>{children}</LearningProgressProvider>;
 }

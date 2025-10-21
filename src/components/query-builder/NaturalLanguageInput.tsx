@@ -1,27 +1,25 @@
-"use client";
+'use client';
 
-import React, { useState, useRef, useEffect } from 'react';
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { ScrollArea } from '@/components/ui/scroll-area';
-import { Card } from '@/components/ui/card';
 import {
-  Sparkles,
-  Search,
   ArrowRight,
   Clock,
-  Zap,
+  Code,
   Database,
   Hash,
-  Code,
-  Loader2
+  Loader2,
+  Search,
+  Sparkles,
+  Zap,
 } from 'lucide-react';
+import type React from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { ScrollArea } from '@/components/ui/scroll-area';
 
-import type {
-  NaturalLanguageInputProps,
-  QuerySuggestion
-} from './types/queryBuilder';
+import type { NaturalLanguageInputProps, QuerySuggestion } from './types/queryBuilder';
 
 export function NaturalLanguageInput({
   value,
@@ -29,8 +27,8 @@ export function NaturalLanguageInput({
   onSubmit,
   suggestions,
   isProcessing = false,
-  placeholder = "Type a natural language query...",
-  className = ""
+  placeholder = 'Type a natural language query...',
+  className = '',
 }: NaturalLanguageInputProps) {
   const [isFocused, setIsFocused] = useState(false);
   const [showSuggestions, setShowSuggestions] = useState(false);
@@ -69,9 +67,7 @@ export function NaturalLanguageInput({
       }
     } else if (e.key === 'ArrowDown') {
       e.preventDefault();
-      setSelectedIndex((prev) =>
-        prev < suggestions.length - 1 ? prev + 1 : prev
-      );
+      setSelectedIndex((prev) => (prev < suggestions.length - 1 ? prev + 1 : prev));
     } else if (e.key === 'ArrowUp') {
       e.preventDefault();
       setSelectedIndex((prev) => (prev > -1 ? prev - 1 : -1));
@@ -182,9 +178,7 @@ export function NaturalLanguageInput({
         >
           <ScrollArea className="max-h-80">
             <div className="p-1">
-              <div className="text-xs text-muted-foreground px-3 py-1 mb-1">
-                Suggested queries
-              </div>
+              <div className="text-xs text-muted-foreground px-3 py-1 mb-1">Suggested queries</div>
 
               {suggestions.map((suggestion, index) => (
                 <div
@@ -196,16 +190,12 @@ export function NaturalLanguageInput({
                   onClick={() => selectSuggestion(suggestion)}
                   onMouseEnter={() => setSelectedIndex(index)}
                 >
-                  <div className="flex-shrink-0 mt-0.5">
-                    {getSuggestionIcon(suggestion.type)}
-                  </div>
+                  <div className="flex-shrink-0 mt-0.5">{getSuggestionIcon(suggestion.type)}</div>
 
                   <div className="flex-1 min-w-0">
                     <div className="flex items-start justify-between">
                       <div className="flex-1">
-                        <div className="text-sm text-foreground">
-                          {suggestion.displayText}
-                        </div>
+                        <div className="text-sm text-foreground">{suggestion.displayText}</div>
                         {suggestion.description && (
                           <div className="text-xs text-muted-foreground mt-0.5">
                             {suggestion.description}
@@ -221,8 +211,8 @@ export function NaturalLanguageInput({
                               suggestion.runtime < 100
                                 ? 'border-green-500 text-[#22c55e]'
                                 : suggestion.runtime < 500
-                                ? 'border-yellow-500 text-[#f97316]'
-                                : 'border-red-500 text-red-400'
+                                  ? 'border-yellow-500 text-[#f97316]'
+                                  : 'border-red-500 text-red-400'
                             }`}
                           >
                             <Clock className="h-3 w-3 mr-1" />
@@ -232,9 +222,7 @@ export function NaturalLanguageInput({
 
                         <Badge
                           variant="outline"
-                          className={`text-xs ${getConfidenceColor(
-                            suggestion.confidence
-                          )}`}
+                          className={`text-xs ${getConfidenceColor(suggestion.confidence)}`}
                         >
                           {Math.round(suggestion.confidence * 100)}%
                         </Badge>
@@ -246,7 +234,7 @@ export function NaturalLanguageInput({
                       <div className="mt-1">
                         <code className="text-xs text-muted-foreground">
                           {suggestion.text.length > 80
-                            ? `${suggestion.text.substring(0, 80)  }...`
+                            ? `${suggestion.text.substring(0, 80)}...`
                             : suggestion.text}
                         </code>
                       </div>

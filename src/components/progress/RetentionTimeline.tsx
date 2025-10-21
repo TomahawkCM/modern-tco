@@ -1,13 +1,10 @@
-"use client";
+'use client';
 
-import { useState, useEffect } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { TrendingUp, TrendingDown, Minus, Calendar } from "lucide-react";
-import {
-  generateRetentionTimeline,
-  type TimelineDataPoint,
-} from "@/lib/progressVisualization";
+import { Calendar, Minus, TrendingDown, TrendingUp } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { Badge } from '@/components/ui/badge';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { generateRetentionTimeline, type TimelineDataPoint } from '@/lib/progressVisualization';
 
 interface RetentionTimelineProps {
   /** Optional module ID to filter timeline */
@@ -25,27 +22,23 @@ interface RetentionTimelineProps {
  *
  * Research: Visual progress feedback increases motivation by 40% (Schunk & DiBenedetto, 2020)
  */
-export function RetentionTimeline({
-  moduleId,
-  daysBack = 30,
-  className,
-}: RetentionTimelineProps) {
+export function RetentionTimeline({ moduleId, daysBack = 30, className }: RetentionTimelineProps) {
   const [timeline, setTimeline] = useState<TimelineDataPoint[]>([]);
-  const [trend, setTrend] = useState<"improving" | "stable" | "declining">("stable");
+  const [trend, setTrend] = useState<'improving' | 'stable' | 'declining'>('stable');
 
   useEffect(() => {
     loadTimeline();
 
     // Listen for review updates
     const handleStorageChange = (e: StorageEvent) => {
-      if (e.key === "review-items" || e.key === "user-points") {
+      if (e.key === 'review-items' || e.key === 'user-points') {
         loadTimeline();
       }
     };
 
-    window.addEventListener("storage", handleStorageChange);
-    return () => window.removeEventListener("storage", handleStorageChange);
-  }, [moduleId, daysBack]);
+    window.addEventListener('storage', handleStorageChange);
+    return () => window.removeEventListener('storage', handleStorageChange);
+  }, [loadTimeline]);
 
   function loadTimeline() {
     const data = generateRetentionTimeline(moduleId, daysBack);
@@ -57,18 +50,19 @@ export function RetentionTimeline({
     const secondHalf = recentDays.slice(-3);
 
     const firstAvg = firstHalf.reduce((sum, d) => sum + d.averageRetention, 0) / firstHalf.length;
-    const secondAvg = secondHalf.reduce((sum, d) => sum + d.averageRetention, 0) / secondHalf.length;
+    const secondAvg =
+      secondHalf.reduce((sum, d) => sum + d.averageRetention, 0) / secondHalf.length;
 
     if (secondAvg > firstAvg + 5) {
-      setTrend("improving");
+      setTrend('improving');
     } else if (secondAvg < firstAvg - 5) {
-      setTrend("declining");
+      setTrend('declining');
     } else {
-      setTrend("stable");
+      setTrend('stable');
     }
   }
 
-  if (timeline.length === 0 || timeline.every(d => d.itemsReviewed === 0)) {
+  if (timeline.length === 0 || timeline.every((d) => d.itemsReviewed === 0)) {
     return (
       <Card className={className}>
         <CardHeader>
@@ -88,21 +82,26 @@ export function RetentionTimeline({
   }
 
   // Calculate statistics
-  const totalDaysActive = timeline.filter(d => d.itemsReviewed > 0).length;
-  const averageRetention = timeline.reduce((sum, d) => sum + d.averageRetention, 0) / timeline.length;
-  const maxRetention = Math.max(...timeline.map(d => d.averageRetention));
-  const minRetention = Math.min(...timeline.filter(d => d.itemsReviewed > 0).map(d => d.averageRetention));
+  const totalDaysActive = timeline.filter((d) => d.itemsReviewed > 0).length;
+  const averageRetention =
+    timeline.reduce((sum, d) => sum + d.averageRetention, 0) / timeline.length;
+  const maxRetention = Math.max(...timeline.map((d) => d.averageRetention));
+  const minRetention = Math.min(
+    ...timeline.filter((d) => d.itemsReviewed > 0).map((d) => d.averageRetention)
+  );
 
   // Prepare chart data (simple sparkline with CSS)
   const chartHeight = 120;
   const chartWidth = 100; // percentage
 
-  const maxValue = Math.max(...timeline.map(d => d.averageRetention), 100);
-  const points = timeline.map((d, i) => {
-    const x = (i / (timeline.length - 1)) * chartWidth;
-    const y = chartHeight - (d.averageRetention / maxValue) * chartHeight;
-    return `${x},${y}`;
-  }).join(" ");
+  const maxValue = Math.max(...timeline.map((d) => d.averageRetention), 100);
+  const points = timeline
+    .map((d, i) => {
+      const x = (i / (timeline.length - 1)) * chartWidth;
+      const y = chartHeight - (d.averageRetention / maxValue) * chartHeight;
+      return `${x},${y}`;
+    })
+    .join(' ');
 
   return (
     <Card className={className}>
@@ -115,17 +114,17 @@ export function RetentionTimeline({
           <Badge
             variant="outline"
             className={
-              trend === "improving"
-                ? "text-[#22c55e] border-green-400"
-                : trend === "declining"
-                ? "text-orange-400 border-orange-400"
-                : "text-muted-foreground"
+              trend === 'improving'
+                ? 'text-[#22c55e] border-green-400'
+                : trend === 'declining'
+                  ? 'text-orange-400 border-orange-400'
+                  : 'text-muted-foreground'
             }
           >
-            {trend === "improving" && <TrendingUp className="h-3 w-3 mr-1" />}
-            {trend === "declining" && <TrendingDown className="h-3 w-3 mr-1" />}
-            {trend === "stable" && <Minus className="h-3 w-3 mr-1" />}
-            {trend === "improving" ? "Improving" : trend === "declining" ? "Declining" : "Stable"}
+            {trend === 'improving' && <TrendingUp className="h-3 w-3 mr-1" />}
+            {trend === 'declining' && <TrendingDown className="h-3 w-3 mr-1" />}
+            {trend === 'stable' && <Minus className="h-3 w-3 mr-1" />}
+            {trend === 'improving' ? 'Improving' : trend === 'declining' ? 'Declining' : 'Stable'}
           </Badge>
         </div>
       </CardHeader>
@@ -134,9 +133,7 @@ export function RetentionTimeline({
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           <div>
             <div className="text-sm text-muted-foreground mb-1">Avg Retention</div>
-            <div className="text-2xl font-bold text-primary">
-              {Math.round(averageRetention)}%
-            </div>
+            <div className="text-2xl font-bold text-primary">{Math.round(averageRetention)}%</div>
           </div>
           <div>
             <div className="text-sm text-muted-foreground mb-1">Active Days</div>
@@ -158,7 +155,9 @@ export function RetentionTimeline({
 
         {/* Sparkline Chart */}
         <div className="relative">
-          <div className="text-sm text-muted-foreground mb-3">Retention Trend (Last {daysBack} Days)</div>
+          <div className="text-sm text-muted-foreground mb-3">
+            Retention Trend (Last {daysBack} Days)
+          </div>
           <svg
             viewBox={`0 0 ${chartWidth} ${chartHeight}`}
             className="w-full h-32"
@@ -235,34 +234,39 @@ export function RetentionTimeline({
         <div>
           <div className="text-sm text-muted-foreground mb-2">Recent Activity</div>
           <div className="space-y-2">
-            {timeline.slice(-7).reverse().filter(d => d.itemsReviewed > 0).slice(0, 5).map((day, idx) => (
-              <div
-                key={idx}
-                className="flex items-center justify-between text-sm p-2 rounded border border-gray-700/50 bg-card/30"
-              >
-                <span className="text-muted-foreground">
-                  {new Date(day.date).toLocaleDateString("en-US", {
-                    month: "short",
-                    day: "numeric",
-                  })}
-                </span>
-                <div className="flex items-center gap-3">
-                  <span className="text-muted-foreground">{day.itemsReviewed} reviews</span>
-                  <Badge
-                    variant="outline"
-                    className={
-                      day.averageRetention >= 80
-                        ? "text-[#22c55e]"
-                        : day.averageRetention >= 60
-                        ? "text-primary"
-                        : "text-orange-400"
-                    }
-                  >
-                    {Math.round(day.averageRetention)}%
-                  </Badge>
+            {timeline
+              .slice(-7)
+              .reverse()
+              .filter((d) => d.itemsReviewed > 0)
+              .slice(0, 5)
+              .map((day, idx) => (
+                <div
+                  key={idx}
+                  className="flex items-center justify-between text-sm p-2 rounded border border-gray-700/50 bg-card/30"
+                >
+                  <span className="text-muted-foreground">
+                    {new Date(day.date).toLocaleDateString('en-US', {
+                      month: 'short',
+                      day: 'numeric',
+                    })}
+                  </span>
+                  <div className="flex items-center gap-3">
+                    <span className="text-muted-foreground">{day.itemsReviewed} reviews</span>
+                    <Badge
+                      variant="outline"
+                      className={
+                        day.averageRetention >= 80
+                          ? 'text-[#22c55e]'
+                          : day.averageRetention >= 60
+                            ? 'text-primary'
+                            : 'text-orange-400'
+                      }
+                    >
+                      {Math.round(day.averageRetention)}%
+                    </Badge>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
           </div>
         </div>
       </CardContent>

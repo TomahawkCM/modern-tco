@@ -13,7 +13,7 @@ const FIXES = {
   // Fix floating promises
   floatingPromises: {
     pattern: /(\s+)(router\.(push|replace|prefetch|refresh|back|forward)\([^)]+\))(;|\s|$)/g,
-    replacement: '$1void $2$3'
+    replacement: '$1void $2$3',
   },
 
   // Fix unescaped apostrophes
@@ -23,7 +23,7 @@ const FIXES = {
       // Don't replace in code blocks or attributes
       if (match.includes('className') || match.includes('href')) return match;
       return `${p1}${p2}{'${p3}`;
-    }
+    },
   },
 
   // Fix unescaped quotes
@@ -33,7 +33,7 @@ const FIXES = {
       // Don't replace in code blocks or attributes
       if (match.includes('className') || match.includes('href')) return match;
       return `${p1}${p2}{'"'}${p3}`;
-    }
+    },
   },
 
   // Fix console.log statements (keep error and warn)
@@ -42,31 +42,31 @@ const FIXES = {
     replacement: (match) => {
       // Comment out instead of removing to preserve debugging info
       return `// ${match}`;
-    }
+    },
   },
 
   // Fix module variable assignments
   moduleVariable: {
     pattern: /\b(const|let|var)\s+module\s*=/g,
-    replacement: '$1 studyModule ='
+    replacement: '$1 studyModule =',
   },
 
   // Fix onClick with async functions
   asyncOnClick: {
     pattern: /onClick=\{async\s+(\([^)]*\)|[a-zA-Z_$][a-zA-Z0-9_$]*)\s*=>\s*\{/g,
-    replacement: 'onClick={$1 => void (async () => {'
+    replacement: 'onClick={$1 => void (async () => {',
   },
 
   // Fix onChange with async functions
   asyncOnChange: {
     pattern: /onChange=\{async\s+(\([^)]*\)|[a-zA-Z_$][a-zA-Z0-9_$]*)\s*=>\s*\{/g,
-    replacement: 'onChange={$1 => void (async () => {'
+    replacement: 'onChange={$1 => void (async () => {',
   },
 
   // Fix onSubmit with async functions
   asyncOnSubmit: {
     pattern: /onSubmit=\{async\s+(\([^)]*\)|[a-zA-Z_$][a-zA-Z0-9_$]*)\s*=>\s*\{/g,
-    replacement: 'onSubmit={$1 => void (async () => {'
+    replacement: 'onSubmit={$1 => void (async () => {',
   },
 
   // Fix setTimeout with promises
@@ -77,7 +77,7 @@ const FIXES = {
         return match.replace(p1, `void ${p1}`);
       }
       return match;
-    }
+    },
   },
 
   // Fix unnecessary async without await
@@ -89,8 +89,8 @@ const FIXES = {
         return `${p1} => {${p2}}`;
       }
       return match;
-    }
-  }
+    },
+  },
 };
 
 // File processor
@@ -100,7 +100,7 @@ function processFile(filePath) {
   }
 
   let content = fs.readFileSync(filePath, 'utf8');
-  let originalContent = content;
+  const originalContent = content;
   let changes = 0;
 
   // Apply fixes
@@ -125,10 +125,7 @@ function processFile(filePath) {
 async function main() {
   console.log('🔧 Starting automated lint error fixes...\n');
 
-  const patterns = [
-    'src/**/*.tsx',
-    'src/**/*.ts'
-  ];
+  const patterns = ['src/**/*.tsx', 'src/**/*.ts'];
 
   let totalFiles = 0;
   let filesChanged = 0;
@@ -157,7 +154,7 @@ async function main() {
   console.log('\nNext steps:');
   console.log('1. Run "npm run lint" to see remaining issues');
   console.log('2. Run "npm run typecheck" to verify TypeScript compilation');
-  console.log('3. Test the application to ensure fixes didn\'t break functionality');
+  console.log("3. Test the application to ensure fixes didn't break functionality");
 }
 
 // Run

@@ -1,12 +1,12 @@
-import { isLearnExperimentalEnabled } from "@/lib/flags/learnExperimental";
+import { isLearnExperimentalEnabled } from '@/lib/flags/learnExperimental';
 
 type LearnExpAction =
-  | "unit_start"
-  | "unit_complete"
-  | "practice_start"
-  | "practice_complete"
-  | "quiz_submit"
-  | "module_complete";
+  | 'unit_start'
+  | 'unit_complete'
+  | 'practice_start'
+  | 'practice_complete'
+  | 'quiz_submit'
+  | 'module_complete';
 
 interface LearnExpEvent {
   moduleId: string;
@@ -18,7 +18,7 @@ interface LearnExpEvent {
 }
 
 export function emitLearnExp(event: LearnExpEvent): void {
-  if (typeof window === "undefined") {
+  if (typeof window === 'undefined') {
     return;
   }
 
@@ -31,5 +31,5 @@ export function emitLearnExp(event: LearnExpEvent): void {
     ts: event.ts ?? Date.now(),
   };
 
-  window.dispatchEvent(new CustomEvent("learnExpEvent", { detail }));
+  window.dispatchEvent(new CustomEvent('learnExpEvent', { detail }));
 }

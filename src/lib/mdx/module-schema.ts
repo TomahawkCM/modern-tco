@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 /**
  * Zod schema for module frontmatter validation
@@ -7,22 +7,22 @@ import { z } from "zod";
 
 export const ModuleFrontmatterSchema = z.object({
   // Core identification
-  id: z.string().min(1, "Module ID is required"),
-  title: z.string().min(1, "Title is required"),
+  id: z.string().min(1, 'Module ID is required'),
+  title: z.string().min(1, 'Title is required'),
   description: z.string().optional(),
-  domainSlug: z.string().min(1, "Domain slug is required"),
+  domainSlug: z.string().min(1, 'Domain slug is required'),
   domainEnum: z.enum([
-    "ASKING_QUESTIONS",
-    "REFINING_QUESTIONS",
-    "TAKING_ACTION",
-    "NAVIGATION_MODULES",
-    "REPORTING_EXPORT",
+    'ASKING_QUESTIONS',
+    'REFINING_QUESTIONS',
+    'TAKING_ACTION',
+    'NAVIGATION_MODULES',
+    'REPORTING_EXPORT',
     // Allow foundation/prerequisite module in the same pipeline
-    "PLATFORM_FOUNDATION",
+    'PLATFORM_FOUNDATION',
   ]),
 
   // Learning metadata
-  difficulty: z.enum(["Beginner", "Intermediate", "Advanced"]),
+  difficulty: z.enum(['Beginner', 'Intermediate', 'Advanced']),
   estimatedTime: z
     .string()
     .regex(
@@ -38,13 +38,13 @@ export const ModuleFrontmatterSchema = z.object({
   blueprintWeight: z
     .number()
     .min(0)
-    .max(100, "Blueprint weight must be between 0 and 100")
+    .max(100, 'Blueprint weight must be between 0 and 100')
     .optional(),
   version: z.union([z.number().positive(), z.string()]).optional(),
-  status: z.enum(["draft", "review", "published"]).optional(),
+  status: z.enum(['draft', 'review', 'published']).optional(),
   lastUpdated: z
     .string()
-    .regex(/^\d{4}-\d{2}-\d{2}$/, "Last updated must be in YYYY-MM-DD format")
+    .regex(/^\d{4}-\d{2}-\d{2}$/, 'Last updated must be in YYYY-MM-DD format')
     .optional(),
 
   // Practice configuration for PracticeButton integration
@@ -54,14 +54,14 @@ export const ModuleFrontmatterSchema = z.object({
       objectiveIds: z.array(z.string()),
       // Accept any string to allow lowercase values in content files
       difficulty: z.string(),
-      href: z.string().min(1, "Practice link is required"),
+      href: z.string().min(1, 'Practice link is required'),
     })
     .optional(),
 
   // Assessment configuration
   assessment: z
     .object({
-      passThreshold: z.number().min(0).max(1, "Pass threshold must be between 0 and 1"),
+      passThreshold: z.number().min(0).max(1, 'Pass threshold must be between 0 and 1'),
     })
     .optional(),
 });
@@ -99,7 +99,7 @@ export function validateModuleFrontmatter(
     if (error instanceof z.ZodError) {
       const zError = error as z.ZodError<any>;
       const errors = zError.issues.map((err: z.ZodIssue) => ({
-        field: err.path.join("."),
+        field: err.path.join('.'),
         message: err.message,
       }));
 
@@ -112,7 +112,7 @@ export function validateModuleFrontmatter(
 
     return {
       success: false,
-      errors: [{ field: "unknown", message: "Unexpected validation error" }],
+      errors: [{ field: 'unknown', message: 'Unexpected validation error' }],
       filePath,
     };
   }
@@ -121,32 +121,32 @@ export function validateModuleFrontmatter(
 /**
  * Domain enum to slug mapping
  */
-export const DOMAIN_ENUM_TO_SLUG: Record<ModuleFrontmatter["domainEnum"], string> = {
-  ASKING_QUESTIONS: "asking-questions",
-  REFINING_QUESTIONS: "refining-questions-targeting",
-  TAKING_ACTION: "taking-action-packages-actions",
-  NAVIGATION_MODULES: "navigation-basic-modules",
-  REPORTING_EXPORT: "reporting-data-export",
-  PLATFORM_FOUNDATION: "platform-foundation",
+export const DOMAIN_ENUM_TO_SLUG: Record<ModuleFrontmatter['domainEnum'], string> = {
+  ASKING_QUESTIONS: 'asking-questions',
+  REFINING_QUESTIONS: 'refining-questions-targeting',
+  TAKING_ACTION: 'taking-action-packages-actions',
+  NAVIGATION_MODULES: 'navigation-basic-modules',
+  REPORTING_EXPORT: 'reporting-data-export',
+  PLATFORM_FOUNDATION: 'platform-foundation',
 };
 
 /**
  * Slug to domain enum mapping
  */
-export const SLUG_TO_DOMAIN_ENUM: Record<string, ModuleFrontmatter["domainEnum"]> = {
-  "asking-questions": "ASKING_QUESTIONS",
-  "refining-questions-targeting": "REFINING_QUESTIONS",
-  "taking-action-packages-actions": "TAKING_ACTION",
-  "navigation-basic-modules": "NAVIGATION_MODULES",
-  "reporting-data-export": "REPORTING_EXPORT",
-  "platform-foundation": "PLATFORM_FOUNDATION",
+export const SLUG_TO_DOMAIN_ENUM: Record<string, ModuleFrontmatter['domainEnum']> = {
+  'asking-questions': 'ASKING_QUESTIONS',
+  'refining-questions-targeting': 'REFINING_QUESTIONS',
+  'taking-action-packages-actions': 'TAKING_ACTION',
+  'navigation-basic-modules': 'NAVIGATION_MODULES',
+  'reporting-data-export': 'REPORTING_EXPORT',
+  'platform-foundation': 'PLATFORM_FOUNDATION',
   // Also support the filename-generated slug
-  "tanium-platform-foundation": "PLATFORM_FOUNDATION",
+  'tanium-platform-foundation': 'PLATFORM_FOUNDATION',
 
   // Experimental learn-style modules
-  "asking-questions-learn": "ASKING_QUESTIONS",
-  "refining-targeting-learn-experimental": "REFINING_QUESTIONS",
-  "taking-action-learn-experimental": "TAKING_ACTION",
-  "navigation-basic-modules-learn-experimental": "NAVIGATION_MODULES",
-  "reporting-export-learn-experimental": "REPORTING_EXPORT",
+  'asking-questions-learn': 'ASKING_QUESTIONS',
+  'refining-targeting-learn-experimental': 'REFINING_QUESTIONS',
+  'taking-action-learn-experimental': 'TAKING_ACTION',
+  'navigation-basic-modules-learn-experimental': 'NAVIGATION_MODULES',
+  'reporting-export-learn-experimental': 'REPORTING_EXPORT',
 };

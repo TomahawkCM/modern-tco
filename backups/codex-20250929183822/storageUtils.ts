@@ -14,11 +14,11 @@ export interface StorageOptions {
 export class StorageError extends Error {
   constructor(
     public key: string,
-    public operation: "get" | "set" | "remove",
+    public operation: 'get' | 'set' | 'remove',
     public originalError?: Error
   ) {
     super(`Storage operation failed: ${operation} ${key}`);
-    this.name = "StorageError";
+    this.name = 'StorageError';
   }
 }
 
@@ -36,7 +36,7 @@ export const safeLocalStorage = {
     for (let attempt = 0; attempt < maxRetries; attempt++) {
       try {
         // Check if localStorage is available
-        if (typeof window === "undefined" || !window.localStorage) {
+        if (typeof window === 'undefined' || !window.localStorage) {
           return fallbackValue;
         }
 
@@ -101,7 +101,7 @@ export const safeLocalStorage = {
     const { validate, sanitize, backupKey } = options;
 
     try {
-      if (typeof window === "undefined" || !window.localStorage) {
+      if (typeof window === 'undefined' || !window.localStorage) {
         return false;
       }
 
@@ -156,7 +156,7 @@ export const safeLocalStorage = {
    */
   removeItem(key: string): boolean {
     try {
-      if (typeof window === "undefined" || !window.localStorage) {
+      if (typeof window === 'undefined' || !window.localStorage) {
         return false;
       }
 
@@ -184,7 +184,7 @@ export const safeLocalStorage = {
    */
   cleanup(): void {
     try {
-      if (typeof window === "undefined" || !window.localStorage) {
+      if (typeof window === 'undefined' || !window.localStorage) {
         return;
       }
 
@@ -207,9 +207,9 @@ export const safeLocalStorage = {
           JSON.parse(item);
 
           // Check if it's a timestamped item and too old
-          if (key.includes("-timestamp") || key.includes("-backup")) {
+          if (key.includes('-timestamp') || key.includes('-backup')) {
             const data = JSON.parse(item);
-            if (typeof data === "object" && data.timestamp && now - data.timestamp > maxAge) {
+            if (typeof data === 'object' && data.timestamp && now - data.timestamp > maxAge) {
               keysToRemove.push(key);
             }
           }
@@ -237,13 +237,13 @@ export const safeLocalStorage = {
    */
   getUsageStats(): { used: number; total: number; percentage: number } {
     try {
-      if (typeof window === "undefined" || !window.localStorage) {
+      if (typeof window === 'undefined' || !window.localStorage) {
         return { used: 0, total: 0, percentage: 0 };
       }
 
       let used = 0;
       for (const key in window.localStorage) {
-        if (window.localStorage.hasOwnProperty(key)) {
+        if (Object.hasOwn(window.localStorage, key)) {
           used += window.localStorage[key].length + key.length;
         }
       }
@@ -270,7 +270,7 @@ export const safeSessionStorage = {
     const fallbackValue = (options.fallback as T | null) ?? null;
 
     try {
-      if (typeof window === "undefined" || !window.sessionStorage) {
+      if (typeof window === 'undefined' || !window.sessionStorage) {
         return fallbackValue;
       }
 
@@ -299,7 +299,7 @@ export const safeSessionStorage = {
 
   setItem<T = unknown>(key: string, value: T): boolean {
     try {
-      if (typeof window === "undefined" || !window.sessionStorage) {
+      if (typeof window === 'undefined' || !window.sessionStorage) {
         return false;
       }
 
@@ -312,7 +312,7 @@ export const safeSessionStorage = {
 
   removeItem(key: string): boolean {
     try {
-      if (typeof window === "undefined" || !window.sessionStorage) {
+      if (typeof window === 'undefined' || !window.sessionStorage) {
         return false;
       }
 
@@ -331,13 +331,13 @@ export const validators = {
   examSession: (data: unknown): data is Record<string, unknown> => {
     return (
       data !== null &&
-      typeof data === "object" &&
+      typeof data === 'object' &&
       data !== null &&
-      typeof (data as Record<string, unknown>).id === "string" &&
-      typeof (data as Record<string, unknown>).mode === "string" &&
+      typeof (data as Record<string, unknown>).id === 'string' &&
+      typeof (data as Record<string, unknown>).mode === 'string' &&
       Array.isArray((data as Record<string, unknown>).questions) &&
-      typeof (data as Record<string, unknown>).currentIndex === "number" &&
-      typeof (data as Record<string, unknown>).answers === "object" &&
+      typeof (data as Record<string, unknown>).currentIndex === 'number' &&
+      typeof (data as Record<string, unknown>).answers === 'object' &&
       Boolean((data as Record<string, unknown>).startTime)
     );
   },
@@ -345,26 +345,26 @@ export const validators = {
   settings: (data: unknown): data is Record<string, unknown> => {
     return (
       data !== null &&
-      typeof data === "object" &&
-      typeof (data as Record<string, unknown>).theme === "string" &&
-      typeof (data as Record<string, unknown>).language === "string" &&
-      typeof (data as Record<string, unknown>).difficulty === "string"
+      typeof data === 'object' &&
+      typeof (data as Record<string, unknown>).theme === 'string' &&
+      typeof (data as Record<string, unknown>).language === 'string' &&
+      typeof (data as Record<string, unknown>).difficulty === 'string'
     );
   },
 
   progress: (data: unknown): data is Record<string, unknown> => {
     return (
       data !== null &&
-      typeof data === "object" &&
-      typeof (data as Record<string, unknown>).totalQuestions === "number" &&
-      typeof (data as Record<string, unknown>).correctAnswers === "number" &&
-      typeof (data as Record<string, unknown>).averageScore === "number" &&
-      typeof (data as Record<string, unknown>).domainScores === "object"
+      typeof data === 'object' &&
+      typeof (data as Record<string, unknown>).totalQuestions === 'number' &&
+      typeof (data as Record<string, unknown>).correctAnswers === 'number' &&
+      typeof (data as Record<string, unknown>).averageScore === 'number' &&
+      typeof (data as Record<string, unknown>).domainScores === 'object'
     );
   },
 
   searchHistory: (data: unknown): data is string[] => {
-    return Array.isArray(data) && data.every((item) => typeof item === "string");
+    return Array.isArray(data) && data.every((item) => typeof item === 'string');
   },
 };
 
@@ -375,26 +375,30 @@ export const sanitizers = {
   examSession: (data: unknown): Record<string, unknown> => {
     const obj = data as Record<string, unknown>;
     return {
-      id: (typeof obj?.id === "string" ? obj.id : null) ?? `session-${Date.now()}`,
-      mode: (typeof obj?.mode === "string" ? obj.mode : null) ?? "practice",
+      id: (typeof obj?.id === 'string' ? obj.id : null) ?? `session-${Date.now()}`,
+      mode: (typeof obj?.mode === 'string' ? obj.mode : null) ?? 'practice',
       questions: Array.isArray(obj?.questions) ? obj.questions : [],
-      currentIndex: Math.max(0, (typeof obj?.currentIndex === "number" ? obj.currentIndex : null) ?? 0),
-      answers: (typeof obj?.answers === "object" && obj?.answers !== null ? obj.answers : null) ?? {},
+      currentIndex: Math.max(
+        0,
+        (typeof obj?.currentIndex === 'number' ? obj.currentIndex : null) ?? 0
+      ),
+      answers:
+        (typeof obj?.answers === 'object' && obj?.answers !== null ? obj.answers : null) ?? {},
       startTime: obj?.startTime ? new Date(obj.startTime as string | number | Date) : new Date(),
       completed: Boolean(obj?.completed),
-      score: Math.max(0, Math.min(100, (typeof obj?.score === "number" ? obj.score : null) ?? 0)),
+      score: Math.max(0, Math.min(100, (typeof obj?.score === 'number' ? obj.score : null) ?? 0)),
     };
   },
 
   settings: (data: unknown): Record<string, unknown> => {
     const obj = data as Record<string, unknown>;
-    const theme = typeof obj?.theme === "string" ? obj.theme : "light";
-    const difficulty = typeof obj?.difficulty === "string" ? obj.difficulty : "medium";
-    
+    const theme = typeof obj?.theme === 'string' ? obj.theme : 'light';
+    const difficulty = typeof obj?.difficulty === 'string' ? obj.difficulty : 'medium';
+
     return {
-      theme: ["light", "dark"].includes(theme) ? theme : "light",
-      language: typeof obj?.language === "string" ? obj.language : "en",
-      difficulty: ["easy", "medium", "hard"].includes(difficulty) ? difficulty : "medium",
+      theme: ['light', 'dark'].includes(theme) ? theme : 'light',
+      language: typeof obj?.language === 'string' ? obj.language : 'en',
+      difficulty: ['easy', 'medium', 'hard'].includes(difficulty) ? difficulty : 'medium',
       notifications: Boolean(obj?.notifications),
       autoSave: Boolean(obj?.autoSave),
     };

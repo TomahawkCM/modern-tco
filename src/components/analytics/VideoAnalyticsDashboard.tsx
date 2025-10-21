@@ -1,15 +1,15 @@
-"use client";
+'use client';
 
-import { useState, useEffect } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Progress } from "@/components/ui/progress";
-import { Video, Play, CheckCircle2, Clock, TrendingUp } from "lucide-react";
+import { CheckCircle2, Clock, Play, TrendingUp, Video } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { Badge } from '@/components/ui/badge';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Progress } from '@/components/ui/progress';
 import {
   getVideoAnalytics,
   getVideoCompletionByModule,
   type VideoAnalyticsSummary,
-} from "@/lib/videoAnalytics";
+} from '@/lib/videoAnalytics';
 
 interface VideoAnalyticsDashboardProps {
   /** Optional module slug to filter analytics */
@@ -25,10 +25,7 @@ interface VideoAnalyticsDashboardProps {
  *
  * Research: Video learning increases engagement by 60% (Mayer, 2021)
  */
-export function VideoAnalyticsDashboard({
-  moduleSlug,
-  className,
-}: VideoAnalyticsDashboardProps) {
+export function VideoAnalyticsDashboard({ moduleSlug, className }: VideoAnalyticsDashboardProps) {
   const [analytics, setAnalytics] = useState<VideoAnalyticsSummary | null>(null);
   const [moduleCompletion, setModuleCompletion] = useState<Record<string, any>>({});
 
@@ -37,14 +34,14 @@ export function VideoAnalyticsDashboard({
 
     // Listen for video progress updates
     const handleStorageChange = (e: StorageEvent) => {
-      if (e.key === "video-progress") {
+      if (e.key === 'video-progress') {
         loadAnalytics();
       }
     };
 
-    window.addEventListener("storage", handleStorageChange);
-    return () => window.removeEventListener("storage", handleStorageChange);
-  }, [moduleSlug]);
+    window.addEventListener('storage', handleStorageChange);
+    return () => window.removeEventListener('storage', handleStorageChange);
+  }, [loadAnalytics]);
 
   function loadAnalytics() {
     const data = getVideoAnalytics(moduleSlug);
@@ -85,10 +82,10 @@ export function VideoAnalyticsDashboard({
   }
 
   const getCompletionColor = (rate: number) => {
-    if (rate >= 80) return "text-[#22c55e]";
-    if (rate >= 60) return "text-primary";
-    if (rate >= 40) return "text-[#f97316]";
-    return "text-orange-400";
+    if (rate >= 80) return 'text-[#22c55e]';
+    if (rate >= 60) return 'text-primary';
+    if (rate >= 40) return 'text-[#f97316]';
+    return 'text-orange-400';
   };
 
   return (
@@ -165,21 +162,18 @@ export function VideoAnalyticsDashboard({
           </CardHeader>
           <CardContent className="space-y-3">
             {Object.entries(moduleCompletion)
-              .filter(([module]) => module !== "unknown")
+              .filter(([module]) => module !== 'unknown')
               .map(([module, stats]) => (
                 <div key={module} className="space-y-1">
                   <div className="flex items-center justify-between">
                     <span className="text-sm text-muted-foreground capitalize">
-                      {module.replace(/-/g, " ")}
+                      {module.replace(/-/g, ' ')}
                     </span>
                     <div className="flex items-center gap-2">
                       <span className="text-xs text-muted-foreground">
                         {stats.completed} / {stats.total}
                       </span>
-                      <Badge
-                        variant="outline"
-                        className={getCompletionColor(stats.percentage)}
-                      >
+                      <Badge variant="outline" className={getCompletionColor(stats.percentage)}>
                         {Math.round(stats.percentage)}%
                       </Badge>
                     </div>
@@ -213,7 +207,7 @@ export function VideoAnalyticsDashboard({
                     {video.moduleSlug && (
                       <>
                         <span>•</span>
-                        <span className="capitalize">{video.moduleSlug.replace(/-/g, " ")}</span>
+                        <span className="capitalize">{video.moduleSlug.replace(/-/g, ' ')}</span>
                       </>
                     )}
                   </div>
@@ -228,7 +222,8 @@ export function VideoAnalyticsDashboard({
                     <Badge variant="outline" className="text-primary border-blue-400">
                       {Object.entries(video.milestones)
                         .reverse()
-                        .find(([_, reached]) => reached)?.[0] || "0"}%
+                        .find(([_, reached]) => reached)?.[0] || '0'}
+                      %
                     </Badge>
                   )}
                 </div>
@@ -261,9 +256,7 @@ export function VideoAnalyticsDashboard({
                     <span>{Math.round(video.totalWatchTime / 60)} min total</span>
                   </div>
                 </div>
-                {video.completed && (
-                  <CheckCircle2 className="h-5 w-5 text-[#22c55e]" />
-                )}
+                {video.completed && <CheckCircle2 className="h-5 w-5 text-[#22c55e]" />}
               </div>
             ))}
           </CardContent>

@@ -3,27 +3,27 @@
  * Minimal test to verify SideNav renders modules from the manifest
  */
 
-import { render, screen } from "@testing-library/react";
-import SideNav from "@/components/SideNav";
-import manifest from "@/config/modules.manifest.json";
+import { render, screen } from '@testing-library/react';
+import SideNav from '@/components/SideNav';
+import manifest from '@/config/modules.manifest.json';
 
 // Mock AuthContext to provide a user id (avoids provider requirement)
-jest.mock("@/contexts/AuthContext", () => ({
-  useAuth: () => ({ user: { id: "test-user" } }),
+jest.mock('@/contexts/AuthContext', () => ({
+  useAuth: () => ({ user: { id: 'test-user' } }),
 }));
 
 // Mock progress function to avoid Supabase calls
-jest.mock("@/lib/progress", () => ({
-  getModuleProgress: async () => ({ moduleId: "x", percentage: 0 }),
+jest.mock('@/lib/progress', () => ({
+  getModuleProgress: async () => ({ moduleId: 'x', percentage: 0 }),
 }));
 
-describe("SideNav (Learn)", () => {
-  it("renders curriculum nav and all modules from manifest", () => {
+describe('SideNav (Learn)', () => {
+  it('renders curriculum nav and all modules from manifest', () => {
     render(<SideNav />);
 
     // Navigation landmark
     expect(
-      screen.getByRole("navigation", { name: /study modules navigation/i })
+      screen.getByRole('navigation', { name: /study modules navigation/i })
     ).toBeInTheDocument();
 
     const data = manifest as unknown as {
@@ -36,4 +36,3 @@ describe("SideNav (Learn)", () => {
     }
   });
 });
-

@@ -1,7 +1,6 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it, expect as vitestExpect } from 'vitest';
 import { getTargetedQuestions } from '@/lib/practice-question-targeting';
-import { Difficulty, QuestionCategory, TCODomain, type Question } from '@/types/exam';
-import { expect as vitestExpect } from 'vitest';
+import { Difficulty, type Question, QuestionCategory, TCODomain } from '@/types/exam';
 
 describe('Vitest setup', () => {
   it('runs a simple targeting smoke test', () => {

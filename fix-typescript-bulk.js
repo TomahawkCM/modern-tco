@@ -13,19 +13,19 @@ const fixes = [
     pattern: /\|\|/g,
     replacement: '??',
     test: (line) => line.includes('||') && !line.includes('//') && !line.includes('console'),
-    description: 'Replace || with ?? for nullish coalescing'
+    description: 'Replace || with ?? for nullish coalescing',
   },
   // Fix: Mixed ?? and || without parentheses (TS5076)
   {
     pattern: /(\w+)\s+\?\?\s+(\w+)\s+\|\|/g,
     replacement: '($1 ?? $2) ||',
-    description: 'Add parentheses for mixed ?? and || operators'
+    description: 'Add parentheses for mixed ?? and || operators',
   },
   {
     pattern: /(\w+)\s+\|\|\s+(\w+)\s+\?\?/g,
     replacement: '($1 || $2) ??',
-    description: 'Add parentheses for mixed || and ?? operators'
-  }
+    description: 'Add parentheses for mixed || and ?? operators',
+  },
 ];
 
 const filesToFix = [
@@ -43,12 +43,12 @@ const filesToFix = [
   'src/components/query-builder/FilterBuilder.tsx',
   'src/components/query-builder/QueryPreview.tsx',
   'src/components/query-builder/QuestionBuilder.tsx',
-  'src/components/query-builder/ResultsViewer.tsx'
+  'src/components/query-builder/ResultsViewer.tsx',
 ];
 
 let totalFixes = 0;
 
-filesToFix.forEach(filePath => {
+filesToFix.forEach((filePath) => {
   const fullPath = path.join(__dirname, filePath);
   if (!fs.existsSync(fullPath)) {
     console.log(`⚠️  Skip: ${filePath} (not found)`);
@@ -59,9 +59,9 @@ filesToFix.forEach(filePath => {
   const originalContent = content;
   let fileFixCount = 0;
 
-  fixes.forEach(fix => {
+  fixes.forEach((fix) => {
     const lines = content.split('\n');
-    const newLines = lines.map(line => {
+    const newLines = lines.map((line) => {
       if (fix.test && !fix.test(line)) return line;
       const newLine = line.replace(fix.pattern, fix.replacement);
       if (newLine !== line) fileFixCount++;

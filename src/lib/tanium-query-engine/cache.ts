@@ -3,8 +3,8 @@
  * High-performance LRU cache with TTL support
  */
 
-import { createHash } from 'crypto';
-import type { QueryResult, QueryNode, CacheEntry } from './types';
+import { createHash } from 'node:crypto';
+import type { CacheEntry, QueryNode, QueryResult } from './types';
 
 interface CacheStats {
   hits: number;
@@ -21,7 +21,8 @@ export class QueryCache {
   private maxSize: number;
   private defaultTTL: number;
 
-  constructor(maxSize: number = 1000, defaultTTL: number = 300000) { // 5 minutes default
+  constructor(maxSize: number = 1000, defaultTTL: number = 300000) {
+    // 5 minutes default
     this.cache = new Map();
     this.maxSize = maxSize;
     this.defaultTTL = defaultTTL;
@@ -30,7 +31,7 @@ export class QueryCache {
       misses: 0,
       evictions: 0,
       size: 0,
-      maxSize
+      maxSize,
     };
   }
 
@@ -100,7 +101,7 @@ export class QueryCache {
       timestamp: Date.now(),
       ttl,
       hits: 0,
-      size
+      size,
     };
 
     this.cache.set(key, entry);
@@ -228,7 +229,7 @@ export class QueryCache {
     const data = {
       entries: Array.from(this.cache.entries()),
       stats: this.stats,
-      accessOrder: this.accessOrder
+      accessOrder: this.accessOrder,
     };
     return JSON.stringify(data);
   }
@@ -271,7 +272,7 @@ export class ParsedQueryCache extends QueryCache {
    */
   public setAST(query: string, ast: QueryNode): void {
     this.set(query, ast, {
-      size: JSON.stringify(ast).length
+      size: JSON.stringify(ast).length,
     });
   }
 }
@@ -280,7 +281,8 @@ export class ParsedQueryCache extends QueryCache {
  * Specialized cache for query results
  */
 export class ResultCache extends QueryCache {
-  constructor(maxSize: number = 100, defaultTTL: number = 60000) { // 1 minute default
+  constructor(maxSize: number = 100, defaultTTL: number = 60000) {
+    // 1 minute default
     super(maxSize, defaultTTL);
   }
 
@@ -301,7 +303,7 @@ export class ResultCache extends QueryCache {
 
     this.set(query, result, {
       size,
-      metadata: options
+      metadata: options,
     });
   }
 
@@ -338,7 +340,7 @@ export class ResultCache extends QueryCache {
       }
     }
 
-    keysToDelete.forEach(key => this.delete(key));
+    keysToDelete.forEach((key) => this.delete(key));
   }
 }
 
@@ -422,7 +424,7 @@ export class CacheManager {
     return {
       parsed: parsedStats,
       results: resultStats,
-      totalHitRate
+      totalHitRate,
     };
   }
 
@@ -435,7 +437,7 @@ export class CacheManager {
   } {
     return {
       parsed: this.parsedCache.pruneExpired(),
-      results: this.resultCache.pruneExpired()
+      results: this.resultCache.pruneExpired(),
     };
   }
 

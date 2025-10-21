@@ -13,8 +13,8 @@
  * - Weekly study plan generation
  */
 
-import { supabase } from '@/lib/supabase';
 import Anthropic from '@anthropic-ai/sdk';
+import { supabase } from '@/lib/supabase';
 import { gatherPerformanceData, type PerformanceData } from './adaptiveLearningPath';
 
 // ==================== TYPES ====================
@@ -22,7 +22,13 @@ import { gatherPerformanceData, type PerformanceData } from './adaptiveLearningP
 export interface Recommendation {
   id: string;
   userId: string;
-  recommendationType: 'next_action' | 'weak_domain' | 'study_schedule' | 'resource' | 'strategy' | 'intervention';
+  recommendationType:
+    | 'next_action'
+    | 'weak_domain'
+    | 'study_schedule'
+    | 'resource'
+    | 'strategy'
+    | 'intervention';
   title: string;
   description: string;
   priority: 'low' | 'medium' | 'high' | 'critical';
@@ -151,9 +157,8 @@ export async function gatherRecommendationContext(userId: string): Promise<Recom
     ? Math.floor((Date.now() - lastStudyDate.getTime()) / (1000 * 60 * 60 * 24))
     : undefined;
 
-  const recentQuizScores = recentSessions
-    ?.filter((s: any) => s.score !== null)
-    .map((s: any) => s.score || 0) || [];
+  const recentQuizScores =
+    recentSessions?.filter((s: any) => s.score !== null).map((s: any) => s.score || 0) || [];
 
   // Get study goals
   const { data: goalData } = await supabase
@@ -165,7 +170,9 @@ export async function gatherRecommendationContext(userId: string): Promise<Recom
     .single();
 
   const daysUntilExam = goalData?.target_exam_date
-    ? Math.ceil((new Date(goalData.target_exam_date).getTime() - Date.now()) / (1000 * 60 * 60 * 24))
+    ? Math.ceil(
+        (new Date(goalData.target_exam_date).getTime() - Date.now()) / (1000 * 60 * 60 * 24)
+      )
     : undefined;
 
   // Calculate study streak
@@ -193,7 +200,9 @@ export async function gatherRecommendationContext(userId: string): Promise<Recom
 
 // ==================== RECOMMENDATION GENERATION ====================
 
-export async function generateRecommendations(context: RecommendationContext): Promise<Recommendation[]> {
+export async function generateRecommendations(
+  context: RecommendationContext
+): Promise<Recommendation[]> {
   const recommendations: Recommendation[] = [];
 
   // 1. Check for intervention needs (CRITICAL)
@@ -228,11 +237,16 @@ export async function generateRecommendations(context: RecommendationContext): P
 
 // ==================== INTERVENTION DETECTION ====================
 
-async function generateInterventionRecommendations(context: RecommendationContext): Promise<Recommendation[]> {
+async function generateInterventionRecommendations(
+  context: RecommendationContext
+): Promise<Recommendation[]> {
   const interventions: Recommendation[] = [];
 
   // Check 1: Low engagement (no study in 7+ days)
-  if (context.recentActivity?.daysSinceLastStudy && context.recentActivity.daysSinceLastStudy >= 7) {
+  if (
+    context.recentActivity?.daysSinceLastStudy &&
+    context.recentActivity.daysSinceLastStudy >= 7
+  ) {
     interventions.push({
       id: `intervention-engagement-${Date.now()}`,
       userId: context.userId,
@@ -256,7 +270,10 @@ async function generateInterventionRecommendations(context: RecommendationContex
   }
 
   // Check 2: Declining performance (recent quiz scores trending down)
-  if (context.recentActivity?.recentQuizScores && context.recentActivity.recentQuizScores.length >= 3) {
+  if (
+    context.recentActivity?.recentQuizScores &&
+    context.recentActivity.recentQuizScores.length >= 3
+  ) {
     const scores = context.recentActivity.recentQuizScores;
     const recentAvg = (scores[0] + scores[1]) / 2;
     const olderAvg = scores.slice(2).reduce((a, b) => a + b, 0) / scores.slice(2).length;
@@ -270,7 +287,7 @@ async function generateInterventionRecommendations(context: RecommendationContex
         description: `Your recent quiz scores (${recentAvg.toFixed(1)}%) are lower than your previous average (${olderAvg.toFixed(1)}%). Let's get you back on track.`,
         priority: 'high',
         generatedBy: 'rule-based',
-        confidenceScore: 0.90,
+        confidenceScore: 0.9,
         reasoning: 'Negative performance trend',
         suggestedActions: [
           'Review fundamentals in your weak domains',
@@ -304,7 +321,7 @@ async function generateInterventionRecommendations(context: RecommendationContex
           'Increase study hours to 15-20/week',
           'Focus exclusively on weak domains',
           'Complete 2 full mock exams immediately',
-          'Consider postponing exam if score doesn\'t improve',
+          "Consider postponing exam if score doesn't improve",
         ],
         estimatedImpact: 'Critical for exam success',
         relatedDomain: context.performance.weakDomains[0],
@@ -316,7 +333,11 @@ async function generateInterventionRecommendations(context: RecommendationContex
   }
 
   // Check 4: Burnout risk (studying too much without breaks)
-  if (context.studyStreak && context.studyStreak > 21 && context.performance.learningVelocity > 3.5) {
+  if (
+    context.studyStreak &&
+    context.studyStreak > 21 &&
+    context.performance.learningVelocity > 3.5
+  ) {
     interventions.push({
       id: `intervention-burnout-${Date.now()}`,
       userId: context.userId,
@@ -345,7 +366,9 @@ async function generateInterventionRecommendations(context: RecommendationContex
 
 // ==================== NEXT ACTION RECOMMENDATION ====================
 
-async function generateNextActionRecommendation(context: RecommendationContext): Promise<Recommendation | null> {
+async function generateNextActionRecommendation(
+  context: RecommendationContext
+): Promise<Recommendation | null> {
   // If student has active learning path, recommend next step
   if (context.currentPath) {
     const { data: nextStep } = await supabase
@@ -413,7 +436,9 @@ async function generateNextActionRecommendation(context: RecommendationContext):
 
 // ==================== WEAK DOMAIN RECOMMENDATIONS ====================
 
-async function generateWeakDomainRecommendations(context: RecommendationContext): Promise<Recommendation[]> {
+async function generateWeakDomainRecommendations(
+  context: RecommendationContext
+): Promise<Recommendation[]> {
   const recommendations: Recommendation[] = [];
 
   // Get top 2 weak domains
@@ -430,7 +455,7 @@ async function generateWeakDomainRecommendations(context: RecommendationContext)
       recommendationType: 'weak_domain',
       title: `📚 Strengthen ${domainName}`,
       description: `Current score: ${score.toFixed(1)}%. This domain represents ${(weight * 100).toFixed(0)}% of the exam.`,
-      priority: weight > 0.20 ? 'high' : 'medium',
+      priority: weight > 0.2 ? 'high' : 'medium',
       generatedBy: 'performance-analysis',
       confidenceScore: 0.92,
       reasoning: `Below target threshold, high exam weight (${(weight * 100).toFixed(0)}%)`,
@@ -453,10 +478,13 @@ async function generateWeakDomainRecommendations(context: RecommendationContext)
 
 // ==================== STUDY SCHEDULE RECOMMENDATION ====================
 
-async function generateStudyScheduleRecommendation(context: RecommendationContext): Promise<Recommendation | null> {
+async function generateStudyScheduleRecommendation(
+  context: RecommendationContext
+): Promise<Recommendation | null> {
   if (!context.goals?.hoursPerWeek || !context.goals.daysUntilExam) return null;
 
-  const currentPace = context.performance.studyHoursCompleted / Math.max(context.performance.modulesCompleted, 1);
+  const currentPace =
+    context.performance.studyHoursCompleted / Math.max(context.performance.modulesCompleted, 1);
   const optimalPace = 2.0; // 2 hours per module average
 
   if (Math.abs(currentPace - optimalPace) > 0.5) {
@@ -472,7 +500,7 @@ async function generateStudyScheduleRecommendation(context: RecommendationContex
         : `You're spending ${currentPace.toFixed(1)}h/module. Try to complete modules in ~2 hours for better momentum.`,
       priority: 'medium',
       generatedBy: 'pace-analysis',
-      confidenceScore: 0.80,
+      confidenceScore: 0.8,
       reasoning: `Current pace: ${currentPace.toFixed(1)}h/module vs optimal 2h/module`,
       suggestedActions: isTooFast
         ? [
@@ -485,7 +513,9 @@ async function generateStudyScheduleRecommendation(context: RecommendationContex
             'Focus on core concepts first',
             'Skip optional deep-dives initially',
           ],
-      estimatedImpact: isTooFast ? 'Improves long-term retention by 25%' : 'Maintains motivation and momentum',
+      estimatedImpact: isTooFast
+        ? 'Improves long-term retention by 25%'
+        : 'Maintains motivation and momentum',
       status: 'active',
       expiresAt: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000),
       createdAt: new Date(),
@@ -497,7 +527,9 @@ async function generateStudyScheduleRecommendation(context: RecommendationContex
 
 // ==================== RESOURCE RECOMMENDATIONS ====================
 
-async function generateResourceRecommendations(context: RecommendationContext): Promise<Recommendation[]> {
+async function generateResourceRecommendations(
+  context: RecommendationContext
+): Promise<Recommendation[]> {
   const recommendations: Recommendation[] = [];
 
   // Recommend mock exams if ready (>70% accuracy, studied >10 hours)
@@ -513,7 +545,7 @@ async function generateResourceRecommendations(context: RecommendationContext): 
         description: `You've built solid knowledge (${context.performance.overallAccuracy.toFixed(1)}%). Mock exams will reveal readiness gaps.`,
         priority: 'high',
         generatedBy: 'readiness-analysis',
-        confidenceScore: 0.90,
+        confidenceScore: 0.9,
         reasoning: 'Strong fundamentals, ready for full assessment',
         suggestedActions: [
           'Take 75-question full mock exam',
@@ -542,7 +574,8 @@ async function generateResourceRecommendations(context: RecommendationContext): 
       userId: context.userId,
       recommendationType: 'resource',
       title: '🎥 Watch Tutorial Videos',
-      description: 'Visual learning matches your style. Our video library reinforces key TCO concepts.',
+      description:
+        'Visual learning matches your style. Our video library reinforces key TCO concepts.',
       priority: 'medium',
       generatedBy: 'learning-style-match',
       confidenceScore: 0.85,
@@ -563,7 +596,9 @@ async function generateResourceRecommendations(context: RecommendationContext): 
 
 // ==================== STRATEGY RECOMMENDATIONS ====================
 
-async function generateStrategyRecommendations(context: RecommendationContext): Promise<Recommendation[]> {
+async function generateStrategyRecommendations(
+  context: RecommendationContext
+): Promise<Recommendation[]> {
   const recommendations: Recommendation[] = [];
 
   // Recommend spaced repetition if not using it regularly
@@ -579,7 +614,7 @@ async function generateStrategyRecommendations(context: RecommendationContext): 
       userId: context.userId,
       recommendationType: 'strategy',
       title: '🔄 Use Spaced Repetition',
-      description: 'You haven\'t reviewed this week. Spaced repetition improves retention by 42%.',
+      description: "You haven't reviewed this week. Spaced repetition improves retention by 42%.",
       priority: 'medium',
       generatedBy: 'usage-analysis',
       confidenceScore: 0.88,
@@ -737,7 +772,10 @@ export async function getActiveRecommendations(userId: string): Promise<Recommen
   return (data || []).map(camelCaseKeys) as Recommendation[];
 }
 
-export async function dismissRecommendation(recommendationId: string, userId: string): Promise<void> {
+export async function dismissRecommendation(
+  recommendationId: string,
+  userId: string
+): Promise<void> {
   const { error } = await supabase
     .from('study_recommendations')
     .update({ status: 'dismissed' })
@@ -747,7 +785,10 @@ export async function dismissRecommendation(recommendationId: string, userId: st
   if (error) throw error;
 }
 
-export async function completeRecommendation(recommendationId: string, userId: string): Promise<void> {
+export async function completeRecommendation(
+  recommendationId: string,
+  userId: string
+): Promise<void> {
   const { error } = await supabase
     .from('study_recommendations')
     .update({

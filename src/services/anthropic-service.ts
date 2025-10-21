@@ -3,27 +3,27 @@
  * Next.js optimized with React Server Components and streaming support
  */
 
-import Anthropic from "@anthropic-ai/sdk";
+import Anthropic from '@anthropic-ai/sdk';
 import type {
+  AIModel,
   AnthropicConfig,
-  TCOQuestionGeneration,
-  StudyExplanation,
-  LearningAnalytics,
-  StudySession,
-  StudyPlan,
   ChatMessage,
   ChatSession,
-  TokenInfo,
-  ITCOStudyAI,
-  AIModel,
   DifficultyLevel,
-} from "@/types/anthropic";
+  ITCOStudyAI,
+  LearningAnalytics,
+  StudyExplanation,
+  StudyPlan,
+  StudySession,
+  TCOQuestionGeneration,
+  TokenInfo,
+} from '@/types/anthropic';
 
 export class ModernTCOStudyAI implements ITCOStudyAI {
   private client: Anthropic;
   private readonly maxTokens = 4000;
-  private readonly model: AIModel = "claude-3-5-sonnet-20241022";
-  private readonly streamingModel: AIModel = "claude-3-5-haiku-20241022";
+  private readonly model: AIModel = 'claude-3-5-sonnet-20241022';
+  private readonly streamingModel: AIModel = 'claude-3-5-haiku-20241022';
 
   constructor(config: AnthropicConfig) {
     this.client = new Anthropic({
@@ -53,7 +53,7 @@ export class ModernTCOStudyAI implements ITCOStudyAI {
    */
   async generateQuestion(
     topic: string,
-    difficulty: DifficultyLevel = "medium",
+    difficulty: DifficultyLevel = 'medium',
     options?: {
       practicalScenario?: boolean;
       taniumVersion?: string;
@@ -61,14 +61,14 @@ export class ModernTCOStudyAI implements ITCOStudyAI {
     }
   ): Promise<TCOQuestionGeneration> {
     const practicalScenario = options?.practicalScenario || false;
-    const taniumVersion = options?.taniumVersion || "latest";
-    const subtopic = options?.subtopic || "";
+    const taniumVersion = options?.taniumVersion || 'latest';
+    const subtopic = options?.subtopic || '';
 
-    const prompt = `Generate a ${difficulty} level TCO certification question about Tanium ${topic}${subtopic ? ` - ${subtopic}` : ""}.
+    const prompt = `Generate a ${difficulty} level TCO certification question about Tanium ${topic}${subtopic ? ` - ${subtopic}` : ''}.
 
 Requirements:
 - Target Tanium version: ${taniumVersion}
-- ${practicalScenario ? "Include practical, hands-on scenario" : "Focus on conceptual understanding"}
+- ${practicalScenario ? 'Include practical, hands-on scenario' : 'Focus on conceptual understanding'}
 - 4 multiple choice answers (A, B, C, D)
 - Detailed explanation with reasoning
 - Real-world enterprise context
@@ -93,7 +93,7 @@ Format as JSON:
         temperature: 0.7,
         messages: [
           {
-            role: "user",
+            role: 'user',
             content: prompt,
           },
         ],
@@ -115,7 +115,7 @@ Ensure all questions are:
 - Challenging but fair for the difficulty level`,
       });
 
-      const content = response.content[0].type === "text" ? response.content[0].text : "";
+      const content = response.content[0].type === 'text' ? response.content[0].text : '';
       const parsed = JSON.parse(content);
 
       return {
@@ -134,9 +134,9 @@ Ensure all questions are:
         references: parsed.references || [],
       };
     } catch (error) {
-      console.error("Question generation failed:", error);
+      console.error('Question generation failed:', error);
       throw new Error(
-        `Failed to generate question: ${error instanceof Error ? error.message : "Unknown error"}`
+        `Failed to generate question: ${error instanceof Error ? error.message : 'Unknown error'}`
       );
     }
   }
@@ -174,7 +174,7 @@ Ensure all questions are:
    */
   async explainConcept(
     concept: string,
-    userLevel: "beginner" | "intermediate" | "advanced" = "intermediate"
+    userLevel: 'beginner' | 'intermediate' | 'advanced' = 'intermediate'
   ): Promise<StudyExplanation> {
     const prompt = `Explain the Tanium concept "${concept}" for a ${userLevel} level TCO candidate.
 
@@ -197,7 +197,7 @@ Focus on practical, actionable information for TCO certification success.`;
         temperature: 0.3,
         messages: [
           {
-            role: "user",
+            role: 'user',
             content: prompt,
           },
         ],
@@ -215,7 +215,7 @@ Always include:
 - Connection to other Tanium features`,
       });
 
-      const content = response.content[0].type === "text" ? response.content[0].text : "";
+      const content = response.content[0].type === 'text' ? response.content[0].text : '';
 
       return {
         concept,
@@ -228,9 +228,9 @@ Always include:
         difficulty: userLevel,
       };
     } catch (error) {
-      console.error("Concept explanation failed:", error);
+      console.error('Concept explanation failed:', error);
       throw new Error(
-        `Failed to explain concept: ${error instanceof Error ? error.message : "Unknown error"}`
+        `Failed to explain concept: ${error instanceof Error ? error.message : 'Unknown error'}`
       );
     }
   }
@@ -240,14 +240,15 @@ Always include:
    */
   async analyzePerformance(userId: string, sessions: StudySession[]): Promise<LearningAnalytics> {
     if (sessions.length === 0) {
-      throw new Error("No study sessions provided for analysis");
+      throw new Error('No study sessions provided for analysis');
     }
 
     const totalQuestions = sessions.reduce((sum, s) => sum + (s.questionsAnswered?.length ?? 0), 0);
     const correctAnswers = sessions.reduce(
       (sum, s) =>
         sum +
-        (s.userAnswers?.filter((ans, idx) => ans === s.questionsAnswered?.[idx]?.correctAnswer).length ?? 0),
+        (s.userAnswers?.filter((ans, idx) => ans === s.questionsAnswered?.[idx]?.correctAnswer)
+          .length ?? 0),
       0
     );
     const totalTime = sessions.reduce((sum, s) => sum + (s.timeSpent ?? 0), 0);
@@ -284,8 +285,8 @@ Performance Metrics:
 - Questions Attempted: ${totalQuestions}
 - Correct Answers: ${correctAnswers}
 - Total Study Time: ${Math.round(totalTime / 60)} minutes
-- Weak Areas: ${weakAreas.join(", ") || "None identified"}
-- Strong Areas: ${strongAreas.join(", ") || "None identified"}
+- Weak Areas: ${weakAreas.join(', ') || 'None identified'}
+- Strong Areas: ${strongAreas.join(', ') || 'None identified'}
 
 Provide personalized recommendations:
 1. 3 specific improvement actions
@@ -309,21 +310,21 @@ Format as JSON:
         temperature: 0.2,
         messages: [
           {
-            role: "user",
+            role: 'user',
             content: prompt,
           },
         ],
         system:
-          "You are a Learning Analytics Expert specializing in TCO certification preparation. Provide data-driven, personalized recommendations.",
+          'You are a Learning Analytics Expert specializing in TCO certification preparation. Provide data-driven, personalized recommendations.',
       });
 
-      const content = response.content[0].type === "text" ? response.content[0].text : "";
+      const content = response.content[0].type === 'text' ? response.content[0].text : '';
       const aiAnalysis = JSON.parse(content);
 
       return {
         userId,
         sessionId: sessions[sessions.length - 1].id,
-        topic: "Overall Performance Analysis",
+        topic: 'Overall Performance Analysis',
         performanceScore,
         timeSpent: totalTime,
         questionsAttempted: totalQuestions,
@@ -338,13 +339,13 @@ Format as JSON:
           aiAnalysis.masteryLevel || this.calculateMasteryLevel(performanceScore, totalQuestions),
       };
     } catch (error) {
-      console.error("Performance analysis failed:", error);
+      console.error('Performance analysis failed:', error);
 
       // Fallback to rule-based analysis
       return {
         userId,
         sessionId: sessions[sessions.length - 1].id,
-        topic: "Overall Performance Analysis",
+        topic: 'Overall Performance Analysis',
         performanceScore,
         timeSpent: totalTime,
         questionsAttempted: totalQuestions,
@@ -371,9 +372,9 @@ Format as JSON:
     const prompt = `Create a personalized TCO study plan:
 
 Parameters:
-- Weak areas to focus on: ${weakAreas.join(", ")}
+- Weak areas to focus on: ${weakAreas.join(', ')}
 - Available study time: ${timeAvailable} hours
-- Target exam date: ${targetDate ? targetDate.toDateString() : "Not specified"}
+- Target exam date: ${targetDate ? targetDate.toDateString() : 'Not specified'}
 - Goal: TCO certification success
 
 Create comprehensive study plan with:
@@ -397,15 +398,15 @@ Format as JSON with topics array containing:
         temperature: 0.4,
         messages: [
           {
-            role: "user",
+            role: 'user',
             content: prompt,
           },
         ],
         system:
-          "You are a TCO Certification Expert and Study Plan Specialist. Create effective, personalized study plans based on individual needs and time constraints.",
+          'You are a TCO Certification Expert and Study Plan Specialist. Create effective, personalized study plans based on individual needs and time constraints.',
       });
 
-      const content = response.content[0].type === "text" ? response.content[0].text : "";
+      const content = response.content[0].type === 'text' ? response.content[0].text : '';
       const planData = JSON.parse(content);
 
       return {
@@ -418,10 +419,10 @@ Format as JSON with topics array containing:
           topic: topic.topic,
           subtopics: topic.subtopics || [],
           estimatedTime: topic.estimatedTime || 60,
-          priority: topic.priority || "medium",
+          priority: topic.priority || 'medium',
           completed: false,
           score: undefined,
-          notes: "",
+          notes: '',
         })),
         prerequisites: planData.prerequisites || [],
         difficulty: this.determinePlanDifficulty(weakAreas.length),
@@ -429,9 +430,9 @@ Format as JSON with topics array containing:
         updatedAt: new Date(),
       };
     } catch (error) {
-      console.error("Study plan creation failed:", error);
+      console.error('Study plan creation failed:', error);
       throw new Error(
-        `Failed to create study plan: ${error instanceof Error ? error.message : "Unknown error"}`
+        `Failed to create study plan: ${error instanceof Error ? error.message : 'Unknown error'}`
       );
     }
   }
@@ -439,16 +440,16 @@ Format as JSON with topics array containing:
   /**
    * Real-time chat assistance with context awareness
    */
-  async chatAssist(message: string, context: ChatSession["context"]): Promise<ChatMessage> {
+  async chatAssist(message: string, context: ChatSession['context']): Promise<ChatMessage> {
     // Type guard for ChatSessionContext
     const sessionContext = typeof context === 'string' ? undefined : context;
 
     const prompt = `User question: "${message}"
 
 Context:
-- Current topic: ${sessionContext?.currentTopic || "General TCO study"}
-- User level: ${sessionContext?.userLevel || "intermediate"}
-- Study goals: ${sessionContext?.studyGoals?.join(", ") || "TCO certification"}
+- Current topic: ${sessionContext?.currentTopic || 'General TCO study'}
+- User level: ${sessionContext?.userLevel || 'intermediate'}
+- Study goals: ${sessionContext?.studyGoals?.join(', ') || 'TCO certification'}
 
 Provide helpful, accurate response as a Tanium TCO expert. 
 Be conversational but authoritative.
@@ -462,20 +463,20 @@ If the question is outside Tanium/TCO scope, politely redirect to certification 
         temperature: 0.6,
         messages: [
           {
-            role: "user",
+            role: 'user',
             content: prompt,
           },
         ],
         system:
-          "You are a friendly Tanium TCO Expert providing real-time study assistance. Be helpful, encouraging, and accurate.",
+          'You are a friendly Tanium TCO Expert providing real-time study assistance. Be helpful, encouraging, and accurate.',
       });
 
-      const content = response.content[0].type === "text" ? response.content[0].text : "";
+      const content = response.content[0].type === 'text' ? response.content[0].text : '';
       const tokenCount = this.countTokens(content).count;
 
       return {
         id: this.generateId(),
-        role: "assistant",
+        role: 'assistant',
         content,
         timestamp: new Date(),
         metadata: {
@@ -486,9 +487,9 @@ If the question is outside Tanium/TCO scope, politely redirect to certification 
         },
       };
     } catch (error) {
-      console.error("Chat assistance failed:", error);
+      console.error('Chat assistance failed:', error);
       throw new Error(
-        `Failed to provide chat assistance: ${error instanceof Error ? error.message : "Unknown error"}`
+        `Failed to provide chat assistance: ${error instanceof Error ? error.message : 'Unknown error'}`
       );
     }
   }
@@ -520,29 +521,29 @@ Provide validation results with specific issues and improvement suggestions.`;
         max_tokens: 1500,
         messages: [
           {
-            role: "user",
+            role: 'user',
             content: prompt,
           },
         ],
         system:
-          "You are a TCO Content Quality Assurance Expert. Validate study materials for technical accuracy and educational effectiveness.",
+          'You are a TCO Content Quality Assurance Expert. Validate study materials for technical accuracy and educational effectiveness.',
       });
 
-      const result = response.content[0].type === "text" ? response.content[0].text : "";
+      const result = response.content[0].type === 'text' ? response.content[0].text : '';
 
       return {
         isValid:
-          !result.toLowerCase().includes("inaccurate") &&
-          !result.toLowerCase().includes("incorrect"),
+          !result.toLowerCase().includes('inaccurate') &&
+          !result.toLowerCase().includes('incorrect'),
         issues: this.extractIssues(result),
         suggestions: this.extractSuggestions(result),
       };
     } catch (error) {
-      console.error("Content validation failed:", error);
+      console.error('Content validation failed:', error);
       return {
         isValid: false,
-        issues: ["Validation service temporarily unavailable"],
-        suggestions: ["Please verify content manually or try again later"],
+        issues: ['Validation service temporarily unavailable'],
+        suggestions: ['Please verify content manually or try again later'],
       };
     }
   }
@@ -571,9 +572,9 @@ Provide validation results with specific issues and improvement suggestions.`;
   private estimateTokenCost(tokenCount: number, model: AIModel): number {
     // Approximate costs per 1K tokens (update with current pricing)
     const costs = {
-      "claude-3-5-sonnet-20241022": 0.003,
-      "claude-3-5-haiku-20241022": 0.00025,
-      "claude-3-opus-20240229": 0.015,
+      'claude-3-5-sonnet-20241022': 0.003,
+      'claude-3-5-haiku-20241022': 0.00025,
+      'claude-3-opus-20240229': 0.015,
     };
     return (tokenCount / 1000) * (costs[model] || 0.003);
   }
@@ -589,27 +590,27 @@ Provide validation results with specific issues and improvement suggestions.`;
   private calculateMasteryLevel(
     score: number,
     questions: number
-  ): LearningAnalytics["masteryLevel"] {
-    if (score >= 90 && questions >= 50) return "expert";
-    if (score >= 80 && questions >= 30) return "proficient";
-    if (score >= 70 && questions >= 20) return "developing";
-    return "novice";
+  ): LearningAnalytics['masteryLevel'] {
+    if (score >= 90 && questions >= 50) return 'expert';
+    if (score >= 80 && questions >= 30) return 'proficient';
+    if (score >= 70 && questions >= 20) return 'developing';
+    return 'novice';
   }
 
   private determinePlanDifficulty(
     weakAreasCount: number
-  ): "beginner" | "intermediate" | "advanced" {
-    if (weakAreasCount <= 2) return "advanced";
-    if (weakAreasCount <= 4) return "intermediate";
-    return "beginner";
+  ): 'beginner' | 'intermediate' | 'advanced' {
+    if (weakAreasCount <= 2) return 'advanced';
+    if (weakAreasCount <= 4) return 'intermediate';
+    return 'beginner';
   }
 
-  private generateFallbackRecommendations(score: number, weakAreas: string[]): string[] {
+  private generateFallbackRecommendations(score: number, _weakAreas: string[]): string[] {
     if (score >= 80)
-      return ["Focus on advanced scenarios", "Practice time management", "Review edge cases"];
+      return ['Focus on advanced scenarios', 'Practice time management', 'Review edge cases'];
     if (score >= 60)
-      return ["Strengthen weak areas", "Increase practice frequency", "Seek additional resources"];
-    return ["Review fundamentals", "Start with easier topics", "Consider additional training"];
+      return ['Strengthen weak areas', 'Increase practice frequency', 'Seek additional resources'];
+    return ['Review fundamentals', 'Start with easier topics', 'Consider additional training'];
   }
 
   // Content extraction helpers
@@ -623,7 +624,7 @@ Provide validation results with specific issues and improvement suggestions.`;
     const topics =
       content.match(/(?:related|connect|similar|also|see also)[\s\S]*?(?=\.|,|\n|$)/gi) || [];
     return topics
-      .map((topic) => topic.replace(/(?:related|connect|similar|also|see also)/gi, "").trim())
+      .map((topic) => topic.replace(/(?:related|connect|similar|also|see also)/gi, '').trim())
       .slice(0, 5);
   }
 
@@ -674,9 +675,9 @@ export function validateTokenLimit(content: string, limit: number): boolean {
 
 export function estimateTokenCost(tokenCount: number, model: AIModel): number {
   const costs = {
-    "claude-3-5-sonnet-20241022": 0.003,
-    "claude-3-5-haiku-20241022": 0.00025,
-    "claude-3-opus-20240229": 0.015,
+    'claude-3-5-sonnet-20241022': 0.003,
+    'claude-3-5-haiku-20241022': 0.00025,
+    'claude-3-opus-20240229': 0.015,
   };
   return (tokenCount / 1000) * (costs[model] || 0.003);
 }
@@ -694,9 +695,9 @@ export function formatTime(seconds: number): string {
 export function calculateMasteryLevel(
   score: number,
   attempts: number
-): LearningAnalytics["masteryLevel"] {
-  if (score >= 90 && attempts >= 50) return "expert";
-  if (score >= 80 && attempts >= 30) return "proficient";
-  if (score >= 70 && attempts >= 20) return "developing";
-  return "novice";
+): LearningAnalytics['masteryLevel'] {
+  if (score >= 90 && attempts >= 50) return 'expert';
+  if (score >= 80 && attempts >= 30) return 'proficient';
+  if (score >= 70 && attempts >= 20) return 'developing';
+  return 'novice';
 }

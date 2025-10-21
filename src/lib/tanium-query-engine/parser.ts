@@ -3,26 +3,26 @@
  * Recursive descent parser with AST generation
  */
 
+import { Lexer } from './lexer';
 import {
-  type Token,
-  TokenType,
-  type QueryNode,
-  type SelectNode,
-  type FromNode,
-  type WhereNode,
-  type GroupByNode,
-  type OrderByNode,
-  type LimitNode,
-  type ColumnNode,
   type AggregateNode,
+  type ColumnNode,
   type FilterNode,
-  type ScopeNode,
   type FilterOperator,
+  type FromNode,
+  type GroupByNode,
+  type LimitNode,
+  type OrderByNode,
   ParseError,
   type ParserOptions,
+  type QueryNode,
+  type ScopeNode,
+  type SelectNode,
   type SourceLocation,
-} from "./types";
-import { Lexer } from "./lexer";
+  type Token,
+  TokenType,
+  type WhereNode,
+} from './types';
 
 export class Parser {
   private tokens: Token[] = [];
@@ -96,7 +96,7 @@ export class Parser {
     // Parse GROUP BY clause
     if (
       this.matchSequence([TokenType.GROUP_BY]) ||
-      (this.check(TokenType.IDENTIFIER) && this.peekValue()?.toLowerCase() === "group")
+      (this.check(TokenType.IDENTIFIER) && this.peekValue()?.toLowerCase() === 'group')
     ) {
       groupBy = this.parseGroupBy();
     }
@@ -104,7 +104,7 @@ export class Parser {
     // Parse ORDER BY clause
     if (
       this.matchSequence([TokenType.ORDER_BY]) ||
-      (this.check(TokenType.IDENTIFIER) && this.peekValue()?.toLowerCase() === "order")
+      (this.check(TokenType.IDENTIFIER) && this.peekValue()?.toLowerCase() === 'order')
     ) {
       orderBy = this.parseOrderBy();
     }
@@ -116,7 +116,7 @@ export class Parser {
 
     // Create query node
     return {
-      type: "Query",
+      type: 'Query',
       select,
       from,
       where,
@@ -150,11 +150,11 @@ export class Parser {
 
     // If only aggregates and no columns, that's valid
     if (columns.length === 0 && aggregates.length === 0) {
-      throw new ParseError("Expected at least one column or aggregate", this.peek());
+      throw new ParseError('Expected at least one column or aggregate', this.peek());
     }
 
     return {
-      type: "Select",
+      type: 'Select',
       columns,
       aggregates,
       location: this.createLocation(startToken, this.previous()),
@@ -168,9 +168,9 @@ export class Parser {
     const startToken = this.peek();
 
     // Handle multi-word column names
-    let columnName = "";
+    let columnName = '';
     while (this.check(TokenType.IDENTIFIER)) {
-      if (columnName) columnName += " ";
+      if (columnName) columnName += ' ';
       columnName += this.advance().value;
 
       // Check if next token continues the column name
@@ -184,7 +184,7 @@ export class Parser {
     }
 
     return {
-      type: "Column",
+      type: 'Column',
       name: columnName,
       location: this.createLocation(startToken, this.previous()),
     };
@@ -195,25 +195,25 @@ export class Parser {
    */
   private parseAggregate(): AggregateNode {
     const startToken = this.peek();
-    let func: AggregateNode["function"];
+    let func: AggregateNode['function'];
 
     // Get aggregate function
     const token = this.advance();
     switch (token.type) {
       case TokenType.COUNT:
-        func = "count";
+        func = 'count';
         break;
       case TokenType.MIN:
-        func = "min";
+        func = 'min';
         break;
       case TokenType.MAX:
-        func = "max";
+        func = 'max';
         break;
       case TokenType.AVG:
-        func = "avg";
+        func = 'avg';
         break;
       case TokenType.SUM:
-        func = "sum";
+        func = 'sum';
         break;
       default:
         throw new ParseError(`Unknown aggregate function: ${token.value}`, token);
@@ -228,11 +228,11 @@ export class Parser {
           column = col.name;
         }
       }
-      this.consume(TokenType.RPAREN, "Expected closing parenthesis");
+      this.consume(TokenType.RPAREN, 'Expected closing parenthesis');
     }
 
     return {
-      type: "Aggregate",
+      type: 'Aggregate',
       function: func,
       column,
       location: this.createLocation(startToken, this.previous()),
@@ -247,7 +247,7 @@ export class Parser {
     const scope = this.parseScope();
 
     return {
-      type: "From",
+      type: 'From',
       scope,
       location: this.createLocation(startToken, this.previous()),
     };
@@ -262,22 +262,22 @@ export class Parser {
     // Check for "all machines"
     if (this.check(TokenType.IDENTIFIER)) {
       const value = this.peekValue()?.toLowerCase();
-      if (value === "all") {
+      if (value === 'all') {
         this.advance();
-        if (this.check(TokenType.IDENTIFIER) && this.peekValue()?.toLowerCase() === "machines") {
+        if (this.check(TokenType.IDENTIFIER) && this.peekValue()?.toLowerCase() === 'machines') {
           this.advance();
         }
         return {
-          type: "Scope",
-          scopeType: "all",
+          type: 'Scope',
+          scopeType: 'all',
           location: this.createLocation(startToken, this.previous()),
         };
       }
 
       // Check for "group <name>"
-      if (value === "group") {
+      if (value === 'group') {
         this.advance();
-        let groupName = "";
+        let groupName = '';
 
         // Handle quoted group name
         if (this.check(TokenType.STRING)) {
@@ -285,7 +285,7 @@ export class Parser {
         } else {
           // Handle unquoted group name
           while (this.check(TokenType.IDENTIFIER)) {
-            if (groupName) groupName += " ";
+            if (groupName) groupName += ' ';
             groupName += this.advance().value;
             if (!this.checkGroupNameContinuation()) {
               break;
@@ -294,8 +294,8 @@ export class Parser {
         }
 
         return {
-          type: "Scope",
-          scopeType: "group",
+          type: 'Scope',
+          scopeType: 'group',
           value: groupName,
           location: this.createLocation(startToken, this.previous()),
         };
@@ -304,8 +304,8 @@ export class Parser {
 
     // Default to "all"
     return {
-      type: "Scope",
-      scopeType: "all",
+      type: 'Scope',
+      scopeType: 'all',
       location: this.createLocation(startToken, startToken),
     };
   }
@@ -322,7 +322,7 @@ export class Parser {
     } while (this.match(TokenType.AND));
 
     return {
-      type: "Where",
+      type: 'Where',
       filters,
       location: this.createLocation(startToken, this.previous()),
     };
@@ -337,7 +337,7 @@ export class Parser {
     // Parse field name
     const field = this.parseColumn();
     if (!field) {
-      throw new ParseError("Expected field name in filter", this.peek());
+      throw new ParseError('Expected field name in filter', this.peek());
     }
 
     // Parse operator
@@ -351,9 +351,9 @@ export class Parser {
       value = parseFloat(this.advance().value);
     } else {
       // Try to read unquoted string
-      let stringValue = "";
+      let stringValue = '';
       while (this.check(TokenType.IDENTIFIER)) {
-        if (stringValue) stringValue += " ";
+        if (stringValue) stringValue += ' ';
         stringValue += this.advance().value;
         if (!this.checkFilterValueContinuation()) {
           break;
@@ -363,7 +363,7 @@ export class Parser {
     }
 
     return {
-      type: "Filter",
+      type: 'Filter',
       field: field.name,
       operator,
       value,
@@ -376,28 +376,28 @@ export class Parser {
    */
   private parseOperator(): FilterOperator {
     if (this.match(TokenType.CONTAINS)) {
-      return "contains";
+      return 'contains';
     }
     if (this.match(TokenType.DOES_NOT_CONTAIN)) {
-      return "does_not_contain";
+      return 'does_not_contain';
     }
     if (this.match(TokenType.EQUALS)) {
-      return "equals";
+      return 'equals';
     }
     if (this.match(TokenType.IS_GREATER_THAN)) {
-      return "greater_than";
+      return 'greater_than';
     }
     if (this.match(TokenType.IS_LESS_THAN)) {
-      return "less_than";
+      return 'less_than';
     }
     if (this.match(TokenType.STARTS_WITH)) {
-      return "starts_with";
+      return 'starts_with';
     }
     if (this.match(TokenType.ENDS_WITH)) {
-      return "ends_with";
+      return 'ends_with';
     }
 
-    throw new ParseError("Expected comparison operator", this.peek());
+    throw new ParseError('Expected comparison operator', this.peek());
   }
 
   /**
@@ -407,9 +407,9 @@ export class Parser {
     const startToken = this.peek();
 
     // Consume "group by"
-    if (this.check(TokenType.IDENTIFIER) && this.peekValue()?.toLowerCase() === "group") {
+    if (this.check(TokenType.IDENTIFIER) && this.peekValue()?.toLowerCase() === 'group') {
       this.advance();
-      if (this.check(TokenType.IDENTIFIER) && this.peekValue()?.toLowerCase() === "by") {
+      if (this.check(TokenType.IDENTIFIER) && this.peekValue()?.toLowerCase() === 'by') {
         this.advance();
       }
     } else if (this.check(TokenType.GROUP_BY)) {
@@ -425,7 +425,7 @@ export class Parser {
     } while (this.match(TokenType.COMMA));
 
     return {
-      type: "GroupBy",
+      type: 'GroupBy',
       columns,
       location: this.createLocation(startToken, this.previous()),
     };
@@ -438,28 +438,28 @@ export class Parser {
     const startToken = this.peek();
 
     // Consume "order by"
-    if (this.check(TokenType.IDENTIFIER) && this.peekValue()?.toLowerCase() === "order") {
+    if (this.check(TokenType.IDENTIFIER) && this.peekValue()?.toLowerCase() === 'order') {
       this.advance();
-      if (this.check(TokenType.IDENTIFIER) && this.peekValue()?.toLowerCase() === "by") {
+      if (this.check(TokenType.IDENTIFIER) && this.peekValue()?.toLowerCase() === 'by') {
         this.advance();
       }
     } else if (this.check(TokenType.ORDER_BY)) {
       this.advance();
     }
 
-    const columns: OrderByNode["columns"] = [];
+    const columns: OrderByNode['columns'] = [];
     do {
       // Parse column name manually to stop at asc/desc keywords
-      let columnName = "";
+      let columnName = '';
       while (this.check(TokenType.IDENTIFIER)) {
         const value = this.peekValue()?.toLowerCase();
 
         // Stop if we hit asc/desc direction keywords
-        if (value === "asc" || value === "desc") {
+        if (value === 'asc' || value === 'desc') {
           break;
         }
 
-        if (columnName) columnName += " ";
+        if (columnName) columnName += ' ';
         columnName += this.advance().value;
 
         // Check if next token continues the column name
@@ -469,12 +469,12 @@ export class Parser {
       }
 
       if (columnName) {
-        let direction: "asc" | "desc" = "asc";
+        let direction: 'asc' | 'desc' = 'asc';
 
         // Check for ASC/DESC
         if (this.check(TokenType.IDENTIFIER)) {
           const dir = this.peekValue()?.toLowerCase();
-          if (dir === "asc" || dir === "desc") {
+          if (dir === 'asc' || dir === 'desc') {
             direction = dir;
             this.advance();
           }
@@ -488,7 +488,7 @@ export class Parser {
     } while (this.match(TokenType.COMMA));
 
     return {
-      type: "OrderBy",
+      type: 'OrderBy',
       columns,
       location: this.createLocation(startToken, this.previous()),
     };
@@ -501,13 +501,13 @@ export class Parser {
     const startToken = this.previous();
 
     if (!this.check(TokenType.NUMBER)) {
-      throw new ParseError("Expected number after LIMIT", this.peek());
+      throw new ParseError('Expected number after LIMIT', this.peek());
     }
 
-    const value = parseInt(this.advance().value);
+    const value = parseInt(this.advance().value, 10);
 
     return {
-      type: "Limit",
+      type: 'Limit',
       value,
       location: this.createLocation(startToken, this.previous()),
     };
@@ -632,10 +632,7 @@ export class Parser {
 
   private checkOrderByColumnContinuation(): boolean {
     // In ORDER BY context, also stop at LIMIT (and comma is handled by outer loop)
-    const stopTokens = [
-      TokenType.LIMIT,
-      TokenType.COMMA,
-    ];
+    const stopTokens = [TokenType.LIMIT, TokenType.COMMA];
     return !stopTokens.includes(this.peek().type);
   }
 

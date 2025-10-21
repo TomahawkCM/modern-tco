@@ -7,15 +7,15 @@
  * for use in the spaced repetition review system.
  */
 
-import { createClient } from "@supabase/supabase-js";
-import fs from "fs";
-import path from "path";
+import { createClient } from '@supabase/supabase-js';
+import fs from 'fs';
+import path from 'path';
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
 
 if (!supabaseUrl || !supabaseServiceKey) {
-  console.error("❌ Missing Supabase credentials in .env.local");
+  console.error('❌ Missing Supabase credentials in .env.local');
   process.exit(1);
 }
 
@@ -24,34 +24,34 @@ const supabase = createClient(supabaseUrl, supabaseServiceKey);
 // Question files to import
 const questionFiles = [
   {
-    file: "asking-questions.json",
-    moduleId: "asking-questions",
-    domain: "Asking Questions",
+    file: 'asking-questions.json',
+    moduleId: 'asking-questions',
+    domain: 'Asking Questions',
   },
   {
-    file: "refining-questions.json",
-    moduleId: "refining-questions",
-    domain: "Refining & Targeting",
+    file: 'refining-questions.json',
+    moduleId: 'refining-questions',
+    domain: 'Refining & Targeting',
   },
   {
-    file: "navigation-modules.json",
-    moduleId: "navigation-modules",
-    domain: "Navigation & Modules",
+    file: 'navigation-modules.json',
+    moduleId: 'navigation-modules',
+    domain: 'Navigation & Modules',
   },
   {
-    file: "taking-action.json",
-    moduleId: "taking-action",
-    domain: "Taking Action",
+    file: 'taking-action.json',
+    moduleId: 'taking-action',
+    domain: 'Taking Action',
   },
   {
-    file: "reporting-export.json",
-    moduleId: "reporting-export",
-    domain: "Reporting & Export",
+    file: 'reporting-export.json',
+    moduleId: 'reporting-export',
+    domain: 'Reporting & Export',
   },
   {
-    file: "comprehensive-assessment-bank.json",
-    moduleId: "comprehensive",
-    domain: "Comprehensive",
+    file: 'comprehensive-assessment-bank.json',
+    moduleId: 'comprehensive',
+    domain: 'Comprehensive',
   },
 ];
 
@@ -82,57 +82,93 @@ function normalizeDomain(domain: string, module?: string): string {
   // - Report Generation and Data Export
   // - Taking Action
 
-  if (domainLower.includes("ask") || domainLower.includes("question")) {
-    return "Asking Questions";
+  if (domainLower.includes('ask') || domainLower.includes('question')) {
+    return 'Asking Questions';
   }
 
-  if (domainLower.includes("refin") || domainLower.includes("target") || domainLower.includes("filter") || domainLower.includes("group")) {
-    return "Refining Questions & Targeting";
+  if (
+    domainLower.includes('refin') ||
+    domainLower.includes('target') ||
+    domainLower.includes('filter') ||
+    domainLower.includes('group')
+  ) {
+    return 'Refining Questions & Targeting';
   }
 
-  if (domainLower.includes("action") || domainLower.includes("package") || domainLower.includes("deploy")) {
-    return "Taking Action";
+  if (
+    domainLower.includes('action') ||
+    domainLower.includes('package') ||
+    domainLower.includes('deploy')
+  ) {
+    return 'Taking Action';
   }
 
-  if (domainLower.includes("navigat") || domainLower.includes("module") || domainLower.includes("console") || domainLower.includes("interact") || domainLower.includes("trends")) {
-    return "Navigation and Basic Module Functions";
+  if (
+    domainLower.includes('navigat') ||
+    domainLower.includes('module') ||
+    domainLower.includes('console') ||
+    domainLower.includes('interact') ||
+    domainLower.includes('trends')
+  ) {
+    return 'Navigation and Basic Module Functions';
   }
 
-  if (domainLower.includes("report") || domainLower.includes("export") || domainLower.includes("data") || domainLower.includes("generation")) {
-    return "Report Generation and Data Export";
+  if (
+    domainLower.includes('report') ||
+    domainLower.includes('export') ||
+    domainLower.includes('data') ||
+    domainLower.includes('generation')
+  ) {
+    return 'Report Generation and Data Export';
   }
 
   // Foundation/Architecture/Platform topics
-  if (domainLower.includes("foundation") || domainLower.includes("architecture") || domainLower.includes("platform") || domainLower.includes("terminology") || domainLower.includes("communication") || domainLower.includes("fundamental")) {
-    return "Fundamentals";
+  if (
+    domainLower.includes('foundation') ||
+    domainLower.includes('architecture') ||
+    domainLower.includes('platform') ||
+    domainLower.includes('terminology') ||
+    domainLower.includes('communication') ||
+    domainLower.includes('fundamental')
+  ) {
+    return 'Fundamentals';
   }
 
   // Business/efficiency/performance -> Fundamentals
-  if (domainLower.includes("business") || domainLower.includes("efficienc") || domainLower.includes("performance") || domainLower.includes("competitive") || domainLower.includes("impact") || domainLower.includes("network") || domainLower.includes("fault") || domainLower.includes("infrastructure")) {
-    return "Fundamentals";
+  if (
+    domainLower.includes('business') ||
+    domainLower.includes('efficienc') ||
+    domainLower.includes('performance') ||
+    domainLower.includes('competitive') ||
+    domainLower.includes('impact') ||
+    domainLower.includes('network') ||
+    domainLower.includes('fault') ||
+    domainLower.includes('infrastructure')
+  ) {
+    return 'Fundamentals';
   }
 
   // Default based on module or fallback
   if (module) {
-    if (module.toLowerCase().includes("foundation")) return "Fundamentals";
-    if (module.toLowerCase().includes("asking")) return "Asking Questions";
-    if (module.toLowerCase().includes("refin")) return "Refining Questions & Targeting";
-    if (module.toLowerCase().includes("action")) return "Taking Action";
-    if (module.toLowerCase().includes("navigat")) return "Navigation and Basic Module Functions";
-    if (module.toLowerCase().includes("report")) return "Report Generation and Data Export";
+    if (module.toLowerCase().includes('foundation')) return 'Fundamentals';
+    if (module.toLowerCase().includes('asking')) return 'Asking Questions';
+    if (module.toLowerCase().includes('refin')) return 'Refining Questions & Targeting';
+    if (module.toLowerCase().includes('action')) return 'Taking Action';
+    if (module.toLowerCase().includes('navigat')) return 'Navigation and Basic Module Functions';
+    if (module.toLowerCase().includes('report')) return 'Report Generation and Data Export';
   }
 
-  return "Fundamentals"; // Safe default
+  return 'Fundamentals'; // Safe default
 }
 
 async function importQuestions() {
-  console.log("🚀 Importing 265 Questions into Supabase\n");
+  console.log('🚀 Importing 265 Questions into Supabase\n');
 
   let totalImported = 0;
   let totalSkipped = 0;
 
   for (const { file, moduleId, domain } of questionFiles) {
-    const filePath = path.join(process.cwd(), "src", "content", "questions", file);
+    const filePath = path.join(process.cwd(), 'src', 'content', 'questions', file);
 
     if (!fs.existsSync(filePath)) {
       console.log(`⚠️  Skipping ${file} - not found`);
@@ -141,7 +177,7 @@ async function importQuestions() {
 
     console.log(`\n📂 Processing: ${file}...`);
 
-    const content = fs.readFileSync(filePath, "utf-8");
+    const content = fs.readFileSync(filePath, 'utf-8');
     let questions: QuestionData[] = [];
 
     try {
@@ -170,7 +206,7 @@ async function importQuestions() {
       if (q.correctAnswerId && q.choices) {
         const choice = q.choices.findIndex((c: any) => c.id === q.correctAnswerId);
         correctAnswerIndex = choice >= 0 ? choice : 0;
-      } else if (typeof q.correctAnswer === "number") {
+      } else if (typeof q.correctAnswer === 'number') {
         correctAnswerIndex = q.correctAnswer;
       }
 
@@ -178,8 +214,8 @@ async function importQuestions() {
       let options: Array<{ id: string; text: string }> = [];
       if (q.choices && Array.isArray(q.choices)) {
         options = q.choices.map((c: any) => ({
-          id: c.id || "",
-          text: c.text || "",
+          id: c.id || '',
+          text: c.text || '',
         }));
       } else if (q.options && Array.isArray(q.options)) {
         options = q.options.map((opt: string, idx: number) => ({
@@ -193,18 +229,15 @@ async function importQuestions() {
         options: options,
         correct_answer: correctAnswerIndex,
         domain: normalizeDomain(q.domain || domain, q.module),
-        difficulty: (q.difficulty || "intermediate").toLowerCase(),
-        category: q.category || q.domain || "GENERAL",
-        explanation: q.explanation || "",
+        difficulty: (q.difficulty || 'intermediate').toLowerCase(),
+        category: q.category || q.domain || 'GENERAL',
+        explanation: q.explanation || '',
         tags: q.tags || [],
       };
     });
 
     // Batch insert (not upsert since we don't have IDs)
-    const { data, error } = await supabase
-      .from("questions")
-      .insert(dbQuestions)
-      .select();
+    const { data, error } = await supabase.from('questions').insert(dbQuestions).select();
 
     if (error) {
       console.error(`   ❌ Error importing: ${error.message}`);
@@ -216,15 +249,15 @@ async function importQuestions() {
     }
   }
 
-  console.log("\n📊 Import Summary:");
+  console.log('\n📊 Import Summary:');
   console.log(`   ✅ Successfully imported: ${totalImported} questions`);
   console.log(`   ⚠️  Skipped/Failed: ${totalSkipped} questions`);
   console.log(`   📝 Total processed: ${totalImported + totalSkipped} questions`);
 
   // Verify import
   const { count, error: countError } = await supabase
-    .from("questions")
-    .select("*", { count: "exact", head: true });
+    .from('questions')
+    .select('*', { count: 'exact', head: true });
 
   if (!countError) {
     console.log(`\n✅ Database verification: ${count} total questions in database`);

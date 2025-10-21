@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import { Suspense } from "react";
-import { DashboardContent } from "./DashboardContent";
+import { Suspense } from 'react';
+import { DashboardContent } from './DashboardContent';
 
 function DashboardSkeleton() {
   return (

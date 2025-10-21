@@ -1,116 +1,131 @@
-"use client"
+'use client';
 
-import * as React from "react"
-import { useState, useEffect, useRef } from "react"
-import { motion } from "framer-motion"
-import { BookOpen, Clock, Trophy, Zap, ChevronRight, Play } from "lucide-react"
-import { archonTheme, getArchonOverlay, getHoverGradient, getDifficultyColor, getModuleTypeStyle } from "@/lib/archon-theme"
+import { motion } from 'framer-motion';
+import { BookOpen, ChevronRight, Clock, Play, Trophy, Zap } from 'lucide-react';
+import type * as React from 'react';
+import { useEffect, useRef, useState } from 'react';
+import {
+  archonTheme,
+  getArchonOverlay,
+  getDifficultyColor,
+  getHoverGradient,
+  getModuleTypeStyle,
+} from '@/lib/archon-theme';
 
 interface StudyCardProps {
-  title?: string
-  description?: string
-  progress?: number
-  duration?: string
-  difficulty?: "Beginner" | "Intermediate" | "Advanced" | "Expert"
-  points?: number
-  isLocked?: boolean
-  moduleType?: "theory" | "practical" | "assessment" | "lab"
-  domain?: "asking" | "refining" | "action" | "navigation" | "reporting"
-  className?: string
-  onClick?: () => void
+  title?: string;
+  description?: string;
+  progress?: number;
+  duration?: string;
+  difficulty?: 'Beginner' | 'Intermediate' | 'Advanced' | 'Expert';
+  points?: number;
+  isLocked?: boolean;
+  moduleType?: 'theory' | 'practical' | 'assessment' | 'lab';
+  domain?: 'asking' | 'refining' | 'action' | 'navigation' | 'reporting';
+  className?: string;
+  onClick?: () => void;
 }
 
 const CyberpunkStudyCard = ({
-  title = "Advanced Threat Detection",
-  description = "Master the art of identifying and neutralizing sophisticated cyber threats using AI-powered detection systems and behavioral analysis techniques.",
+  title = 'Advanced Threat Detection',
+  description = 'Master the art of identifying and neutralizing sophisticated cyber threats using AI-powered detection systems and behavioral analysis techniques.',
   progress = 65,
-  duration = "45 min",
-  difficulty = "Advanced",
+  duration = '45 min',
+  difficulty = 'Advanced',
   points = 250,
   isLocked = false,
-  moduleType = "theory",
-  domain: _domain = "asking",
-  className = "",
+  moduleType = 'theory',
+  domain: _domain = 'asking',
+  className = '',
   onClick,
 }: StudyCardProps) => {
-  const cardRef = useRef<HTMLDivElement>(null)
-  const [isHovered, setIsHovered] = useState(false)
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
-  const [rotation, setRotation] = useState({ x: 0, y: 0 })
-  const [particles, setParticles] = useState<Array<{
-    id: number
-    x: number
-    y: number
-    size: number
-    duration: number
-    delay: number
-  }>>([])
+  const cardRef = useRef<HTMLDivElement>(null);
+  const [isHovered, setIsHovered] = useState(false);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [rotation, setRotation] = useState({ x: 0, y: 0 });
+  const [particles, setParticles] = useState<
+    Array<{
+      id: number;
+      x: number;
+      y: number;
+      size: number;
+      duration: number;
+      delay: number;
+    }>
+  >([]);
 
   // Generate particles on mount using theme configuration
   useEffect(() => {
-    const config = archonTheme.animations.particles
+    const config = archonTheme.animations.particles;
     const newParticles = Array.from({ length: config.count }, (_, i) => ({
       id: i,
       x: Math.random() * 100,
       y: Math.random() * 100,
       size: Math.random() * (config.sizeRange.max - config.sizeRange.min) + config.sizeRange.min,
-      duration: Math.random() * (config.durationRange.max - config.durationRange.min) + config.durationRange.min,
-      delay: Math.random() * config.delayRange.max
-    }))
-    setParticles(newParticles)
-  }, [])
+      duration:
+        Math.random() * (config.durationRange.max - config.durationRange.min) +
+        config.durationRange.min,
+      delay: Math.random() * config.delayRange.max,
+    }));
+    setParticles(newParticles);
+  }, []);
 
   // Handle mouse movement for 3D effect
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (cardRef.current) {
-      const rect = cardRef.current.getBoundingClientRect()
-      const x = e.clientX - rect.left - rect.width / 2
-      const y = e.clientY - rect.top - rect.height / 2
+      const rect = cardRef.current.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
 
-      setMousePosition({ x: e.clientX - rect.left, y: e.clientY - rect.top })
+      setMousePosition({ x: e.clientX - rect.left, y: e.clientY - rect.top });
 
-      const rotateX = -(y / rect.height) * 8
-      const rotateY = (x / rect.width) * 8
+      const rotateX = -(y / rect.height) * 8;
+      const rotateY = (x / rect.width) * 8;
 
-      setRotation({ x: rotateX, y: rotateY })
+      setRotation({ x: rotateX, y: rotateY });
     }
-  }
+  };
 
   const handleMouseLeave = () => {
-    setIsHovered(false)
-    setRotation({ x: 0, y: 0 })
-  }
+    setIsHovered(false);
+    setRotation({ x: 0, y: 0 });
+  };
 
   const getModuleIcon = () => {
     switch (moduleType) {
-      case "theory": return <BookOpen className="w-5 h-5" />
-      case "practical": return <Zap className="w-5 h-5" />
-      case "assessment": return <Trophy className="w-5 h-5" />
-      case "lab": return <Play className="w-5 h-5" />
-      default: return <BookOpen className="w-5 h-5" />
+      case 'theory':
+        return <BookOpen className="w-5 h-5" />;
+      case 'practical':
+        return <Zap className="w-5 h-5" />;
+      case 'assessment':
+        return <Trophy className="w-5 h-5" />;
+      case 'lab':
+        return <Play className="w-5 h-5" />;
+      default:
+        return <BookOpen className="w-5 h-5" />;
     }
-  }
+  };
 
   return (
     <motion.div
       ref={cardRef}
       className={`relative w-full max-w-sm h-80 rounded-2xl overflow-hidden cursor-pointer ${className}`}
       style={{
-        transformStyle: "preserve-3d",
-        perspective: "1000px"
+        transformStyle: 'preserve-3d',
+        perspective: '1000px',
       }}
       initial={{ opacity: 0, y: 20 }}
-      animate={{ 
-        opacity: 1, 
+      animate={{
+        opacity: 1,
         y: 0,
         rotateX: rotation.x,
         rotateY: rotation.y,
-        scale: isHovered ? 1.02 : 1
+        scale: isHovered ? 1.02 : 1,
       }}
       transition={{
-        type: "spring",
+        type: 'spring',
         stiffness: 300,
-        damping: 20
+        damping: 20,
       }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={handleMouseLeave}
@@ -119,18 +134,15 @@ const CyberpunkStudyCard = ({
     >
       {/* Glass morphism background */}
       <div className="absolute inset-0 bg-gradient-to-br from-gray-900/90 via-black/95 to-gray-900/90 backdrop-blur-xl border border-primary/20 rounded-2xl" />
-      
+
       {/* Authentic Archon gradient overlay */}
-      <div 
-        className="absolute inset-0 opacity-60"
-        style={getArchonOverlay()}
-      />
+      <div className="absolute inset-0 opacity-60" style={getArchonOverlay()} />
 
       {/* Interactive glow effect */}
       <motion.div
         className="absolute inset-0 rounded-2xl pointer-events-none"
         style={{
-          background: isHovered ? getHoverGradient(mousePosition.x, mousePosition.y) : "",
+          background: isHovered ? getHoverGradient(mousePosition.x, mousePosition.y) : '',
           opacity: isHovered ? 1 : 0,
         }}
         animate={{
@@ -161,7 +173,7 @@ const CyberpunkStudyCard = ({
               duration: particle.duration,
               delay: particle.delay,
               repeat: Infinity,
-              ease: "easeInOut"
+              ease: 'easeInOut',
             }}
           />
         ))}
@@ -169,14 +181,14 @@ const CyberpunkStudyCard = ({
 
       {/* Circuit pattern overlay */}
       <div className="absolute inset-0 opacity-10">
-        <div 
+        <div
           className="w-full h-full"
           style={{
             backgroundImage: `
               linear-gradient(90deg, rgba(0, 255, 255, 0.3) 1px, transparent 1px),
               linear-gradient(0deg, rgba(0, 255, 255, 0.3) 1px, transparent 1px)
             `,
-            backgroundSize: '20px 20px'
+            backgroundSize: '20px 20px',
           }}
         />
       </div>
@@ -189,11 +201,13 @@ const CyberpunkStudyCard = ({
             <div className={`p-2 rounded-lg ${getModuleTypeStyle(moduleType)}`}>
               {getModuleIcon()}
             </div>
-            <span className={`text-xs font-medium uppercase tracking-wider ${getDifficultyColor(difficulty)}`}>
+            <span
+              className={`text-xs font-medium uppercase tracking-wider ${getDifficultyColor(difficulty)}`}
+            >
               {difficulty}
             </span>
           </div>
-          
+
           {isLocked && (
             <div className="p-1 rounded bg-red-500/20 border border-red-500/30">
               <div className="w-3 h-3 bg-red-400 rounded-full" />
@@ -202,14 +216,10 @@ const CyberpunkStudyCard = ({
         </div>
 
         {/* Title */}
-        <h3 className="text-xl font-bold text-cyan-100 mb-3 leading-tight">
-          {title}
-        </h3>
+        <h3 className="text-xl font-bold text-cyan-100 mb-3 leading-tight">{title}</h3>
 
         {/* Description */}
-        <p className="text-muted-foreground text-sm leading-relaxed mb-4 flex-1">
-          {description}
-        </p>
+        <p className="text-muted-foreground text-sm leading-relaxed mb-4 flex-1">{description}</p>
 
         {/* Progress bar */}
         <div className="mb-4">
@@ -246,7 +256,7 @@ const CyberpunkStudyCard = ({
             whileTap={{ scale: 0.95 }}
             disabled={isLocked}
           >
-            {isLocked ? "Locked" : "Start"}
+            {isLocked ? 'Locked' : 'Start'}
             {!isLocked && <ChevronRight className="w-3 h-3" />}
           </motion.button>
         </div>
@@ -256,11 +266,11 @@ const CyberpunkStudyCard = ({
       <motion.div
         className="absolute inset-0 rounded-2xl border-2 border-transparent"
         style={{
-          background: isHovered 
-            ? "linear-gradient(135deg, rgba(0, 255, 255, 0.5), rgba(34, 211, 238, 0.5)) border-box"
-            : "linear-gradient(135deg, rgba(0, 255, 255, 0.2), rgba(34, 211, 238, 0.2)) border-box",
-          WebkitMask: "linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0)",
-          WebkitMaskComposite: "subtract",
+          background: isHovered
+            ? 'linear-gradient(135deg, rgba(0, 255, 255, 0.5), rgba(34, 211, 238, 0.5)) border-box'
+            : 'linear-gradient(135deg, rgba(0, 255, 255, 0.2), rgba(34, 211, 238, 0.2)) border-box',
+          WebkitMask: 'linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0)',
+          WebkitMaskComposite: 'subtract',
         }}
         animate={{
           opacity: isHovered ? 1 : 0.6,
@@ -272,9 +282,9 @@ const CyberpunkStudyCard = ({
       <motion.div
         className="absolute inset-0 rounded-2xl"
         style={{
-          boxShadow: isHovered 
-            ? "0 0 40px rgba(0, 255, 255, 0.3), 0 0 80px rgba(34, 211, 238, 0.2)"
-            : "0 0 20px rgba(0, 255, 255, 0.1)",
+          boxShadow: isHovered
+            ? '0 0 40px rgba(0, 255, 255, 0.3), 0 0 80px rgba(34, 211, 238, 0.2)'
+            : '0 0 20px rgba(0, 255, 255, 0.1)',
         }}
         animate={{
           opacity: isHovered ? 1 : 0.7,
@@ -282,7 +292,7 @@ const CyberpunkStudyCard = ({
         transition={{ duration: 0.3 }}
       />
     </motion.div>
-  )
-}
+  );
+};
 
-export { CyberpunkStudyCard }
+export { CyberpunkStudyCard };

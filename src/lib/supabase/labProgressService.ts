@@ -3,7 +3,7 @@
  * Handles lab completion tracking, progress analytics, and achievement system
  */
 
-import { createClient } from "@supabase/supabase-js";
+import { createClient } from '@supabase/supabase-js';
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
@@ -65,7 +65,7 @@ class LabProgressService {
     totalSteps: number
   ): Promise<LabProgress> {
     const { data, error } = await (supabase as any)
-      .from("lab_progress")
+      .from('lab_progress')
       .insert({
         user_id: userId,
         lab_id: labId,
@@ -82,7 +82,7 @@ class LabProgressService {
       .single();
 
     if (error) {
-      console.error("Error starting lab:", error);
+      console.error('Error starting lab:', error);
       throw error;
     }
 
@@ -102,7 +102,7 @@ class LabProgressService {
   ): Promise<void> {
     try {
       // Create step record
-      const { error: stepError } = await (supabase as any).from("lab_steps").insert({
+      const { error: stepError } = await (supabase as any).from('lab_steps').insert({
         lab_progress_id: labProgressId,
         step_number: stepNumber,
         step_title: stepTitle,
@@ -113,19 +113,19 @@ class LabProgressService {
       } as any);
 
       if (stepError) {
-        console.error("Error creating step record:", stepError);
+        console.error('Error creating step record:', stepError);
         throw stepError;
       }
 
       // Fetch current lab progress to perform atomic increment
       const { data: currentProgress, error: fetchError } = await (supabase as any)
-        .from("lab_progress")
-        .select("hints_used, validation_failures")
-        .eq("id", labProgressId)
+        .from('lab_progress')
+        .select('hints_used, validation_failures')
+        .eq('id', labProgressId)
         .single();
 
       if (fetchError) {
-        console.error("Error fetching current lab progress:", fetchError);
+        console.error('Error fetching current lab progress:', fetchError);
         throw fetchError;
       }
 
@@ -135,21 +135,21 @@ class LabProgressService {
 
       // Update lab progress
       const { error: progressError } = await (supabase as any)
-        .from("lab_progress")
+        .from('lab_progress')
         .update({
           current_step: stepNumber + 1,
           hints_used: newHintsUsed,
           validation_failures: newValidationFailures,
           updated_at: new Date().toISOString(),
         } as any)
-        .eq("id", labProgressId);
+        .eq('id', labProgressId);
 
       if (progressError) {
-        console.error("Error updating lab progress:", progressError);
+        console.error('Error updating lab progress:', progressError);
         throw progressError;
       }
     } catch (error) {
-      console.error("Error completing step:", error);
+      console.error('Error completing step:', error);
       throw error;
     }
   }
@@ -163,19 +163,19 @@ class LabProgressService {
     completionTimeSeconds: number
   ): Promise<void> {
     const { data, error } = await (supabase as any)
-      .from("lab_progress")
+      .from('lab_progress')
       .update({
         completed_at: new Date().toISOString(),
         score,
         completion_time_seconds: completionTimeSeconds,
         updated_at: new Date().toISOString(),
       } as any)
-      .eq("id", labProgressId)
+      .eq('id', labProgressId)
       .select()
       .single();
 
     if (error) {
-      console.error("Error completing lab:", error);
+      console.error('Error completing lab:', error);
       throw error;
     }
 
@@ -188,13 +188,13 @@ class LabProgressService {
    */
   async getUserLabHistory(userId: string): Promise<LabProgress[]> {
     const { data, error } = await supabase
-      .from("lab_progress")
-      .select("*")
-      .eq("user_id", userId)
-      .order("started_at", { ascending: false });
+      .from('lab_progress')
+      .select('*')
+      .eq('user_id', userId)
+      .order('started_at', { ascending: false });
 
     if (error) {
-      console.error("Error fetching lab history:", error);
+      console.error('Error fetching lab history:', error);
       throw error;
     }
 
@@ -212,10 +212,10 @@ class LabProgressService {
     totalHintsUsed: number;
     domainStats: Record<string, any>;
   }> {
-    const { data, error } = await supabase.from("lab_progress").select("*").eq("user_id", userId);
+    const { data, error } = await supabase.from('lab_progress').select('*').eq('user_id', userId);
 
     if (error) {
-      console.error("Error fetching lab statistics:", error);
+      console.error('Error fetching lab statistics:', error);
       throw error;
     }
 
@@ -290,8 +290,8 @@ class LabProgressService {
     if (labProgress.score === 100) {
       achievements.push({
         user_id: userId,
-        achievement_type: "perfect_score",
-        achievement_title: "Perfect Lab Execution",
+        achievement_type: 'perfect_score',
+        achievement_title: 'Perfect Lab Execution',
         description: `Completed ${labProgress.lab_title} with 100% accuracy`,
         lab_id: labProgress.lab_id,
         metadata: {
@@ -304,8 +304,8 @@ class LabProgressService {
 
     // Speed Demon Achievement (completed in under estimated time)
     const estimatedTimes = {
-      "LAB-AQ-001": 12 * 60, // 12 minutes in seconds
-      "LAB-RQ-001": 15 * 60, // 15 minutes in seconds
+      'LAB-AQ-001': 12 * 60, // 12 minutes in seconds
+      'LAB-RQ-001': 15 * 60, // 15 minutes in seconds
       // Add more lab time estimates
     };
 
@@ -317,8 +317,8 @@ class LabProgressService {
     ) {
       achievements.push({
         user_id: userId,
-        achievement_type: "speed_demon",
-        achievement_title: "Speed Demon",
+        achievement_type: 'speed_demon',
+        achievement_title: 'Speed Demon',
         description: `Completed ${labProgress.lab_title} faster than estimated time`,
         lab_id: labProgress.lab_id,
         metadata: {
@@ -333,8 +333,8 @@ class LabProgressService {
     if (labProgress.hints_used === 0) {
       achievements.push({
         user_id: userId,
-        achievement_type: "no_hints",
-        achievement_title: "Independent Learner",
+        achievement_type: 'no_hints',
+        achievement_title: 'Independent Learner',
         description: `Completed ${labProgress.lab_title} without using any hints`,
         lab_id: labProgress.lab_id,
         metadata: {
@@ -351,10 +351,12 @@ class LabProgressService {
         earned_at: new Date().toISOString(),
       }));
 
-  const { error } = await (supabase as any).from("lab_achievements").insert(achievementsWithTimestamp as any);
+      const { error } = await (supabase as any)
+        .from('lab_achievements')
+        .insert(achievementsWithTimestamp as any);
 
       if (error) {
-        console.error("Error awarding achievements:", error);
+        console.error('Error awarding achievements:', error);
         // Don't throw error for achievements - lab completion should still succeed
       }
     }
@@ -365,13 +367,13 @@ class LabProgressService {
    */
   async getUserAchievements(userId: string): Promise<LabAchievement[]> {
     const { data, error } = await supabase
-      .from("lab_achievements")
-      .select("*")
-      .eq("user_id", userId)
-      .order("earned_at", { ascending: false });
+      .from('lab_achievements')
+      .select('*')
+      .eq('user_id', userId)
+      .order('earned_at', { ascending: false });
 
     if (error) {
-      console.error("Error fetching achievements:", error);
+      console.error('Error fetching achievements:', error);
       throw error;
     }
 
@@ -383,7 +385,7 @@ class LabProgressService {
    */
   async getLabLeaderboard(labId?: string, limit: number = 10): Promise<any[]> {
     let query = supabase
-      .from("lab_progress")
+      .from('lab_progress')
       .select(
         `
         *,
@@ -393,19 +395,19 @@ class LabProgressService {
         )
       `
       )
-      .not("completed_at", "is", null)
-      .order("score", { ascending: false })
-      .order("completion_time_seconds", { ascending: true })
+      .not('completed_at', 'is', null)
+      .order('score', { ascending: false })
+      .order('completion_time_seconds', { ascending: true })
       .limit(limit);
 
     if (labId) {
-      query = query.eq("lab_id", labId);
+      query = query.eq('lab_id', labId);
     }
 
     const { data, error } = await query;
 
     if (error) {
-      console.error("Error fetching leaderboard:", error);
+      console.error('Error fetching leaderboard:', error);
       throw error;
     }
 

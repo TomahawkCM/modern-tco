@@ -7,42 +7,42 @@
  * Publication-ready content with proper grammar and technical accuracy
  */
 
-require("dotenv").config({ path: "../.env.local" });
-const { createClient } = require("@supabase/supabase-js");
-const fs = require("fs");
-const path = require("path");
+require('dotenv').config({ path: '../.env.local' });
+const { createClient } = require('@supabase/supabase-js');
+const fs = require('fs');
+const path = require('path');
 
 // Domain mapping for TCO certification blueprint
 const TCO_DOMAINS = {
-  "Asking Questions": {
+  'Asking Questions': {
     weight: 22,
     description:
-      "Master natural language questioning in Tanium for real-time endpoint data collection. Learn sensor selection, query construction, and result interpretation for effective information gathering.",
-    estimatedTime: "3-4 hours",
+      'Master natural language questioning in Tanium for real-time endpoint data collection. Learn sensor selection, query construction, and result interpretation for effective information gathering.',
+    estimatedTime: '3-4 hours',
   },
-  "Refining Questions": {
+  'Refining Questions': {
     weight: 23,
     description:
-      "Advanced filtering and targeting techniques for precise endpoint management. Covers computer groups, RBAC controls, and intelligent query optimization for effective scope management.",
-    estimatedTime: "4-5 hours",
+      'Advanced filtering and targeting techniques for precise endpoint management. Covers computer groups, RBAC controls, and intelligent query optimization for effective scope management.',
+    estimatedTime: '4-5 hours',
   },
-  "Taking Action": {
+  'Taking Action': {
     weight: 15,
     description:
-      "Package deployment and action management for effective endpoint operations. Learn approval workflows, action monitoring, and emergency response procedures for secure action execution.",
-    estimatedTime: "3-4 hours",
+      'Package deployment and action management for effective endpoint operations. Learn approval workflows, action monitoring, and emergency response procedures for secure action execution.',
+    estimatedTime: '3-4 hours',
   },
-  "Navigation & Basic Modules": {
+  'Navigation & Basic Modules': {
     weight: 23,
     description:
-      "Master the Tanium Console interface and core module functionality. Learn efficient navigation, dashboard customization, and workflow management for optimal operational productivity.",
-    estimatedTime: "4-5 hours",
+      'Master the Tanium Console interface and core module functionality. Learn efficient navigation, dashboard customization, and workflow management for optimal operational productivity.',
+    estimatedTime: '4-5 hours',
   },
-  "Report Generation & Data Export": {
+  'Report Generation & Data Export': {
     weight: 17,
     description:
-      "Comprehensive data reporting and export techniques for compliance and analysis. Master automated workflows, format customization, and large dataset management for stakeholder reporting.",
-    estimatedTime: "3-4 hours",
+      'Comprehensive data reporting and export techniques for compliance and analysis. Master automated workflows, format customization, and large dataset management for stakeholder reporting.',
+    estimatedTime: '3-4 hours',
   },
 };
 
@@ -54,12 +54,12 @@ class ProfessionalStudyMigrator {
 
     if (!supabaseUrl || !supabaseServiceKey) {
       throw new Error(
-        "Missing required Supabase environment variables. Please check .env.local configuration."
+        'Missing required Supabase environment variables. Please check .env.local configuration.'
       );
     }
 
     this.supabase = createClient(supabaseUrl, supabaseServiceKey);
-    console.log("✅ Supabase client initialized successfully");
+    console.log('✅ Supabase client initialized successfully');
   }
 
   /**
@@ -67,8 +67,8 @@ class ProfessionalStudyMigrator {
    */
   async executeMigration() {
     try {
-      console.log("🚀 Starting Professional TCO Study Content Migration");
-      console.log("==================================================");
+      console.log('🚀 Starting Professional TCO Study Content Migration');
+      console.log('==================================================');
 
       // Step 1: Clear existing data
       await this.clearExistingData();
@@ -82,9 +82,9 @@ class ProfessionalStudyMigrator {
       // Step 4: Verify migration
       await this.verifyMigration();
 
-      console.log("✅ Professional study content migration completed successfully!");
+      console.log('✅ Professional study content migration completed successfully!');
     } catch (error) {
-      console.error("❌ Migration failed:", error.message);
+      console.error('❌ Migration failed:', error.message);
       throw error;
     }
   }
@@ -93,36 +93,36 @@ class ProfessionalStudyMigrator {
    * Clear existing study content data
    */
   async clearExistingData() {
-    console.log("🧹 Clearing existing study content...");
+    console.log('🧹 Clearing existing study content...');
 
     // Clear sections first (foreign key constraint)
     const { error: sectionsError } = await this.supabase
-      .from("study_sections")
+      .from('study_sections')
       .delete()
-      .neq("id", "00000000-0000-0000-0000-000000000000");
+      .neq('id', '00000000-0000-0000-0000-000000000000');
 
     if (sectionsError) {
-      console.error("Warning: Could not clear existing sections:", sectionsError.message);
+      console.error('Warning: Could not clear existing sections:', sectionsError.message);
     }
 
     // Clear modules
     const { error: modulesError } = await this.supabase
-      .from("study_modules")
+      .from('study_modules')
       .delete()
-      .neq("id", "00000000-0000-0000-0000-000000000000");
+      .neq('id', '00000000-0000-0000-0000-000000000000');
 
     if (modulesError) {
-      console.error("Warning: Could not clear existing modules:", modulesError.message);
+      console.error('Warning: Could not clear existing modules:', modulesError.message);
     }
 
-    console.log("✅ Existing data cleared");
+    console.log('✅ Existing data cleared');
   }
 
   /**
    * Migrate study modules for all TCO domains
    */
   async migrateStudyModules() {
-    console.log("📚 Migrating study modules...");
+    console.log('📚 Migrating study modules...');
 
     const modules = Object.entries(TCO_DOMAINS).map(([domain, config]) => ({
       domain,
@@ -133,10 +133,10 @@ class ProfessionalStudyMigrator {
       learning_objectives: this.getlearning_objectives(domain),
       references: this.getReferences(domain),
       exam_prep: this.getExamPrep(domain, config.weight),
-      version: "1.0",
+      version: '1.0',
     }));
 
-    const { data, error } = await this.supabase.from("study_modules").insert(modules).select();
+    const { data, error } = await this.supabase.from('study_modules').insert(modules).select();
 
     if (error) {
       throw new Error(`Failed to insert study modules: ${error.message}`);
@@ -150,13 +150,13 @@ class ProfessionalStudyMigrator {
    * Migrate study sections with professional content
    */
   async migrateStudySections() {
-    console.log("📝 Migrating study sections...");
+    console.log('📝 Migrating study sections...');
 
     // Get all modules
     const { data: modules, error } = await this.supabase
-      .from("study_modules")
-      .select("*")
-      .order("domain");
+      .from('study_modules')
+      .select('*')
+      .order('domain');
 
     if (error) {
       throw new Error(`Failed to fetch modules: ${error.message}`);
@@ -168,7 +168,7 @@ class ProfessionalStudyMigrator {
       const sections = await this.createSectionsForModule(module);
 
       const { data: insertedSections, error: sectionsError } = await this.supabase
-        .from("study_sections")
+        .from('study_sections')
         .insert(sections)
         .select();
 
@@ -192,12 +192,12 @@ class ProfessionalStudyMigrator {
     // Section 1: Learning Objectives & Overview
     sections.push({
       module_id: module.id,
-      title: "Learning Objectives & Overview",
+      title: 'Learning Objectives & Overview',
       content: this.getOverviewContent(module.domain),
-      section_type: "overview",
+      section_type: 'overview',
       order_index: 1,
       estimated_time: 15,
-      key_points: this.getKeyPoints(module.domain, "overview"),
+      key_points: this.getKeyPoints(module.domain, 'overview'),
       procedures: [],
       troubleshooting: [],
       references: this.getReferences(module.domain),
@@ -206,12 +206,12 @@ class ProfessionalStudyMigrator {
     // Section 2: Core Procedures
     sections.push({
       module_id: module.id,
-      title: "Core Procedures & Best Practices",
+      title: 'Core Procedures & Best Practices',
       content: this.getProceduresContent(module.domain),
-      section_type: "procedures",
+      section_type: 'procedures',
       order_index: 2,
       estimated_time: 30,
-      key_points: this.getKeyPoints(module.domain, "procedures"),
+      key_points: this.getKeyPoints(module.domain, 'procedures'),
       procedures: this.getProceduresList(module.domain),
       troubleshooting: this.getTroubleshooting(module.domain),
       references: this.getReferences(module.domain),
@@ -220,15 +220,15 @@ class ProfessionalStudyMigrator {
     // Section 3: Exam Preparation
     sections.push({
       module_id: module.id,
-      title: "Exam Preparation & Key Concepts",
+      title: 'Exam Preparation & Key Concepts',
       content: this.getExamPrepContent(module.domain),
-      section_type: "exam_prep",
+      section_type: 'exam_prep',
       order_index: 3,
       estimated_time: 20,
-      key_points: this.getKeyPoints(module.domain, "exam_prep"),
+      key_points: this.getKeyPoints(module.domain, 'exam_prep'),
       procedures: [],
       troubleshooting: [],
-      references: ["TCO Exam Blueprint", "Practice Test Questions", "Certification Study Guide"],
+      references: ['TCO Exam Blueprint', 'Practice Test Questions', 'Certification Study Guide'],
     });
 
     return sections;
@@ -239,7 +239,7 @@ class ProfessionalStudyMigrator {
    */
   getOverviewContent(domain) {
     const content = {
-      "Asking Questions": `# Learning Objectives
+      'Asking Questions': `# Learning Objectives
 
 Upon completion of this module, you will be able to:
 
@@ -268,7 +268,7 @@ Natural Language Query → Sensor Selection → Real-time Data Intelligence
 - **Results**: Real-time intelligence gathered from targeted endpoint populations
 - **Saved Questions**: Standardized query templates for consistent operational procedures`,
 
-      "Refining Questions": `# Learning Objectives
+      'Refining Questions': `# Learning Objectives
 
 Upon completion of this module, you will be able to:
 
@@ -309,19 +309,19 @@ Enterprise Population → Computer Groups → Advanced Filters → Targeted Inte
    */
   getlearning_objectives(domain) {
     const objectives = {
-      "Asking Questions": [
+      'Asking Questions': [
         "Construct natural language questions using Tanium's query interface with proper syntax",
-        "Select appropriate sensors for specific data collection requirements",
-        "Create and manage saved questions for organizational standardization",
-        "Interpret query results accurately and validate data integrity",
-        "Troubleshoot common query issues and optimize performance",
+        'Select appropriate sensors for specific data collection requirements',
+        'Create and manage saved questions for organizational standardization',
+        'Interpret query results accurately and validate data integrity',
+        'Troubleshoot common query issues and optimize performance',
       ],
-      "Refining Questions": [
-        "Design and implement computer groups using dynamic and static methodologies",
-        "Construct advanced filtering logic with complex operators",
-        "Apply security principles including least privilege access",
-        "Optimize query performance through intelligent targeting",
-        "Validate targeting accuracy and troubleshoot scope issues",
+      'Refining Questions': [
+        'Design and implement computer groups using dynamic and static methodologies',
+        'Construct advanced filtering logic with complex operators',
+        'Apply security principles including least privilege access',
+        'Optimize query performance through intelligent targeting',
+        'Validate targeting accuracy and troubleshoot scope issues',
       ],
     };
 
@@ -335,21 +335,21 @@ Enterprise Population → Computer Groups → Advanced Filters → Targeted Inte
    * Verify the migration was successful
    */
   async verifyMigration() {
-    console.log("🔍 Verifying migration results...");
+    console.log('🔍 Verifying migration results...');
 
     const { data: modules, error: moduleError } = await this.supabase
-      .from("study_modules")
-      .select("*")
-      .order("domain");
+      .from('study_modules')
+      .select('*')
+      .order('domain');
 
     if (moduleError) {
       throw new Error(`Verification failed: ${moduleError.message}`);
     }
 
     const { data: sections, error: sectionError } = await this.supabase
-      .from("study_sections")
-      .select("*")
-      .order("module_id, order_index");
+      .from('study_sections')
+      .select('*')
+      .order('module_id, order_index');
 
     if (sectionError) {
       throw new Error(`Section verification failed: ${sectionError.message}`);
@@ -386,7 +386,7 @@ Enterprise Population → Computer Groups → Advanced Filters → Targeted Inte
     return [`Troubleshooting tip for ${domain}`];
   }
   getReferences(domain) {
-    return ["Official Documentation", "Best Practices Guide"];
+    return ['Official Documentation', 'Best Practices Guide'];
   }
   getExamPrep(domain, weight) {
     return { weight_percentage: weight, key_topics: [], practice_focus: `${domain} mastery` };
@@ -400,7 +400,7 @@ async function main() {
     await migrator.executeMigration();
     process.exit(0);
   } catch (error) {
-    console.error("Migration failed:", error.message);
+    console.error('Migration failed:', error.message);
     process.exit(1);
   }
 }

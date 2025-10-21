@@ -12,35 +12,35 @@
  * Usage: node scripts/validate-tco-questions.js
  */
 
-import fs from "fs";
-import path from "path";
-import { fileURLToPath } from "url";
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Import question data
-const sampleQuestionsPath = path.join(__dirname, "../src/data/sample-questions.ts");
-const examTypesPath = path.join(__dirname, "../src/types/exam.ts");
+const sampleQuestionsPath = path.join(__dirname, '../src/data/sample-questions.ts');
+const examTypesPath = path.join(__dirname, '../src/types/exam.ts');
 
 // Official TCO Exam Blueprint (TAN-1000)
 const OFFICIAL_BLUEPRINT = {
   // Domain weights from official Tanium certification guide
   domainWeights: {
-    "Asking Questions": 22, // 22% of exam
-    "Refining Questions & Targeting": 23, // 23% of exam
-    "Taking Action - Packages & Actions": 15, // 15% of exam
-    "Navigation & Basic Module Functions": 23, // 23% of exam
-    "Reporting & Data Export": 17, // 17% of exam
+    'Asking Questions': 22, // 22% of exam
+    'Refining Questions & Targeting': 23, // 23% of exam
+    'Taking Action - Packages & Actions': 15, // 15% of exam
+    'Navigation & Basic Module Functions': 23, // 23% of exam
+    'Reporting & Data Export': 17, // 17% of exam
   },
 
   // Target question counts for 200-question practice bank
   targetCounts: {
-    "Asking Questions": 44, // 22% of 200
-    "Refining Questions & Targeting": 46, // 23% of 200
-    "Taking Action - Packages & Actions": 30, // 15% of 200
-    "Navigation & Basic Module Functions": 46, // 23% of 200
-    "Reporting & Data Export": 34, // 17% of 200
+    'Asking Questions': 44, // 22% of 200
+    'Refining Questions & Targeting': 46, // 23% of 200
+    'Taking Action - Packages & Actions': 30, // 15% of 200
+    'Navigation & Basic Module Functions': 46, // 23% of 200
+    'Reporting & Data Export': 34, // 17% of 200
   },
 
   // Recommended difficulty distribution
@@ -52,11 +52,11 @@ const OFFICIAL_BLUEPRINT = {
 
   // Category distribution for comprehensive coverage
   categoryDistribution: {
-    "Platform Fundamentals": 0.25, // Core Tanium concepts
-    "Console Procedures": 0.3, // Step-by-step operations
+    'Platform Fundamentals': 0.25, // Core Tanium concepts
+    'Console Procedures': 0.3, // Step-by-step operations
     Troubleshooting: 0.2, // Problem-solving scenarios
-    "Practical Scenarios": 0.2, // Real-world applications
-    "Linear Chain Architecture": 0.05, // Tanium-specific architecture
+    'Practical Scenarios': 0.2, // Real-world applications
+    'Linear Chain Architecture': 0.05, // Tanium-specific architecture
   },
 };
 
@@ -67,16 +67,16 @@ const QUALITY_CRITERIA = {
   minChoices: 3, // Minimum answer choices
   maxChoices: 5, // Maximum answer choices
   requiredFields: [
-    "id",
-    "question",
-    "choices",
-    "correctAnswerId",
-    "domain",
-    "difficulty",
-    "category",
-    "explanation",
+    'id',
+    'question',
+    'choices',
+    'correctAnswerId',
+    'domain',
+    'difficulty',
+    'category',
+    'explanation',
   ],
-  recommendedFields: ["tags", "studyGuideRef", "officialRef", "consoleSteps"],
+  recommendedFields: ['tags', 'studyGuideRef', 'officialRef', 'consoleSteps'],
 };
 
 class TCOQuestionValidator {
@@ -97,7 +97,7 @@ class TCOQuestionValidator {
   async loadQuestions() {
     try {
       // Load the sample-questions.ts file and extract the questionBank
-      const content = fs.readFileSync(sampleQuestionsPath, "utf8");
+      const content = fs.readFileSync(sampleQuestionsPath, 'utf8');
 
       // Extract the questionBank array from the TypeScript file
       // This is a simplified approach - in production we'd use proper TS parsing
@@ -105,7 +105,7 @@ class TCOQuestionValidator {
         /export const questionBank: Question\[\] = \[([\s\S]*?)\]/
       );
       if (!questionBankMatch) {
-        throw new Error("Could not find questionBank export in sample-questions.ts");
+        throw new Error('Could not find questionBank export in sample-questions.ts');
       }
 
       // For now, we'll manually extract the question count from the metadata
@@ -114,18 +114,18 @@ class TCOQuestionValidator {
 
       // Extract domain distribution from metadata
       const domainMatches = content.match(/domainDistribution: \{([\s\S]*?)\}/);
-      let domainCounts = {};
+      const domainCounts = {};
 
       if (domainMatches) {
         const domains = [
-          "ASKING_QUESTIONS",
-          "REFINING_TARGETING",
-          "TAKING_ACTION",
-          "NAVIGATION_MODULES",
-          "REPORTING_EXPORT",
+          'ASKING_QUESTIONS',
+          'REFINING_TARGETING',
+          'TAKING_ACTION',
+          'NAVIGATION_MODULES',
+          'REPORTING_EXPORT',
         ];
         domains.forEach((domain) => {
-          const countMatch = content.match(new RegExp(`${domain}.*?\.length`));
+          const countMatch = content.match(new RegExp(`${domain}.*?.length`));
           if (countMatch) {
             // This is a simplified extraction - we'll estimate based on the structure
             domainCounts[domain] = Math.floor(totalQuestions / 5); // Rough estimate
@@ -139,7 +139,7 @@ class TCOQuestionValidator {
       console.log(`✅ Loaded ${this.questions.length} questions for analysis`);
       return true;
     } catch (error) {
-      console.error("❌ Error loading questions:", error.message);
+      console.error('❌ Error loading questions:', error.message);
       return false;
     }
   }
@@ -172,9 +172,9 @@ class TCOQuestionValidator {
 
   assignDifficulty(index, total) {
     const position = index / total;
-    if (position < 0.35) return "Beginner";
-    if (position < 0.85) return "Intermediate";
-    return "Advanced";
+    if (position < 0.35) return 'Beginner';
+    if (position < 0.85) return 'Intermediate';
+    return 'Advanced';
   }
 
   assignCategory(index) {
@@ -205,7 +205,7 @@ class TCOQuestionValidator {
         actualPercent: parseFloat(actualPercent),
         targetPercent,
         deviation: parseFloat(deviation),
-        status: parseFloat(deviation) <= 2 ? "PASS" : "FAIL",
+        status: parseFloat(deviation) <= 2 ? 'PASS' : 'FAIL',
         gap: targetCount - actualCount,
       };
     });
@@ -234,7 +234,7 @@ class TCOQuestionValidator {
         actualPercent: parseFloat(actualPercent),
         targetPercent: targetPercent * 100,
         deviation: parseFloat(deviation),
-        status: parseFloat(deviation) <= 5 ? "PASS" : "FAIL",
+        status: parseFloat(deviation) <= 5 ? 'PASS' : 'FAIL',
       };
     });
 
@@ -256,10 +256,10 @@ class TCOQuestionValidator {
       // Check for missing explanations
       if (!q.hasExplanation) {
         qualityIssues.push({
-          type: "missing_explanation",
+          type: 'missing_explanation',
           questionId: q.id,
-          severity: "high",
-          message: "Question missing explanation",
+          severity: 'high',
+          message: 'Question missing explanation',
         });
         qualityStats.missingExplanations++;
       }
@@ -267,21 +267,21 @@ class TCOQuestionValidator {
       // Check question length
       if (q.questionLength > QUALITY_CRITERIA.maxQuestionLength) {
         qualityIssues.push({
-          type: "long_question",
+          type: 'long_question',
           questionId: q.id,
-          severity: "medium",
+          severity: 'medium',
           message: `Question too long (${q.questionLength} chars)`,
         });
         qualityStats.longQuestions++;
       }
 
       // Check for console procedures
-      if (!q.hasConsoleSteps && q.category === "Console Procedures") {
+      if (!q.hasConsoleSteps && q.category === 'Console Procedures') {
         qualityIssues.push({
-          type: "missing_console_steps",
+          type: 'missing_console_steps',
           questionId: q.id,
-          severity: "medium",
-          message: "Console Procedures question should have step-by-step instructions",
+          severity: 'medium',
+          message: 'Console Procedures question should have step-by-step instructions',
         });
         qualityStats.missingConsoleSteps++;
       }
@@ -305,15 +305,15 @@ class TCOQuestionValidator {
     Object.entries(this.validationResults.domainAnalysis).forEach(([domain, analysis]) => {
       if (analysis.gap > 0) {
         gaps.push({
-          type: "domain_shortage",
+          type: 'domain_shortage',
           domain,
           shortage: analysis.gap,
-          priority: analysis.gap > 10 ? "high" : "medium",
+          priority: analysis.gap > 10 ? 'high' : 'medium',
         });
 
         recommendations.push({
-          type: "content_creation",
-          priority: analysis.gap > 10 ? "high" : "medium",
+          type: 'content_creation',
+          priority: analysis.gap > 10 ? 'high' : 'medium',
           action: `Create ${analysis.gap} additional questions for ${domain}`,
           impact: `Align with official blueprint requirement of ${analysis.targetPercent}%`,
         });
@@ -322,19 +322,19 @@ class TCOQuestionValidator {
 
     // Analyze difficulty gaps
     Object.entries(this.validationResults.difficultyAnalysis).forEach(([level, analysis]) => {
-      if (analysis.status === "FAIL") {
+      if (analysis.status === 'FAIL') {
         const shortage = analysis.targetCount - analysis.actualCount;
         if (shortage > 0) {
           gaps.push({
-            type: "difficulty_shortage",
+            type: 'difficulty_shortage',
             level,
             shortage,
-            priority: "medium",
+            priority: 'medium',
           });
 
           recommendations.push({
-            type: "difficulty_adjustment",
-            priority: "medium",
+            type: 'difficulty_adjustment',
+            priority: 'medium',
             action: `Create ${shortage} additional ${level} level questions`,
             impact: `Balance difficulty distribution to match learning progression`,
           });
@@ -345,19 +345,19 @@ class TCOQuestionValidator {
     // Quality improvement recommendations
     if (this.validationResults.qualityStats.missingExplanations > 0) {
       recommendations.push({
-        type: "quality_improvement",
-        priority: "high",
+        type: 'quality_improvement',
+        priority: 'high',
         action: `Add explanations to ${this.validationResults.qualityStats.missingExplanations} questions`,
-        impact: "Improve learning outcomes and feedback quality",
+        impact: 'Improve learning outcomes and feedback quality',
       });
     }
 
     if (this.validationResults.qualityStats.missingConsoleSteps > 0) {
       recommendations.push({
-        type: "console_procedures",
-        priority: "medium",
+        type: 'console_procedures',
+        priority: 'medium',
         action: `Add step-by-step console instructions to ${this.validationResults.qualityStats.missingConsoleSteps} procedural questions`,
-        impact: "Provide practical hands-on learning support",
+        impact: 'Provide practical hands-on learning support',
       });
     }
 
@@ -375,7 +375,7 @@ class TCOQuestionValidator {
         completionPercentage: ((this.questions.length / 200) * 100).toFixed(1),
         overallCompliance: this.calculateOverallCompliance(),
         criticalIssues: this.validationResults.qualityIssues.filter(
-          (issue) => issue.severity === "high"
+          (issue) => issue.severity === 'high'
         ).length,
       },
       domainAnalysis: this.validationResults.domainAnalysis,
@@ -396,19 +396,19 @@ class TCOQuestionValidator {
     // Domain compliance
     Object.values(this.validationResults.domainAnalysis).forEach((analysis) => {
       totalChecks++;
-      if (analysis.status === "PASS") complianceScore++;
+      if (analysis.status === 'PASS') complianceScore++;
     });
 
     // Difficulty compliance
     Object.values(this.validationResults.difficultyAnalysis).forEach((analysis) => {
       totalChecks++;
-      if (analysis.status === "PASS") complianceScore++;
+      if (analysis.status === 'PASS') complianceScore++;
     });
 
     // Quality compliance
     const qualityScore =
       1 -
-      this.validationResults.qualityIssues.filter((issue) => issue.severity === "high").length /
+      this.validationResults.qualityIssues.filter((issue) => issue.severity === 'high').length /
         this.questions.length;
     totalChecks++;
     if (qualityScore > 0.9) complianceScore++;
@@ -419,13 +419,13 @@ class TCOQuestionValidator {
   printReport() {
     const report = this.generateComprehensiveReport();
 
-    console.log("\n" + "=".repeat(80));
-    console.log("🎯 TCO QUESTION BANK VALIDATION REPORT");
-    console.log("=".repeat(80));
+    console.log('\n' + '='.repeat(80));
+    console.log('🎯 TCO QUESTION BANK VALIDATION REPORT');
+    console.log('='.repeat(80));
 
     // Summary
-    console.log("\n📊 SUMMARY");
-    console.log("-".repeat(40));
+    console.log('\n📊 SUMMARY');
+    console.log('-'.repeat(40));
     console.log(
       `Total Questions: ${report.summary.totalQuestions}/200 (${report.summary.completionPercentage}%)`
     );
@@ -433,22 +433,22 @@ class TCOQuestionValidator {
     console.log(`Critical Issues: ${report.summary.criticalIssues}`);
 
     // Domain Analysis
-    console.log("\n🎓 DOMAIN DISTRIBUTION ANALYSIS");
-    console.log("-".repeat(40));
+    console.log('\n🎓 DOMAIN DISTRIBUTION ANALYSIS');
+    console.log('-'.repeat(40));
     Object.entries(report.domainAnalysis).forEach(([domain, analysis]) => {
-      const statusIcon = analysis.status === "PASS" ? "✅" : "❌";
+      const statusIcon = analysis.status === 'PASS' ? '✅' : '❌';
       console.log(`${statusIcon} ${domain}`);
       console.log(`   Actual: ${analysis.actualCount} questions (${analysis.actualPercent}%)`);
       console.log(`   Target: ${analysis.targetCount} questions (${analysis.targetPercent}%)`);
-      console.log(`   Gap: ${analysis.gap > 0 ? "+" + analysis.gap : analysis.gap} questions`);
+      console.log(`   Gap: ${analysis.gap > 0 ? '+' + analysis.gap : analysis.gap} questions`);
       console.log();
     });
 
     // Difficulty Analysis
-    console.log("\n📈 DIFFICULTY DISTRIBUTION ANALYSIS");
-    console.log("-".repeat(40));
+    console.log('\n📈 DIFFICULTY DISTRIBUTION ANALYSIS');
+    console.log('-'.repeat(40));
     Object.entries(report.difficultyAnalysis).forEach(([level, analysis]) => {
-      const statusIcon = analysis.status === "PASS" ? "✅" : "❌";
+      const statusIcon = analysis.status === 'PASS' ? '✅' : '❌';
       console.log(
         `${statusIcon} ${level}: ${analysis.actualCount}/${analysis.targetCount} (${analysis.actualPercent}%)`
       );
@@ -456,8 +456,8 @@ class TCOQuestionValidator {
 
     // Quality Issues
     if (this.validationResults.qualityIssues.length > 0) {
-      console.log("\n⚠️  QUALITY ISSUES FOUND");
-      console.log("-".repeat(40));
+      console.log('\n⚠️  QUALITY ISSUES FOUND');
+      console.log('-'.repeat(40));
 
       const issuesByType = {};
       this.validationResults.qualityIssues.forEach((issue) => {
@@ -465,15 +465,15 @@ class TCOQuestionValidator {
       });
 
       Object.entries(issuesByType).forEach(([type, count]) => {
-        console.log(`${type.replace(/_/g, " ")}: ${count} questions`);
+        console.log(`${type.replace(/_/g, ' ')}: ${count} questions`);
       });
     }
 
     // Recommendations
-    console.log("\n💡 RECOMMENDATIONS");
-    console.log("-".repeat(40));
+    console.log('\n💡 RECOMMENDATIONS');
+    console.log('-'.repeat(40));
     report.recommendations.forEach((rec, index) => {
-      const priorityIcon = rec.priority === "high" ? "🔴" : rec.priority === "medium" ? "🟡" : "🟢";
+      const priorityIcon = rec.priority === 'high' ? '🔴' : rec.priority === 'medium' ? '🟡' : '🟢';
       console.log(`${index + 1}. ${priorityIcon} ${rec.action}`);
       console.log(`   Impact: ${rec.impact}`);
       console.log();
@@ -483,11 +483,11 @@ class TCOQuestionValidator {
   }
 
   async run() {
-    console.log("🔍 Starting TCO Question Bank Validation...\n");
+    console.log('🔍 Starting TCO Question Bank Validation...\n');
 
     const loaded = await this.loadQuestions();
     if (!loaded) {
-      console.error("❌ Failed to load questions. Exiting.");
+      console.error('❌ Failed to load questions. Exiting.');
       return false;
     }
 
@@ -501,7 +501,7 @@ class TCOQuestionValidator {
     const report = this.printReport();
 
     // Save report to file
-    const reportPath = path.join(__dirname, "../docs/question-validation-report.json");
+    const reportPath = path.join(__dirname, '../docs/question-validation-report.json');
     fs.writeFileSync(reportPath, JSON.stringify(report, null, 2));
     console.log(`\n📝 Detailed report saved to: ${reportPath}`);
 

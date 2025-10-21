@@ -5,18 +5,18 @@
  * Automatically initializes Claude with full agent awareness and selection capabilities
  */
 
-const fs = require("fs");
-const path = require("path");
+const fs = require('fs');
+const path = require('path');
 
 class SessionStartupProtocol {
   constructor() {
-    this.configPath = path.join(__dirname, "agent-routing-config.json");
+    this.configPath = path.join(__dirname, 'agent-routing-config.json');
     this.agentConfig = null;
     this.availableAgents = [];
   }
 
   async initialize() {
-    console.log("🚀 Initializing Claude Session with Auto-Agent Protocol...");
+    console.log('🚀 Initializing Claude Session with Auto-Agent Protocol...');
 
     try {
       // 1. Load agent routing configuration
@@ -34,25 +34,25 @@ class SessionStartupProtocol {
       // 5. Activate hive-mind intelligence
       await this.activateHiveMind();
 
-      console.log("✅ Session startup complete! Claude is now agent-aware.");
+      console.log('✅ Session startup complete! Claude is now agent-aware.');
       console.log(`📊 Available Agents: ${this.availableAgents.length}`);
-      console.log("🧠 Auto-selection enabled for all tasks");
+      console.log('🧠 Auto-selection enabled for all tasks');
 
       return true;
     } catch (error) {
-      console.error("❌ Session startup failed:", error.message);
+      console.error('❌ Session startup failed:', error.message);
       return false;
     }
   }
 
   async loadAgentConfig() {
-    console.log("📋 Loading agent routing configuration...");
+    console.log('📋 Loading agent routing configuration...');
 
     if (!fs.existsSync(this.configPath)) {
       throw new Error(`Agent config not found: ${this.configPath}`);
     }
 
-    const configData = fs.readFileSync(this.configPath, "utf8");
+    const configData = fs.readFileSync(this.configPath, 'utf8');
     this.agentConfig = JSON.parse(configData);
 
     console.log(
@@ -61,100 +61,100 @@ class SessionStartupProtocol {
   }
 
   async initializeAgentEcosystem() {
-    console.log("🤖 Initializing agent ecosystem...");
+    console.log('🤖 Initializing agent ecosystem...');
 
     // Core Development Agents (30+)
     const coreAgents = [
-      "coder",
-      "reviewer",
-      "tester",
-      "planner",
-      "researcher",
-      "api-designer",
-      "backend-developer",
-      "frontend-developer",
-      "fullstack-developer",
-      "mobile-developer",
-      "electron-pro",
-      "websocket-engineer",
-      "graphql-architect",
-      "microservices-architect",
+      'coder',
+      'reviewer',
+      'tester',
+      'planner',
+      'researcher',
+      'api-designer',
+      'backend-developer',
+      'frontend-developer',
+      'fullstack-developer',
+      'mobile-developer',
+      'electron-pro',
+      'websocket-engineer',
+      'graphql-architect',
+      'microservices-architect',
     ];
 
     // Language & Framework Specialists (22+)
     const languageAgents = [
-      "javascript-pro",
-      "typescript-pro",
-      "python-pro",
-      "django-developer",
-      "java-architect",
-      "spring-boot-engineer",
-      "golang-pro",
-      "rust-engineer",
-      "csharp-developer",
-      "dotnet-core-expert",
-      "php-pro",
-      "laravel-specialist",
-      "ruby-pro",
-      "rails-expert",
-      "cpp-pro",
-      "swift-expert",
-      "kotlin-specialist",
-      "react-specialist",
-      "vue-expert",
-      "angular-architect",
-      "nextjs-developer",
-      "flutter-expert",
+      'javascript-pro',
+      'typescript-pro',
+      'python-pro',
+      'django-developer',
+      'java-architect',
+      'spring-boot-engineer',
+      'golang-pro',
+      'rust-engineer',
+      'csharp-developer',
+      'dotnet-core-expert',
+      'php-pro',
+      'laravel-specialist',
+      'ruby-pro',
+      'rails-expert',
+      'cpp-pro',
+      'swift-expert',
+      'kotlin-specialist',
+      'react-specialist',
+      'vue-expert',
+      'angular-architect',
+      'nextjs-developer',
+      'flutter-expert',
     ];
 
     // TCO-Specific Specialists
     const tcoAgents = [
-      "tco-content-specialist",
-      "tco-validation-expert",
-      "tco-ui-architect",
-      "tco-analytics-coordinator",
-      "tco-deployment-manager",
-      "tco-research-analyst",
+      'tco-content-specialist',
+      'tco-validation-expert',
+      'tco-ui-architect',
+      'tco-analytics-coordinator',
+      'tco-deployment-manager',
+      'tco-research-analyst',
     ];
 
     // Coordination Agents
     const coordinationAgents = [
-      "hierarchical-coordinator",
-      "mesh-coordinator",
-      "adaptive-coordinator",
-      "collective-intelligence-coordinator",
-      "swarm-memory-manager",
-      "multi-agent-coordinator",
-      "workflow-orchestrator",
-      "task-distributor",
+      'hierarchical-coordinator',
+      'mesh-coordinator',
+      'adaptive-coordinator',
+      'collective-intelligence-coordinator',
+      'swarm-memory-manager',
+      'multi-agent-coordinator',
+      'workflow-orchestrator',
+      'task-distributor',
     ];
 
     // Quality & Testing Agents
     const qualityAgents = [
-      "qa-expert",
-      "test-automator",
-      "security-auditor",
-      "penetration-tester",
-      "code-reviewer",
-      "debugger",
-      "error-detective",
-      "chaos-engineer",
-      "compliance-auditor",
-      "accessibility-tester",
-      "architect-reviewer",
+      'qa-expert',
+      'test-automator',
+      'security-auditor',
+      'penetration-tester',
+      'code-reviewer',
+      'debugger',
+      'error-detective',
+      'chaos-engineer',
+      'compliance-auditor',
+      'accessibility-tester',
+      'architect-reviewer',
     ];
 
     // Infrastructure & DevOps
     const infraAgents = [
-      "cloud-architect",
-      "kubernetes-specialist",
-      "terraform-engineer",
-      "devops-engineer",
-      "sre-engineer",
-      "platform-engineer",
-      "network-engineer",
-      "deployment-engineer",
-      "incident-responder",
+      'cloud-architect',
+      'kubernetes-specialist',
+      'terraform-engineer',
+      'devops-engineer',
+      'sre-engineer',
+      'platform-engineer',
+      'network-engineer',
+      'deployment-engineer',
+      'incident-responder',
     ];
 
     // Combine all agents
@@ -171,7 +171,7 @@ class SessionStartupProtocol {
   }
 
   async setupIntelligentRouting() {
-    console.log("🎯 Setting up intelligent task routing...");
+    console.log('🎯 Setting up intelligent task routing...');
 
     const routingRules = {
       taskAnalysisEnabled: true,
@@ -194,14 +194,14 @@ class SessionStartupProtocol {
       };
     }
 
-    console.log("✅ Intelligent routing configured");
+    console.log('✅ Intelligent routing configured');
     console.log(`📊 Decision matrix: ${Object.keys(decisionMatrix).length} task types`);
 
     return decisionMatrix;
   }
 
   async enableCrossSessionMemory() {
-    console.log("💾 Enabling cross-session memory...");
+    console.log('💾 Enabling cross-session memory...');
 
     const memoryConfig = {
       persistAgentPerformance: true,
@@ -211,12 +211,12 @@ class SessionStartupProtocol {
       maintainAgentContext: true,
     };
 
-    console.log("✅ Cross-session memory enabled");
+    console.log('✅ Cross-session memory enabled');
     return memoryConfig;
   }
 
   async activateHiveMind() {
-    console.log("🧠 Activating hive-mind intelligence...");
+    console.log('🧠 Activating hive-mind intelligence...');
 
     const hiveMindConfig = {
       collectiveDecisionMaking: true,
@@ -226,7 +226,7 @@ class SessionStartupProtocol {
       distributedProblemSolving: true,
     };
 
-    console.log("✅ Hive-mind intelligence activated");
+    console.log('✅ Hive-mind intelligence activated');
     return hiveMindConfig;
   }
 
@@ -239,14 +239,14 @@ class SessionStartupProtocol {
   }
 
   getTaskRecommendations(userInput) {
-    console.log("🔍 Analyzing task for agent recommendations...");
+    console.log('🔍 Analyzing task for agent recommendations...');
 
     const recommendations = {
-      taskType: "unknown",
+      taskType: 'unknown',
       confidence: 0,
       recommendedAgents: [],
-      coordinationStrategy: "mesh-coordinator",
-      complexity: "moderate",
+      coordinationStrategy: 'mesh-coordinator',
+      complexity: 'moderate',
     };
 
     // Analyze input for keywords

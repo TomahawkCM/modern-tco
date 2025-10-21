@@ -1,7 +1,7 @@
 // Flashcard types for Active Recall & Spaced Repetition System
 // Implements SM-2 algorithm with multi-format card support
 
-import type { SRCardState, SRRating } from "@/lib/sr";
+import type { SRCardState, SRRating } from '@/lib/sr';
 
 export type FlashcardType = 'basic' | 'cloze' | 'concept' | 'diagram' | 'code';
 export type FlashcardSource = 'manual' | 'auto_generated' | 'quiz_failure' | 'video_concept';
@@ -150,7 +150,7 @@ export function toSRCardState(flashcard: Flashcard): SRCardState {
   };
 }
 
-export function fromSRCardState(flashcard: Flashcard, state: SRCardState): Partial<Flashcard> {
+export function fromSRCardState(_flashcard: Flashcard, state: SRCardState): Partial<Flashcard> {
   return {
     srs_due: new Date(state.due).toISOString(),
     srs_interval: state.interval,

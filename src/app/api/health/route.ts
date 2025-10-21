@@ -1,5 +1,4 @@
-import type { NextRequest } from 'next/server';
-import { withErrorTracking, apiSuccess } from '@/lib/error-tracking';
+import { apiSuccess, withErrorTracking } from '@/lib/error-tracking';
 
 export const GET = withErrorTracking(
   async () => {
@@ -7,9 +6,8 @@ export const GET = withErrorTracking(
     return apiSuccess({
       status: 'healthy',
       timestamp: new Date().toISOString(),
-      environment: process.env.NODE_ENV ?? 'development'
+      environment: (process.env.NODE_ENV as string | undefined) ?? 'development',
     });
   },
   { endpoint: '/api/health' }
 );
-

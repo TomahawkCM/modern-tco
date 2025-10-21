@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { buildExamConfig, getExamDefaults } from '@/lib/exam-simulator';
 
 describe('exam-simulator core', () => {
@@ -25,4 +25,3 @@ describe('exam-simulator core', () => {
     expect(cfg.showFeedback).toBe(false);
   });
 });
-

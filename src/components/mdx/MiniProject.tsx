@@ -1,13 +1,20 @@
 'use client';
 
-import React, { useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
+import { CheckCircle2, ChevronRight, FileText, Lightbulb, Target, Trophy } from 'lucide-react';
+import { useState } from 'react';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { CheckCircle2, FileText, Target, Lightbulb, ChevronRight, Trophy } from 'lucide-react';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Button } from '@/components/ui/button';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Progress } from '@/components/ui/progress';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 interface ProjectTask {
   id: string;
@@ -34,7 +41,7 @@ export default function MiniProject({
   difficulty,
   objectives,
   tasks,
-  successCriteria
+  successCriteria,
 }: MiniProjectProps) {
   const [completedTasks, setCompletedTasks] = useState<Set<string>>(new Set());
   const [showHints, setShowHints] = useState<Set<string>>(new Set());
@@ -56,7 +63,7 @@ export default function MiniProject({
       const progress = JSON.parse(localStorage.getItem('miniProjectProgress') || '{}');
       progress[title] = {
         completed: true,
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
       };
       localStorage.setItem('miniProjectProgress', JSON.stringify(progress));
     } else {
@@ -77,10 +84,13 @@ export default function MiniProject({
   const progressPercentage = (completedTasks.size / tasks.length) * 100;
 
   const getDifficultyColor = () => {
-    switch(difficulty) {
-      case 'beginner': return 'text-[#22c55e] bg-green-50';
-      case 'intermediate': return 'text-yellow-600 bg-yellow-50';
-      case 'advanced': return 'text-red-600 bg-red-50';
+    switch (difficulty) {
+      case 'beginner':
+        return 'text-[#22c55e] bg-green-50';
+      case 'intermediate':
+        return 'text-yellow-600 bg-yellow-50';
+      case 'advanced':
+        return 'text-red-600 bg-red-50';
     }
   };
 

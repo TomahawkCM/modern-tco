@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { useEffect } from 'react';
 import { initClientMonitoring } from '@/lib/monitoring';
@@ -11,8 +11,8 @@ function loadSentry(dsn: string, environment?: string) {
   script.crossOrigin = 'anonymous';
   script.onload = () => {
     try {
-      const {Sentry} = (window as any);
-      if (Sentry && !((window as any).__sentry_init)) {
+      const { Sentry } = window as any;
+      if (Sentry && !(window as any).__sentry_init) {
         Sentry.init({
           dsn,
           tracesSampleRate: 0.05,
@@ -36,7 +36,8 @@ export function MonitoringClient() {
     if (dsn) {
       const idle = (window as any).requestIdleCallback as undefined | ((cb: any) => void);
       const start = () => loadSentry(dsn, (process.env.NEXT_PUBLIC_ENV ?? '').toString());
-      if (idle) idle(start); else setTimeout(start, 300);
+      if (idle) idle(start);
+      else setTimeout(start, 300);
     }
   }, []);
   return null;

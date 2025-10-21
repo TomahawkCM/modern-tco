@@ -35,7 +35,7 @@
       "options": [
         "It requires more server hardware for better redundancy",
         "It maintains constant network load regardless of endpoint count",
-        "It stores more historical data for trend analysis", 
+        "It stores more historical data for trend analysis",
         "It uses encrypted database connections for security"
       ],
       "correctAnswer": 1,
@@ -49,29 +49,19 @@
       "module": "Foundation",
       "domain": "Platform Terminology",
       "question": "Which component collects specific types of information from endpoints in real-time?",
-      "options": [
-        "Actions",
-        "Packages",
-        "Sensors",
-        "Modules"
-      ],
+      "options": ["Actions", "Packages", "Sensors", "Modules"],
       "correctAnswer": 2,
-      "difficulty": "beginner", 
+      "difficulty": "beginner",
       "explanation": "Sensors are components that collect specific types of information from endpoints, such as Computer Name, Running Processes, or Disk Space.",
       "tags": ["sensors", "terminology", "data-collection"],
       "weight": 1.0
     },
     {
       "id": "foundation-003",
-      "module": "Foundation", 
+      "module": "Foundation",
       "domain": "Communication Model",
       "question": "In a Tanium deployment with 100,000 endpoints, what percentage of network bandwidth does Tanium typically consume during peak query activity?",
-      "options": [
-        "10-15%",
-        "5-10%",
-        "1-5%",
-        "Less than 0.1%"
-      ],
+      "options": ["10-15%", "5-10%", "1-5%", "Less than 0.1%"],
       "correctAnswer": 3,
       "difficulty": "intermediate",
       "explanation": "Tanium's linear chain architecture consumes less than 0.1% of network bandwidth even during peak activity, regardless of scale.",
@@ -81,14 +71,9 @@
     {
       "id": "foundation-004",
       "module": "Foundation",
-      "domain": "Console Navigation", 
+      "domain": "Console Navigation",
       "question": "What is the primary module used for real-time endpoint querying and action deployment?",
-      "options": [
-        "Trends",
-        "Connect", 
-        "Interact",
-        "Patch"
-      ],
+      "options": ["Trends", "Connect", "Interact", "Patch"],
       "correctAnswer": 2,
       "difficulty": "beginner",
       "explanation": "The Interact module is Tanium's core module for real-time endpoint querying and action deployment.",
@@ -134,12 +119,7 @@
       "module": "Foundation",
       "domain": "Scalability",
       "question": "What is the typical response time for Tanium queries regardless of whether you have 1,000 or 1,000,000 endpoints?",
-      "options": [
-        "5 minutes",
-        "1 minute", 
-        "15 seconds",
-        "30 seconds"
-      ],
+      "options": ["5 minutes", "1 minute", "15 seconds", "30 seconds"],
       "correctAnswer": 2,
       "difficulty": "beginner",
       "explanation": "Tanium maintains a consistent 15-second response time regardless of scale due to its linear chain architecture.",
@@ -185,12 +165,7 @@
       "module": "Foundation",
       "domain": "Performance Benefits",
       "question": "Compared to traditional endpoint management tools, what infrastructure cost reduction do organizations typically see with Tanium?",
-      "options": [
-        "20-30%",
-        "40-50%", 
-        "60-80%",
-        "90-95%"
-      ],
+      "options": ["20-30%", "40-50%", "60-80%", "90-95%"],
       "correctAnswer": 2,
       "difficulty": "intermediate",
       "explanation": "Organizations typically see 60-80% reduction in server and storage costs due to Tanium's efficient architecture that eliminates the need for extensive database infrastructure.",
@@ -219,12 +194,7 @@
       "module": "Foundation",
       "domain": "Console Navigation",
       "question": "Which module is primarily used for historical data analysis and trending?",
-      "options": [
-        "Interact",
-        "Trends",
-        "Connect", 
-        "Deploy"
-      ],
+      "options": ["Interact", "Trends", "Connect", "Deploy"],
       "correctAnswer": 1,
       "difficulty": "beginner",
       "explanation": "The Trends module is designed for historical data analysis, trending, and creating reports based on data collected over time.",
@@ -270,12 +240,7 @@
       "module": "Foundation",
       "domain": "Business Impact",
       "question": "What is the typical improvement in security incident response times for organizations using Tanium versus traditional tools?",
-      "options": [
-        "2x faster",
-        "5x faster",
-        "10x faster", 
-        "No significant improvement"
-      ],
+      "options": ["2x faster", "5x faster", "10x faster", "No significant improvement"],
       "correctAnswer": 2,
       "difficulty": "intermediate",
       "explanation": "Organizations using Tanium report approximately 10x faster incident response times due to real-time data collection and immediate action deployment capabilities.",
@@ -323,7 +288,7 @@
       "question": "What type of sensors would you use to gather 'Running Processes' information from endpoints?",
       "options": [
         "System Information Sensors",
-        "Security-Related Sensors", 
+        "Security-Related Sensors",
         "Performance and Hardware Sensors",
         "Network Configuration Sensors"
       ],
@@ -372,12 +337,7 @@
       "module": "Foundation",
       "domain": "Module Ecosystem",
       "question": "Which Tanium module is specifically designed for integration with SIEM and third-party security tools?",
-      "options": [
-        "Interact",
-        "Patch",
-        "Connect",
-        "Asset"
-      ],
+      "options": ["Interact", "Patch", "Connect", "Asset"],
       "correctAnswer": 2,
       "difficulty": "beginner",
       "explanation": "The Connect module provides integration capabilities with SIEM, ticketing, and other external systems through data feeds and API integration.",
@@ -389,12 +349,7 @@
       "module": "Foundation",
       "domain": "Performance Metrics",
       "question": "In enterprise environments, what is the typical reduction in administrative overhead when implementing Tanium versus traditional tools?",
-      "options": [
-        "20-30%",
-        "35-45%",
-        "50-70%",
-        "80-90%"
-      ],
+      "options": ["20-30%", "35-45%", "50-70%", "80-90%"],
       "correctAnswer": 2,
       "difficulty": "intermediate",
       "explanation": "Organizations typically see 50-70% reduction in administrative overhead due to Tanium's automation capabilities and simplified architecture.",
@@ -440,12 +395,7 @@
       "module": "Foundation",
       "domain": "User Roles",
       "question": "Which role would be appropriate for a user who needs to create and modify questions and sensors but shouldn't deploy actions?",
-      "options": [
-        "Tanium Administrator",
-        "Question Author",
-        "Action Author",
-        "Read-Only Operator"
-      ],
+      "options": ["Tanium Administrator", "Question Author", "Action Author", "Read-Only Operator"],
       "correctAnswer": 1,
       "difficulty": "intermediate",
       "explanation": "Question Author role provides permissions to create and modify questions and sensors without the ability to deploy potentially disruptive actions.",
@@ -525,12 +475,7 @@
       "module": "Foundation",
       "domain": "Success Metrics",
       "question": "What is the typical improvement in IT team productivity for organizations implementing Tanium?",
-      "options": [
-        "25% increase",
-        "50% increase",
-        "2x increase",
-        "3x increase"
-      ],
+      "options": ["25% increase", "50% increase", "2x increase", "3x increase"],
       "correctAnswer": 3,
       "difficulty": "intermediate",
       "explanation": "Organizations implementing Tanium typically see a 3x increase in IT team productivity due to automation, real-time capabilities, and reduced administrative overhead.",
@@ -559,12 +504,7 @@
       "module": "Module 1",
       "domain": "Asking Questions",
       "question": "Which component interprets natural-language questions into sensor queries?",
-      "options": [
-        "Package Service",
-        "Question Parser",
-        "Action Broker",
-        "Reporting Engine"
-      ],
+      "options": ["Package Service", "Question Parser", "Action Broker", "Reporting Engine"],
       "correctAnswer": 1,
       "difficulty": "intermediate",
       "explanation": "The Question Parser maps plain language questions to appropriate sensors and parameters, enabling natural language querying.",
@@ -591,7 +531,7 @@
     {
       "id": "asking-questions-004",
       "module": "Module 1",
-      "domain": "Asking Questions", 
+      "domain": "Asking Questions",
       "question": "How can you identify if a sensor returns current endpoint state versus historical data?",
       "options": [
         "Check the sensor's creation date",
@@ -695,12 +635,7 @@
       "module": "Module 1",
       "domain": "Asking Questions",
       "question": "What is the maximum time you should typically expect to wait for results from a well-constructed Tanium question?",
-      "options": [
-        "5-10 minutes",
-        "30 seconds to 2 minutes",
-        "15-20 seconds",
-        "Several hours"
-      ],
+      "options": ["5-10 minutes", "30 seconds to 2 minutes", "15-20 seconds", "Several hours"],
       "correctAnswer": 2,
       "difficulty": "beginner",
       "explanation": "Well-constructed Tanium questions typically return results within 15-20 seconds regardless of the number of endpoints being queried.",
@@ -714,7 +649,7 @@
       "question": "Which sensor category would 'Disk Space' belong to?",
       "options": [
         "Security-Related Sensors",
-        "System Information Sensors", 
+        "System Information Sensors",
         "Performance and Hardware Sensors",
         "Network Configuration Sensors"
       ],
@@ -833,7 +768,7 @@
       "question": "Which sensors would be most useful for conducting a software inventory across your environment?",
       "options": [
         "Network Interface and Open Ports",
-        "Installed Applications and Running Processes", 
+        "Installed Applications and Running Processes",
         "User Rights and Last Logged In User",
         "CPU Usage and Memory Usage"
       ],
@@ -862,12 +797,12 @@
     },
     {
       "id": "asking-questions-020",
-      "module": "Module 1", 
+      "module": "Module 1",
       "domain": "Asking Questions",
       "question": "Which question would be most effective for identifying endpoints that might have performance issues?",
       "options": [
         "'Get Computer Name from all machines'",
-        "'Get CPU Usage and Memory Usage from all machines where CPU Usage is greater than 90'", 
+        "'Get CPU Usage and Memory Usage from all machines where CPU Usage is greater than 90'",
         "'Get Operating System from all machines'",
         "'Get Last Logged In User from all machines'"
       ],
@@ -880,7 +815,7 @@
     {
       "id": "asking-questions-021",
       "module": "Module 1",
-      "domain": "Asking Questions", 
+      "domain": "Asking Questions",
       "question": "What is the advantage of Tanium's real-time questioning capability over traditional inventory tools?",
       "options": [
         "Lower software licensing costs",
@@ -936,7 +871,7 @@
       "options": [
         "Disk Space and Memory Usage",
         "Running Processes and Installed Applications",
-        "Computer Name and IP Address", 
+        "Computer Name and IP Address",
         "User Rights and Last Logged In User"
       ],
       "correctAnswer": 1,
@@ -984,12 +919,7 @@
       "module": "Module 2",
       "domain": "Refining Questions",
       "question": "Which filter operator would you use to find endpoints with computer names that start with 'WS-'?",
-      "options": [
-        "contains",
-        "equals",
-        "starts with",
-        "matches"
-      ],
+      "options": ["contains", "equals", "starts with", "matches"],
       "correctAnswer": 2,
       "difficulty": "beginner",
       "explanation": "The 'starts with' operator matches values that begin with the specified text, perfect for naming convention patterns like 'WS-'.",
@@ -1054,7 +984,7 @@
       "question": "What type of Computer Group would be most appropriate for organizing endpoints by department?",
       "options": [
         "Dynamic group based on computer naming conventions",
-        "Static group with manually assigned members", 
+        "Static group with manually assigned members",
         "Automatic group based on IP address ranges",
         "Temporary group for specific projects"
       ],
@@ -1066,7 +996,7 @@
     },
     {
       "id": "refining-questions-007",
-      "module": "Module 2", 
+      "module": "Module 2",
       "domain": "Refining Questions",
       "question": "Which filter condition would help identify endpoints that haven't been updated recently?",
       "options": [
@@ -1137,12 +1067,7 @@
       "module": "Module 2",
       "domain": "Refining Questions",
       "question": "Which operator would you use to find endpoints where disk space is below a critical threshold?",
-      "options": [
-        "equals",
-        "contains",
-        "is less than",
-        "starts with"
-      ],
+      "options": ["equals", "contains", "is less than", "starts with"],
       "correctAnswer": 2,
       "difficulty": "beginner",
       "explanation": "The 'is less than' operator compares numerical values, making it ideal for identifying endpoints below critical thresholds like disk space.",
@@ -1405,7 +1330,7 @@
       "weight": 1.0
     },
     {
-      "id": "taking-action-002", 
+      "id": "taking-action-002",
       "module": "Module 3",
       "domain": "Taking Action",
       "question": "What should you always do before deploying an action to production endpoints?",
@@ -1746,7 +1671,7 @@
     },
     {
       "id": "navigation-002",
-      "module": "Module 4", 
+      "module": "Module 4",
       "domain": "Navigation",
       "question": "How do you switch between different Tanium modules?",
       "options": [
@@ -1783,12 +1708,7 @@
       "module": "Module 4",
       "domain": "Navigation",
       "question": "Which module would you access for real-time endpoint querying and action deployment?",
-      "options": [
-        "Trends",
-        "Connect",
-        "Interact",
-        "Asset"
-      ],
+      "options": ["Trends", "Connect", "Interact", "Asset"],
       "correctAnswer": 2,
       "difficulty": "beginner",
       "explanation": "The Interact module is the primary interface for real-time endpoint querying and action deployment activities.",
@@ -2174,12 +2094,7 @@
       "module": "Module 5",
       "domain": "Reporting & Export",
       "question": "Which data export format would be most appropriate for further analysis in Excel?",
-      "options": [
-        "JSON",
-        "CSV",
-        "XML",
-        "PDF"
-      ],
+      "options": ["JSON", "CSV", "XML", "PDF"],
       "correctAnswer": 1,
       "difficulty": "beginner",
       "explanation": "CSV (Comma Separated Values) format is ideal for Excel import and analysis, providing structured data in a spreadsheet-compatible format.",
@@ -2324,7 +2239,7 @@
     },
     {
       "id": "reporting-011",
-      "module": "Module 5", 
+      "module": "Module 5",
       "domain": "Reporting & Export",
       "question": "Which factors should influence your choice of data aggregation level for reports?",
       "options": [

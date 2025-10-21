@@ -1,12 +1,12 @@
 // Review Service - Unified Spaced Repetition Queue
 // Aggregates flashcards and questions with intelligent priority sorting
 
-import { supabase } from "@/lib/supabase";
-import { flashcardService } from "./flashcardService";
-import { questionReviewService } from "./questionReviewService";
-import type { Flashcard } from "@/types/flashcard";
-import type { QuestionReview } from "./questionReviewService";
-import type { Question } from "@/types/assessment";
+import { supabase } from '@/lib/supabase';
+import type { Question } from '@/types/assessment';
+import type { Flashcard } from '@/types/flashcard';
+import { flashcardService } from './flashcardService';
+import type { QuestionReview } from './questionReviewService';
+import { questionReviewService } from './questionReviewService';
 
 // ==================== TYPES ====================
 
@@ -95,10 +95,8 @@ class ReviewService {
     ]);
 
     // Convert flashcards to review queue items
-    const flashcardItems: ReviewQueueItem[] = flashcards.map(f => {
-      const mastery = f.total_reviews > 0
-        ? f.correct_reviews / f.total_reviews
-        : 0;
+    const flashcardItems: ReviewQueueItem[] = flashcards.map((f) => {
+      const mastery = f.total_reviews > 0 ? f.correct_reviews / f.total_reviews : 0;
 
       const daysOverdue = Math.max(
         1,
@@ -119,16 +117,13 @@ class ReviewService {
     });
 
     // Fetch full question data for question reviews
-    const questionIds = questionReviews.map(qr => qr.question_id);
-    const { data: questions } = await supabase
-      .from("questions")
-      .select()
-      .in("id", questionIds);
+    const questionIds = questionReviews.map((qr) => qr.question_id);
+    const { data: questions } = await supabase.from('questions').select().in('id', questionIds);
 
     const questionMap = new Map((questions || []).map((q: any) => [q.id, q]));
 
     // Convert question reviews to review queue items
-    const questionItems: ReviewQueueItem[] = questionReviews.map(qr => {
+    const questionItems: ReviewQueueItem[] = questionReviews.map((qr) => {
       const daysOverdue = Math.max(
         1,
         (now.getTime() - new Date(qr.srs_due).getTime()) / (1000 * 60 * 60 * 24)
@@ -180,12 +175,12 @@ class ReviewService {
    */
   async getFlashcardQueue(userId: string, limit: number = 30): Promise<ReviewQueueItem[]> {
     const queue = await this.getUnifiedReviewQueue(userId, limit * 2);
-    return queue.filter(item => item.itemType === 'flashcard').slice(0, limit);
+    return queue.filter((item) => item.itemType === 'flashcard').slice(0, limit);
   }
 
   async getQuestionQueue(userId: string, limit: number = 30): Promise<ReviewQueueItem[]> {
     const queue = await this.getUnifiedReviewQueue(userId, limit * 2);
-    return queue.filter(item => item.itemType === 'question').slice(0, limit);
+    return queue.filter((item) => item.itemType === 'question').slice(0, limit);
   }
 
   /**
@@ -221,7 +216,7 @@ class ReviewService {
     targetDurationMinutes?: number
   ): Promise<ReviewSession | null> {
     const { data, error } = await supabase
-      .from("review_sessions")
+      .from('review_sessions')
       .insert({
         user_id: userId,
         session_type: sessionType,
@@ -231,7 +226,7 @@ class ReviewService {
       .single();
 
     if (error) {
-      console.error("Error starting review session:", error);
+      console.error('Error starting review session:', error);
       return null;
     }
 
@@ -252,7 +247,7 @@ class ReviewService {
     }
   ): Promise<ReviewSession | null> {
     const { data, error } = await supabase
-      .from("review_sessions")
+      .from('review_sessions')
       .update({
         flashcards_reviewed: stats.flashcardsReviewed,
         questions_reviewed: stats.questionsReviewed,
@@ -262,12 +257,12 @@ class ReviewService {
         completed_at: new Date().toISOString(),
         is_completed: true,
       })
-      .eq("id", sessionId)
+      .eq('id', sessionId)
       .select()
       .single();
 
     if (error) {
-      console.error("Error completing review session:", error);
+      console.error('Error completing review session:', error);
       return null;
     }
 
@@ -277,15 +272,12 @@ class ReviewService {
   /**
    * Get user's review sessions
    */
-  async getUserSessions(
-    userId: string,
-    limit: number = 10
-  ): Promise<ReviewSession[]> {
+  async getUserSessions(userId: string, limit: number = 10): Promise<ReviewSession[]> {
     const { data, error } = await supabase
-      .from("review_sessions")
+      .from('review_sessions')
       .select()
-      .eq("user_id", userId)
-      .order("started_at", { ascending: false })
+      .eq('user_id', userId)
+      .order('started_at', { ascending: false })
       .limit(limit);
 
     if (error || !data) return [];
@@ -299,12 +291,10 @@ class ReviewService {
    */
   async getDailyReviewStats(userId: string): Promise<DailyReviewStats> {
     // Use database function for efficiency
-    const { data, error } = await supabase
-      .rpc("get_review_stats", { p_user_id: userId })
-      .single();
+    const { data, error } = await supabase.rpc('get_review_stats', { p_user_id: userId }).single();
 
     if (error || !data) {
-      console.error("Error fetching review stats:", error);
+      console.error('Error fetching review stats:', error);
       return {
         flashcardsDue: 0,
         questionsDue: 0,
@@ -339,11 +329,11 @@ class ReviewService {
   async getReviewStreak(userId: string): Promise<ReviewStreak> {
     // Get all review session dates
     const { data: sessions } = await supabase
-      .from("review_sessions")
-      .select("started_at")
-      .eq("user_id", userId)
-      .eq("is_completed", true)
-      .order("started_at", { ascending: false });
+      .from('review_sessions')
+      .select('started_at')
+      .eq('user_id', userId)
+      .eq('is_completed', true)
+      .order('started_at', { ascending: false });
 
     if (!sessions || sessions.length === 0) {
       return {
@@ -356,9 +346,7 @@ class ReviewService {
 
     // Extract unique dates
     const reviewDates = Array.from(
-      new Set(
-        sessions.map(s => new Date(s.started_at).toISOString().split('T')[0])
-      )
+      new Set(sessions.map((s) => new Date(s.started_at).toISOString().split('T')[0]))
     ).sort((a, b) => new Date(b).getTime() - new Date(a).getTime());
 
     // Calculate streaks
@@ -445,10 +433,10 @@ class ReviewService {
   private async getFlashcardDueCount(userId: string): Promise<number> {
     const now = new Date().toISOString();
     const { count } = await supabase
-      .from("flashcards")
-      .select("*", { count: "exact", head: true })
-      .eq("user_id", userId)
-      .lte("srs_due", now);
+      .from('flashcards')
+      .select('*', { count: 'exact', head: true })
+      .eq('user_id', userId)
+      .lte('srs_due', now);
 
     return count || 0;
   }

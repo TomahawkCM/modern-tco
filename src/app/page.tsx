@@ -1,35 +1,39 @@
 'use client';
 
-import { Suspense, lazy } from 'react'
-import { AuthGuard } from '@/components/auth/AuthGuard'
-import { HeroSection } from '@/components/homepage/HeroSection'
-import { QuickActions } from '@/components/homepage/QuickActions'
-import { LoadingCard, LoadingSpinner } from '@/components/ui/loading-spinner'
+import { lazy, Suspense } from 'react';
+import { HeroSection } from '@/components/homepage/HeroSection';
+import { QuickActions } from '@/components/homepage/QuickActions';
 
 // Lazy load below-the-fold components for better initial load performance
-const LearningPath = lazy(() => import('@/components/homepage/LearningPath').then(mod => ({ default: mod.LearningPath })))
-const GameificationSection = lazy(() => import('@/components/homepage/GameificationSection').then(mod => ({ default: mod.GameificationSection })))
+const LearningPath = lazy(() =>
+  import('@/components/homepage/LearningPath').then((mod) => ({ default: mod.LearningPath }))
+);
+const GameificationSection = lazy(() =>
+  import('@/components/homepage/GameificationSection').then((mod) => ({
+    default: mod.GameificationSection,
+  }))
+);
 
 export default function Home() {
   return (
     <>
-        {/* Temporarily disabled for testing particle effects */}
-        {/* World-Class Homepage Sections */}
-        <Suspense fallback={<HomepageSkeleton />}>
-          {/* Hero Section with TCO Mastery Journey Welcome */}
-          <HeroSection />
-          
-          {/* Quick Actions for Immediate Engagement */}
-          <QuickActions />
-          
-          {/* Interactive Learning Path with 5 TCO Domains */}
-          <LearningPath />
-          
-          {/* Gamification - Achievements, Leaderboard, Study Streaks */}
-          <GameificationSection />
-        </Suspense>
+      {/* Temporarily disabled for testing particle effects */}
+      {/* World-Class Homepage Sections */}
+      <Suspense fallback={<HomepageSkeleton />}>
+        {/* Hero Section with TCO Mastery Journey Welcome */}
+        <HeroSection />
+
+        {/* Quick Actions for Immediate Engagement */}
+        <QuickActions />
+
+        {/* Interactive Learning Path with 5 TCO Domains */}
+        <LearningPath />
+
+        {/* Gamification - Achievements, Leaderboard, Study Streaks */}
+        <GameificationSection />
+      </Suspense>
     </>
-  )
+  );
 }
 
 function HomepageSkeleton() {
@@ -79,5 +83,5 @@ function HomepageSkeleton() {
         </div>
       </div>
     </div>
-  )
+  );
 }

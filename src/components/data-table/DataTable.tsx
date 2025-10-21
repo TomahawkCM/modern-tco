@@ -1,6 +1,5 @@
-"use client";
+'use client';
 
-import * as React from "react";
 import {
   type ColumnDef,
   flexRender,
@@ -8,7 +7,8 @@ import {
   getSortedRowModel,
   type SortingState,
   useReactTable,
-} from "@tanstack/react-table";
+} from '@tanstack/react-table';
+import * as React from 'react';
 
 export function DataTable<T>({ columns, data }: { columns: ColumnDef<T, any>[]; data: T[] }) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
@@ -35,7 +35,11 @@ export function DataTable<T>({ columns, data }: { columns: ColumnDef<T, any>[]; 
                   onClick={header.column.getToggleSortingHandler()}
                 >
                   {flexRender(header.column.columnDef.header, header.getContext())}
-                  {header.column.getIsSorted() === "asc" ? " ↑" : header.column.getIsSorted() === "desc" ? " ↓" : ""}
+                  {header.column.getIsSorted() === 'asc'
+                    ? ' ↑'
+                    : header.column.getIsSorted() === 'desc'
+                      ? ' ↓'
+                      : ''}
                 </th>
               ))}
             </tr>
@@ -56,4 +60,3 @@ export function DataTable<T>({ columns, data }: { columns: ColumnDef<T, any>[]; 
     </div>
   );
 }
-

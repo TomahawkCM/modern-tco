@@ -10,15 +10,17 @@ export default function GlobalError({
   return (
     <html>
       <body>
-        <div style={{
-          minHeight: '100vh',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          background: 'linear-gradient(to bottom right, black, black, black)',
-          color: 'white',
-          fontFamily: 'system-ui, sans-serif'
-        }}>
+        <div
+          style={{
+            minHeight: '100vh',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            background: 'linear-gradient(to bottom right, black, black, black)',
+            color: 'white',
+            fontFamily: 'system-ui, sans-serif',
+          }}
+        >
           <div style={{ textAlign: 'center', padding: '2rem' }}>
             <h1 style={{ fontSize: '4rem', fontWeight: 'bold', color: '#ef4444' }}>Error</h1>
             <h2 style={{ fontSize: '1.5rem', marginTop: '1rem' }}>Something went wrong</h2>
@@ -35,7 +37,7 @@ export default function GlobalError({
                 border: 'none',
                 borderRadius: '0.5rem',
                 cursor: 'pointer',
-                fontSize: '1rem'
+                fontSize: '1rem',
               }}
             >
               Try again

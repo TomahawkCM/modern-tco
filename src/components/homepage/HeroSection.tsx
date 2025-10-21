@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { ArrowRight, Play, Users, Trophy, BookOpen, Target, Clock, Star } from "lucide-react";
-import Link from "next/link";
-import { useEffect, useState } from "react";
+import { motion } from 'framer-motion';
+import { ArrowRight, BookOpen, Clock, Play, Star, Target, Trophy, Users } from 'lucide-react';
+import Link from 'next/link';
+import { useEffect, useState } from 'react';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 
 export function HeroSection() {
   // HYDRATION FIX: mounted state prevents React Error #418
@@ -13,8 +13,8 @@ export function HeroSection() {
   // Without this, server renders different time-based text than client, causing mismatch
   const [mounted, setMounted] = useState(false);
   const [currentTime, setCurrentTime] = useState(new Date());
-  const [typedText, setTypedText] = useState("");
-  const fullText = "WELCOME TO YOUR TCO MASTERY JOURNEY";
+  const [typedText, setTypedText] = useState('');
+  const fullText = 'WELCOME TO YOUR TCO MASTERY JOURNEY';
 
   useEffect(() => {
     setMounted(true); // Mark as client-side, enables time-based greeting
@@ -38,11 +38,11 @@ export function HeroSection() {
   // HYDRATION FIX: Returns consistent "Welcome" during SSR, then updates to time-based greeting
   // This prevents server/client text mismatch that caused React Error #418
   const getGreeting = () => {
-    if (!mounted) return "Welcome"; // Consistent text for SSR/hydration
+    if (!mounted) return 'Welcome'; // Consistent text for SSR/hydration
     const hour = currentTime.getHours();
-    if (hour < 12) return "Good morning";
-    if (hour < 18) return "Good afternoon";
-    return "Good evening";
+    if (hour < 12) return 'Good morning';
+    if (hour < 18) return 'Good afternoon';
+    return 'Good evening';
   };
 
   return (
@@ -106,10 +106,9 @@ export function HeroSection() {
           transition={{ duration: 0.6, delay: 0.6 }}
           className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-4xl mx-auto leading-relaxed"
         >
-          Master the{" "}
-          <span className="text-primary font-semibold">Tanium Certified Operator</span>{" "}
-          certification with our AI-powered learning platform. Join{" "}
-          <span className="text-accent-foreground font-semibold">thousands of professionals</span>{" "}
+          Master the <span className="text-primary font-semibold">Tanium Certified Operator</span>{' '}
+          certification with our AI-powered learning platform. Join{' '}
+          <span className="text-accent-foreground font-semibold">thousands of professionals</span>{' '}
           who've accelerated their cybersecurity careers.
         </motion.p>
 
@@ -121,16 +120,16 @@ export function HeroSection() {
           className="flex flex-wrap justify-center gap-6 mb-10"
         >
           {[
-            { icon: Users, label: "10,000+", sublabel: "Students" },
-            { icon: Trophy, label: "95%", sublabel: "Pass Rate" },
-            { icon: Clock, label: "30 Days", sublabel: "Avg Prep Time" },
-            { icon: Target, label: "5 Domains", sublabel: "Covered" },
+            { icon: Users, label: '10,000+', sublabel: 'Students' },
+            { icon: Trophy, label: '95%', sublabel: 'Pass Rate' },
+            { icon: Clock, label: '30 Days', sublabel: 'Avg Prep Time' },
+            { icon: Target, label: '5 Domains', sublabel: 'Covered' },
           ].map((stat, index) => (
             <motion.div
               key={index}
               className="text-center"
               whileHover={{ scale: 1.05 }}
-              transition={{ type: "spring", stiffness: 300 }}
+              transition={{ type: 'spring', stiffness: 300 }}
             >
               <div className="w-16 h-16 mx-auto mb-2 rounded-full bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center border border-primary/30">
                 <stat.icon className="w-8 h-8 text-primary" />
@@ -148,10 +147,7 @@ export function HeroSection() {
           transition={{ duration: 0.6, delay: 1.0 }}
           className="flex flex-col sm:flex-row gap-4 justify-center items-center"
         >
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
+          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
             <Button
               asChild
               size="lg"
@@ -165,10 +161,7 @@ export function HeroSection() {
             </Button>
           </motion.div>
 
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
+          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
             <Button
               variant="outline"
               size="lg"
@@ -182,7 +175,6 @@ export function HeroSection() {
             </Button>
           </motion.div>
         </motion.div>
-
       </motion.div>
 
       {/* Scroll Indicator */}

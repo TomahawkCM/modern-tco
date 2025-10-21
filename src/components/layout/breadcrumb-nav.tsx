@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import type { ReactNode } from "react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { Home, ChevronRight } from "lucide-react";
+import { Home } from 'lucide-react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import type { ReactNode } from 'react';
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -11,7 +11,7 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
+} from '@/components/ui/breadcrumb';
 
 interface BreadcrumbNavProps {
   className?: string;
@@ -19,29 +19,29 @@ interface BreadcrumbNavProps {
 
 // Define page titles and structure
 const pageMap: Record<string, { title: string; parent?: string }> = {
-  "/": { title: "Dashboard" },
-  "/dashboard": { title: "Dashboard" },
-  "/study": { title: "Study Modules" },
-  "/practice": { title: "Practice Mode" },
-  "/mock-exam": { title: "Mock Exam" },
-  "/analytics": { title: "Analytics" },
-  "/settings": { title: "Settings" },
-  "/profile": { title: "Profile" },
-  "/labs": { title: "Interactive Labs" },
-  "/domains": { title: "TCO Domains" },
-  "/domains/asking-questions": { title: "Asking Questions", parent: "/domains" },
-  "/domains/refining-questions": { title: "Refining Questions", parent: "/domains" },
-  "/domains/taking-action": { title: "Taking Action", parent: "/domains" },
-  "/domains/navigation-modules": { title: "Navigation & Modules", parent: "/domains" },
-  "/domains/reporting-export": { title: "Reporting & Export", parent: "/domains" },
-  "/modules": { title: "Learning Modules", parent: "/study" },
-  "/review": { title: "Review Questions", parent: "/study" },
+  '/': { title: 'Dashboard' },
+  '/dashboard': { title: 'Dashboard' },
+  '/study': { title: 'Study Modules' },
+  '/practice': { title: 'Practice Mode' },
+  '/mock-exam': { title: 'Mock Exam' },
+  '/analytics': { title: 'Analytics' },
+  '/settings': { title: 'Settings' },
+  '/profile': { title: 'Profile' },
+  '/labs': { title: 'Interactive Labs' },
+  '/domains': { title: 'TCO Domains' },
+  '/domains/asking-questions': { title: 'Asking Questions', parent: '/domains' },
+  '/domains/refining-questions': { title: 'Refining Questions', parent: '/domains' },
+  '/domains/taking-action': { title: 'Taking Action', parent: '/domains' },
+  '/domains/navigation-modules': { title: 'Navigation & Modules', parent: '/domains' },
+  '/domains/reporting-export': { title: 'Reporting & Export', parent: '/domains' },
+  '/modules': { title: 'Learning Modules', parent: '/study' },
+  '/review': { title: 'Review Questions', parent: '/study' },
 };
 
 export function BreadcrumbNav({ className }: BreadcrumbNavProps) {
-  const pathname = usePathname() || "";
+  const pathname = usePathname() || '';
 
-  if (pathname === "/" || pathname === "/dashboard") {
+  if (pathname === '/' || pathname === '/dashboard') {
     return (
       <Breadcrumb className={className}>
         <BreadcrumbList>
@@ -56,18 +56,18 @@ export function BreadcrumbNav({ className }: BreadcrumbNavProps) {
     );
   }
 
-  const pathSegments = pathname.split("/").filter(Boolean);
+  const pathSegments = pathname.split('/').filter(Boolean);
   const breadcrumbItems: Array<{ title: string; href: string; isLast: boolean }> = [];
 
   // Always start with home
   breadcrumbItems.push({
-    title: "Dashboard",
-    href: "/dashboard",
+    title: 'Dashboard',
+    href: '/dashboard',
     isLast: false,
   });
 
   // Build breadcrumb items based on current path
-  let currentPath = "";
+  let currentPath = '';
   pathSegments.forEach((segment, index) => {
     currentPath += `/${segment}`;
     const pageInfo = pageMap[currentPath];
@@ -81,9 +81,9 @@ export function BreadcrumbNav({ className }: BreadcrumbNavProps) {
     } else {
       // Fallback for undefined paths
       const title = segment
-        .split("-")
+        .split('-')
         .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-        .join(" ");
+        .join(' ');
 
       breadcrumbItems.push({
         title,

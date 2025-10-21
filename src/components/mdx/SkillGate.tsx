@@ -1,13 +1,20 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
+import { CheckCircle2, Lock, RefreshCw, Trophy, Unlock, XCircle } from 'lucide-react';
+import { useEffect, useState } from 'react';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { CheckCircle2, XCircle, Lock, Unlock, RefreshCw, Trophy } from 'lucide-react';
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { Button } from '@/components/ui/button';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
 import { Progress } from '@/components/ui/progress';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 
 interface Question {
   question: string;
@@ -26,12 +33,12 @@ interface SkillGateProps {
 }
 
 export default function SkillGate({
-  title = "Skill Checkpoint",
+  title = 'Skill Checkpoint',
   requiredScore = 80,
   questions,
-  nextSection = "next section",
+  nextSection = 'next section',
   prerequisite,
-  onComplete
+  onComplete,
 }: SkillGateProps) {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedAnswers, setSelectedAnswers] = useState<(number | null)[]>(
@@ -93,7 +100,7 @@ export default function SkillGate({
       completed: passed,
       score: finalScore,
       attempts: attempts + 1,
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     };
     localStorage.setItem('skillGateProgress', JSON.stringify(progress));
 
@@ -154,10 +161,13 @@ export default function SkillGate({
 
             <RadioGroup
               value={selectedAnswers[currentQuestion]?.toString()}
-              onValueChange={(value) => handleAnswerSelect(parseInt(value))}
+              onValueChange={(value) => handleAnswerSelect(parseInt(value, 10))}
             >
               {question.options.map((option, index) => (
-                <div key={index} className="flex items-center space-x-2 p-3 rounded-lg hover:bg-gray-50">
+                <div
+                  key={index}
+                  className="flex items-center space-x-2 p-3 rounded-lg hover:bg-gray-50"
+                >
                   <RadioGroupItem value={index.toString()} id={`option-${index}`} />
                   <Label htmlFor={`option-${index}`} className="cursor-pointer flex-1">
                     {option}
@@ -169,16 +179,12 @@ export default function SkillGate({
         </CardContent>
 
         <CardFooter className="flex justify-between">
-          <Button
-            onClick={handlePrevious}
-            disabled={currentQuestion === 0}
-            variant="outline"
-          >
+          <Button onClick={handlePrevious} disabled={currentQuestion === 0} variant="outline">
             Previous
           </Button>
 
           <span className="text-sm text-muted-foreground">
-            {selectedAnswers.filter(a => a !== null).length} of {questions.length} answered
+            {selectedAnswers.filter((a) => a !== null).length} of {questions.length} answered
           </span>
 
           {currentQuestion === questions.length - 1 ? (
@@ -190,10 +196,7 @@ export default function SkillGate({
               Submit Checkpoint
             </Button>
           ) : (
-            <Button
-              onClick={handleNext}
-              disabled={selectedAnswers[currentQuestion] === null}
-            >
+            <Button onClick={handleNext} disabled={selectedAnswers[currentQuestion] === null}>
               Next
             </Button>
           )}
@@ -235,8 +238,8 @@ export default function SkillGate({
           <Alert className="border-green-500 bg-green-50">
             <CheckCircle2 className="w-5 h-5 text-[#22c55e]" />
             <AlertDescription className="text-green-700">
-              Excellent work! You've demonstrated mastery of this content.
-              You can now proceed to {nextSection}.
+              Excellent work! You've demonstrated mastery of this content. You can now proceed to{' '}
+              {nextSection}.
             </AlertDescription>
           </Alert>
         ) : (
@@ -254,7 +257,10 @@ export default function SkillGate({
           {questions.map((q, index) => {
             const isCorrect = selectedAnswers[index] === q.correctAnswer;
             return (
-              <div key={index} className={`p-3 rounded-lg ${isCorrect ? 'bg-green-50' : 'bg-red-50'}`}>
+              <div
+                key={index}
+                className={`p-3 rounded-lg ${isCorrect ? 'bg-green-50' : 'bg-red-50'}`}
+              >
                 <div className="flex items-start gap-2">
                   {isCorrect ? (
                     <CheckCircle2 className="w-5 h-5 text-[#22c55e] mt-0.5" />
@@ -284,17 +290,11 @@ export default function SkillGate({
 
       <CardFooter className="flex justify-center">
         {passed ? (
-          <Button
-            onClick={() => setShowResults(false)}
-            className="bg-[#22c55e] hover:bg-green-700"
-          >
+          <Button onClick={() => setShowResults(false)} className="bg-[#22c55e] hover:bg-green-700">
             Continue to {nextSection}
           </Button>
         ) : (
-          <Button
-            onClick={handleRetry}
-            className="flex items-center gap-2"
-          >
+          <Button onClick={handleRetry} className="flex items-center gap-2">
             <RefreshCw className="w-4 h-4" />
             Try Again
           </Button>

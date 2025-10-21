@@ -12,20 +12,20 @@
  */
 
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
-import {
+import type {
+  BulkFlashcardImport,
+  CreateFlashcardLibraryCard,
+  DueLibraryCard,
+  FlashcardImportResult,
   FlashcardLibraryCard,
+  FlashcardLibraryDomain,
   FlashcardLibraryProgress,
   FlashcardLibraryWithProgress,
-  LibraryFlashcardStats,
   LibraryFlashcardFilters,
+  LibraryFlashcardStats,
   PaginatedLibraryCards,
   QualityRating,
   SM2UpdateResponse,
-  DueLibraryCard,
-  FlashcardLibraryDomain,
-  BulkFlashcardImport,
-  FlashcardImportResult,
-  CreateFlashcardLibraryCard,
 } from '@/types/flashcard-library';
 
 // =====================================================
@@ -59,9 +59,7 @@ export async function getLibraryFlashcards(
     query = query.overlaps('tags', filters.tags);
   }
   if (filters?.searchQuery) {
-    query = query.or(
-      `front.ilike.%${filters.searchQuery}%,back.ilike.%${filters.searchQuery}%`
-    );
+    query = query.or(`front.ilike.%${filters.searchQuery}%,back.ilike.%${filters.searchQuery}%`);
   }
 
   // Sorting
@@ -296,9 +294,7 @@ export async function getLibraryFlashcardsWithProgress(
     .eq('user_id', userId)
     .in('flashcard_library_id', cardIds);
 
-  const progressMap = new Map(
-    progressData?.map((p) => [p.flashcard_library_id, p]) || []
-  );
+  const progressMap = new Map(progressData?.map((p) => [p.flashcard_library_id, p]) || []);
 
   // Combine cards with progress
   const today = new Date().toISOString().split('T')[0];
@@ -358,8 +354,7 @@ export async function getLibraryFlashcardStats(
 
   // Due today
   const today = new Date().toISOString().split('T')[0];
-  const cardsDueToday =
-    progressData?.filter((p) => p.next_review_date <= today).length || 0;
+  const cardsDueToday = progressData?.filter((p) => p.next_review_date <= today).length || 0;
 
   // Get new cards (not started) count
   const { count: newCardsCount } = await supabase
@@ -376,7 +371,7 @@ export async function getLibraryFlashcardStats(
 
   const averageEaseFactor =
     cardsStarted > 0
-      ? progressData!.reduce((sum, p) => sum + p.ease_factor, 0) / cardsStarted
+      ? progressData?.reduce((sum, p) => sum + p.ease_factor, 0) / cardsStarted
       : 2.5;
 
   const currentStreak = Math.max(...(progressData?.map((p) => p.streak) || [0]));

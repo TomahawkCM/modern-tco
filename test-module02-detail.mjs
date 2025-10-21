@@ -7,7 +7,7 @@ async function testModule02() {
   const page = await browser.newPage();
   const errors = [];
 
-  page.on('console', msg => {
+  page.on('console', (msg) => {
     if (msg.type() === 'error') {
       console.log('❌ ERROR:', msg.text());
       errors.push(msg.text());

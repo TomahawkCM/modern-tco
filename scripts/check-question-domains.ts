@@ -42,7 +42,14 @@ async function checkDomains() {
   const domainCategories: Record<string, Set<string>> = {};
   const invalidDomains: Array<{ id: string; category: string; domain: string | null }> = [];
 
-  const validDomains = ['asking_questions', 'refining_targeting', 'taking_action', 'navigation', 'reporting', 'troubleshooting'];
+  const validDomains = [
+    'asking_questions',
+    'refining_targeting',
+    'taking_action',
+    'navigation',
+    'reporting',
+    'troubleshooting',
+  ];
 
   questions.forEach((q) => {
     const domain = q.domain || 'NULL';
@@ -108,15 +115,30 @@ async function checkDomains() {
       console.log(`  Category: "${category}" (${count} questions)`);
 
       // Suggest mapping
-      if (category.toLowerCase().includes('asking') || category.toLowerCase().includes('question')) {
+      if (
+        category.toLowerCase().includes('asking') ||
+        category.toLowerCase().includes('question')
+      ) {
         console.log(`    → Suggest: domain = 'asking_questions'`);
-      } else if (category.toLowerCase().includes('refin') || category.toLowerCase().includes('target')) {
+      } else if (
+        category.toLowerCase().includes('refin') ||
+        category.toLowerCase().includes('target')
+      ) {
         console.log(`    → Suggest: domain = 'refining_targeting'`);
-      } else if (category.toLowerCase().includes('action') || category.toLowerCase().includes('package')) {
+      } else if (
+        category.toLowerCase().includes('action') ||
+        category.toLowerCase().includes('package')
+      ) {
         console.log(`    → Suggest: domain = 'taking_action'`);
-      } else if (category.toLowerCase().includes('navig') || category.toLowerCase().includes('module')) {
+      } else if (
+        category.toLowerCase().includes('navig') ||
+        category.toLowerCase().includes('module')
+      ) {
         console.log(`    → Suggest: domain = 'navigation'`);
-      } else if (category.toLowerCase().includes('report') || category.toLowerCase().includes('export')) {
+      } else if (
+        category.toLowerCase().includes('report') ||
+        category.toLowerCase().includes('export')
+      ) {
         console.log(`    → Suggest: domain = 'reporting'`);
       } else {
         console.log(`    → Suggest: domain = 'asking_questions' (default)`);

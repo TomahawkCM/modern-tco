@@ -1,8 +1,11 @@
-"use client";
+'use client';
 
-import React, { useRef, useEffect, useState, useCallback, useMemo } from 'react';
+import { AlertCircle, ChevronDown, ChevronUp, Database } from 'lucide-react';
+import type React from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import { ScrollArea } from '@/components/ui/scroll-area';
 import {
   Table,
   TableBody,
@@ -11,9 +14,6 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { ChevronUp, ChevronDown, Database, AlertCircle } from 'lucide-react';
 import { getVisibleItems } from '../utils/performance';
 
 interface VirtualScrollTableProps {
@@ -41,11 +41,11 @@ export function VirtualScrollTable({
   rowHeight = 48,
   containerHeight = 600,
   onRowClick,
-  className = "",
-  emptyMessage = "No results found",
+  className = '',
+  emptyMessage = 'No results found',
   loading = false,
   striped = true,
-  highlightOnHover = true
+  highlightOnHover = true,
 }: VirtualScrollTableProps) {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [scrollTop, setScrollTop] = useState(0);
@@ -93,35 +93,28 @@ export function VirtualScrollTable({
   }, [data, sortConfig]);
 
   // Get visible items using virtual scrolling
-  const {
-    visibleItems,
-    startIndex,
-    offsetY,
-    totalHeight
-  } = useMemo(() => {
-    return getVisibleItems(
-      sortedData,
-      containerHeight,
-      rowHeight,
-      scrollTop
-    );
+  const { visibleItems, startIndex, offsetY, totalHeight } = useMemo(() => {
+    return getVisibleItems(sortedData, containerHeight, rowHeight, scrollTop);
   }, [sortedData, containerHeight, rowHeight, scrollTop]);
 
   // Handle sorting
   const handleSort = (key: string) => {
-    setSortConfig(prev => ({
+    setSortConfig((prev) => ({
       key,
-      direction: prev.key === key && prev.direction === 'asc' ? 'desc' : 'asc'
+      direction: prev.key === key && prev.direction === 'asc' ? 'desc' : 'asc',
     }));
   };
 
   // Handle keyboard navigation
-  const handleKeyDown = useCallback((e: React.KeyboardEvent, row: any, index: number) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      onRowClick?.(row, index);
-    }
-  }, [onRowClick]);
+  const handleKeyDown = useCallback(
+    (e: React.KeyboardEvent, row: any, index: number) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        onRowClick?.(row, index);
+      }
+    },
+    [onRowClick]
+  );
 
   if (loading) {
     return (
@@ -239,7 +232,7 @@ export function VirtualScrollTable({
                         onClick={() => onRowClick?.(row, actualIndex)}
                         onKeyDown={(e) => handleKeyDown(e, row, actualIndex)}
                         tabIndex={onRowClick ? 0 : undefined}
-                        role={onRowClick ? "button" : undefined}
+                        role={onRowClick ? 'button' : undefined}
                         aria-label={onRowClick ? `Row ${actualIndex + 1}` : undefined}
                       >
                         {columns.map((column) => (
@@ -268,7 +261,10 @@ export function VirtualScrollTable({
         <div className="p-2 border-t border-gray-700 bg-card/50">
           <div className="flex items-center gap-2 text-xs text-muted-foreground">
             <AlertCircle className="h-3 w-3" />
-            <span>Virtual scrolling enabled for optimal performance with {data.length.toLocaleString()} rows</span>
+            <span>
+              Virtual scrolling enabled for optimal performance with {data.length.toLocaleString()}{' '}
+              rows
+            </span>
           </div>
         </div>
       )}

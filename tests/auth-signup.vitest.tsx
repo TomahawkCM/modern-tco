@@ -1,6 +1,6 @@
-import { describe, it, expect, vi } from 'vitest';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import React from 'react';
+import { describe, expect, it, vi } from 'vitest';
 
 import SignUpPage from '@/app/auth/signup/page';
 
@@ -41,4 +41,3 @@ describe('Auth Signup Page', () => {
     expect(screen.getByRole('button', { name: /Back to Sign In/i })).toBeInTheDocument();
   });
 });
-

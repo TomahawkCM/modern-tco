@@ -1,18 +1,18 @@
-"use client";
+'use client';
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { BarChart3, TrendingUp } from 'lucide-react';
 import {
-  LineChart,
+  Bar,
+  BarChart,
+  CartesianGrid,
   Line,
+  LineChart,
+  ResponsiveContainer,
+  Tooltip,
   XAxis,
   YAxis,
-  CartesianGrid,
-  Tooltip,
-  ResponsiveContainer,
-  BarChart,
-  Bar,
-} from "recharts";
-import { TrendingUp, BarChart3 } from "lucide-react";
+} from 'recharts';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 interface ScoreDataPoint {
   period: string;
@@ -23,11 +23,11 @@ interface ScoreDataPoint {
 interface ScoreChartProps {
   data: ScoreDataPoint[];
   title: string;
-  type?: "line" | "bar";
+  type?: 'line' | 'bar';
   showTrend?: boolean;
 }
 
-export function ScoreChart({ data, title, type = "line", showTrend = true }: ScoreChartProps) {
+export function ScoreChart({ data, title, type = 'line', showTrend = true }: ScoreChartProps) {
   const averageScore = Math.round(data.reduce((sum, point) => sum + point.score, 0) / data.length);
   const trend = data.length > 1 ? data[data.length - 1].score - data[0].score : 0;
 
@@ -38,7 +38,9 @@ export function ScoreChart({ data, title, type = "line", showTrend = true }: Sco
           <p className="font-medium">{label}</p>
           <p className="text-tanium-accent">Score: {payload[0].value}%</p>
           {payload[0].payload.questions && (
-            <p className="text-sm text-muted-foreground">Questions: {payload[0].payload.questions}</p>
+            <p className="text-sm text-muted-foreground">
+              Questions: {payload[0].payload.questions}
+            </p>
           )}
         </div>
       );
@@ -51,7 +53,7 @@ export function ScoreChart({ data, title, type = "line", showTrend = true }: Sco
       <CardHeader>
         <CardTitle className="flex items-center justify-between text-foreground">
           <div className="flex items-center gap-2">
-            {type === "line" ? (
+            {type === 'line' ? (
               <TrendingUp className="h-5 w-5 text-tanium-accent" />
             ) : (
               <BarChart3 className="h-5 w-5 text-tanium-accent" />
@@ -62,8 +64,8 @@ export function ScoreChart({ data, title, type = "line", showTrend = true }: Sco
             <div className="flex items-center gap-2 text-sm">
               <span className="text-muted-foreground">Avg: {averageScore}%</span>
               {trend !== 0 && (
-                <span className={trend > 0 ? "text-[#22c55e]" : "text-red-400"}>
-                  {trend > 0 ? "+" : ""}
+                <span className={trend > 0 ? 'text-[#22c55e]' : 'text-red-400'}>
+                  {trend > 0 ? '+' : ''}
                   {trend}%
                 </span>
               )}
@@ -73,7 +75,7 @@ export function ScoreChart({ data, title, type = "line", showTrend = true }: Sco
       </CardHeader>
       <CardContent>
         <ResponsiveContainer width="100%" height={300}>
-          {type === "line" ? (
+          {type === 'line' ? (
             <LineChart data={data}>
               <CartesianGrid strokeDasharray="3 3" stroke="#374151" opacity={0.3} />
               <XAxis dataKey="period" stroke="#9CA3AF" fontSize={12} />
@@ -84,8 +86,8 @@ export function ScoreChart({ data, title, type = "line", showTrend = true }: Sco
                 dataKey="score"
                 stroke="#3B82F6"
                 strokeWidth={3}
-                dot={{ fill: "#3B82F6", strokeWidth: 2, r: 4 }}
-                activeDot={{ r: 6, stroke: "#3B82F6", strokeWidth: 2 }}
+                dot={{ fill: '#3B82F6', strokeWidth: 2, r: 4 }}
+                activeDot={{ r: 6, stroke: '#3B82F6', strokeWidth: 2 }}
               />
             </LineChart>
           ) : (

@@ -1,12 +1,5 @@
-"use client";
+'use client';
 
-import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Progress } from "@/components/ui/progress";
-import Phase0Foundation from "@/components/study-modules/Phase0Foundation";
 import {
   ArrowRight,
   BookOpen,
@@ -21,18 +14,22 @@ import {
   Target,
   Trophy,
   Zap,
-} from "lucide-react";
-import { analytics } from "@/lib/analytics";
+} from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import Phase0Foundation from '@/components/study-modules/Phase0Foundation';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Progress } from '@/components/ui/progress';
+import { analytics } from '@/lib/analytics';
 
 interface BeginnerDashboardProps {
   studyProgress?: number;
   onProgressUpdate?: (progress: number) => void;
 }
 
-export function BeginnerDashboard({ 
-  studyProgress = 0, 
-  onProgressUpdate 
-}: BeginnerDashboardProps) {
+export function BeginnerDashboard({ studyProgress = 0, onProgressUpdate }: BeginnerDashboardProps) {
   const router = useRouter();
   const [hasCompletedFoundation, setHasCompletedFoundation] = useState(false);
   const [foundationProgress, setFoundationProgress] = useState(0);
@@ -85,14 +82,30 @@ export function BeginnerDashboard({
 
   // Beginner-specific motivational messages
   const motivationalMessages = [
-    { icon: Heart, text: "Every expert was once a beginner. You're on the right path!", color: "text-pink-400" },
-    { icon: Star, text: "Small daily progress leads to stunning results over time.", color: "text-[#f97316]" },
-    { icon: Lightbulb, text: "Understanding comes with practice. Be patient with yourself!", color: "text-primary" },
-    { icon: Rocket, text: "Your future self will thank you for starting this journey today.", color: "text-primary" },
+    {
+      icon: Heart,
+      text: "Every expert was once a beginner. You're on the right path!",
+      color: 'text-pink-400',
+    },
+    {
+      icon: Star,
+      text: 'Small daily progress leads to stunning results over time.',
+      color: 'text-[#f97316]',
+    },
+    {
+      icon: Lightbulb,
+      text: 'Understanding comes with practice. Be patient with yourself!',
+      color: 'text-primary',
+    },
+    {
+      icon: Rocket,
+      text: 'Your future self will thank you for starting this journey today.',
+      color: 'text-primary',
+    },
   ];
 
-  const [currentMessage] = useState(() => 
-    motivationalMessages[Math.floor(Math.random() * motivationalMessages.length)]
+  const [currentMessage] = useState(
+    () => motivationalMessages[Math.floor(Math.random() * motivationalMessages.length)]
   );
 
   return (
@@ -103,13 +116,13 @@ export function BeginnerDashboard({
           <Trophy className="h-8 w-8 text-[#f97316]" />
           <h1 className="text-4xl font-bold text-foreground">Your Tanium Learning Journey</h1>
         </div>
-        
+
         <div className="mb-6 mx-auto max-w-2xl">
           <div className="flex items-center justify-center space-x-3 mb-4">
             <currentMessage.icon className={`h-6 w-6 ${currentMessage.color}`} />
             <p className="text-xl text-muted-foreground">{currentMessage.text}</p>
           </div>
-          
+
           {!hasCompletedFoundation ? (
             <p className="text-lg text-muted-foreground">
               Let's start with the fundamentals - no prior Tanium knowledge required!
@@ -137,7 +150,9 @@ export function BeginnerDashboard({
             {hasViewedOnboarding ? (
               <Badge className="border-[#22c55e]/40 bg-[#22c55e]/20 text-[#22c55e]">Viewed</Badge>
             ) : (
-              <Badge className="border-[#f97316]/40 bg-[#f97316]/20 text-[#f97316]">Recommended</Badge>
+              <Badge className="border-[#f97316]/40 bg-[#f97316]/20 text-[#f97316]">
+                Recommended
+              </Badge>
             )}
             <Button onClick={handleOpenOnboarding} className="gap-2">
               {hasViewedOnboarding ? 'Revisit onboarding' : 'Start onboarding tour'}
@@ -159,12 +174,15 @@ export function BeginnerDashboard({
               Step 1 of 4
             </Badge>
           </div>
-          
-          <Phase0Foundation 
-            onModuleComplete={(moduleId) => {
+
+          <Phase0Foundation
+            onModuleComplete={(_moduleId) => {
               handleFoundationComplete();
-              setFoundationProgress(prev => prev + 25); // Increment progress
-              localStorage.setItem('tanium-foundation-progress', (foundationProgress + 25).toString());
+              setFoundationProgress((prev) => prev + 25); // Increment progress
+              localStorage.setItem(
+                'tanium-foundation-progress',
+                (foundationProgress + 25).toString()
+              );
             }}
             onMilestoneAchieved={(milestoneId) => {
               console.log('Milestone achieved:', milestoneId);
@@ -177,21 +195,27 @@ export function BeginnerDashboard({
       <div className="grid gap-6 md:grid-cols-4">
         <Card className="glass border-white/10">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium text-muted-foreground">Foundation Progress</CardTitle>
+            <CardTitle className="text-sm font-medium text-muted-foreground">
+              Foundation Progress
+            </CardTitle>
             <BookOpen className="h-4 w-4 text-primary" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold text-foreground mb-2">{foundationProgress}%</div>
             <Progress value={foundationProgress} className="h-2 mb-2" />
             <p className="text-xs text-muted-foreground">
-              {foundationProgress === 100 ? 'Complete! 🎉' : `${Math.floor(foundationProgress / 20)} of 5 modules`}
+              {foundationProgress === 100
+                ? 'Complete! 🎉'
+                : `${Math.floor(foundationProgress / 20)} of 5 modules`}
             </p>
           </CardContent>
         </Card>
 
         <Card className="glass border-white/10">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium text-muted-foreground">Study Streak</CardTitle>
+            <CardTitle className="text-sm font-medium text-muted-foreground">
+              Study Streak
+            </CardTitle>
             <Clock className="h-4 w-4 text-orange-400" />
           </CardHeader>
           <CardContent>
@@ -202,7 +226,9 @@ export function BeginnerDashboard({
 
         <Card className="glass border-white/10">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium text-muted-foreground">Confidence Level</CardTitle>
+            <CardTitle className="text-sm font-medium text-muted-foreground">
+              Confidence Level
+            </CardTitle>
             <Target className="h-4 w-4 text-[#22c55e]" />
           </CardHeader>
           <CardContent>
@@ -213,7 +239,9 @@ export function BeginnerDashboard({
 
         <Card className="glass border-white/10">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium text-muted-foreground">Next Milestone</CardTitle>
+            <CardTitle className="text-sm font-medium text-muted-foreground">
+              Next Milestone
+            </CardTitle>
             <Star className="h-4 w-4 text-[#f97316]" />
           </CardHeader>
           <CardContent>
@@ -229,18 +257,22 @@ export function BeginnerDashboard({
           <Rocket className="mr-3 h-7 w-7 text-primary" />
           Your Learning Path
         </h2>
-        
+
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {/* Foundation Module */}
-          <Card className={`glass cursor-pointer border-white/10 transition-all hover:border-white/20 ${
-            hasCompletedFoundation ? 'border-[#22c55e]/30' : 'border-primary/30'
-          }`}>
+          <Card
+            className={`glass cursor-pointer border-white/10 transition-all hover:border-white/20 ${
+              hasCompletedFoundation ? 'border-[#22c55e]/30' : 'border-primary/30'
+            }`}
+          >
             <CardHeader>
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-3">
-                  <div className={`rounded-lg p-2 ${
-                    hasCompletedFoundation ? 'bg-[#22c55e]' : 'bg-primary'
-                  }`}>
+                  <div
+                    className={`rounded-lg p-2 ${
+                      hasCompletedFoundation ? 'bg-[#22c55e]' : 'bg-primary'
+                    }`}
+                  >
                     {hasCompletedFoundation ? (
                       <CheckCircle className="h-6 w-6 text-foreground" />
                     ) : (
@@ -252,18 +284,25 @@ export function BeginnerDashboard({
                     <p className="text-sm text-muted-foreground">85 minutes • 5 modules</p>
                   </div>
                 </div>
-                <Badge variant={hasCompletedFoundation ? "outline" : "default"} 
-                       className={hasCompletedFoundation ? "text-[#22c55e] border-green-400" : "bg-blue-600"}>Step 1</Badge>
+                <Badge
+                  variant={hasCompletedFoundation ? 'outline' : 'default'}
+                  className={
+                    hasCompletedFoundation ? 'text-[#22c55e] border-green-400' : 'bg-blue-600'
+                  }
+                >
+                  Step 1
+                </Badge>
               </div>
             </CardHeader>
             <CardContent>
               <p className="text-muted-foreground mb-4 text-sm">
-                Learn Tanium basics from scratch. Perfect for complete beginners with zero prior knowledge.
+                Learn Tanium basics from scratch. Perfect for complete beginners with zero prior
+                knowledge.
               </p>
               <Button
                 className={`w-full ${
-                  hasCompletedFoundation 
-                    ? 'bg-[#22c55e] hover:bg-green-700' 
+                  hasCompletedFoundation
+                    ? 'bg-[#22c55e] hover:bg-green-700'
                     : 'bg-tanium-accent hover:bg-blue-600'
                 }`}
                 onClick={() => setShowFoundation(!showFoundation)}
@@ -271,16 +310,21 @@ export function BeginnerDashboard({
                 {hasCompletedFoundation ? (
                   <>Review Foundation</>
                 ) : (
-                  <><Zap className="mr-2 h-4 w-4" />Start Learning</>
+                  <>
+                    <Zap className="mr-2 h-4 w-4" />
+                    Start Learning
+                  </>
                 )}
               </Button>
             </CardContent>
           </Card>
 
           {/* Practice Questions */}
-          <Card className={`glass cursor-pointer border-white/10 transition-all hover:border-white/20 ${
-            hasCompletedFoundation ? 'opacity-100' : 'opacity-50'
-          }`}>
+          <Card
+            className={`glass cursor-pointer border-white/10 transition-all hover:border-white/20 ${
+              hasCompletedFoundation ? 'opacity-100' : 'opacity-50'
+            }`}
+          >
             <CardHeader>
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-3">
@@ -292,7 +336,9 @@ export function BeginnerDashboard({
                     <p className="text-sm text-muted-foreground">Interactive learning</p>
                   </div>
                 </div>
-                <Badge variant="outline" className="text-[#22c55e] border-green-400">Step 2</Badge>
+                <Badge variant="outline" className="text-[#22c55e] border-green-400">
+                  Step 2
+                </Badge>
               </div>
             </CardHeader>
             <CardContent>
@@ -302,7 +348,7 @@ export function BeginnerDashboard({
               <Button
                 className="w-full bg-[#22c55e] hover:bg-green-700"
                 disabled={!hasCompletedFoundation}
-                onClick={() => router.push("/practice")}
+                onClick={() => router.push('/practice')}
               >
                 <Zap className="mr-2 h-4 w-4" />
                 Start Practice
@@ -323,17 +369,16 @@ export function BeginnerDashboard({
                     <p className="text-sm text-muted-foreground">Real Tanium scenarios</p>
                   </div>
                 </div>
-                <Badge variant="outline" className="text-primary border-cyan-400">Step 3</Badge>
+                <Badge variant="outline" className="text-primary border-cyan-400">
+                  Step 3
+                </Badge>
               </div>
             </CardHeader>
             <CardContent>
               <p className="text-muted-foreground mb-4 text-sm">
                 Practice with simulated Tanium console environments and real-world scenarios.
               </p>
-              <Button
-                className="w-full bg-primary hover:bg-cyan-700"
-                disabled
-              >
+              <Button className="w-full bg-primary hover:bg-cyan-700" disabled>
                 <Target className="mr-2 h-4 w-4" />
                 Coming Soon
               </Button>
@@ -355,15 +400,21 @@ export function BeginnerDashboard({
             <ul className="space-y-3 text-sm">
               <li className="flex items-start space-x-2 text-muted-foreground">
                 <div className="w-2 h-2 bg-blue-400 rounded-full mt-2 flex-shrink-0" />
-                <span>Take your time - there's no rush. Understanding is more important than speed.</span>
+                <span>
+                  Take your time - there's no rush. Understanding is more important than speed.
+                </span>
               </li>
               <li className="flex items-start space-x-2 text-muted-foreground">
                 <div className="w-2 h-2 bg-green-400 rounded-full mt-2 flex-shrink-0" />
-                <span>Don't skip the foundation module - it makes everything else much easier.</span>
+                <span>
+                  Don't skip the foundation module - it makes everything else much easier.
+                </span>
               </li>
               <li className="flex items-start space-x-2 text-muted-foreground">
                 <div className="w-2 h-2 bg-cyan-400 rounded-full mt-2 flex-shrink-0" />
-                <span>Ask yourself "why" when reading explanations - deep understanding helps retention.</span>
+                <span>
+                  Ask yourself "why" when reading explanations - deep understanding helps retention.
+                </span>
               </li>
               <li className="flex items-start space-x-2 text-muted-foreground">
                 <div className="w-2 h-2 bg-orange-400 rounded-full mt-2 flex-shrink-0" />
@@ -383,14 +434,16 @@ export function BeginnerDashboard({
           <CardContent>
             <div className="space-y-4">
               <p className="text-muted-foreground text-sm">
-                Remember, every Tanium expert started exactly where you are now. The fact that you're here, 
-                ready to learn, shows you have what it takes to succeed.
+                Remember, every Tanium expert started exactly where you are now. The fact that
+                you're here, ready to learn, shows you have what it takes to succeed.
               </p>
               <div className="bg-gradient-to-r from-pink-500/20 to-primary/20 rounded-lg p-4 border border-pink-500/30">
                 <p className="text-pink-100 text-sm font-medium">
-                  "The expert in anything was once a beginner who never gave up." 
+                  "The expert in anything was once a beginner who never gave up."
                   <br />
-                  <span className="text-xs text-pink-200">- You're building expertise one day at a time!</span>
+                  <span className="text-xs text-pink-200">
+                    - You're building expertise one day at a time!
+                  </span>
                 </p>
               </div>
             </div>

@@ -3,21 +3,29 @@
  * Enhanced navigation for the expanded 9-section structure
  */
 
-"use client";
+'use client';
 
-import { useCallback, useState } from "react";
-import { ChevronRight, ChevronDown, CheckCircle, Circle, Lock, BookOpen, Clock } from "lucide-react";
-import { cn } from "@/lib/utils";
 import {
-  type Module3Section,
-  MODULE_3_SECTIONS,
+  BookOpen,
+  CheckCircle,
+  ChevronDown,
+  ChevronRight,
+  Circle,
+  Clock,
+  Lock,
+} from 'lucide-react';
+import { useCallback, useState } from 'react';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
+import { Progress } from '@/components/ui/progress';
+import {
   getModule3LearningPath,
-  getSectionCoverage
-} from "@/lib/module3-section-definitions";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import { Progress } from "@/components/ui/progress";
-import { Badge } from "@/components/ui/badge";
+  getSectionCoverage,
+  MODULE_3_SECTIONS,
+  type Module3Section,
+} from '@/lib/module3-section-definitions';
+import { cn } from '@/lib/utils';
 
 interface Module3NavigationProps {
   currentSection?: Module3Section;
@@ -34,7 +42,7 @@ export function Module3Navigation({
   userProgress = {},
   showProgress = true,
   expandedByDefault = false,
-  className
+  className,
 }: Module3NavigationProps) {
   const [expandedSections, setExpandedSections] = useState<Set<Module3Section>>(
     expandedByDefault ? new Set(Object.keys(MODULE_3_SECTIONS) as Module3Section[]) : new Set()
@@ -43,7 +51,7 @@ export function Module3Navigation({
   const learningPath = getModule3LearningPath();
 
   const toggleSection = useCallback((sectionId: Module3Section) => {
-    setExpandedSections(prev => {
+    setExpandedSections((prev) => {
       const newSet = new Set(prev);
       if (newSet.has(sectionId)) {
         newSet.delete(sectionId);
@@ -64,10 +72,14 @@ export function Module3Navigation({
 
   const getDifficultyColor = (difficulty: string) => {
     switch (difficulty) {
-      case "Beginner": return "bg-green-100 text-green-800";
-      case "Intermediate": return "bg-yellow-100 text-yellow-800";
-      case "Advanced": return "bg-red-100 text-red-800";
-      default: return "bg-gray-100 text-gray-800";
+      case 'Beginner':
+        return 'bg-green-100 text-green-800';
+      case 'Intermediate':
+        return 'bg-yellow-100 text-yellow-800';
+      case 'Advanced':
+        return 'bg-red-100 text-red-800';
+      default:
+        return 'bg-gray-100 text-gray-800';
     }
   };
 
@@ -75,20 +87,21 @@ export function Module3Navigation({
     const section = MODULE_3_SECTIONS[sectionId];
     if (!section.prerequisites || section.prerequisites.length === 0) return false;
 
-    return section.prerequisites.some(prereq => {
+    return section.prerequisites.some((prereq) => {
       const prereqProgress = userProgress[prereq];
       return !prereqProgress?.completed;
     });
   };
 
   return (
-    <Card className={cn("p-4", className)}>
+    <Card className={cn('p-4', className)}>
       <div className="space-y-4">
         <div className="flex items-center justify-between mb-4">
           <h3 className="text-lg font-semibold">Module 3: Taking Action</h3>
           {showProgress && (
             <div className="text-sm text-muted-foreground">
-              {Object.values(userProgress).filter(p => p.completed).length} / {learningPath.length} sections
+              {Object.values(userProgress).filter((p) => p.completed).length} /{' '}
+              {learningPath.length} sections
             </div>
           )}
         </div>
@@ -96,7 +109,11 @@ export function Module3Navigation({
         {showProgress && (
           <div className="mb-6">
             <Progress
-              value={(Object.values(userProgress).filter(p => p.completed).length / learningPath.length) * 100}
+              value={
+                (Object.values(userProgress).filter((p) => p.completed).length /
+                  learningPath.length) *
+                100
+              }
               className="h-2"
             />
           </div>
@@ -117,22 +134,23 @@ export function Module3Navigation({
                   onClick={() => !isLocked && toggleSection(sectionId)}
                   disabled={isLocked}
                   className={cn(
-                    "w-full px-4 py-3 flex items-center justify-between hover:bg-accent/50 transition-colors",
-                    isCurrent && "bg-accent",
-                    isLocked && "opacity-50 cursor-not-allowed"
+                    'w-full px-4 py-3 flex items-center justify-between hover:bg-accent/50 transition-colors',
+                    isCurrent && 'bg-accent',
+                    isLocked && 'opacity-50 cursor-not-allowed'
                   )}
                 >
                   <div className="flex items-center gap-3">
-                    <span className="text-sm text-muted-foreground w-6">
-                      {index + 1}.
-                    </span>
+                    <span className="text-sm text-muted-foreground w-6">{index + 1}.</span>
                     {isLocked ? (
                       <Lock className="w-4 h-4 text-muted-foreground" />
                     ) : (
                       getSectionIcon(sectionId)
                     )}
                     <span className="font-medium text-left">{section.title}</span>
-                    <Badge variant="outline" className={cn("text-xs", getDifficultyColor(section.difficulty))}>
+                    <Badge
+                      variant="outline"
+                      className={cn('text-xs', getDifficultyColor(section.difficulty))}
+                    >
                       {section.difficulty}
                     </Badge>
                     {section.currentQuestionCount === 0 && (
@@ -156,19 +174,23 @@ export function Module3Navigation({
 
                 {isExpanded && !isLocked && (
                   <div className="px-4 py-3 bg-muted/20 border-t space-y-3">
-                    <p className="text-sm text-muted-foreground">
-                      {section.description}
-                    </p>
+                    <p className="text-sm text-muted-foreground">{section.description}</p>
 
                     <div className="space-y-2">
                       <div className="flex items-center justify-between text-xs">
                         <span className="font-medium">Question Coverage</span>
-                        <span className={cn(
-                          "font-medium",
-                          coverage === 100 ? "text-[#22c55e]" :
-                          coverage > 50 ? "text-yellow-600" : "text-red-600"
-                        )}>
-                          {section.currentQuestionCount} / {section.questionTargetCount} questions ({coverage}%)
+                        <span
+                          className={cn(
+                            'font-medium',
+                            coverage === 100
+                              ? 'text-[#22c55e]'
+                              : coverage > 50
+                                ? 'text-yellow-600'
+                                : 'text-red-600'
+                          )}
+                        >
+                          {section.currentQuestionCount} / {section.questionTargetCount} questions (
+                          {coverage}%)
                         </span>
                       </div>
                       <Progress value={coverage} className="h-1.5" />
@@ -179,9 +201,12 @@ export function Module3Navigation({
                         <span className="text-xs font-medium">Learning Objectives:</span>
                         <ul className="space-y-0.5">
                           {section.learningObjectives.map((objective, idx) => (
-                            <li key={idx} className="text-xs text-muted-foreground flex items-start gap-1">
+                            <li
+                              key={idx}
+                              className="text-xs text-muted-foreground flex items-start gap-1"
+                            >
                               <span className="text-muted-foreground/50 mt-0.5">•</span>
-                              <span>{objective.split(":")[1].trim()}</span>
+                              <span>{objective.split(':')[1].trim()}</span>
                             </li>
                           ))}
                         </ul>
@@ -191,13 +216,15 @@ export function Module3Navigation({
                     {section.prerequisites && section.prerequisites.length > 0 && (
                       <div className="text-xs text-muted-foreground">
                         <span className="font-medium">Prerequisites: </span>
-                        {section.prerequisites.map(prereq => MODULE_3_SECTIONS[prereq].title).join(", ")}
+                        {section.prerequisites
+                          .map((prereq) => MODULE_3_SECTIONS[prereq].title)
+                          .join(', ')}
                       </div>
                     )}
 
                     <div className="flex gap-2 mt-3">
                       <Button
-                        variant={isCurrent ? "default" : "outline"}
+                        variant={isCurrent ? 'default' : 'outline'}
                         size="sm"
                         className="flex-1"
                         onClick={(e) => {
@@ -206,7 +233,7 @@ export function Module3Navigation({
                         }}
                       >
                         <BookOpen className="w-3 h-3 mr-1" />
-                        {isCurrent ? "Continue" : "Start"} Section
+                        {isCurrent ? 'Continue' : 'Start'} Section
                       </Button>
                       {progress && progress.progress > 0 && (
                         <Button
@@ -245,13 +272,19 @@ export function Module3Navigation({
             <div>
               <span className="text-muted-foreground">Total Questions:</span>
               <span className="ml-1 font-medium">
-                {Object.values(MODULE_3_SECTIONS).reduce((sum, s) => sum + s.currentQuestionCount, 0)}
+                {Object.values(MODULE_3_SECTIONS).reduce(
+                  (sum, s) => sum + s.currentQuestionCount,
+                  0
+                )}
               </span>
             </div>
             <div>
               <span className="text-muted-foreground">Target Questions:</span>
               <span className="ml-1 font-medium">
-                {Object.values(MODULE_3_SECTIONS).reduce((sum, s) => sum + s.questionTargetCount, 0)}
+                {Object.values(MODULE_3_SECTIONS).reduce(
+                  (sum, s) => sum + s.questionTargetCount,
+                  0
+                )}
               </span>
             </div>
           </div>

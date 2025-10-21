@@ -23,7 +23,9 @@ test.describe('Learn Experimental navigation', () => {
   });
 
   test('deep-linked lab renders without error under the flag', async ({ page }) => {
-    const labResponse = await page.goto('/study/labs/02-l/advanced-filtering?path=learn-experimental');
+    const labResponse = await page.goto(
+      '/study/labs/02-l/advanced-filtering?path=learn-experimental'
+    );
     expect(labResponse?.status()).toBe(200);
 
     await expect(

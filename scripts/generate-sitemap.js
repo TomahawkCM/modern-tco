@@ -59,12 +59,7 @@ const videoPages = [
 ];
 
 function generateSitemap() {
-  const allPages = [
-    ...staticPages,
-    ...modulePages,
-    ...domainPages,
-    ...videoPages,
-  ];
+  const allPages = [...staticPages, ...modulePages, ...domainPages, ...videoPages];
 
   const currentDate = new Date().toISOString().split('T')[0];
 
@@ -111,4 +106,6 @@ const outputPath = path.join(__dirname, '..', 'public', 'sitemap.xml');
 fs.writeFileSync(outputPath, sitemap, 'utf8');
 
 console.log(`✅ Sitemap generated successfully at ${outputPath}`);
-console.log(`📊 Total URLs: ${[...staticPages, ...modulePages, ...domainPages, ...videoPages].length}`);
+console.log(
+  `📊 Total URLs: ${[...staticPages, ...modulePages, ...domainPages, ...videoPages].length}`
+);

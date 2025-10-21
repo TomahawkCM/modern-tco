@@ -1,14 +1,14 @@
-import { createClient } from "@supabase/supabase-js";
-import { readFileSync } from "fs";
-import { join, dirname } from "path";
-import { fileURLToPath } from "url";
+import { createClient } from '@supabase/supabase-js';
+import { readFileSync } from 'fs';
+import { dirname, join } from 'path';
+import { fileURLToPath } from 'url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 // Load environment from .env.local
-const envPath = join(__dirname, "../.env.local");
-const envContent = readFileSync(envPath, "utf8");
-const envLines = envContent.split("\n");
+const envPath = join(__dirname, '../.env.local');
+const envContent = readFileSync(envPath, 'utf8');
+const envLines = envContent.split('\n');
 const env = {};
 
 envLines.forEach((line) => {
@@ -21,30 +21,30 @@ envLines.forEach((line) => {
 const supabaseUrl = env.NEXT_PUBLIC_SUPABASE_URL;
 const supabaseServiceKey = env.SUPABASE_SERVICE_ROLE_KEY;
 
-console.log("🔍 Using Supabase URL:", supabaseUrl);
-console.log("🔑 Service key available:", !!supabaseServiceKey);
+console.log('🔍 Using Supabase URL:', supabaseUrl);
+console.log('🔑 Service key available:', !!supabaseServiceKey);
 
 const supabase = createClient(supabaseUrl, supabaseServiceKey, {
   auth: { autoRefreshToken: false, persistSession: false },
 });
 
 async function createTablesAndMigrateContent() {
-  console.log("🚀 Starting automatic pipeline: Create tables + Load content\n");
+  console.log('🚀 Starting automatic pipeline: Create tables + Load content\n');
 
   // Step 1: Try to create tables by checking if they exist
   try {
-    console.log("📋 Step 1: Checking if tables exist...");
+    console.log('📋 Step 1: Checking if tables exist...');
 
     // Test study_modules table
     const { error: modulesError } = await supabase
-      .from("study_modules")
-      .select("count", { count: "exact" })
+      .from('study_modules')
+      .select('count', { count: 'exact' })
       .limit(0);
 
-    if (modulesError?.code === "PGRST106") {
-      console.log("❌ study_modules table does not exist");
-      console.log("\n🔧 Please run this SQL in Supabase Dashboard:");
-      console.log("=====================================");
+    if (modulesError?.code === 'PGRST106') {
+      console.log('❌ study_modules table does not exist');
+      console.log('\n🔧 Please run this SQL in Supabase Dashboard:');
+      console.log('=====================================');
       console.log(`
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
@@ -84,26 +84,26 @@ CREATE POLICY "Public read access for study sections" ON public.study_sections F
       `);
       return false;
     } else {
-      console.log("✅ Tables exist, proceeding with content migration...");
+      console.log('✅ Tables exist, proceeding with content migration...');
     }
 
     // Step 2: Load comprehensive content
-    console.log("\n📚 Step 2: Loading comprehensive TCO content...");
+    console.log('\n📚 Step 2: Loading comprehensive TCO content...');
 
     const domainFiles = [
-      "domain1-asking-questions.md",
-      "domain2-refining-questions.md",
-      "domain3-taking-action.md",
-      "domain4-navigation-modules.md",
-      "domain5-reporting-data-export.md",
+      'domain1-asking-questions.md',
+      'domain2-refining-questions.md',
+      'domain3-taking-action.md',
+      'domain4-navigation-modules.md',
+      'domain5-reporting-data-export.md',
     ];
 
     let totalSections = 0;
 
     for (const filename of domainFiles) {
       try {
-        const filePath = join(__dirname, "../src/content/domains", filename);
-        const content = readFileSync(filePath, "utf8");
+        const filePath = join(__dirname, '../src/content/domains', filename);
+        const content = readFileSync(filePath, 'utf8');
 
         console.log(`📖 Processing ${filename}...`);
 
@@ -112,7 +112,7 @@ CREATE POLICY "Public read access for study sections" ON public.study_sections F
         if (!domainMatch) continue;
 
         const domainNum = parseInt(domainMatch[1]);
-        const domainSlug = filename.replace(".md", "");
+        const domainSlug = filename.replace('.md', '');
 
         // Extract title and exam weight from content
         const titleMatch = content.match(/^#\s+(.+)$/m);
@@ -123,7 +123,7 @@ CREATE POLICY "Public read access for study sections" ON public.study_sections F
 
         // Insert or update module
         const { data: moduleData, error: moduleError } = await supabase
-          .from("study_modules")
+          .from('study_modules')
           .upsert(
             {
               slug: domainSlug,
@@ -132,7 +132,7 @@ CREATE POLICY "Public read access for study sections" ON public.study_sections F
               order_index: domainNum,
               is_active: true,
             },
-            { onConflict: "slug" }
+            { onConflict: 'slug' }
           )
           .select()
           .single();
@@ -149,8 +149,8 @@ CREATE POLICY "Public read access for study sections" ON public.study_sections F
 
         if (sections.length > 0) {
           const { error: sectionsError } = await supabase
-            .from("study_sections")
-            .upsert(sections, { onConflict: "module_id,title" });
+            .from('study_sections')
+            .upsert(sections, { onConflict: 'module_id,title' });
 
           if (sectionsError) {
             console.error(`❌ Error inserting sections for ${filename}:`, sectionsError);
@@ -172,14 +172,14 @@ CREATE POLICY "Public read access for study sections" ON public.study_sections F
 
     return true;
   } catch (error) {
-    console.error("❌ Pipeline error:", error.message);
+    console.error('❌ Pipeline error:', error.message);
     return false;
   }
 }
 
 function parseContentSections(content, moduleId) {
   const sections = [];
-  const lines = content.split("\n");
+  const lines = content.split('\n');
   let currentSection = null;
   let sectionIndex = 0;
 
@@ -201,15 +201,15 @@ function parseContentSections(content, moduleId) {
       // Start new section
       currentSection = {
         module_id: moduleId,
-        title: sectionMatch[1].replace(/^(🎯\s+)?Module\s+\d+:\s*/i, ""),
-        content: "",
+        title: sectionMatch[1].replace(/^(🎯\s+)?Module\s+\d+:\s*/i, ''),
+        content: '',
         section_type: getSectionType(sectionMatch[1]),
         difficulty_level: getDifficultyLevel(sectionMatch[1]),
         estimated_time: getEstimatedTime(sectionMatch[1]),
       };
     } else if (currentSection) {
       // Add content to current section
-      currentSection.content += line + "\n";
+      currentSection.content += line + '\n';
     }
   }
 
@@ -226,16 +226,16 @@ function parseContentSections(content, moduleId) {
 }
 
 function getSectionType(title) {
-  if (/lab|exercise|hands.?on/i.test(title)) return "lab";
-  if (/practice|question/i.test(title)) return "practice";
-  if (/assessment|test|exam/i.test(title)) return "assessment";
-  return "content";
+  if (/lab|exercise|hands.?on/i.test(title)) return 'lab';
+  if (/practice|question/i.test(title)) return 'practice';
+  if (/assessment|test|exam/i.test(title)) return 'assessment';
+  return 'content';
 }
 
 function getDifficultyLevel(title) {
-  if (/advanced|expert|complex/i.test(title)) return "advanced";
-  if (/intermediate|moderate/i.test(title)) return "intermediate";
-  return "beginner";
+  if (/advanced|expert|complex/i.test(title)) return 'advanced';
+  if (/intermediate|moderate/i.test(title)) return 'intermediate';
+  return 'beginner';
 }
 
 function getEstimatedTime(title) {
@@ -246,6 +246,6 @@ function getEstimatedTime(title) {
 
 // Run the pipeline
 createTablesAndMigrateContent().then((success) => {
-  console.log(success ? "\n🎉 Pipeline completed successfully!" : "\n❌ Pipeline failed");
+  console.log(success ? '\n🎉 Pipeline completed successfully!' : '\n❌ Pipeline failed');
   process.exit(success ? 0 : 1);
 });

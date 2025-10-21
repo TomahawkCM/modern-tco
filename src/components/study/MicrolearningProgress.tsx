@@ -1,10 +1,8 @@
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Progress } from "@/components/ui/progress";
-import { Badge } from "@/components/ui/badge";
-import { Trophy, Target, Clock, CheckCircle2, TrendingUp } from "lucide-react";
+import { Clock, Target, TrendingUp, Trophy } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { Badge } from '@/components/ui/badge';
 
 interface MicrolearningProgressProps {
   moduleId: string;
@@ -24,7 +22,7 @@ export function MicrolearningProgress({
   useEffect(() => {
     // Load progress from localStorage
     const progressKey = `module-progress-${moduleId}`;
-    const progress = JSON.parse(localStorage.getItem(progressKey) || "{}");
+    const progress = JSON.parse(localStorage.getItem(progressKey) || '{}');
     const completed = progress.completedSections?.length || 0;
 
     setCompletedSections(completed);
@@ -34,7 +32,7 @@ export function MicrolearningProgress({
 
   const remainingMinutes = Math.max(
     0,
-    estimatedMinutes - Math.round(completionPercentage * estimatedMinutes / 100)
+    estimatedMinutes - Math.round((completionPercentage * estimatedMinutes) / 100)
   );
 
   return (
@@ -85,7 +83,9 @@ export function MicrolearningProgress({
             <Target className="h-4 w-4 text-primary" />
           </div>
           <div>
-            <div className="text-lg font-bold text-archon-text-primary">{totalSections - completedSections}</div>
+            <div className="text-lg font-bold text-archon-text-primary">
+              {totalSections - completedSections}
+            </div>
             <div className="text-xs text-archon-text-muted">Remaining</div>
           </div>
         </div>
@@ -108,9 +108,7 @@ export function MicrolearningProgress({
             <Trophy className="h-6 w-6 text-[#f97316] drop-shadow-[0_0_10px_rgba(250,204,21,0.7)]" />
             <p className="font-bold text-[#22c55e]">Module Complete!</p>
           </div>
-          <p className="text-sm text-[#22c55e]">
-            Ready for practice questions and assessment
-          </p>
+          <p className="text-sm text-[#22c55e]">Ready for practice questions and assessment</p>
         </div>
       )}
     </div>

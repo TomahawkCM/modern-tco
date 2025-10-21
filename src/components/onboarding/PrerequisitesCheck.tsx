@@ -1,33 +1,30 @@
 'use client';
 
-import React, { useState, useCallback, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Card, CardContent } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Progress } from '@/components/ui/progress';
-import { Badge } from '@/components/ui/badge';
-import { 
-  KnowledgeAssessment, 
-  type KnowledgeQuestion, 
-  type AssessmentResult,
-  LearningPath,
-  LEARNING_PATHS 
-} from '@/lib/knowledge-check';
+import { AnimatePresence, motion } from 'framer-motion';
 import {
-  CheckCircle,
-  XCircle,
-  Clock,
+  AlertTriangle,
+  ArrowRight,
+  Award,
   Brain,
+  CheckCircle,
+  Clock,
+  Lightbulb,
+  RotateCcw,
   Target,
   TrendingUp,
-  AlertTriangle,
-  BookOpen,
-  Zap,
-  Award,
-  ArrowRight,
-  RotateCcw,
-  Lightbulb
+  XCircle,
 } from 'lucide-react';
+import type React from 'react';
+import { useCallback, useEffect, useState } from 'react';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
+import { Progress } from '@/components/ui/progress';
+import {
+  type AssessmentResult,
+  KnowledgeAssessment,
+  type KnowledgeQuestion,
+} from '@/lib/knowledge-check';
 
 interface PrerequisitesCheckProps {
   onComplete: (result: AssessmentResult) => void;
@@ -49,10 +46,7 @@ interface AssessmentStats {
   timePerQuestion: number[];
 }
 
-export const PrerequisitesCheck: React.FC<PrerequisitesCheckProps> = ({ 
-  onComplete, 
-  onSkip 
-}) => {
+export const PrerequisitesCheck: React.FC<PrerequisitesCheckProps> = ({ onComplete, onSkip }) => {
   const [assessment] = useState(() => new KnowledgeAssessment());
   const [questions, setQuestions] = useState<KnowledgeQuestion[]>([]);
   const [questionState, setQuestionState] = useState<QuestionState>({
@@ -60,13 +54,13 @@ export const PrerequisitesCheck: React.FC<PrerequisitesCheckProps> = ({
     selectedAnswer: null,
     showFeedback: false,
     isCorrect: false,
-    explanation: ''
+    explanation: '',
   });
   const [assessmentStats, setAssessmentStats] = useState<AssessmentStats>({
     correct: 0,
     total: 0,
     timeStarted: new Date(),
-    timePerQuestion: []
+    timePerQuestion: [],
   });
   const [isStarted, setIsStarted] = useState(false);
   const [isCompleted, setIsCompleted] = useState(false);
@@ -77,48 +71,51 @@ export const PrerequisitesCheck: React.FC<PrerequisitesCheckProps> = ({
   useEffect(() => {
     const assessmentQuestions = assessment.getAssessmentQuestions(10);
     setQuestions(assessmentQuestions);
-    setAssessmentStats(prev => ({ ...prev, total: assessmentQuestions.length }));
+    setAssessmentStats((prev) => ({ ...prev, total: assessmentQuestions.length }));
   }, [assessment]);
 
   const startAssessment = useCallback(() => {
     setIsStarted(true);
     setQuestionStartTime(new Date());
-    setAssessmentStats(prev => ({ ...prev, timeStarted: new Date() }));
+    setAssessmentStats((prev) => ({ ...prev, timeStarted: new Date() }));
   }, []);
 
-  const selectAnswer = useCallback((answerIndex: number) => {
-    if (questionState.showFeedback) return;
+  const selectAnswer = useCallback(
+    (answerIndex: number) => {
+      if (questionState.showFeedback) return;
 
-    const currentQuestion = questions[questionState.currentQuestionIndex];
-    if (!currentQuestion) return;
+      const currentQuestion = questions[questionState.currentQuestionIndex];
+      if (!currentQuestion) return;
 
-    // Record time taken for this question
-    const timeNow = new Date();
-    const timeTaken = timeNow.getTime() - questionStartTime.getTime();
-    
-    // Record answer in assessment
-    const feedback = assessment.recordAnswer(currentQuestion.id, answerIndex);
-    
-    // Update stats
-    setAssessmentStats(prev => ({
-      ...prev,
-      correct: prev.correct + (feedback.correct ? 1 : 0),
-      timePerQuestion: [...prev.timePerQuestion, timeTaken]
-    }));
+      // Record time taken for this question
+      const timeNow = new Date();
+      const timeTaken = timeNow.getTime() - questionStartTime.getTime();
 
-    // Show feedback
-    setQuestionState(prev => ({
-      ...prev,
-      selectedAnswer: answerIndex,
-      showFeedback: true,
-      isCorrect: feedback.correct,
-      explanation: feedback.explanation
-    }));
-  }, [questionState, questions, assessment, questionStartTime]);
+      // Record answer in assessment
+      const feedback = assessment.recordAnswer(currentQuestion.id, answerIndex);
+
+      // Update stats
+      setAssessmentStats((prev) => ({
+        ...prev,
+        correct: prev.correct + (feedback.correct ? 1 : 0),
+        timePerQuestion: [...prev.timePerQuestion, timeTaken],
+      }));
+
+      // Show feedback
+      setQuestionState((prev) => ({
+        ...prev,
+        selectedAnswer: answerIndex,
+        showFeedback: true,
+        isCorrect: feedback.correct,
+        explanation: feedback.explanation,
+      }));
+    },
+    [questionState, questions, assessment, questionStartTime]
+  );
 
   const nextQuestion = useCallback(() => {
     const nextIndex = questionState.currentQuestionIndex + 1;
-    
+
     if (nextIndex >= questions.length) {
       // Assessment complete
       const assessmentResult = assessment.calculateResults(questions);
@@ -132,7 +129,7 @@ export const PrerequisitesCheck: React.FC<PrerequisitesCheckProps> = ({
         selectedAnswer: null,
         showFeedback: false,
         isCorrect: false,
-        explanation: ''
+        explanation: '',
       });
       setQuestionStartTime(new Date());
     }
@@ -147,13 +144,13 @@ export const PrerequisitesCheck: React.FC<PrerequisitesCheckProps> = ({
       selectedAnswer: null,
       showFeedback: false,
       isCorrect: false,
-      explanation: ''
+      explanation: '',
     });
     setAssessmentStats({
       correct: 0,
       total: newQuestions.length,
       timeStarted: new Date(),
-      timePerQuestion: []
+      timePerQuestion: [],
     });
     setIsStarted(false);
     setIsCompleted(false);
@@ -161,7 +158,12 @@ export const PrerequisitesCheck: React.FC<PrerequisitesCheckProps> = ({
   }, [assessment]);
 
   const currentQuestion = questions[questionState.currentQuestionIndex];
-  const progress = questions.length > 0 ? ((questionState.currentQuestionIndex + (questionState.showFeedback ? 1 : 0)) / questions.length) * 100 : 0;
+  const progress =
+    questions.length > 0
+      ? ((questionState.currentQuestionIndex + (questionState.showFeedback ? 1 : 0)) /
+          questions.length) *
+        100
+      : 0;
 
   // Introduction screen
   if (!isStarted && !isCompleted) {
@@ -177,11 +179,10 @@ export const PrerequisitesCheck: React.FC<PrerequisitesCheckProps> = ({
               <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-100 rounded-full mb-4">
                 <Brain className="h-8 w-8 text-blue-600" />
               </div>
-              <h1 className="text-3xl font-bold text-gray-900 mb-2">
-                Knowledge Assessment
-              </h1>
+              <h1 className="text-3xl font-bold text-gray-900 mb-2">Knowledge Assessment</h1>
               <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                Let's determine your current knowledge level and recommend the perfect learning path for your TCO certification journey.
+                Let's determine your current knowledge level and recommend the perfect learning path
+                for your TCO certification journey.
               </p>
             </div>
 
@@ -191,21 +192,27 @@ export const PrerequisitesCheck: React.FC<PrerequisitesCheckProps> = ({
                   <CheckCircle className="h-5 w-5 text-[#22c55e] mt-1" />
                   <div>
                     <h3 className="font-semibold text-gray-900">Personalized Learning Path</h3>
-                    <p className="text-sm text-gray-600">Get recommendations based on your current knowledge level</p>
+                    <p className="text-sm text-gray-600">
+                      Get recommendations based on your current knowledge level
+                    </p>
                   </div>
                 </div>
                 <div className="flex items-start space-x-3">
                   <Target className="h-5 w-5 text-primary mt-1" />
                   <div>
                     <h3 className="font-semibold text-gray-900">Focused Study Plan</h3>
-                    <p className="text-sm text-gray-600">Identify your strengths and areas for improvement</p>
+                    <p className="text-sm text-gray-600">
+                      Identify your strengths and areas for improvement
+                    </p>
                   </div>
                 </div>
                 <div className="flex items-start space-x-3">
                   <Clock className="h-5 w-5 text-primary mt-1" />
                   <div>
                     <h3 className="font-semibold text-gray-900">Quick Assessment</h3>
-                    <p className="text-sm text-gray-600">Only 10 questions, takes about 5-7 minutes</p>
+                    <p className="text-sm text-gray-600">
+                      Only 10 questions, takes about 5-7 minutes
+                    </p>
                   </div>
                 </div>
               </div>
@@ -238,7 +245,7 @@ export const PrerequisitesCheck: React.FC<PrerequisitesCheckProps> = ({
             </div>
 
             <div className="flex justify-center space-x-4">
-              <Button 
+              <Button
                 onClick={startAssessment}
                 size="lg"
                 className="bg-blue-600 hover:bg-blue-700 text-foreground px-8"
@@ -247,12 +254,7 @@ export const PrerequisitesCheck: React.FC<PrerequisitesCheckProps> = ({
                 Start Assessment
               </Button>
               {onSkip && (
-                <Button 
-                  onClick={onSkip}
-                  variant="outline"
-                  size="lg"
-                  className="px-8"
-                >
+                <Button onClick={onSkip} variant="outline" size="lg" className="px-8">
                   Skip Assessment
                 </Button>
               )}
@@ -271,9 +273,13 @@ export const PrerequisitesCheck: React.FC<PrerequisitesCheckProps> = ({
 
   // Results screen
   if (isCompleted && result) {
-    const pathConfidenceColor = result.recommendedPath.confidence >= 90 ? 'green' : 
-                               result.recommendedPath.confidence >= 70 ? 'blue' : 'orange';
-    
+    const pathConfidenceColor =
+      result.recommendedPath.confidence >= 90
+        ? 'green'
+        : result.recommendedPath.confidence >= 70
+          ? 'blue'
+          : 'orange';
+
     return (
       <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
@@ -286,9 +292,7 @@ export const PrerequisitesCheck: React.FC<PrerequisitesCheckProps> = ({
               <div className="inline-flex items-center justify-center w-16 h-16 bg-green-100 rounded-full mb-4">
                 <Award className="h-8 w-8 text-[#22c55e]" />
               </div>
-              <h1 className="text-3xl font-bold text-gray-900 mb-2">
-                Assessment Complete!
-              </h1>
+              <h1 className="text-3xl font-bold text-gray-900 mb-2">Assessment Complete!</h1>
               <p className="text-lg text-gray-600">
                 Here's your personalized learning path recommendation
               </p>
@@ -298,9 +302,7 @@ export const PrerequisitesCheck: React.FC<PrerequisitesCheckProps> = ({
             <div className="grid md:grid-cols-3 gap-6 mb-8">
               <Card>
                 <CardContent className="p-6 text-center">
-                  <div className="text-3xl font-bold text-blue-600 mb-1">
-                    {result.percentage}%
-                  </div>
+                  <div className="text-3xl font-bold text-blue-600 mb-1">{result.percentage}%</div>
                   <p className="text-sm text-gray-600">Overall Score</p>
                   <p className="text-xs text-muted-foreground mt-1">
                     {result.totalScore} of {result.maxScore} points
@@ -323,12 +325,15 @@ export const PrerequisitesCheck: React.FC<PrerequisitesCheckProps> = ({
               <Card>
                 <CardContent className="p-6 text-center">
                   <div className="text-3xl font-bold text-cyan-600 mb-1">
-                    {Math.round(assessmentStats.timePerQuestion.reduce((a, b) => a + b, 0) / assessmentStats.timePerQuestion.length / 1000)}s
+                    {Math.round(
+                      assessmentStats.timePerQuestion.reduce((a, b) => a + b, 0) /
+                        assessmentStats.timePerQuestion.length /
+                        1000
+                    )}
+                    s
                   </div>
                   <p className="text-sm text-gray-600">Avg. Time</p>
-                  <p className="text-xs text-muted-foreground mt-1">
-                    per question
-                  </p>
+                  <p className="text-xs text-muted-foreground mt-1">per question</p>
                 </CardContent>
               </Card>
             </div>
@@ -338,20 +343,22 @@ export const PrerequisitesCheck: React.FC<PrerequisitesCheckProps> = ({
               <CardContent className="p-6">
                 <div className="flex items-start justify-between mb-4">
                   <div className="flex items-center space-x-3">
-                    <div className={`inline-flex items-center justify-center w-10 h-10 rounded-full bg-${pathConfidenceColor}-100`}>
+                    <div
+                      className={`inline-flex items-center justify-center w-10 h-10 rounded-full bg-${pathConfidenceColor}-100`}
+                    >
                       <Target className={`h-5 w-5 text-${pathConfidenceColor}-600`} />
                     </div>
                     <div>
                       <h3 className="text-xl font-semibold text-gray-900">
                         {result.recommendedPath.name}
                       </h3>
-                      <p className="text-sm text-gray-600">
-                        {result.recommendedPath.description}
-                      </p>
+                      <p className="text-sm text-gray-600">{result.recommendedPath.description}</p>
                     </div>
                   </div>
                   <div className="text-right">
-                    <Badge className={`bg-${pathConfidenceColor}-100 text-${pathConfidenceColor}-800 border-${pathConfidenceColor}-200`}>
+                    <Badge
+                      className={`bg-${pathConfidenceColor}-100 text-${pathConfidenceColor}-800 border-${pathConfidenceColor}-200`}
+                    >
                       {result.recommendedPath.confidence}% confidence
                     </Badge>
                   </div>
@@ -363,7 +370,9 @@ export const PrerequisitesCheck: React.FC<PrerequisitesCheckProps> = ({
                     <div className="space-y-2">
                       <div className="flex items-center space-x-2">
                         <Clock className="h-4 w-4 text-muted-foreground" />
-                        <span className="text-sm text-gray-600">{result.recommendedPath.duration}</span>
+                        <span className="text-sm text-gray-600">
+                          {result.recommendedPath.duration}
+                        </span>
                       </div>
                       <div className="flex items-center space-x-2">
                         <TrendingUp className="h-4 w-4 text-muted-foreground" />
@@ -402,7 +411,10 @@ export const PrerequisitesCheck: React.FC<PrerequisitesCheckProps> = ({
                     <div className="space-y-2">
                       {result.strengths.map((strength, index) => (
                         <div key={index} className="flex items-center space-x-2">
-                          <Badge variant="secondary" className="bg-green-100 text-green-800 border-green-200">
+                          <Badge
+                            variant="secondary"
+                            className="bg-green-100 text-green-800 border-green-200"
+                          >
                             {strength}
                           </Badge>
                         </div>
@@ -427,7 +439,10 @@ export const PrerequisitesCheck: React.FC<PrerequisitesCheckProps> = ({
                     <div className="space-y-2">
                       {result.weaknesses.map((weakness, index) => (
                         <div key={index} className="flex items-center space-x-2">
-                          <Badge variant="secondary" className="bg-orange-100 text-orange-800 border-orange-200">
+                          <Badge
+                            variant="secondary"
+                            className="bg-orange-100 text-orange-800 border-orange-200"
+                          >
                             {weakness}
                           </Badge>
                         </div>
@@ -464,7 +479,7 @@ export const PrerequisitesCheck: React.FC<PrerequisitesCheckProps> = ({
 
             {/* Action Buttons */}
             <div className="flex justify-center space-x-4">
-              <Button 
+              <Button
                 onClick={() => onComplete(result)}
                 size="lg"
                 className="bg-[#22c55e] hover:bg-green-700 text-foreground px-8"
@@ -472,12 +487,7 @@ export const PrerequisitesCheck: React.FC<PrerequisitesCheckProps> = ({
                 <ArrowRight className="h-4 w-4 mr-2" />
                 Start Learning Path
               </Button>
-              <Button 
-                onClick={restartAssessment}
-                variant="outline"
-                size="lg"
-                className="px-6"
-              >
+              <Button onClick={restartAssessment} variant="outline" size="lg" className="px-6">
                 <RotateCcw className="h-4 w-4 mr-2" />
                 Retake Assessment
               </Button>
@@ -507,9 +517,7 @@ export const PrerequisitesCheck: React.FC<PrerequisitesCheckProps> = ({
             Question {questionState.currentQuestionIndex + 1} of {questions.length}
           </span>
           <div className="flex items-center space-x-2">
-            <span className="text-sm text-muted-foreground">
-              {Math.round(progress)}% Complete
-            </span>
+            <span className="text-sm text-muted-foreground">{Math.round(progress)}% Complete</span>
           </div>
         </div>
         <Progress value={progress} className="h-2" />
@@ -534,9 +542,7 @@ export const PrerequisitesCheck: React.FC<PrerequisitesCheckProps> = ({
                     {currentQuestion.difficulty}
                   </Badge>
                 </div>
-                <h2 className="text-xl font-semibold text-gray-900">
-                  {currentQuestion.question}
-                </h2>
+                <h2 className="text-xl font-semibold text-gray-900">{currentQuestion.question}</h2>
               </div>
             </div>
           </div>
@@ -545,7 +551,8 @@ export const PrerequisitesCheck: React.FC<PrerequisitesCheckProps> = ({
           <div className="space-y-3 mb-6">
             {currentQuestion.options.map((option, index) => {
               const isSelected = questionState.selectedAnswer === index;
-              const isCorrect = questionState.showFeedback && index === currentQuestion.correctAnswer;
+              const isCorrect =
+                questionState.showFeedback && index === currentQuestion.correctAnswer;
               const isWrong = questionState.showFeedback && isSelected && !questionState.isCorrect;
 
               return (
@@ -565,24 +572,32 @@ export const PrerequisitesCheck: React.FC<PrerequisitesCheckProps> = ({
                   `}
                 >
                   <div className="flex items-center space-x-3">
-                    <div className={`
+                    <div
+                      className={`
                       w-6 h-6 rounded-full border-2 flex items-center justify-center text-sm font-semibold
                       ${isSelected && !questionState.showFeedback ? 'border-blue-500 bg-primary text-foreground' : 'border-gray-300'}
                       ${isCorrect ? 'border-green-500 bg-[#22c55e] text-foreground' : ''}
                       ${isWrong ? 'border-red-500 bg-red-500 text-foreground' : ''}
-                    `}>
+                    `}
+                    >
                       {questionState.showFeedback ? (
-                        isCorrect ? <CheckCircle className="h-4 w-4" /> :
-                        isWrong ? <XCircle className="h-4 w-4" /> :
-                        String.fromCharCode(65 + index)
+                        isCorrect ? (
+                          <CheckCircle className="h-4 w-4" />
+                        ) : isWrong ? (
+                          <XCircle className="h-4 w-4" />
+                        ) : (
+                          String.fromCharCode(65 + index)
+                        )
                       ) : (
                         String.fromCharCode(65 + index)
                       )}
                     </div>
-                    <span className={`
+                    <span
+                      className={`
                       ${isCorrect ? 'text-green-800 font-medium' : ''}
                       ${isWrong ? 'text-red-800 font-medium' : ''}
-                    `}>
+                    `}
+                    >
                       {option}
                     </span>
                   </div>
@@ -600,10 +615,14 @@ export const PrerequisitesCheck: React.FC<PrerequisitesCheckProps> = ({
                 exit={{ opacity: 0, height: 0 }}
                 className="mb-6"
               >
-                <Card className={`border-2 ${questionState.isCorrect ? 'border-green-200 bg-green-50' : 'border-orange-200 bg-orange-50'}`}>
+                <Card
+                  className={`border-2 ${questionState.isCorrect ? 'border-green-200 bg-green-50' : 'border-orange-200 bg-orange-50'}`}
+                >
                   <CardContent className="p-4">
                     <div className="flex items-start space-x-3">
-                      <div className={`flex-shrink-0 ${questionState.isCorrect ? 'text-[#22c55e]' : 'text-orange-600'}`}>
+                      <div
+                        className={`flex-shrink-0 ${questionState.isCorrect ? 'text-[#22c55e]' : 'text-orange-600'}`}
+                      >
                         {questionState.isCorrect ? (
                           <CheckCircle className="h-5 w-5" />
                         ) : (
@@ -611,12 +630,12 @@ export const PrerequisitesCheck: React.FC<PrerequisitesCheckProps> = ({
                         )}
                       </div>
                       <div>
-                        <h3 className={`font-semibold mb-1 ${questionState.isCorrect ? 'text-green-800' : 'text-orange-800'}`}>
+                        <h3
+                          className={`font-semibold mb-1 ${questionState.isCorrect ? 'text-green-800' : 'text-orange-800'}`}
+                        >
                           {questionState.isCorrect ? 'Correct!' : 'Good try!'}
                         </h3>
-                        <p className="text-sm text-gray-700">
-                          {questionState.explanation}
-                        </p>
+                        <p className="text-sm text-gray-700">{questionState.explanation}</p>
                       </div>
                     </div>
                   </CardContent>
@@ -629,7 +648,8 @@ export const PrerequisitesCheck: React.FC<PrerequisitesCheckProps> = ({
           <div className="flex justify-between items-center">
             <div className="flex items-center space-x-4 text-sm text-muted-foreground">
               <span>
-                Score: {assessmentStats.correct}/{questionState.currentQuestionIndex + (questionState.showFeedback ? 1 : 0)}
+                Score: {assessmentStats.correct}/
+                {questionState.currentQuestionIndex + (questionState.showFeedback ? 1 : 0)}
               </span>
             </div>
 

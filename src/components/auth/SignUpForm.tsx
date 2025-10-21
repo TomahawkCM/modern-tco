@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { useAuth } from "@/contexts/AuthContext";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Alert, AlertDescription } from "@/components/ui/alert";
-import { Loader2, Eye, EyeOff, CheckCircle } from "lucide-react";
+import { CheckCircle, Eye, EyeOff, Loader2 } from 'lucide-react';
+import { useState } from 'react';
+import { Alert, AlertDescription } from '@/components/ui/alert';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { useAuth } from '@/contexts/AuthContext';
 
 interface SignUpFormProps {
   onSuccess?: () => void;
@@ -14,11 +14,11 @@ interface SignUpFormProps {
 }
 
 export function SignUpForm({ onSuccess, onSwitchToLogin }: SignUpFormProps) {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -55,17 +55,17 @@ export function SignUpForm({ onSuccess, onSwitchToLogin }: SignUpFormProps) {
 
     // Validation
     if (!passwordValidation.isValid) {
-      setError("Password must be at least 8 characters with uppercase, lowercase, and numbers");
+      setError('Password must be at least 8 characters with uppercase, lowercase, and numbers');
       return;
     }
 
     if (password !== confirmPassword) {
-      setError("Passwords do not match");
+      setError('Passwords do not match');
       return;
     }
 
     if (!firstName.trim() || !lastName.trim()) {
-      setError("First name and last name are required");
+      setError('First name and last name are required');
       return;
     }
 
@@ -84,7 +84,7 @@ export function SignUpForm({ onSuccess, onSwitchToLogin }: SignUpFormProps) {
         // Don't call onSuccess immediately - user needs to verify email
       }
     } catch (error) {
-      setError("An unexpected error occurred. Please try again.");
+      setError('An unexpected error occurred. Please try again.');
     } finally {
       setIsSubmitting(false);
     }
@@ -181,7 +181,7 @@ export function SignUpForm({ onSuccess, onSwitchToLogin }: SignUpFormProps) {
             <div className="relative">
               <Input
                 id="password"
-                type={showPassword ? "text" : "password"}
+                type={showPassword ? 'text' : 'password'}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Create a strong password"
@@ -206,34 +206,34 @@ export function SignUpForm({ onSuccess, onSwitchToLogin }: SignUpFormProps) {
             {password && (
               <div className="space-y-1 text-xs">
                 <div
-                  className={`flex items-center gap-1 ${passwordValidation.minLength ? "text-[#22c55e]" : "text-muted-foreground"}`}
+                  className={`flex items-center gap-1 ${passwordValidation.minLength ? 'text-[#22c55e]' : 'text-muted-foreground'}`}
                 >
                   <div
-                    className={`h-2 w-2 rounded-full ${passwordValidation.minLength ? "bg-[#22c55e]" : "bg-gray-300"}`}
+                    className={`h-2 w-2 rounded-full ${passwordValidation.minLength ? 'bg-[#22c55e]' : 'bg-gray-300'}`}
                   />
                   At least 8 characters
                 </div>
                 <div
-                  className={`flex items-center gap-1 ${passwordValidation.hasUpperCase ? "text-[#22c55e]" : "text-muted-foreground"}`}
+                  className={`flex items-center gap-1 ${passwordValidation.hasUpperCase ? 'text-[#22c55e]' : 'text-muted-foreground'}`}
                 >
                   <div
-                    className={`h-2 w-2 rounded-full ${passwordValidation.hasUpperCase ? "bg-[#22c55e]" : "bg-gray-300"}`}
+                    className={`h-2 w-2 rounded-full ${passwordValidation.hasUpperCase ? 'bg-[#22c55e]' : 'bg-gray-300'}`}
                   />
                   One uppercase letter
                 </div>
                 <div
-                  className={`flex items-center gap-1 ${passwordValidation.hasLowerCase ? "text-[#22c55e]" : "text-muted-foreground"}`}
+                  className={`flex items-center gap-1 ${passwordValidation.hasLowerCase ? 'text-[#22c55e]' : 'text-muted-foreground'}`}
                 >
                   <div
-                    className={`h-2 w-2 rounded-full ${passwordValidation.hasLowerCase ? "bg-[#22c55e]" : "bg-gray-300"}`}
+                    className={`h-2 w-2 rounded-full ${passwordValidation.hasLowerCase ? 'bg-[#22c55e]' : 'bg-gray-300'}`}
                   />
                   One lowercase letter
                 </div>
                 <div
-                  className={`flex items-center gap-1 ${passwordValidation.hasNumbers ? "text-[#22c55e]" : "text-muted-foreground"}`}
+                  className={`flex items-center gap-1 ${passwordValidation.hasNumbers ? 'text-[#22c55e]' : 'text-muted-foreground'}`}
                 >
                   <div
-                    className={`h-2 w-2 rounded-full ${passwordValidation.hasNumbers ? "bg-[#22c55e]" : "bg-gray-300"}`}
+                    className={`h-2 w-2 rounded-full ${passwordValidation.hasNumbers ? 'bg-[#22c55e]' : 'bg-gray-300'}`}
                   />
                   One number
                 </div>
@@ -248,7 +248,7 @@ export function SignUpForm({ onSuccess, onSwitchToLogin }: SignUpFormProps) {
             <div className="relative">
               <Input
                 id="confirmPassword"
-                type={showConfirmPassword ? "text" : "password"}
+                type={showConfirmPassword ? 'text' : 'password'}
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 placeholder="Confirm your password"
@@ -272,12 +272,12 @@ export function SignUpForm({ onSuccess, onSwitchToLogin }: SignUpFormProps) {
 
             {confirmPassword && (
               <div
-                className={`flex items-center gap-1 text-xs ${passwordsMatch ? "text-[#22c55e]" : "text-red-500"}`}
+                className={`flex items-center gap-1 text-xs ${passwordsMatch ? 'text-[#22c55e]' : 'text-red-500'}`}
               >
                 <div
-                  className={`h-2 w-2 rounded-full ${passwordsMatch ? "bg-[#22c55e]" : "bg-red-500"}`}
+                  className={`h-2 w-2 rounded-full ${passwordsMatch ? 'bg-[#22c55e]' : 'bg-red-500'}`}
                 />
-                {passwordsMatch ? "Passwords match" : "Passwords do not match"}
+                {passwordsMatch ? 'Passwords match' : 'Passwords do not match'}
               </div>
             )}
           </div>
@@ -293,7 +293,7 @@ export function SignUpForm({ onSuccess, onSwitchToLogin }: SignUpFormProps) {
                 Creating Account...
               </>
             ) : (
-              "Create Account"
+              'Create Account'
             )}
           </Button>
 

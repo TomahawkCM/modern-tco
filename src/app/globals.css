@@ -81,29 +81,31 @@
   body {
     @apply bg-background text-foreground;
   }
-  
+
   /* Force dark mode with archon cyberpunk theme */
-html {
+  html {
     color-scheme: dark;
-    overflow-y: auto !important;
+    overflow-y: auto;
     scroll-behavior: smooth;
-}
-  
-body {
+  }
+
+  body {
     @apply bg-archon-bg;
     background-attachment: fixed;
-    overflow-y: auto !important;
+    overflow-y: auto;
     overflow-x: hidden;
-}
+  }
 
-/* Allow natural content expansion for scrolling */
-#__next, body, html {
-  min-height: 100vh;
-}
+  /* Allow natural content expansion for scrolling */
+  #__next,
+  body,
+  html {
+    min-height: 100vh;
+  }
 
-main#main-content {
-  overflow-y: visible;
-}
+  main#main-content {
+    overflow-y: visible;
+  }
 }
 
 /* Archon cyberpunk glass morphism effects - Updated to blue palette */
@@ -161,8 +163,13 @@ main#main-content {
 
 /* Cyberpunk animations - Updated to blue palette */
 @keyframes cyber-pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.7; }
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
 }
 
 .cyber-pulse {
@@ -170,11 +177,14 @@ main#main-content {
 }
 
 @keyframes neon-glow {
-  0%, 100% {
+  0%,
+  100% {
     text-shadow: 0 0 5px rgba(59, 130, 246, 0.5);
   }
   50% {
-    text-shadow: 0 0 20px rgba(59, 130, 246, 0.8), 0 0 30px rgba(59, 130, 246, 0.6);
+    text-shadow:
+      0 0 20px rgba(59, 130, 246, 0.8),
+      0 0 30px rgba(59, 130, 246, 0.6);
   }
 }
 
@@ -184,19 +194,20 @@ main#main-content {
 
 /* Enhanced cyberpunk animations for study cards */
 @keyframes particle-float {
-  0%, 100% { 
+  0%,
+  100% {
     transform: translateY(0px) translateX(0px);
     opacity: 0.3;
   }
-  25% { 
+  25% {
     transform: translateY(-10px) translateX(5px);
     opacity: 0.6;
   }
-  50% { 
+  50% {
     transform: translateY(-20px) translateX(-3px);
     opacity: 0.8;
   }
-  75% { 
+  75% {
     transform: translateY(-15px) translateX(8px);
     opacity: 0.5;
   }
@@ -235,22 +246,20 @@ main#main-content {
 }
 
 .hologram-shimmer {
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(59, 130, 246, 0.1),
-    transparent
-  );
+  background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.1), transparent);
   background-size: 200% 100%;
   animation: hologram-shimmer 3s ease-in-out infinite;
 }
 
 @keyframes progress-glow {
-  0%, 100% {
+  0%,
+  100% {
     box-shadow: 0 0 5px rgba(59, 130, 246, 0.5);
   }
   50% {
-    box-shadow: 0 0 15px rgba(59, 130, 246, 0.8), 0 0 25px rgba(59, 130, 246, 0.4);
+    box-shadow:
+      0 0 15px rgba(59, 130, 246, 0.8),
+      0 0 25px rgba(59, 130, 246, 0.4);
   }
 }
 

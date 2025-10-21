@@ -5,11 +5,6 @@
   "status": "active",
   "activeTasks": 0,
   "lastActivity": 1758677672597,
-  "capabilities": [
-    "Research",
-    "Analysis",
-    "Information Gathering",
-    "Documentation"
-  ],
+  "capabilities": ["Research", "Analysis", "Information Gathering", "Documentation"],
   "createdAt": 1758677672597
 }

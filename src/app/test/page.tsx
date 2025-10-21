@@ -36,7 +36,7 @@ export default function TestPage() {
               <strong>Framework:</strong> Next.js 15.5.2
             </p>
             <p>
-              <strong>Status:</strong>{" "}
+              <strong>Status:</strong>{' '}
               <span className="font-semibold text-[#22c55e]">Connected</span>
             </p>
           </div>

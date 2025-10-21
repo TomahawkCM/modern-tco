@@ -3,30 +3,29 @@
  * TypeScript-based query engine replacing Python simulator
  */
 
-import { Parser, parse } from './parser';
-import { QueryExecutor, executeQuery } from './executor';
 import { CacheManager, cacheManager } from './cache';
+import { executeQuery, QueryExecutor } from './executor';
 import {
-  getFieldMapping,
-  resolveGroupAlias,
-  isKnownField,
+  AGGREGATE_FUNCTIONS,
   getAllFieldNames,
+  getFieldMapping,
+  isKnownField,
+  resolveGroupAlias,
   SENSORS_CATALOG,
-  AGGREGATE_FUNCTIONS
 } from './field-mappings';
-import {
-  type QueryResult,
-  type QueryNode,
-  type MachineData,
-  type ParserOptions,
-  type ExecutorOptions,
-  type SavedQuery,
-  type QueryTemplate,
-  QueryError,
-  ParseError,
-  ExecutionError
-} from './types';
+import { Parser, parse } from './parser';
 import { generateSampleDataWithScenarios } from './sample-data-generator';
+import {
+  type ExecutorOptions,
+  type MachineData,
+  ParseError,
+  type ParserOptions,
+  QueryError,
+  type QueryNode,
+  type QueryResult,
+  type QueryTemplate,
+  type SavedQuery,
+} from './types';
 
 // Generate realistic sample data with 150 machines
 const SAMPLE_DATA: MachineData[] = generateSampleDataWithScenarios();
@@ -51,7 +50,8 @@ export class TaniumQueryEngine {
     this.parser = new Parser(options?.parserOptions);
     this.data = options?.data || SAMPLE_DATA;
     this.executor = new QueryExecutor(this.data, options?.executorOptions);
-    this.cache = options?.cacheEnabled !== false ? cacheManager : new CacheManager({ enabled: false });
+    this.cache =
+      options?.cacheEnabled !== false ? cacheManager : new CacheManager({ enabled: false });
 
     // Initialize default templates
     this.initializeTemplates();
@@ -79,7 +79,7 @@ export class TaniumQueryEngine {
           cached.execution = {
             ...cached.execution!,
             cacheHit: true,
-            totalTimeMs: performance.now() - startTime
+            totalTimeMs: performance.now() - startTime,
           };
           return cached;
         }
@@ -107,7 +107,7 @@ export class TaniumQueryEngine {
       // Update total time
       result.execution = {
         ...result.execution!,
-        totalTimeMs: performance.now() - startTime
+        totalTimeMs: performance.now() - startTime,
       };
 
       // Cache result
@@ -130,8 +130,8 @@ export class TaniumQueryEngine {
           scoped: 0,
           filtered: 0,
           rowsExamined: 0,
-          cacheHit: false
-        }
+          cacheHit: false,
+        },
       };
 
       return errorResult;
@@ -184,7 +184,7 @@ export class TaniumQueryEngine {
       description,
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
-      executionCount: 0
+      executionCount: 0,
     };
 
     this.savedQueries.set(name.toLowerCase(), saved);
@@ -245,41 +245,40 @@ export class TaniumQueryEngine {
       template: 'Get Computer Name, OS Platform, Group from all machines',
       parameters: [],
       category: 'Basic',
-      difficulty: 1
+      difficulty: 1,
     });
 
     this.addTemplate({
       id: 'high-cpu',
       name: 'High CPU Usage',
       description: 'Find machines with high CPU usage',
-      template: 'Get Computer Name, CPU Percent from all machines where CPU Percent is greater than "${threshold}" order by CPU Percent desc',
-      parameters: [
-        { name: 'threshold', type: 'number', required: true, default: 80 }
-      ],
+      template:
+        'Get Computer Name, CPU Percent from all machines where CPU Percent is greater than "${threshold}" order by CPU Percent desc',
+      parameters: [{ name: 'threshold', type: 'number', required: true, default: 80 }],
       category: 'Performance',
-      difficulty: 2
+      difficulty: 2,
     });
 
     this.addTemplate({
       id: 'low-disk',
       name: 'Low Disk Space',
       description: 'Find machines with low disk space',
-      template: 'Get Computer Name, Disk Free GB from all machines where Disk Free GB is less than "${threshold}" order by Disk Free GB',
-      parameters: [
-        { name: 'threshold', type: 'number', required: true, default: 50 }
-      ],
+      template:
+        'Get Computer Name, Disk Free GB from all machines where Disk Free GB is less than "${threshold}" order by Disk Free GB',
+      parameters: [{ name: 'threshold', type: 'number', required: true, default: 50 }],
       category: 'Performance',
-      difficulty: 2
+      difficulty: 2,
     });
 
     this.addTemplate({
       id: 'compliance-check',
       name: 'Compliance Check',
       description: 'Check compliance scores by group',
-      template: 'Get avg(Compliance Score), min(Compliance Score), count() from all machines group by Group',
+      template:
+        'Get avg(Compliance Score), min(Compliance Score), count() from all machines group by Group',
       parameters: [],
       category: 'Governance',
-      difficulty: 3
+      difficulty: 3,
     });
   }
 
@@ -383,10 +382,14 @@ export class TaniumQueryEngine {
    * Export saved queries and templates
    */
   public export(): string {
-    return JSON.stringify({
-      savedQueries: Array.from(this.savedQueries.entries()),
-      templates: Array.from(this.templates.entries())
-    }, null, 2);
+    return JSON.stringify(
+      {
+        savedQueries: Array.from(this.savedQueries.entries()),
+        templates: Array.from(this.templates.entries()),
+      },
+      null,
+      2
+    );
   }
 
   /**
@@ -421,7 +424,7 @@ export {
   isKnownField,
   getAllFieldNames,
   SENSORS_CATALOG,
-  AGGREGATE_FUNCTIONS
+  AGGREGATE_FUNCTIONS,
 };
 
 // Export default

@@ -1,26 +1,27 @@
-"use client";
+'use client';
 
-import { useModules } from "@/contexts/ModuleContext";
-import { TCODomain } from "@/types/exam";
-import { AnimatePresence, motion } from "framer-motion";
-import { BarChart3, BookOpen, CheckCircle2, Filter, Grid, List, Play, Search } from "lucide-react";
-import { useMemo, useState } from "react";
-import ModuleProgress from "./ModuleProgress";
+import { AnimatePresence, motion } from 'framer-motion';
+import { BarChart3, BookOpen, CheckCircle2, Filter, Grid, List, Play, Search } from 'lucide-react';
+import { useMemo, useState } from 'react';
+import { useModules } from '@/contexts/ModuleContext';
+import { TCODomain } from '@/types/exam';
+import ModuleProgress from './ModuleProgress';
+
 // Define Module interface locally to match the one used in ModuleContext
 interface Module {
   id: string;
   title: string;
   description: string;
   domain: string;
-  difficulty: "Beginner" | "Intermediate" | "Advanced";
+  difficulty: 'Beginner' | 'Intermediate' | 'Advanced';
   estimatedTime: number;
   objectives: Array<{ id: string; description: string }>;
   sections: Array<{ id: string; title: string }>;
 }
 
-type ViewMode = "grid" | "list";
-type FilterType = "all" | "not_started" | "in_progress" | "completed";
-type SortType = "order" | "title" | "difficulty" | "domain" | "progress";
+type ViewMode = 'grid' | 'list';
+type FilterType = 'all' | 'not_started' | 'in_progress' | 'completed';
+type SortType = 'order' | 'title' | 'difficulty' | 'domain' | 'progress';
 
 interface ModuleListProps {
   onModuleSelect?: (module: Module) => void;
@@ -28,32 +29,32 @@ interface ModuleListProps {
 }
 
 const domainLabels: Record<TCODomain, string> = {
-  [TCODomain.ASKING_QUESTIONS]: "Asking Questions",
-  [TCODomain.REFINING_QUESTIONS]: "Refining Questions",
-  [TCODomain.REFINING_TARGETING]: "Refining Questions", // Alias uses same label
-  [TCODomain.TAKING_ACTION]: "Taking Action",
-  [TCODomain.NAVIGATION_MODULES]: "Navigation and Basic Module Functions",
-  [TCODomain.REPORTING_EXPORT]: "Report Generation and Data Export",
+  [TCODomain.ASKING_QUESTIONS]: 'Asking Questions',
+  [TCODomain.REFINING_QUESTIONS]: 'Refining Questions',
+  [TCODomain.REFINING_TARGETING]: 'Refining Questions', // Alias uses same label
+  [TCODomain.TAKING_ACTION]: 'Taking Action',
+  [TCODomain.NAVIGATION_MODULES]: 'Navigation and Basic Module Functions',
+  [TCODomain.REPORTING_EXPORT]: 'Report Generation and Data Export',
   // Additional domain labels
-  [TCODomain.SECURITY]: "Security",
-  [TCODomain.FUNDAMENTALS]: "Fundamentals",
-  [TCODomain.TROUBLESHOOTING]: "Troubleshooting",
+  [TCODomain.SECURITY]: 'Security',
+  [TCODomain.FUNDAMENTALS]: 'Fundamentals',
+  [TCODomain.TROUBLESHOOTING]: 'Troubleshooting',
 };
 
 const domainColors: Record<TCODomain, string> = {
-  [TCODomain.ASKING_QUESTIONS]: "text-primary",
-  [TCODomain.REFINING_QUESTIONS]: "text-[#22c55e]",
-  [TCODomain.REFINING_TARGETING]: "text-[#22c55e]", // Alias uses same color
-  [TCODomain.TAKING_ACTION]: "text-red-400",
-  [TCODomain.NAVIGATION_MODULES]: "text-primary",
-  [TCODomain.REPORTING_EXPORT]: "text-[#f97316]",
+  [TCODomain.ASKING_QUESTIONS]: 'text-primary',
+  [TCODomain.REFINING_QUESTIONS]: 'text-[#22c55e]',
+  [TCODomain.REFINING_TARGETING]: 'text-[#22c55e]', // Alias uses same color
+  [TCODomain.TAKING_ACTION]: 'text-red-400',
+  [TCODomain.NAVIGATION_MODULES]: 'text-primary',
+  [TCODomain.REPORTING_EXPORT]: 'text-[#f97316]',
   // Additional domain colors
-  [TCODomain.SECURITY]: "text-orange-400",
-  [TCODomain.FUNDAMENTALS]: "text-sky-400",
-  [TCODomain.TROUBLESHOOTING]: "text-pink-400",
+  [TCODomain.SECURITY]: 'text-orange-400',
+  [TCODomain.FUNDAMENTALS]: 'text-sky-400',
+  [TCODomain.TROUBLESHOOTING]: 'text-pink-400',
 };
 
-function ModuleList({ onModuleSelect, className = "" }: ModuleListProps) {
+function ModuleList({ onModuleSelect, className = '' }: ModuleListProps) {
   const {
     modules,
     moduleProgress,
@@ -65,11 +66,11 @@ function ModuleList({ onModuleSelect, className = "" }: ModuleListProps) {
     getNotStartedModules,
   } = useModules();
 
-  const [searchTerm, setSearchTerm] = useState("");
-  const [selectedDomain, setSelectedDomain] = useState<TCODomain | "all">("all");
-  const [selectedFilter, setSelectedFilter] = useState<FilterType>("all");
-  const [sortBy, setSortBy] = useState<SortType>("order");
-  const [viewMode, setViewMode] = useState<ViewMode>("grid");
+  const [searchTerm, setSearchTerm] = useState('');
+  const [selectedDomain, setSelectedDomain] = useState<TCODomain | 'all'>('all');
+  const [selectedFilter, setSelectedFilter] = useState<FilterType>('all');
+  const [sortBy, setSortBy] = useState<SortType>('order');
+  const [viewMode, setViewMode] = useState<ViewMode>('grid');
 
   const overallStats = getOverallProgress();
 
@@ -88,25 +89,25 @@ function ModuleList({ onModuleSelect, className = "" }: ModuleListProps) {
       }
 
       // Domain filter
-      if (selectedDomain !== "all" && module.domain !== selectedDomain) {
+      if (selectedDomain !== 'all' && module.domain !== selectedDomain) {
         return false;
       }
 
       // Status filter
       const progress = moduleProgress[module.id];
-      if (selectedFilter !== "all") {
+      if (selectedFilter !== 'all') {
         const isCompleted = progress?.completedAt !== undefined;
         const isInProgress = progress?.startedAt && !progress.completedAt;
         const isNotStarted = !progress?.startedAt;
 
         switch (selectedFilter) {
-          case "completed":
+          case 'completed':
             if (!isCompleted) return false;
             break;
-          case "in_progress":
+          case 'in_progress':
             if (!isInProgress) return false;
             break;
-          case "not_started":
+          case 'not_started':
             if (!isNotStarted) return false;
             break;
         }
@@ -118,20 +119,21 @@ function ModuleList({ onModuleSelect, className = "" }: ModuleListProps) {
     // Sort modules
     filtered.sort((a, b) => {
       switch (sortBy) {
-        case "title":
+        case 'title':
           return a.title.localeCompare(b.title);
-        case "difficulty":
+        case 'difficulty': {
           const difficultyOrder = { Beginner: 0, Intermediate: 1, Advanced: 2 };
           return difficultyOrder[a.difficulty] - difficultyOrder[b.difficulty];
-        case "domain":
+        }
+        case 'domain':
           return a.domain.localeCompare(b.domain);
-        case "progress":
+        case 'progress': {
           const aProgress = moduleProgress[a.id];
           const bProgress = moduleProgress[b.id];
           const aComplete = aProgress?.completedAt ? 100 : aProgress?.overallProgress || 0;
           const bComplete = bProgress?.completedAt ? 100 : bProgress?.overallProgress || 0;
           return bComplete - aComplete;
-        case "order":
+        }
         default:
           // Use the order from the modules array (already in correct TCO order)
           return modules.indexOf(a) - modules.indexOf(b);
@@ -190,7 +192,9 @@ function ModuleList({ onModuleSelect, className = "" }: ModuleListProps) {
           <div className="flex items-center gap-3">
             <CheckCircle2 className="h-8 w-8 text-[#22c55e]" />
             <div>
-              <div className="text-2xl font-bold text-foreground">{overallStats.completedModules}</div>
+              <div className="text-2xl font-bold text-foreground">
+                {overallStats.completedModules}
+              </div>
               <div className="text-sm text-green-200">Completed</div>
             </div>
           </div>
@@ -205,7 +209,9 @@ function ModuleList({ onModuleSelect, className = "" }: ModuleListProps) {
           <div className="flex items-center gap-3">
             <Play className="h-8 w-8 text-[#f97316]" />
             <div>
-              <div className="text-2xl font-bold text-foreground">{overallStats.inProgressModules}</div>
+              <div className="text-2xl font-bold text-foreground">
+                {overallStats.inProgressModules}
+              </div>
               <div className="text-sm text-[#f97316]">In Progress</div>
             </div>
           </div>
@@ -247,7 +253,7 @@ function ModuleList({ onModuleSelect, className = "" }: ModuleListProps) {
           {/* Domain Filter */}
           <select
             value={selectedDomain}
-            onChange={(e) => setSelectedDomain(e.target.value as TCODomain | "all")}
+            onChange={(e) => setSelectedDomain(e.target.value as TCODomain | 'all')}
             aria-label="Filter modules by domain"
             className="rounded-lg border border-white/10 bg-black/20 px-3 py-2 text-foreground focus:outline-none focus:ring-2 focus:ring-blue-500/50"
           >
@@ -290,25 +296,25 @@ function ModuleList({ onModuleSelect, className = "" }: ModuleListProps) {
         {/* View Mode Toggle */}
         <div className="flex items-center gap-2 rounded-lg border border-white/10 bg-black/20 p-1">
           <button
-            onClick={() => setViewMode("grid")}
+            onClick={() => setViewMode('grid')}
             title="Switch to grid view"
             aria-label="Switch to grid view"
             className={`rounded-md p-2 transition-colors ${
-              viewMode === "grid"
-                ? "bg-primary/20 text-primary"
-                : "text-muted-foreground hover:text-foreground"
+              viewMode === 'grid'
+                ? 'bg-primary/20 text-primary'
+                : 'text-muted-foreground hover:text-foreground'
             }`}
           >
             <Grid className="h-4 w-4" />
           </button>
           <button
-            onClick={() => setViewMode("list")}
+            onClick={() => setViewMode('list')}
             title="Switch to list view"
             aria-label="Switch to list view"
             className={`rounded-md p-2 transition-colors ${
-              viewMode === "list"
-                ? "bg-primary/20 text-primary"
-                : "text-muted-foreground hover:text-foreground"
+              viewMode === 'list'
+                ? 'bg-primary/20 text-primary'
+                : 'text-muted-foreground hover:text-foreground'
             }`}
           >
             <List className="h-4 w-4" />
@@ -324,10 +330,10 @@ function ModuleList({ onModuleSelect, className = "" }: ModuleListProps) {
         {searchTerm && (
           <button
             onClick={() => {
-              setSearchTerm("");
-              setSelectedDomain("all");
-              setSelectedFilter("all");
-              setSortBy("order");
+              setSearchTerm('');
+              setSelectedDomain('all');
+              setSelectedFilter('all');
+              setSortBy('order');
             }}
             className="text-sm text-primary transition-colors hover:text-primary"
           >
@@ -353,7 +359,7 @@ function ModuleList({ onModuleSelect, className = "" }: ModuleListProps) {
           <motion.div
             layout
             className={`grid gap-6 ${
-              viewMode === "grid" ? "grid-cols-1 lg:grid-cols-2 xl:grid-cols-3" : "grid-cols-1"
+              viewMode === 'grid' ? 'grid-cols-1 lg:grid-cols-2 xl:grid-cols-3' : 'grid-cols-1'
             }`}
           >
             {filteredAndSortedModules.map((module, index) => {
@@ -373,7 +379,7 @@ function ModuleList({ onModuleSelect, className = "" }: ModuleListProps) {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -20 }}
                   transition={{ delay: index * 0.05 }}
-                  className={viewMode === "list" ? "max-w-none" : ""}
+                  className={viewMode === 'list' ? 'max-w-none' : ''}
                 >
                   <ModuleProgress
                     module={module}

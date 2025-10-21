@@ -1,25 +1,24 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import {
-  Search,
-  Plus,
+  BookOpen,
   Check,
   ChevronDown,
   ChevronUp,
-  BookOpen,
   Lightbulb,
+  Plus,
+  Search,
   Terminal,
-  Clock,
-} from "lucide-react";
-import { useSearch } from "@/contexts/SearchContext";
-import type { Question } from "@/types/exam";
-import { cn } from "@/lib/utils";
+} from 'lucide-react';
+import { useState } from 'react';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
+import { Checkbox } from '@/components/ui/checkbox';
+import { Collapsible, CollapsibleContent } from '@/components/ui/collapsible';
+import { useSearch } from '@/contexts/SearchContext';
+import { cn } from '@/lib/utils';
+import type { Question } from '@/types/exam';
 
 interface QuestionResultCardProps {
   question: Question;
@@ -42,21 +41,21 @@ function QuestionResultCard({
 
   const getDifficultyColor = (difficulty: string) => {
     switch (difficulty) {
-      case "Beginner":
-        return "bg-[#22c55e]";
-      case "Intermediate":
-        return "bg-yellow-500";
-      case "Advanced":
-        return "bg-red-500";
+      case 'Beginner':
+        return 'bg-[#22c55e]';
+      case 'Intermediate':
+        return 'bg-yellow-500';
+      case 'Advanced':
+        return 'bg-red-500';
       default:
-        return "bg-gray-500";
+        return 'bg-gray-500';
     }
   };
 
   const highlightText = (text: string, query: string) => {
     if (!query.trim()) return text;
 
-    const regex = new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")})`, "gi");
+    const regex = new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
     return text.split(regex).map((part, index) =>
       regex.test(part) ? (
         <mark key={index} className="rounded bg-tanium-accent/30 px-1 text-tanium-accent">
@@ -83,7 +82,7 @@ function QuestionResultCard({
             <div className="mb-2 flex flex-wrap items-center gap-2">
               <Badge
                 variant="secondary"
-                className={cn("text-xs text-foreground", getDifficultyColor(question.difficulty))}
+                className={cn('text-xs text-foreground', getDifficultyColor(question.difficulty))}
               >
                 {question.difficulty}
               </Badge>
@@ -198,10 +197,10 @@ function QuestionResultCard({
                   <div
                     key={choice.id}
                     className={cn(
-                      "rounded-lg border p-3 transition-colors",
+                      'rounded-lg border p-3 transition-colors',
                       choice.id === question.correctAnswerId
-                        ? "border-green-500/50 bg-[#22c55e]/10"
-                        : "border-white/10 bg-white/5"
+                        ? 'border-green-500/50 bg-[#22c55e]/10'
+                        : 'border-white/10 bg-white/5'
                     )}
                   >
                     <div className="flex items-start gap-3">
@@ -245,7 +244,9 @@ function QuestionResultCard({
                 <div className="space-y-2">
                   {question.consoleSteps.map((step, index) => (
                     <div key={index} className="flex items-start gap-3 rounded bg-card/50 p-2">
-                      <span className="mt-1 font-mono text-xs text-muted-foreground">{index + 1}.</span>
+                      <span className="mt-1 font-mono text-xs text-muted-foreground">
+                        {index + 1}.
+                      </span>
                       <code className="flex-1 font-mono text-xs text-[#22c55e]">{step}</code>
                     </div>
                   ))}
@@ -263,13 +264,13 @@ function QuestionResultCard({
                 <div className="space-y-1">
                   {question.studyGuideRef && (
                     <p className="text-xs text-muted-foreground">
-                      Study Guide:{" "}
+                      Study Guide:{' '}
                       <span className="text-tanium-accent">{question.studyGuideRef}</span>
                     </p>
                   )}
                   {question.officialRef && (
                     <p className="text-xs text-muted-foreground">
-                      Official Docs:{" "}
+                      Official Docs:{' '}
                       <span className="text-tanium-accent">{question.officialRef}</span>
                     </p>
                   )}
@@ -424,12 +425,12 @@ export function SearchResults() {
                 <Button
                   key={page}
                   onClick={() => setPage(page)}
-                  variant={isActive ? "default" : "outline"}
+                  variant={isActive ? 'default' : 'outline'}
                   size="sm"
                   className={cn(
                     isActive
-                      ? "bg-tanium-accent hover:bg-blue-600"
-                      : "border-white/20 text-foreground hover:bg-white/10"
+                      ? 'bg-tanium-accent hover:bg-blue-600'
+                      : 'border-white/20 text-foreground hover:bg-white/10'
                   )}
                 >
                   {page}

@@ -4,7 +4,7 @@
  */
 
 // Import types for use within this file
-import type { AssessmentConfig } from "./assessment";
+import type { AssessmentConfig } from './assessment';
 import type {
   Difficulty,
   Question,
@@ -12,27 +12,12 @@ import type {
   QuestionFilter,
   TCODomain,
   UserProgress,
-} from "./exam";
-import type { LearningFlowContext } from "./learning-flow";
-import type { ModuleProgress } from "./module";
-import type { PracticeSession } from "./practice-session";
-import type { StudyModule } from "./study";
+} from './exam';
+import type { LearningFlowContext } from './learning-flow';
+import type { ModuleProgress } from './module';
+import type { PracticeSession } from './practice-session';
+import type { StudyModule } from './study';
 
-// Core Exam Types
-export { Difficulty, ExamMode, QuestionCategory, TCODomain, TCO_DOMAIN_WEIGHTS } from "./exam";
-export type {
-  Choice,
-  DomainScore,
-  ExamSession,
-  PracticeTargeting,
-  Question,
-  QuestionFilter,
-  QuestionPool,
-  UserProgress,
-} from "./exam";
-
-// Assessment Types
-export { QuestionDifficulty } from "./assessment";
 export type {
   AnalyticsMetrics,
   ApplicationGap,
@@ -69,20 +54,23 @@ export type {
   StudyPlanItem,
   StudyResource,
   UserAnalytics,
-} from "./assessment";
-
-// Study Content Types
-export {
-  DEFAULT_STUDY_CONFIG,
-  DOMAIN_FILE_MAPPING,
-  LEGACY_DOMAIN_MAPPING,
-  PlaybookCategory,
-  ReferenceType,
-  ScenarioDifficulty,
-  SkillLevel,
-  StudyProgressStatus,
-  StudySectionType,
-} from "./study";
+} from './assessment';
+// Assessment Types
+export { QuestionDifficulty } from './assessment';
+export type {
+  Choice,
+  DomainScore,
+  ExamSession,
+  PracticeTargeting,
+  Question,
+  QuestionFilter,
+  QuestionPool,
+  UserProgress,
+} from './exam';
+// Core Exam Types
+export { Difficulty, ExamMode, QuestionCategory, TCO_DOMAIN_WEIGHTS, TCODomain } from './exam';
+// Module Types
+export type { ModuleProgress, ModuleSection } from './module';
 export type {
   ConsoleProcedure,
   ExamPrepSection,
@@ -98,10 +86,19 @@ export type {
   StudySection,
   TroubleshootingGuide,
   UserStudyProgress,
-} from "./study";
-
-// Module Types
-export type { ModuleProgress, ModuleSection } from "./module";
+} from './study';
+// Study Content Types
+export {
+  DEFAULT_STUDY_CONFIG,
+  DOMAIN_FILE_MAPPING,
+  LEGACY_DOMAIN_MAPPING,
+  PlaybookCategory,
+  ReferenceType,
+  ScenarioDifficulty,
+  SkillLevel,
+  StudyProgressStatus,
+  StudySectionType,
+} from './study';
 
 // Define missing module types
 export interface Module {
@@ -109,7 +106,7 @@ export interface Module {
   title: string;
   description: string;
   domain: TCODomain;
-  difficulty: "beginner" | "intermediate" | "advanced";
+  difficulty: 'beginner' | 'intermediate' | 'advanced';
   estimatedTime: number;
   objectives: ModuleObjective[];
   sections: Array<{ id: string; title: string }>;
@@ -198,22 +195,8 @@ export interface QuestionsContextType {
   categoryDistribution: Record<QuestionCategory, number>;
 }
 
-// Practice Session Types
-export { PracticeSessionState } from "./practice-session";
-export type {
-  PracticeProgress,
-  PracticeSession,
-  PracticeSessionConfig,
-  PracticeSessionSummary,
-} from "./practice-session";
-
-// Learning Flow Types
-export {
-  DEFAULT_GATING_RULES,
-  LearningFlowEvent,
-  MasteryLevel,
-  STATE_TRANSITIONS,
-} from "./learning-flow";
+// Database Types
+export type { Database } from '../lib/database.types';
 export type {
   AssessPhaseProgress,
   BoundaryNavigationGuard,
@@ -223,20 +206,21 @@ export type {
   FlowValidation,
   FlowValidationError,
   FlowValidationWarning,
-  LearnPhaseProgress,
   LearningFlowContext,
   LearningFlowMetadata,
   LearningFlowState,
+  LearnPhaseProgress,
   PracticePhaseProgress,
   TopicMastery,
-} from "./learning-flow";
+} from './learning-flow';
 
-// Database Types
-export type { Database } from "../lib/database.types";
-
-// Supabase Types
-export type { Database as SupabaseDatabase } from "./supabase";
-
+// Learning Flow Types
+export {
+  DEFAULT_GATING_RULES,
+  LearningFlowEvent,
+  MasteryLevel,
+  STATE_TRANSITIONS,
+} from './learning-flow';
 // Module-specific exports
 export type {
   BloomsLevel,
@@ -263,23 +247,33 @@ export type {
   StudyPath,
   ValidationCriteria,
   ValidationType,
-} from "./modules";
+} from './modules';
+export type {
+  PracticeProgress,
+  PracticeSession,
+  PracticeSessionConfig,
+  PracticeSessionSummary,
+} from './practice-session';
+// Practice Session Types
+export { PracticeSessionState } from './practice-session';
+// Supabase Types
+export type { Database as SupabaseDatabase } from './supabase';
 
 // Add missing enum values that components expect
 export enum Status {
-  NOT_STARTED = "not_started",
-  IN_PROGRESS = "in_progress",
-  COMPLETED = "completed",
-  PAUSED = "paused",
-  ABANDONED = "abandoned",
+  NOT_STARTED = 'not_started',
+  IN_PROGRESS = 'in_progress',
+  COMPLETED = 'completed',
+  PAUSED = 'paused',
+  ABANDONED = 'abandoned',
 }
 
 // Add missing difficulty enum that includes EXPERT
 export enum DifficultyLevel {
-  BEGINNER = "Beginner",
-  INTERMEDIATE = "Intermediate",
-  ADVANCED = "Advanced",
-  EXPERT = "Expert",
+  BEGINNER = 'Beginner',
+  INTERMEDIATE = 'Intermediate',
+  ADVANCED = 'Advanced',
+  EXPERT = 'Expert',
 }
 
 // Component Props Types (commonly used)
@@ -289,14 +283,14 @@ export interface BaseComponentProps {
 }
 
 export interface BadgeProps extends BaseComponentProps {
-  variant?: "default" | "secondary" | "destructive" | "outline";
-  size?: "sm" | "md" | "lg";
+  variant?: 'default' | 'secondary' | 'destructive' | 'outline';
+  size?: 'sm' | 'md' | 'lg';
 }
 
 export interface TooltipProps extends BaseComponentProps {
   content: string;
-  side?: "top" | "right" | "bottom" | "left";
-  align?: "start" | "center" | "end";
+  side?: 'top' | 'right' | 'bottom' | 'left';
+  align?: 'start' | 'center' | 'end';
 }
 
 // Practice Session Summary Props

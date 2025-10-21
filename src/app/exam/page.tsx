@@ -1,7 +1,7 @@
-import ExamSimulator from "@/components/exam/ExamSimulator";
+import ExamSimulator from '@/components/exam/ExamSimulator';
 
 export const metadata = {
-  title: "Exam Simulator",
+  title: 'Exam Simulator',
 };
 
 export default function ExamPage() {
@@ -15,4 +15,3 @@ export default function ExamPage() {
     </main>
   );
 }
-

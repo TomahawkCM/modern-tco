@@ -1,6 +1,18 @@
-"use client";
+'use client';
 
-import { useState } from "react";
+import { Calendar, CheckCircle, Clock, Download, Eye, Search, XCircle } from 'lucide-react';
+import { useState } from 'react';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 import {
   Table,
   TableBody,
@@ -9,128 +21,116 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Input } from "@/components/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Search, CheckCircle, XCircle, Clock, Eye, Download, Calendar } from "lucide-react";
-import { cn, formatTime, getScoreColor } from "@/lib/utils";
-import { TCODomain } from "@/types/exam";
+} from '@/components/ui/table';
+import { cn, formatTime, getScoreColor } from '@/lib/utils';
+import { TCODomain } from '@/types/exam';
 
 interface ExamResult {
   id: string;
   date: Date;
-  mode: "practice" | "mock" | "review";
+  mode: 'practice' | 'mock' | 'review';
   domain?: TCODomain;
   score: number;
   totalQuestions: number;
   correctAnswers: number;
   timeSpent: number;
-  difficulty: "Beginner" | "Intermediate" | "Advanced";
-  status: "completed" | "in_progress" | "abandoned";
+  difficulty: 'Beginner' | 'Intermediate' | 'Advanced';
+  status: 'completed' | 'in_progress' | 'abandoned';
 }
 
 // Mock data
 const mockResults: ExamResult[] = [
   {
-    id: "1",
-    date: new Date("2024-01-15"),
-    mode: "mock",
+    id: '1',
+    date: new Date('2024-01-15'),
+    mode: 'mock',
     score: 85,
     totalQuestions: 65,
     correctAnswers: 55,
     timeSpent: 3600,
-    difficulty: "Intermediate",
-    status: "completed",
+    difficulty: 'Intermediate',
+    status: 'completed',
   },
   {
-    id: "2",
-    date: new Date("2024-01-14"),
-    mode: "practice",
+    id: '2',
+    date: new Date('2024-01-14'),
+    mode: 'practice',
     domain: TCODomain.SECURITY,
     score: 72,
     totalQuestions: 20,
     correctAnswers: 14,
     timeSpent: 900,
-    difficulty: "Advanced",
-    status: "completed",
+    difficulty: 'Advanced',
+    status: 'completed',
   },
   {
-    id: "3",
-    date: new Date("2024-01-13"),
-    mode: "practice",
+    id: '3',
+    date: new Date('2024-01-13'),
+    mode: 'practice',
     domain: TCODomain.FUNDAMENTALS,
     score: 95,
     totalQuestions: 15,
     correctAnswers: 14,
     timeSpent: 600,
-    difficulty: "Beginner",
-    status: "completed",
+    difficulty: 'Beginner',
+    status: 'completed',
   },
   {
-    id: "4",
-    date: new Date("2024-01-12"),
-    mode: "mock",
+    id: '4',
+    date: new Date('2024-01-12'),
+    mode: 'mock',
     score: 68,
     totalQuestions: 65,
     correctAnswers: 44,
     timeSpent: 4200,
-    difficulty: "Intermediate",
-    status: "completed",
+    difficulty: 'Intermediate',
+    status: 'completed',
   },
   {
-    id: "5",
-    date: new Date("2024-01-11"),
-    mode: "practice",
+    id: '5',
+    date: new Date('2024-01-11'),
+    mode: 'practice',
     domain: TCODomain.TROUBLESHOOTING,
     score: 45,
     totalQuestions: 12,
     correctAnswers: 5,
     timeSpent: 720,
-    difficulty: "Advanced",
-    status: "abandoned",
+    difficulty: 'Advanced',
+    status: 'abandoned',
   },
 ];
 
 export function ResultsTable() {
   const [results] = useState<ExamResult[]>(mockResults);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [filterMode, setFilterMode] = useState<string>("all");
-  const [filterStatus, setFilterStatus] = useState<string>("all");
+  const [searchTerm, setSearchTerm] = useState('');
+  const [filterMode, setFilterMode] = useState<string>('all');
+  const [filterStatus, setFilterStatus] = useState<string>('all');
 
   const filteredResults = results.filter((result) => {
     const matchesSearch =
       result.domain?.toLowerCase().includes(searchTerm.toLowerCase()) ||
       result.mode.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesMode = filterMode === "all" || result.mode === filterMode;
-    const matchesStatus = filterStatus === "all" || result.status === filterStatus;
+    const matchesMode = filterMode === 'all' || result.mode === filterMode;
+    const matchesStatus = filterStatus === 'all' || result.status === filterStatus;
 
     return matchesSearch && matchesMode && matchesStatus;
   });
 
-  const getStatusBadge = (status: ExamResult["status"]) => {
+  const getStatusBadge = (status: ExamResult['status']) => {
     switch (status) {
-      case "completed":
+      case 'completed':
         return (
           <Badge className="bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">
             Completed
           </Badge>
         );
-      case "in_progress":
+      case 'in_progress':
         return (
           <Badge className="bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-muted-foreground">
             In Progress
           </Badge>
         );
-      case "abandoned":
+      case 'abandoned':
         return (
           <Badge className="bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200">
             Abandoned
@@ -141,13 +141,13 @@ export function ResultsTable() {
     }
   };
 
-  const getModeBadge = (mode: ExamResult["mode"]) => {
+  const getModeBadge = (mode: ExamResult['mode']) => {
     switch (mode) {
-      case "mock":
+      case 'mock':
         return <Badge variant="default">Mock Exam</Badge>;
-      case "practice":
+      case 'practice':
         return <Badge variant="secondary">Practice</Badge>;
-      case "review":
+      case 'review':
         return <Badge variant="outline">Review</Badge>;
       default:
         return <Badge variant="outline">{mode}</Badge>;
@@ -168,7 +168,9 @@ export function ResultsTable() {
       <div className="grid gap-4 md:grid-cols-4">
         <Card className="glass border-white/10">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium text-muted-foreground">Total Sessions</CardTitle>
+            <CardTitle className="text-sm font-medium text-muted-foreground">
+              Total Sessions
+            </CardTitle>
             <Calendar className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
@@ -179,11 +181,13 @@ export function ResultsTable() {
 
         <Card className="glass border-white/10">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium text-muted-foreground">Average Score</CardTitle>
+            <CardTitle className="text-sm font-medium text-muted-foreground">
+              Average Score
+            </CardTitle>
             <CheckCircle className="h-4 w-4 text-[#22c55e]" />
           </CardHeader>
           <CardContent>
-            <div className={cn("text-2xl font-bold", getScoreColor(averageScore))}>
+            <div className={cn('text-2xl font-bold', getScoreColor(averageScore))}>
               {averageScore}%
             </div>
             <p className="text-xs text-muted-foreground">across all sessions</p>
@@ -192,7 +196,9 @@ export function ResultsTable() {
 
         <Card className="glass border-white/10">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium text-muted-foreground">Questions Answered</CardTitle>
+            <CardTitle className="text-sm font-medium text-muted-foreground">
+              Questions Answered
+            </CardTitle>
             <CheckCircle className="h-4 w-4 text-primary" />
           </CardHeader>
           <CardContent>
@@ -207,7 +213,9 @@ export function ResultsTable() {
 
         <Card className="glass border-white/10">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium text-muted-foreground">Time Invested</CardTitle>
+            <CardTitle className="text-sm font-medium text-muted-foreground">
+              Time Invested
+            </CardTitle>
             <Clock className="h-4 w-4 text-orange-400" />
           </CardHeader>
           <CardContent>
@@ -239,7 +247,7 @@ export function ResultsTable() {
             </div>
 
             <Select value={filterMode} onValueChange={setFilterMode}>
-              <SelectTrigger 
+              <SelectTrigger
                 className="glass w-full border-white/20 text-foreground sm:w-[180px]"
                 aria-label="Filter exam results by mode"
               >
@@ -302,10 +310,10 @@ export function ResultsTable() {
                       {result.date.toLocaleDateString()}
                     </TableCell>
                     <TableCell>{getModeBadge(result.mode)}</TableCell>
-                    <TableCell>{result.domain ?? "-"}</TableCell>
+                    <TableCell>{result.domain ?? '-'}</TableCell>
                     <TableCell>
                       <div className="flex items-center space-x-2">
-                        <span className={cn("font-medium", getScoreColor(result.score))}>
+                        <span className={cn('font-medium', getScoreColor(result.score))}>
                           {result.score}%
                         </span>
                         {result.score >= 80 ? (

@@ -19,10 +19,10 @@
 
 import { createClient } from '@supabase/supabase-js';
 import {
-  MOCK_EXAM_TEMPLATES,
-  getMockExamTemplate,
-  calculateDomainQuestionCounts,
   calculateDifficultyQuestionCounts,
+  calculateDomainQuestionCounts,
+  getMockExamTemplate,
+  MOCK_EXAM_TEMPLATES,
 } from '../src/data/mock-exam-configs';
 
 // ==================== SUPABASE CLIENT ====================
@@ -53,7 +53,13 @@ async function getAvailableQuestionCounts(supabase: any) {
 
   // By domain
   const domainCounts: Record<string, number> = {};
-  const domains = ['asking_questions', 'refining_targeting', 'taking_action', 'navigation', 'reporting'];
+  const domains = [
+    'asking_questions',
+    'refining_targeting',
+    'taking_action',
+    'navigation',
+    'reporting',
+  ];
 
   for (const domain of domains) {
     const { count } = await supabase
@@ -130,7 +136,9 @@ async function testMockExam(supabase: any, templateId: string) {
     const available = count || 0;
     if (available < requiredCount) {
       canCreate = false;
-      issues.push(`  ❌ ${domain}: need ${requiredCount}, have ${available} (short ${requiredCount - available})`);
+      issues.push(
+        `  ❌ ${domain}: need ${requiredCount}, have ${available} (short ${requiredCount - available})`
+      );
     } else {
       console.log(`  ✅ ${domain}: ${available}/${requiredCount} available`);
     }
@@ -171,7 +179,9 @@ async function printDatabaseStats(supabase: any) {
   if (counts.total === 0) {
     console.log('\n⚠️  WARNING: No questions in database yet!');
     console.log('   Generate and import questions first:');
-    console.log('   1. npx tsx scripts/generate-questions.ts --domain asking_questions --difficulty intermediate --count 50');
+    console.log(
+      '   1. npx tsx scripts/generate-questions.ts --domain asking_questions --difficulty intermediate --count 50'
+    );
     console.log('   2. npx tsx scripts/bulk-import-questions.ts --all');
   }
 }
@@ -202,7 +212,9 @@ async function main() {
       console.error('❌ Invalid arguments');
       console.error('\nUsage:');
       console.error('  npx tsx scripts/test-mock-exam-builder.ts');
-      console.error('  npx tsx scripts/test-mock-exam-builder.ts --template mock-exam-3-intermediate');
+      console.error(
+        '  npx tsx scripts/test-mock-exam-builder.ts --template mock-exam-3-intermediate'
+      );
       console.error('  npx tsx scripts/test-mock-exam-builder.ts --all');
       process.exit(1);
     }
@@ -230,7 +242,9 @@ async function main() {
       console.log('\n🎉 All mock exam templates are ready!');
       console.log('\nYou can now create mock exams using:');
       console.log('  import { createMockExamSession } from "@/lib/mock-exam-builder";');
-      console.log('  const session = await createMockExamSession("mock-exam-1-diagnostic", userId);');
+      console.log(
+        '  const session = await createMockExamSession("mock-exam-1-diagnostic", userId);'
+      );
     } else {
       console.log('\n⚠️  Some templates cannot be created yet.');
       console.log('\nAction needed:');

@@ -1,15 +1,14 @@
-import {
-  type Question,
-  type AssessmentResult,
-  AssessmentSession,
-  type RemediationPlan,
-  type AnalyticsEvent,
-} from "@/types/assessment";
-import { progressService } from "@/lib/services/progress-service";
-import { analyticsService } from "@/lib/services/analytics-service";
+import { analyticsService } from '@/lib/services/analytics-service';
+import { progressService } from '@/lib/services/progress-service';
+import type {
+  AnalyticsEvent,
+  AssessmentResult,
+  Question,
+  RemediationPlan,
+} from '@/types/assessment';
 
 export interface AssessmentConfig {
-  type: "practice" | "mock-exam" | "domain-specific" | "adaptive";
+  type: 'practice' | 'mock-exam' | 'domain-specific' | 'adaptive';
   moduleId?: string;
   domainFilter?: string[];
   questionCount: number;
@@ -97,7 +96,7 @@ class AssessmentEngineClass {
     // Track session start
     if (config.enableAnalytics) {
       await this.recordAnalytics(sessionId, {
-        type: "session_start",
+        type: 'session_start',
         timestamp: new Date(),
         data: {
           assessmentType: config.type,
@@ -122,7 +121,7 @@ class AssessmentEngineClass {
     confidence?: number
   ): Promise<void> {
     const session = this.activeSessions.get(sessionId);
-    if (!session) throw new Error("Session not found");
+    if (!session) throw new Error('Session not found');
 
     session.responses.set(questionId, selectedAnswers);
     session.timeSpent += timeSpent;
@@ -130,7 +129,7 @@ class AssessmentEngineClass {
     // Record analytics
     if (session.config.enableAnalytics) {
       await this.recordAnalytics(sessionId, {
-        type: "question_answered",
+        type: 'question_answered',
         timestamp: new Date(),
         data: {
           questionId,
@@ -144,7 +143,7 @@ class AssessmentEngineClass {
 
     // Update progress tracking
     await progressService.updateQuestionProgress({
-      userId: "current_user", // TODO: Get from auth context
+      userId: 'current_user', // TODO: Get from auth context
       questionId,
       isCorrect: await this.isResponseCorrect(questionId, selectedAnswers),
       timeSpent,
@@ -158,7 +157,7 @@ class AssessmentEngineClass {
    */
   async navigateToNext(sessionId: string): Promise<boolean> {
     const session = this.activeSessions.get(sessionId);
-    if (!session) throw new Error("Session not found");
+    if (!session) throw new Error('Session not found');
 
     if (session.currentQuestionIndex < session.questions.length - 1) {
       session.currentQuestionIndex++;
@@ -179,7 +178,7 @@ class AssessmentEngineClass {
    */
   async completeAssessment(sessionId: string): Promise<AssessmentResult> {
     const session = this.activeSessions.get(sessionId);
-    if (!session) throw new Error("Session not found");
+    if (!session) throw new Error('Session not found');
 
     session.endTime = new Date();
     session.isCompleted = true;
@@ -189,7 +188,7 @@ class AssessmentEngineClass {
 
     // Update progress tracking
     await progressService.updateAssessmentProgress({
-      userId: "current_user", // TODO: Get from auth context
+      userId: 'current_user', // TODO: Get from auth context
       assessmentType: session.config.type,
       moduleId: session.config.moduleId,
       result,
@@ -203,7 +202,7 @@ class AssessmentEngineClass {
     // Record completion analytics
     if (session.config.enableAnalytics) {
       await this.recordAnalytics(sessionId, {
-        type: "assessment_completed",
+        type: 'assessment_completed',
         timestamp: new Date(),
         data: {
           result,
@@ -247,7 +246,7 @@ class AssessmentEngineClass {
       maxPossibleScore += question.points || 1;
 
       // Domain breakdown
-      const domain = question.domain || "general";
+      const domain = question.domain || 'general';
       if (!domainBreakdown[domain]) {
         domainBreakdown[domain] = { correct: 0, total: 0, score: 0 };
       }
@@ -285,18 +284,33 @@ class AssessmentEngineClass {
 
     const performance = {
       totalTime: endTime ? Math.floor((endTime.getTime() - startTime.getTime()) / 1000) : 0,
-      averageTimePerQuestion: questionResults.length > 0 ? questionResults.reduce((s, q) => s + q.timeSpent, 0) / questionResults.length : 0,
-      fastestQuestion: questionResults.length > 0 ? Math.min(...questionResults.map((q) => q.timeSpent)) : 0,
-      slowestQuestion: questionResults.length > 0 ? Math.max(...questionResults.map((q) => q.timeSpent)) : 0,
+      averageTimePerQuestion:
+        questionResults.length > 0
+          ? questionResults.reduce((s, q) => s + q.timeSpent, 0) / questionResults.length
+          : 0,
+      fastestQuestion:
+        questionResults.length > 0 ? Math.min(...questionResults.map((q) => q.timeSpent)) : 0,
+      slowestQuestion:
+        questionResults.length > 0 ? Math.max(...questionResults.map((q) => q.timeSpent)) : 0,
       confidenceAlignment: 0,
-      difficultyProgression: { beginnerAccuracy: 0, intermediateAccuracy: 0, advancedAccuracy: 0, suggestedLevel: ("Beginner" as any) },
+      difficultyProgression: {
+        beginnerAccuracy: 0,
+        intermediateAccuracy: 0,
+        advancedAccuracy: 0,
+        suggestedLevel: 'Beginner' as any,
+      },
     };
 
     const remediation: RemediationPlan = {
-      overallRecommendation: passed ? "Passed - continue practicing" : "Review fundamentals",
+      overallRecommendation: passed ? 'Passed - continue practicing' : 'Review fundamentals',
       objectiveRemediation: [],
       studyPlan: [],
-      retakeEligibility: { eligible: !passed, waitPeriod: passed ? 0 : 24, maxAttempts: 3, currentAttempt: 1 },
+      retakeEligibility: {
+        eligible: !passed,
+        waitPeriod: passed ? 0 : 24,
+        maxAttempts: 3,
+        currentAttempt: 1,
+      },
     };
 
     return {
@@ -325,7 +339,7 @@ class AssessmentEngineClass {
   async generateDetailedAnalytics(sessionId: string): Promise<DetailedAnalytics> {
     const session =
       this.activeSessions.get(sessionId) || (await this.getCompletedSession(sessionId));
-    if (!session) throw new Error("Session not found");
+    if (!session) throw new Error('Session not found');
 
     const events = this.sessionAnalytics.get(sessionId) || [];
     const sessionDuration = session.endTime
@@ -348,7 +362,7 @@ class AssessmentEngineClass {
       const confidence = this.getQuestionConfidence(sessionId, question.id);
 
       // Domain analysis
-      const domain = question.domain || "general";
+      const domain = question.domain || 'general';
       if (!domainPerformance[domain]) {
         domainPerformance[domain] = { correct: 0, total: 0, score: 0 };
       }
@@ -356,7 +370,7 @@ class AssessmentEngineClass {
       if (isCorrect) domainPerformance[domain].correct++;
 
       // Difficulty analysis
-      const difficulty = question.difficulty || "medium";
+      const difficulty = question.difficulty || 'medium';
       if (!difficultyPerformance[difficulty]) {
         difficultyPerformance[difficulty] = { correct: 0, total: 0, score: 0 };
       }
@@ -390,9 +404,9 @@ class AssessmentEngineClass {
 
     // Response patterns
     const responsePatterns = {
-      changedAnswers: events.filter((e) => e.type === "answer_changed").length,
-      skippedQuestions: events.filter((e) => e.type === "question_skipped").length,
-      flaggedQuestions: events.filter((e) => e.type === "question_flagged").length,
+      changedAnswers: events.filter((e) => e.type === 'answer_changed').length,
+      skippedQuestions: events.filter((e) => e.type === 'question_skipped').length,
+      flaggedQuestions: events.filter((e) => e.type === 'question_flagged').length,
     };
 
     return {
@@ -420,7 +434,7 @@ class AssessmentEngineClass {
       .filter(([_, breakdown]) => (breakdown?.score ?? 0) < 0.7)
       .map(([domain]) => domain);
 
-  const studyPlan: RemediationPlan["studyPlan"] = [];
+    const studyPlan: RemediationPlan['studyPlan'] = [];
 
     for (const domain of analytics.strugglingTopics) {
       const domainPerf = domainBreakdownObj[domain];
@@ -429,9 +443,9 @@ class AssessmentEngineClass {
           order: studyPlan.length + 1,
           title: `Study ${domain}`,
           description: `Targeted study plan for ${domain}`,
-          type: "review",
-          domain: domain as unknown as import("@/types/assessment").StudyPlanItem["domain"],
-          priority: (domainPerf.score ?? 0) < 0.5 ? "high" : "medium",
+          type: 'review',
+          domain: domain as unknown as import('@/types/assessment').StudyPlanItem['domain'],
+          priority: (domainPerf.score ?? 0) < 0.5 ? 'high' : 'medium',
           estimatedTime: Math.ceil((1 - (domainPerf.score ?? 0)) * 120), // minutes
           resources: await this.getStudyResourcesForDomain(domain),
           practiceQuestions: await this.getPracticeQuestionsForDomain(domain, 10),
@@ -442,31 +456,39 @@ class AssessmentEngineClass {
     // Sort by priority and score
     studyPlan.sort((a, b) => {
       const priorityOrder: Record<string, number> = { high: 3, medium: 2, low: 1 };
-      const aKey = a.priority ?? "low";
-      const bKey = b.priority ?? "low";
+      const aKey = a.priority ?? 'low';
+      const bKey = b.priority ?? 'low';
       const aPriority = priorityOrder[aKey] ?? 0;
       const bPriority = priorityOrder[bKey] ?? 0;
       return bPriority - aPriority;
     });
 
-    const estimatedStudyTime = studyPlan.reduce((total, item) => total + (item.estimatedTime || 0), 0);
+    const estimatedStudyTime = studyPlan.reduce(
+      (total, item) => total + (item.estimatedTime || 0),
+      0
+    );
 
     const objectiveRemediation: any[] = [];
-    const retakeEligibility = { eligible: !result.passed, waitPeriod: result.passed ? 0 : 24, maxAttempts: 3, currentAttempt: 1 };
+    const retakeEligibility = {
+      eligible: !result.passed,
+      waitPeriod: result.passed ? 0 : 24,
+      maxAttempts: 3,
+      currentAttempt: 1,
+    };
 
     const ret: RemediationPlan = {
       overallRecommendation: result.passed
-        ? "Continue practicing weaker areas to strengthen your knowledge"
-        : "Focus on fundamental concepts before attempting the certification exam",
+        ? 'Continue practicing weaker areas to strengthen your knowledge'
+        : 'Focus on fundamental concepts before attempting the certification exam',
       objectiveRemediation,
       studyPlan,
       retakeEligibility,
       nextSteps: result.passed
-        ? ["Schedule certification exam", "Review flagged questions", "Practice advanced scenarios"]
+        ? ['Schedule certification exam', 'Review flagged questions', 'Practice advanced scenarios']
         : [
-            "Complete remediation study plan",
-            "Retake practice assessment",
-            "Focus on core concepts",
+            'Complete remediation study plan',
+            'Retake practice assessment',
+            'Focus on core concepts',
           ],
       estimatedStudyTime,
       targetRetakeDate: this.calculateTargetRetakeDate(analytics.strugglingTopics.length),
@@ -524,28 +546,28 @@ class AssessmentEngineClass {
   private async increaseDifficulty(sessionId: string): Promise<void> {
     // Implementation for increasing question difficulty
     await this.recordAnalytics(sessionId, {
-      type: "difficulty_adjusted",
+      type: 'difficulty_adjusted',
       timestamp: new Date(),
-      data: { adjustment: "increased", reason: "high_performance" },
+      data: { adjustment: 'increased', reason: 'high_performance' },
     });
   }
 
   private async decreaseDifficulty(sessionId: string): Promise<void> {
     // Implementation for decreasing question difficulty
     await this.recordAnalytics(sessionId, {
-      type: "difficulty_adjusted",
+      type: 'difficulty_adjusted',
       timestamp: new Date(),
-      data: { adjustment: "decreased", reason: "low_performance" },
+      data: { adjustment: 'decreased', reason: 'low_performance' },
     });
   }
 
   // Helper methods
-  private async getQuestionsForAssessment(config: AssessmentConfig): Promise<Question[]> {
+  private async getQuestionsForAssessment(_config: AssessmentConfig): Promise<Question[]> {
     // Implementation to fetch questions based on config
     return [];
   }
 
-  private async isResponseCorrect(questionId: string, response: string[]): Promise<boolean> {
+  private async isResponseCorrect(_questionId: string, _response: string[]): Promise<boolean> {
     // Implementation to check if response is correct
     return true;
   }
@@ -558,7 +580,7 @@ class AssessmentEngineClass {
   private getQuestionTimeSpent(sessionId: string, questionId: string): number {
     const events = this.sessionAnalytics.get(sessionId) || [];
     const questionEvents = events.filter(
-      (e) => e.data?.questionId === questionId && e.type === "question_answered"
+      (e) => e.data?.questionId === questionId && e.type === 'question_answered'
     );
     return questionEvents.reduce((total, event) => total + (event.data?.timeSpent || 0), 0);
   }
@@ -566,7 +588,7 @@ class AssessmentEngineClass {
   private getQuestionConfidence(sessionId: string, questionId: string): number | null {
     const events = this.sessionAnalytics.get(sessionId) || [];
     const questionEvent = events.find(
-      (e) => e.data?.questionId === questionId && e.type === "question_answered"
+      (e) => e.data?.questionId === questionId && e.type === 'question_answered'
     );
     return questionEvent?.data?.confidence || null;
   }
@@ -597,7 +619,7 @@ class AssessmentEngineClass {
     }
   }
 
-  private async getCompletedSession(sessionId: string): Promise<AssessmentSessionData | null> {
+  private async getCompletedSession(_sessionId: string): Promise<AssessmentSessionData | null> {
     // Implementation to retrieve completed session from storage
     return null;
   }
@@ -605,11 +627,10 @@ class AssessmentEngineClass {
 
 export const AssessmentEngine: any = new AssessmentEngineClass();
 export default AssessmentEngine;
-
 // Static forwarding for existing call-sites that import the class/instance directly
-;(AssessmentEngine).initializeSession = AssessmentEngine.initializeSession.bind(AssessmentEngine);
-;(AssessmentEngine).recordResponse = AssessmentEngine.recordResponse?.bind(AssessmentEngine);
-;(AssessmentEngine).navigateToNext = AssessmentEngine.navigateToNext?.bind(AssessmentEngine);
-;(AssessmentEngine).completeAssessment = AssessmentEngine.completeAssessment.bind(AssessmentEngine);
-;(AssessmentEngine).calculateResults = AssessmentEngine.calculateResults.bind(AssessmentEngine);
-;(AssessmentEngine).updateSession = AssessmentEngine.updateSession.bind(AssessmentEngine);
+AssessmentEngine.initializeSession = AssessmentEngine.initializeSession.bind(AssessmentEngine);
+AssessmentEngine.recordResponse = AssessmentEngine.recordResponse?.bind(AssessmentEngine);
+AssessmentEngine.navigateToNext = AssessmentEngine.navigateToNext?.bind(AssessmentEngine);
+AssessmentEngine.completeAssessment = AssessmentEngine.completeAssessment.bind(AssessmentEngine);
+AssessmentEngine.calculateResults = AssessmentEngine.calculateResults.bind(AssessmentEngine);
+AssessmentEngine.updateSession = AssessmentEngine.updateSession.bind(AssessmentEngine);

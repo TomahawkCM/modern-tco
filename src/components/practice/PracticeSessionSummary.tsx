@@ -3,13 +3,8 @@
  * Displays results and performance metrics after completing a practice session
  */
 
-"use client";
+'use client';
 
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Progress } from "@/components/ui/progress";
-import type { PracticeSessionSummaryProps } from "@/types";
 import {
   Award,
   Brain,
@@ -21,7 +16,12 @@ import {
   Trophy,
   X,
   XCircle,
-} from "lucide-react";
+} from 'lucide-react';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Progress } from '@/components/ui/progress';
+import type { PracticeSessionSummaryProps } from '@/types';
 
 export function PracticeSessionSummary({
   session,
@@ -37,7 +37,7 @@ export function PracticeSessionSummary({
   // Calculate domain performance
   const domainStats: Record<string, { correct: number; total: number }> = {};
 
-  questions.forEach((question: any, index: number) => {
+  questions.forEach((question: any, _index: number) => {
     if (!domainStats[question.domain]) {
       domainStats[question.domain] = { correct: 0, total: 0 };
     }
@@ -48,16 +48,16 @@ export function PracticeSessionSummary({
   });
 
   const getPerformanceColor = (percentage: number) => {
-    if (percentage >= 80) return "text-[#22c55e]";
-    if (percentage >= 70) return "text-yellow-600";
-    return "text-red-600";
+    if (percentage >= 80) return 'text-[#22c55e]';
+    if (percentage >= 70) return 'text-yellow-600';
+    return 'text-red-600';
   };
 
   const getPerformanceBadge = (percentage: number) => {
-    if (percentage >= 90) return { variant: "default" as const, text: "Excellent", icon: Trophy };
-    if (percentage >= 80) return { variant: "secondary" as const, text: "Good", icon: Award };
-    if (percentage >= 70) return { variant: "outline" as const, text: "Fair", icon: Target };
-    return { variant: "destructive" as const, text: "Needs Work", icon: Brain };
+    if (percentage >= 90) return { variant: 'default' as const, text: 'Excellent', icon: Trophy };
+    if (percentage >= 80) return { variant: 'secondary' as const, text: 'Good', icon: Award };
+    if (percentage >= 70) return { variant: 'outline' as const, text: 'Fair', icon: Target };
+    return { variant: 'destructive' as const, text: 'Needs Work', icon: Brain };
   };
 
   const performanceBadge = getPerformanceBadge(accuracy);

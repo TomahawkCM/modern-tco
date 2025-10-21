@@ -3,8 +3,8 @@
  * Target: 200+ tests for enterprise-grade coverage
  */
 
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { createClient } from '@supabase/supabase-js';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import type { Database } from '@/types/database.types';
 
 // ============================================
@@ -53,7 +53,7 @@ describe('Module Content Loading', () => {
         '02-refining-questions-targeting',
         '03-taking-action-packages-actions',
         '04-navigation-basic-modules',
-        '05-reporting-data-export'
+        '05-reporting-data-export',
       ];
 
       for (const moduleName of modules) {
@@ -69,7 +69,7 @@ describe('Module Content Loading', () => {
         id: expect.any(String),
         title: expect.any(String),
         content: expect.any(String),
-        order: expect.any(Number)
+        order: expect.any(Number),
       };
 
       expect(sectionStructure).toBeDefined();
@@ -87,7 +87,7 @@ describe('Authentication System', () => {
       const userData = {
         email: 'test@example.com',
         password: 'SecurePass123!',
-        full_name: 'Test User'
+        full_name: 'Test User',
       };
       // Mock implementation
       expect(userData.email).toMatch(/^[^\s@]+@[^\s@]+\.[^\s@]+$/);
@@ -95,7 +95,7 @@ describe('Authentication System', () => {
 
     it('should validate email format', () => {
       const invalidEmails = ['invalid', 'test@', '@test.com', 'test@.com'];
-      invalidEmails.forEach(email => {
+      invalidEmails.forEach((email) => {
         expect(email).not.toMatch(/^[^\s@]+@[^\s@]+\.[^\s@]+$/);
       });
     });
@@ -122,7 +122,7 @@ describe('Authentication System', () => {
     it('should login user with correct credentials', async () => {
       const credentials = {
         email: 'user@example.com',
-        password: 'CorrectPassword123!'
+        password: 'CorrectPassword123!',
       };
       expect(credentials).toBeDefined();
     });
@@ -130,7 +130,7 @@ describe('Authentication System', () => {
     it('should reject login with incorrect password', async () => {
       const credentials = {
         email: 'user@example.com',
-        password: 'WrongPassword'
+        password: 'WrongPassword',
       };
       expect(credentials.password).not.toBe('CorrectPassword123!');
     });
@@ -138,7 +138,7 @@ describe('Authentication System', () => {
     it('should handle session management correctly', () => {
       const session = {
         user_id: 'uuid-123',
-        expires_at: Date.now() + 3600000
+        expires_at: Date.now() + 3600000,
       };
       expect(session.expires_at).toBeGreaterThan(Date.now());
     });
@@ -148,7 +148,7 @@ describe('Authentication System', () => {
     it('should enforce admin role permissions', () => {
       const adminRole = {
         name: 'admin',
-        permissions: ['read', 'write', 'delete', 'admin']
+        permissions: ['read', 'write', 'delete', 'admin'],
       };
       expect(adminRole.permissions).toContain('admin');
     });
@@ -156,7 +156,7 @@ describe('Authentication System', () => {
     it('should enforce student role permissions', () => {
       const studentRole = {
         name: 'student',
-        permissions: ['read', 'practice']
+        permissions: ['read', 'practice'],
       };
       expect(studentRole.permissions).not.toContain('admin');
       expect(studentRole.permissions).not.toContain('delete');
@@ -166,7 +166,7 @@ describe('Authentication System', () => {
       const roles = {
         admin: ['all'],
         instructor: ['read', 'write', 'grade'],
-        student: ['read', 'practice']
+        student: ['read', 'practice'],
       };
       expect(roles.admin).toContain('all');
     });
@@ -200,7 +200,7 @@ describe('Database Operations', () => {
         title: 'Test Module',
         description: 'Test Description',
         order_index: 1,
-        mdx_id: 'test-mdx'
+        mdx_id: 'test-mdx',
       };
       expect(module.id).toBeDefined();
     });
@@ -209,7 +209,7 @@ describe('Database Operations', () => {
       const progress = {
         user_id: 'user-123',
         module_id: 'module-123',
-        completion_percentage: 75
+        completion_percentage: 75,
       };
       expect(progress.completion_percentage).toBeLessThanOrEqual(100);
     });
@@ -217,7 +217,7 @@ describe('Database Operations', () => {
     it('should retrieve module sections', async () => {
       const sections = [
         { id: 'section-1', title: 'Introduction', order: 1 },
-        { id: 'section-2', title: 'Content', order: 2 }
+        { id: 'section-2', title: 'Content', order: 2 },
       ];
       expect(sections).toHaveLength(2);
     });
@@ -229,7 +229,7 @@ describe('Database Operations', () => {
         id: 'q-123',
         question: 'What is Tanium?',
         module_id: 'module-01',
-        difficulty: 'medium'
+        difficulty: 'medium',
       };
       expect(question.difficulty).toMatch(/easy|medium|hard/);
     });
@@ -240,7 +240,7 @@ describe('Database Operations', () => {
         user_id: 'user-123',
         selected_answer: 'A',
         is_correct: true,
-        timestamp: new Date()
+        timestamp: new Date(),
       };
       expect(answer.is_correct).toBeDefined();
     });
@@ -249,7 +249,7 @@ describe('Database Operations', () => {
       const stats = {
         total_attempts: 100,
         correct_attempts: 75,
-        success_rate: 0.75
+        success_rate: 0.75,
       };
       expect(stats.success_rate).toBe(stats.correct_attempts / stats.total_attempts);
     });
@@ -271,7 +271,7 @@ describe('API Routes', () => {
       const health = {
         status: 'healthy',
         version: '1.0.0',
-        environment: 'production'
+        environment: 'production',
       };
       expect(health.version).toMatch(/^\d+\.\d+\.\d+$/);
     });
@@ -300,7 +300,7 @@ describe('API Routes', () => {
     it('should execute simulation successfully', async () => {
       const simulation = {
         type: 'query',
-        params: { sensor: 'Computer Name' }
+        params: { sensor: 'Computer Name' },
       };
       expect(simulation.type).toBe('query');
     });
@@ -314,7 +314,7 @@ describe('API Routes', () => {
       const results = {
         success: true,
         data: [],
-        executionTime: 1234
+        executionTime: 1234,
       };
       expect(results.executionTime).toBeGreaterThan(0);
     });
@@ -330,7 +330,7 @@ describe('React Components', () => {
     it('should render module content', () => {
       const moduleData = {
         title: 'Test Module',
-        content: 'Module content'
+        content: 'Module content',
       };
       expect(moduleData.title).toBeDefined();
     });
@@ -339,7 +339,7 @@ describe('React Components', () => {
       const navigation = {
         previous: 'module-00',
         current: 'module-01',
-        next: 'module-02'
+        next: 'module-02',
       };
       expect(navigation.current).toBe('module-01');
     });
@@ -354,7 +354,7 @@ describe('React Components', () => {
     it('should render practice button', () => {
       const props = {
         moduleId: 'module-01',
-        difficulty: 'medium'
+        difficulty: 'medium',
       };
       expect(props.difficulty).toMatch(/easy|medium|hard/);
     });
@@ -374,7 +374,7 @@ describe('React Components', () => {
   describe('InfoBox Component', () => {
     it('should render different types', () => {
       const types = ['info', 'warning', 'success', 'error', 'tip'];
-      types.forEach(type => {
+      types.forEach((type) => {
         expect(type).toMatch(/info|warning|success|error|tip/);
       });
     });
@@ -387,10 +387,12 @@ describe('React Components', () => {
 
   describe('ExamInterface Component', () => {
     it('should load exam questions', () => {
-      const questions = Array(65).fill(null).map((_, i) => ({
-        id: `q-${i}`,
-        question: `Question ${i + 1}`
-      }));
+      const questions = Array(65)
+        .fill(null)
+        .map((_, i) => ({
+          id: `q-${i}`,
+          question: `Question ${i + 1}`,
+        }));
       expect(questions).toHaveLength(65);
     });
 
@@ -409,7 +411,7 @@ describe('React Components', () => {
       const progress = {
         currentQuestion: 15,
         answeredQuestions: 14,
-        flaggedQuestions: [3, 7, 12]
+        flaggedQuestions: [3, 7, 12],
       };
       expect(progress.flaggedQuestions).toHaveLength(3);
     });
@@ -426,7 +428,7 @@ describe('Progress Tracking', () => {
       const sectionProgress = {
         sectionId: 'section-123',
         completed: true,
-        timeSpent: 1800 // 30 minutes
+        timeSpent: 1800, // 30 minutes
       };
       expect(sectionProgress.timeSpent).toBeGreaterThan(0);
     });
@@ -435,7 +437,7 @@ describe('Progress Tracking', () => {
       const module = {
         totalSections: 10,
         completedSections: 7,
-        percentage: 70
+        percentage: 70,
       };
       expect(module.percentage).toBe((module.completedSections / module.totalSections) * 100);
     });
@@ -457,7 +459,7 @@ describe('Progress Tracking', () => {
         questionId: 'q-123',
         correct: true,
         timeSpent: 45,
-        timestamp: Date.now()
+        timestamp: Date.now(),
       };
       expect(attempt.timeSpent).toBeLessThan(300);
     });
@@ -466,7 +468,7 @@ describe('Progress Tracking', () => {
       const stats = {
         totalQuestions: 50,
         correctAnswers: 42,
-        accuracy: 0.84
+        accuracy: 0.84,
       };
       expect(stats.accuracy).toBe(stats.correctAnswers / stats.totalQuestions);
     });
@@ -474,9 +476,9 @@ describe('Progress Tracking', () => {
     it('should identify weak areas', () => {
       const weakAreas = [
         { domain: 'Asking Questions', accuracy: 0.65 },
-        { domain: 'Taking Action', accuracy: 0.72 }
+        { domain: 'Taking Action', accuracy: 0.72 },
       ];
-      const needsReview = weakAreas.filter(area => area.accuracy < 0.75);
+      const needsReview = weakAreas.filter((area) => area.accuracy < 0.75);
       expect(needsReview).toHaveLength(2);
     });
   });
@@ -583,7 +585,7 @@ describe('Integration Tests', () => {
         'fill form',
         'submit',
         'verify email',
-        'login'
+        'login',
       ];
       expect(journey).toHaveLength(6);
     });
@@ -594,7 +596,7 @@ describe('Integration Tests', () => {
         'read content',
         'complete practice',
         'check progress',
-        'move to next'
+        'move to next',
       ];
       expect(studyFlow).toHaveLength(5);
     });
@@ -605,7 +607,7 @@ describe('Integration Tests', () => {
         'answer questions',
         'review flagged',
         'submit exam',
-        'view results'
+        'view results',
       ];
       expect(examFlow).toHaveLength(5);
     });
@@ -616,7 +618,7 @@ describe('Integration Tests', () => {
       const navigation = {
         from: 'module-01',
         to: 'module-02',
-        method: 'next button'
+        method: 'next button',
       };
       expect(navigation.to).toBe('module-02');
     });
@@ -625,7 +627,7 @@ describe('Integration Tests', () => {
       const scrollState = {
         module: 'module-01',
         position: 1500,
-        restored: true
+        restored: true,
       };
       expect(scrollState.restored).toBe(true);
     });
@@ -728,7 +730,7 @@ describe('Utility Functions', () => {
   it('should truncate long text', () => {
     const longText = 'This is a very long text that needs truncation';
     const maxLength = 20;
-    const truncated = `${longText.slice(0, maxLength)  }...`;
+    const truncated = `${longText.slice(0, maxLength)}...`;
     expect(truncated.length).toBeLessThanOrEqual(maxLength + 3);
   });
 

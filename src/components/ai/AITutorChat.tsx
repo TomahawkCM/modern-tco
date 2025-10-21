@@ -7,20 +7,30 @@
  * Features context-aware conversations, suggested follow-ups, and resource recommendations.
  */
 
-import React, { useState, useEffect, useRef } from 'react';
-import { Send, ThumbsUp, ThumbsDown, Sparkles, Book, Video, TestTube, FileText } from 'lucide-react';
+import {
+  Book,
+  FileText,
+  Send,
+  Sparkles,
+  TestTube,
+  ThumbsDown,
+  ThumbsUp,
+  Video,
+} from 'lucide-react';
+import type React from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Textarea } from '@/components/ui/textarea';
 import { Card } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
+import { Textarea } from '@/components/ui/textarea';
 import { toast } from '@/hooks/use-toast';
 import {
-  sendMessage,
+  type Conversation,
   createConversation,
   getConversationMessages,
-  rateMessage,
   type Message,
-  type Conversation,
+  rateMessage,
+  sendMessage,
   type TutorContext,
   type TutorResponse,
 } from '@/lib/ai/aiTutor';
@@ -89,12 +99,12 @@ export function AITutorChat({
     }
 
     initialize();
-  }, []);
+  }, [context, conversationId, conversationType, userId]);
 
   // Auto-scroll to bottom
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages]);
+  }, []);
 
   // Send message handler
   const handleSendMessage = async () => {
@@ -223,9 +233,7 @@ export function AITutorChat({
           >
             <div
               className={`max-w-[80%] rounded-lg p-4 ${
-                message.role === 'user'
-                  ? 'bg-primary text-foreground'
-                  : 'bg-muted'
+                message.role === 'user' ? 'bg-primary text-foreground' : 'bg-muted'
               }`}
             >
               <div className="whitespace-pre-wrap">{message.content}</div>
@@ -261,9 +269,18 @@ export function AITutorChat({
           <div className="flex justify-start">
             <div className="bg-muted rounded-lg p-4 max-w-[80%]">
               <div className="flex gap-1">
-                <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
-                <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
-                <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
+                <span
+                  className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"
+                  style={{ animationDelay: '0ms' }}
+                />
+                <span
+                  className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"
+                  style={{ animationDelay: '150ms' }}
+                />
+                <span
+                  className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"
+                  style={{ animationDelay: '300ms' }}
+                />
               </div>
             </div>
           </div>
@@ -346,18 +363,27 @@ export function AITutorChat({
 
 function getWelcomeMessage(type: Conversation['conversationType']): string {
   const messages = {
-    general_help: "Hi! I'm your AI tutor for the Tanium TCO certification. I'm here to help you understand concepts, practice skills, and prepare for your exam. What would you like to learn about today?",
-    concept_explanation: "Hi! I specialize in breaking down complex Tanium concepts into simple, easy-to-understand explanations. What concept would you like me to explain?",
-    exam_strategy: "Hi! I'm here to help you develop a winning exam strategy for the TCO certification. Whether it's time management, question approach, or last-minute tips, I've got you covered. What's on your mind?",
-    troubleshooting: "Hi! Let's work through any Tanium problems or challenges you're facing. I'll guide you step-by-step to understand not just the solution, but the underlying concepts. What are you working on?",
-    study_planning: "Hi! I'll help you create a personalized study plan that fits your schedule and learning goals. Let's build a path to TCO certification success together. Tell me about your target exam date and available study time.",
-    motivation: "Hi! I'm here to support you on your TCO certification journey. Whether you're facing challenges, feeling overwhelmed, or just need encouragement, I'm here to help. What's going on?",
+    general_help:
+      "Hi! I'm your AI tutor for the Tanium TCO certification. I'm here to help you understand concepts, practice skills, and prepare for your exam. What would you like to learn about today?",
+    concept_explanation:
+      'Hi! I specialize in breaking down complex Tanium concepts into simple, easy-to-understand explanations. What concept would you like me to explain?',
+    exam_strategy:
+      "Hi! I'm here to help you develop a winning exam strategy for the TCO certification. Whether it's time management, question approach, or last-minute tips, I've got you covered. What's on your mind?",
+    troubleshooting:
+      "Hi! Let's work through any Tanium problems or challenges you're facing. I'll guide you step-by-step to understand not just the solution, but the underlying concepts. What are you working on?",
+    study_planning:
+      "Hi! I'll help you create a personalized study plan that fits your schedule and learning goals. Let's build a path to TCO certification success together. Tell me about your target exam date and available study time.",
+    motivation:
+      "Hi! I'm here to support you on your TCO certification journey. Whether you're facing challenges, feeling overwhelmed, or just need encouragement, I'm here to help. What's going on?",
   };
 
   return messages[type] || messages.general_help;
 }
 
-function getInitialSuggestions(type: Conversation['conversationType'], context?: TutorContext): string[] {
+function getInitialSuggestions(
+  type: Conversation['conversationType'],
+  context?: TutorContext
+): string[] {
   const suggestions: Record<Conversation['conversationType'], string[]> = {
     general_help: [
       'What is the TCO exam structure?',
@@ -365,7 +391,7 @@ function getInitialSuggestions(type: Conversation['conversationType'], context?:
       'How should I start my TCO prep?',
     ],
     concept_explanation: [
-      'Explain Tanium\'s Linear Chain Architecture',
+      "Explain Tanium's Linear Chain Architecture",
       'What are sensors in Tanium?',
       'How does question targeting work?',
     ],
@@ -375,8 +401,8 @@ function getInitialSuggestions(type: Conversation['conversationType'], context?:
       'Last-minute exam preparation tips',
     ],
     troubleshooting: [
-      'I\'m struggling with targeting and filters',
-      'I don\'t understand computer groups',
+      "I'm struggling with targeting and filters",
+      "I don't understand computer groups",
       'Help me with package deployment',
     ],
     study_planning: [
@@ -387,7 +413,7 @@ function getInitialSuggestions(type: Conversation['conversationType'], context?:
     motivation: [
       'I feel overwhelmed by the content',
       'I keep failing practice exams',
-      'I\'m worried about exam readiness',
+      "I'm worried about exam readiness",
     ],
   };
 

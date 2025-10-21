@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { useEffect } from "react";
-import { usePathname, useSearchParams } from "next/navigation";
-import { analytics } from "@/lib/analytics";
-import { useAuth } from "@/contexts/AuthContext";
+import { usePathname, useSearchParams } from 'next/navigation';
+import { useEffect } from 'react';
+import { useAuth } from '@/contexts/AuthContext';
+import { analytics } from '@/lib/analytics';
 
 export function AnalyticsClient() {
   const pathname = usePathname();
@@ -28,7 +28,7 @@ export function AnalyticsClient() {
 
   // Capture pageviews on route changes
   useEffect(() => {
-    const path = pathname + (search?.toString() ? `?${search.toString()}` : "");
+    const path = pathname + (search?.toString() ? `?${search.toString()}` : '');
     const idle = (window as any).requestIdleCallback as undefined | ((cb: any) => void);
     const send = () => analytics.pageview(path);
     if (idle) idle(send);

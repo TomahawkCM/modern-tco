@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from 'react';
 
 export function useLocalStorage<T>(key: string, initialValue: T) {
   // State to store our value
   // Pass initial state function to useState so logic is only executed once
   const [storedValue, setStoredValue] = useState<T>(() => {
-    if (typeof window === "undefined") {
+    if (typeof window === 'undefined') {
       return initialValue;
     }
 
@@ -32,7 +32,7 @@ export function useLocalStorage<T>(key: string, initialValue: T) {
       setStoredValue(valueToStore);
 
       // Save to local storage
-      if (typeof window !== "undefined") {
+      if (typeof window !== 'undefined') {
         window.localStorage.setItem(key, JSON.stringify(valueToStore));
       }
     } catch (error) {
@@ -43,7 +43,7 @@ export function useLocalStorage<T>(key: string, initialValue: T) {
 
   // Listen for changes to localStorage from other tabs/windows
   useEffect(() => {
-    if (typeof window === "undefined") return;
+    if (typeof window === 'undefined') return;
 
     const handleStorageChange = (e: StorageEvent) => {
       if (e.key === key && e.newValue !== null) {
@@ -55,8 +55,8 @@ export function useLocalStorage<T>(key: string, initialValue: T) {
       }
     };
 
-    window.addEventListener("storage", handleStorageChange);
-    return () => window.removeEventListener("storage", handleStorageChange);
+    window.addEventListener('storage', handleStorageChange);
+    return () => window.removeEventListener('storage', handleStorageChange);
   }, [key]);
 
   return [storedValue, setValue] as const;
@@ -64,7 +64,7 @@ export function useLocalStorage<T>(key: string, initialValue: T) {
 
 export function useSessionStorage<T>(key: string, initialValue: T) {
   const [storedValue, setStoredValue] = useState<T>(() => {
-    if (typeof window === "undefined") {
+    if (typeof window === 'undefined') {
       return initialValue;
     }
 
@@ -82,7 +82,7 @@ export function useSessionStorage<T>(key: string, initialValue: T) {
       const valueToStore = value instanceof Function ? value(storedValue) : value;
       setStoredValue(valueToStore);
 
-      if (typeof window !== "undefined") {
+      if (typeof window !== 'undefined') {
         window.sessionStorage.setItem(key, JSON.stringify(valueToStore));
       }
     } catch (error) {
@@ -95,16 +95,16 @@ export function useSessionStorage<T>(key: string, initialValue: T) {
 
 // Hook for persisting exam session data
 export function usePersistentExamSession() {
-  return useSessionStorage("tco-exam-session", null);
+  return useSessionStorage('tco-exam-session', null);
 }
 
 // Hook for user preferences
 export function useUserPreferences() {
   const defaultPreferences = {
-    theme: "dark",
+    theme: 'dark',
     soundEnabled: true,
     notifications: true,
-    practiceMode: "adaptive",
+    practiceMode: 'adaptive',
     showExplanations: true,
     timerVisible: true,
     autoAdvance: false,
@@ -122,7 +122,7 @@ export function useUserPreferences() {
     keyboardNav: true,
   };
 
-  return useLocalStorage("tco-user-preferences", defaultPreferences);
+  return useLocalStorage('tco-user-preferences', defaultPreferences);
 }
 
 // Hook for study analytics
@@ -139,5 +139,5 @@ export function useStudyAnalytics() {
     achievements: [],
   };
 
-  return useLocalStorage("tco-study-analytics", defaultAnalytics);
+  return useLocalStorage('tco-study-analytics', defaultAnalytics);
 }

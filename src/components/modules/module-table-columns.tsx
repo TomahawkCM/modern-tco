@@ -1,13 +1,13 @@
-"use client";
+'use client';
 
-import type { ColumnDef } from "@tanstack/react-table";
-import type { ModuleListRow } from "./module-table-types";
-import Link from "next/link";
+import type { ColumnDef } from '@tanstack/react-table';
+import Link from 'next/link';
+import type { ModuleListRow } from './module-table-types';
 
 export const moduleColumnsStatic: ColumnDef<ModuleListRow>[] = [
   {
-    accessorKey: "title",
-    header: "Title",
+    accessorKey: 'title',
+    header: 'Title',
     cell: ({ row }) => (
       <Link href={`/modules/${row.original.slug}`} className="text-primary hover:underline">
         {row.original.title}
@@ -15,8 +15,8 @@ export const moduleColumnsStatic: ColumnDef<ModuleListRow>[] = [
     ),
   },
   {
-    accessorKey: "domain",
-    header: "Domain",
+    accessorKey: 'domain',
+    header: 'Domain',
     filterFn: (row, _id, value) => {
       const sel: string[] = Array.isArray(value) ? value : [];
       if (sel.length === 0) return true;
@@ -24,8 +24,8 @@ export const moduleColumnsStatic: ColumnDef<ModuleListRow>[] = [
     },
   },
   {
-    accessorKey: "difficulty",
-    header: "Difficulty",
+    accessorKey: 'difficulty',
+    header: 'Difficulty',
     filterFn: (row, _id, value) => {
       const sel: string[] = Array.isArray(value) ? value : [];
       if (sel.length === 0) return true;
@@ -33,8 +33,8 @@ export const moduleColumnsStatic: ColumnDef<ModuleListRow>[] = [
     },
   },
   {
-    accessorKey: "estimatedTimeMinutes",
-    header: "Est. Time (min)",
+    accessorKey: 'estimatedTimeMinutes',
+    header: 'Est. Time (min)',
     cell: ({ getValue }) => <span>{getValue<number>()}</span>,
   },
 ];
@@ -42,8 +42,8 @@ export const moduleColumnsStatic: ColumnDef<ModuleListRow>[] = [
 export const moduleColumnsWithProgress: ColumnDef<ModuleListRow>[] = [
   ...moduleColumnsStatic,
   {
-    accessorKey: "status",
-    header: "Status",
+    accessorKey: 'status',
+    header: 'Status',
     filterFn: (row, _id, value) => {
       const sel: string[] = Array.isArray(value) ? value : [];
       if (sel.length === 0) return true;
@@ -51,10 +51,9 @@ export const moduleColumnsWithProgress: ColumnDef<ModuleListRow>[] = [
     },
   },
   {
-    accessorKey: "progressPct",
-    header: "Progress",
+    accessorKey: 'progressPct',
+    header: 'Progress',
     cell: ({ getValue }) => <span>{getValue<number>() ?? 0}%</span>,
-    sortingFn: (a, b, id) => (Number(a.getValue(id) || 0) - Number(b.getValue(id) || 0)),
+    sortingFn: (a, b, id) => Number(a.getValue(id) || 0) - Number(b.getValue(id) || 0),
   },
 ];
-

@@ -23,8 +23,10 @@ try {
 console.log('📋 Step 2: Identifying files with unused variables...');
 let lintOutput = '';
 try {
-  lintOutput = execSync('npm run lint 2>&1 | grep "@typescript-eslint/no-unused-vars"',
-    { encoding: 'utf-8', maxBuffer: 50 * 1024 * 1024 });
+  lintOutput = execSync('npm run lint 2>&1 | grep "@typescript-eslint/no-unused-vars"', {
+    encoding: 'utf-8',
+    maxBuffer: 50 * 1024 * 1024,
+  });
 } catch (error) {
   lintOutput = error.stdout || '';
 }
@@ -52,8 +54,10 @@ for (const relPath of files) {
     // Get specific errors for this file
     let fileErrors = '';
     try {
-      fileErrors = execSync(`npm run lint 2>&1 | grep "${relPath}" | grep "@typescript-eslint/no-unused-vars"`,
-        { encoding: 'utf-8', maxBuffer: 10 * 1024 * 1024 });
+      fileErrors = execSync(
+        `npm run lint 2>&1 | grep "${relPath}" | grep "@typescript-eslint/no-unused-vars"`,
+        { encoding: 'utf-8', maxBuffer: 10 * 1024 * 1024 }
+      );
     } catch (error) {
       fileErrors = error.stdout || '';
     }
@@ -82,7 +86,7 @@ for (const relPath of files) {
         // Import: import { Foo } from '...'
         {
           regex: new RegExp(`(import\\s*{[^}]*\\b)(${varName})(\\b[^}]*}\\s*from)`, 'g'),
-          replacement: `$1_${varName}$3`
+          replacement: `$1_${varName}$3`,
         },
         // Function params: function foo(bar, baz)
         {
@@ -91,22 +95,22 @@ for (const relPath of files) {
             // Only replace if it's a parameter, not in a type annotation
             if (match.includes(':')) return match;
             return `${p1}_${p2}${p3}`;
-          }
+          },
         },
         // Variable declaration: const foo = ...
         {
           regex: new RegExp(`(\\b(?:const|let|var)\\s+)(${varName})(\\b)`, 'g'),
-          replacement: `$1_${varName}$3`
+          replacement: `$1_${varName}$3`,
         },
         // Destructuring: const { foo, bar } = ...
         {
           regex: new RegExp(`([{,]\\s*)(${varName})(\\s*[,}])`, 'g'),
-          replacement: `$1_${varName}$3`
+          replacement: `$1_${varName}$3`,
         },
         // Array destructuring: const [foo, bar] = ...
         {
           regex: new RegExp(`([\\[,]\\s*)(${varName})(\\s*[,\\]])`, 'g'),
-          replacement: `$1_${varName}$3`
+          replacement: `$1_${varName}$3`,
         },
       ];
 

@@ -1,18 +1,20 @@
-"use client";
+'use client';
 
-import { useState, useEffect } from "react";
-import dynamic from "next/dynamic";
-import { ErrorBoundary } from "@/components/ErrorBoundary";
-import { AppHeader } from "./app-header";
-import { Sidebar } from "./sidebar";
-import { BreadcrumbNav } from "./breadcrumb-nav";
-import { CyberpunkNavBar } from "../CyberpunkNavigationFixed";
-import { Menu } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
-import { useGlobalNavActive } from "@/contexts/GlobalNavContext";
+import { Menu } from 'lucide-react';
+import dynamic from 'next/dynamic';
+import { useEffect, useState } from 'react';
+import { ErrorBoundary } from '@/components/ErrorBoundary';
+import { Button } from '@/components/ui/button';
+import { useGlobalNavActive } from '@/contexts/GlobalNavContext';
+import { cn } from '@/lib/utils';
+import { CyberpunkNavBar } from '../CyberpunkNavigationFixed';
+import { BreadcrumbNav } from './breadcrumb-nav';
+import { Sidebar } from './sidebar';
 
-interface MainLayoutProps { children: React.ReactNode; asGlobal?: boolean }
+interface MainLayoutProps {
+  children: React.ReactNode;
+  asGlobal?: boolean;
+}
 
 export function MainLayout({ children, asGlobal = false }: MainLayoutProps) {
   // ALL HOOKS MUST BE CALLED BEFORE ANY EARLY RETURNS (Rules of Hooks)
@@ -20,7 +22,7 @@ export function MainLayout({ children, asGlobal = false }: MainLayoutProps) {
   const [isDesktop, setIsDesktop] = useState(false);
   const [showBackground, setShowBackground] = useState(false);
   const AnimatedBackground = dynamic(
-    () => import("../CyberpunkNavigationFixed").then((m) => m.AnimatedBackground),
+    () => import('../CyberpunkNavigationFixed').then((m) => m.AnimatedBackground),
     { ssr: false, loading: () => null }
   );
   const globalNavActive = useGlobalNavActive();
@@ -38,7 +40,7 @@ export function MainLayout({ children, asGlobal = false }: MainLayoutProps) {
 
   // Defer particle background for performance and honor reduced motion
   useEffect(() => {
-    const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const prefersReduced = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
     if (prefersReduced) return;
     // Only render on desktop-sized viewports
     if (!isDesktop) return;
@@ -66,17 +68,27 @@ export function MainLayout({ children, asGlobal = false }: MainLayoutProps) {
         <div className="fixed left-0 top-16 bottom-0 w-64 bg-card text-foreground p-4">
           <h2 className="font-bold mb-4">Navigation</h2>
           <ul className="space-y-2">
-            <li><a href="/" className="hover:text-primary">Dashboard</a></li>
-            <li><a href="/study" className="hover:text-primary">Study</a></li>
-            <li><a href="/practice" className="hover:text-primary">Practice</a></li>
+            <li>
+              <a href="/" className="hover:text-primary">
+                Dashboard
+              </a>
+            </li>
+            <li>
+              <a href="/study" className="hover:text-primary">
+                Study
+              </a>
+            </li>
+            <li>
+              <a href="/practice" className="hover:text-primary">
+                Practice
+              </a>
+            </li>
           </ul>
         </div>
 
         {/* Main content */}
         <div className="pl-64 pt-16">
-          <div className="p-8">
-            {children}
-          </div>
+          <div className="p-8">{children}</div>
         </div>
       </div>
     );
@@ -91,12 +103,21 @@ export function MainLayout({ children, asGlobal = false }: MainLayoutProps) {
     return <>{children}</>;
   }
   */
-  console.log('[MainLayout] Rendering full layout - asGlobal:', asGlobal, 'globalNavActive:', globalNavActive);
+  console.log(
+    '[MainLayout] Rendering full layout - asGlobal:',
+    asGlobal,
+    'globalNavActive:',
+    globalNavActive
+  );
 
   return (
     <div className="relative min-h-screen">
       {/* Particle Background (deferred, desktop-only) - Set to background layer */}
-      {showBackground && <div className="fixed inset-0 z-0"><AnimatedBackground /></div>}
+      {showBackground && (
+        <div className="fixed inset-0 z-0">
+          <AnimatedBackground />
+        </div>
+      )}
 
       {/* Enhanced Cyberpunk Navigation with Mobile Menu - Higher z-index */}
       <ErrorBoundary name="CyberpunkNavBar">
@@ -108,27 +129,24 @@ export function MainLayout({ children, asGlobal = false }: MainLayoutProps) {
               console.log(`Navigating to: ${tabName}`);
             }}
           />
-        
-        {/* Mobile Menu Button */}
-        <Button
-          variant="ghost"
-          size="icon"
-          className="fixed top-4 left-4 z-40 md:hidden glass border-white/10 hover:bg-white/10"
-          onClick={() => setSidebarOpen(true)}
-          aria-label="Open navigation menu"
-        >
-          <Menu className="h-5 w-5 text-foreground" />
-        </Button>
+
+          {/* Mobile Menu Button */}
+          <Button
+            variant="ghost"
+            size="icon"
+            className="fixed top-4 left-4 z-40 md:hidden glass border-white/10 hover:bg-white/10"
+            onClick={() => setSidebarOpen(true)}
+            aria-label="Open navigation menu"
+          >
+            <Menu className="h-5 w-5 text-foreground" />
+          </Button>
         </div>
       </ErrorBoundary>
 
       {/* Modern Responsive Sidebar - Ensure proper z-index */}
       <ErrorBoundary name="Sidebar">
         <div className="relative z-40">
-          <Sidebar
-            isOpen={sidebarOpen || isDesktop}
-            onClose={() => setSidebarOpen(false)}
-          />
+          <Sidebar isOpen={sidebarOpen || isDesktop} onClose={() => setSidebarOpen(false)} />
         </div>
       </ErrorBoundary>
 
@@ -136,25 +154,22 @@ export function MainLayout({ children, asGlobal = false }: MainLayoutProps) {
       <main
         id="main-content"
         className={cn(
-          "relative z-20 pt-24 px-4 pb-8 transition-all duration-300",
+          'relative z-20 pt-24 px-4 pb-8 transition-all duration-300',
           // Desktop: Add left margin for persistent sidebar
-          isDesktop ? "md:ml-64" : "",
+          isDesktop ? 'md:ml-64' : '',
           // Mobile: Full width
-          "ml-0"
+          'ml-0'
         )}
         tabIndex={-1}
-        role="main"
         aria-label="Main content"
       >
         <div className="container mx-auto">
           {/* Breadcrumb navigation - transparent to show background */}
           <BreadcrumbNav className="mb-6 p-3" />
-          
+
           {/* Content wrapper - transparent to show background */}
           <div className="p-6">
-            <ErrorBoundary name="MainContent">
-              {children}
-            </ErrorBoundary>
+            <ErrorBoundary name="MainContent">{children}</ErrorBoundary>
           </div>
         </div>
       </main>

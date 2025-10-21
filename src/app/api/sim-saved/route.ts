@@ -23,17 +23,17 @@ queryEngine.saveQuery(
   'Find machines running low on disk space'
 );
 
-export async function GET() {
+export function GET() {
   try {
-    const saved = queryEngine.listSavedQueries().map(query => ({
+    const saved = queryEngine.listSavedQueries().map((query) => ({
       name: query.name,
       question: query.question,
-      savedAt: query.createdAt
+      savedAt: query.createdAt,
     }));
 
     return NextResponse.json({
       ok: true,
-      saved
+      saved,
     });
   } catch (error) {
     const message = error instanceof Error ? error.message : 'Unable to load saved questions';

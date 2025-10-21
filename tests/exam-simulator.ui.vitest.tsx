@@ -1,6 +1,6 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import React from 'react';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import ExamSimulator from '@/components/exam/ExamSimulator';
 import { AssessmentEngine } from '@/lib/assessment/assessment-engine';
@@ -64,7 +64,12 @@ describe('ExamSimulator UI', () => {
       },
       passed: true,
       completedAt: new Date(),
-      remediation: { overallRecommendation: '', objectiveRemediation: [], studyPlan: [], retakeEligibility: true },
+      remediation: {
+        overallRecommendation: '',
+        objectiveRemediation: [],
+        studyPlan: [],
+        retakeEligibility: true,
+      },
     });
   });
 
@@ -110,14 +115,16 @@ describe('ExamSimulator UI', () => {
 
     // Review appears with two items and actions
     expect(await screen.findByTestId('review-panel')).toBeInTheDocument();
-    let reviewItems = await screen.findAllByTestId('review-item');
+    const reviewItems = await screen.findAllByTestId('review-item');
     expect(reviewItems.length).toBe(2);
     expect(screen.getByText('Retake Exam')).toBeInTheDocument();
     expect(screen.getByText('Back to start')).toBeInTheDocument();
 
     // Retake
     fireEvent.click(screen.getByText('Retake Exam'));
-    await waitFor(() => expect((AssessmentEngine as any).initializeSession).toHaveBeenCalledTimes(2));
+    await waitFor(() =>
+      expect((AssessmentEngine as any).initializeSession).toHaveBeenCalledTimes(2)
+    );
     expect(await screen.findByTestId('exam-session')).toBeInTheDocument();
     // Navigate to end and submit again
     fireEvent.click(screen.getByText('Next'));
@@ -128,6 +135,6 @@ describe('ExamSimulator UI', () => {
     fireEvent.click(screen.getByText('Back to start'));
     await waitFor(() => expect(screen.queryByTestId('exam-session')).not.toBeInTheDocument());
     const proto = Object.getPrototypeOf(window.localStorage);
-    expect((proto.removeItem as any)).toHaveBeenCalled();
+    expect(proto.removeItem as any).toHaveBeenCalled();
   });
 });

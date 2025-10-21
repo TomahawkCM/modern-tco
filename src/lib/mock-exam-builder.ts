@@ -13,12 +13,12 @@
 
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import {
-  MockExamTemplate,
-  getMockExamTemplate,
-  calculateDomainQuestionCounts,
   calculateDifficultyQuestionCounts,
+  calculateDomainQuestionCounts,
+  getMockExamTemplate,
+  type MockExamTemplate,
 } from '@/data/mock-exam-configs';
-import { Question, TCODomain } from '@/types/exam';
+import type { Question, TCODomain } from '@/types/exam';
 
 // =====================================================
 // TYPES
@@ -219,10 +219,7 @@ export async function completeMockExamSession(
   // Calculate scores
   let correctAnswers = 0;
   const answerDetails: MockExamResult['answers'] = [];
-  const domainScores: Record<
-    TCODomain,
-    { correct: number; total: number; percentage: number }
-  > = {
+  const domainScores: Record<TCODomain, { correct: number; total: number; percentage: number }> = {
     asking_questions: { correct: 0, total: 0, percentage: 0 },
     refining_targeting: { correct: 0, total: 0, percentage: 0 },
     taking_action: { correct: 0, total: 0, percentage: 0 },
@@ -305,9 +302,7 @@ export async function completeMockExamSession(
 /**
  * Get user's mock exam history
  */
-export async function getMockExamHistory(
-  userId: string
-): Promise<
+export async function getMockExamHistory(userId: string): Promise<
   Array<{
     sessionId: string;
     templateId: string;
@@ -337,9 +332,7 @@ export async function getMockExamHistory(
     sessions?.map((session) => {
       const startedAt = new Date(session.started_at);
       const completedAt = new Date(session.completed_at || session.started_at);
-      const timeTakenMinutes = Math.round(
-        (completedAt.getTime() - startedAt.getTime()) / 60000
-      );
+      const timeTakenMinutes = Math.round((completedAt.getTime() - startedAt.getTime()) / 60000);
 
       return {
         sessionId: session.id,
@@ -364,7 +357,7 @@ export async function getMockExamHistory(
  */
 function buildSelectionCriteria(
   domainCounts: Record<TCODomain, number>,
-  difficultyCounts: Record<'easy' | 'medium' | 'hard', number>,
+  _difficultyCounts: Record<'easy' | 'medium' | 'hard', number>,
   template: MockExamTemplate
 ): QuestionSelectionCriteria[] {
   const criteria: QuestionSelectionCriteria[] = [];
@@ -453,6 +446,6 @@ export function isExamExpired(startedAt: string, timeLimitMinutes: number): bool
 export function getRemainingTimeSeconds(startedAt: string, timeLimitMinutes: number): number {
   const started = new Date(startedAt);
   const expires = new Date(started.getTime() + timeLimitMinutes * 60 * 1000);
-  const remaining = Math.max(0, expires.getTime() - new Date().getTime());
+  const remaining = Math.max(0, expires.getTime() - Date.now());
   return Math.floor(remaining / 1000);
 }

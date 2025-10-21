@@ -1,13 +1,13 @@
-"use client";
+'use client';
 
-import { useState, useEffect } from "react";
-import { useExam } from "@/contexts/ExamContext";
-import { Card, CardContent } from "@/components/ui/card";
-import { Progress } from "@/components/ui/progress";
-import { Badge } from "@/components/ui/badge";
-import { Clock, AlertTriangle } from "lucide-react";
-import { ExamTooltip } from "@/components/ui/help-tooltip";
-import { cn } from "@/lib/utils";
+import { AlertTriangle, Clock } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { Badge } from '@/components/ui/badge';
+import { Card, CardContent } from '@/components/ui/card';
+import { ExamTooltip } from '@/components/ui/help-tooltip';
+import { Progress } from '@/components/ui/progress';
+import { useExam } from '@/contexts/ExamContext';
+import { cn } from '@/lib/utils';
 
 interface ExamTimerProps {
   totalTimeMinutes: number;
@@ -51,7 +51,7 @@ export function ExamTimer({ totalTimeMinutes, onTimeUp, onWarning, className }: 
         }
 
         // Update context with remaining time - ensure updateTimer is available
-        if (updateTimer && typeof updateTimer === "function") {
+        if (updateTimer && typeof updateTimer === 'function') {
           updateTimer(newValue);
         }
 
@@ -73,8 +73,8 @@ export function ExamTimer({ totalTimeMinutes, onTimeUp, onWarning, className }: 
 
   const formatTime = (seconds: number) => {
     // Handle edge cases for invalid seconds
-    if (isNaN(seconds) || seconds < 0) {
-      return "0:00";
+    if (Number.isNaN(seconds) || seconds < 0) {
+      return '0:00';
     }
 
     const hours = Math.floor(seconds / 3600);
@@ -82,43 +82,43 @@ export function ExamTimer({ totalTimeMinutes, onTimeUp, onWarning, className }: 
     const secs = seconds % 60;
 
     if (hours > 0) {
-      return `${hours}:${minutes.toString().padStart(2, "0")}:${secs.toString().padStart(2, "0")}`;
+      return `${hours}:${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
     }
-    return `${minutes}:${secs.toString().padStart(2, "0")}`;
+    return `${minutes}:${secs.toString().padStart(2, '0')}`;
   };
 
   const getProgressPercentage = () => {
     const totalSeconds = totalTimeMinutes * 60;
-    if (totalSeconds === 0 || isNaN(remainingSeconds)) {
+    if (totalSeconds === 0 || Number.isNaN(remainingSeconds)) {
       return 0;
     }
     return Math.max(0, Math.min(100, ((totalSeconds - remainingSeconds) / totalSeconds) * 100));
   };
 
   const getTimerVariant = () => {
-    if (isCritical) return "critical";
-    if (isWarning) return "warning";
-    return "default";
+    if (isCritical) return 'critical';
+    if (isWarning) return 'warning';
+    return 'default';
   };
 
   const getTimerColor = () => {
-    if (isCritical) return "text-red-600 dark:text-red-400";
-    if (isWarning) return "text-amber-600 dark:text-amber-400";
-    return "text-foreground";
+    if (isCritical) return 'text-red-600 dark:text-red-400';
+    if (isWarning) return 'text-amber-600 dark:text-amber-400';
+    return 'text-foreground';
   };
 
   const getProgressColor = () => {
-    if (isCritical) return "bg-red-600";
-    if (isWarning) return "bg-amber-600";
-    return "bg-primary";
+    if (isCritical) return 'bg-red-600';
+    if (isWarning) return 'bg-amber-600';
+    return 'bg-primary';
   };
 
   return (
-    <Card className={cn("glass border-white/10", className)}>
+    <Card className={cn('glass border-white/10', className)}>
       <CardContent className="p-4">
         <div className="mb-2 flex items-center justify-between">
           <div className="flex items-center space-x-2">
-            <Clock className={cn("h-4 w-4", getTimerColor())} />
+            <Clock className={cn('h-4 w-4', getTimerColor())} />
             <span className="text-sm font-medium text-muted-foreground">Time Remaining</span>
             <ExamTooltip
               type="time"
@@ -128,17 +128,17 @@ export function ExamTimer({ totalTimeMinutes, onTimeUp, onWarning, className }: 
 
           {(isWarning || isCritical) && (
             <Badge
-              variant={isCritical ? "destructive" : "default"}
+              variant={isCritical ? 'destructive' : 'default'}
               className="flex items-center space-x-1"
             >
               <AlertTriangle className="h-3 w-3" />
-              <span>{isCritical ? "Critical" : "Warning"}</span>
+              <span>{isCritical ? 'Critical' : 'Warning'}</span>
             </Badge>
           )}
         </div>
 
         <div className="mb-3 text-center">
-          <div className={cn("font-mono text-2xl font-bold", getTimerColor())}>
+          <div className={cn('font-mono text-2xl font-bold', getTimerColor())}>
             {formatTime(remainingSeconds)}
           </div>
           <div className="text-xs text-muted-foreground">
@@ -151,7 +151,7 @@ export function ExamTimer({ totalTimeMinutes, onTimeUp, onWarning, className }: 
           className="h-2"
           style={
             {
-              "--progress-background": getProgressColor(),
+              '--progress-background': getProgressColor(),
             } as any
           }
         />

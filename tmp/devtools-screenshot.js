@@ -5,7 +5,9 @@ const outputPath = process.argv[3] || 'tmp/devtools-screenshot.png';
 const targetUrl = process.argv[4] || 'http://127.0.0.1:3001/';
 
 if (!wsUrl) {
-  console.error('Usage: node tmp/devtools-screenshot.js <webSocketDebuggerUrl> [outputPath] [targetUrl]');
+  console.error(
+    'Usage: node tmp/devtools-screenshot.js <webSocketDebuggerUrl> [outputPath] [targetUrl]'
+  );
   process.exit(1);
 }
 

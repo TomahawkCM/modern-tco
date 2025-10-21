@@ -20,12 +20,7 @@ export function sanitizeInput(
     pattern?: RegExp;
   } = {}
 ): string {
-  const {
-    allowHTML = false,
-    allowScripts = false,
-    maxLength = 10000,
-    pattern
-  } = options;
+  const { allowHTML = false, allowScripts = false, maxLength = 10000, pattern } = options;
 
   // Trim and length check
   let sanitized = input.trim().substring(0, maxLength);
@@ -42,7 +37,7 @@ export function sanitizeInput(
       ? {}
       : {
           FORBID_TAGS: ['script', 'style', 'iframe', 'object', 'embed'],
-          FORBID_ATTR: ['onerror', 'onload', 'onclick', 'onmouseover']
+          FORBID_ATTR: ['onerror', 'onload', 'onclick', 'onmouseover'],
         };
     sanitized = DOMPurify.sanitize(sanitized, config);
   } else {
@@ -65,9 +60,9 @@ export function escapeHtml(text: string): string {
     '>': '&gt;',
     '"': '&quot;',
     "'": '&#x27;',
-    '/': '&#x2F;'
+    '/': '&#x2F;',
   };
-  return text.replace(/[&<>"'/]/g, char => map[char]);
+  return text.replace(/[&<>"'/]/g, (char) => map[char]);
 }
 
 /**
@@ -81,7 +76,8 @@ export function sanitizeTaniumQuery(query: string): string {
   let sanitized = query.replace(dangerous, '');
 
   // Validate query structure
-  const validQueryPattern = /^(Get|get)\s+[\w\s,\[\]"\(\)=<>!-]+\s+(from|FROM)\s+(all machines|ALL MACHINES|[\w\s"]+)(\s+(with|WITH)\s+[\w\s,\[\]"\(\)=<>!-]+)?$/;
+  const validQueryPattern =
+    /^(Get|get)\s+[\w\s,[\]"()=<>!-]+\s+(from|FROM)\s+(all machines|ALL MACHINES|[\w\s"]+)(\s+(with|WITH)\s+[\w\s,[\]"()=<>!-]+)?$/;
 
   if (!validQueryPattern.test(sanitized.trim())) {
     // If not a valid query format, escape special characters
@@ -110,15 +106,7 @@ export function validateSensorName(sensorName: string): string {
   }
 
   // Check against known malicious patterns
-  const blacklist = [
-    'script',
-    'javascript:',
-    'data:',
-    'vbscript:',
-    'onload',
-    'onerror',
-    'onclick'
-  ];
+  const blacklist = ['script', 'javascript:', 'data:', 'vbscript:', 'onload', 'onerror', 'onclick'];
 
   const lowerName = sensorName.toLowerCase();
   for (const pattern of blacklist) {
@@ -146,13 +134,11 @@ export function sanitizeFilterValue(
         throw new Error('Expected string value for text filter');
       }
       // Escape special regex characters if used in pattern matching
-      return value
-        .replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
-        .substring(0, 1000); // Limit length
+      return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').substring(0, 1000); // Limit length
 
-    case 'number':
+    case 'number': {
       const num = Number(value);
-      if (isNaN(num) || !isFinite(num)) {
+      if (Number.isNaN(num) || !Number.isFinite(num)) {
         throw new Error('Invalid number value');
       }
       // Prevent extremely large numbers that could cause issues
@@ -160,13 +146,15 @@ export function sanitizeFilterValue(
         throw new Error('Number exceeds safe range');
       }
       return num;
+    }
 
-    case 'date':
+    case 'date': {
       const date = new Date(value);
-      if (isNaN(date.getTime())) {
+      if (Number.isNaN(date.getTime())) {
         throw new Error('Invalid date value');
       }
       return date.toISOString();
+    }
 
     case 'boolean':
       return Boolean(value);
@@ -184,7 +172,7 @@ export function sanitizeFilterValue(
  */
 export function sanitizeFilename(filename: string, extension: string): string {
   // Remove path traversal attempts
-  let safe = filename.replace(/[\/\\:*?"<>|]/g, '_');
+  let safe = filename.replace(/[/\\:*?"<>|]/g, '_');
 
   // Remove leading dots
   safe = safe.replace(/^\.+/, '');
@@ -225,7 +213,7 @@ export function getContentSecurityPolicy(): string {
     "connect-src 'self' https://api.tanium.com", // Adjust based on API endpoints
     "frame-ancestors 'none'",
     "base-uri 'self'",
-    "form-action 'self'"
+    "form-action 'self'",
   ].join('; ');
 }
 
@@ -245,9 +233,7 @@ class RateLimiter {
     const userAttempts = this.attempts.get(identifier) || [];
 
     // Remove old attempts outside the window
-    const validAttempts = userAttempts.filter(
-      time => now - time < this.windowMs
-    );
+    const validAttempts = userAttempts.filter((time) => now - time < this.windowMs);
 
     if (validAttempts.length >= this.maxAttempts) {
       return false; // Rate limit exceeded
@@ -294,7 +280,7 @@ export function validateQueryComplexity(query: string): boolean {
   const regexMatches = query.match(regexPattern) || [];
   for (const match of regexMatches) {
     const pattern = match.match(/"([^"]*)"/)?.[1];
-    if (pattern && pattern.includes('*') && pattern.length > 100) {
+    if (pattern?.includes('*') && pattern.length > 100) {
       throw new Error('Regex pattern is too complex');
     }
   }
@@ -314,7 +300,7 @@ export function logSecurityEvent(
     event,
     details,
     userAgent: typeof window !== 'undefined' ? window.navigator.userAgent : 'server',
-    url: typeof window !== 'undefined' ? window.location.href : 'server'
+    url: typeof window !== 'undefined' ? window.location.href : 'server',
   };
 
   // In production, send to logging service

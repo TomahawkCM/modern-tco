@@ -1,16 +1,16 @@
-"use client";
+'use client';
 
-import React, { useState, useEffect } from "react";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Label } from "@/components/ui/label";
-import { Progress } from "@/components/ui/progress";
-import { Clock, CheckCircle, XCircle, AlertCircle, BookOpen } from "lucide-react";
-import type { PracticeQuestion as PracticeQuestionType } from "@/types/practice-session";
-import { TCODomain, Difficulty } from "@/types/exam";
-import { cn } from "@/lib/utils";
+import { AlertCircle, BookOpen, CheckCircle, Clock, XCircle } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Label } from '@/components/ui/label';
+import { Progress } from '@/components/ui/progress';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { cn } from '@/lib/utils';
+import { Difficulty, TCODomain } from '@/types/exam';
+import type { PracticeQuestion as PracticeQuestionType } from '@/types/practice-session';
 
 interface PracticeQuestionProps {
   question: PracticeQuestionType;
@@ -27,23 +27,23 @@ interface PracticeQuestionProps {
 }
 
 const DOMAIN_COLORS: Record<TCODomain, string> = {
-  [TCODomain.ASKING_QUESTIONS]: "bg-blue-100 text-blue-700 border-blue-200",
-  [TCODomain.REFINING_QUESTIONS]: "bg-green-100 text-green-700 border-green-200",
-  [TCODomain.REFINING_TARGETING]: "bg-green-100 text-green-700 border-green-200", // Alias uses same color
-  [TCODomain.TAKING_ACTION]: "bg-orange-100 text-orange-700 border-orange-200",
-  [TCODomain.NAVIGATION_MODULES]: "bg-cyan-100 text-cyan-700 border-cyan-200",
-  [TCODomain.REPORTING_EXPORT]: "bg-teal-100 text-teal-700 border-teal-200",
+  [TCODomain.ASKING_QUESTIONS]: 'bg-blue-100 text-blue-700 border-blue-200',
+  [TCODomain.REFINING_QUESTIONS]: 'bg-green-100 text-green-700 border-green-200',
+  [TCODomain.REFINING_TARGETING]: 'bg-green-100 text-green-700 border-green-200', // Alias uses same color
+  [TCODomain.TAKING_ACTION]: 'bg-orange-100 text-orange-700 border-orange-200',
+  [TCODomain.NAVIGATION_MODULES]: 'bg-cyan-100 text-cyan-700 border-cyan-200',
+  [TCODomain.REPORTING_EXPORT]: 'bg-teal-100 text-teal-700 border-teal-200',
   // Additional domain colors
-  [TCODomain.SECURITY]: "bg-red-100 text-red-700 border-red-200",
-  [TCODomain.FUNDAMENTALS]: "bg-sky-100 text-sky-700 border-sky-200",
-  [TCODomain.TROUBLESHOOTING]: "bg-pink-100 text-pink-700 border-pink-200",
+  [TCODomain.SECURITY]: 'bg-red-100 text-red-700 border-red-200',
+  [TCODomain.FUNDAMENTALS]: 'bg-sky-100 text-sky-700 border-sky-200',
+  [TCODomain.TROUBLESHOOTING]: 'bg-pink-100 text-pink-700 border-pink-200',
 };
 
 const DIFFICULTY_COLORS: Record<Difficulty, string> = {
-  [Difficulty.BEGINNER]: "bg-gray-100 text-gray-600",
-  [Difficulty.INTERMEDIATE]: "bg-yellow-100 text-yellow-700",
-  [Difficulty.ADVANCED]: "bg-red-100 text-red-700",
-  [Difficulty.EXPERT]: "bg-black text-foreground",
+  [Difficulty.BEGINNER]: 'bg-gray-100 text-gray-600',
+  [Difficulty.INTERMEDIATE]: 'bg-yellow-100 text-yellow-700',
+  [Difficulty.ADVANCED]: 'bg-red-100 text-red-700',
+  [Difficulty.EXPERT]: 'bg-black text-foreground',
 };
 
 export function PracticeQuestion({
@@ -59,7 +59,7 @@ export function PracticeQuestion({
   timeRemaining,
   className,
 }: PracticeQuestionProps) {
-  const [selectedChoice, setSelectedChoice] = useState<string>(question.userAnswer ?? "");
+  const [selectedChoice, setSelectedChoice] = useState<string>(question.userAnswer ?? '');
   const [questionStartTime] = useState<number>(Date.now());
   const [timeSpent, setTimeSpent] = useState<number>(0);
 
@@ -80,7 +80,7 @@ export function PracticeQuestion({
   const formatTime = (seconds: number): string => {
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;
-    return `${mins}:${secs.toString().padStart(2, "0")}`;
+    return `${mins}:${secs.toString().padStart(2, '0')}`;
   };
 
   const getChoiceIcon = (choiceId: string) => {
@@ -98,23 +98,23 @@ export function PracticeQuestion({
   const getChoiceStyle = (choiceId: string) => {
     if (!showFeedback || !question.userAnswer) {
       return selectedChoice === choiceId
-        ? "border-primary bg-primary/5"
-        : "border-muted hover:border-muted-foreground/50";
+        ? 'border-primary bg-primary/5'
+        : 'border-muted hover:border-muted-foreground/50';
     }
 
     if (choiceId === question.correctAnswerId) {
-      return "border-green-500 bg-green-50";
+      return 'border-green-500 bg-green-50';
     } else if (choiceId === question.userAnswer && choiceId !== question.correctAnswerId) {
-      return "border-red-500 bg-red-50";
+      return 'border-red-500 bg-red-50';
     }
 
-    return "border-muted opacity-60";
+    return 'border-muted opacity-60';
   };
 
   const progressPercentage = (questionNumber / totalQuestions) * 100;
 
   return (
-    <div className={cn("space-y-6", className)}>
+    <div className={cn('space-y-6', className)}>
       {/* Progress Header */}
       <div className="space-y-4">
         <div className="flex items-center justify-between">
@@ -131,7 +131,7 @@ export function PracticeQuestion({
                 <Clock className="h-4 w-4" />
                 <span
                   className={cn(
-                    timeRemaining < 60 ? "font-medium text-red-600" : "text-muted-foreground"
+                    timeRemaining < 60 ? 'font-medium text-red-600' : 'text-muted-foreground'
                   )}
                 >
                   {formatTime(timeRemaining)}
@@ -181,7 +181,7 @@ export function PracticeQuestion({
               <div
                 key={choice.id}
                 className={cn(
-                  "flex items-center space-x-3 rounded-lg border-2 p-4 transition-colors",
+                  'flex items-center space-x-3 rounded-lg border-2 p-4 transition-colors',
                   getChoiceStyle(choice.id)
                 )}
               >
@@ -199,10 +199,10 @@ export function PracticeQuestion({
             <div className="space-y-4 border-t pt-4">
               <div
                 className={cn(
-                  "flex items-start gap-3 rounded-lg p-4",
+                  'flex items-start gap-3 rounded-lg p-4',
                   question.isCorrect
-                    ? "border border-green-200 bg-green-50"
-                    : "border border-red-200 bg-red-50"
+                    ? 'border border-green-200 bg-green-50'
+                    : 'border border-red-200 bg-red-50'
                 )}
               >
                 {question.isCorrect ? (
@@ -213,17 +213,17 @@ export function PracticeQuestion({
                 <div>
                   <p
                     className={cn(
-                      "font-medium",
-                      question.isCorrect ? "text-green-800" : "text-red-800"
+                      'font-medium',
+                      question.isCorrect ? 'text-green-800' : 'text-red-800'
                     )}
                   >
-                    {question.isCorrect ? "Correct!" : "Incorrect"}
+                    {question.isCorrect ? 'Correct!' : 'Incorrect'}
                   </p>
                   {question.explanation && (
                     <p
                       className={cn(
-                        "mt-1 text-sm",
-                        question.isCorrect ? "text-green-700" : "text-red-700"
+                        'mt-1 text-sm',
+                        question.isCorrect ? 'text-green-700' : 'text-red-700'
                       )}
                     >
                       {question.explanation}

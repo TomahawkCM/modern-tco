@@ -28,26 +28,26 @@ export interface MDXModule {
 
 // Domain slug to MDX file mapping
 const domainToMDXMap: Record<string, () => Promise<MDXModule>> = {
-  "platform-foundation": () => import("@/content/modules/00-tanium-platform-foundation.mdx"),
-  "tanium-platform-foundation": () => import("@/content/modules/00-tanium-platform-foundation.mdx"),
-  "platform-foundation-v2": () => import("@/content/modules/00-tanium-platform-foundation-v2.mdx"),
-  "tanium-platform-foundation-v2": () =>
-    import("@/content/modules/00-tanium-platform-foundation-v2.mdx"),
-  "asking-questions": () => import("@/content/modules/01-asking-questions.mdx"),
+  'platform-foundation': () => import('@/content/modules/00-tanium-platform-foundation.mdx'),
+  'tanium-platform-foundation': () => import('@/content/modules/00-tanium-platform-foundation.mdx'),
+  'platform-foundation-v2': () => import('@/content/modules/00-tanium-platform-foundation-v2.mdx'),
+  'tanium-platform-foundation-v2': () =>
+    import('@/content/modules/00-tanium-platform-foundation-v2.mdx'),
+  'asking-questions': () => import('@/content/modules/01-asking-questions.mdx'),
   // "asking-questions-learn": () =>
   //   import("@/content/modules/01-asking-questions-learn.mdx"),
-  "refining-questions-targeting": () =>
-    import("@/content/modules/02-refining-questions-targeting.mdx"),
+  'refining-questions-targeting': () =>
+    import('@/content/modules/02-refining-questions-targeting.mdx'),
   // "02-learn-experimental": () =>
   //   import("@/content/modules/02-refining-targeting-learn-experimental.mdx"),
-  "taking-action-packages-actions": () =>
-    import("@/content/modules/03-taking-action-packages-actions.mdx"),
+  'taking-action-packages-actions': () =>
+    import('@/content/modules/03-taking-action-packages-actions.mdx'),
   // "03-learn-experimental": () =>
   //   import("@/content/modules/03-taking-action-learn-experimental.mdx"),
-  "navigation-basic-modules": () => import("@/content/modules/04-navigation-basic-modules.mdx"),
+  'navigation-basic-modules': () => import('@/content/modules/04-navigation-basic-modules.mdx'),
   // "04-learn-experimental": () =>
   //   import("@/content/modules/04-navigation-basic-modules-learn-experimental.mdx"),
-  "reporting-data-export": () => import("@/content/modules/05-reporting-data-export.mdx"),
+  'reporting-data-export': () => import('@/content/modules/05-reporting-data-export.mdx'),
   // "05-learn-experimental": () =>
   //   import("@/content/modules/05-reporting-export-learn-experimental.mdx"),
 };
@@ -72,17 +72,17 @@ export async function loadMDXContent(domainSlug: string): Promise<MDXModule | nu
 export function getMDXMetadata(module: MDXModule) {
   return (
     module.metadata || {
-      id: "unknown",
-      title: "Unknown Module",
-      domainSlug: "unknown",
-      difficulty: "Intermediate",
-      estimatedTime: "45 min",
+      id: 'unknown',
+      title: 'Unknown Module',
+      domainSlug: 'unknown',
+      difficulty: 'Intermediate',
+      estimatedTime: '45 min',
       objectives: [],
       tags: [],
       blueprintWeight: 0,
       version: 1,
-      status: "draft",
-      lastUpdated: new Date().toISOString().split("T")[0],
+      status: 'draft',
+      lastUpdated: new Date().toISOString().split('T')[0],
     }
   );
 }

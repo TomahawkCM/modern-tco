@@ -1,21 +1,21 @@
-import { Difficulty, QuestionCategory, TCODomain } from "./exam";
-import type { Question } from "./exam";
+import type { Question } from './exam';
+import { Difficulty, QuestionCategory, TCODomain } from './exam';
 
 // Re-export runtime values and types that components/tests expect
 export { Difficulty, QuestionCategory, TCODomain };
 export const QuestionDifficulty = Difficulty; // runtime alias used in some tests
-export type QuestionDifficulty = typeof Difficulty[keyof typeof Difficulty];
+export type QuestionDifficulty = (typeof Difficulty)[keyof typeof Difficulty];
 export type { Question };
 
 // Assessment Types - Updated to match component usage
 export type AssessmentType =
-  | "practice"
-  | "mock-exam"
-  | "domain-specific"
-  | "adaptive"
-  | "domain-test"
-  | "module-quiz"
-  | "practice-test";
+  | 'practice'
+  | 'mock-exam'
+  | 'domain-specific'
+  | 'adaptive'
+  | 'domain-test'
+  | 'module-quiz'
+  | 'practice-test';
 
 // Assessment Session Types
 export interface AssessmentSession {
@@ -27,7 +27,7 @@ export interface AssessmentSession {
   responses?: any;
   startTime: Date;
   endTime?: Date;
-  status: "in_progress" | "completed" | "abandoned" | "paused";
+  status: 'in_progress' | 'completed' | 'abandoned' | 'paused';
   timeLimit?: number; // minutes - Added missing property
   config?: AssessmentConfig;
   // Add missing property that tests expect
@@ -55,7 +55,7 @@ export interface AssessmentSessionData {
   responses: any;
   startTime: Date;
   endTime?: Date;
-  status: "in_progress" | "completed" | "abandoned" | "paused";
+  status: 'in_progress' | 'completed' | 'abandoned' | 'paused';
   timeLimit?: number;
   config: AssessmentConfig;
   // Compatibility aliases
@@ -65,13 +65,13 @@ export interface AssessmentSessionData {
 
 export interface AssessmentConfig {
   type?:
-    | "practice"
-    | "mock-exam"
-    | "domain-specific"
-    | "adaptive"
-    | "domain-test"
-    | "module-quiz"
-    | "practice-test";
+    | 'practice'
+    | 'mock-exam'
+    | 'domain-specific'
+    | 'adaptive'
+    | 'domain-test'
+    | 'module-quiz'
+    | 'practice-test';
   moduleId?: string;
   domainFilter?: string[];
   questionCount: number;
@@ -141,7 +141,11 @@ export interface AssessmentResult {
   // analytics object used in some tests and telemetry
   analytics?: AssessmentAnalytics;
   // per-question detailed results used by some reporting code
-  questionResults?: Array<{ questionId: string; isCorrect: boolean; selectedAnswer?: string | string[] }>;
+  questionResults?: Array<{
+    questionId: string;
+    isCorrect: boolean;
+    selectedAnswer?: string | string[];
+  }>;
   // Add missing property that tests expect
   performanceMetrics?: {
     timeEfficiency: number;
@@ -172,7 +176,7 @@ export interface ObjectiveScoreBreakdown {
   correct: number;
   total: number;
   percentage: number;
-  mastery: "poor" | "developing" | "proficient" | "mastery";
+  mastery: 'poor' | 'developing' | 'proficient' | 'mastery';
 }
 
 export interface PerformanceMetrics {
@@ -202,7 +206,7 @@ export interface RemediationPlan {
     objectiveId: string;
     gap?: string;
     recommendation?: string;
-    priority?: "high" | "medium" | "low";
+    priority?: 'high' | 'medium' | 'low';
     reasoning?: string;
     resources?: string[];
     estimatedStudyTime?: number; // hours
@@ -220,13 +224,13 @@ export interface RemediationPlan {
   }>;
   // Allow authoring code to include next steps without strict rejection
   nextSteps?: Array<string | { title: string; description?: string; link?: string }>;
-    // Optional target date suggested for retake planning
-    targetRetakeDate?: Date;
+  // Optional target date suggested for retake planning
+  targetRetakeDate?: Date;
 }
 
 export interface RemediationAction {
-  type: "review_content" | "practice_more" | "retake_assessment" | "seek_help" | "continue";
-  priority: "low" | "medium" | "high" | "critical";
+  type: 'review_content' | 'practice_more' | 'retake_assessment' | 'seek_help' | 'continue';
+  priority: 'low' | 'medium' | 'high' | 'critical';
   description: string;
   estimatedTime: number; // minutes
 }
@@ -234,25 +238,25 @@ export interface RemediationAction {
 export interface ObjectiveRemediation {
   objectiveId: string;
   objectiveName: string;
-  status: "mastered" | "needs_review" | "needs_practice" | "critical_gap";
+  status: 'mastered' | 'needs_review' | 'needs_practice' | 'critical_gap';
   recommendedActions: RemediationAction[];
   resourceLinks: StudyResource[];
   practiceQuestionCount: number;
 }
 
 export interface StudyResource {
-  type: "module_section" | "external_link" | "lab_exercise" | "video" | "documentation";
+  type: 'module_section' | 'external_link' | 'lab_exercise' | 'video' | 'documentation';
   title: string;
   url: string;
   estimatedTime: number;
-  priority: "high" | "medium" | "low";
+  priority: 'high' | 'medium' | 'low';
 }
 
 export interface StudyPlanItem {
   order: number;
   title: string;
   description: string;
-  type: "review" | "practice" | "lab" | "assessment";
+  type: 'review' | 'practice' | 'lab' | 'assessment';
   estimatedTime?: number;
   moduleId?: string;
   objectiveIds?: string[];
@@ -265,7 +269,7 @@ export interface StudyPlanItem {
     duration: number;
   }>;
   domain?: TCODomain; // Add domain property
-  priority?: "high" | "medium" | "low"; // Add priority property
+  priority?: 'high' | 'medium' | 'low'; // Add priority property
   // Optional study resources and suggested practice items
   resources?: string[];
   practiceQuestions?: string[];
@@ -283,7 +287,7 @@ export interface RetakeEligibility {
 export interface ReviewSession {
   assessmentSessionId: string;
   questions: ReviewQuestion[];
-  mode: "explanation" | "interactive" | "focused_review";
+  mode: 'explanation' | 'interactive' | 'focused_review';
   progressTracking: ReviewProgress;
 }
 
@@ -370,7 +374,7 @@ export interface KnowledgeGapAnalysis {
 
 export interface ConceptGap {
   concept: string;
-  severity: "minor" | "moderate" | "major";
+  severity: 'minor' | 'moderate' | 'major';
   relatedObjectives: string[];
   remediationStrategy: string;
 }
@@ -399,19 +403,19 @@ export interface ImprovementArea {
 
 export interface EngagementMetrics {
   attentionScore: number; // Based on time patterns and interactions
-  effortLevel: "low" | "medium" | "high";
+  effortLevel: 'low' | 'medium' | 'high';
   frustrationIndicators: FrustrationIndicator[];
   motivationFactors: MotivationFactor[];
 }
 
 export interface FrustrationIndicator {
-  type: "rapid_clicking" | "long_pauses" | "answer_cycling" | "help_seeking";
+  type: 'rapid_clicking' | 'long_pauses' | 'answer_cycling' | 'help_seeking';
   frequency: number;
   contextualFactors: string[];
 }
 
 export interface MotivationFactor {
-  type: "achievement" | "progress" | "challenge" | "social";
+  type: 'achievement' | 'progress' | 'challenge' | 'social';
   strength: number; // 0-100
   triggers: string[];
 }
@@ -432,12 +436,12 @@ export interface UserAnalytics {
 // Content Analytics Types
 export interface ContentAnalytics {
   contentId: string;
-  contentType: "module" | "section" | "assessment" | "question";
+  contentType: 'module' | 'section' | 'assessment' | 'question';
   engagementMetrics: {
     views: number;
     totalQuestions?: number;
     correctAnswers?: number;
-  domainScores?: Record<TCODomain, any>;
+    domainScores?: Record<TCODomain, any>;
     streak?: number;
     lastSession?: Date;
     averageScore?: number;
@@ -455,7 +459,5 @@ export interface ContentAnalytics {
     studyStreak?: number;
     sessionCount?: number;
     achievements?: string[];
-
-    };
   };
-
+}

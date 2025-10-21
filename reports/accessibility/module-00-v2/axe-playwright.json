@@ -18,12 +18,7 @@
   "toolOptions": {
     "runOnly": {
       "type": "tag",
-      "values": [
-        "wcag2a",
-        "wcag2aa",
-        "wcag21a",
-        "wcag21aa"
-      ]
+      "values": ["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"]
     },
     "reporter": "v1"
   },
@@ -53,13 +48,7 @@
     {
       "id": "aria-braille-equivalent",
       "impact": null,
-      "tags": [
-        "cat.aria",
-        "wcag2a",
-        "wcag412",
-        "EN-301-549",
-        "EN-9.4.1.2"
-      ],
+      "tags": ["cat.aria", "wcag2a", "wcag412", "EN-301-549", "EN-9.4.1.2"],
       "description": "Ensure aria-braillelabel and aria-brailleroledescription have a non-braille equivalent",
       "help": "aria-braille attributes must have a non-braille equivalent",
       "helpUrl": "https://dequeuniversity.com/rules/axe/4.10/aria-braille-equivalent?application=playwright",
@@ -68,16 +57,7 @@
     {
       "id": "aria-input-field-name",
       "impact": null,
-      "tags": [
-        "cat.aria",
-        "wcag2a",
-        "wcag412",
-        "TTv5",
-        "TT5.c",
-        "EN-301-549",
-        "EN-9.4.1.2",
-        "ACT"
-      ],
+      "tags": ["cat.aria", "wcag2a", "wcag412", "TTv5", "TT5.c", "EN-301-549", "EN-9.4.1.2", "ACT"],
       "description": "Ensure every ARIA input field has an accessible name",
       "help": "ARIA input fields must have an accessible name",
       "helpUrl": "https://dequeuniversity.com/rules/axe/4.10/aria-input-field-name?application=playwright",
@@ -86,13 +66,7 @@
     {
       "id": "aria-meter-name",
       "impact": null,
-      "tags": [
-        "cat.aria",
-        "wcag2a",
-        "wcag111",
-        "EN-301-549",
-        "EN-9.1.1.1"
-      ],
+      "tags": ["cat.aria", "wcag2a", "wcag111", "EN-301-549", "EN-9.1.1.1"],
       "description": "Ensure every ARIA meter node has an accessible name",
       "help": "ARIA meter nodes must have an accessible name",
       "helpUrl": "https://dequeuniversity.com/rules/axe/4.10/aria-meter-name?application=playwright",
@@ -101,13 +75,7 @@
     {
       "id": "aria-progressbar-name",
       "impact": null,
-      "tags": [
-        "cat.aria",
-        "wcag2a",
-        "wcag111",
-        "EN-301-549",
-        "EN-9.1.1.1"
-      ],
+      "tags": ["cat.aria", "wcag2a", "wcag111", "EN-301-549", "EN-9.1.1.1"],
       "description": "Ensure every ARIA progressbar node has an accessible name",
       "help": "ARIA progressbar nodes must have an accessible name",
       "helpUrl": "https://dequeuniversity.com/rules/axe/4.10/aria-progressbar-name?application=playwright",
@@ -116,13 +84,7 @@
     {
       "id": "aria-required-children",
       "impact": null,
-      "tags": [
-        "cat.aria",
-        "wcag2a",
-        "wcag131",
-        "EN-301-549",
-        "EN-9.1.3.1"
-      ],
+      "tags": ["cat.aria", "wcag2a", "wcag131", "EN-301-549", "EN-9.1.3.1"],
       "description": "Ensure elements with an ARIA role that require child roles contain them",
       "help": "Certain ARIA roles must contain particular children",
       "helpUrl": "https://dequeuniversity.com/rules/axe/4.10/aria-required-children?application=playwright",
@@ -131,13 +93,7 @@
     {
       "id": "aria-required-parent",
       "impact": null,
-      "tags": [
-        "cat.aria",
-        "wcag2a",
-        "wcag131",
-        "EN-301-549",
-        "EN-9.1.3.1"
-      ],
+      "tags": ["cat.aria", "wcag2a", "wcag131", "EN-301-549", "EN-9.1.3.1"],
       "description": "Ensure elements with an ARIA role that require parent roles are contained by them",
       "help": "Certain ARIA roles must be contained by particular parents",
       "helpUrl": "https://dequeuniversity.com/rules/axe/4.10/aria-required-parent?application=playwright",
@@ -146,16 +102,7 @@
     {
       "id": "aria-toggle-field-name",
       "impact": null,
-      "tags": [
-        "cat.aria",
-        "wcag2a",
-        "wcag412",
-        "TTv5",
-        "TT5.c",
-        "EN-301-549",
-        "EN-9.4.1.2",
-        "ACT"
-      ],
+      "tags": ["cat.aria", "wcag2a", "wcag412", "TTv5", "TT5.c", "EN-301-549", "EN-9.4.1.2", "ACT"],
       "description": "Ensure every ARIA toggle field has an accessible name",
       "help": "ARIA toggle fields must have an accessible name",
       "helpUrl": "https://dequeuniversity.com/rules/axe/4.10/aria-toggle-field-name?application=playwright",
@@ -164,13 +111,7 @@
     {
       "id": "aria-tooltip-name",
       "impact": null,
-      "tags": [
-        "cat.aria",
-        "wcag2a",
-        "wcag412",
-        "EN-301-549",
-        "EN-9.4.1.2"
-      ],
+      "tags": ["cat.aria", "wcag2a", "wcag412", "EN-301-549", "EN-9.4.1.2"],
       "description": "Ensure every ARIA tooltip node has an accessible name",
       "help": "ARIA tooltip nodes must have an accessible name",
       "helpUrl": "https://dequeuniversity.com/rules/axe/4.10/aria-tooltip-name?application=playwright",
@@ -179,14 +120,7 @@
     {
       "id": "autocomplete-valid",
       "impact": null,
-      "tags": [
-        "cat.forms",
-        "wcag21aa",
-        "wcag135",
-        "EN-301-549",
-        "EN-9.1.3.5",
-        "ACT"
-      ],
+      "tags": ["cat.forms", "wcag21aa", "wcag135", "EN-301-549", "EN-9.1.3.5", "ACT"],
       "description": "Ensure the autocomplete attribute is correct and suitable for the form field",
       "help": "autocomplete attribute must be used correctly",
       "helpUrl": "https://dequeuniversity.com/rules/axe/4.10/autocomplete-valid?application=playwright",
@@ -214,13 +148,7 @@
     {
       "id": "definition-list",
       "impact": null,
-      "tags": [
-        "cat.structure",
-        "wcag2a",
-        "wcag131",
-        "EN-301-549",
-        "EN-9.1.3.1"
-      ],
+      "tags": ["cat.structure", "wcag2a", "wcag131", "EN-301-549", "EN-9.1.3.1"],
       "description": "Ensure <dl> elements are structured correctly",
       "help": "<dl> elements must only directly contain properly-ordered <dt> and <dd> groups, <script>, <template> or <div> elements",
       "helpUrl": "https://dequeuniversity.com/rules/axe/4.10/definition-list?application=playwright",
@@ -229,13 +157,7 @@
     {
       "id": "dlitem",
       "impact": null,
-      "tags": [
-        "cat.structure",
-        "wcag2a",
-        "wcag131",
-        "EN-301-549",
-        "EN-9.1.3.1"
-      ],
+      "tags": ["cat.structure", "wcag2a", "wcag131", "EN-301-549", "EN-9.1.3.1"],
       "description": "Ensure <dt> and <dd> elements are contained by a <dl>",
       "help": "<dt> and <dd> elements must be contained by a <dl>",
       "helpUrl": "https://dequeuniversity.com/rules/axe/4.10/dlitem?application=playwright",
@@ -244,15 +166,7 @@
     {
       "id": "frame-focusable-content",
       "impact": null,
-      "tags": [
-        "cat.keyboard",
-        "wcag2a",
-        "wcag211",
-        "TTv5",
-        "TT4.a",
-        "EN-301-549",
-        "EN-9.2.1.1"
-      ],
+      "tags": ["cat.keyboard", "wcag2a", "wcag211", "TTv5", "TT4.a", "EN-301-549", "EN-9.2.1.1"],
       "description": "Ensure <frame> and <iframe> elements with focusable content do not have tabindex=-1",
       "help": "Frames with focusable content must not have tabindex=-1",
       "helpUrl": "https://dequeuniversity.com/rules/axe/4.10/frame-focusable-content?application=playwright",
@@ -297,14 +211,7 @@
     {
       "id": "html-xml-lang-mismatch",
       "impact": null,
-      "tags": [
-        "cat.language",
-        "wcag2a",
-        "wcag311",
-        "EN-301-549",
-        "EN-9.3.1.1",
-        "ACT"
-      ],
+      "tags": ["cat.language", "wcag2a", "wcag311", "EN-301-549", "EN-9.3.1.1", "ACT"],
       "description": "Ensure that HTML elements with both valid lang and xml:lang attributes agree on the base language of the page",
       "help": "HTML elements with lang and xml:lang must have the same base language",
       "helpUrl": "https://dequeuniversity.com/rules/axe/4.10/html-xml-lang-mismatch?application=playwright",
@@ -355,15 +262,7 @@
     {
       "id": "marquee",
       "impact": null,
-      "tags": [
-        "cat.parsing",
-        "wcag2a",
-        "wcag222",
-        "TTv5",
-        "TT2.b",
-        "EN-301-549",
-        "EN-9.2.2.2"
-      ],
+      "tags": ["cat.parsing", "wcag2a", "wcag222", "TTv5", "TT2.b", "EN-301-549", "EN-9.2.2.2"],
       "description": "Ensure <marquee> elements are not used",
       "help": "<marquee> elements are deprecated and must not be used",
       "helpUrl": "https://dequeuniversity.com/rules/axe/4.10/marquee?application=playwright",
@@ -599,13 +498,7 @@
     {
       "id": "aria-allowed-attr",
       "impact": null,
-      "tags": [
-        "cat.aria",
-        "wcag2a",
-        "wcag412",
-        "EN-301-549",
-        "EN-9.4.1.2"
-      ],
+      "tags": ["cat.aria", "wcag2a", "wcag412", "EN-301-549", "EN-9.4.1.2"],
       "description": "Ensure an element's role supports its ARIA attributes",
       "help": "Elements must only use supported ARIA attributes",
       "helpUrl": "https://dequeuniversity.com/rules/axe/4.10/aria-allowed-attr?application=playwright",
@@ -632,9 +525,7 @@
           ],
           "impact": null,
           "html": "<button class=\"relative group hidden sm:flex\" aria-label=\"Notifications (3 unread)\" tabindex=\"0\">",
-          "target": [
-            "button[aria-label=\"Notifications (3 unread)\"]"
-          ]
+          "target": ["button[aria-label=\"Notifications (3 unread)\"]"]
         },
         {
           "any": [],
@@ -658,9 +549,7 @@
           ],
           "impact": null,
           "html": "<button class=\"relative group hidden sm:flex\" aria-label=\"User profile settings\" tabindex=\"0\">",
-          "target": [
-            "button[aria-label=\"User profile settings\"]"
-          ]
+          "target": ["button[aria-label=\"User profile settings\"]"]
         },
         {
           "any": [],
@@ -684,9 +573,7 @@
           ],
           "impact": null,
           "html": "<aside id=\"main-navigation\" class=\"fixed left-0 top-24 z-40 h-[calc(100vh-6rem)] w-64 transition-transform duration-300 ease-in-out hidden md:block\" role=\"navigation\" aria-label=\"Main navigation\" tabindex=\"-1\">",
-          "target": [
-            "#main-navigation"
-          ]
+          "target": ["#main-navigation"]
         },
         {
           "any": [],
@@ -710,9 +597,7 @@
           ],
           "impact": null,
           "html": "<button class=\"inline-flex h-9 w-full items-center justify-start gap-2 whitespace-nowrap rounded-md px-4 py-2 text-left text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary disabled:pointer-events-none disabled:opacity-50 text-muted-foreground hover:bg-primary/10 hover:text-primary hover:border-l-2 hover:border-primary\" type=\"button\" aria-controls=\"radix-_r_c_\" aria-expanded=\"true\" data-state=\"open\">",
-          "target": [
-            "button[aria-controls=\"radix-_r_c_\"]"
-          ]
+          "target": ["button[aria-controls=\"radix-_r_c_\"]"]
         },
         {
           "any": [],
@@ -736,9 +621,7 @@
           ],
           "impact": null,
           "html": "<button class=\"inline-flex h-9 w-full items-center justify-start gap-2 whitespace-nowrap rounded-md px-4 py-2 text-left text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary disabled:pointer-events-none disabled:opacity-50 text-muted-foreground hover:bg-primary/10 hover:text-primary hover:border-l-2 hover:border-primary\" type=\"button\" aria-controls=\"radix-_r_d_\" aria-expanded=\"true\" data-state=\"open\">",
-          "target": [
-            "button[aria-controls=\"radix-_r_d_\"]"
-          ]
+          "target": ["button[aria-controls=\"radix-_r_d_\"]"]
         },
         {
           "any": [],
@@ -762,9 +645,7 @@
           ],
           "impact": null,
           "html": "<main id=\"main-content\" class=\"relative z-20 pt-24 px-4 pb-8 transition-all duration-300 md:ml-64 ml-0\" tabindex=\"-1\" role=\"main\" aria-label=\"Main content\">",
-          "target": [
-            "#main-content"
-          ]
+          "target": ["#main-content"]
         },
         {
           "any": [],
@@ -788,9 +669,7 @@
           ],
           "impact": null,
           "html": "<nav aria-label=\"breadcrumb\" class=\"mb-6 p-3\">",
-          "target": [
-            ".mb-6"
-          ]
+          "target": [".mb-6"]
         },
         {
           "any": [],
@@ -814,9 +693,7 @@
           ],
           "impact": null,
           "html": "<span role=\"link\" aria-disabled=\"true\" aria-current=\"page\" class=\"font-normal text-foreground flex items-center gap-1\">00 Tanium Platform Foundation V2</span>",
-          "target": [
-            ".font-normal"
-          ]
+          "target": [".font-normal"]
         },
         {
           "any": [],
@@ -840,9 +717,7 @@
           ],
           "impact": null,
           "html": "<div class=\"fixed left-0 top-0 z-[100] translate-y-[-100%] focus-within:translate-y-0 transition-transform duration-200\" aria-label=\"Skip navigation links\">",
-          "target": [
-            ".translate-y-\\[-100\\%\\]"
-          ]
+          "target": [".translate-y-\\[-100\\%\\]"]
         },
         {
           "any": [],
@@ -866,9 +741,7 @@
           ],
           "impact": null,
           "html": "<div role=\"region\" aria-label=\"Notifications (F8)\" tabindex=\"-1\" style=\"pointer-events: none;\"><ol tabindex=\"-1\" class=\"fixed top-0 z-[100] flex max-h-screen w-full flex-col-reverse p-4 sm:bottom-0 sm:right-0 sm:top-auto sm:flex-col md:max-w-[420px]\"></ol></div>",
-          "target": [
-            "div[role=\"region\"]"
-          ]
+          "target": ["div[role=\"region\"]"]
         },
         {
           "any": [],
@@ -892,28 +765,14 @@
           ],
           "impact": null,
           "html": "<div aria-live=\"assertive\" id=\"__next-route-announcer__\" role=\"alert\" style=\"position: absolute; border: 0px; height: 1px; margin: -1px; padding: 0px; width: 1px; clip: rect(0px, 0px, 0px, 0px); overflow: hidden; white-space: nowrap; overflow-wrap: normal;\"></div>",
-          "target": [
-            [
-              "next-route-announcer",
-              "#__next-route-announcer__"
-            ]
-          ]
+          "target": [["next-route-announcer", "#__next-route-announcer__"]]
         }
       ]
     },
     {
       "id": "aria-command-name",
       "impact": null,
-      "tags": [
-        "cat.aria",
-        "wcag2a",
-        "wcag412",
-        "TTv5",
-        "TT6.a",
-        "EN-301-549",
-        "EN-9.4.1.2",
-        "ACT"
-      ],
+      "tags": ["cat.aria", "wcag2a", "wcag412", "TTv5", "TT6.a", "EN-301-549", "EN-9.4.1.2", "ACT"],
       "description": "Ensure every ARIA button, link and menuitem has an accessible name",
       "help": "ARIA commands must have an accessible name",
       "helpUrl": "https://dequeuniversity.com/rules/axe/4.10/aria-command-name?application=playwright",
@@ -932,22 +791,14 @@
           "none": [],
           "impact": null,
           "html": "<span role=\"link\" aria-disabled=\"true\" aria-current=\"page\" class=\"font-normal text-foreground flex items-center gap-1\">00 Tanium Platform Foundation V2</span>",
-          "target": [
-            ".font-normal"
-          ]
+          "target": [".font-normal"]
         }
       ]
     },
     {
       "id": "aria-conditional-attr",
       "impact": null,
-      "tags": [
-        "cat.aria",
-        "wcag2a",
-        "wcag412",
-        "EN-301-549",
-        "EN-9.4.1.2"
-      ],
+      "tags": ["cat.aria", "wcag2a", "wcag412", "EN-301-549", "EN-9.4.1.2"],
       "description": "Ensure ARIA attributes are used as described in the specification of the element's role",
       "help": "ARIA attributes must be used as specified for the element's role",
       "helpUrl": "https://dequeuniversity.com/rules/axe/4.10/aria-conditional-attr?application=playwright",
@@ -966,9 +817,7 @@
           "none": [],
           "impact": null,
           "html": "<button class=\"relative group hidden sm:flex\" aria-label=\"Notifications (3 unread)\" tabindex=\"0\">",
-          "target": [
-            "button[aria-label=\"Notifications (3 unread)\"]"
-          ]
+          "target": ["button[aria-label=\"Notifications (3 unread)\"]"]
         },
         {
           "any": [],
@@ -984,9 +833,7 @@
           "none": [],
           "impact": null,
           "html": "<button class=\"relative group hidden sm:flex\" aria-label=\"User profile settings\" tabindex=\"0\">",
-          "target": [
-            "button[aria-label=\"User profile settings\"]"
-          ]
+          "target": ["button[aria-label=\"User profile settings\"]"]
         },
         {
           "any": [],
@@ -1002,9 +849,7 @@
           "none": [],
           "impact": null,
           "html": "<aside id=\"main-navigation\" class=\"fixed left-0 top-24 z-40 h-[calc(100vh-6rem)] w-64 transition-transform duration-300 ease-in-out hidden md:block\" role=\"navigation\" aria-label=\"Main navigation\" tabindex=\"-1\">",
-          "target": [
-            "#main-navigation"
-          ]
+          "target": ["#main-navigation"]
         },
         {
           "any": [],
@@ -1020,9 +865,7 @@
           "none": [],
           "impact": null,
           "html": "<button class=\"inline-flex h-9 w-full items-center justify-start gap-2 whitespace-nowrap rounded-md px-4 py-2 text-left text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary disabled:pointer-events-none disabled:opacity-50 text-muted-foreground hover:bg-primary/10 hover:text-primary hover:border-l-2 hover:border-primary\" type=\"button\" aria-controls=\"radix-_r_c_\" aria-expanded=\"true\" data-state=\"open\">",
-          "target": [
-            "button[aria-controls=\"radix-_r_c_\"]"
-          ]
+          "target": ["button[aria-controls=\"radix-_r_c_\"]"]
         },
         {
           "any": [],
@@ -1038,9 +881,7 @@
           "none": [],
           "impact": null,
           "html": "<button class=\"inline-flex h-9 w-full items-center justify-start gap-2 whitespace-nowrap rounded-md px-4 py-2 text-left text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary disabled:pointer-events-none disabled:opacity-50 text-muted-foreground hover:bg-primary/10 hover:text-primary hover:border-l-2 hover:border-primary\" type=\"button\" aria-controls=\"radix-_r_d_\" aria-expanded=\"true\" data-state=\"open\">",
-          "target": [
-            "button[aria-controls=\"radix-_r_d_\"]"
-          ]
+          "target": ["button[aria-controls=\"radix-_r_d_\"]"]
         },
         {
           "any": [],
@@ -1056,9 +897,7 @@
           "none": [],
           "impact": null,
           "html": "<main id=\"main-content\" class=\"relative z-20 pt-24 px-4 pb-8 transition-all duration-300 md:ml-64 ml-0\" tabindex=\"-1\" role=\"main\" aria-label=\"Main content\">",
-          "target": [
-            "#main-content"
-          ]
+          "target": ["#main-content"]
         },
         {
           "any": [],
@@ -1074,9 +913,7 @@
           "none": [],
           "impact": null,
           "html": "<nav aria-label=\"breadcrumb\" class=\"mb-6 p-3\">",
-          "target": [
-            ".mb-6"
-          ]
+          "target": [".mb-6"]
         },
         {
           "any": [],
@@ -1092,9 +929,7 @@
           "none": [],
           "impact": null,
           "html": "<span role=\"link\" aria-disabled=\"true\" aria-current=\"page\" class=\"font-normal text-foreground flex items-center gap-1\">00 Tanium Platform Foundation V2</span>",
-          "target": [
-            ".font-normal"
-          ]
+          "target": [".font-normal"]
         },
         {
           "any": [],
@@ -1110,9 +945,7 @@
           "none": [],
           "impact": null,
           "html": "<div class=\"fixed left-0 top-0 z-[100] translate-y-[-100%] focus-within:translate-y-0 transition-transform duration-200\" aria-label=\"Skip navigation links\">",
-          "target": [
-            ".translate-y-\\[-100\\%\\]"
-          ]
+          "target": [".translate-y-\\[-100\\%\\]"]
         },
         {
           "any": [],
@@ -1128,9 +961,7 @@
           "none": [],
           "impact": null,
           "html": "<div role=\"region\" aria-label=\"Notifications (F8)\" tabindex=\"-1\" style=\"pointer-events: none;\"><ol tabindex=\"-1\" class=\"fixed top-0 z-[100] flex max-h-screen w-full flex-col-reverse p-4 sm:bottom-0 sm:right-0 sm:top-auto sm:flex-col md:max-w-[420px]\"></ol></div>",
-          "target": [
-            "div[role=\"region\"]"
-          ]
+          "target": ["div[role=\"region\"]"]
         },
         {
           "any": [],
@@ -1146,25 +977,14 @@
           "none": [],
           "impact": null,
           "html": "<div aria-live=\"assertive\" id=\"__next-route-announcer__\" role=\"alert\" style=\"position: absolute; border: 0px; height: 1px; margin: -1px; padding: 0px; width: 1px; clip: rect(0px, 0px, 0px, 0px); overflow: hidden; white-space: nowrap; overflow-wrap: normal;\"></div>",
-          "target": [
-            [
-              "next-route-announcer",
-              "#__next-route-announcer__"
-            ]
-          ]
+          "target": [["next-route-announcer", "#__next-route-announcer__"]]
         }
       ]
     },
     {
       "id": "aria-deprecated-role",
       "impact": null,
-      "tags": [
-        "cat.aria",
-        "wcag2a",
-        "wcag412",
-        "EN-301-549",
-        "EN-9.4.1.2"
-      ],
+      "tags": ["cat.aria", "wcag2a", "wcag412", "EN-301-549", "EN-9.4.1.2"],
       "description": "Ensure elements do not use deprecated roles",
       "help": "Deprecated ARIA roles must not be used",
       "helpUrl": "https://dequeuniversity.com/rules/axe/4.10/aria-deprecated-role?application=playwright",
@@ -1183,9 +1003,7 @@
           ],
           "impact": null,
           "html": "<aside id=\"main-navigation\" class=\"fixed left-0 top-24 z-40 h-[calc(100vh-6rem)] w-64 transition-transform duration-300 ease-in-out hidden md:block\" role=\"navigation\" aria-label=\"Main navigation\" tabindex=\"-1\">",
-          "target": [
-            "#main-navigation"
-          ]
+          "target": ["#main-navigation"]
         },
         {
           "any": [],
@@ -1201,9 +1019,7 @@
           ],
           "impact": null,
           "html": "<main id=\"main-content\" class=\"relative z-20 pt-24 px-4 pb-8 transition-all duration-300 md:ml-64 ml-0\" tabindex=\"-1\" role=\"main\" aria-label=\"Main content\">",
-          "target": [
-            "#main-content"
-          ]
+          "target": ["#main-content"]
         },
         {
           "any": [],
@@ -1219,9 +1035,7 @@
           ],
           "impact": null,
           "html": "<span role=\"link\" aria-disabled=\"true\" aria-current=\"page\" class=\"font-normal text-foreground flex items-center gap-1\">00 Tanium Platform Foundation V2</span>",
-          "target": [
-            ".font-normal"
-          ]
+          "target": [".font-normal"]
         },
         {
           "any": [],
@@ -1237,9 +1051,7 @@
           ],
           "impact": null,
           "html": "<div role=\"region\" aria-label=\"Notifications (F8)\" tabindex=\"-1\" style=\"pointer-events: none;\"><ol tabindex=\"-1\" class=\"fixed top-0 z-[100] flex max-h-screen w-full flex-col-reverse p-4 sm:bottom-0 sm:right-0 sm:top-auto sm:flex-col md:max-w-[420px]\"></ol></div>",
-          "target": [
-            "div[role=\"region\"]"
-          ]
+          "target": ["div[role=\"region\"]"]
         },
         {
           "any": [],
@@ -1255,12 +1067,7 @@
           ],
           "impact": null,
           "html": "<div aria-live=\"assertive\" id=\"__next-route-announcer__\" role=\"alert\" style=\"position: absolute; border: 0px; height: 1px; margin: -1px; padding: 0px; width: 1px; clip: rect(0px, 0px, 0px, 0px); overflow: hidden; white-space: nowrap; overflow-wrap: normal;\"></div>",
-          "target": [
-            [
-              "next-route-announcer",
-              "#__next-route-announcer__"
-            ]
-          ]
+          "target": [["next-route-announcer", "#__next-route-announcer__"]]
         }
       ]
     },
@@ -1294,9 +1101,7 @@
           "none": [],
           "impact": null,
           "html": "<body class=\"font-sans antialiased\">",
-          "target": [
-            "body"
-          ]
+          "target": ["body"]
         }
       ]
     },
@@ -1344,12 +1149,7 @@
           "none": [],
           "impact": null,
           "html": "<div aria-hidden=\"true\" data-issues-count-exit=\"true\">1</div>",
-          "target": [
-            [
-              "nextjs-portal",
-              "div[data-issues-count-exit=\"true\"]"
-            ]
-          ]
+          "target": [["nextjs-portal", "div[data-issues-count-exit=\"true\"]"]]
         },
         {
           "any": [],
@@ -1379,12 +1179,7 @@
           "none": [],
           "impact": null,
           "html": "<span aria-hidden=\"true\" data-issues-count-plural=\"true\" data-animate=\"false\">s</span>",
-          "target": [
-            [
-              "nextjs-portal",
-              "span[data-issues-count-plural=\"true\"]"
-            ]
-          ]
+          "target": [["nextjs-portal", "span[data-issues-count-plural=\"true\"]"]]
         },
         {
           "any": [],
@@ -1414,12 +1209,7 @@
           "none": [],
           "impact": null,
           "html": "<div aria-hidden=\"true\" data-dot=\"true\"></div>",
-          "target": [
-            [
-              "nextjs-portal",
-              "div[data-dot=\"true\"]"
-            ]
-          ]
+          "target": [["nextjs-portal", "div[data-dot=\"true\"]"]]
         },
         {
           "any": [],
@@ -1449,9 +1239,7 @@
           "none": [],
           "impact": null,
           "html": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"lucide lucide-search absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-primary/60\" aria-hidden=\"true\">",
-          "target": [
-            ".left-3"
-          ]
+          "target": [".left-3"]
         },
         {
           "any": [],
@@ -1481,9 +1269,7 @@
           "none": [],
           "impact": null,
           "html": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"lucide lucide-search h-4 w-4 text-primary\" aria-hidden=\"true\">",
-          "target": [
-            ".lucide-search.text-primary.h-4"
-          ]
+          "target": [".lucide-search.text-primary.h-4"]
         },
         {
           "any": [],
@@ -1513,9 +1299,7 @@
           "none": [],
           "impact": null,
           "html": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"lucide lucide-bell h-4 w-4 text-primary\" aria-hidden=\"true\">",
-          "target": [
-            ".lucide-bell"
-          ]
+          "target": [".lucide-bell"]
         },
         {
           "any": [],
@@ -1545,9 +1329,7 @@
           "none": [],
           "impact": null,
           "html": "<span class=\"absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full text-[10px] text-foreground flex items-center justify-center font-bold\" aria-hidden=\"true\">3</span>",
-          "target": [
-            ".-top-1"
-          ]
+          "target": [".-top-1"]
         },
         {
           "any": [],
@@ -1577,9 +1359,7 @@
           "none": [],
           "impact": null,
           "html": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"lucide lucide-user h-4 w-4 text-primary\" aria-hidden=\"true\">",
-          "target": [
-            ".lucide-user.text-primary.h-4"
-          ]
+          "target": [".lucide-user.text-primary.h-4"]
         },
         {
           "any": [],
@@ -1609,9 +1389,7 @@
           "none": [],
           "impact": null,
           "html": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"lucide lucide-menu h-5 w-5 text-foreground\" aria-hidden=\"true\">",
-          "target": [
-            ".lucide-menu"
-          ]
+          "target": [".lucide-menu"]
         },
         {
           "any": [],
@@ -1641,9 +1419,7 @@
           "none": [],
           "impact": null,
           "html": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"lucide lucide-user h-5 w-5 text-foreground\" aria-hidden=\"true\">",
-          "target": [
-            ".lucide-user.h-5.w-5"
-          ]
+          "target": [".lucide-user.h-5.w-5"]
         },
         {
           "any": [],
@@ -1673,9 +1449,7 @@
           "none": [],
           "impact": null,
           "html": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"lucide lucide-trophy h-3 w-3 text-[#f97316] drop-shadow-[0_0_5px_rgba(250,204,21,0.5)]\" aria-hidden=\"true\">",
-          "target": [
-            ".lucide-trophy"
-          ]
+          "target": [".lucide-trophy"]
         },
         {
           "any": [],
@@ -1705,9 +1479,7 @@
           "none": [],
           "impact": null,
           "html": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"lucide lucide-house mr-2 h-4 w-4 shrink-0\" aria-hidden=\"true\">",
-          "target": [
-            ".lucide-house.mr-2.shrink-0"
-          ]
+          "target": [".lucide-house.mr-2.shrink-0"]
         },
         {
           "any": [],
@@ -1737,9 +1509,7 @@
           "none": [],
           "impact": null,
           "html": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"lucide lucide-book-open mr-2 h-4 w-4 shrink-0\" aria-hidden=\"true\">",
-          "target": [
-            "button[aria-controls=\"radix-_r_c_\"] > .lucide-book-open.mr-2.shrink-0"
-          ]
+          "target": ["button[aria-controls=\"radix-_r_c_\"] > .lucide-book-open.mr-2.shrink-0"]
         },
         {
           "any": [],
@@ -1865,9 +1635,7 @@
           "none": [],
           "impact": null,
           "html": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"lucide lucide-file-text mr-2 h-4 w-4 shrink-0\" aria-hidden=\"true\">",
-          "target": [
-            ".lucide-file-text"
-          ]
+          "target": [".lucide-file-text"]
         },
         {
           "any": [],
@@ -1897,9 +1665,7 @@
           "none": [],
           "impact": null,
           "html": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"lucide lucide-triangle-alert mr-2 h-4 w-4 shrink-0\" aria-hidden=\"true\">",
-          "target": [
-            ".lucide-triangle-alert"
-          ]
+          "target": [".lucide-triangle-alert"]
         },
         {
           "any": [],
@@ -1929,9 +1695,7 @@
           "none": [],
           "impact": null,
           "html": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"lucide lucide-video mr-2 h-4 w-4 shrink-0\" aria-hidden=\"true\">",
-          "target": [
-            ".lucide-video"
-          ]
+          "target": [".lucide-video"]
         },
         {
           "any": [],
@@ -1961,9 +1725,7 @@
           "none": [],
           "impact": null,
           "html": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"lucide lucide-layers mr-2 h-4 w-4 shrink-0\" aria-hidden=\"true\">",
-          "target": [
-            "button[aria-controls=\"radix-_r_d_\"] > .lucide-layers.mr-2.shrink-0"
-          ]
+          "target": ["button[aria-controls=\"radix-_r_d_\"] > .lucide-layers.mr-2.shrink-0"]
         },
         {
           "any": [],
@@ -2089,9 +1851,7 @@
           "none": [],
           "impact": null,
           "html": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"lucide lucide-zap mr-2 h-4 w-4 shrink-0\" aria-hidden=\"true\">",
-          "target": [
-            ".lucide-zap"
-          ]
+          "target": [".lucide-zap"]
         },
         {
           "any": [],
@@ -2185,9 +1945,7 @@
           "none": [],
           "impact": null,
           "html": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"lucide lucide-flask-conical mr-2 h-4 w-4 shrink-0\" aria-hidden=\"true\">",
-          "target": [
-            ".lucide-flask-conical"
-          ]
+          "target": [".lucide-flask-conical"]
         },
         {
           "any": [],
@@ -2217,9 +1975,7 @@
           "none": [],
           "impact": null,
           "html": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"lucide lucide-monitor mr-2 h-4 w-4 shrink-0\" aria-hidden=\"true\">",
-          "target": [
-            ".lucide-monitor"
-          ]
+          "target": [".lucide-monitor"]
         },
         {
           "any": [],
@@ -2249,9 +2005,7 @@
           "none": [],
           "impact": null,
           "html": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"lucide lucide-calendar mr-2 h-4 w-4 shrink-0\" aria-hidden=\"true\">",
-          "target": [
-            ".lucide-calendar"
-          ]
+          "target": [".lucide-calendar"]
         },
         {
           "any": [],
@@ -2281,9 +2035,7 @@
           "none": [],
           "impact": null,
           "html": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"lucide lucide-brain mr-2 h-4 w-4 shrink-0\" aria-hidden=\"true\">",
-          "target": [
-            ".lucide-brain"
-          ]
+          "target": [".lucide-brain"]
         },
         {
           "any": [],
@@ -2313,9 +2065,7 @@
           "none": [],
           "impact": null,
           "html": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"lucide lucide-book-marked mr-2 h-4 w-4 shrink-0\" aria-hidden=\"true\">",
-          "target": [
-            ".lucide-book-marked"
-          ]
+          "target": [".lucide-book-marked"]
         },
         {
           "any": [],
@@ -2345,9 +2095,7 @@
           "none": [],
           "impact": null,
           "html": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"lucide lucide-sticky-note mr-2 h-4 w-4 shrink-0\" aria-hidden=\"true\">",
-          "target": [
-            ".lucide-sticky-note"
-          ]
+          "target": [".lucide-sticky-note"]
         },
         {
           "any": [],
@@ -2409,9 +2157,7 @@
           "none": [],
           "impact": null,
           "html": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"lucide lucide-settings mr-2 h-4 w-4 shrink-0\" aria-hidden=\"true\">",
-          "target": [
-            ".lucide-settings"
-          ]
+          "target": [".lucide-settings"]
         },
         {
           "any": [],
@@ -2441,9 +2187,7 @@
           "none": [],
           "impact": null,
           "html": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"lucide lucide-clock h-4 w-4 text-orange-400 drop-shadow-[0_0_8px_rgba(251,146,60,0.5)]\" aria-hidden=\"true\">",
-          "target": [
-            ".lucide-clock"
-          ]
+          "target": [".lucide-clock"]
         },
         {
           "any": [],
@@ -2473,9 +2217,7 @@
           "none": [],
           "impact": null,
           "html": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"lucide lucide-house h-4 w-4\" aria-hidden=\"true\">",
-          "target": [
-            "a[href$=\"dashboard\"] > .lucide-house.h-4.w-4"
-          ]
+          "target": ["a[href$=\"dashboard\"] > .lucide-house.h-4.w-4"]
         },
         {
           "any": [],
@@ -2569,22 +2311,14 @@
           "none": [],
           "impact": null,
           "html": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"lucide lucide-arrow-left w-4 h-4\" aria-hidden=\"true\">",
-          "target": [
-            ".lucide-arrow-left"
-          ]
+          "target": [".lucide-arrow-left"]
         }
       ]
     },
     {
       "id": "aria-prohibited-attr",
       "impact": "serious",
-      "tags": [
-        "cat.aria",
-        "wcag2a",
-        "wcag412",
-        "EN-301-549",
-        "EN-9.4.1.2"
-      ],
+      "tags": ["cat.aria", "wcag2a", "wcag412", "EN-301-549", "EN-9.4.1.2"],
       "description": "Ensure ARIA attributes are not prohibited for an element's role",
       "help": "Elements must only use permitted ARIA attributes",
       "helpUrl": "https://dequeuniversity.com/rules/axe/4.10/aria-prohibited-attr?application=playwright",
@@ -2603,9 +2337,7 @@
           ],
           "impact": null,
           "html": "<button class=\"relative group hidden sm:flex\" aria-label=\"Notifications (3 unread)\" tabindex=\"0\">",
-          "target": [
-            "button[aria-label=\"Notifications (3 unread)\"]"
-          ]
+          "target": ["button[aria-label=\"Notifications (3 unread)\"]"]
         },
         {
           "any": [],
@@ -2621,9 +2353,7 @@
           ],
           "impact": null,
           "html": "<button class=\"relative group hidden sm:flex\" aria-label=\"User profile settings\" tabindex=\"0\">",
-          "target": [
-            "button[aria-label=\"User profile settings\"]"
-          ]
+          "target": ["button[aria-label=\"User profile settings\"]"]
         },
         {
           "any": [],
@@ -2639,9 +2369,7 @@
           ],
           "impact": null,
           "html": "<aside id=\"main-navigation\" class=\"fixed left-0 top-24 z-40 h-[calc(100vh-6rem)] w-64 transition-transform duration-300 ease-in-out hidden md:block\" role=\"navigation\" aria-label=\"Main navigation\" tabindex=\"-1\">",
-          "target": [
-            "#main-navigation"
-          ]
+          "target": ["#main-navigation"]
         },
         {
           "any": [],
@@ -2657,9 +2385,7 @@
           ],
           "impact": null,
           "html": "<button class=\"inline-flex h-9 w-full items-center justify-start gap-2 whitespace-nowrap rounded-md px-4 py-2 text-left text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary disabled:pointer-events-none disabled:opacity-50 text-muted-foreground hover:bg-primary/10 hover:text-primary hover:border-l-2 hover:border-primary\" type=\"button\" aria-controls=\"radix-_r_c_\" aria-expanded=\"true\" data-state=\"open\">",
-          "target": [
-            "button[aria-controls=\"radix-_r_c_\"]"
-          ]
+          "target": ["button[aria-controls=\"radix-_r_c_\"]"]
         },
         {
           "any": [],
@@ -2675,9 +2401,7 @@
           ],
           "impact": null,
           "html": "<button class=\"inline-flex h-9 w-full items-center justify-start gap-2 whitespace-nowrap rounded-md px-4 py-2 text-left text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary disabled:pointer-events-none disabled:opacity-50 text-muted-foreground hover:bg-primary/10 hover:text-primary hover:border-l-2 hover:border-primary\" type=\"button\" aria-controls=\"radix-_r_d_\" aria-expanded=\"true\" data-state=\"open\">",
-          "target": [
-            "button[aria-controls=\"radix-_r_d_\"]"
-          ]
+          "target": ["button[aria-controls=\"radix-_r_d_\"]"]
         },
         {
           "any": [],
@@ -2693,9 +2417,7 @@
           ],
           "impact": null,
           "html": "<main id=\"main-content\" class=\"relative z-20 pt-24 px-4 pb-8 transition-all duration-300 md:ml-64 ml-0\" tabindex=\"-1\" role=\"main\" aria-label=\"Main content\">",
-          "target": [
-            "#main-content"
-          ]
+          "target": ["#main-content"]
         },
         {
           "any": [],
@@ -2711,9 +2433,7 @@
           ],
           "impact": null,
           "html": "<nav aria-label=\"breadcrumb\" class=\"mb-6 p-3\">",
-          "target": [
-            ".mb-6"
-          ]
+          "target": [".mb-6"]
         },
         {
           "any": [],
@@ -2729,9 +2449,7 @@
           ],
           "impact": null,
           "html": "<span role=\"link\" aria-disabled=\"true\" aria-current=\"page\" class=\"font-normal text-foreground flex items-center gap-1\">00 Tanium Platform Foundation V2</span>",
-          "target": [
-            ".font-normal"
-          ]
+          "target": [".font-normal"]
         },
         {
           "any": [],
@@ -2747,9 +2465,7 @@
           ],
           "impact": null,
           "html": "<div role=\"region\" aria-label=\"Notifications (F8)\" tabindex=\"-1\" style=\"pointer-events: none;\"><ol tabindex=\"-1\" class=\"fixed top-0 z-[100] flex max-h-screen w-full flex-col-reverse p-4 sm:bottom-0 sm:right-0 sm:top-auto sm:flex-col md:max-w-[420px]\"></ol></div>",
-          "target": [
-            "div[role=\"region\"]"
-          ]
+          "target": ["div[role=\"region\"]"]
         },
         {
           "any": [],
@@ -2765,25 +2481,14 @@
           ],
           "impact": null,
           "html": "<div aria-live=\"assertive\" id=\"__next-route-announcer__\" role=\"alert\" style=\"position: absolute; border: 0px; height: 1px; margin: -1px; padding: 0px; width: 1px; clip: rect(0px, 0px, 0px, 0px); overflow: hidden; white-space: nowrap; overflow-wrap: normal;\"></div>",
-          "target": [
-            [
-              "next-route-announcer",
-              "#__next-route-announcer__"
-            ]
-          ]
+          "target": [["next-route-announcer", "#__next-route-announcer__"]]
         }
       ]
     },
     {
       "id": "aria-required-attr",
       "impact": null,
-      "tags": [
-        "cat.aria",
-        "wcag2a",
-        "wcag412",
-        "EN-301-549",
-        "EN-9.4.1.2"
-      ],
+      "tags": ["cat.aria", "wcag2a", "wcag412", "EN-301-549", "EN-9.4.1.2"],
       "description": "Ensure elements with ARIA roles have all required ARIA attributes",
       "help": "Required ARIA attributes must be provided",
       "helpUrl": "https://dequeuniversity.com/rules/axe/4.10/aria-required-attr?application=playwright",
@@ -2802,9 +2507,7 @@
           "none": [],
           "impact": null,
           "html": "<aside id=\"main-navigation\" class=\"fixed left-0 top-24 z-40 h-[calc(100vh-6rem)] w-64 transition-transform duration-300 ease-in-out hidden md:block\" role=\"navigation\" aria-label=\"Main navigation\" tabindex=\"-1\">",
-          "target": [
-            "#main-navigation"
-          ]
+          "target": ["#main-navigation"]
         },
         {
           "any": [
@@ -2820,9 +2523,7 @@
           "none": [],
           "impact": null,
           "html": "<main id=\"main-content\" class=\"relative z-20 pt-24 px-4 pb-8 transition-all duration-300 md:ml-64 ml-0\" tabindex=\"-1\" role=\"main\" aria-label=\"Main content\">",
-          "target": [
-            "#main-content"
-          ]
+          "target": ["#main-content"]
         },
         {
           "any": [
@@ -2838,9 +2539,7 @@
           "none": [],
           "impact": null,
           "html": "<span role=\"link\" aria-disabled=\"true\" aria-current=\"page\" class=\"font-normal text-foreground flex items-center gap-1\">00 Tanium Platform Foundation V2</span>",
-          "target": [
-            ".font-normal"
-          ]
+          "target": [".font-normal"]
         },
         {
           "any": [
@@ -2856,9 +2555,7 @@
           "none": [],
           "impact": null,
           "html": "<div role=\"region\" aria-label=\"Notifications (F8)\" tabindex=\"-1\" style=\"pointer-events: none;\"><ol tabindex=\"-1\" class=\"fixed top-0 z-[100] flex max-h-screen w-full flex-col-reverse p-4 sm:bottom-0 sm:right-0 sm:top-auto sm:flex-col md:max-w-[420px]\"></ol></div>",
-          "target": [
-            "div[role=\"region\"]"
-          ]
+          "target": ["div[role=\"region\"]"]
         },
         {
           "any": [
@@ -2874,25 +2571,14 @@
           "none": [],
           "impact": null,
           "html": "<div aria-live=\"assertive\" id=\"__next-route-announcer__\" role=\"alert\" style=\"position: absolute; border: 0px; height: 1px; margin: -1px; padding: 0px; width: 1px; clip: rect(0px, 0px, 0px, 0px); overflow: hidden; white-space: nowrap; overflow-wrap: normal;\"></div>",
-          "target": [
-            [
-              "next-route-announcer",
-              "#__next-route-announcer__"
-            ]
-          ]
+          "target": [["next-route-announcer", "#__next-route-announcer__"]]
         }
       ]
     },
     {
       "id": "aria-roles",
       "impact": null,
-      "tags": [
-        "cat.aria",
-        "wcag2a",
-        "wcag412",
-        "EN-301-549",
-        "EN-9.4.1.2"
-      ],
+      "tags": ["cat.aria", "wcag2a", "wcag412", "EN-301-549", "EN-9.4.1.2"],
       "description": "Ensure all elements with a role attribute use a valid value",
       "help": "ARIA roles used must conform to valid values",
       "helpUrl": "https://dequeuniversity.com/rules/axe/4.10/aria-roles?application=playwright",
@@ -2925,9 +2611,7 @@
           ],
           "impact": null,
           "html": "<aside id=\"main-navigation\" class=\"fixed left-0 top-24 z-40 h-[calc(100vh-6rem)] w-64 transition-transform duration-300 ease-in-out hidden md:block\" role=\"navigation\" aria-label=\"Main navigation\" tabindex=\"-1\">",
-          "target": [
-            "#main-navigation"
-          ]
+          "target": ["#main-navigation"]
         },
         {
           "any": [],
@@ -2957,9 +2641,7 @@
           ],
           "impact": null,
           "html": "<main id=\"main-content\" class=\"relative z-20 pt-24 px-4 pb-8 transition-all duration-300 md:ml-64 ml-0\" tabindex=\"-1\" role=\"main\" aria-label=\"Main content\">",
-          "target": [
-            "#main-content"
-          ]
+          "target": ["#main-content"]
         },
         {
           "any": [],
@@ -2989,9 +2671,7 @@
           ],
           "impact": null,
           "html": "<span role=\"link\" aria-disabled=\"true\" aria-current=\"page\" class=\"font-normal text-foreground flex items-center gap-1\">00 Tanium Platform Foundation V2</span>",
-          "target": [
-            ".font-normal"
-          ]
+          "target": [".font-normal"]
         },
         {
           "any": [],
@@ -3021,9 +2701,7 @@
           ],
           "impact": null,
           "html": "<div role=\"region\" aria-label=\"Notifications (F8)\" tabindex=\"-1\" style=\"pointer-events: none;\"><ol tabindex=\"-1\" class=\"fixed top-0 z-[100] flex max-h-screen w-full flex-col-reverse p-4 sm:bottom-0 sm:right-0 sm:top-auto sm:flex-col md:max-w-[420px]\"></ol></div>",
-          "target": [
-            "div[role=\"region\"]"
-          ]
+          "target": ["div[role=\"region\"]"]
         },
         {
           "any": [],
@@ -3053,25 +2731,14 @@
           ],
           "impact": null,
           "html": "<div aria-live=\"assertive\" id=\"__next-route-announcer__\" role=\"alert\" style=\"position: absolute; border: 0px; height: 1px; margin: -1px; padding: 0px; width: 1px; clip: rect(0px, 0px, 0px, 0px); overflow: hidden; white-space: nowrap; overflow-wrap: normal;\"></div>",
-          "target": [
-            [
-              "next-route-announcer",
-              "#__next-route-announcer__"
-            ]
-          ]
+          "target": [["next-route-announcer", "#__next-route-announcer__"]]
         }
       ]
     },
     {
       "id": "aria-valid-attr-value",
       "impact": null,
-      "tags": [
-        "cat.aria",
-        "wcag2a",
-        "wcag412",
-        "EN-301-549",
-        "EN-9.4.1.2"
-      ],
+      "tags": ["cat.aria", "wcag2a", "wcag412", "EN-301-549", "EN-9.4.1.2"],
       "description": "Ensure all ARIA attributes have valid values",
       "help": "ARIA attributes must conform to valid values",
       "helpUrl": "https://dequeuniversity.com/rules/axe/4.10/aria-valid-attr-value?application=playwright",
@@ -3104,9 +2771,7 @@
           "none": [],
           "impact": null,
           "html": "<button class=\"relative group hidden sm:flex\" aria-label=\"Notifications (3 unread)\" tabindex=\"0\">",
-          "target": [
-            "button[aria-label=\"Notifications (3 unread)\"]"
-          ]
+          "target": ["button[aria-label=\"Notifications (3 unread)\"]"]
         },
         {
           "any": [],
@@ -3136,9 +2801,7 @@
           "none": [],
           "impact": null,
           "html": "<button class=\"relative group hidden sm:flex\" aria-label=\"User profile settings\" tabindex=\"0\">",
-          "target": [
-            "button[aria-label=\"User profile settings\"]"
-          ]
+          "target": ["button[aria-label=\"User profile settings\"]"]
         },
         {
           "any": [],
@@ -3168,9 +2831,7 @@
           "none": [],
           "impact": null,
           "html": "<aside id=\"main-navigation\" class=\"fixed left-0 top-24 z-40 h-[calc(100vh-6rem)] w-64 transition-transform duration-300 ease-in-out hidden md:block\" role=\"navigation\" aria-label=\"Main navigation\" tabindex=\"-1\">",
-          "target": [
-            "#main-navigation"
-          ]
+          "target": ["#main-navigation"]
         },
         {
           "any": [],
@@ -3200,9 +2861,7 @@
           "none": [],
           "impact": null,
           "html": "<button class=\"inline-flex h-9 w-full items-center justify-start gap-2 whitespace-nowrap rounded-md px-4 py-2 text-left text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary disabled:pointer-events-none disabled:opacity-50 text-muted-foreground hover:bg-primary/10 hover:text-primary hover:border-l-2 hover:border-primary\" type=\"button\" aria-controls=\"radix-_r_c_\" aria-expanded=\"true\" data-state=\"open\">",
-          "target": [
-            "button[aria-controls=\"radix-_r_c_\"]"
-          ]
+          "target": ["button[aria-controls=\"radix-_r_c_\"]"]
         },
         {
           "any": [],
@@ -3232,9 +2891,7 @@
           "none": [],
           "impact": null,
           "html": "<button class=\"inline-flex h-9 w-full items-center justify-start gap-2 whitespace-nowrap rounded-md px-4 py-2 text-left text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary disabled:pointer-events-none disabled:opacity-50 text-muted-foreground hover:bg-primary/10 hover:text-primary hover:border-l-2 hover:border-primary\" type=\"button\" aria-controls=\"radix-_r_d_\" aria-expanded=\"true\" data-state=\"open\">",
-          "target": [
-            "button[aria-controls=\"radix-_r_d_\"]"
-          ]
+          "target": ["button[aria-controls=\"radix-_r_d_\"]"]
         },
         {
           "any": [],
@@ -3264,9 +2921,7 @@
           "none": [],
           "impact": null,
           "html": "<main id=\"main-content\" class=\"relative z-20 pt-24 px-4 pb-8 transition-all duration-300 md:ml-64 ml-0\" tabindex=\"-1\" role=\"main\" aria-label=\"Main content\">",
-          "target": [
-            "#main-content"
-          ]
+          "target": ["#main-content"]
         },
         {
           "any": [],
@@ -3296,9 +2951,7 @@
           "none": [],
           "impact": null,
           "html": "<nav aria-label=\"breadcrumb\" class=\"mb-6 p-3\">",
-          "target": [
-            ".mb-6"
-          ]
+          "target": [".mb-6"]
         },
         {
           "any": [],
@@ -3328,9 +2981,7 @@
           "none": [],
           "impact": null,
           "html": "<span role=\"link\" aria-disabled=\"true\" aria-current=\"page\" class=\"font-normal text-foreground flex items-center gap-1\">00 Tanium Platform Foundation V2</span>",
-          "target": [
-            ".font-normal"
-          ]
+          "target": [".font-normal"]
         },
         {
           "any": [],
@@ -3360,9 +3011,7 @@
           "none": [],
           "impact": null,
           "html": "<div class=\"fixed left-0 top-0 z-[100] translate-y-[-100%] focus-within:translate-y-0 transition-transform duration-200\" aria-label=\"Skip navigation links\">",
-          "target": [
-            ".translate-y-\\[-100\\%\\]"
-          ]
+          "target": [".translate-y-\\[-100\\%\\]"]
         },
         {
           "any": [],
@@ -3392,9 +3041,7 @@
           "none": [],
           "impact": null,
           "html": "<div role=\"region\" aria-label=\"Notifications (F8)\" tabindex=\"-1\" style=\"pointer-events: none;\"><ol tabindex=\"-1\" class=\"fixed top-0 z-[100] flex max-h-screen w-full flex-col-reverse p-4 sm:bottom-0 sm:right-0 sm:top-auto sm:flex-col md:max-w-[420px]\"></ol></div>",
-          "target": [
-            "div[role=\"region\"]"
-          ]
+          "target": ["div[role=\"region\"]"]
         },
         {
           "any": [],
@@ -3424,25 +3071,14 @@
           "none": [],
           "impact": null,
           "html": "<div aria-live=\"assertive\" id=\"__next-route-announcer__\" role=\"alert\" style=\"position: absolute; border: 0px; height: 1px; margin: -1px; padding: 0px; width: 1px; clip: rect(0px, 0px, 0px, 0px); overflow: hidden; white-space: nowrap; overflow-wrap: normal;\"></div>",
-          "target": [
-            [
-              "next-route-announcer",
-              "#__next-route-announcer__"
-            ]
-          ]
+          "target": [["next-route-announcer", "#__next-route-announcer__"]]
         }
       ]
     },
     {
       "id": "aria-valid-attr",
       "impact": null,
-      "tags": [
-        "cat.aria",
-        "wcag2a",
-        "wcag412",
-        "EN-301-549",
-        "EN-9.4.1.2"
-      ],
+      "tags": ["cat.aria", "wcag2a", "wcag412", "EN-301-549", "EN-9.4.1.2"],
       "description": "Ensure attributes that begin with aria- are valid ARIA attributes",
       "help": "ARIA attributes must conform to valid names",
       "helpUrl": "https://dequeuniversity.com/rules/axe/4.10/aria-valid-attr?application=playwright",
@@ -3461,9 +3097,7 @@
           "none": [],
           "impact": null,
           "html": "<button class=\"relative group hidden sm:flex\" aria-label=\"Notifications (3 unread)\" tabindex=\"0\">",
-          "target": [
-            "button[aria-label=\"Notifications (3 unread)\"]"
-          ]
+          "target": ["button[aria-label=\"Notifications (3 unread)\"]"]
         },
         {
           "any": [
@@ -3479,9 +3113,7 @@
           "none": [],
           "impact": null,
           "html": "<button class=\"relative group hidden sm:flex\" aria-label=\"User profile settings\" tabindex=\"0\">",
-          "target": [
-            "button[aria-label=\"User profile settings\"]"
-          ]
+          "target": ["button[aria-label=\"User profile settings\"]"]
         },
         {
           "any": [
@@ -3497,9 +3129,7 @@
           "none": [],
           "impact": null,
           "html": "<aside id=\"main-navigation\" class=\"fixed left-0 top-24 z-40 h-[calc(100vh-6rem)] w-64 transition-transform duration-300 ease-in-out hidden md:block\" role=\"navigation\" aria-label=\"Main navigation\" tabindex=\"-1\">",
-          "target": [
-            "#main-navigation"
-          ]
+          "target": ["#main-navigation"]
         },
         {
           "any": [
@@ -3515,9 +3145,7 @@
           "none": [],
           "impact": null,
           "html": "<button class=\"inline-flex h-9 w-full items-center justify-start gap-2 whitespace-nowrap rounded-md px-4 py-2 text-left text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary disabled:pointer-events-none disabled:opacity-50 text-muted-foreground hover:bg-primary/10 hover:text-primary hover:border-l-2 hover:border-primary\" type=\"button\" aria-controls=\"radix-_r_c_\" aria-expanded=\"true\" data-state=\"open\">",
-          "target": [
-            "button[aria-controls=\"radix-_r_c_\"]"
-          ]
+          "target": ["button[aria-controls=\"radix-_r_c_\"]"]
         },
         {
           "any": [
@@ -3533,9 +3161,7 @@
           "none": [],
           "impact": null,
           "html": "<button class=\"inline-flex h-9 w-full items-center justify-start gap-2 whitespace-nowrap rounded-md px-4 py-2 text-left text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary disabled:pointer-events-none disabled:opacity-50 text-muted-foreground hover:bg-primary/10 hover:text-primary hover:border-l-2 hover:border-primary\" type=\"button\" aria-controls=\"radix-_r_d_\" aria-expanded=\"true\" data-state=\"open\">",
-          "target": [
-            "button[aria-controls=\"radix-_r_d_\"]"
-          ]
+          "target": ["button[aria-controls=\"radix-_r_d_\"]"]
         },
         {
           "any": [
@@ -3551,9 +3177,7 @@
           "none": [],
           "impact": null,
           "html": "<main id=\"main-content\" class=\"relative z-20 pt-24 px-4 pb-8 transition-all duration-300 md:ml-64 ml-0\" tabindex=\"-1\" role=\"main\" aria-label=\"Main content\">",
-          "target": [
-            "#main-content"
-          ]
+          "target": ["#main-content"]
         },
         {
           "any": [
@@ -3569,9 +3193,7 @@
           "none": [],
           "impact": null,
           "html": "<nav aria-label=\"breadcrumb\" class=\"mb-6 p-3\">",
-          "target": [
-            ".mb-6"
-          ]
+          "target": [".mb-6"]
         },
         {
           "any": [
@@ -3587,9 +3209,7 @@
           "none": [],
           "impact": null,
           "html": "<span role=\"link\" aria-disabled=\"true\" aria-current=\"page\" class=\"font-normal text-foreground flex items-center gap-1\">00 Tanium Platform Foundation V2</span>",
-          "target": [
-            ".font-normal"
-          ]
+          "target": [".font-normal"]
         },
         {
           "any": [
@@ -3605,9 +3225,7 @@
           "none": [],
           "impact": null,
           "html": "<div class=\"fixed left-0 top-0 z-[100] translate-y-[-100%] focus-within:translate-y-0 transition-transform duration-200\" aria-label=\"Skip navigation links\">",
-          "target": [
-            ".translate-y-\\[-100\\%\\]"
-          ]
+          "target": [".translate-y-\\[-100\\%\\]"]
         },
         {
           "any": [
@@ -3623,9 +3241,7 @@
           "none": [],
           "impact": null,
           "html": "<div role=\"region\" aria-label=\"Notifications (F8)\" tabindex=\"-1\" style=\"pointer-events: none;\"><ol tabindex=\"-1\" class=\"fixed top-0 z-[100] flex max-h-screen w-full flex-col-reverse p-4 sm:bottom-0 sm:right-0 sm:top-auto sm:flex-col md:max-w-[420px]\"></ol></div>",
-          "target": [
-            "div[role=\"region\"]"
-          ]
+          "target": ["div[role=\"region\"]"]
         },
         {
           "any": [
@@ -3641,26 +3257,14 @@
           "none": [],
           "impact": null,
           "html": "<div aria-live=\"assertive\" id=\"__next-route-announcer__\" role=\"alert\" style=\"position: absolute; border: 0px; height: 1px; margin: -1px; padding: 0px; width: 1px; clip: rect(0px, 0px, 0px, 0px); overflow: hidden; white-space: nowrap; overflow-wrap: normal;\"></div>",
-          "target": [
-            [
-              "next-route-announcer",
-              "#__next-route-announcer__"
-            ]
-          ]
+          "target": [["next-route-announcer", "#__next-route-announcer__"]]
         }
       ]
     },
     {
       "id": "avoid-inline-spacing",
       "impact": null,
-      "tags": [
-        "cat.structure",
-        "wcag21aa",
-        "wcag1412",
-        "EN-301-549",
-        "EN-9.1.4.12",
-        "ACT"
-      ],
+      "tags": ["cat.structure", "wcag21aa", "wcag1412", "EN-301-549", "EN-9.1.4.12", "ACT"],
       "description": "Ensure that text spacing set through style attributes can be adjusted with custom stylesheets",
       "help": "Inline text spacing must be adjustable with custom stylesheets",
       "helpUrl": "https://dequeuniversity.com/rules/axe/4.10/avoid-inline-spacing?application=playwright",
@@ -3693,9 +3297,7 @@
           "none": [],
           "impact": null,
           "html": "<nav class=\"fixed top-1 left-0 right-0 z-50 mx-4 undefined\" style=\"opacity: 0; transform: translateY(-0.408162px);\">",
-          "target": [
-            ".top-1"
-          ]
+          "target": [".top-1"]
         },
         {
           "any": [],
@@ -3725,9 +3327,7 @@
           "none": [],
           "impact": null,
           "html": "<div class=\"h-full bg-gradient-to-r from-primary to-primary/80 transition-all progress-glow\" style=\"width: 62%;\"></div>",
-          "target": [
-            ".progress-glow"
-          ]
+          "target": [".progress-glow"]
         },
         {
           "any": [],
@@ -3757,9 +3357,7 @@
           "none": [],
           "impact": null,
           "html": "<div data-state=\"open\" id=\"radix-_r_c_\" class=\"space-y-1 pt-1\" style=\"transition-duration: 0s; animation-name: none; --radix-collapsible-content-height: 160px; --radix-collapsible-content-width: 223px;\">",
-          "target": [
-            "#radix-_r_c_"
-          ]
+          "target": ["#radix-_r_c_"]
         },
         {
           "any": [],
@@ -3789,9 +3387,7 @@
           "none": [],
           "impact": null,
           "html": "<div data-state=\"open\" id=\"radix-_r_d_\" class=\"space-y-1 pt-1\" style=\"transition-duration: 0s; animation-name: none; --radix-collapsible-content-height: 200px; --radix-collapsible-content-width: 223px;\">",
-          "target": [
-            "#radix-_r_d_"
-          ]
+          "target": ["#radix-_r_d_"]
         },
         {
           "any": [],
@@ -3981,9 +3577,7 @@
           "none": [],
           "impact": null,
           "html": "<div role=\"region\" aria-label=\"Notifications (F8)\" tabindex=\"-1\" style=\"pointer-events: none;\"><ol tabindex=\"-1\" class=\"fixed top-0 z-[100] flex max-h-screen w-full flex-col-reverse p-4 sm:bottom-0 sm:right-0 sm:top-auto sm:flex-col md:max-w-[420px]\"></ol></div>",
-          "target": [
-            "div[role=\"region\"]"
-          ]
+          "target": ["div[role=\"region\"]"]
         },
         {
           "any": [],
@@ -4013,9 +3607,7 @@
           "none": [],
           "impact": null,
           "html": "<next-route-announcer style=\"position: absolute;\"></next-route-announcer>",
-          "target": [
-            "next-route-announcer"
-          ]
+          "target": ["next-route-announcer"]
         }
       ]
     },
@@ -4052,9 +3644,7 @@
           "none": [],
           "impact": null,
           "html": "<button class=\"relative group hidden sm:flex\" aria-label=\"Notifications (3 unread)\" tabindex=\"0\">",
-          "target": [
-            "button[aria-label=\"Notifications (3 unread)\"]"
-          ]
+          "target": ["button[aria-label=\"Notifications (3 unread)\"]"]
         },
         {
           "any": [
@@ -4070,9 +3660,7 @@
           "none": [],
           "impact": null,
           "html": "<button class=\"relative group hidden sm:flex\" aria-label=\"User profile settings\" tabindex=\"0\">",
-          "target": [
-            "button[aria-label=\"User profile settings\"]"
-          ]
+          "target": ["button[aria-label=\"User profile settings\"]"]
         },
         {
           "any": [
@@ -4088,9 +3676,7 @@
           "none": [],
           "impact": null,
           "html": "<button class=\"inline-flex h-9 w-full items-center justify-start gap-2 whitespace-nowrap rounded-md px-4 py-2 text-left text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary disabled:pointer-events-none disabled:opacity-50 bg-gradient-to-r from-primary/20 to-accent/10 text-primary border-l-2 border-primary shadow-[0_0_15px_hsl(var(--primary)/0.2)]\">",
-          "target": [
-            ".from-primary\\/20"
-          ]
+          "target": [".from-primary\\/20"]
         },
         {
           "any": [
@@ -4106,9 +3692,7 @@
           "none": [],
           "impact": null,
           "html": "<button class=\"inline-flex h-9 w-full items-center justify-start gap-2 whitespace-nowrap rounded-md px-4 py-2 text-left text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary disabled:pointer-events-none disabled:opacity-50 text-muted-foreground hover:bg-primary/10 hover:text-primary hover:border-l-2 hover:border-primary\" type=\"button\" aria-controls=\"radix-_r_c_\" aria-expanded=\"true\" data-state=\"open\">",
-          "target": [
-            "button[aria-controls=\"radix-_r_c_\"]"
-          ]
+          "target": ["button[aria-controls=\"radix-_r_c_\"]"]
         },
         {
           "any": [
@@ -4214,9 +3798,7 @@
           "none": [],
           "impact": null,
           "html": "<button class=\"inline-flex h-9 w-full items-center justify-start gap-2 whitespace-nowrap rounded-md px-4 py-2 text-left text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary disabled:pointer-events-none disabled:opacity-50 text-muted-foreground hover:bg-primary/10 hover:text-primary hover:border-l-2 hover:border-primary\" type=\"button\" aria-controls=\"radix-_r_d_\" aria-expanded=\"true\" data-state=\"open\">",
-          "target": [
-            "button[aria-controls=\"radix-_r_d_\"]"
-          ]
+          "target": ["button[aria-controls=\"radix-_r_d_\"]"]
         },
         {
           "any": [
@@ -4466,9 +4048,7 @@
           "none": [],
           "impact": null,
           "html": "<button class=\"inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium transition-all duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80 h-8 rounded-md px-3 text-sm\">",
-          "target": [
-            ".bg-secondary.text-secondary-foreground.shadow-sm:nth-child(1)"
-          ]
+          "target": [".bg-secondary.text-secondary-foreground.shadow-sm:nth-child(1)"]
         },
         {
           "any": [
@@ -4484,9 +4064,7 @@
           "none": [],
           "impact": null,
           "html": "<button class=\"inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium transition-all duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80 h-8 rounded-md px-3 text-sm\">",
-          "target": [
-            ".bg-secondary.text-secondary-foreground.shadow-sm:nth-child(2)"
-          ]
+          "target": [".bg-secondary.text-secondary-foreground.shadow-sm:nth-child(2)"]
         }
       ]
     },
@@ -4516,21 +4094,15 @@
               "relatedNodes": [
                 {
                   "html": "<h3 class=\"px-2 text-sm font-medium text-primary flex items-center gap-2\"><div class=\"h-[2px] w-2 bg-primary rounded-full\"></div>Domain Progress</h3>",
-                  "target": [
-                    "h3"
-                  ]
+                  "target": ["h3"]
                 },
                 {
                   "html": "<h1 class=\"text-6xl font-bold text-primary\">404</h1>",
-                  "target": [
-                    "h1"
-                  ]
+                  "target": ["h1"]
                 },
                 {
                   "html": "<h2 class=\"text-2xl font-semibold text-foreground\">Page Not Found</h2>",
-                  "target": [
-                    "h2"
-                  ]
+                  "target": ["h2"]
                 }
               ],
               "impact": "serious",
@@ -4542,9 +4114,7 @@
               "relatedNodes": [
                 {
                   "html": "<main id=\"main-content\" class=\"relative z-20 pt-24 px-4 pb-8 transition-all duration-300 md:ml-64 ml-0\" tabindex=\"-1\" role=\"main\" aria-label=\"Main content\">",
-                  "target": [
-                    "#main-content"
-                  ]
+                  "target": ["#main-content"]
                 }
               ],
               "impact": "serious",
@@ -4555,9 +4125,7 @@
           "none": [],
           "impact": null,
           "html": "<html lang=\"en\" class=\"__className_f367f3 dark\">",
-          "target": [
-            "html"
-          ]
+          "target": ["html"]
         }
       ]
     },
@@ -4649,9 +4217,7 @@
           "none": [],
           "impact": null,
           "html": "<a class=\"inline-flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-foreground rounded-lg transition-colors\" href=\"/\">",
-          "target": [
-            ".py-3"
-          ]
+          "target": [".py-3"]
         }
       ]
     },
@@ -4686,22 +4252,14 @@
           "none": [],
           "impact": null,
           "html": "<html lang=\"en\" class=\"__className_f367f3 dark\">",
-          "target": [
-            "html"
-          ]
+          "target": ["html"]
         }
       ]
     },
     {
       "id": "duplicate-id-aria",
       "impact": null,
-      "tags": [
-        "cat.parsing",
-        "wcag2a",
-        "wcag412",
-        "EN-301-549",
-        "EN-9.4.1.2"
-      ],
+      "tags": ["cat.parsing", "wcag2a", "wcag412", "EN-301-549", "EN-9.4.1.2"],
       "description": "Ensure every id attribute value used in ARIA and in labels is unique",
       "help": "IDs used in ARIA and labels must be unique",
       "helpUrl": "https://dequeuniversity.com/rules/axe/4.10/duplicate-id-aria?application=playwright",
@@ -4720,9 +4278,7 @@
           "none": [],
           "impact": null,
           "html": "<div data-state=\"open\" id=\"radix-_r_c_\" class=\"space-y-1 pt-1\" style=\"transition-duration: 0s; animation-name: none; --radix-collapsible-content-height: 160px; --radix-collapsible-content-width: 223px;\">",
-          "target": [
-            "#radix-_r_c_"
-          ]
+          "target": ["#radix-_r_c_"]
         },
         {
           "any": [
@@ -4738,24 +4294,14 @@
           "none": [],
           "impact": null,
           "html": "<div data-state=\"open\" id=\"radix-_r_d_\" class=\"space-y-1 pt-1\" style=\"transition-duration: 0s; animation-name: none; --radix-collapsible-content-height: 200px; --radix-collapsible-content-width: 223px;\">",
-          "target": [
-            "#radix-_r_d_"
-          ]
+          "target": ["#radix-_r_d_"]
         }
       ]
     },
     {
       "id": "form-field-multiple-labels",
       "impact": null,
-      "tags": [
-        "cat.forms",
-        "wcag2a",
-        "wcag332",
-        "TTv5",
-        "TT5.c",
-        "EN-301-549",
-        "EN-9.3.3.2"
-      ],
+      "tags": ["cat.forms", "wcag2a", "wcag332", "TTv5", "TT5.c", "EN-301-549", "EN-9.3.3.2"],
       "description": "Ensure form field does not have multiple label elements",
       "help": "Form field must not have multiple label elements",
       "helpUrl": "https://dequeuniversity.com/rules/axe/4.10/form-field-multiple-labels?application=playwright",
@@ -4774,9 +4320,7 @@
           ],
           "impact": null,
           "html": "<input placeholder=\"Search modules, questions...\" class=\"w-full pl-10 pr-4 py-2 bg-white/[0.03] backdrop-blur-md border border-white/10 rounded-lg text-sm text-cyan-100 placeholder-cyan-400/40 focus:outline-none focus:border-white/20 focus:ring-2 focus:ring-white/10 transition-all\" type=\"text\">",
-          "target": [
-            "input"
-          ]
+          "target": ["input"]
         }
       ]
     },
@@ -4811,9 +4355,7 @@
           "none": [],
           "impact": null,
           "html": "<html lang=\"en\" class=\"__className_f367f3 dark\">",
-          "target": [
-            "html"
-          ]
+          "target": ["html"]
         }
       ]
     },
@@ -4848,9 +4390,7 @@
           ],
           "impact": null,
           "html": "<html lang=\"en\" class=\"__className_f367f3 dark\">",
-          "target": [
-            "html"
-          ]
+          "target": ["html"]
         }
       ]
     },
@@ -4896,9 +4436,7 @@
           ],
           "impact": null,
           "html": "<img alt=\"TCO Logo\" class=\"w-10 h-10 sm:w-12 sm:h-12 object-contain\" src=\"/tco-logo.png\">",
-          "target": [
-            "img"
-          ]
+          "target": ["img"]
         }
       ]
     },
@@ -4943,9 +4481,7 @@
           ],
           "impact": null,
           "html": "<input placeholder=\"Search modules, questions...\" class=\"w-full pl-10 pr-4 py-2 bg-white/[0.03] backdrop-blur-md border border-white/10 rounded-lg text-sm text-cyan-100 placeholder-cyan-400/40 focus:outline-none focus:border-white/20 focus:ring-2 focus:ring-white/10 transition-all\" type=\"text\">",
-          "target": [
-            "input"
-          ]
+          "target": ["input"]
         }
       ]
     },
@@ -4992,9 +4528,7 @@
           ],
           "impact": null,
           "html": "<a class=\"transition-colors hover:text-foreground flex items-center gap-1 text-muted-foreground hover:text-foreground transition-colors\" href=\"/dashboard\">",
-          "target": [
-            "a[href$=\"dashboard\"]"
-          ]
+          "target": ["a[href$=\"dashboard\"]"]
         },
         {
           "any": [
@@ -5018,9 +4552,7 @@
           ],
           "impact": null,
           "html": "<a class=\"transition-colors hover:text-foreground flex items-center gap-1 text-muted-foreground hover:text-foreground transition-colors\" href=\"/modules\">Learning Modules</a>",
-          "target": [
-            "a[href$=\"modules\"]"
-          ]
+          "target": ["a[href$=\"modules\"]"]
         },
         {
           "any": [
@@ -5044,22 +4576,14 @@
           ],
           "impact": null,
           "html": "<a class=\"inline-flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-foreground rounded-lg transition-colors\" href=\"/\">",
-          "target": [
-            ".py-3"
-          ]
+          "target": [".py-3"]
         }
       ]
     },
     {
       "id": "list",
       "impact": null,
-      "tags": [
-        "cat.structure",
-        "wcag2a",
-        "wcag131",
-        "EN-301-549",
-        "EN-9.1.3.1"
-      ],
+      "tags": ["cat.structure", "wcag2a", "wcag131", "EN-301-549", "EN-9.1.3.1"],
       "description": "Ensure that lists are structured correctly",
       "help": "<ul> and <ol> must only directly contain <li>, <script> or <template> elements",
       "helpUrl": "https://dequeuniversity.com/rules/axe/4.10/list?application=playwright",
@@ -5078,9 +4602,7 @@
           ],
           "impact": null,
           "html": "<ol class=\"flex flex-wrap items-center gap-1.5 break-words text-sm text-muted-foreground sm:gap-2.5\">",
-          "target": [
-            ".flex-wrap"
-          ]
+          "target": [".flex-wrap"]
         },
         {
           "any": [],
@@ -5096,22 +4618,14 @@
           ],
           "impact": null,
           "html": "<ol tabindex=\"-1\" class=\"fixed top-0 z-[100] flex max-h-screen w-full flex-col-reverse p-4 sm:bottom-0 sm:right-0 sm:top-auto sm:flex-col md:max-w-[420px]\"></ol>",
-          "target": [
-            ".max-h-screen"
-          ]
+          "target": [".max-h-screen"]
         }
       ]
     },
     {
       "id": "listitem",
       "impact": null,
-      "tags": [
-        "cat.structure",
-        "wcag2a",
-        "wcag131",
-        "EN-301-549",
-        "EN-9.1.3.1"
-      ],
+      "tags": ["cat.structure", "wcag2a", "wcag131", "EN-301-549", "EN-9.1.3.1"],
       "description": "Ensure <li> elements are used semantically",
       "help": "<li> elements must be contained in a <ul> or <ol>",
       "helpUrl": "https://dequeuniversity.com/rules/axe/4.10/listitem?application=playwright",
@@ -5130,9 +4644,7 @@
           "none": [],
           "impact": null,
           "html": "<li class=\"flex items-center gap-1\">",
-          "target": [
-            "li:nth-child(1)"
-          ]
+          "target": ["li:nth-child(1)"]
         },
         {
           "any": [
@@ -5148,9 +4660,7 @@
           "none": [],
           "impact": null,
           "html": "<li class=\"flex items-center gap-1\"><a class=\"transition-colors hover:text-foreground flex items-center gap-1 text-muted-foreground hover:text-foreground transition-colors\" href=\"/modules\">Learning Modules</a></li>",
-          "target": [
-            "li:nth-child(3)"
-          ]
+          "target": ["li:nth-child(3)"]
         },
         {
           "any": [
@@ -5166,9 +4676,7 @@
           "none": [],
           "impact": null,
           "html": "<li class=\"flex items-center gap-1\"><span role=\"link\" aria-disabled=\"true\" aria-current=\"page\" class=\"font-normal text-foreground flex items-center gap-1\">00 Tanium Platform Foundation V2</span></li>",
-          "target": [
-            "li:nth-child(5)"
-          ]
+          "target": ["li:nth-child(5)"]
         }
       ]
     },
@@ -5201,24 +4709,14 @@
           "none": [],
           "impact": null,
           "html": "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">",
-          "target": [
-            "meta[name=\"viewport\"]"
-          ]
+          "target": ["meta[name=\"viewport\"]"]
         }
       ]
     },
     {
       "id": "nested-interactive",
       "impact": null,
-      "tags": [
-        "cat.keyboard",
-        "wcag2a",
-        "wcag412",
-        "TTv5",
-        "TT6.a",
-        "EN-301-549",
-        "EN-9.4.1.2"
-      ],
+      "tags": ["cat.keyboard", "wcag2a", "wcag412", "TTv5", "TT6.a", "EN-301-549", "EN-9.4.1.2"],
       "description": "Ensure interactive controls are not nested as they are not always announced by screen readers or can cause focus problems for assistive technologies",
       "help": "Interactive controls must not be nested",
       "helpUrl": "https://dequeuniversity.com/rules/axe/4.10/nested-interactive?application=playwright",
@@ -5237,9 +4735,7 @@
           "none": [],
           "impact": null,
           "html": "<img alt=\"TCO Logo\" class=\"w-10 h-10 sm:w-12 sm:h-12 object-contain\" src=\"/tco-logo.png\">",
-          "target": [
-            "img"
-          ]
+          "target": ["img"]
         },
         {
           "any": [
@@ -5255,9 +4751,7 @@
           "none": [],
           "impact": null,
           "html": "<button class=\"relative group hidden sm:flex\" aria-label=\"Notifications (3 unread)\" tabindex=\"0\">",
-          "target": [
-            "button[aria-label=\"Notifications (3 unread)\"]"
-          ]
+          "target": ["button[aria-label=\"Notifications (3 unread)\"]"]
         },
         {
           "any": [
@@ -5273,9 +4767,7 @@
           "none": [],
           "impact": null,
           "html": "<button class=\"relative group hidden sm:flex\" aria-label=\"User profile settings\" tabindex=\"0\">",
-          "target": [
-            "button[aria-label=\"User profile settings\"]"
-          ]
+          "target": ["button[aria-label=\"User profile settings\"]"]
         },
         {
           "any": [
@@ -5291,9 +4783,7 @@
           "none": [],
           "impact": null,
           "html": "<button class=\"inline-flex h-9 w-full items-center justify-start gap-2 whitespace-nowrap rounded-md px-4 py-2 text-left text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary disabled:pointer-events-none disabled:opacity-50 bg-gradient-to-r from-primary/20 to-accent/10 text-primary border-l-2 border-primary shadow-[0_0_15px_hsl(var(--primary)/0.2)]\">",
-          "target": [
-            ".from-primary\\/20"
-          ]
+          "target": [".from-primary\\/20"]
         },
         {
           "any": [
@@ -5309,9 +4799,7 @@
           "none": [],
           "impact": null,
           "html": "<button class=\"inline-flex h-9 w-full items-center justify-start gap-2 whitespace-nowrap rounded-md px-4 py-2 text-left text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary disabled:pointer-events-none disabled:opacity-50 text-muted-foreground hover:bg-primary/10 hover:text-primary hover:border-l-2 hover:border-primary\" type=\"button\" aria-controls=\"radix-_r_c_\" aria-expanded=\"true\" data-state=\"open\">",
-          "target": [
-            "button[aria-controls=\"radix-_r_c_\"]"
-          ]
+          "target": ["button[aria-controls=\"radix-_r_c_\"]"]
         },
         {
           "any": [
@@ -5417,9 +4905,7 @@
           "none": [],
           "impact": null,
           "html": "<button class=\"inline-flex h-9 w-full items-center justify-start gap-2 whitespace-nowrap rounded-md px-4 py-2 text-left text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary disabled:pointer-events-none disabled:opacity-50 text-muted-foreground hover:bg-primary/10 hover:text-primary hover:border-l-2 hover:border-primary\" type=\"button\" aria-controls=\"radix-_r_d_\" aria-expanded=\"true\" data-state=\"open\">",
-          "target": [
-            "button[aria-controls=\"radix-_r_d_\"]"
-          ]
+          "target": ["button[aria-controls=\"radix-_r_d_\"]"]
         },
         {
           "any": [
@@ -5669,9 +5155,7 @@
           "none": [],
           "impact": null,
           "html": "<hr class=\"my-4 h-[1px] w-full shrink-0 bg-archon-border-bright/30\">",
-          "target": [
-            "hr"
-          ]
+          "target": ["hr"]
         },
         {
           "any": [
@@ -5687,9 +5171,7 @@
           "none": [],
           "impact": null,
           "html": "<button class=\"inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium transition-all duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80 h-8 rounded-md px-3 text-sm\">",
-          "target": [
-            ".bg-secondary.text-secondary-foreground.shadow-sm:nth-child(1)"
-          ]
+          "target": [".bg-secondary.text-secondary-foreground.shadow-sm:nth-child(1)"]
         },
         {
           "any": [
@@ -5705,9 +5187,7 @@
           "none": [],
           "impact": null,
           "html": "<button class=\"inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium transition-all duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80 h-8 rounded-md px-3 text-sm\">",
-          "target": [
-            ".bg-secondary.text-secondary-foreground.shadow-sm:nth-child(2)"
-          ]
+          "target": [".bg-secondary.text-secondary-foreground.shadow-sm:nth-child(2)"]
         }
       ]
     },
@@ -5743,9 +5223,7 @@
           "none": [],
           "impact": null,
           "html": "<html lang=\"en\" class=\"__className_f367f3 dark\">",
-          "target": [
-            "html"
-          ]
+          "target": ["html"]
         },
         {
           "any": [
@@ -5761,9 +5239,7 @@
           "none": [],
           "impact": null,
           "html": "<nav class=\"flex-1 px-4 pb-4 overflow-y-auto scrollbar-thin scrollbar-thumb-primary/30 scrollbar-track-transparent\">",
-          "target": [
-            ".pb-4"
-          ]
+          "target": [".pb-4"]
         }
       ]
     }
@@ -5772,13 +5248,7 @@
     {
       "id": "aria-prohibited-attr",
       "impact": "serious",
-      "tags": [
-        "cat.aria",
-        "wcag2a",
-        "wcag412",
-        "EN-301-549",
-        "EN-9.4.1.2"
-      ],
+      "tags": ["cat.aria", "wcag2a", "wcag412", "EN-301-549", "EN-9.4.1.2"],
       "description": "Ensure ARIA attributes are not prohibited for an element's role",
       "help": "Elements must only use permitted ARIA attributes",
       "helpUrl": "https://dequeuniversity.com/rules/axe/4.10/aria-prohibited-attr?application=playwright",
@@ -5793,9 +5263,7 @@
                 "role": null,
                 "nodeName": "div",
                 "messageKey": "noRoleSingular",
-                "prohibited": [
-                  "aria-label"
-                ]
+                "prohibited": ["aria-label"]
               },
               "relatedNodes": [],
               "impact": "serious",
@@ -5804,9 +5272,7 @@
           ],
           "impact": "serious",
           "html": "<div class=\"fixed left-0 top-0 z-[100] translate-y-[-100%] focus-within:translate-y-0 transition-transform duration-200\" aria-label=\"Skip navigation links\">",
-          "target": [
-            ".translate-y-\\[-100\\%\\]"
-          ],
+          "target": [".translate-y-\\[-100\\%\\]"],
           "failureSummary": "Fix all of the following:\n  aria-label attribute is not well supported on a div with no valid role attribute."
         }
       ]
@@ -5848,9 +5314,7 @@
           "none": [],
           "impact": "serious",
           "html": "<input placeholder=\"Search modules, questions...\" class=\"w-full pl-10 pr-4 py-2 bg-white/[0.03] backdrop-blur-md border border-white/10 rounded-lg text-sm text-cyan-100 placeholder-cyan-400/40 focus:outline-none focus:border-white/20 focus:ring-2 focus:ring-white/10 transition-all\" type=\"text\">",
-          "target": [
-            "input"
-          ],
+          "target": ["input"],
           "failureSummary": "Fix any of the following:\n  Element's background color could not be determined because it is overlapped by another element"
         },
         {
@@ -5873,9 +5337,7 @@
           "none": [],
           "impact": "serious",
           "html": "<span class=\"absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full text-[10px] text-foreground flex items-center justify-center font-bold\" aria-hidden=\"true\">3</span>",
-          "target": [
-            ".-top-1"
-          ],
+          "target": [".-top-1"],
           "failureSummary": "Fix any of the following:\n  Element content is too short to determine if it is actual text content"
         },
         {
@@ -5892,15 +5354,11 @@
               "relatedNodes": [
                 {
                   "html": "<div class=\"glass-card rounded-lg p-3 border-archon-border-bright cyber-border\">",
-                  "target": [
-                    ".border-archon-border-bright"
-                  ]
+                  "target": [".border-archon-border-bright"]
                 },
                 {
                   "html": "<div class=\"flex h-full flex-col bg-gradient-to-b from-archon-bg-panel/95 to-archon-bg-start/95\">",
-                  "target": [
-                    ":root"
-                  ]
+                  "target": [":root"]
                 }
               ],
               "impact": "serious",
@@ -5911,9 +5369,7 @@
           "none": [],
           "impact": "serious",
           "html": "<p class=\"text-sm font-medium text-foreground\">Study Progress</p>",
-          "target": [
-            "p"
-          ],
+          "target": ["p"],
           "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
         },
         {
@@ -5930,15 +5386,11 @@
               "relatedNodes": [
                 {
                   "html": "<div class=\"glass-card rounded-lg p-3 border-archon-border-bright cyber-border\">",
-                  "target": [
-                    ".border-archon-border-bright"
-                  ]
+                  "target": [".border-archon-border-bright"]
                 },
                 {
                   "html": "<div class=\"flex h-full flex-col bg-gradient-to-b from-archon-bg-panel/95 to-archon-bg-start/95\">",
-                  "target": [
-                    ":root"
-                  ]
+                  "target": [":root"]
                 }
               ],
               "impact": "serious",
@@ -5949,9 +5401,7 @@
           "none": [],
           "impact": "serious",
           "html": "<span>Level 3 Learner</span>",
-          "target": [
-            ".space-x-2.text-xs.flex > span"
-          ],
+          "target": [".space-x-2.text-xs.flex > span"],
           "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
         },
         {
@@ -5968,15 +5418,11 @@
               "relatedNodes": [
                 {
                   "html": "<div class=\"glass-card rounded-lg p-3 border-archon-border-bright cyber-border\">",
-                  "target": [
-                    ".border-archon-border-bright"
-                  ]
+                  "target": [".border-archon-border-bright"]
                 },
                 {
                   "html": "<div class=\"flex h-full flex-col bg-gradient-to-b from-archon-bg-panel/95 to-archon-bg-start/95\">",
-                  "target": [
-                    ":root"
-                  ]
+                  "target": [":root"]
                 }
               ],
               "impact": "serious",
@@ -5987,9 +5433,7 @@
           "none": [],
           "impact": "serious",
           "html": "<span>Overall Progress</span>",
-          "target": [
-            ".mb-1 > span"
-          ],
+          "target": [".mb-1 > span"],
           "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
         },
         {
@@ -6006,15 +5450,11 @@
               "relatedNodes": [
                 {
                   "html": "<div class=\"glass-card rounded-lg p-3 border-archon-border-bright cyber-border\">",
-                  "target": [
-                    ".border-archon-border-bright"
-                  ]
+                  "target": [".border-archon-border-bright"]
                 },
                 {
                   "html": "<div class=\"flex h-full flex-col bg-gradient-to-b from-archon-bg-panel/95 to-archon-bg-start/95\">",
-                  "target": [
-                    ":root"
-                  ]
+                  "target": [":root"]
                 }
               ],
               "impact": "serious",
@@ -6025,9 +5465,7 @@
           "none": [],
           "impact": "serious",
           "html": "<span class=\"text-sm font-medium text-primary\">62%</span>",
-          "target": [
-            ".gap-1.flex.items-center > .text-primary.text-sm.font-medium"
-          ],
+          "target": [".gap-1.flex.items-center > .text-primary.text-sm.font-medium"],
           "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
         },
         {
@@ -6044,9 +5482,7 @@
               "relatedNodes": [
                 {
                   "html": "<button class=\"inline-flex h-9 w-full items-center justify-start gap-2 whitespace-nowrap rounded-md px-4 py-2 text-left text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary disabled:pointer-events-none disabled:opacity-50 bg-gradient-to-r from-primary/20 to-accent/10 text-primary border-l-2 border-primary shadow-[0_0_15px_hsl(var(--primary)/0.2)]\">",
-                  "target": [
-                    ".from-primary\\/20"
-                  ]
+                  "target": [".from-primary\\/20"]
                 }
               ],
               "impact": "serious",
@@ -6057,9 +5493,7 @@
           "none": [],
           "impact": "serious",
           "html": "<span class=\"truncate\">Dashboard</span>",
-          "target": [
-            ".from-primary\\/20 > .truncate"
-          ],
+          "target": [".from-primary\\/20 > .truncate"],
           "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
         },
         {
@@ -6076,9 +5510,7 @@
               "relatedNodes": [
                 {
                   "html": "<div class=\"flex h-full flex-col bg-gradient-to-b from-archon-bg-panel/95 to-archon-bg-start/95\">",
-                  "target": [
-                    ":root"
-                  ]
+                  "target": [":root"]
                 }
               ],
               "impact": "serious",
@@ -6089,9 +5521,7 @@
           "none": [],
           "impact": "serious",
           "html": "<span class=\"truncate\">Study</span>",
-          "target": [
-            "button[aria-controls=\"radix-_r_c_\"] > .truncate"
-          ],
+          "target": ["button[aria-controls=\"radix-_r_c_\"] > .truncate"],
           "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
         },
         {
@@ -6108,9 +5538,7 @@
               "relatedNodes": [
                 {
                   "html": "<div class=\"flex h-full flex-col bg-gradient-to-b from-archon-bg-panel/95 to-archon-bg-start/95\">",
-                  "target": [
-                    ":root"
-                  ]
+                  "target": [":root"]
                 }
               ],
               "impact": "serious",
@@ -6140,9 +5568,7 @@
               "relatedNodes": [
                 {
                   "html": "<div class=\"flex h-full flex-col bg-gradient-to-b from-archon-bg-panel/95 to-archon-bg-start/95\">",
-                  "target": [
-                    ":root"
-                  ]
+                  "target": [":root"]
                 }
               ],
               "impact": "serious",
@@ -6172,9 +5598,7 @@
               "relatedNodes": [
                 {
                   "html": "<div class=\"flex h-full flex-col bg-gradient-to-b from-archon-bg-panel/95 to-archon-bg-start/95\">",
-                  "target": [
-                    ":root"
-                  ]
+                  "target": [":root"]
                 }
               ],
               "impact": "serious",
@@ -6204,9 +5628,7 @@
               "relatedNodes": [
                 {
                   "html": "<div class=\"flex h-full flex-col bg-gradient-to-b from-archon-bg-panel/95 to-archon-bg-start/95\">",
-                  "target": [
-                    ":root"
-                  ]
+                  "target": [":root"]
                 }
               ],
               "impact": "serious",
@@ -6236,9 +5658,7 @@
               "relatedNodes": [
                 {
                   "html": "<div class=\"flex h-full flex-col bg-gradient-to-b from-archon-bg-panel/95 to-archon-bg-start/95\">",
-                  "target": [
-                    ":root"
-                  ]
+                  "target": [":root"]
                 }
               ],
               "impact": "serious",
@@ -6268,9 +5688,7 @@
               "relatedNodes": [
                 {
                   "html": "<div class=\"flex h-full flex-col bg-gradient-to-b from-archon-bg-panel/95 to-archon-bg-start/95\">",
-                  "target": [
-                    ":root"
-                  ]
+                  "target": [":root"]
                 }
               ],
               "impact": "serious",
@@ -6281,9 +5699,7 @@
           "none": [],
           "impact": "serious",
           "html": "<span class=\"truncate\">TCO Domains</span>",
-          "target": [
-            "button[aria-controls=\"radix-_r_d_\"] > .truncate"
-          ],
+          "target": ["button[aria-controls=\"radix-_r_d_\"] > .truncate"],
           "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
         },
         {
@@ -6300,9 +5716,7 @@
               "relatedNodes": [
                 {
                   "html": "<div class=\"flex h-full flex-col bg-gradient-to-b from-archon-bg-panel/95 to-archon-bg-start/95\">",
-                  "target": [
-                    ":root"
-                  ]
+                  "target": [":root"]
                 }
               ],
               "impact": "serious",
@@ -6332,9 +5746,7 @@
               "relatedNodes": [
                 {
                   "html": "<div class=\"flex h-full flex-col bg-gradient-to-b from-archon-bg-panel/95 to-archon-bg-start/95\">",
-                  "target": [
-                    ":root"
-                  ]
+                  "target": [":root"]
                 }
               ],
               "impact": "serious",
@@ -6364,9 +5776,7 @@
               "relatedNodes": [
                 {
                   "html": "<div class=\"flex h-full flex-col bg-gradient-to-b from-archon-bg-panel/95 to-archon-bg-start/95\">",
-                  "target": [
-                    ":root"
-                  ]
+                  "target": [":root"]
                 }
               ],
               "impact": "serious",
@@ -6396,9 +5806,7 @@
               "relatedNodes": [
                 {
                   "html": "<div class=\"flex h-full flex-col bg-gradient-to-b from-archon-bg-panel/95 to-archon-bg-start/95\">",
-                  "target": [
-                    ":root"
-                  ]
+                  "target": [":root"]
                 }
               ],
               "impact": "serious",
@@ -6428,9 +5836,7 @@
               "relatedNodes": [
                 {
                   "html": "<div class=\"flex h-full flex-col bg-gradient-to-b from-archon-bg-panel/95 to-archon-bg-start/95\">",
-                  "target": [
-                    ":root"
-                  ]
+                  "target": [":root"]
                 }
               ],
               "impact": "serious",
@@ -6460,9 +5866,7 @@
               "relatedNodes": [
                 {
                   "html": "<div class=\"flex h-full flex-col bg-gradient-to-b from-archon-bg-panel/95 to-archon-bg-start/95\">",
-                  "target": [
-                    ":root"
-                  ]
+                  "target": [":root"]
                 }
               ],
               "impact": "serious",
@@ -6492,9 +5896,7 @@
               "relatedNodes": [
                 {
                   "html": "<div class=\"flex h-full flex-col bg-gradient-to-b from-archon-bg-panel/95 to-archon-bg-start/95\">",
-                  "target": [
-                    ":root"
-                  ]
+                  "target": [":root"]
                 }
               ],
               "impact": "serious",
@@ -6524,9 +5926,7 @@
               "relatedNodes": [
                 {
                   "html": "<div class=\"flex h-full flex-col bg-gradient-to-b from-archon-bg-panel/95 to-archon-bg-start/95\">",
-                  "target": [
-                    ":root"
-                  ]
+                  "target": [":root"]
                 }
               ],
               "impact": "serious",
@@ -6556,9 +5956,7 @@
               "relatedNodes": [
                 {
                   "html": "<div class=\"flex h-full flex-col bg-gradient-to-b from-archon-bg-panel/95 to-archon-bg-start/95\">",
-                  "target": [
-                    ":root"
-                  ]
+                  "target": [":root"]
                 }
               ],
               "impact": "serious",
@@ -6588,9 +5986,7 @@
               "relatedNodes": [
                 {
                   "html": "<div class=\"flex h-full flex-col bg-gradient-to-b from-archon-bg-panel/95 to-archon-bg-start/95\">",
-                  "target": [
-                    ":root"
-                  ]
+                  "target": [":root"]
                 }
               ],
               "impact": "serious",
@@ -6620,9 +6016,7 @@
               "relatedNodes": [
                 {
                   "html": "<div class=\"flex h-full flex-col bg-gradient-to-b from-archon-bg-panel/95 to-archon-bg-start/95\">",
-                  "target": [
-                    ":root"
-                  ]
+                  "target": [":root"]
                 }
               ],
               "impact": "serious",
@@ -6652,9 +6046,7 @@
               "relatedNodes": [
                 {
                   "html": "<div class=\"flex h-full flex-col bg-gradient-to-b from-archon-bg-panel/95 to-archon-bg-start/95\">",
-                  "target": [
-                    ":root"
-                  ]
+                  "target": [":root"]
                 }
               ],
               "impact": "serious",
@@ -6684,9 +6076,7 @@
               "relatedNodes": [
                 {
                   "html": "<div class=\"flex h-full flex-col bg-gradient-to-b from-archon-bg-panel/95 to-archon-bg-start/95\">",
-                  "target": [
-                    ":root"
-                  ]
+                  "target": [":root"]
                 }
               ],
               "impact": "serious",
@@ -6716,9 +6106,7 @@
               "relatedNodes": [
                 {
                   "html": "<div class=\"flex h-full flex-col bg-gradient-to-b from-archon-bg-panel/95 to-archon-bg-start/95\">",
-                  "target": [
-                    ":root"
-                  ]
+                  "target": [":root"]
                 }
               ],
               "impact": "serious",
@@ -6729,9 +6117,7 @@
           "none": [],
           "impact": "serious",
           "html": "<h3 class=\"px-2 text-sm font-medium text-primary flex items-center gap-2\"><div class=\"h-[2px] w-2 bg-primary rounded-full\"></div>Domain Progress</h3>",
-          "target": [
-            "h3"
-          ],
+          "target": ["h3"],
           "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
         },
         {
@@ -6748,9 +6134,7 @@
               "relatedNodes": [
                 {
                   "html": "<div class=\"flex h-full flex-col bg-gradient-to-b from-archon-bg-panel/95 to-archon-bg-start/95\">",
-                  "target": [
-                    ":root"
-                  ]
+                  "target": [":root"]
                 }
               ],
               "impact": "serious",
@@ -6780,9 +6164,7 @@
               "relatedNodes": [
                 {
                   "html": "<div class=\"flex h-full flex-col bg-gradient-to-b from-archon-bg-panel/95 to-archon-bg-start/95\">",
-                  "target": [
-                    ":root"
-                  ]
+                  "target": [":root"]
                 }
               ],
               "impact": "serious",
@@ -6812,9 +6194,7 @@
               "relatedNodes": [
                 {
                   "html": "<div class=\"flex h-full flex-col bg-gradient-to-b from-archon-bg-panel/95 to-archon-bg-start/95\">",
-                  "target": [
-                    ":root"
-                  ]
+                  "target": [":root"]
                 }
               ],
               "impact": "serious",
@@ -6844,9 +6224,7 @@
               "relatedNodes": [
                 {
                   "html": "<div class=\"flex h-full flex-col bg-gradient-to-b from-archon-bg-panel/95 to-archon-bg-start/95\">",
-                  "target": [
-                    ":root"
-                  ]
+                  "target": [":root"]
                 }
               ],
               "impact": "serious",
@@ -6876,9 +6254,7 @@
               "relatedNodes": [
                 {
                   "html": "<div class=\"flex h-full flex-col bg-gradient-to-b from-archon-bg-panel/95 to-archon-bg-start/95\">",
-                  "target": [
-                    ":root"
-                  ]
+                  "target": [":root"]
                 }
               ],
               "impact": "serious",
@@ -6908,9 +6284,7 @@
               "relatedNodes": [
                 {
                   "html": "<div class=\"flex h-full flex-col bg-gradient-to-b from-archon-bg-panel/95 to-archon-bg-start/95\">",
-                  "target": [
-                    ":root"
-                  ]
+                  "target": [":root"]
                 }
               ],
               "impact": "serious",
@@ -6940,9 +6314,7 @@
               "relatedNodes": [
                 {
                   "html": "<div class=\"flex h-full flex-col bg-gradient-to-b from-archon-bg-panel/95 to-archon-bg-start/95\">",
-                  "target": [
-                    ":root"
-                  ]
+                  "target": [":root"]
                 }
               ],
               "impact": "serious",
@@ -6972,9 +6344,7 @@
               "relatedNodes": [
                 {
                   "html": "<div class=\"flex h-full flex-col bg-gradient-to-b from-archon-bg-panel/95 to-archon-bg-start/95\">",
-                  "target": [
-                    ":root"
-                  ]
+                  "target": [":root"]
                 }
               ],
               "impact": "serious",
@@ -7004,9 +6374,7 @@
               "relatedNodes": [
                 {
                   "html": "<div class=\"flex h-full flex-col bg-gradient-to-b from-archon-bg-panel/95 to-archon-bg-start/95\">",
-                  "target": [
-                    ":root"
-                  ]
+                  "target": [":root"]
                 }
               ],
               "impact": "serious",
@@ -7036,9 +6404,7 @@
               "relatedNodes": [
                 {
                   "html": "<div class=\"flex h-full flex-col bg-gradient-to-b from-archon-bg-panel/95 to-archon-bg-start/95\">",
-                  "target": [
-                    ":root"
-                  ]
+                  "target": [":root"]
                 }
               ],
               "impact": "serious",
@@ -7068,15 +6434,11 @@
               "relatedNodes": [
                 {
                   "html": "<div class=\"glass-card mt-4 rounded-lg p-3 border-border hover:border-primary/50 transition-all\">",
-                  "target": [
-                    ".mt-4"
-                  ]
+                  "target": [".mt-4"]
                 },
                 {
                   "html": "<div class=\"flex h-full flex-col bg-gradient-to-b from-archon-bg-panel/95 to-archon-bg-start/95\">",
-                  "target": [
-                    ":root"
-                  ]
+                  "target": [":root"]
                 }
               ],
               "impact": "serious",
@@ -7087,9 +6449,7 @@
           "none": [],
           "impact": "serious",
           "html": "<span class=\"text-sm text-foreground font-medium\">Study Streak</span>",
-          "target": [
-            ".space-x-2.flex.items-center > .text-foreground.text-sm.font-medium"
-          ],
+          "target": [".space-x-2.flex.items-center > .text-foreground.text-sm.font-medium"],
           "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
         },
         {
@@ -7106,9 +6466,7 @@
               "relatedNodes": [
                 {
                   "html": "<div class=\"inline-flex items-center rounded-md border px-2.5 py-0.5 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 shadow hover:bg-primary/80 text-xs bg-gradient-to-r from-primary to-accent border-primary/30 text-foreground\">7 days</div>",
-                  "target": [
-                    ".shadow"
-                  ]
+                  "target": [".shadow"]
                 }
               ],
               "impact": "serious",
@@ -7119,9 +6477,7 @@
           "none": [],
           "impact": "serious",
           "html": "<div class=\"inline-flex items-center rounded-md border px-2.5 py-0.5 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 shadow hover:bg-primary/80 text-xs bg-gradient-to-r from-primary to-accent border-primary/30 text-foreground\">7 days</div>",
-          "target": [
-            ".shadow"
-          ],
+          "target": [".shadow"],
           "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
         },
         {
@@ -7138,9 +6494,7 @@
               "relatedNodes": [
                 {
                   "html": "<div class=\"min-h-screen bg-gradient-to-br from-black via-black to-black\">",
-                  "target": [
-                    "body > .from-black.via-black.to-black"
-                  ]
+                  "target": ["body > .from-black.via-black.to-black"]
                 }
               ],
               "impact": "serious",
@@ -7151,9 +6505,7 @@
           "none": [],
           "impact": "serious",
           "html": "<a class=\"transition-colors hover:text-foreground flex items-center gap-1 text-muted-foreground hover:text-foreground transition-colors\" href=\"/dashboard\">",
-          "target": [
-            "a[href$=\"dashboard\"]"
-          ],
+          "target": ["a[href$=\"dashboard\"]"],
           "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
         },
         {
@@ -7170,9 +6522,7 @@
               "relatedNodes": [
                 {
                   "html": "<div class=\"min-h-screen bg-gradient-to-br from-black via-black to-black\">",
-                  "target": [
-                    "body > .from-black.via-black.to-black"
-                  ]
+                  "target": ["body > .from-black.via-black.to-black"]
                 }
               ],
               "impact": "serious",
@@ -7183,9 +6533,7 @@
           "none": [],
           "impact": "serious",
           "html": "<a class=\"transition-colors hover:text-foreground flex items-center gap-1 text-muted-foreground hover:text-foreground transition-colors\" href=\"/modules\">Learning Modules</a>",
-          "target": [
-            "a[href$=\"modules\"]"
-          ],
+          "target": ["a[href$=\"modules\"]"],
           "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
         },
         {
@@ -7202,9 +6550,7 @@
               "relatedNodes": [
                 {
                   "html": "<div class=\"min-h-screen flex items-center justify-center bg-gradient-to-br from-black via-black to-black\">",
-                  "target": [
-                    ".p-6 > .from-black.via-black.to-black"
-                  ]
+                  "target": [".p-6 > .from-black.via-black.to-black"]
                 }
               ],
               "impact": "serious",
@@ -7215,9 +6561,7 @@
           "none": [],
           "impact": "serious",
           "html": "<h1 class=\"text-6xl font-bold text-primary\">404</h1>",
-          "target": [
-            "h1"
-          ],
+          "target": ["h1"],
           "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
         },
         {
@@ -7234,9 +6578,7 @@
               "relatedNodes": [
                 {
                   "html": "<div class=\"min-h-screen flex items-center justify-center bg-gradient-to-br from-black via-black to-black\">",
-                  "target": [
-                    ".p-6 > .from-black.via-black.to-black"
-                  ]
+                  "target": [".p-6 > .from-black.via-black.to-black"]
                 }
               ],
               "impact": "serious",
@@ -7247,9 +6589,7 @@
           "none": [],
           "impact": "serious",
           "html": "<h2 class=\"text-2xl font-semibold text-foreground\">Page Not Found</h2>",
-          "target": [
-            "h2"
-          ],
+          "target": ["h2"],
           "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
         },
         {
@@ -7266,9 +6606,7 @@
               "relatedNodes": [
                 {
                   "html": "<div class=\"min-h-screen flex items-center justify-center bg-gradient-to-br from-black via-black to-black\">",
-                  "target": [
-                    ".p-6 > .from-black.via-black.to-black"
-                  ]
+                  "target": [".p-6 > .from-black.via-black.to-black"]
                 }
               ],
               "impact": "serious",
@@ -7279,9 +6617,7 @@
           "none": [],
           "impact": "serious",
           "html": "<p class=\"text-muted-foreground max-w-md mx-auto\">The page you're looking for doesn't exist or has been moved.</p>",
-          "target": [
-            ".text-center > p"
-          ],
+          "target": [".text-center > p"],
           "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
         }
       ]
@@ -7289,15 +6625,7 @@
     {
       "id": "link-in-text-block",
       "impact": "serious",
-      "tags": [
-        "cat.color",
-        "wcag2a",
-        "wcag141",
-        "TTv5",
-        "TT13.a",
-        "EN-301-549",
-        "EN-9.1.4.1"
-      ],
+      "tags": ["cat.color", "wcag2a", "wcag141", "TTv5", "TT13.a", "EN-301-549", "EN-9.1.4.1"],
       "description": "Ensure links are distinguished from surrounding text in a way that does not rely on color",
       "help": "Links must be distinguishable without relying on color",
       "helpUrl": "https://dequeuniversity.com/rules/axe/4.10/link-in-text-block?application=playwright",
@@ -7312,9 +6640,7 @@
               "relatedNodes": [
                 {
                   "html": "<div class=\"text-center space-y-6 p-8\">",
-                  "target": [
-                    ".text-center"
-                  ]
+                  "target": [".text-center"]
                 }
               ],
               "impact": "serious",
@@ -7325,9 +6651,7 @@
           "none": [],
           "impact": "serious",
           "html": "<a class=\"inline-flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-foreground rounded-lg transition-colors\" href=\"/\">",
-          "target": [
-            ".py-3"
-          ],
+          "target": [".py-3"],
           "failureSummary": "Fix any of the following:\n  Element's contrast ratio could not be determined due to a background gradient"
         }
       ]

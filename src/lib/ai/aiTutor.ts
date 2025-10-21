@@ -14,8 +14,8 @@
  * - Motivational support
  */
 
-import { supabase } from '@/lib/supabase';
 import Anthropic from '@anthropic-ai/sdk';
+import { supabase } from '@/lib/supabase';
 
 // ==================== TYPES ====================
 
@@ -23,7 +23,13 @@ export interface Conversation {
   id: string;
   userId: string;
   title?: string;
-  conversationType: 'general_help' | 'concept_explanation' | 'exam_strategy' | 'troubleshooting' | 'study_planning' | 'motivation';
+  conversationType:
+    | 'general_help'
+    | 'concept_explanation'
+    | 'exam_strategy'
+    | 'troubleshooting'
+    | 'study_planning'
+    | 'motivation';
   relatedModuleId?: string;
   relatedDomain?: string;
   relatedSectionId?: string;
@@ -243,7 +249,7 @@ export async function archiveConversation(conversationId: string, userId: string
 
 export async function sendMessage(
   conversationId: string,
-  userId: string,
+  _userId: string,
   userMessage: string,
   context?: TutorContext
 ): Promise<TutorResponse> {
@@ -275,7 +281,8 @@ export async function sendMessage(
   if (!conversation) throw new Error('Conversation not found');
 
   // Build context-enhanced system prompt
-  const systemPrompt = conversation.system_prompt || buildSystemPrompt(conversation.conversation_type, context);
+  const systemPrompt =
+    conversation.system_prompt || buildSystemPrompt(conversation.conversation_type, context);
   const contextualPrompt = enhancePromptWithContext(systemPrompt, context);
 
   // Call Claude API
@@ -286,7 +293,7 @@ export async function sendMessage(
     temperature: TEMPERATURE,
     system: contextualPrompt,
     messages: messages.map((msg) => ({
-      role: msg.role as 'user' | 'assistant',
+      role: msg.role,
       content: msg.content,
     })),
   });
@@ -403,7 +410,7 @@ export async function getMotivation(
 
 export async function rateMessage(
   messageId: string,
-  userId: string,
+  _userId: string,
   wasHelpful: boolean,
   feedback?: string
 ): Promise<void> {
@@ -433,7 +440,7 @@ function buildSystemPrompt(type: Conversation['conversationType'], context?: Tut
 function enhancePromptWithContext(basePrompt: string, context?: TutorContext): string {
   if (!context) return basePrompt;
 
-  let enhanced = basePrompt + '\n\n**Current Student Context:**\n';
+  let enhanced = `${basePrompt}\n\n**Current Student Context:**\n`;
 
   if (context.currentModuleId || context.currentDomain) {
     enhanced += `- Currently studying: ${context.currentDomain || context.currentModuleId}\n`;
@@ -453,7 +460,9 @@ function enhancePromptWithContext(basePrompt: string, context?: TutorContext): s
 
   if (context.studyGoals) {
     if (context.studyGoals.targetExamDate) {
-      const daysUntil = Math.ceil((context.studyGoals.targetExamDate.getTime() - Date.now()) / (1000 * 60 * 60 * 24));
+      const daysUntil = Math.ceil(
+        (context.studyGoals.targetExamDate.getTime() - Date.now()) / (1000 * 60 * 60 * 24)
+      );
       enhanced += `- Days until exam: ${daysUntil}\n`;
     }
     if (context.studyGoals.targetScore) {
@@ -464,7 +473,8 @@ function enhancePromptWithContext(basePrompt: string, context?: TutorContext): s
     }
   }
 
-  enhanced += '\nUse this context to personalize your response and make it more relevant to their current situation.';
+  enhanced +=
+    '\nUse this context to personalize your response and make it more relevant to their current situation.';
 
   return enhanced;
 }
@@ -488,7 +498,10 @@ function extractSuggestedFollowUps(message: string, context?: TutorContext): str
   return suggestions.slice(0, 3); // Max 3 suggestions
 }
 
-function extractRelatedResources(message: string, context?: TutorContext): TutorResponse['relatedResources'] {
+function extractRelatedResources(
+  _message: string,
+  context?: TutorContext
+): TutorResponse['relatedResources'] {
   const resources: TutorResponse['relatedResources'] = [];
 
   // Map domains to modules

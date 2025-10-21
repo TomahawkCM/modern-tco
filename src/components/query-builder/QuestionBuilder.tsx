@@ -1,58 +1,52 @@
-"use client";
+'use client';
 
-import React, { useReducer, useCallback, useEffect, useState, useMemo, lazy, Suspense } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { Alert, AlertDescription } from '@/components/ui/alert';
 import {
-  Search,
-  Play,
-  RotateCcw,
-  Download,
-  Save,
-  History,
-  Sparkles,
-  Code,
-  MousePointer,
   AlertCircle,
   CheckCircle,
-  Info
+  Code,
+  History,
+  Info,
+  MousePointer,
+  Play,
+  RotateCcw,
+  Search,
+  Sparkles,
 } from 'lucide-react';
+import { lazy, Suspense, useCallback, useEffect, useReducer, useState } from 'react';
+import { Alert, AlertDescription } from '@/components/ui/alert';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 // Sub-components
 // Lazy load NaturalLanguageInput for better performance (saves ~30% bundle size)
 const NaturalLanguageInput = lazy(() =>
-  import('./NaturalLanguageInput').then(module => ({ default: module.NaturalLanguageInput }))
+  import('./NaturalLanguageInput').then((module) => ({ default: module.NaturalLanguageInput }))
 );
-import { SensorSelector } from './SensorSelector';
-import { FilterBuilder } from './FilterBuilder';
-import { QueryPreview } from './QueryPreview';
-import { ResultsViewer } from './ResultsViewer';
-
-// Hooks (to be implemented)
-import { useQueryValidation } from './hooks/useQueryValidation';
-import { useNaturalLanguage } from './hooks/useNaturalLanguage';
-import { useSensorCatalog } from './hooks/useSensorCatalog';
-import { useDebouncedCallback } from './utils/performance';
 
 // Query engine integration
 import { TaniumQueryEngine } from '@/lib/tanium-query-engine';
 import type { QueryResult } from '@/lib/tanium-query-engine/types';
+import { FilterBuilder } from './FilterBuilder';
+import { useNaturalLanguage } from './hooks/useNaturalLanguage';
 
+// Hooks (to be implemented)
+import { useQueryValidation } from './hooks/useQueryValidation';
+import { useSensorCatalog } from './hooks/useSensorCatalog';
+import { QueryPreview } from './QueryPreview';
+import { ResultsViewer } from './ResultsViewer';
+import { SensorSelector } from './SensorSelector';
 // Types
-import {
-  type QuestionBuilderProps,
-  type QueryBuilderState,
-  type QueryBuilderAction,
-  type BuilderMode,
-  type PartialQuery,
-  SensorSelection,
-  FilterSelection,
-  type QueryHistoryItem,
-  type ValidationState,
-  type ScopeSelection,
+import type {
+  BuilderMode,
+  PartialQuery,
+  QueryBuilderAction,
+  QueryBuilderState,
+  QueryHistoryItem,
+  QuestionBuilderProps,
+  ScopeSelection,
+  ValidationState,
 } from './types/queryBuilder';
 
 // Query builder reducer
@@ -69,8 +63,8 @@ function queryBuilderReducer(
         ...state,
         query: {
           ...state.query,
-          sensors: [...state.query.sensors, action.sensor]
-        }
+          sensors: [...state.query.sensors, action.sensor],
+        },
       };
 
     case 'REMOVE_SENSOR':
@@ -78,8 +72,8 @@ function queryBuilderReducer(
         ...state,
         query: {
           ...state.query,
-          sensors: state.query.sensors.filter((_, i) => i !== action.index)
-        }
+          sensors: state.query.sensors.filter((_, i) => i !== action.index),
+        },
       };
 
     case 'UPDATE_SENSOR':
@@ -87,10 +81,8 @@ function queryBuilderReducer(
         ...state,
         query: {
           ...state.query,
-          sensors: state.query.sensors.map((s, i) =>
-            i === action.index ? action.sensor : s
-          )
-        }
+          sensors: state.query.sensors.map((s, i) => (i === action.index ? action.sensor : s)),
+        },
       };
 
     case 'ADD_FILTER':
@@ -98,8 +90,8 @@ function queryBuilderReducer(
         ...state,
         query: {
           ...state.query,
-          filters: [...state.query.filters, action.filter]
-        }
+          filters: [...state.query.filters, action.filter],
+        },
       };
 
     case 'REMOVE_FILTER':
@@ -107,8 +99,8 @@ function queryBuilderReducer(
         ...state,
         query: {
           ...state.query,
-          filters: state.query.filters.filter(f => f.id !== action.filterId)
-        }
+          filters: state.query.filters.filter((f) => f.id !== action.filterId),
+        },
       };
 
     case 'UPDATE_FILTER':
@@ -116,10 +108,8 @@ function queryBuilderReducer(
         ...state,
         query: {
           ...state.query,
-          filters: state.query.filters.map(f =>
-            f.id === action.filterId ? action.filter : f
-          )
-        }
+          filters: state.query.filters.map((f) => (f.id === action.filterId ? action.filter : f)),
+        },
       };
 
     case 'SET_SCOPE':
@@ -127,8 +117,8 @@ function queryBuilderReducer(
         ...state,
         query: {
           ...state.query,
-          scope: action.scope
-        }
+          scope: action.scope,
+        },
       };
 
     case 'SET_GROUP_BY':
@@ -136,8 +126,8 @@ function queryBuilderReducer(
         ...state,
         query: {
           ...state.query,
-          groupBy: action.groupBy
-        }
+          groupBy: action.groupBy,
+        },
       };
 
     case 'SET_ORDER_BY':
@@ -145,8 +135,8 @@ function queryBuilderReducer(
         ...state,
         query: {
           ...state.query,
-          orderBy: action.orderBy
-        }
+          orderBy: action.orderBy,
+        },
       };
 
     case 'SET_LIMIT':
@@ -154,8 +144,8 @@ function queryBuilderReducer(
         ...state,
         query: {
           ...state.query,
-          limit: action.limit
-        }
+          limit: action.limit,
+        },
       };
 
     case 'SET_RAW_QUERY':
@@ -163,8 +153,8 @@ function queryBuilderReducer(
         ...state,
         query: {
           ...state.query,
-          rawQuery: action.query
-        }
+          rawQuery: action.query,
+        },
       };
 
     case 'SET_VALIDATION':
@@ -182,7 +172,7 @@ function queryBuilderReducer(
     case 'ADD_TO_HISTORY':
       return {
         ...state,
-        history: [action.item, ...state.history].slice(0, 50) // Keep last 50
+        history: [action.item, ...state.history].slice(0, 50), // Keep last 50
       };
 
     case 'RESET_QUERY':
@@ -190,7 +180,7 @@ function queryBuilderReducer(
         ...state,
         query: initialQuery,
         validation: initialValidation,
-        result: undefined
+        result: undefined,
       };
 
     default:
@@ -208,7 +198,7 @@ const initialQuery: PartialQuery = {
   groupBy: [],
   orderBy: [],
   limit: undefined,
-  rawQuery: ''
+  rawQuery: '',
 };
 
 const initialValidation: ValidationState = {
@@ -216,7 +206,7 @@ const initialValidation: ValidationState = {
   errors: [],
   warnings: [],
   syntaxValid: false,
-  semanticValid: false
+  semanticValid: false,
 };
 
 const initialState: QueryBuilderState = {
@@ -226,7 +216,7 @@ const initialState: QueryBuilderState = {
   suggestions: [],
   isExecuting: false,
   result: undefined,
-  history: []
+  history: [],
 };
 
 export function QuestionBuilder({
@@ -238,12 +228,12 @@ export function QuestionBuilder({
   showResults = true,
   showHistory = true,
   maxHeight = '800px',
-  className = ''
+  className = '',
 }: QuestionBuilderProps) {
   const [state, dispatch] = useReducer(queryBuilderReducer, {
     ...initialState,
     mode,
-    query: providedInitialQuery || initialQuery
+    query: providedInitialQuery || initialQuery,
   });
 
   const [queryEngine] = useState(() => new TaniumQueryEngine());
@@ -286,7 +276,7 @@ export function QuestionBuilder({
         timestamp: new Date().toISOString(),
         executionTime: result.execution?.totalTimeMs,
         resultCount: result.rowCount,
-        success: result.ok
+        success: result.ok,
       };
       dispatch({ type: 'ADD_TO_HISTORY', item: historyItem });
 
@@ -298,7 +288,7 @@ export function QuestionBuilder({
       console.error('Query execution error:', error);
       const errorResult: QueryResult = {
         ok: false,
-        error: error instanceof Error ? error.message : 'Query execution failed'
+        error: error instanceof Error ? error.message : 'Query execution failed',
       };
       dispatch({ type: 'SET_RESULT', result: errorResult });
     } finally {
@@ -307,32 +297,38 @@ export function QuestionBuilder({
   }, [state.query, state.validation.isValid, queryEngine, getQueryString, onExecute, readOnly]);
 
   // Handle natural language input
-  const handleNaturalLanguageSubmit = useCallback(async (text: string) => {
-    const result = await parseNaturalLanguage(text);
-    if (result.query) {
-      dispatch({ type: 'RESET_QUERY' });
-      // Apply the parsed query
-      result.query.sensors.forEach(sensor => {
-        dispatch({ type: 'ADD_SENSOR', sensor });
-      });
-      result.query.filters.forEach(filter => {
-        dispatch({ type: 'ADD_FILTER', filter });
-      });
-      if (result.query.scope) {
-        dispatch({ type: 'SET_SCOPE', scope: result.query.scope });
+  const handleNaturalLanguageSubmit = useCallback(
+    async (text: string) => {
+      const result = await parseNaturalLanguage(text);
+      if (result.query) {
+        dispatch({ type: 'RESET_QUERY' });
+        // Apply the parsed query
+        result.query.sensors.forEach((sensor) => {
+          dispatch({ type: 'ADD_SENSOR', sensor });
+        });
+        result.query.filters.forEach((filter) => {
+          dispatch({ type: 'ADD_FILTER', filter });
+        });
+        if (result.query.scope) {
+          dispatch({ type: 'SET_SCOPE', scope: result.query.scope });
+        }
       }
-    }
-  }, [parseNaturalLanguage]);
+    },
+    [parseNaturalLanguage]
+  );
 
   // Load query from history
-  const handleLoadFromHistory = useCallback((item: QueryHistoryItem) => {
-    dispatch({ type: 'SET_RAW_QUERY', query: item.query });
-    if (state.mode === 'advanced') {
-      // Parse and load in advanced mode
-      handleExecute();
-    }
-    setShowHistoryPanel(false);
-  }, [state.mode, handleExecute]);
+  const handleLoadFromHistory = useCallback(
+    (item: QueryHistoryItem) => {
+      dispatch({ type: 'SET_RAW_QUERY', query: item.query });
+      if (state.mode === 'advanced') {
+        // Parse and load in advanced mode
+        handleExecute();
+      }
+      setShowHistoryPanel(false);
+    },
+    [state.mode, handleExecute]
+  );
 
   // Get validation status
   const getValidationStatus = () => {
@@ -362,9 +358,7 @@ export function QuestionBuilder({
             {/* Validation status */}
             <div className="flex items-center space-x-1">
               <validationStatus.icon className={`h-4 w-4 ${validationStatus.color}`} />
-              <span className={`text-sm ${validationStatus.color}`}>
-                {validationStatus.text}
-              </span>
+              <span className={`text-sm ${validationStatus.color}`}>{validationStatus.text}</span>
             </div>
 
             {/* Action buttons */}
@@ -451,13 +445,18 @@ export function QuestionBuilder({
                 filters={state.query.filters}
                 onAdd={(filter) => dispatch({ type: 'ADD_FILTER', filter })}
                 onRemove={(filterId) => dispatch({ type: 'REMOVE_FILTER', filterId })}
-                onUpdate={(filterId, filter) => dispatch({ type: 'UPDATE_FILTER', filterId, filter })}
-                availableSensors={catalog.map(c => 'name' in c.sensor ? c.sensor.name : '')}
+                onUpdate={(filterId, filter) =>
+                  dispatch({ type: 'UPDATE_FILTER', filterId, filter })
+                }
+                availableSensors={catalog.map((c) => ('name' in c.sensor ? c.sensor.name : ''))}
                 filterLogic={state.query.filterLogic}
-                onLogicChange={(logic) =>
+                onLogicChange={(_logic) =>
                   dispatch({
                     type: 'SET_SCOPE',
-                    scope: { ...state.query.scope, customFilter: state.query.filters } as ScopeSelection
+                    scope: {
+                      ...state.query.scope,
+                      customFilter: state.query.filters,
+                    } as ScopeSelection,
                   })
                 }
                 allowNested
@@ -477,14 +476,16 @@ export function QuestionBuilder({
 
           {/* Natural language mode with lazy loading */}
           <TabsContent value="natural-language" className="space-y-4">
-            <Suspense fallback={
-              <div className="flex items-center justify-center p-8">
-                <div className="flex items-center space-x-2">
-                  <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-tanium-accent"></div>
-                  <span className="text-muted-foreground">Loading Natural Language mode...</span>
+            <Suspense
+              fallback={
+                <div className="flex items-center justify-center p-8">
+                  <div className="flex items-center space-x-2">
+                    <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-tanium-accent"></div>
+                    <span className="text-muted-foreground">Loading Natural Language mode...</span>
+                  </div>
                 </div>
-              </div>
-            }>
+              }
+            >
               <NaturalLanguageInput
                 value={state.query.rawQuery || ''}
                 onChange={(value) => dispatch({ type: 'SET_RAW_QUERY', query: value })}
@@ -561,9 +562,7 @@ export function QuestionBuilder({
                   >
                     <div className="flex justify-between items-start">
                       <div className="flex-1">
-                        <code className="text-xs text-muted-foreground block">
-                          {item.query}
-                        </code>
+                        <code className="text-xs text-muted-foreground block">{item.query}</code>
                       </div>
                       <div className="text-xs text-muted-foreground ml-2">
                         {new Date(item.timestamp).toLocaleTimeString()}

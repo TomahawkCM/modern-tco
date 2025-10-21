@@ -9,4 +9,3 @@ export type ModuleListRow = {
   status?: 'not_started' | 'in_progress' | 'completed' | 'bookmarked';
   progressPct?: number; // 0-100
 };
-

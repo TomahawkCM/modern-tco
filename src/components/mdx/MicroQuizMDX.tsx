@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import MicroQuiz from "@/components/study/MicroQuiz";
+import MicroQuiz from '@/components/study/MicroQuiz';
 
 /**
  * MDX-friendly wrapper for MicroQuiz component

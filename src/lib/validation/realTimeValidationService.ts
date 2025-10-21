@@ -6,7 +6,7 @@ import type {
   ValidationCriteria,
   ValidationFeedback,
   ValidationResult,
-} from "@/types/lab";
+} from '@/types/lab';
 
 /**
  * Real-Time Validation Service
@@ -40,8 +40,8 @@ export interface RealTimeValidationResult extends ValidationResult {
 }
 
 export interface AdaptiveFeedback {
-  level: "beginner" | "intermediate" | "advanced";
-  tone: "encouraging" | "instructional" | "corrective";
+  level: 'beginner' | 'intermediate' | 'advanced';
+  tone: 'encouraging' | 'instructional' | 'corrective';
   content: {
     immediate: string;
     detailed: string;
@@ -49,7 +49,7 @@ export interface AdaptiveFeedback {
     resources?: string[];
   };
   visualCues: {
-    color: "green" | "yellow" | "red";
+    color: 'green' | 'yellow' | 'red';
     icon: string;
     animation?: string;
   };
@@ -117,16 +117,16 @@ class RealTimeValidationService {
 
       return enhancedResult;
     } catch (error) {
-      console.error("Real-time validation failed:", error);
+      console.error('Real-time validation failed:', error);
 
       const feedback: ValidationFeedback = {
-        success: { title: "Success", content: "Validation complete", type: "success" },
+        success: { title: 'Success', content: 'Validation complete', type: 'success' },
         failure: {
-          title: "Error",
-          content: "Validation system temporarily unavailable. Please try again.",
-          type: "error",
+          title: 'Error',
+          content: 'Validation system temporarily unavailable. Please try again.',
+          type: 'error',
         },
-        partial: { title: "Partial", content: "Partial validation result", type: "warning" },
+        partial: { title: 'Partial', content: 'Partial validation result', type: 'warning' },
         hints: [],
       };
 
@@ -136,7 +136,7 @@ class RealTimeValidationService {
         criteriaResults: [],
         feedback,
         confidence: 0,
-        suggestedActions: ["Refresh the page and try again"],
+        suggestedActions: ['Refresh the page and try again'],
         performanceMetrics: {
           accuracy: 0,
           efficiency: 0,
@@ -144,14 +144,14 @@ class RealTimeValidationService {
           errorCount: 1,
         },
         adaptiveFeedback: {
-          level: "beginner",
-          tone: "corrective",
+          level: 'beginner',
+          tone: 'corrective',
           content: {
-            immediate: (feedback.failure?.content) || "Validation system error",
-            detailed: "Please check your connection or contact support.",
+            immediate: feedback.failure?.content || 'Validation system error',
+            detailed: 'Please check your connection or contact support.',
             nextSteps: [],
           },
-          visualCues: { color: "red", icon: "XCircle" },
+          visualCues: { color: 'red', icon: 'XCircle' },
         },
         validationTime: Date.now() - startValidation,
       };
@@ -167,9 +167,9 @@ class RealTimeValidationService {
   ): Promise<ValidationResult> {
     if (!step.validation) {
       const feedback: ValidationFeedback = {
-        success: { title: "Success", content: "Step completed successfully", type: "success" },
-        failure: { title: "Error", content: "", type: "error" },
-        partial: { title: "Partial", content: "", type: "warning" },
+        success: { title: 'Success', content: 'Step completed successfully', type: 'success' },
+        failure: { title: 'Error', content: '', type: 'error' },
+        partial: { title: 'Partial', content: '', type: 'warning' },
         hints: [],
       };
 
@@ -216,29 +216,29 @@ class RealTimeValidationService {
     let result: { passed: boolean; score: number; details: string };
 
     switch (criterion.type) {
-      case "console-state":
+      case 'console-state':
         result = this.validateConsoleState(criterion, context.consoleState);
         break;
 
-      case "user-input":
+      case 'user-input':
         result = this.validateUserInput(criterion, context);
         break;
 
-      case "result-data":
+      case 'result-data':
         result = this.validateResultData(criterion, context.consoleState);
         break;
 
-      case "action-sequence":
+      case 'action-sequence':
         result = this.validateActionSequence(criterion, context.consoleState);
         break;
 
-      case "time-based":
+      case 'time-based':
         result = this.validateTimeBased(criterion, context);
         break;
 
       default:
         console.warn(`Unknown validation criterion type: ${criterion.type}`);
-        result = { passed: false, score: 0, details: "Unknown validation type" };
+        result = { passed: false, score: 0, details: 'Unknown validation type' };
     }
 
     return {
@@ -260,33 +260,34 @@ class RealTimeValidationService {
     const target = consoleState[criterion.target as keyof ConsoleState];
 
     switch (criterion.condition) {
-      case "equals":
+      case 'equals': {
         const passed = target === criterion.value;
         return {
           passed,
           score: passed ? 100 : 0,
           details: passed
-            ? "Console state matches expected value"
+            ? 'Console state matches expected value'
             : `Expected ${criterion.value}, got ${target}`,
         };
+      }
 
-      case "contains":
+      case 'contains':
         if (Array.isArray(target)) {
           const containsValue = target.some((item: any) =>
-            typeof item === "object"
+            typeof item === 'object'
               ? this.objectContains(item, criterion.value)
               : item === criterion.value
           );
           return {
             passed: containsValue,
             score: containsValue ? 100 : 0,
-            details: containsValue ? "Required item found" : "Required item not found",
+            details: containsValue ? 'Required item found' : 'Required item not found',
           };
         }
-        return { passed: false, score: 0, details: "Target is not an array" };
+        return { passed: false, score: 0, details: 'Target is not an array' };
 
       default:
-        return { passed: false, score: 0, details: "Unsupported condition" };
+        return { passed: false, score: 0, details: 'Unsupported condition' };
     }
   }
 
@@ -294,15 +295,15 @@ class RealTimeValidationService {
    * Validate user input
    */
   private validateUserInput(
-    criterion: ValidationCriteria,
-    context: ValidationContext
+    _criterion: ValidationCriteria,
+    _context: ValidationContext
   ): { passed: boolean; score: number; details: string } {
     // This would validate specific user inputs based on the criterion
     // For now, return a basic implementation
     return {
       passed: true,
       score: 100,
-      details: "User input validation passed",
+      details: 'User input validation passed',
     };
   }
 
@@ -316,10 +317,10 @@ class RealTimeValidationService {
     // Validate query results, data exports, etc.
     const queries = Array.isArray(consoleState.queries) ? consoleState.queries : [];
 
-    if (criterion.target === "columnCount") {
+    if (criterion.target === 'columnCount') {
       const lastQuery = queries[queries.length - 1];
       if (!lastQuery?.results) {
-        return { passed: false, score: 0, details: "No query results found" };
+        return { passed: false, score: 0, details: 'No query results found' };
       }
 
       const columnCount = lastQuery.results[0]?.columns?.length || 0; // Access columns from the first QueryResult object
@@ -329,12 +330,12 @@ class RealTimeValidationService {
         passed,
         score: passed ? 100 : 0,
         details: passed
-          ? "Correct number of columns"
+          ? 'Correct number of columns'
           : `Expected ${criterion.value} columns, got ${columnCount}`,
       };
     }
 
-    return { passed: true, score: 100, details: "Result data validation passed" };
+    return { passed: true, score: 100, details: 'Result data validation passed' };
   }
 
   /**
@@ -347,23 +348,27 @@ class RealTimeValidationService {
     const activityLog = Array.isArray(consoleState.activityLog) ? consoleState.activityLog : [];
 
     switch (criterion.condition) {
-      case "performed":
-        const actionFound = activityLog.some((entry: ActionHistory) =>
-          entry.action === criterion.target || (typeof entry.details === 'string' && entry.details.includes(criterion.target as string))
+      case 'performed': {
+        const actionFound = activityLog.some(
+          (entry: ActionHistory) =>
+            entry.action === criterion.target ||
+            (typeof entry.details === 'string' &&
+              entry.details.includes(criterion.target as string))
         );
 
         return {
           passed: actionFound,
           score: actionFound ? 100 : 0,
           details: actionFound
-            ? "Required action was performed"
+            ? 'Required action was performed'
             : `Action '${criterion.target}' not found`,
         };
+      }
 
-      case "visited_all":
+      case 'visited_all': {
         const requiredModules = criterion.value as string[];
         const visitedModules = activityLog
-          .filter((entry: ActionHistory) => entry.action === "module_navigation")
+          .filter((entry: ActionHistory) => entry.action === 'module_navigation')
           .map((entry: ActionHistory) => entry.module)
           .filter(Boolean);
 
@@ -373,12 +378,13 @@ class RealTimeValidationService {
           passed: allVisited,
           score: allVisited ? 100 : (visitedModules.length / requiredModules.length) * 100,
           details: allVisited
-            ? "All required modules visited"
+            ? 'All required modules visited'
             : `Visited ${visitedModules.length}/${requiredModules.length} required modules`,
         };
+      }
 
       default:
-        return { passed: true, score: 100, details: "Action sequence validation passed" };
+        return { passed: true, score: 100, details: 'Action sequence validation passed' };
     }
   }
 
@@ -393,7 +399,7 @@ class RealTimeValidationService {
     const elapsedMinutes = elapsedTime / (1000 * 60);
 
     switch (criterion.condition) {
-      case "within_time":
+      case 'within_time': {
         const timeLimit = criterion.value as number; // minutes
         const passed = elapsedMinutes <= timeLimit;
 
@@ -404,9 +410,10 @@ class RealTimeValidationService {
             ? `Completed within ${timeLimit} minutes`
             : `Exceeded time limit by ${(elapsedMinutes - timeLimit).toFixed(1)} minutes`,
         };
+      }
 
       default:
-        return { passed: true, score: 100, details: "Time validation passed" };
+        return { passed: true, score: 100, details: 'Time validation passed' };
     }
   }
 
@@ -416,7 +423,7 @@ class RealTimeValidationService {
   private calculatePerformanceMetrics(
     context: ValidationContext,
     result: ValidationResult
-  ): RealTimeValidationResult["performanceMetrics"] {
+  ): RealTimeValidationResult['performanceMetrics'] {
     const timeSpent = Date.now() - context.startTime;
     const accuracy = result.score;
 
@@ -437,21 +444,21 @@ class RealTimeValidationService {
   private generateAdaptiveFeedback(
     result: ValidationResult,
     context: ValidationContext,
-    metrics: RealTimeValidationResult["performanceMetrics"]
+    metrics: RealTimeValidationResult['performanceMetrics']
   ): AdaptiveFeedback {
     const userHistory = this.performanceTracking.get(context.userId) || [];
     const avgAccuracy =
       userHistory.length > 0 ? userHistory.reduce((a, b) => a + b, 0) / userHistory.length : 70;
 
     // Determine user level based on history
-    let level: AdaptiveFeedback["level"] = "intermediate";
-    if (avgAccuracy < 60) level = "beginner";
-    else if (avgAccuracy > 85) level = "advanced";
+    let level: AdaptiveFeedback['level'] = 'intermediate';
+    if (avgAccuracy < 60) level = 'beginner';
+    else if (avgAccuracy > 85) level = 'advanced';
 
     // Determine tone based on current performance
-    let tone: AdaptiveFeedback["tone"] = "instructional";
-    if (result.score >= 90) tone = "encouraging";
-    else if (result.score < 50) tone = "corrective";
+    let tone: AdaptiveFeedback['tone'] = 'instructional';
+    if (result.score >= 90) tone = 'encouraging';
+    else if (result.score < 50) tone = 'corrective';
 
     // Generate content based on level and performance
     const content = this.generateFeedbackContent(result, level, tone, metrics);
@@ -472,52 +479,52 @@ class RealTimeValidationService {
    */
   private generateFeedbackContent(
     result: ValidationResult,
-    level: AdaptiveFeedback["level"],
-    tone: AdaptiveFeedback["tone"],
-    metrics: RealTimeValidationResult["performanceMetrics"]
-  ): AdaptiveFeedback["content"] {
+    level: AdaptiveFeedback['level'],
+    tone: AdaptiveFeedback['tone'],
+    _metrics: RealTimeValidationResult['performanceMetrics']
+  ): AdaptiveFeedback['content'] {
     const baseContent = result.feedback;
 
     let immediate =
       this.feedbackMessageContent(baseContent, 'success') ||
       this.feedbackMessageContent(baseContent, 'failure') ||
       this.feedbackMessageContent(baseContent, 'partial');
-    let detailed = "";
+    let detailed = '';
     let nextSteps: string[] = [];
     let resources: string[] = [];
 
     if (result.passed) {
-      immediate = tone === "encouraging" ? `🎉 Excellent work! ${immediate}` : immediate;
+      immediate = tone === 'encouraging' ? `🎉 Excellent work! ${immediate}` : immediate;
 
       detailed =
-        level === "beginner"
+        level === 'beginner'
           ? "Great job completing this step! You're building solid foundational skills."
-          : level === "advanced"
-            ? "Perfect execution. You demonstrated mastery of this concept."
+          : level === 'advanced'
+            ? 'Perfect execution. You demonstrated mastery of this concept.'
             : "Well done! You're progressing nicely through the material.";
 
-      nextSteps = ["Continue to the next step", "Review your work if needed"];
+      nextSteps = ['Continue to the next step', 'Review your work if needed'];
     } else {
       immediate =
-        tone === "corrective" ? `Let's work through this together. ${immediate}` : immediate;
+        tone === 'corrective' ? `Let's work through this together. ${immediate}` : immediate;
 
       detailed =
-        level === "beginner"
+        level === 'beginner'
           ? "Don't worry - learning takes practice. Let's break this down into smaller steps."
-          : level === "advanced"
-            ? "This is a challenging step. Review the requirements carefully."
+          : level === 'advanced'
+            ? 'This is a challenging step. Review the requirements carefully.'
             : "You're close to the solution. Check your work against the instructions.";
 
       nextSteps = [
-        "Review the step instructions carefully",
-        "Check your console state",
-        "Try the suggested actions below",
+        'Review the step instructions carefully',
+        'Check your console state',
+        'Try the suggested actions below',
       ];
 
-      if (level === "beginner") {
+      if (level === 'beginner') {
         resources = [
-          "Review the hints for this step",
-          "Check the Tanium documentation",
+          'Review the hints for this step',
+          'Check the Tanium documentation',
           "Ask for help if you're stuck",
         ];
       }
@@ -534,24 +541,24 @@ class RealTimeValidationService {
   /**
    * Generate visual cues for feedback
    */
-  private generateVisualCues(score: number): AdaptiveFeedback["visualCues"] {
+  private generateVisualCues(score: number): AdaptiveFeedback['visualCues'] {
     if (score >= 80) {
       return {
-        color: "green",
-        icon: "CheckCircle",
-        animation: "bounce",
+        color: 'green',
+        icon: 'CheckCircle',
+        animation: 'bounce',
       };
     } else if (score >= 50) {
       return {
-        color: "yellow",
-        icon: "AlertTriangle",
-        animation: "pulse",
+        color: 'yellow',
+        icon: 'AlertTriangle',
+        animation: 'pulse',
       };
     } else {
       return {
-        color: "red",
-        icon: "XCircle",
-        animation: "shake",
+        color: 'red',
+        icon: 'XCircle',
+        animation: 'shake',
       };
     }
   }
@@ -588,13 +595,13 @@ class RealTimeValidationService {
   private generateSuggestedActions(
     result: ValidationResult,
     context: ValidationContext,
-    metrics: RealTimeValidationResult["performanceMetrics"]
+    metrics: RealTimeValidationResult['performanceMetrics']
   ): string[] {
     const suggestions: string[] = [];
 
     if (!result.passed) {
       // Add specific suggestions based on failed criteria
-      result.criteriaResults?.forEach((criterionResult: CriteriaResult, index: number) => {
+      result.criteriaResults?.forEach((criterionResult: CriteriaResult, _index: number) => {
         if (!criterionResult.passed) {
           suggestions.push(`Check: ${criterionResult.details}`);
         }
@@ -603,20 +610,20 @@ class RealTimeValidationService {
       // Add general suggestions
       if (metrics.timeSpent > 300000) {
         // 5 minutes
-        suggestions.push("Consider using hints to speed up progress");
+        suggestions.push('Consider using hints to speed up progress');
       }
 
       if (context.previousAttempts > 2) {
-        suggestions.push("Review the step instructions and try a different approach");
+        suggestions.push('Review the step instructions and try a different approach');
       }
 
-      suggestions.push("Verify your console state matches the requirements");
+      suggestions.push('Verify your console state matches the requirements');
     } else {
-      suggestions.push("Great work! Continue to the next step");
+      suggestions.push('Great work! Continue to the next step');
 
       if (metrics.timeSpent < 60000) {
         // Under 1 minute
-        suggestions.push("Excellent speed! Consider helping others or reviewing advanced concepts");
+        suggestions.push('Excellent speed! Consider helping others or reviewing advanced concepts');
       }
     }
 
@@ -631,32 +638,37 @@ class RealTimeValidationService {
     context: ValidationContext
   ): string | undefined {
     if (result.passed) {
-      return "Ready for the next step";
+      return 'Ready for the next step';
     }
 
     if (context.previousAttempts > 3) {
-      return "Consider reviewing the prerequisites for this step";
+      return 'Consider reviewing the prerequisites for this step';
     }
 
-    return "Continue working on the current step";
+    return 'Continue working on the current step';
   }
 
   /**
    * Helper methods
    */
   private objectContains(obj: any, target: any): boolean {
-    if (typeof target !== "object") return false;
+    if (typeof target !== 'object') return false;
 
     return Object.keys(target).every(
       (key) =>
         obj[key] !== undefined &&
-        (typeof obj[key] === "object"
+        (typeof obj[key] === 'object'
           ? this.objectContains(obj[key], target[key])
           : obj[key] === target[key])
     );
   }
 
-  private feedbackToObject(feedback: any): { success?: any; failure?: any; partial?: any; hints?: any[] } {
+  private feedbackToObject(feedback: any): {
+    success?: any;
+    failure?: any;
+    partial?: any;
+    hints?: any[];
+  } {
     if (!feedback) return {};
     const t = typeof feedback;
     if (t === 'string' || t === 'number' || t === 'boolean') {
@@ -665,7 +677,12 @@ class RealTimeValidationService {
 
     if (typeof feedback === 'object') {
       // If it already looks like a feedback object, return as-is
-      if ('success' in feedback || 'failure' in feedback || 'partial' in feedback || 'hints' in feedback) {
+      if (
+        'success' in feedback ||
+        'failure' in feedback ||
+        'partial' in feedback ||
+        'hints' in feedback
+      ) {
         return feedback;
       }
 
@@ -682,7 +699,7 @@ class RealTimeValidationService {
 
   private feedbackMessageContent(feedback: any, key: 'success' | 'failure' | 'partial'): string {
     const obj = this.feedbackToObject(feedback);
-    return (obj?.[key]?.content) || '';
+    return obj?.[key]?.content || '';
   }
 
   private selectFeedback(
@@ -695,22 +712,22 @@ class RealTimeValidationService {
     if (score >= passingScore) {
       return {
         success: fb.success || undefined,
-        failure: { ...(fb.failure || {}), content: "" },
-        partial: { ...(fb.partial || {}), content: "" },
+        failure: { ...(fb.failure || {}), content: '' },
+        partial: { ...(fb.partial || {}), content: '' },
         hints: fb.hints || [],
       } as ValidationFeedback;
     } else if (score >= passingScore * 0.5) {
       return {
-        success: { ...(fb.success || {}), content: "" },
-        failure: { ...(fb.failure || {}), content: "" },
+        success: { ...(fb.success || {}), content: '' },
+        failure: { ...(fb.failure || {}), content: '' },
         partial: fb.partial || undefined,
         hints: fb.hints || [],
       } as ValidationFeedback;
     } else {
       return {
-        success: { ...(fb.success || {}), content: "" },
+        success: { ...(fb.success || {}), content: '' },
         failure: fb.failure || undefined,
-        partial: { ...(fb.partial || {}), content: "" },
+        partial: { ...(fb.partial || {}), content: '' },
         hints: fb.hints || [],
       } as ValidationFeedback;
     }
@@ -720,8 +737,7 @@ class RealTimeValidationService {
     if (numbers.length <= 1) return 0;
 
     const mean = numbers.reduce((a, b) => a + b, 0) / numbers.length;
-    const variance =
-      numbers.reduce((sum, num) => sum + Math.pow(num - mean, 2), 0) / numbers.length;
+    const variance = numbers.reduce((sum, num) => sum + (num - mean) ** 2, 0) / numbers.length;
 
     return Math.sqrt(variance);
   }

@@ -3,12 +3,7 @@
  * Enhanced assessment system for the expanded 9-section structure
  */
 
-import {
-  Module3Section,
-  MODULE_3_SECTIONS,
-  getSectionCoverage
-} from "@/lib/module3-section-definitions";
-import type { Question, TCODomain } from "@/types/exam";
+import { MODULE_3_SECTIONS, Module3Section } from '@/lib/module3-section-definitions';
 
 /**
  * Module 3 specific assessment configuration
@@ -56,8 +51,8 @@ export interface Module3AssessmentResult {
   };
   certificationReadiness: {
     score: number;
-    areas: Record<Module3Section, "strong" | "adequate" | "needs_improvement">;
-    overallReadiness: "ready" | "almost_ready" | "needs_work";
+    areas: Record<Module3Section, 'strong' | 'adequate' | 'needs_improvement'>;
+    overallReadiness: 'ready' | 'almost_ready' | 'needs_work';
   };
 }
 
@@ -69,24 +64,24 @@ export class Module3AssessmentEngine {
     [Module3Section.PACKAGE_VALIDATION]: 0.12,
     [Module3Section.DEPLOYMENT_STRATEGIES]: 0.18,
     [Module3Section.ERROR_HANDLING]: 0.15,
-    [Module3Section.ROLLBACK_PROCEDURES]: 0.10,
+    [Module3Section.ROLLBACK_PROCEDURES]: 0.1,
     [Module3Section.PERFORMANCE_MONITORING]: 0.15,
     [Module3Section.SECURITY_CONSIDERATIONS]: 0.12,
     [Module3Section.BATCH_OPERATIONS]: 0.08,
     [Module3Section.SCHEDULING_AUTOMATION]: 0.08,
-    [Module3Section.DEPENDENCY_MANAGEMENT]: 0.02
+    [Module3Section.DEPENDENCY_MANAGEMENT]: 0.02,
   };
 
   private static readonly PASSING_THRESHOLDS: Record<Module3Section, number> = {
     [Module3Section.PACKAGE_VALIDATION]: 0.75,
-    [Module3Section.DEPLOYMENT_STRATEGIES]: 0.80,
+    [Module3Section.DEPLOYMENT_STRATEGIES]: 0.8,
     [Module3Section.ERROR_HANDLING]: 0.85,
-    [Module3Section.ROLLBACK_PROCEDURES]: 0.80,
+    [Module3Section.ROLLBACK_PROCEDURES]: 0.8,
     [Module3Section.PERFORMANCE_MONITORING]: 0.75,
     [Module3Section.SECURITY_CONSIDERATIONS]: 0.85,
-    [Module3Section.BATCH_OPERATIONS]: 0.70,
+    [Module3Section.BATCH_OPERATIONS]: 0.7,
     [Module3Section.SCHEDULING_AUTOMATION]: 0.75,
-    [Module3Section.DEPENDENCY_MANAGEMENT]: 0.75
+    [Module3Section.DEPENDENCY_MANAGEMENT]: 0.75,
   };
 
   /**
@@ -106,15 +101,17 @@ export class Module3AssessmentEngine {
     config: Module3AssessmentConfig = {}
   ): Module3AssessmentResult {
     const {
-      sectionWeights = this.DEFAULT_SECTION_WEIGHTS,
+      sectionWeights = Module3AssessmentEngine.DEFAULT_SECTION_WEIGHTS,
       passingThreshold = 0.75,
       requireAllSections = false,
       adaptiveScoring = true,
-      penalizeGaps = true
+      penalizeGaps = true,
     } = config;
 
     // Group responses by section
-    const responsesBySection = this.groupResponsesBySection(sessionData.responses);
+    const responsesBySection = Module3AssessmentEngine.groupResponsesBySection(
+      sessionData.responses
+    );
 
     // Calculate section results
     const sectionResults: Partial<Record<Module3Section, SectionAssessmentResult>> = {};
@@ -123,10 +120,11 @@ export class Module3AssessmentEngine {
 
     Object.entries(responsesBySection).forEach(([sectionId, responses]) => {
       const section = sectionId as Module3Section;
-      const result = this.assessSection(section, responses, config);
+      const result = Module3AssessmentEngine.assessSection(section, responses, config);
       sectionResults[section] = result;
 
-      const weight = sectionWeights[section] || this.DEFAULT_SECTION_WEIGHTS[section];
+      const weight =
+        sectionWeights[section] || Module3AssessmentEngine.DEFAULT_SECTION_WEIGHTS[section];
       totalWeightedScore += result.score * weight;
       totalWeight += weight;
     });
@@ -134,8 +132,8 @@ export class Module3AssessmentEngine {
     // Handle sections with no responses (gaps)
     const attemptedSections = new Set(Object.keys(responsesBySection) as Module3Section[]);
     const gapsIdentified = Object.keys(MODULE_3_SECTIONS)
-      .filter(sectionId => !attemptedSections.has(sectionId as Module3Section))
-      .map(sectionId => sectionId as Module3Section);
+      .filter((sectionId) => !attemptedSections.has(sectionId as Module3Section))
+      .map((sectionId) => sectionId as Module3Section);
 
     // Apply gap penalty if enabled
     if (penalizeGaps && gapsIdentified.length > 0) {
@@ -146,11 +144,11 @@ export class Module3AssessmentEngine {
     // Calculate overall metrics
     const overallScore = totalWeight > 0 ? totalWeightedScore / totalWeight : 0;
     const totalQuestions = sessionData.responses.length;
-    const correctAnswers = sessionData.responses.filter(r => r.correct).length;
+    const correctAnswers = sessionData.responses.filter((r) => r.correct).length;
     const overallAccuracy = totalQuestions > 0 ? correctAnswers / totalQuestions : 0;
 
     // Determine pass/fail
-    const passed = this.determineOverallPass(
+    const passed = Module3AssessmentEngine.determineOverallPass(
       sectionResults as Record<Module3Section, SectionAssessmentResult>,
       overallScore,
       passingThreshold,
@@ -158,19 +156,19 @@ export class Module3AssessmentEngine {
     );
 
     // Identify strengths and weaknesses
-    const { strengths, weaknesses } = this.analyzeStrengthsAndWeaknesses(
+    const { strengths, weaknesses } = Module3AssessmentEngine.analyzeStrengthsAndWeaknesses(
       sectionResults as Record<Module3Section, SectionAssessmentResult>
     );
 
     // Generate recommendations
-    const recommendations = this.generateRecommendations(
+    const recommendations = Module3AssessmentEngine.generateRecommendations(
       sectionResults as Record<Module3Section, SectionAssessmentResult>,
       gapsIdentified,
       overallScore
     );
 
     // Assess certification readiness
-    const certificationReadiness = this.assessCertificationReadiness(
+    const certificationReadiness = Module3AssessmentEngine.assessCertificationReadiness(
       sectionResults as Record<Module3Section, SectionAssessmentResult>,
       overallScore
     );
@@ -185,7 +183,7 @@ export class Module3AssessmentEngine {
       weaknesses,
       gapsIdentified,
       recommendations,
-      certificationReadiness
+      certificationReadiness,
     };
   }
 
@@ -204,33 +202,36 @@ export class Module3AssessmentEngine {
   ): SectionAssessmentResult {
     const section = MODULE_3_SECTIONS[sectionId];
     const questionsAttempted = responses.length;
-    const questionsCorrect = responses.filter(r => r.correct).length;
+    const questionsCorrect = responses.filter((r) => r.correct).length;
     const accuracy = questionsAttempted > 0 ? questionsCorrect / questionsAttempted : 0;
     const timeSpent = responses.reduce((sum, r) => sum + r.timeSpent, 0);
 
     // Calculate adaptive score
     let score = accuracy;
     if (config.adaptiveScoring) {
-      score = this.calculateAdaptiveScore(accuracy, timeSpent, questionsAttempted, section);
+      score = Module3AssessmentEngine.calculateAdaptiveScore(
+        accuracy,
+        timeSpent,
+        questionsAttempted,
+        section
+      );
     }
 
     // Determine pass/fail for section
-    const threshold = this.PASSING_THRESHOLDS[sectionId];
+    const threshold = Module3AssessmentEngine.PASSING_THRESHOLDS[sectionId];
     const passed = score >= threshold;
 
     // Analyze learning objectives
-    const allObjectiveIds = responses.flatMap(r => r.objectiveIds);
-    const correctObjectiveIds = responses
-      .filter(r => r.correct)
-      .flatMap(r => r.objectiveIds);
+    const allObjectiveIds = responses.flatMap((r) => r.objectiveIds);
+    const correctObjectiveIds = responses.filter((r) => r.correct).flatMap((r) => r.objectiveIds);
 
     const objectivesMet = [...new Set(correctObjectiveIds)];
     const objectivesMissed = section.learningObjectives
-      .map(obj => obj.split(":")[0])
-      .filter(objId => !objectivesMet.includes(objId));
+      .map((obj) => obj.split(':')[0])
+      .filter((objId) => !objectivesMet.includes(objId));
 
     // Generate section-specific recommendations
-    const recommendations = this.generateSectionRecommendations(
+    const recommendations = Module3AssessmentEngine.generateSectionRecommendations(
       sectionId,
       accuracy,
       objectivesMissed,
@@ -248,7 +249,7 @@ export class Module3AssessmentEngine {
       passed,
       objectivesMet,
       objectivesMissed,
-      recommendations
+      recommendations,
     };
   }
 
@@ -277,9 +278,9 @@ export class Module3AssessmentEngine {
     }
 
     // Difficulty adjustment
-    if (section.difficulty === "Advanced") {
+    if (section.difficulty === 'Advanced') {
       adaptiveScore += 0.03; // Bonus for advanced sections
-    } else if (section.difficulty === "Beginner") {
+    } else if (section.difficulty === 'Beginner') {
       adaptiveScore -= 0.01; // Slight penalty for beginner sections
     }
 
@@ -303,15 +304,18 @@ export class Module3AssessmentEngine {
       timeSpent: number;
       objectiveIds: string[];
     }>
-  ): Record<string, Array<{
-    questionId: string;
-    correct: boolean;
-    timeSpent: number;
-    objectiveIds: string[];
-  }>> {
+  ): Record<
+    string,
+    Array<{
+      questionId: string;
+      correct: boolean;
+      timeSpent: number;
+      objectiveIds: string[];
+    }>
+  > {
     const grouped: Record<string, any[]> = {};
 
-    responses.forEach(response => {
+    responses.forEach((response) => {
       const { sectionId, ...responseData } = response;
       if (!grouped[sectionId]) {
         grouped[sectionId] = [];
@@ -336,12 +340,12 @@ export class Module3AssessmentEngine {
     }
 
     if (requireAllSections) {
-      return Object.values(sectionResults).every(result => result.passed);
+      return Object.values(sectionResults).every((result) => result.passed);
     }
 
     // At least 70% of attempted sections must pass
     const attemptedSections = Object.values(sectionResults);
-    const passedSections = attemptedSections.filter(result => result.passed);
+    const passedSections = attemptedSections.filter((result) => result.passed);
     return passedSections.length >= attemptedSections.length * 0.7;
   }
 
@@ -371,7 +375,7 @@ export class Module3AssessmentEngine {
     sectionResults: Record<Module3Section, SectionAssessmentResult>,
     gapsIdentified: Module3Section[],
     overallScore: number
-  ): Module3AssessmentResult["recommendations"] {
+  ): Module3AssessmentResult['recommendations'] {
     const priorityAreas: Module3Section[] = [];
     const nextSteps: string[] = [];
 
@@ -387,28 +391,28 @@ export class Module3AssessmentEngine {
 
     // Calculate suggested study time
     let suggestedStudyTime = 0;
-    priorityAreas.forEach(sectionId => {
+    priorityAreas.forEach((sectionId) => {
       const section = MODULE_3_SECTIONS[sectionId];
       suggestedStudyTime += section.estimatedTime * 2; // Double the base time for review
     });
 
     // Generate next steps
     if (overallScore >= 0.85) {
-      nextSteps.push("Focus on maintaining strong performance");
-      nextSteps.push("Consider advanced practice scenarios");
+      nextSteps.push('Focus on maintaining strong performance');
+      nextSteps.push('Consider advanced practice scenarios');
     } else if (overallScore >= 0.75) {
-      nextSteps.push("Review weak areas identified above");
-      nextSteps.push("Practice with similar questions");
+      nextSteps.push('Review weak areas identified above');
+      nextSteps.push('Practice with similar questions');
     } else {
-      nextSteps.push("Comprehensive review of fundamentals needed");
-      nextSteps.push("Focus on understanding core concepts");
-      nextSteps.push("Seek additional study resources");
+      nextSteps.push('Comprehensive review of fundamentals needed');
+      nextSteps.push('Focus on understanding core concepts');
+      nextSteps.push('Seek additional study resources');
     }
 
     return {
       priorityAreas: priorityAreas.slice(0, 3), // Top 3 priorities
       suggestedStudyTime,
-      nextSteps
+      nextSteps,
     };
   }
 
@@ -427,19 +431,20 @@ export class Module3AssessmentEngine {
 
     if (accuracy < 0.6) {
       recommendations.push(`Review fundamental concepts in ${section.title}`);
-      recommendations.push("Practice with easier questions first");
+      recommendations.push('Practice with easier questions first');
     } else if (accuracy < 0.8) {
-      recommendations.push(`Focus on specific learning objectives: ${objectivesMissed.join(", ")}`);
-      recommendations.push("Practice with similar question types");
+      recommendations.push(`Focus on specific learning objectives: ${objectivesMissed.join(', ')}`);
+      recommendations.push('Practice with similar question types');
     }
 
-    if (timeSpent / questionCount > 120) { // More than 2 minutes per question
-      recommendations.push("Work on improving response time");
-      recommendations.push("Practice time management strategies");
+    if (timeSpent / questionCount > 120) {
+      // More than 2 minutes per question
+      recommendations.push('Work on improving response time');
+      recommendations.push('Practice time management strategies');
     }
 
     if (objectivesMissed.length > 0) {
-      recommendations.push(`Study these specific objectives: ${objectivesMissed.join(", ")}`);
+      recommendations.push(`Study these specific objectives: ${objectivesMissed.join(', ')}`);
     }
 
     return recommendations;
@@ -451,33 +456,35 @@ export class Module3AssessmentEngine {
   private static assessCertificationReadiness(
     sectionResults: Record<Module3Section, SectionAssessmentResult>,
     overallScore: number
-  ): Module3AssessmentResult["certificationReadiness"] {
-    const areas: Record<Module3Section, "strong" | "adequate" | "needs_improvement"> =
-      {} as Record<Module3Section, "strong" | "adequate" | "needs_improvement">;
+  ): Module3AssessmentResult['certificationReadiness'] {
+    const areas: Record<Module3Section, 'strong' | 'adequate' | 'needs_improvement'> = {} as Record<
+      Module3Section,
+      'strong' | 'adequate' | 'needs_improvement'
+    >;
 
     Object.entries(sectionResults).forEach(([sectionId, result]) => {
       if (result.score >= 0.85) {
-        areas[sectionId as Module3Section] = "strong";
-      } else if (result.score >= 0.70) {
-        areas[sectionId as Module3Section] = "adequate";
+        areas[sectionId as Module3Section] = 'strong';
+      } else if (result.score >= 0.7) {
+        areas[sectionId as Module3Section] = 'adequate';
       } else {
-        areas[sectionId as Module3Section] = "needs_improvement";
+        areas[sectionId as Module3Section] = 'needs_improvement';
       }
     });
 
-    let overallReadiness: "ready" | "almost_ready" | "needs_work";
+    let overallReadiness: 'ready' | 'almost_ready' | 'needs_work';
     if (overallScore >= 0.85) {
-      overallReadiness = "ready";
+      overallReadiness = 'ready';
     } else if (overallScore >= 0.75) {
-      overallReadiness = "almost_ready";
+      overallReadiness = 'almost_ready';
     } else {
-      overallReadiness = "needs_work";
+      overallReadiness = 'needs_work';
     }
 
     return {
       score: Math.round(overallScore * 100),
       areas,
-      overallReadiness
+      overallReadiness,
     };
   }
 }

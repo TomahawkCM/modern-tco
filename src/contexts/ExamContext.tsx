@@ -1,16 +1,12 @@
-"use client";
+'use client';
 
-import { useAuth } from "@/contexts/AuthContext";
-import { useIncorrectAnswers } from "@/contexts/IncorrectAnswersContext";
-import { useDatabase } from "@/hooks/useDatabase";
-import {
-  getAllAvailableQuestions,
-  getDatabaseWeightedQuestions,
-  getMockExamQuestions,
-  getPracticeQuestions,
-} from "@/lib/examLogic";
-import { ExamMode, type ExamSession, type Question } from "@/types/exam";
-import React, { createContext, useContext, useEffect, useReducer, useState } from "react";
+import type React from 'react';
+import { createContext, useContext, useEffect, useReducer, useState } from 'react';
+import { useAuth } from '@/contexts/AuthContext';
+import { useIncorrectAnswers } from '@/contexts/IncorrectAnswersContext';
+import { useDatabase } from '@/hooks/useDatabase';
+import { getAllAvailableQuestions } from '@/lib/examLogic';
+import { ExamMode, type ExamSession, type Question } from '@/types/exam';
 
 interface ExamState {
   currentSession: ExamSession | null;
@@ -19,19 +15,19 @@ interface ExamState {
 }
 
 type ExamAction =
-  | { type: "START_EXAM"; mode: ExamMode; questions: Question[] }
-  | { type: "ANSWER_QUESTION"; questionId: string; answerId: string }
-  | { type: "NEXT_QUESTION" }
-  | { type: "PREVIOUS_QUESTION" }
-  | { type: "FINISH_EXAM" }
-  | { type: "RESET_EXAM" }
-  | { type: "SET_LOADING"; loading: boolean }
-  | { type: "SET_ERROR"; error: string }
-  | { type: "LOAD_SESSION"; session: ExamSession };
+  | { type: 'START_EXAM'; mode: ExamMode; questions: Question[] }
+  | { type: 'ANSWER_QUESTION'; questionId: string; answerId: string }
+  | { type: 'NEXT_QUESTION' }
+  | { type: 'PREVIOUS_QUESTION' }
+  | { type: 'FINISH_EXAM' }
+  | { type: 'RESET_EXAM' }
+  | { type: 'SET_LOADING'; loading: boolean }
+  | { type: 'SET_ERROR'; error: string }
+  | { type: 'LOAD_SESSION'; session: ExamSession };
 
 const examReducer = (state: ExamState, action: ExamAction): ExamState => {
   switch (action.type) {
-    case "START_EXAM":
+    case 'START_EXAM': {
       const newSession: ExamSession = {
         id: `session-${Date.now()}`,
         mode: action.mode,
@@ -47,8 +43,9 @@ const examReducer = (state: ExamState, action: ExamAction): ExamState => {
         isLoading: false,
         error: null,
       };
+    }
 
-    case "ANSWER_QUESTION":
+    case 'ANSWER_QUESTION': {
       if (!state.currentSession) return state;
 
       const updatedSession = {
@@ -63,8 +60,9 @@ const examReducer = (state: ExamState, action: ExamAction): ExamState => {
         ...state,
         currentSession: updatedSession,
       };
+    }
 
-    case "NEXT_QUESTION":
+    case 'NEXT_QUESTION':
       if (!state.currentSession) return state;
 
       return {
@@ -78,7 +76,7 @@ const examReducer = (state: ExamState, action: ExamAction): ExamState => {
         },
       };
 
-    case "PREVIOUS_QUESTION":
+    case 'PREVIOUS_QUESTION':
       if (!state.currentSession) return state;
 
       return {
@@ -89,12 +87,12 @@ const examReducer = (state: ExamState, action: ExamAction): ExamState => {
         },
       };
 
-    case "FINISH_EXAM":
+    case 'FINISH_EXAM': {
       if (!state.currentSession) return state;
 
       // Calculate score
       const correctAnswers = state.currentSession.questions.filter(
-        (q) => state.currentSession!.answers[q.id] === q.correctAnswerId
+        (q) => state.currentSession?.answers[q.id] === q.correctAnswerId
       ).length;
 
       const score = Math.round((correctAnswers / state.currentSession.questions.length) * 100);
@@ -110,8 +108,9 @@ const examReducer = (state: ExamState, action: ExamAction): ExamState => {
         ...state,
         currentSession: completedSession,
       };
+    }
 
-    case "RESET_EXAM":
+    case 'RESET_EXAM':
       return {
         ...state,
         currentSession: null,
@@ -119,20 +118,20 @@ const examReducer = (state: ExamState, action: ExamAction): ExamState => {
         error: null,
       };
 
-    case "SET_LOADING":
+    case 'SET_LOADING':
       return {
         ...state,
         isLoading: action.loading,
       };
 
-    case "SET_ERROR":
+    case 'SET_ERROR':
       return {
         ...state,
         error: action.error,
         isLoading: false,
       };
 
-    case "LOAD_SESSION":
+    case 'LOAD_SESSION':
       return {
         ...state,
         currentSession: action.session,
@@ -187,10 +186,10 @@ export function ExamProvider({ children }: { children: React.ReactNode }) {
             const dbSession = await db.insertExamSession({
               session_type:
                 state.currentSession.mode === ExamMode.PRACTICE
-                  ? "practice"
+                  ? 'practice'
                   : state.currentSession.mode === ExamMode.MOCK
-                    ? "mock"
-                    : "timed",
+                    ? 'mock'
+                    : 'timed',
               started_at: state.currentSession.startTime.toISOString(),
               total_questions: state.currentSession.questions.length,
               correct_answers: 0,
@@ -200,7 +199,7 @@ export function ExamProvider({ children }: { children: React.ReactNode }) {
           } else if (currentDbSessionId && state.currentSession.completed) {
             // Update completed session
             const correctAnswers = state.currentSession.questions.filter(
-              (q) => state.currentSession!.answers[q.id] === q.correctAnswerId
+              (q) => state.currentSession?.answers[q.id] === q.correctAnswerId
             ).length;
 
             const timeSpent = state.currentSession.endTime
@@ -242,8 +241,9 @@ export function ExamProvider({ children }: { children: React.ReactNode }) {
                   addIncorrectAnswer({
                     questionId,
                     questionText: question.question,
-                    userAnswer: question.choices[parseInt(answerId)]?.text || '',
-                    correctAnswer: question.choices[parseInt(question.correctAnswerId)]?.text || '',
+                    userAnswer: question.choices[parseInt(answerId, 10)]?.text || '',
+                    correctAnswer:
+                      question.choices[parseInt(question.correctAnswerId, 10)]?.text || '',
                     domain: question.domain,
                     sessionId: currentDbSessionId,
                   });
@@ -252,13 +252,13 @@ export function ExamProvider({ children }: { children: React.ReactNode }) {
             }
           }
         } catch (error) {
-          console.error("Failed to save session to database:", error);
+          console.error('Failed to save session to database:', error);
           // Fallback to localStorage
-          localStorage.setItem("tco-exam-session", JSON.stringify(state.currentSession));
+          localStorage.setItem('tco-exam-session', JSON.stringify(state.currentSession));
         }
       } else {
         // Not authenticated, save to localStorage
-        localStorage.setItem("tco-exam-session", JSON.stringify(state.currentSession));
+        localStorage.setItem('tco-exam-session', JSON.stringify(state.currentSession));
 
         // Track incorrect answers for review functionality when session is completed
         if (state.currentSession.completed && addIncorrectAnswer) {
@@ -268,8 +268,8 @@ export function ExamProvider({ children }: { children: React.ReactNode }) {
               addIncorrectAnswer({
                 questionId,
                 questionText: question.question,
-                userAnswer: question.choices[parseInt(answerId)]?.text || '',
-                correctAnswer: question.choices[parseInt(question.correctAnswerId)]?.text || '',
+                userAnswer: question.choices[parseInt(answerId, 10)]?.text || '',
+                correctAnswer: question.choices[parseInt(question.correctAnswerId, 10)]?.text || '',
                 domain: question.domain,
                 sessionId: state.currentSession.id,
               });
@@ -289,9 +289,9 @@ export function ExamProvider({ children }: { children: React.ReactNode }) {
     } else {
       // Clear both database session ID and localStorage
       setCurrentDbSessionId(null);
-      localStorage.removeItem("tco-exam-session");
+      localStorage.removeItem('tco-exam-session');
     }
-  }, [state.currentSession, user?.id, currentDbSessionId, db, addIncorrectAnswer]);
+  }, [state.currentSession, user?.id, currentDbSessionId, db, addIncorrectAnswer, user]);
 
   // Load session from database or localStorage on mount
   useEffect(() => {
@@ -306,28 +306,28 @@ export function ExamProvider({ children }: { children: React.ReactNode }) {
             // Convert database session back to ExamSession format
             // Note: This would need question data to be fully functional
             // For now, we'll still fall back to localStorage for incomplete sessions
-            console.log("Found incomplete database session:", incompleteSession.id);
+            console.log('Found incomplete database session:', incompleteSession.id);
             setCurrentDbSessionId(incompleteSession.id);
           }
         } catch (error) {
-          console.error("Failed to load session from database:", error);
+          console.error('Failed to load session from database:', error);
         }
       }
 
       // Load from localStorage as fallback
       const safeLoadSession = () => {
         try {
-          if (typeof window === "undefined") return;
+          if (typeof window === 'undefined') return;
 
-          const savedSession = localStorage.getItem("tco-exam-session");
+          const savedSession = localStorage.getItem('tco-exam-session');
           if (!savedSession) return;
 
           const session = JSON.parse(savedSession) as ExamSession;
 
           // Validate session structure
           if (!session.id || !session.mode || !Array.isArray(session.questions)) {
-            console.warn("Invalid session structure, removing corrupted data");
-            localStorage.removeItem("tco-exam-session");
+            console.warn('Invalid session structure, removing corrupted data');
+            localStorage.removeItem('tco-exam-session');
             return;
           }
 
@@ -339,27 +339,27 @@ export function ExamProvider({ children }: { children: React.ReactNode }) {
             }
 
             // Validate dates
-            if (isNaN(session.startTime.getTime())) {
-              throw new Error("Invalid start time");
+            if (Number.isNaN(session.startTime.getTime())) {
+              throw new Error('Invalid start time');
             }
 
-            if (session.endTime && isNaN(session.endTime.getTime())) {
-              throw new Error("Invalid end time");
+            if (session.endTime && Number.isNaN(session.endTime.getTime())) {
+              throw new Error('Invalid end time');
             }
           } catch (dateError) {
-            console.warn("Invalid date in session, resetting dates:", dateError);
+            console.warn('Invalid date in session, resetting dates:', dateError);
             session.startTime = new Date();
             session.endTime = undefined;
           }
 
-          dispatch({ type: "LOAD_SESSION", session });
+          dispatch({ type: 'LOAD_SESSION', session });
         } catch (error) {
-          console.error("Failed to load saved session:", error);
+          console.error('Failed to load saved session:', error);
           // Clean up corrupted data
           try {
-            localStorage.removeItem("tco-exam-session");
+            localStorage.removeItem('tco-exam-session');
           } catch (cleanupError) {
-            console.error("Failed to cleanup corrupted session:", cleanupError);
+            console.error('Failed to cleanup corrupted session:', cleanupError);
           }
         }
       };
@@ -368,13 +368,13 @@ export function ExamProvider({ children }: { children: React.ReactNode }) {
     };
 
     loadSession();
-  }, [user?.id]);
+  }, [user?.id, db, user]);
 
   const startExam = async (mode: ExamMode, customQuestions?: Question[]) => {
-    console.log("ExamContext startExam called with mode:", mode);
-    console.log("Custom questions provided:", customQuestions?.length || 0);
+    console.log('ExamContext startExam called with mode:', mode);
+    console.log('Custom questions provided:', customQuestions?.length || 0);
 
-    dispatch({ type: "SET_LOADING", loading: true });
+    dispatch({ type: 'SET_LOADING', loading: true });
 
     try {
       // Use custom questions if provided, otherwise get questions from centralized question system
@@ -382,69 +382,69 @@ export function ExamProvider({ children }: { children: React.ReactNode }) {
       if (customQuestions) {
         // No cap: use exactly what the caller provided
         examQuestions = customQuestions;
-        console.log("Using custom questions:", examQuestions.length);
+        console.log('Using custom questions:', examQuestions.length);
       } else {
         // Use centralized question system based on exam mode
         if (mode === ExamMode.MOCK) {
           try {
-            const { questionService } = await import("@/lib/questionService");
+            const { questionService } = await import('@/lib/questionService');
             examQuestions = await questionService.getMockExamQuestions(); // 105
-            console.log("Generated mock exam questions from DB (105)", examQuestions.length);
+            console.log('Generated mock exam questions from DB (105)', examQuestions.length);
           } catch (e) {
             // Fallback to static weighted questions
-            const { getWeightedRandomQuestions } = await import("@/lib/questionLoader");
+            const { getWeightedRandomQuestions } = await import('@/lib/questionLoader');
             examQuestions = getWeightedRandomQuestions(105);
-            console.warn("Fallback to static weighted questions (105)");
+            console.warn('Fallback to static weighted questions (105)');
           }
         } else {
           const questionCount = mode === ExamMode.PRACTICE ? 25 : 20; // Default practice count is 25
           try {
-            const { questionService } = await import("@/lib/questionService");
+            const { questionService } = await import('@/lib/questionService');
             examQuestions = await questionService.getRandomQuestions(questionCount);
-            console.log("Generated practice questions from DB:", examQuestions.length);
+            console.log('Generated practice questions from DB:', examQuestions.length);
           } catch (e) {
-            const { getWeightedRandomQuestions } = await import("@/lib/questionLoader");
+            const { getWeightedRandomQuestions } = await import('@/lib/questionLoader');
             examQuestions = getWeightedRandomQuestions(questionCount);
-            console.warn("Fallback practice questions from static loader:", examQuestions.length);
+            console.warn('Fallback practice questions from static loader:', examQuestions.length);
           }
         }
       }
 
       // Validate we have questions
       if (!examQuestions || examQuestions.length === 0) {
-        console.warn("No questions available, falling back to all available questions");
+        console.warn('No questions available, falling back to all available questions');
         examQuestions = getAllAvailableQuestions().slice(0, mode === ExamMode.MOCK ? 105 : 25);
       }
 
-      console.log("Final exam questions for session:", examQuestions.length);
+      console.log('Final exam questions for session:', examQuestions.length);
 
       setTimeout(() => {
-        dispatch({ type: "START_EXAM", mode, questions: examQuestions });
+        dispatch({ type: 'START_EXAM', mode, questions: examQuestions });
       }, 500); // Small delay for better UX
     } catch (error) {
-      console.error("Error starting exam:", error);
-      dispatch({ type: "SET_ERROR", error: "Failed to start exam. Please try again." });
+      console.error('Error starting exam:', error);
+      dispatch({ type: 'SET_ERROR', error: 'Failed to start exam. Please try again.' });
     }
   };
 
   const answerQuestion = (questionId: string, answerId: string) => {
-    dispatch({ type: "ANSWER_QUESTION", questionId, answerId });
+    dispatch({ type: 'ANSWER_QUESTION', questionId, answerId });
   };
 
   const nextQuestion = () => {
-    dispatch({ type: "NEXT_QUESTION" });
+    dispatch({ type: 'NEXT_QUESTION' });
   };
 
   const previousQuestion = () => {
-    dispatch({ type: "PREVIOUS_QUESTION" });
+    dispatch({ type: 'PREVIOUS_QUESTION' });
   };
 
   const finishExam = () => {
-    dispatch({ type: "FINISH_EXAM" });
+    dispatch({ type: 'FINISH_EXAM' });
   };
 
   const resetExam = () => {
-    dispatch({ type: "RESET_EXAM" });
+    dispatch({ type: 'RESET_EXAM' });
   };
 
   const getCurrentQuestion = (): Question | null => {
@@ -471,8 +471,8 @@ export function ExamProvider({ children }: { children: React.ReactNode }) {
     if (answeredQuestions.length === 0) return 0;
 
     const correctAnswers = answeredQuestions.filter((questionId) => {
-      const question = state.currentSession!.questions.find((q) => q.id === questionId);
-      return question && state.currentSession!.answers[questionId] === question.correctAnswerId;
+      const question = state.currentSession?.questions.find((q) => q.id === questionId);
+      return question && state.currentSession?.answers[questionId] === question.correctAnswerId;
     }).length;
 
     return Math.round((correctAnswers / answeredQuestions.length) * 100);
@@ -489,7 +489,7 @@ export function ExamProvider({ children }: { children: React.ReactNode }) {
   const timeUp = () => {
     // Auto-finish exam when time is up
     if (state.currentSession && !state.currentSession.completed) {
-      dispatch({ type: "FINISH_EXAM" });
+      dispatch({ type: 'FINISH_EXAM' });
     }
   };
 
@@ -514,7 +514,7 @@ export function ExamProvider({ children }: { children: React.ReactNode }) {
 export function useExam() {
   const context = useContext(ExamContext);
   if (!context) {
-    throw new Error("useExam must be used within an ExamProvider");
+    throw new Error('useExam must be used within an ExamProvider');
   }
   return context;
 }

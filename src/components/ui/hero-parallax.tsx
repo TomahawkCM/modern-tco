@@ -1,6 +1,6 @@
-"use client";
-import React from "react";
-import { motion, useScroll, useTransform, useSpring, type MotionValue } from "motion/react";
+'use client';
+import { type MotionValue, motion, useScroll, useSpring, useTransform } from 'motion/react';
+import React from 'react';
 
 export const HeroParallax = ({
   products,
@@ -17,7 +17,7 @@ export const HeroParallax = ({
   const ref = React.useRef(null);
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ["start start", "end start"],
+    offset: ['start start', 'end start'],
   });
 
   const springConfig = { stiffness: 300, damping: 30, bounce: 100 };

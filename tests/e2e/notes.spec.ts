@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { expect, test } from '@playwright/test';
 
 test('notes page renders and allows basic interactions', async ({ page }) => {
   await page.goto('/notes');
@@ -11,4 +11,3 @@ test('notes page renders and allows basic interactions', async ({ page }) => {
   // Note appears in list
   await expect(page.getByText('E2E test note')).toBeVisible();
 });
-

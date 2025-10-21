@@ -1,23 +1,23 @@
-"use client";
+'use client';
 
-import React from 'react';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { Card, CardContent } from '@/components/ui/card';
-import { 
-  BookOpen, 
-  Target, 
-  Package, 
-  Navigation, 
-  FileSpreadsheet,
+import {
+  BookOpen,
+  Brain,
   ChevronLeft,
   ChevronRight,
+  FileSpreadsheet,
   Home,
-  Brain,
-  Sparkles
+  Navigation,
+  Package,
+  Sparkles,
+  Target,
 } from 'lucide-react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import type React from 'react';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
 import { cn } from '@/lib/utils';
 
 interface ModuleInfo {
@@ -38,7 +38,7 @@ const modules: ModuleInfo[] = [
     difficulty: 'Beginner',
     estimatedTime: '45 min',
     weight: 22,
-    description: 'Master natural language queries and sensor management'
+    description: 'Master natural language queries and sensor management',
   },
   {
     slug: 'refining-questions',
@@ -47,7 +47,7 @@ const modules: ModuleInfo[] = [
     difficulty: 'Intermediate',
     estimatedTime: '50 min',
     weight: 23,
-    description: 'Advanced targeting with computer groups and filters'
+    description: 'Advanced targeting with computer groups and filters',
   },
   {
     slug: 'taking-action',
@@ -56,7 +56,7 @@ const modules: ModuleInfo[] = [
     difficulty: 'Intermediate',
     estimatedTime: '55 min',
     weight: 15,
-    description: 'Safe package deployment and action execution'
+    description: 'Safe package deployment and action execution',
   },
   {
     slug: 'navigation-modules',
@@ -65,7 +65,7 @@ const modules: ModuleInfo[] = [
     difficulty: 'Beginner',
     estimatedTime: '40 min',
     weight: 23,
-    description: 'Platform navigation and core module operations'
+    description: 'Platform navigation and core module operations',
   },
   {
     slug: 'reporting-export',
@@ -74,8 +74,8 @@ const modules: ModuleInfo[] = [
     difficulty: 'Intermediate',
     estimatedTime: '35 min',
     weight: 17,
-    description: 'Report creation and data export systems'
-  }
+    description: 'Report creation and data export systems',
+  },
 ];
 
 const getDifficultyColor = (difficulty: string) => {
@@ -96,11 +96,15 @@ interface ModuleNavigationProps {
   showAllModules?: boolean;
 }
 
-export default function ModuleNavigation({ currentSlug, showAllModules = false }: ModuleNavigationProps) {
+export default function ModuleNavigation({
+  currentSlug,
+  showAllModules = false,
+}: ModuleNavigationProps) {
   const pathname = usePathname() || '';
-  const currentModuleIndex = modules.findIndex(m => m.slug === currentSlug);
+  const currentModuleIndex = modules.findIndex((m) => m.slug === currentSlug);
   const previousModule = currentModuleIndex > 0 ? modules[currentModuleIndex - 1] : null;
-  const nextModule = currentModuleIndex < modules.length - 1 ? modules[currentModuleIndex + 1] : null;
+  const nextModule =
+    currentModuleIndex < modules.length - 1 ? modules[currentModuleIndex + 1] : null;
 
   if (showAllModules) {
     return (
@@ -120,7 +124,7 @@ export default function ModuleNavigation({ currentSlug, showAllModules = false }
           {modules.map((module) => {
             const Icon = module.icon;
             const isActive = pathname.includes(module.slug);
-            
+
             // Determine card color based on difficulty
             const getCardColor = (difficulty: string) => {
               switch (difficulty) {
@@ -150,37 +154,51 @@ export default function ModuleNavigation({ currentSlug, showAllModules = false }
 
             return (
               <Link key={module.slug} href={`/modules/${module.slug}`}>
-                <Card className={cn(
-                  "group transition-all duration-200 hover:scale-105 cursor-pointer hover:shadow-md",
-                  getCardColor(module.difficulty),
-                  isActive && "ring-2 ring-blue-500"
-                )}>
+                <Card
+                  className={cn(
+                    'group transition-all duration-200 hover:scale-105 cursor-pointer hover:shadow-md',
+                    getCardColor(module.difficulty),
+                    isActive && 'ring-2 ring-blue-500'
+                  )}
+                >
                   <CardContent className="p-6">
                     <div className="flex items-center gap-3 mb-3">
-                      <div className={cn("p-2 rounded-lg", 
-                        module.difficulty === 'Beginner' ? 'bg-[#22c55e]/20' :
-                        module.difficulty === 'Intermediate' ? 'bg-orange-500/20' :
-                        module.difficulty === 'Advanced' ? 'bg-red-500/20' : 'bg-primary/20'
-                      )}>
-                        <Icon className={cn("h-6 w-6", getIconColor(module.difficulty))} />
+                      <div
+                        className={cn(
+                          'p-2 rounded-lg',
+                          module.difficulty === 'Beginner'
+                            ? 'bg-[#22c55e]/20'
+                            : module.difficulty === 'Intermediate'
+                              ? 'bg-orange-500/20'
+                              : module.difficulty === 'Advanced'
+                                ? 'bg-red-500/20'
+                                : 'bg-primary/20'
+                        )}
+                      >
+                        <Icon className={cn('h-6 w-6', getIconColor(module.difficulty))} />
                       </div>
                       <div className="flex-1">
                         <h3 className="font-semibold text-slate-900 dark:text-slate-100 group-hover:text-blue-600 dark:group-hover:text-primary transition-colors">
                           {module.title}
                         </h3>
                         <div className="flex items-center gap-2 mt-1">
-                          <Badge variant="outline" className={getDifficultyColor(module.difficulty)}>
+                          <Badge
+                            variant="outline"
+                            className={getDifficultyColor(module.difficulty)}
+                          >
                             {module.difficulty}
                           </Badge>
-                          <span className="text-sm text-slate-600 dark:text-muted-foreground">{module.estimatedTime}</span>
+                          <span className="text-sm text-slate-600 dark:text-muted-foreground">
+                            {module.estimatedTime}
+                          </span>
                         </div>
                       </div>
                     </div>
-                    
+
                     <p className="text-sm text-slate-700 dark:text-muted-foreground mb-3">
                       {module.description}
                     </p>
-                    
+
                     <div className="flex items-center justify-between">
                       <span className="text-xs text-slate-600 dark:text-muted-foreground">
                         Exam Weight: {module.weight}%
@@ -236,7 +254,7 @@ export default function ModuleNavigation({ currentSlug, showAllModules = false }
           <>
             <ChevronRight className="h-4 w-4" />
             <span className="text-primary font-medium">
-              {modules.find(m => m.slug === currentSlug)?.title}
+              {modules.find((m) => m.slug === currentSlug)?.title}
             </span>
           </>
         )}

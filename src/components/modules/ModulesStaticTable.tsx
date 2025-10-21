@@ -1,27 +1,62 @@
-"use client";
+'use client';
 
-import * as React from "react";
-import { type ColumnDef, flexRender, getCoreRowModel, getFilteredRowModel, getSortedRowModel, type SortingState, useReactTable, type ColumnFiltersState, type VisibilityState } from "@tanstack/react-table";
-import type { ModuleListRow } from "./module-table-types";
-import { moduleColumnsStatic } from "./module-table-columns";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { ChevronDown } from "lucide-react";
-import { Toggle } from "@/components/ui/toggle";
-import { usePersistentState } from "@/lib/usePersistentState";
-import { useAuth } from "@/contexts/AuthContext";
+import {
+  type ColumnDef,
+  type ColumnFiltersState,
+  flexRender,
+  getCoreRowModel,
+  getFilteredRowModel,
+  getSortedRowModel,
+  type SortingState,
+  useReactTable,
+  type VisibilityState,
+} from '@tanstack/react-table';
+import { ChevronDown } from 'lucide-react';
+import * as React from 'react';
+import { Button } from '@/components/ui/button';
+import {
+  DropdownMenu,
+  DropdownMenuCheckboxItem,
+  DropdownMenuContent,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
+import { Input } from '@/components/ui/input';
+import { Toggle } from '@/components/ui/toggle';
+import { useAuth } from '@/contexts/AuthContext';
+import { usePersistentState } from '@/lib/usePersistentState';
+import { moduleColumnsStatic } from './module-table-columns';
+import type { ModuleListRow } from './module-table-types';
 
 export function ModulesStaticTable({ rows }: { rows: ModuleListRow[] }) {
   const columns = React.useMemo<ColumnDef<ModuleListRow>[]>(() => moduleColumnsStatic, []);
   const { user } = useAuth();
-  const scope = user?.id ? `:u:${user.id}` : "";
-  const [sorting, setSorting] = usePersistentState<SortingState>(`tco:table:modules-static:sorting${scope}`, []);
-  const [columnFilters, setColumnFilters] = usePersistentState<ColumnFiltersState>(`tco:table:modules-static:filters${scope}`, []);
-  const [columnVisibility, setColumnVisibility] = usePersistentState<VisibilityState>(`tco:table:modules-static:visibility${scope}`, {});
-  const [selectedDomains, setSelectedDomains] = usePersistentState<string[]>(`tco:table:modules-static:facets:domains${scope}`, []);
-  const [selectedLevels, setSelectedLevels] = usePersistentState<string[]>(`tco:table:modules-static:facets:levels${scope}`, []);
-  const [maxTime, setMaxTime] = usePersistentState<number | null>(`tco:table:modules-static:facet:maxTime${scope}`, null);
+  const scope = user?.id ? `:u:${user.id}` : '';
+  const [sorting, setSorting] = usePersistentState<SortingState>(
+    `tco:table:modules-static:sorting${scope}`,
+    []
+  );
+  const [columnFilters, setColumnFilters] = usePersistentState<ColumnFiltersState>(
+    `tco:table:modules-static:filters${scope}`,
+    []
+  );
+  const [columnVisibility, setColumnVisibility] = usePersistentState<VisibilityState>(
+    `tco:table:modules-static:visibility${scope}`,
+    {}
+  );
+  const [selectedDomains, setSelectedDomains] = usePersistentState<string[]>(
+    `tco:table:modules-static:facets:domains${scope}`,
+    []
+  );
+  const [selectedLevels, setSelectedLevels] = usePersistentState<string[]>(
+    `tco:table:modules-static:facets:levels${scope}`,
+    []
+  );
+  const [maxTime, setMaxTime] = usePersistentState<number | null>(
+    `tco:table:modules-static:facet:maxTime${scope}`,
+    null
+  );
 
   const table = useReactTable({
     data: rows,
@@ -36,8 +71,11 @@ export function ModulesStaticTable({ rows }: { rows: ModuleListRow[] }) {
   });
 
   // Unique facet values
-  const uniqueDomains = React.useMemo(() => Array.from(new Set(rows.map(r => r.domain))), [rows]);
-  const uniqueLevels = React.useMemo(() => Array.from(new Set(rows.map(r => r.difficulty))), [rows]);
+  const uniqueDomains = React.useMemo(() => Array.from(new Set(rows.map((r) => r.domain))), [rows]);
+  const uniqueLevels = React.useMemo(
+    () => Array.from(new Set(rows.map((r) => r.difficulty))),
+    [rows]
+  );
 
   // Apply filters
   React.useEffect(() => {
@@ -65,11 +103,11 @@ export function ModulesStaticTable({ rows }: { rows: ModuleListRow[] }) {
   const filteredRows = React.useMemo(() => {
     const rows0 = table.getRowModel().rows;
     if (maxTime == null) return rows0;
-    return rows0.filter(r => {
+    return rows0.filter((r) => {
       const v = Number(r.getValue('estimatedTimeMinutes'));
       return !Number.isNaN(v) && v <= maxTime;
     });
-  }, [table.getRowModel().rows, maxTime]);
+  }, [maxTime, table]);
 
   return (
     <div className="space-y-3">
@@ -88,7 +126,11 @@ export function ModulesStaticTable({ rows }: { rows: ModuleListRow[] }) {
               key={d}
               size="sm"
               pressed={selectedDomains.includes(d)}
-              onPressedChange={(v) => setSelectedDomains(prev => v ? Array.from(new Set([...prev, d])) : prev.filter(x => x !== d))}
+              onPressedChange={(v) =>
+                setSelectedDomains((prev) =>
+                  v ? Array.from(new Set([...prev, d])) : prev.filter((x) => x !== d)
+                )
+              }
               className="data-[state=on]:bg-primary/20 data-[state=on]:text-primary"
             >
               {d}
@@ -103,7 +145,11 @@ export function ModulesStaticTable({ rows }: { rows: ModuleListRow[] }) {
               key={lv}
               size="sm"
               pressed={selectedLevels.includes(lv)}
-              onPressedChange={(v) => setSelectedLevels(prev => v ? Array.from(new Set([...prev, lv])) : prev.filter(x => x !== lv))}
+              onPressedChange={(v) =>
+                setSelectedLevels((prev) =>
+                  v ? Array.from(new Set([...prev, lv])) : prev.filter((x) => x !== lv)
+                )
+              }
               className="data-[state=on]:bg-primary/20 data-[state=on]:text-primary"
             >
               {lv}
@@ -159,15 +205,18 @@ export function ModulesStaticTable({ rows }: { rows: ModuleListRow[] }) {
             <DropdownMenuContent align="end">
               <DropdownMenuLabel>Toggle columns</DropdownMenuLabel>
               <DropdownMenuSeparator />
-              {table.getAllLeafColumns().filter((c) => c.getCanHide()).map((column) => (
-                <DropdownMenuCheckboxItem
-                  key={column.id}
-                  checked={column.getIsVisible()}
-                  onCheckedChange={(v) => column.toggleVisibility(!!v)}
-                >
-                  {column.columnDef.header as any}
-                </DropdownMenuCheckboxItem>
-              ))}
+              {table
+                .getAllLeafColumns()
+                .filter((c) => c.getCanHide())
+                .map((column) => (
+                  <DropdownMenuCheckboxItem
+                    key={column.id}
+                    checked={column.getIsVisible()}
+                    onCheckedChange={(v) => column.toggleVisibility(!!v)}
+                  >
+                    {column.columnDef.header as any}
+                  </DropdownMenuCheckboxItem>
+                ))}
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
@@ -185,7 +234,11 @@ export function ModulesStaticTable({ rows }: { rows: ModuleListRow[] }) {
                     onClick={header.column.getToggleSortingHandler()}
                   >
                     {flexRender(header.column.columnDef.header, header.getContext())}
-                    {header.column.getIsSorted() === "asc" ? " ↑" : header.column.getIsSorted() === "desc" ? " ↓" : ""}
+                    {header.column.getIsSorted() === 'asc'
+                      ? ' ↑'
+                      : header.column.getIsSorted() === 'desc'
+                        ? ' ↓'
+                        : ''}
                   </th>
                 ))}
               </tr>

@@ -172,7 +172,7 @@ export async function generateDomainByWeekHeatmap(userId: string): Promise<Perfo
 
     if (saveError) throw saveError;
 
-    return camelCaseKeys(savedHeatmap) as PerformanceHeatmap;
+    return camelCaseKeys(savedHeatmap);
   } catch (error) {
     console.error('Error generating domain by week heatmap:', error);
     throw error;
@@ -196,11 +196,13 @@ export async function generateTopicByDifficultyHeatmap(
     if (error) throw error;
 
     // Group by topic and difficulty
-    const topicDifficultyData: Record<string, Record<string, { correct: number; total: number }>> =
-      {};
+    const topicDifficultyData: Record<
+      string,
+      Record<string, { correct: number; total: number }>
+    > = {};
 
     for (const attempt of attempts || []) {
-      const question = (attempt as any).question;
+      const { question } = attempt as any;
       if (!question) continue;
 
       const topic = question.topic || 'General';
@@ -274,7 +276,7 @@ export async function generateTopicByDifficultyHeatmap(
 
     if (saveError) throw saveError;
 
-    return camelCaseKeys(savedHeatmap) as PerformanceHeatmap;
+    return camelCaseKeys(savedHeatmap);
   } catch (error) {
     console.error('Error generating topic by difficulty heatmap:', error);
     throw error;
@@ -373,7 +375,7 @@ export async function generateLearningObjectiveHeatmap(
 
     if (saveError) throw saveError;
 
-    return camelCaseKeys(savedHeatmap) as PerformanceHeatmap;
+    return camelCaseKeys(savedHeatmap);
   } catch (error) {
     console.error('Error generating learning objective heatmap:', error);
     throw error;
@@ -404,7 +406,7 @@ export async function getHeatmap(
       throw error;
     }
 
-    return camelCaseKeys(data) as PerformanceHeatmap;
+    return camelCaseKeys(data);
   } catch (error) {
     console.error('Error fetching heatmap:', error);
     throw error;
@@ -424,7 +426,7 @@ export async function getAllHeatmaps(userId: string): Promise<PerformanceHeatmap
 
     if (error) throw error;
 
-    return (data || []).map((item) => camelCaseKeys(item)) as PerformanceHeatmap[];
+    return (data || []).map((item) => camelCaseKeys(item));
   } catch (error) {
     console.error('Error fetching all heatmaps:', error);
     throw error;

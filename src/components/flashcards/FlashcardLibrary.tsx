@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 /**
  * Flashcard Library Component
@@ -13,20 +13,6 @@
  * - Statistics and analytics
  */
 
-import { useState, useEffect } from "react";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Progress } from "@/components/ui/progress";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { Input } from "@/components/ui/input";
 import {
   BookOpen,
   Brain,
@@ -36,18 +22,32 @@ import {
   Filter,
   Search,
   TrendingUp,
-} from "lucide-react";
-import type {
-  FlashcardLibraryWithProgress,
-  LibraryFlashcardStats,
-  FlashcardLibraryDomain,
-  FlashcardLibraryDifficulty,
-} from "@/types/flashcard-library";
+} from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Progress } from '@/components/ui/progress';
 import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import {
+  getLibraryFlashcardStats,
   getLibraryFlashcards,
   getLibraryFlashcardsWithProgress,
-  getLibraryFlashcardStats,
-} from "@/lib/flashcard-library-service";
+} from '@/lib/flashcard-library-service';
+import type {
+  FlashcardLibraryDifficulty,
+  FlashcardLibraryDomain,
+  FlashcardLibraryWithProgress,
+  LibraryFlashcardStats,
+} from '@/types/flashcard-library';
 
 interface FlashcardLibraryProps {
   userId?: string;
@@ -61,11 +61,11 @@ export default function FlashcardLibrary({ userId, onStartReview }: FlashcardLib
   const [loading, setLoading] = useState(true);
 
   // Filters
-  const [selectedDomain, setSelectedDomain] = useState<FlashcardLibraryDomain | "all">("all");
-  const [selectedDifficulty, setSelectedDifficulty] = useState<FlashcardLibraryDifficulty | "all">(
-    "all"
+  const [selectedDomain, setSelectedDomain] = useState<FlashcardLibraryDomain | 'all'>('all');
+  const [selectedDifficulty, setSelectedDifficulty] = useState<FlashcardLibraryDifficulty | 'all'>(
+    'all'
   );
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useState('');
   const [showOnlyDue, setShowOnlyDue] = useState(false);
   const [showOnlyNew, setShowOnlyNew] = useState(false);
 
@@ -75,14 +75,14 @@ export default function FlashcardLibrary({ userId, onStartReview }: FlashcardLib
   // Load data
   useEffect(() => {
     loadFlashcardsAndStats();
-  }, [userId, selectedDomain, selectedDifficulty, searchQuery, showOnlyDue, showOnlyNew]);
+  }, [loadFlashcardsAndStats]);
 
   async function loadFlashcardsAndStats() {
     setLoading(true);
 
     const filters = {
-      domains: selectedDomain !== "all" ? [selectedDomain] : undefined,
-      difficulty: selectedDifficulty !== "all" ? [selectedDifficulty] : undefined,
+      domains: selectedDomain !== 'all' ? [selectedDomain] : undefined,
+      difficulty: selectedDifficulty !== 'all' ? [selectedDifficulty] : undefined,
       searchQuery: searchQuery || undefined,
       limit: 50,
     };
@@ -212,7 +212,7 @@ export default function FlashcardLibrary({ userId, onStartReview }: FlashcardLib
 
       {/* Main Content */}
       <Tabs defaultValue="browse" className="w-full">
-        <TabsList className={isBrowseMode ? "w-full" : "grid w-full grid-cols-3"}>
+        <TabsList className={isBrowseMode ? 'w-full' : 'grid w-full grid-cols-3'}>
           <TabsTrigger value="browse">Browse Library</TabsTrigger>
           {!isBrowseMode && (
             <>
@@ -249,7 +249,7 @@ export default function FlashcardLibrary({ userId, onStartReview }: FlashcardLib
                 <Select
                   value={selectedDomain}
                   onValueChange={(value) =>
-                    setSelectedDomain(value as FlashcardLibraryDomain | "all")
+                    setSelectedDomain(value as FlashcardLibraryDomain | 'all')
                   }
                 >
                   <SelectTrigger>
@@ -269,7 +269,7 @@ export default function FlashcardLibrary({ userId, onStartReview }: FlashcardLib
                 <Select
                   value={selectedDifficulty}
                   onValueChange={(value) =>
-                    setSelectedDifficulty(value as FlashcardLibraryDifficulty | "all")
+                    setSelectedDifficulty(value as FlashcardLibraryDifficulty | 'all')
                   }
                 >
                   <SelectTrigger>
@@ -286,7 +286,7 @@ export default function FlashcardLibrary({ userId, onStartReview }: FlashcardLib
                 {/* Quick Filters */}
                 <div className="flex gap-2">
                   <Button
-                    variant={showOnlyDue ? "default" : "outline"}
+                    variant={showOnlyDue ? 'default' : 'outline'}
                     size="sm"
                     onClick={() => setShowOnlyDue(!showOnlyDue)}
                   >
@@ -294,7 +294,7 @@ export default function FlashcardLibrary({ userId, onStartReview }: FlashcardLib
                     Due Only
                   </Button>
                   <Button
-                    variant={showOnlyNew ? "default" : "outline"}
+                    variant={showOnlyNew ? 'default' : 'outline'}
                     size="sm"
                     onClick={() => setShowOnlyNew(!showOnlyNew)}
                   >
@@ -328,11 +328,11 @@ export default function FlashcardLibrary({ userId, onStartReview }: FlashcardLib
                     <CardHeader className="pb-3">
                       <div className="flex items-start justify-between">
                         <div className="flex-1">
-                          <CardTitle className={`text-sm ${!isFlipped ? "line-clamp-2" : ""}`}>
+                          <CardTitle className={`text-sm ${!isFlipped ? 'line-clamp-2' : ''}`}>
                             {isFlipped ? item.card.back : item.card.front}
                           </CardTitle>
                           <CardDescription className="mt-1 text-xs">
-                            {item.card.domain.replace(/_/g, " ")}
+                            {item.card.domain.replace(/_/g, ' ')}
                             {isFlipped && (
                               <span className="ml-2 font-medium text-primary">(Answer)</span>
                             )}
@@ -353,9 +353,9 @@ export default function FlashcardLibrary({ userId, onStartReview }: FlashcardLib
                       {/* Difficulty Badge */}
                       <div className="flex gap-2">
                         <Badge
-                          variant={item.card.difficulty === "hard" ? "destructive" : "secondary"}
+                          variant={item.card.difficulty === 'hard' ? 'destructive' : 'secondary'}
                         >
-                          {item.card.difficulty || "medium"}
+                          {item.card.difficulty || 'medium'}
                         </Badge>
                         {item.isNew && <Badge variant="outline">New</Badge>}
                         {item.isDue && !item.isNew && (
@@ -387,7 +387,7 @@ export default function FlashcardLibrary({ userId, onStartReview }: FlashcardLib
                               <span className="font-medium">
                                 {item.daysUntilReview! > 0
                                   ? `${item.daysUntilReview} days`
-                                  : "Today"}
+                                  : 'Today'}
                               </span>
                             </div>
                           )}
@@ -470,7 +470,7 @@ export default function FlashcardLibrary({ userId, onStartReview }: FlashcardLib
                 <div key={domainStat.domain} className="space-y-2">
                   <div className="flex justify-between text-sm">
                     <span className="font-medium capitalize">
-                      {domainStat.domain.replace(/_/g, " ")}
+                      {domainStat.domain.replace(/_/g, ' ')}
                     </span>
                     <span className="text-muted-foreground">
                       {domainStat.started}/{domainStat.total} cards • {domainStat.accuracy}%
@@ -494,7 +494,7 @@ export default function FlashcardLibrary({ userId, onStartReview }: FlashcardLib
                   <div className="flex justify-between text-sm">
                     <span className="font-medium capitalize">{difficultyStat.difficulty}</span>
                     <span className="text-muted-foreground">
-                      {difficultyStat.started}/{difficultyStat.total} cards •{" "}
+                      {difficultyStat.started}/{difficultyStat.total} cards •{' '}
                       {difficultyStat.accuracy}% accuracy
                     </span>
                   </div>

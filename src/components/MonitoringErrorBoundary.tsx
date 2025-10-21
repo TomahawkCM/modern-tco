@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import React from "react";
-import { trackEvent } from "@/lib/monitoring";
+import React from 'react';
+import { trackEvent } from '@/lib/monitoring';
 
 type Props = { children: React.ReactNode };
 
@@ -19,8 +19,12 @@ export class MonitoringErrorBoundary extends React.Component<Props, State> {
 
   override componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
     trackEvent({
-      type: "client_error",
-      data: { message: error.message, stack: error.stack, componentStack: errorInfo.componentStack },
+      type: 'client_error',
+      data: {
+        message: error.message,
+        stack: error.stack,
+        componentStack: errorInfo.componentStack,
+      },
     });
   }
 
@@ -37,4 +41,3 @@ export class MonitoringErrorBoundary extends React.Component<Props, State> {
 }
 
 export default MonitoringErrorBoundary;
-

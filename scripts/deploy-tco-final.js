@@ -1,48 +1,48 @@
-const { createClient } = require("@supabase/supabase-js");
+const { createClient } = require('@supabase/supabase-js');
 
 // Use the correct project from .env.local (qnwcwoutgarhqxlgsjzs)
-const supabaseUrl = "https://qnwcwoutgarhqxlgsjzs.supabase.co";
+const supabaseUrl = 'https://qnwcwoutgarhqxlgsjzs.supabase.co';
 const supabaseServiceKey =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFud2N3b3V0Z2FyaHF4bGdzanpzIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc1NjY3MzQyOCwiZXhwIjoyMDcyMjQ5NDI4fQ.U_FDgUC__dtFPVd5jrTpmwaWiDWJ701w4lRbe4qy1T4";
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFud2N3b3V0Z2FyaHF4bGdzanpzIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc1NjY3MzQyOCwiZXhwIjoyMDcyMjQ5NDI4fQ.U_FDgUC__dtFPVd5jrTpmwaWiDWJ701w4lRbe4qy1T4';
 
-console.log("🚀 Final TCO Database Schema Deployment");
-console.log("📍 Project: qnwcwoutgarhqxlgsjzs");
-console.log("🔗 URL:", supabaseUrl);
-console.log("");
+console.log('🚀 Final TCO Database Schema Deployment');
+console.log('📍 Project: qnwcwoutgarhqxlgsjzs');
+console.log('🔗 URL:', supabaseUrl);
+console.log('');
 
 const supabase = createClient(supabaseUrl, supabaseServiceKey, {
   auth: { autoRefreshToken: false, persistSession: false },
 });
 
 async function deploySchema() {
-  console.log("🔍 Testing connection...");
+  console.log('🔍 Testing connection...');
 
   try {
     // Test with a simple query that should work
     const { data, error } = await supabase
-      .from("information_schema.tables")
-      .select("table_name")
-      .eq("table_schema", "public")
+      .from('information_schema.tables')
+      .select('table_name')
+      .eq('table_schema', 'public')
       .limit(1);
 
-    if (error && !error.message.includes("relation") && !error.message.includes("does not exist")) {
-      console.log("❌ Connection failed:", error.message);
+    if (error && !error.message.includes('relation') && !error.message.includes('does not exist')) {
+      console.log('❌ Connection failed:', error.message);
       return;
     }
 
-    console.log("✅ Connection successful!");
-    console.log("");
+    console.log('✅ Connection successful!');
+    console.log('');
 
     // Execute schema creation using raw SQL
-    console.log("📝 Creating database schema...");
+    console.log('📝 Creating database schema...');
 
     const schemaSQLs = [
       {
-        name: "UUID Extension",
+        name: 'UUID Extension',
         sql: 'CREATE EXTENSION IF NOT EXISTS "uuid-ossp";',
       },
       {
-        name: "study_domains table",
+        name: 'study_domains table',
         sql: `CREATE TABLE IF NOT EXISTS study_domains (
           id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
           domain_number INTEGER NOT NULL UNIQUE,
@@ -54,7 +54,7 @@ async function deploySchema() {
         );`,
       },
       {
-        name: "study_modules table",
+        name: 'study_modules table',
         sql: `CREATE TABLE IF NOT EXISTS study_modules (
           id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
           domain_id UUID NOT NULL REFERENCES study_domains(id) ON DELETE CASCADE,
@@ -69,7 +69,7 @@ async function deploySchema() {
         );`,
       },
       {
-        name: "study_sections table",
+        name: 'study_sections table',
         sql: `CREATE TABLE IF NOT EXISTS study_sections (
           id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
           module_id UUID NOT NULL REFERENCES study_modules(id) ON DELETE CASCADE,
@@ -81,7 +81,7 @@ async function deploySchema() {
         );`,
       },
       {
-        name: "practice_questions table",
+        name: 'practice_questions table',
         sql: `CREATE TABLE IF NOT EXISTS practice_questions (
           id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
           domain_id UUID NOT NULL REFERENCES study_domains(id) ON DELETE CASCADE,
@@ -97,14 +97,14 @@ async function deploySchema() {
         );`,
       },
       {
-        name: "Performance indexes",
+        name: 'Performance indexes',
         sql: `CREATE INDEX IF NOT EXISTS idx_study_modules_domain_id ON study_modules(domain_id);
               CREATE INDEX IF NOT EXISTS idx_study_sections_module_id ON study_sections(module_id);
               CREATE INDEX IF NOT EXISTS idx_practice_questions_domain_id ON practice_questions(domain_id);
               CREATE INDEX IF NOT EXISTS idx_practice_questions_module_id ON practice_questions(module_id);`,
       },
       {
-        name: "TCO Domain Data",
+        name: 'TCO Domain Data',
         sql: `INSERT INTO study_domains (domain_number, title, exam_weight, estimated_time_minutes) VALUES
               (1, 'Asking Questions', 22, 180),
               (2, 'Refining Questions & Targeting', 23, 200), 
@@ -118,14 +118,14 @@ async function deploySchema() {
                 updated_at = NOW();`,
       },
       {
-        name: "Row Level Security",
+        name: 'Row Level Security',
         sql: `ALTER TABLE study_domains ENABLE ROW LEVEL SECURITY;
               ALTER TABLE study_modules ENABLE ROW LEVEL SECURITY;
               ALTER TABLE study_sections ENABLE ROW LEVEL SECURITY;
               ALTER TABLE practice_questions ENABLE ROW LEVEL SECURITY;`,
       },
       {
-        name: "Public Read Policies",
+        name: 'Public Read Policies',
         sql: `DROP POLICY IF EXISTS "Enable read access for all users" ON study_domains;
               DROP POLICY IF EXISTS "Enable read access for all users" ON study_modules;
               DROP POLICY IF EXISTS "Enable read access for all users" ON study_sections;
@@ -141,7 +141,7 @@ async function deploySchema() {
     for (const { name, sql } of schemaSQLs) {
       try {
         console.log(`📝 Creating ${name}...`);
-        const { error } = await supabase.rpc("exec", { sql });
+        const { error } = await supabase.rpc('exec', { sql });
 
         if (error) {
           console.log(`❌ Failed ${name}: ${error.message}`);
@@ -154,15 +154,15 @@ async function deploySchema() {
     }
 
     // Verify deployment
-    console.log("");
-    console.log("🔍 Verifying deployment...");
+    console.log('');
+    console.log('🔍 Verifying deployment...');
     const { data: domains, error: domainsError } = await supabase
-      .from("study_domains")
-      .select("*")
-      .order("domain_number");
+      .from('study_domains')
+      .select('*')
+      .order('domain_number');
 
     if (domainsError) {
-      console.log("❌ Verification failed:", domainsError.message);
+      console.log('❌ Verification failed:', domainsError.message);
     } else {
       console.log(`✅ Found ${domains?.length || 0} TCO domains`);
       domains?.forEach((domain) => {
@@ -172,10 +172,10 @@ async function deploySchema() {
       });
     }
 
-    console.log("");
-    console.log("🎉 TCO Database Schema Deployment Complete!");
+    console.log('');
+    console.log('🎉 TCO Database Schema Deployment Complete!');
   } catch (err) {
-    console.log("❌ Deployment failed:", err.message);
+    console.log('❌ Deployment failed:', err.message);
   }
 }
 

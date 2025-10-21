@@ -1,5 +1,6 @@
-import { NextRequest, NextResponse } from "next/server";
-import { supabase } from "@/lib/supabase";
+import type { NextRequest } from 'next/server';
+import { NextResponse } from 'next/server';
+import { supabase } from '@/lib/supabase';
 
 /**
  * Search Analytics API
@@ -34,7 +35,7 @@ type SearchEventInsert = {
   filters_used: Record<string, unknown> | null;
 };
 
-const SEARCH_EVENTS_TABLE = "search_events" as const;
+const SEARCH_EVENTS_TABLE = 'search_events' as const;
 
 export async function POST(req: NextRequest) {
   try {
@@ -42,16 +43,13 @@ export async function POST(req: NextRequest) {
     const body: AnalyticsPayload = await req.json();
 
     // Validate required fields
-    if (!body.query || typeof body.query !== "string") {
-      return NextResponse.json(
-        { error: "Missing or invalid query field" },
-        { status: 400 }
-      );
+    if (!body.query || typeof body.query !== 'string') {
+      return NextResponse.json({ error: 'Missing or invalid query field' }, { status: 400 });
     }
 
     // Validate optional fields
     if (body.clicked_result_type) {
-      const validTypes = ["modules", "sections", "flashcards", "questions", "glossary"];
+      const validTypes = ['modules', 'sections', 'flashcards', 'questions', 'glossary'];
       if (!validTypes.includes(body.clicked_result_type)) {
         return NextResponse.json(
           {
@@ -62,16 +60,16 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    if (body.clicked_result_id && typeof body.clicked_result_id !== "string") {
+    if (body.clicked_result_id && typeof body.clicked_result_id !== 'string') {
       return NextResponse.json(
-        { error: "Invalid clicked_result_id. Must be a UUID string." },
+        { error: 'Invalid clicked_result_id. Must be a UUID string.' },
         { status: 400 }
       );
     }
 
     // Insert analytics event
-    const client = supabase as any;
-    const { error } = await client.from(SEARCH_EVENTS_TABLE).insert({
+
+    const { error } = await (supabase as any).from(SEARCH_EVENTS_TABLE).insert({
       query: body.query.trim(),
       clicked_result_type: body.clicked_result_type ?? null,
       clicked_result_id: body.clicked_result_id ?? null,
@@ -81,33 +79,27 @@ export async function POST(req: NextRequest) {
     } satisfies SearchEventInsert);
 
     if (error) {
-      console.error("[Search Analytics] Database error:", error);
-      return NextResponse.json(
-        { error: "Failed to log analytics event" },
-        { status: 500 }
-      );
+      console.error('[Search Analytics] Database error:', error);
+      return NextResponse.json({ error: 'Failed to log analytics event' }, { status: 500 });
     }
 
     return NextResponse.json({ success: true }, { status: 200 });
   } catch (error) {
-    console.error("[Search Analytics] Unexpected error:", error);
-    return NextResponse.json(
-      { error: "An unexpected error occurred" },
-      { status: 500 }
-    );
+    console.error('[Search Analytics] Unexpected error:', error);
+    return NextResponse.json({ error: 'An unexpected error occurred' }, { status: 500 });
   }
 }
 
 /**
  * OPTIONS handler for CORS preflight
  */
-export async function OPTIONS() {
+export function OPTIONS() {
   return new NextResponse(null, {
     status: 204,
     headers: {
-      Allow: "POST, OPTIONS",
-      "Access-Control-Allow-Methods": "POST, OPTIONS",
-      "Access-Control-Allow-Headers": "Content-Type, Authorization",
+      Allow: 'POST, OPTIONS',
+      'Access-Control-Allow-Methods': 'POST, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type, Authorization',
     },
   });
 }

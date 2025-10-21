@@ -1,18 +1,23 @@
-"use client";
+'use client';
 
-import * as React from "react";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
-import { HelpCircle, Info } from "lucide-react";
+import { HelpCircle, Info } from 'lucide-react';
+import * as React from 'react';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 
 interface HelpTooltipProps {
   content: React.ReactNode;
   children?: React.ReactNode;
 }
 
-export const HelpTooltip = React.memo(function HelpTooltip({ content, children }: HelpTooltipProps) {
+export const HelpTooltip = React.memo(function HelpTooltip({
+  content,
+  children,
+}: HelpTooltipProps) {
   return (
     <div className="group relative inline-flex items-center">
-      {children || <HelpCircle className="h-4 w-4 text-muted-foreground hover:text-muted-foreground cursor-help" />}
+      {children || (
+        <HelpCircle className="h-4 w-4 text-muted-foreground hover:text-muted-foreground cursor-help" />
+      )}
       <div className="invisible group-hover:visible absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 z-50">
         <div className="bg-card text-foreground text-sm rounded-lg py-2 px-3 max-w-xs whitespace-normal shadow-lg border border-gray-700">
           {content}
@@ -24,20 +29,20 @@ export const HelpTooltip = React.memo(function HelpTooltip({ content, children }
 });
 
 interface ExamTooltipProps {
-  type: "time" | "mode" | "progress" | "help";
+  type: 'time' | 'mode' | 'progress' | 'help';
   context: string;
-  side?: "top" | "right" | "bottom" | "left";
+  side?: 'top' | 'right' | 'bottom' | 'left';
   children?: React.ReactNode;
 }
 
-export function ExamTooltip({ type, context, side = "top", children }: ExamTooltipProps) {
+export function ExamTooltip({ type, context, side = 'top', children }: ExamTooltipProps) {
   const getIcon = () => {
     switch (type) {
-      case "time":
+      case 'time':
         return <HelpCircle className="h-3 w-3 text-primary hover:text-primary" />;
-      case "mode":
+      case 'mode':
         return <Info className="h-3 w-3 text-[#22c55e] hover:text-[#22c55e]" />;
-      case "progress":
+      case 'progress':
         return <HelpCircle className="h-3 w-3 text-primary hover:text-primary" />;
       default:
         return <HelpCircle className="h-3 w-3 text-muted-foreground hover:text-muted-foreground" />;
@@ -48,9 +53,7 @@ export function ExamTooltip({ type, context, side = "top", children }: ExamToolt
     <TooltipProvider>
       <Tooltip>
         <TooltipTrigger>
-          <div className="inline-flex items-center">
-            {children ?? getIcon()}
-          </div>
+          <div className="inline-flex items-center">{children ?? getIcon()}</div>
         </TooltipTrigger>
         <TooltipContent side={side}>
           <p className="max-w-sm">{context}</p>

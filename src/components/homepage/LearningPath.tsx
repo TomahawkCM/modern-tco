@@ -1,87 +1,87 @@
-"use client";
+'use client';
 
-import { motion } from "framer-motion";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Progress } from "@/components/ui/progress";
+import { motion } from 'framer-motion';
 import {
-  BookOpen,
-  Target,
-  Zap,
-  Shield,
-  BarChart3,
   ArrowRight,
+  BarChart3,
+  BookOpen,
   CheckCircle,
   Clock,
-  Users,
+  Shield,
   Star,
-} from "lucide-react";
-import Link from "next/link";
+  Target,
+  Users,
+  Zap,
+} from 'lucide-react';
+import Link from 'next/link';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Progress } from '@/components/ui/progress';
 
 const tcoDomains = [
   {
-    id: "questions",
-    title: "Questions & Sensors",
-    description: "Master the art of querying endpoints and gathering intelligence",
-    weight: "22%",
+    id: 'questions',
+    title: 'Questions & Sensors',
+    description: 'Master the art of querying endpoints and gathering intelligence',
+    weight: '22%',
     icon: Target,
-    color: "from-blue-500 to-primary",
-    skills: ["Question syntax", "Sensor deployment", "Data collection", "Performance optimization"],
-    estimatedTime: "6-8 hours",
-    difficulty: "Beginner",
+    color: 'from-blue-500 to-primary',
+    skills: ['Question syntax', 'Sensor deployment', 'Data collection', 'Performance optimization'],
+    estimatedTime: '6-8 hours',
+    difficulty: 'Beginner',
     labs: 8,
     progress: 0,
   },
   {
-    id: "targeting",
-    title: "Computer Group Targeting",
-    description: "Learn to precisely target endpoints for maximum operational efficiency",
-    weight: "23%",
+    id: 'targeting',
+    title: 'Computer Group Targeting',
+    description: 'Learn to precisely target endpoints for maximum operational efficiency',
+    weight: '23%',
     icon: Users,
-    color: "from-primary to-teal-500",
-    skills: ["Group creation", "Dynamic targeting", "Filter logic", "Saved question groups"],
-    estimatedTime: "7-9 hours",
-    difficulty: "Intermediate",
+    color: 'from-primary to-teal-500',
+    skills: ['Group creation', 'Dynamic targeting', 'Filter logic', 'Saved question groups'],
+    estimatedTime: '7-9 hours',
+    difficulty: 'Intermediate',
     labs: 12,
     progress: 0,
   },
   {
-    id: "actions",
-    title: "Actions & Packages",
-    description: "Deploy solutions and remediate issues across your infrastructure",
-    weight: "15%",
+    id: 'actions',
+    title: 'Actions & Packages',
+    description: 'Deploy solutions and remediate issues across your infrastructure',
+    weight: '15%',
     icon: Zap,
-    color: "from-teal-500 to-green-500",
-    skills: ["Action deployment", "Package creation", "Content management", "Approval workflows"],
-    estimatedTime: "5-7 hours",
-    difficulty: "Intermediate",
+    color: 'from-teal-500 to-green-500',
+    skills: ['Action deployment', 'Package creation', 'Content management', 'Approval workflows'],
+    estimatedTime: '5-7 hours',
+    difficulty: 'Intermediate',
     labs: 10,
     progress: 0,
   },
   {
-    id: "navigation",
-    title: "Console Navigation",
-    description: "Navigate the Tanium Console like a pro and maximize productivity",
-    weight: "23%",
+    id: 'navigation',
+    title: 'Console Navigation',
+    description: 'Navigate the Tanium Console like a pro and maximize productivity',
+    weight: '23%',
     icon: Shield,
-    color: "from-green-500 to-emerald-500",
-    skills: ["Interface mastery", "Workflow optimization", "Keyboard shortcuts", "Customization"],
-    estimatedTime: "4-6 hours",
-    difficulty: "Beginner",
+    color: 'from-green-500 to-emerald-500',
+    skills: ['Interface mastery', 'Workflow optimization', 'Keyboard shortcuts', 'Customization'],
+    estimatedTime: '4-6 hours',
+    difficulty: 'Beginner',
     labs: 6,
     progress: 0,
   },
   {
-    id: "reporting",
-    title: "Reporting & Analytics",
-    description: "Generate insights and reports that drive strategic decisions",
-    weight: "17%",
+    id: 'reporting',
+    title: 'Reporting & Analytics',
+    description: 'Generate insights and reports that drive strategic decisions',
+    weight: '17%',
     icon: BarChart3,
-    color: "from-emerald-500 to-blue-500",
-    skills: ["Report creation", "Dashboard design", "Data visualization", "Scheduled reports"],
-    estimatedTime: "5-7 hours",
-    difficulty: "Advanced",
+    color: 'from-emerald-500 to-blue-500',
+    skills: ['Report creation', 'Dashboard design', 'Data visualization', 'Scheduled reports'],
+    estimatedTime: '5-7 hours',
+    difficulty: 'Advanced',
     labs: 9,
     progress: 0,
   },
@@ -90,14 +90,14 @@ const tcoDomains = [
 export function LearningPath() {
   const getDifficultyColor = (difficulty: string) => {
     switch (difficulty) {
-      case "Beginner":
-        return "bg-[#22c55e]/20 text-[#22c55e] border-[#22c55e]/30";
-      case "Intermediate":
-        return "bg-[#f97316]/20 text-[#f97316] border-[#f97316]/30";
-      case "Advanced":
-        return "bg-red-500/20 text-red-400 border-red-500/30";
+      case 'Beginner':
+        return 'bg-[#22c55e]/20 text-[#22c55e] border-[#22c55e]/30';
+      case 'Intermediate':
+        return 'bg-[#f97316]/20 text-[#f97316] border-[#f97316]/30';
+      case 'Advanced':
+        return 'bg-red-500/20 text-red-400 border-red-500/30';
       default:
-        return "bg-slate-500/20 text-muted-foreground border-slate-500/30";
+        return 'bg-slate-500/20 text-muted-foreground border-slate-500/30';
     }
   };
 

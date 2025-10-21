@@ -15,7 +15,7 @@ const TIMEOUT = 30000;
 const RESULTS_FILE = 'docs/knowledge-base/LIVE_APP_TEST_RESULTS.md';
 
 // Test results storage
-let testResults = {
+const testResults = {
   timestamp: new Date().toISOString(),
   url: BASE_URL,
   browser: 'Chromium (WSL2 Headless)',
@@ -25,8 +25,8 @@ let testResults = {
     total: 0,
     passed: 0,
     failed: 0,
-    warnings: 0
-  }
+    warnings: 0,
+  },
 };
 
 // Utility functions
@@ -36,7 +36,7 @@ function addTest(name, status, details, screenshot = null) {
     status, // 'PASS', 'FAIL', 'WARN'
     details,
     screenshot,
-    timestamp: new Date().toISOString()
+    timestamp: new Date().toISOString(),
   };
   testResults.tests.push(test);
   testResults.summary.total++;
@@ -69,7 +69,7 @@ async function waitForElement(page, selector, timeout = 10000) {
 
 async function runTests() {
   console.log('🚀 Starting Comprehensive Live Application Test Suite');
-  console.log('=' .repeat(60));
+  console.log('='.repeat(60));
   console.log(`🌐 Testing URL: ${BASE_URL}`);
   console.log(`🕒 Started: ${new Date().toLocaleString()}`);
   console.log('');
@@ -88,19 +88,19 @@ async function runTests() {
         '--headless=new',
         '--disable-web-security',
         '--no-first-run',
-        '--disable-extensions'
-      ]
+        '--disable-extensions',
+      ],
     });
 
     const context = await browser.newContext({
       viewport: { width: 1920, height: 1080 },
-      userAgent: 'Claude Code Test Suite (WSL2/Chromium)'
+      userAgent: 'Claude Code Test Suite (WSL2/Chromium)',
     });
 
     page = await context.newPage();
 
     // Enable request/response logging
-    page.on('response', response => {
+    page.on('response', (response) => {
       if (!response.ok()) {
         console.log(`❌ Failed request: ${response.status()} ${response.url()}`);
       }
@@ -114,7 +114,12 @@ async function runTests() {
     try {
       await page.goto(BASE_URL, { waitUntil: 'networkidle', timeout: TIMEOUT });
       const loadTime = Date.now() - startTime;
-      addTest('Initial Page Load', 'PASS', `Loaded in ${loadTime}ms`, await takeScreenshot(page, 'initial-load'));
+      addTest(
+        'Initial Page Load',
+        'PASS',
+        `Loaded in ${loadTime}ms`,
+        await takeScreenshot(page, 'initial-load')
+      );
 
       if (loadTime > 5000) {
         addTest('Load Performance', 'WARN', `Slow load time: ${loadTime}ms (>5s)`);
@@ -174,13 +179,21 @@ async function runTests() {
     // Test 7: Interactive elements
     const buttons = await page.$$('button, [role="button"], .button, .btn');
     const links = await page.$$('a[href]');
-    addTest('Interactive Elements', 'PASS', `Found ${buttons.length} buttons and ${links.length} links`);
+    addTest(
+      'Interactive Elements',
+      'PASS',
+      `Found ${buttons.length} buttons and ${links.length} links`
+    );
 
     // Test 8: Form elements (for assessment system)
     const forms = await page.$$('form, .form');
     const inputs = await page.$$('input, textarea, select');
     if (forms.length > 0 || inputs.length > 0) {
-      addTest('Form Elements', 'PASS', `Found ${forms.length} forms and ${inputs.length} input elements`);
+      addTest(
+        'Form Elements',
+        'PASS',
+        `Found ${forms.length} forms and ${inputs.length} input elements`
+      );
     } else {
       addTest('Form Elements', 'WARN', 'No form elements detected');
     }
@@ -192,7 +205,7 @@ async function runTests() {
     // Test 9: Look for TCO-specific content
     const pageText = await page.textContent('body');
     const tcoKeywords = ['tanium', 'tco', 'assessment', 'exam', 'practice', 'certification'];
-    const foundKeywords = tcoKeywords.filter(keyword =>
+    const foundKeywords = tcoKeywords.filter((keyword) =>
       pageText.toLowerCase().includes(keyword.toLowerCase())
     );
 
@@ -203,17 +216,29 @@ async function runTests() {
     }
 
     // Test 10: Assessment/Exam interface elements
-    const examElements = await page.$$('[class*="exam"], [class*="assessment"], [class*="question"], [class*="quiz"]');
+    const examElements = await page.$$(
+      '[class*="exam"], [class*="assessment"], [class*="question"], [class*="quiz"]'
+    );
     if (examElements.length > 0) {
-      addTest('Assessment Interface', 'PASS', `Found ${examElements.length} assessment-related elements`);
+      addTest(
+        'Assessment Interface',
+        'PASS',
+        `Found ${examElements.length} assessment-related elements`
+      );
     } else {
       addTest('Assessment Interface', 'WARN', 'No obvious assessment interface elements found');
     }
 
     // Test 11: Progress tracking elements
-    const progressElements = await page.$$('[class*="progress"], .progress-bar, [role="progressbar"]');
+    const progressElements = await page.$$(
+      '[class*="progress"], .progress-bar, [role="progressbar"]'
+    );
     if (progressElements.length > 0) {
-      addTest('Progress Tracking', 'PASS', `Found ${progressElements.length} progress tracking elements`);
+      addTest(
+        'Progress Tracking',
+        'PASS',
+        `Found ${progressElements.length} progress tracking elements`
+      );
     } else {
       addTest('Progress Tracking', 'WARN', 'No progress tracking elements detected');
     }
@@ -227,12 +252,14 @@ async function runTests() {
       const jsTest = await page.evaluate(() => {
         return {
           hasReact: typeof window.React !== 'undefined',
-          hasNext: typeof window.next !== 'undefined' || typeof window.__NEXT_DATA__ !== 'undefined',
+          hasNext:
+            typeof window.next !== 'undefined' || typeof window.__NEXT_DATA__ !== 'undefined',
           hasJQuery: typeof window.$ !== 'undefined',
           userAgent: navigator.userAgent,
           viewport: { width: window.innerWidth, height: window.innerHeight },
-          darkMode: document.documentElement.classList.contains('dark') ||
-                   document.body.classList.contains('dark')
+          darkMode:
+            document.documentElement.classList.contains('dark') ||
+            document.body.classList.contains('dark'),
         };
       });
 
@@ -243,28 +270,31 @@ async function runTests() {
       if (jsTest.darkMode) {
         addTest('Dark Mode Support', 'PASS', 'Dark mode implementation detected');
       }
-
     } catch (error) {
       addTest('JavaScript Execution', 'FAIL', `JS execution failed: ${error.message}`);
     }
 
     // Test 13: Network performance
     const networkRequests = [];
-    page.on('response', response => {
+    page.on('response', (response) => {
       networkRequests.push({
         url: response.url(),
         status: response.status(),
-        type: response.request().resourceType()
+        type: response.request().resourceType(),
       });
     });
 
     await page.reload({ waitUntil: 'networkidle' });
 
-    const failedRequests = networkRequests.filter(req => req.status >= 400);
+    const failedRequests = networkRequests.filter((req) => req.status >= 400);
     if (failedRequests.length === 0) {
       addTest('Network Requests', 'PASS', `All ${networkRequests.length} requests successful`);
     } else {
-      addTest('Network Requests', 'WARN', `${failedRequests.length}/${networkRequests.length} requests failed`);
+      addTest(
+        'Network Requests',
+        'WARN',
+        `${failedRequests.length}/${networkRequests.length} requests failed`
+      );
     }
 
     // Test 14: CSS and styling
@@ -289,11 +319,14 @@ async function runTests() {
       headings: await page.$$('h1, h2, h3, h4, h5, h6'),
       altImages: await page.$$('img[alt]'),
       ariaLabels: await page.$$('[aria-label]'),
-      focusableElements: await page.$$('a, button, input, select, textarea, [tabindex]')
+      focusableElements: await page.$$('a, button, input, select, textarea, [tabindex]'),
     };
 
-    addTest('Accessibility Elements', 'PASS',
-      `${accessibilityElements.headings.length} headings, ${accessibilityElements.altImages.length} alt images, ${accessibilityElements.ariaLabels.length} ARIA labels, ${accessibilityElements.focusableElements.length} focusable elements`);
+    addTest(
+      'Accessibility Elements',
+      'PASS',
+      `${accessibilityElements.headings.length} headings, ${accessibilityElements.altImages.length} alt images, ${accessibilityElements.ariaLabels.length} ARIA labels, ${accessibilityElements.focusableElements.length} focusable elements`
+    );
 
     // Test 16: Mobile responsiveness
     await page.setViewportSize({ width: 375, height: 667 }); // iPhone viewport
@@ -320,12 +353,15 @@ async function runTests() {
         localStorage: localStorage.getItem('test-key'),
         sessionStorage: sessionStorage.getItem('session-test'),
         localStorageKeys: Object.keys(localStorage).length,
-        sessionStorageKeys: Object.keys(sessionStorage).length
+        sessionStorageKeys: Object.keys(sessionStorage).length,
       }));
 
       if (storageTest.localStorage === 'test-value') {
-        addTest('Browser Storage', 'PASS',
-          `Storage functional - ${storageTest.localStorageKeys} localStorage, ${storageTest.sessionStorageKeys} sessionStorage items`);
+        addTest(
+          'Browser Storage',
+          'PASS',
+          `Storage functional - ${storageTest.localStorageKeys} localStorage, ${storageTest.sessionStorageKeys} sessionStorage items`
+        );
       }
     } catch (error) {
       addTest('Browser Storage', 'FAIL', `Storage test failed: ${error.message}`);
@@ -333,8 +369,8 @@ async function runTests() {
 
     // Test 18: Error handling
     const errorLogs = [];
-    page.on('pageerror', error => errorLogs.push(error));
-    page.on('console', msg => {
+    page.on('pageerror', (error) => errorLogs.push(error));
+    page.on('console', (msg) => {
       if (msg.type() === 'error') errorLogs.push(msg.text());
     });
 
@@ -349,7 +385,6 @@ async function runTests() {
     // Test 19: Final comprehensive screenshot
     const finalScreenshot = await takeScreenshot(page, 'final-comprehensive-view');
     addTest('Final Documentation', 'PASS', 'Comprehensive testing completed', finalScreenshot);
-
   } catch (error) {
     addTest('Test Suite Execution', 'FAIL', `Critical error: ${error.message}`);
     console.error('Critical test suite error:', error);
@@ -366,12 +401,14 @@ async function runTests() {
 async function generateReport() {
   console.log('');
   console.log('📊 Test Results Summary');
-  console.log('=' .repeat(60));
+  console.log('='.repeat(60));
   console.log(`✅ Passed: ${testResults.summary.passed}`);
   console.log(`❌ Failed: ${testResults.summary.failed}`);
   console.log(`⚠️  Warnings: ${testResults.summary.warnings}`);
   console.log(`📝 Total Tests: ${testResults.summary.total}`);
-  console.log(`🎯 Success Rate: ${((testResults.summary.passed / testResults.summary.total) * 100).toFixed(1)}%`);
+  console.log(
+    `🎯 Success Rate: ${((testResults.summary.passed / testResults.summary.total) * 100).toFixed(1)}%`
+  );
 
   // Create markdown report
   let markdown = `# Live Application Test Results\n\n`;
@@ -406,19 +443,19 @@ async function generateReport() {
   markdown += `## Recommendations for Other Sessions\n\n`;
   markdown += `### Key Findings:\n`;
 
-  const criticalFailures = testResults.tests.filter(t => t.status === 'FAIL');
-  const warnings = testResults.tests.filter(t => t.status === 'WARN');
+  const criticalFailures = testResults.tests.filter((t) => t.status === 'FAIL');
+  const warnings = testResults.tests.filter((t) => t.status === 'WARN');
 
   if (criticalFailures.length > 0) {
     markdown += `\n**🚨 Critical Issues** (${criticalFailures.length}):\n`;
-    criticalFailures.forEach(test => {
+    criticalFailures.forEach((test) => {
       markdown += `- ${test.name}: ${test.details}\n`;
     });
   }
 
   if (warnings.length > 0) {
     markdown += `\n**⚠️ Areas for Attention** (${warnings.length}):\n`;
-    warnings.forEach(test => {
+    warnings.forEach((test) => {
       markdown += `- ${test.name}: ${test.details}\n`;
     });
   }

@@ -21,10 +21,7 @@
     },
     "sqlite-tanium": {
       "command": "/home/robne/projects/active/tanium-tco/modern-tco/docker/mcp-sqlite-tanium/docker-mcp-wrapper.sh",
-      "args": [
-        "--db-path",
-        "/data/db/tanium_tco.db"
-      ],
+      "args": ["--db-path", "/data/db/tanium_tco.db"],
       "env": {
         "SQLITE_DATABASE_PATH": "/data/db/tanium_tco.db"
       }

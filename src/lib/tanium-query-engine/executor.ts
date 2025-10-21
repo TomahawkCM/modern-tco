@@ -3,19 +3,19 @@
  * High-performance query execution with optimization
  */
 
+import { getDbColumn, resolveGroupAlias, validateFieldOperator } from './field-mappings';
 import {
-  type QueryNode,
-  type QueryResult,
-  type QueryPlan,
+  type AggregateNode,
   ExecutionError,
-  type ExecutorOptions,
-  type MachineData,
   type ExecutionMetrics,
-  type QueryWarning,
+  type ExecutorOptions,
   type FilterNode,
-  type AggregateNode
+  type MachineData,
+  type QueryNode,
+  type QueryPlan,
+  type QueryResult,
+  type QueryWarning,
 } from './types';
-import { getFieldMapping, getDbColumn, validateFieldOperator, resolveGroupAlias } from './field-mappings';
 
 export class QueryExecutor {
   private data: MachineData[] = [];
@@ -32,7 +32,7 @@ export class QueryExecutor {
       cacheTTL: 60000,
       explainOnly: false,
       format: 'json',
-      ...options
+      ...options,
     };
     this.metrics = this.initMetrics();
   }
@@ -49,7 +49,7 @@ export class QueryExecutor {
       scoped: 0,
       filtered: 0,
       rowsExamined: 0,
-      cacheHit: false
+      cacheHit: false,
     };
   }
 
@@ -100,7 +100,7 @@ export class QueryExecutor {
       cost: this.data.length,
       rows: this.data.length,
       width: 100,
-      children: []
+      children: [],
     };
 
     // Add scope filtering
@@ -110,7 +110,7 @@ export class QueryExecutor {
         cost: plan.rows * 0.1,
         rows: Math.floor(plan.rows * 0.3), // Estimate 30% match
         width: plan.width,
-        details: { scope: query.from.scope.value }
+        details: { scope: query.from.scope.value },
       });
     }
 
@@ -122,7 +122,7 @@ export class QueryExecutor {
         cost: plan.rows * 0.2,
         rows: Math.floor(plan.rows * selectivity),
         width: plan.width,
-        details: { filters: query.where.filters.length }
+        details: { filters: query.where.filters.length },
       });
     }
 
@@ -133,7 +133,7 @@ export class QueryExecutor {
         cost: plan.rows * 0.5,
         rows: Math.floor(plan.rows * 0.1), // Estimate 10% unique groups
         width: 50,
-        details: { groupBy: query.groupBy.columns }
+        details: { groupBy: query.groupBy.columns },
       });
     }
 
@@ -145,7 +145,7 @@ export class QueryExecutor {
         cost: sortCost,
         rows: plan.rows,
         width: plan.width,
-        details: { orderBy: query.orderBy.columns }
+        details: { orderBy: query.orderBy.columns },
       });
     }
 
@@ -156,7 +156,7 @@ export class QueryExecutor {
         cost: 1,
         rows: Math.min(query.limit.value, plan.rows),
         width: plan.width,
-        details: { limit: query.limit.value }
+        details: { limit: query.limit.value },
       });
     }
 
@@ -166,7 +166,7 @@ export class QueryExecutor {
   /**
    * Execute the query plan
    */
-  private async executePlan(query: QueryNode, plan: QueryPlan): Promise<QueryResult> {
+  private async executePlan(query: QueryNode, _plan: QueryPlan): Promise<QueryResult> {
     let workingSet = [...this.data];
     this.metrics.rowsExamined = workingSet.length;
 
@@ -214,7 +214,7 @@ export class QueryExecutor {
       headers,
       rows,
       rowCount: rows.length,
-      metadata: this.buildMetadata(query)
+      metadata: this.buildMetadata(query),
     };
 
     // Add CSV format if requested
@@ -229,7 +229,7 @@ export class QueryExecutor {
    * Apply scope filtering
    */
   private applyScope(data: MachineData[], query: QueryNode): MachineData[] {
-    const {scope} = query.from;
+    const { scope } = query.from;
 
     if (scope.scopeType === 'all') {
       return data;
@@ -237,7 +237,7 @@ export class QueryExecutor {
 
     if (scope.scopeType === 'group' && scope.value) {
       const resolvedGroup = resolveGroupAlias(scope.value);
-      return data.filter(row => row.group_name === resolvedGroup);
+      return data.filter((row) => row.group_name === resolvedGroup);
     }
 
     return data;
@@ -254,7 +254,7 @@ export class QueryExecutor {
       if (!dbColumn) {
         this.warnings.push({
           message: `Unknown field: ${filter.field}`,
-          severity: 'warning'
+          severity: 'warning',
         });
         continue;
       }
@@ -263,11 +263,11 @@ export class QueryExecutor {
       if (!validateFieldOperator(filter.field, filter.operator)) {
         this.warnings.push({
           message: `Operator '${filter.operator}' may not be compatible with field '${filter.field}'`,
-          severity: 'warning'
+          severity: 'warning',
         });
       }
 
-      filtered = filtered.filter(row => this.evaluateFilter(row, filter, dbColumn));
+      filtered = filtered.filter((row) => this.evaluateFilter(row, filter, dbColumn));
     }
 
     return filtered;
@@ -312,17 +312,18 @@ export class QueryExecutor {
   /**
    * Execute SELECT columns
    */
-  private executeSelect(data: MachineData[], query: QueryNode): {
+  private executeSelect(
+    data: MachineData[],
+    query: QueryNode
+  ): {
     headers: string[];
     rows: Array<Array<string | number | null>>;
   } {
-    const {columns} = query.select;
-    const headers = columns.length > 0
-      ? columns.map(col => col.name)
-      : ['Computer Name']; // Default column
+    const { columns } = query.select;
+    const headers = columns.length > 0 ? columns.map((col) => col.name) : ['Computer Name']; // Default column
 
-    const rows = data.map(row => {
-      return headers.map(header => {
+    const rows = data.map((row) => {
+      return headers.map((header) => {
         const dbColumn = getDbColumn(header);
         if (!dbColumn) return null;
         const value = (row as any)[dbColumn];
@@ -336,12 +337,15 @@ export class QueryExecutor {
   /**
    * Execute aggregate functions
    */
-  private executeAggregates(data: MachineData[], query: QueryNode): {
+  private executeAggregates(
+    data: MachineData[],
+    query: QueryNode
+  ): {
     headers: string[];
     rows: Array<Array<string | number | null>>;
   } {
     const headers: string[] = [];
-    const {aggregates} = query.select;
+    const { aggregates } = query.select;
     const groupBy = query.groupBy?.columns[0]; // Support single group by for now
 
     // Add group by column to headers
@@ -351,7 +355,7 @@ export class QueryExecutor {
 
     // Add aggregate columns to headers
     if (aggregates.length > 0) {
-      aggregates.forEach(agg => {
+      aggregates.forEach((agg) => {
         headers.push(`${agg.function}(${agg.column || ''})`);
       });
     } else {
@@ -368,7 +372,7 @@ export class QueryExecutor {
         const row: Array<string | number | null> = [groupValue];
 
         if (aggregates.length > 0) {
-          aggregates.forEach(agg => {
+          aggregates.forEach((agg) => {
             row.push(this.calculateAggregate(groupData, agg));
           });
         } else {
@@ -384,7 +388,7 @@ export class QueryExecutor {
       const row: Array<string | number | null> = [];
 
       if (aggregates.length > 0) {
-        aggregates.forEach(agg => {
+        aggregates.forEach((agg) => {
           row.push(this.calculateAggregate(data, agg));
         });
       } else {
@@ -405,7 +409,7 @@ export class QueryExecutor {
     if (!dbColumn) {
       this.warnings.push({
         message: `Unknown group by column: ${column}`,
-        severity: 'error'
+        severity: 'error',
       });
       return groups;
     }
@@ -415,7 +419,7 @@ export class QueryExecutor {
       if (!groups.has(key)) {
         groups.set(key, []);
       }
-      groups.get(key)!.push(row);
+      groups.get(key)?.push(row);
     }
 
     return groups;
@@ -424,14 +428,17 @@ export class QueryExecutor {
   /**
    * Calculate aggregate function
    */
-  private calculateAggregate(data: MachineData[], aggregate: AggregateNode): string | number | null {
+  private calculateAggregate(
+    data: MachineData[],
+    aggregate: AggregateNode
+  ): string | number | null {
     if (aggregate.function === 'count') {
       if (!aggregate.column) {
         return data.length;
       }
       const dbColumn = getDbColumn(aggregate.column);
       if (!dbColumn) return 0;
-      return data.filter(row => (row as any)[dbColumn] != null).length;
+      return data.filter((row) => (row as any)[dbColumn] != null).length;
     }
 
     if (!aggregate.column) return null;
@@ -439,8 +446,8 @@ export class QueryExecutor {
     if (!dbColumn) return null;
 
     const values = data
-      .map(row => (row as any)[dbColumn])
-      .filter(v => v != null && !isNaN(Number(v)))
+      .map((row) => (row as any)[dbColumn])
+      .filter((v) => v != null && !Number.isNaN(Number(v)))
       .map(Number);
 
     if (values.length === 0) return null;
@@ -522,11 +529,11 @@ export class QueryExecutor {
     const lines: string[] = [];
 
     // Add headers
-    lines.push(headers.map(h => this.escapeCSV(h)).join(','));
+    lines.push(headers.map((h) => this.escapeCSV(h)).join(','));
 
     // Add rows
     for (const row of rows) {
-      lines.push(row.map(cell => this.escapeCSV(cell)).join(','));
+      lines.push(row.map((cell) => this.escapeCSV(cell)).join(','));
     }
 
     return lines.join('\n');
@@ -549,13 +556,13 @@ export class QueryExecutor {
    */
   private buildMetadata(query: QueryNode): QueryResult['metadata'] {
     return {
-      aggregations: query.select.aggregates.map(a => a.function),
+      aggregations: query.select.aggregates.map((a) => a.function),
       groupBy: query.groupBy?.columns[0] || null,
       orderBy: query.orderBy?.columns[0]?.column || null,
       orderDir: query.orderBy?.columns[0]?.direction || 'asc',
       limit: query.limit?.value || null,
       scope: query.from.scope.value || query.from.scope.scopeType,
-      filters: query.where?.filters.length || 0
+      filters: query.where?.filters.length || 0,
     };
   }
 
@@ -575,8 +582,8 @@ export class QueryExecutor {
         orderDir: 'asc',
         limit: null,
         scope: 'all',
-        filters: 0
-      }
+        filters: 0,
+      },
     };
   }
 
@@ -591,7 +598,7 @@ export class QueryExecutor {
       `${indent}${plan.type}`,
       plan.cost,
       plan.rows,
-      plan.details ? JSON.stringify(plan.details) : null
+      plan.details ? JSON.stringify(plan.details) : null,
     ]);
 
     if (plan.children) {

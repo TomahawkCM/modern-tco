@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import * as React from "react";
-import ModulesGrid from "./ModulesGrid";
-import { ModulesProgressTable } from "./ModulesProgressTable";
-import type { ModuleListRow } from "./module-table-types";
+import * as React from 'react';
+import ModulesGrid from './ModulesGrid';
+import { ModulesProgressTable } from './ModulesProgressTable';
+import type { ModuleListRow } from './module-table-types';
 
 type ModuleMeta = {
   slug: string;
@@ -20,22 +20,30 @@ type ModuleMeta = {
 
 export function ModulesBrowser({ modules }: { modules: ModuleMeta[] }) {
   const [view, setView] = React.useState<'grid' | 'table'>(() => {
-    if (typeof window !== 'undefined') return (localStorage.getItem('tco-modules-view') as any) || 'grid';
+    if (typeof window !== 'undefined')
+      return (localStorage.getItem('tco-modules-view') as any) || 'grid';
     return 'grid';
   });
 
   React.useEffect(() => {
-    try { localStorage.setItem('tco-modules-view', view); } catch {}
+    try {
+      localStorage.setItem('tco-modules-view', view);
+    } catch {}
   }, [view]);
 
-  const rows: ModuleListRow[] = React.useMemo(() => modules.map((m) => ({
-    id: m.frontmatter.id,
-    title: m.frontmatter.title,
-    domain: m.frontmatter.domainEnum.replace(/_/g, ' '),
-    difficulty: m.frontmatter.difficulty,
-    estimatedTimeMinutes: parseInt(String(m.frontmatter.estimatedTime ?? '0').split(' ')[0]) || 0,
-    slug: m.slug,
-  })), [modules]);
+  const rows: ModuleListRow[] = React.useMemo(
+    () =>
+      modules.map((m) => ({
+        id: m.frontmatter.id,
+        title: m.frontmatter.title,
+        domain: m.frontmatter.domainEnum.replace(/_/g, ' '),
+        difficulty: m.frontmatter.difficulty,
+        estimatedTimeMinutes:
+          parseInt(String(m.frontmatter.estimatedTime ?? '0').split(' ')[0], 10) || 0,
+        slug: m.slug,
+      })),
+    [modules]
+  );
 
   return (
     <div className="space-y-4">
@@ -64,4 +72,3 @@ export function ModulesBrowser({ modules }: { modules: ModuleMeta[] }) {
     </div>
   );
 }
-

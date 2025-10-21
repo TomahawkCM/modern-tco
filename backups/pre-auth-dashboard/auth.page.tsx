@@ -1,19 +1,19 @@
-"use client";
+'use client';
 
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { useAuth } from "@/contexts/AuthContext";
-import { motion } from "framer-motion";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { motion } from 'framer-motion';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { useAuth } from '@/contexts/AuthContext';
 
 export default function AuthPage() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [isSignUp, setIsSignUp] = useState(false);
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   const [authError, setAuthError] = useState<string | null>(null);
   const { signIn, signUp, loading } = useAuth();
   const router = useRouter();
@@ -27,14 +27,14 @@ export default function AuthPage() {
       if (error) {
         setAuthError(error.message);
       } else {
-        router.push("/modules"); // Redirect to modules page after successful signup
+        router.push('/modules'); // Redirect to modules page after successful signup
       }
     } else {
       const { error } = await signIn(email, password);
       if (error) {
         setAuthError(error.message);
       } else {
-        router.push("/modules"); // Redirect to modules page after successful login
+        router.push('/modules'); // Redirect to modules page after successful login
       }
     }
   };
@@ -50,12 +50,12 @@ export default function AuthPage() {
         <Card className="w-full max-w-md bg-white/10 p-6 shadow-xl backdrop-blur-sm">
           <CardHeader className="text-center">
             <CardTitle className="text-3xl font-bold text-white">
-              {isSignUp ? "Create Account" : "Welcome Back"}
+              {isSignUp ? 'Create Account' : 'Welcome Back'}
             </CardTitle>
             <CardDescription className="text-blue-200">
               {isSignUp
-                ? "Join the Tanium TCO study community."
-                : "Sign in to continue your learning journey."}
+                ? 'Join the Tanium TCO study community.'
+                : 'Sign in to continue your learning journey.'}
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -102,7 +102,7 @@ export default function AuthPage() {
                 className="w-full bg-blue-600 text-white hover:bg-blue-700"
                 disabled={loading}
               >
-                {loading ? "Loading..." : isSignUp ? "Sign Up" : "Sign In"}
+                {loading ? 'Loading...' : isSignUp ? 'Sign Up' : 'Sign In'}
               </Button>
               <Button
                 type="button"
@@ -110,7 +110,7 @@ export default function AuthPage() {
                 onClick={() => setIsSignUp(!isSignUp)}
                 className="w-full text-blue-300 hover:text-blue-100"
               >
-                {isSignUp ? "Already have an account? Sign In" : "Don't have an account? Sign Up"}
+                {isSignUp ? 'Already have an account? Sign In' : "Don't have an account? Sign Up"}
               </Button>
             </form>
           </CardContent>

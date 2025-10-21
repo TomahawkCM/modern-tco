@@ -1,14 +1,14 @@
-"use client";
+'use client';
 
-import { useEffect } from "react";
-import { usePathname, useSearchParams } from "next/navigation";
-import { analytics } from "@/lib/analytics";
-import { useAuth } from "@/contexts/AuthContext";
+import { usePathname, useSearchParams } from 'next/navigation';
+import { useEffect } from 'react';
+import { useAuth } from '@/contexts/AuthContext';
+import { analytics } from '@/lib/analytics';
 
 type IdleScheduler = (callback: () => void) => void;
 
 const scheduleIdle: IdleScheduler = (callback) => {
-  if (typeof window === "undefined") {
+  if (typeof window === 'undefined') {
     return;
   }
 
@@ -16,7 +16,7 @@ const scheduleIdle: IdleScheduler = (callback) => {
     requestIdleCallback?: (cb: () => void) => number;
   };
 
-  if (typeof win.requestIdleCallback === "function") {
+  if (typeof win.requestIdleCallback === 'function') {
     win.requestIdleCallback(() => {
       callback();
     });

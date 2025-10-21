@@ -1,22 +1,22 @@
-"use client";
+'use client';
 
-import { useAuth } from "@/contexts/AuthContext";
-import { useDatabase } from "@/hooks/useDatabase";
 import {
   createContext,
+  type ReactNode,
   useCallback,
   useContext,
   useEffect,
   useReducer,
   useRef,
-  type ReactNode,
-} from "react";
+} from 'react';
+import { useAuth } from '@/contexts/AuthContext';
+import { useDatabase } from '@/hooks/useDatabase';
 
 export interface UserSettings {
-  theme: "light" | "dark" | "system";
+  theme: 'light' | 'dark' | 'system';
   soundEnabled: boolean;
   notifications: boolean;
-  practiceMode: "adaptive" | "random" | "sequential";
+  practiceMode: 'adaptive' | 'random' | 'sequential';
   showExplanations: boolean;
   timerVisible: boolean;
   autoAdvance: boolean;
@@ -32,7 +32,7 @@ export interface UserSettings {
   largeText: boolean;
   screenReader: boolean;
   keyboardNav: boolean;
-  language: "en" | "es" | "fr" | "de";
+  language: 'en' | 'es' | 'fr' | 'de';
   timeZone: string;
   sessionTimeout: number; // minutes
   questionsPerSession: number;
@@ -47,12 +47,12 @@ interface SettingsState {
 }
 
 type SettingsAction =
-  | { type: "LOAD_SETTINGS"; payload: UserSettings }
-  | { type: "UPDATE_SETTING"; payload: { key: keyof UserSettings; value: any } }
-  | { type: "UPDATE_SETTINGS"; payload: Partial<UserSettings> }
-  | { type: "RESET_SETTINGS" }
-  | { type: "SET_LOADING"; payload: boolean }
-  | { type: "SET_ERROR"; payload: string | null };
+  | { type: 'LOAD_SETTINGS'; payload: UserSettings }
+  | { type: 'UPDATE_SETTING'; payload: { key: keyof UserSettings; value: any } }
+  | { type: 'UPDATE_SETTINGS'; payload: Partial<UserSettings> }
+  | { type: 'RESET_SETTINGS' }
+  | { type: 'SET_LOADING'; payload: boolean }
+  | { type: 'SET_ERROR'; payload: string | null };
 
 interface SettingsContextType {
   state: SettingsState;
@@ -65,10 +65,10 @@ interface SettingsContextType {
 }
 
 const defaultSettings: UserSettings = {
-  theme: "dark",
+  theme: 'dark',
   soundEnabled: true,
   notifications: true,
-  practiceMode: "adaptive",
+  practiceMode: 'adaptive',
   showExplanations: true,
   timerVisible: true,
   autoAdvance: false,
@@ -84,7 +84,7 @@ const defaultSettings: UserSettings = {
   largeText: false,
   screenReader: false,
   keyboardNav: true,
-  language: "en",
+  language: 'en',
   timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
   sessionTimeout: 30,
   questionsPerSession: 20,
@@ -100,7 +100,7 @@ const initialState: SettingsState = {
 
 function settingsReducer(state: SettingsState, action: SettingsAction): SettingsState {
   switch (action.type) {
-    case "LOAD_SETTINGS":
+    case 'LOAD_SETTINGS':
       return {
         ...state,
         settings: action.payload,
@@ -108,7 +108,7 @@ function settingsReducer(state: SettingsState, action: SettingsAction): Settings
         error: null,
       };
 
-    case "UPDATE_SETTING":
+    case 'UPDATE_SETTING':
       return {
         ...state,
         settings: {
@@ -117,7 +117,7 @@ function settingsReducer(state: SettingsState, action: SettingsAction): Settings
         },
       };
 
-    case "UPDATE_SETTINGS":
+    case 'UPDATE_SETTINGS':
       return {
         ...state,
         settings: {
@@ -126,19 +126,19 @@ function settingsReducer(state: SettingsState, action: SettingsAction): Settings
         },
       };
 
-    case "RESET_SETTINGS":
+    case 'RESET_SETTINGS':
       return {
         ...state,
         settings: { ...defaultSettings },
       };
 
-    case "SET_LOADING":
+    case 'SET_LOADING':
       return {
         ...state,
         isLoading: action.payload,
       };
 
-    case "SET_ERROR":
+    case 'SET_ERROR':
       return {
         ...state,
         error: action.payload,
@@ -162,32 +162,32 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
   // Load settings from database or localStorage on mount
   useEffect(() => {
     const loadSettings = async () => {
-      dispatch({ type: "SET_LOADING", payload: true });
+      dispatch({ type: 'SET_LOADING', payload: true });
 
       // TODO: Load from Supabase when user_settings table is available
       // For now, skip database loading
 
       // Fallback to localStorage
-      const savedSettings = localStorage.getItem("tco-settings");
+      const savedSettings = localStorage.getItem('tco-settings');
       if (savedSettings) {
         try {
           const settings = JSON.parse(savedSettings);
           const loadedSettings = { ...defaultSettings, ...settings };
-          dispatch({ type: "LOAD_SETTINGS", payload: loadedSettings });
+          dispatch({ type: 'LOAD_SETTINGS', payload: loadedSettings });
         } catch (error) {
-          console.error("Failed to load settings from localStorage:", error);
-          dispatch({ type: "LOAD_SETTINGS", payload: defaultSettings });
+          console.error('Failed to load settings from localStorage:', error);
+          dispatch({ type: 'LOAD_SETTINGS', payload: defaultSettings });
         }
       } else {
-        dispatch({ type: "LOAD_SETTINGS", payload: defaultSettings });
+        dispatch({ type: 'LOAD_SETTINGS', payload: defaultSettings });
       }
 
-      dispatch({ type: "SET_LOADING", payload: false });
+      dispatch({ type: 'SET_LOADING', payload: false });
       dbInitialized.current = true;
     };
 
     loadSettings();
-  }, [user?.id]);
+  }, []);
 
   // Save settings to database and localStorage whenever they change
   useEffect(() => {
@@ -200,7 +200,7 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
       // Debounced save to prevent excessive localStorage writes
       saveTimeout.current = setTimeout(() => {
         // Always save to localStorage for offline support
-        localStorage.setItem("tco-settings", JSON.stringify(state.settings));
+        localStorage.setItem('tco-settings', JSON.stringify(state.settings));
 
         // TODO: Save to database when user_settings table is available
         // if (user && db) {
@@ -211,16 +211,16 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
   }, [state.settings, state.isLoading]);
 
   const updateSetting = <K extends keyof UserSettings>(key: K, value: UserSettings[K]) => {
-    dispatch({ type: "UPDATE_SETTING", payload: { key, value } });
+    dispatch({ type: 'UPDATE_SETTING', payload: { key, value } });
   };
 
   const updateSettings = (settings: Partial<UserSettings>) => {
-    dispatch({ type: "UPDATE_SETTINGS", payload: settings });
+    dispatch({ type: 'UPDATE_SETTINGS', payload: settings });
   };
 
   const resetSettings = useCallback(async () => {
-    localStorage.removeItem("tco-settings");
-    dispatch({ type: "RESET_SETTINGS" });
+    localStorage.removeItem('tco-settings');
+    dispatch({ type: 'RESET_SETTINGS' });
 
     // TODO: Delete from database when user_settings table is available
     // if (user && db) {
@@ -233,7 +233,7 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
     //     console.error("Error deleting settings from database:", error);
     //   }
     // }
-  }, [user?.id, db]);
+  }, []);
 
   const getSetting = <K extends keyof UserSettings>(key: K): UserSettings[K] => {
     return state.settings[key];
@@ -244,7 +244,7 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
   };
 
   const importSettings = (settings: UserSettings) => {
-    dispatch({ type: "LOAD_SETTINGS", payload: settings });
+    dispatch({ type: 'LOAD_SETTINGS', payload: settings });
   };
 
   return (
@@ -267,7 +267,7 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
 export function useSettings() {
   const context = useContext(SettingsContext);
   if (context === undefined) {
-    throw new Error("useSettings must be used within a SettingsProvider");
+    throw new Error('useSettings must be used within a SettingsProvider');
   }
   return context;
 }

@@ -15,11 +15,7 @@
       "npmScripts": {
         "preferPowerShellVariants": true,
         "usePwshSuffixCommands": true,
-        "exampleCommands": [
-          "npm run lint:pwsh",
-          "npm run format:pwsh",
-          "npm run quality:pwsh"
-        ]
+        "exampleCommands": ["npm run lint:pwsh", "npm run format:pwsh", "npm run quality:pwsh"]
       },
       "developmentCommands": [
         "Set-Location modern-tco",

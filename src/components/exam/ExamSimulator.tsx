@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
-import { useEffect, useMemo, useRef, useState } from "react";
-import { buildExamConfig, type ExamModeSim } from "@/lib/exam-simulator";
-import { useAssessment } from "@/hooks/useAssessment";
-import { Button } from "@/components/ui/button";
-import { useAuth } from "@/contexts/AuthContext";
-import { saveQuickNote } from "@/services/notesService";
-import { toast } from "@/hooks/use-toast";
+import { useEffect, useMemo, useRef, useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { useAuth } from '@/contexts/AuthContext';
+import { toast } from '@/hooks/use-toast';
+import { useAssessment } from '@/hooks/useAssessment';
+import { buildExamConfig, type ExamModeSim } from '@/lib/exam-simulator';
+import { saveQuickNote } from '@/services/notesService';
 
 export default function ExamSimulator() {
   const { user } = useAuth();
@@ -26,13 +26,14 @@ export default function ExamSimulator() {
   const [timeRemaining, setTimeRemaining] = useState<number>(0);
   const questionStartRef = useRef<number | null>(null);
   const [answers, setAnswers] = useState<Record<string, string>>({});
-  const storageKey = user?.id && currentSession?.id ? `tco-exam-answers:${user.id}:${currentSession.id}` : null;
+  const storageKey =
+    user?.id && currentSession?.id ? `tco-exam-answers:${user.id}:${currentSession.id}` : null;
 
   const handleStart = async (m: ExamModeSim) => {
     setMode(m);
     const config = buildExamConfig(m, {});
     await startAssessment(config);
-    };
+  };
 
   // Timer management: initialize on session start
   useEffect(() => {
@@ -50,7 +51,7 @@ export default function ExamSimulator() {
     tick();
     const id = window.setInterval(tick, 1000);
     return () => window.clearInterval(id);
-  }, [currentSession?.id, currentSession?.timeLimit, currentSession?.startTime]);
+  }, [currentSession?.timeLimit, currentSession?.startTime, submitAssessment]);
 
   // Load persisted answers/index when a session starts
   useEffect(() => {
@@ -60,20 +61,20 @@ export default function ExamSimulator() {
       if (!raw) return;
       const parsed = JSON.parse(raw) as { answers?: Record<string, string>; index?: number };
       if (parsed.answers) setAnswers(parsed.answers);
-      if (typeof parsed.index === "number") setIndex(Math.max(0, Math.min((currentSession?.questions?.length ?? 1) - 1, parsed.index)));
+      if (typeof parsed.index === 'number')
+        setIndex(Math.max(0, Math.min((currentSession?.questions?.length ?? 1) - 1, parsed.index)));
     } catch (error) {
       // ignore
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [storageKey]);
+  }, [storageKey, currentSession?.questions?.length]);
 
   // Set question start timer on index change
   useEffect(() => {
     questionStartRef.current = Date.now();
     if (currentSession) {
       trackEvent({
-        type: "question_navigated",
-        userId: user?.id ?? "",
+        type: 'question_navigated',
+        userId: user?.id ?? '',
         sessionId: currentSession.id,
         data: { index, questionId: currentSession.questions[index]?.id },
         timestamp: new Date(),
@@ -91,10 +92,12 @@ export default function ExamSimulator() {
     } catch (error) {
       // ignore storage errors
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [index, currentSession?.id]);
+  }, [index, currentSession?.id, currentSession, answers, storageKey, trackEvent, user?.id]);
 
-  const question = useMemo(() => currentSession?.questions?.[index], [currentSession?.questions, index]);
+  const question = useMemo(
+    () => currentSession?.questions?.[index],
+    [currentSession?.questions, index]
+  );
   const isLast = useMemo(() => {
     const len = currentSession?.questions?.length ?? 0;
     return len > 0 && index === len - 1;
@@ -134,7 +137,7 @@ export default function ExamSimulator() {
 
     // Update question-level progress
     await updateProgress({
-      userId: user?.id ?? "",
+      userId: user?.id ?? '',
       questionId: question.id,
       isCorrect,
       timeSpent,
@@ -146,14 +149,16 @@ export default function ExamSimulator() {
   function formatTime(secs: number) {
     const m = Math.floor(secs / 60);
     const s = secs % 60;
-    return `${m}:${s.toString().padStart(2, "0")}`;
+    return `${m}:${s.toString().padStart(2, '0')}`;
   }
 
   return (
     <div className="space-y-4">
       <div className="flex items-center gap-3">
-        <Button disabled={isLoading} onClick={() => handleStart("practice-test")}>Start Practice Test</Button>
-        <Button variant="secondary" disabled={isLoading} onClick={() => handleStart("mock-exam")}>
+        <Button disabled={isLoading} onClick={() => handleStart('practice-test')}>
+          Start Practice Test
+        </Button>
+        <Button variant="secondary" disabled={isLoading} onClick={() => handleStart('mock-exam')}>
           Start Mock Exam
         </Button>
       </div>
@@ -161,10 +166,16 @@ export default function ExamSimulator() {
       {currentSession ? (
         <div data-testid="exam-session" className="rounded border p-4 space-y-4">
           <div className="flex items-center justify-between text-sm text-slate-600 dark:text-muted-foreground">
-            <span>Session: {currentSession.id} · Type: {mode}</span>
-            <span aria-live="polite" aria-label="Time remaining">⏱ {formatTime(timeRemaining)}</span>
+            <span>
+              Session: {currentSession.id} · Type: {mode}
+            </span>
+            <span aria-live="polite" aria-label="Time remaining">
+              ⏱ {formatTime(timeRemaining)}
+            </span>
           </div>
-          <div className="font-medium">Question {index + 1} of {currentSession.questions.length}</div>
+          <div className="font-medium">
+            Question {index + 1} of {currentSession.questions.length}
+          </div>
 
           {question ? (
             <div>
@@ -174,9 +185,15 @@ export default function ExamSimulator() {
                   variant="outline"
                   size="sm"
                   onClick={async () => {
-                    const text = `Q: ${question.question}\nAnswer: ${question.choices?.find((c) => c.id === question.correctAnswerId)?.text ?? ""}${question.explanation ? `\nWhy: ${question.explanation}` : ""}`;
-                    await saveQuickNote(text, { tags: ["exam", question.domain, question.difficulty], user });
-                    toast({ title: "Added to Notes", description: "View it under Notes for spaced review." });
+                    const text = `Q: ${question.question}\nAnswer: ${question.choices?.find((c) => c.id === question.correctAnswerId)?.text ?? ''}${question.explanation ? `\nWhy: ${question.explanation}` : ''}`;
+                    await saveQuickNote(text, {
+                      tags: ['exam', question.domain, question.difficulty],
+                      user,
+                    });
+                    toast({
+                      title: 'Added to Notes',
+                      description: 'View it under Notes for spaced review.',
+                    });
                   }}
                 >
                   Add to Notes
@@ -207,13 +224,19 @@ export default function ExamSimulator() {
                     const sel = answers[q.id];
                     const completed = !!currentSession.completedAt;
                     const isCurrent = i === index;
-                    let cls = "px-2 py-1 rounded text-xs";
-                    if (isCurrent) cls += " bg-blue-600 text-foreground";
+                    let cls = 'px-2 py-1 rounded text-xs';
+                    if (isCurrent) cls += ' bg-blue-600 text-foreground';
                     else if (completed) {
                       const correct = sel && sel === q.correctAnswerId;
-                      cls += correct ? " bg-[#22c55e] text-foreground" : sel ? " bg-red-600 text-foreground" : " bg-slate-200 dark:bg-slate-700";
+                      cls += correct
+                        ? ' bg-[#22c55e] text-foreground'
+                        : sel
+                          ? ' bg-red-600 text-foreground'
+                          : ' bg-slate-200 dark:bg-slate-700';
                     } else {
-                      cls += sel ? " bg-blue-100 dark:bg-blue-900 text-blue-700" : " bg-slate-200 dark:bg-slate-700";
+                      cls += sel
+                        ? ' bg-blue-100 dark:bg-blue-900 text-blue-700'
+                        : ' bg-slate-200 dark:bg-slate-700';
                     }
                     return (
                       <button
@@ -244,15 +267,23 @@ export default function ExamSimulator() {
             </Button>
             <div className="flex items-center gap-2">
               {!isLast && (
-                <Button onClick={() => setIndex((v) => Math.min((currentSession?.questions?.length ?? 1) - 1, v + 1))}>
+                <Button
+                  onClick={() =>
+                    setIndex((v) => Math.min((currentSession?.questions?.length ?? 1) - 1, v + 1))
+                  }
+                >
                   Next
                 </Button>
               )}
               {isLast && (
-                <Button onClick={async () => {
-                  await submitAssessment();
-                  try { if (storageKey) localStorage.removeItem(storageKey); } catch {}
-                }}>
+                <Button
+                  onClick={async () => {
+                    await submitAssessment();
+                    try {
+                      if (storageKey) localStorage.removeItem(storageKey);
+                    } catch {}
+                  }}
+                >
                   Submit Exam
                 </Button>
               )}
@@ -275,14 +306,16 @@ export default function ExamSimulator() {
                   setIndex(0);
                   setAnswers({});
                   setTimeRemaining(0);
-                  try { if (storageKey) localStorage.removeItem(storageKey); } catch {}
+                  try {
+                    if (storageKey) localStorage.removeItem(storageKey);
+                  } catch {}
                 }}
               >
                 Back to start
               </Button>
               <Button
                 onClick={async () => {
-                  const m = mode ?? "practice-test";
+                  const m = mode ?? 'practice-test';
                   setIndex(0);
                   setAnswers({});
                   setTimeRemaining(0);
@@ -304,9 +337,16 @@ export default function ExamSimulator() {
               return (
                 <div key={q.id} className="border rounded p-3" data-testid="review-item">
                   <div className="mb-2">{q.question}</div>
-                  <div className="text-sm">Your answer: <span className={isCorrect ? 'text-[#22c55e]' : 'text-red-600'}>{getText(selected)}</span></div>
+                  <div className="text-sm">
+                    Your answer:{' '}
+                    <span className={isCorrect ? 'text-[#22c55e]' : 'text-red-600'}>
+                      {getText(selected)}
+                    </span>
+                  </div>
                   {!isCorrect && (
-                    <div className="text-sm">Correct answer: <span className="text-[#22c55e]">{getText(correct)}</span></div>
+                    <div className="text-sm">
+                      Correct answer: <span className="text-[#22c55e]">{getText(correct)}</span>
+                    </div>
                   )}
                 </div>
               );
@@ -320,17 +360,23 @@ export default function ExamSimulator() {
 
 function ReviewSummary({ result }: { result: any | null }) {
   if (!result) return null;
-  const percent = typeof result.overallScore === 'number' ? Math.round(result.overallScore * 100) : null;
+  const percent =
+    typeof result.overallScore === 'number' ? Math.round(result.overallScore * 100) : null;
   const time = (result.timeSpent ?? result.totalTime ?? 0) as number;
   const minutes = Math.floor(time / 60);
   const seconds = time % 60;
   return (
     <div className="rounded bg-slate-50 dark:bg-card border p-3 text-sm">
-      <div>Score: {percent !== null ? `${percent}%` : '—'} · Passed: {String(result.passed)}</div>
       <div>
-        Questions: {result.correctAnswers ?? 0} correct / {result.incorrectAnswers ?? 0} incorrect of {result.totalQuestions ?? 0}
+        Score: {percent !== null ? `${percent}%` : '—'} · Passed: {String(result.passed)}
       </div>
-      <div>Time Spent: {minutes}:{seconds.toString().padStart(2, '0')}</div>
+      <div>
+        Questions: {result.correctAnswers ?? 0} correct / {result.incorrectAnswers ?? 0} incorrect
+        of {result.totalQuestions ?? 0}
+      </div>
+      <div>
+        Time Spent: {minutes}:{seconds.toString().padStart(2, '0')}
+      </div>
       {result.domainBreakdown ? (
         <div className="mt-2">
           <div className="font-medium">Domain Breakdown</div>
@@ -341,7 +387,7 @@ function ReviewSummary({ result }: { result: any | null }) {
                 <li key={domain} className="flex justify-between">
                   <span>{domain}</span>
                   <span>
-                    {(d.correct ?? 0)}/{(d.total ?? 0)} · {pct}%
+                    {d.correct ?? 0}/{d.total ?? 0} · {pct}%
                   </span>
                 </li>
               );

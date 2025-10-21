@@ -2,7 +2,9 @@
 import { readdirSync, readFileSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 
-function pct(cat) { return Math.round(((cat && cat.score) || 0) * 100); }
+function pct(cat) {
+  return Math.round(((cat && cat.score) || 0) * 100);
+}
 
 function findLatest(dir) {
   const base = join(process.cwd(), dir);
@@ -37,4 +39,3 @@ function main() {
 }
 
 main();
-

@@ -1,8 +1,8 @@
 'use client';
 
-import Link from "next/link";
-import manifest from "@/config/modules.manifest.json";
-import type { ModuleManifest } from "@/types/manifest";
+import Link from 'next/link';
+import manifest from '@/config/modules.manifest.json';
+import type { ModuleManifest } from '@/types/manifest';
 
 export default function LearnIndexPage() {
   const data = manifest as ModuleManifest;
@@ -23,7 +23,9 @@ export default function LearnIndexPage() {
           >
             <div className="font-medium">{m.title}</div>
             {m.description ? (
-              <div className="text-sm text-slate-600 dark:text-muted-foreground">{m.description}</div>
+              <div className="text-sm text-slate-600 dark:text-muted-foreground">
+                {m.description}
+              </div>
             ) : null}
           </Link>
         ))}

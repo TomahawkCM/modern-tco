@@ -7,6 +7,7 @@
 import { spawn } from 'node:child_process';
 import { mkdirSync } from 'node:fs';
 import { createRequire } from 'node:module';
+
 const require = createRequire(import.meta.url);
 
 // Fixed port 3001 configuration
@@ -22,11 +23,11 @@ function resolveChromePath() {
     '/usr/bin/chromium-browser',
     '/usr/bin/chromium',
     '/usr/bin/google-chrome-stable',
-    '/usr/bin/google-chrome'
+    '/usr/bin/google-chrome',
   ];
-  
+
   if (process.env.CHROME_PATH) return process.env.CHROME_PATH;
-  
+
   // Try to find an existing Chrome installation
   const fs = require('fs');
   for (const path of possiblePaths) {
@@ -37,7 +38,7 @@ function resolveChromePath() {
       }
     } catch {}
   }
-  
+
   // Fallback to playwright if available
   try {
     const { chromium } = require('playwright');
@@ -47,29 +48,27 @@ function resolveChromePath() {
       return p;
     }
   } catch {}
-  
+
   return '';
 }
 
 function resolveLighthouseCli() {
-  try { return require.resolve('lighthouse/lighthouse-cli/index.js'); } catch {}
-  try { return require.resolve('lighthouse/cli/index.js'); } catch {}
+  try {
+    return require.resolve('lighthouse/lighthouse-cli/index.js');
+  } catch {}
+  try {
+    return require.resolve('lighthouse/cli/index.js');
+  } catch {}
   return null;
 }
 
 function run(url, preset, outBase) {
   return new Promise((resolve, reject) => {
-    const args = [
-      url, 
-      '--output=html', 
-      '--output=json', 
-      `--output-path=${outBase}`, 
-      '--quiet'
-    ];
-    
+    const args = [url, '--output=html', '--output=json', `--output-path=${outBase}`, '--quiet'];
+
     if (preset === 'desktop') args.push('--preset=desktop');
     if (preset === 'mobile') args.push('--emulated-form-factor=mobile');
-    
+
     // WSL-optimized Chrome flags
     const flags = [
       '--headless=new',
@@ -84,23 +83,23 @@ function run(url, preset, outBase) {
       '--disable-web-security',
       '--allow-running-insecure-content',
       '--disable-features=BlockInsecurePrivateNetworkRequests,PrivateNetworkAccessSendPreflights',
-      '--remote-debugging-port=9222'  // Explicit debugging port for WSL
+      '--remote-debugging-port=9222', // Explicit debugging port for WSL
     ];
-    
+
     args.push(`--chrome-flags=${flags.join(' ')}`);
-    
+
     const env = { ...process.env };
     const chromePath = resolveChromePath();
     if (chromePath) {
       env.CHROME_PATH = chromePath;
       console.log(`[lighthouse-3001] Using Chrome: ${chromePath}`);
     }
-    
+
     const cli = resolveLighthouseCli();
     const child = cli
       ? spawn(process.execPath, [cli, ...args], { stdio: 'inherit', env })
       : spawn('npx', ['--yes', 'lighthouse', ...args], { stdio: 'inherit', env });
-    
+
     child.on('close', (code) => {
       if (code === 0) {
         resolve();
@@ -108,7 +107,7 @@ function run(url, preset, outBase) {
         reject(new Error(`Lighthouse exited with code ${code}`));
       }
     });
-    
+
     child.on('error', (err) => {
       reject(err);
     });
@@ -119,8 +118,8 @@ const now = new Date().toISOString().replace(/[:.]/g, '-');
 const outDir = `reports/lighthouse/${now}`;
 
 // Ensure output directory exists
-try { 
-  mkdirSync(outDir, { recursive: true }); 
+try {
+  mkdirSync(outDir, { recursive: true });
   console.log(`[lighthouse-3001] Output directory: ${outDir}`);
 } catch (e) {
   console.error(`[lighthouse-3001] Failed to create output directory: ${e.message}`);
@@ -128,28 +127,28 @@ try {
 
 async function main() {
   console.log(`[lighthouse-3001] Running audits for: ${targets.join(', ')}`);
-  
+
   for (const p of targets) {
     const url = p.startsWith('http') ? p : `${BASE_URL}${p}`;
-    const slug = p.replace(/[\/:?&=]/g, '_') || 'root';
-    
+    const slug = p.replace(/[/:?&=]/g, '_') || 'root';
+
     console.log(`\n[lighthouse-3001] Auditing: ${url}`);
-    
+
     try {
       await run(url, 'desktop', `${outDir}/desktop_${slug}`);
       console.log(`  ✓ Desktop audit complete`);
-      
+
       await run(url, 'mobile', `${outDir}/mobile_${slug}`);
       console.log(`  ✓ Mobile audit complete`);
     } catch (err) {
       console.error(`  ✗ Failed to audit ${url}: ${err.message}`);
     }
   }
-  
+
   console.log(`\n[lighthouse-3001] Reports saved to: ${outDir}`);
 }
 
-main().catch((e) => { 
-  console.error('[lighthouse-3001] Error:', e); 
-  process.exit(1); 
+main().catch((e) => {
+  console.error('[lighthouse-3001] Error:', e);
+  process.exit(1);
 });

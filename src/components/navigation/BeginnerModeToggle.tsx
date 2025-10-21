@@ -1,18 +1,19 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  Sparkles,
-  Info,
-  Check,
-  X,
+import { AnimatePresence, motion } from 'framer-motion';
+import {
   BookOpen,
-  Zap,
+  Check,
   GraduationCap,
   HelpCircle,
-  Shield
+  Info,
+  Shield,
+  Sparkles,
+  X,
+  Zap,
 } from 'lucide-react';
+import type React from 'react';
+import { useEffect, useState } from 'react';
 import { getArchonOverlay, getHoverGradient } from '@/lib/archon-theme';
 
 // TypeScript interfaces
@@ -35,7 +36,7 @@ export default function BeginnerModeToggle({
   defaultEnabled = true,
   onToggle,
   position = 'top-right',
-  showTooltip = true
+  showTooltip = true,
 }: BeginnerModeToggleProps) {
   const [isEnabled, setIsEnabled] = useState(defaultEnabled);
   const [showFeatures, setShowFeatures] = useState(false);
@@ -48,43 +49,43 @@ export default function BeginnerModeToggle({
       title: 'Navigation Helper',
       description: 'Floating help button with guided tour',
       icon: HelpCircle,
-      enabled: isEnabled
+      enabled: isEnabled,
     },
     {
       id: 'simplified-content',
       title: 'Simplified Content',
       description: 'Foundation-first learning approach',
       icon: BookOpen,
-      enabled: isEnabled
+      enabled: isEnabled,
     },
     {
       id: 'progress-tracking',
       title: 'Enhanced Progress Tracking',
       description: 'Visual milestones and achievements',
       icon: GraduationCap,
-      enabled: isEnabled
+      enabled: isEnabled,
     },
     {
       id: 'confidence-builder',
       title: 'Confidence Building',
       description: 'Encouraging messages and tips',
       icon: Sparkles,
-      enabled: isEnabled
+      enabled: isEnabled,
     },
     {
       id: 'guided-learning',
       title: 'Guided Learning Path',
       description: 'Step-by-step progression',
       icon: Zap,
-      enabled: isEnabled
-    }
+      enabled: isEnabled,
+    },
   ];
 
   // Load saved preference
   useEffect(() => {
     const savedMode = localStorage.getItem('beginnerMode');
     const firstVisit = !localStorage.getItem('hasVisited');
-    
+
     if (savedMode !== null) {
       const enabled = savedMode === 'true';
       setIsEnabled(enabled);
@@ -96,11 +97,11 @@ export default function BeginnerModeToggle({
       localStorage.setItem('beginnerMode', 'true');
       localStorage.setItem('hasVisited', 'true');
       onToggle?.(true);
-      
+
       // Show features tooltip for first-time users
       setTimeout(() => setShowFeatures(true), 1000);
     }
-  }, []);
+  }, [onToggle]);
 
   // Handle toggle
   const handleToggle = () => {
@@ -108,7 +109,7 @@ export default function BeginnerModeToggle({
     setIsEnabled(newState);
     localStorage.setItem('beginnerMode', String(newState));
     onToggle?.(newState);
-    
+
     // Show features briefly when toggling on
     if (newState && !showFeatures) {
       setShowFeatures(true);
@@ -149,22 +150,26 @@ export default function BeginnerModeToggle({
             onMouseEnter={() => showTooltip && setShowFeatures(true)}
             onMouseLeave={() => showTooltip && setShowFeatures(false)}
             className={`relative flex items-center space-x-2 px-4 py-2 rounded-full shadow-lg transition-all backdrop-blur-sm ${
-              isEnabled 
+              isEnabled
                 ? 'border border-cyan-400/30 text-foreground shadow-cyan-400/20'
                 : 'bg-white/10 border border-gray-300/30 text-muted-foreground hover:bg-white/20'
             }`}
-            style={isEnabled ? {
-              background: getArchonOverlay().background,
-              boxShadow: '0 0 20px rgba(0, 255, 255, 0.2), 0 0 40px rgba(147, 51, 234, 0.1)'
-            } : undefined}
+            style={
+              isEnabled
+                ? {
+                    background: getArchonOverlay().background,
+                    boxShadow: '0 0 20px rgba(0, 255, 255, 0.2), 0 0 40px rgba(147, 51, 234, 0.1)',
+                  }
+                : undefined
+            }
           >
             <Sparkles className={`w-5 h-5 ${isEnabled ? 'animate-pulse' : ''}`} />
-            <span className="text-sm font-semibold">
-              Beginner Mode
-            </span>
-            <div className={`relative w-12 h-6 rounded-full transition-colors ${
-              isEnabled ? 'bg-white/30' : 'bg-gray-200'
-            }`}>
+            <span className="text-sm font-semibold">Beginner Mode</span>
+            <div
+              className={`relative w-12 h-6 rounded-full transition-colors ${
+                isEnabled ? 'bg-white/30' : 'bg-gray-200'
+              }`}
+            >
               <motion.div
                 className={`absolute top-0.5 w-5 h-5 rounded-full shadow-md ${
                   isEnabled ? 'bg-white' : 'bg-gray-400'
@@ -192,18 +197,23 @@ export default function BeginnerModeToggle({
               className="absolute top-full mt-2 right-0 w-80 bg-black/80 backdrop-blur-md rounded-xl shadow-2xl border border-cyan-400/30 overflow-hidden"
               style={{
                 background: getArchonOverlay().background,
-                boxShadow: '0 0 30px rgba(0, 255, 255, 0.2), 0 0 60px rgba(147, 51, 234, 0.1)'
+                boxShadow: '0 0 30px rgba(0, 255, 255, 0.2), 0 0 60px rgba(147, 51, 234, 0.1)',
               }}
             >
               {/* Header */}
-              <div className={`p-4 ${
-                isEnabled 
-                  ? 'text-foreground border-b border-cyan-400/30'
-                  : 'bg-black/40 text-muted-foreground border-b border-gray-600/30'
-              }`}
-              style={isEnabled ? {
-                background: getArchonOverlay().background
-              } : undefined}
+              <div
+                className={`p-4 ${
+                  isEnabled
+                    ? 'text-foreground border-b border-cyan-400/30'
+                    : 'bg-black/40 text-muted-foreground border-b border-gray-600/30'
+                }`}
+                style={
+                  isEnabled
+                    ? {
+                        background: getArchonOverlay().background,
+                      }
+                    : undefined
+                }
               >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-2">
@@ -215,7 +225,7 @@ export default function BeginnerModeToggle({
                   <button
                     onClick={() => setShowFeatures(false)}
                     className={`p-1 rounded-full transition-colors ${
-                      isEnabled 
+                      isEnabled
                         ? 'hover:bg-cyan-400/20 text-cyan-200 hover:text-cyan-100'
                         : 'hover:bg-muted/30 text-muted-foreground hover:text-muted-foreground'
                     }`}
@@ -223,10 +233,8 @@ export default function BeginnerModeToggle({
                     <X className="w-4 h-4" />
                   </button>
                 </div>
-                <p className={`text-sm mt-1 ${
-                  isEnabled ? 'text-foreground/90' : 'text-gray-600'
-                }`}>
-                  {isEnabled 
+                <p className={`text-sm mt-1 ${isEnabled ? 'text-foreground/90' : 'text-gray-600'}`}>
+                  {isEnabled
                     ? 'Enhanced guidance and support enabled'
                     : 'Advanced mode for experienced users'}
                 </p>
@@ -240,39 +248,45 @@ export default function BeginnerModeToggle({
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     className={`flex items-start space-x-3 p-3 rounded-lg transition-colors border ${
-                      feature.enabled 
-                        ? 'border-cyan-400/30'
-                        : 'border-gray-500/30'
+                      feature.enabled ? 'border-cyan-400/30' : 'border-gray-500/30'
                     }`}
-                    style={feature.enabled ? {
-                      background: getArchonOverlay().background,
-                      backdropFilter: 'blur(8px)',
-                      WebkitBackdropFilter: 'blur(8px)'
-                    } : {
-                      background: 'rgba(0, 0, 0, 0.2)'
-                    }}
+                    style={
+                      feature.enabled
+                        ? {
+                            background: getArchonOverlay().background,
+                            backdropFilter: 'blur(8px)',
+                            WebkitBackdropFilter: 'blur(8px)',
+                          }
+                        : {
+                            background: 'rgba(0, 0, 0, 0.2)',
+                          }
+                    }
                   >
-                    <div className={`flex-shrink-0 p-2 rounded-lg ${
-                      feature.enabled 
-                        ? 'bg-cyan-400/20 text-primary'
-                        : 'bg-muted/30 text-muted-foreground'
-                    }`}>
+                    <div
+                      className={`flex-shrink-0 p-2 rounded-lg ${
+                        feature.enabled
+                          ? 'bg-cyan-400/20 text-primary'
+                          : 'bg-muted/30 text-muted-foreground'
+                      }`}
+                    >
                       <feature.icon className="w-4 h-4" />
                     </div>
                     <div className="flex-1">
                       <div className="flex items-center space-x-2">
-                        <h4 className={`text-sm font-semibold ${
-                          feature.enabled ? 'text-foreground' : 'text-muted-foreground'
-                        }`}>
+                        <h4
+                          className={`text-sm font-semibold ${
+                            feature.enabled ? 'text-foreground' : 'text-muted-foreground'
+                          }`}
+                        >
                           {feature.title}
                         </h4>
-                        {feature.enabled && (
-                          <Check className="w-4 h-4 text-primary" />
-                        )}
+                        {feature.enabled && <Check className="w-4 h-4 text-primary" />}
                       </div>
-                      <p className={`text-xs mt-1 ${
-                        feature.enabled ? 'text-cyan-100' : 'text-muted-foreground'
-                      }`}>
+                      <p
+                        className={`text-xs mt-1 ${
+                          feature.enabled ? 'text-cyan-100' : 'text-muted-foreground'
+                        }`}
+                      >
                         {feature.description}
                       </p>
                     </div>
@@ -281,16 +295,18 @@ export default function BeginnerModeToggle({
               </div>
 
               {/* Footer Message */}
-              <div className="p-4 border-t border-cyan-400/30"
-                   style={{
-                     background: 'rgba(0, 0, 0, 0.3)',
-                     backdropFilter: 'blur(8px)',
-                     WebkitBackdropFilter: 'blur(8px)'
-                   }}>
+              <div
+                className="p-4 border-t border-cyan-400/30"
+                style={{
+                  background: 'rgba(0, 0, 0, 0.3)',
+                  backdropFilter: 'blur(8px)',
+                  WebkitBackdropFilter: 'blur(8px)',
+                }}
+              >
                 <div className="flex items-start space-x-2">
                   <Info className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
                   <p className="text-xs text-cyan-100">
-                    {isEnabled 
+                    {isEnabled
                       ? 'Perfect for beginners! Switch off when you feel confident.'
                       : 'Enable anytime to get extra guidance and support.'}
                   </p>
@@ -319,46 +335,47 @@ export default function BeginnerModeToggle({
               className="bg-black/80 backdrop-blur-md rounded-2xl p-8 max-w-md w-full text-center space-y-6 border border-cyan-400/30"
               style={{
                 background: getArchonOverlay().background,
-                boxShadow: '0 0 40px rgba(0, 255, 255, 0.2), 0 0 80px rgba(147, 51, 234, 0.1)'
+                boxShadow: '0 0 40px rgba(0, 255, 255, 0.2), 0 0 80px rgba(147, 51, 234, 0.1)',
               }}
             >
               <motion.div
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
-                transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
+                transition={{ delay: 0.2, type: 'spring', stiffness: 200 }}
                 className="mx-auto w-20 h-20 rounded-full flex items-center justify-center border border-cyan-400/30"
                 style={{
                   background: getArchonOverlay().background,
-                  boxShadow: '0 0 30px rgba(0, 255, 255, 0.3), 0 0 60px rgba(147, 51, 234, 0.2)'
+                  boxShadow: '0 0 30px rgba(0, 255, 255, 0.3), 0 0 60px rgba(147, 51, 234, 0.2)',
                 }}
               >
                 <Sparkles className="w-10 h-10 text-cyan-100 animate-pulse" />
               </motion.div>
-              
+
               <div className="space-y-2">
-                <h2 className="text-2xl font-bold text-foreground">
-                  Beginner Mode Activated! 🎉
-                </h2>
+                <h2 className="text-2xl font-bold text-foreground">Beginner Mode Activated! 🎉</h2>
                 <p className="text-cyan-100">
-                  We've enabled special features to help you learn Tanium with confidence. 
-                  You can toggle this mode on/off anytime using the button in the corner.
+                  We've enabled special features to help you learn Tanium with confidence. You can
+                  toggle this mode on/off anytime using the button in the corner.
                 </p>
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 {beginnerFeatures.slice(0, 4).map((feature) => (
-                  <div key={feature.id} className="p-3 rounded-lg border border-cyan-400/30"
-                       style={{
-                         background: 'rgba(0, 255, 255, 0.1)',
-                         backdropFilter: 'blur(8px)',
-                         WebkitBackdropFilter: 'blur(8px)'
-                       }}>
+                  <div
+                    key={feature.id}
+                    className="p-3 rounded-lg border border-cyan-400/30"
+                    style={{
+                      background: 'rgba(0, 255, 255, 0.1)',
+                      backdropFilter: 'blur(8px)',
+                      WebkitBackdropFilter: 'blur(8px)',
+                    }}
+                  >
                     <feature.icon className="w-6 h-6 text-primary mx-auto mb-1" />
                     <p className="text-xs font-medium text-foreground">{feature.title}</p>
                   </div>
                 ))}
               </div>
-              
+
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -366,7 +383,7 @@ export default function BeginnerModeToggle({
                 className="w-full px-6 py-3 text-foreground font-semibold rounded-lg transition-colors border border-cyan-400/30"
                 style={{
                   background: getHoverGradient(),
-                  boxShadow: '0 0 20px rgba(0, 255, 255, 0.3), 0 0 40px rgba(147, 51, 234, 0.2)'
+                  boxShadow: '0 0 20px rgba(0, 255, 255, 0.3), 0 0 40px rgba(147, 51, 234, 0.2)',
                 }}
               >
                 Start My Journey! 🚀

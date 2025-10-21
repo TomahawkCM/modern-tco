@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { expect, test } from '@playwright/test';
 
 test('module review tab: flag, view, clear', async ({ page }) => {
   // Open Asking Questions module page
@@ -32,4 +32,3 @@ test('module review tab: flag, view, clear', async ({ page }) => {
   await expect(page.getByRole('heading', { name: /TCO Study Center/i })).toBeVisible();
   await expect(page.getByText(/Asking Questions/i)).toBeVisible();
 });
-

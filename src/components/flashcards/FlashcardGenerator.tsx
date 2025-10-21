@@ -1,24 +1,24 @@
-"use client";
+'use client';
 
-import React, { useState } from "react";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Label } from "@/components/ui/label";
+import { Loader2, Plus, Sparkles } from 'lucide-react';
+import { useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { useAuth } from "@/contexts/AuthContext";
-import { flashcardService } from "@/services/flashcardService";
-import type { FlashcardType } from "@/types/flashcard";
-import { Sparkles, Plus, Loader2 } from "lucide-react";
-import { useToast } from "@/hooks/use-toast";
-import { analytics } from "@/lib/analytics";
+} from '@/components/ui/select';
+import { Textarea } from '@/components/ui/textarea';
+import { useAuth } from '@/contexts/AuthContext';
+import { useToast } from '@/hooks/use-toast';
+import { analytics } from '@/lib/analytics';
+import { flashcardService } from '@/services/flashcardService';
+import type { FlashcardType } from '@/types/flashcard';
 
 interface FlashcardGeneratorProps {
   moduleId?: string;
@@ -26,26 +26,30 @@ interface FlashcardGeneratorProps {
   onCardCreated?: () => void;
 }
 
-export default function FlashcardGenerator({ moduleId, sectionId, onCardCreated }: FlashcardGeneratorProps) {
+export default function FlashcardGenerator({
+  moduleId,
+  sectionId,
+  onCardCreated,
+}: FlashcardGeneratorProps) {
   const { user } = useAuth();
   const { toast } = useToast();
   const [isCreating, setIsCreating] = useState(false);
   const [isAutoGenerating, setIsAutoGenerating] = useState(false);
 
   // Form state
-  const [front, setFront] = useState("");
-  const [back, setBack] = useState("");
-  const [cardType, setCardType] = useState<FlashcardType>("basic");
-  const [hint, setHint] = useState("");
-  const [explanation, setExplanation] = useState("");
-  const [tags, setTags] = useState("");
+  const [front, setFront] = useState('');
+  const [back, setBack] = useState('');
+  const [cardType, setCardType] = useState<FlashcardType>('basic');
+  const [hint, setHint] = useState('');
+  const [explanation, setExplanation] = useState('');
+  const [tags, setTags] = useState('');
 
   const handleManualCreate = async () => {
     if (!user?.id || !front.trim() || !back.trim()) {
       toast({
-        title: "Missing information",
-        description: "Please provide both front and back text for the flashcard.",
-        variant: "destructive",
+        title: 'Missing information',
+        description: 'Please provide both front and back text for the flashcard.',
+        variant: 'destructive',
       });
       return;
     }
@@ -58,59 +62,62 @@ export default function FlashcardGenerator({ moduleId, sectionId, onCardCreated 
         sectionId,
         hint: hint.trim() || undefined,
         explanation: explanation.trim() || undefined,
-        tags: tags.split(',').map(t => t.trim()).filter(Boolean),
+        tags: tags
+          .split(',')
+          .map((t) => t.trim())
+          .filter(Boolean),
         source: 'manual',
       });
 
       if (card) {
         toast({
-          title: "Flashcard created!",
-          description: "Your flashcard has been added to your review queue.",
+          title: 'Flashcard created!',
+          description: 'Your flashcard has been added to your review queue.',
         });
 
-        analytics.capture("flashcard_created", {
-          source: "manual",
+        analytics.capture('flashcard_created', {
+          source: 'manual',
           moduleId,
           sectionId,
           cardType,
         });
 
         // Reset form
-        setFront("");
-        setBack("");
-        setHint("");
-        setExplanation("");
-        setTags("");
-        setCardType("basic");
+        setFront('');
+        setBack('');
+        setHint('');
+        setExplanation('');
+        setTags('');
+        setCardType('basic');
 
         onCardCreated?.();
       } else {
-        throw new Error("Failed to create flashcard");
+        throw new Error('Failed to create flashcard');
       }
-      } catch (error) {
-        console.error("Error creating flashcard:", error);
-        toast({
-          title: "Error",
-          description: "Failed to create flashcard. Please try again.",
-          variant: "destructive",
-        });
+    } catch (error) {
+      console.error('Error creating flashcard:', error);
+      toast({
+        title: 'Error',
+        description: 'Failed to create flashcard. Please try again.',
+        variant: 'destructive',
+      });
 
-        analytics.capture("flashcard_create_error", {
-          source: "manual",
-          moduleId,
-          sectionId,
-        });
-      } finally {
-        setIsCreating(false);
-      }
-    };
+      analytics.capture('flashcard_create_error', {
+        source: 'manual',
+        moduleId,
+        sectionId,
+      });
+    } finally {
+      setIsCreating(false);
+    }
+  };
 
   const handleAutoGenerate = async () => {
     if (!user?.id || !moduleId) {
       toast({
-        title: "Module required",
-        description: "Auto-generation requires a module context.",
-        variant: "destructive",
+        title: 'Module required',
+        description: 'Auto-generation requires a module context.',
+        variant: 'destructive',
       });
       return;
     }
@@ -120,31 +127,31 @@ export default function FlashcardGenerator({ moduleId, sectionId, onCardCreated 
       const cards = await flashcardService.autoGenerateFromModule(user.id, moduleId);
 
       toast({
-        title: "Flashcards generated!",
+        title: 'Flashcards generated!',
         description: `Created ${cards.length} flashcards from module learning objectives.`,
       });
 
-      analytics.capture("flashcard_autogen", {
+      analytics.capture('flashcard_autogen', {
         moduleId,
         count: cards.length,
       });
 
       onCardCreated?.();
-      } catch (error) {
-        console.error("Error auto-generating flashcards:", error);
-        toast({
-          title: "Error",
-          description: "Failed to generate flashcards. Please try again.",
-          variant: "destructive",
-        });
+    } catch (error) {
+      console.error('Error auto-generating flashcards:', error);
+      toast({
+        title: 'Error',
+        description: 'Failed to generate flashcards. Please try again.',
+        variant: 'destructive',
+      });
 
-        analytics.capture("flashcard_autogen_error", {
-          moduleId,
-        });
-      } finally {
-        setIsAutoGenerating(false);
-      }
-    };
+      analytics.capture('flashcard_autogen_error', {
+        moduleId,
+      });
+    } finally {
+      setIsAutoGenerating(false);
+    }
+  };
 
   return (
     <Card>
@@ -171,11 +178,7 @@ export default function FlashcardGenerator({ moduleId, sectionId, onCardCreated 
                   Automatically create flashcards from all learning objectives in this module
                 </p>
               </div>
-              <Button
-                onClick={handleAutoGenerate}
-                disabled={isAutoGenerating}
-                variant="secondary"
-              >
+              <Button onClick={handleAutoGenerate} disabled={isAutoGenerating} variant="secondary">
                 {isAutoGenerating && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
                 Generate
               </Button>

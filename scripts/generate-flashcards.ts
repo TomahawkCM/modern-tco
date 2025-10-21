@@ -19,8 +19,8 @@
  */
 
 import dotenv from 'dotenv';
-import OpenAI from 'openai';
 import * as fs from 'fs';
+import OpenAI from 'openai';
 import * as path from 'path';
 
 // Load environment variables from .env.local
@@ -69,7 +69,7 @@ const TCO_DOMAINS: Record<string, DomainInfo> = {
       'Common sensors (Computer Name, IP Address, OS)',
       'Question result interpretation',
     ],
-    description: 'Master asking effective questions using Tanium\'s natural language interface.',
+    description: "Master asking effective questions using Tanium's natural language interface.",
   },
   refining_targeting: {
     name: 'Refining Questions & Targeting',
@@ -231,7 +231,9 @@ async function generateFlashcards(config: GenerationConfig): Promise<GeneratedFl
     throw new Error(`Invalid domain: ${config.domain}`);
   }
 
-  console.log(`\n🤖 Generating ${config.count} ${config.difficulty} flashcards for ${domainInfo.name}...`);
+  console.log(
+    `\n🤖 Generating ${config.count} ${config.difficulty} flashcards for ${domainInfo.name}...`
+  );
   console.log(`📊 Exam Weight: ${domainInfo.weight}%\n`);
 
   const prompt = buildFlashcardGenerationPrompt(domainInfo, config.difficulty, config.count);
@@ -244,7 +246,8 @@ async function generateFlashcards(config: GenerationConfig): Promise<GeneratedFl
       messages: [
         {
           role: 'system',
-          content: 'You are an expert Tanium TCO (Certified Operator) flashcard creator. You always respond with valid JSON objects containing flashcards.',
+          content:
+            'You are an expert Tanium TCO (Certified Operator) flashcard creator. You always respond with valid JSON objects containing flashcards.',
         },
         {
           role: 'user',
@@ -330,7 +333,10 @@ function validateFlashcards(flashcards: GeneratedFlashcard[]): {
 
 // ==================== FILE OUTPUT ====================
 
-function generateTypeScriptFile(flashcards: GeneratedFlashcard[], config: GenerationConfig): string {
+function generateTypeScriptFile(
+  flashcards: GeneratedFlashcard[],
+  config: GenerationConfig
+): string {
   const timestamp = new Date().toISOString().split('T')[0];
   const domainLabel = config.domain === 'all' ? 'multi-domain' : config.domain;
   const fileName = `generated-flashcards-${domainLabel}-${config.difficulty}-${timestamp}.ts`;
@@ -366,10 +372,13 @@ function printStatistics(flashcards: GeneratedFlashcard[]): void {
   console.log('\n📊 Generation Statistics:\n');
 
   // Count by category
-  const byCategory = flashcards.reduce((acc, f) => {
-    acc[f.category] = (acc[f.category] || 0) + 1;
-    return acc;
-  }, {} as Record<string, number>);
+  const byCategory = flashcards.reduce(
+    (acc, f) => {
+      acc[f.category] = (acc[f.category] || 0) + 1;
+      return acc;
+    },
+    {} as Record<string, number>
+  );
 
   console.log('Category Distribution:');
   for (const [category, count] of Object.entries(byCategory)) {
@@ -379,13 +388,13 @@ function printStatistics(flashcards: GeneratedFlashcard[]): void {
 
   // Flashcards with hints
   const withHints = flashcards.filter((f) => f.hint).length;
-  console.log(`\nFlashcards with hints: ${withHints} (${((withHints / flashcards.length) * 100).toFixed(1)}%)`);
+  console.log(
+    `\nFlashcards with hints: ${withHints} (${((withHints / flashcards.length) * 100).toFixed(1)}%)`
+  );
 
   // Average lengths
-  const avgFrontLength =
-    flashcards.reduce((sum, f) => sum + f.front.length, 0) / flashcards.length;
-  const avgBackLength =
-    flashcards.reduce((sum, f) => sum + f.back.length, 0) / flashcards.length;
+  const avgFrontLength = flashcards.reduce((sum, f) => sum + f.front.length, 0) / flashcards.length;
+  const avgBackLength = flashcards.reduce((sum, f) => sum + f.back.length, 0) / flashcards.length;
   console.log(`\nAverage Front Length: ${avgFrontLength.toFixed(0)} characters`);
   console.log(`Average Back Length: ${avgBackLength.toFixed(0)} characters`);
 
@@ -395,10 +404,13 @@ function printStatistics(flashcards: GeneratedFlashcard[]): void {
   console.log(`Total Unique Tags: ${uniqueTags.size}`);
 
   console.log('\nMost Common Tags:');
-  const tagCounts = allTags.reduce((acc, tag) => {
-    acc[tag] = (acc[tag] || 0) + 1;
-    return acc;
-  }, {} as Record<string, number>);
+  const tagCounts = allTags.reduce(
+    (acc, tag) => {
+      acc[tag] = (acc[tag] || 0) + 1;
+      return acc;
+    },
+    {} as Record<string, number>
+  );
   const sortedTags = Object.entries(tagCounts)
     .sort(([, a], [, b]) => b - a)
     .slice(0, 10);

@@ -3,21 +3,21 @@
  * Defines the expanded 9-section structure for enhanced content organization
  */
 
-import { TCODomain } from "@/types/exam";
+import { TCODomain } from '@/types/exam';
 
 /**
  * Module 3 section identifiers
  */
 export enum Module3Section {
-  PACKAGE_VALIDATION = "package-validation",
-  DEPLOYMENT_STRATEGIES = "deployment-strategies",
-  ERROR_HANDLING = "error-handling",
-  ROLLBACK_PROCEDURES = "rollback-procedures",
-  PERFORMANCE_MONITORING = "performance-monitoring",
-  SECURITY_CONSIDERATIONS = "security-considerations",
-  BATCH_OPERATIONS = "batch-operations",
-  SCHEDULING_AUTOMATION = "scheduling-automation",
-  DEPENDENCY_MANAGEMENT = "dependency-management"
+  PACKAGE_VALIDATION = 'package-validation',
+  DEPLOYMENT_STRATEGIES = 'deployment-strategies',
+  ERROR_HANDLING = 'error-handling',
+  ROLLBACK_PROCEDURES = 'rollback-procedures',
+  PERFORMANCE_MONITORING = 'performance-monitoring',
+  SECURITY_CONSIDERATIONS = 'security-considerations',
+  BATCH_OPERATIONS = 'batch-operations',
+  SCHEDULING_AUTOMATION = 'scheduling-automation',
+  DEPENDENCY_MANAGEMENT = 'dependency-management',
 }
 
 /**
@@ -29,7 +29,7 @@ export interface SectionMetadata {
   description: string;
   learningObjectives: string[];
   estimatedTime: number; // in minutes
-  difficulty: "Beginner" | "Intermediate" | "Advanced";
+  difficulty: 'Beginner' | 'Intermediate' | 'Advanced';
   prerequisites?: Module3Section[];
   tags: string[];
   questionTargetCount: number;
@@ -43,174 +43,193 @@ export interface SectionMetadata {
 export const MODULE_3_SECTIONS: Record<Module3Section, SectionMetadata> = {
   [Module3Section.PACKAGE_VALIDATION]: {
     id: Module3Section.PACKAGE_VALIDATION,
-    title: "Package Validation",
-    description: "Learn to validate package integrity, dependencies, and prerequisites before deployment",
+    title: 'Package Validation',
+    description:
+      'Learn to validate package integrity, dependencies, and prerequisites before deployment',
     learningObjectives: [
-      "PV1: Validate package integrity before deployment",
-      "PV2: Verify package dependencies and prerequisites",
-      "PV3: Handle validation failures effectively",
-      "PV4: Implement automated validation workflows"
+      'PV1: Validate package integrity before deployment',
+      'PV2: Verify package dependencies and prerequisites',
+      'PV3: Handle validation failures effectively',
+      'PV4: Implement automated validation workflows',
     ],
     estimatedTime: 20,
-    difficulty: "Intermediate",
-    tags: ["package-integrity", "validation-procedures", "testing-protocols", "checksum-verification"],
+    difficulty: 'Intermediate',
+    tags: [
+      'package-integrity',
+      'validation-procedures',
+      'testing-protocols',
+      'checksum-verification',
+    ],
     questionTargetCount: 10,
     currentQuestionCount: 0,
-    primaryTag: "taking-action-package-validation"
+    primaryTag: 'taking-action-package-validation',
   },
 
   [Module3Section.DEPLOYMENT_STRATEGIES]: {
     id: Module3Section.DEPLOYMENT_STRATEGIES,
-    title: "Advanced Deployment Strategies",
-    description: "Master sophisticated deployment methodologies for enterprise environments",
+    title: 'Advanced Deployment Strategies',
+    description: 'Master sophisticated deployment methodologies for enterprise environments',
     learningObjectives: [
-      "ADS1: Design effective pilot group strategies",
-      "ADS2: Implement geographic and time-zone aware deployments",
-      "ADS3: Create precision targeting with layered filtering",
-      "ADS4: Manage multi-domain deployment scenarios"
+      'ADS1: Design effective pilot group strategies',
+      'ADS2: Implement geographic and time-zone aware deployments',
+      'ADS3: Create precision targeting with layered filtering',
+      'ADS4: Manage multi-domain deployment scenarios',
     ],
     estimatedTime: 30,
-    difficulty: "Advanced",
-    tags: ["pilot-groups", "time-zones", "layered-filtering", "multi-domain", "precise-targeting"],
+    difficulty: 'Advanced',
+    tags: ['pilot-groups', 'time-zones', 'layered-filtering', 'multi-domain', 'precise-targeting'],
     questionTargetCount: 15,
     currentQuestionCount: 8,
-    primaryTag: "taking-action-deployment-strategies"
+    primaryTag: 'taking-action-deployment-strategies',
   },
 
   [Module3Section.ERROR_HANDLING]: {
     id: Module3Section.ERROR_HANDLING,
-    title: "Error Handling & Recovery",
-    description: "Comprehensive error detection, troubleshooting, and recovery procedures",
+    title: 'Error Handling & Recovery',
+    description: 'Comprehensive error detection, troubleshooting, and recovery procedures',
     learningObjectives: [
-      "EH1: Identify and classify deployment errors",
-      "EH2: Apply systematic troubleshooting procedures",
-      "EH3: Implement intelligent retry mechanisms",
-      "EH4: Protect critical infrastructure during failures"
+      'EH1: Identify and classify deployment errors',
+      'EH2: Apply systematic troubleshooting procedures',
+      'EH3: Implement intelligent retry mechanisms',
+      'EH4: Protect critical infrastructure during failures',
     ],
     estimatedTime: 25,
-    difficulty: "Intermediate",
-    tags: ["troubleshooting", "failure-handling", "retry-logic", "error-handling", "root-cause-analysis"],
+    difficulty: 'Intermediate',
+    tags: [
+      'troubleshooting',
+      'failure-handling',
+      'retry-logic',
+      'error-handling',
+      'root-cause-analysis',
+    ],
     questionTargetCount: 10,
     currentQuestionCount: 6,
-    primaryTag: "taking-action-error-handling"
+    primaryTag: 'taking-action-error-handling',
   },
 
   [Module3Section.ROLLBACK_PROCEDURES]: {
     id: Module3Section.ROLLBACK_PROCEDURES,
-    title: "Rollback Procedures",
-    description: "Design and execute effective rollback strategies for failed deployments",
+    title: 'Rollback Procedures',
+    description: 'Design and execute effective rollback strategies for failed deployments',
     learningObjectives: [
-      "RP1: Design comprehensive rollback strategies",
-      "RP2: Implement state restoration procedures",
-      "RP3: Execute emergency rollback procedures",
-      "RP4: Validate rollback completion and success"
+      'RP1: Design comprehensive rollback strategies',
+      'RP2: Implement state restoration procedures',
+      'RP3: Execute emergency rollback procedures',
+      'RP4: Validate rollback completion and success',
     ],
     estimatedTime: 20,
-    difficulty: "Advanced",
+    difficulty: 'Advanced',
     prerequisites: [Module3Section.ERROR_HANDLING],
-    tags: ["rollback-strategies", "state-restoration", "recovery-procedures", "emergency-rollback"],
+    tags: ['rollback-strategies', 'state-restoration', 'recovery-procedures', 'emergency-rollback'],
     questionTargetCount: 8,
     currentQuestionCount: 0,
-    primaryTag: "taking-action-rollback-procedures"
+    primaryTag: 'taking-action-rollback-procedures',
   },
 
   [Module3Section.PERFORMANCE_MONITORING]: {
     id: Module3Section.PERFORMANCE_MONITORING,
-    title: "Performance Monitoring",
-    description: "Monitor and optimize deployment performance at scale",
+    title: 'Performance Monitoring',
+    description: 'Monitor and optimize deployment performance at scale',
     learningObjectives: [
-      "PM1: Monitor system health and performance metrics",
-      "PM2: Optimize resource usage for large-scale deployments",
-      "PM3: Analyze scalability limits and bottlenecks",
-      "PM4: Implement performance trend analysis"
+      'PM1: Monitor system health and performance metrics',
+      'PM2: Optimize resource usage for large-scale deployments',
+      'PM3: Analyze scalability limits and bottlenecks',
+      'PM4: Implement performance trend analysis',
     ],
     estimatedTime: 25,
-    difficulty: "Intermediate",
-    tags: ["monitoring", "performance", "scalability", "resource-usage", "system-health"],
+    difficulty: 'Intermediate',
+    tags: ['monitoring', 'performance', 'scalability', 'resource-usage', 'system-health'],
     questionTargetCount: 10,
     currentQuestionCount: 6,
-    primaryTag: "taking-action-performance-monitoring"
+    primaryTag: 'taking-action-performance-monitoring',
   },
 
   [Module3Section.SECURITY_CONSIDERATIONS]: {
     id: Module3Section.SECURITY_CONSIDERATIONS,
-    title: "Security Considerations",
-    description: "Implement security best practices during deployments",
+    title: 'Security Considerations',
+    description: 'Implement security best practices during deployments',
     learningObjectives: [
-      "SC1: Manage security boundaries and access controls",
-      "SC2: Ensure compliance with data sovereignty requirements",
-      "SC3: Implement proper authorization procedures",
-      "SC4: Validate security policies during deployments"
+      'SC1: Manage security boundaries and access controls',
+      'SC2: Ensure compliance with data sovereignty requirements',
+      'SC3: Implement proper authorization procedures',
+      'SC4: Validate security policies during deployments',
     ],
     estimatedTime: 20,
-    difficulty: "Advanced",
-    tags: ["security-boundaries", "data-sovereignty", "access-control", "compliance", "gdpr"],
+    difficulty: 'Advanced',
+    tags: ['security-boundaries', 'data-sovereignty', 'access-control', 'compliance', 'gdpr'],
     questionTargetCount: 10,
     currentQuestionCount: 2,
-    primaryTag: "taking-action-security-considerations"
+    primaryTag: 'taking-action-security-considerations',
   },
 
   [Module3Section.BATCH_OPERATIONS]: {
     id: Module3Section.BATCH_OPERATIONS,
-    title: "Batch Operations",
-    description: "Execute efficient bulk operations and mass deployments",
+    title: 'Batch Operations',
+    description: 'Execute efficient bulk operations and mass deployments',
     learningObjectives: [
-      "BO1: Design efficient bulk operation strategies",
-      "BO2: Monitor and control batch operations",
-      "BO3: Manage concurrent execution limits",
-      "BO4: Optimize batch operations for enterprise scale"
+      'BO1: Design efficient bulk operation strategies',
+      'BO2: Monitor and control batch operations',
+      'BO3: Manage concurrent execution limits',
+      'BO4: Optimize batch operations for enterprise scale',
     ],
     estimatedTime: 20,
-    difficulty: "Intermediate",
-    tags: ["bulk-operations", "mass-deployment", "batch-processing", "parallel-execution"],
+    difficulty: 'Intermediate',
+    tags: ['bulk-operations', 'mass-deployment', 'batch-processing', 'parallel-execution'],
     questionTargetCount: 10,
     currentQuestionCount: 0,
-    primaryTag: "taking-action-batch-operations"
+    primaryTag: 'taking-action-batch-operations',
   },
 
   [Module3Section.SCHEDULING_AUTOMATION]: {
     id: Module3Section.SCHEDULING_AUTOMATION,
-    title: "Scheduling & Automation",
-    description: "Implement automated workflows and scheduling strategies",
+    title: 'Scheduling & Automation',
+    description: 'Implement automated workflows and scheduling strategies',
     learningObjectives: [
-      "SA1: Design automated deployment workflows",
-      "SA2: Implement time-based scheduling strategies",
-      "SA3: Manage dynamic group automation",
-      "SA4: Integrate with enterprise management tools"
+      'SA1: Design automated deployment workflows',
+      'SA2: Implement time-based scheduling strategies',
+      'SA3: Manage dynamic group automation',
+      'SA4: Integrate with enterprise management tools',
     ],
     estimatedTime: 25,
-    difficulty: "Advanced",
-    tags: ["automation", "scheduling", "workflow-orchestration", "dynamic-groups", "integration"],
+    difficulty: 'Advanced',
+    tags: ['automation', 'scheduling', 'workflow-orchestration', 'dynamic-groups', 'integration'],
     questionTargetCount: 10,
     currentQuestionCount: 1,
-    primaryTag: "taking-action-scheduling-automation"
+    primaryTag: 'taking-action-scheduling-automation',
   },
 
   [Module3Section.DEPENDENCY_MANAGEMENT]: {
     id: Module3Section.DEPENDENCY_MANAGEMENT,
-    title: "Dependency Management",
-    description: "Track and manage operational dependencies effectively",
+    title: 'Dependency Management',
+    description: 'Track and manage operational dependencies effectively',
     learningObjectives: [
-      "DM1: Identify and map operational dependencies",
-      "DM2: Implement automated prerequisite checking",
-      "DM3: Optimize execution order and dependency resolution",
-      "DM4: Handle dependency failures gracefully"
+      'DM1: Identify and map operational dependencies',
+      'DM2: Implement automated prerequisite checking',
+      'DM3: Optimize execution order and dependency resolution',
+      'DM4: Handle dependency failures gracefully',
     ],
     estimatedTime: 20,
-    difficulty: "Intermediate",
+    difficulty: 'Intermediate',
     prerequisites: [Module3Section.PACKAGE_VALIDATION],
-    tags: ["dependency-tracking", "prerequisite-validation", "execution-order", "dependency-resolution"],
+    tags: [
+      'dependency-tracking',
+      'prerequisite-validation',
+      'execution-order',
+      'dependency-resolution',
+    ],
     questionTargetCount: 8,
     currentQuestionCount: 0,
-    primaryTag: "taking-action-dependency-management"
-  }
+    primaryTag: 'taking-action-dependency-management',
+  },
 };
 
 /**
  * Get sections by difficulty level
  */
-export function getSectionsByDifficulty(difficulty: "Beginner" | "Intermediate" | "Advanced"): SectionMetadata[] {
-  return Object.values(MODULE_3_SECTIONS).filter(section => section.difficulty === difficulty);
+export function getSectionsByDifficulty(
+  difficulty: 'Beginner' | 'Intermediate' | 'Advanced'
+): SectionMetadata[] {
+  return Object.values(MODULE_3_SECTIONS).filter((section) => section.difficulty === difficulty);
 }
 
 /**
@@ -218,7 +237,7 @@ export function getSectionsByDifficulty(difficulty: "Beginner" | "Intermediate" 
  */
 export function getSectionsWithGaps(): SectionMetadata[] {
   return Object.values(MODULE_3_SECTIONS).filter(
-    section => section.currentQuestionCount < section.questionTargetCount
+    (section) => section.currentQuestionCount < section.questionTargetCount
   );
 }
 
@@ -242,9 +261,13 @@ export function getOverallModule3Coverage(): {
   overallCoverage: number;
 } {
   const sections = Object.values(MODULE_3_SECTIONS);
-  const completeSections = sections.filter(s => s.currentQuestionCount >= s.questionTargetCount).length;
-  const partialSections = sections.filter(s => s.currentQuestionCount > 0 && s.currentQuestionCount < s.questionTargetCount).length;
-  const emptySections = sections.filter(s => s.currentQuestionCount === 0).length;
+  const completeSections = sections.filter(
+    (s) => s.currentQuestionCount >= s.questionTargetCount
+  ).length;
+  const partialSections = sections.filter(
+    (s) => s.currentQuestionCount > 0 && s.currentQuestionCount < s.questionTargetCount
+  ).length;
+  const emptySections = sections.filter((s) => s.currentQuestionCount === 0).length;
 
   const totalTarget = sections.reduce((sum, s) => sum + s.questionTargetCount, 0);
   const totalCurrent = sections.reduce((sum, s) => sum + s.currentQuestionCount, 0);
@@ -255,7 +278,7 @@ export function getOverallModule3Coverage(): {
     completeSections,
     partialSections,
     emptySections,
-    overallCoverage
+    overallCoverage,
   };
 }
 
@@ -266,14 +289,14 @@ export function createSectionPracticeTargeting(sectionId: Module3Section) {
   const section = MODULE_3_SECTIONS[sectionId];
 
   return {
-    moduleId: "module-taking-action",
+    moduleId: 'module-taking-action',
     primaryDomain: TCODomain.TAKING_ACTION,
-    targetObjectives: section.learningObjectives.map(obj => obj.split(":")[0]), // Extract objective IDs
+    targetObjectives: section.learningObjectives.map((obj) => obj.split(':')[0]), // Extract objective IDs
     requiredTags: [section.primaryTag],
     optionalTags: section.tags,
     minQuestions: 5,
     idealQuestions: 15,
-    fallbackStrategy: "expand-domain" as const
+    fallbackStrategy: 'expand-domain' as const,
   };
 }
 
@@ -290,14 +313,14 @@ export function getModule3LearningPath(): Module3Section[] {
 
     const section = MODULE_3_SECTIONS[sectionId];
     if (section.prerequisites) {
-      section.prerequisites.forEach(prereq => visit(prereq));
+      section.prerequisites.forEach((prereq) => visit(prereq));
     }
 
     visited.add(sectionId);
     path.push(sectionId);
   }
 
-  Object.keys(MODULE_3_SECTIONS).forEach(sectionId => {
+  Object.keys(MODULE_3_SECTIONS).forEach((sectionId) => {
     visit(sectionId as Module3Section);
   });
 

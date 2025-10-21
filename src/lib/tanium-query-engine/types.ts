@@ -44,7 +44,7 @@ export enum TokenType {
 
   // Special
   EOF = 'EOF',
-  UNKNOWN = 'UNKNOWN'
+  UNKNOWN = 'UNKNOWN',
 }
 
 export interface Token {
@@ -275,18 +275,16 @@ export class QueryError extends Error {
 
 export class ParseError extends QueryError {
   constructor(message: string, token?: Token) {
-    super(
-      message,
-      token?.position,
-      token?.line,
-      token?.column
-    );
+    super(message, token?.position, token?.line, token?.column);
     this.name = 'ParseError';
   }
 }
 
 export class ExecutionError extends QueryError {
-  constructor(message: string, public code?: string) {
+  constructor(
+    message: string,
+    public code?: string
+  ) {
     super(message);
     this.name = 'ExecutionError';
   }

@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { expect, test } from '@playwright/test';
 
 test('pricing page shows plans', async ({ page }) => {
   await page.goto('/pricing');
@@ -7,4 +7,3 @@ test('pricing page shows plans', async ({ page }) => {
   await expect(page.getByText(/Pro/i)).toBeVisible();
   await expect(page.getByText(/Team/i)).toBeVisible();
 });
-

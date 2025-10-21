@@ -10,6 +10,7 @@ process.env.__NEXT_DISABLE_SWC_WARNING__ = '1';
 
 // Provide a lightweight mock for the Auth context used by UI components
 import { vi } from 'vitest';
+
 vi.mock('@/contexts/AuthContext', () => {
   return {
     AuthProvider: ({ children }: any) => children,

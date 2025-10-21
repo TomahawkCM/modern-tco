@@ -1,6 +1,8 @@
-"use client";
+'use client';
 
-import { useRouter } from "next/navigation";
+import { HelpCircle, LogOut, Settings, Shield, User } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -8,10 +10,8 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Button } from "@/components/ui/button";
-import { User, Settings, HelpCircle, LogOut, Shield } from "lucide-react";
-import { useIsAdmin } from "@/contexts/AuthContext";
+} from '@/components/ui/dropdown-menu';
+import { useIsAdmin } from '@/contexts/AuthContext';
 
 export function UserMenu() {
   const router = useRouter();
@@ -32,22 +32,22 @@ export function UserMenu() {
       <DropdownMenuContent align="end" className="min-w-52">
         <DropdownMenuLabel>Account</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuItem onClick={() => router.push("/profile")}>
+        <DropdownMenuItem onClick={() => router.push('/profile')}>
           <User className="mr-2 h-4 w-4" /> Profile
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => router.push("/settings")}>
+        <DropdownMenuItem onClick={() => router.push('/settings')}>
           <Settings className="mr-2 h-4 w-4" /> Settings
         </DropdownMenuItem>
         {isAdmin && (
-          <DropdownMenuItem onClick={() => router.push("/admin/questions")}>
+          <DropdownMenuItem onClick={() => router.push('/admin/questions')}>
             <Shield className="mr-2 h-4 w-4 text-primary" /> Admin Dashboard
           </DropdownMenuItem>
         )}
-        <DropdownMenuItem onClick={() => router.push("/kb")}>
+        <DropdownMenuItem onClick={() => router.push('/kb')}>
           <HelpCircle className="mr-2 h-4 w-4" /> Help Center
         </DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuItem onClick={() => router.push("/auth")}>
+        <DropdownMenuItem onClick={() => router.push('/auth')}>
           <LogOut className="mr-2 h-4 w-4" /> Sign out
         </DropdownMenuItem>
       </DropdownMenuContent>

@@ -9,27 +9,27 @@ export async function GET() {
 
     // Test getDueFlashcards query
     const { data: dueCards, error: dueError } = await supabase
-      .from("flashcards")
+      .from('flashcards')
       .select()
-      .eq("user_id", DEV_USER_ID)
-      .lte("srs_due", now)
-      .order("srs_due", { ascending: true })
+      .eq('user_id', DEV_USER_ID)
+      .lte('srs_due', now)
+      .order('srs_due', { ascending: true })
       .limit(20);
 
     // Test getNewFlashcards query
     const { data: newCards, error: newError } = await supabase
-      .from("flashcards")
+      .from('flashcards')
       .select()
-      .eq("user_id", DEV_USER_ID)
-      .eq("srs_reps", 0)
-      .order("created_at", { ascending: false })
+      .eq('user_id', DEV_USER_ID)
+      .eq('srs_reps', 0)
+      .order('created_at', { ascending: false })
       .limit(5);
 
     // Test getFlashcardStats query
     const { data: allCards, error: statsError } = await supabase
-      .from("flashcards")
+      .from('flashcards')
       .select()
-      .eq("user_id", DEV_USER_ID);
+      .eq('user_id', DEV_USER_ID);
 
     return NextResponse.json({
       timestamp: now,
@@ -38,22 +38,25 @@ export async function GET() {
         getDueFlashcards: {
           count: dueCards?.length || 0,
           error: dueError?.message || null,
-          sample: dueCards?.[0] || null
+          sample: dueCards?.[0] || null,
         },
         getNewFlashcards: {
           count: newCards?.length || 0,
-          error: newError?.message || null
+          error: newError?.message || null,
         },
         getFlashcardStats: {
           count: allCards?.length || 0,
-          error: statsError?.message || null
-        }
-      }
+          error: statsError?.message || null,
+        },
+      },
     });
   } catch (error) {
-    return NextResponse.json({
-      error: 'Test failed',
-      details: error instanceof Error ? error.message : 'Unknown error'
-    }, { status: 500 });
+    return NextResponse.json(
+      {
+        error: 'Test failed',
+        details: error instanceof Error ? error.message : 'Unknown error',
+      },
+      { status: 500 }
+    );
   }
 }

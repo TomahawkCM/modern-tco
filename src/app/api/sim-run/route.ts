@@ -7,7 +7,7 @@ type RunPayload = {
 };
 
 export async function POST(request: NextRequest) {
-  if (process.env.NODE_ENV === 'production' && process.env['ENABLE_SIMULATOR'] !== 'true') {
+  if (process.env.NODE_ENV === 'production' && process.env.ENABLE_SIMULATOR !== 'true') {
     return NextResponse.json(
       { ok: false, error: 'Simulator endpoints are disabled in production.' },
       { status: 501 }

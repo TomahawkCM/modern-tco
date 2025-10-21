@@ -1,5 +1,5 @@
-import { AuthGuard } from '@/components/auth/AuthGuard'
-import { SignInForm } from '@/components/auth/SignInForm'
+import { AuthGuard } from '@/components/auth/AuthGuard';
+import { SignInForm } from '@/components/auth/SignInForm';
 
 export default function SignInPage() {
   return (
@@ -14,9 +14,9 @@ export default function SignInPage() {
               Tanium Certified Operator Exam Preparation
             </p>
           </div>
-          
+
           <SignInForm />
-          
+
           <div className="mt-8 text-center text-sm text-slate-600 dark:text-muted-foreground">
             <p>
               Prepare for the TAN-1000 certification exam with interactive learning modules,
@@ -26,5 +26,5 @@ export default function SignInPage() {
         </div>
       </div>
     </AuthGuard>
-  )
+  );
 }

@@ -7,7 +7,7 @@ const modules = [
   'taking-action-packages-actions',
   'navigation-basic-modules',
   'reporting-data-export',
-  'tanium-platform-foundation'
+  'tanium-platform-foundation',
 ];
 
 async function testAllModules() {
@@ -18,18 +18,18 @@ async function testAllModules() {
     const page = await browser.newPage();
     const errors = [];
 
-    page.on('console', msg => {
+    page.on('console', (msg) => {
       if (msg.type() === 'error') errors.push(msg.text());
     });
 
     await page.goto(`${deploymentUrl}/study/${moduleName}`);
     await page.waitForTimeout(3000);
 
-    const hasReferenceError = errors.some(e => e.includes('ReferenceError'));
+    const hasReferenceError = errors.some((e) => e.includes('ReferenceError'));
     const result = {
       module: moduleName,
       passed: errors.length === 0 || !hasReferenceError,
-      errorCount: errors.length
+      errorCount: errors.length,
     };
     results.push(result);
 
@@ -39,7 +39,7 @@ async function testAllModules() {
 
   await browser.close();
 
-  const passedCount = results.filter(r => r.passed).length;
+  const passedCount = results.filter((r) => r.passed).length;
   console.log(`\n=== SUMMARY ===`);
   console.log(`Passed: ${passedCount}/6`);
   if (passedCount === 6) {

@@ -6,20 +6,20 @@
  * Part of the complete Supabase automation system
  */
 
-const fs = require("fs");
-const path = require("path");
-const { execSync, exec } = require("child_process");
-const os = require("os");
-const crypto = require("crypto");
+const fs = require('fs');
+const path = require('path');
+const { execSync, exec } = require('child_process');
+const os = require('os');
+const crypto = require('crypto');
 
 class SessionPersistenceManager {
   constructor() {
     this.homeDir = os.homedir();
-    this.supabaseDir = path.join(this.homeDir, ".supabase");
-    this.sessionFile = path.join(this.supabaseDir, "session-state.json");
-    this.configFile = path.join(this.supabaseDir, "config.toml");
-    this.backupDir = path.join(this.supabaseDir, "backups");
-    this.logFile = path.join(this.supabaseDir, "session.log");
+    this.supabaseDir = path.join(this.homeDir, '.supabase');
+    this.sessionFile = path.join(this.supabaseDir, 'session-state.json');
+    this.configFile = path.join(this.supabaseDir, 'config.toml');
+    this.backupDir = path.join(this.supabaseDir, 'backups');
+    this.logFile = path.join(this.supabaseDir, 'session.log');
   }
 
   /**
@@ -27,14 +27,14 @@ class SessionPersistenceManager {
    */
   async initialize() {
     try {
-      this.log("Initializing session persistence system...");
+      this.log('Initializing session persistence system...');
 
       // Create necessary directories
       this.ensureDirectories();
 
       // Check current authentication status
       const authStatus = await this.checkAuthStatus();
-      this.log(`Current auth status: ${authStatus ? "authenticated" : "not authenticated"}`);
+      this.log(`Current auth status: ${authStatus ? 'authenticated' : 'not authenticated'}`);
 
       // Save current session state
       if (authStatus) {
@@ -43,7 +43,7 @@ class SessionPersistenceManager {
 
       return { success: true, authenticated: authStatus };
     } catch (error) {
-      this.log(`Initialization error: ${error.message}`, "error");
+      this.log(`Initialization error: ${error.message}`, 'error');
       return { success: false, error: error.message };
     }
   }
@@ -53,8 +53,8 @@ class SessionPersistenceManager {
    */
   async checkAuthStatus() {
     try {
-      const result = execSync("supabase status --output json 2>nul", {
-        encoding: "utf8",
+      const result = execSync('supabase status --output json 2>nul', {
+        encoding: 'utf8',
         timeout: 10000,
       });
 
@@ -64,8 +64,8 @@ class SessionPersistenceManager {
     } catch (error) {
       // Try alternative method - check for access token
       try {
-        execSync("supabase projects list 2>nul", {
-          encoding: "utf8",
+        execSync('supabase projects list 2>nul', {
+          encoding: 'utf8',
           timeout: 5000,
         });
         return true;
@@ -80,7 +80,7 @@ class SessionPersistenceManager {
    */
   async saveSessionState() {
     try {
-      this.log("Saving session state...");
+      this.log('Saving session state...');
 
       const sessionData = {
         timestamp: new Date().toISOString(),
@@ -92,13 +92,13 @@ class SessionPersistenceManager {
 
       // Get projects list if authenticated
       try {
-        const projectsResult = execSync("supabase projects list --output json", {
-          encoding: "utf8",
+        const projectsResult = execSync('supabase projects list --output json', {
+          encoding: 'utf8',
           timeout: 10000,
         });
         sessionData.projects = JSON.parse(projectsResult);
       } catch (error) {
-        this.log(`Could not fetch projects: ${error.message}`, "warn");
+        this.log(`Could not fetch projects: ${error.message}`, 'warn');
       }
 
       // Create checksum for integrity verification
@@ -113,11 +113,11 @@ class SessionPersistenceManager {
 
       // Save session state
       fs.writeFileSync(this.sessionFile, JSON.stringify(sessionData, null, 2));
-      this.log("Session state saved successfully");
+      this.log('Session state saved successfully');
 
       return sessionData;
     } catch (error) {
-      this.log(`Error saving session state: ${error.message}`, "error");
+      this.log(`Error saving session state: ${error.message}`, 'error');
       throw error;
     }
   }
@@ -127,20 +127,20 @@ class SessionPersistenceManager {
    */
   async restoreSession() {
     try {
-      this.log("Attempting to restore session...");
+      this.log('Attempting to restore session...');
 
       if (!fs.existsSync(this.sessionFile)) {
-        this.log("No saved session found", "warn");
-        return { success: false, reason: "no_session" };
+        this.log('No saved session found', 'warn');
+        return { success: false, reason: 'no_session' };
       }
 
-      const sessionData = JSON.parse(fs.readFileSync(this.sessionFile, "utf8"));
+      const sessionData = JSON.parse(fs.readFileSync(this.sessionFile, 'utf8'));
 
       // Verify integrity
       const expectedChecksum = this.createChecksum(sessionData);
       if (sessionData.checksum !== expectedChecksum) {
-        this.log("Session data integrity check failed", "error");
-        return { success: false, reason: "integrity_failed" };
+        this.log('Session data integrity check failed', 'error');
+        return { success: false, reason: 'integrity_failed' };
       }
 
       // Check if session is still valid (not older than 7 days)
@@ -148,8 +148,8 @@ class SessionPersistenceManager {
       const maxAge = 7 * 24 * 60 * 60 * 1000; // 7 days
 
       if (sessionAge > maxAge) {
-        this.log("Session expired (older than 7 days)", "warn");
-        return { success: false, reason: "expired" };
+        this.log('Session expired (older than 7 days)', 'warn');
+        return { success: false, reason: 'expired' };
       }
 
       // Restore access token if available
@@ -157,14 +157,14 @@ class SessionPersistenceManager {
         process.env.SUPABASE_ACCESS_TOKEN = sessionData.accessToken;
 
         // Set system environment variable for persistence
-        if (process.platform === "win32") {
+        if (process.platform === 'win32') {
           try {
             execSync(`setx SUPABASE_ACCESS_TOKEN "${sessionData.accessToken}"`, {
               timeout: 5000,
             });
-            this.log("Access token restored to system environment");
+            this.log('Access token restored to system environment');
           } catch (error) {
-            this.log(`Could not set system environment variable: ${error.message}`, "warn");
+            this.log(`Could not set system environment variable: ${error.message}`, 'warn');
           }
         }
       }
@@ -173,15 +173,15 @@ class SessionPersistenceManager {
       const authStatus = await this.checkAuthStatus();
 
       if (authStatus) {
-        this.log("Session restored successfully");
+        this.log('Session restored successfully');
         return { success: true, sessionData };
       } else {
-        this.log("Session restoration failed - authentication invalid", "warn");
-        return { success: false, reason: "auth_invalid" };
+        this.log('Session restoration failed - authentication invalid', 'warn');
+        return { success: false, reason: 'auth_invalid' };
       }
     } catch (error) {
-      this.log(`Error restoring session: ${error.message}`, "error");
-      return { success: false, reason: "error", error: error.message };
+      this.log(`Error restoring session: ${error.message}`, 'error');
+      return { success: false, reason: 'error', error: error.message };
     }
   }
 
@@ -190,35 +190,35 @@ class SessionPersistenceManager {
    */
   async performLogin() {
     try {
-      this.log("Starting interactive login...");
+      this.log('Starting interactive login...');
 
       // Check if already authenticated
       const authStatus = await this.checkAuthStatus();
       if (authStatus) {
-        this.log("Already authenticated");
+        this.log('Already authenticated');
         return { success: true, alreadyAuthenticated: true };
       }
 
-      console.log("🔐 Please complete Supabase CLI authentication...");
-      console.log("   This will open your browser for login.");
-      console.log("   After login, return to this terminal.");
+      console.log('🔐 Please complete Supabase CLI authentication...');
+      console.log('   This will open your browser for login.');
+      console.log('   After login, return to this terminal.');
 
       // Perform login
-      execSync("supabase login", { stdio: "inherit" });
+      execSync('supabase login', { stdio: 'inherit' });
 
       // Verify authentication
       const newAuthStatus = await this.checkAuthStatus();
       if (!newAuthStatus) {
-        throw new Error("Authentication verification failed");
+        throw new Error('Authentication verification failed');
       }
 
       // Save the new session state
       await this.saveSessionState();
 
-      this.log("Login completed and session saved");
+      this.log('Login completed and session saved');
       return { success: true };
     } catch (error) {
-      this.log(`Login error: ${error.message}`, "error");
+      this.log(`Login error: ${error.message}`, 'error');
       return { success: false, error: error.message };
     }
   }
@@ -252,7 +252,7 @@ class SessionPersistenceManager {
       this.log(`Cleanup completed. Removed ${cleaned} old files`);
       return { success: true, cleaned };
     } catch (error) {
-      this.log(`Cleanup error: ${error.message}`, "error");
+      this.log(`Cleanup error: ${error.message}`, 'error');
       return { success: false, error: error.message };
     }
   }
@@ -266,7 +266,7 @@ class SessionPersistenceManager {
         return { exists: false };
       }
 
-      const sessionData = JSON.parse(fs.readFileSync(this.sessionFile, "utf8"));
+      const sessionData = JSON.parse(fs.readFileSync(this.sessionFile, 'utf8'));
       const sessionAge = Date.now() - new Date(sessionData.timestamp).getTime();
 
       return {
@@ -300,20 +300,20 @@ class SessionPersistenceManager {
    */
   createChecksum(data) {
     const { checksum, ...dataWithoutChecksum } = data;
-    return crypto.createHash("sha256").update(JSON.stringify(dataWithoutChecksum)).digest("hex");
+    return crypto.createHash('sha256').update(JSON.stringify(dataWithoutChecksum)).digest('hex');
   }
 
   /**
    * Log messages with timestamp
    */
-  log(message, level = "info") {
+  log(message, level = 'info') {
     const timestamp = new Date().toISOString();
     const logEntry = `[${timestamp}] ${level.toUpperCase()}: ${message}`;
 
     // Console output
-    if (level === "error") {
+    if (level === 'error') {
       console.error(logEntry);
-    } else if (level === "warn") {
+    } else if (level === 'warn') {
       console.warn(logEntry);
     } else {
       console.log(logEntry);
@@ -321,7 +321,7 @@ class SessionPersistenceManager {
 
     // File logging
     try {
-      fs.appendFileSync(this.logFile, logEntry + "\n");
+      fs.appendFileSync(this.logFile, logEntry + '\n');
     } catch (error) {
       // Silent fail for logging errors
     }
@@ -334,37 +334,43 @@ async function main() {
   const command = process.argv[2];
 
   switch (command) {
-    case "init":
+    case 'init': {
       const initResult = await manager.initialize();
       console.log(JSON.stringify(initResult, null, 2));
       process.exit(initResult.success ? 0 : 1);
+    }
 
-    case "restore":
+    case 'restore': {
       const restoreResult = await manager.restoreSession();
       console.log(JSON.stringify(restoreResult, null, 2));
       process.exit(restoreResult.success ? 0 : 1);
+    }
 
-    case "login":
+    case 'login': {
       const loginResult = await manager.performLogin();
       console.log(JSON.stringify(loginResult, null, 2));
       process.exit(loginResult.success ? 0 : 1);
+    }
 
-    case "status":
+    case 'status': {
       const status = await manager.checkAuthStatus();
       const info = manager.getSessionInfo();
       console.log(JSON.stringify({ authenticated: status, session: info }, null, 2));
       process.exit(0);
+    }
 
-    case "cleanup":
+    case 'cleanup': {
       const days = parseInt(process.argv[3]) || 30;
       const cleanupResult = await manager.cleanup(days);
       console.log(JSON.stringify(cleanupResult, null, 2));
       process.exit(cleanupResult.success ? 0 : 1);
+    }
 
-    case "save":
+    case 'save': {
       const saveResult = await manager.saveSessionState();
       console.log(JSON.stringify({ success: true, sessionData: saveResult }, null, 2));
       process.exit(0);
+    }
 
     default:
       console.log(`
@@ -397,7 +403,7 @@ module.exports = SessionPersistenceManager;
 // Run CLI if called directly
 if (require.main === module) {
   main().catch((error) => {
-    console.error("Fatal error:", error.message);
+    console.error('Fatal error:', error.message);
     process.exit(1);
   });
 }

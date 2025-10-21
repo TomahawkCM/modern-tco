@@ -44,10 +44,10 @@ export function schedule(
   rating: SRRating,
   now: Date = new Date()
 ): SRCardState {
-  let {ease} = state;
-  let {interval} = state; // days
-  let {reps} = state;
-  let {lapses} = state;
+  let { ease } = state;
+  let { interval } = state; // days
+  let { reps } = state;
+  let { lapses } = state;
 
   switch (rating) {
     case 'again': {
@@ -89,8 +89,5 @@ export function schedule(
 
 export function getDueQueue(states: SRCardState[], now: Date = new Date()): SRCardState[] {
   const ts = now.getTime();
-  return states
-    .filter((s) => s.due <= ts)
-    .sort((a, b) => a.due - b.due);
+  return states.filter((s) => s.due <= ts).sort((a, b) => a.due - b.due);
 }
-

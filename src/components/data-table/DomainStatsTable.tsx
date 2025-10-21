@@ -1,21 +1,39 @@
-"use client";
+'use client';
 
-import * as React from "react";
-import type { DomainStatRow } from "./types";
-import { type ColumnDef, getCoreRowModel, getFilteredRowModel, getSortedRowModel, type SortingState, useReactTable, flexRender, type ColumnFiltersState, type VisibilityState, type FilterFn } from "@tanstack/react-table";
-import { domainColumns } from "./columns";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { ChevronDown } from "lucide-react";
-import { Toggle } from "@/components/ui/toggle";
-import { usePersistentState } from "@/lib/usePersistentState";
-import { useAuth } from "@/contexts/AuthContext";
+import {
+  type ColumnDef,
+  type ColumnFiltersState,
+  type FilterFn,
+  flexRender,
+  getCoreRowModel,
+  getFilteredRowModel,
+  getSortedRowModel,
+  type SortingState,
+  useReactTable,
+  type VisibilityState,
+} from '@tanstack/react-table';
+import { ChevronDown } from 'lucide-react';
+import * as React from 'react';
+import { Button } from '@/components/ui/button';
+import {
+  DropdownMenu,
+  DropdownMenuCheckboxItem,
+  DropdownMenuContent,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
+import { Input } from '@/components/ui/input';
+import { Toggle } from '@/components/ui/toggle';
+import { useAuth } from '@/contexts/AuthContext';
+import { usePersistentState } from '@/lib/usePersistentState';
+import { domainColumns } from './columns';
+import type { DomainStatRow } from './types';
 
 export function DomainStatsTable({ rows }: { rows: DomainStatRow[] }) {
   const columns = React.useMemo<ColumnDef<DomainStatRow>[]>(() => domainColumns, []);
   const { user } = useAuth();
-  const scope = user?.id ? `:u:${user.id}` : "";
+  const scope = user?.id ? `:u:${user.id}` : '';
   const [sorting, setSorting] = usePersistentState<SortingState>(
     `tco:table:analytics-domains:sorting${scope}`,
     []
@@ -53,7 +71,7 @@ export function DomainStatsTable({ rows }: { rows: DomainStatRow[] }) {
     filterFns: {
       minNumber: (row, columnId, filterValue) => {
         const v = Number(row.getValue(columnId));
-        const min = Number((filterValue)?.min ?? 0);
+        const min = Number(filterValue?.min ?? 0);
         return v >= min;
       },
       domainIn,
@@ -65,7 +83,7 @@ export function DomainStatsTable({ rows }: { rows: DomainStatRow[] }) {
   const currentMin = (scoreColumn?.getFilterValue() as any)?.min ?? 0;
 
   // Unique domain list for facet toggles
-  const uniqueDomains = React.useMemo(() => Array.from(new Set(rows.map(r => r.domain))), [rows]);
+  const uniqueDomains = React.useMemo(() => Array.from(new Set(rows.map((r) => r.domain))), [rows]);
 
   // Sync domain facet with table filter
   React.useEffect(() => {
@@ -151,15 +169,18 @@ export function DomainStatsTable({ rows }: { rows: DomainStatRow[] }) {
             <DropdownMenuContent align="end">
               <DropdownMenuLabel>Toggle columns</DropdownMenuLabel>
               <DropdownMenuSeparator />
-              {table.getAllLeafColumns().filter((c) => c.getCanHide()).map((column) => (
-                <DropdownMenuCheckboxItem
-                  key={column.id}
-                  checked={column.getIsVisible()}
-                  onCheckedChange={(v) => column.toggleVisibility(!!v)}
-                >
-                  {column.columnDef.header as any}
-                </DropdownMenuCheckboxItem>
-              ))}
+              {table
+                .getAllLeafColumns()
+                .filter((c) => c.getCanHide())
+                .map((column) => (
+                  <DropdownMenuCheckboxItem
+                    key={column.id}
+                    checked={column.getIsVisible()}
+                    onCheckedChange={(v) => column.toggleVisibility(!!v)}
+                  >
+                    {column.columnDef.header as any}
+                  </DropdownMenuCheckboxItem>
+                ))}
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
@@ -178,7 +199,11 @@ export function DomainStatsTable({ rows }: { rows: DomainStatRow[] }) {
                     onClick={header.column.getToggleSortingHandler()}
                   >
                     {flexRender(header.column.columnDef.header, header.getContext())}
-                    {header.column.getIsSorted() === "asc" ? " ↑" : header.column.getIsSorted() === "desc" ? " ↓" : ""}
+                    {header.column.getIsSorted() === 'asc'
+                      ? ' ↑'
+                      : header.column.getIsSorted() === 'desc'
+                        ? ' ↓'
+                        : ''}
                   </th>
                 ))}
               </tr>

@@ -3,34 +3,30 @@
  * Displays comprehensive assessment results for the 9-section structure
  */
 
-"use client";
+'use client';
 
-import { useMemo } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Progress } from "@/components/ui/progress";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
 import {
-  TrendingUp,
-  TrendingDown,
-  Target,
-  Clock,
-  CheckCircle,
-  XCircle,
   AlertTriangle,
-  BookOpen,
+  ArrowRight,
   Award,
   BarChart3,
+  BookOpen,
+  CheckCircle,
+  Clock,
   Lightbulb,
-  ArrowRight
-} from "lucide-react";
-import { cn } from "@/lib/utils";
-import {
-  type Module3Section,
-  MODULE_3_SECTIONS
-} from "@/lib/module3-section-definitions";
-import type { Module3AssessmentResult } from "@/lib/module3-assessment-engine";
+  Target,
+  TrendingDown,
+  TrendingUp,
+  XCircle,
+} from 'lucide-react';
+import { useMemo } from 'react';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Progress } from '@/components/ui/progress';
+import type { Module3AssessmentResult } from '@/lib/module3-assessment-engine';
+import { MODULE_3_SECTIONS, type Module3Section } from '@/lib/module3-section-definitions';
+import { cn } from '@/lib/utils';
 
 interface Module3AssessmentResultsProps {
   result: Module3AssessmentResult;
@@ -45,7 +41,7 @@ export function Module3AssessmentResults({
   onRetakeSection,
   onStudySection,
   onRetakeAll,
-  className
+  className,
 }: Module3AssessmentResultsProps) {
   const {
     overallScore,
@@ -57,7 +53,7 @@ export function Module3AssessmentResults({
     weaknesses,
     gapsIdentified,
     recommendations,
-    certificationReadiness
+    certificationReadiness,
   } = result;
 
   const formatTime = (seconds: number) => {
@@ -70,17 +66,21 @@ export function Module3AssessmentResults({
   };
 
   const getScoreColor = (score: number) => {
-    if (score >= 0.85) return "text-[#22c55e]";
-    if (score >= 0.75) return "text-yellow-600";
-    return "text-red-600";
+    if (score >= 0.85) return 'text-[#22c55e]';
+    if (score >= 0.75) return 'text-yellow-600';
+    return 'text-red-600';
   };
 
   const getReadinessColor = (readiness: string) => {
     switch (readiness) {
-      case "ready": return "text-[#22c55e] bg-green-50 border-green-200";
-      case "almost_ready": return "text-yellow-600 bg-yellow-50 border-yellow-200";
-      case "needs_work": return "text-red-600 bg-red-50 border-red-200";
-      default: return "text-gray-600 bg-gray-50 border-gray-200";
+      case 'ready':
+        return 'text-[#22c55e] bg-green-50 border-green-200';
+      case 'almost_ready':
+        return 'text-yellow-600 bg-yellow-50 border-yellow-200';
+      case 'needs_work':
+        return 'text-red-600 bg-red-50 border-red-200';
+      default:
+        return 'text-gray-600 bg-gray-50 border-gray-200';
     }
   };
 
@@ -89,9 +89,14 @@ export function Module3AssessmentResults({
   }, [sectionResults]);
 
   return (
-    <div className={cn("space-y-6", className)}>
+    <div className={cn('space-y-6', className)}>
       {/* Overall Results Header */}
-      <Card className={cn("border-2", passed ? "border-green-200 bg-green-50/50" : "border-red-200 bg-red-50/50")}>
+      <Card
+        className={cn(
+          'border-2',
+          passed ? 'border-green-200 bg-green-50/50' : 'border-red-200 bg-red-50/50'
+        )}
+      >
         <CardHeader>
           <div className="flex items-center justify-between">
             <CardTitle className="text-2xl flex items-center gap-2">
@@ -100,9 +105,9 @@ export function Module3AssessmentResults({
               ) : (
                 <XCircle className="w-8 h-8 text-red-600" />
               )}
-              Module 3 Assessment {passed ? "Passed" : "Failed"}
+              Module 3 Assessment {passed ? 'Passed' : 'Failed'}
             </CardTitle>
-            <Badge variant={passed ? "default" : "destructive"} className="text-lg px-4 py-2">
+            <Badge variant={passed ? 'default' : 'destructive'} className="text-lg px-4 py-2">
               {Math.round(overallScore * 100)}%
             </Badge>
           </div>
@@ -122,9 +127,7 @@ export function Module3AssessmentResults({
               <div className="text-sm text-muted-foreground">Accuracy</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-bold text-primary">
-                {formatTime(totalTimeSpent)}
-              </div>
+              <div className="text-3xl font-bold text-primary">{formatTime(totalTimeSpent)}</div>
               <div className="text-sm text-muted-foreground">Time Spent</div>
             </div>
           </div>
@@ -141,22 +144,25 @@ export function Module3AssessmentResults({
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <div className={cn("p-4 rounded-lg border", getReadinessColor(certificationReadiness.overallReadiness))}>
+          <div
+            className={cn(
+              'p-4 rounded-lg border',
+              getReadinessColor(certificationReadiness.overallReadiness)
+            )}
+          >
             <div className="flex items-center justify-between mb-2">
               <span className="font-semibold text-lg">
-                {certificationReadiness.overallReadiness.replace("_", " ").toUpperCase()}
+                {certificationReadiness.overallReadiness.replace('_', ' ').toUpperCase()}
               </span>
-              <span className="text-2xl font-bold">
-                {certificationReadiness.score}%
-              </span>
+              <span className="text-2xl font-bold">{certificationReadiness.score}%</span>
             </div>
             <div className="text-sm opacity-80">
-              {certificationReadiness.overallReadiness === "ready" &&
+              {certificationReadiness.overallReadiness === 'ready' &&
                 "You're ready for the TCO exam! Continue practicing to maintain your skills."}
-              {certificationReadiness.overallReadiness === "almost_ready" &&
+              {certificationReadiness.overallReadiness === 'almost_ready' &&
                 "You're close to being ready. Focus on the areas below for improvement."}
-              {certificationReadiness.overallReadiness === "needs_work" &&
-                "More preparation needed. Review the priority areas and retake practice sessions."}
+              {certificationReadiness.overallReadiness === 'needs_work' &&
+                'More preparation needed. Review the priority areas and retake practice sessions.'}
             </div>
           </div>
         </CardContent>
@@ -191,13 +197,19 @@ export function Module3AssessmentResults({
                       {section.difficulty}
                     </Badge>
                     <Badge
-                      variant={readiness === "strong" ? "default" : readiness === "adequate" ? "secondary" : "destructive"}
+                      variant={
+                        readiness === 'strong'
+                          ? 'default'
+                          : readiness === 'adequate'
+                            ? 'secondary'
+                            : 'destructive'
+                      }
                       className="text-xs"
                     >
-                      {readiness.replace("_", " ")}
+                      {readiness.replace('_', ' ')}
                     </Badge>
                   </div>
-                  <span className={cn("font-bold text-lg", getScoreColor(sectionResult.score))}>
+                  <span className={cn('font-bold text-lg', getScoreColor(sectionResult.score))}>
                     {Math.round(sectionResult.score * 100)}%
                   </span>
                 </div>
@@ -217,14 +229,13 @@ export function Module3AssessmentResults({
                   </div>
                   <div>
                     <span className="text-muted-foreground">Time:</span>
-                    <span className="ml-1 font-medium">
-                      {formatTime(sectionResult.timeSpent)}
-                    </span>
+                    <span className="ml-1 font-medium">{formatTime(sectionResult.timeSpent)}</span>
                   </div>
                   <div>
                     <span className="text-muted-foreground">Objectives:</span>
                     <span className="ml-1 font-medium">
-                      {sectionResult.objectivesMet.length}/{sectionResult.objectivesMet.length + sectionResult.objectivesMissed.length}
+                      {sectionResult.objectivesMet.length}/
+                      {sectionResult.objectivesMet.length + sectionResult.objectivesMissed.length}
                     </span>
                   </div>
                 </div>
@@ -239,7 +250,9 @@ export function Module3AssessmentResults({
                     </div>
                     <ul className="space-y-1">
                       {sectionResult.recommendations.map((rec, index) => (
-                        <li key={index} className="text-muted-foreground">• {rec}</li>
+                        <li key={index} className="text-muted-foreground">
+                          • {rec}
+                        </li>
                       ))}
                     </ul>
                   </div>
@@ -282,7 +295,7 @@ export function Module3AssessmentResults({
           <CardContent>
             {strengths.length > 0 ? (
               <ul className="space-y-2">
-                {strengths.map(sectionId => (
+                {strengths.map((sectionId) => (
                   <li key={sectionId} className="flex items-center gap-2">
                     <CheckCircle className="w-4 h-4 text-[#22c55e]" />
                     <span>{MODULE_3_SECTIONS[sectionId].title}</span>
@@ -290,7 +303,9 @@ export function Module3AssessmentResults({
                 ))}
               </ul>
             ) : (
-              <p className="text-muted-foreground">Focus on improving overall performance to identify strengths.</p>
+              <p className="text-muted-foreground">
+                Focus on improving overall performance to identify strengths.
+              </p>
             )}
           </CardContent>
         </Card>
@@ -310,7 +325,7 @@ export function Module3AssessmentResults({
                   <div>
                     <div className="text-sm font-medium mb-2">Weak Performance:</div>
                     <ul className="space-y-1">
-                      {weaknesses.map(sectionId => (
+                      {weaknesses.map((sectionId) => (
                         <li key={sectionId} className="flex items-center gap-2 text-sm">
                           <XCircle className="w-3 h-3 text-red-500" />
                           <span>{MODULE_3_SECTIONS[sectionId].title}</span>
@@ -324,7 +339,7 @@ export function Module3AssessmentResults({
                   <div>
                     <div className="text-sm font-medium mb-2">Not Attempted:</div>
                     <ul className="space-y-1">
-                      {gapsIdentified.map(sectionId => (
+                      {gapsIdentified.map((sectionId) => (
                         <li key={sectionId} className="flex items-center gap-2 text-sm">
                           <AlertTriangle className="w-3 h-3 text-[#f97316]" />
                           <span>{MODULE_3_SECTIONS[sectionId].title}</span>
@@ -335,7 +350,9 @@ export function Module3AssessmentResults({
                 )}
               </div>
             ) : (
-              <p className="text-muted-foreground">Great job! No major areas of concern identified.</p>
+              <p className="text-muted-foreground">
+                Great job! No major areas of concern identified.
+              </p>
             )}
           </CardContent>
         </Card>
@@ -354,7 +371,7 @@ export function Module3AssessmentResults({
             <div>
               <h4 className="font-medium mb-2">Priority Areas:</h4>
               <div className="flex flex-wrap gap-2">
-                {recommendations.priorityAreas.map(sectionId => (
+                {recommendations.priorityAreas.map((sectionId) => (
                   <Badge key={sectionId} variant="outline">
                     {MODULE_3_SECTIONS[sectionId].title}
                   </Badge>

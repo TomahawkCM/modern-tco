@@ -1,8 +1,8 @@
-import type { ReactNode } from "react";
-import SideNav from "@/components/SideNav";
+import type { ReactNode } from 'react';
+import SideNav from '@/components/SideNav';
 
 export const metadata = {
-  title: "Learn | Tanium TCO",
+  title: 'Learn | Tanium TCO',
 };
 
 export default function LearnLayout({ children }: { children: ReactNode }) {
@@ -17,4 +17,3 @@ export default function LearnLayout({ children }: { children: ReactNode }) {
     </div>
   );
 }
-

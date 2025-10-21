@@ -4,9 +4,8 @@
  */
 
 import Database from 'better-sqlite3';
-import path from 'path';
+import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
-import { dirname } from 'path';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -57,31 +56,51 @@ function hoursAgo(hours: number): string {
 const osTemplates = {
   windowsWorkstation: [
     { os: 'Windows 10', versions: ['21H2', '22H2', '23H2'], count: 40 },
-    { os: 'Windows 11', versions: ['21H2', '22H2', '23H2'], count: 30 }
+    { os: 'Windows 11', versions: ['21H2', '22H2', '23H2'], count: 30 },
   ],
   windowsServer: [
     { os: 'Windows Server 2016', versions: ['Standard', 'Datacenter'], count: 8 },
     { os: 'Windows Server 2019', versions: ['Standard', 'Datacenter'], count: 15 },
-    { os: 'Windows Server 2022', versions: ['Standard', 'Datacenter'], count: 12 }
+    { os: 'Windows Server 2022', versions: ['Standard', 'Datacenter'], count: 12 },
   ],
   linux: [
     { os: 'Red Hat Enterprise Linux', versions: ['8.8', '9.2'], count: 10 },
     { os: 'Ubuntu Server', versions: ['20.04 LTS', '22.04 LTS'], count: 8 },
-    { os: 'CentOS', versions: ['7.9', '8.5'], count: 5 }
+    { os: 'CentOS', versions: ['7.9', '8.5'], count: 5 },
   ],
-  mac: [
-    { os: 'macOS', versions: ['Monterey 12.7', 'Ventura 13.5', 'Sonoma 14.2'], count: 12 }
-  ]
+  mac: [{ os: 'macOS', versions: ['Monterey 12.7', 'Ventura 13.5', 'Sonoma 14.2'], count: 12 }],
 };
 
 const roles = {
   workstation: ['Developer Workstation', 'Office Workstation', 'Sales Laptop', 'Executive Laptop'],
-  server: ['Web Server', 'Database Server', 'Application Server', 'File Server', 'Domain Controller'],
-  infrastructure: ['DNS Server', 'DHCP Server', 'Print Server', 'Backup Server']
+  server: [
+    'Web Server',
+    'Database Server',
+    'Application Server',
+    'File Server',
+    'Domain Controller',
+  ],
+  infrastructure: ['DNS Server', 'DHCP Server', 'Print Server', 'Backup Server'],
 };
 
-const departments = ['Engineering', 'Sales', 'Marketing', 'Finance', 'HR', 'IT', 'Operations', 'Executive'];
-const locations = ['New York HQ', 'San Francisco Office', 'Austin Office', 'Chicago Office', 'Remote', 'London Office'];
+const departments = [
+  'Engineering',
+  'Sales',
+  'Marketing',
+  'Finance',
+  'HR',
+  'IT',
+  'Operations',
+  'Executive',
+];
+const locations = [
+  'New York HQ',
+  'San Francisco Office',
+  'Austin Office',
+  'Chicago Office',
+  'Remote',
+  'London Office',
+];
 
 // Generate machines
 function generateMachines(): Machine[] {
@@ -89,7 +108,7 @@ function generateMachines(): Machine[] {
   let machineCounter = 1;
 
   // Windows Workstations (70 machines)
-  osTemplates.windowsWorkstation.forEach(template => {
+  osTemplates.windowsWorkstation.forEach((template) => {
     for (let i = 0; i < template.count; i++) {
       const dept = randomChoice(departments);
       const version = randomChoice(template.versions);
@@ -108,13 +127,13 @@ function generateMachines(): Machine[] {
         cpu_percent: isOnline ? randomFloat(5, 85) : 0,
         compliance_score: randomFloat(65, 100),
         last_reboot: daysAgo(randomInt(1, 60)),
-        last_seen: isOnline ? hoursAgo(randomInt(0, 24)) : daysAgo(lastSeenDays)
+        last_seen: isOnline ? hoursAgo(randomInt(0, 24)) : daysAgo(lastSeenDays),
       });
     }
   });
 
   // Windows Servers (35 machines)
-  osTemplates.windowsServer.forEach(template => {
+  osTemplates.windowsServer.forEach((template) => {
     for (let i = 0; i < template.count; i++) {
       const role = randomChoice([...roles.server, ...roles.infrastructure]);
       const version = randomChoice(template.versions);
@@ -126,19 +145,24 @@ function generateMachines(): Machine[] {
         os_platform: template.os,
         os_version: version,
         group_name: 'Production Servers',
-        location: randomChoice(['New York HQ', 'San Francisco Office', 'AWS us-east-1', 'Azure East US']),
+        location: randomChoice([
+          'New York HQ',
+          'San Francisco Office',
+          'AWS us-east-1',
+          'Azure East US',
+        ]),
         disk_free_gb: randomFloat(100, 2000),
         memory_gb: randomChoice([16, 32, 64, 128]),
         cpu_percent: isOnline ? randomFloat(10, 95) : 0,
         compliance_score: randomFloat(85, 100),
         last_reboot: daysAgo(randomInt(1, 120)),
-        last_seen: isOnline ? hoursAgo(randomInt(0, 6)) : daysAgo(randomInt(2, 7))
+        last_seen: isOnline ? hoursAgo(randomInt(0, 6)) : daysAgo(randomInt(2, 7)),
       });
     }
   });
 
   // Linux Servers (23 machines)
-  osTemplates.linux.forEach(template => {
+  osTemplates.linux.forEach((template) => {
     for (let i = 0; i < template.count; i++) {
       const role = randomChoice(roles.server);
       const version = randomChoice(template.versions);
@@ -156,17 +180,17 @@ function generateMachines(): Machine[] {
         cpu_percent: isOnline ? randomFloat(15, 90) : 0,
         compliance_score: randomFloat(80, 100),
         last_reboot: daysAgo(randomInt(30, 365)),
-        last_seen: isOnline ? hoursAgo(randomInt(0, 2)) : daysAgo(randomInt(1, 3))
+        last_seen: isOnline ? hoursAgo(randomInt(0, 2)) : daysAgo(randomInt(1, 3)),
       });
     }
   });
 
   // macOS Workstations (12 machines)
-  osTemplates.mac.forEach(template => {
+  osTemplates.mac.forEach((template) => {
     for (let i = 0; i < template.count; i++) {
       const dept = randomChoice(['Engineering', 'Marketing', 'Executive']);
       const version = randomChoice(template.versions);
-      const isOnline = Math.random() > 0.20; // 80% online (laptops less reliable)
+      const isOnline = Math.random() > 0.2; // 80% online (laptops less reliable)
 
       machines.push({
         computer_name: `MAC-${dept.substring(0, 3).toUpperCase()}-${String(machineCounter++).padStart(3, '0')}`,
@@ -180,7 +204,7 @@ function generateMachines(): Machine[] {
         cpu_percent: isOnline ? randomFloat(10, 70) : 0,
         compliance_score: randomFloat(70, 95),
         last_reboot: daysAgo(randomInt(1, 45)),
-        last_seen: isOnline ? hoursAgo(randomInt(0, 48)) : daysAgo(randomInt(3, 21))
+        last_seen: isOnline ? hoursAgo(randomInt(0, 48)) : daysAgo(randomInt(3, 21)),
       });
     }
   });
@@ -195,12 +219,16 @@ async function seedDatabase() {
     const db = new Database(DB_PATH);
 
     // Get current count
-    const currentCount = db.prepare('SELECT COUNT(*) as count FROM machines').get() as { count: number };
+    const currentCount = db.prepare('SELECT COUNT(*) as count FROM machines').get() as {
+      count: number;
+    };
     console.log(`📊 Current machine count: ${currentCount.count}`);
 
     if (currentCount.count >= 100) {
       console.log('✅ Database already has 100+ machines. Skipping seed.');
-      console.log('   To re-seed, run: sqlite3 sim/inventory.sqlite "DELETE FROM machines WHERE id > 11"');
+      console.log(
+        '   To re-seed, run: sqlite3 sim/inventory.sqlite "DELETE FROM machines WHERE id > 11"'
+      );
       db.close();
       return;
     }
@@ -229,16 +257,18 @@ async function seedDatabase() {
     insertMany(machines);
 
     // Show summary
-    const summary = db.prepare(`
+    const summary = db
+      .prepare(`
       SELECT os_platform, COUNT(*) as count
       FROM machines
       GROUP BY os_platform
       ORDER BY count DESC
-    `).all() as Array<{ os_platform: string; count: number }>;
+    `)
+      .all() as Array<{ os_platform: string; count: number }>;
 
     console.log('\n✅ Seeding complete!');
     console.log('\n📊 Machine Summary:');
-    summary.forEach(row => {
+    summary.forEach((row) => {
       console.log(`   ${row.os_platform.padEnd(30)} ${row.count} machines`);
     });
 

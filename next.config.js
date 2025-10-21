@@ -1,4 +1,4 @@
-const withMDX = require("@next/mdx")({
+const withMDX = require('@next/mdx')({
   extension: /\.mdx?$/,
   options: {
     remarkPlugins: [],
@@ -7,10 +7,10 @@ const withMDX = require("@next/mdx")({
 });
 
 /** @type {import('next').NextConfig} */
-const isProd = process.env.NODE_ENV === "production";
+const isProd = process.env.NODE_ENV === 'production';
 const supabaseHost = (() => {
   try {
-    const u = new URL(process.env.NEXT_PUBLIC_SUPABASE_URL || "");
+    const u = new URL(process.env.NEXT_PUBLIC_SUPABASE_URL || '');
     return u.hostname;
   } catch {
     return undefined;
@@ -21,13 +21,13 @@ const nextConfig = {
   // Serve at '/tanium' in production, root in dev.
   // TEMPORARILY DISABLED basePath to fix build error - re-enable after Next.js fix
   trailingSlash: false,
-  pageExtensions: ["js", "jsx", "ts", "tsx", "md", "mdx"],
+  pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
   reactStrictMode: true,
   // ...(isProd ? { basePath: '/tanium' } : {}),
   skipTrailingSlashRedirect: true,
   generateEtags: false,
   eslint: {
-    dirs: ["src"],
+    dirs: ['src'],
     // Allow production builds to succeed even if there are ESLint errors.
     // Run `npm run lint` locally to address issues incrementally.
     ignoreDuringBuilds: true,
@@ -52,17 +52,17 @@ const nextConfig = {
 
   images: {
     remotePatterns: [
-      { protocol: "https", hostname: "i.ytimg.com" },
-      { protocol: "https", hostname: "img.youtube.com" },
-      { protocol: "https", hostname: "help.tanium.com" },
-      ...(supabaseHost ? [{ protocol: "https", hostname: supabaseHost }] : []),
+      { protocol: 'https', hostname: 'i.ytimg.com' },
+      { protocol: 'https', hostname: 'img.youtube.com' },
+      { protocol: 'https', hostname: 'help.tanium.com' },
+      ...(supabaseHost ? [{ protocol: 'https', hostname: supabaseHost }] : []),
     ],
   },
 
   webpack: (config, { isServer }) => {
     // ✅ Neutralize the conflict: ensure cacheUnaffected isn't on
     if (!config.experiments) config.experiments = {};
-    if ("cacheUnaffected" in config.experiments) {
+    if ('cacheUnaffected' in config.experiments) {
       config.experiments.cacheUnaffected = false;
     }
 
@@ -88,7 +88,7 @@ const nextConfig = {
       }
 
       // Parallelism is safe to keep if you like
-      config.parallelism = Math.max(4, require("os").cpus().length);
+      config.parallelism = Math.max(4, require('os').cpus().length);
     }
 
     return config;
@@ -98,7 +98,7 @@ const nextConfig = {
     // Build CSP (enabled only in production to reduce DX friction)
     const cspDirectives = [];
     if (isProd) {
-      const connectSupabase = supabaseHost ? `https://${supabaseHost}` : "";
+      const connectSupabase = supabaseHost ? `https://${supabaseHost}` : '';
       const parts = [
         "default-src 'self'",
         "base-uri 'self'",
@@ -115,52 +115,52 @@ const nextConfig = {
         [
           "connect-src 'self'",
           connectSupabase,
-          "https://*.supabase.co",
-          "wss://*.supabase.co",
-          "https://us.i.posthog.com",
-          "https://*.posthog.com",
-          "https://sentry.io",
-          "https://*.sentry.io",
-          "https://cdn.jsdelivr.net",
+          'https://*.supabase.co',
+          'wss://*.supabase.co',
+          'https://us.i.posthog.com',
+          'https://*.posthog.com',
+          'https://sentry.io',
+          'https://*.sentry.io',
+          'https://cdn.jsdelivr.net',
         ]
           .filter(Boolean)
-          .join(" "),
-        "frame-src https://www.youtube.com https://www.youtube-nocookie.com",
+          .join(' '),
+        'frame-src https://www.youtube.com https://www.youtube-nocookie.com',
         "font-src 'self' data: https://cdn.jsdelivr.net",
         "worker-src 'self' blob:",
       ];
-      const csp = parts.join("; ");
-      cspDirectives.push({ key: "Content-Security-Policy", value: csp });
+      const csp = parts.join('; ');
+      cspDirectives.push({ key: 'Content-Security-Policy', value: csp });
     }
 
     const commonSecurity = [
-      { key: "X-Content-Type-Options", value: "nosniff" },
-      { key: "Referrer-Policy", value: "no-referrer-when-downgrade" },
-      { key: "X-Frame-Options", value: "SAMEORIGIN" },
-      { key: "Permissions-Policy", value: "geolocation=(), microphone=(), camera=()" },
+      { key: 'X-Content-Type-Options', value: 'nosniff' },
+      { key: 'Referrer-Policy', value: 'no-referrer-when-downgrade' },
+      { key: 'X-Frame-Options', value: 'SAMEORIGIN' },
+      { key: 'Permissions-Policy', value: 'geolocation=(), microphone=(), camera=()' },
       ...cspDirectives,
     ];
 
     return [
-      { source: "/(.*)", headers: commonSecurity },
+      { source: '/(.*)', headers: commonSecurity },
       {
-        source: "/sw.js",
-        headers: [{ key: "Cache-Control", value: "public, max-age=0, must-revalidate" }],
+        source: '/sw.js',
+        headers: [{ key: 'Cache-Control', value: 'public, max-age=0, must-revalidate' }],
       },
     ];
   },
   async redirects() {
     // When basePath is '/tanium' in production, avoid conflicting redirects.
     const devRedirects = [
-      { source: "/tanium", destination: "/", permanent: true },
-      { source: "/tanium/:path*", destination: "/:path*", permanent: true },
+      { source: '/tanium', destination: '/', permanent: true },
+      { source: '/tanium/:path*', destination: '/:path*', permanent: true },
       // Handle legacy capitalized path variants
-      { source: "/Tanium", destination: "/", permanent: true },
-      { source: "/Tanium/:path*", destination: "/:path*", permanent: true },
+      { source: '/Tanium', destination: '/', permanent: true },
+      { source: '/Tanium/:path*', destination: '/:path*', permanent: true },
     ];
 
     const common = [
-      { source: "/exam", destination: "/mock", permanent: true },
+      { source: '/exam', destination: '/mock', permanent: true },
       // DISABLED: basePath redirects (basePath temporarily disabled)
       // ...(isProd ? [{ source: "/tanium/exam", destination: "/tanium/mock", permanent: true }] : []),
     ];

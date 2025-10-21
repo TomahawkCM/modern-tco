@@ -25,7 +25,7 @@ export interface Question {
   objectiveIds?: string[];
   objectiveId?: string; // Add this for backward compatibility
   practiceWeight?: number; // For balanced question distribution
-  conceptLevel?: "fundamental" | "intermediate" | "advanced"; // Granular difficulty
+  conceptLevel?: 'fundamental' | 'intermediate' | 'advanced'; // Granular difficulty
 
   // Review functionality
   userAnswer?: string;
@@ -41,28 +41,28 @@ export interface Choice {
 // Core TCO Domain enum - only the values actually used in the codebase
 export const TCODomain = {
   // Short codes (legacy import scripts and data refer to these)
-  AQ: "Asking Questions",
-  RQ: "Refining Questions & Targeting",
-  TA: "Taking Action",
-  NB: "Navigation and Basic Module Functions",
-  RD: "Report Generation and Data Export",
+  AQ: 'Asking Questions',
+  RQ: 'Refining Questions & Targeting',
+  TA: 'Taking Action',
+  NB: 'Navigation and Basic Module Functions',
+  RD: 'Report Generation and Data Export',
   // Long-form keys for readability
-  ASKING_QUESTIONS: "Asking Questions",
-  REFINING_QUESTIONS: "Refining Questions",
-  REFINING_TARGETING: "Refining Questions & Targeting",
-  TAKING_ACTION: "Taking Action",
-  NAVIGATION_MODULES: "Navigation and Basic Module Functions",
+  ASKING_QUESTIONS: 'Asking Questions',
+  REFINING_QUESTIONS: 'Refining Questions',
+  REFINING_TARGETING: 'Refining Questions & Targeting',
+  TAKING_ACTION: 'Taking Action',
+  NAVIGATION_MODULES: 'Navigation and Basic Module Functions',
   // Backwards-compatible alias used in older data files and imports
-  NAVIGATION_BASIC_MODULE_FUNCTIONS: "Navigation and Basic Module Functions",
-  REPORTING_EXPORT: "Report Generation and Data Export",
+  NAVIGATION_BASIC_MODULE_FUNCTIONS: 'Navigation and Basic Module Functions',
+  REPORTING_EXPORT: 'Report Generation and Data Export',
   // Alternate legacy key used in some imports
-  REPORTING_DATA_EXPORT: "Report Generation and Data Export",
-  SECURITY: "Security",
-  FUNDAMENTALS: "Fundamentals",
-  TROUBLESHOOTING: "Troubleshooting",
+  REPORTING_DATA_EXPORT: 'Report Generation and Data Export',
+  SECURITY: 'Security',
+  FUNDAMENTALS: 'Fundamentals',
+  TROUBLESHOOTING: 'Troubleshooting',
 } as const;
 
-export type TCODomain = typeof TCODomain[keyof typeof TCODomain];
+export type TCODomain = (typeof TCODomain)[keyof typeof TCODomain];
 
 /**
  * Database domain format (snake_case) aligned with content population schema
@@ -91,42 +91,42 @@ export const TCO_DOMAIN_WEIGHTS: Record<TCODomain, number> = {
 
 // Question categories for better organization
 export const QuestionCategory = {
-  PLATFORM_FUNDAMENTALS: "Platform Fundamentals",
-  CONSOLE_PROCEDURES: "Console Procedures",
-  TROUBLESHOOTING: "Troubleshooting",
-  PRACTICAL_SCENARIOS: "Practical Scenarios",
-  LINEAR_CHAIN: "Linear Chain Architecture",
-  BEST_PRACTICES: "Best Practices",
-  ADVANCED_CONCEPTS: "Advanced Concepts",
-  QUESTION_CONSTRUCTION: "Question Construction",
-  QUESTION_SHARING: "Question Sharing",
-  PERFORMANCE_OPTIMIZATION: "Performance Optimization",
-  QUESTION_PERFORMANCE_OPTIMIZATION: "Question Performance Optimization",
+  PLATFORM_FUNDAMENTALS: 'Platform Fundamentals',
+  CONSOLE_PROCEDURES: 'Console Procedures',
+  TROUBLESHOOTING: 'Troubleshooting',
+  PRACTICAL_SCENARIOS: 'Practical Scenarios',
+  LINEAR_CHAIN: 'Linear Chain Architecture',
+  BEST_PRACTICES: 'Best Practices',
+  ADVANCED_CONCEPTS: 'Advanced Concepts',
+  QUESTION_CONSTRUCTION: 'Question Construction',
+  QUESTION_SHARING: 'Question Sharing',
+  PERFORMANCE_OPTIMIZATION: 'Performance Optimization',
+  QUESTION_PERFORMANCE_OPTIMIZATION: 'Question Performance Optimization',
 } as const;
 
-export type QuestionCategory = typeof QuestionCategory[keyof typeof QuestionCategory];
+export type QuestionCategory = (typeof QuestionCategory)[keyof typeof QuestionCategory];
 
 export const Difficulty = {
-  BEGINNER: "Beginner",
-  INTERMEDIATE: "Intermediate",
-  ADVANCED: "Advanced",
-  EXPERT: "Expert",
+  BEGINNER: 'Beginner',
+  INTERMEDIATE: 'Intermediate',
+  ADVANCED: 'Advanced',
+  EXPERT: 'Expert',
   // lowercase aliases for backward-compatible code that expects 'beginner' etc.
-  beginner: "Beginner",
-  intermediate: "Intermediate",
-  advanced: "Advanced",
-  expert: "Expert",
+  beginner: 'Beginner',
+  intermediate: 'Intermediate',
+  advanced: 'Advanced',
+  expert: 'Expert',
 } as const;
 
-export type Difficulty = typeof Difficulty[keyof typeof Difficulty];
+export type Difficulty = (typeof Difficulty)[keyof typeof Difficulty];
 
 // Backwards-compatible alias
 export type QuestionDifficulty = Difficulty;
 
 export enum ExamMode {
-  PRACTICE = "practice",
-  MOCK = "mock",
-  REVIEW = "review",
+  PRACTICE = 'practice',
+  MOCK = 'mock',
+  REVIEW = 'review',
 }
 
 export interface ExamSession {
@@ -172,7 +172,7 @@ export interface QuestionFilter {
   tags?: string[];
   moduleIds?: string[];
   objectiveIds?: string[];
-  conceptLevels?: Array<"fundamental" | "intermediate" | "advanced">;
+  conceptLevels?: Array<'fundamental' | 'intermediate' | 'advanced'>;
   limit?: number;
   maintainDistribution?: boolean;
 }
@@ -184,7 +184,7 @@ export interface QuestionPool {
   difficultyDistribution: Record<string, number>;
   isEmpty: boolean;
   hasMinimumQuestions: boolean;
-  recommendedFallback?: "expand-criteria" | "use-similar-modules" | "mixed-content";
+  recommendedFallback?: 'expand-criteria' | 'use-similar-modules' | 'mixed-content';
 }
 
 export interface PracticeTargeting {
@@ -195,7 +195,7 @@ export interface PracticeTargeting {
   optionalTags: string[];
   minQuestions: number;
   idealQuestions: number;
-  fallbackStrategy: "expand-domain" | "reduce-specificity" | "mixed-content";
+  fallbackStrategy: 'expand-domain' | 'reduce-specificity' | 'mixed-content';
 }
 
 export interface DomainScore {

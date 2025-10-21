@@ -1,13 +1,13 @@
-"use client";
+'use client';
 
-import { useState, memo, useMemo } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Alert, AlertDescription } from "@/components/ui/alert";
-import { CheckCircle, XCircle, Clock, BookOpen } from "lucide-react";
-import type { Question } from "@/types/exam";
-import { cn, getDifficultyColor } from "@/lib/utils";
+import { BookOpen, CheckCircle, Clock, XCircle } from 'lucide-react';
+import { memo, useMemo, useState } from 'react';
+import { Alert, AlertDescription } from '@/components/ui/alert';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { cn, getDifficultyColor } from '@/lib/utils';
+import type { Question } from '@/types/exam';
 
 interface QuestionCardProps {
   question: Question;
@@ -38,7 +38,7 @@ export const QuestionCard = memo(function QuestionCard({
   mode,
   disabled = false,
 }: QuestionCardProps) {
-  const [localAnswer, setLocalAnswer] = useState(selectedAnswer ?? "");
+  const [localAnswer, setLocalAnswer] = useState(selectedAnswer ?? '');
 
   const handleAnswerChange = (value: string) => {
     setLocalAnswer(value);
@@ -65,7 +65,7 @@ export const QuestionCard = memo(function QuestionCard({
             <div className="flex items-center gap-1">
               <Badge
                 variant="outline"
-                className={cn("text-sm", getDifficultyColor(question.difficulty))}
+                className={cn('text-sm', getDifficultyColor(question.difficulty))}
               >
                 {question.difficulty}
               </Badge>
@@ -98,13 +98,13 @@ export const QuestionCard = memo(function QuestionCard({
               <div
                 key={`choice-${choice.id}-${question.id}`}
                 className={cn(
-                  "flex items-center space-x-3 rounded-lg border p-4 transition-all",
-                  "cursor-pointer hover:bg-accent/50",
-                  isSelected && !showResult && "border-primary bg-accent",
+                  'flex items-center space-x-3 rounded-lg border p-4 transition-all',
+                  'cursor-pointer hover:bg-accent/50',
+                  isSelected && !showResult && 'border-primary bg-accent',
                   isCorrectChoice &&
-                    "border-green-200 bg-green-50 dark:border-green-800 dark:bg-green-900/20",
+                    'border-green-200 bg-green-50 dark:border-green-800 dark:bg-green-900/20',
                   isIncorrectChoice &&
-                    "border-red-200 bg-red-50 dark:border-red-800 dark:bg-red-900/20"
+                    'border-red-200 bg-red-50 dark:border-red-800 dark:bg-red-900/20'
                 )}
                 onClick={() => !isSubmitted && !disabled && handleAnswerChange(choice.id)}
               >
@@ -117,15 +117,15 @@ export const QuestionCard = memo(function QuestionCard({
                     checked={isSelected}
                     onChange={() => handleAnswerChange(choice.id)}
                     disabled={isSubmitted ?? disabled}
-                    className={cn("sr-only")}
+                    className={cn('sr-only')}
                   />
                   <div
                     className={cn(
-                      "flex h-4 w-4 items-center justify-center rounded-full border-2 transition-all",
-                      isSelected ? "border-primary bg-primary" : "border-muted-foreground",
-                      isCorrectChoice && "border-green-600 bg-[#22c55e]",
-                      isIncorrectChoice && "border-red-600 bg-red-600",
-                      (isSubmitted ?? disabled) && "opacity-50"
+                      'flex h-4 w-4 items-center justify-center rounded-full border-2 transition-all',
+                      isSelected ? 'border-primary bg-primary' : 'border-muted-foreground',
+                      isCorrectChoice && 'border-green-600 bg-[#22c55e]',
+                      isIncorrectChoice && 'border-red-600 bg-red-600',
+                      (isSubmitted ?? disabled) && 'opacity-50'
                     )}
                   >
                     {isSelected && <div className="h-1.5 w-1.5 rounded-full bg-white" />}
@@ -158,14 +158,14 @@ export const QuestionCard = memo(function QuestionCard({
         {!showResult && onSubmit && (
           <div className="flex items-center justify-between pt-4">
             <div className="text-sm text-muted-foreground">
-              {localAnswer ? "Answer selected" : "Select an answer to continue"}
+              {localAnswer ? 'Answer selected' : 'Select an answer to continue'}
             </div>
             <Button
               onClick={onSubmit}
               disabled={!localAnswer || isSubmitted}
               className="bg-tanium-accent hover:bg-blue-600"
             >
-              {isSubmitted ? "Submitting..." : "Submit Answer"}
+              {isSubmitted ? 'Submitting...' : 'Submit Answer'}
             </Button>
           </div>
         )}
@@ -174,8 +174,8 @@ export const QuestionCard = memo(function QuestionCard({
           <div className="flex items-center justify-center pt-4">
             <div
               className={cn(
-                "flex items-center gap-2 text-lg font-medium",
-                isCorrect ? "text-[#22c55e]" : "text-red-600"
+                'flex items-center gap-2 text-lg font-medium',
+                isCorrect ? 'text-[#22c55e]' : 'text-red-600'
               )}
             >
               {isCorrect ? (

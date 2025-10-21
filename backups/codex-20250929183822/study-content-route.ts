@@ -1,13 +1,13 @@
-import { type NextRequest, NextResponse } from "next/server";
-import fs from "fs";
-import { fileURLToPath } from "url";
-import type { StudyModuleContent } from "@/data/study-content";
+import fs from 'fs';
+import { type NextRequest, NextResponse } from 'next/server';
+import { fileURLToPath } from 'url';
+import type { StudyModuleContent } from '@/data/study-content';
 
 interface ParsedSection {
   id: string;
   title: string;
   content: string;
-  sectionType: "overview" | "concepts" | "procedures" | "examples" | "exam_prep";
+  sectionType: 'overview' | 'concepts' | 'procedures' | 'examples' | 'exam_prep';
   orderIndex: number;
   estimatedTime: number;
   keyPoints: string[];
@@ -40,11 +40,13 @@ class ServerSideContentParser {
 
     if (objectivesMatch) {
       const objectivesText = objectivesMatch[1];
-      const matches = objectivesText ? objectivesText.match(/\d+\.\s+\*\*(.*?)\*\*\s+-\s+(.*?)(?=\n\d+\.|$)/g) : null;
+      const matches = objectivesText
+        ? objectivesText.match(/\d+\.\s+\*\*(.*?)\*\*\s+-\s+(.*?)(?=\n\d+\.|$)/g)
+        : null;
 
       if (matches) {
         matches.forEach((match) => {
-          const cleanMatch = match.replace(/^\d+\.\s+\*\*(.*?)\*\*\s+-\s+/, "");
+          const cleanMatch = match.replace(/^\d+\.\s+\*\*(.*?)\*\*\s+-\s+/, '');
           objectives.push(cleanMatch.trim());
         });
       }
@@ -68,34 +70,34 @@ class ServerSideContentParser {
       const title = titleMatch ? titleMatch[1].trim() : `Module ${index}`;
 
       // Determine section type based on content patterns
-      let sectionType: "overview" | "concepts" | "procedures" | "examples" | "exam_prep" =
-        "concepts";
+      let sectionType: 'overview' | 'concepts' | 'procedures' | 'examples' | 'exam_prep' =
+        'concepts';
 
-      if (title.toLowerCase().includes("fundamental") || title.toLowerCase().includes("basic")) {
-        sectionType = "concepts";
+      if (title.toLowerCase().includes('fundamental') || title.toLowerCase().includes('basic')) {
+        sectionType = 'concepts';
       } else if (
-        title.toLowerCase().includes("procedure") ||
-        title.toLowerCase().includes("step")
+        title.toLowerCase().includes('procedure') ||
+        title.toLowerCase().includes('step')
       ) {
-        sectionType = "procedures";
+        sectionType = 'procedures';
       } else if (
-        title.toLowerCase().includes("example") ||
-        title.toLowerCase().includes("practice")
+        title.toLowerCase().includes('example') ||
+        title.toLowerCase().includes('practice')
       ) {
-        sectionType = "examples";
+        sectionType = 'examples';
       } else if (
-        title.toLowerCase().includes("exam") ||
-        title.toLowerCase().includes("assessment")
+        title.toLowerCase().includes('exam') ||
+        title.toLowerCase().includes('assessment')
       ) {
-        sectionType = "exam_prep";
+        sectionType = 'exam_prep';
       }
 
       // Extract key points from bullet points and numbered lists
       const keyPoints: string[] = [];
-      const bulletMatches = moduleContent.match(/^[\s]*[-\*]\s+(.+)$/gm);
+      const bulletMatches = moduleContent.match(/^[\s]*[-*]\s+(.+)$/gm);
       if (bulletMatches) {
         bulletMatches.forEach((match) => {
-          const point = match.replace(/^[\s]*[-\*]\s+/, "").trim();
+          const point = match.replace(/^[\s]*[-*]\s+/, '').trim();
           keyPoints.push(point);
         });
       }
@@ -105,7 +107,7 @@ class ServerSideContentParser {
       const procedureMatches = moduleContent.match(/^\d+\.\s+(.+)$/gm);
       if (procedureMatches) {
         procedureMatches.forEach((match) => {
-          const procedure = match.replace(/^\d+\.\s+/, "").trim();
+          const procedure = match.replace(/^\d+\.\s+/, '').trim();
           procedures.push(procedure);
         });
       }
@@ -119,7 +121,7 @@ class ServerSideContentParser {
         estimatedTime: 30 + index * 15, // Progressive time estimates
         keyPoints: keyPoints.slice(0, 5), // Limit to top 5 key points
         procedures: procedures.length > 0 ? procedures.slice(0, 8) : undefined,
-        references: ["Tanium Core Platform Documentation", "Interact Module User Guide"],
+        references: ['Tanium Core Platform Documentation', 'Interact Module User Guide'],
       });
     });
 
@@ -127,27 +129,27 @@ class ServerSideContentParser {
   }
 
   public static parseDomain1(markdownPath: string): ParsedModule {
-    const content = fs.readFileSync(markdownPath, "utf-8");
+    const content = fs.readFileSync(markdownPath, 'utf-8');
 
     // Extract title and description from header
     const titleMatch = content.match(/# Domain 1: (.+)/);
-    const title = titleMatch ? `Domain 1: ${titleMatch[1]}` : "Domain 1: Asking Questions";
+    const title = titleMatch ? `Domain 1: ${titleMatch[1]}` : 'Domain 1: Asking Questions';
 
     const descriptionMatch = content.match(/\*\*TCO Certification Domain 1\*\*: (.+)/);
     const description = descriptionMatch
       ? `Master ${descriptionMatch[1].toLowerCase()} for real-time endpoint data collection. Learn sensor selection, query construction, and result interpretation for effective information gathering across enterprise environments.`
-      : "Master natural language questioning in Tanium for real-time endpoint data collection.";
+      : 'Master natural language questioning in Tanium for real-time endpoint data collection.';
 
     return {
-      id: "asking-questions",
-      domain: "Asking Questions",
+      id: 'asking-questions',
+      domain: 'Asking Questions',
       title,
       description,
-      examWeight: this.extractExamWeight(content),
-      estimatedTime: "3-4 hours",
+      examWeight: ServerSideContentParser.extractExamWeight(content),
+      estimatedTime: '3-4 hours',
       estimatedTimeMinutes: 210,
-      learningObjectives: this.extractLearningObjectives(content),
-      sections: this.extractSections(content),
+      learningObjectives: ServerSideContentParser.extractLearningObjectives(content),
+      sections: ServerSideContentParser.extractSections(content),
     };
   }
 
@@ -182,11 +184,11 @@ class ServerSideContentParser {
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
-    const domain = searchParams.get("domain");
+    const domain = searchParams.get('domain');
 
-    if (domain === "asking-questions" || domain === "1") {
+    if (domain === 'asking-questions' || domain === '1') {
       const markdownUrl = new URL(
-        "../../../../content/domains/domain1-asking-questions.md",
+        '../../../../content/domains/domain1-asking-questions.md',
         import.meta.url
       );
 
@@ -194,9 +196,9 @@ export async function GET(request: NextRequest) {
       try {
         contentPath = fileURLToPath(markdownUrl);
       } catch {
-        console.error("Failed to resolve content URL for Domain 1");
+        console.error('Failed to resolve content URL for Domain 1');
         return NextResponse.json(
-          { error: "Study content not found", details: "Unable to resolve content path" },
+          { error: 'Study content not found', details: 'Unable to resolve content path' },
           { status: 404 }
         );
       }
@@ -204,7 +206,7 @@ export async function GET(request: NextRequest) {
       if (!fs.existsSync(contentPath)) {
         console.error(`Domain 1 markdown file not found at ${contentPath}`);
         return NextResponse.json(
-          { error: "Study content not found", details: `File not found: ${contentPath}` },
+          { error: 'Study content not found', details: `File not found: ${contentPath}` },
           { status: 404 }
         );
       }
@@ -224,15 +226,15 @@ export async function GET(request: NextRequest) {
     }
 
     return NextResponse.json(
-      { error: "Domain not supported", availableDomains: ["asking-questions"] },
+      { error: 'Domain not supported', availableDomains: ['asking-questions'] },
       { status: 400 }
     );
   } catch (error) {
-    console.error("Error parsing study content:", error);
+    console.error('Error parsing study content:', error);
     return NextResponse.json(
       {
-        error: "Failed to parse study content",
-        details: error instanceof Error ? error.message : "Unknown error",
+        error: 'Failed to parse study content',
+        details: error instanceof Error ? error.message : 'Unknown error',
       },
       { status: 500 }
     );

@@ -1,8 +1,8 @@
-"use client"
+'use client';
 
-import { motion } from "framer-motion"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { motion } from 'framer-motion';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 
 export default function LighthouseTestPage() {
   return (
@@ -50,8 +50,8 @@ export default function LighthouseTestPage() {
                 </CardHeader>
                 <CardContent>
                   <p className="text-sm text-muted-foreground">
-                    This is a sample card demonstrating the optimized UI components
-                    with minimal JavaScript overhead.
+                    This is a sample card demonstrating the optimized UI components with minimal
+                    JavaScript overhead.
                   </p>
                   <Button className="mt-4" variant="outline">
                     Action {i}
@@ -93,5 +93,5 @@ export default function LighthouseTestPage() {
         </motion.div>
       </div>
     </div>
-  )
+  );
 }

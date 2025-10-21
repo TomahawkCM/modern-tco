@@ -1,123 +1,125 @@
-"use client";
+'use client';
 
-import { useRouter } from "next/navigation";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import {
-  BookOpen,
-  Clock,
-  Target,
   ArrowRight,
+  BookOpen,
+  CheckCircle2,
+  Clock,
   GraduationCap,
   Lightbulb,
-  CheckCircle2,
-} from "lucide-react";
+  Target,
+} from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 
 // Module configuration with all 6 study modules
 const STUDY_MODULES = [
   {
-    slug: "platform-foundation",
-    title: "Tanium Platform Foundation",
-    description: "Complete foundation for zero-knowledge students - understand architecture, terminology, and console basics",
-    icon: "🏗️",
-    difficulty: "Beginner",
-    estimatedTime: "180 min",
-    examWeight: "0%",
+    slug: 'platform-foundation',
+    title: 'Tanium Platform Foundation',
+    description:
+      'Complete foundation for zero-knowledge students - understand architecture, terminology, and console basics',
+    icon: '🏗️',
+    difficulty: 'Beginner',
+    estimatedTime: '180 min',
+    examWeight: '0%',
     order: 0,
     objectives: [
       "Understand Tanium's linear chain architecture",
-      "Master essential platform terminology",
-      "Navigate the Tanium console interface",
+      'Master essential platform terminology',
+      'Navigate the Tanium console interface',
     ],
   },
   {
-    slug: "asking-questions",
-    title: "Asking Questions",
-    description: "Master the art of querying in Tanium - construct effective queries and interpret results",
-    icon: "❓",
-    difficulty: "Beginner",
-    estimatedTime: "45 min",
-    examWeight: "22%",
+    slug: 'asking-questions',
+    title: 'Asking Questions',
+    description:
+      'Master the art of querying in Tanium - construct effective queries and interpret results',
+    icon: '❓',
+    difficulty: 'Beginner',
+    estimatedTime: '45 min',
+    examWeight: '22%',
     order: 1,
     objectives: [
-      "Construct effective natural language queries",
-      "Master the 500+ built-in sensors",
-      "Manage saved questions lifecycle",
+      'Construct effective natural language queries',
+      'Master the 500+ built-in sensors',
+      'Manage saved questions lifecycle',
     ],
   },
   {
-    slug: "refining-questions-targeting",
-    title: "Refining Questions and Targeting",
-    description: "Master advanced filtering and targeting techniques for precise queries",
-    icon: "🎯",
-    difficulty: "Intermediate",
-    estimatedTime: "90 min",
-    examWeight: "23%",
+    slug: 'refining-questions-targeting',
+    title: 'Refining Questions and Targeting',
+    description: 'Master advanced filtering and targeting techniques for precise queries',
+    icon: '🎯',
+    difficulty: 'Intermediate',
+    estimatedTime: '90 min',
+    examWeight: '23%',
     order: 2,
     objectives: [
-      "Apply advanced filtering techniques",
-      "Target specific computer groups",
-      "Optimize query performance",
+      'Apply advanced filtering techniques',
+      'Target specific computer groups',
+      'Optimize query performance',
     ],
   },
   {
-    slug: "taking-action-packages-actions",
-    title: "Taking Action",
-    description: "Learn how to execute actions and deploy solutions using Tanium packages",
-    icon: "⚡",
-    difficulty: "Intermediate",
-    estimatedTime: "120 min",
-    examWeight: "15%",
+    slug: 'taking-action-packages-actions',
+    title: 'Taking Action',
+    description: 'Learn how to execute actions and deploy solutions using Tanium packages',
+    icon: '⚡',
+    difficulty: 'Intermediate',
+    estimatedTime: '120 min',
+    examWeight: '15%',
     order: 3,
     objectives: [
-      "Deploy packages safely to endpoints",
-      "Create and manage actions",
-      "Monitor action execution status",
+      'Deploy packages safely to endpoints',
+      'Create and manage actions',
+      'Monitor action execution status',
     ],
   },
   {
-    slug: "navigation-basic-modules",
-    title: "Navigation and Basic Module Functions",
-    description: "Master the Tanium interface navigation and core module functionality",
-    icon: "🧭",
-    difficulty: "Intermediate",
-    estimatedTime: "210 min",
-    examWeight: "23%",
+    slug: 'navigation-basic-modules',
+    title: 'Navigation and Basic Module Functions',
+    description: 'Master the Tanium interface navigation and core module functionality',
+    icon: '🧭',
+    difficulty: 'Intermediate',
+    estimatedTime: '210 min',
+    examWeight: '23%',
     order: 4,
     objectives: [
-      "Navigate the Tanium console efficiently",
-      "Use essential modules (Comply, Patch, etc.)",
-      "Manage user roles and permissions",
+      'Navigate the Tanium console efficiently',
+      'Use essential modules (Comply, Patch, etc.)',
+      'Manage user roles and permissions',
     ],
   },
   {
-    slug: "reporting-data-export",
-    title: "Report Generation and Data Export",
-    description: "Learn to create reports and export data for analysis and compliance",
-    icon: "📊",
-    difficulty: "Intermediate",
-    estimatedTime: "180 min",
-    examWeight: "17%",
+    slug: 'reporting-data-export',
+    title: 'Report Generation and Data Export',
+    description: 'Learn to create reports and export data for analysis and compliance',
+    icon: '📊',
+    difficulty: 'Intermediate',
+    estimatedTime: '180 min',
+    examWeight: '17%',
     order: 5,
     objectives: [
-      "Create and schedule reports",
-      "Export data in multiple formats",
-      "Build dashboards for stakeholders",
+      'Create and schedule reports',
+      'Export data in multiple formats',
+      'Build dashboards for stakeholders',
     ],
   },
 ];
 
 const getDifficultyColor = (difficulty: string) => {
   switch (difficulty) {
-    case "Beginner":
-      return "border-green-200 bg-green-50 text-green-700 dark:border-green-800 dark:bg-green-950 dark:text-[#22c55e]";
-    case "Intermediate":
-      return "border-yellow-200 bg-yellow-50 text-yellow-700 dark:border-yellow-800 dark:bg-yellow-950 dark:text-[#f97316]";
-    case "Advanced":
-      return "border-red-200 bg-red-50 text-red-700 dark:border-red-800 dark:bg-red-950 dark:text-red-300";
+    case 'Beginner':
+      return 'border-green-200 bg-green-50 text-green-700 dark:border-green-800 dark:bg-green-950 dark:text-[#22c55e]';
+    case 'Intermediate':
+      return 'border-yellow-200 bg-yellow-50 text-yellow-700 dark:border-yellow-800 dark:bg-yellow-950 dark:text-[#f97316]';
+    case 'Advanced':
+      return 'border-red-200 bg-red-50 text-red-700 dark:border-red-800 dark:bg-red-950 dark:text-red-300';
     default:
-      return "border-gray-200 bg-gray-50 text-gray-700 dark:border-gray-800 dark:bg-gray-950 dark:text-muted-foreground";
+      return 'border-gray-200 bg-gray-50 text-gray-700 dark:border-gray-800 dark:bg-gray-950 dark:text-muted-foreground';
   }
 };
 
@@ -125,7 +127,7 @@ export default function StudyPage() {
   const router = useRouter();
 
   const totalTime = STUDY_MODULES.reduce((acc, module) => {
-    return acc + parseInt(module.estimatedTime.split(" ")[0]);
+    return acc + parseInt(module.estimatedTime.split(' ')[0], 10);
   }, 0);
 
   return (
@@ -180,8 +182,9 @@ export default function StudyPage() {
         </CardHeader>
         <CardContent className="text-muted-foreground">
           <p className="mb-3">
-            <strong className="text-primary">New to Tanium?</strong> Start with the Platform Foundation module for a
-            complete introduction. Then progress through each module in order.
+            <strong className="text-primary">New to Tanium?</strong> Start with the Platform
+            Foundation module for a complete introduction. Then progress through each module in
+            order.
           </p>
           <p className="text-sm text-muted-foreground">
             Each module includes interactive examples, practice questions, and active recall
@@ -220,7 +223,7 @@ export default function StudyPage() {
                     <Clock className="h-4 w-4" />
                     {module.estimatedTime}
                   </span>
-                  {module.examWeight !== "0%" && (
+                  {module.examWeight !== '0%' && (
                     <span className="font-medium text-primary">{module.examWeight} exam</span>
                   )}
                 </div>
@@ -265,7 +268,7 @@ export default function StudyPage() {
             retention.
           </p>
           <Button
-            onClick={() => router.push("/study/platform-foundation")}
+            onClick={() => router.push('/study/platform-foundation')}
             className="bg-[#22c55e] hover:bg-green-700"
           >
             Start with Platform Foundation

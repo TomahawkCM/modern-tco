@@ -1,4 +1,3 @@
-import React from 'react';
 import { render, waitFor } from '@testing-library/react';
 
 // Track calls
@@ -10,7 +9,13 @@ jest.mock('@/contexts/ProgressContext', () => ({
     state: { progress: { recentSessions: [] } },
     getDomainStats: () => [],
     setWeeklyGoal: () => {},
-    getOverallStats: () => ({ totalQuestions: 0, averageScore: 0, studyStreak: 0, hoursStudied: 0, readinessLevel: 'Poor' }),
+    getOverallStats: () => ({
+      totalQuestions: 0,
+      averageScore: 0,
+      studyStreak: 0,
+      hoursStudied: 0,
+      readinessLevel: 'Poor',
+    }),
     getWeeklyProgress: () => ({ current: 0, goal: 5, percentage: 0 }),
     resetProgress: () => {},
   }),
@@ -23,7 +28,7 @@ jest.mock('@/contexts/ExamContext', () => ({
       currentSession: {
         completed: true,
         score: 80,
-        questions: [ { id: 'q1', correctAnswerId: 'a' } ],
+        questions: [{ id: 'q1', correctAnswerId: 'a' }],
         answers: { q1: 'a' },
         startTime: new Date(Date.now() - 30_000),
         endTime: new Date(),
@@ -42,7 +47,9 @@ jest.mock('@/contexts/ExamContext', () => ({
 }));
 
 // Silence analytics
-jest.mock('@/lib/analytics', () => ({ analytics: { capture: jest.fn(), pageview: jest.fn(), init: () => true } }));
+jest.mock('@/lib/analytics', () => ({
+  analytics: { capture: jest.fn(), pageview: jest.fn(), init: () => true },
+}));
 
 import PracticePage from '@/app/practice/page';
 
@@ -54,4 +61,3 @@ describe('PracticePage progress integration', () => {
     });
   });
 });
-

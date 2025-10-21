@@ -1,7 +1,7 @@
-import { supabase } from "@/lib/supabase";
-import type { User } from "@supabase/supabase-js";
+import type { User } from '@supabase/supabase-js';
+import { supabase } from '@/lib/supabase';
 
-export type TeamSeatStatus = "invited" | "active" | "revoked";
+export type TeamSeatStatus = 'invited' | 'active' | 'revoked';
 
 export interface TeamSeat {
   id: string;
@@ -11,11 +11,11 @@ export interface TeamSeat {
   acceptedAt?: string | null;
 }
 
-const STORAGE_KEY = "tco_team_seats_v1";
-const LIMIT = parseInt(process.env.NEXT_PUBLIC_TEAM_SEAT_LIMIT || "5", 10) || 5;
+const STORAGE_KEY = 'tco_team_seats_v1';
+const LIMIT = parseInt(process.env.NEXT_PUBLIC_TEAM_SEAT_LIMIT || '5', 10) || 5;
 
 function uuid(): string {
-  if (typeof crypto !== "undefined" && (crypto as any).randomUUID) {
+  if (typeof crypto !== 'undefined' && (crypto as any).randomUUID) {
     return (crypto as any).randomUUID();
   }
   return Math.random().toString(36).slice(2) + Date.now().toString(36);
@@ -33,7 +33,9 @@ function lsGet(): TeamSeat[] {
 }
 
 function lsSet(seats: TeamSeat[]) {
-  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(seats)); } catch {}
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(seats));
+  } catch {}
 }
 
 export const teamService = {
@@ -42,14 +44,14 @@ export const teamService = {
   },
 
   async list(user?: User | null): Promise<TeamSeat[]> {
-    const local = typeof window !== "undefined" ? lsGet() : [];
+    const local = typeof window !== 'undefined' ? lsGet() : [];
     if (!user?.id) return local;
     try {
       const { data, error } = await (supabase as any)
-        .from("team_seats")
-        .select("id,email,status,invited_at,accepted_at")
-        .eq("owner_id", user.id)
-        .order("invited_at", { ascending: false });
+        .from('team_seats')
+        .select('id,email,status,invited_at,accepted_at')
+        .eq('owner_id', user.id)
+        .order('invited_at', { ascending: false });
       if (error) throw error;
       const remote: TeamSeat[] = (data || []).map((r: any) => ({
         id: r.id,
@@ -58,7 +60,7 @@ export const teamService = {
         invitedAt: r.invited_at,
         acceptedAt: r.accepted_at,
       }));
-      if (remote.length && typeof window !== "undefined") lsSet(remote);
+      if (remote.length && typeof window !== 'undefined') lsSet(remote);
       return remote.length ? remote : local;
     } catch (error) {
       return local;
@@ -69,59 +71,63 @@ export const teamService = {
     const newSeat: TeamSeat = {
       id: uuid(),
       email: email.trim().toLowerCase(),
-      status: "invited",
+      status: 'invited',
       invitedAt: new Date().toISOString(),
       acceptedAt: null,
     };
-    const cur = typeof window !== "undefined" ? lsGet() : [];
+    const cur = typeof window !== 'undefined' ? lsGet() : [];
     const updated = [newSeat, ...cur];
-    if (typeof window !== "undefined") lsSet(updated);
+    if (typeof window !== 'undefined') lsSet(updated);
     if (user?.id) {
       try {
-        await (supabase as any)
-          .from("team_seats")
-          .upsert({
+        await (supabase as any).from('team_seats').upsert(
+          {
             id: newSeat.id,
             owner_id: user.id,
             email: newSeat.email,
             status: newSeat.status,
             invited_at: newSeat.invitedAt,
             accepted_at: newSeat.acceptedAt,
-          }, { onConflict: "id" });
+          },
+          { onConflict: 'id' }
+        );
       } catch {}
     }
     return newSeat;
   },
 
   async revoke(id: string, user?: User | null): Promise<void> {
-    const cur = typeof window !== "undefined" ? lsGet() : [];
-    const updated = cur.map((s) => (s.id === id ? { ...s, status: "revoked" as TeamSeatStatus } : s));
-    if (typeof window !== "undefined") lsSet(updated);
+    const cur = typeof window !== 'undefined' ? lsGet() : [];
+    const updated = cur.map((s) =>
+      s.id === id ? { ...s, status: 'revoked' as TeamSeatStatus } : s
+    );
+    if (typeof window !== 'undefined') lsSet(updated);
     if (user?.id) {
       try {
         await (supabase as any)
-          .from("team_seats")
-          .update({ status: "revoked" })
-          .eq("id", id)
-          .eq("owner_id", user.id);
+          .from('team_seats')
+          .update({ status: 'revoked' })
+          .eq('id', id)
+          .eq('owner_id', user.id);
       } catch {}
     }
   },
 
   async activate(id: string, user?: User | null): Promise<void> {
-    const cur = typeof window !== "undefined" ? lsGet() : [];
+    const cur = typeof window !== 'undefined' ? lsGet() : [];
     const now = new Date().toISOString();
-    const updated = cur.map((s) => (s.id === id ? { ...s, status: "active" as TeamSeatStatus, acceptedAt: now } : s));
-    if (typeof window !== "undefined") lsSet(updated);
+    const updated = cur.map((s) =>
+      s.id === id ? { ...s, status: 'active' as TeamSeatStatus, acceptedAt: now } : s
+    );
+    if (typeof window !== 'undefined') lsSet(updated);
     if (user?.id) {
       try {
         await (supabase as any)
-          .from("team_seats")
-          .update({ status: "active", accepted_at: now })
-          .eq("id", id)
-          .eq("owner_id", user.id);
+          .from('team_seats')
+          .update({ status: 'active', accepted_at: now })
+          .eq('id', id)
+          .eq('owner_id', user.id);
       } catch {}
     }
   },
 };
-

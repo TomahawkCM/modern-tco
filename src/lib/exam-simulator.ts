@@ -1,12 +1,11 @@
-import type { AssessmentConfig } from "@/types/assessment";
+import type { AssessmentConfig } from '@/types/assessment';
 
-export type ExamModeSim = "practice-test" | "mock-exam";
+export type ExamModeSim = 'practice-test' | 'mock-exam';
 
 export function getExamDefaults(mode: ExamModeSim): { questionCount: number; timeLimit: number } {
   switch (mode) {
-    case "mock-exam":
+    case 'mock-exam':
       return { questionCount: 75, timeLimit: 105 };
-    case "practice-test":
     default:
       return { questionCount: 25, timeLimit: 35 };
   }
@@ -32,4 +31,3 @@ export function buildExamConfig(
     enableAnalytics: true,
   } as AssessmentConfig;
 }
-

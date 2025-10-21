@@ -4,37 +4,25 @@
  * Matches existing ModuleList styling and functionality
  */
 
-"use client";
+'use client';
 
-import { useState } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Progress } from "@/components/ui/progress";
-import { Input } from "@/components/ui/input";
+import { CheckCircle, Eye, FileText, Filter, Play, Search, Target } from 'lucide-react';
+import { useState } from 'react';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Progress } from '@/components/ui/progress';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import {
-  FileText,
-  Clock,
-  CheckCircle,
-  Play,
-  Search,
-  Filter,
-  BookOpen,
-  Target,
-  User,
-  Calendar,
-  Eye,
-} from "lucide-react";
-import { type StudyGuide, StudyGuideProgress } from "@/types/module";
-import { useModule } from "@/contexts/ModuleContext";
-import { cn } from "@/lib/utils";
+} from '@/components/ui/select';
+import { useModule } from '@/contexts/ModuleContext';
+import { cn } from '@/lib/utils';
+import type { StudyGuide } from '@/types/module';
 
 interface StudyGuideListProps {
   studyGuides: StudyGuide[];
@@ -44,16 +32,16 @@ interface StudyGuideListProps {
 
 export function StudyGuideList({ studyGuides, onGuideSelect, className }: StudyGuideListProps) {
   const { state } = useModule();
-  const [searchQuery, setSearchQuery] = useState("");
-  const [selectedModule, setSelectedModule] = useState<string>("all");
-  const [sortBy, setSortBy] = useState<string>("title");
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedModule, setSelectedModule] = useState<string>('all');
+  const [sortBy, setSortBy] = useState<string>('title');
 
   // Filter guides based on search and filters
   const filteredGuides = studyGuides.filter((guide) => {
     const matchesSearch =
       guide.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       guide.description.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesModule = selectedModule === "all" || guide.moduleId === selectedModule;
+    const matchesModule = selectedModule === 'all' || guide.moduleId === selectedModule;
 
     return matchesSearch && matchesModule;
   });
@@ -61,16 +49,17 @@ export function StudyGuideList({ studyGuides, onGuideSelect, className }: StudyG
   // Sort guides
   const sortedGuides = [...filteredGuides].sort((a, b) => {
     switch (sortBy) {
-      case "title":
+      case 'title':
         return a.title.localeCompare(b.title);
-      case "readingTime":
+      case 'readingTime':
         return a.estimatedReadingTime - b.estimatedReadingTime;
-      case "lastUpdated":
+      case 'lastUpdated':
         return new Date(b.lastUpdated).getTime() - new Date(a.lastUpdated).getTime();
-      case "progress":
+      case 'progress': {
         const progressA = getProgressInfo(a).progress;
         const progressB = getProgressInfo(b).progress;
         return progressB - progressA;
+      }
       default:
         return 0;
     }
@@ -98,9 +87,9 @@ export function StudyGuideList({ studyGuides, onGuideSelect, className }: StudyG
   };
 
   const getStatusColor = (progress: number) => {
-    if (progress >= 100) return "text-[#22c55e] dark:text-[#22c55e]";
-    if (progress > 0) return "text-blue-600 dark:text-primary";
-    return "text-gray-600 dark:text-muted-foreground";
+    if (progress >= 100) return 'text-[#22c55e] dark:text-[#22c55e]';
+    if (progress > 0) return 'text-blue-600 dark:text-primary';
+    return 'text-gray-600 dark:text-muted-foreground';
   };
 
   const getStatusIcon = (progress: number) => {
@@ -110,7 +99,7 @@ export function StudyGuideList({ studyGuides, onGuideSelect, className }: StudyG
   };
 
   return (
-    <div className={cn("space-y-6", className)}>
+    <div className={cn('space-y-6', className)}>
       {/* Header */}
       <div className="flex items-center justify-between">
         <div className="space-y-1">
@@ -183,9 +172,9 @@ export function StudyGuideList({ studyGuides, onGuideSelect, className }: StudyG
               <Button
                 variant="outline"
                 onClick={() => {
-                  setSearchQuery("");
-                  setSelectedModule("all");
-                  setSortBy("title");
+                  setSearchQuery('');
+                  setSelectedModule('all');
+                  setSortBy('title');
                 }}
                 className="w-full"
               >
@@ -223,7 +212,7 @@ export function StudyGuideList({ studyGuides, onGuideSelect, className }: StudyG
                       </Badge>
                       {progressInfo.hasStarted && (
                         <Badge variant="secondary" className="text-xs">
-                          {progressInfo.progress >= 100 ? "Completed" : "In Progress"}
+                          {progressInfo.progress >= 100 ? 'Completed' : 'In Progress'}
                         </Badge>
                       )}
                     </div>
@@ -245,7 +234,7 @@ export function StudyGuideList({ studyGuides, onGuideSelect, className }: StudyG
                         {progressInfo.sectionsRead}/{progressInfo.totalSections} sections
                       </span>
                       <span>
-                        {progressInfo.checkpointsCompleted}/{progressInfo.totalCheckpoints}{" "}
+                        {progressInfo.checkpointsCompleted}/{progressInfo.totalCheckpoints}{' '}
                         checkpoints
                       </span>
                     </div>
@@ -284,13 +273,13 @@ export function StudyGuideList({ studyGuides, onGuideSelect, className }: StudyG
                 {/* Action Button */}
                 <Button
                   className="w-full"
-                  variant={progressInfo.progress >= 100 ? "outline" : "default"}
+                  variant={progressInfo.progress >= 100 ? 'outline' : 'default'}
                 >
                   {progressInfo.progress >= 100
-                    ? "Review Guide"
+                    ? 'Review Guide'
                     : progressInfo.hasStarted
-                      ? "Continue Reading"
-                      : "Start Reading"}
+                      ? 'Continue Reading'
+                      : 'Start Reading'}
                 </Button>
               </CardContent>
             </Card>

@@ -408,9 +408,7 @@
             "duration": 45.556
           }
         ],
-        "sortedBy": [
-          "duration"
-        ]
+        "sortedBy": ["duration"]
       },
       "guidanceLevel": 1
     },
@@ -506,9 +504,7 @@
         "summary": {
           "wastedMs": 2032.6359999999904
         },
-        "sortedBy": [
-          "total"
-        ]
+        "sortedBy": ["total"]
       },
       "guidanceLevel": 1
     },
@@ -2175,9 +2171,7 @@
             "rtt": 0.11299999999999999
           }
         ],
-        "sortedBy": [
-          "rtt"
-        ]
+        "sortedBy": ["rtt"]
       }
     },
     "network-server-latency": {
@@ -2238,9 +2232,7 @@
             "serverResponseTime": 0
           }
         ],
-        "sortedBy": [
-          "serverResponseTime"
-        ]
+        "sortedBy": ["serverResponseTime"]
       }
     },
     "main-thread-tasks": {
@@ -3011,12 +3003,8 @@
             "startTime": 3764.1290000000013
           }
         ],
-        "sortedBy": [
-          "duration"
-        ],
-        "skipSumming": [
-          "startTime"
-        ],
+        "sortedBy": ["duration"],
+        "skipSumming": ["startTime"],
         "debugData": {
           "type": "debugdata",
           "urls": [
@@ -3518,12 +3506,8 @@
         "summary": {
           "wastedBytes": 50862.1
         },
-        "sortedBy": [
-          "totalBytes"
-        ],
-        "skipSumming": [
-          "cacheLifetimeMs"
-        ]
+        "sortedBy": ["totalBytes"],
+        "skipSumming": ["cacheLifetimeMs"]
       },
       "guidanceLevel": 3
     },
@@ -3592,9 +3576,7 @@
             "totalBytes": 46206
           }
         ],
-        "sortedBy": [
-          "totalBytes"
-        ]
+        "sortedBy": ["totalBytes"]
       },
       "guidanceLevel": 1
     },
@@ -3618,9 +3600,7 @@
         "items": [],
         "overallSavingsMs": 0,
         "overallSavingsBytes": 0,
-        "sortedBy": [
-          "wastedBytes"
-        ],
+        "sortedBy": ["wastedBytes"],
         "debugData": {
           "type": "debugdata",
           "metricSavings": {
@@ -3698,9 +3678,7 @@
         "items": [],
         "overallSavingsMs": 0,
         "overallSavingsBytes": 0,
-        "sortedBy": [
-          "wastedBytes"
-        ],
+        "sortedBy": ["wastedBytes"],
         "debugData": {
           "type": "debugdata",
           "metricSavings": {
@@ -3731,9 +3709,7 @@
         "items": [],
         "overallSavingsMs": 0,
         "overallSavingsBytes": 0,
-        "sortedBy": [
-          "wastedBytes"
-        ],
+        "sortedBy": ["wastedBytes"],
         "debugData": {
           "type": "debugdata",
           "metricSavings": {
@@ -3786,9 +3762,7 @@
         ],
         "overallSavingsMs": 70,
         "overallSavingsBytes": 23636,
-        "sortedBy": [
-          "wastedBytes"
-        ],
+        "sortedBy": ["wastedBytes"],
         "debugData": {
           "type": "debugdata",
           "metricSavings": {
@@ -3857,9 +3831,7 @@
         ],
         "overallSavingsMs": 170,
         "overallSavingsBytes": 46818,
-        "sortedBy": [
-          "wastedBytes"
-        ],
+        "sortedBy": ["wastedBytes"],
         "debugData": {
           "type": "debugdata",
           "metricSavings": {
@@ -3936,9 +3908,7 @@
         ],
         "overallSavingsMs": 0,
         "overallSavingsBytes": 829414.15,
-        "sortedBy": [
-          "wastedBytes"
-        ],
+        "sortedBy": ["wastedBytes"],
         "debugData": {
           "type": "debugdata",
           "metricSavings": {
@@ -3969,9 +3939,7 @@
         "items": [],
         "overallSavingsMs": 0,
         "overallSavingsBytes": 0,
-        "sortedBy": [
-          "wastedBytes"
-        ],
+        "sortedBy": ["wastedBytes"],
         "debugData": {
           "type": "debugdata",
           "metricSavings": {
@@ -4001,9 +3969,7 @@
         "items": [],
         "overallSavingsMs": 0,
         "overallSavingsBytes": 0,
-        "sortedBy": [
-          "wastedBytes"
-        ],
+        "sortedBy": ["wastedBytes"],
         "debugData": {
           "type": "debugdata",
           "metricSavings": {
@@ -4077,9 +4043,7 @@
         ],
         "overallSavingsMs": 0,
         "overallSavingsBytes": 867467,
-        "sortedBy": [
-          "wastedBytes"
-        ],
+        "sortedBy": ["wastedBytes"],
         "debugData": {
           "type": "debugdata",
           "metricSavings": {
@@ -4109,9 +4073,7 @@
         "items": [],
         "overallSavingsMs": 0,
         "overallSavingsBytes": 0,
-        "sortedBy": [
-          "wastedBytes"
-        ],
+        "sortedBy": ["wastedBytes"],
         "debugData": {
           "type": "debugdata",
           "metricSavings": {
@@ -4141,9 +4103,7 @@
         "items": [],
         "overallSavingsMs": 0,
         "overallSavingsBytes": 0,
-        "sortedBy": [
-          "wastedBytes"
-        ],
+        "sortedBy": ["wastedBytes"],
         "debugData": {
           "type": "debugdata",
           "metricSavings": {
@@ -4298,9 +4258,7 @@
         ],
         "overallSavingsMs": 50,
         "overallSavingsBytes": 11615,
-        "sortedBy": [
-          "wastedBytes"
-        ],
+        "sortedBy": ["wastedBytes"],
         "debugData": {
           "type": "debugdata",
           "metricSavings": {
@@ -4570,21 +4528,15 @@
             "wastedBytes": 1135.6000000000001
           }
         ],
-        "sortedBy": [
-          "wastedBytes"
-        ],
-        "skipSumming": [
-          "cacheLifetimeMs"
-        ],
+        "sortedBy": ["wastedBytes"],
+        "skipSumming": ["cacheLifetimeMs"],
         "debugData": {
           "type": "debugdata",
           "wastedBytes": 50862.1
         }
       },
       "guidanceLevel": 3,
-      "replacesAudits": [
-        "uses-long-cache-ttl"
-      ]
+      "replacesAudits": ["uses-long-cache-ttl"]
     },
     "cls-culprits-insight": {
       "id": "cls-culprits-insight",
@@ -4652,11 +4604,7 @@
         ]
       },
       "guidanceLevel": 3,
-      "replacesAudits": [
-        "layout-shifts",
-        "non-composited-animations",
-        "unsized-images"
-      ]
+      "replacesAudits": ["layout-shifts", "non-composited-animations", "unsized-images"]
     },
     "document-latency-insight": {
       "id": "document-latency-insight",
@@ -4693,11 +4641,7 @@
         }
       },
       "guidanceLevel": 3,
-      "replacesAudits": [
-        "redirects",
-        "server-response-time",
-        "uses-text-compression"
-      ]
+      "replacesAudits": ["redirects", "server-response-time", "uses-text-compression"]
     },
     "dom-size-insight": {
       "id": "dom-size-insight",
@@ -4793,9 +4737,7 @@
         }
       },
       "guidanceLevel": 3,
-      "replacesAudits": [
-        "dom-size"
-      ]
+      "replacesAudits": ["dom-size"]
     },
     "duplicated-javascript-insight": {
       "id": "duplicated-javascript-insight",
@@ -4836,9 +4778,7 @@
         }
       },
       "guidanceLevel": 2,
-      "replacesAudits": [
-        "duplicated-javascript"
-      ]
+      "replacesAudits": ["duplicated-javascript"]
     },
     "font-display-insight": {
       "id": "font-display-insight",
@@ -4877,9 +4817,7 @@
         ]
       },
       "guidanceLevel": 3,
-      "replacesAudits": [
-        "font-display"
-      ]
+      "replacesAudits": ["font-display"]
     },
     "forced-reflow-insight": {
       "id": "forced-reflow-insight",
@@ -4997,9 +4935,7 @@
       "score": null,
       "scoreDisplayMode": "notApplicable",
       "guidanceLevel": 3,
-      "replacesAudits": [
-        "work-during-interaction"
-      ]
+      "replacesAudits": ["work-during-interaction"]
     },
     "lcp-breakdown-insight": {
       "id": "lcp-breakdown-insight",
@@ -5059,9 +4995,7 @@
         ]
       },
       "guidanceLevel": 3,
-      "replacesAudits": [
-        "largest-contentful-paint-element"
-      ]
+      "replacesAudits": ["largest-contentful-paint-element"]
     },
     "lcp-discovery-insight": {
       "id": "lcp-discovery-insight",
@@ -5070,10 +5004,7 @@
       "score": null,
       "scoreDisplayMode": "notApplicable",
       "guidanceLevel": 3,
-      "replacesAudits": [
-        "prioritize-lcp-image",
-        "lcp-lazy-loaded"
-      ]
+      "replacesAudits": ["prioritize-lcp-image", "lcp-lazy-loaded"]
     },
     "legacy-javascript-insight": {
       "id": "legacy-javascript-insight",
@@ -5366,10 +5297,7 @@
         ]
       },
       "guidanceLevel": 1,
-      "replacesAudits": [
-        "critical-request-chains",
-        "uses-rel-preconnect"
-      ]
+      "replacesAudits": ["critical-request-chains", "uses-rel-preconnect"]
     },
     "render-blocking-insight": {
       "id": "render-blocking-insight",
@@ -5415,9 +5343,7 @@
         ]
       },
       "guidanceLevel": 3,
-      "replacesAudits": [
-        "render-blocking-resources"
-      ]
+      "replacesAudits": ["render-blocking-resources"]
     },
     "third-parties-insight": {
       "id": "third-parties-insight",
@@ -5481,9 +5407,7 @@
         "isEntityGrouped": true
       },
       "guidanceLevel": 3,
-      "replacesAudits": [
-        "third-party-summary"
-      ]
+      "replacesAudits": ["third-party-summary"]
     },
     "viewport-insight": {
       "id": "viewport-insight",
@@ -5525,15 +5449,11 @@
         ]
       },
       "guidanceLevel": 3,
-      "replacesAudits": [
-        "viewport"
-      ]
+      "replacesAudits": ["viewport"]
     }
   },
   "configSettings": {
-    "output": [
-      "json"
-    ],
+    "output": ["json"],
     "maxWaitForFcp": 30000,
     "maxWaitForLoad": 45000,
     "pauseAfterFcpMs": 1000,
@@ -5560,12 +5480,7 @@
     "emulatedUserAgent": "Mozilla/5.0 (Linux; Android 11; moto g power (2022)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Mobile Safari/537.36",
     "auditMode": false,
     "gatherMode": false,
-    "clearStorageTypes": [
-      "file_systems",
-      "shader_cache",
-      "service_workers",
-      "cache_storage"
-    ],
+    "clearStorageTypes": ["file_systems", "shader_cache", "service_workers", "cache_storage"],
     "disableStorageReset": false,
     "debugNavigation": false,
     "channel": "cli",
@@ -5580,19 +5495,13 @@
     "extraHeaders": null,
     "precomputedLanternData": null,
     "onlyAudits": null,
-    "onlyCategories": [
-      "performance"
-    ],
+    "onlyCategories": ["performance"],
     "skipAudits": null
   },
   "categories": {
     "performance": {
       "title": "Performance",
-      "supportedModes": [
-        "navigation",
-        "timespan",
-        "snapshot"
-      ],
+      "supportedModes": ["navigation", "timespan", "snapshot"],
       "auditRefs": [
         {
           "id": "first-contentful-paint",
@@ -6047,9 +5956,7 @@
   "entities": [
     {
       "name": "localhost",
-      "origins": [
-        "http://localhost:3000"
-      ],
+      "origins": ["http://localhost:3000"],
       "isFirstParty": true,
       "isUnrecognized": true
     },
@@ -6067,18 +5974,13 @@
     {
       "name": "Google Fonts",
       "homepage": "https://fonts.google.com/",
-      "origins": [
-        "https://fonts.gstatic.com"
-      ],
+      "origins": ["https://fonts.gstatic.com"],
       "category": "cdn"
     },
     {
       "name": "Other Google APIs/SDKs",
       "homepage": "https://developers.google.com/apis-explorer/#p/",
-      "origins": [
-        "https://www.google.com",
-        "https://jnn-pa.googleapis.com"
-      ],
+      "origins": ["https://www.google.com", "https://jnn-pa.googleapis.com"],
       "category": "utility"
     }
   ],
@@ -8099,12 +8001,8 @@
       "warningHeader": "Warnings: "
     },
     "icuMessagePaths": {
-      "core/audits/viewport.js | title": [
-        "audits.viewport.title"
-      ],
-      "core/audits/viewport.js | description": [
-        "audits.viewport.description"
-      ],
+      "core/audits/viewport.js | title": ["audits.viewport.title"],
+      "core/audits/viewport.js | description": ["audits.viewport.description"],
       "core/lib/i18n/i18n.js | firstContentfulPaintMetric": [
         "audits[first-contentful-paint].title"
       ],
@@ -8161,15 +8059,9 @@
       "core/audits/metrics/first-meaningful-paint.js | description": [
         "audits[first-meaningful-paint].description"
       ],
-      "core/lib/i18n/i18n.js | speedIndexMetric": [
-        "audits[speed-index].title"
-      ],
-      "core/audits/metrics/speed-index.js | description": [
-        "audits[speed-index].description"
-      ],
-      "core/lib/i18n/i18n.js | totalBlockingTimeMetric": [
-        "audits[total-blocking-time].title"
-      ],
+      "core/lib/i18n/i18n.js | speedIndexMetric": ["audits[speed-index].title"],
+      "core/audits/metrics/speed-index.js | description": ["audits[speed-index].description"],
+      "core/lib/i18n/i18n.js | totalBlockingTimeMetric": ["audits[total-blocking-time].title"],
       "core/audits/metrics/total-blocking-time.js | description": [
         "audits[total-blocking-time].description"
       ],
@@ -8205,9 +8097,7 @@
           "path": "audits[largest-contentful-paint-element].displayValue"
         }
       ],
-      "core/lib/i18n/i18n.js | maxPotentialFIDMetric": [
-        "audits[max-potential-fid].title"
-      ],
+      "core/lib/i18n/i18n.js | maxPotentialFIDMetric": ["audits[max-potential-fid].title"],
       "core/audits/metrics/max-potential-fid.js | description": [
         "audits[max-potential-fid].description"
       ],
@@ -8217,9 +8107,7 @@
       "core/audits/metrics/cumulative-layout-shift.js | description": [
         "audits[cumulative-layout-shift].description"
       ],
-      "core/audits/server-response-time.js | title": [
-        "audits[server-response-time].title"
-      ],
+      "core/audits/server-response-time.js | title": ["audits[server-response-time].title"],
       "core/audits/server-response-time.js | description": [
         "audits[server-response-time].description"
       ],
@@ -8259,21 +8147,11 @@
         "audits[network-rtt].details.headings[1].label",
         "audits[network-server-latency].details.headings[1].label"
       ],
-      "core/lib/i18n/i18n.js | interactiveMetric": [
-        "audits.interactive.title"
-      ],
-      "core/audits/metrics/interactive.js | description": [
-        "audits.interactive.description"
-      ],
-      "core/audits/user-timings.js | title": [
-        "audits[user-timings].title"
-      ],
-      "core/audits/user-timings.js | description": [
-        "audits[user-timings].description"
-      ],
-      "core/lib/i18n/i18n.js | columnName": [
-        "audits[user-timings].details.headings[0].label"
-      ],
+      "core/lib/i18n/i18n.js | interactiveMetric": ["audits.interactive.title"],
+      "core/audits/metrics/interactive.js | description": ["audits.interactive.description"],
+      "core/audits/user-timings.js | title": ["audits[user-timings].title"],
+      "core/audits/user-timings.js | description": ["audits[user-timings].description"],
+      "core/lib/i18n/i18n.js | columnName": ["audits[user-timings].details.headings[0].label"],
       "core/audits/user-timings.js | columnType": [
         "audits[user-timings].details.headings[1].label"
       ],
@@ -8288,9 +8166,7 @@
         "audits[lcp-breakdown-insight].details.items[0].headings[1].label",
         "audits[render-blocking-insight].details.headings[2].label"
       ],
-      "core/audits/critical-request-chains.js | title": [
-        "audits[critical-request-chains].title"
-      ],
+      "core/audits/critical-request-chains.js | title": ["audits[critical-request-chains].title"],
       "core/audits/critical-request-chains.js | description": [
         "audits[critical-request-chains].description"
       ],
@@ -8302,12 +8178,8 @@
           "path": "audits[critical-request-chains].displayValue"
         }
       ],
-      "core/audits/redirects.js | title": [
-        "audits.redirects.title"
-      ],
-      "core/audits/redirects.js | description": [
-        "audits.redirects.description"
-      ],
+      "core/audits/redirects.js | title": ["audits.redirects.title"],
+      "core/audits/redirects.js | description": ["audits.redirects.description"],
       "core/audits/mainthread-work-breakdown.js | failureTitle": [
         "audits[mainthread-work-breakdown].title"
       ],
@@ -8317,24 +8189,16 @@
       "core/audits/mainthread-work-breakdown.js | columnCategory": [
         "audits[mainthread-work-breakdown].details.headings[0].label"
       ],
-      "core/audits/bootup-time.js | failureTitle": [
-        "audits[bootup-time].title"
-      ],
-      "core/audits/bootup-time.js | description": [
-        "audits[bootup-time].description"
-      ],
-      "core/audits/bootup-time.js | columnTotal": [
-        "audits[bootup-time].details.headings[1].label"
-      ],
+      "core/audits/bootup-time.js | failureTitle": ["audits[bootup-time].title"],
+      "core/audits/bootup-time.js | description": ["audits[bootup-time].description"],
+      "core/audits/bootup-time.js | columnTotal": ["audits[bootup-time].details.headings[1].label"],
       "core/audits/bootup-time.js | columnScriptEval": [
         "audits[bootup-time].details.headings[2].label"
       ],
       "core/audits/bootup-time.js | columnScriptParse": [
         "audits[bootup-time].details.headings[3].label"
       ],
-      "core/audits/uses-rel-preconnect.js | title": [
-        "audits[uses-rel-preconnect].title"
-      ],
+      "core/audits/uses-rel-preconnect.js | title": ["audits[uses-rel-preconnect].title"],
       "core/audits/uses-rel-preconnect.js | description": [
         "audits[uses-rel-preconnect].description"
       ],
@@ -8363,12 +8227,8 @@
       "core/audits/uses-rel-preconnect.js | tooManyPreconnectLinksWarning": [
         "audits[uses-rel-preconnect].warnings[3]"
       ],
-      "core/audits/font-display.js | title": [
-        "audits[font-display].title"
-      ],
-      "core/audits/font-display.js | description": [
-        "audits[font-display].description"
-      ],
+      "core/audits/font-display.js | title": ["audits[font-display].title"],
+      "core/audits/font-display.js | description": ["audits[font-display].description"],
       "core/audits/font-display.js | undeclaredFontOriginWarning": [
         {
           "values": {
@@ -8388,15 +8248,9 @@
         "audits[font-display-insight].details.headings[1].label",
         "audits[image-delivery-insight].details.headings[2].label"
       ],
-      "core/audits/network-rtt.js | title": [
-        "audits[network-rtt].title"
-      ],
-      "core/audits/network-rtt.js | description": [
-        "audits[network-rtt].description"
-      ],
-      "core/audits/network-server-latency.js | title": [
-        "audits[network-server-latency].title"
-      ],
+      "core/audits/network-rtt.js | title": ["audits[network-rtt].title"],
+      "core/audits/network-rtt.js | description": ["audits[network-rtt].description"],
+      "core/audits/network-server-latency.js | title": ["audits[network-server-latency].title"],
       "core/audits/network-server-latency.js | description": [
         "audits[network-server-latency].description"
       ],
@@ -8445,9 +8299,7 @@
       "core/lib/i18n/i18n.js | thirdPartyResourceType": [
         "audits[resource-summary].details.items[8].label"
       ],
-      "core/audits/third-party-summary.js | title": [
-        "audits[third-party-summary].title"
-      ],
+      "core/audits/third-party-summary.js | title": ["audits[third-party-summary].title"],
       "core/audits/third-party-summary.js | description": [
         "audits[third-party-summary].description"
       ],
@@ -8465,9 +8317,7 @@
       "core/lib/i18n/i18n.js | columnBlockingTime": [
         "audits[third-party-summary].details.headings[2].label"
       ],
-      "core/audits/third-party-facades.js | title": [
-        "audits[third-party-facades].title"
-      ],
+      "core/audits/third-party-facades.js | title": ["audits[third-party-facades].title"],
       "core/audits/third-party-facades.js | description": [
         "audits[third-party-facades].description"
       ],
@@ -8506,18 +8356,10 @@
       "core/audits/largest-contentful-paint-element.js | itemRenderDelay": [
         "audits[largest-contentful-paint-element].details.items[1].items[3].phase"
       ],
-      "core/audits/lcp-lazy-loaded.js | title": [
-        "audits[lcp-lazy-loaded].title"
-      ],
-      "core/audits/lcp-lazy-loaded.js | description": [
-        "audits[lcp-lazy-loaded].description"
-      ],
-      "core/audits/layout-shifts.js | title": [
-        "audits[layout-shifts].title"
-      ],
-      "core/audits/layout-shifts.js | description": [
-        "audits[layout-shifts].description"
-      ],
+      "core/audits/lcp-lazy-loaded.js | title": ["audits[lcp-lazy-loaded].title"],
+      "core/audits/lcp-lazy-loaded.js | description": ["audits[lcp-lazy-loaded].description"],
+      "core/audits/layout-shifts.js | title": ["audits[layout-shifts].title"],
+      "core/audits/layout-shifts.js | description": ["audits[layout-shifts].description"],
       "core/audits/layout-shifts.js | displayValueShiftsFound": [
         {
           "values": {
@@ -8529,12 +8371,8 @@
       "core/audits/layout-shifts.js | columnScore": [
         "audits[layout-shifts].details.headings[1].label"
       ],
-      "core/audits/long-tasks.js | title": [
-        "audits[long-tasks].title"
-      ],
-      "core/audits/long-tasks.js | description": [
-        "audits[long-tasks].description"
-      ],
+      "core/audits/long-tasks.js | title": ["audits[long-tasks].title"],
+      "core/audits/long-tasks.js | description": ["audits[long-tasks].description"],
       "core/audits/long-tasks.js | displayValue": [
         {
           "values": {
@@ -8549,15 +8387,9 @@
       "core/audits/non-composited-animations.js | description": [
         "audits[non-composited-animations].description"
       ],
-      "core/audits/unsized-images.js | title": [
-        "audits[unsized-images].title"
-      ],
-      "core/audits/unsized-images.js | description": [
-        "audits[unsized-images].description"
-      ],
-      "core/audits/prioritize-lcp-image.js | title": [
-        "audits[prioritize-lcp-image].title"
-      ],
+      "core/audits/unsized-images.js | title": ["audits[unsized-images].title"],
+      "core/audits/unsized-images.js | description": ["audits[unsized-images].description"],
+      "core/audits/prioritize-lcp-image.js | title": ["audits[prioritize-lcp-image].title"],
       "core/audits/prioritize-lcp-image.js | description": [
         "audits[prioritize-lcp-image].description"
       ],
@@ -8593,9 +8425,7 @@
           "path": "audits[total-byte-weight].displayValue"
         }
       ],
-      "core/audits/byte-efficiency/offscreen-images.js | title": [
-        "audits[offscreen-images].title"
-      ],
+      "core/audits/byte-efficiency/offscreen-images.js | title": ["audits[offscreen-images].title"],
       "core/audits/byte-efficiency/offscreen-images.js | description": [
         "audits[offscreen-images].description"
       ],
@@ -8625,9 +8455,7 @@
           "path": "audits[render-blocking-insight].displayValue"
         }
       ],
-      "core/audits/byte-efficiency/unminified-css.js | title": [
-        "audits[unminified-css].title"
-      ],
+      "core/audits/byte-efficiency/unminified-css.js | title": ["audits[unminified-css].title"],
       "core/audits/byte-efficiency/unminified-css.js | description": [
         "audits[unminified-css].description"
       ],
@@ -8637,9 +8465,7 @@
       "core/audits/byte-efficiency/unminified-javascript.js | description": [
         "audits[unminified-javascript].description"
       ],
-      "core/audits/byte-efficiency/unused-css-rules.js | title": [
-        "audits[unused-css-rules].title"
-      ],
+      "core/audits/byte-efficiency/unused-css-rules.js | title": ["audits[unused-css-rules].title"],
       "core/audits/byte-efficiency/unused-css-rules.js | description": [
         "audits[unused-css-rules].description"
       ],
@@ -8740,12 +8566,8 @@
       "core/audits/byte-efficiency/legacy-javascript.js | description": [
         "audits[legacy-javascript].description"
       ],
-      "core/audits/dobetterweb/dom-size.js | title": [
-        "audits[dom-size].title"
-      ],
-      "core/audits/dobetterweb/dom-size.js | description": [
-        "audits[dom-size].description"
-      ],
+      "core/audits/dobetterweb/dom-size.js | title": ["audits[dom-size].title"],
+      "core/audits/dobetterweb/dom-size.js | description": ["audits[dom-size].description"],
       "core/audits/dobetterweb/dom-size.js | displayValue": [
         {
           "values": {
@@ -8769,9 +8591,7 @@
       "core/audits/dobetterweb/dom-size.js | statisticDOMWidth": [
         "audits[dom-size].details.items[2].statistic"
       ],
-      "core/audits/dobetterweb/no-document-write.js | title": [
-        "audits[no-document-write].title"
-      ],
+      "core/audits/dobetterweb/no-document-write.js | title": ["audits[no-document-write].title"],
       "core/audits/dobetterweb/no-document-write.js | description": [
         "audits[no-document-write].description"
       ],
@@ -8780,24 +8600,16 @@
         "audits[uses-passive-event-listeners].details.headings[0].label",
         "audits[forced-reflow-insight].details.items[0].headings[0].label"
       ],
-      "core/audits/dobetterweb/uses-http2.js | title": [
-        "audits[uses-http2].title"
-      ],
-      "core/audits/dobetterweb/uses-http2.js | description": [
-        "audits[uses-http2].description"
-      ],
+      "core/audits/dobetterweb/uses-http2.js | title": ["audits[uses-http2].title"],
+      "core/audits/dobetterweb/uses-http2.js | description": ["audits[uses-http2].description"],
       "core/audits/dobetterweb/uses-passive-event-listeners.js | title": [
         "audits[uses-passive-event-listeners].title"
       ],
       "core/audits/dobetterweb/uses-passive-event-listeners.js | description": [
         "audits[uses-passive-event-listeners].description"
       ],
-      "core/audits/bf-cache.js | failureTitle": [
-        "audits[bf-cache].title"
-      ],
-      "core/audits/bf-cache.js | description": [
-        "audits[bf-cache].description"
-      ],
+      "core/audits/bf-cache.js | failureTitle": ["audits[bf-cache].title"],
+      "core/audits/bf-cache.js | description": ["audits[bf-cache].description"],
       "core/audits/bf-cache.js | displayValue": [
         {
           "values": {
@@ -8809,9 +8621,7 @@
       "core/audits/bf-cache.js | failureReasonColumn": [
         "audits[bf-cache].details.headings[0].label"
       ],
-      "core/audits/bf-cache.js | failureTypeColumn": [
-        "audits[bf-cache].details.headings[1].label"
-      ],
+      "core/audits/bf-cache.js | failureTypeColumn": ["audits[bf-cache].details.headings[1].label"],
       "node_modules/@paulirish/trace_engine/panels/application/components/BackForwardCacheStrings.js | mainResourceHasCacheControlNoStore": [
         "audits[bf-cache].details.items[0].reason"
       ],
@@ -9039,21 +8849,13 @@
       "node_modules/@paulirish/trace_engine/models/trace/insights/Viewport.js | description": [
         "audits[viewport-insight].description"
       ],
-      "core/config/default-config.js | performanceCategoryTitle": [
-        "categories.performance.title"
-      ],
-      "core/config/default-config.js | metricGroupTitle": [
-        "categoryGroups.metrics.title"
-      ],
-      "core/config/default-config.js | insightsGroupTitle": [
-        "categoryGroups.insights.title"
-      ],
+      "core/config/default-config.js | performanceCategoryTitle": ["categories.performance.title"],
+      "core/config/default-config.js | metricGroupTitle": ["categoryGroups.metrics.title"],
+      "core/config/default-config.js | insightsGroupTitle": ["categoryGroups.insights.title"],
       "core/config/default-config.js | insightsGroupDescription": [
         "categoryGroups.insights.description"
       ],
-      "core/config/default-config.js | diagnosticsGroupTitle": [
-        "categoryGroups.diagnostics.title"
-      ],
+      "core/config/default-config.js | diagnosticsGroupTitle": ["categoryGroups.diagnostics.title"],
       "core/config/default-config.js | diagnosticsGroupDescription": [
         "categoryGroups.diagnostics.description"
       ],
@@ -9081,9 +8883,7 @@
       "core/config/default-config.js | a11yNavigationGroupDescription": [
         "categoryGroups[a11y-navigation].description"
       ],
-      "core/config/default-config.js | a11yAriaGroupTitle": [
-        "categoryGroups[a11y-aria].title"
-      ],
+      "core/config/default-config.js | a11yAriaGroupTitle": ["categoryGroups[a11y-aria].title"],
       "core/config/default-config.js | a11yAriaGroupDescription": [
         "categoryGroups[a11y-aria].description"
       ],
@@ -9105,21 +8905,15 @@
       "core/config/default-config.js | a11yTablesListsVideoGroupDescription": [
         "categoryGroups[a11y-tables-lists].description"
       ],
-      "core/config/default-config.js | seoMobileGroupTitle": [
-        "categoryGroups[seo-mobile].title"
-      ],
+      "core/config/default-config.js | seoMobileGroupTitle": ["categoryGroups[seo-mobile].title"],
       "core/config/default-config.js | seoMobileGroupDescription": [
         "categoryGroups[seo-mobile].description"
       ],
-      "core/config/default-config.js | seoContentGroupTitle": [
-        "categoryGroups[seo-content].title"
-      ],
+      "core/config/default-config.js | seoContentGroupTitle": ["categoryGroups[seo-content].title"],
       "core/config/default-config.js | seoContentGroupDescription": [
         "categoryGroups[seo-content].description"
       ],
-      "core/config/default-config.js | seoCrawlingGroupTitle": [
-        "categoryGroups[seo-crawl].title"
-      ],
+      "core/config/default-config.js | seoCrawlingGroupTitle": ["categoryGroups[seo-crawl].title"],
       "core/config/default-config.js | seoCrawlingGroupDescription": [
         "categoryGroups[seo-crawl].description"
       ],

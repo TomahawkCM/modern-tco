@@ -1,12 +1,13 @@
 'use client';
 
-import React, { useState, useRef, useEffect } from 'react';
-import { Play, Pause, Volume2, VolumeX, Maximize, CheckCircle } from 'lucide-react';
+import { CheckCircle, Maximize, Pause, Play, Volume2, VolumeX } from 'lucide-react';
+import type React from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import { Slider } from '@/components/ui/slider';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
 import { analytics } from '@/lib/analytics';
 
 export interface TCOVideo {
@@ -55,8 +56,8 @@ export const TCOVideoPlayer: React.FC<TCOVideoPlayerProps> = ({
 
     const handleTimeUpdate = () => {
       setCurrentTime(video.currentTime);
-      setWatchTime(prev => prev + 0.1); // Approximate watch time tracking
-      
+      setWatchTime((prev) => prev + 0.1); // Approximate watch time tracking
+
       if (onProgress) {
         const progress = (video.currentTime / video.duration) * 100;
         onProgress(progress);
@@ -117,7 +118,15 @@ export const TCOVideoPlayer: React.FC<TCOVideoPlayerProps> = ({
       video.removeEventListener('play', handlePlay);
       video.removeEventListener('pause', handlePause);
     };
-  }, [onProgress, onComplete]);
+  }, [
+    onProgress,
+    onComplete,
+    videoObj.domain,
+    videoObj.duration,
+    videoObj.id,
+    videoObj.moduleId,
+    videoObj.title,
+  ]);
 
   const togglePlay = () => {
     const video = videoRef.current;
@@ -178,7 +187,7 @@ export const TCOVideoPlayer: React.FC<TCOVideoPlayerProps> = ({
   const progressPercentage = duration > 0 ? (currentTime / duration) * 100 : 0;
 
   // Progress milestones 25/50/75/100
-  const milestonesRef = useRef<{[k:string]: boolean}>({});
+  const milestonesRef = useRef<{ [k: string]: boolean }>({});
   useEffect(() => {
     if (!duration) return;
     const p = progressPercentage;
@@ -186,11 +195,27 @@ export const TCOVideoPlayer: React.FC<TCOVideoPlayerProps> = ({
       const key = String(m);
       if (!milestonesRef.current[key] && p >= m) {
         milestonesRef.current[key] = true;
-        void analytics.capture('video_progress', { id: videoObj.id, title: videoObj.title, moduleId: videoObj.moduleId, domain: videoObj.domain, milestone: m });
+        void analytics.capture('video_progress', {
+          id: videoObj.id,
+          title: videoObj.title,
+          moduleId: videoObj.moduleId,
+          domain: videoObj.domain,
+          milestone: m,
+        });
       }
     };
-    mark(25); mark(50); mark(75); mark(100);
-  }, [progressPercentage, duration, videoObj.id, videoObj.title]);
+    mark(25);
+    mark(50);
+    mark(75);
+    mark(100);
+  }, [
+    progressPercentage,
+    duration,
+    videoObj.id,
+    videoObj.title,
+    videoObj.domain,
+    videoObj.moduleId,
+  ]);
 
   return (
     <Card className="w-full max-w-4xl mx-auto">
@@ -204,14 +229,14 @@ export const TCOVideoPlayer: React.FC<TCOVideoPlayerProps> = ({
         </div>
         <p className="text-sm text-muted-foreground">{video.description}</p>
         <div className="flex gap-2">
-          {video.tags.map(tag => (
+          {video.tags.map((tag) => (
             <Badge key={tag} variant="outline" className="text-xs">
               {tag}
             </Badge>
           ))}
         </div>
       </CardHeader>
-      
+
       <CardContent className="space-y-4">
         {/* Video Player */}
         <div className="relative bg-black rounded-lg overflow-hidden">
@@ -237,7 +262,7 @@ export const TCOVideoPlayer: React.FC<TCOVideoPlayerProps> = ({
             <div className="space-y-2">
               {/* Progress Bar */}
               <Progress value={progressPercentage} className="h-1" />
-              
+
               {/* Controls */}
               <div className="flex items-center justify-between text-foreground">
                 <div className="flex items-center gap-2">
@@ -249,7 +274,7 @@ export const TCOVideoPlayer: React.FC<TCOVideoPlayerProps> = ({
                   >
                     {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
                   </Button>
-                  
+
                   <div className="flex items-center gap-2">
                     <Button
                       variant="ghost"

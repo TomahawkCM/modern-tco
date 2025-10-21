@@ -23,10 +23,7 @@ const execAsync = promisify(exec);
 
 // Configuration
 const CONFIG = {
-  requiredEnvVars: [
-    'NEXT_PUBLIC_SUPABASE_URL',
-    'NEXT_PUBLIC_SUPABASE_ANON_KEY',
-  ],
+  requiredEnvVars: ['NEXT_PUBLIC_SUPABASE_URL', 'NEXT_PUBLIC_SUPABASE_ANON_KEY'],
   optionalEnvVars: [
     'NEXT_PUBLIC_SENTRY_DSN',
     'NEXT_PUBLIC_POSTHOG_KEY',
@@ -97,7 +94,7 @@ async function checkEnvironment() {
   printHeader('1. Environment Configuration');
 
   let passed = 0;
-  let total = CONFIG.requiredEnvVars.length + CONFIG.optionalEnvVars.length;
+  const total = CONFIG.requiredEnvVars.length + CONFIG.optionalEnvVars.length;
 
   // Check required variables
   for (const varName of CONFIG.requiredEnvVars) {
@@ -122,7 +119,11 @@ async function checkEnvironment() {
   }
 
   const score = (passed / total) * 100;
-  printCheck(`Environment Score`, score >= 80 ? 'pass' : 'warn', `${passed}/${total} variables set`);
+  printCheck(
+    `Environment Score`,
+    score >= 80 ? 'pass' : 'warn',
+    `${passed}/${total} variables set`
+  );
 
   return { passed, total, score };
 }
@@ -432,9 +433,7 @@ async function generateReport(results) {
   printHeader('Production Readiness Report');
 
   // Calculate overall score
-  const overallScore = Math.round(
-    (scoring.total / scoring.maxPoints) * 100
-  );
+  const overallScore = Math.round((scoring.total / scoring.maxPoints) * 100);
 
   // Display category scores
   console.log('Category Scores:');
@@ -473,7 +472,7 @@ async function generateReport(results) {
 
   if (recommendations.length > 0) {
     console.log('Recommendations:\n');
-    recommendations.forEach(rec => console.log(`  ${rec}`));
+    recommendations.forEach((rec) => console.log(`  ${rec}`));
     console.log('');
   }
 
@@ -532,10 +531,17 @@ async function main() {
 
 // Run if called directly
 if (require.main === module) {
-  main().catch(error => {
+  main().catch((error) => {
     console.error('\n✗ Production readiness check failed:', error.message);
     process.exit(1);
   });
 }
 
-module.exports = { checkEnvironment, checkCodeQuality, checkSecurity, checkPerformance, checkDocumentation, checkTesting };
+module.exports = {
+  checkEnvironment,
+  checkCodeQuality,
+  checkSecurity,
+  checkPerformance,
+  checkDocumentation,
+  checkTesting,
+};

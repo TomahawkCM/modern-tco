@@ -3,32 +3,31 @@
  * Browse all TCO study modules with server-side rendering
  */
 
-import { Suspense } from "react";
-import type { Metadata } from "next";
-import Link from "next/link";
-import { Search, Clock, Target, BookOpen, ChevronRight } from "lucide-react";
-
-import { discoverModules, type ModuleMetadata } from "@/lib/content-discovery";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Input } from "@/components/ui/input";
+import { BookOpen, ChevronRight, Clock, Search, Target } from 'lucide-react';
+import type { Metadata } from 'next';
+import Link from 'next/link';
+import { Suspense } from 'react';
+import { ModulesStaticTable } from '@/components/modules/ModulesStaticTable';
+import type { ModuleListRow } from '@/components/modules/module-table-types';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { ModulesStaticTable } from "@/components/modules/ModulesStaticTable";
-import type { ModuleListRow } from "@/components/modules/module-table-types";
+} from '@/components/ui/select';
+import { discoverModules, type ModuleMetadata } from '@/lib/content-discovery';
 
 export const metadata: Metadata = {
-  title: "Study Modules - TCO Certification Prep",
+  title: 'Study Modules - TCO Certification Prep',
   description:
-    "Master all 5 TCO certification domains through interactive study modules, hands-on labs, and comprehensive assessments.",
+    'Master all 5 TCO certification domains through interactive study modules, hands-on labs, and comprehensive assessments.',
   keywords:
-    "TCO, Tanium Certified Operator, study modules, certification prep, interactive learning",
+    'TCO, Tanium Certified Operator, study modules, certification prep, interactive learning',
 };
 
 // Module card component
@@ -42,7 +41,7 @@ function ModuleCard({ module }: { module: ModuleMetadata }) {
         </div>
         <CardTitle className="text-xl">{module.title}</CardTitle>
         <CardDescription className="line-clamp-2">
-          {module.objectives.slice(0, 2).join(". ")}
+          {module.objectives.slice(0, 2).join('. ')}
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -90,7 +89,7 @@ async function ModulesContent() {
   const { modules, errors, validModules } = await discoverModules();
 
   if (errors.length > 0) {
-    console.error("Module discovery errors:", errors);
+    console.error('Module discovery errors:', errors);
   }
 
   return (
@@ -114,18 +113,11 @@ async function ModulesContent() {
       <div className="mb-8 flex flex-col gap-4 sm:flex-row">
         <div className="relative flex-1">
           <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 transform text-muted-foreground" />
-          <Input 
-            placeholder="Search modules..." 
-            className="pl-10" 
-            aria-label="Search modules"
-          />
+          <Input placeholder="Search modules..." className="pl-10" aria-label="Search modules" />
         </div>
 
         <Select>
-          <SelectTrigger 
-            className="w-full sm:w-48"
-            aria-label="Filter modules by domain"
-          >
+          <SelectTrigger className="w-full sm:w-48" aria-label="Filter modules by domain">
             <SelectValue placeholder="All Domains" />
           </SelectTrigger>
           <SelectContent>
@@ -139,10 +131,7 @@ async function ModulesContent() {
         </Select>
 
         <Select>
-          <SelectTrigger 
-            className="w-full sm:w-40"
-            aria-label="Filter modules by difficulty level"
-          >
+          <SelectTrigger className="w-full sm:w-40" aria-label="Filter modules by difficulty level">
             <SelectValue placeholder="All Levels" />
           </SelectTrigger>
           <SelectContent>
@@ -157,39 +146,39 @@ async function ModulesContent() {
 
       {/* Modules Table (Tanium-like list with filters) */}
       {modules.length > 0 ? (
-        <>
-          <Card className="mb-6 border-white/10">
-            <CardHeader>
-              <CardTitle>All Modules</CardTitle>
-              <CardDescription>Sortable, filterable list of modules</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <ModulesStaticTable
-                rows={modules.map((m): ModuleListRow => ({
+        <Card className="mb-6 border-white/10">
+          <CardHeader>
+            <CardTitle>All Modules</CardTitle>
+            <CardDescription>Sortable, filterable list of modules</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <ModulesStaticTable
+              rows={modules.map(
+                (m): ModuleListRow => ({
                   id: m.id,
                   title: m.title,
                   domain: m.domainSlug,
                   difficulty: m.difficulty,
-                  estimatedTimeMinutes: parseInt(String(m.estimatedTime).split(" ")[0]) || 0,
+                  estimatedTimeMinutes: parseInt(String(m.estimatedTime).split(' ')[0], 10) || 0,
                   slug: m.slug,
-                }))}
-              />
-            </CardContent>
-          </Card>
-        </>
+                })
+              )}
+            />
+          </CardContent>
+        </Card>
       ) : (
         <div className="py-12 text-center">
           <h3 className="mb-2 text-lg font-medium">No modules found</h3>
           <p className="text-muted-foreground">
             {errors.length > 0
-              ? "There are errors with the module files. Check the console for details."
-              : "No study modules are available at this time."}
+              ? 'There are errors with the module files. Check the console for details.'
+              : 'No study modules are available at this time.'}
           </p>
         </div>
       )}
 
       {/* Error Summary */}
-      {errors.length > 0 && process.env.NODE_ENV === "development" && (
+      {errors.length > 0 && process.env.NODE_ENV === 'development' && (
         <Card className="mt-8 border-destructive">
           <CardHeader>
             <CardTitle className="text-destructive">Module Discovery Errors</CardTitle>

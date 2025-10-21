@@ -1,24 +1,11 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useProgress } from "@/contexts/ProgressContext";
-import { useIncorrectAnswers } from "@/contexts/IncorrectAnswersContext";
-import { TCODomain } from "@/types/exam";
-import {
-  Download,
-  Upload,
-  FileText,
-  Database,
-  Trash2,
-  RefreshCw,
-  BarChart3,
-  Calendar,
-} from "lucide-react";
-import { cn } from "@/lib/utils";
+import { BarChart3, Calendar, Download, FileText } from 'lucide-react';
+import { useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { useIncorrectAnswers } from '@/contexts/IncorrectAnswersContext';
+import { useProgress } from '@/contexts/ProgressContext';
 
 export function DataExport() {
   const { state: progressState, getOverallStats, getDomainStats, resetProgress } = useProgress();
@@ -36,7 +23,7 @@ export function DataExport() {
 
     try {
       const exportData = {
-        version: "1.0.0",
+        version: '1.0.0',
         exportDate: new Date().toISOString(),
         progress: progressState.progress,
         incorrectAnswers: incorrectState.answers,
@@ -52,17 +39,17 @@ export function DataExport() {
       };
 
       const dataStr = JSON.stringify(exportData, null, 2);
-      const dataBlob = new Blob([dataStr], { type: "application/json" });
+      const dataBlob = new Blob([dataStr], { type: 'application/json' });
 
       const url = URL.createObjectURL(dataBlob);
-      const link = document.createElement("a");
+      const link = document.createElement('a');
       link.href = url;
-      link.download = `tco-progress-backup-${new Date().toISOString().split("T")[0]}.json`;
+      link.download = `tco-progress-backup-${new Date().toISOString().split('T')[0]}.json`;
       link.click();
 
       URL.revokeObjectURL(url);
     } catch (error) {
-      console.error("Failed to export data:", error);
+      console.error('Failed to export data:', error);
     } finally {
       setIsExporting(false);
     }
@@ -81,27 +68,27 @@ export function DataExport() {
 
         // Validate data structure
         if (!importData.version || !importData.progress || !importData.incorrectAnswers) {
-          throw new Error("Invalid backup file format");
+          throw new Error('Invalid backup file format');
         }
 
         // Import progress data
-        localStorage.setItem("tco-progress", JSON.stringify(importData.progress));
+        localStorage.setItem('tco-progress', JSON.stringify(importData.progress));
 
         // Import incorrect answers data
-        localStorage.setItem("tco-incorrect-answers", JSON.stringify(importData.incorrectAnswers));
+        localStorage.setItem('tco-incorrect-answers', JSON.stringify(importData.incorrectAnswers));
 
         // Refresh the page to reload data
         window.location.reload();
       } catch (error) {
-        console.error("Failed to import data:", error);
-        alert("Failed to import data. Please check the file format.");
+        console.error('Failed to import data:', error);
+        alert('Failed to import data. Please check the file format.');
       } finally {
         setIsImporting(false);
       }
     };
 
     reader.readAsText(file);
-    event.target.value = ""; // Reset input
+    event.target.value = ''; // Reset input
   };
 
   const exportCSVReport = () => {
@@ -109,23 +96,23 @@ export function DataExport() {
     const domainStats = getDomainStats();
 
     const csvHeader =
-      "Domain,Score,Questions Answered,Correct Answers,Time Spent (minutes),Accuracy\n";
+      'Domain,Score,Questions Answered,Correct Answers,Time Spent (minutes),Accuracy\n';
     const csvRows = domainStats
       .map(
         (domain) =>
           `${domain.domain},${domain.score},${domain.questionsAnswered},${domain.correctAnswers},${Math.round(domain.timeSpent / 60)},${domain.percentage}%`
       )
-      .join("\n");
+      .join('\n');
 
     const csvSummary = `\nSUMMARY,,,,,\nTotal Questions,${overallStats.totalQuestions},,,,\nAverage Score,${overallStats.averageScore}%,,,,\nStudy Streak,${overallStats.studyStreak} days,,,,\nHours Studied,${overallStats.hoursStudied},,,,\nReadiness Level,${overallStats.readinessLevel},,,,\nSessions Completed,${progressState.progress.sessionCount},,,,\nAchievements,${progressState.progress.achievements.length},,,,`;
 
     const csvContent = csvHeader + csvRows + csvSummary;
-    const csvBlob = new Blob([csvContent], { type: "text/csv" });
+    const csvBlob = new Blob([csvContent], { type: 'text/csv' });
 
     const url = URL.createObjectURL(csvBlob);
-    const link = document.createElement("a");
+    const link = document.createElement('a');
     link.href = url;
-    link.download = `tco-report-${new Date().toISOString().split("T")[0]}.csv`;
+    link.download = `tco-report-${new Date().toISOString().split('T')[0]}.csv`;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -159,41 +146,41 @@ ${
           (domain, index) =>
             `${index + 1}. **${domain.domain}** (${domain.score}%) - ${domain.questionsAnswered} questions practiced`
         )
-        .join("\n")
-    : "Great job! All domains are performing well."
+        .join('\n')
+    : 'Great job! All domains are performing well.'
 }
 
 ## Study Recommendations
 ${
   overallStats.averageScore < 60
-    ? "- Focus on fundamentals before attempting mock exams\n- Spend 30-45 minutes daily on weakest domains\n- Review explanations for all incorrect answers"
+    ? '- Focus on fundamentals before attempting mock exams\n- Spend 30-45 minutes daily on weakest domains\n- Review explanations for all incorrect answers'
     : overallStats.averageScore < 80
-      ? "- Continue regular practice with focus on weak areas\n- Begin incorporating mock exams\n- Aim for 70%+ consistency across all domains"
-      : "- Ready for intensive mock exam practice\n- Focus on time management and exam strategy\n- Review edge cases and advanced scenarios"
+      ? '- Continue regular practice with focus on weak areas\n- Begin incorporating mock exams\n- Aim for 70%+ consistency across all domains'
+      : '- Ready for intensive mock exam practice\n- Focus on time management and exam strategy\n- Review edge cases and advanced scenarios'
 }
 
 ## Weekly Goals
 - Practice sessions: 5-7 per week
-- Mock exams: ${overallStats.averageScore >= 70 ? "1-2" : "0-1"} per week
-- Study time: ${overallStats.averageScore < 70 ? "45-60" : "30-45"} minutes daily
+- Mock exams: ${overallStats.averageScore >= 70 ? '1-2' : '0-1'} per week
+- Study time: ${overallStats.averageScore < 70 ? '45-60' : '30-45'} minutes daily
 
 ## Strong Areas to Maintain
 ${
   strongDomains.length > 0
     ? strongDomains
         .map((domain) => `- **${domain.domain}** (${domain.score}%) - Continue light practice`)
-        .join("\n")
-    : "Continue building strength across all domains."
+        .join('\n')
+    : 'Continue building strength across all domains.'
 }
 
 Generated by TCO Study App - Track your progress at /analytics
 `;
 
-    const planBlob = new Blob([studyPlan], { type: "text/markdown" });
+    const planBlob = new Blob([studyPlan], { type: 'text/markdown' });
     const url = URL.createObjectURL(planBlob);
-    const link = document.createElement("a");
+    const link = document.createElement('a');
     link.href = url;
-    link.download = `tco-study-plan-${new Date().toISOString().split("T")[0]}.md`;
+    link.download = `tco-study-plan-${new Date().toISOString().split('T')[0]}.md`;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);

@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { expect, test } from '@playwright/test';
 
 test('Review Center lists needs-review items and links to sections', async ({ page }) => {
   // Seed local needs-review for Asking Questions
@@ -8,7 +8,12 @@ test('Review Center lists needs-review items and links to sections', async ({ pa
       const value = {
         lastViewed: 'domain-overview',
         sections: [
-          { id: 'natural-language-query-construction', title: 'Natural Language Query Construction', completed: false, needsReview: true },
+          {
+            id: 'natural-language-query-construction',
+            title: 'Natural Language Query Construction',
+            completed: false,
+            needsReview: true,
+          },
         ],
       };
       localStorage.setItem(key, JSON.stringify(value));
@@ -27,4 +32,3 @@ test('Review Center lists needs-review items and links to sections', async ({ pa
   await expect(page).toHaveURL(/modules\/asking-questions#/);
   await expect(page.getByText(/Natural Language Query Construction/i).first()).toBeVisible();
 });
-

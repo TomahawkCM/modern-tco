@@ -116,7 +116,7 @@ export async function calculateGlobalCohortBenchmarks(): Promise<CohortBenchmark
 
     if (fetchError) throw fetchError;
 
-    return camelCaseKeys(benchmark) as CohortBenchmark;
+    return camelCaseKeys(benchmark);
   } catch (error) {
     console.error('Error in calculateGlobalCohortBenchmarks:', error);
     throw error;
@@ -141,7 +141,7 @@ export async function getGlobalCohortBenchmark(): Promise<CohortBenchmark | null
       throw error;
     }
 
-    return camelCaseKeys(data) as CohortBenchmark;
+    return camelCaseKeys(data);
   } catch (error) {
     console.error('Error fetching global cohort benchmark:', error);
     throw error;
@@ -198,7 +198,7 @@ export async function getStudentCohortAssignments(
 
     if (error) throw error;
 
-    return (data || []).map((item) => camelCaseKeys(item)) as StudentCohortAssignment[];
+    return (data || []).map((item) => camelCaseKeys(item));
   } catch (error) {
     console.error('Error fetching student cohort assignments:', error);
     throw error;
@@ -226,7 +226,7 @@ export async function generateComparativeReport(userId: string): Promise<Compara
 
     // Get student's cohort assignment
     const assignments = await getStudentCohortAssignments(userId);
-    const assignment = assignments.find((a) => a.cohortBenchmarkId === cohort!.id);
+    const assignment = assignments.find((a) => a.cohortBenchmarkId === cohort.id);
 
     if (!assignment) {
       throw new Error('Student not assigned to cohort. Please try again.');
@@ -262,7 +262,11 @@ export async function generateComparativeReport(userId: string): Promise<Compara
       difference: accuracyDiff,
       percentile: assignment.accuracyPercentile,
       status: getComparisonStatus(accuracyDiff),
-      interpretation: generateInterpretation('accuracy', accuracyDiff, assignment.accuracyPercentile),
+      interpretation: generateInterpretation(
+        'accuracy',
+        accuracyDiff,
+        assignment.accuracyPercentile
+      ),
     });
 
     // 3. Study Hours
@@ -336,7 +340,7 @@ export async function generateComparativeReport(userId: string): Promise<Compara
 export async function getDomainComparisons(userId: string): Promise<DomainComparison[]> {
   try {
     const cohort = await getGlobalCohortBenchmark();
-    if (!cohort || !cohort.domainAverages) {
+    if (!cohort?.domainAverages) {
       return [];
     }
 
@@ -388,19 +392,13 @@ export async function getDomainComparisons(userId: string): Promise<DomainCompar
 
 // ==================== HELPER FUNCTIONS ====================
 
-function getComparisonStatus(
-  difference: number
-): 'above_average' | 'average' | 'below_average' {
+function getComparisonStatus(difference: number): 'above_average' | 'average' | 'below_average' {
   if (difference > 5) return 'above_average';
   if (difference < -5) return 'below_average';
   return 'average';
 }
 
-function generateInterpretation(
-  metric: string,
-  difference: number,
-  percentile?: number
-): string {
+function generateInterpretation(metric: string, difference: number, _percentile?: number): string {
   const absDiff = Math.abs(difference);
 
   if (metric === 'completion') {
@@ -483,7 +481,7 @@ export async function getCachedComparativeAnalytics(
       .update({ hit_count: (data.hit_count || 0) + 1 })
       .eq('id', data.id);
 
-    return camelCaseKeys(data.data) as ComparativeReport;
+    return camelCaseKeys(data.data);
   } catch (error) {
     console.error('Error fetching cached comparative analytics:', error);
     return null;
@@ -501,19 +499,17 @@ export async function cacheComparativeAnalytics(
     const ttlSeconds = 3600; // 1 hour
     const expiresAt = new Date(Date.now() + ttlSeconds * 1000).toISOString();
 
-    await supabase
-      .from('learning_analytics_cache')
-      .upsert(
-        {
-          user_id: userId,
-          cache_key: 'comparative_analytics',
-          data: snakeCaseKeys(report),
-          ttl_seconds: ttlSeconds,
-          expires_at: expiresAt,
-          hit_count: 0,
-        },
-        { onConflict: 'user_id,cache_key' }
-      );
+    await supabase.from('learning_analytics_cache').upsert(
+      {
+        user_id: userId,
+        cache_key: 'comparative_analytics',
+        data: snakeCaseKeys(report),
+        ttl_seconds: ttlSeconds,
+        expires_at: expiresAt,
+        hit_count: 0,
+      },
+      { onConflict: 'user_id,cache_key' }
+    );
   } catch (error) {
     console.error('Error caching comparative analytics:', error);
     // Don't throw - caching is optional

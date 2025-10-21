@@ -1,17 +1,17 @@
-"use client";
+'use client';
 
-import { useAuth } from "@/contexts/AuthContext";
-import { useDatabase } from "@/hooks/useDatabase";
-import { TCODomain } from "@/types/exam";
 import {
   createContext,
+  type ReactNode,
   useCallback,
   useContext,
   useEffect,
   useReducer,
   useRef,
-  type ReactNode,
-} from "react";
+} from 'react';
+import { useAuth } from '@/contexts/AuthContext';
+import { useDatabase } from '@/hooks/useDatabase';
+import { TCODomain } from '@/types/exam';
 
 interface UserProgress {
   totalQuestions: number;
@@ -21,7 +21,7 @@ interface UserProgress {
   lastStudyDate: string | null;
   hoursStudied: number;
   averageScore: number;
-  examReadiness: "Poor" | "Fair" | "Good" | "Excellent";
+  examReadiness: 'Poor' | 'Fair' | 'Good' | 'Excellent';
   domainScores: Record<
     TCODomain,
     {
@@ -67,18 +67,18 @@ interface ProgressState {
 }
 
 type ProgressAction =
-  | { type: "LOAD_PROGRESS"; payload: UserProgress }
+  | { type: 'LOAD_PROGRESS'; payload: UserProgress }
   | {
-      type: "UPDATE_SESSION_STATS";
+      type: 'UPDATE_SESSION_STATS';
       payload: { score: number; questionsCount: number; timeSpent: number; domain?: TCODomain };
     }
-  | { type: "UPDATE_STUDY_STREAK" }
-  | { type: "UPDATE_REVIEW_STREAK"; payload: { current: number; longest: number } }
-  | { type: "SET_WEEKLY_GOAL"; payload: number }
-  | { type: "ADD_ACHIEVEMENT"; payload: string }
-  | { type: "SET_LOADING"; payload: boolean }
-  | { type: "SET_ERROR"; payload: string | null }
-  | { type: "RESET_PROGRESS" };
+  | { type: 'UPDATE_STUDY_STREAK' }
+  | { type: 'UPDATE_REVIEW_STREAK'; payload: { current: number; longest: number } }
+  | { type: 'SET_WEEKLY_GOAL'; payload: number }
+  | { type: 'ADD_ACHIEVEMENT'; payload: string }
+  | { type: 'SET_LOADING'; payload: boolean }
+  | { type: 'SET_ERROR'; payload: string | null }
+  | { type: 'RESET_PROGRESS' };
 
 interface ProgressContextType {
   state: ProgressState;
@@ -109,7 +109,7 @@ interface ProgressContextType {
   resetProgress: () => void;
 }
 
-const createInitialDomainScores = (): UserProgress["domainScores"] => ({
+const createInitialDomainScores = (): UserProgress['domainScores'] => ({
   [TCODomain.ASKING_QUESTIONS]: {
     score: 0,
     questionsAnswered: 0,
@@ -174,7 +174,7 @@ const createInitialProgress = (): UserProgress => ({
   lastStudyDate: null,
   hoursStudied: 0,
   averageScore: 0,
-  examReadiness: "Poor",
+  examReadiness: 'Poor',
   domainScores: createInitialDomainScores(),
   achievements: [],
   weeklyGoal: 5,
@@ -202,29 +202,28 @@ const getSafeNow = () => {
   return Number.isFinite(now) ? now : 0;
 };
 
-const getIsoDate = (timestamp: number) => new Date(timestamp).toISOString().split("T")[0];
+const getIsoDate = (timestamp: number) => new Date(timestamp).toISOString().split('T')[0];
 
 const getIsoTimestamp = (timestamp: number) => new Date(timestamp).toISOString();
 
 function progressReducer(state: ProgressState, action: ProgressAction): ProgressState {
   switch (action.type) {
-    case "LOAD_PROGRESS":
+    case 'LOAD_PROGRESS':
       return {
         ...state,
         progress: action.payload,
         isLoading: false,
       };
 
-    case "UPDATE_SESSION_STATS": {
-      const domain = action.payload.domain;
+    case 'UPDATE_SESSION_STATS': {
+      const { domain } = action.payload;
       const questionsCount = Math.max(0, Math.round(action.payload.questionsCount));
       const score = Math.max(0, Math.min(100, action.payload.score));
       const timeSpent = Math.max(0, action.payload.timeSpent);
 
       const newTotalQuestions = state.progress.totalQuestions + questionsCount;
       const newSessionCount = state.progress.sessionCount + 1;
-      const totalScoreAccum =
-        state.progress.averageScore * state.progress.sessionCount + score;
+      const totalScoreAccum = state.progress.averageScore * state.progress.sessionCount + score;
       const newAverageScore =
         newSessionCount > 0 ? Math.round(totalScoreAccum / newSessionCount) : 0;
       const newCorrectAnswers =
@@ -232,10 +231,10 @@ function progressReducer(state: ProgressState, action: ProgressAction): Progress
       const hoursStudiedIncrement = questionsCount > 0 ? timeSpent / 3600 : 0;
       const newHoursStudied = Math.max(0, state.progress.hoursStudied + hoursStudiedIncrement);
 
-      let examReadiness: UserProgress["examReadiness"] = "Poor";
-      if (newAverageScore >= 85) examReadiness = "Excellent";
-      else if (newAverageScore >= 75) examReadiness = "Good";
-      else if (newAverageScore >= 60) examReadiness = "Fair";
+      let examReadiness: UserProgress['examReadiness'] = 'Poor';
+      if (newAverageScore >= 85) examReadiness = 'Excellent';
+      else if (newAverageScore >= 75) examReadiness = 'Good';
+      else if (newAverageScore >= 60) examReadiness = 'Fair';
 
       const updatedDomainScores = {
         ...state.progress.domainScores,
@@ -286,7 +285,7 @@ function progressReducer(state: ProgressState, action: ProgressAction): Progress
       };
     }
 
-    case "UPDATE_STUDY_STREAK": {
+    case 'UPDATE_STUDY_STREAK': {
       const nowTimestamp = getSafeNow();
       const today = getIsoDate(nowTimestamp);
       const yesterday = getIsoDate(nowTimestamp - DAY_IN_MS);
@@ -310,7 +309,7 @@ function progressReducer(state: ProgressState, action: ProgressAction): Progress
       };
     }
 
-    case "UPDATE_REVIEW_STREAK": {
+    case 'UPDATE_REVIEW_STREAK': {
       const today = getIsoDate(getSafeNow());
       const { current, longest } = action.payload;
 
@@ -325,7 +324,7 @@ function progressReducer(state: ProgressState, action: ProgressAction): Progress
       };
     }
 
-    case "SET_WEEKLY_GOAL":
+    case 'SET_WEEKLY_GOAL':
       return {
         ...state,
         progress: {
@@ -334,7 +333,7 @@ function progressReducer(state: ProgressState, action: ProgressAction): Progress
         },
       };
 
-    case "ADD_ACHIEVEMENT": {
+    case 'ADD_ACHIEVEMENT': {
       const achievements = [...state.progress.achievements];
       if (!achievements.includes(action.payload)) {
         achievements.push(action.payload);
@@ -349,20 +348,20 @@ function progressReducer(state: ProgressState, action: ProgressAction): Progress
       };
     }
 
-    case "SET_LOADING":
+    case 'SET_LOADING':
       return {
         ...state,
         isLoading: action.payload,
       };
 
-    case "SET_ERROR":
+    case 'SET_ERROR':
       return {
         ...state,
         error: action.payload,
         isLoading: false,
       };
 
-    case "RESET_PROGRESS":
+    case 'RESET_PROGRESS':
       return {
         ...createInitialState(),
       };
@@ -394,9 +393,9 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
         try {
           // TODO: Load from Supabase when user_statistics table is available
           // For now, use initial progress
-          dispatch({ type: "LOAD_PROGRESS", payload: createInitialProgress() });
+          dispatch({ type: 'LOAD_PROGRESS', payload: createInitialProgress() });
         } catch (error) {
-          console.error("Failed to load progress from database:", error);
+          console.error('Failed to load progress from database:', error);
           // Fallback to localStorage
           loadFromLocalStorage();
         }
@@ -407,22 +406,22 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
     };
 
     const loadFromLocalStorage = () => {
-      const savedProgress = localStorage.getItem("tco-progress");
+      const savedProgress = localStorage.getItem('tco-progress');
       if (savedProgress) {
         try {
           const progress = JSON.parse(savedProgress);
-          dispatch({ type: "LOAD_PROGRESS", payload: progress });
+          dispatch({ type: 'LOAD_PROGRESS', payload: progress });
         } catch (error) {
-          console.error("Failed to load progress from localStorage:", error);
-          dispatch({ type: "LOAD_PROGRESS", payload: createInitialProgress() });
+          console.error('Failed to load progress from localStorage:', error);
+          dispatch({ type: 'LOAD_PROGRESS', payload: createInitialProgress() });
         }
       } else {
-        dispatch({ type: "LOAD_PROGRESS", payload: createInitialProgress() });
+        dispatch({ type: 'LOAD_PROGRESS', payload: createInitialProgress() });
       }
     };
 
     loadProgress();
-  }, [user?.id]);
+  }, [user?.id, user]);
 
   // Save progress function with useCallback to prevent infinite loops
   const saveProgress = useCallback(
@@ -452,18 +451,18 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
                 }
               }
             } catch (error) {
-              console.error("Failed to save progress to database:", error);
+              console.error('Failed to save progress to database:', error);
               // Fallback to localStorage
-              localStorage.setItem("tco-progress", progressString);
+              localStorage.setItem('tco-progress', progressString);
             }
           } else {
             // Not authenticated, save to localStorage
-            localStorage.setItem("tco-progress", progressString);
+            localStorage.setItem('tco-progress', progressString);
           }
         }
       }
     },
-    [user?.id, db] // Added db to dependencies
+    [user?.id, db, state.isLoading, user] // Added db to dependencies
   );
 
   // Save progress when specific values change - saveProgress excluded from dependencies (already memoized)
@@ -480,6 +479,8 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
     state.progress.achievements.length,
     state.progress.reviewStreak,
     state.progress.longestReviewStreak,
+    saveProgress,
+    state.progress,
   ]);
 
   const updateSessionStats = (
@@ -511,10 +512,9 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
       nextLastStudyDate = today;
     }
 
-    const fallbackSentinelDate = "1970-01-01"; // Jest fake timers default to epoch if system time isn't set
+    const fallbackSentinelDate = '1970-01-01'; // Jest fake timers default to epoch if system time isn't set
     const isFallbackDate = today === fallbackSentinelDate;
-    const comingFromFallback =
-      snapshot.lastStudyDate === fallbackSentinelDate && !isFallbackDate;
+    const comingFromFallback = snapshot.lastStudyDate === fallbackSentinelDate && !isFallbackDate;
 
     if (isFallbackDate) {
       fallbackStudyStreakRef.current = Math.max(
@@ -537,7 +537,7 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
     }
 
     dispatch({
-      type: "UPDATE_SESSION_STATS",
+      type: 'UPDATE_SESSION_STATS',
       payload: {
         score: sanitizedScore,
         questionsCount: sanitizedQuestions,
@@ -545,17 +545,17 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
         domain,
       },
     });
-    dispatch({ type: "UPDATE_STUDY_STREAK" });
+    dispatch({ type: 'UPDATE_STUDY_STREAK' });
 
     // Check for achievements
     if (sanitizedScore === 100) {
-      dispatch({ type: "ADD_ACHIEVEMENT", payload: "Perfect Score" });
+      dispatch({ type: 'ADD_ACHIEVEMENT', payload: 'Perfect Score' });
     }
     if (nextStudyStreak >= 7) {
-      dispatch({ type: "ADD_ACHIEVEMENT", payload: "Week Warrior" });
+      dispatch({ type: 'ADD_ACHIEVEMENT', payload: 'Week Warrior' });
     }
     if (nextTotalQuestions >= 100) {
-      dispatch({ type: "ADD_ACHIEVEMENT", payload: "Centurion" });
+      dispatch({ type: 'ADD_ACHIEVEMENT', payload: 'Centurion' });
     }
 
     progressSnapshotRef.current = {
@@ -567,21 +567,21 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
   };
 
   const setWeeklyGoal = (goal: number) => {
-    dispatch({ type: "SET_WEEKLY_GOAL", payload: goal });
+    dispatch({ type: 'SET_WEEKLY_GOAL', payload: goal });
   };
 
   const updateReviewStreak = (current: number, longest: number) => {
-    dispatch({ type: "UPDATE_REVIEW_STREAK", payload: { current, longest } });
+    dispatch({ type: 'UPDATE_REVIEW_STREAK', payload: { current, longest } });
 
     // Check for review streak achievements
     if (current >= 7) {
-      dispatch({ type: "ADD_ACHIEVEMENT", payload: "Review Warrior - 7 Day Streak" });
+      dispatch({ type: 'ADD_ACHIEVEMENT', payload: 'Review Warrior - 7 Day Streak' });
     }
     if (current >= 30) {
-      dispatch({ type: "ADD_ACHIEVEMENT", payload: "Review Master - 30 Day Streak" });
+      dispatch({ type: 'ADD_ACHIEVEMENT', payload: 'Review Master - 30 Day Streak' });
     }
     if (current >= 100) {
-      dispatch({ type: "ADD_ACHIEVEMENT", payload: "Review Legend - 100 Day Streak" });
+      dispatch({ type: 'ADD_ACHIEVEMENT', payload: 'Review Legend - 100 Day Streak' });
     }
   };
 
@@ -626,9 +626,9 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
   );
 
   const resetProgress = () => {
-    localStorage.removeItem("tco-progress");
+    localStorage.removeItem('tco-progress');
     lastSavedProgressRef.current = null;
-    dispatch({ type: "RESET_PROGRESS" });
+    dispatch({ type: 'RESET_PROGRESS' });
   };
 
   return (
@@ -652,7 +652,7 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
 export function useProgress(): ProgressContextType {
   const context = useContext(ProgressContext);
   if (context === undefined) {
-    throw new Error("useProgress must be used within a ProgressProvider");
+    throw new Error('useProgress must be used within a ProgressProvider');
   }
   return context;
 }

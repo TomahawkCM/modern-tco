@@ -1,7 +1,7 @@
-const http = require("http");
+const http = require('http');
 
 const server = http.createServer((req, res) => {
-  res.writeHead(200, { "Content-Type": "text/html" });
+  res.writeHead(200, { 'Content-Type': 'text/html' });
   res.end(`
     <html>
       <head><title>Test Server</title></head>
@@ -14,10 +14,10 @@ const server = http.createServer((req, res) => {
   `);
 });
 
-server.listen(3000, "127.0.0.1", () => {
-  console.log("Test server running at http://127.0.0.1:3000/");
+server.listen(3000, '127.0.0.1', () => {
+  console.log('Test server running at http://127.0.0.1:3000/');
 });
 
-server.on("error", (err) => {
-  console.error("Server error:", err);
+server.on('error', (err) => {
+  console.error('Server error:', err);
 });

@@ -41,11 +41,12 @@ function recordConsole(type, text, stackTrace) {
   if (bucket.length >= 10) return;
   bucket.push({
     text,
-    frames: stackTrace?.callFrames?.slice(0, 3)?.map((frame) => ({
-      functionName: frame.functionName,
-      url: frame.url,
-      lineNumber: frame.lineNumber,
-    })) || null,
+    frames:
+      stackTrace?.callFrames?.slice(0, 3)?.map((frame) => ({
+        functionName: frame.functionName,
+        url: frame.url,
+        lineNumber: frame.lineNumber,
+      })) || null,
   });
 }
 
@@ -144,7 +145,9 @@ ws.onmessage = (event) => {
         loadEventSeen = true;
         sendWithPromise(ws, 'Performance.getMetrics')
           .then((metrics) => {
-            const map = Object.fromEntries(metrics.metrics.map((entry) => [entry.name, entry.value]));
+            const map = Object.fromEntries(
+              metrics.metrics.map((entry) => [entry.name, entry.value])
+            );
             results.performance = {
               FirstContentfulPaint: map.FirstContentfulPaint,
               DOMContentLoaded: map.DomContentLoaded,

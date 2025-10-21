@@ -3,14 +3,14 @@
  * Defines structure for learning modules, study guides, and progress tracking
  */
 
-import type { TCODomain } from "./exam";
+import type { TCODomain } from './exam';
 
 // Base module interfaces
 export interface ModuleSection {
   id: string;
   title: string;
   content: string;
-  type: "text" | "video" | "interactive" | "quiz" | "checklist";
+  type: 'text' | 'video' | 'interactive' | 'quiz' | 'checklist';
   estimatedMinutes: number;
   completed?: boolean;
   score?: number;
@@ -22,7 +22,7 @@ export interface LearningModule {
   description: string;
   domain: TCODomain;
   estimatedMinutes: number;
-  difficulty: "beginner" | "intermediate" | "advanced";
+  difficulty: 'beginner' | 'intermediate' | 'advanced';
   prerequisites: string[];
   learningObjectives: string[];
   sections: ModuleSection[];
@@ -55,7 +55,7 @@ export interface StudyGuideSection {
 export interface StudyCheckpoint {
   id: string;
   sectionId: string;
-  type: "knowledge-check" | "hands-on" | "reflection";
+  type: 'knowledge-check' | 'hands-on' | 'reflection';
   question: string;
   answer?: string;
   completed?: boolean;
@@ -101,24 +101,24 @@ export interface ModuleContextState {
 }
 
 export type ModuleContextAction =
-  | { type: "LOAD_MODULES"; payload: LearningModule[] }
-  | { type: "LOAD_STUDY_GUIDES"; payload: StudyGuide[] }
-  | { type: "SET_CURRENT_MODULE"; payload: string | null }
-  | { type: "SET_CURRENT_GUIDE"; payload: string | null }
+  | { type: 'LOAD_MODULES'; payload: LearningModule[] }
+  | { type: 'LOAD_STUDY_GUIDES'; payload: StudyGuide[] }
+  | { type: 'SET_CURRENT_MODULE'; payload: string | null }
+  | { type: 'SET_CURRENT_GUIDE'; payload: string | null }
   | {
-      type: "UPDATE_MODULE_PROGRESS";
+      type: 'UPDATE_MODULE_PROGRESS';
       payload: { moduleId: string; progress: Partial<ModuleProgress> };
     }
   | {
-      type: "UPDATE_GUIDE_PROGRESS";
+      type: 'UPDATE_GUIDE_PROGRESS';
       payload: { guideId: string; progress: Partial<StudyGuideProgress> };
     }
-  | { type: "COMPLETE_SECTION"; payload: { moduleId: string; sectionId: string } }
-  | { type: "ADD_BOOKMARK"; payload: { moduleId: string; sectionId: string } }
-  | { type: "REMOVE_BOOKMARK"; payload: { moduleId: string; sectionId: string } }
-  | { type: "SET_LOADING"; payload: boolean }
-  | { type: "SET_ERROR"; payload: string | null }
-  | { type: "RESET_PROGRESS"; payload: string };
+  | { type: 'COMPLETE_SECTION'; payload: { moduleId: string; sectionId: string } }
+  | { type: 'ADD_BOOKMARK'; payload: { moduleId: string; sectionId: string } }
+  | { type: 'REMOVE_BOOKMARK'; payload: { moduleId: string; sectionId: string } }
+  | { type: 'SET_LOADING'; payload: boolean }
+  | { type: 'SET_ERROR'; payload: string | null }
+  | { type: 'RESET_PROGRESS'; payload: string };
 
 // Legacy module definition (from /js/modules.js)
 export interface LegacyModuleDefinition {
@@ -137,14 +137,14 @@ export interface LegacyModuleDefinition {
 }
 
 // Utility types
-export type ModuleStatus = "not_started" | "in_progress" | "completed";
-export type ModuleCategory = "core" | "advanced" | "specialty" | "assessment";
-export type ContentType = "theory" | "practical" | "mixed";
+export type ModuleStatus = 'not_started' | 'in_progress' | 'completed';
+export type ModuleCategory = 'core' | 'advanced' | 'specialty' | 'assessment';
+export type ContentType = 'theory' | 'practical' | 'mixed';
 
 // Module filtering and search
 export interface ModuleFilters {
   domain?: TCODomain;
-  difficulty?: "beginner" | "intermediate" | "advanced";
+  difficulty?: 'beginner' | 'intermediate' | 'advanced';
   status?: ModuleStatus;
   category?: ModuleCategory;
   estimatedTime?: {
@@ -156,6 +156,6 @@ export interface ModuleFilters {
 export interface ModuleSearchParams {
   query?: string;
   filters?: ModuleFilters;
-  sortBy?: "title" | "difficulty" | "duration" | "progress";
-  sortOrder?: "asc" | "desc";
+  sortBy?: 'title' | 'difficulty' | 'duration' | 'progress';
+  sortOrder?: 'asc' | 'desc';
 }

@@ -62,7 +62,9 @@ function main() {
     return;
   }
 
-  console.log(`Syncing ${names.length} MCP server(s) into Codex global registry${withEnv ? ' with env' : ''}${force ? ' (force)' : ''}...`);
+  console.log(
+    `Syncing ${names.length} MCP server(s) into Codex global registry${withEnv ? ' with env' : ''}${force ? ' (force)' : ''}...`
+  );
 
   let added = 0;
   let skipped = 0;

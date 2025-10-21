@@ -1,16 +1,16 @@
-"use client";
+'use client';
 
-import React, { useState } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Label } from "@/components/ui/label";
-import { useAuth } from "@/contexts/AuthContext";
-import { flashcardService } from "@/services/flashcardService";
-import { CheckCircle2, XCircle, HelpCircle, Sparkles, AlertCircle } from "lucide-react";
-import { useToast } from "@/hooks/use-toast";
-import { analytics } from "@/lib/analytics";
+import { AlertCircle, CheckCircle2, HelpCircle, Sparkles, XCircle } from 'lucide-react';
+import { useState } from 'react';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Label } from '@/components/ui/label';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { useAuth } from '@/contexts/AuthContext';
+import { useToast } from '@/hooks/use-toast';
+import { analytics } from '@/lib/analytics';
+import { flashcardService } from '@/services/flashcardService';
 
 interface MicroQuizProps {
   question: string;
@@ -33,7 +33,7 @@ export default function MicroQuiz({
 }: MicroQuizProps) {
   const { user } = useAuth();
   const { toast } = useToast();
-  const [selectedAnswer, setSelectedAnswer] = useState<string>("");
+  const [selectedAnswer, setSelectedAnswer] = useState<string>('');
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
   const [flashcardCreated, setFlashcardCreated] = useState(false);
@@ -41,9 +41,9 @@ export default function MicroQuiz({
   const handleSubmit = () => {
     if (!selectedAnswer) {
       toast({
-        title: "No answer selected",
-        description: "Please select an answer before checking.",
-        variant: "destructive",
+        title: 'No answer selected',
+        description: 'Please select an answer before checking.',
+        variant: 'destructive',
       });
       return;
     }
@@ -52,7 +52,7 @@ export default function MicroQuiz({
     setIsCorrect(correct);
     setIsSubmitted(true);
 
-    analytics.capture("micro_quiz_answered", {
+    analytics.capture('micro_quiz_answered', {
       question,
       correct,
       moduleId,
@@ -77,28 +77,23 @@ export default function MicroQuiz({
 
     try {
       // Create flashcard from failed quiz question
-      await flashcardService.createFlashcard(
-        user.id,
-        question,
-        correctAnswer,
-        {
-          type: 'basic',
-          source: 'quiz_failure',
-          moduleId,
-          sectionId,
-          explanation: explanation || undefined,
-          tags: concept ? [concept, 'micro-quiz', 'needs-review'] : ['micro-quiz', 'needs-review'],
-        }
-      );
+      await flashcardService.createFlashcard(user.id, question, correctAnswer, {
+        type: 'basic',
+        source: 'quiz_failure',
+        moduleId,
+        sectionId,
+        explanation: explanation || undefined,
+        tags: concept ? [concept, 'micro-quiz', 'needs-review'] : ['micro-quiz', 'needs-review'],
+      });
 
       setFlashcardCreated(true);
       toast({
-        title: "Flashcard created!",
-        description: "This question has been added to your review queue for spaced repetition.",
+        title: 'Flashcard created!',
+        description: 'This question has been added to your review queue for spaced repetition.',
       });
 
-      analytics.capture("flashcard_created", {
-        source: "micro_quiz",
+      analytics.capture('flashcard_created', {
+        source: 'micro_quiz',
         moduleId,
         sectionId,
         concept,
@@ -113,15 +108,15 @@ export default function MicroQuiz({
         });
       }
     } catch (error) {
-      console.error("Error creating flashcard:", error);
+      console.error('Error creating flashcard:', error);
       toast({
-        title: "Error",
-        description: "Failed to create flashcard. Please try again.",
-        variant: "destructive",
+        title: 'Error',
+        description: 'Failed to create flashcard. Please try again.',
+        variant: 'destructive',
       });
 
-      analytics.capture("flashcard_create_error", {
-        source: "micro_quiz",
+      analytics.capture('flashcard_create_error', {
+        source: 'micro_quiz',
         moduleId,
         sectionId,
         concept,
@@ -130,7 +125,7 @@ export default function MicroQuiz({
   };
 
   const handleReset = () => {
-    setSelectedAnswer("");
+    setSelectedAnswer('');
     setIsSubmitted(false);
     setIsCorrect(null);
     setFlashcardCreated(false);
@@ -151,8 +146,8 @@ export default function MicroQuiz({
           </CardTitle>
           {isSubmitted && (
             <Badge
-              variant={isCorrect ? "default" : "destructive"}
-              className={isCorrect ? "bg-[#22c55e]" : ""}
+              variant={isCorrect ? 'default' : 'destructive'}
+              className={isCorrect ? 'bg-[#22c55e]' : ''}
             >
               {isCorrect ? (
                 <>
@@ -189,26 +184,19 @@ export default function MicroQuiz({
                 key={index}
                 className={`flex items-center space-x-3 rounded-lg border-2 p-3 transition-all ${
                   showCorrect
-                    ? "border-green-500 bg-[#22c55e]/10"
+                    ? 'border-green-500 bg-[#22c55e]/10'
                     : showIncorrect
-                      ? "border-red-500 bg-red-500/10"
+                      ? 'border-red-500 bg-red-500/10'
                       : isSelected
-                        ? "border-primary bg-primary/5"
-                        : "border-border hover:border-primary/50"
+                        ? 'border-primary bg-primary/5'
+                        : 'border-border hover:border-primary/50'
                 }`}
               >
                 <RadioGroupItem value={option} id={`option-${index}`} />
-                <Label
-                  htmlFor={`option-${index}`}
-                  className="flex-1 cursor-pointer font-normal"
-                >
+                <Label htmlFor={`option-${index}`} className="flex-1 cursor-pointer font-normal">
                   {option}
-                  {showCorrect && (
-                    <CheckCircle2 className="ml-2 inline h-4 w-4 text-[#22c55e]" />
-                  )}
-                  {showIncorrect && (
-                    <XCircle className="ml-2 inline h-4 w-4 text-red-600" />
-                  )}
+                  {showCorrect && <CheckCircle2 className="ml-2 inline h-4 w-4 text-[#22c55e]" />}
+                  {showIncorrect && <XCircle className="ml-2 inline h-4 w-4 text-red-600" />}
                 </Label>
               </div>
             );
@@ -229,11 +217,7 @@ export default function MicroQuiz({
         {/* Action Buttons */}
         <div className="flex items-center gap-3">
           {!isSubmitted ? (
-            <Button
-              onClick={handleSubmit}
-              disabled={!selectedAnswer}
-              className="flex-1"
-            >
+            <Button onClick={handleSubmit} disabled={!selectedAnswer} className="flex-1">
               Check Answer
             </Button>
           ) : (
@@ -274,7 +258,8 @@ export default function MicroQuiz({
 
         {isSubmitted && !isCorrect && !flashcardCreated && user?.id && (
           <p className="text-xs text-muted-foreground">
-            💡 Create a flashcard to review this concept with spaced repetition for better retention!
+            💡 Create a flashcard to review this concept with spaced repetition for better
+            retention!
           </p>
         )}
       </CardContent>

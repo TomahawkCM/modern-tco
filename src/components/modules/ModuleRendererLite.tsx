@@ -1,58 +1,57 @@
-"use client";
+'use client';
 
-import { useMemo, useRef, useEffect, useState } from "react";
-import dynamic from "next/dynamic";
-import { MDXRemote } from "next-mdx-remote";
-import type { ModuleData } from "@/lib/mdx/module-loader";
-import * as MDXReact from "@mdx-js/react";
-import * as ReactJsxRuntime from "react/jsx-runtime";
-import { cn } from "@/lib/utils";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+import * as MDXReact from '@mdx-js/react';
 import {
-  Clock,
-  Target,
-  Brain,
-  Info,
   AlertCircle,
-  CheckCircle,
-  Lightbulb,
-  Zap,
   BookOpen,
-} from "lucide-react";
-import { Button } from "@/components/ui/button";
+  Brain,
+  CheckCircle,
+  Clock,
+  Info,
+  Lightbulb,
+  Target,
+  Zap,
+} from 'lucide-react';
+import dynamic from 'next/dynamic';
+import { MDXRemote } from 'next-mdx-remote';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import * as ReactJsxRuntime from 'react/jsx-runtime';
+import { Badge } from '@/components/ui/badge';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import type { ModuleData } from '@/lib/mdx/module-loader';
+import { cn } from '@/lib/utils';
 
-const DynamicPracticeButton = dynamic(() => import("@/components/mdx/PracticeButton"), {
+const DynamicPracticeButton = dynamic(() => import('@/components/mdx/PracticeButton'), {
   ssr: false,
   loading: () => <span>Loading practice…</span>,
 });
 
-const DynamicMiniProject = dynamic(() => import("@/components/mdx/MiniProject"), {
+const DynamicMiniProject = dynamic(() => import('@/components/mdx/MiniProject'), {
   ssr: false,
   loading: () => null,
 });
 
-const DynamicSkillGate = dynamic(() => import("@/components/mdx/SkillGate"), {
+const DynamicSkillGate = dynamic(() => import('@/components/mdx/SkillGate'), {
   ssr: false,
   loading: () => null,
 });
 
-const DynamicModuleTransition = dynamic(() => import("@/components/mdx/ModuleTransition"), {
+const DynamicModuleTransition = dynamic(() => import('@/components/mdx/ModuleTransition'), {
   ssr: false,
   loading: () => null,
 });
 
-const DynamicMicroSection = dynamic(() => import("@/components/mdx/MicroSection"), {
+const DynamicMicroSection = dynamic(() => import('@/components/mdx/MicroSection'), {
   ssr: false,
   loading: () => null,
 });
 
-const DynamicMicroQuiz = dynamic(() => import("@/components/mdx/MicroQuizMDX"), {
+const DynamicMicroQuiz = dynamic(() => import('@/components/mdx/MicroQuizMDX'), {
   ssr: false,
   loading: () => null,
 });
 
-const DynamicQueryPlayground = dynamic(() => import("@/components/mdx/QueryPlayground"), {
+const DynamicQueryPlayground = dynamic(() => import('@/components/mdx/QueryPlayground'), {
   ssr: false,
   loading: () => (
     <div className="rounded border border-cyan-600/40 p-4 text-sm text-muted-foreground">
@@ -61,17 +60,17 @@ const DynamicQueryPlayground = dynamic(() => import("@/components/mdx/QueryPlayg
   ),
 });
 
-const DynamicInfoBox = dynamic(() => import("@/components/mdx/InfoBox"), {
+const DynamicInfoBox = dynamic(() => import('@/components/mdx/InfoBox'), {
   ssr: false,
   loading: () => null,
 });
 
-const DynamicCallout = dynamic(() => import("@/components/mdx/Callout"), {
+const DynamicCallout = dynamic(() => import('@/components/mdx/Callout'), {
   ssr: false,
   loading: () => null,
 });
 
-const DynamicSteps = dynamic(() => import("@/components/mdx/Steps"), {
+const DynamicSteps = dynamic(() => import('@/components/mdx/Steps'), {
   ssr: false,
   loading: () => null,
 });
@@ -79,7 +78,7 @@ const DynamicSteps = dynamic(() => import("@/components/mdx/Steps"), {
 function createRuntimeWithDevSupport() {
   const baseRuntime = { ...MDXReact, ...ReactJsxRuntime } as Record<string, unknown>;
 
-  if (typeof baseRuntime.jsxDEV !== "function") {
+  if (typeof baseRuntime.jsxDEV !== 'function') {
     const { jsx } = ReactJsxRuntime;
     baseRuntime.jsxDEV = function jsxDEV(type: unknown, props: unknown, key?: unknown) {
       return jsx(type as any, props as any, key as any);
@@ -103,14 +102,14 @@ export default function ModuleRendererLite({ moduleData }: ModuleRendererLitePro
   useEffect(() => {
     const el = containerRef.current;
     if (!el) return;
-    const headings = Array.from(el.querySelectorAll<HTMLHeadingElement>("h1, h2, h3"));
+    const headings = Array.from(el.querySelectorAll<HTMLHeadingElement>('h1, h2, h3'));
     const entries = headings.map((heading) => ({
       id: heading.id,
       title: heading.innerText.trim(),
-      level: heading.tagName === "H3" ? 3 : heading.tagName === "H2" ? 2 : 1,
+      level: heading.tagName === 'H3' ? 3 : heading.tagName === 'H2' ? 2 : 1,
     }));
     setToc(entries.filter((entry) => entry.id));
-  }, [content]);
+  }, []);
 
   const mdxRuntime = useMemo(() => createRuntimeWithDevSupport(), []);
 
@@ -147,7 +146,7 @@ export default function ModuleRendererLite({ moduleData }: ModuleRendererLitePro
       h1: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
         <h1
           className={cn(
-            "mb-6 scroll-m-20 bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-4xl font-extrabold tracking-tight text-transparent lg:text-5xl",
+            'mb-6 scroll-m-20 bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-4xl font-extrabold tracking-tight text-transparent lg:text-5xl',
             className
           )}
           {...props}
@@ -156,7 +155,7 @@ export default function ModuleRendererLite({ moduleData }: ModuleRendererLitePro
       h2: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
         <h2
           className={cn(
-            "mb-4 flex scroll-m-20 items-center gap-2 text-3xl font-semibold tracking-tight text-foreground",
+            'mb-4 flex scroll-m-20 items-center gap-2 text-3xl font-semibold tracking-tight text-foreground',
             className
           )}
           {...props}
@@ -165,7 +164,7 @@ export default function ModuleRendererLite({ moduleData }: ModuleRendererLitePro
       h3: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
         <h3
           className={cn(
-            "mb-3 flex scroll-m-20 items-center gap-2 text-2xl font-semibold tracking-tight text-muted-foreground",
+            'mb-3 flex scroll-m-20 items-center gap-2 text-2xl font-semibold tracking-tight text-muted-foreground',
             className
           )}
           {...props}
@@ -174,7 +173,7 @@ export default function ModuleRendererLite({ moduleData }: ModuleRendererLitePro
       p: ({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) => (
         <p
           className={cn(
-            "mb-4 leading-7 text-muted-foreground [&:not(:first-child)]:mt-4",
+            'mb-4 leading-7 text-muted-foreground [&:not(:first-child)]:mt-4',
             className
           )}
           {...props}
@@ -183,7 +182,7 @@ export default function ModuleRendererLite({ moduleData }: ModuleRendererLitePro
       ul: ({ className, ...props }: React.HTMLAttributes<HTMLUListElement>) => (
         <ul
           className={cn(
-            "my-4 ml-6 list-disc space-y-2 text-muted-foreground [&>li]:mt-2",
+            'my-4 ml-6 list-disc space-y-2 text-muted-foreground [&>li]:mt-2',
             className
           )}
           {...props}
@@ -192,7 +191,7 @@ export default function ModuleRendererLite({ moduleData }: ModuleRendererLitePro
       ol: ({ className, ...props }: React.HTMLAttributes<HTMLOListElement>) => (
         <ol
           className={cn(
-            "my-4 ml-6 list-decimal space-y-2 text-muted-foreground [&>li]:mt-2",
+            'my-4 ml-6 list-decimal space-y-2 text-muted-foreground [&>li]:mt-2',
             className
           )}
           {...props}
@@ -201,7 +200,7 @@ export default function ModuleRendererLite({ moduleData }: ModuleRendererLitePro
       code: ({ className, ...props }: React.HTMLAttributes<HTMLElement>) => (
         <code
           className={cn(
-            "relative rounded border border-gray-700 bg-card px-2 py-1 font-mono text-sm text-muted-foreground",
+            'relative rounded border border-gray-700 bg-card px-2 py-1 font-mono text-sm text-muted-foreground',
             className
           )}
           {...props}
@@ -210,7 +209,7 @@ export default function ModuleRendererLite({ moduleData }: ModuleRendererLitePro
       pre: ({ className, ...props }: React.HTMLAttributes<HTMLPreElement>) => (
         <pre
           className={cn(
-            "mb-4 mt-6 overflow-x-auto rounded-lg border border-gray-700 bg-gray-900 p-4 text-muted-foreground",
+            'mb-4 mt-6 overflow-x-auto rounded-lg border border-gray-700 bg-gray-900 p-4 text-muted-foreground',
             className
           )}
           {...props}
@@ -219,7 +218,7 @@ export default function ModuleRendererLite({ moduleData }: ModuleRendererLitePro
       blockquote: ({ className, ...props }: React.HTMLAttributes<HTMLElement>) => (
         <blockquote
           className={cn(
-            "mt-6 rounded-r-lg border-l-4 border-blue-500 bg-blue-950/30 py-4 pl-6 pr-4 italic text-blue-100 backdrop-blur-sm",
+            'mt-6 rounded-r-lg border-l-4 border-blue-500 bg-blue-950/30 py-4 pl-6 pr-4 italic text-blue-100 backdrop-blur-sm',
             className
           )}
           {...props}
@@ -250,25 +249,25 @@ export default function ModuleRendererLite({ moduleData }: ModuleRendererLitePro
       EnhancedInfoBox: ({
         title,
         children,
-        variant = "info",
+        variant = 'info',
       }: {
         title?: string;
         children: React.ReactNode;
-        variant?: "info" | "warning" | "success" | "tip";
+        variant?: 'info' | 'warning' | 'success' | 'tip';
       }) => {
         const variants = {
-          info: { icon: Info, colors: "bg-blue-950/30 border-blue-500 text-blue-100" },
+          info: { icon: Info, colors: 'bg-blue-950/30 border-blue-500 text-blue-100' },
           warning: {
             icon: AlertCircle,
-            colors: "bg-yellow-950/30 border-yellow-500 text-yellow-100",
+            colors: 'bg-yellow-950/30 border-yellow-500 text-yellow-100',
           },
-          success: { icon: CheckCircle, colors: "bg-green-950/30 border-green-500 text-green-100" },
-          tip: { icon: Lightbulb, colors: "bg-cyan-950/30 border-cyan-500 text-cyan-100" },
+          success: { icon: CheckCircle, colors: 'bg-green-950/30 border-green-500 text-green-100' },
+          tip: { icon: Lightbulb, colors: 'bg-cyan-950/30 border-cyan-500 text-cyan-100' },
         };
         const { icon: Icon, colors } = variants[variant];
         return (
           <div
-            className={cn("my-6 rounded-r-lg border-l-4 py-4 pl-6 pr-4 backdrop-blur-sm", colors)}
+            className={cn('my-6 rounded-r-lg border-l-4 py-4 pl-6 pr-4 backdrop-blur-sm', colors)}
           >
             {title && (
               <div className="mb-2 flex items-center gap-2 font-semibold">
@@ -348,7 +347,7 @@ export default function ModuleRendererLite({ moduleData }: ModuleRendererLitePro
               variant="outline"
               className="border-purple-600/40 bg-purple-900/40 text-purple-200"
             >
-              Version {frontmatter.version ?? "1"}
+              Version {frontmatter.version ?? '1'}
             </Badge>
           </div>
         </div>
@@ -370,14 +369,14 @@ export default function ModuleRendererLite({ moduleData }: ModuleRendererLitePro
               {toc.map((entry) => (
                 <li
                   key={entry.id}
-                  className={cn(entry.level > 1 ? "ml-4" : "", entry.level > 2 ? "ml-8" : "")}
+                  className={cn(entry.level > 1 ? 'ml-4' : '', entry.level > 2 ? 'ml-8' : '')}
                 >
                   <button
                     className="hover:text-primary hover:underline"
                     onClick={() => {
                       const el = document.getElementById(entry.id);
                       if (el) {
-                        el.scrollIntoView({ behavior: "smooth", block: "start" });
+                        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
                       }
                     }}
                   >

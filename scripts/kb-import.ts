@@ -1,11 +1,11 @@
 #!/usr/bin/env tsx
 
-import path from "path";
-import * as url from "url";
-import dotenv from "dotenv";
-import { Client } from "pg";
+import dotenv from 'dotenv';
+import path from 'path';
+import { Client } from 'pg';
+import * as url from 'url';
 
-import { buildModuleIndex, loadKbLessons } from "./lib/kb-lesson-loader";
+import { buildModuleIndex, loadKbLessons } from './lib/kb-lesson-loader';
 
 type ImportOptions = {
   schema: string;
@@ -13,36 +13,36 @@ type ImportOptions = {
   dryRun: boolean;
 };
 
-dotenv.config({ path: path.join(process.cwd(), ".env.local") });
+dotenv.config({ path: path.join(process.cwd(), '.env.local') });
 
 function resolveOptions(): ImportOptions {
   const args = process.argv.slice(2);
-  let schema = process.env.KB_SCHEMA || "kb";
-  let lessonsDir = path.join(process.cwd(), "docs", "KB", "lessons");
+  let schema = process.env.KB_SCHEMA || 'kb';
+  let lessonsDir = path.join(process.cwd(), 'docs', 'KB', 'lessons');
   let dryRun = false;
 
   for (let i = 0; i < args.length; i += 1) {
     const arg = args[i];
     switch (arg) {
-      case "--schema":
-      case "-s": {
+      case '--schema':
+      case '-s': {
         const next = args[i + 1];
-        if (!next) throw new Error("Missing schema name after --schema");
+        if (!next) throw new Error('Missing schema name after --schema');
         schema = next;
         i += 1;
         break;
       }
-      case "--lessons":
-      case "-l": {
+      case '--lessons':
+      case '-l': {
         const next = args[i + 1];
-        if (!next) throw new Error("Missing directory after --lessons");
+        if (!next) throw new Error('Missing directory after --lessons');
         lessonsDir = path.resolve(process.cwd(), next);
         i += 1;
         break;
       }
-      case "--dry-run":
-      case "--check":
-      case "-d":
+      case '--dry-run':
+      case '--check':
+      case '-d':
         dryRun = true;
         break;
       default:
@@ -62,11 +62,11 @@ function getConnectionString(): string {
     process.env.SUPABASE_DB_URL,
     process.env.DIRECT_DATABASE_URL,
     process.env.DATABASE_URL,
-  ].filter((value): value is string => typeof value === "string" && value.length > 0);
+  ].filter((value): value is string => typeof value === 'string' && value.length > 0);
 
   if (candidates.length === 0) {
     throw new Error(
-      "Database connection string not found. Set SUPABASE_DB_URL, DIRECT_DATABASE_URL, or DATABASE_URL in .env.local"
+      'Database connection string not found. Set SUPABASE_DB_URL, DIRECT_DATABASE_URL, or DATABASE_URL in .env.local'
     );
   }
 
@@ -81,7 +81,7 @@ async function importLessons(options: ImportOptions) {
   console.log(`?? Loaded ${lessons.length} lesson stub(s) across ${modules.length} module(s)`);
 
   if (options.dryRun) {
-    console.log("\n?? Dry run preview:");
+    console.log('\n?? Dry run preview:');
     modules.forEach((module) => {
       console.log(`- ${module.id} (${module.domain}) -> ${module.lessons.length} lesson(s)`);
       module.lessons.forEach((lesson) => {
@@ -92,15 +92,13 @@ async function importLessons(options: ImportOptions) {
   }
 
   const connectionString = getConnectionString();
-  const ssl = connectionString.includes("localhost")
-    ? false
-    : { rejectUnauthorized: false };
+  const ssl = connectionString.includes('localhost') ? false : { rejectUnauthorized: false };
 
   const client = new Client({ connectionString, ssl });
   await client.connect();
 
   try {
-    await client.query("BEGIN");
+    await client.query('BEGIN');
 
     for (const module of modules) {
       await client.query(
@@ -155,12 +153,12 @@ async function importLessons(options: ImportOptions) {
       );
     }
 
-    await client.query("COMMIT");
+    await client.query('COMMIT');
 
     console.log(`?? Imported ${modules.length} module(s) and ${lessons.length} lesson(s)`);
   } catch (error) {
-    await client.query("ROLLBACK");
-    console.error("?? Failed to import lessons:", (error as Error).message);
+    await client.query('ROLLBACK');
+    console.error('?? Failed to import lessons:', (error as Error).message);
     throw error;
   } finally {
     await client.end();
@@ -170,13 +168,13 @@ async function importLessons(options: ImportOptions) {
 async function main() {
   try {
     const options = resolveOptions();
-    console.log("?? KB Lesson Importer");
-    console.log("?? Schema:", options.schema);
-    console.log("?? Lessons dir:", options.lessonsDir);
+    console.log('?? KB Lesson Importer');
+    console.log('?? Schema:', options.schema);
+    console.log('?? Lessons dir:', options.lessonsDir);
 
     await importLessons(options);
   } catch (error) {
-    console.error("?? KB lesson import failed:", (error as Error).message);
+    console.error('?? KB lesson import failed:', (error as Error).message);
     process.exitCode = 1;
   }
 }

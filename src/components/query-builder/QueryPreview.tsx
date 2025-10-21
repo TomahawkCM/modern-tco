@@ -1,33 +1,21 @@
-"use client";
+'use client';
 
-import React, { useMemo } from 'react';
 import DOMPurify from 'dompurify';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
+import { AlertCircle, CheckCircle, Code, Copy, Eye, EyeOff, Info } from 'lucide-react';
+import React, { useMemo } from 'react';
 import { Alert, AlertDescription } from '@/components/ui/alert';
+import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import {
-  Code,
-  AlertCircle,
-  Info,
-  CheckCircle,
-  Copy,
-  Eye,
-  EyeOff
-} from 'lucide-react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
-import {
-  type QueryPreviewProps,
-  PartialQuery,
-  ValidationState
-} from './types/queryBuilder';
+import type { QueryPreviewProps } from './types/queryBuilder';
 
 export function QueryPreview({
   query,
   validation,
   syntaxHighlight = true,
   showWarnings = true,
-  className = ""
+  className = '',
 }: QueryPreviewProps) {
   const [showRaw, setShowRaw] = React.useState(false);
   const [copied, setCopied] = React.useState(false);
@@ -45,7 +33,7 @@ export function QueryPreview({
       parts.push('Get');
 
       // Add sensors
-      const sensorParts = query.sensors.map(s => {
+      const sensorParts = query.sensors.map((s) => {
         let sensorStr = 'name' in s.sensor ? (s.sensor.name ?? '') : '';
         if (s.filter) {
           sensorStr += ` ${s.filter.operator} "${s.filter.value}"`;
@@ -54,7 +42,7 @@ export function QueryPreview({
       });
 
       // Add aggregates
-      const aggregateParts = query.aggregates.map(a => {
+      const aggregateParts = query.aggregates.map((a) => {
         return `${a.function}(${a.sensor ?? ''})`;
       });
 
@@ -75,7 +63,7 @@ export function QueryPreview({
     // WHERE clause
     if (query.filters.length > 0) {
       parts.push('where');
-      const filterParts = query.filters.map(f => {
+      const filterParts = query.filters.map((f) => {
         return `${f.sensor} ${f.operator.replace('_', ' ')} "${f.value}"`;
       });
       parts.push(filterParts.join(` ${query.filterLogic.toLowerCase()} `));
@@ -90,7 +78,7 @@ export function QueryPreview({
     // ORDER BY clause
     if (query.orderBy.length > 0) {
       parts.push('order by');
-      const orderParts = query.orderBy.map(o => {
+      const orderParts = query.orderBy.map((o) => {
         return `${o.sensor} ${o.direction}`;
       });
       parts.push(orderParts.join(', '));
@@ -114,27 +102,46 @@ export function QueryPreview({
 
     // Keywords
     const keywords = [
-      'Get', 'from', 'where', 'with', 'group by', 'order by', 'limit',
-      'and', 'or', 'all machines', 'group'
+      'Get',
+      'from',
+      'where',
+      'with',
+      'group by',
+      'order by',
+      'limit',
+      'and',
+      'or',
+      'all machines',
+      'group',
     ];
-    keywords.forEach(keyword => {
+    keywords.forEach((keyword) => {
       const regex = new RegExp(`\\b(${keyword})\\b`, 'gi');
-      highlighted = highlighted.replace(regex, `<span class="text-primary font-semibold">$1</span>`);
+      highlighted = highlighted.replace(
+        regex,
+        `<span class="text-primary font-semibold">$1</span>`
+      );
     });
 
     // Operators
     const operators = [
-      'contains', 'does not contain', 'equals', 'not equals',
-      'greater than', 'less than', 'starts with', 'ends with', 'matches'
+      'contains',
+      'does not contain',
+      'equals',
+      'not equals',
+      'greater than',
+      'less than',
+      'starts with',
+      'ends with',
+      'matches',
     ];
-    operators.forEach(op => {
+    operators.forEach((op) => {
       const regex = new RegExp(`\\b(${op})\\b`, 'gi');
       highlighted = highlighted.replace(regex, `<span class="text-accent-foreground">$1</span>`);
     });
 
     // Aggregate functions
     const aggregates = ['count', 'min', 'max', 'avg', 'sum'];
-    aggregates.forEach(func => {
+    aggregates.forEach((func) => {
       const regex = new RegExp(`\\b(${func})\\(`, 'gi');
       highlighted = highlighted.replace(regex, `<span class="text-[#22c55e]">$1</span>(`);
     });
@@ -147,10 +154,16 @@ export function QueryPreview({
 
     // Sensor names (capitalize first letter of each word for common sensors)
     const commonSensors = [
-      'Computer Name', 'Operating System', 'IP Address', 'CPU Percent',
-      'Disk Free GB', 'Memory GB', 'Last Reboot', 'Last Logged In User'
+      'Computer Name',
+      'Operating System',
+      'IP Address',
+      'CPU Percent',
+      'Disk Free GB',
+      'Memory GB',
+      'Last Reboot',
+      'Last Logged In User',
     ];
-    commonSensors.forEach(sensor => {
+    commonSensors.forEach((sensor) => {
       const regex = new RegExp(`\\b(${sensor})\\b`, 'gi');
       highlighted = highlighted.replace(regex, `<span class="text-primary">$1</span>`);
     });
@@ -236,8 +249,8 @@ export function QueryPreview({
                   dangerouslySetInnerHTML={{
                     __html: DOMPurify.sanitize(highlightedQuery, {
                       ALLOWED_TAGS: ['span', 'div'],
-                      ALLOWED_ATTR: ['class']
-                    })
+                      ALLOWED_ATTR: ['class'],
+                    }),
                   }}
                 />
               )

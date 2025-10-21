@@ -1,25 +1,24 @@
-"use client";
+'use client';
 
-import React, { useState, useEffect } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Badge } from "@/components/ui/badge";
-import { useReview } from "@/contexts/ReviewContext";
-import { useProgress } from "@/contexts/ProgressContext";
-import StreakCalendar from "@/components/review/StreakCalendar";
-import type { ReviewSessionType } from "@/types/review";
 import {
+  BookOpen,
   Brain,
-  TrendingUp,
+  CheckCircle2,
   Clock,
   Flame,
-  Target,
-  BookOpen,
-  CheckCircle2,
   PlayCircle,
-  Calendar,
-} from "lucide-react";
+  Target,
+  TrendingUp,
+} from 'lucide-react';
+import { useEffect, useState } from 'react';
+import StreakCalendar from '@/components/review/StreakCalendar';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { useProgress } from '@/contexts/ProgressContext';
+import { useReview } from '@/contexts/ReviewContext';
+import type { ReviewSessionType } from '@/types/review';
 
 export default function ReviewDashboard() {
   const {
@@ -41,7 +40,7 @@ export default function ReviewDashboard() {
     refreshStats();
     refreshStreak();
     refreshDueCounts();
-  }, []);
+  }, [refreshDueCounts, refreshStats, refreshStreak]);
 
   useEffect(() => {
     if (streak) {
@@ -82,16 +81,10 @@ export default function ReviewDashboard() {
       <div className="flex items-center justify-between">
         <div>
           <h2 className="text-3xl font-bold tracking-tight">Daily Review</h2>
-          <p className="text-muted-foreground">
-            Spaced repetition for long-term retention
-          </p>
+          <p className="text-muted-foreground">Spaced repetition for long-term retention</p>
         </div>
         {totalDue > 0 && (
-          <Button
-            size="lg"
-            onClick={() => handleStartReview(activeTab)}
-            className="gap-2"
-          >
+          <Button size="lg" onClick={() => handleStartReview(activeTab)} className="gap-2">
             <PlayCircle className="h-5 w-5" />
             Start Review ({totalDue} items)
           </Button>
@@ -232,7 +225,8 @@ export default function ReviewDashboard() {
 
             <TabsContent value="mixed" className="space-y-4 mt-4">
               <p className="text-sm text-muted-foreground">
-                Review both flashcards and practice questions in an interleaved format for optimal learning.
+                Review both flashcards and practice questions in an interleaved format for optimal
+                learning.
               </p>
               {totalDue === 0 ? (
                 <div className="text-center py-8">
@@ -302,10 +296,19 @@ export default function ReviewDashboard() {
           <CardTitle>Spaced Repetition Tips</CardTitle>
         </CardHeader>
         <CardContent className="space-y-2 text-sm text-muted-foreground">
-          <p>✓ <strong>Review daily</strong> for best results - even just 10 minutes maintains your streak</p>
-          <p>✓ <strong>Be honest</strong> with ratings - accurate self-assessment improves scheduling</p>
-          <p>✓ <strong>Focus on weak areas</strong> - the algorithm prioritizes struggling content</p>
-          <p>✓ <strong>Build momentum</strong> - consistent review builds long-term retention</p>
+          <p>
+            ✓ <strong>Review daily</strong> for best results - even just 10 minutes maintains your
+            streak
+          </p>
+          <p>
+            ✓ <strong>Be honest</strong> with ratings - accurate self-assessment improves scheduling
+          </p>
+          <p>
+            ✓ <strong>Focus on weak areas</strong> - the algorithm prioritizes struggling content
+          </p>
+          <p>
+            ✓ <strong>Build momentum</strong> - consistent review builds long-term retention
+          </p>
         </CardContent>
       </Card>
     </div>

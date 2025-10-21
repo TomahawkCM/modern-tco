@@ -1,81 +1,79 @@
-"use client";
+'use client';
 
-import { motion } from "framer-motion";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Progress } from "@/components/ui/progress";
+import { motion } from 'framer-motion';
 import {
-  Trophy,
-  Medal,
-  Star,
-  Zap,
-  Crown,
-  Target,
-  Flame,
+  ArrowRight,
   Award,
-  TrendingUp,
-  Users,
-  Clock,
   BookOpen,
   CheckCircle2,
-  ArrowRight,
-} from "lucide-react";
-import Link from "next/link";
+  Crown,
+  Flame,
+  Star,
+  Target,
+  TrendingUp,
+  Trophy,
+  Users,
+  Zap,
+} from 'lucide-react';
+import Link from 'next/link';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Progress } from '@/components/ui/progress';
 
 const achievements = [
   {
-    id: "first-steps",
-    title: "First Steps",
-    description: "Complete your first TCO module",
+    id: 'first-steps',
+    title: 'First Steps',
+    description: 'Complete your first TCO module',
     icon: BookOpen,
-    tier: "Bronze",
+    tier: 'Bronze',
     points: 100,
     progress: 100,
     unlocked: true,
-    rarity: "Common",
+    rarity: 'Common',
   },
   {
-    id: "question-master",
-    title: "Question Master",
-    description: "Create 50 advanced Tanium questions",
+    id: 'question-master',
+    title: 'Question Master',
+    description: 'Create 50 advanced Tanium questions',
     icon: Target,
-    tier: "Silver",
+    tier: 'Silver',
     points: 500,
     progress: 72,
     unlocked: false,
-    rarity: "Rare",
+    rarity: 'Rare',
   },
   {
-    id: "lab-champion",
-    title: "Lab Champion",
-    description: "Complete all hands-on labs with perfect scores",
+    id: 'lab-champion',
+    title: 'Lab Champion',
+    description: 'Complete all hands-on labs with perfect scores',
     icon: Trophy,
-    tier: "Gold",
+    tier: 'Gold',
     points: 1000,
     progress: 45,
     unlocked: false,
-    rarity: "Epic",
+    rarity: 'Epic',
   },
   {
-    id: "speed-runner",
-    title: "Speed Runner",
-    description: "Complete any domain in under 4 hours",
+    id: 'speed-runner',
+    title: 'Speed Runner',
+    description: 'Complete any domain in under 4 hours',
     icon: Zap,
-    tier: "Platinum",
+    tier: 'Platinum',
     points: 1500,
     progress: 0,
     unlocked: false,
-    rarity: "Legendary",
+    rarity: 'Legendary',
   },
 ];
 
 const leaderboard = [
-  { rank: 1, name: "Alex Chen", points: 12450, avatar: "AC", streak: 28, level: 42 },
-  { rank: 2, name: "Sarah Kim", points: 11800, avatar: "SK", streak: 25, level: 40 },
-  { rank: 3, name: "Mike Rodriguez", points: 10950, avatar: "MR", streak: 22, level: 38 },
-  { rank: 4, name: "You", points: 8750, avatar: "YO", streak: 15, level: 32 },
-  { rank: 5, name: "David Park", points: 8200, avatar: "DP", streak: 18, level: 31 },
+  { rank: 1, name: 'Alex Chen', points: 12450, avatar: 'AC', streak: 28, level: 42 },
+  { rank: 2, name: 'Sarah Kim', points: 11800, avatar: 'SK', streak: 25, level: 40 },
+  { rank: 3, name: 'Mike Rodriguez', points: 10950, avatar: 'MR', streak: 22, level: 38 },
+  { rank: 4, name: 'You', points: 8750, avatar: 'YO', streak: 15, level: 32 },
+  { rank: 5, name: 'David Park', points: 8200, avatar: 'DP', streak: 18, level: 31 },
 ];
 
 const studyStreak = {
@@ -108,41 +106,41 @@ export function GameificationSection() {
 
   const getTierColor = (tier: string) => {
     switch (tier) {
-      case "Bronze":
-        return "from-amber-600 to-yellow-600";
-      case "Silver":
-        return "from-slate-400 to-slate-600";
-      case "Gold":
-        return "from-[#f97316] to-yellow-600";
-      case "Platinum":
-        return "from-primary to-primary";
+      case 'Bronze':
+        return 'from-amber-600 to-yellow-600';
+      case 'Silver':
+        return 'from-slate-400 to-slate-600';
+      case 'Gold':
+        return 'from-[#f97316] to-yellow-600';
+      case 'Platinum':
+        return 'from-primary to-primary';
       default:
-        return "from-slate-500 to-slate-700";
+        return 'from-slate-500 to-slate-700';
     }
   };
 
   const getRarityColor = (rarity: string) => {
     switch (rarity) {
-      case "Common":
-        return "text-muted-foreground border-border";
-      case "Rare":
-        return "text-primary border-primary/30";
-      case "Epic":
-        return "text-accent-foreground border-accent/30";
-      case "Legendary":
-        return "text-[#f97316] border-[#f97316]/30";
+      case 'Common':
+        return 'text-muted-foreground border-border';
+      case 'Rare':
+        return 'text-primary border-primary/30';
+      case 'Epic':
+        return 'text-accent-foreground border-accent/30';
+      case 'Legendary':
+        return 'text-[#f97316] border-[#f97316]/30';
       default:
-        return "text-muted-foreground border-border";
+        return 'text-muted-foreground border-border';
     }
   };
 
   const getAvatarColor = (name: string) => {
     const colors = [
-      "from-red-500 to-pink-500",
-      "from-blue-500 to-primary",
-      "from-green-500 to-teal-500",
-      "from-purple-500 to-indigo-500",
-      "from-yellow-500 to-orange-500",
+      'from-red-500 to-pink-500',
+      'from-blue-500 to-primary',
+      'from-green-500 to-teal-500',
+      'from-purple-500 to-indigo-500',
+      'from-yellow-500 to-orange-500',
     ];
     return colors[name.length % colors.length];
   };
@@ -277,8 +275,8 @@ export function GameificationSection() {
                       key={achievement.id}
                       className={`rounded-lg border p-4 transition-all duration-300 ${
                         achievement.unlocked
-                          ? "border-primary/30 bg-gradient-to-br from-primary/20 to-accent/20"
-                          : "border-border/50 bg-card/80 opacity-75"
+                          ? 'border-primary/30 bg-gradient-to-br from-primary/20 to-accent/20'
+                          : 'border-border/50 bg-card/80 opacity-75'
                       }`}
                     >
                       <div className="flex items-start gap-3">
@@ -354,13 +352,13 @@ export function GameificationSection() {
               </CardHeader>
               <CardContent>
                 <div className="space-y-3">
-                  {leaderboard.map((user, index) => (
+                  {leaderboard.map((user, _index) => (
                     <div
                       key={user.rank}
                       className={`flex items-center gap-4 rounded-lg p-4 transition-all duration-300 ${
-                        user.name === "You"
-                          ? "border border-primary/30 bg-gradient-to-r from-primary/10 to-accent/10"
-                          : "bg-card/80 hover:bg-card"
+                        user.name === 'You'
+                          ? 'border border-primary/30 bg-gradient-to-r from-primary/10 to-accent/10'
+                          : 'bg-card/80 hover:bg-card'
                       }`}
                     >
                       {/* Rank */}
@@ -369,10 +367,10 @@ export function GameificationSection() {
                           <div
                             className={`h-6 w-6 rounded-full bg-gradient-to-br ${
                               user.rank === 1
-                                ? "from-[#f97316] to-yellow-600"
+                                ? 'from-[#f97316] to-yellow-600'
                                 : user.rank === 2
-                                  ? "from-slate-400 to-slate-600"
-                                  : "from-amber-600 to-yellow-600"
+                                  ? 'from-slate-400 to-slate-600'
+                                  : 'from-amber-600 to-yellow-600'
                             } flex items-center justify-center`}
                           >
                             <Crown className="h-3 w-3 text-foreground" />
@@ -393,7 +391,7 @@ export function GameificationSection() {
                       <div className="flex-1">
                         <div className="flex items-center gap-2">
                           <span
-                            className={`font-medium ${user.name === "You" ? "text-primary" : "text-foreground"}`}
+                            className={`font-medium ${user.name === 'You' ? 'text-primary' : 'text-foreground'}`}
                           >
                             {user.name}
                           </span>
@@ -414,7 +412,7 @@ export function GameificationSection() {
                       </div>
 
                       {/* Action */}
-                      {user.name !== "You" && (
+                      {user.name !== 'You' && (
                         <Button
                           variant="outline"
                           size="sm"

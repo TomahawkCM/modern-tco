@@ -4,12 +4,9 @@
  */
 
 import { type NextRequest, NextResponse } from 'next/server';
-import { trackError, trackWarning, type ErrorContext } from './error-tracker';
+import { type ErrorContext, trackError, trackWarning } from './error-tracker';
 
-export type ApiHandler = (
-  request: NextRequest,
-  params?: any
-) => Promise<NextResponse | Response>;
+export type ApiHandler = (request: NextRequest, params?: any) => Promise<NextResponse | Response>;
 
 export interface ApiErrorResponse {
   ok: false;
@@ -76,11 +73,7 @@ export function withErrorTracking(
       // Track slow API calls as warnings
       const duration = Date.now() - startTime;
       if (duration > 3000) {
-        await trackWarning(
-          `Slow API call: ${duration}ms`,
-          { ...context, duration },
-          request
-        );
+        await trackWarning(`Slow API call: ${duration}ms`, { ...context, duration }, request);
       }
 
       // Add request ID to successful responses
@@ -89,7 +82,6 @@ export function withErrorTracking(
       }
 
       return response as NextResponse;
-
     } catch (error) {
       const duration = Date.now() - startTime;
 
@@ -122,9 +114,10 @@ export function withErrorTracking(
           errorCode = 'FORBIDDEN';
         } else {
           // For unexpected errors, use a generic message in production
-          errorMessage = process.env.NODE_ENV === 'development'
-            ? error.message
-            : 'An error occurred processing your request';
+          errorMessage =
+            process.env.NODE_ENV === 'development'
+              ? error.message
+              : 'An error occurred processing your request';
         }
       }
 
@@ -135,7 +128,7 @@ export function withErrorTracking(
           ...context,
           statusCode,
           duration,
-          errorCode
+          errorCode,
         },
         request
       );
@@ -145,7 +138,7 @@ export function withErrorTracking(
         ok: false,
         error: errorMessage,
         requestId,
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
       };
 
       // Add more details in development
@@ -157,8 +150,8 @@ export function withErrorTracking(
       return NextResponse.json(errorResponse, {
         status: statusCode,
         headers: {
-          'x-request-id': requestId
-        }
+          'x-request-id': requestId,
+        },
       });
     }
   };
@@ -178,12 +171,12 @@ export function apiSuccess<T = any>(
   const response: ApiSuccessResponse<T> = {
     ok: true,
     data,
-    requestId: options.requestId
+    requestId: options.requestId,
   };
 
   return NextResponse.json(response, {
     status: options.status || 200,
-    headers: options.headers
+    headers: options.headers,
   });
 }
 
@@ -202,7 +195,7 @@ export function apiError(
     ok: false,
     error: message,
     requestId: options.requestId,
-    timestamp: new Date().toISOString()
+    timestamp: new Date().toISOString(),
   };
 
   if (process.env.NODE_ENV === 'development' && options.code) {
@@ -222,7 +215,7 @@ export function validateBody<T>(
       required?: boolean;
       type?: 'string' | 'number' | 'boolean' | 'object' | 'array';
       validate?: (value: any) => boolean;
-    }
+    };
   }
 ): T {
   if (!body || typeof body !== 'object') {
@@ -251,11 +244,7 @@ export function validateBody<T>(
       }
 
       if (rules.validate && !rules.validate(value)) {
-        throw new ApiError(
-          `Validation failed for field: ${String(key)}`,
-          400,
-          'VALIDATION_FAILED'
-        );
+        throw new ApiError(`Validation failed for field: ${String(key)}`, 400, 'VALIDATION_FAILED');
       }
 
       validated[key] = value;

@@ -1,15 +1,15 @@
-"use client";
+'use client';
 
-import React, { useState } from "react";
+import { BookOpen, FileCheck, HelpCircle, Trophy } from 'lucide-react';
+import { MDXRemote, type MDXRemoteSerializeResult } from 'next-mdx-remote';
+import { useState } from 'react';
 import {
   LearningFlowContainer,
-  LearningFlowState,
   type LearningFlowContext,
-} from "@/components/learning-flow";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { MDXRemote, type MDXRemoteSerializeResult } from "next-mdx-remote";
-import { BookOpen, HelpCircle, FileCheck, Trophy } from "lucide-react";
+  LearningFlowState,
+} from '@/components/learning-flow';
+import { Badge } from '@/components/ui/badge';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 
 interface ModuleWithLearningFlowProps {
   moduleId: string;

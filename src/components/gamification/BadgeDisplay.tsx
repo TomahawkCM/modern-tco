@@ -1,32 +1,32 @@
-"use client";
+'use client';
 
-import { Badge } from "@/components/ui/badge";
-import { Progress } from "@/components/ui/progress";
-import { Card } from "@/components/ui/card";
 import {
-  Trophy,
-  Star,
-  Crown,
-  Flame,
-  Brain,
-  Target,
-  Zap,
-  Compass,
   BookOpen,
-  GraduationCap,
-  Clock,
+  Brain,
   Building2,
-  MessageSquareQuote,
-  FileBarChart,
-  TrendingUp,
-  Footprints,
   Calendar,
-  Sunrise,
-  Moon,
   CheckCircle2,
+  Clock,
+  Compass,
+  Crown,
+  FileBarChart,
+  Flame,
+  Footprints,
+  GraduationCap,
   Lock,
-} from "lucide-react";
-import type { Badge as BadgeType, BadgeTier, BadgeCategory } from "@/lib/achievements";
+  MessageSquareQuote,
+  Moon,
+  Star,
+  Sunrise,
+  Target,
+  TrendingUp,
+  Trophy,
+  Zap,
+} from 'lucide-react';
+import { Badge } from '@/components/ui/badge';
+import { Card } from '@/components/ui/card';
+import { Progress } from '@/components/ui/progress';
+import type { BadgeTier, Badge as BadgeType } from '@/lib/achievements';
 
 interface BadgeDisplayProps {
   badge: BadgeType;
@@ -34,7 +34,7 @@ interface BadgeDisplayProps {
   earnedAt?: Date;
   progress?: number; // 0-100 for badges in progress
   showProgress?: boolean;
-  size?: "sm" | "md" | "lg";
+  size?: 'sm' | 'md' | 'lg';
   onClick?: () => void;
 }
 
@@ -61,17 +61,17 @@ const iconMap: Record<string, typeof Trophy> = {
 };
 
 const tierBorderColors: Record<BadgeTier, string> = {
-  bronze: "border-amber-600",
-  silver: "border-gray-400",
-  gold: "border-yellow-500",
-  platinum: "border-purple-500",
+  bronze: 'border-amber-600',
+  silver: 'border-gray-400',
+  gold: 'border-yellow-500',
+  platinum: 'border-purple-500',
 };
 
 const tierGradients: Record<BadgeTier, string> = {
-  bronze: "from-amber-600/20 to-amber-900/20",
-  silver: "from-gray-400/20 to-gray-600/20",
-  gold: "from-yellow-500/20 to-yellow-700/20",
-  platinum: "from-purple-500/20 to-purple-700/20",
+  bronze: 'from-amber-600/20 to-amber-900/20',
+  silver: 'from-gray-400/20 to-gray-600/20',
+  gold: 'from-yellow-500/20 to-yellow-700/20',
+  platinum: 'from-purple-500/20 to-purple-700/20',
 };
 
 export default function BadgeDisplay({
@@ -80,32 +80,32 @@ export default function BadgeDisplay({
   earnedAt,
   progress = 0,
   showProgress = false,
-  size = "md",
+  size = 'md',
   onClick,
 }: BadgeDisplayProps) {
   const Icon = iconMap[badge.icon] || Trophy;
 
   const sizeClasses = {
     sm: {
-      container: "p-3",
-      icon: "h-8 w-8",
-      title: "text-xs",
-      description: "text-xs",
-      points: "text-xs",
+      container: 'p-3',
+      icon: 'h-8 w-8',
+      title: 'text-xs',
+      description: 'text-xs',
+      points: 'text-xs',
     },
     md: {
-      container: "p-4",
-      icon: "h-12 w-12",
-      title: "text-sm",
-      description: "text-xs",
-      points: "text-sm",
+      container: 'p-4',
+      icon: 'h-12 w-12',
+      title: 'text-sm',
+      description: 'text-xs',
+      points: 'text-sm',
     },
     lg: {
-      container: "p-6",
-      icon: "h-16 w-16",
-      title: "text-base",
-      description: "text-sm",
-      points: "text-base",
+      container: 'p-6',
+      icon: 'h-16 w-16',
+      title: 'text-base',
+      description: 'text-sm',
+      points: 'text-base',
     },
   };
 
@@ -116,11 +116,11 @@ export default function BadgeDisplay({
       className={`
         relative overflow-hidden transition-all
         ${classes.container}
-        ${earned ? tierBorderColors[badge.tier] : "border-gray-700"}
-        ${earned ? "border-2" : "border"}
-        ${!earned ? "opacity-60 grayscale" : ""}
-        ${onClick ? "cursor-pointer hover:scale-105" : ""}
-        ${earned ? `bg-gradient-to-br ${tierGradients[badge.tier]}` : "bg-muted/30"}
+        ${earned ? tierBorderColors[badge.tier] : 'border-gray-700'}
+        ${earned ? 'border-2' : 'border'}
+        ${!earned ? 'opacity-60 grayscale' : ''}
+        ${onClick ? 'cursor-pointer hover:scale-105' : ''}
+        ${earned ? `bg-gradient-to-br ${tierGradients[badge.tier]}` : 'bg-muted/30'}
       `}
       onClick={onClick}
     >
@@ -143,27 +143,23 @@ export default function BadgeDisplay({
         <div
           className={`
           rounded-full p-4
-          ${earned ? tierGradients[badge.tier] : "bg-card/50"}
+          ${earned ? tierGradients[badge.tier] : 'bg-card/50'}
           border-2
-          ${earned ? tierBorderColors[badge.tier] : "border-gray-600"}
+          ${earned ? tierBorderColors[badge.tier] : 'border-gray-600'}
         `}
         >
-          <Icon className={`${classes.icon} ${earned ? badge.color : "text-muted-foreground"}`} />
+          <Icon className={`${classes.icon} ${earned ? badge.color : 'text-muted-foreground'}`} />
         </div>
 
         {/* Badge Details */}
         <div className="text-center space-y-1">
           <h3 className={`font-bold ${classes.title}`}>{badge.name}</h3>
-          <p className={`${classes.description} text-muted-foreground`}>
-            {badge.description}
-          </p>
+          <p className={`${classes.description} text-muted-foreground`}>{badge.description}</p>
 
           {/* Criteria */}
           <div className="flex items-center justify-center gap-1 pt-1">
             <Target className="h-3 w-3 text-muted-foreground" />
-            <span className="text-xs text-muted-foreground">
-              {badge.criteria.description}
-            </span>
+            <span className="text-xs text-muted-foreground">{badge.criteria.description}</span>
           </div>
 
           {/* Points */}
@@ -196,7 +192,7 @@ export default function BadgeDisplay({
         <div className="absolute bottom-2 left-2">
           <Badge
             variant="outline"
-            className={`text-xs ${earned ? tierBorderColors[badge.tier] : "border-gray-600"}`}
+            className={`text-xs ${earned ? tierBorderColors[badge.tier] : 'border-gray-600'}`}
           >
             {badge.tier.toUpperCase()}
           </Badge>

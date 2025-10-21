@@ -1,19 +1,20 @@
-"use client";
+'use client';
 
-import React, { useCallback, useEffect, useState } from "react";
-import { useModule } from "@/contexts/ModuleContext";
-import { useAuth } from "@/contexts/AuthContext";
-import { LearningFlowProgress } from "./LearningFlowProgress";
-import { LearningFlowNavigation } from "./LearningFlowNavigation";
-import type { LearningFlowStateMachine } from "@/lib/learning-flow-state-machine";
+import type React from 'react';
+import { useCallback, useEffect, useState } from 'react';
+import { Card, CardContent } from '@/components/ui/card';
+import { Skeleton } from '@/components/ui/skeleton';
+import { useAuth } from '@/contexts/AuthContext';
+import { useModule } from '@/contexts/ModuleContext';
+import type { LearningFlowStateMachine } from '@/lib/learning-flow-state-machine';
+import { cn } from '@/lib/utils';
 import {
-  LearningFlowState,
-  LearningFlowEvent,
   type LearningFlowContext,
-} from "@/types/learning-flow";
-import { cn } from "@/lib/utils";
-import { Skeleton } from "@/components/ui/skeleton";
-import { Card, CardContent } from "@/components/ui/card";
+  LearningFlowEvent,
+  LearningFlowState,
+} from '@/types/learning-flow';
+import { LearningFlowNavigation } from './LearningFlowNavigation';
+import { LearningFlowProgress } from './LearningFlowProgress';
 
 interface LearningFlowContainerProps {
   moduleId: string;
@@ -52,8 +53,8 @@ export function LearningFlowContainer({
 
         setFlowStateMachine(flow);
       } catch (err) {
-        console.error("Failed to initialize learning flow:", err);
-        setError(err instanceof Error ? err.message : "Failed to initialize learning flow");
+        console.error('Failed to initialize learning flow:', err);
+        setError(err instanceof Error ? err.message : 'Failed to initialize learning flow');
       } finally {
         setIsLoading(false);
       }
@@ -85,8 +86,8 @@ export function LearningFlowContainer({
           console.warn(`Invalid transition: ${event} from ${flowStateMachine.currentState}`);
         }
       } catch (err) {
-        console.error("Failed to update learning flow:", err);
-        setError(err instanceof Error ? err.message : "Failed to update learning flow");
+        console.error('Failed to update learning flow:', err);
+        setError(err instanceof Error ? err.message : 'Failed to update learning flow');
       }
     },
     [flowStateMachine, moduleId, updateLearningFlow, onStateChange]
@@ -106,8 +107,8 @@ export function LearningFlowContainer({
         onStateChange(newFlow.currentState, newFlow.context);
       }
     } catch (err) {
-      console.error("Failed to reset learning flow:", err);
-      setError(err instanceof Error ? err.message : "Failed to reset learning flow");
+      console.error('Failed to reset learning flow:', err);
+      setError(err instanceof Error ? err.message : 'Failed to reset learning flow');
     }
   }, [moduleId, resetLearningFlow, startLearningFlow, onStateChange]);
 
@@ -134,7 +135,7 @@ export function LearningFlowContainer({
 
   if (isLoading) {
     return (
-      <div className={cn("space-y-6", className)}>
+      <div className={cn('space-y-6', className)}>
         <Card>
           <CardContent className="p-6">
             <div className="space-y-4">
@@ -167,7 +168,7 @@ export function LearningFlowContainer({
 
   if (error) {
     return (
-      <Card className={cn("border-destructive", className)}>
+      <Card className={cn('border-destructive', className)}>
         <CardContent className="p-6">
           <div className="space-y-2 text-center">
             <p className="font-medium text-destructive">Failed to load learning flow</p>
@@ -189,7 +190,7 @@ export function LearningFlowContainer({
   }
 
   return (
-    <div className={cn("space-y-6", className)}>
+    <div className={cn('space-y-6', className)}>
       {/* Progress Display */}
       <LearningFlowProgress
         flowContext={flowStateMachine.context}

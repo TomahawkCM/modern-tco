@@ -1,39 +1,39 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-import { useIncorrectAnswers } from "@/contexts/IncorrectAnswersContext";
-import { useStudySession } from "@/contexts/StudySessionContext";
-import { StudyProgressPanel } from "@/components/study/StudyProgressPanel";
 import {
-  BookOpen,
-  FileText,
+  AlertTriangle,
   BarChart3,
+  BookMarked,
+  BookOpen,
+  Calendar,
+  ChevronDown,
+  ChevronRight,
+  Clock,
+  FileText,
+  FlaskConical,
+  Home,
+  Layers,
+  Monitor,
+  Server,
   Settings,
+  Shield,
+  StickyNote,
   Target,
   Trophy,
-  Clock,
   User,
-  Shield,
-  Server,
-  Wrench,
-  Layers,
-  AlertTriangle,
-  ChevronRight,
-  Home,
-  Zap,
-  FlaskConical,
   Video,
-  Calendar,
-  Monitor,
-  BookMarked,
-  StickyNote,
-  ChevronDown,
-} from "lucide-react";
-import { cn } from "@/lib/utils";
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
-import { Badge } from "@/components/ui/badge";
-import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
+  Wrench,
+  Zap,
+} from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+import { StudyProgressPanel } from '@/components/study/StudyProgressPanel';
+import { Badge } from '@/components/ui/badge';
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
+import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sheet';
+import { useIncorrectAnswers } from '@/contexts/IncorrectAnswersContext';
+import { useStudySession } from '@/contexts/StudySessionContext';
+import { cn } from '@/lib/utils';
 
 interface SidebarProps {
   isOpen?: boolean;
@@ -54,8 +54,8 @@ export function Sidebar({ isOpen = true, onClose, className }: SidebarProps) {
   const router = useRouter();
   const { getTotalIncorrectCount } = useIncorrectAnswers();
   const studySession = useStudySession();
-  const [expandedItems, setExpandedItems] = useState<string[]>(["study", "domains"]);
-  const [activeItem, setActiveItem] = useState("dashboard");
+  const [expandedItems, setExpandedItems] = useState<string[]>(['study', 'domains']);
+  const [activeItem, setActiveItem] = useState('dashboard');
   const [isStudyProgressExpanded, setIsStudyProgressExpanded] = useState(true);
 
   // Get the actual incorrect answers count
@@ -63,108 +63,108 @@ export function Sidebar({ isOpen = true, onClose, className }: SidebarProps) {
 
   const navigationItems: NavItem[] = [
     {
-      id: "dashboard",
-      label: "Dashboard",
+      id: 'dashboard',
+      label: 'Dashboard',
       icon: Home,
-      href: "/",
+      href: '/',
     },
     {
-      id: "study",
-      label: "Study",
+      id: 'study',
+      label: 'Study',
       icon: BookOpen,
       items: [
-        { id: "learning-modules", label: "Learning Modules", icon: BookOpen, href: "/modules" },
-        { id: "practice-mode", label: "Practice Mode", icon: Target, href: "/practice" },
-        { id: "mock-exam", label: "Mock Exam", icon: FileText, href: "/mock" },
+        { id: 'learning-modules', label: 'Learning Modules', icon: BookOpen, href: '/modules' },
+        { id: 'practice-mode', label: 'Practice Mode', icon: Target, href: '/practice' },
+        { id: 'mock-exam', label: 'Mock Exam', icon: FileText, href: '/mock' },
         {
-          id: "review-questions",
-          label: "Review",
+          id: 'review-questions',
+          label: 'Review',
           icon: AlertTriangle,
           badge: incorrectAnswersCount > 0 ? incorrectAnswersCount.toString() : undefined,
-          href: "/review",
+          href: '/review',
         },
       ],
     },
     {
-      id: "videos",
-      label: "Videos",
+      id: 'videos',
+      label: 'Videos',
       icon: Video,
-      href: "/videos",
+      href: '/videos',
     },
     {
-      id: "domains",
-      label: "TCO Domains",
+      id: 'domains',
+      label: 'TCO Domains',
       icon: Layers,
       items: [
         {
-          id: "asking-questions",
-          label: "Asking Questions",
+          id: 'asking-questions',
+          label: 'Asking Questions',
           icon: BookOpen,
-          href: "/domains/asking-questions",
+          href: '/domains/asking-questions',
         },
         {
-          id: "refining-questions",
-          label: "Refining Questions",
+          id: 'refining-questions',
+          label: 'Refining Questions',
           icon: Target,
-          href: "/domains/refining-targeting",
+          href: '/domains/refining-targeting',
         },
-        { id: "taking-action", label: "Taking Action", icon: Zap, href: "/domains/taking-action" },
+        { id: 'taking-action', label: 'Taking Action', icon: Zap, href: '/domains/taking-action' },
         {
-          id: "navigation-modules",
-          label: "Navigation and Basic Module Functions",
+          id: 'navigation-modules',
+          label: 'Navigation and Basic Module Functions',
           icon: Layers,
-          href: "/domains/navigation-modules",
+          href: '/domains/navigation-modules',
         },
         {
-          id: "reporting-export",
-          label: "Report Generation and Data Export",
+          id: 'reporting-export',
+          label: 'Report Generation and Data Export',
           icon: BarChart3,
-          href: "/domains/reporting-export",
+          href: '/domains/reporting-export',
         },
       ],
     },
     {
-      id: "labs",
-      label: "Interactive Labs",
+      id: 'labs',
+      label: 'Interactive Labs',
       icon: FlaskConical,
-      badge: "NEW",
-      href: "/labs",
+      badge: 'NEW',
+      href: '/labs',
     },
     {
-      id: "simulator",
-      label: "Simulator",
+      id: 'simulator',
+      label: 'Simulator',
       icon: Monitor,
-      href: "/simulator",
+      href: '/simulator',
     },
     {
-      id: "daily-review",
-      label: "Daily Review",
+      id: 'daily-review',
+      label: 'Daily Review',
       icon: Calendar,
-      href: "/daily-review",
+      href: '/daily-review',
     },
     {
-      id: "kb",
-      label: "KB",
+      id: 'kb',
+      label: 'KB',
       icon: BookMarked,
-      href: "/kb",
+      href: '/kb',
     },
     {
-      id: "notes",
-      label: "Notes",
+      id: 'notes',
+      label: 'Notes',
       icon: StickyNote,
-      href: "/notes",
+      href: '/notes',
     },
     {
-      id: "analytics",
-      label: "Analytics",
+      id: 'analytics',
+      label: 'Analytics',
       icon: BarChart3,
-      href: "/analytics",
+      href: '/analytics',
     },
     {
-      id: "settings",
-      label: "Settings",
+      id: 'settings',
+      label: 'Settings',
       icon: Settings,
-      href: "/settings",
+      href: '/settings',
     },
   ];
 
@@ -188,11 +188,11 @@ export function Sidebar({ isOpen = true, onClose, className }: SidebarProps) {
 
   // Domain progress (mock data)
   const domainProgress = [
-    { name: "Asking Questions", progress: 85, total: 45 },
-    { name: "Refining Questions", progress: 72, total: 38 },
-    { name: "Taking Action", progress: 68, total: 52 },
-    { name: "Navigation and Basic Module Functions", progress: 45, total: 41 },
-    { name: "Report Generation and Data Export", progress: 38, total: 35 },
+    { name: 'Asking Questions', progress: 85, total: 45 },
+    { name: 'Refining Questions', progress: 72, total: 38 },
+    { name: 'Taking Action', progress: 68, total: 52 },
+    { name: 'Navigation and Basic Module Functions', progress: 45, total: 41 },
+    { name: 'Report Generation and Data Export', progress: 38, total: 35 },
   ];
 
   const renderNavItem = (item: NavItem, level: number = 0) => {
@@ -207,9 +207,9 @@ export function Sidebar({ isOpen = true, onClose, className }: SidebarProps) {
           <CollapsibleTrigger asChild>
             <button
               className={cn(
-                "inline-flex h-9 w-full items-center justify-start gap-2 whitespace-nowrap rounded-md px-4 py-2 text-left text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-archon-cyan-primary disabled:pointer-events-none disabled:opacity-50",
-                "text-archon-text-secondary hover:bg-archon-cyan-primary/10 hover:text-archon-cyan-bright hover:border-l-2 hover:border-archon-cyan-bright",
-                level > 0 && "ml-6 w-[calc(100%-1.5rem)]"
+                'inline-flex h-9 w-full items-center justify-start gap-2 whitespace-nowrap rounded-md px-4 py-2 text-left text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-archon-cyan-primary disabled:pointer-events-none disabled:opacity-50',
+                'text-archon-text-secondary hover:bg-archon-cyan-primary/10 hover:text-archon-cyan-bright hover:border-l-2 hover:border-archon-cyan-bright',
+                level > 0 && 'ml-6 w-[calc(100%-1.5rem)]'
               )}
             >
               <Icon className="mr-2 h-4 w-4 shrink-0" />
@@ -220,7 +220,7 @@ export function Sidebar({ isOpen = true, onClose, className }: SidebarProps) {
                 </Badge>
               )}
               <ChevronRight
-                className={cn("ml-auto h-4 w-4 transition-transform", isExpanded && "rotate-90")}
+                className={cn('ml-auto h-4 w-4 transition-transform', isExpanded && 'rotate-90')}
               />
             </button>
           </CollapsibleTrigger>
@@ -235,10 +235,12 @@ export function Sidebar({ isOpen = true, onClose, className }: SidebarProps) {
       <div key={item.id}>
         <button
           className={cn(
-            "inline-flex h-9 w-full items-center justify-start gap-2 whitespace-nowrap rounded-md px-4 py-2 text-left text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-archon-cyan-primary disabled:pointer-events-none disabled:opacity-50",
-            level > 0 && "ml-6 w-[calc(100%-1.5rem)]",
-            isActive && "bg-gradient-to-r from-archon-cyan-primary/20 to-archon-purple-primary/10 text-archon-cyan-bright border-l-2 border-archon-cyan-bright shadow-[0_0_15px_rgba(0,212,255,0.2)]",
-            !isActive && "text-archon-text-secondary hover:bg-archon-cyan-primary/10 hover:text-archon-cyan-bright hover:border-l-2 hover:border-archon-cyan-bright/50"
+            'inline-flex h-9 w-full items-center justify-start gap-2 whitespace-nowrap rounded-md px-4 py-2 text-left text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-archon-cyan-primary disabled:pointer-events-none disabled:opacity-50',
+            level > 0 && 'ml-6 w-[calc(100%-1.5rem)]',
+            isActive &&
+              'bg-gradient-to-r from-archon-cyan-primary/20 to-archon-purple-primary/10 text-archon-cyan-bright border-l-2 border-archon-cyan-bright shadow-[0_0_15px_rgba(0,212,255,0.2)]',
+            !isActive &&
+              'text-archon-text-secondary hover:bg-archon-cyan-primary/10 hover:text-archon-cyan-bright hover:border-l-2 hover:border-archon-cyan-bright/50'
           )}
           onClick={() => handleItemClick(item)}
         >
@@ -264,7 +266,9 @@ export function Sidebar({ isOpen = true, onClose, className }: SidebarProps) {
               <User className="h-5 w-5 text-white" />
             </div>
             <div>
-              <p className="text-sm font-medium text-archon-text-primary archon-text-glow">Study Progress</p>
+              <p className="text-sm font-medium text-archon-text-primary archon-text-glow">
+                Study Progress
+              </p>
               <div className="flex items-center space-x-2 text-xs text-archon-text-secondary">
                 <Trophy className="h-3 w-3 text-yellow-400 drop-shadow-[0_0_5px_rgba(250,204,21,0.5)]" />
                 <span>Level 3 Learner</span>
@@ -303,13 +307,18 @@ export function Sidebar({ isOpen = true, onClose, className }: SidebarProps) {
               <CollapsibleTrigger asChild>
                 <button
                   className={cn(
-                    "inline-flex h-9 w-full items-center justify-start gap-2 whitespace-nowrap rounded-md px-2 py-2 text-left text-sm font-medium transition-all duration-200",
-                    "text-archon-text-secondary hover:bg-archon-cyan-primary/10 hover:text-archon-cyan-bright"
+                    'inline-flex h-9 w-full items-center justify-start gap-2 whitespace-nowrap rounded-md px-2 py-2 text-left text-sm font-medium transition-all duration-200',
+                    'text-archon-text-secondary hover:bg-archon-cyan-primary/10 hover:text-archon-cyan-bright'
                   )}
                 >
-                  <span className="text-xs font-semibold text-archon-cyan-bright">CURRENT MODULE</span>
+                  <span className="text-xs font-semibold text-archon-cyan-bright">
+                    CURRENT MODULE
+                  </span>
                   <ChevronDown
-                    className={cn("ml-auto h-4 w-4 transition-transform", isStudyProgressExpanded && "rotate-180")}
+                    className={cn(
+                      'ml-auto h-4 w-4 transition-transform',
+                      isStudyProgressExpanded && 'rotate-180'
+                    )}
                   />
                 </button>
               </CollapsibleTrigger>
@@ -368,8 +377,8 @@ export function Sidebar({ isOpen = true, onClose, className }: SidebarProps) {
         id="main-navigation"
         className={cn(
           // Offset below top nav bar (~6rem) and match remaining viewport height
-          "fixed left-0 top-24 z-40 h-[calc(100vh-6rem)] w-64 transition-transform duration-300 ease-in-out",
-          "hidden md:block", // Show on desktop
+          'fixed left-0 top-24 z-40 h-[calc(100vh-6rem)] w-64 transition-transform duration-300 ease-in-out',
+          'hidden md:block', // Show on desktop
           className
         )}
         role="navigation"
@@ -382,10 +391,18 @@ export function Sidebar({ isOpen = true, onClose, className }: SidebarProps) {
       </aside>
 
       {/* Mobile Sheet Navigation - Overlay */}
-      <Sheet open={isOpen && typeof window !== 'undefined' && window.innerWidth < 768} onOpenChange={onClose}>
-        <SheetContent side="left" className="w-64 border-archon-border-bright/30 backdrop-blur-xl p-0 bg-gradient-to-b from-archon-bg-panel/98 to-archon-bg-start/98">
+      <Sheet
+        open={isOpen && typeof window !== 'undefined' && window.innerWidth < 768}
+        onOpenChange={onClose}
+      >
+        <SheetContent
+          side="left"
+          className="w-64 border-archon-border-bright/30 backdrop-blur-xl p-0 bg-gradient-to-b from-archon-bg-panel/98 to-archon-bg-start/98"
+        >
           <SheetHeader className="p-4 pb-0 border-b border-archon-border/30">
-            <SheetTitle className="text-archon-text-primary text-left font-bold archon-text-glow">Navigation</SheetTitle>
+            <SheetTitle className="text-archon-text-primary text-left font-bold archon-text-glow">
+              Navigation
+            </SheetTitle>
           </SheetHeader>
           <div className="h-[calc(100%-4rem)]">
             <SidebarContent />

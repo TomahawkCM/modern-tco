@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { expect, test } from '@playwright/test';
 
 test('mock flow: start and finish early', async ({ page }) => {
   await page.goto('/mock?variant=A');
@@ -14,4 +14,3 @@ test('mock flow: start and finish early', async ({ page }) => {
   // Results screen
   await expect(page.getByText(/Mock Exam Complete/i)).toBeVisible();
 });
-

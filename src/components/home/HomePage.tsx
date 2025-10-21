@@ -1,10 +1,19 @@
-"use client";
+'use client';
 
-import { useRouter } from "next/navigation";
-import { TCODomain } from "@/types/exam";
-import { useEffect, useMemo, useState } from "react";
-import { useProgress } from "@/contexts/ProgressContext";
-import { Heart, Sparkles, BookOpen, Target, Trophy, ArrowUpRight, ArrowDownRight, Minus } from "lucide-react";
+import {
+  ArrowDownRight,
+  ArrowUpRight,
+  BookOpen,
+  Heart,
+  Minus,
+  Sparkles,
+  Target,
+  Trophy,
+} from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { useEffect, useMemo, useState } from 'react';
+import { useProgress } from '@/contexts/ProgressContext';
+import { TCODomain } from '@/types/exam';
 
 export function HomePage() {
   const router = useRouter();
@@ -15,7 +24,7 @@ export function HomePage() {
     const idle = (window as any).requestIdleCallback as undefined | ((cb: any) => void);
     const load = async () => {
       try {
-        const mod = await import("@/lib/questionLoader");
+        const mod = await import('@/lib/questionLoader');
         if (active) setTotalQuestions(mod.getAllQuestions().length);
       } catch (error) {
         // swallow; keep 0 if not available
@@ -23,7 +32,9 @@ export function HomePage() {
     };
     if (idle) idle(load);
     else setTimeout(load, 200);
-    return () => { active = false; };
+    return () => {
+      active = false;
+    };
   }, []);
   const { getDomainStats, state: progressState } = useProgress();
   const tcoDomains = [
@@ -37,7 +48,11 @@ export function HomePage() {
     const stats = getDomainStats();
     const map = new Map<string, { score: number; answered: number; correct: number }>();
     for (const s of stats) {
-      map.set(s.domain as string, { score: s.percentage, answered: s.questionsAnswered, correct: s.correctAnswers });
+      map.set(s.domain as string, {
+        score: s.percentage,
+        answered: s.questionsAnswered,
+        correct: s.correctAnswers,
+      });
     }
     return tcoDomains.map((d) => ({
       domain: d,
@@ -45,7 +60,7 @@ export function HomePage() {
       answered: map.get(d)?.answered ?? 0,
       correct: map.get(d)?.correct ?? 0,
     }));
-  }, [getDomainStats]);
+  }, [getDomainStats, tcoDomains]);
 
   // Weakest domain among those with data
   const weakest = useMemo(() => {
@@ -64,7 +79,7 @@ export function HomePage() {
       trends.set(d, delta);
     }
     return trends;
-  }, [progressState.progress.recentSessions]);
+  }, [progressState.progress.recentSessions, tcoDomains]);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-cyan-900">
@@ -77,7 +92,8 @@ export function HomePage() {
             <Sparkles className="h-8 w-8 text-[#f97316]" />
           </div>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Master the Tanium Certified Operator exam with interactive practice and comprehensive study modules
+            Master the Tanium Certified Operator exam with interactive practice and comprehensive
+            study modules
           </p>
         </div>
 
@@ -86,34 +102,41 @@ export function HomePage() {
           <div className="rounded-lg border border-yellow-400/40 bg-[#f97316]/10 px-4 py-3 text-[#f97316]">
             {weakest ? (
               <span>
-                Weakest domain: <span className="font-semibold">{weakest.domain}</span> — accuracy {weakest.score}%
+                Weakest domain: <span className="font-semibold">{weakest.domain}</span> — accuracy{' '}
+                {weakest.score}%
                 <button
-                  onClick={() => router.push(`/practice?domain=${encodeURIComponent(weakest.domain)}&count=25&quick=1&reveal=1`)}
+                  onClick={() =>
+                    router.push(
+                      `/practice?domain=${encodeURIComponent(weakest.domain)}&count=25&quick=1&reveal=1`
+                    )
+                  }
                   className="ml-3 inline-flex items-center rounded bg-[#f97316]/20 px-2 py-1 text-xs text-yellow-100 hover:bg-yellow-500/30"
                 >
                   Drill now
                 </button>
               </span>
             ) : (
-              <span>No practice data yet — start a quick drill to identify your weakest domain.</span>
+              <span>
+                No practice data yet — start a quick drill to identify your weakest domain.
+              </span>
             )}
           </div>
         </div>
 
         {/* Quick Stats */}
-          <div className="grid gap-6 md:grid-cols-3 mb-12">
-            <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-6 text-center">
-              <Trophy className="h-8 w-8 text-[#f97316] mx-auto mb-2" />
-              <div className="text-2xl font-bold text-foreground">{totalQuestions}</div>
-              <p className="text-muted-foreground">Practice Questions</p>
-            </div>
-          
+        <div className="grid gap-6 md:grid-cols-3 mb-12">
+          <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-6 text-center">
+            <Trophy className="h-8 w-8 text-[#f97316] mx-auto mb-2" />
+            <div className="text-2xl font-bold text-foreground">{totalQuestions}</div>
+            <p className="text-muted-foreground">Practice Questions</p>
+          </div>
+
           <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-6 text-center">
             <BookOpen className="h-8 w-8 text-primary mx-auto mb-2" />
             <div className="text-2xl font-bold text-foreground">5</div>
             <p className="text-muted-foreground">Study Domains</p>
           </div>
-          
+
           <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-6 text-center">
             <Target className="h-8 w-8 text-[#22c55e] mx-auto mb-2" />
             <div className="text-2xl font-bold text-foreground">78%</div>
@@ -126,14 +149,42 @@ export function HomePage() {
           <h2 className="text-2xl font-bold text-foreground text-center">Study Domains</h2>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {[
-              { title: "Asking Questions", desc: "Master Tanium's query system", progress: 72, domain: TCODomain.ASKING_QUESTIONS },
-              { title: "Refining Questions & Targeting", desc: "Advanced computer group management", progress: 85, domain: TCODomain.REFINING_TARGETING },
-              { title: "Taking Action", desc: "Package deployment workflows", progress: 58, domain: TCODomain.TAKING_ACTION },
-              { title: "Navigation & Module Functions", desc: "Console navigation expertise", progress: 43, domain: TCODomain.NAVIGATION_MODULES },
-              { title: "Reporting & Data Export", desc: "Data export and reporting", progress: 67, domain: TCODomain.REPORTING_EXPORT },
-              { title: "Mock Exam", desc: "Full TCO simulation", progress: 0, domain: null }
+              {
+                title: 'Asking Questions',
+                desc: "Master Tanium's query system",
+                progress: 72,
+                domain: TCODomain.ASKING_QUESTIONS,
+              },
+              {
+                title: 'Refining Questions & Targeting',
+                desc: 'Advanced computer group management',
+                progress: 85,
+                domain: TCODomain.REFINING_TARGETING,
+              },
+              {
+                title: 'Taking Action',
+                desc: 'Package deployment workflows',
+                progress: 58,
+                domain: TCODomain.TAKING_ACTION,
+              },
+              {
+                title: 'Navigation & Module Functions',
+                desc: 'Console navigation expertise',
+                progress: 43,
+                domain: TCODomain.NAVIGATION_MODULES,
+              },
+              {
+                title: 'Reporting & Data Export',
+                desc: 'Data export and reporting',
+                progress: 67,
+                domain: TCODomain.REPORTING_EXPORT,
+              },
+              { title: 'Mock Exam', desc: 'Full TCO simulation', progress: 0, domain: null },
             ].map((d, index) => (
-              <div key={index} className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-6 hover:bg-white/15 transition-colors cursor-pointer">
+              <div
+                key={index}
+                className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-6 hover:bg-white/15 transition-colors cursor-pointer"
+              >
                 <h3 className="text-lg font-semibold text-foreground mb-2">{d.title}</h3>
                 <p className="text-muted-foreground text-sm mb-4">{d.desc}</p>
                 <div className="space-y-2">
@@ -142,8 +193,8 @@ export function HomePage() {
                     <span className="text-foreground font-medium">{d.progress}%</span>
                   </div>
                   <div className="w-full bg-gray-700 rounded-full h-2">
-                    <div 
-                      className="bg-gradient-to-r from-blue-500 to-primary h-2 rounded-full transition-all duration-300" 
+                    <div
+                      className="bg-gradient-to-r from-blue-500 to-primary h-2 rounded-full transition-all duration-300"
                       style={{ width: `${d.progress}%` }}
                     ></div>
                   </div>
@@ -151,7 +202,11 @@ export function HomePage() {
                 {d.domain ? (
                   <div className="mt-4 flex justify-end">
                     <button
-                      onClick={() => router.push(`/practice?domain=${encodeURIComponent(d.domain)}&count=25&quick=1&reveal=1`)}
+                      onClick={() =>
+                        router.push(
+                          `/practice?domain=${encodeURIComponent(d.domain)}&count=25&quick=1&reveal=1`
+                        )
+                      }
                       className="bg-blue-600 hover:bg-blue-700 text-foreground px-3 py-2 rounded-md text-sm"
                     >
                       Quick Drill (25)
@@ -160,7 +215,7 @@ export function HomePage() {
                 ) : (
                   <div className="mt-4 flex justify-end">
                     <button
-                      onClick={() => router.push("/mock?variant=A")}
+                      onClick={() => router.push('/mock?variant=A')}
                       className="bg-accent hover:bg-purple-700 text-foreground px-3 py-2 rounded-md text-sm"
                     >
                       Start Mock Exam
@@ -174,19 +229,41 @@ export function HomePage() {
 
         {/* Your Domain Performance */}
         <div className="space-y-6">
-          <h2 className="text-2xl font-bold text-foreground text-center">Your Domain Performance</h2>
+          <h2 className="text-2xl font-bold text-foreground text-center">
+            Your Domain Performance
+          </h2>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-5">
             {domainPerf.map((d) => (
-              <div key={d.domain} className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-4">
+              <div
+                key={d.domain}
+                className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-4"
+              >
                 <div className="text-sm text-muted-foreground mb-1">{d.domain}</div>
                 <div className="text-foreground text-2xl font-bold">{d.score}%</div>
                 <div className="text-xs text-muted-foreground">Accuracy</div>
                 <div className="mt-1 text-xs text-muted-foreground flex items-center gap-1">
                   {(() => {
                     const delta = domainTrends.get(d.domain) || 0;
-                    if (delta > 0) return (<><ArrowUpRight className="h-3 w-3 text-[#22c55e]" /> <span className="text-[#22c55e]">+{delta}</span></>);
-                    if (delta < 0) return (<><ArrowDownRight className="h-3 w-3 text-red-400" /> <span className="text-red-400">{delta}</span></>);
-                    return (<><Minus className="h-3 w-3 text-muted-foreground" /> <span className="text-muted-foreground">0</span></>);
+                    if (delta > 0)
+                      return (
+                        <>
+                          <ArrowUpRight className="h-3 w-3 text-[#22c55e]" />{' '}
+                          <span className="text-[#22c55e]">+{delta}</span>
+                        </>
+                      );
+                    if (delta < 0)
+                      return (
+                        <>
+                          <ArrowDownRight className="h-3 w-3 text-red-400" />{' '}
+                          <span className="text-red-400">{delta}</span>
+                        </>
+                      );
+                    return (
+                      <>
+                        <Minus className="h-3 w-3 text-muted-foreground" />{' '}
+                        <span className="text-muted-foreground">0</span>
+                      </>
+                    );
                   })()}
                 </div>
                 <div className="mt-2 text-foreground/90 text-sm">
@@ -194,7 +271,11 @@ export function HomePage() {
                 </div>
                 <div className="mt-3 flex justify-end">
                   <button
-                    onClick={() => router.push(`/practice?domain=${encodeURIComponent(d.domain)}&count=25&quick=1&reveal=1`)}
+                    onClick={() =>
+                      router.push(
+                        `/practice?domain=${encodeURIComponent(d.domain)}&count=25&quick=1&reveal=1`
+                      )
+                    }
                     className="text-xs bg-blue-600 hover:bg-blue-700 text-foreground px-2 py-1 rounded"
                   >
                     Drill 25
@@ -209,21 +290,27 @@ export function HomePage() {
         <div className="space-y-6 mt-10">
           <h2 className="text-2xl font-bold text-foreground text-center">Recent Sessions</h2>
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {(progressState.progress.recentSessions ?? []).slice(0,6).map((s, idx) => (
-              <div key={idx} className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-4">
+            {(progressState.progress.recentSessions ?? []).slice(0, 6).map((s, idx) => (
+              <div
+                key={idx}
+                className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-4"
+              >
                 <div className="flex items-center justify-between">
-                  <div className="text-sm text-muted-foreground">
-                    {s.domain ?? 'Mixed'}
-                  </div>
+                  <div className="text-sm text-muted-foreground">{s.domain ?? 'Mixed'}</div>
                   <div className="text-foreground text-xl font-semibold">{s.score}%</div>
                 </div>
                 <div className="mt-1 text-xs text-muted-foreground">
-                  {s.questions} questions • {Math.round((s.time ?? 0)/60)} min • {new Date(s.at).toLocaleString()}
+                  {s.questions} questions • {Math.round((s.time ?? 0) / 60)} min •{' '}
+                  {new Date(s.at).toLocaleString()}
                 </div>
                 <div className="mt-3 flex justify-end">
                   {s.domain ? (
                     <button
-                      onClick={() => router.push(`/practice?domain=${encodeURIComponent(s.domain ?? '')}&count=${s.questions ?? 25}&quick=1&reveal=1`)}
+                      onClick={() =>
+                        router.push(
+                          `/practice?domain=${encodeURIComponent(s.domain ?? '')}&count=${s.questions ?? 25}&quick=1&reveal=1`
+                        )
+                      }
                       className="text-xs bg-blue-600 hover:bg-blue-700 text-foreground px-2 py-1 rounded"
                     >
                       Repeat Drill
@@ -239,7 +326,7 @@ export function HomePage() {
                 </div>
               </div>
             ))}
-            {((progressState.progress.recentSessions ?? []).length === 0) && (
+            {(progressState.progress.recentSessions ?? []).length === 0 && (
               <div className="text-center text-muted-foreground bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-6">
                 No recent sessions yet. Start a Quick Drill to see your history here.
               </div>
@@ -252,19 +339,19 @@ export function HomePage() {
           <h3 className="text-xl font-semibold text-foreground">Quick Actions</h3>
           <div className="flex flex-wrap justify-center gap-4">
             <button
-              onClick={() => router.push("/modules")}
+              onClick={() => router.push('/modules')}
               className="bg-blue-600 hover:bg-blue-700 text-foreground px-6 py-3 rounded-lg font-medium transition-colors"
             >
               Browse Study Modules
             </button>
             <button
-              onClick={() => router.push("/practice")}
+              onClick={() => router.push('/practice')}
               className="bg-[#22c55e] hover:bg-green-700 text-foreground px-6 py-3 rounded-lg font-medium transition-colors"
             >
               Start Practice Session
             </button>
             <button
-              onClick={() => router.push("/mock")}
+              onClick={() => router.push('/mock')}
               className="bg-accent hover:bg-purple-700 text-foreground px-6 py-3 rounded-lg font-medium transition-colors"
             >
               Take Mock Exam

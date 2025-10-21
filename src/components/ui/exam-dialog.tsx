@@ -1,43 +1,39 @@
-"use client";
+'use client';
 
-import { useState, useEffect } from "react";
+import {
+  AlertTriangle,
+  BookOpen,
+  CheckCircle,
+  Clock,
+  FileText,
+  Play,
+  RotateCcw,
+  Settings,
+  Trophy,
+  XCircle,
+} from 'lucide-react';
+import { useState } from 'react';
+import { Button } from '@/components/ui/button';
 import {
   Dialog,
   DialogContent,
   DialogDescription,
+  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-  DialogFooter,
-} from "@/components/ui/dialog";
+} from '@/components/ui/dialog';
+import { Progress } from '@/components/ui/progress';
+import { Separator } from '@/components/ui/separator';
 import {
   Sheet,
   SheetContent,
   SheetDescription,
   SheetHeader,
   SheetTitle,
-  SheetTrigger,
-  SheetFooter,
-} from "@/components/ui/sheet";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Progress } from "@/components/ui/progress";
-import { Separator } from "@/components/ui/separator";
-import {
-  Clock,
-  Trophy,
-  AlertTriangle,
-  CheckCircle,
-  XCircle,
-  BookOpen,
-  Settings,
-  Play,
-  Pause,
-  RotateCcw,
-  FileText,
-} from "lucide-react";
-import { cn } from "@/lib/utils";
-import { ExamMode, TCODomain } from "@/types/exam";
+} from '@/components/ui/sheet';
+import { cn } from '@/lib/utils';
+import { ExamMode, TCODomain } from '@/types/exam';
 
 interface ExamStartDialogProps {
   trigger: React.ReactNode;
@@ -50,7 +46,7 @@ interface ExamConfig {
   domain?: TCODomain;
   questionCount: number;
   timeLimit?: number;
-  difficulty: "mixed" | "beginner" | "intermediate" | "advanced";
+  difficulty: 'mixed' | 'beginner' | 'intermediate' | 'advanced';
 }
 
 interface ExamPauseSheetProps {
@@ -85,7 +81,7 @@ export function ExamStartDialog({ trigger, mode, onStart }: ExamStartDialogProps
   const [config, setConfig] = useState<ExamConfig>({
     mode,
     questionCount: mode === ExamMode.MOCK ? 65 : 20,
-    difficulty: "mixed",
+    difficulty: 'mixed',
   });
 
   const handleStart = () => {
@@ -96,35 +92,35 @@ export function ExamStartDialog({ trigger, mode, onStart }: ExamStartDialogProps
     switch (mode) {
       case ExamMode.PRACTICE:
         return {
-          title: "Practice Mode",
-          description: "Interactive learning with instant feedback",
+          title: 'Practice Mode',
+          description: 'Interactive learning with instant feedback',
           icon: BookOpen,
-          color: "text-primary",
-          bgColor: "bg-primary",
+          color: 'text-primary',
+          bgColor: 'bg-primary',
         };
       case ExamMode.MOCK:
         return {
-          title: "Mock Exam",
-          description: "Full certification exam simulation",
+          title: 'Mock Exam',
+          description: 'Full certification exam simulation',
           icon: FileText,
-          color: "text-[#22c55e]",
-          bgColor: "bg-[#22c55e]",
+          color: 'text-[#22c55e]',
+          bgColor: 'bg-[#22c55e]',
         };
       case ExamMode.REVIEW:
         return {
-          title: "Review Mode",
-          description: "Review previously missed questions",
+          title: 'Review Mode',
+          description: 'Review previously missed questions',
           icon: RotateCcw,
-          color: "text-orange-400",
-          bgColor: "bg-orange-500",
+          color: 'text-orange-400',
+          bgColor: 'bg-orange-500',
         };
       default:
         return {
-          title: "Exam",
-          description: "Test your knowledge",
+          title: 'Exam',
+          description: 'Test your knowledge',
           icon: BookOpen,
-          color: "text-primary",
-          bgColor: "bg-primary",
+          color: 'text-primary',
+          bgColor: 'bg-primary',
         };
     }
   };
@@ -138,7 +134,7 @@ export function ExamStartDialog({ trigger, mode, onStart }: ExamStartDialogProps
       <DialogContent className="glass max-w-2xl border-white/20 text-foreground">
         <DialogHeader>
           <div className="flex items-center space-x-3">
-            <div className={cn("rounded-lg p-3", modeInfo.bgColor)}>
+            <div className={cn('rounded-lg p-3', modeInfo.bgColor)}>
               <Icon className="h-6 w-6 text-foreground" />
             </div>
             <div>
@@ -157,7 +153,9 @@ export function ExamStartDialog({ trigger, mode, onStart }: ExamStartDialogProps
 
             <div className="grid gap-4 md:grid-cols-2">
               <div className="space-y-2">
-                <label className="text-sm font-medium text-muted-foreground">Number of Questions</label>
+                <label className="text-sm font-medium text-muted-foreground">
+                  Number of Questions
+                </label>
                 <select
                   value={config.questionCount}
                   onChange={(e) => setConfig({ ...config, questionCount: Number(e.target.value) })}
@@ -177,7 +175,9 @@ export function ExamStartDialog({ trigger, mode, onStart }: ExamStartDialogProps
               </div>
 
               <div className="space-y-2">
-                <label className="text-sm font-medium text-muted-foreground">Difficulty Level</label>
+                <label className="text-sm font-medium text-muted-foreground">
+                  Difficulty Level
+                </label>
                 <select
                   value={config.difficulty}
                   onChange={(e) => setConfig({ ...config, difficulty: e.target.value as any })}
@@ -193,9 +193,11 @@ export function ExamStartDialog({ trigger, mode, onStart }: ExamStartDialogProps
 
             {mode === ExamMode.PRACTICE && (
               <div className="space-y-2">
-                <label className="text-sm font-medium text-muted-foreground">Focus Domain (Optional)</label>
+                <label className="text-sm font-medium text-muted-foreground">
+                  Focus Domain (Optional)
+                </label>
                 <select
-                  value={config.domain ?? ""}
+                  value={config.domain ?? ''}
                   onChange={(e) =>
                     setConfig({
                       ...config,
@@ -224,7 +226,7 @@ export function ExamStartDialog({ trigger, mode, onStart }: ExamStartDialogProps
               <div>
                 <p className="text-sm text-muted-foreground">Time Limit</p>
                 <p className="font-medium text-foreground">
-                  {mode === ExamMode.MOCK ? "90 minutes" : "Unlimited"}
+                  {mode === ExamMode.MOCK ? '90 minutes' : 'Unlimited'}
                 </p>
               </div>
             </div>
@@ -267,7 +269,7 @@ export function ExamStartDialog({ trigger, mode, onStart }: ExamStartDialogProps
         <DialogFooter>
           <Button
             onClick={handleStart}
-            className={cn("w-full", modeInfo.bgColor, "hover:opacity-90")}
+            className={cn('w-full', modeInfo.bgColor, 'hover:opacity-90')}
             size="lg"
           >
             <Play className="mr-2 h-4 w-4" />
@@ -325,7 +327,7 @@ export function ExamPauseSheet({
                 </div>
                 <span className="text-lg font-medium text-foreground">
                   {Math.floor(timeRemaining / 60)}:
-                  {(timeRemaining % 60).toString().padStart(2, "0")}
+                  {(timeRemaining % 60).toString().padStart(2, '0')}
                 </span>
               </div>
             </div>
@@ -392,10 +394,10 @@ export function ExamResultsDialog({
 
             <div>
               <DialogTitle className="text-2xl text-foreground">
-                {passed ? "Congratulations!" : "Keep Studying!"}
+                {passed ? 'Congratulations!' : 'Keep Studying!'}
               </DialogTitle>
               <DialogDescription className="text-lg text-muted-foreground">
-                {passed ? "You passed the exam!" : `You need ${results.passingScore}% to pass`}
+                {passed ? 'You passed the exam!' : `You need ${results.passingScore}% to pass`}
               </DialogDescription>
             </div>
           </div>
@@ -405,7 +407,7 @@ export function ExamResultsDialog({
           {/* Score Display */}
           <div className="text-center">
             <div
-              className={cn("mb-2 text-6xl font-bold", passed ? "text-[#22c55e]" : "text-red-400")}
+              className={cn('mb-2 text-6xl font-bold', passed ? 'text-[#22c55e]' : 'text-red-400')}
             >
               {Math.round(percentage)}%
             </div>
@@ -440,8 +442,8 @@ export function ExamResultsDialog({
           {/* Performance Message */}
           <div
             className={cn(
-              "glass rounded-lg p-4",
-              passed ? "border-[#22c55e]/20 bg-[#22c55e]/5" : "border-red-500/20 bg-red-500/5"
+              'glass rounded-lg p-4',
+              passed ? 'border-[#22c55e]/20 bg-[#22c55e]/5' : 'border-red-500/20 bg-red-500/5'
             )}
           >
             <p className="text-center text-sm">

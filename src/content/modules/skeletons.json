@@ -8,14 +8,16 @@
         "Understand sensors and result interpretation",
         "Iterate and refine queries"
       ],
-      "topics": [
-        "Question grammar",
-        "Common sensors",
-        "Result grid basics"
-      ],
+      "topics": ["Question grammar", "Common sensors", "Result grid basics"],
       "labs": [
-        { "title": "Your First Question", "description": "Run a basic inventory question and export results." },
-        { "title": "Refining by OS", "description": "Filter endpoints to a specific platform and compare outputs." }
+        {
+          "title": "Your First Question",
+          "description": "Run a basic inventory question and export results."
+        },
+        {
+          "title": "Refining by OS",
+          "description": "Filter endpoints to a specific platform and compare outputs."
+        }
       ]
     },
     {
@@ -25,13 +27,12 @@
         "Build and apply dynamic computer groups",
         "Optimize targeting for large environments"
       ],
-      "topics": [
-        "AND/OR/NOT",
-        "Grouping and precedence",
-        "Dynamic vs static groups"
-      ],
+      "topics": ["AND/OR/NOT", "Grouping and precedence", "Dynamic vs static groups"],
       "labs": [
-        { "title": "Browser Presence Query", "description": "Target endpoints with Chrome OR Firefox installed on Windows." }
+        {
+          "title": "Browser Presence Query",
+          "description": "Target endpoints with Chrome OR Firefox installed on Windows."
+        }
       ]
     },
     {
@@ -41,13 +42,12 @@
         "Use approvals and maintenance windows",
         "Verify results and remediate"
       ],
-      "topics": [
-        "Package execution",
-        "Approvals",
-        "Rollbacks"
-      ],
+      "topics": ["Package execution", "Approvals", "Rollbacks"],
       "labs": [
-        { "title": "Pilot Deployment", "description": "Deploy to a pilot group, then review status." }
+        {
+          "title": "Pilot Deployment",
+          "description": "Deploy to a pilot group, then review status."
+        }
       ]
     },
     {
@@ -57,13 +57,12 @@
         "Use search to find modules",
         "Manage saved questions"
       ],
-      "topics": [
-        "Sidebar navigation",
-        "Search",
-        "Saved Questions"
-      ],
+      "topics": ["Sidebar navigation", "Search", "Saved Questions"],
       "labs": [
-        { "title": "Finding Modules", "description": "Use global search to locate the correct module." }
+        {
+          "title": "Finding Modules",
+          "description": "Use global search to locate the correct module."
+        }
       ]
     },
     {
@@ -73,15 +72,13 @@
         "Export data for analysis",
         "Share safely with RBAC"
       ],
-      "topics": [
-        "CSV/JSON exports",
-        "Timestamps and filters",
-        "Dashboards"
-      ],
+      "topics": ["CSV/JSON exports", "Timestamps and filters", "Dashboards"],
       "labs": [
-        { "title": "Weekly Summary", "description": "Export a weekly dataset and document filters used." }
+        {
+          "title": "Weekly Summary",
+          "description": "Export a weekly dataset and document filters used."
+        }
       ]
     }
   ]
 }
-

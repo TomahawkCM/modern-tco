@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { Skeleton } from "@/components/ui/skeleton";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { cn } from "@/lib/utils";
+import { Card, CardContent, CardHeader } from '@/components/ui/card';
+import { Skeleton } from '@/components/ui/skeleton';
+import { cn } from '@/lib/utils';
 
 export function QuestionCardSkeleton() {
   return (
@@ -193,23 +193,23 @@ export function ProgressChartSkeleton() {
 }
 
 export function LoadingSpinner({
-  size = "default",
+  size = 'default',
   className,
 }: {
-  size?: "small" | "default" | "large";
+  size?: 'small' | 'default' | 'large';
   className?: string;
 }) {
   const sizeClasses = {
-    small: "h-4 w-4",
-    default: "h-6 w-6",
-    large: "h-8 w-8",
+    small: 'h-4 w-4',
+    default: 'h-6 w-6',
+    large: 'h-8 w-8',
   };
 
   return (
-    <div className={cn("flex items-center justify-center", className)}>
+    <div className={cn('flex items-center justify-center', className)}>
       <div
         className={cn(
-          "animate-spin rounded-full border-2 border-gray-300 border-t-white",
+          'animate-spin rounded-full border-2 border-gray-300 border-t-white',
           sizeClasses[size]
         )}
       />
@@ -217,7 +217,7 @@ export function LoadingSpinner({
   );
 }
 
-export function LoadingOverlay({ message = "Loading..." }: { message?: string }) {
+export function LoadingOverlay({ message = 'Loading...' }: { message?: string }) {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
       <div className="glass space-y-4 rounded-2xl border border-white/20 p-6 text-center">

@@ -1,6 +1,6 @@
-import type { NextRequest } from "next/server";
-import { NextResponse } from "next/server";
-import { supabase } from "@/lib/supabase";
+import type { NextRequest } from 'next/server';
+import { NextResponse } from 'next/server';
+import { supabase } from '@/lib/supabase';
 
 /**
  * Server-side admin verification endpoint
@@ -13,7 +13,10 @@ import { supabase } from "@/lib/supabase";
 export async function GET(_request: NextRequest) {
   try {
     // Get authenticated user from Supabase session
-    const { data: { user }, error: authError } = await supabase.auth.getUser();
+    const {
+      data: { user },
+      error: authError,
+    } = await supabase.auth.getUser();
 
     if (authError || !user?.email) {
       return NextResponse.json({ isAdmin: false }, { status: 200 });
@@ -21,8 +24,8 @@ export async function GET(_request: NextRequest) {
 
     // Server-side admin email check (NOT exposed to client)
     // Uses non-public environment variable
-    const adminEmails = (process.env.ADMIN_EMAILS ?? "")
-      .split(",")
+    const adminEmails = (process.env.ADMIN_EMAILS ?? '')
+      .split(',')
       .map((e) => e.trim().toLowerCase())
       .filter(Boolean);
 

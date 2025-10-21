@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { useAuth } from "@/contexts/AuthContext";
-import { Loader2, Shield } from "lucide-react";
-import { useState, type ReactNode } from "react";
-import { SignInForm } from "./SignInForm";
+import { Loader2, Shield } from 'lucide-react';
+import { type ReactNode, useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { useAuth } from '@/contexts/AuthContext';
+import { SignInForm } from './SignInForm';
 
 interface AuthGuardProps {
   children: ReactNode;
@@ -53,7 +53,7 @@ export function AuthGuard({ children, fallback, requireAuth = true }: AuthGuardP
                   Sign In
                 </Button>
                 <p className="text-center text-sm text-muted-foreground">
-                  Don&rsquo;t have an account?{" "}
+                  Don&rsquo;t have an account?{' '}
                   <button
                     onClick={() => setShowAuthModal(true)}
                     className="text-primary hover:underline"

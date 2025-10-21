@@ -5,10 +5,10 @@
  * Target: 100% coverage for progress tracking workflow
  */
 
-import React from 'react';
-import { renderHook, act, waitFor } from '@testing-library/react';
-import { ProgressProvider, useProgress } from '../ProgressContext';
+import { act, renderHook, waitFor } from '@testing-library/react';
+import type React from 'react';
 import { TCODomain } from '@/types/exam';
+import { ProgressProvider, useProgress } from '../ProgressContext';
 
 // Mock dependencies
 const mockUseAuth = jest.fn();
@@ -165,9 +165,7 @@ describe('ProgressContext', () => {
       });
 
       const domainStats = result.current.getDomainStats();
-      const askingQuestions = domainStats.find(
-        (d) => d.domain === TCODomain.ASKING_QUESTIONS
-      );
+      const askingQuestions = domainStats.find((d) => d.domain === TCODomain.ASKING_QUESTIONS);
 
       expect(askingQuestions).toMatchObject({
         score: 90,
@@ -395,17 +393,13 @@ describe('ProgressContext', () => {
       act(() => {
         result.current.updateReviewStreak(7, 7);
       });
-      expect(result.current.state.progress.achievements).toContain(
-        'Review Warrior - 7 Day Streak'
-      );
+      expect(result.current.state.progress.achievements).toContain('Review Warrior - 7 Day Streak');
 
       // 30-day review streak
       act(() => {
         result.current.updateReviewStreak(30, 30);
       });
-      expect(result.current.state.progress.achievements).toContain(
-        'Review Master - 30 Day Streak'
-      );
+      expect(result.current.state.progress.achievements).toContain('Review Master - 30 Day Streak');
 
       // 100-day review streak
       act(() => {
@@ -501,9 +495,7 @@ describe('ProgressContext', () => {
 
       const domainStats = result.current.getDomainStats();
 
-      const askingQuestions = domainStats.find(
-        (d) => d.domain === TCODomain.ASKING_QUESTIONS
-      );
+      const askingQuestions = domainStats.find((d) => d.domain === TCODomain.ASKING_QUESTIONS);
       expect(askingQuestions).toMatchObject({
         score: 90,
         questionsAnswered: 10,
@@ -512,9 +504,7 @@ describe('ProgressContext', () => {
         percentage: 90,
       });
 
-      const refiningQuestions = domainStats.find(
-        (d) => d.domain === TCODomain.REFINING_QUESTIONS
-      );
+      const refiningQuestions = domainStats.find((d) => d.domain === TCODomain.REFINING_QUESTIONS);
       expect(refiningQuestions).toMatchObject({
         score: 80,
         questionsAnswered: 15,

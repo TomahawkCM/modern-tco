@@ -1,4 +1,4 @@
-import type { Question, TCODomain, Difficulty, QuestionCategory } from "./exam";
+import type { Difficulty, Question, QuestionCategory, TCODomain } from './exam';
 
 export interface PracticeSessionConfig {
   moduleId: string;
@@ -39,10 +39,10 @@ export interface PracticeSession {
 }
 
 export enum PracticeSessionState {
-  NOT_STARTED = "not_started",
-  IN_PROGRESS = "in_progress",
-  COMPLETED = "completed",
-  ABANDONED = "abandoned",
+  NOT_STARTED = 'not_started',
+  IN_PROGRESS = 'in_progress',
+  COMPLETED = 'completed',
+  ABANDONED = 'abandoned',
 }
 
 export interface PracticeSessionSummary {

@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import React, { createContext, useContext, useState, useCallback, type ReactNode } from "react";
+import { createContext, type ReactNode, useCallback, useContext, useState } from 'react';
 
 // Section shape matching ModuleRenderer
 export interface StudySection {
@@ -66,10 +66,13 @@ export function StudySessionProvider({
 }: StudySessionProviderProps) {
   const [currentTab, setCurrentTab] = useState<'content' | 'review'>(activeTab);
 
-  const handleSetActiveTab = useCallback((tab: 'content' | 'review') => {
-    setCurrentTab(tab);
-    onSetActiveTab?.(tab);
-  }, [onSetActiveTab]);
+  const handleSetActiveTab = useCallback(
+    (tab: 'content' | 'review') => {
+      setCurrentTab(tab);
+      onSetActiveTab?.(tab);
+    },
+    [onSetActiveTab]
+  );
 
   const value: StudySessionContextType = {
     moduleId,
@@ -86,11 +89,7 @@ export function StudySessionProvider({
     resetProgress: onResetProgress,
   };
 
-  return (
-    <StudySessionContext.Provider value={value}>
-      {children}
-    </StudySessionContext.Provider>
-  );
+  return <StudySessionContext.Provider value={value}>{children}</StudySessionContext.Provider>;
 }
 
 export function useStudySession(): StudySessionContextType | null {
@@ -101,7 +100,7 @@ export function useStudySession(): StudySessionContextType | null {
 export function useRequiredStudySession(): StudySessionContextType {
   const context = useContext(StudySessionContext);
   if (!context) {
-    throw new Error("useRequiredStudySession must be used within a StudySessionProvider");
+    throw new Error('useRequiredStudySession must be used within a StudySessionProvider');
   }
   return context;
 }

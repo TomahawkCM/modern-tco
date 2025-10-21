@@ -1,13 +1,15 @@
 import { render, screen } from '@testing-library/react';
-import { describe, it, expect } from 'vitest';
 import React from 'react';
+import { describe, expect, it } from 'vitest';
 
 import { ModuleVideos } from '@/components/videos/ModuleVideos';
 
 describe('ModuleVideos', () => {
   it('renders video embeds for a known module', () => {
     render(<ModuleVideos slug="asking-questions" />);
-    const iframes = screen.getAllByTitle(/Asking Questions: Fundamentals|Interpreting Results Quickly/);
+    const iframes = screen.getAllByTitle(
+      /Asking Questions: Fundamentals|Interpreting Results Quickly/
+    );
     expect(iframes.length).toBeGreaterThan(0);
     const frame = screen.getByTitle('Asking Questions: Fundamentals') as HTMLIFrameElement;
     expect(frame).toBeInTheDocument();
@@ -20,4 +22,3 @@ describe('ModuleVideos', () => {
     expect(screen.getByText(/No videos available/i)).toBeInTheDocument();
   });
 });
-

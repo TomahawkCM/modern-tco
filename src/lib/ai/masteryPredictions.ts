@@ -124,14 +124,8 @@ export async function calculateLearningVelocity(
     // Calculate recent trend (last 3 data points vs previous)
     let recentTrend: 'improving' | 'stable' | 'declining' = 'stable';
     if (historicalScores.length >= 4) {
-      const recentAvg =
-        historicalScores
-          .slice(-3)
-          .reduce((sum, h) => sum + h.score, 0) / 3;
-      const previousAvg =
-        historicalScores
-          .slice(-6, -3)
-          .reduce((sum, h) => sum + h.score, 0) / 3;
+      const recentAvg = historicalScores.slice(-3).reduce((sum, h) => sum + h.score, 0) / 3;
+      const previousAvg = historicalScores.slice(-6, -3).reduce((sum, h) => sum + h.score, 0) / 3;
       if (recentAvg > previousAvg + 3) {
         recentTrend = 'improving';
       } else if (recentAvg < previousAvg - 3) {
@@ -188,7 +182,7 @@ function calculateConsistency(scores: number[]): number {
   }
 
   // R² (coefficient of determination)
-  const r2 = Math.pow(numerator, 2) / (denominatorX * denominatorY);
+  const r2 = numerator ** 2 / (denominatorX * denominatorY);
 
   return Math.max(0, Math.min(r2, 1)); // Clamp to 0-1
 }
@@ -329,7 +323,7 @@ async function savePrediction(prediction: MasteryPrediction): Promise<MasteryPre
 
   if (error) throw error;
 
-  return camelCaseKeys(data) as MasteryPrediction;
+  return camelCaseKeys(data);
 }
 
 /**
@@ -346,7 +340,7 @@ export async function getActivePredictions(userId: string): Promise<MasteryPredi
 
     if (error) throw error;
 
-    return (data || []).map((item) => camelCaseKeys(item)) as MasteryPrediction[];
+    return (data || []).map((item) => camelCaseKeys(item));
   } catch (error) {
     console.error('Error fetching active predictions:', error);
     throw error;
@@ -376,7 +370,7 @@ export async function getDomainPrediction(
       throw error;
     }
 
-    return camelCaseKeys(data) as MasteryPrediction;
+    return camelCaseKeys(data);
   } catch (error) {
     console.error('Error fetching domain prediction:', error);
     throw error;
@@ -402,7 +396,7 @@ export async function markPredictionAchieved(
     if (fetchError) throw fetchError;
 
     // Calculate prediction error (actual - predicted)
-    const daysPrediction = (camelCaseKeys(prediction) as MasteryPrediction).predictedDaysToMastery;
+    const daysPrediction = camelCaseKeys(prediction).predictedDaysToMastery;
     const predictionError = actualDaysToMastery - daysPrediction;
 
     // Update prediction with actual values
@@ -447,7 +441,8 @@ export async function generateMasteryPlan(
 
     // Generate weekly plan
     const weeklyPlan: MasteryPlan['weeklyPlan'] = [];
-    const hoursPerWeek = (prediction.recommendedDailyMinutes / 60) * prediction.recommendedWeeklySessions;
+    const hoursPerWeek =
+      (prediction.recommendedDailyMinutes / 60) * prediction.recommendedWeeklySessions;
     const questionsPerWeek = Math.ceil(prediction.predictedPracticeQuestionsNeeded / totalWeeks);
     const masteryGainPerWeek = (targetLevel - currentLevel) / totalWeeks;
 

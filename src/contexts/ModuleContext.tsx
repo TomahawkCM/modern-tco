@@ -1,21 +1,21 @@
-"use client";
+'use client';
 
-import type { ModuleProgress } from "@/types/module";
 import {
   createContext,
+  type ReactNode,
   useCallback,
   useContext,
   useEffect,
   useReducer,
   useRef,
   useState,
-  type ReactNode,
-} from "react";
+} from 'react';
 // import { modules } from "@/data/modules";
-import { useAuth } from "@/contexts/AuthContext";
-import { useDatabase } from "@/hooks/useDatabase";
-import { supabase } from "@/lib/supabase";
-import { TCODomain } from "@/types/exam";
+import { useAuth } from '@/contexts/AuthContext';
+import { useDatabase } from '@/hooks/useDatabase';
+import { supabase } from '@/lib/supabase';
+import { TCODomain } from '@/types/exam';
+import type { ModuleProgress } from '@/types/module';
 
 // Simple modules array for ModuleContext
 // This is a placeholder until proper module definitions are created
@@ -24,7 +24,7 @@ interface Module {
   title: string;
   description: string;
   domain: string;
-  difficulty: "Beginner" | "Intermediate" | "Advanced";
+  difficulty: 'Beginner' | 'Intermediate' | 'Advanced';
   estimatedTime: number;
   objectives: Array<{ id: string; description: string }>;
   sections: Array<{ id: string; title: string }>;
@@ -32,44 +32,45 @@ interface Module {
 
 const modules: Module[] = [
   {
-    id: "platform-basics",
-    title: "Platform Basics",
-    description: "Learn the fundamentals of the Tanium platform",
-    domain: "Asking Questions",
-    difficulty: "Beginner",
+    id: 'platform-basics',
+    title: 'Platform Basics',
+    description: 'Learn the fundamentals of the Tanium platform',
+    domain: 'Asking Questions',
+    difficulty: 'Beginner',
     estimatedTime: 30,
     objectives: [
-      { id: "obj-1", description: "Understand platform architecture" },
-      { id: "obj-2", description: "Navigate the console interface" },
+      { id: 'obj-1', description: 'Understand platform architecture' },
+      { id: 'obj-2', description: 'Navigate the console interface' },
     ],
     sections: [
-      { id: "sec-1", title: "Introduction" },
-      { id: "sec-2", title: "Console Overview" },
+      { id: 'sec-1', title: 'Introduction' },
+      { id: 'sec-2', title: 'Console Overview' },
     ],
   },
   {
-    id: "interact-module",
-    title: "Interact Module",
-    description: "Master the Interact module for querying",
-    domain: "Asking Questions",
-    difficulty: "Beginner",
+    id: 'interact-module',
+    title: 'Interact Module',
+    description: 'Master the Interact module for querying',
+    domain: 'Asking Questions',
+    difficulty: 'Beginner',
     estimatedTime: 45,
     objectives: [
-      { id: "obj-3", description: "Create basic queries" },
-      { id: "obj-4", description: "Use sensor library" },
+      { id: 'obj-3', description: 'Create basic queries' },
+      { id: 'obj-4', description: 'Use sensor library' },
     ],
     sections: [
-      { id: "sec-3", title: "Query Basics" },
-      { id: "sec-4", title: "Sensor Library" },
+      { id: 'sec-3', title: 'Query Basics' },
+      { id: 'sec-4', title: 'Sensor Library' },
     ],
   },
 ];
+
 // import type { Tables } from "@/types/database.types";
 import {
   LearningFlowFactory as FactoryImpl,
   LearningFlowStateMachine as StateMachineImpl,
-} from "@/lib/learning-flow-state-machine";
-import { defaultFlowPersistence } from "@/lib/supabase-flow-persistence";
+} from '@/lib/learning-flow-state-machine';
+import { defaultFlowPersistence } from '@/lib/supabase-flow-persistence';
 
 export interface ModuleContextType {
   modules: Module[];
@@ -98,7 +99,7 @@ export interface ModuleContextType {
 
   // Filtering & Search
   getModulesByDomain: (domain: TCODomain) => Module[];
-  getModulesByDifficulty: (difficulty: "Beginner" | "Intermediate" | "Advanced") => Module[];
+  getModulesByDifficulty: (difficulty: 'Beginner' | 'Intermediate' | 'Advanced') => Module[];
   getCompletedModules: () => Module[];
   getInProgressModules: () => Module[];
   getNotStartedModules: () => Module[];
@@ -134,18 +135,18 @@ interface ModuleState {
 }
 
 type ModuleAction =
-  | { type: "SET_CURRENT_MODULE"; payload: Module | null }
-  | { type: "START_MODULE"; payload: string }
-  | { type: "COMPLETE_MODULE"; payload: string }
-  | { type: "UPDATE_PROGRESS"; payload: { moduleId: string; progress: Partial<ModuleProgress> } }
-  | { type: "COMPLETE_OBJECTIVE"; payload: { moduleId: string; objectiveId: string } }
-  | { type: "UNCOMPLETE_OBJECTIVE"; payload: { moduleId: string; objectiveId: string } }
-  | { type: "LOAD_PROGRESS"; payload: Record<string, ModuleProgress> }
-  | { type: "RESET_PROGRESS" }
-  | { type: "SET_LEARNING_FLOW"; payload: { moduleId: string; flow: StateMachineImpl } }
-  | { type: "REMOVE_LEARNING_FLOW"; payload: string };
+  | { type: 'SET_CURRENT_MODULE'; payload: Module | null }
+  | { type: 'START_MODULE'; payload: string }
+  | { type: 'COMPLETE_MODULE'; payload: string }
+  | { type: 'UPDATE_PROGRESS'; payload: { moduleId: string; progress: Partial<ModuleProgress> } }
+  | { type: 'COMPLETE_OBJECTIVE'; payload: { moduleId: string; objectiveId: string } }
+  | { type: 'UNCOMPLETE_OBJECTIVE'; payload: { moduleId: string; objectiveId: string } }
+  | { type: 'LOAD_PROGRESS'; payload: Record<string, ModuleProgress> }
+  | { type: 'RESET_PROGRESS' }
+  | { type: 'SET_LEARNING_FLOW'; payload: { moduleId: string; flow: StateMachineImpl } }
+  | { type: 'REMOVE_LEARNING_FLOW'; payload: string };
 
-const createInitialProgress = (userId: string = "anonymous"): Record<string, ModuleProgress> => {
+const createInitialProgress = (userId: string = 'anonymous'): Record<string, ModuleProgress> => {
   const progress: Record<string, ModuleProgress> = {};
   modules.forEach((module) => {
     progress[module.id] = {
@@ -157,7 +158,7 @@ const createInitialProgress = (userId: string = "anonymous"): Record<string, Mod
       sectionsCompleted: [],
       overallProgress: 0,
       quiz_scores: {},
-      currentSection: "",
+      currentSection: '',
       bookmarks: [],
     };
   });
@@ -166,13 +167,13 @@ const createInitialProgress = (userId: string = "anonymous"): Record<string, Mod
 
 const moduleReducer = (state: ModuleState, action: ModuleAction): ModuleState => {
   switch (action.type) {
-    case "SET_CURRENT_MODULE":
+    case 'SET_CURRENT_MODULE':
       return {
         ...state,
         currentModule: action.payload,
       };
 
-    case "START_MODULE": {
+    case 'START_MODULE': {
       const moduleId = action.payload;
       const now = new Date().toISOString();
       return {
@@ -188,7 +189,7 @@ const moduleReducer = (state: ModuleState, action: ModuleAction): ModuleState =>
       };
     }
 
-    case "COMPLETE_MODULE": {
+    case 'COMPLETE_MODULE': {
       const moduleId = action.payload;
       const now = new Date().toISOString();
       const module = state.modules.find((m) => m.id === moduleId);
@@ -207,7 +208,7 @@ const moduleReducer = (state: ModuleState, action: ModuleAction): ModuleState =>
       };
     }
 
-    case "UPDATE_PROGRESS": {
+    case 'UPDATE_PROGRESS': {
       const { moduleId, progress } = action.payload;
       return {
         ...state,
@@ -222,7 +223,7 @@ const moduleReducer = (state: ModuleState, action: ModuleAction): ModuleState =>
       };
     }
 
-    case "COMPLETE_OBJECTIVE": {
+    case 'COMPLETE_OBJECTIVE': {
       const { moduleId, objectiveId } = action.payload;
       const currentProgress = state.moduleProgress[moduleId] || createInitialProgress()[moduleId];
       return {
@@ -237,7 +238,7 @@ const moduleReducer = (state: ModuleState, action: ModuleAction): ModuleState =>
       };
     }
 
-    case "UNCOMPLETE_OBJECTIVE": {
+    case 'UNCOMPLETE_OBJECTIVE': {
       const { moduleId, objectiveId } = action.payload;
       const currentProgress = state.moduleProgress[moduleId] || createInitialProgress()[moduleId];
       return {
@@ -252,21 +253,21 @@ const moduleReducer = (state: ModuleState, action: ModuleAction): ModuleState =>
       };
     }
 
-    case "LOAD_PROGRESS":
+    case 'LOAD_PROGRESS':
       return {
         ...state,
         moduleProgress: action.payload,
       };
 
-    case "RESET_PROGRESS":
+    case 'RESET_PROGRESS':
       return {
         ...state,
-        moduleProgress: createInitialProgress("anonymous"), // Will be updated when user is available
+        moduleProgress: createInitialProgress('anonymous'), // Will be updated when user is available
         currentModule: null,
         learningFlows: {},
       };
 
-    case "SET_LEARNING_FLOW":
+    case 'SET_LEARNING_FLOW':
       return {
         ...state,
         learningFlows: {
@@ -275,12 +276,13 @@ const moduleReducer = (state: ModuleState, action: ModuleAction): ModuleState =>
         },
       };
 
-    case "REMOVE_LEARNING_FLOW":
+    case 'REMOVE_LEARNING_FLOW': {
       const { [action.payload]: removed, ...remainingFlows } = state.learningFlows;
       return {
         ...state,
         learningFlows: remainingFlows,
       };
+    }
 
     default:
       return state;
@@ -289,13 +291,13 @@ const moduleReducer = (state: ModuleState, action: ModuleAction): ModuleState =>
 
 const ModuleContext = createContext<ModuleContextType | null>(null);
 
-const STORAGE_KEY = "tco-module-progress";
+const STORAGE_KEY = 'tco-module-progress';
 
 export function ModuleProvider({ children }: { children: ReactNode }) {
   const { user } = useAuth();
   const [state, dispatch] = useReducer(moduleReducer, {
     modules,
-    moduleProgress: createInitialProgress(user?.id || "anonymous"),
+    moduleProgress: createInitialProgress(user?.id || 'anonymous'),
     currentModule: null,
     learningFlows: {},
   });
@@ -315,18 +317,18 @@ export function ModuleProvider({ children }: { children: ReactNode }) {
         try {
           // Load from database
           const { data, error } = await (supabase as any)
-            .from("user_study_progress")
-            .select("*")
-            .eq("user_id", user.id);
+            .from('user_study_progress')
+            .select('*')
+            .eq('user_id', user.id);
 
           if (error) throw error;
 
           // Convert database records to progress format
           const progressMap: Record<string, ModuleProgress> = {};
-              (data as any[]).forEach((record: any) => {
+          (data as any[]).forEach((record: any) => {
             progressMap[record.module_id] = {
               moduleId: record.module_id,
-              userId: record.user_id || user?.id || "anonymous",
+              userId: record.user_id || user?.id || 'anonymous',
               startedAt: record.started_at ? new Date(record.started_at) : new Date(),
               lastAccessedAt: record.last_accessed_at
                 ? new Date(record.last_accessed_at)
@@ -336,20 +338,20 @@ export function ModuleProvider({ children }: { children: ReactNode }) {
               sectionsCompleted: record.sections_completed || [],
               overallProgress: record.overall_progress || 0,
               quiz_scores: record.quiz_scores || {},
-              currentSection: record.current_section || "",
+              currentSection: record.current_section || '',
               bookmarks: record.bookmarks || [],
             };
           });
 
           // Merge with initial progress to ensure all modules have entries
           const mergedProgress = {
-            ...createInitialProgress(user?.id || "anonymous"),
+            ...createInitialProgress(user?.id || 'anonymous'),
             ...progressMap,
           };
-          dispatch({ type: "LOAD_PROGRESS", payload: mergedProgress });
+          dispatch({ type: 'LOAD_PROGRESS', payload: mergedProgress });
           setDbInitialized(true);
         } catch (error) {
-          console.error("Failed to load module progress from database:", error);
+          console.error('Failed to load module progress from database:', error);
           // Fall back to localStorage
           loadFromLocalStorage();
         }
@@ -364,15 +366,15 @@ export function ModuleProvider({ children }: { children: ReactNode }) {
         const stored = localStorage.getItem(STORAGE_KEY);
         if (stored) {
           const progressData = JSON.parse(stored);
-          dispatch({ type: "LOAD_PROGRESS", payload: progressData });
+          dispatch({ type: 'LOAD_PROGRESS', payload: progressData });
         }
       } catch (error) {
-        console.warn("Failed to load module progress from localStorage:", error);
+        console.warn('Failed to load module progress from localStorage:', error);
       }
     };
 
     loadProgress();
-  }, []); // Empty dependency array - only run once on mount
+  }, [db, user]); // Empty dependency array - only run once on mount
 
   // Save progress to database or localStorage whenever it changes (debounced)
   useEffect(() => {
@@ -381,22 +383,22 @@ export function ModuleProvider({ children }: { children: ReactNode }) {
 
       if (user && db) {
         // Save to database for each changed module
-              for (const [moduleId, progress] of Object.entries(state.moduleProgress)) {
+        for (const [moduleId, progress] of Object.entries(state.moduleProgress)) {
           if (progress.startedAt || progress.completedAt) {
             try {
               const { error } = await supabase
-                .from("user_study_progress")
+                .from('user_study_progress')
                 .upsert({
                   user_id: user.id,
                   module_id: moduleId,
                   time_spent_minutes: progress.totalTimeSpent || 0,
                   completed_at: progress.completedAt?.toISOString() || null,
-                  status: progress.completedAt ? "completed" : "in_progress",
+                  status: progress.completedAt ? 'completed' : 'in_progress',
                   notes: null,
                   section_id: null,
                 } as any)
-                .eq("user_id", user.id)
-                .eq("module_id", moduleId);
+                .eq('user_id', user.id)
+                .eq('module_id', moduleId);
 
               if (error) {
                 console.error(`Failed to save progress for module ${moduleId}:`, error);
@@ -411,7 +413,7 @@ export function ModuleProvider({ children }: { children: ReactNode }) {
         try {
           localStorage.setItem(STORAGE_KEY, JSON.stringify(state.moduleProgress));
         } catch (error) {
-          console.warn("Failed to save module progress to localStorage:", error);
+          console.warn('Failed to save module progress to localStorage:', error);
         }
       }
     };
@@ -425,27 +427,27 @@ export function ModuleProvider({ children }: { children: ReactNode }) {
   }, [state.moduleProgress, user, db, dbInitialized]);
 
   const startModule = (moduleId: string) => {
-    dispatch({ type: "START_MODULE", payload: moduleId });
+    dispatch({ type: 'START_MODULE', payload: moduleId });
   };
 
   const completeModule = (moduleId: string) => {
-    dispatch({ type: "COMPLETE_MODULE", payload: moduleId });
+    dispatch({ type: 'COMPLETE_MODULE', payload: moduleId });
   };
 
   const updateModuleProgress = (moduleId: string, progress: Partial<ModuleProgress>) => {
-    dispatch({ type: "UPDATE_PROGRESS", payload: { moduleId, progress } });
+    dispatch({ type: 'UPDATE_PROGRESS', payload: { moduleId, progress } });
   };
 
   const completeObjective = (moduleId: string, objectiveId: string) => {
-    dispatch({ type: "COMPLETE_OBJECTIVE", payload: { moduleId, objectiveId } });
+    dispatch({ type: 'COMPLETE_OBJECTIVE', payload: { moduleId, objectiveId } });
   };
 
   const uncompleteObjective = (moduleId: string, objectiveId: string) => {
-    dispatch({ type: "UNCOMPLETE_OBJECTIVE", payload: { moduleId, objectiveId } });
+    dispatch({ type: 'UNCOMPLETE_OBJECTIVE', payload: { moduleId, objectiveId } });
   };
 
   const setCurrentModule = (module: Module | null) => {
-    dispatch({ type: "SET_CURRENT_MODULE", payload: module });
+    dispatch({ type: 'SET_CURRENT_MODULE', payload: module });
   };
 
   const getNextModule = (currentModuleId: string): Module | null => {
@@ -469,7 +471,7 @@ export function ModuleProvider({ children }: { children: ReactNode }) {
   };
 
   const getModulesByDifficulty = (
-    difficulty: "Beginner" | "Intermediate" | "Advanced"
+    difficulty: 'Beginner' | 'Intermediate' | 'Advanced'
   ): Module[] => {
     return state.modules.filter((module) => module.difficulty === difficulty);
   };
@@ -495,7 +497,7 @@ export function ModuleProvider({ children }: { children: ReactNode }) {
 
     const totalTimeSpent = Object.values(state.moduleProgress).reduce((total, progress) => {
       // Add null/undefined check for progress and totalTimeSpent
-      if (!progress || typeof progress.totalTimeSpent !== "number") {
+      if (!progress || typeof progress.totalTimeSpent !== 'number') {
         return total;
       }
       return total + progress.totalTimeSpent;
@@ -545,7 +547,7 @@ export function ModuleProvider({ children }: { children: ReactNode }) {
     const exportData = {
       moduleProgress: state.moduleProgress,
       exportedAt: new Date().toISOString(),
-      version: "1.0",
+      version: '1.0',
     };
     return JSON.stringify(exportData, null, 2);
   };
@@ -553,30 +555,30 @@ export function ModuleProvider({ children }: { children: ReactNode }) {
   const importProgress = (data: string): boolean => {
     try {
       const importData = JSON.parse(data);
-      if (importData.moduleProgress && typeof importData.moduleProgress === "object") {
-        dispatch({ type: "LOAD_PROGRESS", payload: importData.moduleProgress });
+      if (importData.moduleProgress && typeof importData.moduleProgress === 'object') {
+        dispatch({ type: 'LOAD_PROGRESS', payload: importData.moduleProgress });
         return true;
       }
       return false;
     } catch (error) {
-      console.error("Failed to import progress:", error);
+      console.error('Failed to import progress:', error);
       return false;
     }
   };
 
   const resetProgress = useCallback(async () => {
-    dispatch({ type: "RESET_PROGRESS" });
+    dispatch({ type: 'RESET_PROGRESS' });
 
     if (user && db) {
       try {
         // Delete all module progress from database
         const { error } = await supabase
-          .from("user_study_progress")
+          .from('user_study_progress')
           .delete()
-          .eq("user_id", user.id);
+          .eq('user_id', user.id);
 
         if (error) {
-          console.error("Failed to reset module progress in database:", error);
+          console.error('Failed to reset module progress in database:', error);
         }
 
         // Also reset learning flows
@@ -590,19 +592,19 @@ export function ModuleProvider({ children }: { children: ReactNode }) {
         //   console.error("Failed to reset learning flow progress in database:", flowError);
         // }
       } catch (error) {
-        console.error("Error resetting module progress:", error);
+        console.error('Error resetting module progress:', error);
       }
     } else {
       // Clear from localStorage if not authenticated
       localStorage.removeItem(STORAGE_KEY);
     }
-  }, [user?.id, db]);
+  }, [user?.id, db, user]);
 
   // p5: Learning Flow Management Functions
   const startLearningFlow = useCallback(
     async (moduleId: string): Promise<StateMachineImpl> => {
       if (!user?.id) {
-        throw new Error("User must be authenticated to start learning flow");
+        throw new Error('User must be authenticated to start learning flow');
       }
 
       // Check if flow already exists
@@ -625,7 +627,7 @@ export function ModuleProvider({ children }: { children: ReactNode }) {
 
       // Save to state
       dispatch({
-        type: "SET_LEARNING_FLOW",
+        type: 'SET_LEARNING_FLOW',
         payload: { moduleId, flow: flowWithPersistence },
       });
 
@@ -662,7 +664,7 @@ export function ModuleProvider({ children }: { children: ReactNode }) {
 
         // Cache in state
         dispatch({
-          type: "SET_LEARNING_FLOW",
+          type: 'SET_LEARNING_FLOW',
           payload: { moduleId, flow },
         });
 
@@ -678,7 +680,7 @@ export function ModuleProvider({ children }: { children: ReactNode }) {
     async (moduleId: string, flowState: StateMachineImpl): Promise<void> => {
       // Update in-memory state
       dispatch({
-        type: "SET_LEARNING_FLOW",
+        type: 'SET_LEARNING_FLOW',
         payload: { moduleId, flow: flowState },
       });
 
@@ -695,7 +697,7 @@ export function ModuleProvider({ children }: { children: ReactNode }) {
       }
 
       // Remove from state
-      dispatch({ type: "REMOVE_LEARNING_FLOW", payload: moduleId });
+      dispatch({ type: 'REMOVE_LEARNING_FLOW', payload: moduleId });
 
       // Delete from database
       await defaultFlowPersistence.delete(moduleId, user.id);
@@ -744,7 +746,7 @@ export function ModuleProvider({ children }: { children: ReactNode }) {
 export function useModules(): ModuleContextType {
   const context = useContext(ModuleContext);
   if (!context) {
-    throw new Error("useModules must be used within a ModuleProvider");
+    throw new Error('useModules must be used within a ModuleProvider');
   }
   return context;
 }

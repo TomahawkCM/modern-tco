@@ -12,8 +12,8 @@
  * - Prerequisite-aware sequencing
  */
 
-import { supabase } from '@/lib/supabase';
 import Anthropic from '@anthropic-ai/sdk';
+import { supabase } from '@/lib/supabase';
 
 // ==================== TYPES ====================
 
@@ -264,9 +264,8 @@ export async function gatherPerformanceData(userId: string): Promise<Performance
     .eq('status', 'completed');
 
   // Calculate learning velocity
-  const learningVelocity = modulesCompleted && modulesCompleted > 0
-    ? studyHoursCompleted / modulesCompleted
-    : 2.0; // Default 2 hours per module
+  const learningVelocity =
+    modulesCompleted && modulesCompleted > 0 ? studyHoursCompleted / modulesCompleted : 2.0; // Default 2 hours per module
 
   return {
     userId,
@@ -428,7 +427,7 @@ function parsePathPlanResponse(response: string): {
     const parsed = JSON.parse(jsonMatch[0]);
     return {
       name: parsed.name || 'Adaptive Learning Path',
-      confidence: parsed.confidence || 0.80,
+      confidence: parsed.confidence || 0.8,
       steps: parsed.steps || [],
     };
   } catch (error) {
@@ -527,7 +526,7 @@ export async function getActiveLearningPath(userId: string): Promise<LearningPat
     .single();
 
   if (error && error.code !== 'PGRST116') throw error;
-  return data ? (camelCaseKeys(data) as any) : null;
+  return data ? camelCaseKeys(data) : null;
 }
 
 export async function getNextStep(pathId: string): Promise<LearningPathStep | null> {

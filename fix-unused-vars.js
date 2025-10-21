@@ -12,11 +12,16 @@ const { execSync } = require('child_process');
 console.log('🔧 Starting Automated Unused Variable Cleanup...\n');
 
 // Get ESLint output with unused variables
-const lintOutput = execSync('npm run lint 2>&1', { encoding: 'utf-8', maxBuffer: 10 * 1024 * 1024 });
+const lintOutput = execSync('npm run lint 2>&1', {
+  encoding: 'utf-8',
+  maxBuffer: 10 * 1024 * 1024,
+});
 
 // Parse lint output for unused variable errors
-const unusedVarPattern = /^(.+?):(\d+):(\d+)\s+error\s+'(.+?)' is (?:defined but never used|assigned a value but never used)/gm;
-const unusedArgPattern = /^(.+?):(\d+):(\d+)\s+error\s+'(.+?)' is defined but never used. Allowed unused args must match/gm;
+const unusedVarPattern =
+  /^(.+?):(\d+):(\d+)\s+error\s+'(.+?)' is (?:defined but never used|assigned a value but never used)/gm;
+const unusedArgPattern =
+  /^(.+?):(\d+):(\d+)\s+error\s+'(.+?)' is defined but never used. Allowed unused args must match/gm;
 
 const fixes = [];
 let match;
@@ -56,7 +61,7 @@ for (const [filePath, fileFixes] of Object.entries(fileGroups)) {
   }
 
   try {
-    let content = fs.readFileSync(fullPath, 'utf-8');
+    const content = fs.readFileSync(fullPath, 'utf-8');
     const lines = content.split('\n');
     let modified = false;
 

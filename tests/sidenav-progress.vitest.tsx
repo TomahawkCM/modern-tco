@@ -1,6 +1,6 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, screen, within } from '@testing-library/react';
 import React from 'react';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 // Mock next/navigation to provide a stable pathname
 vi.mock('next/navigation', async (orig) => {
@@ -52,4 +52,3 @@ describe('SideNav progress dots', () => {
     expect(tFilled.length).toBe(1);
   });
 });
-

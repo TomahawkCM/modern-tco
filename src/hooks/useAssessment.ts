@@ -1,14 +1,14 @@
-import { useState, useCallback, useEffect } from "react";
-import { AssessmentEngine } from "../lib/assessment/assessment-engine";
-import { ProgressService } from "../lib/services/progress-service";
-import { AnalyticsService } from "../lib/services/analytics-service";
+import { useCallback, useEffect, useState } from 'react';
+import { AssessmentEngine } from '../lib/assessment/assessment-engine';
+import { AnalyticsService } from '../lib/services/analytics-service';
+import { ProgressService } from '../lib/services/progress-service';
 import type {
-  AssessmentConfig,
-  AssessmentSession,
-  AssessmentResult,
-  QuestionAnswer,
   AnalyticsEvent,
-} from "../types/assessment";
+  AssessmentConfig,
+  AssessmentResult,
+  AssessmentSession,
+  QuestionAnswer,
+} from '../types/assessment';
 
 export interface UseAssessmentReturn {
   currentSession: AssessmentSession | null;
@@ -52,7 +52,7 @@ export function useAssessment(): UseAssessmentReturn {
         userId: config.userId,
         moduleId: config.moduleId,
         type: config.assessmentType,
-        status: "in_progress",
+        status: 'in_progress',
         startTime: new Date(),
         timeLimit: config.timeLimit,
         questions: sessionData.questions,
@@ -67,8 +67,8 @@ export function useAssessment(): UseAssessmentReturn {
 
       // Track assessment start
       await AnalyticsService.track({
-        type: "assessment_started",
-        userId: config.userId ?? "",
+        type: 'assessment_started',
+        userId: config.userId ?? '',
         data: {
           assessmentId: config.assessmentId,
           assessmentType: config.assessmentType,
@@ -79,8 +79,8 @@ export function useAssessment(): UseAssessmentReturn {
         timestamp: new Date(),
       });
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to start assessment");
-      console.error("Error starting assessment:", err);
+      setError(err instanceof Error ? err.message : 'Failed to start assessment');
+      console.error('Error starting assessment:', err);
     } finally {
       setIsLoading(false);
     }
@@ -89,14 +89,16 @@ export function useAssessment(): UseAssessmentReturn {
   const submitAnswer = useCallback(
     async (questionId: string, answer: QuestionAnswer) => {
       if (!currentSession) {
-        throw new Error("No active assessment session");
+        throw new Error('No active assessment session');
       }
 
       try {
         setError(null);
 
         // Update session with answer
-  const updatedAnswers = Array.isArray(currentSession.answers) ? [...currentSession.answers] : [];
+        const updatedAnswers = Array.isArray(currentSession.answers)
+          ? [...currentSession.answers]
+          : [];
         const existingAnswerIndex = updatedAnswers.findIndex((a) => a.questionId === questionId);
 
         if (existingAnswerIndex >= 0) {
@@ -119,17 +121,18 @@ export function useAssessment(): UseAssessmentReturn {
 
         // Track answer submission (provide normalized 'selectedAnswers' and keep 'answer' for compatibility)
         await AnalyticsService.track({
-          type: "question_answered",
-          userId: currentSession.userId ?? "",
+          type: 'question_answered',
+          userId: currentSession.userId ?? '',
           sessionId: currentSession.id,
           data: {
             sessionId: currentSession.id,
             questionId,
-            selectedAnswers: ((answer as any).selectedAnswers ?? (
-              Array.isArray((answer as any).selectedAnswer)
+            selectedAnswers: (
+              (answer as any).selectedAnswers ??
+              (Array.isArray((answer as any).selectedAnswer)
                 ? (answer as any).selectedAnswer
-                : [(answer as any).selectedAnswer]
-            )).filter(Boolean),
+                : [(answer as any).selectedAnswer])
+            ).filter(Boolean),
             // Backward compatible alias
             answer: (answer as any).selectedAnswers ?? (answer as any).selectedAnswer,
             timeSpent: (answer as any).timeSpent ?? 0,
@@ -139,8 +142,8 @@ export function useAssessment(): UseAssessmentReturn {
           timestamp: new Date(),
         });
       } catch (err) {
-        setError(err instanceof Error ? err.message : "Failed to submit answer");
-        console.error("Error submitting answer:", err);
+        setError(err instanceof Error ? err.message : 'Failed to submit answer');
+        console.error('Error submitting answer:', err);
       }
     },
     [currentSession]
@@ -148,7 +151,7 @@ export function useAssessment(): UseAssessmentReturn {
 
   const submitAssessment = useCallback(async (): Promise<AssessmentResult> => {
     if (!currentSession) {
-      throw new Error("No active assessment session");
+      throw new Error('No active assessment session');
     }
 
     try {
@@ -161,7 +164,7 @@ export function useAssessment(): UseAssessmentReturn {
       // Update session status
       const completedSession = {
         ...currentSession,
-        status: "completed" as const,
+        status: 'completed' as const,
         completedAt: new Date(),
         score: result.overallScore,
         passed: result.passed,
@@ -172,23 +175,23 @@ export function useAssessment(): UseAssessmentReturn {
 
       // Update progress tracking (keys aligned with tests)
       await ProgressService.updateAssessmentProgress({
-        userId: (currentSession.userId ?? "") as any,
+        userId: (currentSession.userId ?? '') as any,
         moduleId: currentSession.moduleId as any,
         assessmentId: currentSession.assessmentId as any,
-        score: (result).overallScore,
-        passed: (result).passed,
-        completedAt: (result).completedAt,
-        timeSpent: (result).timeSpent ?? (result).totalTime ?? 0,
-        correctAnswers: (result).correctAnswers ?? 0,
-        incorrectAnswers: (result).incorrectAnswers ?? 0,
-        totalQuestions: (result).totalQuestions ?? 0,
-        domainBreakdown: (result).domainBreakdown,
+        score: result.overallScore,
+        passed: result.passed,
+        completedAt: result.completedAt,
+        timeSpent: result.timeSpent ?? result.totalTime ?? 0,
+        correctAnswers: result.correctAnswers ?? 0,
+        incorrectAnswers: result.incorrectAnswers ?? 0,
+        totalQuestions: result.totalQuestions ?? 0,
+        domainBreakdown: result.domainBreakdown,
       } as any);
 
       // Track assessment completion
       await AnalyticsService.track({
-        type: "assessment_completed",
-        userId: currentSession.userId ?? "",
+        type: 'assessment_completed',
+        userId: currentSession.userId ?? '',
         sessionId: currentSession.id,
         data: {
           sessionId: currentSession.id,
@@ -197,15 +200,15 @@ export function useAssessment(): UseAssessmentReturn {
           timeSpent: result.timeSpent,
           correctAnswers: result.correctAnswers,
           totalQuestions: result.totalQuestions,
-          domainBreakdown: (result).domainBreakdown,
+          domainBreakdown: result.domainBreakdown,
         },
         timestamp: new Date(),
       });
 
       return result;
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to submit assessment");
-      console.error("Error submitting assessment:", err);
+      setError(err instanceof Error ? err.message : 'Failed to submit assessment');
+      console.error('Error submitting assessment:', err);
       throw err;
     } finally {
       setIsLoading(false);
@@ -216,12 +219,14 @@ export function useAssessment(): UseAssessmentReturn {
     if (currentSession) {
       // Track assessment cancellation
       AnalyticsService.track({
-        type: "assessment_cancelled",
+        type: 'assessment_cancelled',
         userId: currentSession.userId,
         sessionId: currentSession.id,
         data: {
           sessionId: currentSession.id,
-          questionsAnswered: Array.isArray(currentSession.answers) ? currentSession.answers.length : 0,
+          questionsAnswered: Array.isArray(currentSession.answers)
+            ? currentSession.answers.length
+            : 0,
           totalQuestions: currentSession.questions.length,
           timeSpent: Date.now() - currentSession.startTime.getTime(),
         },
@@ -239,7 +244,7 @@ export function useAssessment(): UseAssessmentReturn {
     try {
       await ProgressService.updateQuestionProgress(progress);
     } catch (err) {
-      console.error("Error updating progress:", err);
+      console.error('Error updating progress:', err);
     }
   }, []);
 
@@ -247,7 +252,7 @@ export function useAssessment(): UseAssessmentReturn {
     try {
       return await ProgressService.getUserProgress(userId, moduleId);
     } catch (err) {
-      console.error("Error getting progress:", err);
+      console.error('Error getting progress:', err);
       return null;
     }
   }, []);
@@ -256,7 +261,7 @@ export function useAssessment(): UseAssessmentReturn {
     try {
       await AnalyticsService.track(event);
     } catch (err) {
-      console.error("Error tracking event:", err);
+      console.error('Error tracking event:', err);
     }
   }, []);
 
@@ -264,7 +269,7 @@ export function useAssessment(): UseAssessmentReturn {
     try {
       return await AnalyticsService.getUserAnalytics(userId, timeRange);
     } catch (err) {
-      console.error("Error getting analytics:", err);
+      console.error('Error getting analytics:', err);
       return null;
     }
   }, []);
@@ -272,11 +277,11 @@ export function useAssessment(): UseAssessmentReturn {
   // Cleanup on unmount
   useEffect(() => {
     return () => {
-      if (currentSession && currentSession.status === "in_progress") {
+      if (currentSession && currentSession.status === 'in_progress') {
         cancelAssessment();
       }
     };
-  }, []);
+  }, [cancelAssessment, currentSession]);
 
   return {
     currentSession,

@@ -3,7 +3,7 @@
  * Playwright-based end-to-end tests for critical user journeys
  */
 
-import { test, expect, Page, BrowserContext } from '@playwright/test';
+import { BrowserContext, expect, type Page, test } from '@playwright/test';
 
 // Test configuration
 const BASE_URL = process.env.PLAYWRIGHT_TEST_URL || 'http://localhost:3000';
@@ -38,7 +38,7 @@ test.describe('Homepage and Navigation', () => {
       { link: 'Modules', url: '/modules' },
       { link: 'Practice', url: '/practice' },
       { link: 'Exam', url: '/exam' },
-      { link: 'Progress', url: '/progress' }
+      { link: 'Progress', url: '/progress' },
     ];
 
     for (const section of sections) {
@@ -87,7 +87,7 @@ test.describe('Authentication Flow', () => {
     await page.click('button[type="submit"]');
 
     // Should redirect to dashboard or email verification
-    await expect(page).toHaveURL(new RegExp('/(dashboard|verify-email)'));
+    await expect(page).toHaveURL(/\/(dashboard|verify-email)/);
   });
 
   test('should handle login with valid credentials', async ({ page }) => {
@@ -139,7 +139,7 @@ test.describe('Module Content Navigation', () => {
       'Refining Questions',
       'Taking Action',
       'Navigation',
-      'Reporting'
+      'Reporting',
     ];
 
     for (const module of modules) {
@@ -437,7 +437,7 @@ test.describe('Responsive Design', () => {
   const viewports = [
     { name: 'Mobile', width: 375, height: 667 },
     { name: 'Tablet', width: 768, height: 1024 },
-    { name: 'Desktop', width: 1920, height: 1080 }
+    { name: 'Desktop', width: 1920, height: 1080 },
   ];
 
   for (const viewport of viewports) {
@@ -448,7 +448,7 @@ test.describe('Responsive Design', () => {
       // Take screenshot for visual regression
       await page.screenshot({
         path: `screenshots/${viewport.name.toLowerCase()}-homepage.png`,
-        fullPage: true
+        fullPage: true,
       });
 
       // Check key elements are visible
@@ -573,7 +573,7 @@ test.describe('Error Handling', () => {
 
   test('should handle network errors gracefully', async ({ page, context }) => {
     // Block API calls
-    await context.route('**/api/**', route => route.abort());
+    await context.route('**/api/**', (route) => route.abort());
 
     await page.goto(`${BASE_URL}/practice`);
 
@@ -622,7 +622,7 @@ test.describe('Third-party Integrations', () => {
       // Should open payment modal or redirect
       await page.waitForTimeout(1000);
       const stripeFrame = page.frameLocator('iframe[name*="stripe"]');
-      const hasStripe = await stripeFrame.locator('*').count() > 0;
+      const hasStripe = (await stripeFrame.locator('*').count()) > 0;
       expect(hasStripe || page.url().includes('stripe')).toBeTruthy();
     }
   });
@@ -638,8 +638,5 @@ export default {
   },
   retries: 2,
   workers: 4,
-  reporter: [
-    ['html'],
-    ['junit', { outputFile: 'test-results.xml' }]
-  ]
+  reporter: [['html'], ['junit', { outputFile: 'test-results.xml' }]],
 };

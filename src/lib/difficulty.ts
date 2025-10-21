@@ -24,9 +24,14 @@ export function canonicalizeDifficulty(input: string | undefined | null): Diffic
   }
 }
 
-export function defaultDifficultyRecord<T>(valueFactory: (d: Difficulty) => T): Record<Difficulty, T> {
-  return ALL_DIFFICULTIES.reduce((acc, d) => {
-    acc[d] = valueFactory(d);
-    return acc;
-  }, {} as Record<Difficulty, T>);
+export function defaultDifficultyRecord<T>(
+  valueFactory: (d: Difficulty) => T
+): Record<Difficulty, T> {
+  return ALL_DIFFICULTIES.reduce(
+    (acc, d) => {
+      acc[d] = valueFactory(d);
+      return acc;
+    },
+    {} as Record<Difficulty, T>
+  );
 }

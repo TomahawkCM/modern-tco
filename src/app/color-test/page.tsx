@@ -1,13 +1,20 @@
-"use client";
+'use client';
 
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Skeleton } from "@/components/ui/skeleton";
-import { AlertCircle, CheckCircle2, Info, XCircle } from "lucide-react";
+import { AlertCircle, CheckCircle2, Info, XCircle } from 'lucide-react';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Skeleton } from '@/components/ui/skeleton';
 
 export default function ColorTestPage() {
   return (
@@ -16,8 +23,8 @@ export default function ColorTestPage() {
       <div className="text-center space-y-4">
         <h1 className="text-4xl font-bold text-foreground">Color System Test Page</h1>
         <p className="text-muted-foreground max-w-2xl mx-auto">
-          Comprehensive visualization of the unified color system with WCAG AA compliant contrast ratios.
-          All components use semantic tokens for consistency and maintainability.
+          Comprehensive visualization of the unified color system with WCAG AA compliant contrast
+          ratios. All components use semantic tokens for consistency and maintainability.
         </p>
       </div>
 
@@ -68,7 +75,9 @@ export default function ColorTestPage() {
                 <div className="h-20 bg-primary rounded flex items-center justify-center">
                   <span className="text-primary-foreground font-medium">bg-primary</span>
                 </div>
-                <p className="text-sm text-muted-foreground">text-primary-foreground (10:1 ratio)</p>
+                <p className="text-sm text-muted-foreground">
+                  text-primary-foreground (10:1 ratio)
+                </p>
               </div>
             </CardContent>
           </Card>
@@ -84,7 +93,9 @@ export default function ColorTestPage() {
                 <div className="h-20 bg-secondary rounded flex items-center justify-center">
                   <span className="text-secondary-foreground font-medium">bg-secondary</span>
                 </div>
-                <p className="text-sm text-muted-foreground">text-secondary-foreground (9:1 ratio)</p>
+                <p className="text-sm text-muted-foreground">
+                  text-secondary-foreground (9:1 ratio)
+                </p>
               </div>
             </CardContent>
           </Card>
@@ -100,7 +111,9 @@ export default function ColorTestPage() {
                 <div className="h-20 bg-muted rounded flex items-center justify-center">
                   <span className="text-muted-foreground font-medium">bg-muted</span>
                 </div>
-                <p className="text-sm text-muted-foreground">text-muted-foreground (7:1 ratio - AAA)</p>
+                <p className="text-sm text-muted-foreground">
+                  text-muted-foreground (7:1 ratio - AAA)
+                </p>
               </div>
             </CardContent>
           </Card>
@@ -137,9 +150,15 @@ export default function ColorTestPage() {
               <Button variant="link">Link Button</Button>
             </div>
             <div className="mt-6 flex flex-wrap gap-4">
-              <Button variant="default" size="sm">Small</Button>
-              <Button variant="default" size="default">Default</Button>
-              <Button variant="default" size="lg">Large</Button>
+              <Button variant="default" size="sm">
+                Small
+              </Button>
+              <Button variant="default" size="default">
+                Default
+              </Button>
+              <Button variant="default" size="lg">
+                Large
+              </Button>
               <Button variant="default" size="icon">
                 <CheckCircle2 className="h-4 w-4" />
               </Button>
@@ -171,7 +190,8 @@ export default function ColorTestPage() {
             <Info className="h-4 w-4" />
             <AlertTitle>Information</AlertTitle>
             <AlertDescription>
-              This is a default alert with informational content. All text maintains proper contrast ratios.
+              This is a default alert with informational content. All text maintains proper contrast
+              ratios.
             </AlertDescription>
           </Alert>
 
@@ -269,8 +289,12 @@ export default function ColorTestPage() {
             <h2 className="text-3xl font-bold text-foreground">Heading 2 - Foreground</h2>
             <h3 className="text-2xl font-bold text-foreground">Heading 3 - Foreground</h3>
             <p className="text-foreground">Body text using text-foreground (18:1 ratio)</p>
-            <p className="text-muted-foreground">Muted text using text-muted-foreground (7:1 ratio - WCAG AAA)</p>
-            <p className="text-sm text-muted-foreground">Small muted text for captions and metadata</p>
+            <p className="text-muted-foreground">
+              Muted text using text-muted-foreground (7:1 ratio - WCAG AAA)
+            </p>
+            <p className="text-sm text-muted-foreground">
+              Small muted text for captions and metadata
+            </p>
           </CardContent>
         </Card>
       </section>

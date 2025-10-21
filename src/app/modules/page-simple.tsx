@@ -2,7 +2,7 @@
  * Simplified Modules Page for debugging
  */
 
-"use client";
+'use client';
 
 export default function ModulesPageSimple() {
   return (

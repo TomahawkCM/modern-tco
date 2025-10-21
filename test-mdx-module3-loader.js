@@ -11,7 +11,13 @@ async function testModuleLoader() {
   console.log('🧪 Testing Module 3 MDX Loader Integration...\n');
 
   // Test the expanded Module 3 file
-  const modulePath = path.join(__dirname, 'src', 'content', 'modules', '03-taking-action-packages-actions.mdx');
+  const modulePath = path.join(
+    __dirname,
+    'src',
+    'content',
+    'modules',
+    '03-taking-action-packages-actions.mdx'
+  );
 
   try {
     // Check if file exists
@@ -29,8 +35,15 @@ async function testModuleLoader() {
     console.log(`📄 Content length: ${rawContent.length} characters`);
 
     // Validate frontmatter structure
-    const requiredFields = ['id', 'title', 'domainSlug', 'domainEnum', 'difficulty', 'estimatedTime'];
-    const missingFields = requiredFields.filter(field => !(field in frontmatter));
+    const requiredFields = [
+      'id',
+      'title',
+      'domainSlug',
+      'domainEnum',
+      'difficulty',
+      'estimatedTime',
+    ];
+    const missingFields = requiredFields.filter((field) => !(field in frontmatter));
 
     if (missingFields.length > 0) {
       console.log(`❌ Missing frontmatter fields: ${missingFields.join(', ')}`);
@@ -52,19 +65,23 @@ async function testModuleLoader() {
     if (frontmatter.domainSlug === expectedDomainSlug) {
       console.log('✅ Domain slug matches expected value');
     } else {
-      console.log(`⚠️  Domain slug mismatch. Expected: ${expectedDomainSlug}, Got: ${frontmatter.domainSlug}`);
+      console.log(
+        `⚠️  Domain slug mismatch. Expected: ${expectedDomainSlug}, Got: ${frontmatter.domainSlug}`
+      );
     }
 
     // Analyze content sections
-    const sections = rawContent.split(/^##\s/m).filter(section => section.trim().length > 0);
+    const sections = rawContent.split(/^##\s/m).filter((section) => section.trim().length > 0);
     console.log(`\n📚 Content Analysis:`);
     console.log(`   Total sections: ${sections.length}`);
 
     // Extract section titles
-    const sectionTitles = sections.map(section => {
-      const firstLine = section.split('\n')[0];
-      return firstLine.replace(/^##\s*/, '').trim();
-    }).filter(title => title.length > 0);
+    const sectionTitles = sections
+      .map((section) => {
+        const firstLine = section.split('\n')[0];
+        return firstLine.replace(/^##\s*/, '').trim();
+      })
+      .filter((title) => title.length > 0);
 
     console.log(`   Section titles:`);
     sectionTitles.forEach((title, index) => {
@@ -76,11 +93,11 @@ async function testModuleLoader() {
       'PracticeButton',
       'InteractiveCodeBlock',
       'TaniumConsole',
-      'VideoPlayer'
+      'VideoPlayer',
     ];
 
     console.log(`\n🔧 Interactive Components Check:`);
-    interactiveElements.forEach(element => {
+    interactiveElements.forEach((element) => {
       const count = (rawContent.match(new RegExp(`<${element}`, 'g')) || []).length;
       if (count > 0) {
         console.log(`   ✅ ${element}: ${count} instances`);
@@ -92,7 +109,7 @@ async function testModuleLoader() {
     // Check for HTML entity issues
     const htmlEntities = ['&lt;', '&gt;', '&amp;', '&quot;'];
     console.log(`\n🔍 HTML Entity Check:`);
-    htmlEntities.forEach(entity => {
+    htmlEntities.forEach((entity) => {
       const count = (rawContent.match(new RegExp(entity, 'g')) || []).length;
       if (count > 0) {
         console.log(`   ⚠️  ${entity}: ${count} instances found`);
@@ -108,7 +125,7 @@ async function testModuleLoader() {
 
     // Check for different code block types
     const languages = ['bash', 'powershell', 'tanium', 'yaml', 'json'];
-    languages.forEach(lang => {
+    languages.forEach((lang) => {
       const count = (rawContent.match(new RegExp(`\`\`\`${lang}`, 'g')) || []).length;
       if (count > 0) {
         console.log(`   ${lang}: ${count} blocks`);
@@ -122,21 +139,20 @@ async function testModuleLoader() {
       frontmatter,
       contentLength: rawContent.length,
       sectionCount: sections.length,
-      codeBlockCount: codeBlocks.length
+      codeBlockCount: codeBlocks.length,
     };
-
   } catch (error) {
     console.error('❌ Module 3 MDX Loader Test Failed:', error.message);
     return {
       success: false,
-      error: error.message
+      error: error.message,
     };
   }
 }
 
 // Run the test
 testModuleLoader()
-  .then(result => {
+  .then((result) => {
     if (result.success) {
       console.log('\n✅ All tests passed! Module 3 is ready for integration.');
       process.exit(0);
@@ -145,7 +161,7 @@ testModuleLoader()
       process.exit(1);
     }
   })
-  .catch(error => {
+  .catch((error) => {
     console.error('❌ Test execution failed:', error);
     process.exit(1);
   });

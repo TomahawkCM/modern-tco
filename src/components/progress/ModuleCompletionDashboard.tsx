@@ -1,14 +1,11 @@
-"use client";
+'use client';
 
-import { useState, useEffect } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Progress } from "@/components/ui/progress";
-import { BookOpen, CheckCircle2, Target, Clock } from "lucide-react";
-import {
-  calculateModuleProgress,
-  type ModuleProgress,
-} from "@/lib/progressVisualization";
+import { BookOpen, CheckCircle2, Clock, Target } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { Badge } from '@/components/ui/badge';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Progress } from '@/components/ui/progress';
+import { calculateModuleProgress, type ModuleProgress } from '@/lib/progressVisualization';
 
 interface ModuleCompletionDashboardProps {
   /** Custom className */
@@ -24,10 +21,7 @@ interface ModuleCompletionDashboardProps {
  *
  * Research: Progress tracking increases goal achievement by 32% (Locke & Latham, 2002)
  */
-export function ModuleCompletionDashboard({
-  className,
-  moduleId,
-}: ModuleCompletionDashboardProps) {
+export function ModuleCompletionDashboard({ className, moduleId }: ModuleCompletionDashboardProps) {
   const [modules, setModules] = useState<ModuleProgress[]>([]);
   const [totalProgress, setTotalProgress] = useState(0);
 
@@ -36,27 +30,28 @@ export function ModuleCompletionDashboard({
 
     // Listen for review updates
     const handleStorageChange = (e: StorageEvent) => {
-      if (e.key === "review-items") {
+      if (e.key === 'review-items') {
         loadProgress();
       }
     };
 
-    window.addEventListener("storage", handleStorageChange);
-    return () => window.removeEventListener("storage", handleStorageChange);
-  }, [moduleId]);
+    window.addEventListener('storage', handleStorageChange);
+    return () => window.removeEventListener('storage', handleStorageChange);
+  }, [loadProgress]);
 
   function loadProgress() {
     let moduleData = calculateModuleProgress();
 
     if (moduleId) {
-      moduleData = moduleData.filter(m => m.moduleId === moduleId);
+      moduleData = moduleData.filter((m) => m.moduleId === moduleId);
     }
 
     setModules(moduleData);
 
     // Calculate overall progress
     if (moduleData.length > 0) {
-      const avgCompletion = moduleData.reduce((sum, m) => sum + m.completionPercentage, 0) / moduleData.length;
+      const avgCompletion =
+        moduleData.reduce((sum, m) => sum + m.completionPercentage, 0) / moduleData.length;
       setTotalProgress(avgCompletion);
     }
   }
@@ -81,17 +76,17 @@ export function ModuleCompletionDashboard({
   }
 
   const getCompletionColor = (percentage: number) => {
-    if (percentage >= 80) return "text-[#22c55e] border-green-400";
-    if (percentage >= 60) return "text-primary border-blue-400";
-    if (percentage >= 40) return "text-[#f97316] border-yellow-400";
-    return "text-orange-400 border-orange-400";
+    if (percentage >= 80) return 'text-[#22c55e] border-green-400';
+    if (percentage >= 60) return 'text-primary border-blue-400';
+    if (percentage >= 40) return 'text-[#f97316] border-yellow-400';
+    return 'text-orange-400 border-orange-400';
   };
 
   const getRetentionColor = (retention: number) => {
-    if (retention >= 90) return "text-[#22c55e]";
-    if (retention >= 70) return "text-primary";
-    if (retention >= 50) return "text-[#f97316]";
-    return "text-orange-400";
+    if (retention >= 90) return 'text-[#22c55e]';
+    if (retention >= 70) return 'text-primary';
+    if (retention >= 50) return 'text-[#f97316]';
+    return 'text-orange-400';
   };
 
   return (
@@ -130,13 +125,16 @@ export function ModuleCompletionDashboard({
               <div>
                 <div className="text-xs text-muted-foreground mb-1">Completed</div>
                 <div className="text-lg font-bold text-[#22c55e]">
-                  {modules.filter(m => m.completionPercentage >= 80).length}
+                  {modules.filter((m) => m.completionPercentage >= 80).length}
                 </div>
               </div>
               <div>
                 <div className="text-xs text-muted-foreground mb-1">In Progress</div>
                 <div className="text-lg font-bold text-primary">
-                  {modules.filter(m => m.completionPercentage > 0 && m.completionPercentage < 80).length}
+                  {
+                    modules.filter((m) => m.completionPercentage > 0 && m.completionPercentage < 80)
+                      .length
+                  }
                 </div>
               </div>
             </div>
@@ -187,9 +185,7 @@ export function ModuleCompletionDashboard({
               <div className="grid grid-cols-3 gap-3">
                 <div className="rounded border border-gray-700 bg-card/50 p-2 text-center">
                   <div className="text-xs text-muted-foreground mb-1">Started</div>
-                  <div className="text-sm font-semibold text-primary">
-                    {module.conceptsStarted}
-                  </div>
+                  <div className="text-sm font-semibold text-primary">{module.conceptsStarted}</div>
                 </div>
                 <div className="rounded border border-gray-700 bg-card/50 p-2 text-center">
                   <div className="text-xs text-muted-foreground mb-1">Mastered</div>
@@ -199,7 +195,9 @@ export function ModuleCompletionDashboard({
                 </div>
                 <div className="rounded border border-gray-700 bg-card/50 p-2 text-center">
                   <div className="text-xs text-muted-foreground mb-1">Retention</div>
-                  <div className={`text-sm font-semibold ${getRetentionColor(module.averageRetention)}`}>
+                  <div
+                    className={`text-sm font-semibold ${getRetentionColor(module.averageRetention)}`}
+                  >
                     {Math.round(module.averageRetention)}%
                   </div>
                 </div>
@@ -209,9 +207,7 @@ export function ModuleCompletionDashboard({
               <div className="flex items-center gap-2 text-xs">
                 <div className="flex-1 flex items-center gap-1">
                   <div className="w-2 h-2 rounded-full bg-[#22c55e]" />
-                  <span className="text-muted-foreground">
-                    Mastered: {module.conceptsMastered}
-                  </span>
+                  <span className="text-muted-foreground">Mastered: {module.conceptsMastered}</span>
                 </div>
                 <div className="flex-1 flex items-center gap-1">
                   <div className="w-2 h-2 rounded-full bg-primary" />

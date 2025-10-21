@@ -1,24 +1,14 @@
-"use client";
+'use client';
 
-import { useState, useEffect } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Progress } from "@/components/ui/progress";
-import { Badge } from "@/components/ui/badge";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import {
-  BookOpen,
-  CheckCircle,
-  Clock,
-  Play,
-  ArrowLeft,
-  ArrowRight,
-  Trophy,
-  Target,
-  Brain,
-} from "lucide-react";
-import { type Module, ModuleSection, type ModuleProgress } from "@/data/modules/module-definitions";
-import { cn } from "@/lib/utils";
+import { ArrowLeft, ArrowRight, BookOpen, CheckCircle, Clock, Target, Trophy } from 'lucide-react';
+import { useState } from 'react';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Progress } from '@/components/ui/progress';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import type { Module, ModuleProgress } from '@/data/modules/module-definitions';
+import { cn } from '@/lib/utils';
 
 interface ModuleViewerProps {
   module: Module;
@@ -50,32 +40,32 @@ export function ModuleViewer({
   const getDomainColors = (domain: string) => {
     const colors = {
       ASKING_QUESTIONS: {
-        color: "text-[#22c55e]",
-        bgColor: "bg-green-900/20",
-        borderColor: "border-green-400",
+        color: 'text-[#22c55e]',
+        bgColor: 'bg-green-900/20',
+        borderColor: 'border-green-400',
       },
       REFINING_QUESTIONS: {
-        color: "text-primary",
-        bgColor: "bg-blue-900/20",
-        borderColor: "border-blue-400",
+        color: 'text-primary',
+        bgColor: 'bg-blue-900/20',
+        borderColor: 'border-blue-400',
       },
       TAKING_ACTION: {
-        color: "text-primary",
-        bgColor: "bg-primary/20",
-        borderColor: "border-cyan-400",
+        color: 'text-primary',
+        bgColor: 'bg-primary/20',
+        borderColor: 'border-cyan-400',
       },
       NAVIGATION_MODULES: {
-        color: "text-[#f97316]",
-        bgColor: "bg-yellow-900/20",
-        borderColor: "border-yellow-400",
+        color: 'text-[#f97316]',
+        bgColor: 'bg-yellow-900/20',
+        borderColor: 'border-yellow-400',
       },
       REPORTING_EXPORT: {
-        color: "text-red-400",
-        bgColor: "bg-red-900/20",
-        borderColor: "border-red-400",
+        color: 'text-red-400',
+        bgColor: 'bg-red-900/20',
+        borderColor: 'border-red-400',
       },
     };
-    return colors[domain as keyof typeof colors] || colors["NAVIGATION_MODULES"];
+    return colors[domain as keyof typeof colors] || colors.NAVIGATION_MODULES;
   };
 
   const domainColors = getDomainColors(module.domain);
@@ -115,9 +105,9 @@ export function ModuleViewer({
   const isFirstSection = currentSection === 0;
 
   return (
-    <div className={cn("space-y-6", className)}>
+    <div className={cn('space-y-6', className)}>
       {/* Module Header */}
-      <Card className={cn("glass border-2", domainColors.borderColor, domainColors.bgColor)}>
+      <Card className={cn('glass border-2', domainColors.borderColor, domainColors.bgColor)}>
         <CardHeader>
           <div className="flex items-start justify-between">
             <div className="flex items-center gap-4">
@@ -126,15 +116,15 @@ export function ModuleViewer({
                 <CardTitle className="text-2xl text-foreground">{module.title}</CardTitle>
                 <p className="mt-2 text-muted-foreground">{module.description}</p>
                 <div className="mt-3 flex items-center gap-4">
-                  <Badge variant="outline" className={cn("border-white/20", domainColors.color)}>
+                  <Badge variant="outline" className={cn('border-white/20', domainColors.color)}>
                     <Clock className="mr-1 h-3 w-3" />
                     {module.estimatedTime}
                   </Badge>
-                  <Badge variant="outline" className={cn("border-white/20", domainColors.color)}>
+                  <Badge variant="outline" className={cn('border-white/20', domainColors.color)}>
                     <Target className="mr-1 h-3 w-3" />
                     {module.objectives.length} objectives
                   </Badge>
-                  <Badge variant="outline" className={cn("border-white/20", domainColors.color)}>
+                  <Badge variant="outline" className={cn('border-white/20', domainColors.color)}>
                     <Trophy className="mr-1 h-3 w-3" />
                     {module.examWeight}% exam weight
                   </Badge>
@@ -177,7 +167,10 @@ export function ModuleViewer({
       {/* Module Content Tabs */}
       <Tabs defaultValue="content" className="space-y-6">
         <TabsList className="glass grid w-full grid-cols-3 border border-white/10">
-          <TabsTrigger value="content" className="text-foreground data-[state=active]:bg-tanium-accent">
+          <TabsTrigger
+            value="content"
+            className="text-foreground data-[state=active]:bg-tanium-accent"
+          >
             <BookOpen className="mr-2 h-4 w-4" />
             Content
           </TabsTrigger>
@@ -188,7 +181,10 @@ export function ModuleViewer({
             <Target className="mr-2 h-4 w-4" />
             Objectives
           </TabsTrigger>
-          <TabsTrigger value="progress" className="text-foreground data-[state=active]:bg-tanium-accent">
+          <TabsTrigger
+            value="progress"
+            className="text-foreground data-[state=active]:bg-tanium-accent"
+          >
             <Trophy className="mr-2 h-4 w-4" />
             Progress
           </TabsTrigger>
@@ -275,11 +271,11 @@ export function ModuleViewer({
                   <div
                     key={section.id}
                     className={cn(
-                      "flex cursor-pointer items-center justify-between rounded-lg border p-4 transition-colors",
+                      'flex cursor-pointer items-center justify-between rounded-lg border p-4 transition-colors',
                       currentSection === index
-                        ? "border-tanium-accent bg-tanium-accent/10"
-                        : "border-white/10 hover:border-white/20",
-                      completedSections.has(section.id) && "border-green-400 bg-green-900/20"
+                        ? 'border-tanium-accent bg-tanium-accent/10'
+                        : 'border-white/10 hover:border-white/20',
+                      completedSections.has(section.id) && 'border-green-400 bg-green-900/20'
                     )}
                     onClick={() => setCurrentSection(index)}
                   >
@@ -320,10 +316,10 @@ export function ModuleViewer({
                   <div
                     key={objective.id}
                     className={cn(
-                      "flex cursor-pointer items-start gap-4 rounded-lg border p-4 transition-colors",
+                      'flex cursor-pointer items-start gap-4 rounded-lg border p-4 transition-colors',
                       completedObjectives.has(objective.id)
-                        ? "border-green-400 bg-green-900/20"
-                        : "border-white/10 hover:border-white/20"
+                        ? 'border-green-400 bg-green-900/20'
+                        : 'border-white/10 hover:border-white/20'
                     )}
                     onClick={() => handleObjectiveToggle(objective.id)}
                   >
@@ -333,10 +329,10 @@ export function ModuleViewer({
                       </div>
                       <div
                         className={cn(
-                          "flex h-5 w-5 items-center justify-center rounded border-2 transition-colors",
+                          'flex h-5 w-5 items-center justify-center rounded border-2 transition-colors',
                           completedObjectives.has(objective.id)
-                            ? "border-green-400 bg-green-400"
-                            : "border-white/20 hover:border-white/40"
+                            ? 'border-green-400 bg-green-400'
+                            : 'border-white/20 hover:border-white/40'
                         )}
                       >
                         {completedObjectives.has(objective.id) && (
@@ -347,8 +343,8 @@ export function ModuleViewer({
                     <div className="flex-1">
                       <p
                         className={cn(
-                          "leading-relaxed text-foreground",
-                          completedObjectives.has(objective.id) && "line-through opacity-60"
+                          'leading-relaxed text-foreground',
+                          completedObjectives.has(objective.id) && 'line-through opacity-60'
                         )}
                       >
                         {objective.text}
@@ -422,8 +418,8 @@ export function ModuleViewer({
                 <div className="space-y-3">
                   <div className="flex justify-between">
                     <span className="text-muted-foreground">Domain</span>
-                    <Badge className={cn("text-xs", domainColors.color, domainColors.bgColor)}>
-                      {module.domain.replace("_", " ")}
+                    <Badge className={cn('text-xs', domainColors.color, domainColors.bgColor)}>
+                      {module.domain.replace('_', ' ')}
                     </Badge>
                   </div>
 

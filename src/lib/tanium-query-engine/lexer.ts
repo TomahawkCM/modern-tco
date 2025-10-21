@@ -3,7 +3,7 @@
  * High-performance lexical analyzer for TQL syntax
  */
 
-import { type Token, TokenType, QueryError } from './types';
+import { QueryError, type Token, TokenType } from './types';
 
 export class Lexer {
   private input: string;
@@ -155,13 +155,26 @@ export class Lexer {
       if (escaped) {
         // Handle escape sequences
         switch (char) {
-          case 'n': value += '\n'; break;
-          case 't': value += '\t'; break;
-          case 'r': value += '\r'; break;
-          case '\\': value += '\\'; break;
-          case '"': value += '"'; break;
-          case "'": value += "'"; break;
-          default: value += char;
+          case 'n':
+            value += '\n';
+            break;
+          case 't':
+            value += '\t';
+            break;
+          case 'r':
+            value += '\r';
+            break;
+          case '\\':
+            value += '\\';
+            break;
+          case '"':
+            value += '"';
+            break;
+          case "'":
+            value += "'";
+            break;
+          default:
+            value += char;
         }
         escaped = false;
       } else if (char === '\\') {
@@ -174,12 +187,7 @@ export class Lexer {
     }
 
     if (this.isEOF()) {
-      throw new QueryError(
-        `Unterminated string literal`,
-        startPos,
-        startLine,
-        startColumn
-      );
+      throw new QueryError(`Unterminated string literal`, startPos, startLine, startColumn);
     }
 
     this.advance(); // Skip closing quote
@@ -225,7 +233,10 @@ export class Lexer {
     let value = '';
 
     // Read identifier characters
-    while (!this.isEOF() && (this.isAlphaNumeric(this.peek()) || this.peek() === '_' || this.peek() === ' ')) {
+    while (
+      !this.isEOF() &&
+      (this.isAlphaNumeric(this.peek()) || this.peek() === '_' || this.peek() === ' ')
+    ) {
       const char = this.peek();
 
       // Check if space is part of a multi-word identifier (e.g., "Computer Name")
@@ -256,7 +267,11 @@ export class Lexer {
 
     if (keywordType) {
       // Special handling for aggregate functions
-      if ([TokenType.COUNT, TokenType.MIN, TokenType.MAX, TokenType.AVG, TokenType.SUM].includes(keywordType)) {
+      if (
+        [TokenType.COUNT, TokenType.MIN, TokenType.MAX, TokenType.AVG, TokenType.SUM].includes(
+          keywordType
+        )
+      ) {
         // Look for parentheses
         this.skipWhitespace();
         if (this.peek() === '(') {
@@ -274,11 +289,26 @@ export class Lexer {
    */
   private isKnownField(name: string): boolean {
     const knownFields = [
-      'computer name', 'computer role', 'operating system', 'os platform',
-      'os version', 'disk free gb', 'memory gb', 'cpu percent',
-      'compliance score', 'group name', 'group', 'location',
-      'last reboot', 'last seen', 'service status', 'ip address',
-      'mac address', 'serial number', 'manufacturer', 'model'
+      'computer name',
+      'computer role',
+      'operating system',
+      'os platform',
+      'os version',
+      'disk free gb',
+      'memory gb',
+      'cpu percent',
+      'compliance score',
+      'group name',
+      'group',
+      'location',
+      'last reboot',
+      'last seen',
+      'service status',
+      'ip address',
+      'mac address',
+      'serial number',
+      'manufacturer',
+      'model',
     ];
 
     return knownFields.includes(name.toLowerCase());
@@ -362,7 +392,7 @@ export class Lexer {
       value,
       position: this.position,
       line: this.line,
-      column: this.column
+      column: this.column,
     };
   }
 
@@ -381,7 +411,7 @@ export class Lexer {
       value,
       position,
       line,
-      column
+      column,
     };
   }
 
@@ -396,9 +426,7 @@ export class Lexer {
    * Get formatted token list (for debugging)
    */
   public formatTokens(): string {
-    return this.tokens
-      .map(t => `${t.type}(${t.value}) @ ${t.line}:${t.column}`)
-      .join('\n');
+    return this.tokens.map((t) => `${t.type}(${t.value}) @ ${t.line}:${t.column}`).join('\n');
   }
 }
 

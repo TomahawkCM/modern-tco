@@ -1,11 +1,6 @@
-"use client";
+'use client';
 
-import { Alert, AlertDescription } from "@/components/ui/alert";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Progress } from "@/components/ui/progress";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion } from 'framer-motion';
 import {
   Award,
   BookOpen,
@@ -20,19 +15,25 @@ import {
   RotateCcw,
   Target,
   XCircle,
-} from "lucide-react";
-import React, { useCallback, useEffect, useState } from "react";
+} from 'lucide-react';
+import type React from 'react';
+import { useCallback, useEffect, useState } from 'react';
+import { Alert, AlertDescription } from '@/components/ui/alert';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Progress } from '@/components/ui/progress';
 
-import { labProgressService } from "@/lib/supabase/labProgressService";
+import { labProgressService } from '@/lib/supabase/labProgressService';
 import type {
   ConsoleState,
   LabAchievement,
   LabExercise,
   LabProgress,
   ValidationResult,
-} from "@/types/lab";
-import { CheckpointValidator } from "./CheckpointValidator";
-import { ConsoleSimulator } from "./ConsoleSimulator";
+} from '@/types/lab';
+import { CheckpointValidator } from './CheckpointValidator';
+import { ConsoleSimulator } from './ConsoleSimulator';
 
 interface LabExercisePlayerProps {
   exercise: LabExercise;
@@ -62,15 +63,15 @@ export const LabExercisePlayer: React.FC<LabExercisePlayerProps> = ({
   userId,
   onComplete,
   onExit,
-  className = "",
+  className = '',
 }) => {
   const [state, setState] = useState<PlayerState>({
     currentStepIndex: 0,
     session: null,
     stepResults: [],
     consoleState: {
-      currentModule: "interact",
-      currentView: "Questions",
+      currentModule: 'interact',
+      currentView: 'Questions',
       sessionData: {},
       queries: [],
       computerGroups: [],
@@ -108,12 +109,12 @@ export const LabExercisePlayer: React.FC<LabExercisePlayerProps> = ({
           },
         }));
       } catch (error) {
-        console.error("Failed to initialize lab session:", error);
+        console.error('Failed to initialize lab session:', error);
       }
     };
 
     void initializeSession();
-  }, [userId, exercise.id]);
+  }, [userId, exercise.id, exercise.domain, exercise.steps.length, exercise]);
 
   // Timer effect
   useEffect(() => {
@@ -139,7 +140,7 @@ export const LabExercisePlayer: React.FC<LabExercisePlayerProps> = ({
   const formatTime = (milliseconds: number): string => {
     const minutes = Math.floor(milliseconds / 60000);
     const seconds = Math.floor((milliseconds % 60000) / 1000);
-    return `${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
+    return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
   };
 
   const currentStep = exercise.steps[state.currentStepIndex];
@@ -171,7 +172,7 @@ export const LabExercisePlayer: React.FC<LabExercisePlayerProps> = ({
       const stepResult: ValidationResult = {
         success: true, // Assume passed for now
         score: 100,
-        feedback: "Step completed successfully",
+        feedback: 'Step completed successfully',
         criteria: [],
         suggestions: [],
       };
@@ -198,7 +199,7 @@ export const LabExercisePlayer: React.FC<LabExercisePlayerProps> = ({
         }, 1500);
       }
     } catch (error) {
-      console.error("Failed to validate step:", error);
+      console.error('Failed to validate step:', error);
       setState((prev) => ({ ...prev, isValidating: false }));
     }
   };
@@ -206,7 +207,7 @@ export const LabExercisePlayer: React.FC<LabExercisePlayerProps> = ({
   // Check for achievements
   const checkAchievements = async (
     stepResult: ValidationResult,
-    allResults: ValidationResult[]
+    _allResults: ValidationResult[]
   ) => {
     const newAchievements: LabAchievement[] = [];
 
@@ -214,20 +215,20 @@ export const LabExercisePlayer: React.FC<LabExercisePlayerProps> = ({
     if (stepResult.score === 100) {
       newAchievements.push({
         id: `perfect-${currentStep.id}`,
-        title: "Perfect Execution",
-        description: "Completed step with 100% accuracy",
-        type: "performance",
+        title: 'Perfect Execution',
+        description: 'Completed step with 100% accuracy',
+        type: 'performance',
         criteria: {
-          type: "score",
+          type: 'score',
           threshold: 100,
-          comparison: "equal",
+          comparison: 'equal',
         },
         reward: {
           points: 100,
-          badge: "Perfect Execution Badge",
-          title: "Perfect Execution",
+          badge: 'Perfect Execution Badge',
+          title: 'Perfect Execution',
         },
-        rarity: "rare",
+        rarity: 'rare',
       });
     }
 
@@ -237,20 +238,20 @@ export const LabExercisePlayer: React.FC<LabExercisePlayerProps> = ({
     if (timeSpent < expectedTime * 0.5) {
       newAchievements.push({
         id: `speed-${currentStep.id}`,
-        title: "Speed Demon",
-        description: "Completed step in record time",
-        type: "efficiency",
+        title: 'Speed Demon',
+        description: 'Completed step in record time',
+        type: 'efficiency',
         criteria: {
-          type: "time",
+          type: 'time',
           threshold: expectedTime * 0.5,
-          comparison: "less",
+          comparison: 'less',
         },
         reward: {
           points: 50,
-          badge: "Speed Demon Badge",
-          title: "Speed Demon",
+          badge: 'Speed Demon Badge',
+          title: 'Speed Demon',
         },
-        rarity: "uncommon",
+        rarity: 'uncommon',
       });
     }
 
@@ -258,20 +259,20 @@ export const LabExercisePlayer: React.FC<LabExercisePlayerProps> = ({
     if (!state.showHints && stepResult.score >= 90) {
       newAchievements.push({
         id: `no-hints-${currentStep.id}`,
-        title: "Independent Learner",
-        description: "Completed step without using hints",
-        type: "mastery",
+        title: 'Independent Learner',
+        description: 'Completed step without using hints',
+        type: 'mastery',
         criteria: {
-          type: "hints",
+          type: 'hints',
           threshold: 0,
-          comparison: "equal",
+          comparison: 'equal',
         },
         reward: {
           points: 75,
-          badge: "Independent Learner Badge",
-          title: "Independent Learner",
+          badge: 'Independent Learner Badge',
+          title: 'Independent Learner',
         },
-        rarity: "common",
+        rarity: 'common',
       });
     }
 
@@ -329,7 +330,7 @@ export const LabExercisePlayer: React.FC<LabExercisePlayerProps> = ({
 
       onComplete?.(results);
     } catch (error) {
-      console.error("Failed to complete exercise:", error);
+      console.error('Failed to complete exercise:', error);
     }
   };
 
@@ -340,8 +341,8 @@ export const LabExercisePlayer: React.FC<LabExercisePlayerProps> = ({
       currentStepIndex: 0,
       stepResults: [],
       consoleState: {
-        currentModule: "interact",
-        currentView: "Questions",
+        currentModule: 'interact',
+        currentView: 'Questions',
         sessionData: {},
         queries: [],
         computerGroups: [],
@@ -410,7 +411,7 @@ export const LabExercisePlayer: React.FC<LabExercisePlayerProps> = ({
             <div className="flex items-center gap-2">
               <Button variant="outline" size="sm" onClick={toggleHints}>
                 {state.showHints ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-                {state.showHints ? "Hide Hints" : "Show Hints"}
+                {state.showHints ? 'Hide Hints' : 'Show Hints'}
               </Button>
 
               <Button variant="outline" size="sm" onClick={toggleTimer}>
@@ -419,7 +420,7 @@ export const LabExercisePlayer: React.FC<LabExercisePlayerProps> = ({
                 ) : (
                   <Play className="h-4 w-4" />
                 )}
-                {state.timer.isActive ? "Pause" : "Resume"}
+                {state.timer.isActive ? 'Pause' : 'Resume'}
               </Button>
 
               <Button variant="outline" size="sm" onClick={resetExercise}>
@@ -491,7 +492,7 @@ export const LabExercisePlayer: React.FC<LabExercisePlayerProps> = ({
             {state.showHints && currentStep.hints && (
               <motion.div
                 initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: "auto" }}
+                animate={{ opacity: 1, height: 'auto' }}
                 className="rounded-lg border border-blue-200 bg-blue-50 p-4"
               >
                 <h4 className="mb-2 font-medium text-blue-900">💡 Hints:</h4>
@@ -554,7 +555,7 @@ export const LabExercisePlayer: React.FC<LabExercisePlayerProps> = ({
               initialState={state.consoleState}
               onStateChange={handleConsoleStateChange}
               onAction={(action) => {
-                console.log("Console action:", action);
+                console.log('Console action:', action);
               }}
             />
           </CardContent>
@@ -573,7 +574,7 @@ export const LabExercisePlayer: React.FC<LabExercisePlayerProps> = ({
               consoleState={state.consoleState}
               userActions={[]}
               onValidationCompleteAction={(result) => {
-                console.log("Validation complete:", result);
+                console.log('Validation complete:', result);
               }}
               onHintRequestAction={() => {
                 setState((prev) => ({ ...prev, showHints: true }));
@@ -595,7 +596,7 @@ export const LabExercisePlayer: React.FC<LabExercisePlayerProps> = ({
                 <div
                   key={index}
                   className={`rounded-lg border p-3 ${
-                    result.success ? "border-green-200 bg-green-50" : "border-red-200 bg-red-50"
+                    result.success ? 'border-green-200 bg-green-50' : 'border-red-200 bg-red-50'
                   }`}
                 >
                   <div className="mb-2 flex items-center justify-between">

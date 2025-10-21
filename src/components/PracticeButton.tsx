@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import { Button } from "@/components/ui/button";
-import { useAuth } from "@/contexts/AuthContext";
-import { usePractice } from "@/contexts/PracticeContext";
-import type { Difficulty, TCODomain } from "@/types/exam";
-import { Play, Target } from "lucide-react";
+import { Play, Target } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { useAuth } from '@/contexts/AuthContext';
+import { usePractice } from '@/contexts/PracticeContext';
+import type { Difficulty, TCODomain } from '@/types/exam';
 
 interface PracticeButtonProps {
   moduleId: string;
@@ -22,8 +22,8 @@ export default function PracticeButton({
   targetTags,
   objectiveIds,
   difficulty,
-  children = "Start Practice Session",
-  className = "",
+  children = 'Start Practice Session',
+  className = '',
 }: PracticeButtonProps) {
   const { startModulePractice, isLoading: practiceLoading } = usePractice();
   const { user, loading: authLoading } = useAuth();
@@ -33,11 +33,11 @@ export default function PracticeButton({
       domain: domainEnum as unknown as TCODomain,
       questionCount: 15,
       // Additional hints can be used by session manager if supported
-      // @ts-ignore keep flexible for future extensions
+      // @ts-expect-error keep flexible for future extensions
       targetTags,
-      // @ts-ignore keep flexible for future extensions
+      // @ts-expect-error keep flexible for future extensions
       objectiveIds,
-      // @ts-ignore keep flexible for future extensions
+      // @ts-expect-error keep flexible for future extensions
       difficulty,
     });
   };

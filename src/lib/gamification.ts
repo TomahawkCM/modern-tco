@@ -28,14 +28,14 @@ export interface PointsEntry {
 }
 
 export type PointsReason =
-  | "review_correct"
-  | "review_streak"
-  | "perfect_session"
-  | "first_review"
-  | "module_complete"
-  | "achievement_unlocked"
-  | "practice_correct"
-  | "quiz_passed";
+  | 'review_correct'
+  | 'review_streak'
+  | 'perfect_session'
+  | 'first_review'
+  | 'module_complete'
+  | 'achievement_unlocked'
+  | 'practice_correct'
+  | 'quiz_passed';
 
 export interface Achievement {
   id: string;
@@ -45,17 +45,17 @@ export interface Achievement {
   category: AchievementCategory;
   requirement: AchievementRequirement;
   points: number;
-  rarity: "common" | "uncommon" | "rare" | "epic" | "legendary";
+  rarity: 'common' | 'uncommon' | 'rare' | 'epic' | 'legendary';
   unlockedAt?: Date;
 }
 
 export type AchievementCategory =
-  | "streak"
-  | "mastery"
-  | "completion"
-  | "practice"
-  | "social"
-  | "special";
+  | 'streak'
+  | 'mastery'
+  | 'completion'
+  | 'practice'
+  | 'social'
+  | 'special';
 
 export interface AchievementRequirement {
   type: RequirementType;
@@ -64,13 +64,13 @@ export interface AchievementRequirement {
 }
 
 export type RequirementType =
-  | "review_streak_days"
-  | "perfect_sessions"
-  | "total_reviews"
-  | "module_mastery"
-  | "total_points"
-  | "items_mastered"
-  | "practice_sessions";
+  | 'review_streak_days'
+  | 'perfect_sessions'
+  | 'total_reviews'
+  | 'module_mastery'
+  | 'total_points'
+  | 'items_mastered'
+  | 'practice_sessions';
 
 export interface UserAchievements {
   userId?: string;
@@ -100,9 +100,9 @@ export const POINT_MULTIPLIERS = {
     30: 2.0,
   },
   retention: {
-    70: 1.0,  // Struggling
-    80: 1.2,  // Normal
-    90: 1.5,  // Mastered
+    70: 1.0, // Struggling
+    80: 1.2, // Normal
+    90: 1.5, // Mastered
   },
 };
 
@@ -118,195 +118,195 @@ export const BASE_POINTS = {
 
 // Level progression (points needed for each level)
 export const LEVEL_THRESHOLDS = [
-  0,      // Level 1
-  100,    // Level 2
-  250,    // Level 3
-  500,    // Level 4
-  1000,   // Level 5
-  2000,   // Level 6
-  4000,   // Level 7
-  7500,   // Level 8
-  12000,  // Level 9
-  20000,  // Level 10
-  30000,  // Level 11
-  45000,  // Level 12
-  65000,  // Level 13
-  90000,  // Level 14
+  0, // Level 1
+  100, // Level 2
+  250, // Level 3
+  500, // Level 4
+  1000, // Level 5
+  2000, // Level 6
+  4000, // Level 7
+  7500, // Level 8
+  12000, // Level 9
+  20000, // Level 10
+  30000, // Level 11
+  45000, // Level 12
+  65000, // Level 13
+  90000, // Level 14
   120000, // Level 15
 ];
 
 /**
  * Achievement Definitions
  */
-export const ACHIEVEMENTS: Omit<Achievement, "unlockedAt">[] = [
+export const ACHIEVEMENTS: Omit<Achievement, 'unlockedAt'>[] = [
   // Streak Achievements
   {
-    id: "streak-3",
-    name: "Getting Started",
-    description: "Complete reviews for 3 days in a row",
-    icon: "🔥",
-    category: "streak",
-    requirement: { type: "review_streak_days", value: 3 },
+    id: 'streak-3',
+    name: 'Getting Started',
+    description: 'Complete reviews for 3 days in a row',
+    icon: '🔥',
+    category: 'streak',
+    requirement: { type: 'review_streak_days', value: 3 },
     points: 25,
-    rarity: "common",
+    rarity: 'common',
   },
   {
-    id: "streak-7",
-    name: "Week Warrior",
-    description: "Complete reviews for 7 days in a row",
-    icon: "⚡",
-    category: "streak",
-    requirement: { type: "review_streak_days", value: 7 },
+    id: 'streak-7',
+    name: 'Week Warrior',
+    description: 'Complete reviews for 7 days in a row',
+    icon: '⚡',
+    category: 'streak',
+    requirement: { type: 'review_streak_days', value: 7 },
     points: 100,
-    rarity: "uncommon",
+    rarity: 'uncommon',
   },
   {
-    id: "streak-14",
-    name: "Two Week Titan",
-    description: "Complete reviews for 14 days in a row",
-    icon: "💪",
-    category: "streak",
-    requirement: { type: "review_streak_days", value: 14 },
+    id: 'streak-14',
+    name: 'Two Week Titan',
+    description: 'Complete reviews for 14 days in a row',
+    icon: '💪',
+    category: 'streak',
+    requirement: { type: 'review_streak_days', value: 14 },
     points: 250,
-    rarity: "rare",
+    rarity: 'rare',
   },
   {
-    id: "streak-30",
-    name: "Monthly Master",
-    description: "Complete reviews for 30 days in a row",
-    icon: "👑",
-    category: "streak",
-    requirement: { type: "review_streak_days", value: 30 },
+    id: 'streak-30',
+    name: 'Monthly Master',
+    description: 'Complete reviews for 30 days in a row',
+    icon: '👑',
+    category: 'streak',
+    requirement: { type: 'review_streak_days', value: 30 },
     points: 500,
-    rarity: "epic",
+    rarity: 'epic',
   },
   {
-    id: "streak-100",
-    name: "Centurion",
-    description: "Complete reviews for 100 days in a row",
-    icon: "🏆",
-    category: "streak",
-    requirement: { type: "review_streak_days", value: 100 },
+    id: 'streak-100',
+    name: 'Centurion',
+    description: 'Complete reviews for 100 days in a row',
+    icon: '🏆',
+    category: 'streak',
+    requirement: { type: 'review_streak_days', value: 100 },
     points: 2000,
-    rarity: "legendary",
+    rarity: 'legendary',
   },
 
   // Mastery Achievements
   {
-    id: "perfect-1",
-    name: "Flawless Victory",
-    description: "Complete a perfect review session (100% correct)",
-    icon: "✨",
-    category: "mastery",
-    requirement: { type: "perfect_sessions", value: 1 },
+    id: 'perfect-1',
+    name: 'Flawless Victory',
+    description: 'Complete a perfect review session (100% correct)',
+    icon: '✨',
+    category: 'mastery',
+    requirement: { type: 'perfect_sessions', value: 1 },
     points: 50,
-    rarity: "common",
+    rarity: 'common',
   },
   {
-    id: "perfect-10",
-    name: "Perfectionist",
-    description: "Complete 10 perfect review sessions",
-    icon: "💎",
-    category: "mastery",
-    requirement: { type: "perfect_sessions", value: 10 },
+    id: 'perfect-10',
+    name: 'Perfectionist',
+    description: 'Complete 10 perfect review sessions',
+    icon: '💎',
+    category: 'mastery',
+    requirement: { type: 'perfect_sessions', value: 10 },
     points: 300,
-    rarity: "rare",
+    rarity: 'rare',
   },
   {
-    id: "items-mastered-10",
-    name: "Quick Learner",
-    description: "Master 10 concepts (>90% retention)",
-    icon: "🎓",
-    category: "mastery",
-    requirement: { type: "items_mastered", value: 10 },
+    id: 'items-mastered-10',
+    name: 'Quick Learner',
+    description: 'Master 10 concepts (>90% retention)',
+    icon: '🎓',
+    category: 'mastery',
+    requirement: { type: 'items_mastered', value: 10 },
     points: 200,
-    rarity: "uncommon",
+    rarity: 'uncommon',
   },
   {
-    id: "items-mastered-50",
-    name: "Expert",
-    description: "Master 50 concepts (>90% retention)",
-    icon: "🧠",
-    category: "mastery",
-    requirement: { type: "items_mastered", value: 50 },
+    id: 'items-mastered-50',
+    name: 'Expert',
+    description: 'Master 50 concepts (>90% retention)',
+    icon: '🧠',
+    category: 'mastery',
+    requirement: { type: 'items_mastered', value: 50 },
     points: 750,
-    rarity: "epic",
+    rarity: 'epic',
   },
 
   // Completion Achievements
   {
-    id: "reviews-10",
-    name: "Dedicated Student",
-    description: "Complete 10 review sessions",
-    icon: "📚",
-    category: "completion",
-    requirement: { type: "total_reviews", value: 10 },
+    id: 'reviews-10',
+    name: 'Dedicated Student',
+    description: 'Complete 10 review sessions',
+    icon: '📚',
+    category: 'completion',
+    requirement: { type: 'total_reviews', value: 10 },
     points: 100,
-    rarity: "common",
+    rarity: 'common',
   },
   {
-    id: "reviews-50",
-    name: "Committed Learner",
-    description: "Complete 50 review sessions",
-    icon: "📖",
-    category: "completion",
-    requirement: { type: "total_reviews", value: 50 },
+    id: 'reviews-50',
+    name: 'Committed Learner',
+    description: 'Complete 50 review sessions',
+    icon: '📖',
+    category: 'completion',
+    requirement: { type: 'total_reviews', value: 50 },
     points: 400,
-    rarity: "uncommon",
+    rarity: 'uncommon',
   },
   {
-    id: "reviews-100",
-    name: "Review Champion",
-    description: "Complete 100 review sessions",
-    icon: "🎯",
-    category: "completion",
-    requirement: { type: "total_reviews", value: 100 },
+    id: 'reviews-100',
+    name: 'Review Champion',
+    description: 'Complete 100 review sessions',
+    icon: '🎯',
+    category: 'completion',
+    requirement: { type: 'total_reviews', value: 100 },
     points: 1000,
-    rarity: "rare",
+    rarity: 'rare',
   },
 
   // Points Achievements
   {
-    id: "points-500",
-    name: "Rising Star",
-    description: "Earn 500 total points",
-    icon: "⭐",
-    category: "completion",
-    requirement: { type: "total_points", value: 500 },
+    id: 'points-500',
+    name: 'Rising Star',
+    description: 'Earn 500 total points',
+    icon: '⭐',
+    category: 'completion',
+    requirement: { type: 'total_points', value: 500 },
     points: 50,
-    rarity: "common",
+    rarity: 'common',
   },
   {
-    id: "points-2500",
-    name: "Point Prodigy",
-    description: "Earn 2,500 total points",
-    icon: "🌟",
-    category: "completion",
-    requirement: { type: "total_points", value: 2500 },
+    id: 'points-2500',
+    name: 'Point Prodigy',
+    description: 'Earn 2,500 total points',
+    icon: '🌟',
+    category: 'completion',
+    requirement: { type: 'total_points', value: 2500 },
     points: 250,
-    rarity: "uncommon",
+    rarity: 'uncommon',
   },
   {
-    id: "points-10000",
-    name: "Score Sorcerer",
-    description: "Earn 10,000 total points",
-    icon: "✨",
-    category: "completion",
-    requirement: { type: "total_points", value: 10000 },
+    id: 'points-10000',
+    name: 'Score Sorcerer',
+    description: 'Earn 10,000 total points',
+    icon: '✨',
+    category: 'completion',
+    requirement: { type: 'total_points', value: 10000 },
     points: 1000,
-    rarity: "rare",
+    rarity: 'rare',
   },
 
   // Practice Achievements
   {
-    id: "practice-10",
-    name: "Practice Makes Perfect",
-    description: "Complete 10 practice sessions",
-    icon: "🎮",
-    category: "practice",
-    requirement: { type: "practice_sessions", value: 10 },
+    id: 'practice-10',
+    name: 'Practice Makes Perfect',
+    description: 'Complete 10 practice sessions',
+    icon: '🎮',
+    category: 'practice',
+    requirement: { type: 'practice_sessions', value: 10 },
     points: 100,
-    rarity: "common",
+    rarity: 'common',
   },
 ];
 
@@ -315,12 +315,12 @@ export const ACHIEVEMENTS: Omit<Achievement, "unlockedAt">[] = [
  */
 export function calculateReviewPoints(
   correct: boolean,
-  difficulty: "easy" | "medium" | "hard",
+  difficulty: 'easy' | 'medium' | 'hard',
   streakDays: number,
   retention?: number
 ): { points: number; multiplier: number; breakdown: string[] } {
   if (!correct) {
-    return { points: 0, multiplier: 0, breakdown: ["Incorrect answer: 0 points"] };
+    return { points: 0, multiplier: 0, breakdown: ['Incorrect answer: 0 points'] };
   }
 
   const breakdown: string[] = [];
@@ -407,11 +407,11 @@ export function calculateLevel(totalPoints: number): {
  * Get user points from storage
  */
 export function getUserPoints(): UserPoints {
-  if (typeof window === "undefined") {
+  if (typeof window === 'undefined') {
     return getDefaultUserPoints();
   }
 
-  const stored = localStorage.getItem("user-points");
+  const stored = localStorage.getItem('user-points');
   if (stored) {
     try {
       const data = JSON.parse(stored);
@@ -433,8 +433,8 @@ export function getUserPoints(): UserPoints {
  * Save user points to storage
  */
 export function saveUserPoints(points: UserPoints): void {
-  if (typeof window === "undefined") return;
-  localStorage.setItem("user-points", JSON.stringify(points));
+  if (typeof window === 'undefined') return;
+  localStorage.setItem('user-points', JSON.stringify(points));
 }
 
 /**
@@ -488,11 +488,11 @@ function getDefaultUserPoints(): UserPoints {
  * Get user achievements from storage
  */
 export function getUserAchievements(): UserAchievements {
-  if (typeof window === "undefined") {
+  if (typeof window === 'undefined') {
     return getDefaultUserAchievements();
   }
 
-  const stored = localStorage.getItem("user-achievements");
+  const stored = localStorage.getItem('user-achievements');
   if (stored) {
     try {
       const data = JSON.parse(stored);
@@ -514,8 +514,8 @@ export function getUserAchievements(): UserAchievements {
  * Save user achievements to storage
  */
 export function saveUserAchievements(achievements: UserAchievements): void {
-  if (typeof window === "undefined") return;
-  localStorage.setItem("user-achievements", JSON.stringify(achievements));
+  if (typeof window === 'undefined') return;
+  localStorage.setItem('user-achievements', JSON.stringify(achievements));
 }
 
 /**
@@ -532,31 +532,31 @@ export function checkAchievements(stats: {
   const userAchievements = getUserAchievements();
   const newlyUnlocked: Achievement[] = [];
 
-  ACHIEVEMENTS.forEach(achievementDef => {
+  ACHIEVEMENTS.forEach((achievementDef) => {
     // Check if already unlocked
-    if (userAchievements.unlocked.some(a => a.id === achievementDef.id)) {
+    if (userAchievements.unlocked.some((a) => a.id === achievementDef.id)) {
       return;
     }
 
     // Check requirement
     let currentValue = 0;
     switch (achievementDef.requirement.type) {
-      case "review_streak_days":
+      case 'review_streak_days':
         currentValue = stats.streakDays;
         break;
-      case "perfect_sessions":
+      case 'perfect_sessions':
         currentValue = stats.perfectSessions;
         break;
-      case "total_reviews":
+      case 'total_reviews':
         currentValue = stats.totalReviews;
         break;
-      case "total_points":
+      case 'total_points':
         currentValue = stats.totalPoints;
         break;
-      case "items_mastered":
+      case 'items_mastered':
         currentValue = stats.itemsMastered;
         break;
-      case "practice_sessions":
+      case 'practice_sessions':
         currentValue = stats.practiceSessions;
         break;
     }
@@ -573,7 +573,7 @@ export function checkAchievements(stats: {
       // Award achievement points
       addPoints(
         achievementDef.points,
-        "achievement_unlocked",
+        'achievement_unlocked',
         1.0,
         `Unlocked: ${achievementDef.name}`
       );
@@ -600,43 +600,40 @@ export function getAchievementProgress(stats: {
 }): AchievementProgress[] {
   const userAchievements = getUserAchievements();
 
-  return ACHIEVEMENTS.filter(
-    a => !userAchievements.unlocked.some(u => u.id === a.id)
-  ).map(achievement => {
-    let currentValue = 0;
-    switch (achievement.requirement.type) {
-      case "review_streak_days":
-        currentValue = stats.streakDays;
-        break;
-      case "perfect_sessions":
-        currentValue = stats.perfectSessions;
-        break;
-      case "total_reviews":
-        currentValue = stats.totalReviews;
-        break;
-      case "total_points":
-        currentValue = stats.totalPoints;
-        break;
-      case "items_mastered":
-        currentValue = stats.itemsMastered;
-        break;
-      case "practice_sessions":
-        currentValue = stats.practiceSessions;
-        break;
+  return ACHIEVEMENTS.filter((a) => !userAchievements.unlocked.some((u) => u.id === a.id)).map(
+    (achievement) => {
+      let currentValue = 0;
+      switch (achievement.requirement.type) {
+        case 'review_streak_days':
+          currentValue = stats.streakDays;
+          break;
+        case 'perfect_sessions':
+          currentValue = stats.perfectSessions;
+          break;
+        case 'total_reviews':
+          currentValue = stats.totalReviews;
+          break;
+        case 'total_points':
+          currentValue = stats.totalPoints;
+          break;
+        case 'items_mastered':
+          currentValue = stats.itemsMastered;
+          break;
+        case 'practice_sessions':
+          currentValue = stats.practiceSessions;
+          break;
+      }
+
+      const percentage = Math.min(100, (currentValue / achievement.requirement.value) * 100);
+
+      return {
+        achievementId: achievement.id,
+        currentValue,
+        requiredValue: achievement.requirement.value,
+        percentage,
+      };
     }
-
-    const percentage = Math.min(
-      100,
-      (currentValue / achievement.requirement.value) * 100
-    );
-
-    return {
-      achievementId: achievement.id,
-      currentValue,
-      requiredValue: achievement.requirement.value,
-      percentage,
-    };
-  });
+  );
 }
 
 /**

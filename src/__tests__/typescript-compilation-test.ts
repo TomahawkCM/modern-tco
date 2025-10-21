@@ -4,7 +4,7 @@
  */
 
 // Test imports of new components and libraries
-import { TerminologySearch, type TermDefinition } from '../lib/tco-terminology';
+import { type TermDefinition, TerminologySearch } from '../lib/tco-terminology';
 
 // Test basic type usage
 const testTerm: TermDefinition = {
@@ -16,7 +16,7 @@ const testTerm: TermDefinition = {
   importance: 'useful',
   difficulty: 'beginner',
   examRelevance: false,
-  taniumSpecific: false
+  taniumSpecific: false,
 };
 
 const testSearch = new TerminologySearch();
@@ -30,5 +30,3 @@ describe('TypeScript compilation', () => {
     expect(testTerm.term).toBe('Test Term');
   });
 });
-
-export {}; // Make this a module

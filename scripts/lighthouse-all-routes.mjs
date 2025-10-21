@@ -3,11 +3,12 @@
 // Configured for WSL2 environment with port 3001
 
 import { spawn } from 'node:child_process';
-import { mkdirSync, writeFileSync, existsSync } from 'node:fs';
+import { existsSync, mkdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 
 const BASE_URL = 'http://localhost:3001';
-const CHROME_PATH = process.env.CHROME_PATH || '/home/robne/.cache/ms-playwright/chromium-1193/chrome-linux/chrome';
+const CHROME_PATH =
+  process.env.CHROME_PATH || '/home/robne/.cache/ms-playwright/chromium-1193/chrome-linux/chrome';
 
 // All key routes in the Tanium TCO LMS
 const routes = [
@@ -19,7 +20,7 @@ const routes = [
   { path: '/assessment', name: 'assessment' },
   { path: '/progress', name: 'progress' },
   { path: '/settings', name: 'settings' },
-  { path: '/profile', name: 'profile' }
+  { path: '/profile', name: 'profile' },
 ];
 
 const now = new Date().toISOString().replace(/[:.]/g, '-').substring(0, 19);
@@ -56,17 +57,17 @@ function runLighthouse(url, preset, outputPath) {
       `--output-path=${outputPath}`,
       '--quiet',
       `--preset=${preset}`,
-      '--chrome-flags=--headless --no-sandbox --disable-dev-shm-usage --disable-features=BlockInsecurePrivateNetworkRequests --disable-setuid-sandbox --allow-insecure-localhost --ignore-certificate-errors'
+      '--chrome-flags=--headless --no-sandbox --disable-dev-shm-usage --disable-features=BlockInsecurePrivateNetworkRequests --disable-setuid-sandbox --allow-insecure-localhost --ignore-certificate-errors',
     ];
 
     const env = {
       ...process.env,
-      CHROME_PATH
+      CHROME_PATH,
     };
 
-    const child = spawn('npx', args, { 
+    const child = spawn('npx', args, {
       stdio: 'pipe',
-      env 
+      env,
     });
 
     let stdout = '';
@@ -99,11 +100,11 @@ async function parseScores(jsonPath) {
     const { readFileSync } = await import('fs');
     const data = JSON.parse(readFileSync(jsonPath, 'utf8'));
     const scores = {};
-    
+
     for (const [key, value] of Object.entries(data.categories)) {
       scores[key] = Math.round((value.score || 0) * 100);
     }
-    
+
     return scores;
   } catch (e) {
     return null;
@@ -130,13 +131,13 @@ async function main() {
   // Check if server is running
   console.log(`🔍 Checking server at ${BASE_URL}...`);
   const serverRunning = await checkServer();
-  
+
   if (!serverRunning) {
     console.log('⚠️  Server not responding on port 3001');
     console.log('💡 Start the server with: npm run dev:3001');
     process.exit(1);
   }
-  
+
   console.log('✅ Server is running\n');
 
   const results = [];
@@ -150,11 +151,11 @@ async function main() {
 
     for (const preset of ['desktop', 'mobile']) {
       const outputPath = join(outDir, `${preset}_${route.name}`);
-      
+
       try {
         process.stdout.write(`  ${preset === 'desktop' ? '🖥️ ' : '📱'} ${preset}: `);
         await runLighthouse(url, preset, outputPath);
-        
+
         // Parse and display scores
         const scores = await parseScores(`${outputPath}.report.json`);
         if (scores) {
@@ -165,12 +166,12 @@ async function main() {
             })
             .join(' | ');
           console.log(`✓ ${scoreStr}`);
-          
+
           results.push({
             route: route.name,
             path: route.path,
             preset,
-            scores
+            scores,
           });
         } else {
           console.log('✓ Complete');
@@ -194,22 +195,22 @@ async function main() {
   for (const category of categories) {
     avgScores.desktop[category] = Math.round(
       results
-        .filter(r => r.preset === 'desktop')
-        .reduce((sum, r) => sum + (r.scores[category] || 0), 0) / 
-      results.filter(r => r.preset === 'desktop').length
+        .filter((r) => r.preset === 'desktop')
+        .reduce((sum, r) => sum + (r.scores[category] || 0), 0) /
+        results.filter((r) => r.preset === 'desktop').length
     );
-    
+
     avgScores.mobile[category] = Math.round(
       results
-        .filter(r => r.preset === 'mobile')
-        .reduce((sum, r) => sum + (r.scores[category] || 0), 0) / 
-      results.filter(r => r.preset === 'mobile').length
+        .filter((r) => r.preset === 'mobile')
+        .reduce((sum, r) => sum + (r.scores[category] || 0), 0) /
+        results.filter((r) => r.preset === 'mobile').length
     );
   }
 
   console.log('\n📊 Average Scores:');
   console.log('─'.repeat(40));
-  
+
   for (const preset of ['desktop', 'mobile']) {
     console.log(`\n${preset === 'desktop' ? '🖥️  Desktop' : '📱 Mobile'}:`);
     for (const [category, score] of Object.entries(avgScores[preset])) {
@@ -219,10 +220,7 @@ async function main() {
   }
 
   // Identify problem areas
-  const issues = results.filter(r => 
-    r.scores.performance < 50 || 
-    r.scores.accessibility < 80
-  );
+  const issues = results.filter((r) => r.scores.performance < 50 || r.scores.accessibility < 80);
 
   if (issues.length > 0) {
     console.log('\n⚠️  Routes Needing Attention:');
@@ -240,14 +238,21 @@ async function main() {
 
   // Save summary to JSON
   const summaryPath = join(outDir, 'summary.json');
-  writeFileSync(summaryPath, JSON.stringify({
-    timestamp: new Date().toISOString(),
-    duration: `${duration}s`,
-    baseUrl: BASE_URL,
-    routes: routes.map(r => r.path),
-    averageScores: avgScores,
-    detailedResults: results
-  }, null, 2));
+  writeFileSync(
+    summaryPath,
+    JSON.stringify(
+      {
+        timestamp: new Date().toISOString(),
+        duration: `${duration}s`,
+        baseUrl: BASE_URL,
+        routes: routes.map((r) => r.path),
+        averageScores: avgScores,
+        detailedResults: results,
+      },
+      null,
+      2
+    )
+  );
 
   console.log('\n' + '='.repeat(60));
   console.log(`✅ Audit complete in ${duration}s`);
@@ -256,7 +261,7 @@ async function main() {
   console.log('='.repeat(60) + '\n');
 }
 
-main().catch(e => {
+main().catch((e) => {
   console.error('\n❌ Fatal error:', e.message);
   process.exit(1);
 });

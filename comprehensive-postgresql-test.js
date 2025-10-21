@@ -6,14 +6,14 @@
  * Uses direct database connection and manual table creation for testing
  */
 
-import { createClient } from "@supabase/supabase-js";
-import dotenv from "dotenv";
-import { readFileSync, writeFileSync } from "fs";
-import { fileURLToPath } from "url";
-import { dirname, join } from "path";
+import { createClient } from '@supabase/supabase-js';
+import dotenv from 'dotenv';
+import { readFileSync, writeFileSync } from 'fs';
+import { dirname, join } from 'path';
+import { fileURLToPath } from 'url';
 
 // Load environment variables
-dotenv.config({ path: ".env.local" });
+dotenv.config({ path: '.env.local' });
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -22,8 +22,8 @@ const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 const SUPABASE_SERVICE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
-console.log("🚀 Comprehensive PostgreSQL Testing Suite for Tanium TCO");
-console.log("========================================================");
+console.log('🚀 Comprehensive PostgreSQL Testing Suite for Tanium TCO');
+console.log('========================================================');
 console.log(`Database URL: ${SUPABASE_URL}`);
 console.log(`Testing PostgreSQL native features...\n`);
 
@@ -45,31 +45,31 @@ const testResults = {
  * Phase 1: Database Connection and Version Testing
  */
 async function testDatabaseConnection() {
-  console.log("📡 Phase 1: Database Connection and Version Testing");
-  console.log("--------------------------------------------------");
+  console.log('📡 Phase 1: Database Connection and Version Testing');
+  console.log('--------------------------------------------------');
 
   try {
     const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_KEY);
 
-    console.log("✅ Supabase client initialized successfully");
-    console.log("   Using service role key for full database access");
+    console.log('✅ Supabase client initialized successfully');
+    console.log('   Using service role key for full database access');
 
     // Test basic connectivity by creating a simple test table
-    console.log("🔍 Testing basic database operations...");
+    console.log('🔍 Testing basic database operations...');
 
     // Create a simple test table to verify connection
-    const createTableResult = await supabase.rpc("create_test_table");
-    console.log("   Basic operations test completed");
+    const createTableResult = await supabase.rpc('create_test_table');
+    console.log('   Basic operations test completed');
 
     testResults.connection = {
       success: true,
       timestamp: new Date(),
-      url: SUPABASE_URL.replace(/\/\/.*:.*@/, "//***:***@"), // Hide credentials in logs
+      url: SUPABASE_URL.replace(/\/\/.*:.*@/, '//***:***@'), // Hide credentials in logs
     };
 
     return supabase;
   } catch (error) {
-    console.error("❌ Database connection failed:", error.message);
+    console.error('❌ Database connection failed:', error.message);
     testResults.connection = { success: false, error: error.message };
     throw error;
   }
@@ -79,8 +79,8 @@ async function testDatabaseConnection() {
  * Phase 2: Test PostgreSQL Native Features
  */
 async function testPostgreSQLFeatures(supabase) {
-  console.log("\n🔧 Phase 2: PostgreSQL Native Features Testing");
-  console.log("----------------------------------------------");
+  console.log('\n🔧 Phase 2: PostgreSQL Native Features Testing');
+  console.log('----------------------------------------------');
 
   const features = {
     uuid: null,
@@ -93,30 +93,30 @@ async function testPostgreSQLFeatures(supabase) {
 
   try {
     // Test 1: UUID Generation
-    console.log("Testing UUID extension and generation...");
+    console.log('Testing UUID extension and generation...');
     try {
       // Test if we can generate a UUID (this is a basic PostgreSQL function)
       const testId = crypto.randomUUID(); // Use native crypto for testing
       console.log(`✅ UUID generation working: ${testId.substring(0, 8)}...`);
       features.uuid = { working: true, sample: testId };
     } catch (uuidError) {
-      console.log("❌ UUID generation failed");
+      console.log('❌ UUID generation failed');
       features.uuid = { working: false, error: uuidError.message };
     }
 
     // Test 2: JSON/JSONB Operations
-    console.log("Testing JSON/JSONB functionality...");
+    console.log('Testing JSON/JSONB functionality...');
     try {
       const testJsonData = {
         learning_objectives: [
-          "Master natural language queries",
-          "Select appropriate sensors",
-          "Interpret query results",
+          'Master natural language queries',
+          'Select appropriate sensors',
+          'Interpret query results',
         ],
         exam_prep: {
           weight_percentage: 22,
-          key_topics: ["Queries", "Sensors", "Results"],
-          practice_focus: "Question construction",
+          key_topics: ['Queries', 'Sensors', 'Results'],
+          practice_focus: 'Question construction',
         },
       };
 
@@ -124,28 +124,28 @@ async function testPostgreSQLFeatures(supabase) {
       const jsonString = JSON.stringify(testJsonData);
       const parsedJson = JSON.parse(jsonString);
 
-      console.log("✅ JSON operations working");
+      console.log('✅ JSON operations working');
       console.log(`   Sample data: ${parsedJson.learning_objectives.length} learning objectives`);
       features.jsonb = { working: true, sample: testJsonData };
     } catch (jsonError) {
-      console.log("❌ JSON operations failed");
+      console.log('❌ JSON operations failed');
       features.jsonb = { working: false, error: jsonError.message };
     }
 
     // Test 3: Array Operations
-    console.log("Testing Array functionality...");
+    console.log('Testing Array functionality...');
     try {
       const testArrayData = {
         key_points: [
-          "Natural language queries are the foundation",
-          "Sensors are the data collection mechanisms",
-          "Results provide real-time endpoint information",
+          'Natural language queries are the foundation',
+          'Sensors are the data collection mechanisms',
+          'Results provide real-time endpoint information',
         ],
         procedures: [
-          "Access Interact Module",
-          "Type natural language query",
-          "Select appropriate sensor",
-          "Execute and validate results",
+          'Access Interact Module',
+          'Type natural language query',
+          'Select appropriate sensor',
+          'Execute and validate results',
         ],
       };
 
@@ -153,20 +153,20 @@ async function testPostgreSQLFeatures(supabase) {
       const arrayLength = testArrayData.key_points.length;
       const firstItem = testArrayData.key_points[0];
 
-      console.log("✅ Array operations working");
+      console.log('✅ Array operations working');
       console.log(
         `   Sample: ${arrayLength} key points, first: "${firstItem.substring(0, 30)}..."`
       );
       features.arrays = { working: true, sample: testArrayData };
     } catch (arrayError) {
-      console.log("❌ Array operations failed");
+      console.log('❌ Array operations failed');
       features.arrays = { working: false, error: arrayError.message };
     }
 
     // Test 4: Full-text Search Capabilities
-    console.log("Testing full-text search capabilities...");
+    console.log('Testing full-text search capabilities...');
     try {
-      const searchTerms = ["tanium", "sensor", "query", "certification"];
+      const searchTerms = ['tanium', 'sensor', 'query', 'certification'];
       const testContent = `
         Master natural language questioning in Tanium for real-time endpoint data collection.
         Learn sensor selection, query construction, and result interpretation for effective information gathering.
@@ -184,30 +184,30 @@ async function testPostgreSQLFeatures(supabase) {
       console.log(`✅ Text search working: ${foundCount}/${searchTerms.length} terms found`);
       features.fulltext = { working: true, sample: searchResults };
     } catch (searchError) {
-      console.log("❌ Full-text search test failed");
+      console.log('❌ Full-text search test failed');
       features.fulltext = { working: false, error: searchError.message };
     }
 
     // Test 5: Function/Procedure Support
-    console.log("Testing PostgreSQL functions...");
+    console.log('Testing PostgreSQL functions...');
     try {
       // Test basic SQL function concepts
       const functionTest = {
-        name: "validate_study_content_integrity",
-        purpose: "Validate study content data integrity",
-        returnType: "TEXT",
-        language: "plpgsql",
+        name: 'validate_study_content_integrity',
+        purpose: 'Validate study content data integrity',
+        returnType: 'TEXT',
+        language: 'plpgsql',
       };
 
-      console.log("✅ Function structure validation passed");
+      console.log('✅ Function structure validation passed');
       console.log(`   Test function: ${functionTest.name} (${functionTest.language})`);
       features.functions = { working: true, sample: functionTest };
     } catch (functionError) {
-      console.log("❌ Function test failed");
+      console.log('❌ Function test failed');
       features.functions = { working: false, error: functionError.message };
     }
   } catch (error) {
-    console.error("❌ PostgreSQL features test failed:", error.message);
+    console.error('❌ PostgreSQL features test failed:', error.message);
     features.error = error.message;
   }
 
@@ -219,8 +219,8 @@ async function testPostgreSQLFeatures(supabase) {
  * Phase 3: Simulate TCO Study Content Operations
  */
 async function testTCOContentOperations() {
-  console.log("\n📚 Phase 3: TCO Study Content Operations Simulation");
-  console.log("--------------------------------------------------");
+  console.log('\n📚 Phase 3: TCO Study Content Operations Simulation');
+  console.log('--------------------------------------------------');
 
   const operations = {};
 
@@ -229,47 +229,47 @@ async function testTCOContentOperations() {
     const tcoStudyModules = [
       {
         id: crypto.randomUUID(),
-        domain: "Asking Questions",
-        title: "Domain 1: Asking Questions - Study Guide",
+        domain: 'Asking Questions',
+        title: 'Domain 1: Asking Questions - Study Guide',
         description:
-          "Master natural language questioning in Tanium for real-time endpoint data collection.",
+          'Master natural language questioning in Tanium for real-time endpoint data collection.',
         exam_weight: 22,
-        estimated_time: "3-4 hours",
+        estimated_time: '3-4 hours',
         learning_objectives: [
-          "Construct natural language questions using Tanium query interface",
-          "Select appropriate sensors for data collection requirements",
-          "Create and manage saved questions for repeated use",
+          'Construct natural language questions using Tanium query interface',
+          'Select appropriate sensors for data collection requirements',
+          'Create and manage saved questions for repeated use',
         ],
       },
       {
         id: crypto.randomUUID(),
-        domain: "Refining Questions",
-        title: "Domain 2: Refining Questions and Targeting - Study Guide",
-        description: "Advanced filtering and targeting techniques for precise endpoint management.",
+        domain: 'Refining Questions',
+        title: 'Domain 2: Refining Questions and Targeting - Study Guide',
+        description: 'Advanced filtering and targeting techniques for precise endpoint management.',
         exam_weight: 23,
-        estimated_time: "4-5 hours",
+        estimated_time: '4-5 hours',
         learning_objectives: [
-          "Create and manage computer groups for precise targeting",
-          "Construct advanced filters using logical operators",
-          "Apply least privilege principles in targeting",
+          'Create and manage computer groups for precise targeting',
+          'Construct advanced filters using logical operators',
+          'Apply least privilege principles in targeting',
         ],
       },
       {
         id: crypto.randomUUID(),
-        domain: "Taking Action",
-        title: "Domain 3: Taking Action - Packages and Actions - Study Guide",
-        description: "Package deployment and action management for effective endpoint operations.",
+        domain: 'Taking Action',
+        title: 'Domain 3: Taking Action - Packages and Actions - Study Guide',
+        description: 'Package deployment and action management for effective endpoint operations.',
         exam_weight: 15,
-        estimated_time: "3-4 hours",
+        estimated_time: '3-4 hours',
         learning_objectives: [
-          "Deploy packages and execute actions on targeted endpoint groups",
-          "Navigate approval workflows and understand multi-tier processes",
-          "Monitor action execution status and troubleshoot failures",
+          'Deploy packages and execute actions on targeted endpoint groups',
+          'Navigate approval workflows and understand multi-tier processes',
+          'Monitor action execution status and troubleshoot failures',
         ],
       },
     ];
 
-    console.log("✅ TCO Study Modules Structure Validated");
+    console.log('✅ TCO Study Modules Structure Validated');
     console.log(`   Created ${tcoStudyModules.length} study modules`);
     console.log(
       `   Total exam weight: ${tcoStudyModules.reduce((sum, m) => sum + m.exam_weight, 0)}%`
@@ -294,36 +294,36 @@ async function testTCOContentOperations() {
       {
         id: crypto.randomUUID(),
         module_id: tcoStudyModules[0].id,
-        title: "Learning Objectives & Overview",
-        content: "# Learning Objectives\\n\\nBy completing this module, you will master...",
-        section_type: "overview",
+        title: 'Learning Objectives & Overview',
+        content: '# Learning Objectives\\n\\nBy completing this module, you will master...',
+        section_type: 'overview',
         order_index: 1,
         estimated_time: 15,
         key_points: [
-          "Natural language queries are the foundation of Tanium operations",
-          "Sensors are the data collection mechanisms",
-          "Results provide real-time endpoint information",
+          'Natural language queries are the foundation of Tanium operations',
+          'Sensors are the data collection mechanisms',
+          'Results provide real-time endpoint information',
         ],
       },
       {
         id: crypto.randomUUID(),
         module_id: tcoStudyModules[0].id,
-        title: "Basic Question Construction Procedures",
+        title: 'Basic Question Construction Procedures',
         content:
-          "# Step-by-Step Console Procedures\\n\\n## Procedure 1: Basic Question Construction...",
-        section_type: "procedures",
+          '# Step-by-Step Console Procedures\\n\\n## Procedure 1: Basic Question Construction...',
+        section_type: 'procedures',
         order_index: 2,
         estimated_time: 25,
         procedures: [
-          "Access Interact Module",
-          "Type natural language query",
-          "Select appropriate sensor",
-          "Execute and validate results",
+          'Access Interact Module',
+          'Type natural language query',
+          'Select appropriate sensor',
+          'Execute and validate results',
         ],
       },
     ];
 
-    console.log("✅ Study Sections Structure Validated");
+    console.log('✅ Study Sections Structure Validated');
     console.log(`   Created ${studySections.length} study sections`);
     console.log(
       `   Total estimated time: ${studySections.reduce((sum, s) => sum + s.estimated_time, 0)} minutes`
@@ -342,7 +342,7 @@ async function testTCOContentOperations() {
         user_id: crypto.randomUUID(),
         module_id: tcoStudyModules[0].id,
         section_id: studySections[0].id,
-        status: "completed",
+        status: 'completed',
         time_spent: 18,
         completed_at: new Date(),
       },
@@ -351,23 +351,23 @@ async function testTCOContentOperations() {
         user_id: crypto.randomUUID(),
         module_id: tcoStudyModules[0].id,
         section_id: studySections[1].id,
-        status: "in_progress",
+        status: 'in_progress',
         time_spent: 12,
         completed_at: null,
       },
     ];
 
-    console.log("✅ User Progress Tracking Validated");
+    console.log('✅ User Progress Tracking Validated');
     console.log(`   Simulated progress for ${userProgress.length} study sessions`);
 
     operations.progress = {
       success: true,
       sessions: userProgress.length,
       totalTimeSpent: userProgress.reduce((sum, p) => sum + p.time_spent, 0),
-      completedSessions: userProgress.filter((p) => p.status === "completed").length,
+      completedSessions: userProgress.filter((p) => p.status === 'completed').length,
     };
   } catch (error) {
-    console.error("❌ Content operations simulation failed:", error.message);
+    console.error('❌ Content operations simulation failed:', error.message);
     operations.error = error.message;
   }
 
@@ -379,40 +379,40 @@ async function testTCOContentOperations() {
  * Phase 4: Search and Query Performance Testing
  */
 async function testSearchAndPerformance() {
-  console.log("\n⚡ Phase 4: Search and Performance Testing");
-  console.log("-----------------------------------------");
+  console.log('\n⚡ Phase 4: Search and Performance Testing');
+  console.log('-----------------------------------------');
 
   const performance = {};
 
   try {
     // Test search functionality on study content
-    console.log("Testing search performance...");
+    console.log('Testing search performance...');
     const startTime = Date.now();
 
     // Simulate searching through TCO study content
     const searchDatabase = [
       {
         id: 1,
-        content: "natural language questioning in Tanium for real-time endpoint data collection",
+        content: 'natural language questioning in Tanium for real-time endpoint data collection',
       },
-      { id: 2, content: "sensor selection, query construction, and result interpretation" },
-      { id: 3, content: "computer groups, RBAC controls, and intelligent query optimization" },
+      { id: 2, content: 'sensor selection, query construction, and result interpretation' },
+      { id: 3, content: 'computer groups, RBAC controls, and intelligent query optimization' },
       {
         id: 4,
-        content: "package deployment and action management for effective endpoint operations",
+        content: 'package deployment and action management for effective endpoint operations',
       },
       {
         id: 5,
-        content: "approval workflows, action monitoring, and emergency response procedures",
+        content: 'approval workflows, action monitoring, and emergency response procedures',
       },
     ];
 
     const searchQueries = [
-      "natural language",
-      "sensor selection",
-      "computer groups",
-      "package deployment",
-      "approval workflows",
+      'natural language',
+      'sensor selection',
+      'computer groups',
+      'package deployment',
+      'approval workflows',
     ];
 
     let totalResults = 0;
@@ -438,7 +438,7 @@ async function testSearchAndPerformance() {
     };
 
     // Test data processing performance
-    console.log("Testing data processing performance...");
+    console.log('Testing data processing performance...');
     const processingStart = Date.now();
 
     // Simulate processing study progress data
@@ -478,7 +478,7 @@ async function testSearchAndPerformance() {
       recordsPerMs: Math.round(progressData.length / processingTime),
     };
   } catch (error) {
-    console.error("❌ Performance testing failed:", error.message);
+    console.error('❌ Performance testing failed:', error.message);
     performance.error = error.message;
   }
 
@@ -490,21 +490,21 @@ async function testSearchAndPerformance() {
  * Generate Comprehensive Test Report
  */
 function generateTestReport() {
-  console.log("\n📊 PostgreSQL Testing Comprehensive Report");
-  console.log("==========================================");
+  console.log('\n📊 PostgreSQL Testing Comprehensive Report');
+  console.log('==========================================');
 
   const report = {
     metadata: {
       timestamp: testResults.timestamp,
-      project: "Tanium Certified Operator (TCO) Study Platform",
-      database: "PostgreSQL via Supabase",
-      testVersion: "2.0.0",
-      environment: "Development",
+      project: 'Tanium Certified Operator (TCO) Study Platform',
+      database: 'PostgreSQL via Supabase',
+      testVersion: '2.0.0',
+      environment: 'Development',
     },
     summary: {
       totalPhases: 4,
       successfulPhases: 0,
-      overallStatus: "COMPLETED",
+      overallStatus: 'COMPLETED',
       testDuration: Date.now() - new Date(testResults.timestamp).getTime(),
     },
     results: testResults,
@@ -524,18 +524,18 @@ function generateTestReport() {
   report.summary.successfulPhases = successfulPhases;
   report.summary.overallStatus =
     successfulPhases === 4
-      ? "FULLY_SUCCESSFUL"
+      ? 'FULLY_SUCCESSFUL'
       : successfulPhases >= 2
-        ? "PARTIALLY_SUCCESSFUL"
-        : "NEEDS_ATTENTION";
+        ? 'PARTIALLY_SUCCESSFUL'
+        : 'NEEDS_ATTENTION';
 
   // Display summary
   console.log(`\n✨ Test Summary: ${successfulPhases}/4 phases successful`);
   console.log(`   Overall Status: ${report.summary.overallStatus}`);
   console.log(`   Test Duration: ${Math.round(report.summary.testDuration)}ms`);
 
-  console.log("\nDetailed Results:");
-  console.log(`   Connection: ${testResults.connection?.success ? "✅" : "❌"}`);
+  console.log('\nDetailed Results:');
+  console.log(`   Connection: ${testResults.connection?.success ? '✅' : '❌'}`);
 
   if (testResults.postgresqlFeatures) {
     const workingFeatures = Object.values(testResults.postgresqlFeatures).filter(
@@ -545,8 +545,8 @@ function generateTestReport() {
     console.log(`   PostgreSQL Features: ${workingFeatures}/${totalFeatures} ✅`);
   }
 
-  console.log(`   Data Operations: ${testResults.dataOperations?.modules?.success ? "✅" : "❌"}`);
-  console.log(`   Performance Tests: ${testResults.performance?.search ? "✅" : "❌"}`);
+  console.log(`   Data Operations: ${testResults.dataOperations?.modules?.success ? '✅' : '❌'}`);
+  console.log(`   Performance Tests: ${testResults.performance?.search ? '✅' : '❌'}`);
 
   if (testResults.performance?.search) {
     console.log(`\nPerformance Metrics:`);
@@ -580,26 +580,26 @@ async function runComprehensiveTests() {
     const report = generateTestReport();
 
     // Save report
-    const reportPath = join(__dirname, "docs/postgresql-comprehensive-test-report.json");
+    const reportPath = join(__dirname, 'docs/postgresql-comprehensive-test-report.json');
     writeFileSync(reportPath, JSON.stringify(report, null, 2));
 
     console.log(`\n💾 Comprehensive test report saved to: ${reportPath}`);
-    console.log("\n🎉 PostgreSQL comprehensive testing completed successfully!");
+    console.log('\n🎉 PostgreSQL comprehensive testing completed successfully!');
 
-    console.log("\n🔍 Key Findings:");
-    console.log("   ✅ PostgreSQL native features (UUID, JSON, Arrays) are fully supported");
-    console.log("   ✅ TCO study content structure validates successfully");
-    console.log("   ✅ Search and performance capabilities meet requirements");
-    console.log("   ✅ Database connection and operations are stable");
+    console.log('\n🔍 Key Findings:');
+    console.log('   ✅ PostgreSQL native features (UUID, JSON, Arrays) are fully supported');
+    console.log('   ✅ TCO study content structure validates successfully');
+    console.log('   ✅ Search and performance capabilities meet requirements');
+    console.log('   ✅ Database connection and operations are stable');
 
-    console.log("\n📋 Recommendations:");
-    console.log("   1. Implement schema via Supabase Dashboard SQL Editor");
-    console.log("   2. Populate study content using migration files");
-    console.log("   3. Configure Row Level Security policies for user data");
-    console.log("   4. Set up real-time subscriptions for progress tracking");
-    console.log("   5. Implement full-text search indexes for content discovery");
+    console.log('\n📋 Recommendations:');
+    console.log('   1. Implement schema via Supabase Dashboard SQL Editor');
+    console.log('   2. Populate study content using migration files');
+    console.log('   3. Configure Row Level Security policies for user data');
+    console.log('   4. Set up real-time subscriptions for progress tracking');
+    console.log('   5. Implement full-text search indexes for content discovery');
   } catch (error) {
-    console.error("\n💥 Comprehensive testing failed:", error.message);
+    console.error('\n💥 Comprehensive testing failed:', error.message);
     process.exit(1);
   }
 }

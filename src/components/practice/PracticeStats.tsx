@@ -1,17 +1,17 @@
-"use client";
+'use client';
 
-import { useState, useEffect } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Progress } from "@/components/ui/progress";
-import { Target, TrendingUp, Clock, BarChart3, Award, AlertCircle } from "lucide-react";
+import { AlertCircle, Award, BarChart3, Clock, Target, TrendingUp } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { Badge } from '@/components/ui/badge';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Progress } from '@/components/ui/progress';
+import type { PracticeStats as PracticeStatsType } from '@/lib/practiceMode';
 import {
   getPracticeStats,
-  getWeakConcepts,
-  getStrongConcepts,
   getPracticeVsReviewComparison,
-} from "@/lib/practiceMode";
-import type { PracticeStats as PracticeStatsType } from "@/lib/practiceMode";
+  getStrongConcepts,
+  getWeakConcepts,
+} from '@/lib/practiceMode';
 
 interface PracticeStatsProps {
   /** Custom className */
@@ -34,14 +34,14 @@ export function PracticeStats({ className }: PracticeStatsProps) {
 
     // Listen for stats updates
     const handleStorageChange = (e: StorageEvent) => {
-      if (e.key === "practice-stats") {
+      if (e.key === 'practice-stats') {
         loadStats();
       }
     };
 
-    window.addEventListener("storage", handleStorageChange);
-    return () => window.removeEventListener("storage", handleStorageChange);
-  }, []);
+    window.addEventListener('storage', handleStorageChange);
+    return () => window.removeEventListener('storage', handleStorageChange);
+  }, [loadStats]);
 
   function loadStats() {
     const practiceStats = getPracticeStats();
@@ -82,10 +82,10 @@ export function PracticeStats({ className }: PracticeStatsProps) {
   }
 
   const getAccuracyColor = (accuracy: number) => {
-    if (accuracy >= 90) return "text-[#22c55e]";
-    if (accuracy >= 70) return "text-primary";
-    if (accuracy >= 50) return "text-[#f97316]";
-    return "text-orange-400";
+    if (accuracy >= 90) return 'text-[#22c55e]';
+    if (accuracy >= 70) return 'text-primary';
+    if (accuracy >= 50) return 'text-[#f97316]';
+    return 'text-orange-400';
   };
 
   return (
@@ -256,7 +256,7 @@ export function PracticeStats({ className }: PracticeStatsProps) {
               <div key={idx} className="space-y-1">
                 <div className="flex items-center justify-between">
                   <span className="text-sm text-muted-foreground capitalize">
-                    {moduleStats.moduleId.replace(/-/g, " ")}
+                    {moduleStats.moduleId.replace(/-/g, ' ')}
                   </span>
                   <div className="flex items-center gap-2">
                     <span className="text-xs text-muted-foreground">
@@ -285,9 +285,8 @@ export function PracticeStats({ className }: PracticeStatsProps) {
           </CardHeader>
           <CardContent className="space-y-2">
             {stats.recentSessions.slice(0, 5).map((session, idx) => {
-              const accuracy = session.questions.length > 0
-                ? (session.score / session.questions.length) * 100
-                : 0;
+              const accuracy =
+                session.questions.length > 0 ? (session.score / session.questions.length) * 100 : 0;
 
               return (
                 <div
@@ -296,13 +295,13 @@ export function PracticeStats({ className }: PracticeStatsProps) {
                 >
                   <div className="flex-1">
                     <div className="text-sm text-muted-foreground">
-                      {session.mode === "concept"
+                      {session.mode === 'concept'
                         ? `📍 ${session.concept}`
-                        : session.mode === "module"
-                        ? `📚 ${session.moduleId}`
-                        : session.mode === "missed"
-                        ? "🎯 Missed Questions"
-                        : "🎲 Random"}
+                        : session.mode === 'module'
+                          ? `📚 ${session.moduleId}`
+                          : session.mode === 'missed'
+                            ? '🎯 Missed Questions'
+                            : '🎲 Random'}
                     </div>
                     <div className="text-xs text-muted-foreground">
                       {new Date(session.startTime).toLocaleDateString()}
@@ -312,10 +311,7 @@ export function PracticeStats({ className }: PracticeStatsProps) {
                     <span className="text-sm text-muted-foreground">
                       {session.score} / {session.questions.length}
                     </span>
-                    <Badge
-                      variant="outline"
-                      className={getAccuracyColor(accuracy)}
-                    >
+                    <Badge variant="outline" className={getAccuracyColor(accuracy)}>
                       {Math.round(accuracy)}%
                     </Badge>
                   </div>

@@ -25,7 +25,7 @@ export interface SafeUserProgress {
   user_id: string;
   section_id: string;
   module_id: string;
-  status: "not_started" | "in_progress" | "completed" | "bookmarked";
+  status: 'not_started' | 'in_progress' | 'completed' | 'bookmarked';
   completion_percentage: number;
   last_accessed: string;
   completed_at?: string;
@@ -98,7 +98,7 @@ export interface SafeQuestion extends BaseEntity {
 }
 
 export interface SafeExamSession extends BaseEntity {
-  mode: "practice" | "mock" | "review";
+  mode: 'practice' | 'mock' | 'review';
   questions: SafeQuestion[];
   currentIndex: number;
   answers: SafeRecord<string, string>;
@@ -175,7 +175,7 @@ export interface SafeStudyGuideSection {
 export interface SafeStudyGuideCheckpoint {
   id: string;
   sectionId: string;
-  type: "knowledge-check" | "hands-on";
+  type: 'knowledge-check' | 'hands-on';
   question: string;
   completed: boolean;
 }

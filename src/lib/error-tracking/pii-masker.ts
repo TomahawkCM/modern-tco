@@ -81,8 +81,8 @@ export function maskString(str: string): string {
   let masked = str;
 
   // Mask email addresses (keep domain for debugging)
-  masked = masked.replace(PII_PATTERNS.email, (match, localPart, domain) => {
-    const maskedLocal = `${localPart.charAt(0)  }***`;
+  masked = masked.replace(PII_PATTERNS.email, (_match, localPart, domain) => {
+    const maskedLocal = `${localPart.charAt(0)}***`;
     return `${maskedLocal}@${domain}`;
   });
 
@@ -103,7 +103,7 @@ export function maskString(str: string): string {
   masked = masked.replace(PII_PATTERNS.jwt, (match) => {
     const parts = match.split('.');
     if (parts.length >= 2) {
-      return `${parts[0]  }.*****.***`;
+      return `${parts[0]}.*****.***`;
     }
     return '***JWT***';
   });
@@ -111,7 +111,7 @@ export function maskString(str: string): string {
   // Mask long API keys (but keep first few chars for debugging)
   masked = masked.replace(PII_PATTERNS.apiKey, (match) => {
     if (match.length > 40) {
-      return `${match.substring(0, 4)  }...${  match.substring(match.length - 4)}`;
+      return `${match.substring(0, 4)}...${match.substring(match.length - 4)}`;
     }
     return match;
   });
@@ -119,7 +119,7 @@ export function maskString(str: string): string {
   // Mask UUIDs (keep first segment for debugging)
   masked = masked.replace(PII_PATTERNS.uuid, (match) => {
     const parts = match.split('-');
-    return `${parts[0]  }-****-****-****-************`;
+    return `${parts[0]}-****-****-****-************`;
   });
 
   return masked;
@@ -147,7 +147,7 @@ export function maskObject<T extends MaskableData>(obj: T, depth = 0, maxDepth =
   }
 
   if (Array.isArray(obj)) {
-    return obj.map(item => maskObject(item, depth + 1, maxDepth)) as T;
+    return obj.map((item) => maskObject(item, depth + 1, maxDepth)) as T;
   }
 
   const masked: MaskableObject = {};
@@ -155,9 +155,7 @@ export function maskObject<T extends MaskableData>(obj: T, depth = 0, maxDepth =
     const lowerKey = key.toLowerCase();
 
     // Check if field name is sensitive
-    const isSensitiveField = SENSITIVE_FIELD_NAMES.some(field =>
-      lowerKey.includes(field)
-    );
+    const isSensitiveField = SENSITIVE_FIELD_NAMES.some((field) => lowerKey.includes(field));
 
     if (isSensitiveField) {
       // Completely mask sensitive fields
@@ -182,7 +180,9 @@ export function maskObject<T extends MaskableData>(obj: T, depth = 0, maxDepth =
 /**
  * Masks headers object, with special handling for sensitive headers
  */
-export function maskHeaders(headers: Record<string, string | string[]>): Record<string, string | string[]> {
+export function maskHeaders(
+  headers: Record<string, string | string[]>
+): Record<string, string | string[]> {
   const masked: Record<string, string | string[]> = {};
 
   for (const [key, value] of Object.entries(headers)) {
@@ -195,13 +195,17 @@ export function maskHeaders(headers: Record<string, string | string[]>): Record<
       } else {
         masked[key] = '[REDACTED:HEADER]';
       }
-    } else if (lowerKey.includes('auth') || lowerKey.includes('token') || lowerKey.includes('key')) {
+    } else if (
+      lowerKey.includes('auth') ||
+      lowerKey.includes('token') ||
+      lowerKey.includes('key')
+    ) {
       // Be extra cautious with auth-related headers
       masked[key] = '[REDACTED:AUTH]';
     } else {
       // Apply standard masking to header values
       if (Array.isArray(value)) {
-        masked[key] = value.map(v => maskString(v));
+        masked[key] = value.map((v) => maskString(v));
       } else {
         masked[key] = maskString(value);
       }
@@ -222,7 +226,7 @@ export function maskUrl(url: string): string {
 
     for (const [key, value] of params.entries()) {
       const lowerKey = key.toLowerCase();
-      if (SENSITIVE_FIELD_NAMES.some(field => lowerKey.includes(field))) {
+      if (SENSITIVE_FIELD_NAMES.some((field) => lowerKey.includes(field))) {
         maskedParams.set(key, '[REDACTED]');
       } else {
         maskedParams.set(key, maskString(value));

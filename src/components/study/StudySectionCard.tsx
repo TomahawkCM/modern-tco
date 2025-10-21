@@ -1,48 +1,64 @@
 // @ts-nocheck - Type errors in this file will be fixed post-deployment
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
-import { Progress } from '@/components/ui/progress'
-import { BookOpen, Clock, CheckCircle, BookmarkIcon, PlayCircle } from 'lucide-react'
-import Link from 'next/link'
-import { useStudyProgress } from '@/hooks/useStudyProgress'
-import { useBookmarks } from '@/hooks/useBookmarks'
-import type { StudySection } from '@/types/supabase'
+
+import { BookmarkIcon, BookOpen, CheckCircle, Clock, PlayCircle } from 'lucide-react';
+import Link from 'next/link';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Progress } from '@/components/ui/progress';
+import { useBookmarks } from '@/hooks/useBookmarks';
+import { useStudyProgress } from '@/hooks/useStudyProgress';
+import type { StudySection } from '@/types/supabase';
 
 interface StudySectionCardProps {
-  section: StudySection
-  moduleId: string
-  className?: string
+  section: StudySection;
+  moduleId: string;
+  className?: string;
 }
 
 export function StudySectionCard({ section, moduleId, className }: StudySectionCardProps) {
-  const { getSectionStatus, getSectionCompletion } = useStudyProgress()
-  const { isBookmarked, toggleBookmark } = useBookmarks()
-  
-  const status = getSectionStatus(section.id)
-  const completion = getSectionCompletion(section.id)
-  const bookmarked = isBookmarked(section.id)
+  const { getSectionStatus, getSectionCompletion } = useStudyProgress();
+  const { isBookmarked, toggleBookmark } = useBookmarks();
+
+  const status = getSectionStatus(section.id);
+  const completion = getSectionCompletion(section.id);
+  const bookmarked = isBookmarked(section.id);
 
   const getStatusBadge = () => {
     switch (status) {
       case 'completed':
-        return <Badge variant="default" className="gap-1 bg-green-100 text-green-800 hover:bg-green-200"><CheckCircle className="h-3 w-3" />Completed</Badge>
+        return (
+          <Badge variant="default" className="gap-1 bg-green-100 text-green-800 hover:bg-green-200">
+            <CheckCircle className="h-3 w-3" />
+            Completed
+          </Badge>
+        );
       case 'in_progress':
-        return <Badge variant="default" className="gap-1"><PlayCircle className="h-3 w-3" />In Progress</Badge>
+        return (
+          <Badge variant="default" className="gap-1">
+            <PlayCircle className="h-3 w-3" />
+            In Progress
+          </Badge>
+        );
       default:
-        return <Badge variant="secondary" className="gap-1"><BookOpen className="h-3 w-3" />Not Started</Badge>
+        return (
+          <Badge variant="secondary" className="gap-1">
+            <BookOpen className="h-3 w-3" />
+            Not Started
+          </Badge>
+        );
     }
-  }
+  };
 
   const handleBookmarkToggle = async (e: React.MouseEvent) => {
-    e.preventDefault()
-    e.stopPropagation()
+    e.preventDefault();
+    e.stopPropagation();
     try {
-      await toggleBookmark(section.id, moduleId)
+      await toggleBookmark(section.id, moduleId);
     } catch (error) {
-      console.error('Failed to toggle bookmark:', error)
+      console.error('Failed to toggle bookmark:', error);
     }
-  }
+  };
 
   return (
     <Card className={`group hover:shadow-lg transition-all duration-200 ${className}`}>
@@ -59,15 +75,15 @@ export function StudySectionCard({ section, moduleId, className }: StudySectionC
               {section.content.substring(0, 100)}...
             </CardDescription>
           </div>
-          
+
           <Button
             variant="ghost"
             size="sm"
             onClick={handleBookmarkToggle}
             className="ml-2 shrink-0"
           >
-            <BookmarkIcon 
-              className={`h-4 w-4 ${bookmarked ? 'fill-current text-primary' : 'text-muted-foreground'}`} 
+            <BookmarkIcon
+              className={`h-4 w-4 ${bookmarked ? 'fill-current text-primary' : 'text-muted-foreground'}`}
             />
           </Button>
         </div>
@@ -89,7 +105,9 @@ export function StudySectionCard({ section, moduleId, className }: StudySectionC
         <div className="flex items-center gap-4 text-sm text-muted-foreground">
           <div className="flex items-center gap-1">
             <Clock className="h-4 w-4" />
-            <span>{section.estimated_time_minutes ? `${section.estimated_time_minutes} min` : '15 min'}</span>
+            <span>
+              {section.estimated_time_minutes ? `${section.estimated_time_minutes} min` : '15 min'}
+            </span>
           </div>
           <div className="flex items-center gap-1">
             <BookOpen className="h-4 w-4" />
@@ -98,29 +116,34 @@ export function StudySectionCard({ section, moduleId, className }: StudySectionC
         </div>
 
         {/* Content Preview */}
-        {section.content && typeof section.content === 'object' && 'overview' in section.content && (
-          <div className="space-y-2">
-            <h4 className="text-sm font-medium">Overview:</h4>
-            <p className="text-sm text-muted-foreground line-clamp-3">
-              {(section.content).overview}
-            </p>
-          </div>
-        )}
+        {section.content &&
+          typeof section.content === 'object' &&
+          'overview' in section.content && (
+            <div className="space-y-2">
+              <h4 className="text-sm font-medium">Overview:</h4>
+              <p className="text-sm text-muted-foreground line-clamp-3">
+                {section.content.overview}
+              </p>
+            </div>
+          )}
 
         {/* Action Button */}
         <div className="pt-2">
-          <Button asChild className="w-full" variant={status === 'completed' ? 'outline' : 'default'}>
+          <Button
+            asChild
+            className="w-full"
+            variant={status === 'completed' ? 'outline' : 'default'}
+          >
             <Link href={`/study/${moduleId}#${section.id}`}>
               {status === 'completed'
                 ? 'Review Section'
                 : status === 'in_progress'
                   ? 'Continue Reading'
-                  : 'Start Section'
-              }
+                  : 'Start Section'}
             </Link>
           </Button>
         </div>
       </CardContent>
     </Card>
-  )
+  );
 }

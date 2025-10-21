@@ -12,7 +12,7 @@ const OS_PLATFORMS = [
   { name: 'Windows Server 2019', version: ['2019'], weight: 8 },
   { name: 'Windows Server 2016', version: ['2016'], weight: 4 },
   { name: 'macOS', version: ['13.6', '14.0', '14.1', '14.2', '14.3', '14.4'], weight: 15 },
-  { name: 'Linux', version: ['RHEL 8', 'RHEL 9', 'Ubuntu 22.04', 'Ubuntu 20.04'], weight: 10 }
+  { name: 'Linux', version: ['RHEL 8', 'RHEL 9', 'Ubuntu 22.04', 'Ubuntu 20.04'], weight: 10 },
 ];
 
 const LOCATIONS = [
@@ -22,7 +22,7 @@ const LOCATIONS = [
   { name: 'EU-UK', weight: 12 },
   { name: 'APAC-JP', weight: 10 },
   { name: 'APAC-AU', weight: 8 },
-  { name: 'SA-BR', weight: 5 }
+  { name: 'SA-BR', weight: 5 },
 ];
 
 const GROUPS = [
@@ -37,7 +37,7 @@ const GROUPS = [
   { name: 'Data Center Servers', role: 'Server', weight: 8 },
   { name: 'Edge Servers', role: 'Server', weight: 3 },
   { name: 'Development Servers', role: 'Server', weight: 2 },
-  { name: 'Canary Cohort', role: 'Workstation', weight: 1 }
+  { name: 'Canary Cohort', role: 'Workstation', weight: 1 },
 ];
 
 // Helper to pick weighted random item
@@ -102,12 +102,15 @@ function generateMachine(index: number): MachineData {
   }
 
   // Compliance score - higher for newer systems and servers
-  let complianceBase = 0.70;
+  let complianceBase = 0.7;
   if (os.name.includes('2022') || os.name.includes('11') || os.name === 'macOS') {
     complianceBase = 0.85;
   }
   if (isServer) complianceBase += 0.05;
-  const compliance_score = Math.min(0.99, Math.max(0.50, complianceBase + randomInRange(-0.15, 0.15)));
+  const compliance_score = Math.min(
+    0.99,
+    Math.max(0.5, complianceBase + randomInRange(-0.15, 0.15))
+  );
 
   return {
     computer_name: computerName,
@@ -121,7 +124,7 @@ function generateMachine(index: number): MachineData {
     cpu_percent: Math.round(cpu_percent * 10) / 10,
     compliance_score: Math.round(compliance_score * 100) / 100,
     last_reboot: randomPastDate(30),
-    last_seen: randomPastDate(7)
+    last_seen: randomPastDate(7),
   };
 }
 
@@ -158,7 +161,7 @@ export function generateSampleDataWithScenarios(): MachineData[] {
       cpu_percent: 98.7,
       compliance_score: 0.72,
       last_reboot: randomPastDate(45),
-      last_seen: randomPastDate(1)
+      last_seen: randomPastDate(1),
     },
     {
       computer_name: 'LOW-DISK-ALERT',
@@ -172,7 +175,7 @@ export function generateSampleDataWithScenarios(): MachineData[] {
       cpu_percent: 34.2,
       compliance_score: 0.58,
       last_reboot: randomPastDate(60),
-      last_seen: randomPastDate(2)
+      last_seen: randomPastDate(2),
     },
     {
       computer_name: 'OFFLINE-MACHINE',
@@ -186,7 +189,7 @@ export function generateSampleDataWithScenarios(): MachineData[] {
       cpu_percent: 12.3,
       compliance_score: 0.81,
       last_reboot: randomPastDate(90),
-      last_seen: randomPastDate(30)
+      last_seen: randomPastDate(30),
     },
     {
       computer_name: 'PERFECT-COMPLIANCE',
@@ -200,7 +203,7 @@ export function generateSampleDataWithScenarios(): MachineData[] {
       cpu_percent: 25.1,
       compliance_score: 0.99,
       last_reboot: randomPastDate(3),
-      last_seen: randomPastDate(1)
+      last_seen: randomPastDate(1),
     },
     {
       computer_name: 'LOW-COMPLIANCE-WKS',
@@ -214,7 +217,7 @@ export function generateSampleDataWithScenarios(): MachineData[] {
       cpu_percent: 45.6,
       compliance_score: 0.52,
       last_reboot: randomPastDate(75),
-      last_seen: randomPastDate(5)
+      last_seen: randomPastDate(5),
     },
     {
       computer_name: 'HIGH-MEMORY-SERVER',
@@ -228,7 +231,7 @@ export function generateSampleDataWithScenarios(): MachineData[] {
       cpu_percent: 42.8,
       compliance_score: 0.94,
       last_reboot: randomPastDate(10),
-      last_seen: randomPastDate(1)
+      last_seen: randomPastDate(1),
     },
     {
       computer_name: 'EDGE-CANARY-001',
@@ -242,7 +245,7 @@ export function generateSampleDataWithScenarios(): MachineData[] {
       cpu_percent: 8.2,
       compliance_score: 0.98,
       last_reboot: randomPastDate(1),
-      last_seen: randomPastDate(1)
+      last_seen: randomPastDate(1),
     },
     {
       computer_name: 'LEGACY-SERVER-01',
@@ -256,7 +259,7 @@ export function generateSampleDataWithScenarios(): MachineData[] {
       cpu_percent: 67.4,
       compliance_score: 0.61,
       last_reboot: randomPastDate(120),
-      last_seen: randomPastDate(7)
+      last_seen: randomPastDate(7),
     },
     {
       computer_name: 'MAC-EXEC-VIP',
@@ -270,7 +273,7 @@ export function generateSampleDataWithScenarios(): MachineData[] {
       cpu_percent: 15.3,
       compliance_score: 0.96,
       last_reboot: randomPastDate(5),
-      last_seen: randomPastDate(1)
+      last_seen: randomPastDate(1),
     },
     {
       computer_name: 'DEV-BUILD-SERVER',
@@ -284,8 +287,8 @@ export function generateSampleDataWithScenarios(): MachineData[] {
       cpu_percent: 82.1,
       compliance_score: 0.87,
       last_reboot: randomPastDate(7),
-      last_seen: randomPastDate(1)
-    }
+      last_seen: randomPastDate(1),
+    },
   ];
 
   return [...baseData, ...scenarioMachines];

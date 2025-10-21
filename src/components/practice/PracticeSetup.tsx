@@ -1,20 +1,20 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Label } from "@/components/ui/label";
+import { AlertCircle, Book, Play, Shuffle, Target } from 'lucide-react';
+import { useState } from 'react';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Label } from '@/components/ui/label';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { Play, Target, Book, Shuffle, AlertCircle } from "lucide-react";
-import { createPracticeSession, getPracticeRecommendations } from "@/lib/practiceMode";
-import type { PracticeSession } from "@/lib/practiceMode";
+} from '@/components/ui/select';
+import type { PracticeSession } from '@/lib/practiceMode';
+import { createPracticeSession, getPracticeRecommendations } from '@/lib/practiceMode';
 
 interface PracticeSetupProps {
   /** Callback when practice session starts */
@@ -30,12 +30,16 @@ interface PracticeSetupProps {
  *
  * Configure and start a practice session
  */
-export function PracticeSetup({ onStart, moduleId: initialModuleId, concept: initialConcept }: PracticeSetupProps) {
-  const [mode, setMode] = useState<"concept" | "module" | "random" | "missed">("random");
-  const [difficulty, setDifficulty] = useState<"easy" | "medium" | "hard" | "mixed">("mixed");
+export function PracticeSetup({
+  onStart,
+  moduleId: initialModuleId,
+  concept: initialConcept,
+}: PracticeSetupProps) {
+  const [mode, setMode] = useState<'concept' | 'module' | 'random' | 'missed'>('random');
+  const [difficulty, setDifficulty] = useState<'easy' | 'medium' | 'hard' | 'mixed'>('mixed');
   const [questionCount, setQuestionCount] = useState(10);
-  const [moduleId, setModuleId] = useState(initialModuleId || "");
-  const [concept, setConcept] = useState(initialConcept || "");
+  const [moduleId, setModuleId] = useState(initialModuleId || '');
+  const [concept, setConcept] = useState(initialConcept || '');
 
   const recommendations = getPracticeRecommendations();
 
@@ -52,8 +56,8 @@ export function PracticeSetup({ onStart, moduleId: initialModuleId, concept: ini
   };
 
   const canStart = () => {
-    if (mode === "concept" && (!moduleId || !concept)) return false;
-    if (mode === "module" && !moduleId) return false;
+    if (mode === 'concept' && (!moduleId || !concept)) return false;
+    if (mode === 'module' && !moduleId) return false;
     return true;
   };
 
@@ -89,77 +93,69 @@ export function PracticeSetup({ onStart, moduleId: initialModuleId, concept: ini
             <Label>Practice Mode</Label>
             <div className="grid grid-cols-2 gap-3">
               <button
-                onClick={() => setMode("random")}
+                onClick={() => setMode('random')}
                 className={`rounded-lg border-2 p-4 text-left transition-colors ${
-                  mode === "random"
-                    ? "border-purple-500 bg-accent/10"
-                    : "border-gray-700 hover:border-gray-600"
+                  mode === 'random'
+                    ? 'border-purple-500 bg-accent/10'
+                    : 'border-gray-700 hover:border-gray-600'
                 }`}
               >
                 <div className="flex items-center gap-2 mb-2">
                   <Shuffle className="h-5 w-5 text-accent-foreground" />
                   <span className="font-semibold">Random</span>
                 </div>
-                <p className="text-sm text-muted-foreground">
-                  Mix of questions from all topics
-                </p>
+                <p className="text-sm text-muted-foreground">Mix of questions from all topics</p>
               </button>
 
               <button
-                onClick={() => setMode("concept")}
+                onClick={() => setMode('concept')}
                 className={`rounded-lg border-2 p-4 text-left transition-colors ${
-                  mode === "concept"
-                    ? "border-blue-500 bg-primary/10"
-                    : "border-gray-700 hover:border-gray-600"
+                  mode === 'concept'
+                    ? 'border-blue-500 bg-primary/10'
+                    : 'border-gray-700 hover:border-gray-600'
                 }`}
               >
                 <div className="flex items-center gap-2 mb-2">
                   <Target className="h-5 w-5 text-primary" />
                   <span className="font-semibold">Specific Concept</span>
                 </div>
-                <p className="text-sm text-muted-foreground">
-                  Focus on one concept
-                </p>
+                <p className="text-sm text-muted-foreground">Focus on one concept</p>
               </button>
 
               <button
-                onClick={() => setMode("module")}
+                onClick={() => setMode('module')}
                 className={`rounded-lg border-2 p-4 text-left transition-colors ${
-                  mode === "module"
-                    ? "border-green-500 bg-[#22c55e]/10"
-                    : "border-gray-700 hover:border-gray-600"
+                  mode === 'module'
+                    ? 'border-green-500 bg-[#22c55e]/10'
+                    : 'border-gray-700 hover:border-gray-600'
                 }`}
               >
                 <div className="flex items-center gap-2 mb-2">
                   <Book className="h-5 w-5 text-[#22c55e]" />
                   <span className="font-semibold">Module</span>
                 </div>
-                <p className="text-sm text-muted-foreground">
-                  Practice entire module
-                </p>
+                <p className="text-sm text-muted-foreground">Practice entire module</p>
               </button>
 
               <button
-                onClick={() => setMode("missed")}
+                onClick={() => setMode('missed')}
                 className={`rounded-lg border-2 p-4 text-left transition-colors ${
-                  mode === "missed"
-                    ? "border-orange-500 bg-orange-500/10"
-                    : "border-gray-700 hover:border-gray-600"
+                  mode === 'missed'
+                    ? 'border-orange-500 bg-orange-500/10'
+                    : 'border-gray-700 hover:border-gray-600'
                 }`}
               >
                 <div className="flex items-center gap-2 mb-2">
                   <AlertCircle className="h-5 w-5 text-orange-400" />
                   <span className="font-semibold">Missed Questions</span>
                 </div>
-                <p className="text-sm text-muted-foreground">
-                  Review incorrect answers
-                </p>
+                <p className="text-sm text-muted-foreground">Review incorrect answers</p>
               </button>
             </div>
           </div>
 
           {/* Module Selection (if needed) */}
-          {(mode === "concept" || mode === "module") && (
+          {(mode === 'concept' || mode === 'module') && (
             <div className="space-y-2">
               <Label htmlFor="module-select">Module</Label>
               <Select value={moduleId} onValueChange={setModuleId}>
@@ -178,7 +174,7 @@ export function PracticeSetup({ onStart, moduleId: initialModuleId, concept: ini
           )}
 
           {/* Concept Selection (if needed) */}
-          {mode === "concept" && moduleId && (
+          {mode === 'concept' && moduleId && (
             <div className="space-y-2">
               <Label htmlFor="concept-input">Concept</Label>
               <input
@@ -206,25 +202,33 @@ export function PracticeSetup({ onStart, moduleId: initialModuleId, concept: ini
                 <SelectItem value="easy">
                   <span className="flex items-center gap-2">
                     Easy
-                    <Badge variant="outline" className="text-xs">Beginner</Badge>
+                    <Badge variant="outline" className="text-xs">
+                      Beginner
+                    </Badge>
                   </span>
                 </SelectItem>
                 <SelectItem value="medium">
                   <span className="flex items-center gap-2">
                     Medium
-                    <Badge variant="outline" className="text-xs">Intermediate</Badge>
+                    <Badge variant="outline" className="text-xs">
+                      Intermediate
+                    </Badge>
                   </span>
                 </SelectItem>
                 <SelectItem value="hard">
                   <span className="flex items-center gap-2">
                     Hard
-                    <Badge variant="outline" className="text-xs">Advanced</Badge>
+                    <Badge variant="outline" className="text-xs">
+                      Advanced
+                    </Badge>
                   </span>
                 </SelectItem>
                 <SelectItem value="mixed">
                   <span className="flex items-center gap-2">
                     Mixed
-                    <Badge variant="outline" className="text-xs">All Levels</Badge>
+                    <Badge variant="outline" className="text-xs">
+                      All Levels
+                    </Badge>
                   </span>
                 </SelectItem>
               </SelectContent>
@@ -236,7 +240,7 @@ export function PracticeSetup({ onStart, moduleId: initialModuleId, concept: ini
             <Label htmlFor="count-select">Number of Questions</Label>
             <Select
               value={questionCount.toString()}
-              onValueChange={(v) => setQuestionCount(parseInt(v))}
+              onValueChange={(v) => setQuestionCount(parseInt(v, 10))}
             >
               <SelectTrigger id="count-select">
                 <SelectValue />

@@ -1,20 +1,20 @@
-import { supabase } from "@/lib/supabase";
+import { supabase } from '@/lib/supabase';
 import {
   type Choice,
   Difficulty,
-  type QuestionCategory,
-  TCODomain,
-  TCO_DOMAIN_WEIGHTS,
   type ExamSession,
   type Question,
-} from "@/types/exam";
-import { ALL_DIFFICULTIES } from "./difficulty";
-import type { Tables } from "@/types/supabase";
+  type QuestionCategory,
+  TCO_DOMAIN_WEIGHTS,
+  TCODomain,
+} from '@/types/exam';
+import type { Tables } from '@/types/supabase';
+import { ALL_DIFFICULTIES } from './difficulty';
 import {
   getAllQuestions,
   getQuestionsByDomain,
   getWeightedRandomQuestions,
-} from "./questionLoader";
+} from './questionLoader';
 
 export interface QuestionFilter {
   domains?: TCODomain[];
@@ -51,19 +51,19 @@ export function filterQuestions(questions: Question[], filter: QuestionFilter): 
   let filtered = [...questions];
 
   if (filter.domains && filter.domains.length > 0) {
-    filtered = filtered.filter((q) => filter.domains!.includes(q.domain));
+    filtered = filtered.filter((q) => filter.domains?.includes(q.domain));
   }
 
   if (filter.difficulties && filter.difficulties.length > 0) {
-    filtered = filtered.filter((q) => filter.difficulties!.includes(q.difficulty));
+    filtered = filtered.filter((q) => filter.difficulties?.includes(q.difficulty));
   }
 
   if (filter.tags && filter.tags.length > 0) {
-    filtered = filtered.filter((q) => filter.tags!.some((tag) => q.tags?.includes(tag)));
+    filtered = filtered.filter((q) => filter.tags?.some((tag) => q.tags?.includes(tag)));
   }
 
   if (filter.excludeAnswered && filter.answeredQuestions) {
-    filtered = filtered.filter((q) => !filter.answeredQuestions!.includes(q.id));
+    filtered = filtered.filter((q) => !filter.answeredQuestions?.includes(q.id));
   }
 
   return filtered;
@@ -101,16 +101,16 @@ export function getPracticeQuestions(
 export async function getDatabaseWeightedQuestions(count: number = 65): Promise<Question[]> {
   try {
     // Fetch all questions from Supabase
-    const { data: allQuestions, error } = await supabase.from("questions").select("*");
+    const { data: allQuestions, error } = await supabase.from('questions').select('*');
 
     if (error) {
-      console.error("Error fetching questions from database:", error);
+      console.error('Error fetching questions from database:', error);
       // Fallback to static questions
       return getWeightedRandomQuestions(count);
     }
 
     if (!allQuestions || allQuestions.length === 0) {
-      console.warn("No questions found in database, using static fallback");
+      console.warn('No questions found in database, using static fallback');
       return getWeightedRandomQuestions(count);
     }
 
@@ -118,13 +118,13 @@ export async function getDatabaseWeightedQuestions(count: number = 65): Promise<
     const questionsByDomain: Record<string, Question[]> = {};
 
     allQuestions.forEach((dbQuestionData) => {
-      const dbQuestion = dbQuestionData as Tables<"questions">; // Explicitly cast here
+      const dbQuestion = dbQuestionData as Tables<'questions'>; // Explicitly cast here
       // Convert database format to our Question interface
       const question: Question = {
         id: dbQuestion.id,
         question: dbQuestion.question,
         choices: (dbQuestion.options as unknown as Choice[]) || [],
-        correctAnswerId: dbQuestion.correct_answer?.toString() || "0",
+        correctAnswerId: dbQuestion.correct_answer?.toString() || '0',
         domain: dbQuestion.domain as TCODomain,
         difficulty: dbQuestion.difficulty as Difficulty,
         category: dbQuestion.category as QuestionCategory,
@@ -164,12 +164,12 @@ export async function getDatabaseWeightedQuestions(count: number = 65): Promise<
       const usedIds = new Set(selectedQuestions.map((q) => q.id));
       const remainingQuestions = allQuestions
         .map((dbQData) => {
-          const dbQ = dbQData as Tables<"questions">; // Explicitly cast here
+          const dbQ = dbQData as Tables<'questions'>; // Explicitly cast here
           return {
             id: dbQ.id,
             question: dbQ.question,
             choices: (dbQ.options as unknown as Choice[]) || [],
-            correctAnswerId: dbQ.correct_answer?.toString() || "0",
+            correctAnswerId: dbQ.correct_answer?.toString() || '0',
             domain: dbQ.domain as TCODomain,
             difficulty: dbQ.difficulty as Difficulty,
             category: dbQ.category as QuestionCategory,
@@ -194,7 +194,7 @@ export async function getDatabaseWeightedQuestions(count: number = 65): Promise<
 
     return finalQuestions;
   } catch (error) {
-    console.error("Error in getDatabaseWeightedQuestions:", error);
+    console.error('Error in getDatabaseWeightedQuestions:', error);
     // Fallback to static questions
     return getWeightedRandomQuestions(count);
   }
@@ -443,16 +443,16 @@ export function generateStudyRecommendations(
   const nextSteps: string[] = [];
 
   if (weakDomains.length > 0) {
-    studyTips.push(`Focus on your weakest domains: ${weakDomains.join(", ")}`);
+    studyTips.push(`Focus on your weakest domains: ${weakDomains.join(', ')}`);
     nextSteps.push(`Take domain-specific practice tests for ${weakDomains[0]}`);
   }
 
   if (averageRecentScore < 70) {
-    studyTips.push("Review explanations carefully for incorrect answers");
-    nextSteps.push("Complete at least 20 practice questions daily");
+    studyTips.push('Review explanations carefully for incorrect answers');
+    nextSteps.push('Complete at least 20 practice questions daily');
   } else if (averageRecentScore > 85) {
     studyTips.push("You're performing well! Focus on consistency");
-    nextSteps.push("Take a full-length mock exam to test readiness");
+    nextSteps.push('Take a full-length mock exam to test readiness');
   }
 
   return {
@@ -470,15 +470,15 @@ export function validateExamSession(session: ExamSession): { isValid: boolean; e
   const errors: string[] = [];
 
   if (!session.questions || session.questions.length === 0) {
-    errors.push("Exam session must contain questions");
+    errors.push('Exam session must contain questions');
   }
 
   if (!session.startTime) {
-    errors.push("Exam session must have a start time");
+    errors.push('Exam session must have a start time');
   }
 
   if (session.completed && !session.endTime) {
-    errors.push("Completed exam session must have an end time");
+    errors.push('Completed exam session must have an end time');
   }
 
   const answeredQuestions = Object.keys(session.answers);
@@ -487,7 +487,7 @@ export function validateExamSession(session: ExamSession): { isValid: boolean; e
   );
 
   if (invalidAnswers.length > 0) {
-    errors.push(`Invalid answers found for questions: ${invalidAnswers.join(", ")}`);
+    errors.push(`Invalid answers found for questions: ${invalidAnswers.join(', ')}`);
   }
 
   return {
@@ -497,7 +497,7 @@ export function validateExamSession(session: ExamSession): { isValid: boolean; e
 }
 
 // Helper to transform database question object to application-level Question
-function transformDatabaseQuestion(dbQ: Tables<"questions">): Question {
+function transformDatabaseQuestion(dbQ: Tables<'questions'>): Question {
   const choices = (dbQ.options as unknown as Choice[]) || []; // Assume options is JSON and parse it to Choice[]
   const tags = (dbQ.tags as string[]) || []; // Assume tags is JSON and parse it to string[]
 
@@ -505,7 +505,7 @@ function transformDatabaseQuestion(dbQ: Tables<"questions">): Question {
     id: dbQ.id,
     question: dbQ.question,
     choices,
-    correctAnswerId: dbQ.correct_answer?.toString() || "0",
+    correctAnswerId: dbQ.correct_answer?.toString() || '0',
     domain: dbQ.domain as TCODomain,
     difficulty: dbQ.difficulty as Difficulty,
     category: dbQ.category as QuestionCategory,

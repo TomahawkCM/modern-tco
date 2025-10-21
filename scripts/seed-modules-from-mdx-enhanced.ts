@@ -21,13 +21,13 @@
  * - SUPABASE_SERVICE_ROLE_KEY (server key)
  */
 
+import crypto from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
-import matter from 'gray-matter';
-import { createClient } from '@supabase/supabase-js';
 import { parseArgs } from 'node:util';
-import crypto from 'node:crypto';
+import { createClient } from '@supabase/supabase-js';
 import dotenv from 'dotenv';
+import matter from 'gray-matter';
 
 // Load env from .env.local if present
 try {
@@ -51,7 +51,13 @@ type Section = {
   title: string;
   content: string;
   order: number;
-  type: 'overview' | 'learning_objectives' | 'procedures' | 'troubleshooting' | 'exam_prep' | 'references';
+  type:
+    | 'overview'
+    | 'learning_objectives'
+    | 'procedures'
+    | 'troubleshooting'
+    | 'exam_prep'
+    | 'references';
   estimated?: number;
   keyPoints?: string[];
 };
@@ -67,7 +73,10 @@ type CLIOptions = {
 function generateDeterministicUUID(id: string): string {
   // Create a namespace UUID (using a fixed namespace for TCO modules)
   const namespace = '6ba7b810-9dad-11d1-80b4-00c04fd430c8'; // Standard namespace UUID
-  const hash = crypto.createHash('sha256').update(namespace + id).digest('hex');
+  const hash = crypto
+    .createHash('sha256')
+    .update(namespace + id)
+    .digest('hex');
 
   // Format as UUID v4
   return [
@@ -75,7 +84,7 @@ function generateDeterministicUUID(id: string): string {
     hash.substring(8, 12),
     '4' + hash.substring(13, 16), // Version 4
     ((parseInt(hash.substring(16, 18), 16) & 0x3f) | 0x80).toString(16) + hash.substring(18, 20), // Variant
-    hash.substring(20, 32)
+    hash.substring(20, 32),
   ].join('-');
 }
 
@@ -123,11 +132,11 @@ function parseCliArgs(): CLIOptions {
       'replace-domain': {
         type: 'string',
       },
-      'verbose': {
+      verbose: {
         type: 'boolean',
         default: false,
       },
-      'help': {
+      help: {
         type: 'boolean',
         default: false,
       },
@@ -179,7 +188,7 @@ function parseSections(markdown: string): Section[] {
     if (line.startsWith('## ') || line.startsWith('# ')) {
       flush();
       let title = line.replace(/^#{1,2}\s+/, '').trim();
-      let estimated: number | undefined = undefined;
+      let estimated: number | undefined;
       // Extract estimated time in heading like "(45 minutes)" or "(3 hours)"
       const m = title.match(/\(([^)]+)\)\s*$/);
       if (m) {
@@ -205,15 +214,15 @@ function formatDomain(domain: string): string {
   // Map common domain variations to standard names
   const domainMap: Record<string, string> = {
     'asking-questions': 'Asking Questions',
-    'asking_questions': 'Asking Questions',
+    asking_questions: 'Asking Questions',
     'refining-questions': 'Refining Questions & Targeting',
-    'refining_questions': 'Refining Questions & Targeting',
+    refining_questions: 'Refining Questions & Targeting',
     'taking-action': 'Taking Action',
-    'taking_action': 'Taking Action',
-    'navigation': 'Navigation and Basic Module Functions',
+    taking_action: 'Taking Action',
+    navigation: 'Navigation and Basic Module Functions',
     'navigation-and-basic-module-functions': 'Navigation and Basic Module Functions',
     'report-generation': 'Report Generation and Data Export',
-    'report_generation': 'Report Generation and Data Export',
+    report_generation: 'Report Generation and Data Export',
   };
 
   const normalized = domain.toLowerCase().replace(/[_\s]+/g, '-');
@@ -235,7 +244,9 @@ async function main() {
   }
 
   if (options.replaceDomain) {
-    console.log(`${colors.cyan}🎯 Targeting domain: ${colors.bright}${options.replaceDomain}${colors.reset}`);
+    console.log(
+      `${colors.cyan}🎯 Targeting domain: ${colors.bright}${options.replaceDomain}${colors.reset}`
+    );
   }
 
   if (options.verbose) {
@@ -263,7 +274,9 @@ async function main() {
     return;
   }
 
-  console.log(`\n${colors.green}✓${colors.reset} Found ${colors.bright}${files.length}${colors.reset} MDX files.\n`);
+  console.log(
+    `\n${colors.green}✓${colors.reset} Found ${colors.bright}${files.length}${colors.reset} MDX files.\n`
+  );
 
   let processedCount = 0;
   let skippedCount = 0;
@@ -282,7 +295,9 @@ async function main() {
     // Check if we should process this module
     if (options.replaceDomain && domain !== options.replaceDomain) {
       if (options.verbose) {
-        console.log(`${colors.dim}⏭️  Skipping ${f}: domain "${domain}" doesn't match filter${colors.reset}`);
+        console.log(
+          `${colors.dim}⏭️  Skipping ${f}: domain "${domain}" doesn't match filter${colors.reset}`
+        );
       }
       skippedCount++;
       continue;
@@ -296,7 +311,9 @@ async function main() {
     const est = parseEstimatedMinutes(fm.estimatedTime);
     const learningObjectives: string[] = Array.isArray(fm.learningObjectives)
       ? fm.learningObjectives
-      : (Array.isArray(fm.objectives) ? fm.objectives : []);
+      : Array.isArray(fm.objectives)
+        ? fm.objectives
+        : [];
     const version = String(fm.version || '1');
 
     if (!mdxId) {
@@ -308,15 +325,21 @@ async function main() {
     // Generate UUID from the MDX ID for database
     const id = generateDeterministicUUID(mdxId);
 
-    console.log(`\n${colors.cyan}📦 Processing module:${colors.reset} ${colors.bright}${mdxId}${colors.reset} (${title})`);
+    console.log(
+      `\n${colors.cyan}📦 Processing module:${colors.reset} ${colors.bright}${mdxId}${colors.reset} (${title})`
+    );
     console.log(`   ${colors.dim}Domain: ${domain}${colors.reset}`);
     console.log(`   ${colors.dim}UUID: ${id}${colors.reset}`);
 
     if (options.verbose) {
       console.log(`   ${colors.dim}Description: ${description || 'None'}${colors.reset}`);
       console.log(`   ${colors.dim}Exam Weight: ${examWeight}%${colors.reset}`);
-      console.log(`   ${colors.dim}Estimated Time: ${est ? `${est} minutes` : 'Not specified'}${colors.reset}`);
-      console.log(`   ${colors.dim}Learning Objectives: ${learningObjectives.length}${colors.reset}`);
+      console.log(
+        `   ${colors.dim}Estimated Time: ${est ? `${est} minutes` : 'Not specified'}${colors.reset}`
+      );
+      console.log(
+        `   ${colors.dim}Learning Objectives: ${learningObjectives.length}${colors.reset}`
+      );
     }
 
     if (options.dryRun) {
@@ -324,8 +347,12 @@ async function main() {
 
       const sections = parseSections(content);
       if (sections.length > 0) {
-        console.log(`   ${colors.yellow}[DRY RUN] Would delete existing sections for module ${id}${colors.reset}`);
-        console.log(`   ${colors.yellow}[DRY RUN] Would insert ${sections.length} sections${colors.reset}`);
+        console.log(
+          `   ${colors.yellow}[DRY RUN] Would delete existing sections for module ${id}${colors.reset}`
+        );
+        console.log(
+          `   ${colors.yellow}[DRY RUN] Would insert ${sections.length} sections${colors.reset}`
+        );
 
         if (options.verbose) {
           sections.forEach((s, i) => {
@@ -376,7 +403,9 @@ async function main() {
         .eq('module_id', id);
 
       if (deleteErr && options.verbose) {
-        console.warn(`   ${colors.yellow}⚠️  Warning deleting sections: ${deleteErr.message}${colors.reset}`);
+        console.warn(
+          `   ${colors.yellow}⚠️  Warning deleting sections: ${deleteErr.message}${colors.reset}`
+        );
       }
 
       const sections = parseSections(content);
@@ -407,13 +436,16 @@ async function main() {
         .select('id');
 
       if (secErr) {
-        console.error(`   ${colors.red}❌ Sections insert failed: ${secErr.message}${colors.reset}`);
+        console.error(
+          `   ${colors.red}❌ Sections insert failed: ${secErr.message}${colors.reset}`
+        );
         errorCount++;
       } else {
-        console.log(`   ${colors.green}✅ Inserted ${inserted?.length || 0} sections${colors.reset}`);
+        console.log(
+          `   ${colors.green}✅ Inserted ${inserted?.length || 0} sections${colors.reset}`
+        );
         processedCount++;
       }
-
     } catch (error) {
       console.error(`   ${colors.red}❌ Unexpected error: ${error}${colors.reset}`);
       errorCount++;
@@ -433,7 +465,9 @@ async function main() {
   }
 
   if (options.dryRun) {
-    console.log(`\n${colors.yellow}ℹ️  This was a dry run. To apply changes, run without --dry-run flag${colors.reset}`);
+    console.log(
+      `\n${colors.yellow}ℹ️  This was a dry run. To apply changes, run without --dry-run flag${colors.reset}`
+    );
   }
 
   console.log(`\n${colors.green}✨ Done!${colors.reset}\n`);

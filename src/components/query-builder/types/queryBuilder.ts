@@ -3,13 +3,11 @@
  * TypeScript interfaces for the interactive Question Builder
  */
 
-import {
-  QueryNode,
-  FilterNode,
-  type Sensor,
-  type QueryResult,
-  type FieldMapping,
-  type FilterOperator
+import type {
+  FieldMapping,
+  FilterOperator,
+  QueryResult,
+  Sensor,
 } from '@/lib/tanium-query-engine/types';
 
 // Re-export imported types

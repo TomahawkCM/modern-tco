@@ -3,29 +3,27 @@
  * p5: Core types and state definitions for educational flow
  */
 
-import { ModuleProgress } from "./modules";
-
 /**
  * Learning Flow State Machine
  * Three-phase educational progression with gating and telemetry
  */
 export enum LearningFlowState {
-  LEARN = "learn",
-  PRACTICE = "practice",
-  ASSESS = "assess",
-  COMPLETED = "completed",
+  LEARN = 'learn',
+  PRACTICE = 'practice',
+  ASSESS = 'assess',
+  COMPLETED = 'completed',
 }
 
 export enum LearningFlowEvent {
-  START_LEARN = "start_learn",
-  COMPLETE_LEARN = "complete_learn",
-  START_PRACTICE = "start_practice",
-  COMPLETE_PRACTICE = "complete_practice",
-  START_ASSESS = "start_assess",
-  COMPLETE_ASSESS = "complete_assess",
-  FAIL_ASSESS = "fail_assess",
-  RESET_FLOW = "reset_flow",
-  RESUME_FLOW = "resume_flow",
+  START_LEARN = 'start_learn',
+  COMPLETE_LEARN = 'complete_learn',
+  START_PRACTICE = 'start_practice',
+  COMPLETE_PRACTICE = 'complete_practice',
+  START_ASSESS = 'start_assess',
+  COMPLETE_ASSESS = 'complete_assess',
+  FAIL_ASSESS = 'fail_assess',
+  RESET_FLOW = 'reset_flow',
+  RESUME_FLOW = 'resume_flow',
 }
 
 export interface LearningFlowContext {
@@ -99,10 +97,10 @@ export interface FlowTelemetry {
 }
 
 export enum MasteryLevel {
-  NOVICE = "novice",
-  DEVELOPING = "developing",
-  PROFICIENT = "proficient",
-  ADVANCED = "advanced",
+  NOVICE = 'novice',
+  DEVELOPING = 'developing',
+  PROFICIENT = 'proficient',
+  ADVANCED = 'advanced',
 }
 
 /**
@@ -194,7 +192,7 @@ export interface FlowValidation {
 export interface FlowValidationError {
   code: string;
   message: string;
-  severity: "error" | "warning";
+  severity: 'error' | 'warning';
   field?: string;
 }
 

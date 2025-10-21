@@ -1,13 +1,13 @@
 // Direct schema creation using service role key
-require("dotenv").config({ path: ".env.local" });
-const { createClient } = require("@supabase/supabase-js");
+require('dotenv').config({ path: '.env.local' });
+const { createClient } = require('@supabase/supabase-js');
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
-console.log("🚀 Creating TCO Study Platform Schema...");
-console.log("URL:", supabaseUrl);
-console.log("Using SERVICE ROLE key for full database access");
+console.log('🚀 Creating TCO Study Platform Schema...');
+console.log('URL:', supabaseUrl);
+console.log('Using SERVICE ROLE key for full database access');
 
 const supabase = createClient(supabaseUrl, serviceRoleKey);
 
@@ -100,24 +100,24 @@ CREATE POLICY "Enable read access for all users" ON practice_questions FOR SELEC
 
 async function createSchema() {
   try {
-    console.log("📊 Executing schema creation...");
+    console.log('📊 Executing schema creation...');
 
-    const { data, error } = await supabase.rpc("exec_sql", {
+    const { data, error } = await supabase.rpc('exec_sql', {
       sql: schemaSQL,
     });
 
     if (error) {
-      console.log("❌ Schema creation failed:", error.message);
+      console.log('❌ Schema creation failed:', error.message);
 
       // Try alternative approach with individual queries
-      console.log("🔄 Trying individual table creation...");
+      console.log('🔄 Trying individual table creation...');
 
-      const queries = schemaSQL.split(";").filter((q) => q.trim());
+      const queries = schemaSQL.split(';').filter((q) => q.trim());
       for (let i = 0; i < queries.length; i++) {
         const query = queries[i].trim();
         if (query) {
           console.log(`   Running query ${i + 1}/${queries.length}`);
-          const { error: queryError } = await supabase.rpc("exec_sql", { sql: query });
+          const { error: queryError } = await supabase.rpc('exec_sql', { sql: query });
           if (queryError) {
             console.log(`   ❌ Query failed: ${queryError.message}`);
           } else {
@@ -126,21 +126,21 @@ async function createSchema() {
         }
       }
     } else {
-      console.log("✅ Schema creation succeeded:", data);
+      console.log('✅ Schema creation succeeded:', data);
     }
 
     // Verify tables were created
-    console.log("\\n🔍 Verifying table creation...");
-    const { data: domains, error: domainsError } = await supabase.from("study_domains").select("*");
+    console.log('\\n🔍 Verifying table creation...');
+    const { data: domains, error: domainsError } = await supabase.from('study_domains').select('*');
 
     if (domainsError) {
-      console.log("❌ Verification failed:", domainsError.message);
+      console.log('❌ Verification failed:', domainsError.message);
     } else {
-      console.log("🎉 SUCCESS! Tables created and accessible");
+      console.log('🎉 SUCCESS! Tables created and accessible');
       console.log(`   study_domains: ${domains?.length || 0} records`);
     }
   } catch (error) {
-    console.log("❌ Unexpected error:", error.message);
+    console.log('❌ Unexpected error:', error.message);
   }
 }
 

@@ -1,27 +1,15 @@
-"use client";
+'use client';
 
-import React, { useState, useEffect, useCallback } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Progress } from "@/components/ui/progress";
-import { Badge } from "@/components/ui/badge";
-import { useReview } from "@/contexts/ReviewContext";
-import { flashcardService } from "@/services/flashcardService";
-import { questionReviewService } from "@/services/questionReviewService";
-import type { ReviewQueueItem } from "@/types/review";
-import type { SRRating } from "@/lib/sr";
-import { isFlashcardItem, isQuestionItem, formatTimeRemaining } from "@/types/review";
-import {
-  Clock,
-  CheckCircle2,
-  XCircle,
-  Brain,
-  Target,
-  Pause,
-  Play,
-  X,
-  TrendingUp,
-} from "lucide-react";
+import { Brain, CheckCircle2, Clock, Pause, Play, Target, X, XCircle } from 'lucide-react';
+import { useCallback, useEffect, useState } from 'react';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Progress } from '@/components/ui/progress';
+import { useReview } from '@/contexts/ReviewContext';
+import type { SRRating } from '@/lib/sr';
+import type { ReviewQueueItem } from '@/types/review';
+import { formatTimeRemaining, isFlashcardItem, isQuestionItem } from '@/types/review';
 
 interface StudySessionProps {
   onComplete?: () => void;
@@ -43,7 +31,7 @@ export default function StudySession({ onComplete, onExit }: StudySessionProps) 
 
   const [currentItem, setCurrentItem] = useState<ReviewQueueItem | null>(null);
   const [showAnswer, setShowAnswer] = useState(false);
-  const [selectedAnswer, setSelectedAnswer] = useState<string>("");
+  const [selectedAnswer, setSelectedAnswer] = useState<string>('');
   const [itemStartTime, setItemStartTime] = useState<number>(Date.now());
   const [elapsedTime, setElapsedTime] = useState(0);
 
@@ -64,21 +52,24 @@ export default function StudySession({ onComplete, onExit }: StudySessionProps) 
       const item = queue[activeSession.currentIndex];
       setCurrentItem(item || null);
       setShowAnswer(false);
-      setSelectedAnswer("");
+      setSelectedAnswer('');
       setItemStartTime(Date.now());
     }
-  }, [queue, activeSession?.currentIndex]);
+  }, [queue, activeSession?.currentIndex, activeSession]);
 
-  const handleFlashcardRating = useCallback(async (rating: SRRating) => {
-    if (!currentItem || !isFlashcardItem(currentItem)) return;
+  const handleFlashcardRating = useCallback(
+    async (rating: SRRating) => {
+      if (!currentItem || !isFlashcardItem(currentItem)) return;
 
-    const timeSpent = Math.floor((Date.now() - itemStartTime) / 1000);
-    await reviewFlashcard(currentItem.flashcard.id, rating, timeSpent);
+      const timeSpent = Math.floor((Date.now() - itemStartTime) / 1000);
+      await reviewFlashcard(currentItem.flashcard.id, rating, timeSpent);
 
-    // Move to next item
-    setShowAnswer(false);
-    nextItem();
-  }, [currentItem, itemStartTime, reviewFlashcard, nextItem]);
+      // Move to next item
+      setShowAnswer(false);
+      nextItem();
+    },
+    [currentItem, itemStartTime, reviewFlashcard, nextItem]
+  );
 
   const handleQuestionSubmit = useCallback(async () => {
     if (!currentItem || !isQuestionItem(currentItem) || !selectedAnswer) return;
@@ -90,7 +81,7 @@ export default function StudySession({ onComplete, onExit }: StudySessionProps) 
 
     // Move to next item
     setShowAnswer(false);
-    setSelectedAnswer("");
+    setSelectedAnswer('');
     nextItem();
   }, [currentItem, selectedAnswer, itemStartTime, reviewQuestion, nextItem]);
 
@@ -98,7 +89,9 @@ export default function StudySession({ onComplete, onExit }: StudySessionProps) 
     await completeSession();
     trackReviewEvent('review_session_completed_ui', {
       itemsReviewed: activeSession?.reviewed,
-      accuracy: activeSession?.reviewed ? (activeSession.correct / activeSession.reviewed) * 100 : 0,
+      accuracy: activeSession?.reviewed
+        ? (activeSession.correct / activeSession.reviewed) * 100
+        : 0,
     });
     onComplete?.();
   }, [completeSession, trackReviewEvent, activeSession, onComplete]);
@@ -112,7 +105,7 @@ export default function StudySession({ onComplete, onExit }: StudySessionProps) 
   }, [resumeSession]);
 
   const handleExit = useCallback(() => {
-    if (confirm("Are you sure you want to exit? Your progress will be lost.")) {
+    if (confirm('Are you sure you want to exit? Your progress will be lost.')) {
       onExit?.();
     }
   }, [onExit]);
@@ -125,18 +118,14 @@ export default function StudySession({ onComplete, onExit }: StudySessionProps) 
     );
   }
 
-  const progress = activeSession.reviewed > 0
-    ? (activeSession.reviewed / (queue?.length || 1)) * 100
-    : 0;
-  const accuracy = activeSession.reviewed > 0
-    ? (activeSession.correct / activeSession.reviewed) * 100
-    : 0;
+  const progress =
+    activeSession.reviewed > 0 ? (activeSession.reviewed / (queue?.length || 1)) * 100 : 0;
+  const accuracy =
+    activeSession.reviewed > 0 ? (activeSession.correct / activeSession.reviewed) * 100 : 0;
 
   const isComplete = activeSession.currentIndex >= (queue?.length || 0);
   const targetDuration = activeSession.session?.target_duration_minutes;
-  const remainingTime = targetDuration
-    ? Math.max(0, targetDuration * 60 - elapsedTime)
-    : null;
+  const remainingTime = targetDuration ? Math.max(0, targetDuration * 60 - elapsedTime) : null;
 
   // Session complete screen
   if (isComplete) {
@@ -213,7 +202,7 @@ export default function StudySession({ onComplete, onExit }: StudySessionProps) 
           {remainingTime !== null && (
             <div className="flex items-center gap-2 text-sm">
               <Clock className="h-4 w-4" />
-              <span className={remainingTime < 60 ? "text-orange-500 font-semibold" : ""}>
+              <span className={remainingTime < 60 ? 'text-orange-500 font-semibold' : ''}>
                 {formatTimeRemaining(remainingTime)}
               </span>
             </div>
@@ -267,11 +256,11 @@ export default function StudySession({ onComplete, onExit }: StudySessionProps) 
           <CardHeader>
             <div className="flex items-start justify-between">
               <Badge variant="secondary">
-                {currentItem.flashcard.srs_reps === 0 ? "New Card" : `Review #${currentItem.flashcard.srs_reps + 1}`}
+                {currentItem.flashcard.srs_reps === 0
+                  ? 'New Card'
+                  : `Review #${currentItem.flashcard.srs_reps + 1}`}
               </Badge>
-              <Badge variant="outline">
-                Mastery: {Math.round(currentItem.mastery * 100)}%
-              </Badge>
+              <Badge variant="outline">Mastery: {Math.round(currentItem.mastery * 100)}%</Badge>
             </div>
           </CardHeader>
           <CardContent className="space-y-6">
@@ -320,7 +309,9 @@ export default function StudySession({ onComplete, onExit }: StudySessionProps) 
                     onClick={() => handleFlashcardRating('good')}
                   >
                     <span className="font-semibold">Good</span>
-                    <span className="text-xs text-muted-foreground">{currentItem.intervalDays}d</span>
+                    <span className="text-xs text-muted-foreground">
+                      {currentItem.intervalDays}d
+                    </span>
                   </Button>
                   <Button
                     variant="outline"
@@ -328,7 +319,9 @@ export default function StudySession({ onComplete, onExit }: StudySessionProps) 
                     onClick={() => handleFlashcardRating('easy')}
                   >
                     <span className="font-semibold">Easy</span>
-                    <span className="text-xs text-muted-foreground">&gt;{currentItem.intervalDays}d</span>
+                    <span className="text-xs text-muted-foreground">
+                      &gt;{currentItem.intervalDays}d
+                    </span>
                   </Button>
                 </div>
               </div>
@@ -350,11 +343,11 @@ export default function StudySession({ onComplete, onExit }: StudySessionProps) 
           <CardHeader>
             <div className="flex items-start justify-between">
               <Badge variant="secondary">
-                {currentItem.questionReview?.srs_reps === 0 ? "New Question" : `Attempt #${currentItem.questionReview?.total_attempts || 0 + 1}`}
+                {currentItem.questionReview?.srs_reps === 0
+                  ? 'New Question'
+                  : `Attempt #${currentItem.questionReview?.total_attempts || 0 + 1}`}
               </Badge>
-              <Badge variant="outline">
-                Mastery: {Math.round(currentItem.mastery * 100)}%
-              </Badge>
+              <Badge variant="outline">Mastery: {Math.round(currentItem.mastery * 100)}%</Badge>
             </div>
           </CardHeader>
           <CardContent className="space-y-6">
@@ -368,7 +361,7 @@ export default function StudySession({ onComplete, onExit }: StudySessionProps) 
               {currentItem.question?.choices.map((choice) => (
                 <Button
                   key={choice.id}
-                  variant={selectedAnswer === choice.id ? "default" : "outline"}
+                  variant={selectedAnswer === choice.id ? 'default' : 'outline'}
                   className="w-full justify-start text-left h-auto py-3"
                   onClick={() => setSelectedAnswer(choice.id)}
                   disabled={showAnswer}
@@ -377,9 +370,11 @@ export default function StudySession({ onComplete, onExit }: StudySessionProps) 
                   {showAnswer && choice.id === currentItem.question?.correctAnswerId && (
                     <CheckCircle2 className="h-5 w-5 text-[#22c55e]" />
                   )}
-                  {showAnswer && selectedAnswer === choice.id && choice.id !== currentItem.question?.correctAnswerId && (
-                    <XCircle className="h-5 w-5 text-red-500" />
-                  )}
+                  {showAnswer &&
+                    selectedAnswer === choice.id &&
+                    choice.id !== currentItem.question?.correctAnswerId && (
+                      <XCircle className="h-5 w-5 text-red-500" />
+                    )}
                 </Button>
               ))}
             </div>
@@ -403,11 +398,7 @@ export default function StudySession({ onComplete, onExit }: StudySessionProps) 
                 Submit Answer
               </Button>
             ) : (
-              <Button
-                className="w-full"
-                size="lg"
-                onClick={handleQuestionSubmit}
-              >
+              <Button className="w-full" size="lg" onClick={handleQuestionSubmit}>
                 Next Question
               </Button>
             )}

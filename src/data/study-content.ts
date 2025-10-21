@@ -1,7 +1,7 @@
 // Professional TCO Study Content - World-Class Certification Preparation
 // Comprehensive study modules for all 5 TCO domains
 
-import { parseDomain1Content } from "@/lib/content-parser";
+import { parseDomain1Content } from '@/lib/content-parser';
 
 export interface StudyModuleContent {
   id: string;
@@ -19,7 +19,7 @@ export interface StudySectionContent {
   id: string;
   title: string;
   content: string;
-  sectionType: "overview" | "concepts" | "procedures" | "examples" | "exam_prep";
+  sectionType: 'overview' | 'concepts' | 'procedures' | 'examples' | 'exam_prep';
   orderIndex: number;
   estimatedTime: number;
   keyPoints: string[];
@@ -35,12 +35,12 @@ function loadDomain1Content(): StudyModuleContent {
   if (domain1Content) return domain1Content;
 
   // Only attempt to load markdown content on server-side
-  if (typeof window === "undefined") {
+  if (typeof window === 'undefined') {
     try {
       domain1Content = parseDomain1Content();
       return domain1Content;
     } catch (error) {
-      console.warn("Failed to load Domain 1 markdown content, using fallback:", error);
+      console.warn('Failed to load Domain 1 markdown content, using fallback:', error);
     }
   }
 
@@ -51,32 +51,32 @@ function loadDomain1Content(): StudyModuleContent {
 
 // Fallback content for offline/development scenarios
 const fallbackDomain1Content: StudyModuleContent = {
-  id: "asking-questions",
-  domain: "Asking Questions",
-  title: "Domain 1: Asking Questions - Professional Study Guide (Fallback)",
+  id: 'asking-questions',
+  domain: 'Asking Questions',
+  title: 'Domain 1: Asking Questions - Professional Study Guide (Fallback)',
   description:
-    "Master natural language questioning in Tanium for real-time endpoint data collection. Learn sensor selection, query construction, and result interpretation for effective information gathering across enterprise environments.",
+    'Master natural language questioning in Tanium for real-time endpoint data collection. Learn sensor selection, query construction, and result interpretation for effective information gathering across enterprise environments.',
   examWeight: 22,
-  estimatedTime: "3-4 hours",
+  estimatedTime: '3-4 hours',
   estimatedTimeMinutes: 210,
   learningObjectives: [
     "Construct natural language questions using Tanium's query interface with precision",
-    "Select appropriate sensors for specific data collection requirements",
-    "Create and manage saved questions for repeated operational use",
-    "Interpret query results accurately and validate data integrity",
-    "Troubleshoot common query issues and optimize performance effectively",
+    'Select appropriate sensors for specific data collection requirements',
+    'Create and manage saved questions for repeated operational use',
+    'Interpret query results accurately and validate data integrity',
+    'Troubleshoot common query issues and optimize performance effectively',
   ],
   sections: [
     {
-      id: "aq-fallback",
-      title: "Basic Query Construction",
+      id: 'aq-fallback',
+      title: 'Basic Query Construction',
       content:
-        "This is fallback content. The comprehensive Domain 1 content should be loaded from markdown files.",
-      sectionType: "concepts",
+        'This is fallback content. The comprehensive Domain 1 content should be loaded from markdown files.',
+      sectionType: 'concepts',
       orderIndex: 1,
       estimatedTime: 30,
-      keyPoints: ["Fallback content loaded", "Check markdown integration"],
-      references: ["Tanium Documentation"],
+      keyPoints: ['Fallback content loaded', 'Check markdown integration'],
+      references: ['Tanium Documentation'],
     },
   ],
 };
@@ -84,25 +84,25 @@ const fallbackDomain1Content: StudyModuleContent = {
 // World-Class Professional Study Content with Dynamic Loading
 export const STUDY_MODULES: StudyModuleContent[] = [
   {
-    id: "asking-questions",
-    domain: "Asking Questions",
-    title: "Domain 1: Asking Questions - Professional Study Guide",
+    id: 'asking-questions',
+    domain: 'Asking Questions',
+    title: 'Domain 1: Asking Questions - Professional Study Guide',
     description:
-      "Master natural language questioning in Tanium for real-time endpoint data collection. Learn sensor selection, query construction, and result interpretation for effective information gathering across enterprise environments.",
+      'Master natural language questioning in Tanium for real-time endpoint data collection. Learn sensor selection, query construction, and result interpretation for effective information gathering across enterprise environments.',
     examWeight: 22,
-    estimatedTime: "3-4 hours",
+    estimatedTime: '3-4 hours',
     estimatedTimeMinutes: 210,
     learningObjectives: [
       "Construct natural language questions using Tanium's query interface with precision",
-      "Select appropriate sensors for specific data collection requirements",
-      "Create and manage saved questions for repeated operational use",
-      "Interpret query results accurately and validate data integrity",
-      "Troubleshoot common query issues and optimize performance effectively",
+      'Select appropriate sensors for specific data collection requirements',
+      'Create and manage saved questions for repeated operational use',
+      'Interpret query results accurately and validate data integrity',
+      'Troubleshoot common query issues and optimize performance effectively',
     ],
     sections: [
       {
-        id: "aq-overview",
-        title: "Learning Objectives & Domain Overview",
+        id: 'aq-overview',
+        title: 'Learning Objectives & Domain Overview',
         content: `# Learning Objectives & Domain Overview
 
 ## By completing this module, you will master:
@@ -131,20 +131,20 @@ In enterprise environments, the ability to ask precise questions determines:
 - **Real-world Scenarios** - Practice with production-like situations  
 - **Performance Focus** - Learn to optimize queries for enterprise scale
 - **Troubleshooting Skills** - Master diagnostic techniques for failed queries`,
-        sectionType: "overview",
+        sectionType: 'overview',
         orderIndex: 1,
         estimatedTime: 20,
         keyPoints: [
-          "Domain represents 22% of total exam weight",
-          "Foundation skill for all Tanium operations",
-          "Hands-on practice is absolutely essential",
-          "Real-world application drives enterprise value",
+          'Domain represents 22% of total exam weight',
+          'Foundation skill for all Tanium operations',
+          'Hands-on practice is absolutely essential',
+          'Real-world application drives enterprise value',
         ],
-        references: ["Tanium Core Platform Documentation", "Interact Module User Guide"],
+        references: ['Tanium Core Platform Documentation', 'Interact Module User Guide'],
       },
       {
-        id: "aq-concepts",
-        title: "Core Concepts and Terminology",
+        id: 'aq-concepts',
+        title: 'Core Concepts and Terminology',
         content: `# Core Concepts and Terminology
 
 ## Mental Model: The Question-Sensor-Data Flow
@@ -211,20 +211,20 @@ Get Computer Name and IP Address and Operating System from all machines
 - Timeout management
 - Permission validation  
 - Sensor availability verification`,
-        sectionType: "concepts",
+        sectionType: 'concepts',
         orderIndex: 2,
         estimatedTime: 35,
         keyPoints: [
-          "Questions translate to sensor operations automatically",
-          "Sensor selection directly impacts query performance",
-          "Multi-sensor queries provide correlated data efficiently",
-          "Proper scope management prevents system overload",
+          'Questions translate to sensor operations automatically',
+          'Sensor selection directly impacts query performance',
+          'Multi-sensor queries provide correlated data efficiently',
+          'Proper scope management prevents system overload',
         ],
-        references: ["Sensor Reference Documentation", "Query Best Practices Guide"],
+        references: ['Sensor Reference Documentation', 'Query Best Practices Guide'],
       },
       {
-        id: "aq-procedures",
-        title: "Step-by-Step Procedures",
+        id: 'aq-procedures',
+        title: 'Step-by-Step Procedures',
         content: `# Professional Procedures for Asking Questions
 
 ## Procedure 1: Basic Question Construction
@@ -310,38 +310,38 @@ Get Computer Name and IP Address and Operating System from all machines
 - **Permission Denied**: Verify user roles, confirm sensor access rights, validate RBAC configuration
 - **No Results Returned**: Check targeting accuracy, verify endpoint connectivity, validate sensor functionality
 - **Performance Issues**: Optimize query complexity, review targeting scope, consider timing adjustments`,
-        sectionType: "procedures",
+        sectionType: 'procedures',
         orderIndex: 3,
         estimatedTime: 45,
         keyPoints: [
-          "Always start with simple questions before complex ones",
-          "Multi-sensor queries provide comprehensive data efficiently",
-          "Saved questions enable standardization and reusability",
-          "Systematic troubleshooting prevents recurring issues",
+          'Always start with simple questions before complex ones',
+          'Multi-sensor queries provide comprehensive data efficiently',
+          'Saved questions enable standardization and reusability',
+          'Systematic troubleshooting prevents recurring issues',
         ],
         procedures: [
-          "Access Interact Module and verify interface readiness",
-          "Construct question using natural language and sensor selection",
-          "Execute query and validate results for accuracy",
-          "Save frequently-used queries with proper documentation",
-          "Optimize performance through targeting and sensor selection",
-          "Troubleshoot failures using systematic diagnostic process",
+          'Access Interact Module and verify interface readiness',
+          'Construct question using natural language and sensor selection',
+          'Execute query and validate results for accuracy',
+          'Save frequently-used queries with proper documentation',
+          'Optimize performance through targeting and sensor selection',
+          'Troubleshoot failures using systematic diagnostic process',
         ],
         troubleshooting: [
-          "No results returned: Check targeting accuracy and endpoint connectivity",
-          "Slow query performance: Optimize sensor selection and reduce scope",
-          "Permission errors: Verify user roles and sensor access rights",
-          "Timeout issues: Review query complexity and network connectivity",
+          'No results returned: Check targeting accuracy and endpoint connectivity',
+          'Slow query performance: Optimize sensor selection and reduce scope',
+          'Permission errors: Verify user roles and sensor access rights',
+          'Timeout issues: Review query complexity and network connectivity',
         ],
         references: [
-          "Interact Module User Guide",
-          "Query Optimization Best Practices",
-          "Troubleshooting Guide",
+          'Interact Module User Guide',
+          'Query Optimization Best Practices',
+          'Troubleshooting Guide',
         ],
       },
       {
-        id: "aq-exam-prep",
-        title: "Exam Preparation & Practice Scenarios",
+        id: 'aq-exam-prep',
+        title: 'Exam Preparation & Practice Scenarios',
         content: `# Exam Preparation for Asking Questions Domain
 
 ## Exam Weight and Priority: 22%
@@ -458,40 +458,40 @@ This domain represents 22% of the TCO certification exam - making it a **HIGH PR
 - **Consistent sub-60-second** execution times for standard queries
 - **100% success rate** on troubleshooting scenarios
 - **Demonstrated expertise** in real-world application scenarios`,
-        sectionType: "exam_prep",
+        sectionType: 'exam_prep',
         orderIndex: 4,
         estimatedTime: 30,
         keyPoints: [
-          "22% exam weight makes this high-priority study area",
-          "Hands-on practice with 100+ queries is essential",
-          "Master both basic construction and advanced optimization",
-          "Achieve 95%+ accuracy before attempting certification",
+          '22% exam weight makes this high-priority study area',
+          'Hands-on practice with 100+ queries is essential',
+          'Master both basic construction and advanced optimization',
+          'Achieve 95%+ accuracy before attempting certification',
         ],
-        references: ["TCO Exam Blueprint", "Practice Test Repository", "Certification Study Guide"],
+        references: ['TCO Exam Blueprint', 'Practice Test Repository', 'Certification Study Guide'],
       },
     ],
   },
   {
-    id: "refining-questions",
-    domain: "Refining Questions",
-    title: "Domain 2: Refining Questions and Targeting - Professional Study Guide",
+    id: 'refining-questions',
+    domain: 'Refining Questions',
+    title: 'Domain 2: Refining Questions and Targeting - Professional Study Guide',
     description:
-      "Advanced filtering and targeting techniques for precise endpoint management. Covers computer groups, RBAC controls, and intelligent query optimization for effective scope management in complex enterprise environments.",
+      'Advanced filtering and targeting techniques for precise endpoint management. Covers computer groups, RBAC controls, and intelligent query optimization for effective scope management in complex enterprise environments.',
     examWeight: 23,
-    estimatedTime: "4-5 hours",
+    estimatedTime: '4-5 hours',
     estimatedTimeMinutes: 270,
     learningObjectives: [
-      "Create and manage computer groups (dynamic and static) for precise targeting",
-      "Construct advanced filters using logical operators and complex conditions",
-      "Apply least privilege principles in targeting and scope management",
-      "Implement RBAC controls for content access and computer group permissions",
-      "Optimize query performance through intelligent targeting and filtering techniques",
-      "Troubleshoot targeting issues and validate scope accuracy across environments",
+      'Create and manage computer groups (dynamic and static) for precise targeting',
+      'Construct advanced filters using logical operators and complex conditions',
+      'Apply least privilege principles in targeting and scope management',
+      'Implement RBAC controls for content access and computer group permissions',
+      'Optimize query performance through intelligent targeting and filtering techniques',
+      'Troubleshoot targeting issues and validate scope accuracy across environments',
     ],
     sections: [
       {
-        id: "rq-overview",
-        title: "Learning Objectives & Domain Overview",
+        id: 'rq-overview',
+        title: 'Learning Objectives & Domain Overview',
         content: `# Learning Objectives & Domain Overview
 
 ## By completing this module, you will master:
@@ -520,40 +520,40 @@ Mastery of refining questions and targeting enables:
 - **Security Focus** - Understand RBAC implications of all targeting decisions
 - **Performance Awareness** - Learn to balance precision with system efficiency
 - **Real-world Application** - Practice with enterprise-scale scenarios`,
-        sectionType: "overview",
+        sectionType: 'overview',
         orderIndex: 1,
         estimatedTime: 25,
         keyPoints: [
-          "Highest exam weight at 23% - critical for certification success",
-          "Enables precision operations across enterprise environments",
-          "Security and compliance depend on proper targeting",
-          "Performance optimization through intelligent scope management",
+          'Highest exam weight at 23% - critical for certification success',
+          'Enables precision operations across enterprise environments',
+          'Security and compliance depend on proper targeting',
+          'Performance optimization through intelligent scope management',
         ],
-        references: ["Computer Groups Administration Guide", "RBAC Implementation Documentation"],
+        references: ['Computer Groups Administration Guide', 'RBAC Implementation Documentation'],
       },
       // Domain 2 sections now complete - comprehensive study content added
     ],
   },
   {
-    id: "refining-questions",
-    domain: "Refining Questions & Targeting",
-    title: "Domain 2: Refining Questions & Targeting - Professional Study Guide",
+    id: 'refining-questions',
+    domain: 'Refining Questions & Targeting',
+    title: 'Domain 2: Refining Questions & Targeting - Professional Study Guide',
     description:
-      "Master precision targeting and advanced filtering techniques for enterprise endpoint management. Learn dynamic/static computer groups, complex filter creation, and performance optimization strategies.",
+      'Master precision targeting and advanced filtering techniques for enterprise endpoint management. Learn dynamic/static computer groups, complex filter creation, and performance optimization strategies.',
     examWeight: 23,
-    estimatedTime: "4-5 hours",
+    estimatedTime: '4-5 hours',
     estimatedTimeMinutes: 270,
     learningObjectives: [
-      "Create and manage dynamic computer groups with complex rule logic",
-      "Build and maintain static computer groups for persistent collections",
-      "Design complex multi-criteria filters using advanced boolean logic",
-      "Implement least privilege targeting with RBAC integration",
-      "Optimize targeting performance for enterprise-scale operations",
+      'Create and manage dynamic computer groups with complex rule logic',
+      'Build and maintain static computer groups for persistent collections',
+      'Design complex multi-criteria filters using advanced boolean logic',
+      'Implement least privilege targeting with RBAC integration',
+      'Optimize targeting performance for enterprise-scale operations',
     ],
     sections: [
       {
-        id: "rq-overview",
-        title: "Learning Objectives & Domain Overview",
+        id: 'rq-overview',
+        title: 'Learning Objectives & Domain Overview',
         content: `# Learning Objectives & Domain Overview
 
 ## By completing this module, you will master:
@@ -582,16 +582,16 @@ Mastery of refining questions and targeting enables:
 - **Security Focus** - Understand RBAC implications of all targeting decisions
 - **Performance Awareness** - Learn to balance precision with system efficiency
 - **Real-world Application** - Practice with enterprise-scale scenarios`,
-        sectionType: "overview",
+        sectionType: 'overview',
         orderIndex: 1,
         estimatedTime: 25,
         keyPoints: [
-          "Highest exam weight at 23% - critical for certification success",
-          "Enables precision operations across enterprise environments",
-          "Security and compliance depend on proper targeting",
-          "Performance optimization through intelligent scope management",
+          'Highest exam weight at 23% - critical for certification success',
+          'Enables precision operations across enterprise environments',
+          'Security and compliance depend on proper targeting',
+          'Performance optimization through intelligent scope management',
         ],
-        references: ["Computer Groups Administration Guide", "RBAC Implementation Documentation"],
+        references: ['Computer Groups Administration Guide', 'RBAC Implementation Documentation'],
       },
       // Complete Domain 2 sections added above
     ],
@@ -602,17 +602,17 @@ Mastery of refining questions and targeting enables:
 // Enhanced utility functions for accessing study content with dynamic loading
 export function getStudyModuleByDomain(domain: string): StudyModuleContent | undefined {
   // Special handling for Domain 1 with dynamic content loading
-  if (domain.toLowerCase().includes("asking") || domain.toLowerCase() === "asking-questions") {
+  if (domain.toLowerCase().includes('asking') || domain.toLowerCase() === 'asking-questions') {
     try {
       return loadDomain1Content();
     } catch (error) {
-      console.warn("Failed to load dynamic Domain 1 content, using fallback");
+      console.warn('Failed to load dynamic Domain 1 content, using fallback');
     }
   }
 
   return STUDY_MODULES.find(
     (module) =>
-      module.domain.toLowerCase().replace(/\s+/g, "-") === domain.toLowerCase() ||
+      module.domain.toLowerCase().replace(/\s+/g, '-') === domain.toLowerCase() ||
       module.id === domain.toLowerCase()
   );
 }
@@ -623,12 +623,12 @@ export function getAllStudyModules(): StudyModuleContent[] {
   // Replace Domain 1 with dynamically loaded content
   try {
     const domain1Content = loadDomain1Content();
-    const domain1Index = modules.findIndex((m) => m.id === "asking-questions");
+    const domain1Index = modules.findIndex((m) => m.id === 'asking-questions');
     if (domain1Index !== -1) {
       modules[domain1Index] = domain1Content;
     }
   } catch (error) {
-    console.warn("Failed to load dynamic Domain 1 content, using existing content");
+    console.warn('Failed to load dynamic Domain 1 content, using existing content');
   }
 
   return modules;
@@ -636,11 +636,11 @@ export function getAllStudyModules(): StudyModuleContent[] {
 
 export function getStudyModuleById(id: string): StudyModuleContent | undefined {
   // Special handling for Domain 1
-  if (id === "asking-questions") {
+  if (id === 'asking-questions') {
     try {
       return loadDomain1Content();
     } catch (error) {
-      console.warn("Failed to load dynamic Domain 1 content, using fallback");
+      console.warn('Failed to load dynamic Domain 1 content, using fallback');
     }
   }
 
@@ -651,7 +651,7 @@ export function getStudyModuleById(id: string): StudyModuleContent | undefined {
 export function getStudyModuleByDomainSync(domain: string): StudyModuleContent | undefined {
   return STUDY_MODULES.find(
     (module) =>
-      module.domain.toLowerCase().replace(/\s+/g, "-") === domain.toLowerCase() ||
+      module.domain.toLowerCase().replace(/\s+/g, '-') === domain.toLowerCase() ||
       module.id === domain.toLowerCase()
   );
 }

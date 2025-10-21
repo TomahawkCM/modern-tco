@@ -1,7 +1,7 @@
 'use client';
 
-import React, { createContext, useContext, useState } from 'react';
-import { cn } from '@/lib/utils';
+import type React from 'react';
+import { createContext, useContext, useState } from 'react';
 
 interface StepsContextType {
   currentStep: number;
@@ -30,9 +30,7 @@ function StepsRoot({ children }: StepsProps) {
 
   return (
     <StepsContext.Provider value={{ currentStep: stepCounter, incrementStep }}>
-      <div className="my-6 space-y-4">
-        {children}
-      </div>
+      <div className="my-6 space-y-4">{children}</div>
     </StepsContext.Provider>
   );
 }
@@ -55,9 +53,7 @@ function Step({ title, children }: StepProps) {
           {stepNumber}
         </div>
         {/* Connecting line */}
-        {!isLastStep && (
-          <div className="mt-1 h-full w-0.5 bg-border" />
-        )}
+        {!isLastStep && <div className="mt-1 h-full w-0.5 bg-border" />}
       </div>
 
       {/* Step content */}

@@ -1,12 +1,12 @@
 import { useCallback } from 'react';
 import type {
-  UseQueryValidation,
+  FilterSelection,
   PartialQuery,
-  ValidationState,
-  ValidationError,
-  ValidationWarning,
   SensorSelection,
-  FilterSelection
+  UseQueryValidation,
+  ValidationError,
+  ValidationState,
+  ValidationWarning,
 } from '../types/queryBuilder';
 
 export function useQueryValidation(): UseQueryValidation {
@@ -20,7 +20,7 @@ export function useQueryValidation(): UseQueryValidation {
       errors.push({
         field: 'sensors',
         message: 'Query must have at least one sensor or aggregate function',
-        severity: 'error'
+        severity: 'error',
       });
     }
 
@@ -31,7 +31,7 @@ export function useQueryValidation(): UseQueryValidation {
         errors.push({
           field: `sensor[${index}]`,
           message: 'Sensor name cannot be empty',
-          severity: 'error'
+          severity: 'error',
         });
       }
 
@@ -43,7 +43,7 @@ export function useQueryValidation(): UseQueryValidation {
               field: `sensor[${index}].${key}`,
               message: `Parameter "${key}" is empty`,
               suggestion: 'Provide a value or use default',
-              severity: 'warning'
+              severity: 'warning',
             });
           }
         });
@@ -56,7 +56,7 @@ export function useQueryValidation(): UseQueryValidation {
         errors.push({
           field: `filter[${filter.id}]`,
           message: 'Filter must have a sensor selected',
-          severity: 'error'
+          severity: 'error',
         });
       }
 
@@ -64,16 +64,16 @@ export function useQueryValidation(): UseQueryValidation {
         errors.push({
           field: `filter[${filter.id}]`,
           message: 'Filter value cannot be empty',
-          severity: 'error'
+          severity: 'error',
         });
       }
 
       // Type-specific validation
-      if (filter.dataType === 'number' && isNaN(Number(filter.value))) {
+      if (filter.dataType === 'number' && Number.isNaN(Number(filter.value))) {
         errors.push({
           field: `filter[${filter.id}]`,
           message: 'Filter value must be a valid number',
-          severity: 'error'
+          severity: 'error',
         });
       }
     });
@@ -83,14 +83,14 @@ export function useQueryValidation(): UseQueryValidation {
       // Check if non-grouped sensors are aggregated
       const groupedSensors = new Set(query.groupBy);
       const hasNonAggregatedSensors = query.sensors.some(
-        s => !groupedSensors.has('name' in s.sensor ? (s.sensor.name || '') : '')
+        (s) => !groupedSensors.has('name' in s.sensor ? s.sensor.name || '' : '')
       );
 
       if (hasNonAggregatedSensors && query.aggregates.length === 0) {
         errors.push({
           field: 'groupBy',
           message: 'Non-grouped sensors must be aggregated when using GROUP BY',
-          severity: 'error'
+          severity: 'error',
         });
       }
     }
@@ -102,7 +102,7 @@ export function useQueryValidation(): UseQueryValidation {
           errors.push({
             field: `orderBy[${index}]`,
             message: 'ORDER BY must specify a sensor',
-            severity: 'error'
+            severity: 'error',
           });
         }
       });
@@ -114,7 +114,7 @@ export function useQueryValidation(): UseQueryValidation {
         errors.push({
           field: 'limit',
           message: 'LIMIT must be greater than 0',
-          severity: 'error'
+          severity: 'error',
         });
       }
       if (query.limit > 10000) {
@@ -122,7 +122,7 @@ export function useQueryValidation(): UseQueryValidation {
           field: 'limit',
           message: 'LIMIT is very high',
           suggestion: 'Consider using a smaller limit for better performance',
-          severity: 'warning'
+          severity: 'warning',
         });
       }
     }
@@ -133,7 +133,7 @@ export function useQueryValidation(): UseQueryValidation {
         field: 'sensors',
         message: 'Many sensors selected',
         suggestion: 'Consider reducing sensors for better performance',
-        severity: 'warning'
+        severity: 'warning',
       });
     }
 
@@ -142,13 +142,13 @@ export function useQueryValidation(): UseQueryValidation {
         field: 'filters',
         message: 'No filters applied',
         suggestion: 'Consider adding filters to reduce result set',
-        severity: 'info'
+        severity: 'info',
       });
     }
 
     // Determine overall validity
     const isValid = errors.length === 0;
-    const syntaxValid = errors.filter(e => e.severity === 'critical').length === 0;
+    const syntaxValid = errors.filter((e) => e.severity === 'critical').length === 0;
     const semanticValid = isValid;
 
     return {
@@ -156,7 +156,7 @@ export function useQueryValidation(): UseQueryValidation {
       errors,
       warnings,
       syntaxValid,
-      semanticValid
+      semanticValid,
     };
   }, []);
 
@@ -191,7 +191,7 @@ export function useQueryValidation(): UseQueryValidation {
     }
 
     // Type validation
-    if (filter.dataType === 'number' && isNaN(Number(filter.value))) {
+    if (filter.dataType === 'number' && Number.isNaN(Number(filter.value))) {
       return false;
     }
 
@@ -214,8 +214,8 @@ export function useQueryValidation(): UseQueryValidation {
       const items: string[] = [];
 
       // Add sensors
-      query.sensors.forEach(s => {
-        let sensorStr = 'name' in s.sensor ? (s.sensor.name || '') : '';
+      query.sensors.forEach((s) => {
+        let sensorStr = 'name' in s.sensor ? s.sensor.name || '' : '';
 
         // Add parameters if any
         if (s.parameters && Object.keys(s.parameters).length > 0) {
@@ -234,10 +234,8 @@ export function useQueryValidation(): UseQueryValidation {
       });
 
       // Add aggregates
-      query.aggregates.forEach(a => {
-        const aggStr = a.sensor
-          ? `${a.function}(${a.sensor})`
-          : `${a.function}()`;
+      query.aggregates.forEach((a) => {
+        const aggStr = a.sensor ? `${a.function}(${a.sensor})` : `${a.function}()`;
         items.push(aggStr);
       });
 
@@ -262,21 +260,19 @@ export function useQueryValidation(): UseQueryValidation {
       parts.push('where');
 
       const buildFilterString = (filters: FilterSelection[], parentId?: string): string => {
-        const groupFilters = filters.filter(f =>
+        const groupFilters = filters.filter((f) =>
           parentId ? f.parentId === parentId : !f.parentId && !f.isNested
         );
 
-        const filterStrings = groupFilters.map(f => {
+        const filterStrings = groupFilters.map((f) => {
           const operator = f.operator.replace(/_/g, ' ');
           return `${f.sensor} ${operator} "${f.value}"`;
         });
 
         // Handle nested groups
-        const nestedGroups = filters.filter(f =>
-          f.isNested && f.parentId === parentId
-        );
+        const nestedGroups = filters.filter((f) => f.isNested && f.parentId === parentId);
 
-        nestedGroups.forEach(group => {
+        nestedGroups.forEach((group) => {
           const nestedString = buildFilterString(filters, group.id);
           if (nestedString) {
             filterStrings.push(`(${nestedString})`);
@@ -298,9 +294,7 @@ export function useQueryValidation(): UseQueryValidation {
     // Build ORDER BY clause
     if (query.orderBy.length > 0) {
       parts.push('order by');
-      const orderParts = query.orderBy.map(o =>
-        `${o.sensor} ${o.direction}`
-      );
+      const orderParts = query.orderBy.map((o) => `${o.sensor} ${o.direction}`);
       parts.push(orderParts.join(', '));
     }
 
@@ -316,6 +310,6 @@ export function useQueryValidation(): UseQueryValidation {
     validate,
     validateSensor,
     validateFilter,
-    getQueryString
+    getQueryString,
   };
 }

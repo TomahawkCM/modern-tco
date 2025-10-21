@@ -1,9 +1,8 @@
-"use client";
+'use client';
 
-import React from "react";
-import dynamic from "next/dynamic";
-import InfoBox from "@/components/mdx/InfoBox";
-import PracticeButton from "@/components/mdx/PracticeButton";
+import dynamic from 'next/dynamic';
+import InfoBox from '@/components/mdx/InfoBox';
+import PracticeButton from '@/components/mdx/PracticeButton';
 
 interface MDXClientWrapperProps {
   slug: string;
@@ -16,24 +15,30 @@ interface MDXClientWrapperProps {
 
 // Dynamically import MDX content based on slug
 const mdxModules = {
-  "tanium-platform-foundation": dynamic(() => import("@/content/modules/00-tanium-platform-foundation.mdx")),
-  "platform-foundation": dynamic(() => import("@/content/modules/00-tanium-platform-foundation.mdx")),
-  "asking-questions": dynamic(() => import("@/content/modules/01-asking-questions.mdx")),
-  "refining-questions-targeting": dynamic(() => import("@/content/modules/02-refining-questions-targeting.mdx")),
-  "taking-action-packages-actions": dynamic(() => import("@/content/modules/03-taking-action-packages-actions.mdx")),
-  "navigation-basic-modules": dynamic(() => import("@/content/modules/04-navigation-basic-modules.mdx")),
-  "reporting-data-export": dynamic(() => import("@/content/modules/05-reporting-data-export.mdx")),
+  'tanium-platform-foundation': dynamic(
+    () => import('@/content/modules/00-tanium-platform-foundation.mdx')
+  ),
+  'platform-foundation': dynamic(
+    () => import('@/content/modules/00-tanium-platform-foundation.mdx')
+  ),
+  'asking-questions': dynamic(() => import('@/content/modules/01-asking-questions.mdx')),
+  'refining-questions-targeting': dynamic(
+    () => import('@/content/modules/02-refining-questions-targeting.mdx')
+  ),
+  'taking-action-packages-actions': dynamic(
+    () => import('@/content/modules/03-taking-action-packages-actions.mdx')
+  ),
+  'navigation-basic-modules': dynamic(
+    () => import('@/content/modules/04-navigation-basic-modules.mdx')
+  ),
+  'reporting-data-export': dynamic(() => import('@/content/modules/05-reporting-data-export.mdx')),
 } as const;
 
 export default function MDXClientWrapper({ slug, meta }: MDXClientWrapperProps) {
   const MDXContent = mdxModules[slug as keyof typeof mdxModules];
 
   if (!MDXContent) {
-    return (
-      <div className="text-red-400">
-        Module content not found for slug: {slug}
-      </div>
-    );
+    return <div className="text-red-400">Module content not found for slug: {slug}</div>;
   }
 
   return (

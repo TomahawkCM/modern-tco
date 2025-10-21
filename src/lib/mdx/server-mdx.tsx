@@ -3,8 +3,8 @@
  * Properly handles MDX content rendering in React Server Components
  */
 
-import { compileMDX } from "next-mdx-remote/rsc";
-import type { MDXRemoteProps } from "next-mdx-remote/rsc";
+import type { MDXRemoteProps } from 'next-mdx-remote/rsc';
+import { compileMDX } from 'next-mdx-remote/rsc';
 
 // Re-export types for convenience
 export type { MDXRemoteProps };
@@ -41,7 +41,7 @@ export async function compileMDXContent(
  */
 export function ServerMDXContent({
   content,
-  components
+  components,
 }: {
   content: React.ReactElement;
   components?: Record<string, React.ComponentType>;

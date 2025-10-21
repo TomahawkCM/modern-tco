@@ -3,34 +3,32 @@
  * Provides clear Study → Practice → Exam progression with progress tracking
  */
 
-"use client";
+'use client';
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Progress } from "@/components/ui/progress";
-import { Badge } from "@/components/ui/badge";
 import {
-  BookOpen,
-  Target,
-  FileText,
-  CheckCircle,
-  ArrowRight,
-  Clock,
-  Trophy,
   AlertCircle,
-  Play,
+  ArrowRight,
+  BookOpen,
   Brain,
-  TrendingUp,
-  Lightbulb,
+  CheckCircle,
+  Clock,
   GraduationCap,
-  HelpCircle,
-} from "lucide-react";
-import { cn } from "@/lib/utils";
+  Lightbulb,
+  Play,
+  Target,
+  TrendingUp,
+  Trophy,
+} from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Progress } from '@/components/ui/progress';
+import { cn } from '@/lib/utils';
 
 interface StudyPhase {
-  id: "foundation" | "study" | "practice" | "exam";
+  id: 'foundation' | 'study' | 'practice' | 'exam';
   title: string;
   description: string;
   icon: React.ComponentType<{ className?: string }>;
@@ -38,15 +36,15 @@ interface StudyPhase {
   bgColor: string;
   borderColor: string;
   estimatedTime: string;
-  status: "locked" | "available" | "in_progress" | "completed";
+  status: 'locked' | 'available' | 'in_progress' | 'completed';
   progress: number;
   isBeginnerFriendly?: boolean;
-  difficulty: "beginner" | "intermediate" | "advanced";
+  difficulty: 'beginner' | 'intermediate' | 'advanced';
   actions: Array<{
     label: string;
     path: string;
     description: string;
-    type: "primary" | "secondary";
+    type: 'primary' | 'secondary';
   }>;
 }
 
@@ -60,117 +58,118 @@ export function StudyPathwayGuide({ className }: StudyPathwayGuideProps) {
   // Mock progress data - in real app, would come from user context
   const [studyPhases] = useState<StudyPhase[]>([
     {
-      id: "foundation",
-      title: "Foundation & Prerequisites",
+      id: 'foundation',
+      title: 'Foundation & Prerequisites',
       description:
-        "🌟 NEW FOR BEGINNERS! Build your IT foundation with endpoint management basics, terminology, and confidence-building exercises - designed for complete newcomers",
+        '🌟 NEW FOR BEGINNERS! Build your IT foundation with endpoint management basics, terminology, and confidence-building exercises - designed for complete newcomers',
       icon: Lightbulb,
-      color: "text-primary",
-      bgColor: "bg-primary/20",
-      borderColor: "border-cyan-400",
-      estimatedTime: "2-4 hours",
-      status: "available",
+      color: 'text-primary',
+      bgColor: 'bg-primary/20',
+      borderColor: 'border-cyan-400',
+      estimatedTime: '2-4 hours',
+      status: 'available',
       progress: 0,
       isBeginnerFriendly: true,
-      difficulty: "beginner",
+      difficulty: 'beginner',
       actions: [
         {
-          label: "Start Foundation",
-          path: "/onboarding/welcome",
-          description: "Begin with complete beginner introduction",
-          type: "primary",
+          label: 'Start Foundation',
+          path: '/onboarding/welcome',
+          description: 'Begin with complete beginner introduction',
+          type: 'primary',
         },
         {
-          label: "Check Prerequisites",
-          path: "/onboarding/prerequisites",
-          description: "Assess your current knowledge level",
-          type: "secondary",
+          label: 'Check Prerequisites',
+          path: '/onboarding/prerequisites',
+          description: 'Assess your current knowledge level',
+          type: 'secondary',
         },
       ],
     },
     {
-      id: "study",
-      title: "Core Study Modules",
+      id: 'study',
+      title: 'Core Study Modules',
       description:
-        "Learn essential concepts through comprehensive study modules covering all 5 TCO domains with beginner-friendly explanations and examples",
+        'Learn essential concepts through comprehensive study modules covering all 5 TCO domains with beginner-friendly explanations and examples',
       icon: BookOpen,
-      color: "text-primary",
-      bgColor: "bg-blue-900/20",
-      borderColor: "border-blue-400",
-      estimatedTime: "8-12 hours",
-      status: "locked",
+      color: 'text-primary',
+      bgColor: 'bg-blue-900/20',
+      borderColor: 'border-blue-400',
+      estimatedTime: '8-12 hours',
+      status: 'locked',
       progress: 0,
       isBeginnerFriendly: true,
-      difficulty: "intermediate",
+      difficulty: 'intermediate',
       actions: [
         {
-          label: "Continue Learning",
-          path: "/study",
-          description: "Resume your study modules",
-          type: "primary",
+          label: 'Continue Learning',
+          path: '/study',
+          description: 'Resume your study modules',
+          type: 'primary',
         },
         {
-          label: "Browse Domains",
-          path: "/study/asking-questions",
-          description: "Explore domain content",
-          type: "secondary",
+          label: 'Browse Domains',
+          path: '/study/asking-questions',
+          description: 'Explore domain content',
+          type: 'secondary',
         },
       ],
     },
     {
-      id: "practice",
-      title: "Practice & Reinforcement",
+      id: 'practice',
+      title: 'Practice & Reinforcement',
       description:
-        "Test your knowledge with guided practice questions, instant feedback, and adaptive difficulty to build confidence progressively",
+        'Test your knowledge with guided practice questions, instant feedback, and adaptive difficulty to build confidence progressively',
       icon: Target,
-      color: "text-[#22c55e]",
-      bgColor: "bg-green-900/20",
-      borderColor: "border-green-400",
-      estimatedTime: "4-6 hours",
-      status: "locked",
+      color: 'text-[#22c55e]',
+      bgColor: 'bg-green-900/20',
+      borderColor: 'border-green-400',
+      estimatedTime: '4-6 hours',
+      status: 'locked',
       progress: 0,
       isBeginnerFriendly: false,
-      difficulty: "intermediate",
+      difficulty: 'intermediate',
       actions: [
         {
-          label: "Domain Practice",
-          path: "/practice/domain",
-          description: "Practice by domain",
-          type: "primary",
+          label: 'Domain Practice',
+          path: '/practice/domain',
+          description: 'Practice by domain',
+          type: 'primary',
         },
         {
-          label: "Mixed Practice",
-          path: "/practice/mixed",
-          description: "Practice all domains",
-          type: "secondary",
+          label: 'Mixed Practice',
+          path: '/practice/mixed',
+          description: 'Practice all domains',
+          type: 'secondary',
         },
       ],
     },
     {
-      id: "exam",
-      title: "Certification Readiness",
-      description: "Take full-length timed mock exams to simulate real certification conditions - recommended only after mastering foundations",
+      id: 'exam',
+      title: 'Certification Readiness',
+      description:
+        'Take full-length timed mock exams to simulate real certification conditions - recommended only after mastering foundations',
       icon: GraduationCap,
-      color: "text-[#f97316]",
-      bgColor: "bg-yellow-900/20",
-      borderColor: "border-yellow-400",
-      estimatedTime: "90 minutes",
-      status: "locked",
+      color: 'text-[#f97316]',
+      bgColor: 'bg-yellow-900/20',
+      borderColor: 'border-yellow-400',
+      estimatedTime: '90 minutes',
+      status: 'locked',
       progress: 0,
       isBeginnerFriendly: false,
-      difficulty: "advanced",
+      difficulty: 'advanced',
       actions: [
         {
-          label: "Take Mock Exam",
-          path: "/mock",
-          description: "90-minute timed exam",
-          type: "primary",
+          label: 'Take Mock Exam',
+          path: '/mock',
+          description: '90-minute timed exam',
+          type: 'primary',
         },
         {
-          label: "View Requirements",
-          path: "/mock/requirements",
-          description: "See exam readiness criteria",
-          type: "secondary",
+          label: 'View Requirements',
+          path: '/mock/requirements',
+          description: 'See exam readiness criteria',
+          type: 'secondary',
         },
       ],
     },
@@ -178,33 +177,33 @@ export function StudyPathwayGuide({ className }: StudyPathwayGuideProps) {
 
   const overallProgress = studyPhases.reduce((acc, phase) => acc + phase.progress, 0) / 4;
 
-  const getStatusIcon = (status: StudyPhase["status"]) => {
+  const getStatusIcon = (status: StudyPhase['status']) => {
     switch (status) {
-      case "completed":
+      case 'completed':
         return <CheckCircle className="h-5 w-5 text-[#22c55e]" />;
-      case "in_progress":
+      case 'in_progress':
         return <Play className="h-5 w-5 text-primary" />;
-      case "available":
+      case 'available':
         return <AlertCircle className="h-5 w-5 text-[#f97316]" />;
-      case "locked":
+      case 'locked':
         return <Clock className="h-5 w-5 text-muted-foreground" />;
       default:
         return null;
     }
   };
 
-  const getStatusText = (status: StudyPhase["status"]) => {
+  const getStatusText = (status: StudyPhase['status']) => {
     switch (status) {
-      case "completed":
-        return "Completed";
-      case "in_progress":
-        return "In Progress";
-      case "available":
-        return "Available";
-      case "locked":
-        return "Locked";
+      case 'completed':
+        return 'Completed';
+      case 'in_progress':
+        return 'In Progress';
+      case 'available':
+        return 'Available';
+      case 'locked':
+        return 'Locked';
       default:
-        return "";
+        return '';
     }
   };
 
@@ -213,33 +212,33 @@ export function StudyPathwayGuide({ className }: StudyPathwayGuideProps) {
   ): { level: string; color: string; description: string } => {
     if (progress >= 80)
       return {
-        level: "Exam Ready",
-        color: "text-[#22c55e]",
+        level: 'Exam Ready',
+        color: 'text-[#22c55e]',
         description: "You're well-prepared for certification!",
       };
     if (progress >= 60)
       return {
-        level: "Good Progress",
-        color: "text-primary",
-        description: "Continue practicing to build confidence",
+        level: 'Good Progress',
+        color: 'text-primary',
+        description: 'Continue practicing to build confidence',
       };
     if (progress >= 40)
       return {
-        level: "Building Up",
-        color: "text-[#f97316]",
-        description: "Keep studying to strengthen your foundation",
+        level: 'Building Up',
+        color: 'text-[#f97316]',
+        description: 'Keep studying to strengthen your foundation',
       };
     return {
-      level: "Getting Started",
-      color: "text-muted-foreground",
-      description: "Focus on completing study modules first",
+      level: 'Getting Started',
+      color: 'text-muted-foreground',
+      description: 'Focus on completing study modules first',
     };
   };
 
   const readiness = getReadinessLevel(overallProgress);
 
   return (
-    <div className={cn("space-y-6", className)}>
+    <div className={cn('space-y-6', className)}>
       {/* Overall Progress Header */}
       <Card className="glass border-white/10">
         <CardHeader>
@@ -254,7 +253,7 @@ export function StudyPathwayGuide({ className }: StudyPathwayGuideProps) {
               <div className="mb-1 text-2xl font-bold text-foreground">
                 {Math.round(overallProgress)}% Complete
               </div>
-              <div className={cn("text-sm font-medium", readiness.color)}>{readiness.level}</div>
+              <div className={cn('text-sm font-medium', readiness.color)}>{readiness.level}</div>
               <div className="text-xs text-muted-foreground">{readiness.description}</div>
             </div>
             <div className="text-right">
@@ -286,10 +285,10 @@ export function StudyPathwayGuide({ className }: StudyPathwayGuideProps) {
               <div key={phase.id} className="relative">
                 <Card
                   className={cn(
-                    "glass border-2 transition-all hover:border-opacity-50",
+                    'glass border-2 transition-all hover:border-opacity-50',
                     phase.borderColor,
                     phase.bgColor,
-                    phase.status === "locked" && "opacity-75"
+                    phase.status === 'locked' && 'opacity-75'
                   )}
                 >
                   <CardContent className="p-6">
@@ -298,15 +297,15 @@ export function StudyPathwayGuide({ className }: StudyPathwayGuideProps) {
                       <div className="flex flex-col items-center gap-2">
                         <div
                           className={cn(
-                            "flex h-12 w-12 items-center justify-center rounded-full border-2",
+                            'flex h-12 w-12 items-center justify-center rounded-full border-2',
                             phase.borderColor,
                             phase.bgColor
                           )}
                         >
-                          <Icon className={cn("h-6 w-6", phase.color)} />
+                          <Icon className={cn('h-6 w-6', phase.color)} />
                         </div>
                         <div className="text-center">
-                          <div className={cn("text-sm font-medium", phase.color)}>
+                          <div className={cn('text-sm font-medium', phase.color)}>
                             {phase.progress}%
                           </div>
                           <div className="mt-1 w-16">
@@ -342,13 +341,13 @@ export function StudyPathwayGuide({ className }: StudyPathwayGuideProps) {
                             <Button
                               key={action.path}
                               size="sm"
-                              variant={action.type === "primary" ? "default" : "outline"}
-                              disabled={phase.status === "locked"}
+                              variant={action.type === 'primary' ? 'default' : 'outline'}
+                              disabled={phase.status === 'locked'}
                               onClick={() => router.push(action.path)}
                               className={cn(
-                                action.type === "primary"
+                                action.type === 'primary'
                                   ? `${phase.bgColor} ${phase.borderColor} hover:bg-opacity-30`
-                                  : "border-white/20 text-foreground hover:bg-white/10"
+                                  : 'border-white/20 text-foreground hover:bg-white/10'
                               )}
                             >
                               {action.label}

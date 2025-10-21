@@ -1,12 +1,13 @@
 /**
  * Sanity checks for the question database statistics.
  */
-import { getQuestionStats } from "@/lib/questionLoader";
+import { getQuestionStats } from '@/lib/questionLoader';
 
-describe("Question stats", () => {
-  it("computes totals and distributions consistently", () => {
+describe('Question stats', () => {
+  it('computes totals and distributions consistently', () => {
     const stats = getQuestionStats();
-    const { totalQuestions, domainDistribution, difficultyDistribution, categoryDistribution } = stats;
+    const { totalQuestions, domainDistribution, difficultyDistribution, categoryDistribution } =
+      stats;
 
     expect(totalQuestions).toBeGreaterThan(0);
 
@@ -19,4 +20,3 @@ describe("Question stats", () => {
     expect(catSum).toBe(totalQuestions);
   });
 });
-

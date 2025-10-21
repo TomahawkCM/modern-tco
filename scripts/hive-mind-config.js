@@ -36,7 +36,7 @@ const HIVE_MIND_CONFIG = {
     default: 'hierarchical',
     adaptive: true,
     maxAgents: 10,
-    strategy: 'adaptive'
+    strategy: 'adaptive',
   },
 
   // Agent performance tracking
@@ -45,7 +45,7 @@ const HIVE_MIND_CONFIG = {
     trackExecutionTime: true,
     trackQuality: true,
     trackCollaboration: true,
-    metricsRetention: 30 // days
+    metricsRetention: 30, // days
   },
 
   // Cross-session memory
@@ -54,7 +54,7 @@ const HIVE_MIND_CONFIG = {
     persistence: 'sqlite',
     ttl: 604800, // 7 days in seconds
     namespace: 'tanium-tco',
-    compression: true
+    compression: true,
   },
 
   // Truth verification system
@@ -62,7 +62,7 @@ const HIVE_MIND_CONFIG = {
     enabled: true,
     threshold: 0.95,
     autoVerify: true,
-    pairProgramming: true
+    pairProgramming: true,
   },
 
   // Agent specialization profiles
@@ -70,48 +70,48 @@ const HIVE_MIND_CONFIG = {
     'tco-content-specialist': {
       capabilities: ['mdx-authoring', 'video-integration', 'assessment-design'],
       priority: 'high',
-      tokenBudget: 0.15
+      tokenBudget: 0.15,
     },
     'tco-validation-expert': {
       capabilities: ['enterprise-qa', 'certification-compliance', 'security-audit'],
       priority: 'high',
-      tokenBudget: 0.12
+      tokenBudget: 0.12,
     },
     'tco-ui-architect': {
       capabilities: ['shadcn-ui', 'accessibility', 'responsive-design'],
       priority: 'medium',
-      tokenBudget: 0.10
+      tokenBudget: 0.1,
     },
     'assessment-engine-specialist': {
       capabilities: ['weighted-scoring', 'adaptive-learning', 'analytics'],
       priority: 'high',
-      tokenBudget: 0.15
+      tokenBudget: 0.15,
     },
     'video-system-architect': {
       capabilities: ['youtube-api', 'progress-tracking', 'multi-provider'],
       priority: 'medium',
-      tokenBudget: 0.10
+      tokenBudget: 0.1,
     },
     'database-architect': {
       capabilities: ['supabase', 'postgresql', 'rls', 'real-time'],
       priority: 'high',
-      tokenBudget: 0.13
+      tokenBudget: 0.13,
     },
     'react-specialist': {
       capabilities: ['react', 'typescript', 'hooks', 'contexts'],
       priority: 'high',
-      tokenBudget: 0.12
+      tokenBudget: 0.12,
     },
     'performance-engineer': {
       capabilities: ['optimization', 'caching', 'lighthouse', 'bundle-analysis'],
       priority: 'medium',
-      tokenBudget: 0.08
+      tokenBudget: 0.08,
     },
     'security-engineer': {
       capabilities: ['rls-audit', 'csp', 'authentication', 'encryption'],
       priority: 'critical',
-      tokenBudget: 0.05
-    }
+      tokenBudget: 0.05,
+    },
   },
 
   // Task routing patterns
@@ -120,35 +120,35 @@ const HIVE_MIND_CONFIG = {
       frontend: {
         keywords: ['react', 'component', 'ui', 'tsx', 'shadcn', 'accessibility'],
         agents: ['react-specialist', 'typescript-pro', 'tco-ui-architect'],
-        topology: 'hierarchical'
+        topology: 'hierarchical',
       },
       backend: {
         keywords: ['api', 'supabase', 'postgresql', 'auth', 'rls'],
         agents: ['backend-developer', 'database-architect', 'security-engineer'],
-        topology: 'hierarchical'
+        topology: 'hierarchical',
       },
       assessment: {
         keywords: ['assessment', 'scoring', 'analytics', 'progress'],
         agents: ['assessment-engine-specialist', 'tco-analytics-coordinator'],
-        topology: 'adaptive'
+        topology: 'adaptive',
       },
       content: {
         keywords: ['video', 'youtube', 'content', 'mdx', 'learning'],
         agents: ['video-system-architect', 'tco-content-specialist'],
-        topology: 'mesh'
+        topology: 'mesh',
       },
       testing: {
         keywords: ['test', 'vitest', 'jest', 'e2e', 'playwright'],
         agents: ['test-automator', 'qa-expert', 'tco-validation-expert'],
-        topology: 'hierarchical'
+        topology: 'hierarchical',
       },
       deployment: {
         keywords: ['deploy', 'vercel', 'production', 'ci/cd'],
         agents: ['tco-deployment-manager', 'devops-engineer', 'vercel-specialist'],
-        topology: 'hierarchical'
-      }
-    }
-  }
+        topology: 'hierarchical',
+      },
+    },
+  },
 };
 
 /**
@@ -181,7 +181,6 @@ async function initializeHiveMind() {
 
     // Display quick start commands
     displayQuickStart();
-
   } catch (error) {
     console.error('❌ Hive-Mind Initialization Failed:', error.message);
     process.exit(1);
@@ -199,7 +198,7 @@ async function createDirectoryStructure() {
     METRICS_DIR,
     path.join(CLAUDE_FLOW_DIR, 'memory'),
     path.join(CLAUDE_FLOW_DIR, 'sessions'),
-    path.join(CLAUDE_FLOW_DIR, 'agents')
+    path.join(CLAUDE_FLOW_DIR, 'agents'),
   ];
 
   for (const dir of dirs) {
@@ -319,11 +318,7 @@ async function initializeSQLiteDatabase() {
 async function saveConfiguration() {
   console.log('\n💾 Saving configuration...');
 
-  fs.writeFileSync(
-    CONFIG_PATH,
-    JSON.stringify(HIVE_MIND_CONFIG, null, 2),
-    'utf8'
-  );
+  fs.writeFileSync(CONFIG_PATH, JSON.stringify(HIVE_MIND_CONFIG, null, 2), 'utf8');
 
   console.log('  ✅ Configuration saved');
 }
@@ -343,25 +338,21 @@ async function initializeMetricsTracking() {
       failedTasks: 0,
       totalAgents: 0,
       activeAgents: 0,
-      neuralEvents: 0
+      neuralEvents: 0,
     },
     'system-metrics.json': {
       tokenUsage: 0,
       executionTime: 0,
       qualityScore: 0,
       collaborationScore: 0,
-      lastUpdated: new Date().toISOString()
-    }
+      lastUpdated: new Date().toISOString(),
+    },
   };
 
   for (const [filename, content] of Object.entries(metricsFiles)) {
     const filepath = path.join(METRICS_DIR, filename);
     if (!fs.existsSync(filepath)) {
-      fs.writeFileSync(
-        filepath,
-        JSON.stringify(content, null, 2),
-        'utf8'
-      );
+      fs.writeFileSync(filepath, JSON.stringify(content, null, 2), 'utf8');
       console.log(`  ✅ Created ${filename}`);
     }
   }
@@ -373,13 +364,7 @@ async function initializeMetricsTracking() {
 async function verifyMCPServers() {
   console.log('\n🔍 Verifying MCP server configuration...');
 
-  const requiredServers = [
-    'claude-flow',
-    'filesystem',
-    'github',
-    'firecrawl',
-    'playwright'
-  ];
+  const requiredServers = ['claude-flow', 'filesystem', 'github', 'firecrawl', 'playwright'];
 
   console.log('  ℹ️  Required MCP servers:', requiredServers.join(', '));
   console.log('  ✅ MCP servers should be configured in Claude Code settings');
@@ -411,5 +396,5 @@ if (require.main === module) {
 
 module.exports = {
   initializeHiveMind,
-  HIVE_MIND_CONFIG
+  HIVE_MIND_CONFIG,
 };

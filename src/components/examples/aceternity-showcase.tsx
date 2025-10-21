@@ -1,22 +1,18 @@
-"use client";
+'use client';
 
-import dynamic from "next/dynamic";
-import { CardBody, CardContainer, CardItem } from "@/components/ui/3d-card";
-import { BackgroundBeams } from "@/components/ui/background-beams";
-import { Sparkles } from "@/components/ui/sparkles";
-import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
-import { FloatingNav } from "@/components/ui/floating-navbar";
-import { HeroParallax } from "@/components/ui/hero-parallax";
-import { BentoGrid, BentoGridItem } from "@/components/ui/bento-grid";
-import { Meteors } from "@/components/ui/meteors";
+import dynamic from 'next/dynamic';
+import { CardBody, CardContainer, CardItem } from '@/components/ui/3d-card';
+import { BackgroundBeams } from '@/components/ui/background-beams';
+import { Meteors } from '@/components/ui/meteors';
+import { TextGenerateEffect } from '@/components/ui/text-generate-effect';
 
 const AnimatedTestimonials = dynamic(
-  () => import("@/components/ui/animated-testimonials").then((m) => m.AnimatedTestimonials),
+  () => import('@/components/ui/animated-testimonials').then((m) => m.AnimatedTestimonials),
   { ssr: false, loading: () => <div className="h-24" /> }
 );
 
 const InfiniteMovingCards = dynamic(
-  () => import("@/components/ui/infinite-moving-cards").then((m) => m.InfiniteMovingCards),
+  () => import('@/components/ui/infinite-moving-cards').then((m) => m.InfiniteMovingCards),
   { ssr: false, loading: () => <div className="h-24" /> }
 );
 
@@ -27,50 +23,50 @@ export default function AceternityShowcase() {
   const testimonials = [
     {
       quote:
-        "The interactive components make studying for TCO certification engaging and memorable.",
-      name: "Sarah Johnson",
-      designation: "IT Security Analyst",
-      src: "/avatar1.jpg",
+        'The interactive components make studying for TCO certification engaging and memorable.',
+      name: 'Sarah Johnson',
+      designation: 'IT Security Analyst',
+      src: '/avatar1.jpg',
     },
     {
-      quote: "Beautiful animations help visualize complex Tanium concepts effectively.",
-      name: "Michael Chen",
-      designation: "Systems Administrator",
-      src: "/avatar2.jpg",
+      quote: 'Beautiful animations help visualize complex Tanium concepts effectively.',
+      name: 'Michael Chen',
+      designation: 'Systems Administrator',
+      src: '/avatar2.jpg',
     },
     {
-      quote: "The modern UI design keeps me focused and motivated during study sessions.",
-      name: "Emily Rodriguez",
-      designation: "Infrastructure Engineer",
-      src: "/avatar3.jpg",
+      quote: 'The modern UI design keeps me focused and motivated during study sessions.',
+      name: 'Emily Rodriguez',
+      designation: 'Infrastructure Engineer',
+      src: '/avatar3.jpg',
     },
   ];
 
   const movingCards = [
     {
-      quote: "Master Tanium Console Operations",
-      name: "TCO Domain 1",
-      title: "Asking Questions - 22%",
+      quote: 'Master Tanium Console Operations',
+      name: 'TCO Domain 1',
+      title: 'Asking Questions - 22%',
     },
     {
-      quote: "Advanced Targeting & Refinement",
-      name: "TCO Domain 2",
-      title: "Refining Questions - 23%",
+      quote: 'Advanced Targeting & Refinement',
+      name: 'TCO Domain 2',
+      title: 'Refining Questions - 23%',
     },
     {
-      quote: "Safe Package Deployment",
-      name: "TCO Domain 3",
-      title: "Taking Action - 15%",
+      quote: 'Safe Package Deployment',
+      name: 'TCO Domain 3',
+      title: 'Taking Action - 15%',
     },
     {
-      quote: "Platform Navigation Mastery",
-      name: "TCO Domain 4",
-      title: "Navigation & Modules - 23%",
+      quote: 'Platform Navigation Mastery',
+      name: 'TCO Domain 4',
+      title: 'Navigation & Modules - 23%',
     },
     {
-      quote: "Data Export & Reporting",
-      name: "TCO Domain 5",
-      title: "Reporting & Data - 17%",
+      quote: 'Data Export & Reporting',
+      name: 'TCO Domain 5',
+      title: 'Reporting & Data - 17%',
     },
   ];
 
@@ -182,7 +178,9 @@ export default function AceternityShowcase() {
       {/* Infinite Moving Cards */}
       <section className="py-16">
         <div className="container mx-auto px-4">
-          <h2 className="mb-12 text-center text-3xl font-bold text-foreground">TCO Study Domains</h2>
+          <h2 className="mb-12 text-center text-3xl font-bold text-foreground">
+            TCO Study Domains
+          </h2>
           <InfiniteMovingCards items={movingCards} direction="right" speed="slow" />
         </div>
       </section>

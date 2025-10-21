@@ -1,33 +1,31 @@
-"use client";
+'use client';
 
-import { useState, useEffect } from "react";
 import {
+  BarChart3,
+  BookOpen,
+  Clock,
+  FileText,
   Menu,
   Search,
   Settings,
-  User,
-  BookOpen,
-  FileText,
-  BarChart3,
-  Trophy,
-  Clock,
   Target,
-} from "lucide-react";
-import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
-import { HelpTooltip } from "@/components/ui/help-tooltip";
-import { LargeTextToggle } from "@/components/accessibility/large-text-toggle";
-import { HighContrastToggle } from "@/components/accessibility/high-contrast-toggle";
-import { useRouter } from "next/navigation";
-import { UserMenu } from "./UserMenu";
+  Trophy,
+} from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import { HighContrastToggle } from '@/components/accessibility/high-contrast-toggle';
+import { LargeTextToggle } from '@/components/accessibility/large-text-toggle';
+import { Button } from '@/components/ui/button';
 import {
   CommandDialog,
-  CommandInput,
-  CommandList,
   CommandEmpty,
   CommandGroup,
+  CommandInput,
   CommandItem,
-} from "@/components/ui/command";
+  CommandList,
+} from '@/components/ui/command';
+import { HelpTooltip } from '@/components/ui/help-tooltip';
+import { UserMenu } from './UserMenu';
 
 interface AppHeaderProps {
   onMenuClick?: () => void;
@@ -56,12 +54,14 @@ export function AppHeader({ onMenuClick, currentScore = 0, studyStreak = 0 }: Ap
 
   const handleSearch = () => {
     setSearchOpen(!searchOpen);
-    console.log("Toggle search");
+    console.log('Toggle search');
   };
 
   const handleCommand = (path: string) => {
     setCommandOpen(false);
-    try { router.push(path); } catch {}
+    try {
+      router.push(path);
+    } catch {}
   };
 
   // Global keyboard shortcut: Ctrl/Cmd+K to open Command Palette (Tanium-like quick search)
@@ -159,7 +159,7 @@ export function AppHeader({ onMenuClick, currentScore = 0, studyStreak = 0 }: Ap
                 variant="ghost"
                 size="icon"
                 className="text-foreground hover:bg-white/10"
-                onClick={() => router.push("/settings")}
+                onClick={() => router.push('/settings')}
                 aria-label="Open settings"
               >
                 <Settings className="h-5 w-5" />
@@ -179,47 +179,47 @@ export function AppHeader({ onMenuClick, currentScore = 0, studyStreak = 0 }: Ap
         <CommandList>
           <CommandEmpty>No results found.</CommandEmpty>
           <CommandGroup heading="Study">
-            <CommandItem onSelect={() => handleCommand("/modules")}>
+            <CommandItem onSelect={() => handleCommand('/modules')}>
               <BookOpen className="mr-2 h-4 w-4" />
               <span>Learning Modules</span>
             </CommandItem>
-            <CommandItem onSelect={() => handleCommand("/practice")}>
+            <CommandItem onSelect={() => handleCommand('/practice')}>
               <BookOpen className="mr-2 h-4 w-4" />
               <span>Practice Questions</span>
             </CommandItem>
-            <CommandItem onSelect={() => handleCommand("/mock")}>
+            <CommandItem onSelect={() => handleCommand('/mock')}>
               <FileText className="mr-2 h-4 w-4" />
               <span>Mock Exam</span>
             </CommandItem>
-            <CommandItem onSelect={() => handleCommand("/review")}>
+            <CommandItem onSelect={() => handleCommand('/review')}>
               <Target className="mr-2 h-4 w-4" />
               <span>Review Mistakes</span>
             </CommandItem>
           </CommandGroup>
           <CommandGroup heading="Analytics">
-            <CommandItem onSelect={() => handleCommand("/analytics")}>
+            <CommandItem onSelect={() => handleCommand('/analytics')}>
               <BarChart3 className="mr-2 h-4 w-4" />
               <span>Performance Dashboard</span>
             </CommandItem>
-            <CommandItem onSelect={() => handleCommand("/progress")}>
+            <CommandItem onSelect={() => handleCommand('/progress')}>
               <Trophy className="mr-2 h-4 w-4" />
               <span>Progress Tracking</span>
             </CommandItem>
           </CommandGroup>
           <CommandGroup heading="Domains">
-            <CommandItem onSelect={() => handleCommand("/domains/asking-questions")}>
+            <CommandItem onSelect={() => handleCommand('/domains/asking-questions')}>
               <span>Asking Questions</span>
             </CommandItem>
-            <CommandItem onSelect={() => handleCommand("/domains/refining-targeting")}>
+            <CommandItem onSelect={() => handleCommand('/domains/refining-targeting')}>
               <span>Refining Questions</span>
             </CommandItem>
-            <CommandItem onSelect={() => handleCommand("/domains/taking-action")}>
+            <CommandItem onSelect={() => handleCommand('/domains/taking-action')}>
               <span>Taking Action</span>
             </CommandItem>
-            <CommandItem onSelect={() => handleCommand("/domains/navigation-modules")}>
+            <CommandItem onSelect={() => handleCommand('/domains/navigation-modules')}>
               <span>Navigation & Modules</span>
             </CommandItem>
-            <CommandItem onSelect={() => handleCommand("/domains/reporting-export")}>
+            <CommandItem onSelect={() => handleCommand('/domains/reporting-export')}>
               <span>Reporting & Export</span>
             </CommandItem>
           </CommandGroup>

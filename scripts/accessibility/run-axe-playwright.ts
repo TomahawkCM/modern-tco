@@ -1,10 +1,12 @@
-import { chromium } from 'playwright';
 import AxeBuilder from '@axe-core/playwright';
 import fs from 'fs';
 import path from 'path';
+import { chromium } from 'playwright';
 
-const TARGET_URL = process.env.AXE_TARGET_URL ?? 'http://127.0.0.1:3001/modules/00-tanium-platform-foundation-v2';
-const OUTPUT_PATH = process.env.AXE_OUTPUT ?? path.resolve('reports/accessibility/module-00-v2/axe-playwright.json');
+const TARGET_URL =
+  process.env.AXE_TARGET_URL ?? 'http://127.0.0.1:3001/modules/00-tanium-platform-foundation-v2';
+const OUTPUT_PATH =
+  process.env.AXE_OUTPUT ?? path.resolve('reports/accessibility/module-00-v2/axe-playwright.json');
 
 async function run() {
   const browser = await chromium.launch({

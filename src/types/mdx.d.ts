@@ -1,5 +1,5 @@
-declare module "*.mdx" {
-  import type { ComponentType } from "react";
+declare module '*.mdx' {
+  import type { ComponentType } from 'react';
 
   interface MDXProps {
     components?: Record<string, ComponentType<any>>;
@@ -10,8 +10,8 @@ declare module "*.mdx" {
 }
 
 // TypeScript declarations for MDX content modules
-declare module "@/content/modules/*.mdx" {
-  import type { ComponentType } from "react";
+declare module '@/content/modules/*.mdx' {
+  import type { ComponentType } from 'react';
 
   interface MDXProps {
     components?: Record<string, ComponentType<any>>;

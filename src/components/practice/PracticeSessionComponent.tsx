@@ -1,28 +1,19 @@
-"use client";
+'use client';
 
-import { useState, useEffect } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Progress } from "@/components/ui/progress";
+import { ArrowRight, BookOpen, CheckCircle2, Clock, Target, Trophy, XCircle } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Progress } from '@/components/ui/progress';
 import {
-  CheckCircle2,
-  XCircle,
-  ArrowRight,
-  Trophy,
-  Clock,
-  BookOpen,
-  Target,
-} from "lucide-react";
-import { cn } from "@/lib/utils";
-import {
-  type PracticeSession,
-  type PracticeQuestion,
-  getPracticeQuestions,
   answerPracticeQuestion,
   completePracticeSession,
-} from "@/lib/practiceMode";
-import type { Question } from "@/lib/questionBank";
+  getPracticeQuestions,
+  type PracticeSession,
+} from '@/lib/practiceMode';
+import type { Question } from '@/lib/questionBank';
+import { cn } from '@/lib/utils';
 
 interface PracticeSessionComponentProps {
   /** Practice session */
@@ -72,7 +63,7 @@ export function PracticeSessionComponent({
   // Reset timer when question changes
   useEffect(() => {
     setQuestionStartTime(Date.now());
-  }, [currentIndex]);
+  }, []);
 
   const handleSelectAnswer = (answer: string) => {
     setSelectedAnswer(answer);
@@ -82,14 +73,9 @@ export function PracticeSessionComponent({
     if (!currentQuestion || !selectedAnswer) return;
 
     const timeSpent = Math.floor((Date.now() - questionStartTime) / 1000);
-    const questionId = session.questions[currentIndex].questionId;
+    const { questionId } = session.questions[currentIndex];
 
-    const result = answerPracticeQuestion(
-      session,
-      questionId,
-      selectedAnswer,
-      timeSpent
-    );
+    const result = answerPracticeQuestion(session, questionId, selectedAnswer, timeSpent);
 
     setIsCorrect(result.correct);
     setShowResult(true);
@@ -151,9 +137,7 @@ export function PracticeSessionComponent({
                 <Target className="h-4 w-4 text-primary" />
                 <span className="text-sm text-muted-foreground">Accuracy</span>
               </div>
-              <div className="text-2xl font-bold text-primary">
-                {Math.round(accuracy)}%
-              </div>
+              <div className="text-2xl font-bold text-primary">{Math.round(accuracy)}%</div>
             </div>
 
             <div className="rounded-lg border border-[#22c55e]/20 bg-[#22c55e]/5 p-4">
@@ -161,9 +145,7 @@ export function PracticeSessionComponent({
                 <CheckCircle2 className="h-4 w-4 text-[#22c55e]" />
                 <span className="text-sm text-muted-foreground">Correct</span>
               </div>
-              <div className="text-2xl font-bold text-[#22c55e]">
-                {session.score}
-              </div>
+              <div className="text-2xl font-bold text-[#22c55e]">{session.score}</div>
             </div>
           </div>
 
@@ -173,8 +155,8 @@ export function PracticeSessionComponent({
               {accuracy >= 90
                 ? "🎉 Excellent work! You're ready for harder challenges."
                 : accuracy >= 70
-                ? "👍 Good job! Keep practicing to improve further."
-                : "📚 Keep studying! Review the concepts and try again."}
+                  ? '👍 Good job! Keep practicing to improve further.'
+                  : '📚 Keep studying! Review the concepts and try again.'}
             </p>
           </div>
 
@@ -235,37 +217,37 @@ export function PracticeSessionComponent({
                 <div className="mb-4">
                   <div className="mb-2 flex items-center justify-between">
                     <Badge variant="outline">
-                      {currentQuestion.type === "true-false" ? "True/False" : "Multiple Choice"}
+                      {currentQuestion.type === 'true-false' ? 'True/False' : 'Multiple Choice'}
                     </Badge>
-                    <Badge variant="outline">
-                      Difficulty: {currentQuestion.difficulty}
-                    </Badge>
+                    <Badge variant="outline">Difficulty: {currentQuestion.difficulty}</Badge>
                   </div>
-                  <p className="text-base font-medium text-foreground">{currentQuestion.question}</p>
+                  <p className="text-base font-medium text-foreground">
+                    {currentQuestion.question}
+                  </p>
                 </div>
 
                 <div className="space-y-2">
-                  {currentQuestion.type === "true-false" ? (
+                  {currentQuestion.type === 'true-false' ? (
                     <div className="flex gap-3">
                       <button
-                        onClick={() => handleSelectAnswer("True")}
+                        onClick={() => handleSelectAnswer('True')}
                         className={cn(
-                          "flex-1 rounded-lg border-2 p-4 transition-colors",
-                          selectedAnswer === "True"
-                            ? "border-green-500 bg-[#22c55e]/20"
-                            : "border-gray-700 hover:border-gray-600"
+                          'flex-1 rounded-lg border-2 p-4 transition-colors',
+                          selectedAnswer === 'True'
+                            ? 'border-green-500 bg-[#22c55e]/20'
+                            : 'border-gray-700 hover:border-gray-600'
                         )}
                       >
                         <CheckCircle2 className="mx-auto mb-2 h-6 w-6" />
                         <span>True</span>
                       </button>
                       <button
-                        onClick={() => handleSelectAnswer("False")}
+                        onClick={() => handleSelectAnswer('False')}
                         className={cn(
-                          "flex-1 rounded-lg border-2 p-4 transition-colors",
-                          selectedAnswer === "False"
-                            ? "border-red-500 bg-red-500/20"
-                            : "border-gray-700 hover:border-gray-600"
+                          'flex-1 rounded-lg border-2 p-4 transition-colors',
+                          selectedAnswer === 'False'
+                            ? 'border-red-500 bg-red-500/20'
+                            : 'border-gray-700 hover:border-gray-600'
                         )}
                       >
                         <XCircle className="mx-auto mb-2 h-6 w-6" />
@@ -278,10 +260,10 @@ export function PracticeSessionComponent({
                         key={idx}
                         onClick={() => handleSelectAnswer(option)}
                         className={cn(
-                          "w-full rounded-lg border-2 p-4 text-left transition-colors",
+                          'w-full rounded-lg border-2 p-4 text-left transition-colors',
                           selectedAnswer === option
-                            ? "border-purple-500 bg-accent/20"
-                            : "border-gray-700 hover:border-gray-600"
+                            ? 'border-purple-500 bg-accent/20'
+                            : 'border-gray-700 hover:border-gray-600'
                         )}
                       >
                         <div className="flex items-start gap-3">
@@ -311,8 +293,10 @@ export function PracticeSessionComponent({
         {showResult && currentQuestion && (
           <Card
             className={cn(
-              "border-2",
-              isCorrect ? "border-[#22c55e]/30 bg-[#22c55e]/5" : "border-orange-500/30 bg-orange-500/5"
+              'border-2',
+              isCorrect
+                ? 'border-[#22c55e]/30 bg-[#22c55e]/5'
+                : 'border-orange-500/30 bg-orange-500/5'
             )}
           >
             <CardContent className="py-6">
@@ -337,7 +321,9 @@ export function PracticeSessionComponent({
                       {currentQuestion.concept}
                     </Badge>
                   </div>
-                  <p className="text-sm font-medium text-muted-foreground">{currentQuestion.question}</p>
+                  <p className="text-sm font-medium text-muted-foreground">
+                    {currentQuestion.question}
+                  </p>
                 </div>
 
                 <div className="mb-3 rounded bg-[#22c55e]/10 px-3 py-2">
@@ -363,12 +349,14 @@ export function PracticeSessionComponent({
                     <BookOpen className="h-4 w-4 text-primary" />
                     <span className="text-xs font-semibold text-primary">Explanation:</span>
                   </div>
-                  <p className="text-sm leading-relaxed text-muted-foreground">{currentQuestion.explanation}</p>
+                  <p className="text-sm leading-relaxed text-muted-foreground">
+                    {currentQuestion.explanation}
+                  </p>
                 </div>
               </div>
 
               <Button onClick={handleNext} className="w-full bg-accent hover:bg-purple-700">
-                {isLastQuestion ? "Complete Session" : "Next Question"}
+                {isLastQuestion ? 'Complete Session' : 'Next Question'}
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </CardContent>

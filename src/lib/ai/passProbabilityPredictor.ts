@@ -14,7 +14,7 @@
  */
 
 import { supabase } from '@/lib/supabase';
-import { gatherPerformanceData, type PerformanceData } from './adaptiveLearningPath';
+import { gatherPerformanceData } from './adaptiveLearningPath';
 
 // ==================== TYPES ====================
 
@@ -109,9 +109,9 @@ const DOMAIN_NAMES = {
 const FEATURE_WEIGHTS = {
   completion: 0.25, // Module completion
   accuracy: 0.35, // Overall accuracy
-  mockExams: 0.20, // Mock exam performance
-  practice: 0.10, // Practice question performance
-  engagement: 0.10, // Study consistency
+  mockExams: 0.2, // Mock exam performance
+  practice: 0.1, // Practice question performance
+  engagement: 0.1, // Study consistency
 };
 
 // Passing threshold for TCO
@@ -173,8 +173,7 @@ async function extractFeatures(userId: string): Promise<PredictionFeatures> {
 
   const daysUntilExam = goalData?.target_exam_date
     ? Math.ceil(
-        (new Date(goalData.target_exam_date).getTime() - Date.now()) /
-          (1000 * 60 * 60 * 24)
+        (new Date(goalData.target_exam_date).getTime() - Date.now()) / (1000 * 60 * 60 * 24)
       )
     : undefined;
 
@@ -188,10 +187,7 @@ async function extractFeatures(userId: string): Promise<PredictionFeatures> {
     .single();
 
   const daysOfPreparation = firstSession
-    ? Math.ceil(
-        (Date.now() - new Date(firstSession.created_at).getTime()) /
-          (1000 * 60 * 60 * 24)
-      )
+    ? Math.ceil((Date.now() - new Date(firstSession.created_at).getTime()) / (1000 * 60 * 60 * 24))
     : 0;
 
   return {
@@ -223,7 +219,7 @@ async function extractFeatures(userId: string): Promise<PredictionFeatures> {
  */
 function predictBayesian(features: PredictionFeatures): number {
   // Prior probability (baseline pass rate: ~70% for prepared students)
-  const prior = 0.70;
+  const prior = 0.7;
 
   // Likelihood factors
   const completionLikelihood = features.completionPercentage / 100;
@@ -318,15 +314,12 @@ function predictEnsemble(features: PredictionFeatures): {
   const ruleBased = predictRuleBased(features);
 
   // Weighted average (more weight on Bayesian and regression)
-  const probability =
-    bayesian * 0.4 + regression * 0.4 + ruleBased * 0.2;
+  const probability = bayesian * 0.4 + regression * 0.4 + ruleBased * 0.2;
 
   // Confidence based on model agreement
   const predictions = [bayesian, regression, ruleBased];
   const mean = predictions.reduce((a, b) => a + b, 0) / predictions.length;
-  const variance =
-    predictions.reduce((sum, p) => sum + Math.pow(p - mean, 2), 0) /
-    predictions.length;
+  const variance = predictions.reduce((sum, p) => sum + (p - mean) ** 2, 0) / predictions.length;
   const stdDev = Math.sqrt(variance);
 
   // Lower variance = higher confidence
@@ -362,9 +355,7 @@ function predictDomainScores(
 
 // ==================== STRENGTHS & WEAKNESSES ====================
 
-function identifyStrengthsWeaknesses(
-  domainScores: Record<string, number>
-): {
+function identifyStrengthsWeaknesses(domainScores: Record<string, number>): {
   strengths: PassProbability['strengths'];
   weaknesses: PassProbability['weaknesses'];
   riskFactors: string[];
@@ -394,7 +385,7 @@ function identifyStrengthsWeaknesses(
       });
 
       // High-weight domains below threshold are risk factors
-      if (weight > 0.20) {
+      if (weight > 0.2) {
         riskFactors.push(
           `Low score in high-weight domain: ${domainName} (${(weight * 100).toFixed(0)}% of exam)`
         );
@@ -500,15 +491,10 @@ export async function predictPassProbability(userId: string): Promise<PassProbab
   const domainScores = predictDomainScores(features, probability);
 
   // Identify strengths/weaknesses
-  const { strengths, weaknesses, riskFactors } =
-    identifyStrengthsWeaknesses(domainScores);
+  const { strengths, weaknesses, riskFactors } = identifyStrengthsWeaknesses(domainScores);
 
   // Generate recommendations
-  const recommendedActions = generateRecommendations(
-    features,
-    probability,
-    weaknesses
-  );
+  const recommendedActions = generateRecommendations(features, probability, weaknesses);
 
   // Estimate study hours needed
   const estimatedStudyHoursNeeded = estimateStudyHoursNeeded(
@@ -569,9 +555,7 @@ export async function predictPassProbability(userId: string): Promise<PassProbab
 
 // ==================== RETRIEVAL ====================
 
-export async function getLatestPrediction(
-  userId: string
-): Promise<PassProbability | null> {
+export async function getLatestPrediction(userId: string): Promise<PassProbability | null> {
   const { data, error } = await supabase.rpc('get_latest_pass_probability', {
     p_user_id: userId,
   });

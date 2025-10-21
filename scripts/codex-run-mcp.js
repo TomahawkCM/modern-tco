@@ -27,11 +27,17 @@ if (!existsSync(mcpConfig)) {
 }
 
 const isWin = process.platform === 'win32';
-const cmd = isWin
-  ? 'powershell'
-  : 'bash';
+const cmd = isWin ? 'powershell' : 'bash';
 const cmdArgs = isWin
-  ? ['-NoProfile', '-ExecutionPolicy', 'Bypass', '-File', 'scripts/codex-run-mcp.ps1', '-Prompt', prompt]
+  ? [
+      '-NoProfile',
+      '-ExecutionPolicy',
+      'Bypass',
+      '-File',
+      'scripts/codex-run-mcp.ps1',
+      '-Prompt',
+      prompt,
+    ]
   : ['scripts/codex-run-mcp.sh', prompt];
 
 const child = spawn(cmd, cmdArgs, {
@@ -40,4 +46,3 @@ const child = spawn(cmd, cmdArgs, {
 });
 
 child.on('exit', (code) => process.exit(code ?? 0));
-

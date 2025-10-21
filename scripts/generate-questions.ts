@@ -18,8 +18,8 @@
  */
 
 import dotenv from 'dotenv';
-import OpenAI from 'openai';
 import * as fs from 'fs';
+import OpenAI from 'openai';
 import * as path from 'path';
 
 // Load environment variables from .env.local
@@ -76,7 +76,7 @@ const TCO_DOMAINS: Record<string, DomainInfo> = {
       'Question sharing and collaboration',
     ],
     description:
-      'Master the art of asking effective questions using Tanium\'s natural language interface to gather real-time endpoint data.',
+      "Master the art of asking effective questions using Tanium's natural language interface to gather real-time endpoint data.",
   },
   refining_targeting: {
     name: 'Refining Questions & Targeting',
@@ -231,7 +231,9 @@ async function generateQuestions(config: GenerationConfig): Promise<GeneratedQue
     throw new Error(`Invalid domain: ${config.domain}`);
   }
 
-  console.log(`\n🤖 Generating ${config.count} ${config.difficulty} questions for ${domainInfo.name}...`);
+  console.log(
+    `\n🤖 Generating ${config.count} ${config.difficulty} questions for ${domainInfo.name}...`
+  );
   console.log(`📊 Exam Weight: ${domainInfo.weight}%\n`);
 
   const prompt = buildQuestionGenerationPrompt(domainInfo, config.difficulty, config.count);
@@ -244,7 +246,8 @@ async function generateQuestions(config: GenerationConfig): Promise<GeneratedQue
       messages: [
         {
           role: 'system',
-          content: 'You are an expert Tanium TCO (Certified Operator) exam question writer. You always respond with valid JSON arrays containing exam questions.',
+          content:
+            'You are an expert Tanium TCO (Certified Operator) exam question writer. You always respond with valid JSON arrays containing exam questions.',
         },
         {
           role: 'user',
@@ -377,10 +380,13 @@ function printStatistics(questions: GeneratedQuestion[]): void {
   console.log('\n📊 Generation Statistics:\n');
 
   // Count by difficulty
-  const byDifficulty = questions.reduce((acc, q) => {
-    acc[q.difficulty] = (acc[q.difficulty] || 0) + 1;
-    return acc;
-  }, {} as Record<string, number>);
+  const byDifficulty = questions.reduce(
+    (acc, q) => {
+      acc[q.difficulty] = (acc[q.difficulty] || 0) + 1;
+      return acc;
+    },
+    {} as Record<string, number>
+  );
 
   console.log('Difficulty Distribution:');
   for (const [difficulty, count] of Object.entries(byDifficulty)) {
@@ -389,10 +395,13 @@ function printStatistics(questions: GeneratedQuestion[]): void {
   }
 
   // Count by category
-  const byCategory = questions.reduce((acc, q) => {
-    acc[q.category] = (acc[q.category] || 0) + 1;
-    return acc;
-  }, {} as Record<string, number>);
+  const byCategory = questions.reduce(
+    (acc, q) => {
+      acc[q.category] = (acc[q.category] || 0) + 1;
+      return acc;
+    },
+    {} as Record<string, number>
+  );
 
   console.log('\nCategory Distribution:');
   for (const [category, count] of Object.entries(byCategory)) {
@@ -411,10 +420,13 @@ function printStatistics(questions: GeneratedQuestion[]): void {
   console.log(`Total Unique Tags: ${uniqueTags.size}`);
 
   console.log('\nMost Common Tags:');
-  const tagCounts = allTags.reduce((acc, tag) => {
-    acc[tag] = (acc[tag] || 0) + 1;
-    return acc;
-  }, {} as Record<string, number>);
+  const tagCounts = allTags.reduce(
+    (acc, tag) => {
+      acc[tag] = (acc[tag] || 0) + 1;
+      return acc;
+    },
+    {} as Record<string, number>
+  );
   const sortedTags = Object.entries(tagCounts)
     .sort(([, a], [, b]) => b - a)
     .slice(0, 10);

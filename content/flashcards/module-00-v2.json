@@ -1,42 +1,282 @@
 [
-  {"id":"module00-fc-001","front":"What analogy do we use to explain Tanium's platform?","back":"A city-wide emergency radio system that reaches every neighborhood instantly.","tags":["analogy","why"],"difficulty":"easy"},
-  {"id":"module00-fc-002","front":"What problem does Tanium's speed help IT teams solve?","back":"It lets teams investigate and remediate incidents before they escalate across the environment.","tags":["value","why"],"difficulty":"easy"},
-  {"id":"module00-fc-003","front":"Define an endpoint in Tanium terms.","back":"Any device managed by Tanium, such as a workstation, server, or laptop.","tags":["terminology","what"],"difficulty":"easy"},
-  {"id":"module00-fc-004","front":"What is a sensor?","back":"A reusable question template that gathers real-time data from endpoints.","tags":["terminology","what"],"difficulty":"easy"},
-  {"id":"module00-fc-005","front":"What is a package?","back":"A bundle of instructions that prepares an action to change something on endpoints.","tags":["terminology","what"],"difficulty":"easy"},
-  {"id":"module00-fc-006","front":"What is an action in Tanium?","back":"An execution of a package against targeted endpoints.","tags":["terminology","what"],"difficulty":"easy"},
-  {"id":"module00-fc-007","front":"Which component collects data but does not change endpoints?","back":"A sensor.","tags":["terminology","what"],"difficulty":"easy"},
-  {"id":"module00-fc-008","front":"Why is the peer-to-peer chain efficient?","back":"Endpoints forward requests and responses to neighbors, reducing central server load and bandwidth.","tags":["architecture","why"],"difficulty":"medium"},
-  {"id":"module00-fc-009","front":"How does Tanium reduce bandwidth when asking a question?","back":"Only one endpoint in each network segment contacts the server, then relays the question through peers.","tags":["architecture","what"],"difficulty":"medium"},
-  {"id":"module00-fc-010","front":"What console area lets you ask live questions?","back":"The Interact module.","tags":["console","how"],"difficulty":"easy"},
-  {"id":"module00-fc-011","front":"What is the first step in the first-success workflow?","back":"Open the Tanium console and navigate to Interact.","tags":["workflow","how"],"difficulty":"easy"},
-  {"id":"module00-fc-012","front":"What question do you run for a first win?","back":"Ask the Computer Name sensor to see live endpoints responding.","tags":["workflow","how"],"difficulty":"easy"},
-  {"id":"module00-fc-013","front":"How do you narrow a question to lab devices?","back":"Add a filter: where Computer Name contains LAB.","tags":["filters","how"],"difficulty":"medium"},
-  {"id":"module00-fc-014","front":"What should you check if a question returns no results?","back":"Verify the targeted computer group has online endpoints and the syntax is correct.","tags":["troubleshooting","how"],"difficulty":"medium"},
-  {"id":"module00-fc-015","front":"Where do you review prior questions in the console?","back":"The Question History tab in Interact.","tags":["console","apply"],"difficulty":"medium"},
-  {"id":"module00-fc-016","front":"Which sensor helps identify low disk space?","back":"Disk Free Space.","tags":["scenario","apply"],"difficulty":"easy"},
-  {"id":"module00-fc-017","front":"After finding low disk space machines, what is a safe remediation step?","back":"Schedule an action to clean temporary files on targeted endpoints.","tags":["scenario","apply"],"difficulty":"medium"},
-  {"id":"module00-fc-018","front":"Why export results to CSV?","back":"To share clear evidence with stakeholders and document remediation tasks.","tags":["reporting","apply"],"difficulty":"easy"},
-  {"id":"module00-fc-019","front":"What should accompany a CSV export?","back":"A changelog noting what was done, recommended next steps, and responsible owners.","tags":["reporting","apply"],"difficulty":"medium"},
-  {"id":"module00-fc-020","front":"How does Tanium map to the TCO exam?","back":"Platform value, architecture, navigation, and troubleshooting all correspond to specific blueprint domains.","tags":["exam","what"],"difficulty":"medium"},
-  {"id":"module00-fc-021","front":"What is the benefit of the linear chain during outages?","back":"If one endpoint is offline, neighbors reroute the signal so the question still propagates.","tags":["resilience","why"],"difficulty":"medium"},
-  {"id":"module00-fc-022","front":"What does the Tanium Server coordinate?","back":"It seeds questions, collects responses, and manages authentication/policy.","tags":["architecture","what"],"difficulty":"medium"},
-  {"id":"module00-fc-023","front":"What is a computer group?","back":"A logical collection of endpoints used for targeting questions and actions.","tags":["targeting","what"],"difficulty":"easy"},
-  {"id":"module00-fc-024","front":"Why start with a pilot group before mass actions?","back":"To validate the change on a small set of machines and avoid wide-impact mistakes.","tags":["best-practice","apply"],"difficulty":"medium"},
-  {"id":"module00-fc-025","front":"Which role-based permission grants access to Interact?","back":"The Interact role or any custom role with equivalent rights.","tags":["security","how"],"difficulty":"medium"},
-  {"id":"module00-fc-026","front":"How do you explain Tanium to non-technical stakeholders?","back":"Compare it to sending one message that instantly reaches every device, giving instant visibility.","tags":["communication","why"],"difficulty":"easy"},
-  {"id":"module00-fc-027","front":"What exam topic covers console navigation?","back":"TCO Domain: Console Navigation & Workflows.","tags":["exam","how"],"difficulty":"easy"},
-  {"id":"module00-fc-028","front":"What do you document after a remediation action?","back":"Action performed, impacted endpoints, results, and follow-up tasks.","tags":["reporting","apply"],"difficulty":"medium"},
-  {"id":"module00-fc-029","front":"How often should you run health checks on the Tanium linear chain?","back":"Regularly, especially before large-scale question or action campaigns.","tags":["operations","how"],"difficulty":"medium"},
-  {"id":"module00-fc-030","front":"What indicates the platform is responsive during a question?","back":"Results begin streaming within seconds and reach near real-time completeness.","tags":["observability","how"],"difficulty":"easy"},
-  {"id":"module00-fc-031","front":"Which feature helps surface recently asked questions?","back":"Recent Questions widget within Interact.","tags":["console","what"],"difficulty":"medium"},
-  {"id":"module00-fc-032","front":"How do you keep terminology accessible?","back":"Introduce plain-language definitions before using acronyms or jargon.","tags":["pedagogy","style"],"difficulty":"easy"},
-  {"id":"module00-fc-033","front":"What keyboard navigation tip supports accessibility?","back":"Use tab order to verify every interactive element is reachable without a mouse.","tags":["accessibility","how"],"difficulty":"easy"},
-  {"id":"module00-fc-034","front":"Why capture alt text for diagrams?","back":"To ensure screen reader users understand the visual context of the architecture.","tags":["accessibility","style"],"difficulty":"easy"},
-  {"id":"module00-fc-035","front":"What metric does the performance budget set for LCP?","back":"Keep Largest Contentful Paint under 3.0 seconds on desktop Lighthouse runs.","tags":["performance","governance"],"difficulty":"medium"},
-  {"id":"module00-fc-036","front":"Which bundle size target do we enforce for module pages?","back":"Keep JavaScript bundles under 250 KB gzipped per module page.","tags":["performance","governance"],"difficulty":"medium"},
-  {"id":"module00-fc-037","front":"What does the Active Recall step accomplish?","back":"It prompts learners to retrieve concepts before moving on, strengthening retention.","tags":["pedagogy","why"],"difficulty":"easy"},
-  {"id":"module00-fc-038","front":"Why include mini-practice tasks?","back":"They convert knowledge into action quickly, reinforcing confidence for beginners.","tags":["pedagogy","how"],"difficulty":"easy"},
-  {"id":"module00-fc-039","front":"How do you verify accessibility compliance quickly?","back":"Run automated tools like axe and pair with manual keyboard/screen reader checks.","tags":["accessibility","apply"],"difficulty":"medium"},
-  {"id":"module00-fc-040","front":"What outcome should a one-sentence summary deliver?","back":"A crisp reminder of the main takeaway that learners can repeat from memory.","tags":["pedagogy","style"],"difficulty":"easy"}
+  {
+    "id": "module00-fc-001",
+    "front": "What analogy do we use to explain Tanium's platform?",
+    "back": "A city-wide emergency radio system that reaches every neighborhood instantly.",
+    "tags": ["analogy", "why"],
+    "difficulty": "easy"
+  },
+  {
+    "id": "module00-fc-002",
+    "front": "What problem does Tanium's speed help IT teams solve?",
+    "back": "It lets teams investigate and remediate incidents before they escalate across the environment.",
+    "tags": ["value", "why"],
+    "difficulty": "easy"
+  },
+  {
+    "id": "module00-fc-003",
+    "front": "Define an endpoint in Tanium terms.",
+    "back": "Any device managed by Tanium, such as a workstation, server, or laptop.",
+    "tags": ["terminology", "what"],
+    "difficulty": "easy"
+  },
+  {
+    "id": "module00-fc-004",
+    "front": "What is a sensor?",
+    "back": "A reusable question template that gathers real-time data from endpoints.",
+    "tags": ["terminology", "what"],
+    "difficulty": "easy"
+  },
+  {
+    "id": "module00-fc-005",
+    "front": "What is a package?",
+    "back": "A bundle of instructions that prepares an action to change something on endpoints.",
+    "tags": ["terminology", "what"],
+    "difficulty": "easy"
+  },
+  {
+    "id": "module00-fc-006",
+    "front": "What is an action in Tanium?",
+    "back": "An execution of a package against targeted endpoints.",
+    "tags": ["terminology", "what"],
+    "difficulty": "easy"
+  },
+  {
+    "id": "module00-fc-007",
+    "front": "Which component collects data but does not change endpoints?",
+    "back": "A sensor.",
+    "tags": ["terminology", "what"],
+    "difficulty": "easy"
+  },
+  {
+    "id": "module00-fc-008",
+    "front": "Why is the peer-to-peer chain efficient?",
+    "back": "Endpoints forward requests and responses to neighbors, reducing central server load and bandwidth.",
+    "tags": ["architecture", "why"],
+    "difficulty": "medium"
+  },
+  {
+    "id": "module00-fc-009",
+    "front": "How does Tanium reduce bandwidth when asking a question?",
+    "back": "Only one endpoint in each network segment contacts the server, then relays the question through peers.",
+    "tags": ["architecture", "what"],
+    "difficulty": "medium"
+  },
+  {
+    "id": "module00-fc-010",
+    "front": "What console area lets you ask live questions?",
+    "back": "The Interact module.",
+    "tags": ["console", "how"],
+    "difficulty": "easy"
+  },
+  {
+    "id": "module00-fc-011",
+    "front": "What is the first step in the first-success workflow?",
+    "back": "Open the Tanium console and navigate to Interact.",
+    "tags": ["workflow", "how"],
+    "difficulty": "easy"
+  },
+  {
+    "id": "module00-fc-012",
+    "front": "What question do you run for a first win?",
+    "back": "Ask the Computer Name sensor to see live endpoints responding.",
+    "tags": ["workflow", "how"],
+    "difficulty": "easy"
+  },
+  {
+    "id": "module00-fc-013",
+    "front": "How do you narrow a question to lab devices?",
+    "back": "Add a filter: where Computer Name contains LAB.",
+    "tags": ["filters", "how"],
+    "difficulty": "medium"
+  },
+  {
+    "id": "module00-fc-014",
+    "front": "What should you check if a question returns no results?",
+    "back": "Verify the targeted computer group has online endpoints and the syntax is correct.",
+    "tags": ["troubleshooting", "how"],
+    "difficulty": "medium"
+  },
+  {
+    "id": "module00-fc-015",
+    "front": "Where do you review prior questions in the console?",
+    "back": "The Question History tab in Interact.",
+    "tags": ["console", "apply"],
+    "difficulty": "medium"
+  },
+  {
+    "id": "module00-fc-016",
+    "front": "Which sensor helps identify low disk space?",
+    "back": "Disk Free Space.",
+    "tags": ["scenario", "apply"],
+    "difficulty": "easy"
+  },
+  {
+    "id": "module00-fc-017",
+    "front": "After finding low disk space machines, what is a safe remediation step?",
+    "back": "Schedule an action to clean temporary files on targeted endpoints.",
+    "tags": ["scenario", "apply"],
+    "difficulty": "medium"
+  },
+  {
+    "id": "module00-fc-018",
+    "front": "Why export results to CSV?",
+    "back": "To share clear evidence with stakeholders and document remediation tasks.",
+    "tags": ["reporting", "apply"],
+    "difficulty": "easy"
+  },
+  {
+    "id": "module00-fc-019",
+    "front": "What should accompany a CSV export?",
+    "back": "A changelog noting what was done, recommended next steps, and responsible owners.",
+    "tags": ["reporting", "apply"],
+    "difficulty": "medium"
+  },
+  {
+    "id": "module00-fc-020",
+    "front": "How does Tanium map to the TCO exam?",
+    "back": "Platform value, architecture, navigation, and troubleshooting all correspond to specific blueprint domains.",
+    "tags": ["exam", "what"],
+    "difficulty": "medium"
+  },
+  {
+    "id": "module00-fc-021",
+    "front": "What is the benefit of the linear chain during outages?",
+    "back": "If one endpoint is offline, neighbors reroute the signal so the question still propagates.",
+    "tags": ["resilience", "why"],
+    "difficulty": "medium"
+  },
+  {
+    "id": "module00-fc-022",
+    "front": "What does the Tanium Server coordinate?",
+    "back": "It seeds questions, collects responses, and manages authentication/policy.",
+    "tags": ["architecture", "what"],
+    "difficulty": "medium"
+  },
+  {
+    "id": "module00-fc-023",
+    "front": "What is a computer group?",
+    "back": "A logical collection of endpoints used for targeting questions and actions.",
+    "tags": ["targeting", "what"],
+    "difficulty": "easy"
+  },
+  {
+    "id": "module00-fc-024",
+    "front": "Why start with a pilot group before mass actions?",
+    "back": "To validate the change on a small set of machines and avoid wide-impact mistakes.",
+    "tags": ["best-practice", "apply"],
+    "difficulty": "medium"
+  },
+  {
+    "id": "module00-fc-025",
+    "front": "Which role-based permission grants access to Interact?",
+    "back": "The Interact role or any custom role with equivalent rights.",
+    "tags": ["security", "how"],
+    "difficulty": "medium"
+  },
+  {
+    "id": "module00-fc-026",
+    "front": "How do you explain Tanium to non-technical stakeholders?",
+    "back": "Compare it to sending one message that instantly reaches every device, giving instant visibility.",
+    "tags": ["communication", "why"],
+    "difficulty": "easy"
+  },
+  {
+    "id": "module00-fc-027",
+    "front": "What exam topic covers console navigation?",
+    "back": "TCO Domain: Console Navigation & Workflows.",
+    "tags": ["exam", "how"],
+    "difficulty": "easy"
+  },
+  {
+    "id": "module00-fc-028",
+    "front": "What do you document after a remediation action?",
+    "back": "Action performed, impacted endpoints, results, and follow-up tasks.",
+    "tags": ["reporting", "apply"],
+    "difficulty": "medium"
+  },
+  {
+    "id": "module00-fc-029",
+    "front": "How often should you run health checks on the Tanium linear chain?",
+    "back": "Regularly, especially before large-scale question or action campaigns.",
+    "tags": ["operations", "how"],
+    "difficulty": "medium"
+  },
+  {
+    "id": "module00-fc-030",
+    "front": "What indicates the platform is responsive during a question?",
+    "back": "Results begin streaming within seconds and reach near real-time completeness.",
+    "tags": ["observability", "how"],
+    "difficulty": "easy"
+  },
+  {
+    "id": "module00-fc-031",
+    "front": "Which feature helps surface recently asked questions?",
+    "back": "Recent Questions widget within Interact.",
+    "tags": ["console", "what"],
+    "difficulty": "medium"
+  },
+  {
+    "id": "module00-fc-032",
+    "front": "How do you keep terminology accessible?",
+    "back": "Introduce plain-language definitions before using acronyms or jargon.",
+    "tags": ["pedagogy", "style"],
+    "difficulty": "easy"
+  },
+  {
+    "id": "module00-fc-033",
+    "front": "What keyboard navigation tip supports accessibility?",
+    "back": "Use tab order to verify every interactive element is reachable without a mouse.",
+    "tags": ["accessibility", "how"],
+    "difficulty": "easy"
+  },
+  {
+    "id": "module00-fc-034",
+    "front": "Why capture alt text for diagrams?",
+    "back": "To ensure screen reader users understand the visual context of the architecture.",
+    "tags": ["accessibility", "style"],
+    "difficulty": "easy"
+  },
+  {
+    "id": "module00-fc-035",
+    "front": "What metric does the performance budget set for LCP?",
+    "back": "Keep Largest Contentful Paint under 3.0 seconds on desktop Lighthouse runs.",
+    "tags": ["performance", "governance"],
+    "difficulty": "medium"
+  },
+  {
+    "id": "module00-fc-036",
+    "front": "Which bundle size target do we enforce for module pages?",
+    "back": "Keep JavaScript bundles under 250 KB gzipped per module page.",
+    "tags": ["performance", "governance"],
+    "difficulty": "medium"
+  },
+  {
+    "id": "module00-fc-037",
+    "front": "What does the Active Recall step accomplish?",
+    "back": "It prompts learners to retrieve concepts before moving on, strengthening retention.",
+    "tags": ["pedagogy", "why"],
+    "difficulty": "easy"
+  },
+  {
+    "id": "module00-fc-038",
+    "front": "Why include mini-practice tasks?",
+    "back": "They convert knowledge into action quickly, reinforcing confidence for beginners.",
+    "tags": ["pedagogy", "how"],
+    "difficulty": "easy"
+  },
+  {
+    "id": "module00-fc-039",
+    "front": "How do you verify accessibility compliance quickly?",
+    "back": "Run automated tools like axe and pair with manual keyboard/screen reader checks.",
+    "tags": ["accessibility", "apply"],
+    "difficulty": "medium"
+  },
+  {
+    "id": "module00-fc-040",
+    "front": "What outcome should a one-sentence summary deliver?",
+    "back": "A crisp reminder of the main takeaway that learners can repeat from memory.",
+    "tags": ["pedagogy", "style"],
+    "difficulty": "easy"
+  }
 ]

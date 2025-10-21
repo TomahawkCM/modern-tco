@@ -1,18 +1,18 @@
-"use client";
+'use client';
 
 /**
  * Client Component for Module Progress Tracking
  * Handles interactive progress features and state management
  */
 
-import React, { useState, useEffect, useRef } from "react";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Book, Clock } from "lucide-react";
-import { cn } from "@/lib/utils";
-import { useAuth } from "@/contexts/AuthContext";
-import { useDatabase } from "@/contexts/DatabaseContext";
-import { analytics } from "@/lib/analytics";
+import { Book, Clock } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { useAuth } from '@/contexts/AuthContext';
+import { useDatabase } from '@/contexts/DatabaseContext';
+import { analytics } from '@/lib/analytics';
+import { cn } from '@/lib/utils';
 
 interface ModuleProgressTrackerProps {
   moduleId: string;
@@ -47,17 +47,19 @@ export default function ModuleProgressTracker({
   function slugify(s: string) {
     return s
       .toLowerCase()
-      .replace(/[^a-z0-9\s-]/g, "")
+      .replace(/[^a-z0-9\s-]/g, '')
       .trim()
-      .replace(/\s+/g, "-");
+      .replace(/\s+/g, '-');
   }
 
   function stripEtaSuffix(title: string) {
-    return title.replace(/\s*\((?:\d+(?:\.\d+)?\s*(?:min|minutes|m|h|hour|hours))\)\s*$/i, "").trim();
+    return title
+      .replace(/\s*\((?:\d+(?:\.\d+)?\s*(?:min|minutes|m|h|hour|hours))\)\s*$/i, '')
+      .trim();
   }
 
   function formatMinutes(min?: number) {
-    if (!min || min <= 0) return "0m";
+    if (!min || min <= 0) return '0m';
     if (min < 60) return `${min}m`;
     const h = Math.floor(min / 60);
     const m = min % 60;
@@ -70,7 +72,7 @@ export default function ModuleProgressTracker({
     const matches = [...content.matchAll(headingRegex)];
 
     const discovered: SectionState[] = matches.map((match) => {
-      const level = match[0].indexOf("#") === 0 ? match[0].lastIndexOf("#") + 1 : 1;
+      const level = match[0].indexOf('#') === 0 ? match[0].lastIndexOf('#') + 1 : 1;
       const title = match[1].trim();
       const id = slugify(title);
 
@@ -90,7 +92,7 @@ export default function ModuleProgressTracker({
     });
 
     setSections(discovered);
-  }, [content]);
+  }, [content, sections, slugify]);
 
   // Load persisted progress
   useEffect(() => {
@@ -119,14 +121,19 @@ export default function ModuleProgressTracker({
   }, []);
 
   // Mark section complete/needs review
-  const markSection = async (id: string, status: "completed" | "needs_review" | "in_progress" | "not_started") => {
+  const markSection = async (
+    id: string,
+    status: 'completed' | 'needs_review' | 'in_progress' | 'not_started'
+  ) => {
     setSections((prev) =>
       prev.map((s) =>
-        s.id === id ? { ...s, completed: status === "completed", needsReview: status === "needs_review" } : s
+        s.id === id
+          ? { ...s, completed: status === 'completed', needsReview: status === 'needs_review' }
+          : s
       )
     );
 
-    void analytics.capture("study_section_mark", { moduleId, id, status });
+    void analytics.capture('study_section_mark', { moduleId, id, status });
 
     if (!user) return;
     try {
@@ -135,25 +142,27 @@ export default function ModuleProgressTracker({
   };
 
   const formatTime = (seconds: number) => {
-    const m = Math.floor(seconds / 60).toString().padStart(2, "0");
-    const s = (seconds % 60).toString().padStart(2, "0");
+    const m = Math.floor(seconds / 60)
+      .toString()
+      .padStart(2, '0');
+    const s = (seconds % 60).toString().padStart(2, '0');
     return `${m}:${s}`;
   };
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
-      element.scrollIntoView({ behavior: "smooth", block: "start" });
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
       setLastViewed(sectionId);
       setActiveId(sectionId);
-      void analytics.capture("study_section_view", { moduleId, id: sectionId });
+      void analytics.capture('study_section_view', { moduleId, id: sectionId });
     }
   };
 
   const completedCount = sections.filter((s) => s.completed).length;
   const progress = sections.length > 0 ? Math.round((completedCount / sections.length) * 100) : 0;
   const totalEta = sections.reduce((sum, s) => sum + (s.etaMin ?? 0), 0);
-  const remainingEta = sections.reduce((sum, s) => sum + (s.completed ? 0 : s.etaMin ?? 0), 0);
+  const remainingEta = sections.reduce((sum, s) => sum + (s.completed ? 0 : (s.etaMin ?? 0)), 0);
 
   return (
     <div className="sticky top-24 space-y-4">
@@ -210,7 +219,7 @@ export default function ModuleProgressTracker({
               className="w-full bg-green-700 hover:bg-[#22c55e]"
               onClick={async () => {
                 for (const s of sections) {
-                  if (!s.completed) await markSection(s.id, "completed");
+                  if (!s.completed) await markSection(s.id, 'completed');
                 }
               }}
             >
@@ -221,7 +230,9 @@ export default function ModuleProgressTracker({
               variant="outline"
               className="w-full border-gray-600 text-muted-foreground hover:bg-gray-900/30"
               onClick={() => {
-                setSections((prev) => prev.map((s) => ({ ...s, completed: false, needsReview: false })));
+                setSections((prev) =>
+                  prev.map((s) => ({ ...s, completed: false, needsReview: false }))
+                );
               }}
             >
               Reset progress
@@ -230,24 +241,32 @@ export default function ModuleProgressTracker({
 
           <ul className="space-y-2">
             {sections.map((s) => (
-              <li key={s.id} className={cn("flex items-start gap-2", activeId === s.id ? "opacity-100" : "opacity-80")}>
+              <li
+                key={s.id}
+                className={cn(
+                  'flex items-start gap-2',
+                  activeId === s.id ? 'opacity-100' : 'opacity-80'
+                )}
+              >
                 <input
                   type="checkbox"
                   className="mt-1"
                   checked={s.completed}
-                  onChange={(e) => markSection(s.id, e.target.checked ? "completed" : "in_progress")}
+                  onChange={(e) =>
+                    markSection(s.id, e.target.checked ? 'completed' : 'in_progress')
+                  }
                   aria-label={`Mark ${s.title} complete`}
                 />
                 <button
                   className={cn(
-                    "text-left text-sm hover:underline flex-1",
-                    activeId === s.id ? "text-primary" : "text-blue-100"
+                    'text-left text-sm hover:underline flex-1',
+                    activeId === s.id ? 'text-primary' : 'text-blue-100'
                   )}
                   onClick={() => scrollToSection(s.id)}
                 >
                   {stripEtaSuffix(s.title)}
                 </button>
-                {typeof s.etaMin === "number" && s.etaMin > 0 && (
+                {typeof s.etaMin === 'number' && s.etaMin > 0 && (
                   <span className="ml-2 inline-flex items-center gap-1 text-[11px] text-muted-foreground">
                     <Clock className="h-3 w-3" /> {s.etaMin}m
                   </span>
@@ -255,7 +274,7 @@ export default function ModuleProgressTracker({
                 {!s.completed && (
                   <button
                     className="ml-auto text-[11px] text-[#f97316] hover:underline"
-                    onClick={() => markSection(s.id, "needs_review")}
+                    onClick={() => markSection(s.id, 'needs_review')}
                     aria-label={`Mark ${s.title} needs review`}
                   >
                     flag

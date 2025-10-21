@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { expect, test } from '@playwright/test';
 
 test('review shows incorrect answers after a practice with autowrong', async ({ page }) => {
   // Start quick drill with a few wrong answers injected by test hook, then autofinish
@@ -14,4 +14,3 @@ test('review shows incorrect answers after a practice with autowrong', async ({ 
   // Expect question counter
   await expect(page.getByText(/Question\s+1\s+of/i)).toBeVisible();
 });
-

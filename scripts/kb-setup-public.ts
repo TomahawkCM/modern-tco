@@ -3,9 +3,9 @@
 // Sets up public KB tables/views using a direct Postgres connection.
 // Uses SUPABASE_DB_URL or DIRECT_DATABASE_URL or DATABASE_URL from .env.local
 
+import dotenv from 'dotenv';
 import fs from 'fs';
 import path from 'path';
-import dotenv from 'dotenv';
 import { Client } from 'pg';
 
 dotenv.config({ path: path.join(process.cwd(), '.env.local') });
@@ -29,9 +29,10 @@ async function main() {
   const sql = fs.readFileSync(sqlPath, 'utf8');
 
   const conn = getConnectionString();
-  const ssl = conn.includes('localhost') || conn.includes('127.0.0.1')
-    ? false
-    : { rejectUnauthorized: false } as any;
+  const ssl =
+    conn.includes('localhost') || conn.includes('127.0.0.1')
+      ? false
+      : ({ rejectUnauthorized: false } as any);
 
   const client = new Client({ connectionString: conn, ssl });
   console.log('Setting up public KB schema (modules, lessons, questions, view)...');
@@ -45,9 +46,10 @@ async function main() {
     console.error('Failed to apply public KB schema:', err?.message || err);
     process.exitCode = 1;
   } finally {
-    try { await client.end(); } catch {}
+    try {
+      await client.end();
+    } catch {}
   }
 }
 
 main();
-

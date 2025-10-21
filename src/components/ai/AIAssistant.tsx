@@ -1,24 +1,22 @@
-"use client";
+'use client';
 
-import React, { useState, useRef, useEffect } from 'react';
+import {
+  BookOpen,
+  Brain,
+  Lightbulb,
+  Loader2,
+  MessageCircle,
+  RefreshCw,
+  Send,
+  Sparkles,
+  Target,
+} from 'lucide-react';
+import type React from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
-import { Badge } from '@/components/ui/badge';
-import { 
-  Brain, 
-  Send, 
-  Sparkles, 
-  MessageCircle, 
-  BookOpen, 
-  Target, 
-  Lightbulb,
-  Loader2,
-  Mic,
-  MicOff,
-  Volume2,
-  RefreshCw
-} from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 interface Message {
@@ -40,26 +38,26 @@ const quickActions = [
     icon: BookOpen,
     label: 'Explain Concept',
     prompt: 'Can you explain this concept in simple terms?',
-    type: 'explanation' as const
+    type: 'explanation' as const,
   },
   {
     icon: Target,
     label: 'Practice Questions',
     prompt: 'Give me practice questions on this topic',
-    type: 'practice' as const
+    type: 'practice' as const,
   },
   {
     icon: Lightbulb,
     label: 'Study Tips',
     prompt: 'What are the best ways to study this material?',
-    type: 'general' as const
+    type: 'general' as const,
   },
   {
     icon: MessageCircle,
     label: 'Quiz Me',
     prompt: 'Create a quick quiz to test my knowledge',
-    type: 'quiz' as const
-  }
+    type: 'quiz' as const,
+  },
 ];
 
 export default function AIAssistant({ moduleSlug, isOpen, onClose }: AIAssistantProps) {
@@ -76,7 +74,7 @@ export default function AIAssistant({ moduleSlug, isOpen, onClose }: AIAssistant
 
   useEffect(() => {
     scrollToBottom();
-  }, [messages]);
+  }, [scrollToBottom]);
 
   useEffect(() => {
     if (isOpen && inputRef.current) {
@@ -92,28 +90,28 @@ export default function AIAssistant({ moduleSlug, isOpen, onClose }: AIAssistant
       content: content.trim(),
       sender: 'user',
       timestamp: new Date(),
-      type
+      type,
     };
 
-    setMessages(prev => [...prev, userMessage]);
+    setMessages((prev) => [...prev, userMessage]);
     setInputValue('');
     setIsLoading(true);
 
     try {
       // Simulate AI response - in real implementation, this would call your AI service
-      await new Promise(resolve => setTimeout(resolve, 1000 + Math.random() * 2000));
-      
+      await new Promise((resolve) => setTimeout(resolve, 1000 + Math.random() * 2000));
+
       const aiResponse = generateAIResponse(content, type, moduleSlug);
-      
+
       const aiMessage: Message = {
         id: (Date.now() + 1).toString(),
         content: aiResponse,
         sender: 'ai',
         timestamp: new Date(),
-        type
+        type,
       };
 
-      setMessages(prev => [...prev, aiMessage]);
+      setMessages((prev) => [...prev, aiMessage]);
     } catch (error) {
       console.error('Failed to get AI response:', error);
       const errorMessage: Message = {
@@ -121,59 +119,63 @@ export default function AIAssistant({ moduleSlug, isOpen, onClose }: AIAssistant
         content: 'I apologize, but I encountered an error. Please try again.',
         sender: 'ai',
         timestamp: new Date(),
-        type: 'general'
+        type: 'general',
       };
-      setMessages(prev => [...prev, errorMessage]);
+      setMessages((prev) => [...prev, errorMessage]);
     } finally {
       setIsLoading(false);
     }
   };
 
-  const generateAIResponse = (userInput: string, type: Message['type'], moduleSlug?: string): string => {
+  const generateAIResponse = (
+    _userInput: string,
+    type: Message['type'],
+    moduleSlug?: string
+  ): string => {
     // This is a placeholder for demonstration. In a real implementation,
     // you would integrate with Claude API or another AI service
-    
+
     const responses = {
       explanation: [
-        "Let me break this down for you step by step...",
+        'Let me break this down for you step by step...',
         "This concept is fundamental to Tanium operations. Here's how it works...",
-        "Think of it this way - imagine you're managing thousands of endpoints..."
+        "Think of it this way - imagine you're managing thousands of endpoints...",
       ],
       practice: [
-        "Great! Here are some practice questions to test your understanding:\n\n1. What is the primary purpose of computer groups in Tanium?\n2. How do dynamic groups differ from static groups?\n3. When would you use nested filter conditions?",
-        "Let's practice with some scenario-based questions:\n\n1. You need to target Windows servers with missing security patches. What targeting approach would you use?\n2. A deployment failed on 50% of targets. What troubleshooting steps would you take?"
+        'Great! Here are some practice questions to test your understanding:\n\n1. What is the primary purpose of computer groups in Tanium?\n2. How do dynamic groups differ from static groups?\n3. When would you use nested filter conditions?',
+        "Let's practice with some scenario-based questions:\n\n1. You need to target Windows servers with missing security patches. What targeting approach would you use?\n2. A deployment failed on 50% of targets. What troubleshooting steps would you take?",
       ],
       quiz: [
-        "Quick Quiz Time! 🎯\n\n1. (Multiple Choice) In Tanium, what happens when you create a dynamic computer group?\nA) It updates manually\nB) It updates automatically based on criteria\nC) It requires approval\nD) It expires after 24 hours\n\nThink about it and let me know your answer!",
-        "Let's test your knowledge! 📚\n\nTrue or False: Saved questions in Tanium can be shared across different content sets.\n\nExplain your reasoning when you answer!"
+        'Quick Quiz Time! 🎯\n\n1. (Multiple Choice) In Tanium, what happens when you create a dynamic computer group?\nA) It updates manually\nB) It updates automatically based on criteria\nC) It requires approval\nD) It expires after 24 hours\n\nThink about it and let me know your answer!',
+        "Let's test your knowledge! 📚\n\nTrue or False: Saved questions in Tanium can be shared across different content sets.\n\nExplain your reasoning when you answer!",
       ],
       general: [
-        "For studying TCO material effectively, I recommend the active recall method. Try explaining concepts out loud as if teaching someone else.",
-        "Here are my top study tips for Tanium certification:\n\n1. Practice hands-on in a lab environment\n2. Focus on understanding workflows, not just memorizing\n3. Review official documentation regularly\n4. Join study groups or forums for discussion",
-        "The key to mastering Tanium is understanding the relationships between different components. Start with the basics and build up complexity gradually."
-      ]
+        'For studying TCO material effectively, I recommend the active recall method. Try explaining concepts out loud as if teaching someone else.',
+        'Here are my top study tips for Tanium certification:\n\n1. Practice hands-on in a lab environment\n2. Focus on understanding workflows, not just memorizing\n3. Review official documentation regularly\n4. Join study groups or forums for discussion',
+        'The key to mastering Tanium is understanding the relationships between different components. Start with the basics and build up complexity gradually.',
+      ],
     };
 
     const moduleSpecificResponses: Record<string, string[]> = {
       'asking-questions': [
-        "For the Asking Questions module, focus on understanding natural language query construction and the sensor library. The key is knowing when to use which sensors and how to interpret results effectively."
+        'For the Asking Questions module, focus on understanding natural language query construction and the sensor library. The key is knowing when to use which sensors and how to interpret results effectively.',
       ],
       'refining-questions': [
-        "Refining Questions & Targeting is crucial - it's 23% of the exam! Master the difference between dynamic and static computer groups, and practice complex filter logic with AND/OR/NOT operators."
+        "Refining Questions & Targeting is crucial - it's 23% of the exam! Master the difference between dynamic and static computer groups, and practice complex filter logic with AND/OR/NOT operators.",
       ],
       'taking-action': [
-        "Taking Action focuses on safe deployment practices. Always remember the pilot-test-deploy workflow and know your rollback procedures. Package validation is critical."
+        'Taking Action focuses on safe deployment practices. Always remember the pilot-test-deploy workflow and know your rollback procedures. Package validation is critical.',
       ],
       'navigation-modules': [
-        "Platform navigation might seem basic, but efficient workflow management is essential for real-world operations. Know your keyboard shortcuts and module transitions."
+        'Platform navigation might seem basic, but efficient workflow management is essential for real-world operations. Know your keyboard shortcuts and module transitions.',
       ],
       'reporting-export': [
-        "For Reporting & Data Export, understand the different output formats and when to use each. Performance considerations become important with large datasets."
-      ]
+        'For Reporting & Data Export, understand the different output formats and when to use each. Performance considerations become important with large datasets.',
+      ],
     };
 
     let responseArray = responses[type ?? 'general'] || responses.general;
-    
+
     if (moduleSlug && moduleSpecificResponses[moduleSlug]) {
       responseArray = [...moduleSpecificResponses[moduleSlug], ...responseArray];
     }
@@ -186,7 +188,7 @@ export default function AIAssistant({ moduleSlug, isOpen, onClose }: AIAssistant
     void sendMessage(inputValue);
   };
 
-  const handleQuickAction = (action: typeof quickActions[0]) => {
+  const handleQuickAction = (action: (typeof quickActions)[0]) => {
     void sendMessage(action.prompt, action.type);
   };
 
@@ -227,8 +229,11 @@ export default function AIAssistant({ moduleSlug, isOpen, onClose }: AIAssistant
               </div>
             </div>
             {moduleSlug && (
-              <Badge variant="outline" className="w-fit border-cyan-300 bg-cyan-100 text-cyan-700 dark:border-cyan-600 dark:bg-cyan-900/30 dark:text-primary">
-                {moduleSlug.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}
+              <Badge
+                variant="outline"
+                className="w-fit border-cyan-300 bg-cyan-100 text-cyan-700 dark:border-cyan-600 dark:bg-cyan-900/30 dark:text-primary"
+              >
+                {moduleSlug.replace(/-/g, ' ').replace(/\b\w/g, (l) => l.toUpperCase())}
               </Badge>
             )}
           </CardHeader>
@@ -243,9 +248,10 @@ export default function AIAssistant({ moduleSlug, isOpen, onClose }: AIAssistant
                     Welcome to your AI Study Assistant!
                   </h3>
                   <p className="text-cyan-700 dark:text-primary text-sm mb-4">
-                    I'm here to help you master Tanium concepts. Ask me anything about the study material.
+                    I'm here to help you master Tanium concepts. Ask me anything about the study
+                    material.
                   </p>
-                  
+
                   {/* Quick Actions */}
                   <div className="grid grid-cols-2 gap-2">
                     {quickActions.map((action) => {
@@ -271,13 +277,13 @@ export default function AIAssistant({ moduleSlug, isOpen, onClose }: AIAssistant
                 <div
                   key={message.id}
                   className={cn(
-                    "flex",
+                    'flex',
                     message.sender === 'user' ? 'justify-end' : 'justify-start'
                   )}
                 >
                   <div
                     className={cn(
-                      "max-w-[80%] rounded-lg px-4 py-2 text-sm",
+                      'max-w-[80%] rounded-lg px-4 py-2 text-sm',
                       message.sender === 'user'
                         ? 'bg-primary text-foreground dark:bg-cyan-500'
                         : 'bg-white/90 text-cyan-900 border border-cyan-200 dark:bg-cyan-950/50 dark:text-cyan-100 dark:border-cyan-700'
@@ -285,9 +291,9 @@ export default function AIAssistant({ moduleSlug, isOpen, onClose }: AIAssistant
                   >
                     <div className="whitespace-pre-wrap">{message.content}</div>
                     <div className="text-xs opacity-70 mt-1">
-                      {message.timestamp.toLocaleTimeString([], { 
-                        hour: '2-digit', 
-                        minute: '2-digit' 
+                      {message.timestamp.toLocaleTimeString([], {
+                        hour: '2-digit',
+                        minute: '2-digit',
                       })}
                     </div>
                   </div>

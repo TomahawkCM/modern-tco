@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import { BeginnerLayout } from "@/components/layout/BeginnerLayout";
-import { BeginnerDashboard } from "@/components/dashboard/BeginnerDashboard";
+import { BeginnerDashboard } from '@/components/dashboard/BeginnerDashboard';
+import { BeginnerLayout } from '@/components/layout/BeginnerLayout';
 
 export default function BeginnerPage() {
   return (

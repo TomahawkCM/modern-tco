@@ -1,20 +1,21 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
-import { motion, AnimatePresence } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import {
+  Award,
+  BookOpen,
+  CheckCircle,
   ChevronLeft,
   ChevronRight,
   Clock,
-  Target,
-  CheckCircle,
-  BookOpen,
-  Play,
   Pause,
+  Play,
   RotateCcw,
-  Award
+  Target,
 } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import type React from 'react';
+import { useEffect, useState } from 'react';
 import { cn } from '@/lib/utils';
 import { useLearningProgress } from './LearningProgressProvider';
 
@@ -39,7 +40,7 @@ export function StudyModuleWrapper({
   estimatedTime = 15,
   objectives = [],
   prerequisites = [],
-  className
+  className,
 }: StudyModuleWrapperProps) {
   const router = useRouter();
   const {
@@ -49,7 +50,7 @@ export function StudyModuleWrapper({
     navigateToNextModule,
     domains,
     currentDomain,
-    currentModule
+    currentModule,
   } = useLearningProgress();
 
   const [timeSpent, setTimeSpent] = useState(0);
@@ -57,10 +58,13 @@ export function StudyModuleWrapper({
   const [moduleStartTime, setModuleStartTime] = useState<Date | null>(null);
 
   // Get current module and navigation info - with safety checks
-  const domain = domains?.find(d => d.id === domainId);
-  const currentModuleIndex = domain?.modules?.findIndex(m => m.id === moduleId) ?? -1;
+  const domain = domains?.find((d) => d.id === domainId);
+  const currentModuleIndex = domain?.modules?.findIndex((m) => m.id === moduleId) ?? -1;
   const previousModule = currentModuleIndex > 0 ? domain?.modules?.[currentModuleIndex - 1] : null;
-  const nextModule = currentModuleIndex < (domain?.modules?.length ?? 0) - 1 ? domain?.modules?.[currentModuleIndex + 1] : null;
+  const nextModule =
+    currentModuleIndex < (domain?.modules?.length ?? 0) - 1
+      ? domain?.modules?.[currentModuleIndex + 1]
+      : null;
 
   const moduleProgress = getModuleProgress(domainId, moduleId);
 
@@ -91,18 +95,18 @@ export function StudyModuleWrapper({
       if (timeSpent > 0) {
         updateModuleProgress(domainId, moduleId, {
           timeSpent: Math.max(timeSpent, moduleProgress.timeSpent ?? 0),
-          lastAccessed: new Date().toISOString()
+          lastAccessed: new Date().toISOString(),
         });
       }
     };
-  }, []);
+  }, [domainId, moduleId, moduleProgress.timeSpent, timeSpent, updateModuleProgress]);
 
   const handleStartModule = () => {
     setModuleStartTime(new Date());
     setIsActive(true);
     updateModuleProgress(domainId, moduleId, {
       status: 'in_progress',
-      startedAt: new Date().toISOString()
+      startedAt: new Date().toISOString(),
     });
   };
 
@@ -112,7 +116,7 @@ export function StudyModuleWrapper({
       status: 'completed',
       completedAt: new Date().toISOString(),
       timeSpent,
-      score: 100 // Default completion score
+      score: 100, // Default completion score
     });
   };
 
@@ -125,7 +129,7 @@ export function StudyModuleWrapper({
       timeSpent: 0,
       startedAt: undefined,
       completedAt: undefined,
-      score: undefined
+      score: undefined,
     });
   };
 
@@ -146,11 +150,15 @@ export function StudyModuleWrapper({
     }
   };
 
-  const progressPercentage = moduleProgress.status === 'completed' ? 100 :
-    moduleProgress.status === 'in_progress' ? Math.min((timeSpent / estimatedTime) * 100, 95) : 0;
+  const progressPercentage =
+    moduleProgress.status === 'completed'
+      ? 100
+      : moduleProgress.status === 'in_progress'
+        ? Math.min((timeSpent / estimatedTime) * 100, 95)
+        : 0;
 
   return (
-    <div className={cn("space-y-6", className)}>
+    <div className={cn('space-y-6', className)}>
       {/* Module Header */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
@@ -164,15 +172,15 @@ export function StudyModuleWrapper({
                 <BookOpen className="h-5 w-5 text-primary" />
               </div>
               <div>
-                <h1 className="text-2xl font-bold text-archon-text-primary archon-text-glow">{title}</h1>
+                <h1 className="text-2xl font-bold text-archon-text-primary archon-text-glow">
+                  {title}
+                </h1>
                 <div className="text-sm text-archon-text-muted">
                   Module {currentModuleIndex + 1} of {domain?.modules.length}
                 </div>
               </div>
             </div>
-            {description && (
-              <p className="text-archon-text-secondary mb-4">{description}</p>
-            )}
+            {description && <p className="text-archon-text-secondary mb-4">{description}</p>}
           </div>
 
           {/* Module Status */}
@@ -185,13 +193,19 @@ export function StudyModuleWrapper({
                 </span>
               </div>
               <div className="text-xs text-muted-foreground mt-1">
-                Status: <span className={cn(
-                  moduleProgress.status === 'completed' && 'text-[#22c55e] font-bold',
-                  moduleProgress.status === 'in_progress' && 'text-primary font-bold',
-                  moduleProgress.status === 'not_started' && 'text-muted-foreground'
-                )}>
-                  {moduleProgress.status === 'completed' ? 'Completed' :
-                   moduleProgress.status === 'in_progress' ? 'In Progress' : 'Not Started'}
+                Status:{' '}
+                <span
+                  className={cn(
+                    moduleProgress.status === 'completed' && 'text-[#22c55e] font-bold',
+                    moduleProgress.status === 'in_progress' && 'text-primary font-bold',
+                    moduleProgress.status === 'not_started' && 'text-muted-foreground'
+                  )}
+                >
+                  {moduleProgress.status === 'completed'
+                    ? 'Completed'
+                    : moduleProgress.status === 'in_progress'
+                      ? 'In Progress'
+                      : 'Not Started'}
                 </span>
               </div>
             </div>
@@ -297,10 +311,10 @@ export function StudyModuleWrapper({
               onClick={handlePreviousModule}
               disabled={!previousModule}
               className={cn(
-                "inline-flex items-center gap-2 px-3 py-2 rounded-lg transition-colors",
+                'inline-flex items-center gap-2 px-3 py-2 rounded-lg transition-colors',
                 previousModule
-                  ? "bg-muted hover:bg-gray-700 text-foreground"
-                  : "bg-card text-muted-foreground cursor-not-allowed"
+                  ? 'bg-muted hover:bg-gray-700 text-foreground'
+                  : 'bg-card text-muted-foreground cursor-not-allowed'
               )}
             >
               <ChevronLeft className="h-4 w-4" />
@@ -311,10 +325,10 @@ export function StudyModuleWrapper({
               onClick={handleNextModule}
               disabled={!nextModule && moduleProgress.status !== 'completed'}
               className={cn(
-                "inline-flex items-center gap-2 px-3 py-2 rounded-lg transition-colors",
+                'inline-flex items-center gap-2 px-3 py-2 rounded-lg transition-colors',
                 (nextModule ?? moduleProgress.status === 'completed')
-                  ? "bg-cyan-500 hover:bg-primary text-foreground"
-                  : "bg-card text-muted-foreground cursor-not-allowed"
+                  ? 'bg-cyan-500 hover:bg-primary text-foreground'
+                  : 'bg-card text-muted-foreground cursor-not-allowed'
               )}
             >
               {nextModule ? 'Next' : 'Finish'}

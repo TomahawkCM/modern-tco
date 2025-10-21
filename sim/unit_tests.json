@@ -7,10 +7,7 @@
       "difficulty": 1,
       "question": "Get count() from all machines group by OS Platform",
       "expect": {
-        "headers": [
-          "OS Platform",
-          "count()"
-        ],
+        "headers": ["OS Platform", "count()"],
         "rows": []
       }
     },

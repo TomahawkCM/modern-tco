@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { expect, test } from '@playwright/test';
 
 test('Mixed Review CTA starts multi-domain practice session', async ({ page }) => {
   // Seed local progress with multiple domains needing review
@@ -9,7 +9,12 @@ test('Mixed Review CTA starts multi-domain practice session', async ({ page }) =
       const askingQuestionsValue = {
         lastViewed: 'core-concepts',
         sections: [
-          { id: 'natural-language-query-construction', title: 'Natural Language Query Construction', completed: false, needsReview: true },
+          {
+            id: 'natural-language-query-construction',
+            title: 'Natural Language Query Construction',
+            completed: false,
+            needsReview: true,
+          },
           { id: 'query-operators', title: 'Query Operators', completed: false, needsReview: true },
         ],
       };
@@ -21,7 +26,12 @@ test('Mixed Review CTA starts multi-domain practice session', async ({ page }) =
         lastViewed: 'introduction',
         sections: [
           { id: 'key-concepts', title: 'Key Concepts', completed: false, needsReview: true },
-          { id: 'architecture-overview', title: 'Architecture Overview', completed: false, needsReview: true },
+          {
+            id: 'architecture-overview',
+            title: 'Architecture Overview',
+            completed: false,
+            needsReview: true,
+          },
         ],
       };
       localStorage.setItem(foundationKey, JSON.stringify(foundationValue));
@@ -31,7 +41,12 @@ test('Mixed Review CTA starts multi-domain practice session', async ({ page }) =
       const navigationValue = {
         lastViewed: 'overview',
         sections: [
-          { id: 'dashboard-navigation', title: 'Dashboard Navigation', completed: false, needsReview: true },
+          {
+            id: 'dashboard-navigation',
+            title: 'Dashboard Navigation',
+            completed: false,
+            needsReview: true,
+          },
         ],
       };
       localStorage.setItem(navigationKey, JSON.stringify(navigationValue));
@@ -62,10 +77,14 @@ test('Mixed Review CTA starts multi-domain practice session', async ({ page }) =
   expect(url).toContain('domain=');
 
   // Verify practice mode is active
-  await expect(page.getByRole('heading', { name: /Practice Session/i })).toBeVisible({ timeout: 10000 });
+  await expect(page.getByRole('heading', { name: /Practice Session/i })).toBeVisible({
+    timeout: 10000,
+  });
 
   // Verify that a question is displayed (from any of the needs-review domains)
-  await expect(page.locator('.question-content, [data-testid="question-text"]').first()).toBeVisible({ timeout: 10000 });
+  await expect(
+    page.locator('.question-content, [data-testid="question-text"]').first()
+  ).toBeVisible({ timeout: 10000 });
 });
 
 test('Mixed Review only shows when multiple domains have needs-review items', async ({ page }) => {
@@ -76,7 +95,12 @@ test('Mixed Review only shows when multiple domains have needs-review items', as
       const askingQuestionsValue = {
         lastViewed: 'core-concepts',
         sections: [
-          { id: 'natural-language-query-construction', title: 'Natural Language Query Construction', completed: false, needsReview: true },
+          {
+            id: 'natural-language-query-construction',
+            title: 'Natural Language Query Construction',
+            completed: false,
+            needsReview: true,
+          },
         ],
       };
       localStorage.setItem(askingQuestionsKey, JSON.stringify(askingQuestionsValue));
@@ -116,7 +140,12 @@ test('Mixed Review filters questions by needs-review domains only', async ({ pag
       const askingQuestionsValue = {
         lastViewed: 'core-concepts',
         sections: [
-          { id: 'natural-language-query-construction', title: 'Natural Language Query Construction', completed: false, needsReview: true },
+          {
+            id: 'natural-language-query-construction',
+            title: 'Natural Language Query Construction',
+            completed: false,
+            needsReview: true,
+          },
         ],
       };
       localStorage.setItem(askingQuestionsKey, JSON.stringify(askingQuestionsValue));

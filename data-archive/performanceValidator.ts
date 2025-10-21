@@ -3,9 +3,9 @@
  * Tests system performance with current and projected question loads
  */
 
-import { questionBank } from "@/data/sample-questions";
-import { validateQuestionBank } from "./questionBankValidator";
-import { TCODomain, Difficulty, QuestionCategory } from "@/types/exam";
+import { questionBank } from '@/data/sample-questions';
+import { Difficulty, QuestionCategory, TCODomain } from '@/types/exam';
+import { validateQuestionBank } from './questionBankValidator';
 
 interface PerformanceMetrics {
   loadTime: number;
@@ -28,7 +28,7 @@ interface PerformanceTestResult {
  * Run comprehensive performance tests on question bank system
  */
 export function runPerformanceTests(): PerformanceTestResult {
-  console.log("🚀 Running TCO Question Bank Performance Tests...");
+  console.log('🚀 Running TCO Question Bank Performance Tests...');
 
   // Test current question bank performance
   const currentMetrics = testCurrentPerformance();
@@ -107,8 +107,8 @@ function projectPerformanceFor200Questions(): PerformanceMetrics {
   return {
     loadTime: current.loadTime * scalingFactor,
     searchTime: current.searchTime * scalingFactor,
-    filterTime: current.filterTime * Math.pow(scalingFactor, 1.2), // Slightly non-linear
-    validationTime: current.validationTime * Math.pow(scalingFactor, 1.1),
+    filterTime: current.filterTime * scalingFactor ** 1.2, // Slightly non-linear
+    validationTime: current.validationTime * scalingFactor ** 1.1,
     memoryUsage: current.memoryUsage * scalingFactor,
     questionCount: targetCount,
   };
@@ -135,23 +135,23 @@ function identifyBottlenecks(current: PerformanceMetrics, projected: Performance
   const bottlenecks: string[] = [];
 
   if (projected.loadTime > 100) {
-    bottlenecks.push("Question bank initialization exceeds 100ms target");
+    bottlenecks.push('Question bank initialization exceeds 100ms target');
   }
 
   if (projected.searchTime > 50) {
-    bottlenecks.push("Domain filtering exceeds 50ms target");
+    bottlenecks.push('Domain filtering exceeds 50ms target');
   }
 
   if (projected.filterTime > 75) {
-    bottlenecks.push("Complex filtering operations need optimization");
+    bottlenecks.push('Complex filtering operations need optimization');
   }
 
   if (projected.validationTime > 200) {
-    bottlenecks.push("Validation system needs performance optimization");
+    bottlenecks.push('Validation system needs performance optimization');
   }
 
   if (projected.memoryUsage > 50) {
-    bottlenecks.push("Memory usage projection exceeds reasonable limits");
+    bottlenecks.push('Memory usage projection exceeds reasonable limits');
   }
 
   return bottlenecks;
@@ -161,29 +161,29 @@ function generateRecommendations(bottlenecks: string[], scalabilityScore: number
   const recommendations: string[] = [];
 
   if (scalabilityScore >= 90) {
-    recommendations.push("✅ System shows excellent scalability for 200 questions");
-    recommendations.push("Consider implementing caching for optimal performance");
+    recommendations.push('✅ System shows excellent scalability for 200 questions');
+    recommendations.push('Consider implementing caching for optimal performance');
   } else if (scalabilityScore >= 75) {
-    recommendations.push("⚠️ System adequate but could benefit from optimization");
-    recommendations.push("Implement lazy loading for question bank initialization");
-    recommendations.push("Add indexing for faster domain/category filtering");
+    recommendations.push('⚠️ System adequate but could benefit from optimization');
+    recommendations.push('Implement lazy loading for question bank initialization');
+    recommendations.push('Add indexing for faster domain/category filtering');
   } else {
-    recommendations.push("🚨 Significant performance optimization required");
-    recommendations.push("Implement virtual scrolling for large question sets");
-    recommendations.push("Add database-style indexing for filtering operations");
-    recommendations.push("Consider question bank segmentation by domain");
+    recommendations.push('🚨 Significant performance optimization required');
+    recommendations.push('Implement virtual scrolling for large question sets');
+    recommendations.push('Add database-style indexing for filtering operations');
+    recommendations.push('Consider question bank segmentation by domain');
   }
 
-  if (bottlenecks.includes("Question bank initialization exceeds 100ms target")) {
-    recommendations.push("Implement lazy loading and code splitting");
+  if (bottlenecks.includes('Question bank initialization exceeds 100ms target')) {
+    recommendations.push('Implement lazy loading and code splitting');
   }
 
-  if (bottlenecks.includes("Domain filtering exceeds 50ms target")) {
-    recommendations.push("Create domain-indexed question maps");
+  if (bottlenecks.includes('Domain filtering exceeds 50ms target')) {
+    recommendations.push('Create domain-indexed question maps');
   }
 
-  if (bottlenecks.includes("Complex filtering operations need optimization")) {
-    recommendations.push("Pre-compute common filter combinations");
+  if (bottlenecks.includes('Complex filtering operations need optimization')) {
+    recommendations.push('Pre-compute common filter combinations');
   }
 
   return recommendations;
@@ -200,7 +200,7 @@ interface PerformanceWithMemory extends Performance {
 
 function getMemoryUsage(): number {
   // Simplified memory usage estimation
-  if (typeof performance !== "undefined") {
+  if (typeof performance !== 'undefined') {
     const perfWithMemory = performance as PerformanceWithMemory;
     if (perfWithMemory.memory) {
       return perfWithMemory.memory.usedJSHeapSize / 1024 / 1024; // MB
@@ -216,8 +216,8 @@ export function generatePerformanceReport(): string {
   const results = runPerformanceTests();
 
   let report = `# TCO Question Bank Performance Report\\n\\n`;
-  report += `**Test Date**: ${new Date().toISOString().split("T")[0]}\\n`;
-  report += `**System Status**: ${results.scalabilityScore >= 90 ? "✅ Excellent" : results.scalabilityScore >= 75 ? "⚠️ Good" : "🚨 Needs Optimization"}\\n`;
+  report += `**Test Date**: ${new Date().toISOString().split('T')[0]}\\n`;
+  report += `**System Status**: ${results.scalabilityScore >= 90 ? '✅ Excellent' : results.scalabilityScore >= 75 ? '⚠️ Good' : '🚨 Needs Optimization'}\\n`;
   report += `**Scalability Score**: ${results.scalabilityScore}/100\\n\\n`;
 
   report += `## Current Performance (${results.current.questionCount} questions)\\n\\n`;
@@ -228,11 +228,11 @@ export function generatePerformanceReport(): string {
   report += `- **Memory Usage**: ${results.current.memoryUsage.toFixed(2)}MB\\n\\n`;
 
   report += `## Projected Performance (200 questions)\\n\\n`;
-  report += `- **Load Time**: ${results.projected200.loadTime.toFixed(2)}ms ${results.projected200.loadTime <= 100 ? "✅" : "⚠️"}\\n`;
-  report += `- **Search Time**: ${results.projected200.searchTime.toFixed(2)}ms ${results.projected200.searchTime <= 50 ? "✅" : "⚠️"}\\n`;
-  report += `- **Filter Time**: ${results.projected200.filterTime.toFixed(2)}ms ${results.projected200.filterTime <= 75 ? "✅" : "⚠️"}\\n`;
-  report += `- **Validation Time**: ${results.projected200.validationTime.toFixed(2)}ms ${results.projected200.validationTime <= 200 ? "✅" : "⚠️"}\\n`;
-  report += `- **Memory Usage**: ${results.projected200.memoryUsage.toFixed(2)}MB ${results.projected200.memoryUsage <= 50 ? "✅" : "⚠️"}\\n\\n`;
+  report += `- **Load Time**: ${results.projected200.loadTime.toFixed(2)}ms ${results.projected200.loadTime <= 100 ? '✅' : '⚠️'}\\n`;
+  report += `- **Search Time**: ${results.projected200.searchTime.toFixed(2)}ms ${results.projected200.searchTime <= 50 ? '✅' : '⚠️'}\\n`;
+  report += `- **Filter Time**: ${results.projected200.filterTime.toFixed(2)}ms ${results.projected200.filterTime <= 75 ? '✅' : '⚠️'}\\n`;
+  report += `- **Validation Time**: ${results.projected200.validationTime.toFixed(2)}ms ${results.projected200.validationTime <= 200 ? '✅' : '⚠️'}\\n`;
+  report += `- **Memory Usage**: ${results.projected200.memoryUsage.toFixed(2)}MB ${results.projected200.memoryUsage <= 50 ? '✅' : '⚠️'}\\n\\n`;
 
   if (results.bottlenecks.length > 0) {
     report += `## Identified Bottlenecks\\n\\n`;

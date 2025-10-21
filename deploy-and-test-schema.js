@@ -5,14 +5,14 @@
  * Deploys improved schema with Supabase best practices and validates everything
  */
 
-import { createClient } from "@supabase/supabase-js";
-import dotenv from "dotenv";
-import { readFileSync, writeFileSync } from "fs";
-import { fileURLToPath } from "url";
-import { dirname, join } from "path";
+import { createClient } from '@supabase/supabase-js';
+import dotenv from 'dotenv';
+import { readFileSync, writeFileSync } from 'fs';
+import { dirname, join } from 'path';
+import { fileURLToPath } from 'url';
 
 // Load environment variables
-dotenv.config({ path: ".env.local" });
+dotenv.config({ path: '.env.local' });
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -20,43 +20,43 @@ const __dirname = dirname(__filename);
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 const SUPABASE_SERVICE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
-const PROJECT_REF = "qnwcwoutgarhqxlgsjzs";
+const PROJECT_REF = 'qnwcwoutgarhqxlgsjzs';
 
-console.log("🚀 All-in-One Schema Deployment & Testing - Supabase Best Practices");
-console.log("===================================================================");
+console.log('🚀 All-in-One Schema Deployment & Testing - Supabase Best Practices');
+console.log('===================================================================');
 console.log(`Database: ${SUPABASE_URL}`);
 console.log(`Project: ${PROJECT_REF}\n`);
 
 async function deployAndTestSchema() {
   try {
-    console.log("🏗️  Step 1: Pre-Deployment Validation");
-    console.log("-------------------------------------");
+    console.log('🏗️  Step 1: Pre-Deployment Validation');
+    console.log('-------------------------------------');
 
     const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_KEY);
 
     // Verify connection
-    console.log("✅ Supabase service client initialized");
-    console.log("✅ Environment variables loaded");
-    console.log("✅ PostgreSQL connection ready");
+    console.log('✅ Supabase service client initialized');
+    console.log('✅ Environment variables loaded');
+    console.log('✅ PostgreSQL connection ready');
 
-    console.log("\n📋 Step 2: Schema Deployment Instructions");
-    console.log("-----------------------------------------");
+    console.log('\n📋 Step 2: Schema Deployment Instructions');
+    console.log('-----------------------------------------');
 
-    console.log("Since this is a managed Supabase instance, schema deployment must be done via:");
-    console.log("");
-    console.log("🎯 OPTION A: Supabase Dashboard (Recommended)");
-    console.log("   1. Go to: https://supabase.com/dashboard/project/" + PROJECT_REF + "/sql");
-    console.log("   2. Copy and paste the improved migration SQL");
+    console.log('Since this is a managed Supabase instance, schema deployment must be done via:');
+    console.log('');
+    console.log('🎯 OPTION A: Supabase Dashboard (Recommended)');
+    console.log('   1. Go to: https://supabase.com/dashboard/project/' + PROJECT_REF + '/sql');
+    console.log('   2. Copy and paste the improved migration SQL');
     console.log('   3. Click "RUN" to execute');
-    console.log("");
-    console.log("🎯 OPTION B: Supabase CLI");
-    console.log("   1. supabase link --project-ref " + PROJECT_REF);
-    console.log("   2. supabase db push");
-    console.log("   3. Verify tables created");
+    console.log('');
+    console.log('🎯 OPTION B: Supabase CLI');
+    console.log('   1. supabase link --project-ref ' + PROJECT_REF);
+    console.log('   2. supabase db push');
+    console.log('   3. Verify tables created');
 
     // Display the complete improved schema
-    console.log("\\n📜 Improved Migration SQL (Copy to Dashboard):");
-    console.log("===============================================");
+    console.log('\\n📜 Improved Migration SQL (Copy to Dashboard):');
+    console.log('===============================================');
 
     const improvedSchema = `
 -- Improved Schema with Supabase Best Practices
@@ -214,11 +214,11 @@ GRANT ALL ON ALL TABLES IN SCHEMA public TO service_role;
 
     console.log(improvedSchema);
 
-    console.log("\n🧪 Step 3: Post-Deployment Testing (Simulation)");
-    console.log("-----------------------------------------------");
+    console.log('\n🧪 Step 3: Post-Deployment Testing (Simulation)');
+    console.log('-----------------------------------------------');
 
     // Simulate testing of the improved schema features
-    console.log("Testing Supabase best practices implementation...");
+    console.log('Testing Supabase best practices implementation...');
 
     // Test 1: UUID Generation
     const testUuid = crypto.randomUUID();
@@ -233,7 +233,7 @@ GRANT ALL ON ALL TABLES IN SCHEMA public TO service_role;
       { estimated: 90, spent: 90, progress: Math.round((90 / 90) * 100) },
     ];
 
-    console.log("✅ Integer time field analytics:");
+    console.log('✅ Integer time field analytics:');
     timeTests.forEach((test, i) => {
       console.log(
         `   Module ${i + 1}: ${test.spent}/${test.estimated} minutes (${test.progress}% complete)`
@@ -247,14 +247,14 @@ GRANT ALL ON ALL TABLES IN SCHEMA public TO service_role;
 
     // Test 3: TCO Content Structure
     const tcoModules = [
-      { domain: "Asking Questions", weight: 22, time: 180 },
-      { domain: "Refining Questions", weight: 23, time: 240 },
-      { domain: "Taking Action", weight: 15, time: 180 },
-      { domain: "Navigation & Modules", weight: 23, time: 240 },
-      { domain: "Reporting & Export", weight: 17, time: 180 },
+      { domain: 'Asking Questions', weight: 22, time: 180 },
+      { domain: 'Refining Questions', weight: 23, time: 240 },
+      { domain: 'Taking Action', weight: 15, time: 180 },
+      { domain: 'Navigation & Modules', weight: 23, time: 240 },
+      { domain: 'Reporting & Export', weight: 17, time: 180 },
     ];
 
-    console.log("✅ TCO certification structure:");
+    console.log('✅ TCO certification structure:');
     const totalWeight = tcoModules.reduce((sum, m) => sum + m.weight, 0);
     const totalTime = tcoModules.reduce((sum, m) => sum + m.time, 0);
     console.log(`   Total domains: ${tcoModules.length}`);
@@ -263,34 +263,34 @@ GRANT ALL ON ALL TABLES IN SCHEMA public TO service_role;
 
     // Test 4: RLS Policy Structure
     const rlsTests = {
-      publicContent: "study_modules, study_sections (SELECT TO authenticated USING true)",
-      privateData: "user_study_progress, user_study_bookmarks (auth.uid() = user_id)",
-      serviceRole: "Full access to all tables for admin operations",
+      publicContent: 'study_modules, study_sections (SELECT TO authenticated USING true)',
+      privateData: 'user_study_progress, user_study_bookmarks (auth.uid() = user_id)',
+      serviceRole: 'Full access to all tables for admin operations',
     };
 
-    console.log("✅ Row Level Security policies:");
+    console.log('✅ Row Level Security policies:');
     Object.entries(rlsTests).forEach(([key, value]) => {
       console.log(`   ${key}: ${value}`);
     });
 
-    console.log("\n🎯 Step 4: Quick Validation Test");
-    console.log("--------------------------------");
+    console.log('\n🎯 Step 4: Quick Validation Test');
+    console.log('--------------------------------');
 
     // Try to test actual connectivity and table existence
     try {
       // Test if we can at least connect to the database
       const { data: healthCheck, error: healthError } = await supabase
-        .from("non_existent_table")
-        .select("*")
+        .from('non_existent_table')
+        .select('*')
         .limit(1);
 
-      if (healthError && healthError.message.includes("schema cache")) {
-        console.log("✅ Database connection verified (table not found is expected)");
+      if (healthError && healthError.message.includes('schema cache')) {
+        console.log('✅ Database connection verified (table not found is expected)');
       } else {
-        console.log("🔍 Database connection status unclear");
+        console.log('🔍 Database connection status unclear');
       }
     } catch (connectError) {
-      console.log("⚠️  Connection test inconclusive");
+      console.log('⚠️  Connection test inconclusive');
     }
 
     // Test storage system
@@ -300,81 +300,81 @@ GRANT ALL ON ALL TABLES IN SCHEMA public TO service_role;
         console.log(`✅ Storage system accessible: ${buckets.length} buckets`);
       }
     } catch (storageTest) {
-      console.log("⚠️  Storage test skipped");
+      console.log('⚠️  Storage test skipped');
     }
 
-    console.log("\n📊 Step 5: Comprehensive Report Generation");
-    console.log("------------------------------------------");
+    console.log('\n📊 Step 5: Comprehensive Report Generation');
+    console.log('------------------------------------------');
 
     const deploymentReport = {
       timestamp: new Date().toISOString(),
-      project: "Tanium TCO Study Platform - Production Ready Schema",
-      database: "PostgreSQL via Supabase",
+      project: 'Tanium TCO Study Platform - Production Ready Schema',
+      database: 'PostgreSQL via Supabase',
       projectRef: PROJECT_REF,
       improvements: [
-        "✅ Uses gen_random_uuid() (Supabase-preferred over uuid_generate_v4())",
-        "✅ Integer time fields enable analytics and sorting",
-        "✅ Proper auth.users foreign keys for user data integrity",
-        "✅ Clean RLS policies with TO authenticated USING (true)",
-        "✅ Added missing updated_at trigger on bookmarks table",
-        "✅ pgcrypto and pg_trgm extensions for performance",
-        "✅ Optimized indexes for all query patterns",
-        "✅ Enum constraints for data validation",
+        '✅ Uses gen_random_uuid() (Supabase-preferred over uuid_generate_v4())',
+        '✅ Integer time fields enable analytics and sorting',
+        '✅ Proper auth.users foreign keys for user data integrity',
+        '✅ Clean RLS policies with TO authenticated USING (true)',
+        '✅ Added missing updated_at trigger on bookmarks table',
+        '✅ pgcrypto and pg_trgm extensions for performance',
+        '✅ Optimized indexes for all query patterns',
+        '✅ Enum constraints for data validation',
       ],
       deployment: {
-        status: "READY FOR DEPLOYMENT",
-        method: "Supabase Dashboard SQL Editor",
+        status: 'READY FOR DEPLOYMENT',
+        method: 'Supabase Dashboard SQL Editor',
         url: `https://supabase.com/dashboard/project/${PROJECT_REF}/sql`,
-        validation: "All best practices implemented",
+        validation: 'All best practices implemented',
       },
       features: {
-        uuid: "gen_random_uuid() - Supabase preferred",
-        timeFields: "Integer minutes for calculations",
-        foreignKeys: "auth.users(id) references",
-        rls: "Clean authenticated policies",
-        triggers: "All updated_at triggers including bookmarks",
-        analytics: "Time-based progress calculations ready",
+        uuid: 'gen_random_uuid() - Supabase preferred',
+        timeFields: 'Integer minutes for calculations',
+        foreignKeys: 'auth.users(id) references',
+        rls: 'Clean authenticated policies',
+        triggers: 'All updated_at triggers including bookmarks',
+        analytics: 'Time-based progress calculations ready',
       },
       tco_readiness: {
         domains: 5,
         totalExamWeight: 100,
         studyHours: Math.round(totalTime / 60),
-        features: "Progress tracking, bookmarks, real-time updates",
+        features: 'Progress tracking, bookmarks, real-time updates',
       },
       nextSteps: [
-        "Deploy schema via Supabase Dashboard",
-        "Populate with TCO study content",
-        "Test user authentication flow",
-        "Implement progress analytics",
-        "Set up real-time subscriptions",
+        'Deploy schema via Supabase Dashboard',
+        'Populate with TCO study content',
+        'Test user authentication flow',
+        'Implement progress analytics',
+        'Set up real-time subscriptions',
       ],
     };
 
     // Save the deployment report
-    const reportPath = join(__dirname, "docs/schema-deployment-report.json");
+    const reportPath = join(__dirname, 'docs/schema-deployment-report.json');
     writeFileSync(reportPath, JSON.stringify(deploymentReport, null, 2));
 
-    console.log("✅ Schema deployment readiness: CONFIRMED");
-    console.log("✅ Supabase best practices: IMPLEMENTED");
-    console.log("✅ TCO platform compatibility: VALIDATED");
-    console.log("✅ Performance optimizations: READY");
-    console.log("✅ Security policies: CONFIGURED");
+    console.log('✅ Schema deployment readiness: CONFIRMED');
+    console.log('✅ Supabase best practices: IMPLEMENTED');
+    console.log('✅ TCO platform compatibility: VALIDATED');
+    console.log('✅ Performance optimizations: READY');
+    console.log('✅ Security policies: CONFIGURED');
 
     console.log(`\n💾 Deployment report saved: ${reportPath}`);
 
-    console.log("\n🚀 DEPLOYMENT INSTRUCTIONS SUMMARY");
-    console.log("==================================");
+    console.log('\n🚀 DEPLOYMENT INSTRUCTIONS SUMMARY');
+    console.log('==================================');
     console.log(`1. Visit: https://supabase.com/dashboard/project/${PROJECT_REF}/sql`);
-    console.log("2. Copy the improved migration SQL above");
-    console.log("3. Paste and click RUN");
-    console.log("4. Verify 4 tables created");
+    console.log('2. Copy the improved migration SQL above');
+    console.log('3. Paste and click RUN');
+    console.log('4. Verify 4 tables created');
     console.log('5. Test with: curl -H "apikey: ANON_KEY" "SUPABASE_URL/rest/v1/study_modules"');
 
-    console.log("\n🎉 PostgreSQL with Tanium Supabase - PRODUCTION READY!");
+    console.log('\n🎉 PostgreSQL with Tanium Supabase - PRODUCTION READY!');
 
     return deploymentReport;
   } catch (error) {
-    console.error("\n💥 Deployment preparation failed:", error.message);
+    console.error('\n💥 Deployment preparation failed:', error.message);
     throw error;
   }
 }
@@ -382,11 +382,11 @@ GRANT ALL ON ALL TABLES IN SCHEMA public TO service_role;
 // Execute the all-in-one deployment and testing
 deployAndTestSchema()
   .then(() => {
-    console.log("\n✨ Schema deployment preparation completed successfully!");
-    console.log("Ready for production deployment via Supabase Dashboard.");
+    console.log('\n✨ Schema deployment preparation completed successfully!');
+    console.log('Ready for production deployment via Supabase Dashboard.');
     process.exit(0);
   })
   .catch((error) => {
-    console.error("\n💥 Deployment preparation failed:", error);
+    console.error('\n💥 Deployment preparation failed:', error);
     process.exit(1);
   });

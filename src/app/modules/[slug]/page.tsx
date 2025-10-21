@@ -3,12 +3,12 @@
  * Properly handles server-side MDX rendering without client/server conflicts
  */
 
-import { notFound } from "next/navigation";
-import fs from "fs/promises";
-import path from "path";
-import matter from "gray-matter";
-import { serialize } from "next-mdx-remote/serialize";
-import { validateModuleFrontmatter } from "@/lib/mdx/module-schema";
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import matter from 'gray-matter';
+import { notFound } from 'next/navigation';
+import { serialize } from 'next-mdx-remote/serialize';
+import { validateModuleFrontmatter } from '@/lib/mdx/module-schema';
 
 interface ModulePageProps {
   params: Promise<{ slug: string }>;
@@ -16,35 +16,35 @@ interface ModulePageProps {
 
 // Map slug variations to canonical filenames
 const SLUG_TO_FILENAME: Record<string, string> = {
-  "tanium-platform-foundation": "00-tanium-platform-foundation.mdx",
-  "platform-foundation": "00-tanium-platform-foundation.mdx",
-  "tanium-platform-foundation-v2": "00-tanium-platform-foundation-v2.mdx",
-  "platform-foundation-v2": "00-tanium-platform-foundation-v2.mdx",
-  "asking-questions": "01-asking-questions.mdx",
-  "asking-questions-learn": "01-asking-questions-learn.mdx",
-  "refining-questions-targeting": "02-refining-questions-targeting.mdx",
-  "refining-questions": "02-refining-questions-targeting.mdx",
-  "taking-action-packages-actions": "03-taking-action-packages-actions.mdx",
-  "taking-action": "03-taking-action-packages-actions.mdx",
-  "navigation-basic-modules": "04-navigation-basic-modules.mdx",
-  navigation: "04-navigation-basic-modules.mdx",
-  "reporting-data-export": "05-reporting-data-export.mdx",
-  reporting: "05-reporting-data-export.mdx",
-  "microlearning-example": "MICROLEARNING_EXAMPLE.mdx",
-  "example-module-microlearning": "MICROLEARNING_EXAMPLE.mdx",
-  MICROLEARNING_EXAMPLE: "MICROLEARNING_EXAMPLE.mdx",
+  'tanium-platform-foundation': '00-tanium-platform-foundation.mdx',
+  'platform-foundation': '00-tanium-platform-foundation.mdx',
+  'tanium-platform-foundation-v2': '00-tanium-platform-foundation-v2.mdx',
+  'platform-foundation-v2': '00-tanium-platform-foundation-v2.mdx',
+  'asking-questions': '01-asking-questions.mdx',
+  'asking-questions-learn': '01-asking-questions-learn.mdx',
+  'refining-questions-targeting': '02-refining-questions-targeting.mdx',
+  'refining-questions': '02-refining-questions-targeting.mdx',
+  'taking-action-packages-actions': '03-taking-action-packages-actions.mdx',
+  'taking-action': '03-taking-action-packages-actions.mdx',
+  'navigation-basic-modules': '04-navigation-basic-modules.mdx',
+  navigation: '04-navigation-basic-modules.mdx',
+  'reporting-data-export': '05-reporting-data-export.mdx',
+  reporting: '05-reporting-data-export.mdx',
+  'microlearning-example': 'MICROLEARNING_EXAMPLE.mdx',
+  'example-module-microlearning': 'MICROLEARNING_EXAMPLE.mdx',
+  MICROLEARNING_EXAMPLE: 'MICROLEARNING_EXAMPLE.mdx',
 };
 
 async function getModuleContent(slug: string) {
-  const isProduction = process.env.NODE_ENV === "production";
+  const isProduction = process.env.NODE_ENV === 'production';
   const isVercel = !!process.env.VERCEL;
 
   // Debug logging for Vercel
   if (isVercel || isProduction) {
-    console.log("[Module] Loading:", {
+    console.log('[Module] Loading:', {
       slug,
       environment: process.env.NODE_ENV,
-      platform: isVercel ? "Vercel" : "Other",
+      platform: isVercel ? 'Vercel' : 'Other',
       cwd: process.cwd(),
     });
   }
@@ -59,10 +59,10 @@ async function getModuleContent(slug: string) {
 
     // Try to read from pre-bundled cache (Vercel-compatible)
     // Located in public/.mdx-cache/ which is included in deployment
-    const cachePath = path.join(process.cwd(), "public", ".mdx-cache", `${filename}.json`);
+    const cachePath = path.join(process.cwd(), 'public', '.mdx-cache', `${filename}.json`);
 
     try {
-      const cacheContent = await fs.readFile(cachePath, "utf8");
+      const cacheContent = await fs.readFile(cachePath, 'utf8');
       const bundled = JSON.parse(cacheContent);
 
       // Validate frontmatter
@@ -99,7 +99,7 @@ async function getModuleContent(slug: string) {
       console.warn(`[Module Warning] Cache miss, reading source file: ${filename}`);
 
       // Development fallback: read from source
-      const modulePath = path.join(process.cwd(), "src", "content", "modules", filename);
+      const modulePath = path.join(process.cwd(), 'src', 'content', 'modules', filename);
 
       try {
         await fs.access(modulePath);
@@ -108,7 +108,7 @@ async function getModuleContent(slug: string) {
         return null;
       }
 
-      const fileContent = await fs.readFile(modulePath, "utf8");
+      const fileContent = await fs.readFile(modulePath, 'utf8');
       const { data: frontmatter, content } = matter(fileContent);
 
       // Validate frontmatter
@@ -155,10 +155,10 @@ export default async function ModulePage({ params }: ModulePageProps) {
     notFound();
   }
 
-  const useLiteRenderer = moduleData.frontmatter?.id === "module-tanium-platform-foundation-v2";
+  const useLiteRenderer = moduleData.frontmatter?.id === 'module-tanium-platform-foundation-v2';
   const ModuleRenderer = useLiteRenderer
-    ? (await import("@/components/modules/ModuleRendererLite")).default
-    : (await import("@/components/modules/ModuleRenderer")).default;
+    ? (await import('@/components/modules/ModuleRendererLite')).default
+    : (await import('@/components/modules/ModuleRenderer')).default;
 
   return <ModuleRenderer moduleData={moduleData} />;
 }
@@ -177,7 +177,7 @@ export async function generateMetadata({ params }: ModulePageProps) {
 
   if (!moduleData) {
     return {
-      title: "Module Not Found",
+      title: 'Module Not Found',
     };
   }
 

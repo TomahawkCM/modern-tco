@@ -3,10 +3,10 @@
 
 // Used for __tests__/testing-library.js
 // Learn more: https://github.com/testing-library/jest-dom
-import "@testing-library/jest-dom";
+import '@testing-library/jest-dom';
 
 // Enhanced Next.js 15.5.2 router mocking
-jest.mock("next/navigation", () => ({
+jest.mock('next/navigation', () => ({
   useRouter: () => ({
     push: jest.fn(),
     replace: jest.fn(),
@@ -16,14 +16,14 @@ jest.mock("next/navigation", () => ({
     refresh: jest.fn(),
   }),
   useSearchParams: () => new URLSearchParams(),
-  usePathname: () => "/",
+  usePathname: () => '/',
   useParams: () => ({}),
   notFound: jest.fn(),
   redirect: jest.fn(),
 }));
 
 // Mock Next.js App Router specific modules
-jest.mock("next/headers", () => ({
+jest.mock('next/headers', () => ({
   cookies: () => ({
     get: jest.fn(),
     set: jest.fn(),
@@ -33,7 +33,7 @@ jest.mock("next/headers", () => ({
 }));
 
 // Mock window.matchMedia with enhanced compatibility
-Object.defineProperty(window, "matchMedia", {
+Object.defineProperty(window, 'matchMedia', {
   writable: true,
   value: jest.fn().mockImplementation((query) => ({
     matches: false,
@@ -56,7 +56,9 @@ global.IntersectionObserver = class IntersectionObserver {
   disconnect() {}
   observe() {}
   unobserve() {}
-  takeRecords() { return []; }
+  takeRecords() {
+    return [];
+  }
 };
 
 // Mock ResizeObserver
