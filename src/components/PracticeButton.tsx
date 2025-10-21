@@ -9,8 +9,6 @@ import type { Difficulty, TCODomain } from '@/types/exam';
 interface PracticeButtonProps {
   moduleId: string;
   domainEnum: TCODomain | string;
-  targetTags: string[];
-  objectiveIds: string[];
   difficulty: Difficulty;
   children?: React.ReactNode;
   className?: string;
@@ -19,8 +17,6 @@ interface PracticeButtonProps {
 export default function PracticeButton({
   moduleId,
   domainEnum,
-  targetTags,
-  objectiveIds,
   difficulty,
   children = 'Start Practice Session',
   className = '',
@@ -32,12 +28,6 @@ export default function PracticeButton({
     startModulePractice(moduleId, {
       domain: domainEnum as unknown as TCODomain,
       questionCount: 15,
-      // Additional hints can be used by session manager if supported
-      // @ts-expect-error keep flexible for future extensions
-      targetTags,
-      // @ts-expect-error keep flexible for future extensions
-      objectiveIds,
-      // @ts-expect-error keep flexible for future extensions
       difficulty,
     });
   };

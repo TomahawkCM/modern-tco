@@ -1,8 +1,6 @@
 // Professional TCO Study Content - World-Class Certification Preparation
 // Comprehensive study modules for all 5 TCO domains
 
-import { parseDomain1Content } from '@/lib/content-parser';
-
 export interface StudyModuleContent {
   id: string;
   domain: string;
@@ -28,29 +26,12 @@ export interface StudySectionContent {
   references: string[];
 }
 
-// Dynamic content loading for comprehensive study materials
-let domain1Content: StudyModuleContent | null = null;
+// Note: Dynamic content loading from markdown files is disabled to avoid
+// bundling Node.js modules (fs, path) in the client bundle.
+// All content is now statically defined below for optimal performance.
 
-function loadDomain1Content(): StudyModuleContent {
-  if (domain1Content) return domain1Content;
-
-  // Only attempt to load markdown content on server-side
-  if (typeof window === 'undefined') {
-    try {
-      domain1Content = parseDomain1Content();
-      return domain1Content;
-    } catch (error) {
-      console.warn('Failed to load Domain 1 markdown content, using fallback:', error);
-    }
-  }
-
-  // Use fallback content for client-side or when server-side loading fails
-  domain1Content = fallbackDomain1Content;
-  return fallbackDomain1Content;
-}
-
-// Fallback content for offline/development scenarios
-const fallbackDomain1Content: StudyModuleContent = {
+// Domain 1: Asking Questions - Comprehensive study content
+const domain1Content: StudyModuleContent = {
   id: 'asking-questions',
   domain: 'Asking Questions',
   title: 'Domain 1: Asking Questions - Professional Study Guide (Fallback)',
@@ -599,15 +580,11 @@ Mastery of refining questions and targeting enables:
   // Additional modules would continue here for complete implementation...
 ];
 
-// Enhanced utility functions for accessing study content with dynamic loading
+// Enhanced utility functions for accessing study content
 export function getStudyModuleByDomain(domain: string): StudyModuleContent | undefined {
-  // Special handling for Domain 1 with dynamic content loading
+  // Special handling for Domain 1
   if (domain.toLowerCase().includes('asking') || domain.toLowerCase() === 'asking-questions') {
-    try {
-      return loadDomain1Content();
-    } catch (error) {
-      console.warn('Failed to load dynamic Domain 1 content, using fallback');
-    }
+    return domain1Content;
   }
 
   return STUDY_MODULES.find(
@@ -620,15 +597,10 @@ export function getStudyModuleByDomain(domain: string): StudyModuleContent | und
 export function getAllStudyModules(): StudyModuleContent[] {
   const modules = [...STUDY_MODULES];
 
-  // Replace Domain 1 with dynamically loaded content
-  try {
-    const domain1Content = loadDomain1Content();
-    const domain1Index = modules.findIndex((m) => m.id === 'asking-questions');
-    if (domain1Index !== -1) {
-      modules[domain1Index] = domain1Content;
-    }
-  } catch (error) {
-    console.warn('Failed to load dynamic Domain 1 content, using existing content');
+  // Replace Domain 1 with static content
+  const domain1Index = modules.findIndex((m) => m.id === 'asking-questions');
+  if (domain1Index !== -1) {
+    modules[domain1Index] = domain1Content;
   }
 
   return modules;
@@ -637,11 +609,7 @@ export function getAllStudyModules(): StudyModuleContent[] {
 export function getStudyModuleById(id: string): StudyModuleContent | undefined {
   // Special handling for Domain 1
   if (id === 'asking-questions') {
-    try {
-      return loadDomain1Content();
-    } catch (error) {
-      console.warn('Failed to load dynamic Domain 1 content, using fallback');
-    }
+    return domain1Content;
   }
 
   return STUDY_MODULES.find((module) => module.id === id);

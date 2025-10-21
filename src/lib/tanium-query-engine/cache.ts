@@ -3,8 +3,19 @@
  * High-performance LRU cache with TTL support
  */
 
-import { createHash } from 'node:crypto';
 import type { CacheEntry, QueryNode, QueryResult } from './types';
+
+/**
+ * Simple string hash function (browser-compatible)
+ * DJB2 algorithm - fast and good distribution for cache keys
+ */
+function simpleHash(str: string): string {
+  let hash = 5381;
+  for (let i = 0; i < str.length; i++) {
+    hash = ((hash << 5) + hash) + str.charCodeAt(i); // hash * 33 + c
+  }
+  return Math.abs(hash).toString(36).padStart(8, '0');
+}
 
 interface CacheStats {
   hits: number;
@@ -41,10 +52,7 @@ export class QueryCache {
   private generateKey(query: string | QueryNode, options?: Record<string, any>): string {
     const data = typeof query === 'string' ? query : JSON.stringify(query);
     const optionsStr = options ? JSON.stringify(options) : '';
-    return createHash('sha256')
-      .update(data + optionsStr)
-      .digest('hex')
-      .substring(0, 16); // Use first 16 chars for shorter keys
+    return simpleHash(data + optionsStr);
   }
 
   /**
