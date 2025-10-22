@@ -6,7 +6,9 @@
     "domainEnum": "TAKING_ACTION",
     "difficulty": "Intermediate",
     "estimatedTime": "120 min",
-    "prerequisites": ["module-refining-questions-targeting"],
+    "prerequisites": [
+      "module-refining-questions-targeting"
+    ],
     "objectives": [
       "Deploy basic packages with simple parameters",
       "Monitor action status and understand basic exit codes",
@@ -35,5 +37,5 @@
   },
   "filename": "03-taking-action-packages-actions.mdx",
   "slug": "module-taking-action",
-  "bundledAt": "2025-10-21T23:52:52.704Z"
+  "bundledAt": "2025-10-22T00:58:24.712Z"
 }

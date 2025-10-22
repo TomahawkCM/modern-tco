@@ -5,7 +5,11 @@
     "domainSlug": "reporting-export",
     "difficulty": "Intermediate",
     "estimatedTime": 60,
-    "tags": ["reporting", "export", "experiment"],
+    "tags": [
+      "reporting",
+      "export",
+      "experiment"
+    ],
     "status": "experimental",
     "lastUpdated": "2025-10-05"
   },
@@ -16,5 +20,5 @@
   },
   "filename": "05-reporting-export-learn-experimental.mdx",
   "slug": "module-05L",
-  "bundledAt": "2025-10-21T23:52:52.966Z"
+  "bundledAt": "2025-10-22T00:58:25.015Z"
 }

@@ -5,7 +5,12 @@
     "domainSlug": "navigation-basic-modules",
     "difficulty": "Beginner",
     "estimatedTime": 80,
-    "tags": ["console", "navigation", "modules", "experiment"],
+    "tags": [
+      "console",
+      "navigation",
+      "modules",
+      "experiment"
+    ],
     "status": "experimental",
     "lastUpdated": "2025-10-05"
   },
@@ -16,5 +21,5 @@
   },
   "filename": "04-navigation-basic-modules-learn-experimental.mdx",
   "slug": "module-04L",
-  "bundledAt": "2025-10-21T23:52:52.721Z"
+  "bundledAt": "2025-10-22T00:58:24.734Z"
 }

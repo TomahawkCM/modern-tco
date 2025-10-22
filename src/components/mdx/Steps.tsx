@@ -1,6 +1,6 @@
 'use client';
 
-import type React from 'react';
+import React from 'react';
 import { createContext, useContext, useState } from 'react';
 
 interface StepsContextType {
@@ -30,7 +30,23 @@ function StepsRoot({ children }: StepsProps) {
 
   return (
     <StepsContext.Provider value={{ currentStep: stepCounter, incrementStep }}>
-      <div className="my-6 space-y-4">{children}</div>
+      <div className="steps-container my-6 space-y-4">
+        <style jsx>{`
+          .steps-container {
+            counter-reset: step-counter;
+          }
+          .steps-container :global(.step-item) {
+            counter-increment: step-counter;
+          }
+          .steps-container :global(.step-number)::before {
+            content: counter(step-counter);
+          }
+          .steps-container :global(.step-item:last-child .step-connector) {
+            display: none;
+          }
+        `}</style>
+        {children}
+      </div>
     </StepsContext.Provider>
   );
 }

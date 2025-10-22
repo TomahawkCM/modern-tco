@@ -1,4 +1,4 @@
-import type React from 'react';
+import React from 'react';
 
 // Type definition for MDX components
 type MDXComponents = {
@@ -16,7 +16,7 @@ import ModuleTransition from '@/components/mdx/ModuleTransition';
 import PracticeButton from '@/components/mdx/PracticeButton';
 import QueryPlayground from '@/components/mdx/QueryPlayground';
 import SkillGate from '@/components/mdx/SkillGate';
-import Steps from '@/components/mdx/Steps';
+import StepItem from '@/components/mdx/StepItem';
 
 function Anchor(props: React.AnchorHTMLAttributes<HTMLAnchorElement>) {
   const href = props.href || '';
@@ -39,7 +39,6 @@ export function useMDXComponents(components: MDXComponents = {}): MDXComponents 
     PracticeButton,
     QueryPlayground,
     SkillGate,
-    Steps,
-    'Steps.Step': Steps.Step,
+    StepItem,
   };
 }

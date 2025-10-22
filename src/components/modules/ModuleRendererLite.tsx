@@ -13,7 +13,7 @@ import {
   Zap,
 } from 'lucide-react';
 import dynamic from 'next/dynamic';
-import { MDXRemote } from 'next-mdx-remote';
+// MDXRemote is imported dynamically below to avoid SSR issues
 import { useEffect, useMemo, useRef, useState } from 'react';
 import * as ReactJsxRuntime from 'react/jsx-runtime';
 import { Badge } from '@/components/ui/badge';
@@ -74,6 +74,25 @@ const DynamicSteps = dynamic(() => import('@/components/mdx/Steps'), {
   ssr: false,
   loading: () => null,
 });
+
+const DynamicStepItem = dynamic(() => import('@/components/mdx/StepItem'), {
+  ssr: false,
+  loading: () => null,
+});
+
+const DynamicMDXRemote = dynamic(
+  () => import('next-mdx-remote').then((mod) => mod.MDXRemote),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="animate-pulse space-y-4">
+        <div className="h-4 bg-gray-700 rounded w-3/4"></div>
+        <div className="h-4 bg-gray-700 rounded w-1/2"></div>
+        <div className="h-4 bg-gray-700 rounded w-2/3"></div>
+      </div>
+    ),
+  }
+);
 
 function createRuntimeWithDevSupport() {
   const baseRuntime = { ...MDXReact, ...ReactJsxRuntime } as Record<string, unknown>;
@@ -143,6 +162,9 @@ export default function ModuleRendererLite({ moduleData }: ModuleRendererLitePro
         <DynamicCallout {...props} />
       ),
       Steps: (props: React.ComponentProps<typeof DynamicSteps>) => <DynamicSteps {...props} />,
+      StepItem: (props: React.ComponentProps<typeof DynamicStepItem>) => (
+        <DynamicStepItem {...props} />
+      ),
       h1: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
         <h1
           className={cn(
@@ -390,7 +412,7 @@ export default function ModuleRendererLite({ moduleData }: ModuleRendererLitePro
       )}
 
       <div ref={containerRef} className="prose prose-lg prose-invert max-w-none">
-        <MDXRemote {...content} components={mdxComponents} />
+        <DynamicMDXRemote {...content} components={mdxComponents} />
       </div>
 
       {frontmatter.practiceConfig?.href && (

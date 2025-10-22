@@ -3,15 +3,16 @@
 
 type AppRoutes = "/" | "/admin/questions" | "/analytics" | "/analytics/events" | "/assessments" | "/auth" | "/auth/signin" | "/auth/signup" | "/beginner" | "/beginner/onboarding" | "/color-test" | "/daily-review" | "/dashboard" | "/domains/[domain]" | "/drills" | "/exam" | "/flashcards" | "/guides" | "/kb" | "/labs" | "/learn" | "/learn/[slug]" | "/learn/query-builder" | "/lighthouse-test" | "/mdx-test" | "/mock" | "/mock-exam" | "/modules" | "/modules/[slug]" | "/modules/server" | "/notes" | "/notifications" | "/perf-test" | "/practice" | "/pricing" | "/profile" | "/progress" | "/review" | "/search" | "/settings" | "/simple" | "/simulator" | "/study" | "/study/[domain]" | "/study/labs/[...slug]" | "/study/review" | "/team" | "/test" | "/test-db" | "/test-mdx" | "/test-minimal" | "/videos" | "/videos/[slug]" | "/videos/admin" | "/welcome"
 type AppRouteHandlerRoutes = "/api/auth/check-admin" | "/api/flashcards/debug" | "/api/flashcards/public" | "/api/flashcards/seed" | "/api/flashcards/test" | "/api/health" | "/api/search" | "/api/search-analytics" | "/api/sim-eval" | "/api/sim-meta" | "/api/sim-run" | "/api/sim-save" | "/api/sim-saved" | "/api/stripe/create-checkout-session" | "/api/study/content"
-type PageRoutes = never
+type PageRoutes = "/_error"
 type LayoutRoutes = "/" | "/daily-review" | "/learn" | "/learning" | "/study" | "/test-minimal"
-type RedirectRoutes = "/exam"
+type RedirectRoutes = "/Tanium" | "/Tanium/[[...path]]" | "/exam" | "/tanium" | "/tanium/[[...path]]"
 type RewriteRoutes = never
 type Routes = AppRoutes | PageRoutes | LayoutRoutes | RedirectRoutes | RewriteRoutes | AppRouteHandlerRoutes
 
 
 interface ParamMap {
   "/": {}
+  "/_error": {}
   "/admin/questions": {}
   "/analytics": {}
   "/analytics/events": {}
@@ -73,6 +74,10 @@ interface ParamMap {
   "/study/[domain]": { "domain": string; }
   "/study/labs/[...slug]": { "slug": string[]; }
   "/study/review": {}
+  "/tanium": {}
+  "/Tanium": {}
+  "/tanium/[[...path]]": { "path"?: string[]; }
+  "/Tanium/[[...path]]": { "path"?: string[]; }
   "/team": {}
   "/test": {}
   "/test-db": {}
