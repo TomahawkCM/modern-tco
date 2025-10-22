@@ -31,9 +31,28 @@ export function ModuleViewer({
   const [completedObjectives, setCompletedObjectives] = useState<Set<string>>(new Set());
   const [completedSections, setCompletedSections] = useState<Set<string>>(new Set());
 
-  // Calculate progress percentages
-  const objectiveProgress = Math.round((completedObjectives.size / module.objectives.length) * 100);
-  const sectionProgress = Math.round((completedSections.size / module.sections.length) * 100);
+  // Early return if module data is not loaded
+  if (!module || !module.objectives || !module.sections) {
+    return (
+      <div className={cn('space-y-6', className)}>
+        <Card className="glass border-white/10">
+          <CardContent className="py-12 text-center">
+            <p className="text-muted-foreground">Loading module data...</p>
+          </CardContent>
+        </Card>
+      </div>
+    );
+  }
+
+  // Calculate progress percentages with safe fallbacks
+  const objectivesLength = module.objectives?.length || 0;
+  const sectionsLength = module.sections?.length || 0;
+  const objectiveProgress = objectivesLength > 0 
+    ? Math.round((completedObjectives.size / objectivesLength) * 100) 
+    : 0;
+  const sectionProgress = sectionsLength > 0
+    ? Math.round((completedSections.size / sectionsLength) * 100)
+    : 0;
   const overallProgress = Math.round((objectiveProgress + sectionProgress) / 2);
 
   // Domain color mapping
@@ -89,7 +108,7 @@ export function ModuleViewer({
   };
 
   const nextSection = () => {
-    if (currentSection < module.sections.length - 1) {
+    if (currentSection < sectionsLength - 1) {
       setCurrentSection(currentSection + 1);
     }
   };
@@ -100,8 +119,8 @@ export function ModuleViewer({
     }
   };
 
-  const currentSectionData = module.sections[currentSection];
-  const isLastSection = currentSection === module.sections.length - 1;
+  const currentSectionData = module.sections?.[currentSection];
+  const isLastSection = currentSection === sectionsLength - 1;
   const isFirstSection = currentSection === 0;
 
   return (
@@ -122,7 +141,7 @@ export function ModuleViewer({
                   </Badge>
                   <Badge variant="outline" className={cn('border-white/20', domainColors.color)}>
                     <Target className="mr-1 h-3 w-3" />
-                    {module.objectives.length} objectives
+                    {objectivesLength} objectives
                   </Badge>
                   <Badge variant="outline" className={cn('border-white/20', domainColors.color)}>
                     <Trophy className="mr-1 h-3 w-3" />
@@ -146,7 +165,7 @@ export function ModuleViewer({
                 <div className="flex items-center gap-2">
                   <Progress value={objectiveProgress} className="h-2 flex-1" />
                   <span className="text-sm text-foreground">
-                    {completedObjectives.size}/{module.objectives.length}
+                    {completedObjectives.size}/{objectivesLength}
                   </span>
                 </div>
               </div>
@@ -155,7 +174,7 @@ export function ModuleViewer({
                 <div className="flex items-center gap-2">
                   <Progress value={sectionProgress} className="h-2 flex-1" />
                   <span className="text-sm text-foreground">
-                    {completedSections.size}/{module.sections.length}
+                    {completedSections.size}/{sectionsLength}
                   </span>
                 </div>
               </div>
@@ -197,11 +216,11 @@ export function ModuleViewer({
               <div className="flex items-center justify-between">
                 <CardTitle className="flex items-center gap-2 text-foreground">
                   <span className="text-tanium-accent">Section {currentSection + 1}:</span>
-                  {currentSectionData.title}
+                  {currentSectionData?.title || 'Loading...'}
                 </CardTitle>
                 <Badge variant="outline" className="border-white/20 text-foreground">
                   <Clock className="mr-1 h-3 w-3" />
-                  {currentSectionData.estimatedTime} min
+                  {currentSectionData?.estimatedTime || 0} min
                 </Badge>
               </div>
             </CardHeader>
@@ -209,7 +228,7 @@ export function ModuleViewer({
               {/* Section Content */}
               <div className="prose prose-invert max-w-none">
                 <p className="text-lg leading-relaxed text-muted-foreground">
-                  {currentSectionData.content}
+                  {currentSectionData?.content || 'Loading section content...'}
                 </p>
               </div>
 
@@ -227,14 +246,14 @@ export function ModuleViewer({
 
                 <div className="text-center">
                   <div className="mb-2 text-sm text-muted-foreground">
-                    Section {currentSection + 1} of {module.sections.length}
+                    Section {currentSection + 1} of {sectionsLength}
                   </div>
                   <Button
-                    onClick={() => handleSectionComplete(currentSectionData.id)}
-                    disabled={completedSections.has(currentSectionData.id)}
+                    onClick={() => currentSectionData && handleSectionComplete(currentSectionData.id)}
+                    disabled={!currentSectionData || completedSections.has(currentSectionData?.id || '')}
                     className="bg-[#22c55e] text-foreground hover:bg-green-700 disabled:bg-green-800"
                   >
-                    {completedSections.has(currentSectionData.id) ? (
+                    {currentSectionData && completedSections.has(currentSectionData.id) ? (
                       <>
                         <CheckCircle className="mr-2 h-4 w-4" />
                         Completed
@@ -267,7 +286,7 @@ export function ModuleViewer({
             </CardHeader>
             <CardContent>
               <div className="grid gap-3">
-                {module.sections.map((section, index) => (
+                {module.sections?.map((section, index) => (
                   <div
                     key={section.id}
                     className={cn(
@@ -312,7 +331,7 @@ export function ModuleViewer({
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
-                {module.objectives.map((objective, index) => (
+                {module.objectives?.map((objective, index) => (
                   <div
                     key={objective.id}
                     className={cn(
@@ -379,7 +398,7 @@ export function ModuleViewer({
                     <div className="mb-1 flex justify-between text-sm">
                       <span className="text-muted-foreground">Objectives Completed</span>
                       <span className="text-foreground">
-                        {completedObjectives.size}/{module.objectives.length}
+                        {completedObjectives.size}/{objectivesLength}
                       </span>
                     </div>
                     <Progress value={objectiveProgress} className="h-2" />
@@ -389,7 +408,7 @@ export function ModuleViewer({
                     <div className="mb-1 flex justify-between text-sm">
                       <span className="text-muted-foreground">Sections Completed</span>
                       <span className="text-foreground">
-                        {completedSections.size}/{module.sections.length}
+                        {completedSections.size}/{sectionsLength}
                       </span>
                     </div>
                     <Progress value={sectionProgress} className="h-2" />
@@ -445,7 +464,7 @@ export function ModuleViewer({
                 <div className="border-t border-white/10 pt-4">
                   <div className="mb-2 text-sm text-muted-foreground">Tags</div>
                   <div className="flex flex-wrap gap-2">
-                    {module.tags.map((tag) => (
+                    {module.tags?.map((tag) => (
                       <Badge
                         key={tag}
                         variant="outline"

@@ -103,12 +103,7 @@ export function MainLayout({ children, asGlobal = false }: MainLayoutProps) {
     return <>{children}</>;
   }
   */
-  console.log(
-    '[MainLayout] Rendering full layout - asGlobal:',
-    asGlobal,
-    'globalNavActive:',
-    globalNavActive
-  );
+  // Removed console.log to reduce console noise in production
 
   return (
     <div className="relative min-h-screen">
