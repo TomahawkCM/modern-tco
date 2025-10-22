@@ -107,15 +107,29 @@ export default function ModuleRendererLite({ moduleData }: ModuleRendererLitePro
 
   useEffect(() => {
     const el = containerRef.current;
-    if (!el) return;
-    const headings = Array.from(el.querySelectorAll<HTMLHeadingElement>('h1, h2, h3'));
-    const entries = headings.map((heading) => ({
-      id: heading.id,
-      title: heading.innerText.trim(),
-      level: heading.tagName === 'H3' ? 3 : heading.tagName === 'H2' ? 2 : 1,
-    }));
+    if (!el) {
+      setToc([]);
+      return;
+    }
+
+    const headingNodes = el.querySelectorAll<HTMLHeadingElement>('h1, h2, h3');
+    if (!headingNodes || headingNodes.length === 0) {
+      setToc([]);
+      return;
+    }
+
+    const entries = Array.from(headingNodes)
+      .filter((heading): heading is HTMLHeadingElement => Boolean(heading))
+      .map((heading) => ({
+        id: heading.id,
+        title: heading.innerText.trim(),
+        level: heading.tagName === 'H3' ? 3 : heading.tagName === 'H2' ? 2 : 1,
+      }));
+
     setToc(entries.filter((entry) => entry.id));
   }, []);
+
+  const safeToc = Array.isArray(toc) ? toc : [];
 
   const mdxRuntime = useMemo(() => createRuntimeWithDevSupport(), []);
 
@@ -362,7 +376,7 @@ export default function ModuleRendererLite({ moduleData }: ModuleRendererLitePro
         </div>
       </header>
 
-      {toc.length > 0 && (
+      {safeToc.length > 0 && (
         <Card className="border-cyan-900/30 bg-gradient-to-b from-gray-950/50 to-cyan-950/20">
           <CardHeader className="pb-3">
             <CardTitle className="flex items-center gap-2 text-muted-foreground">
@@ -375,7 +389,7 @@ export default function ModuleRendererLite({ moduleData }: ModuleRendererLitePro
           </CardHeader>
           <CardContent>
             <ul className="space-y-2 text-sm text-muted-foreground">
-              {toc.map((entry) => (
+              {safeToc.map((entry) => (
                 <li
                   key={entry.id}
                   className={cn(entry.level > 1 ? 'ml-4' : '', entry.level > 2 ? 'ml-8' : '')}

@@ -168,7 +168,7 @@ export function HeroSection() {
               className="text-lg px-8 py-4 border-2 border-primary/50 text-primary hover:bg-primary/10 backdrop-blur-md transition-all duration-300"
               asChild
             >
-              <Link href="/demo">
+              <Link href="/videos">
                 <Play className="w-5 h-5 mr-2" />
                 Watch Demo
               </Link>
