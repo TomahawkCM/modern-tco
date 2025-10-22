@@ -13,7 +13,7 @@ import {
   Zap,
 } from 'lucide-react';
 import dynamic from 'next/dynamic';
-// MDXRemote is imported dynamically below to avoid SSR issues
+import { MDXRemote } from 'next-mdx-remote';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import * as ReactJsxRuntime from 'react/jsx-runtime';
 import { Badge } from '@/components/ui/badge';
@@ -80,19 +80,6 @@ const DynamicStepItem = dynamic(() => import('@/components/mdx/StepItem'), {
   loading: () => null,
 });
 
-const DynamicMDXRemote = dynamic(
-  () => import('next-mdx-remote').then((mod) => mod.MDXRemote),
-  {
-    ssr: false,
-    loading: () => (
-      <div className="animate-pulse space-y-4">
-        <div className="h-4 bg-gray-700 rounded w-3/4"></div>
-        <div className="h-4 bg-gray-700 rounded w-1/2"></div>
-        <div className="h-4 bg-gray-700 rounded w-2/3"></div>
-      </div>
-    ),
-  }
-);
 
 function createRuntimeWithDevSupport() {
   const baseRuntime = { ...MDXReact, ...ReactJsxRuntime } as Record<string, unknown>;
@@ -412,7 +399,7 @@ export default function ModuleRendererLite({ moduleData }: ModuleRendererLitePro
       )}
 
       <div ref={containerRef} className="prose prose-lg prose-invert max-w-none">
-        <DynamicMDXRemote {...content} components={mdxComponents} />
+        <MDXRemote {...content} components={mdxComponents} />
       </div>
 
       {frontmatter.practiceConfig?.href && (
