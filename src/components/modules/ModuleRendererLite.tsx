@@ -80,7 +80,6 @@ const DynamicStepItem = dynamic(() => import('@/components/mdx/StepItem'), {
   loading: () => null,
 });
 
-
 function createRuntimeWithDevSupport() {
   const baseRuntime = { ...MDXReact, ...ReactJsxRuntime } as Record<string, unknown>;
 
@@ -101,7 +100,7 @@ interface ModuleRendererLiteProps {
 type TocEntry = { id: string; title: string; level: number };
 
 export default function ModuleRendererLite({ moduleData }: ModuleRendererLiteProps) {
-  const { frontmatter, content } = moduleData;
+  // ALL Hooks MUST be called before any conditional returns (Rules of Hooks)
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [toc, setToc] = useState<TocEntry[]>([]);
 
@@ -341,26 +340,51 @@ export default function ModuleRendererLite({ moduleData }: ModuleRendererLitePro
     []
   );
 
+  // Safe destructuring with fallbacks (after all hooks)
+  const frontmatter = moduleData?.frontmatter || {
+    title: 'Loading...',
+    description: '',
+    difficulty: '',
+    estimatedTime: '',
+    version: '1',
+  };
+  const content = moduleData?.content;
+
+  // Early return AFTER all hooks if module data is invalid
+  if (!moduleData?.frontmatter || !moduleData.content) {
+    return (
+      <div className="flex min-h-screen items-center justify-center">
+        <Card className="border-white/10">
+          <CardContent className="py-12 text-center">
+            <p className="text-muted-foreground">Loading module content...</p>
+          </CardContent>
+        </Card>
+      </div>
+    );
+  }
+
   return (
     <div className="space-y-8">
       <header className="rounded-2xl border border-cyan-900/40 bg-gradient-to-br from-gray-950 via-gray-950 to-cyan-950/40 p-6 shadow-lg">
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div>
             <p className="text-sm uppercase tracking-wide text-cyan-300">Module</p>
-            <h1 className="text-3xl font-bold text-white md:text-4xl">{frontmatter.title}</h1>
-            {frontmatter.description && (
+            <h1 className="text-3xl font-bold text-white md:text-4xl">
+              {frontmatter?.title || 'Module'}
+            </h1>
+            {frontmatter?.description && (
               <p className="mt-2 max-w-2xl text-base text-muted-foreground">
                 {frontmatter.description}
               </p>
             )}
           </div>
           <div className="flex flex-wrap gap-2">
-            {frontmatter.difficulty && (
+            {frontmatter?.difficulty && (
               <Badge variant="outline" className="border-cyan-600/40 bg-cyan-900/50 text-cyan-200">
                 {frontmatter.difficulty}
               </Badge>
             )}
-            {frontmatter.estimatedTime && (
+            {frontmatter?.estimatedTime && (
               <Badge variant="outline" className="border-blue-600/40 bg-blue-900/50 text-blue-200">
                 <Clock className="mr-1 inline h-3 w-3" />
                 {frontmatter.estimatedTime}
@@ -370,7 +394,7 @@ export default function ModuleRendererLite({ moduleData }: ModuleRendererLitePro
               variant="outline"
               className="border-purple-600/40 bg-purple-900/40 text-purple-200"
             >
-              Version {frontmatter.version ?? '1'}
+              Version {frontmatter?.version ?? '1'}
             </Badge>
           </div>
         </div>
@@ -416,7 +440,7 @@ export default function ModuleRendererLite({ moduleData }: ModuleRendererLitePro
         <MDXRemote {...content} components={mdxComponents} />
       </div>
 
-      {frontmatter.practiceConfig?.href && (
+      {frontmatter?.practiceConfig?.href && (
         <Card className="border-primary/30 bg-gradient-to-r from-gray-900/50 to-blue-900/30">
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-muted-foreground">
