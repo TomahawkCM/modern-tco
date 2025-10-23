@@ -6,14 +6,8 @@
     "domainEnum": "REPORTING_EXPORT",
     "difficulty": "Intermediate",
     "estimatedTime": "180 min",
-    "prerequisites": [
-      "module-navigation-basic-modules"
-    ],
-    "objectives": [
-      "obj-reporting-build",
-      "obj-reporting-export",
-      "obj-reporting-quality"
-    ],
+    "prerequisites": ["module-navigation-basic-modules"],
+    "objectives": ["obj-reporting-build", "obj-reporting-export", "obj-reporting-quality"],
     "tags": [
       "TCO",
       "Domain5",
@@ -41,5 +35,5 @@
   },
   "filename": "05-reporting-data-export.mdx",
   "slug": "module-reporting-data-export",
-  "bundledAt": "2025-10-22T01:49:52.604Z"
+  "bundledAt": "2025-10-23T00:08:49.839Z"
 }

@@ -5,12 +5,7 @@
     "domainSlug": "taking-action",
     "difficulty": "Intermediate",
     "estimatedTime": 70,
-    "tags": [
-      "actions",
-      "packages",
-      "safety",
-      "experiment"
-    ],
+    "tags": ["actions", "packages", "safety", "experiment"],
     "status": "experimental",
     "lastUpdated": "2025-10-05"
   },
@@ -21,5 +16,5 @@
   },
   "filename": "03-taking-action-learn-experimental.mdx",
   "slug": "module-03L",
-  "bundledAt": "2025-10-22T01:49:52.214Z"
+  "bundledAt": "2025-10-23T00:08:49.254Z"
 }

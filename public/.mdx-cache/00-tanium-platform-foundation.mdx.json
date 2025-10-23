@@ -8,13 +8,7 @@
     "estimatedTime": "180 min",
     "blueprintWeight": 0,
     "description": "Comprehensive foundation module for zero-knowledge students covering Tanium platform architecture, terminology, communication model, and console navigation.",
-    "tags": [
-      "foundation",
-      "architecture",
-      "terminology",
-      "console",
-      "platform-basics"
-    ],
+    "tags": ["foundation", "architecture", "terminology", "console", "platform-basics"],
     "lastUpdated": "2024-09-24",
     "version": 1,
     "status": "published",
@@ -34,5 +28,5 @@
   },
   "filename": "00-tanium-platform-foundation.mdx",
   "slug": "module-tanium-platform-foundation",
-  "bundledAt": "2025-10-22T01:49:51.759Z"
+  "bundledAt": "2025-10-23T00:08:48.046Z"
 }

@@ -6,9 +6,7 @@
     "domainEnum": "NAVIGATION_MODULES",
     "difficulty": "Beginner",
     "estimatedTime": "210 min",
-    "prerequisites": [
-      "platform-client-basics"
-    ],
+    "prerequisites": ["platform-client-basics"],
     "objectives": [
       "Navigate console efficiently using all navigation methods and shortcuts",
       "Master console layout, panel management, and workspace customization",
@@ -44,5 +42,5 @@
   },
   "filename": "04-navigation-basic-modules.mdx",
   "slug": "module-navigation-basic-modules",
-  "bundledAt": "2025-10-22T01:49:52.511Z"
+  "bundledAt": "2025-10-23T00:08:49.684Z"
 }

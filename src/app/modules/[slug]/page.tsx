@@ -175,15 +175,16 @@ export async function generateMetadata({ params }: ModulePageProps) {
   const { slug } = await params;
   const moduleData = await getModuleContent(slug);
 
-  if (!moduleData) {
+  if (!moduleData?.frontmatter) {
     return {
       title: 'Module Not Found',
     };
   }
 
   return {
-    title: `${moduleData.frontmatter.title} | Tanium TCO Study`,
+    title: `${moduleData.frontmatter?.title || 'Module'} | Tanium TCO Study`,
     description:
-      moduleData.frontmatter.description || `Study module for ${moduleData.frontmatter.title}`,
+      moduleData.frontmatter?.description ||
+      `Study module for ${moduleData.frontmatter?.title || 'module'}`,
   };
 }
