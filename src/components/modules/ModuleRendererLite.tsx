@@ -1,5 +1,9 @@
 'use client';
 
+import { Badge } from '@/components/ui/badge';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import type { ModuleData } from '@/lib/mdx/module-loader';
+import { cn } from '@/lib/utils';
 import * as MDXReact from '@mdx-js/react';
 import {
   AlertCircle,
@@ -12,14 +16,10 @@ import {
   Target,
   Zap,
 } from 'lucide-react';
-import dynamic from 'next/dynamic';
 import { MDXRemote } from 'next-mdx-remote';
+import dynamic from 'next/dynamic';
 import { useEffect, useMemo, useRef, useState } from 'react';
-import * as ReactJsxRuntime from 'react/jsx-runtime';
-import { Badge } from '@/components/ui/badge';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import type { ModuleData } from '@/lib/mdx/module-loader';
-import { cn } from '@/lib/utils';
+import * as runtime from 'react/jsx-runtime';
 
 const DynamicPracticeButton = dynamic(() => import('@/components/mdx/PracticeButton'), {
   ssr: false,
@@ -81,16 +81,16 @@ const DynamicStepItem = dynamic(() => import('@/components/mdx/StepItem'), {
 });
 
 function createRuntimeWithDevSupport() {
-  const baseRuntime = { ...MDXReact, ...ReactJsxRuntime } as Record<string, unknown>;
-
-  if (typeof baseRuntime.jsxDEV !== 'function') {
-    const { jsx } = ReactJsxRuntime;
-    baseRuntime.jsxDEV = function jsxDEV(type: unknown, props: unknown, key?: unknown) {
-      return jsx(type as any, props as any, key as any);
-    };
-  }
-
-  return baseRuntime;
+  // Provide full React JSX runtime for MDX automatic runtime
+  return {
+    ...MDXReact,
+    ...runtime,
+    jsx: runtime.jsx,
+    jsxs: runtime.jsxs,
+    Fragment: runtime.Fragment,
+    // Polyfill jsxDEV for dev compatibility (maps to production jsx)
+    jsxDEV: runtime.jsx,
+  };
 }
 
 interface ModuleRendererLiteProps {
@@ -437,7 +437,7 @@ export default function ModuleRendererLite({ moduleData }: ModuleRendererLitePro
       )}
 
       <div ref={containerRef} className="prose prose-lg prose-invert max-w-none">
-        <MDXRemote {...content} components={mdxComponents} />
+        <MDXRemote {...content} components={mdxComponents} scope={mdxRuntime} />
       </div>
 
       {frontmatter?.practiceConfig?.href && (

@@ -48,8 +48,14 @@ async function bundleAllMDX() {
           development: false,
           jsxImportSource: 'react',
           format: 'mdx',
+          // Force production JSX runtime
+          jsx: true,
+          providerImportSource: '@mdx-js/react',
         },
         parseFrontmatter: false,
+        // Ensure we're in production mode
+        scope: {},
+        development: false,
       });
 
       // Extract slug from frontmatter or filename
