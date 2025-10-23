@@ -40,13 +40,16 @@ async function bundleAllMDX() {
       const content = await fs.readFile(fullPath, 'utf8');
       const { data, content: mdxContent } = matter(content);
 
-      // Serialize MDX (same as runtime serialization)
+      // Serialize MDX for production (use jsx instead of jsxDEV)
       const serialized = await serialize(mdxContent, {
         mdxOptions: {
           remarkPlugins: [],
           rehypePlugins: [],
           development: false,
+          jsxImportSource: 'react',
+          format: 'mdx',
         },
+        parseFrontmatter: false,
       });
 
       // Extract slug from frontmatter or filename
