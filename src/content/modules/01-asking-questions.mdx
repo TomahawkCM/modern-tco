@@ -1,30 +1,30 @@
 ---
-id: "tco-asking-questions"
-title: "Asking Questions"
-domainSlug: "asking-questions"
+id: 'tco-asking-questions'
+title: 'Asking Questions'
+domainSlug: 'asking-questions'
 domainEnum: ASKING_QUESTIONS
-difficulty: "Beginner"
-estimatedTime: "45 min"
+difficulty: 'Beginner'
+estimatedTime: '45 min'
 blueprintWeight: 0.22
-description: "Master the art of querying in Tanium - learn natural language query construction, sensor mastery, and saved question management."
-tags: ["queries", "sensors", "natural-language", "saved-questions"]
-lastUpdated: "2024-09-05"
+description: 'Master the art of querying in Tanium - learn natural language query construction, sensor mastery, and saved question management.'
+tags: ['queries', 'sensors', 'natural-language', 'saved-questions']
+lastUpdated: '2024-09-05'
 version: 1
 status: published
 # author: "TCO Study Platform" # This field is not in the schema
 # objectives: 4 # This field is not in the schema - moved to meta export
 objectives:
-  - "Construct effective natural language queries in the Tanium console"
-  - "Master the 500+ built-in sensors and create custom sensors"
-  - "Manage saved questions lifecycle and sharing workflows"
-  - "Interpret query results and troubleshoot performance issues"
+  - 'Construct effective natural language queries in the Tanium console'
+  - 'Master the 500+ built-in sensors and create custom sensors'
+  - 'Manage saved questions lifecycle and sharing workflows'
+  - 'Interpret query results and troubleshoot performance issues'
 ---
 
 export const meta = {
   id: 'tco-asking-questions',
   title: 'Asking Questions',
   objectives: 4,
-  domainSlug: 'asking-questions'
+  domainSlug: 'asking-questions',
 };
 
 # Asking Questions: Foundation of Tanium Operations
@@ -93,10 +93,10 @@ Windows Server 2016 Standard
 <MicroQuizMDX
   question="What is the primary purpose of Tanium sensors?"
   options={[
-    "To monitor network traffic patterns",
-    "To collect real-time endpoint data and system information",
-    "To deploy software updates to endpoints",
-    "To scan for network vulnerabilities"
+    'To monitor network traffic patterns',
+    'To collect real-time endpoint data and system information',
+    'To deploy software updates to endpoints',
+    'To scan for network vulnerabilities',
   ]}
   correctAnswer="To collect real-time endpoint data and system information"
   explanation="Sensors in Tanium are the core mechanism for querying and collecting specific pieces of information from endpoints in real-time. They can gather system data, security information, hardware details, and application status across thousands of endpoints simultaneously."
@@ -171,10 +171,10 @@ DESKTOP-FINANCE01
 <MicroQuizMDX
   question="What is the correct lifecycle order for managing a saved question in Tanium?"
   options={[
-    "Save → Create → Validate → Share → Monitor",
-    "Create → Save → Validate → Monitor → Share",
-    "Create → Validate → Save → Share → Monitor",
-    "Validate → Create → Save → Share → Monitor"
+    'Save → Create → Validate → Share → Monitor',
+    'Create → Save → Validate → Monitor → Share',
+    'Create → Validate → Save → Share → Monitor',
+    'Validate → Create → Save → Share → Monitor',
   ]}
   correctAnswer="Create → Validate → Save → Share → Monitor"
   explanation="The correct lifecycle follows a logical progression: First, CREATE your query by constructing it. Then VALIDATE that it returns expected results. Next, SAVE it with descriptive metadata. Then SHARE it with appropriate user groups. Finally, continuously MONITOR its usage and performance to ensure it remains effective and efficient."
@@ -205,61 +205,61 @@ DESKTOP-FINANCE01
 ## Sensor Deep Dive: Practical Coverage and Examples
 
 <InfoBox title="Goal of this section">
-  Build practical intuition for which sensor to use, what it returns, and how to pair it
-  with filters and targets to answer real-world questions quickly.
+  Build practical intuition for which sensor to use, what it returns, and how to pair it with
+  filters and targets to answer real-world questions quickly.
 </InfoBox>
 
 ### System Information Sensors (15 with examples)
 
-1) Computer Name — Unique endpoint identifier
+1. Computer Name — Unique endpoint identifier
    - Example: Get Computer Name from all machines
    - Example: Get Computer Name from all machines where Computer Name contains "WKS-"
 
-2) Operating System — OS family and version
+2. Operating System — OS family and version
    - Example: Get Operating System from all machines
    - Example: Get Operating System from all machines where Operating System contains "Windows 11"
 
-3) OS Platform — Normalized platform categorization
+3. OS Platform — Normalized platform categorization
    - Example: Get OS Platform from all machines
    - Example: Get Computer Name, OS Platform from all machines where OS Platform = "Windows"
 
-4) Uptime — Time since last reboot
+4. Uptime — Time since last reboot
    - Example: Get Uptime from all machines
    - Example: Get Computer Name, Uptime from all machines where Uptime &gt; 7 days
 
-5) IP Address — Primary address(es)
+5. IP Address — Primary address(es)
    - Example: Get IP Address from all machines
    - Example: Get Computer Name, IP Address from all machines where IP Address contains "10.10."
 
-6) MAC Address — Hardware interface addresses
+6. MAC Address — Hardware interface addresses
    - Example: Get MAC Address from all machines
 
-7) Logged In User — Current interactive user
+7. Logged In User — Current interactive user
    - Example: Get Logged In User from all machines
    - Example: Get Computer Name from all machines where Logged In User contains "admin"
 
-8) Last Reboot — Timestamp of last restart
+8. Last Reboot — Timestamp of last restart
    - Example: Get Last Reboot from all machines where OS Platform = "Windows"
 
-9) Computer Serial Number — Hardware serial for inventory
+9. Computer Serial Number — Hardware serial for inventory
    - Example: Get Computer Serial Number from all machines
 
-10) BIOS Version — Firmware baseline
+10. BIOS Version — Firmware baseline
     - Example: Get BIOS Version from all machines where Manufacturer contains "Dell"
 
-11) Chassis Type — Form factor cues
+11. Chassis Type — Form factor cues
     - Example: Get Chassis Type from all machines where Chassis Type = "Laptop"
 
-12) Domain — AD domain membership
+12. Domain — AD domain membership
     - Example: Get Domain from all machines where Domain contains "CORP"
 
-13) Last Logged In User — Audit perspective
-    - Example: Get Computer Name, Last Logged In User from all machines where Last Logged In User contains "svc_"
+13. Last Logged In User — Audit perspective
+    - Example: Get Computer Name, Last Logged In User from all machines where Last Logged In User contains "svc\_"
 
-14) Time Zone — Regional context
+14. Time Zone — Regional context
     - Example: Get Computer Name, Time Zone from all machines where Time Zone contains "UTC"
 
-15) Tanium Client Version — Fleet hygiene
+15. Tanium Client Version — Fleet hygiene
     - Example: Get Tanium Client Version from all machines where Tanium Client Version < "7.5.0"
 
 <InfoBox title="Pattern">
@@ -269,49 +269,49 @@ DESKTOP-FINANCE01
 
 ### Security Sensors (15 with examples)
 
-1) Running Processes — Active processes on endpoint
+1. Running Processes — Active processes on endpoint
    - Example: Get Running Processes from all machines where Running Processes contains "powershell.exe"
 
-2) Services — Installed services and states
+2. Services — Installed services and states
    - Example: Get Services from all machines where Services contains "Tanium Client"
 
-3) Listening Ports — Network exposure baseline
+3. Listening Ports — Network exposure baseline
    - Example: Get Listening Ports from all machines where Listening Ports contains ":3389"
 
-4) Local Administrators — Privileged local users
+4. Local Administrators — Privileged local users
    - Example: Get Local Administrators from all machines where Local Administrators contains "domain admins"
 
-5) Installed Patches — Patch state snapshot
+5. Installed Patches — Patch state snapshot
    - Example: Get Installed Patches from all machines where Installed Patches contains "KB5030219"
 
-6) Antivirus Status — Protection baseline
+6. Antivirus Status — Protection baseline
    - Example: Get Antivirus Status from all machines where Antivirus Status contains "disabled"
 
-7) Firewall State — Host firewall posture
+7. Firewall State — Host firewall posture
    - Example: Get Firewall State from all machines where Firewall State = "Off"
 
-8) Last Logged On Users — Historical user access
+8. Last Logged On Users — Historical user access
    - Example: Get Last Logged On Users from all machines where Last Logged On Users contains "temp"
 
-9) Scheduled Tasks — Persistence vectors
+9. Scheduled Tasks — Persistence vectors
    - Example: Get Scheduled Tasks from all machines where Scheduled Tasks contains "\\x1f" (suspicious)
 
-10) Startup Items — Autostart entries
+10. Startup Items — Autostart entries
     - Example: Get Startup Items from all machines where Startup Items contains "unknown.exe"
 
-11) OS Build Number — Patch rung differentiation
+11. OS Build Number — Patch rung differentiation
     - Example: Get Computer Name, OS Build Number from all machines where OS Build Number < "22621"
 
-12) Disk Encryption Status — Data at rest protection
+12. Disk Encryption Status — Data at rest protection
     - Example: Get Disk Encryption Status from all machines where Disk Encryption Status != "Enabled"
 
-13) Secure Boot State — Firmware security
+13. Secure Boot State — Firmware security
     - Example: Get Secure Boot State from all machines where Secure Boot State != "On"
 
-14) Local Group Policy Settings — Hardened configurations
+14. Local Group Policy Settings — Hardened configurations
     - Example: Get Local Group Policy Settings from all machines where ...
 
-15) Browser Extensions — Potential risk surface
+15. Browser Extensions — Potential risk surface
     - Example: Get Browser Extensions from all machines where Browser Extensions contains "password"
 
 <InfoBox title="Triage tip">
@@ -321,84 +321,84 @@ DESKTOP-FINANCE01
 
 ### Performance Sensors (10 with examples)
 
-1) CPU Utilization — Point-in-time CPU load
+1. CPU Utilization — Point-in-time CPU load
    - Example: Get Computer Name, CPU Utilization from all machines where CPU Utilization &gt; 85
 
-2) Memory Utilization — Working set pressure
+2. Memory Utilization — Working set pressure
    - Example: Get Memory Utilization from all machines where Memory Utilization &gt; 90
 
-3) Disk Space — Free space health
+3. Disk Space — Free space health
    - Example: Get Disk Space from all machines where Disk Space &lt; 10 GB
 
-4) Disk Queue Length — Storage contention
+4. Disk Queue Length — Storage contention
    - Example: Get Disk Queue Length from all machines where Disk Queue Length &gt; 2
 
-5) Network Utilization — Egress/ingress pressure
+5. Network Utilization — Egress/ingress pressure
    - Example: Get Network Utilization from all machines where Network Utilization &gt; 80
 
-6) Top Processes by CPU — Noisy neighbors
+6. Top Processes by CPU — Noisy neighbors
    - Example: Get Top Processes by CPU from all machines where OS Platform = "Windows"
 
-7) Top Processes by Memory — Memory hog identification
+7. Top Processes by Memory — Memory hog identification
    - Example: Get Top Processes by Memory from all machines where Memory Utilization &gt; 85
 
-8) Page File Usage — Virtual memory pressure
+8. Page File Usage — Virtual memory pressure
    - Example: Get Page File Usage from all machines where Page File Usage &gt; 75
 
-9) System Uptime Buckets — Correlate with leaks
+9. System Uptime Buckets — Correlate with leaks
    - Example: Get System Uptime Buckets from all machines where Uptime &gt; 14 days
 
-10) GPU Utilization — Graphics workloads
+10. GPU Utilization — Graphics workloads
     - Example: Get GPU Utilization from all machines where GPU Utilization &gt; 70
 
 ### Hardware/Inventory Sensors (10 with examples)
 
-1) Manufacturer
+1. Manufacturer
    - Example: Get Manufacturer from all machines where Manufacturer = "Dell"
    - PowerShell: `Get-CimInstance Win32_ComputerSystem | Select-Object Manufacturer`
    - Performance: Fast (WMI cache friendly)
 
-2) Model
+2. Model
    - Example: Get Computer Name, Model from all machines where Model contains "Precision"
    - PowerShell: `Get-CimInstance Win32_ComputerSystem | Select-Object Model`
    - Use case: Asset management, driver compatibility
 
-3) CPU Model
+3. CPU Model
    - Example: Get CPU Model from all machines where CPU Model contains "i7"
    - PowerShell: `Get-CimInstance Win32_Processor | Select-Object Name`
    - Performance tip: Single query for CPU inventory vs per-core details
 
-4) Physical Memory
+4. Physical Memory
    - Example: Get Physical Memory from all machines where Physical Memory &lt; 8 GB
    - PowerShell: `Get-CimInstance Win32_PhysicalMemory | Measure-Object Capacity -Sum | ForEach-Object {[math]::Round($_.Sum/1GB,2)}`
    - Threshold alerts: &lt;8GB (low), &lt;16GB (medium), 32GB+ (high-spec)
 
-5) Disk Model / Size
+5. Disk Model / Size
    - Example: Get Disk Model from all machines where Disk Model contains "SSD"
    - PowerShell: `Get-CimInstance Win32_DiskDrive | Select-Object Model, Size`
    - SSD vs HDD performance impact analysis
 
-6) Network Adapter
+6. Network Adapter
    - Example: Get Network Adapter from all machines where Network Adapter contains "Intel"
    - PowerShell: `Get-CimInstance Win32_NetworkAdapter | Where-Object {$_.PhysicalAdapter} | Select-Object Name`
    - Driver compatibility and security assessments
 
-7) Battery Health (laptops)
+7. Battery Health (laptops)
    - Example: Get Battery Health from all machines where Battery Health &lt; 70
    - PowerShell: `Get-CimInstance Win32_Battery | Select-Object EstimatedChargeRemaining`
    - Mobile workforce health monitoring
 
-8) Display Adapter
+8. Display Adapter
    - Example: Get Display Adapter from all machines where Display Adapter contains "NVIDIA"
    - PowerShell: `Get-CimInstance Win32_VideoController | Select-Object Name`
    - Graphics workload optimization
 
-9) Docking State (where available)
+9. Docking State (where available)
    - Example: Get Docking State from laptops where Docking State = "Docked"
    - PowerShell: Custom sensor based on USB/Thunderbolt detection
    - Hybrid work policy compliance
 
-10) Asset Tag
+10. Asset Tag
     - Example: Get Asset Tag from all machines where Asset Tag contains "NYC"
     - PowerShell: `Get-CimInstance Win32_SystemEnclosure | Select-Object SMBIOSAssetTag`
     - Physical inventory correlation
@@ -406,8 +406,9 @@ DESKTOP-FINANCE01
 ### Application and Software Sensors (15 with advanced examples)
 
 <InfoBox title="Software Inventory Strategy">
-  Application sensors are critical for license compliance, security assessments, and standardization.
-  Use combination queries to correlate versions, installations, and security posture.
+  Application sensors are critical for license compliance, security assessments, and
+  standardization. Use combination queries to correlate versions, installations, and security
+  posture.
 </InfoBox>
 
 <QueryPlayground
@@ -449,85 +450,85 @@ LAPTOP-SALES11 - Windows 11 Home
   difficulty="advanced"
 />
 
-1) Installed Applications
+1. Installed Applications
    - Basic: Get Installed Applications from all machines where Installed Applications contains "Adobe"
    - Advanced: Get Computer Name, Installed Applications from all machines where Installed Applications contains "Adobe" AND Installed Applications contains "2023"
    - PowerShell: `Get-ItemProperty HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\* | Select-Object DisplayName, DisplayVersion`
    - Performance: Expensive on large endpoints, constrain by OS Platform first
 
-2) Running Applications
+2. Running Applications
    - Basic: Get Running Applications from all machines where Running Applications contains "chrome.exe"
    - Advanced: Get Computer Name, Running Applications from all machines where Running Applications contains "chrome" AND NOT Running Applications contains "work profile"
    - PowerShell: `Get-Process | Where-Object {$_.MainWindowTitle} | Select-Object ProcessName, MainWindowTitle`
    - Security use: Detect unauthorized software execution
 
-3) Application Versions
+3. Application Versions
    - Basic: Get Application Versions from all machines where Application Versions contains "Office"
-   - Advanced: Get Computer Name, Application Versions from all machines where Application Versions matches "Office.*365" AND Application Versions contains "16.0"
+   - Advanced: Get Computer Name, Application Versions from all machines where Application Versions matches "Office.\*365" AND Application Versions contains "16.0"
    - Regex pattern: `"^Office.*16\.0\.([0-9]{4,5})\."`
    - License compliance tracking
 
-4) Browser Extensions
+4. Browser Extensions
    - Basic: Get Browser Extensions from all machines where Browser Extensions contains "password"
    - Advanced: Get Computer Name, Browser Extensions from all machines where Browser Extensions contains "ad blocker" OR Browser Extensions contains "VPN"
    - PowerShell Chrome: `Get-ChildItem "$env:USERPROFILE\AppData\Local\Google\Chrome\User Data\Default\Extensions"`
    - Security risk assessment
 
-5) Startup Programs
+5. Startup Programs
    - Basic: Get Startup Programs from all machines where Startup Programs contains "unknown"
    - Advanced: Get Computer Name, Startup Programs from all machines where Startup Programs contains ".exe" AND NOT Startup Programs contains "Microsoft"
    - PowerShell: `Get-CimInstance Win32_StartupCommand | Select-Object Name, Command, Location`
    - Persistence analysis
 
-6) Windows Features
+6. Windows Features
    - Example: Get Windows Features from all machines where Windows Features contains "Hyper-V"
    - PowerShell: `Get-WindowsOptionalFeature -Online | Where-Object {$_.State -eq "Enabled"} | Select-Object FeatureName`
    - Compliance verification
 
-7) Installed Patches
+7. Installed Patches
    - Basic: Get Installed Patches from all machines where Installed Patches contains "KB5030219"
    - Advanced: Get Computer Name, Installed Patches from all machines where NOT Installed Patches contains "KB5030219" AND Operating System contains "Windows 11"
    - PowerShell: `Get-HotFix | Select-Object HotFixID, InstalledOn | Sort-Object InstalledOn -Descending`
    - Patch compliance gaps
 
-8) Software Certificates
+8. Software Certificates
    - Example: Get Software Certificates from all machines where Software Certificates contains "Expired"
    - PowerShell: `Get-ChildItem Cert:\LocalMachine\My | Where-Object {$_.NotAfter -lt (Get-Date)} | Select-Object Subject, NotAfter`
    - PKI hygiene monitoring
 
-9) Browser Homepage
+9. Browser Homepage
    - Example: Get Browser Homepage from all machines where Browser Homepage contains "search-redirect"
    - Security indicator for browser hijacking
    - PowerShell: Registry-based detection for default browsers
 
-10) Default Applications
+10. Default Applications
     - Example: Get Default Applications from all machines where Default Applications contains "unknown"
     - PowerShell: `Get-ItemProperty HKCU:\Software\Microsoft\Windows\Shell\Associations\UrlAssociations\http\UserChoice`
     - Configuration drift detection
 
-11) Application Dependencies
+11. Application Dependencies
     - Example: Get Application Dependencies from all machines where Application Dependencies contains ".NET Framework 4.8"
     - Prerequisite validation for software deployment
     - PowerShell: Registry + file system dependency checks
 
-12) Java Versions
+12. Java Versions
     - Basic: Get Java Versions from all machines where Java Versions contains "8"
     - Advanced: Get Computer Name, Java Versions from all machines where Java Versions matches "1\.[8-9]" AND Java Versions contains "security"
     - Critical for security vulnerability management
     - PowerShell: `Get-ItemProperty "HKLM:\SOFTWARE\JavaSoft\Java Runtime Environment" | Select-Object CurrentVersion`
 
-13) PDF Readers
+13. PDF Readers
     - Example: Get PDF Readers from all machines where PDF Readers contains "Adobe Reader"
     - PowerShell: File association and default application detection
     - Security risk from vulnerable PDF software
 
-14) Antivirus Products
+14. Antivirus Products
     - Basic: Get Antivirus Products from all machines where Antivirus Products contains "Windows Defender"
     - Advanced: Get Computer Name, Antivirus Products from all machines where Antivirus Products contains "disabled" OR Antivirus Products contains "expired"
     - PowerShell: `Get-CimInstance -Namespace root\SecurityCenter2 -ClassName AntiVirusProduct`
     - Security posture validation
 
-15) PowerShell Execution Policy
+15. PowerShell Execution Policy
     - Example: Get PowerShell Execution Policy from all machines where PowerShell Execution Policy = "Unrestricted"
     - PowerShell: `Get-ExecutionPolicy -List | Select-Object Scope, ExecutionPolicy`
     - Security configuration baseline
@@ -535,116 +536,116 @@ LAPTOP-SALES11 - Windows 11 Home
 ### Advanced Network and Security Sensors (20 comprehensive examples)
 
 <InfoBox title="Security Assessment Focus">
-  Network and security sensors provide the foundation for threat hunting, compliance validation,
-  and incident response. Combine multiple sensors for comprehensive security posture assessment.
+  Network and security sensors provide the foundation for threat hunting, compliance validation, and
+  incident response. Combine multiple sensors for comprehensive security posture assessment.
 </InfoBox>
 
-1) Network Connections
+1. Network Connections
    - Basic: Get Network Connections from all machines where Network Connections contains ":443"
    - Advanced: Get Computer Name, Network Connections from all machines where Network Connections contains "ESTABLISHED" AND Network Connections contains "suspicious-domain.com"
    - PowerShell: `Get-NetTCPConnection | Where-Object {$_.State -eq "Established"} | Select-Object LocalAddress, LocalPort, RemoteAddress, RemotePort`
    - Threat hunting for C2 communications
 
-2) DNS Cache
+2. DNS Cache
    - Basic: Get DNS Cache from all machines where DNS Cache contains "malicious-domain"
    - Advanced: Get Computer Name, DNS Cache from all machines where DNS Cache contains ".tk" OR DNS Cache contains ".ml"
    - PowerShell: `Get-DnsClientCache | Select-Object Entry, Data`
    - Malware communication analysis
 
-3) ARP Table
+3. ARP Table
    - Example: Get ARP Table from all machines where ARP Table contains "incomplete"
    - PowerShell: `Get-NetNeighbor | Select-Object IPAddress, LinkLayerAddress, State`
    - Network reconnaissance detection
 
-4) Routing Table
+4. Routing Table
    - Example: Get Routing Table from all machines where Routing Table contains "0.0.0.0"
    - PowerShell: `Get-NetRoute | Select-Object DestinationPrefix, NextHop, InterfaceAlias`
    - Network configuration analysis
 
-5) Open Files
+5. Open Files
    - Basic: Get Open Files from all machines where Open Files contains "temp"
    - Advanced: Get Computer Name, Open Files from all machines where Open Files contains "ransomware" OR Open Files contains ".encrypted"
    - PowerShell: `Get-SmbOpenFile | Select-Object Path, ClientUserName`
    - File access monitoring
 
-6) Active Directory Information
+6. Active Directory Information
    - Example: Get Active Directory Information from all machines where Active Directory Information contains "CORP.LOCAL"
    - PowerShell: `Get-ComputerInfo | Select-Object CsDomain, CsDomainRole`
    - Domain membership validation
 
-7) Group Policy Results
+7. Group Policy Results
    - Example: Get Group Policy Results from all machines where Group Policy Results contains "not applied"
    - PowerShell: `gpresult /r /scope:computer`
    - Policy compliance verification
 
-8) Windows Event Logs
+8. Windows Event Logs
    - Basic: Get Windows Event Logs from all machines where Windows Event Logs contains "Error"
    - Advanced: Get Computer Name, Windows Event Logs from all machines where Windows Event Logs contains "Event ID 4625" AND Windows Event Logs contains "last 24 hours"
    - PowerShell: `Get-WinEvent -FilterHashtable @{LogName='Security'; ID=4625; StartTime=(Get-Date).AddDays(-1)}`
    - Security event correlation
 
-9) Registry Keys
+9. Registry Keys
    - Basic: Get Registry Keys from all machines where Registry Keys contains "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run"
    - Advanced: Get Computer Name, Registry Keys from all machines where Registry Keys contains "persistence" AND Registry Keys contains "unknown.exe"
    - PowerShell: `Get-ItemProperty "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Run"`
    - Persistence mechanism detection
 
-10) File Hashes
+10. File Hashes
     - Basic: Get File Hashes from all machines where File Hashes contains "suspicious.exe"
     - Advanced: Get Computer Name, File Hashes from all machines where File Hashes contains "MD5" AND File Hashes contains "known-malware-hash"
     - PowerShell: `Get-FileHash -Path "C:\suspected\file.exe" -Algorithm SHA256`
     - Malware identification
 
-11) USB Device History
+11. USB Device History
     - Example: Get USB Device History from all machines where USB Device History contains "unknown device"
     - PowerShell: `Get-ItemProperty "HKLM:\SYSTEM\CurrentControlSet\Enum\USBSTOR\*"`
     - Data exfiltration risk assessment
 
-12) Shared Folders
+12. Shared Folders
     - Basic: Get Shared Folders from all machines where Shared Folders contains "C$"
     - Advanced: Get Computer Name, Shared Folders from all machines where Shared Folders contains "Everyone" AND Shared Folders contains "Full Control"
     - PowerShell: `Get-SmbShare | Select-Object Name, Path, Description`
     - Exposure risk analysis
 
-13) WMI Event Consumers
+13. WMI Event Consumers
     - Example: Get WMI Event Consumers from all machines where WMI Event Consumers contains "suspicious"
     - PowerShell: `Get-WmiObject -Namespace root\subscription -Class __EventConsumer`
     - Advanced persistence detection
 
-14) Certificate Store
+14. Certificate Store
     - Basic: Get Certificate Store from all machines where Certificate Store contains "expired"
     - Advanced: Get Computer Name, Certificate Store from all machines where Certificate Store contains "Self-Signed" AND Certificate Store contains "Root CA"
     - PowerShell: `Get-ChildItem Cert:\LocalMachine\Root | Where-Object {$_.NotAfter -lt (Get-Date)}`
     - PKI security assessment
 
-15) Network Adapters
+15. Network Adapters
     - Example: Get Network Adapters from all machines where Network Adapters contains "promiscuous mode"
     - PowerShell: `Get-NetAdapter | Select-Object Name, InterfaceDescription, PromiscuousMode`
     - Network sniffing detection
 
-16) Windows Firewall Rules
+16. Windows Firewall Rules
     - Basic: Get Windows Firewall Rules from all machines where Windows Firewall Rules contains "allow all"
     - Advanced: Get Computer Name, Windows Firewall Rules from all machines where Windows Firewall Rules contains "inbound" AND Windows Firewall Rules contains "any port"
     - PowerShell: `Get-NetFirewallRule | Where-Object {$_.Enabled -eq "True"} | Select-Object DisplayName, Direction, Action`
     - Firewall policy compliance
 
-17) Alternate Data Streams
+17. Alternate Data Streams
     - Example: Get Alternate Data Streams from all machines where Alternate Data Streams contains "Zone.Identifier"
     - PowerShell: `Get-Item "C:\suspicious\*" -Stream *`
     - Hidden data detection
 
-18) PowerShell History
+18. PowerShell History
     - Basic: Get PowerShell History from all machines where PowerShell History contains "Invoke-Expression"
     - Advanced: Get Computer Name, PowerShell History from all machines where PowerShell History contains "DownloadString" OR PowerShell History contains "EncodedCommand"
     - PowerShell: `Get-Content "$env:USERPROFILE\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt"`
     - Attack technique detection
 
-19) LDAP Queries
+19. LDAP Queries
     - Example: Get LDAP Queries from all machines where LDAP Queries contains "admin"
     - PowerShell: Custom sensor using DirectorySearcher
     - Active Directory reconnaissance
 
-20) System Integrity
+20. System Integrity
     - Example: Get System Integrity from all machines where System Integrity contains "corrupted"
     - PowerShell: `sfc /verifyonly` results parsing
     - System tampering detection
@@ -652,8 +653,8 @@ LAPTOP-SALES11 - Windows 11 Home
 ### Performance and Resource Monitoring Sensors (15 detailed examples)
 
 <InfoBox title="Performance Optimization Strategy">
-  Performance sensors help identify bottlenecks, plan capacity, and maintain system health.
-  Use trending data and threshold alerts for proactive management.
+  Performance sensors help identify bottlenecks, plan capacity, and maintain system health. Use
+  trending data and threshold alerts for proactive management.
 </InfoBox>
 
 <QueryPlayground
@@ -682,82 +683,82 @@ WORKSTATION-DEV08 - C:\ 2.3GB free
   difficulty="intermediate"
 />
 
-1) CPU Usage by Process
+1. CPU Usage by Process
    - Basic: Get CPU Usage by Process from all machines where CPU Usage by Process &gt; 80
    - Advanced: Get Computer Name, CPU Usage by Process from all machines where CPU Usage by Process contains "chrome.exe" AND CPU Usage by Process &gt; 50
    - PowerShell: `Get-Process | Sort-Object CPU -Descending | Select-Object -First 5 ProcessName, CPU`
    - Performance bottleneck identification
 
-2) Memory Usage by Process
+2. Memory Usage by Process
    - Basic: Get Memory Usage by Process from all machines where Memory Usage by Process &gt; 1 GB
    - Advanced: Get Computer Name, Memory Usage by Process from all machines where Memory Usage by Process contains "Unknown" AND Memory Usage by Process &gt; 500 MB
    - PowerShell: `Get-Process | Sort-Object WorkingSet -Descending | Select-Object ProcessName, @{N='MemoryMB';E={[math]::Round($_.WorkingSet/1MB,2)}}`
    - Memory leak detection
 
-3) Disk I/O Statistics
+3. Disk I/O Statistics
    - Example: Get Disk I/O Statistics from all machines where Disk I/O Statistics &gt; 100 IOPS
    - PowerShell: `Get-Counter "\PhysicalDisk(*)\Disk Reads/sec", "\PhysicalDisk(*)\Disk Writes/sec"`
    - Storage performance analysis
 
-4) Network Bandwidth Usage
+4. Network Bandwidth Usage
    - Basic: Get Network Bandwidth Usage from all machines where Network Bandwidth Usage &gt; 80%
    - Advanced: Get Computer Name, Network Bandwidth Usage from all machines where Network Bandwidth Usage &gt; 50% AND Uptime &lt; 1 day
    - PowerShell: `Get-Counter "\Network Interface(*)\Bytes Total/sec"`
    - Network capacity planning
 
-5) Page File Usage
+5. Page File Usage
    - Example: Get Page File Usage from all machines where Page File Usage &gt; 75%
    - PowerShell: `Get-Counter "\Paging File(_Total)\% Usage"`
    - Virtual memory optimization
 
-6) Handle Count
+6. Handle Count
    - Example: Get Handle Count from all machines where Handle Count &gt; 10000
    - PowerShell: `Get-Process | Select-Object ProcessName, HandleCount | Sort-Object HandleCount -Descending`
    - Resource leak detection
 
-7) Thread Count
+7. Thread Count
    - Example: Get Thread Count from all machines where Thread Count &gt; 1000
    - PowerShell: `Get-Process | Select-Object ProcessName, Threads | Sort-Object Threads -Descending`
    - Application scalability assessment
 
-8) System Cache
+8. System Cache
    - Example: Get System Cache from all machines where System Cache &lt; 1 GB
    - PowerShell: `Get-Counter "\Memory\Cache Bytes"`
    - Memory utilization optimization
 
-9) Interrupt Time
+9. Interrupt Time
    - Example: Get Interrupt Time from all machines where Interrupt Time &gt; 10%
    - PowerShell: `Get-Counter "\Processor(*)\% Interrupt Time"`
    - Hardware and driver performance
 
-10) Context Switches
+10. Context Switches
     - Example: Get Context Switches from all machines where Context Switches &gt; 5000
     - PowerShell: `Get-Counter "\System\Context Switches/sec"`
     - System efficiency metrics
 
-11) Disk Queue Length
+11. Disk Queue Length
     - Basic: Get Disk Queue Length from all machines where Disk Queue Length &gt; 2
     - Advanced: Get Computer Name, Disk Queue Length from all machines where Disk Queue Length &gt; 1 AND Disk Space &lt; 20%
     - PowerShell: `Get-Counter "\PhysicalDisk(*)\Current Disk Queue Length"`
     - Storage bottleneck identification
 
-12) Process Creation Rate
+12. Process Creation Rate
     - Example: Get Process Creation Rate from all machines where Process Creation Rate &gt; 100
     - PowerShell: `Get-Counter "\System\Processes"`
     - System activity monitoring
 
-13) Registry Operations
+13. Registry Operations
     - Example: Get Registry Operations from all machines where Registry Operations &gt; 1000
     - PowerShell: `Get-Counter "\Registry\Registry Operations/sec"`
     - Application behavior analysis
 
-14) GPU Usage
+14. GPU Usage
     - Basic: Get GPU Usage from all machines where GPU Usage &gt; 80%
     - Advanced: Get Computer Name, GPU Usage from all machines where GPU Usage &gt; 50% AND GPU Usage contains "NVIDIA"
     - PowerShell: `nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader,nounits`
     - Graphics workload optimization
 
-15) Power Management
+15. Power Management
     - Example: Get Power Management from all machines where Power Management contains "High Performance"
     - PowerShell: `powercfg /getactivescheme`
     - Energy efficiency optimization
@@ -767,98 +768,100 @@ WORKSTATION-DEV08 - C:\ 2.3GB free
 ## Query Patterns Library: From Basics to Advanced
 
 <InfoBox title="How to use">
-  Copy these patterns, replace placeholders with your environment data, and run on a small
-  cohort first. Then scale gradually.
+  Copy these patterns, replace placeholders with your environment data, and run on a small cohort
+  first. Then scale gradually.
 </InfoBox>
 
 ### Basic Patterns (10)
 
-1) Inventory by OS
+1. Inventory by OS
    - Get Operating System from all machines
 
-2) Hostname search
+2. Hostname search
    - Get Computer Name from all machines where Computer Name contains "WKS-"
 
-3) IP subnet filter
+3. IP subnet filter
    - Get Computer Name, IP Address from all machines where IP Address contains "10.20."
 
-4) Uptime check
+4. Uptime check
    - Get Computer Name, Uptime from all machines where Uptime &gt; 7 days
 
-5) Logged in user snapshot
+5. Logged in user snapshot
    - Get Computer Name, Logged In User from all machines
 
-6) Low disk space
+6. Low disk space
    - Get Computer Name, Disk Space from all machines where Disk Space &lt; 10 GB
 
-7) Antivirus disabled
+7. Antivirus disabled
    - Get Computer Name, Antivirus Status from all machines where Antivirus Status contains "disabled"
 
-8) RDP exposure
+8. RDP exposure
    - Get Computer Name, Listening Ports from all machines where Listening Ports contains ":3389"
 
-9) Browser extension census
+9. Browser extension census
    - Get Browser Extensions from all machines
 
-10) Client version hygiene
-   - Get Tanium Client Version from all machines where Tanium Client Version < "7.5.0"
+10. Client version hygiene
+
+- Get Tanium Client Version from all machines where Tanium Client Version < "7.5.0"
 
 ### Advanced Patterns (10)
 
-1) Nested logic for patch risk
+1. Nested logic for patch risk
    - Get Computer Name from all machines where Operating System contains "Windows" AND (Installed Patches contains "KB50" OR OS Build Number < "22621")
 
-2) Exclude test/staging
+2. Exclude test/staging
    - Get Computer Name from all machines where NOT Computer Name contains "-TST-" AND NOT Computer Name contains "-DEV-"
 
-3) Service drift
+3. Service drift
    - Get Services from all machines where Services contains "AgentX" AND NOT Services contains "Running"
 
-4) Rogue processes by publisher gap
+4. Rogue processes by publisher gap
    - Get Running Processes from all machines where Running Processes contains "unknown.exe"
 
-5) Targeted by business unit and subnet
+5. Targeted by business unit and subnet
    - Get Computer Name from all machines where (Domain contains "CORP" AND IP Address contains "10.50.")
 
-6) Version pattern with regex
+6. Version pattern with regex
    - Get Application Versions from all machines where Application Versions matches "^10\\.(2[2-9]|[3-9][0-9])"
 
-7) Performance triage cohort
+7. Performance triage cohort
    - Get Computer Name from all machines where CPU Utilization &gt; 85 OR Memory Utilization &gt; 90
 
-8) Encryption coverage exception
+8. Encryption coverage exception
    - Get Computer Name from all machines where OS Platform = "Windows" AND Disk Encryption Status != "Enabled"
 
-9) Least-privileged admin discovery
+9. Least-privileged admin discovery
    - Get Local Administrators from all machines where Local Administrators contains "domain admins"
 
-10) Patch pilot program
-   - Get Computer Name from all machines where Model contains "Precision" AND OS Build Number < "22621"
+10. Patch pilot program
+
+- Get Computer Name from all machines where Model contains "Precision" AND OS Build Number < "22621"
 
 ### Performance Optimization Patterns (5)
 
-1) **Targeted Query with Indexed Sensors**
+1. **Targeted Query with Indexed Sensors**
    - Query: `Get Computer Name and Last Reboot Time from all machines where Operating System containing "Server 2022"`
    - Optimization: Uses indexed sensors for faster results
    - Performance: Returns in &lt;2 seconds for 50,000 endpoints
 
-2) **Efficient Date Range Filtering**
+2. **Efficient Date Range Filtering**
    - Query: `Get Installed Applications from all machines where Last Logged In User != "No User" and Days Since Last Reboot &lt; 7`
    - Optimization: Filters on indexed date fields first
    - Performance: 70% faster than string comparisons
 
-3) **Sensor Caching Strategy**
+3. **Sensor Caching Strategy**
    - Query: `Get CPU Usage and Memory Usage from all machines (sensor cache max age:15 minutes)`
    - Optimization: Leverages cached sensor results
    - Performance: Reduces endpoint impact by 90%
 
-4) **Progressive Question Refinement**
+4. **Progressive Question Refinement**
    - Stage 1: `Get Operating System from all machines`
    - Stage 2: `Get Installed Applications from all machines where Operating System containing "Windows 10"`
    - Optimization: Use results from Stage 1 to create targeted Stage 2
    - Performance: Reduces total query time by 60%
 
-5) **Compound Sensor Optimization**
+5. **Compound Sensor Optimization**
    - Query: `Get Computer Name and {CPU Details[CPU Name,CPU Architecture,CPU Cores]} from all machines`
    - Optimization: Retrieves multiple related values in single sensor execution
    - Performance: 3x faster than separate queries
@@ -872,27 +875,33 @@ WORKSTATION-DEV08 - C:\ 2.3GB free
 #### 1. Computer Name and Identity Sensors
 
 **Computer Name**
+
 ```tanium
 Get Computer Name from all machines
 ```
+
 - **Purpose**: Primary endpoint identifier
 - **Performance**: &lt;0.1ms execution time
 - **Use Cases**: Asset tracking, naming convention compliance, domain membership validation
 - **Pro Tip**: Combine with Domain Name for full FQDN
 
 **Computer ID**
+
 ```tanium
 Get Computer ID from all machines
 ```
+
 - **Purpose**: Unique Tanium identifier (never changes)
 - **Performance**: Cached, instant return
 - **Use Cases**: Tracking renamed machines, database correlations
 - **Note**: Survives OS reinstalls if Tanium database preserved
 
 **Domain Name**
+
 ```tanium
 Get Domain Name from all machines
 ```
+
 - **Purpose**: Active Directory domain membership
 - **Performance**: &lt;0.5ms execution time
 - **Use Cases**: Multi-domain environments, workgroup vs domain analysis
@@ -901,36 +910,44 @@ Get Domain Name from all machines
 #### 2. Operating System Sensors
 
 **Operating System**
+
 ```tanium
 Get Operating System from all machines
 ```
+
 - **Purpose**: Full OS identification string
 - **Performance**: Cached on client
 - **Format**: "Microsoft Windows Server 2022 Datacenter"
 - **Parsing Tips**: Use "containing" for version matching
 
 **OS Platform**
+
 ```tanium
 Get OS Platform from all machines
 ```
+
 - **Purpose**: High-level OS family
 - **Values**: Windows, Linux, Mac, AIX, Solaris
 - **Performance**: Instant from cache
 - **Use Case**: Cross-platform query filtering
 
 **OS Architecture**
+
 ```tanium
 Get OS Architecture from all machines where OS Platform = "Windows"
 ```
+
 - **Purpose**: 32-bit vs 64-bit determination
 - **Values**: x64, x86, ARM64
 - **Critical for**: Software deployment, driver compatibility
 - **Registry Key**: `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment\PROCESSOR_ARCHITECTURE`
 
 **Windows Build Number**
+
 ```tanium
 Get Windows Build Number from all machines where OS Platform = "Windows"
 ```
+
 - **Purpose**: Precise Windows version tracking
 - **Examples**:
   - 22621 = Windows 11 22H2
@@ -941,9 +958,11 @@ Get Windows Build Number from all machines where OS Platform = "Windows"
 #### 3. Hardware Inventory Sensors
 
 **CPU Details**
+
 ```tanium
 Get CPU Details[CPU Name, CPU Architecture, CPU Cores, CPU Logical Processors] from all machines
 ```
+
 - **Purpose**: Complete processor inventory
 - **Performance Impact**: Low (&lt;5ms)
 - **Data Points**:
@@ -954,27 +973,33 @@ Get CPU Details[CPU Name, CPU Architecture, CPU Cores, CPU Logical Processors] f
 - **Capacity Planning**: Identify under-powered systems
 
 **Total Memory**
+
 ```tanium
 Get Total Memory from all machines
 ```
+
 - **Purpose**: RAM capacity in MB
 - **Performance**: Instant from WMI cache
 - **Filtering Example**: `where Total Memory &lt; 8192` (less than 8GB)
 - **WMI Class**: Win32_ComputerSystem.TotalPhysicalMemory
 
 **Disk Free Space**
+
 ```tanium
 Get Disk Free Space from all machines
 ```
+
 - **Purpose**: Available storage per volume
 - **Format**: "C: 45.2 GB, D: 123.5 GB"
 - **Alert Query**: `where Disk Free Space containing "C:" and Disk Free Space < "10 GB"`
 - **PowerShell**: `Get-WmiObject Win32_LogicalDisk | Select DeviceID, FreeSpace`
 
 **Model**
+
 ```tanium
 Get Model from all machines
 ```
+
 - **Purpose**: Hardware model identification
 - **Examples**: "Dell OptiPlex 7090", "VMware Virtual Platform"
 - **Virtual Detection**: `where Model containing "Virtual" or Model containing "VMware"`
@@ -983,27 +1008,33 @@ Get Model from all machines
 #### 4. Network Configuration Sensors
 
 **IP Address**
+
 ```tanium
 Get IP Address from all machines
 ```
+
 - **Purpose**: All configured IP addresses
 - **Format**: Comma-separated list
 - **Filtering**: `where IP Address containing "192.168"`
 - **Note**: Returns all interfaces, including virtual
 
 **MAC Address**
+
 ```tanium
 Get MAC Address from all machines
 ```
+
 - **Purpose**: Physical network adapter identification
 - **Format**: "00:50:56:C0:00:08"
 - **Wake-on-LAN**: Required for remote power management
 - **Duplicate Detection**: `Get MAC Address and Computer Name from all machines | group by MAC Address`
 
 **Network Interfaces**
+
 ```tanium
 Get Network Interfaces from all machines
 ```
+
 - **Purpose**: Complete NIC inventory
 - **Details**: Name, Status, Speed, IP Configuration
 - **Troubleshooting**: Identify disabled or misconfigured adapters
@@ -1014,27 +1045,33 @@ Get Network Interfaces from all machines
 #### 1. User and Access Control Sensors
 
 **Logged In Users**
+
 ```tanium
 Get Logged In Users from all machines
 ```
+
 - **Purpose**: Active user sessions
 - **Format**: "DOMAIN\username (Console/RDP)"
 - **Security Use**: Detect unauthorized access
 - **Query Suspicious**: `where Logged In Users containing "Administrator"`
 
 **Local Administrators**
+
 ```tanium
 Get Local Administrators from all machines
 ```
+
 - **Purpose**: Local admin group membership
 - **Compliance Check**: `where Local Administrators not containing "Domain Admins"`
 - **Least Privilege**: Identify over-privileged accounts
 - **PowerShell**: `Get-LocalGroupMember -Group "Administrators"`
 
 **User Rights Assignments**
+
 ```tanium
 Get User Rights[SeDebugPrivilege, SeBackupPrivilege, SeTakeOwnershipPrivilege] from all machines
 ```
+
 - **Purpose**: Advanced privilege audit
 - **Critical Rights**:
   - SeDebugPrivilege: Can debug any process
@@ -1045,27 +1082,33 @@ Get User Rights[SeDebugPrivilege, SeBackupPrivilege, SeTakeOwnershipPrivilege] f
 #### 2. Process and Service Monitoring
 
 **Running Processes**
+
 ```tanium
 Get Running Processes from all machines
 ```
+
 - **Purpose**: Complete process listing
 - **Format**: "process.exe (PID: 1234)"
 - **Threat Hunting**: `where Running Processes containing "powershell.exe -enc"`
 - **Performance**: Can be resource intensive on busy systems
 
 **Services**
+
 ```tanium
 Get Services from all machines
 ```
+
 - **Purpose**: Windows service inventory
 - **Format**: "ServiceName (Status: Running/Stopped)"
 - **Security Check**: `where Services containing "TeamViewer" and Services containing "Running"`
 - **Compliance**: Identify unauthorized remote access tools
 
 **Listening Ports**
+
 ```tanium
 Get Listening Ports from all machines
 ```
+
 - **Purpose**: Open port detection
 - **Format**: "TCP:3389, TCP:445, UDP:53"
 - **Security Alert**: `where Listening Ports containing "TCP:4444"` (common backdoor)
@@ -1074,27 +1117,33 @@ Get Listening Ports from all machines
 #### 3. Security Software Status
 
 **Anti-Virus Enabled**
+
 ```tanium
 Get Anti-Virus Enabled from all machines
 ```
+
 - **Purpose**: AV status verification
 - **Values**: Yes, No, Unknown
 - **Compliance Query**: `where Anti-Virus Enabled != "Yes"`
 - **Note**: Checks Windows Security Center registration
 
 **Windows Firewall Status**
+
 ```tanium
 Get Windows Firewall Status from all machines where OS Platform = "Windows"
 ```
+
 - **Purpose**: Firewall state per profile
 - **Format**: "Domain: On, Private: On, Public: On"
 - **Alert Query**: `where Windows Firewall Status containing "Off"`
 - **PowerShell**: `Get-NetFirewallProfile | Select Name, Enabled`
 
 **BitLocker Status**
+
 ```tanium
 Get BitLocker Status from all machines where OS Platform = "Windows"
 ```
+
 - **Purpose**: Disk encryption validation
 - **Values**: "Encrypted", "Not Encrypted", "Encryption In Progress"
 - **Compliance**: `where BitLocker Status != "Encrypted"`
@@ -1105,9 +1154,11 @@ Get BitLocker Status from all machines where OS Platform = "Windows"
 #### 1. Resource Utilization
 
 **CPU Usage**
+
 ```tanium
 Get CPU Usage from all machines
 ```
+
 - **Purpose**: Current processor utilization
 - **Format**: Percentage (0-100)
 - **Alert Threshold**: `where CPU Usage &gt; 90`
@@ -1115,18 +1166,22 @@ Get CPU Usage from all machines
 - **WMI**: Win32_PerfFormattedData_PerfOS_Processor
 
 **Memory Usage**
+
 ```tanium
 Get Memory Usage from all machines
 ```
+
 - **Purpose**: RAM utilization percentage
-- **Calculation**: (Used Memory / Total Memory) * 100
+- **Calculation**: (Used Memory / Total Memory) \* 100
 - **Alert Query**: `where Memory Usage &gt; 85`
 - **Troubleshooting**: Combine with process memory consumers
 
 **Disk Usage**
+
 ```tanium
 Get Disk Usage from all machines
 ```
+
 - **Purpose**: Storage utilization per volume
 - **Format**: "C: 67%, D: 23%"
 - **Critical Alert**: `where Disk Usage containing "C:" and Disk Usage > "90%"`
@@ -1135,18 +1190,22 @@ Get Disk Usage from all machines
 #### 2. System Health Metrics
 
 **Uptime**
+
 ```tanium
 Get Uptime from all machines
 ```
+
 - **Purpose**: System availability tracking
 - **Format**: "14 days, 3 hours, 27 minutes"
 - **Patch Compliance**: `where Uptime > "30 days"` (needs reboot)
 - **Availability SLA**: Calculate monthly uptime percentage
 
 **System Event Logs**
+
 ```tanium
 Get System Event Logs[Critical, Error] from all machines (max age:24 hours)
 ```
+
 - **Purpose**: Recent critical events
 - **Event IDs**: 41 (unexpected shutdown), 1074 (planned restart)
 - **Correlation**: Link to performance degradation
@@ -1163,6 +1222,7 @@ Get System Event Logs[Critical, Error] from all machines (max age:24 hours)
 **Duration**: 45 minutes
 
 **Prerequisites**:
+
 - Tanium Console access
 - Test environment with 100+ endpoints
 - Mixed Windows/Linux systems preferred
@@ -1170,6 +1230,7 @@ Get System Event Logs[Critical, Error] from all machines (max age:24 hours)
 #### Part 1: Simple Queries (10 minutes)
 
 **Task 1.1**: Inventory all Windows systems
+
 ```tanium
 Get Computer Name and Operating System from all machines
 where OS Platform = "Windows"
@@ -1178,6 +1239,7 @@ where OS Platform = "Windows"
 **Expected Result**: List of Windows machines with OS versions
 
 **Task 1.2**: Find servers vs workstations
+
 ```tanium
 Get Computer Name and Operating System from all machines
 where Operating System containing "Server"
@@ -1186,6 +1248,7 @@ where Operating System containing "Server"
 **Validation**: Count should match your server inventory
 
 **Task 1.3**: Identify virtual machines
+
 ```tanium
 Get Computer Name and Model from all machines
 where Model containing "Virtual" or Model containing "VMware"
@@ -1196,17 +1259,20 @@ where Model containing "Virtual" or Model containing "VMware"
 #### Part 2: Compound Queries (15 minutes)
 
 **Task 2.1**: Security posture assessment
+
 ```tanium
 Get Computer Name and Anti-Virus Enabled and Windows Firewall Status
 and BitLocker Status from all machines where OS Platform = "Windows"
 ```
 
 **Analysis Questions**:
+
 - How many systems have all three protections enabled?
 - Which systems are most vulnerable?
 - What patterns do you observe?
 
 **Task 2.2**: Hardware capacity planning
+
 ```tanium
 Get Computer Name and Total Memory and CPU Details[CPU Cores]
 and Disk Free Space from all machines
@@ -1216,6 +1282,7 @@ where Total Memory &lt; 8192 or Disk Free Space containing "C:" < "20 GB"
 **Business Value**: Identify systems needing upgrades
 
 **Task 2.3**: User activity monitoring
+
 ```tanium
 Get Computer Name and Logged In Users and Last Logged In User
 and Uptime from all machines
@@ -1227,6 +1294,7 @@ where Logged In Users != "No User"
 #### Part 3: Advanced Filtering (20 minutes)
 
 **Task 3.1**: Complex boolean logic
+
 ```tanium
 Get Computer Name and Operating System and Last Reboot Time
 from all machines where
@@ -1237,6 +1305,7 @@ or (Operating System containing "Server" and Uptime > "60 days")
 **Challenge**: Explain the logic flow to a colleague
 
 **Task 3.2**: Regular expression filtering
+
 ```tanium
 Get Computer Name and IP Address from all machines
 where IP Address matches "192\.168\.[0-9]+\.[0-9]+"
@@ -1245,6 +1314,7 @@ where IP Address matches "192\.168\.[0-9]+\.[0-9]+"
 **Extension**: Modify to find specific subnets
 
 **Task 3.3**: Negation and exclusion
+
 ```tanium
 Get Computer Name and Installed Applications from all machines
 where Installed Applications not containing "Microsoft Defender"
@@ -1256,16 +1326,19 @@ and Operating System containing "Windows"
 #### Lab Assessment Criteria
 
 **Basic Proficiency** (Score: 60-70%)
+
 - Execute all simple queries correctly
 - Understand basic filter syntax
 - Retrieve accurate results
 
 **Intermediate Proficiency** (Score: 71-85%)
+
 - Complete compound queries successfully
 - Apply boolean logic correctly
 - Interpret results accurately
 
 **Advanced Proficiency** (Score: 86-100%)
+
 - Master complex filtering
 - Optimize query performance
 - Identify business insights from data
@@ -1277,6 +1350,7 @@ and Operating System containing "Windows"
 **Duration**: 60 minutes
 
 **Prerequisites**:
+
 - Administrative access to Tanium
 - PowerShell/Bash scripting knowledge
 - Understanding of WMI/CIM
@@ -1288,6 +1362,7 @@ and Operating System containing "Windows"
 **Sensor Name**: "Custom - Windows Defender Detailed Status"
 
 **PowerShell Code**:
+
 ```powershell
 $DefenderStatus = Get-MpComputerStatus -ErrorAction SilentlyContinue
 
@@ -1319,6 +1394,7 @@ if ($DefenderStatus) {
 ```
 
 **Testing Steps**:
+
 1. Create sensor in Tanium Console
 2. Set Max Age: 3600 seconds
 3. Set Platform: Windows
@@ -1333,6 +1409,7 @@ if ($DefenderStatus) {
 **Sensor Name**: "Custom - Certificate Expiration Check"
 
 **PowerShell Code**:
+
 ```powershell
 $Certs = Get-ChildItem Cert:\LocalMachine\My
 $ExpiringCerts = @()
@@ -1365,6 +1442,7 @@ if ($ExpiringCerts.Count -gt 0) {
 **Sensor Name**: "Custom - Linux Security Audit"
 
 **Bash Code**:
+
 ```bash
 #!/bin/bash
 
@@ -1404,6 +1482,7 @@ echo "RootLogin:${ROOT_LOGIN:-default}, PassAuth:${PASS_AUTH:-default}, Firewall
 ```
 
 **Deployment Notes**:
+
 - Test on different Linux distributions
 - Account for command availability
 - Handle permission requirements
@@ -1414,6 +1493,7 @@ echo "RootLogin:${ROOT_LOGIN:-default}, PassAuth:${PASS_AUTH:-default}, Firewall
 **Sensor Name**: "Custom - Vulnerable Package Detection"
 
 **Bash Code**:
+
 ```bash
 #!/bin/bash
 
@@ -1445,6 +1525,7 @@ fi
 ```
 
 **Integration Points**:
+
 - Link to patch management workflow
 - Trigger automated remediation
 - Generate compliance reports
@@ -1473,16 +1554,17 @@ fi
 
 **Common Issues and Solutions**:
 
-| Issue | Cause | Solution |
-|-------|-------|----------|
-| No results returned | Permission denied | Run with appropriate privileges |
-| Timeout errors | Script too slow | Optimize code, increase timeout |
-| Parse errors | Invalid output format | Ensure single-line output |
-| Platform mismatch | Wrong OS targeting | Set correct platform filter |
+| Issue               | Cause                 | Solution                        |
+| ------------------- | --------------------- | ------------------------------- |
+| No results returned | Permission denied     | Run with appropriate privileges |
+| Timeout errors      | Script too slow       | Optimize code, increase timeout |
+| Parse errors        | Invalid output format | Ensure single-line output       |
+| Platform mismatch   | Wrong OS targeting    | Set correct platform filter     |
 
 #### Lab Assessment and Certification Readiness
 
 **Skills Demonstrated**:
+
 - Custom sensor development
 - Cross-platform scripting
 - Security assessment automation
@@ -1490,6 +1572,7 @@ fi
 - Error handling
 
 **Certification Alignment**:
+
 - Maps to TCO Exam Domain 1 (22% weight)
 - Demonstrates advanced querying capabilities
 - Shows platform customization expertise
@@ -1508,6 +1591,7 @@ fi
 **Tanium Query Strategy**:
 
 **Phase 1 - Initial Detection** (0-5 minutes)
+
 ```tanium
 // Check for known IOCs
 Get Computer Name and Running Processes and Network Connections
@@ -1517,6 +1601,7 @@ and Network Connections containing "185.220"
 ```
 
 **Phase 2 - Scope Assessment** (5-15 minutes)
+
 ```tanium
 // Identify lateral movement
 Get Computer Name and Logged In Users and Recent Logins[24 hours]
@@ -1525,6 +1610,7 @@ Recent Logins containing any of affected users
 ```
 
 **Phase 3 - Containment** (15-30 minutes)
+
 ```tanium
 // Isolate suspicious systems
 Get Computer Name and Network Isolation Status
@@ -1534,6 +1620,7 @@ Computer Name in [affected_systems_list]
 ```
 
 **Business Impact Metrics**:
+
 - Mean Time to Detection: 3 minutes
 - Scope Identification: 12 minutes
 - Full Containment: 28 minutes
@@ -1541,6 +1628,7 @@ Computer Name in [affected_systems_list]
 - Prevented Loss: $4.2M
 
 **Lessons Learned**:
+
 - Pre-built threat hunting queries essential
 - Automated response packages reduce containment time
 - Query performance critical during incidents
@@ -1555,12 +1643,14 @@ Computer Name in [affected_systems_list]
 **Tanium Query Portfolio**:
 
 **Encryption Validation**
+
 ```tanium
 Get Computer Name and BitLocker Status and FileVault Status
 from all machines | Export to compliance_encryption_report.csv
 ```
 
 **Access Control Audit**
+
 ```tanium
 Get Computer Name and Local Administrators and User Rights[SeBackupPrivilege]
 from all machines where
@@ -1569,6 +1659,7 @@ User Rights containing non-standard accounts
 ```
 
 **Patch Compliance**
+
 ```tanium
 Get Computer Name and Missing Patches[Critical] and Days Since Last Reboot
 from all machines where
@@ -1576,6 +1667,7 @@ Missing Patches count &gt; 0 or Days Since Last Reboot &gt; 30
 ```
 
 **Audit Results**:
+
 - Encryption Compliance: 98.7%
 - Excess Privileges Found: 342 accounts
 - Critical Patches Missing: 1,247 systems
@@ -1609,6 +1701,7 @@ and (Anti-Virus != "Enabled" or Last Patch Date &gt; 30 days ago)
 ```
 
 **Integration Metrics**:
+
 - Discovery Time: 4 hours
 - Security Issues Found: 3,421
 - Non-compliant Software: 867 instances
@@ -1622,22 +1715,26 @@ and (Anti-Virus != "Enabled" or Last Patch Date &gt; 30 days ago)
 ### Question Type Patterns
 
 **Type 1: Syntax Questions** (30% of exam)
+
 - Focus on correct query structure
 - Common errors to avoid
 - Filter operator usage
 
 **Example**: "Which query correctly finds Windows servers?"
+
 - A) Get Computer Name where OS = "Server" ❌
 - B) Get Computer Name from all machines where Operating System containing "Server" ✅
 - C) Get machines where type = "Server" ❌
 - D) Select Computer Name where OS like "Server" ❌
 
 **Type 2: Optimization Questions** (25% of exam)
+
 - Query performance considerations
 - Sensor impact on endpoints
 - Caching strategies
 
 **Type 3: Scenario-Based Questions** (45% of exam)
+
 - Real-world problem solving
 - Multi-step query construction
 - Business requirement translation
@@ -1645,12 +1742,9 @@ and (Anti-Virus != "Enabled" or Last Patch Date &gt; 30 days ago)
 ### Study Tips
 
 <InfoBox type="tip">
-**Exam Success Formula**:
-1. Master basic syntax (2 weeks)
-2. Practice compound queries (1 week)
-3. Study sensor reference (1 week)
-4. Complete all labs (2 weeks)
-5. Review real scenarios (1 week)
+  **Exam Success Formula**: 1. Master basic syntax (2 weeks) 2. Practice compound queries (1 week)
+  3. Study sensor reference (1 week) 4. Complete all labs (2 weeks) 5. Review real scenarios (1
+  week)
 </InfoBox>
 
 ### Common Exam Mistakes
@@ -1668,6 +1762,7 @@ and (Anti-Virus != "Enabled" or Last Patch Date &gt; 30 days ago)
 ### Index Utilization Strategy
 
 **Indexed Sensors** (Fast):
+
 - Computer Name
 - Computer ID
 - Operating System
@@ -1675,12 +1770,14 @@ and (Anti-Virus != "Enabled" or Last Patch Date &gt; 30 days ago)
 - Last Reboot Time
 
 **Non-Indexed Sensors** (Slower):
+
 - Running Processes
 - Installed Applications
 - Registry Values
 - File Properties
 
 **Optimization Pattern**:
+
 ```tanium
 // Inefficient - scans all machines
 Get Computer Name from all machines
@@ -1698,6 +1795,7 @@ and Installed Applications containing "Chrome"
 ### Query Result Caching
 
 **Cache Configuration**:
+
 ```tanium
 Get CPU Usage from all machines (sensor cache max age:300)
 ```
@@ -1714,12 +1812,14 @@ Get CPU Usage from all machines (sensor cache max age:300)
 ### Compound Sensor Optimization
 
 **Single Sensor Call**:
+
 ```tanium
 Get {Computer Identity[Computer Name,Domain,IP Address,MAC Address]}
 from all machines
 ```
 
 **Benefits**:
+
 - Single endpoint execution
 - Reduced network traffic
 - Consistent data snapshot
@@ -1790,6 +1890,7 @@ Results Don't Match Expectations?
 **Question 1**: You need to find all Windows servers that haven't been rebooted in the last 30 days and have critical patches missing. Which query is most efficient?
 
 **Answer**:
+
 ```tanium
 Get Computer Name from all machines
 where Operating System containing "Server"
@@ -1802,6 +1903,7 @@ and Missing Critical Patches &gt; 0
 **Question 2**: How would you identify systems with suspicious PowerShell activity?
 
 **Answer**:
+
 ```tanium
 Get Computer Name and Running Processes and Process Command Lines
 from all machines where
@@ -1812,6 +1914,7 @@ and Process Command Lines containing any of ["-enc", "-ExecutionPolicy Bypass", 
 **Question 3**: What's the best way to track certificate expiration across the enterprise?
 
 **Answer**: Deploy custom sensor (see Lab 2) and query:
+
 ```tanium
 Get Computer Name and Custom - Certificate Expiration Check
 from all machines where
@@ -1825,23 +1928,23 @@ Custom - Certificate Expiration Check not containing "No Certificates"
 ### Query Performance Standards
 
 | Endpoint Count | Simple Query | Complex Query | Custom Sensor |
-|---------------|--------------|---------------|---------------|
-| 100 | &lt;1 sec | &lt;3 sec | &lt;5 sec |
-| 1,000 | &lt;2 sec | &lt;5 sec | &lt;10 sec |
-| 10,000 | &lt;5 sec | &lt;15 sec | &lt;30 sec |
-| 50,000 | &lt;10 sec | &lt;30 sec | &lt;60 sec |
-| 100,000+ | &lt;20 sec | &lt;60 sec | &lt;120 sec |
+| -------------- | ------------ | ------------- | ------------- |
+| 100            | &lt;1 sec    | &lt;3 sec     | &lt;5 sec     |
+| 1,000          | &lt;2 sec    | &lt;5 sec     | &lt;10 sec    |
+| 10,000         | &lt;5 sec    | &lt;15 sec    | &lt;30 sec    |
+| 50,000         | &lt;10 sec   | &lt;30 sec    | &lt;60 sec    |
+| 100,000+       | &lt;20 sec   | &lt;60 sec    | &lt;120 sec   |
 
 ### Optimization Impact Results
 
 **Test Environment**: 25,000 endpoints, mixed platforms
 
-| Optimization Technique | Performance Gain | Resource Savings |
-|-----------------------|------------------|------------------|
-| Indexed filtering first | 65% faster | 40% less CPU |
-| Sensor caching | 80% faster | 70% less network |
-| Compound sensors | 75% faster | 60% less I/O |
-| Targeted groups | 90% faster | 85% less load |
+| Optimization Technique  | Performance Gain | Resource Savings |
+| ----------------------- | ---------------- | ---------------- |
+| Indexed filtering first | 65% faster       | 40% less CPU     |
+| Sensor caching          | 80% faster       | 70% less network |
+| Compound sensors        | 75% faster       | 60% less I/O     |
+| Targeted groups         | 90% faster       | 85% less load    |
 
 ---
 
@@ -1873,16 +1976,19 @@ Custom - Certificate Expiration Check not containing "No Certificates"
 ### Career Path Development
 
 **Junior Analyst** (0-1 year)
+
 - Master basic queries
 - Use pre-built sensors
 - Execute saved questions
 
 **Senior Analyst** (1-3 years)
+
 - Create custom sensors
 - Design query strategies
 - Lead incident response
 
 **Platform Architect** (3+ years)
+
 - Optimize enterprise queries
 - Design sensor frameworks
 - Train other analysts
@@ -1890,36 +1996,39 @@ Custom - Certificate Expiration Check not containing "No Certificates"
 ---
 
 <InfoBox type="success">
-**Module 1 Complete!** You've mastered the foundation of Tanium querying. You're now ready to tackle advanced filtering and targeting in Module 2.
+  **Module 1 Complete!** You've mastered the foundation of Tanium querying. You're now ready to
+  tackle advanced filtering and targeting in Module 2.
 </InfoBox>
 
 <PracticeButton moduleId="asking-questions" difficulty="exam" />
 
-1) Constrain first
+1. Constrain first
    - Start with OS Platform or Domain to narrow result set; then add expensive string filters.
 
-2) Field projection
+2. Field projection
    - Return only needed fields (Computer Name + 1). Add more fields after validating scope.
 
-3) Sampling
+3. Sampling
    - Validate logic on 10–20 endpoints before fleet queries to avoid long-running questions.
 
-4) Saved question reuse
+4. Saved question reuse
    - Save expensive logic and schedule refresh windows outside business hours.
 
-5) Pivot workflow
+5. Pivot workflow
    - Use small base cohorts and pivot into deeper sensors (process → ports → autoruns).
 
 ### Enterprise Query Patterns Library (25+ production-ready templates)
 
 <InfoBox title="Production Query Strategy">
-  These patterns are battle-tested in enterprise environments. Each includes performance considerations,
-  common variations, and troubleshooting tips. Start with constraints, validate on small cohorts.
+  These patterns are battle-tested in enterprise environments. Each includes performance
+  considerations, common variations, and troubleshooting tips. Start with constraints, validate on
+  small cohorts.
 </InfoBox>
 
 #### Security Assessment Patterns (10 advanced templates)
 
 **1. Comprehensive Security Baseline Assessment**
+
 ```
 Get Computer Name, Operating System, Antivirus Status, Firewall State, Disk Encryption Status, Last Reboot
 from all machines
@@ -1927,12 +2036,14 @@ where OS Platform = "Windows"
 AND NOT Computer Name contains "-TST-"
 AND NOT Computer Name contains "-DEV-"
 ```
+
 - **Purpose**: Complete security posture snapshot
 - **Performance**: ~45 seconds for 1000 endpoints
 - **Optimization**: Run during off-peak hours, save as scheduled question
 - **Variations**: Add patch status, user rights, or startup items
 
 **2. Advanced Persistent Threat (APT) Hunting**
+
 ```
 Get Computer Name, Running Processes, Network Connections, Scheduled Tasks, Startup Items
 from all machines
@@ -1940,12 +2051,14 @@ where (Running Processes contains "powershell" AND Running Processes contains "-
 OR (Network Connections contains "ESTABLISHED" AND Network Connections contains ":443")
 OR (Scheduled Tasks contains "\\Microsoft\\Windows\\" AND Scheduled Tasks contains "unknown")
 ```
+
 - **Purpose**: Detect sophisticated threats and persistence mechanisms
 - **Performance**: Expensive - limit to suspected compromised subnet first
 - **Indicators**: Encoded PowerShell, suspicious network activity, unusual scheduled tasks
 - **Follow-up**: Pivot to registry, file hashes, and user activity on positive matches
 
 **3. Lateral Movement Detection**
+
 ```
 Get Computer Name, Logged In User, Last Logged On Users, Network Connections, Running Processes
 from all machines
@@ -1953,12 +2066,14 @@ where (Logged In User contains "admin" OR Last Logged On Users contains "admin")
 AND (Network Connections contains ":445" OR Network Connections contains ":3389")
 AND Uptime &lt; 1 day
 ```
+
 - **Purpose**: Identify recent admin activity with network access
 - **Performance**: Medium impact - constrain by time window
 - **Red flags**: Admin accounts on workstations, recent logins with SMB/RDP
 - **Investigation**: Check for privilege escalation and data access patterns
 
 **4. Ransomware Early Warning System**
+
 ```
 Get Computer Name, Running Processes, Open Files, Disk Space, CPU Utilization
 from all machines
@@ -1966,12 +2081,14 @@ where (Running Processes contains "encrypt" OR Running Processes contains "ranso
 OR (Open Files contains ".encrypted" OR Open Files contains ".locked")
 OR (CPU Utilization &gt; 85 AND Disk Space decreased &gt; 10%)
 ```
+
 - **Purpose**: Detect ransomware before full encryption
 - **Performance**: High frequency sensor - use thresholds carefully
 - **Automation**: Trigger immediate isolation on positive matches
 - **False positives**: Legitimate backup/sync operations
 
 **5. Insider Threat Monitoring**
+
 ```
 Get Computer Name, Logged In User, USB Device History, Open Files, Network Connections
 from all machines
@@ -1979,12 +2096,14 @@ where (USB Device History contains "Mass Storage" AND USB Device History contain
 OR (Open Files contains "confidential" OR Open Files contains "salary")
 OR (Network Connections contains "dropbox" OR Network Connections contains "drive.google")
 ```
+
 - **Purpose**: Monitor for data exfiltration activities
 - **Performance**: Privacy considerations - ensure proper authorization
 - **Compliance**: Log all queries for audit purposes
 - **Pattern analysis**: Look for unusual after-hours activity
 
 **6. Vulnerability Assessment Automation**
+
 ```
 Get Computer Name, Installed Applications, Java Versions, Browser Extensions, OS Build Number
 from all machines
@@ -1992,12 +2111,14 @@ where (Java Versions matches "1\.[0-7]" OR Java Versions contains "old")
 OR (Browser Extensions contains "flash" OR Browser Extensions contains "silverlight")
 OR (OS Build Number < "22621" AND Operating System contains "Windows 11")
 ```
+
 - **Purpose**: Identify systems with known vulnerable software
 - **Performance**: Application queries are expensive - use OS constraints
 - **Prioritization**: Focus on internet-facing and critical systems first
 - **Remediation**: Auto-generate deployment packages for updates
 
 **7. Compliance Violation Detection**
+
 ```
 Get Computer Name, Local Administrators, PowerShell Execution Policy, Installed Applications, Firewall State
 from all machines
@@ -2006,12 +2127,14 @@ OR (PowerShell Execution Policy = "Unrestricted" OR PowerShell Execution Policy 
 OR (Installed Applications contains "TeamViewer" AND NOT Installed Applications contains "corporate")
 OR Firewall State = "Off"
 ```
+
 - **Purpose**: Detect policy violations and security misconfigurations
 - **Performance**: Complex logic - test on pilot group first
 - **Reporting**: Generate executive dashboard from results
 - **Remediation**: Automated GPO deployment for common violations
 
 **8. Shadow IT Discovery**
+
 ```
 Get Computer Name, Installed Applications, Running Applications, Browser Extensions, Network Connections
 from all machines
@@ -2020,12 +2143,14 @@ OR (Running Applications contains "zoom" AND NOT Running Applications contains "
 OR (Browser Extensions contains "password manager" AND NOT Browser Extensions contains "approved")
 OR (Network Connections contains "amazonaws" OR Network Connections contains "azure")
 ```
+
 - **Purpose**: Identify unauthorized cloud services and applications
 - **Performance**: Network queries are expensive - schedule during maintenance windows
 - **Business impact**: Coordinate with compliance team before enforcement
 - **Alternatives**: Offer approved alternatives for discovered shadow IT
 
 **9. Privileged Access Audit**
+
 ```
 Get Computer Name, Local Administrators, Logged In User, Last Logged On Users, User Rights
 from all machines
@@ -2033,12 +2158,14 @@ where (Local Administrators contains "Domain Admins" OR Local Administrators con
 OR (User Rights contains "SeDebugPrivilege" OR User Rights contains "SeTakeOwnershipPrivilege")
 OR (Logged In User contains "admin" AND Computer Name contains "WKS-")
 ```
+
 - **Purpose**: Audit privileged access across the environment
 - **Performance**: User rights queries can be slow - use domain constraints
 - **Frequency**: Run weekly and compare against baseline
 - **Escalation**: Flag any unexpected changes for immediate review
 
 **10. Data Loss Prevention (DLP) Monitoring**
+
 ```
 Get Computer Name, Open Files, Running Processes, Network Connections, USB Device History
 from all machines
@@ -2047,6 +2174,7 @@ OR (Running Processes contains "robocopy" OR Running Processes contains "xcopy")
 OR (Network Connections contains "ftp" OR Network Connections contains "sftp")
 OR (USB Device History contains "today" AND USB Device History contains "&gt; 1 GB")
 ```
+
 - **Purpose**: Monitor for potential data exfiltration activities
 - **Performance**: File system queries are intensive - use time windows
 - **Privacy**: Ensure compliance with employee monitoring policies
@@ -2055,30 +2183,35 @@ OR (USB Device History contains "today" AND USB Device History contains "&gt; 1 
 #### Operational Excellence Patterns (10 comprehensive templates)
 
 **11. Infrastructure Health Dashboard**
+
 ```
 Get Computer Name, CPU Utilization, Memory Utilization, Disk Space, Uptime, Tanium Client Version
 from all machines
 where (CPU Utilization &gt; 80 OR Memory Utilization &gt; 85 OR Disk Space &lt; 15%)
 OR (Uptime &gt; 30 days OR Tanium Client Version < "7.5.0")
 ```
+
 - **Purpose**: Proactive infrastructure monitoring
 - **Performance**: Real-time metrics - cache results for dashboards
 - **Thresholds**: Adjust based on environment baseline
 - **Automation**: Auto-create service tickets for threshold violations
 
 **12. Patch Management Effectiveness**
+
 ```
 Get Computer Name, OS Build Number, Installed Patches, Last Reboot, Automatic Updates
 from all machines
 where (OS Build Number < "latest-1" OR NOT Installed Patches contains "latest-security-update")
 OR (Last Reboot older than 7 days AND Automatic Updates = "Enabled")
 ```
+
 - **Purpose**: Measure patch deployment success rates
 - **Performance**: Patch queries are expensive - run weekly
 - **Reporting**: Generate compliance reports for management
 - **Remediation**: Auto-schedule maintenance windows for non-compliant systems
 
 **13. License Compliance Monitoring**
+
 ```
 Get Computer Name, Installed Applications, Operating System, Physical Memory, CPU Model
 from all machines
@@ -2086,12 +2219,14 @@ where (Installed Applications contains "Office 365" AND NOT Installed Applicatio
 OR (Operating System contains "Enterprise" AND Physical Memory &lt; 4 GB)
 OR (Installed Applications contains "Adobe Creative" AND CPU Model contains "i3")
 ```
+
 - **Purpose**: Ensure software licensing compliance
 - **Performance**: Application inventory is slow - run monthly
 - **Legal**: Coordinate with legal team for compliance requirements
 - **Cost optimization**: Identify over-licensed or under-utilized software
 
 **14. Asset Lifecycle Management**
+
 ```
 Get Computer Name, Manufacturer, Model, Asset Tag, CPU Model, Physical Memory, Last Reboot
 from all machines
@@ -2100,12 +2235,14 @@ OR (CPU Model contains "Core 2" OR CPU Model contains "Pentium")
 OR (Physical Memory &lt; 8 GB AND Model not contains "Thin Client")
 OR (Asset Tag contains "2018" OR Asset Tag contains "2019")
 ```
+
 - **Purpose**: Identify systems approaching end-of-life
 - **Performance**: Hardware queries are fast - safe for frequent execution
 - **Business planning**: Support hardware refresh planning
 - **Cost management**: Identify systems requiring immediate replacement
 
 **15. Security Tool Effectiveness**
+
 ```
 Get Computer Name, Antivirus Status, Firewall State, Disk Encryption Status, OS Build Number, Last Reboot
 from all machines
@@ -2113,12 +2250,14 @@ where (Antivirus Status contains "disabled" OR Antivirus Status contains "out of
 OR (Firewall State = "Off" OR Disk Encryption Status != "Enabled")
 OR (OS Build Number < "security-baseline" OR Last Reboot older than 14 days)
 ```
+
 - **Purpose**: Validate security control effectiveness
 - **Performance**: Security sensors are generally fast
 - **Alerting**: Immediate escalation for disabled security controls
 - **Trending**: Track improvement over time
 
 **16. Remote Work Readiness Assessment**
+
 ```
 Get Computer Name, VPN Software, Wi-Fi Profiles, Battery Health, Docking State, Webcam Status
 from all machines
@@ -2126,12 +2265,14 @@ where (NOT Installed Applications contains "VPN" OR VPN Software = "Not Connecte
 OR (Wi-Fi Profiles not contains "Corporate" OR Battery Health &lt; 70%)
 OR (Model contains "Desktop" AND Location = "Remote")
 ```
+
 - **Purpose**: Ensure remote workers have proper setup
 - **Performance**: Mix of fast and slow sensors - optimize query order
 - **User experience**: Proactive identification of remote work issues
 - **Deployment**: Auto-provision missing remote work tools
 
 **17. Change Management Validation**
+
 ```
 Get Computer Name, Installed Applications, Services, Registry Keys, File Versions, Last Reboot
 from all machines
@@ -2139,24 +2280,28 @@ where (Installed Applications contains "NewApp v2.0" AND Services not contains "
 OR (Registry Keys contains "HKLM\\SOFTWARE\\NewApp" AND File Versions not contains "2.0.0")
 OR (Last Reboot older than 1 day AND Installed Applications contains "requires restart")
 ```
+
 - **Purpose**: Validate successful change deployments
 - **Performance**: Comprehensive validation is expensive
 - **Quality assurance**: Ensure changes deployed correctly
 - **Rollback**: Identify systems requiring rollback procedures
 
 **18. Capacity Planning Analytics**
+
 ```
 Get Computer Name, CPU Utilization, Memory Utilization, Disk Space, Network Utilization, Uptime
 from all machines
 where (CPU Utilization average &gt; 60 OR Memory Utilization average &gt; 70)
 OR (Disk Space growth rate &gt; 10% OR Network Utilization peak &gt; 80%)
 ```
+
 - **Purpose**: Identify systems approaching capacity limits
 - **Performance**: Trending data requires historical context
 - **Forecasting**: Support infrastructure planning decisions
 - **Optimization**: Identify candidates for hardware upgrades
 
 **19. Backup and Recovery Validation**
+
 ```
 Get Computer Name, Backup Software, Last Backup, Critical Files, Database Status, Replication Status
 from all machines
@@ -2164,12 +2309,14 @@ where (NOT Installed Applications contains "Backup Agent" OR Last Backup older t
 OR (Critical Files contains "database" AND Database Status != "Backed Up")
 OR (Replication Status = "Failed" OR Replication Status = "Delayed")
 ```
+
 - **Purpose**: Ensure backup systems are functioning properly
 - **Performance**: File system queries can be slow
 - **RTO/RPO**: Validate recovery time and point objectives
 - **Testing**: Regular backup restoration testing
 
 **20. Endpoint Configuration Drift**
+
 ```
 Get Computer Name, Group Policy Results, Registry Keys, Services, Installed Applications, Time Zone
 from all machines
@@ -2177,6 +2324,7 @@ where (Group Policy Results contains "failed" OR Group Policy Results contains "
 OR (Services contains "required service" AND Services contains "stopped")
 OR (Time Zone != "Corporate Standard" OR DNS Server != "Corporate DNS")
 ```
+
 - **Purpose**: Detect configuration drift from standards
 - **Performance**: Policy queries can be expensive
 - **Compliance**: Maintain configuration baselines
@@ -2185,6 +2333,7 @@ OR (Time Zone != "Corporate Standard" OR DNS Server != "Corporate DNS")
 #### Performance Optimization Query Patterns (5 advanced patterns)
 
 **21. Query Performance Optimization Framework**
+
 ```mermaid
 flowchart TD
     A[Query Request] --> B{Size Estimation}
@@ -2204,7 +2353,8 @@ flowchart TD
 
 **22. High-Performance Query Construction Patterns**
 
-*Pattern A: Constraint Ordering for Maximum Efficiency*
+_Pattern A: Constraint Ordering for Maximum Efficiency_
+
 ```
 # Optimal order: Platform → Domain → Subnet → String filters
 Get Computer Name, Target_Sensor
@@ -2216,7 +2366,8 @@ AND Computer Name contains "WKS-"      # Slower: String operation
 AND Target_Sensor contains "criteria"  # Slowest: Sensor evaluation
 ```
 
-*Pattern B: Efficient Field Projection*
+_Pattern B: Efficient Field Projection_
+
 ```
 # Return minimal fields initially
 Get Computer Name, Critical_Field_Only
@@ -2227,7 +2378,8 @@ Get Computer Name, Detailed_Field_1, Detailed_Field_2, Detailed_Field_3
 from machines with names in ("HOST001", "HOST002", "HOST003")
 ```
 
-*Pattern C: Time-Based Optimization*
+_Pattern C: Time-Based Optimization_
+
 ```
 # Use temporal constraints to reduce dataset
 Get Computer Name, Event_Data
@@ -2239,13 +2391,15 @@ AND [other constraints]
 
 **23. Query Caching and Reuse Strategies**
 
-*Saved Question Hierarchy:*
+_Saved Question Hierarchy:_
+
 - **Base Queries**: Fundamental system info, updated every 4 hours
 - **Security Queries**: Threat detection, updated every hour
 - **Performance Queries**: Resource monitoring, updated every 15 minutes
 - **Compliance Queries**: Policy validation, updated daily
 
-*Example Saved Question Library:*
+_Example Saved Question Library:_
+
 ```
 # Base-SysInfo-Windows (4 hour refresh)
 Get Computer Name, Operating System, IP Address, Uptime, Domain
@@ -2264,7 +2418,8 @@ where CPU Utilization &gt; 80
 
 **24. Advanced Regex and String Matching Patterns**
 
-*Version Pattern Matching:*
+_Version Pattern Matching:_
+
 ```
 # Match Office versions 16.0.15000 and higher
 Get Computer Name, Application Versions
@@ -2282,7 +2437,8 @@ from all machines
 where Running Processes matches "[a-z]{1,8}\.(exe|bat|ps1|vbs)$"
 ```
 
-*Complex Boolean Logic:*
+_Complex Boolean Logic:_
+
 ```
 # Nested conditions with proper precedence
 Get Computer Name, Security_Assessment
@@ -2298,7 +2454,8 @@ AND NOT Computer Name contains "-DEV-"
 
 **25. Error Handling and Troubleshooting Patterns**
 
-*Progressive Query Validation:*
+_Progressive Query Validation:_
+
 ```
 # Step 1: Test sensor availability
 Get Computer Name, Test_Sensor from 10 machines where OS Platform = "Windows"
@@ -2313,7 +2470,8 @@ Get [all_fields] from 25 machines where [all_conditions]
 Get [all_fields] from all machines where [all_conditions]
 ```
 
-*Fallback Query Patterns:*
+_Fallback Query Patterns:_
+
 ```
 # Primary query with fallback for missing sensors
 Try: Get Computer Name, Primary_Sensor from all machines where [conditions]
@@ -2324,23 +2482,24 @@ Emergency: Get Computer Name, Basic_Info from all machines where OS Platform = "
 ### Query Performance Benchmarking and Optimization
 
 <InfoBox title="Performance Testing Protocol">
-  Always benchmark queries on representative subsets before fleet deployment. Document
-  execution times, resource usage, and accuracy metrics for continuous optimization.
+  Always benchmark queries on representative subsets before fleet deployment. Document execution
+  times, resource usage, and accuracy metrics for continuous optimization.
 </InfoBox>
 
 #### Performance Metrics and Thresholds
 
-| Query Type | Target Response Time | Endpoint Limit | Resource Impact |
-|------------|---------------------|----------------|-----------------|
-| Basic Info (3 fields) | &lt; 30 seconds | 5000+ | Low |
-| Security Assessment | &lt; 2 minutes | 2000 | Medium |
-| Application Inventory | &lt; 5 minutes | 1000 | High |
-| Performance Monitoring | &lt; 1 minute | 3000 | Medium |
-| Custom Sensors | Variable | 500-1000 | High |
+| Query Type             | Target Response Time | Endpoint Limit | Resource Impact |
+| ---------------------- | -------------------- | -------------- | --------------- |
+| Basic Info (3 fields)  | &lt; 30 seconds      | 5000+          | Low             |
+| Security Assessment    | &lt; 2 minutes       | 2000           | Medium          |
+| Application Inventory  | &lt; 5 minutes       | 1000           | High            |
+| Performance Monitoring | &lt; 1 minute        | 3000           | Medium          |
+| Custom Sensors         | Variable             | 500-1000       | High            |
 
 #### Optimization Techniques by Query Category
 
 **Fast Queries (&lt; 30 seconds)**
+
 - System information sensors (OS, hostname, IP)
 - Hardware inventory (manufacturer, model, memory)
 - Basic security state (antivirus, firewall)
@@ -2348,6 +2507,7 @@ Emergency: Get Computer Name, Basic_Info from all machines where OS Platform = "
 - File existence checks
 
 **Medium Queries (30 seconds - 2 minutes)**
+
 - Process and service enumeration
 - Network connection lists
 - Windows event log parsing
@@ -2355,6 +2515,7 @@ Emergency: Get Computer Name, Basic_Info from all machines where OS Platform = "
 - Certificate store queries
 
 **Slow Queries (&gt; 2 minutes)**
+
 - Complete application inventory
 - File system scanning
 - Deep registry traversal
@@ -2393,8 +2554,8 @@ flowchart TD
 ## Custom Sensor Creation Guide
 
 <InfoBox title="When to build a custom sensor?">
-  When built-in sensors cannot express a required check, when data must be normalized from
-  a unique file/registry path, or when you need environment-specific logic.
+  When built-in sensors cannot express a required check, when data must be normalized from a unique
+  file/registry path, or when you need environment-specific logic.
 </InfoBox>
 
 ### PowerShell Sensors (5 examples)
@@ -2530,8 +2691,8 @@ flowchart TD
 ## Advanced Custom Sensor Development
 
 <InfoBox title="Enterprise Sensor Development Strategy">
-  Custom sensors should be modular, well-documented, and tested across diverse environments.
-  Follow enterprise development practices including version control, peer review, and staged deployment.
+  Custom sensors should be modular, well-documented, and tested across diverse environments. Follow
+  enterprise development practices including version control, peer review, and staged deployment.
 </InfoBox>
 
 ### Step-by-Step Custom Sensor Creation Process
@@ -2539,6 +2700,7 @@ flowchart TD
 #### Phase 1: Requirements Analysis and Design
 
 **1. Define Sensor Objectives**
+
 ```yaml
 Sensor Name: Windows Defender Real-Time Protection Status
 Purpose: Validate Windows Defender real-time protection is enabled
@@ -2549,12 +2711,14 @@ Error Handling: Graceful fallback to registry check if WMI fails
 ```
 
 **2. Research Data Sources**
+
 - **Primary**: WMI (Win32_OperatingSystem, MSFT_MpPreference)
 - **Secondary**: Registry (HKLM\SOFTWARE\Microsoft\Windows Defender)
 - **Tertiary**: PowerShell Get-MpPreference cmdlet
 - **Fallback**: Service status check
 
 **3. Design Sensor Logic Flow**
+
 ```mermaid
 flowchart TD
     A[Start] --> B{WMI Available?}
@@ -3134,20 +3298,22 @@ $Output | ConvertTo-Json -Compress
 ### Debugging and Troubleshooting Custom Sensors
 
 <InfoBox title="Debugging Best Practices">
-  Effective sensor debugging requires systematic approaches, comprehensive logging,
-  and standardized error handling patterns.
+  Effective sensor debugging requires systematic approaches, comprehensive logging, and standardized
+  error handling patterns.
 </InfoBox>
 
 #### Common Sensor Issues and Solutions
 
 **Issue 1: Inconsistent Output Across Systems**
 
-*Symptoms:*
+_Symptoms:_
+
 - Same sensor returns different results on similar systems
 - Output format varies between endpoints
 - Sporadic "null" or empty results
 
-*Debugging Steps:*
+_Debugging Steps:_
+
 ```powershell
 # Enhanced sensor with debugging output
 param([switch]$Debug)
@@ -3173,7 +3339,8 @@ try {
 }
 ```
 
-*Solution Patterns:*
+_Solution Patterns:_
+
 - Implement comprehensive error handling with fallback methods
 - Use consistent output formatting (JSON or structured text)
 - Add platform and version detection
@@ -3181,12 +3348,14 @@ try {
 
 **Issue 2: Performance Degradation Over Time**
 
-*Symptoms:*
+_Symptoms:_
+
 - Sensor execution time increases over weeks/months
 - Memory usage grows during execution
 - System becomes unresponsive during sensor execution
 
-*Performance Optimization Techniques:*
+_Performance Optimization Techniques:_
+
 ```powershell
 # Memory-efficient sensor pattern
 [System.GC]::Collect() # Force garbage collection at start
@@ -3211,12 +3380,14 @@ try {
 
 **Issue 3: Permission and Access Denied Errors**
 
-*Symptoms:*
+_Symptoms:_
+
 - "Access Denied" errors on some systems
 - Inconsistent behavior between admin and non-admin contexts
 - Registry or WMI access failures
 
-*Permission-Aware Sensor Pattern:*
+_Permission-Aware Sensor Pattern:_
+
 ```powershell
 # Check execution context
 function Test-AdminPrivileges {
@@ -3391,9 +3562,9 @@ if ($PassRate -lt 100) {
 ## Comprehensive Interactive Labs
 
 <InfoBox title="Lab Learning Objectives">
-  These hands-on labs progress from basic query construction to advanced enterprise scenarios.
-  Each lab includes prerequisites, step-by-step instructions, expected outcomes, and troubleshooting guides.
-  Complete all labs to master Tanium's asking questions domain.
+  These hands-on labs progress from basic query construction to advanced enterprise scenarios. Each
+  lab includes prerequisites, step-by-step instructions, expected outcomes, and troubleshooting
+  guides. Complete all labs to master Tanium's asking questions domain.
 </InfoBox>
 
 ### Lab 1: Foundational Query Construction and Natural Language Mastery
@@ -3401,12 +3572,14 @@ if ($PassRate -lt 100) {
 **Duration**: 25 minutes | **Difficulty**: Beginner | **Prerequisites**: Access to Tanium Console
 
 #### Objectives
+
 - Master the basic "Get [sensor] from [targets] where [filters]" pattern
 - Understand sensor selection and field projection
 - Practice incremental query building and validation
 - Create and manage your first saved question
 
 #### Pre-Lab Setup
+
 ```yaml
 Required Access:
   - Tanium Console read access
@@ -3422,29 +3595,34 @@ Preparation:
 #### Exercise 1.1: Basic System Inventory (8 minutes)
 
 **Step 1: Simple Computer Name Query**
+
 ```
 Query: Get Computer Name from all machines
 Expected Results: List of all endpoint hostnames
 Validation: Should return 100% of online endpoints
 ```
 
-*Troubleshooting:*
+_Troubleshooting:_
+
 - If no results: Check "all machines" target, verify endpoint connectivity
 - If partial results: Some endpoints may be offline or filtered
 
 **Step 2: Add Operating System Information**
+
 ```
 Query: Get Computer Name, Operating System from all machines
 Expected Results: Hostname and OS version for each endpoint
 Performance: Should complete in &lt; 30 seconds for 1000 endpoints
 ```
 
-*Analysis Questions:*
+_Analysis Questions:_
+
 - How many different OS versions are in your environment?
 - What percentage are Windows 10 vs Windows 11?
 - Are there any unexpected or obsolete OS versions?
 
 **Step 3: Filter by Operating System**
+
 ```
 Query: Get Computer Name, Operating System from all machines where Operating System contains "Windows 11"
 Expected Results: Only Windows 11 endpoints
@@ -3454,6 +3632,7 @@ Validation: Result count should be subset of Step 2
 #### Exercise 1.2: Advanced Filtering and Targeting (10 minutes)
 
 **Step 4: Hostname Pattern Filtering**
+
 ```
 Query: Get Computer Name, Operating System from all machines where Computer Name contains "WKS-"
 Purpose: Target workstation endpoints using naming convention
@@ -3461,6 +3640,7 @@ Expected Results: Only workstations, excluding servers
 ```
 
 **Step 5: Multiple Filter Conditions**
+
 ```
 Query: Get Computer Name, Operating System, IP Address from all machines
 where Computer Name contains "WKS-"
@@ -3470,6 +3650,7 @@ Performance Note: Multiple filters improve precision but may reduce result count
 ```
 
 **Step 6: Boolean Logic with Parentheses**
+
 ```
 Query: Get Computer Name, Operating System from all machines
 where (Computer Name contains "WKS-" OR Computer Name contains "LAP-")
@@ -3477,7 +3658,8 @@ AND Operating System contains "Windows"
 Expected Results: All Windows workstations and laptops
 ```
 
-*Advanced Challenge:*
+_Advanced Challenge:_
+
 ```
 Query: Get Computer Name, Operating System, Uptime from all machines
 where Operating System contains "Windows"
@@ -3489,6 +3671,7 @@ Purpose: Find recently rebooted production Windows systems
 #### Exercise 1.3: Saved Question Creation and Management (7 minutes)
 
 **Step 7: Create Your First Saved Question**
+
 1. Use your most successful query from Exercise 1.2
 2. Click "Save Question" in the Tanium interface
 3. Name: "LAB1-Inventory-Windows-Workstations"
@@ -3496,12 +3679,14 @@ Purpose: Find recently rebooted production Windows systems
 5. Add metadata: Your name, date created, review schedule
 
 **Step 8: Test Saved Question Execution**
+
 1. Navigate to saved questions library
 2. Find your saved question
 3. Execute and verify results match your manual query
 4. Note execution time and endpoint coverage
 
 **Step 9: Share and Collaborate**
+
 1. Share question with lab partner or colleague
 2. Verify they can access and execute
 3. Document any permission or access issues
@@ -3509,12 +3694,14 @@ Purpose: Find recently rebooted production Windows systems
 #### Lab 1 Assessment and Validation
 
 **Knowledge Check Questions:**
+
 1. What happens if you omit the "from all machines" portion?
 2. How does "contains" differ from "equals" in filter performance?
 3. When should you use parentheses in complex Boolean logic?
 4. What's the maximum recommended number of fields to return?
 
 **Practical Assessment:**
+
 - Execute this query and explain the results:
   ```
   Get Computer Name, Operating System, Last Logged In User, Uptime
@@ -3525,6 +3712,7 @@ Purpose: Find recently rebooted production Windows systems
   ```
 
 **Expected Learning Outcomes:**
+
 - [ ] Construct basic queries using natural language syntax
 - [ ] Apply single and multiple filter conditions
 - [ ] Use Boolean operators (AND, OR, NOT) correctly
@@ -3538,12 +3726,14 @@ Purpose: Find recently rebooted production Windows systems
 **Duration**: 35 minutes | **Difficulty**: Intermediate | **Prerequisites**: Lab 1 completion
 
 #### Objectives
+
 - Master complex filtering with nested Boolean logic
 - Optimize queries for performance and accuracy
 - Understand sensor selection strategies
 - Implement query validation and testing workflows
 
 #### Pre-Lab Setup
+
 ```yaml
 Required Resources:
   - Lab 1 completion and saved questions
@@ -3560,6 +3750,7 @@ Advanced Preparation:
 #### Exercise 2.1: Complex Security Assessment Queries (12 minutes)
 
 **Step 1: Multi-Condition Security Baseline**
+
 ```
 Query: Get Computer Name, Antivirus Status, Firewall State, OS Build Number
 from all machines
@@ -3570,12 +3761,14 @@ Purpose: Identify production Windows systems with security control gaps
 Expected Results: Systems requiring immediate security attention
 ```
 
-*Performance Analysis:*
-- Record execution time: _____ seconds
-- Record result count: _____ endpoints
-- Calculate success rate: _____ % (results/total endpoints)
+_Performance Analysis:_
+
+- Record execution time: **\_** seconds
+- Record result count: **\_** endpoints
+- Calculate success rate: **\_** % (results/total endpoints)
 
 **Step 2: Advanced Threat Hunting Pattern**
+
 ```
 Query: Get Computer Name, Running Processes, Network Connections
 from all machines
@@ -3586,12 +3779,14 @@ Purpose: Hunt for potential APT indicators
 WARNING: Expensive query - test on small subset first
 ```
 
-*Optimization Challenge:*
+_Optimization Challenge:_
+
 - Test on 10 endpoints first
 - If successful and fast (&lt;2 minutes), expand to 50 endpoints
 - Document any performance degradation patterns
 
 **Step 3: Compliance Violation Detection**
+
 ```
 Query: Get Computer Name, Local Administrators, PowerShell Execution Policy
 from all machines
@@ -3605,6 +3800,7 @@ Purpose: Detect policy violations in corporate domain
 
 **Step 4: Baseline Performance Measurement**
 Take any query from Exercise 2.1 and measure:
+
 ```
 Original Query Performance:
 - Execution Time: _____ seconds
@@ -3616,6 +3812,7 @@ Original Query Performance:
 
 **Step 5: Apply Constraint Ordering Optimization**
 Rewrite your query using optimal constraint order:
+
 ```
 Optimized Query Structure:
 Get [minimal fields]
@@ -3626,6 +3823,7 @@ AND [expensive filters last]            # Slow: Complex filters last
 ```
 
 **Step 6: Field Projection Optimization**
+
 ```
 Original: Get Computer Name, Field1, Field2, Field3, Field4 from all machines where [filters]
 Optimized: Get Computer Name, Field1 from all machines where [filters]
@@ -3637,6 +3835,7 @@ Performance Comparison:
 ```
 
 **Step 7: Staged Query Approach**
+
 ```
 Stage 1: Get Computer Name from all machines where OS Platform = "Windows" AND Domain contains "CORP"
 Results: _____ endpoints identified
@@ -3649,6 +3848,7 @@ Purpose: Deep dive on subset identified in Stage 1
 #### Exercise 2.3: Regex and Advanced String Matching (8 minutes)
 
 **Step 8: Version Pattern Matching**
+
 ```
 Query: Get Computer Name, Application Versions
 from all machines
@@ -3658,6 +3858,7 @@ Expected Results: Modern Office 365 installations
 ```
 
 **Step 9: IP Address Pattern Matching**
+
 ```
 Query: Get Computer Name, IP Address
 from all machines
@@ -3667,6 +3868,7 @@ Challenge: Modify regex for your environment's IP ranges
 ```
 
 **Step 10: Advanced Process Name Filtering**
+
 ```
 Query: Get Computer Name, Running Processes
 from all machines
@@ -3679,6 +3881,7 @@ Security Use: Identify possible malware with random names
 
 **Performance Benchmarking Exercise:**
 Complete this optimization challenge:
+
 ```
 Original Query (intentionally inefficient):
 Get Computer Name, Installed Applications, Running Processes, Services, Network Connections
@@ -3697,6 +3900,7 @@ Performance Metrics:
 ```
 
 **Common Issues and Solutions:**
+
 1. **"Query too slow"** - Apply constraint ordering, reduce field projection
 2. **"No results returned"** - Relax filters, check platform constraints
 3. **"Regex not matching"** - Test regex patterns on small dataset first
@@ -3709,12 +3913,14 @@ Performance Metrics:
 **Duration**: 45 minutes | **Difficulty**: Advanced | **Prerequisites**: Labs 1-2 completion, PowerShell knowledge
 
 #### Objectives
+
 - Design and implement custom sensors for enterprise requirements
 - Integrate error handling and performance optimization
 - Test sensors across diverse environments
 - Deploy sensors following enterprise best practices
 
 #### Pre-Lab Setup
+
 ```yaml
 Development Environment:
   - PowerShell 5.1+ or PowerShell Core 7+
@@ -3731,6 +3937,7 @@ Security Requirements:
 #### Exercise 3.1: Security Sensor Development (20 minutes)
 
 **Step 1: Requirements Analysis and Design**
+
 ```yaml
 Sensor Specification:
   Name: Enterprise Security Baseline Checker
@@ -3742,6 +3949,7 @@ Sensor Specification:
 ```
 
 **Step 2: Implement Core Sensor Logic**
+
 ```powershell
 # Enterprise Security Baseline Sensor v1.0
 # File: SecurityBaseline.ps1
@@ -3839,6 +4047,7 @@ if ($Detailed) {
 ```
 
 **Step 3: Sensor Testing and Validation**
+
 ```powershell
 # Test your sensor with different parameters
 Write-Host "Testing basic execution..." -ForegroundColor Yellow
@@ -3854,6 +4063,7 @@ Write-Host "`nTesting debug mode..." -ForegroundColor Yellow
 #### Exercise 3.2: Cross-Platform Sensor Development (15 minutes)
 
 **Step 4: Linux Security Sensor**
+
 ```bash
 #!/bin/bash
 # Linux Security Baseline Sensor
@@ -3978,6 +4188,7 @@ fi
 #### Exercise 3.3: Enterprise Deployment and Monitoring (10 minutes)
 
 **Step 5: Deployment Validation Checklist**
+
 ```yaml
 Pre-Deployment Validation:
   Code Review:
@@ -4000,6 +4211,7 @@ Pre-Deployment Validation:
 ```
 
 **Step 6: Tanium Integration**
+
 1. **Create Sensor in Tanium:**
    - Navigate to Authoring → Sensors
    - Create new sensor: "Custom Security Baseline"
@@ -4008,6 +4220,7 @@ Pre-Deployment Validation:
    - Configure parameters if needed
 
 2. **Test Deployment:**
+
    ```
    Query: Get Custom Security Baseline from 5 machines where OS Platform = "Windows"
    Expected: Consistent output format across all test machines
@@ -4028,6 +4241,7 @@ Pre-Deployment Validation:
 **Troubleshooting Common Issues:**
 
 1. **"Permission Denied" Errors:**
+
    ```powershell
    # Add privilege check and fallback
    if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
@@ -4037,6 +4251,7 @@ Pre-Deployment Validation:
    ```
 
 2. **Inconsistent Output:**
+
    ```powershell
    # Standardize output format
    $Output = @{
@@ -4056,6 +4271,7 @@ Pre-Deployment Validation:
    ```
 
 **Enterprise Best Practices Validation:**
+
 - [ ] Sensor includes version information
 - [ ] Error handling provides diagnostic information
 - [ ] Output format is consistent and machine-parseable
@@ -4069,12 +4285,14 @@ Pre-Deployment Validation:
 **Duration**: 40 minutes | **Difficulty**: Expert | **Prerequisites**: Labs 1-3 completion
 
 #### Objectives
+
 - Design complex multi-stage query workflows
 - Implement automated query orchestration
 - Create enterprise dashboards and reporting
 - Establish continuous monitoring and alerting
 
 #### Pre-Lab Setup
+
 ```yaml
 Advanced Requirements:
   - Completion of Labs 1-3 with working saved questions
@@ -4091,6 +4309,7 @@ Environment Preparation:
 #### Exercise 4.1: Multi-Stage Query Orchestration (15 minutes)
 
 **Step 1: Design Enterprise Security Assessment Workflow**
+
 ```yaml
 Workflow Design: Comprehensive Security Assessment
 Stage 1: System Identification and Baseline
@@ -4115,6 +4334,7 @@ Stage 4: Reporting and Remediation Planning
 ```
 
 **Step 2: Implement Stage 1 - System Identification**
+
 ```
 Saved Question Name: "WORKFLOW-Stage1-SystemBaseline"
 Query: Get Computer Name, Operating System, Domain, Last Reboot, Tanium Client Version
@@ -4127,6 +4347,7 @@ Schedule: Daily at 6:00 AM
 ```
 
 **Step 3: Implement Stage 2 - Security Validation**
+
 ```
 Saved Question Name: "WORKFLOW-Stage2-SecurityControls"
 Query: Get Computer Name, Custom Security Baseline, Installed Patches, Antivirus Products
@@ -4138,6 +4359,7 @@ Schedule: Daily at 7:00 AM (after Stage 1 completion)
 ```
 
 **Step 4: Create Risk Assessment Logic**
+
 ```
 Saved Question Name: "WORKFLOW-Stage3-RiskAssessment"
 Query: Get Computer Name, Security Risk Score, Priority Action Required
@@ -4151,10 +4373,10 @@ Schedule: Daily at 8:00 AM
 #### Exercise 4.2: Automated Monitoring and Alerting (15 minutes)
 
 **Step 5: Critical Security Alert System**
+
 ```yaml
 Alert Configuration: High-Risk Security Events
-Trigger Query:
-  Get Computer Name, Alert Details, Threat Level
+Trigger Query: Get Computer Name, Alert Details, Threat Level
   from all machines
   where (Custom Security Baseline contains "Non-Compliant"
   AND Threat Level = "Critical")
@@ -4170,6 +4392,7 @@ Alert Conditions:
 ```
 
 **Step 6: Performance Monitoring Dashboard**
+
 ```
 Dashboard Name: "Enterprise Query Performance Monitor"
 Components:
@@ -4194,6 +4417,7 @@ Export Capability: PDF, CSV, API
 ```
 
 **Step 7: Automated Remediation Workflows**
+
 ```yaml
 Workflow: Automated Security Remediation
 Trigger: Results from "WORKFLOW-Stage3-RiskAssessment"
@@ -4223,26 +4447,26 @@ Success Criteria:
 #### Exercise 4.3: Enterprise Reporting and Business Intelligence (10 minutes)
 
 **Step 8: Executive Security Dashboard**
+
 ```yaml
 Dashboard: Executive Security Overview
 Audience: CISO, IT Leadership, Compliance Team
 Update Frequency: Daily at 9:00 AM
 
-Key Metrics:
-  1. Security Compliance Score (0-100%)
-     - Based on critical security controls
-     - Trending over last 30 days
-     - Comparison to industry benchmarks
+Key Metrics: 1. Security Compliance Score (0-100%)
+  - Based on critical security controls
+  - Trending over last 30 days
+  - Comparison to industry benchmarks
 
   2. Risk Exposure Matrix
-     - High/Medium/Low risk endpoint counts
-     - Critical vulnerability exposure
-     - Mean time to remediation
+  - High/Medium/Low risk endpoint counts
+  - Critical vulnerability exposure
+  - Mean time to remediation
 
   3. Operational Efficiency
-     - Query performance trends
-     - Automation success rates
-     - Manual intervention requirements
+  - Query performance trends
+  - Automation success rates
+  - Manual intervention requirements
 
 Visual Components:
   - Security score gauge with color coding
@@ -4252,6 +4476,7 @@ Visual Components:
 ```
 
 **Step 9: Compliance Reporting Automation**
+
 ```sql
 -- Example automated compliance report query
 WITH SecurityBaseline AS (
@@ -4291,6 +4516,7 @@ FROM ComplianceMetrics;
 #### Lab 4 Final Assessment and Enterprise Integration
 
 **Enterprise Integration Checklist:**
+
 - [ ] Multi-stage workflows implemented and tested
 - [ ] Automated monitoring alerts configured
 - [ ] Executive dashboards created and validated
@@ -4301,12 +4527,14 @@ FROM ComplianceMetrics;
 - [ ] User training materials prepared
 
 **Business Value Validation:**
+
 1. **Time Savings**: Calculate hours saved through automation
 2. **Risk Reduction**: Measure improvement in security posture
 3. **Operational Efficiency**: Track query performance improvements
 4. **Compliance**: Demonstrate audit-ready reporting capabilities
 
 **Next Steps for Production Deployment:**
+
 1. **Stakeholder Approval**: Present results to business stakeholders
 2. **Production Pilot**: Deploy to limited production environment
 3. **Monitoring and Tuning**: Adjust based on real-world performance
@@ -4320,6 +4548,7 @@ FROM ComplianceMetrics;
 **Duration**: 50 minutes | **Difficulty**: Expert | **Prerequisites**: All previous labs
 
 #### Objectives
+
 - Apply learned skills to real-world enterprise scenarios
 - Master advanced troubleshooting techniques
 - Implement enterprise-scale optimizations
@@ -4330,6 +4559,7 @@ FROM ComplianceMetrics;
 **Scenario**: Suspected ransomware attack detected. Implement immediate assessment and containment.
 
 **Step 1: Rapid Threat Assessment**
+
 ```
 URGENT Query: Get Computer Name, Running Processes, Network Connections, Open Files
 from all machines
@@ -4340,6 +4570,7 @@ Time Limit: Must complete in &lt; 2 minutes
 ```
 
 **Step 2: Containment and Isolation**
+
 ```
 Follow-up Query: Get Computer Name, Network Adapter Status, Logged In User, Last Process Started
 from machines in previous query results
@@ -4363,6 +4594,7 @@ AND Network Connections contains ":443"
 ```
 
 **Your Optimized Solution:**
+
 ```
 Stage 1: [Write your Stage 1 query here]
 Stage 2: [Write your Stage 2 query here]
@@ -4377,6 +4609,7 @@ Accuracy Requirement: 100% result consistency
 **Integration Scenario**: Connect Tanium queries with SIEM, ticketing system, and patch management.
 
 **Step 1: SIEM Integration Query**
+
 ```yaml
 Purpose: Export security events to SIEM in standardized format
 Query Structure:
@@ -4387,6 +4620,7 @@ Query Structure:
 ```
 
 **Step 2: Automated Ticket Creation**
+
 ```yaml
 Trigger Conditions:
   - Security compliance violations
@@ -4404,6 +4638,7 @@ Ticket Data Requirements:
 **Final Assessment Questions:**
 
 1. **Query Optimization**: Explain the performance difference between these two approaches:
+
    ```
    Approach A: Get Computer Name, Running Processes from all machines where Running Processes contains "malware"
    Approach B: Get Computer Name from all machines where OS Platform = "Windows"; then Get Running Processes from [subset] where Running Processes contains "malware"
@@ -4416,6 +4651,7 @@ Ticket Data Requirements:
 4. **Business Integration**: Describe how you would present query results to non-technical executives.
 
 **Lab Completion Criteria:**
+
 - [ ] All 5 labs completed successfully
 - [ ] Created library of 10+ working saved questions
 - [ ] Demonstrated query optimization techniques
@@ -4425,6 +4661,7 @@ Ticket Data Requirements:
 - [ ] Achieved &gt;90% accuracy on assessment questions
 
 **Certification Readiness Validation:**
+
 - Can construct complex queries under time pressure
 - Understands performance optimization principles
 - Demonstrates troubleshooting methodology
@@ -4435,59 +4672,85 @@ Ticket Data Requirements:
 
 ## Practice Components
 
-<PracticeButton type="quiz" title="Sensor Selection Drill" difficulty="beginner" estimatedTime="8 minutes">
-  Identify the best sensor for each scenario and construct a minimal query.
-  Examples include inventory, security, and performance tasks.
-  Score 80% to pass.
+<PracticeButton
+  type="quiz"
+  title="Sensor Selection Drill"
+  difficulty="beginner"
+  estimatedTime="8 minutes"
+>
+  Identify the best sensor for each scenario and construct a minimal query. Examples include
+  inventory, security, and performance tasks. Score 80% to pass.
 </PracticeButton>
 
-<PracticeButton type="hands-on" title="Filter Logic Builder" difficulty="intermediate" estimatedTime="12 minutes">
+<PracticeButton
+  type="hands-on"
+  title="Filter Logic Builder"
+  difficulty="intermediate"
+  estimatedTime="12 minutes"
+>
   Build queries using nested AND/OR/NOT with parentheses. Validate result counts as filters change.
 </PracticeButton>
 
-<PracticeButton type="flashcard" title="Natural Language Flashcards" difficulty="beginner" estimatedTime="7 minutes">
-  Rapid recall of the Tanium question grammar: Get [sensor] from [targets] where [filters].
-  Includes quick "what sensor would you use?" prompts.
+<PracticeButton
+  type="flashcard"
+  title="Natural Language Flashcards"
+  difficulty="beginner"
+  estimatedTime="7 minutes"
+>
+  Rapid recall of the Tanium question grammar: Get [sensor] from [targets] where [filters]. Includes
+  quick "what sensor would you use?" prompts.
 </PracticeButton>
 
-<PracticeButton type="scenario" title="Sensor Lab Challenge" difficulty="intermediate" estimatedTime="15 minutes">
-  Given a set of real-world tasks, choose sensors and write minimal queries. Compare accuracy and performance trade-offs.
+<PracticeButton
+  type="scenario"
+  title="Sensor Lab Challenge"
+  difficulty="intermediate"
+  estimatedTime="15 minutes"
+>
+  Given a set of real-world tasks, choose sensors and write minimal queries. Compare accuracy and
+  performance trade-offs.
 </PracticeButton>
 
-<PracticeButton type="cleanup" title="Saved Question Cleanup Drill" difficulty="beginner" estimatedTime="10 minutes">
-  Identify redundant or stale saved questions. Propose naming, ownership, and archiving improvements.
+<PracticeButton
+  type="cleanup"
+  title="Saved Question Cleanup Drill"
+  difficulty="beginner"
+  estimatedTime="10 minutes"
+>
+  Identify redundant or stale saved questions. Propose naming, ownership, and archiving
+  improvements.
 </PracticeButton>
 
 <InfoBox title="Comparison: Inventory vs Security queries">
-  Inventory queries prioritize breadth and low cardinality fields. Security queries prioritize
-  depth and pivot speed. Optimize field projection and constrain early accordingly.
+  Inventory queries prioritize breadth and low cardinality fields. Security queries prioritize depth
+  and pivot speed. Optimize field projection and constrain early accordingly.
 </InfoBox>
 
-| Scenario | Recommended Sensor | Filter | Notes |
-|---|---|---|---|
-| Low disk space | Disk Space | &lt; 10 GB | Constrain by OS first |
-| RDP exposure | Listening Ports | contains ":3389" | Validate on servers separately |
-| Antivirus disabled | Antivirus Status | contains "disabled" | Check platform-specific fields |
-| High CPU | CPU Utilization | &gt; 85 | Pair with Top Processes by CPU |
+| Scenario           | Recommended Sensor | Filter              | Notes                          |
+| ------------------ | ------------------ | ------------------- | ------------------------------ |
+| Low disk space     | Disk Space         | &lt; 10 GB          | Constrain by OS first          |
+| RDP exposure       | Listening Ports    | contains ":3389"    | Validate on servers separately |
+| Antivirus disabled | Antivirus Status   | contains "disabled" | Check platform-specific fields |
+| High CPU           | CPU Utilization    | &gt; 85             | Pair with Top Processes by CPU |
 
 <InfoBox title="Save time">
-  Promote your top 10 questions to saved questions with clear names and owners. Reuse them for
-  daily health checks and incident triage.
+  Promote your top 10 questions to saved questions with clear names and owners. Reuse them for daily
+  health checks and incident triage.
 </InfoBox>
 
-| Operator | Usage | Example | Notes |
-|---|---|---|---|
-| contains | substring match | Computer Name contains "WKS-" | Fast on constrained cohorts |
-| equals | exact match | OS Platform = "Windows" | Preferred for performance |
-| matches | regex | Application Versions matches "^10\\.(2[2-9]|[3-9][0-9])" | Test on small sets |
-| older than | time window | Last Seen older than 7 days | Great for hygiene checks |
+| Operator   | Usage           | Example                                     | Notes                       |
+| ---------- | --------------- | ------------------------------------------- | --------------------------- | ------------------ |
+| contains   | substring match | Computer Name contains "WKS-"               | Fast on constrained cohorts |
+| equals     | exact match     | OS Platform = "Windows"                     | Preferred for performance   |
+| matches    | regex           | Application Versions matches "^10\\.(2[2-9] | [3-9][0-9])"                | Test on small sets |
+| older than | time window     | Last Seen older than 7 days                 | Great for hygiene checks    |
 
-| Sensor Category | Typical Output Size | Perf Tips | Common Pair |
-|---|---|---|---|
-| Inventory (OS/Model) | Small | Project 1–2 fields | Computer Name |
-| Security (Processes/Ports) | Medium–Large | Constrain by OS/BU first | Logged In User |
-| Performance (CPU/Memory) | Small | Use thresholds | Top Processes |
-| Hardware (Disk/Adapter) | Small | Prefer equality/prefix | Asset Tag |
+| Sensor Category            | Typical Output Size | Perf Tips                | Common Pair    |
+| -------------------------- | ------------------- | ------------------------ | -------------- |
+| Inventory (OS/Model)       | Small               | Project 1–2 fields       | Computer Name  |
+| Security (Processes/Ports) | Medium–Large        | Constrain by OS/BU first | Logged In User |
+| Performance (CPU/Memory)   | Small               | Use thresholds           | Top Processes  |
+| Hardware (Disk/Adapter)    | Small               | Prefer equality/prefix   | Asset Tag      |
 
 <InfoBox title="Scoring guide">
   Quizzes pass at 80%. Hands‑on labs require reproducible results and a short justification of
@@ -4510,6 +4773,7 @@ Real-world Tanium deployments face complex challenges requiring sophisticated qu
 **Challenge**: Weekly security posture assessment across diverse infrastructure while respecting regional compliance requirements (GDPR, APAC data sovereignty, US banking regulations).
 
 **Regional Constraints:**
+
 - **EMEA**: GDPR Article 32 - data minimization, processing limitations
 - **APAC**: Data sovereignty - no cross-border data transfer
 - **Americas**: SOX compliance, Federal banking regulations
@@ -4517,6 +4781,7 @@ Real-world Tanium deployments face complex challenges requiring sophisticated qu
 **Solution Architecture:**
 
 **Phase 1: Regional Inventory Assessment**
+
 ```
 // EMEA-specific query (data minimization compliant)
 Get Computer Name, OS Platform, Last Seen, Domain
@@ -4538,6 +4803,7 @@ and Last Seen newer than 1 day
 ```
 
 **Phase 2: Threat Vector Analysis**
+
 ```
 // Global threat hunting (automated daily execution)
 Get Computer Name, Suspicious Network Connections, Unusual Processes, Registry - Persistence Keys
@@ -4549,12 +4815,14 @@ and Last Seen newer than 24 hours
 ```
 
 **Performance Metrics:**
+
 - Query execution time: &lt;45 seconds per region
 - Data volume: 15GB daily across all regions
 - Compliance validation: 100% regional law adherence
 - False positive rate: &lt;2% for threat detection
 
 **Business Impact:**
+
 - 60% reduction in security assessment time
 - 100% compliance with regional regulations
 - $2.3M annual cost savings from automation
@@ -4573,6 +4841,7 @@ and Last Seen newer than 24 hours
 **Hour 0-6: Rapid Threat Discovery**
 
 **Initial Compromise Indicators:**
+
 ```
 // Phase 1: Identify patient of zero
 Get Computer Name, Running Processes, Network Connections, Recent File Changes
@@ -4586,6 +4855,7 @@ and Computer Name starts with "WORKSTATION"
 **Hour 6-24: Lateral Movement Tracking**
 
 **Multi-stage Investigation:**
+
 ```
 // Stage 1: Credential harvesting detection
 Get Computer Name, Process Tree, Memory Dumps, Credential Manager Entries
@@ -4610,6 +4880,7 @@ where (Network Traffic Volume &gt; 1GB in last 4 hours
 **Hour 24-48: Persistence Mechanism Discovery**
 
 **Advanced Persistence Detection:**
+
 ```
 // Registry-based persistence
 Get Computer Name, Registry - Run Keys, Registry - Service Keys, Registry - WMI Persistence
@@ -4629,6 +4900,7 @@ where (Startup Folder Contents newer than 7 days
 **Hour 48-72: Complete Eradication**
 
 **Verification Queries:**
+
 ```
 // Confirm threat elimination
 Get Computer Name, IoC Validation Status, System Integrity Check, Network Baseline Comparison
@@ -4647,6 +4919,7 @@ and Configuration Compliance = "100%"
 ```
 
 **Outcome Metrics:**
+
 - Time to detection: 4 hours (industry average: 287 days)
 - Complete containment: 31 hours
 - Zero data exfiltration confirmed
@@ -4662,6 +4935,7 @@ and Configuration Compliance = "100%"
 **Challenge**: Secure 15,000 new remote workers in 60 days while maintaining operational security
 
 **Infrastructure Requirements:**
+
 - VPN capacity scaling (500 → 15,000 concurrent)
 - Endpoint security for personal devices (BYOD policy)
 - Compliance with manufacturing regulations (ITAR, EAR)
@@ -4670,6 +4944,7 @@ and Configuration Compliance = "100%"
 **Week 1-2: Remote Endpoint Discovery**
 
 **Device Inventory and Classification:**
+
 ```
 // Personal vs. corporate device identification
 Get Computer Name, Domain Membership, Asset Tag, Device Owner, Installation Date
@@ -4691,6 +4966,7 @@ and (VPN Client Status not equals "Installed"
 **Week 3-4: Security Baseline Implementation**
 
 **Compliance Validation Queries:**
+
 ```
 // ITAR/EAR compliance checking
 Get Computer Name, Installed Applications, Data Classification Labels, Encryption Status
@@ -4711,6 +4987,7 @@ and (VPN Session History contains "non-US IP"
 **Week 5-8: Performance Optimization**
 
 **Remote Work Performance Monitoring:**
+
 ```
 // Network performance assessment
 Get Computer Name, VPN Connection Quality, Bandwidth Utilization, Latency Measurements
@@ -4732,6 +5009,7 @@ and (Response Time &gt; 3000ms
 **Business Continuity Validation:**
 
 **Critical System Availability:**
+
 ```
 // Manufacturing system accessibility
 Get Computer Name, Manufacturing System Connectivity, Failover Status, Backup Verification
@@ -4743,6 +5021,7 @@ and (Manufacturing System Connectivity not equals "Available"
 ```
 
 **Results Achieved:**
+
 - 15,000 remote workers enabled in 47 days (ahead of schedule)
 - 99.7% uptime for critical manufacturing systems
 - Zero ITAR/EAR compliance violations
@@ -4758,6 +5037,7 @@ and (Manufacturing System Connectivity not equals "Available"
 **Challenge**: Integrate 50,000 IoT sensors and 5,000 OT devices with existing Tanium deployment without compromising critical infrastructure operations
 
 **Environmental Constraints:**
+
 - Zero downtime tolerance for power generation systems
 - Air-gapped networks with limited connectivity
 - Legacy systems (Windows 2000, embedded Linux)
@@ -4766,6 +5046,7 @@ and (Manufacturing System Connectivity not equals "Available"
 **Phase 1: Network Segmentation Validation**
 
 **IT/OT Boundary Verification:**
+
 ```
 // Network segmentation validation
 Get Computer Name, Network Interfaces, Routing Tables, Firewall Rules, Zone Classification
@@ -4787,6 +5068,7 @@ and Zone Classification = "OT"
 **Phase 2: IoT Device Classification**
 
 **Device Type and Risk Assessment:**
+
 ```
 // IoT device discovery and categorization
 Get Computer Name, Device Type, Manufacturer, Firmware Version, Communication Protocols
@@ -4808,6 +5090,7 @@ and (Operational Status not equals "Normal"
 **Phase 3: Compliance Monitoring**
 
 **NERC CIP Compliance Validation:**
+
 ```
 // CIP-007 patch management compliance
 Get Computer Name, Patch Status, Security Patch Installation Date, Vulnerability Assessment
@@ -4829,6 +5112,7 @@ and (Configuration Changes newer than 7 days
 **Phase 4: Anomaly Detection**
 
 **Advanced Threat Detection for OT:**
+
 ```
 // Unusual communication patterns
 Get Computer Name, Network Traffic Analysis, Protocol Deviations, Timing Anomalies
@@ -4848,6 +5132,7 @@ and (Control Logic Changes newer than 1 hour
 ```
 
 **Implementation Results:**
+
 - 100% inventory visibility across IT/OT environments
 - 45% reduction in false positive security alerts
 - NERC CIP compliance maintained throughout integration
@@ -4863,6 +5148,7 @@ and (Control Logic Changes newer than 1 hour
 **Challenge**: Achieve and maintain HIPAA compliance across complex healthcare IT infrastructure while enabling clinical workflow efficiency
 
 **Regulatory Requirements:**
+
 - PHI data encryption at rest and in transit
 - Access logging and audit trails
 - Minimum necessary access principles
@@ -4872,6 +5158,7 @@ and (Control Logic Changes newer than 1 hour
 **Phase 1: PHI Data Discovery and Classification**
 
 **Patient Data Location Mapping:**
+
 ```
 // PHI-containing systems identification
 Get Computer Name, Installed Applications, Data Store Locations, Encryption Status, Access Controls
@@ -4895,6 +5182,7 @@ and (Data Flow Mapping contains "Unencrypted"
 **Phase 2: Access Control Validation**
 
 **HIPAA Minimum Necessary Compliance:**
+
 ```
 // User access pattern analysis
 Get Computer Name, User Account Activity, Resource Access Logs, Role Assignments, Time-Based Access
@@ -4917,6 +5205,7 @@ and Administrator_Justification = "Not Provided"
 **Phase 3: Audit Trail Implementation**
 
 **Comprehensive Logging Validation:**
+
 ```
 // HIPAA audit log compliance
 Get Computer Name, Audit Log Status, Log Retention Period, Log Integrity Verification, Access Attempts
@@ -4938,6 +5227,7 @@ and (Patient Record Access not logged
 **Phase 4: Risk Assessment and Mitigation**
 
 **Vulnerability Management for Healthcare:**
+
 ```
 // Medical device vulnerability assessment
 Get Computer Name, Medical Device Vulnerabilities, Patch Feasibility, Risk Score, Mitigation Status
@@ -4959,6 +5249,7 @@ and (BAA Status not equals "Signed and Current"
 **Phase 5: Incident Response and Breach Prevention**
 
 **Real-time Threat Detection:**
+
 ```
 // Potential data breach detection
 Get Computer Name, Unusual Data Access, Large File Transfers, External Communications, User Behavior Analysis
@@ -4978,6 +5269,7 @@ and (Impact Assessment contains "500+ Patients"
 ```
 
 **HIPAA Compliance Results:**
+
 - 100% PHI data discovery and classification achieved
 - 99.9% audit trail completeness maintained
 - Zero HIPAA violations during 18-month audit period
@@ -4991,13 +5283,13 @@ and (Impact Assessment contains "500+ Patients"
 
 **Query Strategy Selection Matrix:**
 
-| Business Driver | Recommended Approach | Query Pattern | Success Metrics |
-|---|---|---|---|
-| **Regulatory Compliance** | Conservative, auditable queries | Multi-stage validation with full logging | 100% compliance, complete audit trails |
-| **Incident Response** | Rapid, iterative investigation | Broad discovery → narrow focus → validation | Time to containment, threat elimination rate |
-| **Performance Optimization** | Baseline-driven monitoring | Trend analysis with threshold alerting | SLA compliance, resource optimization |
-| **Risk Management** | Continuous, automated assessment | Scheduled queries with exception reporting | Risk score improvement, vulnerability reduction |
-| **Business Operations** | Efficient, scheduled execution | Optimized queries with caching | Cost per query, business value delivered |
+| Business Driver              | Recommended Approach             | Query Pattern                               | Success Metrics                                 |
+| ---------------------------- | -------------------------------- | ------------------------------------------- | ----------------------------------------------- |
+| **Regulatory Compliance**    | Conservative, auditable queries  | Multi-stage validation with full logging    | 100% compliance, complete audit trails          |
+| **Incident Response**        | Rapid, iterative investigation   | Broad discovery → narrow focus → validation | Time to containment, threat elimination rate    |
+| **Performance Optimization** | Baseline-driven monitoring       | Trend analysis with threshold alerting      | SLA compliance, resource optimization           |
+| **Risk Management**          | Continuous, automated assessment | Scheduled queries with exception reporting  | Risk score improvement, vulnerability reduction |
+| **Business Operations**      | Efficient, scheduled execution   | Optimized queries with caching              | Cost per query, business value delivered        |
 
 **Query Complexity Assessment Framework:**
 
@@ -5036,8 +5328,7 @@ Value Factors:
   - Compliance assurance (fine avoidance, audit readiness)
   - Business enablement (faster decision making, insights)
 
-ROI Formula:
-  ROI = (Value Delivered - Total Cost) / Total Cost × 100%
+ROI Formula: ROI = (Value Delivered - Total Cost) / Total Cost × 100%
 
 Benchmark ROI Targets:
   - Security queries: 300-500% ROI
@@ -5060,7 +5351,6 @@ Benchmark ROI Targets:
 
 **Next Module**: [Refining Questions & Targeting](/modules/refining-questions-targeting) - Learn advanced targeting and filtering techniques
 
-
 ## 🎯 Module Transition: Ready for Advanced Targeting?
 
 <ModuleTransition
@@ -5070,83 +5360,82 @@ Benchmark ROI Targets:
   nextModuleTitle="Refining Questions & Targeting"
   requiredSkills={[
     {
-      id: "basic-query",
-      name: "Basic Query Construction",
-      description: "Build simple queries using Get-From-Where syntax",
+      id: 'basic-query',
+      name: 'Basic Query Construction',
+      description: 'Build simple queries using Get-From-Where syntax',
       tested: false,
-      passed: false
+      passed: false,
     },
     {
-      id: "sensor-usage",
-      name: "Sensor Selection",
-      description: "Choose appropriate sensors for different information needs",
+      id: 'sensor-usage',
+      name: 'Sensor Selection',
+      description: 'Choose appropriate sensors for different information needs',
       tested: false,
-      passed: false
+      passed: false,
     },
     {
-      id: "result-interpretation",
-      name: "Result Interpretation",
-      description: "Understand and analyze query results",
+      id: 'result-interpretation',
+      name: 'Result Interpretation',
+      description: 'Understand and analyze query results',
       tested: false,
-      passed: false
+      passed: false,
     },
     {
-      id: "saved-questions",
-      name: "Saved Questions",
-      description: "Create and manage reusable saved questions",
+      id: 'saved-questions',
+      name: 'Saved Questions',
+      description: 'Create and manage reusable saved questions',
       tested: false,
-      passed: false
-    }
+      passed: false,
+    },
   ]}
   challenges={[
     {
-      question: "Which query correctly retrieves all Windows servers with their patch status?",
+      question: 'Which query correctly retrieves all Windows servers with their patch status?',
       options: [
-        "Get Computer Name and Patch Status from all machines where Operating System contains Server",
-        "Get Patch Status where Computer Name contains Server",
-        "Select Computer Name, Patch Status from machines where OS = Windows Server",
-        "Find all servers and show patch status"
+        'Get Computer Name and Patch Status from all machines where Operating System contains Server',
+        'Get Patch Status where Computer Name contains Server',
+        'Select Computer Name, Patch Status from machines where OS = Windows Server',
+        'Find all servers and show patch status',
       ],
       correctAnswer: 0,
-      explanation: "The correct syntax uses \"Get [sensors] from all machines where [filter]\". The query must specify what to get (Computer Name and Patch Status), from where (all machines), and the filter condition (OS contains Server).",
-      skillId: "basic-query"
+      explanation:
+        'The correct syntax uses "Get [sensors] from all machines where [filter]". The query must specify what to get (Computer Name and Patch Status), from where (all machines), and the filter condition (OS contains Server).',
+      skillId: 'basic-query',
     },
     {
-      question: "Which sensor would you use to find machines with high CPU usage?",
-      options: [
-        "System Performance",
-        "CPU Utilization",
-        "Process List",
-        "Hardware Information"
-      ],
+      question: 'Which sensor would you use to find machines with high CPU usage?',
+      options: ['System Performance', 'CPU Utilization', 'Process List', 'Hardware Information'],
       correctAnswer: 1,
-      explanation: "CPU Utilization is the specific sensor that returns current CPU usage percentage. System Performance might include CPU but also other metrics. Process List shows what is running but not overall CPU usage.",
-      skillId: "sensor-usage"
+      explanation:
+        'CPU Utilization is the specific sensor that returns current CPU usage percentage. System Performance might include CPU but also other metrics. Process List shows what is running but not overall CPU usage.',
+      skillId: 'sensor-usage',
     },
     {
-      question: "A query returns \"234 machines with 3 different results\". What does this mean?",
+      question: 'A query returns "234 machines with 3 different results". What does this mean?',
       options: [
-        "234 machines responded with errors",
-        "Only 3 machines responded to the query",
-        "234 machines responded, grouped into 3 distinct result sets",
-        "The query failed on 231 machines"
+        '234 machines responded with errors',
+        'Only 3 machines responded to the query',
+        '234 machines responded, grouped into 3 distinct result sets',
+        'The query failed on 231 machines',
       ],
       correctAnswer: 2,
-      explanation: "Tanium groups identical results together. \"234 machines with 3 different results\" means all 234 machines responded successfully, but their responses fell into 3 different groups based on the data returned.",
-      skillId: "result-interpretation"
+      explanation:
+        'Tanium groups identical results together. "234 machines with 3 different results" means all 234 machines responded successfully, but their responses fell into 3 different groups based on the data returned.',
+      skillId: 'result-interpretation',
     },
     {
-      question: "What is the primary benefit of creating a Saved Question?",
+      question: 'What is the primary benefit of creating a Saved Question?',
       options: [
-        "It runs faster than regular queries",
-        "It can be scheduled to run automatically and reused across teams",
-        "It bypasses security restrictions",
-        "It uses less network bandwidth"
+        'It runs faster than regular queries',
+        'It can be scheduled to run automatically and reused across teams',
+        'It bypasses security restrictions',
+        'It uses less network bandwidth',
       ],
       correctAnswer: 1,
-      explanation: "Saved Questions can be scheduled to run automatically at intervals and shared across teams for consistent reporting. They do not necessarily run faster or use less bandwidth, and they follow the same security rules.",
-      skillId: "saved-questions"
-    }
+      explanation:
+        'Saved Questions can be scheduled to run automatically at intervals and shared across teams for consistent reporting. They do not necessarily run faster or use less bandwidth, and they follow the same security rules.',
+      skillId: 'saved-questions',
+    },
   ]}
   minimumScore={0.75}
 />

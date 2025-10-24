@@ -351,7 +351,7 @@ export default function ModuleRendererLite({ moduleData }: ModuleRendererLitePro
   const content = moduleData?.content;
 
   // Early return AFTER all hooks if module data is invalid
-  if (!moduleData?.frontmatter || !moduleData.content) {
+  if (!moduleData || !moduleData.frontmatter || !moduleData.content) {
     return (
       <div className="flex min-h-screen items-center justify-center">
         <Card className="border-white/10">

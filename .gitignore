@@ -34,5 +34,10 @@ claude-flow.bat
 claude-flow.ps1
 hive-mind-prompt-*.txt
 .next/
-C:\Users\*
+C:\\Users\\*
+C:/*
+lighthouse.*/
+CUsersrobneAppDataLocallighthouse.*/
+*.report.html
+*.report.json
 pnpm-lock.yaml

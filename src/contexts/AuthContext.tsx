@@ -1,8 +1,8 @@
 'use client';
 
-import type { AuthError, Session, User } from '@supabase/supabase-js';
-import { createContext, type ReactNode, useContext, useEffect, useState } from 'react';
 import { supabase } from '@/lib/supabase';
+import type { AuthError, Session, User } from '@supabase/supabase-js';
+import { createContext, useContext, useEffect, useState, type ReactNode } from 'react';
 
 /** Minimal shape used to build payloads */
 type _UsersRow = {
@@ -135,7 +135,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((event, session) => {
-      console.warn('Auth state changed:', event, session?.user.id);
+      console.log('Auth state changed:', event, session?.user?.id ?? 'no user');
 
       setState((prev) => ({
         ...prev,

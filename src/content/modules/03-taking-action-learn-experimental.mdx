@@ -1,20 +1,3 @@
----
-title: "Taking Action (Learn-style, Experimental)"
-id: "module-03L"
-domainSlug: "taking-action"
-difficulty: "Intermediate"
-estimatedTime: 70
-tags: ["actions", "packages", "safety", "experiment"]
-status: "experimental"
-lastUpdated: "2025-10-05"
----
-
-import { MicroSection } from "@/components/mdx/MicroSection";
-import PracticeButton from "@/components/mdx/PracticeButton";
-import { MicroQuizMDX } from "@/components/learn-experimental/LearnExperimentalQuizGroup";
-import { getReadOnlyQuestions } from "@/lib/quiz/readOnlyQuestions";
-import { emitLearnExp } from "@/lib/telemetry/learnExperimental";
-
 # Taking Action (Learn Experimental Track)
 
 <MicroSection
@@ -41,7 +24,9 @@ import { emitLearnExp } from "@/lib/telemetry/learnExperimental";
 
 <PracticeButton
   href="/study/labs/03-l/action-safety-check"
-  onClick={() => emitLearnExp({ moduleId: "module-03L", unitId: "unit-03L-01", action: "practice_start" })}
+  onClick={() =>
+    emitLearnExp({ moduleId: 'module-03L', unitId: 'unit-03L-01', action: 'practice_start' })
+  }
 >
   Practice: Build an Action Safety Checklist
 </PracticeButton>
@@ -72,7 +57,9 @@ import { emitLearnExp } from "@/lib/telemetry/learnExperimental";
 
 <PracticeButton
   href="/study/labs/03-l/package-anatomy"
-  onClick={() => emitLearnExp({ moduleId: "module-03L", unitId: "unit-03L-02", action: "practice_start" })}
+  onClick={() =>
+    emitLearnExp({ moduleId: 'module-03L', unitId: 'unit-03L-02', action: 'practice_start' })
+  }
 >
   Practice: Deconstruct a Package
 </PracticeButton>
@@ -103,7 +90,9 @@ import { emitLearnExp } from "@/lib/telemetry/learnExperimental";
 
 <PracticeButton
   href="/study/labs/03-l/deployment-plan"
-  onClick={() => emitLearnExp({ moduleId: "module-03L", unitId: "unit-03L-03", action: "practice_start" })}
+  onClick={() =>
+    emitLearnExp({ moduleId: 'module-03L', unitId: 'unit-03L-03', action: 'practice_start' })
+  }
 >
   Practice: Draft a Deployment Blueprint
 </PracticeButton>
@@ -134,7 +123,9 @@ import { emitLearnExp } from "@/lib/telemetry/learnExperimental";
 
 <PracticeButton
   href="/study/labs/03-l/verification-runbook"
-  onClick={() => emitLearnExp({ moduleId: "module-03L", unitId: "unit-03L-04", action: "practice_start" })}
+  onClick={() =>
+    emitLearnExp({ moduleId: 'module-03L', unitId: 'unit-03L-04', action: 'practice_start' })
+  }
 >
   Practice: Build a Verification Runbook
 </PracticeButton>
@@ -165,7 +156,9 @@ import { emitLearnExp } from "@/lib/telemetry/learnExperimental";
 
 <PracticeButton
   href="/study/labs/03-l/action-retrospective"
-  onClick={() => emitLearnExp({ moduleId: "module-03L", unitId: "unit-03L-05", action: "practice_start" })}
+  onClick={() =>
+    emitLearnExp({ moduleId: 'module-03L', unitId: 'unit-03L-05', action: 'practice_start' })
+  }
 >
   Practice: Draft an Action Retrospective
 </PracticeButton>
@@ -178,6 +171,5 @@ import { emitLearnExp } from "@/lib/telemetry/learnExperimental";
   moduleId="module-03L"
   unitId="unit-03L-summary"
   quizIdPrefix="module-03L-summary"
-  questions={getReadOnlyQuestions({ domain: "taking-action", limit: 7 })}
+  questions={getReadOnlyQuestions({ domain: 'taking-action', limit: 7 })}
 />
-

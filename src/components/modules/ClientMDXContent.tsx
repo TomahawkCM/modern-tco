@@ -1,4 +1,4 @@
-'use client';  // Ensure at top
+'use client'; // Ensure at top
 
 export default function ClientMDXContent({ content }: ClientMDXContentProps) {
   // Move useMemo inside
