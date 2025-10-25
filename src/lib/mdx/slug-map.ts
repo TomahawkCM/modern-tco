@@ -2,6 +2,7 @@
 export const SLUG_TO_FILENAME: Record<string, string> = {
   'tanium-platform-foundation': '00-tanium-platform-foundation.mdx',
   'platform-foundation': '00-tanium-platform-foundation.mdx',
+  '00-tanium-platform-foundation-v2': '00-tanium-platform-foundation-v2.mdx',
   'tanium-platform-foundation-v2': '00-tanium-platform-foundation-v2.mdx',
   'platform-foundation-v2': '00-tanium-platform-foundation-v2.mdx',
   'asking-questions': '01-asking-questions.mdx',

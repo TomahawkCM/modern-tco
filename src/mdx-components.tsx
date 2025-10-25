@@ -17,6 +17,7 @@ import PracticeButton from '@/components/mdx/PracticeButton';
 import QueryPlayground from '@/components/mdx/QueryPlayground';
 import SkillGate from '@/components/mdx/SkillGate';
 import StepItem from '@/components/mdx/StepItem';
+import Steps from '@/components/mdx/Steps';
 
 function Anchor(props: React.AnchorHTMLAttributes<HTMLAnchorElement>) {
   const href = props.href || '';
@@ -40,5 +41,6 @@ export function useMDXComponents(components: MDXComponents = {}): MDXComponents 
     QueryPlayground,
     SkillGate,
     StepItem,
+    Steps,
   };
 }

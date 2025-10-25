@@ -1,0 +1,317 @@
+---
+id: 'module-tanium-platform-foundation-v2'
+title: 'Tanium Platform Foundation (Beginner Edition)'
+domainSlug: 'platform-foundation'
+domainEnum: PLATFORM_FOUNDATION
+difficulty: 'Beginner'
+estimatedTime: '120 min'
+blueprintWeight: 0
+description: 'Beginner-first walkthrough of the Tanium platform using plain language, analogies, and hands-on practice.'
+tags:
+  - 'foundation'
+  - 'architecture'
+  - 'beginner'
+  - 'exam-alignment'
+version: 2
+status: review
+prerequisites: []
+learningObjectives:
+  - "Explain Tanium's core value using a relatable analogy."
+  - 'Identify key platform components and how they show up on the TCO exam.'
+  - 'Complete a first-success workflow in the Tanium console.'
+  - 'Apply the platform principles to troubleshoot a simple scenario.'
+---
+
+# Tanium Platform Foundation (Beginner Edition)
+
+Welcome! By the end of this module you will understand why Tanium matters, what pieces make it work, how to succeed on your first run, and how it appears on the Tanium Certified Operator (TCO) exam.
+
+## Why this matters
+
+<Callout type="tip" title="Analogy: City-Wide Radio">
+  Tanium works like a city-wide emergency radio. One signal reaches every neighborhood almost
+  instantly, so IT teams can act fast without waiting for silence on the line.
+</Callout>
+
+- Visibility: Respond to questions across every endpoint in seconds.
+- Scale: Peer-to-peer communication keeps bandwidth usage low.
+- Speed: Issues resolve faster when the whole fleet hears you at once.
+
+Traditional polling tools behave like phone trees—slow, serialized, and prone to missed calls. Tanium’s broadcast-style approach ensures every endpoint hears the request, relays it onward, and reports back before a slow-moving outbreak becomes a major incident.
+
+### Active Recall
+
+- Why does Tanium rely on a peer-to-peer model?
+- How does the city-wide radio analogy connect to Tanium's architecture?
+
+### Mini-practice
+
+1. Write down one problem fast visibility solves for your organization.
+2. Describe how a slow response could impact an IT incident.
+
+<MicroQuizMDX
+  question="Which Tanium capability helps you avoid waiting for scheduled scans?"
+  options={[
+    'Live peer-to-peer questions',
+    'Weekly antivirus updates',
+    'Quarterly audit reports',
+    'Manual device spot checks',
+  ]}
+  correctAnswer="Live peer-to-peer questions"
+  explanation="Live peer-to-peer questions let you gather data instantly instead of waiting for scheduled scans."
+/>
+
+### One-sentence summary
+
+Tanium broadcasts questions across endpoints almost instantly, giving teams the speed to investigate and act before issues spiral.
+
+## What you need to know
+
+### Key terms (plain language)
+
+- **Endpoint** – Any device managed by Tanium; think of it as a citizen listening to the radio.
+- **Sensor** – A question template that collects live data from endpoints.
+- **Package** – A set of instructions to change something on endpoints.
+- **Action** – The execution of a package across target endpoints.
+- **Computer Group** – A saved collection of endpoints you use to scope questions and actions.
+- **Question** – A sensor plus targeting; it tells Tanium what to ask and who should respond.
+
+<InfoBox title="Exam Signal" theme="definition">
+  The TCO exam often asks about how sensors and packages differ. Remember: sensors gather data;
+  packages make changes.
+</InfoBox>
+
+### Architecture at a glance
+
+![Diagram placeholder describing the Tanium linear chain](/diagrams/module00-linear-chain-placeholder.svg 'Diagram placeholder for Tanium linear chain')
+
+### Where this shows up on the TCO exam
+
+| Subsection            | TCO Topic                           | Question Weight |
+| --------------------- | ----------------------------------- | --------------- |
+| Why this matters      | Platform value proposition          | 5%              |
+| What you need to know | Platform architecture & terminology | 20%             |
+| How it works          | Console navigation & workflows      | 30%             |
+| Apply it now          | Troubleshooting & scenario analysis | 15%             |
+
+The TCO exam expects you to connect terminology with impact. Focus on explaining _why_ Tanium’s architecture is different, not just reciting definitions. During practice, say each concept aloud in plain language before moving on to the next topic.
+
+### Knowledge Checks
+
+<MicroQuizMDX
+  question="What does a Tanium sensor do?"
+  options={[
+    'Collects live data from endpoints',
+    'Deploys software packages',
+    'Creates new user accounts',
+    'Shuts down endpoints remotely',
+  ]}
+  correctAnswer="Collects live data from endpoints"
+  explanation="Sensors gather information; they do not take action on endpoints."
+  concept="Sensors"
+/>
+
+<MicroQuizMDX
+  question="In the city-wide radio analogy, what represents the endpoints?"
+  options={[
+    'The radio announcer',
+    'Citizens receiving the message',
+    'Street signs',
+    'Weather reports',
+  ]}
+  correctAnswer="Citizens receiving the message"
+  explanation="Endpoints are like citizens listening to the broadcast."
+  concept="Platform Architecture"
+/>
+
+### Active Recall
+
+- Summarize the difference between a sensor and a package.
+- Which part of the architecture keeps bandwidth low?
+- How does Tanium decide which endpoints should answer a question?
+
+### Mini-practice
+
+1. Match each term (sensor, package, action) with a real-world example from your environment.
+2. Identify which TCO objective each term aligns with.
+3. Sketch the peer-to-peer chain and label where the Tanium Server and endpoints sit.
+
+### One-sentence summary
+
+Know the vocabulary: sensors ask, packages prepare actions, and endpoints respond in seconds.
+
+## How it works (guided steps)
+
+<Steps>
+  <StepItem title="Step 1: Open Interact">
+    Sign into the Tanium console and choose **Interact** from the navigation menu.
+  </StepItem>
+  <StepItem title="Step 2: Build your question">
+    Select **Computer Name** from the sensor list or search bar.
+  </StepItem>
+  <StepItem title="Step 3: Ask and observe">
+    Click **Ask Question** and watch results flow in as endpoints respond.
+  </StepItem>
+</Steps>
+
+Pause between each step to note what changed on screen. When results arrive, hover over the status indicator to confirm how many endpoints have answered and how many are still pending. This habit helps you spot when a subset of machines might be unreachable.
+
+<Callout type="warning" title="Common pitfalls & how to debug">
+  - No results? Check that the machine group you targeted has online endpoints. - Slow responses?
+  Review peer-to-peer health; ensure no blocked ports. - Unexpected data? Re-run with a filter to
+  narrow the scope.
+</Callout>
+
+### Knowledge Checks
+
+<MicroQuizMDX
+  question="Which navigation area launches the Question Builder?"
+  options={['Home', 'Deploy', 'Interact', 'Dashboards']}
+  correctAnswer="Interact"
+  explanation="Interact is where you build and run ad-hoc questions."
+  concept="Console Navigation"
+/>
+
+<MicroQuizMDX
+  question="How can you verify why a question returned no results?"
+  options={[
+    'Blame DNS cache',
+    'Check target groups and endpoint online status',
+    'Reboot the server',
+    'Delete the sensor',
+  ]}
+  correctAnswer="Check target groups and endpoint online status"
+  explanation="Confirm the target group and endpoint availability before taking further action."
+  concept="Troubleshooting"
+/>
+
+<MicroQuizMDX
+  question="What filter would you add to scope your first question to lab devices?"
+  options={[
+    'Where Computer Name contains LAB',
+    'Where Sensor equals LAB',
+    'Where Operating System equals Database',
+    'Where Package equals LAB',
+  ]}
+  correctAnswer="Where Computer Name contains LAB"
+  explanation="Use the filter clause to target endpoints with names containing the LAB prefix."
+  concept="Filtering"
+/>
+
+### Active Recall
+
+- Which menu launches the Question Builder?
+- What steps confirm endpoint availability?
+- How do filters change the scope of a question?
+
+### Mini-practice
+
+1. Build a question that lists all machines running Windows.
+2. Add a filter for computer name containing `LAB`.
+3. Document how many endpoints respond within 10 seconds.
+4. Export results to CSV and note the default download location.
+
+### One-sentence summary
+
+A reliable first success comes from targeting the right endpoints, asking a precise question, and watching response flow for signs of trouble.
+
+## Apply it now
+
+<Callout type="lab" title="Scenario: Low Disk Space Alert">
+  You notice remote laptops dropping off nightly backups. Use Tanium to identify machines with less
+  than 10 GB free disk space and plan next steps.
+</Callout>
+
+Start by restating the problem in your own words: “Backups are failing because some laptops are out of space.” This keeps the goal clear as you build the question, triage the results, and communicate next actions back to stakeholders.
+
+### Short checkpoint quiz
+
+<MicroQuizMDX
+  question="Which sensor helps you measure disk capacity during the scenario?"
+  options={['Running Applications', 'Disk Free Space', 'Installed Patches', 'Online Status']}
+  correctAnswer="Disk Free Space"
+  explanation="Disk Free Space reports the remaining capacity on each endpoint."
+  concept="Sensors"
+/>
+
+<MicroQuizMDX
+  question="After identifying low disk space systems, what is the best next step?"
+  options={[
+    'Immediately push new software',
+    'Schedule an action to clean temp files',
+    'Remove them from the network',
+    'Do nothing',
+  ]}
+  correctAnswer="Schedule an action to clean temp files"
+  explanation="Cleaning temp files or requesting end-user cleanup is a targeted remediation before any drastic measures."
+  concept="Remediation"
+/>
+
+<MicroQuizMDX
+  question="How do you document your findings for stakeholders?"
+  options={[
+    'Screenshot the console and send without context',
+    'Export results to CSV with notes on next actions',
+    'Delete the question to keep the console tidy',
+    'Send raw JSON logs',
+  ]}
+  correctAnswer="Export results to CSV with notes on next actions"
+  explanation="Exporting data with commentary provides clarity and auditability."
+  concept="Documentation"
+/>
+
+<MicroQuizMDX
+  question="Which feature helps you rerun the same question after cleanup actions?"
+  options={['Question History', 'Live Chats', 'Timeline Dashboard', 'User Directory']}
+  correctAnswer="Question History"
+  explanation="Question History stores prior questions so you can rerun them quickly for validation."
+  concept="Console Features"
+/>
+
+<MicroQuizMDX
+  question="Which targeting approach keeps remediation safe while testing?"
+  options={[
+    'Blast to All Endpoints immediately',
+    'Start with a pilot computer group before broad deployment',
+    'Only target offline machines',
+    'Delete the package after one run',
+  ]}
+  correctAnswer="Start with a pilot computer group before broad deployment"
+  explanation="Begin with a controlled pilot group, validate results, then scale to the wider fleet."
+  concept="Targeting"
+/>
+
+<MicroQuizMDX
+  question="What documentation should accompany the CSV export?"
+  options={[
+    'A changelog describing actions taken and next steps',
+    'Animated GIFs of the console',
+    'A generic Tanium brochure',
+    'Nothing—CSV alone is enough',
+  ]}
+  correctAnswer="A changelog describing actions taken and next steps"
+  explanation="Stakeholders need context on what was done, what's next, and who is responsible."
+  concept="Documentation"
+/>
+
+### Active Recall
+
+- What sensor reveals disk capacity?
+- Which follow-up action helps you remediate low disk space?
+- How will you prove the issue is resolved?
+
+### Mini-practice
+
+1. Draft the exact question syntax you will use for the scenario.
+2. Note which computer group you will target first and why.
+3. Outline how you will communicate results to stakeholders.
+
+### If stuck, try this ladder
+
+1. Re-run the question with a smaller computer group to verify scope.
+2. Use the Question History to confirm the query syntax.
+3. Ask a peer to replicate in their environment to compare results.
+
+### One-sentence summary
+
+Apply the workflow end-to-end: detect the issue, run a focused question, and communicate the results with clear remediation steps.
