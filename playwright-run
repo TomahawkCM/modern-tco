@@ -1,4 +1,0 @@
-#!/bin/bash
-# Quick Playwright run command
-source ~/.playwright-wsl2-env 2>/dev/null
-node "$@"

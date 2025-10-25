@@ -1,20 +1,5 @@
 'use client';
 
-import {
-  AlertCircle,
-  Book,
-  BookOpen,
-  Brain,
-  CheckCircle,
-  Clock,
-  Info,
-  Lightbulb,
-  Target,
-  Zap,
-} from 'lucide-react';
-import dynamic from 'next/dynamic';
-import type React from 'react';
-import { useEffect, useMemo, useRef, useState } from 'react';
 import MicroQuizMDX from '@/components/mdx/MicroQuizMDX';
 import MicroSection from '@/components/mdx/MicroSection';
 import PracticeButton from '@/components/mdx/PracticeButton';
@@ -29,21 +14,24 @@ import { analytics } from '@/lib/analytics';
 import type { ModuleData } from '@/lib/mdx/module-loader';
 import { cn } from '@/lib/utils';
 import { Difficulty } from '@/types/exam';
+import {
+  AlertCircle,
+  BookOpen,
+  Brain,
+  CheckCircle,
+  Clock,
+  Info,
+  Lightbulb,
+  Target,
+  Zap,
+} from 'lucide-react';
+import type React from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import ClientMDXContent from './ClientMDXContent';
 
 interface ModuleRendererProps {
   moduleData: ModuleData;
 }
-
-// Client-side MDX wrapper component
-const ClientMDXContent = dynamic(() => import('./ClientMDXContent'), {
-  ssr: false,
-  loading: () => (
-    <div className="flex items-center justify-center p-8">
-      <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-cyan-500"></div>
-      <span className="ml-3 text-primary">Loading content...</span>
-    </div>
-  ),
-});
 
 // MDX Components that can be used within the module content
 const mdxComponents = {

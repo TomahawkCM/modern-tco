@@ -47,7 +47,7 @@ async function bundleAllMDX() {
           rehypePlugins: [],
           development: false,
           jsxImportSource: 'react',
-          format: 'mdx',
+          format: 'function-body', // Correct format for MDXRemote
           // Force production JSX runtime
           jsx: true,
           providerImportSource: '@mdx-js/react',

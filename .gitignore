@@ -5,13 +5,20 @@ node_modules/
 
 # Build artifacts
 .next/
+.swc/
+.supabase/
+.vercel/
+.vscode/
 
 # Browser binaries
 .chrome/
 
 # Claude Flow generated files
-.claude/settings.local.json
+.claude/
+.claude-flow/
+.serena/
 .mcp.json
+.mcp.json.backup*
 claude-flow.config.json
 .swarm/
 .hive-mind/
@@ -33,11 +40,50 @@ claude-flow
 claude-flow.bat
 claude-flow.ps1
 hive-mind-prompt-*.txt
-.next/
-C:\\Users\\*
-C:/*
-lighthouse.*/
-CUsersrobneAppDataLocallighthouse.*/
+.eslintcache
+*.log
+logs/
+!logs/.gitkeep
+.temp
+.tmp
+tmp/
+tmp*.txt
+local-lh-report.json
+
+# Documentation and archive files
+archive/
+backups/
+config-backups/
+data-archive/
+coverage/
+test-results/
+reports/
+Screenshots/
+
+# Build and test artifacts
+*.tsbuildinfo
+playwright-*/
+lighthouse-*/
+test-lighthouse-*/
+production-final/
+playwright-run/
+playwright-test/
+
+# Lighthouse reports
 *.report.html
 *.report.json
-pnpm-lock.yaml
+lighthouse-*
+CUsersrobneAppDataLocallighthouse.*/
+*lighthouse.*/
+
+# Zone Identifier
+*[Zone.Identifier]
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
