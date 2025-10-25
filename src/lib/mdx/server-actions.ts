@@ -94,7 +94,7 @@ export async function getModuleContent(slug: string) {
           remarkPlugins: [],
           rehypePlugins: [],
           development: false,
-          format: 'function-body',
+          format: 'mdx',
           // DO NOT use jsx: true - that outputs JSX which can't be executed
         },
         parseFrontmatter: false,
