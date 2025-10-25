@@ -3,32 +3,16 @@
 import PracticeButton from '@/components/mdx/PracticeButton';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { MDXRemoteClient } from '@/lib/mdx/MDXRemoteClient';
 import { cn } from '@/lib/utils';
-import * as MDXReact from '@mdx-js/react';
 import { AlertCircle, Brain, CheckCircle, Clock, Info, Lightbulb, Target, Zap } from 'lucide-react';
 import type { MDXRemoteSerializeResult } from 'next-mdx-remote';
-import { MDXRemote } from 'next-mdx-remote';
-import React, { useMemo } from 'react';
-import * as runtime from 'react/jsx-runtime';
+import type React from 'react';
 
 interface ClientMDXContentProps {
   content: MDXRemoteSerializeResult;
 }
 
-// This function provides the full React JSX runtime for MDX.
-// It's necessary for the MDX automatic runtime to work correctly.
-function createRuntimeWithDevSupport() {
-  return {
-    ...MDXReact,
-    ...runtime,
-    jsx: runtime.jsx,
-    jsxs: runtime.jsxs,
-    Fragment: runtime.Fragment,
-    jsxDEV: runtime.jsx,
-  };
-}
-
-// MDX Components that can be used within the module content
 const mdxComponents = {
   PracticeButton: (props: React.ComponentProps<typeof PracticeButton>) => (
     <PracticeButton {...props} />
@@ -199,16 +183,14 @@ const mdxComponents = {
 };
 
 export default function ClientMDXContent({ content }: ClientMDXContentProps) {
-  const mdxRuntime = useMemo(createRuntimeWithDevSupport, []);
-
   if (!content) {
     return (
       <div className="flex items-center justify-center p-8">
-        <div className="h-8 w-8 animate-spin rounded-full border-b-2 border-cyan-500"></div>
+        <div className="h-8 w-8 animate-spin rounded-full border-b-2 border-cyan-500" />
         <span className="ml-3 text-primary">Loading content...</span>
       </div>
     );
   }
 
-  return <MDXRemote {...content} components={mdxComponents} scope={mdxRuntime} />;
+  return <MDXRemoteClient {...content} components={mdxComponents} />;
 }

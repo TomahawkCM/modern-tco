@@ -93,7 +93,7 @@ export async function getModuleContent(slug: string) {
         mdxOptions: {
           remarkPlugins: [],
           rehypePlugins: [],
-          development: process.env.NODE_ENV === 'development',
+          development: false,
           format: 'function-body',
         },
       });
