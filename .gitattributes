@@ -1,0 +1,16 @@
+# Normalize text files to LF in the repository.
+* text=auto eol=lf
+
+# Preserve binary assets as-is.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.pdf binary
+*.zip binary
+*.mp4 binary
+*.webm binary
+
+# Allow PowerShell scripts to keep CRLF endings if needed for Windows execution.
+*.ps1 text eol=crlf
