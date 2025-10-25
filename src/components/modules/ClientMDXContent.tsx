@@ -8,6 +8,7 @@ import ModuleTransition from '@/components/mdx/ModuleTransition';
 import PracticeButton from '@/components/mdx/PracticeButton';
 import QueryPlayground from '@/components/mdx/QueryPlayground';
 import SkillGate from '@/components/mdx/SkillGate';
+import StepItem from '@/components/mdx/StepItem';
 import Steps from '@/components/mdx/Steps';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -37,6 +38,7 @@ const mdxComponents = {
     <QueryPlayground {...props} />
   ),
   SkillGate: (props: React.ComponentProps<typeof SkillGate>) => <SkillGate {...props} />,
+  StepItem: (props: React.ComponentProps<typeof StepItem>) => <StepItem {...props} />,
   Steps: (props: React.ComponentProps<typeof Steps>) => <Steps {...props} />,
   // HTML Elements
   h1: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
