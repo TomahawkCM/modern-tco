@@ -5,7 +5,7 @@
 
 import { notFound } from 'next/navigation';
 
-import ModuleRenderer from '@/components/modules/ModuleRenderer';
+import ModuleRenderer from '@/components/modules/ModuleRenderer.client';
 import { getModuleContent } from '@/lib/mdx/server-actions';
 import { SLUG_TO_FILENAME } from '@/lib/mdx/slug-map';
 

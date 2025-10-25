@@ -30,21 +30,28 @@ export function MDXRemoteClient({
   const [isReadyToRender, setIsReadyToRender] = useState(!lazy || typeof window === 'undefined');
 
   useEffect(() => {
-    if (!lazy) return;
+    if (!lazy) {
+      return;
+    }
+
     if (typeof window === 'undefined') {
       setIsReadyToRender(true);
       return;
     }
-    const schedule = 'requestIdleCallback' in window
-      ? window.requestIdleCallback(() => setIsReadyToRender(true))
-      : window.setTimeout(() => setIsReadyToRender(true), 50);
-    return () => {
-      if (typeof schedule === 'number') {
-        window.clearTimeout(schedule);
-      } else if (schedule) {
-        window.cancelIdleCallback?.(schedule);
-      }
-    };
+
+    const win: Window & typeof globalThis = window;
+
+    if (typeof win.requestIdleCallback === 'function') {
+      const handle = win.requestIdleCallback(() => setIsReadyToRender(true));
+      return () => {
+        if (typeof win.cancelIdleCallback === 'function') {
+          win.cancelIdleCallback(handle);
+        }
+      };
+    }
+
+    const timeout = win.setTimeout(() => setIsReadyToRender(true), 50);
+    return () => win.clearTimeout(timeout);
   }, [lazy]);
 
   const Content = useMemo(() => {
