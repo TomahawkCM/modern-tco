@@ -94,8 +94,11 @@ export async function getModuleContent(slug: string) {
           remarkPlugins: [],
           rehypePlugins: [],
           development: false,
-          format: 'mdx',
+          format: 'function-body',
+          // DO NOT use jsx: true - that outputs JSX which can't be executed
         },
+        parseFrontmatter: false,
+        scope: {},
       });
 
       console.log(`[Module] ✓ Loaded from source: ${filename}`);

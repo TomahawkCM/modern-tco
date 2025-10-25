@@ -40,22 +40,18 @@ async function bundleAllMDX() {
       const content = await fs.readFile(fullPath, 'utf8');
       const { data, content: mdxContent } = matter(content);
 
-      // Serialize MDX for production (use jsx instead of jsxDEV)
+      // Serialize MDX for production (output JavaScript, not JSX)
       const serialized = await serialize(mdxContent, {
         mdxOptions: {
           remarkPlugins: [],
           rehypePlugins: [],
           development: false,
-          jsxImportSource: 'react',
-          format: 'function-body', // Correct format for MDXRemote
-          // Force production JSX runtime
-          jsx: true,
-          providerImportSource: '@mdx-js/react',
+          format: 'function-body', // Required for MDXRemoteClient
+          // DO NOT use jsx: true - that outputs JSX which can't be executed
+          // Let it default to outputting JavaScript function code
         },
         parseFrontmatter: false,
-        // Ensure we're in production mode
         scope: {},
-        development: false,
       });
 
       // Extract slug from frontmatter or filename

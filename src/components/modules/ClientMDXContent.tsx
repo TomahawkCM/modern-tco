@@ -1,22 +1,44 @@
 'use client';
 
+import Callout from '@/components/mdx/Callout';
+import InfoBox from '@/components/mdx/InfoBox';
+import MicroQuizMDX from '@/components/mdx/MicroQuizMDX';
+import MiniProject from '@/components/mdx/MiniProject';
+import ModuleTransition from '@/components/mdx/ModuleTransition';
 import PracticeButton from '@/components/mdx/PracticeButton';
+import QueryPlayground from '@/components/mdx/QueryPlayground';
+import SkillGate from '@/components/mdx/SkillGate';
+import Steps from '@/components/mdx/Steps';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { MDXRemoteClient } from '@/lib/mdx/MDXRemoteClient';
 import { cn } from '@/lib/utils';
 import { AlertCircle, Brain, CheckCircle, Clock, Info, Lightbulb, Target, Zap } from 'lucide-react';
 import type { MDXRemoteSerializeResult } from 'next-mdx-remote';
-import type React from 'react';
+import React from 'react';
 
 interface ClientMDXContentProps {
   content: MDXRemoteSerializeResult;
 }
 
 const mdxComponents = {
+  // MDX Custom Components
+  Callout: (props: React.ComponentProps<typeof Callout>) => <Callout {...props} />,
+  InfoBox: (props: React.ComponentProps<typeof InfoBox>) => <InfoBox {...props} />,
+  MicroQuizMDX: (props: React.ComponentProps<typeof MicroQuizMDX>) => <MicroQuizMDX {...props} />,
+  MiniProject: (props: React.ComponentProps<typeof MiniProject>) => <MiniProject {...props} />,
+  ModuleTransition: (props: React.ComponentProps<typeof ModuleTransition>) => (
+    <ModuleTransition {...props} />
+  ),
   PracticeButton: (props: React.ComponentProps<typeof PracticeButton>) => (
     <PracticeButton {...props} />
   ),
+  QueryPlayground: (props: React.ComponentProps<typeof QueryPlayground>) => (
+    <QueryPlayground {...props} />
+  ),
+  SkillGate: (props: React.ComponentProps<typeof SkillGate>) => <SkillGate {...props} />,
+  Steps: (props: React.ComponentProps<typeof Steps>) => <Steps {...props} />,
+  // HTML Elements
   h1: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
     <h1
       className={cn(
@@ -50,20 +72,31 @@ const mdxComponents = {
       {...props}
     />
   ),
-  ul: ({ className, ...props }: React.HTMLAttributes<HTMLUListElement>) => (
+  ul: ({ className, children, ...props }: React.HTMLAttributes<HTMLUListElement>) => (
     <ul
       className={cn('my-4 ml-6 list-disc space-y-2 text-muted-foreground [&>li]:mt-2', className)}
       {...props}
-    />
+    >
+      {React.Children.map(children, (child, index) =>
+        React.isValidElement(child) ? React.cloneElement(child as React.ReactElement<any>, { key: index }) : child
+      )}
+    </ul>
   ),
-  ol: ({ className, ...props }: React.HTMLAttributes<HTMLOListElement>) => (
+  ol: ({ className, children, ...props }: React.HTMLAttributes<HTMLOListElement>) => (
     <ol
       className={cn(
         'my-4 ml-6 list-decimal space-y-2 text-muted-foreground [&>li]:mt-2',
         className
       )}
       {...props}
-    />
+    >
+      {React.Children.map(children, (child, index) =>
+        React.isValidElement(child) ? React.cloneElement(child as React.ReactElement<any>, { key: index }) : child
+      )}
+    </ol>
+  ),
+  li: ({ className, ...props }: React.HTMLAttributes<HTMLLIElement>) => (
+    <li className={cn('mt-2', className)} {...props} />
   ),
   code: ({ className, ...props }: React.HTMLAttributes<HTMLElement>) => (
     <code
