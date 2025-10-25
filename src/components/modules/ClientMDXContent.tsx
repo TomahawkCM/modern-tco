@@ -127,34 +127,6 @@ const mdxComponents = {
       {...props}
     />
   ),
-  InfoBox: ({
-    title,
-    children,
-    variant = 'info',
-  }: {
-    title?: string;
-    children: React.ReactNode;
-    variant?: 'info' | 'warning' | 'success' | 'tip';
-  }) => {
-    const variants = {
-      info: { icon: Info, colors: 'bg-blue-950/30 border-blue-500 text-blue-100' },
-      warning: { icon: AlertCircle, colors: 'bg-yellow-950/30 border-yellow-500 text-yellow-100' },
-      success: { icon: CheckCircle, colors: 'bg-green-950/30 border-green-500 text-green-100' },
-      tip: { icon: Lightbulb, colors: 'bg-cyan-950/30 border-cyan-500 text-cyan-100' },
-    };
-    const { icon: Icon, colors } = variants[variant];
-    return (
-      <div className={cn('my-6 rounded-r-lg border-l-4 py-4 pl-6 pr-4 backdrop-blur-sm', colors)}>
-        {title && (
-          <div className="mb-2 flex items-center gap-2 font-semibold">
-            <Icon className="h-5 w-5" />
-            {title}
-          </div>
-        )}
-        <div>{children}</div>
-      </div>
-    );
-  },
   LearningObjective: ({ children }: { children: React.ReactNode }) => (
     <Card className="my-6 border-primary/30 bg-gradient-to-r from-blue-950/50 to-cyan-950/50">
       <CardHeader className="pb-3">
