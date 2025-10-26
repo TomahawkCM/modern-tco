@@ -1,15 +1,15 @@
-import type { Metadata, Viewport } from 'next';
-import { Suspense } from 'react';
-import MonitoringErrorBoundary from '@/components/MonitoringErrorBoundary';
-import { Toaster } from '@/components/ui/toaster';
-import { Providers } from './providers';
-import './globals.css';
-import { Inter } from 'next/font/google';
-import { AnalyticsClient } from '@/app/analytics-client';
-import { MonitoringClient } from '@/app/monitoring-client';
-import { AccessibilityInitializer } from '@/components/AccessibilityInitializer';
-import { SkipLinks } from '@/components/accessibility/skip-links';
-import { MainLayout } from '@/components/layout/main-layout';
+import { Suspense } from "react";
+import { Providers } from "./providers";
+import MonitoringErrorBoundary from "@/components/MonitoringErrorBoundary";
+import { Toaster } from "@/components/ui/toaster";
+import type { Metadata, Viewport } from "next";
+import "./globals.css";
+import { MainLayout } from "@/components/layout/main-layout";
+import { SkipLinks } from "@/components/accessibility/skip-links";
+import { AnalyticsClient } from "@/app/analytics-client";
+import { MonitoringClient } from "@/app/monitoring-client";
+import { AccessibilityInitializer } from "@/components/AccessibilityInitializer";
+import { Inter } from "next/font/google";
 
 const inter = Inter({
   subsets: ['latin'],
@@ -17,21 +17,21 @@ const inter = Inter({
   preload: true,
 });
 
-// Force dynamic rendering to prevent static generation issues with React hooks
-export const dynamic = 'force-dynamic';
+// PERFORMANCE FIX: Removed 'force-dynamic' to enable static generation
+// Pages that need dynamic rendering should set it at page level
+// export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
-  title: 'Tanium Certified Operator Exam System',
-  description:
-    'Master the Tanium Certified Operator certification with interactive practice and comprehensive study modules',
-  keywords: ['Tanium', 'TCO', 'Certification', 'Training', 'Exam Preparation'],
-  authors: [{ name: 'TCO Study Platform' }],
+  title: "Tanium Certified Operator Exam System",
+  description: "Master the Tanium Certified Operator certification with interactive practice and comprehensive study modules",
+  keywords: ["Tanium", "TCO", "Certification", "Training", "Exam Preparation"],
+  authors: [{ name: "TCO Study Platform" }],
 };
 
 export const viewport: Viewport = {
-  width: 'device-width',
+  width: "device-width",
   initialScale: 1,
-  themeColor: '#1e40af',
+  themeColor: "#1e40af",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

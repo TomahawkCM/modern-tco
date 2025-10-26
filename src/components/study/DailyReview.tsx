@@ -1,31 +1,31 @@
-'use client';
+"use client";
 
+import { useState, useEffect } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Progress } from "@/components/ui/progress";
 import {
-  AlertCircle,
-  BarChart3,
-  Brain,
   Calendar,
+  Brain,
+  TrendingUp,
+  AlertCircle,
   CheckCircle2,
   Clock,
-  PlayCircle,
   Target,
-  TrendingUp,
-} from 'lucide-react';
-import { useEffect, useState } from 'react';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Progress } from '@/components/ui/progress';
+  PlayCircle,
+  BarChart3,
+} from "lucide-react";
+import { cn } from "@/lib/utils";
 import {
-  getItemsDueInDays,
   getItemsDueToday,
   getOverdueItems,
+  getItemsDueInDays,
   getReviewStats,
   importWeakConcepts,
   type ReviewItem,
-} from '@/lib/spacedRepetition';
-import { cn } from '@/lib/utils';
-import PerformanceAnalytics from './PerformanceAnalytics';
+} from "@/lib/spacedRepetition";
+import PerformanceAnalytics from "./PerformanceAnalytics";
 
 interface DailyReviewProps {
   /** Optional: Filter by specific module */
@@ -35,7 +35,7 @@ interface DailyReviewProps {
 }
 
 export function DailyReview({ moduleId, onStartReview }: DailyReviewProps) {
-  const [activeTab, setActiveTab] = useState<'review' | 'analytics'>('review');
+  const [activeTab, setActiveTab] = useState<"review" | "analytics">("review");
   const [dueToday, setDueToday] = useState<ReviewItem[]>([]);
   const [overdue, setOverdue] = useState<ReviewItem[]>([]);
   const [upcoming, setUpcoming] = useState<ReviewItem[]>([]);
@@ -66,7 +66,7 @@ export function DailyReview({ moduleId, onStartReview }: DailyReviewProps) {
 
   const handleImportWeakConcepts = () => {
     if (!moduleId) {
-      alert('Please select a specific module to import weak concepts');
+      alert("Please select a specific module to import weak concepts");
       return;
     }
 
@@ -77,7 +77,7 @@ export function DailyReview({ moduleId, onStartReview }: DailyReviewProps) {
   const handleStartReview = () => {
     const itemsToReview = [...overdue, ...dueToday];
     if (itemsToReview.length === 0) {
-      alert('No items due for review!');
+      alert("No items due for review!");
       return;
     }
 
@@ -106,26 +106,26 @@ export function DailyReview({ moduleId, onStartReview }: DailyReviewProps) {
       {/* Tabs */}
       <div className="flex gap-2">
         <Button
-          onClick={() => setActiveTab('review')}
-          variant={activeTab === 'review' ? 'default' : 'outline'}
+          onClick={() => setActiveTab("review")}
+          variant={activeTab === "review" ? "default" : "outline"}
           className={cn(
-            'flex-1',
-            activeTab === 'review'
-              ? 'bg-accent hover:bg-purple-700'
-              : 'border-gray-700 text-muted-foreground hover:bg-card'
+            "flex-1",
+            activeTab === "review"
+              ? "bg-accent hover:bg-purple-700"
+              : "border-gray-700 text-muted-foreground hover:bg-card"
           )}
         >
           <Calendar className="mr-2 h-4 w-4" />
           Daily Review
         </Button>
         <Button
-          onClick={() => setActiveTab('analytics')}
-          variant={activeTab === 'analytics' ? 'default' : 'outline'}
+          onClick={() => setActiveTab("analytics")}
+          variant={activeTab === "analytics" ? "default" : "outline"}
           className={cn(
-            'flex-1',
-            activeTab === 'analytics'
-              ? 'bg-blue-600 hover:bg-blue-700'
-              : 'border-gray-700 text-muted-foreground hover:bg-card'
+            "flex-1",
+            activeTab === "analytics"
+              ? "bg-blue-600 hover:bg-blue-700"
+              : "border-gray-700 text-muted-foreground hover:bg-card"
           )}
         >
           <BarChart3 className="mr-2 h-4 w-4" />
@@ -134,232 +134,248 @@ export function DailyReview({ moduleId, onStartReview }: DailyReviewProps) {
       </div>
 
       {/* Review Tab Content */}
-      {activeTab === 'review' && (
+      {activeTab === "review" && (
         <>
           {/* Statistics Cards */}
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
-            {/* Due Today */}
-            <Card
-              className={cn(
-                'border-2',
-                totalDue > 0
-                  ? 'border-orange-500/30 bg-orange-500/5'
-                  : 'border-[#22c55e]/30 bg-[#22c55e]/5'
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
+        {/* Due Today */}
+        <Card className={cn(
+          "border-2",
+          totalDue > 0
+            ? "border-orange-500/30 bg-orange-500/5"
+            : "border-[#22c55e]/30 bg-[#22c55e]/5"
+        )}>
+          <CardContent className="pt-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm font-medium text-muted-foreground">Due Today</p>
+                <p className="text-3xl font-bold text-foreground">{totalDue}</p>
+              </div>
+              <Calendar className={cn(
+                "h-8 w-8",
+                totalDue > 0 ? "text-orange-500" : "text-[#22c55e]"
+              )} />
+            </div>
+            {overdue.length > 0 && (
+              <Badge variant="outline" className="mt-2 border-red-500/30 text-red-400">
+                {overdue.length} overdue
+              </Badge>
+            )}
+          </CardContent>
+        </Card>
+
+        {/* Total Items */}
+        <Card className="border-primary/20 bg-primary/5">
+          <CardContent className="pt-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm font-medium text-muted-foreground">Total Items</p>
+                <p className="text-3xl font-bold text-foreground">{stats.totalItems}</p>
+              </div>
+              <Target className="h-8 w-8 text-primary" />
+            </div>
+            <p className="mt-2 text-xs text-muted-foreground">
+              Being tracked for review
+            </p>
+          </CardContent>
+        </Card>
+
+        {/* Average Retention */}
+        <Card className="border-[#22c55e]/20 bg-[#22c55e]/5">
+          <CardContent className="pt-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm font-medium text-muted-foreground">Avg Retention</p>
+                <p className="text-3xl font-bold text-foreground">{stats.averageRetention}%</p>
+              </div>
+              <TrendingUp className="h-8 w-8 text-[#22c55e]" />
+            </div>
+            <Progress
+              value={stats.averageRetention}
+              className="mt-2 h-2 bg-green-900/30"
+            />
+          </CardContent>
+        </Card>
+
+        {/* Upcoming (Next 7 Days) */}
+        <Card className="border-accent/20 bg-accent/5">
+          <CardContent className="pt-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm font-medium text-muted-foreground">Next 7 Days</p>
+                <p className="text-3xl font-bold text-foreground">{upcoming.length}</p>
+              </div>
+              <Clock className="h-8 w-8 text-purple-500" />
+            </div>
+            <p className="mt-2 text-xs text-muted-foreground">
+              Items coming up for review
+            </p>
+          </CardContent>
+        </Card>
+      </div>
+
+      {/* Action Buttons */}
+      <div className="flex gap-3">
+        <Button
+          onClick={handleStartReview}
+          disabled={totalDue === 0}
+          className={cn(
+            "flex-1",
+            totalDue > 0
+              ? "bg-accent hover:bg-purple-700"
+              : "bg-muted cursor-not-allowed"
+          )}
+        >
+          <PlayCircle className="mr-2 h-4 w-4" />
+          Start Review Session ({totalDue} items)
+        </Button>
+
+        {moduleId && (
+          <Button
+            onClick={handleImportWeakConcepts}
+            variant="outline"
+            className="border-orange-500/30 text-orange-400 hover:bg-orange-500/10"
+          >
+            <AlertCircle className="mr-2 h-4 w-4" />
+            Import Weak Concepts
+          </Button>
+        )}
+      </div>
+
+      {/* Items Due Today */}
+      {totalDue > 0 && (
+        <Card className="border-orange-500/20 bg-orange-500/5">
+          <CardHeader>
+            <CardTitle className="text-sm text-orange-300">
+              Items Due for Review
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-3">
+              {/* Overdue Items */}
+              {overdue.length > 0 && (
+                <div>
+                  <h4 className="mb-2 flex items-center gap-2 text-sm font-medium text-red-400">
+                    <AlertCircle className="h-4 w-4" />
+                    Overdue ({overdue.length})
+                  </h4>
+                  <div className="space-y-2">
+                    {overdue.slice(0, 5).map((item) => (
+                      <ReviewItemCard key={item.id} item={item} isOverdue={true} />
+                    ))}
+                    {overdue.length > 5 && (
+                      <p className="text-xs text-muted-foreground">
+                        +{overdue.length - 5} more overdue items
+                      </p>
+                    )}
+                  </div>
+                </div>
               )}
-            >
-              <CardContent className="pt-6">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-sm font-medium text-muted-foreground">Due Today</p>
-                    <p className="text-3xl font-bold text-foreground">{totalDue}</p>
-                  </div>
-                  <Calendar
-                    className={cn('h-8 w-8', totalDue > 0 ? 'text-orange-500' : 'text-[#22c55e]')}
-                  />
-                </div>
-                {overdue.length > 0 && (
-                  <Badge variant="outline" className="mt-2 border-red-500/30 text-red-400">
-                    {overdue.length} overdue
-                  </Badge>
-                )}
-              </CardContent>
-            </Card>
 
-            {/* Total Items */}
-            <Card className="border-primary/20 bg-primary/5">
-              <CardContent className="pt-6">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-sm font-medium text-muted-foreground">Total Items</p>
-                    <p className="text-3xl font-bold text-foreground">{stats.totalItems}</p>
+              {/* Due Today */}
+              {dueToday.length > 0 && (
+                <div>
+                  <h4 className="mb-2 flex items-center gap-2 text-sm font-medium text-orange-400">
+                    <Calendar className="h-4 w-4" />
+                    Due Today ({dueToday.length})
+                  </h4>
+                  <div className="space-y-2">
+                    {dueToday.slice(0, 5).map((item) => (
+                      <ReviewItemCard key={item.id} item={item} />
+                    ))}
+                    {dueToday.length > 5 && (
+                      <p className="text-xs text-muted-foreground">
+                        +{dueToday.length - 5} more items due today
+                      </p>
+                    )}
                   </div>
-                  <Target className="h-8 w-8 text-primary" />
                 </div>
-                <p className="mt-2 text-xs text-muted-foreground">Being tracked for review</p>
-              </CardContent>
-            </Card>
-
-            {/* Average Retention */}
-            <Card className="border-[#22c55e]/20 bg-[#22c55e]/5">
-              <CardContent className="pt-6">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-sm font-medium text-muted-foreground">Avg Retention</p>
-                    <p className="text-3xl font-bold text-foreground">{stats.averageRetention}%</p>
-                  </div>
-                  <TrendingUp className="h-8 w-8 text-[#22c55e]" />
-                </div>
-                <Progress value={stats.averageRetention} className="mt-2 h-2 bg-green-900/30" />
-              </CardContent>
-            </Card>
-
-            {/* Upcoming (Next 7 Days) */}
-            <Card className="border-accent/20 bg-accent/5">
-              <CardContent className="pt-6">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-sm font-medium text-muted-foreground">Next 7 Days</p>
-                    <p className="text-3xl font-bold text-foreground">{upcoming.length}</p>
-                  </div>
-                  <Clock className="h-8 w-8 text-purple-500" />
-                </div>
-                <p className="mt-2 text-xs text-muted-foreground">Items coming up for review</p>
-              </CardContent>
-            </Card>
-          </div>
-
-          {/* Action Buttons */}
-          <div className="flex gap-3">
-            <Button
-              onClick={handleStartReview}
-              disabled={totalDue === 0}
-              className={cn(
-                'flex-1',
-                totalDue > 0 ? 'bg-accent hover:bg-purple-700' : 'bg-muted cursor-not-allowed'
               )}
-            >
-              <PlayCircle className="mr-2 h-4 w-4" />
-              Start Review Session ({totalDue} items)
-            </Button>
+            </div>
+          </CardContent>
+        </Card>
+      )}
 
+      {/* No Items Due */}
+      {totalDue === 0 && stats.totalItems > 0 && (
+        <Card className="border-[#22c55e]/20 bg-[#22c55e]/5">
+          <CardContent className="py-8 text-center">
+            <CheckCircle2 className="mx-auto mb-3 h-12 w-12 text-[#22c55e]" />
+            <h3 className="mb-2 text-lg font-semibold text-[#22c55e]">
+              All Caught Up! 🎉
+            </h3>
+            <p className="text-sm text-muted-foreground">
+              No reviews due today. Next review: {upcoming.length > 0 ? "in the next 7 days" : "TBD"}
+            </p>
+          </CardContent>
+        </Card>
+      )}
+
+      {/* Empty State */}
+      {stats.totalItems === 0 && (
+        <Card className="border-primary/20 bg-primary/5">
+          <CardContent className="py-8 text-center">
+            <Brain className="mx-auto mb-3 h-12 w-12 text-primary" />
+            <h3 className="mb-2 text-lg font-semibold text-primary">
+              Start Building Your Review Queue
+            </h3>
+            <p className="mb-4 text-sm text-muted-foreground">
+              Complete micro-sections and quizzes to add items to your spaced repetition schedule.
+            </p>
             {moduleId && (
               <Button
                 onClick={handleImportWeakConcepts}
                 variant="outline"
-                className="border-orange-500/30 text-orange-400 hover:bg-orange-500/10"
+                className="border-primary/30 text-primary hover:bg-primary/10"
               >
                 <AlertCircle className="mr-2 h-4 w-4" />
-                Import Weak Concepts
+                Import Weak Concepts from Quizzes
               </Button>
             )}
-          </div>
-
-          {/* Items Due Today */}
-          {totalDue > 0 && (
-            <Card className="border-orange-500/20 bg-orange-500/5">
-              <CardHeader>
-                <CardTitle className="text-sm text-orange-300">Items Due for Review</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-3">
-                  {/* Overdue Items */}
-                  {overdue.length > 0 && (
-                    <div>
-                      <h4 className="mb-2 flex items-center gap-2 text-sm font-medium text-red-400">
-                        <AlertCircle className="h-4 w-4" />
-                        Overdue ({overdue.length})
-                      </h4>
-                      <div className="space-y-2">
-                        {overdue.slice(0, 5).map((item) => (
-                          <ReviewItemCard key={item.id} item={item} isOverdue={true} />
-                        ))}
-                        {overdue.length > 5 && (
-                          <p className="text-xs text-muted-foreground">
-                            +{overdue.length - 5} more overdue items
-                          </p>
-                        )}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Due Today */}
-                  {dueToday.length > 0 && (
-                    <div>
-                      <h4 className="mb-2 flex items-center gap-2 text-sm font-medium text-orange-400">
-                        <Calendar className="h-4 w-4" />
-                        Due Today ({dueToday.length})
-                      </h4>
-                      <div className="space-y-2">
-                        {dueToday.slice(0, 5).map((item) => (
-                          <ReviewItemCard key={item.id} item={item} />
-                        ))}
-                        {dueToday.length > 5 && (
-                          <p className="text-xs text-muted-foreground">
-                            +{dueToday.length - 5} more items due today
-                          </p>
-                        )}
-                      </div>
-                    </div>
-                  )}
-                </div>
-              </CardContent>
-            </Card>
-          )}
-
-          {/* No Items Due */}
-          {totalDue === 0 && stats.totalItems > 0 && (
-            <Card className="border-[#22c55e]/20 bg-[#22c55e]/5">
-              <CardContent className="py-8 text-center">
-                <CheckCircle2 className="mx-auto mb-3 h-12 w-12 text-[#22c55e]" />
-                <h3 className="mb-2 text-lg font-semibold text-[#22c55e]">All Caught Up! 🎉</h3>
-                <p className="text-sm text-muted-foreground">
-                  No reviews due today. Next review:{' '}
-                  {upcoming.length > 0 ? 'in the next 7 days' : 'TBD'}
-                </p>
-              </CardContent>
-            </Card>
-          )}
-
-          {/* Empty State */}
-          {stats.totalItems === 0 && (
-            <Card className="border-primary/20 bg-primary/5">
-              <CardContent className="py-8 text-center">
-                <Brain className="mx-auto mb-3 h-12 w-12 text-primary" />
-                <h3 className="mb-2 text-lg font-semibold text-primary">
-                  Start Building Your Review Queue
-                </h3>
-                <p className="mb-4 text-sm text-muted-foreground">
-                  Complete micro-sections and quizzes to add items to your spaced repetition
-                  schedule.
-                </p>
-                {moduleId && (
-                  <Button
-                    onClick={handleImportWeakConcepts}
-                    variant="outline"
-                    className="border-primary/30 text-primary hover:bg-primary/10"
-                  >
-                    <AlertCircle className="mr-2 h-4 w-4" />
-                    Import Weak Concepts from Quizzes
-                  </Button>
-                )}
-              </CardContent>
-            </Card>
-          )}
+          </CardContent>
+        </Card>
+      )}
         </>
       )}
 
       {/* Analytics Tab Content */}
-      {activeTab === 'analytics' && <PerformanceAnalytics moduleId={moduleId} />}
+      {activeTab === "analytics" && (
+        <PerformanceAnalytics moduleId={moduleId} />
+      )}
     </div>
   );
 }
 
 // Individual review item card
 function ReviewItemCard({ item, isOverdue }: { item: ReviewItem; isOverdue?: boolean }) {
-  const intervalNames = ['Day 1', 'Day 3', 'Day 7', 'Day 16', 'Day 35+'];
+  const intervalNames = ["Day 1", "Day 3", "Day 7", "Day 16", "Day 35+"];
   const daysOverdue = isOverdue
     ? Math.floor((Date.now() - new Date(item.nextReview).getTime()) / (1000 * 60 * 60 * 24))
     : 0;
 
   return (
-    <div
-      className={cn(
-        'flex items-center justify-between rounded-lg border p-3',
-        isOverdue ? 'border-red-500/30 bg-red-500/5' : 'border-orange-500/20 bg-orange-500/5'
-      )}
-    >
+    <div className={cn(
+      "flex items-center justify-between rounded-lg border p-3",
+      isOverdue
+        ? "border-red-500/30 bg-red-500/5"
+        : "border-orange-500/20 bg-orange-500/5"
+    )}>
       <div className="flex-1">
         <p className="text-sm font-medium text-foreground">{item.title}</p>
         <div className="mt-1 flex items-center gap-2">
           <Badge variant="outline" className="text-xs border-gray-700 text-muted-foreground">
-            {intervalNames[item.intervalIndex] || 'Complete'}
+            {intervalNames[item.intervalIndex] || "Complete"}
           </Badge>
           <span className="text-xs text-muted-foreground">
             {item.totalReviews} reviews • {item.retention}% retention
           </span>
         </div>
       </div>
-      {isOverdue && <Badge className="bg-red-600 text-foreground">{daysOverdue}d overdue</Badge>}
+      {isOverdue && (
+        <Badge className="bg-red-600 text-foreground">
+          {daysOverdue}d overdue
+        </Badge>
+      )}
     </div>
   );
 }

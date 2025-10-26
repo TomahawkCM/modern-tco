@@ -1,48 +1,48 @@
-'use client';
+"use client";
 
+import { useState, useEffect } from "react";
+import { useExam } from "@/contexts/ExamContext";
+import { useSettings } from "@/contexts/SettingsContext";
+import { ExamMode, type Question, TCODomain, Difficulty } from "@/types/exam";
 import {
-  ArrowLeft,
-  ArrowRight,
-  BookOpen,
-  CheckCircle,
-  Clock,
-  Target,
-  Timer,
-  XCircle,
-} from 'lucide-react';
-import { useEffect, useState } from 'react';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Label } from '@/components/ui/label';
-import { Progress } from '@/components/ui/progress';
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
-import { useAuth } from '@/contexts/AuthContext';
-import { useExam } from '@/contexts/ExamContext';
-import { useSettings } from '@/contexts/SettingsContext';
-import { toast } from '@/hooks/use-toast';
-import {
-  filterQuestions,
-  getAllAvailableQuestions,
-  getDomainQuestions,
-  getPracticeQuestions,
   selectAdaptiveQuestions,
-} from '@/lib/examLogic';
-import { saveQuickNote } from '@/services/notesService';
-import { Difficulty, ExamMode, type Question, TCODomain } from '@/types/exam';
+  filterQuestions,
+  getPracticeQuestions,
+  getDomainQuestions,
+  getAllAvailableQuestions,
+} from "@/lib/examLogic";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { saveQuickNote } from "@/services/notesService";
+import { useAuth } from "@/contexts/AuthContext";
+import { toast } from "@/hooks/use-toast";
+import { Badge } from "@/components/ui/badge";
+import { Progress } from "@/components/ui/progress";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Label } from "@/components/ui/label";
+import {
+  Timer,
+  Clock,
+  CheckCircle,
+  XCircle,
+  ArrowRight,
+  ArrowLeft,
+  BookOpen,
+  Target,
+} from "lucide-react";
 
 interface PracticeSessionProps {
   domain?: TCODomain;
   difficulty?: Difficulty;
   questionCount?: number;
-  mode?: 'adaptive' | 'random' | 'domain-specific';
+  mode?: "adaptive" | "random" | "domain-specific";
 }
 
 export function PracticeSession({
   domain,
   difficulty,
   questionCount = 10,
-  mode = 'adaptive',
+  mode = "adaptive",
 }: PracticeSessionProps) {
   const {
     state,
@@ -57,7 +57,7 @@ export function PracticeSession({
   } = useExam();
   const { state: settings } = useSettings();
   const { user } = useAuth();
-  const [selectedAnswer, setSelectedAnswer] = useState<string>('');
+  const [selectedAnswer, setSelectedAnswer] = useState<string>("");
   const [showExplanation, setShowExplanation] = useState(false);
   const [sessionStarted, setSessionStarted] = useState(false);
   const [timeSpent, setTimeSpent] = useState(0);
@@ -76,18 +76,18 @@ export function PracticeSession({
   const startPracticeSession = () => {
     // Get available questions count from centralized database
     const availableQuestions = getAllAvailableQuestions();
-    console.log('Starting practice session with questions:', availableQuestions.length);
-    console.log('Questions available:', availableQuestions.length > 0 ? 'YES' : 'NO');
+    console.log("Starting practice session with questions:", availableQuestions.length);
+    console.log("Questions available:", availableQuestions.length > 0 ? "YES" : "NO");
     let selectedQuestions: Question[] = [];
 
-    if (mode === 'adaptive') {
+    if (mode === "adaptive") {
       // Use adaptive question selection (placeholder for user performance data)
       selectedQuestions = selectAdaptiveQuestions({}, questionCount, {
         focusOnWeakAreas: true,
         difficultyProgression: true,
         spaceRepetition: false,
       });
-    } else if (mode === 'domain-specific' && domain) {
+    } else if (mode === "domain-specific" && domain) {
       // Get questions from specific domain using centralized database
       const domainQuestions = getDomainQuestions(domain);
       let filteredQuestions = domainQuestions;
@@ -109,7 +109,7 @@ export function PracticeSession({
     }
 
     if (selectedQuestions.length === 0) {
-      console.warn('No questions available for the selected criteria');
+      console.warn("No questions available for the selected criteria");
       return;
     }
 
@@ -131,7 +131,7 @@ export function PracticeSession({
 
   const handleNextQuestion = () => {
     nextQuestion();
-    setSelectedAnswer('');
+    setSelectedAnswer("");
     setShowExplanation(false);
   };
 
@@ -144,7 +144,7 @@ export function PracticeSession({
         setShowExplanation(true);
       }
     } else {
-      setSelectedAnswer('');
+      setSelectedAnswer("");
       setShowExplanation(false);
     }
   };
@@ -157,7 +157,7 @@ export function PracticeSession({
   const formatTime = (seconds: number) => {
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;
-    return `${mins}:${secs.toString().padStart(2, '0')}`;
+    return `${mins}:${secs.toString().padStart(2, "0")}`;
   };
 
   if (state.isLoading) {
@@ -178,9 +178,9 @@ export function PracticeSession({
             Start Practice Session
           </CardTitle>
           <CardDescription>
-            {mode === 'adaptive' && 'Adaptive practice with questions tailored to your performance'}
-            {mode === 'domain-specific' && domain && `Focused practice on ${domain} domain`}
-            {mode === 'random' && 'Random questions from all domains'}
+            {mode === "adaptive" && "Adaptive practice with questions tailored to your performance"}
+            {mode === "domain-specific" && domain && `Focused practice on ${domain} domain`}
+            {mode === "random" && "Random questions from all domains"}
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
@@ -277,7 +277,7 @@ export function PracticeSession({
                     <span className="text-tanium-orange">
                       {domainCorrect}/{domainQuestions.length}
                     </span>
-                    <Badge variant={domainScore >= 70 ? 'default' : 'destructive'}>
+                    <Badge variant={domainScore >= 70 ? "default" : "destructive"}>
                       {domainScore}%
                     </Badge>
                   </div>
@@ -306,7 +306,7 @@ export function PracticeSession({
     return <div className="text-center text-muted-foreground">No questions available</div>;
   }
 
-  const isAnswered = selectedAnswer !== '';
+  const isAnswered = selectedAnswer !== "";
   const isCorrect = selectedAnswer === currentQuestion.correctAnswerId;
 
   return (
@@ -325,10 +325,10 @@ export function PracticeSession({
               <Badge
                 variant={
                   currentQuestion.difficulty === Difficulty.BEGINNER
-                    ? 'default'
+                    ? "default"
                     : currentQuestion.difficulty === Difficulty.INTERMEDIATE
-                      ? 'secondary'
-                      : 'destructive'
+                      ? "secondary"
+                      : "destructive"
                 }
               >
                 {currentQuestion.difficulty}
@@ -350,22 +350,14 @@ export function PracticeSession({
       <Card className="border-tanium-secondary/20 bg-tanium-dark/50">
         <CardHeader>
           <div className="flex items-start justify-between gap-3">
-            <CardTitle className="leading-relaxed text-foreground">
-              {currentQuestion.question}
-            </CardTitle>
+            <CardTitle className="leading-relaxed text-foreground">{currentQuestion.question}</CardTitle>
             <Button
               variant="outline"
               size="sm"
               onClick={async () => {
-                const text = `Q: ${currentQuestion.question}\nAnswer: ${currentQuestion.choices.find((c) => c.id === currentQuestion.correctAnswerId)?.text ?? ''}${currentQuestion.explanation ? `\nWhy: ${currentQuestion.explanation}` : ''}`;
-                await saveQuickNote(text, {
-                  tags: ['practice', currentQuestion.domain, currentQuestion.difficulty],
-                  user,
-                });
-                toast({
-                  title: 'Added to Notes',
-                  description: 'View it under Notes for spaced review.',
-                });
+                const text = `Q: ${currentQuestion.question}\nAnswer: ${currentQuestion.choices.find((c) => c.id === currentQuestion.correctAnswerId)?.text ?? ""}${currentQuestion.explanation ? `\nWhy: ${currentQuestion.explanation}` : ""}`;
+                await saveQuickNote(text, { tags: ["practice", currentQuestion.domain, currentQuestion.difficulty], user });
+                toast({ title: "Added to Notes", description: "View it under Notes for spaced review." });
               }}
             >
               Add to Notes
@@ -386,12 +378,12 @@ export function PracticeSession({
                   className={`flex-1 cursor-pointer rounded-lg border p-3 transition-colors ${
                     isAnswered
                       ? choice.id === currentQuestion.correctAnswerId
-                        ? 'border-green-500 bg-[#22c55e]/10 text-[#22c55e]'
+                        ? "border-green-500 bg-[#22c55e]/10 text-[#22c55e]"
                         : choice.id === selectedAnswer &&
                             choice.id !== currentQuestion.correctAnswerId
-                          ? 'border-red-500 bg-red-500/10 text-red-400'
-                          : 'border-tanium-secondary/20 text-muted-foreground'
-                      : 'hover:border-tanium-orange/50 border-tanium-secondary/20 text-muted-foreground hover:text-foreground'
+                          ? "border-red-500 bg-red-500/10 text-red-400"
+                          : "border-tanium-secondary/20 text-muted-foreground"
+                      : "hover:border-tanium-orange/50 border-tanium-secondary/20 text-muted-foreground hover:text-foreground"
                   }`}
                 >
                   <div className="flex items-center justify-between">
@@ -417,7 +409,7 @@ export function PracticeSession({
           {showExplanation && currentQuestion.explanation && isAnswered && (
             <div
               className={`mt-4 rounded-lg border p-4 ${
-                isCorrect ? 'border-[#22c55e]/20 bg-[#22c55e]/5' : 'border-red-500/20 bg-red-500/5'
+                isCorrect ? "border-[#22c55e]/20 bg-[#22c55e]/5" : "border-red-500/20 bg-red-500/5"
               }`}
             >
               <div className="mb-2 flex items-center gap-2">
@@ -426,8 +418,8 @@ export function PracticeSession({
                 ) : (
                   <XCircle className="h-5 w-5 text-red-500" />
                 )}
-                <span className={`font-semibold ${isCorrect ? 'text-[#22c55e]' : 'text-red-400'}`}>
-                  {isCorrect ? 'Correct!' : 'Incorrect'}
+                <span className={`font-semibold ${isCorrect ? "text-[#22c55e]" : "text-red-400"}`}>
+                  {isCorrect ? "Correct!" : "Incorrect"}
                 </span>
               </div>
               <p className="text-muted-foreground">{currentQuestion.explanation}</p>

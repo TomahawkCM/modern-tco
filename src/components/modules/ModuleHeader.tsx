@@ -2,10 +2,10 @@
  * Server Component for Module Header
  */
 
-import { CheckCircle, Clock, Target } from 'lucide-react';
-import { Badge } from '@/components/ui/badge';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import type { ModuleFrontmatter } from '@/lib/mdx/module-schema';
+import { Badge } from "@/components/ui/badge";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Clock, Target, CheckCircle } from "lucide-react";
+import type { ModuleFrontmatter } from "@/lib/mdx/module-schema";
 
 interface ModuleHeaderProps {
   frontmatter: ModuleFrontmatter;
@@ -13,14 +13,14 @@ interface ModuleHeaderProps {
 
 const getDifficultyColor = (difficulty: string) => {
   switch (difficulty) {
-    case 'Beginner':
-      return 'bg-green-900/50 text-green-200 border-green-500/50';
-    case 'Intermediate':
-      return 'bg-yellow-900/50 text-[#f97316] border-yellow-500/50';
-    case 'Advanced':
-      return 'bg-red-900/50 text-red-200 border-red-500/50';
+    case "Beginner":
+      return "bg-green-900/50 text-green-200 border-green-500/50";
+    case "Intermediate":
+      return "bg-yellow-900/50 text-[#f97316] border-yellow-500/50";
+    case "Advanced":
+      return "bg-red-900/50 text-red-200 border-red-500/50";
     default:
-      return 'bg-gray-900/50 text-muted-foreground border-gray-500/50';
+      return "bg-gray-900/50 text-muted-foreground border-gray-500/50";
   }
 };
 
@@ -28,11 +28,8 @@ export default function ModuleHeader({ frontmatter }: ModuleHeaderProps) {
   return (
     <div className="mb-8">
       <div className="mb-4 flex flex-wrap items-center gap-3">
-        <Badge
-          variant="outline"
-          className="border-blue-500/50 bg-blue-900/50 text-muted-foreground"
-        >
-          {frontmatter.domainEnum.replace(/_/g, ' ')}
+        <Badge variant="outline" className="border-blue-500/50 bg-blue-900/50 text-muted-foreground">
+          {frontmatter.domainEnum.replace(/_/g, " ")}
         </Badge>
         <Badge variant="outline" className={getDifficultyColor(frontmatter.difficulty)}>
           {frontmatter.difficulty}
@@ -48,9 +45,7 @@ export default function ModuleHeader({ frontmatter }: ModuleHeaderProps) {
       </h1>
 
       {frontmatter.description && (
-        <p className="mb-6 text-xl leading-relaxed text-muted-foreground">
-          {frontmatter.description}
-        </p>
+        <p className="mb-6 text-xl leading-relaxed text-muted-foreground">{frontmatter.description}</p>
       )}
 
       {/* Learning Objectives */}

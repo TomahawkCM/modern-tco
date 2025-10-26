@@ -1,26 +1,28 @@
-'use client';
+"use client";
 
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
-  BarChart3,
-  BookOpen,
-  MessageSquare,
-  Navigation,
-  Play,
-  Shield,
-  Target,
-  Wrench,
-} from 'lucide-react';
-import {
-  PolarAngleAxis,
+  RadarChart,
   PolarGrid,
+  PolarAngleAxis,
   PolarRadiusAxis,
   Radar,
-  RadarChart,
   ResponsiveContainer,
-} from 'recharts';
-import { Badge } from '@/components/ui/badge';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { TCO_DOMAIN_WEIGHTS, TCODomain } from '@/types/exam';
+} from "recharts";
+import { Badge } from "@/components/ui/badge";
+import {
+  Shield,
+  BookOpen,
+  Server,
+  Layers,
+  Wrench,
+  MessageSquare,
+  Target,
+  Play,
+  Navigation,
+  BarChart3,
+} from "lucide-react";
+import { TCODomain, TCO_DOMAIN_WEIGHTS } from "@/types/exam";
 
 interface DomainData {
   domain: string;
@@ -30,17 +32,15 @@ interface DomainData {
 }
 
 interface DomainRadarChartProps {
-  domainScores: Partial<
-    Record<
-      TCODomain,
-      {
-        score: number;
-        questionsAnswered: number;
-        correctAnswers: number;
-        timeSpent: number;
-      }
-    >
-  >;
+  domainScores: Partial<Record<
+    TCODomain,
+    {
+      score: number;
+      questionsAnswered: number;
+      correctAnswers: number;
+      timeSpent: number;
+    }
+  >>;
 }
 
 export function DomainRadarChart({ domainScores }: DomainRadarChartProps) {
@@ -60,21 +60,21 @@ export function DomainRadarChart({ domainScores }: DomainRadarChartProps) {
 
   // Updated labels for official TCO domains
   const domainLabels = {
-    [TCODomain.ASKING_QUESTIONS]: 'Asking Questions',
-    [TCODomain.REFINING_QUESTIONS]: 'Refining Questions',
-    [TCODomain.REFINING_TARGETING]: 'Refining Questions & Targeting',
-    [TCODomain.TAKING_ACTION]: 'Taking Action',
-    [TCODomain.NAVIGATION_MODULES]: 'Navigation and Basic Module Functions',
-    [TCODomain.REPORTING_EXPORT]: 'Report Generation and Data Export',
+    [TCODomain.ASKING_QUESTIONS]: "Asking Questions",
+    [TCODomain.REFINING_QUESTIONS]: "Refining Questions",
+    [TCODomain.REFINING_TARGETING]: "Refining Questions & Targeting",
+    [TCODomain.TAKING_ACTION]: "Taking Action",
+    [TCODomain.NAVIGATION_MODULES]: "Navigation and Basic Module Functions",
+    [TCODomain.REPORTING_EXPORT]: "Report Generation and Data Export",
     // Additional domain labels
-    [TCODomain.SECURITY]: 'Security',
-    [TCODomain.FUNDAMENTALS]: 'Fundamentals',
-    [TCODomain.TROUBLESHOOTING]: 'Troubleshooting',
+    [TCODomain.SECURITY]: "Security",
+    [TCODomain.FUNDAMENTALS]: "Fundamentals",
+    [TCODomain.TROUBLESHOOTING]: "Troubleshooting",
   };
 
   const data: DomainData[] = Object.entries(domainScores).map(([domain, stats]) => ({
     domain: domainLabels[domain as TCODomain],
-    score: stats?.score || 0,
+    score: (stats?.score) || 0,
     fullMark: 100,
     weight: TCO_DOMAIN_WEIGHTS[domain as TCODomain] || 0,
   }));
@@ -84,10 +84,10 @@ export function DomainRadarChart({ domainScores }: DomainRadarChartProps) {
   const weakestDomain = data.reduce((min, item) => (item.score < min.score ? item : min));
 
   const getScoreColor = (score: number) => {
-    if (score >= 80) return 'text-[#22c55e] border-green-400';
-    if (score >= 70) return 'text-primary border-blue-400';
-    if (score >= 60) return 'text-[#f97316] border-yellow-400';
-    return 'text-red-400 border-red-400';
+    if (score >= 80) return "text-[#22c55e] border-green-400";
+    if (score >= 70) return "text-primary border-blue-400";
+    if (score >= 60) return "text-[#f97316] border-yellow-400";
+    return "text-red-400 border-red-400";
   };
 
   return (
@@ -105,11 +105,11 @@ export function DomainRadarChart({ domainScores }: DomainRadarChartProps) {
             <ResponsiveContainer width="100%" height={250}>
               <RadarChart data={data}>
                 <PolarGrid gridType="polygon" stroke="#374151" opacity={0.3} />
-                <PolarAngleAxis dataKey="domain" tick={{ fontSize: 12, fill: '#9CA3AF' }} />
+                <PolarAngleAxis dataKey="domain" tick={{ fontSize: 12, fill: "#9CA3AF" }} />
                 <PolarRadiusAxis
                   angle={90}
                   domain={[0, 100]}
-                  tick={{ fontSize: 10, fill: '#6B7280' }}
+                  tick={{ fontSize: 10, fill: "#6B7280" }}
                   axisLine={false}
                 />
                 <Radar
@@ -119,7 +119,7 @@ export function DomainRadarChart({ domainScores }: DomainRadarChartProps) {
                   fill="#3B82F6"
                   fillOpacity={0.2}
                   strokeWidth={2}
-                  dot={{ r: 4, fill: '#3B82F6' }}
+                  dot={{ r: 4, fill: "#3B82F6" }}
                 />
               </RadarChart>
             </ResponsiveContainer>

@@ -1,0 +1,94 @@
+{
+  "version": 1,
+  "updatedAt": "2025-10-26T12:00:00.000Z",
+  "modules": [
+    {
+      "id": "platform-foundation",
+      "slug": "platform-foundation",
+      "title": "Tanium Platform Foundation",
+      "description": "Comprehensive foundation module covering platform architecture, terminology, and console navigation",
+      "domain": "Platform Foundation",
+      "order": 0
+    },
+    {
+      "id": "asking-questions",
+      "slug": "asking-questions",
+      "title": "Asking Questions",
+      "description": "Master natural language questions and sensor basics",
+      "domain": "Asking Questions",
+      "order": 1
+    },
+    {
+      "id": "refining-questions",
+      "slug": "refining-questions",
+      "title": "Refining Questions & Targeting",
+      "description": "Advanced targeting with groups and filters",
+      "domain": "Refining Questions & Targeting",
+      "order": 2
+    },
+    {
+      "id": "refining-targeting-experimental",
+      "slug": "refining-targeting",
+      "title": "Refining Questions & Targeting (Learn Experimental)",
+      "description": "Advanced targeting with microlearning approach and interactive practice",
+      "domain": "Refining Questions & Targeting",
+      "order": 3
+    },
+    {
+      "id": "taking-action",
+      "slug": "taking-action",
+      "title": "Taking Action",
+      "description": "Safe package deployment and action execution",
+      "domain": "Taking Action",
+      "order": 4
+    },
+    {
+      "id": "taking-action-experimental",
+      "slug": "taking-action",
+      "title": "Taking Action (Learn Experimental)",
+      "description": "Package deployment and action safety with microlearning approach",
+      "domain": "Taking Action",
+      "order": 5
+    },
+    {
+      "id": "navigation-modules",
+      "slug": "navigation-modules",
+      "title": "Navigation & Basic Modules",
+      "description": "Navigate the console and core modules",
+      "domain": "Navigation and Basic Module Functions",
+      "order": 6
+    },
+    {
+      "id": "navigation-basic-modules-experimental",
+      "slug": "navigation-basic-modules",
+      "title": "Navigation & Basic Modules (Learn Experimental)",
+      "description": "Console navigation and module basics with microlearning approach",
+      "domain": "Navigation and Basic Module Functions",
+      "order": 7
+    },
+    {
+      "id": "reporting-export",
+      "slug": "reporting-export",
+      "title": "Reporting & Data Export",
+      "description": "Report creation and data export",
+      "domain": "Report Generation and Data Export",
+      "order": 8
+    },
+    {
+      "id": "reporting-export-experimental",
+      "slug": "reporting-export",
+      "title": "Reporting & Data Export (Learn Experimental)",
+      "description": "Reporting principles and data export with microlearning approach",
+      "domain": "Report Generation and Data Export",
+      "order": 9
+    },
+    {
+      "id": "example-microlearning",
+      "slug": "example-microlearning",
+      "title": "Microlearning Example Module",
+      "description": "Example showing how to structure content with microlearning sections for optimal retention",
+      "domain": "Example Microlearning",
+      "order": 10
+    }
+  ]
+}

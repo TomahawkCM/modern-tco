@@ -1,18 +1,17 @@
-'use client';
+"use client";
 
+import { useAuth } from "@/contexts/AuthContext";
+import { useDatabase } from "@/hooks/useDatabase";
+import { TCODomain } from "@/types/exam";
 import {
   createContext,
-  type ReactNode,
   useCallback,
   useContext,
   useEffect,
   useReducer,
   useState,
-} from 'react';
-import { useAuth } from '@/contexts/AuthContext';
-import { useDatabase } from '@/hooks/useDatabase';
-import { TCODomain } from '@/types/exam';
-
+  type ReactNode,
+} from "react";
 // import type { Tables } from "@/types/database.types";
 
 interface IncorrectAnswer {
@@ -36,21 +35,21 @@ interface IncorrectAnswersState {
 }
 
 type IncorrectAnswersAction =
-  | { type: 'LOAD_ANSWERS'; payload: IncorrectAnswer[] }
+  | { type: "LOAD_ANSWERS"; payload: IncorrectAnswer[] }
   | {
-      type: 'ADD_INCORRECT_ANSWER';
-      payload: Omit<IncorrectAnswer, 'id' | 'timestamp' | 'reviewed' | 'reviewCount'>;
+      type: "ADD_INCORRECT_ANSWER";
+      payload: Omit<IncorrectAnswer, "id" | "timestamp" | "reviewed" | "reviewCount">;
     }
-  | { type: 'MARK_REVIEWED'; payload: string }
-  | { type: 'CLEAR_ANSWERS' }
-  | { type: 'REMOVE_ANSWER'; payload: string }
-  | { type: 'SET_LOADING'; payload: boolean }
-  | { type: 'SET_ERROR'; payload: string | null };
+  | { type: "MARK_REVIEWED"; payload: string }
+  | { type: "CLEAR_ANSWERS" }
+  | { type: "REMOVE_ANSWER"; payload: string }
+  | { type: "SET_LOADING"; payload: boolean }
+  | { type: "SET_ERROR"; payload: string | null };
 
 interface IncorrectAnswersContextType {
   state: IncorrectAnswersState;
   addIncorrectAnswer: (
-    answer: Omit<IncorrectAnswer, 'id' | 'timestamp' | 'reviewed' | 'reviewCount'>
+    answer: Omit<IncorrectAnswer, "id" | "timestamp" | "reviewed" | "reviewCount">
   ) => void;
   markAsReviewed: (answerId: string) => void;
   getAnswersByDomain: (domain: TCODomain) => IncorrectAnswer[];
@@ -75,14 +74,14 @@ function incorrectAnswersReducer(
   action: IncorrectAnswersAction
 ): IncorrectAnswersState {
   switch (action.type) {
-    case 'LOAD_ANSWERS':
+    case "LOAD_ANSWERS":
       return {
         ...state,
         answers: action.payload,
         isLoading: false,
       };
 
-    case 'ADD_INCORRECT_ANSWER': {
+    case "ADD_INCORRECT_ANSWER": {
       const newAnswer: IncorrectAnswer = {
         ...action.payload,
         id: `incorrect-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
@@ -103,7 +102,7 @@ function incorrectAnswersReducer(
       };
     }
 
-    case 'MARK_REVIEWED': {
+    case "MARK_REVIEWED": {
       return {
         ...state,
         answers: state.answers.map((answer) =>
@@ -114,26 +113,26 @@ function incorrectAnswersReducer(
       };
     }
 
-    case 'REMOVE_ANSWER': {
+    case "REMOVE_ANSWER": {
       return {
         ...state,
         answers: state.answers.filter((answer) => answer.id !== action.payload),
       };
     }
 
-    case 'CLEAR_ANSWERS':
+    case "CLEAR_ANSWERS":
       return {
         ...state,
         answers: [],
       };
 
-    case 'SET_LOADING':
+    case "SET_LOADING":
       return {
         ...state,
         isLoading: action.payload,
       };
 
-    case 'SET_ERROR':
+    case "SET_ERROR":
       return {
         ...state,
         error: action.payload,
@@ -155,27 +154,27 @@ export function IncorrectAnswersProvider({ children }: { children: ReactNode }) 
 
   // Load incorrect answers from database or localStorage on mount
   useEffect(() => {
-    dispatch({ type: 'SET_LOADING', payload: true });
+    dispatch({ type: "SET_LOADING", payload: true });
 
     try {
-      const savedAnswers = localStorage.getItem('tco-incorrect-answers');
+      const savedAnswers = localStorage.getItem("tco-incorrect-answers");
 
       if (savedAnswers) {
         const answers = JSON.parse(savedAnswers).map((answer: any) => ({
           ...answer,
           timestamp: new Date(answer.timestamp),
         }));
-        dispatch({ type: 'LOAD_ANSWERS', payload: answers });
+        dispatch({ type: "LOAD_ANSWERS", payload: answers });
       } else {
-        dispatch({ type: 'LOAD_ANSWERS', payload: [] });
+        dispatch({ type: "LOAD_ANSWERS", payload: [] });
       }
     } catch (error) {
       if (process.env.NODE_ENV === 'development') {
-        console.error('Failed to load incorrect answers from localStorage:', error);
+        console.error("Failed to load incorrect answers from localStorage:", error);
       }
-      dispatch({ type: 'LOAD_ANSWERS', payload: [] });
+      dispatch({ type: "LOAD_ANSWERS", payload: [] });
     } finally {
-      dispatch({ type: 'SET_LOADING', payload: false });
+      dispatch({ type: "SET_LOADING", payload: false });
     }
   }, []);
 
@@ -184,7 +183,7 @@ export function IncorrectAnswersProvider({ children }: { children: ReactNode }) 
     if (!state.isLoading && !user) {
       // Simple debounced save to prevent excessive localStorage writes
       const timeoutId = setTimeout(() => {
-        localStorage.setItem('tco-incorrect-answers', JSON.stringify(state.answers));
+        localStorage.setItem("tco-incorrect-answers", JSON.stringify(state.answers));
       }, 200);
 
       return () => clearTimeout(timeoutId);
@@ -192,7 +191,7 @@ export function IncorrectAnswersProvider({ children }: { children: ReactNode }) 
   }, [state.answers, state.isLoading, user]);
 
   const addIncorrectAnswer = useCallback(
-    async (answer: Omit<IncorrectAnswer, 'id' | 'timestamp' | 'reviewed' | 'reviewCount'>) => {
+    async (answer: Omit<IncorrectAnswer, "id" | "timestamp" | "reviewed" | "reviewCount">) => {
       const newAnswer: IncorrectAnswer = {
         ...answer,
         id: `incorrect-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
@@ -202,7 +201,7 @@ export function IncorrectAnswersProvider({ children }: { children: ReactNode }) 
       };
 
       // Add to local state immediately
-      dispatch({ type: 'ADD_INCORRECT_ANSWER', payload: answer });
+      dispatch({ type: "ADD_INCORRECT_ANSWER", payload: answer });
 
       // Save to database if authenticated
       if (user) {
@@ -212,25 +211,25 @@ export function IncorrectAnswersProvider({ children }: { children: ReactNode }) 
           const error = null; // Placeholder
 
           if (error && process.env.NODE_ENV === 'development') {
-            console.error('Failed to save incorrect answer to database:', error);
+            console.error("Failed to save incorrect answer to database:", error);
             // Still keep in local state even if database save fails
           }
         } catch (error) {
           if (process.env.NODE_ENV === 'development') {
-            console.error('Error saving incorrect answer:', error);
+            console.error("Error saving incorrect answer:", error);
           }
         }
       } else {
         // Save to localStorage if not authenticated
-        localStorage.setItem('tco-incorrect-answers', JSON.stringify(state.answers));
+        localStorage.setItem("tco-incorrect-answers", JSON.stringify(state.answers));
       }
     },
-    [user?.id, state.answers, user]
+    [user?.id]
   );
 
   const markAsReviewed = useCallback(
     async (answerId: string) => {
-      dispatch({ type: 'MARK_REVIEWED', payload: answerId });
+      dispatch({ type: "MARK_REVIEWED", payload: answerId });
 
       // Update in database if authenticated
       if (user) {
@@ -240,16 +239,16 @@ export function IncorrectAnswersProvider({ children }: { children: ReactNode }) 
           const error = null; // Placeholder
 
           if (error && process.env.NODE_ENV === 'development') {
-            console.error('Failed to update review status in database:', error);
+            console.error("Failed to update review status in database:", error);
           }
         } catch (error) {
           if (process.env.NODE_ENV === 'development') {
-            console.error('Error updating review status:', error);
+            console.error("Error updating review status:", error);
           }
         }
       }
     },
-    [user?.id, user]
+    [user?.id]
   );
 
   const getAnswersByDomain = (domain: TCODomain): IncorrectAnswer[] => {
@@ -270,7 +269,7 @@ export function IncorrectAnswersProvider({ children }: { children: ReactNode }) 
   );
 
   const clearAllAnswers = useCallback(async () => {
-    dispatch({ type: 'CLEAR_ANSWERS' });
+    dispatch({ type: "CLEAR_ANSWERS" });
 
     if (user) {
       try {
@@ -279,21 +278,21 @@ export function IncorrectAnswersProvider({ children }: { children: ReactNode }) 
         const error = null; // Placeholder
 
         if (error && process.env.NODE_ENV === 'development') {
-          console.error('Failed to clear incorrect answers from database:', error);
+          console.error("Failed to clear incorrect answers from database:", error);
         }
       } catch (error) {
         if (process.env.NODE_ENV === 'development') {
-          console.error('Error clearing incorrect answers:', error);
+          console.error("Error clearing incorrect answers:", error);
         }
       }
     } else {
-      localStorage.removeItem('tco-incorrect-answers');
+      localStorage.removeItem("tco-incorrect-answers");
     }
-  }, [user?.id, user]);
+  }, [user?.id]);
 
   const removeAnswer = useCallback(
     async (answerId: string) => {
-      dispatch({ type: 'REMOVE_ANSWER', payload: answerId });
+      dispatch({ type: "REMOVE_ANSWER", payload: answerId });
 
       if (user) {
         try {
@@ -302,19 +301,19 @@ export function IncorrectAnswersProvider({ children }: { children: ReactNode }) 
           const error = null; // Placeholder
 
           if (error && process.env.NODE_ENV === 'development') {
-            console.error('Failed to remove incorrect answer from database:', error);
+            console.error("Failed to remove incorrect answer from database:", error);
           }
         } catch (error) {
           if (process.env.NODE_ENV === 'development') {
-            console.error('Error removing incorrect answer:', error);
+            console.error("Error removing incorrect answer:", error);
           }
         }
       } else {
         // Update localStorage if not authenticated
-        localStorage.setItem('tco-incorrect-answers', JSON.stringify(state.answers));
+        localStorage.setItem("tco-incorrect-answers", JSON.stringify(state.answers));
       }
     },
-    [user?.id, state.answers, user]
+    [user?.id]
   );
 
   const getTotalIncorrectCount = (): number => {
@@ -363,7 +362,7 @@ export function IncorrectAnswersProvider({ children }: { children: ReactNode }) 
 export function useIncorrectAnswers() {
   const context = useContext(IncorrectAnswersContext);
   if (context === undefined) {
-    throw new Error('useIncorrectAnswers must be used within an IncorrectAnswersProvider');
+    throw new Error("useIncorrectAnswers must be used within an IncorrectAnswersProvider");
   }
   return context;
 }

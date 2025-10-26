@@ -1,29 +1,29 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { analytics } from '@/lib/analytics';
+import { useState } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { analytics } from "@/lib/analytics";
 
-type Plan = 'free' | 'pro' | 'team';
+type Plan = "free" | "pro" | "team";
 
 async function startCheckout(plan: Plan) {
   try {
-    void analytics.capture('checkout_start', { plan });
-    const res = await fetch('/api/stripe/create-checkout-session', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+    void analytics.capture("checkout_start", { plan });
+    const res = await fetch("/api/v1/stripe/create-checkout-session", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ plan }),
     });
-    if (!res.ok) throw new Error('Checkout failed');
+    if (!res.ok) throw new Error("Checkout failed");
     const data = (await res.json()) as { url?: string; mode?: string };
     if (data.url) {
       window.location.href = data.url;
       return;
     }
-    throw new Error('No redirect URL returned');
+    throw new Error("No redirect URL returned");
   } catch (error) {
-    alert('Unable to start checkout right now. Please try again later.');
+    alert("Unable to start checkout right now. Please try again later.");
   }
 }
 
@@ -32,20 +32,14 @@ export default function PricingPage() {
 
   const onSelect = async (plan: Plan) => {
     setLoadingPlan(plan);
-    try {
-      await startCheckout(plan);
-    } finally {
-      setLoadingPlan(null);
-    }
+    try { await startCheckout(plan); } finally { setLoadingPlan(null); }
   };
 
   return (
     <div className="mx-auto max-w-6xl space-y-8 p-6">
       <div className="text-center">
         <h1 className="mb-3 text-4xl font-bold text-foreground">Choose Your Plan</h1>
-        <p className="text-muted-foreground">
-          Upgrade to unlock full practice, analytics, and advanced modules.
-        </p>
+        <p className="text-muted-foreground">Upgrade to unlock full practice, analytics, and advanced modules.</p>
       </div>
 
       <div className="grid gap-6 md:grid-cols-3">
@@ -71,9 +65,7 @@ export default function PricingPage() {
             <CardTitle className="text-foreground">Pro</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4 text-muted-foreground">
-            <div className="text-3xl font-bold text-foreground">
-              $9<span className="text-base font-medium">/mo</span>
-            </div>
+            <div className="text-3xl font-bold text-foreground">$9<span className="text-base font-medium">/mo</span></div>
             <ul className="list-disc space-y-1 pl-5 text-sm">
               <li>Unlimited practice + explanations</li>
               <li>Exam simulator</li>
@@ -82,10 +74,10 @@ export default function PricingPage() {
             </ul>
             <Button
               className="w-full bg-tanium-accent hover:bg-blue-600"
-              onClick={() => onSelect('pro')}
-              disabled={loadingPlan === 'pro'}
+              onClick={() => onSelect("pro")}
+              disabled={loadingPlan === "pro"}
             >
-              {loadingPlan === 'pro' ? 'Starting checkout…' : 'Get Pro'}
+              {loadingPlan === "pro" ? "Starting checkout…" : "Get Pro"}
             </Button>
           </CardContent>
         </Card>
@@ -95,9 +87,7 @@ export default function PricingPage() {
             <CardTitle className="text-foreground">Team</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4 text-muted-foreground">
-            <div className="text-3xl font-bold text-foreground">
-              $29<span className="text-base font-medium">/mo</span>
-            </div>
+            <div className="text-3xl font-bold text-foreground">$29<span className="text-base font-medium">/mo</span></div>
             <ul className="list-disc space-y-1 pl-5 text-sm">
               <li>All Pro features</li>
               <li>Team seats (basic)</li>
@@ -105,10 +95,10 @@ export default function PricingPage() {
             </ul>
             <Button
               className="w-full bg-primary hover:bg-blue-600"
-              onClick={() => onSelect('team')}
-              disabled={loadingPlan === 'team'}
+              onClick={() => onSelect("team")}
+              disabled={loadingPlan === "team"}
             >
-              {loadingPlan === 'team' ? 'Starting checkout…' : 'Get Team'}
+              {loadingPlan === "team" ? "Starting checkout…" : "Get Team"}
             </Button>
           </CardContent>
         </Card>

@@ -1,20 +1,20 @@
-'use client';
+"use client";
 
-import { Type } from 'lucide-react';
-import { useEffect, useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
+import { useEffect, useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Type } from "lucide-react";
+import { cn } from "@/lib/utils";
 
-const STORAGE_KEY = 'tco-large-text';
+const STORAGE_KEY = "tco-large-text";
 
 function applyLargeText(enabled: boolean) {
   const html = document.documentElement;
   if (enabled) {
-    html.style.fontSize = '18px'; // ~112.5% assuming 16px base
-    html.setAttribute('data-large-text', '1');
+    html.style.fontSize = "18px"; // ~112.5% assuming 16px base
+    html.setAttribute("data-large-text", "1");
   } else {
-    html.style.fontSize = '';
-    html.removeAttribute('data-large-text');
+    html.style.fontSize = "";
+    html.removeAttribute("data-large-text");
   }
 }
 
@@ -24,7 +24,7 @@ export function LargeTextToggle() {
   useEffect(() => {
     try {
       const v = localStorage.getItem(STORAGE_KEY);
-      const on = v === '1';
+      const on = v === "1";
       setEnabled(on);
     } catch {}
   }, []);
@@ -32,7 +32,7 @@ export function LargeTextToggle() {
   useEffect(() => {
     try {
       applyLargeText(enabled);
-      localStorage.setItem(STORAGE_KEY, enabled ? '1' : '0');
+      localStorage.setItem(STORAGE_KEY, enabled ? "1" : "0");
     } catch {}
   }, [enabled]);
 
@@ -41,11 +41,11 @@ export function LargeTextToggle() {
       variant="ghost"
       size="icon"
       aria-pressed={enabled}
-      aria-label={enabled ? 'Disable large text' : 'Enable large text'}
+      aria-label={enabled ? "Disable large text" : "Enable large text"}
       className={cn(
-        'relative z-50 text-foreground hover:bg-white/10 transition-all duration-200',
-        'active:scale-95 pointer-events-auto',
-        enabled && 'bg-primary/20 ring-2 ring-primary/50'
+        "relative z-50 text-foreground hover:bg-white/10 transition-all duration-200",
+        "active:scale-95 pointer-events-auto",
+        enabled && "bg-primary/20 ring-2 ring-primary/50"
       )}
       onClick={() => setEnabled((v) => !v)}
     >
@@ -53,3 +53,4 @@ export function LargeTextToggle() {
     </Button>
   );
 }
+

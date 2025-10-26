@@ -1,10 +1,13 @@
-'use client';
+"use client";
 
-import { Activity, BookOpen, Clock, Lightbulb, Target, TrendingUp } from 'lucide-react';
-import { useEffect, useState } from 'react';
-import { Badge } from '@/components/ui/badge';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { getStudyRecommendations, getStudySessionAnalytics } from '@/lib/videoAnalytics';
+import { useState, useEffect } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { BookOpen, Clock, Target, Lightbulb, Activity, TrendingUp } from "lucide-react";
+import {
+  getStudySessionAnalytics,
+  getStudyRecommendations,
+} from "@/lib/videoAnalytics";
 
 interface StudyInsightsDashboardProps {
   /** Number of days to analyze */
@@ -18,7 +21,10 @@ interface StudyInsightsDashboardProps {
  *
  * Displays study session analytics, patterns, and personalized recommendations
  */
-export function StudyInsightsDashboard({ daysBack = 30, className }: StudyInsightsDashboardProps) {
+export function StudyInsightsDashboard({
+  daysBack = 30,
+  className,
+}: StudyInsightsDashboardProps) {
   const [analytics, setAnalytics] = useState<any>(null);
   const [recommendations, setRecommendations] = useState<string[]>([]);
 
@@ -27,14 +33,14 @@ export function StudyInsightsDashboard({ daysBack = 30, className }: StudyInsigh
 
     // Listen for study session updates
     const handleStorageChange = (e: StorageEvent) => {
-      if (e.key === 'study-sessions' || e.key === 'video-progress') {
+      if (e.key === "study-sessions" || e.key === "video-progress") {
         loadAnalytics();
       }
     };
 
-    window.addEventListener('storage', handleStorageChange);
-    return () => window.removeEventListener('storage', handleStorageChange);
-  }, [loadAnalytics]);
+    window.addEventListener("storage", handleStorageChange);
+    return () => window.removeEventListener("storage", handleStorageChange);
+  }, [daysBack]);
 
   function loadAnalytics() {
     const data = getStudySessionAnalytics(daysBack);
@@ -55,17 +61,17 @@ export function StudyInsightsDashboard({ daysBack = 30, className }: StudyInsigh
   }
 
   const getQualityColor = (score: number) => {
-    if (score >= 80) return 'text-[#22c55e] border-green-400';
-    if (score >= 60) return 'text-primary border-blue-400';
-    if (score >= 40) return 'text-[#f97316] border-yellow-400';
-    return 'text-orange-400 border-orange-400';
+    if (score >= 80) return "text-[#22c55e] border-green-400";
+    if (score >= 60) return "text-primary border-blue-400";
+    if (score >= 40) return "text-[#f97316] border-yellow-400";
+    return "text-orange-400 border-orange-400";
   };
 
   const getQualityLabel = (score: number) => {
-    if (score >= 80) return 'Excellent';
-    if (score >= 60) return 'Good';
-    if (score >= 40) return 'Fair';
-    return 'Needs Improvement';
+    if (score >= 80) return "Excellent";
+    if (score >= 60) return "Good";
+    if (score >= 40) return "Fair";
+    return "Needs Improvement";
   };
 
   return (
@@ -116,9 +122,7 @@ export function StudyInsightsDashboard({ daysBack = 30, className }: StudyInsigh
                 <Target className="h-4 w-4 text-[#f97316]" />
                 <span className="text-xs text-muted-foreground">Quality</span>
               </div>
-              <div
-                className={`text-3xl font-bold ${getQualityColor(analytics.averageQualityScore).split(' ')[0]}`}
-              >
+              <div className={`text-3xl font-bold ${getQualityColor(analytics.averageQualityScore).split(" ")[0]}`}>
                 {Math.round(analytics.averageQualityScore)}
               </div>
             </div>
@@ -162,26 +166,24 @@ export function StudyInsightsDashboard({ daysBack = 30, className }: StudyInsigh
                   <div key={type} className="space-y-1">
                     <div className="flex items-center justify-between text-sm">
                       <span className="text-muted-foreground capitalize flex items-center gap-2">
-                        {type === 'video' && '📺'}
-                        {type === 'practice' && '✍️'}
-                        {type === 'review' && '🔄'}
-                        {type === 'reading' && '📚'}
+                        {type === "video" && "📺"}
+                        {type === "practice" && "✍️"}
+                        {type === "review" && "🔄"}
+                        {type === "reading" && "📚"}
                         {type}
                       </span>
-                      <span className="text-muted-foreground">
-                        {Math.round(percentage as number)}%
-                      </span>
+                      <span className="text-muted-foreground">{Math.round(percentage as number)}%</span>
                     </div>
                     <div className="h-2 bg-gray-700/50 rounded-full overflow-hidden">
                       <div
                         className={`h-full transition-all ${
-                          type === 'video'
-                            ? 'bg-accent'
-                            : type === 'practice'
-                              ? 'bg-primary'
-                              : type === 'review'
-                                ? 'bg-[#22c55e]'
-                                : 'bg-yellow-500'
+                          type === "video"
+                            ? "bg-accent"
+                            : type === "practice"
+                            ? "bg-primary"
+                            : type === "review"
+                            ? "bg-[#22c55e]"
+                            : "bg-yellow-500"
                         }`}
                         style={{ width: `${percentage}%` }}
                       />
@@ -214,9 +216,7 @@ export function StudyInsightsDashboard({ daysBack = 30, className }: StudyInsigh
               {Object.entries(analytics.sessionsByDay)
                 .slice(-14) // Last 14 days
                 .map(([date, count]) => {
-                  const maxSessions = Math.max(
-                    ...(Object.values(analytics.sessionsByDay) as number[])
-                  );
+                  const maxSessions = Math.max(...Object.values(analytics.sessionsByDay) as number[]);
                   const height = maxSessions > 0 ? ((count as number) / maxSessions) * 100 : 0;
                   const dateObj = new Date(date);
 

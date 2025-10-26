@@ -1,20 +1,11 @@
 'use client';
 
-import { CheckCircle2, HelpCircle, Lightbulb, Play, RotateCcw, XCircle } from 'lucide-react';
-import type React from 'react';
-import { useCallback, useState } from 'react';
-import { Alert, AlertDescription } from '@/components/ui/alert';
+import React, { useState, useCallback } from 'react';
 import { Button } from '@/components/ui/button';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { Alert, AlertDescription } from '@/components/ui/alert';
+import { CheckCircle2, XCircle, HelpCircle, Play, RotateCcw, Lightbulb } from 'lucide-react';
 import { Textarea } from '@/components/ui/textarea';
-import { analytics } from '@/lib/analytics';
 
 interface QueryPlaygroundProps {
   title?: string;
@@ -27,13 +18,13 @@ interface QueryPlaygroundProps {
 }
 
 export default function QueryPlayground({
-  title = 'Practice Query',
+  title = "Practice Query",
   instruction,
   expectedQuery,
-  expectedResult = 'Query results would appear here',
+  expectedResult = "Query results would appear here",
   hint,
   difficulty = 'beginner',
-  children,
+  children
 }: QueryPlaygroundProps) {
   const [userQuery, setUserQuery] = useState('');
   const [showResult, setShowResult] = useState(false);
@@ -55,24 +46,16 @@ export default function QueryPlayground({
     const expected = normalizeQuery(expectedQuery);
 
     // Check for exact match or close match
-    const isCorrect =
-      normalized === expected ||
+    const isCorrect = normalized === expected ||
       (normalized.includes('get') &&
-        normalized.includes('from all machines') &&
-        expectedQuery
-          .split(' ')
-          .every((word) => normalized.includes(word.toLowerCase().replace(/[,'"]/g, ''))));
+       normalized.includes('from all machines') &&
+       expectedQuery.split(' ').every(word =>
+         normalized.includes(word.toLowerCase().replace(/[,'"]/g, ''))
+       ));
 
     setFeedback(isCorrect ? 'correct' : 'incorrect');
     setShowResult(isCorrect);
-    setAttempts((prev) => prev + 1);
-
-    analytics.capture('query_playground_result', {
-      title,
-      difficulty,
-      correct: isCorrect,
-      attempts: attempts + 1,
-    });
+    setAttempts(prev => prev + 1);
 
     // Save progress to localStorage
     if (isCorrect) {
@@ -80,11 +63,11 @@ export default function QueryPlayground({
       progress[title] = {
         completed: true,
         attempts: attempts + 1,
-        timestamp: new Date().toISOString(),
+        timestamp: new Date().toISOString()
       };
       localStorage.setItem('queryPlaygroundProgress', JSON.stringify(progress));
     }
-  }, [userQuery, expectedQuery, title, attempts, difficulty, normalizeQuery]);
+  }, [userQuery, expectedQuery, title, attempts]);
 
   const reset = () => {
     setUserQuery('');
@@ -92,23 +75,14 @@ export default function QueryPlayground({
     setFeedback(null);
     setShowHint(false);
     setAttempts(0);
-
-    analytics.capture('query_playground_reset', {
-      title,
-      difficulty,
-    });
   };
 
   const getDifficultyColor = () => {
-    switch (difficulty) {
-      case 'beginner':
-        return 'text-[#22c55e]';
-      case 'intermediate':
-        return 'text-yellow-600';
-      case 'advanced':
-        return 'text-red-600';
-      default:
-        return 'text-gray-600';
+    switch(difficulty) {
+      case 'beginner': return 'text-[#22c55e]';
+      case 'intermediate': return 'text-yellow-600';
+      case 'advanced': return 'text-red-600';
+      default: return 'text-gray-600';
     }
   };
 
@@ -156,8 +130,7 @@ export default function QueryPlayground({
                 <>
                   <XCircle className="w-5 h-5 text-red-600" />
                   <AlertDescription className="text-red-700">
-                    Not quite right.{' '}
-                    {attempts >= 2 ? 'Try using the hint below.' : 'Give it another try!'}
+                    Not quite right. {attempts >= 2 ? 'Try using the hint below.' : 'Give it another try!'}
                   </AlertDescription>
                 </>
               )}
@@ -183,7 +156,11 @@ export default function QueryPlayground({
           </Alert>
         )}
 
-        {children && <div className="mt-4 p-4 bg-gray-50 rounded-lg">{children}</div>}
+        {children && (
+          <div className="mt-4 p-4 bg-gray-50 rounded-lg">
+            {children}
+          </div>
+        )}
       </CardContent>
 
       <CardFooter className="flex justify-between">
@@ -196,7 +173,11 @@ export default function QueryPlayground({
             <Play className="w-4 h-4" />
             Run Query
           </Button>
-          <Button onClick={reset} variant="outline" className="flex items-center gap-2">
+          <Button
+            onClick={reset}
+            variant="outline"
+            className="flex items-center gap-2"
+          >
             <RotateCcw className="w-4 h-4" />
             Reset
           </Button>
@@ -204,14 +185,7 @@ export default function QueryPlayground({
 
         {hint && !showHint && attempts >= 1 && feedback !== 'correct' && (
           <Button
-            onClick={() => {
-              setShowHint(true);
-              analytics.capture('query_playground_hint', {
-                title,
-                difficulty,
-                attempts,
-              });
-            }}
+            onClick={() => setShowHint(true)}
             variant="ghost"
             className="flex items-center gap-2"
           >

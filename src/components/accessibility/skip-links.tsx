@@ -1,33 +1,33 @@
-'use client';
+"use client";
 
-import { Button } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 export function SkipLinks() {
   const handleSkipToContent = (e: React.MouseEvent) => {
     e.preventDefault();
-    const mainContent = document.getElementById('main-content');
+    const mainContent = document.getElementById("main-content");
     if (mainContent) {
       mainContent.focus();
-      mainContent.scrollIntoView({ behavior: 'smooth' });
+      mainContent.scrollIntoView({ behavior: "smooth" });
     }
   };
 
   const handleSkipToNavigation = (e: React.MouseEvent) => {
     e.preventDefault();
-    const navigation = document.getElementById('main-navigation');
+    const navigation = document.getElementById("main-navigation");
     if (navigation) {
       navigation.focus();
-      navigation.scrollIntoView({ behavior: 'smooth' });
+      navigation.scrollIntoView({ behavior: "smooth" });
     }
   };
 
   return (
     <div
       className={cn(
-        'fixed left-0 top-0 z-[100]',
-        'translate-y-[-100%] focus-within:translate-y-0',
-        'transition-transform duration-200'
+        "fixed left-0 top-0 z-[100]",
+        "translate-y-[-100%] focus-within:translate-y-0",
+        "transition-transform duration-200"
       )}
       aria-label="Skip navigation links"
     >

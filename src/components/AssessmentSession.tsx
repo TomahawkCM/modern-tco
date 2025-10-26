@@ -1,22 +1,22 @@
-'use client';
+"use client";
 
-import { AnimatePresence, motion } from 'framer-motion';
-import { AlertCircle, Clock, Target } from 'lucide-react';
-import { useCallback, useEffect, useState } from 'react';
-import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Progress } from '@/components/ui/progress';
-import { useQuestions } from '@/contexts/QuestionsContext';
-import { AssessmentEngine } from '@/lib/assessment-engine';
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Progress } from "@/components/ui/progress";
+import { useQuestions } from "@/contexts/QuestionsContext";
+import { AssessmentEngine } from "@/lib/assessment-engine";
 import type {
   AssessmentResult,
   AssessmentSession as AssessmentSessionType,
   AssessmentType,
-} from '@/types/assessment';
-import type { TCODomain } from '@/types/exam';
-import '@/styles/assessment.css';
+} from "@/types/assessment";
+import type { TCODomain } from "@/types/exam";
+import { AnimatePresence, motion } from "framer-motion";
+import { AlertCircle, Clock, Target } from "lucide-react";
+import { useCallback, useEffect, useState } from "react";
+import "@/styles/assessment.css";
 
 interface AssessmentSessionProps {
   assessmentType: AssessmentType;
@@ -59,7 +59,7 @@ export function AssessmentSession({
         startTime: new Date(),
         timeLimit: getTimeLimit(assessmentType),
         moduleId,
-        status: 'in_progress',
+        status: "in_progress",
         config: {
           type: assessmentType,
           moduleId,
@@ -82,7 +82,7 @@ export function AssessmentSession({
 
   // Timer effect
   useEffect(() => {
-    if (!session || session.status !== 'in_progress' || timeRemaining <= 0) return;
+    if (!session || session.status !== "in_progress" || timeRemaining <= 0) return;
 
     const timer = setInterval(() => {
       setTimeRemaining((prev) => {
@@ -100,13 +100,13 @@ export function AssessmentSession({
 
   const getQuestionCount = (type: AssessmentType): number => {
     switch (type) {
-      case 'mock-exam':
+      case "mock-exam":
         return 75;
-      case 'domain-test':
+      case "domain-test":
         return 15;
-      case 'module-quiz':
+      case "module-quiz":
         return 10;
-      case 'practice-test':
+      case "practice-test":
         return 25;
       default:
         return 10;
@@ -115,13 +115,13 @@ export function AssessmentSession({
 
   const getTimeLimit = (type: AssessmentType): number => {
     switch (type) {
-      case 'mock-exam':
+      case "mock-exam":
         return 105; // 105 minutes for full exam
-      case 'domain-test':
+      case "domain-test":
         return 20;
-      case 'module-quiz':
+      case "module-quiz":
         return 15;
-      case 'practice-test':
+      case "practice-test":
         return 35;
       default:
         return 15;
@@ -178,14 +178,14 @@ export function AssessmentSession({
         ...session,
         id: session.id || `assessment-${Date.now()}`,
         endTime,
-        status: 'completed',
+        status: "completed",
       };
 
       // Calculate results using assessment engine
       const result = await AssessmentEngine.calculateResults(completedSession);
       onComplete(result);
     } catch (error) {
-      console.error('Error submitting assessment:', error);
+      console.error("Error submitting assessment:", error);
       // Handle error - could show error message
     } finally {
       setIsSubmitting(false);
@@ -198,9 +198,9 @@ export function AssessmentSession({
     const remainingSeconds = seconds % 60;
 
     if (hours > 0) {
-      return `${hours}:${minutes.toString().padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`;
+      return `${hours}:${minutes.toString().padStart(2, "0")}:${remainingSeconds.toString().padStart(2, "0")}`;
     }
-    return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
+    return `${minutes}:${remainingSeconds.toString().padStart(2, "0")}`;
   };
 
   const getProgressPercentage = (): number => {
@@ -235,8 +235,8 @@ export function AssessmentSession({
         <div className="mb-6 rounded-lg bg-white p-4 shadow-sm">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
-              <Badge variant={assessmentType === 'mock-exam' ? 'destructive' : 'secondary'}>
-                {assessmentType.replace('-', ' ').toUpperCase()}
+              <Badge variant={assessmentType === "mock-exam" ? "destructive" : "secondary"}>
+                {assessmentType.replace("-", " ").toUpperCase()}
               </Badge>
               <div className="flex items-center text-sm text-gray-600">
                 <Target className="mr-1 h-4 w-4" />
@@ -248,10 +248,10 @@ export function AssessmentSession({
               <div
                 className={`time-display ${
                   isTimeCritical
-                    ? 'time-display--critical'
+                    ? "time-display--critical"
                     : isTimeWarning
-                      ? 'time-display--warning'
-                      : 'time-display--normal'
+                      ? "time-display--warning"
+                      : "time-display--normal"
                 }`}
               >
                 <Clock className="h-4 w-4" />
@@ -310,43 +310,39 @@ export function AssessmentSession({
               </CardHeader>
 
               <CardContent className="space-y-3">
-                {(currentQuestion.options ?? currentQuestion.choices ?? []).map(
-                  (option: any, index: number) => {
-                    const optionLetter = String.fromCharCode(65 + index); // A, B, C, D
-                    const currentResponse = session.responses.find(
-                      (r: any) => r.questionId === currentQuestion.id
-                    );
-                    const isSelected = currentResponse?.selectedAnswer === option.id;
+                {(currentQuestion.options ?? currentQuestion.choices ?? []).map((option: any, index: number) => {
+                  const optionLetter = String.fromCharCode(65 + index); // A, B, C, D
+                  const currentResponse = session.responses.find((r: any) => r.questionId === currentQuestion.id);
+                  const isSelected = currentResponse?.selectedAnswer === option.id;
 
-                    return (
-                      <motion.button
-                        key={option.id}
-                        whileHover={{ scale: 1.01 }}
-                        whileTap={{ scale: 0.99 }}
-                        onClick={() => handleAnswerSelect(currentQuestion.id, option.id)}
-                        aria-label={`Option ${optionLetter}: ${option.text}`}
-                        className={`assessment-option-button ${
-                          isSelected
-                            ? 'assessment-option-button--selected'
-                            : 'assessment-option-button--unselected'
-                        }`}
-                      >
-                        <div className="flex items-start space-x-3">
-                          <div
-                            className={`option-indicator ${
-                              isSelected
-                                ? 'option-indicator--selected'
-                                : 'option-indicator--unselected'
-                            }`}
-                          >
-                            {optionLetter}
-                          </div>
-                          <span className="flex-1">{option.text}</span>
+                  return (
+                    <motion.button
+                      key={option.id}
+                      whileHover={{ scale: 1.01 }}
+                      whileTap={{ scale: 0.99 }}
+                      onClick={() => handleAnswerSelect(currentQuestion.id, option.id)}
+                      aria-label={`Option ${optionLetter}: ${option.text}`}
+                      className={`assessment-option-button ${
+                        isSelected
+                          ? "assessment-option-button--selected"
+                          : "assessment-option-button--unselected"
+                      }`}
+                    >
+                      <div className="flex items-start space-x-3">
+                        <div
+                          className={`option-indicator ${
+                            isSelected
+                              ? "option-indicator--selected"
+                              : "option-indicator--unselected"
+                          }`}
+                        >
+                          {optionLetter}
                         </div>
-                      </motion.button>
-                    );
-                  }
-                )}
+                        <span className="flex-1">{option.text}</span>
+                      </div>
+                    </motion.button>
+                  );
+                })}
               </CardContent>
             </Card>
           </motion.div>
@@ -365,19 +361,16 @@ export function AssessmentSession({
           <div className="flex items-center space-x-2">
             {session.questions.map((_: any, index: number) => (
               <button
-                type="button"
                 key={index}
                 onClick={() => setCurrentQuestionIndex(index)}
                 aria-label={`Go to question ${index + 1}${session.responses.find((r: any) => r.questionId === session.questions[index].id) ? ' (answered)' : ''}`}
                 title={`Question ${index + 1}${session.responses.find((r: any) => r.questionId === session.questions[index].id) ? ' - Answered' : ' - Not answered'}`}
                 className={`question-nav-button ${
                   index === currentQuestionIndex
-                    ? 'question-nav-button--active'
-                    : session.responses.find(
-                          (r: any) => r.questionId === session.questions[index].id
-                        )
-                      ? 'question-nav-button--answered'
-                      : 'question-nav-button--unanswered'
+                    ? "question-nav-button--active"
+                    : session.responses.find((r: any) => r.questionId === session.questions[index].id)
+                      ? "question-nav-button--answered"
+                      : "question-nav-button--unanswered"
                 }`}
               >
                 {index + 1}
@@ -390,15 +383,15 @@ export function AssessmentSession({
             disabled={isSubmitting}
             className={
               currentQuestionIndex === session.questions.length - 1
-                ? 'bg-[#22c55e] hover:bg-green-700'
-                : ''
+                ? "bg-[#22c55e] hover:bg-green-700"
+                : ""
             }
           >
             {isSubmitting
-              ? 'Submitting...'
+              ? "Submitting..."
               : currentQuestionIndex === session.questions.length - 1
-                ? 'Submit Assessment'
-                : 'Next'}
+                ? "Submit Assessment"
+                : "Next"}
           </Button>
         </div>
 
@@ -410,13 +403,13 @@ export function AssessmentSession({
             className="fixed bottom-4 right-4 z-50"
           >
             <Alert
-              className={`${isTimeCritical ? 'border-red-500 bg-red-50' : 'border-yellow-500 bg-yellow-50'}`}
+              className={`${isTimeCritical ? "border-red-500 bg-red-50" : "border-yellow-500 bg-yellow-50"}`}
             >
               <AlertCircle
-                className={`h-4 w-4 ${isTimeCritical ? 'text-red-600' : 'text-yellow-600'}`}
+                className={`h-4 w-4 ${isTimeCritical ? "text-red-600" : "text-yellow-600"}`}
               />
-              <AlertDescription className={isTimeCritical ? 'text-red-800' : 'text-yellow-800'}>
-                {isTimeCritical ? 'Less than 1 minute remaining!' : 'Less than 5 minutes remaining'}
+              <AlertDescription className={isTimeCritical ? "text-red-800" : "text-yellow-800"}>
+                {isTimeCritical ? "Less than 1 minute remaining!" : "Less than 5 minutes remaining"}
               </AlertDescription>
             </Alert>
           </motion.div>

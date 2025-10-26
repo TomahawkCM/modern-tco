@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import { Loader2, Shield } from 'lucide-react';
-import { type ReactNode, useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { useAuth } from '@/contexts/AuthContext';
-import { SignInForm } from './SignInForm';
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { useAuth } from "@/contexts/AuthContext";
+import { Loader2, Shield } from "lucide-react";
+import { useState, type ReactNode } from "react";
+import { SignInForm } from "./SignInForm";
 
 interface AuthGuardProps {
   children: ReactNode;
@@ -53,9 +53,8 @@ export function AuthGuard({ children, fallback, requireAuth = true }: AuthGuardP
                   Sign In
                 </Button>
                 <p className="text-center text-sm text-muted-foreground">
-                  Don&rsquo;t have an account?{' '}
+                  Don&rsquo;t have an account?{" "}
                   <button
-                    type="button"
                     onClick={() => setShowAuthModal(true)}
                     className="text-primary hover:underline"
                   >
@@ -73,7 +72,6 @@ export function AuthGuard({ children, fallback, requireAuth = true }: AuthGuardP
               <div className="mb-4 flex items-center justify-between">
                 <h2 className="text-xl font-semibold">Sign In</h2>
                 <button
-                  type="button"
                   onClick={() => setShowAuthModal(false)}
                   className="text-muted-foreground hover:text-slate-700 dark:text-muted-foreground dark:hover:text-muted-foreground"
                 >

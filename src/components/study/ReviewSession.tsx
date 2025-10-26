@@ -1,35 +1,36 @@
-'use client';
+"use client";
 
+import { useState, useEffect } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Progress } from "@/components/ui/progress";
 import {
-  ArrowRight,
-  BookOpen,
   CheckCircle2,
+  XCircle,
+  ArrowRight,
+  Trophy,
+  TrendingUp,
   Clock,
   RotateCcw,
-  TrendingUp,
-  Trophy,
-  XCircle,
-} from 'lucide-react';
-import { useEffect, useState } from 'react';
-import { notifyAchievementUnlocked } from '@/components/gamification/AchievementNotification';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Progress } from '@/components/ui/progress';
+  Lightbulb,
+  BookOpen,
+} from "lucide-react";
+import { cn } from "@/lib/utils";
 import {
-  addPoints,
-  calculateReviewPoints,
-  checkAchievements,
-  getUserPoints,
-} from '@/lib/gamification';
-import { getQuestionsForReview, type Question } from '@/lib/questionBank';
-import {
-  type ReviewItem,
+  updateReviewItem,
   saveReviewItems,
   saveReviewSession,
-  updateReviewItem,
-} from '@/lib/spacedRepetition';
-import { cn } from '@/lib/utils';
+  type ReviewItem,
+} from "@/lib/spacedRepetition";
+import { getQuestionsForReview, type Question } from "@/lib/questionBank";
+import {
+  calculateReviewPoints,
+  addPoints,
+  checkAchievements,
+  getUserPoints,
+} from "@/lib/gamification";
+import { notifyAchievementUnlocked } from "@/components/gamification/AchievementNotification";
 
 interface ReviewSessionProps {
   /** Items to review */
@@ -82,7 +83,7 @@ export function ReviewSession({ items, onComplete, onExit }: ReviewSessionProps)
         currentItem.moduleId,
         currentItem.sectionId,
         currentItem.concept,
-        currentItem.difficulty || 'medium',
+        currentItem.difficulty || "medium",
         1
       );
 
@@ -94,7 +95,7 @@ export function ReviewSession({ items, onComplete, onExit }: ReviewSessionProps)
     }
 
     setSelectedAnswer(null);
-  }, [currentItem, useQuestions]);
+  }, [currentIndex, currentItem, useQuestions]);
 
   const handleSelectAnswer = (answer: string) => {
     setSelectedAnswer(answer);
@@ -123,30 +124,34 @@ export function ReviewSession({ items, onComplete, onExit }: ReviewSessionProps)
     // Calculate and award points for correct answers
     if (correct) {
       const userPoints = getUserPoints();
-      const streakDays =
-        userPoints.pointsHistory.filter((entry) => entry.reason === 'review_correct').length > 0
-          ? 1
-          : 0; // Simplified streak calculation
+      const streakDays = userPoints.pointsHistory.filter(entry =>
+        entry.reason === "review_correct"
+      ).length > 0 ? 1 : 0; // Simplified streak calculation
 
-      const difficulty = currentQuestion?.difficulty || currentItem.difficulty || 'medium';
-      const { retention } = currentItem;
+      const difficulty = currentQuestion?.difficulty || currentItem.difficulty || "medium";
+      const retention = currentItem.retention;
 
-      const pointsResult = calculateReviewPoints(correct, difficulty, streakDays, retention);
+      const pointsResult = calculateReviewPoints(
+        correct,
+        difficulty,
+        streakDays,
+        retention
+      );
 
       // Award points
       addPoints(
         pointsResult.points,
-        'review_correct',
+        "review_correct",
         pointsResult.multiplier,
         `Reviewed: ${currentItem.concept}`
       );
 
       setPointsEarned(pointsResult.points);
-      setSessionPoints((prev) => prev + pointsResult.points);
+      setSessionPoints(prev => prev + pointsResult.points);
       setPointsBreakdown(pointsResult.breakdown);
     } else {
       setPointsEarned(0);
-      setPointsBreakdown(['Incorrect answer: 0 points']);
+      setPointsBreakdown(["Incorrect answer: 0 points"]);
     }
   };
 
@@ -188,8 +193,8 @@ export function ReviewSession({ items, onComplete, onExit }: ReviewSessionProps)
       const allModuleItems = getAllModuleItems(moduleId);
 
       // Replace updated items
-      const updatedAllItems = allModuleItems.map((item) => {
-        const updated = moduleItems.find((u) => u.id === item.id);
+      const updatedAllItems = allModuleItems.map(item => {
+        const updated = moduleItems.find(u => u.id === item.id);
         return updated || item;
       });
 
@@ -197,9 +202,9 @@ export function ReviewSession({ items, onComplete, onExit }: ReviewSessionProps)
     });
 
     // Calculate results
-    const itemsCorrect = answers.filter((a) => a.correct).length;
+    const itemsCorrect = answers.filter(a => a.correct).length;
     const totalRetention = items.reduce((sum, item) => {
-      const answer = answers.find((a) => a.itemId === item.id);
+      const answer = answers.find(a => a.itemId === item.id);
       return sum + (answer?.correct ? 100 : 0);
     }, 0);
     const averageRetention = Math.round(totalRetention / items.length);
@@ -216,14 +221,14 @@ export function ReviewSession({ items, onComplete, onExit }: ReviewSessionProps)
 
     // Award perfect session bonus
     if (itemsCorrect === items.length && items.length > 0) {
-      addPoints(50, 'perfect_session', 1.0, 'Perfect session!');
-      setSessionPoints((prev) => prev + 50);
+      addPoints(50, "perfect_session", 1.0, "Perfect session!");
+      setSessionPoints(prev => prev + 50);
     }
 
     // Check for achievements
     const userPoints = getUserPoints();
-    const allItems = getAllModuleItems(items[0]?.moduleId || '');
-    const itemsMastered = allItems.filter((item) => item.retention > 90).length;
+    const allItems = getAllModuleItems(items[0]?.moduleId || "");
+    const itemsMastered = allItems.filter(item => item.retention > 90).length;
 
     const newAchievements = checkAchievements({
       streakDays: 1, // TODO: Calculate actual streak
@@ -235,7 +240,7 @@ export function ReviewSession({ items, onComplete, onExit }: ReviewSessionProps)
     });
 
     // Notify about new achievements
-    newAchievements.forEach((achievement) => {
+    newAchievements.forEach(achievement => {
       notifyAchievementUnlocked(achievement);
     });
 
@@ -247,7 +252,7 @@ export function ReviewSession({ items, onComplete, onExit }: ReviewSessionProps)
   };
 
   const getAllModuleItems = (moduleId: string): ReviewItem[] => {
-    if (typeof window === 'undefined') return [];
+    if (typeof window === "undefined") return [];
     const key = `spaced-repetition-${moduleId}`;
     const data = localStorage.getItem(key);
     if (!data) return [];
@@ -265,7 +270,7 @@ export function ReviewSession({ items, onComplete, onExit }: ReviewSessionProps)
 
   // Final results view
   if (showFinalResults) {
-    const itemsCorrect = answers.filter((a) => a.correct).length;
+    const itemsCorrect = answers.filter(a => a.correct).length;
     const scorePercentage = Math.round((itemsCorrect / items.length) * 100);
     const sessionDuration = Math.floor((Date.now() - sessionStartTime) / 1000);
     const minutes = Math.floor(sessionDuration / 60);
@@ -344,11 +349,8 @@ export function ReviewSession({ items, onComplete, onExit }: ReviewSessionProps)
                         )}
                         <span className="text-muted-foreground">{item.title}</span>
                       </div>
-                      <Badge
-                        variant="outline"
-                        className="text-xs border-accent/30 text-accent-foreground"
-                      >
-                        {daysUntil} day{daysUntil !== 1 ? 's' : ''}
+                      <Badge variant="outline" className="text-xs border-accent/30 text-accent-foreground">
+                        {daysUntil} day{daysUntil !== 1 ? "s" : ""}
                       </Badge>
                     </div>
                   );
@@ -359,7 +361,11 @@ export function ReviewSession({ items, onComplete, onExit }: ReviewSessionProps)
 
           {/* Action Buttons */}
           <div className="flex gap-3">
-            <Button onClick={onExit} variant="outline" className="flex-1">
+            <Button
+              onClick={onExit}
+              variant="outline"
+              className="flex-1"
+            >
               Back to Dashboard
             </Button>
           </div>
@@ -386,7 +392,7 @@ export function ReviewSession({ items, onComplete, onExit }: ReviewSessionProps)
         <div>
           <div className="mb-4">
             <Badge variant="outline" className="mb-2 text-xs border-primary/30 text-primary">
-              {currentItem.type === 'micro-section' ? 'Micro-Section' : 'Weak Concept'}
+              {currentItem.type === "micro-section" ? "Micro-Section" : "Weak Concept"}
             </Badge>
             <h3 className="text-lg font-semibold text-foreground">{currentItem.title}</h3>
             <p className="mt-1 text-sm text-muted-foreground">Concept: {currentItem.concept}</p>
@@ -401,47 +407,39 @@ export function ReviewSession({ items, onComplete, onExit }: ReviewSessionProps)
                   <div className="space-y-4">
                     <div className="mb-4">
                       <div className="mb-2 flex items-center justify-between">
-                        <Badge
-                          variant="outline"
-                          className="text-xs border-accent/30 text-accent-foreground"
-                        >
-                          {currentQuestion.type === 'true-false' ? 'True/False' : 'Multiple Choice'}
+                        <Badge variant="outline" className="text-xs border-accent/30 text-accent-foreground">
+                          {currentQuestion.type === "true-false" ? "True/False" : "Multiple Choice"}
                         </Badge>
-                        <Badge
-                          variant="outline"
-                          className="text-xs border-[#f97316]/30 text-[#f97316]"
-                        >
+                        <Badge variant="outline" className="text-xs border-[#f97316]/30 text-[#f97316]">
                           Difficulty: {currentQuestion.difficulty}
                         </Badge>
                       </div>
-                      <p className="text-base font-medium text-foreground">
-                        {currentQuestion.question}
-                      </p>
+                      <p className="text-base font-medium text-foreground">{currentQuestion.question}</p>
                     </div>
 
                     <div className="space-y-2">
-                      {currentQuestion.type === 'true-false' ? (
+                      {currentQuestion.type === "true-false" ? (
                         /* True/False Options */
                         <div className="flex gap-3">
                           <button
-                            onClick={() => handleSelectAnswer('True')}
+                            onClick={() => handleSelectAnswer("True")}
                             className={cn(
-                              'flex-1 rounded-lg border-2 p-4 text-center transition-all',
-                              selectedAnswer === 'True'
-                                ? 'border-purple-500 bg-accent/20 text-foreground'
-                                : 'border-gray-700 bg-card/50 text-muted-foreground hover:border-purple-500/50 hover:bg-accent/10'
+                              "flex-1 rounded-lg border-2 p-4 text-center transition-all",
+                              selectedAnswer === "True"
+                                ? "border-purple-500 bg-accent/20 text-foreground"
+                                : "border-gray-700 bg-card/50 text-muted-foreground hover:border-purple-500/50 hover:bg-accent/10"
                             )}
                           >
                             <CheckCircle2 className="mx-auto mb-1 h-6 w-6" />
                             <span className="font-medium">True</span>
                           </button>
                           <button
-                            onClick={() => handleSelectAnswer('False')}
+                            onClick={() => handleSelectAnswer("False")}
                             className={cn(
-                              'flex-1 rounded-lg border-2 p-4 text-center transition-all',
-                              selectedAnswer === 'False'
-                                ? 'border-purple-500 bg-accent/20 text-foreground'
-                                : 'border-gray-700 bg-card/50 text-muted-foreground hover:border-purple-500/50 hover:bg-accent/10'
+                              "flex-1 rounded-lg border-2 p-4 text-center transition-all",
+                              selectedAnswer === "False"
+                                ? "border-purple-500 bg-accent/20 text-foreground"
+                                : "border-gray-700 bg-card/50 text-muted-foreground hover:border-purple-500/50 hover:bg-accent/10"
                             )}
                           >
                             <XCircle className="mx-auto mb-1 h-6 w-6" />
@@ -455,19 +453,19 @@ export function ReviewSession({ items, onComplete, onExit }: ReviewSessionProps)
                             key={idx}
                             onClick={() => handleSelectAnswer(option)}
                             className={cn(
-                              'w-full rounded-lg border-2 p-4 text-left transition-all',
+                              "w-full rounded-lg border-2 p-4 text-left transition-all",
                               selectedAnswer === option
-                                ? 'border-purple-500 bg-accent/20 text-foreground'
-                                : 'border-gray-700 bg-card/50 text-muted-foreground hover:border-purple-500/50 hover:bg-accent/10'
+                                ? "border-purple-500 bg-accent/20 text-foreground"
+                                : "border-gray-700 bg-card/50 text-muted-foreground hover:border-purple-500/50 hover:bg-accent/10"
                             )}
                           >
                             <div className="flex items-center gap-3">
                               <div
                                 className={cn(
-                                  'flex h-6 w-6 items-center justify-center rounded-full border-2 text-xs font-bold',
+                                  "flex h-6 w-6 items-center justify-center rounded-full border-2 text-xs font-bold",
                                   selectedAnswer === option
-                                    ? 'border-purple-400 bg-accent text-foreground'
-                                    : 'border-gray-600 text-muted-foreground'
+                                    ? "border-purple-400 bg-accent text-foreground"
+                                    : "border-gray-600 text-muted-foreground"
                                 )}
                               >
                                 {String.fromCharCode(65 + idx)}
@@ -519,14 +517,12 @@ export function ReviewSession({ items, onComplete, onExit }: ReviewSessionProps)
 
           {/* Result Feedback */}
           {showResult && currentAnswer !== null && (
-            <Card
-              className={cn(
-                'border-2',
-                currentAnswer
-                  ? 'border-[#22c55e]/30 bg-[#22c55e]/5'
-                  : 'border-orange-500/30 bg-orange-500/5'
-              )}
-            >
+            <Card className={cn(
+              "border-2",
+              currentAnswer
+                ? "border-[#22c55e]/30 bg-[#22c55e]/5"
+                : "border-orange-500/30 bg-orange-500/5"
+            )}>
               <CardContent className="py-6">
                 <div className="mb-4 text-center">
                   {currentAnswer ? (
@@ -534,8 +530,7 @@ export function ReviewSession({ items, onComplete, onExit }: ReviewSessionProps)
                       <CheckCircle2 className="mx-auto mb-2 h-12 w-12 text-[#22c55e]" />
                       <h4 className="text-lg font-semibold text-[#22c55e]">Great Job! 🎉</h4>
                       <p className="mt-1 text-sm text-muted-foreground">
-                        You'll see this again in{' '}
-                        {getNextIntervalDays(currentItem.intervalIndex + 1)} days
+                        You'll see this again in {getNextIntervalDays(currentItem.intervalIndex + 1)} days
                       </p>
                     </>
                   ) : (
@@ -555,7 +550,9 @@ export function ReviewSession({ items, onComplete, onExit }: ReviewSessionProps)
                     <div className="flex items-center justify-between mb-2">
                       <div className="flex items-center gap-2">
                         <Trophy className="h-5 w-5 text-[#f97316]" />
-                        <span className="font-semibold text-[#f97316]">+{pointsEarned} Points</span>
+                        <span className="font-semibold text-[#f97316]">
+                          +{pointsEarned} Points
+                        </span>
                       </div>
                       <Badge variant="outline" className="text-[#f97316]">
                         Total: {sessionPoints}
@@ -589,22 +586,16 @@ export function ReviewSession({ items, onComplete, onExit }: ReviewSessionProps)
                     <div className="mb-3 rounded bg-[#22c55e]/10 px-3 py-2">
                       <div className="mb-1 flex items-center gap-2">
                         <CheckCircle2 className="h-4 w-4 text-[#22c55e]" />
-                        <span className="text-xs font-semibold text-[#22c55e]">
-                          Correct Answer:
-                        </span>
+                        <span className="text-xs font-semibold text-[#22c55e]">Correct Answer:</span>
                       </div>
-                      <p className="text-sm text-muted-foreground">
-                        {currentQuestion.correctAnswer}
-                      </p>
+                      <p className="text-sm text-muted-foreground">{currentQuestion.correctAnswer}</p>
                     </div>
 
                     {selectedAnswer && selectedAnswer !== currentQuestion.correctAnswer && (
                       <div className="mb-3 rounded bg-orange-500/10 px-3 py-2">
                         <div className="mb-1 flex items-center gap-2">
                           <XCircle className="h-4 w-4 text-orange-500" />
-                          <span className="text-xs font-semibold text-orange-400">
-                            Your Answer:
-                          </span>
+                          <span className="text-xs font-semibold text-orange-400">Your Answer:</span>
                         </div>
                         <p className="text-sm text-muted-foreground">{selectedAnswer}</p>
                       </div>
@@ -623,8 +614,11 @@ export function ReviewSession({ items, onComplete, onExit }: ReviewSessionProps)
                 )}
 
                 <div className="mt-6">
-                  <Button onClick={handleNext} className="w-full bg-accent hover:bg-purple-700">
-                    {isLastItem ? 'Complete Session' : 'Next Item'}
+                  <Button
+                    onClick={handleNext}
+                    className="w-full bg-accent hover:bg-purple-700"
+                  >
+                    {isLastItem ? "Complete Session" : "Next Item"}
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
                 </div>
@@ -635,8 +629,12 @@ export function ReviewSession({ items, onComplete, onExit }: ReviewSessionProps)
 
         {/* Progress Stats */}
         <div className="flex items-center justify-between text-sm text-muted-foreground">
-          <span>Current retention: {currentItem.retention}%</span>
-          <span>{currentItem.totalReviews} previous reviews</span>
+          <span>
+            Current retention: {currentItem.retention}%
+          </span>
+          <span>
+            {currentItem.totalReviews} previous reviews
+          </span>
         </div>
       </CardContent>
     </Card>

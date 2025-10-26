@@ -1,8 +1,8 @@
-import { AuthGuard } from '@/components/auth/AuthGuard';
-import { SignUpForm } from '@/components/auth/SignUpForm';
+import { AuthGuard } from "@/components/auth/AuthGuard";
+import { SignUpForm } from "@/components/auth/SignUpForm";
 
 export const metadata = {
-  title: 'Create Account',
+  title: "Create Account",
 };
 
 export default function SignUpPage() {
@@ -14,3 +14,4 @@ export default function SignUpPage() {
     </AuthGuard>
   );
 }
+

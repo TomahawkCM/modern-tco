@@ -1,6 +1,6 @@
-import { render, screen, within } from '@testing-library/react';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
 import React from 'react';
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { MockAuthProvider, screen, within, render } from './test-utils';
 
 // Mock next/navigation to provide a stable pathname
 vi.mock('next/navigation', async (orig) => {
@@ -24,8 +24,6 @@ vi.mock('@/lib/progress', () => {
   };
 });
 
-// Auth context is already mocked in vitest.setup.ts to return a test user
-
 import SideNav from '@/components/SideNav';
 
 describe('SideNav progress dots', () => {
@@ -34,7 +32,11 @@ describe('SideNav progress dots', () => {
   });
 
   it('renders progress dots reflecting per-module progress', async () => {
-    render(<SideNav />);
+    render(
+      <MockAuthProvider>
+        <SideNav />
+      </MockAuthProvider>
+    );
 
     // Asking Questions should have about 60% => ~3/5 dots filled
     const asking = await screen.findByRole('link', { name: /Asking Questions/i });
@@ -52,3 +54,4 @@ describe('SideNav progress dots', () => {
     expect(tFilled.length).toBe(1);
   });
 });
+

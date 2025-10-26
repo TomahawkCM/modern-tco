@@ -1,20 +1,20 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { useEffect, useMemo, useState } from 'react';
-import manifest from '@/config/modules.manifest.json';
-import { useAuth } from '@/contexts/AuthContext';
-import { getModuleProgress } from '@/lib/progress';
-import type { ModuleManifest } from '@/types/manifest';
-import type { ModuleProgressMap } from '@/types/progress';
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useEffect, useMemo, useState } from "react";
+import { useAuth } from "@/contexts/AuthContext";
+import { getModuleProgress } from "@/lib/progress";
+import type { ModuleProgressMap } from "@/types/progress";
+import type { ModuleManifest } from "@/types/manifest";
+import manifest from "@/config/modules.manifest.json";
 
 function isActive(pathname: string, slug: string) {
   return pathname === `/learn/${slug}`;
 }
 
 export default function SideNav() {
-  const pathname = usePathname() || '';
+  const pathname = usePathname() || "";
   const { user } = useAuth();
   const data = manifest as ModuleManifest;
   const modules = [...data.modules].sort((a, b) => a.order - b.order);
@@ -41,7 +41,7 @@ export default function SideNav() {
     return () => {
       cancelled = true;
     };
-  }, [user?.id, moduleIds]);
+  }, [user?.id, moduleIds.join("|")]);
 
   function ProgressDots({ pct }: { pct: number | undefined }) {
     const percent = Math.max(0, Math.min(1, pct ?? 0));
@@ -55,11 +55,11 @@ export default function SideNav() {
             <span
               key={i}
               data-testid="progress-dot"
-              data-filled={isFilled ? 'true' : 'false'}
+              data-filled={isFilled ? "true" : "false"}
               className={[
-                'h-1.5 w-1.5 rounded-full',
-                isFilled ? 'bg-primary' : 'bg-slate-300 dark:bg-slate-700',
-              ].join(' ')}
+                "h-1.5 w-1.5 rounded-full",
+                isFilled ? "bg-primary" : "bg-slate-300 dark:bg-slate-700",
+              ].join(" ")}
             />
           );
         })}
@@ -68,14 +68,9 @@ export default function SideNav() {
   }
 
   return (
-    <nav
-      aria-label="Study modules navigation"
-      className="w-full md:w-64 md:min-h-[calc(100vh-4rem)] md:border-r md:border-slate-200 dark:md:border-border md:pr-4"
-    >
+    <nav aria-label="Study modules navigation" className="w-full md:w-64 md:min-h-[calc(100vh-4rem)] md:border-r md:border-slate-200 dark:md:border-border md:pr-4">
       <div className="px-4 py-3 md:px-0">
-        <h2 className="text-sm font-semibold text-slate-700 dark:text-muted-foreground">
-          Curriculum
-        </h2>
+        <h2 className="text-sm font-semibold text-slate-700 dark:text-muted-foreground">Curriculum</h2>
       </div>
       <ul className="space-y-1 px-2 md:px-0 pb-4">
         {modules.map((m) => {
@@ -85,12 +80,12 @@ export default function SideNav() {
               <Link
                 href={`/learn/${m.slug}`}
                 className={[
-                  'block rounded px-3 py-2 text-sm transition-colors',
+                  "block rounded px-3 py-2 text-sm transition-colors",
                   active
-                    ? 'bg-blue-600 text-foreground'
-                    : 'text-slate-700 hover:bg-slate-100 dark:text-muted-foreground dark:hover:bg-card',
-                ].join(' ')}
-                aria-current={active ? 'page' : undefined}
+                    ? "bg-blue-600 text-foreground"
+                    : "text-slate-700 hover:bg-slate-100 dark:text-muted-foreground dark:hover:bg-card",
+                ].join(" ")}
+                aria-current={active ? "page" : undefined}
               >
                 <div className="flex items-center justify-between gap-3">
                   <div className="flex flex-col min-w-0">

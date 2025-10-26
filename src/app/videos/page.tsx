@@ -1,13 +1,10 @@
-import Link from 'next/link';
-import { ModuleVideos } from '@/components/videos/ModuleVideos';
-import videoManifest from '@/content/videos/manifest.json';
+import videoManifest from "@/content/videos/manifest.json";
+import { ModuleVideos } from "@/components/videos/ModuleVideos";
+import Link from "next/link";
 
 export default function VideosIndexPage() {
   const data = videoManifest as unknown as {
-    modules: Array<{
-      slug: string;
-      videos: Array<{ id: string; title: string; youtubeId: string; start?: number }>;
-    }>;
+    modules: Array<{ slug: string; videos: Array<{ id: string; title: string; youtubeId: string; start?: number }> }>;
   };
 
   return (
@@ -23,9 +20,7 @@ export default function VideosIndexPage() {
         {data.modules.map((m) => (
           <section key={m.slug} className="space-y-3">
             <div className="flex items-center justify-between">
-              <h2 className="text-xl font-semibold capitalize text-foreground">
-                {m.slug.replace(/-/g, ' ')}
-              </h2>
+              <h2 className="text-xl font-semibold capitalize text-foreground">{m.slug.replace(/-/g, " ")}</h2>
               <Link
                 href={`/videos/${m.slug}`}
                 className="text-sm text-primary hover:underline"
@@ -41,3 +36,4 @@ export default function VideosIndexPage() {
     </div>
   );
 }
+

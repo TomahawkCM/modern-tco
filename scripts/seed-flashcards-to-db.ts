@@ -10,9 +10,9 @@
  */
 
 import { createClient } from '@supabase/supabase-js';
-import * as dotenv from 'dotenv';
 import * as fs from 'fs';
 import * as path from 'path';
+import * as dotenv from 'dotenv';
 
 dotenv.config({ path: '.env.local' });
 
@@ -118,7 +118,10 @@ async function seedFlashcards() {
     for (let i = 0; i < flashcardsToInsert.length; i += batchSize) {
       const batch = flashcardsToInsert.slice(i, i + batchSize);
 
-      const { data, error } = await supabase.from('flashcards').insert(batch).select();
+      const { data, error } = await supabase
+        .from('flashcards')
+        .insert(batch)
+        .select();
 
       if (error) {
         console.error(`❌ Error inserting batch ${Math.floor(i / batchSize) + 1}:`, error);
@@ -143,6 +146,7 @@ async function seedFlashcards() {
     });
 
     console.log('\n✅ Seeding complete! Users can now access flashcards at /flashcards\n');
+
   } catch (error) {
     console.error('❌ Fatal error:', error);
     process.exit(1);

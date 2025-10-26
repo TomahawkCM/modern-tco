@@ -1,4 +1,5 @@
-import { supabase } from './supabase';
+import { supabase } from "./supabase";
+import type { User } from "@supabase/supabase-js";
 
 export interface UserProfile {
   id: string;
@@ -29,13 +30,13 @@ export interface Achievement {
  */
 export async function getUserProfile(userId: string): Promise<UserProfile | null> {
   const { data, error } = await supabase
-    .from('users')
-    .select('id, email, name, created_at, last_login')
-    .eq('id', userId)
+    .from("users")
+    .select("id, email, name, created_at, last_login")
+    .eq("id", userId)
     .single();
 
   if (error) {
-    console.error('Error fetching user profile:', error);
+    console.error("Error fetching user profile:", error);
     return null;
   }
 
@@ -48,23 +49,23 @@ export async function getUserProfile(userId: string): Promise<UserProfile | null
 export async function getUserStats(userId: string): Promise<UserStats> {
   // Fetch user progress
   const { data: progressData, error: progressError } = await supabase
-    .from('user_progress')
-    .select('is_correct, time_taken, completed_at')
-    .eq('user_id', userId);
+    .from("user_progress")
+    .select("is_correct, time_taken, completed_at")
+    .eq("user_id", userId);
 
   if (progressError) {
-    console.error('Error fetching user progress:', progressError);
+    console.error("Error fetching user progress:", progressError);
   }
 
   // Fetch exam sessions
   const { data: sessionData, error: sessionError } = await supabase
-    .from('exam_sessions')
-    .select('score, started_at, completed_at, time_spent')
-    .eq('user_id', userId)
-    .order('started_at', { ascending: false });
+    .from("exam_sessions")
+    .select("score, started_at, completed_at, time_spent")
+    .eq("user_id", userId)
+    .order("started_at", { ascending: false });
 
   if (sessionError) {
-    console.error('Error fetching exam sessions:', sessionError);
+    console.error("Error fetching exam sessions:", sessionError);
   }
 
   // Calculate statistics
@@ -142,33 +143,33 @@ export async function getUserAchievements(userId: string): Promise<Achievement[]
 
   const achievements: Achievement[] = [
     {
-      name: 'First Steps',
-      description: 'Completed first practice session',
-      icon: 'Trophy',
+      name: "First Steps",
+      description: "Completed first practice session",
+      icon: "Trophy",
       earned: stats.questionsCompleted > 0,
     },
     {
-      name: 'Week Warrior',
-      description: '7-day study streak',
-      icon: 'Calendar',
+      name: "Week Warrior",
+      description: "7-day study streak",
+      icon: "Calendar",
       earned: stats.studyStreak >= 7,
     },
     {
-      name: 'Question Master',
-      description: 'Answered 100+ questions',
-      icon: 'Target',
+      name: "Question Master",
+      description: "Answered 100+ questions",
+      icon: "Target",
       earned: stats.questionsCompleted >= 100,
     },
     {
-      name: 'Domain Expert',
-      description: 'Mastered a certification domain',
-      icon: 'Award',
+      name: "Domain Expert",
+      description: "Mastered a certification domain",
+      icon: "Award",
       earned: false, // TODO: Implement domain mastery logic
     },
     {
-      name: 'Mock Master',
-      description: 'Passed a mock exam',
-      icon: 'BookOpen',
+      name: "Mock Master",
+      description: "Passed a mock exam",
+      icon: "BookOpen",
       earned: stats.totalScore >= 75, // Assuming 75% is passing
     },
   ];
@@ -184,15 +185,15 @@ export async function updateUserProfile(
   updates: { name?: string; bio?: string }
 ): Promise<{ success: boolean; error?: string }> {
   const { error } = await supabase
-    .from('users')
+    .from("users")
     .update({
       name: updates.name,
       updated_at: new Date().toISOString(),
     })
-    .eq('id', userId);
+    .eq("id", userId);
 
   if (error) {
-    console.error('Error updating user profile:', error);
+    console.error("Error updating user profile:", error);
     return { success: false, error: error.message };
   }
 
@@ -204,11 +205,11 @@ export async function updateUserProfile(
  */
 export async function updateLastLogin(userId: string): Promise<void> {
   const { error } = await supabase
-    .from('users')
+    .from("users")
     .update({ last_login: new Date().toISOString() })
-    .eq('id', userId);
+    .eq("id", userId);
 
   if (error) {
-    console.error('Error updating last login:', error);
+    console.error("Error updating last login:", error);
   }
 }

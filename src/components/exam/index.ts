@@ -1,12 +1,13 @@
 // Exam Component Library - Central Export
 // Reusable components for Tanium Certified Operator exam system
 
-export { ExamModeTabs } from './exam-mode-tabs';
-// Specialized Exam Components (only export existing components)
-export { ExamTimer } from './exam-timer';
 // Core Exam Components
-export { QuestionCard } from './question-card';
-export { ResultsTable } from './results-table';
+export { QuestionCard } from "./question-card";
+export { ExamModeTabs } from "./exam-mode-tabs";
+export { ResultsTable } from "./results-table";
+
+// Specialized Exam Components (only export existing components)
+export { ExamTimer } from "./exam-timer";
 
 // Note: Other components commented out until created
 // export { DomainProgress } from './domain-progress'

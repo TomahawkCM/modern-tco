@@ -12,3 +12,4 @@ export interface ModuleManifest {
   updatedAt: string;
   modules: ModuleManifestEntry[];
 }
+

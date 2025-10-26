@@ -3,28 +3,28 @@
  * Handles markdown rendering, progress tracking, and navigation
  */
 
-'use client';
+"use client";
 
+import { useState, useEffect } from "react";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Progress } from "@/components/ui/progress";
+import { Badge } from "@/components/ui/badge";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import {
+  BookOpen,
+  Clock,
+  CheckCircle,
+  Circle,
   ArrowLeft,
   ArrowRight,
   Bookmark,
   BookmarkCheck,
-  BookOpen,
-  CheckCircle,
-  Circle,
-  Clock,
-} from 'lucide-react';
-import { useEffect, useState } from 'react';
-import ReactMarkdown from 'react-markdown';
-import remarkGfm from 'remark-gfm';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Progress } from '@/components/ui/progress';
-import { ScrollArea } from '@/components/ui/scroll-area';
-import { cn } from '@/lib/utils';
-import type { StudyGuide, StudyGuideProgress } from '@/types/module';
+} from "lucide-react";
+import type { StudyGuide, StudyGuideProgress } from "@/types/module";
+import { cn } from "@/lib/utils";
 
 interface StudyGuideViewerProps {
   guide: StudyGuide;
@@ -84,7 +84,9 @@ export function StudyGuideViewer({
     // Secure markdown rendering using react-markdown (prevents XSS attacks)
     return (
       <div className="prose prose-slate dark:prose-invert max-w-none">
-        <ReactMarkdown remarkPlugins={[remarkGfm]}>{content}</ReactMarkdown>
+        <ReactMarkdown remarkPlugins={[remarkGfm]}>
+          {content}
+        </ReactMarkdown>
       </div>
     );
   };
@@ -101,7 +103,7 @@ export function StudyGuideViewer({
   }
 
   return (
-    <div className={cn('space-y-6', className)}>
+    <div className={cn("space-y-6", className)}>
       {/* Guide Header */}
       <Card>
         <CardHeader>
@@ -157,10 +159,10 @@ export function StudyGuideViewer({
                   return (
                     <Button
                       key={section.id}
-                      variant={isCurrent ? 'default' : 'ghost'}
+                      variant={isCurrent ? "default" : "ghost"}
                       className={cn(
-                        'h-auto w-full justify-start p-3 text-left',
-                        isRead && 'bg-green-50 hover:bg-green-100 dark:bg-green-950/20'
+                        "h-auto w-full justify-start p-3 text-left",
+                        isRead && "bg-green-50 hover:bg-green-100 dark:bg-green-950/20"
                       )}
                       onClick={() => navigateToSection(index)}
                     >

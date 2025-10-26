@@ -1,4 +1,4 @@
-import { TCODomain } from './exam';
+import { TCODomain } from "./exam";
 
 /**
  * Study Content Types for TCO Certification Preparation
@@ -130,71 +130,71 @@ export interface StudyBookmark {
 
 // Legacy to Modern Domain Mapping
 export const LEGACY_DOMAIN_MAPPING: Record<string, TCODomain> = {
-  'Asking Questions': TCODomain.ASKING_QUESTIONS,
-  'Refining Questions and Targeting': TCODomain.REFINING_QUESTIONS,
-  'Taking Action - Packages and Actions': TCODomain.TAKING_ACTION,
-  'Navigation and Basic Module Functions': TCODomain.NAVIGATION_MODULES,
-  'Reporting and Data Export': TCODomain.REPORTING_EXPORT,
+  "Asking Questions": TCODomain.ASKING_QUESTIONS,
+  "Refining Questions and Targeting": TCODomain.REFINING_QUESTIONS,
+  "Taking Action - Packages and Actions": TCODomain.TAKING_ACTION,
+  "Navigation and Basic Module Functions": TCODomain.NAVIGATION_MODULES,
+  "Reporting and Data Export": TCODomain.REPORTING_EXPORT,
 };
 
 // Modern Domain to Legacy File Mapping
 export const DOMAIN_FILE_MAPPING: Record<TCODomain, string> = {
-  [TCODomain.ASKING_QUESTIONS]: '01-Asking_Questions.md',
-  [TCODomain.REFINING_QUESTIONS]: '02-Refining_Questions_and_Targeting.md',
-  [TCODomain.REFINING_TARGETING]: '02-Refining_Questions_and_Targeting.md',
-  [TCODomain.TAKING_ACTION]: '03-Taking_Action_Packages_and_Actions.md',
-  [TCODomain.NAVIGATION_MODULES]: '04-Navigation_and_Basic_Module_Functions.md',
-  [TCODomain.REPORTING_EXPORT]: '05-Reporting_and_Data_Export.md',
-  [TCODomain.SECURITY]: '06-Security.md',
-  [TCODomain.FUNDAMENTALS]: '07-Fundamentals.md',
-  [TCODomain.TROUBLESHOOTING]: '08-Troubleshooting.md',
+  [TCODomain.ASKING_QUESTIONS]: "01-Asking_Questions.md",
+  [TCODomain.REFINING_QUESTIONS]: "02-Refining_Questions_and_Targeting.md",
+  [TCODomain.REFINING_TARGETING]: "02-Refining_Questions_and_Targeting.md",
+  [TCODomain.TAKING_ACTION]: "03-Taking_Action_Packages_and_Actions.md",
+  [TCODomain.NAVIGATION_MODULES]: "04-Navigation_and_Basic_Module_Functions.md",
+  [TCODomain.REPORTING_EXPORT]: "05-Reporting_and_Data_Export.md",
+  [TCODomain.SECURITY]: "06-Security.md",
+  [TCODomain.FUNDAMENTALS]: "07-Fundamentals.md",
+  [TCODomain.TROUBLESHOOTING]: "08-Troubleshooting.md",
 };
 
 // Enums
 export enum StudySectionType {
-  OVERVIEW = 'overview',
-  LEARNING_OBJECTIVES = 'learning_objectives',
-  PROCEDURES = 'procedures',
-  TROUBLESHOOTING = 'troubleshooting',
-  PLAYBOOK = 'playbook',
-  EXAM_PREP = 'exam_prep',
-  REFERENCES = 'references',
+  OVERVIEW = "overview",
+  LEARNING_OBJECTIVES = "learning_objectives",
+  PROCEDURES = "procedures",
+  TROUBLESHOOTING = "troubleshooting",
+  PLAYBOOK = "playbook",
+  EXAM_PREP = "exam_prep",
+  REFERENCES = "references",
 }
 
 export enum SkillLevel {
-  FOUNDATION = 'foundation',
-  INTERMEDIATE = 'intermediate',
-  ADVANCED = 'advanced',
-  EXPERT = 'expert',
+  FOUNDATION = "foundation",
+  INTERMEDIATE = "intermediate",
+  ADVANCED = "advanced",
+  EXPERT = "expert",
 }
 
 export enum ReferenceType {
-  OFFICIAL_DOCS = 'official_docs',
-  COMMUNITY = 'community',
-  RELATED_MODULE = 'related_module',
-  EXTERNAL = 'external',
-  VIDEO = 'video',
-  HANDS_ON_LAB = 'hands_on_lab',
+  OFFICIAL_DOCS = "official_docs",
+  COMMUNITY = "community",
+  RELATED_MODULE = "related_module",
+  EXTERNAL = "external",
+  VIDEO = "video",
+  HANDS_ON_LAB = "hands_on_lab",
 }
 
 export enum PlaybookCategory {
-  PRE_OPERATION = 'pre_operation',
-  EXECUTION = 'execution',
-  POST_OPERATION = 'post_operation',
-  EMERGENCY = 'emergency',
+  PRE_OPERATION = "pre_operation",
+  EXECUTION = "execution",
+  POST_OPERATION = "post_operation",
+  EMERGENCY = "emergency",
 }
 
 export enum ScenarioDifficulty {
-  BEGINNER = 'beginner',
-  INTERMEDIATE = 'intermediate',
-  ADVANCED = 'advanced',
+  BEGINNER = "beginner",
+  INTERMEDIATE = "intermediate",
+  ADVANCED = "advanced",
 }
 
 export enum StudyProgressStatus {
-  NOT_STARTED = 'not_started',
-  IN_PROGRESS = 'in_progress',
-  COMPLETED = 'completed',
-  NEEDS_REVIEW = 'needs_review',
+  NOT_STARTED = "not_started",
+  IN_PROGRESS = "in_progress",
+  COMPLETED = "completed",
+  NEEDS_REVIEW = "needs_review",
 }
 
 // Study Mode Configuration

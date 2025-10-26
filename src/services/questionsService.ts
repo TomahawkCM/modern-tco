@@ -3,11 +3,11 @@
  * Manages fetching and caching questions from Supabase
  */
 
-import type { Database } from '@/lib/database.types';
-import { supabase } from '@/lib/supabase';
-import type { Difficulty, Question, QuestionCategory, TCODomain } from '@/types/exam';
+import { supabase } from "@/lib/supabase";
+import type { Difficulty, Question, QuestionCategory, TCODomain } from "@/types/exam";
+import type { Database } from "@/lib/database.types";
 
-type DBQuestion = Database['public']['Tables']['questions']['Row'];
+type DBQuestion = Database["public"]["Tables"]["questions"]["Row"];
 
 // Cache for questions to avoid repeated fetches
 let questionsCache: Question[] | null = null;
@@ -20,10 +20,12 @@ const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
 function convertDBQuestionToQuestion(dbQuestion: DBQuestion): Question {
   // Parse JSON fields
   const choices =
-    typeof dbQuestion.options === 'string' ? JSON.parse(dbQuestion.options) : dbQuestion.options;
+    typeof dbQuestion.options === "string"
+      ? JSON.parse(dbQuestion.options)
+      : dbQuestion.options;
 
   const tags =
-    typeof dbQuestion.tags === 'string' ? JSON.parse(dbQuestion.tags) : dbQuestion.tags || [];
+    typeof dbQuestion.tags === "string" ? JSON.parse(dbQuestion.tags) : dbQuestion.tags || [];
 
   return {
     id: dbQuestion.id,
@@ -33,7 +35,7 @@ function convertDBQuestionToQuestion(dbQuestion: DBQuestion): Question {
     domain: dbQuestion.domain as TCODomain,
     difficulty: dbQuestion.difficulty as Difficulty,
     category: dbQuestion.category as QuestionCategory,
-    explanation: dbQuestion.explanation || '',
+    explanation: dbQuestion.explanation || "",
     tags,
     createdAt: dbQuestion.created_at ? new Date(dbQuestion.created_at) : undefined,
     updatedAt: dbQuestion.updated_at ? new Date(dbQuestion.updated_at) : undefined,
@@ -52,27 +54,27 @@ export async function fetchQuestions(forceRefresh = false): Promise<Question[]> 
 
   try {
     const res: any = await supabase
-      .from('questions')
-      .select('*')
-      .order('created_at', { ascending: false });
+      .from("questions")
+      .select("*")
+      .order("created_at", { ascending: false });
 
     const { data, error } = res;
 
     if (error) {
       // Check if error is about missing table (expected in development)
       const isTableMissing =
-        error.code === 'PGRST116' ||
+        error.code === "PGRST116" ||
         error.message?.includes('relation "public.questions" does not exist') ||
         error.message?.includes("table 'public.questions' in the schema");
 
       if (isTableMissing) {
         // Silently fall back for missing table - this is expected
-        console.log('Database table not found, using fallback data');
+        console.log("Database table not found, using fallback data");
         return [];
       }
 
       // Log other unexpected errors
-      console.error('Unexpected error fetching questions:', error.message);
+      console.error("Unexpected error fetching questions:", error.message);
 
       // Fall back to cached data if available
       if (questionsCache) {
@@ -84,15 +86,13 @@ export async function fetchQuestions(forceRefresh = false): Promise<Question[]> 
     }
 
     if (!data || data.length === 0) {
-      console.warn('No questions found in database');
+      console.warn("No questions found in database");
       // Return empty array instead of throwing
       return [];
     }
 
     // Convert database questions to application format (safely)
-    const questions = (data as unknown[]).map((row) =>
-      convertDBQuestionToQuestion(row as DBQuestion)
-    );
+    const questions = (data as unknown[]).map((row) => convertDBQuestionToQuestion(row as DBQuestion));
 
     // Update cache
     questionsCache = questions;
@@ -103,7 +103,7 @@ export async function fetchQuestions(forceRefresh = false): Promise<Question[]> 
     // Check if it's a table missing error (expected)
     const isTableMissing =
       error &&
-      ((error as any).code === 'PGRST116' ||
+      ((error as any).code === "PGRST116" ||
         (error as any).message?.includes('relation "public.questions" does not exist') ||
         (error as any).message?.includes("table 'public.questions' in the schema"));
 
@@ -113,7 +113,7 @@ export async function fetchQuestions(forceRefresh = false): Promise<Question[]> 
     }
 
     // Log unexpected errors only
-    console.error('Unexpected error fetching questions:', (error as Error).message);
+    console.error("Unexpected error fetching questions:", (error as Error).message);
 
     // If we have cached data, return it
     if (questionsCache) {
@@ -131,10 +131,10 @@ export async function fetchQuestions(forceRefresh = false): Promise<Question[]> 
 export async function fetchQuestionsByDomain(domain: TCODomain): Promise<Question[]> {
   try {
     const res: any = await supabase
-      .from('questions')
-      .select('*')
-      .eq('domain', domain)
-      .order('created_at', { ascending: false });
+      .from("questions")
+      .select("*")
+      .eq("domain", domain)
+      .order("created_at", { ascending: false });
 
     const { data, error } = res;
 
@@ -143,7 +143,7 @@ export async function fetchQuestionsByDomain(domain: TCODomain): Promise<Questio
       throw error;
     }
 
-    return ((data ?? []) as unknown[]).map((r) => convertDBQuestionToQuestion(r as DBQuestion));
+  return ((data ?? []) as unknown[]).map((r) => convertDBQuestionToQuestion(r as DBQuestion));
   } catch (error) {
     console.error(`Failed to fetch questions for domain ${domain}:`, error);
     return [];
@@ -156,10 +156,10 @@ export async function fetchQuestionsByDomain(domain: TCODomain): Promise<Questio
 export async function fetchQuestionsByDifficulty(difficulty: Difficulty): Promise<Question[]> {
   try {
     const res: any = await supabase
-      .from('questions')
-      .select('*')
-      .eq('difficulty', difficulty.toLowerCase() as 'beginner' | 'intermediate' | 'advanced')
-      .order('created_at', { ascending: false });
+      .from("questions")
+      .select("*")
+      .eq("difficulty", difficulty.toLowerCase() as "beginner" | "intermediate" | "advanced")
+      .order("created_at", { ascending: false });
 
     const { data, error } = res;
 
@@ -168,7 +168,7 @@ export async function fetchQuestionsByDifficulty(difficulty: Difficulty): Promis
       throw error;
     }
 
-    return ((data ?? []) as unknown[]).map((r) => convertDBQuestionToQuestion(r as DBQuestion));
+  return ((data ?? []) as unknown[]).map((r) => convertDBQuestionToQuestion(r as DBQuestion));
   } catch (error) {
     console.error(`Failed to fetch questions for difficulty ${difficulty}:`, error);
     return [];
@@ -181,10 +181,10 @@ export async function fetchQuestionsByDifficulty(difficulty: Difficulty): Promis
 export async function fetchQuestionsByCategory(category: QuestionCategory): Promise<Question[]> {
   try {
     const res: any = await supabase
-      .from('questions')
-      .select('*')
-      .eq('category', category)
-      .order('created_at', { ascending: false });
+      .from("questions")
+      .select("*")
+      .eq("category", category)
+      .order("created_at", { ascending: false });
 
     const { data, error } = res;
 
@@ -193,7 +193,7 @@ export async function fetchQuestionsByCategory(category: QuestionCategory): Prom
       throw error;
     }
 
-    return ((data ?? []) as unknown[]).map((r) => convertDBQuestionToQuestion(r as DBQuestion));
+  return ((data ?? []) as unknown[]).map((r) => convertDBQuestionToQuestion(r as DBQuestion));
   } catch (error) {
     console.error(`Failed to fetch questions for category ${category}:`, error);
     return [];
@@ -206,10 +206,10 @@ export async function fetchQuestionsByCategory(category: QuestionCategory): Prom
 export async function searchQuestions(searchText: string): Promise<Question[]> {
   try {
     const res: any = await supabase
-      .from('questions')
-      .select('*')
+      .from("questions")
+      .select("*")
       .or(`question.ilike.%${searchText}%,explanation.ilike.%${searchText}%`)
-      .order('created_at', { ascending: false });
+      .order("created_at", { ascending: false });
 
     const { data, error } = res;
 
@@ -218,7 +218,7 @@ export async function searchQuestions(searchText: string): Promise<Question[]> {
       throw error;
     }
 
-    return ((data ?? []) as unknown[]).map((r) => convertDBQuestionToQuestion(r as DBQuestion));
+  return ((data ?? []) as unknown[]).map((r) => convertDBQuestionToQuestion(r as DBQuestion));
   } catch (error) {
     console.error(`Failed to search questions for "${searchText}":`, error);
     return [];
@@ -230,7 +230,7 @@ export async function searchQuestions(searchText: string): Promise<Question[]> {
  */
 export async function fetchQuestionById(id: string): Promise<Question | null> {
   try {
-    const res: any = await supabase.from('questions').select('*').eq('id', id).single();
+    const res: any = await supabase.from("questions").select("*").eq("id", id).single();
 
     const { data, error } = res;
 
@@ -257,22 +257,19 @@ export async function fetchQuestionsWithFilters(filters: {
   limit?: number;
 }): Promise<Question[]> {
   try {
-    let query = supabase.from('questions').select('*');
+    let query = supabase.from("questions").select("*");
 
     // Apply filters
     if (filters.domains && filters.domains.length > 0) {
-      query = query.in('domain', filters.domains);
+      query = query.in("domain", filters.domains);
     }
 
     if (filters.difficulties && filters.difficulties.length > 0) {
-      query = query.in(
-        'difficulty',
-        filters.difficulties.map((d) => d.toLowerCase() as 'beginner' | 'intermediate' | 'advanced')
-      );
+      query = query.in("difficulty", filters.difficulties.map(d => d.toLowerCase() as "beginner" | "intermediate" | "advanced"));
     }
 
     if (filters.categories && filters.categories.length > 0) {
-      query = query.in('category', filters.categories);
+      query = query.in("category", filters.categories);
     }
 
     if (filters.tags && filters.tags.length > 0) {
@@ -287,12 +284,12 @@ export async function fetchQuestionsWithFilters(filters: {
     }
 
     // Order by creation date
-    query = query.order('created_at', { ascending: false });
+    query = query.order("created_at", { ascending: false });
 
     const { data, error } = await query;
 
     if (error) {
-      console.error('Error fetching filtered questions:', error);
+      console.error("Error fetching filtered questions:", error);
       throw error;
     }
 
@@ -301,13 +298,13 @@ export async function fetchQuestionsWithFilters(filters: {
     // Client-side tag filtering if needed
     if (filters.tags && filters.tags.length > 0) {
       questions = questions.filter(
-        (q) => q.tags && filters.tags?.some((tag) => q.tags?.includes(tag))
+        (q) => q.tags && filters.tags!.some((tag) => q.tags!.includes(tag))
       );
     }
 
     return questions;
   } catch (error) {
-    console.error('Failed to fetch filtered questions:', error);
+    console.error("Failed to fetch filtered questions:", error);
     return [];
   }
 }
@@ -325,13 +322,13 @@ export function clearQuestionsCache() {
  */
 export function subscribeToQuestions(callback: (payload: any) => void) {
   return supabase
-    .channel('questions_changes')
+    .channel("questions_changes")
     .on(
-      'postgres_changes',
+      "postgres_changes",
       {
-        event: '*',
-        schema: 'public',
-        table: 'questions',
+        event: "*",
+        schema: "public",
+        table: "questions",
       },
       (payload) => {
         // Clear cache on any change
@@ -343,38 +340,43 @@ export function subscribeToQuestions(callback: (payload: any) => void) {
 }
 
 /**
- * Load questions from Supabase database only
- * No fallback to static data to prevent bundle bloat
+ * Load questions with fallback to static data
+ * This is a transitional function that tries Supabase first,
+ * then falls back to static data if needed
  */
 export async function loadQuestionsWithFallback(): Promise<Question[]> {
   try {
-    // Fetch from Supabase database
+    // Try to fetch from Supabase first
     const questions = await fetchQuestions();
 
     if (questions.length > 0) {
-      console.log(`✅ Loaded ${questions.length} questions from Supabase database`);
+      console.log(`Loaded ${questions.length} questions from Supabase`);
       return questions;
     }
 
-    // Database is empty - log warning but don't fall back to static data
-    console.warn(
-      '⚠️ No questions found in database. Please run: npx tsx scripts/bulk-import-questions.ts --all'
-    );
-    return [];
+    // If no questions in database, silently fall back to full imported question bank
+    // Dynamic import to avoid circular dependencies
+    const { importedQuestionBank } = await import("@/data/imported-questions-master");
+    console.log(`Falling back to imported question bank: ${importedQuestionBank.length} questions`);
+    return importedQuestionBank;
   } catch (error) {
-    // Check if it's a table missing error
+    // Check if it's a table missing error (expected)
     const isTableMissing =
       error &&
-      ((error as any).code === 'PGRST116' ||
+      ((error as any).code === "PGRST116" ||
         (error as any).message?.includes('relation "public.questions" does not exist') ||
         (error as any).message?.includes("table 'public.questions' in the schema"));
 
-    if (isTableMissing) {
-      console.warn('⚠️ Questions table does not exist in database. Please run Supabase migrations.');
-    } else {
-      console.error('❌ Error loading questions from database:', (error as Error).message);
+    if (!isTableMissing) {
+      // Only log unexpected errors
+      console.error("Unexpected error loading questions:", (error as Error).message);
     }
 
-    return [];
+    // Fall back to full imported question bank
+    const { importedQuestionBank } = await import("@/data/imported-questions-master");
+    console.log(
+      `Emergency fallback to imported question bank: ${importedQuestionBank.length} questions`
+    );
+    return importedQuestionBank;
   }
 }

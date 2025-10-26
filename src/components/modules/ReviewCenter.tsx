@@ -1,13 +1,13 @@
-'use client';
+"use client";
 
-import { AlertTriangle, BookOpen } from 'lucide-react';
-import Link from 'next/link';
-import { useEffect, useMemo, useState } from 'react';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { useAuth } from '@/contexts/AuthContext';
-import { useDatabase } from '@/contexts/DatabaseContext';
+import { useEffect, useMemo, useState } from "react";
+import { useAuth } from "@/contexts/AuthContext";
+import { useDatabase } from "@/contexts/DatabaseContext";
+import Link from "next/link";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { AlertTriangle, BookOpen } from "lucide-react";
 
 type ModuleMap = Record<string, { slug: string; title: string }>;
 
@@ -16,13 +16,7 @@ export default function ReviewCenter({ modules }: { modules: ModuleMap }) {
   const db = useDatabase();
 
   const [items, setItems] = useState<
-    Array<{
-      module_id: string;
-      module_title: string;
-      slug: string;
-      section_id: string;
-      section_title: string;
-    }>
+    Array<{ module_id: string; module_title: string; slug: string; section_id: string; section_title: string }>
   >([]);
   const [loading, setLoading] = useState(true);
 
@@ -34,7 +28,7 @@ export default function ReviewCenter({ modules }: { modules: ModuleMap }) {
       try {
         if (user) {
           const rows = await db.getUserStudyProgress();
-          const need = (rows as any[]).filter((r) => r.status === 'needs_review');
+          const need = (rows as any[]).filter((r) => r.status === "needs_review");
           // Fetch section titles per module
           const byModule: Record<string, string[]> = {};
           for (const r of need) {
@@ -43,38 +37,21 @@ export default function ReviewCenter({ modules }: { modules: ModuleMap }) {
             if (!mid || !sid) continue;
             (byModule[mid] ||= []).push(sid);
           }
-          const out: Array<{
-            module_id: string;
-            module_title: string;
-            slug: string;
-            section_id: string;
-            section_title: string;
-          }> = [];
+          const out: Array<{ module_id: string; module_title: string; slug: string; section_id: string; section_title: string }>
+            = [];
           for (const [mid, sids] of Object.entries(byModule)) {
             const meta = modules[mid];
             if (!meta) continue;
             // TODO: Implement getStudySectionsPublic method
             // For now, use section IDs directly as titles
             for (const sid of sids) {
-              out.push({
-                module_id: mid,
-                module_title: meta.title,
-                slug: meta.slug,
-                section_id: sid,
-                section_title: `Section ${sid}`,
-              });
+              out.push({ module_id: mid, module_title: meta.title, slug: meta.slug, section_id: sid, section_title: `Section ${sid}` });
             }
           }
           if (mounted) setItems(out);
         } else {
           // Local fallback
-          const out: Array<{
-            module_id: string;
-            module_title: string;
-            slug: string;
-            section_id: string;
-            section_title: string;
-          }> = [];
+          const out: Array<{ module_id: string; module_title: string; slug: string; section_id: string; section_title: string }> = [];
           for (const [mid, meta] of Object.entries(modules)) {
             const key = `tco-study-progress:${mid}`;
             try {
@@ -84,13 +61,7 @@ export default function ReviewCenter({ modules }: { modules: ModuleMap }) {
               const secs = Array.isArray(v?.sections) ? v.sections : [];
               for (const s of secs) {
                 if (s?.needsReview && !s?.completed) {
-                  out.push({
-                    module_id: mid,
-                    module_title: meta.title,
-                    slug: meta.slug,
-                    section_id: s.id ?? '',
-                    section_title: s.title ?? 'Section',
-                  });
+                  out.push({ module_id: mid, module_title: meta.title, slug: meta.slug, section_id: s.id ?? "", section_title: s.title ?? "Section" });
                 }
               }
             } catch {}
@@ -108,17 +79,14 @@ export default function ReviewCenter({ modules }: { modules: ModuleMap }) {
     return () => {
       mounted = false;
     };
-  }, [user?.id, modules, db, user]);
+  }, [user?.id]);
 
   const grouped = useMemo(() => {
-    const g = new Map<
-      string,
-      { title: string; slug: string; items: Array<{ id: string; title: string }> }
-    >();
+    const g = new Map<string, { title: string; slug: string; items: Array<{ id: string; title: string }> }>();
     for (const it of items) {
       const key = it.module_id;
       if (!g.has(key)) g.set(key, { title: it.module_title, slug: it.slug, items: [] });
-      g.get(key)?.items.push({ id: it.section_id, title: it.section_title });
+      g.get(key)!.items.push({ id: it.section_id, title: it.section_title });
     }
     return Array.from(g.entries()).map(([id, v]) => ({ id, ...v }));
   }, [items]);
@@ -127,7 +95,7 @@ export default function ReviewCenter({ modules }: { modules: ModuleMap }) {
   const uniqueDomains = useMemo(() => {
     const set = new Set<string>();
     for (const it of items) {
-      const { slug } = it;
+      const {slug} = it;
       const slugToDomain: Record<string, string> = {
         'platform-foundation': 'Fundamentals',
         'asking-questions': 'Asking Questions',
@@ -151,7 +119,9 @@ export default function ReviewCenter({ modules }: { modules: ModuleMap }) {
 
   // Early return AFTER all hooks are called
   if (loading) {
-    return <div className="text-center text-muted-foreground">Loading review items…</div>;
+    return (
+      <div className="text-center text-muted-foreground">Loading review items…</div>
+    );
   }
 
   return (
@@ -170,9 +140,7 @@ export default function ReviewCenter({ modules }: { modules: ModuleMap }) {
               <BookOpen className="h-5 w-5" /> You're all caught up!
             </CardTitle>
           </CardHeader>
-          <CardContent className="text-green-100">
-            No sections are flagged for review. Keep studying!
-          </CardContent>
+          <CardContent className="text-green-100">No sections are flagged for review. Keep studying!</CardContent>
         </Card>
       ) : (
         grouped.map((m) => (
@@ -203,9 +171,7 @@ export default function ReviewCenter({ modules }: { modules: ModuleMap }) {
                       asChild
                       title={`Start practice for ${m.title}`}
                     >
-                      <Link
-                        href={`/practice?domain=${encodeURIComponent(domain)}&count=25&quick=1&reveal=1`}
-                      >
+                      <Link href={`/practice?domain=${encodeURIComponent(domain)}&count=25&quick=1&reveal=1`}>
                         Start Practice
                       </Link>
                     </Button>

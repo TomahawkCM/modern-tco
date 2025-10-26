@@ -3,27 +3,36 @@
  * Connects PracticeSessionManager with QuestionsContext for targeted practice
  */
 
-'use client';
+"use client";
 
-import { createContext, type ReactNode, useCallback, useContext, useState } from 'react';
-import { useAuth } from '@/contexts/AuthContext';
-import { useIncorrectAnswers } from '@/contexts/IncorrectAnswersContext';
-import { useModules } from '@/contexts/ModuleContext';
-import { useQuestions } from '@/contexts/QuestionsContext';
-import { MODULE_3_SECTIONS, type Module3Section } from '@/lib/module3-section-definitions';
+import { useAuth } from "@/contexts/AuthContext";
+import { useModules } from "@/contexts/ModuleContext";
+import { useQuestions } from "@/contexts/QuestionsContext";
+import { useIncorrectAnswers } from "@/contexts/IncorrectAnswersContext";
 import {
-  createPracticeTargeting,
   PracticeQuestionTargeting,
-} from '@/lib/practice-question-targeting';
-import { PracticeSessionManager } from '@/lib/practice-session-manager';
-import type { PracticeTargeting, QuestionPool, TCODomain } from '@/types/exam';
+  createPracticeTargeting,
+} from "@/lib/practice-question-targeting";
+import { PracticeSessionManager } from "@/lib/practice-session-manager";
+import type { PracticeTargeting, QuestionPool, TCODomain } from "@/types/exam";
 import {
+  type Module3Section,
+  MODULE_3_SECTIONS,
+  createSectionPracticeTargeting
+} from "@/lib/module3-section-definitions";
+import {
+  getModule3SectionQuestions,
+  buildModule3PracticeSession,
+  getModule3PracticeRecommendations
+} from "@/lib/module3-practice-integration";
+import {
+  PracticeSessionState,
   type PracticeQuestion,
   type PracticeSession,
   type PracticeSessionConfig,
-  PracticeSessionState,
   type PracticeSessionSummary,
-} from '@/types/practice-session';
+} from "@/types/practice-session";
+import { createContext, useCallback, useContext, useState, type ReactNode } from "react";
 
 export interface PracticeContextType {
   [key: string]: any;
@@ -90,19 +99,16 @@ export interface PracticeContextType {
   canGoToPrevious: () => boolean;
 
   // Module 3 Enhanced Analytics
-  getModule3SectionProgress: () => Record<
-    Module3Section,
-    {
-      questionsAttempted: number;
-      questionsCorrect: number;
-      accuracy: number;
-      timeSpent: number;
-      lastAttempted?: Date;
-    }
-  >;
+  getModule3SectionProgress: () => Record<Module3Section, {
+    questionsAttempted: number;
+    questionsCorrect: number;
+    accuracy: number;
+    timeSpent: number;
+    lastAttempted?: Date;
+  }>;
   getModule3Recommendations: () => {
     prioritySections: Module3Section[];
-    recommendedSessionType: 'focused' | 'comprehensive' | 'review';
+    recommendedSessionType: "focused" | "comprehensive" | "review";
     suggestedDuration: number;
   };
 
@@ -165,7 +171,7 @@ export function PracticeProvider({ children }: { children: ReactNode }) {
         });
 
         if (filteredQuestions.length < 3) {
-          console.error('Not enough questions for custom practice configuration');
+          console.error("Not enough questions for custom practice configuration");
           return false;
         }
 
@@ -178,7 +184,7 @@ export function PracticeProvider({ children }: { children: ReactNode }) {
 
         return true;
       } catch (error) {
-        console.error('Failed to start custom practice:', error);
+        console.error("Failed to start custom practice:", error);
         return false;
       }
     },
@@ -191,7 +197,7 @@ export function PracticeProvider({ children }: { children: ReactNode }) {
   const startModulePractice = useCallback(
     async (moduleId: string, config?: Partial<PracticeSessionConfig>): Promise<boolean> => {
       if (authLoading) {
-        console.error('User must be authenticated to start practice session');
+        console.error("User must be authenticated to start practice session");
         return false;
       }
 
@@ -210,12 +216,12 @@ export function PracticeProvider({ children }: { children: ReactNode }) {
           module.objectives.map((obj) => obj.id || obj.description),
           {
             requiredTags: [],
-            optionalTags: module.domain ? [`Domain${module.domain.split(' ')[0]}`] : [],
+            optionalTags: module.domain ? [`Domain${module.domain.split(" ")[0]}`] : [],
             minQuestions: config?.questionCount
               ? Math.max(5, Math.floor(config.questionCount * 0.5))
               : 5,
             idealQuestions: config?.questionCount || 15,
-            fallbackStrategy: 'expand-domain',
+            fallbackStrategy: "expand-domain",
           }
         );
 
@@ -225,14 +231,14 @@ export function PracticeProvider({ children }: { children: ReactNode }) {
         if (pool.isEmpty || !pool.hasMinimumQuestions) {
           console.warn(`Insufficient questions for module ${moduleId}:`, pool);
           // Try domain fallback
-          if (pool.recommendedFallback === 'expand-criteria') {
+          if (pool.recommendedFallback === "expand-criteria") {
             const domainQuestions = await getQuestionsWithFilters({
               domains: [module.domain as TCODomain],
               limit: config?.questionCount || 15,
             });
 
             if (domainQuestions.length < 3) {
-              console.error('Not enough questions even with domain fallback');
+              console.error("Not enough questions even with domain fallback");
               return false;
             }
 
@@ -259,11 +265,7 @@ export function PracticeProvider({ children }: { children: ReactNode }) {
 
         // Start session
         const manager = new PracticeSessionManager();
-        const session = await manager.startSession(
-          sessionConfig,
-          user?.id || 'anonymous',
-          pool.questions
-        );
+        const session = await manager.startSession(sessionConfig, user?.id || 'anonymous', pool.questions);
 
         setSessionManager(manager);
         setCurrentSession(session);
@@ -274,13 +276,13 @@ export function PracticeProvider({ children }: { children: ReactNode }) {
         const flow = await getLearningFlow(moduleId);
         if (flow) {
           // Transition to practice phase
-          const updatedFlow = flow.transition('START_PRACTICE' as any);
+          const updatedFlow = flow.transition("START_PRACTICE" as any);
           await updateLearningFlow(moduleId, updatedFlow as any);
         }
 
         return true;
       } catch (error) {
-        console.error('Failed to start module practice:', error);
+        console.error("Failed to start module practice:", error);
         return false;
       }
     },
@@ -315,7 +317,7 @@ export function PracticeProvider({ children }: { children: ReactNode }) {
         }
 
         const sessionConfig: PracticeSessionConfig = {
-          moduleId: `domain-${domain.toLowerCase().replace(/\s+/g, '-')}`,
+          moduleId: `domain-${domain.toLowerCase().replace(/\s+/g, "-")}`,
           domain,
           questionCount: Math.min(domainQuestions.length, config?.questionCount || 20),
           passingScore: config?.passingScore || 75,
@@ -331,7 +333,7 @@ export function PracticeProvider({ children }: { children: ReactNode }) {
 
         return true;
       } catch (error) {
-        console.error('Failed to start domain practice:', error);
+        console.error("Failed to start domain practice:", error);
         return false;
       }
     },
@@ -361,21 +363,19 @@ export function PracticeProvider({ children }: { children: ReactNode }) {
           // Weight by needs-review counts (incorrect answers that haven't been reviewed)
           const domainStats = getDomainStats();
           const totalNeedsReview = domains.reduce(
-            (sum, domain) =>
-              sum + (domainStats[domain]?.count || 0) - (domainStats[domain]?.reviewed || 0),
+            (sum, domain) => sum + (domainStats[domain]?.count || 0) - (domainStats[domain]?.reviewed || 0),
             0
           );
 
           if (totalNeedsReview > 0) {
             // Distribute based on needs-review counts with a minimum of 1 question per domain
             for (const domain of domains) {
-              const needsReview =
-                (domainStats[domain]?.count || 0) - (domainStats[domain]?.reviewed || 0);
+              const needsReview = (domainStats[domain]?.count || 0) - (domainStats[domain]?.reviewed || 0);
               const weight = needsReview / totalNeedsReview;
               const domainQuestionCount = Math.max(1, Math.round(totalQuestions * weight));
 
               // Prioritize questions that were previously answered incorrectly
-              const incorrectQuestionIds = getAnswersByDomain(domain).map((a) => a.questionId);
+              const incorrectQuestionIds = getAnswersByDomain(domain).map(a => a.questionId);
 
               const domainQuestions = await getQuestionsWithFilters({
                 domains: [domain],
@@ -383,15 +383,13 @@ export function PracticeProvider({ children }: { children: ReactNode }) {
               });
 
               // Sort questions to prioritize those that were answered incorrectly
-              const prioritized = domainQuestions
-                .sort((a: any, b: any) => {
-                  const aIncorrect = incorrectQuestionIds.includes(a.id);
-                  const bIncorrect = incorrectQuestionIds.includes(b.id);
-                  if (aIncorrect && !bIncorrect) return -1;
-                  if (!aIncorrect && bIncorrect) return 1;
-                  return 0;
-                })
-                .slice(0, domainQuestionCount);
+              const prioritized = domainQuestions.sort((a: any, b: any) => {
+                const aIncorrect = incorrectQuestionIds.includes(a.id);
+                const bIncorrect = incorrectQuestionIds.includes(b.id);
+                if (aIncorrect && !bIncorrect) return -1;
+                if (!aIncorrect && bIncorrect) return 1;
+                return 0;
+              }).slice(0, domainQuestionCount);
 
               allQuestions = [...allQuestions, ...prioritized];
             }
@@ -405,11 +403,11 @@ export function PracticeProvider({ children }: { children: ReactNode }) {
         if (config?.useWeightedDistribution !== false && !config?.useNeedsReviewWeighting) {
           // Use TCO exam weights for distribution
           const domainWeights: Record<string, number> = {
-            'Asking Questions': 0.22,
-            'Refining Questions & Targeting': 0.23,
-            'Taking Action': 0.15,
-            'Navigation and Basic Module Functions': 0.23,
-            'Report Generation and Data Export': 0.17,
+            "Asking Questions": 0.22,
+            "Refining Questions & Targeting": 0.23,
+            "Taking Action": 0.15,
+            "Navigation and Basic Module Functions": 0.23,
+            "Report Generation and Data Export": 0.17,
           };
 
           // Calculate questions per domain based on weights
@@ -445,17 +443,17 @@ export function PracticeProvider({ children }: { children: ReactNode }) {
         allQuestions = allQuestions.slice(0, totalQuestions);
 
         if (allQuestions.length < 5) {
-          console.error('Not enough questions for multi-domain practice');
+          console.error("Not enough questions for multi-domain practice");
           return false;
         }
 
         const sessionConfig: PracticeSessionConfig = {
-          moduleId: `multi-domain-${domains.join('-').toLowerCase()}`,
+          moduleId: `multi-domain-${domains.join("-").toLowerCase()}`,
           domain: domains[0], // Primary domain for tracking
           questionCount: allQuestions.length,
           passingScore: config?.passingScore || 75,
           timeLimit: config?.timeLimit,
-          tags: domains.map((d) => `Domain:${d}`),
+          tags: domains.map(d => `Domain:${d}`),
         };
 
         const manager = new PracticeSessionManager();
@@ -467,7 +465,7 @@ export function PracticeProvider({ children }: { children: ReactNode }) {
 
         return true;
       } catch (error) {
-        console.error('Failed to start weighted multi-domain practice:', error);
+        console.error("Failed to start weighted multi-domain practice:", error);
         return false;
       }
     },
@@ -487,7 +485,7 @@ export function PracticeProvider({ children }: { children: ReactNode }) {
     }> => {
       const module = modules.find((m) => m.id === moduleId);
       if (!module) {
-        return { available: false, count: 0, recommendation: 'Module not found' };
+        return { available: false, count: 0, recommendation: "Module not found" };
       }
 
       const targeting = createPracticeTargeting(
@@ -502,7 +500,7 @@ export function PracticeProvider({ children }: { children: ReactNode }) {
         available: pool.hasMinimumQuestions,
         count: pool.totalCount,
         recommendation: pool.recommendedFallback
-          ? `Consider ${pool.recommendedFallback.replace('-', ' ')} for more questions`
+          ? `Consider ${pool.recommendedFallback.replace("-", " ")} for more questions`
           : undefined,
       };
     },
@@ -569,12 +567,12 @@ export function PracticeProvider({ children }: { children: ReactNode }) {
    */
   const pauseSession = useCallback(() => {
     // Implementation for pausing session
-    console.log('Session paused');
+    console.log("Session paused");
   }, []);
 
   const resumeSession = useCallback(() => {
     // Implementation for resuming session
-    console.log('Session resumed');
+    console.log("Session resumed");
   }, []);
 
   const abandonSession = useCallback(() => {
@@ -640,61 +638,52 @@ export function PracticeProvider({ children }: { children: ReactNode }) {
   /**
    * Module3 Session Management
    */
-  const startModule3SectionPractice = useCallback(
-    async (
-      sectionId: Module3Section,
-      config?: {
-        includePrerequisites?: boolean;
-        includeRelatedSections?: boolean;
-        adaptiveDifficulty?: boolean;
-        focusOnGaps?: boolean;
-        questionCount?: number;
-      }
-    ): Promise<boolean> => {
-      // TODO: Implement Module3 section practice
-      console.log('Starting Module3 section practice:', sectionId, config);
-      return Promise.resolve(false);
-    },
-    []
-  );
+  const startModule3SectionPractice = useCallback(async (
+    sectionId: Module3Section,
+    config?: {
+      includePrerequisites?: boolean;
+      includeRelatedSections?: boolean;
+      adaptiveDifficulty?: boolean;
+      focusOnGaps?: boolean;
+      questionCount?: number;
+    }
+  ): Promise<boolean> => {
+    // TODO: Implement Module3 section practice
+    console.log("Starting Module3 section practice:", sectionId, config);
+    return Promise.resolve(false);
+  }, []);
 
-  const startModule3ComprehensivePractice = useCallback(
-    async (
-      sections: Module3Section[],
-      config?: {
-        questionsPerSection?: number;
-        randomizeOrder?: boolean;
-        focusOnWeakAreas?: boolean;
-        timeLimit?: number;
-      }
-    ): Promise<boolean> => {
-      // TODO: Implement Module3 comprehensive practice
-      console.log('Starting Module3 comprehensive practice:', sections, config);
-      return Promise.resolve(false);
-    },
-    []
-  );
+  const startModule3ComprehensivePractice = useCallback(async (
+    sections: Module3Section[],
+    config?: {
+      questionsPerSection?: number;
+      randomizeOrder?: boolean;
+      focusOnWeakAreas?: boolean;
+      timeLimit?: number;
+    }
+  ): Promise<boolean> => {
+    // TODO: Implement Module3 comprehensive practice
+    console.log("Starting Module3 comprehensive practice:", sections, config);
+    return Promise.resolve(false);
+  }, []);
 
   const getModule3SectionProgress = useCallback(() => {
     // TODO: Implement Module3 progress tracking
-    return {} as Record<
-      Module3Section,
-      {
-        questionsAttempted: number;
-        questionsCorrect: number;
-        accuracy: number;
-        timeSpent: number;
-        lastAttempted?: Date;
-      }
-    >;
+    return {} as Record<Module3Section, {
+      questionsAttempted: number;
+      questionsCorrect: number;
+      accuracy: number;
+      timeSpent: number;
+      lastAttempted?: Date;
+    }>;
   }, []);
 
   const getModule3Recommendations = useCallback(() => {
     // TODO: Implement Module3 recommendations
     return {
       prioritySections: [] as Module3Section[],
-      recommendedSessionType: 'focused' as const,
-      suggestedDuration: 30,
+      recommendedSessionType: "focused" as const,
+      suggestedDuration: 30
     };
   }, []);
 
@@ -704,9 +693,7 @@ export function PracticeProvider({ children }: { children: ReactNode }) {
     return {
       available: true,
       questionCount: section?.currentQuestionCount || 0,
-      coverage: section
-        ? Math.floor((section.currentQuestionCount / section.questionTargetCount) * 100)
-        : 0,
+      coverage: section ? Math.floor((section.currentQuestionCount / section.questionTargetCount) * 100) : 0
     };
   }, []);
 
@@ -754,7 +741,7 @@ export function PracticeProvider({ children }: { children: ReactNode }) {
 export function usePractice() {
   const context = useContext(PracticeContext);
   if (!context) {
-    throw new Error('usePractice must be used within a PracticeProvider');
+    throw new Error("usePractice must be used within a PracticeProvider");
   }
   return context;
 }

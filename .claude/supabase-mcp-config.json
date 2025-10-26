@@ -1,0 +1,39 @@
+{
+  "name": "supabase",
+  "version": "1.0.0",
+  "description": "Supabase MCP Server for Tanium TCO",
+  "environment": {
+    "SUPABASE_URL": "https://qnwcwoutgarhqxlgsjzs.supabase.co",
+    "SUPABASE_SERVICE_ROLE_KEY": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFud2N3b3V0Z2FyaHF4bGdzanpzIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc1NjY3MzQyOCwiZXhwIjoyMDcyMjQ5NDI4fQ.U_FDgUC__dtFPVd5jrTpmwaWiDWJ701w4lRbe4qy1T4",
+    "SUPABASE_ANON_KEY": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFud2N3b3V0Z2FyaHF4bGdzanpzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTY2NzM0MjgsImV4cCI6MjA3MjI0OTQyOH0.nooeC4pyNsoRok5zKat9iwUk9rgCfz_b5SWqZ7_dgtQ",
+    "SUPABASE_PROJECT_ID": "qnwcwoutgarhqxlgsjzs"
+  },
+  "tools": [
+    "search_docs",
+    "list_tables",
+    "list_extensions",
+    "list_migrations",
+    "apply_migration",
+    "execute_sql",
+    "get_logs",
+    "get_advisors",
+    "get_project_url",
+    "get_anon_key",
+    "generate_typescript_types",
+    "list_edge_functions",
+    "deploy_edge_function",
+    "create_branch",
+    "list_branches",
+    "delete_branch",
+    "merge_branch",
+    "reset_branch",
+    "rebase_branch"
+  ],
+  "configuration": {
+    "project_ref": "qnwcwoutgarhqxlgsjzs",
+    "api_url": "https://qnwcwoutgarhqxlgsjzs.supabase.co",
+    "auth_enabled": true,
+    "realtime_enabled": true,
+    "storage_enabled": true
+  }
+}

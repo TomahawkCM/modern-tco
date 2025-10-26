@@ -1,0 +1,27 @@
+
+> tanium-tco-modern@1.0.0 build
+> cross-env NODE_OPTIONS=--max-old-space-size=8192 next build
+
+   ▲ Next.js 15.5.2
+   - Environments: .env.local, .env.production
+   - Experiments (use with caution):
+     ✓ optimizeCss
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully in 11.1s
+   Skipping linting
+   Checking validity of types ...
+Failed to compile.
+
+./src/app/api/study/content/route.ts:34:35
+Type error: Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
+  Type 'undefined' is not assignable to type 'string'.
+
+[0m [90m 32 |[39m   [36mprivate[39m [36mstatic[39m extractExamWeight(content[33m:[39m string)[33m:[39m number {
+ [90m 33 |[39m     [36mconst[39m weightMatch [33m=[39m content[33m.[39mmatch([35m/(\d+)%\s+Exam\s+Weight/i[39m)[33m;[39m
+[31m[1m>[22m[39m[90m 34 |[39m     [36mreturn[39m weightMatch [33m?[39m parseInt(weightMatch[[35m1[39m]) [33m:[39m [35m0[39m[33m;[39m
+ [90m    |[39m                                   [31m[1m^[22m[39m
+ [90m 35 |[39m   }
+ [90m 36 |[39m
+ [90m 37 |[39m   [36mprivate[39m [36mstatic[39m extractLearningObjectives(content[33m:[39m string)[33m:[39m string[] {[0m
+Next.js build worker exited with code: 1 and signal: null

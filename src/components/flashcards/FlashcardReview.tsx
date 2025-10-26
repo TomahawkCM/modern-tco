@@ -1,26 +1,15 @@
-'use client';
+"use client";
 
-import {
-  AlertCircle,
-  BookOpen,
-  Brain,
-  Check,
-  Clock,
-  Filter,
-  Hash,
-  Target,
-  TrendingUp,
-  X,
-} from 'lucide-react';
-import React, { useEffect, useState } from 'react';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Progress } from '@/components/ui/progress';
-import { useAuth } from '@/contexts/AuthContext';
-import type { SRRating } from '@/lib/sr';
-import { flashcardService } from '@/services/flashcardService';
-import type { Flashcard } from '@/types/flashcard';
+import React, { useState, useEffect } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Progress } from "@/components/ui/progress";
+import { Badge } from "@/components/ui/badge";
+import { useAuth } from "@/contexts/AuthContext";
+import { flashcardService } from "@/services/flashcardService";
+import type { Flashcard } from "@/types/flashcard";
+import type { SRRating } from "@/lib/sr";
+import { Brain, Check, X, AlertCircle, Clock, TrendingUp, BookOpen, Target, Filter, Hash } from "lucide-react";
 
 interface FlashcardReviewProps {
   moduleId?: string; // Filter by module
@@ -36,12 +25,7 @@ interface ReviewStats {
   newCardsLearned: number;
 }
 
-export default function FlashcardReview({
-  moduleId,
-  deckId,
-  totalCards = 0,
-  onComplete,
-}: FlashcardReviewProps) {
+export default function FlashcardReview({ moduleId, deckId, totalCards = 0, onComplete }: FlashcardReviewProps) {
   const { user } = useAuth();
   const isStaticMode = !user;
 
@@ -63,6 +47,7 @@ export default function FlashcardReview({
 
   useEffect(() => {
     loadCards();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user?.id, moduleId, deckId, sessionLimit, selectedDomain]);
 
   const loadCards = async () => {
@@ -83,35 +68,18 @@ export default function FlashcardReview({
       if (moduleId) {
         // Get all cards for module and filter by due date
         const moduleCards = await flashcardService.getFlashcardsByModule(userId, moduleId);
-        dueCards = moduleCards.filter((c) => new Date(c.srs_due) <= new Date());
-        console.log(
-          '[FlashcardReview] Module cards loaded:',
-          moduleCards.length,
-          'due:',
-          dueCards.length
-        );
+        dueCards = moduleCards.filter(c => new Date(c.srs_due) <= new Date());
+        console.log('[FlashcardReview] Module cards loaded:', moduleCards.length, 'due:', dueCards.length);
       } else if (deckId) {
         // Get deck cards and filter by due date
         const deckCards = await flashcardService.getDeckCards(deckId, userId);
-        dueCards = deckCards.filter((c) => new Date(c.srs_due) <= new Date());
-        console.log(
-          '[FlashcardReview] Deck cards loaded:',
-          deckCards.length,
-          'due:',
-          dueCards.length
-        );
+        dueCards = deckCards.filter(c => new Date(c.srs_due) <= new Date());
+        console.log('[FlashcardReview] Deck cards loaded:', deckCards.length, 'due:', dueCards.length);
       } else if (selectedDomain) {
         // Get cards filtered by domain (stored in tags array)
         const domainCards = await flashcardService.getFlashcardsByDomain(userId, selectedDomain);
-        dueCards = domainCards
-          .filter((c) => new Date(c.srs_due) <= new Date())
-          .slice(0, effectiveLimit);
-        console.log(
-          '[FlashcardReview] Domain cards loaded:',
-          domainCards.length,
-          'due:',
-          dueCards.length
-        );
+        dueCards = domainCards.filter(c => new Date(c.srs_due) <= new Date()).slice(0, effectiveLimit);
+        console.log('[FlashcardReview] Domain cards loaded:', domainCards.length, 'due:', dueCards.length);
       } else {
         // Get all due cards with custom limit
         dueCards = await flashcardService.getDueFlashcards(userId, effectiveLimit);
@@ -128,9 +96,7 @@ export default function FlashcardReview({
         if (selectedDomain) {
           // Get new cards from specific domain (filter by tags containing domain)
           const allNewCards = await flashcardService.getNewFlashcards(userId, 1000);
-          newCards = allNewCards
-            .filter((c) => c.tags && c.tags.includes(selectedDomain))
-            .slice(0, newCardsCount);
+          newCards = allNewCards.filter(c => c.tags && c.tags.includes(selectedDomain)).slice(0, newCardsCount);
         } else {
           newCards = await flashcardService.getNewFlashcards(userId, newCardsCount);
         }
@@ -142,7 +108,7 @@ export default function FlashcardReview({
 
       setCards(allCards);
     } catch (error) {
-      console.error('Error loading flashcards:', error);
+      console.error("Error loading flashcards:", error);
     } finally {
       setIsLoading(false);
     }
@@ -162,10 +128,7 @@ export default function FlashcardReview({
       ...sessionStats,
       totalReviewed: sessionStats.totalReviewed + 1,
       correct: sessionStats.correct + (isCorrect ? 1 : 0),
-      avgTimePerCard: Math.floor(
-        (sessionStats.avgTimePerCard * sessionStats.totalReviewed + timeSpent) /
-          (sessionStats.totalReviewed + 1)
-      ),
+      avgTimePerCard: Math.floor((sessionStats.avgTimePerCard * sessionStats.totalReviewed + timeSpent) / (sessionStats.totalReviewed + 1)),
       newCardsLearned: sessionStats.newCardsLearned + (currentCard.srs_reps === 0 ? 1 : 0),
     };
     setSessionStats(newStats);
@@ -202,13 +165,13 @@ export default function FlashcardReview({
     if (isFirstTime) {
       // New user - no flashcards created yet
       return (
-        <Card className="w-full max-w-2xl mx-auto">
-          <CardContent className="flex flex-col items-center justify-center p-12 text-center">
-            <Brain className="h-16 w-16 text-primary mb-4" />
-            <h3 className="text-2xl font-bold mb-2">No Flashcards Yet</h3>
-            <p className="text-muted-foreground mb-6">
+      <Card className="w-full max-w-2xl mx-auto">
+        <CardContent className="flex flex-col items-center justify-center p-12 text-center">
+          <Brain className="h-16 w-16 text-primary mb-4" />
+          <h3 className="text-2xl font-bold mb-2">No Flashcards Yet</h3>
+          <p className="text-muted-foreground mb-6">
               Create your first flashcard to start using spaced repetition for better retention!
-            </p>
+          </p>
 
             {/* Onboarding CTAs */}
             <div className="space-y-3 w-full max-w-md">
@@ -227,9 +190,7 @@ export default function FlashcardReview({
                   </Button>
                 </a>
                 <div className="pt-2 border-t">
-                  <p className="text-xs text-muted-foreground mb-2">
-                    Or create one manually using the "Create Cards" tab above
-                  </p>
+                  <p className="text-xs text-muted-foreground mb-2">Or create one manually using the "Create Cards" tab above</p>
                 </div>
               </div>
             </div>
@@ -257,8 +218,7 @@ export default function FlashcardReview({
               <p className="text-2xl font-bold text-foreground">
                 {sessionStats.totalReviewed > 0
                   ? Math.round((sessionStats.correct / sessionStats.totalReviewed) * 100)
-                  : 0}
-                %
+                  : 0}%
               </p>
             </div>
           </div>
@@ -276,8 +236,7 @@ export default function FlashcardReview({
         <Card className="border-[#f97316] bg-[#f97316]/10">
           <CardContent className="py-3">
             <p className="text-sm text-[#f97316]">
-              ⚠️ <strong>Shared Flashcard Library</strong> - Reviewing static TCO cards without
-              signing in.
+              ⚠️ <strong>Shared Flashcard Library</strong> - Reviewing static TCO cards without signing in.
             </p>
           </CardContent>
         </Card>
@@ -294,15 +253,15 @@ export default function FlashcardReview({
             </label>
             <div className="flex flex-wrap gap-2">
               {[
-                { value: 10, label: '10' },
-                { value: 25, label: '25' },
-                { value: 50, label: '50' },
-                { value: 100, label: '100' },
-                { value: 9999, label: 'All' },
+                { value: 10, label: "10" },
+                { value: 25, label: "25" },
+                { value: 50, label: "50" },
+                { value: 100, label: "100" },
+                { value: 9999, label: "All" }
               ].map((option) => (
                 <Button
                   key={option.value}
-                  variant={sessionLimit === option.value ? 'default' : 'outline'}
+                  variant={sessionLimit === option.value ? "default" : "outline"}
                   size="sm"
                   onClick={() => setSessionLimit(option.value)}
                   className="min-w-[60px]"
@@ -321,16 +280,16 @@ export default function FlashcardReview({
             </label>
             <div className="flex flex-wrap gap-2">
               {[
-                { value: null, label: 'Random' },
-                { value: 'asking-questions', label: 'Asking Questions' },
-                { value: 'refining-questions-targeting', label: 'Refining & Targeting' },
-                { value: 'taking-action-packages-actions', label: 'Taking Action' },
-                { value: 'navigation-basic-modules', label: 'Navigation' },
-                { value: 'reporting-data-export', label: 'Reporting' },
+                { value: null, label: "Random" },
+                { value: "asking-questions", label: "Asking Questions" },
+                { value: "refining-questions-targeting", label: "Refining & Targeting" },
+                { value: "taking-action-packages-actions", label: "Taking Action" },
+                { value: "navigation-basic-modules", label: "Navigation" },
+                { value: "reporting-data-export", label: "Reporting" }
               ].map((option) => (
                 <Button
-                  key={option.value || 'random'}
-                  variant={selectedDomain === option.value ? 'default' : 'outline'}
+                  key={option.value || "random"}
+                  variant={selectedDomain === option.value ? "default" : "outline"}
                   size="sm"
                   onClick={() => setSelectedDomain(option.value)}
                   className="text-xs"
@@ -369,8 +328,7 @@ export default function FlashcardReview({
           <p className="text-sm font-bold text-foreground">
             {sessionStats.totalReviewed > 0
               ? Math.round((sessionStats.correct / sessionStats.totalReviewed) * 100)
-              : 0}
-            %
+              : 0}%
           </p>
         </div>
         <div className="p-3 bg-muted rounded-md text-center">
@@ -385,13 +343,17 @@ export default function FlashcardReview({
         <CardHeader>
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <Badge variant={currentCard.srs_reps === 0 ? 'default' : 'secondary'}>
-                {currentCard.srs_reps === 0 ? 'New' : `Review ${currentCard.total_reviews}`}
+              <Badge variant={currentCard.srs_reps === 0 ? "default" : "secondary"}>
+                {currentCard.srs_reps === 0 ? "New" : `Review ${currentCard.total_reviews}`}
               </Badge>
               <Badge variant="outline">{currentCard.card_type}</Badge>
             </div>
             {currentCard.hint && !showAnswer && (
-              <Button variant="ghost" size="sm" onClick={() => alert(currentCard.hint)}>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => alert(currentCard.hint)}
+              >
                 <AlertCircle className="h-4 w-4 mr-1" />
                 Hint
               </Button>
@@ -429,7 +391,11 @@ export default function FlashcardReview({
           {/* Show Answer Button */}
           {!showAnswer && (
             <div className="space-y-2 mt-4">
-              <Button onClick={() => setShowAnswer(true)} size="lg" className="w-full">
+              <Button
+                onClick={() => setShowAnswer(true)}
+                size="lg"
+                className="w-full"
+              >
                 Show Answer
               </Button>
               <Button
@@ -446,9 +412,7 @@ export default function FlashcardReview({
           {/* Rating Buttons (SM-2 Algorithm) */}
           {showAnswer && (
             <div className="space-y-3 mt-6">
-              <p className="text-xs text-center text-muted-foreground">
-                Rate your recall (optional):
-              </p>
+              <p className="text-xs text-center text-muted-foreground">Rate your recall (optional):</p>
               <div className="grid grid-cols-4 gap-2">
                 <Button
                   variant="destructive"
@@ -476,13 +440,7 @@ export default function FlashcardReview({
                   <Check className="h-5 w-5 mb-1" />
                   <span className="text-xs">Good</span>
                   <span className="text-xs opacity-70">
-                    ~
-                    {currentCard.srs_reps === 0
-                      ? 1
-                      : currentCard.srs_reps === 1
-                        ? 6
-                        : Math.round(currentCard.srs_interval * currentCard.srs_ease)}
-                    d
+                    ~{currentCard.srs_reps === 0 ? 1 : currentCard.srs_reps === 1 ? 6 : Math.round(currentCard.srs_interval * currentCard.srs_ease)}d
                   </span>
                 </Button>
                 <Button
@@ -493,11 +451,7 @@ export default function FlashcardReview({
                   <TrendingUp className="h-5 w-5 mb-1" />
                   <span className="text-xs">Easy</span>
                   <span className="text-xs opacity-70">
-                    ~
-                    {currentCard.srs_reps === 0
-                      ? 3
-                      : Math.round(currentCard.srs_interval * currentCard.srs_ease * 1.3)}
-                    d
+                    ~{currentCard.srs_reps === 0 ? 3 : Math.round(currentCard.srs_interval * currentCard.srs_ease * 1.3)}d
                   </span>
                 </Button>
               </div>

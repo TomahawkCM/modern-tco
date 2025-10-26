@@ -1,7 +1,9 @@
-'use client';
+"use client";
 
-import { AlertTriangle, ArrowLeft, ArrowRight, CheckCircle, Play, RotateCcw } from 'lucide-react';
-import { useState } from 'react';
+import React, { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -12,16 +14,14 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from '@/components/ui/alert-dialog';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { cn } from '@/lib/utils';
+} from "@/components/ui/alert-dialog";
+import { ArrowRight, ArrowLeft, Play, RotateCcw, CheckCircle, AlertTriangle } from "lucide-react";
 import {
-  type LearningFlowContext,
-  LearningFlowEvent,
   LearningFlowState,
-} from '@/types/learning-flow';
+  LearningFlowEvent,
+  type LearningFlowContext,
+} from "@/types/learning-flow";
+import { cn } from "@/lib/utils";
 
 interface LearningFlowNavigationProps {
   flowContext: LearningFlowContext;
@@ -34,41 +34,41 @@ interface LearningFlowNavigationProps {
 
 const NAVIGATION_CONFIG = {
   [LearningFlowState.LEARN]: {
-    title: 'Study the Material',
-    description: 'Review the learning content and understand the concepts',
-    nextLabel: 'Start Practice',
+    title: "Study the Material",
+    description: "Review the learning content and understand the concepts",
+    nextLabel: "Start Practice",
     nextEvent: LearningFlowEvent.COMPLETE_LEARN,
-    color: 'bg-primary',
+    color: "bg-primary",
     canGoBack: false,
   },
   [LearningFlowState.PRACTICE]: {
-    title: 'Practice Questions',
-    description: 'Test your understanding with practice questions',
-    nextLabel: 'Start Assessment',
+    title: "Practice Questions",
+    description: "Test your understanding with practice questions",
+    nextLabel: "Start Assessment",
     nextEvent: LearningFlowEvent.COMPLETE_PRACTICE,
     prevLabel: undefined,
     prevEvent: undefined,
-    color: 'bg-amber-500',
+    color: "bg-amber-500",
     canGoBack: false,
   },
   [LearningFlowState.ASSESS]: {
-    title: 'Take Assessment',
-    description: 'Complete the formal assessment to finish this module',
-    nextLabel: 'Complete Assessment',
+    title: "Take Assessment",
+    description: "Complete the formal assessment to finish this module",
+    nextLabel: "Complete Assessment",
     nextEvent: LearningFlowEvent.COMPLETE_ASSESS,
     prevLabel: undefined,
     prevEvent: undefined,
-    color: 'bg-cyan-500',
+    color: "bg-cyan-500",
     canGoBack: false,
   },
   [LearningFlowState.COMPLETED]: {
-    title: 'Module Completed',
-    description: 'Congratulations! You have successfully completed this module',
+    title: "Module Completed",
+    description: "Congratulations! You have successfully completed this module",
     nextLabel: null,
     nextEvent: null,
     prevLabel: undefined,
     prevEvent: undefined,
-    color: 'bg-[#22c55e]',
+    color: "bg-[#22c55e]",
     canGoBack: false,
   },
 };
@@ -108,13 +108,13 @@ export function LearningFlowNavigation({
   const showReset = onReset && flowContext.currentState !== LearningFlowState.LEARN && !disabled;
 
   return (
-    <Card className={cn('w-full', className)}>
+    <Card className={cn("w-full", className)}>
       <CardHeader>
         <div className="flex items-center justify-between">
           <div className="space-y-1">
             <div className="flex items-center gap-2">
               <CardTitle className="text-xl">{config.title}</CardTitle>
-              <Badge className={cn('text-foreground', config.color)} variant="secondary">
+              <Badge className={cn("text-foreground", config.color)} variant="secondary">
                 {flowContext.currentState.charAt(0).toUpperCase() +
                   flowContext.currentState.slice(1)}
               </Badge>
@@ -136,11 +136,11 @@ export function LearningFlowNavigation({
                 <p className="font-medium text-amber-800">Prerequisites not met</p>
                 <p className="text-amber-700">
                   {flowContext.currentState === LearningFlowState.LEARN &&
-                    'Complete the learning content to proceed to practice.'}
+                    "Complete the learning content to proceed to practice."}
                   {flowContext.currentState === LearningFlowState.PRACTICE &&
-                    'Answer enough practice questions correctly to proceed to assessment.'}
+                    "Answer enough practice questions correctly to proceed to assessment."}
                   {flowContext.currentState === LearningFlowState.ASSESS &&
-                    'Complete the assessment to finish this module.'}
+                    "Complete the assessment to finish this module."}
                 </p>
               </div>
             </div>
@@ -202,8 +202,8 @@ export function LearningFlowNavigation({
                 onClick={handleNext}
                 disabled={!canAdvance}
                 className={cn(
-                  'flex min-w-fit items-center gap-2',
-                  isCompleted ? 'bg-[#22c55e] hover:bg-green-700' : ''
+                  "flex min-w-fit items-center gap-2",
+                  isCompleted ? "bg-[#22c55e] hover:bg-green-700" : ""
                 )}
               >
                 {isCompleted ? (
@@ -229,11 +229,11 @@ export function LearningFlowNavigation({
           {flowContext.currentState !== LearningFlowState.COMPLETED && (
             <div className="text-sm text-muted-foreground">
               {flowContext.currentState === LearningFlowState.LEARN &&
-                'Take your time to understand the concepts before moving to practice.'}
+                "Take your time to understand the concepts before moving to practice."}
               {flowContext.currentState === LearningFlowState.PRACTICE &&
-                'Practice helps reinforce your learning. Complete enough questions to unlock the assessment.'}
+                "Practice helps reinforce your learning. Complete enough questions to unlock the assessment."}
               {flowContext.currentState === LearningFlowState.ASSESS &&
-                'This is your chance to demonstrate your mastery of the material.'}
+                "This is your chance to demonstrate your mastery of the material."}
             </div>
           )}
         </div>

@@ -1,0 +1,88 @@
+    CREATE POLICY IF NOT EXISTS "Enable read access for all users" ON study_sections FOR SELECT USING (true);
+    CREATE POLICY IF NOT EXISTS "Enable read access for all users" ON practice_questions FOR SELECT USING (true);
+  `;
+  if (!(await executeSQL(policiesSQL, "Creating public read policies"))) return false;
+
+  return true;
+}
+
+/**
+ * Verify schema deployment by checking tables and data
+ */
+async function verifyDeployment() {
+  console.log("\n🔍 Verifying Schema Deployment...");
+
+  // Check tables exist
+  const tablesQuery = `
+    SELECT table_name, table_type 
+    FROM information_schema.tables 
+    WHERE table_schema = 'public' 
+    AND table_name IN ('study_domains', 'study_modules', 'study_sections', 'practice_questions')
+    ORDER BY table_name;
+  `;
+
+  const { data: tables, error: tablesError } = await supabase.rpc("exec_sql", {
+    sql_query: tablesQuery,
+  });
+
+  if (tablesError) {
+    console.error("❌ Table verification failed:", tablesError);
+    return false;
+  }
+
+  console.log("✅ Tables verified:", tables);
+
+  // Check domains data
+  const { data: domains, error: domainsError } = await supabase
+    .from("study_domains")
+    .select("domain_number, title, exam_weight")
+    .order("domain_number");
+
+  if (domainsError) {
+    console.error("❌ Domains verification failed:", domainsError);
+    return false;
+  }
+
+  console.log("✅ TCO Domains verified:", domains);
+  return true;
+}
+
+/**
+ * Main deployment function
+ */
+async function main() {
+  try {
+    console.log("🎯 Starting TCO Database Schema Deployment");
+
+    // Step 1: Create exec function if needed
+    await createExecFunction();
+
+    // Step 2: Deploy complete schema
+    const schemaSuccess = await deploySchema();
+    if (!schemaSuccess) {
+      console.error("❌ Schema deployment failed");
+      process.exit(1);
+    }
+
+    // Step 3: Verify deployment
+    const verifySuccess = await verifyDeployment();
+    if (!verifySuccess) {
+      console.error("❌ Schema verification failed");
+      process.exit(1);
+    }
+
+    console.log("\n🎉 TCO Database Schema Deployment Completed Successfully!");
+    console.log(
+      "📊 4 tables created: study_domains, study_modules, study_sections, practice_questions"
+    );
+    console.log("🎯 5 TCO certification domains populated");
+    console.log("🔒 Row Level Security policies configured");
+    console.log("⚡ Performance indexes optimized");
+  } catch (error) {
+    console.error("❌ Deployment failed with error:", error);
+    process.exit(1);
+  }
+}
+
+// Execute deployment
+main();

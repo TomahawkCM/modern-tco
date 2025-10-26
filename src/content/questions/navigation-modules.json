@@ -1,0 +1,83 @@
+[
+  {
+    "id": "nb-001",
+    "question": "Which console area provides quick access to commonly used modules?",
+    "choices": [
+      { "id": "a", "text": "System Settings" },
+      { "id": "b", "text": "Navigation sidebar" },
+      { "id": "c", "text": "Action approval queue" },
+      { "id": "d", "text": "Sensor editor" }
+    ],
+    "correctAnswerId": "b",
+    "domain": "Navigation and Basic Module Functions",
+    "difficulty": "Beginner",
+    "category": "Console Procedures",
+    "explanation": "The sidebar exposes core modules and saved resources.",
+    "tags": ["navigation", "modules"]
+  },
+  {
+    "id": "nb-002",
+    "question": "What workflow helps new users learn module layouts efficiently?",
+    "choices": [
+      { "id": "a", "text": "Explore one module at a time and use built-in help" },
+      { "id": "b", "text": "Change tenant settings" },
+      { "id": "c", "text": "Disable tooltips" },
+      { "id": "d", "text": "Use only keyboard shortcuts" }
+    ],
+    "correctAnswerId": "a",
+    "domain": "Navigation and Basic Module Functions",
+    "difficulty": "Beginner",
+    "category": "Platform Fundamentals",
+    "explanation": "Incremental exploration plus help resources builds familiarity.",
+    "tags": ["onboarding", "help"]
+  },
+  {
+    "id": "nb-003",
+    "question": "Which option is most useful for locating a specific module quickly?",
+    "choices": [
+      { "id": "a", "text": "Global search or module search bar" },
+      { "id": "b", "text": "Export data" },
+      { "id": "c", "text": "Run a package" },
+      { "id": "d", "text": "Open action approvals" }
+    ],
+    "correctAnswerId": "a",
+    "domain": "Navigation and Basic Module Functions",
+    "difficulty": "Beginner",
+    "category": "Console Procedures",
+    "explanation": "Search accelerates navigation to modules and content.",
+    "tags": ["search", "productivity"]
+  },
+  {
+    "id": "nb-004",
+    "question": "What should you review before enabling a new module in production?",
+    "choices": [
+      { "id": "a", "text": "Licensing, prerequisites, and role permissions" },
+      { "id": "b", "text": "Only the console theme" },
+      { "id": "c", "text": "None; modules are always safe by default" },
+      { "id": "d", "text": "Endpoint time zones" }
+    ],
+    "correctAnswerId": "a",
+    "domain": "Navigation and Basic Module Functions",
+    "difficulty": "Intermediate",
+    "category": "Platform Fundamentals",
+    "explanation": "Ensure requirements and access controls are correctly configured.",
+    "tags": ["prerequisites", "rbac"]
+  },
+  {
+    "id": "nb-005",
+    "question": "Which feature saves a commonly used question for later use?",
+    "choices": [
+      { "id": "a", "text": "Saved Questions" },
+      { "id": "b", "text": "Module catalog" },
+      { "id": "c", "text": "Sensor editor" },
+      { "id": "d", "text": "User profile" }
+    ],
+    "correctAnswerId": "a",
+    "domain": "Navigation and Basic Module Functions",
+    "difficulty": "Beginner",
+    "category": "Console Procedures",
+    "explanation": "Use Saved Questions to bookmark and reuse queries.",
+    "tags": ["saved-questions", "efficiency"]
+  }
+]
+

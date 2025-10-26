@@ -43,7 +43,11 @@ export type FlashcardLibraryDifficulty = 'easy' | 'medium' | 'hard';
 /**
  * Source of flashcard content
  */
-export type FlashcardLibrarySource = 'ai_generated' | 'manual' | 'imported' | 'expert_curated';
+export type FlashcardLibrarySource =
+  | 'ai_generated'
+  | 'manual'
+  | 'imported'
+  | 'expert_curated';
 
 /**
  * SuperMemo2 quality rating scale (0-5)
@@ -337,10 +341,7 @@ export interface PaginatedLibraryCards {
  * Bulk flashcard import data
  */
 export interface BulkFlashcardImport {
-  cards: Omit<
-    FlashcardLibraryCard,
-    'id' | 'created_at' | 'updated_at' | 'total_reviews' | 'total_correct' | 'average_ease_factor'
-  >[];
+  cards: Omit<FlashcardLibraryCard, 'id' | 'created_at' | 'updated_at' | 'total_reviews' | 'total_correct' | 'average_ease_factor'>[];
   source: FlashcardLibrarySource;
   sourceDescription?: string;
 }

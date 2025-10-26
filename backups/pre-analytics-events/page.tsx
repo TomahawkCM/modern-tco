@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import { useEffect, useMemo, useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { supabase } from '@/lib/supabase';
+import { useEffect, useMemo, useState } from "react";
+import { supabase } from "@/lib/supabase";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 
 type EventRow = {
   event_id: string;
@@ -19,7 +19,7 @@ export default function AnalyticsEventsPage() {
   const [events, setEvents] = useState<EventRow[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useState("");
 
   const filtered = useMemo(() => {
     if (!query) return events;
@@ -27,12 +27,12 @@ export default function AnalyticsEventsPage() {
     return events.filter((e) =>
       [
         e.event_type,
-        e.session_id ?? '',
-        e.user_id ?? '',
+        e.session_id ?? "",
+        e.user_id ?? "",
         e.event_timestamp,
         JSON.stringify(e.event_data ?? {}),
       ]
-        .join('\n')
+        .join("\n")
         .toLowerCase()
         .includes(q)
     );
@@ -43,9 +43,9 @@ export default function AnalyticsEventsPage() {
     setError(null);
     try {
       const { data, error } = await (supabase as any)
-        .from('analytics_events')
-        .select('event_id,event_type,event_timestamp,session_id,user_id,event_data')
-        .order('event_timestamp', { ascending: false })
+        .from("analytics_events")
+        .select("event_id,event_type,event_timestamp,session_id,user_id,event_data")
+        .order("event_timestamp", { ascending: false })
         .limit(100);
       if (error) throw error;
       setEvents((data as EventRow[]) ?? []);
@@ -72,7 +72,7 @@ export default function AnalyticsEventsPage() {
             className="w-80 bg-white/5 text-white placeholder:text-white/40"
           />
           <Button onClick={load} disabled={loading} className="bg-tanium-accent">
-            {loading ? 'Refreshing...' : 'Refresh'}
+            {loading ? "Refreshing..." : "Refresh"}
           </Button>
         </div>
       </div>
@@ -110,8 +110,8 @@ export default function AnalyticsEventsPage() {
                         {e.event_type}
                       </span>
                     </td>
-                    <td className="px-2 align-top">{e.session_id ?? ''}</td>
-                    <td className="px-2 align-top">{e.user_id ?? ''}</td>
+                    <td className="px-2 align-top">{e.session_id ?? ""}</td>
+                    <td className="px-2 align-top">{e.user_id ?? ""}</td>
                     <td className="px-2 align-top">
                       <pre className="max-h-40 overflow-auto whitespace-pre-wrap break-words rounded bg-black/20 p-2 text-xs text-white/70">
                         {JSON.stringify(e.event_data ?? {}, null, 2)}

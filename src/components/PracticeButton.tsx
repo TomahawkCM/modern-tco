@@ -1,14 +1,16 @@
-'use client';
+"use client";
 
-import { Play, Target } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { useAuth } from '@/contexts/AuthContext';
-import { usePractice } from '@/contexts/PracticeContext';
-import type { Difficulty, TCODomain } from '@/types/exam';
+import { Button } from "@/components/ui/button";
+import { useAuth } from "@/contexts/AuthContext";
+import { usePractice } from "@/contexts/PracticeContext";
+import type { Difficulty, TCODomain } from "@/types/exam";
+import { Play, Target } from "lucide-react";
 
 interface PracticeButtonProps {
   moduleId: string;
   domainEnum: TCODomain | string;
+  targetTags: string[];
+  objectiveIds: string[];
   difficulty: Difficulty;
   children?: React.ReactNode;
   className?: string;
@@ -17,9 +19,11 @@ interface PracticeButtonProps {
 export default function PracticeButton({
   moduleId,
   domainEnum,
+  targetTags,
+  objectiveIds,
   difficulty,
-  children = 'Start Practice Session',
-  className = '',
+  children = "Start Practice Session",
+  className = "",
 }: PracticeButtonProps) {
   const { startModulePractice, isLoading: practiceLoading } = usePractice();
   const { user, loading: authLoading } = useAuth();
@@ -28,6 +32,12 @@ export default function PracticeButton({
     startModulePractice(moduleId, {
       domain: domainEnum as unknown as TCODomain,
       questionCount: 15,
+      // Additional hints can be used by session manager if supported
+      // @ts-ignore keep flexible for future extensions
+      targetTags,
+      // @ts-ignore keep flexible for future extensions
+      objectiveIds,
+      // @ts-ignore keep flexible for future extensions
       difficulty,
     });
   };

@@ -1,11 +1,9 @@
-import { useAuth } from '@/contexts/AuthContext';
-import { studyModulesService } from '@/lib/study-modules';
-import type { UserBookmarkWithDetails } from '@/types/supabase';
-
+import { useAuth } from "@/contexts/AuthContext";
+import { studyModulesService } from "@/lib/study-modules";
+import type { UserBookmarkWithDetails } from "@/types/supabase";
 // Local alias used across UI code
 type UserStudyBookmark = UserBookmarkWithDetails;
-
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
 export function useBookmarks() {
   const { user } = useAuth();
@@ -28,8 +26,8 @@ export function useBookmarks() {
         const userBookmarks = await studyModulesService.getUserBookmarks(user.id);
         setBookmarks(userBookmarks);
       } catch (err) {
-        setError(err instanceof Error ? err.message : 'Failed to load bookmarks');
-        console.error('Error loading user bookmarks:', err);
+        setError(err instanceof Error ? err.message : "Failed to load bookmarks");
+        console.error("Error loading user bookmarks:", err);
       } finally {
         setLoading(false);
       }
@@ -54,7 +52,7 @@ export function useBookmarks() {
       setBookmarks((prev) => [newBookmark, ...prev]);
       return newBookmark;
     } catch (err) {
-      const message = err instanceof Error ? err.message : 'Failed to add bookmark';
+      const message = err instanceof Error ? err.message : "Failed to add bookmark";
       setError(message);
       throw new Error(message);
     }
@@ -70,7 +68,7 @@ export function useBookmarks() {
       // Update local state
       setBookmarks((prev) => prev.filter((bookmark) => bookmark.section_id !== sectionId));
     } catch (err) {
-      const message = err instanceof Error ? err.message : 'Failed to remove bookmark';
+      const message = err instanceof Error ? err.message : "Failed to remove bookmark";
       setError(message);
       throw new Error(message);
     }
@@ -94,7 +92,7 @@ export function useBookmarks() {
 
       return updatedBookmark;
     } catch (err) {
-      const message = err instanceof Error ? err.message : 'Failed to update bookmark notes';
+      const message = err instanceof Error ? err.message : "Failed to update bookmark notes";
       setError(message);
       throw new Error(message);
     }

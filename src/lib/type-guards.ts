@@ -4,16 +4,16 @@
 
 export type UnknownRecord = Record<string, unknown>;
 
-export const isString = (value: unknown): value is string => typeof value === 'string';
+export const isString = (value: unknown): value is string => typeof value === "string";
 
 export const isNumber = (value: unknown): value is number => {
-  return typeof value === 'number' && !Number.isNaN(value);
+  return typeof value === "number" && !Number.isNaN(value);
 };
 
-export const isBoolean = (value: unknown): value is boolean => typeof value === 'boolean';
+export const isBoolean = (value: unknown): value is boolean => typeof value === "boolean";
 
 export const isObject = (value: unknown): value is UnknownRecord => {
-  return typeof value === 'object' && value !== null && !Array.isArray(value);
+  return typeof value === "object" && value !== null && !Array.isArray(value);
 };
 
 export const isArray = (value: unknown): value is unknown[] => Array.isArray(value);
@@ -27,7 +27,7 @@ export const isNotNull = <T>(value: T | null | undefined): value is T => {
 };
 
 export const hasId = (obj: unknown): obj is { id: string | number } => {
-  if (!isObject(obj) || !('id' in obj)) {
+  if (!isObject(obj) || !("id" in obj)) {
     return false;
   }
 
@@ -36,7 +36,7 @@ export const hasId = (obj: unknown): obj is { id: string | number } => {
 };
 
 export const hasTitle = (obj: unknown): obj is { title: string } => {
-  return isObject(obj) && 'title' in obj && isString(obj.title);
+  return isObject(obj) && "title" in obj && isString(obj.title);
 };
 
 export interface StudyModuleLike {
@@ -51,11 +51,11 @@ export const isStudyModule = (value: unknown): value is StudyModuleLike => {
     return false;
   }
 
-  if ('domain' in value && value.domain !== null && !isString(value.domain)) {
+  if ("domain" in value && value.domain !== null && !isString(value.domain)) {
     return false;
   }
 
-  if ('sections' in value && value.sections !== null && !isArray(value.sections)) {
+  if ("sections" in value && value.sections !== null && !isArray(value.sections)) {
     return false;
   }
 
@@ -74,7 +74,7 @@ export const isStudySection = (value: unknown): value is StudySectionLike => {
     return false;
   }
 
-  if (!('module_id' in value) || (!isString(value.module_id) && !isNumber(value.module_id))) {
+  if (!("module_id" in value) || (!isString(value.module_id) && !isNumber(value.module_id))) {
     return false;
   }
 
@@ -174,17 +174,14 @@ export const isExamSession = (value: unknown): value is ExamSessionLike => {
   }
 
   const record = value;
-  const { id, mode, questions, currentIndex, answers, startTime, completed } =
-    record as unknown as ExamSessionLike;
+  const { id, mode, questions, currentIndex, answers, startTime, completed } = record as unknown as ExamSessionLike;
   return (
     isString(id) &&
     isString(mode) &&
     Array.isArray(questions) &&
     isNumber(currentIndex) &&
     isObject(answers) &&
-    ((startTime instanceof Date && !Number.isNaN(startTime.getTime())) ||
-      isString(startTime) ||
-      isNumber(startTime)) &&
+    ((startTime instanceof Date && !Number.isNaN(startTime.getTime())) || isString(startTime) || isNumber(startTime)) &&
     isBoolean(completed)
   );
 };
@@ -193,7 +190,7 @@ export const safeStringAccess = (obj: unknown, key: string): string => {
   if (isObject(obj) && key in obj && isString(obj[key])) {
     return obj[key];
   }
-  return '';
+  return "";
 };
 
 export const safeNumberAccess = (obj: unknown, key: string): number => {

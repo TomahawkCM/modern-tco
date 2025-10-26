@@ -3,14 +3,14 @@
  * Comprehensive error recovery, rate limiting, and resilience features
  */
 
-import Anthropic from '@anthropic-ai/sdk';
+import Anthropic from "@anthropic-ai/sdk";
 import {
-  type AIModel,
   type AnthropicConfig,
-  type DifficultyLevel,
-  StudyExplanation,
   type TCOQuestionGeneration,
-} from '@/types/anthropic';
+  StudyExplanation,
+  type AIModel,
+  type DifficultyLevel,
+} from "@/types/anthropic";
 
 export interface RetryConfig {
   maxRetries: number;
@@ -35,8 +35,8 @@ export interface CircuitBreakerConfig {
 export class EnhancedAnthropicService {
   private client: Anthropic;
   private readonly maxTokens = 4000;
-  private readonly model: AIModel = 'claude-3-5-sonnet-20241022';
-  private readonly fallbackModel: AIModel = 'claude-3-5-haiku-20241022';
+  private readonly model: AIModel = "claude-3-5-sonnet-20241022";
+  private readonly fallbackModel: AIModel = "claude-3-5-haiku-20241022";
 
   // Error handling and resilience
   private retryConfig: RetryConfig;
@@ -88,7 +88,7 @@ export class EnhancedAnthropicService {
    */
   async generateQuestion(
     topic: string,
-    difficulty: DifficultyLevel = 'medium',
+    difficulty: DifficultyLevel = "medium",
     options?: {
       practicalScenario?: boolean;
       taniumVersion?: string;
@@ -130,8 +130,8 @@ export class EnhancedAnthropicService {
     options?: any
   ): Promise<TCOQuestionGeneration> {
     const practicalScenario = options?.practicalScenario || false;
-    const taniumVersion = options?.taniumVersion || 'latest';
-    const subtopic = options?.subtopic || '';
+    const taniumVersion = options?.taniumVersion || "latest";
+    const subtopic = options?.subtopic || "";
 
     const prompt = this.buildQuestionPrompt(topic, difficulty, {
       practicalScenario,
@@ -144,18 +144,18 @@ export class EnhancedAnthropicService {
         model: this.model,
         max_tokens: this.maxTokens,
         temperature: 0.7,
-        messages: [{ role: 'user', content: prompt }],
+        messages: [{ role: "user", content: prompt }],
         system: this.getSystemPrompt(),
       })
     );
 
-    const content = response.content[0].type === 'text' ? response.content[0].text : '';
+    const content = response.content[0].type === "text" ? response.content[0].text : "";
 
     try {
       const parsed = JSON.parse(content);
       return this.validateAndFormatQuestion(parsed, topic, difficulty, options);
     } catch (parseError) {
-      console.warn('Failed to parse JSON, attempting fallback extraction');
+      console.warn("Failed to parse JSON, attempting fallback extraction");
       return this.extractQuestionFromText(content, topic, difficulty, options);
     }
   }
@@ -173,7 +173,7 @@ export class EnhancedAnthropicService {
 
     // Strategy 1: Try with simpler prompt
     try {
-      console.log('📝 Trying simplified prompt');
+      console.log("📝 Trying simplified prompt");
       const simplePrompt = this.buildSimpleQuestionPrompt(topic, difficulty);
 
       const response = await this.makeAPICall(() =>
@@ -181,41 +181,41 @@ export class EnhancedAnthropicService {
           model: this.fallbackModel,
           max_tokens: 2000,
           temperature: 0.5,
-          messages: [{ role: 'user', content: simplePrompt }],
+          messages: [{ role: "user", content: simplePrompt }],
         })
       );
 
-      const content = response.content[0].type === 'text' ? response.content[0].text : '';
+      const content = response.content[0].type === "text" ? response.content[0].text : "";
       const parsed = JSON.parse(content);
 
       return this.validateAndFormatQuestion(parsed, topic, difficulty, options);
     } catch (fallbackError) {
-      console.warn('📝 Simplified prompt failed:', fallbackError);
+      console.warn("📝 Simplified prompt failed:", fallbackError);
     }
 
     // Strategy 2: Use template-based generation
     try {
-      console.log('🔧 Using template-based generation');
+      console.log("🔧 Using template-based generation");
       return this.generateTemplateQuestion(topic, difficulty, options);
     } catch (templateError) {
-      console.warn('🔧 Template generation failed:', templateError);
+      console.warn("🔧 Template generation failed:", templateError);
     }
 
     // Strategy 3: Return cached question if available
     if (options?.fallbackToCache) {
       try {
-        console.log('💾 Attempting cache fallback');
+        console.log("💾 Attempting cache fallback");
         const cachedQuestion = await this.getCachedQuestion(topic, difficulty);
         if (cachedQuestion) {
           return cachedQuestion;
         }
       } catch (cacheError) {
-        console.warn('💾 Cache fallback failed:', cacheError);
+        console.warn("💾 Cache fallback failed:", cacheError);
       }
     }
 
     // Final fallback: Generate basic question
-    console.warn('⚠️ All strategies failed, generating basic question');
+    console.warn("⚠️ All strategies failed, generating basic question");
     return this.generateBasicFallbackQuestion(topic, difficulty, originalError);
   }
 
@@ -297,13 +297,13 @@ export class EnhancedAnthropicService {
 
     // Reset circuit breaker if timeout passed
     if (this.isCircuitOpen && now - this.lastFailureTime > this.circuitBreakerConfig.resetTimeout) {
-      console.log('🔄 Circuit breaker reset attempt');
+      console.log("🔄 Circuit breaker reset attempt");
       this.isCircuitOpen = false;
       this.failureCount = 0;
     }
 
     if (this.isCircuitOpen) {
-      throw new Error('Circuit breaker is OPEN - too many recent failures');
+      throw new Error("Circuit breaker is OPEN - too many recent failures");
     }
   }
 
@@ -340,19 +340,19 @@ export class EnhancedAnthropicService {
       return await apiCall();
     } catch (error: any) {
       // Enhance error with additional context
-      if (error?.error?.type === 'rate_limit_error') {
+      if (error?.error?.type === "rate_limit_error") {
         throw new Error(`Rate limited by Anthropic API: ${error.error.message}`);
       }
 
-      if (error?.error?.type === 'overloaded_error') {
+      if (error?.error?.type === "overloaded_error") {
         throw new Error(`Anthropic API overloaded: ${error.error.message}`);
       }
 
-      if (error?.error?.type === 'invalid_request_error') {
+      if (error?.error?.type === "invalid_request_error") {
         throw new Error(`Invalid request: ${error.error.message}`);
       }
 
-      if (error?.code === 'ENOTFOUND' || error?.code === 'ECONNRESET') {
+      if (error?.code === "ENOTFOUND" || error?.code === "ECONNRESET") {
         throw new Error(`Network error: ${error.message}`);
       }
 
@@ -364,7 +364,7 @@ export class EnhancedAnthropicService {
    * Helper methods
    */
   private calculateRetryDelay(attempt: number): number {
-    let delay = this.retryConfig.baseDelay * this.retryConfig.backoffFactor ** attempt;
+    let delay = this.retryConfig.baseDelay * Math.pow(this.retryConfig.backoffFactor, attempt);
 
     delay = Math.min(delay, this.retryConfig.maxDelay);
 
@@ -376,7 +376,7 @@ export class EnhancedAnthropicService {
   }
 
   private isNonRetryableError(error: any): boolean {
-    const nonRetryableTypes = ['invalid_request_error', 'authentication_error', 'permission_error'];
+    const nonRetryableTypes = ["invalid_request_error", "authentication_error", "permission_error"];
 
     return (
       nonRetryableTypes.includes(error?.error?.type) ||
@@ -405,14 +405,14 @@ export class EnhancedAnthropicService {
 
     return {
       id: this.generateRequestId(),
-      question: template.question.replace('{topic}', topic),
+      question: template.question.replace("{topic}", topic),
       answers: template.answers,
       correctAnswer: template.correctAnswer,
-      explanation: template.explanation.replace('{topic}', topic),
+      explanation: template.explanation.replace("{topic}", topic),
       difficulty,
       topic,
-      subtopic: options?.subtopic || '',
-      taniumVersion: options?.taniumVersion || 'latest',
+      subtopic: options?.subtopic || "",
+      taniumVersion: options?.taniumVersion || "latest",
       practicalScenario: options?.practicalScenario || false,
       estimatedTime: 90,
       learningObjectives: [`Understanding ${topic} concepts`],
@@ -429,17 +429,17 @@ export class EnhancedAnthropicService {
       id: this.generateRequestId(),
       question: `What is a key consideration when working with Tanium ${topic}?`,
       answers: [
-        'Always follow security best practices',
-        'Ignore system requirements',
-        'Skip validation steps',
-        'Disable monitoring',
+        "Always follow security best practices",
+        "Ignore system requirements",
+        "Skip validation steps",
+        "Disable monitoring",
       ],
       correctAnswer: 0,
       explanation: `When working with Tanium ${topic}, it's essential to follow security best practices to ensure system integrity and proper functionality.`,
       difficulty,
       topic,
-      subtopic: '',
-      taniumVersion: 'latest',
+      subtopic: "",
+      taniumVersion: "latest",
       practicalScenario: false,
       estimatedTime: 60,
       learningObjectives: [`Basic ${topic} concepts`],
@@ -461,16 +461,16 @@ export class EnhancedAnthropicService {
   private getQuestionTemplates(): Record<string, any> {
     return {
       default: {
-        question: 'What is an important aspect of {topic} in Tanium?',
+        question: "What is an important aspect of {topic} in Tanium?",
         answers: [
-          'Following best practices and security guidelines',
-          'Ignoring system recommendations',
-          'Bypassing validation steps',
-          'Disabling error checking',
+          "Following best practices and security guidelines",
+          "Ignoring system recommendations",
+          "Bypassing validation steps",
+          "Disabling error checking",
         ],
         correctAnswer: 0,
         explanation:
-          'When working with {topic}, following established best practices and security guidelines ensures reliable and secure operations.',
+          "When working with {topic}, following established best practices and security guidelines ensures reliable and secure operations.",
       },
     };
   }
@@ -485,7 +485,7 @@ export class EnhancedAnthropicService {
   }
 
   private getSystemPrompt(): string {
-    return 'You are a Tanium expert creating TCO certification questions. Focus on practical knowledge and real-world scenarios.';
+    return "You are a Tanium expert creating TCO certification questions. Focus on practical knowledge and real-world scenarios.";
   }
 
   private validateAndFormatQuestion(
@@ -498,13 +498,13 @@ export class EnhancedAnthropicService {
     return {
       id: this.generateRequestId(),
       question: parsed.question || `Question about ${topic}`,
-      answers: Array.isArray(parsed.answers) ? parsed.answers : ['A', 'B', 'C', 'D'],
-      correctAnswer: typeof parsed.correctAnswer === 'number' ? parsed.correctAnswer : 0,
+      answers: Array.isArray(parsed.answers) ? parsed.answers : ["A", "B", "C", "D"],
+      correctAnswer: typeof parsed.correctAnswer === "number" ? parsed.correctAnswer : 0,
       explanation: parsed.explanation || `Explanation for ${topic}`,
       difficulty,
       topic,
-      subtopic: options?.subtopic || '',
-      taniumVersion: options?.taniumVersion || 'latest',
+      subtopic: options?.subtopic || "",
+      taniumVersion: options?.taniumVersion || "latest",
       practicalScenario: options?.practicalScenario || false,
       estimatedTime: parsed.estimatedTime || 90,
       learningObjectives: parsed.learningObjectives || [],

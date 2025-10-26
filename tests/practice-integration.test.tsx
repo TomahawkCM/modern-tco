@@ -1,152 +1,146 @@
-import { fireEvent, render, screen } from '@testing-library/react';
-import type React from 'react';
-import { beforeEach, describe, expect, it, vi } from 'vitest';
-import PracticeButton from '@/components/PracticeButton';
-import { PracticeContext, type PracticeContextType } from '@/contexts/PracticeContext';
-import { getTargetedQuestions } from '@/lib/practice-question-targeting';
-import { PracticeSessionManager } from '@/lib/practice-session-manager';
-import {
-  Difficulty,
-  type PracticeTargeting,
-  type Question,
-  QuestionCategory,
-  TCODomain,
-} from '@/types/exam';
+import PracticeButton from "@/components/PracticeButton";
+import { PracticeContext, PracticeContextType } from "@/contexts/PracticeContext";
+import { getTargetedQuestions } from "@/lib/practice-question-targeting";
+import { PracticeSessionManager } from "@/lib/practice-session-manager";
+import { Difficulty, PracticeTargeting, Question, QuestionCategory, TCODomain } from "@/types/exam";
+import React from "react";
+import { beforeEach, describe, expect, it, vi } from "vitest";
+import { MockAuthProvider, screen, fireEvent, render } from "./test-utils";
 
 // Mock questions for testing
 const mockQuestions: Question[] = [
   {
-    id: 'pq1',
+    id: "pq1",
     question: "What is the key benefit of Tanium's real-time endpoint visibility?",
     choices: [
-      { id: 'a', text: 'Real-time querying' },
-      { id: 'b', text: 'Historical analysis' },
-      { id: 'c', text: 'Reporting' },
-      { id: 'd', text: 'Deployment' },
+      { id: "a", text: "Real-time querying" },
+      { id: "b", text: "Historical analysis" },
+      { id: "c", text: "Reporting" },
+      { id: "d", text: "Deployment" },
     ],
-    correctAnswerId: 'a',
+    correctAnswerId: "a",
     domain: TCODomain.ASKING_QUESTIONS, // Use enum
     difficulty: Difficulty.BEGINNER, // Use enum
     category: QuestionCategory.PLATFORM_FUNDAMENTALS, // Use enum
-    explanation: '', // Added missing property
-    tags: ['fundamentals'], // Ensure exact targeting can match
+    explanation: "", // Added missing property
+    tags: ["fundamentals"], // Ensure exact targeting can match
     consoleSteps: [], // Added missing property
-    context: '', // Added missing property
+    context: "", // Added missing property
     createdAt: new Date(), // Added missing property
     updatedAt: new Date(), // Added missing property
   },
   {
-    id: 'pq2',
-    question: 'How do you define a computer group in Tanium?',
+    id: "pq2",
+    question: "How do you define a computer group in Tanium?",
     choices: [
-      { id: 'a', text: 'Manual selection' },
-      { id: 'b', text: 'Rule-based criteria' },
-      { id: 'c', text: 'Import from file' },
-      { id: 'd', text: 'Copy existing group' },
+      { id: "a", text: "Manual selection" },
+      { id: "b", text: "Rule-based criteria" },
+      { id: "c", text: "Import from file" },
+      { id: "d", text: "Copy existing group" },
     ],
-    correctAnswerId: 'b',
+    correctAnswerId: "b",
     domain: TCODomain.REFINING_QUESTIONS, // Use enum
     difficulty: Difficulty.INTERMEDIATE, // Use enum
     category: QuestionCategory.CONSOLE_PROCEDURES, // Use enum
-    explanation: '', // Added missing property
+    explanation: "", // Added missing property
     tags: [], // Added missing property
     consoleSteps: [], // Added missing property
-    context: '', // Added missing property
+    context: "", // Added missing property
     createdAt: new Date(), // Added missing property
     updatedAt: new Date(), // Added missing property
   },
   {
-    id: 'pq3',
-    question: 'Which of the following is NOT a parameter for Tanium packages?',
+    id: "pq3",
+    question: "Which of the following is NOT a parameter for Tanium packages?",
     choices: [
-      { id: 'a', text: 'Package parameters' },
-      { id: 'b', text: 'Target group size' },
-      { id: 'c', text: 'Approval status' },
-      { id: 'd', text: 'All of the above' },
+      { id: "a", text: "Package parameters" },
+      { id: "b", text: "Target group size" },
+      { id: "c", text: "Approval status" },
+      { id: "d", text: "All of the above" },
     ],
-    correctAnswerId: 'c',
+    correctAnswerId: "c",
     domain: TCODomain.TAKING_ACTION, // Use enum
     difficulty: Difficulty.INTERMEDIATE, // Use enum
     category: QuestionCategory.PRACTICAL_SCENARIOS, // Use enum
-    explanation: '', // Added missing property
+    explanation: "", // Added missing property
     tags: [], // Added missing property
     consoleSteps: [], // Added missing property
-    context: '', // Added missing property
+    context: "", // Added missing property
     createdAt: new Date(), // Added missing property
     updatedAt: new Date(), // Added missing property
   },
 ];
 
-describe('Practice Integration System', () => {
-  describe('getTargetedQuestions', () => {
-    it('should prioritize exact matches', () => {
+describe("Practice Integration System", () => {
+  describe("getTargetedQuestions", () => {
+    it("should prioritize exact matches", () => {
       const targeting: PracticeTargeting = {
-        moduleId: 'pq1', // Corrected moduleId
+        moduleId: "pq1", // Corrected moduleId
         primaryDomain: TCODomain.ASKING_QUESTIONS, // Use enum
         targetObjectives: [],
-        requiredTags: ['fundamentals'], // Corrected tag
+        requiredTags: ["fundamentals"], // Corrected tag
         optionalTags: [],
         minQuestions: 1,
         idealQuestions: 2,
-        fallbackStrategy: 'expand-domain',
+        fallbackStrategy: "expand-domain",
       };
 
       const result = getTargetedQuestions(mockQuestions, targeting);
 
       expect(result.questions).toHaveLength(1);
-      expect(result.questions[0].id).toBe('pq1');
+      expect(result.questions[0].id).toBe("pq1");
       // With fewer than the minimum recommended questions, we should suggest expanding criteria
-      expect(result.recommendedFallback).toBe('expand-criteria');
+      expect(result.recommendedFallback).toBe("expand-criteria");
     });
 
-    it('should expand to domain if exact match is insufficient', () => {
+    it("should expand to domain if exact match is insufficient", () => {
       const targeting: PracticeTargeting = {
-        moduleId: 'nonexistent-module',
+        moduleId: "nonexistent-module",
         primaryDomain: TCODomain.ASKING_QUESTIONS, // Use enum
         targetObjectives: [],
-        requiredTags: ['nonexistent-tag'],
+        requiredTags: ["nonexistent-tag"],
         optionalTags: [],
         minQuestions: 1,
         idealQuestions: 10,
-        fallbackStrategy: 'expand-domain',
+        fallbackStrategy: "expand-domain",
       };
 
       const result = getTargetedQuestions(mockQuestions, targeting);
 
       expect(result.questions).toHaveLength(1);
-      expect(result.questions[0].id).toBe('pq1');
-      expect(result.recommendedFallback).toBe('expand-criteria'); // Updated assertion
+      expect(result.questions[0].id).toBe("pq1");
+      expect(result.recommendedFallback).toBe("expand-criteria"); // Updated assertion
     });
 
-    it('should reduce specificity if domain expansion is insufficient', () => {
+    it("should reduce specificity if domain expansion is insufficient", () => {
       const targeting: PracticeTargeting = {
-        moduleId: 'nonexistent-module',
+        moduleId: "nonexistent-module",
         primaryDomain: TCODomain.TAKING_ACTION, // Use enum
         targetObjectives: [],
-        requiredTags: ['nonexistent-tag'],
+        requiredTags: ["nonexistent-tag"],
         optionalTags: [],
         minQuestions: 1,
         idealQuestions: 10,
-        fallbackStrategy: 'reduce-specificity',
+        fallbackStrategy: "reduce-specificity",
       };
 
       const result = getTargetedQuestions(mockQuestions, targeting);
 
       expect(result.questions).toHaveLength(1);
-      expect(result.questions[0].id).toBe('pq3');
-      expect(result.recommendedFallback).toBe('expand-criteria'); // Updated assertion
+      expect(result.questions[0].id).toBe("pq3");
+      expect(result.recommendedFallback).toBe("expand-criteria"); // Updated assertion
     });
 
-    it('should provide mixed content as a last resort', () => {
+    it("should provide mixed content as a last resort", () => {
       const targeting: PracticeTargeting = {
-        moduleId: 'nonexistent-module',
+        moduleId: "nonexistent-module",
         primaryDomain: TCODomain.SECURITY, // Use enum (assuming it has no questions in mockQuestions)
         targetObjectives: [],
         requiredTags: [],
         optionalTags: [],
         minQuestions: 1,
         idealQuestions: 10,
-        fallbackStrategy: 'mixed-content',
+        fallbackStrategy: "mixed-content",
       };
 
       const result = getTargetedQuestions(mockQuestions, targeting);
@@ -154,36 +148,36 @@ describe('Practice Integration System', () => {
       // Security domain has no direct matches; mixed-content will return available related domain questions
       expect(result.questions.length).toBeGreaterThan(0);
       // With fewer than the recommended minimum, suggest expanding criteria
-      expect(result.recommendedFallback).toBe('expand-criteria');
+      expect(result.recommendedFallback).toBe("expand-criteria");
     });
 
-    it('should handle empty initial question sets gracefully', () => {
+    it("should handle empty initial question sets gracefully", () => {
       const targeting: PracticeTargeting = {
-        moduleId: 'm1',
+        moduleId: "m1",
         primaryDomain: TCODomain.ASKING_QUESTIONS, // Use enum
         targetObjectives: [],
         requiredTags: [],
         optionalTags: [],
         minQuestions: 5,
         idealQuestions: 10,
-        fallbackStrategy: 'mixed-content',
+        fallbackStrategy: "mixed-content",
       };
 
       const result = getTargetedQuestions([], targeting);
 
       expect(result.questions).toHaveLength(0);
       expect(result.isEmpty).toBe(true);
-      expect(result.recommendedFallback).toBe('mixed-content');
+      expect(result.recommendedFallback).toBe("mixed-content");
     });
 
-    it('should handle malformed questions gracefully', () => {
+    it("should handle malformed questions gracefully", () => {
       const malformedQuestions: Question[] = [
-        // @ts-expect-error - simulating malformed data
+        // @ts-ignore - simulating malformed data
         {
-          id: 'malformed1',
-          question: 'Invalid question',
-          choices: 'not an array', // Malformed choices
-          correctAnswerId: 'a',
+          id: "malformed1",
+          question: "Invalid question",
+          choices: "not an array", // Malformed choices
+          correctAnswerId: "a",
           domain: TCODomain.ASKING_QUESTIONS,
           difficulty: Difficulty.BEGINNER,
           category: QuestionCategory.PLATFORM_FUNDAMENTALS,
@@ -191,14 +185,14 @@ describe('Practice Integration System', () => {
       ];
 
       const targeting: PracticeTargeting = {
-        moduleId: 'm1',
+        moduleId: "m1",
         primaryDomain: TCODomain.ASKING_QUESTIONS, // Use enum
         targetObjectives: [],
         requiredTags: [],
         optionalTags: [],
         minQuestions: 1,
         idealQuestions: 2,
-        fallbackStrategy: 'expand-domain',
+        fallbackStrategy: "expand-domain",
       };
 
       // Malformed items lack choices, but the targeting system does not validate choices.
@@ -208,27 +202,27 @@ describe('Practice Integration System', () => {
       expect(result.isEmpty === true || result.isEmpty === false).toBe(true);
     });
 
-    it('should correctly identify when no fallbacks were used', () => {
+    it("should correctly identify when no fallbacks were used", () => {
       const targeting: PracticeTargeting = {
-        moduleId: 'pq1', // Corrected moduleId to match a question
+        moduleId: "pq1", // Corrected moduleId to match a question
         primaryDomain: TCODomain.ASKING_QUESTIONS, // Use enum
         targetObjectives: [],
-        requiredTags: ['platform-overview'], // Corrected tag
+        requiredTags: ["platform-overview"], // Corrected tag
         optionalTags: [],
         minQuestions: 1,
         idealQuestions: 2,
-        fallbackStrategy: 'expand-domain',
+        fallbackStrategy: "expand-domain",
       };
       // Ensure mockQuestions[0] matches the targeting criteria
       const result = getTargetedQuestions([mockQuestions[0]], targeting);
 
       expect(result.questions).toHaveLength(1);
       // For small exact matches under minimum threshold, recommend expanding criteria
-      expect(result.recommendedFallback).toBe('expand-criteria');
+      expect(result.recommendedFallback).toBe("expand-criteria");
     });
   });
 
-  describe('PracticeButton Component', () => {
+  describe("PracticeButton Component", () => {
     const mockStartModulePractice = vi.fn();
     const mockStartDomainPractice = vi.fn(); // Mock startDomainPractice
     const mockGetQuestionPool = vi.fn(); // Mock getQuestionPool
@@ -254,13 +248,13 @@ describe('Practice Integration System', () => {
       sessionState: null, // Add sessionState
       sessionManager: new PracticeSessionManager([], {
         primaryDomain: TCODomain.ASKING_QUESTIONS,
-        moduleId: 'test',
+        moduleId: "test",
         targetObjectives: [],
         requiredTags: [],
         optionalTags: [],
         minQuestions: 1,
         idealQuestions: 10,
-        fallbackStrategy: 'expand-domain',
+        fallbackStrategy: "expand-domain",
       }), // Add sessionManager
       currentQuestion: null, // Add currentQuestion
       questionPool: {
@@ -279,7 +273,7 @@ describe('Practice Integration System', () => {
       incorrectAnswers: 0, // Add incorrectAnswers
       skippedQuestions: 0, // Add skippedQuestions
       hintsUsed: 0, // Add hintsUsed
-      feedback: '', // Add feedback
+      feedback: "", // Add feedback
       showExplanation: false, // Add showExplanation
       toggleExplanation: vi.fn(), // Add toggleExplanation
       reviewMode: false, // Add reviewMode
@@ -302,133 +296,141 @@ describe('Practice Integration System', () => {
       vi.clearAllMocks();
       mockPracticeContext.sessionManager = new PracticeSessionManager([], {
         primaryDomain: TCODomain.ASKING_QUESTIONS,
-        moduleId: 'test',
+        moduleId: "test",
         targetObjectives: [],
         requiredTags: [],
         optionalTags: [],
         minQuestions: 1,
         idealQuestions: 10,
-        fallbackStrategy: 'expand-domain',
+        fallbackStrategy: "expand-domain",
       });
     });
 
-    it('should render with correct props', () => {
+    it("should render with correct props", () => {
       render(
-        <MockPracticeProvider>
-          <PracticeButton
-            moduleId="module-asking-questions"
-            domainEnum={TCODomain.ASKING_QUESTIONS} // Use enum
-            targetTags={['Interact', 'Sensors']}
-            objectiveIds={['obj-asking-formulate']}
-            difficulty={Difficulty.BEGINNER} // Use enum
-          />
-        </MockPracticeProvider>
+        <MockAuthProvider>
+          <MockPracticeProvider>
+            <PracticeButton
+              moduleId="module-asking-questions"
+              domainEnum={TCODomain.ASKING_QUESTIONS} // Use enum
+              targetTags={["Interact", "Sensors"]}
+              objectiveIds={["obj-asking-formulate"]}
+              difficulty={Difficulty.BEGINNER} // Use enum
+            />
+          </MockPracticeProvider>
+        </MockAuthProvider>
       );
 
-      expect(screen.getByText('Start Practice Session')).toBeInTheDocument();
-      expect(screen.getByRole('button')).toBeInTheDocument();
+      expect(screen.getByText("Start Practice Session")).toBeInTheDocument();
+      expect(screen.getByRole("button")).toBeInTheDocument();
     });
 
-    it('should call startModulePractice when clicked', () => {
+    it("should call startModulePractice when clicked", () => {
       render(
-        <MockPracticeProvider>
-          <PracticeButton
-            moduleId="module-asking-questions"
-            domainEnum={TCODomain.ASKING_QUESTIONS} // Use enum
-            targetTags={['Interact', 'Sensors']}
-            objectiveIds={['obj-asking-formulate']}
-            difficulty={Difficulty.BEGINNER} // Use enum
-          />
-        </MockPracticeProvider>
+        <MockAuthProvider>
+          <MockPracticeProvider>
+            <PracticeButton
+              moduleId="module-asking-questions"
+              domainEnum={TCODomain.ASKING_QUESTIONS} // Use enum
+              targetTags={["Interact", "Sensors"]}
+              objectiveIds={["obj-asking-formulate"]}
+              difficulty={Difficulty.BEGINNER} // Use enum
+            />
+          </MockPracticeProvider>
+        </MockAuthProvider>
       );
 
-      const button = screen.getByRole('button');
+      const button = screen.getByRole("button");
       fireEvent.click(button);
 
       expect(mockStartModulePractice).toHaveBeenCalledWith(
-        'module-asking-questions',
+        "module-asking-questions",
         expect.objectContaining({
           domain: TCODomain.ASKING_QUESTIONS,
-          targetTags: ['Interact', 'Sensors'],
-          objectiveIds: ['obj-asking-formulate'],
+          targetTags: ["Interact", "Sensors"],
+          objectiveIds: ["obj-asking-formulate"],
           difficulty: Difficulty.BEGINNER,
           questionCount: 15,
         })
       );
     });
 
-    it('should reflect disabled state when loading', () => {
+    it("should reflect disabled state when loading", () => {
       const loadingContext: PracticeContextType = { ...mockPracticeContext, isLoading: true }; // Explicitly type
 
       render(
-        <PracticeContext.Provider value={loadingContext}>
-          <PracticeButton
-            moduleId="module-asking-questions"
-            domainEnum={TCODomain.ASKING_QUESTIONS} // Use enum
-            targetTags={['Interact']}
-            objectiveIds={['obj-asking-formulate']}
-            difficulty={Difficulty.BEGINNER} // Use enum
-          />
-        </PracticeContext.Provider>
+        <MockAuthProvider>
+          <PracticeContext.Provider value={loadingContext}>
+            <PracticeButton
+              moduleId="module-asking-questions"
+              domainEnum={TCODomain.ASKING_QUESTIONS} // Use enum
+              targetTags={["Interact"]}
+              objectiveIds={["obj-asking-formulate"]}
+              difficulty={Difficulty.BEGINNER} // Use enum
+            />
+          </PracticeContext.Provider>
+        </MockAuthProvider>
       );
 
-      expect(screen.getByRole('button')).toBeDisabled();
+      expect(screen.getByRole("button")).toBeDisabled();
     });
 
-    it('should accept custom children text', () => {
+    it("should accept custom children text", () => {
       render(
-        <MockPracticeProvider>
-          <PracticeButton
-            moduleId="module-asking-questions"
-            domainEnum={TCODomain.ASKING_QUESTIONS} // Use enum
-            targetTags={['Interact']}
-            objectiveIds={['obj-asking-formulate']}
-            difficulty={Difficulty.BEGINNER} // Use enum
-          >
-            Start Module Practice
-          </PracticeButton>
-        </MockPracticeProvider>
+        <MockAuthProvider>
+          <MockPracticeProvider>
+            <PracticeButton
+              moduleId="module-asking-questions"
+              domainEnum={TCODomain.ASKING_QUESTIONS} // Use enum
+              targetTags={["Interact"]}
+              objectiveIds={["obj-asking-formulate"]}
+              difficulty={Difficulty.BEGINNER} // Use enum
+            >
+              Start Module Practice
+            </PracticeButton>
+          </MockPracticeProvider>
+        </MockAuthProvider>
       );
 
-      expect(screen.getByText('Start Module Practice')).toBeInTheDocument();
+      expect(screen.getByText("Start Module Practice")).toBeInTheDocument();
     });
   });
 
-  describe('Edge Cases and Error Handling', () => {
-    it('should handle empty question pool gracefully', () => {
+  describe("Edge Cases and Error Handling", () => {
+    it("should handle empty question pool gracefully", () => {
       const targeting: PracticeTargeting = {
-        moduleId: 'm1',
+        moduleId: "m1",
         primaryDomain: TCODomain.ASKING_QUESTIONS, // Use enum
         targetObjectives: [],
         requiredTags: [],
         optionalTags: [],
         minQuestions: 5,
         idealQuestions: 10,
-        fallbackStrategy: 'mixed-content',
+        fallbackStrategy: "mixed-content",
       };
 
       const result = getTargetedQuestions([], targeting);
 
       expect(result.questions).toHaveLength(0);
-      expect(result.recommendedFallback).toBe('mixed-content'); // Updated assertion
+      expect(result.recommendedFallback).toBe("mixed-content"); // Updated assertion
     });
 
-    it('should handle malformed question data', () => {
+    it("should handle malformed question data", () => {
       const malformedQuestions: Question[] = [
         {
-          id: 'malformed1',
-          question: 'Invalid question',
+          id: "malformed1",
+          question: "Invalid question",
           choices: [],
-          correctAnswerId: 'a',
+          correctAnswerId: "a",
           domain: TCODomain.ASKING_QUESTIONS,
           difficulty: Difficulty.BEGINNER,
           category: QuestionCategory.PLATFORM_FUNDAMENTALS,
         } as Question,
         {
-          id: 'malformed2',
-          question: 'Invalid question 2',
+          id: "malformed2",
+          question: "Invalid question 2",
           choices: [],
-          correctAnswerId: 'b',
+          correctAnswerId: "b",
           domain: TCODomain.REFINING_QUESTIONS,
           difficulty: Difficulty.INTERMEDIATE,
           category: QuestionCategory.CONSOLE_PROCEDURES,
@@ -436,14 +438,14 @@ describe('Practice Integration System', () => {
       ];
 
       const targeting: PracticeTargeting = {
-        moduleId: 'test',
+        moduleId: "test",
         primaryDomain: TCODomain.ASKING_QUESTIONS, // Use enum
         targetObjectives: [],
         requiredTags: [],
         optionalTags: [],
         minQuestions: 1,
         idealQuestions: 2,
-        fallbackStrategy: 'expand-domain',
+        fallbackStrategy: "expand-domain",
       };
 
       // Targeting ignores choice validation; allow up to 1 item due to domain-only fallback
@@ -452,16 +454,16 @@ describe('Practice Integration System', () => {
       expect([true, false]).toContain(result.isEmpty);
     });
 
-    it('should handle very large question counts', () => {
+    it("should handle very large question counts", () => {
       const targeting: PracticeTargeting = {
-        moduleId: 'module-asking-questions',
+        moduleId: "module-asking-questions",
         primaryDomain: TCODomain.ASKING_QUESTIONS, // Use enum
         targetObjectives: [],
         requiredTags: [],
         optionalTags: [],
         minQuestions: 1,
         idealQuestions: 1000, // Unrealistically large
-        fallbackStrategy: 'expand-domain',
+        fallbackStrategy: "expand-domain",
       };
 
       const result = getTargetedQuestions(mockQuestions, targeting);
@@ -470,3 +472,4 @@ describe('Practice Integration System', () => {
     });
   });
 });
+

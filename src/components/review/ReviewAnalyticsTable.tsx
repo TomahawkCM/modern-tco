@@ -1,23 +1,6 @@
-'use client';
+"use client";
 
-import {
-  AlertTriangle,
-  BookOpen,
-  ChevronDown,
-  ChevronUp,
-  Filter,
-  Layers,
-  Search,
-  Server,
-  Shield,
-  Wrench,
-} from 'lucide-react';
-import { useMemo, useState } from 'react';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Progress } from '@/components/ui/progress';
+import { useMemo, useState } from "react";
 import {
   Table,
   TableBody,
@@ -25,9 +8,33 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '@/components/ui/table';
-import { cn } from '@/lib/utils';
-import { Difficulty, TCODomain } from '@/types/exam';
+} from "@/components/ui/table";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Progress } from "@/components/ui/progress";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Input } from "@/components/ui/input";
+import { TCODomain, Difficulty } from "@/types/exam";
+import { cn } from "@/lib/utils";
+import {
+  BookOpen,
+  Server,
+  Layers,
+  Shield,
+  Wrench,
+  AlertTriangle,
+  Filter,
+  ChevronUp,
+  ChevronDown,
+  Search,
+} from "lucide-react";
 
 interface ReviewAnalyticsTableProps {
   incorrectAnswers: Array<{
@@ -37,8 +44,8 @@ interface ReviewAnalyticsTableProps {
     reviewed: boolean;
     timestamp: Date;
   }>;
-  onDomainFilter?: (domain: TCODomain | 'all') => void;
-  onDifficultyFilter?: (difficulty: Difficulty | 'all') => void;
+  onDomainFilter?: (domain: TCODomain | "all") => void;
+  onDifficultyFilter?: (difficulty: Difficulty | "all") => void;
 }
 
 type AnalyticsRow = {
@@ -55,17 +62,17 @@ type AnalyticsRow = {
   };
 };
 
-type SortField = 'domain' | 'total' | 'reviewed' | 'pending' | 'percentage';
-type SortOrder = 'asc' | 'desc';
+type SortField = "domain" | "total" | "reviewed" | "pending" | "percentage";
+type SortOrder = "asc" | "desc";
 
 export function ReviewAnalyticsTable({
   incorrectAnswers,
   onDomainFilter,
   onDifficultyFilter,
 }: ReviewAnalyticsTableProps) {
-  const [sortField, setSortField] = useState<SortField>('total');
-  const [sortOrder, setSortOrder] = useState<SortOrder>('desc');
-  const [searchTerm, setSearchTerm] = useState('');
+  const [sortField, setSortField] = useState<SortField>("total");
+  const [sortOrder, setSortOrder] = useState<SortOrder>("desc");
+  const [searchTerm, setSearchTerm] = useState("");
 
   // Calculate analytics data
   const analyticsData = useMemo(() => {
@@ -117,23 +124,23 @@ export function ReviewAnalyticsTable({
       let aVal: any, bVal: any;
 
       switch (sortField) {
-        case 'domain':
+        case "domain":
           aVal = a.domain;
           bVal = b.domain;
           break;
-        case 'total':
+        case "total":
           aVal = a.total;
           bVal = b.total;
           break;
-        case 'reviewed':
+        case "reviewed":
           aVal = a.reviewed;
           bVal = b.reviewed;
           break;
-        case 'pending':
+        case "pending":
           aVal = a.pending;
           bVal = b.pending;
           break;
-        case 'percentage':
+        case "percentage":
           aVal = a.percentageReviewed;
           bVal = b.percentageReviewed;
           break;
@@ -141,7 +148,7 @@ export function ReviewAnalyticsTable({
           return 0;
       }
 
-      if (sortOrder === 'asc') {
+      if (sortOrder === "asc") {
         return aVal < bVal ? -1 : aVal > bVal ? 1 : 0;
       } else {
         return aVal > bVal ? -1 : aVal < bVal ? 1 : 0;
@@ -151,10 +158,10 @@ export function ReviewAnalyticsTable({
 
   const handleSort = (field: SortField) => {
     if (sortField === field) {
-      setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
+      setSortOrder(sortOrder === "asc" ? "desc" : "asc");
     } else {
       setSortField(field);
-      setSortOrder('desc');
+      setSortOrder("desc");
     }
   };
 
@@ -175,22 +182,22 @@ export function ReviewAnalyticsTable({
 
   const getDomainColor = (domain: TCODomain) => {
     const colorMap = {
-      [TCODomain.ASKING_QUESTIONS]: 'text-[#22c55e]',
-      [TCODomain.REFINING_QUESTIONS]: 'text-primary',
-      [TCODomain.REFINING_TARGETING]: 'text-primary',
-      [TCODomain.TAKING_ACTION]: 'text-primary',
-      [TCODomain.NAVIGATION_MODULES]: 'text-red-400',
-      [TCODomain.REPORTING_EXPORT]: 'text-[#f97316]',
-      [TCODomain.SECURITY]: 'text-orange-400',
-      [TCODomain.FUNDAMENTALS]: 'text-primary',
-      [TCODomain.TROUBLESHOOTING]: 'text-pink-400',
+      [TCODomain.ASKING_QUESTIONS]: "text-[#22c55e]",
+      [TCODomain.REFINING_QUESTIONS]: "text-primary",
+      [TCODomain.REFINING_TARGETING]: "text-primary",
+      [TCODomain.TAKING_ACTION]: "text-primary",
+      [TCODomain.NAVIGATION_MODULES]: "text-red-400",
+      [TCODomain.REPORTING_EXPORT]: "text-[#f97316]",
+      [TCODomain.SECURITY]: "text-orange-400",
+      [TCODomain.FUNDAMENTALS]: "text-primary",
+      [TCODomain.TROUBLESHOOTING]: "text-pink-400",
     };
-    return colorMap[domain] || 'text-muted-foreground';
+    return colorMap[domain] || "text-muted-foreground";
   };
 
   const SortIcon = ({ field }: { field: SortField }) => {
     if (sortField !== field) return null;
-    return sortOrder === 'asc' ? (
+    return sortOrder === "asc" ? (
       <ChevronUp className="ml-1 inline h-3 w-3" />
     ) : (
       <ChevronDown className="ml-1 inline h-3 w-3" />
@@ -249,32 +256,32 @@ export function ReviewAnalyticsTable({
             <TableRow className="border-white/10">
               <TableHead
                 className="cursor-pointer text-foreground hover:text-tanium-accent"
-                onClick={() => handleSort('domain')}
+                onClick={() => handleSort("domain")}
               >
                 Domain <SortIcon field="domain" />
               </TableHead>
               <TableHead
                 className="cursor-pointer text-center text-foreground hover:text-tanium-accent"
-                onClick={() => handleSort('total')}
+                onClick={() => handleSort("total")}
               >
                 Total <SortIcon field="total" />
               </TableHead>
               <TableHead
                 className="cursor-pointer text-center text-foreground hover:text-tanium-accent"
-                onClick={() => handleSort('reviewed')}
+                onClick={() => handleSort("reviewed")}
               >
                 Reviewed <SortIcon field="reviewed" />
               </TableHead>
               <TableHead
                 className="cursor-pointer text-center text-foreground hover:text-tanium-accent"
-                onClick={() => handleSort('pending')}
+                onClick={() => handleSort("pending")}
               >
                 Pending <SortIcon field="pending" />
               </TableHead>
               <TableHead className="text-center text-foreground">By Difficulty</TableHead>
               <TableHead
                 className="cursor-pointer text-center text-foreground hover:text-tanium-accent"
-                onClick={() => handleSort('percentage')}
+                onClick={() => handleSort("percentage")}
               >
                 Progress <SortIcon field="percentage" />
               </TableHead>
@@ -289,7 +296,7 @@ export function ReviewAnalyticsTable({
                 <TableRow key={row.domain} className="border-white/10 hover:bg-white/5">
                   <TableCell>
                     <div className="flex items-center gap-2">
-                      <Icon className={cn('h-4 w-4', color)} />
+                      <Icon className={cn("h-4 w-4", color)} />
                       <span className="text-foreground">{row.domain}</span>
                     </div>
                   </TableCell>
@@ -339,9 +346,7 @@ export function ReviewAnalyticsTable({
                         className="h-2 flex-1"
                         aria-label={`${row.domain} review progress: ${row.percentageReviewed}% complete`}
                       />
-                      <span className="text-xs text-muted-foreground">
-                        {row.percentageReviewed}%
-                      </span>
+                      <span className="text-xs text-muted-foreground">{row.percentageReviewed}%</span>
                     </div>
                   </TableCell>
                   <TableCell className="text-center">

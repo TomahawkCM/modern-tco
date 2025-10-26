@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import React from 'react';
+import React from "react";
 
 interface ErrorBoundaryProps {
   children: React.ReactNode;
@@ -24,11 +24,7 @@ export class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoun
   }
 
   override componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
-    console.error(
-      `[ErrorBoundary ${this.props.name ?? 'Unknown'}] Caught error:`,
-      error,
-      errorInfo
-    );
+    console.error(`[ErrorBoundary ${this.props.name ?? 'Unknown'}] Caught error:`, error, errorInfo);
   }
 
   override render() {
@@ -39,9 +35,7 @@ export class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoun
 
       return (
         <div className="p-4 m-4 bg-red-900/20 border border-red-500 rounded-lg text-red-200">
-          <h2 className="text-lg font-bold mb-2">
-            Component Error in {this.props.name ?? 'Component'}
-          </h2>
+          <h2 className="text-lg font-bold mb-2">Component Error in {this.props.name ?? 'Component'}</h2>
           <p className="text-sm">{this.state.error?.message ?? 'An unknown error occurred'}</p>
           <details className="mt-2">
             <summary className="cursor-pointer text-xs">Stack Trace</summary>

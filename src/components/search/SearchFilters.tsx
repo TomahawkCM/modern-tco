@@ -1,16 +1,16 @@
-'use client';
+"use client";
 
-import { ChevronDown, ChevronRight, RotateCcw } from 'lucide-react';
-import { useState } from 'react';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Checkbox } from '@/components/ui/checkbox';
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
-import { Label } from '@/components/ui/label';
-import { Separator } from '@/components/ui/separator';
-import { useSearch } from '@/contexts/SearchContext';
-import { cn } from '@/lib/utils';
-import { Difficulty, QuestionCategory, TCODomain } from '@/types/exam';
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Label } from "@/components/ui/label";
+import { Badge } from "@/components/ui/badge";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { Separator } from "@/components/ui/separator";
+import { ChevronDown, ChevronRight, RotateCcw } from "lucide-react";
+import { useSearch } from "@/contexts/SearchContext";
+import { TCODomain, Difficulty, QuestionCategory } from "@/types/exam";
+import { cn } from "@/lib/utils";
 
 export function SearchFilters() {
   const { state, setFilters } = useSearch();
@@ -53,7 +53,7 @@ export function SearchFilters() {
   };
 
   const handleFeatureChange = (
-    feature: 'hasExplanation' | 'hasConsoleSteps',
+    feature: "hasExplanation" | "hasConsoleSteps",
     checked: boolean | undefined
   ) => {
     setFilters({ [feature]: checked });
@@ -95,7 +95,7 @@ export function SearchFilters() {
       )}
 
       {/* TCO Domains */}
-      <Collapsible open={expandedSections.domains} onOpenChange={() => toggleSection('domains')}>
+      <Collapsible open={expandedSections.domains} onOpenChange={() => toggleSection("domains")}>
         <CollapsibleTrigger asChild>
           <Button variant="ghost" className="h-auto w-full justify-between p-0 text-left">
             <span className="text-sm font-medium text-foreground">TCO Domains</span>
@@ -120,8 +120,8 @@ export function SearchFilters() {
                 <Label
                   htmlFor={`domain-${domain}`}
                   className={cn(
-                    'flex-1 cursor-pointer text-sm transition-colors',
-                    isChecked ? 'text-foreground' : 'text-muted-foreground'
+                    "flex-1 cursor-pointer text-sm transition-colors",
+                    isChecked ? "text-foreground" : "text-muted-foreground"
                   )}
                 >
                   {domain}
@@ -142,7 +142,7 @@ export function SearchFilters() {
       {/* Difficulty Levels */}
       <Collapsible
         open={expandedSections.difficulties}
-        onOpenChange={() => toggleSection('difficulties')}
+        onOpenChange={() => toggleSection("difficulties")}
       >
         <CollapsibleTrigger asChild>
           <Button variant="ghost" className="h-auto w-full justify-between p-0 text-left">
@@ -170,28 +170,28 @@ export function SearchFilters() {
                 <Label
                   htmlFor={`difficulty-${difficulty}`}
                   className={cn(
-                    'flex-1 cursor-pointer text-sm transition-colors',
-                    isChecked ? 'text-foreground' : 'text-muted-foreground'
+                    "flex-1 cursor-pointer text-sm transition-colors",
+                    isChecked ? "text-foreground" : "text-muted-foreground"
                   )}
                 >
                   {difficulty}
                 </Label>
                 <div className="flex items-center gap-1">
-                  {difficulty === 'Beginner' && (
+                  {difficulty === "Beginner" && (
                     <div className="flex gap-px">
                       <div className="h-2 w-2 rounded-full bg-[#22c55e]"></div>
                       <div className="h-2 w-2 rounded-full bg-gray-400"></div>
                       <div className="h-2 w-2 rounded-full bg-gray-400"></div>
                     </div>
                   )}
-                  {difficulty === 'Intermediate' && (
+                  {difficulty === "Intermediate" && (
                     <div className="flex gap-px">
                       <div className="h-2 w-2 rounded-full bg-yellow-500"></div>
                       <div className="h-2 w-2 rounded-full bg-yellow-500"></div>
                       <div className="h-2 w-2 rounded-full bg-gray-400"></div>
                     </div>
                   )}
-                  {difficulty === 'Advanced' && (
+                  {difficulty === "Advanced" && (
                     <div className="flex gap-px">
                       <div className="h-2 w-2 rounded-full bg-red-500"></div>
                       <div className="h-2 w-2 rounded-full bg-red-500"></div>
@@ -210,7 +210,7 @@ export function SearchFilters() {
       {/* Question Categories */}
       <Collapsible
         open={expandedSections.categories}
-        onOpenChange={() => toggleSection('categories')}
+        onOpenChange={() => toggleSection("categories")}
       >
         <CollapsibleTrigger asChild>
           <Button variant="ghost" className="h-auto w-full justify-between p-0 text-left">
@@ -236,8 +236,8 @@ export function SearchFilters() {
                 <Label
                   htmlFor={`category-${category}`}
                   className={cn(
-                    'flex-1 cursor-pointer text-sm transition-colors',
-                    isChecked ? 'text-foreground' : 'text-muted-foreground'
+                    "flex-1 cursor-pointer text-sm transition-colors",
+                    isChecked ? "text-foreground" : "text-muted-foreground"
                   )}
                 >
                   {category}
@@ -251,7 +251,7 @@ export function SearchFilters() {
       <Separator className="bg-white/10" />
 
       {/* Special Features */}
-      <Collapsible open={expandedSections.features} onOpenChange={() => toggleSection('features')}>
+      <Collapsible open={expandedSections.features} onOpenChange={() => toggleSection("features")}>
         <CollapsibleTrigger asChild>
           <Button variant="ghost" className="h-auto w-full justify-between p-0 text-left">
             <span className="text-sm font-medium text-foreground">Features</span>
@@ -268,7 +268,7 @@ export function SearchFilters() {
               id="has-explanation"
               checked={state.filters.hasExplanation === true}
               onCheckedChange={(checked) =>
-                handleFeatureChange('hasExplanation', checked ? true : undefined)
+                handleFeatureChange("hasExplanation", checked ? true : undefined)
               }
               className="border-white/20 data-[state=checked]:bg-tanium-accent"
             />
@@ -285,7 +285,7 @@ export function SearchFilters() {
               id="has-console-steps"
               checked={state.filters.hasConsoleSteps === true}
               onCheckedChange={(checked) =>
-                handleFeatureChange('hasConsoleSteps', checked ? true : undefined)
+                handleFeatureChange("hasConsoleSteps", checked ? true : undefined)
               }
               className="border-white/20 data-[state=checked]:bg-tanium-accent"
             />

@@ -82,9 +82,9 @@ fi
 echo ""
 echo "4️⃣  Backing up generated content..."
 
-if [ -d "data-archive/generated" ]; then
-    cp -r data-archive/generated "${BACKUP_DIR}/generated_content_backup"
-    GENERATED_COUNT=$(ls -1 data-archive/generated/*.ts 2>/dev/null | wc -l)
+if [ -d "src/data/generated" ]; then
+    cp -r src/data/generated "${BACKUP_DIR}/generated_content_backup"
+    GENERATED_COUNT=$(ls -1 src/data/generated/*.ts 2>/dev/null | wc -l)
     echo -e "${GREEN}   ✅ ${GENERATED_COUNT} generated files backed up${NC}"
 else
     mkdir -p "${BACKUP_DIR}/generated_content_backup"
@@ -166,7 +166,7 @@ cp ${BACKUP_DIR}/config_backup/package.json package.json
 
 ### Restore Generated Content
 \`\`\`bash
-cp -r ${BACKUP_DIR}/generated_content_backup/* data-archive/generated/
+cp -r ${BACKUP_DIR}/generated_content_backup/* src/data/generated/
 \`\`\`
 
 ## Verification
@@ -226,8 +226,8 @@ fi
 # Restore generated content
 if [ -d "${BACKUP_DIR}/generated_content_backup" ]; then
     echo "3️⃣  Restoring generated content..."
-    mkdir -p data-archive/generated
-    cp -r ${BACKUP_DIR}/generated_content_backup/* data-archive/generated/
+    mkdir -p src/data/generated
+    cp -r ${BACKUP_DIR}/generated_content_backup/* src/data/generated/
     echo "   ✅ Generated content restored"
 fi
 

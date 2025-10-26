@@ -1,12 +1,5 @@
 import { calculateExamResults } from '@/lib/examLogic';
-import {
-  Difficulty,
-  ExamMode,
-  type ExamSession,
-  type Question,
-  QuestionCategory,
-  TCODomain,
-} from '@/types/exam';
+import { ExamMode, type ExamSession, type Question, Difficulty, QuestionCategory, TCODomain } from '@/types/exam';
 
 function q(id: string, domain: TCODomain): Question {
   return {
@@ -52,3 +45,4 @@ describe('calculateExamResults', () => {
     expect(sum).toBe(3);
   });
 });
+

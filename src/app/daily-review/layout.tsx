@@ -1,7 +1,11 @@
-'use client';
+"use client";
 
-import { ReviewProvider } from '@/contexts/ReviewContext';
+import { ReviewProvider } from "@/contexts/ReviewContext";
 
-export default function DailyReviewLayout({ children }: { children: React.ReactNode }) {
+export default function DailyReviewLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return <ReviewProvider>{children}</ReviewProvider>;
 }

@@ -1,14 +1,14 @@
-'use client';
+"use client";
 
-import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 export default function StudyRedirect() {
   const router = useRouter();
 
   useEffect(() => {
     // Redirect /study to /modules (unified study experience)
-    router.replace('/modules');
+    router.replace("/modules");
   }, [router]);
 
   return (

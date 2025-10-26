@@ -2,7 +2,7 @@
 // The config you add here will be used whenever a users loads a page in their browser.
 // https://docs.sentry.io/platforms/javascript/guides/nextjs/
 
-import * as Sentry from '@sentry/nextjs';
+import * as Sentry from "@sentry/nextjs";
 
 Sentry.init({
   dsn: process.env.NEXT_PUBLIC_SENTRY_DSN,
@@ -34,29 +34,29 @@ Sentry.init({
   // Ignore common errors that aren't actionable
   ignoreErrors: [
     // Browser extensions
-    'top.GLOBALS',
+    "top.GLOBALS",
     // Random plugins/extensions
-    'originalCreateNotification',
-    'canvas.contentDocument',
-    'MyApp_RemoveAllHighlights',
-    'http://tt.epicplay.com',
+    "originalCreateNotification",
+    "canvas.contentDocument",
+    "MyApp_RemoveAllHighlights",
+    "http://tt.epicplay.com",
     "Can't find variable: ZiteReader",
-    'jigsaw is not defined',
-    'ComboSearch is not defined',
-    'http://loading.retry.widdit.com/',
-    'atomicFindClose',
+    "jigsaw is not defined",
+    "ComboSearch is not defined",
+    "http://loading.retry.widdit.com/",
+    "atomicFindClose",
     // Facebook flakiness
-    'fb_xd_fragment',
+    "fb_xd_fragment",
     // ISP "optimizing" proxy - `Cache-Control: no-transform` seems to reduce this. (thanks @acdha)
     // See http://stackoverflow.com/questions/4113268/how-to-stop-javascript-injection-from-vodafone-proxy
-    'bmi_SafeAddOnload',
-    'EBCallBackMessageReceived',
+    "bmi_SafeAddOnload",
+    "EBCallBackMessageReceived",
     // See http://toolbar.conduit.com/Developer/HtmlAndGadget/Methods/JSInjection.aspx
-    'conduitPage',
+    "conduitPage",
     // Network errors
-    'Network request failed',
-    'NetworkError',
-    'Failed to fetch',
+    "Network request failed",
+    "NetworkError",
+    "Failed to fetch",
   ],
 
   // Ignore errors from certain URLs
@@ -79,8 +79,8 @@ Sentry.init({
     // Add custom context for Tanium TCO app
     if (event.contexts) {
       event.contexts.app = {
-        name: 'Tanium TCO LMS',
-        version: '1.0.0',
+        name: "Tanium TCO LMS",
+        version: "1.0.0",
       };
     }
 

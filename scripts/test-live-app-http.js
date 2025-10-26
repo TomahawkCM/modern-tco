@@ -16,7 +16,7 @@ const TIMEOUT = 30000;
 const RESULTS_FILE = 'docs/knowledge-base/LIVE_APP_TEST_RESULTS.md';
 
 // Test results storage
-const testResults = {
+let testResults = {
   timestamp: new Date().toISOString(),
   url: BASE_URL,
   testMethod: 'HTTP/HTML Analysis (WSL2 Browser-Free)',
@@ -26,8 +26,8 @@ const testResults = {
     total: 0,
     passed: 0,
     failed: 0,
-    warnings: 0,
-  },
+    warnings: 0
+  }
 };
 
 // Utility functions
@@ -37,7 +37,7 @@ function addTest(name, status, details, data = null) {
     status, // 'PASS', 'FAIL', 'WARN'
     details,
     data,
-    timestamp: new Date().toISOString(),
+    timestamp: new Date().toISOString()
   };
   testResults.tests.push(test);
   testResults.summary.total++;
@@ -50,37 +50,33 @@ function addTest(name, status, details, data = null) {
 
 function makeHttpRequest(url, options = {}) {
   return new Promise((resolve, reject) => {
-    const req = https.request(
-      url,
-      {
-        timeout: TIMEOUT,
-        headers: {
-          'User-Agent': 'Claude Code Test Suite (WSL2/HTTP)',
-          Accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-          'Accept-Language': 'en-US,en;q=0.5',
-          'Accept-Encoding': 'gzip, deflate',
-          Connection: 'keep-alive',
-          ...options.headers,
-        },
-        ...options,
+    const req = https.request(url, {
+      timeout: TIMEOUT,
+      headers: {
+        'User-Agent': 'Claude Code Test Suite (WSL2/HTTP)',
+        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+        'Accept-Language': 'en-US,en;q=0.5',
+        'Accept-Encoding': 'gzip, deflate',
+        'Connection': 'keep-alive',
+        ...options.headers
       },
-      (res) => {
-        let data = '';
+      ...options
+    }, (res) => {
+      let data = '';
 
-        res.on('data', (chunk) => {
-          data += chunk;
-        });
+      res.on('data', (chunk) => {
+        data += chunk;
+      });
 
-        res.on('end', () => {
-          resolve({
-            statusCode: res.statusCode,
-            headers: res.headers,
-            body: data,
-            responseTime: Date.now() - startTime,
-          });
+      res.on('end', () => {
+        resolve({
+          statusCode: res.statusCode,
+          headers: res.headers,
+          body: data,
+          responseTime: Date.now() - startTime
         });
-      }
-    );
+      });
+    });
 
     const startTime = Date.now();
 
@@ -116,18 +112,10 @@ function analyzeHTML(html) {
     hasNextJS: /__next/i.test(html) || /_next/i.test(html) || /next\.js/i.test(html),
     tcoKeywords: {
       tanium: /tanium/gi.test(html) ? (html.match(/tanium/gi) || []).length : 0,
-      tco: /tco|total cost of ownership/gi.test(html)
-        ? (html.match(/tco|total cost of ownership/gi) || []).length
-        : 0,
-      assessment: /assessment|exam|test|quiz/gi.test(html)
-        ? (html.match(/assessment|exam|test|quiz/gi) || []).length
-        : 0,
-      certification: /certification|certified/gi.test(html)
-        ? (html.match(/certification|certified/gi) || []).length
-        : 0,
-      practice: /practice|training/gi.test(html)
-        ? (html.match(/practice|training/gi) || []).length
-        : 0,
+      tco: /tco|total cost of ownership/gi.test(html) ? (html.match(/tco|total cost of ownership/gi) || []).length : 0,
+      assessment: /assessment|exam|test|quiz/gi.test(html) ? (html.match(/assessment|exam|test|quiz/gi) || []).length : 0,
+      certification: /certification|certified/gi.test(html) ? (html.match(/certification|certified/gi) || []).length : 0,
+      practice: /practice|training/gi.test(html) ? (html.match(/practice|training/gi) || []).length : 0
     },
     hasVideoElements: /<video/i.test(html) || /youtube/i.test(html) || /video/i.test(html),
     hasProgressBar: /progress/i.test(html) || /progressbar/i.test(html),
@@ -138,8 +126,8 @@ function analyzeHTML(html) {
       description: /<meta[^>]*name=['"](description)['"]/i.test(html),
       keywords: /<meta[^>]*name=['"](keywords)['"]/i.test(html),
       ogTitle: /<meta[^>]*property=['"](og:title)['"]/i.test(html),
-      ogDescription: /<meta[^>]*property=['"](og:description)['"]/i.test(html),
-    },
+      ogDescription: /<meta[^>]*property=['"](og:description)['"]/i.test(html)
+    }
   };
 
   return analysis;
@@ -147,7 +135,7 @@ function analyzeHTML(html) {
 
 async function runTests() {
   console.log('🚀 Starting Comprehensive Live Application Test Suite (HTTP-based)');
-  console.log('='.repeat(70));
+  console.log('=' .repeat(70));
   console.log(`🌐 Testing URL: ${BASE_URL}`);
   console.log(`🕒 Started: ${new Date().toLocaleString()}`);
   console.log(`🔧 Method: HTTP requests + HTML analysis (Browser-free testing)`);
@@ -168,11 +156,7 @@ async function runTests() {
       if (response.statusCode === 200) {
         addTest('HTTP Connectivity', 'PASS', `Status 200 OK, response time: ${responseTime}ms`);
       } else {
-        addTest(
-          'HTTP Connectivity',
-          'WARN',
-          `Status ${response.statusCode}, response time: ${responseTime}ms`
-        );
+        addTest('HTTP Connectivity', 'WARN', `Status ${response.statusCode}, response time: ${responseTime}ms`);
       }
 
       // Response time performance
@@ -183,6 +167,7 @@ async function runTests() {
       } else {
         addTest('Response Time', 'FAIL', `Slow response time: ${responseTime}ms (>5s)`);
       }
+
     } catch (error) {
       addTest('HTTP Connectivity', 'FAIL', `Connection failed: ${error.message}`);
       return; // Can't continue without basic connectivity
@@ -207,10 +192,10 @@ async function runTests() {
       'x-content-type-options': headers['x-content-type-options'],
       'x-xss-protection': headers['x-xss-protection'],
       'strict-transport-security': headers['strict-transport-security'],
-      'content-security-policy': headers['content-security-policy'],
+      'content-security-policy': headers['content-security-policy']
     };
 
-    const securityCount = Object.values(securityHeaders).filter((h) => h).length;
+    const securityCount = Object.values(securityHeaders).filter(h => h).length;
     if (securityCount >= 3) {
       addTest('Security Headers', 'PASS', `${securityCount}/5 security headers present`);
     } else if (securityCount >= 1) {
@@ -257,11 +242,8 @@ async function runTests() {
 
     // Interactive elements
     if (analysis.buttonCount > 0 || analysis.inputCount > 0) {
-      addTest(
-        'Interactive Elements',
-        'PASS',
-        `Found ${analysis.buttonCount} buttons and ${analysis.inputCount} input fields`
-      );
+      addTest('Interactive Elements', 'PASS',
+        `Found ${analysis.buttonCount} buttons and ${analysis.inputCount} input fields`);
     } else {
       addTest('Interactive Elements', 'WARN', 'No interactive elements detected');
     }
@@ -271,23 +253,14 @@ async function runTests() {
     console.log('-'.repeat(50));
 
     // Test 4: TCO-specific content analysis
-    const totalTcoKeywords = Object.values(analysis.tcoKeywords).reduce(
-      (sum, count) => sum + count,
-      0
-    );
+    const totalTcoKeywords = Object.values(analysis.tcoKeywords).reduce((sum, count) => sum + count, 0);
 
     if (totalTcoKeywords >= 5) {
-      addTest(
-        'TCO Content Recognition',
-        'PASS',
-        `Strong TCO content detected: ${totalTcoKeywords} keyword matches`
-      );
+      addTest('TCO Content Recognition', 'PASS',
+        `Strong TCO content detected: ${totalTcoKeywords} keyword matches`);
     } else if (totalTcoKeywords >= 1) {
-      addTest(
-        'TCO Content Recognition',
-        'WARN',
-        `Some TCO content detected: ${totalTcoKeywords} keyword matches`
-      );
+      addTest('TCO Content Recognition', 'WARN',
+        `Some TCO content detected: ${totalTcoKeywords} keyword matches`);
     } else {
       addTest('TCO Content Recognition', 'FAIL', 'No TCO-related content detected');
     }
@@ -298,11 +271,7 @@ async function runTests() {
     }
 
     if (analysis.tcoKeywords.assessment > 0) {
-      addTest(
-        'Assessment Content',
-        'PASS',
-        `${analysis.tcoKeywords.assessment} assessment references found`
-      );
+      addTest('Assessment Content', 'PASS', `${analysis.tcoKeywords.assessment} assessment references found`);
     }
 
     console.log('');
@@ -391,30 +360,18 @@ async function runTests() {
       '/api/health',
       '/api/status',
       '/api/practice-questions',
-      '/api/assessments',
+      '/api/assessments'
     ];
 
     for (const endpoint of apiEndpoints) {
       try {
         const apiResponse = await makeHttpRequest(`https://modern-tco.vercel.app${endpoint}`);
         if (apiResponse.statusCode === 200) {
-          addTest(
-            `API Endpoint: ${endpoint}`,
-            'PASS',
-            `Endpoint responding with status ${apiResponse.statusCode}`
-          );
+          addTest(`API Endpoint: ${endpoint}`, 'PASS', `Endpoint responding with status ${apiResponse.statusCode}`);
         } else if (apiResponse.statusCode === 404) {
-          addTest(
-            `API Endpoint: ${endpoint}`,
-            'WARN',
-            `Endpoint not found (${apiResponse.statusCode})`
-          );
+          addTest(`API Endpoint: ${endpoint}`, 'WARN', `Endpoint not found (${apiResponse.statusCode})`);
         } else {
-          addTest(
-            `API Endpoint: ${endpoint}`,
-            'WARN',
-            `Endpoint returned status ${apiResponse.statusCode}`
-          );
+          addTest(`API Endpoint: ${endpoint}`, 'WARN', `Endpoint returned status ${apiResponse.statusCode}`);
         }
       } catch (error) {
         // API endpoints might not exist, so we mark as info rather than failure
@@ -429,16 +386,13 @@ async function runTests() {
       try {
         const assetResponse = await makeHttpRequest(`https://modern-tco.vercel.app${assetPath}`);
         if (assetResponse.statusCode === 200) {
-          addTest(
-            `Static Asset: ${assetPath}`,
-            'PASS',
-            `Asset available (${assetResponse.statusCode})`
-          );
+          addTest(`Static Asset: ${assetPath}`, 'PASS', `Asset available (${assetResponse.statusCode})`);
         }
       } catch (error) {
         addTest(`Static Asset: ${assetPath}`, 'WARN', `Asset not found or inaccessible`);
       }
     }
+
   } catch (error) {
     addTest('Test Suite Execution', 'FAIL', `Critical error: ${error.message}`);
     console.error('Critical test suite error:', error);
@@ -451,14 +405,12 @@ async function runTests() {
 async function generateReport() {
   console.log('');
   console.log('📊 Test Results Summary');
-  console.log('='.repeat(60));
+  console.log('=' .repeat(60));
   console.log(`✅ Passed: ${testResults.summary.passed}`);
   console.log(`❌ Failed: ${testResults.summary.failed}`);
   console.log(`⚠️  Warnings: ${testResults.summary.warnings}`);
   console.log(`📝 Total Tests: ${testResults.summary.total}`);
-  console.log(
-    `🎯 Success Rate: ${((testResults.summary.passed / testResults.summary.total) * 100).toFixed(1)}%`
-  );
+  console.log(`🎯 Success Rate: ${((testResults.summary.passed / testResults.summary.total) * 100).toFixed(1)}%`);
 
   // Create markdown report
   let markdown = `# Live Application Test Results\n\n`;
@@ -494,34 +446,17 @@ async function generateReport() {
 
   // Categorize tests
   const categories = {
-    'Infrastructure & Performance': [
-      'HTTP Connectivity',
-      'Response Time',
-      'Content Type',
-      'Security Headers',
-      'Caching Headers',
-    ],
-    'HTML Structure & UI': [
-      'Page Title',
-      'Navigation Structure',
-      'Main Content Area',
-      'Interactive Elements',
-    ],
+    'Infrastructure & Performance': ['HTTP Connectivity', 'Response Time', 'Content Type', 'Security Headers', 'Caching Headers'],
+    'HTML Structure & UI': ['Page Title', 'Navigation Structure', 'Main Content Area', 'Interactive Elements'],
     'Tanium TCO Features': ['TCO Content Recognition', 'Tanium Branding', 'Assessment Content'],
-    'Technical Implementation': [
-      'Next.js Framework',
-      'React Framework',
-      'Framework Detection',
-      'JavaScript Resources',
-      'CSS Resources',
-    ],
+    'Technical Implementation': ['Next.js Framework', 'React Framework', 'Framework Detection', 'JavaScript Resources', 'CSS Resources'],
     'Advanced Features': ['Video System', 'Progress Tracking', 'Theme Support'],
     'SEO & Accessibility': ['SEO Meta Tags', 'Basic Accessibility', 'Image Resources'],
-    'API & Resources': [], // Will be populated dynamically
+    'API & Resources': [] // Will be populated dynamically
   };
 
   // Populate API & Resources category
-  testResults.tests.forEach((test) => {
+  testResults.tests.forEach(test => {
     if (test.name.includes('API Endpoint') || test.name.includes('Static Asset')) {
       categories['API & Resources'].push(test.name);
     }
@@ -534,11 +469,9 @@ async function generateReport() {
 
     markdown += `### ${category}\n\n`;
 
-    const categoryTests = testResults.tests.filter(
-      (test) =>
-        testNames.includes(test.name) ||
-        (category === 'API & Resources' &&
-          (test.name.includes('API Endpoint') || test.name.includes('Static Asset')))
+    const categoryTests = testResults.tests.filter(test =>
+      testNames.includes(test.name) ||
+      (category === 'API & Resources' && (test.name.includes('API Endpoint') || test.name.includes('Static Asset')))
     );
 
     if (categoryTests.length === 0) {
@@ -546,7 +479,7 @@ async function generateReport() {
       return;
     }
 
-    categoryTests.forEach((test) => {
+    categoryTests.forEach(test => {
       const emoji = test.status === 'PASS' ? '✅' : test.status === 'FAIL' ? '❌' : '⚠️';
       markdown += `- ${emoji} **${test.name}**: ${test.details}\n`;
     });
@@ -555,9 +488,9 @@ async function generateReport() {
   });
 
   markdown += `## 🚨 Critical Issues\n\n`;
-  const criticalFailures = testResults.tests.filter((t) => t.status === 'FAIL');
+  const criticalFailures = testResults.tests.filter(t => t.status === 'FAIL');
   if (criticalFailures.length > 0) {
-    criticalFailures.forEach((test) => {
+    criticalFailures.forEach(test => {
       markdown += `- ❌ **${test.name}**: ${test.details}\n`;
     });
   } else {
@@ -565,9 +498,9 @@ async function generateReport() {
   }
 
   markdown += `\n## ⚠️ Areas for Improvement\n\n`;
-  const warnings = testResults.tests.filter((t) => t.status === 'WARN');
+  const warnings = testResults.tests.filter(t => t.status === 'WARN');
   if (warnings.length > 0) {
-    warnings.forEach((test) => {
+    warnings.forEach(test => {
       markdown += `- ⚠️ **${test.name}**: ${test.details}\n`;
     });
   } else {
@@ -575,10 +508,10 @@ async function generateReport() {
   }
 
   markdown += `\n## 🎉 Strong Points\n\n`;
-  const strengths = testResults.tests.filter((t) => t.status === 'PASS');
+  const strengths = testResults.tests.filter(t => t.status === 'PASS');
   const topStrengths = strengths.slice(0, 10); // Show top 10 strengths
   if (topStrengths.length > 0) {
-    topStrengths.forEach((test) => {
+    topStrengths.forEach(test => {
       markdown += `- ✅ **${test.name}**: ${test.details}\n`;
     });
     if (strengths.length > 10) {

@@ -5,22 +5,22 @@
  * Creates database schema using Supabase client with service role
  */
 
-require('dotenv').config({ path: '.env.local' });
-const { createClient } = require('@supabase/supabase-js');
+require("dotenv").config({ path: ".env.local" });
+const { createClient } = require("@supabase/supabase-js");
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
 if (!supabaseUrl || !supabaseServiceKey) {
-  console.error('❌ Missing Supabase environment variables');
-  console.error('Required: NEXT_PUBLIC_SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY');
+  console.error("❌ Missing Supabase environment variables");
+  console.error("Required: NEXT_PUBLIC_SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY");
   process.exit(1);
 }
 
 const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
-console.log('🏗️  Creating TCO Database Schema...');
-console.log('📍 Supabase URL:', supabaseUrl);
+console.log("🏗️  Creating TCO Database Schema...");
+console.log("📍 Supabase URL:", supabaseUrl);
 
 async function createSchema() {
   try {
@@ -85,54 +85,54 @@ async function createSchema() {
     `;
 
     // Execute each table creation
-    console.log('📝 Creating study_domains table...');
-    const { error: domainsError } = await supabase.rpc('exec', { sql: domainsSql });
-    if (domainsError && !domainsError.message.includes('already exists')) {
-      console.error('❌ Error creating domains table:', domainsError);
+    console.log("📝 Creating study_domains table...");
+    const { error: domainsError } = await supabase.rpc("exec", { sql: domainsSql });
+    if (domainsError && !domainsError.message.includes("already exists")) {
+      console.error("❌ Error creating domains table:", domainsError);
       throw domainsError;
     }
 
-    console.log('📝 Creating study_modules table...');
-    const { error: modulesError } = await supabase.rpc('exec', { sql: modulesSql });
-    if (modulesError && !modulesError.message.includes('already exists')) {
-      console.error('❌ Error creating modules table:', modulesError);
+    console.log("📝 Creating study_modules table...");
+    const { error: modulesError } = await supabase.rpc("exec", { sql: modulesSql });
+    if (modulesError && !modulesError.message.includes("already exists")) {
+      console.error("❌ Error creating modules table:", modulesError);
       throw modulesError;
     }
 
-    console.log('📝 Creating study_sections table...');
-    const { error: sectionsError } = await supabase.rpc('exec', { sql: sectionsSql });
-    if (sectionsError && !sectionsError.message.includes('already exists')) {
-      console.error('❌ Error creating sections table:', sectionsError);
+    console.log("📝 Creating study_sections table...");
+    const { error: sectionsError } = await supabase.rpc("exec", { sql: sectionsSql });
+    if (sectionsError && !sectionsError.message.includes("already exists")) {
+      console.error("❌ Error creating sections table:", sectionsError);
       throw sectionsError;
     }
 
-    console.log('📝 Creating practice_questions table...');
-    const { error: questionsError } = await supabase.rpc('exec', { sql: questionsSql });
-    if (questionsError && !questionsError.message.includes('already exists')) {
-      console.error('❌ Error creating questions table:', questionsError);
+    console.log("📝 Creating practice_questions table...");
+    const { error: questionsError } = await supabase.rpc("exec", { sql: questionsSql });
+    if (questionsError && !questionsError.message.includes("already exists")) {
+      console.error("❌ Error creating questions table:", questionsError);
       throw questionsError;
     }
 
     // Insert domain data
-    console.log('📊 Inserting TCO domain data...');
+    console.log("📊 Inserting TCO domain data...");
     const domains = [
-      { domain_number: 1, title: 'Asking Questions', exam_weight: 22, estimated_time_minutes: 180 },
+      { domain_number: 1, title: "Asking Questions", exam_weight: 22, estimated_time_minutes: 180 },
       {
         domain_number: 2,
-        title: 'Refining Questions & Targeting',
+        title: "Refining Questions & Targeting",
         exam_weight: 23,
         estimated_time_minutes: 200,
       },
-      { domain_number: 3, title: 'Taking Action', exam_weight: 15, estimated_time_minutes: 150 },
+      { domain_number: 3, title: "Taking Action", exam_weight: 15, estimated_time_minutes: 150 },
       {
         domain_number: 4,
-        title: 'Navigation & Module Functions',
+        title: "Navigation & Module Functions",
         exam_weight: 23,
         estimated_time_minutes: 180,
       },
       {
         domain_number: 5,
-        title: 'Reporting & Data Export',
+        title: "Reporting & Data Export",
         exam_weight: 17,
         estimated_time_minutes: 160,
       },
@@ -140,8 +140,8 @@ async function createSchema() {
 
     for (const domain of domains) {
       const { error } = await supabase
-        .from('study_domains')
-        .upsert(domain, { onConflict: 'domain_number' });
+        .from("study_domains")
+        .upsert(domain, { onConflict: "domain_number" });
 
       if (error) {
         console.error(`❌ Error inserting domain ${domain.domain_number}:`, error);
@@ -150,10 +150,10 @@ async function createSchema() {
       }
     }
 
-    console.log('🎉 Database schema created successfully!');
-    console.log('📊 Ready for content migration');
+    console.log("🎉 Database schema created successfully!");
+    console.log("📊 Ready for content migration");
   } catch (error) {
-    console.error('❌ Schema creation failed:', error);
+    console.error("❌ Schema creation failed:", error);
     throw error;
   }
 }
@@ -161,10 +161,10 @@ async function createSchema() {
 // Run the schema creation
 createSchema()
   .then(() => {
-    console.log('✅ Schema creation complete');
+    console.log("✅ Schema creation complete");
     process.exit(0);
   })
   .catch((error) => {
-    console.error('💥 Schema creation failed:', error);
+    console.error("💥 Schema creation failed:", error);
     process.exit(1);
   });

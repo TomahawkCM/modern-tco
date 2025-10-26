@@ -1,19 +1,9 @@
 'use client';
 
-import { AnimatePresence, motion } from 'framer-motion';
-import {
-  ArrowUpRight,
-  BookOpen,
-  CheckCircle,
-  ChevronRight,
-  Filter,
-  Info,
-  Search,
-  Star,
-  Target,
-} from 'lucide-react';
-import React, { useMemo, useState } from 'react';
-import { type TermCategory, type TermDefinition, TerminologySearch } from '@/lib/tco-terminology';
+import React, { useState, useEffect, useMemo } from 'react';
+import { Search, BookOpen, Filter, Star, Clock, Target, ChevronRight, ArrowUpRight, CheckCircle, Info } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { TerminologySearch, type TermDefinition, type TermCategory } from '@/lib/tco-terminology';
 
 interface InteractiveGlossaryProps {
   className?: string;
@@ -32,45 +22,45 @@ interface FilterState {
 
 const categoryIcons: Record<TermCategory, React.ComponentType<{ className?: string }>> = {
   'basic-it': BookOpen,
-  networking: Target,
-  security: Star,
-  endpoints: CheckCircle,
+  'networking': Target,
+  'security': Star,
+  'endpoints': CheckCircle,
   'tanium-core': ArrowUpRight,
   'tanium-modules': Target,
-  operations: Info,
-  compliance: Star,
-  troubleshooting: ChevronRight,
+  'operations': Info,
+  'compliance': Star,
+  'troubleshooting': ChevronRight
 };
 
 const categoryColors: Record<TermCategory, string> = {
   'basic-it': 'text-blue-600 bg-blue-50',
-  networking: 'text-[#22c55e] bg-green-50',
-  security: 'text-red-600 bg-red-50',
-  endpoints: 'text-cyan-600 bg-cyan-50',
+  'networking': 'text-[#22c55e] bg-green-50',
+  'security': 'text-red-600 bg-red-50',
+  'endpoints': 'text-cyan-600 bg-cyan-50',
   'tanium-core': 'text-sky-600 bg-sky-50',
   'tanium-modules': 'text-cyan-600 bg-cyan-50',
-  operations: 'text-orange-600 bg-orange-50',
-  compliance: 'text-pink-600 bg-pink-50',
-  troubleshooting: 'text-gray-600 bg-gray-50',
+  'operations': 'text-orange-600 bg-orange-50',
+  'compliance': 'text-pink-600 bg-pink-50',
+  'troubleshooting': 'text-gray-600 bg-gray-50'
 };
 
 const difficultyColors = {
-  beginner: 'text-[#22c55e] bg-green-100',
-  intermediate: 'text-yellow-600 bg-yellow-100',
-  advanced: 'text-red-600 bg-red-100',
+  'beginner': 'text-[#22c55e] bg-green-100',
+  'intermediate': 'text-yellow-600 bg-yellow-100',
+  'advanced': 'text-red-600 bg-red-100'
 };
 
 const importanceColors = {
-  critical: 'text-red-600 bg-red-100',
-  important: 'text-orange-600 bg-orange-100',
-  useful: 'text-blue-600 bg-blue-100',
+  'critical': 'text-red-600 bg-red-100',
+  'important': 'text-orange-600 bg-orange-100',
+  'useful': 'text-blue-600 bg-blue-100'
 };
 
-export function InteractiveGlossary({
-  className = '',
+export function InteractiveGlossary({ 
+  className = '', 
   onTermSelect,
   initialCategory = 'basic-it',
-  showOnlyExamRelevant = false,
+  showOnlyExamRelevant = false 
 }: InteractiveGlossaryProps) {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedTerm, setSelectedTerm] = useState<TermDefinition | null>(null);
@@ -79,7 +69,7 @@ export function InteractiveGlossary({
     difficulty: 'all',
     importance: 'all',
     examRelevant: showOnlyExamRelevant ? true : null,
-    taniumSpecific: null,
+    taniumSpecific: null
   });
   const [showFilters, setShowFilters] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -90,7 +80,7 @@ export function InteractiveGlossary({
   // Filtered and searched terms
   const filteredTerms = useMemo(() => {
     setIsLoading(true);
-
+    
     let results: TermDefinition[] = [];
 
     if (searchTerm.trim()) {
@@ -100,14 +90,12 @@ export function InteractiveGlossary({
     }
 
     // Apply filters
-    results = results.filter((term) => {
+    results = results.filter(term => {
       if (filters.category !== 'all' && term.category !== filters.category) return false;
       if (filters.difficulty !== 'all' && term.difficulty !== filters.difficulty) return false;
       if (filters.importance !== 'all' && term.importance !== filters.importance) return false;
-      if (filters.examRelevant !== null && term.examRelevance !== filters.examRelevant)
-        return false;
-      if (filters.taniumSpecific !== null && term.taniumSpecific !== filters.taniumSpecific)
-        return false;
+      if (filters.examRelevant !== null && term.examRelevance !== filters.examRelevant) return false;
+      if (filters.taniumSpecific !== null && term.taniumSpecific !== filters.taniumSpecific) return false;
       return true;
     });
 
@@ -128,7 +116,7 @@ export function InteractiveGlossary({
       difficulty: 'all',
       importance: 'all',
       examRelevant: null,
-      taniumSpecific: null,
+      taniumSpecific: null
     });
   };
 
@@ -144,9 +132,7 @@ export function InteractiveGlossary({
   }, [filters]);
 
   return (
-    <div
-      className={`bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden ${className}`}
-    >
+    <div className={`bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden ${className}`}>
       {/* Header */}
       <div className="bg-gradient-to-r from-primary to-sky-600 px-6 py-4">
         <div className="flex items-center justify-between">
@@ -201,7 +187,6 @@ export function InteractiveGlossary({
             </button>
             {activeFilterCount > 0 && (
               <button
-                type="button"
                 onClick={resetFilters}
                 className="text-sm text-cyan-600 hover:text-cyan-800"
               >
@@ -226,9 +211,7 @@ export function InteractiveGlossary({
                     <label className="block text-sm font-medium text-gray-700 mb-2">Category</label>
                     <select
                       value={filters.category}
-                      onChange={(e) =>
-                        setFilters({ ...filters, category: e.target.value as TermCategory | 'all' })
-                      }
+                      onChange={(e) => setFilters({ ...filters, category: e.target.value as TermCategory | 'all' })}
                       className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-cyan-500"
                     >
                       <option value="all">All Categories</option>
@@ -246,17 +229,10 @@ export function InteractiveGlossary({
 
                   {/* Difficulty Filter */}
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Difficulty
-                    </label>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">Difficulty</label>
                     <select
                       value={filters.difficulty}
-                      onChange={(e) =>
-                        setFilters({
-                          ...filters,
-                          difficulty: e.target.value as FilterState['difficulty'],
-                        })
-                      }
+                      onChange={(e) => setFilters({ ...filters, difficulty: e.target.value as FilterState['difficulty'] })}
                       className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-cyan-500"
                     >
                       <option value="all">All Levels</option>
@@ -268,17 +244,10 @@ export function InteractiveGlossary({
 
                   {/* Importance Filter */}
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Importance
-                    </label>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">Importance</label>
                     <select
                       value={filters.importance}
-                      onChange={(e) =>
-                        setFilters({
-                          ...filters,
-                          importance: e.target.value as FilterState['importance'],
-                        })
-                      }
+                      onChange={(e) => setFilters({ ...filters, importance: e.target.value as FilterState['importance'] })}
                       className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-cyan-500"
                     >
                       <option value="all">All Importance</option>
@@ -295,12 +264,10 @@ export function InteractiveGlossary({
                         <input
                           type="checkbox"
                           checked={filters.examRelevant === true}
-                          onChange={(e) =>
-                            setFilters({
-                              ...filters,
-                              examRelevant: e.target.checked ? true : null,
-                            })
-                          }
+                          onChange={(e) => setFilters({ 
+                            ...filters, 
+                            examRelevant: e.target.checked ? true : null 
+                          })}
                           className="rounded border-gray-300 text-cyan-600 focus:ring-cyan-500"
                         />
                         <span className="text-sm text-gray-700">Exam Relevant Only</span>
@@ -309,12 +276,10 @@ export function InteractiveGlossary({
                         <input
                           type="checkbox"
                           checked={filters.taniumSpecific === true}
-                          onChange={(e) =>
-                            setFilters({
-                              ...filters,
-                              taniumSpecific: e.target.checked ? true : null,
-                            })
-                          }
+                          onChange={(e) => setFilters({ 
+                            ...filters, 
+                            taniumSpecific: e.target.checked ? true : null 
+                          })}
                           className="rounded border-gray-300 text-cyan-600 focus:ring-cyan-500"
                         />
                         <span className="text-sm text-gray-700">Tanium Specific Only</span>
@@ -354,8 +319,8 @@ export function InteractiveGlossary({
                     transition={{ delay: index * 0.05 }}
                     onClick={() => handleTermSelect(term)}
                     className={`p-3 rounded-lg cursor-pointer transition-all hover:shadow-md ${
-                      selectedTerm?.id === term.id
-                        ? 'bg-cyan-50 border border-cyan-200'
+                      selectedTerm?.id === term.id 
+                        ? 'bg-cyan-50 border border-cyan-200' 
                         : 'bg-gray-50 hover:bg-gray-100'
                     }`}
                   >
@@ -369,14 +334,10 @@ export function InteractiveGlossary({
                           {term.beginnerExplanation}
                         </p>
                         <div className="flex items-center space-x-2 mt-2">
-                          <span
-                            className={`px-2 py-1 text-xs rounded-full ${categoryColors[term.category]}`}
-                          >
+                          <span className={`px-2 py-1 text-xs rounded-full ${categoryColors[term.category]}`}>
                             {term.category}
                           </span>
-                          <span
-                            className={`px-2 py-1 text-xs rounded-full ${difficultyColors[term.difficulty]}`}
-                          >
+                          <span className={`px-2 py-1 text-xs rounded-full ${difficultyColors[term.difficulty]}`}>
                             {term.difficulty}
                           </span>
                           {term.examRelevance && (
@@ -403,25 +364,19 @@ export function InteractiveGlossary({
                 {/* Term Header */}
                 <div>
                   <div className="flex items-center space-x-3 mb-2">
-                    {React.createElement(categoryIcons[selectedTerm.category], {
-                      className: 'w-6 h-6 text-cyan-600',
+                    {React.createElement(categoryIcons[selectedTerm.category], { 
+                      className: "w-6 h-6 text-cyan-600" 
                     })}
                     <h2 className="text-2xl font-bold text-gray-900">{selectedTerm.term}</h2>
                   </div>
                   <div className="flex flex-wrap gap-2">
-                    <span
-                      className={`px-3 py-1 text-sm rounded-full ${categoryColors[selectedTerm.category]}`}
-                    >
+                    <span className={`px-3 py-1 text-sm rounded-full ${categoryColors[selectedTerm.category]}`}>
                       {selectedTerm.category}
                     </span>
-                    <span
-                      className={`px-3 py-1 text-sm rounded-full ${difficultyColors[selectedTerm.difficulty]}`}
-                    >
+                    <span className={`px-3 py-1 text-sm rounded-full ${difficultyColors[selectedTerm.difficulty]}`}>
                       {selectedTerm.difficulty}
                     </span>
-                    <span
-                      className={`px-3 py-1 text-sm rounded-full ${importanceColors[selectedTerm.importance]}`}
-                    >
+                    <span className={`px-3 py-1 text-sm rounded-full ${importanceColors[selectedTerm.importance]}`}>
                       {selectedTerm.importance}
                     </span>
                     {selectedTerm.examRelevance && (
@@ -443,12 +398,10 @@ export function InteractiveGlossary({
                     <h3 className="font-semibold text-gray-900 mb-2">Definition</h3>
                     <p className="text-gray-700 leading-relaxed">{selectedTerm.definition}</p>
                   </div>
-
+                  
                   <div>
                     <h3 className="font-semibold text-gray-900 mb-2">Beginner Explanation</h3>
-                    <p className="text-gray-700 leading-relaxed">
-                      {selectedTerm.beginnerExplanation}
-                    </p>
+                    <p className="text-gray-700 leading-relaxed">{selectedTerm.beginnerExplanation}</p>
                   </div>
                 </div>
 
@@ -494,8 +447,7 @@ export function InteractiveGlossary({
               <BookOpen className="w-16 h-16 mb-4" />
               <h3 className="text-lg font-medium mb-2">Select a term to learn more</h3>
               <p className="text-sm text-center">
-                Click on any term from the list to see detailed explanations, examples, and related
-                concepts
+                Click on any term from the list to see detailed explanations, examples, and related concepts
               </p>
             </div>
           )}

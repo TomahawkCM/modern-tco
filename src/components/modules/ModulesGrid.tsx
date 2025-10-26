@@ -1,13 +1,13 @@
-'use client';
+"use client";
 
-import { Clock } from 'lucide-react';
-import Link from 'next/link';
-import { useEffect, useMemo, useState } from 'react';
-import { Badge } from '@/components/ui/badge';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Progress } from '@/components/ui/progress';
-import { useAuth } from '@/contexts/AuthContext';
-import { useDatabase } from '@/contexts/DatabaseContext';
+import Link from "next/link";
+import { useEffect, useMemo, useState } from "react";
+import { useAuth } from "@/contexts/AuthContext";
+import { useDatabase } from "@/contexts/DatabaseContext";
+import { Badge } from "@/components/ui/badge";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Progress } from "@/components/ui/progress";
+import { Clock } from "lucide-react";
 
 type ModuleMeta = {
   slug: string;
@@ -74,7 +74,7 @@ export function ModulesGrid({ modules }: { modules: ModuleMeta[] }) {
           } catch {}
         } catch (e: any) {
           // Fail gracefully if table/policies aren’t ready
-          setError(e?.message ?? 'Unable to load progress');
+          setError(e?.message ?? "Unable to load progress");
           setProgress({});
         }
       } else {
@@ -112,14 +112,7 @@ export function ModulesGrid({ modules }: { modules: ModuleMeta[] }) {
     return () => {
       mounted = false;
     };
-  }, [
-    getModuleProgress,
-    moduleIds,
-    user,
-    getLastViewedSectionsMap,
-    getStudyNeedsReviewMap,
-    modules,
-  ]);
+  }, [getModuleProgress, moduleIds, user]);
 
   return (
     <>
@@ -145,18 +138,18 @@ export function ModulesGrid({ modules }: { modules: ModuleMeta[] }) {
           }
           const status =
             (p?.status as string) ||
-            (percent >= 100 ? 'completed' : percent > 0 ? 'in_progress' : 'not_started');
+            (percent >= 100 ? "completed" : percent > 0 ? "in_progress" : "not_started");
           const needs = needsMap[frontmatter.id] ?? local[frontmatter.id]?.needs ?? 0;
           const lastViewed = lastMap[frontmatter.id] || (local[frontmatter.id]?.lastViewed ?? null);
 
           const statusColor =
-            status === 'completed'
-              ? 'border-green-500/50 bg-green-900/50 text-green-200'
-              : status === 'in_progress'
-                ? 'border-yellow-500/50 bg-yellow-900/50 text-[#f97316]'
-                : status === 'bookmarked'
-                  ? 'border-primary/50 bg-cyan-900/50 text-cyan-200'
-                  : 'border-gray-500/50 bg-gray-900/50 text-muted-foreground';
+            status === "completed"
+              ? "border-green-500/50 bg-green-900/50 text-green-200"
+              : status === "in_progress"
+                ? "border-yellow-500/50 bg-yellow-900/50 text-[#f97316]"
+                : status === "bookmarked"
+                  ? "border-primary/50 bg-cyan-900/50 text-cyan-200"
+                  : "border-gray-500/50 bg-gray-900/50 text-muted-foreground";
 
           return (
             <Link key={slug} href={`/modules/${slug}`} className="no-underline">
@@ -167,7 +160,7 @@ export function ModulesGrid({ modules }: { modules: ModuleMeta[] }) {
                       variant="outline"
                       className="border-blue-500/50 bg-blue-900/50 text-muted-foreground"
                     >
-                      {frontmatter.domainEnum.replace(/_/g, ' ')}
+                      {frontmatter.domainEnum.replace(/_/g, " ")}
                     </Badge>
                     <Badge
                       variant="outline"
@@ -176,10 +169,10 @@ export function ModulesGrid({ modules }: { modules: ModuleMeta[] }) {
                       {frontmatter.difficulty}
                     </Badge>
                     <span className="flex items-center gap-1 text-sm text-muted-foreground">
-                      <Clock className="h-4 w-4" /> {frontmatter.estimatedTime ?? '—'}
+                      <Clock className="h-4 w-4" /> {frontmatter.estimatedTime ?? "—"}
                     </span>
                     <Badge variant="outline" className={statusColor}>
-                      {status.replace(/_/g, ' ')}
+                      {status.replace(/_/g, " ")}
                     </Badge>
                     {needs > 0 && (
                       <Badge

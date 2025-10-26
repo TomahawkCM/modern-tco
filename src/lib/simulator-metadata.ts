@@ -1,5 +1,5 @@
-import fs from 'node:fs/promises';
-import path from 'node:path';
+import fs from 'fs/promises';
+import path from 'path';
 
 const SIM_DIR = path.join(process.cwd(), 'sim');
 const SENSORS_PATH = path.join(SIM_DIR, 'sensors_catalog.json');
@@ -21,10 +21,7 @@ type SimulatorExamples = {
   }>;
 };
 
-export async function getSensorsCatalog(): Promise<{
-  sensors: SensorEntry[];
-  aggregates: string[];
-}> {
+export async function getSensorsCatalog(): Promise<{ sensors: SensorEntry[]; aggregates: string[] }> {
   try {
     const raw = await fs.readFile(SENSORS_PATH, 'utf-8');
     return JSON.parse(raw);

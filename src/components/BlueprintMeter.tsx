@@ -1,53 +1,38 @@
-'use client';
+"use client";
 
-import { useMemo, useState } from 'react';
-import {
-  computeCoverage,
-  coverageFromContent,
-  type DomainCoverage,
-  type ObjectiveCoverage,
-} from '@/lib/blueprint';
-import type { Question } from '@/types/exam';
+import { computeCoverage, coverageFromContent, type DomainCoverage, type ObjectiveCoverage } from "@/lib/blueprint";
+import type { Question } from "@/types/exam";
+import { useMemo, useState } from "react";
 
 interface BlueprintMeterProps {
   questions?: Question[];
-  source?: 'content' | 'custom';
+  source?: "content" | "custom";
   compact?: boolean;
-  mode?: 'domain' | 'objective'; // optional external control
+  mode?: "domain" | "objective"; // optional external control
 }
 
-export default function BlueprintMeter({
-  questions,
-  source = 'content',
-  compact,
-  mode,
-}: BlueprintMeterProps) {
-  const summary = useMemo(
-    () => (source === 'content' ? coverageFromContent() : computeCoverage(questions ?? [])),
-    [source, questions]
-  );
-  const [view, setView] = useState<'domain' | 'objective'>(mode ?? 'domain');
+export default function BlueprintMeter({ questions, source = "content", compact, mode }: BlueprintMeterProps) {
+  const summary = useMemo(() => (source === "content" ? coverageFromContent() : computeCoverage(questions ?? [])), [source, questions]);
+  const [view, setView] = useState<"domain" | "objective">(mode ?? "domain");
   const hasObjectives = (summary.objectives?.length ?? 0) > 0;
-  const effectiveView = mode ?? (hasObjectives ? view : 'domain');
+  const effectiveView = mode ?? (hasObjectives ? view : "domain");
 
   return (
     <section aria-labelledby="bp-title" className="space-y-3">
-      <h2 id="bp-title" className="text-lg font-semibold">
-        Blueprint Coverage
-      </h2>
+      <h2 id="bp-title" className="text-lg font-semibold">Blueprint Coverage</h2>
       {hasObjectives && !mode && (
         <div className="flex items-center gap-2 text-sm">
           <button
             type="button"
-            className={`rounded px-2 py-1 ${effectiveView === 'domain' ? 'bg-blue-600 text-foreground' : 'bg-slate-200 dark:bg-card'}`}
-            onClick={() => setView('domain')}
+            className={`rounded px-2 py-1 ${effectiveView === "domain" ? "bg-blue-600 text-foreground" : "bg-slate-200 dark:bg-card"}`}
+            onClick={() => setView("domain")}
           >
             Domains
           </button>
           <button
             type="button"
-            className={`rounded px-2 py-1 ${effectiveView === 'objective' ? 'bg-blue-600 text-foreground' : 'bg-slate-200 dark:bg-card'}`}
-            onClick={() => setView('objective')}
+            className={`rounded px-2 py-1 ${effectiveView === "objective" ? "bg-blue-600 text-foreground" : "bg-slate-200 dark:bg-card"}`}
+            onClick={() => setView("objective")}
           >
             Objectives
           </button>
@@ -55,11 +40,9 @@ export default function BlueprintMeter({
       )}
 
       <div className="space-y-2" data-testid="blueprint-meter">
-        {effectiveView === 'domain'
+        {effectiveView === "domain"
           ? summary.domains.map((d) => <DomainRow key={d.domain} data={d} compact={!!compact} />)
-          : (summary.objectives ?? [])
-              .slice(0, 8)
-              .map((o) => <ObjectiveRow key={o.objectiveId} data={o} compact={!!compact} />)}
+          : (summary.objectives ?? []).slice(0, 8).map((o) => <ObjectiveRow key={o.objectiveId} data={o} compact={!!compact} />)}
       </div>
     </section>
   );
@@ -67,7 +50,7 @@ export default function BlueprintMeter({
 
 function DomainRow({ data, compact }: { data: DomainCoverage; compact: boolean }) {
   const pct = Math.max(0, Math.min(200, data.coverageIndex));
-  const color = pct >= 100 ? 'bg-[#22c55e]' : pct >= 85 ? 'bg-yellow-500' : 'bg-red-600';
+  const color = pct >= 100 ? "bg-[#22c55e]" : pct >= 85 ? "bg-yellow-500" : "bg-red-600";
   const ariaNow = Math.round(Math.min(100, pct));
   return (
     <div className="space-y-1">
@@ -88,8 +71,7 @@ function DomainRow({ data, compact }: { data: DomainCoverage; compact: boolean }
       </div>
       {!compact && (
         <div className="text-xs text-muted-foreground">
-          {data.total} questions · actual {(data.actualShare * 100).toFixed(0)}% vs target{' '}
-          {(data.targetShare * 100).toFixed(0)}%
+          {data.total} questions · actual {(data.actualShare * 100).toFixed(0)}% vs target {(data.targetShare * 100).toFixed(0)}%
         </div>
       )}
     </div>
@@ -98,7 +80,7 @@ function DomainRow({ data, compact }: { data: DomainCoverage; compact: boolean }
 
 function ObjectiveRow({ data, compact }: { data: ObjectiveCoverage; compact: boolean }) {
   const pct = Math.round(data.share * 100);
-  const color = pct >= 20 ? 'bg-[#22c55e]' : pct >= 10 ? 'bg-yellow-500' : 'bg-red-600';
+  const color = pct >= 20 ? "bg-[#22c55e]" : pct >= 10 ? "bg-yellow-500" : "bg-red-600";
   return (
     <div className="space-y-1">
       <div className="flex items-center justify-between text-sm">
@@ -115,7 +97,9 @@ function ObjectiveRow({ data, compact }: { data: ObjectiveCoverage; compact: boo
       >
         <div className={`${color} h-full`} style={{ width: `${pct}%` }} />
       </div>
-      {!compact && <div className="text-xs text-muted-foreground">{data.total} questions</div>}
+      {!compact && (
+        <div className="text-xs text-muted-foreground">{data.total} questions</div>
+      )}
     </div>
   );
 }

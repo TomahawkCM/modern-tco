@@ -5,21 +5,21 @@
  * Creates schema and migrates all 2,415 lines of content to Supabase PostgreSQL
  */
 
-const { createClient } = require('@supabase/supabase-js');
-const fs = require('fs');
-const path = require('path');
-require('dotenv').config({ path: '.env.local' });
+const { createClient } = require("@supabase/supabase-js");
+const fs = require("fs");
+const path = require("path");
+require("dotenv").config({ path: ".env.local" });
 
 // Configuration
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
-console.log('🚀 Starting Comprehensive TCO Content Integration Pipeline...');
+console.log("🚀 Starting Comprehensive TCO Content Integration Pipeline...");
 console.log(`📍 Supabase URL: ${supabaseUrl}`);
-console.log(`🔑 Service Role Key: ${serviceRoleKey ? 'Present' : 'Missing'}`);
+console.log(`🔑 Service Role Key: ${serviceRoleKey ? "Present" : "Missing"}`);
 
 if (!supabaseUrl || !serviceRoleKey) {
-  console.error('❌ Missing required environment variables');
+  console.error("❌ Missing required environment variables");
   process.exit(1);
 }
 
@@ -39,8 +39,8 @@ function parseMarkdownContent(filePath, domainInfo) {
     throw new Error(`File not found: ${filePath}`);
   }
 
-  const content = fs.readFileSync(filePath, 'utf8');
-  const lines = content.split('\n');
+  const content = fs.readFileSync(filePath, "utf8");
+  const lines = content.split("\n");
   console.log(`   📏 ${lines.length} lines found`);
 
   // Extract learning objectives
@@ -59,26 +59,29 @@ function parseMarkdownContent(filePath, domainInfo) {
     const line = lines[i].trim();
 
     // Learning objectives extraction
-    if (line.includes('Learning Objectives') || line.includes('learning objectives')) {
+    if (line.includes("Learning Objectives") || line.includes("learning objectives")) {
       inObjectives = true;
       continue;
     }
-    if (inObjectives && line.startsWith('#')) {
+    if (inObjectives && line.startsWith("#")) {
       inObjectives = false;
     }
     if (
       inObjectives &&
-      (line.startsWith('1.') ||
-        line.startsWith('2.') ||
-        line.startsWith('3.') ||
-        line.startsWith('4.') ||
-        line.startsWith('5.'))
+      (line.startsWith("1.") ||
+        line.startsWith("2.") ||
+        line.startsWith("3.") ||
+        line.startsWith("4.") ||
+        line.startsWith("5."))
     ) {
-      learningObjectives.push(line.substring(2).trim().replace(/\*\*/g, ''));
+      learningObjectives.push(line.substring(2).trim().replace(/\*\*/g, ""));
     }
 
     // Section extraction - look for main section headers
-    if (line.match(/^##\s+(🎯\s+)?[Mm]odule/i) || line.match(/^##\s+(🔥\s+|🟡\s+|🔵\s+)?[A-Z]/)) {
+    if (
+      line.match(/^##\s+(\🎯\s+)?[Mm]odule/i) ||
+      line.match(/^##\s+(\🔥\s+|\🟡\s+|\🔵\s+)?[A-Z]/)
+    ) {
       // Save previous section
       if (currentSection) {
         sections.push({
@@ -91,12 +94,12 @@ function parseMarkdownContent(filePath, domainInfo) {
 
       // Start new section
       const title = line
-        .replace(/^##\s+/, '')
-        .replace(/(🎯\s+|🔥\s+|🟡\s+|🔵\s+)/g, '')
+        .replace(/^##\s+/, "")
+        .replace(/(\🎯\s+|\🔥\s+|\🟡\s+|\🔵\s+)/g, "")
         .trim();
       currentSection = {
         title: title,
-        content: '',
+        content: "",
         section_type: determineSectionType(title),
         order_index: sectionIndex++,
         estimated_time: extractEstimatedTime(title) || 15,
@@ -109,14 +112,14 @@ function parseMarkdownContent(filePath, domainInfo) {
 
     // Collect content for current section
     if (currentSection) {
-      currentSection.content += line + '\n';
+      currentSection.content += line + "\n";
 
       // Extract key points (bullet points, numbered lists)
-      if (line.match(/^[*\-+]\s+/) || line.match(/^\d+\.\s+/)) {
+      if (line.match(/^[\*\-\+]\s+/) || line.match(/^\d+\.\s+/)) {
         const point = line
-          .replace(/^[*\-+\d.]\s+/, '')
+          .replace(/^[\*\-\+\d\.]\s+/, "")
           .trim()
-          .replace(/\*\*/g, '');
+          .replace(/\*\*/g, "");
         if (point.length > 0) keyPoints.push(point);
       }
 
@@ -125,13 +128,13 @@ function parseMarkdownContent(filePath, domainInfo) {
         line.match(/^Step\s+\d+/i) ||
         line.match(/^\d+\.\s+(Navigate|Click|Select|Enter|Open)/i)
       ) {
-        const procedure = line.trim().replace(/\*\*/g, '');
+        const procedure = line.trim().replace(/\*\*/g, "");
         if (procedure.length > 0) procedures.push(procedure);
       }
 
       // Extract references (links, file paths)
-      if (line.includes('http') || line.includes('.md') || line.includes('Reference:')) {
-        const reference = line.trim().replace(/\*\*/g, '');
+      if (line.includes("http") || line.includes(".md") || line.includes("Reference:")) {
+        const reference = line.trim().replace(/\*\*/g, "");
         if (reference.length > 0) references.push(reference);
       }
     }
@@ -161,23 +164,23 @@ function parseMarkdownContent(filePath, domainInfo) {
 
 function determineSectionType(title) {
   const titleLower = title.toLowerCase();
-  if (titleLower.includes('overview') || titleLower.includes('introduction')) return 'overview';
-  if (titleLower.includes('concept') || titleLower.includes('fundamental')) return 'concepts';
+  if (titleLower.includes("overview") || titleLower.includes("introduction")) return "overview";
+  if (titleLower.includes("concept") || titleLower.includes("fundamental")) return "concepts";
   if (
-    titleLower.includes('procedure') ||
-    titleLower.includes('step') ||
-    titleLower.includes('how to')
+    titleLower.includes("procedure") ||
+    titleLower.includes("step") ||
+    titleLower.includes("how to")
   )
-    return 'procedures';
-  if (titleLower.includes('example') || titleLower.includes('practice')) return 'examples';
+    return "procedures";
+  if (titleLower.includes("example") || titleLower.includes("practice")) return "examples";
   if (
-    titleLower.includes('exam') ||
-    titleLower.includes('question') ||
-    titleLower.includes('assessment')
+    titleLower.includes("exam") ||
+    titleLower.includes("question") ||
+    titleLower.includes("assessment")
   )
-    return 'exam_prep';
-  if (titleLower.includes('lab') || titleLower.includes('hands-on')) return 'lab';
-  return 'concepts';
+    return "exam_prep";
+  if (titleLower.includes("lab") || titleLower.includes("hands-on")) return "lab";
+  return "concepts";
 }
 
 function extractEstimatedTime(title) {
@@ -188,7 +191,7 @@ function extractEstimatedTime(title) {
 // Extract questions from content
 function extractQuestions(content, moduleId) {
   const questions = [];
-  const lines = content.split('\n');
+  const lines = content.split("\n");
 
   let currentQuestion = null;
   let inQuestionSection = false;
@@ -212,13 +215,13 @@ function extractQuestions(content, moduleId) {
       // Start new question
       currentQuestion = {
         module_id: moduleId,
-        question_text: line.substring(line.indexOf('.') + 1).trim(),
-        question_type: 'multiple_choice',
+        question_text: line.substring(line.indexOf(".") + 1).trim(),
+        question_type: "multiple_choice",
         options: {},
-        correct_answer: '',
-        explanation: '',
+        correct_answer: "",
+        explanation: "",
         difficulty_level: 3,
-        tags: ['tco', 'certification'],
+        tags: ["tco", "certification"],
       };
     }
 
@@ -237,7 +240,7 @@ function extractQuestions(content, moduleId) {
 
     // Extract explanation
     if (currentQuestion && line.match(/explanation:/i)) {
-      currentQuestion.explanation = line.substring(line.indexOf(':') + 1).trim();
+      currentQuestion.explanation = line.substring(line.indexOf(":") + 1).trim();
     }
   }
 
@@ -252,51 +255,51 @@ function extractQuestions(content, moduleId) {
 // Domain configuration
 const domains = [
   {
-    domain: 'domain1',
-    title: 'Asking Questions',
+    domain: "domain1",
+    title: "Asking Questions",
     examWeight: 22,
     estimatedTime: 180,
-    description: 'Natural Language Query Construction and Sensor Management',
-    file: 'src/content/domains/domain1-asking-questions.md',
+    description: "Natural Language Query Construction and Sensor Management",
+    file: "src/content/domains/domain1-asking-questions.md",
   },
   {
-    domain: 'domain2',
-    title: 'Refining Questions & Targeting',
+    domain: "domain2",
+    title: "Refining Questions & Targeting",
     examWeight: 23,
     estimatedTime: 200,
-    description: 'Computer Group Management and Advanced Filtering Techniques',
-    file: 'src/content/domains/domain2-refining-questions.md',
+    description: "Computer Group Management and Advanced Filtering Techniques",
+    file: "src/content/domains/domain2-refining-questions.md",
   },
   {
-    domain: 'domain3',
-    title: 'Taking Action',
+    domain: "domain3",
+    title: "Taking Action",
     examWeight: 15,
     estimatedTime: 160,
-    description: 'Package Deployment and Action Execution Procedures',
-    file: 'src/content/domains/domain3-taking-action.md',
+    description: "Package Deployment and Action Execution Procedures",
+    file: "src/content/domains/domain3-taking-action.md",
   },
   {
-    domain: 'domain4',
-    title: 'Navigation & Module Functions',
+    domain: "domain4",
+    title: "Navigation & Module Functions",
     examWeight: 23,
     estimatedTime: 190,
-    description: 'Console Navigation and Core Module Operations',
-    file: 'src/content/domains/domain4-navigation-modules.md',
+    description: "Console Navigation and Core Module Operations",
+    file: "src/content/domains/domain4-navigation-modules.md",
   },
   {
-    domain: 'domain5',
-    title: 'Reporting & Data Export',
+    domain: "domain5",
+    title: "Reporting & Data Export",
     examWeight: 17,
     estimatedTime: 170,
-    description: 'Report Creation and Data Export Systems',
-    file: 'src/content/domains/domain5-reporting-data-export.md',
+    description: "Report Creation and Data Export Systems",
+    file: "src/content/domains/domain5-reporting-data-export.md",
   },
 ];
 
 // Main migration function
 async function migrateContent() {
   try {
-    console.log('\n📂 Starting content migration for all 5 TCO domains...');
+    console.log("\n📂 Starting content migration for all 5 TCO domains...");
 
     let totalContentLines = 0;
     let totalSections = 0;
@@ -318,7 +321,7 @@ async function migrateContent() {
       // Insert module
       console.log(`   💾 Inserting module data...`);
       const { data: moduleData, error: moduleError } = await supabase
-        .from('study_modules')
+        .from("study_modules")
         .upsert(
           {
             domain: parsedContent.domain,
@@ -330,7 +333,7 @@ async function migrateContent() {
             learning_objectives: parsedContent.learning_objectives,
           },
           {
-            onConflict: 'domain',
+            onConflict: "domain",
           }
         )
         .select()
@@ -346,7 +349,7 @@ async function migrateContent() {
       // Insert sections
       console.log(`   📝 Inserting ${parsedContent.sections.length} sections...`);
       for (const section of parsedContent.sections) {
-        const { error: sectionError } = await supabase.from('study_sections').upsert({
+        const { error: sectionError } = await supabase.from("study_sections").upsert({
           module_id: moduleData.id,
           title: section.title,
           content: section.content,
@@ -365,14 +368,14 @@ async function migrateContent() {
 
       // Extract and insert questions
       const questions = extractQuestions(
-        parsedContent.sections.map((s) => s.content).join('\n'),
+        parsedContent.sections.map((s) => s.content).join("\n"),
         moduleData.id
       );
       totalQuestions += questions.length;
 
       console.log(`   ❓ Inserting ${questions.length} practice questions...`);
       for (const question of questions) {
-        const { error: questionError } = await supabase.from('study_questions').upsert(question);
+        const { error: questionError } = await supabase.from("study_questions").upsert(question);
 
         if (questionError) {
           console.error(`   ❌ Question insertion failed:`, questionError);
@@ -382,8 +385,8 @@ async function migrateContent() {
       console.log(`   ✅ ${domain.title} migration completed!`);
     }
 
-    console.log('\n🎉 Content migration completed successfully!');
-    console.log('\n📊 Migration Summary:');
+    console.log("\n🎉 Content migration completed successfully!");
+    console.log("\n📊 Migration Summary:");
     console.log(`   📚 Modules: 5 TCO certification domains`);
     console.log(`   📝 Sections: ${totalSections} study sections`);
     console.log(`   📏 Content: ${totalContentLines} lines of professional content`);
@@ -397,7 +400,7 @@ async function migrateContent() {
       questions: totalQuestions,
     };
   } catch (error) {
-    console.error('\n💥 Content migration failed:', error);
+    console.error("\n💥 Content migration failed:", error);
     throw error;
   }
 }
@@ -405,13 +408,13 @@ async function migrateContent() {
 // Verification function
 async function verifyMigration() {
   try {
-    console.log('\n🔍 Verifying migration results...');
+    console.log("\n🔍 Verifying migration results...");
 
     // Check modules
-    const { data: modules, error: moduleError } = await supabase.from('study_modules').select('*');
+    const { data: modules, error: moduleError } = await supabase.from("study_modules").select("*");
 
     if (moduleError) {
-      console.error('❌ Error fetching modules:', moduleError);
+      console.error("❌ Error fetching modules:", moduleError);
       return;
     }
 
@@ -419,11 +422,11 @@ async function verifyMigration() {
 
     // Check sections
     const { data: sections, error: sectionError } = await supabase
-      .from('study_sections')
-      .select('*');
+      .from("study_sections")
+      .select("*");
 
     if (sectionError) {
-      console.error('❌ Error fetching sections:', sectionError);
+      console.error("❌ Error fetching sections:", sectionError);
       return;
     }
 
@@ -431,11 +434,11 @@ async function verifyMigration() {
 
     // Check questions
     const { data: questions, error: questionError } = await supabase
-      .from('study_questions')
-      .select('*');
+      .from("study_questions")
+      .select("*");
 
     if (questionError) {
-      console.error('❌ Error fetching questions:', questionError);
+      console.error("❌ Error fetching questions:", questionError);
       return;
     }
 
@@ -444,34 +447,34 @@ async function verifyMigration() {
     // Detailed breakdown by domain
     for (const module of modules) {
       const { data: moduleSections } = await supabase
-        .from('study_sections')
-        .select('*')
-        .eq('module_id', module.id);
+        .from("study_sections")
+        .select("*")
+        .eq("module_id", module.id);
 
       const { data: moduleQuestions } = await supabase
-        .from('study_questions')
-        .select('*')
-        .eq('module_id', module.id);
+        .from("study_questions")
+        .select("*")
+        .eq("module_id", module.id);
 
       console.log(
         `   📖 ${module.title}: ${moduleSections?.length || 0} sections, ${moduleQuestions?.length || 0} questions, ${module.content_lines} lines`
       );
     }
 
-    console.log('\n🎊 All content successfully integrated into Supabase PostgreSQL!');
-    console.log('🚀 Ready for application integration!');
+    console.log("\n🎊 All content successfully integrated into Supabase PostgreSQL!");
+    console.log("🚀 Ready for application integration!");
   } catch (error) {
-    console.error('❌ Verification failed:', error);
+    console.error("❌ Verification failed:", error);
   }
 }
 
 // Main execution
 async function main() {
   try {
-    console.log('🏁 Starting comprehensive content integration pipeline...');
+    console.log("🏁 Starting comprehensive content integration pipeline...");
 
     // First, try to create tables if they don't exist
-    console.log('\n🏗️  Ensuring database schema exists...');
+    console.log("\n🏗️  Ensuring database schema exists...");
 
     // We'll rely on Supabase to auto-create tables when we insert data
     // Or tables should already exist from SQL Editor in Supabase Dashboard
@@ -479,16 +482,16 @@ async function main() {
     const migrationResults = await migrateContent();
     await verifyMigration();
 
-    console.log('\n🎯 PIPELINE COMPLETE!');
-    console.log('✅ All 2,415 lines of TCO content now available in Supabase PostgreSQL');
-    console.log('✅ Ready for StudyModuleViewer integration');
-    console.log('✅ Students will see comprehensive professional content instead of fallbacks');
+    console.log("\n🎯 PIPELINE COMPLETE!");
+    console.log("✅ All 2,415 lines of TCO content now available in Supabase PostgreSQL");
+    console.log("✅ Ready for StudyModuleViewer integration");
+    console.log("✅ Students will see comprehensive professional content instead of fallbacks");
   } catch (error) {
-    console.error('\n💥 Pipeline failed:', error.message);
-    console.error('\n🛠️  Troubleshooting:');
-    console.error('1. Ensure database tables exist in Supabase Dashboard');
-    console.error('2. Verify service role key has proper permissions');
-    console.error('3. Check that all domain markdown files exist');
+    console.error("\n💥 Pipeline failed:", error.message);
+    console.error("\n🛠️  Troubleshooting:");
+    console.error("1. Ensure database tables exist in Supabase Dashboard");
+    console.error("2. Verify service role key has proper permissions");
+    console.error("3. Check that all domain markdown files exist");
     process.exit(1);
   }
 }

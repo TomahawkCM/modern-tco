@@ -9,8 +9,8 @@
  * - Immediate feedback during practice critical for learning (Hattie & Timperley, 2007)
  */
 
-import { addPoints } from './gamification';
-import { getQuestionsForReview, type Question } from './questionBank';
+import { getQuestionsForReview, type Question } from "./questionBank";
+import { addPoints } from "./gamification";
 
 export interface PracticeSession {
   id: string;
@@ -22,8 +22,8 @@ export interface PracticeSession {
   questions: PracticeQuestion[];
   score: number;
   totalQuestions: number;
-  difficulty: 'easy' | 'medium' | 'hard' | 'mixed';
-  mode: 'concept' | 'module' | 'random' | 'missed';
+  difficulty: "easy" | "medium" | "hard" | "mixed";
+  mode: "concept" | "module" | "random" | "missed";
 }
 
 export interface PracticeQuestion {
@@ -70,9 +70,9 @@ export function createPracticeSession(config: {
   moduleId?: string;
   sectionId?: string;
   concept?: string;
-  difficulty?: 'easy' | 'medium' | 'hard' | 'mixed';
+  difficulty?: "easy" | "medium" | "hard" | "mixed";
   questionCount?: number;
-  mode?: 'concept' | 'module' | 'random' | 'missed';
+  mode?: "concept" | "module" | "random" | "missed";
 }): PracticeSession {
   const sessionId = `practice-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
 
@@ -85,8 +85,8 @@ export function createPracticeSession(config: {
     questions: [],
     score: 0,
     totalQuestions: config.questionCount || 10,
-    difficulty: config.difficulty || 'mixed',
-    mode: config.mode || 'random',
+    difficulty: config.difficulty || "mixed",
+    mode: config.mode || "random",
   };
 }
 
@@ -97,20 +97,20 @@ export function getPracticeQuestions(session: PracticeSession): Question[] {
   let questions: Question[] = [];
 
   switch (session.mode) {
-    case 'concept':
+    case "concept":
       // Practice specific concept
       if (session.moduleId && session.concept) {
         questions = getQuestionsForReview(
           session.moduleId,
-          session.sectionId || '',
+          session.sectionId || "",
           session.concept,
-          session.difficulty === 'mixed' ? 'medium' : session.difficulty,
+          session.difficulty === "mixed" ? "medium" : session.difficulty,
           session.totalQuestions
         );
       }
       break;
 
-    case 'module':
+    case "module":
       // Practice entire module
       if (session.moduleId) {
         questions = getModuleQuestions(
@@ -121,19 +121,19 @@ export function getPracticeQuestions(session: PracticeSession): Question[] {
       }
       break;
 
-    case 'random':
+    case "random":
       // Random questions from any module
       questions = getRandomQuestions(session.difficulty, session.totalQuestions);
       break;
 
-    case 'missed':
+    case "missed":
       // Questions previously answered incorrectly
       questions = getMissedQuestions(session.totalQuestions);
       break;
   }
 
   // If mixed difficulty, shuffle difficulties
-  if (session.difficulty === 'mixed') {
+  if (session.difficulty === "mixed") {
     questions = mixDifficulties(questions);
   }
 
@@ -145,14 +145,14 @@ export function getPracticeQuestions(session: PracticeSession): Question[] {
  */
 function getModuleQuestions(
   moduleId: string,
-  difficulty: 'easy' | 'medium' | 'hard' | 'mixed',
+  difficulty: "easy" | "medium" | "hard" | "mixed",
   count: number
 ): Question[] {
   const allQuestions = getQuestionsForReview(
     moduleId,
-    '',
-    '',
-    difficulty === 'mixed' ? 'medium' : difficulty,
+    "",
+    "",
+    difficulty === "mixed" ? "medium" : difficulty,
     count * 3 // Get more to ensure variety
   );
 
@@ -163,14 +163,14 @@ function getModuleQuestions(
  * Get random questions from all modules
  */
 function getRandomQuestions(
-  difficulty: 'easy' | 'medium' | 'hard' | 'mixed',
+  difficulty: "easy" | "medium" | "hard" | "mixed",
   count: number
 ): Question[] {
   const allQuestions = getQuestionsForReview(
-    '',
-    '',
-    '',
-    difficulty === 'mixed' ? 'medium' : difficulty,
+    "",
+    "",
+    "",
+    difficulty === "mixed" ? "medium" : difficulty,
     count * 5
   );
 
@@ -185,8 +185,8 @@ function getMissedQuestions(count: number): Question[] {
   const missedQuestionIds = new Set<string>();
 
   // Find questions that were answered incorrectly
-  stats.recentSessions.forEach((session) => {
-    session.questions.forEach((pq) => {
+  stats.recentSessions.forEach(session => {
+    session.questions.forEach(pq => {
       if (pq.correct === false) {
         missedQuestionIds.add(pq.questionId);
       }
@@ -196,16 +196,16 @@ function getMissedQuestions(count: number): Question[] {
   // Get these questions from the bank
   // For now, return random questions as placeholder
   // TODO: Implement proper missed question tracking
-  return getRandomQuestions('mixed', count);
+  return getRandomQuestions("mixed", count);
 }
 
 /**
  * Mix difficulties in question set
  */
 function mixDifficulties(questions: Question[]): Question[] {
-  const easy = questions.filter((q) => q.difficulty === 'easy');
-  const medium = questions.filter((q) => q.difficulty === 'medium');
-  const hard = questions.filter((q) => q.difficulty === 'hard');
+  const easy = questions.filter(q => q.difficulty === "easy");
+  const medium = questions.filter(q => q.difficulty === "medium");
+  const hard = questions.filter(q => q.difficulty === "hard");
 
   const mixed: Question[] = [];
   const target = questions.length;
@@ -221,7 +221,7 @@ function mixDifficulties(questions: Question[]): Question[] {
 
   // Fill remaining with any available questions
   while (mixed.length < target && questions.length > mixed.length) {
-    const remaining = questions.filter((q) => !mixed.includes(q));
+    const remaining = questions.filter(q => !mixed.includes(q));
     if (remaining.length === 0) break;
     mixed.push(remaining[0]);
   }
@@ -250,16 +250,16 @@ export function answerPracticeQuestion(
   userAnswer: string,
   timeSpent: number
 ): { correct: boolean; question: Question } {
-  const question = session.questions.find((pq) => pq.questionId === questionId)?.question;
+  const question = session.questions.find(pq => pq.questionId === questionId)?.question;
 
   if (!question) {
-    throw new Error('Question not found in session');
+    throw new Error("Question not found in session");
   }
 
   const correct = userAnswer === question.correctAnswer;
 
   // Update question in session
-  const practiceQuestion = session.questions.find((pq) => pq.questionId === questionId);
+  const practiceQuestion = session.questions.find(pq => pq.questionId === questionId);
   if (practiceQuestion) {
     practiceQuestion.userAnswer = userAnswer;
     practiceQuestion.correct = correct;
@@ -274,7 +274,7 @@ export function answerPracticeQuestion(
     // Award practice points (half of review points)
     addPoints(
       5, // Base practice points
-      'practice_correct',
+      "practice_correct",
       1.0,
       `Practice: ${question.concept}`
     );
@@ -299,11 +299,11 @@ export function completePracticeSession(session: PracticeSession): PracticeSessi
  * Get practice statistics
  */
 export function getPracticeStats(): PracticeStats {
-  if (typeof window === 'undefined') {
+  if (typeof window === "undefined") {
     return getDefaultPracticeStats();
   }
 
-  const stored = localStorage.getItem('practice-stats');
+  const stored = localStorage.getItem("practice-stats");
   if (stored) {
     try {
       const data = JSON.parse(stored);
@@ -333,8 +333,8 @@ export function getPracticeStats(): PracticeStats {
  * Save practice statistics
  */
 export function savePracticeStats(stats: PracticeStats): void {
-  if (typeof window === 'undefined') return;
-  localStorage.setItem('practice-stats', JSON.stringify(stats));
+  if (typeof window === "undefined") return;
+  localStorage.setItem("practice-stats", JSON.stringify(stats));
 }
 
 /**
@@ -350,14 +350,13 @@ function savePracticeSession(session: PracticeSession): void {
   // Update totals
   stats.totalSessions++;
   stats.totalQuestions += session.questions.length;
-  const correctQuestions = session.questions.filter((pq) => pq.correct).length;
+  const correctQuestions = session.questions.filter(pq => pq.correct).length;
   stats.totalCorrect += correctQuestions;
   stats.accuracyRate = (stats.totalCorrect / stats.totalQuestions) * 100;
 
   // Update average time
   const totalTime = session.questions.reduce((sum, pq) => sum + pq.timeSpent, 0);
-  const currentTotalTime =
-    stats.averageTimePerQuestion * (stats.totalQuestions - session.questions.length);
+  const currentTotalTime = stats.averageTimePerQuestion * (stats.totalQuestions - session.questions.length);
   stats.averageTimePerQuestion = (currentTotalTime + totalTime) / stats.totalQuestions;
 
   // Update module stats
@@ -380,9 +379,9 @@ function savePracticeSession(session: PracticeSession): void {
   }
 
   // Update concept stats
-  session.questions.forEach((pq) => {
-    const { concept } = pq.question;
-    const { moduleId } = pq.question;
+  session.questions.forEach(pq => {
+    const concept = pq.question.concept;
+    const moduleId = pq.question.moduleId;
 
     if (!stats.byConcept[concept]) {
       stats.byConcept[concept] = {
@@ -428,7 +427,7 @@ export function getWeakConcepts(minQuestions: number = 3): ConceptPracticeStats[
   const stats = getPracticeStats();
 
   return Object.values(stats.byConcept)
-    .filter((c) => c.questions >= minQuestions)
+    .filter(c => c.questions >= minQuestions)
     .sort((a, b) => a.accuracy - b.accuracy)
     .slice(0, 10);
 }
@@ -440,7 +439,7 @@ export function getStrongConcepts(minQuestions: number = 3): ConceptPracticeStat
   const stats = getPracticeStats();
 
   return Object.values(stats.byConcept)
-    .filter((c) => c.questions >= minQuestions)
+    .filter(c => c.questions >= minQuestions)
     .sort((a, b) => b.accuracy - a.accuracy)
     .slice(0, 10);
 }
@@ -469,7 +468,7 @@ export function getPracticeRecommendations(): string[] {
 
   // Not practiced recently
   const conceptsNeedingPractice = Object.values(stats.byConcept)
-    .filter((c) => {
+    .filter(c => {
       const daysSince = (Date.now() - c.lastPracticed.getTime()) / (1000 * 60 * 60 * 24);
       return daysSince > 7;
     })
@@ -483,12 +482,16 @@ export function getPracticeRecommendations(): string[] {
 
   // High accuracy - ready for harder questions
   if (stats.accuracyRate > 90 && stats.totalQuestions >= 20) {
-    recommendations.push(`🚀 Excellent progress! Try harder difficulty questions.`);
+    recommendations.push(
+      `🚀 Excellent progress! Try harder difficulty questions.`
+    );
   }
 
   // No recent practice
   if (stats.totalSessions === 0) {
-    recommendations.push(`👋 Start practicing to build confidence before your next review!`);
+    recommendations.push(
+      `👋 Start practicing to build confidence before your next review!`
+    );
   }
 
   return recommendations;
@@ -508,14 +511,20 @@ export function getPracticeVsReviewComparison(): {
   let reviewSessions = 0;
   let reviewAccuracy = 0;
 
-  if (typeof window !== 'undefined') {
-    const reviewSessionsData = localStorage.getItem('review-sessions');
+  if (typeof window !== "undefined") {
+    const reviewSessionsData = localStorage.getItem("review-sessions");
     if (reviewSessionsData) {
       try {
         const sessions = JSON.parse(reviewSessionsData);
         reviewSessions = sessions.length;
-        const totalCorrect = sessions.reduce((sum: number, s: any) => sum + s.itemsCorrect, 0);
-        const totalItems = sessions.reduce((sum: number, s: any) => sum + s.itemsReviewed, 0);
+        const totalCorrect = sessions.reduce(
+          (sum: number, s: any) => sum + s.itemsCorrect,
+          0
+        );
+        const totalItems = sessions.reduce(
+          (sum: number, s: any) => sum + s.itemsReviewed,
+          0
+        );
         reviewAccuracy = totalItems > 0 ? (totalCorrect / totalItems) * 100 : 0;
       } catch {
         // Ignore errors

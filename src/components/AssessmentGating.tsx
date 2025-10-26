@@ -1,29 +1,29 @@
-import { AnimatePresence, motion } from 'framer-motion';
+import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Progress } from "@/components/ui/progress";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 import {
-  AlertTriangle,
-  BarChart3,
-  BookOpen,
-  CheckCircle,
-  Clock,
   Lock,
-  Target,
-  Trophy,
   Unlock,
+  Trophy,
+  Target,
+  Clock,
+  CheckCircle,
   XCircle,
-} from 'lucide-react';
-import { useEffect, useState } from 'react';
-import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Progress } from '@/components/ui/progress';
-import { Difficulty, TCODomain } from '@/types/exam';
-import { progressService } from '../lib/services/progress-service';
-import type { AssessmentConfig } from '../types/assessment';
+  AlertTriangle,
+  BookOpen,
+  BarChart3,
+} from "lucide-react";
+import { progressService } from "../lib/services/progress-service";
+import type { AssessmentConfig } from "../types/assessment";
+import { Difficulty, TCODomain } from "@/types/exam";
 
 interface GatingRequirement {
   id: string;
-  type: 'assessment' | 'module' | 'time_spent' | 'streak';
+  type: "assessment" | "module" | "time_spent" | "streak";
   name: string;
   description: string;
   threshold: number;
@@ -39,7 +39,7 @@ interface AssessmentGate {
   requirements: GatingRequirement[];
   unlocked: boolean;
   assessmentConfig: AssessmentConfig;
-  estimatedDifficulty: 'beginner' | 'intermediate' | 'advanced' | 'expert';
+  estimatedDifficulty: "beginner" | "intermediate" | "advanced" | "expert";
   estimatedDuration: number; // minutes
   passingScore: number; // 0-1
   maxAttempts?: number;
@@ -55,20 +55,20 @@ interface AssessmentGatingProps {
 
 const mockGates: AssessmentGate[] = [
   {
-    id: 'practice-quiz-1',
-    name: 'Domain Knowledge Check',
-    description: 'Basic understanding of Tanium platform concepts',
-    estimatedDifficulty: 'beginner',
+    id: "practice-quiz-1",
+    name: "Domain Knowledge Check",
+    description: "Basic understanding of Tanium platform concepts",
+    estimatedDifficulty: "beginner",
     estimatedDuration: 15,
     passingScore: 0.7,
     maxAttempts: 3,
     currentAttempts: 0,
     unlocked: true,
     assessmentConfig: {
-      assessmentId: 'practice-quiz-1',
-      userId: '',
-      moduleId: '',
-      type: 'practice',
+      assessmentId: "practice-quiz-1",
+      userId: "",
+      moduleId: "",
+      type: "practice",
       timeLimit: 900, // 15 minutes
       questionCount: 10,
       domainFilter: [TCODomain.ASKING_QUESTIONS],
@@ -81,32 +81,32 @@ const mockGates: AssessmentGate[] = [
     },
     requirements: [
       {
-        id: 'reading-progress',
-        type: 'module',
-        name: 'Complete Module Reading',
-        description: 'Read through all module content',
+        id: "reading-progress",
+        type: "module",
+        name: "Complete Module Reading",
+        description: "Read through all module content",
         threshold: 100,
         current: 100,
-        unit: '%',
+        unit: "%",
         met: true,
       },
     ],
   },
   {
-    id: 'hands-on-lab-1',
-    name: 'Console Navigation Lab',
-    description: 'Hands-on practice with Tanium console interface',
-    estimatedDifficulty: 'intermediate',
+    id: "hands-on-lab-1",
+    name: "Console Navigation Lab",
+    description: "Hands-on practice with Tanium console interface",
+    estimatedDifficulty: "intermediate",
     estimatedDuration: 25,
     passingScore: 0.8,
     maxAttempts: 2,
     currentAttempts: 0,
     unlocked: false,
     assessmentConfig: {
-      assessmentId: 'hands-on-lab-1',
-      userId: '',
-      moduleId: '',
-      type: 'practice',
+      assessmentId: "hands-on-lab-1",
+      userId: "",
+      moduleId: "",
+      type: "practice",
       timeLimit: 1500, // 25 minutes
       questionCount: 8,
       domainFilter: [TCODomain.NAVIGATION_MODULES],
@@ -119,42 +119,42 @@ const mockGates: AssessmentGate[] = [
     },
     requirements: [
       {
-        id: 'prev-assessment',
-        type: 'assessment',
-        name: 'Pass Domain Knowledge Check',
-        description: 'Score 70% or higher on the practice quiz',
+        id: "prev-assessment",
+        type: "assessment",
+        name: "Pass Domain Knowledge Check",
+        description: "Score 70% or higher on the practice quiz",
         threshold: 0.7,
         current: 0,
-        unit: 'score',
+        unit: "score",
         met: false,
       },
       {
-        id: 'study-time',
-        type: 'time_spent',
-        name: 'Study Time',
-        description: 'Spend at least 30 minutes studying',
+        id: "study-time",
+        type: "time_spent",
+        name: "Study Time",
+        description: "Spend at least 30 minutes studying",
         threshold: 30,
         current: 12,
-        unit: 'minutes',
+        unit: "minutes",
         met: false,
       },
     ],
   },
   {
-    id: 'certification-practice',
-    name: 'Certification Practice Exam',
-    description: 'Full-length practice exam simulating TAN-1000 certification',
-    estimatedDifficulty: 'expert',
+    id: "certification-practice",
+    name: "Certification Practice Exam",
+    description: "Full-length practice exam simulating TAN-1000 certification",
+    estimatedDifficulty: "expert",
     estimatedDuration: 105,
     passingScore: 0.75,
     maxAttempts: 1,
     currentAttempts: 0,
     unlocked: false,
     assessmentConfig: {
-      assessmentId: 'certification-practice',
-      userId: '',
-      moduleId: '',
-      type: 'practice',
+      assessmentId: "certification-practice",
+      userId: "",
+      moduleId: "",
+      type: "practice",
       timeLimit: 6300, // 105 minutes
       questionCount: 65,
       domainFilter: undefined, // All domains
@@ -167,33 +167,33 @@ const mockGates: AssessmentGate[] = [
     },
     requirements: [
       {
-        id: 'all-modules',
-        type: 'module',
-        name: 'Complete All Modules',
-        description: 'Finish all 5 TCO certification domains',
+        id: "all-modules",
+        type: "module",
+        name: "Complete All Modules",
+        description: "Finish all 5 TCO certification domains",
         threshold: 5,
         current: 2,
-        unit: 'modules',
+        unit: "modules",
         met: false,
       },
       {
-        id: 'practice-scores',
-        type: 'assessment',
-        name: 'Practice Assessment Average',
-        description: 'Maintain 85% average on practice assessments',
+        id: "practice-scores",
+        type: "assessment",
+        name: "Practice Assessment Average",
+        description: "Maintain 85% average on practice assessments",
         threshold: 0.85,
         current: 0.78,
-        unit: 'avg score',
+        unit: "avg score",
         met: false,
       },
       {
-        id: 'study-streak',
-        type: 'streak',
-        name: 'Study Consistency',
-        description: 'Study for 7 consecutive days',
+        id: "study-streak",
+        type: "streak",
+        name: "Study Consistency",
+        description: "Study for 7 consecutive days",
         threshold: 7,
         current: 4,
-        unit: 'days',
+        unit: "days",
         met: false,
       },
     ],
@@ -213,11 +213,11 @@ function RequirementCard({
     <motion.div
       whileHover={{ scale: onClick ? 1.02 : 1 }}
       className={`rounded-lg border p-4 transition-all duration-200 ${
-        onClick ? 'cursor-pointer hover:shadow-md' : ''
+        onClick ? "cursor-pointer hover:shadow-md" : ""
       } ${
         requirement.met
-          ? 'border-green-200 bg-green-50 dark:border-green-800 dark:bg-green-950'
-          : 'border-gray-200 bg-gray-50 dark:border-gray-700 dark:bg-gray-900'
+          ? "border-green-200 bg-green-50 dark:border-green-800 dark:bg-green-950"
+          : "border-gray-200 bg-gray-50 dark:border-gray-700 dark:bg-gray-900"
       }`}
       onClick={onClick}
     >
@@ -230,14 +230,12 @@ function RequirementCard({
           )}
           <span className="text-sm font-medium">{requirement.name}</span>
         </div>
-        <Badge variant={requirement.met ? 'default' : 'secondary'} className="text-xs">
+        <Badge variant={requirement.met ? "default" : "secondary"} className="text-xs">
           {requirement.current} / {requirement.threshold} {requirement.unit}
         </Badge>
       </div>
 
-      <p className="mb-3 text-xs text-gray-600 dark:text-muted-foreground">
-        {requirement.description}
-      </p>
+      <p className="mb-3 text-xs text-gray-600 dark:text-muted-foreground">{requirement.description}</p>
 
       <div className="space-y-1">
         <Progress value={progress} className="h-2" />
@@ -257,21 +255,20 @@ function AssessmentGateCard({
   onRequirementClick?: (requirement: GatingRequirement) => void;
 }) {
   const difficultyColors = {
-    beginner: 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200',
-    intermediate: 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-[#f97316]',
-    advanced: 'bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200',
-    expert: 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200',
+    beginner: "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200",
+    intermediate: "bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-[#f97316]",
+    advanced: "bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200",
+    expert: "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200",
   };
 
   const unmetRequirements = gate.requirements.filter((req) => !req.met);
   const canAttempt =
-    gate.unlocked &&
-    (gate.maxAttempts === undefined || gate.currentAttempts < (gate.maxAttempts ?? Infinity));
+    gate.unlocked && (gate.maxAttempts === undefined || gate.currentAttempts < (gate.maxAttempts ?? Infinity));
 
   return (
     <Card
       className={`transition-all duration-300 ${
-        gate.unlocked ? 'shadow-md hover:shadow-lg' : 'opacity-75'
+        gate.unlocked ? "shadow-md hover:shadow-lg" : "opacity-75"
       }`}
     >
       <CardHeader className="pb-3">
@@ -314,7 +311,7 @@ function AssessmentGateCard({
               </div>
             )}
           </div>
-          {gate.assessmentConfig.type === 'practice' && (
+          {gate.assessmentConfig.type === "practice" && (
             <Trophy className="h-5 w-5 text-yellow-600" />
           )}
         </div>
@@ -344,14 +341,14 @@ function AssessmentGateCard({
           {unmetRequirements.length > 0 && (
             <motion.div
               initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
+              animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
             >
               <Alert>
                 <AlertTriangle className="h-4 w-4" />
                 <AlertDescription>
                   Complete {unmetRequirements.length} requirement
-                  {unmetRequirements.length !== 1 ? 's' : ''} to unlock this assessment.
+                  {unmetRequirements.length !== 1 ? "s" : ""} to unlock this assessment.
                 </AlertDescription>
               </Alert>
             </motion.div>
@@ -360,7 +357,7 @@ function AssessmentGateCard({
           {gate.maxAttempts && gate.currentAttempts >= gate.maxAttempts && (
             <motion.div
               initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
+              animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
             >
               <Alert variant="destructive">
@@ -376,9 +373,9 @@ function AssessmentGateCard({
         <Button onClick={onStart} disabled={!canAttempt} className="w-full" size="lg">
           {gate.unlocked
             ? canAttempt
-              ? 'Start Assessment'
-              : 'No Attempts Remaining'
-            : 'Requirements Not Met'}
+              ? "Start Assessment"
+              : "No Attempts Remaining"
+            : "Requirements Not Met"}
         </Button>
       </CardContent>
     </Card>
@@ -407,7 +404,7 @@ export function AssessmentGating({
           const updatedRequirements = gate.requirements.map((req) => {
             // Update requirement based on actual progress
             switch (req.type) {
-              case 'module': {
+              case "module":
                 // Get module completion percentage
                 const moduleCompletion = (userProgress as any)?.moduleProgress?.[req.id] || 0;
                 return {
@@ -415,25 +412,21 @@ export function AssessmentGating({
                   current: moduleCompletion,
                   met: moduleCompletion >= req.threshold,
                 };
-              }
 
-              case 'assessment': {
+              case "assessment":
                 // Get assessment scores
                 const assessmentScore = (userProgress as any)?.assessmentScores?.[req.id] || 0;
                 return { ...req, current: assessmentScore, met: assessmentScore >= req.threshold };
-              }
 
-              case 'time_spent': {
+              case "time_spent":
                 // Get study time
                 const timeSpent = userProgress?.timeSpent ?? 0;
                 return { ...req, current: timeSpent, met: timeSpent >= req.threshold };
-              }
 
-              case 'streak': {
+              case "streak":
                 // Get study streak
                 const streak = (userProgress as any)?.studyStreak ?? userProgress?.streak ?? 0;
                 return { ...req, current: streak, met: streak >= req.threshold };
-              }
 
               default:
                 return req;
@@ -450,21 +443,21 @@ export function AssessmentGating({
             assessmentConfig: {
               ...gate.assessmentConfig,
               userId,
-              moduleId: moduleId ?? '',
+              moduleId: moduleId ?? "",
             },
           };
         });
 
         setGates(updatedGates);
       } catch (error) {
-        console.error('Error loading gating data:', error);
+        console.error("Error loading gating data:", error);
       } finally {
         setIsLoading(false);
       }
     };
 
     void loadGatingData();
-  }, [userId, moduleId, gates]);
+  }, [userId, moduleId]);
 
   const handleAssessmentStart = (gate: AssessmentGate) => {
     if (gate.unlocked) {

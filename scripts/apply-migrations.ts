@@ -5,9 +5,9 @@
  */
 
 import { createClient } from '@supabase/supabase-js';
-import * as dotenv from 'dotenv';
 import * as fs from 'fs';
 import * as path from 'path';
+import * as dotenv from 'dotenv';
 
 // Load environment variables
 dotenv.config({ path: '.env.local' });
@@ -24,14 +24,14 @@ if (!supabaseUrl || !supabaseServiceRoleKey) {
 const supabase = createClient(supabaseUrl, supabaseServiceRoleKey, {
   auth: {
     autoRefreshToken: false,
-    persistSession: false,
-  },
+    persistSession: false
+  }
 });
 
 const migrationFiles = [
   '20250926_add_last_viewed_section.sql',
   '20250927_add_mdx_id_to_study_modules.sql',
-  '20250927_add_questions_module_id.sql',
+  '20250927_add_questions_module_id.sql'
 ];
 
 async function applyMigrations() {

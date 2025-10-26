@@ -16,7 +16,7 @@ export interface ReviewItem {
   moduleId: string;
   sectionId: string;
   concept: string;
-  type: 'micro-section' | 'weak-concept';
+  type: "micro-section" | "weak-concept";
 
   // Scheduling
   createdAt: string; // ISO timestamp
@@ -31,7 +31,7 @@ export interface ReviewItem {
 
   // Metadata
   title: string;
-  difficulty?: 'easy' | 'medium' | 'hard';
+  difficulty?: "easy" | "medium" | "hard";
 }
 
 export interface ReviewSession {
@@ -54,18 +54,18 @@ const INTERVALS = [1, 2, 4, 9, 19];
  * - Mastered (retention > 90%): Review less frequently (1.3x interval)
  */
 const DIFFICULTY_MULTIPLIERS = {
-  struggling: 0.7, // 30% shorter intervals
-  normal: 1.0, // Standard intervals
-  mastered: 1.3, // 30% longer intervals
+  struggling: 0.7,  // 30% shorter intervals
+  normal: 1.0,      // Standard intervals
+  mastered: 1.3,    // 30% longer intervals
 };
 
 /**
  * Determine difficulty level based on retention percentage
  */
-export function getDifficultyLevel(retention: number): 'struggling' | 'normal' | 'mastered' {
-  if (retention < 70) return 'struggling';
-  if (retention > 90) return 'mastered';
-  return 'normal';
+export function getDifficultyLevel(retention: number): "struggling" | "normal" | "mastered" {
+  if (retention < 70) return "struggling";
+  if (retention > 90) return "mastered";
+  return "normal";
 }
 
 /**
@@ -94,43 +94,42 @@ export function calculateNextReview(
  * Calculate adaptive interval based on performance trend
  * Analyzes last N reviews to determine if student is improving or struggling
  */
-export function calculateAdaptiveInterval(item: ReviewItem, wasCorrect: boolean): number {
-  const { retention } = item;
+export function calculateAdaptiveInterval(
+  item: ReviewItem,
+  wasCorrect: boolean
+): number {
+  const retention = item.retention;
 
   // First few reviews: Use standard progression
   if (item.totalReviews < 3) {
-    return wasCorrect ? Math.min(item.intervalIndex + 1, INTERVALS.length - 1) : item.intervalIndex;
+    return wasCorrect
+      ? Math.min(item.intervalIndex + 1, INTERVALS.length - 1)
+      : item.intervalIndex;
   }
 
   // Adaptive logic based on retention
   if (retention < 70) {
     // Struggling: Stay at current or go back one level
-    return wasCorrect ? item.intervalIndex : Math.max(0, item.intervalIndex - 1);
+    return wasCorrect
+      ? item.intervalIndex
+      : Math.max(0, item.intervalIndex - 1);
   } else if (retention > 90) {
     // Mastered: Can skip ahead if consistently correct
-    return wasCorrect ? Math.min(item.intervalIndex + 2, INTERVALS.length - 1) : item.intervalIndex;
+    return wasCorrect
+      ? Math.min(item.intervalIndex + 2, INTERVALS.length - 1)
+      : item.intervalIndex;
   } else {
     // Normal: Standard progression
-    return wasCorrect ? Math.min(item.intervalIndex + 1, INTERVALS.length - 1) : item.intervalIndex;
+    return wasCorrect
+      ? Math.min(item.intervalIndex + 1, INTERVALS.length - 1)
+      : item.intervalIndex;
   }
 }
 
 /**
  * Add a new item to the spaced repetition system
  */
-export function addReviewItem(
-  item: Omit<
-    ReviewItem,
-    | 'id'
-    | 'createdAt'
-    | 'lastReviewed'
-    | 'nextReview'
-    | 'intervalIndex'
-    | 'totalReviews'
-    | 'correctReviews'
-    | 'retention'
-  >
-): ReviewItem {
+export function addReviewItem(item: Omit<ReviewItem, "id" | "createdAt" | "lastReviewed" | "nextReview" | "intervalIndex" | "totalReviews" | "correctReviews" | "retention">): ReviewItem {
   const now = new Date();
   const nextReview = calculateNextReview(now, 0); // First review in 1 day
 
@@ -152,7 +151,10 @@ export function addReviewItem(
 /**
  * Update review item after a review session with adaptive difficulty
  */
-export function updateReviewItem(item: ReviewItem, wasCorrect: boolean): ReviewItem {
+export function updateReviewItem(
+  item: ReviewItem,
+  wasCorrect: boolean
+): ReviewItem {
   const now = new Date();
   const totalReviews = item.totalReviews + 1;
   const correctReviews = item.correctReviews + (wasCorrect ? 1 : 0);
@@ -165,12 +167,9 @@ export function updateReviewItem(item: ReviewItem, wasCorrect: boolean): ReviewI
   const nextReview = calculateNextReview(now, nextIntervalIndex, retention);
 
   // Update difficulty level based on current retention
-  const difficulty =
-    getDifficultyLevel(retention) === 'struggling'
-      ? 'hard'
-      : getDifficultyLevel(retention) === 'mastered'
-        ? 'easy'
-        : 'medium';
+  const difficulty = getDifficultyLevel(retention) === "struggling" ? "hard"
+    : getDifficultyLevel(retention) === "mastered" ? "easy"
+    : "medium";
 
   return {
     ...item,
@@ -188,7 +187,7 @@ export function updateReviewItem(item: ReviewItem, wasCorrect: boolean): ReviewI
  * Get all review items from localStorage
  */
 export function getAllReviewItems(moduleId?: string): ReviewItem[] {
-  if (typeof window === 'undefined') return [];
+  if (typeof window === "undefined") return [];
 
   const allItems: ReviewItem[] = [];
 
@@ -210,7 +209,7 @@ export function getAllReviewItems(moduleId?: string): ReviewItem[] {
   // Otherwise get all modules
   for (let i = 0; i < localStorage.length; i++) {
     const key = localStorage.key(i);
-    if (key?.startsWith('spaced-repetition-')) {
+    if (key && key.startsWith("spaced-repetition-")) {
       const data = localStorage.getItem(key);
       if (data) {
         try {
@@ -230,7 +229,7 @@ export function getAllReviewItems(moduleId?: string): ReviewItem[] {
  * Save review items to localStorage
  */
 export function saveReviewItems(moduleId: string, items: ReviewItem[]): void {
-  if (typeof window === 'undefined') return;
+  if (typeof window === "undefined") return;
 
   const key = `spaced-repetition-${moduleId}`;
   localStorage.setItem(key, JSON.stringify(items));
@@ -244,7 +243,7 @@ export function getItemsDueToday(moduleId?: string): ReviewItem[] {
   const now = new Date();
   now.setHours(23, 59, 59, 999); // End of today
 
-  return allItems.filter((item) => {
+  return allItems.filter(item => {
     const nextReview = new Date(item.nextReview);
     return nextReview <= now;
   });
@@ -260,7 +259,7 @@ export function getItemsDueInDays(days: number, moduleId?: string): ReviewItem[]
   futureDate.setDate(futureDate.getDate() + days);
   futureDate.setHours(23, 59, 59, 999);
 
-  return allItems.filter((item) => {
+  return allItems.filter(item => {
     const nextReview = new Date(item.nextReview);
     return nextReview >= now && nextReview <= futureDate;
   });
@@ -274,7 +273,7 @@ export function getOverdueItems(moduleId?: string): ReviewItem[] {
   const now = new Date();
   now.setHours(0, 0, 0, 0); // Start of today
 
-  return allItems.filter((item) => {
+  return allItems.filter(item => {
     const nextReview = new Date(item.nextReview);
     return nextReview < now;
   });
@@ -284,7 +283,7 @@ export function getOverdueItems(moduleId?: string): ReviewItem[] {
  * Import weak concepts from quiz attempts into spaced repetition system
  */
 export function importWeakConcepts(moduleId: string): void {
-  if (typeof window === 'undefined') return;
+  if (typeof window === "undefined") return;
 
   // Get weak areas from quiz tracking
   const weakAreasKey = `weak-areas-${moduleId}`;
@@ -300,17 +299,17 @@ export function importWeakConcepts(moduleId: string): void {
     Object.entries(weakAreas).forEach(([concept, failureCount]) => {
       // Check if already tracked
       const exists = existingItems.some(
-        (item) => item.concept === concept && item.moduleId === moduleId
+        item => item.concept === concept && item.moduleId === moduleId
       );
 
       if (!exists && failureCount > 0) {
         const newItem = addReviewItem({
           moduleId,
-          sectionId: 'weak-concept', // Generic for now
+          sectionId: "weak-concept", // Generic for now
           concept,
-          type: 'weak-concept',
+          type: "weak-concept",
           title: concept,
-          difficulty: failureCount >= 3 ? 'hard' : failureCount >= 2 ? 'medium' : 'easy',
+          difficulty: failureCount >= 3 ? "hard" : failureCount >= 2 ? "medium" : "easy",
         });
 
         existingItems.push(newItem);
@@ -319,7 +318,7 @@ export function importWeakConcepts(moduleId: string): void {
 
     saveReviewItems(moduleId, existingItems);
   } catch (e) {
-    console.error('Error importing weak concepts:', e);
+    console.error("Error importing weak concepts:", e);
   }
 }
 
@@ -338,15 +337,14 @@ export function getReviewStats(moduleId?: string): {
   const overdue = getOverdueItems(moduleId);
 
   const totalRetention = allItems.reduce((sum, item) => sum + item.retention, 0);
-  const averageRetention = allItems.length > 0 ? Math.round(totalRetention / allItems.length) : 100;
+  const averageRetention = allItems.length > 0
+    ? Math.round(totalRetention / allItems.length)
+    : 100;
 
-  const itemsByInterval = allItems.reduce(
-    (acc, item) => {
-      acc[item.intervalIndex] = (acc[item.intervalIndex] || 0) + 1;
-      return acc;
-    },
-    {} as Record<number, number>
-  );
+  const itemsByInterval = allItems.reduce((acc, item) => {
+    acc[item.intervalIndex] = (acc[item.intervalIndex] || 0) + 1;
+    return acc;
+  }, {} as Record<number, number>);
 
   return {
     totalItems: allItems.length,
@@ -361,15 +359,15 @@ export function getReviewStats(moduleId?: string): {
  * Get all review sessions from localStorage
  */
 export function getReviewSessions(): ReviewSession[] {
-  if (typeof window === 'undefined') return [];
+  if (typeof window === "undefined") return [];
 
-  const data = localStorage.getItem('review-sessions');
+  const data = localStorage.getItem("review-sessions");
   if (!data) return [];
 
   try {
     return JSON.parse(data);
   } catch (e) {
-    console.error('Error parsing review sessions:', e);
+    console.error("Error parsing review sessions:", e);
     return [];
   }
 }
@@ -377,8 +375,8 @@ export function getReviewSessions(): ReviewSession[] {
 /**
  * Save a completed review session
  */
-export function saveReviewSession(session: Omit<ReviewSession, 'id' | 'timestamp'>): void {
-  if (typeof window === 'undefined') return;
+export function saveReviewSession(session: Omit<ReviewSession, "id" | "timestamp">): void {
+  if (typeof window === "undefined") return;
 
   const sessions = getReviewSessions();
   const newSession: ReviewSession = {
@@ -394,7 +392,7 @@ export function saveReviewSession(session: Omit<ReviewSession, 'id' | 'timestamp
     sessions.shift();
   }
 
-  localStorage.setItem('review-sessions', JSON.stringify(sessions));
+  localStorage.setItem("review-sessions", JSON.stringify(sessions));
 }
 
 /**
@@ -410,19 +408,15 @@ export function getPerformanceAnalytics(moduleId?: string): {
 } {
   const allItems = getAllReviewItems(moduleId);
 
-  const struggling = allItems.filter(
-    (item) => getDifficultyLevel(item.retention) === 'struggling'
-  ).length;
-  const normal = allItems.filter((item) => getDifficultyLevel(item.retention) === 'normal').length;
-  const mastered = allItems.filter(
-    (item) => getDifficultyLevel(item.retention) === 'mastered'
-  ).length;
+  const struggling = allItems.filter(item => getDifficultyLevel(item.retention) === "struggling").length;
+  const normal = allItems.filter(item => getDifficultyLevel(item.retention) === "normal").length;
+  const mastered = allItems.filter(item => getDifficultyLevel(item.retention) === "mastered").length;
 
   // Track improving vs declining items (comparing last 3 reviews to previous 3)
   let improvingItems = 0;
   let decliningItems = 0;
 
-  allItems.forEach((item) => {
+  allItems.forEach(item => {
     if (item.totalReviews >= 6) {
       // Simple heuristic: Improving if current retention is higher than at halfway point
       const halfwayRetention = (item.correctReviews / item.totalReviews) * 100;
@@ -436,13 +430,12 @@ export function getPerformanceAnalytics(moduleId?: string): {
 
   // Calculate retention trend from recent sessions
   const recentSessions = getReviewSessions().slice(-10);
-  const averageRetentionTrend =
-    recentSessions.length > 0
-      ? Math.round(
-          recentSessions.reduce((sum, session) => sum + session.averageRetention, 0) /
-            recentSessions.length
-        )
-      : 0;
+  const averageRetentionTrend = recentSessions.length > 0
+    ? Math.round(
+        recentSessions.reduce((sum, session) => sum + session.averageRetention, 0) /
+          recentSessions.length
+      )
+    : 0;
 
   return {
     struggling,
@@ -465,35 +458,35 @@ export function getPersonalizedRecommendations(moduleId?: string): string[] {
   // Overdue items
   if (stats.overdue > 0) {
     recommendations.push(
-      `🚨 You have ${stats.overdue} overdue review${stats.overdue > 1 ? 's' : ''}. Complete these first to prevent forgetting.`
+      `🚨 You have ${stats.overdue} overdue review${stats.overdue > 1 ? "s" : ""}. Complete these first to prevent forgetting.`
     );
   }
 
   // Struggling items
   if (analytics.struggling > 0) {
     recommendations.push(
-      `📚 ${analytics.struggling} concept${analytics.struggling > 1 ? 's' : ''} need${analytics.struggling === 1 ? 's' : ''} extra attention. Review the original section content before your next session.`
+      `📚 ${analytics.struggling} concept${analytics.struggling > 1 ? "s" : ""} need${analytics.struggling === 1 ? "s" : ""} extra attention. Review the original section content before your next session.`
     );
   }
 
   // Mastered items
   if (analytics.mastered > 0) {
     recommendations.push(
-      `⭐ Great job! You've mastered ${analytics.mastered} concept${analytics.mastered > 1 ? 's' : ''}. These will be reviewed less frequently.`
+      `⭐ Great job! You've mastered ${analytics.mastered} concept${analytics.mastered > 1 ? "s" : ""}. These will be reviewed less frequently.`
     );
   }
 
   // Declining performance
   if (analytics.decliningItems > 0) {
     recommendations.push(
-      `📉 ${analytics.decliningItems} concept${analytics.decliningItems > 1 ? 's show' : ' shows'} declining retention. Consider re-reading the source material.`
+      `📉 ${analytics.decliningItems} concept${analytics.decliningItems > 1 ? "s show" : " shows"} declining retention. Consider re-reading the source material.`
     );
   }
 
   // Improving performance
   if (analytics.improvingItems > 0) {
     recommendations.push(
-      `📈 Excellent progress! ${analytics.improvingItems} concept${analytics.improvingItems > 1 ? 's are' : ' is'} improving with each review.`
+      `📈 Excellent progress! ${analytics.improvingItems} concept${analytics.improvingItems > 1 ? "s are" : " is"} improving with each review.`
     );
   }
 

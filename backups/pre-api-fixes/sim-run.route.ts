@@ -1,15 +1,15 @@
-import { type NextRequest, NextResponse } from 'next/server';
-import { runSimulator } from '@/lib/simulator-runner';
+import { type NextRequest, NextResponse } from "next/server";
+import { runSimulator } from "@/lib/simulator-runner";
 
 type RunPayload = {
   name?: string;
-  format?: 'json' | 'csv';
+  format?: "json" | "csv";
 };
 
 export async function POST(request: NextRequest) {
-  if (process.env.NODE_ENV === 'production' && process.env['ENABLE_SIMULATOR'] !== 'true') {
+  if (process.env.NODE_ENV === "production" && process.env["ENABLE_SIMULATOR"] !== "true") {
     return NextResponse.json(
-      { ok: false, error: 'Simulator endpoints are disabled in production.' },
+      { ok: false, error: "Simulator endpoints are disabled in production." },
       { status: 501 }
     );
   }
@@ -17,16 +17,16 @@ export async function POST(request: NextRequest) {
   try {
     payload = await request.json();
   } catch (_error) {
-    return NextResponse.json({ ok: false, error: 'Invalid JSON body' }, { status: 400 });
+    return NextResponse.json({ ok: false, error: "Invalid JSON body" }, { status: 400 });
   }
 
-  if (!payload?.name || typeof payload.name !== 'string') {
-    return NextResponse.json({ ok: false, error: 'Name is required.' }, { status: 400 });
+  if (!payload?.name || typeof payload.name !== "string") {
+    return NextResponse.json({ ok: false, error: "Name is required." }, { status: 400 });
   }
 
-  const args = ['--json', '--run-saved', payload.name];
-  if (payload.format === 'csv') {
-    args.push('--out', 'csv');
+  const args = ["--json", "--run-saved", payload.name];
+  if (payload.format === "csv") {
+    args.push("--out", "csv");
   }
 
   try {
@@ -34,7 +34,7 @@ export async function POST(request: NextRequest) {
     const status = result?.ok === false ? 400 : 200;
     return NextResponse.json(result, { status });
   } catch (_error) {
-    const message = error instanceof Error ? error.message : 'Simulator invocation failed';
+    const message = error instanceof Error ? error.message : "Simulator invocation failed";
     return NextResponse.json({ ok: false, error: message }, { status: 500 });
   }
 }

@@ -1,40 +1,48 @@
+import React, { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Badge } from "@/components/ui/badge";
+import { Progress } from "@/components/ui/progress";
 import {
-  Award,
   BarChart3,
-  Brain,
-  Calendar,
-  Clock,
-  Download,
-  RefreshCw,
-  Target,
   TrendingUp,
-} from 'lucide-react';
-import type React from 'react';
-import { useEffect, useState } from 'react';
+  Clock,
+  Target,
+  Award,
+  Brain,
+  Users,
+  Calendar,
+  Download,
+  Filter,
+  RefreshCw,
+} from "lucide-react";
 import {
-  Area,
+  LineChart,
+  Line,
   AreaChart,
-  Bar,
+  Area,
   BarChart,
-  CartesianGrid,
+  Bar,
+  PieChart,
+  Pie,
   Cell,
-  ResponsiveContainer,
-  Tooltip,
   XAxis,
   YAxis,
-} from 'recharts';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Progress } from '@/components/ui/progress';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { analyticsService } from '../lib/services/analytics-service';
-import { progressService } from '../lib/services/progress-service';
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+} from "recharts";
+import { analyticsService } from "../lib/services/analytics-service";
+import { progressService } from "../lib/services/progress-service";
+import type { UserAnalytics, ContentAnalytics } from "../types/assessment";
 
 interface AssessmentDashboardProps {
   userId: string;
-  timeRange?: '7d' | '30d' | '90d' | '1y';
-  onTimeRangeChange?: (range: '7d' | '30d' | '90d' | '1y') => void;
+  timeRange?: "7d" | "30d" | "90d" | "1y";
+  onTimeRangeChange?: (range: "7d" | "30d" | "90d" | "1y") => void;
 }
 
 interface DashboardMetrics {
@@ -76,65 +84,65 @@ const mockMetrics: DashboardMetrics = {
   timeSpent: 450, // minutes
   streakDays: 7,
   domainMastery: {
-    'asking-questions': 0.85,
-    'refining-questions': 0.78,
-    'taking-action': 0.72,
-    'navigation-basics': 0.9,
-    'reporting-data': 0.68,
+    "asking-questions": 0.85,
+    "refining-questions": 0.78,
+    "taking-action": 0.72,
+    "navigation-basics": 0.9,
+    "reporting-data": 0.68,
   },
   recentActivity: [
-    { date: '2024-01-01', assessments: 2, averageScore: 0.85, timeSpent: 45 },
-    { date: '2024-01-02', assessments: 1, averageScore: 0.78, timeSpent: 30 },
-    { date: '2024-01-03', assessments: 3, averageScore: 0.82, timeSpent: 60 },
-    { date: '2024-01-04', assessments: 1, averageScore: 0.9, timeSpent: 25 },
-    { date: '2024-01-05', assessments: 2, averageScore: 0.75, timeSpent: 50 },
-    { date: '2024-01-06', assessments: 1, averageScore: 0.88, timeSpent: 35 },
-    { date: '2024-01-07', assessments: 2, averageScore: 0.83, timeSpent: 40 },
+    { date: "2024-01-01", assessments: 2, averageScore: 0.85, timeSpent: 45 },
+    { date: "2024-01-02", assessments: 1, averageScore: 0.78, timeSpent: 30 },
+    { date: "2024-01-03", assessments: 3, averageScore: 0.82, timeSpent: 60 },
+    { date: "2024-01-04", assessments: 1, averageScore: 0.9, timeSpent: 25 },
+    { date: "2024-01-05", assessments: 2, averageScore: 0.75, timeSpent: 50 },
+    { date: "2024-01-06", assessments: 1, averageScore: 0.88, timeSpent: 35 },
+    { date: "2024-01-07", assessments: 2, averageScore: 0.83, timeSpent: 40 },
   ],
   performanceTrends: [
-    { domain: 'Asking Questions', current: 85, previous: 78, change: 7 },
-    { domain: 'Refining & Targeting', current: 78, previous: 82, change: -4 },
-    { domain: 'Taking Action', current: 72, previous: 68, change: 4 },
-    { domain: 'Navigation', current: 90, previous: 85, change: 5 },
-    { domain: 'Reporting', current: 68, previous: 65, change: 3 },
+    { domain: "Asking Questions", current: 85, previous: 78, change: 7 },
+    { domain: "Refining & Targeting", current: 78, previous: 82, change: -4 },
+    { domain: "Taking Action", current: 72, previous: 68, change: 4 },
+    { domain: "Navigation", current: 90, previous: 85, change: 5 },
+    { domain: "Reporting", current: 68, previous: 65, change: 3 },
   ],
   upcomingAssessments: [
-    { id: '1', name: 'Advanced Targeting Lab', due: '2024-01-10', difficulty: 'Advanced' },
-    { id: '2', name: 'Certification Practice Exam', due: '2024-01-15', difficulty: 'Expert' },
+    { id: "1", name: "Advanced Targeting Lab", due: "2024-01-10", difficulty: "Advanced" },
+    { id: "2", name: "Certification Practice Exam", due: "2024-01-15", difficulty: "Expert" },
   ],
   achievements: [
     {
-      id: '1',
-      name: 'First Steps',
-      description: 'Complete your first assessment',
+      id: "1",
+      name: "First Steps",
+      description: "Complete your first assessment",
       earned: true,
       progress: 100,
     },
     {
-      id: '2',
-      name: 'Perfect Score',
-      description: 'Score 100% on any assessment',
+      id: "2",
+      name: "Perfect Score",
+      description: "Score 100% on any assessment",
       earned: true,
       progress: 100,
     },
     {
-      id: '3',
-      name: 'Consistent Learner',
-      description: 'Study for 7 consecutive days',
+      id: "3",
+      name: "Consistent Learner",
+      description: "Study for 7 consecutive days",
       earned: true,
       progress: 100,
     },
     {
-      id: '4',
-      name: 'Domain Expert',
-      description: 'Master all 5 TCO domains',
+      id: "4",
+      name: "Domain Expert",
+      description: "Master all 5 TCO domains",
       earned: false,
       progress: 60,
     },
     {
-      id: '5',
-      name: 'Speed Demon',
-      description: 'Complete assessment in under 10 minutes',
+      id: "5",
+      name: "Speed Demon",
+      description: "Complete assessment in under 10 minutes",
       earned: false,
       progress: 0,
     },
@@ -142,11 +150,11 @@ const mockMetrics: DashboardMetrics = {
 };
 
 const DOMAIN_COLORS = {
-  'asking-questions': '#3B82F6',
-  'refining-questions': '#EF4444',
-  'taking-action': '#10B981',
-  'navigation-basics': '#F59E0B',
-  'reporting-data': '#8B5CF6',
+  "asking-questions": "#3B82F6",
+  "refining-questions": "#EF4444",
+  "taking-action": "#10B981",
+  "navigation-basics": "#F59E0B",
+  "reporting-data": "#8B5CF6",
 };
 
 function MetricCard({
@@ -155,7 +163,7 @@ function MetricCard({
   subtitle,
   icon: Icon,
   trend,
-  color = 'blue',
+  color = "blue",
 }: {
   title: string;
   value: string | number;
@@ -181,14 +189,14 @@ function MetricCard({
         {trend && (
           <div className="mt-4 flex items-center border-t pt-4">
             <TrendingUp
-              className={`mr-1 h-4 w-4 ${trend.value >= 0 ? 'text-[#22c55e]' : 'text-red-600'}`}
+              className={`mr-1 h-4 w-4 ${trend.value >= 0 ? "text-[#22c55e]" : "text-red-600"}`}
             />
             <span
               className={`text-sm font-medium ${
-                trend.value >= 0 ? 'text-[#22c55e]' : 'text-red-600'
+                trend.value >= 0 ? "text-[#22c55e]" : "text-red-600"
               }`}
             >
-              {trend.value >= 0 ? '+' : ''}
+              {trend.value >= 0 ? "+" : ""}
               {trend.value}%
             </span>
             <span className="ml-1 text-sm text-muted-foreground">{trend.label}</span>
@@ -201,9 +209,9 @@ function MetricCard({
 
 function DomainMasteryChart({ data }: { data: Record<string, number> }) {
   const chartData = Object.entries(data).map(([domain, score]) => ({
-    domain: domain.replace('-', ' ').replace(/\b\w/g, (l) => l.toUpperCase()),
+    domain: domain.replace("-", " ").replace(/\b\w/g, (l) => l.toUpperCase()),
     score: Math.round(score * 100),
-    color: DOMAIN_COLORS[domain as keyof typeof DOMAIN_COLORS] || '#6B7280',
+    color: DOMAIN_COLORS[domain as keyof typeof DOMAIN_COLORS] || "#6B7280",
   }));
 
   return (
@@ -213,12 +221,12 @@ function DomainMasteryChart({ data }: { data: Record<string, number> }) {
         <XAxis dataKey="domain" fontSize={12} angle={-45} textAnchor="end" height={80} />
         <YAxis fontSize={12} domain={[0, 100]} tickFormatter={(value) => `${value}%`} />
         <Tooltip
-          formatter={(value) => [`${value}%`, 'Mastery']}
-          labelStyle={{ color: '#374151' }}
+          formatter={(value) => [`${value}%`, "Mastery"]}
+          labelStyle={{ color: "#374151" }}
           contentStyle={{
-            backgroundColor: 'rgba(255, 255, 255, 0.95)',
-            border: '1px solid #E5E7EB',
-            borderRadius: '8px',
+            backgroundColor: "rgba(255, 255, 255, 0.95)",
+            border: "1px solid #E5E7EB",
+            borderRadius: "8px",
           }}
         />
         <Bar dataKey="score" radius={[4, 4, 0, 0]} fill="#6B7280">
@@ -244,22 +252,22 @@ function ActivityChart({
           dataKey="date"
           fontSize={12}
           tickFormatter={(value) =>
-            new Date(value).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
+            new Date(value).toLocaleDateString("en-US", { month: "short", day: "numeric" })
           }
         />
         <YAxis fontSize={12} />
         <Tooltip
           labelFormatter={(value) => new Date(value).toLocaleDateString()}
           formatter={(value, name) => {
-            if (name === 'averageScore')
-              return [`${Math.round((value as number) * 100)}%`, 'Avg Score'];
-            if (name === 'timeSpent') return [`${value}min`, 'Time Spent'];
+            if (name === "averageScore")
+              return [`${Math.round((value as number) * 100)}%`, "Avg Score"];
+            if (name === "timeSpent") return [`${value}min`, "Time Spent"];
             return [value, name];
           }}
           contentStyle={{
-            backgroundColor: 'rgba(255, 255, 255, 0.95)',
-            border: '1px solid #E5E7EB',
-            borderRadius: '8px',
+            backgroundColor: "rgba(255, 255, 255, 0.95)",
+            border: "1px solid #E5E7EB",
+            borderRadius: "8px",
           }}
         />
         <Area
@@ -287,12 +295,12 @@ function ActivityChart({
 
 export function AssessmentDashboard({
   userId,
-  timeRange = '30d',
+  timeRange = "30d",
   onTimeRangeChange,
 }: AssessmentDashboardProps) {
   const [metrics, setMetrics] = useState<DashboardMetrics>(mockMetrics);
   const [isLoading, setIsLoading] = useState(true);
-  const [selectedTab, setSelectedTab] = useState('overview');
+  const [selectedTab, setSelectedTab] = useState("overview");
 
   useEffect(() => {
     const loadDashboardData = async () => {
@@ -309,7 +317,7 @@ export function AssessmentDashboard({
 
         setMetrics(mockMetrics);
       } catch (error) {
-        console.error('Error loading dashboard data:', error);
+        console.error("Error loading dashboard data:", error);
       } finally {
         setIsLoading(false);
       }
@@ -323,10 +331,10 @@ export function AssessmentDashboard({
       // Export dashboard data as PDF or CSV
       const analytics = await analyticsService.getUserAnalytics(userId, timeRange);
       const blob = new Blob([JSON.stringify(analytics, null, 2)], {
-        type: 'application/json',
+        type: "application/json",
       });
       const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
+      const a = document.createElement("a");
       a.href = url;
       a.download = `assessment-analytics-${timeRange}.json`;
       document.body.appendChild(a);
@@ -334,7 +342,7 @@ export function AssessmentDashboard({
       document.body.removeChild(a);
       URL.revokeObjectURL(url);
     } catch (error) {
-      console.error('Error exporting data:', error);
+      console.error("Error exporting data:", error);
     }
   };
 
@@ -367,7 +375,7 @@ export function AssessmentDashboard({
           {/* Time Range Selector */}
           <select
             value={timeRange}
-            onChange={(e) => onTimeRangeChange?.(e.target.value as '7d' | '30d' | '90d' | '1y')}
+            onChange={(e) => onTimeRangeChange?.(e.target.value as "7d" | "30d" | "90d" | "1y")}
             className="rounded-lg border bg-white px-3 py-2 text-sm dark:bg-card"
           >
             <option value="7d">Last 7 days</option>
@@ -394,7 +402,7 @@ export function AssessmentDashboard({
           value={metrics.totalAssessments}
           subtitle="Completed"
           icon={BarChart3}
-          trend={{ value: 15, label: 'vs last period' }}
+          trend={{ value: 15, label: "vs last period" }}
           color="blue"
         />
 
@@ -403,7 +411,7 @@ export function AssessmentDashboard({
           value={`${Math.round(metrics.averageScore * 100)}%`}
           subtitle="Across all assessments"
           icon={Target}
-          trend={{ value: 5, label: 'improvement' }}
+          trend={{ value: 5, label: "improvement" }}
           color="green"
         />
 
@@ -412,7 +420,7 @@ export function AssessmentDashboard({
           value={`${Math.floor(metrics.timeSpent / 60)}h ${metrics.timeSpent % 60}m`}
           subtitle="Total learning time"
           icon={Clock}
-          trend={{ value: 23, label: 'increase' }}
+          trend={{ value: 23, label: "increase" }}
           color="cyan"
         />
 
@@ -421,7 +429,7 @@ export function AssessmentDashboard({
           value={`${metrics.streakDays} days`}
           subtitle="Current streak"
           icon={Award}
-          trend={{ value: 0, label: 'maintain streak' }}
+          trend={{ value: 0, label: "maintain streak" }}
           color="orange"
         />
       </div>
@@ -485,12 +493,12 @@ export function AssessmentDashboard({
                     <div className="text-right">
                       <div
                         className={`flex items-center gap-1 ${
-                          trend.change >= 0 ? 'text-[#22c55e]' : 'text-red-600'
+                          trend.change >= 0 ? "text-[#22c55e]" : "text-red-600"
                         }`}
                       >
                         <TrendingUp className="h-4 w-4" />
                         <span className="font-medium">
-                          {trend.change >= 0 ? '+' : ''}
+                          {trend.change >= 0 ? "+" : ""}
                           {trend.change}%
                         </span>
                       </div>
@@ -523,7 +531,7 @@ export function AssessmentDashboard({
                       </p>
                     </div>
                     <Badge
-                      variant={assessment.difficulty === 'Expert' ? 'destructive' : 'secondary'}
+                      variant={assessment.difficulty === "Expert" ? "destructive" : "secondary"}
                     >
                       {assessment.difficulty}
                     </Badge>
@@ -542,8 +550,8 @@ export function AssessmentDashboard({
                 key={achievement.id}
                 className={`transition-all ${
                   achievement.earned
-                    ? 'bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-950 dark:to-emerald-950'
-                    : ''
+                    ? "bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-950 dark:to-emerald-950"
+                    : ""
                 }`}
               >
                 <CardContent className="p-6">

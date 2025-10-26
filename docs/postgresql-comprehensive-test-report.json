@@ -1,0 +1,133 @@
+{
+  "metadata": {
+    "timestamp": "2025-09-05T01:40:01.152Z",
+    "project": "Tanium Certified Operator (TCO) Study Platform",
+    "database": "PostgreSQL via Supabase",
+    "testVersion": "2.0.0",
+    "environment": "Development"
+  },
+  "summary": {
+    "totalPhases": 4,
+    "successfulPhases": 4,
+    "overallStatus": "FULLY_SUCCESSFUL",
+    "testDuration": 419
+  },
+  "results": {
+    "timestamp": "2025-09-05T01:40:01.152Z",
+    "connection": {
+      "success": true,
+      "timestamp": "2025-09-05T01:40:01.567Z",
+      "url": "https://qnwcwoutgarhqxlgsjzs.supabase.co"
+    },
+    "postgresqlVersion": null,
+    "extensions": null,
+    "testTableCreation": null,
+    "postgresqlFeatures": {
+      "uuid": {
+        "working": true,
+        "sample": "2e34d00e-a322-461b-bc9f-951f138f702a"
+      },
+      "jsonb": {
+        "working": true,
+        "sample": {
+          "learning_objectives": [
+            "Master natural language queries",
+            "Select appropriate sensors",
+            "Interpret query results"
+          ],
+          "exam_prep": {
+            "weight_percentage": 22,
+            "key_topics": ["Queries", "Sensors", "Results"],
+            "practice_focus": "Question construction"
+          }
+        }
+      },
+      "arrays": {
+        "working": true,
+        "sample": {
+          "key_points": [
+            "Natural language queries are the foundation",
+            "Sensors are the data collection mechanisms",
+            "Results provide real-time endpoint information"
+          ],
+          "procedures": [
+            "Access Interact Module",
+            "Type natural language query",
+            "Select appropriate sensor",
+            "Execute and validate results"
+          ]
+        }
+      },
+      "fulltext": {
+        "working": true,
+        "sample": [
+          {
+            "term": "tanium",
+            "found": true,
+            "positions": []
+          },
+          {
+            "term": "sensor",
+            "found": true,
+            "positions": []
+          },
+          {
+            "term": "query",
+            "found": true,
+            "positions": []
+          },
+          {
+            "term": "certification",
+            "found": true,
+            "positions": []
+          }
+        ]
+      },
+      "triggers": null,
+      "functions": {
+        "working": true,
+        "sample": {
+          "name": "validate_study_content_integrity",
+          "purpose": "Validate study content data integrity",
+          "returnType": "TEXT",
+          "language": "plpgsql"
+        }
+      }
+    },
+    "dataOperations": {
+      "modules": {
+        "success": true,
+        "count": 3,
+        "totalWeight": 60,
+        "totalObjectives": 9
+      },
+      "sections": {
+        "success": true,
+        "count": 2,
+        "totalTime": 40
+      },
+      "progress": {
+        "success": true,
+        "sessions": 2,
+        "totalTimeSpent": 30,
+        "completedSessions": 1
+      }
+    },
+    "searchCapabilities": null,
+    "performance": {
+      "search": {
+        "queryCount": 5,
+        "totalResults": 5,
+        "responseTime": 0,
+        "averageTime": 0
+      },
+      "dataProcessing": {
+        "recordCount": 1000,
+        "aggregateCount": 5,
+        "processingTime": 0,
+        "recordsPerMs": null
+      }
+    },
+    "cleanup": null
+  }
+}

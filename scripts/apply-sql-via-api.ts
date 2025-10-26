@@ -1,11 +1,11 @@
 #!/usr/bin/env tsx
-import dotenv from 'dotenv';
 /**
  * Apply a local SQL file to Supabase via Management API (uses PAT).
  * Requires: SUPABASE_ACCESS_TOKEN and project ref (SUPABASE_PROJECT_REF or parse from NEXT_PUBLIC_SUPABASE_URL)
  */
 import fs from 'fs';
 import path from 'path';
+import dotenv from 'dotenv';
 
 // Load env from .env.local if present
 const envLocal = path.resolve(process.cwd(), '.env.local');
@@ -37,11 +37,7 @@ function inferProjectRef(): string | null {
 
 async function main() {
   const args = parseArgs(process.argv.slice(2));
-  const filePath = args.file
-    ? path.isAbsolute(args.file)
-      ? args.file
-      : path.resolve(process.cwd(), args.file)
-    : '';
+  const filePath = args.file ? (path.isAbsolute(args.file) ? args.file : path.resolve(process.cwd(), args.file)) : '';
   if (!filePath || !fs.existsSync(filePath)) {
     console.error('Usage: tsx scripts/apply-sql-via-api.ts --file <sql-file>');
     process.exit(1);
@@ -50,22 +46,18 @@ async function main() {
   const token = process.env.SUPABASE_ACCESS_TOKEN;
   const ref = inferProjectRef();
   if (!token || !ref) {
-    console.error(
-      'Missing SUPABASE_ACCESS_TOKEN or project ref (SUPABASE_PROJECT_REF or parseable NEXT_PUBLIC_SUPABASE_URL).'
-    );
+    console.error('Missing SUPABASE_ACCESS_TOKEN or project ref (SUPABASE_PROJECT_REF or parseable NEXT_PUBLIC_SUPABASE_URL).');
     process.exit(1);
   }
 
   const sql = fs.readFileSync(filePath, 'utf8');
   const apiUrl = `https://api.supabase.com/v1/projects/${ref}/sql`;
 
-  console.log(
-    `Applying SQL to project ${ref} via Management API: ${path.relative(process.cwd(), filePath)}`
-  );
+  console.log(`Applying SQL to project ${ref} via Management API: ${path.relative(process.cwd(), filePath)}`);
   const res = await fetch(apiUrl, {
     method: 'POST',
     headers: {
-      Authorization: `Bearer ${token}`,
+      'Authorization': `Bearer ${token}`,
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({ query: sql }),
@@ -85,3 +77,4 @@ main().catch((e) => {
   console.error('Error:', e?.message || e);
   process.exit(1);
 });
+

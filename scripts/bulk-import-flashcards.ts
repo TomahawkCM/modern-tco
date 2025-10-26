@@ -7,7 +7,7 @@
  *
  * Usage:
  *   npx tsx scripts/bulk-import-flashcards.ts <file-path>
- *   npx tsx scripts/bulk-import-flashcards.ts data-archive/generated/generated-flashcards-*.ts
+ *   npx tsx scripts/bulk-import-flashcards.ts src/data/generated/generated-flashcards-*.ts
  *   npx tsx scripts/bulk-import-flashcards.ts --all
  *
  * Features:
@@ -20,8 +20,8 @@
 
 import { createClient } from '@supabase/supabase-js';
 import * as fs from 'fs';
-import * as glob from 'glob';
 import * as path from 'path';
+import * as glob from 'glob';
 
 // ==================== TYPES ====================
 
@@ -112,7 +112,10 @@ function validateFlashcard(flashcard: Flashcard, index: number): string[] {
 /**
  * Import flashcards to database
  */
-async function importFlashcards(supabase: any, flashcards: Flashcard[]): Promise<ImportResult> {
+async function importFlashcards(
+  supabase: any,
+  flashcards: Flashcard[]
+): Promise<ImportResult> {
   const result: ImportResult = {
     success: false,
     totalItems: flashcards.length,
@@ -201,7 +204,11 @@ async function importFlashcards(supabase: any, flashcards: Flashcard[]): Promise
 /**
  * Log import to content_import_logs table
  */
-async function logImport(supabase: any, result: ImportResult, sourceFile: string): Promise<void> {
+async function logImport(
+  supabase: any,
+  result: ImportResult,
+  sourceFile: string
+): Promise<void> {
   await supabase.from('content_import_logs').insert({
     content_type: 'flashcards',
     import_method: 'bulk_api',
@@ -227,9 +234,7 @@ function printSummary(result: ImportResult): void {
   console.log(`Total flashcards:    ${result.totalItems}`);
   console.log(`Successful imports:  ${result.successfulItems} ✅`);
   console.log(`Failed imports:      ${result.failedItems} ❌`);
-  console.log(
-    `Success rate:        ${((result.successfulItems / result.totalItems) * 100).toFixed(1)}%`
-  );
+  console.log(`Success rate:        ${((result.successfulItems / result.totalItems) * 100).toFixed(1)}%`);
   console.log('='.repeat(60));
 
   if (result.success) {
@@ -257,9 +262,7 @@ async function main() {
     console.error('  npx tsx scripts/bulk-import-flashcards.ts <file-path>');
     console.error('  npx tsx scripts/bulk-import-flashcards.ts --all');
     console.error('\nExamples:');
-    console.error(
-      '  npx tsx scripts/bulk-import-flashcards.ts data-archive/generated/generated-flashcards-asking_questions-medium-2025-10-10.ts'
-    );
+    console.error('  npx tsx scripts/bulk-import-flashcards.ts src/data/generated/generated-flashcards-asking_questions-medium-2025-10-10.ts');
     console.error('  npx tsx scripts/bulk-import-flashcards.ts --all');
     process.exit(1);
   }
@@ -273,7 +276,7 @@ async function main() {
     // Handle --all flag
     if (args[0] === '--all') {
       console.log('🔍 Finding all generated flashcard files...');
-      const generatedDir = path.join(__dirname, '..', 'data-archive', 'generated');
+      const generatedDir = path.join(__dirname, '..', 'src', 'data', 'generated');
       const pattern = path.join(generatedDir, 'generated-flashcards-*.ts');
       filePaths = glob.sync(pattern);
 

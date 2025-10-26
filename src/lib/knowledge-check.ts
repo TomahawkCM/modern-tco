@@ -46,13 +46,12 @@ export const KNOWLEDGE_QUESTIONS: KnowledgeQuestion[] = [
       'A software that manages computer hardware and software resources',
       'A type of computer virus',
       'A network cable',
-      'A programming language',
+      'A programming language'
     ],
     correctAnswer: 0,
-    explanation:
-      'An operating system (OS) is the fundamental software that manages all hardware and software resources on a computer, providing services for computer programs.',
+    explanation: 'An operating system (OS) is the fundamental software that manages all hardware and software resources on a computer, providing services for computer programs.',
     difficulty: 'beginner',
-    weight: 3,
+    weight: 3
   },
   {
     id: 'basic-it-2',
@@ -62,13 +61,12 @@ export const KNOWLEDGE_QUESTIONS: KnowledgeQuestion[] = [
       'Internet Protocol address',
       'Internal Program address',
       'Information Processing address',
-      'Integrated Platform address',
+      'Integrated Platform address'
     ],
     correctAnswer: 0,
-    explanation:
-      'IP stands for Internet Protocol. An IP address is a unique identifier assigned to each device connected to a network that uses the Internet Protocol for communication.',
+    explanation: 'IP stands for Internet Protocol. An IP address is a unique identifier assigned to each device connected to a network that uses the Internet Protocol for communication.',
     difficulty: 'beginner',
-    weight: 4,
+    weight: 4
   },
   {
     id: 'basic-it-3',
@@ -78,13 +76,12 @@ export const KNOWLEDGE_QUESTIONS: KnowledgeQuestion[] = [
       'Malicious software designed to damage or disrupt computer systems',
       'A type of computer hardware',
       'Software that improves computer performance',
-      'A network monitoring tool',
+      'A network monitoring tool'
     ],
     correctAnswer: 0,
-    explanation:
-      'Malware is short for "malicious software" - any software intentionally designed to cause damage to computers, servers, clients, or computer networks.',
+    explanation: 'Malware is short for "malicious software" - any software intentionally designed to cause damage to computers, servers, clients, or computer networks.',
     difficulty: 'beginner',
-    weight: 4,
+    weight: 4
   },
 
   // Networking Questions
@@ -96,13 +93,12 @@ export const KNOWLEDGE_QUESTIONS: KnowledgeQuestion[] = [
       'A collection of interconnected devices that can communicate and share resources',
       'A single powerful computer',
       'A type of software program',
-      'A security protocol',
+      'A security protocol'
     ],
     correctAnswer: 0,
-    explanation:
-      'A computer network is a group of interconnected devices (computers, servers, etc.) that can communicate with each other and share resources like files, printers, and internet connections.',
+    explanation: 'A computer network is a group of interconnected devices (computers, servers, etc.) that can communicate with each other and share resources like files, printers, and internet connections.',
     difficulty: 'beginner',
-    weight: 5,
+    weight: 5
   },
   {
     id: 'networking-2',
@@ -112,13 +108,12 @@ export const KNOWLEDGE_QUESTIONS: KnowledgeQuestion[] = [
       'LAN covers a small area (like a building), WAN covers a large area (like multiple cities)',
       'LAN is faster, WAN is slower',
       'LAN is for security, WAN is for performance',
-      'There is no difference',
+      'There is no difference'
     ],
     correctAnswer: 0,
-    explanation:
-      'LAN (Local Area Network) covers a small geographical area like a building or campus, while WAN (Wide Area Network) spans large geographical areas, potentially across countries.',
+    explanation: 'LAN (Local Area Network) covers a small geographical area like a building or campus, while WAN (Wide Area Network) spans large geographical areas, potentially across countries.',
     difficulty: 'intermediate',
-    weight: 3,
+    weight: 3
   },
 
   // Security Questions
@@ -130,13 +125,12 @@ export const KNOWLEDGE_QUESTIONS: KnowledgeQuestion[] = [
       'To protect digital information, systems, and networks from threats',
       'To make computers run faster',
       'To create new software applications',
-      'To design computer hardware',
+      'To design computer hardware'
     ],
     correctAnswer: 0,
-    explanation:
-      'Cybersecurity focuses on protecting computers, networks, programs, and data from attack, damage, or unauthorized access.',
+    explanation: 'Cybersecurity focuses on protecting computers, networks, programs, and data from attack, damage, or unauthorized access.',
     difficulty: 'beginner',
-    weight: 5,
+    weight: 5
   },
   {
     id: 'security-2',
@@ -146,13 +140,12 @@ export const KNOWLEDGE_QUESTIONS: KnowledgeQuestion[] = [
       'A weakness in a system that could be exploited by attackers',
       'A type of computer virus',
       'A network speed measurement',
-      'A software license',
+      'A software license'
     ],
     correctAnswer: 0,
-    explanation:
-      'A vulnerability is a weakness or flaw in a system, application, or network that could potentially be exploited by cybercriminals to gain unauthorized access or cause damage.',
+    explanation: 'A vulnerability is a weakness or flaw in a system, application, or network that could potentially be exploited by cybercriminals to gain unauthorized access or cause damage.',
     difficulty: 'intermediate',
-    weight: 4,
+    weight: 4
   },
 
   // Systems Administration Questions
@@ -164,13 +157,12 @@ export const KNOWLEDGE_QUESTIONS: KnowledgeQuestion[] = [
       'Hardware, software, networks, and facilities that support IT services',
       'Only computer hardware',
       'Only software applications',
-      'Only network cables',
+      'Only network cables'
     ],
     correctAnswer: 0,
-    explanation:
-      'IT infrastructure encompasses all the hardware, software, networks, facilities, and related equipment and services required for the existence, operation, and management of an enterprise IT environment.',
+    explanation: 'IT infrastructure encompasses all the hardware, software, networks, facilities, and related equipment and services required for the existence, operation, and management of an enterprise IT environment.',
     difficulty: 'intermediate',
-    weight: 3,
+    weight: 3
   },
   {
     id: 'systems-2',
@@ -180,13 +172,12 @@ export const KNOWLEDGE_QUESTIONS: KnowledgeQuestion[] = [
       'The process of tracking system performance, availability, and security',
       'Installing new software',
       'Backing up data',
-      'Creating user accounts',
+      'Creating user accounts'
     ],
     correctAnswer: 0,
-    explanation:
-      'System monitoring involves continuously tracking the performance, availability, and security status of computer systems and networks to ensure optimal operation.',
+    explanation: 'System monitoring involves continuously tracking the performance, availability, and security status of computer systems and networks to ensure optimal operation.',
     difficulty: 'intermediate',
-    weight: 4,
+    weight: 4
   },
 
   // Enterprise Questions
@@ -198,13 +189,12 @@ export const KNOWLEDGE_QUESTIONS: KnowledgeQuestion[] = [
       'Large scale operations with hundreds or thousands of devices and users',
       'A single computer setup',
       'Home office networks',
-      'Gaming computer systems',
+      'Gaming computer systems'
     ],
     correctAnswer: 0,
-    explanation:
-      'Enterprise environments are characterized by large-scale operations involving hundreds to thousands of devices, users, and complex infrastructure requiring professional management.',
+    explanation: 'Enterprise environments are characterized by large-scale operations involving hundreds to thousands of devices, users, and complex infrastructure requiring professional management.',
     difficulty: 'intermediate',
-    weight: 4,
+    weight: 4
   },
   {
     id: 'enterprise-2',
@@ -214,22 +204,20 @@ export const KNOWLEDGE_QUESTIONS: KnowledgeQuestion[] = [
       'To maintain security, compliance, and operational efficiency across all devices',
       'To make computers run faster',
       'To reduce electricity costs',
-      'To improve internet speed',
+      'To improve internet speed'
     ],
     correctAnswer: 0,
-    explanation:
-      'Endpoint management is crucial for maintaining security, ensuring compliance with policies, deploying software updates, and maintaining operational efficiency across all devices in an organization.',
+    explanation: 'Endpoint management is crucial for maintaining security, ensuring compliance with policies, deploying software updates, and maintaining operational efficiency across all devices in an organization.',
     difficulty: 'advanced',
-    weight: 5,
-  },
+    weight: 5
+  }
 ];
 
 export const LEARNING_PATHS: LearningPath[] = [
   {
     id: 'absolute-beginner',
     name: 'Complete IT Fundamentals',
-    description:
-      'Start from the very beginning with basic computer and networking concepts before approaching Tanium.',
+    description: 'Start from the very beginning with basic computer and networking concepts before approaching Tanium.',
     duration: '4-6 weeks',
     difficulty: 'absolute-beginner',
     prerequisites: ['Basic computer literacy', 'Willingness to learn'],
@@ -237,9 +225,9 @@ export const LEARNING_PATHS: LearningPath[] = [
       'Understand basic IT terminology',
       'Grasp fundamental networking concepts',
       'Learn basic security principles',
-      'Prepare for Tanium-specific training',
+      'Prepare for Tanium-specific training'
     ],
-    confidence: 95,
+    confidence: 95
   },
   {
     id: 'beginner-foundation',
@@ -252,9 +240,9 @@ export const LEARNING_PATHS: LearningPath[] = [
       'Understand endpoint management concepts',
       'Learn Tanium platform basics',
       'Master fundamental operations',
-      'Prepare for advanced features',
+      'Prepare for advanced features'
     ],
-    confidence: 90,
+    confidence: 90
   },
   {
     id: 'intermediate-direct',
@@ -267,9 +255,9 @@ export const LEARNING_PATHS: LearningPath[] = [
       'Master all TCO exam domains',
       'Complete hands-on lab exercises',
       'Pass practice exams consistently',
-      'Achieve TCO certification',
+      'Achieve TCO certification'
     ],
-    confidence: 85,
+    confidence: 85
   },
   {
     id: 'advanced-review',
@@ -282,10 +270,10 @@ export const LEARNING_PATHS: LearningPath[] = [
       'Perfect exam technique',
       'Master complex scenarios',
       'Achieve high confidence',
-      'Excel in certification',
+      'Excel in certification'
     ],
-    confidence: 95,
-  },
+    confidence: 95
+  }
 ];
 
 export class KnowledgeAssessment {
@@ -305,12 +293,12 @@ export class KnowledgeAssessment {
     const questionsPerCategory = Math.ceil(count / categoriesNeeded.length);
     const selectedQuestions: KnowledgeQuestion[] = [];
 
-    categoriesNeeded.forEach((category) => {
+    categoriesNeeded.forEach(category => {
       const categoryQuestions = this.questions
-        .filter((q) => q.category === category)
+        .filter(q => q.category === category)
         .sort(() => Math.random() - 0.5) // Shuffle
         .slice(0, questionsPerCategory);
-
+      
       selectedQuestions.push(...categoryQuestions);
     });
 
@@ -321,7 +309,7 @@ export class KnowledgeAssessment {
    * Record an answer and return immediate feedback
    */
   recordAnswer(questionId: string, answerIndex: number): { correct: boolean; explanation: string } {
-    const question = this.questions.find((q) => q.id === questionId);
+    const question = this.questions.find(q => q.id === questionId);
     if (!question) {
       throw new Error(`Question ${questionId} not found`);
     }
@@ -332,7 +320,7 @@ export class KnowledgeAssessment {
 
     return {
       correct: isCorrect,
-      explanation: question.explanation,
+      explanation: question.explanation
     };
   }
 
@@ -345,8 +333,8 @@ export class KnowledgeAssessment {
     let maxScore = 0;
 
     // Calculate category scores
-    questionsUsed.forEach((question) => {
-      const { category } = question;
+    questionsUsed.forEach(question => {
+      const {category} = question;
       const questionScore = this.results.get(question.id) || 0;
       const maxQuestionScore = question.weight;
 
@@ -361,10 +349,11 @@ export class KnowledgeAssessment {
     });
 
     // Calculate percentages
-    Object.keys(categoryScores).forEach((category) => {
+    Object.keys(categoryScores).forEach(category => {
       const categoryData = categoryScores[category];
-      categoryData.percentage =
-        categoryData.total > 0 ? Math.round((categoryData.score / categoryData.total) * 100) : 0;
+      categoryData.percentage = categoryData.total > 0 
+        ? Math.round((categoryData.score / categoryData.total) * 100)
+        : 0;
     });
 
     const overallPercentage = maxScore > 0 ? Math.round((totalScore / maxScore) * 100) : 0;
@@ -386,54 +375,53 @@ export class KnowledgeAssessment {
       recommendedPath,
       strengths,
       weaknesses,
-      nextSteps,
+      nextSteps
     };
   }
 
   private determineRecommendedPath(
-    overallPercentage: number,
+    overallPercentage: number, 
     categoryScores: Record<string, { score: number; total: number; percentage: number }>
   ): LearningPath {
     const basicItScore = categoryScores['basic-it']?.percentage || 0;
-    const networkingScore = categoryScores.networking?.percentage || 0;
-    const securityScore = categoryScores.security?.percentage || 0;
+    const networkingScore = categoryScores['networking']?.percentage || 0;
+    const securityScore = categoryScores['security']?.percentage || 0;
 
     // Absolute beginner: Struggling with basic IT concepts
     if (basicItScore < 60 || overallPercentage < 40) {
-      return LEARNING_PATHS.find((p) => p.id === 'absolute-beginner')!;
+      return LEARNING_PATHS.find(p => p.id === 'absolute-beginner')!;
     }
 
     // Beginner foundation: Decent basics but weak in specialized areas
     if (overallPercentage < 65 || networkingScore < 50 || securityScore < 50) {
-      return LEARNING_PATHS.find((p) => p.id === 'beginner-foundation')!;
+      return LEARNING_PATHS.find(p => p.id === 'beginner-foundation')!;
     }
 
     // Intermediate: Good foundation, ready for direct TCO prep
     if (overallPercentage < 85) {
-      return LEARNING_PATHS.find((p) => p.id === 'intermediate-direct')!;
+      return LEARNING_PATHS.find(p => p.id === 'intermediate-direct')!;
     }
 
     // Advanced: Strong performance, just needs exam practice
-    return LEARNING_PATHS.find((p) => p.id === 'advanced-review')!;
+    return LEARNING_PATHS.find(p => p.id === 'advanced-review')!;
   }
 
-  private analyzePerformance(
-    categoryScores: Record<string, { score: number; total: number; percentage: number }>
-  ): { strengths: string[]; weaknesses: string[] } {
+  private analyzePerformance(categoryScores: Record<string, { score: number; total: number; percentage: number }>): 
+    { strengths: string[]; weaknesses: string[] } {
     const strengths: string[] = [];
     const weaknesses: string[] = [];
 
     const categoryNames: Record<string, string> = {
       'basic-it': 'Basic IT Concepts',
-      networking: 'Networking Fundamentals',
-      security: 'Security Principles',
-      systems: 'Systems Administration',
-      enterprise: 'Enterprise Operations',
+      'networking': 'Networking Fundamentals',
+      'security': 'Security Principles',
+      'systems': 'Systems Administration',
+      'enterprise': 'Enterprise Operations'
     };
 
     Object.entries(categoryScores).forEach(([category, scores]) => {
       const categoryName = categoryNames[category] || category;
-
+      
       if (scores.percentage >= 70) {
         strengths.push(categoryName);
       } else if (scores.percentage < 50) {

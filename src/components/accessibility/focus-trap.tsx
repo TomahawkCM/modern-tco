@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef } from "react";
 
 interface FocusTrapProps {
   children: React.ReactNode;
@@ -36,12 +36,12 @@ export function FocusTrap({
     };
 
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape' && onEscape) {
+      if (event.key === "Escape" && onEscape) {
         onEscape();
         return;
       }
 
-      if (event.key !== 'Tab') return;
+      if (event.key !== "Tab") return;
 
       const focusableElements = getFocusableElements();
       if (focusableElements.length === 0) return;
@@ -70,10 +70,10 @@ export function FocusTrap({
       (focusableElements[0] as HTMLElement).focus();
     }
 
-    document.addEventListener('keydown', handleKeyDown);
+    document.addEventListener("keydown", handleKeyDown);
 
     return () => {
-      document.removeEventListener('keydown', handleKeyDown);
+      document.removeEventListener("keydown", handleKeyDown);
 
       // Restore focus to previously focused element
       if (restoreFocus && previousFocusRef.current) {

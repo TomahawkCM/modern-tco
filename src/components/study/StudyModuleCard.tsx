@@ -1,87 +1,60 @@
 // @ts-nocheck - Type errors in this file will be fixed post-deployment
-
-import { motion } from 'framer-motion';
-import { BookOpen, CheckCircle, Clock, Users } from 'lucide-react';
-import Link from 'next/link';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Progress } from '@/components/ui/progress';
-import type { StudyModuleWithSections } from '@/types/supabase';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Badge } from '@/components/ui/badge'
+import { Progress } from '@/components/ui/progress'
+import { Button } from '@/components/ui/button'
+import { BookOpen, Clock, CheckCircle, Users } from 'lucide-react'
+import Link from 'next/link'
+import { motion } from 'framer-motion'
+import type { StudyModuleWithSections } from '@/types/supabase'
 
 interface StudyModuleCardProps {
-  module: StudyModuleWithSections;
+  module: StudyModuleWithSections
   progress?: {
-    completed: number;
-    total: number;
-    percentage: number;
-  };
-  className?: string;
+    completed: number
+    total: number
+    percentage: number
+  }
+  className?: string
 }
 
 export function StudyModuleCard({ module, progress, className }: StudyModuleCardProps) {
-  const progressPercentage = progress?.percentage ?? 0;
-  const isCompleted = progressPercentage === 100;
-  const hasStarted = progressPercentage > 0;
+  const progressPercentage = progress?.percentage ?? 0
+  const isCompleted = progressPercentage === 100
+  const hasStarted = progressPercentage > 0
 
   const getProgressColor = () => {
-    if (progressPercentage === 0) return 'bg-gray-200';
-    if (progressPercentage < 30) return 'bg-red-500';
-    if (progressPercentage < 70) return 'bg-yellow-500';
-    return 'bg-[#22c55e]';
-  };
+    if (progressPercentage === 0) return 'bg-gray-200'
+    if (progressPercentage < 30) return 'bg-red-500'
+    if (progressPercentage < 70) return 'bg-yellow-500'
+    return 'bg-[#22c55e]'
+  }
 
   const getStatusBadge = () => {
     if (isCompleted) {
-      return (
-        <Badge
-          variant="default"
-          className="gap-1 bg-cyan-100 text-cyan-800 hover:bg-cyan-200 border-primary/20"
-        >
-          <CheckCircle className="h-3 w-3" />
-          Completed
-        </Badge>
-      );
+      return <Badge variant="default" className="gap-1 bg-cyan-100 text-cyan-800 hover:bg-cyan-200 border-primary/20"><CheckCircle className="h-3 w-3" />Completed</Badge>
     }
     if (hasStarted) {
-      return (
-        <Badge
-          variant="default"
-          className="gap-1 bg-sky-100 text-sky-800 hover:bg-sky-200 border-sky-500/20"
-        >
-          <Clock className="h-3 w-3" />
-          In Progress
-        </Badge>
-      );
+      return <Badge variant="default" className="gap-1 bg-sky-100 text-sky-800 hover:bg-sky-200 border-sky-500/20"><Clock className="h-3 w-3" />In Progress</Badge>
     }
-    return (
-      <Badge
-        variant="secondary"
-        className="gap-1 bg-slate-100 text-slate-700 hover:bg-slate-200 border-slate-500/20"
-      >
-        <BookOpen className="h-3 w-3" />
-        Not Started
-      </Badge>
-    );
-  };
+    return <Badge variant="secondary" className="gap-1 bg-slate-100 text-slate-700 hover:bg-slate-200 border-slate-500/20"><BookOpen className="h-3 w-3" />Not Started</Badge>
+  }
 
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3 }}
-      whileHover={{
-        scale: 1.03,
+      whileHover={{ 
+        scale: 1.03, 
         y: -2,
-        transition: { duration: 0.2, ease: 'easeOut' },
+        transition: { duration: 0.2, ease: "easeOut" } 
       }}
       className="group"
     >
-      <Card
-        className={`relative bg-black/20 backdrop-blur-xl border border-primary/20 shadow-[0_0_50px_rgba(34,211,238,0.1)] hover:shadow-[0_0_80px_rgba(34,211,238,0.15)] transition-all duration-200 ease-out focus-visible:ring-2 focus-visible:ring-cyan-400/50 focus-visible:shadow-[0_0_80px_rgba(34,211,238,0.15)] ${className}`}
-      >
+      <Card className={`relative bg-black/20 backdrop-blur-xl border border-primary/20 shadow-[0_0_50px_rgba(34,211,238,0.1)] hover:shadow-[0_0_80px_rgba(34,211,238,0.15)] transition-all duration-200 ease-out focus-visible:ring-2 focus-visible:ring-cyan-400/50 focus-visible:shadow-[0_0_80px_rgba(34,211,238,0.15)] ${className}`}>
         <div className="absolute -inset-[1px] bg-gradient-to-r from-primary/10 via-sky-400/10 to-primary/10 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 blur-sm"></div>
-
+        
         <CardHeader className="pb-4 relative">
           <div className="flex items-start justify-between">
             <div className="space-y-2 flex-1">
@@ -120,9 +93,7 @@ export function StudyModuleCard({ module, progress, className }: StudyModuleCard
             </div>
             <div className="flex items-center gap-2 text-cyan-100/60">
               <Clock className="h-4 w-4 text-primary" />
-              <span>
-                {module.estimated_time_minutes ? `${module.estimated_time_minutes} min` : 'TBD'}
-              </span>
+              <span>{module.estimated_time_minutes ? `${module.estimated_time_minutes} min` : 'TBD'}</span>
             </div>
             <div className="flex items-center gap-2 text-cyan-100/60">
               <Users className="h-4 w-4 text-primary" />
@@ -152,21 +123,14 @@ export function StudyModuleCard({ module, progress, className }: StudyModuleCard
 
           {/* Action Button */}
           <div className="pt-2">
-            <Button
-              asChild
-              className="w-full bg-primary hover:bg-cyan-500 text-foreground border-primary/50"
-            >
+            <Button asChild className="w-full bg-primary hover:bg-cyan-500 text-foreground border-primary/50">
               <Link href={`/study/${module.domain || module.id}`}>
-                {isCompleted
-                  ? 'Review Module'
-                  : hasStarted
-                    ? 'Continue Learning'
-                    : 'Start Learning'}
+                {isCompleted ? 'Review Module' : hasStarted ? 'Continue Learning' : 'Start Learning'}
               </Link>
             </Button>
           </div>
         </CardContent>
       </Card>
     </motion.div>
-  );
+  )
 }

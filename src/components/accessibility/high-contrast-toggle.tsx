@@ -1,18 +1,18 @@
-'use client';
+"use client";
 
-import { Contrast } from 'lucide-react';
-import { useEffect, useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
+import { useEffect, useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Contrast } from "lucide-react";
+import { cn } from "@/lib/utils";
 
-const STORAGE_KEY = 'tco-high-contrast';
+const STORAGE_KEY = "tco-high-contrast";
 
 function applyHighContrast(on: boolean) {
   const html = document.documentElement;
   if (on) {
-    html.setAttribute('data-high-contrast', '1');
+    html.setAttribute("data-high-contrast", "1");
   } else {
-    html.removeAttribute('data-high-contrast');
+    html.removeAttribute("data-high-contrast");
   }
 }
 
@@ -22,14 +22,14 @@ export function HighContrastToggle() {
   useEffect(() => {
     try {
       const v = localStorage.getItem(STORAGE_KEY);
-      setEnabled(v === '1');
+      setEnabled(v === "1");
     } catch {}
   }, []);
 
   useEffect(() => {
     try {
       applyHighContrast(enabled);
-      localStorage.setItem(STORAGE_KEY, enabled ? '1' : '0');
+      localStorage.setItem(STORAGE_KEY, enabled ? "1" : "0");
     } catch {}
   }, [enabled]);
 
@@ -38,11 +38,11 @@ export function HighContrastToggle() {
       variant="ghost"
       size="icon"
       aria-pressed={enabled}
-      aria-label={enabled ? 'Disable high contrast' : 'Enable high contrast'}
+      aria-label={enabled ? "Disable high contrast" : "Enable high contrast"}
       className={cn(
-        'relative z-50 text-foreground hover:bg-white/10 transition-all duration-200',
-        'active:scale-95 pointer-events-auto',
-        enabled && 'bg-primary/20 ring-2 ring-primary/50'
+        "relative z-50 text-foreground hover:bg-white/10 transition-all duration-200",
+        "active:scale-95 pointer-events-auto",
+        enabled && "bg-primary/20 ring-2 ring-primary/50"
       )}
       onClick={() => setEnabled((v) => !v)}
     >
@@ -50,3 +50,4 @@ export function HighContrastToggle() {
     </Button>
   );
 }
+

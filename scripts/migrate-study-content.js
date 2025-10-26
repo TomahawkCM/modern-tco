@@ -7,26 +7,26 @@
  * Handles domain name mapping and markdown parsing
  */
 
-const fs = require('fs');
-const path = require('path');
-const { createClient } = require('@supabase/supabase-js');
+const fs = require("fs");
+const path = require("path");
+const { createClient } = require("@supabase/supabase-js");
 
 // Domain name mapping from legacy to modern TCO blueprint names
 const LEGACY_DOMAIN_MAPPING = {
-  'Asking Questions': 'Asking Questions',
-  'Refining Questions and Targeting': 'Refining Questions',
-  'Taking Action': 'Taking Action',
-  'Tanium Navigation and Basic Modules': 'Navigation & Basic Modules',
-  'Report Generation and Data Export': 'Report Generation & Data Export',
+  "Asking Questions": "Asking Questions",
+  "Refining Questions and Targeting": "Refining Questions",
+  "Taking Action": "Taking Action",
+  "Tanium Navigation and Basic Modules": "Navigation & Basic Modules",
+  "Report Generation and Data Export": "Report Generation & Data Export",
 };
 
 // File mapping for legacy Module_Guide files
 const DOMAIN_FILE_MAPPING = {
-  'Asking Questions': '01-Asking_Questions.md',
-  'Refining Questions': '02-Refining_Questions_and_Targeting.md',
-  'Taking Action': '03-Taking_Action_Packages_and_Actions.md',
-  'Navigation & Basic Modules': '04-Navigation_and_Basic_Module_Functions.md',
-  'Report Generation & Data Export': '05-Reporting_and_Data_Export.md',
+  "Asking Questions": "01-Asking_Questions.md",
+  "Refining Questions": "02-Refining_Questions_and_Targeting.md",
+  "Taking Action": "03-Taking_Action_Packages_and_Actions.md",
+  "Navigation & Basic Modules": "04-Navigation_and_Basic_Module_Functions.md",
+  "Report Generation & Data Export": "05-Reporting_and_Data_Export.md",
 };
 
 class StudyContentMigrator {
@@ -37,22 +37,22 @@ class StudyContentMigrator {
 
     if (!supabaseUrl || !supabaseServiceKey) {
       throw new Error(
-        'Missing Supabase environment variables. Please set NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY'
+        "Missing Supabase environment variables. Please set NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY"
       );
     }
 
     this.supabase = createClient(supabaseUrl, supabaseServiceKey);
 
     // Paths
-    this.legacyDocsPath = path.join(__dirname, '../../docs/Module_Guides');
-    this.modernTcoPath = path.join(__dirname, '..');
+    this.legacyDocsPath = path.join(__dirname, "../../docs/Module_Guides");
+    this.modernTcoPath = path.join(__dirname, "..");
   }
 
   /**
    * Parse markdown content into structured sections
    */
   parseMarkdownContent(content, domain) {
-    const lines = content.split('\n');
+    const lines = content.split("\n");
     const sections = [];
     let currentSection = null;
     let currentSubsection = null;
@@ -64,22 +64,22 @@ class StudyContentMigrator {
       if (!line) continue;
 
       // Main section headers (## )
-      if (line.startsWith('## ')) {
+      if (line.startsWith("## ")) {
         // Save previous section if exists
         if (currentSection) {
           sections.push(currentSection);
         }
 
         currentSection = {
-          title: line.replace('## ', '').trim(),
-          content: '',
+          title: line.replace("## ", "").trim(),
+          content: "",
           subsections: [],
           order_index: sections.length,
         };
         currentSubsection = null;
       }
       // Subsection headers (### )
-      else if (line.startsWith('### ')) {
+      else if (line.startsWith("### ")) {
         if (currentSection) {
           // Save previous subsection content
           if (currentSubsection) {
@@ -87,8 +87,8 @@ class StudyContentMigrator {
           }
 
           currentSubsection = {
-            title: line.replace('### ', '').trim(),
-            content: '',
+            title: line.replace("### ", "").trim(),
+            content: "",
             order_index: currentSection.subsections.length,
           };
         }
@@ -98,9 +98,9 @@ class StudyContentMigrator {
         const contentLine = lines[i]; // Keep original formatting
 
         if (currentSubsection) {
-          currentSubsection.content += contentLine + '\n';
+          currentSubsection.content += contentLine + "\n";
         } else if (currentSection) {
-          currentSection.content += contentLine + '\n';
+          currentSection.content += contentLine + "\n";
         }
       }
     }
@@ -121,14 +121,14 @@ class StudyContentMigrator {
    */
   async insertStudyModule(domain, description, totalSections) {
     const { data, error } = await this.supabase
-      .from('study_modules')
+      .from("study_modules")
       .insert({
         domain,
         title: `${domain} - Study Guide`,
         description,
         total_sections: totalSections,
         estimated_time_minutes: totalSections * 15, // Estimate 15 minutes per section
-        difficulty_level: 'intermediate',
+        difficulty_level: "intermediate",
       })
       .select()
       .single();
@@ -175,7 +175,7 @@ class StudyContentMigrator {
     }
 
     const { data, error } = await this.supabase
-      .from('study_sections')
+      .from("study_sections")
       .insert(sectionsToInsert)
       .select();
 
@@ -206,7 +206,7 @@ class StudyContentMigrator {
       throw new Error(`File not found: ${filePath}`);
     }
 
-    const content = fs.readFileSync(filePath, 'utf8');
+    const content = fs.readFileSync(filePath, "utf8");
     console.log(`   📖 Read ${content.length} characters from ${filename}`);
 
     // Parse content into sections
@@ -242,8 +242,8 @@ class StudyContentMigrator {
    * Run complete migration for all domains
    */
   async migrateAll() {
-    console.log('🚀 Starting Study Content Migration');
-    console.log('==================================');
+    console.log("🚀 Starting Study Content Migration");
+    console.log("==================================");
 
     const results = [];
 
@@ -261,8 +261,8 @@ class StudyContentMigrator {
     }
 
     // Summary
-    console.log('\n📊 Migration Summary');
-    console.log('==================');
+    console.log("\n📊 Migration Summary");
+    console.log("==================");
 
     const totalSections = results.reduce((sum, r) => sum + r.sectionsCount, 0);
     const totalCharacters = results.reduce((sum, r) => sum + r.totalCharacters, 0);
@@ -284,15 +284,15 @@ class StudyContentMigrator {
    * Verify migration results
    */
   async verifyMigration() {
-    console.log('\n🔍 Verifying Migration');
-    console.log('=====================');
+    console.log("\n🔍 Verifying Migration");
+    console.log("=====================");
 
     try {
       // Check study modules
       const { data: modules, error: modulesError } = await this.supabase
-        .from('study_modules')
-        .select('*')
-        .order('domain');
+        .from("study_modules")
+        .select("*")
+        .order("domain");
 
       if (modulesError) {
         throw new Error(`Failed to fetch modules: ${modulesError.message}`);
@@ -307,9 +307,9 @@ class StudyContentMigrator {
 
       // Check study sections
       const { data: sections, error: sectionsError } = await this.supabase
-        .from('study_sections')
-        .select('module_id, title')
-        .order('module_id, order_index');
+        .from("study_sections")
+        .select("module_id, title")
+        .order("module_id, order_index");
 
       if (sectionsError) {
         throw new Error(`Failed to fetch sections: ${sectionsError.message}`);
@@ -333,7 +333,7 @@ class StudyContentMigrator {
 
       return { modules: modules.length, sections: sections.length };
     } catch (error) {
-      console.error('❌ Verification failed:', error.message);
+      console.error("❌ Verification failed:", error.message);
       throw error;
     }
   }
@@ -350,9 +350,9 @@ async function main() {
     // Verify results
     await migrator.verifyMigration();
 
-    console.log('\n🎉 Migration completed successfully!');
+    console.log("\n🎉 Migration completed successfully!");
   } catch (error) {
-    console.error('\n💥 Migration failed:', error.message);
+    console.error("\n💥 Migration failed:", error.message);
     process.exit(1);
   }
 }

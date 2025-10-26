@@ -5,10 +5,7 @@ const path = require('path');
 const { execSync } = require('child_process');
 
 // Get all TypeScript/TSX files with nullish coalescing errors
-const lintOutput = execSync('npm run lint 2>&1 || true', {
-  encoding: 'utf8',
-  maxBuffer: 10 * 1024 * 1024,
-});
+const lintOutput = execSync('npm run lint 2>&1 || true', { encoding: 'utf8', maxBuffer: 10 * 1024 * 1024 });
 
 // Parse lint output for nullish coalescing errors
 const nullishErrors = [];
@@ -35,7 +32,7 @@ for (let i = 0; i < lines.length; i++) {
 
 // Group errors by file
 const errorsByFile = {};
-nullishErrors.forEach((err) => {
+nullishErrors.forEach(err => {
   if (!errorsByFile[err.file]) {
     errorsByFile[err.file] = [];
   }
@@ -49,36 +46,36 @@ const fixPatterns = [
   // Simple || to ??
   {
     pattern: /(\w+(?:\.\w+)*)\s*\|\|\s*('|")([^'"]*)\2/g,
-    replacement: '$1 ?? $2$3$2',
+    replacement: '$1 ?? $2$3$2'
   },
   {
     pattern: /(\w+(?:\.\w+)*)\s*\|\|\s*(\d+)/g,
-    replacement: '$1 ?? $2',
+    replacement: '$1 ?? $2'
   },
   {
     pattern: /(\w+(?:\.\w+)*)\s*\|\|\s*(true|false|null|undefined)/g,
-    replacement: '$1 ?? $2',
+    replacement: '$1 ?? $2'
   },
   {
     pattern: /(\w+(?:\.\w+)*)\s*\|\|\s*(\w+(?:\.\w+)*)/g,
-    replacement: '$1 ?? $2',
+    replacement: '$1 ?? $2'
   },
   {
     pattern: /(\w+(?:\.\w+)*)\s*\|\|\s*(\[)/g,
-    replacement: '$1 ?? $2',
+    replacement: '$1 ?? $2'
   },
   {
     pattern: /(\w+(?:\.\w+)*)\s*\|\|\s*(\{)/g,
-    replacement: '$1 ?? $2',
-  },
+    replacement: '$1 ?? $2'
+  }
 ];
 
 let totalFixed = 0;
 
-Object.keys(errorsByFile).forEach((filePath) => {
+Object.keys(errorsByFile).forEach(filePath => {
   try {
     let content = fs.readFileSync(filePath, 'utf8');
-    const originalContent = content;
+    let originalContent = content;
     let fixes = 0;
 
     // Apply fix patterns

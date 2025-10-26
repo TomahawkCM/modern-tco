@@ -1,16 +1,16 @@
 import type {
-  AssessmentConfig,
-  AssessmentResponse,
+  AssessmentSession,
   AssessmentResult,
   AssessmentScore,
-  AssessmentSession,
-  DifficultyAnalysis,
-  ObjectiveRemediation,
   PerformanceMetrics,
   RemediationPlan,
-} from '@/types/assessment';
-import type { Question, QuestionDifficulty, TCODomain } from '@/types/exam';
-import { TCO_DOMAIN_WEIGHTS as TCO_DOMAIN_WEIGHTS_FROM_TYPES } from '@/types/exam';
+  ObjectiveRemediation,
+  DifficultyAnalysis,
+  AssessmentResponse,
+  AssessmentConfig,
+} from "@/types/assessment";
+import type { Question, TCODomain, QuestionDifficulty, Difficulty as DifficultyType } from "@/types/exam";
+import { TCO_DOMAIN_WEIGHTS as TCO_DOMAIN_WEIGHTS_FROM_TYPES } from "@/types/exam";
 
 // TCO Domain Weights (from certification blueprint)
 export const TCO_DOMAIN_WEIGHTS = {
@@ -39,11 +39,12 @@ export class AssessmentEngine {
       ? sessionLike.responses
       : Object.values(sessionLike?.responses || {});
 
-    const inferredDomain: TCODomain =
+    const inferredDomain: TCODomain = (
       (sessionLike?.domain as TCODomain) ||
-      sessionLike?.domainFilter ||
+      (sessionLike?.domainFilter) ||
       (sessionLike?.questions?.[0]?.domain as TCODomain) ||
-      ('ASKING_QUESTIONS' as TCODomain);
+      ("ASKING_QUESTIONS" as TCODomain)
+    );
 
     const properSession: AssessmentSession = {
       id: sessionLike?.id || `assessment-${Date.now()}`,
@@ -53,10 +54,10 @@ export class AssessmentEngine {
       responses: responsesArray,
       startTime: sessionLike?.startTime || new Date(),
       endTime: sessionLike?.endTime || new Date(),
-      status: sessionLike?.status || 'completed',
+      status: sessionLike?.status || "completed",
       timeLimit: sessionLike?.timeLimit,
       config: {
-        type: sessionLike?.type || 'practice',
+        type: (sessionLike?.type) || "practice",
         moduleId: sessionLike?.moduleId,
         domainFilter: Array.isArray(sessionLike?.domainFilter)
           ? sessionLike.domainFilter[0]
@@ -64,28 +65,29 @@ export class AssessmentEngine {
         questionCount: sessionLike?.questions?.length || 0,
         timeLimit: sessionLike?.timeLimit,
         userId: sessionLike?.userId,
-        assessmentId: sessionLike?.id,
+            assessmentId: sessionLike?.id,
         allowReview: true,
         showExplanations: true,
         randomizeQuestions: true,
         randomizeOptions: true,
         adaptiveDifficulty: false,
         enableAnalytics: true,
-        difficulty: 'Beginner' as any,
+  difficulty: "Beginner" as any,
       },
     };
 
-    const engine = new AssessmentEngine();
+  const engine = new AssessmentEngine();
     const score = engine.calculateScore(properSession);
     const performance = engine.calculatePerformanceMetrics(properSession);
     const remediation = engine.generateRemediationPlan(properSession, score, performance);
     if ((remediation as any).canRetake === undefined) {
       (remediation as any).canRetake = false;
     }
-    const safePassThreshold =
-      properSession.config?.passThreshold ??
-      (properSession.config?.type === 'practice-test' ? 0.6 : 0.7);
-    const passed = score.percentage >= safePassThreshold * 100;
+  const safePassThreshold = (
+    (properSession.config?.passThreshold) ??
+    (properSession.config?.type === "practice-test" ? 0.6 : 0.7)
+  );
+  const passed = score.percentage >= safePassThreshold * 100;
 
     const result: AssessmentResult = {
       sessionId: properSession.id,
@@ -165,10 +167,9 @@ export class AssessmentEngine {
       const question = questions.find((q) => q.id === response.questionId);
       if (!question) return;
 
-      const difficultyKey =
-        typeof question.difficulty === 'string' ? question.difficulty : String(question.difficulty);
-      const difficultyWeight = DIFFICULTY_WEIGHTS[difficultyKey] || 1.0;
-      const domainWeight = (TCO_DOMAIN_WEIGHTS_FROM_TYPES as any)[question.domain] || 0.2;
+  const difficultyKey = typeof question.difficulty === 'string' ? question.difficulty : String(question.difficulty);
+  const difficultyWeight = DIFFICULTY_WEIGHTS[difficultyKey] || 1.0;
+  const domainWeight = (TCO_DOMAIN_WEIGHTS_FROM_TYPES as any)[question.domain] || 0.2;
       const questionWeight = difficultyWeight * domainWeight;
 
       totalWeight += questionWeight;
@@ -186,13 +187,10 @@ export class AssessmentEngine {
   private calculateDomainBreakdown(responses: AssessmentResponse[], questions: Question[]) {
     const domainStats: Record<TCODomain, { correct: number; total: number }> = Object.keys(
       TCO_DOMAIN_WEIGHTS_FROM_TYPES
-    ).reduce(
-      (acc: any, key) => {
-        acc[key] = { correct: 0, total: 0 };
-        return acc;
-      },
-      {} as Record<string, { correct: number; total: number }>
-    );
+    ).reduce((acc: any, key) => {
+      acc[key] = { correct: 0, total: 0 };
+      return acc;
+    }, {} as Record<string, { correct: number; total: number }>);
 
     responses.forEach((response) => {
       const question = questions.find((q) => q.id === response.questionId);
@@ -223,8 +221,8 @@ export class AssessmentEngine {
       const ids: string[] = (q as any).objectiveIds
         ? (q as any).objectiveIds
         : (q as any).objectiveId
-          ? [(q as any).objectiveId]
-          : [];
+        ? [(q as any).objectiveId]
+        : [];
       ids.forEach((id) => {
         if (!objectiveStats[id]) {
           objectiveStats[id] = { correct: 0, total: 0, name: this.getObjectiveName(id) };
@@ -239,8 +237,8 @@ export class AssessmentEngine {
       const ids: string[] = (question as any).objectiveIds
         ? (question as any).objectiveIds
         : (question as any).objectiveId
-          ? [(question as any).objectiveId]
-          : [];
+        ? [(question as any).objectiveId]
+        : [];
       if (ids.length === 0) return;
 
       ids.forEach((objectiveId) => {
@@ -277,21 +275,21 @@ export class AssessmentEngine {
    */
   private getObjectiveName(objectiveId: string): string {
     const objectiveMap: Record<string, string> = {
-      'obj-asking-formulate': 'Formulate effective questions using Tanium syntax',
-      'obj-asking-sensors': 'Select and configure appropriate sensors',
-      'obj-asking-results': 'Interpret and analyze query results',
-      'obj-refining-groups': 'Create and manage computer groups',
-      'obj-refining-filters': 'Apply advanced filtering techniques',
-      'obj-refining-rbac': 'Implement role-based access controls',
-      'obj-taking-parameters': 'Configure package parameters safely',
-      'obj-taking-monitoring': 'Monitor action status and troubleshoot',
-      'obj-taking-planning': 'Plan large-scale deployments',
-      'obj-nav-efficiency': 'Navigate console efficiently',
-      'obj-nav-modules': 'Understand module relationships',
-      'obj-nav-procedures': 'Execute standard procedures',
-      'obj-reporting-build': 'Build and customize reports',
-      'obj-reporting-export': 'Export data efficiently',
-      'obj-reporting-quality': 'Ensure data quality and validation',
+      "obj-asking-formulate": "Formulate effective questions using Tanium syntax",
+      "obj-asking-sensors": "Select and configure appropriate sensors",
+      "obj-asking-results": "Interpret and analyze query results",
+      "obj-refining-groups": "Create and manage computer groups",
+      "obj-refining-filters": "Apply advanced filtering techniques",
+      "obj-refining-rbac": "Implement role-based access controls",
+      "obj-taking-parameters": "Configure package parameters safely",
+      "obj-taking-monitoring": "Monitor action status and troubleshoot",
+      "obj-taking-planning": "Plan large-scale deployments",
+      "obj-nav-efficiency": "Navigate console efficiently",
+      "obj-nav-modules": "Understand module relationships",
+      "obj-nav-procedures": "Execute standard procedures",
+      "obj-reporting-build": "Build and customize reports",
+      "obj-reporting-export": "Export data efficiently",
+      "obj-reporting-quality": "Ensure data quality and validation",
     };
 
     return objectiveMap[objectiveId] || objectiveId;
@@ -302,11 +300,11 @@ export class AssessmentEngine {
    */
   private determineMasteryLevel(
     percentage: number
-  ): 'poor' | 'developing' | 'proficient' | 'mastery' {
-    if (percentage >= 90) return 'mastery';
-    if (percentage >= 80) return 'proficient';
-    if (percentage >= 60) return 'developing';
-    return 'poor';
+  ): "poor" | "developing" | "proficient" | "mastery" {
+    if (percentage >= 90) return "mastery";
+    if (percentage >= 80) return "proficient";
+    if (percentage >= 60) return "developing";
+    return "poor";
   }
 
   /**
@@ -386,16 +384,16 @@ export class AssessmentEngine {
     });
 
     const beginnerAccuracy =
-      difficultyStats.Beginner.total > 0
-        ? (difficultyStats.Beginner.correct / difficultyStats.Beginner.total) * 100
+      difficultyStats['Beginner'].total > 0
+        ? (difficultyStats['Beginner'].correct / difficultyStats['Beginner'].total) * 100
         : 0;
     const intermediateAccuracy =
-      difficultyStats.Intermediate.total > 0
-        ? (difficultyStats.Intermediate.correct / difficultyStats.Intermediate.total) * 100
+      difficultyStats['Intermediate'].total > 0
+        ? (difficultyStats['Intermediate'].correct / difficultyStats['Intermediate'].total) * 100
         : 0;
     const advancedAccuracy =
-      difficultyStats.Advanced.total > 0
-        ? (difficultyStats.Advanced.correct / difficultyStats.Advanced.total) * 100
+      difficultyStats['Advanced'].total > 0
+        ? (difficultyStats['Advanced'].correct / difficultyStats['Advanced'].total) * 100
         : 0;
 
     const suggestedLevel = this.suggestDifficultyLevel(
@@ -421,20 +419,20 @@ export class AssessmentEngine {
     advancedAccuracy: number
   ): QuestionDifficulty {
     // If struggling with beginner, stay at beginner
-    if (beginnerAccuracy < 70) return 'Beginner' as any;
+  if (beginnerAccuracy < 70) return "Beginner" as any;
 
     // If mastering intermediate, move to advanced
-    if (intermediateAccuracy >= 85) return 'Advanced' as any;
+  if (intermediateAccuracy >= 85) return "Advanced" as any;
 
     // If comfortable with beginner but struggling with intermediate, stay intermediate
-    if (beginnerAccuracy >= 80 && intermediateAccuracy < 70) return 'Intermediate' as any;
+  if (beginnerAccuracy >= 80 && intermediateAccuracy < 70) return "Intermediate" as any;
 
     // If mastering advanced, suggest expert level
-    if (advancedAccuracy >= 85) return 'Expert' as any;
+  if (advancedAccuracy >= 85) return "Expert" as any;
 
     // Default progression
-    if (beginnerAccuracy >= 80) return 'Intermediate' as any;
-    return 'Beginner' as any;
+  if (beginnerAccuracy >= 80) return "Intermediate" as any;
+  return "Beginner" as any;
   }
 
   /**
@@ -443,16 +441,16 @@ export class AssessmentEngine {
   generateRemediationPlan(
     session: AssessmentSession,
     score: AssessmentScore,
-    _performance: PerformanceMetrics
+    performance: PerformanceMetrics
   ): RemediationPlan {
-    const safeConfig: AssessmentConfig = session.config ?? ({} as AssessmentConfig);
-    const overallRecommendation = this.determineOverallRecommendation(score, safeConfig);
+  const safeConfig: AssessmentConfig = session.config ?? ({} as AssessmentConfig);
+  const overallRecommendation = this.determineOverallRecommendation(score, safeConfig);
     const objectiveRemediation = this.generateObjectiveRemediation(
       score.objectiveBreakdown,
       session.questions
     );
-    const studyPlan = this.createStudyPlan(objectiveRemediation, score);
-    const retakeEligibility = this.determineRetakeEligibility(score, safeConfig);
+  const studyPlan = this.createStudyPlan(objectiveRemediation, score);
+  const retakeEligibility = this.determineRetakeEligibility(score, safeConfig);
 
     return {
       overallRecommendation,
@@ -470,18 +468,18 @@ export class AssessmentEngine {
 
     if (score.percentage >= passThreshold) {
       return {
-        type: 'continue' as const,
-        priority: 'low' as const,
+        type: "continue" as const,
+        priority: "low" as const,
         description:
-          'Congratulations! You have successfully passed this assessment. Continue to the next module.',
+          "Congratulations! You have successfully passed this assessment. Continue to the next module.",
         estimatedTime: 0,
       };
     }
 
     if (score.percentage >= passThreshold * 0.8) {
       return {
-        type: 'practice_more' as const,
-        priority: 'medium' as const,
+        type: "practice_more" as const,
+        priority: "medium" as const,
         description: "You're close to passing! Focus on targeted practice in your weaker areas.",
         estimatedTime: 30,
       };
@@ -489,19 +487,19 @@ export class AssessmentEngine {
 
     if (score.percentage >= passThreshold * 0.6) {
       return {
-        type: 'review_content' as const,
-        priority: 'high' as const,
+        type: "review_content" as const,
+        priority: "high" as const,
         description:
-          'Review the learning content and focus on understanding key concepts before practicing.',
+          "Review the learning content and focus on understanding key concepts before practicing.",
         estimatedTime: 60,
       };
     }
 
     return {
-      type: 'seek_help' as const,
-      priority: 'critical' as const,
+      type: "seek_help" as const,
+      priority: "critical" as const,
       description:
-        'Consider seeking additional help or instruction. Review foundational concepts thoroughly.',
+        "Consider seeking additional help or instruction. Review foundational concepts thoroughly.",
       estimatedTime: 120,
     };
   }
@@ -511,7 +509,7 @@ export class AssessmentEngine {
    */
   private generateObjectiveRemediation(
     objectiveBreakdowns: any[],
-    _questions: Question[]
+    questions: Question[]
   ): ObjectiveRemediation[] {
     return objectiveBreakdowns.map((objective) => {
       const status = this.determineObjectiveStatus(objective.mastery, objective.percentage);
@@ -533,53 +531,53 @@ export class AssessmentEngine {
   private determineObjectiveStatus(
     mastery: string,
     percentage: number
-  ): 'mastered' | 'needs_review' | 'needs_practice' | 'critical_gap' {
-    if (mastery === 'mastery') return 'mastered';
-    if (mastery === 'proficient') return 'mastered';
-    if (percentage >= 60) return 'needs_practice';
-    if (percentage >= 40) return 'needs_review';
-    return 'critical_gap';
+  ): "mastered" | "needs_review" | "needs_practice" | "critical_gap" {
+    if (mastery === "mastery") return "mastered";
+    if (mastery === "proficient") return "mastered";
+    if (percentage >= 60) return "needs_practice";
+    if (percentage >= 40) return "needs_review";
+    return "critical_gap";
   }
 
-  private getObjectiveActions(status: string, _percentage: number) {
+  private getObjectiveActions(status: string, percentage: number) {
     switch (status) {
-      case 'mastered':
+      case "mastered":
         return [
           {
-            type: 'continue' as const,
-            priority: 'low' as const,
-            description: 'You have mastered this objective. Continue to maintain proficiency.',
+            type: "continue" as const,
+            priority: "low" as const,
+            description: "You have mastered this objective. Continue to maintain proficiency.",
             estimatedTime: 5,
           },
         ];
 
-      case 'needs_practice':
+      case "needs_practice":
         return [
           {
-            type: 'practice_more' as const,
-            priority: 'medium' as const,
-            description: 'Complete additional practice questions to strengthen understanding.',
+            type: "practice_more" as const,
+            priority: "medium" as const,
+            description: "Complete additional practice questions to strengthen understanding.",
             estimatedTime: 20,
           },
         ];
 
-      case 'needs_review':
+      case "needs_review":
         return [
           {
-            type: 'review_content' as const,
-            priority: 'high' as const,
-            description: 'Review the related learning content and complete hands-on exercises.',
+            type: "review_content" as const,
+            priority: "high" as const,
+            description: "Review the related learning content and complete hands-on exercises.",
             estimatedTime: 45,
           },
         ];
 
-      case 'critical_gap':
+      case "critical_gap":
         return [
           {
-            type: 'seek_help' as const,
-            priority: 'critical' as const,
+            type: "seek_help" as const,
+            priority: "critical" as const,
             description:
-              'This is a critical knowledge gap. Seek additional instruction and practice extensively.',
+              "This is a critical knowledge gap. Seek additional instruction and practice extensively.",
             estimatedTime: 90,
           },
         ];
@@ -592,22 +590,22 @@ export class AssessmentEngine {
   private getObjectiveResources(objectiveId: string) {
     // Map objectives to relevant study resources
     const resourceMap: Record<string, any[]> = {
-      'obj-asking-formulate': [
+      "obj-asking-formulate": [
         {
-          type: 'module_section',
-          title: 'Question Grammar Fundamentals',
-          url: '/modules/asking-questions#question-grammar',
+          type: "module_section",
+          title: "Question Grammar Fundamentals",
+          url: "/modules/asking-questions#question-grammar",
           estimatedTime: 15,
-          priority: 'high',
+          priority: "high",
         },
       ],
-      'obj-refining-groups': [
+      "obj-refining-groups": [
         {
-          type: 'module_section',
-          title: 'Dynamic Group Creation',
-          url: '/modules/refining-questions-targeting#dynamic-groups',
+          type: "module_section",
+          title: "Dynamic Group Creation",
+          url: "/modules/refining-questions-targeting#dynamic-groups",
           estimatedTime: 20,
-          priority: 'high',
+          priority: "high",
         },
       ],
       // Add more mappings as needed
@@ -620,22 +618,22 @@ export class AssessmentEngine {
     const baseCount = Math.max(5, currentQuestions);
 
     switch (status) {
-      case 'mastered':
+      case "mastered":
         return Math.ceil(baseCount * 0.3);
-      case 'needs_practice':
+      case "needs_practice":
         return Math.ceil(baseCount * 0.8);
-      case 'needs_review':
+      case "needs_review":
         return Math.ceil(baseCount * 1.2);
-      case 'critical_gap':
+      case "critical_gap":
         return Math.ceil(baseCount * 1.5);
       default:
         return baseCount;
     }
   }
 
-  private createStudyPlan(objectiveRemediation: ObjectiveRemediation[], _score: AssessmentScore) {
+  private createStudyPlan(objectiveRemediation: ObjectiveRemediation[], score: AssessmentScore) {
     // Create ordered study plan based on remediation priorities
-    const studyItems: import('@/types/assessment').StudyPlanItem[] = [];
+  const studyItems: import("@/types/assessment").StudyPlanItem[] = [];
     let order = 1;
 
     // Sort by priority: critical gaps first, then needs review, then needs practice
@@ -645,13 +643,13 @@ export class AssessmentEngine {
     });
 
     sortedObjectives.forEach((objective) => {
-      if (objective.status !== 'mastered') {
+      if (objective.status !== "mastered") {
         studyItems.push({
           order: order++,
           title: `Review: ${objective.objectiveName}`,
           description:
-            objective.recommendedActions[0]?.description || 'Review this learning objective',
-          type: 'review' as const,
+            objective.recommendedActions[0]?.description || "Review this learning objective",
+          type: "review" as const,
           estimatedTime: objective.recommendedActions[0]?.estimatedTime || 30,
           objectiveIds: [objective.objectiveId],
           completed: false,
@@ -662,7 +660,7 @@ export class AssessmentEngine {
             order: order++,
             title: `Practice: ${objective.objectiveName}`,
             description: `Complete ${objective.practiceQuestionCount} practice questions`,
-            type: 'practice' as const,
+            type: "practice" as const,
             estimatedTime: objective.practiceQuestionCount * 2, // 2 minutes per question
             objectiveIds: [objective.objectiveId],
             completed: false,
@@ -675,7 +673,7 @@ export class AssessmentEngine {
   }
 
   private determineRetakeEligibility(score: AssessmentScore, config: AssessmentConfig) {
-    const passed = score.percentage >= (config.passThreshold ?? 0.7) * 100;
+    const passed = score.percentage >= ((config.passThreshold ?? 0.7) * 100);
 
     return {
       eligible: !passed,
@@ -691,7 +689,7 @@ export class AssessmentEngine {
    */
   completeAssessment(session: AssessmentSession): AssessmentResult {
     session.endTime = new Date();
-    session.status = 'completed';
+    session.status = "completed";
 
     const score = this.calculateScore(session);
     const performance = this.calculatePerformanceMetrics(session);
@@ -699,9 +697,11 @@ export class AssessmentEngine {
     if ((remediation as any).canRetake === undefined) {
       (remediation as any).canRetake = false;
     }
-    const safeThreshold =
-      session.config?.passThreshold ?? (session.config?.type === 'practice-test' ? 0.6 : 0.7);
-    const passed = score.percentage >= safeThreshold * 100;
+  const safeThreshold = (
+    (session.config?.passThreshold) ??
+    (session.config?.type === "practice-test" ? 0.6 : 0.7)
+  );
+  const passed = score.percentage >= safeThreshold * 100;
 
     const result: AssessmentResult = {
       sessionId: session.id,

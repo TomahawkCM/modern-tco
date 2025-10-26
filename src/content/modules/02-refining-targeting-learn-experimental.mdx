@@ -1,0 +1,208 @@
+---
+title: "Refining Questions & Targeting (Learn-style, Experimental)"
+id: "module-02L"
+domainSlug: "refining-targeting"
+difficulty: "Intermediate"
+estimatedTime: 75
+tags: ["microlearning", "targeting", "experiment"]
+status: "experimental"
+lastUpdated: "2025-10-05"
+---
+
+import { MicroSection } from "@/components/mdx/MicroSection";
+import PracticeButton from "@/components/mdx/PracticeButton";
+import { MicroQuizMDX } from "@/components/learn-experimental/LearnExperimentalQuizGroup";
+import { getReadOnlyQuestions } from "@/lib/quiz/readOnlyQuestions";
+import { emitLearnExp } from "@/lib/telemetry/learnExperimental";
+
+# Refining Questions & Targeting (Learn Experimental Track)
+
+<MicroSection
+  id="unit-02L-01"
+  moduleId="module-02L"
+  title="Advanced Filtering Patterns"
+  estimatedMinutes={12}
+  sectionNumber={1}
+  totalSections={5}
+  keyTakeaways={[
+    "Combine sensor output filters to isolate the exact signal you need.",
+    "Sequence filters to keep the question responsive on large datasets.",
+    "Document the filter intent so teammates understand change impact."
+  ]}
+  quickCheck={
+    <MicroQuizMDX
+      moduleId="module-02L"
+      unitId="unit-02L-01"
+      quizIdPrefix="module-02L-unit-01"
+      questions={getReadOnlyQuestions({ domain: "refining-targeting", tags: ["filters"], limit: 3 })}
+    />
+  }
+>
+
+### Learning outcomes
+
+- Layer multiple filters without over-constraining the question response.
+- Explain performance trade-offs of client-side versus server-side filtering.
+
+<PracticeButton
+  href="/study/labs/02-l/advanced-filtering"
+  onClick={() => emitLearnExp({ moduleId: "module-02L", unitId: "unit-02L-01", action: "practice_start" })}
+>
+  Practice: Chain Advanced Filters
+</PracticeButton>
+
+</MicroSection>
+
+<MicroSection
+  id="unit-02L-02"
+  moduleId="module-02L"
+  title="Dynamic Groups & RBAC Alignment"
+  estimatedMinutes={15}
+  sectionNumber={2}
+  totalSections={5}
+  keyTakeaways={[
+    "Build dynamic groups that map to real operational boundaries.",
+    "Align question permissions with least-privilege RBAC assignments.",
+    "Review membership drift weekly to keep groups accurate."
+  ]}
+  quickCheck={
+    <MicroQuizMDX
+      moduleId="module-02L"
+      unitId="unit-02L-02"
+      quizIdPrefix="module-02L-unit-02"
+      questions={getReadOnlyQuestions({ domain: "refining-targeting", tags: ["rbac"], limit: 3 })}
+    />
+  }
+>
+
+### Learning outcomes
+
+- Map persona-based access to question execution rights.
+- Detect when a dynamic group needs manual audit versus automated repair.
+
+<PracticeButton
+  href="/study/labs/02-l/rbac-alignment"
+  onClick={() => emitLearnExp({ moduleId: "module-02L", unitId: "unit-02L-02", action: "practice_start" })}
+>
+  Practice: Align Groups & Roles
+</PracticeButton>
+
+</MicroSection>
+
+<MicroSection
+  id="unit-02L-03"
+  moduleId="module-02L"
+  title="Safe Targeting in Production"
+  estimatedMinutes={14}
+  sectionNumber={3}
+  totalSections={5}
+  keyTakeaways={[
+    "Use canary groups to validate sensitive questions before global rollout.",
+    "Anchor targeting decisions to change windows and business risk.",
+    "Capture rollback plans for every high-impact question."
+  ]}
+  quickCheck={
+    <MicroQuizMDX
+      moduleId="module-02L"
+      unitId="unit-02L-03"
+      quizIdPrefix="module-02L-unit-03"
+      questions={getReadOnlyQuestions({ domain: "refining-targeting", tags: ["safety"], limit: 3 })}
+    />
+  }
+>
+
+### Learning outcomes
+
+- Build a defensible targeting plan for high-risk investigative questions.
+- Communicate blast radius and fallback steps to stakeholders.
+
+<PracticeButton
+  href="/study/labs/02-l/safe-targeting-plan"
+  onClick={() => emitLearnExp({ moduleId: "module-02L", unitId: "unit-02L-03", action: "practice_start" })}
+>
+  Practice: Draft a Safe Targeting Plan
+</PracticeButton>
+
+</MicroSection>
+
+<MicroSection
+  id="unit-02L-04"
+  moduleId="module-02L"
+  title="Performance Diagnostics"
+  estimatedMinutes={12}
+  sectionNumber={4}
+  totalSections={5}
+  keyTakeaways={[
+    "Track question duration and sensor load to avoid saturating endpoints.",
+    "Identify when to pivot from broadcast to split-question strategies.",
+    "Log repeat offenders causing slow-downs for quick remediation."
+  ]}
+  quickCheck={
+    <MicroQuizMDX
+      moduleId="module-02L"
+      unitId="unit-02L-04"
+      quizIdPrefix="module-02L-unit-04"
+      questions={getReadOnlyQuestions({ domain: "refining-targeting", tags: ["performance"], limit: 3 })}
+    />
+  }
+>
+
+### Learning outcomes
+
+- Diagnose performance bottlenecks using the Question History view.
+- Recommend alternate query designs to keep service-level objectives intact.
+
+<PracticeButton
+  href="/study/labs/02-l/performance-diagnostics"
+  onClick={() => emitLearnExp({ moduleId: "module-02L", unitId: "unit-02L-04", action: "practice_start" })}
+>
+  Practice: Tune Question Performance
+</PracticeButton>
+
+</MicroSection>
+
+<MicroSection
+  id="unit-02L-05"
+  moduleId="module-02L"
+  title="Operationalizing Targeting Insights"
+  estimatedMinutes={12}
+  sectionNumber={5}
+  totalSections={5}
+  keyTakeaways={[
+    "Turn proven targeting logic into templates or automation policies.",
+    "Share refinement lessons across platform, security, and operations teams.",
+    "Incorporate targeting metrics into quarterly reviews."
+  ]}
+  quickCheck={
+    <MicroQuizMDX
+      moduleId="module-02L"
+      unitId="unit-02L-05"
+      quizIdPrefix="module-02L-unit-05"
+      questions={getReadOnlyQuestions({ domain: "refining-targeting", limit: 3 })}
+    />
+  }
+>
+
+### Learning outcomes
+
+- Package targeting best practices into a reusable playbook entry.
+- Measure the before-and-after impact of targeting improvements.
+
+<PracticeButton
+  href="/study/labs/02-l/operationalize-targeting"
+  onClick={() => emitLearnExp({ moduleId: "module-02L", unitId: "unit-02L-05", action: "practice_start" })}
+>
+  Practice: Publish a Targeting Upgrade
+</PracticeButton>
+
+</MicroSection>
+
+## End-module knowledge check
+
+<MicroQuizMDX
+  moduleId="module-02L"
+  unitId="unit-02L-summary"
+  quizIdPrefix="module-02L-summary"
+  questions={getReadOnlyQuestions({ domain: "refining-targeting", limit: 8 })}
+/>
+

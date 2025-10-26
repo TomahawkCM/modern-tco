@@ -1,5 +1,5 @@
-import { type ClassValue, clsx } from 'clsx';
-import { twMerge } from 'tailwind-merge';
+import { type ClassValue, clsx } from "clsx";
+import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -16,9 +16,9 @@ export function formatTime(seconds: number): string {
   const remainingSeconds = seconds % 60;
 
   if (hours > 0) {
-    return `${hours}:${minutes.toString().padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`;
+    return `${hours}:${minutes.toString().padStart(2, "0")}:${remainingSeconds.toString().padStart(2, "0")}`;
   }
-  return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
+  return `${minutes}:${remainingSeconds.toString().padStart(2, "0")}`;
 }
 
 export function shuffleArray<T>(array: T[]): T[] {
@@ -31,21 +31,21 @@ export function shuffleArray<T>(array: T[]): T[] {
 }
 
 export function getScoreColor(score: number): string {
-  if (score >= 90) return 'text-[#22c55e] dark:text-[#22c55e]';
-  if (score >= 80) return 'text-blue-600 dark:text-primary';
-  if (score >= 70) return 'text-yellow-600 dark:text-[#f97316]';
-  return 'text-red-600 dark:text-red-400';
+  if (score >= 90) return "text-[#22c55e] dark:text-[#22c55e]";
+  if (score >= 80) return "text-blue-600 dark:text-primary";
+  if (score >= 70) return "text-yellow-600 dark:text-[#f97316]";
+  return "text-red-600 dark:text-red-400";
 }
 
 export function getDifficultyColor(difficulty: string): string {
   switch (difficulty.toLowerCase()) {
-    case 'beginner':
-      return 'text-[#22c55e] dark:text-[#22c55e]';
-    case 'intermediate':
-      return 'text-yellow-600 dark:text-[#f97316]';
-    case 'advanced':
-      return 'text-red-600 dark:text-red-400';
+    case "beginner":
+      return "text-[#22c55e] dark:text-[#22c55e]";
+    case "intermediate":
+      return "text-yellow-600 dark:text-[#f97316]";
+    case "advanced":
+      return "text-red-600 dark:text-red-400";
     default:
-      return 'text-gray-600 dark:text-muted-foreground';
+      return "text-gray-600 dark:text-muted-foreground";
   }
 }

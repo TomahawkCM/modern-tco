@@ -1,13 +1,13 @@
-'use client';
+"use client";
 
-import { useEffect, useRef } from 'react';
-import { analytics } from '@/lib/analytics';
+import { useEffect, useRef } from "react";
+import { analytics } from "@/lib/analytics";
 import {
-  endVideoSession,
-  startVideoSession,
   trackVideoImpression,
+  startVideoSession,
   updateVideoProgress,
-} from '@/lib/videoAnalytics';
+  endVideoSession,
+} from "@/lib/videoAnalytics";
 
 interface VideoEmbedProps {
   youtubeId: string;
@@ -22,21 +22,18 @@ export default function VideoEmbed({ youtubeId, title, start, moduleSlug }: Vide
 
   // Load YouTube IFrame API once
   function loadYT(): Promise<void> {
-    if (typeof window === 'undefined') return Promise.resolve();
+    if (typeof window === "undefined") return Promise.resolve();
     const w = window as any;
     if (w.YT?.Player) return Promise.resolve();
     if (w.__ytApiPromise) return w.__ytApiPromise as Promise<void>;
     w.__ytApiPromise = new Promise<void>((resolve) => {
-      const script = document.createElement('script');
-      script.src = 'https://www.youtube.com/iframe_api';
+      const script = document.createElement("script");
+      script.src = "https://www.youtube.com/iframe_api";
       script.async = true;
       document.head.appendChild(script);
       const prev = w.onYouTubeIframeAPIReady;
-      w.onYouTubeIframeAPIReady = () => {
-        if (typeof prev === 'function')
-          try {
-            prev();
-          } catch {}
+      w.onYouTubeIframeAPIReady = function () {
+        if (typeof prev === "function") try { prev(); } catch {}
         resolve();
       };
     });
@@ -45,7 +42,7 @@ export default function VideoEmbed({ youtubeId, title, start, moduleSlug }: Vide
 
   // Global attach queue: create players sequentially to avoid race/concurrency issues
   function enqueueAttach(task: () => void) {
-    if (typeof window === 'undefined') return task();
+    if (typeof window === "undefined") return task();
     const w = window as any;
     w.__ytAttachQueue = w.__ytAttachQueue ?? [];
     w.__ytAttachRunning = w.__ytAttachRunning ?? false;
@@ -56,9 +53,7 @@ export default function VideoEmbed({ youtubeId, title, start, moduleSlug }: Vide
       const step = () => {
         const fn = w.__ytAttachQueue.shift();
         if (fn) {
-          try {
-            fn();
-          } catch {}
+          try { fn(); } catch {}
           // Generous spacing reduces flakiness when many players initialize together
           setTimeout(step, 500);
         } else {
@@ -72,31 +67,19 @@ export default function VideoEmbed({ youtubeId, title, start, moduleSlug }: Vide
 
   // Impression/visibility analytics
   useEffect(() => {
-    void analytics.capture('video_impression', {
-      provider: 'youtube',
-      youtubeId,
-      title,
-      moduleSlug,
-    });
+    void analytics.capture("video_impression", { provider: "youtube", youtubeId, title, moduleSlug });
     trackVideoImpression(youtubeId, title, moduleSlug);
 
     const el = containerRef.current!;
-    if (!el || typeof window === 'undefined') return;
+    if (!el || typeof window === "undefined") return;
     let seen = false;
     const io = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
           if (!seen && entry.isIntersecting && entry.intersectionRatio >= 0.5) {
-            void analytics.capture('video_visible', {
-              provider: 'youtube',
-              youtubeId,
-              title,
-              moduleSlug,
-            });
+            void analytics.capture("video_visible", { provider: "youtube", youtubeId, title, moduleSlug });
             seen = true;
-            try {
-              io.disconnect();
-            } catch {}
+            try { io.disconnect(); } catch {}
             break;
           }
         }
@@ -104,11 +87,7 @@ export default function VideoEmbed({ youtubeId, title, start, moduleSlug }: Vide
       { threshold: [0.5] }
     );
     io.observe(el as Element);
-    return () => {
-      try {
-        io.disconnect();
-      } catch {}
-    };
+    return () => { try { io.disconnect(); } catch {} };
   }, [youtubeId, title, moduleSlug]);
 
   // Create player using API (no pre-rendered iframe)
@@ -128,9 +107,7 @@ export default function VideoEmbed({ youtubeId, title, start, moduleSlug }: Vide
       const doCreate = () => {
         // Avoid duplicate creation
         if (playerRef.current?.destroy) {
-          try {
-            playerRef.current.destroy();
-          } catch {}
+          try { playerRef.current.destroy(); } catch {}
           playerRef.current = null;
         }
         let ready = false;
@@ -141,9 +118,7 @@ export default function VideoEmbed({ youtubeId, title, start, moduleSlug }: Vide
           // Safety timeout: if onReady doesn't fire, retry
           const watchdog = setTimeout(() => {
             if (!ready) {
-              try {
-                playerRef.current?.destroy?.();
-              } catch {}
+              try { playerRef.current?.destroy?.(); } catch {}
               if (attempts <= 3) {
                 setTimeout(createOnce, 800);
               }
@@ -163,19 +138,12 @@ export default function VideoEmbed({ youtubeId, title, start, moduleSlug }: Vide
             events: {
               onReady: () => {
                 ready = true;
-                try {
-                  clearTimeout(watchdog);
-                } catch {}
+                try { clearTimeout(watchdog); } catch {}
               },
               onStateChange: (e: any) => {
                 const state = e.data; // 0 ended, 1 playing, 2 paused
                 if (state === 1) {
-                  void analytics.capture('video_play', {
-                    provider: 'youtube',
-                    youtubeId,
-                    title,
-                    moduleSlug,
-                  });
+                  void analytics.capture("video_play", { provider: "youtube", youtubeId, title, moduleSlug });
 
                   // Start video session if not already started
                   if (!sessionId) {
@@ -193,13 +161,7 @@ export default function VideoEmbed({ youtubeId, title, start, moduleSlug }: Vide
                           [25, 50, 75, 100].forEach((m) => {
                             if (!milestones[m] && p >= m) {
                               milestones[m] = true;
-                              void analytics.capture('video_progress', {
-                                provider: 'youtube',
-                                youtubeId,
-                                title,
-                                moduleSlug,
-                                milestone: m,
-                              });
+                              void analytics.capture("video_progress", { provider: "youtube", youtubeId, title, moduleSlug, milestone: m });
 
                               // Track milestone in video analytics
                               if (sessionId) {
@@ -216,14 +178,7 @@ export default function VideoEmbed({ youtubeId, title, start, moduleSlug }: Vide
                     const dur = playerRef.current?.getDuration?.() || 0;
                     const cur = playerRef.current?.getCurrentTime?.() || 0;
                     const percent = dur ? Math.round((cur / dur) * 100) : 0;
-                    void analytics.capture('video_pause', {
-                      provider: 'youtube',
-                      youtubeId,
-                      title,
-                      moduleSlug,
-                      position: Math.floor(cur),
-                      percent,
-                    });
+                    void analytics.capture("video_pause", { provider: "youtube", youtubeId, title, moduleSlug, position: Math.floor(cur), percent });
 
                     // Update watch time
                     if (sessionStartTime > 0) {
@@ -231,21 +186,12 @@ export default function VideoEmbed({ youtubeId, title, start, moduleSlug }: Vide
                       sessionStartTime = 0;
                     }
                   } catch {}
-                  if (interval) {
-                    clearInterval(interval);
-                    interval = null;
-                  }
+                  if (interval) { clearInterval(interval); interval = null; }
                 } else if (state === 0) {
                   try {
                     const dur = playerRef.current?.getDuration?.() || 0;
                     const cur = playerRef.current?.getCurrentTime?.() || 0;
-                    void analytics.capture('video_complete', {
-                      provider: 'youtube',
-                      youtubeId,
-                      title,
-                      moduleSlug,
-                      duration: Math.floor(dur),
-                    });
+                    void analytics.capture("video_complete", { provider: "youtube", youtubeId, title, moduleSlug, duration: Math.floor(dur) });
 
                     // End video session
                     if (sessionId) {
@@ -258,19 +204,12 @@ export default function VideoEmbed({ youtubeId, title, start, moduleSlug }: Vide
                       totalWatchTime = 0;
                     }
                   } catch {}
-                  if (interval) {
-                    clearInterval(interval);
-                    interval = null;
-                  }
+                  if (interval) { clearInterval(interval); interval = null; }
                 }
               },
               onError: () => {
-                try {
-                  clearTimeout(watchdog);
-                } catch {}
-                try {
-                  playerRef.current?.destroy?.();
-                } catch {}
+                try { clearTimeout(watchdog); } catch {}
+                try { playerRef.current?.destroy?.(); } catch {}
                 if (attempts <= 3) {
                   setTimeout(createOnce, 800);
                 }
@@ -288,14 +227,10 @@ export default function VideoEmbed({ youtubeId, title, start, moduleSlug }: Vide
     void attach();
 
     return () => {
-      try {
-        if (interval) clearInterval(interval);
-      } catch {}
-      try {
-        playerRef.current?.destroy?.();
-      } catch {}
+      try { if (interval) clearInterval(interval); } catch {}
+      try { playerRef.current?.destroy?.(); } catch {}
     };
-  }, [youtubeId, start, title, moduleSlug, enqueueAttach, loadYT]);
+  }, [youtubeId, start, title, moduleSlug]);
 
   return (
     <div

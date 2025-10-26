@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
 interface UseKeyboardNavigationOptions {
   enabled?: boolean;
@@ -45,56 +45,56 @@ export function useKeyboardNavigation({
 
       // Handle keyboard shortcuts
       switch (key) {
-        case 'Escape':
+        case "Escape":
           if (onEscape) {
             event.preventDefault();
             onEscape();
           }
           break;
 
-        case 'Enter':
+        case "Enter":
           if (onEnter && !ctrlKey && !metaKey) {
             event.preventDefault();
             onEnter();
           }
           break;
 
-        case 'ArrowUp':
+        case "ArrowUp":
           if (onArrowUp) {
             event.preventDefault();
             onArrowUp();
           }
           break;
 
-        case 'ArrowDown':
+        case "ArrowDown":
           if (onArrowDown) {
             event.preventDefault();
             onArrowDown();
           }
           break;
 
-        case 'ArrowLeft':
+        case "ArrowLeft":
           if (onArrowLeft) {
             event.preventDefault();
             onArrowLeft();
           }
           break;
 
-        case 'ArrowRight':
+        case "ArrowRight":
           if (onArrowRight) {
             event.preventDefault();
             onArrowRight();
           }
           break;
 
-        case 'Tab':
+        case "Tab":
           if (onTab) {
             onTab(shiftKey);
           }
           break;
 
-        case ' ':
-        case 'Space':
+        case " ":
+        case "Space":
           if (onSpace) {
             event.preventDefault();
             onSpace();
@@ -107,12 +107,12 @@ export function useKeyboardNavigation({
       setIsKeyboardUser(false);
     };
 
-    document.addEventListener('keydown', handleKeyDown);
-    document.addEventListener('mousedown', handleMouseDown);
+    document.addEventListener("keydown", handleKeyDown);
+    document.addEventListener("mousedown", handleMouseDown);
 
     return () => {
-      document.removeEventListener('keydown', handleKeyDown);
-      document.removeEventListener('mousedown', handleMouseDown);
+      document.removeEventListener("keydown", handleKeyDown);
+      document.removeEventListener("mousedown", handleMouseDown);
     };
   }, [
     enabled,
@@ -135,12 +135,12 @@ export function useArrowKeyNavigation<T extends HTMLElement>(
   options: {
     enabled?: boolean;
     loop?: boolean;
-    orientation?: 'horizontal' | 'vertical' | 'both';
+    orientation?: "horizontal" | "vertical" | "both";
     onSelect?: (item: T, index: number) => void;
   } = {}
 ) {
   const [currentIndex, setCurrentIndex] = useState(-1);
-  const { enabled = true, loop = true, orientation = 'vertical', onSelect } = options;
+  const { enabled = true, loop = true, orientation = "vertical", onSelect } = options;
 
   const moveToIndex = (newIndex: number) => {
     if (!items.length) return;
@@ -159,22 +159,22 @@ export function useArrowKeyNavigation<T extends HTMLElement>(
   };
 
   const moveUp = () => {
-    if (orientation === 'horizontal') return;
+    if (orientation === "horizontal") return;
     moveToIndex(currentIndex - 1);
   };
 
   const moveDown = () => {
-    if (orientation === 'horizontal') return;
+    if (orientation === "horizontal") return;
     moveToIndex(currentIndex + 1);
   };
 
   const moveLeft = () => {
-    if (orientation === 'vertical') return;
+    if (orientation === "vertical") return;
     moveToIndex(currentIndex - 1);
   };
 
   const moveRight = () => {
-    if (orientation === 'vertical') return;
+    if (orientation === "vertical") return;
     moveToIndex(currentIndex + 1);
   };
 

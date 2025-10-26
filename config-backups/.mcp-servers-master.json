@@ -1,0 +1,305 @@
+{
+  "mcpServers": {
+    "shadcn": {
+      "command": "npx",
+      "args": ["shadcn@latest", "mcp"],
+      "description": "Shadcn UI MCP Server for component management",
+      "capabilities": {
+        "tools": true,
+        "ui_components": true,
+        "design_system": true
+      }
+    },
+    "filesystem": {
+      "command": "npx",
+      "args": ["@modelcontextprotocol/server-filesystem", "/home/robne/projects/active"],
+      "env": {
+        "ALLOWED_DIRECTORIES": "/home/robne/projects/active"
+      },
+      "description": "Filesystem MCP Server for file operations",
+      "capabilities": {
+        "tools": true,
+        "file_ops": true,
+        "io": true
+      }
+    },
+    "claude-flow": {
+      "command": "npx",
+      "args": ["claude-flow@alpha", "mcp", "start"],
+      "env": {
+        "NODE_ENV": "development",
+        "CLAUDE_FLOW_AUTO_START": "true"
+      },
+      "description": "Claude Flow v2.0.0 MCP Server with 87 tools",
+      "capabilities": {
+        "tools": true,
+        "resources": true,
+        "prompts": true,
+        "swarm": true,
+        "neural": true
+      }
+    },
+    "sqlite-tanium": {
+      "command": "npx",
+      "args": ["-y", "mcp-sqlite"],
+      "env": {
+        "SQLITE_DATABASE_PATH": "/home/robne/projects/active/tanium-tco/modern-tco/data/db/tanium_tco.db"
+      },
+      "description": "SQLite MCP Server for Tanium TCO study app",
+      "capabilities": {
+        "tools": true,
+        "database": true,
+        "education": true
+      }
+    },
+    "github": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-github"],
+      "env": {
+        "GITHUB_TOKEN": "${GITHUB_TOKEN}"
+      },
+      "description": "GitHub MCP Server for repository management",
+      "capabilities": {
+        "tools": true,
+        "version_control": true,
+        "collaboration": true
+      }
+    },
+    "firecrawl": {
+      "command": "npx",
+      "args": ["-y", "firecrawl-mcp"],
+      "env": {
+        "FIRECRAWL_API_KEY": "${FIRECRAWL_API_KEY}"
+      },
+      "description": "Firecrawl MCP Server v3.2.0 for web scraping and content extraction",
+      "capabilities": {
+        "tools": true,
+        "scraping": true,
+        "web_content": true
+      }
+    },
+    "google-maps": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-google-maps"],
+      "env": {
+        "GOOGLE_MAPS_API_KEY": "${GOOGLE_MAPS_API_KEY}"
+      },
+      "description": "Official Google Maps MCP Server for geolocation services",
+      "capabilities": {
+        "tools": true,
+        "geolocation": true,
+        "mapping": true
+      }
+    },
+    "brave-search": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-brave-search"],
+      "env": {
+        "BRAVE_API_KEY": "${BRAVE_API_KEY}"
+      },
+      "description": "Brave Search MCP Server for web search",
+      "capabilities": {
+        "tools": true,
+        "search": true,
+        "web": true
+      }
+    },
+    "playwright": {
+      "command": "npx",
+      "args": ["-y", "@playwright/mcp"],
+      "env": {
+        "PLAYWRIGHT_BROWSERS_PATH": "/home/robne/.cache/ms-playwright"
+      },
+      "description": "Official Microsoft Playwright MCP Server for browser automation",
+      "capabilities": {
+        "tools": true,
+        "browser_automation": true,
+        "e2e_testing": true
+      }
+    },
+    "mongodb": {
+      "command": "npx",
+      "args": ["-y", "mongodb-mcp-server"],
+      "env": {
+        "MONGODB_URI": "${MONGODB_URI}",
+        "MONGODB_DATABASE": "mapmydeals"
+      },
+      "description": "Official MongoDB MCP Server v1.0.1 for database operations",
+      "capabilities": {
+        "tools": true,
+        "database": true,
+        "atlas": true
+      }
+    },
+    "postgresql": {
+      "command": "npx",
+      "args": ["-y", "mcp-postgresql"],
+      "env": {
+        "DATABASE_URL": "${DATABASE_URL}"
+      },
+      "description": "PostgreSQL MCP Server for relational database operations",
+      "capabilities": {
+        "tools": true,
+        "database": true,
+        "sql": true
+      }
+    },
+    "docker": {
+      "command": "npx",
+      "args": ["-y", "mcp-docker"],
+      "description": "Docker MCP Server for container management",
+      "capabilities": {
+        "tools": true,
+        "containers": true,
+        "devops": true
+      }
+    },
+    "kubernetes": {
+      "command": "npx",
+      "args": ["-y", "mcp-server-kubernetes"],
+      "description": "Kubernetes MCP Server for orchestration management",
+      "capabilities": {
+        "tools": true,
+        "orchestration": true,
+        "devops": true
+      }
+    },
+    "sqlite-mapmydeals": {
+      "command": "npx",
+      "args": ["-y", "mcp-sqlite"],
+      "env": {
+        "SQLITE_DATABASE_PATH": "/home/robne/projects/active/mapmydeals/data/db/mapmydeals.db"
+      },
+      "description": "SQLite MCP Server for MapMyDeals business data",
+      "capabilities": {
+        "tools": true,
+        "database": true,
+        "cache": true
+      }
+    },
+    "supabase": {
+      "command": "npx",
+      "args": ["-y", "supabase-mcp"],
+      "env": {
+        "SUPABASE_URL": "${SUPABASE_URL}",
+        "SUPABASE_ANON_KEY": "${SUPABASE_ANON_KEY}",
+        "SUPABASE_SERVICE_KEY": "${SUPABASE_SERVICE_KEY}"
+      },
+      "description": "Supabase MCP Server v1.5.0 for modern PostgreSQL with real-time features",
+      "capabilities": {
+        "tools": true,
+        "database": true,
+        "realtime": true
+      }
+    },
+    "notion": {
+      "command": "npx",
+      "args": ["-y", "@notionhq/notion-mcp-server"],
+      "env": {
+        "NOTION_API_KEY": "${NOTION_API_KEY}"
+      },
+      "description": "Official Notion MCP Server v1.9.0 for database and project management",
+      "capabilities": {
+        "tools": true,
+        "database": true,
+        "productivity": true
+      }
+    },
+    "obsidian": {
+      "command": "npx",
+      "args": ["-y", "obsidian-mcp-server"],
+      "env": {
+        "OBSIDIAN_VAULT_PATH": "${OBSIDIAN_VAULT_PATH}"
+      },
+      "description": "Obsidian MCP Server v2.0.7 for comprehensive knowledge vault management",
+      "capabilities": {
+        "tools": true,
+        "knowledge_base": true,
+        "notes": true
+      }
+    },
+    "stripe": {
+      "command": "npx",
+      "args": ["-y", "@stripe/mcp"],
+      "env": {
+        "STRIPE_SECRET_KEY": "${STRIPE_SECRET_KEY}",
+        "STRIPE_WEBHOOK_SECRET": "${STRIPE_WEBHOOK_SECRET}"
+      },
+      "description": "Official Stripe MCP Server v0.2.4 for payment processing and monetization",
+      "capabilities": {
+        "tools": true,
+        "payments": true,
+        "billing": true
+      }
+    }
+  },
+  "settings": {
+    "autoStart": true,
+    "timeout": 30000,
+    "retryAttempts": 3,
+    "retryDelay": 2000,
+    "healthCheckInterval": 30000,
+    "enableLogging": true,
+    "logLevel": "info",
+    "enableMetrics": true,
+    "parallelStartup": true,
+    "maxConcurrentStartups": 6,
+    "gracefulShutdown": true,
+    "shutdownTimeout": 15000,
+    "startupTiers": {
+      "tier1_critical": {
+        "servers": ["claude-flow", "filesystem", "sqlite-tanium", "shadcn"],
+        "timeout": 15000,
+        "parallel": true,
+        "priority": "high"
+      },
+      "tier2_database": {
+        "servers": ["mongodb", "postgresql", "supabase", "sqlite-mapmydeals"],
+        "timeout": 20000,
+        "parallel": true,
+        "priority": "high"
+      },
+      "tier3_services": {
+        "servers": ["github", "firecrawl", "google-maps", "playwright"],
+        "timeout": 25000,
+        "parallel": true,
+        "priority": "medium"
+      },
+      "tier4_optional": {
+        "servers": ["brave-search", "docker", "kubernetes", "notion", "obsidian", "stripe"],
+        "timeout": 30000,
+        "parallel": true,
+        "priority": "low"
+      }
+    },
+    "resourceLimits": {
+      "maxMemoryPerServer": "1024MB",
+      "maxCpuPercentage": 10,
+      "enableGpuAcceleration": false
+    },
+    "optimizedStartupSequence": [
+      "claude-flow",
+      "filesystem",
+      "sqlite-tanium",
+      "shadcn",
+      "mongodb",
+      "postgresql",
+      "supabase",
+      "github",
+      "firecrawl"
+    ]
+  },
+  "metadata": {
+    "version": "2.0.0",
+    "totalServers": 18,
+    "lastUpdated": "2025-09-24",
+    "description": "Optimized 18-server MCP ecosystem for WSL2 environment",
+    "changes": [
+      "Removed deprecated servers: puppeteer, redis, openai, slack",
+      "Added new servers: supabase, notion, obsidian, stripe",
+      "Updated firecrawl to v3.2.0",
+      "Added official Playwright server",
+      "Optimized for WSL2 native filesystem performance"
+    ]
+  }
+}

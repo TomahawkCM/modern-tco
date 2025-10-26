@@ -15,20 +15,14 @@
 
 import fs from 'node:fs';
 import path from 'node:path';
-import { createClient } from '@supabase/supabase-js';
 import matter from 'gray-matter';
+import { createClient } from '@supabase/supabase-js';
 
 type Section = {
   title: string;
   content: string;
   order: number;
-  type:
-    | 'overview'
-    | 'learning_objectives'
-    | 'procedures'
-    | 'troubleshooting'
-    | 'exam_prep'
-    | 'references';
+  type: 'overview' | 'learning_objectives' | 'procedures' | 'troubleshooting' | 'exam_prep' | 'references';
   estimated?: number;
   keyPoints?: string[];
 };
@@ -68,7 +62,7 @@ function parseSections(markdown: string): Section[] {
     if (line.startsWith('## ') || line.startsWith('# ')) {
       flush();
       let title = line.replace(/^#{1,2}\s+/, '').trim();
-      let estimated: number | undefined;
+      let estimated: number | undefined = undefined;
       // Extract estimated time in heading like "(45 minutes)" or "(3 hours)"
       const m = title.match(/\(([^)]+)\)\s*$/);
       if (m) {
@@ -115,11 +109,7 @@ async function main() {
     const weightRaw = typeof fm.blueprintWeight === 'number' ? fm.blueprintWeight : undefined;
     const examWeight = weightRaw && weightRaw <= 1 ? Math.round(weightRaw * 100) : weightRaw || 0;
     const est = parseEstimatedMinutes(fm.estimatedTime);
-    const learningObjectives: string[] = Array.isArray(fm.learningObjectives)
-      ? fm.learningObjectives
-      : Array.isArray(fm.objectives)
-        ? fm.objectives
-        : [];
+    const learningObjectives: string[] = Array.isArray(fm.learningObjectives) ? fm.learningObjectives : (Array.isArray(fm.objectives) ? fm.objectives : []);
     const version = String(fm.version || '1');
 
     if (!id) {
@@ -142,11 +132,7 @@ async function main() {
       updated_at: new Date().toISOString(),
     };
 
-    const { data: mod, error: modErr } = await supabase
-      .from('study_modules')
-      .upsert(upsertModule, { onConflict: 'id' })
-      .select('*')
-      .single();
+    const { data: mod, error: modErr } = await supabase.from('study_modules').upsert(upsertModule, { onConflict: 'id' }).select('*').single();
     if (modErr) {
       console.error(`  ❌ Upsert failed: ${modErr.message}`);
       continue;
@@ -177,10 +163,7 @@ async function main() {
       updated_at: new Date().toISOString(),
     }));
 
-    const { data: inserted, error: secErr } = await supabase
-      .from('study_sections')
-      .insert(rows)
-      .select('id');
+    const { data: inserted, error: secErr } = await supabase.from('study_sections').insert(rows).select('id');
     if (secErr) {
       console.error(`  ❌ Sections insert failed: ${secErr.message}`);
     } else {

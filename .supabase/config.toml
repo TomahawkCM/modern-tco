@@ -1,0 +1,30 @@
+# A string used to distinguish different Supabase projects on the same machine.
+# Not required if you have a single project in the same directory as the config.
+project_id = "qnwcwoutgarhqxlgsjzs"
+
+[api]
+enabled = true
+port = 54321
+schemas = ["public", "storage", "graphql_public"]
+extra_search_path = ["public", "extensions"]
+max_rows = 1000
+
+[db]
+port = 54322
+shadow_port = 54320
+major_version = 15
+
+[realtime]
+enabled = true
+ip_version = "ipv4"
+
+[studio]
+enabled = true
+port = 54323
+api_url = "https://qnwcwoutgarhqxlgsjzs.supabase.co"
+
+[storage]
+enabled = true
+
+[auth]
+enabled = true

@@ -1,5 +1,5 @@
-import Anthropic from '@anthropic-ai/sdk';
-import { Difficulty, type Question, QuestionCategory, TCODomain } from '@/types/exam';
+import { Difficulty, QuestionCategory, TCODomain, type Question } from "@/types/exam";
+import Anthropic from "@anthropic-ai/sdk";
 
 interface GenerationConfig {
   domain: TCODomain;
@@ -26,7 +26,7 @@ export class QuestionGeneratorService {
 
   constructor(apiKey?: string) {
     this.anthropic = new Anthropic({
-      apiKey: apiKey || process.env.ANTHROPIC_API_KEY || '',
+      apiKey: apiKey || process.env.ANTHROPIC_API_KEY || "",
     });
   }
 
@@ -75,19 +75,19 @@ export class QuestionGeneratorService {
     for (let attempt = 1; attempt <= this.maxRetries; attempt++) {
       try {
         const response = await this.anthropic.messages.create({
-          model: 'claude-3-5-sonnet-20241022',
+          model: "claude-3-5-sonnet-20241022",
           max_tokens: 4000,
           temperature: 0.7,
           messages: [
             {
-              role: 'user',
+              role: "user",
               content: prompt,
             },
           ],
         });
 
         const content = response.content[0];
-        if (content.type === 'text') {
+        if (content.type === "text") {
           return this.parseGeneratedQuestions(content.text, config);
         }
       } catch (error) {
@@ -247,7 +247,7 @@ Focus on Tanium's 'Refining Questions & Targeting' module:
 - Advanced targeting scenarios`,
     };
 
-    return (contexts as any)[domain] || '';
+    return (contexts as any)[domain] || "";
   }
 
   /**
@@ -279,7 +279,7 @@ Focus on Tanium's 'Refining Questions & Targeting' module:
         - Expect integration of multiple Tanium modules and advanced configurations`,
     };
 
-    return (contexts as any)[difficulty] || '';
+    return (contexts as any)[difficulty] || "";
   }
 
   /**
@@ -301,24 +301,6 @@ Focus on real-world use cases, business scenarios, and practical application of 
 
       [QuestionCategory.LINEAR_CHAIN]: `
 Focus on Linear Chain Architecture concepts, question flow, and data processing.`,
-
-      [QuestionCategory.BEST_PRACTICES]: `
-Focus on industry best practices, recommended approaches, and optimal usage patterns.`,
-
-      [QuestionCategory.ADVANCED_CONCEPTS]: `
-Focus on advanced topics, complex scenarios, and deep technical understanding.`,
-
-      [QuestionCategory.QUESTION_CONSTRUCTION]: `
-Focus on how to construct effective Tanium questions, syntax, and query building.`,
-
-      [QuestionCategory.QUESTION_SHARING]: `
-Focus on collaboration features, sharing questions, and team workflows.`,
-
-      [QuestionCategory.PERFORMANCE_OPTIMIZATION]: `
-Focus on optimization techniques, performance tuning, and efficiency improvements.`,
-
-      [QuestionCategory.QUESTION_PERFORMANCE_OPTIMIZATION]: `
-Focus on optimizing question performance, query efficiency, and resource usage.`,
     };
 
     return contexts[category];
@@ -332,7 +314,7 @@ Focus on optimizing question performance, query efficiency, and resource usage.`
       // Extract JSON from response
       const jsonMatch = response.match(/\[[\s\S]*\]/);
       if (!jsonMatch) {
-        throw new Error('No JSON array found in response');
+        throw new Error("No JSON array found in response");
       }
 
       const generatedData: GeneratedQuestionData[] = JSON.parse(jsonMatch[0]);
@@ -355,7 +337,7 @@ Focus on optimizing question performance, query efficiency, and resource usage.`
         } as Question;
       });
     } catch (error) {
-      console.error('❌ Failed to parse generated questions:', error);
+      console.error("❌ Failed to parse generated questions:", error);
       throw new Error(`Failed to parse AI response: ${error}`);
     }
   }
@@ -365,29 +347,29 @@ Focus on optimizing question performance, query efficiency, and resource usage.`
    */
   private generateQuestionId(domain: TCODomain, difficulty: Difficulty, index: number): string {
     const domainCodes = {
-      [TCODomain.ASKING_QUESTIONS]: 'AQ',
-      [TCODomain.REFINING_QUESTIONS]: 'RT',
-      [TCODomain.TAKING_ACTION]: 'TA',
-      [TCODomain.NAVIGATION_MODULES]: 'NM',
-      [TCODomain.REPORTING_EXPORT]: 'RE',
-      [TCODomain.SECURITY]: 'SC', // Add missing domain
-      [TCODomain.FUNDAMENTALS]: 'FU', // Add missing domain
-      [TCODomain.TROUBLESHOOTING]: 'TR', // Add missing domain
-      [TCODomain.REFINING_TARGETING]: 'RF', // Add missing TCODomain member
+      [TCODomain.ASKING_QUESTIONS]: "AQ",
+      [TCODomain.REFINING_QUESTIONS]: "RT",
+      [TCODomain.TAKING_ACTION]: "TA",
+      [TCODomain.NAVIGATION_MODULES]: "NM",
+      [TCODomain.REPORTING_EXPORT]: "RE",
+      [TCODomain.SECURITY]: "SC", // Add missing domain
+      [TCODomain.FUNDAMENTALS]: "FU", // Add missing domain
+      [TCODomain.TROUBLESHOOTING]: "TR", // Add missing domain
+      [TCODomain.REFINING_TARGETING]: "RF", // Add missing TCODomain member
     };
 
     const difficultyCodes = {
-      [Difficulty.BEGINNER]: 'B',
-      [Difficulty.INTERMEDIATE]: 'I',
-      [Difficulty.ADVANCED]: 'A',
-      [Difficulty.EXPERT]: 'E',
+      [Difficulty.BEGINNER]: "B",
+      [Difficulty.INTERMEDIATE]: "I",
+      [Difficulty.ADVANCED]: "A",
+      [Difficulty.EXPERT]: "E",
     };
 
     const timestamp = Date.now().toString().slice(-6);
-    const domainCode = domainCodes[domain];
-    const difficultyCode = difficultyCodes[difficulty] || 'U';
+  const domainCode = domainCodes[domain];
+  const difficultyCode = difficultyCodes[difficulty] || "U";
 
-    return `TCO-${domainCode}-${difficultyCode}${timestamp}${index.toString().padStart(2, '0')}`;
+    return `TCO-${domainCode}-${difficultyCode}${timestamp}${index.toString().padStart(2, "0")}`;
   }
 
   /**
@@ -417,28 +399,28 @@ Focus on optimizing question performance, query efficiency, and resource usage.`
 
     // Check required fields
     if (!question.question || question.question.trim().length < 10) {
-      issues.push('Question text too short or missing');
+      issues.push("Question text too short or missing");
     }
 
     if (!question.choices || question.choices.length !== 4) {
-      issues.push('Must have exactly 4 choices');
+      issues.push("Must have exactly 4 choices");
     }
 
     if (!question.correctAnswerId) {
-      issues.push('Missing correct answer ID');
+      issues.push("Missing correct answer ID");
     }
 
     // Validate choices
     if (question.choices) {
       const choiceIds = question.choices.map((c) => c.id);
-      const expectedIds = ['a', 'b', 'c', 'd'];
+      const expectedIds = ["a", "b", "c", "d"];
 
       if (!expectedIds.every((id) => choiceIds.includes(id))) {
-        issues.push('Choices must have IDs: a, b, c, d');
+        issues.push("Choices must have IDs: a, b, c, d");
       }
 
       if (!choiceIds.includes(question.correctAnswerId)) {
-        issues.push('Correct answer ID not found in choices');
+        issues.push("Correct answer ID not found in choices");
       }
 
       question.choices.forEach((choice) => {
@@ -450,7 +432,7 @@ Focus on optimizing question performance, query efficiency, and resource usage.`
 
     // Check explanation
     if (!question.explanation || question.explanation.length < 20) {
-      issues.push('Explanation too short or missing');
+      issues.push("Explanation too short or missing");
     }
 
     return issues;

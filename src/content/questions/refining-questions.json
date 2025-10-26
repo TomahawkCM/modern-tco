@@ -1,0 +1,83 @@
+[
+  {
+    "id": "rq-001",
+    "question": "What is the main benefit of Dynamic Computer Groups when refining targets?",
+    "choices": [
+      { "id": "a", "text": "They store historical answers" },
+      { "id": "b", "text": "They automatically update membership based on criteria" },
+      { "id": "c", "text": "They deploy packages automatically" },
+      { "id": "d", "text": "They disable sensors by default" }
+    ],
+    "correctAnswerId": "b",
+    "domain": "Refining Questions & Targeting",
+    "difficulty": "Intermediate",
+    "category": "Platform Fundamentals",
+    "explanation": "Dynamic groups recalculate membership as endpoint data changes.",
+    "tags": ["dynamic-groups", "targeting"]
+  },
+  {
+    "id": "rq-002",
+    "question": "Which boolean operator combination best expresses 'Windows endpoints with Chrome OR Firefox installed and not domain controllers'?",
+    "choices": [
+      { "id": "a", "text": "AND only" },
+      { "id": "b", "text": "(Chrome OR Firefox) AND Windows AND NOT DomainController" },
+      { "id": "c", "text": "OR only" },
+      { "id": "d", "text": "NOT only" }
+    ],
+    "correctAnswerId": "b",
+    "domain": "Refining Questions & Targeting",
+    "difficulty": "Advanced",
+    "category": "Console Procedures",
+    "explanation": "Proper grouping ensures correct evaluation order of conditions.",
+    "tags": ["boolean", "filters"]
+  },
+  {
+    "id": "rq-003",
+    "question": "What is a recommended approach to improve performance on very large target sets?",
+    "choices": [
+      { "id": "a", "text": "Increase timeout only" },
+      { "id": "b", "text": "Pre-filter with computer groups to reduce scope" },
+      { "id": "c", "text": "Run during peak hours" },
+      { "id": "d", "text": "Disable RBAC" }
+    ],
+    "correctAnswerId": "b",
+    "domain": "Refining Questions & Targeting",
+    "difficulty": "Advanced",
+    "category": "Practical Scenarios",
+    "explanation": "Reducing the initial scope minimizes evaluation work and network load.",
+    "tags": ["performance", "optimization"]
+  },
+  {
+    "id": "rq-004",
+    "question": "How should RBAC be used when operators need to manage targeting for a specific region?",
+    "choices": [
+      { "id": "a", "text": "Give all operators admin" },
+      { "id": "b", "text": "Create region-specific roles with limited group permissions" },
+      { "id": "c", "text": "Use shared accounts" },
+      { "id": "d", "text": "Disable RBAC for speed" }
+    ],
+    "correctAnswerId": "b",
+    "domain": "Refining Questions & Targeting",
+    "difficulty": "Intermediate",
+    "category": "Platform Fundamentals",
+    "explanation": "Least privilege: scope access to the operator's region only.",
+    "tags": ["rbac", "least-privilege"]
+  },
+  {
+    "id": "rq-005",
+    "question": "Which steps best validate a computer group's unexpected membership?",
+    "choices": [
+      { "id": "a", "text": "Delete and recreate" },
+      { "id": "b", "text": "Verify sensors, refresh eval, check filters, confirm RBAC" },
+      { "id": "c", "text": "Ignore and proceed" },
+      { "id": "d", "text": "Increase evaluation timeout only" }
+    ],
+    "correctAnswerId": "b",
+    "domain": "Refining Questions & Targeting",
+    "difficulty": "Intermediate",
+    "category": "Troubleshooting",
+    "explanation": "Validate data quality, evaluation freshness, logic, and permissions.",
+    "tags": ["troubleshooting", "validation"]
+  }
+]
+

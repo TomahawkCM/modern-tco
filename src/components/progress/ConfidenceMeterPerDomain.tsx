@@ -1,11 +1,17 @@
-'use client';
+"use client";
 
-import { AlertCircle, Brain, CheckCircle2, Info, TrendingUp } from 'lucide-react';
-import { useState } from 'react';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Slider } from '@/components/ui/slider';
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Slider } from "@/components/ui/slider";
+import {
+  Brain,
+  TrendingUp,
+  AlertCircle,
+  CheckCircle2,
+  Info,
+} from "lucide-react";
+import { useState } from "react";
 
 interface DomainConfidence {
   domain: string;
@@ -32,23 +38,26 @@ export default function ConfidenceMeterPerDomain({
 
   // Domain colors matching DomainMasteryWheel
   const domainColors: Record<string, string> = {
-    'Asking Questions': 'bg-primary',
-    Fundamentals: 'bg-cyan-500',
-    'Navigation and Basic Module Functions': 'bg-[#22c55e]',
-    'Refining Questions & Targeting': 'bg-accent',
-    'Report Generation and Data Export': 'bg-pink-500',
-    'Taking Action': 'bg-orange-500',
+    "Asking Questions": "bg-primary",
+    Fundamentals: "bg-cyan-500",
+    "Navigation and Basic Module Functions": "bg-[#22c55e]",
+    "Refining Questions & Targeting": "bg-accent",
+    "Report Generation and Data Export": "bg-pink-500",
+    "Taking Action": "bg-orange-500",
   };
 
   const getConfidenceLevel = (confidence: number) => {
-    if (confidence >= 80) return { label: 'High', color: 'text-[#22c55e]' };
-    if (confidence >= 50) return { label: 'Moderate', color: 'text-[#f97316]' };
-    return { label: 'Low', color: 'text-red-500' };
+    if (confidence >= 80) return { label: "High", color: "text-[#22c55e]" };
+    if (confidence >= 50)
+      return { label: "Moderate", color: "text-[#f97316]" };
+    return { label: "Low", color: "text-red-500" };
   };
 
   const getConfidenceIcon = (confidence: number) => {
-    if (confidence >= 80) return <CheckCircle2 className="h-4 w-4 text-[#22c55e]" />;
-    if (confidence >= 50) return <AlertCircle className="h-4 w-4 text-[#f97316]" />;
+    if (confidence >= 80)
+      return <CheckCircle2 className="h-4 w-4 text-[#22c55e]" />;
+    if (confidence >= 50)
+      return <AlertCircle className="h-4 w-4 text-[#f97316]" />;
     return <AlertCircle className="h-4 w-4 text-red-500" />;
   };
 
@@ -74,7 +83,9 @@ export default function ConfidenceMeterPerDomain({
   }, 0);
 
   // Find domains needing attention (< 50% confidence + high exam weight)
-  const needsAttention = domains.filter((d) => d.confidence < 50 && d.blueprintWeight >= 20);
+  const needsAttention = domains.filter(
+    (d) => d.confidence < 50 && d.blueprintWeight >= 20
+  );
 
   return (
     <Card>
@@ -85,7 +96,9 @@ export default function ConfidenceMeterPerDomain({
             Self-Assessment Confidence
           </CardTitle>
           <div className="text-center">
-            <div className="text-3xl font-bold text-primary">{Math.round(weightedConfidence)}%</div>
+            <div className="text-3xl font-bold text-primary">
+              {Math.round(weightedConfidence)}%
+            </div>
             <p className="text-xs text-muted-foreground">Weighted Avg</p>
           </div>
         </div>
@@ -95,8 +108,9 @@ export default function ConfidenceMeterPerDomain({
           <div className="flex items-start gap-2">
             <Info className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
             <p className="text-xs text-muted-foreground">
-              Self-assessment is a powerful learning tool. Rate your confidence honestly to identify
-              areas for focused study. Update as you progress through the material.
+              Self-assessment is a powerful learning tool. Rate your confidence
+              honestly to identify areas for focused study. Update as you
+              progress through the material.
             </p>
           </div>
         </div>
@@ -105,10 +119,13 @@ export default function ConfidenceMeterPerDomain({
       <CardContent className="space-y-4">
         {/* Domain Confidence Sliders */}
         {domains.map((domain) => {
-          const color = domainColors[domain.domain] || domainColors.Fundamentals;
+          const color =
+            domainColors[domain.domain] || domainColors["Fundamentals"];
           const level = getConfidenceLevel(domain.confidence);
           const isEditing = editingDomain === domain.domain;
-          const displayConfidence = isEditing ? tempConfidence : domain.confidence;
+          const displayConfidence = isEditing
+            ? tempConfidence
+            : domain.confidence;
 
           return (
             <div key={domain.domain} className="space-y-2">
@@ -125,7 +142,9 @@ export default function ConfidenceMeterPerDomain({
                 </div>
                 <div className="flex items-center gap-2">
                   {getConfidenceIcon(displayConfidence)}
-                  <span className={`text-sm font-medium ${level.color}`}>{displayConfidence}%</span>
+                  <span className={`text-sm font-medium ${level.color}`}>
+                    {displayConfidence}%
+                  </span>
                 </div>
               </div>
 
@@ -149,7 +168,11 @@ export default function ConfidenceMeterPerDomain({
                       >
                         Save
                       </Button>
-                      <Button size="sm" variant="outline" onClick={handleCancelEdit}>
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        onClick={handleCancelEdit}
+                      >
                         Cancel
                       </Button>
                     </div>
@@ -162,14 +185,16 @@ export default function ConfidenceMeterPerDomain({
                 <div className="flex items-center gap-2">
                   <div className="flex-1 h-2 bg-muted rounded-full overflow-hidden">
                     <div
-                      className={`h-full ${color.replace('bg-', 'bg-')} transition-all`}
+                      className={`h-full ${color.replace("bg-", "bg-")} transition-all`}
                       style={{ width: `${displayConfidence}%` }}
                     />
                   </div>
                   <Button
                     size="sm"
                     variant="ghost"
-                    onClick={() => handleStartEdit(domain.domain, domain.confidence)}
+                    onClick={() =>
+                      handleStartEdit(domain.domain, domain.confidence)
+                    }
                   >
                     Update
                   </Button>
@@ -177,17 +202,21 @@ export default function ConfidenceMeterPerDomain({
               )}
 
               {/* Objectives Progress (if available) */}
-              {domain.objectivesMastered !== undefined && domain.totalObjectives !== undefined && (
-                <div className="flex items-center justify-between text-xs text-muted-foreground">
-                  <span>
-                    Learning Objectives: {domain.objectivesMastered}/{domain.totalObjectives}{' '}
-                    mastered
-                  </span>
-                  {domain.lastUpdated && (
-                    <span>Last updated: {new Date(domain.lastUpdated).toLocaleDateString()}</span>
-                  )}
-                </div>
-              )}
+              {domain.objectivesMastered !== undefined &&
+                domain.totalObjectives !== undefined && (
+                  <div className="flex items-center justify-between text-xs text-muted-foreground">
+                    <span>
+                      Learning Objectives: {domain.objectivesMastered}/
+                      {domain.totalObjectives} mastered
+                    </span>
+                    {domain.lastUpdated && (
+                      <span>
+                        Last updated:{" "}
+                        {new Date(domain.lastUpdated).toLocaleDateString()}
+                      </span>
+                    )}
+                  </div>
+                )}
             </div>
           );
         })}
@@ -198,18 +227,22 @@ export default function ConfidenceMeterPerDomain({
             <div className="p-3 bg-orange-500/10 border border-orange-500/20 rounded-lg">
               <div className="flex items-start gap-2 mb-2">
                 <TrendingUp className="h-4 w-4 text-orange-500 mt-0.5" />
-                <p className="text-sm font-medium text-orange-500">Priority Study Areas</p>
+                <p className="text-sm font-medium text-orange-500">
+                  Priority Study Areas
+                </p>
               </div>
               <ul className="space-y-1 text-xs text-muted-foreground">
                 {needsAttention.map((domain) => (
                   <li key={domain.domain} className="flex items-center gap-2">
                     <div
                       className={`w-2 h-2 rounded-full ${
-                        domainColors[domain.domain] || domainColors.Fundamentals
+                        domainColors[domain.domain] ||
+                        domainColors["Fundamentals"]
                       }`}
                     />
-                    <strong>{domain.domain}</strong> - Low confidence with {domain.blueprintWeight}%
-                    exam weight. Focus here for maximum impact.
+                    <strong>{domain.domain}</strong> - Low confidence with{" "}
+                    {domain.blueprintWeight}% exam weight. Focus here for
+                    maximum impact.
                   </li>
                 ))}
               </ul>
@@ -218,18 +251,22 @@ export default function ConfidenceMeterPerDomain({
         )}
 
         {/* High Confidence Domains */}
-        {showRecommendations && domains.filter((d) => d.confidence >= 80).length > 0 && (
-          <div className="p-3 bg-[#22c55e]/10 border border-[#22c55e]/20 rounded-lg">
-            <div className="flex items-start gap-2 mb-2">
-              <CheckCircle2 className="h-4 w-4 text-[#22c55e] mt-0.5" />
-              <p className="text-sm font-medium text-[#22c55e]">Strong Areas</p>
+        {showRecommendations &&
+          domains.filter((d) => d.confidence >= 80).length > 0 && (
+            <div className="p-3 bg-[#22c55e]/10 border border-[#22c55e]/20 rounded-lg">
+              <div className="flex items-start gap-2 mb-2">
+                <CheckCircle2 className="h-4 w-4 text-[#22c55e] mt-0.5" />
+                <p className="text-sm font-medium text-[#22c55e]">
+                  Strong Areas
+                </p>
+              </div>
+              <p className="text-xs text-muted-foreground">
+                You feel confident in{" "}
+                {domains.filter((d) => d.confidence >= 80).length} domain(s).
+                Consider taking practice exams to validate your knowledge!
+              </p>
             </div>
-            <p className="text-xs text-muted-foreground">
-              You feel confident in {domains.filter((d) => d.confidence >= 80).length} domain(s).
-              Consider taking practice exams to validate your knowledge!
-            </p>
-          </div>
-        )}
+          )}
 
         {/* Confidence Scale Legend */}
         <div className="pt-4 border-t">
@@ -237,11 +274,15 @@ export default function ConfidenceMeterPerDomain({
           <div className="grid grid-cols-3 gap-2 text-xs">
             <div>
               <p className="font-medium text-[#22c55e]">80-100% - High</p>
-              <p className="text-muted-foreground">Ready for practice exams</p>
+              <p className="text-muted-foreground">
+                Ready for practice exams
+              </p>
             </div>
             <div>
               <p className="font-medium text-[#f97316]">50-79% - Moderate</p>
-              <p className="text-muted-foreground">Continue focused study</p>
+              <p className="text-muted-foreground">
+                Continue focused study
+              </p>
             </div>
             <div>
               <p className="font-medium text-red-500">0-49% - Low</p>

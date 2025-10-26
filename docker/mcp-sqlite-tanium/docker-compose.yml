@@ -1,0 +1,96 @@
+# Docker Compose for Tanium TCO SQLite MCP Server
+# Phase 1: Hybrid Architecture - sqlite-tanium containerized only
+# See: .claude/vibe-check-constitution.md for full strategy
+
+services:
+  mcp-sqlite-tanium:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      labels:
+        - "org.opencontainers.image.title=Tanium TCO SQLite MCP"
+        - "org.opencontainers.image.version=1.0.0"
+        - "org.opencontainers.image.created=2025-10-08"
+
+    image: tanium-tco/mcp-sqlite:latest
+
+    container_name: mcp-sqlite-tanium
+
+    # Restart policy for production reliability
+    restart: unless-stopped
+
+    # Environment variables
+    environment:
+      - SQLITE_DATABASE_PATH=/data/db/tanium_tco.db
+      - NODE_ENV=production
+      - NODE_OPTIONS=--max-old-space-size=512
+
+    # Volume mounts for database persistence
+    volumes:
+      # Database directory - persistent storage
+      - tanium-tco-db:/data/db
+
+      # Optional: Mount existing database from host
+      # Uncomment if you want to use existing database file
+      # - ../../data/db/tanium_tco.db:/data/db/tanium_tco.db
+
+    # Resource limits (Docker MCP best practice)
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+        reservations:
+          cpus: '0.25'
+          memory: 256M
+
+    # Health check configuration
+    healthcheck:
+      test: ["CMD", "/usr/local/bin/healthcheck.sh"]
+      interval: 30s
+      timeout: 10s
+      start_period: 5s
+      retries: 3
+
+    # Logging configuration
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+    # Security options
+    security_opt:
+      - no-new-privileges:true
+
+    # Read-only root filesystem (security hardening) - TEMPORARILY DISABLED FOR DEBUGGING
+    # Only /data is writable
+    # read_only: true
+    # tmpfs:
+    #   - /tmp:noexec,nosuid,nodev,size=64m
+
+    # Network mode: none (MCP uses stdio, no network needed)
+    # This provides maximum isolation
+    network_mode: none
+
+    # Labels for organization
+    labels:
+      - "com.tanium-tco.service=mcp"
+      - "com.tanium-tco.mcp-server=sqlite"
+      - "com.tanium-tco.phase=1-hybrid"
+
+# Named volumes for data persistence
+volumes:
+  tanium-tco-db:
+    driver: local
+    labels:
+      - "com.tanium-tco.description=Tanium TCO SQLite database storage"
+      - "com.tanium-tco.backup=required"
+
+# Network configuration (if needed in future)
+# Currently using network_mode: none for maximum isolation
+networks:
+  default:
+    driver: bridge
+    labels:
+      - "com.tanium-tco.network=mcp-isolated"

@@ -1,0 +1,79 @@
+{
+  "mcpServers": {
+    "shadcn": {
+      "command": "npx",
+      "args": [
+        "shadcn@latest",
+        "mcp"
+      ]
+    },
+    "filesystem": {
+      "command": "npx",
+      "args": [
+        "@modelcontextprotocol/server-filesystem",
+        "/home/robne/projects/active"
+      ]
+    },
+    "claude-flow": {
+      "command": "npx",
+      "args": [
+        "claude-flow@alpha",
+        "mcp",
+        "start"
+      ]
+    },
+    "sqlite-tanium": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "mcp-sqlite"
+      ],
+      "env": {
+        "SQLITE_DATABASE_PATH": "/home/robne/projects/active/tanium-tco/modern-tco/data/db/tanium_tco.db"
+      }
+    },
+    "github": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-github"
+      ],
+      "env": {
+        "GITHUB_TOKEN": "${GITHUB_TOKEN}"
+      }
+    },
+    "firecrawl": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "firecrawl-mcp"
+      ],
+      "env": {
+        "FIRECRAWL_API_KEY": "${FIRECRAWL_API_KEY}"
+      }
+    },
+    "playwright": {
+      "command": "npx",
+      "args": [
+        "@playwright/mcp"
+      ],
+      "env": {
+        "PLAYWRIGHT_BROWSERS_PATH": "/home/robne/.cache/ms-playwright",
+        "PLAYWRIGHT_CHROMIUM_USE_HEADLESS_NEW": "1",
+        "DISPLAY": ":0",
+        "NODE_OPTIONS": "--max-old-space-size=4096",
+        "PLAYWRIGHT_SKIP_BROWSER_GC": "1"
+      }
+    },
+    "postgresql": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "mcp-postgresql"
+      ],
+      "env": {
+        "DATABASE_URL": "${DATABASE_URL}"
+      }
+    }
+  }
+}

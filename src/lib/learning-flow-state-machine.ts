@@ -4,19 +4,23 @@
  */
 
 import {
-  type BoundaryNavigationGuard,
-  DEFAULT_GATING_RULES,
-  type FlowProgressPersistence,
+  LearningFlowState,
+  LearningFlowEvent,
+  type LearningFlowContext,
   type FlowStateMachine,
+  type GatingRules,
+  DEFAULT_GATING_RULES,
+  STATE_TRANSITIONS,
   type FlowTelemetry,
+  type BoundaryNavigationGuard,
+  type FlowProgressPersistence,
   type FlowValidation,
   type FlowValidationError,
-  type GatingRules,
-  type LearningFlowContext,
-  LearningFlowEvent,
-  LearningFlowState,
-  STATE_TRANSITIONS,
-} from '@/types/learning-flow';
+  LearnPhaseProgress,
+  PracticePhaseProgress,
+  AssessPhaseProgress,
+  LearningFlowMetadata,
+} from "@/types/learning-flow";
 
 /**
  * State Machine Implementation
@@ -178,7 +182,7 @@ export class LearningFlowStateMachine implements FlowStateMachine {
     // Check required topics if specified
     if (rules.requiredTopics.length > 0) {
       const masteredTopics = practiceProgress.topics
-        .filter((topic) => topic.masteryLevel === 'proficient' || topic.masteryLevel === 'advanced')
+        .filter((topic) => topic.masteryLevel === "proficient" || topic.masteryLevel === "advanced")
         .map((topic) => topic.topicId);
 
       return rules.requiredTopics.every((required) => masteredTopics.includes(required));
@@ -331,13 +335,13 @@ export class DefaultBoundaryNavigationGuard implements BoundaryNavigationGuard {
     targetState: LearningFlowState
   ): string | null {
     if (this.isBackwardNavigation(currentState, targetState)) {
-      return 'Going back will reset your current progress. Are you sure?';
+      return "Going back will reset your current progress. Are you sure?";
     }
 
     return null;
   }
 
-  canForceNavigation(_userId: string): boolean {
+  canForceNavigation(userId: string): boolean {
     // Implement admin/instructor override logic here
     return false;
   }
@@ -422,58 +426,58 @@ export class LearningFlowFactory {
     // Validate required fields
     if (!context.moduleId) {
       errors.push({
-        code: 'MISSING_MODULE_ID',
-        message: 'Module ID is required',
-        severity: 'error',
-        field: 'moduleId',
+        code: "MISSING_MODULE_ID",
+        message: "Module ID is required",
+        severity: "error",
+        field: "moduleId",
       });
     }
 
     if (!context.userId) {
       errors.push({
-        code: 'MISSING_USER_ID',
-        message: 'User ID is required',
-        severity: 'error',
-        field: 'userId',
+        code: "MISSING_USER_ID",
+        message: "User ID is required",
+        severity: "error",
+        field: "userId",
       });
     }
 
     // Validate state
     if (!Object.values(LearningFlowState).includes(context.currentState)) {
       errors.push({
-        code: 'INVALID_STATE',
-        message: 'Invalid learning flow state',
-        severity: 'error',
-        field: 'currentState',
+        code: "INVALID_STATE",
+        message: "Invalid learning flow state",
+        severity: "error",
+        field: "currentState",
       });
     }
 
     // Validate timestamps
     if (context.completedAt && context.completedAt < context.startedAt) {
       errors.push({
-        code: 'INVALID_TIMESTAMPS',
-        message: 'Completed date cannot be before start date',
-        severity: 'error',
-        field: 'completedAt',
+        code: "INVALID_TIMESTAMPS",
+        message: "Completed date cannot be before start date",
+        severity: "error",
+        field: "completedAt",
       });
     }
 
     // Check for potential issues
     if (context.timeSpent < 0) {
       warnings.push({
-        code: 'NEGATIVE_TIME',
-        message: 'Time spent cannot be negative',
-        severity: 'warning',
-        field: 'timeSpent',
+        code: "NEGATIVE_TIME",
+        message: "Time spent cannot be negative",
+        severity: "warning",
+        field: "timeSpent",
       });
     }
 
     if (context.attempts > 10) {
       warnings.push({
-        code: 'HIGH_ATTEMPTS',
-        message: 'High number of attempts detected',
-        severity: 'warning',
-        field: 'attempts',
+        code: "HIGH_ATTEMPTS",
+        message: "High number of attempts detected",
+        severity: "warning",
+        field: "attempts",
       });
     }
 

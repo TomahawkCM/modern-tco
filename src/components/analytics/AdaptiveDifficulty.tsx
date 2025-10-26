@@ -1,5 +1,12 @@
-'use client';
+"use client";
 
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Progress } from "@/components/ui/progress";
+import { Switch } from "@/components/ui/switch";
+import { useProgress } from "@/contexts/ProgressContext";
+import { TCODomain } from "@/types/exam";
 import {
   Activity,
   Brain,
@@ -10,18 +17,11 @@ import {
   TrendingDown,
   TrendingUp,
   Zap,
-} from 'lucide-react';
-import { useState } from 'react';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Progress } from '@/components/ui/progress';
-import { Switch } from '@/components/ui/switch';
-import { useProgress } from '@/contexts/ProgressContext';
-import { TCODomain } from '@/types/exam';
+} from "lucide-react";
+import { useState } from "react";
 
 interface DifficultyLevel {
-  level: 'beginner' | 'intermediate' | 'advanced' | 'expert';
+  level: "beginner" | "intermediate" | "advanced" | "expert";
   label: string;
   description: string;
   color: string;
@@ -30,7 +30,7 @@ interface DifficultyLevel {
 
 interface AdaptiveSettings {
   enabled: boolean;
-  sensitivity: 'conservative' | 'moderate' | 'aggressive';
+  sensitivity: "conservative" | "moderate" | "aggressive";
   minAccuracy: number;
   targetAccuracy: number;
   adjustmentThreshold: number;
@@ -38,31 +38,31 @@ interface AdaptiveSettings {
 
 const difficultyLevels: Record<string, DifficultyLevel> = {
   beginner: {
-    level: 'beginner',
-    label: 'Beginner',
-    description: 'Basic concepts and fundamental knowledge',
-    color: 'text-[#22c55e] border-green-400',
+    level: "beginner",
+    label: "Beginner",
+    description: "Basic concepts and fundamental knowledge",
+    color: "text-[#22c55e] border-green-400",
     icon: Shield,
   },
   intermediate: {
-    level: 'intermediate',
-    label: 'Intermediate',
-    description: 'Practical application and common scenarios',
-    color: 'text-primary border-blue-400',
+    level: "intermediate",
+    label: "Intermediate",
+    description: "Practical application and common scenarios",
+    color: "text-primary border-blue-400",
     icon: Target,
   },
   advanced: {
-    level: 'advanced',
-    label: 'Advanced',
-    description: 'Complex scenarios and edge cases',
-    color: 'text-orange-400 border-orange-400',
+    level: "advanced",
+    label: "Advanced",
+    description: "Complex scenarios and edge cases",
+    color: "text-orange-400 border-orange-400",
     icon: Activity,
   },
   expert: {
-    level: 'expert',
-    label: 'Expert',
-    description: 'Master-level concepts and expert scenarios',
-    color: 'text-red-400 border-red-400',
+    level: "expert",
+    label: "Expert",
+    description: "Master-level concepts and expert scenarios",
+    color: "text-red-400 border-red-400",
     icon: Zap,
   },
 };
@@ -71,22 +71,22 @@ export function AdaptiveDifficulty() {
   const { getDomainStats, getOverallStats, state } = useProgress();
   const [settings, setSettings] = useState<AdaptiveSettings>({
     enabled: true,
-    sensitivity: 'moderate',
+    sensitivity: "moderate",
     minAccuracy: 60,
     targetAccuracy: 75,
     adjustmentThreshold: 5,
   });
 
   const [domainDifficulty, setDomainDifficulty] = useState<Record<TCODomain, string>>({
-    [TCODomain.ASKING_QUESTIONS]: 'intermediate',
-    [TCODomain.REFINING_QUESTIONS]: 'intermediate',
-    [TCODomain.REFINING_TARGETING]: 'intermediate',
-    [TCODomain.TAKING_ACTION]: 'intermediate',
-    [TCODomain.NAVIGATION_MODULES]: 'intermediate',
-    [TCODomain.REPORTING_EXPORT]: 'intermediate',
-    [TCODomain.SECURITY]: 'intermediate',
-    [TCODomain.FUNDAMENTALS]: 'intermediate',
-    [TCODomain.TROUBLESHOOTING]: 'intermediate',
+    [TCODomain.ASKING_QUESTIONS]: "intermediate",
+    [TCODomain.REFINING_QUESTIONS]: "intermediate",
+    [TCODomain.REFINING_TARGETING]: "intermediate",
+    [TCODomain.TAKING_ACTION]: "intermediate",
+    [TCODomain.NAVIGATION_MODULES]: "intermediate",
+    [TCODomain.REPORTING_EXPORT]: "intermediate",
+    [TCODomain.SECURITY]: "intermediate",
+    [TCODomain.FUNDAMENTALS]: "intermediate",
+    [TCODomain.TROUBLESHOOTING]: "intermediate",
   });
 
   const domainStats = getDomainStats();
@@ -100,7 +100,7 @@ export function AdaptiveDifficulty() {
     domainStats.forEach((domain) => {
       const currentLevel = domainDifficulty[domain.domain];
       let recommendedLevel = currentLevel;
-      let reason = 'Performance is stable';
+      let reason = "Performance is stable";
 
       if (domain.questionsAnswered >= 5) {
         // Only adjust if enough data
@@ -109,39 +109,39 @@ export function AdaptiveDifficulty() {
 
         if (accuracy >= settings.targetAccuracy + settings.adjustmentThreshold) {
           // Performance is high, increase difficulty
-          if (currentLevel === 'beginner') recommendedLevel = 'intermediate';
-          else if (currentLevel === 'intermediate') recommendedLevel = 'advanced';
-          else if (currentLevel === 'advanced') recommendedLevel = 'expert';
+          if (currentLevel === "beginner") recommendedLevel = "intermediate";
+          else if (currentLevel === "intermediate") recommendedLevel = "advanced";
+          else if (currentLevel === "advanced") recommendedLevel = "expert";
 
           if (recommendedLevel !== currentLevel) {
             reason = `High accuracy (${accuracy}%) suggests readiness for harder questions`;
           }
         } else if (accuracy < settings.minAccuracy) {
           // Performance is low, decrease difficulty
-          if (currentLevel === 'expert') recommendedLevel = 'advanced';
-          else if (currentLevel === 'advanced') recommendedLevel = 'intermediate';
-          else if (currentLevel === 'intermediate') recommendedLevel = 'beginner';
+          if (currentLevel === "expert") recommendedLevel = "advanced";
+          else if (currentLevel === "advanced") recommendedLevel = "intermediate";
+          else if (currentLevel === "intermediate") recommendedLevel = "beginner";
 
           if (recommendedLevel !== currentLevel) {
             reason = `Low accuracy (${accuracy}%) suggests need for easier questions`;
           }
-        } else if (recentTrend === 'improving' && accuracy >= settings.targetAccuracy) {
+        } else if (recentTrend === "improving" && accuracy >= settings.targetAccuracy) {
           // Consistent improvement, consider increasing
-          if (settings.sensitivity === 'aggressive') {
-            if (currentLevel === 'beginner') recommendedLevel = 'intermediate';
-            else if (currentLevel === 'intermediate') recommendedLevel = 'advanced';
-            reason = 'Consistent improvement trend detected';
+          if (settings.sensitivity === "aggressive") {
+            if (currentLevel === "beginner") recommendedLevel = "intermediate";
+            else if (currentLevel === "intermediate") recommendedLevel = "advanced";
+            reason = "Consistent improvement trend detected";
           }
-        } else if (recentTrend === 'declining' && accuracy < settings.targetAccuracy) {
+        } else if (recentTrend === "declining" && accuracy < settings.targetAccuracy) {
           // Declining performance, consider decreasing
-          if (settings.sensitivity !== 'conservative') {
-            if (currentLevel === 'expert') recommendedLevel = 'advanced';
-            else if (currentLevel === 'advanced') recommendedLevel = 'intermediate';
-            reason = 'Declining performance trend detected';
+          if (settings.sensitivity !== "conservative") {
+            if (currentLevel === "expert") recommendedLevel = "advanced";
+            else if (currentLevel === "advanced") recommendedLevel = "intermediate";
+            reason = "Declining performance trend detected";
           }
         }
       } else {
-        reason = 'Insufficient data for adjustment';
+        reason = "Insufficient data for adjustment";
       }
 
       adjustments[domain.domain] = {
@@ -154,15 +154,15 @@ export function AdaptiveDifficulty() {
     return adjustments;
   };
 
-  const calculateRecentTrend = (domain: TCODomain): 'improving' | 'declining' | 'stable' => {
+  const calculateRecentTrend = (domain: TCODomain): "improving" | "declining" | "stable" => {
     // Mock implementation - in real app, analyze recent session history
     const domainData = domainStats.find((d) => d.domain === domain);
-    if (!domainData || domainData.questionsAnswered < 10) return 'stable';
+    if (!domainData || domainData.questionsAnswered < 10) return "stable";
 
     // Simulate trend analysis based on current performance
-    if (domainData.percentage > 80) return 'improving';
-    if (domainData.percentage < 60) return 'declining';
-    return 'stable';
+    if (domainData.percentage > 80) return "improving";
+    if (domainData.percentage < 60) return "declining";
+    return "stable";
   };
 
   const applyDifficultyAdjustment = (domain: TCODomain, newLevel: string) => {
@@ -237,10 +237,7 @@ export function AdaptiveDifficulty() {
             <h4 className="font-medium text-foreground">Adjustment Settings</h4>
             <div className="glass space-y-4 rounded-lg border border-white/5 p-4">
               <div>
-                <label
-                  htmlFor="sensitivity-select"
-                  className="mb-2 block text-sm text-muted-foreground"
-                >
+                <label htmlFor="sensitivity-select" className="mb-2 block text-sm text-muted-foreground">
                   Sensitivity
                 </label>
                 <select

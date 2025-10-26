@@ -1,26 +1,26 @@
-'use client';
+"use client";
 
+import { useState } from "react";
+import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Separator } from "@/components/ui/separator";
 import {
-  AlertCircle,
-  CheckCircle,
+  X,
+  Play,
+  FileText,
+  RotateCcw,
   ChevronDown,
   ChevronUp,
-  FileText,
-  Play,
-  RotateCcw,
-  X,
-} from 'lucide-react';
-import { useRouter } from 'next/navigation';
-import { useState } from 'react';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
-import { ScrollArea } from '@/components/ui/scroll-area';
-import { Separator } from '@/components/ui/separator';
-import { useExam } from '@/contexts/ExamContext';
-import { useSearch } from '@/contexts/SearchContext';
-import { cn } from '@/lib/utils';
-import { ExamMode, TCODomain } from '@/types/exam';
+  CheckCircle,
+  AlertCircle,
+} from "lucide-react";
+import { useSearch } from "@/contexts/SearchContext";
+import { useExam } from "@/contexts/ExamContext";
+import { useRouter } from "next/navigation";
+import { ExamMode, TCODomain } from "@/types/exam";
+import { cn } from "@/lib/utils";
 
 export function SelectedQuestionsPanel() {
   const router = useRouter();
@@ -33,7 +33,7 @@ export function SelectedQuestionsPanel() {
 
     void startExam(ExamMode.PRACTICE, state.selectedQuestions);
     clearSelection();
-    router.push('/practice');
+    router.push("/practice");
   };
 
   const handleCreateMockExam = () => {
@@ -41,7 +41,7 @@ export function SelectedQuestionsPanel() {
 
     void startExam(ExamMode.MOCK, state.selectedQuestions);
     clearSelection();
-    router.push('/mock');
+    router.push("/mock");
   };
 
   // Calculate domain distribution
@@ -54,7 +54,7 @@ export function SelectedQuestionsPanel() {
     .filter((stat) => stat.count > 0);
 
   // Calculate difficulty distribution
-  const difficultyStats = ['Beginner', 'Intermediate', 'Advanced']
+  const difficultyStats = ["Beginner", "Intermediate", "Advanced"]
     .map((difficulty) => {
       const count = state.selectedQuestions.filter((q) => q.difficulty === difficulty).length;
       const percentage = count > 0 ? Math.round((count / state.selectedQuestions.length) * 100) : 0;
@@ -64,14 +64,14 @@ export function SelectedQuestionsPanel() {
 
   const getDifficultyColor = (difficulty: string) => {
     switch (difficulty) {
-      case 'Beginner':
-        return 'text-[#22c55e]';
-      case 'Intermediate':
-        return 'text-[#f97316]';
-      case 'Advanced':
-        return 'text-red-400';
+      case "Beginner":
+        return "text-[#22c55e]";
+      case "Intermediate":
+        return "text-[#f97316]";
+      case "Advanced":
+        return "text-red-400";
       default:
-        return 'text-muted-foreground';
+        return "text-muted-foreground";
     }
   };
 
@@ -79,16 +79,16 @@ export function SelectedQuestionsPanel() {
     const count = state.selectedQuestions.length;
     if (count === 0) return null;
     if (count < 5)
-      return { type: 'warning', message: 'Consider adding more questions for better practice' };
+      return { type: "warning", message: "Consider adding more questions for better practice" };
     if (count > 50)
       return {
-        type: 'warning',
-        message: 'Large selection - consider breaking into smaller sessions',
+        type: "warning",
+        message: "Large selection - consider breaking into smaller sessions",
       };
     if (count >= 5 && count <= 20)
-      return { type: 'success', message: 'Good selection size for focused practice' };
+      return { type: "success", message: "Good selection size for focused practice" };
     if (count >= 21 && count <= 50)
-      return { type: 'success', message: 'Excellent size for comprehensive practice' };
+      return { type: "success", message: "Excellent size for comprehensive practice" };
     return null;
   };
 
@@ -115,7 +115,7 @@ export function SelectedQuestionsPanel() {
         <div className="flex items-center justify-between">
           <h3 className="font-medium text-foreground">
             {state.selectedQuestions.length} Question
-            {state.selectedQuestions.length !== 1 ? 's' : ''}
+            {state.selectedQuestions.length !== 1 ? "s" : ""}
           </h3>
           <Button
             onClick={clearSelection}
@@ -131,19 +131,19 @@ export function SelectedQuestionsPanel() {
         {recommendation && (
           <div
             className={cn(
-              'flex items-start gap-2 rounded-lg p-3 text-xs',
-              recommendation.type === 'success'
-                ? 'border border-[#22c55e]/20 bg-[#22c55e]/10'
-                : 'border border-[#f97316]/20 bg-[#f97316]/10'
+              "flex items-start gap-2 rounded-lg p-3 text-xs",
+              recommendation.type === "success"
+                ? "border border-[#22c55e]/20 bg-[#22c55e]/10"
+                : "border border-[#f97316]/20 bg-[#f97316]/10"
             )}
           >
-            {recommendation.type === 'success' ? (
+            {recommendation.type === "success" ? (
               <CheckCircle className="mt-0.5 h-3 w-3 shrink-0 text-[#22c55e]" />
             ) : (
               <AlertCircle className="mt-0.5 h-3 w-3 shrink-0 text-[#f97316]" />
             )}
             <span
-              className={recommendation.type === 'success' ? 'text-[#22c55e]' : 'text-[#f97316]'}
+              className={recommendation.type === "success" ? "text-[#22c55e]" : "text-[#f97316]"}
             >
               {recommendation.message}
             </span>
@@ -204,7 +204,7 @@ export function SelectedQuestionsPanel() {
             <div className="space-y-2">
               {difficultyStats.map(({ difficulty, count, percentage }) => (
                 <div key={difficulty} className="flex items-center justify-between text-xs">
-                  <span className={cn('font-medium', getDifficultyColor(difficulty))}>
+                  <span className={cn("font-medium", getDifficultyColor(difficulty))}>
                     {difficulty}
                   </span>
                   <div className="flex items-center gap-1">
@@ -236,9 +236,7 @@ export function SelectedQuestionsPanel() {
               {state.selectedQuestions.map((question, index) => (
                 <Card key={question.id} className="border-white/10 bg-white/5 p-3">
                   <div className="flex items-start gap-2">
-                    <span className="mt-1 shrink-0 text-xs text-muted-foreground">
-                      {index + 1}.
-                    </span>
+                    <span className="mt-1 shrink-0 text-xs text-muted-foreground">{index + 1}.</span>
                     <div className="min-w-0 flex-1">
                       <p className="mb-2 line-clamp-2 text-xs leading-relaxed text-muted-foreground">
                         {question.question}
@@ -248,12 +246,12 @@ export function SelectedQuestionsPanel() {
                           <Badge
                             variant="secondary"
                             className={cn(
-                              'px-1 py-0 text-xs',
-                              question.difficulty === 'Beginner' &&
-                                'bg-[#22c55e]/20 text-[#22c55e]',
-                              question.difficulty === 'Intermediate' &&
-                                'bg-[#f97316]/20 text-[#f97316]',
-                              question.difficulty === 'Advanced' && 'bg-red-500/20 text-red-300'
+                              "px-1 py-0 text-xs",
+                              question.difficulty === "Beginner" &&
+                                "bg-[#22c55e]/20 text-[#22c55e]",
+                              question.difficulty === "Intermediate" &&
+                                "bg-[#f97316]/20 text-[#f97316]",
+                              question.difficulty === "Advanced" && "bg-red-500/20 text-red-300"
                             )}
                           >
                             {question.difficulty.substring(0, 3)}

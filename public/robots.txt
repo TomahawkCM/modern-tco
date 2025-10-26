@@ -1,0 +1,39 @@
+# Robots.txt for Tanium TCO Learning Management System
+
+User-agent: *
+Allow: /
+
+# Allow search engines to crawl public pages
+Allow: /tanium
+Allow: /tanium/
+Allow: /tanium/welcome
+Allow: /tanium/pricing
+Allow: /tanium/auth/signin
+Allow: /tanium/auth/signup
+
+# Block access to API endpoints
+Disallow: /tanium/api/
+
+# Block access to admin areas
+Disallow: /tanium/admin/
+Disallow: /tanium/videos/admin
+
+# Block access to internal test pages
+Disallow: /tanium/test
+Disallow: /tanium/test-*
+Disallow: /tanium/perf-test
+Disallow: /tanium/lighthouse-test
+
+# Block access to .next build directory
+Disallow: /tanium/_next/static/chunks/
+Disallow: /tanium/_next/cache/
+
+# Allow crawling of CSS and JS assets
+Allow: /tanium/_next/static/css/
+Allow: /tanium/_next/static/media/
+
+# Sitemap location
+Sitemap: https://your-domain.com/tanium/sitemap.xml
+
+# Crawl-delay (seconds between requests)
+Crawl-delay: 1

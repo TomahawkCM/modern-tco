@@ -1,24 +1,24 @@
 .vercel
 
+# Environment variables (CRITICAL: Never commit these!)
+.env.local
+.env*.local
+.env
+
 # Dependencies
 node_modules/
 
 # Build artifacts
 .next/
-.swc/
-.supabase/
-.vercel/
-.vscode/
+*.tsbuildinfo
+.eslintcache
 
 # Browser binaries
 .chrome/
 
 # Claude Flow generated files
-.claude/
-.claude-flow/
-.serena/
+.claude/settings.local.json
 .mcp.json
-.mcp.json.backup*
 claude-flow.config.json
 .swarm/
 .hive-mind/
@@ -40,50 +40,26 @@ claude-flow
 claude-flow.bat
 claude-flow.ps1
 hive-mind-prompt-*.txt
-.eslintcache
-*.log
-logs/
-!logs/.gitkeep
-.temp
-.tmp
-tmp/
-tmp*.txt
-local-lh-report.json
+.next/
+# Windows cache paths (use forward slashes for git compatibility)
+C:/**
+**/AppData/**
+*lighthouse*/**
+*Cache/**
+*GPUCache/**
+*DawnGraphiteCache/**
+*DawnWebGPUCache/**
+**Local Storage/**
+**Session Storage/**
+**Shared Dictionary/**
+.mdx-cache/
+pnpm-lock.yaml
 
-# Documentation and archive files
-archive/
-backups/
-config-backups/
-data-archive/
-coverage/
-test-results/
-reports/
-Screenshots/
+# Claude Flow metrics (auto-updated)
+.claude-flow/metrics/
+*/.claude-flow/metrics/
 
-# Build and test artifacts
-*.tsbuildinfo
-playwright-*/
-lighthouse-*/
-test-lighthouse-*/
-production-final/
-playwright-run/
-playwright-test/
-
-# Lighthouse reports
-*.report.html
-*.report.json
-lighthouse-*
-CUsersrobneAppDataLocallighthouse.*/
-*lighthouse.*/
-
-# Zone Identifier (Windows alternate data streams)
+# Temporary and backup files
+*.backup
+*.backup-*
 *:Zone.Identifier
-
-# OS generated files
-.DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
-Thumbs.db

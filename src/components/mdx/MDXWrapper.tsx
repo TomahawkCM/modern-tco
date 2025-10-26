@@ -3,8 +3,8 @@
  * Provides consistent styling for study module content
  */
 
-import type { ReactNode } from 'react';
-import { cn } from '@/lib/utils';
+import type { ReactNode } from "react";
+import { cn } from "@/lib/utils";
 
 interface MDXWrapperProps {
   children: ReactNode;
@@ -15,26 +15,26 @@ export function MDXWrapper({ children, className }: MDXWrapperProps) {
   return (
     <div
       className={cn(
-        'prose prose-invert max-w-none',
+        "prose prose-invert max-w-none",
         // Headings
-        'prose-headings:text-foreground prose-h1:text-2xl prose-h1:font-bold prose-h1:mb-4',
-        'prose-h2:text-xl prose-h2:font-semibold prose-h2:mb-3 prose-h2:text-primary',
-        'prose-h3:text-lg prose-h3:font-medium prose-h3:mb-2 prose-h3:text-muted-foreground',
+        "prose-headings:text-foreground prose-h1:text-2xl prose-h1:font-bold prose-h1:mb-4",
+        "prose-h2:text-xl prose-h2:font-semibold prose-h2:mb-3 prose-h2:text-primary",
+        "prose-h3:text-lg prose-h3:font-medium prose-h3:mb-2 prose-h3:text-muted-foreground",
         // Paragraphs and text
-        'prose-p:text-muted-foreground prose-p:leading-relaxed prose-p:mb-4',
-        'prose-strong:text-foreground prose-strong:font-semibold',
-        'prose-em:text-muted-foreground',
+        "prose-p:text-muted-foreground prose-p:leading-relaxed prose-p:mb-4",
+        "prose-strong:text-foreground prose-strong:font-semibold",
+        "prose-em:text-muted-foreground",
         // Lists
-        'prose-ul:text-muted-foreground prose-ol:text-muted-foreground',
-        'prose-li:mb-1 prose-li:leading-relaxed',
+        "prose-ul:text-muted-foreground prose-ol:text-muted-foreground",
+        "prose-li:mb-1 prose-li:leading-relaxed",
         // Links
-        'prose-a:text-primary prose-a:no-underline hover:prose-a:text-primary hover:prose-a:underline',
+        "prose-a:text-primary prose-a:no-underline hover:prose-a:text-primary hover:prose-a:underline",
         // Code
-        'prose-code:bg-card prose-code:text-primary prose-code:px-2 prose-code:py-1 prose-code:rounded',
-        'prose-pre:bg-card prose-pre:border prose-pre:border-border',
+        "prose-code:bg-card prose-code:text-primary prose-code:px-2 prose-code:py-1 prose-code:rounded",
+        "prose-pre:bg-card prose-pre:border prose-pre:border-border",
         // Blockquotes
-        'prose-blockquote:border-l-4 prose-blockquote:border-blue-500 prose-blockquote:bg-primary/10',
-        'prose-blockquote:pl-4 prose-blockquote:py-2 prose-blockquote:text-muted-foreground prose-blockquote:italic',
+        "prose-blockquote:border-l-4 prose-blockquote:border-blue-500 prose-blockquote:bg-primary/10",
+        "prose-blockquote:pl-4 prose-blockquote:py-2 prose-blockquote:text-muted-foreground prose-blockquote:italic",
         className
       )}
     >

@@ -1,11 +1,12 @@
-'use client';
+"use client";
 
-import { Book, Clock } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { useStudySession } from '@/contexts/StudySessionContext';
-import { analytics } from '@/lib/analytics';
-import { cn } from '@/lib/utils';
+import React from "react";
+import { useStudySession } from "@/contexts/StudySessionContext";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Book, Clock } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { analytics } from "@/lib/analytics";
 
 export function StudyProgressPanel() {
   const session = useStudySession();
@@ -51,10 +52,9 @@ export function StudyProgressPanel() {
     void analytics.capture('study_reset_progress', { moduleId, from: 'sidebar' });
   };
 
-  const completedCount = sections.filter((s) => s.completed).length;
+  const completedCount = sections.filter(s => s.completed).length;
   const totalSections = sections.length;
-  const progressPercent =
-    totalSections > 0 ? Math.round((completedCount / totalSections) * 100) : 0;
+  const progressPercent = totalSections > 0 ? Math.round((completedCount / totalSections) * 100) : 0;
 
   return (
     <Card className="border-primary/30 bg-gradient-to-b from-gray-900/50 to-blue-900/30">
@@ -114,8 +114,8 @@ export function StudyProgressPanel() {
             <li
               key={s.id}
               className={cn(
-                'flex items-start gap-2 text-xs',
-                activeId === s.id ? 'opacity-100' : 'opacity-80'
+                "flex items-start gap-2 text-xs",
+                activeId === s.id ? "opacity-100" : "opacity-80"
               )}
             >
               <input
@@ -127,11 +127,11 @@ export function StudyProgressPanel() {
               />
               <button
                 className={cn(
-                  'flex-1 text-left text-xs hover:underline',
-                  activeId === s.id ? 'text-primary font-medium' : 'text-blue-100'
+                  "flex-1 text-left text-xs hover:underline",
+                  activeId === s.id ? "text-primary font-medium" : "text-blue-100"
                 )}
                 onClick={() => handleScrollToSection(s.id)}
-                aria-current={activeId === s.id ? 'true' : undefined}
+                aria-current={activeId === s.id ? "true" : undefined}
               >
                 {s.title}
               </button>

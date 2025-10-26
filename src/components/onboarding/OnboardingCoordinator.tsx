@@ -1,21 +1,21 @@
-'use client';
+"use client";
 
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Progress } from "@/components/ui/progress";
 import {
-  ArrowRight,
   BookOpen,
-  Brain,
   CheckCircle,
-  Heart,
-  Sparkles,
+  ArrowRight,
+  User,
+  Brain,
   Target,
   Trophy,
-  User,
-} from 'lucide-react';
-import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Progress } from '@/components/ui/progress';
+  Sparkles,
+  Heart,
+} from "lucide-react";
 
 interface OnboardingStep {
   id: string;
@@ -53,7 +53,7 @@ export function OnboardingCoordinator({ onComplete }: OnboardingCoordinatorProps
         localStorage.setItem('tanium-intro-seen', 'true');
         setHasSeenIntro(true);
         setCurrentStep(1);
-      },
+      }
     },
     {
       id: 'beginner-mode',
@@ -64,7 +64,7 @@ export function OnboardingCoordinator({ onComplete }: OnboardingCoordinatorProps
       action: () => {
         localStorage.setItem('tanium-beginner-mode', 'true');
         setCurrentStep(2);
-      },
+      }
     },
     {
       id: 'foundation',
@@ -76,11 +76,11 @@ export function OnboardingCoordinator({ onComplete }: OnboardingCoordinatorProps
         localStorage.setItem('tanium-foundation-started', 'true');
         router.push('/beginner');
         onComplete?.();
-      },
+      }
     },
   ];
 
-  const completedSteps = steps.filter((step) => step.completed).length;
+  const completedSteps = steps.filter(step => step.completed).length;
   const progress = (completedSteps / steps.length) * 100;
 
   if (completedSteps === steps.length) {
@@ -94,7 +94,7 @@ export function OnboardingCoordinator({ onComplete }: OnboardingCoordinatorProps
           <p className="text-muted-foreground mb-6">
             Your beginner-friendly learning environment is ready. Let's start your Tanium journey!
           </p>
-          <Button
+          <Button 
             onClick={() => router.push('/beginner')}
             className="bg-tanium-accent hover:bg-blue-600"
           >
@@ -137,9 +137,9 @@ export function OnboardingCoordinator({ onComplete }: OnboardingCoordinatorProps
           {currentStep === 0 && (
             <div className="space-y-4">
               <p className="text-muted-foreground">
-                Tanium helps IT teams see, control, and secure every endpoint instantly. Whether
-                you're completely new to endpoint management or just new to Tanium, we'll guide you
-                every step of the way.
+                Tanium helps IT teams see, control, and secure every endpoint instantly. 
+                Whether you're completely new to endpoint management or just new to Tanium, 
+                we'll guide you every step of the way.
               </p>
               <div className="grid grid-cols-2 gap-4 my-6">
                 <div className="bg-white/5 rounded-lg p-4">
@@ -153,10 +153,12 @@ export function OnboardingCoordinator({ onComplete }: OnboardingCoordinatorProps
               </div>
             </div>
           )}
-
+          
           {currentStep === 1 && (
             <div className="space-y-4">
-              <p className="text-muted-foreground">Beginner Mode adds helpful features like:</p>
+              <p className="text-muted-foreground">
+                Beginner Mode adds helpful features like:
+              </p>
               <ul className="text-left space-y-2 max-w-md mx-auto">
                 <li className="flex items-center text-muted-foreground">
                   <CheckCircle className="h-4 w-4 text-[#22c55e] mr-2" />
@@ -177,12 +179,12 @@ export function OnboardingCoordinator({ onComplete }: OnboardingCoordinatorProps
               </ul>
             </div>
           )}
-
+          
           {currentStep === 2 && (
             <div className="space-y-4">
               <p className="text-muted-foreground">
-                Your foundation learning covers everything you need to know about Tanium, starting
-                from the very beginning. Perfect for complete beginners!
+                Your foundation learning covers everything you need to know about Tanium, 
+                starting from the very beginning. Perfect for complete beginners!
               </p>
               <div className="bg-gradient-to-r from-blue-500/20 to-primary/20 rounded-lg p-4 border border-primary/30">
                 <p className="text-blue-100 text-sm">
@@ -191,7 +193,7 @@ export function OnboardingCoordinator({ onComplete }: OnboardingCoordinatorProps
               </div>
             </div>
           )}
-
+          
           <Button
             onClick={currentStepData.action}
             className="w-full bg-tanium-accent hover:bg-blue-600 mt-6"
@@ -215,22 +217,16 @@ export function OnboardingCoordinator({ onComplete }: OnboardingCoordinatorProps
       {/* Step Overview */}
       <div className="grid grid-cols-3 gap-4">
         {steps.map((step, index) => (
-          <Card
-            key={step.id}
+          <Card 
+            key={step.id} 
             className={`glass border-white/10 ${
               index === currentStep ? 'border-blue-500/50 bg-primary/10' : ''
             } ${step.completed ? 'border-green-500/50 bg-[#22c55e]/5' : ''}`}
           >
             <CardContent className="p-4 text-center">
-              <div
-                className={`mx-auto w-8 h-8 rounded-full flex items-center justify-center mb-2 ${
-                  step.completed
-                    ? 'bg-[#22c55e]'
-                    : index === currentStep
-                      ? 'bg-primary'
-                      : 'bg-muted'
-                }`}
-              >
+              <div className={`mx-auto w-8 h-8 rounded-full flex items-center justify-center mb-2 ${
+                step.completed ? 'bg-[#22c55e]' : index === currentStep ? 'bg-primary' : 'bg-muted'
+              }`}>
                 {step.completed ? (
                   <CheckCircle className="h-4 w-4 text-foreground" />
                 ) : (

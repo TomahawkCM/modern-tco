@@ -44,9 +44,7 @@ function resolveChromeBinary(baseDir, platform = os.platform()) {
   if (candidates.length === 0) return null;
 
   candidates.sort((a, b) =>
-    path
-      .basename(b)
-      .localeCompare(path.basename(a), undefined, { numeric: true, sensitivity: 'base' })
+    path.basename(b).localeCompare(path.basename(a), undefined, { numeric: true, sensitivity: 'base' })
   );
 
   const tryPathsForPlatform = (platformId, dir) => {
@@ -91,15 +89,18 @@ function ensureChromeBinary(baseDir, platform = os.platform()) {
   console.error(`[mcp-devtools] Chrome for Testing not found. Installing to ${baseDir} ...`);
   fs.mkdirSync(baseDir, { recursive: true });
 
-  const installResult = spawnSync(
-    resolveCommand('npx', platform),
-    ['-y', '@puppeteer/browsers', 'install', 'chrome@stable', '--path', baseDir],
-    {
-      stdio: 'inherit',
-      cwd: projectRoot,
-      env: process.env,
-    }
-  );
+  const installResult = spawnSync(resolveCommand('npx', platform), [
+    '-y',
+    '@puppeteer/browsers',
+    'install',
+    'chrome@stable',
+    '--path',
+    baseDir,
+  ], {
+    stdio: 'inherit',
+    cwd: projectRoot,
+    env: process.env,
+  });
 
   if (installResult.status !== 0) {
     throw new Error(`Failed to install Chrome for Testing (exit code ${installResult.status})`);
@@ -107,9 +108,7 @@ function ensureChromeBinary(baseDir, platform = os.platform()) {
 
   chromeBin = resolveChromeBinary(baseDir, platform);
   if (!chromeBin) {
-    throw new Error(
-      `Chrome for Testing installation succeeded but executable not found under ${baseDir}`
-    );
+    throw new Error(`Chrome for Testing installation succeeded but executable not found under ${baseDir}`);
   }
 
   return chromeBin;

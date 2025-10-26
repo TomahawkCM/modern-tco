@@ -1,15 +1,15 @@
-import fs from 'node:fs';
-import path from 'node:path';
-import { glob } from 'glob';
-import matter from 'gray-matter';
-import type { MDXRemoteSerializeResult } from 'next-mdx-remote';
-import { serialize } from 'next-mdx-remote/serialize';
+import fs from "fs";
+import { glob } from "glob";
+import matter from "gray-matter";
+import type { MDXRemoteSerializeResult } from "next-mdx-remote";
+import { serialize } from "next-mdx-remote/serialize";
+import path from "path";
 import {
-  type ModuleFrontmatter,
-  type ModuleValidationResult,
   SLUG_TO_DOMAIN_ENUM,
   validateModuleFrontmatter,
-} from './module-schema';
+  type ModuleFrontmatter,
+  type ModuleValidationResult,
+} from "./module-schema";
 
 /**
  * Complete module data structure
@@ -28,19 +28,19 @@ export class ModuleLoadError extends Error {
   constructor(
     message: string,
     public filePath?: string,
-    public validationErrors?: ModuleValidationResult['errors']
+    public validationErrors?: ModuleValidationResult["errors"]
   ) {
     super(message);
-    this.name = 'ModuleLoadError';
+    this.name = "ModuleLoadError";
   }
 }
 
 /**
  * Content discovery configuration
  */
-const MODULES_DIR = path.join(process.cwd(), 'src', 'content', 'modules');
+const MODULES_DIR = path.join(process.cwd(), "src", "content", "modules");
 // Use POSIX-style glob so it works cross-platform (Windows/macOS/Linux)
-const MODULES_GLOB = 'src/content/modules/*.mdx';
+const MODULES_GLOB = "src/content/modules/*.mdx";
 
 /**
  * Discover all module files using glob patterns
@@ -51,7 +51,7 @@ export async function discoverModuleFiles(): Promise<string[]> {
     return files.sort(); // Ensure consistent ordering
   } catch (error) {
     throw new ModuleLoadError(
-      `Failed to discover module files: ${error instanceof Error ? error.message : 'Unknown error'}`
+      `Failed to discover module files: ${error instanceof Error ? error.message : "Unknown error"}`
     );
   }
 }
@@ -60,9 +60,9 @@ export async function discoverModuleFiles(): Promise<string[]> {
  * Generate slug from filename
  */
 export function generateSlugFromFilename(filePath: string): string {
-  const filename = path.basename(filePath, '.mdx');
+  const filename = path.basename(filePath, ".mdx");
   // Remove leading numbers and hyphens (e.g., "01-asking-questions" -> "asking-questions")
-  return filename.replace(/^\d+-/, '');
+  return filename.replace(/^\d+-/, "");
 }
 
 /**
@@ -76,7 +76,7 @@ export async function loadModuleFile(filePath: string): Promise<ModuleData> {
     }
 
     // Read and parse the file
-    const fileContents = fs.readFileSync(filePath, 'utf8');
+    const fileContents = fs.readFileSync(filePath, "utf8");
     const { data: frontmatter, content: rawContent } = matter(fileContents);
 
     // Validate frontmatter
@@ -90,9 +90,9 @@ export async function loadModuleFile(filePath: string): Promise<ModuleData> {
 
     // Verify slug matches domain
     const expectedDomainEnum = SLUG_TO_DOMAIN_ENUM[slug];
-    if (expectedDomainEnum && validation.data?.domainEnum !== expectedDomainEnum) {
+    if (expectedDomainEnum && validation.data!.domainEnum !== expectedDomainEnum) {
       throw new ModuleLoadError(
-        `Slug "${slug}" doesn't match domainEnum "${validation.data?.domainEnum}" in ${filePath}`,
+        `Slug "${slug}" doesn't match domainEnum "${validation.data!.domainEnum}" in ${filePath}`,
         filePath
       );
     }
@@ -117,7 +117,7 @@ export async function loadModuleFile(filePath: string): Promise<ModuleData> {
     }
 
     throw new ModuleLoadError(
-      `Failed to load module ${filePath}: ${error instanceof Error ? error.message : 'Unknown error'}`,
+      `Failed to load module ${filePath}: ${error instanceof Error ? error.message : "Unknown error"}`,
       filePath
     );
   }
@@ -173,7 +173,7 @@ export async function loadAllModules(): Promise<{
       } else {
         errors.push(
           new ModuleLoadError(
-            `Unexpected error loading ${filePath}: ${error instanceof Error ? error.message : 'Unknown error'}`,
+            `Unexpected error loading ${filePath}: ${error instanceof Error ? error.message : "Unknown error"}`,
             filePath
           )
         );
@@ -192,7 +192,7 @@ export async function loadModuleBySlug(slug: string): Promise<ModuleData | null>
   try {
     files = await discoverModuleFiles();
   } catch (error) {
-    console.warn('Module discovery failed:', error);
+    console.warn("Module discovery failed:", error);
     return null;
   }
 
@@ -205,6 +205,7 @@ export async function loadModuleBySlug(slug: string): Promise<ModuleData | null>
       }
     } catch (error) {
       console.error(`Failed to check module metadata for ${filePath}:`, error);
+      continue;
     }
   }
 
@@ -225,7 +226,7 @@ export async function getModuleMetadata(filePath: string): Promise<{
       return null;
     }
 
-    const fileContents = fs.readFileSync(filePath, 'utf8');
+    const fileContents = fs.readFileSync(filePath, "utf8");
     const { data: frontmatter } = matter(fileContents);
 
     const validation = validateModuleFrontmatter(frontmatter, filePath);
@@ -261,7 +262,7 @@ export async function getAllModuleMetadata(): Promise<
   try {
     files = await discoverModuleFiles();
   } catch (error) {
-    console.warn('Module discovery failed:', error);
+    console.warn("Module discovery failed:", error);
     return [];
   }
   const metadata = [];

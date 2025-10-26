@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import { motion } from 'framer-motion';
-import { Award, BookOpen, CheckCircle, Clock, Star, Target, TrendingUp, Users } from 'lucide-react';
-import { useRouter } from 'next/navigation';
-import type { TCODomain } from '@/types/exam';
-import type { ModuleProgress as ModuleProgressType } from '@/types/module';
-import { getDomainRouteSlug } from '@/utils/domainMapper';
+import type { TCODomain } from "@/types/exam";
+import type { ModuleProgress as ModuleProgressType } from "@/types/module";
+import { getDomainRouteSlug } from "@/utils/domainMapper";
+import { motion } from "framer-motion";
+import { Award, BookOpen, CheckCircle, Clock, Star, Target, TrendingUp, Users } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 // Define Module interface locally to match the one used in ModuleContext
 interface Module {
@@ -13,7 +13,7 @@ interface Module {
   title: string;
   description: string;
   domain: string;
-  difficulty: 'Beginner' | 'Intermediate' | 'Advanced';
+  difficulty: "Beginner" | "Intermediate" | "Advanced";
   estimatedTime: number;
   objectives: Array<{ id: string; description: string }>;
   sections: Array<{ id: string; title: string }>;
@@ -29,46 +29,46 @@ interface ModuleProgressProps {
 
 const domainColors = {
   ASKING_QUESTIONS: {
-    bg: 'from-blue-500/20 to-blue-600/20',
-    border: 'border-primary/30',
-    text: 'text-primary',
-    accent: 'bg-primary',
-    hover: 'hover:from-blue-500/30 hover:to-blue-600/30',
+    bg: "from-blue-500/20 to-blue-600/20",
+    border: "border-primary/30",
+    text: "text-primary",
+    accent: "bg-primary",
+    hover: "hover:from-blue-500/30 hover:to-blue-600/30",
   },
   REFINING_QUESTIONS: {
-    bg: 'from-green-500/20 to-green-600/20',
-    border: 'border-[#22c55e]/30',
-    text: 'text-[#22c55e]',
-    accent: 'bg-[#22c55e]',
-    hover: 'hover:from-green-500/30 hover:to-green-600/30',
+    bg: "from-green-500/20 to-green-600/20",
+    border: "border-[#22c55e]/30",
+    text: "text-[#22c55e]",
+    accent: "bg-[#22c55e]",
+    hover: "hover:from-green-500/30 hover:to-green-600/30",
   },
   TAKING_ACTION: {
-    bg: 'from-red-500/20 to-red-600/20',
-    border: 'border-red-500/30',
-    text: 'text-red-400',
-    accent: 'bg-red-500',
-    hover: 'hover:from-red-500/30 hover:to-red-600/30',
+    bg: "from-red-500/20 to-red-600/20",
+    border: "border-red-500/30",
+    text: "text-red-400",
+    accent: "bg-red-500",
+    hover: "hover:from-red-500/30 hover:to-red-600/30",
   },
   NAVIGATION_MODULES: {
-    bg: 'from-primary/20 to-cyan-600/20',
-    border: 'border-primary/30',
-    text: 'text-primary',
-    accent: 'bg-cyan-500',
-    hover: 'hover:from-primary/30 hover:to-cyan-600/30',
+    bg: "from-primary/20 to-cyan-600/20",
+    border: "border-primary/30",
+    text: "text-primary",
+    accent: "bg-cyan-500",
+    hover: "hover:from-primary/30 hover:to-cyan-600/30",
   },
   REPORTING_EXPORT: {
-    bg: 'from-yellow-500/20 to-yellow-600/20',
-    border: 'border-[#f97316]/30',
-    text: 'text-[#f97316]',
-    accent: 'bg-yellow-500',
-    hover: 'hover:from-yellow-500/30 hover:to-yellow-600/30',
+    bg: "from-yellow-500/20 to-yellow-600/20",
+    border: "border-[#f97316]/30",
+    text: "text-[#f97316]",
+    accent: "bg-yellow-500",
+    hover: "hover:from-yellow-500/30 hover:to-yellow-600/30",
   },
 };
 
 const difficultyConfig = {
-  Beginner: { color: 'text-[#22c55e]', bg: 'bg-[#22c55e]/20', icon: Star },
-  Intermediate: { color: 'text-[#f97316]', bg: 'bg-[#f97316]/20', icon: TrendingUp },
-  Advanced: { color: 'text-red-400', bg: 'bg-red-500/20', icon: Award },
+  Beginner: { color: "text-[#22c55e]", bg: "bg-[#22c55e]/20", icon: Star },
+  Intermediate: { color: "text-[#f97316]", bg: "bg-[#f97316]/20", icon: TrendingUp },
+  Advanced: { color: "text-red-400", bg: "bg-red-500/20", icon: Award },
 };
 
 export default function ModuleProgress({
@@ -76,19 +76,19 @@ export default function ModuleProgress({
   progress,
   onStartModule,
   onContinueModule,
-  className = '',
+  className = "",
 }: ModuleProgressProps) {
   const router = useRouter();
   const colors = (domainColors as any)[module.domain] || {
-    bg: 'from-gray-500/20 to-gray-600/20',
-    border: 'border-gray-500/30',
-    text: 'text-muted-foreground',
-    accent: 'bg-gray-500',
-    hover: 'hover:from-gray-500/30 hover:to-gray-600/30',
+    bg: "from-gray-500/20 to-gray-600/20",
+    border: "border-gray-500/30",
+    text: "text-muted-foreground",
+    accent: "bg-gray-500",
+    hover: "hover:from-gray-500/30 hover:to-gray-600/30",
   };
   const difficultyInfo = difficultyConfig[module.difficulty] || {
-    color: 'text-muted-foreground',
-    bg: 'bg-gray-500/20',
+    color: "text-muted-foreground",
+    bg: "bg-gray-500/20",
     icon: Star,
   };
   const DifficultyIcon = difficultyInfo.icon;
@@ -111,29 +111,29 @@ export default function ModuleProgress({
   const getStatusInfo = () => {
     if (isCompleted) {
       return {
-        status: 'Completed',
-        statusColor: 'text-[#22c55e]',
-        statusBg: 'bg-[#22c55e]/20',
+        status: "Completed",
+        statusColor: "text-[#22c55e]",
+        statusBg: "bg-[#22c55e]/20",
         icon: CheckCircle,
-        action: 'Review Module',
+        action: "Review Module",
         actionHandler: handleNavigateToStudy,
       };
     } else if (isInProgress) {
       return {
-        status: 'In Progress',
+        status: "In Progress",
         statusColor: colors.text,
-        statusBg: `${colors.bg.replace('from-', 'bg-').split(' ')[0]}/20`,
+        statusBg: `${colors.bg.replace("from-", "bg-").split(" ")[0]}/20`,
         icon: Clock,
-        action: 'Continue Module',
+        action: "Continue Module",
         actionHandler: handleNavigateToStudy,
       };
     } else {
       return {
-        status: 'Not Started',
-        statusColor: 'text-muted-foreground',
-        statusBg: 'bg-gray-500/20',
+        status: "Not Started",
+        statusColor: "text-muted-foreground",
+        statusBg: "bg-gray-500/20",
         icon: BookOpen,
-        action: 'Start Module',
+        action: "Start Module",
         actionHandler: handleNavigateToStudy,
       };
     }
@@ -150,10 +150,10 @@ export default function ModuleProgress({
   };
 
   const getProgressColor = (percentage: number) => {
-    if (percentage >= 100) return 'bg-[#22c55e]';
+    if (percentage >= 100) return "bg-[#22c55e]";
     if (percentage >= 75) return colors.accent;
-    if (percentage >= 50) return 'bg-yellow-500';
-    return 'bg-gray-500';
+    if (percentage >= 50) return "bg-yellow-500";
+    return "bg-gray-500";
   };
 
   return (
@@ -212,7 +212,7 @@ export default function ModuleProgress({
             <motion.div
               initial={{ width: 0 }}
               animate={{ width: `${objectiveProgress}%` }}
-              transition={{ duration: 1, ease: 'easeOut' }}
+              transition={{ duration: 1, ease: "easeOut" }}
               className={`h-full ${getProgressColor(objectiveProgress)} rounded-full`}
             />
           </div>
@@ -232,21 +232,17 @@ export default function ModuleProgress({
         <div className="rounded-lg border border-white/10 bg-black/20 p-3">
           <div className="mb-1 flex items-center gap-2">
             <TrendingUp className="h-4 w-4 text-[#22c55e]" />
-            <span className="text-xs uppercase tracking-wide text-muted-foreground">
-              Time Spent
-            </span>
+            <span className="text-xs uppercase tracking-wide text-muted-foreground">Time Spent</span>
           </div>
           <div className="text-lg font-semibold text-foreground">
-            {progress.totalTimeSpent ? formatTimeSpent(progress.totalTimeSpent) : '0m'}
+            {progress.totalTimeSpent ? formatTimeSpent(progress.totalTimeSpent) : "0m"}
           </div>
         </div>
 
         <div className="rounded-lg border border-white/10 bg-black/20 p-3">
           <div className="mb-1 flex items-center gap-2">
             <Target className="h-4 w-4 text-primary" />
-            <span className="text-xs uppercase tracking-wide text-muted-foreground">
-              Objectives
-            </span>
+            <span className="text-xs uppercase tracking-wide text-muted-foreground">Objectives</span>
           </div>
           <div className="text-lg font-semibold text-foreground">
             {completedObjectives}/{totalObjectives}
@@ -259,7 +255,7 @@ export default function ModuleProgress({
             <span className="text-xs uppercase tracking-wide text-muted-foreground">Domain</span>
           </div>
           <div className={`text-sm font-medium ${colors.text} truncate`}>
-            {module.domain.replace(/_/g, ' ')}
+            {module.domain.replace(/_/g, " ")}
           </div>
         </div>
       </div>
@@ -278,12 +274,10 @@ export default function ModuleProgress({
                 <div key={objective.id} className="flex items-start gap-2">
                   <CheckCircle
                     className={`mt-0.5 h-4 w-4 flex-shrink-0 ${
-                      isCompleted ? 'text-[#22c55e]' : 'text-gray-600'
+                      isCompleted ? "text-[#22c55e]" : "text-gray-600"
                     }`}
                   />
-                  <span
-                    className={`text-sm ${isCompleted ? 'text-muted-foreground' : 'text-muted-foreground'}`}
-                  >
+                  <span className={`text-sm ${isCompleted ? "text-muted-foreground" : "text-muted-foreground"}`}>
                     {objective.description}
                   </span>
                 </div>
@@ -316,7 +310,7 @@ export default function ModuleProgress({
         <motion.div
           initial={{ opacity: 0, scale: 0 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.5, type: 'spring' }}
+          transition={{ delay: 0.5, type: "spring" }}
           className="absolute right-4 top-4"
         >
           <div className="rounded-full bg-[#22c55e] p-2 text-foreground shadow-lg">

@@ -1,18 +1,27 @@
-'use client';
+"use client";
 
-import { Award, BookOpen, Calendar, Clock, Target, TrendingUp, Trophy, Zap } from 'lucide-react';
-import { useEffect, useState } from 'react';
-import { Badge } from '@/components/ui/badge';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Progress } from '@/components/ui/progress';
+import { useState, useEffect } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Progress } from "@/components/ui/progress";
 import {
-  calculateLearningVelocity,
+  Trophy,
+  Target,
+  Clock,
+  TrendingUp,
+  Zap,
+  Calendar,
+  Award,
+  BookOpen,
+} from "lucide-react";
+import {
   calculateProgressSummary,
-  compareToBenchmarks,
-  type ProgressBenchmark,
-  type ProgressSummary as ProgressSummaryType,
+  calculateLearningVelocity,
   predictExamReadiness,
-} from '@/lib/progressVisualization';
+  compareToBenchmarks,
+  type ProgressSummary as ProgressSummaryType,
+  type ProgressBenchmark,
+} from "@/lib/progressVisualization";
 
 interface ProgressSummaryProps {
   /** Custom className */
@@ -37,14 +46,18 @@ export function ProgressSummary({ className }: ProgressSummaryProps) {
 
     // Listen for all updates
     const handleStorageChange = (e: StorageEvent) => {
-      if (e.key === 'review-items' || e.key === 'user-points' || e.key === 'practice-stats') {
+      if (
+        e.key === "review-items" ||
+        e.key === "user-points" ||
+        e.key === "practice-stats"
+      ) {
         loadProgress();
       }
     };
 
-    window.addEventListener('storage', handleStorageChange);
-    return () => window.removeEventListener('storage', handleStorageChange);
-  }, [loadProgress]);
+    window.addEventListener("storage", handleStorageChange);
+    return () => window.removeEventListener("storage", handleStorageChange);
+  }, []);
 
   function loadProgress() {
     const progressData = calculateProgressSummary();
@@ -71,17 +84,17 @@ export function ProgressSummary({ className }: ProgressSummaryProps) {
   }
 
   const getReadinessColor = (readiness: number) => {
-    if (readiness >= 85) return 'text-[#22c55e] border-green-400';
-    if (readiness >= 70) return 'text-primary border-blue-400';
-    if (readiness >= 50) return 'text-[#f97316] border-yellow-400';
-    return 'text-orange-400 border-orange-400';
+    if (readiness >= 85) return "text-[#22c55e] border-green-400";
+    if (readiness >= 70) return "text-primary border-blue-400";
+    if (readiness >= 50) return "text-[#f97316] border-yellow-400";
+    return "text-orange-400 border-orange-400";
   };
 
   const getReadinessMessage = (readiness: number) => {
-    if (readiness >= 85) return 'Ready for Exam! 🎉';
-    if (readiness >= 70) return 'Almost Ready - Keep Practicing!';
-    if (readiness >= 50) return 'Good Progress - Continue Studying';
-    return 'Building Foundation - Stay Focused';
+    if (readiness >= 85) return "Ready for Exam! 🎉";
+    if (readiness >= 70) return "Almost Ready - Keep Practicing!";
+    if (readiness >= 50) return "Good Progress - Continue Studying";
+    return "Building Foundation - Stay Focused";
   };
 
   return (
@@ -104,9 +117,7 @@ export function ProgressSummary({ className }: ProgressSummaryProps) {
             <div className={`text-6xl font-bold mb-2 ${getReadinessColor(summary.examReadiness)}`}>
               {summary.examReadiness}%
             </div>
-            <p className="text-sm text-muted-foreground mb-4">
-              {getReadinessMessage(summary.examReadiness)}
-            </p>
+            <p className="text-sm text-muted-foreground mb-4">{getReadinessMessage(summary.examReadiness)}</p>
             <Progress value={summary.examReadiness} className="h-3" />
           </div>
 
@@ -160,9 +171,7 @@ export function ProgressSummary({ className }: ProgressSummaryProps) {
             <div className="rounded-lg border border-gray-700 bg-card/30 p-4">
               <div className="flex items-center gap-2 mb-3">
                 <TrendingUp className="h-4 w-4 text-primary" />
-                <span className="text-sm font-semibold text-muted-foreground">
-                  Learning Velocity
-                </span>
+                <span className="text-sm font-semibold text-muted-foreground">Learning Velocity</span>
               </div>
               <div className="flex items-end justify-between gap-2 h-20">
                 {velocity.map((count, idx) => {
@@ -202,8 +211,8 @@ export function ProgressSummary({ className }: ProgressSummaryProps) {
                 <span className="text-sm text-muted-foreground">days at current pace</span>
               </div>
               <p className="text-xs text-muted-foreground mt-2">
-                Based on your learning velocity, you'll be exam-ready in approximately {daysToReady}{' '}
-                days if you maintain your current study rate.
+                Based on your learning velocity, you'll be exam-ready in approximately {daysToReady} days
+                if you maintain your current study rate.
               </p>
             </div>
           )}
@@ -216,8 +225,8 @@ export function ProgressSummary({ className }: ProgressSummaryProps) {
                 🎉 You're Ready for the Exam!
               </p>
               <p className="text-xs text-muted-foreground">
-                Your retention and mastery levels indicate strong exam readiness. Consider
-                scheduling your certification exam.
+                Your retention and mastery levels indicate strong exam readiness. Consider scheduling
+                your certification exam.
               </p>
             </div>
           )}
@@ -241,27 +250,23 @@ export function ProgressSummary({ className }: ProgressSummaryProps) {
                   <div className="flex items-center gap-2">
                     <span className="text-sm text-muted-foreground">
                       {Math.round(benchmark.userValue)}
-                      {benchmark.metric.includes('Retention') ||
-                      benchmark.metric.includes('Mastered') ||
-                      benchmark.metric.includes('Readiness')
-                        ? '%'
-                        : 'hrs'}
+                      {benchmark.metric.includes("Retention") || benchmark.metric.includes("Mastered") || benchmark.metric.includes("Readiness") ? "%" : "hrs"}
                     </span>
                     <Badge
                       variant="outline"
                       className={
-                        benchmark.status === 'exceeds'
-                          ? 'text-[#22c55e] border-green-400'
-                          : benchmark.status === 'meets'
-                            ? 'text-primary border-blue-400'
-                            : 'text-orange-400 border-orange-400'
+                        benchmark.status === "exceeds"
+                          ? "text-[#22c55e] border-green-400"
+                          : benchmark.status === "meets"
+                          ? "text-primary border-blue-400"
+                          : "text-orange-400 border-orange-400"
                       }
                     >
-                      {benchmark.status === 'exceeds'
-                        ? 'Exceeds'
-                        : benchmark.status === 'meets'
-                          ? 'Meets'
-                          : 'Below'}
+                      {benchmark.status === "exceeds"
+                        ? "Exceeds"
+                        : benchmark.status === "meets"
+                        ? "Meets"
+                        : "Below"}
                     </Badge>
                   </div>
                 </div>
@@ -269,25 +274,20 @@ export function ProgressSummary({ className }: ProgressSummaryProps) {
                   <Progress value={benchmark.percentile} className="h-2" />
                   <div
                     className="absolute top-0 h-2 w-0.5 bg-yellow-500"
-                    style={{ left: '100%' }}
+                    style={{ left: "100%" }}
                     title={`Target: ${benchmark.benchmarkValue}`}
                   />
                 </div>
                 <div className="flex justify-between text-xs text-muted-foreground">
-                  <span>
-                    Target: {benchmark.benchmarkValue}
-                    {benchmark.metric.includes('Retention') ||
-                    benchmark.metric.includes('Mastered') ||
-                    benchmark.metric.includes('Readiness')
-                      ? '%'
-                      : ' hrs'}
+                  <span>Target: {benchmark.benchmarkValue}
+                    {benchmark.metric.includes("Retention") || benchmark.metric.includes("Mastered") || benchmark.metric.includes("Readiness") ? "%" : " hrs"}
                   </span>
                   <span>
-                    {benchmark.status === 'exceeds'
+                    {benchmark.status === "exceeds"
                       ? `+${Math.round(benchmark.percentile - 100)}% above`
-                      : benchmark.status === 'meets'
-                        ? 'On target'
-                        : `${Math.round(100 - benchmark.percentile)}% to goal`}
+                      : benchmark.status === "meets"
+                      ? "On target"
+                      : `${Math.round(100 - benchmark.percentile)}% to goal`}
                   </span>
                 </div>
               </div>

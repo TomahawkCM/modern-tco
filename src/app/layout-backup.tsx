@@ -1,31 +1,31 @@
-import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
-import './globals.css';
-import { SkipLinks } from '@/components/accessibility/skip-links';
-import { ThemeProvider } from '@/components/ui/theme-provider';
-import { Toaster } from '@/components/ui/toaster';
-import { TooltipProvider } from '@/components/ui/tooltip';
-import { AuthProvider } from '@/contexts/AuthContext';
-import { DatabaseProvider } from '@/contexts/DatabaseContext';
-import { ExamProvider } from '@/contexts/ExamContext';
-import { IncorrectAnswersProvider } from '@/contexts/IncorrectAnswersContext';
-import { ModuleProvider } from '@/contexts/ModuleContext';
-import { ProgressProvider } from '@/contexts/ProgressContext';
-import { QuestionsProvider } from '@/contexts/QuestionsContext';
-import { SearchProvider } from '@/contexts/SearchContext';
-import { SettingsProvider } from '@/contexts/SettingsContext';
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import "./globals.css";
+import { ThemeProvider } from "@/components/ui/theme-provider";
+import { Toaster } from "@/components/ui/toaster";
+import { TooltipProvider } from "@/components/ui/tooltip";
+import { SkipLinks } from "@/components/accessibility/skip-links";
+import { AuthProvider } from "@/contexts/AuthContext";
+import { DatabaseProvider } from "@/contexts/DatabaseContext";
+import { QuestionsProvider } from "@/contexts/QuestionsContext";
+import { SearchProvider } from "@/contexts/SearchContext";
+import { ExamProvider } from "@/contexts/ExamContext";
+import { ProgressProvider } from "@/contexts/ProgressContext";
+import { SettingsProvider } from "@/contexts/SettingsContext";
+import { IncorrectAnswersProvider } from "@/contexts/IncorrectAnswersContext";
+import { ModuleProvider } from "@/contexts/ModuleContext";
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: 'Tanium Certified Operator - Exam Preparation',
-  description: 'Modern exam preparation system for Tanium Certified Operator certification',
-  manifest: '/manifest.json',
+  title: "Tanium Certified Operator - Exam Preparation",
+  description: "Modern exam preparation system for Tanium Certified Operator certification",
+  manifest: "/manifest.json",
 };
 
 export const viewport = {
-  themeColor: '#1a365d',
-  width: 'device-width',
+  themeColor: "#1a365d",
+  width: "device-width",
   initialScale: 1,
 };
 

@@ -1,9 +1,9 @@
 'use client';
 
-import { ArrowLeft, BookOpen, CheckCircle, ChevronRight, Clock, Target } from 'lucide-react';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 import React from 'react';
+import { usePathname } from 'next/navigation';
+import Link from 'next/link';
+import { ChevronRight, BookOpen, Clock, CheckCircle, Target, ArrowLeft } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useLearningProgress } from './LearningProgressProvider';
 
@@ -20,30 +20,32 @@ export function LearningNavigation() {
   // Generate breadcrumbs based on current path
   const generateBreadcrumbs = (): BreadcrumbItem[] => {
     const segments = pathname.split('/').filter(Boolean);
-    const breadcrumbs: BreadcrumbItem[] = [{ label: 'Study', href: '/study' }];
+    const breadcrumbs: BreadcrumbItem[] = [
+      { label: 'Study', href: '/study' }
+    ];
 
     if (segments.includes('learning')) {
       breadcrumbs.push({ label: 'Learning Modules', href: '/learning' });
     }
 
     if (currentDomain) {
-      const domain = domains.find((d) => d.id === currentDomain);
+      const domain = domains.find(d => d.id === currentDomain);
       if (domain) {
         breadcrumbs.push({
           label: domain.title,
           href: `/learning/${domain.id}`,
-          current: !currentModule,
+          current: !currentModule
         });
       }
     }
 
     if (currentModule && currentDomain) {
-      const domain = domains.find((d) => d.id === currentDomain);
-      const module = domain?.modules.find((m) => m.id === currentModule);
+      const domain = domains.find(d => d.id === currentDomain);
+      const module = domain?.modules.find(m => m.id === currentModule);
       if (module) {
         breadcrumbs.push({
           label: module.title,
-          current: true,
+          current: true
         });
       }
     }
@@ -72,7 +74,9 @@ export function LearningNavigation() {
         <nav className="flex items-center space-x-2 text-sm mb-4" aria-label="Breadcrumb">
           {breadcrumbs.map((item, index) => (
             <React.Fragment key={index}>
-              {index > 0 && <ChevronRight className="h-4 w-4 text-muted-foreground" />}
+              {index > 0 && (
+                <ChevronRight className="h-4 w-4 text-muted-foreground" />
+              )}
               {item.href && !item.current ? (
                 <Link
                   href={item.href}
@@ -81,11 +85,9 @@ export function LearningNavigation() {
                   {item.label}
                 </Link>
               ) : (
-                <span
-                  className={cn(
-                    item.current ? 'text-foreground font-medium' : 'text-muted-foreground'
-                  )}
-                >
+                <span className={cn(
+                  item.current ? 'text-foreground font-medium' : 'text-muted-foreground'
+                )}>
                   {item.label}
                 </span>
               )}
@@ -104,7 +106,7 @@ export function LearningNavigation() {
                 </div>
                 <div>
                   <div className="text-foreground font-medium">
-                    {domains.find((d) => d.id === currentDomain)?.title}
+                    {domains.find(d => d.id === currentDomain)?.title}
                   </div>
                   <div className="text-sm text-muted-foreground">
                     {progress.completedModules} of {progress.totalModules} modules completed
@@ -156,18 +158,16 @@ export function LearningNavigation() {
 }
 
 function ModuleNavigation() {
-  const { currentDomain, currentModule, domains, navigateToPreviousModule, navigateToNextModule } =
-    useLearningProgress();
+  const { currentDomain, currentModule, domains, navigateToPreviousModule, navigateToNextModule } = useLearningProgress();
 
   if (!currentDomain || !currentModule) return null;
 
-  const domain = domains.find((d) => d.id === currentDomain);
+  const domain = domains.find(d => d.id === currentDomain);
   if (!domain) return null;
 
-  const currentModuleIndex = domain.modules.findIndex((m) => m.id === currentModule);
+  const currentModuleIndex = domain.modules.findIndex(m => m.id === currentModule);
   const previousModule = currentModuleIndex > 0 ? domain.modules[currentModuleIndex - 1] : null;
-  const nextModule =
-    currentModuleIndex < domain.modules.length - 1 ? domain.modules[currentModuleIndex + 1] : null;
+  const nextModule = currentModuleIndex < domain.modules.length - 1 ? domain.modules[currentModuleIndex + 1] : null;
 
   return (
     <div className="flex items-center justify-between">
@@ -187,9 +187,7 @@ function ModuleNavigation() {
       </div>
 
       <div className="flex-1 text-center">
-        <div className="text-xs text-muted-foreground">
-          Module {currentModuleIndex + 1} of {domain.modules.length}
-        </div>
+        <div className="text-xs text-muted-foreground">Module {currentModuleIndex + 1} of {domain.modules.length}</div>
         <div className="text-sm font-medium text-foreground">
           {domain.modules[currentModuleIndex]?.title}
         </div>

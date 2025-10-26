@@ -1,0 +1,1 @@
+{"question": "Get Computer Name, CPU Percent from all machines where CPU Percent is greater than \"50\" order by CPU Percent desc limit 3"}

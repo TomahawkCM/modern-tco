@@ -1,8 +1,9 @@
 // Question Review Service - Spaced Repetition for Practice Exam Questions
 // Extends SM-2 algorithm from flashcards to assessment questions
 
-import { type SRRating, schedule } from '@/lib/sr';
-import { supabase } from '@/lib/supabase';
+import { supabase } from "@/lib/supabase";
+import { schedule, type SRRating } from "@/lib/sr";
+import type { Question } from "@/types/assessment";
 
 // ==================== TYPES ====================
 
@@ -57,14 +58,11 @@ export interface QuestionReviewStats {
   learningQuestions: number; // srs_reps < 2
   masteredQuestions: number; // srs_reps >= 2 && mastery >= 0.8
   avgMasteryLevel: number; // 0-100
-  questionsByDomain: Record<
-    string,
-    {
-      total: number;
-      due: number;
-      avgMastery: number;
-    }
-  >;
+  questionsByDomain: Record<string, {
+    total: number;
+    due: number;
+    avgMastery: number;
+  }>;
 }
 
 // Convert between database and SM-2 algorithm
@@ -99,17 +97,17 @@ class QuestionReviewService {
   async getOrCreateReview(userId: string, questionId: string): Promise<QuestionReview | null> {
     // Try to get existing review
     const { data: existing, error: getError } = await supabase
-      .from('question_reviews')
+      .from("question_reviews")
       .select()
-      .eq('user_id', userId)
-      .eq('question_id', questionId)
+      .eq("user_id", userId)
+      .eq("question_id", questionId)
       .single();
 
     if (existing && !getError) return existing as QuestionReview;
 
     // Create new review record
     const { data: newReview, error: createError } = await supabase
-      .from('question_reviews')
+      .from("question_reviews")
       .insert({
         user_id: userId,
         question_id: questionId,
@@ -119,7 +117,7 @@ class QuestionReviewService {
       .single();
 
     if (createError) {
-      console.error('Error creating question review:', createError);
+      console.error("Error creating question review:", createError);
       return null;
     }
 
@@ -128,9 +126,9 @@ class QuestionReviewService {
 
   async getReview(reviewId: string): Promise<QuestionReview | null> {
     const { data, error } = await supabase
-      .from('question_reviews')
+      .from("question_reviews")
       .select()
-      .eq('id', reviewId)
+      .eq("id", reviewId)
       .single();
 
     if (error || !data) return null;
@@ -139,10 +137,10 @@ class QuestionReviewService {
 
   async getUserReviews(userId: string): Promise<QuestionReview[]> {
     const { data, error } = await supabase
-      .from('question_reviews')
+      .from("question_reviews")
       .select()
-      .eq('user_id', userId)
-      .order('last_reviewed_at', { ascending: false, nullsFirst: false });
+      .eq("user_id", userId)
+      .order("last_reviewed_at", { ascending: false, nullsFirst: false });
 
     if (error || !data) return [];
     return data as QuestionReview[];
@@ -156,11 +154,11 @@ class QuestionReviewService {
   async getDueQuestions(userId: string, limit: number = 20): Promise<QuestionReview[]> {
     const now = new Date().toISOString();
     const { data, error } = await supabase
-      .from('question_reviews')
+      .from("question_reviews")
       .select()
-      .eq('user_id', userId)
-      .lte('srs_due', now)
-      .order('srs_due', { ascending: true })
+      .eq("user_id", userId)
+      .lte("srs_due", now)
+      .order("srs_due", { ascending: true })
       .limit(limit);
 
     if (error || !data) return [];
@@ -202,7 +200,7 @@ class QuestionReviewService {
 
     // Update review in database
     const { data: updatedReview, error: updateError } = await supabase
-      .from('question_reviews')
+      .from("question_reviews")
       .update({
         ...srsUpdates,
         total_attempts: newTotalAttempts,
@@ -210,18 +208,18 @@ class QuestionReviewService {
         average_time_seconds: newAvgTime,
         last_reviewed_at: new Date().toISOString(),
       })
-      .eq('id', review.id)
+      .eq("id", review.id)
       .select()
       .single();
 
     if (updateError || !updatedReview) {
-      console.error('Error updating question review:', updateError);
+      console.error("Error updating question review:", updateError);
       return null;
     }
 
     // Record attempt in history
     const { data: attempt, error: attemptError } = await supabase
-      .from('question_review_attempts')
+      .from("question_review_attempts")
       .insert({
         review_id: review.id,
         user_id: userId,
@@ -238,7 +236,7 @@ class QuestionReviewService {
       .single();
 
     if (attemptError) {
-      console.error('Error creating review attempt:', attemptError);
+      console.error("Error creating review attempt:", attemptError);
     }
 
     return {
@@ -250,7 +248,11 @@ class QuestionReviewService {
   /**
    * Calculate SM-2 rating based on correctness and mastery
    */
-  private calculateRating(isCorrect: boolean, masteryLevel: number, currentReps: number): SRRating {
+  private calculateRating(
+    isCorrect: boolean,
+    masteryLevel: number,
+    currentReps: number
+  ): SRRating {
     if (!isCorrect) {
       return 'again'; // Wrong answer = reset interval
     }
@@ -278,11 +280,11 @@ class QuestionReviewService {
    */
   async getNewQuestions(userId: string, limit: number = 10): Promise<QuestionReview[]> {
     const { data, error } = await supabase
-      .from('question_reviews')
+      .from("question_reviews")
       .select()
-      .eq('user_id', userId)
-      .eq('srs_reps', 0)
-      .order('created_at', { ascending: false })
+      .eq("user_id", userId)
+      .eq("srs_reps", 0)
+      .order("created_at", { ascending: false })
       .limit(limit);
 
     if (error || !data) return [];
@@ -307,11 +309,11 @@ class QuestionReviewService {
     limit: number = 20
   ): Promise<QuestionReview[]> {
     const { data, error } = await supabase
-      .from('question_reviews')
+      .from("question_reviews")
       .select()
-      .eq('user_id', userId)
-      .lt('mastery_level', masteryThreshold)
-      .order('mastery_level', { ascending: true })
+      .eq("user_id", userId)
+      .lt("mastery_level", masteryThreshold)
+      .order("mastery_level", { ascending: true })
       .limit(limit);
 
     if (error || !data) return [];
@@ -325,9 +327,9 @@ class QuestionReviewService {
    */
   async getQuestionStats(userId: string): Promise<QuestionReviewStats> {
     const { data: allReviews } = await supabase
-      .from('question_reviews')
+      .from("question_reviews")
       .select()
-      .eq('user_id', userId);
+      .eq("user_id", userId);
 
     if (!allReviews || allReviews.length === 0) {
       return {
@@ -345,35 +347,29 @@ class QuestionReviewService {
     const now = new Date().toISOString();
 
     const totalQuestions = reviews.length;
-    const dueToday = reviews.filter((r) => r.srs_due <= now).length;
-    const newQuestions = reviews.filter((r) => r.srs_reps === 0).length;
-    const learningQuestions = reviews.filter((r) => r.srs_reps > 0 && r.srs_reps < 2).length;
-    const masteredQuestions = reviews.filter(
-      (r) => r.srs_reps >= 2 && r.mastery_level >= 0.8
-    ).length;
+    const dueToday = reviews.filter(r => r.srs_due <= now).length;
+    const newQuestions = reviews.filter(r => r.srs_reps === 0).length;
+    const learningQuestions = reviews.filter(r => r.srs_reps > 0 && r.srs_reps < 2).length;
+    const masteredQuestions = reviews.filter(r => r.srs_reps >= 2 && r.mastery_level >= 0.8).length;
 
     const totalMastery = reviews.reduce((sum, r) => sum + r.mastery_level, 0);
     const avgMasteryLevel = (totalMastery / totalQuestions) * 100;
 
     // Get question domains for breakdown
     const { data: questions } = await supabase
-      .from('questions')
-      .select('id, domain')
-      .in(
-        'id',
-        reviews.map((r) => r.question_id)
-      );
+      .from("questions")
+      .select("id, domain")
+      .in("id", reviews.map(r => r.question_id));
 
-    const questionDomainMap = new Map((questions || []).map((q: any) => [q.id, q.domain]));
+    const questionDomainMap = new Map(
+      (questions || []).map((q: any) => [q.id, q.domain])
+    );
 
-    const questionsByDomain: Record<
-      string,
-      {
-        total: number;
-        due: number;
-        avgMastery: number;
-      }
-    > = {};
+    const questionsByDomain: Record<string, {
+      total: number;
+      due: number;
+      avgMastery: number;
+    }> = {};
 
     for (const review of reviews) {
       const domain = questionDomainMap.get(review.question_id) || 'Unknown';
@@ -410,11 +406,11 @@ class QuestionReviewService {
    */
   async getQuestionAttempts(questionId: string, userId: string): Promise<QuestionReviewAttempt[]> {
     const { data, error } = await supabase
-      .from('question_review_attempts')
+      .from("question_review_attempts")
       .select()
-      .eq('user_id', userId)
-      .eq('question_id', questionId)
-      .order('attempted_at', { ascending: false });
+      .eq("user_id", userId)
+      .eq("question_id", questionId)
+      .order("attempted_at", { ascending: false });
 
     if (error || !data) return [];
     return data as QuestionReviewAttempt[];
@@ -426,10 +422,10 @@ class QuestionReviewService {
   async getDueCount(userId: string): Promise<number> {
     const now = new Date().toISOString();
     const { count, error } = await supabase
-      .from('question_reviews')
-      .select('*', { count: 'exact', head: true })
-      .eq('user_id', userId)
-      .lte('srs_due', now);
+      .from("question_reviews")
+      .select("*", { count: "exact", head: true })
+      .eq("user_id", userId)
+      .lte("srs_due", now);
 
     if (error) return 0;
     return count || 0;

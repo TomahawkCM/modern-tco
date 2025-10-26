@@ -1,36 +1,41 @@
-'use client';
+"use client";
+
+import React, { useState, useEffect, useRef } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Input } from "@/components/ui/input";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Separator } from "@/components/ui/separator";
+import {
+  Terminal,
+  Search,
+  Database,
+  Settings,
+  Users,
+  Shield,
+  Activity,
+  Server,
+  Zap,
+  CheckCircle,
+  AlertTriangle,
+  Clock,
+  ArrowRight,
+  Play,
+  Pause,
+  RefreshCw,
+} from "lucide-react";
 
 import {
-  Activity,
-  AlertTriangle,
-  CheckCircle,
-  Clock,
-  Database,
-  Play,
-  RefreshCw,
-  Search,
-  Server,
-  Settings,
-  Shield,
-  Terminal,
-  Users,
-  Zap,
-} from 'lucide-react';
-import { useEffect, useRef, useState } from 'react';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { ScrollArea } from '@/components/ui/scroll-area';
-import { Tabs, TabsContent } from '@/components/ui/tabs';
-
-import type {
-  ComputerGroup,
-  ConsoleAction,
-  ConsoleState,
-  SavedQuery,
-  TaniumModule,
-} from '@/types/lab';
+  type ConsoleState,
+  type TaniumModule,
+  type SavedQuery,
+  type ComputerGroup,
+  ActionHistory,
+  type ConsoleAction,
+} from "@/types/lab";
 
 interface ConsoleSimulatorProps {
   initialState: ConsoleState;
@@ -44,99 +49,56 @@ interface ConsoleSimulatorProps {
 // Mock data for simulation
 const mockModules: TaniumModule[] = [
   {
-    id: 'interact',
-    name: 'Interact',
+    id: "interact",
+    name: "Interact",
     enabled: true,
     features: [
-      {
-        id: 'question-builder',
-        name: 'Question Builder',
-        description: 'Build natural language queries',
-        enabled: true,
-        configuration: {},
-      },
-      {
-        id: 'saved-questions',
-        name: 'Saved Questions',
-        description: 'Manage saved queries',
-        enabled: true,
-        configuration: {},
-      },
-      {
-        id: 'real-time-results',
-        name: 'Real-time Results',
-        description: 'Live query results',
-        enabled: true,
-        configuration: {},
-      },
+      { id: "question-builder", name: "Question Builder", description: "Build natural language queries", enabled: true, configuration: {} },
+      { id: "saved-questions", name: "Saved Questions", description: "Manage saved queries", enabled: true, configuration: {} },
+      { id: "real-time-results", name: "Real-time Results", description: "Live query results", enabled: true, configuration: {} },
     ],
-    permissions: ['read', 'write', 'execute'],
+    permissions: ["read", "write", "execute"],
   },
   {
-    id: 'deploy',
-    name: 'Deploy',
+    id: "deploy",
+    name: "Deploy",
     enabled: true,
     features: [
-      {
-        id: 'package-management',
-        name: 'Package Management',
-        description: 'Manage deployment packages',
-        enabled: true,
-        configuration: {},
-      },
-      {
-        id: 'action-history',
-        name: 'Action History',
-        description: 'View deployment history',
-        enabled: true,
-        configuration: {},
-      },
+      { id: "package-management", name: "Package Management", description: "Manage deployment packages", enabled: true, configuration: {} },
+      { id: "action-history", name: "Action History", description: "View deployment history", enabled: true, configuration: {} },
     ],
-    permissions: ['read', 'write', 'execute'],
+    permissions: ["read", "write", "execute"],
   },
   {
-    id: 'administration',
-    name: 'Administration',
+    id: "administration",
+    name: "Administration",
     enabled: true,
     features: [
-      {
-        id: 'computer-groups',
-        name: 'Computer Groups',
-        description: 'Manage computer groups',
-        enabled: true,
-        configuration: {},
-      },
-      {
-        id: 'user-management',
-        name: 'User Management',
-        description: 'Manage users and roles',
-        enabled: true,
-        configuration: {},
-      },
+      { id: "computer-groups", name: "Computer Groups", description: "Manage computer groups", enabled: true, configuration: {} },
+      { id: "user-management", name: "User Management", description: "Manage users and roles", enabled: true, configuration: {} },
     ],
-    permissions: ['read', 'write', 'admin'],
+    permissions: ["read", "write", "admin"],
   },
 ];
 
 const mockQueries: SavedQuery[] = [
   {
-    id: 'query-1',
-    name: 'Get Computer Names',
-    question: 'Get Computer Name from all machines',
-    sensors: ['Computer Name'],
-    targeting: { type: 'all-computers' },
-    lastExecuted: '2025-01-10T10:30:00Z',
+    id: "query-1",
+    name: "Get Computer Names",
+    question: "Get Computer Name from all machines",
+    sensors: ["Computer Name"],
+    targeting: { type: "all-computers" },
+    lastExecuted: "2025-01-10T10:30:00Z",
     shared: false,
   },
   {
-    id: 'query-2',
-    name: 'Windows Endpoints',
-    question:
-      'Get Computer Name and Operating System from all machines where Operating System contains "Windows"',
-    sensors: ['Computer Name', 'Operating System'],
-    targeting: {
-      type: 'custom-filter',
-      filters: [{ sensor: 'Operating System', operator: 'contains', value: 'Windows' }],
+    id: "query-2",
+    name: "Windows Endpoints",
+    question: "Get Computer Name and Operating System from all machines where Operating System contains \"Windows\"",
+    sensors: ["Computer Name", "Operating System"],
+    targeting: { 
+      type: "custom-filter",
+      filters: [{ sensor: "Operating System", operator: "contains", value: "Windows" }]
     },
     shared: true,
   },
@@ -144,24 +106,24 @@ const mockQueries: SavedQuery[] = [
 
 const mockComputerGroups: ComputerGroup[] = [
   {
-    id: 'group-1',
-    name: 'All Computers',
-    type: 'static',
-    description: 'Default group containing all endpoints',
+    id: "group-1",
+    name: "All Computers",
+    type: "static",
+    description: "Default group containing all endpoints",
     memberCount: 1247,
-    lastUpdated: '2025-01-10T09:15:00Z',
+    lastUpdated: "2025-01-10T09:15:00Z",
   },
   {
-    id: 'group-2',
-    name: 'Windows Servers',
-    type: 'dynamic',
-    description: 'Servers running Windows OS',
+    id: "group-2",
+    name: "Windows Servers",
+    type: "dynamic",
+    description: "Servers running Windows OS",
     rules: [
-      { sensor: 'Operating System', operator: 'contains', value: 'Windows' },
-      { sensor: 'Computer Role', operator: 'equals', value: 'Server' },
+      { sensor: "Operating System", operator: "contains", value: "Windows" },
+      { sensor: "Computer Role", operator: "equals", value: "Server" }
     ],
     memberCount: 156,
-    lastUpdated: '2025-01-10T08:45:00Z',
+    lastUpdated: "2025-01-10T08:45:00Z",
   },
 ];
 
@@ -174,8 +136,8 @@ export function ConsoleSimulator({
   readOnly = false,
 }: ConsoleSimulatorProps) {
   const [consoleState, setConsoleState] = useState<ConsoleState>(initialState);
-  const [activeModule, setActiveModule] = useState(initialState.currentModule ?? 'interact');
-  const [queryInput, setQueryInput] = useState('');
+  const [activeModule, setActiveModule] = useState(initialState.currentModule ?? "interact");
+  const [queryInput, setQueryInput] = useState("");
   const [queryResults, setQueryResults] = useState<any[]>([]);
   const [isExecuting, setIsExecuting] = useState(false);
   const [actionLog, setActionLog] = useState<string[]>([]);
@@ -194,8 +156,8 @@ export function ConsoleSimulator({
   // Log action to terminal
   const logAction = (action: string) => {
     const timestamp = new Date().toLocaleTimeString();
-    setActionLog((prev) => [...prev, `[${timestamp}] ${action}`]);
-
+    setActionLog(prev => [...prev, `[${timestamp}] ${action}`]);
+    
     // Scroll to bottom
     setTimeout(() => {
       if (terminalRef.current) {
@@ -207,16 +169,16 @@ export function ConsoleSimulator({
   // Handle module navigation
   const handleModuleClick = (moduleId: string) => {
     if (readOnly) return;
-
+    
     setActiveModule(moduleId);
-    const newState = { ...consoleState, currentModule: moduleId, currentView: 'main' };
+    const newState = { ...consoleState, currentModule: moduleId, currentView: "main" };
     setConsoleState(newState);
     onStateChange(newState);
-
+    
     logAction(`Navigated to ${moduleId} module`);
     onAction({
       id: `nav-${moduleId}`,
-      type: 'navigate',
+      type: "navigate",
       target: moduleId,
       description: `Navigate to ${moduleId} module`,
       isOptional: false,
@@ -231,19 +193,19 @@ export function ConsoleSimulator({
     logAction(`Executing query: "${queryInput}"`);
 
     // Simulate query execution
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+    await new Promise(resolve => setTimeout(resolve, 2000));
 
     // Generate mock results based on query
     const mockResults = generateMockResults(queryInput);
     setQueryResults(mockResults);
-
+    
     // Save query to state
     const newQuery: SavedQuery = {
       id: `query-${Date.now()}`,
       name: `Query ${consoleState.queries.length + 1}`,
       question: queryInput,
       sensors: extractSensors(queryInput),
-      targeting: { type: 'all-computers' },
+      targeting: { type: "all-computers" },
       results: mockResults,
       lastExecuted: new Date().toISOString(),
       shared: false,
@@ -260,25 +222,25 @@ export function ConsoleSimulator({
     logAction(`Query completed - ${mockResults.length} results returned`);
 
     onAction({
-      id: 'execute-query',
-      type: 'input',
-      target: 'query-field',
+      id: "execute-query",
+      type: "input",
+      target: "query-field",
       value: queryInput,
-      description: 'Execute Tanium query',
+      description: "Execute Tanium query",
       isOptional: false,
     });
   };
 
   // Generate mock results based on query
-  const generateMockResults = (_query: string): any[] => {
+  const generateMockResults = (query: string): any[] => {
     const baseCount = Math.floor(Math.random() * 100) + 50;
     return Array.from({ length: baseCount }, (_, i) => ({
       computerId: `comp-${i + 1}`,
       computerName: `PC-${String(i + 1).padStart(4, '0')}`,
       data: {
-        'Computer Name': `PC-${String(i + 1).padStart(4, '0')}`,
-        'Operating System': Math.random() > 0.3 ? 'Windows 10' : 'Windows Server 2019',
-        'IP Address': `192.168.${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}`,
+        "Computer Name": `PC-${String(i + 1).padStart(4, '0')}`,
+        "Operating System": Math.random() > 0.3 ? "Windows 10" : "Windows Server 2019",
+        "IP Address": `192.168.${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}`,
       },
       timestamp: new Date().toISOString(),
     }));
@@ -286,27 +248,24 @@ export function ConsoleSimulator({
 
   // Extract sensors from query
   const extractSensors = (query: string): string[] => {
-    const commonSensors = [
-      'Computer Name',
-      'Operating System',
-      'IP Address',
-      'Last Logged In User',
-    ];
-    return commonSensors.filter((sensor) => query.toLowerCase().includes(sensor.toLowerCase()));
+    const commonSensors = ["Computer Name", "Operating System", "IP Address", "Last Logged In User"];
+    return commonSensors.filter(sensor => 
+      query.toLowerCase().includes(sensor.toLowerCase())
+    );
   };
 
   // Create computer group
   const handleCreateGroup = () => {
     if (readOnly) return;
 
-    const groupName = prompt('Enter computer group name:');
+    const groupName = prompt("Enter computer group name:");
     if (!groupName) return;
 
     const newGroup: ComputerGroup = {
       id: `group-${Date.now()}`,
       name: groupName,
-      type: 'dynamic',
-      description: 'User-created group',
+      type: "dynamic",
+      description: "User-created group",
       memberCount: Math.floor(Math.random() * 500) + 10,
       lastUpdated: new Date().toISOString(),
     };
@@ -320,10 +279,10 @@ export function ConsoleSimulator({
 
     logAction(`Created computer group: ${groupName}`);
     onAction({
-      id: 'create-group',
-      type: 'click',
-      target: 'create-group-button',
-      description: 'Create new computer group',
+      id: "create-group",
+      type: "click",
+      target: "create-group-button",
+      description: "Create new computer group",
       isOptional: false,
     });
   };
@@ -334,20 +293,13 @@ export function ConsoleSimulator({
 
   const getModuleIcon = (moduleId: string) => {
     switch (moduleId) {
-      case 'interact':
-        return <Search className="h-4 w-4" />;
-      case 'deploy':
-        return <Zap className="h-4 w-4" />;
-      case 'asset':
-        return <Database className="h-4 w-4" />;
-      case 'administration':
-        return <Settings className="h-4 w-4" />;
-      case 'patch':
-        return <Shield className="h-4 w-4" />;
-      case 'threat-response':
-        return <AlertTriangle className="h-4 w-4" />;
-      default:
-        return <Terminal className="h-4 w-4" />;
+      case "interact": return <Search className="h-4 w-4" />;
+      case "deploy": return <Zap className="h-4 w-4" />;
+      case "asset": return <Database className="h-4 w-4" />;
+      case "administration": return <Settings className="h-4 w-4" />;
+      case "patch": return <Shield className="h-4 w-4" />;
+      case "threat-response": return <AlertTriangle className="h-4 w-4" />;
+      default: return <Terminal className="h-4 w-4" />;
     }
   };
 
@@ -365,7 +317,9 @@ export function ConsoleSimulator({
                   Platform 7.5
                 </Badge>
               </div>
-              <div className="text-sm text-muted-foreground">{formatTime(currentTime)}</div>
+              <div className="text-sm text-muted-foreground">
+                {formatTime(currentTime)}
+              </div>
             </div>
             <div className="flex items-center space-x-2">
               <Badge variant="outline" className="border-blue-500 text-primary">
@@ -385,14 +339,14 @@ export function ConsoleSimulator({
             {mockModules.map((module) => (
               <Button
                 key={module.id}
-                variant={activeModule === module.id ? 'default' : 'ghost'}
+                variant={activeModule === module.id ? "default" : "ghost"}
                 size="sm"
                 onClick={() => handleModuleClick(module.id)}
                 disabled={readOnly}
                 className={`flex items-center space-x-2 ${
-                  activeModule === module.id
-                    ? 'bg-tanium-accent hover:bg-blue-600'
-                    : 'text-muted-foreground hover:text-foreground'
+                  activeModule === module.id 
+                    ? "bg-tanium-accent hover:bg-blue-600" 
+                    : "text-muted-foreground hover:text-foreground"
                 }`}
               >
                 {getModuleIcon(module.id)}
@@ -459,9 +413,7 @@ export function ConsoleSimulator({
                               className="flex justify-between py-1 text-sm border-b border-gray-700 last:border-0"
                             >
                               <span className="text-foreground">{result.computerName}</span>
-                              <span className="text-muted-foreground">
-                                {result.data['Operating System']}
-                              </span>
+                              <span className="text-muted-foreground">{result.data["Operating System"]}</span>
                             </div>
                           ))}
                           {queryResults.length > 10 && (
@@ -494,9 +446,7 @@ export function ConsoleSimulator({
                         </div>
                         <div className="flex items-center space-x-2">
                           {query.shared && (
-                            <Badge variant="outline" className="text-xs">
-                              Shared
-                            </Badge>
+                            <Badge variant="outline" className="text-xs">Shared</Badge>
                           )}
                           <Button size="sm" variant="ghost" disabled={readOnly}>
                             <Play className="h-3 w-3" />
@@ -538,13 +488,9 @@ export function ConsoleSimulator({
                         <div>
                           <div className="flex items-center space-x-2">
                             <span className="font-medium text-foreground">{group.name}</span>
-                            <Badge
-                              variant="outline"
-                              className={
-                                group.type === 'dynamic'
-                                  ? 'border-blue-500 text-primary'
-                                  : 'border-gray-500 text-muted-foreground'
-                              }
+                            <Badge 
+                              variant="outline" 
+                              className={group.type === 'dynamic' ? "border-blue-500 text-primary" : "border-gray-500 text-muted-foreground"}
                             >
                               {group.type}
                             </Badge>
@@ -552,9 +498,7 @@ export function ConsoleSimulator({
                           <div className="text-sm text-muted-foreground">{group.description}</div>
                         </div>
                         <div className="text-right">
-                          <div className="font-medium text-foreground">
-                            {group.memberCount.toLocaleString()}
-                          </div>
+                          <div className="font-medium text-foreground">{group.memberCount.toLocaleString()}</div>
                           <div className="text-xs text-muted-foreground">endpoints</div>
                         </div>
                       </div>
@@ -607,9 +551,9 @@ export function ConsoleSimulator({
                     <div
                       key={action.id}
                       className={`flex items-center space-x-2 p-2 rounded text-sm ${
-                        index < (currentStep ?? 0)
-                          ? 'bg-[#22c55e]/10 border border-green-500/50'
-                          : 'bg-gray-500/10 border border-gray-500/50'
+                        index < (currentStep ?? 0) 
+                          ? "bg-[#22c55e]/10 border border-green-500/50" 
+                          : "bg-gray-500/10 border border-gray-500/50"
                       }`}
                     >
                       {index < (currentStep ?? 0) ? (
@@ -617,11 +561,7 @@ export function ConsoleSimulator({
                       ) : (
                         <Clock className="h-4 w-4 text-muted-foreground" />
                       )}
-                      <span
-                        className={
-                          index < (currentStep ?? 0) ? 'text-[#22c55e]' : 'text-muted-foreground'
-                        }
-                      >
+                      <span className={index < (currentStep ?? 0) ? "text-[#22c55e]" : "text-muted-foreground"}>
                         {action.description}
                       </span>
                     </div>

@@ -3,9 +3,9 @@
  * Glob-based discovery and metadata aggregation for MDX modules
  */
 
-import fs from 'node:fs/promises';
-import path from 'node:path';
-import { type MDXFrontmatter, MDXValidationError, validateFrontmatter } from './mdx-schema';
+import fs from "fs/promises";
+import path from "path";
+import { type MDXFrontmatter, validateFrontmatter, MDXValidationError } from "./mdx-schema";
 
 export interface ModuleMetadata extends MDXFrontmatter {
   slug: string;
@@ -21,29 +21,29 @@ export interface ContentDiscoveryResult {
   validModules: number;
 }
 
-const MODULES_DIR = path.join(process.cwd(), 'src/content/modules');
+const MODULES_DIR = path.join(process.cwd(), "src/content/modules");
 const CONTENT_PATTERN = /\.mdx?$/;
 
 // Extract frontmatter from MDX content
 function extractFrontmatter(content: string): unknown {
   const frontmatterMatch = content.match(/^---\n([\s\S]*?)\n---/);
   if (!frontmatterMatch) {
-    throw new Error('No frontmatter found');
+    throw new Error("No frontmatter found");
   }
 
   const frontmatterYaml = frontmatterMatch[1];
 
   // Simple YAML parser for our specific frontmatter structure
-  const lines = frontmatterYaml.split('\n');
+  const lines = frontmatterYaml.split("\n");
   const result: any = {};
-  let currentKey = '';
+  let currentKey = "";
   let isArray = false;
 
   for (const line of lines) {
     const trimmed = line.trim();
     if (!trimmed) continue;
 
-    if (trimmed.startsWith('- ')) {
+    if (trimmed.startsWith("- ")) {
       // Array item
       if (isArray && currentKey) {
         if (!Array.isArray(result[currentKey])) {
@@ -51,28 +51,28 @@ function extractFrontmatter(content: string): unknown {
         }
         result[currentKey].push(trimmed.substring(2).trim());
       }
-    } else if (trimmed.includes(':')) {
+    } else if (trimmed.includes(":")) {
       // Key-value pair
-      const [key, ...valueParts] = trimmed.split(':');
-      const value = valueParts.join(':').trim();
+      const [key, ...valueParts] = trimmed.split(":");
+      const value = valueParts.join(":").trim();
 
       currentKey = key.trim();
       isArray = false;
 
-      if (value === '') {
+      if (value === "") {
         // This might start an array
         isArray = true;
         result[currentKey] = [];
-      } else if (value.startsWith('[') && value.endsWith(']')) {
+      } else if (value.startsWith("[") && value.endsWith("]")) {
         // Inline array
         const arrayContent = value.slice(1, -1);
-        result[currentKey] = arrayContent.split(',').map((item) => item.trim());
-      } else if (value === 'true' || value === 'false') {
-        result[currentKey] = value === 'true';
-      } else if (!Number.isNaN(Number(value))) {
+        result[currentKey] = arrayContent.split(",").map((item) => item.trim());
+      } else if (value === "true" || value === "false") {
+        result[currentKey] = value === "true";
+      } else if (!isNaN(Number(value))) {
         result[currentKey] = Number(value);
       } else {
-        result[currentKey] = value.replace(/['"]/g, '');
+        result[currentKey] = value.replace(/['"]/g, "");
       }
     }
   }
@@ -90,8 +90,8 @@ function calculateReadingTime(content: string): number {
 // Get module slug from filename
 function getSlugFromFilename(filename: string): string {
   return filename
-    .replace(/^\d+-/, '') // Remove number prefix
-    .replace(/\.mdx?$/, '') // Remove extension
+    .replace(/^\d+-/, "") // Remove number prefix
+    .replace(/\.mdx?$/, "") // Remove extension
     .toLowerCase();
 }
 
@@ -101,14 +101,21 @@ export async function discoverModules(): Promise<ContentDiscoveryResult> {
 
   try {
     const files = await fs.readdir(MODULES_DIR);
-    const mdxFiles = files.filter((file) => CONTENT_PATTERN.test(file));
+    const mdxFiles = files.filter((file) => {
+      // Only include .mdx files, exclude experimental and example files
+      return (
+        CONTENT_PATTERN.test(file) &&
+        !file.includes("experimental") &&
+        !file.includes("EXAMPLE")
+      );
+    });
 
     for (const file of mdxFiles) {
       const filePath = path.join(MODULES_DIR, file);
       const slug = getSlugFromFilename(file);
 
       try {
-        const content = await fs.readFile(filePath, 'utf-8');
+        const content = await fs.readFile(filePath, "utf-8");
         const frontmatter = extractFrontmatter(content);
         const validatedFrontmatter = validateFrontmatter(frontmatter);
 
@@ -132,9 +139,9 @@ export async function discoverModules(): Promise<ContentDiscoveryResult> {
     }
   } catch (error) {
     const discoveryError = new MDXValidationError(
-      'content-discovery',
+      "content-discovery",
       `Failed to read modules directory: ${error}`,
-      'Ensure src/content/modules directory exists'
+      "Ensure src/content/modules directory exists"
     );
     errors.push(discoveryError);
   }

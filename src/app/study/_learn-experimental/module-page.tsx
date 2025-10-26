@@ -1,13 +1,13 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import { useEffect, useMemo, useRef, useState } from 'react';
-import MicroSectionProgressGrid from '@/components/progress/MicroSectionProgressGrid';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { isLearnExperimentalEnabled } from '@/lib/flags/learnExperimental';
-import { emitLearnExp } from '@/lib/telemetry/learnExperimental';
+import { useEffect, useMemo, useRef, useState } from "react";
+import Link from "next/link";
+import { Badge } from "@/components/ui/badge";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import MicroSectionProgressGrid from "@/components/progress/MicroSectionProgressGrid";
+import { isLearnExperimentalEnabled } from "@/lib/flags/learnExperimental";
+import { emitLearnExp } from "@/lib/telemetry/learnExperimental";
 
 interface SectionConfig {
   id: string;
@@ -45,7 +45,7 @@ interface SectionProgressState {
 }
 
 function buildSectionProgress(config: LearnExperimentalModuleConfig): SectionProgressState[] {
-  if (typeof window === 'undefined') {
+  if (typeof window === "undefined") {
     return config.sections.map((section) => ({
       id: section.id,
       title: section.title,
@@ -60,7 +60,7 @@ function buildSectionProgress(config: LearnExperimentalModuleConfig): SectionPro
 
   const completionStates = config.sections.map((section) => {
     const key = `micro-section-${config.moduleId}-${section.id}`;
-    return localStorage.getItem(key) === 'true';
+    return localStorage.getItem(key) === "true";
   });
 
   const firstIncomplete = completionStates.findIndex((state) => !state);
@@ -79,9 +79,7 @@ function buildSectionProgress(config: LearnExperimentalModuleConfig): SectionPro
 }
 
 function useModuleProgress(config: LearnExperimentalModuleConfig, enabled: boolean) {
-  const [sections, setSections] = useState<SectionProgressState[]>(() =>
-    buildSectionProgress(config)
-  );
+  const [sections, setSections] = useState<SectionProgressState[]>(() => buildSectionProgress(config));
 
   useEffect(() => {
     if (!enabled) return;
@@ -90,11 +88,11 @@ function useModuleProgress(config: LearnExperimentalModuleConfig, enabled: boole
     update();
 
     const interval = window.setInterval(update, 2500);
-    window.addEventListener('focus', update);
+    window.addEventListener("focus", update);
 
     return () => {
       window.clearInterval(interval);
-      window.removeEventListener('focus', update);
+      window.removeEventListener("focus", update);
     };
   }, [config, enabled]);
 
@@ -111,7 +109,7 @@ function useModuleProgress(config: LearnExperimentalModuleConfig, enabled: boole
       {
         moduleId: config.moduleId,
         moduleName: config.title,
-        color: config.accentColor ?? 'bg-primary',
+        color: config.accentColor ?? "bg-primary",
         totalSections,
         completedSections,
         totalMinutes,
@@ -136,10 +134,7 @@ export function createLearnExperimentalModulePage(config: LearnExperimentalModul
     const [enabled, setEnabled] = useState(enabledServer);
     const [loadingModule, setLoadingModule] = useState(true);
     const [ModuleComponent, setModuleComponent] = useState<React.ComponentType<any> | null>(null);
-    const { modules, sections, completedSections, totalSections } = useModuleProgress(
-      config,
-      enabled
-    );
+    const { modules, sections, completedSections, totalSections } = useModuleProgress(config, enabled);
     const moduleCompleteEmitted = useRef(false);
     const unitCompletionRef = useRef<Record<string, boolean>>({});
     const unitStartRef = useRef<Record<string, boolean>>({});
@@ -171,14 +166,14 @@ export function createLearnExperimentalModulePage(config: LearnExperimentalModul
       return () => {
         active = false;
       };
-    }, [enabled, config]);
+    }, [enabled]);
 
     useEffect(() => {
       if (!enabled) return;
       emitLearnExp({
         moduleId: config.moduleId,
         unitId: `${config.moduleId}-overview`,
-        action: 'unit_start',
+        action: "unit_start",
       });
     }, [enabled, config.moduleId]);
 
@@ -190,7 +185,7 @@ export function createLearnExperimentalModulePage(config: LearnExperimentalModul
           emitLearnExp({
             moduleId: config.moduleId,
             unitId: section.id,
-            action: 'unit_start',
+            action: "unit_start",
           });
           unitStartRef.current[section.id] = true;
         }
@@ -200,7 +195,7 @@ export function createLearnExperimentalModulePage(config: LearnExperimentalModul
           emitLearnExp({
             moduleId: config.moduleId,
             unitId: section.id,
-            action: 'unit_complete',
+            action: "unit_complete",
           });
         }
         unitCompletionRef.current[section.id] = section.completed;
@@ -214,19 +209,19 @@ export function createLearnExperimentalModulePage(config: LearnExperimentalModul
         emitLearnExp({
           moduleId: config.moduleId,
           unitId: `${config.moduleId}-module`,
-          action: 'module_complete',
+          action: "module_complete",
         });
         moduleCompleteEmitted.current = true;
       }
     }, [enabled, completedSections, totalSections, config.moduleId]);
 
     const navItems = [
-      { href: '/study/01-learn-experimental', label: '01-L Asking Questions' },
-      { href: '/study/02-learn-experimental', label: '02-L Refining & Targeting' },
-      { href: '/study/03-learn-experimental', label: '03-L Taking Action' },
-      { href: '/study/04-learn-experimental', label: '04-L Navigation & Modules' },
-      { href: '/study/05-learn-experimental', label: '05-L Reporting & Export' },
-      { href: '/study/compare-learning', label: 'Compare', subtle: true },
+      { href: "/study/01-learn-experimental", label: "01-L Asking Questions" },
+      { href: "/study/02-learn-experimental", label: "02-L Refining & Targeting" },
+      { href: "/study/03-learn-experimental", label: "03-L Taking Action" },
+      { href: "/study/04-learn-experimental", label: "04-L Navigation & Modules" },
+      { href: "/study/05-learn-experimental", label: "05-L Reporting & Export" },
+      { href: "/study/compare-learning", label: "Compare", subtle: true },
     ];
 
     if (!enabled) {
@@ -242,13 +237,9 @@ export function createLearnExperimentalModulePage(config: LearnExperimentalModul
             <CardContent className="space-y-3 text-sm text-muted-foreground">
               <p>
                 The Learn-style modules are behind a feature flag. Launch the dev server with
-                <code className="ml-1 rounded bg-card px-2 py-1 text-xs">
-                  NEXT_PUBLIC_LEARN_EXPERIMENTAL=1
-                </code>
+                <code className="ml-1 rounded bg-card px-2 py-1 text-xs">NEXT_PUBLIC_LEARN_EXPERIMENTAL=1</code>
                 or append
-                <code className="ml-1 rounded bg-card px-2 py-1 text-xs">
-                  ?path=learn-experimental
-                </code>
+                <code className="ml-1 rounded bg-card px-2 py-1 text-xs">?path=learn-experimental</code>
                 to the URL.
               </p>
               <div className="pt-2">
@@ -273,10 +264,7 @@ export function createLearnExperimentalModulePage(config: LearnExperimentalModul
       );
     }
 
-    const totalMinutes = config.sections.reduce(
-      (sum, section) => sum + section.estimatedMinutes,
-      0
-    );
+    const totalMinutes = config.sections.reduce((sum, section) => sum + section.estimatedMinutes, 0);
 
     return (
       <div className="mx-auto max-w-6xl space-y-10 px-4 py-10">
@@ -284,19 +272,19 @@ export function createLearnExperimentalModulePage(config: LearnExperimentalModul
           {navItems.map((item) => {
             const isActive = item.href === config.route;
             const baseClasses =
-              'inline-flex items-center gap-2 rounded-lg px-3 py-1.5 text-sm transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60';
+              "inline-flex items-center gap-2 rounded-lg px-3 py-1.5 text-sm transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60";
             const activeClasses =
-              'bg-gradient-to-r from-primary/30 via-primary/20 to-primary/30 text-foreground border border-primary/60 shadow-[0_8px_22px_-12px_rgba(96,165,250,0.85)]';
+              "bg-gradient-to-r from-primary/30 via-primary/20 to-primary/30 text-foreground border border-primary/60 shadow-[0_8px_22px_-12px_rgba(96,165,250,0.85)]";
             const inactiveClasses = item.subtle
-              ? 'text-muted-foreground hover:text-primary/90 focus-visible:ring-1 focus-visible:ring-primary/40'
-              : 'text-slate-100 border border-transparent hover:border-primary/40 hover:bg-primary/10 hover:text-primary';
+              ? "text-muted-foreground hover:text-primary/90 focus-visible:ring-1 focus-visible:ring-primary/40"
+              : "text-slate-100 border border-transparent hover:border-primary/40 hover:bg-primary/10 hover:text-primary";
 
             return (
               <Link
                 key={item.href}
                 href={item.href}
-                aria-current={isActive ? 'page' : undefined}
-                data-active={isActive ? 'true' : undefined}
+                aria-current={isActive ? "page" : undefined}
+                data-active={isActive ? "true" : undefined}
                 className={`${baseClasses} ${isActive ? activeClasses : inactiveClasses}`}
               >
                 {item.label}
@@ -322,9 +310,7 @@ export function createLearnExperimentalModulePage(config: LearnExperimentalModul
           <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
             <span>Total units: {config.sections.length}</span>
             <span>Estimated time: {totalMinutes} min</span>
-            <span>
-              Completion: {completedSections}/{totalSections}
-            </span>
+            <span>Completion: {completedSections}/{totalSections}</span>
           </div>
         </header>
 
@@ -341,17 +327,14 @@ export function createLearnExperimentalModulePage(config: LearnExperimentalModul
           </div>
           <div className="grid gap-4 md:grid-cols-2">
             {config.labs.map((lab) => (
-              <Card
-                key={lab.href}
-                className="border-border/50 bg-slate-950/40 transition hover:border-primary/50"
-              >
+              <Card key={lab.href} className="border-border/50 bg-slate-950/40 transition hover:border-primary/50">
                 <CardHeader>
                   <CardTitle className="text-lg text-foreground">{lab.title}</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-3 text-sm text-muted-foreground">
                   {lab.description ? <p>{lab.description}</p> : null}
                   <div className="flex items-center justify-between text-xs text-muted-foreground/80">
-                    <span>{lab.estimatedMinutes ? `${lab.estimatedMinutes} min` : '5–10 min'}</span>
+                    <span>{lab.estimatedMinutes ? `${lab.estimatedMinutes} min` : "5–10 min"}</span>
                     <Link
                       href={lab.href}
                       className="text-primary underline-offset-4 hover:underline"

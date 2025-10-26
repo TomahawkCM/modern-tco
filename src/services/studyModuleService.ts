@@ -4,6 +4,7 @@
  */
 
 import { supabase } from '@/lib/supabase';
+import type { TCODomain } from '@/types/exam';
 
 export interface StudyModule {
   id: string;
@@ -26,13 +27,7 @@ export interface StudySection {
   module_id: string;
   title: string;
   content: string;
-  section_type:
-    | 'overview'
-    | 'learning_objectives'
-    | 'procedures'
-    | 'troubleshooting'
-    | 'exam_prep'
-    | 'references';
+  section_type: 'overview' | 'learning_objectives' | 'procedures' | 'troubleshooting' | 'exam_prep' | 'references';
   order_index: number;
   estimated_time_minutes: number;
   key_points: string[];
@@ -109,14 +104,9 @@ class StudyModuleService {
       const domainVariants = [
         domain,
         domain.replace(/-/g, '_').toUpperCase(),
-        domain
-          .split('-')
-          .map((word, idx) =>
-            idx === 0
-              ? word.charAt(0).toUpperCase() + word.slice(1)
-              : word.charAt(0).toUpperCase() + word.slice(1)
-          )
-          .join(' '),
+        domain.split('-').map((word, idx) =>
+          idx === 0 ? word.charAt(0).toUpperCase() + word.slice(1) : word.charAt(0).toUpperCase() + word.slice(1)
+        ).join(' ')
       ];
 
       const { data, error } = await supabase
@@ -126,8 +116,7 @@ class StudyModuleService {
         .limit(1)
         .single();
 
-      if (error && error.code !== 'PGRST116') {
-        // PGRST116 is "no rows returned"
+      if (error && error.code !== 'PGRST116') { // PGRST116 is "no rows returned"
         console.error('Error fetching module by domain:', error);
         return null;
       }
@@ -165,13 +154,12 @@ class StudyModuleService {
   /**
    * Get user progress for a module or domain
    */
-  async getUserProgress(
-    userId: string,
-    domain?: string,
-    moduleId?: string
-  ): Promise<StudyProgress | null> {
+  async getUserProgress(userId: string, domain?: string, moduleId?: string): Promise<StudyProgress | null> {
     try {
-      let query = supabase.from('user_study_progress').select('*').eq('user_id', userId);
+      let query = supabase
+        .from('user_study_progress')
+        .select('*')
+        .eq('user_id', userId);
 
       if (moduleId) {
         query = query.eq('module_id', moduleId);
@@ -198,10 +186,12 @@ class StudyModuleService {
    */
   async updateUserProgress(progress: Partial<StudyProgress>): Promise<boolean> {
     try {
-      const { error } = await supabase.from('user_study_progress').upsert(progress as any, {
-        onConflict: 'user_id,domain',
-        ignoreDuplicates: false,
-      });
+      const { error } = await supabase
+        .from('user_study_progress')
+        .upsert(progress as any, {
+          onConflict: 'user_id,domain',
+          ignoreDuplicates: false
+        });
 
       if (error) {
         console.error('Error updating progress:', error);
@@ -218,9 +208,7 @@ class StudyModuleService {
   /**
    * Get modules with progress for a user
    */
-  async getModulesWithProgress(
-    userId?: string
-  ): Promise<(StudyModule & { progress?: number; completedSections?: number })[]> {
+  async getModulesWithProgress(userId?: string): Promise<(StudyModule & { progress?: number; completedSections?: number })[]> {
     try {
       const modules = await this.getAllModules();
 
@@ -235,15 +223,15 @@ class StudyModuleService {
         .eq('user_id', userId);
 
       // Map progress to modules
-      const modulesWithProgress = modules.map((module) => {
-        const progress = (progressData as any)?.find(
-          (p: any) => p.module_id === module.id || p.domain === module.domain
+      const modulesWithProgress = modules.map(module => {
+        const progress = (progressData as any)?.find((p: any) =>
+          p.module_id === module.id || p.domain === module.domain
         );
 
         return {
           ...module,
           progress: progress?.completion_percentage || 0,
-          completedSections: progress?.completed_sections?.length || 0,
+          completedSections: progress?.completed_sections?.length || 0
         };
       });
 
@@ -283,7 +271,7 @@ class StudyModuleService {
         completed_sections: completedSections,
         total_sections: sections.length,
         completion_percentage: completionPercentage,
-        last_accessed_at: new Date().toISOString(),
+        last_accessed_at: new Date().toISOString()
       });
     } catch (err) {
       console.error('Error marking section complete:', err);

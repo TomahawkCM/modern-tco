@@ -1,24 +1,32 @@
-'use client';
+"use client";
 
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Progress } from "@/components/ui/progress";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
-  BookOpen,
   CheckCircle,
-  ChevronLeft,
-  ChevronRight,
-  Download,
-  RotateCcw,
-  Share2,
+  XCircle,
+  Clock,
   Target,
   TrendingUp,
-  XCircle,
-} from 'lucide-react';
-import { useState } from 'react';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Progress } from '@/components/ui/progress';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import type { AssessmentResult, AssessmentSession, RemediationPlan } from '@/types/assessment';
+  BookOpen,
+  RotateCcw,
+  Download,
+  Share2,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
+import {
+  type AssessmentResult,
+  type AssessmentSession,
+  QuestionResponse,
+  type RemediationPlan,
+  ObjectiveRemediation,
+} from "@/types/assessment";
 
 interface ReviewModeProps {
   result: AssessmentResult;
@@ -36,11 +44,11 @@ export function ReviewMode({
   onExitReview,
 }: ReviewModeProps) {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [selectedTab, setSelectedTab] = useState('overview');
+  const [selectedTab, setSelectedTab] = useState("overview");
   const [showExplanations, setShowExplanations] = useState(true);
 
   const currentQuestion = session.questions[currentQuestionIndex];
-  const currentResponse = session.responses[currentQuestion.id];
+  const currentResponse = (session.responses)[currentQuestion.id];
   const isCorrect = currentResponse?.selectedAnswer === currentQuestion.correctAnswer;
 
   const formatTime = (seconds: number): string => {
@@ -59,21 +67,21 @@ export function ReviewMode({
   };
 
   const getScoreColor = (score: number): string => {
-    if (score >= 0.8) return 'text-[#22c55e]';
-    if (score >= 0.7) return 'text-yellow-600';
-    return 'text-red-600';
+    if (score >= 0.8) return "text-[#22c55e]";
+    if (score >= 0.7) return "text-yellow-600";
+    return "text-red-600";
   };
 
   const getScoreBadgeVariant = (score: number) => {
-    if (score >= 0.8) return 'default'; // green
-    if (score >= 0.7) return 'secondary'; // yellow
-    return 'destructive'; // red
+    if (score >= 0.8) return "default"; // green
+    if (score >= 0.7) return "secondary"; // yellow
+    return "destructive"; // red
   };
 
   const handleExportResults = () => {
     const exportData = {
       assessment: {
-        type: result.assessment?.type ?? 'practice',
+        type: result.assessment?.type ?? "practice",
         completedAt: result.completedAt,
         duration: result.totalTime ?? 0,
       },
@@ -87,11 +95,11 @@ export function ReviewMode({
       remediationPlan: result.remediationPlan,
     };
 
-    const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json' });
+    const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: "application/json" });
     const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
+    const a = document.createElement("a");
     a.href = url;
-    a.download = `tcо-assessment-results-${new Date().toISOString().split('T')[0]}.json`;
+    a.download = `tcо-assessment-results-${new Date().toISOString().split("T")[0]}.json`;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -109,8 +117,8 @@ export function ReviewMode({
               <Badge variant={getScoreBadgeVariant(result.overallScore)}>
                 {formatPercentage(result.overallScore)}
               </Badge>
-              <Badge variant={result.passed ? 'default' : 'destructive'}>
-                {result.passed ? 'PASSED' : 'FAILED'}
+              <Badge variant={result.passed ? "default" : "destructive"}>
+                {result.passed ? "PASSED" : "FAILED"}
               </Badge>
             </div>
 
@@ -247,7 +255,7 @@ export function ReviewMode({
                     <BookOpen className="mr-2 h-4 w-4" />
                     Start Study Plan
                   </Button>
-                  <Button variant="outline" onClick={() => setSelectedTab('remediation')}>
+                  <Button variant="outline" onClick={() => setSelectedTab("remediation")}>
                     View Recommendations
                   </Button>
                 </div>
@@ -266,23 +274,22 @@ export function ReviewMode({
                 <CardContent>
                   <div className="mb-4 grid grid-cols-5 gap-2">
                     {session.questions.map((question, index) => {
-                      const response = session.responses[question.id];
+                      const response = (session.responses)[question.id];
                       const isCurrentQuestion = index === currentQuestionIndex;
                       const isAnswerCorrect = response?.selectedAnswer === question.correctAnswer;
 
                       return (
                         <button
-                          type="button"
                           key={index}
                           onClick={() => setCurrentQuestionIndex(index)}
                           className={`h-10 w-10 rounded-lg text-sm font-semibold transition-all ${
                             isCurrentQuestion
-                              ? 'bg-blue-600 text-foreground'
+                              ? "bg-blue-600 text-foreground"
                               : isAnswerCorrect
-                                ? 'border border-green-300 bg-green-100 text-green-700'
+                                ? "border border-green-300 bg-green-100 text-green-700"
                                 : response
-                                  ? 'border border-red-300 bg-red-100 text-red-700'
-                                  : 'bg-gray-100 text-muted-foreground'
+                                  ? "border border-red-300 bg-red-100 text-red-700"
+                                  : "bg-gray-100 text-muted-foreground"
                           }`}
                         >
                           {index + 1}
@@ -355,27 +362,27 @@ export function ReviewMode({
                             key={option.id}
                             className={`rounded-lg border-2 p-3 ${
                               isCorrectAnswer
-                                ? 'border-green-500 bg-green-50'
+                                ? "border-green-500 bg-green-50"
                                 : isSelectedAnswer && !isCorrectAnswer
-                                  ? 'border-red-500 bg-red-50'
-                                  : 'border-gray-200 bg-white'
+                                  ? "border-red-500 bg-red-50"
+                                  : "border-gray-200 bg-white"
                             }`}
                           >
                             <div className="flex items-start space-x-3">
                               <div
                                 className={`flex h-6 w-6 items-center justify-center rounded-full border-2 text-xs font-semibold ${
                                   isCorrectAnswer
-                                    ? 'border-green-500 bg-[#22c55e] text-foreground'
+                                    ? "border-green-500 bg-[#22c55e] text-foreground"
                                     : isSelectedAnswer
-                                      ? 'border-red-500 bg-red-500 text-foreground'
-                                      : 'border-gray-300 text-muted-foreground'
+                                      ? "border-red-500 bg-red-500 text-foreground"
+                                      : "border-gray-300 text-muted-foreground"
                                 }`}
                               >
                                 {optionLetter}
                               </div>
                               <div className="flex-1">
                                 <span
-                                  className={isCorrectAnswer ? 'font-medium text-green-800' : ''}
+                                  className={isCorrectAnswer ? "font-medium text-green-800" : ""}
                                 >
                                   {option.text}
                                 </span>
@@ -426,7 +433,7 @@ export function ReviewMode({
                       size="sm"
                       onClick={() => setShowExplanations(!showExplanations)}
                     >
-                      {showExplanations ? 'Hide' : 'Show'} Explanations
+                      {showExplanations ? "Hide" : "Show"} Explanations
                     </Button>
 
                     <Button
@@ -535,7 +542,7 @@ export function ReviewMode({
                           <div className="mb-2 flex items-center justify-between">
                             <h4 className="font-medium">{objective.objectiveId}</h4>
                             <Badge
-                              variant={objective.priority === 'high' ? 'destructive' : 'secondary'}
+                              variant={objective.priority === "high" ? "destructive" : "secondary"}
                             >
                               {objective.priority} priority
                             </Badge>
@@ -584,7 +591,7 @@ export function ReviewMode({
                       </div>
                       <div>
                         <div className="text-2xl font-bold text-orange-600">
-                          {(result.remediationPlan ?? result.remediation)?.canRetake ? 'Yes' : 'No'}
+                          {(result.remediationPlan ?? result.remediation)?.canRetake ? "Yes" : "No"}
                         </div>
                         <div className="text-sm text-gray-600">Ready to Retake</div>
                       </div>

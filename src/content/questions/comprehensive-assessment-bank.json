@@ -1,0 +1,2411 @@
+{
+  "meta": {
+    "title": "TCO Comprehensive Assessment Question Bank",
+    "version": "1.0.0",
+    "created": "2024-09-24",
+    "totalQuestions": 140,
+    "moduleDistribution": {
+      "foundation": 30,
+      "asking-questions": 25,
+      "refining-questions": 25,
+      "taking-action": 20,
+      "navigation": 25,
+      "reporting-export": 15
+    },
+    "difficultyDistribution": {
+      "beginner": 56,
+      "intermediate": 56,
+      "advanced": 28
+    },
+    "weightDistribution": {
+      "foundation": 0,
+      "asking-questions": 22,
+      "refining-questions": 23,
+      "taking-action": 15,
+      "navigation": 23,
+      "reporting-export": 17
+    }
+  },
+  "questions": [
+    {
+      "id": "foundation-001",
+      "module": "Foundation",
+      "domain": "Platform Architecture",
+      "question": "What is the primary architectural advantage of Tanium's Linear Chain Technology over traditional hub-and-spoke endpoint management systems?",
+      "options": [
+        "It requires more server hardware for better redundancy",
+        "It maintains constant network load regardless of endpoint count",
+        "It stores more historical data for trend analysis", 
+        "It uses encrypted database connections for security"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "beginner",
+      "explanation": "Linear Chain Technology ensures that network load remains constant as endpoints are added, unlike hub-and-spoke systems where each additional endpoint increases server and network burden proportionally.",
+      "tags": ["architecture", "linear-chain", "scalability"],
+      "weight": 1.0
+    },
+    {
+      "id": "foundation-002",
+      "module": "Foundation",
+      "domain": "Platform Terminology",
+      "question": "Which component collects specific types of information from endpoints in real-time?",
+      "options": [
+        "Actions",
+        "Packages",
+        "Sensors",
+        "Modules"
+      ],
+      "correctAnswer": 2,
+      "difficulty": "beginner", 
+      "explanation": "Sensors are components that collect specific types of information from endpoints, such as Computer Name, Running Processes, or Disk Space.",
+      "tags": ["sensors", "terminology", "data-collection"],
+      "weight": 1.0
+    },
+    {
+      "id": "foundation-003",
+      "module": "Foundation", 
+      "domain": "Communication Model",
+      "question": "In a Tanium deployment with 100,000 endpoints, what percentage of network bandwidth does Tanium typically consume during peak query activity?",
+      "options": [
+        "10-15%",
+        "5-10%",
+        "1-5%",
+        "Less than 0.1%"
+      ],
+      "correctAnswer": 3,
+      "difficulty": "intermediate",
+      "explanation": "Tanium's linear chain architecture consumes less than 0.1% of network bandwidth even during peak activity, regardless of scale.",
+      "tags": ["network-efficiency", "bandwidth", "performance"],
+      "weight": 1.2
+    },
+    {
+      "id": "foundation-004",
+      "module": "Foundation",
+      "domain": "Console Navigation", 
+      "question": "What is the primary module used for real-time endpoint querying and action deployment?",
+      "options": [
+        "Trends",
+        "Connect", 
+        "Interact",
+        "Patch"
+      ],
+      "correctAnswer": 2,
+      "difficulty": "beginner",
+      "explanation": "The Interact module is Tanium's core module for real-time endpoint querying and action deployment.",
+      "tags": ["interact", "modules", "console"],
+      "weight": 1.0
+    },
+    {
+      "id": "foundation-005",
+      "module": "Foundation",
+      "domain": "Platform Architecture",
+      "question": "How does Tanium's 'just-in-time' data collection model differ from traditional endpoint management approaches?",
+      "options": [
+        "It collects all data continuously and stores it in databases",
+        "It collects specific data only when requested, providing real-time results",
+        "It only collects data during scheduled maintenance windows",
+        "It requires manual data collection initiation by administrators"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "intermediate",
+      "explanation": "Tanium's just-in-time model collects specific data only when requested, ensuring data freshness while minimizing storage and network overhead.",
+      "tags": ["just-in-time", "data-collection", "architecture"],
+      "weight": 1.2
+    },
+    {
+      "id": "foundation-006",
+      "module": "Foundation",
+      "domain": "Platform Terminology",
+      "question": "What is a 'Package' in Tanium terminology?",
+      "options": [
+        "A single sensor that collects one type of data",
+        "A pre-configured bundle combining sensors, questions, and actions",
+        "A database table storing historical endpoint data",
+        "A network protocol for client-server communication"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "beginner",
+      "explanation": "A Package is a pre-configured bundle that combines sensors, questions, and actions to solve specific IT challenges, making complex workflows reusable.",
+      "tags": ["packages", "terminology", "workflow"],
+      "weight": 1.0
+    },
+    {
+      "id": "foundation-007",
+      "module": "Foundation",
+      "domain": "Scalability",
+      "question": "What is the typical response time for Tanium queries regardless of whether you have 1,000 or 1,000,000 endpoints?",
+      "options": [
+        "5 minutes",
+        "1 minute", 
+        "15 seconds",
+        "30 seconds"
+      ],
+      "correctAnswer": 2,
+      "difficulty": "beginner",
+      "explanation": "Tanium maintains a consistent 15-second response time regardless of scale due to its linear chain architecture.",
+      "tags": ["performance", "scalability", "response-time"],
+      "weight": 1.0
+    },
+    {
+      "id": "foundation-008",
+      "module": "Foundation",
+      "domain": "Communication Model",
+      "question": "In Tanium's Linear Chain architecture, how do endpoints communicate during a query?",
+      "options": [
+        "All endpoints connect directly to the server simultaneously",
+        "Endpoints form a chain where each communicates with its neighbors",
+        "A central database distributes queries to all endpoints",
+        "Endpoints communicate through dedicated relay servers"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "intermediate",
+      "explanation": "In Linear Chain architecture, endpoints form a communication chain where each endpoint communicates with its immediate neighbors, creating an efficient path from server to all endpoints.",
+      "tags": ["linear-chain", "communication", "architecture"],
+      "weight": 1.2
+    },
+    {
+      "id": "foundation-009",
+      "module": "Foundation",
+      "domain": "Role-Based Access",
+      "question": "Which role typically has full platform access and configuration capabilities?",
+      "options": [
+        "Tanium Operator",
+        "Read-Only Operator",
+        "Tanium Administrator",
+        "Question Author"
+      ],
+      "correctAnswer": 2,
+      "difficulty": "beginner",
+      "explanation": "Tanium Administrator role provides full platform access and configuration capabilities across all modules and functions.",
+      "tags": ["roles", "permissions", "administration"],
+      "weight": 1.0
+    },
+    {
+      "id": "foundation-010",
+      "module": "Foundation",
+      "domain": "Performance Benefits",
+      "question": "Compared to traditional endpoint management tools, what infrastructure cost reduction do organizations typically see with Tanium?",
+      "options": [
+        "20-30%",
+        "40-50%", 
+        "60-80%",
+        "90-95%"
+      ],
+      "correctAnswer": 2,
+      "difficulty": "intermediate",
+      "explanation": "Organizations typically see 60-80% reduction in server and storage costs due to Tanium's efficient architecture that eliminates the need for extensive database infrastructure.",
+      "tags": ["cost-savings", "infrastructure", "roi"],
+      "weight": 1.2
+    },
+    {
+      "id": "foundation-011",
+      "module": "Foundation",
+      "domain": "Platform Terminology",
+      "question": "What is an 'Action' in Tanium?",
+      "options": [
+        "A query that retrieves information from endpoints",
+        "An operation that makes changes to endpoints",
+        "A report showing historical trends",
+        "A dashboard displaying real-time metrics"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "beginner",
+      "explanation": "An Action is an operation that makes changes to endpoints, such as installing software, updating configurations, or running scripts.",
+      "tags": ["actions", "terminology", "endpoint-management"],
+      "weight": 1.0
+    },
+    {
+      "id": "foundation-012",
+      "module": "Foundation",
+      "domain": "Console Navigation",
+      "question": "Which module is primarily used for historical data analysis and trending?",
+      "options": [
+        "Interact",
+        "Trends",
+        "Connect", 
+        "Deploy"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "beginner",
+      "explanation": "The Trends module is designed for historical data analysis, trending, and creating reports based on data collected over time.",
+      "tags": ["trends", "modules", "historical-data"],
+      "weight": 1.0
+    },
+    {
+      "id": "foundation-013",
+      "module": "Foundation",
+      "domain": "Network Efficiency",
+      "question": "What happens to network utilization when traditional endpoint management tools scale from 10,000 to 100,000 endpoints?",
+      "options": [
+        "Network utilization remains constant",
+        "Network utilization increases proportionally by 10x",
+        "Network utilization decreases due to optimization",
+        "Network utilization doubles regardless of endpoint count"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "intermediate",
+      "explanation": "Traditional hub-and-spoke architectures see proportional increases in network utilization as endpoint counts grow, often overwhelming network infrastructure.",
+      "tags": ["traditional-tools", "network-utilization", "scalability"],
+      "weight": 1.2
+    },
+    {
+      "id": "foundation-014",
+      "module": "Foundation",
+      "domain": "Platform Architecture",
+      "question": "What is a key advantage of Tanium's 'self-organizing' chain capability?",
+      "options": [
+        "It requires manual configuration of all network paths",
+        "It automatically optimizes communication paths and routes around failures",
+        "It stores backup copies of all data locally",
+        "It increases network security through encryption"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "advanced",
+      "explanation": "Tanium's self-organizing capability allows the linear chain to automatically find optimal network paths and route around failed or slow endpoints without manual intervention.",
+      "tags": ["self-organizing", "fault-tolerance", "automation"],
+      "weight": 1.5
+    },
+    {
+      "id": "foundation-015",
+      "module": "Foundation",
+      "domain": "Business Impact",
+      "question": "What is the typical improvement in security incident response times for organizations using Tanium versus traditional tools?",
+      "options": [
+        "2x faster",
+        "5x faster",
+        "10x faster", 
+        "No significant improvement"
+      ],
+      "correctAnswer": 2,
+      "difficulty": "intermediate",
+      "explanation": "Organizations using Tanium report approximately 10x faster incident response times due to real-time data collection and immediate action deployment capabilities.",
+      "tags": ["incident-response", "security", "business-value"],
+      "weight": 1.2
+    },
+    {
+      "id": "foundation-016",
+      "module": "Foundation",
+      "domain": "Console Features",
+      "question": "What information is typically displayed in the Tanium Console's status bar?",
+      "options": [
+        "User login history and preferences",
+        "Connection status, performance metrics, and background tasks",
+        "Historical trend data and reports",
+        "Available software packages and updates"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "beginner",
+      "explanation": "The console's status bar displays system status information including client connectivity, query execution status, and running operations progress.",
+      "tags": ["console", "status-bar", "interface"],
+      "weight": 1.0
+    },
+    {
+      "id": "foundation-017",
+      "module": "Foundation",
+      "domain": "Zone Architecture",
+      "question": "How do Tanium Zones help with very large deployments?",
+      "options": [
+        "They increase network bandwidth requirements",
+        "They organize network segments and improve performance through geographic distribution",
+        "They require separate licensing for each zone",
+        "They eliminate the need for encryption"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "advanced",
+      "explanation": "Zones organize network segments, respect existing network boundaries, and place servers close to endpoint populations to optimize performance and provide fault isolation.",
+      "tags": ["zones", "large-scale", "geographic-distribution"],
+      "weight": 1.5
+    },
+    {
+      "id": "foundation-018",
+      "module": "Foundation",
+      "domain": "Data Collection",
+      "question": "What type of sensors would you use to gather 'Running Processes' information from endpoints?",
+      "options": [
+        "System Information Sensors",
+        "Security-Related Sensors", 
+        "Performance and Hardware Sensors",
+        "Network Configuration Sensors"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "beginner",
+      "explanation": "'Running Processes' is categorized as a Security-Related Sensor because it's commonly used for security investigations and threat hunting.",
+      "tags": ["sensors", "security", "processes"],
+      "weight": 1.0
+    },
+    {
+      "id": "foundation-019",
+      "module": "Foundation",
+      "domain": "Communication Security",
+      "question": "How are Tanium client-server communications protected?",
+      "options": [
+        "Plain text with firewall protection only",
+        "TLS encryption with certificate validation and mutual authentication",
+        "VPN tunneling with pre-shared keys",
+        "Custom proprietary encryption algorithms"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "intermediate",
+      "explanation": "Tanium uses TLS encryption for all communications, with certificate validation for server identity, mutual authentication, and data integrity protection.",
+      "tags": ["security", "encryption", "authentication"],
+      "weight": 1.2
+    },
+    {
+      "id": "foundation-020",
+      "module": "Foundation",
+      "domain": "Platform Efficiency",
+      "question": "Why does Tanium require significantly less storage infrastructure than traditional endpoint management tools?",
+      "options": [
+        "It compresses all data using advanced algorithms",
+        "It uses just-in-time data collection instead of continuous storage",
+        "It automatically deletes old data after 24 hours",
+        "It only stores summary reports rather than detailed data"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "intermediate",
+      "explanation": "Tanium's just-in-time approach collects data only when needed rather than continuously collecting and storing everything, resulting in 99% reduction in storage requirements.",
+      "tags": ["storage", "just-in-time", "efficiency"],
+      "weight": 1.2
+    },
+    {
+      "id": "foundation-021",
+      "module": "Foundation",
+      "domain": "Module Ecosystem",
+      "question": "Which Tanium module is specifically designed for integration with SIEM and third-party security tools?",
+      "options": [
+        "Interact",
+        "Patch",
+        "Connect",
+        "Asset"
+      ],
+      "correctAnswer": 2,
+      "difficulty": "beginner",
+      "explanation": "The Connect module provides integration capabilities with SIEM, ticketing, and other external systems through data feeds and API integration.",
+      "tags": ["connect", "integration", "siem"],
+      "weight": 1.0
+    },
+    {
+      "id": "foundation-022",
+      "module": "Foundation",
+      "domain": "Performance Metrics",
+      "question": "In enterprise environments, what is the typical reduction in administrative overhead when implementing Tanium versus traditional tools?",
+      "options": [
+        "20-30%",
+        "35-45%",
+        "50-70%",
+        "80-90%"
+      ],
+      "correctAnswer": 2,
+      "difficulty": "intermediate",
+      "explanation": "Organizations typically see 50-70% reduction in administrative overhead due to Tanium's automation capabilities and simplified architecture.",
+      "tags": ["administrative-overhead", "efficiency", "automation"],
+      "weight": 1.2
+    },
+    {
+      "id": "foundation-023",
+      "module": "Foundation",
+      "domain": "Question Structure",
+      "question": "What is the basic structure of a Tanium question?",
+      "options": [
+        "SELECT [data] FROM [endpoints] WHERE [condition]",
+        "Get [Sensor] from [Target] where [Condition]",
+        "QUERY [table] FILTER [criteria] ORDER BY [field]",
+        "COLLECT [information] WHERE [endpoint] EQUALS [value]"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "beginner",
+      "explanation": "Tanium questions follow the natural language structure: 'Get [Sensor] from [Target] where [Condition]', making them intuitive to construct.",
+      "tags": ["questions", "syntax", "natural-language"],
+      "weight": 1.0
+    },
+    {
+      "id": "foundation-024",
+      "module": "Foundation",
+      "domain": "Fault Tolerance",
+      "question": "What happens when an endpoint in the Tanium linear chain fails or becomes unresponsive?",
+      "options": [
+        "All endpoints after the failed one become unreachable",
+        "The entire query fails and must be restarted",
+        "The chain automatically routes around the failed endpoint",
+        "A backup server takes over the failed endpoint's role"
+      ],
+      "correctAnswer": 2,
+      "difficulty": "advanced",
+      "explanation": "Tanium's self-healing chain capability automatically routes around failed or unresponsive endpoints, maintaining query execution without manual intervention.",
+      "tags": ["fault-tolerance", "self-healing", "reliability"],
+      "weight": 1.5
+    },
+    {
+      "id": "foundation-025",
+      "module": "Foundation",
+      "domain": "User Roles",
+      "question": "Which role would be appropriate for a user who needs to create and modify questions and sensors but shouldn't deploy actions?",
+      "options": [
+        "Tanium Administrator",
+        "Question Author",
+        "Action Author",
+        "Read-Only Operator"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "intermediate",
+      "explanation": "Question Author role provides permissions to create and modify questions and sensors without the ability to deploy potentially disruptive actions.",
+      "tags": ["roles", "permissions", "question-author"],
+      "weight": 1.2
+    },
+    {
+      "id": "foundation-026",
+      "module": "Foundation",
+      "domain": "Network Discovery",
+      "question": "How do Tanium clients handle network path optimization?",
+      "options": [
+        "Administrators must manually configure all network paths",
+        "Clients automatically discover and optimize network paths",
+        "Network paths are hardcoded during installation",
+        "A central network mapping service manages all paths"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "advanced",
+      "explanation": "Tanium clients include automatic network discovery capabilities that find optimal paths and adapt to network changes without manual configuration.",
+      "tags": ["network-discovery", "auto-optimization", "automation"],
+      "weight": 1.5
+    },
+    {
+      "id": "foundation-027",
+      "module": "Foundation",
+      "domain": "Console Customization",
+      "question": "What aspects of the Tanium Console can users typically customize for their workflow?",
+      "options": [
+        "Only color themes and font sizes",
+        "Dashboard widgets, layout arrangement, and notification settings",
+        "Network configuration and security policies",
+        "Database schemas and table structures"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "beginner",
+      "explanation": "Users can customize dashboard widgets, layout arrangements, notification settings, themes, and default views to optimize their workflow.",
+      "tags": ["customization", "dashboard", "user-experience"],
+      "weight": 1.0
+    },
+    {
+      "id": "foundation-028",
+      "module": "Foundation",
+      "domain": "Competitive Advantage",
+      "question": "What is a key business advantage of Tanium's real-time capabilities versus traditional batch processing?",
+      "options": [
+        "Lower software licensing costs",
+        "Decisions based on current data instead of hours-old information",
+        "Reduced need for network security",
+        "Compatibility with older operating systems"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "intermediate",
+      "explanation": "Real-time data enables immediate decision-making and action, compared to traditional tools that provide decisions based on hours or days-old data.",
+      "tags": ["real-time", "decision-making", "competitive-advantage"],
+      "weight": 1.2
+    },
+    {
+      "id": "foundation-029",
+      "module": "Foundation",
+      "domain": "Infrastructure Requirements",
+      "question": "For managing 100,000 endpoints, approximately how many Tanium servers are typically required compared to traditional tools?",
+      "options": [
+        "Same number (10-15 servers)",
+        "More servers (15-20 servers)",
+        "Significantly fewer servers (2-4 servers)",
+        "No servers (cloud-only deployment)"
+      ],
+      "correctAnswer": 2,
+      "difficulty": "intermediate",
+      "explanation": "Tanium requires significantly fewer servers (2-4 with redundancy) compared to traditional tools that might require 10-20 servers for the same endpoint count.",
+      "tags": ["infrastructure", "servers", "cost-efficiency"],
+      "weight": 1.2
+    },
+    {
+      "id": "foundation-030",
+      "module": "Foundation",
+      "domain": "Success Metrics",
+      "question": "What is the typical improvement in IT team productivity for organizations implementing Tanium?",
+      "options": [
+        "25% increase",
+        "50% increase",
+        "2x increase",
+        "3x increase"
+      ],
+      "correctAnswer": 3,
+      "difficulty": "intermediate",
+      "explanation": "Organizations implementing Tanium typically see a 3x increase in IT team productivity due to automation, real-time capabilities, and reduced administrative overhead.",
+      "tags": ["productivity", "success-metrics", "business-value"],
+      "weight": 1.2
+    },
+    {
+      "id": "asking-questions-001",
+      "module": "Module 1",
+      "domain": "Asking Questions",
+      "question": "What is the primary purpose of asking a Tanium Question?",
+      "options": [
+        "To schedule software deployments",
+        "To retrieve real-time endpoint data",
+        "To manage user accounts",
+        "To back up Tanium Server"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "beginner",
+      "explanation": "Tanium Questions query endpoints for current state in real time, providing immediate visibility into endpoint conditions.",
+      "tags": ["basics", "questions", "real-time", "purpose"],
+      "weight": 1.0
+    },
+    {
+      "id": "asking-questions-002",
+      "module": "Module 1",
+      "domain": "Asking Questions",
+      "question": "Which component interprets natural-language questions into sensor queries?",
+      "options": [
+        "Package Service",
+        "Question Parser",
+        "Action Broker",
+        "Reporting Engine"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "intermediate",
+      "explanation": "The Question Parser maps plain language questions to appropriate sensors and parameters, enabling natural language querying.",
+      "tags": ["parser", "sensors", "natural-language"],
+      "weight": 1.3
+    },
+    {
+      "id": "asking-questions-003",
+      "module": "Module 1",
+      "domain": "Asking Questions",
+      "question": "When constructing a new question, what is the recommended best practice?",
+      "options": [
+        "Include all possible filters from the beginning",
+        "Start simple and add constraints incrementally",
+        "Always use the most complex sensors available",
+        "Avoid using saved questions as templates"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "beginner",
+      "explanation": "Starting with a basic query allows you to validate results and understand the data before adding complexity through filters and constraints.",
+      "tags": ["best-practice", "iteration", "methodology"],
+      "weight": 1.0
+    },
+    {
+      "id": "asking-questions-004",
+      "module": "Module 1",
+      "domain": "Asking Questions", 
+      "question": "How can you identify if a sensor returns current endpoint state versus historical data?",
+      "options": [
+        "Check the sensor's creation date",
+        "Observe if results reflect near real-time values",
+        "Look at the sensor's file size",
+        "Verify the sensor's authentication method"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "intermediate",
+      "explanation": "Sensors that return current endpoint state will show values that reflect the actual current conditions on endpoints, updated in real-time.",
+      "tags": ["sensors", "real-time", "validation"],
+      "weight": 1.3
+    },
+    {
+      "id": "asking-questions-005",
+      "module": "Module 1",
+      "domain": "Asking Questions",
+      "question": "Which console feature helps confirm that your question targets the expected endpoints?",
+      "options": [
+        "Action approval queue",
+        "Preview results grid",
+        "Package gallery",
+        "Module catalog"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "beginner",
+      "explanation": "The preview results grid allows you to see which endpoints respond to your question and validate the data before taking further action.",
+      "tags": ["validation", "ui", "targeting"],
+      "weight": 1.0
+    },
+    {
+      "id": "asking-questions-006",
+      "module": "Module 1",
+      "domain": "Asking Questions",
+      "question": "What happens when you ask a question like 'Get Computer Name from all machines'?",
+      "options": [
+        "It creates a scheduled report for daily execution",
+        "It immediately queries all connected endpoints for their computer names",
+        "It backs up the computer name database",
+        "It updates the endpoint inventory database"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "beginner",
+      "explanation": "This question immediately propagates through the linear chain to all connected endpoints, which respond with their current computer names in real-time.",
+      "tags": ["example-query", "real-time", "computer-name"],
+      "weight": 1.0
+    },
+    {
+      "id": "asking-questions-007",
+      "module": "Module 1",
+      "domain": "Asking Questions",
+      "question": "Which approach is most effective for troubleshooting a question that returns unexpected results?",
+      "options": [
+        "Immediately add more complex filters",
+        "Start with a simpler version of the question and gradually add complexity",
+        "Change to a different sensor entirely",
+        "Run the question on a scheduled basis"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "intermediate",
+      "explanation": "Simplifying the question helps isolate issues and understand what's causing unexpected results before adding complexity back incrementally.",
+      "tags": ["troubleshooting", "methodology", "debugging"],
+      "weight": 1.3
+    },
+    {
+      "id": "asking-questions-008",
+      "module": "Module 1",
+      "domain": "Asking Questions",
+      "question": "What type of information would the 'Running Processes' sensor typically return?",
+      "options": [
+        "Historical process execution logs",
+        "Processes currently active on endpoints",
+        "Scheduled processes for future execution",
+        "Process configuration templates"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "beginner",
+      "explanation": "The 'Running Processes' sensor returns information about processes currently active and executing on endpoints at the time of the query.",
+      "tags": ["running-processes", "sensors", "real-time"],
+      "weight": 1.0
+    },
+    {
+      "id": "asking-questions-009",
+      "module": "Module 1",
+      "domain": "Asking Questions",
+      "question": "When should you consider creating a 'Saved Question'?",
+      "options": [
+        "Only for questions that take longer than 30 seconds to execute",
+        "For questions you plan to use repeatedly or share with others",
+        "Only for questions that require administrator permissions",
+        "For questions that query more than 1000 endpoints"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "intermediate",
+      "explanation": "Saved Questions are valuable for queries you'll use repeatedly, want to share with team members, or want to standardize across your organization.",
+      "tags": ["saved-questions", "reusability", "collaboration"],
+      "weight": 1.3
+    },
+    {
+      "id": "asking-questions-010",
+      "module": "Module 1",
+      "domain": "Asking Questions",
+      "question": "What is the maximum time you should typically expect to wait for results from a well-constructed Tanium question?",
+      "options": [
+        "5-10 minutes",
+        "30 seconds to 2 minutes",
+        "15-20 seconds",
+        "Several hours"
+      ],
+      "correctAnswer": 2,
+      "difficulty": "beginner",
+      "explanation": "Well-constructed Tanium questions typically return results within 15-20 seconds regardless of the number of endpoints being queried.",
+      "tags": ["performance", "response-time", "expectations"],
+      "weight": 1.0
+    },
+    {
+      "id": "asking-questions-011",
+      "module": "Module 1",
+      "domain": "Asking Questions",
+      "question": "Which sensor category would 'Disk Space' belong to?",
+      "options": [
+        "Security-Related Sensors",
+        "System Information Sensors", 
+        "Performance and Hardware Sensors",
+        "Network Configuration Sensors"
+      ],
+      "correctAnswer": 2,
+      "difficulty": "beginner",
+      "explanation": "'Disk Space' is categorized as a Performance and Hardware Sensor because it provides information about physical storage resources and system performance.",
+      "tags": ["sensors", "disk-space", "categorization"],
+      "weight": 1.0
+    },
+    {
+      "id": "asking-questions-012",
+      "module": "Module 1",
+      "domain": "Asking Questions",
+      "question": "What should you do if your question returns no results when you expected responses from multiple endpoints?",
+      "options": [
+        "Wait longer for results to appear",
+        "Check if your targeting criteria is too restrictive or if endpoints are offline",
+        "Restart the Tanium server",
+        "Change to a different user account"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "intermediate",
+      "explanation": "No results often indicate overly restrictive targeting criteria, offline endpoints, or syntax issues in the question construction.",
+      "tags": ["troubleshooting", "no-results", "targeting"],
+      "weight": 1.3
+    },
+    {
+      "id": "asking-questions-013",
+      "module": "Module 1",
+      "domain": "Asking Questions",
+      "question": "In the question 'Get Computer Name from all machines where Operating System contains Windows', what is the filter condition?",
+      "options": [
+        "'Get Computer Name'",
+        "'from all machines'",
+        "'where Operating System contains Windows'",
+        "'Computer Name'"
+      ],
+      "correctAnswer": 2,
+      "difficulty": "beginner",
+      "explanation": "The filter condition is 'where Operating System contains Windows', which restricts results to only Windows machines.",
+      "tags": ["filters", "syntax", "operating-system"],
+      "weight": 1.0
+    },
+    {
+      "id": "asking-questions-014",
+      "module": "Module 1",
+      "domain": "Asking Questions",
+      "question": "Which approach helps ensure question accuracy when investigating a security incident?",
+      "options": [
+        "Use the most complex question possible immediately",
+        "Start with broad questions and narrow down based on initial findings",
+        "Only use pre-built saved questions",
+        "Avoid using multiple sensors in a single question"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "advanced",
+      "explanation": "Starting broad allows you to understand the scope of an incident, then narrowing down helps focus the investigation on specific indicators or affected systems.",
+      "tags": ["security-investigation", "methodology", "incident-response"],
+      "weight": 1.5
+    },
+    {
+      "id": "asking-questions-015",
+      "module": "Module 1",
+      "domain": "Asking Questions",
+      "question": "What information can you gather from the 'Last Logged In User' sensor?",
+      "options": [
+        "Password strength and complexity",
+        "User access permissions and rights",
+        "The most recent user to log into each endpoint",
+        "User login failure attempts"
+      ],
+      "correctAnswer": 2,
+      "difficulty": "beginner",
+      "explanation": "The 'Last Logged In User' sensor provides the identity of the most recent user to successfully log into each endpoint.",
+      "tags": ["user-tracking", "sensors", "login-information"],
+      "weight": 1.0
+    },
+    {
+      "id": "asking-questions-016",
+      "module": "Module 1",
+      "domain": "Asking Questions",
+      "question": "How do natural language questions in Tanium differ from SQL queries?",
+      "options": [
+        "They require specialized database knowledge",
+        "They use human-readable syntax that's easier to construct and understand",
+        "They can only query predefined database tables",
+        "They require complex join operations"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "intermediate",
+      "explanation": "Tanium's natural language approach uses human-readable syntax like 'Get [sensor] from [target] where [condition]' instead of complex SQL syntax.",
+      "tags": ["natural-language", "syntax", "usability"],
+      "weight": 1.3
+    },
+    {
+      "id": "asking-questions-017",
+      "module": "Module 1",
+      "domain": "Asking Questions",
+      "question": "What is the benefit of using the Question Builder interface versus typing questions manually?",
+      "options": [
+        "It automatically executes questions faster",
+        "It provides guided assistance and reduces syntax errors",
+        "It only allows administrator-approved questions",
+        "It stores questions in encrypted format"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "beginner",
+      "explanation": "The Question Builder provides guided assistance, suggests sensors and filters, and helps reduce syntax errors through its structured interface.",
+      "tags": ["question-builder", "ui", "error-reduction"],
+      "weight": 1.0
+    },
+    {
+      "id": "asking-questions-018",
+      "module": "Module 1",
+      "domain": "Asking Questions",
+      "question": "Which sensors would be most useful for conducting a software inventory across your environment?",
+      "options": [
+        "Network Interface and Open Ports",
+        "Installed Applications and Running Processes", 
+        "User Rights and Last Logged In User",
+        "CPU Usage and Memory Usage"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "intermediate",
+      "explanation": "'Installed Applications' provides comprehensive software inventory, while 'Running Processes' shows currently active software.",
+      "tags": ["software-inventory", "sensors", "asset-management"],
+      "weight": 1.3
+    },
+    {
+      "id": "asking-questions-019",
+      "module": "Module 1",
+      "domain": "Asking Questions",
+      "question": "What happens if you ask a question targeting 'all machines' in a large environment?",
+      "options": [
+        "The query will fail due to scalability limits",
+        "Results will be delayed by several hours",
+        "The linear chain ensures consistent response time regardless of scale",
+        "Only a sample of machines will respond"
+      ],
+      "correctAnswer": 2,
+      "difficulty": "advanced",
+      "explanation": "Tanium's linear chain architecture maintains consistent response times regardless of scale, so querying 'all machines' works efficiently even in large environments.",
+      "tags": ["scalability", "all-machines", "linear-chain"],
+      "weight": 1.5
+    },
+    {
+      "id": "asking-questions-020",
+      "module": "Module 1", 
+      "domain": "Asking Questions",
+      "question": "Which question would be most effective for identifying endpoints that might have performance issues?",
+      "options": [
+        "'Get Computer Name from all machines'",
+        "'Get CPU Usage and Memory Usage from all machines where CPU Usage is greater than 90'", 
+        "'Get Operating System from all machines'",
+        "'Get Last Logged In User from all machines'"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "intermediate",
+      "explanation": "This question uses performance sensors with a filter condition to identify endpoints with high CPU usage that might indicate performance problems.",
+      "tags": ["performance-monitoring", "filters", "troubleshooting"],
+      "weight": 1.3
+    },
+    {
+      "id": "asking-questions-021",
+      "module": "Module 1",
+      "domain": "Asking Questions", 
+      "question": "What is the advantage of Tanium's real-time questioning capability over traditional inventory tools?",
+      "options": [
+        "Lower software licensing costs",
+        "Better integration with databases",
+        "Current data instead of potentially outdated snapshots",
+        "Simpler user interface design"
+      ],
+      "correctAnswer": 2,
+      "difficulty": "intermediate",
+      "explanation": "Real-time questioning provides current, up-to-date information rather than relying on potentially outdated database snapshots or periodic collections.",
+      "tags": ["real-time", "accuracy", "current-data"],
+      "weight": 1.3
+    },
+    {
+      "id": "asking-questions-022",
+      "module": "Module 1",
+      "domain": "Asking Questions",
+      "question": "How should you validate a new question before using it in production?",
+      "options": [
+        "Run it immediately on all production endpoints",
+        "Test it on a small group of endpoints first to verify expected results",
+        "Only use questions created by other team members",
+        "Schedule it to run during maintenance windows only"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "beginner",
+      "explanation": "Testing questions on a small group first allows you to validate syntax, targeting, and expected results before broader deployment.",
+      "tags": ["validation", "testing", "best-practice"],
+      "weight": 1.0
+    },
+    {
+      "id": "asking-questions-023",
+      "module": "Module 1",
+      "domain": "Asking Questions",
+      "question": "What does it mean when a question returns results with different response times for different endpoints?",
+      "options": [
+        "Some endpoints have better hardware specifications",
+        "Network conditions or endpoint performance varies across the environment",
+        "The question syntax is incorrect",
+        "Some endpoints require administrator permissions"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "advanced",
+      "explanation": "Varying response times typically indicate differences in network conditions, endpoint performance, or computational complexity of the sensor on different systems.",
+      "tags": ["response-time", "performance-variation", "troubleshooting"],
+      "weight": 1.5
+    },
+    {
+      "id": "asking-questions-024",
+      "module": "Module 1",
+      "domain": "Asking Questions",
+      "question": "Which sensors would be most relevant for a security investigation focused on potential malware?",
+      "options": [
+        "Disk Space and Memory Usage",
+        "Running Processes and Installed Applications",
+        "Computer Name and IP Address", 
+        "User Rights and Last Logged In User"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "intermediate",
+      "explanation": "'Running Processes' can identify suspicious active processes, while 'Installed Applications' can reveal unwanted or malicious software installations.",
+      "tags": ["security-investigation", "malware", "threat-hunting"],
+      "weight": 1.3
+    },
+    {
+      "id": "asking-questions-025",
+      "module": "Module 1",
+      "domain": "Asking Questions",
+      "question": "What is the most important consideration when sharing saved questions with team members?",
+      "options": [
+        "Ensuring the questions run on a schedule",
+        "Verifying that recipients have appropriate permissions and understand the question's purpose",
+        "Converting questions to action packages",
+        "Translating questions to multiple languages"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "advanced",
+      "explanation": "Recipients need appropriate permissions to execute the questions and should understand their purpose to use them effectively and safely.",
+      "tags": ["collaboration", "permissions", "knowledge-sharing"],
+      "weight": 1.5
+    },
+    {
+      "id": "refining-questions-001",
+      "module": "Module 2",
+      "domain": "Refining Questions",
+      "question": "What is the primary purpose of refining and targeting questions in Tanium?",
+      "options": [
+        "To reduce server processing power",
+        "To focus results on specific endpoints and improve query efficiency",
+        "To increase network bandwidth usage",
+        "To create more complex reporting structures"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "beginner",
+      "explanation": "Refining and targeting questions helps focus results on specific endpoints that match your criteria, improving efficiency and reducing irrelevant data.",
+      "tags": ["targeting", "efficiency", "refinement"],
+      "weight": 1.0
+    },
+    {
+      "id": "refining-questions-002",
+      "module": "Module 2",
+      "domain": "Refining Questions",
+      "question": "Which filter operator would you use to find endpoints with computer names that start with 'WS-'?",
+      "options": [
+        "contains",
+        "equals",
+        "starts with",
+        "matches"
+      ],
+      "correctAnswer": 2,
+      "difficulty": "beginner",
+      "explanation": "The 'starts with' operator matches values that begin with the specified text, perfect for naming convention patterns like 'WS-'.",
+      "tags": ["filters", "operators", "naming-conventions"],
+      "weight": 1.0
+    },
+    {
+      "id": "refining-questions-003",
+      "module": "Module 2",
+      "domain": "Refining Questions",
+      "question": "What is a Computer Group in Tanium?",
+      "options": [
+        "A collection of Tanium servers in the same network zone",
+        "A logical grouping of endpoints based on shared characteristics",
+        "A set of user accounts with similar permissions",
+        "A bundle of related sensors and questions"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "beginner",
+      "explanation": "Computer Groups are logical collections of endpoints that share characteristics, making it easier to target specific sets of machines for questions and actions.",
+      "tags": ["computer-groups", "organization", "targeting"],
+      "weight": 1.0
+    },
+    {
+      "id": "refining-questions-004",
+      "module": "Module 2",
+      "domain": "Refining Questions",
+      "question": "Which approach is most effective for optimizing a question that returns too many results?",
+      "options": [
+        "Add more specific filter conditions to narrow the scope",
+        "Change to a different sensor entirely",
+        "Reduce the timeout value",
+        "Run the question multiple times"
+      ],
+      "correctAnswer": 0,
+      "difficulty": "intermediate",
+      "explanation": "Adding more specific filter conditions helps narrow the scope of results to only the endpoints or data that match your specific criteria.",
+      "tags": ["optimization", "filtering", "refinement"],
+      "weight": 1.3
+    },
+    {
+      "id": "refining-questions-005",
+      "module": "Module 2",
+      "domain": "Refining Questions",
+      "question": "When would you use the 'not equals' filter operator?",
+      "options": [
+        "To find exact matches only",
+        "To exclude specific values from results",
+        "To find partial text matches",
+        "To sort results in descending order"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "beginner",
+      "explanation": "The 'not equals' operator excludes endpoints or data that match the specified value, useful for filtering out unwanted results.",
+      "tags": ["filters", "exclusion", "operators"],
+      "weight": 1.0
+    },
+    {
+      "id": "refining-questions-006",
+      "module": "Module 2",
+      "domain": "Refining Questions",
+      "question": "What type of Computer Group would be most appropriate for organizing endpoints by department?",
+      "options": [
+        "Dynamic group based on computer naming conventions",
+        "Static group with manually assigned members", 
+        "Automatic group based on IP address ranges",
+        "Temporary group for specific projects"
+      ],
+      "correctAnswer": 0,
+      "difficulty": "intermediate",
+      "explanation": "Dynamic groups based on naming conventions automatically include endpoints that follow departmental naming patterns, maintaining group membership automatically.",
+      "tags": ["computer-groups", "dynamic", "organization"],
+      "weight": 1.3
+    },
+    {
+      "id": "refining-questions-007",
+      "module": "Module 2", 
+      "domain": "Refining Questions",
+      "question": "Which filter condition would help identify endpoints that haven't been updated recently?",
+      "options": [
+        "'Last Reboot' is older than '30 days'",
+        "'Computer Name' contains 'OLD'",
+        "'Operating System' equals 'Windows'",
+        "'CPU Usage' is greater than '50'"
+      ],
+      "correctAnswer": 0,
+      "difficulty": "intermediate",
+      "explanation": "Filtering by 'Last Reboot' older than a specific timeframe helps identify endpoints that may not have received recent updates or patches.",
+      "tags": ["filters", "maintenance", "date-filtering"],
+      "weight": 1.3
+    },
+    {
+      "id": "refining-questions-008",
+      "module": "Module 2",
+      "domain": "Refining Questions",
+      "question": "What is the benefit of using regular expressions in Tanium questions?",
+      "options": [
+        "They make queries execute faster",
+        "They provide powerful pattern matching capabilities for complex filters",
+        "They automatically create computer groups",
+        "They encrypt sensitive query results"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "advanced",
+      "explanation": "Regular expressions enable sophisticated pattern matching for complex filtering scenarios that simple operators can't handle effectively.",
+      "tags": ["regex", "pattern-matching", "advanced-filtering"],
+      "weight": 1.5
+    },
+    {
+      "id": "refining-questions-009",
+      "module": "Module 2",
+      "domain": "Refining Questions",
+      "question": "How do you combine multiple filter conditions in a single question?",
+      "options": [
+        "Use 'AND' or 'OR' logical operators",
+        "Create separate questions for each condition",
+        "Use comma-separated filter lists",
+        "Apply filters in sequential order"
+      ],
+      "correctAnswer": 0,
+      "difficulty": "intermediate",
+      "explanation": "Logical operators 'AND' and 'OR' allow you to combine multiple filter conditions to create more specific targeting criteria.",
+      "tags": ["logical-operators", "complex-filtering", "and-or"],
+      "weight": 1.3
+    },
+    {
+      "id": "refining-questions-010",
+      "module": "Module 2",
+      "domain": "Refining Questions",
+      "question": "What should you consider when creating a question that targets a very specific subset of endpoints?",
+      "options": [
+        "Whether the targeting criteria might be too restrictive and return no results",
+        "If the question needs administrator approval",
+        "Whether to schedule the question for later execution",
+        "If the results need to be encrypted"
+      ],
+      "correctAnswer": 0,
+      "difficulty": "intermediate",
+      "explanation": "Overly restrictive targeting criteria might result in no matching endpoints, so it's important to validate that your filters aren't too narrow.",
+      "tags": ["targeting", "validation", "criteria"],
+      "weight": 1.3
+    },
+    {
+      "id": "refining-questions-011",
+      "module": "Module 2",
+      "domain": "Refining Questions",
+      "question": "Which operator would you use to find endpoints where disk space is below a critical threshold?",
+      "options": [
+        "equals",
+        "contains",
+        "is less than",
+        "starts with"
+      ],
+      "correctAnswer": 2,
+      "difficulty": "beginner",
+      "explanation": "The 'is less than' operator compares numerical values, making it ideal for identifying endpoints below critical thresholds like disk space.",
+      "tags": ["numeric-comparison", "operators", "thresholds"],
+      "weight": 1.0
+    },
+    {
+      "id": "refining-questions-012",
+      "module": "Module 2",
+      "domain": "Refining Questions",
+      "question": "What is the advantage of using dynamic Computer Groups over static groups?",
+      "options": [
+        "Dynamic groups require less storage space",
+        "Dynamic groups automatically maintain membership based on current endpoint characteristics",
+        "Dynamic groups have better security permissions",
+        "Dynamic groups execute queries faster"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "intermediate",
+      "explanation": "Dynamic groups automatically adjust membership as endpoint characteristics change, eliminating the need for manual maintenance of group membership.",
+      "tags": ["computer-groups", "dynamic", "automation"],
+      "weight": 1.3
+    },
+    {
+      "id": "refining-questions-013",
+      "module": "Module 2",
+      "domain": "Refining Questions",
+      "question": "When might you use a compound filter with both 'AND' and 'OR' operators?",
+      "options": [
+        "To simplify question syntax",
+        "To create complex targeting scenarios like '(Windows 10 OR Windows 11) AND (Disk Space less than 20%)'",
+        "To improve query performance",
+        "To create automatic reports"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "advanced",
+      "explanation": "Compound filters with mixed operators enable complex scenarios where you need endpoints that match one of several conditions AND meet additional criteria.",
+      "tags": ["compound-filters", "complex-logic", "advanced"],
+      "weight": 1.5
+    },
+    {
+      "id": "refining-questions-014",
+      "module": "Module 2",
+      "domain": "Refining Questions",
+      "question": "How can you verify that your targeting criteria will include the expected endpoints before executing a question?",
+      "options": [
+        "Run a simple 'Get Computer Name' question with the same targeting criteria",
+        "Check the server logs",
+        "Contact the network administrator",
+        "Wait for the full question to complete"
+      ],
+      "correctAnswer": 0,
+      "difficulty": "intermediate",
+      "explanation": "Running a simple question with the same targeting criteria shows which endpoints match your filters before executing more complex or resource-intensive queries.",
+      "tags": ["validation", "testing", "targeting"],
+      "weight": 1.3
+    },
+    {
+      "id": "refining-questions-015",
+      "module": "Module 2",
+      "domain": "Refining Questions",
+      "question": "What is the difference between 'contains' and 'equals' filter operators?",
+      "options": [
+        "'Contains' finds partial matches, 'equals' requires exact matches",
+        "'Contains' is faster than 'equals'",
+        "'Contains' is case-sensitive, 'equals' is not",
+        "'Contains' works only with numbers, 'equals' works with text"
+      ],
+      "correctAnswer": 0,
+      "difficulty": "beginner",
+      "explanation": "'Contains' matches values that include the specified text anywhere within them, while 'equals' requires an exact match of the entire value.",
+      "tags": ["operators", "matching", "contains-equals"],
+      "weight": 1.0
+    },
+    {
+      "id": "refining-questions-016",
+      "module": "Module 2",
+      "domain": "Refining Questions",
+      "question": "Which approach helps optimize network utilization when querying large numbers of endpoints?",
+      "options": [
+        "Use broader targeting to include more endpoints",
+        "Use more specific targeting to reduce the number of responding endpoints",
+        "Increase the query timeout value",
+        "Run queries during business hours only"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "intermediate",
+      "explanation": "More specific targeting reduces the number of endpoints that need to respond, optimizing network utilization while still getting the information you need.",
+      "tags": ["optimization", "network", "efficiency"],
+      "weight": 1.3
+    },
+    {
+      "id": "refining-questions-017",
+      "module": "Module 2",
+      "domain": "Refining Questions",
+      "question": "What is a practical use case for the 'ends with' filter operator?",
+      "options": [
+        "Finding endpoints by manufacturer name",
+        "Identifying files by extension or computer names by domain suffix",
+        "Locating high CPU usage processes",
+        "Discovering network configuration issues"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "intermediate",
+      "explanation": "The 'ends with' operator is useful for identifying patterns at the end of values, such as file extensions (.exe) or domain suffixes (.domain.com).",
+      "tags": ["operators", "patterns", "file-extensions"],
+      "weight": 1.3
+    },
+    {
+      "id": "refining-questions-018",
+      "module": "Module 2",
+      "domain": "Refining Questions",
+      "question": "How do you handle time-based filtering in Tanium questions?",
+      "options": [
+        "Use date/time comparison operators like 'older than' or 'newer than'",
+        "Convert all dates to numeric formats first",
+        "Time-based filtering is not supported",
+        "Use only scheduled questions for time-based queries"
+      ],
+      "correctAnswer": 0,
+      "difficulty": "intermediate",
+      "explanation": "Tanium supports time-based filtering with operators like 'older than' and 'newer than' for sensors that return date/time information.",
+      "tags": ["time-filtering", "date-comparison", "temporal"],
+      "weight": 1.3
+    },
+    {
+      "id": "refining-questions-019",
+      "module": "Module 2",
+      "domain": "Refining Questions",
+      "question": "What is the best practice for creating Computer Groups based on geographic location?",
+      "options": [
+        "Use IP address ranges if they correspond to geographic regions",
+        "Base groups only on computer naming conventions",
+        "Create separate Tanium installations for each location",
+        "Use only manual assignment of group members"
+      ],
+      "correctAnswer": 0,
+      "difficulty": "advanced",
+      "explanation": "If IP address ranges correspond to geographic locations, they provide a reliable way to automatically group endpoints by location.",
+      "tags": ["geographic-grouping", "ip-ranges", "location-based"],
+      "weight": 1.5
+    },
+    {
+      "id": "refining-questions-020",
+      "module": "Module 2",
+      "domain": "Refining Questions",
+      "question": "How can you troubleshoot a question that returns more results than expected?",
+      "options": [
+        "Add more restrictive filter conditions or check for typos in targeting criteria",
+        "Increase the server memory allocation",
+        "Change to a different user account",
+        "Restart the Tanium service"
+      ],
+      "correctAnswer": 0,
+      "difficulty": "intermediate",
+      "explanation": "Too many results usually indicate that targeting criteria are too broad or contain errors, so adding restrictions or checking for typos is the first step.",
+      "tags": ["troubleshooting", "too-many-results", "refinement"],
+      "weight": 1.3
+    },
+    {
+      "id": "refining-questions-021",
+      "module": "Module 2",
+      "domain": "Refining Questions",
+      "question": "What is the purpose of using Computer Groups in targeting questions?",
+      "options": [
+        "To improve query performance only",
+        "To simplify targeting by using predefined collections of endpoints",
+        "To provide better security controls",
+        "To automatically schedule question execution"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "beginner",
+      "explanation": "Computer Groups simplify targeting by allowing you to reference predefined collections of endpoints rather than reconstructing complex filter criteria each time.",
+      "tags": ["computer-groups", "targeting", "simplification"],
+      "weight": 1.0
+    },
+    {
+      "id": "refining-questions-022",
+      "module": "Module 2",
+      "domain": "Refining Questions",
+      "question": "Which scenario would benefit most from using regular expressions in question filters?",
+      "options": [
+        "Simple computer name matching",
+        "Complex pattern matching for file paths or process names with variable components",
+        "Basic IP address filtering",
+        "Exact user name lookups"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "advanced",
+      "explanation": "Regular expressions excel at complex pattern matching where simple operators can't handle variable components or sophisticated patterns.",
+      "tags": ["regex", "complex-patterns", "advanced-filtering"],
+      "weight": 1.5
+    },
+    {
+      "id": "refining-questions-023",
+      "module": "Module 2",
+      "domain": "Refining Questions",
+      "question": "What should you do if your refined question returns no results when you expected some?",
+      "options": [
+        "Gradually remove filter conditions to identify which criteria might be too restrictive",
+        "Add more filter conditions",
+        "Change to a different sensor",
+        "Increase the query timeout"
+      ],
+      "correctAnswer": 0,
+      "difficulty": "intermediate",
+      "explanation": "Gradually removing filter conditions helps identify which specific criteria might be preventing endpoints from matching your query.",
+      "tags": ["troubleshooting", "no-results", "debugging"],
+      "weight": 1.3
+    },
+    {
+      "id": "refining-questions-024",
+      "module": "Module 2",
+      "domain": "Refining Questions",
+      "question": "How do case sensitivity considerations affect question filtering?",
+      "options": [
+        "All filters are automatically case-insensitive",
+        "Some operators may be case-sensitive depending on the sensor and platform",
+        "Case sensitivity only applies to numeric comparisons",
+        "Case sensitivity is user-configurable globally"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "advanced",
+      "explanation": "Case sensitivity varies depending on the specific sensor, platform, and operator being used, so it's important to test filtering behavior.",
+      "tags": ["case-sensitivity", "filtering", "platform-differences"],
+      "weight": 1.5
+    },
+    {
+      "id": "refining-questions-025",
+      "module": "Module 2",
+      "domain": "Refining Questions",
+      "question": "What is the most effective way to create a Computer Group for endpoints that need urgent security patches?",
+      "options": [
+        "Manual assignment based on last patch date",
+        "Dynamic group based on criteria like 'Last Reboot older than X days' and 'Operating System Version'",
+        "Static group updated weekly by administrators",
+        "Geographic-based grouping only"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "advanced",
+      "explanation": "Dynamic groups based on patch-relevant criteria automatically maintain membership as endpoint conditions change, ensuring current identification of vulnerable systems.",
+      "tags": ["security-patching", "dynamic-groups", "vulnerability-management"],
+      "weight": 1.5
+    },
+    {
+      "id": "taking-action-001",
+      "module": "Module 3",
+      "domain": "Taking Action",
+      "question": "What is the primary purpose of Tanium Actions?",
+      "options": [
+        "To collect data from endpoints",
+        "To make changes or perform tasks on endpoints",
+        "To create reports and dashboards",
+        "To manage user accounts and permissions"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "beginner",
+      "explanation": "Tanium Actions are designed to make changes or perform tasks on endpoints, such as installing software, applying configurations, or running maintenance scripts.",
+      "tags": ["actions", "purpose", "endpoint-changes"],
+      "weight": 1.0
+    },
+    {
+      "id": "taking-action-002", 
+      "module": "Module 3",
+      "domain": "Taking Action",
+      "question": "What should you always do before deploying an action to production endpoints?",
+      "options": [
+        "Test the action on a small group of non-production endpoints",
+        "Deploy to all endpoints immediately",
+        "Schedule the action for peak business hours",
+        "Skip validation to save time"
+      ],
+      "correctAnswer": 0,
+      "difficulty": "beginner",
+      "explanation": "Testing actions on a small group first helps identify potential issues and validates expected behavior before broader deployment.",
+      "tags": ["testing", "validation", "best-practice"],
+      "weight": 1.0
+    },
+    {
+      "id": "taking-action-003",
+      "module": "Module 3",
+      "domain": "Taking Action",
+      "question": "What information do exit codes provide after action execution?",
+      "options": [
+        "The network bandwidth used during deployment",
+        "Success or failure status of the action",
+        "The time taken to execute the action",
+        "The user account that initiated the action"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "beginner",
+      "explanation": "Exit codes indicate whether an action succeeded (typically 0) or failed (non-zero values), providing crucial feedback on action execution.",
+      "tags": ["exit-codes", "status", "success-failure"],
+      "weight": 1.0
+    },
+    {
+      "id": "taking-action-004",
+      "module": "Module 3",
+      "domain": "Taking Action",
+      "question": "When should you consider implementing a rollback plan for an action?",
+      "options": [
+        "Only for actions that modify system files",
+        "For any action that makes significant changes to endpoint configuration or software",
+        "Never, as Tanium automatically handles rollbacks",
+        "Only during maintenance windows"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "intermediate",
+      "explanation": "Any action making significant changes should have a rollback plan to quickly restore endpoints to their previous state if issues occur.",
+      "tags": ["rollback", "risk-management", "planning"],
+      "weight": 1.3
+    },
+    {
+      "id": "taking-action-005",
+      "module": "Module 3",
+      "domain": "Taking Action",
+      "question": "Which approach is best for deploying actions to large numbers of endpoints?",
+      "options": [
+        "Deploy to all endpoints simultaneously",
+        "Use staged deployment with small batches and validation between batches",
+        "Deploy only during off-hours regardless of batch size",
+        "Wait for manual confirmation from each endpoint user"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "intermediate",
+      "explanation": "Staged deployment allows you to validate success in small groups before proceeding, reducing risk and enabling quick response to issues.",
+      "tags": ["staged-deployment", "large-scale", "risk-mitigation"],
+      "weight": 1.3
+    },
+    {
+      "id": "taking-action-006",
+      "module": "Module 3",
+      "domain": "Taking Action",
+      "question": "What is a Tanium Package in the context of actions?",
+      "options": [
+        "A compressed file containing multiple sensors",
+        "A pre-built bundle containing action logic, parameters, and metadata",
+        "A database backup of action history",
+        "A network protocol for action deployment"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "beginner",
+      "explanation": "Packages are pre-built bundles that contain the action logic, configurable parameters, and metadata needed to perform specific tasks on endpoints.",
+      "tags": ["packages", "pre-built", "action-logic"],
+      "weight": 1.0
+    },
+    {
+      "id": "taking-action-007",
+      "module": "Module 3",
+      "domain": "Taking Action",
+      "question": "How do you monitor the progress of action deployment across multiple endpoints?",
+      "options": [
+        "Wait for email notifications only",
+        "Use the action status interface to track real-time deployment progress",
+        "Check individual endpoint logs manually",
+        "Actions cannot be monitored during deployment"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "beginner",
+      "explanation": "Tanium provides real-time action status interfaces that show deployment progress, success rates, and any errors across all targeted endpoints.",
+      "tags": ["monitoring", "progress", "real-time"],
+      "weight": 1.0
+    },
+    {
+      "id": "taking-action-008",
+      "module": "Module 3",
+      "domain": "Taking Action",
+      "question": "What does an exit code of '0' typically indicate?",
+      "options": [
+        "The action failed to execute",
+        "The action completed successfully",
+        "The action is still running",
+        "The action was cancelled by the user"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "beginner",
+      "explanation": "In most systems, an exit code of 0 indicates successful completion, while non-zero values typically indicate various types of failures or issues.",
+      "tags": ["exit-codes", "success", "zero-exit"],
+      "weight": 1.0
+    },
+    {
+      "id": "taking-action-009",
+      "module": "Module 3",
+      "domain": "Taking Action",
+      "question": "Which factor is most important when determining action timeout values?",
+      "options": [
+        "The number of endpoints being targeted",
+        "The expected execution time based on the action's complexity and endpoint performance",
+        "The time of day the action is deployed",
+        "The user's security clearance level"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "intermediate",
+      "explanation": "Timeout values should be based on realistic expectations of how long the action needs to complete, considering both action complexity and endpoint performance characteristics.",
+      "tags": ["timeout", "execution-time", "performance"],
+      "weight": 1.3
+    },
+    {
+      "id": "taking-action-010",
+      "module": "Module 3",
+      "domain": "Taking Action",
+      "question": "What is the benefit of using action parameters?",
+      "options": [
+        "They make actions execute faster",
+        "They allow customization of action behavior without modifying the underlying script",
+        "They automatically generate rollback procedures",
+        "They provide better security encryption"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "intermediate",
+      "explanation": "Parameters allow you to customize action behavior (like file paths, configuration values, or options) without needing to modify the core action script.",
+      "tags": ["parameters", "customization", "flexibility"],
+      "weight": 1.3
+    },
+    {
+      "id": "taking-action-011",
+      "module": "Module 3",
+      "domain": "Taking Action",
+      "question": "How should you handle actions that require administrative privileges on Windows endpoints?",
+      "options": [
+        "Run actions only with standard user privileges",
+        "Ensure the Tanium client has appropriate elevated privileges or use built-in elevation mechanisms",
+        "Manually log into each endpoint as administrator",
+        "Administrative privileges are not supported"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "intermediate",
+      "explanation": "Actions requiring administrative privileges need the Tanium client to have appropriate elevation or use built-in mechanisms to elevate privileges safely.",
+      "tags": ["privileges", "elevation", "windows"],
+      "weight": 1.3
+    },
+    {
+      "id": "taking-action-012",
+      "module": "Module 3",
+      "domain": "Taking Action",
+      "question": "What is the most appropriate response when an action fails on a subset of endpoints?",
+      "options": [
+        "Immediately retry the action on all endpoints",
+        "Investigate the failure reasons, fix issues, then retry only on the failed endpoints",
+        "Cancel the entire action deployment",
+        "Ignore the failures and proceed with other actions"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "intermediate",
+      "explanation": "Investigating failures helps identify and resolve specific issues, then retrying only on failed endpoints avoids unnecessary reprocessing of successful deployments.",
+      "tags": ["failure-handling", "troubleshooting", "retry-logic"],
+      "weight": 1.3
+    },
+    {
+      "id": "taking-action-013",
+      "module": "Module 3",
+      "domain": "Taking Action",
+      "question": "Which information is most important to document when creating custom actions?",
+      "options": [
+        "Only the expected exit codes",
+        "Purpose, parameters, prerequisites, expected results, and potential risks",
+        "Only the script source code",
+        "Just the creation date and author"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "advanced",
+      "explanation": "Comprehensive documentation helps others understand, use, and maintain the action safely, including its purpose, configuration, requirements, and risks.",
+      "tags": ["documentation", "custom-actions", "best-practice"],
+      "weight": 1.5
+    },
+    {
+      "id": "taking-action-014",
+      "module": "Module 3",
+      "domain": "Taking Action",
+      "question": "How does Tanium's linear chain architecture benefit action deployment?",
+      "options": [
+        "Actions are deployed faster to endpoints closer to the server",
+        "Action deployment speed remains consistent regardless of endpoint count",
+        "Actions require less network bandwidth on endpoints farther from the server",
+        "Actions can only be deployed during low network usage periods"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "advanced",
+      "explanation": "The linear chain ensures consistent deployment performance regardless of scale, maintaining efficient action distribution without overwhelming network infrastructure.",
+      "tags": ["linear-chain", "deployment-speed", "scalability"],
+      "weight": 1.5
+    },
+    {
+      "id": "taking-action-015",
+      "module": "Module 3",
+      "domain": "Taking Action",
+      "question": "What is the safest approach for deploying security patches via Tanium actions?",
+      "options": [
+        "Deploy all patches immediately to all endpoints",
+        "Test patches on representative systems, then deploy in phases with monitoring",
+        "Only deploy patches during maintenance windows",
+        "Wait for vendor confirmation before any deployment"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "intermediate",
+      "explanation": "Testing and phased deployment with monitoring allows you to identify compatibility issues and validate patch success before full deployment.",
+      "tags": ["security-patches", "phased-deployment", "safety"],
+      "weight": 1.3
+    },
+    {
+      "id": "taking-action-016",
+      "module": "Module 3",
+      "domain": "Taking Action",
+      "question": "Which scenario would require the most careful action planning and testing?",
+      "options": [
+        "Installing a minor software update",
+        "Modifying critical system configuration files",
+        "Collecting log files from endpoints",
+        "Restarting a non-critical service"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "advanced",
+      "explanation": "Modifying critical system configuration files carries the highest risk of causing system instability or security issues, requiring extensive planning and testing.",
+      "tags": ["risk-assessment", "critical-changes", "planning"],
+      "weight": 1.5
+    },
+    {
+      "id": "taking-action-017",
+      "module": "Module 3",
+      "domain": "Taking Action",
+      "question": "How do you validate that an action achieved its intended result?",
+      "options": [
+        "Check only that the action completed without errors",
+        "Use follow-up questions to verify the desired state was achieved",
+        "Wait for user complaints if something is wrong",
+        "Action validation is automatic and requires no manual checking"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "intermediate",
+      "explanation": "Follow-up questions allow you to verify that the action not only completed but actually achieved the intended configuration or state changes.",
+      "tags": ["validation", "follow-up", "verification"],
+      "weight": 1.3
+    },
+    {
+      "id": "taking-action-018",
+      "module": "Module 3",
+      "domain": "Taking Action",
+      "question": "What is the primary advantage of using pre-built Tanium packages versus creating custom actions?",
+      "options": [
+        "Pre-built packages execute faster",
+        "Pre-built packages are tested, documented, and follow best practices",
+        "Pre-built packages use less network bandwidth",
+        "Pre-built packages require fewer permissions"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "beginner",
+      "explanation": "Pre-built packages benefit from extensive testing, documentation, and incorporation of best practices, reducing development time and risk.",
+      "tags": ["pre-built-packages", "best-practices", "reliability"],
+      "weight": 1.0
+    },
+    {
+      "id": "taking-action-019",
+      "module": "Module 3",
+      "domain": "Taking Action",
+      "question": "Which action deployment pattern minimizes risk in large environments?",
+      "options": [
+        "Deploy to all production systems first, then test systems",
+        "Deploy to test systems, then small production batches, then full deployment",
+        "Deploy randomly across the environment",
+        "Deploy to the most critical systems first"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "intermediate",
+      "explanation": "Following a test-to-production progression with small batches allows validation at each stage and minimizes impact if issues are discovered.",
+      "tags": ["deployment-pattern", "risk-minimization", "testing"],
+      "weight": 1.3
+    },
+    {
+      "id": "taking-action-020",
+      "module": "Module 3",
+      "domain": "Taking Action",
+      "question": "What should you do if an action shows successful exit codes but doesn't achieve the expected result?",
+      "options": [
+        "Assume the action worked correctly",
+        "Investigate whether the exit codes accurately reflect the action's actual outcome",
+        "Immediately redeploy the action",
+        "Contact Tanium support first"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "advanced",
+      "explanation": "Sometimes actions may report success but not achieve the intended result due to script logic issues, permission problems, or environmental factors.",
+      "tags": ["troubleshooting", "exit-codes", "validation"],
+      "weight": 1.5
+    },
+    {
+      "id": "navigation-001",
+      "module": "Module 4",
+      "domain": "Navigation",
+      "question": "What is the primary purpose of the Tanium Console's left sidebar navigation?",
+      "options": [
+        "To display real-time performance metrics",
+        "To provide access to module-specific functionality and administration",
+        "To show currently connected endpoints",
+        "To manage user account settings"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "beginner",
+      "explanation": "The left sidebar provides organized access to the current module's main functions, administration settings, and configuration options.",
+      "tags": ["navigation", "sidebar", "module-access"],
+      "weight": 1.0
+    },
+    {
+      "id": "navigation-002",
+      "module": "Module 4", 
+      "domain": "Navigation",
+      "question": "How do you switch between different Tanium modules?",
+      "options": [
+        "Use the module selector in the top navigation bar",
+        "Log out and log back in with different credentials",
+        "Use the left sidebar exclusively",
+        "Modules cannot be switched during a session"
+      ],
+      "correctAnswer": 0,
+      "difficulty": "beginner",
+      "explanation": "The module selector in the top navigation bar provides quick access to switch between installed and accessible modules.",
+      "tags": ["module-switching", "navigation", "top-bar"],
+      "weight": 1.0
+    },
+    {
+      "id": "navigation-003",
+      "module": "Module 4",
+      "domain": "Navigation",
+      "question": "What information do breadcrumb navigations provide in the Tanium Console?",
+      "options": [
+        "Real-time system performance data",
+        "Your current location within the module hierarchy",
+        "Recently executed questions and actions",
+        "Connected endpoint statistics"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "beginner",
+      "explanation": "Breadcrumb navigation shows your current location within the module's page hierarchy, helping with navigation and orientation.",
+      "tags": ["breadcrumbs", "location", "hierarchy"],
+      "weight": 1.0
+    },
+    {
+      "id": "navigation-004",
+      "module": "Module 4",
+      "domain": "Navigation",
+      "question": "Which module would you access for real-time endpoint querying and action deployment?",
+      "options": [
+        "Trends",
+        "Connect",
+        "Interact",
+        "Asset"
+      ],
+      "correctAnswer": 2,
+      "difficulty": "beginner",
+      "explanation": "The Interact module is the primary interface for real-time endpoint querying and action deployment activities.",
+      "tags": ["interact", "real-time", "primary-module"],
+      "weight": 1.0
+    },
+    {
+      "id": "navigation-005",
+      "module": "Module 4",
+      "domain": "Navigation",
+      "question": "How can you quickly access frequently used questions in the Interact module?",
+      "options": [
+        "Use the Saved Questions feature",
+        "Bookmark browser pages",
+        "Create custom dashboards only",
+        "Memorize the question syntax"
+      ],
+      "correctAnswer": 0,
+      "difficulty": "beginner",
+      "explanation": "Saved Questions allow you to store and quickly access frequently used queries, improving workflow efficiency.",
+      "tags": ["saved-questions", "efficiency", "workflow"],
+      "weight": 1.0
+    },
+    {
+      "id": "navigation-006",
+      "module": "Module 4",
+      "domain": "Navigation",
+      "question": "What is the most efficient way to find a specific sensor when building a question?",
+      "options": [
+        "Browse through all available sensors alphabetically",
+        "Use the sensor browser's search functionality",
+        "Guess the sensor name and try variations",
+        "Ask other team members for sensor names"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "intermediate",
+      "explanation": "The sensor browser's search functionality allows you to quickly locate sensors by name, category, or description.",
+      "tags": ["sensor-browser", "search", "efficiency"],
+      "weight": 1.3
+    },
+    {
+      "id": "navigation-007",
+      "module": "Module 4",
+      "domain": "Navigation",
+      "question": "Where would you typically find configuration options for a specific module?",
+      "options": [
+        "In the main dashboard only",
+        "In the Administration section of the module's sidebar",
+        "Only in global system settings",
+        "Configuration options are not available"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "beginner",
+      "explanation": "Most modules include an Administration section in their sidebar containing module-specific configuration options and settings.",
+      "tags": ["administration", "configuration", "module-settings"],
+      "weight": 1.0
+    },
+    {
+      "id": "navigation-008",
+      "module": "Module 4",
+      "domain": "Navigation",
+      "question": "How do you access help documentation while working in the Tanium Console?",
+      "options": [
+        "Exit the console and use external documentation",
+        "Use the Help icon in the top navigation bar",
+        "Help is only available during installation",
+        "Contact support for each question"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "beginner",
+      "explanation": "The Help icon in the top navigation provides access to context-sensitive documentation and support resources.",
+      "tags": ["help", "documentation", "support"],
+      "weight": 1.0
+    },
+    {
+      "id": "navigation-009",
+      "module": "Module 4",
+      "domain": "Navigation",
+      "question": "What is the benefit of customizing dashboard widgets for your role?",
+      "options": [
+        "It improves server performance",
+        "It provides quick access to the most relevant information for your responsibilities",
+        "It reduces network bandwidth usage",
+        "It automatically creates reports"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "intermediate",
+      "explanation": "Customizing dashboard widgets allows you to surface the most relevant information for your role and responsibilities, improving efficiency.",
+      "tags": ["dashboard-customization", "relevance", "efficiency"],
+      "weight": 1.3
+    },
+    {
+      "id": "navigation-010",
+      "module": "Module 4",
+      "domain": "Navigation",
+      "question": "How do you efficiently navigate back to previous pages in the console?",
+      "options": [
+        "Use browser back/forward buttons exclusively",
+        "Use breadcrumb navigation or the console's built-in navigation history",
+        "Log out and log back in",
+        "Previous page navigation is not available"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "beginner",
+      "explanation": "Breadcrumb navigation and the console's navigation features provide efficient ways to move between pages and return to previous locations.",
+      "tags": ["navigation-history", "breadcrumbs", "efficiency"],
+      "weight": 1.0
+    },
+    {
+      "id": "navigation-011",
+      "module": "Module 4",
+      "domain": "Navigation",
+      "question": "Which console feature helps you understand your current permissions and access level?",
+      "options": [
+        "The status bar at the bottom",
+        "The user menu in the top navigation",
+        "The left sidebar content",
+        "Dashboard widgets only"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "intermediate",
+      "explanation": "The user menu typically displays your current role, permissions, and access level information within the Tanium environment.",
+      "tags": ["permissions", "user-menu", "access-level"],
+      "weight": 1.3
+    },
+    {
+      "id": "navigation-012",
+      "module": "Module 4",
+      "domain": "Navigation",
+      "question": "What is the most effective way to organize your workspace for daily Tanium operations?",
+      "options": [
+        "Keep all default settings unchanged",
+        "Customize dashboards, save frequently used questions, and organize bookmarks",
+        "Use only the basic interface features",
+        "Organization features are not available"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "intermediate",
+      "explanation": "Customizing dashboards, saving common queries, and organizing resources improves daily workflow efficiency and productivity.",
+      "tags": ["workspace-organization", "productivity", "customization"],
+      "weight": 1.3
+    },
+    {
+      "id": "navigation-013",
+      "module": "Module 4",
+      "domain": "Navigation",
+      "question": "How do you monitor the status of running questions and actions?",
+      "options": [
+        "Check email notifications only",
+        "Use the status indicators and progress monitoring features in the console",
+        "Wait for completion notifications",
+        "Status monitoring is not available"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "beginner",
+      "explanation": "The console provides real-time status indicators and progress monitoring for running questions and actions.",
+      "tags": ["status-monitoring", "progress", "real-time"],
+      "weight": 1.0
+    },
+    {
+      "id": "navigation-014",
+      "module": "Module 4",
+      "domain": "Navigation",
+      "question": "Which approach is best for learning advanced module functionality?",
+      "options": [
+        "Trial and error with production systems",
+        "Start with basic features, use help resources, and gradually explore advanced options",
+        "Skip documentation and learn from colleagues only",
+        "Advanced features should be avoided"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "intermediate",
+      "explanation": "Progressive learning from basic to advanced features, combined with documentation and help resources, provides safe and effective skill development.",
+      "tags": ["learning-approach", "advanced-features", "progression"],
+      "weight": 1.3
+    },
+    {
+      "id": "navigation-015",
+      "module": "Module 4",
+      "domain": "Navigation",
+      "question": "What information is typically displayed in the console's main content area?",
+      "options": [
+        "Only navigation menus",
+        "The current page's data, forms, results, and primary functionality",
+        "User account information only",
+        "System performance metrics exclusively"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "beginner",
+      "explanation": "The main content area displays the current page's primary functionality, including data tables, forms, results, and interactive elements.",
+      "tags": ["content-area", "functionality", "interface"],
+      "weight": 1.0
+    },
+    {
+      "id": "navigation-016",
+      "module": "Module 4",
+      "domain": "Navigation",
+      "question": "How do you efficiently switch between different views within a single module?",
+      "options": [
+        "Use the left sidebar navigation options",
+        "Log out and log back in",
+        "Use only browser tabs",
+        "View switching is not supported"
+      ],
+      "correctAnswer": 0,
+      "difficulty": "beginner",
+      "explanation": "The left sidebar provides organized navigation between different views and functions within the current module.",
+      "tags": ["view-switching", "sidebar", "within-module"],
+      "weight": 1.0
+    },
+    {
+      "id": "navigation-017",
+      "module": "Module 4",
+      "domain": "Navigation",
+      "question": "What is the advantage of using the console's built-in notification system?",
+      "options": [
+        "It replaces the need for email entirely",
+        "It provides real-time alerts about system events, completed operations, and important updates",
+        "It only works during business hours",
+        "Notifications are purely decorative"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "intermediate",
+      "explanation": "The notification system provides timely alerts about system events, operation completions, and important updates relevant to your work.",
+      "tags": ["notifications", "alerts", "real-time"],
+      "weight": 1.3
+    },
+    {
+      "id": "navigation-018",
+      "module": "Module 4",
+      "domain": "Navigation",
+      "question": "Which console feature helps you understand the relationships between different data elements?",
+      "options": [
+        "Color coding and visual indicators in data displays",
+        "All data is displayed identically",
+        "Relationships are not shown in the console",
+        "Only text descriptions provide relationship information"
+      ],
+      "correctAnswer": 0,
+      "difficulty": "advanced",
+      "explanation": "The console uses color coding, visual indicators, and structured displays to help users understand relationships and connections between data elements.",
+      "tags": ["data-relationships", "visual-indicators", "understanding"],
+      "weight": 1.5
+    },
+    {
+      "id": "navigation-019",
+      "module": "Module 4",
+      "domain": "Navigation",
+      "question": "How do you access advanced configuration options for questions and actions?",
+      "options": [
+        "Advanced options are not available in the console",
+        "Through expanded configuration panels or advanced settings sections",
+        "Only through command-line interfaces",
+        "Advanced configurations are automatic"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "intermediate",
+      "explanation": "The console provides expanded configuration panels and advanced settings sections for detailed customization of questions and actions.",
+      "tags": ["advanced-configuration", "customization", "options"],
+      "weight": 1.3
+    },
+    {
+      "id": "navigation-020",
+      "module": "Module 4",
+      "domain": "Navigation",
+      "question": "What is the best practice for maintaining efficiency while working with multiple Tanium modules?",
+      "options": [
+        "Work with only one module at a time",
+        "Use browser tabs, save context between modules, and organize workflows across modules",
+        "Avoid switching between modules",
+        "Module efficiency is not a concern"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "advanced",
+      "explanation": "Effective multi-module workflows involve using browser tabs strategically, saving context, and organizing work to minimize context switching overhead.",
+      "tags": ["multi-module", "efficiency", "workflow"],
+      "weight": 1.5
+    },
+    {
+      "id": "navigation-021",
+      "module": "Module 4",
+      "domain": "Navigation",
+      "question": "How do keyboard shortcuts improve console navigation efficiency?",
+      "options": [
+        "Shortcuts are not available in web interfaces",
+        "They provide faster access to common functions without using the mouse",
+        "Shortcuts only work for administrator accounts",
+        "They primarily improve server performance"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "intermediate",
+      "explanation": "Keyboard shortcuts enable faster access to frequently used functions, reducing reliance on mouse navigation and improving workflow speed.",
+      "tags": ["keyboard-shortcuts", "efficiency", "speed"],
+      "weight": 1.3
+    },
+    {
+      "id": "navigation-022",
+      "module": "Module 4",
+      "domain": "Navigation",
+      "question": "What is the purpose of the expand/collapse toggle for the sidebar?",
+      "options": [
+        "To hide the sidebar permanently",
+        "To maximize screen space for data views when detailed navigation isn't needed",
+        "To improve server performance",
+        "Sidebar toggle has no functional purpose"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "beginner",
+      "explanation": "The sidebar toggle allows users to maximize screen space for data views when navigation options aren't immediately needed.",
+      "tags": ["sidebar-toggle", "screen-space", "interface"],
+      "weight": 1.0
+    },
+    {
+      "id": "navigation-023",
+      "module": "Module 4",
+      "domain": "Navigation",
+      "question": "Which strategy helps maintain context when working on complex, multi-step procedures?",
+      "options": [
+        "Complete each step immediately without planning",
+        "Use breadcrumbs, take notes, and save intermediate results",
+        "Avoid complex procedures entirely",
+        "Context maintenance is automatic"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "advanced",
+      "explanation": "Complex procedures benefit from using navigation aids, documentation, and saving intermediate results to maintain context and enable recovery if interrupted.",
+      "tags": ["context-maintenance", "complex-procedures", "workflow"],
+      "weight": 1.5
+    },
+    {
+      "id": "navigation-024",
+      "module": "Module 4",
+      "domain": "Navigation",
+      "question": "How do you efficiently locate specific configuration settings across different modules?",
+      "options": [
+        "Search through every module manually",
+        "Use search functionality, documentation, or logical grouping within Administration sections",
+        "Configuration settings cannot be located efficiently",
+        "All settings are in the same location"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "intermediate",
+      "explanation": "Using search features, consulting documentation, and understanding logical grouping patterns helps locate specific settings efficiently.",
+      "tags": ["configuration-search", "settings-location", "efficiency"],
+      "weight": 1.3
+    },
+    {
+      "id": "navigation-025",
+      "module": "Module 4",
+      "domain": "Navigation",
+      "question": "What is the most effective approach for troubleshooting navigation issues in the console?",
+      "options": [
+        "Restart the browser immediately",
+        "Check permissions, clear browser cache, verify network connectivity, and consult help resources",
+        "Contact support without any troubleshooting",
+        "Navigation issues cannot be troubleshot"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "advanced",
+      "explanation": "Systematic troubleshooting including permission checks, browser maintenance, network verification, and resource consultation addresses most common navigation issues.",
+      "tags": ["troubleshooting", "navigation-issues", "systematic-approach"],
+      "weight": 1.5
+    },
+    {
+      "id": "reporting-001",
+      "module": "Module 5",
+      "domain": "Reporting & Export",
+      "question": "What is the primary purpose of the Trends module in Tanium?",
+      "options": [
+        "To execute real-time questions",
+        "To store and analyze historical endpoint data",
+        "To deploy actions to endpoints",
+        "To manage user permissions"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "beginner",
+      "explanation": "The Trends module is designed to collect, store, and analyze endpoint data over time, providing historical insights and trending capabilities.",
+      "tags": ["trends", "historical-data", "analysis"],
+      "weight": 1.0
+    },
+    {
+      "id": "reporting-002",
+      "module": "Module 5",
+      "domain": "Reporting & Export",
+      "question": "Which data export format would be most appropriate for further analysis in Excel?",
+      "options": [
+        "JSON",
+        "CSV",
+        "XML",
+        "PDF"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "beginner",
+      "explanation": "CSV (Comma Separated Values) format is ideal for Excel import and analysis, providing structured data in a spreadsheet-compatible format.",
+      "tags": ["export-formats", "csv", "excel"],
+      "weight": 1.0
+    },
+    {
+      "id": "reporting-003",
+      "module": "Module 5",
+      "domain": "Reporting & Export",
+      "question": "How do you schedule a report to run automatically at regular intervals?",
+      "options": [
+        "Manual execution is the only option",
+        "Use the scheduling features within the reporting module",
+        "Schedule through external cron jobs only",
+        "Automatic scheduling is not available"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "beginner",
+      "explanation": "Tanium's reporting modules include built-in scheduling capabilities for automated report generation at specified intervals.",
+      "tags": ["scheduling", "automation", "regular-reports"],
+      "weight": 1.0
+    },
+    {
+      "id": "reporting-004",
+      "module": "Module 5",
+      "domain": "Reporting & Export",
+      "question": "What is the advantage of using dashboard visualizations over raw data tables?",
+      "options": [
+        "Dashboards use less storage space",
+        "Dashboards provide easier pattern recognition and executive-level summaries",
+        "Dashboards are more accurate than tables",
+        "Dashboards execute faster than queries"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "intermediate",
+      "explanation": "Dashboard visualizations make it easier to identify patterns, trends, and key insights, especially for executive reporting and quick decision-making.",
+      "tags": ["dashboards", "visualization", "pattern-recognition"],
+      "weight": 1.3
+    },
+    {
+      "id": "reporting-005",
+      "module": "Module 5",
+      "domain": "Reporting & Export",
+      "question": "Which approach is best for creating reports that will be shared with external stakeholders?",
+      "options": [
+        "Share raw Tanium console access",
+        "Create formatted reports with context, explanations, and executive summaries",
+        "Export only raw data without formatting",
+        "External sharing is not recommended"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "intermediate",
+      "explanation": "External stakeholders benefit from formatted reports that include context, explanations, and executive summaries rather than raw technical data.",
+      "tags": ["external-sharing", "formatting", "stakeholders"],
+      "weight": 1.3
+    },
+    {
+      "id": "reporting-006",
+      "module": "Module 5",
+      "domain": "Reporting & Export",
+      "question": "How do you ensure report data accuracy when working with historical trends?",
+      "options": [
+        "Historical data is always accurate by default",
+        "Validate data collection settings, check for gaps, and understand sampling methods",
+        "Only use the most recent data points",
+        "Data accuracy cannot be verified"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "intermediate",
+      "explanation": "Ensuring accuracy requires validating collection settings, identifying data gaps, and understanding how historical data is sampled and stored.",
+      "tags": ["data-accuracy", "validation", "historical-trends"],
+      "weight": 1.3
+    },
+    {
+      "id": "reporting-007",
+      "module": "Module 5",
+      "domain": "Reporting & Export",
+      "question": "What is the benefit of creating standardized report templates?",
+      "options": [
+        "Templates reduce server processing power",
+        "Templates ensure consistency, save time, and improve collaboration",
+        "Templates are required for all reports",
+        "Templates only work with specific data types"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "beginner",
+      "explanation": "Standardized templates ensure consistent formatting, save time in report creation, and make it easier to collaborate and share reports.",
+      "tags": ["templates", "standardization", "consistency"],
+      "weight": 1.0
+    },
+    {
+      "id": "reporting-008",
+      "module": "Module 5",
+      "domain": "Reporting & Export",
+      "question": "Which visualization type would be most effective for showing security compliance percentages over time?",
+      "options": [
+        "Data table only",
+        "Line chart or area chart",
+        "Pie chart only",
+        "Text summary only"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "intermediate",
+      "explanation": "Line charts or area charts effectively show changes in compliance percentages over time, making trends and improvements clearly visible.",
+      "tags": ["visualization-types", "compliance", "trends"],
+      "weight": 1.3
+    },
+    {
+      "id": "reporting-009",
+      "module": "Module 5",
+      "domain": "Reporting & Export",
+      "question": "How should you handle sensitive data when creating reports for different audiences?",
+      "options": [
+        "Include all data regardless of audience",
+        "Filter and redact sensitive information based on audience clearance and need-to-know",
+        "Never include any specific data",
+        "Sensitivity is not a reporting concern"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "advanced",
+      "explanation": "Reports should be tailored to include only information appropriate for the audience's clearance level and legitimate need-to-know requirements.",
+      "tags": ["data-sensitivity", "audience-filtering", "security"],
+      "weight": 1.5
+    },
+    {
+      "id": "reporting-010",
+      "module": "Module 5",
+      "domain": "Reporting & Export",
+      "question": "What is the most efficient way to distribute regular reports to multiple recipients?",
+      "options": [
+        "Manual email distribution",
+        "Automated distribution lists with scheduled delivery",
+        "Post reports on shared drives only",
+        "Recipients should access the console directly"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "beginner",
+      "explanation": "Automated distribution with scheduled delivery ensures consistent, timely report delivery to multiple recipients without manual effort.",
+      "tags": ["distribution", "automation", "efficiency"],
+      "weight": 1.0
+    },
+    {
+      "id": "reporting-011",
+      "module": "Module 5", 
+      "domain": "Reporting & Export",
+      "question": "Which factors should influence your choice of data aggregation level for reports?",
+      "options": [
+        "Always use the most detailed level available",
+        "Consider audience needs, report purpose, and data volume",
+        "Use only summary-level data",
+        "Aggregation level doesn't matter"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "advanced",
+      "explanation": "The appropriate aggregation level depends on what the audience needs to know, the report's purpose, and practical considerations like data volume and readability.",
+      "tags": ["aggregation", "audience-needs", "data-volume"],
+      "weight": 1.5
+    },
+    {
+      "id": "reporting-012",
+      "module": "Module 5",
+      "domain": "Reporting & Export",
+      "question": "How do you create effective executive dashboards for IT security metrics?",
+      "options": [
+        "Include all available technical details",
+        "Focus on key performance indicators, trends, and exceptions that require executive attention",
+        "Use only numerical data without charts",
+        "Executive dashboards are not needed"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "intermediate",
+      "explanation": "Executive dashboards should focus on high-level KPIs, trends, and exceptions that require leadership attention rather than overwhelming with technical details.",
+      "tags": ["executive-dashboards", "kpis", "high-level"],
+      "weight": 1.3
+    },
+    {
+      "id": "reporting-013",
+      "module": "Module 5",
+      "domain": "Reporting & Export",
+      "question": "What is the best practice for archiving and retaining historical reports?",
+      "options": [
+        "Delete reports after one week",
+        "Establish retention policies based on compliance requirements and business needs",
+        "Keep all reports indefinitely",
+        "Archiving is not necessary"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "advanced",
+      "explanation": "Report retention should align with compliance requirements, audit needs, and business value while managing storage costs effectively.",
+      "tags": ["archiving", "retention-policies", "compliance"],
+      "weight": 1.5
+    },
+    {
+      "id": "reporting-014",
+      "module": "Module 5",
+      "domain": "Reporting & Export",
+      "question": "Which approach helps ensure report performance when dealing with large datasets?",
+      "options": [
+        "Always include all available data",
+        "Use appropriate filtering, sampling, and aggregation to optimize performance",
+        "Avoid reports with large datasets",
+        "Performance optimization is automatic"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "intermediate",
+      "explanation": "Performance optimization through strategic filtering, sampling, and aggregation ensures reports remain responsive while providing meaningful insights.",
+      "tags": ["performance-optimization", "large-datasets", "filtering"],
+      "weight": 1.3
+    },
+    {
+      "id": "reporting-015",
+      "module": "Module 5",
+      "domain": "Reporting & Export",
+      "question": "How do you validate that scheduled reports are executing successfully?",
+      "options": [
+        "Wait for recipients to complain",
+        "Monitor execution logs, delivery confirmations, and set up failure notifications",
+        "Check manually every day",
+        "Validation is not necessary"
+      ],
+      "correctAnswer": 1,
+      "difficulty": "intermediate",
+      "explanation": "Proactive monitoring through execution logs, delivery confirmations, and failure notifications ensures reliable report delivery.",
+      "tags": ["validation", "monitoring", "scheduled-reports"],
+      "weight": 1.3
+    }
+  ]
+}
