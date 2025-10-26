@@ -46,9 +46,8 @@ async function bundleAllMDX() {
           remarkPlugins: [],
           rehypePlugins: [],
           development: false,
-          format: 'function-body', // Required for MDXRemoteClient
+          format: 'mdx', // Use 'mdx' format for proper type compatibility and array prop handling
           // DO NOT use jsx: true - that outputs JSX which can't be executed
-          // Let it default to outputting JavaScript function code
         },
         parseFrontmatter: false,
         scope: {},
