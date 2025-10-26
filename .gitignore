@@ -76,8 +76,8 @@ lighthouse-*
 CUsersrobneAppDataLocallighthouse.*/
 *lighthouse.*/
 
-# Zone Identifier
-*[Zone.Identifier]
+# Zone Identifier (Windows alternate data streams)
+*:Zone.Identifier
 
 # OS generated files
 .DS_Store
