@@ -34,6 +34,7 @@ import {
   Plus,
   Upload,
   Sparkles,
+  Beaker,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
@@ -135,6 +136,12 @@ export function Sidebar({ isOpen = true, onClose, className }: SidebarProps) {
       icon: FlaskConical,
       badge: "NEW",
       href: "/labs",
+    },
+    {
+      id: "lab-companion",
+      label: "Lab Companion",
+      icon: Beaker,
+      href: "/lab-companion",
     },
     {
       id: "simulator",
