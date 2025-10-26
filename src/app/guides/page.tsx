@@ -4,162 +4,164 @@
  * Matches existing modules page structure and functionality
  */
 
-'use client';
+"use client";
 
-import { ArrowLeft, BookOpen, Download, FileText } from 'lucide-react';
-import { useEffect, useState } from 'react';
-import { StudyGuideList } from '@/components/guides/StudyGuideList';
-import { StudyGuideViewer } from '@/components/guides/StudyGuideViewer';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Progress } from '@/components/ui/progress';
+import { useEffect, useState } from "react";
+import { StudyGuideList } from "@/components/guides/StudyGuideList";
+import { StudyGuideViewer } from "@/components/guides/StudyGuideViewer";
+import { useModule } from "@/contexts/ModuleContext";
+import { Button } from "@/components/ui/button";
+import { ArrowLeft, BookOpen, FileText, Download } from "lucide-react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Progress } from "@/components/ui/progress";
 
 // Temporary mock data - will be replaced with actual data
 const mockStudyGuides = [
   {
-    id: 'guide-1',
-    moduleId: 'fundamentals-1',
-    title: 'Tanium Platform Overview',
+    id: "guide-1",
+    moduleId: "fundamentals-1",
+    title: "Tanium Platform Overview",
     description:
-      'Comprehensive guide covering the core concepts and architecture of the Tanium platform.',
+      "Comprehensive guide covering the core concepts and architecture of the Tanium platform.",
     content: `# Tanium Platform Overview\n\nThis guide provides a comprehensive overview of the Tanium platform...\n\n## Core Components\n\n### Tanium Server\nThe central hub that manages all platform operations...\n\n### Tanium Clients\nLightweight agents deployed on endpoints...`,
     sections: [
       {
-        id: 's1',
-        title: 'Introduction',
+        id: "s1",
+        title: "Introduction",
         level: 1,
-        content: 'Overview of Tanium platform',
+        content: "Overview of Tanium platform",
         completed: false,
       },
       {
-        id: 's2',
-        title: 'Core Components',
+        id: "s2",
+        title: "Core Components",
         level: 1,
-        content: 'Server, clients, modules',
+        content: "Server, clients, modules",
         completed: false,
       },
       {
-        id: 's3',
-        title: 'Architecture',
+        id: "s3",
+        title: "Architecture",
         level: 1,
-        content: 'How components work together',
+        content: "How components work together",
         completed: false,
       },
     ],
     checkpoints: [
       {
-        id: 'c1',
-        sectionId: 's1',
-        type: 'knowledge-check' as const,
-        question: 'What is the primary function of Tanium Server?',
+        id: "c1",
+        sectionId: "s1",
+        type: "knowledge-check" as const,
+        question: "What is the primary function of Tanium Server?",
         completed: false,
       },
       {
-        id: 'c2',
-        sectionId: 's2',
-        type: 'hands-on' as const,
-        question: 'Deploy a Tanium client in a test environment',
+        id: "c2",
+        sectionId: "s2",
+        type: "hands-on" as const,
+        question: "Deploy a Tanium client in a test environment",
         completed: false,
       },
     ],
     estimatedReadingTime: 15,
-    lastUpdated: new Date('2024-01-15'),
+    lastUpdated: new Date("2024-01-15"),
   },
   {
-    id: 'guide-2',
-    moduleId: 'deployment-1',
-    title: 'Deployment Best Practices',
-    description: 'Step-by-step guide for deploying Tanium in enterprise environments.',
+    id: "guide-2",
+    moduleId: "deployment-1",
+    title: "Deployment Best Practices",
+    description: "Step-by-step guide for deploying Tanium in enterprise environments.",
     content: `# Deployment Best Practices\n\nThis guide covers enterprise deployment strategies...\n\n## Planning Phase\n\n### Network Requirements\nBandwidth, ports, and connectivity considerations...`,
     sections: [
       {
-        id: 's1',
-        title: 'Planning',
+        id: "s1",
+        title: "Planning",
         level: 1,
-        content: 'Pre-deployment planning',
+        content: "Pre-deployment planning",
         completed: false,
       },
       {
-        id: 's2',
-        title: 'Installation',
+        id: "s2",
+        title: "Installation",
         level: 1,
-        content: 'Server installation process',
+        content: "Server installation process",
         completed: false,
       },
       {
-        id: 's3',
-        title: 'Configuration',
+        id: "s3",
+        title: "Configuration",
         level: 1,
-        content: 'Initial configuration',
+        content: "Initial configuration",
         completed: false,
       },
       {
-        id: 's4',
-        title: 'Client Deployment',
+        id: "s4",
+        title: "Client Deployment",
         level: 1,
-        content: 'Mass client deployment',
+        content: "Mass client deployment",
         completed: false,
       },
     ],
     checkpoints: [
       {
-        id: 'c1',
-        sectionId: 's1',
-        type: 'knowledge-check' as const,
-        question: 'What are the minimum system requirements for Tanium Server?',
+        id: "c1",
+        sectionId: "s1",
+        type: "knowledge-check" as const,
+        question: "What are the minimum system requirements for Tanium Server?",
         completed: false,
       },
       {
-        id: 'c2',
-        sectionId: 's3',
-        type: 'hands-on' as const,
-        question: 'Configure initial server settings',
+        id: "c2",
+        sectionId: "s3",
+        type: "hands-on" as const,
+        question: "Configure initial server settings",
         completed: false,
       },
     ],
     estimatedReadingTime: 25,
-    lastUpdated: new Date('2024-01-20'),
+    lastUpdated: new Date("2024-01-20"),
   },
   {
-    id: 'guide-3',
-    moduleId: 'administration-1',
-    title: 'User Management Guide',
-    description: 'Complete guide to managing users, roles, and permissions in Tanium.',
+    id: "guide-3",
+    moduleId: "administration-1",
+    title: "User Management Guide",
+    description: "Complete guide to managing users, roles, and permissions in Tanium.",
     content: `# User Management Guide\n\nManaging users and permissions effectively...\n\n## User Roles\n\n### Administrator\nFull platform access and management capabilities...`,
     sections: [
       {
-        id: 's1',
-        title: 'User Roles',
+        id: "s1",
+        title: "User Roles",
         level: 1,
-        content: 'Understanding different user roles',
+        content: "Understanding different user roles",
         completed: false,
       },
       {
-        id: 's2',
-        title: 'Creating Users',
+        id: "s2",
+        title: "Creating Users",
         level: 1,
-        content: 'User creation process',
+        content: "User creation process",
         completed: false,
       },
       {
-        id: 's3',
-        title: 'Permissions',
+        id: "s3",
+        title: "Permissions",
         level: 1,
-        content: 'Configuring permissions',
+        content: "Configuring permissions",
         completed: false,
       },
     ],
     checkpoints: [
       {
-        id: 'c1',
-        sectionId: 's1',
-        type: 'knowledge-check' as const,
-        question: 'What permissions does a Content Set Author have?',
+        id: "c1",
+        sectionId: "s1",
+        type: "knowledge-check" as const,
+        question: "What permissions does a Content Set Author have?",
         completed: false,
       },
     ],
     estimatedReadingTime: 20,
-    lastUpdated: new Date('2024-01-10'),
+    lastUpdated: new Date("2024-01-10"),
   },
 ];
 
@@ -197,7 +199,7 @@ export default function GuidesPage() {
           sectionsRead: [],
           checkpointsCompleted: [],
           notes: {},
-          lastPosition: '',
+          lastPosition: "",
           totalReadingTime: 0,
         },
       }));

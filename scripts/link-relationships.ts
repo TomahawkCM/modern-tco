@@ -1,5 +1,4 @@
 #!/usr/bin/env tsx
-import { createClient } from '@supabase/supabase-js';
 /**
  * Link relationships between modules and questions using domain/mdx_id
  * - Sets questions.module_id where domain matches study_modules.domain
@@ -7,6 +6,7 @@ import { createClient } from '@supabase/supabase-js';
  */
 import dotenv from 'dotenv';
 import path from 'path';
+import { createClient } from '@supabase/supabase-js';
 
 dotenv.config({ path: path.join(process.cwd(), '.env.local') });
 
@@ -19,9 +19,7 @@ function assertEnv(name: string): string {
 async function main() {
   const url = assertEnv('NEXT_PUBLIC_SUPABASE_URL');
   const key = assertEnv('SUPABASE_SERVICE_ROLE_KEY');
-  const admin = createClient(url, key, {
-    auth: { persistSession: false, autoRefreshToken: false },
-  });
+  const admin = createClient(url, key, { auth: { persistSession: false, autoRefreshToken: false } });
 
   console.log('🔗 Linking questions to modules...');
   // Detect if questions.module_id exists
@@ -86,46 +84,43 @@ function normalizeDomain(input: string): string {
   const map: Record<string, string> = {
     // Asking Questions
     'asking questions': 'asking questions',
-    asking_questions: 'asking questions',
-    domain1: 'asking questions',
+    'asking_questions': 'asking questions',
+    'domain1': 'asking questions',
     // Refining Questions & Targeting
     'refining questions & targeting': 'refining questions & targeting',
     'refining questions and targeting': 'refining questions & targeting',
     'refining questions': 'refining questions & targeting',
-    refining_questions: 'refining questions & targeting',
+    'refining_questions': 'refining questions & targeting',
     'refining-targeting': 'refining questions & targeting',
-    domain2: 'refining questions & targeting',
+    'domain2': 'refining questions & targeting',
     // Taking Action
     'taking action': 'taking action',
     'taking action — packages & actions': 'taking action',
     'taking action - packages & actions': 'taking action',
     'taking action - packages and actions': 'taking action',
-    taking_action: 'taking action',
-    domain3: 'taking action',
+    'taking_action': 'taking action',
+    'domain3': 'taking action',
     // Navigation → use DB key when present in modules
     'navigation & basic module functions': 'navigation_modules',
     'navigation and basic module functions': 'navigation_modules',
-    navigation_basic_modules: 'navigation_modules',
+    'navigation_basic_modules': 'navigation_modules',
     'navigation modules': 'navigation_modules',
-    domain4: 'navigation_modules',
+    'domain4': 'navigation_modules',
     // Reporting → use DB key when present in modules
     'reporting & data export': 'reporting_export',
     'report generation and data export': 'reporting_export',
     'report generation & data export': 'reporting_export',
-    reporting_data_export: 'reporting_export',
-    domain5: 'reporting_export',
+    'reporting_data_export': 'reporting_export',
+    'domain5': 'reporting_export',
     // Foundation
-    platform_foundation: 'platform_foundation',
+    'platform_foundation': 'platform_foundation',
     'tanium platform foundation': 'platform_foundation',
-    foundation: 'platform_foundation',
-    fundamentals: 'platform_foundation',
+    'foundation': 'platform_foundation',
+    'fundamentals': 'platform_foundation',
   };
   if (map[s]) return map[s];
   // Normalize common punctuation/whitespace
-  const compact = s
-    .replace(/\s*&\s*/g, ' & ')
-    .replace(/\s+/g, ' ')
-    .trim();
+  const compact = s.replace(/\s*&\s*/g, ' & ').replace(/\s+/g, ' ').trim();
   if (map[compact]) return map[compact];
   return s;
 }

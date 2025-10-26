@@ -1,11 +1,12 @@
+import type { Question } from "@/types/exam";
+import { TCO_DOMAIN_WEIGHTS, TCODomain } from "@/types/exam";
+
 // Static content fallback (5 items each)
-import aq from '@/content/questions/asking-questions.json';
-import nb from '@/content/questions/navigation-modules.json';
-import rq from '@/content/questions/refining-questions.json';
-import rd from '@/content/questions/reporting-export.json';
-import ta from '@/content/questions/taking-action.json';
-import type { Question } from '@/types/exam';
-import { TCO_DOMAIN_WEIGHTS, TCODomain } from '@/types/exam';
+import aq from "@/content/questions/asking-questions.json";
+import rq from "@/content/questions/refining-questions.json";
+import ta from "@/content/questions/taking-action.json";
+import nb from "@/content/questions/navigation-modules.json";
+import rd from "@/content/questions/reporting-export.json";
 
 type DomainKey = keyof typeof TCO_DOMAIN_WEIGHTS;
 
@@ -31,11 +32,7 @@ export function computeWeightedCounts(total: number, domains: string[]): Record<
     domain: w.domain,
     raw: (total * w.weight) / weightSum,
   }));
-  const base = raws.map((r) => ({
-    domain: r.domain,
-    count: Math.floor(r.raw),
-    frac: r.raw - Math.floor(r.raw),
-  }));
+  const base = raws.map((r) => ({ domain: r.domain, count: Math.floor(r.raw), frac: r.raw - Math.floor(r.raw) }));
   let remaining = total - base.reduce((s, b) => s + b.count, 0);
   // Sort by largest fractional part, tie-break by weight desc
   const order = [...base].sort((a, b) => {
@@ -89,3 +86,4 @@ function normalizeQuestion(q: Question): Question {
     options: (q as any).options ?? q.choices,
   };
 }
+

@@ -5,13 +5,13 @@
 
 import {
   type Difficulty,
+  TCODomain,
+  TCO_DOMAIN_WEIGHTS,
   type PracticeTargeting,
   type Question,
   type QuestionFilter,
   type QuestionPool,
-  TCO_DOMAIN_WEIGHTS,
-  TCODomain,
-} from '@/types/exam';
+} from "@/types/exam";
 import { defaultDifficultyRecord } from './difficulty';
 
 /**
@@ -26,33 +26,30 @@ export class PracticeQuestionTargeting {
     targeting: PracticeTargeting
   ): QuestionPool {
     // Stage 1: Exact targeting (ideal case)
-    let pool = PracticeQuestionTargeting.applyExactTargeting(allQuestions, targeting);
+    let pool = this.applyExactTargeting(allQuestions, targeting);
 
     // Stage 2: Check if we have minimum questions
     if (pool.questions.length >= targeting.minQuestions) {
-      return PracticeQuestionTargeting.buildQuestionPool(pool.questions, 'exact-match');
+      return this.buildQuestionPool(pool.questions, "exact-match");
     }
 
     // Stage 3: Apply fallback strategies
     switch (targeting.fallbackStrategy) {
-      case 'expand-domain':
-        pool = PracticeQuestionTargeting.expandToDomain(allQuestions, targeting);
+      case "expand-domain":
+        pool = this.expandToDomain(allQuestions, targeting);
         break;
 
-      case 'reduce-specificity':
-        pool = PracticeQuestionTargeting.reduceSpecificity(allQuestions, targeting);
+      case "reduce-specificity":
+        pool = this.reduceSpecificity(allQuestions, targeting);
         break;
 
-      case 'mixed-content':
-        pool = PracticeQuestionTargeting.getMixedContent(allQuestions, targeting);
+      case "mixed-content":
+        pool = this.getMixedContent(allQuestions, targeting);
         break;
     }
 
     // Stage 4: Final validation and pool construction
-    const finalPool = PracticeQuestionTargeting.buildQuestionPool(
-      pool.questions,
-      pool.fallbackUsed
-    );
+    const finalPool = this.buildQuestionPool(pool.questions, pool.fallbackUsed);
 
     return finalPool;
   }
@@ -87,7 +84,7 @@ export class PracticeQuestionTargeting {
       // Objective match (if available)
       if (targeting.targetObjectives.length > 0 && question.objectiveIds) {
         const hasTargetObjective = targeting.targetObjectives.some((objective) =>
-          question.objectiveIds?.includes(objective)
+          question.objectiveIds!.includes(objective)
         );
         if (!hasTargetObjective) {
           return false;
@@ -98,7 +95,7 @@ export class PracticeQuestionTargeting {
     });
 
     // Shuffle for variety
-    filtered = PracticeQuestionTargeting.shuffleArray([...filtered]);
+    filtered = this.shuffleArray([...filtered]);
 
     // Limit to ideal count if we have enough
     if (filtered.length > targeting.idealQuestions) {
@@ -129,11 +126,11 @@ export class PracticeQuestionTargeting {
       }
     }
 
-    domainQuestions = PracticeQuestionTargeting.shuffleArray(domainQuestions);
+    domainQuestions = this.shuffleArray(domainQuestions);
 
     return {
       questions: domainQuestions.slice(0, targeting.idealQuestions),
-      fallbackUsed: 'expand-domain',
+      fallbackUsed: "expand-domain",
     };
   }
 
@@ -158,11 +155,8 @@ export class PracticeQuestionTargeting {
 
     if (filtered.length >= targeting.minQuestions) {
       return {
-        questions: PracticeQuestionTargeting.shuffleArray(filtered).slice(
-          0,
-          targeting.idealQuestions
-        ),
-        fallbackUsed: 'reduced-specificity-objectives',
+        questions: this.shuffleArray(filtered).slice(0, targeting.idealQuestions),
+        fallbackUsed: "reduced-specificity-objectives",
       };
     }
 
@@ -182,11 +176,8 @@ export class PracticeQuestionTargeting {
 
       if (filtered.length >= targeting.minQuestions) {
         return {
-          questions: PracticeQuestionTargeting.shuffleArray(filtered).slice(
-            0,
-            targeting.idealQuestions
-          ),
-          fallbackUsed: 'reduced-specificity-tags',
+          questions: this.shuffleArray(filtered).slice(0, targeting.idealQuestions),
+          fallbackUsed: "reduced-specificity-tags",
         };
       }
     }
@@ -195,11 +186,8 @@ export class PracticeQuestionTargeting {
     filtered = questions.filter((q) => q.domain === targeting.primaryDomain);
 
     return {
-      questions: PracticeQuestionTargeting.shuffleArray(filtered).slice(
-        0,
-        targeting.idealQuestions
-      ),
-      fallbackUsed: 'reduced-specificity-domain-only',
+      questions: this.shuffleArray(filtered).slice(0, targeting.idealQuestions),
+      fallbackUsed: "reduced-specificity-domain-only",
     };
   }
 
@@ -225,23 +213,14 @@ export class PracticeQuestionTargeting {
     const primaryCount = Math.ceil(targeting.idealQuestions * 0.7);
     const relatedCount = targeting.idealQuestions - primaryCount;
 
-    const selectedPrimary = PracticeQuestionTargeting.shuffleArray(primaryDomainQuestions).slice(
-      0,
-      primaryCount
-    );
-    const selectedRelated = PracticeQuestionTargeting.shuffleArray(relatedQuestions).slice(
-      0,
-      relatedCount
-    );
+    const selectedPrimary = this.shuffleArray(primaryDomainQuestions).slice(0, primaryCount);
+    const selectedRelated = this.shuffleArray(relatedQuestions).slice(0, relatedCount);
 
-    const mixedQuestions = PracticeQuestionTargeting.shuffleArray([
-      ...selectedPrimary,
-      ...selectedRelated,
-    ]);
+    const mixedQuestions = this.shuffleArray([...selectedPrimary, ...selectedRelated]);
 
     return {
       questions: mixedQuestions,
-      fallbackUsed: 'mixed-content',
+      fallbackUsed: "mixed-content",
     };
   }
 
@@ -258,7 +237,8 @@ export class PracticeQuestionTargeting {
       {} as Record<TCODomain, number>
     );
 
-    const difficultyDistribution: Record<Difficulty, number> = defaultDifficultyRecord(() => 0);
+    const difficultyDistribution: Record<Difficulty, number> =
+      defaultDifficultyRecord(() => 0);
 
     questions.forEach((question) => {
       domainDistribution[question.domain]++;
@@ -269,13 +249,13 @@ export class PracticeQuestionTargeting {
     const hasMinimumQuestions = questions.length >= 5; // Configurable minimum
 
     // Determine fallback recommendation
-    let recommendedFallback: QuestionPool['recommendedFallback'];
+    let recommendedFallback: QuestionPool["recommendedFallback"];
     if (isEmpty) {
-      recommendedFallback = 'mixed-content';
+      recommendedFallback = "mixed-content";
     } else if (!hasMinimumQuestions) {
-      recommendedFallback = 'expand-criteria';
-    } else if (fallbackUsed && fallbackUsed !== 'exact-match') {
-      recommendedFallback = 'use-similar-modules';
+      recommendedFallback = "expand-criteria";
+    } else if (fallbackUsed && fallbackUsed !== "exact-match") {
+      recommendedFallback = "use-similar-modules";
     }
 
     return {
@@ -297,55 +277,55 @@ export class PracticeQuestionTargeting {
 
     // Domain filtering
     if (filter.domains && filter.domains.length > 0) {
-      filtered = filtered.filter((q) => filter.domains?.includes(q.domain));
+      filtered = filtered.filter((q) => filter.domains!.includes(q.domain));
     }
 
     // Difficulty filtering
     if (filter.difficulties && filter.difficulties.length > 0) {
-      filtered = filtered.filter((q) => filter.difficulties?.includes(q.difficulty));
+      filtered = filtered.filter((q) => filter.difficulties!.includes(q.difficulty));
     }
 
     // Category filtering
     if (filter.categories && filter.categories.length > 0) {
-      filtered = filtered.filter((q) => filter.categories?.includes(q.category));
+      filtered = filtered.filter((q) => filter.categories!.includes(q.category));
     }
 
     // Tag filtering
     if (filter.tags && filter.tags.length > 0) {
       filtered = filtered.filter((q) => {
         const questionTags = q.tags || [];
-        return filter.tags?.some((tag) => questionTags.includes(tag));
+        return filter.tags!.some((tag) => questionTags.includes(tag));
       });
     }
 
     // Module filtering
     if (filter.moduleIds && filter.moduleIds.length > 0) {
-      filtered = filtered.filter((q) => q.moduleId && filter.moduleIds?.includes(q.moduleId));
+      filtered = filtered.filter((q) => q.moduleId && filter.moduleIds!.includes(q.moduleId));
     }
 
     // Objective filtering
     if (filter.objectiveIds && filter.objectiveIds.length > 0) {
       filtered = filtered.filter((q) => {
         if (!q.objectiveIds) return false;
-        return filter.objectiveIds?.some((objective) => q.objectiveIds?.includes(objective));
+        return filter.objectiveIds!.some((objective) => q.objectiveIds!.includes(objective));
       });
     }
 
     // Concept level filtering
     if (filter.conceptLevels && filter.conceptLevels.length > 0) {
       filtered = filtered.filter(
-        (q) => q.conceptLevel && filter.conceptLevels?.includes(q.conceptLevel)
+        (q) => q.conceptLevel && filter.conceptLevels!.includes(q.conceptLevel)
       );
     }
 
     // Maintain domain distribution if requested
     if (filter.maintainDistribution && filter.limit) {
-      filtered = PracticeQuestionTargeting.maintainDomainDistribution(filtered, filter.limit);
+      filtered = this.maintainDomainDistribution(filtered, filter.limit);
     }
 
     // Apply limit
     if (filter.limit && !filter.maintainDistribution) {
-      filtered = PracticeQuestionTargeting.shuffleArray(filtered).slice(0, filter.limit);
+      filtered = this.shuffleArray(filtered).slice(0, filter.limit);
     }
 
     return filtered;
@@ -359,17 +339,14 @@ export class PracticeQuestionTargeting {
     targetCount: number
   ): Question[] {
     if (questions.length <= targetCount) {
-      return PracticeQuestionTargeting.shuffleArray(questions);
+      return this.shuffleArray(questions);
     }
 
     const domainValues = Object.values(TCODomain) as TCODomain[];
-    const domainGroups: Record<TCODomain, Question[]> = domainValues.reduce(
-      (acc, d) => {
-        acc[d] = [];
-        return acc;
-      },
-      {} as Record<TCODomain, Question[]>
-    );
+    const domainGroups: Record<TCODomain, Question[]> = domainValues.reduce((acc, d) => {
+      acc[d] = [];
+      return acc;
+    }, {} as Record<TCODomain, Question[]>);
 
     // Group questions by domain
     questions.forEach((q) => {
@@ -388,10 +365,7 @@ export class PracticeQuestionTargeting {
       const targetForDomain = Math.round(targetCount * weight);
       const availableForDomain = Math.min(targetForDomain, domainQuestions.length);
 
-      const selectedFromDomain = PracticeQuestionTargeting.shuffleArray(domainQuestions).slice(
-        0,
-        availableForDomain
-      );
+      const selectedFromDomain = this.shuffleArray(domainQuestions).slice(0, availableForDomain);
 
       result.push(...selectedFromDomain);
     });
@@ -403,11 +377,11 @@ export class PracticeQuestionTargeting {
 
       if (availableQuestions.length === 0) break;
 
-      const shuffled = PracticeQuestionTargeting.shuffleArray(availableQuestions);
+      const shuffled = this.shuffleArray(availableQuestions);
       result.push(...shuffled.slice(0, remainingNeeded));
     }
 
-    return PracticeQuestionTargeting.shuffleArray(result).slice(0, targetCount);
+    return this.shuffleArray(result).slice(0, targetCount);
   }
 
   /**
@@ -435,7 +409,7 @@ export function createPracticeTargeting(
     optionalTags?: string[];
     minQuestions?: number;
     idealQuestions?: number;
-    fallbackStrategy?: PracticeTargeting['fallbackStrategy'];
+    fallbackStrategy?: PracticeTargeting["fallbackStrategy"];
   }
 ): PracticeTargeting {
   return {
@@ -446,11 +420,12 @@ export function createPracticeTargeting(
     optionalTags: options?.optionalTags || [],
     minQuestions: options?.minQuestions || 5,
     idealQuestions: options?.idealQuestions || 15,
-    fallbackStrategy: options?.fallbackStrategy || 'expand-domain',
+    fallbackStrategy: options?.fallbackStrategy || "expand-domain",
   };
 }
 
 // Bind static method to preserve `this` context when imported as a standalone function
-export const getTargetedQuestions =
-  PracticeQuestionTargeting.getTargetedQuestions.bind(PracticeQuestionTargeting);
+export const getTargetedQuestions = PracticeQuestionTargeting.getTargetedQuestions.bind(
+  PracticeQuestionTargeting
+);
 export default PracticeQuestionTargeting;

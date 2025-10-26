@@ -7,12 +7,12 @@
  * Uses the optimal TypeScript/JavaScript + Supabase stack
  */
 
-const fs = require('fs');
-const path = require('path');
-const { createClient } = require('@supabase/supabase-js');
+const fs = require("fs");
+const path = require("path");
+const { createClient } = require("@supabase/supabase-js");
 
-console.log('🚀 TCO Study Content Migration Executor');
-console.log('=========================================');
+console.log("🚀 TCO Study Content Migration Executor");
+console.log("=========================================");
 
 async function executeMigration() {
   try {
@@ -22,42 +22,42 @@ async function executeMigration() {
 
     if (!supabaseUrl || !supabaseServiceKey) {
       throw new Error(
-        '❌ Missing Supabase environment variables. Please set NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY'
+        "❌ Missing Supabase environment variables. Please set NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY"
       );
     }
 
-    console.log('✅ Supabase environment variables found');
+    console.log("✅ Supabase environment variables found");
     const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
     // Read migration file
     const migrationPath = path.join(
       __dirname,
-      '../supabase/migrations/20250902031155_populate_study_content.sql'
+      "../supabase/migrations/20250902031155_populate_study_content.sql"
     );
 
     if (!fs.existsSync(migrationPath)) {
       throw new Error(`❌ Migration file not found: ${migrationPath}`);
     }
 
-    console.log('✅ Migration file found:', migrationPath);
-    const migrationSQL = fs.readFileSync(migrationPath, 'utf8');
+    console.log("✅ Migration file found:", migrationPath);
+    const migrationSQL = fs.readFileSync(migrationPath, "utf8");
 
     console.log(`📄 Migration file size: ${migrationSQL.length} characters`);
 
     // Execute migration
-    console.log('🔄 Executing study content migration...');
+    console.log("🔄 Executing study content migration...");
 
     // Split SQL into individual statements and execute them
     const statements = migrationSQL
-      .split(';')
+      .split(";")
       .map((stmt) => stmt.trim())
-      .filter((stmt) => stmt && !stmt.startsWith('--'));
+      .filter((stmt) => stmt && !stmt.startsWith("--"));
 
     for (let i = 0; i < statements.length; i++) {
       const stmt = statements[i];
       if (stmt) {
         console.log(`   Executing statement ${i + 1}/${statements.length}...`);
-        const { error } = await supabase.rpc('exec', { sql: stmt });
+        const { error } = await supabase.rpc("exec", { sql: stmt });
         if (error) {
           console.error(`❌ Statement ${i + 1} failed:`, error.message);
           throw error;
@@ -65,17 +65,17 @@ async function executeMigration() {
       }
     }
 
-    console.log('✅ Migration executed successfully');
+    console.log("✅ Migration executed successfully");
 
     // Verify migration results
-    console.log('🔍 Verifying migration results...');
+    console.log("🔍 Verifying migration results...");
 
     const { data: modules, error: modulesError } = await supabase
-      .from('study_modules')
-      .select('domain, title, exam_weight');
+      .from("study_modules")
+      .select("domain, title, exam_weight");
 
     if (modulesError) {
-      console.error('❌ Verification failed:', modulesError.message);
+      console.error("❌ Verification failed:", modulesError.message);
       throw modulesError;
     }
 
@@ -85,32 +85,32 @@ async function executeMigration() {
     });
 
     const { data: sections, error: sectionsError } = await supabase
-      .from('study_sections')
-      .select('title, module_id')
-      .order('module_id, order_index');
+      .from("study_sections")
+      .select("title, module_id")
+      .order("module_id, order_index");
 
     if (sectionsError) {
-      console.error('❌ Section verification failed:', sectionsError.message);
+      console.error("❌ Section verification failed:", sectionsError.message);
       throw sectionsError;
     }
 
     console.log(`✅ Found ${sections.length} study sections`);
 
-    console.log('\n🎉 Study Content Migration COMPLETED Successfully!');
-    console.log('');
-    console.log('📋 Summary:');
+    console.log("\n🎉 Study Content Migration COMPLETED Successfully!");
+    console.log("");
+    console.log("📋 Summary:");
     console.log(`   • Study Modules: ${modules.length}`);
     console.log(`   • Study Sections: ${sections.length}`);
     console.log(`   • Migration File: ${migrationPath}`);
     console.log(`   • Language: Professional publication-ready English`);
     console.log(`   • Stack: TypeScript/JavaScript + Supabase (optimal)`);
-    console.log('');
-    console.log('🔥 Next Steps:');
-    console.log('   1. Test StudyModuleViewer component');
-    console.log('   2. Validate study-to-practice workflow');
-    console.log('   3. Begin Phase 3 analytics features');
+    console.log("");
+    console.log("🔥 Next Steps:");
+    console.log("   1. Test StudyModuleViewer component");
+    console.log("   2. Validate study-to-practice workflow");
+    console.log("   3. Begin Phase 3 analytics features");
   } catch (error) {
-    console.error('\n💥 Migration failed:', error.message);
+    console.error("\n💥 Migration failed:", error.message);
     process.exit(1);
   }
 }

@@ -1,0 +1,455 @@
+{
+  "tasks": [
+    {
+      "id": "TASK-0001",
+      "title": "Seed curriculum manifest + left-nav modules",
+      "priority": 1,
+      "type": "feature",
+      "status": "todo",
+      "estimate_hours": 2.0,
+      "prompt_template": "CODEX/TASK_GENERIC.md",
+      "prompt_path": "docs/PROMPTS/CODEX/run-TASK-0001.md",
+      "task_md": "docs/TASKS/TASK-0001.md",
+      "allowed_files": [
+        "modern-tco/src/config/modules.manifest.json",
+        "modern-tco/src/components/SideNav.*",
+        "modern-tco/src/app/learn/**",
+        "modern-tco/src/pages/learn/**",
+        "modern-tco/src/types/**",
+        "modern-tco/jest.config.*",
+        "modern-tco/package.json"
+      ],
+      "dependencies": [],
+      "validate": [
+        "npm ci",
+        "npm run build",
+        "npm test -i"
+      ]
+    },
+    {
+      "id": "TASK-0002",
+      "title": "Per-module progress dots (Supabase read)",
+      "priority": 1,
+      "type": "feature",
+      "status": "todo",
+      "estimate_hours": 2.5,
+      "prompt_template": "CODEX/TASK_GENERIC.md",
+      "prompt_path": "docs/PROMPTS/CODEX/run-TASK-0002.md",
+      "task_md": "docs/TASKS/TASK-0002.md",
+      "allowed_files": [
+        "modern-tco/src/components/SideNav.*",
+        "modern-tco/src/lib/progress.*",
+        "modern-tco/src/types/**"
+      ],
+      "dependencies": [
+        "TASK-0001"
+      ],
+      "validate": [
+        "npm run build",
+        "npm test -i"
+      ]
+    },
+    {
+      "id": "TASK-0003",
+      "title": "Seed 5 Q&A items per module (static JSON)",
+      "priority": 1,
+      "type": "content",
+      "status": "todo",
+      "estimate_hours": 3.0,
+      "prompt_template": "CODEX/TASK_GENERIC.md",
+      "prompt_path": "docs/PROMPTS/CODEX/run-TASK-0003.md",
+      "task_md": "docs/TASKS/TASK-0003.md",
+      "allowed_files": [
+        "modern-tco/src/content/questions/**",
+        "modern-tco/src/types/**",
+        "modern-tco/package.json"
+      ],
+      "dependencies": [
+        "TASK-0001"
+      ],
+      "validate": [
+        "npm run build",
+        "npm test -i"
+      ]
+    },
+    {
+      "id": "TASK-0004",
+      "title": "Daily 10 smart drill mode",
+      "priority": 1,
+      "type": "feature",
+      "status": "todo",
+      "estimate_hours": 4.0,
+      "prompt_template": "CODEX/TASK_GENERIC.md",
+      "prompt_path": "docs/PROMPTS/CODEX/run-TASK-0004.md",
+      "task_md": "docs/TASKS/TASK-0004.md",
+      "allowed_files": [
+        "modern-tco/src/app/drills/**",
+        "modern-tco/src/lib/drills.*",
+        "modern-tco/src/types/**"
+      ],
+      "dependencies": [
+        "TASK-0003"
+      ],
+      "validate": [
+        "npm run build",
+        "npm test -i"
+      ]
+    },
+    {
+      "id": "TASK-0005",
+      "title": "Exam Simulator v1 (Practice + Timed)",
+      "priority": 1,
+      "type": "feature",
+      "status": "todo",
+      "estimate_hours": 6.0,
+      "prompt_template": "CODEX/TASK_GENERIC.md",
+      "prompt_path": "docs/PROMPTS/CODEX/run-TASK-0005.md",
+      "task_md": "docs/TASKS/TASK-0005.md",
+      "allowed_files": [
+        "modern-tco/src/app/exam/**",
+        "modern-tco/src/lib/exam.*",
+        "modern-tco/src/types/**"
+      ],
+      "dependencies": [
+        "TASK-0003"
+      ],
+      "validate": [
+        "npm run build",
+        "npm test -i"
+      ]
+    },
+    {
+      "id": "TASK-0006",
+      "title": "Signup page (Supabase Auth)",
+      "priority": 1,
+      "type": "feature",
+      "status": "todo",
+      "estimate_hours": 3.0,
+      "prompt_template": "CODEX/TASK_GENERIC.md",
+      "prompt_path": "docs/PROMPTS/CODEX/run-TASK-0006.md",
+      "task_md": "docs/TASKS/TASK-0006.md",
+      "allowed_files": [
+        "modern-tco/src/app/signup/**",
+        "modern-tco/src/lib/auth.*",
+        "modern-tco/src/types/**"
+      ],
+      "dependencies": [],
+      "validate": [
+        "npm run build"
+      ]
+    },
+    {
+      "id": "TASK-0007",
+      "title": "Embed vetted YouTube videos per module",
+      "priority": 1,
+      "type": "content",
+      "status": "todo",
+      "estimate_hours": 2.5,
+      "prompt_template": "CODEX/TASK_GENERIC.md",
+      "prompt_path": "docs/PROMPTS/CODEX/run-TASK-0007.md",
+      "task_md": "docs/TASKS/TASK-0007.md",
+      "allowed_files": [
+        "modern-tco/src/content/videos/**",
+        "modern-tco/src/app/learn/**"
+      ],
+      "dependencies": [
+        "TASK-0001"
+      ],
+      "validate": [
+        "npm run build"
+      ]
+    },
+    {
+      "id": "TASK-0008",
+      "title": "Module page skeletons (lesson outline + lab placeholders)",
+      "priority": 1,
+      "type": "content",
+      "status": "todo",
+      "estimate_hours": 3.0,
+      "prompt_template": "CODEX/TASK_GENERIC.md",
+      "prompt_path": "docs/PROMPTS/CODEX/run-TASK-0008.md",
+      "task_md": "docs/TASKS/TASK-0008.md",
+      "allowed_files": [
+        "modern-tco/src/app/learn/**",
+        "modern-tco/src/content/modules/**"
+      ],
+      "dependencies": [
+        "TASK-0001"
+      ],
+      "validate": [
+        "npm run build"
+      ]
+    },
+    {
+      "id": "TASK-0009",
+      "title": "Blueprint coverage meter",
+      "priority": 2,
+      "type": "feature",
+      "status": "todo",
+      "estimate_hours": 2.5,
+      "prompt_template": "CODEX/TASK_GENERIC.md",
+      "prompt_path": "docs/PROMPTS/CODEX/run-TASK-0009.md",
+      "task_md": "docs/TASKS/TASK-0009.md",
+      "allowed_files": [
+        "modern-tco/src/components/BlueprintMeter.*",
+        "modern-tco/src/lib/blueprint.*"
+      ],
+      "dependencies": [
+        "TASK-0003"
+      ],
+      "validate": [
+        "npm run build",
+        "npm test -i"
+      ]
+    },
+    {
+      "id": "TASK-0010",
+      "title": "Attempt history & progress analytics",
+      "priority": 2,
+      "type": "feature",
+      "status": "todo",
+      "estimate_hours": 3.5,
+      "prompt_template": "CODEX/TASK_GENERIC.md",
+      "prompt_path": "docs/PROMPTS/CODEX/run-TASK-0010.md",
+      "task_md": "docs/TASKS/TASK-0010.md",
+      "allowed_files": [
+        "modern-tco/src/app/progress/**",
+        "modern-tco/src/lib/progress.*"
+      ],
+      "dependencies": [
+        "TASK-0005"
+      ],
+      "validate": [
+        "npm run build",
+        "npm test -i"
+      ]
+    },
+    {
+      "id": "TASK-0011",
+      "title": "Notes + spaced repetition MVP",
+      "priority": 2,
+      "type": "feature",
+      "status": "todo",
+      "estimate_hours": 3.0,
+      "prompt_template": "CODEX/TASK_GENERIC.md",
+      "prompt_path": "docs/PROMPTS/CODEX/run-TASK-0011.md",
+      "task_md": "docs/TASKS/TASK-0011.md",
+      "allowed_files": [
+        "modern-tco/src/app/notes/**",
+        "modern-tco/src/lib/sr.*"
+      ],
+      "dependencies": [
+        "TASK-0003"
+      ],
+      "validate": [
+        "npm run build"
+      ]
+    },
+    {
+      "id": "TASK-0012",
+      "title": "Pricing page + Stripe",
+      "priority": 2,
+      "type": "feature",
+      "status": "todo",
+      "estimate_hours": 4.0,
+      "prompt_template": "CODEX/TASK_GENERIC.md",
+      "prompt_path": "docs/PROMPTS/CODEX/run-TASK-0012.md",
+      "task_md": "docs/TASKS/TASK-0012.md",
+      "allowed_files": [
+        "modern-tco/src/app/pricing/**",
+        "modern-tco/src/app/api/stripe/**"
+      ],
+      "dependencies": [
+        "TASK-0006"
+      ],
+      "validate": [
+        "npm run build"
+      ]
+    },
+    {
+      "id": "TASK-0013",
+      "title": "Accessibility pass & large-text mode",
+      "priority": 2,
+      "type": "feature",
+      "status": "todo",
+      "estimate_hours": 2.0,
+      "prompt_template": "CODEX/TASK_GENERIC.md",
+      "prompt_path": "docs/PROMPTS/CODEX/run-TASK-0013.md",
+      "task_md": "docs/TASKS/TASK-0013.md",
+      "allowed_files": [
+        "modern-tco/src/components/**",
+        "modern-tco/src/app/layout.*"
+      ],
+      "dependencies": [],
+      "validate": [
+        "npm run build"
+      ]
+    },
+    {
+      "id": "TASK-0014",
+      "title": "Analytics (PostHog) events",
+      "priority": 2,
+      "type": "feature",
+      "status": "todo",
+      "estimate_hours": 1.5,
+      "prompt_template": "CODEX/TASK_GENERIC.md",
+      "prompt_path": "docs/PROMPTS/CODEX/run-TASK-0014.md",
+      "task_md": "docs/TASKS/TASK-0014.md",
+      "allowed_files": [
+        "modern-tco/src/lib/analytics.*",
+        "modern-tco/src/app/**"
+      ],
+      "dependencies": [],
+      "validate": [
+        "npm run build"
+      ]
+    },
+    {
+      "id": "TASK-0015",
+      "title": "Remote images domain config",
+      "priority": 2,
+      "type": "chore",
+      "status": "todo",
+      "estimate_hours": 0.5,
+      "prompt_template": "CODEX/TASK_GENERIC.md",
+      "prompt_path": "docs/PROMPTS/CODEX/run-TASK-0015.md",
+      "task_md": "docs/TASKS/TASK-0015.md",
+      "allowed_files": [
+        "modern-tco/next.config.*"
+      ],
+      "dependencies": [],
+      "validate": [
+        "npm run build"
+      ]
+    },
+    {
+      "id": "TASK-0016",
+      "title": "Team plan basic seats",
+      "priority": 3,
+      "type": "feature",
+      "status": "todo",
+      "estimate_hours": 4.0,
+      "prompt_template": "CODEX/TASK_GENERIC.md",
+      "prompt_path": "docs/PROMPTS/CODEX/run-TASK-0016.md",
+      "task_md": "docs/TASKS/TASK-0016.md",
+      "allowed_files": [
+        "modern-tco/src/app/team/**",
+        "modern-tco/src/lib/team.*"
+      ],
+      "dependencies": [
+        "TASK-0006"
+      ],
+      "validate": [
+        "npm run build"
+      ]
+    },
+    {
+      "id": "TASK-0017",
+      "title": "Admin question editor",
+      "priority": 3,
+      "type": "feature",
+      "status": "todo",
+      "estimate_hours": 6.0,
+      "prompt_template": "CODEX/TASK_GENERIC.md",
+      "prompt_path": "docs/PROMPTS/CODEX/run-TASK-0017.md",
+      "task_md": "docs/TASKS/TASK-0017.md",
+      "allowed_files": [
+        "modern-tco/src/app/admin/**",
+        "modern-tco/src/lib/content.*"
+      ],
+      "dependencies": [
+        "TASK-0003"
+      ],
+      "validate": [
+        "npm run build"
+      ]
+    },
+    {
+      "id": "TASK-0018",
+      "title": "Playwright e2e smoke",
+      "priority": 3,
+      "type": "qa",
+      "status": "todo",
+      "estimate_hours": 2.5,
+      "prompt_template": "CODEX/TASK_GENERIC.md",
+      "prompt_path": "docs/PROMPTS/CODEX/run-TASK-0018.md",
+      "task_md": "docs/TASKS/TASK-0018.md",
+      "allowed_files": [
+        "modern-tco/tests/e2e/**",
+        "modern-tco/package.json"
+      ],
+      "dependencies": [],
+      "validate": [
+        "npm run build"
+      ]
+    },
+    {
+      "id": "TASK-0019",
+      "title": "Release pipeline docs & checklists",
+      "priority": 3,
+      "type": "ops",
+      "status": "todo",
+      "estimate_hours": 1.0,
+      "prompt_template": "CODEX/TASK_GENERIC.md",
+      "prompt_path": "docs/PROMPTS/CODEX/run-TASK-0019.md",
+      "task_md": "docs/TASKS/TASK-0019.md",
+      "allowed_files": [
+        "docs/OPS/**",
+        "docs/TRACKING/CHANGELOG.md"
+      ],
+      "dependencies": [],
+      "validate": []
+    },
+    {
+      "id": "TASK-OPS-0001",
+      "title": "Ensure basePath('/tanium') in production",
+      "priority": 1,
+      "type": "ops",
+      "status": "todo",
+      "estimate_hours": 0.25,
+      "prompt_template": "CODEX/TASK_GENERIC.md",
+      "prompt_path": "docs/PROMPTS/CODEX/run-TASK-OPS-0001.md",
+      "task_md": "docs/TASKS/TASK-OPS-0001.md",
+      "allowed_files": [
+        "modern-tco/next.config.*"
+      ],
+      "dependencies": [],
+      "validate": [
+        "npm run build"
+      ]
+    },
+    {
+      "id": "TASK-OPS-0002",
+      "title": "Main vercel.json rewrites to modern-tco domain",
+      "priority": 1,
+      "type": "ops",
+      "status": "todo",
+      "estimate_hours": 0.25,
+      "prompt_template": "CODEX/TASK_GENERIC.md",
+      "prompt_path": "docs/PROMPTS/CODEX/run-TASK-OPS-0002.md",
+      "task_md": "docs/TASKS/TASK-OPS-0002.md",
+      "allowed_files": [
+        "vercel.json"
+      ],
+      "dependencies": [],
+      "validate": []
+    },
+    {
+      "id": "TASK-OPS-0003",
+      "title": "Disable Deployment Protection (Production)",
+      "priority": 1,
+      "type": "ops",
+      "status": "todo",
+      "estimate_hours": 0.25,
+      "prompt_template": "CODEX/TASK_GENERIC.md",
+      "prompt_path": "docs/PROMPTS/CODEX/run-TASK-OPS-0003.md",
+      "task_md": "docs/TASKS/TASK-OPS-0003.md",
+      "allowed_files": [
+        "docs/SESSIONS/**",
+        "docs/TRACKING/CHANGELOG.md"
+      ],
+      "dependencies": [],
+      "validate": []
+    }
+  ]
+}

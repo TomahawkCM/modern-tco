@@ -1,21 +1,20 @@
 'use client';
 
-import { AnimatePresence, motion } from 'framer-motion';
-import type React from 'react';
-import { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import '../../styles/assessment.css';
-import {
-  Award,
+import { 
   BookOpen,
-  CheckCircle,
   Clock,
-  Globe,
-  Heart,
-  Monitor,
-  PlayCircle,
-  Server,
-  Star,
   Target,
+  CheckCircle,
+  Monitor,
+  Server,
+  Globe,
+  Star,
+  Award,
+  Heart,
+  PlayCircle
 } from 'lucide-react';
 
 // TypeScript interfaces for Phase 0 Foundation
@@ -69,8 +68,8 @@ export default function Phase0Foundation({
   userProgress = {
     completedModules: [],
     unlockedMilestones: [],
-    confidenceLevel: 'building',
-  },
+    confidenceLevel: 'building'
+  }
 }: Phase0FoundationProps) {
   const [activeModule, setActiveModule] = useState<string | null>(null);
 
@@ -98,16 +97,16 @@ export default function Phase0Foundation({
           content: 'Endpoints are every device in your organization that connects to the network',
           keyPoints: [
             'Laptops and desktop computers used by employees',
-            'Servers running critical business applications',
+            'Servers running critical business applications', 
             'Mobile devices accessing company resources',
-            'IoT devices like printers, cameras, and sensors',
+            'IoT devices like printers, cameras, and sensors'
           ],
           examples: [
-            "A sales rep's laptop connecting from a coffee shop",
+            'A sales rep\'s laptop connecting from a coffee shop',
             'The email server in your data center',
-            'Conference room smart TVs and projectors',
+            'Conference room smart TVs and projectors'
           ],
-          isCompleted: false,
+          isCompleted: false
         },
         {
           id: 'endpoint-challenges',
@@ -117,9 +116,9 @@ export default function Phase0Foundation({
             '"Where is that device?" - No visibility into connected devices',
             '"Is it secure?" - Unknown vulnerabilities and threats',
             '"What\'s installed?" - No software inventory or patch status',
-            '"How do we fix issues?" - Manual, time-consuming processes',
+            '"How do we fix issues?" - Manual, time-consuming processes'
           ],
-          isCompleted: false,
+          isCompleted: false
         },
         {
           id: 'tanium-solution',
@@ -127,18 +126,18 @@ export default function Phase0Foundation({
           content: 'Tanium provides real-time visibility and control over all endpoints',
           keyPoints: [
             'See everything connected to your network instantly',
-            'Ask questions about any endpoint in natural language',
+            'Ask questions about any endpoint in natural language', 
             'Take actions across thousands of devices simultaneously',
-            'Maintain continuous security monitoring and threat detection',
+            'Maintain continuous security monitoring and threat detection'
           ],
           examples: [
             'Ask: "Which computers have Chrome version 90 or older?"',
             'Deploy security patches to 10,000 endpoints in minutes',
-            'Automatically detect and respond to malware infections',
+            'Automatically detect and respond to malware infections'
           ],
-          isCompleted: false,
-        },
-      ],
+          isCompleted: false
+        }
+      ]
     },
     {
       id: 'core-concepts',
@@ -148,7 +147,7 @@ export default function Phase0Foundation({
       icon: Server,
       difficulty: 'Beginner',
       milestone: 'Navigate Tanium architecture with confidence',
-      confidenceBoost: "You're speaking Tanium like a pro!",
+      confidenceBoost: 'You\'re speaking Tanium like a pro!',
       isCompleted: userProgress.completedModules.includes('core-concepts'),
       progress: 0,
       sections: [
@@ -159,9 +158,9 @@ export default function Phase0Foundation({
           keyPoints: [
             'Tanium Console: Your command center for all operations',
             'Tanium Client: Lightweight agent on every endpoint',
-            'Tanium Server: Central intelligence processing everything',
+            'Tanium Server: Central intelligence processing everything'
           ],
-          isCompleted: false,
+          isCompleted: false
         },
         {
           id: 'key-capabilities',
@@ -170,16 +169,16 @@ export default function Phase0Foundation({
           keyPoints: [
             'Real-Time Questions: Ask anything about your endpoints',
             'Instant Actions: Deploy changes across your entire environment',
-            'Continuous Monitoring: Always-on visibility and alerting',
+            'Continuous Monitoring: Always-on visibility and alerting'
           ],
           examples: [
             'Question: "Show me machines with high CPU usage"',
             'Action: "Install Windows updates on all domain controllers"',
-            'Monitor: "Alert me when disk space drops below 10%"',
+            'Monitor: "Alert me when disk space drops below 10%"'
           ],
-          isCompleted: false,
-        },
-      ],
+          isCompleted: false
+        }
+      ]
     },
     {
       id: 'terminology',
@@ -202,16 +201,16 @@ export default function Phase0Foundation({
             'Sensor: Pre-built data collectors (500+ available)',
             'Computer Group: Collections of endpoints grouped by criteria',
             'Action: Tasks deployed to endpoints to make changes',
-            'Targeting: Selecting which endpoints receive questions/actions',
+            'Targeting: Selecting which endpoints receive questions/actions'
           ],
           checklistItems: [
             'I can explain what a Tanium question is',
             'I understand the difference between sensors and questions',
             'I know how computer groups organize endpoints',
             'I can describe what actions do',
-            'I understand targeting concepts',
+            'I understand targeting concepts'
           ],
-          isCompleted: false,
+          isCompleted: false
         },
         {
           id: 'intermediate-terms',
@@ -221,32 +220,32 @@ export default function Phase0Foundation({
             'Package: Bundle of files, commands, and parameters',
             'Saved Question: Reusable questions for repeated use',
             'Action Group: Collection of related actions',
-            'Module: Specialized Tanium applications (Patch, Asset, etc.)',
+            'Module: Specialized Tanium applications (Patch, Asset, etc.)'
           ],
-          isCompleted: false,
+          isCompleted: false
         },
         {
           id: 'advanced-terms',
           title: 'Advanced Terms (TCO Exam Focus)',
           content: 'Master the concepts that appear on the certification exam',
           keyPoints: [
-            "Linear Chain Architecture: Tanium's unique communication method",
+            'Linear Chain Architecture: Tanium\'s unique communication method',
             'RBAC: Role-Based Access Control security model',
-            'Content Authoring: Creating custom sensors and packages',
+            'Content Authoring: Creating custom sensors and packages'
           ],
-          isCompleted: false,
-        },
-      ],
+          isCompleted: false
+        }
+      ]
     },
     {
       id: 'navigation',
-      title: 'Navigation Essentials',
+      title: 'Navigation Essentials', 
       duration: '15 minutes',
       description: 'Move confidently through the Tanium console interface',
       icon: Globe,
       difficulty: 'Easy',
       milestone: 'Navigate Tanium console without guidance',
-      confidenceBoost: "You're navigating like a Tanium expert!",
+      confidenceBoost: 'You\'re navigating like a Tanium expert!',
       isCompleted: userProgress.completedModules.includes('navigation'),
       progress: 0,
       sections: [
@@ -259,15 +258,15 @@ export default function Phase0Foundation({
             'Interact: Ask questions and view real-time results',
             'Deploy: Manage actions and package deployments',
             'Modules: Access specialized applications',
-            'Administration: User and system management',
+            'Administration: User and system management'
           ],
           checklistItems: [
             'I can find the Interact tab for asking questions',
             'I know where to go to deploy actions',
             'I can access specialized modules',
-            'I understand the administration section',
+            'I understand the administration section'
           ],
-          isCompleted: false,
+          isCompleted: false
         },
         {
           id: 'essential-workflows',
@@ -276,11 +275,11 @@ export default function Phase0Foundation({
           keyPoints: [
             'Basic Question Flow: From asking to exporting results',
             'Action Deployment Flow: From selection to monitoring',
-            'Computer Group Management: Creating and managing groups',
+            'Computer Group Management: Creating and managing groups'
           ],
-          isCompleted: false,
-        },
-      ],
+          isCompleted: false
+        }
+      ]
     },
     {
       id: 'learning-roadmap',
@@ -300,11 +299,11 @@ export default function Phase0Foundation({
           content: 'Your complete journey from beginner to certified professional',
           keyPoints: [
             'Phase 0: Foundation (You are here!) - Build confidence',
-            'Phase 1: Core Fundamentals - Master 5 TCO domains',
+            'Phase 1: Core Fundamentals - Master 5 TCO domains', 
             'Phase 2: Exam Preparation - Practice tests and time management',
-            'Phase 3: Certification Success - Real-world application',
+            'Phase 3: Certification Success - Real-world application'
           ],
-          isCompleted: false,
+          isCompleted: false
         },
         {
           id: 'study-tips',
@@ -315,18 +314,18 @@ export default function Phase0Foundation({
             'Practice daily - 30 minutes beats 3-hour sessions',
             'Ask questions - use resources liberally',
             'Celebrate progress - acknowledge every milestone',
-            'Connect concepts - link terms to real scenarios',
+            'Connect concepts - link terms to real scenarios'
           ],
           checklistItems: [
             'I have a daily study schedule',
             'I know where to get help when stuck',
             'I celebrate my learning progress',
-            'I connect new concepts to real examples',
+            'I connect new concepts to real examples'
           ],
-          isCompleted: false,
-        },
-      ],
-    },
+          isCompleted: false
+        }
+      ]
+    }
   ];
 
   // Foundation milestones for gamification
@@ -338,7 +337,7 @@ export default function Phase0Foundation({
       icon: Star,
       isUnlocked: userProgress.completedModules.length >= 1,
       isCompleted: userProgress.unlockedMilestones.includes('first-module'),
-      reward: 'Foundation Learner Badge',
+      reward: 'Foundation Learner Badge'
     },
     {
       id: 'terminology-master',
@@ -347,7 +346,7 @@ export default function Phase0Foundation({
       icon: BookOpen,
       isUnlocked: userProgress.completedModules.includes('terminology'),
       isCompleted: userProgress.unlockedMilestones.includes('terminology-master'),
-      reward: 'Vocabulary Expert Badge',
+      reward: 'Vocabulary Expert Badge'
     },
     {
       id: 'navigation-expert',
@@ -356,7 +355,7 @@ export default function Phase0Foundation({
       icon: Globe,
       isUnlocked: userProgress.completedModules.includes('navigation'),
       isCompleted: userProgress.unlockedMilestones.includes('navigation-expert'),
-      reward: 'Console Navigator Badge',
+      reward: 'Console Navigator Badge'
     },
     {
       id: 'foundation-graduate',
@@ -365,20 +364,17 @@ export default function Phase0Foundation({
       icon: Award,
       isUnlocked: userProgress.completedModules.length >= 5,
       isCompleted: userProgress.unlockedMilestones.includes('foundation-graduate'),
-      reward: 'Ready for Phase 1 Badge',
-    },
+      reward: 'Ready for Phase 1 Badge'
+    }
   ];
 
   // Calculate overall progress
   useEffect(() => {
-    const totalSections = foundationModules.reduce(
-      (total, module) => total + module.sections.length,
-      0
-    );
+    const totalSections = foundationModules.reduce((total, module) => total + module.sections.length, 0);
     const completedCount = completedSections.length;
     const progress = totalSections > 0 ? (completedCount / totalSections) * 100 : 0;
     setOverallProgress(Math.round(progress));
-  }, [completedSections, foundationModules]);
+  }, [completedSections]);
 
   // Handle section completion
   const handleSectionComplete = (moduleId: string, sectionId: string) => {
@@ -386,23 +382,22 @@ export default function Phase0Foundation({
     setCompletedSections(newCompleted);
 
     // Check if module is complete
-    const module = foundationModules.find((m) => m.id === moduleId);
+    const module = foundationModules.find(m => m.id === moduleId);
     if (module) {
-      const moduleSections = module.sections.map((s) => s.id);
-      const moduleCompleted = moduleSections.every((id) => newCompleted.includes(id));
-
+      const moduleSections = module.sections.map(s => s.id);
+      const moduleCompleted = moduleSections.every(id => newCompleted.includes(id));
+      
       if (moduleCompleted) {
         onModuleComplete?.(moduleId);
-
+        
         // Check for milestone achievements
-        const milestone = foundationMilestones.find(
-          (m) =>
-            (m.id === 'first-module' && userProgress.completedModules.length === 0) ||
-            (m.id === 'terminology-master' && moduleId === 'terminology') ||
-            (m.id === 'navigation-expert' && moduleId === 'navigation') ||
-            (m.id === 'foundation-graduate' && userProgress.completedModules.length >= 4)
+        const milestone = foundationMilestones.find(m => 
+          m.id === 'first-module' && userProgress.completedModules.length === 0 ||
+          m.id === 'terminology-master' && moduleId === 'terminology' ||
+          m.id === 'navigation-expert' && moduleId === 'navigation' ||
+          m.id === 'foundation-graduate' && userProgress.completedModules.length >= 4
         );
-
+        
         if (milestone && !milestone.isCompleted) {
           setShowMilestone(milestone);
           onMilestoneAchieved?.(milestone.id);
@@ -412,7 +407,7 @@ export default function Phase0Foundation({
   };
 
   const getModuleProgress = (module: FoundationModule): number => {
-    const completedInModule = module.sections.filter((s) =>
+    const completedInModule = module.sections.filter(s => 
       completedSections.includes(s.id)
     ).length;
     return Math.round((completedInModule / module.sections.length) * 100);
@@ -420,12 +415,9 @@ export default function Phase0Foundation({
 
   const getDifficultyColor = (difficulty: string): string => {
     switch (difficulty) {
-      case 'Easy':
-        return 'bg-green-100 text-green-800';
-      case 'Beginner':
-        return 'bg-blue-100 text-blue-800';
-      default:
-        return 'bg-gray-100 text-gray-800';
+      case 'Easy': return 'bg-green-100 text-green-800';
+      case 'Beginner': return 'bg-blue-100 text-blue-800';
+      default: return 'bg-gray-100 text-gray-800';
     }
   };
 
@@ -438,7 +430,9 @@ export default function Phase0Foundation({
           animate={{ opacity: 1, y: 0 }}
           className="space-y-2"
         >
-          <h1 className="text-4xl font-bold text-gray-900">Phase 0: Foundation</h1>
+          <h1 className="text-4xl font-bold text-gray-900">
+            Phase 0: Foundation
+          </h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             Complete Beginner's Guide to Tanium - Build unshakeable confidence in the fundamentals
           </p>
@@ -455,7 +449,7 @@ export default function Phase0Foundation({
               className="bg-gradient-to-r from-primary to-sky-600 h-3 rounded-full"
               initial={{ width: 0 }}
               animate={{ width: `${overallProgress}%` }}
-              transition={{ duration: 1, ease: 'easeOut' }}
+              transition={{ duration: 1, ease: "easeOut" }}
             />
           </div>
         </div>
@@ -477,26 +471,30 @@ export default function Phase0Foundation({
                 <div className="flex-shrink-0 p-3 bg-blue-50 rounded-lg">
                   <module.icon className="w-6 h-6 text-blue-600" />
                 </div>
-
+                
                 <div className="flex-1 space-y-2">
                   <div className="flex items-center space-x-2">
-                    <h3 className="text-lg font-semibold text-gray-900">{module.title}</h3>
-                    {module.isCompleted && <CheckCircle className="w-5 h-5 text-[#22c55e]" />}
+                    <h3 className="text-lg font-semibold text-gray-900">
+                      {module.title}
+                    </h3>
+                    {module.isCompleted && (
+                      <CheckCircle className="w-5 h-5 text-[#22c55e]" />
+                    )}
                   </div>
-
+                  
                   <div className="flex items-center space-x-3">
                     <span className="flex items-center text-sm text-muted-foreground">
                       <Clock className="w-4 h-4 mr-1" />
                       {module.duration}
                     </span>
-                    <span
-                      className={`px-2 py-1 text-xs font-semibold rounded-full ${getDifficultyColor(module.difficulty)}`}
-                    >
+                    <span className={`px-2 py-1 text-xs font-semibold rounded-full ${getDifficultyColor(module.difficulty)}`}>
                       {module.difficulty}
                     </span>
                   </div>
-
-                  <p className="text-gray-600 text-sm">{module.description}</p>
+                  
+                  <p className="text-gray-600 text-sm">
+                    {module.description}
+                  </p>
                 </div>
               </div>
 
@@ -507,7 +505,7 @@ export default function Phase0Foundation({
                   <span className="text-gray-900 font-medium">{getModuleProgress(module)}%</span>
                 </div>
                 <div className="w-full bg-gray-200 rounded-full h-2">
-                  <div
+                  <div 
                     className="progress-bar"
                     style={{ width: `${getModuleProgress(module)}%` }}
                   />
@@ -518,18 +516,16 @@ export default function Phase0Foundation({
               <div className="space-y-2 mb-4">
                 {module.sections.map((section) => (
                   <div key={section.id} className="flex items-center space-x-3">
-                    <div
-                      className={`w-2 h-2 rounded-full ${
-                        completedSections.includes(section.id) ? 'bg-[#22c55e]' : 'bg-gray-300'
-                      }`}
-                    />
-                    <span
-                      className={`text-sm ${
-                        completedSections.includes(section.id)
-                          ? 'text-gray-900 font-medium'
-                          : 'text-gray-600'
-                      }`}
-                    >
+                    <div className={`w-2 h-2 rounded-full ${
+                      completedSections.includes(section.id) 
+                        ? 'bg-[#22c55e]' 
+                        : 'bg-gray-300'
+                    }`} />
+                    <span className={`text-sm ${
+                      completedSections.includes(section.id)
+                        ? 'text-gray-900 font-medium'
+                        : 'text-gray-600'
+                    }`}>
                       {section.title}
                     </span>
                     {completedSections.includes(section.id) && (
@@ -547,7 +543,9 @@ export default function Phase0Foundation({
                 className="w-full flex items-center justify-center space-x-2 px-4 py-3 bg-gradient-to-r from-primary to-sky-600 text-foreground font-semibold rounded-lg hover:from-cyan-600 hover:to-sky-700 transition-colors"
               >
                 <PlayCircle className="w-4 h-4" />
-                <span>{module.isCompleted ? 'Review Module' : 'Start Learning'}</span>
+                <span>
+                  {module.isCompleted ? 'Review Module' : 'Start Learning'}
+                </span>
               </motion.button>
             </div>
 
@@ -565,7 +563,9 @@ export default function Phase0Foundation({
                     {module.sections.map((section) => (
                       <div key={section.id} className="bg-white rounded-lg p-4 space-y-3">
                         <div className="flex items-center justify-between">
-                          <h4 className="text-md font-semibold text-gray-900">{section.title}</h4>
+                          <h4 className="text-md font-semibold text-gray-900">
+                            {section.title}
+                          </h4>
                           {completedSections.includes(section.id) ? (
                             <CheckCircle className="w-5 h-5 text-[#22c55e]" />
                           ) : (
@@ -579,17 +579,16 @@ export default function Phase0Foundation({
                             </motion.button>
                           )}
                         </div>
-
-                        <p className="text-gray-600 text-sm">{section.content}</p>
-
+                        
+                        <p className="text-gray-600 text-sm">
+                          {section.content}
+                        </p>
+                        
                         <div className="space-y-2">
                           <h5 className="text-sm font-medium text-gray-900">Key Points:</h5>
                           <ul className="space-y-1">
                             {section.keyPoints.map((point, idx) => (
-                              <li
-                                key={idx}
-                                className="text-sm text-gray-600 flex items-start space-x-2"
-                              >
+                              <li key={idx} className="text-sm text-gray-600 flex items-start space-x-2">
                                 <div className="w-1.5 h-1.5 bg-primary rounded-full mt-2 flex-shrink-0" />
                                 <span>{point}</span>
                               </li>
@@ -602,10 +601,7 @@ export default function Phase0Foundation({
                             <h5 className="text-sm font-medium text-gray-900">Examples:</h5>
                             <ul className="space-y-1">
                               {section.examples.map((example, idx) => (
-                                <li
-                                  key={idx}
-                                  className="text-sm text-green-700 bg-green-50 rounded px-2 py-1"
-                                >
+                                <li key={idx} className="text-sm text-green-700 bg-green-50 rounded px-2 py-1">
                                   {example}
                                 </li>
                               ))}
@@ -618,14 +614,11 @@ export default function Phase0Foundation({
                             <h5 className="text-sm font-medium text-gray-900">Self-Check:</h5>
                             <ul className="space-y-1">
                               {section.checklistItems.map((item, idx) => (
-                                <li
-                                  key={idx}
-                                  className="text-sm text-gray-600 flex items-start space-x-2"
-                                >
+                                <li key={idx} className="text-sm text-gray-600 flex items-start space-x-2">
                                   <label className="flex items-start space-x-2">
-                                    <input
-                                      type="checkbox"
-                                      className="mt-1"
+                                    <input 
+                                      type="checkbox" 
+                                      className="mt-1" 
                                       aria-label={`Check off: ${item}`}
                                     />
                                     <span>{item}</span>
@@ -650,45 +643,41 @@ export default function Phase0Foundation({
         <h2 className="text-2xl font-bold text-gray-900 mb-4 text-center">
           🏆 Foundation Milestones
         </h2>
-
+        
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           {foundationMilestones.map((milestone) => (
             <motion.div
               key={milestone.id}
               initial={{ opacity: 0.6 }}
-              animate={{
+              animate={{ 
                 opacity: milestone.isUnlocked ? 1 : 0.6,
-                scale: milestone.isCompleted ? 1.05 : 1,
+                scale: milestone.isCompleted ? 1.05 : 1
               }}
               className={`p-4 rounded-lg border text-center space-y-2 ${
-                milestone.isCompleted
+                milestone.isCompleted 
                   ? 'bg-gradient-to-r from-[#f97316] to-orange-400 border-yellow-500 text-foreground'
                   : milestone.isUnlocked
                     ? 'bg-white border-cyan-200 shadow-sm'
                     : 'bg-gray-100 border-gray-300'
               }`}
             >
-              <milestone.icon
-                className={`w-8 h-8 mx-auto ${
-                  milestone.isCompleted ? 'text-foreground' : 'text-cyan-600'
-                }`}
-              />
-              <h3
-                className={`font-semibold ${
-                  milestone.isCompleted ? 'text-foreground' : 'text-gray-900'
-                }`}
-              >
+              <milestone.icon className={`w-8 h-8 mx-auto ${
+                milestone.isCompleted ? 'text-foreground' : 'text-cyan-600'
+              }`} />
+              <h3 className={`font-semibold ${
+                milestone.isCompleted ? 'text-foreground' : 'text-gray-900'
+              }`}>
                 {milestone.title}
               </h3>
-              <p
-                className={`text-xs ${
-                  milestone.isCompleted ? 'text-foreground/90' : 'text-gray-600'
-                }`}
-              >
+              <p className={`text-xs ${
+                milestone.isCompleted ? 'text-foreground/90' : 'text-gray-600'
+              }`}>
                 {milestone.description}
               </p>
               {milestone.isCompleted && (
-                <div className="text-xs bg-white/20 rounded-full px-2 py-1">{milestone.reward}</div>
+                <div className="text-xs bg-white/20 rounded-full px-2 py-1">
+                  {milestone.reward}
+                </div>
               )}
             </motion.div>
           ))}
@@ -715,25 +704,33 @@ export default function Phase0Foundation({
               <motion.div
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
-                transition={{ delay: 0.2, type: 'spring', stiffness: 200 }}
+                transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
                 className="mx-auto w-20 h-20 bg-gradient-to-r from-[#f97316] to-orange-400 rounded-full flex items-center justify-center"
               >
                 <showMilestone.icon className="w-10 h-10 text-foreground" />
               </motion.div>
-
+              
               <div className="space-y-2">
-                <h3 className="text-2xl font-bold text-gray-900">Milestone Achieved!</h3>
-                <h4 className="text-lg font-semibold text-cyan-600">{showMilestone.title}</h4>
-                <p className="text-gray-600">{showMilestone.description}</p>
+                <h3 className="text-2xl font-bold text-gray-900">
+                  Milestone Achieved!
+                </h3>
+                <h4 className="text-lg font-semibold text-cyan-600">
+                  {showMilestone.title}
+                </h4>
+                <p className="text-gray-600">
+                  {showMilestone.description}
+                </p>
               </div>
 
               <div className="p-4 bg-gradient-to-r from-cyan-50 to-sky-50 rounded-lg">
                 <div className="flex items-center justify-center space-x-2">
                   <Award className="w-5 h-5 text-cyan-600" />
-                  <span className="font-semibold text-cyan-900">{showMilestone.reward}</span>
+                  <span className="font-semibold text-cyan-900">
+                    {showMilestone.reward}
+                  </span>
                 </div>
               </div>
-
+              
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -755,10 +752,12 @@ export default function Phase0Foundation({
           className="bg-gradient-to-r from-green-500 to-emerald-600 rounded-xl p-8 text-foreground text-center"
         >
           <Heart className="w-12 h-12 mx-auto mb-4" />
-          <h2 className="text-3xl font-bold mb-2">🎉 Foundation Complete!</h2>
+          <h2 className="text-3xl font-bold mb-2">
+            🎉 Foundation Complete!
+          </h2>
           <p className="text-xl text-foreground/90 mb-6">
-            Amazing work! You've built a solid foundation in Tanium concepts. You're ready for Phase
-            1: Core Fundamentals!
+            Amazing work! You've built a solid foundation in Tanium concepts. 
+            You're ready for Phase 1: Core Fundamentals!
           </p>
           <motion.button
             whileHover={{ scale: 1.05 }}

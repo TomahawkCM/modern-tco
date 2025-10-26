@@ -1,7 +1,7 @@
 // @ts-nocheck - Type errors in this file will be fixed post-deployment
-import { type Choice, Difficulty, type Question, QuestionCategory, TCODomain } from '@/types/exam';
-import type { Json, QuestionInsert, QuestionUpdate } from '../types/supabase'; // Import Json
-import { supabase } from './supabase';
+import { type Choice, Difficulty, type Question, QuestionCategory, TCODomain } from "@/types/exam";
+import type { Json, QuestionInsert, QuestionUpdate, Tables } from "../types/supabase"; // Import Json
+import { supabase } from "./supabase";
 
 /**
  * Database-driven Question Service
@@ -16,18 +16,18 @@ export class QuestionService {
     const map: Record<string, number> = { a: 0, b: 1, c: 2, d: 3 };
     if (v in map) return map[v];
     const n = Number(v);
-    return Number.isFinite(n) ? n : v;
+    return Number.isFinite(n) ? (n) : v;
   }
   // --- Mapping helpers: DB <-> App enums ---
   private mapDbDifficultyToUi(value: string | null | undefined): Difficulty {
-    switch ((value || '').toLowerCase()) {
-      case 'beginner':
+    switch ((value || "").toLowerCase()) {
+      case "beginner":
         return Difficulty.BEGINNER;
-      case 'intermediate':
+      case "intermediate":
         return Difficulty.INTERMEDIATE;
-      case 'advanced':
+      case "advanced":
         return Difficulty.ADVANCED;
-      case 'expert':
+      case "expert":
         return Difficulty.EXPERT;
       default:
         // Fallback: if it's already a UI value, return as-is; else default to Intermediate
@@ -43,22 +43,22 @@ export class QuestionService {
   }
 
   private mapUiDifficultyToDb(value: Difficulty | string | null | undefined): string {
-    const v = (value || '').toString();
+    const v = (value || "").toString();
     switch (v) {
       case Difficulty.BEGINNER:
-      case 'beginner':
-        return 'beginner';
+      case "beginner":
+        return "beginner";
       case Difficulty.INTERMEDIATE:
-      case 'intermediate':
-        return 'intermediate';
+      case "intermediate":
+        return "intermediate";
       case Difficulty.ADVANCED:
-      case 'advanced':
-        return 'advanced';
+      case "advanced":
+        return "advanced";
       case Difficulty.EXPERT:
-      case 'expert':
-        return 'expert';
+      case "expert":
+        return "expert";
       default:
-        return 'intermediate';
+        return "intermediate";
     }
   }
 
@@ -87,15 +87,15 @@ export class QuestionService {
 
   private DOMAIN_UI_TO_DB: Record<string, string> = {
     // Legacy uppercase enum codes (supported if an older schema uses codes)
-    [TCODomain.ASKING_QUESTIONS]: 'ASKING_QUESTIONS',
-    [TCODomain.REFINING_QUESTIONS]: 'REFINING_QUESTIONS',
-    [TCODomain.REFINING_TARGETING]: 'REFINING_TARGETING',
-    [TCODomain.TAKING_ACTION]: 'TAKING_ACTION',
-    [TCODomain.NAVIGATION_MODULES]: 'NAVIGATION_MODULES',
-    [TCODomain.REPORTING_EXPORT]: 'REPORTING_EXPORT',
-    [TCODomain.SECURITY]: 'SECURITY',
-    [TCODomain.FUNDAMENTALS]: 'FUNDAMENTALS',
-    [TCODomain.TROUBLESHOOTING]: 'TROUBLESHOOTING',
+    [TCODomain.ASKING_QUESTIONS]: "ASKING_QUESTIONS",
+    [TCODomain.REFINING_QUESTIONS]: "REFINING_QUESTIONS",
+    [TCODomain.REFINING_TARGETING]: "REFINING_TARGETING",
+    [TCODomain.TAKING_ACTION]: "TAKING_ACTION",
+    [TCODomain.NAVIGATION_MODULES]: "NAVIGATION_MODULES",
+    [TCODomain.REPORTING_EXPORT]: "REPORTING_EXPORT",
+    [TCODomain.SECURITY]: "SECURITY",
+    [TCODomain.FUNDAMENTALS]: "FUNDAMENTALS",
+    [TCODomain.TROUBLESHOOTING]: "TROUBLESHOOTING",
   };
 
   private mapUiDomainToDb(value: TCODomain | string): string {
@@ -124,23 +124,23 @@ export class QuestionService {
   }
 
   private CATEGORY_UI_TO_DB: Record<QuestionCategory, string> = {
-    [QuestionCategory.PLATFORM_FUNDAMENTALS]: 'PLATFORM_FUNDAMENTALS',
-    [QuestionCategory.CONSOLE_PROCEDURES]: 'CONSOLE_PROCEDURES',
-    [QuestionCategory.TROUBLESHOOTING]: 'TROUBLESHOOTING',
-    [QuestionCategory.PRACTICAL_SCENARIOS]: 'PRACTICAL_SCENARIOS',
-    [QuestionCategory.LINEAR_CHAIN]: 'LINEAR_CHAIN',
+    [QuestionCategory.PLATFORM_FUNDAMENTALS]: "PLATFORM_FUNDAMENTALS",
+    [QuestionCategory.CONSOLE_PROCEDURES]: "CONSOLE_PROCEDURES",
+    [QuestionCategory.TROUBLESHOOTING]: "TROUBLESHOOTING",
+    [QuestionCategory.PRACTICAL_SCENARIOS]: "PRACTICAL_SCENARIOS",
+    [QuestionCategory.LINEAR_CHAIN]: "LINEAR_CHAIN",
   } as any;
 
   private mapUiCategoryToDb(value: QuestionCategory | string): string {
     const ui = (value as QuestionCategory) || QuestionCategory.PLATFORM_FUNDAMENTALS;
-    return this.CATEGORY_UI_TO_DB[ui] || 'PLATFORM_FUNDAMENTALS';
+    return this.CATEGORY_UI_TO_DB[ui] || "PLATFORM_FUNDAMENTALS";
   }
 
   /**
    * Get all questions from database
    */
   async getAllQuestions(): Promise<Question[]> {
-    const res: any = await supabase.from('questions').select('*').order('created_at');
+    const res: any = await supabase.from("questions").select("*").order("created_at");
     const { data, error } = res;
 
     if (error) {
@@ -156,10 +156,10 @@ export class QuestionService {
   async getQuestionsByDomain(domain: TCODomain): Promise<Question[]> {
     const dbDomain = this.mapUiDomainToDb(domain);
     const res: any = await supabase
-      .from('questions')
-      .select('*')
-      .eq('domain', dbDomain)
-      .order('created_at');
+      .from("questions")
+      .select("*")
+      .eq("domain", dbDomain)
+      .order("created_at");
     const { data, error } = res;
 
     if (error) {
@@ -173,15 +173,12 @@ export class QuestionService {
    * Get questions by difficulty level
    */
   async getQuestionsByDifficulty(difficulty: Difficulty): Promise<Question[]> {
-    const dbDifficulty = this.mapUiDifficultyToDb(difficulty) as
-      | 'beginner'
-      | 'intermediate'
-      | 'advanced';
+    const dbDifficulty = this.mapUiDifficultyToDb(difficulty) as "beginner" | "intermediate" | "advanced";
     const res: any = await supabase
-      .from('questions')
-      .select('*')
-      .eq('difficulty', dbDifficulty)
-      .order('created_at');
+      .from("questions")
+      .select("*")
+      .eq("difficulty", dbDifficulty)
+      .order("created_at");
     const { data, error } = res;
 
     if (error) {
@@ -197,10 +194,10 @@ export class QuestionService {
   async getQuestionsByCategory(category: QuestionCategory): Promise<Question[]> {
     const dbCategory = this.mapUiCategoryToDb(category);
     const res: any = await supabase
-      .from('questions')
-      .select('*')
-      .eq('category', dbCategory) // Use DB enum code
-      .order('created_at');
+      .from("questions")
+      .select("*")
+      .eq("category", dbCategory) // Use DB enum code
+      .order("created_at");
     const { data, error } = res;
 
     if (error) {
@@ -215,7 +212,7 @@ export class QuestionService {
    * Uses database function for optimal performance
    */
   async getWeightedRandomQuestions(count: number): Promise<Question[]> {
-    const res: any = await (supabase as any).rpc('get_weighted_random_questions', {
+    const res: any = await (supabase as any).rpc("get_weighted_random_questions", {
       question_count: count,
     });
 
@@ -226,8 +223,8 @@ export class QuestionService {
     }
 
     // Transform the JSONB data back to Question objects
-    const rows = (data ?? []) as { question_data: Json }[];
-    return rows.map((row) => row.question_data as unknown as Question);
+  const rows = (data ?? []) as { question_data: Json }[];
+  return rows.map((row) => (row.question_data as unknown) as Question);
   }
 
   /**
@@ -241,7 +238,11 @@ export class QuestionService {
    * Get random questions across all domains (no weighting)
    */
   async getRandomQuestions(count: number): Promise<Question[]> {
-    const res: any = await supabase.from('questions').select('*').order('RANDOM()').limit(count);
+    const res: any = await supabase
+      .from("questions")
+      .select("*")
+      .order("RANDOM()")
+      .limit(count);
     const { data, error } = res;
     if (error) {
       throw new Error(`Failed to fetch random questions: ${error.message}`);
@@ -255,10 +256,10 @@ export class QuestionService {
   async getPracticeQuestions(domain: TCODomain, count: number = 10): Promise<Question[]> {
     const dbDomain = this.mapUiDomainToDb(domain);
     const res: any = await supabase
-      .from('questions')
-      .select('*')
-      .eq('domain', dbDomain)
-      .order('RANDOM()')
+      .from("questions")
+      .select("*")
+      .eq("domain", dbDomain)
+      .order("RANDOM()")
       .limit(count);
     const { data, error } = res;
 
@@ -280,12 +281,12 @@ export class QuestionService {
   }> {
     // Get total count
     const totalResult: any = await supabase
-      .from('questions')
-      .select('*', { count: 'exact', head: true });
+      .from("questions")
+      .select("*", { count: "exact", head: true });
     const totalQuestions = totalResult?.count ?? 0;
 
     // Get domain distribution without aggregates (compatible with strict PostgREST configs)
-    const domainRes: any = await supabase.from('questions').select('domain');
+    const domainRes: any = await supabase.from("questions").select("domain");
     const domainRows = (domainRes?.data ?? []) as Array<{ domain: string | null }>;
     const domainError = domainRes?.error;
 
@@ -294,12 +295,12 @@ export class QuestionService {
     }
 
     // Get difficulty distribution
-    const diffRes: any = await supabase.from('questions').select('difficulty');
-    const difficultyData = diffRes?.data ?? [];
+  const diffRes: any = await supabase.from("questions").select("difficulty");
+  const difficultyData = diffRes?.data ?? [];
 
-    // Get category distribution
-    const catRes: any = await supabase.from('questions').select('category');
-    const categoryData = catRes?.data ?? [];
+  // Get category distribution
+  const catRes: any = await supabase.from("questions").select("category");
+  const categoryData = catRes?.data ?? [];
 
     // Process distributions
     const domainDistribution: Record<TCODomain, number> = {} as Record<TCODomain, number>;
@@ -322,7 +323,7 @@ export class QuestionService {
 
     // Count from domain statistics view
     domainRows.forEach((row) => {
-      const uiDomain = this.mapDbDomainToUi(row.domain || undefined);
+      const uiDomain = this.mapDbDomainToUi((row.domain || undefined));
       domainDistribution[uiDomain] = (domainDistribution[uiDomain] || 0) + 1;
     });
 
@@ -351,10 +352,10 @@ export class QuestionService {
    */
   async searchQuestions(searchTerm: string): Promise<Question[]> {
     const res: any = await supabase
-      .from('questions')
-      .select('*')
+      .from("questions")
+      .select("*")
       .or(`question.ilike.%${searchTerm}%,explanation.ilike.%${searchTerm}%`)
-      .order('created_at');
+      .order("created_at");
     const { data, error } = res;
 
     if (error) {
@@ -369,10 +370,10 @@ export class QuestionService {
    */
   async getQuestionsByTags(tags: string[]): Promise<Question[]> {
     const res: any = await supabase
-      .from('questions')
-      .select('*')
-      .overlaps('tags', tags)
-      .order('created_at');
+      .from("questions")
+      .select("*")
+      .overlaps("tags", tags)
+      .order("created_at");
     const { data, error } = res;
 
     if (error) {
@@ -396,9 +397,9 @@ export class QuestionService {
     try {
       // Check for questions without proper structure
       const invalidRes: any = await supabase
-        .from('questions')
-        .select('id, question, options, correct_answer') // Select options and correct_answer
-        .or('question.is.null,options.is.null,correct_answer.is.null'); // Check options and correct_answer
+        .from("questions")
+        .select("id, question, options, correct_answer") // Select options and correct_answer
+        .or("question.is.null,options.is.null,correct_answer.is.null"); // Check options and correct_answer
       const invalidQuestions = invalidRes?.data ?? [];
 
       if (invalidQuestions.length > 0) {
@@ -406,22 +407,22 @@ export class QuestionService {
       }
 
       // Check for orphaned correct answer IDs
-      const qwcRes: any = await supabase.from('questions').select('id, options, correct_answer');
+      const qwcRes: any = await supabase.from("questions").select("id, options, correct_answer");
       const questionsWithChoices = qwcRes?.data ?? [];
 
       questionsWithChoices.forEach((q: any) => {
         if (q.options && Array.isArray(q.options)) {
           // Normalize choice ids as strings
           const choiceIds = (q.options as unknown as Array<any>).map((c, idx) => {
-            if (c && typeof c === 'object' && 'id' in c) return String(c.id);
+            if (c && typeof c === 'object' && 'id' in c) return String((c).id);
             // fallback: index-based ids a/b/c/d
-            return ['a', 'b', 'c', 'd'][idx] || String(idx);
+            return ['a','b','c','d'][idx] || String(idx);
           });
 
           const normalizeAnswer = (val: any): string => {
-            if (typeof val === 'number') return ['a', 'b', 'c', 'd'][val] || String(val);
+            if (typeof val === 'number') return ['a','b','c','d'][val] || String(val);
             if (typeof val === 'string') {
-              const map: Record<string, string> = { '0': 'a', '1': 'b', '2': 'c', '3': 'd' };
+              const map: Record<string,string> = { '0':'a','1':'b','2':'c','3':'d' };
               return map[val] || val;
             }
             return String(val ?? 'a');
@@ -429,9 +430,7 @@ export class QuestionService {
 
           const normalized = normalizeAnswer(q.correct_answer);
           if (!choiceIds.includes(normalized)) {
-            errors.push(
-              `Question ${q.id}: Correct answer ID '${q.correct_answer}' not found in choices`
-            );
+            errors.push(`Question ${q.id}: Correct answer ID '${q.correct_answer}' not found in choices`);
           }
         } else {
           errors.push(`Question ${q.id}: Choices are missing or not an array.`);
@@ -439,7 +438,7 @@ export class QuestionService {
       });
 
       // Check domain distribution
-      const stats = await this.getQuestionStats();
+    const stats = await this.getQuestionStats();
       const expectedDistribution = {
         [TCODomain.ASKING_QUESTIONS]: 22,
         [TCODomain.REFINING_QUESTIONS]: 23,
@@ -477,40 +476,40 @@ export class QuestionService {
     const list = Array.isArray(dbQuestions) ? dbQuestions : dbQuestions ? [dbQuestions] : [];
 
     return list.map((dbQ: any) => {
-      const rawCorrect: any = dbQ.correct_answer;
+      const rawCorrect: any = (dbQ).correct_answer;
       let correctAnswerId: string;
       if (typeof rawCorrect === 'number') {
-        const map = ['a', 'b', 'c', 'd'];
+        const map = ['a','b','c','d'];
         correctAnswerId = map[rawCorrect] || String(rawCorrect);
       } else if (typeof rawCorrect === 'string') {
         // Normalize numeric strings
-        const map: Record<string, string> = { '0': 'a', '1': 'b', '2': 'c', '3': 'd' };
+        const map: Record<string,string> = { '0':'a','1':'b','2':'c','3':'d' };
         correctAnswerId = map[rawCorrect] || rawCorrect;
       } else {
         correctAnswerId = String(rawCorrect ?? 'a');
       }
 
-      return {
-        id: dbQ.id,
-        question: dbQ.question,
-        choices: (dbQ.options as unknown as Choice[]) || [], // Map options to choices, cast to unknown first
-        correctAnswerId,
-        domain: this.mapDbDomainToUi(dbQ.domain as string),
-        difficulty: this.mapDbDifficultyToUi(dbQ.difficulty as string),
-        category: this.mapDbCategoryToUi(dbQ.category as string),
-        explanation: dbQ.explanation || '',
-        tags: dbQ.tags || [],
-        studyGuideRef: dbQ.study_guide_ref || dbQ.references || '',
-        createdAt: dbQ.created_at ? new Date(dbQ.created_at) : undefined,
-        updatedAt: dbQ.updated_at ? new Date(dbQ.updated_at) : undefined, // Map updated_at
-      };
+      return ({
+      id: dbQ.id,
+      question: dbQ.question,
+      choices: (dbQ.options as unknown as Choice[]) || [], // Map options to choices, cast to unknown first
+      correctAnswerId,
+      domain: this.mapDbDomainToUi(dbQ.domain as string),
+      difficulty: this.mapDbDifficultyToUi(dbQ.difficulty as string),
+      category: this.mapDbCategoryToUi(dbQ.category as string),
+      explanation: dbQ.explanation || "",
+      tags: dbQ.tags || [],
+      studyGuideRef: dbQ.study_guide_ref || dbQ.references || "",
+      createdAt: dbQ.created_at ? new Date(dbQ.created_at) : undefined,
+      updatedAt: dbQ.updated_at ? new Date(dbQ.updated_at) : undefined, // Map updated_at
+    });
     });
   }
 
   /**
    * Add new question to database
    */
-  async addQuestion(question: Omit<Question, 'id'>): Promise<Question> {
+  async addQuestion(question: Omit<Question, "id">): Promise<Question> {
     const dbQuestion: QuestionInsert = {
       question: question.question,
       options: question.choices as unknown as Json, // Cast choices to Json
@@ -526,7 +525,7 @@ export class QuestionService {
       updated_at: question.updatedAt?.toISOString() || new Date().toISOString(),
     };
 
-    const res: any = await supabase.from('questions').insert(dbQuestion).select().single();
+    const res: any = await supabase.from("questions").insert(dbQuestion).select().single();
     const { data, error } = res;
 
     if (error) {
@@ -540,7 +539,7 @@ export class QuestionService {
   /**
    * Update existing question
    */
-  async updateQuestion(id: string, updates: Partial<Omit<Question, 'id'>>): Promise<Question> {
+  async updateQuestion(id: string, updates: Partial<Omit<Question, "id">>): Promise<Question> {
     const dbUpdates: QuestionUpdate = {
       // Only include properties that are actually being updated
       ...(updates.question && { question: updates.question }),
@@ -559,9 +558,9 @@ export class QuestionService {
     };
 
     const res: any = await (supabase as any)
-      .from('questions')
+      .from("questions")
       .update(dbUpdates)
-      .eq('id', id)
+      .eq("id", id)
       .select()
       .single();
     const { data, error } = res;
@@ -577,7 +576,7 @@ export class QuestionService {
    * Delete question
    */
   async deleteQuestion(id: string): Promise<void> {
-    const { error } = await supabase.from('questions').delete().eq('id', id);
+    const { error } = await supabase.from("questions").delete().eq("id", id);
 
     if (error) {
       throw new Error(`Failed to delete question: ${error.message}`);

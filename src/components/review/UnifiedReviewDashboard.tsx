@@ -1,26 +1,26 @@
-'use client';
+"use client";
 
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useAuth } from "@/contexts/AuthContext";
+import { supabase } from "@/lib/supabase";
+import FlashcardReview from "@/components/flashcards/FlashcardReview";
+import QuestionReview from "./QuestionReview";
 import {
-  AlertCircle,
-  BookOpen,
   Brain,
-  CheckCircle2,
-  Clock,
-  ExternalLink,
-  Flame,
+  BookOpen,
   Target,
   TrendingUp,
-} from 'lucide-react';
-import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
-import FlashcardReview from '@/components/flashcards/FlashcardReview';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { useAuth } from '@/contexts/AuthContext';
-import { supabase } from '@/lib/supabase';
-import QuestionReview from './QuestionReview';
+  Flame,
+  Clock,
+  CheckCircle2,
+  AlertCircle,
+  ExternalLink,
+} from "lucide-react";
 
 interface ReviewStats {
   flashcards_due: number;
@@ -52,7 +52,7 @@ export default function UnifiedReviewDashboard() {
   const [stats, setStats] = useState<ReviewStats | null>(null);
   const [queue, setQueue] = useState<ReviewQueueItem[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [activeSession, setActiveSession] = useState<'flashcards' | 'questions' | null>(null);
+  const [activeSession, setActiveSession] = useState<"flashcards" | "questions" | null>(null);
 
   useEffect(() => {
     if (user?.id) {
@@ -66,32 +66,29 @@ export default function UnifiedReviewDashboard() {
     setIsLoading(true);
     try {
       // Get review statistics
-      const { data: statsData, error: statsError } = await supabase.rpc('get_review_stats', {
+      const { data: statsData, error: statsError } = await supabase.rpc("get_review_stats", {
         p_user_id: user.id,
       });
 
       if (statsError) {
-        console.error('Error loading stats:', statsError);
+        console.error("Error loading stats:", statsError);
       } else if (statsData && statsData.length > 0) {
         setStats(statsData[0]);
       }
 
       // Get unified review queue (flashcards + questions)
-      const { data: queueData, error: queueError } = await supabase.rpc(
-        'get_unified_review_queue',
-        {
-          p_user_id: user.id,
-          p_limit: 50,
-        }
-      );
+      const { data: queueData, error: queueError } = await supabase.rpc("get_unified_review_queue", {
+        p_user_id: user.id,
+        p_limit: 50,
+      });
 
       if (queueError) {
-        console.error('Error loading queue:', queueError);
+        console.error("Error loading queue:", queueError);
       } else {
         setQueue(queueData || []);
       }
     } catch (error) {
-      console.error('Dashboard load error:', error);
+      console.error("Dashboard load error:", error);
     } finally {
       setIsLoading(false);
     }
@@ -103,7 +100,7 @@ export default function UnifiedReviewDashboard() {
   };
 
   // If showing flashcard review
-  if (activeSession === 'flashcards') {
+  if (activeSession === "flashcards") {
     return (
       <div className="space-y-4">
         <Button variant="ghost" onClick={() => setActiveSession(null)}>
@@ -118,7 +115,7 @@ export default function UnifiedReviewDashboard() {
   }
 
   // If showing question review
-  if (activeSession === 'questions') {
+  if (activeSession === "questions") {
     return (
       <div className="space-y-4">
         <Button variant="ghost" onClick={() => setActiveSession(null)}>
@@ -175,7 +172,7 @@ export default function UnifiedReviewDashboard() {
 
       {/* Statistics Grid */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <Card className={totalDue > 0 ? 'border-orange-500/50' : 'border-green-500/50'}>
+        <Card className={totalDue > 0 ? "border-orange-500/50" : "border-green-500/50"}>
           <CardContent className="pt-6 text-center">
             <div className="flex items-center justify-center mb-2">
               {totalDue > 0 ? (
@@ -209,10 +206,7 @@ export default function UnifiedReviewDashboard() {
           <CardContent className="pt-6 text-center">
             <TrendingUp className="h-6 w-6 mx-auto mb-2 text-[#22c55e]" />
             <p className="text-3xl font-bold">
-              {Math.round(
-                ((stats?.avg_flashcard_retention || 0) + (stats?.avg_question_mastery || 0)) / 2
-              )}
-              %
+              {Math.round(((stats?.avg_flashcard_retention || 0) + (stats?.avg_question_mastery || 0)) / 2)}%
             </p>
             <p className="text-xs text-muted-foreground">Avg Mastery</p>
           </CardContent>
@@ -237,22 +231,22 @@ export default function UnifiedReviewDashboard() {
                   {stats?.flashcards_total || 0} total cards
                 </p>
               </div>
-              <Badge variant={flashcardCount > 0 ? 'destructive' : 'secondary'}>
+              <Badge variant={flashcardCount > 0 ? "destructive" : "secondary"}>
                 {flashcardCount} due
               </Badge>
             </div>
 
             <Button
-              onClick={() => setActiveSession('flashcards')}
+              onClick={() => setActiveSession("flashcards")}
               disabled={flashcardCount === 0}
               className="w-full"
               size="lg"
             >
-              {flashcardCount > 0 ? 'Start Flashcard Review' : 'All Caught Up!'}
+              {flashcardCount > 0 ? "Start Flashcard Review" : "All Caught Up!"}
             </Button>
 
             <Button
-              onClick={() => router.push('/flashcards')}
+              onClick={() => router.push("/flashcards")}
               variant="outline"
               className="w-full"
               size="sm"
@@ -284,19 +278,19 @@ export default function UnifiedReviewDashboard() {
                   {stats?.questions_total || 0} questions tracked
                 </p>
               </div>
-              <Badge variant={questionCount > 0 ? 'destructive' : 'secondary'}>
+              <Badge variant={questionCount > 0 ? "destructive" : "secondary"}>
                 {questionCount} due
               </Badge>
             </div>
 
             <Button
-              onClick={() => setActiveSession('questions')}
+              onClick={() => setActiveSession("questions")}
               disabled={questionCount === 0}
               className="w-full"
               size="lg"
               variant="secondary"
             >
-              {questionCount > 0 ? 'Start Question Review' : 'All Caught Up!'}
+              {questionCount > 0 ? "Start Question Review" : "All Caught Up!"}
             </Button>
 
             <div className="text-xs text-muted-foreground">
@@ -346,7 +340,7 @@ export default function UnifiedReviewDashboard() {
                 >
                   <div className="flex items-center gap-3">
                     <span className="text-sm font-mono text-muted-foreground">#{idx + 1}</span>
-                    {item.item_type === 'flashcard' ? (
+                    {item.item_type === "flashcard" ? (
                       <Brain className="h-4 w-4 text-primary" />
                     ) : (
                       <BookOpen className="h-4 w-4 text-purple-500" />
@@ -358,7 +352,7 @@ export default function UnifiedReviewDashboard() {
                       </p>
                     </div>
                   </div>
-                  <Badge variant={item.mastery < 0.7 ? 'destructive' : 'secondary'}>
+                  <Badge variant={item.mastery < 0.7 ? "destructive" : "secondary"}>
                     Priority: {item.priority_score.toFixed(1)}
                   </Badge>
                 </div>

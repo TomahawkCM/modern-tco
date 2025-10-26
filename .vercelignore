@@ -1,0 +1,51 @@
+# Build artifacts and dependencies
+backups/
+node_modules/
+
+# Build cache (ignore these)
+.next/cache/
+.next/trace/
+
+# CRITICAL: Include .mdx-cache/ in Vercel deployments
+# The prebuild script creates this directory with pre-bundled MDX files
+# It's in .gitignore (correct) but MUST be deployed to Vercel
+!.mdx-cache/
+
+# Version control
+.git/
+
+# Environment and config
+.env.local
+.env.mcp
+.mcp-servers-master.json
+*.log
+
+# Development tools
+.claude-flow/
+logs/
+.serena/
+.vercel/
+.vscode/
+
+# Documentation and tests
+docs/
+tests/
+harness/
+
+# Runtime data
+memory/
+Tanium TCO/
+
+# Temporary and backup files
+.bmad-config.yaml
+tmp*.txt
+tsc-output.txt
+dev_output.txt
+nul
+*.bak
+*.sql
+*.js.map
+.chrome/
+
+# NOTE: src/content/modules is NOT ignored - needed for prebuild script
+# The prebuild script reads MDX files from src/content/modules/ and creates .mdx-cache/

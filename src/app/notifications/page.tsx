@@ -1,60 +1,60 @@
-'use client';
+"use client";
 
-import { Bell, BookOpen, CheckCheck, Clock, Target, Trophy } from 'lucide-react';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
-import { cn } from '@/lib/utils';
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Bell, CheckCheck, Clock, Trophy, BookOpen, Target } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 export default function NotificationsPage() {
   // Mock notifications - TODO: Replace with real data from Supabase
   const notifications = [
     {
       id: 1,
-      type: 'achievement',
-      title: 'New Achievement Unlocked!',
+      type: "achievement",
+      title: "New Achievement Unlocked!",
       message: "You've earned the 'Week Warrior' badge for maintaining a 7-day study streak.",
-      timestamp: '2 hours ago',
+      timestamp: "2 hours ago",
       read: false,
       icon: Trophy,
-      color: 'text-yellow-400',
+      color: "text-yellow-400",
     },
     {
       id: 2,
-      type: 'reminder',
-      title: 'Daily Study Reminder',
+      type: "reminder",
+      title: "Daily Study Reminder",
       message: "Don't break your streak! Complete today's practice session.",
-      timestamp: '5 hours ago',
+      timestamp: "5 hours ago",
       read: false,
       icon: Clock,
-      color: 'text-primary',
+      color: "text-primary",
     },
     {
       id: 3,
-      type: 'progress',
-      title: 'Module Completed',
+      type: "progress",
+      title: "Module Completed",
       message: "You've completed 'Refining Questions & Targeting'. Great job!",
-      timestamp: '1 day ago',
+      timestamp: "1 day ago",
       read: true,
       icon: BookOpen,
-      color: 'text-green-400',
+      color: "text-green-400",
     },
     {
       id: 4,
-      type: 'milestone',
-      title: 'Milestone Reached',
+      type: "milestone",
+      title: "Milestone Reached",
       message: "You've answered 100+ practice questions!",
-      timestamp: '2 days ago',
+      timestamp: "2 days ago",
       read: true,
       icon: Target,
-      color: 'text-purple-400',
+      color: "text-purple-400",
     },
   ];
 
   const unreadCount = notifications.filter((n) => !n.read).length;
 
   const handleMarkAllRead = () => {
-    console.log('Mark all as read - TODO: Implement');
+    console.log("Mark all as read - TODO: Implement");
   };
 
   const handleMarkRead = (id: number) => {
@@ -94,7 +94,7 @@ export default function NotificationsPage() {
             <div className="flex items-center gap-2">
               <div className="w-2 h-2 bg-primary rounded-full animate-pulse" />
               <span className="text-foreground font-medium">
-                You have {unreadCount} unread notification{unreadCount > 1 ? 's' : ''}
+                You have {unreadCount} unread notification{unreadCount > 1 ? "s" : ""}
               </span>
             </div>
           </CardContent>
@@ -109,19 +109,22 @@ export default function NotificationsPage() {
             <Card
               key={notification.id}
               className={cn(
-                'glass border-white/10 transition-all hover:border-white/20',
-                !notification.read && 'border-primary/30 bg-white/5'
+                "glass border-white/10 transition-all hover:border-white/20",
+                !notification.read && "border-primary/30 bg-white/5"
               )}
             >
               <CardContent className="flex items-start gap-4 p-4">
                 {/* Icon */}
                 <div
                   className={cn(
-                    'flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center',
-                    notification.read ? 'bg-white/5' : 'bg-primary/10'
+                    "flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center",
+                    notification.read ? "bg-white/5" : "bg-primary/10"
                   )}
                 >
-                  <IconComponent className={cn('h-5 w-5', notification.color)} aria-hidden="true" />
+                  <IconComponent
+                    className={cn("h-5 w-5", notification.color)}
+                    aria-hidden="true"
+                  />
                 </div>
 
                 {/* Content */}
@@ -129,8 +132,8 @@ export default function NotificationsPage() {
                   <div className="flex items-start justify-between gap-2">
                     <h3
                       className={cn(
-                        'font-medium',
-                        notification.read ? 'text-muted-foreground' : 'text-foreground'
+                        "font-medium",
+                        notification.read ? "text-muted-foreground" : "text-foreground"
                       )}
                     >
                       {notification.title}
@@ -146,8 +149,8 @@ export default function NotificationsPage() {
                   </div>
                   <p
                     className={cn(
-                      'text-sm mt-1',
-                      notification.read ? 'text-muted-foreground/70' : 'text-muted-foreground'
+                      "text-sm mt-1",
+                      notification.read ? "text-muted-foreground/70" : "text-muted-foreground"
                     )}
                   >
                     {notification.message}

@@ -9,7 +9,7 @@ const moduleFiles = [
   'src/content/modules/02-refining-questions-targeting.mdx',
   'src/content/modules/03-taking-action-packages-actions.mdx',
   'src/content/modules/04-navigation-basic-modules.mdx',
-  'src/content/modules/05-reporting-data-export.mdx',
+  'src/content/modules/05-reporting-data-export.mdx'
 ];
 
 function escapeComparisons(content) {

@@ -3,8 +3,8 @@
  * Enhanced for Interactive Console Simulation Framework
  */
 
+import type { TCODomain } from "./exam";
 import type React from 'react';
-import type { TCODomain } from './exam';
 
 // Core lab exercise types
 export interface LabExercise {
@@ -12,7 +12,7 @@ export interface LabExercise {
   title: string;
   domain: TCODomain;
   estimatedTime: number; // minutes
-  difficulty: 'Beginner' | 'Intermediate' | 'Advanced';
+  difficulty: "Beginner" | "Intermediate" | "Advanced";
   description: string;
   learningObjectives: string[];
   prerequisites?: string[];
@@ -40,7 +40,7 @@ export interface LabStep {
 
 // Console simulation configuration
 export interface ConsoleSimulation {
-  simulationType: 'tanium-console' | 'command-line' | 'mixed';
+  simulationType: "tanium-console" | "command-line" | "mixed";
   initialState: ConsoleState;
   modules: TaniumModule[];
   permissions: UserPermissions;
@@ -62,7 +62,7 @@ export interface ConsoleState {
 // Tanium platform modules
 export interface TaniumModule {
   id: string;
-  name: 'Interact' | 'Deploy' | 'Asset' | 'Patch' | 'Threat Response' | 'Administration';
+  name: "Interact" | "Deploy" | "Asset" | "Patch" | "Threat Response" | "Administration";
   enabled: boolean;
   features: ModuleFeature[];
   permissions: string[];
@@ -79,7 +79,7 @@ export interface ModuleFeature {
 // Console actions that users can perform
 export interface ConsoleAction {
   id: string;
-  type: 'navigate' | 'input' | 'click' | 'wait' | 'validate';
+  type: "navigate" | "input" | "click" | "wait" | "validate";
   target: string;
   value?: string;
   description: string;
@@ -90,7 +90,7 @@ export interface ConsoleAction {
 
 // Action validation rules
 export interface ActionValidation {
-  type: 'exact' | 'regex' | 'contains' | 'exists' | 'custom';
+  type: "exact" | "regex" | "contains" | "exists" | "custom";
   pattern: string;
   errorMessage: string;
   successMessage: string;
@@ -100,7 +100,7 @@ export interface ActionValidation {
 
 // Step validation configuration
 export interface StepValidation {
-  type: 'automatic' | 'manual' | 'hybrid';
+  type: "automatic" | "manual" | "hybrid";
   criteria: ValidationCriteria[];
   feedback: ValidationFeedback;
   scoring: StepScoring;
@@ -110,12 +110,12 @@ export interface StepValidation {
 export interface ValidationCriteria {
   id: string;
   type:
-    | 'console-state'
-    | 'user-input'
-    | 'result-data'
-    | 'time-limit'
-    | 'action-sequence'
-    | 'time-based'; // Added 'time-based'
+    | "console-state"
+    | "user-input"
+    | "result-data"
+    | "time-limit"
+    | "action-sequence"
+    | "time-based"; // Added 'time-based'
   condition: string; // Added this
   weight: number; // 0-100
   required: boolean;
@@ -136,7 +136,7 @@ export type ValidationFeedback =
 export interface FeedbackMessage {
   title: string;
   content: string;
-  type: 'success' | 'error' | 'warning' | 'info';
+  type: "success" | "error" | "warning" | "info";
   actionable?: boolean;
   nextSteps?: string[];
 }
@@ -153,7 +153,7 @@ export interface StepScoring {
 // Hint system
 export interface Hint {
   id: string;
-  level: 'gentle' | 'specific' | 'detailed' | 'solution';
+  level: "gentle" | "specific" | "detailed" | "solution";
   trigger: HintTrigger;
   content: string;
   penaltyPoints: number;
@@ -162,7 +162,7 @@ export interface Hint {
 }
 
 export interface HintTrigger {
-  type: 'time-based' | 'failure-count' | 'user-request' | 'stuck-detection';
+  type: "time-based" | "failure-count" | "user-request" | "stuck-detection";
   threshold: number;
   condition?: string;
 }
@@ -181,16 +181,16 @@ export interface LabAchievement {
   id: string;
   title: string;
   description: string;
-  type: 'completion' | 'performance' | 'efficiency' | 'mastery' | 'special';
+  type: "completion" | "performance" | "efficiency" | "mastery" | "special";
   criteria: AchievementCriteria;
   reward: AchievementReward;
-  rarity: 'common' | 'uncommon' | 'rare' | 'epic' | 'legendary';
+  rarity: "common" | "uncommon" | "rare" | "epic" | "legendary";
 }
 
 export interface AchievementCriteria {
-  type: 'score' | 'time' | 'attempts' | 'hints' | 'streak' | 'custom';
+  type: "score" | "time" | "attempts" | "hints" | "streak" | "custom";
   threshold: number;
-  comparison: 'greater' | 'less' | 'equal' | 'range';
+  comparison: "greater" | "less" | "equal" | "range";
   condition?: string;
 }
 
@@ -209,7 +209,7 @@ export interface LabMetadata {
   updated: string;
   tags: string[];
   category: string;
-  certification: 'TAN-1000' | 'TAN-2000' | 'Custom';
+  certification: "TAN-1000" | "TAN-2000" | "Custom";
   officialRef?: string;
   studyGuideRef?: string;
   relatedLabs?: string[];
@@ -217,7 +217,7 @@ export interface LabMetadata {
 
 // User permissions and RBAC simulation
 export interface UserPermissions {
-  role: 'operator' | 'administrator' | 'readonly' | 'custom';
+  role: "operator" | "administrator" | "readonly" | "custom";
   modules: Record<string, ModulePermission>;
   actions: string[];
   restrictions: string[];
@@ -240,7 +240,7 @@ export interface EnvironmentConfig {
   packages: string[];
   networkLatency: number; // ms
   simulateErrors: boolean;
-  dataScale: 'small' | 'medium' | 'large' | 'enterprise';
+  dataScale: "small" | "medium" | "large" | "enterprise";
 }
 
 // Tanium-specific data types
@@ -256,16 +256,16 @@ export interface SavedQuery {
 }
 
 export interface TargetingRule {
-  type: 'all-computers' | 'computer-group' | 'custom-filter';
+  type: "all-computers" | "computer-group" | "custom-filter";
   target?: string;
   filters?: FilterRule[];
 }
 
 export interface FilterRule {
   sensor: string;
-  operator: 'equals' | 'contains' | 'not-equals' | 'regex' | 'exists';
+  operator: "equals" | "contains" | "not-equals" | "regex" | "exists";
   value: string;
-  logicalOperator?: 'AND' | 'OR';
+  logicalOperator?: "AND" | "OR";
 }
 
 export interface QueryResult {
@@ -279,7 +279,7 @@ export interface QueryResult {
 export interface ComputerGroup {
   id: string;
   name: string;
-  type: 'static' | 'dynamic';
+  type: "static" | "dynamic";
   description: string;
   rules?: FilterRule[];
   memberCount: number;
@@ -299,7 +299,7 @@ export interface Package {
 
 export interface PackageParameter {
   name: string;
-  type: 'string' | 'number' | 'boolean' | 'file' | 'list';
+  type: "string" | "number" | "boolean" | "file" | "list";
   required: boolean;
   defaultValue?: string;
   validation?: string;
@@ -308,11 +308,11 @@ export interface PackageParameter {
 
 export interface ActionHistory {
   id: string;
-  type: 'package-deployment' | 'saved-action' | 'live-action' | 'module_navigation'; // Added 'module_navigation' for filter
+  type: "package-deployment" | "saved-action" | "live-action" | "module_navigation"; // Added 'module_navigation' for filter
   name: string;
   package?: string;
   targeting?: TargetingRule;
-  status?: 'pending' | 'running' | 'completed' | 'failed' | 'stopped';
+  status?: "pending" | "running" | "completed" | "failed" | "stopped";
   progress?: number; // 0-100
   results?: ActionResult[];
   startTime: string;
@@ -325,7 +325,7 @@ export interface ActionHistory {
 export interface ActionResult {
   computerId: string;
   computerName: string;
-  status: 'success' | 'failure' | 'timeout' | 'pending';
+  status: "success" | "failure" | "timeout" | "pending";
   exitCode?: number;
   output?: string;
   timestamp: string;
@@ -344,7 +344,7 @@ export interface LabProgress {
   hintsUsed: number;
   validationFailures: number;
   timeSpent: number; // seconds
-  status: 'not-started' | 'in-progress' | 'completed' | 'failed' | 'timeout';
+  status: "not-started" | "in-progress" | "completed" | "failed" | "timeout";
   checkpoints: ProgressCheckpoint[];
 }
 
@@ -384,11 +384,11 @@ export interface CriteriaResult {
 export interface LabEvent {
   id: string;
   type:
-    | 'step-completed'
-    | 'validation-failed'
-    | 'hint-used'
-    | 'achievement-earned'
-    | 'time-warning';
+    | "step-completed"
+    | "validation-failed"
+    | "hint-used"
+    | "achievement-earned"
+    | "time-warning";
   timestamp: string;
   data: Record<string, any>;
   broadcast: boolean;

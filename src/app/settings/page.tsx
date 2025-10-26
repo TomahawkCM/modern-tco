@@ -1,34 +1,35 @@
-'use client';
+"use client";
 
-import {
-  Bell,
-  BookOpen,
-  Mail,
-  Palette,
-  RotateCcw,
-  Save,
-  Settings,
-  Shield,
-  Trash2,
-  User,
-} from 'lucide-react';
-import { useRouter } from 'next/navigation';
-import { useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
+import { useState } from "react";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import { Switch } from "@/components/ui/switch";
+import { Separator } from "@/components/ui/separator";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select';
-import { Separator } from '@/components/ui/separator';
-import { Switch } from '@/components/ui/switch';
-import { useAuth } from '@/contexts/AuthContext';
-import { useToast } from '@/hooks/use-toast';
+} from "@/components/ui/select";
+import {
+  Settings,
+  User,
+  Bell,
+  Palette,
+  BookOpen,
+  Shield,
+  Save,
+  RotateCcw,
+  Mail,
+  Lock,
+  Trash2,
+} from "lucide-react";
+import { useAuth } from "@/contexts/AuthContext";
+import { useRouter } from "next/navigation";
+import { useToast } from "@/hooks/use-toast";
 
 export default function SettingsPage() {
   const router = useRouter();
@@ -38,8 +39,8 @@ export default function SettingsPage() {
   // Settings state
   const [settings, setSettings] = useState({
     // Account
-    email: user?.email ?? '',
-    name: user?.user_metadata?.name ?? '',
+    email: user?.email ?? "",
+    name: user?.user_metadata?.name ?? "",
 
     // Notifications
     emailNotifications: true,
@@ -48,14 +49,14 @@ export default function SettingsPage() {
     weeklyProgress: true,
 
     // Appearance
-    theme: 'dark',
+    theme: "dark",
     largeText: false,
     highContrast: false,
     reducedMotion: false,
 
     // Study Preferences
-    questionsPerSession: '20',
-    studyMode: 'adaptive',
+    questionsPerSession: "20",
+    studyMode: "adaptive",
     showExplanations: true,
     autoAdvance: false,
 
@@ -66,33 +67,33 @@ export default function SettingsPage() {
 
   const handleSave = async () => {
     // TODO: Save settings to Supabase user_settings table
-    console.log('Saving settings:', settings);
+    console.log("Saving settings:", settings);
 
     toast({
-      title: 'Settings saved',
-      description: 'Your preferences have been updated successfully.',
+      title: "Settings saved",
+      description: "Your preferences have been updated successfully.",
     });
   };
 
   const handleReset = () => {
     toast({
-      title: 'Settings reset',
-      description: 'All settings have been reset to default values.',
-      variant: 'destructive',
+      title: "Settings reset",
+      description: "All settings have been reset to default values.",
+      variant: "destructive",
     });
   };
 
   const handleDeleteAccount = async () => {
     const confirmed = window.confirm(
-      'Are you sure you want to delete your account? This action cannot be undone.'
+      "Are you sure you want to delete your account? This action cannot be undone."
     );
     if (confirmed) {
       // TODO: Implement account deletion
-      console.log('Delete account requested');
+      console.log("Delete account requested");
       toast({
-        title: 'Account deletion requested',
-        description: 'Your account will be deleted within 24 hours.',
-        variant: 'destructive',
+        title: "Account deletion requested",
+        description: "Your account will be deleted within 24 hours.",
+        variant: "destructive",
       });
     }
   };
@@ -105,7 +106,9 @@ export default function SettingsPage() {
           <Settings className="h-8 w-8" />
           Settings & Preferences
         </h1>
-        <p className="text-muted-foreground mt-2">Customize your TCO exam preparation experience</p>
+        <p className="text-muted-foreground mt-2">
+          Customize your TCO exam preparation experience
+        </p>
       </div>
 
       {/* Account Settings */}
@@ -115,7 +118,9 @@ export default function SettingsPage() {
             <User className="h-5 w-5" />
             Account Information
           </CardTitle>
-          <CardDescription>Manage your account details and authentication</CardDescription>
+          <CardDescription>
+            Manage your account details and authentication
+          </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -130,7 +135,9 @@ export default function SettingsPage() {
                 className="glass border-white/20 text-foreground"
                 disabled
               />
-              <p className="text-xs text-muted-foreground">Contact support to change your email</p>
+              <p className="text-xs text-muted-foreground">
+                Contact support to change your email
+              </p>
             </div>
             <div className="space-y-2">
               <Label htmlFor="name" className="text-foreground">
@@ -152,7 +159,7 @@ export default function SettingsPage() {
           <div className="flex gap-3">
             <Button
               variant="outline"
-              onClick={() => router.push('/profile')}
+              onClick={() => router.push("/profile")}
               className="border-white/20 text-foreground hover:bg-white/10"
             >
               <User className="h-4 w-4 mr-2" />
@@ -177,13 +184,17 @@ export default function SettingsPage() {
             <Bell className="h-5 w-5" />
             Notifications
           </CardTitle>
-          <CardDescription>Choose what updates you want to receive</CardDescription>
+          <CardDescription>
+            Choose what updates you want to receive
+          </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="flex items-center justify-between">
             <div className="space-y-0.5">
               <Label className="text-foreground">Email Notifications</Label>
-              <p className="text-sm text-muted-foreground">Receive updates via email</p>
+              <p className="text-sm text-muted-foreground">
+                Receive updates via email
+              </p>
             </div>
             <Switch
               checked={settings.emailNotifications}
@@ -204,7 +215,9 @@ export default function SettingsPage() {
             </div>
             <Switch
               checked={settings.studyReminders}
-              onCheckedChange={(checked) => setSettings({ ...settings, studyReminders: checked })}
+              onCheckedChange={(checked) =>
+                setSettings({ ...settings, studyReminders: checked })
+              }
             />
           </div>
 
@@ -213,7 +226,9 @@ export default function SettingsPage() {
           <div className="flex items-center justify-between">
             <div className="space-y-0.5">
               <Label className="text-foreground">Achievement Alerts</Label>
-              <p className="text-sm text-muted-foreground">Get notified when you earn badges</p>
+              <p className="text-sm text-muted-foreground">
+                Get notified when you earn badges
+              </p>
             </div>
             <Switch
               checked={settings.achievementAlerts}
@@ -234,7 +249,9 @@ export default function SettingsPage() {
             </div>
             <Switch
               checked={settings.weeklyProgress}
-              onCheckedChange={(checked) => setSettings({ ...settings, weeklyProgress: checked })}
+              onCheckedChange={(checked) =>
+                setSettings({ ...settings, weeklyProgress: checked })
+              }
             />
           </div>
         </CardContent>
@@ -247,17 +264,16 @@ export default function SettingsPage() {
             <Palette className="h-5 w-5" />
             Appearance & Accessibility
           </CardTitle>
-          <CardDescription>Customize how the platform looks and feels</CardDescription>
+          <CardDescription>
+            Customize how the platform looks and feels
+          </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="space-y-2">
             <Label htmlFor="theme" className="text-foreground">
               Theme
             </Label>
-            <Select
-              value={settings.theme}
-              onValueChange={(value) => setSettings({ ...settings, theme: value })}
-            >
+            <Select value={settings.theme} onValueChange={(value) => setSettings({ ...settings, theme: value })}>
               <SelectTrigger className="glass border-white/20 text-foreground">
                 <SelectValue />
               </SelectTrigger>
@@ -280,7 +296,9 @@ export default function SettingsPage() {
             </div>
             <Switch
               checked={settings.largeText}
-              onCheckedChange={(checked) => setSettings({ ...settings, largeText: checked })}
+              onCheckedChange={(checked) =>
+                setSettings({ ...settings, largeText: checked })
+              }
             />
           </div>
 
@@ -295,7 +313,9 @@ export default function SettingsPage() {
             </div>
             <Switch
               checked={settings.highContrast}
-              onCheckedChange={(checked) => setSettings({ ...settings, highContrast: checked })}
+              onCheckedChange={(checked) =>
+                setSettings({ ...settings, highContrast: checked })
+              }
             />
           </div>
 
@@ -304,11 +324,15 @@ export default function SettingsPage() {
           <div className="flex items-center justify-between">
             <div className="space-y-0.5">
               <Label className="text-foreground">Reduced Motion</Label>
-              <p className="text-sm text-muted-foreground">Minimize animations and transitions</p>
+              <p className="text-sm text-muted-foreground">
+                Minimize animations and transitions
+              </p>
             </div>
             <Switch
               checked={settings.reducedMotion}
-              onCheckedChange={(checked) => setSettings({ ...settings, reducedMotion: checked })}
+              onCheckedChange={(checked) =>
+                setSettings({ ...settings, reducedMotion: checked })
+              }
             />
           </div>
         </CardContent>
@@ -321,7 +345,9 @@ export default function SettingsPage() {
             <BookOpen className="h-5 w-5" />
             Study Preferences
           </CardTitle>
-          <CardDescription>Customize your learning experience</CardDescription>
+          <CardDescription>
+            Customize your learning experience
+          </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -331,7 +357,9 @@ export default function SettingsPage() {
               </Label>
               <Select
                 value={settings.questionsPerSession}
-                onValueChange={(value) => setSettings({ ...settings, questionsPerSession: value })}
+                onValueChange={(value) =>
+                  setSettings({ ...settings, questionsPerSession: value })
+                }
               >
                 <SelectTrigger className="glass border-white/20 text-foreground">
                   <SelectValue />
@@ -376,7 +404,9 @@ export default function SettingsPage() {
             </div>
             <Switch
               checked={settings.showExplanations}
-              onCheckedChange={(checked) => setSettings({ ...settings, showExplanations: checked })}
+              onCheckedChange={(checked) =>
+                setSettings({ ...settings, showExplanations: checked })
+              }
             />
           </div>
 
@@ -391,7 +421,9 @@ export default function SettingsPage() {
             </div>
             <Switch
               checked={settings.autoAdvance}
-              onCheckedChange={(checked) => setSettings({ ...settings, autoAdvance: checked })}
+              onCheckedChange={(checked) =>
+                setSettings({ ...settings, autoAdvance: checked })
+              }
             />
           </div>
         </CardContent>
@@ -404,7 +436,9 @@ export default function SettingsPage() {
             <Shield className="h-5 w-5" />
             Privacy & Data
           </CardTitle>
-          <CardDescription>Control your data and privacy preferences</CardDescription>
+          <CardDescription>
+            Control your data and privacy preferences
+          </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="flex items-center justify-between">
@@ -416,7 +450,9 @@ export default function SettingsPage() {
             </div>
             <Switch
               checked={settings.shareProgress}
-              onCheckedChange={(checked) => setSettings({ ...settings, shareProgress: checked })}
+              onCheckedChange={(checked) =>
+                setSettings({ ...settings, shareProgress: checked })
+              }
             />
           </div>
 
@@ -431,7 +467,9 @@ export default function SettingsPage() {
             </div>
             <Switch
               checked={settings.publicProfile}
-              onCheckedChange={(checked) => setSettings({ ...settings, publicProfile: checked })}
+              onCheckedChange={(checked) =>
+                setSettings({ ...settings, publicProfile: checked })
+              }
             />
           </div>
 

@@ -1,6 +1,6 @@
-import type { User } from '@supabase/supabase-js';
-import { createInitialState, type SRCardState, type SRRating, schedule } from '@/lib/sr';
-import { supabase } from '@/lib/supabase';
+import { supabase } from "@/lib/supabase";
+import { createInitialState, schedule, type SRCardState, type SRRating } from "@/lib/sr";
+import type { User } from "@supabase/supabase-js";
 
 export type Note = {
   id: string;
@@ -14,7 +14,7 @@ export type Note = {
   sectionId?: string | null;
 };
 
-const STORAGE_KEY = 'tco_notes_v1';
+const STORAGE_KEY = "tco_notes_v1";
 
 export const notesStorage = {
   get(): Note[] {
@@ -48,7 +48,7 @@ export const notesStorage = {
 };
 
 function uuid(): string {
-  if (typeof crypto !== 'undefined' && typeof (crypto as any).randomUUID === 'function') {
+  if (typeof crypto !== "undefined" && typeof (crypto as any).randomUUID === "function") {
     return (crypto as any).randomUUID();
   }
   return Math.random().toString(36).slice(2) + Date.now().toString(36);
@@ -86,16 +86,16 @@ export function mergeByNewest(a: Note[], b: Note[]): Note[] {
 export const notesRemote = {
   async list(userId: string): Promise<Note[]> {
     const { data, error } = await (supabase as any)
-      .from('notes')
-      .select('id, user_id, text, tags, srs, created_at, updated_at, module_id, section_id')
-      .eq('user_id', userId)
-      .order('updated_at', { ascending: false });
+      .from("notes")
+      .select("id, user_id, text, tags, srs, created_at, updated_at, module_id, section_id")
+      .eq("user_id", userId)
+      .order("updated_at", { ascending: false });
     if (error) throw error;
     const notes: Note[] = (data || []).map((row: any) => ({
       id: row.id,
       userId: row.user_id,
       text: row.text,
-      tags: Array.isArray(row.tags) ? row.tags : row.tags || [],
+      tags: Array.isArray(row.tags) ? row.tags : (row.tags || []),
       srs: row.srs || createInitialState(row.id),
       createdAt: row.created_at,
       updatedAt: row.updated_at,
@@ -118,15 +118,17 @@ export const notesRemote = {
       module_id: n.moduleId ?? null,
       section_id: n.sectionId ?? null,
     }));
-    const { error } = await (supabase as any).from('notes').upsert(payload, { onConflict: 'id' });
+    const { error } = await (supabase as any)
+      .from("notes")
+      .upsert(payload, { onConflict: "id" });
     if (error) throw error;
   },
   async remove(userId: string, id: string): Promise<void> {
     const { error } = await (supabase as any)
-      .from('notes')
+      .from("notes")
       .delete()
-      .eq('user_id', userId)
-      .eq('id', id);
+      .eq("user_id", userId)
+      .eq("id", id);
     if (error) throw error;
   },
 };
@@ -156,17 +158,9 @@ export async function syncNotes(user: User | null): Promise<Note[]> {
 
 export async function saveQuickNote(
   text: string,
-  opts?: {
-    tags?: string[];
-    user?: User | null;
-    moduleId?: string | null;
-    sectionId?: string | null;
-  }
+  opts?: { tags?: string[]; user?: User | null; moduleId?: string | null; sectionId?: string | null }
 ) {
-  const note = buildNote(text, opts?.tags || [], {
-    moduleId: opts?.moduleId,
-    sectionId: opts?.sectionId,
-  });
+  const note = buildNote(text, opts?.tags || [], { moduleId: opts?.moduleId, sectionId: opts?.sectionId });
   notesStorage.add(note);
   if (opts?.user?.id) {
     try {
@@ -193,9 +187,7 @@ export async function updateNote(note: Note, user?: User | null): Promise<Note> 
   const updated = { ...note, updatedAt: new Date().toISOString() };
   notesStorage.upsert(updated);
   if (user?.id) {
-    try {
-      await notesRemote.upsert(user.id, updated);
-    } catch {}
+    try { await notesRemote.upsert(user.id, updated); } catch {}
   }
   return updated;
 }
@@ -203,9 +195,7 @@ export async function updateNote(note: Note, user?: User | null): Promise<Note> 
 export async function deleteNote(id: string, user?: User | null): Promise<void> {
   notesStorage.remove(id);
   if (user?.id) {
-    try {
-      await notesRemote.remove(user.id, id);
-    } catch {}
+    try { await notesRemote.remove(user.id, id); } catch {}
   }
 }
 

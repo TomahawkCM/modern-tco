@@ -1,16 +1,16 @@
-'use client';
+"use client";
 
-import { CheckCircle2, Target, TrendingUp } from 'lucide-react';
-import { Badge } from '@/components/ui/badge';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Progress } from '@/components/ui/progress';
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Progress } from "@/components/ui/progress";
+import { Target, TrendingUp, CheckCircle2 } from "lucide-react";
 
 interface DomainProgress {
   domain: string;
   totalSections: number;
   completedSections: number;
   masteryPercentage: number;
-  confidenceLevel: 'low' | 'medium' | 'high';
+  confidenceLevel: "low" | "medium" | "high";
   blueprintWeight: number; // % of exam
 }
 
@@ -25,37 +25,37 @@ export default function DomainMasteryWheel({
 }: DomainMasteryWheelProps) {
   // TCO Certification color scheme
   const domainColors = [
-    'bg-primary', // Asking Questions (22%)
-    'bg-accent', // Refining & Targeting (23%)
-    'bg-orange-500', // Taking Action (15%)
-    'bg-[#22c55e]', // Navigation (23%)
-    'bg-pink-500', // Reporting (17%)
-    'bg-cyan-500', // Foundation (0% but still important)
+    "bg-primary", // Asking Questions (22%)
+    "bg-accent", // Refining & Targeting (23%)
+    "bg-orange-500", // Taking Action (15%)
+    "bg-[#22c55e]", // Navigation (23%)
+    "bg-pink-500", // Reporting (17%)
+    "bg-cyan-500", // Foundation (0% but still important)
   ];
 
   const getConfidenceColor = (level: string) => {
     switch (level) {
-      case 'high':
-        return 'text-[#22c55e]';
-      case 'medium':
-        return 'text-[#f97316]';
-      case 'low':
-        return 'text-red-500';
+      case "high":
+        return "text-[#22c55e]";
+      case "medium":
+        return "text-[#f97316]";
+      case "low":
+        return "text-red-500";
       default:
-        return 'text-muted-foreground';
+        return "text-muted-foreground";
     }
   };
 
   const getConfidenceText = (level: string) => {
     switch (level) {
-      case 'high':
-        return 'Strong';
-      case 'medium':
-        return 'Developing';
-      case 'low':
-        return 'Needs Work';
+      case "high":
+        return "Strong";
+      case "medium":
+        return "Developing";
+      case "low":
+        return "Needs Work";
       default:
-        return 'Not Started';
+        return "Not Started";
     }
   };
 
@@ -68,7 +68,9 @@ export default function DomainMasteryWheel({
             Domain Mastery Overview
           </CardTitle>
           <div className="text-center">
-            <div className="text-3xl font-bold text-primary">{Math.round(overallMastery)}%</div>
+            <div className="text-3xl font-bold text-primary">
+              {Math.round(overallMastery)}%
+            </div>
             <p className="text-xs text-muted-foreground">Overall</p>
           </div>
         </div>
@@ -79,7 +81,8 @@ export default function DomainMasteryWheel({
         <div className="space-y-4">
           {domains.map((domain, idx) => {
             const color = domainColors[idx % domainColors.length];
-            const completionPercentage = (domain.completedSections / domain.totalSections) * 100;
+            const completionPercentage =
+              (domain.completedSections / domain.totalSections) * 100;
 
             return (
               <div key={domain.domain} className="space-y-2">
@@ -115,7 +118,10 @@ export default function DomainMasteryWheel({
                     className="h-3"
                     style={
                       {
-                        '--progress-background': `hsl(var(--${color.replace('bg-', '')}))`,
+                        "--progress-background": `hsl(var(--${color.replace(
+                          "bg-",
+                          ""
+                        )}))`,
                       } as React.CSSProperties
                     }
                   />
@@ -162,12 +168,14 @@ export default function DomainMasteryWheel({
         {/* Study Recommendations */}
         {domains.some((d) => d.masteryPercentage < 70) && (
           <div className="p-3 bg-orange-500/10 border border-orange-500/20 rounded-lg">
-            <p className="text-sm font-medium text-orange-500 mb-1">Focus Areas</p>
+            <p className="text-sm font-medium text-orange-500 mb-1">
+              Focus Areas
+            </p>
             <p className="text-xs text-muted-foreground">
               {domains
                 .filter((d) => d.masteryPercentage < 70)
                 .map((d) => d.domain)
-                .join(', ')}{' '}
+                .join(", ")}{" "}
               need more practice. Try domain-specific drills!
             </p>
           </div>

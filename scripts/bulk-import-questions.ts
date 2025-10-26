@@ -7,7 +7,7 @@
  *
  * Usage:
  *   npx tsx scripts/bulk-import-questions.ts <file-path>
- *   npx tsx scripts/bulk-import-questions.ts data-archive/generated/generated-questions-*.ts
+ *   npx tsx scripts/bulk-import-questions.ts src/data/generated/generated-questions-*.ts
  *   npx tsx scripts/bulk-import-questions.ts --all
  *
  * Features:
@@ -20,8 +20,8 @@
 
 import { createClient } from '@supabase/supabase-js';
 import * as fs from 'fs';
-import * as glob from 'glob';
 import * as path from 'path';
+import * as glob from 'glob';
 
 // ==================== TYPES ====================
 
@@ -87,7 +87,10 @@ async function loadQuestionsFromFile(filePath: string): Promise<Question[]> {
 /**
  * Check for duplicate question IDs in database
  */
-async function checkDuplicates(supabase: any, questions: Question[]): Promise<string[]> {
+async function checkDuplicates(
+  supabase: any,
+  questions: Question[]
+): Promise<string[]> {
   const questionIds = questions.map((q) => q.id);
 
   const { data: existingQuestions } = await supabase
@@ -108,7 +111,7 @@ async function checkDuplicates(supabase: any, questions: Question[]): Promise<st
  * Convert letter ID (a,b,c,d) to integer index (0,1,2,3)
  */
 function letterToIndex(letter: string): number {
-  const map: Record<string, number> = { a: 0, b: 1, c: 2, d: 3 };
+  const map: Record<string, number> = { 'a': 0, 'b': 1, 'c': 2, 'd': 3 };
   return map[letter.toLowerCase()] ?? 0;
 }
 
@@ -117,10 +120,9 @@ function letterToIndex(letter: string): number {
  */
 function transformQuestionForDB(question: Question) {
   // Convert letter ID to integer if needed
-  const correctAnswer =
-    typeof question.correctAnswerId === 'string'
-      ? letterToIndex(question.correctAnswerId)
-      : question.correctAnswerId;
+  const correctAnswer = typeof question.correctAnswerId === 'string'
+    ? letterToIndex(question.correctAnswerId)
+    : question.correctAnswerId;
 
   return {
     // Let database generate UUID - don't include id field
@@ -207,7 +209,11 @@ async function importQuestions(
 /**
  * Log import to content_import_logs table
  */
-async function logImport(supabase: any, result: ImportResult, sourceFile: string): Promise<void> {
+async function logImport(
+  supabase: any,
+  result: ImportResult,
+  sourceFile: string
+): Promise<void> {
   await supabase.from('content_import_logs').insert({
     content_type: 'questions',
     import_method: 'bulk_api',
@@ -234,9 +240,7 @@ function printSummary(result: ImportResult): void {
   console.log(`Successful imports:  ${result.successfulItems} ✅`);
   console.log(`Failed imports:      ${result.failedItems} ❌`);
   console.log(`Duplicates skipped:  ${result.duplicates.length} ⚠️`);
-  console.log(
-    `Success rate:        ${((result.successfulItems / result.totalItems) * 100).toFixed(1)}%`
-  );
+  console.log(`Success rate:        ${((result.successfulItems / result.totalItems) * 100).toFixed(1)}%`);
   console.log('='.repeat(60));
 
   if (result.success) {
@@ -261,9 +265,7 @@ async function main() {
     console.error('  npx tsx scripts/bulk-import-questions.ts <file-path>');
     console.error('  npx tsx scripts/bulk-import-questions.ts --all');
     console.error('\nExamples:');
-    console.error(
-      '  npx tsx scripts/bulk-import-questions.ts data-archive/generated/generated-questions-asking_questions-beginner-2025-10-10.ts'
-    );
+    console.error('  npx tsx scripts/bulk-import-questions.ts src/data/generated/generated-questions-asking_questions-beginner-2025-10-10.ts');
     console.error('  npx tsx scripts/bulk-import-questions.ts --all');
     process.exit(1);
   }
@@ -277,7 +279,7 @@ async function main() {
     // Handle --all flag
     if (args[0] === '--all') {
       console.log('🔍 Finding all generated question files...');
-      const generatedDir = path.join(__dirname, '..', 'data-archive', 'generated');
+      const generatedDir = path.join(__dirname, '..', 'src', 'data', 'generated');
       const pattern = path.join(generatedDir, 'generated-questions-*.ts');
       filePaths = glob.sync(pattern);
 

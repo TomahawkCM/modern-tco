@@ -1,0 +1,102 @@
+{
+  "agentRouting": {
+    "enabled": true,
+    "autoSpawn": true,
+    "taskAnalysis": true,
+    "intelligentSelection": true
+  },
+  "taskToAgentMapping": {
+    "frontend": {
+      "keywords": [
+        "react",
+        "component",
+        "ui",
+        "responsive",
+        "css",
+        "typescript",
+        "jsx",
+        "tsx",
+        "styling",
+        "design"
+      ],
+      "primaryAgents": ["frontend-developer", "react-specialist", "typescript-pro"],
+      "supportAgents": ["ui-ux-designer", "accessibility-tester"],
+      "coordination": "mesh-coordinator"
+    },
+    "backend": {
+      "keywords": ["api", "server", "database", "endpoint", "service", "auth", "security"],
+      "primaryAgents": ["backend-developer", "api-designer", "security-engineer"],
+      "supportAgents": ["database-administrator", "performance-engineer"],
+      "coordination": "hierarchical-coordinator"
+    },
+    "analytics": {
+      "keywords": ["analytics", "data", "metrics", "dashboard", "visualization", "charts"],
+      "primaryAgents": ["data-scientist", "data-analyst", "frontend-developer"],
+      "supportAgents": ["performance-engineer", "ui-ux-designer"],
+      "coordination": "adaptive-coordinator"
+    },
+    "testing": {
+      "keywords": ["test", "spec", "unit", "integration", "e2e", "quality", "validation"],
+      "primaryAgents": ["qa-expert", "test-automator", "tdd-london-swarm"],
+      "supportAgents": ["accessibility-tester", "performance-benchmarker"],
+      "coordination": "collective-intelligence-coordinator"
+    },
+    "refactoring": {
+      "keywords": ["refactor", "optimize", "improve", "cleanup", "technical debt"],
+      "primaryAgents": ["refactoring-specialist", "code-reviewer", "architect-reviewer"],
+      "supportAgents": ["performance-engineer", "security-auditor"],
+      "coordination": "hierarchical-coordinator"
+    },
+    "documentation": {
+      "keywords": ["document", "readme", "guide", "tutorial", "wiki", "help"],
+      "primaryAgents": ["technical-writer", "documentation-engineer", "tutorial-engineer"],
+      "supportAgents": ["reference-builder", "content-marketer"],
+      "coordination": "mesh-coordinator"
+    },
+    "debugging": {
+      "keywords": ["debug", "error", "bug", "fix", "troubleshoot", "issue"],
+      "primaryAgents": ["debugger", "error-detective", "analyzer"],
+      "supportAgents": ["performance-engineer", "security-auditor"],
+      "coordination": "adaptive-coordinator"
+    }
+  },
+  "complexityThresholds": {
+    "simple": {
+      "maxAgents": 2,
+      "strategy": "single-lead"
+    },
+    "moderate": {
+      "maxAgents": 5,
+      "strategy": "small-team"
+    },
+    "complex": {
+      "maxAgents": 10,
+      "strategy": "coordinated-swarm"
+    }
+  },
+  "sessionSettings": {
+    "persistAgents": true,
+    "crossSessionMemory": true,
+    "learningEnabled": true,
+    "performanceTracking": true,
+    "autoSpawnOnStartup": true,
+    "intelligentTaskRouting": true
+  },
+  "defaultActiveAgents": {
+    "taniumTCO": [
+      "react-specialist",
+      "typescript-pro",
+      "tco-validation-expert",
+      "frontend-developer",
+      "test-automator"
+    ],
+    "coordination": "adaptive-coordinator"
+  },
+  "agentSelectionRules": {
+    "alwaysAnalyzeTask": true,
+    "autoSpawnOptimalAgents": true,
+    "useComplexityThresholds": true,
+    "enableHiveMindDecisions": true,
+    "crossSessionLearning": true
+  }
+}

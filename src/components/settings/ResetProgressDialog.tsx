@@ -1,10 +1,6 @@
-'use client';
+"use client";
 
-import { AlertTriangle, BookOpen, Clock, Target, Trophy } from 'lucide-react';
-import { useEffect, useState } from 'react';
-import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
+import { useState, useEffect } from "react";
 import {
   Dialog,
   DialogContent,
@@ -12,13 +8,28 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from '@/components/ui/dialog';
-import { Progress } from '@/components/ui/progress';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { useIncorrectAnswers } from '@/contexts/IncorrectAnswersContext';
-import { useModules } from '@/contexts/ModuleContext';
-import { useProgress } from '@/contexts/ProgressContext';
-import type { TCODomain } from '@/types/exam';
+} from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Card, CardContent } from "@/components/ui/card";
+import { Progress } from "@/components/ui/progress";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  AlertTriangle,
+  BarChart3,
+  Clock,
+  Trophy,
+  Target,
+  TrendingUp,
+  CheckCircle,
+  BookOpen,
+  Brain,
+} from "lucide-react";
+import { useModules } from "@/contexts/ModuleContext";
+import { useProgress } from "@/contexts/ProgressContext";
+import { useIncorrectAnswers } from "@/contexts/IncorrectAnswersContext";
+import { cn } from "@/lib/utils";
+import type { TCODomain } from "@/types/exam";
 
 interface ResetProgressDialogProps {
   open: boolean;
@@ -39,14 +50,14 @@ interface ModuleAnalytics {
   totalObjectives: number;
 }
 
-export function ResetProgressDialog({ open, onOpenChange, onConfirm }: ResetProgressDialogProps) {
+export function ResetProgressDialog({
+  open,
+  onOpenChange,
+  onConfirm,
+}: ResetProgressDialogProps) {
   const { modules, moduleProgress, resetProgress: resetModuleProgress } = useModules();
   const { state: progressState, getOverallStats, getDomainStats } = useProgress();
-  const {
-    state: incorrectState,
-    getTotalIncorrectCount,
-    getDomainStats: getIncorrectDomainStats,
-  } = useIncorrectAnswers();
+  const { state: incorrectState, getTotalIncorrectCount, getDomainStats: getIncorrectDomainStats } = useIncorrectAnswers();
 
   const [isResetting, setIsResetting] = useState(false);
   const [moduleAnalytics, setModuleAnalytics] = useState<ModuleAnalytics[]>([]);
@@ -77,7 +88,7 @@ export function ResetProgressDialog({ open, onOpenChange, onConfirm }: ResetProg
       };
     });
 
-    setModuleAnalytics(analytics.filter((a) => a.timeSpent > 0 || a.completionPercentage > 0));
+    setModuleAnalytics(analytics.filter(a => a.timeSpent > 0 || a.completionPercentage > 0));
   }, [modules, moduleProgress]);
 
   const overallStats = getOverallStats();
@@ -96,7 +107,7 @@ export function ResetProgressDialog({ open, onOpenChange, onConfirm }: ResetProg
     setIsResetting(true);
 
     // Simulate reset process
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    await new Promise(resolve => setTimeout(resolve, 1000));
 
     // Call the actual reset functions
     onConfirm();
@@ -107,9 +118,8 @@ export function ResetProgressDialog({ open, onOpenChange, onConfirm }: ResetProg
   };
 
   const totalTimeInvested = moduleAnalytics.reduce((sum, m) => sum + m.timeSpent, 0);
-  const completedModules = moduleAnalytics.filter((m) => m.completionPercentage === 100).length;
-  const averageAccuracy =
-    domainStats.reduce((sum, d) => sum + (d.percentage || 0), 0) / (domainStats.length || 1);
+  const completedModules = moduleAnalytics.filter(m => m.completionPercentage === 100).length;
+  const averageAccuracy = domainStats.reduce((sum, d) => sum + (d.percentage || 0), 0) / (domainStats.length || 1);
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -204,7 +214,9 @@ export function ResetProgressDialog({ open, onOpenChange, onConfirm }: ResetProg
                           <div className="flex items-center justify-between">
                             <div>
                               <p className="font-medium">{module.title}</p>
-                              <p className="text-sm text-muted-foreground">{module.domain}</p>
+                              <p className="text-sm text-muted-foreground">
+                                {module.domain}
+                              </p>
                             </div>
                             <div className="text-right">
                               <p className="text-sm font-medium">
@@ -288,7 +300,11 @@ export function ResetProgressDialog({ open, onOpenChange, onConfirm }: ResetProg
         <DialogFooter className="flex gap-2">
           {!showFinalWarning ? (
             <>
-              <Button variant="outline" onClick={() => onOpenChange(false)} disabled={isResetting}>
+              <Button
+                variant="outline"
+                onClick={() => onOpenChange(false)}
+                disabled={isResetting}
+              >
                 Cancel
               </Button>
               <Button
@@ -305,8 +321,7 @@ export function ResetProgressDialog({ open, onOpenChange, onConfirm }: ResetProg
               <Alert className="flex-1 border-red-200 bg-red-50/10">
                 <AlertTriangle className="h-4 w-4 text-red-400" />
                 <AlertDescription>
-                  <strong>Final Confirmation:</strong> Type "RESET" to confirm you want to
-                  permanently delete all progress.
+                  <strong>Final Confirmation:</strong> Type "RESET" to confirm you want to permanently delete all progress.
                 </AlertDescription>
               </Alert>
               <Button
@@ -316,7 +331,11 @@ export function ResetProgressDialog({ open, onOpenChange, onConfirm }: ResetProg
               >
                 Back
               </Button>
-              <Button variant="destructive" onClick={handleReset} disabled={isResetting}>
+              <Button
+                variant="destructive"
+                onClick={handleReset}
+                disabled={isResetting}
+              >
                 {isResetting ? (
                   <>
                     <div className="mr-2 h-4 w-4 animate-spin rounded-full border-b-2 border-white" />

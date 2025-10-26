@@ -1,21 +1,21 @@
 'use client';
 
-import {
-  AlertCircle,
-  CheckCircle2,
-  ChevronRight,
-  Lock,
-  RotateCcw,
-  Trophy,
-  Unlock,
-  XCircle,
-} from 'lucide-react';
-import { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Progress } from '@/components/ui/progress';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Progress } from '@/components/ui/progress';
+import {
+  CheckCircle2,
+  XCircle,
+  ChevronRight,
+  Lock,
+  Unlock,
+  Trophy,
+  AlertCircle,
+  RotateCcw
+} from 'lucide-react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 interface Skill {
@@ -51,7 +51,7 @@ export default function ModuleTransition({
   nextModuleTitle,
   requiredSkills,
   challenges,
-  minimumScore = 0.8,
+  minimumScore = 0.8
 }: ModuleTransitionProps) {
   const [skills, setSkills] = useState<Skill[]>(requiredSkills);
   const [currentChallengeIndex, setCurrentChallengeIndex] = useState(0);
@@ -82,7 +82,7 @@ export default function ModuleTransition({
       completed,
       unlocked,
       attempts,
-      timestamp: new Date().toISOString(),
+      timestamp: new Date().toISOString()
     };
     localStorage.setItem(`transition-${currentModuleId}-${nextModuleId}`, JSON.stringify(progress));
   };
@@ -99,12 +99,12 @@ export default function ModuleTransition({
     const isCorrect = selectedAnswer === currentChallenge.correctAnswer;
 
     // Update skill status
-    const updatedSkills = skills.map((skill) => {
+    const updatedSkills = skills.map(skill => {
       if (skill.id === currentChallenge.skillId) {
         return {
           ...skill,
           tested: true,
-          passed: isCorrect ?? skill.passed, // Keep passed if already passed
+          passed: isCorrect ?? skill.passed // Keep passed if already passed
         };
       }
       return skill;
@@ -137,7 +137,7 @@ export default function ModuleTransition({
   };
 
   const handleRetry = () => {
-    setSkills(requiredSkills.map((s) => ({ ...s, tested: false, passed: false })));
+    setSkills(requiredSkills.map(s => ({ ...s, tested: false, passed: false })));
     setCurrentChallengeIndex(0);
     setSelectedAnswer(null);
     setShowExplanation(false);
@@ -149,10 +149,9 @@ export default function ModuleTransition({
   };
 
   const currentChallenge = challenges[currentChallengeIndex];
-  const progressPercentage =
-    ((currentChallengeIndex + (showExplanation ? 1 : 0)) / challenges.length) * 100;
+  const progressPercentage = ((currentChallengeIndex + (showExplanation ? 1 : 0)) / challenges.length) * 100;
   const scorePercentage = (score / challenges.length) * 100;
-  const passedSkillsCount = skills.filter((s) => s.passed).length;
+  const passedSkillsCount = skills.filter(s => s.passed).length;
 
   if (completed) {
     return (
@@ -179,21 +178,22 @@ export default function ModuleTransition({
         <CardContent className="pt-6 space-y-6">
           {/* Final Score */}
           <div className="text-center space-y-2">
-            <div className="text-4xl font-bold">{Math.round(scorePercentage)}%</div>
+            <div className="text-4xl font-bold">
+              {Math.round(scorePercentage)}%
+            </div>
             <div className="text-sm text-gray-600">
               {score} out of {challenges.length} correct
             </div>
-            <div className="text-sm">Required: {Math.round(minimumScore * 100)}%</div>
+            <div className="text-sm">
+              Required: {Math.round(minimumScore * 100)}%
+            </div>
           </div>
 
           {/* Skills Summary */}
           <div className="space-y-3">
             <h3 className="font-semibold">Skills Assessment:</h3>
             {skills.map((skill) => (
-              <div
-                key={skill.id}
-                className="flex items-center justify-between p-2 rounded-lg bg-gray-50"
-              >
+              <div key={skill.id} className="flex items-center justify-between p-2 rounded-lg bg-gray-50">
                 <span className="text-sm">{skill.name}</span>
                 {skill.passed ? (
                   <CheckCircle2 className="w-4 h-4 text-[#22c55e]" />
@@ -209,7 +209,7 @@ export default function ModuleTransition({
             {unlocked ? (
               <Button
                 className="w-full bg-[#22c55e] hover:bg-green-700"
-                onClick={() => (window.location.href = `/modules/${nextModuleId}`)}
+                onClick={() => window.location.href = `/modules/${nextModuleId}`}
               >
                 <Unlock className="w-4 h-4 mr-2" />
                 Continue to {nextModuleTitle}
@@ -219,11 +219,15 @@ export default function ModuleTransition({
                 <Alert className="border-orange-200 bg-orange-50">
                   <AlertCircle className="w-4 h-4 text-orange-600" />
                   <AlertDescription className="text-orange-700">
-                    You need {Math.round(minimumScore * 100)}% to unlock the next module. Review the
-                    skills you missed and try again.
+                    You need {Math.round(minimumScore * 100)}% to unlock the next module.
+                    Review the skills you missed and try again.
                   </AlertDescription>
                 </Alert>
-                <Button onClick={handleRetry} className="w-full" variant="outline">
+                <Button
+                  onClick={handleRetry}
+                  className="w-full"
+                  variant="outline"
+                >
                   <RotateCcw className="w-4 h-4 mr-2" />
                   Retry Assessment (Attempt {attempts + 1})
                 </Button>
@@ -299,8 +303,8 @@ export default function ModuleTransition({
                             : 'border-red-500 bg-red-50'
                           : 'border-blue-500 bg-blue-50'
                         : showExplanation && index === currentChallenge.correctAnswer
-                          ? 'border-green-500 bg-green-50'
-                          : 'border-gray-200 hover:bg-gray-50'
+                        ? 'border-green-500 bg-green-50'
+                        : 'border-gray-200 hover:bg-gray-50'
                     }`}
                   >
                     <div className="flex items-center justify-between">
@@ -340,7 +344,10 @@ export default function ModuleTransition({
                   Submit Answer
                 </Button>
               ) : (
-                <Button onClick={handleNextChallenge} className="w-full">
+                <Button
+                  onClick={handleNextChallenge}
+                  className="w-full"
+                >
                   {currentChallengeIndex < challenges.length - 1 ? (
                     <>
                       Next Question

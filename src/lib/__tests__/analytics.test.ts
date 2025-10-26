@@ -25,3 +25,4 @@ describe('analytics wrapper', () => {
     await expect(analytics.pageview('/x')).resolves.toBeUndefined();
   });
 });
+

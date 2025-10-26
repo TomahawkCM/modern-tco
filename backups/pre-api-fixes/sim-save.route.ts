@@ -1,12 +1,12 @@
-import type { NextRequest } from 'next/server';
+import type { NextRequest } from "next/server";
+import { runSimulator } from "@/lib/simulator-runner";
 import {
-  ApiError,
-  apiError,
-  apiSuccess,
-  validateBody,
   withErrorTracking,
-} from '@/lib/error-tracking';
-import { runSimulator } from '@/lib/simulator-runner';
+  ApiError,
+  apiSuccess,
+  apiError,
+  validateBody,
+} from "@/lib/error-tracking";
 
 type SavePayload = {
   name: string;
@@ -16,11 +16,11 @@ type SavePayload = {
 export const POST = withErrorTracking(
   async (request: NextRequest) => {
     // Check if simulator is enabled in production
-    if (process.env.NODE_ENV === 'production' && process.env['ENABLE_SIMULATOR'] !== 'true') {
+    if (process.env.NODE_ENV === "production" && process.env["ENABLE_SIMULATOR"] !== "true") {
       throw new ApiError(
-        'Simulator endpoints are disabled in production',
+        "Simulator endpoints are disabled in production",
         501,
-        'SIMULATOR_DISABLED'
+        "SIMULATOR_DISABLED"
       );
     }
 
@@ -29,19 +29,19 @@ export const POST = withErrorTracking(
     try {
       payload = await request.json();
     } catch (error) {
-      throw new ApiError('Invalid JSON body', 400, 'INVALID_JSON');
+      throw new ApiError("Invalid JSON body", 400, "INVALID_JSON");
     }
 
     // Validate required fields
     const validatedPayload = validateBody<SavePayload>(payload, {
       name: {
         required: true,
-        type: 'string',
+        type: "string",
         validate: (v) => v.length > 0 && v.length <= 100,
       },
       question: {
         required: true,
-        type: 'string',
+        type: "string",
         validate: (v) => v.length > 0 && v.length <= 1000,
       },
     });
@@ -49,15 +49,15 @@ export const POST = withErrorTracking(
     // Run the simulator
     try {
       const result = await runSimulator([
-        '--json',
-        '--save',
+        "--json",
+        "--save",
         validatedPayload.name,
-        '-q',
+        "-q",
         validatedPayload.question,
       ]);
 
       if (result?.ok === false) {
-        throw new ApiError(result.error || 'Simulator execution failed', 400, 'SIMULATOR_ERROR');
+        throw new ApiError(result.error || "Simulator execution failed", 400, "SIMULATOR_ERROR");
       }
 
       return apiSuccess(result);
@@ -68,8 +68,8 @@ export const POST = withErrorTracking(
       }
 
       // Wrap other errors
-      throw new ApiError('Simulator invocation failed', 500, 'SIMULATOR_INVOCATION_FAILED');
+      throw new ApiError("Simulator invocation failed", 500, "SIMULATOR_INVOCATION_FAILED");
     }
   },
-  { endpoint: '/api/sim-save' }
+  { endpoint: "/api/sim-save" }
 );

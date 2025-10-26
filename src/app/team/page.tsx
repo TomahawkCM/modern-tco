@@ -1,19 +1,19 @@
-'use client';
+"use client";
 
-import { useEffect, useMemo, useState } from 'react';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { useAuth } from '@/contexts/AuthContext';
-import { analytics } from '@/lib/analytics';
-import { type TeamSeat, teamService } from '@/lib/team';
+import { useEffect, useMemo, useState } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Badge } from "@/components/ui/badge";
+import { Label } from "@/components/ui/label";
+import { teamService, type TeamSeat } from "@/lib/team";
+import { useAuth } from "@/contexts/AuthContext";
+import { analytics } from "@/lib/analytics";
 
 export default function TeamPage() {
   const { user } = useAuth();
   const [seats, setSeats] = useState<TeamSeat[]>([]);
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState("");
   const [error, setError] = useState<string | null>(null);
   const limit = teamService.getLimit();
 
@@ -23,12 +23,10 @@ export default function TeamPage() {
       const list = await teamService.list(user);
       if (active) setSeats(list);
     })();
-    return () => {
-      active = false;
-    };
-  }, [user?.id, user]);
+    return () => { active = false; };
+  }, [user?.id]);
 
-  const used = seats.filter((s) => s.status !== 'revoked').length;
+  const used = seats.filter((s) => s.status !== "revoked").length;
   const remaining = Math.max(0, limit - used);
 
   function validEmail(e: string) {
@@ -39,37 +37,33 @@ export default function TeamPage() {
     setError(null);
     const e = email.trim().toLowerCase();
     if (!validEmail(e)) {
-      setError('Enter a valid email address');
+      setError("Enter a valid email address");
       return;
     }
     if (remaining <= 0) {
-      setError('Seat limit reached');
+      setError("Seat limit reached");
       return;
     }
-    if (seats.some((s) => s.email === e && s.status !== 'revoked')) {
-      setError('This email already has a seat');
+    if (seats.some((s) => s.email === e && s.status !== "revoked")) {
+      setError("This email already has a seat");
       return;
     }
     const seat = await teamService.invite(e, user);
-    void analytics.capture('team_invite', { email: e });
+    void analytics.capture("team_invite", { email: e });
     setSeats((prev) => [seat, ...prev]);
-    setEmail('');
+    setEmail("");
   }
 
   async function handleRevoke(id: string) {
     await teamService.revoke(id, user);
-    void analytics.capture('team_revoke', { id });
-    setSeats((prev) => prev.map((s) => (s.id === id ? { ...s, status: 'revoked' } : s)));
+    void analytics.capture("team_revoke", { id });
+    setSeats((prev) => prev.map((s) => (s.id === id ? { ...s, status: "revoked" } : s)));
   }
 
   async function handleActivate(id: string) {
     await teamService.activate(id, user);
-    void analytics.capture('team_activate', { id });
-    setSeats((prev) =>
-      prev.map((s) =>
-        s.id === id ? { ...s, status: 'active', acceptedAt: new Date().toISOString() } : s
-      )
-    );
+    void analytics.capture("team_activate", { id });
+    setSeats((prev) => prev.map((s) => (s.id === id ? { ...s, status: "active", acceptedAt: new Date().toISOString() } : s)));
   }
 
   const sorted = useMemo(() => {
@@ -79,10 +73,7 @@ export default function TeamPage() {
   return (
     <div className="mx-auto max-w-5xl p-6">
       <h1 className="mb-4 text-3xl font-bold text-foreground">Team Seats (Beta)</h1>
-      <p className="mb-6 text-muted-foreground">
-        Invite teammates to use your Team plan. This MVP stores seats in your account with Supabase
-        when available, with a local fallback for development.
-      </p>
+      <p className="mb-6 text-muted-foreground">Invite teammates to use your Team plan. This MVP stores seats in your account with Supabase when available, with a local fallback for development.</p>
 
       <Card className="glass border-white/10">
         <CardHeader>
@@ -90,14 +81,10 @@ export default function TeamPage() {
         </CardHeader>
         <CardContent className="flex items-center justify-between text-sm text-muted-foreground">
           <div>
-            <div>
-              <span className="font-medium">Limit:</span> {limit}
-            </div>
-            <div>
-              <span className="font-medium">Used:</span> {used}
-            </div>
+            <div><span className="font-medium">Limit:</span> {limit}</div>
+            <div><span className="font-medium">Used:</span> {used}</div>
           </div>
-          <Badge variant={remaining > 0 ? 'secondary' : 'outline'}>
+          <Badge variant={remaining > 0 ? "secondary" : "outline"}>
             {remaining} seats remaining
           </Badge>
         </CardContent>
@@ -110,24 +97,12 @@ export default function TeamPage() {
         <CardContent className="space-y-3">
           <div className="grid gap-2 sm:grid-cols-[1fr_auto] sm:items-end">
             <div>
-              <Label htmlFor="invite-email" className="text-muted-foreground">
-                Email
-              </Label>
-              <Input
-                id="invite-email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="teammate@company.com"
-                disabled={!user}
-              />
+              <Label htmlFor="invite-email" className="text-muted-foreground">Email</Label>
+              <Input id="invite-email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="teammate@company.com" disabled={!user} />
             </div>
-            <Button onClick={handleInvite} disabled={!email.trim() || !user} className="sm:ml-2">
-              Invite
-            </Button>
+            <Button onClick={handleInvite} disabled={!email.trim() || !user} className="sm:ml-2">Invite</Button>
           </div>
-          {!user && (
-            <div className="text-sm text-[#f97316]">Sign in to invite and manage seats.</div>
-          )}
+          {!user && <div className="text-sm text-[#f97316]">Sign in to invite and manage seats.</div>}
           {error && <div className="text-sm text-red-400">{error}</div>}
         </CardContent>
       </Card>
@@ -138,9 +113,7 @@ export default function TeamPage() {
         </CardHeader>
         <CardContent>
           {sorted.length === 0 ? (
-            <div className="text-sm text-muted-foreground">
-              No seats yet. Invite your first teammate above.
-            </div>
+            <div className="text-sm text-muted-foreground">No seats yet. Invite your first teammate above.</div>
           ) : (
             <ul className="divide-y divide-white/10">
               {sorted.map((s) => (
@@ -149,21 +122,15 @@ export default function TeamPage() {
                     <div className="text-foreground">{s.email}</div>
                     <div className="text-xs text-muted-foreground">
                       Invited {new Date(s.invitedAt).toLocaleString()} • Status: {s.status}
-                      {s.acceptedAt
-                        ? ` • Activated ${new Date(s.acceptedAt).toLocaleString()}`
-                        : ''}
+                      {s.acceptedAt ? ` • Activated ${new Date(s.acceptedAt).toLocaleString()}` : ""}
                     </div>
                   </div>
                   <div className="flex gap-2">
-                    {s.status === 'invited' && (
-                      <Button size="sm" variant="outline" onClick={() => handleActivate(s.id)}>
-                        Mark Active
-                      </Button>
+                    {s.status === "invited" && (
+                      <Button size="sm" variant="outline" onClick={() => handleActivate(s.id)}>Mark Active</Button>
                     )}
-                    {s.status !== 'revoked' && (
-                      <Button size="sm" variant="destructive" onClick={() => handleRevoke(s.id)}>
-                        Revoke
-                      </Button>
+                    {s.status !== "revoked" && (
+                      <Button size="sm" variant="destructive" onClick={() => handleRevoke(s.id)}>Revoke</Button>
                     )}
                   </div>
                 </li>

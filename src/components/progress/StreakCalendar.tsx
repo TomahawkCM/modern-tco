@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { addDays, format, isSameDay, startOfWeek, subDays } from 'date-fns';
-import { Flame, Trophy } from 'lucide-react';
-import { Badge } from '@/components/ui/badge';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Flame, Calendar as CalendarIcon, Trophy, Target } from "lucide-react";
+import { format, subDays, startOfWeek, addDays, isSameDay } from "date-fns";
 
 interface ReviewDay {
   date: Date;
@@ -47,25 +47,25 @@ export default function StreakCalendar({
 
   // Get color for a day based on review count
   const getDayColor = (date: Date): string => {
-    if (date > today) return 'bg-card'; // Future dates
+    if (date > today) return "bg-card"; // Future dates
 
     const reviewData = getReviewData(date);
     if (!reviewData || reviewData.reviewCount === 0) {
-      return 'bg-card'; // No reviews
+      return "bg-card"; // No reviews
     }
 
     if (reviewData.goalMet) {
-      return 'bg-[#22c55e]'; // Met daily goal
+      return "bg-[#22c55e]"; // Met daily goal
     }
 
     if (reviewData.reviewCount > 0) {
-      return 'bg-yellow-500/50'; // Some reviews but didn't meet goal
+      return "bg-yellow-500/50"; // Some reviews but didn't meet goal
     }
 
-    return 'bg-card';
+    return "bg-card";
   };
 
-  const weekdays = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
+  const weekdays = ["S", "M", "T", "W", "T", "F", "S"];
 
   return (
     <Card>
@@ -78,13 +78,17 @@ export default function StreakCalendar({
           <div className="flex items-center gap-4">
             {currentStreak > 0 && (
               <div className="text-center">
-                <div className="text-2xl font-bold text-orange-500">{currentStreak}</div>
+                <div className="text-2xl font-bold text-orange-500">
+                  {currentStreak}
+                </div>
                 <p className="text-xs text-muted-foreground">Current</p>
               </div>
             )}
             {longestStreak > 0 && (
               <div className="text-center">
-                <div className="text-2xl font-bold text-primary">{longestStreak}</div>
+                <div className="text-2xl font-bold text-primary">
+                  {longestStreak}
+                </div>
                 <p className="text-xs text-muted-foreground">Best</p>
               </div>
             )}
@@ -98,7 +102,10 @@ export default function StreakCalendar({
           {/* Weekday headers */}
           <div className="grid grid-cols-7 gap-2 mb-2">
             {weekdays.map((day, idx) => (
-              <div key={idx} className="text-center text-xs font-medium text-muted-foreground">
+              <div
+                key={idx}
+                className="text-center text-xs font-medium text-muted-foreground"
+              >
                 {day}
               </div>
             ))}
@@ -118,30 +125,35 @@ export default function StreakCalendar({
                     className="relative group"
                     title={
                       isFuture
-                        ? 'Future date'
+                        ? "Future date"
                         : reviewData
-                          ? `${format(date, 'MMM d')}: ${reviewData.reviewCount} reviews`
-                          : `${format(date, 'MMM d')}: No reviews`
+                        ? `${format(date, "MMM d")}: ${
+                            reviewData.reviewCount
+                          } reviews`
+                        : `${format(date, "MMM d")}: No reviews`
                     }
                   >
                     <div
                       className={`
                         aspect-square rounded-md flex items-center justify-center
                         ${getDayColor(date)}
-                        ${isToday ? 'ring-2 ring-primary ring-offset-2 ring-offset-background' : ''}
-                        ${isFuture ? 'opacity-20' : ''}
+                        ${isToday ? "ring-2 ring-primary ring-offset-2 ring-offset-background" : ""}
+                        ${isFuture ? "opacity-20" : ""}
                         transition-all cursor-pointer hover:scale-110
                       `}
                     >
-                      <span className="text-xs font-medium">{format(date, 'd')}</span>
+                      <span className="text-xs font-medium">
+                        {format(date, "d")}
+                      </span>
                     </div>
 
                     {/* Tooltip on hover */}
                     {!isFuture && (
                       <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover:block z-10">
                         <div className="bg-popover text-popover-foreground px-2 py-1 rounded-md shadow-lg text-xs whitespace-nowrap">
-                          {format(date, 'MMM d')}: {reviewData?.reviewCount || 0} reviews
-                          {reviewData?.goalMet && ' ✓'}
+                          {format(date, "MMM d")}:{" "}
+                          {reviewData?.reviewCount || 0} reviews
+                          {reviewData?.goalMet && " ✓"}
                         </div>
                       </div>
                     )}
@@ -197,7 +209,9 @@ export default function StreakCalendar({
 
         {currentStreak === longestStreak && currentStreak >= 7 && (
           <div className="p-3 bg-[#22c55e]/10 border border-[#22c55e]/20 rounded-lg text-center">
-            <p className="text-sm font-medium text-[#22c55e]">🔥 Personal best! You're on fire!</p>
+            <p className="text-sm font-medium text-[#22c55e]">
+              🔥 Personal best! You're on fire!
+            </p>
           </div>
         )}
       </CardContent>

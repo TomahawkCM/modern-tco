@@ -1,13 +1,13 @@
-'use client';
+"use client";
 
-import { Clock, Search, TrendingUp, X } from 'lucide-react';
-import { useEffect, useState } from 'react';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { useSearch } from '@/contexts/SearchContext';
-import { cn } from '@/lib/utils';
+import { useState, useEffect } from "react";
+import { Search, X, Clock, TrendingUp } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Card } from "@/components/ui/card";
+import { useSearch } from "@/contexts/SearchContext";
+import { cn } from "@/lib/utils";
 
 export function SearchHeader() {
   const { state, setQuery, generateSuggestions, resetSearch } = useSearch();
@@ -32,14 +32,14 @@ export function SearchHeader() {
   };
 
   const handleClear = () => {
-    setInputValue('');
-    setQuery('');
+    setInputValue("");
+    setQuery("");
     setShowSuggestions(false);
   };
 
   const handleShowAll = () => {
     resetSearch();
-    setInputValue('');
+    setInputValue("");
     setShowSuggestions(false);
   };
 
@@ -144,12 +144,11 @@ export function SearchHeader() {
 
           {!state.isSearching && state.totalResults > 0 && (
             <div className="text-sm text-muted-foreground">
-              Found <span className="font-medium text-foreground">{state.totalResults}</span>{' '}
-              question
-              {state.totalResults !== 1 ? 's' : ''}
+              Found <span className="font-medium text-foreground">{state.totalResults}</span> question
+              {state.totalResults !== 1 ? "s" : ""}
               {state.query && (
                 <span>
-                  {' '}
+                  {" "}
                   for &ldquo;<span className="text-tanium-accent">{state.query}</span>&rdquo;
                 </span>
               )}
@@ -166,7 +165,7 @@ export function SearchHeader() {
 
             return activeFilterCount > 0 ? (
               <Badge variant="secondary" className="text-xs">
-                {activeFilterCount} filter{activeFilterCount !== 1 ? 's' : ''} active
+                {activeFilterCount} filter{activeFilterCount !== 1 ? "s" : ""} active
               </Badge>
             ) : null;
           })()}
@@ -176,32 +175,32 @@ export function SearchHeader() {
         <div className="hidden gap-2 lg:flex">
           {(
             [
-              'Asking Questions',
-              'Refining Questions & Targeting',
-              'Taking Action - Packages & Actions',
+              "Asking Questions",
+              "Refining Questions & Targeting",
+              "Taking Action - Packages & Actions",
             ] as const
           ).map((domain) => {
             const isActive = state.filters.domains.includes(domain);
             return (
               <Button
                 key={domain}
-                variant={isActive ? 'default' : 'ghost'}
+                variant={isActive ? "default" : "ghost"}
                 size="sm"
                 onClick={() => {
                   const newDomains = isActive
                     ? state.filters.domains.filter((d) => d !== domain)
                     : [...state.filters.domains, domain];
-                  setQuery('');
+                  setQuery("");
                   // This would need to call setFilters from the search context
                 }}
                 className={cn(
-                  'text-xs transition-colors',
+                  "text-xs transition-colors",
                   isActive
-                    ? 'bg-tanium-accent text-foreground hover:bg-blue-600'
-                    : 'text-muted-foreground hover:bg-white/10 hover:text-foreground'
+                    ? "bg-tanium-accent text-foreground hover:bg-blue-600"
+                    : "text-muted-foreground hover:bg-white/10 hover:text-foreground"
                 )}
               >
-                {domain ? domain.split(' ')[0] : domain} {/* Show first word */}
+                {domain ? domain.split(" ")[0] : domain} {/* Show first word */}
               </Button>
             );
           })}

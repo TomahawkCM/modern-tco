@@ -1,0 +1,16 @@
+    if (labId) {
+      query = query.eq("lab_id", labId);
+    }
+
+    const { data, error } = await query;
+
+    if (error) {
+      console.error("Error fetching leaderboard:", error);
+      throw error;
+    }
+
+    return data || [];
+  }
+}
+
+export const labProgressService = new LabProgressService();

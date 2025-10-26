@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import ReactMarkdown from 'react-markdown';
+import ReactMarkdown from "react-markdown";
 
 interface LabMarkdownProps {
   content: string;

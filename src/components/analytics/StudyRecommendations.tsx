@@ -1,30 +1,38 @@
-'use client';
+"use client";
 
+import { useRouter } from "next/navigation";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Progress } from "@/components/ui/progress";
+import { useProgress } from "@/contexts/ProgressContext";
+import { TCODomain } from "@/types/exam";
+import { cn } from "@/lib/utils";
+import { useMemo } from "react";
 import {
-  AlertTriangle,
-  BookOpen,
   Brain,
-  CheckCircle,
+  Target,
   Clock,
+  TrendingUp,
+  AlertTriangle,
+  CheckCircle,
+  Zap,
+  BookOpen,
+  Shield,
+  Server,
   FileText,
   Layers,
-  Shield,
-  Target,
+  Wrench,
   Trophy,
-  Zap,
-} from 'lucide-react';
-import { useRouter } from 'next/navigation';
-import { useMemo } from 'react';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { useProgress } from '@/contexts/ProgressContext';
-import { cn } from '@/lib/utils';
-import { TCODomain } from '@/types/exam';
+  MessageSquare,
+  Play,
+  Navigation,
+  BarChart3,
+} from "lucide-react";
 
 interface Recommendation {
-  type: 'focus' | 'practice' | 'review' | 'exam' | 'achievement';
-  priority: 'high' | 'medium' | 'low';
+  type: "focus" | "practice" | "review" | "exam" | "achievement";
+  priority: "high" | "medium" | "low";
   title: string;
   description: string;
   action: string;
@@ -36,7 +44,7 @@ interface Recommendation {
 export function StudyRecommendations() {
   const router = useRouter();
   const { getOverallStats, getDomainStats, state } = useProgress();
-
+  
   // Memoize expensive function calls to prevent infinite re-renders
   const overallStats = useMemo(() => getOverallStats(), [getOverallStats]);
   const domainStats = useMemo(() => getDomainStats(), [getDomainStats]);
@@ -69,138 +77,138 @@ export function StudyRecommendations() {
       };
 
       const domainUrls: Record<TCODomain, string> = {
-        [TCODomain.ASKING_QUESTIONS]: 'asking-questions',
-        [TCODomain.REFINING_QUESTIONS]: 'refining-questions',
-        [TCODomain.REFINING_TARGETING]: 'refining-questions-targeting',
-        [TCODomain.TAKING_ACTION]: 'taking-action',
-        [TCODomain.NAVIGATION_MODULES]: 'navigation-modules',
-        [TCODomain.REPORTING_EXPORT]: 'reporting-export',
-        [TCODomain.SECURITY]: 'security',
-        [TCODomain.FUNDAMENTALS]: 'fundamentals',
-        [TCODomain.TROUBLESHOOTING]: 'troubleshooting',
+        [TCODomain.ASKING_QUESTIONS]: "asking-questions",
+        [TCODomain.REFINING_QUESTIONS]: "refining-questions",
+        [TCODomain.REFINING_TARGETING]: "refining-questions-targeting",
+        [TCODomain.TAKING_ACTION]: "taking-action",
+        [TCODomain.NAVIGATION_MODULES]: "navigation-modules",
+        [TCODomain.REPORTING_EXPORT]: "reporting-export",
+        [TCODomain.SECURITY]: "security",
+        [TCODomain.FUNDAMENTALS]: "fundamentals",
+        [TCODomain.TROUBLESHOOTING]: "troubleshooting",
       };
 
       recommendations.push({
-        type: 'focus',
-        priority: 'high',
+        type: "focus",
+        priority: "high",
         title: `Focus on ${weakestDomain.domain}`,
         description: `Your weakest area with ${weakestDomain.score}% average. Targeted practice will improve overall readiness.`,
         action: `Study ${weakestDomain.domain}`,
         link: `/domains/${domainUrls[weakestDomain.domain]}`,
         icon: domainIcons[weakestDomain.domain] || Target,
-        color: 'text-red-400 border-red-400',
+        color: "text-red-400 border-red-400",
       });
     }
 
     // Study streak recommendations
     if (overallStats.studyStreak === 0) {
       recommendations.push({
-        type: 'practice',
-        priority: 'high',
-        title: 'Start Your Study Streak',
-        description: 'Begin building momentum with daily practice sessions to improve retention.',
-        action: 'Start Practice',
-        link: '/practice',
+        type: "practice",
+        priority: "high",
+        title: "Start Your Study Streak",
+        description: "Begin building momentum with daily practice sessions to improve retention.",
+        action: "Start Practice",
+        link: "/practice",
         icon: Zap,
-        color: 'text-orange-400 border-orange-400',
+        color: "text-orange-400 border-orange-400",
       });
     } else if (overallStats.studyStreak < 7) {
       recommendations.push({
-        type: 'practice',
-        priority: 'medium',
-        title: 'Build Study Consistency',
+        type: "practice",
+        priority: "medium",
+        title: "Build Study Consistency",
         description: `You're on a ${overallStats.studyStreak}-day streak. Keep going to reach the 7-day milestone!`,
-        action: 'Continue Streak',
-        link: '/practice',
+        action: "Continue Streak",
+        link: "/practice",
         icon: Clock,
-        color: 'text-[#f97316] border-yellow-400',
+        color: "text-[#f97316] border-yellow-400",
       });
     }
 
     // Overall score recommendations
     if (overallStats.averageScore < 70) {
       recommendations.push({
-        type: 'review',
-        priority: 'high',
-        title: 'Review Fundamentals',
+        type: "review",
+        priority: "high",
+        title: "Review Fundamentals",
         description:
-          'Your overall score suggests focusing on core concepts before attempting mock exams.',
-        action: 'Review Basics',
-        link: '/domains/fundamentals',
+          "Your overall score suggests focusing on core concepts before attempting mock exams.",
+        action: "Review Basics",
+        link: "/domains/fundamentals",
         icon: BookOpen,
-        color: 'text-primary border-blue-400',
+        color: "text-primary border-blue-400",
       });
     } else if (overallStats.averageScore >= 80) {
       recommendations.push({
-        type: 'exam',
-        priority: 'medium',
-        title: 'Ready for Mock Exams',
-        description: 'Your strong performance indicates readiness for timed practice exams.',
-        action: 'Take Mock Exam',
-        link: '/mock',
+        type: "exam",
+        priority: "medium",
+        title: "Ready for Mock Exams",
+        description: "Your strong performance indicates readiness for timed practice exams.",
+        action: "Take Mock Exam",
+        link: "/mock",
         icon: CheckCircle,
-        color: 'text-[#22c55e] border-green-400',
+        color: "text-[#22c55e] border-green-400",
       });
     }
 
     // Session count recommendations
     if (state.progress.sessionCount < 5) {
       recommendations.push({
-        type: 'practice',
-        priority: 'medium',
-        title: 'Build Practice Momentum',
+        type: "practice",
+        priority: "medium",
+        title: "Build Practice Momentum",
         description:
-          'Complete more practice sessions to establish patterns and identify knowledge gaps.',
-        action: 'Start Practice',
-        link: '/practice',
+          "Complete more practice sessions to establish patterns and identify knowledge gaps.",
+        action: "Start Practice",
+        link: "/practice",
         icon: Target,
-        color: 'text-primary border-blue-400',
+        color: "text-primary border-blue-400",
       });
     }
 
     // Readiness-based recommendations
-    if (overallStats.readinessLevel === 'Poor' || overallStats.readinessLevel === 'Fair') {
+    if (overallStats.readinessLevel === "Poor" || overallStats.readinessLevel === "Fair") {
       recommendations.push({
-        type: 'focus',
-        priority: 'high',
-        title: 'Intensive Study Needed',
-        description: 'Current readiness level requires focused study across multiple domains.',
-        action: 'Study Plan',
-        link: '/domains/fundamentals',
+        type: "focus",
+        priority: "high",
+        title: "Intensive Study Needed",
+        description: "Current readiness level requires focused study across multiple domains.",
+        action: "Study Plan",
+        link: "/domains/fundamentals",
         icon: Brain,
-        color: 'text-red-400 border-red-400',
+        color: "text-red-400 border-red-400",
       });
     }
 
     // Achievement recommendations
     const possibleAchievements = [
       {
-        name: 'Perfect Score',
-        condition: () => !state.progress.achievements.includes('Perfect Score'),
+        name: "Perfect Score",
+        condition: () => !state.progress.achievements.includes("Perfect Score"),
       },
       {
-        name: 'Week Warrior',
+        name: "Week Warrior",
         condition: () =>
-          overallStats.studyStreak < 7 && !state.progress.achievements.includes('Week Warrior'),
+          overallStats.studyStreak < 7 && !state.progress.achievements.includes("Week Warrior"),
       },
       {
-        name: 'Centurion',
+        name: "Centurion",
         condition: () =>
-          overallStats.totalQuestions < 100 && !state.progress.achievements.includes('Centurion'),
+          overallStats.totalQuestions < 100 && !state.progress.achievements.includes("Centurion"),
       },
     ];
 
     const nextAchievement = possibleAchievements.find((achievement) => achievement.condition());
     if (nextAchievement) {
       recommendations.push({
-        type: 'achievement',
-        priority: 'low',
+        type: "achievement",
+        priority: "low",
         title: `Unlock "${nextAchievement.name}"`,
         description: getAchievementDescription(nextAchievement.name),
-        action: 'Work Toward Goal',
-        link: '/practice',
+        action: "Work Toward Goal",
+        link: "/practice",
         icon: Trophy,
-        color: 'text-primary border-cyan-400',
+        color: "text-primary border-cyan-400",
       });
     }
 
@@ -213,14 +221,14 @@ export function StudyRecommendations() {
 
   const getAchievementDescription = (achievement: string): string => {
     switch (achievement) {
-      case 'Perfect Score':
-        return 'Score 100% on any practice session to unlock this achievement.';
-      case 'Week Warrior':
+      case "Perfect Score":
+        return "Score 100% on any practice session to unlock this achievement.";
+      case "Week Warrior":
         return `Study for ${7 - overallStats.studyStreak} more consecutive days to earn this badge.`;
-      case 'Centurion':
+      case "Centurion":
         return `Answer ${100 - overallStats.totalQuestions} more questions to reach 100 total.`;
       default:
-        return 'Complete the requirements to unlock this achievement.';
+        return "Complete the requirements to unlock this achievement.";
     }
   };
 
@@ -244,7 +252,7 @@ export function StudyRecommendations() {
               maintain your readiness.
             </p>
             <Button
-              onClick={() => router.push('/mock')}
+              onClick={() => router.push("/mock")}
               className="bg-tanium-accent hover:bg-blue-600"
             >
               Take a Mock Exam
@@ -272,7 +280,7 @@ export function StudyRecommendations() {
                 key={index}
                 className="glass flex items-start gap-4 rounded-lg border border-white/10 p-4 transition-colors hover:border-white/20"
               >
-                <div className={`rounded-lg p-2 bg-${rec.color.split('-')[1]}-500/20`}>
+                <div className={`rounded-lg p-2 bg-${rec.color.split("-")[1]}-500/20`}>
                   <Icon className={`h-5 w-5 ${rec.color}`} />
                 </div>
                 <div className="min-w-0 flex-1">
@@ -284,12 +292,12 @@ export function StudyRecommendations() {
                     <Badge
                       variant="outline"
                       className={cn(
-                        'shrink-0',
-                        rec.priority === 'high'
-                          ? 'border-red-400 text-red-400'
-                          : rec.priority === 'medium'
-                            ? 'border-yellow-400 text-[#f97316]'
-                            : 'border-gray-400 text-muted-foreground'
+                        "shrink-0",
+                        rec.priority === "high"
+                          ? "border-red-400 text-red-400"
+                          : rec.priority === "medium"
+                            ? "border-yellow-400 text-[#f97316]"
+                            : "border-gray-400 text-muted-foreground"
                       )}
                     >
                       {rec.priority}

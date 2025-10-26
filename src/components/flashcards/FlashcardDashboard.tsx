@@ -1,15 +1,15 @@
-'use client';
+"use client";
 
-import { BookOpen, Brain, Clock, Flame, Target, TrendingUp } from 'lucide-react';
-import React, { useEffect, useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { useAuth } from '@/contexts/AuthContext';
-import { flashcardService } from '@/services/flashcardService';
-import type { FlashcardStats } from '@/types/flashcard';
-import FlashcardGenerator from './FlashcardGenerator';
-import FlashcardReview from './FlashcardReview';
+import React, { useState, useEffect } from "react";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useAuth } from "@/contexts/AuthContext";
+import { flashcardService } from "@/services/flashcardService";
+import type { FlashcardStats } from "@/types/flashcard";
+import FlashcardReview from "./FlashcardReview";
+import FlashcardGenerator from "./FlashcardGenerator";
+import { Brain, TrendingUp, Clock, Flame, Target, BookOpen } from "lucide-react";
 
 interface FlashcardDashboardProps {
   moduleId?: string;
@@ -19,13 +19,14 @@ export default function FlashcardDashboard({ moduleId }: FlashcardDashboardProps
   const { user } = useAuth();
   const isStaticMode = !user;
   const [stats, setStats] = useState<FlashcardStats | null>(null);
-  const [activeTab, setActiveTab] = useState('review');
+  const [activeTab, setActiveTab] = useState("review");
   const [isLoading, setIsLoading] = useState(true);
   const [isSeeding, setIsSeeding] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     loadStats();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user?.id]);
 
   const loadStats = async () => {
@@ -39,7 +40,7 @@ export default function FlashcardDashboard({ moduleId }: FlashcardDashboardProps
         await autoSeedFlashcards();
       }
     } catch (error) {
-      console.error('Error loading stats:', error);
+      console.error("Error loading stats:", error);
     } finally {
       setIsLoading(false);
     }
@@ -54,7 +55,7 @@ export default function FlashcardDashboard({ moduleId }: FlashcardDashboardProps
     try {
       console.log('🔄 Attempting to auto-seed flashcards...');
 
-      const response = await fetch('/api/flashcards/seed', {
+      const response = await fetch('/api/v1/flashcards/seed', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -65,22 +66,24 @@ export default function FlashcardDashboard({ moduleId }: FlashcardDashboardProps
       const data = await response.json();
 
       if (response.ok) {
-        const seededCount = typeof data?.count === 'number' ? data.count : 0;
+        const seededCount = typeof data?.count === "number" ? data.count : 0;
 
         if (seededCount > 0) {
           console.log(`✅ Auto-seeded ${seededCount} flashcards`, data);
           const newStats = await flashcardService.getFlashcardStats(user.id);
           setStats(newStats);
         } else if (data?.alreadySeeded) {
-          console.log('ℹ️ Flashcards already seeded');
+          console.log("ℹ️ Flashcards already seeded");
         } else {
-          console.info('ℹ️ No flashcards were seeded automatically', data);
+          console.info("ℹ️ No flashcards were seeded automatically", data);
         }
       } else {
-        const errorMsg = data?.details || data?.error || response.statusText || 'Unknown error';
-        console.error('❌ Failed to auto-seed flashcards:', data);
+        const errorMsg = data?.details || data?.error || response.statusText || "Unknown error";
+        console.error("❌ Failed to auto-seed flashcards:", data);
         setError(
-          `Failed to load flashcards: ${errorMsg}${data?.suggestion ? ` (${data.suggestion})` : ''}`
+          `Failed to load flashcards: ${errorMsg}${
+            data?.suggestion ? ` (${data.suggestion})` : ""
+          }`
         );
       }
     } catch (err) {
@@ -108,7 +111,9 @@ export default function FlashcardDashboard({ moduleId }: FlashcardDashboardProps
       <div className="flex flex-col items-center justify-center p-8 space-y-4">
         <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
         {isSeeding && (
-          <p className="text-sm text-muted-foreground">Loading your 331 TCO flashcards...</p>
+          <p className="text-sm text-muted-foreground">
+            Loading your 331 TCO flashcards...
+          </p>
         )}
       </div>
     );
@@ -123,18 +128,10 @@ export default function FlashcardDashboard({ moduleId }: FlashcardDashboardProps
         <CardContent className="space-y-4">
           <p className="text-sm text-muted-foreground">{error}</p>
           <div className="flex gap-2">
-            <Button
-              onClick={() => {
-                setError(null);
-                loadStats();
-              }}
-            >
+            <Button onClick={() => { setError(null); loadStats(); }}>
               Retry
             </Button>
-            <Button
-              variant="outline"
-              onClick={() => window.open('/api/flashcards/debug', '_blank')}
-            >
+            <Button variant="outline" onClick={() => window.open('/api/flashcards/debug', '_blank')}>
               View Debug Info
             </Button>
           </div>
@@ -150,8 +147,7 @@ export default function FlashcardDashboard({ moduleId }: FlashcardDashboardProps
         <Card className="border-accent/50 bg-accent/10">
           <CardContent className="py-3">
             <p className="text-sm text-accent-foreground">
-              ⚠️ <strong>Shared Flashcard Library</strong> - Showing read-only TCO flashcards without
-              authentication.
+              ⚠️ <strong>Shared Flashcard Library</strong> - Showing read-only TCO flashcards without authentication.
             </p>
           </CardContent>
         </Card>
@@ -230,7 +226,10 @@ export default function FlashcardDashboard({ moduleId }: FlashcardDashboardProps
         </TabsContent>
 
         <TabsContent value="create" className="mt-6">
-          <FlashcardGenerator moduleId={moduleId} onCardCreated={handleCardCreated} />
+          <FlashcardGenerator
+            moduleId={moduleId}
+            onCardCreated={handleCardCreated}
+          />
         </TabsContent>
       </Tabs>
 
@@ -240,22 +239,10 @@ export default function FlashcardDashboard({ moduleId }: FlashcardDashboardProps
           <CardTitle className="text-base">💡 Study Tips</CardTitle>
         </CardHeader>
         <CardContent className="text-sm space-y-2">
-          <p>
-            • <strong>Daily consistency</strong> beats marathon sessions - review for 10-15 minutes
-            daily
-          </p>
-          <p>
-            • <strong>Don't peek!</strong> Try to recall the answer before revealing it for maximum
-            retention
-          </p>
-          <p>
-            • <strong>Be honest</strong> with your ratings - the algorithm adapts to your actual
-            performance
-          </p>
-          <p>
-            • <strong>Create cards</strong> from mistakes - add failed quiz questions to reinforce
-            weak areas
-          </p>
+          <p>• <strong>Daily consistency</strong> beats marathon sessions - review for 10-15 minutes daily</p>
+          <p>• <strong>Don't peek!</strong> Try to recall the answer before revealing it for maximum retention</p>
+          <p>• <strong>Be honest</strong> with your ratings - the algorithm adapts to your actual performance</p>
+          <p>• <strong>Create cards</strong> from mistakes - add failed quiz questions to reinforce weak areas</p>
         </CardContent>
       </Card>
     </div>

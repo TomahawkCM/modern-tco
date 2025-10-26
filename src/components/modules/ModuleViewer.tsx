@@ -1,14 +1,24 @@
-'use client';
+"use client";
 
-import { ArrowLeft, ArrowRight, BookOpen, CheckCircle, Clock, Target, Trophy } from 'lucide-react';
-import { useState } from 'react';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Progress } from '@/components/ui/progress';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import type { Module, ModuleProgress } from '@/data/modules/module-definitions';
-import { cn } from '@/lib/utils';
+import { useState, useEffect } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Progress } from "@/components/ui/progress";
+import { Badge } from "@/components/ui/badge";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  BookOpen,
+  CheckCircle,
+  Clock,
+  Play,
+  ArrowLeft,
+  ArrowRight,
+  Trophy,
+  Target,
+  Brain,
+} from "lucide-react";
+import { type Module, ModuleSection, type ModuleProgress } from "@/data/modules/module-definitions";
+import { cn } from "@/lib/utils";
 
 interface ModuleViewerProps {
   module: Module;
@@ -31,60 +41,41 @@ export function ModuleViewer({
   const [completedObjectives, setCompletedObjectives] = useState<Set<string>>(new Set());
   const [completedSections, setCompletedSections] = useState<Set<string>>(new Set());
 
-  // Early return if module data is not loaded
-  if (!module || !module.objectives || !module.sections) {
-    return (
-      <div className={cn('space-y-6', className)}>
-        <Card className="glass border-white/10">
-          <CardContent className="py-12 text-center">
-            <p className="text-muted-foreground">Loading module data...</p>
-          </CardContent>
-        </Card>
-      </div>
-    );
-  }
-
-  // Calculate progress percentages with safe fallbacks
-  const objectivesLength = module.objectives?.length || 0;
-  const sectionsLength = module.sections?.length || 0;
-  const objectiveProgress = objectivesLength > 0 
-    ? Math.round((completedObjectives.size / objectivesLength) * 100) 
-    : 0;
-  const sectionProgress = sectionsLength > 0
-    ? Math.round((completedSections.size / sectionsLength) * 100)
-    : 0;
+  // Calculate progress percentages
+  const objectiveProgress = Math.round((completedObjectives.size / module.objectives.length) * 100);
+  const sectionProgress = Math.round((completedSections.size / module.sections.length) * 100);
   const overallProgress = Math.round((objectiveProgress + sectionProgress) / 2);
 
   // Domain color mapping
   const getDomainColors = (domain: string) => {
     const colors = {
       ASKING_QUESTIONS: {
-        color: 'text-[#22c55e]',
-        bgColor: 'bg-green-900/20',
-        borderColor: 'border-green-400',
+        color: "text-[#22c55e]",
+        bgColor: "bg-green-900/20",
+        borderColor: "border-green-400",
       },
       REFINING_QUESTIONS: {
-        color: 'text-primary',
-        bgColor: 'bg-blue-900/20',
-        borderColor: 'border-blue-400',
+        color: "text-primary",
+        bgColor: "bg-blue-900/20",
+        borderColor: "border-blue-400",
       },
       TAKING_ACTION: {
-        color: 'text-primary',
-        bgColor: 'bg-primary/20',
-        borderColor: 'border-cyan-400',
+        color: "text-primary",
+        bgColor: "bg-primary/20",
+        borderColor: "border-cyan-400",
       },
       NAVIGATION_MODULES: {
-        color: 'text-[#f97316]',
-        bgColor: 'bg-yellow-900/20',
-        borderColor: 'border-yellow-400',
+        color: "text-[#f97316]",
+        bgColor: "bg-yellow-900/20",
+        borderColor: "border-yellow-400",
       },
       REPORTING_EXPORT: {
-        color: 'text-red-400',
-        bgColor: 'bg-red-900/20',
-        borderColor: 'border-red-400',
+        color: "text-red-400",
+        bgColor: "bg-red-900/20",
+        borderColor: "border-red-400",
       },
     };
-    return colors[domain as keyof typeof colors] || colors.NAVIGATION_MODULES;
+    return colors[domain as keyof typeof colors] || colors["NAVIGATION_MODULES"];
   };
 
   const domainColors = getDomainColors(module.domain);
@@ -108,7 +99,7 @@ export function ModuleViewer({
   };
 
   const nextSection = () => {
-    if (currentSection < sectionsLength - 1) {
+    if (currentSection < module.sections.length - 1) {
       setCurrentSection(currentSection + 1);
     }
   };
@@ -119,14 +110,14 @@ export function ModuleViewer({
     }
   };
 
-  const currentSectionData = module.sections?.[currentSection];
-  const isLastSection = currentSection === sectionsLength - 1;
+  const currentSectionData = module.sections[currentSection];
+  const isLastSection = currentSection === module.sections.length - 1;
   const isFirstSection = currentSection === 0;
 
   return (
-    <div className={cn('space-y-6', className)}>
+    <div className={cn("space-y-6", className)}>
       {/* Module Header */}
-      <Card className={cn('glass border-2', domainColors.borderColor, domainColors.bgColor)}>
+      <Card className={cn("glass border-2", domainColors.borderColor, domainColors.bgColor)}>
         <CardHeader>
           <div className="flex items-start justify-between">
             <div className="flex items-center gap-4">
@@ -135,15 +126,15 @@ export function ModuleViewer({
                 <CardTitle className="text-2xl text-foreground">{module.title}</CardTitle>
                 <p className="mt-2 text-muted-foreground">{module.description}</p>
                 <div className="mt-3 flex items-center gap-4">
-                  <Badge variant="outline" className={cn('border-white/20', domainColors.color)}>
+                  <Badge variant="outline" className={cn("border-white/20", domainColors.color)}>
                     <Clock className="mr-1 h-3 w-3" />
                     {module.estimatedTime}
                   </Badge>
-                  <Badge variant="outline" className={cn('border-white/20', domainColors.color)}>
+                  <Badge variant="outline" className={cn("border-white/20", domainColors.color)}>
                     <Target className="mr-1 h-3 w-3" />
-                    {objectivesLength} objectives
+                    {module.objectives.length} objectives
                   </Badge>
-                  <Badge variant="outline" className={cn('border-white/20', domainColors.color)}>
+                  <Badge variant="outline" className={cn("border-white/20", domainColors.color)}>
                     <Trophy className="mr-1 h-3 w-3" />
                     {module.examWeight}% exam weight
                   </Badge>
@@ -165,7 +156,7 @@ export function ModuleViewer({
                 <div className="flex items-center gap-2">
                   <Progress value={objectiveProgress} className="h-2 flex-1" />
                   <span className="text-sm text-foreground">
-                    {completedObjectives.size}/{objectivesLength}
+                    {completedObjectives.size}/{module.objectives.length}
                   </span>
                 </div>
               </div>
@@ -174,7 +165,7 @@ export function ModuleViewer({
                 <div className="flex items-center gap-2">
                   <Progress value={sectionProgress} className="h-2 flex-1" />
                   <span className="text-sm text-foreground">
-                    {completedSections.size}/{sectionsLength}
+                    {completedSections.size}/{module.sections.length}
                   </span>
                 </div>
               </div>
@@ -186,10 +177,7 @@ export function ModuleViewer({
       {/* Module Content Tabs */}
       <Tabs defaultValue="content" className="space-y-6">
         <TabsList className="glass grid w-full grid-cols-3 border border-white/10">
-          <TabsTrigger
-            value="content"
-            className="text-foreground data-[state=active]:bg-tanium-accent"
-          >
+          <TabsTrigger value="content" className="text-foreground data-[state=active]:bg-tanium-accent">
             <BookOpen className="mr-2 h-4 w-4" />
             Content
           </TabsTrigger>
@@ -200,10 +188,7 @@ export function ModuleViewer({
             <Target className="mr-2 h-4 w-4" />
             Objectives
           </TabsTrigger>
-          <TabsTrigger
-            value="progress"
-            className="text-foreground data-[state=active]:bg-tanium-accent"
-          >
+          <TabsTrigger value="progress" className="text-foreground data-[state=active]:bg-tanium-accent">
             <Trophy className="mr-2 h-4 w-4" />
             Progress
           </TabsTrigger>
@@ -216,11 +201,11 @@ export function ModuleViewer({
               <div className="flex items-center justify-between">
                 <CardTitle className="flex items-center gap-2 text-foreground">
                   <span className="text-tanium-accent">Section {currentSection + 1}:</span>
-                  {currentSectionData?.title || 'Loading...'}
+                  {currentSectionData.title}
                 </CardTitle>
                 <Badge variant="outline" className="border-white/20 text-foreground">
                   <Clock className="mr-1 h-3 w-3" />
-                  {currentSectionData?.estimatedTime || 0} min
+                  {currentSectionData.estimatedTime} min
                 </Badge>
               </div>
             </CardHeader>
@@ -228,7 +213,7 @@ export function ModuleViewer({
               {/* Section Content */}
               <div className="prose prose-invert max-w-none">
                 <p className="text-lg leading-relaxed text-muted-foreground">
-                  {currentSectionData?.content || 'Loading section content...'}
+                  {currentSectionData.content}
                 </p>
               </div>
 
@@ -246,14 +231,14 @@ export function ModuleViewer({
 
                 <div className="text-center">
                   <div className="mb-2 text-sm text-muted-foreground">
-                    Section {currentSection + 1} of {sectionsLength}
+                    Section {currentSection + 1} of {module.sections.length}
                   </div>
                   <Button
-                    onClick={() => currentSectionData && handleSectionComplete(currentSectionData.id)}
-                    disabled={!currentSectionData || completedSections.has(currentSectionData?.id || '')}
+                    onClick={() => handleSectionComplete(currentSectionData.id)}
+                    disabled={completedSections.has(currentSectionData.id)}
                     className="bg-[#22c55e] text-foreground hover:bg-green-700 disabled:bg-green-800"
                   >
-                    {currentSectionData && completedSections.has(currentSectionData.id) ? (
+                    {completedSections.has(currentSectionData.id) ? (
                       <>
                         <CheckCircle className="mr-2 h-4 w-4" />
                         Completed
@@ -286,15 +271,15 @@ export function ModuleViewer({
             </CardHeader>
             <CardContent>
               <div className="grid gap-3">
-                {module.sections?.map((section, index) => (
+                {module.sections.map((section, index) => (
                   <div
                     key={section.id}
                     className={cn(
-                      'flex cursor-pointer items-center justify-between rounded-lg border p-4 transition-colors',
+                      "flex cursor-pointer items-center justify-between rounded-lg border p-4 transition-colors",
                       currentSection === index
-                        ? 'border-tanium-accent bg-tanium-accent/10'
-                        : 'border-white/10 hover:border-white/20',
-                      completedSections.has(section.id) && 'border-green-400 bg-green-900/20'
+                        ? "border-tanium-accent bg-tanium-accent/10"
+                        : "border-white/10 hover:border-white/20",
+                      completedSections.has(section.id) && "border-green-400 bg-green-900/20"
                     )}
                     onClick={() => setCurrentSection(index)}
                   >
@@ -331,14 +316,14 @@ export function ModuleViewer({
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
-                {module.objectives?.map((objective, index) => (
+                {module.objectives.map((objective, index) => (
                   <div
                     key={objective.id}
                     className={cn(
-                      'flex cursor-pointer items-start gap-4 rounded-lg border p-4 transition-colors',
+                      "flex cursor-pointer items-start gap-4 rounded-lg border p-4 transition-colors",
                       completedObjectives.has(objective.id)
-                        ? 'border-green-400 bg-green-900/20'
-                        : 'border-white/10 hover:border-white/20'
+                        ? "border-green-400 bg-green-900/20"
+                        : "border-white/10 hover:border-white/20"
                     )}
                     onClick={() => handleObjectiveToggle(objective.id)}
                   >
@@ -348,10 +333,10 @@ export function ModuleViewer({
                       </div>
                       <div
                         className={cn(
-                          'flex h-5 w-5 items-center justify-center rounded border-2 transition-colors',
+                          "flex h-5 w-5 items-center justify-center rounded border-2 transition-colors",
                           completedObjectives.has(objective.id)
-                            ? 'border-green-400 bg-green-400'
-                            : 'border-white/20 hover:border-white/40'
+                            ? "border-green-400 bg-green-400"
+                            : "border-white/20 hover:border-white/40"
                         )}
                       >
                         {completedObjectives.has(objective.id) && (
@@ -362,8 +347,8 @@ export function ModuleViewer({
                     <div className="flex-1">
                       <p
                         className={cn(
-                          'leading-relaxed text-foreground',
-                          completedObjectives.has(objective.id) && 'line-through opacity-60'
+                          "leading-relaxed text-foreground",
+                          completedObjectives.has(objective.id) && "line-through opacity-60"
                         )}
                       >
                         {objective.text}
@@ -398,7 +383,7 @@ export function ModuleViewer({
                     <div className="mb-1 flex justify-between text-sm">
                       <span className="text-muted-foreground">Objectives Completed</span>
                       <span className="text-foreground">
-                        {completedObjectives.size}/{objectivesLength}
+                        {completedObjectives.size}/{module.objectives.length}
                       </span>
                     </div>
                     <Progress value={objectiveProgress} className="h-2" />
@@ -408,7 +393,7 @@ export function ModuleViewer({
                     <div className="mb-1 flex justify-between text-sm">
                       <span className="text-muted-foreground">Sections Completed</span>
                       <span className="text-foreground">
-                        {completedSections.size}/{sectionsLength}
+                        {completedSections.size}/{module.sections.length}
                       </span>
                     </div>
                     <Progress value={sectionProgress} className="h-2" />
@@ -437,8 +422,8 @@ export function ModuleViewer({
                 <div className="space-y-3">
                   <div className="flex justify-between">
                     <span className="text-muted-foreground">Domain</span>
-                    <Badge className={cn('text-xs', domainColors.color, domainColors.bgColor)}>
-                      {module.domain.replace('_', ' ')}
+                    <Badge className={cn("text-xs", domainColors.color, domainColors.bgColor)}>
+                      {module.domain.replace("_", " ")}
                     </Badge>
                   </div>
 
@@ -464,7 +449,7 @@ export function ModuleViewer({
                 <div className="border-t border-white/10 pt-4">
                   <div className="mb-2 text-sm text-muted-foreground">Tags</div>
                   <div className="flex flex-wrap gap-2">
-                    {module.tags?.map((tag) => (
+                    {module.tags.map((tag) => (
                       <Badge
                         key={tag}
                         variant="outline"

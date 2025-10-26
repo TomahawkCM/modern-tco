@@ -1,30 +1,30 @@
-'use client';
+"use client";
 
+import { useState } from "react";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Progress } from "@/components/ui/progress";
+import { Separator } from "@/components/ui/separator";
 import {
-  AlertTriangle,
-  BarChart3,
-  BookOpen,
-  Brain,
-  CheckCircle,
-  Clock,
+  Target,
   FileText,
+  AlertTriangle,
+  Clock,
+  Trophy,
+  BookOpen,
+  BarChart3,
   Play,
   RotateCcw,
-  Target,
-  Trophy,
-  Users,
+  CheckCircle,
   XCircle,
+  Users,
+  Brain,
   Zap,
-} from 'lucide-react';
-import { useState } from 'react';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { ExamTooltip } from '@/components/ui/help-tooltip';
-import { Progress } from '@/components/ui/progress';
-import { Separator } from '@/components/ui/separator';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { cn } from '@/lib/utils';
+} from "lucide-react";
+import { ExamTooltip, QuickTips } from "@/components/ui/help-tooltip";
+import { cn } from "@/lib/utils";
 
 interface ExamModeTabsProps {
   onModeSelect?: (mode: string, config?: any) => void;
@@ -39,7 +39,7 @@ export function ExamModeTabs({
   onModeSelect,
   currentProgress = { practice: 65, mock: 45, review: 80 },
 }: ExamModeTabsProps) {
-  const [selectedMode, setSelectedMode] = useState('practice');
+  const [selectedMode, setSelectedMode] = useState("practice");
 
   const handleModeStart = (mode: string, config?: any) => {
     setSelectedMode(mode);
@@ -50,107 +50,107 @@ export function ExamModeTabs({
   const examConfigs = {
     practice: [
       {
-        id: 'practice-mixed',
-        title: 'Mixed Questions',
-        description: 'Questions from all TCO domains',
+        id: "practice-mixed",
+        title: "Mixed Questions",
+        description: "Questions from all TCO domains",
         questions: 20,
         timeLimit: null,
-        difficulty: 'mixed',
+        difficulty: "mixed",
         icon: BookOpen,
-        color: 'text-primary',
-        bgColor: 'bg-blue-50 dark:bg-blue-900/20',
+        color: "text-primary",
+        bgColor: "bg-blue-50 dark:bg-blue-900/20",
       },
       {
-        id: 'practice-fundamentals',
-        title: 'Fundamentals Only',
-        description: 'Focus on basic concepts',
+        id: "practice-fundamentals",
+        title: "Fundamentals Only",
+        description: "Focus on basic concepts",
         questions: 15,
         timeLimit: null,
-        difficulty: 'basic',
+        difficulty: "basic",
         icon: Brain,
-        color: 'text-[#22c55e]',
-        bgColor: 'bg-green-50 dark:bg-green-900/20',
+        color: "text-[#22c55e]",
+        bgColor: "bg-green-50 dark:bg-green-900/20",
       },
       {
-        id: 'practice-advanced',
-        title: 'Advanced Topics',
-        description: 'Complex scenarios and analysis',
+        id: "practice-advanced",
+        title: "Advanced Topics",
+        description: "Complex scenarios and analysis",
         questions: 10,
         timeLimit: null,
-        difficulty: 'advanced',
+        difficulty: "advanced",
         icon: Zap,
-        color: 'text-primary',
-        bgColor: 'bg-cyan-50 dark:bg-primary/20',
+        color: "text-primary",
+        bgColor: "bg-cyan-50 dark:bg-primary/20",
       },
     ],
     mock: [
       {
-        id: 'mock-full',
-        title: 'Full Mock Exam',
-        description: 'Complete 75-question simulation',
+        id: "mock-full",
+        title: "Full Mock Exam",
+        description: "Complete 75-question simulation",
         questions: 75,
         timeLimit: 120,
-        difficulty: 'mixed',
+        difficulty: "mixed",
         icon: FileText,
-        color: 'text-orange-500',
-        bgColor: 'bg-orange-50 dark:bg-orange-900/20',
+        color: "text-orange-500",
+        bgColor: "bg-orange-50 dark:bg-orange-900/20",
       },
       {
-        id: 'mock-quick',
-        title: 'Quick Assessment',
-        description: '30-minute evaluation',
+        id: "mock-quick",
+        title: "Quick Assessment",
+        description: "30-minute evaluation",
         questions: 25,
         timeLimit: 30,
-        difficulty: 'mixed',
+        difficulty: "mixed",
         icon: Clock,
-        color: 'text-[#f97316]',
-        bgColor: 'bg-yellow-50 dark:bg-yellow-900/20',
+        color: "text-[#f97316]",
+        bgColor: "bg-yellow-50 dark:bg-yellow-900/20",
       },
       {
-        id: 'mock-domain',
-        title: 'Domain Focus',
-        description: 'Test specific knowledge area',
+        id: "mock-domain",
+        title: "Domain Focus",
+        description: "Test specific knowledge area",
         questions: 40,
         timeLimit: 60,
-        difficulty: 'mixed',
+        difficulty: "mixed",
         icon: Target,
-        color: 'text-red-500',
-        bgColor: 'bg-red-50 dark:bg-red-900/20',
+        color: "text-red-500",
+        bgColor: "bg-red-50 dark:bg-red-900/20",
       },
     ],
     review: [
       {
-        id: 'review-missed',
-        title: 'Missed Questions',
-        description: 'Review your incorrect answers',
+        id: "review-missed",
+        title: "Missed Questions",
+        description: "Review your incorrect answers",
         questions: 12,
         timeLimit: null,
-        difficulty: 'mixed',
+        difficulty: "mixed",
         icon: XCircle,
-        color: 'text-red-500',
-        bgColor: 'bg-red-50 dark:bg-red-900/20',
+        color: "text-red-500",
+        bgColor: "bg-red-50 dark:bg-red-900/20",
       },
       {
-        id: 'review-flagged',
-        title: 'Flagged for Review',
-        description: 'Questions you marked for later',
+        id: "review-flagged",
+        title: "Flagged for Review",
+        description: "Questions you marked for later",
         questions: 8,
         timeLimit: null,
-        difficulty: 'mixed',
+        difficulty: "mixed",
         icon: AlertTriangle,
-        color: 'text-amber-500',
-        bgColor: 'bg-amber-50 dark:bg-amber-900/20',
+        color: "text-amber-500",
+        bgColor: "bg-amber-50 dark:bg-amber-900/20",
       },
       {
-        id: 'review-weak',
-        title: 'Weak Areas',
-        description: 'Focus on low-scoring domains',
+        id: "review-weak",
+        title: "Weak Areas",
+        description: "Focus on low-scoring domains",
         questions: 15,
         timeLimit: null,
-        difficulty: 'mixed',
+        difficulty: "mixed",
         icon: BarChart3,
-        color: 'text-primary',
-        bgColor: 'bg-blue-50 dark:bg-blue-900/20',
+        color: "text-primary",
+        bgColor: "bg-blue-50 dark:bg-blue-900/20",
       },
     ],
   };
@@ -162,8 +162,8 @@ export function ExamModeTabs({
       <Card
         key={config.id}
         className={cn(
-          'cursor-pointer transition-all duration-200 hover:shadow-md',
-          'border-2 hover:border-primary/50',
+          "cursor-pointer transition-all duration-200 hover:shadow-md",
+          "border-2 hover:border-primary/50",
           config.bgColor
         )}
         onClick={() => handleModeStart(selectedMode, config)}
@@ -171,8 +171,8 @@ export function ExamModeTabs({
         <CardHeader className="pb-3">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
-              <div className={cn('rounded-lg bg-white/50 p-2 dark:bg-black/20')}>
-                <Icon className={cn('h-5 w-5', config.color)} />
+              <div className={cn("rounded-lg bg-white/50 p-2 dark:bg-black/20")}>
+                <Icon className={cn("h-5 w-5", config.color)} />
               </div>
               <div>
                 <CardTitle className="text-lg">{config.title}</CardTitle>

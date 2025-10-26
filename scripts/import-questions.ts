@@ -14,9 +14,9 @@
  * - RD (33 questions) → REPORTING_EXPORT (17% - target ~698 questions)
  */
 
-import fs from 'fs';
-import path from 'path';
-import { Difficulty, type Question, QuestionCategory, TCODomain } from '../src/types/exam';
+import fs from "fs";
+import path from "path";
+import { Question, TCODomain, Difficulty, QuestionCategory } from "../src/types/exam";
 
 // Legacy question interface
 interface LegacyQuestion {
@@ -51,47 +51,47 @@ const DIFFICULTY_MAPPING: Record<number, Difficulty> = {
 
 // Category assignment based on tags and content
 function assignCategory(question: LegacyQuestion): QuestionCategory {
-  const tags = question.tags.join(' ').toLowerCase();
+  const tags = question.tags.join(" ").toLowerCase();
   const stem = question.stem.toLowerCase();
 
   // Platform fundamentals
   if (
-    tags.includes('fundamentals') ||
-    tags.includes('basic-concepts') ||
-    tags.includes('architecture') ||
-    tags.includes('core-components')
+    tags.includes("fundamentals") ||
+    tags.includes("basic-concepts") ||
+    tags.includes("architecture") ||
+    tags.includes("core-components")
   ) {
     return QuestionCategory.PLATFORM_FUNDAMENTALS;
   }
 
   // Console procedures
   if (
-    tags.includes('console') ||
-    tags.includes('navigation') ||
-    tags.includes('workflow') ||
-    tags.includes('interface')
+    tags.includes("console") ||
+    tags.includes("navigation") ||
+    tags.includes("workflow") ||
+    tags.includes("interface")
   ) {
     return QuestionCategory.CONSOLE_PROCEDURES;
   }
 
   // Troubleshooting
   if (
-    tags.includes('troubleshooting') ||
-    tags.includes('diagnosis') ||
-    tags.includes('debug') ||
-    stem.includes('troubleshoot') ||
-    stem.includes('no results') ||
-    stem.includes('error')
+    tags.includes("troubleshooting") ||
+    tags.includes("diagnosis") ||
+    tags.includes("debug") ||
+    stem.includes("troubleshoot") ||
+    stem.includes("no results") ||
+    stem.includes("error")
   ) {
     return QuestionCategory.TROUBLESHOOTING;
   }
 
   // Linear chain architecture
   if (
-    tags.includes('linear-chain') ||
-    tags.includes('peer-to-peer') ||
-    tags.includes('client-communication') ||
-    tags.includes('scalability')
+    tags.includes("linear-chain") ||
+    tags.includes("peer-to-peer") ||
+    tags.includes("client-communication") ||
+    tags.includes("scalability")
   ) {
     return QuestionCategory.LINEAR_CHAIN;
   }
@@ -103,12 +103,12 @@ function assignCategory(question: LegacyQuestion): QuestionCategory {
 // Convert answer letter to choice ID
 function convertAnswerToChoiceId(answerLetter: string): string {
   const mapping: Record<string, string> = {
-    A: 'a',
-    B: 'b',
-    C: 'c',
-    D: 'd',
+    A: "a",
+    B: "b",
+    C: "c",
+    D: "d",
   };
-  return mapping[answerLetter.toUpperCase()] || 'a';
+  return mapping[answerLetter.toUpperCase()] || "a";
 }
 
 // Convert legacy question to modern format
@@ -129,32 +129,32 @@ function convertLegacyQuestion(legacy: LegacyQuestion): Question {
     explanation: legacy.explanation,
     tags: legacy.tags,
     studyGuideRef: legacy.refs
-      .find((ref) => ref.startsWith('archonkb://'))
-      ?.replace('archonkb://', ''),
+      .find((ref) => ref.startsWith("archonkb://"))
+      ?.replace("archonkb://", ""),
     officialRef: legacy.refs
-      .find((ref) => ref.startsWith('official://'))
-      ?.replace('official://', ''),
+      .find((ref) => ref.startsWith("official://"))
+      ?.replace("official://", ""),
   };
 }
 
 // Main import function
 async function importQuestions() {
-  console.log('🚀 Starting TCO Question Import Process...');
+  console.log("🚀 Starting TCO Question Import Process...");
 
   // Read the master questions file
-  const masterFilePath = path.join(process.cwd(), '../docs/Exam_Pools/questions_master.json');
+  const masterFilePath = path.join(process.cwd(), "../docs/Exam_Pools/questions_master.json");
 
   if (!fs.existsSync(masterFilePath)) {
     throw new Error(`Master questions file not found at: ${masterFilePath}`);
   }
 
-  console.log('📖 Reading master questions file...');
-  const masterData = JSON.parse(fs.readFileSync(masterFilePath, 'utf8')) as LegacyQuestion[];
+  console.log("📖 Reading master questions file...");
+  const masterData = JSON.parse(fs.readFileSync(masterFilePath, "utf8")) as LegacyQuestion[];
 
   console.log(`📊 Found ${masterData.length} questions to import`);
 
   // Convert all questions
-  console.log('🔄 Converting questions to modern format...');
+  console.log("🔄 Converting questions to modern format...");
   const convertedQuestions: Question[] = masterData.map(convertLegacyQuestion);
 
   // Group questions by domain for balanced distribution
@@ -170,13 +170,13 @@ async function importQuestions() {
   );
 
   // Display statistics
-  console.log('\n📈 Import Statistics:');
+  console.log("\n📈 Import Statistics:");
   Object.entries(questionsByDomain).forEach(([domain, questions]) => {
     console.log(`  ${domain}: ${questions.length} questions`);
   });
 
   // Generate TypeScript files for each domain
-  const dataDir = path.join(process.cwd(), 'src/data');
+  const dataDir = path.join(process.cwd(), "src/data");
   if (!fs.existsSync(dataDir)) {
     fs.mkdirSync(dataDir, { recursive: true });
   }
@@ -192,7 +192,7 @@ async function importQuestions() {
  * Distribution:
 ${Object.entries(questionsByDomain)
   .map(([domain, questions]) => ` * ${domain}: ${questions.length} questions`)
-  .join('\n')}
+  .join("\n")}
  */
 
 export const importedQuestionBank: Question[] = ${JSON.stringify(convertedQuestions, null, 2)}
@@ -204,7 +204,7 @@ export const importedQuestionBankMetadata = {
   domainDistribution: {
 ${Object.entries(questionsByDomain)
   .map(([domain, questions]) => `    '${domain}': ${questions.length}`)
-  .join(',\n')}
+  .join(",\n")}
   },
   difficultyDistribution: {
     [Difficulty.BEGINNER]: ${convertedQuestions.filter((q) => q.difficulty === Difficulty.BEGINNER).length},
@@ -221,7 +221,7 @@ ${Object.entries(questionsByDomain)
 }
 `;
 
-  const masterOutputPath = path.join(dataDir, 'imported-questions-master.ts');
+  const masterOutputPath = path.join(dataDir, "imported-questions-master.ts");
   fs.writeFileSync(masterOutputPath, masterImportFile);
 
   console.log(`✅ Generated master import file: ${masterOutputPath}`);
@@ -229,9 +229,9 @@ ${Object.entries(questionsByDomain)
   // Generate domain-specific files
   Object.entries(questionsByDomain).forEach(([domain, questions]) => {
     const domainCode = domain
-      .split(' ')[0]
+      .split(" ")[0]
       .toLowerCase()
-      .replace(/[^a-z]/g, '');
+      .replace(/[^a-z]/g, "");
     const fileName = `questions-${domainCode}.ts`;
     const filePath = path.join(dataDir, fileName);
 
@@ -260,9 +260,9 @@ export const ${domainCode}QuestionMetadata = {
   });
 
   // Update the main sample-questions.ts to include imported questions
-  console.log('📝 Updating sample-questions.ts...');
+  console.log("📝 Updating sample-questions.ts...");
 
-  const sampleQuestionsPath = path.join(dataDir, 'sample-questions.ts');
+  const sampleQuestionsPath = path.join(dataDir, "sample-questions.ts");
   const updatedSampleQuestions = `import { Question, TCODomain, Difficulty, QuestionCategory } from '@/types/exam'
 import { importedQuestionBank, importedQuestionBankMetadata } from './imported-questions-master'
 
@@ -308,12 +308,12 @@ export const sampleQuestions: Question[] = questionBank
 `;
 
   fs.writeFileSync(sampleQuestionsPath, updatedSampleQuestions);
-  console.log('✅ Updated sample-questions.ts with imported questions');
+  console.log("✅ Updated sample-questions.ts with imported questions");
 
-  console.log('\n🎉 Import Complete!');
+  console.log("\n🎉 Import Complete!");
   console.log(`📊 Total Questions Imported: ${convertedQuestions.length}`);
   console.log(`📁 Files Generated: ${Object.keys(questionsByDomain).length + 2}`);
-  console.log('🏃‍♂️ Ready to test the TCO application!');
+  console.log("🏃‍♂️ Ready to test the TCO application!");
 
   return {
     totalQuestions: convertedQuestions.length,

@@ -1,0 +1,44 @@
+{
+  "recommendations": [
+    // Essential TypeScript & JavaScript
+    "esbenp.prettier-vscode",
+    "dbaeumer.vscode-eslint",
+    "ms-vscode.vscode-typescript-next",
+    "yoavbls.pretty-ts-errors",
+
+    // React & Next.js Development
+    "bradlc.vscode-tailwindcss",
+    "formulahendry.auto-rename-tag",
+    "ms-vscode.vscode-json",
+
+    // Error Visualization & Debugging
+    "usernamehw.errorlens",
+
+    // Testing & Quality
+    "ms-playwright.playwright",
+    "ms-vscode.vscode-jest",
+
+    // Git & Version Control
+    "eamodio.gitlens",
+    "github.vscode-pull-request-github",
+
+    // Productivity & Navigation
+    "christian-kohler.path-intellisense",
+    "christian-kohler.npm-intellisense",
+    "alefragnani.bookmarks",
+
+    // Markdown & MDX
+    "unifiedjs.vscode-mdx",
+    "yzhang.markdown-all-in-one",
+    "davidanson.vscode-markdownlint",
+
+    // Database (Supabase)
+    "mtxr.sqltools",
+    "mtxr.sqltools-driver-pg"
+  ],
+  "unwantedRecommendations": [
+    "ms-vscode.vscode-typescript",
+    "hookyqr.beautify",
+    "ms-vscode.sublime-keybindings"
+  ]
+}

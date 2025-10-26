@@ -1,25 +1,25 @@
-import createMDX from '@next/mdx';
-import rehypeAutolinkHeadings from 'rehype-autolink-headings';
-import rehypePrettyCode from 'rehype-pretty-code';
-import rehypeSlug from 'rehype-slug';
+import createMDX from "@next/mdx";
 // import withPWA from "next-pwa";
-import remarkGfm from 'remark-gfm';
+import remarkGfm from "remark-gfm";
+import rehypeSlug from "rehype-slug";
+import rehypeAutolinkHeadings from "rehype-autolink-headings";
+import rehypePrettyCode from "rehype-pretty-code";
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  pageExtensions: ['ts', 'tsx', 'mdx'],
+  pageExtensions: ["ts", "tsx", "mdx"],
 
   // Disable static optimization for error pages to avoid build issues
   generateBuildId: async () => {
-    return 'build-' + Date.now();
+    return 'build-' + Date.now()
   },
 
   // Performance optimizations
   compiler: {
-    removeConsole: process.env.NODE_ENV === 'production',
+    removeConsole: process.env.NODE_ENV === "production",
   },
-
+  
   // Optimize CSS and imports
   experimental: {
     optimizeCss: true,
@@ -27,36 +27,36 @@ const nextConfig = {
     staticGenerationRetryCount: 0,
     staticGenerationMaxConcurrency: 1,
     optimizePackageImports: [
-      '@radix-ui/react-icons',
-      'lucide-react',
-      '@supabase/supabase-js',
-      'framer-motion',
-      'date-fns',
-      'recharts',
-      '@radix-ui/react-dialog',
-      '@radix-ui/react-dropdown-menu',
-      '@radix-ui/react-select',
-      '@radix-ui/react-slot',
-      '@radix-ui/react-tabs',
-      '@radix-ui/react-tooltip',
-      '@radix-ui/react-avatar',
-      '@radix-ui/react-checkbox',
-      '@radix-ui/react-label',
-      '@radix-ui/react-popover',
-      '@radix-ui/react-progress',
-      '@radix-ui/react-radio-group',
-      '@radix-ui/react-separator',
-      '@radix-ui/react-switch',
-      '@radix-ui/react-toast',
-      'class-variance-authority',
-      'tailwind-merge',
-      'clsx',
+      "@radix-ui/react-icons",
+      "lucide-react",
+      "@supabase/supabase-js",
+      "framer-motion",
+      "date-fns",
+      "recharts",
+      "@radix-ui/react-dialog",
+      "@radix-ui/react-dropdown-menu",
+      "@radix-ui/react-select",
+      "@radix-ui/react-slot",
+      "@radix-ui/react-tabs",
+      "@radix-ui/react-tooltip",
+      "@radix-ui/react-avatar",
+      "@radix-ui/react-checkbox",
+      "@radix-ui/react-label",
+      "@radix-ui/react-popover",
+      "@radix-ui/react-progress",
+      "@radix-ui/react-radio-group",
+      "@radix-ui/react-separator",
+      "@radix-ui/react-switch",
+      "@radix-ui/react-toast",
+      "class-variance-authority",
+      "tailwind-merge",
+      "clsx"
     ],
   },
-
+  
   // Image optimization
   images: {
-    formats: ['image/avif', 'image/webp'],
+    formats: ["image/avif", "image/webp"],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
   },
@@ -67,15 +67,15 @@ const nextConfig = {
       // Optimize bundle splitting
       config.optimization = {
         ...config.optimization,
-        runtimeChunk: 'single',
+        runtimeChunk: "single",
         splitChunks: {
-          chunks: 'all',
+          chunks: "all",
           cacheGroups: {
             default: false,
             vendors: false,
             framework: {
-              name: 'framework',
-              chunks: 'all',
+              name: "framework",
+              chunks: "all",
               test: /[\\/]node_modules[\\/](react|react-dom|scheduler|prop-types|use-subscription)[\\/]/,
               priority: 40,
               enforce: true,
@@ -84,20 +84,22 @@ const nextConfig = {
               test: /[\\/]node_modules[\\/]/,
               name(module) {
                 const packageName = module.context.match(/[\\/]node_modules[\\/](.*?)[\\/]/)?.[1];
-                return `npm.${packageName?.replace('@', '')}`;
+                return `npm.${packageName?.replace("@", "")}`;
               },
               priority: 30,
               minChunks: 1,
               reuseExistingChunk: true,
             },
             commons: {
-              name: 'commons',
+              name: "commons",
               minChunks: 2,
               priority: 20,
             },
             shared: {
               name(module, chunks) {
-                return `shared-${chunks.map((chunk) => chunk.name).join('-')}`.substring(0, 30);
+                return `shared-${chunks
+                  .map((chunk) => chunk.name)
+                  .join("-")}`.substring(0, 30);
               },
               priority: 10,
               reuseExistingChunk: true,
@@ -109,7 +111,7 @@ const nextConfig = {
       };
 
       // Enable tree shaking for production
-      if (process.env.NODE_ENV === 'production') {
+      if (process.env.NODE_ENV === "production") {
         config.optimization.usedExports = true;
         config.optimization.sideEffects = false;
       }
@@ -121,34 +123,34 @@ const nextConfig = {
   async headers() {
     return [
       {
-        source: '/:path*',
+        source: "/:path*",
         headers: [
           {
-            key: 'X-DNS-Prefetch-Control',
-            value: 'on',
+            key: "X-DNS-Prefetch-Control",
+            value: "on",
           },
           {
-            key: 'X-Content-Type-Options',
-            value: 'nosniff',
+            key: "X-Content-Type-Options",
+            value: "nosniff",
           },
           {
-            key: 'X-Frame-Options',
-            value: 'SAMEORIGIN',
+            key: "X-Frame-Options",
+            value: "SAMEORIGIN",
           },
           {
-            key: 'X-XSS-Protection',
-            value: '1; mode=block',
+            key: "X-XSS-Protection",
+            value: "1; mode=block",
           },
           {
-            key: 'Referrer-Policy',
-            value: 'strict-origin-when-cross-origin',
+            key: "Referrer-Policy",
+            value: "strict-origin-when-cross-origin",
           },
           {
-            key: 'Permissions-Policy',
-            value: 'camera=(), microphone=(), geolocation=()',
+            key: "Permissions-Policy",
+            value: "camera=(), microphone=(), geolocation=()",
           },
           {
-            key: 'Content-Security-Policy',
+            key: "Content-Security-Policy",
             value: [
               "default-src 'self'",
               "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.youtube.com https://www.youtube-nocookie.com https://app.posthog.com https://cdn.jsdelivr.net",
@@ -162,26 +164,26 @@ const nextConfig = {
               "base-uri 'self'",
               "form-action 'self'",
               "frame-ancestors 'none'",
-              'upgrade-insecure-requests',
-            ].join('; '),
+              "upgrade-insecure-requests"
+            ].join("; "),
           },
         ],
       },
       {
-        source: '/fonts/:path*',
+        source: "/fonts/:path*",
         headers: [
           {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable',
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
           },
         ],
       },
       {
-        source: '/_next/static/:path*',
+        source: "/_next/static/:path*",
         headers: [
           {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable',
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
           },
         ],
       },
@@ -199,14 +201,14 @@ const withMDX = createMDX({
       [
         rehypeAutolinkHeadings,
         {
-          behavior: 'wrap',
-          properties: { className: 'anchor' },
+          behavior: "wrap",
+          properties: { className: "anchor" },
         },
       ],
       [
         rehypePrettyCode,
         {
-          theme: 'github-dark',
+          theme: "github-dark",
           keepBackground: true,
         },
       ],

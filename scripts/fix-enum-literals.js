@@ -1,13 +1,13 @@
-const fs = require('fs');
-const path = require('path');
+const fs = require("fs");
+const path = require("path");
 
 // File path
-const filePath = path.join(__dirname, '..', 'src', 'data', 'imported-questions-master.ts');
+const filePath = path.join(__dirname, "..", "src", "data", "imported-questions-master.ts");
 
-console.log('Starting enum literal fixes...');
+console.log("Starting enum literal fixes...");
 
 // Read the file
-let content = fs.readFileSync(filePath, 'utf8');
+let content = fs.readFileSync(filePath, "utf8");
 console.log(`File size: ${content.length} characters`);
 
 // Count original occurrences
@@ -59,12 +59,12 @@ content = content.replace(
 );
 
 // Write the file back
-fs.writeFileSync(filePath, content, 'utf8');
+fs.writeFileSync(filePath, content, "utf8");
 
-console.log('Enum literal fixes completed!');
+console.log("Enum literal fixes completed!");
 
 // Verify changes
-const newContent = fs.readFileSync(filePath, 'utf8');
+const newContent = fs.readFileSync(filePath, "utf8");
 const remainingDifficultyStrings = (newContent.match(/"difficulty": "[^"]*",/g) || []).length;
 const remainingCategoryStrings = (newContent.match(/"category": "[^"]*",/g) || []).length;
 
@@ -72,7 +72,7 @@ console.log(`Remaining difficulty strings: ${remainingDifficultyStrings}`);
 console.log(`Remaining category strings: ${remainingCategoryStrings}`);
 
 if (remainingDifficultyStrings === 0 && remainingCategoryStrings === 0) {
-  console.log('✅ All enum conversions completed successfully!');
+  console.log("✅ All enum conversions completed successfully!");
 } else {
-  console.log('⚠️ Some string literals may still remain');
+  console.log("⚠️ Some string literals may still remain");
 }

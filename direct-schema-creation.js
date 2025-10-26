@@ -1,17 +1,17 @@
 // Direct schema creation with service role key - FULL DATABASE ACCESS
-require('dotenv').config({ path: '.env.local' });
-const https = require('https');
+require("dotenv").config({ path: ".env.local" });
+const https = require("https");
 
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
 const PROJECT_REF = process.env.SUPABASE_PROJECT_REF;
 
-console.log('🚀 DIRECT SCHEMA CREATION WITH SERVICE ROLE ACCESS');
-console.log('URL:', SUPABASE_URL);
-console.log('Project:', PROJECT_REF);
+console.log("🚀 DIRECT SCHEMA CREATION WITH SERVICE ROLE ACCESS");
+console.log("URL:", SUPABASE_URL);
+console.log("Project:", PROJECT_REF);
 console.log(
-  'Service Role Key:',
-  SERVICE_ROLE_KEY ? `${SERVICE_ROLE_KEY.slice(0, 20)}...` : 'MISSING'
+  "Service Role Key:",
+  SERVICE_ROLE_KEY ? `${SERVICE_ROLE_KEY.slice(0, 20)}...` : "MISSING"
 );
 
 // DDL statements to execute
@@ -65,10 +65,10 @@ const ddlStatements = [
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
   );`,
 
-  'CREATE INDEX IF NOT EXISTS idx_study_modules_domain_id ON study_modules(domain_id);',
-  'CREATE INDEX IF NOT EXISTS idx_study_sections_module_id ON study_sections(module_id);',
-  'CREATE INDEX IF NOT EXISTS idx_practice_questions_domain_id ON practice_questions(domain_id);',
-  'CREATE INDEX IF NOT EXISTS idx_practice_questions_module_id ON practice_questions(module_id);',
+  "CREATE INDEX IF NOT EXISTS idx_study_modules_domain_id ON study_modules(domain_id);",
+  "CREATE INDEX IF NOT EXISTS idx_study_sections_module_id ON study_sections(module_id);",
+  "CREATE INDEX IF NOT EXISTS idx_practice_questions_domain_id ON practice_questions(domain_id);",
+  "CREATE INDEX IF NOT EXISTS idx_practice_questions_module_id ON practice_questions(module_id);",
 
   `INSERT INTO study_domains (domain_number, title, exam_weight, estimated_time_minutes) VALUES
     (1, 'Asking Questions', 22, 180),
@@ -82,10 +82,10 @@ const ddlStatements = [
     estimated_time_minutes = EXCLUDED.estimated_time_minutes,
     updated_at = NOW();`,
 
-  'ALTER TABLE study_domains ENABLE ROW LEVEL SECURITY;',
-  'ALTER TABLE study_modules ENABLE ROW LEVEL SECURITY;',
-  'ALTER TABLE study_sections ENABLE ROW LEVEL SECURITY;',
-  'ALTER TABLE practice_questions ENABLE ROW LEVEL SECURITY;',
+  "ALTER TABLE study_domains ENABLE ROW LEVEL SECURITY;",
+  "ALTER TABLE study_modules ENABLE ROW LEVEL SECURITY;",
+  "ALTER TABLE study_sections ENABLE ROW LEVEL SECURITY;",
+  "ALTER TABLE practice_questions ENABLE ROW LEVEL SECURITY;",
 
   'CREATE POLICY IF NOT EXISTS "Enable read access for all users" ON study_domains FOR SELECT USING (true);',
   'CREATE POLICY IF NOT EXISTS "Enable read access for all users" ON study_modules FOR SELECT USING (true);',
@@ -100,21 +100,21 @@ async function executeSQL(sql) {
     const options = {
       hostname: `${PROJECT_REF}.supabase.co`,
       port: 443,
-      path: '/rest/v1/rpc/query',
-      method: 'POST',
+      path: "/rest/v1/rpc/query",
+      method: "POST",
       headers: {
         Authorization: `Bearer ${SERVICE_ROLE_KEY}`,
         apikey: SERVICE_ROLE_KEY,
-        'Content-Type': 'application/json',
-        'Content-Length': Buffer.byteLength(postData),
-        Prefer: 'return=minimal',
+        "Content-Type": "application/json",
+        "Content-Length": Buffer.byteLength(postData),
+        Prefer: "return=minimal",
       },
     };
 
     const req = https.request(options, (res) => {
-      let data = '';
-      res.on('data', (chunk) => (data += chunk));
-      res.on('end', () => {
+      let data = "";
+      res.on("data", (chunk) => (data += chunk));
+      res.on("end", () => {
         if (res.statusCode >= 200 && res.statusCode < 300) {
           resolve({ success: true, data: data });
         } else {
@@ -123,7 +123,7 @@ async function executeSQL(sql) {
       });
     });
 
-    req.on('error', (error) => {
+    req.on("error", (error) => {
       resolve({ success: false, error: error.message });
     });
 
@@ -140,20 +140,20 @@ async function executeDirectSQL(sql) {
     const options = {
       hostname: `${PROJECT_REF}.supabase.co`,
       port: 443,
-      path: '/rest/v1/',
-      method: 'POST',
+      path: "/rest/v1/",
+      method: "POST",
       headers: {
         Authorization: `Bearer ${SERVICE_ROLE_KEY}`,
         apikey: SERVICE_ROLE_KEY,
-        'Content-Type': 'application/sql',
-        'Content-Length': Buffer.byteLength(postData),
+        "Content-Type": "application/sql",
+        "Content-Length": Buffer.byteLength(postData),
       },
     };
 
     const req = https.request(options, (res) => {
-      let data = '';
-      res.on('data', (chunk) => (data += chunk));
-      res.on('end', () => {
+      let data = "";
+      res.on("data", (chunk) => (data += chunk));
+      res.on("end", () => {
         resolve({
           success: res.statusCode >= 200 && res.statusCode < 300,
           status: res.statusCode,
@@ -162,7 +162,7 @@ async function executeDirectSQL(sql) {
       });
     });
 
-    req.on('error', (error) => {
+    req.on("error", (error) => {
       resolve({ success: false, error: error.message });
     });
 
@@ -172,7 +172,7 @@ async function executeDirectSQL(sql) {
 }
 
 async function createSchema() {
-  console.log('\n📊 Executing DDL statements with SERVICE ROLE access...');
+  console.log("\n📊 Executing DDL statements with SERVICE ROLE access...");
 
   let successCount = 0;
   let errorCount = 0;
@@ -185,17 +185,17 @@ async function createSchema() {
     let result = await executeDirectSQL(sql);
 
     if (result.success) {
-      console.log('   ✅ SUCCESS');
+      console.log("   ✅ SUCCESS");
       successCount++;
     } else {
       console.log(`   ❌ FAILED (${result.status}): ${result.data || result.error}`);
 
       // Try RPC approach as fallback
-      console.log('   🔄 Trying RPC approach...');
+      console.log("   🔄 Trying RPC approach...");
       result = await executeSQL(sql);
 
       if (result.success) {
-        console.log('   ✅ SUCCESS (RPC)');
+        console.log("   ✅ SUCCESS (RPC)");
         successCount++;
       } else {
         console.log(`   ❌ FAILED (RPC): ${result.error}`);
@@ -209,23 +209,23 @@ async function createSchema() {
   console.log(`   ❌ Failed: ${errorCount}`);
 
   if (successCount > 0) {
-    console.log('\n🔍 Verifying table creation...');
+    console.log("\n🔍 Verifying table creation...");
     // Try to query the tables
     const verifySQL =
       "SELECT table_name FROM information_schema.tables WHERE table_schema = 'public' AND table_name LIKE 'study_%'";
     const verifyResult = await executeDirectSQL(verifySQL);
 
     if (verifyResult.success) {
-      console.log('🎉 TABLES CREATED SUCCESSFULLY!');
-      console.log('Tables:', verifyResult.data);
+      console.log("🎉 TABLES CREATED SUCCESSFULLY!");
+      console.log("Tables:", verifyResult.data);
     } else {
-      console.log('⚠️  Tables may have been created but verification failed');
+      console.log("⚠️  Tables may have been created but verification failed");
     }
   }
 }
 
 if (!SERVICE_ROLE_KEY) {
-  console.log('❌ SERVICE_ROLE_KEY not found in environment');
+  console.log("❌ SERVICE_ROLE_KEY not found in environment");
   process.exit(1);
 }
 

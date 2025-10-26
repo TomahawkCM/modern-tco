@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef } from "react";
 
 interface UseScreenReaderOptions {
-  politeness?: 'polite' | 'assertive';
+  politeness?: "polite" | "assertive";
   atomic?: boolean;
 }
 
@@ -13,16 +13,16 @@ export function useScreenReader() {
   useEffect(() => {
     // Create live region if it doesn't exist
     if (!liveRegionRef.current) {
-      const liveRegion = document.createElement('div');
-      liveRegion.setAttribute('aria-live', 'polite');
-      liveRegion.setAttribute('aria-atomic', 'true');
-      liveRegion.setAttribute('aria-relevant', 'additions text');
-      liveRegion.style.position = 'absolute';
-      liveRegion.style.left = '-10000px';
-      liveRegion.style.width = '1px';
-      liveRegion.style.height = '1px';
-      liveRegion.style.overflow = 'hidden';
-      liveRegion.id = 'screen-reader-announcements';
+      const liveRegion = document.createElement("div");
+      liveRegion.setAttribute("aria-live", "polite");
+      liveRegion.setAttribute("aria-atomic", "true");
+      liveRegion.setAttribute("aria-relevant", "additions text");
+      liveRegion.style.position = "absolute";
+      liveRegion.style.left = "-10000px";
+      liveRegion.style.width = "1px";
+      liveRegion.style.height = "1px";
+      liveRegion.style.overflow = "hidden";
+      liveRegion.id = "screen-reader-announcements";
 
       document.body.appendChild(liveRegion);
       liveRegionRef.current = liveRegion;
@@ -37,16 +37,16 @@ export function useScreenReader() {
   }, []);
 
   const announce = (message: string, options: UseScreenReaderOptions = {}) => {
-    const { politeness = 'polite', atomic = true } = options;
+    const { politeness = "polite", atomic = true } = options;
 
     if (!liveRegionRef.current) return;
 
     // Update live region attributes
-    liveRegionRef.current.setAttribute('aria-live', politeness);
-    liveRegionRef.current.setAttribute('aria-atomic', atomic.toString());
+    liveRegionRef.current.setAttribute("aria-live", politeness);
+    liveRegionRef.current.setAttribute("aria-atomic", atomic.toString());
 
     // Clear existing content and add new message
-    liveRegionRef.current.innerHTML = '';
+    liveRegionRef.current.innerHTML = "";
     setTimeout(() => {
       if (liveRegionRef.current) {
         liveRegionRef.current.textContent = message;
@@ -56,17 +56,17 @@ export function useScreenReader() {
     // Clear message after announcement
     setTimeout(() => {
       if (liveRegionRef.current) {
-        liveRegionRef.current.textContent = '';
+        liveRegionRef.current.textContent = "";
       }
     }, 5000);
   };
 
   const announceImmediate = (message: string) => {
-    announce(message, { politeness: 'assertive' });
+    announce(message, { politeness: "assertive" });
   };
 
   const announcePolite = (message: string) => {
-    announce(message, { politeness: 'polite' });
+    announce(message, { politeness: "polite" });
   };
 
   return {
@@ -81,15 +81,15 @@ export function useFocusAnnouncement() {
   const { announce } = useScreenReader();
 
   const announceFocus = (element: HTMLElement) => {
-    const role = element.getAttribute('role');
+    const role = element.getAttribute("role");
     const label =
-      element.getAttribute('aria-label') ||
-      element.getAttribute('title') ||
+      element.getAttribute("aria-label") ||
+      element.getAttribute("title") ||
       element.textContent?.trim();
 
     if (label) {
       const announcement = role ? `${role}, ${label}` : label;
-      announce(announcement, { politeness: 'polite' });
+      announce(announcement, { politeness: "polite" });
     }
   };
 
@@ -98,11 +98,11 @@ export function useFocusAnnouncement() {
     if (total && index !== undefined) {
       message += `, ${index + 1} of ${total}`;
     }
-    announce(message, { politeness: 'polite' });
+    announce(message, { politeness: "polite" });
   };
 
   const announceStatus = (status: string) => {
-    announce(status, { politeness: 'assertive' });
+    announce(status, { politeness: "assertive" });
   };
 
   return {
@@ -118,11 +118,11 @@ export function useExamAnnouncements() {
 
   const announceQuestion = (questionNumber: number, totalQuestions: number, question: string) => {
     const message = `Question ${questionNumber} of ${totalQuestions}: ${question}`;
-    announce(message, { politeness: 'polite' });
+    announce(message, { politeness: "polite" });
   };
 
   const announceAnswer = (isCorrect: boolean, explanation?: string) => {
-    const result = isCorrect ? 'Correct answer' : 'Incorrect answer';
+    const result = isCorrect ? "Correct answer" : "Incorrect answer";
     let message = result;
     if (explanation) {
       message += `. ${explanation}`;
@@ -132,7 +132,7 @@ export function useExamAnnouncements() {
 
   const announceProgress = (current: number, total: number, percentage: number) => {
     const message = `Progress: ${current} of ${total} questions completed, ${percentage}% complete`;
-    announce(message, { politeness: 'polite' });
+    announce(message, { politeness: "polite" });
   };
 
   const announceExamStart = (mode: string, questionCount: number, timeLimit?: number) => {
@@ -144,7 +144,7 @@ export function useExamAnnouncements() {
   };
 
   const announceExamEnd = (score: number, passed: boolean) => {
-    const result = passed ? 'passed' : 'did not pass';
+    const result = passed ? "passed" : "did not pass";
     const message = `Exam completed. You ${result} with a score of ${score}%`;
     announceImmediate(message);
   };

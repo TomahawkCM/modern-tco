@@ -1,0 +1,4 @@
+#!/bin/sh
+echo "🎯 Checking staged files..."
+npx lint-staged
+echo "✅ Pre-commit checks passed!"

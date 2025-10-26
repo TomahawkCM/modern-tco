@@ -1,0 +1,183 @@
+---
+title: "Taking Action (Learn-style, Experimental)"
+id: "module-03L"
+domainSlug: "taking-action"
+difficulty: "Intermediate"
+estimatedTime: 70
+tags: ["actions", "packages", "safety", "experiment"]
+status: "experimental"
+lastUpdated: "2025-10-05"
+---
+
+import { MicroSection } from "@/components/mdx/MicroSection";
+import PracticeButton from "@/components/mdx/PracticeButton";
+import { MicroQuizMDX } from "@/components/learn-experimental/LearnExperimentalQuizGroup";
+import { getReadOnlyQuestions } from "@/lib/quiz/readOnlyQuestions";
+import { emitLearnExp } from "@/lib/telemetry/learnExperimental";
+
+# Taking Action (Learn Experimental Track)
+
+<MicroSection
+  id="unit-03L-01"
+  moduleId="module-03L"
+  title="Action Safety Foundations"
+  estimatedMinutes={12}
+  sectionNumber={1}
+  totalSections={5}
+  keyTakeaways={[
+    "Validate prerequisites, change windows, and stakeholder sign-off before any action.",
+    "Use simulations or analysis mode to test impact where possible.",
+    "Document rollback triggers for every run."
+  ]}
+  quickCheck={
+    <MicroQuizMDX
+      moduleId="module-03L"
+      unitId="unit-03L-01"
+      quizIdPrefix="module-03L-unit-01"
+      questions={getReadOnlyQuestions({ domain: "taking-action", tags: ["safety"], limit: 3 })}
+    />
+  }
+>
+
+<PracticeButton
+  href="/study/labs/03-l/action-safety-check"
+  onClick={() => emitLearnExp({ moduleId: "module-03L", unitId: "unit-03L-01", action: "practice_start" })}
+>
+  Practice: Build an Action Safety Checklist
+</PracticeButton>
+
+</MicroSection>
+
+<MicroSection
+  id="unit-03L-02"
+  moduleId="module-03L"
+  title="Package Fundamentals"
+  estimatedMinutes={14}
+  sectionNumber={2}
+  totalSections={5}
+  keyTakeaways={[
+    "Understand command sets, files, and parameters that power Tanium packages.",
+    "Leverage package sources and versioning for consistency.",
+    "Reuse tested packages with clear descriptions and owners."
+  ]}
+  quickCheck={
+    <MicroQuizMDX
+      moduleId="module-03L"
+      unitId="unit-03L-02"
+      quizIdPrefix="module-03L-unit-02"
+      questions={getReadOnlyQuestions({ domain: "taking-action", tags: ["packages"], limit: 3 })}
+    />
+  }
+>
+
+<PracticeButton
+  href="/study/labs/03-l/package-anatomy"
+  onClick={() => emitLearnExp({ moduleId: "module-03L", unitId: "unit-03L-02", action: "practice_start" })}
+>
+  Practice: Deconstruct a Package
+</PracticeButton>
+
+</MicroSection>
+
+<MicroSection
+  id="unit-03L-03"
+  moduleId="module-03L"
+  title="Deployment Strategies"
+  estimatedMinutes={14}
+  sectionNumber={3}
+  totalSections={5}
+  keyTakeaways={[
+    "Sequence deployments starting with low-risk cohorts.",
+    "Use recurring actions for hygiene tasks and schedule-based operations.",
+    "Monitor live progress and update stakeholders in real time."
+  ]}
+  quickCheck={
+    <MicroQuizMDX
+      moduleId="module-03L"
+      unitId="unit-03L-03"
+      quizIdPrefix="module-03L-unit-03"
+      questions={getReadOnlyQuestions({ domain: "taking-action", tags: ["deployment"], limit: 3 })}
+    />
+  }
+>
+
+<PracticeButton
+  href="/study/labs/03-l/deployment-plan"
+  onClick={() => emitLearnExp({ moduleId: "module-03L", unitId: "unit-03L-03", action: "practice_start" })}
+>
+  Practice: Draft a Deployment Blueprint
+</PracticeButton>
+
+</MicroSection>
+
+<MicroSection
+  id="unit-03L-04"
+  moduleId="module-03L"
+  title="Verification and Rollback"
+  estimatedMinutes={10}
+  sectionNumber={4}
+  totalSections={5}
+  keyTakeaways={[
+    "Pair every action with a verification question that confirms success.",
+    "Define rollback automation for rapid recovery.",
+    "Capture post-action lessons within 24 hours."
+  ]}
+  quickCheck={
+    <MicroQuizMDX
+      moduleId="module-03L"
+      unitId="unit-03L-04"
+      quizIdPrefix="module-03L-unit-04"
+      questions={getReadOnlyQuestions({ domain: "taking-action", tags: ["verification"], limit: 3 })}
+    />
+  }
+>
+
+<PracticeButton
+  href="/study/labs/03-l/verification-runbook"
+  onClick={() => emitLearnExp({ moduleId: "module-03L", unitId: "unit-03L-04", action: "practice_start" })}
+>
+  Practice: Build a Verification Runbook
+</PracticeButton>
+
+</MicroSection>
+
+<MicroSection
+  id="unit-03L-05"
+  moduleId="module-03L"
+  title="Action Reporting & Continuous Improvement"
+  estimatedMinutes={10}
+  sectionNumber={5}
+  totalSections={5}
+  keyTakeaways={[
+    "Capture outcome metrics, not just completion status.",
+    "Feed lessons learned into the next remediation cycle.",
+    "Celebrate wins to reinforce proactive action culture."
+  ]}
+  quickCheck={
+    <MicroQuizMDX
+      moduleId="module-03L"
+      unitId="unit-03L-05"
+      quizIdPrefix="module-03L-unit-05"
+      questions={getReadOnlyQuestions({ domain: "taking-action", limit: 3 })}
+    />
+  }
+>
+
+<PracticeButton
+  href="/study/labs/03-l/action-retrospective"
+  onClick={() => emitLearnExp({ moduleId: "module-03L", unitId: "unit-03L-05", action: "practice_start" })}
+>
+  Practice: Draft an Action Retrospective
+</PracticeButton>
+
+</MicroSection>
+
+## End-module knowledge check
+
+<MicroQuizMDX
+  moduleId="module-03L"
+  unitId="unit-03L-summary"
+  quizIdPrefix="module-03L-summary"
+  questions={getReadOnlyQuestions({ domain: "taking-action", limit: 7 })}
+/>
+

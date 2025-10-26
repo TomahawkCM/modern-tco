@@ -1,14 +1,14 @@
-import { createClient } from '@supabase/supabase-js';
-import dotenv from 'dotenv';
+import { createClient } from "@supabase/supabase-js";
+import dotenv from "dotenv";
 
 // Load environment variables
-dotenv.config({ path: '.env.local' });
+dotenv.config({ path: ".env.local" });
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
 if (!supabaseUrl || !supabaseServiceKey) {
-  console.error('❌ Missing Supabase credentials');
+  console.error("❌ Missing Supabase credentials");
   process.exit(1);
 }
 
@@ -21,7 +21,7 @@ const supabase = createClient(supabaseUrl, supabaseServiceKey, {
 });
 
 async function createTables() {
-  console.log('🚀 Creating tables via Supabase Admin API...\n');
+  console.log("🚀 Creating tables via Supabase Admin API...\n");
 
   // Use the raw SQL execution via the REST API
   const createSQL = `
@@ -84,9 +84,9 @@ async function createTables() {
   try {
     // Execute via raw HTTP request to Supabase REST API
     const response = await fetch(`${supabaseUrl}/rest/v1/rpc/exec`, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
         Authorization: `Bearer ${supabaseServiceKey}`,
         apikey: supabaseServiceKey,
       },
@@ -96,55 +96,55 @@ async function createTables() {
     });
 
     if (response.ok) {
-      console.log('✅ Tables created successfully via REST API');
+      console.log("✅ Tables created successfully via REST API");
     } else {
-      console.log('⚠️  REST API method not available, trying direct approach...');
+      console.log("⚠️  REST API method not available, trying direct approach...");
 
       // Alternative: Try to test if tables exist by querying them
       const { error: testError } = await supabase
-        .from('study_modules')
-        .select('count', { count: 'exact' });
+        .from("study_modules")
+        .select("count", { count: "exact" });
 
-      if (testError && testError.code === 'PGRST106') {
-        console.log('❌ Tables do not exist and cannot be created automatically');
-        console.log('Please run the SQL script in Supabase Dashboard SQL Editor:');
-        console.log('\n' + createSQL);
+      if (testError && testError.code === "PGRST106") {
+        console.log("❌ Tables do not exist and cannot be created automatically");
+        console.log("Please run the SQL script in Supabase Dashboard SQL Editor:");
+        console.log("\n" + createSQL);
         return false;
       } else if (!testError) {
-        console.log('✅ Tables already exist');
+        console.log("✅ Tables already exist");
         return true;
       }
     }
 
     // Verify tables were created
-    console.log('🔍 Verifying table creation...');
+    console.log("🔍 Verifying table creation...");
 
     const { data: modules, error: modulesError } = await supabase
-      .from('study_modules')
-      .select('count', { count: 'exact' });
+      .from("study_modules")
+      .select("count", { count: "exact" });
 
     if (modulesError) {
-      console.error('❌ study_modules table verification failed:', modulesError.message);
+      console.error("❌ study_modules table verification failed:", modulesError.message);
       return false;
     }
 
-    console.log('✅ study_modules table verified');
+    console.log("✅ study_modules table verified");
 
     const { data: sections, error: sectionsError } = await supabase
-      .from('study_sections')
-      .select('count', { count: 'exact' });
+      .from("study_sections")
+      .select("count", { count: "exact" });
 
     if (sectionsError) {
-      console.error('❌ study_sections table verification failed:', sectionsError.message);
+      console.error("❌ study_sections table verification failed:", sectionsError.message);
       return false;
     }
 
-    console.log('✅ study_sections table verified');
+    console.log("✅ study_sections table verified");
 
-    console.log('\n🎉 Database schema ready for content migration!');
+    console.log("\n🎉 Database schema ready for content migration!");
     return true;
   } catch (error) {
-    console.error('❌ Error creating tables:', error.message);
+    console.error("❌ Error creating tables:", error.message);
     return false;
   }
 }
@@ -152,9 +152,9 @@ async function createTables() {
 // Run the function
 createTables().then((success) => {
   if (success) {
-    console.log('\n🚀 Ready to run: npm run migrate:content');
+    console.log("\n🚀 Ready to run: npm run migrate:content");
   } else {
-    console.log('\n❌ Table creation failed - manual intervention required');
+    console.log("\n❌ Table creation failed - manual intervention required");
   }
   process.exit(success ? 0 : 1);
 });

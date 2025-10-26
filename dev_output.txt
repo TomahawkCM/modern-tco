@@ -1,0 +1,19 @@
+
+> tanium-tco-modern@1.0.0 dev:port
+> set NODE_OPTIONS=--max-old-space-size=6144 && next dev --turbo --port 3007
+
+   ▲ Next.js 15.5.2 (Turbopack)
+   - Local:        http://localhost:3007
+   - Network:      http://192.168.1.84:3007
+   - Environments: .env.local
+   - Experiments (use with caution):
+     ✓ optimizeCss
+
+ ✓ Starting...
+ ✓ Ready in 2.4s
+ ○ Compiling / ...
+ ✓ Compiled / in 6.2s
+Loaded 45 questions from tco-aligned-questions
+Supabase URL: https://qnwcwoutgarhqxlgsjzs.supabase.co
+Supabase Key: [REDACTED - LENGTH: 208]
+ HEAD / 200 in 7066ms

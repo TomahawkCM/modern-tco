@@ -1,0 +1,183 @@
+---
+title: "Reporting & Data Export (Learn-style, Experimental)"
+id: "module-05L"
+domainSlug: "reporting-export"
+difficulty: "Intermediate"
+estimatedTime: 60
+tags: ["reporting", "export", "experiment"]
+status: "experimental"
+lastUpdated: "2025-10-05"
+---
+
+import { MicroSection } from "@/components/mdx/MicroSection";
+import PracticeButton from "@/components/mdx/PracticeButton";
+import { MicroQuizMDX } from "@/components/learn-experimental/LearnExperimentalQuizGroup";
+import { getReadOnlyQuestions } from "@/lib/quiz/readOnlyQuestions";
+import { emitLearnExp } from "@/lib/telemetry/learnExperimental";
+
+# Reporting & Data Export (Learn Experimental Track)
+
+<MicroSection
+  id="unit-05L-01"
+  moduleId="module-05L"
+  title="Reporting Principles"
+  estimatedMinutes={10}
+  sectionNumber={1}
+  totalSections={5}
+  keyTakeaways={[
+    "Start every report with a single question the audience needs answered.",
+    "Choose visualizations that highlight trend, deviation, or status quickly.",
+    "Set expectations for update cadence and ownership."
+  ]}
+  quickCheck={
+    <MicroQuizMDX
+      moduleId="module-05L"
+      unitId="unit-05L-01"
+      quizIdPrefix="module-05L-unit-01"
+      questions={getReadOnlyQuestions({ domain: "reporting-export", tags: ["reporting"], limit: 3 })}
+    />
+  }
+>
+
+<PracticeButton
+  href="/study/labs/05-l/report-brief"
+  onClick={() => emitLearnExp({ moduleId: "module-05L", unitId: "unit-05L-01", action: "practice_start" })}
+>
+  Practice: Write a Reporting Brief
+</PracticeButton>
+
+</MicroSection>
+
+<MicroSection
+  id="unit-05L-02"
+  moduleId="module-05L"
+  title="Building Dashboards"
+  estimatedMinutes={14}
+  sectionNumber={2}
+  totalSections={5}
+  keyTakeaways={[
+    "Assemble dashboards with a logical top-to-bottom story.",
+    "Use filters and drill-downs to personalize the view.",
+    "Capture data freshness indicators directly on the dashboard."
+  ]}
+  quickCheck={
+    <MicroQuizMDX
+      moduleId="module-05L"
+      unitId="unit-05L-02"
+      quizIdPrefix="module-05L-unit-02"
+      questions={getReadOnlyQuestions({ domain: "reporting-export", tags: ["dashboards"], limit: 3 })}
+    />
+  }
+>
+
+<PracticeButton
+  href="/study/labs/05-l/dashboard-outline"
+  onClick={() => emitLearnExp({ moduleId: "module-05L", unitId: "unit-05L-02", action: "practice_start" })}
+>
+  Practice: Outline a Dashboard Story
+</PracticeButton>
+
+</MicroSection>
+
+<MicroSection
+  id="unit-05L-03"
+  moduleId="module-05L"
+  title="Export Options & Automation"
+  estimatedMinutes={12}
+  sectionNumber={3}
+  totalSections={5}
+  keyTakeaways={[
+    "Select the export format that preserves fidelity for the consumer.",
+    "Automate recurring exports with scheduling and secure delivery.",
+    "Track export usage to avoid oversharing sensitive data."
+  ]}
+  quickCheck={
+    <MicroQuizMDX
+      moduleId="module-05L"
+      unitId="unit-05L-03"
+      quizIdPrefix="module-05L-unit-03"
+      questions={getReadOnlyQuestions({ domain: "reporting-export", tags: ["export"], limit: 3 })}
+    />
+  }
+>
+
+<PracticeButton
+  href="/study/labs/05-l/export-playbook"
+  onClick={() => emitLearnExp({ moduleId: "module-05L", unitId: "unit-05L-03", action: "practice_start" })}
+>
+  Practice: Draft an Export Playbook
+</PracticeButton>
+
+</MicroSection>
+
+<MicroSection
+  id="unit-05L-04"
+  moduleId="module-05L"
+  title="Data Hygiene & Quality"
+  estimatedMinutes={12}
+  sectionNumber={4}
+  totalSections={5}
+  keyTakeaways={[
+    "Run validation checks to confirm data freshness and completeness.",
+    "Document data lineage for trust and troubleshooting.",
+    "Create a remediation path when quality issues arise."
+  ]}
+  quickCheck={
+    <MicroQuizMDX
+      moduleId="module-05L"
+      unitId="unit-05L-04"
+      quizIdPrefix="module-05L-unit-04"
+      questions={getReadOnlyQuestions({ domain: "reporting-export", tags: ["data-quality"], limit: 3 })}
+    />
+  }
+>
+
+<PracticeButton
+  href="/study/labs/05-l/data-quality-log"
+  onClick={() => emitLearnExp({ moduleId: "module-05L", unitId: "unit-05L-04", action: "practice_start" })}
+>
+  Practice: Create a Data Quality Log
+</PracticeButton>
+
+</MicroSection>
+
+<MicroSection
+  id="unit-05L-05"
+  moduleId="module-05L"
+  title="Sharing & Governance"
+  estimatedMinutes={12}
+  sectionNumber={5}
+  totalSections={5}
+  keyTakeaways={[
+    "Share reports using access controls aligned to governance policy.",
+    "Track who consumes exports and why.",
+    "Retire reports responsibly to avoid stale narratives."
+  ]}
+  quickCheck={
+    <MicroQuizMDX
+      moduleId="module-05L"
+      unitId="unit-05L-05"
+      quizIdPrefix="module-05L-unit-05"
+      questions={getReadOnlyQuestions({ domain: "reporting-export", tags: ["governance"], limit: 3 })}
+    />
+  }
+>
+
+<PracticeButton
+  href="/study/labs/05-l/governance-check"
+  onClick={() => emitLearnExp({ moduleId: "module-05L", unitId: "unit-05L-05", action: "practice_start" })}
+>
+  Practice: Run a Governance Check
+</PracticeButton>
+
+</MicroSection>
+
+## End-module knowledge check
+
+<MicroQuizMDX
+  moduleId="module-05L"
+  unitId="unit-05L-summary"
+  quizIdPrefix="module-05L-summary"
+  questions={getReadOnlyQuestions({ domain: "reporting-export", limit: 6 })}
+/>
+

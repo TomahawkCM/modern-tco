@@ -27,12 +27,12 @@ export type StudySettings = {
   share_anonymous?: boolean;
   detailed_stats?: boolean;
   questions_per_session?: number | null;
-  difficulty_progression?: 'static' | 'adaptive';
+  difficulty_progression?: "static" | "adaptive";
   pause_on_incorrect?: boolean;
 };
 
 export type UserSettings = {
-  theme?: 'light' | 'dark' | 'system';
+  theme?: "light" | "dark" | "system";
   language?: string;
   time_zone?: string;
   session_timeout?: number | null;

@@ -1,29 +1,28 @@
 'use client';
 
-import {
-  Award,
-  BookOpen,
-  Brain,
-  CheckCircle2,
-  Circle,
-  Clock,
-  Flag,
-  Lock,
-  Rocket,
-  Star,
-  Target,
-  TrendingUp,
-  Trophy,
-  Unlock,
-  Zap,
-} from 'lucide-react';
-import type React from 'react';
-import { useEffect, useState } from 'react';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
+import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
+import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import {
+  Trophy,
+  Target,
+  Clock,
+  TrendingUp,
+  Award,
+  BookOpen,
+  CheckCircle2,
+  Circle,
+  Lock,
+  Unlock,
+  Star,
+  Zap,
+  Brain,
+  Rocket,
+  Flag
+} from 'lucide-react';
+import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
 interface ModuleProgress {
@@ -65,7 +64,7 @@ const SKILL_LEVELS = [
   { level: 'beginner', minProgress: 0, color: 'bg-[#22c55e]', icon: BookOpen },
   { level: 'intermediate', minProgress: 30, color: 'bg-primary', icon: Target },
   { level: 'advanced', minProgress: 60, color: 'bg-accent', icon: Brain },
-  { level: 'expert', minProgress: 90, color: 'bg-orange-500', icon: Rocket },
+  { level: 'expert', minProgress: 90, color: 'bg-orange-500', icon: Rocket }
 ];
 
 const ACHIEVEMENTS: Achievement[] = [
@@ -75,7 +74,7 @@ const ACHIEVEMENTS: Achievement[] = [
     description: 'Complete your first QueryPlayground exercise',
     icon: Star,
     unlocked: false,
-    category: 'progress',
+    category: 'progress'
   },
   {
     id: 'module-master',
@@ -83,7 +82,7 @@ const ACHIEVEMENTS: Achievement[] = [
     description: 'Complete all exercises in a module',
     icon: Trophy,
     unlocked: false,
-    category: 'mastery',
+    category: 'mastery'
   },
   {
     id: 'speed-learner',
@@ -91,7 +90,7 @@ const ACHIEVEMENTS: Achievement[] = [
     description: 'Complete a module in under 2 hours',
     icon: Zap,
     unlocked: false,
-    category: 'speed',
+    category: 'speed'
   },
   {
     id: 'consistent-student',
@@ -99,7 +98,7 @@ const ACHIEVEMENTS: Achievement[] = [
     description: 'Study for 7 days in a row',
     icon: Award,
     unlocked: false,
-    category: 'consistency',
+    category: 'consistency'
   },
   {
     id: 'zero-to-hero',
@@ -107,8 +106,8 @@ const ACHIEVEMENTS: Achievement[] = [
     description: 'Complete all modules and projects',
     icon: Rocket,
     unlocked: false,
-    category: 'mastery',
-  },
+    category: 'mastery'
+  }
 ];
 
 export default function LearningProgressTracker() {
@@ -122,12 +121,10 @@ export default function LearningProgressTracker() {
     currentStreak: 0,
     longestStreak: 0,
     averageAccuracy: 0,
-    skillLevel: 'beginner',
+    skillLevel: 'beginner'
   });
   const [achievements, setAchievements] = useState<Achievement[]>(ACHIEVEMENTS);
-  const [selectedView, setSelectedView] = useState<'overview' | 'modules' | 'achievements'>(
-    'overview'
-  );
+  const [selectedView, setSelectedView] = useState<'overview' | 'modules' | 'achievements'>('overview');
 
   useEffect(() => {
     loadProgress();
@@ -149,10 +146,9 @@ export default function LearningProgressTracker() {
         totalExercises: 0,
         completedExercises: 0,
         checkpointPassed: gateProgress['Foundation Module Checkpoint']?.completed ?? false,
-        miniProjectComplete:
-          projectProgress['Network Discovery & Architecture Mapping']?.completed ?? false,
+        miniProjectComplete: projectProgress['Network Discovery & Architecture Mapping']?.completed ?? false,
         timeSpent: 180,
-        lastAccessed: new Date().toISOString(),
+        lastAccessed: new Date().toISOString()
       },
       {
         moduleId: 'asking-questions',
@@ -160,12 +156,11 @@ export default function LearningProgressTracker() {
         totalSections: 8,
         completedSections: 0,
         totalExercises: 10,
-        completedExercises: Object.keys(queryProgress).filter((k) => k.startsWith('Practice:'))
-          .length,
+        completedExercises: Object.keys(queryProgress).filter(k => k.startsWith('Practice:')).length,
         checkpointPassed: false,
         miniProjectComplete: false,
         timeSpent: 45,
-        lastAccessed: new Date().toISOString(),
+        lastAccessed: new Date().toISOString()
       },
       {
         moduleId: 'refining-questions',
@@ -176,7 +171,7 @@ export default function LearningProgressTracker() {
         completedExercises: 0,
         checkpointPassed: false,
         miniProjectComplete: false,
-        timeSpent: 0,
+        timeSpent: 0
       },
       {
         moduleId: 'taking-action',
@@ -187,7 +182,7 @@ export default function LearningProgressTracker() {
         completedExercises: 0,
         checkpointPassed: false,
         miniProjectComplete: false,
-        timeSpent: 0,
+        timeSpent: 0
       },
       {
         moduleId: 'navigation',
@@ -198,7 +193,7 @@ export default function LearningProgressTracker() {
         completedExercises: 0,
         checkpointPassed: false,
         miniProjectComplete: false,
-        timeSpent: 0,
+        timeSpent: 0
       },
       {
         moduleId: 'reporting',
@@ -209,34 +204,29 @@ export default function LearningProgressTracker() {
         completedExercises: 0,
         checkpointPassed: false,
         miniProjectComplete: false,
-        timeSpent: 0,
-      },
+        timeSpent: 0
+      }
     ];
 
     // Update stats
-    const completedModules = modules.filter(
-      (m) => m.checkpointPassed && m.miniProjectComplete
-    ).length;
+    const completedModules = modules.filter(m => m.checkpointPassed && m.miniProjectComplete).length;
     const totalExercisesCompleted = modules.reduce((sum, m) => sum + m.completedExercises, 0);
     const totalTime = modules.reduce((sum, m) => sum + m.timeSpent, 0);
 
     setModuleProgress(modules);
-    setLearningStats((prev) => ({
+    setLearningStats(prev => ({
       ...prev,
       completedModules,
       completedExercises: totalExercisesCompleted,
       totalTimeSpent: totalTime,
-      skillLevel: getSkillLevel(completedModules, modules.length),
+      skillLevel: getSkillLevel(completedModules, modules.length)
     }));
 
     // Check achievements
     updateAchievements(queryProgress, gateProgress, projectProgress);
   };
 
-  const getSkillLevel = (
-    completed: number,
-    total: number
-  ): 'beginner' | 'intermediate' | 'advanced' | 'expert' => {
+  const getSkillLevel = (completed: number, total: number): 'beginner' | 'intermediate' | 'advanced' | 'expert' => {
     const percentage = (completed / total) * 100;
     if (percentage >= 90) return 'expert';
     if (percentage >= 60) return 'advanced';
@@ -249,24 +239,19 @@ export default function LearningProgressTracker() {
 
     // Check first query
     if (Object.keys(queries).length > 0) {
-      const firstQuery = newAchievements.find((a) => a.id === 'first-query');
+      const firstQuery = newAchievements.find(a => a.id === 'first-query');
       if (firstQuery) {
         firstQuery.unlocked = true;
         const queryValues = Object.values(queries);
-        if (
-          queryValues.length > 0 &&
-          queryValues[0] &&
-          typeof queryValues[0] === 'object' &&
-          'timestamp' in queryValues[0]
-        ) {
+        if (queryValues.length > 0 && queryValues[0] && typeof queryValues[0] === 'object' && 'timestamp' in queryValues[0]) {
           firstQuery.unlockedDate = (queryValues[0] as { timestamp: string }).timestamp;
         }
       }
     }
 
     // Check module completion
-    if (Object.keys(queries).filter((k) => k.startsWith('Practice:')).length >= 10) {
-      const moduleMaster = newAchievements.find((a) => a.id === 'module-master');
+    if (Object.keys(queries).filter(k => k.startsWith('Practice:')).length >= 10) {
+      const moduleMaster = newAchievements.find(a => a.id === 'module-master');
       if (moduleMaster) {
         moduleMaster.unlocked = true;
         moduleMaster.unlockedDate = new Date().toISOString();
@@ -288,7 +273,7 @@ export default function LearningProgressTracker() {
 
   const getCurrentLevel = () => {
     const progress = (learningStats.completedModules / learningStats.totalModules) * 100;
-    return SKILL_LEVELS.find((level) => progress >= level.minProgress) || SKILL_LEVELS[0];
+    return SKILL_LEVELS.find(level => progress >= level.minProgress) || SKILL_LEVELS[0];
   };
 
   const formatTime = (minutes: number) => {
@@ -362,7 +347,9 @@ export default function LearningProgressTracker() {
                   <div className="flex items-center justify-between">
                     <div>
                       <p className="text-sm text-gray-600">Accuracy</p>
-                      <p className="text-2xl font-bold">{learningStats.averageAccuracy ?? 85}%</p>
+                      <p className="text-2xl font-bold">
+                        {learningStats.averageAccuracy ?? 85}%
+                      </p>
                     </div>
                     <TrendingUp className="w-8 h-8 text-[#22c55e]" />
                   </div>
@@ -374,7 +361,9 @@ export default function LearningProgressTracker() {
                   <div className="flex items-center justify-between">
                     <div>
                       <p className="text-sm text-gray-600">Streak</p>
-                      <p className="text-2xl font-bold">{learningStats.currentStreak} days</p>
+                      <p className="text-2xl font-bold">
+                        {learningStats.currentStreak} days
+                      </p>
                     </div>
                     <Zap className="w-8 h-8 text-[#f97316]" />
                   </div>
@@ -387,7 +376,7 @@ export default function LearningProgressTracker() {
                     <div>
                       <p className="text-sm text-gray-600">Achievements</p>
                       <p className="text-2xl font-bold">
-                        {achievements.filter((a) => a.unlocked).length}/{achievements.length}
+                        {achievements.filter(a => a.unlocked).length}/{achievements.length}
                       </p>
                     </div>
                     <Trophy className="w-8 h-8 text-purple-500" />
@@ -406,18 +395,12 @@ export default function LearningProgressTracker() {
               </CardHeader>
               <CardContent className="pt-0">
                 <ul className="space-y-2">
-                  {moduleProgress
-                    .filter((m) => !m.checkpointPassed)
-                    .slice(0, 3)
-                    .map((module) => (
-                      <li key={module.moduleId} className="flex items-center gap-2 text-sm">
-                        <Circle className="w-3 h-3 text-blue-600" />
-                        <span>
-                          Continue {module.title} - {module.completedExercises}/
-                          {module.totalExercises} exercises done
-                        </span>
-                      </li>
-                    ))}
+                  {moduleProgress.filter(m => !m.checkpointPassed).slice(0, 3).map(module => (
+                    <li key={module.moduleId} className="flex items-center gap-2 text-sm">
+                      <Circle className="w-3 h-3 text-blue-600" />
+                      <span>Continue {module.title} - {module.completedExercises}/{module.totalExercises} exercises done</span>
+                    </li>
+                  ))}
                 </ul>
               </CardContent>
             </Card>
@@ -426,19 +409,15 @@ export default function LearningProgressTracker() {
           <TabsContent value="modules" className="space-y-4 mt-6">
             {moduleProgress.map((module, index) => {
               const status = getModuleStatus(module);
-              const progress =
-                module.totalExercises > 0
-                  ? (module.completedExercises / module.totalExercises) * 100
-                  : 0;
+              const progress = module.totalExercises > 0
+                ? (module.completedExercises / module.totalExercises) * 100
+                : 0;
 
               return (
-                <Card
-                  key={module.moduleId}
-                  className={cn(
-                    'transition-all hover:shadow-md',
-                    status.label === 'Complete' && 'bg-green-50 border-green-200'
-                  )}
-                >
+                <Card key={module.moduleId} className={cn(
+                  'transition-all hover:shadow-md',
+                  status.label === 'Complete' && 'bg-green-50 border-green-200'
+                )}>
                   <CardContent className="p-4">
                     <div className="flex items-center justify-between mb-3">
                       <div className="flex items-center gap-3">
@@ -475,9 +454,7 @@ export default function LearningProgressTracker() {
                       <div className="space-y-1">
                         <div className="flex justify-between text-sm text-gray-600">
                           <span>Exercises</span>
-                          <span>
-                            {module.completedExercises}/{module.totalExercises}
-                          </span>
+                          <span>{module.completedExercises}/{module.totalExercises}</span>
                         </div>
                         <Progress value={progress} className="h-2" />
                       </div>
@@ -490,7 +467,7 @@ export default function LearningProgressTracker() {
 
           <TabsContent value="achievements" className="mt-6">
             <div className="grid grid-cols-2 gap-4">
-              {achievements.map((achievement) => (
+              {achievements.map(achievement => (
                 <Card
                   key={achievement.id}
                   className={cn(
@@ -502,12 +479,10 @@ export default function LearningProgressTracker() {
                 >
                   <CardContent className="p-4">
                     <div className="flex items-start gap-3">
-                      <achievement.icon
-                        className={cn(
-                          'w-8 h-8',
-                          achievement.unlocked ? 'text-orange-500' : 'text-muted-foreground'
-                        )}
-                      />
+                      <achievement.icon className={cn(
+                        'w-8 h-8',
+                        achievement.unlocked ? 'text-orange-500' : 'text-muted-foreground'
+                      )} />
                       <div className="flex-1">
                         <h4 className="font-semibold">{achievement.title}</h4>
                         <p className="text-sm text-gray-600 mt-1">{achievement.description}</p>
@@ -517,7 +492,9 @@ export default function LearningProgressTracker() {
                           </p>
                         )}
                       </div>
-                      {achievement.unlocked && <CheckCircle2 className="w-5 h-5 text-[#22c55e]" />}
+                      {achievement.unlocked && (
+                        <CheckCircle2 className="w-5 h-5 text-[#22c55e]" />
+                      )}
                     </div>
                   </CardContent>
                 </Card>

@@ -14,25 +14,25 @@ export interface StorageOptions<TValue = unknown> {
 export class StorageError extends Error {
   constructor(
     public key: string,
-    public operation: 'get' | 'set' | 'remove',
+    public operation: "get" | "set" | "remove",
     public originalError?: unknown
   ) {
     super(`Storage operation failed: ${operation} ${key}`);
-    this.name = 'StorageError';
+    this.name = "StorageError";
   }
 }
 
 const isRecord = (value: unknown): value is Record<string, unknown> => {
-  return typeof value === 'object' && value !== null && !Array.isArray(value);
+  return typeof value === "object" && value !== null && !Array.isArray(value);
 };
 
-const isString = (value: unknown): value is string => typeof value === 'string';
+const isString = (value: unknown): value is string => typeof value === "string";
 
 const isNumber = (value: unknown): value is number => {
-  return typeof value === 'number' && !Number.isNaN(value);
+  return typeof value === "number" && !Number.isNaN(value);
 };
 
-const isBoolean = (value: unknown): value is boolean => typeof value === 'boolean';
+const isBoolean = (value: unknown): value is boolean => typeof value === "boolean";
 
 const isStringArray = (value: unknown): value is string[] => {
   return Array.isArray(value) && value.every(isString);
@@ -50,8 +50,8 @@ const isQuotaExceededError = (error: unknown): boolean => {
   return (
     error instanceof DOMException &&
     (error.code === 22 ||
-      error.name === 'QuotaExceededError' ||
-      error.name === 'NS_ERROR_DOM_QUOTA_REACHED')
+      error.name === "QuotaExceededError" ||
+      error.name === "NS_ERROR_DOM_QUOTA_REACHED")
   );
 };
 
@@ -72,7 +72,7 @@ export const safeLocalStorage = {
 
     for (let attempt = 0; attempt < maxRetries; attempt += 1) {
       try {
-        if (typeof window === 'undefined') {
+        if (typeof window === "undefined") {
           return fallbackValue;
         }
 
@@ -90,7 +90,7 @@ export const safeLocalStorage = {
         }
 
         if (parsedValue === null) {
-          throw new StorageError(key, 'get');
+          throw new StorageError(key, "get");
         }
 
         if (validate && !validate(parsedValue)) {
@@ -130,15 +130,11 @@ export const safeLocalStorage = {
   /**
    * Set item with validation and backup creation
    */
-  setItem<TValue = unknown>(
-    key: string,
-    value: TValue,
-    options: StorageOptions<TValue> = {}
-  ): boolean {
+  setItem<TValue = unknown>(key: string, value: TValue, options: StorageOptions<TValue> = {}): boolean {
     const { validate, sanitize, backupKey } = options;
 
     try {
-      if (typeof window === 'undefined') {
+      if (typeof window === "undefined") {
         return false;
       }
 
@@ -169,7 +165,7 @@ export const safeLocalStorage = {
       if (isQuotaExceededError(error)) {
         this.cleanup();
         try {
-          if (typeof window === 'undefined') {
+          if (typeof window === "undefined") {
             return false;
           }
           window.localStorage.setItem(key, JSON.stringify(value));
@@ -187,7 +183,7 @@ export const safeLocalStorage = {
    * Remove item with error handling
    */
   removeItem(key: string): boolean {
-    if (typeof window === 'undefined') {
+    if (typeof window === "undefined") {
       return false;
     }
 
@@ -215,7 +211,7 @@ export const safeLocalStorage = {
    * Clean up corrupted or old data
    */
   cleanup(): void {
-    if (typeof window === 'undefined') {
+    if (typeof window === "undefined") {
       return;
     }
 
@@ -243,7 +239,7 @@ export const safeLocalStorage = {
           continue;
         }
 
-        if (key.includes('-timestamp') || key.includes('-backup')) {
+        if (key.includes("-timestamp") || key.includes("-backup")) {
           const { timestamp } = parsedValue as { timestamp?: unknown };
           if (isNumber(timestamp) && now - timestamp > maxAge) {
             keysToRemove.push(key);
@@ -267,7 +263,7 @@ export const safeLocalStorage = {
    * Get storage usage statistics
    */
   getUsageStats(): { used: number; total: number; percentage: number } {
-    if (typeof window === 'undefined') {
+    if (typeof window === "undefined") {
       return { used: 0, total: 0, percentage: 0 };
     }
 
@@ -308,7 +304,7 @@ export const safeSessionStorage = {
     const fallbackValue = fallback ?? null;
 
     try {
-      if (typeof window === 'undefined') {
+      if (typeof window === "undefined") {
         return fallbackValue;
       }
 
@@ -337,15 +333,11 @@ export const safeSessionStorage = {
     }
   },
 
-  setItem<TValue = unknown>(
-    key: string,
-    value: TValue,
-    options: StorageOptions<TValue> = {}
-  ): boolean {
+  setItem<TValue = unknown>(key: string, value: TValue, options: StorageOptions<TValue> = {}): boolean {
     const { validate, sanitize } = options;
 
     try {
-      if (typeof window === 'undefined') {
+      if (typeof window === "undefined") {
         return false;
       }
 
@@ -363,7 +355,7 @@ export const safeSessionStorage = {
   },
 
   removeItem(key: string): boolean {
-    if (typeof window === 'undefined') {
+    if (typeof window === "undefined") {
       return false;
     }
 
@@ -398,7 +390,7 @@ export const validators = {
       isNumber(data.currentIndex) &&
       isRecord(answers) &&
       (startTime instanceof Date || isString(startTime) || isNumber(startTime)) &&
-      ('completed' in data ? isBoolean(data.completed) : true)
+      ("completed" in data ? isBoolean(data.completed) : true)
     );
   },
 
@@ -407,7 +399,11 @@ export const validators = {
       return false;
     }
 
-    return isString(data.theme) && isString(data.language) && isString(data.difficulty);
+    return (
+      isString(data.theme) &&
+      isString(data.language) &&
+      isString(data.difficulty)
+    );
   },
 
   progress: (data: unknown): data is Record<string, unknown> => {
@@ -455,7 +451,7 @@ export const sanitizers = {
     };
 
     const id = isString(rawId) ? rawId : `session-${Date.now()}`;
-    const mode = isString(rawMode) ? rawMode : 'practice';
+    const mode = isString(rawMode) ? rawMode : "practice";
     const questions = Array.isArray(rawQuestions) ? rawQuestions : [];
     const currentIndex = isNumber(rawCurrentIndex) ? Math.max(0, rawCurrentIndex) : 0;
     const answers = isRecord(rawAnswers) ? rawAnswers : {};
@@ -502,20 +498,25 @@ export const sanitizers = {
       autoSave?: unknown;
     };
 
-    const allowedThemes = new Set(['light', 'dark']);
-    const theme = isString(rawTheme) && allowedThemes.has(rawTheme) ? rawTheme : 'light';
+    const allowedThemes = new Set(["light", "dark"]);
+    const theme = isString(rawTheme) && allowedThemes.has(rawTheme)
+      ? rawTheme
+      : "light";
 
-    const allowedDifficulty = new Set(['easy', 'medium', 'hard']);
-    const difficulty =
-      isString(rawDifficulty) && allowedDifficulty.has(rawDifficulty) ? rawDifficulty : 'medium';
+    const allowedDifficulty = new Set(["easy", "medium", "hard"]);
+    const difficulty = isString(rawDifficulty) && allowedDifficulty.has(rawDifficulty)
+      ? rawDifficulty
+      : "medium";
 
-    const language = isString(rawLanguage) ? rawLanguage : 'en';
+    const language = isString(rawLanguage) ? rawLanguage : "en";
 
     return {
       theme,
       language,
       difficulty,
-      notifications: isBoolean(rawNotifications) ? rawNotifications : Boolean(rawNotifications),
+      notifications: isBoolean(rawNotifications)
+        ? rawNotifications
+        : Boolean(rawNotifications),
       autoSave: isBoolean(rawAutoSave) ? rawAutoSave : Boolean(rawAutoSave),
     };
   },

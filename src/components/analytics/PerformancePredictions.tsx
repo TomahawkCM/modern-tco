@@ -1,30 +1,31 @@
-'use client';
+"use client";
 
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Progress } from "@/components/ui/progress";
+import { useProgress } from "@/contexts/ProgressContext";
+import type { TCODomain } from "@/types/exam";
+import { useMemo } from "react";
 import {
-  Activity,
-  AlertTriangle,
-  BarChart3,
-  BookOpen,
-  Brain,
-  Calendar,
-  CheckCircle,
-  Clock,
-  Target,
   TrendingUp,
+  Target,
+  Calendar,
+  Clock,
+  Brain,
+  AlertTriangle,
+  CheckCircle,
   Trophy,
   Zap,
-} from 'lucide-react';
-import { useMemo } from 'react';
-import { Badge } from '@/components/ui/badge';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Progress } from '@/components/ui/progress';
-import { useProgress } from '@/contexts/ProgressContext';
-import type { TCODomain } from '@/types/exam';
+  BookOpen,
+  BarChart3,
+  Activity,
+} from "lucide-react";
 
 interface PredictionModel {
   examReadiness: {
     score: number;
-    level: 'Poor' | 'Fair' | 'Good' | 'Excellent' | 'Exam Ready';
+    level: "Poor" | "Fair" | "Good" | "Excellent" | "Exam Ready";
     confidence: number;
     timeToReady: string;
     requiredSessions: number;
@@ -52,7 +53,7 @@ interface PredictionModel {
 
 export function PerformancePredictions() {
   const { getDomainStats, getOverallStats, state } = useProgress();
-
+  
   // Memoize expensive function calls to prevent infinite re-renders
   const domainStats = useMemo(() => getDomainStats(), [getDomainStats]);
   const overallStats = useMemo(() => getOverallStats(), [getOverallStats]);
@@ -80,25 +81,25 @@ export function PerformancePredictions() {
         100
     );
 
-    let readinessLevel: PredictionModel['examReadiness']['level'] = 'Poor';
-    let timeToReady = '8-12 weeks';
+    let readinessLevel: PredictionModel["examReadiness"]["level"] = "Poor";
+    let timeToReady = "8-12 weeks";
     let requiredSessions = 30;
 
     if (readinessScore >= 90) {
-      readinessLevel = 'Exam Ready';
-      timeToReady = 'Ready now';
+      readinessLevel = "Exam Ready";
+      timeToReady = "Ready now";
       requiredSessions = 0;
     } else if (readinessScore >= 75) {
-      readinessLevel = 'Excellent';
-      timeToReady = '1-2 weeks';
+      readinessLevel = "Excellent";
+      timeToReady = "1-2 weeks";
       requiredSessions = 3;
     } else if (readinessScore >= 60) {
-      readinessLevel = 'Good';
-      timeToReady = '2-4 weeks';
+      readinessLevel = "Good";
+      timeToReady = "2-4 weeks";
       requiredSessions = 8;
     } else if (readinessScore >= 40) {
-      readinessLevel = 'Fair';
-      timeToReady = '4-6 weeks';
+      readinessLevel = "Fair";
+      timeToReady = "4-6 weeks";
       requiredSessions = 15;
     }
 
@@ -116,13 +117,13 @@ export function PerformancePredictions() {
       const predictedScore = Math.min(currentScore + growthRate * 2, 100);
       const confidence = Math.min(questionsAnswered * 5, 95); // Confidence based on data points
 
-      let recommendation = 'Continue current pace';
+      let recommendation = "Continue current pace";
       if (currentScore < 60) {
-        recommendation = 'Intensive study needed - focus on fundamentals';
+        recommendation = "Intensive study needed - focus on fundamentals";
       } else if (currentScore < 75) {
-        recommendation = 'Regular practice with targeted improvement';
+        recommendation = "Regular practice with targeted improvement";
       } else if (currentScore >= 85) {
-        recommendation = 'Maintain proficiency with light practice';
+        recommendation = "Maintain proficiency with light practice";
       }
 
       return {
@@ -137,9 +138,9 @@ export function PerformancePredictions() {
     // Study insights
     const studyInsights = {
       optimalStudyTime:
-        avgScore < 60 ? '45-60 minutes' : avgScore < 80 ? '30-45 minutes' : '20-30 minutes',
+        avgScore < 60 ? "45-60 minutes" : avgScore < 80 ? "30-45 minutes" : "20-30 minutes",
       suggestedFrequency:
-        studyStreak < 7 ? 'Daily' : studyStreak < 14 ? '5-6 times per week' : '4-5 times per week',
+        studyStreak < 7 ? "Daily" : studyStreak < 14 ? "5-6 times per week" : "4-5 times per week",
       weeklyTarget: avgScore < 60 ? 100 : avgScore < 80 ? 75 : 50,
       predictedGrowth: Math.round(Math.min(15 - avgScore / 10, 8)),
     };
@@ -173,28 +174,28 @@ export function PerformancePredictions() {
 
   const getReadinessColor = (level: string) => {
     switch (level) {
-      case 'Exam Ready':
-        return 'text-[#22c55e] border-green-400 bg-green-400/10';
-      case 'Excellent':
-        return 'text-primary border-blue-400 bg-blue-400/10';
-      case 'Good':
-        return 'text-[#f97316] border-yellow-400 bg-yellow-400/10';
-      case 'Fair':
-        return 'text-orange-400 border-orange-400 bg-orange-400/10';
+      case "Exam Ready":
+        return "text-[#22c55e] border-green-400 bg-green-400/10";
+      case "Excellent":
+        return "text-primary border-blue-400 bg-blue-400/10";
+      case "Good":
+        return "text-[#f97316] border-yellow-400 bg-yellow-400/10";
+      case "Fair":
+        return "text-orange-400 border-orange-400 bg-orange-400/10";
       default:
-        return 'text-red-400 border-red-400 bg-red-400/10';
+        return "text-red-400 border-red-400 bg-red-400/10";
     }
   };
 
   const getReadinessIcon = (level: string) => {
     switch (level) {
-      case 'Exam Ready':
+      case "Exam Ready":
         return Trophy;
-      case 'Excellent':
+      case "Excellent":
         return CheckCircle;
-      case 'Good':
+      case "Good":
         return Target;
-      case 'Fair':
+      case "Fair":
         return Clock;
       default:
         return AlertTriangle;
@@ -239,9 +240,7 @@ export function PerformancePredictions() {
                     <Clock className="h-4 w-4" />
                     <span className="text-sm">Time to Ready</span>
                   </div>
-                  <p className="font-medium text-foreground">
-                    {predictions.examReadiness.timeToReady}
-                  </p>
+                  <p className="font-medium text-foreground">{predictions.examReadiness.timeToReady}</p>
                 </div>
                 <div>
                   <div className="mb-2 flex items-center gap-2 text-muted-foreground">
@@ -301,16 +300,16 @@ export function PerformancePredictions() {
                     style={{
                       borderColor:
                         prediction.confidence > 70
-                          ? '#10B981'
+                          ? "#10B981"
                           : prediction.confidence > 50
-                            ? '#F59E0B'
-                            : '#EF4444',
+                            ? "#F59E0B"
+                            : "#EF4444",
                       color:
                         prediction.confidence > 70
-                          ? '#10B981'
+                          ? "#10B981"
                           : prediction.confidence > 50
-                            ? '#F59E0B'
-                            : '#EF4444',
+                            ? "#F59E0B"
+                            : "#EF4444",
                     }}
                   >
                     {prediction.confidence}% confidence
@@ -335,7 +334,7 @@ export function PerformancePredictions() {
                       <Activity className="h-3 w-3 text-muted-foreground" />
                     )}
                     <span className="text-xs text-muted-foreground">
-                      {prediction.predictedScore > prediction.currentScore ? '+' : ''}
+                      {prediction.predictedScore > prediction.currentScore ? "+" : ""}
                       {Math.round(prediction.predictedScore - prediction.currentScore)} points
                     </span>
                   </div>
@@ -391,9 +390,7 @@ export function PerformancePredictions() {
             </h4>
             <div className="space-y-3">
               <div>
-                <span className="mb-2 block text-sm text-muted-foreground">
-                  Strengths to Maintain
-                </span>
+                <span className="mb-2 block text-sm text-muted-foreground">Strengths to Maintain</span>
                 <div className="flex flex-wrap gap-2">
                   {predictions.examSimulation.strengthAreas.length > 0 ? (
                     predictions.examSimulation.strengthAreas.map((area) => (
@@ -402,9 +399,7 @@ export function PerformancePredictions() {
                       </Badge>
                     ))
                   ) : (
-                    <span className="text-xs text-muted-foreground">
-                      Continue building strengths
-                    </span>
+                    <span className="text-xs text-muted-foreground">Continue building strengths</span>
                   )}
                 </div>
               </div>

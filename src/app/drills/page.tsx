@@ -1,7 +1,7 @@
-import { getDailyDrill } from '@/lib/drills';
+import { getDailyDrill } from "@/lib/drills";
 
 export const metadata = {
-  title: 'Daily 10 Drill',
+  title: "Daily 10 Drill",
 };
 
 export default async function DailyDrillPage() {
@@ -14,7 +14,7 @@ export default async function DailyDrillPage() {
         A balanced set across core domains to keep skills sharp.
       </p>
       <ol className="space-y-4 list-decimal pl-5">
-        {questions.map((q, _idx) => (
+        {questions.map((q, idx) => (
           <li key={q.id} className="rounded border border-slate-200 dark:border-border p-3">
             <div className="mb-2 font-medium">{q.question}</div>
             <ul className="text-sm space-y-1">
@@ -34,3 +34,4 @@ export default async function DailyDrillPage() {
     </main>
   );
 }
+

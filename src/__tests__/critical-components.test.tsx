@@ -7,6 +7,7 @@
  * Priority: HIGH - Run before every deployment
  */
 
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
 
 // Mock Next.js router
@@ -57,7 +58,7 @@ describe('Critical Component Tests', () => {
         { id: 3, domain: 1, text: 'Question 3' },
       ];
 
-      const domain1Questions = mockQuestions.filter((q) => q.domain === 1);
+      const domain1Questions = mockQuestions.filter(q => q.domain === 1);
 
       expect(domain1Questions).toHaveLength(2);
       expect(domain1Questions[0].domain).toBe(1);
@@ -77,6 +78,9 @@ describe('Critical Component Tests', () => {
       const questions = [1, 2, 3, 4, 5];
 
       const shuffled = [...questions].sort(() => Math.random() - 0.5);
+
+      // Very unlikely to be in same order after shuffle
+      const isSameOrder = questions.every((val, idx) => val === shuffled[idx]);
 
       // Note: This test has small chance of false positive
       // In production, use a seeded random for deterministic tests
@@ -181,7 +185,7 @@ describe('Critical Component Tests', () => {
       const reviewQueue = [1, 2, 3, 4, 5];
       const correctlyAnswered = 3;
 
-      const updatedQueue = reviewQueue.filter((id) => id !== correctlyAnswered);
+      const updatedQueue = reviewQueue.filter(id => id !== correctlyAnswered);
 
       expect(updatedQueue).not.toContain(3);
       expect(updatedQueue).toHaveLength(4);
@@ -239,9 +243,11 @@ describe('Critical Component Tests', () => {
 
     test('should validate admin email format', () => {
       const adminEmails = 'admin@example.com,user@test.com';
-      const emailList = adminEmails.split(',').map((e) => e.trim());
+      const emailList = adminEmails.split(',').map(e => e.trim());
 
-      const allValid = emailList.every((email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email));
+      const allValid = emailList.every(email =>
+        /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
+      );
 
       expect(allValid).toBe(true);
     });
@@ -269,7 +275,7 @@ describe('Critical Component Tests', () => {
       expect(largeQuestionBank).toHaveLength(140);
 
       // Filter should be fast (not testing actual performance, just functionality)
-      const domain1Questions = largeQuestionBank.filter((q) => q.domain === 1);
+      const domain1Questions = largeQuestionBank.filter(q => q.domain === 1);
       expect(domain1Questions.length).toBeGreaterThan(0);
     });
 

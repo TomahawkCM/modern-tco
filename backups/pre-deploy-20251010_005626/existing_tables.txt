@@ -1,0 +1,13 @@
+# Critical Tables to Preserve
+# These tables exist and should NOT be affected by deployment:
+
+flashcards                  # User-created flashcards (MUST PRESERVE)
+exam_sessions              # Exam tracking (MUST PRESERVE)
+questions                  # Question bank (MUST PRESERVE)
+users                      # User accounts (MUST PRESERVE)
+user_progress             # User progress (MUST PRESERVE)
+
+# New Tables to be Created:
+flashcard_library         # Curated flashcard content (NEW)
+flashcard_library_progress # User progress on library cards (NEW)
+content_import_logs       # Import audit trail (NEW)

@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import { supabase } from '@/lib/supabase';
-import type { AuthError, Session, User } from '@supabase/supabase-js';
-import { createContext, useContext, useEffect, useState, type ReactNode } from 'react';
+import { supabase } from "@/lib/supabase";
+import type { AuthError, Session, User } from "@supabase/supabase-js";
+import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
 
 /** Minimal shape used to build payloads */
-type _UsersRow = {
+type UsersRow = {
   id: string;
   email: string | null;
   first_name: string | null;
@@ -36,7 +36,7 @@ interface AuthContextType extends AuthState {
   isAdmin: boolean;
 }
 
-const AuthContext = createContext<AuthContextType | undefined>(undefined);
+export const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 /**
  * Security Fix: Removed client-side admin check
@@ -47,7 +47,7 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export function useAuth() {
   const context = useContext(AuthContext);
   if (context === undefined) {
-    throw new Error('useAuth must be used within an AuthProvider');
+    throw new Error("useAuth must be used within an AuthProvider");
   }
   return context;
 }
@@ -69,18 +69,15 @@ export function useIsAdmin(): boolean {
 
       try {
         const response = await fetch('/api/auth/check-admin');
-        const data: { isAdmin?: boolean } = await response.json();
-        setIsAdmin(data.isAdmin ?? false);
+        const data = await response.json();
+        setIsAdmin(data.isAdmin || false);
       } catch (error) {
         console.error('Failed to check admin status:', error);
         setIsAdmin(false);
       }
     }
 
-    void fetchAdminStatus().catch((error) => {
-      console.error('Failed to fetch admin status:', error);
-      setIsAdmin(false);
-    });
+    fetchAdminStatus();
   }, [user]);
 
   return isAdmin;
@@ -106,7 +103,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
           error,
         } = await supabase.auth.getSession();
         if (error) {
-          console.error('Error getting initial session:', error);
+          console.error("Error getting initial session:", error);
           setState((prev) => ({ ...prev, error, loading: false }));
           return;
         }
@@ -119,7 +116,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
           error: null,
         }));
       } catch (error) {
-        console.error('Unexpected error getting session:', error);
+        console.error("Unexpected error getting session:", error);
         setState((prev) => ({
           ...prev,
           loading: false,
@@ -128,14 +125,12 @@ export function AuthProvider({ children }: AuthProviderProps) {
       }
     };
 
-    void getInitialSession().catch((error) => {
-      console.error('Failed to get initial session:', error);
-    });
+    getInitialSession();
 
     const {
       data: { subscription },
-    } = supabase.auth.onAuthStateChange((event, session) => {
-      console.log('Auth state changed:', event, session?.user?.id ?? 'no user');
+    } = supabase.auth.onAuthStateChange(async (event, session) => {
+      console.log("Auth state changed:", event, session?.user?.id);
 
       setState((prev) => ({
         ...prev,
@@ -145,16 +140,16 @@ export function AuthProvider({ children }: AuthProviderProps) {
         error: null,
       }));
 
-      if (event === 'SIGNED_IN' && session?.user) {
+      if (event === "SIGNED_IN" && session?.user) {
         // TODO: Implement user profile sync when users table is available
         // await syncUserProfile(session.user);
-      } else if (event === 'SIGNED_OUT') {
+      } else if (event === "SIGNED_OUT") {
         // Clear cached app data when signing out
-        localStorage.removeItem('tco-progress');
-        localStorage.removeItem('tco-exam-session');
-        localStorage.removeItem('tco-incorrect-answers');
-        localStorage.removeItem('tco-settings');
-        localStorage.removeItem('tco-search-history');
+        localStorage.removeItem("tco-progress");
+        localStorage.removeItem("tco-exam-session");
+        localStorage.removeItem("tco-incorrect-answers");
+        localStorage.removeItem("tco-settings");
+        localStorage.removeItem("tco-search-history");
       }
     });
 
@@ -209,8 +204,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
         password,
         options: {
           data: {
-            first_name: options?.firstName ?? '',
-            last_name: options?.lastName ?? '',
+            first_name: options?.firstName || "",
+            last_name: options?.lastName || "",
           },
         },
       });
@@ -238,7 +233,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
   const resetPassword = async (email: string) => {
     try {
-      const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? '';
+      const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
       const { error } = await supabase.auth.resetPasswordForEmail(email, {
         redirectTo: `${window.location.origin}${basePath}/auth/reset-password`,
       });
@@ -250,7 +245,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
   const updateProfile = async (updates: { firstName?: string; lastName?: string }) => {
     if (!state.user) {
-      return { error: { message: 'No user logged in' } as AuthError };
+      return { error: { message: "No user logged in" } as AuthError };
     }
 
     try {

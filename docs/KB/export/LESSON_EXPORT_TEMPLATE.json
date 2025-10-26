@@ -1,0 +1,54 @@
+{
+  "metadata": {
+    "generatedAt": "2025-01-01T00:00:00.000Z",
+    "moduleCount": 1,
+    "lessonCount": 1,
+    "sourceDir": "docs/KB/lessons"
+  },
+  "modules": [
+    {
+      "id": "kb.aq.basics",
+      "title": "Asking Questions Fundamentals",
+      "domain": "AQ",
+      "status": "draft",
+      "description": "Optional description that surfaces in dashboards or downstream exports.",
+      "metadata": {
+        "status": "draft",
+        "contributors": ["kb-team"],
+        "durationMinutes": 15,
+        "slug": "query-workbench-overview",
+        "sourceFile": "templates/query-workbench-overview.md"
+      },
+      "lessons": [
+        {
+          "slug": "query-workbench-overview",
+          "title": "Query Workbench Overview",
+          "status": "draft",
+          "summary": "Placeholder text describing how analysts navigate the query workbench.",
+          "durationMinutes": 15,
+          "tags": ["stub"],
+          "contributors": ["kb-team"],
+          "skillLevel": "beginner",
+          "content": "## Overview\n\nReplace with lesson markdown prior to publishing.",
+          "sourceFile": "templates/query-workbench-overview.md"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "id": "kb-ask-001",
+      "moduleId": "kb.aq.basics",
+      "domain": "AQ",
+      "question": "Placeholder question?",
+      "choices": [
+        { "id": "a", "text": "Choice A" },
+        { "id": "b", "text": "Choice B" }
+      ],
+      "correctAnswerId": "a",
+      "difficulty": "beginner",
+      "tags": ["stub"],
+      "explanation": "Stub explanation"
+    }
+  ]
+}

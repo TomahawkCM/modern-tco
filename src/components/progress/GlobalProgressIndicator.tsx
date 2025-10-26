@@ -3,15 +3,15 @@
  * Shows overall certification readiness and next recommended step
  */
 
-'use client';
+"use client";
 
-import { ArrowRight, BookOpen, FileText, Target, TrendingUp } from 'lucide-react';
-import { useRouter } from 'next/navigation';
-import { useState } from 'react';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Progress } from '@/components/ui/progress';
-import { cn } from '@/lib/utils';
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { Badge } from "@/components/ui/badge";
+import { Progress } from "@/components/ui/progress";
+import { Button } from "@/components/ui/button";
+import { TrendingUp, BookOpen, Target, FileText, ArrowRight, CheckCircle } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 interface GlobalProgressIndicatorProps {
   className?: string;
@@ -31,45 +31,43 @@ export function GlobalProgressIndicator({
     studyProgress: 65,
     practiceProgress: 35,
     examProgress: 0,
-    readinessLevel: 'Good Progress',
+    readinessLevel: "Good Progress",
     nextStep: {
-      phase: 'practice',
-      title: 'Continue Practice',
-      description: 'Practice questions in weaker domains',
-      path: '/domains/taking-action',
+      phase: "practice",
+      title: "Continue Practice",
+      description: "Practice questions in weaker domains",
+      path: "/domains/taking-action",
       icon: Target,
     },
   });
 
   const getReadinessColor = (progress: number) => {
-    if (progress >= 80) return 'text-[#22c55e]';
-    if (progress >= 60) return 'text-primary';
-    if (progress >= 40) return 'text-[#f97316]';
-    return 'text-muted-foreground';
+    if (progress >= 80) return "text-[#22c55e]";
+    if (progress >= 60) return "text-primary";
+    if (progress >= 40) return "text-[#f97316]";
+    return "text-muted-foreground";
   };
 
   const getProgressColor = (progress: number) => {
-    if (progress >= 80) return 'bg-[#22c55e]';
-    if (progress >= 60) return 'bg-primary';
-    if (progress >= 40) return 'bg-yellow-500';
-    return 'bg-gray-500';
+    if (progress >= 80) return "bg-[#22c55e]";
+    if (progress >= 60) return "bg-primary";
+    if (progress >= 40) return "bg-yellow-500";
+    return "bg-gray-500";
   };
 
   if (compact) {
     return (
-      <div className={cn('flex items-center gap-3', className)}>
+      <div className={cn("flex items-center gap-3", className)}>
         <div className="flex items-center gap-2">
           <TrendingUp className="h-4 w-4 text-tanium-accent" />
-          <span className="text-sm font-medium text-foreground">
-            {progressData.overallProgress}%
-          </span>
+          <span className="text-sm font-medium text-foreground">{progressData.overallProgress}%</span>
         </div>
         <div className="w-24">
           <Progress value={progressData.overallProgress} className="h-2" />
         </div>
         <Badge
           variant="outline"
-          className={cn('text-xs', getReadinessColor(progressData.overallProgress))}
+          className={cn("text-xs", getReadinessColor(progressData.overallProgress))}
         >
           {progressData.readinessLevel}
         </Badge>
@@ -80,7 +78,7 @@ export function GlobalProgressIndicator({
   return (
     <div
       className={cn(
-        'rounded-lg border border-white/10 bg-black/20 p-4 backdrop-blur-sm',
+        "rounded-lg border border-white/10 bg-black/20 p-4 backdrop-blur-sm",
         className
       )}
     >
@@ -91,7 +89,7 @@ export function GlobalProgressIndicator({
             <div className="text-lg font-semibold text-foreground">
               {progressData.overallProgress}% Complete
             </div>
-            <div className={cn('text-sm', getReadinessColor(progressData.overallProgress))}>
+            <div className={cn("text-sm", getReadinessColor(progressData.overallProgress))}>
               {progressData.readinessLevel}
             </div>
           </div>

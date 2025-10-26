@@ -1,15 +1,15 @@
-import { act, renderHook } from '@testing-library/react';
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { useAssessment } from '../src/hooks/useAssessment';
-import { AssessmentEngine } from '../src/lib/assessment/assessment-engine';
-import { AnalyticsService } from '../src/lib/services/analytics-service';
-import { ProgressService } from '../src/lib/services/progress-service';
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { renderHook, act } from "@testing-library/react";
+import { useAssessment } from "../src/hooks/useAssessment";
+import { AssessmentEngine } from "../src/lib/assessment/assessment-engine";
+import { AnalyticsService } from "../src/lib/services/analytics-service";
+import { ProgressService } from "../src/lib/services/progress-service";
 import type {
   AssessmentConfig,
   AssessmentResult,
   AssessmentSession,
-} from '../src/types/assessment';
-import { Difficulty, QuestionCategory, TCODomain } from '../src/types/assessment';
+} from "../src/types/assessment";
+import { Difficulty, QuestionCategory, TCODomain } from "../src/types/assessment";
 
 // We will spy and stub methods on these modules directly
 const mockAssessmentEngine = AssessmentEngine as any;
@@ -17,10 +17,10 @@ const mockProgressService = ProgressService as any;
 const mockAnalyticsService = AnalyticsService as any;
 
 const mockAssessmentConfig: AssessmentConfig = {
-  assessmentId: 'test-assessment',
-  userId: 'test-user',
-  moduleId: 'test-module',
-  assessmentType: 'practice',
+  assessmentId: "test-assessment",
+  userId: "test-user",
+  moduleId: "test-module",
+  assessmentType: "practice",
   timeLimit: 1800, // 30 minutes
   questionCount: 10,
   domainFilter: [TCODomain.ASKING_QUESTIONS], // Use enum
@@ -33,52 +33,52 @@ const mockAssessmentConfig: AssessmentConfig = {
 };
 
 const mockAssessmentSession: AssessmentSession = {
-  id: 'test-session',
-  assessmentId: 'test-assessment',
-  userId: 'test-user',
-  moduleId: 'test-module',
-  type: 'practice',
-  status: 'in_progress',
-  startTime: new Date('2024-01-01T10:00:00Z'),
+  id: "test-session",
+  assessmentId: "test-assessment",
+  userId: "test-user",
+  moduleId: "test-module",
+  type: "practice",
+  status: "in_progress",
+  startTime: new Date("2024-01-01T10:00:00Z"),
   timeLimit: 1800,
   questions: [
     {
-      id: 'q1',
-      question: 'What is the primary purpose of Tanium?', // Renamed 'text' to 'question'
+      id: "q1",
+      question: "What is the primary purpose of Tanium?", // Renamed 'text' to 'question'
       choices: [
-        { id: 'a', text: 'Network monitoring' },
-        { id: 'b', text: 'Endpoint visibility and control' },
-        { id: 'c', text: 'Web development' },
-        { id: 'd', text: 'Data storage' },
+        { id: "a", text: "Network monitoring" },
+        { id: "b", text: "Endpoint visibility and control" },
+        { id: "c", text: "Web development" },
+        { id: "d", text: "Data storage" },
       ],
-      correctAnswerId: 'b',
+      correctAnswerId: "b",
       domain: TCODomain.ASKING_QUESTIONS, // Use enum
       difficulty: Difficulty.INTERMEDIATE, // Use enum
       category: QuestionCategory.PLATFORM_FUNDAMENTALS, // Added category
-      explanation: 'Tanium provides real-time endpoint visibility and control.',
-      tags: ['fundamentals', 'platform-overview'],
+      explanation: "Tanium provides real-time endpoint visibility and control.",
+      tags: ["fundamentals", "platform-overview"],
       consoleSteps: [], // Added empty consoleSteps
-      context: '', // Added empty context
+      context: "", // Added empty context
       createdAt: new Date(), // Added createdAt
       updatedAt: new Date(), // Added updatedAt
     },
     {
-      id: 'q2',
-      question: 'Which sensor would you use to get system information?', // Renamed 'text' to 'question'
+      id: "q2",
+      question: "Which sensor would you use to get system information?", // Renamed 'text' to 'question'
       choices: [
-        { id: 'a', text: 'Computer Name' },
-        { id: 'b', text: 'System Information' },
-        { id: 'c', text: 'Process List' },
-        { id: 'd', text: 'Network Adapters' },
+        { id: "a", text: "Computer Name" },
+        { id: "b", text: "System Information" },
+        { id: "c", text: "Process List" },
+        { id: "d", text: "Network Adapters" },
       ],
-      correctAnswerId: 'b',
+      correctAnswerId: "b",
       domain: TCODomain.ASKING_QUESTIONS, // Use enum
       difficulty: Difficulty.INTERMEDIATE, // Use enum
       category: QuestionCategory.CONSOLE_PROCEDURES, // Added category
-      explanation: 'System Information sensor provides comprehensive system details.',
-      tags: ['sensors', 'system-info'],
+      explanation: "System Information sensor provides comprehensive system details.",
+      tags: ["sensors", "system-info"],
       consoleSteps: [], // Added empty consoleSteps
-      context: '', // Added empty context
+      context: "", // Added empty context
       createdAt: new Date(), // Added createdAt
       updatedAt: new Date(), // Added updatedAt
     },
@@ -91,9 +91,9 @@ const mockAssessmentSession: AssessmentSession = {
 };
 
 const mockAssessmentResult: AssessmentResult = {
-  sessionId: 'test-session',
-  userId: 'test-user',
-  assessmentId: 'test-assessment',
+  sessionId: "test-session",
+  userId: "test-user",
+  assessmentId: "test-assessment",
   overallScore: 0.85,
   correctAnswers: 8,
   incorrectAnswers: 2,
@@ -105,37 +105,37 @@ const mockAssessmentResult: AssessmentResult = {
     [TCODomain.REFINING_QUESTIONS]: { score: 0.8, total: 3, correct: 2 }, // Renamed questionsAnswered to total
     [TCODomain.TAKING_ACTION]: { score: 0.75, total: 2, correct: 1 }, // Renamed questionsAnswered to total
   },
-  completedAt: new Date('2024-01-01T10:20:00Z'),
+  completedAt: new Date("2024-01-01T10:20:00Z"),
   remediation: {
     weakAreas: [TCODomain.TAKING_ACTION], // Use enum
     recommendedStudyTime: 60,
     suggestedResources: [
       {
-        type: 'video',
-        title: 'Action Deployment Best Practices',
-        url: '/resources/action-deployment',
+        type: "video",
+        title: "Action Deployment Best Practices",
+        url: "/resources/action-deployment",
         estimatedTime: 15,
       },
       {
-        type: 'practice',
-        title: 'Action Lab Exercise',
-        url: '/labs/action-basics',
+        type: "practice",
+        title: "Action Lab Exercise",
+        url: "/labs/action-basics",
         estimatedTime: 45,
       },
     ],
     studyPlan: [
       {
         order: 1,
-        title: 'Review Action Deployment',
-        description: 'Review the core concepts of Tanium action deployment.',
-        type: 'review',
+        title: "Review Action Deployment",
+        description: "Review the core concepts of Tanium action deployment.",
+        type: "review",
         activities: [
-          { type: 'review', content: 'Action deployment concepts', duration: 30 },
-          { type: 'practice', content: 'Basic action exercises', duration: 30 },
+          { type: "review", content: "Action deployment concepts", duration: 30 },
+          { type: "practice", content: "Basic action exercises", duration: 30 },
         ],
       },
     ],
-    overallRecommendation: 'Focus on practical application of action deployment.', // Added missing property
+    overallRecommendation: "Focus on practical application of action deployment.", // Added missing property
     objectiveRemediation: [], // Added missing property
     retakeEligibility: true, // Added missing property
   },
@@ -153,12 +153,7 @@ const mockAssessmentResult: AssessmentResult = {
     fastestQuestion: 45,
     slowestQuestion: 300,
     confidenceAlignment: 0.8,
-    difficultyProgression: {
-      beginnerAccuracy: 0.7,
-      intermediateAccuracy: 0.8,
-      advancedAccuracy: 0.85,
-      suggestedLevel: 'Intermediate' as any,
-    },
+    difficultyProgression: { beginnerAccuracy: 0.7, intermediateAccuracy: 0.8, advancedAccuracy: 0.85, suggestedLevel:  "Intermediate" as any },
   },
   analytics: {
     averageTimePerQuestion: 120,
@@ -170,14 +165,14 @@ const mockAssessmentResult: AssessmentResult = {
   },
 };
 
-describe('Assessment Workflow Integration Tests', () => {
+describe("Assessment Workflow Integration Tests", () => {
   beforeEach(() => {
     // Reset all mocks
     vi.clearAllMocks();
 
     // Setup default mock implementations
     mockAssessmentEngine.initializeSession = vi.fn().mockResolvedValue({
-      sessionId: 'test-session',
+      sessionId: "test-session",
       questions: mockAssessmentSession.questions,
       // Removed metadata as it's not part of AssessmentSessionData
     });
@@ -185,20 +180,20 @@ describe('Assessment Workflow Integration Tests', () => {
     mockAssessmentEngine.updateSession = vi.fn().mockResolvedValue(undefined);
     mockAssessmentEngine.calculateResults = vi.fn().mockResolvedValue(mockAssessmentResult);
 
-    mockProgressService.updateAssessmentProgress = vi.fn().mockResolvedValue(undefined);
-    mockProgressService.updateQuestionProgress = vi.fn().mockResolvedValue(undefined);
-    mockProgressService.getUserProgress = vi.fn().mockResolvedValue(null);
+  mockProgressService.updateAssessmentProgress = vi.fn().mockResolvedValue(undefined);
+  mockProgressService.updateQuestionProgress = vi.fn().mockResolvedValue(undefined);
+  mockProgressService.getUserProgress = vi.fn().mockResolvedValue(null);
 
-    mockAnalyticsService.track = vi.fn().mockResolvedValue(undefined);
-    mockAnalyticsService.getUserAnalytics = vi.fn().mockResolvedValue({});
+  mockAnalyticsService.track = vi.fn().mockResolvedValue(undefined);
+  mockAnalyticsService.getUserAnalytics = vi.fn().mockResolvedValue({});
   });
 
   afterEach(() => {
     vi.restoreAllMocks();
   });
 
-  describe('Assessment Lifecycle', () => {
-    it('should initialize assessment session correctly', async () => {
+  describe("Assessment Lifecycle", () => {
+    it("should initialize assessment session correctly", async () => {
       const { result } = renderHook(() => useAssessment());
 
       await act(async () => {
@@ -217,7 +212,7 @@ describe('Assessment Workflow Integration Tests', () => {
       );
       expect(mockAnalyticsService.track).toHaveBeenCalledWith(
         expect.objectContaining({
-          type: 'assessment_started',
+          type: "assessment_started",
           userId: mockAssessmentConfig.userId,
           data: expect.objectContaining({
             assessmentId: mockAssessmentConfig.assessmentId,
@@ -231,7 +226,7 @@ describe('Assessment Workflow Integration Tests', () => {
       expect(result.current.isLoading).toBe(false);
     });
 
-    it('should handle answer submission correctly', async () => {
+    it("should handle answer submission correctly", async () => {
       const { result } = renderHook(() => useAssessment());
 
       // Start assessment first
@@ -240,8 +235,8 @@ describe('Assessment Workflow Integration Tests', () => {
       });
 
       const answer = {
-        questionId: 'q1',
-        selectedAnswers: ['b'],
+        questionId: "q1",
+        selectedAnswers: ["b"],
         timeSpent: 120,
         attempts: 1,
         submittedAt: new Date(),
@@ -250,11 +245,11 @@ describe('Assessment Workflow Integration Tests', () => {
       };
 
       await act(async () => {
-        await result.current.submitAnswer('q1', answer);
+        await result.current.submitAnswer("q1", answer);
       });
 
       expect(mockAssessmentEngine.updateSession).toHaveBeenCalledWith(
-        'test-session',
+        "test-session",
         expect.objectContaining({
           answers: expect.arrayContaining([expect.objectContaining(answer)]), // Use expect.objectContaining
         })
@@ -262,18 +257,18 @@ describe('Assessment Workflow Integration Tests', () => {
 
       expect(mockAnalyticsService.track).toHaveBeenCalledWith(
         expect.objectContaining({
-          type: 'question_answered',
+          type: "question_answered",
           userId: mockAssessmentConfig.userId,
           data: expect.objectContaining({
-            questionId: 'q1',
-            selectedAnswers: ['b'], // Changed from 'answer' to 'selectedAnswers'
+            questionId: "q1",
+            selectedAnswers: ["b"], // Changed from 'answer' to 'selectedAnswers'
             timeSpent: 120,
           }),
         })
       );
     });
 
-    it('should complete assessment and calculate results', async () => {
+    it("should complete assessment and calculate results", async () => {
       const { result } = renderHook(() => useAssessment());
 
       // Start assessment
@@ -283,9 +278,9 @@ describe('Assessment Workflow Integration Tests', () => {
 
       // Submit some answers
       await act(async () => {
-        await result.current.submitAnswer('q1', {
-          questionId: 'q1',
-          selectedAnswers: ['b'],
+        await result.current.submitAnswer("q1", {
+          questionId: "q1",
+          selectedAnswers: ["b"],
           timeSpent: 120,
           attempts: 1,
           submittedAt: new Date(),
@@ -302,7 +297,7 @@ describe('Assessment Workflow Integration Tests', () => {
 
       expect(mockAssessmentEngine.calculateResults).toHaveBeenCalledWith(
         expect.objectContaining({
-          id: 'test-session',
+          id: "test-session",
           answers: expect.any(Array),
           questions: expect.any(Array), // Add questions to the expected object
         })
@@ -326,10 +321,10 @@ describe('Assessment Workflow Integration Tests', () => {
 
       expect(mockAnalyticsService.track).toHaveBeenCalledWith(
         expect.objectContaining({
-          type: 'assessment_completed',
+          type: "assessment_completed",
           userId: mockAssessmentConfig.userId,
           data: expect.objectContaining({
-            sessionId: 'test-session',
+            sessionId: "test-session",
             score: mockAssessmentResult.overallScore,
             passed: mockAssessmentResult.passed,
             totalQuestions: mockAssessmentResult.totalQuestions,
@@ -343,7 +338,7 @@ describe('Assessment Workflow Integration Tests', () => {
       expect(result.current.currentResult).toEqual(mockAssessmentResult);
     });
 
-    it('should handle assessment cancellation', async () => {
+    it("should handle assessment cancellation", async () => {
       const { result } = renderHook(() => useAssessment());
 
       // Start assessment
@@ -361,10 +356,10 @@ describe('Assessment Workflow Integration Tests', () => {
 
       expect(mockAnalyticsService.track).toHaveBeenCalledWith(
         expect.objectContaining({
-          type: 'assessment_cancelled',
+          type: "assessment_cancelled",
           userId: mockAssessmentConfig.userId,
           data: expect.objectContaining({
-            sessionId: 'test-session',
+            sessionId: "test-session",
           }),
         })
       );
@@ -374,22 +369,22 @@ describe('Assessment Workflow Integration Tests', () => {
     });
   });
 
-  describe('Error Handling', () => {
-    it('should handle assessment initialization errors', async () => {
+  describe("Error Handling", () => {
+    it("should handle assessment initialization errors", async () => {
       const { result } = renderHook(() => useAssessment());
 
-      const error = new Error('Failed to initialize assessment');
+      const error = new Error("Failed to initialize assessment");
       mockAssessmentEngine.initializeSession.mockRejectedValue(error);
 
       await act(async () => {
         await result.current.startAssessment(mockAssessmentConfig);
       });
 
-      expect(result.current.error).toBe('Failed to initialize assessment');
+      expect(result.current.error).toBe("Failed to initialize assessment");
       expect(result.current.currentSession).toBe(null);
     });
 
-    it('should handle answer submission errors', async () => {
+    it("should handle answer submission errors", async () => {
       const { result } = renderHook(() => useAssessment());
 
       // Start assessment first
@@ -397,12 +392,12 @@ describe('Assessment Workflow Integration Tests', () => {
         await result.current.startAssessment(mockAssessmentConfig);
       });
 
-      const error = new Error('Failed to submit answer');
+      const error = new Error("Failed to submit answer");
       mockAssessmentEngine.updateSession.mockRejectedValue(error);
 
       const answer = {
-        questionId: 'q1',
-        selectedAnswers: ['b'],
+        questionId: "q1",
+        selectedAnswers: ["b"],
         timeSpent: 120,
         attempts: 1,
         submittedAt: new Date(),
@@ -411,13 +406,13 @@ describe('Assessment Workflow Integration Tests', () => {
       };
 
       await act(async () => {
-        await result.current.submitAnswer('q1', answer);
+        await result.current.submitAnswer("q1", answer);
       });
 
-      expect(result.current.error).toBe('Failed to submit answer');
+      expect(result.current.error).toBe("Failed to submit answer");
     });
 
-    it('should handle assessment submission errors', async () => {
+    it("should handle assessment submission errors", async () => {
       const { result } = renderHook(() => useAssessment());
 
       // Start assessment
@@ -425,7 +420,7 @@ describe('Assessment Workflow Integration Tests', () => {
         await result.current.startAssessment(mockAssessmentConfig);
       });
 
-      const error = new Error('Failed to submit assessment');
+      const error = new Error("Failed to submit assessment");
       mockAssessmentEngine.calculateResults.mockRejectedValue(error);
 
       await act(async () => {
@@ -436,17 +431,17 @@ describe('Assessment Workflow Integration Tests', () => {
         }
       });
 
-      expect(result.current.error).toBe('Failed to submit assessment');
+      expect(result.current.error).toBe("Failed to submit assessment");
     });
   });
 
-  describe('Progress and Analytics Integration', () => {
-    it('should update progress correctly', async () => {
+  describe("Progress and Analytics Integration", () => {
+    it("should update progress correctly", async () => {
       const { result } = renderHook(() => useAssessment());
 
       const progress = {
-        userId: 'test-user',
-        questionId: 'q1',
+        userId: "test-user",
+        questionId: "q1",
         isCorrect: true,
         timeSpent: 120,
         attempts: 1,
@@ -473,13 +468,13 @@ describe('Assessment Workflow Integration Tests', () => {
       );
     });
 
-    it('should track analytics events', async () => {
+    it("should track analytics events", async () => {
       const { result } = renderHook(() => useAssessment());
 
       const event = {
-        type: 'custom_event' as const,
-        userId: 'test-user',
-        data: { test: 'data' },
+        type: "custom_event" as const,
+        userId: "test-user",
+        data: { test: "data" },
         timestamp: new Date(),
       };
 
@@ -490,32 +485,32 @@ describe('Assessment Workflow Integration Tests', () => {
       expect(mockAnalyticsService.track).toHaveBeenCalledWith(event);
     });
 
-    it('should retrieve user progress', async () => {
+    it("should retrieve user progress", async () => {
       const { result } = renderHook(() => useAssessment());
 
       const mockProgress = {
-        userId: 'test-user',
-        moduleProgress: { 'test-module': 0.75 },
-        assessmentScores: { 'test-assessment': 0.85 },
+        userId: "test-user",
+        moduleProgress: { "test-module": 0.75 },
+        assessmentScores: { "test-assessment": 0.85 },
         timeSpent: 450,
       };
 
-      mockProgressService.getUserProgress.mockResolvedValue(mockProgress as any);
+    mockProgressService.getUserProgress.mockResolvedValue(mockProgress as any);
 
       let progress;
       await act(async () => {
-        progress = await result.current.getProgress('test-user', 'test-module');
+        progress = await result.current.getProgress("test-user", "test-module");
       });
 
-      expect(mockProgressService.getUserProgress).toHaveBeenCalledWith('test-user', 'test-module');
+      expect(mockProgressService.getUserProgress).toHaveBeenCalledWith("test-user", "test-module");
       expect(progress).toEqual(mockProgress);
     });
 
-    it('should retrieve user analytics', async () => {
+    it("should retrieve user analytics", async () => {
       const { result } = renderHook(() => useAssessment());
 
       const mockAnalytics = {
-        userId: 'test-user',
+        userId: "test-user",
         totalAssessments: 5,
         averageScore: 0.82,
         timeSpent: 450,
@@ -526,16 +521,16 @@ describe('Assessment Workflow Integration Tests', () => {
 
       let analytics;
       await act(async () => {
-        analytics = await result.current.getAnalytics('test-user', '30d');
+        analytics = await result.current.getAnalytics("test-user", "30d");
       });
 
-      expect(mockAnalyticsService.getUserAnalytics).toHaveBeenCalledWith('test-user', '30d');
+      expect(mockAnalyticsService.getUserAnalytics).toHaveBeenCalledWith("test-user", "30d");
       expect(analytics).toEqual(mockAnalytics);
     });
   });
 
-  describe('Pass Threshold Gating', () => {
-    it('should enforce passing thresholds correctly', async () => {
+  describe("Pass Threshold Gating", () => {
+    it("should enforce passing thresholds correctly", async () => {
       const { result } = renderHook(() => useAssessment());
 
       // Mock a failing result
@@ -562,8 +557,8 @@ describe('Assessment Workflow Integration Tests', () => {
         assessmentResult = await result.current.submitAssessment();
       });
 
-      expect((assessmentResult as any)?.passed).toBe(false); // Add optional chaining
-      expect((assessmentResult as any)?.overallScore).toBe(0.65); // Add optional chaining
+  expect((assessmentResult as any)?.passed).toBe(false); // Add optional chaining
+  expect((assessmentResult as any)?.overallScore).toBe(0.65); // Add optional chaining
 
       // Verify that progress service was called with failed status
       expect(mockProgressService.updateAssessmentProgress).toHaveBeenCalledWith(
@@ -574,7 +569,7 @@ describe('Assessment Workflow Integration Tests', () => {
       );
     });
 
-    it('should provide remediation for failed assessments', async () => {
+    it("should provide remediation for failed assessments", async () => {
       const failingResult = {
         ...mockAssessmentResult,
         overallScore: 0.65,
@@ -584,22 +579,22 @@ describe('Assessment Workflow Integration Tests', () => {
           recommendedStudyTime: 120,
           suggestedResources: [
             {
-              type: 'video',
-              title: 'Advanced Targeting Techniques',
-              url: '/resources/targeting',
+              type: "video",
+              title: "Advanced Targeting Techniques",
+              url: "/resources/targeting",
               estimatedTime: 30,
             },
           ],
           studyPlan: [
             {
               order: 1,
-              title: 'Review Targeting Concepts',
-              description: 'Focus on refining questions and targeting.',
-              type: 'review',
-              activities: [{ type: 'review', content: 'Targeting concepts', duration: 60 }],
+              title: "Review Targeting Concepts",
+              description: "Focus on refining questions and targeting.",
+              type: "review",
+              activities: [{ type: "review", content: "Targeting concepts", duration: 60 }],
             },
           ],
-          overallRecommendation: 'Focus on improving targeting and action deployment skills.', // Add missing property
+          overallRecommendation: "Focus on improving targeting and action deployment skills.", // Add missing property
           objectiveRemediation: [], // Add missing property
           retakeEligibility: true, // Add missing property
         },
@@ -618,13 +613,13 @@ describe('Assessment Workflow Integration Tests', () => {
         assessmentResult = await result.current.submitAssessment();
       });
 
-      expect((assessmentResult as any)?.remediation?.weakAreas).toEqual([
+  expect((assessmentResult as any)?.remediation?.weakAreas).toEqual([
         TCODomain.TAKING_ACTION,
         TCODomain.REFINING_QUESTIONS,
       ]);
-      expect((assessmentResult as any)?.remediation?.recommendedStudyTime).toBe(120);
-      expect((assessmentResult as any)?.remediation?.suggestedResources).toBeDefined();
-      expect((assessmentResult as any)?.remediation?.studyPlan).toBeDefined();
+  expect((assessmentResult as any)?.remediation?.recommendedStudyTime).toBe(120);
+  expect((assessmentResult as any)?.remediation?.suggestedResources).toBeDefined();
+  expect((assessmentResult as any)?.remediation?.studyPlan).toBeDefined();
     });
   });
 });

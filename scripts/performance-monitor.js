@@ -39,7 +39,7 @@ const formatBytes = (bytes) => {
   const k = 1024;
   const sizes = ['Bytes', 'KB', 'MB', 'GB'];
   const i = Math.floor(Math.log(bytes) / Math.log(k));
-  return Math.round((bytes / k ** i) * 100) / 100 + ' ' + sizes[i];
+  return Math.round(bytes / Math.pow(k, i) * 100) / 100 + ' ' + sizes[i];
 };
 
 const formatTime = (ms) => {
@@ -162,9 +162,8 @@ async function runLighthouse() {
     console.log('\nLighthouse Scores:');
     Object.entries(scores).forEach(([category, score]) => {
       const threshold = CONFIG.thresholds[category] || 90;
-      const status = score >= threshold ? 'pass' : score >= threshold - 10 ? 'warn' : 'fail';
-      const categoryLabel =
-        category.charAt(0).toUpperCase() + category.slice(1).replace(/([A-Z])/g, ' $1');
+      const status = score >= threshold ? 'pass' : (score >= threshold - 10 ? 'warn' : 'fail');
+      const categoryLabel = category.charAt(0).toUpperCase() + category.slice(1).replace(/([A-Z])/g, ' $1');
       printStatus(`  ${categoryLabel}`, `${score}/100`, status);
     });
 
@@ -172,21 +171,12 @@ async function runLighthouse() {
     const metrics = report.audits['metrics'].details.items[0];
     console.log('\nCore Web Vitals:');
     printStatus('  First Contentful Paint', formatTime(metrics.firstContentfulPaint), 'info');
-    printStatus(
-      '  Largest Contentful Paint',
-      formatTime(metrics.largestContentfulPaint),
-      metrics.largestContentfulPaint <= 2500 ? 'pass' : 'warn'
-    );
-    printStatus(
-      '  Total Blocking Time',
-      formatTime(metrics.totalBlockingTime),
-      metrics.totalBlockingTime <= 300 ? 'pass' : 'warn'
-    );
-    printStatus(
-      '  Cumulative Layout Shift',
-      metrics.cumulativeLayoutShift.toFixed(3),
-      metrics.cumulativeLayoutShift <= 0.1 ? 'pass' : 'warn'
-    );
+    printStatus('  Largest Contentful Paint', formatTime(metrics.largestContentfulPaint),
+      metrics.largestContentfulPaint <= 2500 ? 'pass' : 'warn');
+    printStatus('  Total Blocking Time', formatTime(metrics.totalBlockingTime),
+      metrics.totalBlockingTime <= 300 ? 'pass' : 'warn');
+    printStatus('  Cumulative Layout Shift', metrics.cumulativeLayoutShift.toFixed(3),
+      metrics.cumulativeLayoutShift <= 0.1 ? 'pass' : 'warn');
 
     printStatus('\nFull report saved', htmlReportPath, 'pass');
 
@@ -248,11 +238,8 @@ async function checkDependencies() {
     const critical = audit.metadata?.vulnerabilities?.critical || 0;
     const high = audit.metadata?.vulnerabilities?.high || 0;
 
-    printStatus(
-      'Security vulnerabilities',
-      vulnCount,
-      vulnCount === 0 ? 'pass' : critical > 0 || high > 0 ? 'fail' : 'warn'
-    );
+    printStatus('Security vulnerabilities', vulnCount, vulnCount === 0 ? 'pass' :
+      (critical > 0 || high > 0 ? 'fail' : 'warn'));
 
     if (vulnCount > 0) {
       console.log('  Critical:', critical);
@@ -282,28 +269,19 @@ async function generateReport(results) {
 
   // Generate recommendations
   if (results.lighthouse?.scores.performance < CONFIG.thresholds.performance) {
-    report.recommendations.push(
-      '⚠ Performance score below threshold - optimize bundle size and code splitting'
-    );
+    report.recommendations.push('⚠ Performance score below threshold - optimize bundle size and code splitting');
   }
 
   if (results.bundle?.sortedPages[0][1] > CONFIG.thresholds.maxBundleSize) {
-    report.recommendations.push(
-      `⚠ Largest page (${results.bundle.sortedPages[0][0]}) exceeds size threshold`
-    );
+    report.recommendations.push(`⚠ Largest page (${results.bundle.sortedPages[0][0]}) exceeds size threshold`);
   }
 
   if (results.dependencies?.vulnerabilities?.critical > 0) {
-    report.recommendations.push(
-      '🚨 Critical security vulnerabilities detected - run npm audit fix immediately'
-    );
+    report.recommendations.push('🚨 Critical security vulnerabilities detected - run npm audit fix immediately');
   }
 
-  if (results.build?.buildTime > 180000) {
-    // 3 minutes
-    report.recommendations.push(
-      '⚠ Build time exceeds 3 minutes - consider optimizing build process'
-    );
+  if (results.build?.buildTime > 180000) { // 3 minutes
+    report.recommendations.push('⚠ Build time exceeds 3 minutes - consider optimizing build process');
   }
 
   // Display summary
@@ -312,7 +290,7 @@ async function generateReport(results) {
     printStatus('Overall status', 'All checks passed', 'pass');
   } else {
     console.log('\nRecommendations:');
-    report.recommendations.forEach((rec) => console.log(`  ${rec}`));
+    report.recommendations.forEach(rec => console.log(`  ${rec}`));
   }
 
   // Save report
@@ -354,7 +332,7 @@ async function main() {
 
 // Run if called directly
 if (require.main === module) {
-  main().catch((error) => {
+  main().catch(error => {
     console.error('\n✗ Performance monitoring failed:', error.message);
     process.exit(1);
   });

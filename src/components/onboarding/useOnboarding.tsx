@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from "react";
 
 interface UseOnboardingReturn {
   /** Whether user has completed onboarding */
@@ -36,23 +36,23 @@ export function useOnboarding(): UseOnboardingReturn {
 
   useEffect(() => {
     // Check localStorage on mount
-    const completed = localStorage.getItem('onboarding_completed');
-    setHasCompletedOnboarding(completed === 'true');
+    const completed = localStorage.getItem("onboarding_completed");
+    setHasCompletedOnboarding(completed === "true");
   }, []);
 
   const startOnboarding = () => {
     setHasCompletedOnboarding(false);
-    localStorage.removeItem('onboarding_completed');
+    localStorage.removeItem("onboarding_completed");
   };
 
   const completeOnboarding = () => {
     setHasCompletedOnboarding(true);
-    localStorage.setItem('onboarding_completed', 'true');
+    localStorage.setItem("onboarding_completed", "true");
   };
 
   const resetOnboarding = () => {
     setHasCompletedOnboarding(false);
-    localStorage.removeItem('onboarding_completed');
+    localStorage.removeItem("onboarding_completed");
   };
 
   return {

@@ -5,10 +5,10 @@
  * Uses pure PostgreSQL features and native pg driver
  */
 
-require('dotenv').config({ path: '.env.local' });
-const { Client } = require('pg');
-const fs = require('fs');
-const path = require('path');
+require("dotenv").config({ path: ".env.local" });
+const { Client } = require("pg");
+const fs = require("fs");
+const path = require("path");
 
 // PostgreSQL connection using Supabase credentials
 const connectionString = `postgresql://postgres.qnwcwoutgarhqxlgsjzs:${process.env.SUPABASE_DB_PASSWORD}@aws-0-us-west-1.pooler.supabase.com:6543/postgres`;
@@ -17,8 +17,8 @@ const connectionString = `postgresql://postgres.qnwcwoutgarhqxlgsjzs:${process.e
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
-console.log('🐘 Starting Native PostgreSQL TCO Content Integration Pipeline...');
-console.log('📍 Target Database: Supabase PostgreSQL');
+console.log("🐘 Starting Native PostgreSQL TCO Content Integration Pipeline...");
+console.log("📍 Target Database: Supabase PostgreSQL");
 
 // Native PostgreSQL schema using advanced features
 const SCHEMA_SQL = `
@@ -156,51 +156,51 @@ $$ LANGUAGE plpgsql;
 // TCO Domain configuration
 const domains = [
   {
-    domain: 'domain1',
+    domain: "domain1",
     number: 1,
-    title: 'Asking Questions',
+    title: "Asking Questions",
     examWeight: 22,
     estimatedTime: 180,
-    file: 'domain1-asking-questions.md',
+    file: "domain1-asking-questions.md",
   },
   {
-    domain: 'domain2',
+    domain: "domain2",
     number: 2,
-    title: 'Refining Questions & Targeting',
+    title: "Refining Questions & Targeting",
     examWeight: 23,
     estimatedTime: 200,
-    file: 'domain2-refining-questions.md',
+    file: "domain2-refining-questions.md",
   },
   {
-    domain: 'domain3',
+    domain: "domain3",
     number: 3,
-    title: 'Taking Action',
+    title: "Taking Action",
     examWeight: 15,
     estimatedTime: 150,
-    file: 'domain3-taking-action.md',
+    file: "domain3-taking-action.md",
   },
   {
-    domain: 'domain4',
+    domain: "domain4",
     number: 4,
-    title: 'Navigation & Module Functions',
+    title: "Navigation & Module Functions",
     examWeight: 23,
     estimatedTime: 180,
-    file: 'domain4-navigation-modules.md',
+    file: "domain4-navigation-modules.md",
   },
   {
-    domain: 'domain5',
+    domain: "domain5",
     number: 5,
-    title: 'Reporting & Data Export',
+    title: "Reporting & Data Export",
     examWeight: 17,
     estimatedTime: 160,
-    file: 'domain5-reporting-data-export.md',
+    file: "domain5-reporting-data-export.md",
   },
 ];
 
 // Enhanced markdown parser for PostgreSQL features
 function parseMarkdownContent(filePath, domainInfo) {
-  const content = fs.readFileSync(filePath, 'utf8');
-  const lines = content.split('\n');
+  const content = fs.readFileSync(filePath, "utf8");
+  const lines = content.split("\n");
 
   const sections = [];
   let currentSection = null;
@@ -214,15 +214,15 @@ function parseMarkdownContent(filePath, domainInfo) {
     lineCount++;
 
     // Detect section headers (## Module or similar)
-    if (line.match(/^##\s+(🎯\s+)?[Mm]odule/i) || line.match(/^##\s+\d+\./)) {
+    if (line.match(/^##\s+(\🎯\s+)?[Mm]odule/i) || line.match(/^##\s+\d+\./)) {
       if (currentSection) {
         sections.push(currentSection);
       }
 
       currentSection = {
         title: line
-          .replace(/^##\s+/, '')
-          .replace(/(🎯\s+)?/, '')
+          .replace(/^##\s+/, "")
+          .replace(/(\🎯\s+)?/, "")
           .trim(),
         content: [],
         learningObjectives: [],
@@ -235,14 +235,14 @@ function parseMarkdownContent(filePath, domainInfo) {
     }
 
     // Extract learning objectives
-    if (line.includes('Learning Objectives') || line.includes('You will learn')) {
+    if (line.includes("Learning Objectives") || line.includes("You will learn")) {
       const objectives = [];
       let j = i + 1;
       while (
         j < lines.length &&
-        (lines[j].startsWith('-') || lines[j].startsWith('*') || lines[j].startsWith('  -'))
+        (lines[j].startsWith("-") || lines[j].startsWith("*") || lines[j].startsWith("  -"))
       ) {
-        const objective = lines[j].replace(/^[\s\-*]+/, '').trim();
+        const objective = lines[j].replace(/^[\s\-\*]+/, "").trim();
         if (objective) objectives.push(objective);
         j++;
       }
@@ -264,7 +264,7 @@ function parseMarkdownContent(filePath, domainInfo) {
   // If no modules found, create a single section with all content
   if (sections.length === 0) {
     sections.push({
-      title: domainInfo.title + ' - Complete Study Guide',
+      title: domainInfo.title + " - Complete Study Guide",
       content: lines,
       learningObjectives: [],
       metadata: {
@@ -294,23 +294,23 @@ async function createPostgreSQLConnection() {
 
   try {
     await client.connect();
-    console.log('🐘 Connected to PostgreSQL database');
+    console.log("🐘 Connected to PostgreSQL database");
     return client;
   } catch (error) {
-    console.error('❌ PostgreSQL connection failed:', error.message);
+    console.error("❌ PostgreSQL connection failed:", error.message);
     throw error;
   }
 }
 
 async function setupDatabase(client) {
-  console.log('🏗️  Setting up PostgreSQL schema...');
+  console.log("🏗️  Setting up PostgreSQL schema...");
 
   try {
     await client.query(SCHEMA_SQL);
-    console.log('✅ PostgreSQL schema created successfully');
+    console.log("✅ PostgreSQL schema created successfully");
 
     // Insert domain data with PostgreSQL native features
-    console.log('📊 Inserting domain data...');
+    console.log("📊 Inserting domain data...");
 
     for (const domain of domains) {
       const query = `
@@ -335,13 +335,13 @@ async function setupDatabase(client) {
       console.log(`✅ Domain ${domain.number}: ${result.rows[0].title}`);
     }
   } catch (error) {
-    console.error('❌ Schema setup failed:', error);
+    console.error("❌ Schema setup failed:", error);
     throw error;
   }
 }
 
 async function migrateContent(client) {
-  console.log('📂 Starting content migration for all 5 TCO domains...');
+  console.log("📂 Starting content migration for all 5 TCO domains...");
 
   let totalLines = 0;
   let totalSections = 0;
@@ -352,7 +352,7 @@ async function migrateContent(client) {
       `\n🎯 Processing ${domainConfig.title} (${domainConfig.examWeight}% exam weight)...`
     );
 
-    const filePath = path.join(__dirname, '..', 'src', 'content', 'domains', domainConfig.file);
+    const filePath = path.join(__dirname, "..", "src", "content", "domains", domainConfig.file);
 
     if (!fs.existsSync(filePath)) {
       console.log(`⚠️  File not found: ${filePath}`);
@@ -366,7 +366,7 @@ async function migrateContent(client) {
 
       // Get domain ID
       const domainResult = await client.query(
-        'SELECT id FROM study_domains WHERE domain_number = $1',
+        "SELECT id FROM study_domains WHERE domain_number = $1",
         [domainConfig.number]
       );
 
@@ -399,11 +399,11 @@ async function migrateContent(client) {
         const moduleResult = await client.query(moduleQuery, [
           domainId,
           section.title,
-          section.content.join('\n'),
+          section.content.join("\n"),
           section.learningObjectives, // PostgreSQL array
           JSON.stringify(section.metadata), // PostgreSQL JSONB
           i + 1,
-          'intermediate',
+          "intermediate",
         ]);
 
         totalModules++;
@@ -420,12 +420,12 @@ async function migrateContent(client) {
 }
 
 async function verifyMigration(client) {
-  console.log('\n🔍 Verifying PostgreSQL migration results...');
+  console.log("\n🔍 Verifying PostgreSQL migration results...");
 
   try {
     // Use PostgreSQL native queries
-    const domainCount = await client.query('SELECT COUNT(*) as count FROM study_domains');
-    const moduleCount = await client.query('SELECT COUNT(*) as count FROM study_modules');
+    const domainCount = await client.query("SELECT COUNT(*) as count FROM study_domains");
+    const moduleCount = await client.query("SELECT COUNT(*) as count FROM study_modules");
     const contentStats = await client.query(`
       SELECT 
         COUNT(*) as total_modules,
@@ -453,7 +453,7 @@ async function verifyMigration(client) {
 
     return true;
   } catch (error) {
-    console.error('❌ Verification failed:', error);
+    console.error("❌ Verification failed:", error);
     return false;
   }
 }
@@ -475,7 +475,7 @@ async function main() {
     const verified = await verifyMigration(client);
 
     if (verified) {
-      console.log('\n🎉 PostgreSQL Content Migration Completed Successfully!');
+      console.log("\n🎉 PostgreSQL Content Migration Completed Successfully!");
       console.log(`\n📊 Migration Summary:`);
       console.log(`   📚 Modules: ${stats.totalModules} TCO study modules`);
       console.log(`   📝 Sections: ${stats.totalSections} study sections`);
@@ -488,12 +488,12 @@ async function main() {
       console.log(`✅ Full-text search and advanced querying enabled`);
     }
   } catch (error) {
-    console.error('💥 Pipeline failed:', error);
+    console.error("💥 Pipeline failed:", error);
     process.exit(1);
   } finally {
     if (client) {
       await client.end();
-      console.log('🔌 PostgreSQL connection closed');
+      console.log("🔌 PostgreSQL connection closed");
     }
   }
 }
@@ -502,11 +502,11 @@ async function main() {
 if (require.main === module) {
   main()
     .then(() => {
-      console.log('✅ Native PostgreSQL pipeline completed');
+      console.log("✅ Native PostgreSQL pipeline completed");
       process.exit(0);
     })
     .catch((error) => {
-      console.error('💥 Native PostgreSQL pipeline failed:', error);
+      console.error("💥 Native PostgreSQL pipeline failed:", error);
       process.exit(1);
     });
 }

@@ -1,10 +1,7 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import { useState } from 'react';
-import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Button } from '@/components/ui/button';
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -12,19 +9,22 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { LoadingSpinner } from '@/components/ui/loading-spinner';
-import { useAuth } from '@/contexts/AuthContext';
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { LoadingSpinner } from "@/components/ui/loading-spinner";
+import { useAuth } from "@/contexts/AuthContext";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 interface SignInFormProps {
   onSuccess?: () => void;
 }
 
 export function SignInForm({ onSuccess }: SignInFormProps = {}) {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const { signIn, loading } = useAuth();
   const router = useRouter();
@@ -34,7 +34,7 @@ export function SignInForm({ onSuccess }: SignInFormProps = {}) {
     setError(null);
 
     if (!email || !password) {
-      setError('Please fill in all fields');
+      setError("Please fill in all fields");
       return;
     }
 
@@ -44,10 +44,10 @@ export function SignInForm({ onSuccess }: SignInFormProps = {}) {
         setError(error.message);
       } else {
         onSuccess?.();
-        router.push('/dashboard');
+        router.push("/dashboard");
       }
     } catch (error) {
-      setError('An unexpected error occurred');
+      setError("An unexpected error occurred");
     }
   };
 
@@ -100,7 +100,7 @@ export function SignInForm({ onSuccess }: SignInFormProps = {}) {
                 Signing In...
               </>
             ) : (
-              'Sign In'
+              "Sign In"
             )}
           </Button>
 
@@ -109,7 +109,7 @@ export function SignInForm({ onSuccess }: SignInFormProps = {}) {
               Forgot your password?
             </Link>
             <div>
-              Don't have an account?{' '}
+              Don't have an account?{" "}
               <Link href="/auth/signup" className="font-medium text-primary hover:underline">
                 Sign up
               </Link>

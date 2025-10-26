@@ -1,25 +1,25 @@
-'use client';
+"use client";
 
+import { useState, useEffect } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Progress } from "@/components/ui/progress";
 import {
+  TrendingUp,
+  TrendingDown,
+  Target,
   AlertTriangle,
   Award,
-  BarChart3,
   Lightbulb,
-  Target,
-  TrendingDown,
-  TrendingUp,
-} from 'lucide-react';
-import { useEffect, useState } from 'react';
-import { Badge } from '@/components/ui/badge';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Progress } from '@/components/ui/progress';
+  BarChart3,
+} from "lucide-react";
+import { cn } from "@/lib/utils";
 import {
-  getAllReviewItems,
-  getDifficultyLevel,
   getPerformanceAnalytics,
   getPersonalizedRecommendations,
-} from '@/lib/spacedRepetition';
-import { cn } from '@/lib/utils';
+  getDifficultyLevel,
+  getAllReviewItems,
+} from "@/lib/spacedRepetition";
 
 interface PerformanceAnalyticsProps {
   /** Optional: Filter by specific module */
@@ -88,7 +88,7 @@ export function PerformanceAnalytics({ moduleId }: PerformanceAnalyticsProps) {
                 </span>
               </div>
               <Badge className="bg-red-600 text-foreground">
-                {analytics.struggling} item{analytics.struggling !== 1 ? 's' : ''}
+                {analytics.struggling} item{analytics.struggling !== 1 ? "s" : ""}
               </Badge>
             </div>
             <Progress value={strugglingPercentage} className="h-2 bg-red-900/30" />
@@ -107,7 +107,7 @@ export function PerformanceAnalytics({ moduleId }: PerformanceAnalyticsProps) {
                 </span>
               </div>
               <Badge variant="outline" className="border-primary/30 text-primary">
-                {analytics.normal} item{analytics.normal !== 1 ? 's' : ''}
+                {analytics.normal} item{analytics.normal !== 1 ? "s" : ""}
               </Badge>
             </div>
             <Progress value={normalPercentage} className="h-2 bg-blue-900/30" />
@@ -124,7 +124,7 @@ export function PerformanceAnalytics({ moduleId }: PerformanceAnalyticsProps) {
                 </span>
               </div>
               <Badge className="bg-[#22c55e] text-foreground">
-                {analytics.mastered} item{analytics.mastered !== 1 ? 's' : ''}
+                {analytics.mastered} item{analytics.mastered !== 1 ? "s" : ""}
               </Badge>
             </div>
             <Progress value={masteredPercentage} className="h-2 bg-green-900/30" />
@@ -169,7 +169,9 @@ export function PerformanceAnalytics({ moduleId }: PerformanceAnalyticsProps) {
       {/* Retention Trend */}
       <Card className="border-accent/20 bg-accent/5">
         <CardHeader>
-          <CardTitle className="text-sm text-accent-foreground">Recent Retention Trend</CardTitle>
+          <CardTitle className="text-sm text-accent-foreground">
+            Recent Retention Trend
+          </CardTitle>
         </CardHeader>
         <CardContent>
           <div className="mb-2 flex items-baseline gap-2">
@@ -178,13 +180,16 @@ export function PerformanceAnalytics({ moduleId }: PerformanceAnalyticsProps) {
             </span>
             <span className="text-sm text-muted-foreground">(last 10 sessions)</span>
           </div>
-          <Progress value={analytics.averageRetentionTrend} className="h-3 bg-purple-900/30" />
+          <Progress
+            value={analytics.averageRetentionTrend}
+            className="h-3 bg-purple-900/30"
+          />
           <p className="mt-2 text-xs text-muted-foreground">
             {analytics.averageRetentionTrend >= 80
-              ? '🎯 Excellent! Keep up the consistent review schedule'
+              ? "🎯 Excellent! Keep up the consistent review schedule"
               : analytics.averageRetentionTrend >= 70
-                ? '📚 Good progress - consider reviewing struggling concepts'
-                : '⚠️ Focus on completing overdue reviews and re-reading sections'}
+              ? "📚 Good progress - consider reviewing struggling concepts"
+              : "⚠️ Focus on completing overdue reviews and re-reading sections"}
           </p>
         </CardContent>
       </Card>
@@ -201,7 +206,10 @@ export function PerformanceAnalytics({ moduleId }: PerformanceAnalyticsProps) {
           <CardContent>
             <ul className="space-y-3">
               {recommendations.map((rec, idx) => (
-                <li key={idx} className="flex items-start gap-2 text-sm text-muted-foreground">
+                <li
+                  key={idx}
+                  className="flex items-start gap-2 text-sm text-muted-foreground"
+                >
                   <span className="mt-0.5 text-[#f97316]">•</span>
                   <span>{rec}</span>
                 </li>
@@ -214,32 +222,43 @@ export function PerformanceAnalytics({ moduleId }: PerformanceAnalyticsProps) {
       {/* How Adaptive Difficulty Works */}
       <Card className="border-gray-700">
         <CardHeader>
-          <CardTitle className="text-sm text-foreground">How Adaptive Difficulty Works</CardTitle>
+          <CardTitle className="text-sm text-foreground">
+            How Adaptive Difficulty Works
+          </CardTitle>
         </CardHeader>
         <CardContent className="space-y-3 text-sm text-muted-foreground">
           <div className="rounded-lg border border-red-500/30 bg-red-500/5 p-3">
-            <p className="mb-1 font-semibold text-red-300">Struggling (&lt; 70% retention)</p>
+            <p className="mb-1 font-semibold text-red-300">
+              Struggling (&lt; 70% retention)
+            </p>
             <p className="text-xs text-muted-foreground">
               • Intervals are 30% shorter (e.g., Day 3 → Day 2)
-              <br />• Stay at current interval until performance improves
+              <br />
+              • Stay at current interval until performance improves
               <br />• Drop back one level if you get it wrong
             </p>
           </div>
 
           <div className="rounded-lg border border-primary/30 bg-primary/5 p-3">
-            <p className="mb-1 font-semibold text-primary">Normal (70-90% retention)</p>
+            <p className="mb-1 font-semibold text-primary">
+              Normal (70-90% retention)
+            </p>
             <p className="text-xs text-muted-foreground">
               • Standard 2357 intervals (Day 1, 3, 7, 16, 35)
-              <br />• Progress one level when correct
+              <br />
+              • Progress one level when correct
               <br />• Stay at current level when incorrect
             </p>
           </div>
 
           <div className="rounded-lg border border-[#22c55e]/30 bg-[#22c55e]/5 p-3">
-            <p className="mb-1 font-semibold text-[#22c55e]">Mastered (&gt; 90% retention)</p>
+            <p className="mb-1 font-semibold text-[#22c55e]">
+              Mastered (&gt; 90% retention)
+            </p>
             <p className="text-xs text-muted-foreground">
               • Intervals are 30% longer (e.g., Day 7 → Day 9)
-              <br />• Can skip ahead 2 levels when consistently correct
+              <br />
+              • Can skip ahead 2 levels when consistently correct
               <br />• Frees up time to focus on struggling concepts
             </p>
           </div>

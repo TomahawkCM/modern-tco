@@ -3,17 +3,18 @@
  * Reusable components for linking between domains and modules
  */
 
-import { BookOpen, ChevronRight, Target } from 'lucide-react';
-import Link from 'next/link';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import type { ModuleMetadata } from '@/lib/content-discovery';
+import Link from "next/link";
+import { ChevronRight, BookOpen, Target } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import {
-  getDomainDisplayName,
+  getModulesForDomain,
   getDomainForModule,
+  getDomainDisplayName,
   getDomainRouteSlug,
-} from '@/lib/domain-module-mapper';
+} from "@/lib/domain-module-mapper";
+import type { ModuleMetadata } from "@/lib/content-discovery";
 
 interface ModuleLinkCardProps {
   module: ModuleMetadata;
@@ -31,7 +32,7 @@ export function ModuleLinkCard({ module, showDomain = false }: ModuleLinkCardPro
         )}
         <CardTitle className="text-lg">{module.title}</CardTitle>
         <CardDescription className="line-clamp-2">
-          {module.objectives.slice(0, 2).join('. ')}
+          {module.objectives.slice(0, 2).join(". ")}
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -163,15 +164,15 @@ export function ModuleDomainBreadcrumb({
 
 interface DomainLinkButtonProps {
   domainSlug: string;
-  variant?: 'default' | 'outline' | 'secondary';
-  size?: 'sm' | 'default' | 'lg';
+  variant?: "default" | "outline" | "secondary";
+  size?: "sm" | "default" | "lg";
   className?: string;
 }
 
 export function DomainLinkButton({
   domainSlug,
-  variant = 'outline',
-  size = 'default',
+  variant = "outline",
+  size = "default",
   className,
 }: DomainLinkButtonProps) {
   const domainName = getDomainDisplayName(domainSlug);

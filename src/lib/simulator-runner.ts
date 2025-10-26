@@ -1,15 +1,14 @@
-import { spawn, spawnSync } from 'node:child_process';
-import path from 'node:path';
+import { spawn, spawnSync } from 'child_process';
+import path from 'path';
 
 const envCandidates = [process.env.PYTHON_PATH, process.env.SIM_PYTHON];
-const platformDefaults =
-  process.platform === 'win32' ? ['python3', 'python', 'py'] : ['python3', 'python'];
+const platformDefaults = process.platform === 'win32' ? ['python3', 'python', 'py'] : ['python3', 'python'];
 const pythonCandidates = Array.from(
   new Set(
     [...envCandidates, ...platformDefaults]
       .filter((candidate): candidate is string => Boolean(candidate?.trim()))
-      .map((candidate) => candidate.trim())
-  )
+      .map((candidate) => candidate.trim()),
+  ),
 );
 
 const SIM_DIR = path.join(process.cwd(), 'sim');
@@ -30,7 +29,7 @@ function resolvePythonBinary(): string {
   }
 
   throw new Error(
-    'Unable to locate a Python interpreter. Install Python 3 or set the SIM_PYTHON/PYTHON_PATH environment variable.'
+    'Unable to locate a Python interpreter. Install Python 3 or set the SIM_PYTHON/PYTHON_PATH environment variable.',
   );
 }
 
@@ -75,8 +74,8 @@ function runProcess(args: string[], timeoutMs = 8000): Promise<string> {
       if (error?.code === 'ENOENT') {
         reject(
           new Error(
-            `Python executable "${pythonBin}" could not be found. Install Python 3 or configure SIM_PYTHON/PYTHON_PATH.`
-          )
+            `Python executable "${pythonBin}" could not be found. Install Python 3 or configure SIM_PYTHON/PYTHON_PATH.`,
+          ),
         );
         return;
       }

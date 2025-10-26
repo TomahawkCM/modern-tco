@@ -1,0 +1,25 @@
+{
+  "ci": {
+    "collect": {
+      "url": [
+        "http://localhost:3001/",
+        "http://localhost:3001/welcome",
+        "http://localhost:3001/practice",
+        "http://localhost:3001/mock",
+        "http://localhost:3001/review"
+      ],
+      "startServerCommand": "npm run dev",
+      "startServerReadyPattern": "ready on",
+      "startServerReadyTimeout": 120000,
+      "numberOfRuns": 1,
+      "settings": {
+        "preset": "desktop",
+        "chromeFlags": "--headless=new --no-sandbox --disable-gpu --disable-dev-shm-usage --allow-insecure-localhost --ignore-certificate-errors",
+        "skipAudits": ["uses-http2"]
+      }
+    },
+    "upload": {
+      "target": "temporary-public-storage"
+    }
+  }
+}

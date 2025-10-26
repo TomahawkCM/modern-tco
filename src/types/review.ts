@@ -1,9 +1,9 @@
 // Review System Types - Unified Spaced Repetition for Flashcards & Questions
 // Part of Phase 2: Unified Review Dashboard
 
-import type { SRRating } from '@/lib/sr';
-import type { Question } from './assessment';
-import type { Flashcard } from './flashcard';
+import type { SRRating } from "@/lib/sr";
+import type { Flashcard } from "./flashcard";
+import type { Question } from "./assessment";
 
 // ==================== QUESTION REVIEWS ====================
 
@@ -141,14 +141,11 @@ export interface QuestionReviewStats {
   masteredQuestions: number; // srs_reps >= 2 && mastery >= 0.8
   avgMasteryLevel: number; // 0-100
 
-  questionsByDomain: Record<
-    string,
-    {
-      total: number;
-      due: number;
-      avgMastery: number; // 0-100
-    }
-  >;
+  questionsByDomain: Record<string, {
+    total: number;
+    due: number;
+    avgMastery: number; // 0-100
+  }>;
 }
 
 // ==================== UI STATE ====================
@@ -271,15 +268,11 @@ export interface ReviewSettings {
 /**
  * Type guard for ReviewQueueItem
  */
-export function isFlashcardItem(
-  item: ReviewQueueItem
-): item is ReviewQueueItem & { flashcard: Flashcard } {
+export function isFlashcardItem(item: ReviewQueueItem): item is ReviewQueueItem & { flashcard: Flashcard } {
   return item.itemType === 'flashcard' && item.flashcard !== undefined;
 }
 
-export function isQuestionItem(
-  item: ReviewQueueItem
-): item is ReviewQueueItem & { question: Question } {
+export function isQuestionItem(item: ReviewQueueItem): item is ReviewQueueItem & { question: Question } {
   return item.itemType === 'question' && item.question !== undefined;
 }
 
@@ -317,7 +310,10 @@ export function formatStreak(streak: number): string {
 /**
  * Calculate session progress percentage
  */
-export function calculateSessionProgress(currentIndex: number, totalItems: number): number {
+export function calculateSessionProgress(
+  currentIndex: number,
+  totalItems: number
+): number {
   if (totalItems === 0) return 0;
   return Math.round((currentIndex / totalItems) * 100);
 }

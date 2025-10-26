@@ -3,20 +3,20 @@
  * Test Supabase PAT Token Validity and MCP Connection
  */
 
-const path = require('path');
-require('dotenv').config({ path: path.join(__dirname, '../.env.local') });
+const path = require("path");
+require("dotenv").config({ path: path.join(__dirname, "../.env.local") });
 
 async function testToken() {
-  console.log('🔐 Testing Supabase PAT Token...');
+  console.log("🔐 Testing Supabase PAT Token...");
 
   const token = process.env.SUPABASE_ACCESS_TOKEN;
   const projectRef = process.env.SUPABASE_PROJECT_REF;
 
   console.log(`📋 Project Ref: ${projectRef}`);
-  console.log(`🔑 Token format: ${token ? token.substring(0, 10) + '...' : 'MISSING'}`);
+  console.log(`🔑 Token format: ${token ? token.substring(0, 10) + "..." : "MISSING"}`);
 
   if (!token) {
-    console.error('❌ SUPABASE_ACCESS_TOKEN not found in environment');
+    console.error("❌ SUPABASE_ACCESS_TOKEN not found in environment");
     return false;
   }
 
@@ -29,16 +29,16 @@ async function testToken() {
 
   try {
     // Test API call with token
-    const response = await fetch('https://api.supabase.com/v1/projects', {
+    const response = await fetch("https://api.supabase.com/v1/projects", {
       headers: {
         Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     });
 
     if (response.ok) {
       const projects = await response.json();
-      console.log('✅ Token is valid!');
+      console.log("✅ Token is valid!");
       console.log(`📊 Found ${projects.length} projects`);
 
       // Find our specific project
@@ -59,50 +59,50 @@ async function testToken() {
       return false;
     }
   } catch (error) {
-    console.error('❌ Failed to test token:', error.message);
+    console.error("❌ Failed to test token:", error.message);
     return false;
   }
 }
 
 async function testMCPConnection() {
-  console.log('\\n🔌 Testing MCP Server availability...');
+  console.log("\\n🔌 Testing MCP Server availability...");
 
   // This would normally be tested through Claude, but we can check if the server starts
-  const { spawn } = require('child_process');
+  const { spawn } = require("child_process");
 
   return new Promise((resolve) => {
     const env = { ...process.env };
     const mcp = spawn(
-      'npx',
+      "npx",
       [
-        '-y',
-        '@supabase/mcp-server-supabase@latest',
-        '--project-ref=qnwcwoutgarhqxlgsjzs',
-        '--features=database,docs,development',
+        "-y",
+        "@supabase/mcp-server-supabase@latest",
+        "--project-ref=qnwcwoutgarhqxlgsjzs",
+        "--features=database,docs,development",
       ],
       {
         env,
-        stdio: ['pipe', 'pipe', 'pipe'],
+        stdio: ["pipe", "pipe", "pipe"],
       }
     );
 
-    let output = '';
+    let output = "";
     let hasStarted = false;
 
-    mcp.stdout.on('data', (data) => {
+    mcp.stdout.on("data", (data) => {
       output += data.toString();
-      if (output.includes('{"jsonrpc":"2.0"') || output.includes('MCP')) {
+      if (output.includes('{"jsonrpc":"2.0"') || output.includes("MCP")) {
         hasStarted = true;
-        console.log('✅ MCP Server started successfully');
+        console.log("✅ MCP Server started successfully");
         mcp.kill();
         resolve(true);
       }
     });
 
-    mcp.stderr.on('data', (data) => {
+    mcp.stderr.on("data", (data) => {
       const error = data.toString();
-      if (error.includes('Invalid access token')) {
-        console.log('❌ MCP Server failed: Invalid access token');
+      if (error.includes("Invalid access token")) {
+        console.log("❌ MCP Server failed: Invalid access token");
         mcp.kill();
         resolve(false);
       }
@@ -111,7 +111,7 @@ async function testMCPConnection() {
     // Timeout after 10 seconds
     setTimeout(() => {
       if (!hasStarted) {
-        console.log('⏱️  MCP Server test timed out');
+        console.log("⏱️  MCP Server test timed out");
         mcp.kill();
         resolve(false);
       }
@@ -121,7 +121,7 @@ async function testMCPConnection() {
 
 // Run tests
 (async () => {
-  console.log('🧪 Starting Supabase MCP Connection Tests\\n');
+  console.log("🧪 Starting Supabase MCP Connection Tests\\n");
 
   const tokenValid = await testToken();
 
@@ -129,11 +129,11 @@ async function testMCPConnection() {
     const mcpWorks = await testMCPConnection();
 
     if (tokenValid && mcpWorks) {
-      console.log('\\n🎉 All tests passed! MCP should work correctly.');
+      console.log("\\n🎉 All tests passed! MCP should work correctly.");
       process.exit(0);
     }
   }
 
-  console.log('\\n❌ Issues found. Check configuration and token.');
+  console.log("\\n❌ Issues found. Check configuration and token.");
   process.exit(1);
 })();

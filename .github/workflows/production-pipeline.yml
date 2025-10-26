@@ -55,17 +55,17 @@ jobs:
 
       - name: Run unit tests
         run: |
-          if [ -f "jest.config.js" ]; then
-            npm run test -- --passWithNoTests --maxWorkers=2 || echo "Tests skipped (setup needed)"
+          if [ -f "vitest.config.ts" ]; then
+            npm run test || echo "Tests skipped (setup needed)"
           else
-            echo "Jest not configured, skipping tests"
+            echo "Vitest not configured, skipping tests"
           fi
         continue-on-error: true
 
       - name: Generate test coverage
         run: |
-          if [ -f "jest.config.js" ]; then
-            npm run test:coverage -- --passWithNoTests || echo "Coverage skipped"
+          if [ -f "vitest.config.ts" ]; then
+            npm run test:coverage || echo "Coverage skipped"
           fi
         continue-on-error: true
 

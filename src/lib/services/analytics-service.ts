@@ -1,7 +1,7 @@
-import { v4 as uuidv4 } from 'uuid';
-import { supabase } from '@/lib/supabase';
-import type { AnalyticsEvent, ContentAnalytics, UserAnalytics } from '@/types/assessment';
-import type { TablesInsert } from '@/types/supabase';
+import { supabase } from "@/lib/supabase";
+import type { AnalyticsEvent, ContentAnalytics, UserAnalytics } from "@/types/assessment";
+import type { TablesInsert } from "@/types/supabase";
+import { v4 as uuidv4 } from "uuid";
 
 export interface AnalyticsMetrics {
   totalSessions: number;
@@ -45,7 +45,7 @@ class AnalyticsServiceClass {
   async track(event: AnalyticsEvent): Promise<void> {
     const payload = {
       event_id: uuidv4(),
-      user_id: event.data?.userId || 'anonymous',
+      user_id: event.data?.userId || "anonymous",
       session_id: event.session_id,
       event_type: event.type,
       event_timestamp: event.timestamp.toISOString(),
@@ -53,10 +53,10 @@ class AnalyticsServiceClass {
     } as TablesInsert<'analytics_events'>;
 
     // Cast to any at call-site to avoid overly-strict generated Supabase insert overloads
-    const { error } = await (supabase as any).from('analytics_events').insert(payload);
+    const { error } = await (supabase as any).from("analytics_events").insert(payload);
 
     if (error) {
-      console.error('Failed to track analytics event:', error.message);
+      console.error("Failed to track analytics event:", error.message);
       throw new Error(`Failed to track analytics event: ${error.message}`);
     }
   }
@@ -65,7 +65,7 @@ class AnalyticsServiceClass {
    * Get comprehensive analytics dashboard data
    */
   async getDashboardMetrics(
-    _timeRange: 'day' | 'week' | 'month' | 'all' = 'week'
+    timeRange: "day" | "week" | "month" | "all" = "week"
   ): Promise<AnalyticsMetrics> {
     // This method would query Supabase for aggregated analytics data
     // For now, return mock data or an empty structure
@@ -89,7 +89,7 @@ class AnalyticsServiceClass {
   /**
    * Get user-specific analytics
    */
-  async getUserAnalytics(_userId: string, _timeRange?: string): Promise<UserAnalytics | null> {
+  async getUserAnalytics(userId: string, timeRange?: string): Promise<UserAnalytics | null> {
     // This method would query Supabase for user-specific analytics data
     return null;
   }
@@ -97,7 +97,7 @@ class AnalyticsServiceClass {
   /**
    * Get content performance analytics
    */
-  async getContentAnalytics(_contentId: string): Promise<ContentAnalytics | null> {
+  async getContentAnalytics(contentId: string): Promise<ContentAnalytics | null> {
     // This method would query Supabase for content-specific analytics data
     return null;
   }
@@ -120,7 +120,7 @@ class AnalyticsServiceClass {
   /**
    * Generate learning insights and recommendations
    */
-  async generateInsights(_userId?: string): Promise<{
+  async generateInsights(userId?: string): Promise<{
     personalizedRecommendations: string[];
     contentImprovements: string[];
     systemOptimizations: string[];
@@ -139,8 +139,8 @@ class AnalyticsServiceClass {
    * Export analytics data for reporting
    */
   async exportData(
-    format: 'json' | 'csv' = 'json',
-    timeRange: 'day' | 'week' | 'month' | 'all' = 'all'
+    format: "json" | "csv" = "json",
+    timeRange: "day" | "week" | "month" | "all" = "all"
   ): Promise<string> {
     // This would fetch data from Supabase and format it
     const exportData = {
@@ -153,17 +153,17 @@ class AnalyticsServiceClass {
       performanceMetrics: await this.getPerformanceMetrics(),
     };
 
-    if (format === 'csv') {
+    if (format === "csv") {
       // Basic CSV conversion for demonstration
-      const headers = ['timestamp', 'type', 'userId', 'sessionId', 'data'];
+      const headers = ["timestamp", "type", "userId", "sessionId", "data"];
       const rows = exportData.events.map((event: AnalyticsEvent) => [
         event.timestamp.toISOString(),
         event.type,
-        event.data?.userId || '',
-        event.session_id || '',
+        event.data?.userId || "",
+        event.session_id || "",
         JSON.stringify(event.data || {}),
       ]);
-      return [headers, ...rows].map((row) => row.join(',')).join('\n');
+      return [headers, ...rows].map((row) => row.join(",")).join("\n");
     }
 
     return JSON.stringify(exportData, null, 2);
@@ -172,10 +172,10 @@ class AnalyticsServiceClass {
   /**
    * Set up real-time analytics streaming
    */
-  setupRealTimeStream(_callback: (event: AnalyticsEvent) => void): () => void {
+  setupRealTimeStream(callback: (event: AnalyticsEvent) => void): () => void {
     // In a real-time scenario, this would involve Supabase Realtime or websockets
     console.warn(
-      'Real-time analytics streaming not fully implemented with direct Supabase integration.'
+      "Real-time analytics streaming not fully implemented with direct Supabase integration."
     );
     return () => {}; // No-op cleanup
   }
@@ -188,17 +188,21 @@ export const analyticsService = new AnalyticsServiceClass();
 // `AnalyticsService.track(...)`. We bind the instance methods to the class
 // constructor to preserve existing usage without refactoring callers.
 (AnalyticsServiceClass as any).track = analyticsService.track.bind(analyticsService);
-(AnalyticsServiceClass as any).getUserAnalytics =
-  analyticsService.getUserAnalytics.bind(analyticsService);
-(AnalyticsServiceClass as any).getContentAnalytics =
-  analyticsService.getContentAnalytics.bind(analyticsService);
+(AnalyticsServiceClass as any).getUserAnalytics = analyticsService.getUserAnalytics.bind(
+  analyticsService
+);
+(AnalyticsServiceClass as any).getContentAnalytics = analyticsService.getContentAnalytics.bind(
+  analyticsService
+);
 
 // Static signatures for compatibility with call-sites that use the class as a static holder
 (AnalyticsServiceClass as any).track = analyticsService.track.bind(analyticsService);
-(AnalyticsServiceClass as any).getUserAnalytics =
-  analyticsService.getUserAnalytics.bind(analyticsService);
-(AnalyticsServiceClass as any).getContentAnalytics =
-  analyticsService.getContentAnalytics.bind(analyticsService);
+(AnalyticsServiceClass as any).getUserAnalytics = analyticsService.getUserAnalytics.bind(
+  analyticsService
+);
+(AnalyticsServiceClass as any).getContentAnalytics = analyticsService.getContentAnalytics.bind(
+  analyticsService
+);
 
 export { AnalyticsServiceClass as AnalyticsService }; // Keep class alias export for tests/mocks
 export default analyticsService;

@@ -1,33 +1,33 @@
-'use client';
+"use client";
 
+import React, { useState, useEffect, useRef } from "react";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Progress } from "@/components/ui/progress";
+import { Separator } from "@/components/ui/separator";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import {
-  BookMarked,
   BookOpen,
-  CheckCircle2,
-  ChevronLeft,
-  ChevronRight,
-  Circle,
   Clock,
-  FileText,
+  CheckCircle2,
+  Circle,
+  ChevronRight,
+  ChevronLeft,
+  BookMarked,
   Target,
-} from 'lucide-react';
-import React, { useEffect, useRef, useState } from 'react';
-import ReactMarkdown from 'react-markdown';
-import ModuleFlashcardPrompt from '@/components/study/ModuleFlashcardPrompt';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Progress } from '@/components/ui/progress';
-import { ScrollArea } from '@/components/ui/scroll-area';
-import { Separator } from '@/components/ui/separator';
+  FileText,
+} from "lucide-react";
+import { supabase } from "@/lib/supabase";
+import { StudyModule, StudySection, type UserStudyProgress } from "@/types/study";
+import type { TCODomain } from "@/types/exam";
 import {
   getStudyModuleByDomain,
   type StudyModuleContent,
   type StudySectionContent,
-} from '@/data/study-content';
-import { supabase } from '@/lib/supabase';
-import type { TCODomain } from '@/types/exam';
-import { StudyModule, StudySection, type UserStudyProgress } from '@/types/study';
+} from "@/data/study-content";
+import ReactMarkdown from "react-markdown";
+import ModuleFlashcardPrompt from "@/components/study/ModuleFlashcardPrompt";
 
 interface StudyModuleViewerProps {
   domain: TCODomain;
@@ -71,7 +71,7 @@ export function StudyModuleViewer({
       (loadingRef.current.hasLoaded && domainRef.current === domain) ||
       (contentLoaded && module && sections.length > 0)
     ) {
-      console.log('⚠️ Skipping loadStudyContent - already loaded or loading');
+      console.log("⚠️ Skipping loadStudyContent - already loaded or loading");
       setIsLoading(false);
       return;
     }
@@ -85,7 +85,7 @@ export function StudyModuleViewer({
     loadingRef.current.isLoadingData = true;
 
     try {
-      console.log('🔄 Starting loadStudyContent for domain:', domain);
+      console.log("🔄 Starting loadStudyContent for domain:", domain);
       setIsLoading(true);
       setError(null);
 
@@ -95,27 +95,25 @@ export function StudyModuleViewer({
         const domainVariants = [
           domain,
           domain.replace(/-/g, '_').toUpperCase(),
-          domain
-            .split('-')
-            .map((word, idx) => word.charAt(0).toUpperCase() + word.slice(1))
-            .join(' ')
-            .replace(' And ', ' & '),
+          domain.split('-').map((word, idx) =>
+            word.charAt(0).toUpperCase() + word.slice(1)
+          ).join(' ').replace(' And ', ' & ')
         ];
 
         const { data: moduleData, error: moduleError } = await (supabase as any)
-          .from('study_modules')
-          .select('*')
-          .in('domain', domainVariants)
+          .from("study_modules")
+          .select("*")
+          .in("domain", domainVariants)
           .limit(1)
           .maybeSingle();
 
         if (!moduleError && moduleData) {
           // Load study sections
           const { data: sectionsData, error: sectionsError } = await (supabase as any)
-            .from('study_sections')
-            .select('*')
-            .eq('module_id', moduleData.id)
-            .order('order_index');
+            .from("study_sections")
+            .select("*")
+            .eq("module_id", (moduleData).id)
+            .order("order_index");
 
           if (!sectionsError && sectionsData && sectionsData.length > 0) {
             // Successfully loaded from database - convert to StudyModuleContent format
@@ -129,38 +127,23 @@ export function StudyModuleViewer({
               estimatedTime: `${md.estimated_time_minutes} min`,
               estimatedTimeMinutes: md.estimated_time_minutes,
               examWeight: md.exam_weight,
-              learningObjectives: Array.isArray(md.learning_objectives)
-                ? (md.learning_objectives as string[])
-                : [],
+              learningObjectives: Array.isArray(md.learning_objectives) ? (md.learning_objectives as string[]) : [],
               sections: sd.map((section: any) => ({
                 id: section.id,
                 title: section.title,
                 content: section.content,
-                sectionType: section.section_type as
-                  | 'overview'
-                  | 'procedures'
-                  | 'exam_prep'
-                  | 'concepts'
-                  | 'examples',
+                sectionType: section.section_type as "overview" | "procedures" | "exam_prep" | "concepts" | "examples",
                 orderIndex: section.order_index,
                 estimatedTime: section.estimated_time_minutes,
                 estimatedTimeMinutes: section.estimated_time_minutes,
-                keyPoints: Array.isArray(section.key_points)
-                  ? (section.key_points as string[])
-                  : [],
-                procedures: Array.isArray(section.procedures)
-                  ? (section.procedures as string[])
-                  : [],
-                troubleshooting: Array.isArray(section.troubleshooting)
-                  ? (section.troubleshooting as string[])
-                  : [],
-                references: Array.isArray(section.references)
-                  ? (section.references as string[])
-                  : [],
+                keyPoints: Array.isArray(section.key_points) ? (section.key_points as string[]) : [],
+                procedures: Array.isArray(section.procedures) ? (section.procedures as string[]) : [],
+                troubleshooting: Array.isArray(section.troubleshooting) ? (section.troubleshooting as string[]) : [],
+                references: Array.isArray(section.references) ? (section.references as string[]) : [],
                 playbook: section.playbook ?? {},
               })),
             };
-
+            
             setModule(convertedModule);
             setSections(convertedModule.sections);
             setUsingFallback(false);
@@ -168,16 +151,16 @@ export function StudyModuleViewer({
             setIsLoading(false);
             loadingRef.current.hasLoaded = true;
             loadingRef.current.isLoadingData = false;
-            console.log('✅ Loaded study content from database');
+            console.log("✅ Loaded study content from database");
             return;
           }
         }
       } catch (dbError) {
-        console.warn('Database connection failed, using fallback content:', dbError);
+        console.warn("Database connection failed, using fallback content:", dbError);
       }
 
       // Fall back to local content
-      console.log('📚 Using fallback study content for domain:', domain);
+      console.log("📚 Using fallback study content for domain:", domain);
       const fallbackModule = getStudyModuleByDomain(domain);
 
       if (fallbackModule) {
@@ -189,11 +172,11 @@ export function StudyModuleViewer({
         loadingRef.current.hasLoaded = true;
         loadingRef.current.isLoadingData = false;
         console.log(
-          '✅ Successfully loaded fallback content with',
+          "✅ Successfully loaded fallback content with",
           fallbackModule.sections.length,
-          'sections'
+          "sections"
         );
-        console.log('🔧 Setting isLoading to false...');
+        console.log("🔧 Setting isLoading to false...");
       } else {
         throw new Error(`No study content available for domain: ${domain}`);
       }
@@ -203,7 +186,7 @@ export function StudyModuleViewer({
       setContentLoaded(false);
       loadingRef.current.hasLoaded = false;
       loadingRef.current.isLoadingData = false;
-      console.error('Error loading study content:', err);
+      console.error("Error loading study content:", err);
     }
   };
 
@@ -237,10 +220,10 @@ export function StudyModuleViewer({
       if (!user) return;
 
       const { data: progressData } = await supabase
-        .from('user_study_progress')
-        .select('*')
-        .eq('user_id', user.id)
-        .eq('domain', domain)
+        .from("user_study_progress")
+        .select("*")
+        .eq("user_id", user.id)
+        .eq("domain", domain)
         .single();
 
       if (progressData) {
@@ -256,7 +239,7 @@ export function StudyModuleViewer({
         }
       }
     } catch (err: any) {
-      console.error('Error loading user progress:', err);
+      console.error("Error loading user progress:", err);
     }
   };
 
@@ -266,7 +249,7 @@ export function StudyModuleViewer({
       newCompletedSections.add(sectionId);
 
       const progressData = {
-        user_id: usingFallback ? 'local-user' : null,
+        user_id: usingFallback ? "local-user" : null,
         domain,
         completed_sections: Array.from(newCompletedSections),
         total_sections: sections.length,
@@ -278,7 +261,7 @@ export function StudyModuleViewer({
         // Save to local storage when using fallback content
         const localProgressKey = `tco-study-progress-${domain}`;
         localStorage.setItem(localProgressKey, JSON.stringify(progressData));
-        console.log('✅ Progress saved to local storage');
+        console.log("✅ Progress saved to local storage");
       } else {
         // Save to database when using database content
         const {
@@ -287,12 +270,12 @@ export function StudyModuleViewer({
         if (!user) return;
 
         progressData.user_id = user.id;
-        const { error } = await (supabase as any).from('user_study_progress').upsert(progressData);
+        const { error } = await (supabase as any).from("user_study_progress").upsert(progressData);
 
         if (error) {
           throw new Error(`Failed to update progress: ${error.message}`);
         }
-        console.log('✅ Progress saved to database');
+        console.log("✅ Progress saved to database");
       }
 
       setCompletedSections(newCompletedSections);
@@ -303,7 +286,7 @@ export function StudyModuleViewer({
         onComplete();
       }
     } catch (err: any) {
-      console.error('Error marking section complete:', err);
+      console.error("Error marking section complete:", err);
     }
   };
 
@@ -328,18 +311,18 @@ export function StudyModuleViewer({
   // Show loading only if actually loading and content not loaded
   // Additional check: if ref says content is loaded but state doesn't reflect it, force update
   if (loadingRef.current.hasLoaded && !contentLoaded && module && sections.length > 0) {
-    console.log('🔧 Force updating contentLoaded state from ref');
+    console.log("🔧 Force updating contentLoaded state from ref");
     setContentLoaded(true);
     setIsLoading(false);
   }
 
   if (isLoading && !contentLoaded && !loadingRef.current.hasLoaded) {
     console.log(
-      '🔄 Showing loading spinner - isLoading:',
+      "🔄 Showing loading spinner - isLoading:",
       isLoading,
-      'contentLoaded:',
+      "contentLoaded:",
       contentLoaded,
-      'refLoaded:',
+      "refLoaded:",
       loadingRef.current.hasLoaded
     );
     return (
@@ -361,7 +344,7 @@ export function StudyModuleViewer({
             Study Content Not Available
           </CardTitle>
           <CardDescription className="text-red-600">
-            {error ?? 'No study content found for this domain.'}
+            {error ?? "No study content found for this domain."}
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -422,9 +405,7 @@ export function StudyModuleViewer({
             </div>
             <Progress value={completionPercentage} className="h-2" />
             <div className="mt-2 flex items-center justify-between">
-              <span className="text-sm text-muted-foreground">
-                {completionPercentage}% Complete
-              </span>
+              <span className="text-sm text-muted-foreground">{completionPercentage}% Complete</span>
               {completionPercentage === 100 && onNavigateToQuestions && (
                 <Button
                   onClick={onNavigateToQuestions}
@@ -457,7 +438,7 @@ export function StudyModuleViewer({
                     <button
                       key={section.id}
                       onClick={() => navigateToSection(index)}
-                      className={`w-full rounded-lg p-3 text-left transition-all hover:bg-gray-50 ${isCurrent ? 'border-2 border-blue-200 bg-blue-50' : 'border border-gray-200'} `}
+                      className={`w-full rounded-lg p-3 text-left transition-all hover:bg-gray-50 ${isCurrent ? "border-2 border-blue-200 bg-blue-50" : "border border-gray-200"} `}
                     >
                       <div className="flex items-start gap-3">
                         {isCompleted ? (
@@ -468,7 +449,7 @@ export function StudyModuleViewer({
                         <div className="min-w-0 flex-1">
                           <p
                             className={`text-sm font-medium leading-snug ${
-                              isCurrent ? 'text-blue-900' : 'text-gray-900'
+                              isCurrent ? "text-blue-900" : "text-gray-900"
                             }`}
                           >
                             {section.title}

@@ -1,5 +1,5 @@
-import { describe, expect, it } from 'vitest';
-import { computeWeightedCounts, getDailyDrill } from '@/lib/drills';
+import { describe, it, expect } from 'vitest';
+import { getDailyDrill, computeWeightedCounts } from '@/lib/drills';
 import { TCODomain } from '@/types/exam';
 
 describe('Daily Drill', () => {
@@ -44,3 +44,4 @@ describe('Daily Drill', () => {
     }
   });
 });
+

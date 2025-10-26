@@ -10,19 +10,17 @@
  *   tsx scripts/apply-sql.ts --file supabase/migrations/20250920090000_add_analytics_and_lab_tables.sql
  */
 
-import dns from 'node:dns/promises';
-import { setDefaultResultOrder } from 'dns';
-import dotenv from 'dotenv';
 import fs from 'fs';
 import path from 'path';
+import dotenv from 'dotenv';
 import { Client } from 'pg';
+import dns from 'node:dns/promises';
+import { setDefaultResultOrder } from 'dns';
 
 dotenv.config({ path: path.join(process.cwd(), '.env.local') });
 
 // Prefer IPv4 to avoid IPv6 connectivity issues in some environments
-try {
-  setDefaultResultOrder('ipv4first');
-} catch {}
+try { setDefaultResultOrder('ipv4first'); } catch {}
 
 function parseArgs(argv: string[]): { file?: string } {
   const out: { file?: string } = {};
@@ -54,10 +52,9 @@ async function main() {
     process.exit(1);
   }
 
-  const ssl =
-    conn.includes('localhost') || conn.includes('127.0.0.1')
-      ? false
-      : ({ rejectUnauthorized: false } as any);
+  const ssl = conn.includes('localhost') || conn.includes('127.0.0.1')
+    ? false
+    : ({ rejectUnauthorized: false } as any);
 
   const sql = fs.readFileSync(filePath, 'utf8');
 
@@ -76,15 +73,7 @@ async function main() {
       const v4 = await dns.lookup(host, { family: 4 });
       hostAddr = v4.address || host;
     } catch {}
-    client = new Client({
-      host: hostAddr,
-      port,
-      user,
-      password,
-      database,
-      ssl,
-      statement_timeout: 0 as any,
-    });
+    client = new Client({ host: hostAddr, port, user, password, database, ssl, statement_timeout: 0 as any });
   } catch {
     // Fallback: use connection string as-is
     client = new Client({ connectionString: conn, ssl, statement_timeout: 0 as any });
@@ -97,15 +86,11 @@ async function main() {
     await client.query('COMMIT');
     console.log('SQL applied successfully.');
   } catch (err: any) {
-    try {
-      await client.query('ROLLBACK');
-    } catch {}
+    try { await client.query('ROLLBACK'); } catch {}
     console.error('Failed to apply SQL:', err?.message || err);
     process.exitCode = 1;
   } finally {
-    try {
-      await client.end();
-    } catch {}
+    try { await client.end(); } catch {}
   }
 }
 

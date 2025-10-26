@@ -1,9 +1,9 @@
-const fs = require('node:fs');
-const os = require('node:os');
-const path = require('node:path');
+const fs = require('fs');
+const os = require('os');
+const path = require('path');
 
 const launcherModule = path.join(__dirname, '../../scripts/mcp-devtools-launch');
-
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const { resolveChromeBinary } = require(launcherModule);
 
 describe('resolveChromeBinary', () => {

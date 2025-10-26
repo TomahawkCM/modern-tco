@@ -1,31 +1,31 @@
-const { createClient } = require('@supabase/supabase-js');
-const fs = require('fs');
-const path = require('path');
+const { createClient } = require("@supabase/supabase-js");
+const fs = require("fs");
+const path = require("path");
 
 // Use the project from .env.local
-const supabaseUrl = 'https://qnwcwoutgarhqxlgsjzs.supabase.co';
+const supabaseUrl = "https://qnwcwoutgarhqxlgsjzs.supabase.co";
 const supabaseServiceKey =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFud2N3b3V0Z2FyaHF4bGdzanpzIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc1NjY3MzQyOCwiZXhwIjoyMDcyMjQ5NDI4fQ.U_FDgUC__dtFPVd5jrTpmwaWiDWJ701w4lRbe4qy1T4';
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFud2N3b3V0Z2FyaHF4bGdzanpzIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc1NjY3MzQyOCwiZXhwIjoyMDcyMjQ5NDI4fQ.U_FDgUC__dtFPVd5jrTpmwaWiDWJ701w4lRbe4qy1T4";
 
-console.log('🚀 Deploying TCO Database Schema...\n');
+console.log("🚀 Deploying TCO Database Schema...\n");
 
 const supabase = createClient(supabaseUrl, supabaseServiceKey, {
   auth: { autoRefreshToken: false, persistSession: false },
 });
 
 async function testConnection() {
-  console.log('🔍 Testing Supabase connection...');
+  console.log("🔍 Testing Supabase connection...");
 
   try {
     // Simple test query
-    const { data, error } = await supabase.from('pg_tables').select('*').limit(1);
+    const { data, error } = await supabase.from("pg_tables").select("*").limit(1);
 
     if (error) {
       console.log(`❌ Connection test failed: ${error.message}`);
       return false;
     }
 
-    console.log('✅ Connection successful!\n');
+    console.log("✅ Connection successful!\n");
     return true;
   } catch (err) {
     console.log(`❌ Connection error: ${err.message}`);
@@ -37,7 +37,7 @@ async function executeSQL(query, description) {
   console.log(`📝 ${description}...`);
 
   try {
-    const { data, error } = await supabase.rpc('exec', { sql: query });
+    const { data, error } = await supabase.rpc("exec", { sql: query });
 
     if (error) {
       console.log(`❌ Failed: ${error.message}`);
@@ -56,12 +56,12 @@ async function deploySchema() {
   // Test connection first
   const connected = await testConnection();
   if (!connected) {
-    console.log('❌ Cannot proceed without database connection');
+    console.log("❌ Cannot proceed without database connection");
     return;
   }
 
   // Create UUID extension
-  await executeSQL('CREATE EXTENSION IF NOT EXISTS "uuid-ossp";', 'Creating UUID extension');
+  await executeSQL('CREATE EXTENSION IF NOT EXISTS "uuid-ossp";', "Creating UUID extension");
 
   // Create study_domains table
   await executeSQL(
@@ -76,7 +76,7 @@ async function deploySchema() {
       updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
     );
   `,
-    'Creating study_domains table'
+    "Creating study_domains table"
   );
 
   // Create study_modules table
@@ -95,7 +95,7 @@ async function deploySchema() {
       updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
     );
   `,
-    'Creating study_modules table'
+    "Creating study_modules table"
   );
 
   // Create study_sections table
@@ -111,7 +111,7 @@ async function deploySchema() {
       updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
     );
   `,
-    'Creating study_sections table'
+    "Creating study_sections table"
   );
 
   // Create practice_questions table
@@ -131,7 +131,7 @@ async function deploySchema() {
       updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
     );
   `,
-    'Creating practice_questions table'
+    "Creating practice_questions table"
   );
 
   // Create indexes
@@ -142,7 +142,7 @@ async function deploySchema() {
     CREATE INDEX IF NOT EXISTS idx_practice_questions_domain_id ON practice_questions(domain_id);
     CREATE INDEX IF NOT EXISTS idx_practice_questions_module_id ON practice_questions(module_id);
   `,
-    'Creating performance indexes'
+    "Creating performance indexes"
   );
 
   // Insert TCO domains
@@ -160,7 +160,7 @@ async function deploySchema() {
       estimated_time_minutes = EXCLUDED.estimated_time_minutes,
       updated_at = NOW();
   `,
-    'Inserting TCO certification domains'
+    "Inserting TCO certification domains"
   );
 
   // Enable RLS and create policies
@@ -171,7 +171,7 @@ async function deploySchema() {
     ALTER TABLE study_sections ENABLE ROW LEVEL SECURITY;
     ALTER TABLE practice_questions ENABLE ROW LEVEL SECURITY;
   `,
-    'Enabling Row Level Security'
+    "Enabling Row Level Security"
   );
 
   await executeSQL(
@@ -181,14 +181,14 @@ async function deploySchema() {
     CREATE POLICY IF NOT EXISTS "Enable read access for all users" ON study_sections FOR SELECT USING (true);
     CREATE POLICY IF NOT EXISTS "Enable read access for all users" ON practice_questions FOR SELECT USING (true);
   `,
-    'Creating read access policies'
+    "Creating read access policies"
   );
 
-  console.log('\n🎉 TCO Database schema deployed successfully!');
+  console.log("\n🎉 TCO Database schema deployed successfully!");
 
   // Verify deployment
-  console.log('\n🔍 Verifying deployment...');
-  const { data: domains } = await supabase.from('study_domains').select('*');
+  console.log("\n🔍 Verifying deployment...");
+  const { data: domains } = await supabase.from("study_domains").select("*");
   console.log(`✅ Found ${domains?.length || 0} TCO domains in database`);
 
   if (domains?.length > 0) {

@@ -3,24 +3,24 @@
  * p5: Database persistence for Learn → Practice → Assess flow state
  */
 
-import { supabase } from '@/lib/supabase';
+import { supabase } from "@/lib/supabase";
 import type {
   FlowProgressPersistence,
   LearningFlowContext,
   LearningFlowMetadata,
   LearningFlowState,
-} from '@/types/learning-flow';
-import type { StudyStatus, Tables } from '@/types/supabase'; // Import Tables
+} from "@/types/learning-flow";
+import type { StudyStatus, Tables, UserStudyProgressInsert } from "@/types/supabase"; // Import Tables
 
 export class SupabaseFlowProgressPersistence implements FlowProgressPersistence {
   private offlineQueue: LearningFlowContext[] = [];
-  private isOnline = typeof window !== 'undefined' ? navigator.onLine : true;
+  private isOnline = typeof window !== "undefined" ? navigator.onLine : true;
 
   constructor() {
-    if (typeof window !== 'undefined') {
+    if (typeof window !== "undefined") {
       // Listen for online/offline events
-      window.addEventListener('online', this.handleOnline.bind(this));
-      window.addEventListener('offline', this.handleOffline.bind(this));
+      window.addEventListener("online", this.handleOnline.bind(this));
+      window.addEventListener("offline", this.handleOffline.bind(this));
     }
   }
 
@@ -35,7 +35,7 @@ export class SupabaseFlowProgressPersistence implements FlowProgressPersistence 
 
     try {
       const { error } = await supabase
-        .from('user_study_progress')
+        .from("user_study_progress")
         .upsert({
           user_id: context.userId,
           module_id: context.moduleId,
@@ -51,8 +51,8 @@ export class SupabaseFlowProgressPersistence implements FlowProgressPersistence 
           }),
           updated_at: new Date().toISOString(),
         } as any)
-        .eq('user_id', context.userId)
-        .eq('module_id', context.moduleId);
+        .eq("user_id", context.userId)
+        .eq("module_id", context.moduleId);
 
       if (error) {
         this.queueForSync(context);
@@ -71,70 +71,75 @@ export class SupabaseFlowProgressPersistence implements FlowProgressPersistence 
     if (!this.isOnline) {
       return this.loadFromOfflineQueue(moduleId, userId);
     }
-    const { data, error } = await supabase
-      .from('user_study_progress')
-      .select('*')
-      .eq('user_id', userId)
-      .eq('module_id', moduleId)
-      .single();
 
-    if (error) {
-      if (error.code === 'PGRST116' || error.details?.includes('0 rows')) {
-        // No rows found - this is expected for new flows
-        return null;
+    try {
+      const { data, error } = await supabase
+        .from("user_study_progress")
+        .select("*")
+        .eq("user_id", userId)
+        .eq("module_id", moduleId)
+        .single();
+
+      if (error) {
+        if (error.code === "PGRST116" || error.details?.includes("0 rows")) {
+          // No rows found - this is expected for new flows
+          return null;
+        }
+        throw new Error(`Failed to load learning flow progress: ${error.message}`);
       }
-      throw new Error(`Failed to load learning flow progress: ${error.message}`);
-    }
 
-    if (!data) return null; // Should be handled by PGRST116, but for safety
+      if (!data) return null; // Should be handled by PGRST116, but for safety
 
-    const typedData = data as Tables<'user_study_progress'>; // Explicitly cast data
-    if (!typedData) {
-      throw new Error('No user study progress found.');
-    }
-
-    // Parse notes back into attempts, canProceed, and metadata
-    let parsedNotes: {
-      attempts?: number;
-      canProceed?: boolean;
-      metadata?: LearningFlowMetadata;
-    } = {};
-    if (typedData.notes) {
-      try {
-        parsedNotes = JSON.parse(typedData.notes);
-      } catch (parseError) {
-        console.error('Failed to parse learning flow notes:', parseError);
+      const typedData = data as Tables<"user_study_progress">; // Explicitly cast data
+      if (!typedData) {
+        throw new Error("No user study progress found.");
       }
-    }
 
-    return {
-      moduleId: typedData.module_id,
-      userId: typedData.user_id,
-      currentState: typedData.status as LearningFlowState, // Map StudyStatus to LearningFlowState
-      startedAt: new Date(typedData.created_at),
-      completedAt: typedData.completed_at ? new Date(typedData.completed_at) : undefined,
-      timeSpent: typedData.time_spent_minutes || 0,
-      attempts: parsedNotes.attempts || 0,
-      canProceed: parsedNotes.canProceed || false,
-      metadata: parsedNotes.metadata || {
-        learnProgress: {
-          sectionsViewed: [],
-          totalSections: 0,
-          timeSpent: 0,
-          checkpointsPassed: [],
-          keyPointsReviewed: [],
+      // Parse notes back into attempts, canProceed, and metadata
+      let parsedNotes: {
+        attempts?: number;
+        canProceed?: boolean;
+        metadata?: LearningFlowMetadata;
+      } = {};
+      if (typedData.notes) {
+        try {
+          parsedNotes = JSON.parse(typedData.notes);
+        } catch (parseError) {
+          console.error("Failed to parse learning flow notes:", parseError);
+        }
+      }
+
+      return {
+        moduleId: typedData.module_id,
+        userId: typedData.user_id,
+        currentState: typedData.status as LearningFlowState, // Map StudyStatus to LearningFlowState
+        startedAt: new Date(typedData.created_at),
+        completedAt: typedData.completed_at ? new Date(typedData.completed_at) : undefined,
+        timeSpent: typedData.time_spent_minutes || 0,
+        attempts: parsedNotes.attempts || 0,
+        canProceed: parsedNotes.canProceed || false,
+        metadata: parsedNotes.metadata || {
+          learnProgress: {
+            sectionsViewed: [],
+            totalSections: 0,
+            timeSpent: 0,
+            checkpointsPassed: [],
+            keyPointsReviewed: [],
+          },
+          practiceProgress: {
+            questionsAttempted: 0,
+            questionsCorrect: 0,
+            timeSpent: 0,
+            topics: [],
+            hintsUsed: 0,
+          },
+          assessProgress: { attempts: 0, bestScore: 0, lastScore: 0, timeSpent: 0, passed: false },
+          telemetry: [],
         },
-        practiceProgress: {
-          questionsAttempted: 0,
-          questionsCorrect: 0,
-          timeSpent: 0,
-          topics: [],
-          hintsUsed: 0,
-        },
-        assessProgress: { attempts: 0, bestScore: 0, lastScore: 0, timeSpent: 0, passed: false },
-        telemetry: [],
-      },
-    };
+      };
+    } catch (error) {
+      throw error;
+    }
   }
 
   /**
@@ -148,14 +153,19 @@ export class SupabaseFlowProgressPersistence implements FlowProgressPersistence 
       );
       return;
     }
-    const { error } = await supabase
-      .from('user_study_progress')
-      .delete()
-      .eq('user_id', userId)
-      .eq('module_id', moduleId);
 
-    if (error) {
-      throw new Error(`Failed to delete learning flow progress: ${error.message}`);
+    try {
+      const { error } = await supabase
+        .from("user_study_progress")
+        .delete()
+        .eq("user_id", userId)
+        .eq("module_id", moduleId);
+
+      if (error) {
+        throw new Error(`Failed to delete learning flow progress: ${error.message}`);
+      }
+    } catch (error) {
+      throw error;
     }
   }
 
@@ -174,7 +184,7 @@ export class SupabaseFlowProgressPersistence implements FlowProgressPersistence 
     // Persist to localStorage
     try {
       localStorage.setItem(
-        'learning-flow-offline-queue',
+        "learning-flow-offline-queue",
         JSON.stringify(
           this.offlineQueue.map((ctx) => ({
             ...ctx,
@@ -210,7 +220,7 @@ export class SupabaseFlowProgressPersistence implements FlowProgressPersistence 
 
     // Clear localStorage queue on successful sync
     try {
-      localStorage.removeItem('learning-flow-offline-queue');
+      localStorage.removeItem("learning-flow-offline-queue");
     } catch (error) {
       // Silently handle localStorage errors in production
     }
@@ -221,7 +231,7 @@ export class SupabaseFlowProgressPersistence implements FlowProgressPersistence 
    */
   loadOfflineQueue(): void {
     try {
-      const stored = localStorage.getItem('learning-flow-offline-queue');
+      const stored = localStorage.getItem("learning-flow-offline-queue");
       if (stored) {
         const parsed = JSON.parse(stored);
         this.offlineQueue = parsed.map((ctx: any) => ({
@@ -264,6 +274,6 @@ export class SupabaseFlowProgressPersistence implements FlowProgressPersistence 
 export const defaultFlowPersistence = new SupabaseFlowProgressPersistence();
 
 // Load offline queue on module initialization
-if (typeof window !== 'undefined') {
+if (typeof window !== "undefined") {
   defaultFlowPersistence.loadOfflineQueue();
 }

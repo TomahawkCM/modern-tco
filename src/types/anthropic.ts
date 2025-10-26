@@ -3,28 +3,28 @@
  * Comprehensive TypeScript definitions for Claude API integration
  */
 
-import { Anthropic } from '@anthropic-ai/sdk';
+import { Anthropic } from "@anthropic-ai/sdk";
 import type {
-  APIConnectionError,
-  APIError,
-  APIUserAbortError,
-  AuthenticationError,
-  BadRequestError,
-  InternalServerError,
-  NotFoundError,
-  PermissionDeniedError,
-  RateLimitError,
-} from '@anthropic-ai/sdk/core/error';
-import type {
+  Tool,
+  ToolUseBlock,
+  ToolResultBlockParam,
   ContentBlock,
-  ImageBlockParam,
+  TextBlock,
   Message,
   MessageCreateParams,
-  TextBlock,
-  Tool,
-  ToolResultBlockParam,
-  ToolUseBlock,
-} from '@anthropic-ai/sdk/resources/messages/messages';
+  ImageBlockParam,
+} from "@anthropic-ai/sdk/resources/messages/messages";
+import type {
+  APIError,
+  APIConnectionError,
+  APIUserAbortError,
+  BadRequestError,
+  AuthenticationError,
+  PermissionDeniedError,
+  NotFoundError,
+  RateLimitError,
+  InternalServerError,
+} from "@anthropic-ai/sdk/core/error";
 
 // Re-export core Anthropic types
 export type {
@@ -52,13 +52,10 @@ export type ImageBlock = ImageBlockParam;
 export type ToolResultBlock = ToolResultBlockParam;
 
 // Difficulty levels for questions and content
-export type DifficultyLevel = 'beginner' | 'intermediate' | 'advanced' | 'easy' | 'medium' | 'hard';
+export type DifficultyLevel = "beginner" | "intermediate" | "advanced" | "easy" | "medium" | "hard";
 
 // AI Model types
-export type AIModel =
-  | 'claude-3-5-sonnet-20241022'
-  | 'claude-3-5-haiku-20241022'
-  | 'claude-3-opus-20240229';
+export type AIModel = "claude-3-5-sonnet-20241022" | "claude-3-5-haiku-20241022" | "claude-3-opus-20240229";
 
 // Token counting and information
 export interface TokenInfo {
@@ -162,7 +159,7 @@ export interface StudyPlan {
   updatedAt?: Date;
   studyPath?: {
     moduleId: string;
-    priority: 'high' | 'medium' | 'low';
+    priority: "high" | "medium" | "low";
     estimatedTime: number;
     prerequisites?: string[];
   }[];
@@ -171,7 +168,7 @@ export interface StudyPlan {
 // Chat Message
 export interface ChatMessage {
   id?: string;
-  role: 'user' | 'assistant' | 'system';
+  role: "user" | "assistant" | "system";
   content: string;
   timestamp: Date;
   metadata?: any;
@@ -219,14 +216,14 @@ export interface AnthropicConfig {
 export interface StudyAssistantConfig extends AnthropicConfig {
   systemPrompt?: string;
   studyContext?: string;
-  userLevel?: 'beginner' | 'intermediate' | 'advanced';
+  userLevel?: "beginner" | "intermediate" | "advanced";
   examMode?: boolean;
 }
 
 export interface QuestionGenerationParams {
   topic: string;
-  difficulty: 'beginner' | 'intermediate' | 'advanced';
-  questionType: 'multiple-choice' | 'true-false' | 'scenario' | 'fill-blank';
+  difficulty: "beginner" | "intermediate" | "advanced";
+  questionType: "multiple-choice" | "true-false" | "scenario" | "fill-blank";
   count: number;
   examWeight?: number;
   objectives?: string[];
@@ -235,8 +232,8 @@ export interface QuestionGenerationParams {
 
 export interface GeneratedQuestion {
   id: string;
-  type: 'multiple-choice' | 'true-false' | 'scenario' | 'fill-blank';
-  difficulty: 'beginner' | 'intermediate' | 'advanced';
+  type: "multiple-choice" | "true-false" | "scenario" | "fill-blank";
+  difficulty: "beginner" | "intermediate" | "advanced";
   topic: string;
   question: string;
   options?: string[];
@@ -249,21 +246,21 @@ export interface GeneratedQuestion {
 
 export interface ExplanationRequest {
   concept: string;
-  userLevel: 'beginner' | 'intermediate' | 'advanced';
+  userLevel: "beginner" | "intermediate" | "advanced";
   context?: string;
   includeExamples?: boolean;
   includeReferences?: boolean;
 }
 
 export interface StudyPathRecommendation {
-  currentLevel: 'beginner' | 'intermediate' | 'advanced';
+  currentLevel: "beginner" | "intermediate" | "advanced";
   completedModules: string[];
   weakAreas: string[];
   recommendedNext: string[];
   estimatedTime: number;
   studyPlan: {
     moduleId: string;
-    priority: 'high' | 'medium' | 'low';
+    priority: "high" | "medium" | "low";
     estimatedTime: number;
     prerequisites?: string[];
   }[];
@@ -316,10 +313,10 @@ export interface StreamingResponse {
 
 // Tool definitions for function calling
 export interface StudyTool extends Tool {
-  name: 'generate_question' | 'explain_concept' | 'analyze_performance' | 'recommend_study_path';
+  name: "generate_question" | "explain_concept" | "analyze_performance" | "recommend_study_path";
   description: string;
   input_schema: {
-    type: 'object';
+    type: "object";
     properties: Record<string, any>;
     required: string[];
   };
@@ -327,7 +324,7 @@ export interface StudyTool extends Tool {
 
 // Error types specific to our application
 export interface StudyServiceError {
-  code: 'INVALID_CONFIG' | 'API_ERROR' | 'RATE_LIMIT' | 'QUOTA_EXCEEDED' | 'NETWORK_ERROR';
+  code: "INVALID_CONFIG" | "API_ERROR" | "RATE_LIMIT" | "QUOTA_EXCEEDED" | "NETWORK_ERROR";
   message: string;
   details?: any;
   retryAfter?: number;
@@ -344,8 +341,8 @@ export interface TokenUsage {
 export interface TokenOptimizationSettings {
   maxContextLength: number;
   reserveTokensForResponse: number;
-  truncationStrategy: 'beginning' | 'end' | 'middle' | 'smart';
-  compressionLevel: 'none' | 'light' | 'moderate' | 'aggressive';
+  truncationStrategy: "beginning" | "end" | "middle" | "smart";
+  compressionLevel: "none" | "light" | "moderate" | "aggressive";
 }
 
 // Streaming types
@@ -357,8 +354,8 @@ export interface StreamingOptions {
 }
 
 // Utility types
-export type APIMethod = 'POST' | 'GET' | 'PUT' | 'DELETE';
-export type ContentType = 'text' | 'image' | 'tool_use' | 'tool_result';
+export type APIMethod = "POST" | "GET" | "PUT" | "DELETE";
+export type ContentType = "text" | "image" | "tool_use" | "tool_result";
 
 // Model-specific configurations
 export interface ModelCapabilities {
@@ -373,7 +370,7 @@ export interface ModelCapabilities {
 }
 
 export const CLAUDE_MODELS: Record<string, ModelCapabilities> = {
-  'claude-3-5-sonnet-20241022': {
+  "claude-3-5-sonnet-20241022": {
     maxTokens: 200000,
     supportsImages: true,
     supportsFunctions: true,
@@ -383,7 +380,7 @@ export const CLAUDE_MODELS: Record<string, ModelCapabilities> = {
       output: 0.015,
     },
   },
-  'claude-3-haiku-20240307': {
+  "claude-3-haiku-20240307": {
     maxTokens: 200000,
     supportsImages: true,
     supportsFunctions: true,

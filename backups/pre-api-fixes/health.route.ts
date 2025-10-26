@@ -1,11 +1,11 @@
-import { apiSuccess, withErrorTracking } from '@/lib/error-tracking';
+import { withErrorTracking, apiSuccess } from "@/lib/error-tracking";
 
 export const GET = withErrorTracking(
   () =>
     apiSuccess({
-      status: 'healthy',
+      status: "healthy",
       timestamp: new Date().toISOString(),
-      environment: process.env.NODE_ENV ?? 'development',
+      environment: process.env.NODE_ENV ?? "development",
     }),
-  { endpoint: '/api/health' }
+  { endpoint: "/api/health" }
 );

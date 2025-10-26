@@ -1,9 +1,10 @@
-'use client';
+"use client";
 
-import { CheckCircle2, Circle, Clock, Target } from 'lucide-react';
-import { Badge } from '@/components/ui/badge';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Progress } from '@/components/ui/progress';
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Progress } from "@/components/ui/progress";
+import { CheckCircle2, Circle, Clock, Target } from "lucide-react";
+import Link from "next/link";
 
 interface MicroSection {
   id: string;
@@ -47,12 +48,12 @@ export default function MicroSectionProgressGrid({
 
   // Module colors matching DomainMasteryWheel
   const moduleColors: Record<string, string> = {
-    foundation: 'bg-cyan-500',
-    'module-1': 'bg-primary',
-    'module-2': 'bg-accent',
-    'module-3': 'bg-orange-500',
-    'module-4': 'bg-[#22c55e]',
-    'module-5': 'bg-pink-500',
+    foundation: "bg-cyan-500",
+    "module-1": "bg-primary",
+    "module-2": "bg-accent",
+    "module-3": "bg-orange-500",
+    "module-4": "bg-[#22c55e]",
+    "module-5": "bg-pink-500",
   };
 
   const getSectionIcon = (section: MicroSection) => {
@@ -70,7 +71,7 @@ export default function MicroSectionProgressGrid({
 
   const getSectionClasses = (section: MicroSection) => {
     const baseClasses =
-      'flex items-center gap-2 p-2 rounded-md transition-all cursor-pointer hover:bg-accent';
+      "flex items-center gap-2 p-2 rounded-md transition-all cursor-pointer hover:bg-accent";
 
     if (section.completed) {
       return `${baseClasses} bg-[#22c55e]/10 border border-[#22c55e]/20`;
@@ -119,8 +120,9 @@ export default function MicroSectionProgressGrid({
       <CardContent className="space-y-6">
         {/* Module Sections Grid */}
         {modules.map((module) => {
-          const moduleProgress = (module.completedSections / module.totalSections) * 100;
-          const color = moduleColors[module.moduleId] || 'bg-gray-500';
+          const moduleProgress =
+            (module.completedSections / module.totalSections) * 100;
+          const color = moduleColors[module.moduleId] || "bg-gray-500";
 
           return (
             <div key={module.moduleId} className="space-y-3">
@@ -133,7 +135,9 @@ export default function MicroSectionProgressGrid({
                     {module.completedSections}/{module.totalSections}
                   </Badge>
                 </div>
-                <span className="text-sm text-muted-foreground">{Math.round(moduleProgress)}%</span>
+                <span className="text-sm text-muted-foreground">
+                  {Math.round(moduleProgress)}%
+                </span>
               </div>
 
               {/* Module Progress Bar */}
@@ -154,7 +158,9 @@ export default function MicroSectionProgressGrid({
                   >
                     {getSectionIcon(section)}
                     <div className="flex-1 min-w-0">
-                      <p className="text-sm font-medium truncate">{section.title}</p>
+                      <p className="text-sm font-medium truncate">
+                        {section.title}
+                      </p>
                       <p className="text-xs text-muted-foreground">
                         {section.estimatedMinutes} min
                       </p>
@@ -191,18 +197,22 @@ export default function MicroSectionProgressGrid({
         {/* Study Recommendations */}
         {overallProgress < 100 && (
           <div className="p-3 bg-primary/10 border border-primary/20 rounded-lg">
-            <p className="text-sm font-medium text-primary mb-1">Continue Your Journey</p>
+            <p className="text-sm font-medium text-primary mb-1">
+              Continue Your Journey
+            </p>
             <p className="text-xs text-muted-foreground">
-              {totalSections - totalCompleted} sections remaining. Complete{' '}
-              {Math.min(5, totalSections - totalCompleted)} today to stay on track for your 20-hour
-              goal!
+              {totalSections - totalCompleted} sections remaining. Complete{" "}
+              {Math.min(5, totalSections - totalCompleted)} today to stay on
+              track for your 20-hour goal!
             </p>
           </div>
         )}
 
         {overallProgress === 100 && (
           <div className="p-3 bg-[#22c55e]/10 border border-[#22c55e]/20 rounded-lg text-center">
-            <p className="text-sm font-medium text-[#22c55e]">🎉 All Sections Complete!</p>
+            <p className="text-sm font-medium text-[#22c55e]">
+              🎉 All Sections Complete!
+            </p>
             <p className="text-xs text-muted-foreground mt-1">
               Ready for practice exams and certification assessment
             </p>

@@ -1,0 +1,346 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TCO Browser Test - Modern App Verification</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #1a365d 0%, #2d5a87 50%, #4a90b8 100%);
+        color: white;
+        min-height: 100vh;
+        padding: 2rem;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .header {
+        text-align: center;
+        margin-bottom: 3rem;
+      }
+
+      .header h1 {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      }
+
+      .header p {
+        font-size: 1.2rem;
+        opacity: 0.9;
+      }
+
+      .test-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin-bottom: 3rem;
+      }
+
+      .test-card {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 12px;
+        padding: 2rem;
+        transition: all 0.3s ease;
+        cursor: pointer;
+      }
+
+      .test-card:hover {
+        transform: translateY(-5px);
+        background: rgba(255, 255, 255, 0.15);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      }
+
+      .test-card h3 {
+        color: #4fc3f7;
+        margin-bottom: 1rem;
+        font-size: 1.4rem;
+      }
+
+      .test-card p {
+        line-height: 1.6;
+        margin-bottom: 1rem;
+      }
+
+      .status {
+        display: inline-block;
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        font-weight: bold;
+      }
+
+      .status.success {
+        background: #4caf50;
+        color: white;
+      }
+
+      .status.pending {
+        background: #ff9800;
+        color: white;
+      }
+
+      .interactive-demo {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
+        padding: 2rem;
+        margin: 2rem 0;
+      }
+
+      .demo-button {
+        background: linear-gradient(45deg, #2196f3, #4caf50);
+        color: white;
+        border: none;
+        padding: 1rem 2rem;
+        border-radius: 8px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin: 0.5rem;
+      }
+
+      .demo-button:hover {
+        transform: scale(1.05);
+        box-shadow: 0 5px 15px rgba(33, 150, 243, 0.4);
+      }
+
+      .progress-bar {
+        width: 100%;
+        height: 8px;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 4px;
+        overflow: hidden;
+        margin: 1rem 0;
+      }
+
+      .progress-fill {
+        height: 100%;
+        background: linear-gradient(90deg, #4caf50, #8bc34a);
+        border-radius: 4px;
+        transition: width 0.5s ease;
+      }
+
+      #console-output {
+        background: rgba(0, 0, 0, 0.5);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 8px;
+        padding: 1rem;
+        font-family: "Courier New", monospace;
+        font-size: 0.9rem;
+        height: 200px;
+        overflow-y: auto;
+        margin-top: 1rem;
+      }
+
+      @media (max-width: 768px) {
+        .header h1 {
+          font-size: 2rem;
+        }
+
+        .test-grid {
+          grid-template-columns: 1fr;
+        }
+
+        body {
+          padding: 1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>🎯 TCO Modern App Browser Test</h1>
+        <p>
+          Verifying browser functionality and modern web features for Tanium Certified Operator
+          study platform
+        </p>
+      </div>
+
+      <div class="test-grid">
+        <div class="test-card" onclick="runTest('basic')">
+          <h3>📱 Basic Functionality</h3>
+          <p>Testing HTML5, CSS3, and JavaScript execution</p>
+          <span id="basic-status" class="status pending">Pending</span>
+        </div>
+
+        <div class="test-card" onclick="runTest('responsive')">
+          <h3>📐 Responsive Design</h3>
+          <p>Testing viewport responsiveness and mobile compatibility</p>
+          <span id="responsive-status" class="status pending">Pending</span>
+        </div>
+
+        <div class="test-card" onclick="runTest('modern')">
+          <h3>🚀 Modern Features</h3>
+          <p>Testing CSS Grid, Flexbox, and modern JavaScript features</p>
+          <span id="modern-status" class="status pending">Pending</span>
+        </div>
+
+        <div class="test-card" onclick="runTest('interactive')">
+          <h3>🎮 Interactivity</h3>
+          <p>Testing click handlers, animations, and user interactions</p>
+          <span id="interactive-status" class="status pending">Pending</span>
+        </div>
+      </div>
+
+      <div class="interactive-demo">
+        <h3>🎯 TCO Study Platform Demo</h3>
+        <p>Simulated features from the actual Tanium Certified Operator study application:</p>
+
+        <button class="demo-button" onclick="simulateQuizQuestion()">📝 Practice Question</button>
+
+        <button class="demo-button" onclick="simulateProgressTracking()">
+          📊 Progress Tracking
+        </button>
+
+        <button class="demo-button" onclick="simulateStudyModule()">📚 Study Module</button>
+
+        <div class="progress-bar">
+          <div id="progress-fill" class="progress-fill" style="width: 0%"></div>
+        </div>
+
+        <p id="demo-status">Click buttons above to test TCO platform features</p>
+      </div>
+
+      <div id="console-output">
+        <div style="color: #4fc3f7">TCO Browser Test Console - Ready for testing</div>
+        <div style="color: #4caf50">✓ HTML structure loaded successfully</div>
+        <div style="color: #4caf50">✓ CSS styling applied successfully</div>
+        <div style="color: #4caf50">✓ JavaScript engine initialized</div>
+      </div>
+    </div>
+
+    <script>
+      let testResults = {
+        basic: false,
+        responsive: false,
+        modern: false,
+        interactive: false,
+      };
+
+      function logToConsole(message, type = "info") {
+        const console = document.getElementById("console-output");
+        const colors = {
+          info: "#4FC3F7",
+          success: "#4CAF50",
+          error: "#F44336",
+          warning: "#FF9800",
+        };
+
+        const timestamp = new Date().toLocaleTimeString();
+        const div = document.createElement("div");
+        div.style.color = colors[type];
+        div.innerHTML = `[${timestamp}] ${message}`;
+        console.appendChild(div);
+        console.scrollTop = console.scrollHeight;
+      }
+
+      function runTest(testType) {
+        logToConsole(`🧪 Running ${testType} test...`, "info");
+
+        setTimeout(() => {
+          let passed = false;
+
+          switch (testType) {
+            case "basic":
+              passed =
+                typeof document !== "undefined" &&
+                typeof window !== "undefined" &&
+                document.querySelector !== undefined;
+              break;
+
+            case "responsive":
+              passed =
+                window.innerWidth > 0 &&
+                CSS.supports("display", "grid") &&
+                CSS.supports("display", "flex");
+              break;
+
+            case "modern":
+              passed =
+                Array.from && Promise && fetch && CSS.supports("backdrop-filter", "blur(10px)");
+              break;
+
+            case "interactive":
+              passed =
+                document.addEventListener &&
+                document.createElement &&
+                Element.prototype.classList !== undefined;
+              break;
+          }
+
+          testResults[testType] = passed;
+          const statusElement = document.getElementById(`${testType}-status`);
+
+          if (passed) {
+            statusElement.textContent = "Passed";
+            statusElement.className = "status success";
+            logToConsole(`✓ ${testType} test PASSED`, "success");
+          } else {
+            statusElement.textContent = "Failed";
+            statusElement.className = "status error";
+            logToConsole(`✗ ${testType} test FAILED`, "error");
+          }
+
+          checkAllTests();
+        }, 500);
+      }
+
+      function checkAllTests() {
+        const allPassed = Object.values(testResults).every((result) => result === true);
+        if (allPassed) {
+          logToConsole("🎉 ALL TESTS PASSED! Browser ready for TCO app", "success");
+        }
+      }
+
+      function simulateQuizQuestion() {
+        logToConsole("📝 Simulating TCO practice question...", "info");
+        updateProgress(25);
+        document.getElementById("demo-status").textContent =
+          "Question: Which Tanium module is used for endpoint visibility? A) Connect B) Interact C) Asset D) Patch";
+      }
+
+      function simulateProgressTracking() {
+        logToConsole("📊 Simulating progress tracking...", "info");
+        updateProgress(60);
+        document.getElementById("demo-status").textContent =
+          "Progress: Domain 1 (Asking Questions) - 78% complete | Domain 2 (Targeting) - 45% complete";
+      }
+
+      function simulateStudyModule() {
+        logToConsole("📚 Simulating study module...", "info");
+        updateProgress(90);
+        document.getElementById("demo-status").textContent =
+          "Study Module: Navigation & Module Functions - Interactive console walkthrough loaded";
+      }
+
+      function updateProgress(percentage) {
+        const progressFill = document.getElementById("progress-fill");
+        progressFill.style.width = percentage + "%";
+      }
+
+      // Auto-run basic test on load
+      setTimeout(() => {
+        logToConsole("🚀 Auto-running basic functionality test...", "info");
+        runTest("basic");
+      }, 1000);
+
+      // Log browser info
+      logToConsole(`Browser: ${navigator.userAgent}`, "info");
+      logToConsole(`Viewport: ${window.innerWidth}x${window.innerHeight}`, "info");
+      logToConsole(`Screen: ${screen.width}x${screen.height}`, "info");
+    </script>
+  </body>
+</html>

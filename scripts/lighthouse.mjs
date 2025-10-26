@@ -6,7 +6,6 @@
 import { spawn } from 'node:child_process';
 import { mkdirSync } from 'node:fs';
 import { createRequire } from 'node:module';
-
 const require = createRequire(import.meta.url);
 
 const [baseArg = 'http://localhost:3000', ...paths] = process.argv.slice(2);
@@ -39,12 +38,8 @@ function resolveChromePath() {
 // We will rely on Lighthouse to launch Chrome but pass safe flags.
 
 function resolveLighthouseCli() {
-  try {
-    return require.resolve('lighthouse/lighthouse-cli/index.js');
-  } catch {}
-  try {
-    return require.resolve('lighthouse/cli/index.js');
-  } catch {}
+  try { return require.resolve('lighthouse/lighthouse-cli/index.js'); } catch {}
+  try { return require.resolve('lighthouse/cli/index.js'); } catch {}
   return null;
 }
 
@@ -95,21 +90,16 @@ function run(url, preset, outBase) {
 const now = new Date().toISOString().replace(/[:.]/g, '-');
 const outDir = `reports/lighthouse/${now}`;
 // Ensure output directory exists so Lighthouse can write files
-try {
-  mkdirSync(outDir, { recursive: true });
-} catch {}
+try { mkdirSync(outDir, { recursive: true }); } catch {}
 
 async function main() {
   for (const p of targets) {
     const url = p.startsWith('http') ? p : `${base}${p}`;
-    const slug = p.replace(/[/:?&=]/g, '_') || 'root';
+    const slug = p.replace(/[\/:?&=]/g, '_') || 'root';
     await run(url, 'desktop', `${outDir}/desktop_${slug}`);
     await run(url, 'mobile', `${outDir}/mobile_${slug}`);
   }
   console.log(`\nLighthouse reports saved to: ${outDir}`);
 }
 
-main().catch((e) => {
-  console.error(e);
-  process.exit(1);
-});
+main().catch((e) => { console.error(e); process.exit(1); });

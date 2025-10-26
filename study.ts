@@ -1,15 +1,15 @@
 // src/types/study.ts
 export type TCODomain =
-  | 'Platform'
-  | 'Asset Discovery'
-  | 'Deploy'
-  | 'Patch'
-  | 'Comply'
-  | 'Trends'
-  | 'Interact'
-  | 'Reporting'
-  | 'Sensors'
-  | 'Packages';
+  | "Platform"
+  | "Asset Discovery"
+  | "Deploy"
+  | "Patch"
+  | "Comply"
+  | "Trends"
+  | "Interact"
+  | "Reporting"
+  | "Sensors"
+  | "Packages";
 
 export type Question = {
   id: string;
@@ -21,7 +21,7 @@ export type Question = {
   tags?: string[];
 };
 
-export type AssessmentStatus = 'not-started' | 'in-progress' | 'completed';
+export type AssessmentStatus = "not-started" | "in-progress" | "completed";
 
 export type AssessmentResponse = {
   questionId: string;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 // Type definition for MDX components
 type MDXComponents = {
@@ -7,23 +7,22 @@ type MDXComponents = {
 
 // Direct imports required for MDX - dynamic imports don't work with useMDXComponents
 // All MDX components registered globally - no explicit imports needed in .mdx files
-import Callout from '@/components/mdx/Callout';
-import InfoBox from '@/components/mdx/InfoBox';
-import MicroQuizMDX from '@/components/mdx/MicroQuizMDX';
-import MicroSection from '@/components/mdx/MicroSection';
-import MiniProject from '@/components/mdx/MiniProject';
-import ModuleTransition from '@/components/mdx/ModuleTransition';
-import PracticeButton from '@/components/mdx/PracticeButton';
-import QueryPlayground from '@/components/mdx/QueryPlayground';
-import SkillGate from '@/components/mdx/SkillGate';
-import StepItem from '@/components/mdx/StepItem';
-import Steps from '@/components/mdx/Steps';
+import Callout from "@/components/mdx/Callout";
+import InfoBox from "@/components/mdx/InfoBox";
+import MicroQuizMDX from "@/components/mdx/MicroQuizMDX";
+import MicroSection from "@/components/mdx/MicroSection";
+import MiniProject from "@/components/mdx/MiniProject";
+import ModuleTransition from "@/components/mdx/ModuleTransition";
+import PracticeButton from "@/components/mdx/PracticeButton";
+import QueryPlayground from "@/components/mdx/QueryPlayground";
+import SkillGate from "@/components/mdx/SkillGate";
+import { Steps, Step } from "@/components/mdx/Steps";
 
 function Anchor(props: React.AnchorHTMLAttributes<HTMLAnchorElement>) {
-  const href = props.href || '';
+  const href = props.href || "";
   const isExternal = /^https?:\/\//i.test(href);
-  const rel = isExternal ? 'noopener noreferrer' : props.rel;
-  const target = isExternal ? '_blank' : props.target;
+  const rel = isExternal ? "noopener noreferrer" : props.rel;
+  const target = isExternal ? "_blank" : props.target;
   return <a {...props} rel={rel} target={target} />;
 }
 
@@ -40,7 +39,7 @@ export function useMDXComponents(components: MDXComponents = {}): MDXComponents 
     PracticeButton,
     QueryPlayground,
     SkillGate,
-    StepItem,
     Steps,
+    Step,
   };
 }

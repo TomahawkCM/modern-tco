@@ -9,11 +9,11 @@
  * Usage: npm run generate-questions
  */
 
-import fs from 'node:fs/promises';
-import path from 'node:path';
+import fs from "fs/promises";
+import path from "path";
+import { QuestionGeneratorService } from "../services/QuestionGeneratorService";
+import { Difficulty, QuestionCategory, TCODomain, TCO_DOMAIN_WEIGHTS } from "../types/exam";
 import { defaultDifficultyRecord } from '../lib/difficulty';
-import { QuestionGeneratorService } from '../services/QuestionGeneratorService';
-import { Difficulty, QuestionCategory, TCO_DOMAIN_WEIGHTS, TCODomain } from '../types/exam';
 
 interface GenerationPlan {
   domain: TCODomain;
@@ -32,13 +32,13 @@ class QuestionBankExpansion {
 
   constructor() {
     this.generator = new QuestionGeneratorService();
-    this.outputDir = path.join(process.cwd(), 'src', 'data', 'generated');
+    this.outputDir = path.join(process.cwd(), "src", "data", "generated");
   }
 
   async expandQuestionBank(): Promise<void> {
-    console.log('🚀 Starting TCO Question Bank Expansion');
-    console.log('📊 Target: Expand from 200 to 1,000+ questions (800 new questions)');
-    console.log('🎯 Maintaining official TAN-1000 blueprint distribution\n');
+    console.log("🚀 Starting TCO Question Bank Expansion");
+    console.log("📊 Target: Expand from 200 to 1,000+ questions (800 new questions)");
+    console.log("🎯 Maintaining official TAN-1000 blueprint distribution\n");
 
     // Create output directory
     await this.ensureOutputDirectory();
@@ -54,9 +54,9 @@ class QuestionBankExpansion {
       await this.generateDomainQuestions(plan);
     }
 
-    console.log('\n✅ Question bank expansion completed successfully!');
-    console.log('📁 Generated files saved to: src/data/generated/');
-    console.log('🔧 Next steps: Review, validate, and integrate questions');
+    console.log("\n✅ Question bank expansion completed successfully!");
+    console.log("📁 Generated files saved to: src/data/generated/");
+    console.log("🔧 Next steps: Review, validate, and integrate questions");
   }
 
   /**
@@ -139,9 +139,9 @@ class QuestionBankExpansion {
    * Display the generation plan
    */
   private displayGenerationPlan(plans: GenerationPlan[]): void {
-    console.log('📋 GENERATION PLAN\n');
-    console.log(`${'Domain'.padEnd(35) + 'Current'.padEnd(10) + 'Target'.padEnd(10)}Generate`);
-    console.log('-'.repeat(70));
+    console.log("📋 GENERATION PLAN\n");
+    console.log(`${"Domain".padEnd(35) + "Current".padEnd(10) + "Target".padEnd(10)}Generate`);
+    console.log("-".repeat(70));
 
     let totalToGenerate = 0;
     for (const plan of plans) {
@@ -155,7 +155,7 @@ class QuestionBankExpansion {
       totalToGenerate += plan.toGenerate;
     }
 
-    console.log('-'.repeat(70));
+    console.log("-".repeat(70));
     console.log(`TOTAL TO GENERATE: ${totalToGenerate} questions\n`);
   }
 
@@ -202,7 +202,7 @@ class QuestionBankExpansion {
           if (invalid.length > 0) {
             console.warn(`    ⚠️ ${invalid.length} questions failed validation`);
             invalid.forEach((item) => {
-              console.warn(`      - ${item.issues.join(', ')}`);
+              console.warn(`      - ${item.issues.join(", ")}`);
             });
           }
 
@@ -251,15 +251,15 @@ class QuestionBankExpansion {
    */
   private async saveDomainQuestions(domain: TCODomain, questions: any[]): Promise<void> {
     const domainCodes: Record<TCODomain, string> = {
-      [TCODomain.ASKING_QUESTIONS]: 'asking',
-      [TCODomain.REFINING_QUESTIONS]: 'refining',
-      [TCODomain.TAKING_ACTION]: 'taking',
-      [TCODomain.NAVIGATION_MODULES]: 'navigation',
-      [TCODomain.REPORTING_EXPORT]: 'reporting',
-      [TCODomain.SECURITY]: 'security', // Add missing domain
-      [TCODomain.FUNDAMENTALS]: 'fundamentals', // Add missing domain
-      [TCODomain.TROUBLESHOOTING]: 'troubleshooting', // Add missing domain
-      [TCODomain.REFINING_TARGETING]: 'refiningTargeting', // Add missing TCODomain member
+      [TCODomain.ASKING_QUESTIONS]: "asking",
+      [TCODomain.REFINING_QUESTIONS]: "refining",
+      [TCODomain.TAKING_ACTION]: "taking",
+      [TCODomain.NAVIGATION_MODULES]: "navigation",
+      [TCODomain.REPORTING_EXPORT]: "reporting",
+      [TCODomain.SECURITY]: "security", // Add missing domain
+      [TCODomain.FUNDAMENTALS]: "fundamentals", // Add missing domain
+      [TCODomain.TROUBLESHOOTING]: "troubleshooting", // Add missing domain
+      [TCODomain.REFINING_TARGETING]: "refiningTargeting", // Add missing TCODomain member
     };
 
     const filename = `generated-questions-${domainCodes[domain]}.ts`;
@@ -276,7 +276,7 @@ class QuestionBankExpansion {
 export const generated${domainCodes[domain].charAt(0).toUpperCase()}${domainCodes[domain].slice(1)}Questions: Question[] = ${JSON.stringify(questions, null, 2)}
 `;
 
-    await fs.writeFile(filepath, content, 'utf-8');
+    await fs.writeFile(filepath, content, "utf-8");
     console.log(`💾 Saved to: ${filename}`);
   }
 
@@ -288,7 +288,7 @@ export const generated${domainCodes[domain].charAt(0).toUpperCase()}${domainCode
       await fs.access(this.outputDir);
     } catch {
       await fs.mkdir(this.outputDir, { recursive: true });
-      console.log('📁 Created output directory: src/data/generated/');
+      console.log("📁 Created output directory: src/data/generated/");
     }
   }
 
@@ -306,7 +306,7 @@ async function main() {
     const expansion = new QuestionBankExpansion();
     await expansion.expandQuestionBank();
   } catch (error) {
-    console.error('💥 Fatal error during question generation:', error);
+    console.error("💥 Fatal error during question generation:", error);
     process.exit(1);
   }
 }

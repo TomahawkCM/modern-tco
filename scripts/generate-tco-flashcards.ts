@@ -15,9 +15,9 @@
  */
 
 import { createClient } from '@supabase/supabase-js';
-import * as dotenv from 'dotenv';
 import * as fs from 'fs';
 import * as path from 'path';
+import * as dotenv from 'dotenv';
 
 // Load environment variables
 dotenv.config({ path: '.env.local' });
@@ -81,10 +81,7 @@ const TARGET_TOTAL_CARDS = 330; // Middle of 300-350 range
 async function convertMCQToFlashcards(): Promise<Flashcard[]> {
   console.log('\n📝 Phase 1: Converting MCQ Questions to Flashcards...\n');
 
-  const questionBankPath = path.join(
-    process.cwd(),
-    'src/content/questions/comprehensive-assessment-bank.json'
-  );
+  const questionBankPath = path.join(process.cwd(), 'src/content/questions/comprehensive-assessment-bank.json');
   const questionBank = JSON.parse(fs.readFileSync(questionBankPath, 'utf-8'));
 
   const flashcards: Flashcard[] = [];
@@ -98,13 +95,10 @@ async function convertMCQToFlashcards(): Promise<Flashcard[]> {
     return q.explanation && q.explanation.length > 20 && q.difficulty !== 'advanced';
   });
 
-  console.log(
-    `  Found ${suitableQuestions.length} suitable questions out of ${questionBank.questions.length} total`
-  );
+  console.log(`  Found ${suitableQuestions.length} suitable questions out of ${questionBank.questions.length} total`);
 
   // Convert each question to flashcard
-  for (const q of suitableQuestions.slice(0, 70)) {
-    // Target: 60-70 cards
+  for (const q of suitableQuestions.slice(0, 70)) { // Target: 60-70 cards
     const correctOption = q.options[q.correctAnswer];
     // Use the question's domain field to determine flashcard domain
     const domain = mapQuestionDomainFromField(q.domain, q.module);
@@ -185,9 +179,7 @@ async function extractMDXFlashcards(): Promise<Flashcard[]> {
       }
     }
 
-    console.log(
-      `  ${moduleName}: Extracted ${flashcards.filter((f) => f.domain === domain).length} flashcards`
-    );
+    console.log(`  ${moduleName}: Extracted ${flashcards.filter(f => f.domain === domain).length} flashcards`);
   }
 
   console.log(`\n  ✅ Extracted ${flashcards.length} flashcards from MDX modules\n`);
@@ -203,8 +195,8 @@ async function fillBlueprintGaps(existingCards: Flashcard[]): Promise<Flashcard[
 
   // Calculate current distribution
   const domainCounts: Record<string, number> = {};
-  Object.keys(TCO_BLUEPRINT).forEach((domain) => {
-    domainCounts[domain] = existingCards.filter((c) => c.domain === domain).length;
+  Object.keys(TCO_BLUEPRINT).forEach(domain => {
+    domainCounts[domain] = existingCards.filter(c => c.domain === domain).length;
   });
 
   // Calculate target distribution
@@ -252,13 +244,13 @@ function mapQuestionDomainFromField(questionDomain: string, module: string): str
 
     // Refining Questions domains
     'Computer Groups': 'refining-questions-targeting',
-    Filtering: 'refining-questions-targeting',
-    Targeting: 'refining-questions-targeting',
+    'Filtering': 'refining-questions-targeting',
+    'Targeting': 'refining-questions-targeting',
 
     // Taking Action domains
     'Package Management': 'taking-action-packages-actions',
     'Action Deployment': 'taking-action-packages-actions',
-    Monitoring: 'taking-action-packages-actions',
+    'Monitoring': 'taking-action-packages-actions',
 
     // Navigation domains
     'Interact Module': 'navigation-basic-modules',
@@ -269,7 +261,7 @@ function mapQuestionDomainFromField(questionDomain: string, module: string): str
     // Reporting domains
     'Data Export': 'reporting-data-export',
     'Report Creation': 'reporting-data-export',
-    Scheduling: 'reporting-data-export',
+    'Scheduling': 'reporting-data-export',
   };
 
   // Try exact match on domain field
@@ -279,12 +271,12 @@ function mapQuestionDomainFromField(questionDomain: string, module: string): str
 
   // Fall back to module mapping
   const moduleMap: Record<string, string> = {
-    Foundation: 'asking-questions',
+    'Foundation': 'asking-questions',
     'Asking Questions': 'asking-questions',
     'Refining Questions': 'refining-questions-targeting',
     'Taking Action': 'taking-action-packages-actions',
-    Navigation: 'navigation-basic-modules',
-    Reporting: 'reporting-data-export',
+    'Navigation': 'navigation-basic-modules',
+    'Reporting': 'reporting-data-export',
   };
 
   return moduleMap[module] || 'asking-questions';
@@ -292,10 +284,8 @@ function mapQuestionDomainFromField(questionDomain: string, module: string): str
 
 function extractKeywords(text: string): string[] {
   // Extract important keywords from explanation
-  const keywords = text.match(
-    /\b(Tanium|Linear Chain|Sensor|Package|Action|Computer Group|Filter|Module|Interact|Trends|Connect|Report|CSV|JSON|API)\b/gi
-  );
-  return keywords ? [...new Set(keywords.map((k) => k.toLowerCase()))] : [];
+  const keywords = text.match(/\b(Tanium|Linear Chain|Sensor|Package|Action|Computer Group|Filter|Module|Interact|Trends|Connect|Report|CSV|JSON|API)\b/gi);
+  return keywords ? [...new Set(keywords.map(k => k.toLowerCase()))] : [];
 }
 
 function parseObjectiveToFlashcard(objectiveText: string, domain: string): Flashcard | null {
@@ -303,9 +293,7 @@ function parseObjectiveToFlashcard(objectiveText: string, domain: string): Flash
   const cleanText = objectiveText.replace(/<[^>]*>/g, '').trim();
 
   // Look for Q&A patterns
-  const questionMatch = cleanText.match(
-    /^(What|How|Why|When|Where|Which|Describe|Explain|List|Define)\s+([^.?!]+)/i
-  );
+  const questionMatch = cleanText.match(/^(What|How|Why|When|Where|Which|Describe|Explain|List|Define)\s+([^.?!]+)/i);
 
   if (questionMatch) {
     const question = questionMatch[0];
@@ -354,143 +342,41 @@ function generateTemplateCards(domain: string, domainType: string, count: number
   if (count <= 0) return [];
 
   // Template patterns for each domain
-  const templates: Record<
-    string,
-    Array<{ q: string; a: string; type?: string; tags?: string[] }>
-  > = {
+  const templates: Record<string, Array<{q: string, a: string, type?: string, tags?: string[]}>> = {
     'asking-questions': [
-      {
-        q: 'What sensor retrieves installed software information?',
-        a: "The 'Installed Applications' sensor retrieves a list of all software installed on an endpoint, including application name, version, publisher, and install date.",
-      },
-      {
-        q: 'How do you save a Tanium question for reuse?',
-        a: "Click the 'Save Question' button in the Question Results panel, provide a descriptive name, and optionally assign it to a Computer Group. Saved questions appear in the 'Saved Questions' menu for quick access.",
-        tags: ['saved-questions'],
-      },
-      {
-        q: "What is the purpose of the 'with all results' clause?",
-        a: "The 'with all results' clause returns every value from every endpoint, useful for comprehensive audits. Without it, Tanium returns summarized/deduplicated results for efficiency.",
-        tags: ['query-options'],
-      },
-      {
-        q: 'How do natural language queries work in Tanium?',
-        a: "Natural language queries let you type questions in plain English (e.g., 'show me computers with Chrome installed'). Tanium's NLP engine translates this to sensor-based syntax automatically.",
-        tags: ['natural-language'],
-      },
-      {
-        q: 'What is a parameterized sensor?',
-        a: "A parameterized sensor accepts input values to customize its behavior. For example, 'File Exists[C:\\\\temp]' checks for a specific file path provided as a parameter.",
-        tags: ['sensors', 'advanced'],
-      },
+      { q: "What sensor retrieves installed software information?", a: "The 'Installed Applications' sensor retrieves a list of all software installed on an endpoint, including application name, version, publisher, and install date." },
+      { q: "How do you save a Tanium question for reuse?", a: "Click the 'Save Question' button in the Question Results panel, provide a descriptive name, and optionally assign it to a Computer Group. Saved questions appear in the 'Saved Questions' menu for quick access.", tags: ['saved-questions'] },
+      { q: "What is the purpose of the 'with all results' clause?", a: "The 'with all results' clause returns every value from every endpoint, useful for comprehensive audits. Without it, Tanium returns summarized/deduplicated results for efficiency.", tags: ['query-options'] },
+      { q: "How do natural language queries work in Tanium?", a: "Natural language queries let you type questions in plain English (e.g., 'show me computers with Chrome installed'). Tanium's NLP engine translates this to sensor-based syntax automatically.", tags: ['natural-language'] },
+      { q: "What is a parameterized sensor?", a: "A parameterized sensor accepts input values to customize its behavior. For example, 'File Exists[C:\\\\temp]' checks for a specific file path provided as a parameter.", tags: ['sensors', 'advanced'] },
     ],
     'refining-questions-targeting': [
-      {
-        q: "What is the 'from' clause used for in Tanium questions?",
-        a: "The 'from' clause specifies the target scope: 'from all machines' queries every endpoint, while 'from [Computer Group]' targets only endpoints in that group.",
-        tags: ['targeting'],
-      },
-      {
-        q: 'How do you create a Computer Group in Tanium?',
-        a: "Navigate to Administration > Computer Groups, click 'New', define filter criteria using sensors (e.g., 'Operating System contains Windows'), test the filter, and save with a descriptive name.",
-        tags: ['computer-groups'],
-      },
-      {
-        q: 'What operators are available for filtering Tanium results?',
-        a: "Available operators include: 'contains', 'starts with', 'ends with', 'equals', 'does not contain', '>', '<', '>=', '<=', 'is', 'is not'. Use these in 'where' clauses to refine results.",
-        tags: ['filtering', 'operators'],
-      },
-      {
-        q: 'How does RBAC integrate with Computer Groups?',
-        a: 'Role-Based Access Control (RBAC) uses Computer Groups to restrict user permissions. Users only see endpoints in their assigned groups, ensuring data isolation and security.',
-        tags: ['rbac', 'security'],
-      },
-      {
-        q: 'What is the difference between static and dynamic Computer Groups?',
-        a: "Dynamic groups update automatically based on sensor criteria (e.g., 'OS=Windows'). Static groups contain manually specified endpoints. Dynamic groups adapt to infrastructure changes, while static groups remain fixed.",
-        tags: ['computer-groups', 'types'],
-      },
+      { q: "What is the 'from' clause used for in Tanium questions?", a: "The 'from' clause specifies the target scope: 'from all machines' queries every endpoint, while 'from [Computer Group]' targets only endpoints in that group.", tags: ['targeting'] },
+      { q: "How do you create a Computer Group in Tanium?", a: "Navigate to Administration > Computer Groups, click 'New', define filter criteria using sensors (e.g., 'Operating System contains Windows'), test the filter, and save with a descriptive name.", tags: ['computer-groups'] },
+      { q: "What operators are available for filtering Tanium results?", a: "Available operators include: 'contains', 'starts with', 'ends with', 'equals', 'does not contain', '>', '<', '>=', '<=', 'is', 'is not'. Use these in 'where' clauses to refine results.", tags: ['filtering', 'operators'] },
+      { q: "How does RBAC integrate with Computer Groups?", a: "Role-Based Access Control (RBAC) uses Computer Groups to restrict user permissions. Users only see endpoints in their assigned groups, ensuring data isolation and security.", tags: ['rbac', 'security'] },
+      { q: "What is the difference between static and dynamic Computer Groups?", a: "Dynamic groups update automatically based on sensor criteria (e.g., 'OS=Windows'). Static groups contain manually specified endpoints. Dynamic groups adapt to infrastructure changes, while static groups remain fixed.", tags: ['computer-groups', 'types'] },
     ],
     'taking-action-packages-actions': [
-      {
-        q: 'What is the difference between a Package and an Action?',
-        a: 'A Package is the deployment unit (script/command/files to execute). An Action is the execution instance that applies a Package to specific endpoints. One Package can be used in multiple Actions.',
-        tags: ['packages', 'actions'],
-      },
-      {
-        q: 'How do you deploy a Package to specific endpoints?',
-        a: "Create an Action by selecting a Package, specify target endpoints using Computer Groups or filters, set deployment parameters (schedule, timeout, reissue), and click 'Deploy Action'.",
-        tags: ['deployment'],
-      },
-      {
-        q: 'What is the Action Status dashboard used for?',
-        a: 'Action Status shows real-time deployment progress: pending/running/completed/failed counts, detailed endpoint results, error messages, and performance metrics. Use it to monitor and troubleshoot deployments.',
-        tags: ['monitoring', 'action-status'],
-      },
-      {
-        q: 'How do you perform a rollback after a failed Package deployment?',
-        a: 'Create a new Action with a rollback Package that reverses the changes (e.g., uninstall software, restore configuration). Target the same endpoints, verify success in Action Status, then confirm state with verification questions.',
-        tags: ['rollback', 'remediation'],
-      },
-      {
-        q: 'What is the purpose of Package parameters?',
-        a: "Package parameters allow customization at deployment time. For example, a 'Software Install' package might accept parameters for install path, license key, or configuration options without modifying the Package itself.",
-        tags: ['packages', 'parameters'],
-      },
+      { q: "What is the difference between a Package and an Action?", a: "A Package is the deployment unit (script/command/files to execute). An Action is the execution instance that applies a Package to specific endpoints. One Package can be used in multiple Actions.", tags: ['packages', 'actions'] },
+      { q: "How do you deploy a Package to specific endpoints?", a: "Create an Action by selecting a Package, specify target endpoints using Computer Groups or filters, set deployment parameters (schedule, timeout, reissue), and click 'Deploy Action'.", tags: ['deployment'] },
+      { q: "What is the Action Status dashboard used for?", a: "Action Status shows real-time deployment progress: pending/running/completed/failed counts, detailed endpoint results, error messages, and performance metrics. Use it to monitor and troubleshoot deployments.", tags: ['monitoring', 'action-status'] },
+      { q: "How do you perform a rollback after a failed Package deployment?", a: "Create a new Action with a rollback Package that reverses the changes (e.g., uninstall software, restore configuration). Target the same endpoints, verify success in Action Status, then confirm state with verification questions.", tags: ['rollback', 'remediation'] },
+      { q: "What is the purpose of Package parameters?", a: "Package parameters allow customization at deployment time. For example, a 'Software Install' package might accept parameters for install path, license key, or configuration options without modifying the Package itself.", tags: ['packages', 'parameters'] },
     ],
     'navigation-basic-modules': [
-      {
-        q: 'What is the Trends module used for?',
-        a: 'Trends records question results over time for historical analysis, compliance reporting, and change detection. It visualizes data trends, identifies anomalies, and supports audit requirements.',
-        tags: ['trends', 'historical'],
-      },
-      {
-        q: 'How does Connect integrate with external systems?',
-        a: 'Connect exports Tanium data to SIEM, SOAR, ticketing, and reporting platforms using REST API, Syslog, JDBC, or scheduled file delivery. It supports JSON, CSV, XML formats for seamless integration.',
-        tags: ['connect', 'integration'],
-      },
-      {
-        q: "What is the Reporting module's primary function?",
-        a: 'Reporting creates formatted reports with charts, tables, and visualizations. It supports scheduled delivery, custom templates, multi-format export (PDF/CSV/Excel), and automated distribution to stakeholders.',
-        tags: ['reporting'],
-      },
-      {
-        q: 'How do you navigate between Tanium modules?',
-        a: 'Use the main navigation menu (top or side bar depending on version) to switch between Interact, Trends, Connect, Reporting, and other modules. Each module has its own workspace and functionality.',
-        tags: ['navigation', 'ui'],
-      },
-      {
-        q: "What is the Interact module's sub-second response time?",
-        a: 'Interact leverages Linear Chain Technology to deliver query results in sub-second time, even across millions of endpoints. This real-time capability enables live troubleshooting and instant visibility.',
-        tags: ['interact', 'performance'],
-      },
+      { q: "What is the Trends module used for?", a: "Trends records question results over time for historical analysis, compliance reporting, and change detection. It visualizes data trends, identifies anomalies, and supports audit requirements.", tags: ['trends', 'historical'] },
+      { q: "How does Connect integrate with external systems?", a: "Connect exports Tanium data to SIEM, SOAR, ticketing, and reporting platforms using REST API, Syslog, JDBC, or scheduled file delivery. It supports JSON, CSV, XML formats for seamless integration.", tags: ['connect', 'integration'] },
+      { q: "What is the Reporting module's primary function?", a: "Reporting creates formatted reports with charts, tables, and visualizations. It supports scheduled delivery, custom templates, multi-format export (PDF/CSV/Excel), and automated distribution to stakeholders.", tags: ['reporting'] },
+      { q: "How do you navigate between Tanium modules?", a: "Use the main navigation menu (top or side bar depending on version) to switch between Interact, Trends, Connect, Reporting, and other modules. Each module has its own workspace and functionality.", tags: ['navigation', 'ui'] },
+      { q: "What is the Interact module's sub-second response time?", a: "Interact leverages Linear Chain Technology to deliver query results in sub-second time, even across millions of endpoints. This real-time capability enables live troubleshooting and instant visibility.", tags: ['interact', 'performance'] },
     ],
     'reporting-data-export': [
-      {
-        q: 'What export formats does Tanium support?',
-        a: 'Tanium supports CSV (comma-separated values), JSON (JavaScript Object Notation), XML (Extensible Markup Language), PDF (formatted reports), Excel (XLSX), and direct SIEM/SOAR integration via REST API.',
-        tags: ['export', 'formats'],
-      },
-      {
-        q: 'How do you schedule automated reports in Tanium?',
-        a: "In the Reporting module, create a report template, click 'Schedule', set frequency (daily/weekly/monthly), specify recipients (email/API), choose format, and configure delivery options. Scheduled reports run automatically.",
-        tags: ['scheduling', 'automation'],
-      },
-      {
-        q: 'What is the REST API endpoint for exporting question results?',
-        a: "Use the '/api/v2/result_data/question' endpoint with GET or POST methods. Specify question ID or sensor names, apply filters, and receive JSON/CSV results programmatically for custom integrations.",
-        tags: ['api', 'rest'],
-      },
-      {
-        q: 'How do you export data to a SIEM platform?',
-        a: 'Configure a Connect destination with SIEM connection details (API endpoint, Syslog server, or JDBC). Create a scheduled export for relevant questions, map fields to SIEM format, and enable real-time or batch delivery.',
-        tags: ['siem', 'integration'],
-      },
-      {
-        q: "What is the benefit of using Tanium's JSON export?",
-        a: 'JSON export provides structured, machine-readable data ideal for API integrations, custom dashboards, and automated processing. It preserves data types, supports nested structures, and enables programmatic parsing.',
-        tags: ['json', 'automation'],
-      },
+      { q: "What export formats does Tanium support?", a: "Tanium supports CSV (comma-separated values), JSON (JavaScript Object Notation), XML (Extensible Markup Language), PDF (formatted reports), Excel (XLSX), and direct SIEM/SOAR integration via REST API.", tags: ['export', 'formats'] },
+      { q: "How do you schedule automated reports in Tanium?", a: "In the Reporting module, create a report template, click 'Schedule', set frequency (daily/weekly/monthly), specify recipients (email/API), choose format, and configure delivery options. Scheduled reports run automatically.", tags: ['scheduling', 'automation'] },
+      { q: "What is the REST API endpoint for exporting question results?", a: "Use the '/api/v2/result_data/question' endpoint with GET or POST methods. Specify question ID or sensor names, apply filters, and receive JSON/CSV results programmatically for custom integrations.", tags: ['api', 'rest'] },
+      { q: "How do you export data to a SIEM platform?", a: "Configure a Connect destination with SIEM connection details (API endpoint, Syslog server, or JDBC). Create a scheduled export for relevant questions, map fields to SIEM format, and enable real-time or batch delivery.", tags: ['siem', 'integration'] },
+      { q: "What is the benefit of using Tanium's JSON export?", a: "JSON export provides structured, machine-readable data ideal for API integrations, custom dashboards, and automated processing. It preserves data types, supports nested structures, and enables programmatic parsing.", tags: ['json', 'automation'] },
     ],
   };
 
@@ -521,18 +407,16 @@ function generateDomainSpecificCards(domain: string, count: number): Flashcard[]
   const domainKnowledge: Record<string, Flashcard[]> = {
     'asking-questions': [
       {
-        front_text: 'What is the 500+ Sensor Library in Tanium?',
-        back_text:
-          "The Sensor Library is Tanium's comprehensive collection of over 500 pre-built sensors that collect specific endpoint data such as Computer Name, Running Processes, Installed Applications, IP Address, Operating System, and more. These sensors are ready to use and cover common IT operations needs.",
+        front_text: "What is the 500+ Sensor Library in Tanium?",
+        back_text: "The Sensor Library is Tanium's comprehensive collection of over 500 pre-built sensors that collect specific endpoint data such as Computer Name, Running Processes, Installed Applications, IP Address, Operating System, and more. These sensors are ready to use and cover common IT operations needs.",
         card_type: 'concept',
         source: 'generated',
         tags: ['sensors', 'fundamentals'],
         domain,
       },
       {
-        front_text: 'How do you construct a basic Tanium question?',
-        back_text:
-          "A basic Tanium question follows the pattern: 'Get [Sensor] from [Target]'. For example: 'Get Computer Name from all machines' or 'Get Running Processes from Windows Servers'. The 'Get' keyword initiates the query, followed by the sensor name and target scope.",
+        front_text: "How do you construct a basic Tanium question?",
+        back_text: "A basic Tanium question follows the pattern: 'Get [Sensor] from [Target]'. For example: 'Get Computer Name from all machines' or 'Get Running Processes from Windows Servers'. The 'Get' keyword initiates the query, followed by the sensor name and target scope.",
         card_type: 'basic',
         source: 'generated',
         tags: ['question-construction', 'syntax'],
@@ -540,11 +424,10 @@ function generateDomainSpecificCards(domain: string, count: number): Flashcard[]
       },
       {
         front_text: "What is the difference between 'Get' and 'Count' in Tanium questions?",
-        back_text:
-          "'Get' retrieves the actual data values from endpoints (e.g., 'Get Computer Name' returns all computer names). 'Count' returns the number of unique values (e.g., 'Count Computer Name' returns how many distinct computer names exist). Use 'Count' for summary statistics and 'Get' for detailed data.",
+        back_text: "'Get' retrieves the actual data values from endpoints (e.g., 'Get Computer Name' returns all computer names). 'Count' returns the number of unique values (e.g., 'Count Computer Name' returns how many distinct computer names exist). Use 'Count' for summary statistics and 'Get' for detailed data.",
         card_type: 'concept',
         source: 'generated',
-        hint: 'Think about whether you need values or statistics',
+        hint: "Think about whether you need values or statistics",
         tags: ['query-types', 'get-vs-count'],
         domain,
       },
@@ -559,7 +442,9 @@ function generateDomainSpecificCards(domain: string, count: number): Flashcard[]
     'navigation-basic-modules': [
       ...generateTemplateCards(domain, 'navigation-basic-modules', count),
     ],
-    'reporting-data-export': [...generateTemplateCards(domain, 'reporting-data-export', count)],
+    'reporting-data-export': [
+      ...generateTemplateCards(domain, 'reporting-data-export', count),
+    ],
   };
 
   const cards = domainKnowledge[domain] || [];
@@ -601,7 +486,7 @@ async function seedFlashcardsToDatabase(flashcards: Flashcard[]): Promise<void> 
     }
 
     // Prepare flashcards for insertion
-    const flashcardsToInsert = flashcards.map((card) => ({
+    const flashcardsToInsert = flashcards.map(card => ({
       user_id: userId,
       ...card,
       srs_due: new Date().toISOString(), // Due immediately for first review
@@ -619,7 +504,10 @@ async function seedFlashcardsToDatabase(flashcards: Flashcard[]): Promise<void> 
 
     for (let i = 0; i < flashcardsToInsert.length; i += batchSize) {
       const batch = flashcardsToInsert.slice(i, i + batchSize);
-      const { data, error } = await supabase.from('flashcards').insert(batch).select();
+      const { data, error } = await supabase
+        .from('flashcards')
+        .insert(batch)
+        .select();
 
       if (error) {
         console.error(`❌ Error inserting batch ${Math.floor(i / batchSize) + 1}:`, error);
@@ -627,12 +515,11 @@ async function seedFlashcardsToDatabase(flashcards: Flashcard[]): Promise<void> 
       }
 
       inserted += data?.length || 0;
-      console.log(
-        `  ✅ Inserted batch ${Math.floor(i / batchSize) + 1}: ${data?.length} flashcards`
-      );
+      console.log(`  ✅ Inserted batch ${Math.floor(i / batchSize) + 1}: ${data?.length} flashcards`);
     }
 
     console.log(`\n✅ Successfully seeded ${inserted} flashcards to database!\n`);
+
   } catch (error) {
     console.error('❌ Unexpected error during seeding:', error);
   }
@@ -647,16 +534,14 @@ function generateValidationReport(flashcards: Flashcard[]): void {
   // Total count
   console.log(`\n📈 Total Flashcards: ${flashcards.length}`);
   console.log(`   Target Range: 300-350 cards`);
-  console.log(
-    `   Status: ${flashcards.length >= 300 && flashcards.length <= 350 ? '✅ Within target' : '⚠️  Outside target range'}\n`
-  );
+  console.log(`   Status: ${flashcards.length >= 300 && flashcards.length <= 350 ? '✅ Within target' : '⚠️  Outside target range'}\n`);
 
   // Domain distribution
   console.log('📚 Domain Distribution (vs TCO Blueprint):\n');
 
   const domainCounts: Record<string, number> = {};
-  Object.keys(TCO_BLUEPRINT).forEach((domain) => {
-    domainCounts[domain] = flashcards.filter((c) => c.domain === domain).length;
+  Object.keys(TCO_BLUEPRINT).forEach(domain => {
+    domainCounts[domain] = flashcards.filter(c => c.domain === domain).length;
   });
 
   Object.entries(TCO_BLUEPRINT).forEach(([domain, { weight, name }]) => {
@@ -666,23 +551,16 @@ function generateValidationReport(flashcards: Flashcard[]): void {
     const blueprintPercentage = (weight * 100).toFixed(0);
 
     console.log(`  ${name}:`);
-    console.log(
-      `    Actual: ${count} cards (${percentage}%) | Blueprint: ${blueprintPercentage}% | Target: ${target}`
-    );
-    console.log(
-      `    Status: ${Math.abs(count - target) <= 5 ? '✅ On target' : '⚠️  Off target'}\n`
-    );
+    console.log(`    Actual: ${count} cards (${percentage}%) | Blueprint: ${blueprintPercentage}% | Target: ${target}`);
+    console.log(`    Status: ${Math.abs(count - target) <= 5 ? '✅ On target' : '⚠️  Off target'}\n`);
   });
 
   // Source distribution
   console.log('🔍 Source Distribution:\n');
-  const sources = flashcards.reduce(
-    (acc, card) => {
-      acc[card.source] = (acc[card.source] || 0) + 1;
-      return acc;
-    },
-    {} as Record<string, number>
-  );
+  const sources = flashcards.reduce((acc, card) => {
+    acc[card.source] = (acc[card.source] || 0) + 1;
+    return acc;
+  }, {} as Record<string, number>);
 
   Object.entries(sources).forEach(([source, count]) => {
     console.log(`  ${source}: ${count} cards`);
@@ -690,13 +568,10 @@ function generateValidationReport(flashcards: Flashcard[]): void {
 
   // Card type distribution
   console.log('\n🎴 Card Type Distribution:\n');
-  const cardTypes = flashcards.reduce(
-    (acc, card) => {
-      acc[card.card_type] = (acc[card.card_type] || 0) + 1;
-      return acc;
-    },
-    {} as Record<string, number>
-  );
+  const cardTypes = flashcards.reduce((acc, card) => {
+    acc[card.card_type] = (acc[card.card_type] || 0) + 1;
+    return acc;
+  }, {} as Record<string, number>);
 
   Object.entries(cardTypes).forEach(([type, count]) => {
     console.log(`  ${type}: ${count} cards`);
@@ -704,14 +579,11 @@ function generateValidationReport(flashcards: Flashcard[]): void {
 
   // Difficulty distribution
   console.log('\n⭐ Difficulty Distribution:\n');
-  const difficulties = flashcards.reduce(
-    (acc, card) => {
-      const diff = card.difficulty || 'not-set';
-      acc[diff] = (acc[diff] || 0) + 1;
-      return acc;
-    },
-    {} as Record<string, number>
-  );
+  const difficulties = flashcards.reduce((acc, card) => {
+    const diff = card.difficulty || 'not-set';
+    acc[diff] = (acc[diff] || 0) + 1;
+    return acc;
+  }, {} as Record<string, number>);
 
   Object.entries(difficulties).forEach(([difficulty, count]) => {
     console.log(`  ${difficulty}: ${count} cards`);
@@ -753,6 +625,7 @@ async function main() {
 
     console.log('🎉 All done! Flashcard library ready for production.\n');
     process.exit(0);
+
   } catch (error) {
     console.error('❌ Fatal error:', error);
     process.exit(1);

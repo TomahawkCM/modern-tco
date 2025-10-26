@@ -1,10 +1,13 @@
-'use client';
+"use client";
 
-import { Flame, Minus, TrendingDown, TrendingUp } from 'lucide-react';
-import { useEffect, useState } from 'react';
-import { Badge } from '@/components/ui/badge';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { type ConceptMastery, generateConceptMastery } from '@/lib/progressVisualization';
+import { useState, useEffect } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Flame, TrendingUp, TrendingDown, Minus } from "lucide-react";
+import {
+  generateConceptMastery,
+  type ConceptMastery,
+} from "@/lib/progressVisualization";
 
 interface ConceptMasteryHeatmapProps {
   /** Optional module ID to filter concepts */
@@ -20,23 +23,26 @@ interface ConceptMasteryHeatmapProps {
  *
  * Research: Heatmaps improve pattern recognition by 45% (Wilkinson & Friendly, 2009)
  */
-export function ConceptMasteryHeatmap({ moduleId, className }: ConceptMasteryHeatmapProps) {
+export function ConceptMasteryHeatmap({
+  moduleId,
+  className,
+}: ConceptMasteryHeatmapProps) {
   const [concepts, setConcepts] = useState<ConceptMastery[]>([]);
-  const [view, setView] = useState<'all' | 'mastered' | 'learning' | 'struggling'>('all');
+  const [view, setView] = useState<"all" | "mastered" | "learning" | "struggling">("all");
 
   useEffect(() => {
     loadConcepts();
 
     // Listen for review updates
     const handleStorageChange = (e: StorageEvent) => {
-      if (e.key === 'review-items') {
+      if (e.key === "review-items") {
         loadConcepts();
       }
     };
 
-    window.addEventListener('storage', handleStorageChange);
-    return () => window.removeEventListener('storage', handleStorageChange);
-  }, [loadConcepts]);
+    window.addEventListener("storage", handleStorageChange);
+    return () => window.removeEventListener("storage", handleStorageChange);
+  }, [moduleId]);
 
   function loadConcepts() {
     const data = generateConceptMastery(moduleId);
@@ -63,14 +69,14 @@ export function ConceptMasteryHeatmap({ moduleId, className }: ConceptMasteryHea
   }
 
   // Filter concepts based on view
-  const filteredConcepts = concepts.filter((concept) => {
+  const filteredConcepts = concepts.filter(concept => {
     switch (view) {
-      case 'mastered':
-        return concept.masteryLevel === 'mastered';
-      case 'learning':
-        return concept.masteryLevel === 'intermediate' || concept.masteryLevel === 'advanced';
-      case 'struggling':
-        return concept.masteryLevel === 'beginner';
+      case "mastered":
+        return concept.masteryLevel === "mastered";
+      case "learning":
+        return concept.masteryLevel === "intermediate" || concept.masteryLevel === "advanced";
+      case "struggling":
+        return concept.masteryLevel === "beginner";
       default:
         return true;
     }
@@ -78,39 +84,39 @@ export function ConceptMasteryHeatmap({ moduleId, className }: ConceptMasteryHea
 
   const getMasteryColor = (level: string) => {
     switch (level) {
-      case 'mastered':
-        return 'bg-[#22c55e]/20 border-green-500 text-[#22c55e]';
-      case 'advanced':
-        return 'bg-primary/20 border-blue-500 text-primary';
-      case 'intermediate':
-        return 'bg-[#f97316]/20 border-yellow-500 text-[#f97316]';
-      case 'beginner':
-        return 'bg-orange-500/20 border-orange-500 text-orange-400';
+      case "mastered":
+        return "bg-[#22c55e]/20 border-green-500 text-[#22c55e]";
+      case "advanced":
+        return "bg-primary/20 border-blue-500 text-primary";
+      case "intermediate":
+        return "bg-[#f97316]/20 border-yellow-500 text-[#f97316]";
+      case "beginner":
+        return "bg-orange-500/20 border-orange-500 text-orange-400";
       default:
-        return 'bg-gray-500/20 border-gray-500 text-muted-foreground';
+        return "bg-gray-500/20 border-gray-500 text-muted-foreground";
     }
   };
 
   const getMasteryLabel = (level: string) => {
     switch (level) {
-      case 'mastered':
-        return '✓ Mastered';
-      case 'advanced':
-        return '⚡ Advanced';
-      case 'intermediate':
-        return '📚 Learning';
-      case 'beginner':
-        return '🎯 Beginner';
+      case "mastered":
+        return "✓ Mastered";
+      case "advanced":
+        return "⚡ Advanced";
+      case "intermediate":
+        return "📚 Learning";
+      case "beginner":
+        return "🎯 Beginner";
       default:
-        return 'Unknown';
+        return "Unknown";
     }
   };
 
   const getTrendIcon = (trend: string) => {
     switch (trend) {
-      case 'improving':
+      case "improving":
         return <TrendingUp className="h-3 w-3 text-[#22c55e]" />;
-      case 'declining':
+      case "declining":
         return <TrendingDown className="h-3 w-3 text-orange-400" />;
       default:
         return <Minus className="h-3 w-3 text-muted-foreground" />;
@@ -119,10 +125,10 @@ export function ConceptMasteryHeatmap({ moduleId, className }: ConceptMasteryHea
 
   // Calculate statistics
   const stats = {
-    mastered: concepts.filter((c) => c.masteryLevel === 'mastered').length,
-    advanced: concepts.filter((c) => c.masteryLevel === 'advanced').length,
-    intermediate: concepts.filter((c) => c.masteryLevel === 'intermediate').length,
-    beginner: concepts.filter((c) => c.masteryLevel === 'beginner').length,
+    mastered: concepts.filter(c => c.masteryLevel === "mastered").length,
+    advanced: concepts.filter(c => c.masteryLevel === "advanced").length,
+    intermediate: concepts.filter(c => c.masteryLevel === "intermediate").length,
+    beginner: concepts.filter(c => c.masteryLevel === "beginner").length,
   };
 
   return (
@@ -162,41 +168,41 @@ export function ConceptMasteryHeatmap({ moduleId, className }: ConceptMasteryHea
         {/* View Filter */}
         <div className="flex items-center gap-2">
           <button
-            onClick={() => setView('all')}
+            onClick={() => setView("all")}
             className={`px-3 py-1 rounded text-sm transition-colors ${
-              view === 'all'
-                ? 'bg-accent text-foreground'
-                : 'bg-card text-muted-foreground hover:bg-gray-700'
+              view === "all"
+                ? "bg-accent text-foreground"
+                : "bg-card text-muted-foreground hover:bg-gray-700"
             }`}
           >
             All ({concepts.length})
           </button>
           <button
-            onClick={() => setView('mastered')}
+            onClick={() => setView("mastered")}
             className={`px-3 py-1 rounded text-sm transition-colors ${
-              view === 'mastered'
-                ? 'bg-[#22c55e] text-foreground'
-                : 'bg-card text-muted-foreground hover:bg-gray-700'
+              view === "mastered"
+                ? "bg-[#22c55e] text-foreground"
+                : "bg-card text-muted-foreground hover:bg-gray-700"
             }`}
           >
             Mastered ({stats.mastered})
           </button>
           <button
-            onClick={() => setView('learning')}
+            onClick={() => setView("learning")}
             className={`px-3 py-1 rounded text-sm transition-colors ${
-              view === 'learning'
-                ? 'bg-blue-600 text-foreground'
-                : 'bg-card text-muted-foreground hover:bg-gray-700'
+              view === "learning"
+                ? "bg-blue-600 text-foreground"
+                : "bg-card text-muted-foreground hover:bg-gray-700"
             }`}
           >
             Learning ({stats.advanced + stats.intermediate})
           </button>
           <button
-            onClick={() => setView('struggling')}
+            onClick={() => setView("struggling")}
             className={`px-3 py-1 rounded text-sm transition-colors ${
-              view === 'struggling'
-                ? 'bg-orange-600 text-foreground'
-                : 'bg-card text-muted-foreground hover:bg-gray-700'
+              view === "struggling"
+                ? "bg-orange-600 text-foreground"
+                : "bg-card text-muted-foreground hover:bg-gray-700"
             }`}
           >
             Focus ({stats.beginner})
@@ -224,21 +230,25 @@ export function ConceptMasteryHeatmap({ moduleId, className }: ConceptMasteryHea
                     <div className="flex items-center gap-3 text-xs opacity-80">
                       <span>{concept.reviewCount} reviews</span>
                       <span>•</span>
-                      <span>Last: {new Date(concept.lastReviewed).toLocaleDateString()}</span>
+                      <span>
+                        Last: {new Date(concept.lastReviewed).toLocaleDateString()}
+                      </span>
                     </div>
                   </div>
                   <div className="text-right">
-                    <div className="text-lg font-bold mb-1">{Math.round(concept.retention)}%</div>
+                    <div className="text-lg font-bold mb-1">
+                      {Math.round(concept.retention)}%
+                    </div>
                     <Badge
                       variant="outline"
                       className={`text-xs ${
-                        concept.masteryLevel === 'mastered'
-                          ? 'border-green-500 text-[#22c55e]'
-                          : concept.masteryLevel === 'advanced'
-                            ? 'border-blue-500 text-primary'
-                            : concept.masteryLevel === 'intermediate'
-                              ? 'border-yellow-500 text-[#f97316]'
-                              : 'border-orange-500 text-orange-400'
+                        concept.masteryLevel === "mastered"
+                          ? "border-green-500 text-[#22c55e]"
+                          : concept.masteryLevel === "advanced"
+                          ? "border-blue-500 text-primary"
+                          : concept.masteryLevel === "intermediate"
+                          ? "border-yellow-500 text-[#f97316]"
+                          : "border-orange-500 text-orange-400"
                       }`}
                     >
                       {getMasteryLabel(concept.masteryLevel)}
@@ -250,13 +260,13 @@ export function ConceptMasteryHeatmap({ moduleId, className }: ConceptMasteryHea
                 <div className="mt-2 h-1 bg-gray-700/50 rounded-full overflow-hidden">
                   <div
                     className={`h-full transition-all ${
-                      concept.masteryLevel === 'mastered'
-                        ? 'bg-[#22c55e]'
-                        : concept.masteryLevel === 'advanced'
-                          ? 'bg-primary'
-                          : concept.masteryLevel === 'intermediate'
-                            ? 'bg-yellow-500'
-                            : 'bg-orange-500'
+                      concept.masteryLevel === "mastered"
+                        ? "bg-[#22c55e]"
+                        : concept.masteryLevel === "advanced"
+                        ? "bg-primary"
+                        : concept.masteryLevel === "intermediate"
+                        ? "bg-yellow-500"
+                        : "bg-orange-500"
                     }`}
                     style={{ width: `${concept.retention}%` }}
                   />

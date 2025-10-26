@@ -41,23 +41,11 @@ function maskPII(data: any): any {
 
   if (typeof data === 'object') {
     const masked: any = {};
-    const sensitiveKeys = [
-      'password',
-      'token',
-      'secret',
-      'key',
-      'authorization',
-      'cookie',
-      'session',
-      'credit',
-      'ssn',
-      'phone',
-      'email',
-    ];
+    const sensitiveKeys = ['password', 'token', 'secret', 'key', 'authorization', 'cookie', 'session', 'credit', 'ssn', 'phone', 'email'];
 
     for (const [key, value] of Object.entries(data)) {
       const lowerKey = key.toLowerCase();
-      if (sensitiveKeys.some((sensitive) => lowerKey.includes(sensitive))) {
+      if (sensitiveKeys.some(sensitive => lowerKey.includes(sensitive))) {
         masked[key] = '***REDACTED***';
       } else {
         masked[key] = maskPII(value);
@@ -173,7 +161,7 @@ export function withErrorHandling<T extends (...args: any[]) => Promise<NextResp
 ): T {
   return (async (...args: Parameters<T>) => {
     const request = args[0] as Request;
-    const { method } = request;
+    const {method} = request;
 
     try {
       return await handler(...args);

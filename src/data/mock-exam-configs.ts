@@ -10,6 +10,8 @@
  * - No database tables needed - templates stored in code for flexibility
  */
 
+import { TCODomain } from '@/types/exam';
+
 // =====================================================
 // TYPES
 // =====================================================
@@ -267,7 +269,7 @@ export const MOCK_EXAM_6_FINAL: MockExamTemplate = {
   id: 'mock-exam-6-final',
   name: 'Mock Exam 6: Final Challenge',
   description:
-    "Most challenging mock exam. Tests mastery with complex, scenario-based questions. Pass this and you're exam-ready!",
+    'Most challenging mock exam. Tests mastery with complex, scenario-based questions. Pass this and you\'re exam-ready!',
 
   totalQuestions: TCO_EXAM_SPECS.TOTAL_QUESTIONS,
   timeLimitMinutes: TCO_EXAM_SPECS.TIME_LIMIT_MINUTES,
@@ -315,7 +317,9 @@ export function getMockExamTemplate(id: string): MockExamTemplate | undefined {
 /**
  * Get next recommended mock exam based on completed exams
  */
-export function getNextRecommendedExam(completedExamIds: string[]): MockExamTemplate | null {
+export function getNextRecommendedExam(
+  completedExamIds: string[]
+): MockExamTemplate | null {
   // Find first exam that hasn't been completed
   for (const template of MOCK_EXAM_TEMPLATES) {
     if (!completedExamIds.includes(template.id)) {
@@ -335,12 +339,18 @@ export function getNextRecommendedExam(completedExamIds: string[]): MockExamTemp
  * Calculate question count per domain based on distribution
  * Returns database-compatible domain keys (snake_case)
  */
-export function calculateDomainQuestionCounts(template: MockExamTemplate): Record<string, number> {
+export function calculateDomainQuestionCounts(
+  template: MockExamTemplate
+): Record<string, number> {
   const { totalQuestions, domainDistribution } = template;
 
   return {
-    asking_questions: Math.round((domainDistribution.asking_questions / 100) * totalQuestions),
-    refining_targeting: Math.round((domainDistribution.refining_targeting / 100) * totalQuestions),
+    asking_questions: Math.round(
+      (domainDistribution.asking_questions / 100) * totalQuestions
+    ),
+    refining_targeting: Math.round(
+      (domainDistribution.refining_targeting / 100) * totalQuestions
+    ),
     taking_action: Math.round((domainDistribution.taking_action / 100) * totalQuestions),
     navigation: Math.round((domainDistribution.navigation / 100) * totalQuestions),
     reporting: Math.round((domainDistribution.reporting / 100) * totalQuestions),
@@ -386,13 +396,13 @@ export function getReadinessRecommendation(
   if (template.difficultyLevel === 'final_challenge') {
     if (scorePercentage >= 85) {
       return {
-        message: "🎉 Excellent! You're fully prepared for the TCO exam!",
+        message: '🎉 Excellent! You\'re fully prepared for the TCO exam!',
         nextAction: 'Schedule your certification exam with confidence',
         isReady: true,
       };
     } else if (scorePercentage >= 75) {
       return {
-        message: "Good score! You're nearly ready for the TCO exam.",
+        message: 'Good score! You\'re nearly ready for the TCO exam.',
         nextAction: 'Review weak areas and retake this exam',
         isReady: true,
       };

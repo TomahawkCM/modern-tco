@@ -1,0 +1,10 @@
+Computer Name,Disk Space,Drive,Free GB,Total GB,Percent Free
+LAPTOP-SALES09,C:\ 4.2GB free of 120GB (4%),C:\,4.2,120,4
+DESKTOP-HR15,C:\ 7.8GB free of 250GB (3%),C:\,7.8,250,3
+SERVER-LOG02,D:\ 9.1GB free of 500GB (2%),D:\,9.1,500,2
+WORKSTATION-DEV08,C:\ 2.3GB free of 120GB (2%),C:\,2.3,120,2
+DESKTOP-FINANCE01,C:\ 11.5GB free of 250GB (5%),C:\,11.5,250,5
+LAPTOP-IT03,C:\ 8.9GB free of 120GB (7%),C:\,8.9,120,7
+SERVER-BACKUP01,E:\ 14.2GB free of 1000GB (1%),E:\,14.2,1000,1
+WORKSTATION-CAD12,C:\ 6.7GB free of 500GB (1%),C:\,6.7,500,1
+DESKTOP-SUPPORT05,C:\ 13.4GB free of 250GB (5%),C:\,13.4,250,5

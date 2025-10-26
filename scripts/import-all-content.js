@@ -5,75 +5,75 @@
  * Usage: node scripts/import-all-content.js [--questions|--modules|--labs|--all]
  */
 
-const fs = require('fs');
-const path = require('path');
+const fs = require("fs");
+const path = require("path");
 
 // Paths
-const OLD_APP_PATH = path.join(__dirname, '../../../');
-const MODERN_APP_PATH = path.join(__dirname, '..');
+const OLD_APP_PATH = path.join(__dirname, "../../../");
+const MODERN_APP_PATH = path.join(__dirname, "..");
 
 // Content sources
 const CONTENT_SOURCES = {
   questions: {
-    source: path.join(OLD_APP_PATH, 'js/questions.js'),
-    target: path.join(MODERN_APP_PATH, 'src/data/questions/'),
-    type: 'javascript',
+    source: path.join(OLD_APP_PATH, "js/questions.js"),
+    target: path.join(MODERN_APP_PATH, "src/data/questions/"),
+    type: "javascript",
   },
   modules: {
-    source: path.join(OLD_APP_PATH, 'js/modules.js'),
-    target: path.join(MODERN_APP_PATH, 'src/data/modules/'),
-    type: 'javascript',
+    source: path.join(OLD_APP_PATH, "js/modules.js"),
+    target: path.join(MODERN_APP_PATH, "src/data/modules/"),
+    type: "javascript",
   },
   guides: {
-    source: path.join(OLD_APP_PATH, 'docs/Module_Guides/'),
-    target: path.join(MODERN_APP_PATH, 'src/data/guides/'),
-    type: 'markdown',
+    source: path.join(OLD_APP_PATH, "docs/Module_Guides/"),
+    target: path.join(MODERN_APP_PATH, "src/data/guides/"),
+    type: "markdown",
   },
   labs: {
-    source: path.join(OLD_APP_PATH, 'docs/Labs/'),
-    target: path.join(MODERN_APP_PATH, 'src/data/labs/'),
-    type: 'json',
+    source: path.join(OLD_APP_PATH, "docs/Labs/"),
+    target: path.join(MODERN_APP_PATH, "src/data/labs/"),
+    type: "json",
   },
   exams: {
-    source: path.join(OLD_APP_PATH, 'docs/Exam_Sets/'),
-    target: path.join(MODERN_APP_PATH, 'src/data/exams/'),
-    type: 'json',
+    source: path.join(OLD_APP_PATH, "docs/Exam_Sets/"),
+    target: path.join(MODERN_APP_PATH, "src/data/exams/"),
+    type: "json",
   },
 };
 
 // Domain mapping for questions
 const DOMAIN_MAPPING = {
-  AQ: 'ASKING_QUESTIONS',
-  RT: 'REFINING_TARGETING',
-  RQ: 'REFINING_TARGETING', // Alternative code
-  TA: 'TAKING_ACTION',
-  NM: 'NAVIGATION_MODULES',
-  NB: 'NAVIGATION_MODULES', // Alternative code
-  RE: 'REPORTING_EXPORT',
-  RD: 'REPORTING_EXPORT', // Alternative code
+  AQ: "ASKING_QUESTIONS",
+  RT: "REFINING_TARGETING",
+  RQ: "REFINING_TARGETING", // Alternative code
+  TA: "TAKING_ACTION",
+  NM: "NAVIGATION_MODULES",
+  NB: "NAVIGATION_MODULES", // Alternative code
+  RE: "REPORTING_EXPORT",
+  RD: "REPORTING_EXPORT", // Alternative code
 };
 
 // Difficulty mapping
 const DIFFICULTY_MAPPING = {
-  1: 'EASY',
-  2: 'MEDIUM',
-  3: 'HARD',
+  1: "EASY",
+  2: "MEDIUM",
+  3: "HARD",
 };
 
 /**
  * Import all questions from the old app
  */
 async function importQuestions() {
-  console.log('📚 Importing questions...');
+  console.log("📚 Importing questions...");
 
   try {
     // Read the questions file
-    const questionsContent = fs.readFileSync(CONTENT_SOURCES.questions.source, 'utf8');
+    const questionsContent = fs.readFileSync(CONTENT_SOURCES.questions.source, "utf8");
 
     // Extract questions array from the JavaScript file
     const questionsMatch = questionsContent.match(/const\s+questions\s*=\s*(\[[\s\S]*?\]);/);
     if (!questionsMatch) {
-      throw new Error('Could not find questions array in source file');
+      throw new Error("Could not find questions array in source file");
     }
 
     // Parse questions (using eval carefully with known source)
@@ -91,13 +91,13 @@ async function importQuestions() {
 
     // Process each question
     questions.forEach((q, index) => {
-      const domain = DOMAIN_MAPPING[q.domain] || 'NAVIGATION_MODULES';
-      const difficulty = DIFFICULTY_MAPPING[q.difficulty] || 'MEDIUM';
+      const domain = DOMAIN_MAPPING[q.domain] || "NAVIGATION_MODULES";
+      const difficulty = DIFFICULTY_MAPPING[q.difficulty] || "MEDIUM";
 
       const formattedQuestion = {
         id: `imported-${index + 1}`,
         domain: domain,
-        subdomain: q.subdomain || 'General',
+        subdomain: q.subdomain || "General",
         difficulty: difficulty,
         question: q.question,
         choices: q.choices.map((choice, i) => ({
@@ -105,12 +105,12 @@ async function importQuestions() {
           text: choice,
         })),
         correctAnswerId: String.fromCharCode(65 + q.correctAnswer),
-        explanation: q.explanation || 'No explanation provided.',
-        category: q.category || 'General',
+        explanation: q.explanation || "No explanation provided.",
+        category: q.category || "General",
         tags: q.tags || [],
         examTopic: q.examTopic || null,
         examSubtopic: q.examSubtopic || null,
-        importedFrom: 'legacy-tco-app',
+        importedFrom: "legacy-tco-app",
         importDate: new Date().toISOString(),
       };
 
@@ -124,7 +124,7 @@ async function importQuestions() {
 
     // Save questions by domain
     for (const [domain, questions] of Object.entries(questionsByDomain)) {
-      const filename = `${domain.toLowerCase().replace(/_/g, '-')}.ts`;
+      const filename = `${domain.toLowerCase().replace(/_/g, "-")}.ts`;
       const filepath = path.join(CONTENT_SOURCES.questions.target, filename);
 
       const content = `// Auto-generated from legacy TCO app
@@ -173,16 +173,16 @@ export {
 export default allQuestions;
 `;
 
-    fs.writeFileSync(path.join(CONTENT_SOURCES.questions.target, 'index.ts'), indexContent);
-    console.log('✅ Created question bank index');
+    fs.writeFileSync(path.join(CONTENT_SOURCES.questions.target, "index.ts"), indexContent);
+    console.log("✅ Created question bank index");
 
     // Summary
-    console.log('\n📊 Question Import Summary:');
+    console.log("\n📊 Question Import Summary:");
     Object.entries(questionsByDomain).forEach(([domain, questions]) => {
       console.log(`  ${domain}: ${questions.length} questions`);
     });
   } catch (error) {
-    console.error('❌ Error importing questions:', error);
+    console.error("❌ Error importing questions:", error);
   }
 }
 
@@ -190,16 +190,16 @@ export default allQuestions;
  * Import learning modules
  */
 async function importModules() {
-  console.log('\n📚 Importing modules...');
+  console.log("\n📚 Importing modules...");
 
   try {
     // Read modules file
-    const modulesContent = fs.readFileSync(CONTENT_SOURCES.modules.source, 'utf8');
+    const modulesContent = fs.readFileSync(CONTENT_SOURCES.modules.source, "utf8");
 
     // Extract modules array
     const modulesMatch = modulesContent.match(/this\.modules\s*=\s*(\[[\s\S]*?\]);/);
     if (!modulesMatch) {
-      throw new Error('Could not find modules array in source file');
+      throw new Error("Could not find modules array in source file");
     }
 
     // Parse modules
@@ -214,7 +214,7 @@ async function importModules() {
     // Save modules
     const moduleDefinitions = modules.map((module) => ({
       ...module,
-      importedFrom: 'legacy-tco-app',
+      importedFrom: "legacy-tco-app",
       importDate: new Date().toISOString(),
     }));
 
@@ -236,10 +236,10 @@ export const modules: Module[] = ${JSON.stringify(moduleDefinitions, null, 2)};
 export default modules;
 `;
 
-    fs.writeFileSync(path.join(CONTENT_SOURCES.modules.target, 'index.ts'), content);
+    fs.writeFileSync(path.join(CONTENT_SOURCES.modules.target, "index.ts"), content);
     console.log(`✅ Imported ${modules.length} modules`);
   } catch (error) {
-    console.error('❌ Error importing modules:', error);
+    console.error("❌ Error importing modules:", error);
   }
 }
 
@@ -247,7 +247,7 @@ export default modules;
  * Import study guides (markdown files)
  */
 async function importGuides() {
-  console.log('\n📚 Importing study guides...');
+  console.log("\n📚 Importing study guides...");
 
   try {
     // Create target directory
@@ -258,7 +258,7 @@ async function importGuides() {
     // Copy all markdown files
     const files = fs
       .readdirSync(CONTENT_SOURCES.guides.source)
-      .filter((file) => file.endsWith('.md'));
+      .filter((file) => file.endsWith(".md"));
 
     files.forEach((file) => {
       const source = path.join(CONTENT_SOURCES.guides.source, file);
@@ -269,7 +269,7 @@ async function importGuides() {
 
     console.log(`✅ Imported ${files.length} study guides`);
   } catch (error) {
-    console.error('❌ Error importing guides:', error);
+    console.error("❌ Error importing guides:", error);
   }
 }
 
@@ -277,7 +277,7 @@ async function importGuides() {
  * Import interactive labs
  */
 async function importLabs() {
-  console.log('\n📚 Importing labs...');
+  console.log("\n📚 Importing labs...");
 
   try {
     // Create target directory
@@ -288,14 +288,14 @@ async function importLabs() {
     // Copy all JSON lab files
     const files = fs
       .readdirSync(CONTENT_SOURCES.labs.source)
-      .filter((file) => file.endsWith('.json'));
+      .filter((file) => file.endsWith(".json"));
 
     files.forEach((file) => {
       const source = path.join(CONTENT_SOURCES.labs.source, file);
       const target = path.join(CONTENT_SOURCES.labs.target, file);
 
       // Read and process lab content
-      const labContent = JSON.parse(fs.readFileSync(source, 'utf8'));
+      const labContent = JSON.parse(fs.readFileSync(source, "utf8"));
 
       // Update domain codes to new format
       if (labContent.domain) {
@@ -303,7 +303,7 @@ async function importLabs() {
       }
 
       // Add import metadata
-      labContent.importedFrom = 'legacy-tco-app';
+      labContent.importedFrom = "legacy-tco-app";
       labContent.importDate = new Date().toISOString();
 
       fs.writeFileSync(target, JSON.stringify(labContent, null, 2));
@@ -312,7 +312,7 @@ async function importLabs() {
 
     console.log(`✅ Imported ${files.length} labs`);
   } catch (error) {
-    console.error('❌ Error importing labs:', error);
+    console.error("❌ Error importing labs:", error);
   }
 }
 
@@ -320,7 +320,7 @@ async function importLabs() {
  * Import exam sets
  */
 async function importExams() {
-  console.log('\n📚 Importing exams...');
+  console.log("\n📚 Importing exams...");
 
   try {
     // Create target directory
@@ -329,7 +329,7 @@ async function importExams() {
     }
 
     // Process subdirectories
-    const subdirs = ['mock_exams', 'real_exams'];
+    const subdirs = ["mock_exams", "real_exams"];
     let totalExams = 0;
 
     subdirs.forEach((subdir) => {
@@ -341,7 +341,7 @@ async function importExams() {
       }
 
       if (fs.existsSync(sourcePath)) {
-        const files = fs.readdirSync(sourcePath).filter((file) => file.endsWith('.json'));
+        const files = fs.readdirSync(sourcePath).filter((file) => file.endsWith(".json"));
 
         files.forEach((file) => {
           const source = path.join(sourcePath, file);
@@ -353,16 +353,16 @@ async function importExams() {
     });
 
     // Also copy quizlet file if it exists
-    const quizletSource = path.join(CONTENT_SOURCES.exams.source, 'quizlet_100.json');
+    const quizletSource = path.join(CONTENT_SOURCES.exams.source, "quizlet_100.json");
     if (fs.existsSync(quizletSource)) {
-      const quizletTarget = path.join(CONTENT_SOURCES.exams.target, 'quizlet_100.json');
+      const quizletTarget = path.join(CONTENT_SOURCES.exams.target, "quizlet_100.json");
       fs.copyFileSync(quizletSource, quizletTarget);
       totalExams++;
     }
 
     console.log(`✅ Imported ${totalExams} exam files`);
   } catch (error) {
-    console.error('❌ Error importing exams:', error);
+    console.error("❌ Error importing exams:", error);
   }
 }
 
@@ -370,12 +370,12 @@ async function importExams() {
  * Main import function
  */
 async function main() {
-  console.log('🚀 Starting TCO Content Import');
-  console.log('================================\n');
+  console.log("🚀 Starting TCO Content Import");
+  console.log("================================\n");
 
   const args = process.argv.slice(2);
 
-  if (args.length === 0 || args.includes('--all')) {
+  if (args.length === 0 || args.includes("--all")) {
     // Import everything
     await importQuestions();
     await importModules();
@@ -384,24 +384,24 @@ async function main() {
     await importExams();
   } else {
     // Import specific content types
-    if (args.includes('--questions')) await importQuestions();
-    if (args.includes('--modules')) await importModules();
-    if (args.includes('--guides')) await importGuides();
-    if (args.includes('--labs')) await importLabs();
-    if (args.includes('--exams')) await importExams();
+    if (args.includes("--questions")) await importQuestions();
+    if (args.includes("--modules")) await importModules();
+    if (args.includes("--guides")) await importGuides();
+    if (args.includes("--labs")) await importLabs();
+    if (args.includes("--exams")) await importExams();
   }
 
-  console.log('\n================================');
-  console.log('✅ Import complete!');
-  console.log('\nNext steps:');
-  console.log('1. Fix domain constants in ProgressContext.tsx');
-  console.log('2. Update domain page components');
-  console.log('3. Create module/lab viewer components');
-  console.log('4. Test imported content');
+  console.log("\n================================");
+  console.log("✅ Import complete!");
+  console.log("\nNext steps:");
+  console.log("1. Fix domain constants in ProgressContext.tsx");
+  console.log("2. Update domain page components");
+  console.log("3. Create module/lab viewer components");
+  console.log("4. Test imported content");
 }
 
 // Run the import
 main().catch((error) => {
-  console.error('Fatal error:', error);
+  console.error("Fatal error:", error);
   process.exit(1);
 });

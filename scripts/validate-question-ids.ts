@@ -7,8 +7,8 @@
  * the proper TCO-{DOMAIN}-{NUMBER} format
  */
 
-import fs from 'fs';
-import path from 'path';
+import fs from "fs";
+import path from "path";
 
 interface ValidationReport {
   totalQuestions: number;
@@ -33,13 +33,13 @@ function validateQuestionIds(): ValidationReport {
 
   try {
     // Read the master imported questions file
-    const dataPath = path.join(process.cwd(), 'src/data/imported-questions-master.ts');
+    const dataPath = path.join(process.cwd(), "src/data/imported-questions-master.ts");
 
     if (!fs.existsSync(dataPath)) {
-      throw new Error('Imported questions master file not found');
+      throw new Error("Imported questions master file not found");
     }
 
-    const fileContent = fs.readFileSync(dataPath, 'utf8');
+    const fileContent = fs.readFileSync(dataPath, "utf8");
 
     // Extract all question IDs using regex
     const idMatches = fileContent.matchAll(/"id":\s*"([^"]+)"/g);
@@ -68,7 +68,7 @@ function validateQuestionIds(): ValidationReport {
         report.invalidFormatIds.push(id);
       } else {
         // Extract domain from valid IDs
-        const domain = id.split('-')[1];
+        const domain = id.split("-")[1];
         report.domainCounts[domain] = (report.domainCounts[domain] || 0) + 1;
       }
     }
@@ -80,7 +80,7 @@ function validateQuestionIds(): ValidationReport {
     report.passed = report.duplicateIds.length === 0 && report.formatCompliance >= 95;
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);
-    console.error('Error validating question IDs:', message);
+    console.error("Error validating question IDs:", message);
     report.passed = false;
   }
 
@@ -88,13 +88,13 @@ function validateQuestionIds(): ValidationReport {
 }
 
 function generateIdValidationReport(report: ValidationReport): void {
-  console.log('\n🔍 TCO Question ID Validation Report');
-  console.log('='.repeat(50));
+  console.log("\n🔍 TCO Question ID Validation Report");
+  console.log("=".repeat(50));
 
   if (report.passed) {
-    console.log('✅ ID Validation PASSED');
+    console.log("✅ ID Validation PASSED");
   } else {
-    console.log('❌ ID Validation FAILED');
+    console.log("❌ ID Validation FAILED");
   }
 
   console.log(`📊 Total Questions: ${report.totalQuestions}`);
@@ -102,26 +102,26 @@ function generateIdValidationReport(report: ValidationReport): void {
   console.log(`📏 Format Compliance: ${report.formatCompliance.toFixed(1)}%`);
 
   if (Object.keys(report.domainCounts).length > 0) {
-    console.log('\n📈 Questions by Domain Code:');
+    console.log("\n📈 Questions by Domain Code:");
     Object.entries(report.domainCounts).forEach(([domain, count]) => {
       console.log(`  ${domain}: ${count} questions`);
     });
   }
 
   if (report.duplicateIds.length > 0) {
-    console.log('\n❌ Duplicate IDs found:');
+    console.log("\n❌ Duplicate IDs found:");
     report.duplicateIds.forEach((id) => console.log(`  • ${id}`));
   }
 
   if (report.invalidFormatIds.length > 0) {
-    console.log('\n⚠️ Invalid Format IDs:');
+    console.log("\n⚠️ Invalid Format IDs:");
     report.invalidFormatIds.slice(0, 10).forEach((id) => console.log(`  • ${id}`));
     if (report.invalidFormatIds.length > 10) {
       console.log(`  ... and ${report.invalidFormatIds.length - 10} more`);
     }
   }
 
-  console.log('\n' + '='.repeat(50));
+  console.log("\n" + "=".repeat(50));
 }
 
 // Run validation if this file is executed directly

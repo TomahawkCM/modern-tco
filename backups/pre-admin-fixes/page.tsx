@@ -1,20 +1,20 @@
-'use client';
+"use client";
 
-import { useEffect, useMemo, useState } from 'react';
-import { AdminGuard } from '@/components/auth/AdminGuard';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
-import { analytics } from '@/lib/analytics';
-import { type AdminQuestion, contentService } from '@/lib/content';
+import { useEffect, useMemo, useState } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
+import { Badge } from "@/components/ui/badge";
+import { contentService, type AdminQuestion } from "@/lib/content";
+import { AdminGuard } from "@/components/auth/AdminGuard";
+import { analytics } from "@/lib/analytics";
 
 export default function AdminQuestionsPage() {
   const [questions, setQuestions] = useState<AdminQuestion[]>([]);
   const [current, setCurrent] = useState<AdminQuestion | null>(null);
-  const [filter, setFilter] = useState('');
+  const [filter, setFilter] = useState("");
 
   useEffect(() => {
     let active = true;
@@ -33,8 +33,8 @@ export default function AdminQuestionsPage() {
     const q = filter.trim().toLowerCase();
     if (!q) return questions;
     return questions.filter((x) =>
-      [x.question, x.explanation || '', x.category || '', x.domain || '', (x.tags || []).join(',')]
-        .join('\n')
+      [x.question, x.explanation || "", x.category || "", x.domain || "", (x.tags || []).join(",")]
+        .join("\n")
         .toLowerCase()
         .includes(q)
     );
@@ -48,7 +48,7 @@ export default function AdminQuestionsPage() {
   async function save() {
     if (!current) return;
     const saved = await contentService.upsert(current);
-    analytics.capture('admin_question_save', { id: saved.id });
+    analytics.capture("admin_question_save", { id: saved.id });
     setQuestions((prev) => {
       const idx = prev.findIndex((p) => p.id === saved.id);
       const copy = [...prev];
@@ -60,7 +60,7 @@ export default function AdminQuestionsPage() {
 
   async function remove(id: string) {
     await contentService.remove(id);
-    analytics.capture('admin_question_delete', { id });
+    analytics.capture("admin_question_delete", { id });
     setQuestions((prev) => prev.filter((p) => p.id !== id));
     if (current?.id === id) setCurrent(null);
   }
@@ -156,7 +156,7 @@ export default function AdminQuestionsPage() {
                     <div>
                       <Label className="text-gray-300">Domain</Label>
                       <Input
-                        value={current.domain || ''}
+                        value={current.domain || ""}
                         onChange={(e) => setCurrent({ ...current, domain: e.target.value })}
                       />
                     </div>
@@ -165,26 +165,26 @@ export default function AdminQuestionsPage() {
                     <div>
                       <Label className="text-gray-300">Difficulty</Label>
                       <Input
-                        value={current.difficulty || ''}
+                        value={current.difficulty || ""}
                         onChange={(e) => setCurrent({ ...current, difficulty: e.target.value })}
                       />
                     </div>
                     <div>
                       <Label className="text-gray-300">Category</Label>
                       <Input
-                        value={current.category || ''}
+                        value={current.category || ""}
                         onChange={(e) => setCurrent({ ...current, category: e.target.value })}
                       />
                     </div>
                     <div>
                       <Label className="text-gray-300">Tags (comma)</Label>
                       <Input
-                        value={(current.tags || []).join(', ')}
+                        value={(current.tags || []).join(", ")}
                         onChange={(e) =>
                           setCurrent({
                             ...current,
                             tags: e.target.value
-                              .split(',')
+                              .split(",")
                               .map((t) => t.trim())
                               .filter(Boolean),
                           })
@@ -195,7 +195,7 @@ export default function AdminQuestionsPage() {
                   <div>
                     <Label className="text-gray-300">Explanation</Label>
                     <Textarea
-                      value={current.explanation || ''}
+                      value={current.explanation || ""}
                       onChange={(e) => setCurrent({ ...current, explanation: e.target.value })}
                       className="min-h-[80px]"
                     />

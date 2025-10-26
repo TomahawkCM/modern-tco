@@ -1,32 +1,35 @@
-'use client';
+"use client";
 
+import React, { useState, useEffect } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Progress } from "@/components/ui/progress";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
-  AlertTriangle,
-  Award,
   CheckCircle,
-  Eye,
-  RefreshCw,
+  XCircle,
+  AlertTriangle,
+  Clock,
+  Zap,
   Target,
   TrendingUp,
-  XCircle,
-  Zap,
-} from 'lucide-react';
-import React, { useEffect, useState } from 'react';
-import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Progress } from '@/components/ui/progress';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+  Award,
+  Eye,
+  RefreshCw,
+} from "lucide-react";
 
-import type {
-  ConsoleAction,
-  ConsoleState,
-  CriteriaResult,
-  LabStep,
-  ValidationCriteria,
-  ValidationResult,
-} from '@/types/lab';
+import {
+  type LabStep,
+  type ValidationResult,
+  type ValidationCriteria,
+  type CriteriaResult,
+  type ConsoleState,
+  type ConsoleAction,
+  StepValidation,
+  ProgressCheckpoint,
+} from "@/types/lab";
 
 interface CheckpointValidatorProps {
   step: LabStep;
@@ -60,7 +63,7 @@ class AdvancedValidationEngine implements ValidationEngine {
     for (const criteria of step.validation.criteria) {
       const result = await this.validateCriteria(criteria, consoleState, userActions);
       criteriaResults.push(result);
-
+      
       totalScore += result.score * (criteria.weight / 100);
       totalWeight += criteria.weight;
     }
@@ -89,31 +92,31 @@ class AdvancedValidationEngine implements ValidationEngine {
   ): Promise<CriteriaResult> {
     let passed = false;
     let score = 0;
-    let feedback = '';
+    let feedback = "";
 
     switch (criteria.type) {
-      case 'console-state':
+      case "console-state":
         ({ passed, score, feedback } = this.validateConsoleState(criteria, consoleState));
         break;
-
-      case 'user-input':
+      
+      case "user-input":
         ({ passed, score, feedback } = this.validateUserInput(criteria, userActions));
         break;
-
-      case 'result-data':
+      
+      case "result-data":
         ({ passed, score, feedback } = this.validateResultData(criteria, consoleState));
         break;
-
-      case 'time-limit':
+      
+      case "time-limit":
         ({ passed, score, feedback } = this.validateTimeLimit(criteria, userActions));
         break;
-
-      case 'action-sequence':
+      
+      case "action-sequence":
         ({ passed, score, feedback } = this.validateActionSequence(criteria, userActions));
         break;
-
+      
       default:
-        feedback = 'Unknown validation criteria type';
+        feedback = "Unknown validation criteria type";
         break;
     }
 
@@ -131,25 +134,22 @@ class AdvancedValidationEngine implements ValidationEngine {
   ): { passed: boolean; score: number; feedback: string } {
     try {
       // Parse condition as JSON path or simple property check
-      const { condition } = criteria;
-
-      if (condition.includes('currentModule')) {
-        const expectedModule = condition.split('=')[1]?.trim().replace(/['"]/g, '');
+      const {condition} = criteria;
+      
+      if (condition.includes("currentModule")) {
+        const expectedModule = condition.split("=")[1]?.trim().replace(/['"]/g, "");
         const passed = consoleState.currentModule === expectedModule;
         return {
           passed,
           score: passed ? 100 : 0,
-          feedback: passed
+          feedback: passed 
             ? `✓ Correctly navigated to ${expectedModule} module`
             : `✗ Expected ${expectedModule} module, but currently in ${consoleState.currentModule}`,
         };
       }
 
-      if (condition.includes('queries.length')) {
-        const expectedCount = parseInt(
-          condition.split('>=')[1] || condition.split('>')[1] || '0',
-          10
-        );
+      if (condition.includes("queries.length")) {
+        const expectedCount = parseInt(condition.split(">=")[1] || condition.split(">")[1] || "0");
         const actualCount = consoleState.queries.length;
         const passed = actualCount >= expectedCount;
         return {
@@ -161,11 +161,8 @@ class AdvancedValidationEngine implements ValidationEngine {
         };
       }
 
-      if (condition.includes('computerGroups.length')) {
-        const expectedCount = parseInt(
-          condition.split('>=')[1] || condition.split('>')[1] || '0',
-          10
-        );
+      if (condition.includes("computerGroups.length")) {
+        const expectedCount = parseInt(condition.split(">=")[1] || condition.split(">")[1] || "0");
         const actualCount = consoleState.computerGroups.length;
         const passed = actualCount >= expectedCount;
         return {
@@ -195,14 +192,14 @@ class AdvancedValidationEngine implements ValidationEngine {
     criteria: ValidationCriteria,
     userActions: ConsoleAction[]
   ): { passed: boolean; score: number; feedback: string } {
-    const inputActions = userActions.filter((action) => action.type === 'input');
-
-    if (criteria.condition.includes('regex')) {
-      const regexPattern = criteria.condition.split('regex:')[1];
-      const regex = new RegExp(regexPattern, 'i');
-
-      const matchingInputs = inputActions.filter(
-        (action) => action.value && regex.test(action.value)
+    const inputActions = userActions.filter(action => action.type === "input");
+    
+    if (criteria.condition.includes("regex")) {
+      const regexPattern = criteria.condition.split("regex:")[1];
+      const regex = new RegExp(regexPattern, "i");
+      
+      const matchingInputs = inputActions.filter(action => 
+        action.value && regex.test(action.value)
       );
 
       const passed = matchingInputs.length > 0;
@@ -215,9 +212,9 @@ class AdvancedValidationEngine implements ValidationEngine {
       };
     }
 
-    if (criteria.condition.includes('contains')) {
-      const expectedText = criteria.condition.split('contains:')[1]?.trim().replace(/['"]/g, '');
-      const matchingInputs = inputActions.filter((action) =>
+    if (criteria.condition.includes("contains")) {
+      const expectedText = criteria.condition.split("contains:")[1]?.trim().replace(/['"]/g, "");
+      const matchingInputs = inputActions.filter(action =>
         action.value?.toLowerCase().includes(expectedText.toLowerCase())
       );
 
@@ -243,12 +240,10 @@ class AdvancedValidationEngine implements ValidationEngine {
     consoleState: ConsoleState
   ): { passed: boolean; score: number; feedback: string } {
     // Check if queries have results
-    if (criteria.condition.includes('hasResults')) {
-      const queriesWithResults = consoleState.queries.filter(
-        (q) => q.results && q.results.length > 0
-      );
+    if (criteria.condition.includes("hasResults")) {
+      const queriesWithResults = consoleState.queries.filter(q => q.results && q.results.length > 0);
       const passed = queriesWithResults.length > 0;
-
+      
       return {
         passed,
         score: passed ? 100 : 0,
@@ -258,12 +253,9 @@ class AdvancedValidationEngine implements ValidationEngine {
       };
     }
 
-    if (criteria.condition.includes('resultCount')) {
-      const expectedCount = parseInt(criteria.condition.split('>=')[1] || '1', 10);
-      const totalResults = consoleState.queries.reduce(
-        (sum, q) => sum + (q.results?.length ?? 0),
-        0
-      );
+    if (criteria.condition.includes("resultCount")) {
+      const expectedCount = parseInt(criteria.condition.split(">=")[1] || "1");
+      const totalResults = consoleState.queries.reduce((sum, q) => sum + (q.results?.length ?? 0), 0);
       const passed = totalResults >= expectedCount;
 
       return {
@@ -283,14 +275,14 @@ class AdvancedValidationEngine implements ValidationEngine {
   }
 
   private validateTimeLimit(
-    _criteria: ValidationCriteria,
+    criteria: ValidationCriteria,
     userActions: ConsoleAction[]
   ): { passed: boolean; score: number; feedback: string } {
     if (userActions.length === 0) {
       return {
         passed: false,
         score: 0,
-        feedback: 'No actions recorded for time validation',
+        feedback: "No actions recorded for time validation",
       };
     }
 
@@ -299,7 +291,7 @@ class AdvancedValidationEngine implements ValidationEngine {
     return {
       passed: true,
       score: 100,
-      feedback: '✓ Completed within time limit',
+      feedback: "✓ Completed within time limit",
     };
   }
 
@@ -308,21 +300,18 @@ class AdvancedValidationEngine implements ValidationEngine {
     userActions: ConsoleAction[]
   ): { passed: boolean; score: number; feedback: string } {
     // Parse expected sequence from condition
-    const expectedSequence = criteria.condition
-      .split('sequence:')[1]
-      ?.split(',')
-      .map((s) => s.trim());
-
+    const expectedSequence = criteria.condition.split("sequence:")[1]?.split(",").map(s => s.trim());
+    
     if (!expectedSequence) {
       return {
         passed: false,
         score: 0,
-        feedback: 'Invalid sequence condition',
+        feedback: "Invalid sequence condition",
       };
     }
 
     // Check if actions match expected sequence
-    const actionTypes = userActions.map((action) => action.type);
+    const actionTypes = userActions.map(action => action.type);
     let sequenceMatch = 0;
 
     for (let i = 0; i < expectedSequence.length; i++) {
@@ -341,87 +330,75 @@ class AdvancedValidationEngine implements ValidationEngine {
       score,
       feedback: passed
         ? `✓ Actions performed in correct sequence`
-        : `✗ Expected sequence: ${expectedSequence.join(' → ')}, got ${sequenceMatch}/${expectedSequence.length} correct`,
+        : `✗ Expected sequence: ${expectedSequence.join(" → ")}, got ${sequenceMatch}/${expectedSequence.length} correct`,
     };
   }
 
   private generateFeedback(criteriaResults: CriteriaResult[], success: boolean): string {
-    const passedCount = criteriaResults.filter((c) => c.passed).length;
+    const passedCount = criteriaResults.filter(c => c.passed).length;
     const totalCount = criteriaResults.length;
 
     if (success) {
       return `Excellent work! You successfully completed ${passedCount}/${totalCount} validation criteria.`;
     } else {
-      const failedCriteria = criteriaResults.filter((c) => !c.passed);
-      return `Step incomplete. You completed ${passedCount}/${totalCount} criteria. Focus on: ${failedCriteria.map((c) => this.feedbackToString(c.feedback)).join('; ')}`;
+      const failedCriteria = criteriaResults.filter(c => !c.passed);
+      return `Step incomplete. You completed ${passedCount}/${totalCount} criteria. Focus on: ${failedCriteria.map(c => this.feedbackToString(c.feedback)).join("; ")}`;
     }
   }
 
   private generateSuggestions(
     criteriaResults: CriteriaResult[],
-    _consoleState: ConsoleState,
-    _userActions: ConsoleAction[]
+    consoleState: ConsoleState,
+    userActions: ConsoleAction[]
   ): string[] {
     const suggestions: string[] = [];
-    const failedCriteria = criteriaResults.filter((c) => !c.passed);
+    const failedCriteria = criteriaResults.filter(c => !c.passed);
 
     if (failedCriteria.length === 0) {
-      suggestions.push('Great job! All validation criteria passed.');
+      suggestions.push("Great job! All validation criteria passed.");
       return suggestions;
     }
 
     // Generate context-aware suggestions
-    if (failedCriteria.some((c) => this.feedbackToString(c.feedback).includes('module'))) {
-      suggestions.push('Navigate to the correct Tanium module using the module tabs at the top');
+    if (failedCriteria.some(c => this.feedbackToString(c.feedback).includes("module"))) {
+      suggestions.push("Navigate to the correct Tanium module using the module tabs at the top");
     }
 
-    if (
-      failedCriteria.some((c) => {
-        const s = this.feedbackToString(c.feedback);
-        return s.includes('query') || s.includes('input');
-      })
-    ) {
-      suggestions.push(
-        'Check your query syntax - ensure it follows Tanium natural language format'
-      );
+    if (failedCriteria.some(c => {
+      const s = this.feedbackToString(c.feedback);
+      return s.includes("query") || s.includes("input");
+    })) {
+      suggestions.push("Check your query syntax - ensure it follows Tanium natural language format");
       suggestions.push("Example: 'Get Computer Name from all machines'");
     }
 
-    if (failedCriteria.some((c) => this.feedbackToString(c.feedback).includes('results'))) {
-      suggestions.push(
-        'Make sure to execute your query by clicking the play button or pressing Enter'
-      );
+    if (failedCriteria.some(c => this.feedbackToString(c.feedback).includes("results"))) {
+      suggestions.push("Make sure to execute your query by clicking the play button or pressing Enter");
     }
 
-    if (failedCriteria.some((c) => this.feedbackToString(c.feedback).includes('group'))) {
-      suggestions.push('Create a computer group in the Administration module');
+    if (failedCriteria.some(c => this.feedbackToString(c.feedback).includes("group"))) {
+      suggestions.push("Create a computer group in the Administration module");
       suggestions.push("Use the 'Create Group' button and configure appropriate filters");
     }
 
-    if (failedCriteria.some((c) => this.feedbackToString(c.feedback).includes('sequence'))) {
-      suggestions.push(
-        'Follow the step instructions in order - some actions depend on previous steps'
-      );
+    if (failedCriteria.some(c => this.feedbackToString(c.feedback).includes("sequence"))) {
+      suggestions.push("Follow the step instructions in order - some actions depend on previous steps");
     }
 
     return suggestions;
   }
 
   private feedbackToString(f: any): string {
-    if (!f) return '';
-    if (typeof f === 'string') return f;
-    if (typeof f === 'object') {
-      if ('content' in f && typeof f.content === 'string') return f.content;
+    if (!f) return "";
+    if (typeof f === "string") return f;
+    if (typeof f === "object") {
+      if ("content" in f && typeof f.content === "string") return f.content;
       const parts: string[] = [];
-      if (f.success)
-        parts.push(typeof f.success === 'string' ? f.success : (f.success.content ?? ''));
-      if (f.failure)
-        parts.push(typeof f.failure === 'string' ? f.failure : (f.failure.content ?? ''));
-      if (f.partial)
-        parts.push(typeof f.partial === 'string' ? f.partial : (f.partial.content ?? ''));
-      if (Array.isArray(f.hints))
-        parts.push(...f.hints.map((h: any) => (typeof h === 'string' ? h : (h.content ?? ''))));
-      return parts.filter(Boolean).join(' ');
+      if (f.success) parts.push(typeof f.success === "string" ? f.success : f.success.content ?? "");
+      if (f.failure) parts.push(typeof f.failure === "string" ? f.failure : f.failure.content ?? "");
+      if (f.partial) parts.push(typeof f.partial === "string" ? f.partial : f.partial.content ?? "");
+      if (Array.isArray(f.hints)) parts.push(...f.hints.map((h: any) => (typeof h === "string" ? h : h.content ?? "")));
+      return parts.filter(Boolean).join(" ");
     }
     return String(f);
   }
@@ -442,22 +419,22 @@ export function CheckpointValidator({
   // Run validation when triggered
   const runValidation = async () => {
     setIsRunning(true);
-
+    
     try {
       const result = await validationEngine.validateStep(step, consoleState, userActions);
-      setValidationResult(result);
-      onValidationCompleteAction(result);
+  setValidationResult(result);
+  onValidationCompleteAction(result);
     } catch (error) {
-      console.error('Validation error:', error);
+      console.error("Validation error:", error);
       const errorResult: ValidationResult = {
         success: false,
         score: 0,
-        feedback: 'Validation system error occurred',
+        feedback: "Validation system error occurred",
         criteria: [],
-        suggestions: ['Please try again or contact support'],
+        suggestions: ["Please try again or contact support"],
       };
-      setValidationResult(errorResult);
-      onValidationCompleteAction(errorResult);
+  setValidationResult(errorResult);
+  onValidationCompleteAction(errorResult);
     } finally {
       setIsRunning(false);
     }
@@ -468,49 +445,49 @@ export function CheckpointValidator({
     if (isValidating) {
       void runValidation();
     }
-  }, [isValidating, runValidation]);
+  }, [isValidating]);
 
   const getScoreColor = (score: number) => {
-    if (score >= 90) return 'text-[#22c55e]';
-    if (score >= 70) return 'text-[#f97316]';
-    return 'text-red-400';
+    if (score >= 90) return "text-[#22c55e]";
+    if (score >= 70) return "text-[#f97316]";
+    return "text-red-400";
   };
 
   const getScoreBadgeColor = (score: number) => {
-    if (score >= 90) return 'border-green-500 text-[#22c55e]';
-    if (score >= 70) return 'border-yellow-500 text-[#f97316]';
-    return 'border-red-500 text-red-400';
+    if (score >= 90) return "border-green-500 text-[#22c55e]";
+    if (score >= 70) return "border-yellow-500 text-[#f97316]";
+    return "border-red-500 text-red-400";
   };
 
   // Helper: normalize feedback to string for searching/logic
   const feedbackToString = (f?: any): string => {
-    if (!f) return '';
-    if (typeof f === 'string') return f;
-    if (React.isValidElement(f)) return '';
+    if (!f) return "";
+    if (typeof f === "string") return f;
+    if (React.isValidElement(f)) return "";
     // FeedbackMessage shape
-    if (typeof f === 'object') {
+    if (typeof f === "object") {
       // If it's a direct FeedbackMessage
-      if ('content' in f && typeof f.content === 'string') return f.content;
+      if ("content" in f && typeof f.content === "string") return f.content;
 
       // Composite ValidationFeedback { success?, failure?, partial?, hints? }
       const parts: string[] = [];
       if (f.success) {
-        if (typeof f.success === 'string') parts.push(f.success);
+        if (typeof f.success === "string") parts.push(f.success);
         else if (f.success.content) parts.push(f.success.content);
       }
       if (f.failure) {
-        if (typeof f.failure === 'string') parts.push(f.failure);
+        if (typeof f.failure === "string") parts.push(f.failure);
         else if (f.failure.content) parts.push(f.failure.content);
       }
       if (f.partial) {
-        if (typeof f.partial === 'string') parts.push(f.partial);
+        if (typeof f.partial === "string") parts.push(f.partial);
         else if (f.partial.content) parts.push(f.partial.content);
       }
       if (Array.isArray(f.hints)) {
-        parts.push(...f.hints.map((h: any) => (typeof h === 'string' ? h : (h.content ?? ''))));
+        parts.push(...f.hints.map((h: any) => (typeof h === "string" ? h : h.content ?? "")));
       }
 
-      return parts.filter(Boolean).join(' \n');
+      return parts.filter(Boolean).join(" \n");
     }
 
     return String(f);
@@ -519,10 +496,10 @@ export function CheckpointValidator({
   // Helper: normalize feedback to a React node for rendering
   const feedbackToNode = (f?: any): React.ReactNode => {
     if (f === undefined || f === null) return null;
-    if (typeof f === 'string') return f;
+    if (typeof f === "string") return f;
     if (React.isValidElement(f)) return f;
-    if (typeof f === 'object') {
-      if ('content' in f && (f.content ?? f.title)) {
+    if (typeof f === "object") {
+      if ("content" in f && (f.content ?? f.title)) {
         return (
           <div>
             {f.title && <div className="font-medium">{f.title}</div>}
@@ -535,8 +512,7 @@ export function CheckpointValidator({
       if (f.success) return feedbackToNode(f.success);
       if (f.partial) return feedbackToNode(f.partial);
       if (f.failure) return feedbackToNode(f.failure);
-      if (Array.isArray(f.hints))
-        return f.hints.map((h: any, i: number) => <div key={i}>{feedbackToNode(h)}</div>);
+      if (Array.isArray(f.hints)) return f.hints.map((h: any, i: number) => <div key={i}>{feedbackToNode(h)}</div>);
     }
 
     return String(f);
@@ -575,13 +551,7 @@ export function CheckpointValidator({
         {validationResult && (
           <CardContent className="space-y-4">
             {/* Overall Result */}
-            <Alert
-              className={
-                validationResult.success
-                  ? 'border-green-500/50 bg-[#22c55e]/10'
-                  : 'border-red-500/50 bg-red-500/10'
-              }
-            >
+            <Alert className={validationResult.success ? "border-green-500/50 bg-[#22c55e]/10" : "border-red-500/50 bg-red-500/10"}>
               <div className="flex items-center space-x-3">
                 {validationResult.success ? (
                   <CheckCircle className="h-5 w-5 text-[#22c55e]" />
@@ -591,14 +561,14 @@ export function CheckpointValidator({
                 <div className="flex-1">
                   <div className="flex items-center justify-between">
                     <span className="font-medium">
-                      {validationResult.success ? 'Step Completed!' : 'Step Incomplete'}
+                      {validationResult.success ? "Step Completed!" : "Step Incomplete"}
                     </span>
                     <Badge variant="outline" className={getScoreBadgeColor(validationResult.score)}>
                       {validationResult.score}%
                     </Badge>
                   </div>
                   <AlertDescription className="mt-1">
-                    {feedbackToNode(validationResult.feedback)}
+                        {feedbackToNode(validationResult.feedback)}
                   </AlertDescription>
                 </div>
               </div>
@@ -612,7 +582,10 @@ export function CheckpointValidator({
                   {validationResult.score}%
                 </span>
               </div>
-              <Progress value={validationResult.score} className="h-2" />
+              <Progress 
+                value={validationResult.score} 
+                className="h-2"
+              />
             </div>
           </CardContent>
         )}
@@ -638,9 +611,9 @@ export function CheckpointValidator({
                   <div
                     key={criteria.id}
                     className={`p-3 rounded border ${
-                      criteria.passed
-                        ? 'border-green-500/50 bg-[#22c55e]/5'
-                        : 'border-red-500/50 bg-red-500/5'
+                      criteria.passed 
+                        ? "border-green-500/50 bg-[#22c55e]/5" 
+                        : "border-red-500/50 bg-red-500/5"
                     }`}
                   >
                     <div className="flex items-center justify-between">
@@ -650,7 +623,9 @@ export function CheckpointValidator({
                         ) : (
                           <XCircle className="h-4 w-4 text-red-400" />
                         )}
-                        <span className="font-medium text-foreground">Criteria {criteria.id}</span>
+                        <span className="font-medium text-foreground">
+                          Criteria {criteria.id}
+                        </span>
                       </div>
                       <Badge variant="outline" className={getScoreBadgeColor(criteria.score)}>
                         {criteria.score}%

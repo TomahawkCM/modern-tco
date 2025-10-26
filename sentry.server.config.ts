@@ -2,7 +2,7 @@
 // The config you add here will be used whenever the server handles a request.
 // https://docs.sentry.io/platforms/javascript/guides/nextjs/
 
-import * as Sentry from '@sentry/nextjs';
+import * as Sentry from "@sentry/nextjs";
 
 Sentry.init({
   dsn: process.env.NEXT_PUBLIC_SENTRY_DSN,
@@ -19,8 +19,8 @@ Sentry.init({
   // Ignore common errors that aren't actionable
   ignoreErrors: [
     // Supabase connection timeouts (non-critical)
-    'ECONNREFUSED',
-    'ETIMEDOUT',
+    "ECONNREFUSED",
+    "ETIMEDOUT",
   ],
 
   // Custom fingerprinting for better error grouping
@@ -28,8 +28,8 @@ Sentry.init({
     // Add custom context for Tanium TCO app
     if (event.contexts) {
       event.contexts.app = {
-        name: 'Tanium TCO LMS',
-        version: '1.0.0',
+        name: "Tanium TCO LMS",
+        version: "1.0.0",
       };
     }
 

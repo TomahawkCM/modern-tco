@@ -1,24 +1,24 @@
-import type { User } from '@supabase/supabase-js';
-import { useCallback, useEffect, useState } from 'react';
-import type { Database } from '@/lib/database.types';
-import { supabase } from '@/lib/supabase';
+import { useState, useEffect, useCallback } from "react";
+import { supabase } from "@/lib/supabase";
+import type { Database } from "@/lib/database.types";
+import type { User } from "@supabase/supabase-js";
 
-type Tables = Database['public']['Tables'];
-type ExamSession = Tables['exam_sessions']['Row'];
-type UserProgress = Tables['user_progress']['Row'];
-type UserStatistics = Tables['user_statistics']['Row'];
-type Question = Tables['questions']['Row'];
+type Tables = Database["public"]["Tables"];
+type ExamSession = Tables["exam_sessions"]["Row"];
+type UserProgress = Tables["user_progress"]["Row"];
+type UserStatistics = Tables["user_statistics"]["Row"];
+type Question = Tables["questions"]["Row"];
 
 // Generic database hook for common operations
 export function useDatabase(user?: User | null) {
   const userId = user?.id;
 
   const insertExamSession = useCallback(
-    async (sessionData: Omit<Tables['exam_sessions']['Insert'], 'user_id'>) => {
-      if (!user) throw new Error('User not authenticated');
+    async (sessionData: Omit<Tables["exam_sessions"]["Insert"], "user_id">) => {
+      if (!user) throw new Error("User not authenticated");
 
       const res: any = await supabase
-        .from('exam_sessions')
+        .from("exam_sessions")
         .insert({
           ...sessionData,
           user_id: user.id,
@@ -30,18 +30,18 @@ export function useDatabase(user?: User | null) {
       if (error) throw error;
       return data ?? null;
     },
-    [user]
+    [userId, user]
   );
 
   const updateExamSession = useCallback(
-    async (sessionId: string, updates: Tables['exam_sessions']['Update']) => {
-      if (!user) throw new Error('User not authenticated');
+    async (sessionId: string, updates: Tables["exam_sessions"]["Update"]) => {
+      if (!user) throw new Error("User not authenticated");
 
       const res: any = await (supabase as any)
-        .from('exam_sessions')
+        .from("exam_sessions")
         .update(updates as any)
-        .eq('id', sessionId)
-        .eq('user_id', user.id)
+        .eq("id", sessionId)
+        .eq("user_id", user.id)
         .select()
         .single();
 
@@ -49,15 +49,15 @@ export function useDatabase(user?: User | null) {
       if (error) throw error;
       return data ?? null;
     },
-    [user]
+    [userId, user]
   );
 
   const insertUserProgress = useCallback(
-    async (progressData: Omit<Tables['user_progress']['Insert'], 'user_id'>) => {
-      if (!user) throw new Error('User not authenticated');
+    async (progressData: Omit<Tables["user_progress"]["Insert"], "user_id">) => {
+      if (!user) throw new Error("User not authenticated");
 
       const res: any = await supabase
-        .from('user_progress')
+        .from("user_progress")
         .insert({
           ...progressData,
           user_id: user.id,
@@ -69,25 +69,28 @@ export function useDatabase(user?: User | null) {
       if (error) throw error;
       return data ?? null;
     },
-    [user]
+    [userId, user]
   );
 
   const getUserStatistics = useCallback(async () => {
-    if (!user) throw new Error('User not authenticated');
+    if (!user) throw new Error("User not authenticated");
 
-    const res: any = await supabase.from('user_statistics').select('*').eq('user_id', user.id);
+    const res: any = await supabase
+      .from("user_statistics")
+      .select("*")
+      .eq("user_id", user.id);
 
     const { data, error } = res;
     if (error) throw error;
     return data ?? [];
-  }, [user]);
+  }, [userId, user]);
 
   const upsertUserStatistics = useCallback(
-    async (statsData: Omit<Tables['user_statistics']['Insert'], 'user_id'>) => {
-      if (!user) throw new Error('User not authenticated');
+    async (statsData: Omit<Tables["user_statistics"]["Insert"], "user_id">) => {
+      if (!user) throw new Error("User not authenticated");
 
       const res: any = await supabase
-        .from('user_statistics')
+        .from("user_statistics")
         .upsert({
           ...statsData,
           user_id: user.id,
@@ -99,62 +102,62 @@ export function useDatabase(user?: User | null) {
       if (error) throw error;
       return data ?? null;
     },
-    [user]
+    [userId, user]
   );
 
   const getQuestions = useCallback(
     async (filters?: {
       category?: string;
-      difficulty?: 'beginner' | 'intermediate' | 'advanced';
+      difficulty?: "beginner" | "intermediate" | "advanced";
       tags?: string[];
       limit?: number;
     }) => {
-      let query: any = supabase.from('questions').select('*');
+  let query: any = supabase.from("questions").select("*");
 
       if (filters?.category) {
-        query = query.eq('category', filters.category);
+        query = query.eq("category", filters.category);
       }
 
       if (filters?.difficulty) {
-        query = query.eq('difficulty', filters.difficulty);
+        query = query.eq("difficulty", filters.difficulty);
       }
 
       if (filters?.tags && filters.tags.length > 0) {
-        query = query.contains('tags', filters.tags);
+        query = query.contains("tags", filters.tags);
       }
 
       if (filters?.limit) {
         query = query.limit(filters.limit);
       }
 
-      const res: any = await query;
-      const { data, error } = res;
-      if (error) throw error;
-      return data ?? [];
+  const res: any = await query;
+  const { data, error } = res;
+  if (error) throw error;
+  return data ?? [];
     },
     []
   );
 
   const getExamSessions = useCallback(async () => {
-    if (!user) throw new Error('User not authenticated');
+    if (!user) throw new Error("User not authenticated");
 
     const res: any = await supabase
-      .from('exam_sessions')
-      .select('*')
-      .eq('user_id', user.id)
-      .order('started_at', { ascending: false });
+      .from("exam_sessions")
+      .select("*")
+      .eq("user_id", user.id)
+      .order("started_at", { ascending: false });
 
     const { data, error } = res;
     if (error) throw error;
     return data ?? [];
-  }, [user]);
+  }, [userId, user]);
 
   const getUserProgress = useCallback(
     async (examSessionId?: string) => {
-      if (!user) throw new Error('User not authenticated');
+      if (!user) throw new Error("User not authenticated");
 
       let query: any = supabase
-        .from('user_progress')
+        .from("user_progress")
         .select(
           `
         *,
@@ -169,19 +172,19 @@ export function useDatabase(user?: User | null) {
         )
       `
         )
-        .eq('user_id', user.id)
-        .order('completed_at', { ascending: false });
+        .eq("user_id", user.id)
+        .order("completed_at", { ascending: false });
 
       if (examSessionId) {
-        query = query.eq('exam_session_id', examSessionId);
+        query = query.eq("exam_session_id", examSessionId);
       }
 
-      const res: any = await query;
-      const { data, error } = res;
-      if (error) throw error;
-      return data ?? [];
+  const res: any = await query;
+  const { data, error } = res;
+  if (error) throw error;
+  return data ?? [];
     },
-    [user]
+    [userId, user]
   );
 
   return {
@@ -194,11 +197,14 @@ export function useDatabase(user?: User | null) {
     getExamSessions,
     getUserProgress,
     getModuleProgress: async (moduleIds: string[] = []) => {
-      if (!user) throw new Error('User not authenticated');
-      let query: any = supabase.from('user_module_progress').select('*').eq('user_id', user.id);
+      if (!user) throw new Error("User not authenticated");
+      let query: any = supabase
+        .from("user_module_progress")
+        .select("*")
+        .eq("user_id", user.id);
 
       if (moduleIds.length > 0) {
-        query = query.in('module_id', moduleIds);
+        query = query.in("module_id", moduleIds);
       }
 
       const res: any = await query;
@@ -207,13 +213,13 @@ export function useDatabase(user?: User | null) {
       return data ?? [];
     },
     getStudyNeedsReviewMap: async (moduleIds: string[] = []) => {
-      if (!user) throw new Error('User not authenticated');
+      if (!user) throw new Error("User not authenticated");
       let query: any = supabase
-        .from('user_study_progress')
-        .select('module_id,status')
-        .eq('user_id', user.id)
-        .eq('status', 'needs_review');
-      if (moduleIds.length > 0) query = query.in('module_id', moduleIds);
+        .from("user_study_progress")
+        .select("module_id,status")
+        .eq("user_id", user.id)
+        .eq("status", "needs_review");
+      if (moduleIds.length > 0) query = query.in("module_id", moduleIds);
       const res: any = await query;
       const { data, error } = res;
       if (error) throw error;
@@ -225,13 +231,13 @@ export function useDatabase(user?: User | null) {
       return map;
     },
     getLastViewedSectionsMap: async (moduleIds: string[] = []) => {
-      if (!user) throw new Error('User not authenticated');
+      if (!user) throw new Error("User not authenticated");
       let query: any = supabase
-        .from('user_study_progress')
-        .select('module_id,section_id,updated_at')
-        .eq('user_id', user.id)
-        .order('updated_at', { ascending: false });
-      if (moduleIds.length > 0) query = query.in('module_id', moduleIds);
+        .from("user_study_progress")
+        .select("module_id,section_id,updated_at")
+        .eq("user_id", user.id)
+        .order("updated_at", { ascending: false });
+      if (moduleIds.length > 0) query = query.in("module_id", moduleIds);
       const res: any = await query;
       const { data, error } = res;
       if (error) throw error;
@@ -244,13 +250,13 @@ export function useDatabase(user?: User | null) {
       return map;
     },
     getUserStudyProgress: async (moduleId?: string) => {
-      if (!user) throw new Error('User not authenticated');
+      if (!user) throw new Error("User not authenticated");
       let query: any = supabase
-        .from('user_study_progress')
-        .select('*')
-        .eq('user_id', user.id)
-        .order('updated_at', { ascending: false });
-      if (moduleId) query = query.eq('module_id', moduleId);
+        .from("user_study_progress")
+        .select("*")
+        .eq("user_id", user.id)
+        .order("updated_at", { ascending: false });
+      if (moduleId) query = query.eq("module_id", moduleId);
       const res: any = await query;
       const { data, error } = res;
       if (error) throw error;
@@ -259,11 +265,11 @@ export function useDatabase(user?: User | null) {
     upsertUserStudyProgress: async (p: {
       module_id: string;
       section_id?: string | null;
-      status: 'not_started' | 'in_progress' | 'completed' | 'needs_review';
+      status: "not_started" | "in_progress" | "completed" | "needs_review";
       time_spent_minutes?: number;
       notes?: string | null;
     }) => {
-      if (!user) throw new Error('User not authenticated');
+      if (!user) throw new Error("User not authenticated");
       const row: any = {
         user_id: user.id,
         module_id: p.module_id,
@@ -275,21 +281,23 @@ export function useDatabase(user?: User | null) {
         created_at: new Date().toISOString(),
         updated_at: new Date().toISOString(),
       };
-      const res: any = await supabase.from('user_study_progress').insert(row).select().single();
+      const res: any = await supabase.from("user_study_progress").insert(row).select().single();
       const { data, error } = res;
       if (error) throw error;
       return data ?? null;
     },
-    upsertModuleProgress: async (progress: {
-      module_id: string;
-      completed_sections?: number;
-      total_sections?: number;
-      status?: 'not_started' | 'in_progress' | 'completed' | 'bookmarked';
-    }) => {
-      if (!user) throw new Error('User not authenticated');
+    upsertModuleProgress: async (
+      progress: {
+        module_id: string;
+        completed_sections?: number;
+        total_sections?: number;
+        status?: "not_started" | "in_progress" | "completed" | "bookmarked";
+      }
+    ) => {
+      if (!user) throw new Error("User not authenticated");
 
       const res: any = await supabase
-        .from('user_module_progress')
+        .from("user_module_progress")
         .upsert({
           user_id: user.id,
           module_id: progress.module_id,
@@ -310,7 +318,7 @@ export function useDatabase(user?: User | null) {
 
 // Hook for real-time subscriptions
 export function useRealtimeSubscription<T = any>(
-  table: keyof Database['public']['Tables'],
+  table: keyof Database["public"]["Tables"],
   filter?: string,
   callback?: (payload: any) => void
 ) {
@@ -324,12 +332,12 @@ export function useRealtimeSubscription<T = any>(
     const setupSubscription = async () => {
       try {
         // Initial data fetch
-        let query = supabase.from(table).select('*');
+        let query = supabase.from(table).select("*");
 
         if (filter) {
           // Parse filter - expecting format like "user_id=eq.{userId}"
           const [column, operator, value] = filter.split(/[=.]/);
-          if (operator === 'eq') {
+          if (operator === "eq") {
             query = query.eq(column, value);
           }
         }
@@ -339,17 +347,17 @@ export function useRealtimeSubscription<T = any>(
         if (fetchError) {
           setError(fetchError.message);
         } else {
-          setData((initialData ?? []) as unknown as T[]);
+          setData(((initialData ?? []) as unknown) as T[]);
         }
 
         // Set up real-time subscription
         subscription = supabase
           .channel(`${table}_changes`)
           .on(
-            'postgres_changes',
+            "postgres_changes",
             {
-              event: '*',
-              schema: 'public',
+              event: "*",
+              schema: "public",
               table: table as string,
               filter,
             },
@@ -361,15 +369,15 @@ export function useRealtimeSubscription<T = any>(
               // Update local data based on event type
               setData((current) => {
                 switch (payload.eventType) {
-                  case 'INSERT':
-                    return [...current, payload.new as unknown as T];
-                  case 'UPDATE':
+                  case "INSERT":
+                    return [...current, (payload.new as unknown) as T];
+                  case "UPDATE":
                     return current.map((item) =>
                       (item as any).id === (payload.new as any).id
-                        ? (payload.new as unknown as T)
+                        ? ((payload.new as unknown) as T)
                         : item
                     );
-                  case 'DELETE':
+                  case "DELETE":
                     return current.filter((item) => (item as any).id !== (payload.old as any).id);
                   default:
                     return current;
@@ -379,7 +387,7 @@ export function useRealtimeSubscription<T = any>(
           )
           .subscribe();
       } catch (err) {
-        setError(err instanceof Error ? err.message : 'Unknown error');
+        setError(err instanceof Error ? err.message : "Unknown error");
       } finally {
         setLoading(false);
       }

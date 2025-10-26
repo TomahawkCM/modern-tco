@@ -3,11 +3,8 @@
  * Provides questions data from Supabase to the entire application
  */
 
-'use client';
+"use client";
 
-import { usePathname } from 'next/navigation';
-import React, { createContext, useCallback, useContext, useEffect, useState } from 'react';
-import { defaultDifficultyRecord } from '@/lib/difficulty';
 import {
   clearQuestionsCache,
   fetchQuestions,
@@ -18,8 +15,11 @@ import {
   loadQuestionsWithFallback,
   searchQuestions,
   subscribeToQuestions,
-} from '@/services/questionsService';
-import { Difficulty, type Question, QuestionCategory, TCODomain } from '@/types/exam';
+} from "@/services/questionsService";
+import { Difficulty, QuestionCategory, TCODomain, type Question } from "@/types/exam";
+import { defaultDifficultyRecord } from '@/lib/difficulty';
+import React, { createContext, useCallback, useContext, useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 
 interface QuestionsContextType {
   questions: Question[];
@@ -78,11 +78,11 @@ export function QuestionsProvider({ children }: { children: React.ReactNode }) {
   // Only load questions on routes that actually need the full bank.
   // This avoids fetching hundreds of questions on pages like /welcome, /mock, /review.
   const shouldLoad = React.useMemo(() => {
-    const p = (pathname || '').toLowerCase();
+    const p = (pathname || "").toLowerCase();
     // Load on admin editor and study/content areas; defer elsewhere
-    return ['/admin', '/study', '/learn', '/learning', '/modules', '/assessments', '/kb'].some(
-      (prefix) => p.startsWith(prefix)
-    );
+    return [
+      "/admin", "/study", "/learn", "/learning", "/modules", "/assessments", "/kb",
+    ].some((prefix) => p.startsWith(prefix));
   }, [pathname]);
 
   const loadInitialQuestions = useCallback(async () => {
@@ -94,10 +94,15 @@ export function QuestionsProvider({ children }: { children: React.ReactNode }) {
       const loadedQuestions = await loadQuestionsWithFallback();
       setQuestions(loadedQuestions);
     } catch (err) {
-      console.error('Failed to load questions:', err);
-      setError('Failed to load questions. Please refresh the page or contact support.');
-      // No fallback to static data to prevent bundle bloat
-      setQuestions([]);
+      console.error("Failed to load questions:", err);
+      setError("Failed to load questions. Please try again.");
+      // Even on error, try to have some questions available
+      try {
+        const { questionBank } = await import("@/data/sample-questions");
+        setQuestions(questionBank);
+      } catch {
+        setQuestions([]);
+      }
     } finally {
       setLoading(false);
     }
@@ -111,22 +116,16 @@ export function QuestionsProvider({ children }: { children: React.ReactNode }) {
     }
 
     let unsub: { unsubscribe: () => void } | null = null;
-    void loadInitialQuestions().catch((error) => {
-      console.error('Failed to load initial questions:', error);
-    });
+    loadInitialQuestions();
 
     // Subscribe to real-time updates only when loading is enabled
     unsub = subscribeToQuestions((payload) => {
-      console.warn('Questions updated:', payload);
-      void loadInitialQuestions().catch((error) => {
-        console.error('Failed to reload questions:', error);
-      });
+      console.log("Questions updated:", payload);
+      loadInitialQuestions();
     });
 
     return () => {
-      try {
-        unsub?.unsubscribe();
-      } catch {}
+      try { unsub?.unsubscribe(); } catch {}
     };
   }, [loadInitialQuestions, shouldLoad]);
 
@@ -141,8 +140,8 @@ export function QuestionsProvider({ children }: { children: React.ReactNode }) {
       const freshQuestions = await fetchQuestions(forceRefresh);
       setQuestions(freshQuestions);
     } catch (err) {
-      console.error('Failed to refresh questions:', err);
-      setError('Failed to refresh questions.');
+      console.error("Failed to refresh questions:", err);
+      setError("Failed to refresh questions.");
     } finally {
       setLoading(false);
     }
@@ -198,25 +197,25 @@ export function QuestionsProvider({ children }: { children: React.ReactNode }) {
       try {
         return await fetchQuestionsWithFilters(filters);
       } catch (err) {
-        console.error('Failed to fetch filtered questions:', err);
+        console.error("Failed to fetch filtered questions:", err);
         // Fall back to filtering cached questions
         let filtered = [...questions];
 
         if (filters.domains && filters.domains.length > 0) {
-          filtered = filtered.filter((q) => filters.domains?.includes(q.domain));
+          filtered = filtered.filter((q) => filters.domains!.includes(q.domain));
         }
 
         if (filters.difficulties && filters.difficulties.length > 0) {
-          filtered = filtered.filter((q) => filters.difficulties?.includes(q.difficulty));
+          filtered = filtered.filter((q) => filters.difficulties!.includes(q.difficulty));
         }
 
         if (filters.categories && filters.categories.length > 0) {
-          filtered = filtered.filter((q) => filters.categories?.includes(q.category));
+          filtered = filtered.filter((q) => filters.categories!.includes(q.category));
         }
 
         if (filters.tags && filters.tags.length > 0) {
           filtered = filtered.filter(
-            (q) => q.tags && filters.tags?.some((tag) => q.tags?.includes(tag))
+            (q) => q.tags && filters.tags!.some((tag) => q.tags!.includes(tag))
           );
         }
 
@@ -266,15 +265,15 @@ export function QuestionsProvider({ children }: { children: React.ReactNode }) {
       // Apply filters if provided
       if (filters) {
         if (filters.domains && filters.domains.length > 0) {
-          pool = pool.filter((q) => filters.domains?.includes(q.domain));
+          pool = pool.filter((q) => filters.domains!.includes(q.domain));
         }
 
         if (filters.difficulties && filters.difficulties.length > 0) {
-          pool = pool.filter((q) => filters.difficulties?.includes(q.difficulty));
+          pool = pool.filter((q) => filters.difficulties!.includes(q.difficulty));
         }
 
         if (filters.categories && filters.categories.length > 0) {
-          pool = pool.filter((q) => filters.categories?.includes(q.category));
+          pool = pool.filter((q) => filters.categories!.includes(q.category));
         }
       }
 
@@ -312,11 +311,11 @@ export function QuestionsProvider({ children }: { children: React.ReactNode }) {
 
         // For different assessment types, apply different strategies
         switch (config.type) {
-          case 'practice':
+          case "practice":
             // Mix of difficulties for practice
             assessmentQuestions = assessmentQuestions.sort(() => Math.random() - 0.5);
             break;
-          case 'mock_exam': {
+          case "mock_exam":
             // Balanced distribution for mock exams
             const difficulties = [
               Difficulty.BEGINNER,
@@ -336,8 +335,7 @@ export function QuestionsProvider({ children }: { children: React.ReactNode }) {
 
             assessmentQuestions = balancedQuestions.sort(() => Math.random() - 0.5);
             break;
-          }
-          case 'final_exam':
+          case "final_exam":
             // More advanced questions for final exam
             assessmentQuestions = assessmentQuestions
               .filter(
@@ -354,7 +352,7 @@ export function QuestionsProvider({ children }: { children: React.ReactNode }) {
         // Return the requested number of questions
         return assessmentQuestions.slice(0, config.count);
       } catch (err) {
-        console.error('Failed to get assessment questions:', err);
+        console.error("Failed to get assessment questions:", err);
         // Fallback to random selection
         return getRandomQuestions(
           config.count,
@@ -418,12 +416,6 @@ export function QuestionsProvider({ children }: { children: React.ReactNode }) {
       [QuestionCategory.TROUBLESHOOTING]: 0,
       [QuestionCategory.PRACTICAL_SCENARIOS]: 0,
       [QuestionCategory.LINEAR_CHAIN]: 0,
-      [QuestionCategory.BEST_PRACTICES]: 0,
-      [QuestionCategory.ADVANCED_CONCEPTS]: 0,
-      [QuestionCategory.QUESTION_CONSTRUCTION]: 0,
-      [QuestionCategory.QUESTION_SHARING]: 0,
-      [QuestionCategory.PERFORMANCE_OPTIMIZATION]: 0,
-      [QuestionCategory.QUESTION_PERFORMANCE_OPTIMIZATION]: 0,
     };
 
     if (questions && Array.isArray(questions)) {
@@ -462,7 +454,7 @@ export function QuestionsProvider({ children }: { children: React.ReactNode }) {
 export function useQuestions() {
   const context = useContext(QuestionsContext);
   if (!context) {
-    throw new Error('useQuestions must be used within a QuestionsProvider');
+    throw new Error("useQuestions must be used within a QuestionsProvider");
   }
   return context;
 }

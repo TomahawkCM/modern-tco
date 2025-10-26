@@ -1,15 +1,15 @@
-'use client';
+"use client";
 
-import { CheckCircle2, HelpCircle, Loader2, XCircle } from 'lucide-react';
-import { useEffect, useState } from 'react';
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Label } from '@/components/ui/label';
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
-import type { Question } from '@/lib/questionBank';
-import { emitLearnExp } from '@/lib/telemetry/learnExperimental';
+import { useEffect, useState } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Label } from "@/components/ui/label";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { CheckCircle2, HelpCircle, Loader2, XCircle } from "lucide-react";
+import type { Question } from "@/lib/questionBank";
+import { emitLearnExp } from "@/lib/telemetry/learnExperimental";
 
 interface LearnExperimentalQuizGroupProps {
   questions: Question[] | Promise<Question[]>;
@@ -25,7 +25,7 @@ interface QuizState {
 }
 
 const DEFAULT_STATE: QuizState = {
-  selected: '',
+  selected: "",
   submitted: false,
   correct: null,
 };
@@ -38,7 +38,7 @@ function sanitizeQuestions(input: Question[]): Question[] {
       return {
         ...question,
         options,
-        correctAnswer: question.correctAnswer ?? options[0] ?? '',
+        correctAnswer: question.correctAnswer ?? options[0] ?? "",
         id: question.id ?? `read-only-question-${index}`,
       } satisfies Question;
     })
@@ -94,12 +94,12 @@ function QuizCard({
                 key={optionKey}
                 className={`flex items-center gap-3 rounded-lg border p-3 text-sm transition-colors ${
                   isCorrectOption
-                    ? 'border-emerald-500/70 bg-emerald-500/10'
+                    ? "border-emerald-500/70 bg-emerald-500/10"
                     : isIncorrectSelection
-                      ? 'border-red-500/70 bg-red-500/10'
+                      ? "border-red-500/70 bg-red-500/10"
                       : isSelected
-                        ? 'border-primary bg-primary/10'
-                        : 'border-border hover:border-primary/50'
+                        ? "border-primary bg-primary/10"
+                        : "border-border hover:border-primary/50"
                 }`}
               >
                 <RadioGroupItem value={option} id={optionKey} />
@@ -144,9 +144,9 @@ function QuizCard({
 
 export function LearnExperimentalQuizGroup({
   questions,
-  moduleId = 'learn-experimental',
-  unitId = 'unit',
-  quizIdPrefix = 'quiz',
+  moduleId = "learn-experimental",
+  unitId = "unit",
+  quizIdPrefix = "quiz",
 }: LearnExperimentalQuizGroupProps) {
   const [loading, setLoading] = useState(true);
   const [questionSet, setQuestionSet] = useState<Question[]>([]);
@@ -190,7 +190,7 @@ export function LearnExperimentalQuizGroup({
       emitLearnExp({
         moduleId,
         unitId,
-        action: 'quiz_submit',
+        action: "quiz_submit",
         correct: isCorrect,
         quizId: `${quizIdPrefix}-${quiz.id}`,
       });
@@ -226,8 +226,8 @@ export function LearnExperimentalQuizGroup({
       <Alert className="border-dashed border-primary/40 bg-slate-950/40">
         <AlertTitle className="text-sm font-semibold">No questions available</AlertTitle>
         <AlertDescription className="text-sm text-muted-foreground">
-          We couldn&apos;t load quick-check questions for this unit right now. Review the key
-          concepts and return later.
+          We couldn&apos;t load quick-check questions for this unit right now. Review the key concepts and
+          return later.
         </AlertDescription>
       </Alert>
     );

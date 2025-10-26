@@ -4,9 +4,10 @@
  * Falls back to dynamic MDX imports on production if fs discovery is empty.
  */
 
-import { ModulesBrowser } from '@/components/modules/ModulesBrowser';
-import { getAllModuleMetadata } from '@/lib/mdx/module-loader';
-import { AVAILABLE_DOMAINS, getMDXMetadata, loadMDXContent } from '@/lib/mdx-loader';
+import { getAllModuleMetadata } from "@/lib/mdx/module-loader";
+import { ModulesBrowser } from "@/components/modules/ModulesBrowser";
+import Link from "next/link";
+import { AVAILABLE_DOMAINS, getMDXMetadata, loadMDXContent } from "@/lib/mdx-loader";
 
 export default async function Modules() {
   let modules = await getAllModuleMetadata();
@@ -56,9 +57,7 @@ export default async function Modules() {
         <span id="resume-banner" />
       </div>
       {(() => {
-        const idToSlug = Object.fromEntries(
-          (modules as any[]).map((m) => [m.frontmatter.id, m.slug])
-        );
+        const idToSlug = Object.fromEntries((modules as any[]).map((m) => [m.frontmatter.id, m.slug]));
         const mapping = JSON.stringify(idToSlug).replace(/</g, '\u003c');
         return (
           <script

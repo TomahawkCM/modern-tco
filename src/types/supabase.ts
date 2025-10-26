@@ -1,17 +1,14 @@
 // Import generated types from production database schema
-import type { Database as GeneratedDatabase, Json as GeneratedJson } from './supabase-generated';
+import { Database as GeneratedDatabase, Json as GeneratedJson } from './supabase-generated';
 
 // Re-export the generated types
 export type Database = GeneratedDatabase;
 export type Json = GeneratedJson;
 
 // Type-safe table helpers
-export type Tables<T extends keyof Database['public']['Tables']> =
-  Database['public']['Tables'][T]['Row'];
-export type TablesInsert<T extends keyof Database['public']['Tables']> =
-  Database['public']['Tables'][T]['Insert'];
-export type TablesUpdate<T extends keyof Database['public']['Tables']> =
-  Database['public']['Tables'][T]['Update'];
+export type Tables<T extends keyof Database['public']['Tables']> = Database['public']['Tables'][T]['Row'];
+export type TablesInsert<T extends keyof Database['public']['Tables']> = Database['public']['Tables'][T]['Insert'];
+export type TablesUpdate<T extends keyof Database['public']['Tables']> = Database['public']['Tables'][T]['Update'];
 
 // Common table helpers used across the codebase
 export type StudyModule = Tables<'study_modules'>;
@@ -57,36 +54,26 @@ export type TCODomain =
 export type Difficulty = 'Beginner' | 'Intermediate' | 'Advanced' | 'Expert';
 
 // Lightweight enhanced interfaces frequently used in the app
-export type StudyModuleWithSections = Omit<
-  StudyModule,
-  'exam_prep' | 'learning_objectives' | 'references'
-> & {
+export type StudyModuleWithSections = Omit<StudyModule, 'exam_prep' | 'learning_objectives' | 'references'> & {
   sections?: StudySection[];
   learning_objectives?: string[] | Json;
   references?: string[] | Json;
-  exam_prep?:
-    | {
-        description?: string;
-        exam_focus?: string[];
-        practice_labs?: string[];
-      }
-    | Json;
+  exam_prep?: {
+    description?: string;
+    exam_focus?: string[];
+    practice_labs?: string[];
+  } | Json;
 };
 
-export type StudySectionWithModule = Omit<
-  StudySection,
-  'content' | 'key_points' | 'procedures' | 'troubleshooting' | 'references' | 'playbook'
-> & {
+export type StudySectionWithModule = Omit<StudySection, 'content' | 'key_points' | 'procedures' | 'troubleshooting' | 'references' | 'playbook'> & {
   module?: StudyModule;
-  content?:
-    | {
-        overview?: string;
-        key_points?: string[];
-        procedures?: string[];
-        troubleshooting?: string[];
-        references?: string[];
-      }
-    | string;
+  content?: {
+    overview?: string;
+    key_points?: string[];
+    procedures?: string[];
+    troubleshooting?: string[];
+    references?: string[];
+  } | string;
   key_points?: string[] | Json;
   procedures?: string[] | Json;
   troubleshooting?: string[] | Json;

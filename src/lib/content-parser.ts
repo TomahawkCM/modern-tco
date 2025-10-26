@@ -1,15 +1,20 @@
 // Content Parser Utility for TCO Study Materials
 // Converts markdown files to structured TypeScript data
+//
+// KNOWN ISSUE (Next.js 16/Turbopack): This module uses Node.js 'fs' but is imported by both
+// server (labs page) and client components (StudyModuleViewer via study-content.ts).
+// TODO: Refactor to separate server-only parsing from shared data types
+// See Archon task: "Refactor content-parser.ts for Turbopack compatibility"
 
-import fs from 'node:fs';
-import path from 'node:path';
-import type { StudyModuleContent, StudySectionContent } from '@/data/study-content';
+import fs from "fs";
+import path from "path";
+import type { StudyModuleContent, StudySectionContent } from "@/data/study-content";
 
 interface ParsedSection {
   id: string;
   title: string;
   content: string;
-  sectionType: 'overview' | 'concepts' | 'procedures' | 'examples' | 'exam_prep';
+  sectionType: "overview" | "concepts" | "procedures" | "examples" | "exam_prep";
   orderIndex: number;
   estimatedTime: number;
   keyPoints: string[];
@@ -33,7 +38,7 @@ interface ParsedModule {
 export class ContentParser {
   private static extractExamWeight(content: string): number {
     const weightMatch = content.match(/(\d+)%\s+Exam\s+Weight/i);
-    return weightMatch ? parseInt(weightMatch[1], 10) : 0;
+    return weightMatch ? parseInt(weightMatch[1]) : 0;
   }
 
   private static extractLearningObjectives(content: string): string[] {
@@ -46,7 +51,7 @@ export class ContentParser {
 
       if (matches) {
         matches.forEach((match) => {
-          const cleanMatch = match.replace(/^\d+\.\s+\*\*(.*?)\*\*\s+-\s+/, '');
+          const cleanMatch = match.replace(/^\d+\.\s+\*\*(.*?)\*\*\s+-\s+/, "");
           objectives.push(cleanMatch.trim());
         });
       }
@@ -70,34 +75,34 @@ export class ContentParser {
       const title = titleMatch ? titleMatch[1].trim() : `Module ${index}`;
 
       // Determine section type based on content patterns
-      let sectionType: 'overview' | 'concepts' | 'procedures' | 'examples' | 'exam_prep' =
-        'concepts';
+      let sectionType: "overview" | "concepts" | "procedures" | "examples" | "exam_prep" =
+        "concepts";
 
-      if (title.toLowerCase().includes('fundamental') || title.toLowerCase().includes('basic')) {
-        sectionType = 'concepts';
+      if (title.toLowerCase().includes("fundamental") || title.toLowerCase().includes("basic")) {
+        sectionType = "concepts";
       } else if (
-        title.toLowerCase().includes('procedure') ||
-        title.toLowerCase().includes('step')
+        title.toLowerCase().includes("procedure") ||
+        title.toLowerCase().includes("step")
       ) {
-        sectionType = 'procedures';
+        sectionType = "procedures";
       } else if (
-        title.toLowerCase().includes('example') ||
-        title.toLowerCase().includes('practice')
+        title.toLowerCase().includes("example") ||
+        title.toLowerCase().includes("practice")
       ) {
-        sectionType = 'examples';
+        sectionType = "examples";
       } else if (
-        title.toLowerCase().includes('exam') ||
-        title.toLowerCase().includes('assessment')
+        title.toLowerCase().includes("exam") ||
+        title.toLowerCase().includes("assessment")
       ) {
-        sectionType = 'exam_prep';
+        sectionType = "exam_prep";
       }
 
       // Extract key points from bullet points and numbered lists
       const keyPoints: string[] = [];
-      const bulletMatches = moduleContent.match(/^[\s]*[-*]\s+(.+)$/gm);
+      const bulletMatches = moduleContent.match(/^[\s]*[-\*]\s+(.+)$/gm);
       if (bulletMatches) {
         bulletMatches.forEach((match) => {
-          const point = match.replace(/^[\s]*[-*]\s+/, '').trim();
+          const point = match.replace(/^[\s]*[-\*]\s+/, "").trim();
           keyPoints.push(point);
         });
       }
@@ -107,7 +112,7 @@ export class ContentParser {
       const procedureMatches = moduleContent.match(/^\d+\.\s+(.+)$/gm);
       if (procedureMatches) {
         procedureMatches.forEach((match) => {
-          const procedure = match.replace(/^\d+\.\s+/, '').trim();
+          const procedure = match.replace(/^\d+\.\s+/, "").trim();
           procedures.push(procedure);
         });
       }
@@ -121,7 +126,7 @@ export class ContentParser {
         estimatedTime: 30 + index * 15, // Progressive time estimates
         keyPoints: keyPoints.slice(0, 5), // Limit to top 5 key points
         procedures: procedures.length > 0 ? procedures.slice(0, 8) : undefined,
-        references: ['Tanium Core Platform Documentation', 'Interact Module User Guide'],
+        references: ["Tanium Core Platform Documentation", "Interact Module User Guide"],
       });
     });
 
@@ -129,27 +134,27 @@ export class ContentParser {
   }
 
   public static parseDomain1(markdownPath: string): ParsedModule {
-    const content = fs.readFileSync(markdownPath, 'utf-8');
+    const content = fs.readFileSync(markdownPath, "utf-8");
 
     // Extract title and description from header
     const titleMatch = content.match(/# Domain 1: (.+)/);
-    const title = titleMatch ? `Domain 1: ${titleMatch[1]}` : 'Domain 1: Asking Questions';
+    const title = titleMatch ? `Domain 1: ${titleMatch[1]}` : "Domain 1: Asking Questions";
 
     const descriptionMatch = content.match(/\*\*TCO Certification Domain 1\*\*: (.+)/);
     const description = descriptionMatch
       ? `Master ${descriptionMatch[1].toLowerCase()} for real-time endpoint data collection. Learn sensor selection, query construction, and result interpretation for effective information gathering across enterprise environments.`
-      : 'Master natural language questioning in Tanium for real-time endpoint data collection.';
+      : "Master natural language questioning in Tanium for real-time endpoint data collection.";
 
     return {
-      id: 'asking-questions',
-      domain: 'Asking Questions',
+      id: "asking-questions",
+      domain: "Asking Questions",
       title,
       description,
-      examWeight: ContentParser.extractExamWeight(content),
-      estimatedTime: '3-4 hours',
+      examWeight: this.extractExamWeight(content),
+      estimatedTime: "3-4 hours",
       estimatedTimeMinutes: 210,
-      learningObjectives: ContentParser.extractLearningObjectives(content),
-      sections: ContentParser.extractSections(content),
+      learningObjectives: this.extractLearningObjectives(content),
+      sections: this.extractSections(content),
     };
   }
 
@@ -183,27 +188,27 @@ export class ContentParser {
   public static parseDomain1Content(): StudyModuleContent {
     // Note: This function is designed for server-side use only
     // File system operations are not available during webpack compilation
-    if (typeof window !== 'undefined') {
-      throw new Error('parseDomain1Content can only be called on the server side');
+    if (typeof window !== "undefined") {
+      throw new Error("parseDomain1Content can only be called on the server side");
     }
 
     try {
       const markdownPath = path.join(
         process.cwd(),
-        'src',
-        'content',
-        'domains',
-        'domain1-asking-questions.md'
+        "src",
+        "content",
+        "domains",
+        "domain1-asking-questions.md"
       );
 
       if (!fs.existsSync(markdownPath)) {
         throw new Error(`Domain 1 markdown file not found at ${markdownPath}`);
       }
 
-      const parsed = ContentParser.parseDomain1(markdownPath);
-      return ContentParser.convertToStudyModuleContent(parsed);
+      const parsed = this.parseDomain1(markdownPath);
+      return this.convertToStudyModuleContent(parsed);
     } catch (error) {
-      console.error('Error parsing Domain 1 content:', error);
+      console.error("Error parsing Domain 1 content:", error);
       throw error;
     }
   }

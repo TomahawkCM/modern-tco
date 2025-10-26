@@ -1,13 +1,13 @@
-'use client';
+"use client";
 
-import { BookOpen, CheckCircle2, ChevronDown, ChevronUp, Circle, Clock, Lock } from 'lucide-react';
-import { useEffect, useState } from 'react';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Progress } from '@/components/ui/progress';
-import { addReviewItem, getAllReviewItems, saveReviewItems } from '@/lib/spacedRepetition';
-import { cn } from '@/lib/utils';
+import { useState, useEffect } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Progress } from "@/components/ui/progress";
+import { CheckCircle2, Circle, Clock, BookOpen, ChevronDown, ChevronUp, Lock } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { addReviewItem, getAllReviewItems, saveReviewItems } from "@/lib/spacedRepetition";
 
 interface MicroSectionProps {
   /** Unique identifier for progress tracking */
@@ -52,13 +52,13 @@ export function MicroSection({
   // Load completion and quiz status from localStorage
   useEffect(() => {
     const storageKey = `micro-section-${moduleId}-${id}`;
-    const completed = localStorage.getItem(storageKey) === 'true';
+    const completed = localStorage.getItem(storageKey) === "true";
     setIsCompleted(completed);
 
     // Check if quiz was passed (if quiz exists)
     if (quickCheck && requireQuizPass) {
       const quizStorageKey = `quiz-passed-${moduleId}-${id}`;
-      const passed = localStorage.getItem(quizStorageKey) === 'true';
+      const passed = localStorage.getItem(quizStorageKey) === "true";
       setQuizPassed(passed);
     } else {
       // No quiz requirement, allow completion
@@ -69,15 +69,13 @@ export function MicroSection({
   const handleMarkComplete = () => {
     // Enforce quiz requirement if applicable
     if (quickCheck && requireQuizPass && !quizPassed) {
-      alert(
-        'Please complete and pass the Quick Check quiz (80%+) before marking this section complete.'
-      );
+      alert("Please complete and pass the Quick Check quiz (80%+) before marking this section complete.");
       setShowQuickCheck(true);
       return;
     }
 
     const storageKey = `micro-section-${moduleId}-${id}`;
-    localStorage.setItem(storageKey, 'true');
+    localStorage.setItem(storageKey, "true");
     setIsCompleted(true);
 
     // Update module progress
@@ -93,7 +91,7 @@ export function MicroSection({
 
     // Check if this section is already being tracked
     const alreadyTracked = existingItems.some(
-      (item) => item.sectionId === id && item.moduleId === moduleId
+      item => item.sectionId === id && item.moduleId === moduleId
     );
 
     if (!alreadyTracked) {
@@ -102,14 +100,14 @@ export function MicroSection({
         moduleId,
         sectionId: id,
         concept: title,
-        type: 'micro-section',
+        type: "micro-section",
         title,
       });
 
       existingItems.push(newItem);
       saveReviewItems(moduleId, existingItems);
 
-      console.log('✅ Added to spaced repetition:', {
+      console.log("✅ Added to spaced repetition:", {
         title,
         nextReview: newItem.nextReview,
       });
@@ -123,7 +121,7 @@ export function MicroSection({
 
   const updateModuleProgress = (moduleId: string) => {
     const progressKey = `module-progress-${moduleId}`;
-    const currentProgress = JSON.parse(localStorage.getItem(progressKey) || '{}');
+    const currentProgress = JSON.parse(localStorage.getItem(progressKey) || "{}");
     const completedSections = new Set(currentProgress.completedSections || []);
     completedSections.add(id);
 
@@ -141,8 +139,10 @@ export function MicroSection({
   return (
     <Card
       className={cn(
-        'mb-6 border-2 transition-all',
-        isCompleted ? 'border-[#22c55e]/30 bg-[#22c55e]/5' : 'border-primary/20 bg-card/80'
+        "mb-6 border-2 transition-all",
+        isCompleted
+          ? "border-[#22c55e]/30 bg-[#22c55e]/5"
+          : "border-primary/20 bg-card/80"
       )}
     >
       <CardHeader className="cursor-pointer" onClick={() => setIsExpanded(!isExpanded)}>
@@ -174,7 +174,11 @@ export function MicroSection({
           </div>
 
           <Button variant="ghost" size="sm" className="text-muted-foreground">
-            {isExpanded ? <ChevronUp className="h-5 w-5" /> : <ChevronDown className="h-5 w-5" />}
+            {isExpanded ? (
+              <ChevronUp className="h-5 w-5" />
+            ) : (
+              <ChevronDown className="h-5 w-5" />
+            )}
           </Button>
         </div>
       </CardHeader>
@@ -182,7 +186,9 @@ export function MicroSection({
       {isExpanded && (
         <CardContent className="space-y-6">
           {/* Learning Content */}
-          <div className="prose prose-invert max-w-none">{children}</div>
+          <div className="prose prose-invert max-w-none">
+            {children}
+          </div>
 
           {/* Key Takeaways */}
           {keyTakeaways && keyTakeaways.length > 0 && (
@@ -214,14 +220,14 @@ export function MicroSection({
                   <Button
                     onClick={() => setShowQuickCheck(true)}
                     className={cn(
-                      'w-full',
+                      "w-full",
                       quizPassed
-                        ? 'bg-[#22c55e] hover:bg-[#22c55e]/90'
-                        : 'bg-accent hover:bg-accent/90'
+                        ? "bg-[#22c55e] hover:bg-[#22c55e]/90"
+                        : "bg-accent hover:bg-accent/90"
                     )}
                   >
                     <CheckCircle2 className="mr-2 h-4 w-4" />
-                    {quizPassed ? 'Review Quick Check ✓' : 'Take Quick Check (2 min)'}
+                    {quizPassed ? "Review Quick Check ✓" : "Take Quick Check (2 min)"}
                   </Button>
                   {requireQuizPass && !quizPassed && (
                     <p className="mt-2 text-xs text-[#f97316] flex items-center gap-1">
@@ -253,10 +259,10 @@ export function MicroSection({
                 onClick={handleMarkComplete}
                 disabled={Boolean(quickCheck && requireQuizPass && !quizPassed)}
                 className={cn(
-                  'w-full',
+                  "w-full",
                   quickCheck && requireQuizPass && !quizPassed
-                    ? 'bg-muted cursor-not-allowed'
-                    : 'bg-[#22c55e] hover:bg-[#22c55e]/90'
+                    ? "bg-muted cursor-not-allowed"
+                    : "bg-[#22c55e] hover:bg-[#22c55e]/90"
                 )}
               >
                 {quickCheck && requireQuizPass && !quizPassed ? (

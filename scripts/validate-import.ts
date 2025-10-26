@@ -7,15 +7,15 @@
  * and performs comprehensive quality checks
  */
 
-import fs from 'fs';
-import path from 'path';
+import fs from "fs";
+import path from "path";
 import {
-  Difficulty,
   Question,
+  TCODomain,
   QuestionCategory,
+  Difficulty,
   TCO_DOMAIN_WEIGHTS,
-  type TCODomain,
-} from '../src/types/exam';
+} from "../src/types/exam";
 
 interface ValidationResult {
   passed: boolean;
@@ -46,16 +46,16 @@ function validateQuestionBank(): ValidationResult {
 
   try {
     // Import the question bank
-    const dataPath = path.join(process.cwd(), 'src/data/imported-questions-master.ts');
+    const dataPath = path.join(process.cwd(), "src/data/imported-questions-master.ts");
 
     if (!fs.existsSync(dataPath)) {
-      result.errors.push('Imported questions file not found. Run import-questions.ts first.');
+      result.errors.push("Imported questions file not found. Run import-questions.ts first.");
       result.passed = false;
       return result;
     }
 
     // Read and parse the generated file (simplified validation)
-    const fileContent = fs.readFileSync(dataPath, 'utf8');
+    const fileContent = fs.readFileSync(dataPath, "utf8");
 
     // Extract question count from metadata
     const totalMatch = fileContent.match(/totalQuestions: (\d+)/);
@@ -97,7 +97,7 @@ function validateQuestionBank(): ValidationResult {
 
     // Basic validation checks
     if (totalQuestions === 0) {
-      result.errors.push('No questions were imported');
+      result.errors.push("No questions were imported");
       result.passed = false;
     } else if (totalQuestions < 200) {
       result.errors.push(`Only ${totalQuestions} questions imported, expected 200+`);
@@ -107,7 +107,7 @@ function validateQuestionBank(): ValidationResult {
     }
 
     // Check for required files
-    const requiredFiles = ['src/data/imported-questions-master.ts', 'src/data/sample-questions.ts'];
+    const requiredFiles = ["src/data/imported-questions-master.ts", "src/data/sample-questions.ts"];
 
     requiredFiles.forEach((file) => {
       const filePath = path.join(process.cwd(), file);
@@ -126,30 +126,30 @@ function validateQuestionBank(): ValidationResult {
 }
 
 function generateValidationReport(result: ValidationResult): void {
-  console.log('\n📋 TCO Question Import Validation Report');
-  console.log('='.repeat(50));
+  console.log("\n📋 TCO Question Import Validation Report");
+  console.log("=".repeat(50));
 
   if (result.passed) {
-    console.log('✅ Validation PASSED');
+    console.log("✅ Validation PASSED");
   } else {
-    console.log('❌ Validation FAILED');
+    console.log("❌ Validation FAILED");
   }
 
   console.log(`📊 Total Questions: ${result.statistics.totalQuestions}`);
 
   if (Object.keys(result.statistics.domainDistribution).length > 0) {
-    console.log('\n📈 Domain Distribution:');
+    console.log("\n📈 Domain Distribution:");
     Object.entries(result.statistics.domainDistribution).forEach(([domain, count]) => {
       console.log(`  ${domain}: ${count} questions`);
     });
   }
 
   if (Object.keys(result.statistics.blueprintCompliance).length > 0) {
-    console.log('\n🎯 Blueprint Compliance:');
+    console.log("\n🎯 Blueprint Compliance:");
     Object.entries(result.statistics.blueprintCompliance).forEach(([domain, data]) => {
       const percentage = ((data.actual / result.statistics.totalQuestions) * 100).toFixed(1);
       const targetPercentage = TCO_DOMAIN_WEIGHTS[domain as TCODomain];
-      const status = data.variance <= data.target * 0.1 ? '✅' : '⚠️';
+      const status = data.variance <= data.target * 0.1 ? "✅" : "⚠️";
       console.log(
         `  ${status} ${domain}: ${data.actual} (${percentage}%) vs target ${data.target} (${targetPercentage}%)`
       );
@@ -157,16 +157,16 @@ function generateValidationReport(result: ValidationResult): void {
   }
 
   if (result.errors.length > 0) {
-    console.log('\n❌ Errors:');
+    console.log("\n❌ Errors:");
     result.errors.forEach((error) => console.log(`  • ${error}`));
   }
 
   if (result.warnings.length > 0) {
-    console.log('\n⚠️ Warnings:');
+    console.log("\n⚠️ Warnings:");
     result.warnings.forEach((warning) => console.log(`  • ${warning}`));
   }
 
-  console.log('\n' + '='.repeat(50));
+  console.log("\n" + "=".repeat(50));
 }
 
 // Run validation if this file is executed directly
