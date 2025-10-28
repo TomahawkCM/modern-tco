@@ -60,6 +60,8 @@ function run(url, preset, outBase) {
       '--ignore-certificate-errors',
       '--no-first-run',
       '--no-default-browser-check',
+      // Force Linux-compatible user data directory to prevent Windows path creation in WSL2
+      `--user-data-dir=/tmp/lighthouse-chrome-${Date.now()}-${Math.random().toString(36).slice(2)}`,
     ];
     try {
       const u = new URL(base);

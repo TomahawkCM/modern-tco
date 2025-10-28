@@ -82,9 +82,10 @@ try {
 export const supabase = supabaseClient;
 
 // Server-side client for admin operations
-export const supabaseAdmin = process.env.SUPABASE_SERVICE_ROLE_KEY
+// Only create if BOTH supabaseUrl and service role key are available
+export const supabaseAdmin = (supabaseUrl && process.env.SUPABASE_SERVICE_ROLE_KEY)
   ? createClient<Database>(
-      (supabaseUrl || ""),
+      supabaseUrl,
       process.env.SUPABASE_SERVICE_ROLE_KEY,
       {
         auth: {

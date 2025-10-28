@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import {
   ArrowLeft,
@@ -105,6 +106,16 @@ function MockExamContent() {
     }
     return undefined;
   }, [timeRemaining, timerStarted, state.currentSession, finishExam]);
+
+  // Lock body scroll when exam is active (no page scrolling)
+  useEffect(() => {
+    if (state.currentSession && !state.currentSession.completed) {
+      document.body.style.overflow = 'hidden';
+      return () => {
+        document.body.style.overflow = '';
+      };
+    }
+  }, [state.currentSession]);
 
   function seededShuffle<T>(arr: T[], seedStr: string): T[] {
     // Simple LCG based on seed string hash
@@ -417,62 +428,68 @@ function MockExamContent() {
     );
   }
 
-  // Question view
+  // Question view - Fixed viewport layout with no page scrolling
   return (
-      <div className="mx-auto max-w-4xl space-y-6">
-        {/* Progress header with timer */}
-        <div className="flex items-center justify-between">
-          <div>
-            <h1 className="text-2xl font-bold text-foreground">Mock Exam</h1>
-            <p className="text-muted-foreground">
-              Question {progress.current} of {progress.total}
-            </p>
+      <div className="mx-auto max-w-4xl flex flex-col h-[calc(100vh-12rem)]">
+        {/* Fixed Header - Timer and Progress */}
+        <div className="flex-none space-y-4">
+          {/* Progress header with timer */}
+          <div className="flex items-center justify-between">
+            <div>
+              <h1 className="text-2xl font-bold text-foreground">Mock Exam</h1>
+              <p className="text-muted-foreground">
+                Question {progress.current} of {progress.total}
+              </p>
+            </div>
+            <div className="flex items-center gap-6">
+              <ExamTimer
+                totalTimeMinutes={105}
+                onTimeUp={() => {
+                  finishExam();
+                  setTimerStarted(false);
+                }}
+                onWarning={(remainingMinutes) => {
+                  console.log(`Timer warning: ${remainingMinutes} minutes remaining`);
+                }}
+              />
+              <Badge
+                variant="outline"
+                className={cn(
+                  "border-white/20",
+                  timeRemaining < 10 * 60 ? "border-red-400 text-red-400" : "text-foreground"
+                )}
+              >
+                {formatTime(timeRemaining)} left
+              </Badge>
+            </div>
           </div>
-          <div className="flex items-center gap-6">
-            <ExamTimer
-              totalTimeMinutes={105}
-              onTimeUp={() => {
-                finishExam();
-                setTimerStarted(false);
-              }}
-              onWarning={(remainingMinutes) => {
-                console.log(`Timer warning: ${remainingMinutes} minutes remaining`);
-              }}
-            />
-            <Badge
-              variant="outline"
-              className={cn(
-                "border-white/20",
-                timeRemaining < 10 * 60 ? "border-red-400 text-red-400" : "text-foreground"
-              )}
-            >
-              {formatTime(timeRemaining)} left
-            </Badge>
-          </div>
+
+          {/* Progress bar */}
+          <Progress
+            value={progress.percentage}
+            className="h-3"
+            aria-label={`Exam progress: ${progress.percentage}%`}
+          />
         </div>
 
-        {/* Progress bar */}
-        <Progress
-          value={progress.percentage}
-          className="h-3"
-          aria-label={`Exam progress: ${progress.percentage}%`}
-        />
+        {/* Scrollable Content - Question Card */}
+        <ScrollArea className="flex-1 my-4">
+          {currentQuestion && (
+            <QuestionCard
+              question={currentQuestion}
+              questionNumber={progress.current}
+              totalQuestions={progress.total}
+              selectedAnswer={selectedAnswer}
+              onAnswerSelect={handleAnswerSelect}
+              showExplanation={false} // Hide explanations in mock exam
+              mode="exam"
+            />
+          )}
+        </ScrollArea>
 
-        {/* Question card */}
-        {currentQuestion && (
-          <QuestionCard
-            question={currentQuestion}
-            questionNumber={progress.current}
-            totalQuestions={progress.total}
-            selectedAnswer={selectedAnswer}
-            onAnswerSelect={handleAnswerSelect}
-            showExplanation={false} // Hide explanations in mock exam
-            mode="exam"
-          />
-        )}
-
-        {/* Navigation and actions */}
-        <div className="flex items-center justify-between">
+        {/* Fixed Footer - Navigation */}
+        <div className="flex-none">
+          <div className="flex items-center justify-between">
           <Button
             variant="outline"
             onClick={handlePrevious}
@@ -515,6 +532,7 @@ function MockExamContent() {
               </>
             )}
           </Button>
+        </div>
         </div>
       </div>
   );

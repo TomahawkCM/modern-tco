@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, memo, useMemo } from "react";
+import { useState, useEffect, memo, useMemo } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -40,6 +40,11 @@ export const QuestionCard = memo(function QuestionCard({
 }: QuestionCardProps) {
   const [localAnswer, setLocalAnswer] = useState(selectedAnswer ?? "");
 
+  // Sync local state with prop changes when question changes
+  useEffect(() => {
+    setLocalAnswer(selectedAnswer ?? "");
+  }, [selectedAnswer]);
+
   const handleAnswerChange = (value: string) => {
     setLocalAnswer(value);
     onAnswerSelect(value);
@@ -53,41 +58,41 @@ export const QuestionCard = memo(function QuestionCard({
 
   return (
     <Card className="question-card mx-auto w-full max-w-4xl">
-      <CardHeader>
-        <div className="mb-4 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <Badge variant="outline" className="text-sm">
+      <CardHeader className="pb-3">
+        <div className="mb-2 flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <Badge variant="outline" className="text-xs">
               Question {questionNumber} of {totalQuestions}
             </Badge>
             <div className="flex items-center gap-1">
-              <Badge variant="secondary">{question.domain}</Badge>
+              <Badge variant="secondary" className="text-xs">{question.domain}</Badge>
             </div>
             <div className="flex items-center gap-1">
               <Badge
                 variant="outline"
-                className={cn("text-sm", getDifficultyColor(question.difficulty))}
+                className={cn("text-xs", getDifficultyColor(question.difficulty))}
               >
                 {question.difficulty}
               </Badge>
             </div>
           </div>
-          <div className="flex items-center gap-1 text-sm text-muted-foreground">
-            <Clock className="h-4 w-4" />
+          <div className="flex items-center gap-1 text-xs text-muted-foreground">
+            <Clock className="h-3 w-3" />
             <span>2 min</span>
           </div>
         </div>
 
-        <CardTitle className="text-xl leading-relaxed text-foreground">
+        <CardTitle className="text-lg leading-snug text-foreground">
           {question.question}
         </CardTitle>
       </CardHeader>
 
-      <CardContent className="space-y-6">
-        <div className="mb-4 flex items-center gap-2">
-          <span className="text-sm text-muted-foreground">Select your answer:</span>
+      <CardContent className="space-y-3 pt-3">
+        <div className="mb-2 flex items-center gap-2">
+          <span className="text-xs text-muted-foreground">Select your answer:</span>
         </div>
 
-        <div className="space-y-4" role="radiogroup">
+        <div className="space-y-2" role="radiogroup">
           {memoizedChoices.map((choice) => {
             const isSelected = localAnswer === choice.id;
             const isCorrectChoice = showResult && choice.id === question.correctAnswerId;
@@ -98,7 +103,7 @@ export const QuestionCard = memo(function QuestionCard({
               <div
                 key={`choice-${choice.id}-${question.id}`}
                 className={cn(
-                  "flex items-center space-x-3 rounded-lg border p-4 transition-all",
+                  "flex items-center space-x-3 rounded-lg border p-3 transition-all",
                   "cursor-pointer hover:bg-accent/50",
                   isSelected && !showResult && "border-primary bg-accent",
                   isCorrectChoice &&
@@ -133,7 +138,7 @@ export const QuestionCard = memo(function QuestionCard({
                 </div>
                 <label
                   htmlFor={`${choice.id}-${question.id}`}
-                  className="flex-1 cursor-pointer text-base leading-relaxed"
+                  className="flex-1 cursor-pointer text-sm leading-snug"
                 >
                   {choice.text}
                 </label>
@@ -147,16 +152,16 @@ export const QuestionCard = memo(function QuestionCard({
         </div>
 
         {showResult && question.explanation && (
-          <Alert className="border-blue-200 bg-blue-50 dark:border-blue-800 dark:bg-blue-900/20">
-            <BookOpen className="h-4 w-4 text-blue-600" />
-            <AlertDescription className="text-blue-800 dark:text-muted-foreground">
+          <Alert className="border-blue-200 bg-blue-50 dark:border-blue-800 dark:bg-blue-900/20 py-2">
+            <BookOpen className="h-3 w-3 text-blue-600" />
+            <AlertDescription className="text-xs text-blue-800 dark:text-muted-foreground">
               <strong>Explanation:</strong> {question.explanation}
             </AlertDescription>
           </Alert>
         )}
 
         {!showResult && onSubmit && (
-          <div className="flex items-center justify-between pt-4">
+          <div className="flex items-center justify-between pt-2">
             <div className="text-sm text-muted-foreground">
               {localAnswer ? "Answer selected" : "Select an answer to continue"}
             </div>
@@ -171,10 +176,10 @@ export const QuestionCard = memo(function QuestionCard({
         )}
 
         {showResult && (
-          <div className="flex items-center justify-center pt-4">
+          <div className="flex items-center justify-center pt-2">
             <div
               className={cn(
-                "flex items-center gap-2 text-lg font-medium",
+                "flex items-center gap-2 text-base font-medium",
                 isCorrect ? "text-[#22c55e]" : "text-red-600"
               )}
             >

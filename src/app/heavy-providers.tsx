@@ -97,18 +97,20 @@ export function PracticeOnlyProviders({ children }: { children: React.ReactNode 
 
 /**
  * ExamOnlyProviders - Subset for exam/assessment pages
- * Includes exam, assessment, and questions contexts
+ * Includes exam, assessment, questions, and progress tracking contexts
  */
 export function ExamOnlyProviders({ children }: { children: React.ReactNode }) {
   return (
     <DatabaseProvider>
-      <QuestionsProvider>
-        <ExamProvider>
-          <AssessmentProvider>
-            {children}
-          </AssessmentProvider>
-        </ExamProvider>
-      </QuestionsProvider>
+      <ProgressProvider>
+        <QuestionsProvider>
+          <ExamProvider>
+            <AssessmentProvider>
+              {children}
+            </AssessmentProvider>
+          </ExamProvider>
+        </QuestionsProvider>
+      </ProgressProvider>
     </DatabaseProvider>
   );
 }

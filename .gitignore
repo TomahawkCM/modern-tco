@@ -43,6 +43,9 @@ hive-mind-prompt-*.txt
 .next/
 # Windows cache paths (use forward slashes for git compatibility)
 C:/**
+C:\\**
+C:\\Users/**
+CUsers*
 **/AppData/**
 *lighthouse*/**
 *Cache/**

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback, useMemo, memo } from "react";
 import dynamic from "next/dynamic";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { AppHeader } from "./app-header";
@@ -14,7 +14,7 @@ import { useGlobalNavActive } from "@/contexts/GlobalNavContext";
 
 interface MainLayoutProps { children: React.ReactNode; asGlobal?: boolean }
 
-export function MainLayout({ children, asGlobal = false }: MainLayoutProps) {
+function MainLayoutComponent({ children, asGlobal = false }: MainLayoutProps) {
   // ALL HOOKS MUST BE CALLED BEFORE ANY EARLY RETURNS (Rules of Hooks)
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [isDesktop, setIsDesktop] = useState(false);
@@ -91,7 +91,27 @@ export function MainLayout({ children, asGlobal = false }: MainLayoutProps) {
     return <>{children}</>;
   }
   */
-  console.log('[MainLayout] Rendering full layout - asGlobal:', asGlobal, 'globalNavActive:', globalNavActive);
+
+  // Optimized: Only log in development mode to reduce console spam
+  if (process.env.NODE_ENV === 'development') {
+    console.log('[MainLayout] Rendering full layout - asGlobal:', asGlobal, 'globalNavActive:', globalNavActive);
+  }
+
+  // Memoize callbacks to prevent child re-renders
+  const handleSidebarClose = useCallback(() => setSidebarOpen(false), []);
+  const handleSidebarOpen = useCallback(() => setSidebarOpen(true), []);
+  const handleTabChange = useCallback((tabName: string) => {
+    console.log(`Navigating to: ${tabName}`);
+  }, []);
+
+  // Memoize main content className
+  const mainClassName = useMemo(() => cn(
+    "relative z-20 pt-24 px-4 pb-8 transition-all duration-300",
+    // Desktop: Add left margin for persistent sidebar
+    isDesktop ? "md:ml-64" : "",
+    // Mobile: Full width
+    "ml-0"
+  ), [isDesktop]);
 
   return (
     <div className="relative min-h-screen">
@@ -104,17 +124,15 @@ export function MainLayout({ children, asGlobal = false }: MainLayoutProps) {
           <CyberpunkNavBar
             navItems={[]}
             brandName="TANIUM TCO"
-            onTabChange={(tabName) => {
-              console.log(`Navigating to: ${tabName}`);
-            }}
+            onTabChange={handleTabChange}
           />
-        
+
         {/* Mobile Menu Button */}
         <Button
           variant="ghost"
           size="icon"
           className="fixed top-4 left-4 z-40 md:hidden glass border-white/10 hover:bg-white/10"
-          onClick={() => setSidebarOpen(true)}
+          onClick={handleSidebarOpen}
           aria-label="Open navigation menu"
         >
           <Menu className="h-5 w-5 text-foreground" />
@@ -127,7 +145,7 @@ export function MainLayout({ children, asGlobal = false }: MainLayoutProps) {
         <div className="relative z-40">
           <Sidebar
             isOpen={sidebarOpen || isDesktop}
-            onClose={() => setSidebarOpen(false)}
+            onClose={handleSidebarClose}
           />
         </div>
       </ErrorBoundary>
@@ -135,13 +153,7 @@ export function MainLayout({ children, asGlobal = false }: MainLayoutProps) {
       {/* Main content with proper responsive spacing - Higher than background */}
       <main
         id="main-content"
-        className={cn(
-          "relative z-20 pt-24 px-4 pb-8 transition-all duration-300",
-          // Desktop: Add left margin for persistent sidebar
-          isDesktop ? "md:ml-64" : "",
-          // Mobile: Full width
-          "ml-0"
-        )}
+        className={mainClassName}
         tabIndex={-1}
         role="main"
         aria-label="Main content"
@@ -161,3 +173,6 @@ export function MainLayout({ children, asGlobal = false }: MainLayoutProps) {
     </div>
   );
 }
+
+// Export memoized version to prevent unnecessary re-renders
+export const MainLayout = memo(MainLayoutComponent);

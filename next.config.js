@@ -26,12 +26,6 @@ const nextConfig = {
   // ...(isProd ? { basePath: '/tanium' } : {}),
   skipTrailingSlashRedirect: true,
   generateEtags: false,
-  eslint: {
-    dirs: ["src"],
-    // Allow production builds to succeed even if there are ESLint errors.
-    // Run `npm run lint` locally to address issues incrementally.
-    ignoreDuringBuilds: true,
-  },
   // Enforce type safety in CI/build
   typescript: {
     ignoreBuildErrors: false,
