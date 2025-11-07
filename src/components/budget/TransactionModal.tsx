@@ -1,0 +1,659 @@
+'use client';
+
+/**
+ * Transaction Modal Component
+ * Add or edit transactions
+ */
+
+import { useState, useEffect } from 'react';
+import type { Transaction, Category, Account } from '@/types/budget';
+import { format } from 'date-fns';
+import { recordCorrection, categorizeTransaction } from '@/lib/categorization/rules';
+import { db, storeReceipt, getTransactionReceipts, getThumbnailBlobUrl, deleteReceipt } from '@/lib/budget-db';
+import { CategoryCombobox } from './CategoryCombobox';
+import { ReceiptUpload } from './ReceiptUpload';
+import { ConfidenceMeter } from './ConfidenceMeter';
+import { Paperclip, FileImage, Trash2, Brain } from 'lucide-react';
+import type { Receipt } from '@/types/budget';
+import type { ExtractedReceiptData } from '@/lib/receipt-ocr';
+
+interface TransactionModalProps {
+  transaction: Transaction | null;
+  categories: Category[];
+  accounts: Account[];
+  onSave: (transaction: Transaction) => void;
+  onClose: () => void;
+}
+
+export function TransactionModal({
+  transaction,
+  categories,
+  accounts,
+  onSave,
+  onClose,
+}: TransactionModalProps) {
+  const [date, setDate] = useState(
+    transaction?.date ? format(new Date(transaction.date), 'yyyy-MM-dd') : format(new Date(), 'yyyy-MM-dd')
+  );
+  const [description, setDescription] = useState(transaction?.description || '');
+  const [amount, setAmount] = useState(transaction?.amount ? Math.abs(transaction.amount).toString() : '');
+  const [type, setType] = useState<'income' | 'expense'>(transaction?.amount && transaction.amount > 0 ? 'income' : 'expense');
+  const [category, setCategory] = useState(transaction?.category || '');
+  const [subcategory, setSubcategory] = useState(transaction?.subcategory || '');
+  const [accountId, setAccountId] = useState(transaction?.accountId || (accounts[0]?.id || ''));
+  const [notes, setNotes] = useState(transaction?.notes || '');
+  const [tags, setTags] = useState(transaction?.tags?.join(', ') || '');
+  const [showLearnMessage, setShowLearnMessage] = useState(false);
+  const [showCreateCategory, setShowCreateCategory] = useState(false);
+  const [newCategoryName, setNewCategoryName] = useState('');
+  const [newCategorySubcats, setNewCategorySubcats] = useState('');
+  const [showReceiptUpload, setShowReceiptUpload] = useState(false);
+  const [attachedReceipt, setAttachedReceipt] = useState<File | null>(null);
+  const [existingReceipts, setExistingReceipts] = useState<Receipt[]>([]);
+
+  // Track original category for learning
+  const originalCategory = transaction?.category || null;
+  const originalSubcategory = transaction?.subcategory || null;
+
+  // Auto-categorization confidence
+  const [autoCategorizationConfidence, setAutoCategorizationConfidence] = useState<number | null>(null);
+  const [showConfidenceMeter, setShowConfidenceMeter] = useState(false);
+
+  const filteredCategories = categories; // Show all categories regardless of transaction type
+  const selectedCategory = filteredCategories.find(c => c.name === category);
+
+  // Auto-categorize on description change (for new transactions)
+  useEffect(() => {
+    if (!transaction && description.trim()) {
+      const result = categorizeTransaction(description);
+      if (result && !category) {
+        setCategory(result.category);
+        setSubcategory(result.subcategory || '');
+        setAutoCategorizationConfidence(result.confidence);
+        setShowConfidenceMeter(true);
+      }
+    }
+  }, [description, transaction, category]);
+
+  // Load existing receipts when editing a transaction
+  useEffect(() => {
+    if (transaction?.id) {
+      getTransactionReceipts(transaction.id).then(receipts => {
+        setExistingReceipts(receipts);
+      });
+    }
+  }, [transaction?.id]);
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+
+    const amountNum = parseFloat(amount);
+    if (isNaN(amountNum) || amountNum <= 0) {
+      alert('Please enter a valid amount');
+      return;
+    }
+
+    const newTransaction: Transaction = {
+      id: transaction?.id || `tx_${Date.now()}`,
+      accountId,
+      date: new Date(date),
+      description,
+      amount: type === 'income' ? amountNum : -amountNum,
+      category: category || null,
+      subcategory: subcategory || null,
+      notes,
+      isRecurring: false,
+      tags: tags.split(',').map(t => t.trim()).filter(Boolean),
+      createdAt: transaction?.createdAt || new Date(),
+      updatedAt: new Date(),
+    };
+
+    // Learn from category corrections
+    if (transaction && category && (category !== originalCategory || subcategory !== originalSubcategory)) {
+      // Get original auto-categorization for this description
+      const autoCategorization = categorizeTransaction(description);
+
+      recordCorrection({
+        originalDescription: description,
+        suggestedCategory: autoCategorization?.category || originalCategory || 'Uncategorized',
+        suggestedSubcategory: autoCategorization?.subcategory || originalSubcategory || undefined,
+        correctedCategory: category,
+        correctedSubcategory: subcategory || undefined,
+        timestamp: new Date(),
+      });
+
+      // Show brief confirmation message
+      setShowLearnMessage(true);
+      setTimeout(() => setShowLearnMessage(false), 3000);
+    }
+
+    // Save the transaction first
+    onSave(newTransaction);
+
+    // Store the receipt if one was attached
+    if (attachedReceipt) {
+      try {
+        await storeReceipt(newTransaction.id, attachedReceipt);
+      } catch (error) {
+        console.error('Failed to store receipt:', error);
+        // Transaction is saved, but receipt storage failed
+        // We could show an error message here if needed
+      }
+    }
+  }
+
+  async function handleDeleteReceipt(receiptId: string) {
+    if (!transaction?.id) return;
+
+    if (confirm('Are you sure you want to delete this receipt?')) {
+      try {
+        await deleteReceipt(receiptId, transaction.id);
+        setExistingReceipts(existingReceipts.filter(r => r.id !== receiptId));
+      } catch (error) {
+        console.error('Failed to delete receipt:', error);
+        alert('Failed to delete receipt');
+      }
+    }
+  }
+
+  // Phase 7.3.1: Handle OCR data extraction
+  function handleOCRDataExtracted(data: ExtractedReceiptData) {
+    // Pre-fill form fields with extracted data
+    if (data.merchant && !description) {
+      setDescription(data.merchant);
+    }
+
+    if (data.amount && !amount) {
+      setAmount(data.amount.toString());
+      // Assume expenses by default (receipts are usually for purchases)
+      setType('expense');
+    }
+
+    if (data.date && !transaction) {
+      // Only set date for new transactions
+      setDate(format(data.date, 'yyyy-MM-dd'));
+    }
+
+    // Try to auto-categorize based on merchant name
+    if (data.merchant && !category) {
+      const result = categorizeTransaction(data.merchant);
+      if (result) {
+        setCategory(result.category);
+        setSubcategory(result.subcategory || '');
+        setAutoCategorizationConfidence(result.confidence);
+        setShowConfidenceMeter(true);
+      }
+    }
+  }
+
+  async function createNewCategory() {
+    if (!newCategoryName.trim()) {
+      alert('Category name is required');
+      return;
+    }
+
+    try {
+      const subcatsArray = newCategorySubcats
+        .split(',')
+        .map(s => s.trim())
+        .filter(Boolean);
+
+      const newCat: Category = {
+        id: `cat_${Date.now()}`,
+        name: newCategoryName.trim(),
+        type,
+        subcategories: subcatsArray,
+        color: '#3b82f6',
+        icon: 'tag',
+        isDefault: false,
+        order: categories.length + 1,
+        createdAt: new Date(),
+      };
+
+      await db.categories.add(newCat);
+
+      // Reload categories and select the new one
+      const updatedCategories = await db.categories.toArray();
+      // Update parent component's categories (would need callback)
+      setCategory(newCat.name);
+      setShowCreateCategory(false);
+      setNewCategoryName('');
+      setNewCategorySubcats('');
+
+      alert(`Category "${newCat.name}" created!`);
+    } catch (error) {
+      console.error('Error creating category:', error);
+      alert('Failed to create category');
+    }
+  }
+
+  return (
+    <div className="fixed inset-0 bg-black/50 flex items-end sm:items-center justify-center z-50">
+      {/* Modal - Phase 3.1.5: Mobile-optimized with bottom sheet on mobile, centered on desktop */}
+      <div className="bg-white rounded-t-2xl sm:rounded-lg shadow-xl w-full sm:max-w-2xl sm:mx-4 max-h-[85vh] sm:max-h-[90vh] overflow-hidden flex flex-col">
+        <div className="p-4 sm:p-6 border-b border-gray-200 flex-shrink-0 bg-white">
+          <div className="flex items-center justify-between">
+            <h2 className="text-lg sm:text-xl font-semibold text-gray-900">
+              {transaction ? 'Edit Transaction' : 'Add Transaction'}
+            </h2>
+            <button
+              type="button"
+              onClick={onClose}
+              className="p-2 rounded-lg text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-colors"
+              aria-label="Close modal"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <div className="overflow-y-auto flex-1">
+
+        <form onSubmit={handleSubmit} className="p-4 sm:p-6 space-y-4">
+          {/* Learning Message */}
+          {showLearnMessage && (
+            <div className="bg-green-50 border border-green-200 rounded-lg p-4 flex items-start gap-2">
+              <div className="flex-shrink-0 text-green-600">✓</div>
+              <div className="text-sm text-green-800">
+                <div className="font-medium">Learned!</div>
+                <div className="text-green-700 mt-0.5">
+                  After 3 similar corrections, future transactions from this merchant will auto-categorize.
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Type Toggle */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">Type</label>
+            <div className="grid grid-cols-2 gap-4">
+              <button
+                type="button"
+                onClick={() => {
+                  setType('expense');
+                  setCategory('');
+                  setSubcategory('');
+                }}
+                className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+                  type === 'expense'
+                    ? 'bg-red-600 text-white'
+                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                }`}
+              >
+                Expense
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  setType('income');
+                  setCategory('');
+                  setSubcategory('');
+                }}
+                className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+                  type === 'income'
+                    ? 'bg-green-600 text-white'
+                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                }`}
+              >
+                Income
+              </button>
+            </div>
+          </div>
+
+          {/* Description */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Description *
+            </label>
+            <input
+              type="text"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              placeholder="e.g., Grocery shopping at Sobeys"
+              className="w-full h-12 px-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+              required
+            />
+          </div>
+
+          {/* Amount and Date - Responsive: Stack on mobile, side-by-side on larger screens */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Amount *
+              </label>
+              <div className="relative">
+                <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500">$</span>
+                <input
+                  type="number"
+                  value={amount}
+                  onChange={(e) => setAmount(e.target.value)}
+                  placeholder="0.00"
+                  step="0.01"
+                  min="0"
+                  inputMode="decimal"
+                  className="w-full h-12 pl-8 pr-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                  required
+                />
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Date *
+              </label>
+              <input
+                type="date"
+                value={date}
+                onChange={(e) => setDate(e.target.value)}
+                className="w-full h-12 px-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                required
+              />
+            </div>
+          </div>
+
+          {/* Category and Subcategory */}
+          <div className="space-y-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Category
+              </label>
+              {!showCreateCategory ? (
+                <div className="space-y-2">
+                  <CategoryCombobox
+                    options={[
+                      ...filteredCategories.map(cat => ({
+                        value: cat.name,
+                        label: cat.name,
+                      })),
+                      { value: '__create__', label: '+ Create New Category' }
+                    ]}
+                    value={category}
+                    onChange={(value) => {
+                      if (value === '__create__') {
+                        setShowCreateCategory(true);
+                        setCategory('');
+                      } else {
+                        setCategory(value);
+                        setSubcategory('');
+                      }
+                    }}
+                    placeholder="Select category..."
+                  />
+                </div>
+              ) : (
+                <div className="space-y-2 p-4 border-2 border-teal-500 rounded-lg bg-teal-50">
+                  <input
+                    type="text"
+                    value={newCategoryName}
+                    onChange={(e) => setNewCategoryName(e.target.value)}
+                    placeholder="Category name..."
+                    className="w-full px-4 py-2 text-sm border border-gray-300 rounded focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                  />
+                  <input
+                    type="text"
+                    value={newCategorySubcats}
+                    onChange={(e) => setNewCategorySubcats(e.target.value)}
+                    placeholder="Subcategories (optional, comma-separated)"
+                    className="w-full px-4 py-2 text-sm border border-gray-300 rounded focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                  />
+                  <div className="flex gap-2">
+                    <button
+                      type="button"
+                      onClick={createNewCategory}
+                      className="flex-1 px-4 py-2 text-sm bg-teal-600 text-white rounded hover:bg-teal-700"
+                    >
+                      Create
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setShowCreateCategory(false);
+                        setNewCategoryName('');
+                        setNewCategorySubcats('');
+                      }}
+                      className="flex-1 px-4 py-2 text-sm border border-gray-300 text-gray-700 rounded hover:bg-gray-50"
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Subcategory
+              </label>
+              <CategoryCombobox
+                options={[
+                  { value: '', label: 'None' },
+                  ...(selectedCategory?.subcategories.map(sub => ({
+                    value: sub,
+                    label: sub,
+                  })) || [])
+                ]}
+                value={subcategory}
+                onChange={setSubcategory}
+                placeholder="Select subcategory..."
+                disabled={!selectedCategory || selectedCategory.subcategories.length === 0}
+              />
+            </div>
+
+            {/* Confidence Meter for Auto-Categorization */}
+            {showConfidenceMeter && autoCategorizationConfidence !== null && category && (
+              <div className="pt-2">
+                <ConfidenceMeter
+                  confidence={autoCategorizationConfidence}
+                  category={category}
+                  subcategory={subcategory}
+                  showLearnButton={true}
+                  onLearnFromThis={() => {
+                    // Explicit learning - confirm the auto-categorization is correct
+                    recordCorrection({
+                      originalDescription: description,
+                      suggestedCategory: category,
+                      suggestedSubcategory: subcategory || undefined,
+                      correctedCategory: category,
+                      correctedSubcategory: subcategory || undefined,
+                      timestamp: new Date(),
+                    });
+                    setShowLearnMessage(true);
+                    setTimeout(() => setShowLearnMessage(false), 3000);
+                    setShowConfidenceMeter(false);
+                  }}
+                />
+              </div>
+            )}
+          </div>
+
+          {/* Account */}
+          {accounts.length > 0 && (
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Account
+              </label>
+              <select
+                value={accountId}
+                onChange={(e) => setAccountId(e.target.value)}
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+              >
+                {accounts.map(acc => (
+                  <option key={acc.id} value={acc.id}>
+                    {acc.name} ({acc.institution})
+                  </option>
+                ))}
+              </select>
+            </div>
+          )}
+
+          {/* Notes */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Notes
+            </label>
+            <textarea
+              value={notes}
+              onChange={(e) => setNotes(e.target.value)}
+              placeholder="Add any additional notes..."
+              rows={3}
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+            />
+          </div>
+
+          {/* Tags */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Tags (comma-separated)
+            </label>
+            <input
+              type="text"
+              value={tags}
+              onChange={(e) => setTags(e.target.value)}
+              placeholder="e.g., groceries, weekly, essential"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+            />
+          </div>
+
+          {/* Receipt Upload - Phase 7.1.1 & 7.2.2: Receipt storage and thumbnails */}
+          <div className="space-y-4">
+            <label className="block text-sm font-medium text-gray-700">
+              Receipt Attachments
+            </label>
+
+            {/* Existing Receipts - Phase 7.2.2: Display thumbnails */}
+            {existingReceipts.length > 0 && (
+              <div className="space-y-2">
+                <p className="text-xs text-gray-600">Existing receipts ({existingReceipts.length})</p>
+                <div className="grid grid-cols-3 sm:grid-cols-4 gap-2">
+                  {existingReceipts.map((receipt) => {
+                    const thumbnailUrl = receipt.thumbnail ? getThumbnailBlobUrl(receipt) : null;
+                    const isPdf = receipt.mimeType === 'application/pdf';
+
+                    return (
+                      <div
+                        key={receipt.id}
+                        className="relative group"
+                      >
+                        <div className="aspect-square bg-gray-100 rounded-lg overflow-hidden border border-gray-200 hover:border-teal-400 transition-colors">
+                          {thumbnailUrl && !isPdf ? (
+                            <img
+                              src={thumbnailUrl}
+                              alt={receipt.filename}
+                              className="w-full h-full object-cover"
+                              onLoad={() => URL.revokeObjectURL(thumbnailUrl)}
+                            />
+                          ) : (
+                            <div className="w-full h-full flex flex-col items-center justify-center p-2">
+                              <FileImage className="w-8 h-8 text-gray-400 mb-2" />
+                              <span className="text-xs text-gray-500 text-center truncate w-full">
+                                {isPdf ? 'PDF' : receipt.filename.split('.').pop()?.toUpperCase()}
+                              </span>
+                            </div>
+                          )}
+                        </div>
+
+                        {/* Hover overlay with actions */}
+                        <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg flex items-center justify-center gap-2">
+                          <button
+                            type="button"
+                            onClick={() => {
+                              // View full receipt (could open in modal or new tab)
+                              const fullUrl = URL.createObjectURL(receipt.blob);
+                              window.open(fullUrl, '_blank');
+                              setTimeout(() => URL.revokeObjectURL(fullUrl), 1000);
+                            }}
+                            className="p-2.5 bg-white rounded text-gray-700 hover:bg-gray-100"
+                            title="View full receipt"
+                          >
+                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                            </svg>
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => handleDeleteReceipt(receipt.id)}
+                            className="p-2.5 bg-red-500 rounded text-white hover:bg-red-600"
+                            title="Delete receipt"
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </button>
+                        </div>
+
+                        {/* Filename tooltip */}
+                        <div className="mt-2">
+                          <p className="text-xs text-gray-600 truncate" title={receipt.filename}>
+                            {receipt.filename}
+                          </p>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+
+            {/* New Receipt Upload */}
+            {!showReceiptUpload && !attachedReceipt && (
+              <button
+                type="button"
+                onClick={() => setShowReceiptUpload(true)}
+                className="flex items-center gap-2 px-4 py-2.5 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors w-full justify-center min-h-[44px]"
+              >
+                <Paperclip className="w-4 h-4" />
+                <span>Add New Receipt</span>
+              </button>
+            )}
+
+            {attachedReceipt && (
+              <div className="flex items-center justify-between p-4 bg-green-50 border border-green-200 rounded-lg">
+                <div className="flex items-center gap-2">
+                  <Paperclip className="w-4 h-4 text-green-600" />
+                  <span className="text-sm text-green-800 font-medium">New: {attachedReceipt.name}</span>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setAttachedReceipt(null)}
+                  className="text-red-600 hover:text-red-700 text-sm font-medium"
+                >
+                  Remove
+                </button>
+              </div>
+            )}
+
+            {showReceiptUpload && !attachedReceipt && (
+              <ReceiptUpload
+                onFileAccepted={(file) => {
+                  setAttachedReceipt(file);
+                  setShowReceiptUpload(false);
+                }}
+                onClose={() => setShowReceiptUpload(false)}
+                onDataExtracted={handleOCRDataExtracted}
+              />
+            )}
+          </div>
+
+          {/* Actions - Mobile-optimized: Full-width buttons with proper spacing */}
+          <div className="flex gap-4 pt-4 border-t border-gray-200">
+            <button
+              type="button"
+              onClick={onClose}
+              className="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors font-medium min-h-[44px]"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              className="flex-1 px-4 py-2 bg-teal-500 text-white rounded-lg hover:bg-teal-600 transition-colors font-medium min-h-[44px]"
+            >
+              {transaction ? 'Update' : 'Add'} Transaction
+            </button>
+          </div>
+        </form>
+        </div>
+      </div>
+    </div>
+  );
+}

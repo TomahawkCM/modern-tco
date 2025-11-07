@@ -1,0 +1,393 @@
+'use client';
+
+/**
+ * Reports Page
+ * Financial reports and visualizations
+ */
+
+import { useState, useEffect } from 'react';
+import { BarChart3, PieChart as PieChartIcon, TrendingUp, Calendar } from 'lucide-react';
+import { db } from '@/lib/budget-db';
+import type { Transaction, Category } from '@/types/budget';
+import { SpendingHeatMap } from '@/components/budget/SpendingHeatMap';
+import { SpendingTrendChart } from '@/components/budget/SpendingTrendChart';
+import {
+  LineChart,
+  Line,
+  BarChart,
+  Bar,
+  PieChart,
+  Pie,
+  Cell,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+} from 'recharts';
+
+export default function ReportsPage() {
+  const [transactions, setTransactions] = useState<Transaction[]>([]);
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [timeRange, setTimeRange] = useState<'month' | 'quarter' | 'year' | 'all'>('month');
+
+  useEffect(() => {
+    loadData();
+  }, []);
+
+  async function loadData() {
+    try {
+      const [txs, cats] = await Promise.all([
+        db.transactions.toArray(),
+        db.categories.toArray(),
+      ]);
+      setTransactions(txs);
+      setCategories(cats);
+    } catch (error) {
+      console.error('Error loading reports data:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center h-64">
+        <div className="text-center">
+          <div className="w-16 h-16 border-4 border-teal-600 border-t-transparent rounded-full animate-spin mx-auto"></div>
+          <p className="mt-4 text-gray-600">Loading reports...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Filter transactions by time range
+  const filteredTransactions = filterByTimeRange(transactions, timeRange);
+
+  // Calculate spending by category
+  const categorySpending = calculateCategorySpending(filteredTransactions, categories);
+
+  // Calculate monthly trends
+  const monthlyTrends = calculateMonthlyTrends(transactions);
+
+  // Calculate income vs expenses
+  const incomeExpenses = calculateIncomeExpenses(filteredTransactions);
+
+  // Top spending categories
+  const topCategories = categorySpending
+    .sort((a, b) => b.value - a.value)
+    .slice(0, 5);
+
+  return (
+    <div className="space-y-6">
+      {/* Header */}
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-3xl font-bold text-gray-900">Reports & Insights</h1>
+          <p className="text-gray-600 mt-2">Visualize your financial data</p>
+        </div>
+
+        {/* Time Range Selector */}
+        <div className="flex gap-2">
+          {(['month', 'quarter', 'year', 'all'] as const).map((range) => (
+            <button
+              key={range}
+              onClick={() => setTimeRange(range)}
+              className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+                timeRange === range
+                  ? 'bg-teal-600 text-white'
+                  : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50'
+              }`}
+            >
+              {range.charAt(0).toUpperCase() + range.slice(1)}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Summary Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+        <div className="bg-white rounded-lg shadow p-6">
+          <div className="flex items-center gap-2 text-gray-600 mb-2">
+            <TrendingUp className="w-5 h-5" />
+            <p className="text-sm">Total Income</p>
+          </div>
+          <p className="text-3xl font-bold text-green-600">
+            ${incomeExpenses.income.toLocaleString('en-US', { minimumFractionDigits: 2 })}
+          </p>
+        </div>
+
+        <div className="bg-white rounded-lg shadow p-6">
+          <div className="flex items-center gap-2 text-gray-600 mb-2">
+            <TrendingUp className="w-5 h-5 rotate-180" />
+            <p className="text-sm">Total Expenses</p>
+          </div>
+          <p className="text-3xl font-bold text-red-600">
+            ${incomeExpenses.expenses.toLocaleString('en-US', { minimumFractionDigits: 2 })}
+          </p>
+        </div>
+
+        <div className="bg-white rounded-lg shadow p-6">
+          <div className="flex items-center gap-2 text-gray-600 mb-2">
+            <PieChartIcon className="w-5 h-5" />
+            <p className="text-sm">Net Savings</p>
+          </div>
+          <p className={`text-3xl font-bold ${incomeExpenses.net >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+            ${incomeExpenses.net.toLocaleString('en-US', { minimumFractionDigits: 2 })}
+          </p>
+        </div>
+
+        <div className="bg-white rounded-lg shadow p-6">
+          <div className="flex items-center gap-2 text-gray-600 mb-2">
+            <BarChart3 className="w-5 h-5" />
+            <p className="text-sm">Savings Rate</p>
+          </div>
+          <p className="text-3xl font-bold text-teal-600">
+            {incomeExpenses.savingsRate.toFixed(1)}%
+          </p>
+        </div>
+      </div>
+
+      {/* Charts Grid */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* Spending by Category - Pie Chart */}
+        <div className="bg-white rounded-lg shadow p-6">
+          <h2 className="text-lg font-semibold text-gray-900 mb-4">Spending by Category</h2>
+          {categorySpending.length > 0 ? (
+            <ResponsiveContainer width="100%" height={300}>
+              <PieChart>
+                <Pie
+                  data={categorySpending}
+                  cx="50%"
+                  cy="50%"
+                  labelLine={false}
+                  label={({ name, percent }) => `${name}: ${((percent ?? 0) * 100).toFixed(0)}%`}
+                  outerRadius={80}
+                  fill="#8884d8"
+                  dataKey="value"
+                >
+                  {categorySpending.map((entry, index) => (
+                    <Cell key={`cell-${index}`} fill={entry.color} />
+                  ))}
+                </Pie>
+                <Tooltip formatter={(value: number) => `$${value.toFixed(2)}`} />
+              </PieChart>
+            </ResponsiveContainer>
+          ) : (
+            <p className="text-gray-500 text-center py-12">No spending data available</p>
+          )}
+        </div>
+
+        {/* Top Spending Categories - Bar Chart */}
+        <div className="bg-white rounded-lg shadow p-6">
+          <h2 className="text-lg font-semibold text-gray-900 mb-4">Top 5 Categories</h2>
+          {topCategories.length > 0 ? (
+            <ResponsiveContainer width="100%" height={300}>
+              <BarChart data={topCategories}>
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="name" />
+                <YAxis />
+                <Tooltip formatter={(value: number) => `$${value.toFixed(2)}`} />
+                <Bar dataKey="value" fill="#3b82f6" />
+              </BarChart>
+            </ResponsiveContainer>
+          ) : (
+            <p className="text-gray-500 text-center py-12">No data available</p>
+          )}
+        </div>
+
+        {/* Monthly Trends - Line Chart */}
+        <div className="bg-white rounded-lg shadow p-6 lg:col-span-2">
+          <h2 className="text-lg font-semibold text-gray-900 mb-4">Income vs Expenses (Last 6 Months)</h2>
+          {monthlyTrends.length > 0 ? (
+            <ResponsiveContainer width="100%" height={300}>
+              <LineChart data={monthlyTrends}>
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="month" />
+                <YAxis />
+                <Tooltip formatter={(value: number) => `$${value.toFixed(2)}`} />
+                <Legend />
+                <Line type="monotone" dataKey="income" stroke="#22c55e" strokeWidth={2} name="Income" />
+                <Line type="monotone" dataKey="expenses" stroke="#ef4444" strokeWidth={2} name="Expenses" />
+                <Line type="monotone" dataKey="net" stroke="#3b82f6" strokeWidth={2} name="Net" />
+              </LineChart>
+            </ResponsiveContainer>
+          ) : (
+            <p className="text-gray-500 text-center py-12">No trend data available</p>
+          )}
+        </div>
+      </div>
+
+      {/* Spending Trend & Forecast */}
+      <SpendingTrendChart transactions={filteredTransactions} monthsBack={6} forecastDays={30} />
+
+      {/* Spending Heat Map */}
+      <SpendingHeatMap transactions={filteredTransactions} />
+
+      {/* Category Breakdown Table */}
+      <div className="bg-white rounded-lg shadow overflow-hidden">
+        <div className="p-6 border-b border-gray-200">
+          <h2 className="text-lg font-semibold text-gray-900">Category Breakdown</h2>
+        </div>
+        <div className="overflow-x-auto">
+          <table className="w-full">
+            <thead className="bg-gray-50">
+              <tr>
+                <th className="px-6 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Category
+                </th>
+                <th className="px-6 py-2 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Amount
+                </th>
+                <th className="px-6 py-2 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  % of Total
+                </th>
+                <th className="px-6 py-2 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Transactions
+                </th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-gray-200">
+              {categorySpending.map((cat) => (
+                <tr key={cat.name} className="hover:bg-gray-50">
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <div className="flex items-center gap-2">
+                      <div
+                        className="w-3 h-3 rounded-full"
+                        style={{ backgroundColor: cat.color }}
+                      />
+                      <span className="font-medium text-gray-900">{cat.name}</span>
+                    </div>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-right font-semibold text-gray-900">
+                    ${cat.value.toFixed(2)}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-right text-gray-600">
+                    {cat.percentage.toFixed(1)}%
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-right text-gray-600">
+                    {cat.count}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// Helper functions
+
+function filterByTimeRange(transactions: Transaction[], range: 'month' | 'quarter' | 'year' | 'all'): Transaction[] {
+  if (range === 'all') return transactions;
+
+  const now = new Date();
+  const cutoffDate = new Date();
+
+  switch (range) {
+    case 'month':
+      cutoffDate.setMonth(now.getMonth() - 1);
+      break;
+    case 'quarter':
+      cutoffDate.setMonth(now.getMonth() - 3);
+      break;
+    case 'year':
+      cutoffDate.setFullYear(now.getFullYear() - 1);
+      break;
+  }
+
+  return transactions.filter(tx => new Date(tx.date) >= cutoffDate);
+}
+
+function calculateCategorySpending(transactions: Transaction[], categories: Category[]) {
+  const spending = new Map<string, { value: number; count: number; color: string }>();
+
+  transactions
+    .filter(tx => tx.amount < 0) // Only expenses
+    .forEach(tx => {
+      const category = tx.category || 'Uncategorized';
+      const existing = spending.get(category) || { value: 0, count: 0, color: '#64748b' };
+      const cat = categories.find(c => c.name === category);
+
+      spending.set(category, {
+        value: existing.value + Math.abs(tx.amount),
+        count: existing.count + 1,
+        color: cat?.color || '#64748b',
+      });
+    });
+
+  const total = Array.from(spending.values()).reduce((sum, cat) => sum + cat.value, 0);
+
+  return Array.from(spending.entries()).map(([name, data]) => ({
+    name,
+    value: data.value,
+    count: data.count,
+    color: data.color,
+    percentage: total > 0 ? (data.value / total) * 100 : 0,
+  }));
+}
+
+function calculateMonthlyTrends(transactions: Transaction[]) {
+  const monthlyData = new Map<string, { income: number; expenses: number }>();
+
+  // Get last 6 months
+  const months: string[] = [];
+  for (let i = 5; i >= 0; i--) {
+    const date = new Date();
+    date.setMonth(date.getMonth() - i);
+    const key = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
+    months.push(key);
+    monthlyData.set(key, { income: 0, expenses: 0 });
+  }
+
+  transactions.forEach(tx => {
+    const date = new Date(tx.date);
+    const key = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
+
+    if (monthlyData.has(key)) {
+      const data = monthlyData.get(key)!;
+      if (tx.amount > 0) {
+        data.income += tx.amount;
+      } else {
+        data.expenses += Math.abs(tx.amount);
+      }
+    }
+  });
+
+  return months.map(key => {
+    const data = monthlyData.get(key)!;
+    const [year, month] = key.split('-');
+    const monthName = new Date(parseInt(year), parseInt(month) - 1).toLocaleDateString('en-US', {
+      month: 'short',
+      year: '2-digit',
+    });
+
+    return {
+      month: monthName,
+      income: data.income,
+      expenses: data.expenses,
+      net: data.income - data.expenses,
+    };
+  });
+}
+
+function calculateIncomeExpenses(transactions: Transaction[]) {
+  const income = transactions
+    .filter(tx => tx.amount > 0)
+    .reduce((sum, tx) => sum + tx.amount, 0);
+
+  const expenses = Math.abs(
+    transactions
+      .filter(tx => tx.amount < 0)
+      .reduce((sum, tx) => sum + tx.amount, 0)
+  );
+
+  const net = income - expenses;
+  const savingsRate = income > 0 ? (net / income) * 100 : 0;
+
+  return { income, expenses, net, savingsRate };
+}
