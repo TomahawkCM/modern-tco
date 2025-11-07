@@ -79,7 +79,11 @@ export function StudyModuleCard({ module, progress, className }: StudyModuleCard
                 </span>
                 <span className="font-medium text-primary">{progressPercentage}%</span>
               </div>
-              <Progress value={progressPercentage} className="h-2" />
+              <Progress 
+                value={progressPercentage} 
+                className="h-2" 
+                aria-label={`Module progress: ${progress.completed} of ${progress.total} sections completed (${progressPercentage}%)`}
+              />
             </div>
           )}
         </CardHeader>

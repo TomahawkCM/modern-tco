@@ -35,6 +35,7 @@ import {
   Upload,
   Sparkles,
   Beaker,
+  Wallet,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
@@ -180,6 +181,12 @@ export function Sidebar({ isOpen = true, onClose, className }: SidebarProps) {
       icon: BarChart3,
       href: "/analytics",
     },
+    {
+      id: "budget",
+      label: "Budget App",
+      icon: Wallet,
+      href: "/budget-app",
+    },
     ...(isAdmin
       ? [
           {
@@ -236,7 +243,7 @@ export function Sidebar({ isOpen = true, onClose, className }: SidebarProps) {
     } else {
       setActiveItem(item.id);
       if (item.href) {
-        router.push(item.href);
+        void router.push(item.href);
       }
       if (onClose) onClose();
     }
@@ -336,7 +343,14 @@ export function Sidebar({ isOpen = true, onClose, className }: SidebarProps) {
                 <span className="text-sm font-medium text-primary">62%</span>
               </div>
             </div>
-            <div className="relative h-2 w-full overflow-hidden rounded-full bg-primary/20 border border-primary/30">
+            <div 
+              className="relative h-2 w-full overflow-hidden rounded-full bg-primary/20 border border-primary/30"
+              role="progressbar"
+              aria-valuenow={62}
+              aria-valuemin={0}
+              aria-valuemax={100}
+              aria-label="Overall study progress: 62% complete"
+            >
               <div
                 className="h-full bg-gradient-to-r from-primary to-primary/80 transition-all progress-glow"
                 style={{ width: '62%' }}
@@ -389,7 +403,14 @@ export function Sidebar({ isOpen = true, onClose, className }: SidebarProps) {
                 <span className="truncate">{domain.name}</span>
                 <span className="font-medium">{domain.progress}%</span>
               </div>
-              <div className="relative h-1.5 w-full overflow-hidden rounded-full bg-primary/20 border border-border">
+              <div 
+                className="relative h-1.5 w-full overflow-hidden rounded-full bg-primary/20 border border-border"
+                role="progressbar"
+                aria-valuenow={domain.progress}
+                aria-valuemin={0}
+                aria-valuemax={100}
+                aria-label={`${domain.name} domain progress: ${domain.progress}% (${domain.progress} of ${domain.total} items)`}
+              >
                 <div
                   className="h-full bg-gradient-to-r from-accent to-primary transition-all duration-500"
                   style={{ width: `${domain.progress || 0}%` }}

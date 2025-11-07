@@ -392,6 +392,14 @@ export function ExamProvider({ children }: { children: React.ReactNode }) {
             console.log("Generated mock exam questions from DB (105)", examQuestions.length);
           } catch (e) {
             // Fallback to static weighted questions
+            console.warn("Database weighted questions unavailable, using static fallback", e);
+            // Check if it's a 404 error (RPC function not created)
+            if (e instanceof Error && e.message.includes('404')) {
+              console.error(
+                'RPC function get_weighted_random_questions not found. ' +
+                'Run: npm run db:apply-sql:api -- --file supabase/sql/get_weighted_random_questions.sql'
+              );
+            }
             const { getWeightedRandomQuestions } = await import("@/lib/questionLoader");
             examQuestions = getWeightedRandomQuestions(105);
             console.warn("Fallback to static weighted questions (105)");

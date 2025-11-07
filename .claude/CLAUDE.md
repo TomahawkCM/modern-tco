@@ -14,7 +14,7 @@
 - ✅ 2357 spaced repetition system with adaptive difficulty
 - ✅ 27 badges, 6 levels, points system
 - ✅ Video milestone tracking, interactive labs
-- ✅ Full mock exams (75 questions, 105min timer)
+- ✅ Full mock exams (105 questions, 105min timer)
 
 **Production Priorities**:
 1. Content population (videos, questions, lab certificates)

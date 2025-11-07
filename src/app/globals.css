@@ -290,3 +290,22 @@ main#main-content {
   box-shadow: 0 4px 20px rgba(59, 130, 246, 0.3);
   transform: translateY(-2px) scale(1.02);
 }
+
+/* Phase 4.1.1: Button press animations - Tactile feedback for all buttons */
+button:not(:disabled) {
+  transition: transform 0.15s ease-out;
+}
+
+button:not(:disabled):active {
+  transform: scale(0.95);
+}
+
+/* Phase 4.1.3: Shimmer loading animation for skeletons */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}

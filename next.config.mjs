@@ -4,11 +4,19 @@ import remarkGfm from "remark-gfm";
 import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypePrettyCode from "rehype-pretty-code";
+import { fileURLToPath } from "url";
+import { dirname, resolve } from "path";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
   pageExtensions: ["ts", "tsx", "mdx"],
+  
+  // Set output file tracing root to project directory to silence workspace warning
+  outputFileTracingRoot: resolve(__dirname),
 
   // Disable static optimization for error pages to avoid build issues
   generateBuildId: async () => {
@@ -53,26 +61,17 @@ const nextConfig = {
       "clsx"
     ],
   },
-  
+
+  // Production optimizations
+  poweredByHeader: false,
+  generateEtags: true,
+  compress: true,
+
   // Image optimization
   images: {
     formats: ["image/avif", "image/webp"],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-  },
-
-  // Turbopack Configuration (Next.js 16+)
-  // Turbopack is now stable and the default bundler
-  // Provides 5-10x faster Fast Refresh and 2-5x faster builds
-  // Custom webpack config removed in favor of Turbopack defaults
-  turbopack: {
-    rules: {
-      // Configure MDX loader for Turbopack
-      '*.mdx': {
-        loaders: ['@mdx-js/loader'],
-        as: '*.js',
-      },
-    },
   },
 
   // Headers for caching and security
@@ -147,28 +146,13 @@ const nextConfig = {
   },
 };
 
+// MDX configuration for Webpack (production builds use --webpack flag)
+// Webpack has stable support for MDX plugins, unlike Turbopack
 const withMDX = createMDX({
   extension: /\.mdx?$/,
   options: {
-    // Use MDX provider for global component registration (via src/mdx-components.tsx)
     remarkPlugins: [remarkGfm],
-    rehypePlugins: [
-      rehypeSlug,
-      [
-        rehypeAutolinkHeadings,
-        {
-          behavior: "wrap",
-          properties: { className: "anchor" },
-        },
-      ],
-      [
-        rehypePrettyCode,
-        {
-          theme: "github-dark",
-          keepBackground: true,
-        },
-      ],
-    ],
+    rehypePlugins: [rehypeSlug, rehypeAutolinkHeadings, rehypePrettyCode],
   },
 });
 

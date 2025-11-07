@@ -5,11 +5,14 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import { useAuth } from "@/contexts/AuthContext";
 import { flashcardService } from "@/services/flashcardService";
 import type { Flashcard } from "@/types/flashcard";
 import type { SRRating } from "@/lib/sr";
 import { Brain, Check, X, AlertCircle, Clock, TrendingUp, BookOpen, Target, Filter, Hash } from "lucide-react";
+import { ErrorMessages } from "@/lib/error-messages";
+import { useToast } from "@/hooks/use-toast";
 
 interface FlashcardReviewProps {
   moduleId?: string; // Filter by module
@@ -27,6 +30,7 @@ interface ReviewStats {
 
 export default function FlashcardReview({ moduleId, deckId, totalCards = 0, onComplete }: FlashcardReviewProps) {
   const { user } = useAuth();
+  const { toast } = useToast();
   const isStaticMode = !user;
 
   const [cards, setCards] = useState<Flashcard[]>([]);
@@ -107,8 +111,24 @@ export default function FlashcardReview({ moduleId, deckId, totalCards = 0, onCo
       console.log('[FlashcardReview] Total cards after limit:', allCards.length);
 
       setCards(allCards);
+
+      // Show helpful message if no cards available
+      if (allCards.length === 0) {
+        const errorMsg = ErrorMessages.noFlashcardsDue;
+        toast({
+          title: errorMsg.title,
+          description: `${errorMsg.message}${errorMsg.action ? ` ${errorMsg.action}` : ''}`,
+          variant: errorMsg.variant as "default" | "destructive",
+        });
+      }
     } catch (error) {
       console.error("Error loading flashcards:", error);
+      const errorMsg = ErrorMessages.flashcardsLoadFailed;
+      toast({
+        title: errorMsg.title,
+        description: `${errorMsg.message}${errorMsg.action ? ` ${errorMsg.action}` : ''}`,
+        variant: errorMsg.variant as "default" | "destructive",
+      });
     } finally {
       setIsLoading(false);
     }
@@ -120,8 +140,19 @@ export default function FlashcardReview({ moduleId, deckId, totalCards = 0, onCo
     const timeSpent = Math.floor((Date.now() - reviewStartTime) / 1000);
     const isCorrect = rating === 'good' || rating === 'easy';
 
-    // Update card with SRS algorithm
-    await flashcardService.reviewFlashcard(currentCard.id, user?.id, rating, timeSpent);
+    try {
+      // Update card with SRS algorithm
+      await flashcardService.reviewFlashcard(currentCard.id, user?.id, rating, timeSpent);
+    } catch (error) {
+      console.error("Error saving flashcard review:", error);
+      const errorMsg = ErrorMessages.flashcardReviewFailed;
+      toast({
+        title: errorMsg.title,
+        description: `${errorMsg.message}${errorMsg.action ? ` ${errorMsg.action}` : ''}`,
+        variant: errorMsg.variant as "default" | "destructive",
+      });
+      // Don't return - continue with local state update
+    }
 
     // Update session stats
     const newStats = {
@@ -304,7 +335,11 @@ export default function FlashcardReview({ moduleId, deckId, totalCards = 0, onCo
 
       {/* Progress Bar */}
       <div className="flex items-center gap-3">
-        <Progress value={progress} className="flex-1" />
+        <Progress 
+          value={progress} 
+          className="flex-1" 
+          aria-label={`Flashcard review progress: ${currentIndex + 1} of ${cards.length} cards (${Math.round(progress)}%)`}
+        />
         <span className="text-sm font-medium whitespace-nowrap">
           {currentIndex + 1} / {cards.length}
         </span>
@@ -360,33 +395,38 @@ export default function FlashcardReview({ moduleId, deckId, totalCards = 0, onCo
             )}
           </div>
         </CardHeader>
-        <CardContent className="min-h-[300px] flex flex-col justify-center">
-          {/* Front of card */}
-          <div className="mb-6">
-            <p className="text-sm text-muted-foreground mb-2">Question:</p>
-            <h2 className="text-2xl font-bold text-foreground">{currentCard.front_text}</h2>
-            {currentCard.image_url && (
-              <img
-                src={currentCard.image_url}
-                alt="Flashcard visual"
-                className="mt-4 rounded-lg max-h-48 object-contain"
-              />
-            )}
-          </div>
+        <CardContent className="flex flex-col">
+          {/* Scrollable card content area */}
+          <ScrollArea className="h-[calc(100vh-42rem)] min-h-[300px]">
+            <div className="pr-4">
+              {/* Front of card */}
+              <div className="mb-6">
+                <p className="text-sm text-muted-foreground mb-2">Question:</p>
+                <h2 className="text-2xl font-bold text-foreground">{currentCard.front_text}</h2>
+                {currentCard.image_url && (
+                  <img
+                    src={currentCard.image_url}
+                    alt="Flashcard visual"
+                    className="mt-4 rounded-lg max-h-48 object-contain"
+                  />
+                )}
+              </div>
 
-          {/* Back of card (revealed) */}
-          {showAnswer && (
-            <div className="border-t pt-6 animate-in fade-in-50 duration-300">
-              <p className="text-sm text-muted-foreground mb-2">Answer:</p>
-              <p className="text-lg text-foreground">{currentCard.back_text}</p>
-              {currentCard.explanation && (
-                <div className="mt-4 p-3 bg-muted rounded-md">
-                  <p className="text-sm font-medium text-foreground mb-1">Explanation:</p>
-                  <p className="text-sm text-muted-foreground">{currentCard.explanation}</p>
+              {/* Back of card (revealed) */}
+              {showAnswer && (
+                <div className="border-t pt-6 animate-in fade-in-50 duration-300">
+                  <p className="text-sm text-muted-foreground mb-2">Answer:</p>
+                  <p className="text-lg text-foreground">{currentCard.back_text}</p>
+                  {currentCard.explanation && (
+                    <div className="mt-4 p-3 bg-muted rounded-md">
+                      <p className="text-sm font-medium text-foreground mb-1">Explanation:</p>
+                      <p className="text-sm text-muted-foreground">{currentCard.explanation}</p>
+                    </div>
+                  )}
                 </div>
               )}
             </div>
-          )}
+          </ScrollArea>
 
           {/* Show Answer Button */}
           {!showAnswer && (

@@ -266,7 +266,11 @@ export function StudyPathwayGuide({ className }: StudyPathwayGuideProps) {
               </div>
             </div>
           </div>
-          <Progress value={overallProgress} className="h-3" />
+          <Progress 
+            value={overallProgress} 
+            className="h-3" 
+            aria-label={`Overall study pathway progress: ${overallProgress}% towards Tanium Certified Operator goal`}
+          />
         </CardContent>
       </Card>
 
@@ -310,7 +314,11 @@ export function StudyPathwayGuide({ className }: StudyPathwayGuideProps) {
                             {phase.progress}%
                           </div>
                           <div className="mt-1 w-16">
-                            <Progress value={phase.progress} className="h-1" />
+                            <Progress 
+                              value={phase.progress} 
+                              className="h-1" 
+                              aria-label={`${phase.title} phase progress: ${phase.progress}%`}
+                            />
                           </div>
                         </div>
                       </div>
@@ -344,7 +352,7 @@ export function StudyPathwayGuide({ className }: StudyPathwayGuideProps) {
                               size="sm"
                               variant={action.type === "primary" ? "default" : "outline"}
                               disabled={phase.status === "locked"}
-                              onClick={() => router.push(action.path)}
+                              onClick={() => void router.push(action.path)}
                               className={cn(
                                 action.type === "primary"
                                   ? `${phase.bgColor} ${phase.borderColor} hover:bg-opacity-30`

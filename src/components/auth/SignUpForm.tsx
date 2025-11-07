@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Loader2, Eye, EyeOff, CheckCircle } from "lucide-react";
+import { ErrorMessages, humanizeError } from "@/lib/error-messages";
 
 interface SignUpFormProps {
   onSuccess?: () => void;
@@ -55,17 +56,20 @@ export function SignUpForm({ onSuccess, onSwitchToLogin }: SignUpFormProps) {
 
     // Validation
     if (!passwordValidation.isValid) {
-      setError("Password must be at least 8 characters with uppercase, lowercase, and numbers");
+      const errorMsg = ErrorMessages.passwordComplexityFailed;
+      setError(`${errorMsg.message}${errorMsg.action ? ` ${errorMsg.action}` : ''}`);
       return;
     }
 
     if (password !== confirmPassword) {
-      setError("Passwords do not match");
+      const errorMsg = ErrorMessages.passwordMismatch;
+      setError(`${errorMsg.message}${errorMsg.action ? ` ${errorMsg.action}` : ''}`);
       return;
     }
 
     if (!firstName.trim() || !lastName.trim()) {
-      setError("First name and last name are required");
+      const errorMsg = ErrorMessages.fieldRequired("First name and last name");
+      setError(`${errorMsg.message}${errorMsg.action ? ` ${errorMsg.action}` : ''}`);
       return;
     }
 
@@ -78,13 +82,15 @@ export function SignUpForm({ onSuccess, onSwitchToLogin }: SignUpFormProps) {
       });
 
       if (error) {
-        setError(error.message);
+        const errorMsg = ErrorMessages.signupFailed(error.message);
+        setError(`${errorMsg.message}${errorMsg.action ? ` ${errorMsg.action}` : ''}`);
       } else {
         setSuccess(true);
         // Don't call onSuccess immediately - user needs to verify email
       }
     } catch (error) {
-      setError("An unexpected error occurred. Please try again.");
+      const errorMsg = humanizeError(error);
+      setError(`${errorMsg.message}${errorMsg.action ? ` ${errorMsg.action}` : ''}`);
     } finally {
       setIsSubmitting(false);
     }

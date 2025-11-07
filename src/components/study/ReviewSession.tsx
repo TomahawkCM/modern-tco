@@ -295,7 +295,11 @@ export function ReviewSession({ items, onComplete, onExit }: ReviewSessionProps)
               </p>
             </div>
 
-            <Progress value={scorePercentage} className="h-3 bg-green-900/30" />
+            <Progress 
+              value={scorePercentage} 
+              className="h-3 bg-green-900/30" 
+              aria-label={`Review session score: ${scorePercentage}% (${itemsCorrect} of ${items.length} items correct)`}
+            />
           </div>
 
           {/* Statistics */}
@@ -384,7 +388,11 @@ export function ReviewSession({ items, onComplete, onExit }: ReviewSessionProps)
             {currentIndex + 1} of {items.length}
           </Badge>
         </div>
-        <Progress value={progress} className="h-2" />
+        <Progress 
+          value={progress} 
+          className="h-2" 
+          aria-label={`Review session progress: ${currentIndex + 1} of ${items.length} items (${Math.round(progress)}%)`}
+        />
       </CardHeader>
 
       <CardContent className="space-y-6">

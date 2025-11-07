@@ -27,14 +27,14 @@ export default function AuthPage() {
       if (error) {
         setAuthError(error.message);
       } else {
-        router.push("/modules"); // Redirect to modules page after successful signup
+        void router.push("/modules"); // Redirect to modules page after successful signup
       }
     } else {
       const { error } = await signIn(email, password);
       if (error) {
         setAuthError(error.message);
       } else {
-        router.push("/modules"); // Redirect to modules page after successful login
+        void router.push("/modules"); // Redirect to modules page after successful login
       }
     }
   };
@@ -59,7 +59,7 @@ export default function AuthPage() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <form onSubmit={(e) => void handleSubmit(e)} className="space-y-4">
               {isSignUp && (
                 <>
                   <Input

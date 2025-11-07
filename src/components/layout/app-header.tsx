@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import dynamic from "next/dynamic";
 import {
   Menu,
   Search,
@@ -12,7 +13,15 @@ import {
   Trophy,
   Clock,
   Target,
+  Sparkles,
+  Brain,
+  Wallet,
 } from "lucide-react";
+
+// Dynamically import AIAssistant to avoid SSR issues
+const AIAssistant = dynamic(() => import("@/components/ai/AIAssistant"), {
+  ssr: false,
+});
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { HelpTooltip } from "@/components/ui/help-tooltip";
@@ -38,6 +47,7 @@ interface AppHeaderProps {
 export function AppHeader({ onMenuClick, currentScore = 0, studyStreak = 0 }: AppHeaderProps) {
   const [searchOpen, setSearchOpen] = useState(false);
   const [commandOpen, setCommandOpen] = useState(false);
+  const [aiAssistantOpen, setAiAssistantOpen] = useState(false);
   const router = useRouter();
 
   // Memoize tooltip content to prevent re-creation on every render
@@ -64,17 +74,28 @@ export function AppHeader({ onMenuClick, currentScore = 0, studyStreak = 0 }: Ap
     try { router.push(path); } catch {}
   };
 
-  // Global keyboard shortcut: Ctrl/Cmd+K to open Command Palette (Tanium-like quick search)
-  // and Escape to close.
+  // Global keyboard shortcuts:
+  // - Ctrl/Cmd+K: Open Command Palette (Tanium-like quick navigation)
+  // - Ctrl/Cmd+Shift+K: Open AI Assistant
+  // - Escape: Close open dialogs
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
       const isCmdK = (e.key === 'k' || e.key === 'K') && (e.metaKey || e.ctrlKey);
-      if (isCmdK) {
+      const isCmdShiftK = isCmdK && e.shiftKey;
+
+      if (isCmdShiftK) {
+        // Cmd+Shift+K opens AI Assistant
+        e.preventDefault();
+        setAiAssistantOpen(true);
+      } else if (isCmdK) {
+        // Cmd+K opens Command Palette
         e.preventDefault();
         setCommandOpen(true);
       }
+
       if (e.key === 'Escape') {
         setCommandOpen(false);
+        setAiAssistantOpen(false);
       }
     };
     window.addEventListener('keydown', onKeyDown);
@@ -109,19 +130,44 @@ export function AppHeader({ onMenuClick, currentScore = 0, studyStreak = 0 }: Ap
             </div>
           </div>
 
+          {/* Budget App Link */}
+          <Button
+            variant="ghost"
+            size="sm"
+            className="glass ml-4 text-foreground hover:bg-white/10 border border-white/10"
+            onClick={() => router.push("/budget-app")}
+            aria-label="Budget App"
+          >
+            <Wallet className="mr-2 h-4 w-4" />
+            <span className="hidden sm:inline">Budget</span>
+          </Button>
+
           {/* Center - Search/Command */}
           <div className="flex flex-1 justify-center px-4">
-            <div className="flex items-center gap-1">
+            <div className="flex items-center gap-2">
               <Button
                 variant="outline"
                 className="glass w-full max-w-sm justify-start border-white/20 text-foreground hover:bg-white/10"
-                onClick={() => setCommandOpen(true)}
+                onClick={() => router.push("/search")}
+                aria-label="Open question search"
               >
                 <Search className="mr-2 h-4 w-4" />
-                <span className="hidden sm:inline">Search or press Ctrl+K</span>
+                <span className="hidden sm:inline">Search questions...</span>
                 <span className="sm:hidden">Search...</span>
               </Button>
-              {/* <QuickTips.Shortcuts /> - Component removed for now */}
+
+              {/* AI Assistant Button */}
+              <Button
+                variant="outline"
+                size="icon"
+                className="glass border-white/20 text-tanium-accent hover:bg-tanium-accent/10 hover:border-tanium-accent/50"
+                onClick={() => setAiAssistantOpen(true)}
+                aria-label="Open AI Study Assistant (Cmd+Shift+K)"
+                title="AI Study Assistant (Cmd+Shift+K)"
+              >
+                <Brain className="h-5 w-5" />
+                <Sparkles className="absolute -right-0.5 -top-0.5 h-3 w-3 text-amber-400" />
+              </Button>
             </div>
           </div>
 
@@ -225,6 +271,12 @@ export function AppHeader({ onMenuClick, currentScore = 0, studyStreak = 0 }: Ap
           </CommandGroup>
         </CommandList>
       </CommandDialog>
+
+      {/* AI Study Assistant */}
+      <AIAssistant
+        isOpen={aiAssistantOpen}
+        onClose={() => setAiAssistantOpen(false)}
+      />
     </>
   );
 }

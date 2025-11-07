@@ -140,7 +140,15 @@ function MockExamContent() {
       void analytics.capture("mock_exam_start", { count: qs.length, variant });
       await startExam(ExamMode.MOCK, qs);
     } catch (e) {
-      console.warn("Falling back to static weighted questions", e);
+      // Graceful fallback to static questions if database RPC function is unavailable
+      console.warn("Database weighted questions unavailable, using static fallback", e);
+      // Check if it's a 404 error (RPC function not created)
+      if (e instanceof Error && e.message.includes('404')) {
+        console.error(
+          'RPC function get_weighted_random_questions not found. ' +
+          'Run: npm run db:apply-sql:api -- --file supabase/sql/get_weighted_random_questions.sql'
+        );
+      }
       const { getWeightedRandomQuestions } = await import("@/lib/questionLoader");
       const pool = getWeightedRandomQuestions(130);
       const qs = seededShuffle(pool, `${variant}-TCO`).slice(0, 105);
@@ -430,7 +438,7 @@ function MockExamContent() {
 
   // Question view - Fixed viewport layout with no page scrolling
   return (
-      <div className="mx-auto max-w-4xl flex flex-col h-[calc(100vh-12rem)]">
+      <div className="mx-auto max-w-4xl flex flex-col h-[calc(100vh-16rem)]">
         {/* Fixed Header - Timer and Progress */}
         <div className="flex-none space-y-4">
           {/* Progress header with timer */}
@@ -473,18 +481,20 @@ function MockExamContent() {
         </div>
 
         {/* Scrollable Content - Question Card */}
-        <ScrollArea className="flex-1 my-4">
-          {currentQuestion && (
-            <QuestionCard
-              question={currentQuestion}
-              questionNumber={progress.current}
-              totalQuestions={progress.total}
-              selectedAnswer={selectedAnswer}
-              onAnswerSelect={handleAnswerSelect}
-              showExplanation={false} // Hide explanations in mock exam
-              mode="exam"
-            />
-          )}
+        <ScrollArea className="flex-1 h-full">
+          <div className="pr-4">
+            {currentQuestion && (
+              <QuestionCard
+                question={currentQuestion}
+                questionNumber={progress.current}
+                totalQuestions={progress.total}
+                selectedAnswer={selectedAnswer}
+                onAnswerSelect={handleAnswerSelect}
+                showExplanation={false} // Hide explanations in mock exam
+                mode="exam"
+              />
+            )}
+          </div>
         </ScrollArea>
 
         {/* Fixed Footer - Navigation */}

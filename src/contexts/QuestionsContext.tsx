@@ -81,7 +81,7 @@ export function QuestionsProvider({ children }: { children: React.ReactNode }) {
     const p = (pathname || "").toLowerCase();
     // Load on admin editor and study/content areas; defer elsewhere
     return [
-      "/admin", "/study", "/learn", "/learning", "/modules", "/assessments", "/kb",
+      "/admin", "/study", "/learn", "/learning", "/modules", "/assessments", "/kb", "/search",
     ].some((prefix) => p.startsWith(prefix));
   }, [pathname]);
 

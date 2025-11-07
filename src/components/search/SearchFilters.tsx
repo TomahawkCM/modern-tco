@@ -107,7 +107,7 @@ export function SearchFilters() {
           </Button>
         </CollapsibleTrigger>
         <CollapsibleContent className="mt-3 space-y-3">
-          {Object.values(TCODomain).map((domain) => {
+          {[...new Set(Object.values(TCODomain))].map((domain) => {
             const isChecked = state.filters.domains.includes(domain);
             return (
               <div key={domain} className="flex items-center space-x-2">
@@ -155,7 +155,7 @@ export function SearchFilters() {
           </Button>
         </CollapsibleTrigger>
         <CollapsibleContent className="mt-3 space-y-3">
-          {Object.values(Difficulty).map((difficulty) => {
+          {[...new Set(Object.values(Difficulty))].map((difficulty) => {
             const isChecked = state.filters.difficulties.includes(difficulty);
             return (
               <div key={difficulty} className="flex items-center space-x-2">

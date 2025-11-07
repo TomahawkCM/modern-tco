@@ -1,7 +1,7 @@
 "use client";
 
 import { Suspense } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import dynamic from "next/dynamic";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -168,24 +168,17 @@ function DashboardSkeleton() {
   );
 }
 
-interface AssessmentPageProps {
-  searchParams: Promise<{
-    mode?: "gating" | "session" | "review" | "dashboard";
-    userId?: string;
-    moduleId?: string;
-    sessionId?: string;
-    assessmentId?: string;
-  }>;
-}
-
-export default async function AssessmentsPage({ searchParams }: AssessmentPageProps) {
-  const params = await searchParams;
-  const { mode = "gating", userId = "default-user", moduleId, sessionId, assessmentId } = params;
+function AssessmentsPageContent() {
+  const searchParams = useSearchParams();
+  // Handle null case for useSearchParams() in Next.js 16
+  const mode = searchParams?.get("mode") || "gating";
+  const userId = searchParams?.get("userId") || "default-user";
+  const moduleId = searchParams?.get("moduleId") || undefined;
+  const sessionId = searchParams?.get("sessionId") || undefined;
+  const assessmentId = searchParams?.get("assessmentId") || undefined;
 
   return (
-    <AssessmentProvider>
-      <div className="container mx-auto px-4 py-8">
-        <Suspense fallback={<div className="animate-pulse">Loading...</div>}>
+    <div className="container mx-auto px-4 py-8">
           {mode === "gating" && (
             <AssessmentGating
               userId={userId}
@@ -285,8 +278,16 @@ export default async function AssessmentsPage({ searchParams }: AssessmentPagePr
               }}
             />
           )}
-        </Suspense>
-      </div>
+    </div>
+  );
+}
+
+export default function AssessmentsPage() {
+  return (
+    <AssessmentProvider>
+      <Suspense fallback={<div className="animate-pulse">Loading...</div>}>
+        <AssessmentsPageContent />
+      </Suspense>
     </AssessmentProvider>
   );
 }

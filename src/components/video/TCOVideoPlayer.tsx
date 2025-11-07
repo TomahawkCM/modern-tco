@@ -236,7 +236,11 @@ export const TCOVideoPlayer: React.FC<TCOVideoPlayerProps> = ({
           <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
             <div className="space-y-2">
               {/* Progress Bar */}
-              <Progress value={progressPercentage} className="h-1" />
+              <Progress 
+                value={progressPercentage} 
+                className="h-1" 
+                aria-label={`Video playback progress: ${Math.round(progressPercentage)}% (${formatTime(currentTime)} of ${formatTime(duration)})`}
+              />
               
               {/* Controls */}
               <div className="flex items-center justify-between text-foreground">

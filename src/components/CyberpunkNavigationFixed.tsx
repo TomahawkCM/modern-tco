@@ -3,7 +3,14 @@
 import React, { useState, useEffect, useRef } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { useRouter, usePathname } from "next/navigation"
-import { Search, User, Settings, Bell, Menu, X, Zap, Shield, Cpu, Activity } from "lucide-react"
+import Image from "next/image"
+import { Search, User, Settings, Bell, Menu, X, Zap, Shield, Cpu, Activity, Brain, Sparkles, Wallet } from "lucide-react"
+import dynamic from "next/dynamic"
+
+// Dynamically import AIAssistant to avoid SSR issues
+const AIAssistant = dynamic(() => import("@/components/ai/AIAssistant"), {
+  ssr: false,
+})
 
 export interface NavItem {
   name: string
@@ -43,6 +50,7 @@ export const CyberpunkNavBar: React.FC<CyberpunkNavBarProps> = ({
     { name: "Study", href: "/study", icon: <Zap className="h-4 w-4" /> },
     { name: "Practice", href: "/practice", icon: <Shield className="h-4 w-4" /> },
     { name: "Analytics", href: "/analytics", icon: <Activity className="h-4 w-4" /> },
+    { name: "Budget", href: "/budget-app", icon: <Wallet className="h-4 w-4" /> },
   ],
   brandName = "TANIUM TCO",
   onTabChange
@@ -52,6 +60,7 @@ export const CyberpunkNavBar: React.FC<CyberpunkNavBarProps> = ({
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [activeTab, setActiveTab] = useState(navItems[0]?.name ?? "Dashboard")
   const [mounted, setMounted] = useState(false)
+  const [aiAssistantOpen, setAiAssistantOpen] = useState(false)
 
   // Prevent hydration issues
   useEffect(() => {
@@ -84,9 +93,30 @@ export const CyberpunkNavBar: React.FC<CyberpunkNavBarProps> = ({
     setActiveTab(tabName)
     onTabChange?.(tabName)
     if (href && href !== "#") {
-      router.push(href)
+      void router.push(href)
     }
   }
+
+  // Global keyboard shortcut: Cmd+Shift+K to open AI Assistant
+  useEffect(() => {
+    if (!mounted) return
+
+    const onKeyDown = (e: KeyboardEvent) => {
+      const isCmdShiftK = (e.key === 'k' || e.key === 'K') && e.shiftKey && (e.metaKey || e.ctrlKey)
+
+      if (isCmdShiftK) {
+        e.preventDefault()
+        setAiAssistantOpen(true)
+      }
+
+      if (e.key === 'Escape') {
+        setAiAssistantOpen(false)
+      }
+    }
+
+    window.addEventListener('keydown', onKeyDown)
+    return () => window.removeEventListener('keydown', onKeyDown)
+  }, [mounted])
 
   // Return simple nav during SSR to prevent hydration mismatch
   if (!mounted) {
@@ -95,10 +125,13 @@ export const CyberpunkNavBar: React.FC<CyberpunkNavBarProps> = ({
         <div className="px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
-              <img
+              <Image
                 src="/tco-logo.png"
                 alt="TCO Logo"
+                width={40}
+                height={40}
                 className="w-10 h-10 object-contain"
+                priority
               />
               <div className="text-xl font-bold text-primary">
                 {brandName}
@@ -140,10 +173,13 @@ export const CyberpunkNavBar: React.FC<CyberpunkNavBarProps> = ({
               whileTap={{ scale: 0.95 }}
             >
               <div className="relative flex-shrink-0">
-                <img
+                <Image
                   src="/tco-logo.png"
                   alt="TCO Logo"
+                  width={48}
+                  height={48}
                   className="w-10 h-10 sm:w-12 sm:h-12 object-contain"
+                  priority
                 />
                 <div className="absolute inset-0 bg-gradient-to-r from-primary to-purple-500 rounded-full blur animate-pulse opacity-10"></div>
               </div>
@@ -155,12 +191,17 @@ export const CyberpunkNavBar: React.FC<CyberpunkNavBarProps> = ({
 
             {/* Desktop Navigation - Simplified to just search bar */}
             <div className="hidden md:flex items-center flex-1 max-w-md mx-4">
-              <div className="relative w-full">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-primary/60" />
+              <div
+                className="relative w-full cursor-pointer"
+                onClick={() => void router.push("/search")}
+              >
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-primary/60 pointer-events-none" />
                 <input
                   type="text"
                   placeholder="Search modules, questions..."
-                  className="w-full pl-10 pr-4 py-2 bg-white/[0.03] backdrop-blur-md border border-white/10 rounded-lg text-sm text-cyan-100 placeholder-cyan-400/40 focus:outline-none focus:border-white/20 focus:ring-2 focus:ring-white/10 transition-all"
+                  className="w-full pl-10 pr-4 py-2 bg-white/[0.03] backdrop-blur-md border border-white/10 rounded-lg text-sm text-cyan-100 placeholder-cyan-400/40 focus:outline-none focus:border-white/20 focus:ring-2 focus:ring-white/10 transition-all cursor-pointer"
+                  readOnly
+                  onClick={() => void router.push("/search")}
                 />
               </div>
             </div>
@@ -172,11 +213,7 @@ export const CyberpunkNavBar: React.FC<CyberpunkNavBarProps> = ({
                 className="md:hidden relative group"
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
-                onClick={() => {
-                  // Focus the search input on desktop or navigate to search page on mobile
-                  const searchInput = document.querySelector('input[type="text"]') as HTMLInputElement;
-                  if (searchInput) searchInput.focus();
-                }}
+                onClick={() => void router.push("/search")}
                 aria-label="Search modules and questions"
               >
                 <div className="absolute -inset-1 bg-gradient-to-r from-primary to-sky-400 rounded-full blur opacity-10 group-hover:opacity-30 transition duration-300"></div>
@@ -190,7 +227,7 @@ export const CyberpunkNavBar: React.FC<CyberpunkNavBarProps> = ({
                 className="relative group hidden sm:flex"
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
-                onClick={() => router.push("/notifications")}
+                onClick={() => void router.push("/notifications")}
                 aria-label="Notifications (3 unread)"
               >
                 <div className="absolute -inset-1 bg-gradient-to-r from-primary to-sky-400 rounded-full blur opacity-10 group-hover:opacity-30 transition duration-300"></div>
@@ -200,12 +237,28 @@ export const CyberpunkNavBar: React.FC<CyberpunkNavBarProps> = ({
                 </div>
               </motion.button>
 
+              {/* AI Assistant */}
+              <motion.button
+                className="relative group hidden sm:flex"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                onClick={() => setAiAssistantOpen(true)}
+                aria-label="Open AI Study Assistant (Cmd+Shift+K)"
+                title="AI Study Assistant (Cmd+Shift+K)"
+              >
+                <div className="absolute -inset-1 bg-gradient-to-r from-amber-400 to-orange-500 rounded-full blur opacity-10 group-hover:opacity-30 transition duration-300"></div>
+                <div className="relative w-9 h-9 bg-white/[0.05] backdrop-blur-xl border border-amber-400/20 rounded-full flex items-center justify-center">
+                  <Brain className="h-4 w-4 text-amber-400" aria-hidden="true" />
+                  <Sparkles className="absolute -right-0.5 -top-0.5 h-3 w-3 text-amber-400" aria-hidden="true" />
+                </div>
+              </motion.button>
+
               {/* Profile */}
               <motion.button
                 className="relative group hidden sm:flex"
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
-                onClick={() => router.push("/profile")}
+                onClick={() => void router.push("/profile")}
                 aria-label="User profile settings"
               >
                 <div className="absolute -inset-1 bg-gradient-to-r from-primary to-sky-400 rounded-full blur opacity-10 group-hover:opacity-30 transition duration-300"></div>
@@ -219,6 +272,14 @@ export const CyberpunkNavBar: React.FC<CyberpunkNavBarProps> = ({
       </div>
 
       {/* Mobile Navigation - Removed (navigation now in sidebar) */}
+
+      {/* AI Study Assistant Modal */}
+      {mounted && (
+        <AIAssistant
+          isOpen={aiAssistantOpen}
+          onClose={() => setAiAssistantOpen(false)}
+        />
+      )}
     </motion.nav>
   )
 }

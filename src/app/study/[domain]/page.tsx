@@ -193,7 +193,7 @@ export default function StudyDomainPage() {
           <div className="text-center">
             <h1 className="mb-4 text-2xl font-bold text-foreground">Study Domain Not Found</h1>
             <p className="mb-6 text-muted-foreground">
-              The domain you're looking for doesn't exist or may have been moved.
+              The domain you&apos;re looking for doesn&apos;t exist or may have been moved.
             </p>
             <Button
               onClick={() => router.push("/study")}

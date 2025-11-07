@@ -118,7 +118,11 @@ export function ProgressSummary({ className }: ProgressSummaryProps) {
               {summary.examReadiness}%
             </div>
             <p className="text-sm text-muted-foreground mb-4">{getReadinessMessage(summary.examReadiness)}</p>
-            <Progress value={summary.examReadiness} className="h-3" />
+            <Progress 
+              value={summary.examReadiness} 
+              className="h-3" 
+              aria-label={`Exam readiness score: ${summary.examReadiness}%`}
+            />
           </div>
 
           {/* Key Metrics Grid */}

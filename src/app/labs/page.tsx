@@ -1,9 +1,25 @@
 "use client";
 
-import { InteractiveLabSystem } from "@/components/labs/InteractiveLabSystem";
+import dynamic from "next/dynamic";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Skeleton } from "@/components/ui/skeleton";
 import { Terminal, Code, Zap, Trophy, Clock, Target } from "lucide-react";
+
+// Lazy load InteractiveLabSystem to improve initial page load performance
+const InteractiveLabSystem = dynamic(() => import("@/components/labs/InteractiveLabSystem").then(mod => ({ default: mod.InteractiveLabSystem })), {
+  loading: () => <LabSystemSkeleton />,
+  ssr: false,
+});
+
+function LabSystemSkeleton() {
+  return (
+    <div className="space-y-4">
+      <Skeleton className="h-64 w-full" />
+      <Skeleton className="h-32 w-full" />
+    </div>
+  );
+}
 
 export default function LabsPage() {
   const handleLabComplete = (labId: string, score: number) => {

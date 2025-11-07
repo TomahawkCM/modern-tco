@@ -173,13 +173,13 @@ function PracticeContent() {
   const quickStarted = useRef(false);
   useEffect(() => {
     if (!search) return;
-    const quick = search.get('quick');
-    const domainParam = normalizeDomainParam(search.get('domain'));
-    const domainsParam = parseDomainsParam(search.get('domains'));
-    const countParam = Number(search.get('count') || 25);
-    const revealParam = search.get('reveal');
-    const autofinishParam = search.get('autofinish');
-    const autowrongParam = Number(search.get('autowrong') || 0);
+    const quick = search?.get('quick');
+    const domainParam = normalizeDomainParam(search?.get('domain'));
+    const domainsParam = parseDomainsParam(search?.get('domains'));
+    const countParam = Number(search?.get('count') || 25);
+    const revealParam = search?.get('reveal');
+    const autofinishParam = search?.get('autofinish');
+    const autowrongParam = Number(search?.get('autowrong') || 0);
 
     if (domainParam) setSelectedDomain(domainParam);
     if (countParam && [25,50,75,100].includes(countParam)) setQuestionCount(countParam);

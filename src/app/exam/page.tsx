@@ -1,8 +1,23 @@
-import ExamSimulator from "@/components/exam/ExamSimulator";
+"use client";
 
-export const metadata = {
-  title: "Exam Simulator",
-};
+import dynamic from "next/dynamic";
+import { Skeleton } from "@/components/ui/skeleton";
+
+// Lazy load ExamSimulator to improve initial page load performance
+const ExamSimulator = dynamic(() => import("@/components/exam/ExamSimulator"), {
+  loading: () => <ExamSimulatorSkeleton />,
+  ssr: false,
+});
+
+function ExamSimulatorSkeleton() {
+  return (
+    <div className="space-y-4">
+      <Skeleton className="h-10 w-full" />
+      <Skeleton className="h-64 w-full" />
+      <Skeleton className="h-32 w-full" />
+    </div>
+  );
+}
 
 export default function ExamPage() {
   return (

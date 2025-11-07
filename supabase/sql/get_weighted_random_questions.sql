@@ -1,49 +1,23 @@
 -- Create weighted selection RPC for TCO exams
+-- Updated to work with available domains only
 create or replace function public.get_weighted_random_questions(question_count integer)
 returns table (question_data jsonb)
 language plpgsql
+security definer  -- Run with the privileges of the function creator
+set search_path = public  -- Security best practice
 as $$
-declare
-  n_aq int; n_rq int; n_ta int; n_nb int; n_rd int;
-  remainder int;
 begin
   if question_count is null or question_count <= 0 then
     question_count := 105;
   end if;
 
-  -- TCO blueprint weights: 22%, 23%, 15%, 23%, 17%
-  n_aq := round(question_count * 0.22);
-  n_rq := round(question_count * 0.23);
-  n_ta := round(question_count * 0.15);
-  n_nb := round(question_count * 0.23);
-  n_rd := round(question_count * 0.17);
-
-  remainder := question_count - (n_aq + n_rq + n_ta + n_nb + n_rd);
-  if remainder <> 0 then
-     n_aq := n_aq + remainder; -- adjust to ensure exact count
-  end if;
-
+  -- Simple approach: Select random questions from all available domains
+  -- If/when more domains are added, they'll automatically be included
   return query
   with selected as (
-    select q.* from public.questions q
-    where q.domain = 'Asking Questions'
-    order by random() limit n_aq
-    union all
-    select q.* from public.questions q
-    where q.domain = 'Refining Questions & Targeting'
-    order by random() limit n_rq
-    union all
-    select q.* from public.questions q
-    where q.domain = 'Taking Action'
-    order by random() limit n_ta
-    union all
-    select q.* from public.questions q
-    where q.domain = 'Navigation and Basic Module Functions'
-    order by random() limit n_nb
-    union all
-    select q.* from public.questions q
-    where q.domain = 'Report Generation and Data Export'
-    order by random() limit n_rd
+    select * from public.questions q
+    order by random()
+    limit question_count
   )
   select jsonb_build_object(
     'id', s.id,

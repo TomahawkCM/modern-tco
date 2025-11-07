@@ -1,29 +1,93 @@
 {
-  "name": "Tanium Certified Operator Exam",
-  "short_name": "TCO Exam",
-  "description": "Professional certification exam preparation for Tanium Certified Operator",
-  "start_url": "/tanium/",
+  "name": "Budget App - Household Finance Manager",
+  "short_name": "Budget App",
+  "description": "Privacy-first household budget management app. Track income, expenses, budgets, and investments locally on your device.",
+  "start_url": "/budget-app",
   "display": "standalone",
-  "theme_color": "#0F172A",
   "background_color": "#ffffff",
-  "orientation": "portrait-primary",
+  "theme_color": "#14b8a6",
+  "orientation": "portrait",
+  "scope": "/budget-app",
   "icons": [
     {
-      "src": "/icon.svg",
+      "src": "/icons/budget-app-192.png",
       "sizes": "192x192",
-      "type": "image/svg+xml",
-      "purpose": "maskable any"
+      "type": "image/png",
+      "purpose": "any maskable"
     },
     {
-      "src": "/icon.svg",
+      "src": "/icons/budget-app-512.png",
       "sizes": "512x512",
-      "type": "image/svg+xml",
-      "purpose": "maskable any"
+      "type": "image/png",
+      "purpose": "any maskable"
     }
   ],
-  "categories": ["education", "productivity"],
-  "lang": "en",
-  "dir": "ltr",
-  "scope": "/tanium/",
-  "prefer_related_applications": false
+  "categories": ["finance", "productivity", "utilities"],
+  "screenshots": [
+    {
+      "src": "/screenshots/budget-app-desktop.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Budget App Dashboard on Desktop"
+    },
+    {
+      "src": "/screenshots/budget-app-mobile.png",
+      "sizes": "750x1334",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Budget App on Mobile"
+    }
+  ],
+  "share_target": {
+    "action": "/budget-app/import",
+    "method": "POST",
+    "enctype": "multipart/form-data",
+    "params": {
+      "files": [
+        {
+          "name": "csv",
+          "accept": ["text/csv", ".csv"]
+        }
+      ]
+    }
+  },
+  "shortcuts": [
+    {
+      "name": "Add Transaction",
+      "short_name": "Add",
+      "description": "Quickly add a new transaction",
+      "url": "/budget-app/transactions?action=new",
+      "icons": [
+        {
+          "src": "/icons/add-transaction.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Import CSV",
+      "short_name": "Import",
+      "description": "Import bank statement CSV",
+      "url": "/budget-app/import",
+      "icons": [
+        {
+          "src": "/icons/import.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "View Reports",
+      "short_name": "Reports",
+      "description": "View spending reports and analytics",
+      "url": "/budget-app/reports",
+      "icons": [
+        {
+          "src": "/icons/reports.png",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ]
 }

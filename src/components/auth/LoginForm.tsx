@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Loader2, Eye, EyeOff } from "lucide-react";
+import { ErrorMessages, humanizeError } from "@/lib/error-messages";
 
 interface LoginFormProps {
   onSuccess?: () => void;
@@ -31,12 +32,14 @@ export function LoginForm({ onSuccess, onSwitchToSignUp }: LoginFormProps) {
       const { error } = await signIn(email, password);
 
       if (error) {
-        setError(error.message);
+        const errorMsg = ErrorMessages.loginFailed;
+        setError(`${errorMsg.message}${errorMsg.action ? ` ${errorMsg.action}` : ''}`);
       } else {
         onSuccess?.();
       }
     } catch (error) {
-      setError("An unexpected error occurred. Please try again.");
+      const errorMsg = humanizeError(error);
+      setError(`${errorMsg.message}${errorMsg.action ? ` ${errorMsg.action}` : ''}`);
     } finally {
       setIsSubmitting(false);
     }

@@ -40,7 +40,7 @@ export default function QueryBuilderPage() {
         <Info className="h-4 w-4 text-primary" />
         <AlertDescription className="text-primary">
           <strong>Interactive Learning Mode:</strong> This simulator helps you understand
-          Tanium's natural language query system. Practice building queries using guided mode,
+          Tanium&apos;s natural language query system. Practice building queries using guided mode,
           natural language, or advanced syntax.
         </AlertDescription>
       </Alert>

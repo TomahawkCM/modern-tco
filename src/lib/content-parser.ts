@@ -6,8 +6,9 @@
 // TODO: Refactor to separate server-only parsing from shared data types
 // See Archon task: "Refactor content-parser.ts for Turbopack compatibility"
 
-import fs from "fs";
-import path from "path";
+// Conditional imports for client/server compatibility
+const fs = typeof window === 'undefined' ? require('fs') : null;
+const path = typeof window === 'undefined' ? require('path') : null;
 import type { StudyModuleContent, StudySectionContent } from "@/data/study-content";
 
 interface ParsedSection {

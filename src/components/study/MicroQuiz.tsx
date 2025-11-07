@@ -10,6 +10,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { flashcardService } from "@/services/flashcardService";
 import { CheckCircle2, XCircle, HelpCircle, Sparkles, AlertCircle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { ErrorMessages } from "@/lib/error-messages";
 
 interface MicroQuizProps {
   question: string;
@@ -39,10 +40,11 @@ export default function MicroQuiz({
 
   const handleSubmit = () => {
     if (!selectedAnswer) {
+      const error = ErrorMessages.noAnswerSelected;
       toast({
-        title: "No answer selected",
-        description: "Please select an answer before checking.",
-        variant: "destructive",
+        title: error.title,
+        description: `${error.message}${error.action ? ` ${error.action}` : ''}`,
+        variant: error.variant as "default" | "destructive",
       });
       return;
     }
@@ -98,10 +100,11 @@ export default function MicroQuiz({
       }
     } catch (error) {
       console.error("Error creating flashcard:", error);
+      const errorMsg = ErrorMessages.flashcardCreationFailed;
       toast({
-        title: "Error",
-        description: "Failed to create flashcard. Please try again.",
-        variant: "destructive",
+        title: errorMsg.title,
+        description: `${errorMsg.message}${errorMsg.action ? ` ${errorMsg.action}` : ''}`,
+        variant: errorMsg.variant as "default" | "destructive",
       });
     }
   };

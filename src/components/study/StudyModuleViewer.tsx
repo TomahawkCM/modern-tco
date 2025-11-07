@@ -403,7 +403,11 @@ export function StudyModuleViewer({
                 {completedSections.size} of {sections.length} sections
               </span>
             </div>
-            <Progress value={completionPercentage} className="h-2" />
+            <Progress 
+              value={completionPercentage} 
+              className="h-2" 
+              aria-label={`Study module progress: ${completedSections.size} of ${sections.length} sections completed (${completionPercentage}%)`}
+            />
             <div className="mt-2 flex items-center justify-between">
               <span className="text-sm text-muted-foreground">{completionPercentage}% Complete</span>
               {completionPercentage === 100 && onNavigateToQuestions && (

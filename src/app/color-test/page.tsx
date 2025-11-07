@@ -140,7 +140,7 @@ export default function ColorTestPage() {
               <Button variant="default" size="sm">Small</Button>
               <Button variant="default" size="default">Default</Button>
               <Button variant="default" size="lg">Large</Button>
-              <Button variant="default" size="icon">
+              <Button variant="default" size="icon" aria-label="Icon button example">
                 <CheckCircle2 className="h-4 w-4" />
               </Button>
             </div>

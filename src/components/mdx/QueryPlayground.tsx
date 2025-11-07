@@ -6,6 +6,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { CheckCircle2, XCircle, HelpCircle, Play, RotateCcw, Lightbulb } from 'lucide-react';
 import { Textarea } from '@/components/ui/textarea';
+import { ErrorMessages } from '@/lib/error-messages';
 
 interface QueryPlaygroundProps {
   title?: string;
@@ -117,20 +118,23 @@ export default function QueryPlayground({
         </div>
 
         {feedback && (
-          <Alert className={feedback === 'correct' ? 'border-green-500' : 'border-red-500'}>
+          <Alert className={feedback === 'correct' ? 'border-green-500' : 'border-orange-400'}>
             <div className="flex items-center gap-2">
               {feedback === 'correct' ? (
                 <>
                   <CheckCircle2 className="w-5 h-5 text-[#22c55e]" />
                   <AlertDescription className="text-green-700">
-                    Excellent! Your query is correct.
+                    Excellent work! Your query is correct. You're getting the hang of Tanium queries! 🎉
                   </AlertDescription>
                 </>
               ) : (
                 <>
-                  <XCircle className="w-5 h-5 text-red-600" />
-                  <AlertDescription className="text-red-700">
-                    Not quite right. {attempts >= 2 ? 'Try using the hint below.' : 'Give it another try!'}
+                  <XCircle className="w-5 h-5 text-orange-500" />
+                  <AlertDescription className="text-orange-700">
+                    {attempts >= 2
+                      ? `Close! Check out the hint below for guidance. Remember, practice makes perfect! 💡`
+                      : `Almost there! Give it another shot. Try comparing your query with the example format. 🤔`
+                    }
                   </AlertDescription>
                 </>
               )}

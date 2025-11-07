@@ -11,19 +11,40 @@ import { Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useGlobalNavActive } from "@/contexts/GlobalNavContext";
+import { usePathname } from "next/navigation";
 
 interface MainLayoutProps { children: React.ReactNode; asGlobal?: boolean }
+
+// HOOKS FIX: Move dynamic import outside component to prevent inconsistent hook counts
+// Previously caused "Rendered fewer hooks than expected" error
+const AnimatedBackground = dynamic(
+  () => import("../CyberpunkNavigationFixed").then((m) => m.AnimatedBackground),
+  { ssr: false, loading: () => null }
+);
 
 function MainLayoutComponent({ children, asGlobal = false }: MainLayoutProps) {
   // ALL HOOKS MUST BE CALLED BEFORE ANY EARLY RETURNS (Rules of Hooks)
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [isDesktop, setIsDesktop] = useState(false);
   const [showBackground, setShowBackground] = useState(false);
-  const AnimatedBackground = dynamic(
-    () => import("../CyberpunkNavigationFixed").then((m) => m.AnimatedBackground),
-    { ssr: false, loading: () => null }
-  );
   const globalNavActive = useGlobalNavActive();
+  const pathname = usePathname();
+
+  // Memoize callbacks to prevent child re-renders - MOVED BEFORE EARLY RETURNS
+  const handleSidebarClose = useCallback(() => setSidebarOpen(false), []);
+  const handleSidebarOpen = useCallback(() => setSidebarOpen(true), []);
+  const handleTabChange = useCallback((tabName: string) => {
+    console.log(`Navigating to: ${tabName}`);
+  }, []);
+
+  // Memoize main content className - MOVED BEFORE EARLY RETURNS
+  const mainClassName = useMemo(() => cn(
+    "relative z-20 pt-24 px-4 pb-8 transition-all duration-300",
+    // Desktop: Add left margin for persistent sidebar
+    isDesktop ? "md:ml-64" : "",
+    // Mobile: Full width
+    "ml-0"
+  ), [isDesktop]);
 
   // Detect screen size for responsive behavior
   useEffect(() => {
@@ -85,6 +106,11 @@ function MainLayoutComponent({ children, asGlobal = false }: MainLayoutProps) {
   // If global nav is already active elsewhere and this isn't the global shell, collapse to passthrough
   // DEBUG: Log when this happens
   // TEMPORARILY DISABLED TO DEBUG RENDERING ISSUE
+  // Exclude Budget App from main layout (it has its own standalone layout)
+  if (pathname?.startsWith('/budget-app')) {
+    return <>{children}</>;
+  }
+
   /*
   if (!asGlobal && globalNavActive) {
     console.log('[MainLayout] Bypassing layout - asGlobal:', asGlobal, 'globalNavActive:', globalNavActive);
@@ -96,22 +122,6 @@ function MainLayoutComponent({ children, asGlobal = false }: MainLayoutProps) {
   if (process.env.NODE_ENV === 'development') {
     console.log('[MainLayout] Rendering full layout - asGlobal:', asGlobal, 'globalNavActive:', globalNavActive);
   }
-
-  // Memoize callbacks to prevent child re-renders
-  const handleSidebarClose = useCallback(() => setSidebarOpen(false), []);
-  const handleSidebarOpen = useCallback(() => setSidebarOpen(true), []);
-  const handleTabChange = useCallback((tabName: string) => {
-    console.log(`Navigating to: ${tabName}`);
-  }, []);
-
-  // Memoize main content className
-  const mainClassName = useMemo(() => cn(
-    "relative z-20 pt-24 px-4 pb-8 transition-all duration-300",
-    // Desktop: Add left margin for persistent sidebar
-    isDesktop ? "md:ml-64" : "",
-    // Mobile: Full width
-    "ml-0"
-  ), [isDesktop]);
 
   return (
     <div className="relative min-h-screen">

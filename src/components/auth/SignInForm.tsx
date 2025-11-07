@@ -17,6 +17,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { ErrorMessages, humanizeError } from "@/lib/error-messages";
 
 interface SignInFormProps {
   onSuccess?: () => void;
@@ -34,20 +35,23 @@ export function SignInForm({ onSuccess }: SignInFormProps = {}) {
     setError(null);
 
     if (!email || !password) {
-      setError("Please fill in all fields");
+      const errorMsg = ErrorMessages.fieldRequired("Email and password");
+      setError(`${errorMsg.message}${errorMsg.action ? ` ${errorMsg.action}` : ''}`);
       return;
     }
 
     try {
       const { error } = await signIn(email, password);
       if (error) {
-        setError(error.message);
+        const errorMsg = ErrorMessages.loginFailed;
+        setError(`${errorMsg.message}${errorMsg.action ? ` ${errorMsg.action}` : ''}`);
       } else {
         onSuccess?.();
         router.push("/dashboard");
       }
     } catch (error) {
-      setError("An unexpected error occurred");
+      const errorMsg = humanizeError(error);
+      setError(`${errorMsg.message}${errorMsg.action ? ` ${errorMsg.action}` : ''}`);
     }
   };
 

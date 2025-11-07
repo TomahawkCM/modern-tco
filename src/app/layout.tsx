@@ -36,7 +36,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${inter.className} dark`}>
+    <html lang="en" className={`${inter.className} dark`} data-scroll-behavior="smooth">
       <head>
         {/* Preconnect to external domains for performance */}
         <link rel="preconnect" href="https://qnwcwoutgarhqxlgsjzs.supabase.co" />

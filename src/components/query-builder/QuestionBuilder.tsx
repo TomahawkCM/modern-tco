@@ -40,6 +40,7 @@ import { useDebouncedCallback } from './utils/performance';
 // Query engine integration
 import { TaniumQueryEngine } from '@/lib/tanium-query-engine';
 import type { QueryResult } from '@/lib/tanium-query-engine/types';
+import { ErrorMessages, humanizeError } from '@/lib/error-messages';
 
 // Types
 import {
@@ -296,9 +297,10 @@ export function QuestionBuilder({
       }
     } catch (error) {
       console.error('Query execution error:', error);
+      const errorMsg = ErrorMessages.queryExecutionFailed;
       const errorResult: QueryResult = {
         ok: false,
-        error: error instanceof Error ? error.message : 'Query execution failed'
+        error: `${errorMsg.message}${errorMsg.action ? ` ${errorMsg.action}` : ''}`
       };
       dispatch({ type: 'SET_RESULT', result: errorResult });
     } finally {
