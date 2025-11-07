@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OFX>
+  <SIGNONMSGSRSV1>
+    <SONRS>
+      <STATUS>
+        <CODE>0</CODE>
+        <SEVERITY>INFO</SEVERITY>
+      </STATUS>
+      <DTSERVER>20250106120000</DTSERVER>
+      <LANGUAGE>ENG</LANGUAGE>
+    </SONRS>
+  </SIGNONMSGSRSV1>
+  <CREDITCARDMSGSRSV1>
+    <CCSTMTTRNRS>
+      <TRNUID>1</TRNUID>
+      <STATUS>
+        <CODE>0</CODE>
+        <SEVERITY>INFO</SEVERITY>
+      </STATUS>
+      <CCSTMTRS>
+        <CURDEF>USD</CURDEF>
+        <CCACCTFROM>
+          <ACCTID>1234567890123456</ACCTID>
+        </CCACCTFROM>
+        <BANKTRANLIST>
+          <DTSTART>20250101</DTSTART>
+          <DTEND>20250106</DTEND>
+          <STMTTRN>
+            <TRNTYPE>DEBIT</TRNTYPE>
+            <DTPOSTED>20250102</DTPOSTED>
+            <TRNAMT>-150.00</TRNAMT>
+            <FITID>CC20250102001</FITID>
+            <NAME>AMAZON.COM</NAME>
+            <MEMO>Books and electronics</MEMO>
+          </STMTTRN>
+          <STMTTRN>
+            <TRNTYPE>DEBIT</TRNTYPE>
+            <DTPOSTED>20250103</DTPOSTED>
+            <TRNAMT>-45.99</TRNAMT>
+            <FITID>CC20250103001</FITID>
+            <NAME>NETFLIX</NAME>
+            <MEMO>Subscription</MEMO>
+          </STMTTRN>
+          <STMTTRN>
+            <TRNTYPE>DEBIT</TRNTYPE>
+            <DTPOSTED>20250104</DTPOSTED>
+            <TRNAMT>-65.00</TRNAMT>
+            <FITID>CC20250104001</FITID>
+            <NAME>RESTAURANT XYZ</NAME>
+            <MEMO>Dinner</MEMO>
+          </STMTTRN>
+          <STMTTRN>
+            <TRNTYPE>CREDIT</TRNTYPE>
+            <DTPOSTED>20250105</DTPOSTED>
+            <TRNAMT>150.00</TRNAMT>
+            <FITID>CC20250105001</FITID>
+            <NAME>AMAZON.COM</NAME>
+            <MEMO>Refund</MEMO>
+          </STMTTRN>
+          <STMTTRN>
+            <TRNTYPE>DEBIT</TRNTYPE>
+            <DTPOSTED>20250106</DTPOSTED>
+            <TRNAMT>-89.99</TRNAMT>
+            <FITID>CC20250106001</FITID>
+            <NAME>BEST BUY</NAME>
+            <MEMO>Electronics</MEMO>
+          </STMTTRN>
+        </BANKTRANLIST>
+        <LEDGERBAL>
+          <BALAMT>-850.98</BALAMT>
+          <DTASOF>20250106</DTASOF>
+        </LEDGERBAL>
+      </CCSTMTRS>
+    </CCSTMTTRNRS>
+  </CREDITCARDMSGSRSV1>
+</OFX>

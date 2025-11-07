@@ -1,0 +1,54 @@
+{
+  "defaults": {
+    "standard": "WCAG2AA",
+    "timeout": 30000,
+    "wait": 2000,
+    "chromeLaunchConfig": {
+      "args": ["--no-sandbox", "--disable-setuid-sandbox"]
+    },
+    "reporters": [
+      "cli",
+      "json"
+    ],
+    "runners": [
+      "axe",
+      "htmlcs"
+    ],
+    "ignore": [
+      "notice",
+      "warning"
+    ],
+    "actions": [
+      "wait for element #main-content to be visible",
+      "wait for element .bg-white to be visible"
+    ]
+  },
+  "urls": [
+    {
+      "url": "http://localhost:3000/budget-app",
+      "screenCapture": "pa11y-results/dashboard.png",
+      "timeout": 60000
+    },
+    {
+      "url": "http://localhost:3000/budget-app/transactions",
+      "screenCapture": "pa11y-results/transactions.png",
+      "timeout": 60000
+    },
+    {
+      "url": "http://localhost:3000/budget-app/budgets",
+      "screenCapture": "pa11y-results/budgets.png",
+      "timeout": 60000
+    },
+    {
+      "url": "http://localhost:3000/budget-app/reports",
+      "screenCapture": "pa11y-results/reports.png",
+      "timeout": 60000
+    },
+    {
+      "url": "http://localhost:3000/budget-app/investments",
+      "screenCapture": "pa11y-results/investments.png",
+      "timeout": 60000
+    }
+  ]
+}
+
