@@ -1,8 +1,14 @@
+import { Metadata } from 'next';
 import { AdminGuard } from '@/components/auth/AdminGuard';
 import { BulkImporter } from '@/components/admin/questions/BulkImporter';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
+
+export const metadata: Metadata = {
+  title: 'Bulk Import Questions | Admin',
+  description: 'Import multiple TCO certification questions at once from CSV or JSON files',
+};
 
 export default function BulkImportPage() {
   return (
