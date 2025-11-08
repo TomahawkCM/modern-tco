@@ -21,7 +21,8 @@ import {
   Upload,
   Tags,
   Menu,
-  Wallet
+  Wallet,
+  Camera
 } from 'lucide-react';
 import {
   Sheet,
@@ -46,6 +47,7 @@ interface NavItem {
 const navigation: NavItem[] = [
   { name: 'Dashboard', href: '/budget-app', icon: Home },
   { name: 'Transactions', href: '/budget-app/transactions', icon: Receipt },
+  { name: 'Scan Receipt', href: '/budget-app/ocr', icon: Camera },
   { name: 'Categories', href: '/budget-app/categories', icon: Tags },
   { name: 'Budgets', href: '/budget-app/budgets', icon: PieChart },
   { name: 'Investments', href: '/budget-app/investments', icon: Wallet },
