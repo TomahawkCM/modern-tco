@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 /**
  * Temporary workaround for Vercel's build pipeline expecting legacy
- * `.rsc` artifacts for app router pages. Next 16 with React 19 only emits
- * `page.js` files, so we duplicate them to `.rsc` until Vercel updates.
+ * `.rsc` and `.html` artifacts for app router pages. Next 16 with React 19
+ * only emits `page.js` files, so we duplicate them to `.rsc` and `.html`
+ * until Vercel updates.
  */
 const fs = require("fs/promises");
 const path = require("path");
@@ -40,10 +41,11 @@ function deriveRscTargets(appDir, pagePath) {
 
   const base = relative === "page.js" ? "page" : relative.slice(0, -("page.js".length + 1));
   const rscPath = path.join(appDir, `${base}.rsc`);
+  const htmlPath = path.join(appDir, `${base}.html`);
   const nftSource = `${pagePath}.nft.json`;
   const nftTarget = path.join(appDir, `${base}.rsc.nft.json`);
 
-  return { rscPath, nftSource, nftTarget };
+  return { rscPath, htmlPath, nftSource, nftTarget };
 }
 
 async function ensureRscArtifacts() {
@@ -62,18 +64,28 @@ async function ensureRscArtifacts() {
   }
 
   let createdRsc = 0;
+  let createdHtml = 0;
   let createdTrace = 0;
 
   for (const pagePath of pageEntries) {
     const targets = deriveRscTargets(appDir, pagePath);
     if (!targets) continue;
 
+    const content = await fs.readFile(pagePath);
+
+    // Create .rsc file
     if (!(await pathExists(targets.rscPath))) {
-      const content = await fs.readFile(pagePath);
       await fs.writeFile(targets.rscPath, content);
       createdRsc += 1;
     }
 
+    // Create .html file (Vercel expects these for static routes)
+    if (!(await pathExists(targets.htmlPath))) {
+      await fs.writeFile(targets.htmlPath, content);
+      createdHtml += 1;
+    }
+
+    // Create trace files
     if (await pathExists(targets.nftSource)) {
       if (!(await pathExists(targets.nftTarget))) {
         const traceContent = await fs.readFile(targets.nftSource);
@@ -83,7 +95,7 @@ async function ensureRscArtifacts() {
     }
   }
 
-  // Vercel also expects index.rsc for the root page
+  // Vercel also expects index.rsc and index.html for the root page
   const rootPageRsc = path.join(appDir, "page.rsc");
   const rootIndexRsc = path.join(appDir, "index.rsc");
   if ((await pathExists(rootPageRsc)) && !(await pathExists(rootIndexRsc))) {
@@ -91,6 +103,15 @@ async function ensureRscArtifacts() {
     await fs.writeFile(rootIndexRsc, content);
     createdRsc += 1;
     console.log("[postbuild] Created index.rsc for root page (Vercel compatibility)");
+  }
+
+  const rootPageHtml = path.join(appDir, "page.html");
+  const rootIndexHtml = path.join(appDir, "index.html");
+  if ((await pathExists(rootPageHtml)) && !(await pathExists(rootIndexHtml))) {
+    const content = await fs.readFile(rootPageHtml);
+    await fs.writeFile(rootIndexHtml, content);
+    createdHtml += 1;
+    console.log("[postbuild] Created index.html for root page (Vercel compatibility)");
   }
 
   const rootPageNft = path.join(appDir, "page.rsc.nft.json");
@@ -103,7 +124,7 @@ async function ensureRscArtifacts() {
   }
 
   console.log(
-    `[postbuild] Ensured ${createdRsc} .rsc shims and ${createdTrace} trace files for Next app routes.`
+    `[postbuild] Ensured ${createdRsc} .rsc shims, ${createdHtml} .html files, and ${createdTrace} trace files for Next app routes.`
   );
 }
 
