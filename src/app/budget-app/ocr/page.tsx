@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 /**
  * Receipt Scanner (OCR) Page
@@ -6,12 +6,21 @@
  * Uses Tesseract.js for client-side OCR processing
  */
 
-import { useState, useRef } from 'react';
-import { Camera, Upload, AlertCircle, CheckCircle2, XCircle, Loader2, Eye, Save } from 'lucide-react';
-import { extractReceiptData, type ExtractedReceiptData } from '@/lib/receipt-ocr';
-import { getPrivacySettings } from '@/lib/budget-privacy-settings';
-import { db } from '@/lib/budget-db';
-import Link from 'next/link';
+import { useState, useRef } from "react";
+import {
+  Camera,
+  Upload,
+  AlertCircle,
+  CheckCircle2,
+  XCircle,
+  Loader2,
+  Eye,
+  Save,
+} from "lucide-react";
+import { extractReceiptData, type ExtractedReceiptData } from "@/lib/receipt-ocr";
+import { getPrivacySettings } from "@/lib/budget-privacy-settings";
+import { db } from "@/lib/budget-db";
+import Link from "next/link";
 
 export default function ReceiptScannerPage() {
   const [imageFile, setImageFile] = useState<File | null>(null);
@@ -22,11 +31,11 @@ export default function ReceiptScannerPage() {
   const [savedTransactionId, setSavedTransactionId] = useState<string | null>(null);
 
   // Form fields for editing extracted data
-  const [merchant, setMerchant] = useState('');
-  const [amount, setAmount] = useState('');
-  const [date, setDate] = useState('');
-  const [description, setDescription] = useState('');
-  const [category, setCategory] = useState<string>('');
+  const [merchant, setMerchant] = useState("");
+  const [amount, setAmount] = useState("");
+  const [date, setDate] = useState("");
+  const [description, setDescription] = useState("");
+  const [category, setCategory] = useState<string>("");
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -39,14 +48,14 @@ export default function ReceiptScannerPage() {
     if (!file) return;
 
     // Validate file type
-    if (!file.type.startsWith('image/')) {
-      setError('Please select an image file (JPG, PNG)');
+    if (!file.type.startsWith("image/")) {
+      setError("Please select an image file (JPG, PNG)");
       return;
     }
 
     // Validate file size (max 10MB)
     if (file.size > 10 * 1024 * 1024) {
-      setError('Image file must be less than 10MB');
+      setError("Image file must be less than 10MB");
       return;
     }
 
@@ -67,17 +76,31 @@ export default function ReceiptScannerPage() {
     event.preventDefault();
     const file = event.dataTransfer.files[0];
 
-    if (file && file.type.startsWith('image/')) {
-      // Create a synthetic event for handleFileSelect
-      const syntheticEvent = {
-        target: {
-          files: [file]
-        }
-      } as React.ChangeEvent<HTMLInputElement>;
-      handleFileSelect(syntheticEvent);
-    } else {
-      setError('Please drop an image file (JPG, PNG)');
+    if (!file) return;
+
+    // Validate file type
+    if (!file.type.startsWith("image/")) {
+      setError("Please drop an image file (JPG, PNG)");
+      return;
     }
+
+    // Validate file size (max 10MB)
+    if (file.size > 10 * 1024 * 1024) {
+      setError("Image file must be less than 10MB");
+      return;
+    }
+
+    setImageFile(file);
+    setError(null);
+    setSavedTransactionId(null);
+    setExtractedData(null);
+
+    // Create preview
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      setImagePreview(e.target?.result as string);
+    };
+    reader.readAsDataURL(file);
   };
 
   const handleDragOver = (event: React.DragEvent<HTMLDivElement>) => {
@@ -98,15 +121,15 @@ export default function ReceiptScannerPage() {
       // Pre-fill form with extracted data
       if (data.merchant) setMerchant(data.merchant);
       if (data.amount !== null) setAmount(Math.abs(data.amount).toFixed(2));
-      if (data.date) setDate(data.date.toISOString().split('T')[0]);
+      if (data.date) setDate(data.date.toISOString().split("T")[0]);
       if (data.merchant) setDescription(data.merchant);
 
       if (data.confidence < 0.5) {
-        setError('Low confidence OCR result. Please verify the extracted data carefully.');
+        setError("Low confidence OCR result. Please verify the extracted data carefully.");
       }
     } catch (err) {
-      console.error('OCR processing error:', err);
-      setError('Failed to process receipt. Please try again or enter the data manually.');
+      console.error("OCR processing error:", err);
+      setError("Failed to process receipt. Please try again or enter the data manually.");
     } finally {
       setIsProcessing(false);
     }
@@ -114,7 +137,7 @@ export default function ReceiptScannerPage() {
 
   const saveTransaction = async () => {
     if (!merchant || !amount || !date) {
-      setError('Please fill in merchant, amount, and date before saving');
+      setError("Please fill in merchant, amount, and date before saving");
       return;
     }
 
@@ -122,7 +145,7 @@ export default function ReceiptScannerPage() {
       // Get default account (or first account)
       const accounts = await db.accounts.toArray();
       if (accounts.length === 0) {
-        setError('Please create an account first in the main app');
+        setError("Please create an account first in the main app");
         return;
       }
 
@@ -134,13 +157,15 @@ export default function ReceiptScannerPage() {
         accountId,
         date: new Date(date),
         description: description || merchant,
-        originalDescription: extractedData?.rawText || '',
+        originalDescription: extractedData?.rawText || "",
         amount: -Math.abs(parseFloat(amount)), // Negative for expense
         category: category || null,
         subcategory: null,
-        notes: extractedData ? `OCR Confidence: ${(extractedData.confidence * 100).toFixed(1)}%` : '',
+        notes: extractedData
+          ? `OCR Confidence: ${(extractedData.confidence * 100).toFixed(1)}%`
+          : "",
         isRecurring: false,
-        tags: ['receipt-scan'],
+        tags: ["receipt-scan"],
         merchant,
         receiptIds: [], // Could link to stored receipt blob
         createdAt: new Date(),
@@ -156,8 +181,8 @@ export default function ReceiptScannerPage() {
         resetForm();
       }, 2000);
     } catch (err) {
-      console.error('Error saving transaction:', err);
-      setError('Failed to save transaction. Please try again.');
+      console.error("Error saving transaction:", err);
+      setError("Failed to save transaction. Please try again.");
     }
   };
 
@@ -165,36 +190,36 @@ export default function ReceiptScannerPage() {
     setImageFile(null);
     setImagePreview(null);
     setExtractedData(null);
-    setMerchant('');
-    setAmount('');
-    setDate('');
-    setDescription('');
-    setCategory('');
+    setMerchant("");
+    setAmount("");
+    setDate("");
+    setDescription("");
+    setCategory("");
     setSavedTransactionId(null);
     setError(null);
     if (fileInputRef.current) {
-      fileInputRef.current.value = '';
+      fileInputRef.current.value = "";
     }
   };
 
   // If OCR is disabled, show message
   if (!isOCREnabled) {
     return (
-      <div className="max-w-2xl mx-auto">
-        <h1 className="text-3xl font-bold text-gray-900 mb-6">Scan Receipt</h1>
+      <div className="mx-auto max-w-2xl">
+        <h1 className="mb-6 text-3xl font-bold text-gray-900">Scan Receipt</h1>
 
-        <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-6">
+        <div className="rounded-lg border border-yellow-200 bg-yellow-50 p-6">
           <div className="flex items-start gap-3">
-            <AlertCircle className="w-6 h-6 text-yellow-600 flex-shrink-0 mt-0.5" />
+            <AlertCircle className="mt-0.5 h-6 w-6 flex-shrink-0 text-yellow-600" />
             <div>
-              <h3 className="text-lg font-semibold text-yellow-900 mb-2">OCR Disabled</h3>
-              <p className="text-yellow-800 mb-4">
-                Receipt scanning (OCR) is currently disabled in your privacy settings.
-                Enable it to automatically extract transaction details from receipt images.
+              <h3 className="mb-2 text-lg font-semibold text-yellow-900">OCR Disabled</h3>
+              <p className="mb-4 text-yellow-800">
+                Receipt scanning (OCR) is currently disabled in your privacy settings. Enable it to
+                automatically extract transaction details from receipt images.
               </p>
               <Link
                 href="/budget-app/settings"
-                className="inline-flex items-center px-4 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition-colors"
+                className="inline-flex items-center rounded-lg bg-yellow-600 px-4 py-2 text-white transition-colors hover:bg-yellow-700"
               >
                 Go to Settings
               </Link>
@@ -202,14 +227,14 @@ export default function ReceiptScannerPage() {
           </div>
         </div>
 
-        <div className="mt-6 bg-blue-50 border border-blue-200 rounded-lg p-4">
+        <div className="mt-6 rounded-lg border border-blue-200 bg-blue-50 p-4">
           <div className="flex items-start gap-3">
-            <Eye className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
+            <Eye className="mt-0.5 h-5 w-5 flex-shrink-0 text-blue-600" />
             <div>
-              <h4 className="text-sm font-semibold text-blue-900 mb-1">Privacy Note</h4>
+              <h4 className="mb-1 text-sm font-semibold text-blue-900">Privacy Note</h4>
               <p className="text-sm text-blue-800">
-                OCR processing happens entirely in your browser using Tesseract.js.
-                No receipt images are uploaded to any server. All data stays on your device.
+                OCR processing happens entirely in your browser using Tesseract.js. No receipt
+                images are uploaded to any server. All data stays on your device.
               </p>
             </div>
           </div>
@@ -219,20 +244,20 @@ export default function ReceiptScannerPage() {
   }
 
   return (
-    <div className="max-w-4xl mx-auto">
+    <div className="mx-auto max-w-4xl">
       <div className="mb-6">
         <h1 className="text-3xl font-bold text-gray-900">Scan Receipt</h1>
-        <p className="text-gray-600 mt-2">
+        <p className="mt-2 text-gray-600">
           Upload a receipt image to automatically extract transaction details using OCR
         </p>
       </div>
 
       {/* Privacy Notice */}
-      <div className="mb-6 bg-blue-50 border border-blue-200 rounded-lg p-4">
+      <div className="mb-6 rounded-lg border border-blue-200 bg-blue-50 p-4">
         <div className="flex items-start gap-3">
-          <Eye className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
+          <Eye className="mt-0.5 h-5 w-5 flex-shrink-0 text-blue-600" />
           <div className="flex-1">
-            <h4 className="text-sm font-semibold text-blue-900 mb-1">Privacy First</h4>
+            <h4 className="mb-1 text-sm font-semibold text-blue-900">Privacy First</h4>
             <p className="text-sm text-blue-800">
               All OCR processing happens in your browser. No images are uploaded to servers.
             </p>
@@ -240,13 +265,13 @@ export default function ReceiptScannerPage() {
         </div>
       </div>
 
-      <div className="grid md:grid-cols-2 gap-6">
+      <div className="grid gap-6 md:grid-cols-2">
         {/* Left Column: Upload & Preview */}
         <div className="space-y-6">
           {/* File Upload */}
-          <div className="bg-white rounded-lg shadow p-6">
-            <h2 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
-              <Camera className="w-5 h-5 text-teal-600" />
+          <div className="rounded-lg bg-white p-6 shadow">
+            <h2 className="mb-4 flex items-center gap-2 text-lg font-semibold text-gray-900">
+              <Camera className="h-5 w-5 text-teal-600" />
               Upload Receipt
             </h2>
 
@@ -254,16 +279,15 @@ export default function ReceiptScannerPage() {
               <div
                 onDrop={handleDrop}
                 onDragOver={handleDragOver}
-                className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-teal-500 transition-colors cursor-pointer"
+                className="cursor-pointer rounded-lg border-2 border-dashed border-gray-300 p-8 text-center transition-colors hover:border-teal-500"
                 onClick={() => fileInputRef.current?.click()}
               >
-                <Upload className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-                <p className="text-gray-600 mb-2">
-                  <span className="font-semibold text-teal-600">Click to upload</span> or drag and drop
+                <Upload className="mx-auto mb-4 h-12 w-12 text-gray-400" />
+                <p className="mb-2 text-gray-600">
+                  <span className="font-semibold text-teal-600">Click to upload</span> or drag and
+                  drop
                 </p>
-                <p className="text-sm text-gray-500">
-                  JPG, PNG up to 10MB
-                </p>
+                <p className="text-sm text-gray-500">JPG, PNG up to 10MB</p>
                 <input
                   ref={fileInputRef}
                   type="file"
@@ -274,27 +298,23 @@ export default function ReceiptScannerPage() {
               </div>
             ) : (
               <div>
-                <div className="relative rounded-lg overflow-hidden border border-gray-200 mb-4">
-                  <img
-                    src={imagePreview}
-                    alt="Receipt preview"
-                    className="w-full h-auto"
-                  />
+                <div className="relative mb-4 overflow-hidden rounded-lg border border-gray-200">
+                  <img src={imagePreview} alt="Receipt preview" className="h-auto w-full" />
                 </div>
                 <div className="flex gap-2">
                   <button
                     onClick={processReceipt}
                     disabled={isProcessing}
-                    className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-teal-600 text-white rounded-lg hover:bg-teal-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
+                    className="flex flex-1 items-center justify-center gap-2 rounded-lg bg-teal-600 px-4 py-2 text-white transition-colors hover:bg-teal-700 disabled:cursor-not-allowed disabled:bg-gray-400"
                   >
                     {isProcessing ? (
                       <>
-                        <Loader2 className="w-5 h-5 animate-spin" />
+                        <Loader2 className="h-5 w-5 animate-spin" />
                         Processing...
                       </>
                     ) : (
                       <>
-                        <Camera className="w-5 h-5" />
+                        <Camera className="h-5 w-5" />
                         Scan Receipt
                       </>
                     )}
@@ -302,7 +322,7 @@ export default function ReceiptScannerPage() {
                   <button
                     onClick={resetForm}
                     disabled={isProcessing}
-                    className="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
+                    className="rounded-lg border border-gray-300 px-4 py-2 text-gray-700 transition-colors hover:bg-gray-50"
                   >
                     Clear
                   </button>
@@ -313,47 +333,53 @@ export default function ReceiptScannerPage() {
 
           {/* OCR Results */}
           {extractedData && (
-            <div className="bg-white rounded-lg shadow p-6">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">OCR Results</h3>
+            <div className="rounded-lg bg-white p-6 shadow">
+              <h3 className="mb-4 text-lg font-semibold text-gray-900">OCR Results</h3>
 
               <div className="space-y-3 text-sm">
-                <div className="flex justify-between items-center pb-2 border-b border-gray-200">
+                <div className="flex items-center justify-between border-b border-gray-200 pb-2">
                   <span className="text-gray-600">Confidence:</span>
-                  <span className={`font-semibold ${
-                    extractedData.confidence >= 0.7 ? 'text-green-600' :
-                    extractedData.confidence >= 0.5 ? 'text-yellow-600' :
-                    'text-red-600'
-                  }`}>
+                  <span
+                    className={`font-semibold ${
+                      extractedData.confidence >= 0.7
+                        ? "text-green-600"
+                        : extractedData.confidence >= 0.5
+                          ? "text-yellow-600"
+                          : "text-red-600"
+                    }`}
+                  >
                     {(extractedData.confidence * 100).toFixed(1)}%
                   </span>
                 </div>
 
-                <div className="flex justify-between items-center pb-2 border-b border-gray-200">
+                <div className="flex items-center justify-between border-b border-gray-200 pb-2">
                   <span className="text-gray-600">Merchant:</span>
-                  <span className="font-medium">{extractedData.merchant || 'Not found'}</span>
+                  <span className="font-medium">{extractedData.merchant || "Not found"}</span>
                 </div>
 
-                <div className="flex justify-between items-center pb-2 border-b border-gray-200">
+                <div className="flex items-center justify-between border-b border-gray-200 pb-2">
                   <span className="text-gray-600">Amount:</span>
                   <span className="font-medium">
-                    {extractedData.amount !== null ? `$${extractedData.amount.toFixed(2)}` : 'Not found'}
+                    {extractedData.amount !== null
+                      ? `$${extractedData.amount.toFixed(2)}`
+                      : "Not found"}
                   </span>
                 </div>
 
-                <div className="flex justify-between items-center pb-2 border-b border-gray-200">
+                <div className="flex items-center justify-between border-b border-gray-200 pb-2">
                   <span className="text-gray-600">Date:</span>
                   <span className="font-medium">
-                    {extractedData.date ? extractedData.date.toLocaleDateString() : 'Not found'}
+                    {extractedData.date ? extractedData.date.toLocaleDateString() : "Not found"}
                   </span>
                 </div>
               </div>
 
               {extractedData.rawText && (
                 <details className="mt-4">
-                  <summary className="text-sm text-gray-600 cursor-pointer hover:text-gray-900">
+                  <summary className="cursor-pointer text-sm text-gray-600 hover:text-gray-900">
                     View Raw OCR Text
                   </summary>
-                  <pre className="mt-2 p-3 bg-gray-50 rounded text-xs text-gray-700 overflow-auto max-h-48">
+                  <pre className="mt-2 max-h-48 overflow-auto rounded bg-gray-50 p-3 text-xs text-gray-700">
                     {extractedData.rawText}
                   </pre>
                 </details>
@@ -363,32 +389,28 @@ export default function ReceiptScannerPage() {
         </div>
 
         {/* Right Column: Transaction Form */}
-        <div className="bg-white rounded-lg shadow p-6">
-          <h2 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
-            <Save className="w-5 h-5 text-teal-600" />
+        <div className="rounded-lg bg-white p-6 shadow">
+          <h2 className="mb-4 flex items-center gap-2 text-lg font-semibold text-gray-900">
+            <Save className="h-5 w-5 text-teal-600" />
             Transaction Details
           </h2>
 
           <div className="space-y-4">
             {/* Merchant */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Merchant *
-              </label>
+              <label className="mb-1 block text-sm font-medium text-gray-700">Merchant *</label>
               <input
                 type="text"
                 value={merchant}
                 onChange={(e) => setMerchant(e.target.value)}
                 placeholder="e.g., Walmart, Starbucks"
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:border-transparent focus:ring-2 focus:ring-teal-500"
               />
             </div>
 
             {/* Amount */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Amount *
-              </label>
+              <label className="mb-1 block text-sm font-medium text-gray-700">Amount *</label>
               <div className="relative">
                 <span className="absolute left-3 top-2.5 text-gray-500">$</span>
                 <input
@@ -397,49 +419,43 @@ export default function ReceiptScannerPage() {
                   value={amount}
                   onChange={(e) => setAmount(e.target.value)}
                   placeholder="0.00"
-                  className="w-full pl-7 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                  className="w-full rounded-lg border border-gray-300 py-2 pl-7 pr-3 focus:border-transparent focus:ring-2 focus:ring-teal-500"
                 />
               </div>
             </div>
 
             {/* Date */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Date *
-              </label>
+              <label className="mb-1 block text-sm font-medium text-gray-700">Date *</label>
               <input
                 type="date"
                 value={date}
                 onChange={(e) => setDate(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:border-transparent focus:ring-2 focus:ring-teal-500"
               />
             </div>
 
             {/* Description */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Description
-              </label>
+              <label className="mb-1 block text-sm font-medium text-gray-700">Description</label>
               <input
                 type="text"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 placeholder="Optional description"
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:border-transparent focus:ring-2 focus:ring-teal-500"
               />
             </div>
 
             {/* Category */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Category
-              </label>
+              <label className="mb-1 block text-sm font-medium text-gray-700">Category</label>
               <input
                 type="text"
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
                 placeholder="e.g., Groceries, Dining"
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:border-transparent focus:ring-2 focus:ring-teal-500"
               />
             </div>
 
@@ -447,33 +463,33 @@ export default function ReceiptScannerPage() {
             <button
               onClick={saveTransaction}
               disabled={!merchant || !amount || !date}
-              className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-teal-600 text-white rounded-lg hover:bg-teal-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors font-medium"
+              className="flex w-full items-center justify-center gap-2 rounded-lg bg-teal-600 px-4 py-3 font-medium text-white transition-colors hover:bg-teal-700 disabled:cursor-not-allowed disabled:bg-gray-300"
             >
-              <Save className="w-5 h-5" />
+              <Save className="h-5 w-5" />
               Save Transaction
             </button>
           </div>
 
           {/* Error Message */}
           {error && (
-            <div className="mt-4 p-3 bg-red-50 border border-red-200 rounded-lg flex items-start gap-2">
-              <XCircle className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
+            <div className="mt-4 flex items-start gap-2 rounded-lg border border-red-200 bg-red-50 p-3">
+              <XCircle className="mt-0.5 h-5 w-5 flex-shrink-0 text-red-600" />
               <p className="text-sm text-red-800">{error}</p>
             </div>
           )}
 
           {/* Success Message */}
           {savedTransactionId && (
-            <div className="mt-4 p-3 bg-green-50 border border-green-200 rounded-lg">
-              <div className="flex items-start gap-2 mb-2">
-                <CheckCircle2 className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
-                <p className="text-sm text-green-800 font-medium">
+            <div className="mt-4 rounded-lg border border-green-200 bg-green-50 p-3">
+              <div className="mb-2 flex items-start gap-2">
+                <CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-green-600" />
+                <p className="text-sm font-medium text-green-800">
                   Transaction saved successfully!
                 </p>
               </div>
               <Link
                 href="/budget-app/transactions"
-                className="inline-flex items-center text-sm text-green-700 hover:text-green-900 underline"
+                className="inline-flex items-center text-sm text-green-700 underline hover:text-green-900"
               >
                 View in Transactions
               </Link>
