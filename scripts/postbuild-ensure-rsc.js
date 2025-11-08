@@ -83,6 +83,25 @@ async function ensureRscArtifacts() {
     }
   }
 
+  // Vercel also expects index.rsc for the root page
+  const rootPageRsc = path.join(appDir, "page.rsc");
+  const rootIndexRsc = path.join(appDir, "index.rsc");
+  if ((await pathExists(rootPageRsc)) && !(await pathExists(rootIndexRsc))) {
+    const content = await fs.readFile(rootPageRsc);
+    await fs.writeFile(rootIndexRsc, content);
+    createdRsc += 1;
+    console.log("[postbuild] Created index.rsc for root page (Vercel compatibility)");
+  }
+
+  const rootPageNft = path.join(appDir, "page.rsc.nft.json");
+  const rootIndexNft = path.join(appDir, "index.rsc.nft.json");
+  if ((await pathExists(rootPageNft)) && !(await pathExists(rootIndexNft))) {
+    const content = await fs.readFile(rootPageNft);
+    await fs.writeFile(rootIndexNft, content);
+    createdTrace += 1;
+    console.log("[postbuild] Created index.rsc.nft.json for root page (Vercel compatibility)");
+  }
+
   console.log(
     `[postbuild] Ensured ${createdRsc} .rsc shims and ${createdTrace} trace files for Next app routes.`
   );
