@@ -41,23 +41,23 @@ export function PrivacyControlsPanel({
       [field]: !settings[field],
     };
 
-    // If disabling Claude API master switch, disable all Claude-dependent features
-    if (field === 'enableClaudeAPI' && !newSettings.enableClaudeAPI) {
+    // If disabling AI Features master switch, disable all AI-dependent features
+    if (field === 'enableAIFeatures' && !newSettings.enableAIFeatures) {
       newSettings.enableSmartDuplicateDetection = false;
       newSettings.enableAnomalyDetection = false;
       newSettings.enablePredictiveSpending = false;
       newSettings.enableNaturalLanguageImport = false;
     }
 
-    // If enabling a Claude feature, automatically enable Claude API
+    // If enabling an AI feature, automatically enable AI Features
     if (
-      (field === 'enableSmartDuplicateDetection' || 
-       field === 'enableAnomalyDetection' || 
-       field === 'enablePredictiveSpending' || 
+      (field === 'enableSmartDuplicateDetection' ||
+       field === 'enableAnomalyDetection' ||
+       field === 'enablePredictiveSpending' ||
        field === 'enableNaturalLanguageImport') &&
       newSettings[field]
     ) {
-      newSettings.enableClaudeAPI = true;
+      newSettings.enableAIFeatures = true;
     }
 
     onSettingsChange(newSettings);
@@ -139,8 +139,8 @@ export function PrivacyControlsPanel({
     setShowConfirmReset(false);
   }
 
-  const claudeFeaturesEnabled = settings.enableClaudeAPI;
-  const hasClaudeDependentFeatures = 
+  const aiFeaturesEnabled = settings.enableAIFeatures;
+  const hasAIDependentFeatures =
     settings.enableSmartDuplicateDetection ||
     settings.enableAnomalyDetection ||
     settings.enablePredictiveSpending ||
@@ -178,32 +178,32 @@ export function PrivacyControlsPanel({
           <h3 className="text-lg font-semibold text-gray-900">AI Features</h3>
         </div>
 
-        {/* Claude API Master Switch */}
+        {/* AI Features Master Switch */}
         <div className="mb-6 pb-6 border-b border-gray-200">
           <div className="flex items-center justify-between">
             <div className="flex-1">
               <div className="flex items-center gap-2">
-                <h4 className="font-medium text-gray-900">Claude API (Master Switch)</h4>
-                {claudeFeaturesEnabled && (
+                <h4 className="font-medium text-gray-900">AI Features (Master Switch)</h4>
+                {aiFeaturesEnabled && (
                   <span className="px-2 py-0.5 bg-purple-100 text-purple-700 text-xs rounded-full">
                     Active
                   </span>
                 )}
               </div>
               <p className="text-sm text-gray-600 mt-1">
-                Enable Claude API for advanced AI features. When disabled, all Claude-dependent 
+                Enable AI Features powered by OpenAI for advanced functionality. When disabled, all AI-dependent
                 features are automatically disabled.
               </p>
-              {claudeFeaturesEnabled && (
+              {aiFeaturesEnabled && (
                 <div className="mt-2 text-xs text-gray-500">
-                  <strong>What's sent:</strong> Only cleaned transaction descriptions (e.g., "AMAZON.COM"). 
-                  No account numbers, names, or addresses.
+                  <strong>What's sent:</strong> Only cleaned transaction descriptions (e.g., "AMAZON.COM").
+                  No account numbers, names, or addresses. Powered by OpenAI GPT-4o-mini.
                 </div>
               )}
             </div>
             <ToggleSwitch
-              checked={settings.enableClaudeAPI}
-              onChange={() => handleToggle('enableClaudeAPI')}
+              checked={settings.enableAIFeatures}
+              onChange={() => handleToggle('enableAIFeatures')}
             />
           </div>
         </div>
@@ -214,8 +214,8 @@ export function PrivacyControlsPanel({
           description="Use AI to detect duplicate transactions even when merchant names differ (e.g., 'AMAZON PRIME' vs 'AMZN MKTP CA')"
           checked={settings.enableSmartDuplicateDetection}
           onChange={() => handleToggle('enableSmartDuplicateDetection')}
-          disabled={!claudeFeaturesEnabled}
-          requiresClaude={true}
+          disabled={!aiFeaturesEnabled}
+          requiresAI={true}
         />
 
         {/* Anomaly Detection */}
@@ -224,8 +224,8 @@ export function PrivacyControlsPanel({
           description="Flag unusual spending patterns (e.g., 'Your Starbucks purchase of $85 is unusual')"
           checked={settings.enableAnomalyDetection}
           onChange={() => handleToggle('enableAnomalyDetection')}
-          disabled={!claudeFeaturesEnabled}
-          requiresClaude={true}
+          disabled={!aiFeaturesEnabled}
+          requiresAI={true}
         />
 
         {/* Predictive Spending */}
@@ -234,8 +234,8 @@ export function PrivacyControlsPanel({
           description="Forecast monthly spending by category using AI analysis"
           checked={settings.enablePredictiveSpending}
           onChange={() => handleToggle('enablePredictiveSpending')}
-          disabled={!claudeFeaturesEnabled}
-          requiresClaude={true}
+          disabled={!aiFeaturesEnabled}
+          requiresAI={true}
         />
 
         {/* Natural Language Import */}
@@ -244,8 +244,8 @@ export function PrivacyControlsPanel({
           description="Auto-configure bank imports using natural language (e.g., 'Import my TD checking account CSV')"
           checked={settings.enableNaturalLanguageImport}
           onChange={() => handleToggle('enableNaturalLanguageImport')}
-          disabled={!claudeFeaturesEnabled}
-          requiresClaude={true}
+          disabled={!aiFeaturesEnabled}
+          requiresAI={true}
         />
       </div>
 
@@ -395,16 +395,16 @@ interface SettingRowProps {
   checked: boolean;
   onChange: () => void;
   disabled?: boolean;
-  requiresClaude?: boolean;
+  requiresAI?: boolean;
 }
 
-function SettingRow({ 
-  title, 
-  description, 
-  checked, 
-  onChange, 
+function SettingRow({
+  title,
+  description,
+  checked,
+  onChange,
   disabled = false,
-  requiresClaude = false 
+  requiresAI = false
 }: SettingRowProps) {
   return (
     <div className={`mb-4 pb-4 ${disabled ? 'opacity-50' : ''}`}>
@@ -412,9 +412,9 @@ function SettingRow({
         <div className="flex-1">
           <div className="flex items-center gap-2">
             <h4 className="font-medium text-gray-900">{title}</h4>
-            {requiresClaude && (
+            {requiresAI && (
               <span className="px-2 py-0.5 bg-purple-100 text-purple-700 text-xs rounded-full">
-                Requires Claude API
+                Requires AI Features
               </span>
             )}
           </div>

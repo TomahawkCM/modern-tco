@@ -1,13 +1,13 @@
 /**
- * Smart Duplicate Detection using Claude API
+ * Smart Duplicate Detection using OpenAI API
  * Provides semantic similarity matching for transaction descriptions
  * Handles variants like "AMAZON PRIME" vs "AMZN MKTP CA"
- * 
+ *
  * Privacy: Only sends cleaned transaction descriptions (no account numbers, names, addresses)
  * Opt-in: Requires user consent via privacy settings
  */
 
-import Anthropic from '@anthropic-ai/sdk';
+import OpenAI from 'openai';
 import type { ParsedTransaction, Transaction } from '@/types/budget';
 
 export interface DuplicateMatch {
@@ -30,39 +30,39 @@ export interface SmartDuplicateDetectionOptions {
  */
 function cleanDescription(description: string): string {
   let cleaned = description.trim();
-  
+
   // Remove account numbers (patterns like XXXX-1234, 1234567890)
   cleaned = cleaned.replace(/\b\d{4}[- ]?\d{4,}\b/g, '');
   cleaned = cleaned.replace(/\bXXXX[- ]?\d{4,}\b/gi, '');
-  
+
   // Remove transaction IDs (long numeric strings)
   cleaned = cleaned.replace(/\b\d{10,}\b/g, '');
-  
+
   // Remove common prefixes that don't help with matching
   cleaned = cleaned.replace(/^\[[A-Z]{2}\]\s*/i, ''); // [PR], [OP] etc
   cleaned = cleaned.replace(/^(PURCHASE|DEBIT|CREDIT|PAYMENT|AUTH)\s+/i, '');
-  
+
   // Remove dates in various formats
   cleaned = cleaned.replace(/\d{1,2}\/\d{1,2}\/\d{2,4}/g, '');
   cleaned = cleaned.replace(/\d{4}-\d{2}-\d{2}/g, '');
-  
+
   // Clean up extra whitespace
   cleaned = cleaned.replace(/\s+/g, ' ').trim();
-  
+
   return cleaned;
 }
 
 /**
- * Check if two transaction descriptions are semantically similar using Claude API
+ * Check if two transaction descriptions are semantically similar using OpenAI API
  */
 async function checkSemanticSimilarity(
-  client: Anthropic,
+  client: OpenAI,
   desc1: string,
   desc2: string
 ): Promise<{ isDuplicate: boolean; confidence: number; reason: string }> {
   const cleaned1 = cleanDescription(desc1);
   const cleaned2 = cleanDescription(desc2);
-  
+
   // If cleaned descriptions are identical, skip API call
   if (cleaned1.toLowerCase() === cleaned2.toLowerCase()) {
     return {
@@ -71,7 +71,7 @@ async function checkSemanticSimilarity(
       reason: 'Exact match after cleaning',
     };
   }
-  
+
   const prompt = `You are a financial transaction duplicate detection system. Determine if these two transaction descriptions refer to the same purchase or payment.
 
 Transaction 1: "${cleaned1}"
@@ -91,35 +91,33 @@ Respond with JSON:
 }`;
 
   try {
-    const response = await client.messages.create({
-      model: 'claude-3-5-haiku-20241022', // Use Haiku for cost efficiency
-      max_tokens: 200,
-      temperature: 0.1, // Low temperature for consistent results
+    const response = await client.chat.completions.create({
+      model: 'gpt-4o-mini', // Fast and cost-effective model
       messages: [
         {
-          role: 'user',
-          content: prompt,
+          role: 'system',
+          content: 'You are a financial transaction analysis system. Be precise and conservative - only mark as duplicates if you are confident they refer to the same transaction.'
         },
+        {
+          role: 'user',
+          content: prompt
+        }
       ],
-      system: 'You are a financial transaction analysis system. Be precise and conservative - only mark as duplicates if you are confident they refer to the same transaction.',
+      response_format: { type: 'json_object' },
+      temperature: 0.1, // Low temperature for consistent results
+      max_tokens: 200,
     });
 
-    const content = response.content[0];
-    if (content.type === 'text') {
-      const text = content.text.trim();
-      
-      // Try to extract JSON from response
-      const jsonMatch = text.match(/\{[\s\S]*\}/);
-      if (jsonMatch) {
-        const result = JSON.parse(jsonMatch[0]);
-        return {
-          isDuplicate: result.isDuplicate || false,
-          confidence: Math.max(0, Math.min(1, result.confidence || 0)),
-          reason: result.reason || 'Semantic match',
-        };
-      }
+    const content = response.choices[0]?.message?.content;
+    if (content) {
+      const result = JSON.parse(content);
+      return {
+        isDuplicate: result.isDuplicate || false,
+        confidence: Math.max(0, Math.min(1, result.confidence || 0)),
+        reason: result.reason || 'Semantic match',
+      };
     }
-    
+
     // Fallback: conservative approach
     return {
       isDuplicate: false,
@@ -138,7 +136,7 @@ Respond with JSON:
 }
 
 /**
- * Detect duplicates using semantic similarity with Claude API
+ * Detect duplicates using semantic similarity with OpenAI API
  * Only checks transactions that pass basic filters (date + amount similarity)
  */
 export async function detectSmartDuplicates(
@@ -147,7 +145,7 @@ export async function detectSmartDuplicates(
   options: SmartDuplicateDetectionOptions = {}
 ): Promise<DuplicateMatch[]> {
   const {
-    apiKey = process.env.NEXT_PUBLIC_ANTHROPIC_API_KEY,
+    apiKey = process.env.NEXT_PUBLIC_OPENAI_API_KEY,
     enabled = false,
     minConfidence = 0.7,
     batchSize = 10,
@@ -164,7 +162,7 @@ export async function detectSmartDuplicates(
     return [];
   }
 
-  const client = new Anthropic({ apiKey });
+  const client = new OpenAI({ apiKey, dangerouslyAllowBrowser: true });
   const matches: DuplicateMatch[] = [];
 
   // Filter candidates: same date (±1 day) and similar amount (±$0.01)
@@ -195,7 +193,7 @@ export async function detectSmartDuplicates(
   // Process in batches to avoid rate limits
   for (let i = 0; i < candidates.length; i += batchSize) {
     const batch = candidates.slice(i, i + batchSize);
-    
+
     // Process batch concurrently
     const batchPromises = batch.map(async ({ newTx, existingTx }) => {
       const result = await checkSemanticSimilarity(
@@ -272,4 +270,3 @@ export async function detectDuplicatesEnhanced(
     }
   }
 }
-

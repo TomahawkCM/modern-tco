@@ -12,28 +12,28 @@ export interface PrivacySettings {
   enableAnomalyDetection: boolean;
   enablePredictiveSpending: boolean;
   enableNaturalLanguageImport: boolean;
-  
+
   // Data Processing
-  enableClaudeAPI: boolean; // Master switch for Claude API features
+  enableAIFeatures: boolean; // Master switch for AI features (OpenAI)
   enableOCR: boolean;
-  
+
   // Data Security
   enableEncryption: boolean; // Encrypt sensitive data at rest
-  
+
   // Data Management
   allowDataExport: boolean;
   allowDataDeletion: boolean;
-  
+
   // Last updated timestamp
   updatedAt: number;
 }
 
 const DEFAULT_SETTINGS: PrivacySettings = {
-  enableSmartDuplicateDetection: false, // Opt-in by default
-  enableAnomalyDetection: false,
-  enablePredictiveSpending: false,
-  enableNaturalLanguageImport: false,
-  enableClaudeAPI: false, // Master switch - must be enabled for any Claude features
+  enableSmartDuplicateDetection: true, // Enabled by default
+  enableAnomalyDetection: true, // Enabled by default
+  enablePredictiveSpending: true, // Enabled by default
+  enableNaturalLanguageImport: true, // Enabled by default
+  enableAIFeatures: true, // Master switch - AI features enabled by default
   enableOCR: true, // OCR is client-side only, safe by default
   enableEncryption: false, // Encryption opt-in (requires key generation)
   allowDataExport: true,
@@ -89,15 +89,23 @@ export function savePrivacySettings(settings: Partial<PrivacySettings>): void {
  */
 export function isSmartDuplicateDetectionEnabled(): boolean {
   const settings = getPrivacySettings();
-  return settings.enableClaudeAPI && settings.enableSmartDuplicateDetection;
+  return settings.enableAIFeatures && settings.enableSmartDuplicateDetection;
 }
 
 /**
- * Check if any Claude API feature is enabled
+ * Check if AI features are enabled
+ */
+export function isAIFeaturesEnabled(): boolean {
+  const settings = getPrivacySettings();
+  return settings.enableAIFeatures;
+}
+
+/**
+ * @deprecated Use isAIFeaturesEnabled() instead
+ * Backward compatibility alias
  */
 export function isClaudeAPIEnabled(): boolean {
-  const settings = getPrivacySettings();
-  return settings.enableClaudeAPI;
+  return isAIFeaturesEnabled();
 }
 
 /**

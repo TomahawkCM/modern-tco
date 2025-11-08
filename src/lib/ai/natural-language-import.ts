@@ -1,16 +1,16 @@
 /**
  * Natural Language Import Configuration
- * Uses Claude API to parse user intent and auto-generate bank configurations
- * 
+ * Uses OpenAI API to parse user intent and auto-generate bank configurations
+ *
  * Example: "Import my TD checking account CSV" → auto-configures TD parser
- * 
+ *
  * Privacy: Only sends user's natural language input, no transaction data
  */
 
-import Anthropic from '@anthropic-ai/sdk';
+import OpenAI from 'openai';
 import { BANK_CONFIGS } from '@/lib/parsers/csv-parser';
 import type { BankConfig } from '@/types/budget';
-import { isClaudeAPIEnabled } from '@/lib/budget-privacy-settings';
+import { isAIFeaturesEnabled } from '@/lib/budget-privacy-settings';
 
 export interface ImportIntent {
   bank: string | null; // Bank key from BANK_CONFIGS
@@ -28,7 +28,7 @@ export interface NaturalLanguageImportOptions {
 }
 
 const DEFAULT_OPTIONS: Required<NaturalLanguageImportOptions> = {
-  apiKey: process.env.NEXT_PUBLIC_ANTHROPIC_API_KEY || '',
+  apiKey: process.env.NEXT_PUBLIC_OPENAI_API_KEY || '',
   enabled: true,
   fallbackToWizard: true,
 };
@@ -79,7 +79,7 @@ const BANK_NAME_MAP: Record<string, string> = {
   'simplii': 'simplii',
   'simplii financial': 'simplii',
   'home trust': 'homeTrust',
-  
+
   // American banks
   'chase': 'chase',
   'chase bank': 'chase',
@@ -94,16 +94,16 @@ const BANK_NAME_MAP: Record<string, string> = {
 };
 
 /**
- * Parse natural language import intent using Claude API
+ * Parse natural language import intent using OpenAI API
  */
 export async function parseImportIntent(
   userInput: string,
   options: NaturalLanguageImportOptions = {}
 ): Promise<ImportIntent> {
   const finalOptions = { ...DEFAULT_OPTIONS, ...options };
-  
+
   // Privacy check
-  if (!finalOptions.enabled || !isClaudeAPIEnabled()) {
+  if (!finalOptions.enabled || !isAIFeaturesEnabled()) {
     return {
       bank: null,
       accountType: null,
@@ -112,16 +112,16 @@ export async function parseImportIntent(
       reasoning: 'Natural language import is disabled in privacy settings',
     };
   }
-  
+
   // API key check
   if (!finalOptions.apiKey) {
     console.warn('[NLImport] No API key provided. Falling back to basic parsing.');
     return parseBasicIntent(userInput);
   }
-  
+
   try {
-    const client = new Anthropic({ apiKey: finalOptions.apiKey });
-    
+    const client = new OpenAI({ apiKey: finalOptions.apiKey, dangerouslyAllowBrowser: true });
+
     const prompt = `You are a financial data import assistant. Parse the user's natural language request to configure a bank import.
 
 User input: "${userInput}"
@@ -147,42 +147,40 @@ Respond with JSON:
   "reasoning": "Brief explanation of how you parsed the request"
 }`;
 
-    const response = await client.messages.create({
-      model: 'claude-3-5-haiku-20241022', // Use Haiku for cost efficiency
-      max_tokens: 300,
-      temperature: 0.1, // Low temperature for consistent results
+    const response = await client.chat.completions.create({
+      model: 'gpt-4o-mini', // Fast and cost-effective model
       messages: [
         {
-          role: 'user',
-          content: prompt,
+          role: 'system',
+          content: 'You are a financial data import configuration assistant. Be precise and conservative - only return high confidence matches.'
         },
+        {
+          role: 'user',
+          content: prompt
+        }
       ],
-      system: 'You are a financial data import configuration assistant. Be precise and conservative - only return high confidence matches.',
+      response_format: { type: 'json_object' },
+      temperature: 0.1, // Low temperature for consistent results
+      max_tokens: 300,
     });
 
-    const content = response.content[0];
-    if (content.type === 'text') {
-      const text = content.text.trim();
-      
-      // Extract JSON from response
-      const jsonMatch = text.match(/\{[\s\S]*\}/);
-      if (jsonMatch) {
-        const result = JSON.parse(jsonMatch[0]);
-        
-        // Validate bank key exists
-        const bankKey = result.bank?.toLowerCase();
-        const validBankKey = bankKey && BANK_CONFIGS[bankKey] ? bankKey : null;
-        
-        return {
-          bank: validBankKey,
-          accountType: result.accountType || null,
-          fileFormat: result.fileFormat?.toLowerCase() || null,
-          confidence: Math.max(0, Math.min(1, result.confidence || 0)),
-          reasoning: result.reasoning || 'Parsed using Claude API',
-        };
-      }
+    const content = response.choices[0]?.message?.content;
+    if (content) {
+      const result = JSON.parse(content);
+
+      // Validate bank key exists
+      const bankKey = result.bank?.toLowerCase();
+      const validBankKey = bankKey && BANK_CONFIGS[bankKey] ? bankKey : null;
+
+      return {
+        bank: validBankKey,
+        accountType: result.accountType || null,
+        fileFormat: result.fileFormat?.toLowerCase() || null,
+        confidence: Math.max(0, Math.min(1, result.confidence || 0)),
+        reasoning: result.reasoning || 'Parsed using OpenAI API',
+      };
     }
-    
+
     // Fallback if JSON parsing fails
     return parseBasicIntent(userInput);
   } catch (error) {
@@ -198,7 +196,7 @@ Respond with JSON:
  */
 function parseBasicIntent(userInput: string): ImportIntent {
   const lowerInput = userInput.toLowerCase();
-  
+
   // Extract bank
   let bank: string | null = null;
   for (const [key, value] of Object.entries(BANK_NAME_MAP)) {
@@ -207,7 +205,7 @@ function parseBasicIntent(userInput: string): ImportIntent {
       break;
     }
   }
-  
+
   // Extract account type
   let accountType: 'checking' | 'savings' | 'credit' | null = null;
   if (lowerInput.includes('checking')) {
@@ -217,7 +215,7 @@ function parseBasicIntent(userInput: string): ImportIntent {
   } else if (lowerInput.includes('credit')) {
     accountType = 'credit';
   }
-  
+
   // Extract file format
   let fileFormat: 'csv' | 'ofx' | 'qfx' | null = null;
   if (lowerInput.includes('csv')) {
@@ -227,13 +225,13 @@ function parseBasicIntent(userInput: string): ImportIntent {
   } else if (lowerInput.includes('qfx')) {
     fileFormat = 'qfx';
   }
-  
+
   // Calculate confidence based on matches
   let confidence = 0.5; // Base confidence for keyword matching
   if (bank) confidence += 0.2;
   if (accountType) confidence += 0.15;
   if (fileFormat) confidence += 0.15;
-  
+
   return {
     bank,
     accountType,
@@ -259,10 +257,10 @@ export async function autoConfigureImport(
   shouldUseWizard: boolean; // True if confidence is low and should show wizard
 }> {
   const intent = await parseImportIntent(userInput, options);
-  
+
   // If confidence is low, suggest using wizard
   const shouldUseWizard = intent.confidence < 0.7 && options.fallbackToWizard !== false;
-  
+
   return {
     success: intent.bank !== null && intent.confidence >= 0.5,
     bankKey: intent.bank,
@@ -278,17 +276,16 @@ export async function autoConfigureImport(
  */
 export function isNaturalLanguageImportEnabled(): boolean {
   if (typeof window === 'undefined') return false;
-  
+
   try {
     const settings = localStorage.getItem('budget-app-privacy-settings');
     if (settings) {
       const parsed = JSON.parse(settings);
-      return parsed.enableNaturalLanguageImport === true && parsed.enableClaudeAPI === true;
+      return parsed.enableNaturalLanguageImport === true && parsed.enableAIFeatures === true;
     }
   } catch (error) {
     console.warn('[NLImport] Failed to check privacy settings:', error);
   }
-  
+
   return false;
 }
-
