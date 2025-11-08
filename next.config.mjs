@@ -28,38 +28,10 @@ const nextConfig = {
     removeConsole: process.env.NODE_ENV === "production",
   },
   
-  // Optimize CSS and imports
+  // Next.js 16 experimental features
   experimental: {
-    optimizeCss: true,
-    // Disable static generation for error pages to avoid Html import bug
-    staticGenerationRetryCount: 0,
-    staticGenerationMaxConcurrency: 1,
-    optimizePackageImports: [
-      "@radix-ui/react-icons",
-      "lucide-react",
-      "@supabase/supabase-js",
-      "framer-motion",
-      "date-fns",
-      "recharts",
-      "@radix-ui/react-dialog",
-      "@radix-ui/react-dropdown-menu",
-      "@radix-ui/react-select",
-      "@radix-ui/react-slot",
-      "@radix-ui/react-tabs",
-      "@radix-ui/react-tooltip",
-      "@radix-ui/react-avatar",
-      "@radix-ui/react-checkbox",
-      "@radix-ui/react-label",
-      "@radix-ui/react-popover",
-      "@radix-ui/react-progress",
-      "@radix-ui/react-radio-group",
-      "@radix-ui/react-separator",
-      "@radix-ui/react-switch",
-      "@radix-ui/react-toast",
-      "class-variance-authority",
-      "tailwind-merge",
-      "clsx"
-    ],
+    // Enable Turbopack filesystem caching for faster dev server startup
+    turbopackFileSystemCacheForDev: true,
   },
 
   // Production optimizations
