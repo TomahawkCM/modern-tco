@@ -25,6 +25,8 @@ import type {
   Holding,
   AnomalyFeedback,
   PredictionAccuracy,
+  Loan,
+  LoanPayment,
 } from '@/types/budget';
 import {
   encryptTransaction,
@@ -67,6 +69,8 @@ export class BudgetDatabase extends Dexie {
   priceCache!: Table<PriceCache>;
   anomalyFeedback!: Table<AnomalyFeedback>;
   predictionAccuracy!: Table<PredictionAccuracy>;
+  loans!: Table<Loan>;
+  loanPayments!: Table<LoanPayment>;
 
   constructor() {
     super('HouseholdBudgetApp');
@@ -168,6 +172,44 @@ export class BudgetDatabase extends Dexie {
       priceCache: 'id, symbol, fetchedAt, source',
       anomalyFeedback: 'id, transactionId, merchant, category, createdAt',
       predictionAccuracy: 'id, category, month, recordedAt'
+    });
+
+    // Version 8: Add loan tracking tables
+    this.version(8).stores({
+      accounts: 'id, name, institution, type',
+      transactions: 'id, accountId, date, category, amount, description, splitFromId, isSplit',
+      categories: 'id, name, type, order',
+      budgets: 'id, categoryId, period, startDate',
+      futurePurchases: 'id, targetDate, priority, isCompleted',
+      retirementPlans: 'id, name, createdAt',
+      importMappings: 'id, institution, accountId',
+      receipts: 'id, transactionId, uploadedAt, mimeType, fileSize',
+      investmentAccounts: 'id, type, name, createdAt',
+      holdings: 'id, accountId, symbol, purchaseDate, [accountId+symbol]',
+      priceCache: 'id, symbol, fetchedAt, source',
+      anomalyFeedback: 'id, transactionId, merchant, category, createdAt',
+      predictionAccuracy: 'id, category, month, recordedAt',
+      loans: 'id, type, status, lender, nextPaymentDate, accountId',
+      loanPayments: 'id, loanId, date, transactionId, isScheduled'
+    });
+
+    // Version 9: Add payment frequency to loans
+    this.version(9).stores({
+      accounts: 'id, name, institution, type',
+      transactions: 'id, accountId, date, category, amount, description, splitFromId, isSplit',
+      categories: 'id, name, type, order',
+      budgets: 'id, categoryId, period, startDate',
+      futurePurchases: 'id, targetDate, priority, isCompleted',
+      retirementPlans: 'id, name, createdAt',
+      importMappings: 'id, institution, accountId',
+      receipts: 'id, transactionId, uploadedAt, mimeType, fileSize',
+      investmentAccounts: 'id, type, name, createdAt',
+      holdings: 'id, accountId, symbol, purchaseDate, [accountId+symbol]',
+      priceCache: 'id, symbol, fetchedAt, source',
+      anomalyFeedback: 'id, transactionId, merchant, category, createdAt',
+      predictionAccuracy: 'id, category, month, recordedAt',
+      loans: 'id, type, status, lender, nextPaymentDate, accountId, paymentFrequency',
+      loanPayments: 'id, loanId, date, transactionId, isScheduled'
     });
   }
 }

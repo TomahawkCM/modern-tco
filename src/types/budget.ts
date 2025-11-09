@@ -462,6 +462,8 @@ export interface BudgetExport {
   investmentTransactions?: InvestmentTransaction[];
   investmentAccounts?: InvestmentAccount[]; // Phase 8 simplified
   holdings?: Holding[]; // Phase 8 simplified
+  loans?: Loan[]; // Loan tracking
+  loanPayments?: LoanPayment[]; // Loan payment history
 }
 
 // Filter and sort options
@@ -481,4 +483,83 @@ export interface TransactionFilters {
 export interface SortOption {
   field: keyof Transaction;
   direction: 'asc' | 'desc';
+}
+
+// Loan Types
+export type LoanType = 'mortgage' | 'auto' | 'personal' | 'student';
+export type LoanStatus = 'active' | 'paid-off' | 'refinanced' | 'defaulted';
+export type PaymentFrequency = 'weekly' | 'bi-weekly' | 'monthly';
+
+export interface Loan {
+  id: string;
+  name: string; // "Primary Mortgage", "Honda Civic Loan"
+  type: LoanType;
+  lender: string; // "Wells Fargo", "TD Bank"
+
+  // Loan Terms
+  originalPrincipal: number; // Original loan amount
+  interestRate: number; // Annual interest rate (e.g., 3.5 for 3.5%)
+  termMonths: number; // Loan term in months (e.g., 360 for 30 years)
+  startDate: Date; // Loan origination date
+
+  // Current Status
+  currentBalance: number; // Remaining principal balance
+  monthlyPayment: number; // Regular monthly payment (P&I)
+  paymentFrequency: PaymentFrequency; // How often payments are made
+  nextPaymentDate: Date; // Next scheduled payment
+  status: LoanStatus;
+
+  // Payment Tracking
+  totalPaid: number; // Total amount paid so far
+  totalInterestPaid: number; // Total interest paid so far
+  extraPayments: number; // Total extra principal payments
+
+  // Optional Fields
+  accountId?: string; // Link to checking/savings account for auto-pay
+  notes?: string;
+
+  // Mortgage-specific
+  propertyTax?: number; // Monthly property tax (for escrow)
+  homeInsurance?: number; // Monthly insurance (for escrow)
+  pmi?: number; // Private Mortgage Insurance
+
+  // Auto-specific
+  vehicleMake?: string; // "Honda"
+  vehicleModel?: string; // "Civic"
+  vehicleYear?: number; // 2020
+
+  // Student Loan-specific
+  defermentEndDate?: Date; // When payments start
+  subsidized?: boolean; // Subsidized loan (gov't pays interest during deferment)
+
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+export interface LoanPayment {
+  id: string;
+  loanId: string; // Reference to Loan
+  date: Date;
+  amount: number; // Total payment amount
+  principalAmount: number; // Amount applied to principal
+  interestAmount: number; // Amount applied to interest
+  extraPrincipal: number; // Extra principal payment beyond regular
+  balanceAfter: number; // Remaining balance after payment
+
+  // Optional
+  transactionId?: string; // Link to Transaction if auto-matched
+  notes?: string;
+  isScheduled: boolean; // True if from amortization schedule, false if actual payment
+
+  createdAt: Date;
+}
+
+export interface AmortizationEntry {
+  month: number; // Payment number (1-360)
+  date: Date; // Payment date
+  payment: number; // Total payment amount
+  principal: number; // Principal portion
+  interest: number; // Interest portion
+  balance: number; // Remaining balance
+  cumulativeInterest: number; // Total interest paid up to this point
 }
