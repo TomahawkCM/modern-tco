@@ -1,17 +1,17 @@
-const fs = require('fs');
-const path = require('path');
+const fs = require("fs");
+const path = require("path");
 
-const sourceDir = path.resolve(__dirname, '../node_modules/pdfjs-dist/legacy/build');
+const sourceDir = path.resolve(__dirname, "../node_modules/pdfjs-dist/legacy/build");
 const targets = [
   {
-    description: 'PDF.js worker',
-    sources: ['pdf.worker.min.mjs', 'pdf.worker.mjs'],
-    destination: path.resolve(__dirname, '../public/pdf.worker.mjs'),
+    description: "PDF.js worker",
+    sources: ["pdf.worker.min.mjs", "pdf.worker.mjs"],
+    destination: path.resolve(__dirname, "../public/pdf.worker.mjs"),
   },
   {
-    description: 'PDF.js main bundle',
-    sources: ['pdf.min.mjs', 'pdf.mjs'],
-    destination: path.resolve(__dirname, '../public/pdf.mjs'),
+    description: "PDF.js main bundle",
+    sources: ["pdf.min.mjs", "pdf.mjs"],
+    destination: path.resolve(__dirname, "../public/pdf.mjs"),
   },
 ];
 
@@ -21,11 +21,11 @@ for (const target of targets) {
     .find((candidate) => fs.existsSync(candidate));
 
   if (!sourcePath) {
-    console.error(
-      `❌ Error: Could not find any of [${target.sources.join(', ')}] in ${sourceDir}.`
+    console.warn(
+      `⚠️  Warning: Could not find any of [${target.sources.join(", ")}] in ${sourceDir}.`
     );
-    console.error('Please run `npm install` again.');
-    process.exit(1);
+    console.warn(`   Skipping ${target.description} copy - PDF features may not work.`);
+    continue; // Skip this target instead of failing
   }
 
   fs.mkdirSync(path.dirname(target.destination), { recursive: true });
