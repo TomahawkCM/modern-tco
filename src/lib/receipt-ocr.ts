@@ -1,10 +1,11 @@
 /**
  * Receipt OCR Utilities
- * Phase 7.3.1: Extract text from receipt images using Tesseract.js
+ * Phase 7.3.1: Extract text from receipt images and PDFs using Tesseract.js
  * Parses merchant, date, and amount from receipt text
  */
 
 import Tesseract from 'tesseract.js';
+import { convertPdfToImages, isPdfFile } from './pdf-to-image';
 
 export interface ExtractedReceiptData {
   merchant: string | null;
@@ -12,36 +13,28 @@ export interface ExtractedReceiptData {
   date: Date | null;
   rawText: string;
   confidence: number; // 0-1
+  pagesProcessed?: number; // Number of pages processed (for PDFs)
+  bestPageNumber?: number; // Page number with highest confidence (for PDFs)
 }
 
 /**
- * Extract text and parse data from a receipt image
- * @param file - Image file (JPG, PNG) to process
+ * Extract text and parse data from a receipt image or PDF
+ * @param file - Image file (JPG, PNG) or PDF to process
+ * @param onProgress - Optional progress callback for multi-page PDFs
  * @returns Extracted receipt data with confidence score
  */
-export async function extractReceiptData(file: File): Promise<ExtractedReceiptData> {
+export async function extractReceiptData(
+  file: File,
+  onProgress?: (current: number, total: number) => void
+): Promise<ExtractedReceiptData> {
   try {
-    // Perform OCR on the image
-    const result = await Tesseract.recognize(
-      file,
-      'eng'
-    );
-
-    const rawText = result.data.text;
-    const confidence = result.data.confidence / 100; // Convert to 0-1 scale
-
-    // Parse merchant, amount, and date from the text
-    const merchant = extractMerchant(rawText);
-    const amount = extractAmount(rawText);
-    const date = extractDate(rawText);
-
-    return {
-      merchant,
-      amount,
-      date,
-      rawText,
-      confidence,
-    };
+    // Check if file is a PDF
+    if (isPdfFile(file)) {
+      return await extractFromPdf(file, onProgress);
+    } else {
+      // Process as image
+      return await extractFromImage(file);
+    }
   } catch (error) {
     console.error('OCR extraction failed:', error);
     return {
@@ -52,6 +45,120 @@ export async function extractReceiptData(file: File): Promise<ExtractedReceiptDa
       confidence: 0,
     };
   }
+}
+
+/**
+ * Extract data from an image file
+ */
+async function extractFromImage(file: File): Promise<ExtractedReceiptData> {
+  const result = await Tesseract.recognize(file, 'eng');
+
+  const rawText = result.data.text;
+  const confidence = result.data.confidence / 100; // Convert to 0-1 scale
+
+  // Parse merchant, amount, and date from the text
+  const merchant = extractMerchant(rawText);
+  const amount = extractAmount(rawText);
+  const date = extractDate(rawText);
+
+  return {
+    merchant,
+    amount,
+    date,
+    rawText,
+    confidence,
+  };
+}
+
+/**
+ * Extract data from a PDF file (processes all pages, returns best result)
+ */
+async function extractFromPdf(
+  file: File,
+  onProgress?: (current: number, total: number) => void
+): Promise<ExtractedReceiptData> {
+  // Convert PDF pages to images
+  const pages = await convertPdfToImages(file, 10); // Max 10 pages
+
+  if (pages.length === 0) {
+    throw new Error('PDF has no pages');
+  }
+
+  // Process each page with OCR
+  const results: Array<ExtractedReceiptData & { pageNum: number }> = [];
+
+  for (let i = 0; i < pages.length; i++) {
+    const page = pages[i];
+
+    // Report progress
+    if (onProgress) {
+      onProgress(i + 1, pages.length);
+    }
+
+    // Perform OCR on the page canvas
+    const result = await Tesseract.recognize(page.canvas, 'eng');
+
+    const rawText = result.data.text;
+    const confidence = result.data.confidence / 100;
+
+    // Parse data from this page
+    const merchant = extractMerchant(rawText);
+    const amount = extractAmount(rawText);
+    const date = extractDate(rawText);
+
+    results.push({
+      merchant,
+      amount,
+      date,
+      rawText,
+      confidence,
+      pageNum: page.pageNumber,
+    });
+  }
+
+  // Find the best result (highest confidence with valid data)
+  let bestResult = results[0];
+  let bestScore = calculateResultScore(bestResult);
+
+  for (const result of results) {
+    const score = calculateResultScore(result);
+    if (score > bestScore) {
+      bestResult = result;
+      bestScore = score;
+    }
+  }
+
+  // Combine raw text from all pages (for reference)
+  const combinedRawText = results.map((r, i) => `--- Page ${i + 1} ---\n${r.rawText}`).join('\n\n');
+
+  return {
+    merchant: bestResult.merchant,
+    amount: bestResult.amount,
+    date: bestResult.date,
+    rawText: combinedRawText,
+    confidence: bestResult.confidence,
+    pagesProcessed: pages.length,
+    bestPageNumber: bestResult.pageNum,
+  };
+}
+
+/**
+ * Calculate a score for a result (used to find best page in multi-page PDFs)
+ * Higher score = better result
+ */
+function calculateResultScore(result: ExtractedReceiptData & { pageNum: number }): number {
+  let score = result.confidence;
+
+  // Boost score if we found merchant
+  if (result.merchant) score += 0.3;
+
+  // Boost score if we found amount
+  if (result.amount !== null) score += 0.4;
+
+  // Boost score if we found date
+  if (result.date) score += 0.2;
+
+  return score;
 }
 
 /**

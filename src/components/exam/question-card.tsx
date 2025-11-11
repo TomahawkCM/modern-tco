@@ -4,8 +4,9 @@ import { useState, useEffect, memo, useMemo } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { CheckCircle, XCircle, Clock, BookOpen } from "lucide-react";
+import { CheckCircle, XCircle, Clock, BookOpen, AlertCircle } from "lucide-react";
 import type { Question } from "@/types/exam";
 import { cn, getDifficultyColor } from "@/lib/utils";
 
@@ -22,6 +23,8 @@ interface QuestionCardProps {
   isSubmitted?: boolean;
   mode?: string;
   disabled?: boolean;
+  isMarked?: boolean;
+  onToggleMarkForReview?: () => void;
 }
 
 export const QuestionCard = memo(function QuestionCard({
@@ -37,6 +40,8 @@ export const QuestionCard = memo(function QuestionCard({
   isSubmitted = false,
   mode,
   disabled = false,
+  isMarked = false,
+  onToggleMarkForReview,
 }: QuestionCardProps) {
   const [localAnswer, setLocalAnswer] = useState(selectedAnswer ?? "");
 
@@ -150,6 +155,27 @@ export const QuestionCard = memo(function QuestionCard({
             );
           })}
         </div>
+
+        {/* Mark for Review Checkbox */}
+        {onToggleMarkForReview && !showResult && (
+          <div className="flex items-center space-x-2 pt-2">
+            <Checkbox
+              id={`mark-for-review-${question.id}`}
+              checked={isMarked}
+              onCheckedChange={onToggleMarkForReview}
+              disabled={disabled}
+            />
+            <label
+              htmlFor={`mark-for-review-${question.id}`}
+              className="flex items-center gap-2 text-sm font-medium leading-none cursor-pointer peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+            >
+              <AlertCircle className={cn("h-4 w-4", isMarked && "text-amber-500")} />
+              <span className={cn(isMarked && "text-amber-600 dark:text-amber-400")}>
+                Mark for Review
+              </span>
+            </label>
+          </div>
+        )}
 
         {showResult && question.explanation && (
           <Alert className="border-blue-200 bg-blue-50 dark:border-blue-800 dark:bg-blue-900/20 py-2">

@@ -55,11 +55,13 @@ See `FINAL_COMPLETION_SUMMARY.md` for complete implementation details.
 - Database (20): database-architect, supabase-specialist, rls-policy-designer
 - Testing (25): test-automator, playwright-specialist, accessibility-tester
 - Performance (18): performance-engineer, bundle-analyzer, lighthouse-optimizer
+- Debugging (3): debug-specialist, error-detective, analyzer
 
 **Auto-Spawn Patterns**:
 - UI work → react-specialist, typescript-pro, shadcn-specialist
 - Database → database-architect, supabase-specialist, security-engineer
 - Testing → test-automator, e2e-specialist, qa-engineer
+- Debugging → debug-specialist, error-detective, performance-engineer
 
 See `.claude/agent-routing-config.json` for complete agent documentation.
 
@@ -105,6 +107,7 @@ See `.claude/agent-routing-config.json` for complete agent documentation.
 | **Performance** | performance-engineer, bundle-analyzer, lighthouse-optimizer | Optimization + metrics |
 | **API/Backend** | api-specialist, backend-architect, security-engineer | REST/GraphQL + security |
 | **DevOps/Deploy** | devops-engineer, docker-specialist, deployment-specialist | CI/CD + containerization |
+| **Debug/Troubleshoot** | debug-specialist, error-detective, analyzer | Error triage + root cause + TypeScript/performance/E2E debugging |
 | **General/Mixed** | full-stack-specialist, system-architect | Multi-domain tasks |
 
 **Assignment Command**:

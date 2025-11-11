@@ -54,10 +54,35 @@
       "coordination": "mesh-coordinator"
     },
     "debugging": {
-      "keywords": ["debug", "error", "bug", "fix", "troubleshoot", "issue"],
-      "primaryAgents": ["debugger", "error-detective", "analyzer"],
-      "supportAgents": ["performance-engineer", "security-auditor"],
-      "coordination": "adaptive-coordinator"
+      "keywords": [
+        "debug", "error", "bug", "fix", "troubleshoot", "issue", "broken",
+        "type error", "typescript", "tsc", "type mismatch", "compilation error",
+        "slow", "memory leak", "bottleneck", "performance", "optimization",
+        "test failed", "e2e", "playwright", "integration", "flaky test",
+        "exception", "crash", "failure", "stack trace"
+      ],
+      "primaryAgents": ["debug-specialist", "error-detective", "analyzer"],
+      "supportAgents": [
+        "react-specialist",
+        "typescript-pro",
+        "performance-engineer",
+        "test-automator",
+        "security-auditor"
+      ],
+      "coordination": "adaptive-coordinator",
+      "toolAccess": {
+        "mandatory": ["vibe-check"],
+        "primary": ["filesystem", "ide", "playwright", "bash"],
+        "secondary": ["postgresql", "sqlite-tanium", "github", "archon"]
+      },
+      "autoSpawn": true,
+      "priority": "high",
+      "archonIntegration": {
+        "enabled": true,
+        "projectId": "9c56f01c-759a-42b1-bad4-06b71f2c4db9",
+        "statusFlow": ["todo", "doing", "review", "done"],
+        "mandatoryVibeCheck": true
+      }
     }
   },
   "complexityThresholds": {

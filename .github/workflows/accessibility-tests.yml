@@ -1,0 +1,242 @@
+name: Accessibility Testing
+
+on:
+  pull_request:
+    branches: [main, develop]
+    paths:
+      - 'src/app/budget-app/**'
+      - 'src/components/budget/**'
+      - 'src/lib/**'
+      - 'package.json'
+      - '.github/workflows/accessibility-tests.yml'
+
+jobs:
+  accessibility-audit:
+    name: Lighthouse CI & Pa11y Accessibility Audit
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build production bundle
+        run: npm run build
+        env:
+          NODE_ENV: production
+
+      - name: Start production server
+        run: |
+          npm start &
+          echo $! > server.pid
+        env:
+          PORT: 3001
+
+      - name: Wait for server to be ready
+        run: npx wait-on http://localhost:3001 -t 60000
+
+      - name: Run Lighthouse CI on Budget App routes
+        run: |
+          npm install -g @lhci/cli
+
+          # Create lighthouse config
+          cat > lighthouserc.json << 'EOF'
+          {
+            "ci": {
+              "collect": {
+                "url": [
+                  "http://localhost:3001/budget-app",
+                  "http://localhost:3001/budget-app/transactions",
+                  "http://localhost:3001/budget-app/budgets",
+                  "http://localhost:3001/budget-app/loans",
+                  "http://localhost:3001/budget-app/investments",
+                  "http://localhost:3001/budget-app/reports",
+                  "http://localhost:3001/budget-app/categories"
+                ],
+                "numberOfRuns": 3,
+                "settings": {
+                  "onlyCategories": ["accessibility"],
+                  "skipAudits": ["uses-http2"]
+                }
+              },
+              "assert": {
+                "assertions": {
+                  "categories:accessibility": ["error", {"minScore": 0.95}]
+                }
+              },
+              "upload": {
+                "target": "temporary-public-storage"
+              }
+            }
+          }
+          EOF
+
+          lhci autorun
+
+      - name: Run Pa11y accessibility tests
+        run: |
+          npm install -g pa11y pa11y-ci
+
+          # Create pa11y config
+          cat > .pa11yci.json << 'EOF'
+          {
+            "defaults": {
+              "timeout": 30000,
+              "wait": 2000,
+              "chromeLaunchConfig": {
+                "args": ["--no-sandbox", "--disable-setuid-sandbox"]
+              },
+              "runners": ["axe"],
+              "standard": "WCAG2AA",
+              "actions": [
+                "wait for element body to be visible",
+                "wait for 3000ms"
+              ],
+              "hideElements": ".posthog-toolbar"
+            },
+            "urls": [
+              "http://localhost:3001/budget-app",
+              "http://localhost:3001/budget-app/transactions",
+              "http://localhost:3001/budget-app/budgets",
+              "http://localhost:3001/budget-app/loans",
+              "http://localhost:3001/budget-app/investments",
+              "http://localhost:3001/budget-app/reports",
+              "http://localhost:3001/budget-app/categories"
+            ]
+          }
+          EOF
+
+          # Run Pa11y and generate reports
+          pa11y-ci --json > pa11y-results.json || true
+
+          # Check for errors
+          ERROR_COUNT=$(cat pa11y-results.json | grep -o '"code":' | wc -l)
+
+          if [ $ERROR_COUNT -gt 0 ]; then
+            echo "❌ Pa11y found $ERROR_COUNT accessibility errors"
+            cat pa11y-results.json
+            exit 1
+          else
+            echo "✅ Pa11y found 0 accessibility errors"
+          fi
+
+      - name: Generate accessibility reports
+        if: always()
+        run: |
+          mkdir -p accessibility-reports
+
+          # Copy Lighthouse reports
+          if [ -d ".lighthouseci" ]; then
+            cp -r .lighthouseci accessibility-reports/lighthouse || true
+          fi
+
+          # Copy Pa11y results
+          if [ -f "pa11y-results.json" ]; then
+            cp pa11y-results.json accessibility-reports/ || true
+          fi
+
+          # Create summary
+          cat > accessibility-reports/README.md << 'EOF'
+          # Accessibility Test Results
+
+          ## Lighthouse CI
+          - **Threshold**: ≥95% accessibility score
+          - **Routes tested**: 7 budget app pages
+          - **Runs per route**: 3 (averaged)
+
+          View detailed reports in `lighthouse/` directory.
+
+          ## Pa11y
+          - **Threshold**: 0 errors
+          - **Standard**: WCAG 2.1 AA
+          - **Runner**: axe-core
+
+          View results in `pa11y-results.json`.
+
+          ## How to use these reports
+
+          1. **Lighthouse**: Open `lighthouse/lhr-*.html` files in a browser
+          2. **Pa11y**: Review `pa11y-results.json` for specific violations
+
+          ## Common issues to check
+
+          - Color contrast ratios (4.5:1 for text, 3:1 for UI)
+          - Missing alt text on images
+          - Form labels and ARIA attributes
+          - Keyboard navigation and focus indicators
+          - Heading hierarchy (no skipped levels)
+          EOF
+
+      - name: Upload accessibility reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: accessibility-reports
+          path: accessibility-reports/
+          retention-days: 30
+
+      - name: Stop server
+        if: always()
+        run: |
+          if [ -f server.pid ]; then
+            kill $(cat server.pid) || true
+          fi
+
+      - name: Comment PR with results
+        if: always() && github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        env:
+          JOB_STATUS: ${{ job.status }}
+        with:
+          script: |
+            const fs = require('fs');
+            const jobStatus = process.env.JOB_STATUS;
+
+            let comment = '## 🔍 Accessibility Test Results\n\n';
+
+            // Add status badges
+            comment += '### Status\n\n';
+            comment += '| Tool | Status |\n';
+            comment += '|------|--------|\n';
+
+            const lighthouseStatus = jobStatus === 'success' ? '✅ Passed (≥95%)' : '❌ Failed';
+            const pa11yStatus = jobStatus === 'success' ? '✅ 0 errors' : '❌ Has errors';
+
+            comment += `| Lighthouse CI | ${lighthouseStatus} |\n`;
+            comment += `| Pa11y | ${pa11yStatus} |\n\n`;
+
+            comment += '### 📊 Reports Available\n\n';
+            comment += 'Download the full accessibility reports from the workflow artifacts.\n\n';
+            comment += '**Tested Routes:**\n';
+            comment += '- `/budget-app` (Dashboard)\n';
+            comment += '- `/budget-app/transactions`\n';
+            comment += '- `/budget-app/budgets`\n';
+            comment += '- `/budget-app/loans`\n';
+            comment += '- `/budget-app/investments`\n';
+            comment += '- `/budget-app/reports`\n';
+            comment += '- `/budget-app/categories`\n\n';
+
+            if (jobStatus !== 'success') {
+              comment += '### 🔧 Next Steps\n\n';
+              comment += '1. Download the accessibility reports artifact\n';
+              comment += '2. Review Lighthouse HTML reports for specific issues\n';
+              comment += '3. Check Pa11y JSON for WCAG violations\n';
+              comment += '4. Fix issues and push updates\n';
+            }
+
+            // Post comment
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment
+            });

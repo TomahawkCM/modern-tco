@@ -18,40 +18,137 @@ export function Skeleton({ className, style }: { className?: string; style?: Rea
 }
 
 /**
- * Dashboard skeleton - 3 metric cards + chart
+ * Dashboard skeleton - Updated to match mobile-optimized layout
+ * Features:
+ * - 4 metric cards (responsive grid)
+ * - Responsive header with mobile-optimized button layout
+ * - 2 chart skeletons (desktop: charts, mobile: progress bars)
+ * - Matches actual dashboard structure for better perceived performance
  */
 export function DashboardSkeleton() {
   return (
-    <div className="space-y-6">
-      {/* Header */}
-      <div className="flex items-center justify-between">
-        <Skeleton className="h-8 w-48" />
-        <Skeleton className="h-10 w-32" />
+    <div className="space-y-8 pb-8">
+      {/* Responsive Header */}
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div className="space-y-2">
+          <Skeleton className="h-8 sm:h-10 w-48" />
+          <Skeleton className="h-5 sm:h-6 w-32" />
+        </div>
+        <div className="flex gap-2 sm:gap-3">
+          <Skeleton className="h-12 w-24 sm:w-32 flex-1 sm:flex-initial rounded-lg" />
+          <Skeleton className="h-12 w-12 sm:w-24 rounded-lg" />
+          <Skeleton className="hidden sm:block h-12 w-24 rounded-lg" />
+        </div>
       </div>
 
-      {/* Metric Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        {[1, 2, 3].map((i) => (
-          <div key={i} className="bg-white rounded-lg shadow p-6 space-y-3">
-            <Skeleton className="h-4 w-24" />
+      {/* Metric Cards - 4 cards with responsive grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {[1, 2, 3, 4].map((i) => (
+          <div key={i} className="bg-white rounded-xl shadow-sm p-6 space-y-3">
+            <div className="flex items-center justify-between">
+              <Skeleton className="h-4 w-24" />
+              <Skeleton className="w-4 h-4 rounded-full" />
+            </div>
             <Skeleton className="h-8 w-32" />
             <Skeleton className="h-3 w-20" />
           </div>
         ))}
       </div>
 
-      {/* Chart */}
-      <div className="bg-white rounded-lg shadow p-6 space-y-4">
-        <Skeleton className="h-6 w-40" />
-        <div className="flex items-end justify-between gap-2 h-64">
-          {[40, 60, 55, 70, 65, 80, 75, 85].map((height, i) => (
-            <Skeleton
-              key={i}
-              className="flex-1"
-              style={{ height: `${height}%` }}
-            />
-          ))}
+      {/* Charts Section - 2 charts side by side */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        {/* Chart 1: Category Spending */}
+        <div className="bg-white rounded-xl shadow-sm">
+          <div className="p-6 border-b border-gray-200 flex items-center gap-4">
+            <Skeleton className="w-8 h-8 rounded-lg" />
+            <div className="flex-1 space-y-2">
+              <Skeleton className="h-5 w-40" />
+              <Skeleton className="h-3 w-32" />
+            </div>
+          </div>
+          <div className="p-6">
+            {/* Desktop: Pie chart skeleton */}
+            <div className="hidden md:flex items-center justify-center h-[300px]">
+              <Skeleton className="w-48 h-48 rounded-full" />
+            </div>
+            {/* Mobile: Progress bars skeleton */}
+            <div className="md:hidden space-y-4">
+              {[1, 2, 3, 4, 5].map((i) => (
+                <div key={i} className="space-y-2">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <Skeleton className="w-3 h-3 rounded-full" />
+                      <Skeleton className="h-4 w-24" />
+                    </div>
+                    <Skeleton className="h-4 w-16" />
+                  </div>
+                  <Skeleton className="h-2 w-full rounded-full" />
+                  <Skeleton className="h-3 w-20" />
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
+
+        {/* Chart 2: Income vs Expenses */}
+        <div className="bg-white rounded-xl shadow-sm">
+          <div className="p-6 border-b border-gray-200 flex items-center gap-4">
+            <Skeleton className="w-8 h-8 rounded-lg" />
+            <div className="space-y-2">
+              <Skeleton className="h-5 w-40" />
+              <Skeleton className="h-3 w-32" />
+            </div>
+          </div>
+          <div className="p-6">
+            {/* Desktop: Area chart skeleton */}
+            <div className="hidden md:flex items-end justify-between gap-2 h-[300px]">
+              {[40, 60, 55, 70, 65, 80].map((height, i) => (
+                <Skeleton
+                  key={i}
+                  className="flex-1 rounded-t"
+                  style={{ height: `${height}%` }}
+                />
+              ))}
+            </div>
+            {/* Mobile: Monthly trend bars skeleton */}
+            <div className="md:hidden space-y-3">
+              {[1, 2, 3].map((i) => (
+                <div key={i} className="space-y-2">
+                  <div className="flex items-center justify-between">
+                    <Skeleton className="h-4 w-12" />
+                    <Skeleton className="h-4 w-16" />
+                  </div>
+                  <div className="flex gap-2">
+                    <div className="flex-1 space-y-1">
+                      <Skeleton className="h-3 w-full" />
+                      <Skeleton className="h-1.5 w-full rounded-full" />
+                    </div>
+                    <div className="flex-1 space-y-1">
+                      <Skeleton className="h-3 w-full" />
+                      <Skeleton className="h-1.5 w-full rounded-full" />
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Additional sections placeholder */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        {[1, 2, 3].map((i) => (
+          <div key={i} className="bg-white rounded-xl shadow-sm">
+            <div className="p-6 border-b border-gray-200">
+              <Skeleton className="h-5 w-32" />
+            </div>
+            <div className="p-6 space-y-3">
+              <Skeleton className="h-4 w-full" />
+              <Skeleton className="h-4 w-5/6" />
+              <Skeleton className="h-4 w-4/6" />
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );

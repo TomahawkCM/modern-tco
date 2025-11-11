@@ -3,6 +3,7 @@ import { Providers } from "./providers";
 import MonitoringErrorBoundary from "@/components/MonitoringErrorBoundary";
 import { Toaster } from "@/components/ui/toaster";
 import type { Metadata, Viewport } from "next";
+import Script from "next/script";
 import "./globals.css";
 import { MainLayout } from "@/components/layout/main-layout";
 import { SkipLinks } from "@/components/accessibility/skip-links";
@@ -38,6 +39,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${inter.className} dark`} data-scroll-behavior="smooth">
       <head>
+        {/* PWA Manifest */}
+        <link rel="manifest" href="/manifest.json" />
+
         {/* Preconnect to external domains for performance */}
         <link rel="preconnect" href="https://qnwcwoutgarhqxlgsjzs.supabase.co" />
         <link rel="dns-prefetch" href="https://qnwcwoutgarhqxlgsjzs.supabase.co" />
@@ -45,8 +49,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="dns-prefetch" href="https://www.youtube.com" />
         <link rel="preconnect" href="https://app.posthog.com" />
         <link rel="dns-prefetch" href="https://app.posthog.com" />
+
+        {/* PDF.js from CDN for OCR functionality - bypasses webpack bundling issues */}
+        <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
       </head>
       <body className="font-sans antialiased">
+        {/* Load PDF.js from CDN - bypasses webpack bundling issues */}
+        <Script
+          src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"
+          strategy="beforeInteractive"
+        />
+
         {/* HYDRATION FIX: AccessibilityInitializer applies settings AFTER React hydration
             Previously had inline script in <head> that caused React Error #418
             See HYDRATION_FIX_SUMMARY.md and AccessibilityInitializer.tsx for details */}

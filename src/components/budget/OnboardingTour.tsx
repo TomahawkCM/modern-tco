@@ -70,6 +70,24 @@ export function OnboardingTour() {
     }
   }, []);
 
+  // Handle Escape key to close tour (Task 2.2.3)
+  useEffect(() => {
+    if (!isVisible) return;
+
+    function handleEscapeKey(event: KeyboardEvent) {
+      if (event.key === 'Escape') {
+        localStorage.setItem('budget-app-tour-completed', 'true');
+        setIsVisible(false);
+      }
+    }
+
+    document.addEventListener('keydown', handleEscapeKey);
+
+    return () => {
+      document.removeEventListener('keydown', handleEscapeKey);
+    };
+  }, [isVisible]);
+
   function handleNext() {
     if (currentStep < TOUR_STEPS.length - 1) {
       const nextStep = currentStep + 1;
@@ -166,7 +184,7 @@ export function OnboardingTour() {
             
             <button
               onClick={handleNext}
-              className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-teal-500 text-white rounded-lg hover:bg-teal-600 transition-colors font-medium"
+              className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-teal-700 text-white rounded-lg hover:bg-teal-800 transition-colors font-medium"
             >
               {isLastStep ? (
                 <>

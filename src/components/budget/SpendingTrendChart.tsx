@@ -26,6 +26,8 @@ import {
   calculateLinearRegression,
   getTrendDescription,
 } from '@/lib/analytics/trend-forecasting';
+import { useThemeMode } from '@/hooks/useThemeMode';
+import { getChartPalette } from '@/lib/budget-chart-colors';
 
 interface SpendingTrendChartProps {
   transactions: { date: Date; amount: number }[];
@@ -38,6 +40,10 @@ export function SpendingTrendChart({
   monthsBack = 6,
   forecastDays = 30,
 }: SpendingTrendChartProps) {
+  // Get theme-aware chart colors
+  const theme = useThemeMode();
+  const palette = getChartPalette(theme);
+
   const { chartData, trendInfo, stats } = useMemo(() => {
     // Prepare historical data
     const historicalData = prepareMonthlyTrendData(transactions, monthsBack);
@@ -158,45 +164,45 @@ export function SpendingTrendChart({
       {/* Chart */}
       <ResponsiveContainer width="100%" height={300}>
         <LineChart data={chartData}>
-          <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+          <CartesianGrid strokeDasharray="3 3" stroke={palette.grid} />
           <XAxis
             dataKey="date"
-            stroke="#6b7280"
+            stroke={palette.grid}
             tick={{ fontSize: 12 }}
           />
           <YAxis
-            stroke="#6b7280"
+            stroke={palette.grid}
             tick={{ fontSize: 12 }}
             tickFormatter={(value) => `$${value.toFixed(0)}`}
           />
           <Tooltip
             contentStyle={{
-              backgroundColor: '#fff',
-              border: '1px solid #e5e7eb',
+              backgroundColor: palette.background,
+              border: `1px solid ${palette.grid}`,
               borderRadius: '0.5rem',
             }}
             formatter={(value: any) => [`$${value?.toFixed(2)}`, '']}
           />
           <Legend />
-          
+
           {/* Actual spending (solid line) */}
           <Line
             type="monotone"
             dataKey="actual"
-            stroke="#0d9488"
+            stroke={palette.data[9].hex}
             strokeWidth={2}
-            dot={{ fill: '#0d9488', r: 4 }}
+            dot={{ fill: palette.data[9].hex, r: 4 }}
             name="Actual Spending"
           />
-          
+
           {/* Projected spending (dashed line) */}
           <Line
             type="monotone"
             dataKey="projected"
-            stroke="#f59e0b"
+            stroke={palette.data[4].hex}
             strokeWidth={2}
             strokeDasharray="5 5"
-            dot={{ fill: '#f59e0b', r: 4 }}
+            dot={{ fill: palette.data[4].hex, r: 4 }}
             name="Projected"
           />
         </LineChart>

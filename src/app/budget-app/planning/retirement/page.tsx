@@ -9,10 +9,15 @@ import { useState, useEffect } from 'react';
 import { TrendingUp, DollarSign, Calendar, PiggyBank, Upload, Trash2 } from 'lucide-react';
 import { db } from '@/lib/budget-db';
 import type { RetirementPlan } from '@/types/budget';
+import { ConfirmDialog } from '@/components/budget/ConfirmDialog';
 
 export default function RetirementPage() {
   const [plans, setPlans] = useState<RetirementPlan[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+
+  // Confirmation dialog state
+  const [deleteConfirmOpen, setDeleteConfirmOpen] = useState(false);
+  const [deletingPlan, setDeletingPlan] = useState<RetirementPlan | null>(null);
 
   // Form state - Basic
   const [currentAge, setCurrentAge] = useState('30');
@@ -255,15 +260,23 @@ export default function RetirementPage() {
     }
   }
 
-  async function deletePlan(id: string) {
-    if (!confirm('Are you sure you want to delete this retirement plan?')) return;
+  function initiateDeletePlan(plan: RetirementPlan) {
+    setDeletingPlan(plan);
+    setDeleteConfirmOpen(true);
+  }
+
+  async function confirmDeletePlan() {
+    if (!deletingPlan) return;
 
     try {
-      await db.retirementPlans.delete(id);
+      await db.retirementPlans.delete(deletingPlan.id);
       await loadPlans();
+      setDeleteConfirmOpen(false);
+      setDeletingPlan(null);
     } catch (error) {
       console.error('Error deleting plan:', error);
       alert('Failed to delete plan');
+      // Keep dialog open on error
     }
   }
 
@@ -307,6 +320,7 @@ export default function RetirementPage() {
                   onChange={(e) => setCurrentAge(e.target.value)}
                   min="18"
                   max="100"
+                  inputMode="numeric"
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
                 />
               </div>
@@ -321,6 +335,7 @@ export default function RetirementPage() {
                   onChange={(e) => setRetirementAge(e.target.value)}
                   min="18"
                   max="100"
+                  inputMode="numeric"
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
                 />
               </div>
@@ -338,6 +353,7 @@ export default function RetirementPage() {
                   onChange={(e) => setCurrentSavings(e.target.value)}
                   step="1000"
                   min="0"
+                  inputMode="decimal"
                   className="w-full pl-8 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
                 />
               </div>
@@ -355,6 +371,7 @@ export default function RetirementPage() {
                   onChange={(e) => setMonthlyContribution(e.target.value)}
                   step="50"
                   min="0"
+                  inputMode="decimal"
                   className="w-full pl-8 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
                 />
               </div>
@@ -372,6 +389,7 @@ export default function RetirementPage() {
                   step="0.1"
                   min="0"
                   max="20"
+                  inputMode="decimal"
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
                 />
               </div>
@@ -387,6 +405,7 @@ export default function RetirementPage() {
                   step="0.1"
                   min="0"
                   max="10"
+                  inputMode="decimal"
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
                 />
               </div>
@@ -405,6 +424,7 @@ export default function RetirementPage() {
                     onChange={(e) => setDesiredMonthlyIncome(e.target.value)}
                     step="100"
                     min="0"
+                    inputMode="decimal"
                     className="w-full pl-8 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
                   />
                 </div>
@@ -420,6 +440,7 @@ export default function RetirementPage() {
                   onChange={(e) => setLifespanAssumption(e.target.value)}
                   min="18"
                   max="120"
+                  inputMode="numeric"
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
                 />
               </div>
@@ -451,6 +472,7 @@ export default function RetirementPage() {
                           step="10"
                           min="0"
                           placeholder="Monthly CPP"
+                          inputMode="decimal"
                           className="w-full pl-8 pr-4 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
                         />
                       </div>
@@ -480,6 +502,7 @@ export default function RetirementPage() {
                           step="10"
                           min="0"
                           placeholder="Monthly OAS"
+                          inputMode="decimal"
                           className="w-full pl-8 pr-4 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
                         />
                       </div>
@@ -507,6 +530,7 @@ export default function RetirementPage() {
                       onChange={(e) => setRrspBalance(e.target.value)}
                       step="1000"
                       min="0"
+                      inputMode="decimal"
                       className="w-full pl-8 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
                     />
                   </div>
@@ -524,6 +548,7 @@ export default function RetirementPage() {
                       onChange={(e) => setTfsaBalance(e.target.value)}
                       step="1000"
                       min="0"
+                      inputMode="decimal"
                       className="w-full pl-8 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
                     />
                   </div>
@@ -541,6 +566,7 @@ export default function RetirementPage() {
                       onChange={(e) => setNonRegisteredBalance(e.target.value)}
                       step="1000"
                       min="0"
+                      inputMode="decimal"
                       className="w-full pl-8 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
                     />
                   </div>
@@ -566,6 +592,7 @@ export default function RetirementPage() {
                         onChange={(e) => setCompanyShares(e.target.value)}
                         step="1000"
                         min="0"
+                        inputMode="decimal"
                         className="w-full pl-8 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
                       />
                     </div>
@@ -582,6 +609,7 @@ export default function RetirementPage() {
                       step="0.1"
                       min="0"
                       max="100"
+                      inputMode="decimal"
                       className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
                     />
                   </div>
@@ -599,6 +627,7 @@ export default function RetirementPage() {
                       onChange={(e) => setStockOptions(e.target.value)}
                       step="1000"
                       min="0"
+                      inputMode="decimal"
                       className="w-full pl-8 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
                     />
                   </div>
@@ -625,6 +654,7 @@ export default function RetirementPage() {
                           step="10"
                           min="0"
                           placeholder="Monthly pension"
+                          inputMode="decimal"
                           className="w-full pl-8 pr-4 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
                         />
                       </div>
@@ -755,7 +785,7 @@ export default function RetirementPage() {
                     Load
                   </button>
                   <button
-                    onClick={() => deletePlan(plan.id)}
+                    onClick={() => initiateDeletePlan(plan)}
                     className="inline-flex items-center gap-2 px-4 py-2 text-sm text-red-600 hover:text-red-700 hover:bg-red-50 rounded-lg transition-colors"
                     title="Delete this plan"
                   >
@@ -768,6 +798,29 @@ export default function RetirementPage() {
           </div>
         </div>
       )}
+
+      {/* Confirmation Dialog */}
+      <ConfirmDialog
+        open={deleteConfirmOpen}
+        onOpenChange={setDeleteConfirmOpen}
+        onConfirm={confirmDeletePlan}
+        title="Delete Retirement Plan"
+        description="This will permanently remove this retirement plan and all its projections."
+        impact={deletingPlan ? {
+          title: "You will lose:",
+          items: [
+            `Plan: ${deletingPlan.name}`,
+            `Current age: ${deletingPlan.currentAge} years`,
+            `Retirement age: ${deletingPlan.retirementAge} years`,
+            `Monthly contribution: $${deletingPlan.monthlyContribution.toFixed(2)}`,
+            `Current savings: $${deletingPlan.currentSavings.toFixed(2)}`,
+            'All growth projections and calculations',
+          ]
+        } : undefined}
+        confirmLabel="Delete Plan"
+        variant="destructive"
+        icon={<Trash2 className="w-5 h-5" />}
+      />
     </div>
   );
 }

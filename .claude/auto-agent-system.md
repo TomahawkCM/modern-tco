@@ -51,6 +51,11 @@ Task("Test automator: Create comprehensive test suite");
 Task("Backend developer: Design and implement API endpoints");
 Task("Security engineer: Implement authentication and validation");
 Task("Database administrator: Optimize database queries and schema");
+
+// Example for debugging work:
+Task("Debug specialist: Investigate and fix TypeError in auth component");
+Task("Error detective: Analyze stack trace and identify root cause");
+Task("Performance engineer: Profile and optimize slow dashboard loading");
 ```
 
 ## 3. Session-Level Agent Management
@@ -151,11 +156,38 @@ Default Active Agents:
   - test-automator (for quality assurance)
   - performance-engineer (for optimization)
   - documentation-engineer (for user guides)
+  - debug-specialist (for troubleshooting and error resolution)
 
 Standby Specialists:
   - security-auditor (for auth features)
   - accessibility-tester (for compliance)
   - data-scientist (for analytics features)
+  - error-detective (for complex debugging scenarios)
+  - analyzer (for deep code analysis)
+```
+
+### Debugging-Specific Auto-Spawn Rules
+
+```yaml
+Debug Specialist triggers on keywords:
+  Error Analysis: [error, exception, crash, failure, broken, stack trace]
+  TypeScript: [type error, typescript, tsc, type mismatch, compilation error]
+  Performance: [slow, memory leak, bottleneck, performance, optimization]
+  Testing: [test failed, e2e, playwright, integration, flaky test]
+
+Auto-spawn workflow:
+  1. User mentions debugging keyword
+  2. debug-specialist automatically spawns
+  3. Runs vibe-check first (mandatory)
+  4. Selects minimal viable toolset
+  5. Executes appropriate debugging workflow
+  6. Updates Archon task throughout process
+  7. Records patterns with vibe-learn
+
+Integration with Archon:
+  Project ID: 9c56f01c-759a-42b1-bad4-06b71f2c4db9
+  Task flow: todo → doing → review → done
+  Mandatory vibe-check before every debugging session
 ```
 
 This system ensures that every task leverages the full power of your 240+ agent collection!

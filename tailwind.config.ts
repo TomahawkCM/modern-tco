@@ -17,6 +17,75 @@ const config: Config = {
       },
     },
     extend: {
+      fontSize: {
+        // Seniors-friendly typography scale (18px base)
+        xs: ['0.875rem', { lineHeight: '1.25' }],    // 14px
+        sm: ['1rem', { lineHeight: '1.5' }],         // 16px
+        base: ['1.125rem', { lineHeight: '1.5' }],   // 18px (NEW - up from 16px)
+        lg: ['1.25rem', { lineHeight: '1.5' }],      // 20px
+        xl: ['1.5rem', { lineHeight: '1.5' }],       // 24px
+        '2xl': ['1.875rem', { lineHeight: '1.25' }], // 30px
+        '3xl': ['2.25rem', { lineHeight: '1.25' }],  // 36px
+        '4xl': ['3rem', { lineHeight: '1.125' }],    // 48px
+      },
+      lineHeight: {
+        tight: '1.25',
+        snug: '1.375',
+        normal: '1.5',
+        relaxed: '1.75',
+        loose: '2',
+      },
+      fontWeight: {
+        light: '300',
+        normal: '400',
+        medium: '500',
+        semibold: '600',
+        bold: '700',
+        extrabold: '800',
+      },
+      spacing: {
+        'page-x': 'var(--spacing-page-x)',
+        'page-y': 'var(--spacing-page-y)',
+        'section': 'var(--spacing-section)',
+        'subsection': 'var(--spacing-subsection)',
+        'card': 'var(--spacing-card-padding)',
+        'card-gap': 'var(--spacing-card-gap)',
+        'touch': 'var(--spacing-touch-target)',
+      },
+      boxShadow: {
+        xs: 'var(--shadow-xs)',
+        sm: 'var(--shadow-sm)',
+        md: 'var(--shadow-md)',
+        lg: 'var(--shadow-lg)',
+        xl: 'var(--shadow-xl)',
+        '2xl': 'var(--shadow-2xl)',
+        inner: 'var(--shadow-inner)',
+        focus: 'var(--shadow-focus)',
+      },
+      zIndex: {
+        dropdown: 'var(--z-dropdown)',
+        sticky: 'var(--z-sticky)',
+        fixed: 'var(--z-fixed)',
+        'modal-backdrop': 'var(--z-modal-backdrop)',
+        modal: 'var(--z-modal)',
+        popover: 'var(--z-popover)',
+        toast: 'var(--z-toast)',
+        tooltip: 'var(--z-tooltip)',
+      },
+      transitionDuration: {
+        instant: 'var(--duration-instant)',
+        fast: 'var(--duration-fast)',
+        normal: 'var(--duration-normal)',
+        slow: 'var(--duration-slow)',
+        slower: 'var(--duration-slower)',
+      },
+      transitionTimingFunction: {
+        default: 'var(--easing-default)',
+        emphasized: 'var(--easing-emphasized)',
+        decelerate: 'var(--easing-decelerate)',
+        accelerate: 'var(--easing-accelerate)',
+        bounce: 'var(--easing-bounce)',
+      },
       colors: {
         // Archon cyberpunk color scheme - Updated to archon.png blue palette
         // Use sparingly - prefer semantic tokens (bg-background, text-foreground, etc.)
@@ -127,10 +196,21 @@ const config: Config = {
             height: "0",
           },
         },
+        "typing-bounce": {
+          "0%, 60%, 100%": {
+            transform: "translateY(0)",
+            opacity: "0.7",
+          },
+          "30%": {
+            transform: "translateY(-10px)",
+            opacity: "1",
+          },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "typing-bounce": "typing-bounce 1.4s infinite ease-in-out",
       },
       backdropBlur: {
         xs: "2px",

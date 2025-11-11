@@ -13,6 +13,8 @@ const Checkbox = React.forwardRef<
     ref={ref}
     className={cn(
       "peer h-4 w-4 shrink-0 rounded-sm border border-primary shadow focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground",
+      // WCAG 2.2: Add padding to create 48px touch target while keeping visual size at 16px
+      "p-4 min-h-[3rem] min-w-[3rem]",
       className
     )}
     {...props}

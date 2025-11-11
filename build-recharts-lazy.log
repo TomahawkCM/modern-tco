@@ -1,0 +1,170 @@
+
+> tanium-tco-modern@1.0.0 prebuild
+> node scripts/bundle-mdx.js
+
+📦 Starting MDX bundling process...
+
+✅ Created cache directory: /home/robne/projects/active/tanium-tco/modern-tco/.mdx-cache
+
+📚 Found 11 MDX files:
+
+  ✓ 00-tanium-platform-foundation.mdx                  → 00-tanium-platform-foundation.mdx.json
+  ✓ 01-asking-questions.mdx                            → 01-asking-questions.mdx.json
+  ✓ 02-refining-questions-targeting.mdx                → 02-refining-questions-targeting.mdx.json
+  ✓ 02-refining-targeting-learn-experimental.mdx       → 02-refining-targeting-learn-experimental.mdx.json
+  ✓ 03-taking-action-learn-experimental.mdx            → 03-taking-action-learn-experimental.mdx.json
+  ✓ 03-taking-action-packages-actions.mdx              → 03-taking-action-packages-actions.mdx.json
+  ✓ 04-navigation-basic-modules-learn-experimental.mdx → 04-navigation-basic-modules-learn-experimental.mdx.json
+  ✓ 04-navigation-basic-modules.mdx                    → 04-navigation-basic-modules.mdx.json
+  ✓ 05-reporting-data-export.mdx                       → 05-reporting-data-export.mdx.json
+  ✓ 05-reporting-export-learn-experimental.mdx         → 05-reporting-export-learn-experimental.mdx.json
+  ✓ MICROLEARNING_EXAMPLE.mdx                          → MICROLEARNING_EXAMPLE.mdx.json
+
+======================================================================
+✅ Bundled 11 MDX files successfully
+📁 Cache location: /home/robne/projects/active/tanium-tco/modern-tco/.mdx-cache
+======================================================================
+
+✅ Created cache index at /home/robne/projects/active/tanium-tco/modern-tco/.mdx-cache/_index.json
+
+
+> tanium-tco-modern@1.0.0 build
+> node scripts/generate-sitemap.js && cross-env NODE_OPTIONS=--max-old-space-size=16384 UV_THREADPOOL_SIZE=12 next build --webpack
+
+✅ Sitemap generated successfully at /home/robne/projects/active/tanium-tco/modern-tco/public/sitemap.xml
+📊 Total URLs: 40
+   ▲ Next.js 16.0.0 (webpack)
+   - Environments: .env.local, .env.production
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully in 98s
+   Running TypeScript ...
+   Collecting page data ...
+   Generating static pages (0/114) ...
+   Generating static pages (28/114) 
+   Generating static pages (56/114) 
+   Generating static pages (85/114) 
+ ✓ Generating static pages (114/114) in 3.0s
+   Finalizing page optimization ...
+   Collecting build traces ...
+
+Route (app)
+┌ ○ /
+├ ƒ /_not-found
+├ ○ /admin/questions
+├ ƒ /admin/questions/[id]/edit
+├ ○ /admin/questions/ai-generate
+├ ○ /admin/questions/bulk-import
+├ ○ /admin/questions/new
+├ ○ /analytics
+├ ○ /analytics/events
+├ ƒ /api/auth/check-admin
+├ ƒ /api/chat
+├ ƒ /api/flashcards/public
+├ ƒ /api/health
+├ ƒ /api/v1/flashcards/debug
+├ ƒ /api/v1/flashcards/generate
+├ ƒ /api/v1/flashcards/public
+├ ƒ /api/v1/flashcards/seed
+├ ƒ /api/v1/flashcards/test
+├ ƒ /api/v1/sim-eval
+├ ƒ /api/v1/sim-meta
+├ ƒ /api/v1/sim-run
+├ ƒ /api/v1/sim-save
+├ ƒ /api/v1/sim-saved
+├ ƒ /api/v1/stripe/create-checkout-session
+├ ƒ /api/v1/study/content
+├ ○ /assessments
+├ ○ /auth
+├ ○ /auth/signin
+├ ○ /auth/signup
+├ ○ /beginner
+├ ○ /budget-app
+├ ○ /budget-app/budgets
+├ ○ /budget-app/categories
+├ ○ /budget-app/debug
+├ ○ /budget-app/design-system
+├ ○ /budget-app/export
+├ ○ /budget-app/import
+├ ○ /budget-app/investments
+├ ○ /budget-app/loans
+├ ƒ /budget-app/loans/[id]
+├ ƒ /budget-app/loans/[id]/edit
+├ ○ /budget-app/loans/new
+├ ○ /budget-app/ocr
+├ ○ /budget-app/offline
+├ ○ /budget-app/planning/future
+├ ○ /budget-app/planning/retirement
+├ ○ /budget-app/reports
+├ ○ /budget-app/settings
+├ ○ /budget-app/train-ml
+├ ○ /budget-app/transactions
+├ ○ /color-test
+├ ○ /daily-review
+├ ○ /dashboard
+├ ƒ /domains/[domain]
+├ ○ /drills
+├ ○ /exam
+├ ○ /flashcards
+├ ○ /guides
+├ ○ /kb
+├ ○ /lab-companion
+├ ○ /labs
+├ ○ /learn
+├ ● /learn/[slug]
+│ ├ /learn/platform-foundation
+│ ├ /learn/asking-questions
+│ ├ /learn/refining-questions
+│ └ [+6 more paths]
+├ ○ /learn/query-builder
+├ ○ /lighthouse-test
+├ ○ /mdx-test
+├ ○ /mock
+├ ○ /mock-exam
+├ ○ /modules
+├ ● /modules/[slug]
+│ ├ /modules/tanium-platform-foundation
+│ ├ /modules/platform-foundation
+│ ├ /modules/asking-questions
+│ └ [+12 more paths]
+├ ○ /modules/server
+├ ○ /notes
+├ ○ /notifications
+├ ○ /perf-test
+├ ○ /practice
+├ ○ /pricing
+├ ○ /profile
+├ ○ /progress
+├ ○ /review
+├ ○ /search
+├ ○ /settings
+├ ○ /simple
+├ ○ /simulator
+├ ○ /study
+├ ƒ /study/[domain]
+├ ƒ /study/labs/[...slug]
+├ ƒ /study/review
+├ ○ /team
+├ ○ /test
+├ ○ /test-db
+├ ○ /test-mdx
+├ ○ /test-minimal
+├ ○ /videos
+├ ● /videos/[slug]
+│ ├ /videos/asking-questions
+│ ├ /videos/refining-questions
+│ ├ /videos/taking-action
+│ └ [+2 more paths]
+├ ○ /videos/admin
+└ ○ /welcome
+
+
+○  (Static)   prerendered as static content
+●  (SSG)      prerendered as static HTML (uses generateStaticParams)
+ƒ  (Dynamic)  server-rendered on demand
+
+
+> tanium-tco-modern@1.0.0 postbuild
+> node scripts/postbuild-ensure-rsc.js
+
+[postbuild] Ensured 12 .rsc shims and 80 trace files for app routes.

@@ -24,9 +24,11 @@ import {
 import { getBatchStockPrices, clearPriceCache } from '@/lib/market-data';
 import { InvestmentAccountModal } from '@/components/budget/InvestmentAccountModal';
 import { HoldingModal } from '@/components/budget/HoldingModal';
-import { InvestmentCharts } from '@/components/budget/InvestmentCharts';
+import { LazyInvestmentCharts } from '@/components/budget/charts/LazyChartComponents';
+import { ConfirmDialog } from '@/components/budget/ConfirmDialog';
 import { useToast } from '@/components/budget/Toast';
 import { CountUp } from '@/hooks/useCountUp';
+import { EmptyStates } from '@/components/budget/EmptyState';
 
 export default function InvestmentsPage() {
   const toast = useToast();
@@ -41,6 +43,12 @@ export default function InvestmentsPage() {
   const [showHoldingModal, setShowHoldingModal] = useState(false);
   const [editingHolding, setEditingHolding] = useState<Holding | null>(null);
   const [holdingModalAccount, setHoldingModalAccount] = useState<InvestmentAccount | null>(null);
+
+  // Confirmation dialog state
+  const [deleteAccountConfirmOpen, setDeleteAccountConfirmOpen] = useState(false);
+  const [deletingAccount, setDeletingAccount] = useState<{ account: InvestmentAccount; holdingsCount: number; totalValue: number } | null>(null);
+  const [deleteHoldingConfirmOpen, setDeleteHoldingConfirmOpen] = useState(false);
+  const [deletingHolding, setDeletingHolding] = useState<Holding | null>(null);
 
   // Market data
   const [currentPrices, setCurrentPrices] = useState<Record<string, number>>({});
@@ -119,31 +127,55 @@ export default function InvestmentsPage() {
     await loadPrices(holdings);
   }
 
-  async function handleDeleteAccount(accountId: string) {
-    const confirmed = await toast.confirm('Delete this investment account and all its holdings?');
-    if (!confirmed) return;
+  function initiateDeleteAccount(account: InvestmentAccount) {
+    const accountHoldings = holdings.filter(h => h.accountId === account.id);
+    const totalValue = accountHoldings.reduce((sum, h) => {
+      const price = currentPrices[h.symbol] || h.purchasePrice;
+      return sum + (h.quantity * price);
+    }, 0);
+
+    setDeletingAccount({
+      account,
+      holdingsCount: accountHoldings.length,
+      totalValue,
+    });
+    setDeleteAccountConfirmOpen(true);
+  }
+
+  async function confirmDeleteAccount() {
+    if (!deletingAccount) return;
 
     try {
-      await deleteInvestmentAccount(accountId);
+      await deleteInvestmentAccount(deletingAccount.account.id);
       await loadData();
       toast.success('Investment account deleted successfully');
+      setDeleteAccountConfirmOpen(false);
+      setDeletingAccount(null);
     } catch (error) {
       console.error('Error deleting account:', error);
       toast.error('Failed to delete account');
+      // Keep dialog open on error
     }
   }
 
-  async function handleDeleteHolding(holdingId: string) {
-    const confirmed = await toast.confirm('Delete this holding?');
-    if (!confirmed) return;
+  function initiateDeleteHolding(holding: Holding) {
+    setDeletingHolding(holding);
+    setDeleteHoldingConfirmOpen(true);
+  }
+
+  async function confirmDeleteHolding() {
+    if (!deletingHolding) return;
 
     try {
-      await deleteHolding(holdingId);
+      await deleteHolding(deletingHolding.id);
       await loadData();
       toast.success('Holding deleted successfully');
+      setDeleteHoldingConfirmOpen(false);
+      setDeletingHolding(null);
     } catch (error) {
       console.error('Error deleting holding:', error);
       toast.error('Failed to delete holding');
+      // Keep dialog open on error
     }
   }
 
@@ -390,22 +422,7 @@ export default function InvestmentsPage() {
 
       {/* Empty State */}
       {accounts.length === 0 ? (
-        <div className="bg-white rounded-lg border border-gray-200 p-12 text-center">
-          <Wallet className="w-16 h-16 text-gray-300 mx-auto mb-4" />
-          <h3 className="text-lg font-semibold text-gray-900 mb-2">
-            No investment accounts yet
-          </h3>
-          <p className="text-gray-600 mb-6 max-w-md mx-auto">
-            Start tracking your investments by creating an account for your RRSP, TFSA, or other investment accounts.
-          </p>
-          <button
-            onClick={openAddAccountModal}
-            className="inline-flex items-center gap-2 px-4 py-2 bg-teal-500 text-white rounded-lg hover:bg-teal-600 transition-colors"
-          >
-            <Plus className="w-4 h-4" />
-            Create Your First Account
-          </button>
-        </div>
+        <EmptyStates.Investments />
       ) : (
         /* Investment Accounts List */
         <div className="space-y-4">
@@ -443,7 +460,7 @@ export default function InvestmentsPage() {
                         <Edit className="w-4 h-4" />
                       </button>
                       <button
-                        onClick={() => handleDeleteAccount(account.id)}
+                        onClick={() => initiateDeleteAccount(account)}
                         className="p-2 text-red-600 hover:text-red-700 hover:bg-red-50 rounded-lg transition-colors"
                         title="Delete account"
                       >
@@ -560,7 +577,7 @@ export default function InvestmentsPage() {
                                     <Edit className="w-4 h-4" />
                                   </button>
                                   <button
-                                    onClick={() => handleDeleteHolding(holding.id)}
+                                    onClick={() => initiateDeleteHolding(holding)}
                                     className="p-2.5 text-red-600 hover:text-red-700 hover:bg-red-50 rounded transition-colors"
                                     title="Delete holding"
                                   >
@@ -602,8 +619,8 @@ export default function InvestmentsPage() {
             <h2 className="text-2xl font-bold text-gray-900">Portfolio Analysis</h2>
             <p className="text-gray-600 mt-2">Visual breakdown of your investments</p>
           </div>
-          <InvestmentCharts 
-            holdings={holdings} 
+          <LazyInvestmentCharts
+            holdings={holdings}
             accounts={accounts}
             currentPrices={currentPrices}
           />
@@ -634,6 +651,49 @@ export default function InvestmentsPage() {
           }}
         />
       )}
+
+      {/* Confirmation Dialogs */}
+      <ConfirmDialog
+        open={deleteAccountConfirmOpen}
+        onOpenChange={setDeleteAccountConfirmOpen}
+        onConfirm={confirmDeleteAccount}
+        title="Delete Investment Account"
+        description="This will permanently delete the account and all associated holdings."
+        impact={deletingAccount ? {
+          title: "You will lose:",
+          items: [
+            `Account: ${deletingAccount.account.name}`,
+            `${deletingAccount.holdingsCount} holding${deletingAccount.holdingsCount === 1 ? '' : 's'}`,
+            `Total value: $${deletingAccount.totalValue.toFixed(2)}`,
+            'All transaction history',
+          ]
+        } : undefined}
+        confirmLabel="Delete Account & Holdings"
+        variant="destructive"
+        icon={<Trash2 className="w-5 h-5" />}
+      />
+
+      <ConfirmDialog
+        open={deleteHoldingConfirmOpen}
+        onOpenChange={setDeleteHoldingConfirmOpen}
+        onConfirm={confirmDeleteHolding}
+        title="Delete Holding"
+        description="This will permanently remove this holding from your portfolio."
+        impact={deletingHolding ? {
+          title: "You will lose:",
+          items: [
+            `Symbol: ${deletingHolding.symbol}`,
+            `${deletingHolding.quantity} shares`,
+            `Purchase price: $${deletingHolding.purchasePrice.toFixed(2)}`,
+            currentPrices[deletingHolding.symbol]
+              ? `Current value: $${(deletingHolding.quantity * currentPrices[deletingHolding.symbol]).toFixed(2)}`
+              : null,
+          ]
+        } : undefined}
+        confirmLabel="Delete Holding"
+        variant="destructive"
+        icon={<Trash2 className="w-5 h-5" />}
+      />
     </div>
   );
 }

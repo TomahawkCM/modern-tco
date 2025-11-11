@@ -60,8 +60,9 @@ export function InvestmentAccountModal({
   }
 
   return (
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-lg shadow-xl max-w-md w-full max-h-[90vh] overflow-y-auto">
+    <div className="fixed inset-0 bg-black/50 flex items-end sm:items-center justify-center z-50 p-4 sm:p-4 p-0">
+      {/* Phase 3.1.5: Mobile-optimized with bottom sheet on mobile, centered on desktop */}
+      <div className="bg-white rounded-t-2xl sm:rounded-lg shadow-xl w-full sm:max-w-md max-h-[90vh] overflow-y-auto">
         {/* Header */}
         <div className="flex items-center justify-between p-6 border-b border-gray-200">
           <h2 className="text-xl font-bold text-gray-900">
@@ -89,7 +90,7 @@ export function InvestmentAccountModal({
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="e.g., My RRSP, TFSA Savings, Company Stock"
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+              className="w-full h-12 px-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
               required
             />
           </div>
@@ -103,7 +104,7 @@ export function InvestmentAccountModal({
               id="account-type"
               value={type}
               onChange={(e) => setType(e.target.value as InvestmentAccount['type'])}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+              className="w-full h-12 px-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
               required
             >
               {ACCOUNT_TYPES.map((accountType) => (
@@ -131,7 +132,7 @@ export function InvestmentAccountModal({
               value={institution}
               onChange={(e) => setInstitution(e.target.value)}
               placeholder="e.g., Questrade, Wealthsimple, TD Direct"
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+              className="w-full h-12 px-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
             />
           </div>
 
@@ -146,7 +147,7 @@ export function InvestmentAccountModal({
               value={accountNumber}
               onChange={(e) => setAccountNumber(e.target.value)}
               placeholder="e.g., Last 4 digits: 1234"
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+              className="w-full h-12 px-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
             />
           </div>
 

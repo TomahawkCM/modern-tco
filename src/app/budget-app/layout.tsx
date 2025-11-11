@@ -22,7 +22,8 @@ import {
   Tags,
   Menu,
   Wallet,
-  Camera
+  Camera,
+  CreditCard
 } from 'lucide-react';
 import {
   Sheet,
@@ -37,6 +38,8 @@ import { OnboardingTour } from '@/components/budget/OnboardingTour';
 import { ToastProvider } from '@/components/budget/Toast';
 import { PWAInstallPrompt } from '@/components/budget/PWAInstallPrompt';
 import { usePWA } from '@/hooks/usePWA';
+import { ChatbotProvider } from '@/contexts/ChatbotContext';
+import { ChatbotWidget } from '@/components/budget/chatbot/ChatbotWidget';
 
 interface NavItem {
   name: string;
@@ -50,6 +53,7 @@ const navigation: NavItem[] = [
   { name: 'Scan Receipt', href: '/budget-app/ocr', icon: Camera },
   { name: 'Categories', href: '/budget-app/categories', icon: Tags },
   { name: 'Budgets', href: '/budget-app/budgets', icon: PieChart },
+  { name: 'Loans', href: '/budget-app/loans', icon: CreditCard },
   { name: 'Investments', href: '/budget-app/investments', icon: Wallet },
   { name: 'Future Plans', href: '/budget-app/planning/future', icon: Target },
   { name: 'Retirement', href: '/budget-app/planning/retirement', icon: TrendingUp },
@@ -104,7 +108,7 @@ export default function BudgetAppLayout({
       </div>
 
       {/* Navigation */}
-      <nav className="flex-1 p-4 space-y-2">
+      <nav className="flex-1 p-4 space-y-2" aria-label="Main navigation">
         {navigation.map((item) => (
           <Link
             key={item.name}
@@ -161,7 +165,8 @@ export default function BudgetAppLayout({
   );
 
   return (
-    <div className="flex h-screen bg-gray-50">
+    <ChatbotProvider>
+      <div className="flex h-screen bg-gray-50">
       {/* Desktop Sidebar - hidden on mobile (<768px) */}
       <aside className="hidden md:flex w-64 bg-white border-r border-gray-200">
         <div className="flex flex-col h-full w-full">
@@ -195,7 +200,7 @@ export default function BudgetAppLayout({
         </header>
 
         {/* Main Content */}
-        <main className="flex-1 overflow-y-auto pb-16 md:pb-0">
+        <main className="flex-1 overflow-y-auto pb-16 md:pb-0" tabIndex={0} aria-label="Main content area">
           <div className="max-w-7xl mx-auto p-4 md:p-8">
             <ToastProvider>
               {children}
@@ -206,7 +211,7 @@ export default function BudgetAppLayout({
         {/* Bottom Navigation Bar - Mobile Only */}
         {/* Phase 3 Task 3.1.2: Bottom navigation for quick access to main features */}
         {/* Phase 3 Task 3.1.3: Touch targets ≥44px for accessibility */}
-        <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-2 py-2 z-40">
+        <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-2 py-2 z-40" aria-label="Mobile bottom navigation">
           <div className="flex justify-around items-center">
             {/* Dashboard */}
             <Link
@@ -268,6 +273,10 @@ export default function BudgetAppLayout({
 
       {/* PWA Install Prompt - Phase 3.2.3 */}
       <PWAInstallPrompt />
-    </div>
+
+      {/* AI Chatbot Widget */}
+      <ChatbotWidget />
+      </div>
+    </ChatbotProvider>
   );
 }

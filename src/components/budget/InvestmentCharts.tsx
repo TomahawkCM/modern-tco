@@ -23,6 +23,8 @@ import {
   ResponsiveContainer,
 } from 'recharts';
 import type { Holding, InvestmentAccount } from '@/types/budget';
+import { useThemeMode } from '@/hooks/useThemeMode';
+import { getChartPalette } from '@/lib/budget-chart-colors';
 
 interface InvestmentChartsProps {
   holdings: Holding[];
@@ -30,19 +32,10 @@ interface InvestmentChartsProps {
   currentPrices: Record<string, number>;
 }
 
-// Teal color palette for charts
-const COLORS = [
-  '#14b8a6', // teal-500
-  '#0d9488', // teal-600
-  '#0f766e', // teal-700
-  '#115e59', // teal-800
-  '#134e4a', // teal-900
-  '#5eead4', // teal-300
-  '#2dd4bf', // teal-400
-  '#99f6e4', // teal-200
-];
-
 export function InvestmentCharts({ holdings, accounts, currentPrices }: InvestmentChartsProps) {
+  // Get theme-aware chart colors
+  const theme = useThemeMode();
+  const palette = getChartPalette(theme);
   // Calculate allocation data for pie chart
   const allocationData = holdings.map((holding) => {
     const currentPrice = currentPrices[holding.symbol.toUpperCase()] || holding.purchasePrice;
@@ -206,7 +199,7 @@ export function InvestmentCharts({ holdings, accounts, currentPrices }: Investme
                 dataKey="value"
               >
                 {allocationData.map((entry, index) => (
-                  <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                  <Cell key={`cell-${index}`} fill={palette.data[index % palette.data.length].hex} />
                 ))}
               </Pie>
               <Tooltip content={<PieTooltip />} />
@@ -241,7 +234,7 @@ export function InvestmentCharts({ holdings, accounts, currentPrices }: Investme
                   dataKey="value"
                 >
                   {nonZeroAccountData.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                    <Cell key={`cell-${index}`} fill={palette.data[index % palette.data.length].hex} />
                   ))}
                 </Pie>
                 <Tooltip content={<AccountTooltip />} />
@@ -268,28 +261,28 @@ export function InvestmentCharts({ holdings, accounts, currentPrices }: Investme
               data={performanceData}
               margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
             >
-              <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
-              <XAxis 
-                dataKey="symbol" 
-                tick={{ fill: '#6b7280', fontSize: 12 }}
+              <CartesianGrid strokeDasharray="3 3" stroke={palette.grid} />
+              <XAxis
+                dataKey="symbol"
+                tick={{ fill: palette.text, fontSize: 12 }}
                 angle={-45}
                 textAnchor="end"
                 height={80}
               />
-              <YAxis 
-                tick={{ fill: '#6b7280', fontSize: 12 }}
+              <YAxis
+                tick={{ fill: palette.text, fontSize: 12 }}
                 tickFormatter={(value) => `$${value.toLocaleString()}`}
               />
               <Tooltip content={<BarTooltip />} />
-              <Bar 
-                dataKey="gainLoss" 
-                fill="#14b8a6"
+              <Bar
+                dataKey="gainLoss"
+                fill={palette.data[0].hex}
                 radius={[8, 8, 0, 0]}
               >
                 {performanceData.map((entry, index) => (
-                  <Cell 
-                    key={`cell-${index}`} 
-                    fill={entry.gainLoss >= 0 ? '#10b981' : '#ef4444'} 
+                  <Cell
+                    key={`cell-${index}`}
+                    fill={entry.gainLoss >= 0 ? palette.positive.hex : palette.negative.hex}
                   />
                 ))}
               </Bar>

@@ -1,0 +1,60 @@
+
+> tanium-tco-modern@1.0.0 analyze
+> cross-env ANALYZE=true npm run build
+
+
+> tanium-tco-modern@1.0.0 prebuild
+> node scripts/bundle-mdx.js
+
+📦 Starting MDX bundling process...
+
+✅ Created cache directory: /home/robne/projects/active/tanium-tco/modern-tco/.mdx-cache
+
+📚 Found 11 MDX files:
+
+  ✓ 00-tanium-platform-foundation.mdx                  → 00-tanium-platform-foundation.mdx.json
+  ✓ 01-asking-questions.mdx                            → 01-asking-questions.mdx.json
+  ✓ 02-refining-questions-targeting.mdx                → 02-refining-questions-targeting.mdx.json
+  ✓ 02-refining-targeting-learn-experimental.mdx       → 02-refining-targeting-learn-experimental.mdx.json
+  ✓ 03-taking-action-learn-experimental.mdx            → 03-taking-action-learn-experimental.mdx.json
+  ✓ 03-taking-action-packages-actions.mdx              → 03-taking-action-packages-actions.mdx.json
+  ✓ 04-navigation-basic-modules-learn-experimental.mdx → 04-navigation-basic-modules-learn-experimental.mdx.json
+  ✓ 04-navigation-basic-modules.mdx                    → 04-navigation-basic-modules.mdx.json
+  ✓ 05-reporting-data-export.mdx                       → 05-reporting-data-export.mdx.json
+  ✓ 05-reporting-export-learn-experimental.mdx         → 05-reporting-export-learn-experimental.mdx.json
+  ✓ MICROLEARNING_EXAMPLE.mdx                          → MICROLEARNING_EXAMPLE.mdx.json
+
+======================================================================
+✅ Bundled 11 MDX files successfully
+📁 Cache location: /home/robne/projects/active/tanium-tco/modern-tco/.mdx-cache
+======================================================================
+
+✅ Created cache index at /home/robne/projects/active/tanium-tco/modern-tco/.mdx-cache/_index.json
+
+
+> tanium-tco-modern@1.0.0 build
+> node scripts/generate-sitemap.js && cross-env NODE_OPTIONS=--max-old-space-size=16384 UV_THREADPOOL_SIZE=12 next build --webpack
+
+✅ Sitemap generated successfully at /home/robne/projects/active/tanium-tco/modern-tco/public/sitemap.xml
+📊 Total URLs: 40
+   ▲ Next.js 16.0.0 (webpack)
+   - Environments: .env.local, .env.production
+
+   Creating an optimized production build ...
+Webpack Bundle Analyzer saved report to /home/robne/projects/active/tanium-tco/modern-tco/.next/analyze/nodejs.html
+
+No bundles were parsed. Analyzer will show only original module sizes from stats file.
+
+Webpack Bundle Analyzer saved report to /home/robne/projects/active/tanium-tco/modern-tco/.next/analyze/edge.html
+Webpack Bundle Analyzer saved report to /home/robne/projects/active/tanium-tco/modern-tco/.next/analyze/client.html
+ ✓ Compiled successfully in 2.7min
+   Running TypeScript ...
+   Collecting page data ...
+uncaughtException Error: spawn /usr/bin/node EAGAIN
+    at ignore-listed frames {
+  errno: -11,
+  code: 'EAGAIN',
+  syscall: 'spawn /usr/bin/node',
+  path: '/usr/bin/node',
+  spawnargs: [Array]
+}

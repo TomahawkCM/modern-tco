@@ -7,17 +7,19 @@
  */
 
 import { type PrivacySettings } from '@/lib/budget-privacy-settings';
-import { 
-  Shield, 
-  Brain, 
-  Eye, 
-  Lock, 
-  Download, 
-  Trash2, 
+import {
+  Shield,
+  Brain,
+  Eye,
+  Lock,
+  Download,
+  Trash2,
   AlertTriangle,
   Info,
   CheckCircle2,
-  XCircle
+  XCircle,
+  MessageSquare,
+  BarChart3
 } from 'lucide-react';
 import { useState } from 'react';
 
@@ -35,18 +37,20 @@ export function PrivacyControlsPanel({
 
   function handleToggle(field: keyof PrivacySettings) {
     if (field === 'updatedAt') return; // Don't allow toggling timestamp
-    
+    if (field === 'chatbotDataAccess' || field === 'chatbotConversationRetention') return; // Don't toggle non-boolean fields
+
     const newSettings: PrivacySettings = {
       ...settings,
       [field]: !settings[field],
     };
 
-    // If disabling AI Features master switch, disable all AI-dependent features
+    // If disabling AI Features master switch, disable all AI-dependent features (including chatbot)
     if (field === 'enableAIFeatures' && !newSettings.enableAIFeatures) {
       newSettings.enableSmartDuplicateDetection = false;
       newSettings.enableAnomalyDetection = false;
       newSettings.enablePredictiveSpending = false;
       newSettings.enableNaturalLanguageImport = false;
+      newSettings.enableChatbot = false; // Chatbot also requires AI features
     }
 
     // If enabling an AI feature, automatically enable AI Features
@@ -54,13 +58,28 @@ export function PrivacyControlsPanel({
       (field === 'enableSmartDuplicateDetection' ||
        field === 'enableAnomalyDetection' ||
        field === 'enablePredictiveSpending' ||
-       field === 'enableNaturalLanguageImport') &&
+       field === 'enableNaturalLanguageImport' ||
+       field === 'enableChatbot') &&
       newSettings[field]
     ) {
       newSettings.enableAIFeatures = true;
     }
 
     onSettingsChange(newSettings);
+  }
+
+  function handleChatbotDataAccessChange(value: 'read-only' | 'full-access') {
+    onSettingsChange({
+      ...settings,
+      chatbotDataAccess: value,
+    });
+  }
+
+  function handleChatbotRetentionChange(value: 7 | 30 | 'forever') {
+    onSettingsChange({
+      ...settings,
+      chatbotConversationRetention: value,
+    });
   }
 
   async function handleExportData() {
@@ -246,6 +265,158 @@ export function PrivacyControlsPanel({
           onChange={() => handleToggle('enableNaturalLanguageImport')}
           disabled={!aiFeaturesEnabled}
           requiresAI={true}
+        />
+      </div>
+
+      {/* Chatbot Section */}
+      <div className="bg-white rounded-lg shadow p-6">
+        <div className="flex items-center gap-2 mb-4">
+          <MessageSquare className="w-5 h-5 text-indigo-600" />
+          <h3 className="text-lg font-semibold text-gray-900">Budget Chatbot</h3>
+        </div>
+
+        {/* Chatbot Master Switch */}
+        <div className="mb-6 pb-6 border-b border-gray-200">
+          <div className="flex items-center justify-between">
+            <div className="flex-1">
+              <div className="flex items-center gap-2">
+                <h4 className="font-medium text-gray-900">Enable Chatbot</h4>
+                {settings.enableChatbot && (
+                  <span className="px-2 py-0.5 bg-indigo-100 text-indigo-700 text-xs rounded-full">
+                    Active
+                  </span>
+                )}
+                {!aiFeaturesEnabled && (
+                  <span className="px-2 py-0.5 bg-gray-100 text-gray-700 text-xs rounded-full">
+                    Requires AI Features
+                  </span>
+                )}
+              </div>
+              <p className="text-sm text-gray-600 mt-1">
+                AI-powered assistant that can answer questions about your transactions, budgets, and spending patterns.
+                Conversations are processed via OpenAI API.
+              </p>
+              {settings.enableChatbot && (
+                <div className="mt-2 text-xs text-gray-500">
+                  <strong>Privacy:</strong> Your financial data is sent to OpenAI to answer questions.
+                  OpenAI does not use API data to train models. You can disable anytime.
+                </div>
+              )}
+            </div>
+            <ToggleSwitch
+              checked={settings.enableChatbot}
+              onChange={() => handleToggle('enableChatbot')}
+              disabled={!aiFeaturesEnabled}
+            />
+          </div>
+        </div>
+
+        {/* Data Access Level */}
+        {settings.enableChatbot && (
+          <>
+            <div className="mb-6 pb-6 border-b border-gray-200">
+              <h4 className="font-medium text-gray-900 mb-3">Data Access Permission</h4>
+              <div className="space-y-2">
+                <label className="flex items-start gap-3 p-3 bg-gray-50 rounded-lg border-2 border-gray-200 hover:border-indigo-500 cursor-pointer transition-colors">
+                  <input
+                    type="radio"
+                    name="chatbotDataAccess"
+                    value="read-only"
+                    checked={settings.chatbotDataAccess === 'read-only'}
+                    onChange={() => handleChatbotDataAccessChange('read-only')}
+                    className="mt-1 text-indigo-600 focus:ring-indigo-500"
+                  />
+                  <div className="flex-1">
+                    <div className="font-medium text-gray-900">Read-Only (Recommended)</div>
+                    <div className="text-sm text-gray-600 mt-1">
+                      Chatbot can view data and answer questions but cannot modify anything
+                    </div>
+                  </div>
+                </label>
+                <label className="flex items-start gap-3 p-3 bg-gray-50 rounded-lg border-2 border-gray-200 hover:border-indigo-500 cursor-pointer transition-colors">
+                  <input
+                    type="radio"
+                    name="chatbotDataAccess"
+                    value="full-access"
+                    checked={settings.chatbotDataAccess === 'full-access'}
+                    onChange={() => handleChatbotDataAccessChange('full-access')}
+                    className="mt-1 text-indigo-600 focus:ring-indigo-500"
+                  />
+                  <div className="flex-1">
+                    <div className="font-medium text-gray-900">Full Access</div>
+                    <div className="text-sm text-gray-600 mt-1">
+                      Chatbot can perform actions like adding transactions and creating budgets
+                    </div>
+                  </div>
+                </label>
+              </div>
+            </div>
+
+            {/* Conversation Retention */}
+            <div className="mb-4">
+              <h4 className="font-medium text-gray-900 mb-3">Conversation History</h4>
+              <div className="space-y-2">
+                <label className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg border-2 border-gray-200 hover:border-indigo-500 cursor-pointer transition-colors">
+                  <input
+                    type="radio"
+                    name="chatbotRetention"
+                    value="7"
+                    checked={settings.chatbotConversationRetention === 7}
+                    onChange={() => handleChatbotRetentionChange(7)}
+                    className="text-indigo-600 focus:ring-indigo-500"
+                  />
+                  <span className="text-gray-900">Delete after 7 days (Recommended)</span>
+                </label>
+                <label className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg border-2 border-gray-200 hover:border-indigo-500 cursor-pointer transition-colors">
+                  <input
+                    type="radio"
+                    name="chatbotRetention"
+                    value="30"
+                    checked={settings.chatbotConversationRetention === 30}
+                    onChange={() => handleChatbotRetentionChange(30)}
+                    className="text-indigo-600 focus:ring-indigo-500"
+                  />
+                  <span className="text-gray-900">Delete after 30 days</span>
+                </label>
+                <label className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg border-2 border-gray-200 hover:border-indigo-500 cursor-pointer transition-colors">
+                  <input
+                    type="radio"
+                    name="chatbotRetention"
+                    value="forever"
+                    checked={settings.chatbotConversationRetention === 'forever'}
+                    onChange={() => handleChatbotRetentionChange('forever')}
+                    className="text-indigo-600 focus:ring-indigo-500"
+                  />
+                  <span className="text-gray-900">Keep forever</span>
+                </label>
+              </div>
+              <p className="text-xs text-gray-600 mt-2">
+                Conversations are stored locally in your browser. You can manually delete them anytime.
+              </p>
+            </div>
+          </>
+        )}
+      </div>
+
+      {/* Analytics & Monitoring Section */}
+      <div className="bg-white rounded-lg shadow p-6">
+        <div className="flex items-center gap-2 mb-4">
+          <BarChart3 className="w-5 h-5 text-blue-600" />
+          <h3 className="text-lg font-semibold text-gray-900">Analytics & Monitoring</h3>
+        </div>
+
+        <SettingRow
+          title="Enable Analytics"
+          description="Track feature usage and app performance using PostHog. No personal financial data (amounts, descriptions) is collected."
+          checked={settings.enableAnalytics}
+          onChange={() => handleToggle('enableAnalytics')}
+        />
+
+        <SettingRow
+          title="Enable Error Tracking"
+          description="Automatically report errors and crashes to Sentry to help improve the app. No financial data is included in error reports."
+          checked={settings.enableErrorTracking}
+          onChange={() => handleToggle('enableErrorTracking')}
         />
       </div>
 

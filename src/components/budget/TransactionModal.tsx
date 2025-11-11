@@ -16,6 +16,8 @@ import { ConfidenceMeter } from './ConfidenceMeter';
 import { Paperclip, FileImage, Trash2, Brain } from 'lucide-react';
 import type { Receipt } from '@/types/budget';
 import type { ExtractedReceiptData } from '@/lib/receipt-ocr';
+import { useFocusTrap } from '@/hooks/useFocusTrap';
+import { trackBudgetEvent } from '@/lib/budget-analytics';
 
 interface TransactionModalProps {
   transaction: Transaction | null;
@@ -32,14 +34,26 @@ export function TransactionModal({
   onSave,
   onClose,
 }: TransactionModalProps) {
+  // Smart default: Load last used category from localStorage
+  const getLastUsedCategory = () => {
+    if (typeof window !== 'undefined') {
+      const lastCat = localStorage.getItem('lastUsedCategory');
+      const lastSub = localStorage.getItem('lastUsedSubcategory');
+      return { category: lastCat || '', subcategory: lastSub || '' };
+    }
+    return { category: '', subcategory: '' };
+  };
+
+  const lastUsed = transaction ? { category: '', subcategory: '' } : getLastUsedCategory();
+
   const [date, setDate] = useState(
     transaction?.date ? format(new Date(transaction.date), 'yyyy-MM-dd') : format(new Date(), 'yyyy-MM-dd')
   );
   const [description, setDescription] = useState(transaction?.description || '');
   const [amount, setAmount] = useState(transaction?.amount ? Math.abs(transaction.amount).toString() : '');
   const [type, setType] = useState<'income' | 'expense'>(transaction?.amount && transaction.amount > 0 ? 'income' : 'expense');
-  const [category, setCategory] = useState(transaction?.category || '');
-  const [subcategory, setSubcategory] = useState(transaction?.subcategory || '');
+  const [category, setCategory] = useState(transaction?.category || lastUsed.category);
+  const [subcategory, setSubcategory] = useState(transaction?.subcategory || lastUsed.subcategory);
   const [accountId, setAccountId] = useState(transaction?.accountId || (accounts[0]?.id || ''));
   const [notes, setNotes] = useState(transaction?.notes || '');
   const [tags, setTags] = useState(transaction?.tags?.join(', ') || '');
@@ -50,6 +64,7 @@ export function TransactionModal({
   const [showReceiptUpload, setShowReceiptUpload] = useState(false);
   const [attachedReceipt, setAttachedReceipt] = useState<File | null>(null);
   const [existingReceipts, setExistingReceipts] = useState<Receipt[]>([]);
+  const [showAdvancedOptions, setShowAdvancedOptions] = useState(false);
 
   // Track original category for learning
   const originalCategory = transaction?.category || null;
@@ -61,6 +76,9 @@ export function TransactionModal({
 
   const filteredCategories = categories; // Show all categories regardless of transaction type
   const selectedCategory = filteredCategories.find(c => c.name === category);
+
+  // Focus trap for modal accessibility
+  const modalRef = useFocusTrap(true);
 
   // Auto-categorize on description change (for new transactions)
   useEffect(() => {
@@ -83,6 +101,21 @@ export function TransactionModal({
       });
     }
   }, [transaction?.id]);
+
+  // Handle Escape key to close modal (Task 2.2.3)
+  useEffect(() => {
+    function handleEscapeKey(event: KeyboardEvent) {
+      if (event.key === 'Escape') {
+        onClose();
+      }
+    }
+
+    document.addEventListener('keydown', handleEscapeKey);
+
+    return () => {
+      document.removeEventListener('keydown', handleEscapeKey);
+    };
+  }, [onClose]);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -127,8 +160,21 @@ export function TransactionModal({
       setTimeout(() => setShowLearnMessage(false), 3000);
     }
 
+    // Remember last used category for smart defaults
+    if (category && typeof window !== 'undefined') {
+      localStorage.setItem('lastUsedCategory', category);
+      localStorage.setItem('lastUsedSubcategory', subcategory || '');
+    }
+
     // Save the transaction first
     onSave(newTransaction);
+
+    // Track analytics event
+    trackBudgetEvent(transaction ? 'transaction_edited' : 'transaction_added', {
+      section: 'transactions',
+      method: attachedReceipt ? 'receipt' : 'manual',
+      success: true,
+    });
 
     // Store the receipt if one was attached
     if (attachedReceipt) {
@@ -230,19 +276,22 @@ export function TransactionModal({
   return (
     <div className="fixed inset-0 bg-black/50 flex items-end sm:items-center justify-center z-50">
       {/* Modal - Phase 3.1.5: Mobile-optimized with bottom sheet on mobile, centered on desktop */}
-      <div className="bg-white rounded-t-2xl sm:rounded-lg shadow-xl w-full sm:max-w-2xl sm:mx-4 max-h-[85vh] sm:max-h-[90vh] overflow-hidden flex flex-col">
-        <div className="p-4 sm:p-6 border-b border-gray-200 flex-shrink-0 bg-white">
+      <div
+        ref={modalRef}
+        className="bg-white rounded-t-2xl sm:rounded-lg shadow-xl w-full sm:max-w-2xl sm:mx-4 max-h-[85vh] sm:max-h-[90vh] overflow-hidden flex flex-col"
+      >
+        <div className="p-5 sm:p-6 border-b border-gray-200 flex-shrink-0 bg-white">
           <div className="flex items-center justify-between">
-            <h2 className="text-lg sm:text-xl font-semibold text-gray-900">
+            <h2 className="text-xl sm:text-2xl font-bold text-gray-900">
               {transaction ? 'Edit Transaction' : 'Add Transaction'}
             </h2>
             <button
               type="button"
               onClick={onClose}
-              className="p-2 rounded-lg text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-colors"
+              className="p-2.5 rounded-lg text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-colors"
               aria-label="Close modal"
             >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
@@ -265,9 +314,9 @@ export function TransactionModal({
             </div>
           )}
 
-          {/* Type Toggle */}
+          {/* Type Toggle - Enhanced */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">Type</label>
+            <label className="block text-base font-semibold text-gray-700 mb-3">Type *</label>
             <div className="grid grid-cols-2 gap-4">
               <button
                 type="button"
@@ -276,9 +325,9 @@ export function TransactionModal({
                   setCategory('');
                   setSubcategory('');
                 }}
-                className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+                className={`px-6 py-3 min-h-[48px] rounded-lg text-base font-semibold transition-colors ${
                   type === 'expense'
-                    ? 'bg-red-600 text-white'
+                    ? 'bg-red-500 text-white shadow-md'
                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                 }`}
               >
@@ -291,9 +340,9 @@ export function TransactionModal({
                   setCategory('');
                   setSubcategory('');
                 }}
-                className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+                className={`px-6 py-3 min-h-[48px] rounded-lg text-base font-semibold transition-colors ${
                   type === 'income'
-                    ? 'bg-green-600 text-white'
+                    ? 'bg-green-500 text-white shadow-md'
                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                 }`}
               >
@@ -302,30 +351,33 @@ export function TransactionModal({
             </div>
           </div>
 
-          {/* Description */}
+          {/* Description - Enhanced */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label htmlFor="transaction-description" className="block text-base font-semibold text-gray-700 mb-3">
               Description *
             </label>
             <input
+              id="transaction-description"
               type="text"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               placeholder="e.g., Grocery shopping at Sobeys"
-              className="w-full h-12 px-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+              className="w-full min-h-[48px] px-4 text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+              aria-required="true"
               required
             />
           </div>
 
-          {/* Amount and Date - Responsive: Stack on mobile, side-by-side on larger screens */}
+          {/* Amount and Date - Enhanced */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="transaction-amount" className="block text-base font-semibold text-gray-700 mb-3">
                 Amount *
               </label>
               <div className="relative">
-                <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500">$</span>
+                <span className="absolute left-4 top-1/2 -translate-y-1/2 text-lg text-gray-500">$</span>
                 <input
+                  id="transaction-amount"
                   type="number"
                   value={amount}
                   onChange={(e) => setAmount(e.target.value)}
@@ -333,31 +385,34 @@ export function TransactionModal({
                   step="0.01"
                   min="0"
                   inputMode="decimal"
-                  className="w-full h-12 pl-8 pr-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                  className="w-full min-h-[48px] pl-8 pr-4 text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                  aria-required="true"
                   required
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="transaction-date" className="block text-base font-semibold text-gray-700 mb-3">
                 Date *
               </label>
               <input
+                id="transaction-date"
                 type="date"
                 value={date}
                 onChange={(e) => setDate(e.target.value)}
-                className="w-full h-12 px-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                className="w-full min-h-[48px] px-4 text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                aria-required="true"
                 required
               />
             </div>
           </div>
 
-          {/* Category and Subcategory */}
+          {/* Category and Subcategory - Enhanced */}
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Category
+              <label className="block text-base font-semibold text-gray-700 mb-3">
+                Category {lastUsed.category && !transaction && <span className="text-sm font-normal text-gray-500">(Using last: {lastUsed.category})</span>}
               </label>
               {!showCreateCategory ? (
                 <div className="space-y-2">
@@ -423,7 +478,7 @@ export function TransactionModal({
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-base font-semibold text-gray-700 mb-3">
                 Subcategory
               </label>
               <CategoryCombobox
@@ -468,52 +523,81 @@ export function TransactionModal({
             )}
           </div>
 
-          {/* Account */}
-          {accounts.length > 0 && (
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Account
-              </label>
-              <select
-                value={accountId}
-                onChange={(e) => setAccountId(e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+          {/* Advanced Options - Collapsible */}
+          <div className="border-t-2 border-gray-200 pt-4">
+            <button
+              type="button"
+              onClick={() => setShowAdvancedOptions(!showAdvancedOptions)}
+              className="flex items-center gap-2 text-base font-semibold text-teal-600 hover:text-teal-700 mb-4"
+            >
+              <svg
+                className={`w-5 h-5 transition-transform ${showAdvancedOptions ? 'rotate-90' : ''}`}
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
               >
-                {accounts.map(acc => (
-                  <option key={acc.id} value={acc.id}>
-                    {acc.name} ({acc.institution})
-                  </option>
-                ))}
-              </select>
-            </div>
-          )}
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+              <span>Advanced Options</span>
+              <span className="text-sm font-normal text-gray-500">
+                ({[notes, tags, accounts.length > 1 ? 'account' : ''].filter(Boolean).length} available)
+              </span>
+            </button>
 
-          {/* Notes */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Notes
-            </label>
-            <textarea
-              value={notes}
-              onChange={(e) => setNotes(e.target.value)}
-              placeholder="Add any additional notes..."
-              rows={3}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
-            />
-          </div>
+            {showAdvancedOptions && (
+              <div className="space-y-4 pl-4 border-l-2 border-teal-200">
+                {/* Account */}
+                {accounts.length > 0 && (
+                  <div>
+                    <label htmlFor="transaction-account" className="block text-base font-medium text-gray-700 mb-3">
+                      Account
+                    </label>
+                    <select
+                      id="transaction-account"
+                      value={accountId}
+                      onChange={(e) => setAccountId(e.target.value)}
+                      className="w-full min-h-[48px] px-4 text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                    >
+                      {accounts.map(acc => (
+                        <option key={acc.id} value={acc.id}>
+                          {acc.name} ({acc.institution})
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                )}
 
-          {/* Tags */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Tags (comma-separated)
-            </label>
-            <input
-              type="text"
-              value={tags}
-              onChange={(e) => setTags(e.target.value)}
-              placeholder="e.g., groceries, weekly, essential"
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
-            />
+                {/* Notes */}
+                <div>
+                  <label htmlFor="transaction-notes" className="block text-base font-medium text-gray-700 mb-3">
+                    Notes
+                  </label>
+                  <textarea
+                    id="transaction-notes"
+                    value={notes}
+                    onChange={(e) => setNotes(e.target.value)}
+                    placeholder="Add any additional notes..."
+                    rows={3}
+                    className="w-full px-4 py-3 text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent resize-none"
+                  />
+                </div>
+
+                {/* Tags */}
+                <div>
+                  <label htmlFor="transaction-tags" className="block text-base font-medium text-gray-700 mb-3">
+                    Tags (comma-separated)
+                  </label>
+                  <input
+                    id="transaction-tags"
+                    type="text"
+                    value={tags}
+                    onChange={(e) => setTags(e.target.value)}
+                    placeholder="e.g., groceries, weekly, essential"
+                    className="w-full min-h-[48px] px-4 text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                  />
+                </div>
+              </div>
+            )}
           </div>
 
           {/* Receipt Upload - Phase 7.1.1 & 7.2.2: Receipt storage and thumbnails */}
@@ -635,18 +719,18 @@ export function TransactionModal({
             )}
           </div>
 
-          {/* Actions - Mobile-optimized: Full-width buttons with proper spacing */}
-          <div className="flex gap-4 pt-4 border-t border-gray-200">
+          {/* Actions - Enhanced */}
+          <div className="flex gap-4 pt-6 border-t-2 border-gray-200">
             <button
               type="button"
               onClick={onClose}
-              className="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors font-medium min-h-[44px]"
+              className="flex-1 px-6 py-3 text-base border-2 border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors font-semibold min-h-[48px]"
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="flex-1 px-4 py-2 bg-teal-500 text-white rounded-lg hover:bg-teal-600 transition-colors font-medium min-h-[44px]"
+              className="flex-1 px-6 py-3 text-base bg-teal-500 text-white rounded-lg hover:bg-teal-600 transition-colors font-semibold shadow-md hover:shadow-lg min-h-[48px]"
             >
               {transaction ? 'Update' : 'Add'} Transaction
             </button>

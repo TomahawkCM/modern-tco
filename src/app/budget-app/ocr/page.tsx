@@ -16,6 +16,7 @@ import {
   Loader2,
   Eye,
   Save,
+  FileText,
 } from "lucide-react";
 import { extractReceiptData, type ExtractedReceiptData } from "@/lib/receipt-ocr";
 import { getPrivacySettings } from "@/lib/budget-privacy-settings";
@@ -26,6 +27,7 @@ export default function ReceiptScannerPage() {
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
+  const [processingProgress, setProcessingProgress] = useState<{ current: number; total: number } | null>(null);
   const [extractedData, setExtractedData] = useState<ExtractedReceiptData | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [savedTransactionId, setSavedTransactionId] = useState<string | null>(null);
@@ -47,15 +49,18 @@ export default function ReceiptScannerPage() {
     const file = event.target.files?.[0];
     if (!file) return;
 
-    // Validate file type
-    if (!file.type.startsWith("image/")) {
-      setError("Please select an image file (JPG, PNG)");
+    // Validate file type (images and PDFs supported)
+    const isImage = file.type.startsWith("image/");
+    const isPdf = file.type === "application/pdf" || file.name.toLowerCase().endsWith(".pdf");
+
+    if (!isImage && !isPdf) {
+      setError("Please select an image or PDF file (JPG, PNG, PDF)");
       return;
     }
 
     // Validate file size (max 10MB)
     if (file.size > 10 * 1024 * 1024) {
-      setError("Image file must be less than 10MB");
+      setError("File must be less than 10MB");
       return;
     }
 
@@ -63,13 +68,19 @@ export default function ReceiptScannerPage() {
     setError(null);
     setSavedTransactionId(null);
     setExtractedData(null);
+    setProcessingProgress(null);
 
-    // Create preview
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      setImagePreview(e.target?.result as string);
-    };
-    reader.readAsDataURL(file);
+    // Create preview (only for images, PDFs will show file info)
+    if (isImage) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        setImagePreview(e.target?.result as string);
+      };
+      reader.readAsDataURL(file);
+    } else {
+      // For PDFs, set a placeholder
+      setImagePreview("pdf");
+    }
   };
 
   const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
@@ -78,15 +89,18 @@ export default function ReceiptScannerPage() {
 
     if (!file) return;
 
-    // Validate file type
-    if (!file.type.startsWith("image/")) {
-      setError("Please drop an image file (JPG, PNG)");
+    // Validate file type (images and PDFs supported)
+    const isImage = file.type.startsWith("image/");
+    const isPdf = file.type === "application/pdf" || file.name.toLowerCase().endsWith(".pdf");
+
+    if (!isImage && !isPdf) {
+      setError("Please drop an image or PDF file (JPG, PNG, PDF)");
       return;
     }
 
     // Validate file size (max 10MB)
     if (file.size > 10 * 1024 * 1024) {
-      setError("Image file must be less than 10MB");
+      setError("File must be less than 10MB");
       return;
     }
 
@@ -94,13 +108,19 @@ export default function ReceiptScannerPage() {
     setError(null);
     setSavedTransactionId(null);
     setExtractedData(null);
+    setProcessingProgress(null);
 
-    // Create preview
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      setImagePreview(e.target?.result as string);
-    };
-    reader.readAsDataURL(file);
+    // Create preview (only for images, PDFs will show file info)
+    if (isImage) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        setImagePreview(e.target?.result as string);
+      };
+      reader.readAsDataURL(file);
+    } else {
+      // For PDFs, set a placeholder
+      setImagePreview("pdf");
+    }
   };
 
   const handleDragOver = (event: React.DragEvent<HTMLDivElement>) => {
@@ -113,10 +133,16 @@ export default function ReceiptScannerPage() {
     setIsProcessing(true);
     setError(null);
     setExtractedData(null);
+    setProcessingProgress(null);
 
     try {
-      const data = await extractReceiptData(imageFile);
+      // Pass progress callback for multi-page PDFs
+      const data = await extractReceiptData(imageFile, (current, total) => {
+        setProcessingProgress({ current, total });
+      });
+
       setExtractedData(data);
+      setProcessingProgress(null);
 
       // Pre-fill form with extracted data
       if (data.merchant) setMerchant(data.merchant);
@@ -132,6 +158,7 @@ export default function ReceiptScannerPage() {
       setError("Failed to process receipt. Please try again or enter the data manually.");
     } finally {
       setIsProcessing(false);
+      setProcessingProgress(null);
     }
   };
 
@@ -190,6 +217,7 @@ export default function ReceiptScannerPage() {
     setImageFile(null);
     setImagePreview(null);
     setExtractedData(null);
+    setProcessingProgress(null);
     setMerchant("");
     setAmount("");
     setDate("");
@@ -248,7 +276,7 @@ export default function ReceiptScannerPage() {
       <div className="mb-6">
         <h1 className="text-3xl font-bold text-gray-900">Scan Receipt</h1>
         <p className="mt-2 text-gray-600">
-          Upload a receipt image to automatically extract transaction details using OCR
+          Upload a receipt image or PDF (JPG, PNG, PDF) to automatically extract transaction details using OCR
         </p>
       </div>
 
@@ -284,23 +312,35 @@ export default function ReceiptScannerPage() {
               >
                 <Upload className="mx-auto mb-4 h-12 w-12 text-gray-400" />
                 <p className="mb-2 text-gray-600">
-                  <span className="font-semibold text-teal-600">Click to upload</span> or drag and
+                  <span className="font-semibold text-teal-700">Click to upload</span> or drag and
                   drop
                 </p>
-                <p className="text-sm text-gray-500">JPG, PNG up to 10MB</p>
+                <p className="text-sm text-gray-500">JPG, PNG, PDF up to 10MB</p>
                 <input
                   ref={fileInputRef}
                   type="file"
-                  accept="image/*"
+                  accept="image/*,application/pdf"
                   onChange={handleFileSelect}
                   className="hidden"
+                  aria-label="Upload receipt image or PDF"
                 />
               </div>
             ) : (
               <div>
-                <div className="relative mb-4 overflow-hidden rounded-lg border border-gray-200">
-                  <img src={imagePreview} alt="Receipt preview" className="h-auto w-full" />
-                </div>
+                {/* Show PDF icon for PDFs, image preview for images */}
+                {imagePreview === "pdf" ? (
+                  <div className="relative mb-4 rounded-lg border border-gray-200 bg-gray-50 p-8 text-center">
+                    <FileText className="mx-auto mb-2 h-16 w-16 text-gray-400" />
+                    <p className="text-sm font-medium text-gray-900">{imageFile?.name}</p>
+                    <p className="mt-1 text-xs text-gray-500">
+                      PDF • {((imageFile?.size || 0) / 1024).toFixed(0)} KB
+                    </p>
+                  </div>
+                ) : (
+                  <div className="relative mb-4 overflow-hidden rounded-lg border border-gray-200">
+                    <img src={imagePreview} alt="Receipt preview" className="h-auto w-full" />
+                  </div>
+                )}
                 <div className="flex gap-2">
                   <button
                     onClick={processReceipt}
@@ -310,7 +350,9 @@ export default function ReceiptScannerPage() {
                     {isProcessing ? (
                       <>
                         <Loader2 className="h-5 w-5 animate-spin" />
-                        Processing...
+                        {processingProgress
+                          ? `Processing page ${processingProgress.current} of ${processingProgress.total}...`
+                          : "Processing..."}
                       </>
                     ) : (
                       <>
@@ -335,6 +377,18 @@ export default function ReceiptScannerPage() {
           {extractedData && (
             <div className="rounded-lg bg-white p-6 shadow">
               <h3 className="mb-4 text-lg font-semibold text-gray-900">OCR Results</h3>
+
+              {/* Show PDF info if multi-page */}
+              {extractedData.pagesProcessed && extractedData.pagesProcessed > 1 && (
+                <div className="mb-4 rounded-lg bg-blue-50 p-3 text-sm text-blue-800">
+                  <p className="font-medium">
+                    📄 Processed {extractedData.pagesProcessed} pages
+                  </p>
+                  <p className="mt-1 text-xs">
+                    Best result from page {extractedData.bestPageNumber}
+                  </p>
+                </div>
+              )}
 
               <div className="space-y-3 text-sm">
                 <div className="flex items-center justify-between border-b border-gray-200 pb-2">
@@ -426,11 +480,13 @@ export default function ReceiptScannerPage() {
 
             {/* Date */}
             <div>
-              <label className="mb-1 block text-sm font-medium text-gray-700">Date *</label>
+              <label htmlFor="receipt-date" className="mb-1 block text-sm font-medium text-gray-700">Date *</label>
               <input
+                id="receipt-date"
                 type="date"
                 value={date}
                 onChange={(e) => setDate(e.target.value)}
+                aria-label="Receipt date"
                 className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:border-transparent focus:ring-2 focus:ring-teal-500"
               />
             </div>

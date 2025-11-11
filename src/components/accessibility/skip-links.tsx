@@ -23,7 +23,7 @@ export function SkipLinks() {
   };
 
   return (
-    <div
+    <nav
       className={cn(
         "fixed left-0 top-0 z-[100]",
         "translate-y-[-100%] focus-within:translate-y-0",
@@ -39,6 +39,6 @@ export function SkipLinks() {
           Skip to navigation
         </Button>
       </div>
-    </div>
+    </nav>
   );
 }

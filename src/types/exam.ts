@@ -129,6 +129,7 @@ export interface ExamSession {
   questions: Question[];
   currentIndex: number;
   answers: Record<string, string>;
+  markedForReview?: string[]; // Array of question IDs marked for review
   startTime: Date;
   endTime?: Date;
   score?: number;

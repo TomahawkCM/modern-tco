@@ -6,32 +6,109 @@
  */
 
 import { useState, useEffect } from 'react';
+import dynamic from 'next/dynamic';
 import { BarChart3, PieChart as PieChartIcon, TrendingUp, Calendar } from 'lucide-react';
 import { db } from '@/lib/budget-db';
 import type { Transaction, Category } from '@/types/budget';
 import { SpendingHeatMap } from '@/components/budget/SpendingHeatMap';
-import { SpendingTrendChart } from '@/components/budget/SpendingTrendChart';
-import {
-  LineChart,
-  Line,
-  BarChart,
-  Bar,
-  PieChart,
-  Pie,
-  Cell,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  ResponsiveContainer,
-} from 'recharts';
+import { LazySpendingTrendChart } from '@/components/budget/charts/LazyChartComponents';
+import { useThemeMode } from '@/hooks/useThemeMode';
+import { getChartPalette, getCategoryColor } from '@/lib/budget-chart-colors';
+
+// Dynamic chart imports for reports page
+const DynamicReportsCharts = dynamic(
+  () => import('recharts').then((mod) => {
+    function ReportsCharts({ type, data, palette, xKey, yKey, lines }: any) {
+      const { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, BarChart, Bar, XAxis, YAxis, CartesianGrid, LineChart, Line, Legend } = mod;
+
+      if (type === 'pie') {
+        return (
+          <ResponsiveContainer width="100%" height={300}>
+            <PieChart>
+              <Pie
+                data={data}
+                cx="50%"
+                cy="50%"
+                labelLine={false}
+                label={({ name, percent }) => `${name}: ${((percent ?? 0) * 100).toFixed(0)}%`}
+                outerRadius={100}
+                fill="#8884d8"
+                dataKey="value"
+              >
+                {data.map((entry: any, index: number) => (
+                  <Cell
+                    key={`cell-${index}`}
+                    fill={String(entry.color || palette.data[index % palette.data.length]?.hex || '#94a3b8')}
+                  />
+                ))}
+              </Pie>
+              <Tooltip formatter={(value: number) => `$${value.toFixed(2)}`} />
+            </PieChart>
+          </ResponsiveContainer>
+        );
+      }
+
+      if (type === 'bar') {
+        return (
+          <ResponsiveContainer width="100%" height={300}>
+            <BarChart data={data}>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey={xKey} stroke={palette.grid} />
+              <YAxis stroke={palette.grid} />
+              <Tooltip formatter={(value: number) => `$${value.toFixed(2)}`} />
+              <Bar dataKey={yKey} fill={palette.data[1].hex} />
+            </BarChart>
+          </ResponsiveContainer>
+        );
+      }
+
+      // Line chart
+      return (
+        <ResponsiveContainer width="100%" height={300}>
+          <LineChart data={data}>
+            <CartesianGrid strokeDasharray="3 3" stroke={palette.grid} />
+            <XAxis dataKey={xKey} stroke={palette.grid} />
+            <YAxis stroke={palette.grid} />
+            <Tooltip formatter={(value: number) => `$${value.toFixed(2)}`} />
+            <Legend />
+            {lines.map((line: any) => (
+              <Line
+                key={line.key}
+                type="monotone"
+                dataKey={line.key}
+                stroke={line.color}
+                strokeWidth={2}
+                name={line.name}
+              />
+            ))}
+          </LineChart>
+        </ResponsiveContainer>
+      );
+    }
+    return { default: ReportsCharts };
+  }),
+  {
+    loading: () => (
+      <div className="w-full rounded-lg bg-gray-100 animate-pulse flex items-center justify-center h-[300px]">
+        <div className="flex flex-col items-center gap-2 text-gray-400">
+          <div className="w-12 h-12 border-4 border-gray-300 border-t-teal-600 rounded-full animate-spin" />
+          <span className="text-sm font-medium">Loading chart...</span>
+        </div>
+      </div>
+    ),
+    ssr: false
+  }
+);
 
 export default function ReportsPage() {
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [timeRange, setTimeRange] = useState<'month' | 'quarter' | 'year' | 'all'>('month');
+
+  // Get theme-aware chart colors
+  const theme = useThemeMode();
+  const palette = getChartPalette(theme);
 
   useEffect(() => {
     loadData();
@@ -156,25 +233,14 @@ export default function ReportsPage() {
         <div className="bg-white rounded-lg shadow p-6">
           <h2 className="text-lg font-semibold text-gray-900 mb-4">Spending by Category</h2>
           {categorySpending.length > 0 ? (
-            <ResponsiveContainer width="100%" height={300}>
-              <PieChart>
-                <Pie
-                  data={categorySpending}
-                  cx="50%"
-                  cy="50%"
-                  labelLine={false}
-                  label={({ name, percent }) => `${name}: ${((percent ?? 0) * 100).toFixed(0)}%`}
-                  outerRadius={80}
-                  fill="#8884d8"
-                  dataKey="value"
-                >
-                  {categorySpending.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={entry.color} />
-                  ))}
-                </Pie>
-                <Tooltip formatter={(value: number) => `$${value.toFixed(2)}`} />
-              </PieChart>
-            </ResponsiveContainer>
+            <DynamicReportsCharts
+              type="pie"
+              data={categorySpending.map(entry => ({
+                ...entry,
+                color: getCategoryColor(entry.color, theme)
+              }))}
+              palette={palette}
+            />
           ) : (
             <p className="text-gray-500 text-center py-12">No spending data available</p>
           )}
@@ -184,15 +250,13 @@ export default function ReportsPage() {
         <div className="bg-white rounded-lg shadow p-6">
           <h2 className="text-lg font-semibold text-gray-900 mb-4">Top 5 Categories</h2>
           {topCategories.length > 0 ? (
-            <ResponsiveContainer width="100%" height={300}>
-              <BarChart data={topCategories}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" />
-                <YAxis />
-                <Tooltip formatter={(value: number) => `$${value.toFixed(2)}`} />
-                <Bar dataKey="value" fill="#3b82f6" />
-              </BarChart>
-            </ResponsiveContainer>
+            <DynamicReportsCharts
+              type="bar"
+              data={topCategories}
+              palette={palette}
+              xKey="name"
+              yKey="value"
+            />
           ) : (
             <p className="text-gray-500 text-center py-12">No data available</p>
           )}
@@ -202,18 +266,17 @@ export default function ReportsPage() {
         <div className="bg-white rounded-lg shadow p-6 lg:col-span-2">
           <h2 className="text-lg font-semibold text-gray-900 mb-4">Income vs Expenses (Last 6 Months)</h2>
           {monthlyTrends.length > 0 ? (
-            <ResponsiveContainer width="100%" height={300}>
-              <LineChart data={monthlyTrends}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="month" />
-                <YAxis />
-                <Tooltip formatter={(value: number) => `$${value.toFixed(2)}`} />
-                <Legend />
-                <Line type="monotone" dataKey="income" stroke="#22c55e" strokeWidth={2} name="Income" />
-                <Line type="monotone" dataKey="expenses" stroke="#ef4444" strokeWidth={2} name="Expenses" />
-                <Line type="monotone" dataKey="net" stroke="#3b82f6" strokeWidth={2} name="Net" />
-              </LineChart>
-            </ResponsiveContainer>
+            <DynamicReportsCharts
+              type="line"
+              data={monthlyTrends}
+              palette={palette}
+              xKey="month"
+              lines={[
+                { key: 'income', name: 'Income', color: palette.positive.hex },
+                { key: 'expenses', name: 'Expenses', color: palette.negative.hex },
+                { key: 'net', name: 'Net', color: palette.neutral.hex },
+              ]}
+            />
           ) : (
             <p className="text-gray-500 text-center py-12">No trend data available</p>
           )}
@@ -221,7 +284,7 @@ export default function ReportsPage() {
       </div>
 
       {/* Spending Trend & Forecast */}
-      <SpendingTrendChart transactions={filteredTransactions} monthsBack={6} forecastDays={30} />
+      <LazySpendingTrendChart transactions={filteredTransactions} monthsBack={6} forecastDays={30} />
 
       {/* Spending Heat Map */}
       <SpendingHeatMap transactions={filteredTransactions} />

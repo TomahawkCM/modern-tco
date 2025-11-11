@@ -6,10 +6,11 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Plus, Filter, TrendingDown, Calendar, DollarSign, Percent } from 'lucide-react';
+import { Plus, Filter, TrendingDown, Calendar, DollarSign, Percent, CreditCard } from 'lucide-react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { EmptyStates } from '@/components/budget/EmptyState';
 import {
   Select,
   SelectContent,
@@ -236,25 +237,19 @@ export default function LoansPage() {
 
       {/* Loans List */}
       {filteredLoans.length === 0 ? (
-        <Card>
-          <CardContent className="flex flex-col items-center justify-center py-12">
-            <DollarSign className="w-16 h-16 text-gray-300 mb-4" />
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">No loans found</h3>
-            <p className="text-gray-500 text-center max-w-md mb-6">
-              {loans.length === 0
-                ? 'Get started by adding your first loan to track payments and payoff progress.'
-                : 'No loans match the selected filters.'}
-            </p>
-            {loans.length === 0 && (
-              <Link href="/budget-app/loans/new">
-                <Button className="bg-teal-500 hover:bg-teal-700">
-                  <Plus className="w-4 h-4 mr-2" />
-                  Add Your First Loan
-                </Button>
-              </Link>
-            )}
-          </CardContent>
-        </Card>
+        loans.length === 0 ? (
+          <EmptyStates.Loans />
+        ) : (
+          <Card>
+            <CardContent className="flex flex-col items-center justify-center py-12">
+              <Filter className="w-16 h-16 text-gray-300 mb-4" />
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">No loans match your filters</h3>
+              <p className="text-gray-500 text-center max-w-md">
+                Try adjusting your filter criteria to see more loans.
+              </p>
+            </CardContent>
+          </Card>
+        )
       ) : (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           {filteredLoans.map(loan => {

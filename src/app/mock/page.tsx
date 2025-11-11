@@ -27,6 +27,8 @@ import { cn } from "@/lib/utils";
 import { analytics } from "@/lib/analytics";
 import { questionService } from "@/lib/questionService";
 import { useProgress } from "@/contexts/ProgressContext";
+import { QuestionNavigator } from "@/components/exam/question-navigator";
+import { ExamSummaryPanel } from "@/components/exam/exam-summary-panel";
 
 // Code-split heavy components: only load after exam starts
 const QuestionCard = dynamic(
@@ -52,6 +54,7 @@ function MockExamContent() {
     answerQuestion,
     nextQuestion,
     previousQuestion,
+    toggleMarkForReview,
     finishExam,
     resetExam,
     getCurrentQuestion,
@@ -436,30 +439,59 @@ function MockExamContent() {
     );
   }
 
-  // Question view - Fixed viewport layout with no page scrolling
+  // Prepare question statuses for navigator
+  const questionStatuses = state.currentSession.questions.map((q, idx) => {
+    const isAnswered = !!state.currentSession?.answers[q.id];
+    const isMarked = state.currentSession?.markedForReview?.includes(q.id) ?? false;
+
+    return {
+      questionId: `q-${idx}`,
+      status: (isMarked ? "marked" : isAnswered ? "answered" : "unanswered") as "answered" | "unanswered" | "marked",
+    };
+  });
+
+  const handleNavigateToQuestion = (index: number) => {
+    if (!state.currentSession) return;
+    // Update current index via reducer
+    const event = { type: "JUMP_TO_QUESTION" as const, index };
+    // We need to dispatch this through the context, but we can use the existing methods
+    // For now, use a loop of next/previous to get there
+    const diff = index - state.currentSession.currentIndex;
+    if (diff > 0) {
+      for (let i = 0; i < diff; i++) nextQuestion();
+    } else if (diff < 0) {
+      for (let i = 0; i < Math.abs(diff); i++) previousQuestion();
+    }
+  };
+
+  const answeredCount = Object.keys(state.currentSession.answers).length;
+  const unansweredCount = state.currentSession.questions.length - answeredCount;
+  const markedCount = state.currentSession.markedForReview?.length || 0;
+
+  // Question view - Three-column responsive layout
   return (
-      <div className="mx-auto max-w-4xl flex flex-col h-[calc(100vh-16rem)]">
-        {/* Fixed Header - Timer and Progress */}
-        <div className="flex-none space-y-4">
-          {/* Progress header with timer */}
-          <div className="flex items-center justify-between">
-            <div>
-              <h1 className="text-2xl font-bold text-foreground">Mock Exam</h1>
-              <p className="text-muted-foreground">
-                Question {progress.current} of {progress.total}
-              </p>
-            </div>
-            <div className="flex items-center gap-6">
-              <ExamTimer
-                totalTimeMinutes={105}
-                onTimeUp={() => {
-                  finishExam();
-                  setTimerStarted(false);
-                }}
-                onWarning={(remainingMinutes) => {
-                  console.log(`Timer warning: ${remainingMinutes} minutes remaining`);
-                }}
-              />
+      <div className="flex h-[calc(100vh-8rem)] gap-6 max-w-[1920px] mx-auto px-4">
+        {/* Left Sidebar - Question Navigator (240px, desktop only) */}
+        <QuestionNavigator
+          totalQuestions={progress.total}
+          currentQuestionIndex={state.currentSession.currentIndex}
+          questionStatuses={questionStatuses}
+          onNavigateToQuestion={handleNavigateToQuestion}
+          className="flex-none w-[240px]"
+        />
+
+        {/* Center Content - Question Card (flex-1) */}
+        <div className="flex-1 flex flex-col min-w-0">
+          {/* Fixed Header - Timer and Progress */}
+          <div className="flex-none space-y-4 mb-4">
+            {/* Progress header with timer (mobile/tablet only - desktop uses right panel) */}
+            <div className="flex items-center justify-between xl:hidden">
+              <div>
+                <h1 className="text-xl font-bold text-foreground">Mock Exam</h1>
+                <p className="text-sm text-muted-foreground">
+                  Q {progress.current} of {progress.total}
+                </p>
+              </div>
               <Badge
                 variant="outline"
                 className={cn(
@@ -470,80 +502,105 @@ function MockExamContent() {
                 {formatTime(timeRemaining)} left
               </Badge>
             </div>
-          </div>
 
-          {/* Progress bar */}
-          <Progress
-            value={progress.percentage}
-            className="h-3"
-            aria-label={`Exam progress: ${progress.percentage}%`}
-          />
-        </div>
-
-        {/* Scrollable Content - Question Card */}
-        <ScrollArea className="flex-1 h-full">
-          <div className="pr-4">
-            {currentQuestion && (
-              <QuestionCard
-                question={currentQuestion}
-                questionNumber={progress.current}
-                totalQuestions={progress.total}
-                selectedAnswer={selectedAnswer}
-                onAnswerSelect={handleAnswerSelect}
-                showExplanation={false} // Hide explanations in mock exam
-                mode="exam"
-              />
-            )}
-          </div>
-        </ScrollArea>
-
-        {/* Fixed Footer - Navigation */}
-        <div className="flex-none">
-          <div className="flex items-center justify-between">
-          <Button
-            variant="outline"
-            onClick={handlePrevious}
-            disabled={isFirstQuestion}
-            className="border-white/20 text-foreground hover:bg-white/10 disabled:opacity-50"
-          >
-            <ArrowLeft className="mr-2 h-4 w-4" />
-            Previous
-          </Button>
-
-          <div className="flex items-center gap-4">
-            <div className="text-sm text-muted-foreground">
-              {selectedAnswer ? "Answer selected" : "Select an answer"}
+            {/* Desktop-only header */}
+            <div className="hidden xl:block">
+              <h1 className="text-2xl font-bold text-foreground">Mock Exam</h1>
+              <p className="text-muted-foreground">
+                Question {progress.current} of {progress.total}
+              </p>
             </div>
-            <Button
-              variant="outline"
-              onClick={handleFinishEarly}
-              className="border-red-400 text-red-400 hover:bg-red-900/20"
-            >
-              <CheckCircle className="mr-2 h-4 w-4" />
-              Finish Early
-            </Button>
+
+            {/* Progress bar */}
+            <Progress
+              value={progress.percentage}
+              className="h-3"
+              aria-label={`Exam progress: ${progress.percentage}%`}
+            />
           </div>
 
-          <Button
-            onClick={handleNext}
-            disabled={!selectedAnswer}
-            className="bg-tanium-accent hover:bg-blue-600 disabled:opacity-50"
-            aria-label={isLastQuestion ? "Submit Mock Exam" : "Go to Next Question"}
-          >
-            {isLastQuestion ? (
-              <>
-                <CheckCircle className="mr-2 h-4 w-4" />
-                Submit Exam
-              </>
-            ) : (
-              <>
-                Next
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </>
-            )}
-          </Button>
+          {/* Scrollable Content - Question Card */}
+          <ScrollArea className="flex-1">
+            <div className="pr-4">
+              {currentQuestion && (
+                <QuestionCard
+                  question={currentQuestion}
+                  questionNumber={progress.current}
+                  totalQuestions={progress.total}
+                  selectedAnswer={selectedAnswer}
+                  onAnswerSelect={handleAnswerSelect}
+                  showExplanation={false}
+                  mode="exam"
+                  isMarked={state.currentSession?.markedForReview?.includes(currentQuestion.id) ?? false}
+                  onToggleMarkForReview={() => toggleMarkForReview(currentQuestion.id)}
+                />
+              )}
+            </div>
+          </ScrollArea>
+
+          {/* Fixed Footer - Navigation */}
+          <div className="flex-none mt-4">
+            <div className="flex items-center justify-between gap-2">
+              <Button
+                variant="outline"
+                onClick={handlePrevious}
+                disabled={isFirstQuestion}
+                className="border-white/20 text-foreground hover:bg-white/10 disabled:opacity-50"
+              >
+                <ArrowLeft className="mr-2 h-4 w-4" />
+                <span className="hidden sm:inline">Previous</span>
+              </Button>
+
+              <div className="flex items-center gap-2 sm:gap-4">
+                <div className="text-xs sm:text-sm text-muted-foreground hidden sm:block">
+                  {selectedAnswer ? "Answer selected" : "Select an answer"}
+                </div>
+                <Button
+                  variant="outline"
+                  onClick={handleFinishEarly}
+                  size="sm"
+                  className="border-red-400 text-red-400 hover:bg-red-900/20 xl:hidden"
+                >
+                  <CheckCircle className="mr-1 sm:mr-2 h-4 w-4" />
+                  <span className="hidden sm:inline">Finish Early</span>
+                  <span className="sm:hidden">Finish</span>
+                </Button>
+              </div>
+
+              <Button
+                onClick={handleNext}
+                disabled={!selectedAnswer}
+                className="bg-tanium-accent hover:bg-blue-600 disabled:opacity-50"
+                aria-label={isLastQuestion ? "Submit Mock Exam" : "Go to Next Question"}
+              >
+                {isLastQuestion ? (
+                  <>
+                    <CheckCircle className="mr-2 h-4 w-4" />
+                    <span className="hidden sm:inline">Submit Exam</span>
+                    <span className="sm:hidden">Submit</span>
+                  </>
+                ) : (
+                  <>
+                    <span className="hidden sm:inline">Next</span>
+                    <ArrowRight className="sm:ml-2 h-4 w-4" />
+                  </>
+                )}
+              </Button>
+            </div>
+          </div>
         </div>
-        </div>
+
+        {/* Right Sidebar - Exam Summary (200px, xl+ only) */}
+        <ExamSummaryPanel
+          timeRemaining={timeRemaining}
+          totalTime={105 * 60}
+          totalQuestions={progress.total}
+          answeredCount={answeredCount}
+          unansweredCount={unansweredCount}
+          markedCount={markedCount}
+          onSubmitExam={handleFinishEarly}
+          className="flex-none"
+        />
       </div>
   );
 }

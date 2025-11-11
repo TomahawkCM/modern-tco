@@ -23,6 +23,8 @@ type ExamAction =
   | { type: "ANSWER_QUESTION"; questionId: string; answerId: string }
   | { type: "NEXT_QUESTION" }
   | { type: "PREVIOUS_QUESTION" }
+  | { type: "JUMP_TO_QUESTION"; index: number }
+  | { type: "TOGGLE_MARK_FOR_REVIEW"; questionId: string }
   | { type: "FINISH_EXAM" }
   | { type: "RESET_EXAM" }
   | { type: "SET_LOADING"; loading: boolean }
@@ -38,6 +40,7 @@ const examReducer = (state: ExamState, action: ExamAction): ExamState => {
         questions: action.questions,
         currentIndex: 0,
         answers: {},
+        markedForReview: [],
         startTime: new Date(),
         completed: false,
       };
@@ -86,6 +89,36 @@ const examReducer = (state: ExamState, action: ExamAction): ExamState => {
         currentSession: {
           ...state.currentSession,
           currentIndex: Math.max(state.currentSession.currentIndex - 1, 0),
+        },
+      };
+
+    case "JUMP_TO_QUESTION":
+      if (!state.currentSession) return state;
+
+      return {
+        ...state,
+        currentSession: {
+          ...state.currentSession,
+          currentIndex: Math.max(
+            0,
+            Math.min(action.index, state.currentSession.questions.length - 1)
+          ),
+        },
+      };
+
+    case "TOGGLE_MARK_FOR_REVIEW":
+      if (!state.currentSession) return state;
+
+      const currentMarked = state.currentSession.markedForReview || [];
+      const isMarked = currentMarked.includes(action.questionId);
+
+      return {
+        ...state,
+        currentSession: {
+          ...state.currentSession,
+          markedForReview: isMarked
+            ? currentMarked.filter((id) => id !== action.questionId)
+            : [...currentMarked, action.questionId],
         },
       };
 
@@ -150,6 +183,8 @@ interface ExamContextValue {
   answerQuestion: (questionId: string, answerId: string) => void;
   nextQuestion: () => void;
   previousQuestion: () => void;
+  jumpToQuestion: (index: number) => void;
+  toggleMarkForReview: (questionId: string) => void;
   finishExam: () => void;
   resetExam: () => void;
   getCurrentQuestion: () => Question | null;
@@ -447,6 +482,14 @@ export function ExamProvider({ children }: { children: React.ReactNode }) {
     dispatch({ type: "PREVIOUS_QUESTION" });
   };
 
+  const jumpToQuestion = (index: number) => {
+    dispatch({ type: "JUMP_TO_QUESTION", index });
+  };
+
+  const toggleMarkForReview = (questionId: string) => {
+    dispatch({ type: "TOGGLE_MARK_FOR_REVIEW", questionId });
+  };
+
   const finishExam = () => {
     dispatch({ type: "FINISH_EXAM" });
   };
@@ -507,6 +550,8 @@ export function ExamProvider({ children }: { children: React.ReactNode }) {
     answerQuestion,
     nextQuestion,
     previousQuestion,
+    jumpToQuestion,
+    toggleMarkForReview,
     finishExam,
     resetExam,
     getCurrentQuestion,

@@ -8,14 +8,20 @@
 import { useState, useEffect } from 'react';
 import { Plus, Edit, Trash2, Target, TrendingUp, Calendar, DollarSign } from 'lucide-react';
 import { db } from '@/lib/budget-db';
+import { EmptyStates } from '@/components/budget/EmptyState';
 import type { FuturePurchase } from '@/types/budget';
 import { differenceInDays, differenceInMonths, addMonths, format } from 'date-fns';
+import { ConfirmDialog } from '@/components/budget/ConfirmDialog';
 
 export default function FuturePurchasePage() {
   const [purchases, setPurchases] = useState<FuturePurchase[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [editingPurchase, setEditingPurchase] = useState<FuturePurchase | null>(null);
+
+  // Confirmation dialog state
+  const [deleteConfirmOpen, setDeleteConfirmOpen] = useState(false);
+  const [deletingPurchase, setDeletingPurchase] = useState<FuturePurchase | null>(null);
 
   useEffect(() => {
     loadData();
@@ -48,15 +54,23 @@ export default function FuturePurchasePage() {
     }
   }
 
-  async function deletePurchase(id: string) {
-    if (!confirm('Are you sure you want to delete this goal?')) return;
+  function initiateDeletePurchase(purchase: FuturePurchase) {
+    setDeletingPurchase(purchase);
+    setDeleteConfirmOpen(true);
+  }
+
+  async function confirmDeletePurchase() {
+    if (!deletingPurchase) return;
 
     try {
-      await db.futurePurchases.delete(id);
+      await db.futurePurchases.delete(deletingPurchase.id);
       await loadData();
+      setDeleteConfirmOpen(false);
+      setDeletingPurchase(null);
     } catch (error) {
       console.error('Error deleting purchase:', error);
       alert('Failed to delete purchase');
+      // Keep dialog open on error
     }
   }
 
@@ -81,6 +95,10 @@ export default function FuturePurchasePage() {
         </div>
       </div>
     );
+  }
+
+  if (purchases.length === 0) {
+    return <EmptyStates.FuturePlans />;
   }
 
   const activePurchases = purchases.filter(p => !p.isCompleted);
@@ -157,7 +175,7 @@ export default function FuturePurchasePage() {
                 setEditingPurchase(purchase);
                 setShowModal(true);
               }}
-              onDelete={() => deletePurchase(purchase.id)}
+              onDelete={() => initiateDeletePurchase(purchase)}
               onToggleComplete={() => toggleComplete(purchase)}
             />
           ))}
@@ -189,7 +207,7 @@ export default function FuturePurchasePage() {
                 setEditingPurchase(purchase);
                 setShowModal(true);
               }}
-              onDelete={() => deletePurchase(purchase.id)}
+              onDelete={() => initiateDeletePurchase(purchase)}
               onToggleComplete={() => toggleComplete(purchase)}
             />
           ))}
@@ -207,6 +225,28 @@ export default function FuturePurchasePage() {
           }}
         />
       )}
+
+      {/* Confirmation Dialog */}
+      <ConfirmDialog
+        open={deleteConfirmOpen}
+        onOpenChange={setDeleteConfirmOpen}
+        onConfirm={confirmDeletePurchase}
+        title="Delete Savings Goal"
+        description="This will permanently remove this goal from your future purchase planner."
+        impact={deletingPurchase ? {
+          title: "You will lose:",
+          items: [
+            `Goal: ${deletingPurchase.name}`,
+            `Target amount: $${deletingPurchase.targetAmount.toFixed(2)}`,
+            `Current savings: $${deletingPurchase.currentSavings.toFixed(2)}`,
+            `Timeline: ${format(new Date(deletingPurchase.targetDate), 'MMMM yyyy')}`,
+            deletingPurchase.description ? `Description: "${deletingPurchase.description}"` : null,
+          ]
+        } : undefined}
+        confirmLabel="Delete Goal"
+        variant="destructive"
+        icon={<Trash2 className="w-5 h-5" />}
+      />
     </div>
   );
 }
@@ -454,6 +494,7 @@ function PurchaseModal({
                   placeholder="0.00"
                   step="0.01"
                   min="0"
+                  inputMode="decimal"
                   className="w-full pl-8 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
                   required
                 />
@@ -473,6 +514,7 @@ function PurchaseModal({
                   placeholder="0.00"
                   step="0.01"
                   min="0"
+                  inputMode="decimal"
                   className="w-full pl-8 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
                 />
               </div>
@@ -493,6 +535,7 @@ function PurchaseModal({
                   placeholder="0.00"
                   step="0.01"
                   min="0"
+                  inputMode="decimal"
                   className="w-full pl-8 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
                 />
               </div>

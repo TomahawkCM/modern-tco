@@ -10,6 +10,7 @@
 import { useState, useEffect } from 'react';
 import { X, Plus, Trash2, AlertCircle, CheckCircle } from 'lucide-react';
 import type { Transaction, Category } from '@/types/budget';
+import { useFocusTrap } from '@/hooks/useFocusTrap';
 
 interface Split {
   id: string;
@@ -53,6 +54,24 @@ export function SplitTransactionModal({
   ]);
   
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Focus trap for modal accessibility
+  const modalRef = useFocusTrap(true);
+
+  // Handle Escape key to close modal (Task 2.2.3)
+  useEffect(() => {
+    function handleEscapeKey(event: KeyboardEvent) {
+      if (event.key === 'Escape') {
+        onClose();
+      }
+    }
+
+    document.addEventListener('keydown', handleEscapeKey);
+
+    return () => {
+      document.removeEventListener('keydown', handleEscapeKey);
+    };
+  }, [onClose]);
 
   // Calculate total and validation
   const total = splits.reduce((sum, split) => sum + (split.amount || 0), 0);
@@ -139,8 +158,9 @@ export function SplitTransactionModal({
   }
 
   return (
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-lg shadow-xl max-w-3xl w-full max-h-[90vh] overflow-y-auto">
+    <div className="fixed inset-0 bg-black/50 flex items-end sm:items-center justify-center z-50 p-4 sm:p-4 p-0">
+      {/* Phase 3.1.5: Mobile-optimized with bottom sheet on mobile, centered on desktop */}
+      <div ref={modalRef} className="bg-white rounded-t-2xl sm:rounded-lg shadow-xl w-full sm:max-w-3xl max-h-[90vh] overflow-y-auto">
         {/* Header */}
         <div className="flex items-center justify-between p-6 border-b border-gray-200 sticky top-0 bg-white z-10">
           <div>
@@ -208,13 +228,15 @@ export function SplitTransactionModal({
                       <div className="grid grid-cols-2 gap-4">
                         {/* Category */}
                         <div>
-                          <label className="block text-xs font-medium text-gray-700 mb-2">
+                          <label htmlFor={`split-category-${split.id}`} className="block text-xs font-medium text-gray-700 mb-2">
                             Category <span className="text-red-600">*</span>
                           </label>
                           <select
+                            id={`split-category-${split.id}`}
                             value={split.category}
                             onChange={(e) => handleCategoryChange(split.id, e.target.value)}
-                            className="w-full px-4 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                            className="w-full h-12 px-4 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                            aria-required="true"
                             required
                           >
                             <option value="">Select category...</option>
@@ -228,19 +250,22 @@ export function SplitTransactionModal({
 
                         {/* Amount */}
                         <div>
-                          <label className="block text-xs font-medium text-gray-700 mb-2">
+                          <label htmlFor={`split-amount-${split.id}`} className="block text-xs font-medium text-gray-700 mb-2">
                             Amount <span className="text-red-600">*</span>
                           </label>
                           <div className="relative">
-                            <span className="absolute left-4 top-2 text-gray-500 text-sm">$</span>
+                            <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 text-sm">$</span>
                             <input
+                              id={`split-amount-${split.id}`}
                               type="number"
                               step="0.01"
                               min="0"
                               max={originalAmount}
                               value={split.amount || ''}
                               onChange={(e) => updateSplit(split.id, 'amount', parseFloat(e.target.value) || 0)}
-                              className="w-full pl-8 pr-4 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                              inputMode="decimal"
+                              className="w-full h-12 pl-8 pr-4 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                              aria-required="true"
                               required
                             />
                           </div>
@@ -250,13 +275,14 @@ export function SplitTransactionModal({
                       {/* Subcategory */}
                       {selectedCategory && selectedCategory.subcategories.length > 0 && (
                         <div>
-                          <label className="block text-xs font-medium text-gray-700 mb-2">
+                          <label htmlFor={`split-subcategory-${split.id}`} className="block text-xs font-medium text-gray-700 mb-2">
                             Subcategory
                           </label>
                           <select
+                            id={`split-subcategory-${split.id}`}
                             value={split.subcategory}
                             onChange={(e) => updateSplit(split.id, 'subcategory', e.target.value)}
-                            className="w-full px-4 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                            className="w-full h-12 px-4 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
                           >
                             <option value="">None</option>
                             {selectedCategory.subcategories.map((subcat) => (
@@ -270,15 +296,16 @@ export function SplitTransactionModal({
 
                       {/* Notes */}
                       <div>
-                        <label className="block text-xs font-medium text-gray-700 mb-2">
+                        <label htmlFor={`split-notes-${split.id}`} className="block text-xs font-medium text-gray-700 mb-2">
                           Notes (Optional)
                         </label>
                         <input
+                          id={`split-notes-${split.id}`}
                           type="text"
                           value={split.notes}
                           onChange={(e) => updateSplit(split.id, 'notes', e.target.value)}
                           placeholder="e.g., Business expense, Personal use"
-                          className="w-full px-4 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                          className="w-full h-12 px-4 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
                         />
                       </div>
                     </div>

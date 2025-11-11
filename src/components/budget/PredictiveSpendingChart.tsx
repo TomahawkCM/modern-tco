@@ -10,6 +10,8 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Responsi
 import { TrendingUp, TrendingDown, AlertCircle, Loader2 } from 'lucide-react';
 import { predictSpending, isPredictiveSpendingEnabled, type SpendingPrediction } from '@/lib/analytics/lstm-predictive-spending';
 import type { Transaction } from '@/types/budget';
+import { useThemeMode } from '@/hooks/useThemeMode';
+import { getChartPalette } from '@/lib/budget-chart-colors';
 
 interface PredictiveSpendingChartProps {
   transactions: Transaction[];
@@ -24,6 +26,10 @@ export function PredictiveSpendingChart({
   monthsAhead = 3,
   showHistorical = true,
 }: PredictiveSpendingChartProps) {
+  // Get theme-aware chart colors
+  const theme = useThemeMode();
+  const palette = getChartPalette(theme);
+
   const [predictions, setPredictions] = useState<SpendingPrediction[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -181,23 +187,23 @@ export function PredictiveSpendingChart({
         </h3>
         <ResponsiveContainer width="100%" height={300}>
           <AreaChart data={chartData}>
-            <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+            <CartesianGrid strokeDasharray="3 3" stroke={palette.grid} />
             <XAxis
               dataKey="month"
-              stroke="#6b7280"
+              stroke={palette.grid}
               fontSize={12}
-              tick={{ fill: '#6b7280' }}
+              tick={{ fill: palette.text }}
             />
             <YAxis
-              stroke="#6b7280"
+              stroke={palette.grid}
               fontSize={12}
-              tick={{ fill: '#6b7280' }}
+              tick={{ fill: palette.text }}
               tickFormatter={(value) => `$${value.toFixed(0)}`}
             />
             <Tooltip
               contentStyle={{
-                backgroundColor: 'white',
-                border: '1px solid #e5e7eb',
+                backgroundColor: palette.background,
+                border: `1px solid ${palette.grid}`,
                 borderRadius: '8px',
               }}
               formatter={(value: number, name: string) => [
@@ -206,40 +212,40 @@ export function PredictiveSpendingChart({
               ]}
             />
             <Legend />
-            
+
             {/* Confidence interval area */}
             {predictions.length > 0 && (
               <Area
                 type="monotone"
                 dataKey="upper"
                 stroke="none"
-                fill="#3b82f6"
+                fill={palette.data[1].hex}
                 fillOpacity={0.1}
                 name="Confidence Interval"
               />
             )}
-            
+
             {/* Actual spending line */}
             {showHistorical && (
               <Line
                 type="monotone"
                 dataKey="actual"
-                stroke="#10b981"
+                stroke={palette.positive.hex}
                 strokeWidth={2}
-                dot={{ fill: '#10b981', r: 4 }}
+                dot={{ fill: palette.positive.hex, r: 4 }}
                 name="Actual"
               />
             )}
-            
+
             {/* Predicted spending line */}
             {predictions.length > 0 && (
               <Line
                 type="monotone"
                 dataKey="predicted"
-                stroke="#3b82f6"
+                stroke={palette.data[1].hex}
                 strokeWidth={2}
                 strokeDasharray="5 5"
-                dot={{ fill: '#3b82f6', r: 4 }}
+                dot={{ fill: palette.data[1].hex, r: 4 }}
                 name="Predicted"
               />
             )}

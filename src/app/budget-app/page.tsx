@@ -22,6 +22,7 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
 import {
   TrendingUp,
   TrendingDown,
@@ -37,19 +38,6 @@ import {
   ArrowDown,
   AlertCircle,
 } from 'lucide-react';
-import {
-  PieChart,
-  Pie,
-  Cell,
-  ResponsiveContainer,
-  AreaChart,
-  Area,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-} from 'recharts';
 import { db, initializeDefaultCategories } from '@/lib/budget-db';
 import type { Transaction, Account, Budget, Category } from '@/types/budget';
 import { detectRecurringTransactions, type RecurringPattern } from '@/lib/analytics/recurring-detector';
@@ -60,6 +48,93 @@ import { detectAnomalies, isAnomalyDetectionEnabled, type AnomalyAlert } from '@
 import { AnomalyAlerts } from '@/components/budget/AnomalyAlerts';
 import { CountUp } from '@/hooks/useCountUp';
 import { DashboardSkeleton } from '@/components/budget/LoadingSkeleton'; // Phase 4.1.3
+
+// Dynamic chart imports to avoid race conditions from concurrent lazy loading
+const DynamicDashboardCharts = dynamic(
+  () => import('recharts').then((mod) => {
+    // Component that uses recharts for both pie and area charts
+    function DashboardCharts({ type, data, CustomTooltip }: any) {
+      const { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, AreaChart, Area, XAxis, YAxis, CartesianGrid, Legend } = mod;
+
+      if (type === 'pie') {
+        return (
+          <ResponsiveContainer width="100%" height={300}>
+            <PieChart>
+              <Pie
+                data={data}
+                cx="50%"
+                cy="50%"
+                labelLine={false}
+                label={({ name, percent }) => `${name}: ${((percent ?? 0) * 100).toFixed(0)}%`}
+                outerRadius={100}
+                fill="#8884d8"
+                dataKey="value"
+              >
+                {data.map((entry: any, index: number) => (
+                  <Cell key={`cell-${index}`} fill={entry.color} />
+                ))}
+              </Pie>
+              <Tooltip content={<CustomTooltip />} />
+            </PieChart>
+          </ResponsiveContainer>
+        );
+      }
+
+      // Area chart for income vs expenses
+      return (
+        <ResponsiveContainer width="100%" height={300}>
+          <AreaChart data={data}>
+            <defs>
+              <linearGradient id="colorIncome" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="5%" stopColor="#22c55e" stopOpacity={0.3} />
+                <stop offset="95%" stopColor="#22c55e" stopOpacity={0} />
+              </linearGradient>
+              <linearGradient id="colorExpenses" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="5%" stopColor="#ef4444" stopOpacity={0.3} />
+                <stop offset="95%" stopColor="#ef4444" stopOpacity={0} />
+              </linearGradient>
+            </defs>
+            <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
+            <XAxis dataKey="month" tick={{ fontSize: 12 }} stroke="#999" />
+            <YAxis tick={{ fontSize: 12 }} stroke="#999" />
+            <Tooltip content={<CustomTooltip />} />
+            <Legend />
+            <Area
+              type="monotone"
+              dataKey="income"
+              stroke="#22c55e"
+              strokeWidth={2}
+              fillOpacity={1}
+              fill="url(#colorIncome)"
+              name="Income"
+            />
+            <Area
+              type="monotone"
+              dataKey="expenses"
+              stroke="#ef4444"
+              strokeWidth={2}
+              fillOpacity={1}
+              fill="url(#colorExpenses)"
+              name="Expenses"
+            />
+          </AreaChart>
+        </ResponsiveContainer>
+      );
+    }
+    return { default: DashboardCharts };
+  }),
+  {
+    loading: () => (
+      <div className="w-full rounded-lg bg-gray-100 dark:bg-gray-800 animate-pulse flex items-center justify-center h-[300px]">
+        <div className="flex flex-col items-center gap-2 text-gray-400">
+          <div className="w-12 h-12 border-4 border-gray-300 border-t-teal-600 rounded-full animate-spin" />
+          <span className="text-sm font-medium">Loading chart...</span>
+        </div>
+      </div>
+    ),
+    ssr: false
+  }
+);
 
 /**
  * Enhanced Metric Card Component
@@ -397,14 +472,11 @@ export default function BudgetDashboard() {
           </div>
           <div className="p-6">
             {categorySpending.length > 0 ? (
-              <ResponsiveContainer width="100%" height={300}>
-                <PieChart>
-                  <Pie data={categorySpending} cx="50%" cy="50%" labelLine={false} label={({ name, percent }) => `${name}: ${((percent ?? 0) * 100).toFixed(0)}%`} outerRadius={100} fill="#8884d8" dataKey="value">
-                    {categorySpending.map((entry, index) => <Cell key={`cell-${index}`} fill={entry.color} />)}
-                  </Pie>
-                  <Tooltip content={<CustomTooltip />} />
-                </PieChart>
-              </ResponsiveContainer>
+              <DynamicDashboardCharts
+                type="pie"
+                data={categorySpending}
+                CustomTooltip={CustomTooltip}
+              />
             ) : (
               <div className="h-[300px] flex items-center justify-center text-gray-500">No expense data for this month</div>
             )}
@@ -423,27 +495,11 @@ export default function BudgetDashboard() {
           </div>
           <div className="p-6">
             {monthlyTrends.length > 0 ? (
-              <ResponsiveContainer width="100%" height={300}>
-                <AreaChart data={monthlyTrends}>
-                  <defs>
-                    <linearGradient id="colorIncome" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="5%" stopColor="#22c55e" stopOpacity={0.3} />
-                      <stop offset="95%" stopColor="#22c55e" stopOpacity={0} />
-                    </linearGradient>
-                    <linearGradient id="colorExpenses" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="5%" stopColor="#ef4444" stopOpacity={0.3} />
-                      <stop offset="95%" stopColor="#ef4444" stopOpacity={0} />
-                    </linearGradient>
-                  </defs>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
-                  <XAxis dataKey="month" tick={{ fontSize: 12 }} stroke="#999" />
-                  <YAxis tick={{ fontSize: 12 }} stroke="#999" />
-                  <Tooltip content={<CustomTooltip />} />
-                  <Legend />
-                  <Area type="monotone" dataKey="income" stroke="#22c55e" strokeWidth={2} fillOpacity={1} fill="url(#colorIncome)" name="Income" />
-                  <Area type="monotone" dataKey="expenses" stroke="#ef4444" strokeWidth={2} fillOpacity={1} fill="url(#colorExpenses)" name="Expenses" />
-                </AreaChart>
-              </ResponsiveContainer>
+              <DynamicDashboardCharts
+                type="area"
+                data={monthlyTrends}
+                CustomTooltip={CustomTooltip}
+              />
             ) : (
               <div className="h-[300px] flex items-center justify-center text-gray-500">No trend data available</div>
             )}

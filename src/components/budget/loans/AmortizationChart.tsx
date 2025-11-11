@@ -25,6 +25,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import type { Loan } from '@/types/budget';
 import { generateAmortizationSchedule } from '@/lib/loans/calculations';
 import { format } from 'date-fns';
+import { useThemeMode } from '@/hooks/useThemeMode';
+import { getChartPalette } from '@/lib/budget-chart-colors';
 
 interface AmortizationChartProps {
   loan: Loan;
@@ -32,6 +34,10 @@ interface AmortizationChartProps {
 }
 
 export function AmortizationChart({ loan, maxMonths = 360 }: AmortizationChartProps) {
+  // Get theme-aware chart colors
+  const theme = useThemeMode();
+  const palette = getChartPalette(theme);
+
   const schedule = useMemo(() => {
     return generateAmortizationSchedule(
       loan.currentBalance,
@@ -98,19 +104,19 @@ export function AmortizationChart({ loan, maxMonths = 360 }: AmortizationChartPr
                 <AreaChart data={sampledData}>
                   <defs>
                     <linearGradient id="colorBalance" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="5%" stopColor="#14b8a6" stopOpacity={0.3} />
-                      <stop offset="95%" stopColor="#14b8a6" stopOpacity={0} />
+                      <stop offset="5%" stopColor={palette.data[0].hex} stopOpacity={0.3} />
+                      <stop offset="95%" stopColor={palette.data[0].hex} stopOpacity={0} />
                     </linearGradient>
                   </defs>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
+                  <CartesianGrid strokeDasharray="3 3" stroke={palette.grid} />
                   <XAxis
                     dataKey="date"
-                    tick={{ fontSize: 12 }}
-                    stroke="#999"
+                    tick={{ fontSize: 12, fill: palette.text }}
+                    stroke={palette.grid}
                   />
                   <YAxis
-                    tick={{ fontSize: 12 }}
-                    stroke="#999"
+                    tick={{ fontSize: 12, fill: palette.text }}
+                    stroke={palette.grid}
                     tickFormatter={(value) => `$${(value / 1000).toFixed(0)}k`}
                   />
                   <Tooltip content={<CustomTooltip />} />
@@ -118,7 +124,7 @@ export function AmortizationChart({ loan, maxMonths = 360 }: AmortizationChartPr
                   <Area
                     type="monotone"
                     dataKey="balance"
-                    stroke="#14b8a6"
+                    stroke={palette.data[0].hex}
                     strokeWidth={2}
                     fillOpacity={1}
                     fill="url(#colorBalance)"
@@ -137,15 +143,15 @@ export function AmortizationChart({ loan, maxMonths = 360 }: AmortizationChartPr
             <div className="h-[400px]">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={sampledData}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
+                  <CartesianGrid strokeDasharray="3 3" stroke={palette.grid} />
                   <XAxis
                     dataKey="date"
-                    tick={{ fontSize: 12 }}
-                    stroke="#999"
+                    tick={{ fontSize: 12, fill: palette.text }}
+                    stroke={palette.grid}
                   />
                   <YAxis
-                    tick={{ fontSize: 12 }}
-                    stroke="#999"
+                    tick={{ fontSize: 12, fill: palette.text }}
+                    stroke={palette.grid}
                     tickFormatter={(value) => `$${value.toLocaleString()}`}
                   />
                   <Tooltip content={<CustomTooltip />} />
@@ -153,13 +159,13 @@ export function AmortizationChart({ loan, maxMonths = 360 }: AmortizationChartPr
                   <Bar
                     dataKey="principal"
                     stackId="payment"
-                    fill="#10b981"
+                    fill={palette.positive.hex}
                     name="Principal"
                   />
                   <Bar
                     dataKey="interest"
                     stackId="payment"
-                    fill="#ef4444"
+                    fill={palette.negative.hex}
                     name="Interest"
                   />
                 </BarChart>
@@ -175,15 +181,15 @@ export function AmortizationChart({ loan, maxMonths = 360 }: AmortizationChartPr
             <div className="h-[400px]">
               <ResponsiveContainer width="100%" height="100%">
                 <LineChart data={sampledData}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
+                  <CartesianGrid strokeDasharray="3 3" stroke={palette.grid} />
                   <XAxis
                     dataKey="date"
-                    tick={{ fontSize: 12 }}
-                    stroke="#999"
+                    tick={{ fontSize: 12, fill: palette.text }}
+                    stroke={palette.grid}
                   />
                   <YAxis
-                    tick={{ fontSize: 12 }}
-                    stroke="#999"
+                    tick={{ fontSize: 12, fill: palette.text }}
+                    stroke={palette.grid}
                     tickFormatter={(value) => `$${(value / 1000).toFixed(0)}k`}
                   />
                   <Tooltip content={<CustomTooltip />} />
@@ -191,7 +197,7 @@ export function AmortizationChart({ loan, maxMonths = 360 }: AmortizationChartPr
                   <Line
                     type="monotone"
                     dataKey="cumulativePrincipal"
-                    stroke="#10b981"
+                    stroke={palette.positive.hex}
                     strokeWidth={2}
                     dot={false}
                     name="Cumulative Principal"
@@ -199,7 +205,7 @@ export function AmortizationChart({ loan, maxMonths = 360 }: AmortizationChartPr
                   <Line
                     type="monotone"
                     dataKey="cumulativeInterest"
-                    stroke="#ef4444"
+                    stroke={palette.negative.hex}
                     strokeWidth={2}
                     dot={false}
                     name="Cumulative Interest"
