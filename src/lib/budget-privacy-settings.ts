@@ -17,6 +17,15 @@ export interface PrivacySettings {
   enableAIFeatures: boolean; // Master switch for AI features (OpenAI)
   enableOCR: boolean;
 
+  // Chatbot Privacy Controls
+  enableChatbot: boolean; // Master switch for chatbot feature
+  chatbotDataAccess: 'read-only' | 'full-access'; // Permission level for chatbot
+  chatbotConversationRetention: 7 | 30 | 'forever'; // Conversation retention period (days)
+
+  // Analytics & Error Tracking
+  enableAnalytics: boolean; // Master switch for PostHog analytics
+  enableErrorTracking: boolean; // Master switch for Sentry error tracking
+
   // Data Security
   enableEncryption: boolean; // Encrypt sensitive data at rest
 
@@ -35,6 +44,11 @@ const DEFAULT_SETTINGS: PrivacySettings = {
   enableNaturalLanguageImport: true, // Enabled by default
   enableAIFeatures: true, // Master switch - AI features enabled by default
   enableOCR: true, // OCR is client-side only, safe by default
+  enableChatbot: false, // Chatbot opt-in required (GDPR compliance)
+  chatbotDataAccess: 'read-only', // Safe default - chatbot can only read data
+  chatbotConversationRetention: 7, // 7 days default (minimum retention)
+  enableAnalytics: true, // Analytics enabled by default (privacy-safe, no PII)
+  enableErrorTracking: true, // Error tracking enabled by default (helps improve app)
   enableEncryption: false, // Encryption opt-in (requires key generation)
   allowDataExport: true,
   allowDataDeletion: true,
@@ -79,6 +93,9 @@ export function savePrivacySettings(settings: Partial<PrivacySettings>): void {
       updatedAt: Date.now(),
     };
     localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
+
+    // Dispatch custom event to notify components of settings change
+    window.dispatchEvent(new Event('chatbot-settings-changed'));
   } catch (error) {
     console.error('[PrivacySettings] Failed to save settings:', error);
   }
@@ -117,6 +134,22 @@ export function isEncryptionEnabled(): boolean {
 }
 
 /**
+ * Check if analytics is enabled
+ */
+export function isAnalyticsEnabled(): boolean {
+  const settings = getPrivacySettings();
+  return settings.enableAnalytics;
+}
+
+/**
+ * Check if error tracking is enabled
+ */
+export function isErrorTrackingEnabled(): boolean {
+  const settings = getPrivacySettings();
+  return settings.enableErrorTracking;
+}
+
+/**
  * Reset privacy settings to defaults
  */
 export function resetPrivacySettings(): void {
@@ -129,5 +162,29 @@ export function resetPrivacySettings(): void {
   } catch (error) {
     console.error('[PrivacySettings] Failed to reset settings:', error);
   }
+}
+
+/**
+ * Check if chatbot is enabled
+ */
+export function isChatbotEnabled(): boolean {
+  const settings = getPrivacySettings();
+  return settings.enableChatbot && settings.enableAIFeatures; // Requires both chatbot AND AI features enabled
+}
+
+/**
+ * Get chatbot data access level
+ */
+export function getChatbotDataAccess(): 'read-only' | 'full-access' {
+  const settings = getPrivacySettings();
+  return settings.chatbotDataAccess;
+}
+
+/**
+ * Get chatbot conversation retention period
+ */
+export function getChatbotConversationRetention(): 7 | 30 | 'forever' {
+  const settings = getPrivacySettings();
+  return settings.chatbotConversationRetention;
 }
 

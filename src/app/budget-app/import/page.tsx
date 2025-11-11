@@ -9,7 +9,7 @@
 import { useState, useCallback, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { Upload, FileText, CheckCircle, AlertCircle, Download, Eye, X, Check } from 'lucide-react';
-import { db } from '@/lib/budget-db';
+import { db, saveImportMetadata, getImportHistory } from '@/lib/budget-db';
 import {
   parseCSVContent,
   detectBank,
@@ -32,12 +32,14 @@ import {
   type FileFormat,
 } from '@/lib/parsers/format-detector';
 import { categorizeTransaction } from '@/lib/categorization/rules';
-import { 
-  parseImportIntent, 
-  autoConfigureImport, 
-  isNaturalLanguageImportEnabled 
+import {
+  parseImportIntent,
+  autoConfigureImport,
+  isNaturalLanguageImportEnabled
 } from '@/lib/ai/natural-language-import';
-import type { ParsedTransaction, Transaction } from '@/types/budget';
+import type { ParsedTransaction, Transaction, ImportMetadata } from '@/types/budget';
+import { format } from 'date-fns';
+import { HelpTooltip } from '@/components/budget/HelpTooltip';
 
 export default function ImportPage() {
   const router = useRouter();
@@ -45,6 +47,7 @@ export default function ImportPage() {
   const [formatDetection, setFormatDetection] = useState<FormatDetectionResult | null>(null);
   const [isDragging, setIsDragging] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
+  const [processingStage, setProcessingStage] = useState<string>('');
   const [parsedTransactions, setParsedTransactions] = useState<ParsedTransaction[]>([]);
   const [summary, setSummary] = useState<ImportSummary | null>(null);
   const [selectedBank, setSelectedBank] = useState<string>('auto');
@@ -56,8 +59,30 @@ export default function ImportPage() {
   const [nlInput, setNlInput] = useState<string>('');
   const [isProcessingNL, setIsProcessingNL] = useState(false);
   const [nlResult, setNlResult] = useState<{ success: boolean; message: string } | null>(null);
+  const [importHistory, setImportHistory] = useState<ImportMetadata[]>([]);
+  const [isNLEnabled, setIsNLEnabled] = useState(false); // Track NL feature enabled state
 
   console.log('[ImportPage] Component mounted');
+
+  // Check if Natural Language Import is enabled (client-side only to avoid hydration mismatch)
+  useEffect(() => {
+    setIsNLEnabled(isNaturalLanguageImportEnabled());
+  }, []);
+
+  // Load import history on mount
+  useEffect(() => {
+    loadImportHistoryData();
+  }, []);
+
+  async function loadImportHistoryData() {
+    try {
+      const history = await getImportHistory(5); // Last 5 imports
+      setImportHistory(history);
+      console.log('[ImportPage] Loaded import history:', history.length, 'records');
+    } catch (error) {
+      console.error('[ImportPage] Error loading import history:', error);
+    }
+  }
 
   // Load matched transaction when expanded
   useEffect(() => {
@@ -194,18 +219,19 @@ export default function ImportPage() {
     console.log('[ImportPage] Processing file:', file.name, 'Format:', formatDetection.format);
     setIsProcessing(true);
     setError(null);
+    setProcessingStage('Validating file format...');
 
     try {
       // Check if format is supported
       if (!isFormatSupported(formatDetection.format)) {
         const errorMsg = `Unsupported format: ${getFormatDisplayName(formatDetection.format)}`;
         setError(errorMsg);
-        alert(errorMsg);
         return;
       }
 
       // Read file content
       console.log('[ImportPage] Reading file content...');
+      setProcessingStage('Reading file content...');
       const text = await file.text();
       console.log('[ImportPage] File content length:', text.length);
 
@@ -216,13 +242,13 @@ export default function ImportPage() {
       // ========================================
       if (formatDetection.format === 'ofx' || formatDetection.format === 'qfx') {
         console.log('[ImportPage] Processing OFX/QFX file...');
+        setProcessingStage('Parsing OFX/QFX file...');
 
         // Validate OFX format
         const validation = validateOFXFile(text);
         if (!validation.isValid) {
           const errorMsg = `Invalid OFX file:\n${validation.errors.join('\n')}`;
           setError(errorMsg);
-          alert(errorMsg);
           return;
         }
 
@@ -242,17 +268,18 @@ export default function ImportPage() {
       // ========================================
       else if (formatDetection.format === 'csv') {
         console.log('[ImportPage] Processing CSV file...');
+        setProcessingStage('Parsing CSV file...');
 
         // Detect bank if auto
         let bankKey = selectedBank;
         if (selectedBank === 'auto') {
           console.log('[ImportPage] Auto-detecting bank format...');
+          setProcessingStage('Auto-detecting bank format...');
           const detected = await detectBankFromContent(text);
           console.log('[ImportPage] Detected bank:', detected);
           if (!detected) {
             const errorMsg = 'Could not auto-detect bank format. Please select manually.';
             setError(errorMsg);
-            alert(errorMsg);
             return;
           }
           bankKey = detected;
@@ -261,14 +288,14 @@ export default function ImportPage() {
 
         const bankConfig = BANK_CONFIGS[bankKey];
         if (!bankConfig) {
-          alert('Invalid bank configuration');
+          setError('Invalid bank configuration. Please try selecting a different bank.');
           return;
         }
 
         // Parse CSV with the correct skipRows
         const rows = parseCSVContent(text, bankConfig.skipRows || 0);
         if (rows.length === 0) {
-          alert('No data found in CSV file');
+          setError('No data found in CSV file. The file may be empty or incorrectly formatted.');
           return;
         }
 
@@ -276,7 +303,7 @@ export default function ImportPage() {
         transactions = convertToTransactions(rows, bankConfig, accountId);
         console.log('[ImportPage] CSV parsing complete');
       } else {
-        alert('Unsupported file format');
+        setError(`Unsupported file format: ${formatDetection.format}. Please use CSV, OFX, or QFX files.`);
         return;
       }
 
@@ -287,18 +314,20 @@ export default function ImportPage() {
       // Detect duplicates using FITID (perfect for OFX) or fuzzy matching (CSV)
       // Optionally use smart detection with Claude API if enabled
       console.log('[ImportPage] Checking for duplicates...');
+      setProcessingStage(`Detecting duplicates in ${transactions.length} transactions...`);
       const existingTxs = await db.transactions.toArray();
       console.log('[ImportPage] Existing transactions count:', existingTxs.length);
-      
+
       // Check if smart duplicate detection is enabled
       const { isSmartDuplicateDetectionEnabled } = await import('@/lib/budget-privacy-settings');
       const useSmartDetection = isSmartDuplicateDetectionEnabled();
       console.log('[ImportPage] Smart duplicate detection:', useSmartDetection ? 'enabled' : 'disabled');
-      
+
       await detectDuplicates(transactions, existingTxs, useSmartDetection);
       console.log('[ImportPage] Duplicate detection complete');
 
       // Auto-categorize
+      setProcessingStage('Auto-categorizing transactions...');
       transactions.forEach((tx) => {
         const result = categorizeTransaction(tx.description);
         if (result) {
@@ -318,7 +347,6 @@ export default function ImportPage() {
         ? `Error: ${error.message}\n\nStack: ${error.stack}`
         : 'Error processing file. Please check the format and try again.';
       setError(errorMsg);
-      alert(errorMsg);
     } finally {
       setIsProcessing(false);
     }
@@ -375,6 +403,43 @@ export default function ImportPage() {
       await db.transactions.bulkAdd(transactions);
       console.log('[ImportPage] Save complete');
 
+      // Save import metadata for audit trail
+      const duplicateCount = parsedTransactions.filter((tx) => tx.isDuplicate).length;
+      const transactionDates = newTransactions.map((tx) => tx.date);
+      const dateRangeStart = transactionDates.length > 0
+        ? new Date(Math.min(...transactionDates.map((d) => d.getTime())))
+        : null;
+      const dateRangeEnd = transactionDates.length > 0
+        ? new Date(Math.max(...transactionDates.map((d) => d.getTime())))
+        : null;
+
+      try {
+        // Ensure fileFormat is one of the supported types
+        const detectedFormat = formatDetection?.format || 'csv';
+        const fileFormat: 'csv' | 'ofx' | 'qfx' =
+          detectedFormat === 'csv' || detectedFormat === 'ofx' || detectedFormat === 'qfx'
+            ? detectedFormat
+            : 'csv'; // Default to csv for unknown formats
+
+        await saveImportMetadata({
+          fileName: file?.name || 'unknown',
+          fileFormat,
+          bank: (formatDetection as any)?.bankName || undefined,
+          importDate: new Date(),
+          transactionCount: newTransactions.length,
+          duplicateCount,
+          dateRangeStart,
+          dateRangeEnd,
+        });
+        console.log('[ImportPage] Import metadata saved');
+
+        // Refresh import history display
+        await loadImportHistoryData();
+      } catch (metaError) {
+        console.error('[ImportPage] Error saving import metadata:', metaError);
+        // Non-fatal error - don't block import completion
+      }
+
       setStep('complete');
       console.log('[ImportPage] Import complete!');
     } catch (error) {
@@ -383,7 +448,6 @@ export default function ImportPage() {
         ? `Import Error: ${error.message}\n\nStack: ${error.stack}`
         : 'Error importing transactions. Please try again.';
       setError(errorMsg);
-      alert(errorMsg);
     } finally {
       setIsProcessing(false);
     }
@@ -403,7 +467,20 @@ export default function ImportPage() {
     <div className="max-w-4xl mx-auto space-y-6">
       {/* Header */}
       <div>
-        <h1 className="text-3xl font-bold text-gray-900">Import Transactions</h1>
+        <div className="flex items-center gap-3">
+          <h1 className="text-3xl font-bold text-gray-900">Import Transactions</h1>
+          <HelpTooltip
+            content={
+              <>
+                <strong>File Formats:</strong> CSV = Spreadsheet file with columns. OFX/QFX = Standardized bank format with account info included.
+                Most banks support both. OFX is easier (no bank selection needed).
+              </>
+            }
+            learnMoreUrl="/docs/user-guide#import-formats"
+            ariaLabel="More information about CSV and OFX file formats"
+            iconSize="h-5 w-5"
+          />
+        </div>
         <p className="text-gray-600 mt-2">
           Upload CSV, OFX, or QFX files from BMO, Home Trust, TD, Chase, and 15+ other banks
         </p>
@@ -456,16 +533,23 @@ export default function ImportPage() {
       {step === 'upload' && (
         <>
           {/* Natural Language Import (if enabled) */}
-          {isNaturalLanguageImportEnabled() && (
+          {isNLEnabled && (
             <div className="bg-gradient-to-r from-purple-50 to-blue-50 border border-purple-200 rounded-lg p-6">
               <div className="flex items-start gap-3 mb-4">
                 <div className="p-2 bg-purple-100 rounded-lg">
                   <FileText className="w-5 h-5 text-purple-600" />
                 </div>
                 <div className="flex-1">
-                  <h3 className="text-lg font-semibold text-gray-900 mb-1">
-                    Natural Language Import
-                  </h3>
+                  <div className="flex items-center gap-2 mb-1">
+                    <h3 className="text-lg font-semibold text-gray-900">
+                      Natural Language Import
+                    </h3>
+                    <HelpTooltip
+                      content="AI-powered feature that understands plain English instructions. Just describe what you want to import and the AI will configure the right settings for your bank."
+                      learnMoreUrl="/docs/user-guide#ai-import"
+                      ariaLabel="More information about AI-powered natural language import"
+                    />
+                  </div>
                   <p className="text-sm text-gray-600 mb-4">
                     Describe your import in plain English. Example: "Import my TD checking account CSV"
                   </p>
@@ -506,48 +590,148 @@ export default function ImportPage() {
             </div>
           )}
 
-          {/* Bank Selection - Only show for CSV files */}
+          {/* Import History Section */}
+          <div className="bg-white rounded-lg shadow-md overflow-hidden mb-6">
+            <div className="border-b-2 border-gray-200 bg-gray-50 p-6">
+              <h2 className="text-2xl font-bold text-gray-900">Recent Imports</h2>
+              <p className="text-base text-gray-600 mt-2">
+                View your import history and verify successful uploads
+              </p>
+            </div>
+
+            {importHistory.length > 0 ? (
+              <div className="divide-y divide-gray-200">
+                {importHistory.map((record) => {
+                  const isPartialImport = record.duplicateCount > 0 && record.duplicateCount < record.transactionCount;
+                  const isFullSuccess = record.duplicateCount === 0;
+
+                  return (
+                    <div key={record.id} className="p-6 hover:bg-gray-50 transition-colors">
+                      {/* File Info Row */}
+                      <div className="flex items-start gap-4 mb-3">
+                        <div className="flex-shrink-0">
+                          <FileText className="w-6 h-6 text-teal-600" />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center gap-3 mb-2 flex-wrap">
+                            <h3 className="text-lg font-semibold text-gray-900 truncate">
+                              {record.fileName}
+                            </h3>
+                            <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-teal-100 text-teal-800 border border-teal-300">
+                              {record.fileFormat.toUpperCase()}
+                            </span>
+                            {isFullSuccess && (
+                              <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-green-100 text-green-800 border border-green-300">
+                                <Check className="w-3 h-3" />
+                                Success
+                              </span>
+                            )}
+                            {isPartialImport && (
+                              <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-yellow-100 text-yellow-800 border border-yellow-300">
+                                <AlertCircle className="w-3 h-3" />
+                                Partial Import
+                              </span>
+                            )}
+                          </div>
+
+                          {/* Import Date */}
+                          <p className="text-sm text-gray-600 mb-2">
+                            Imported on {format(new Date(record.importDate), 'MMM d, yyyy \'at\' h:mm a')}
+                          </p>
+
+                          {/* Stats */}
+                          <div className="flex items-center gap-4 text-sm text-gray-700 mb-2 flex-wrap">
+                            <span className="flex items-center gap-1">
+                              <CheckCircle className="w-4 h-4 text-green-600" />
+                              <strong>{record.transactionCount}</strong> {record.transactionCount === 1 ? 'transaction' : 'transactions'} added
+                            </span>
+                            {record.duplicateCount > 0 && (
+                              <span className="flex items-center gap-1 text-yellow-700">
+                                <AlertCircle className="w-4 h-4" />
+                                <strong>{record.duplicateCount}</strong> {record.duplicateCount === 1 ? 'duplicate' : 'duplicates'} skipped
+                              </span>
+                            )}
+                          </div>
+
+                          {/* Date Range */}
+                          {record.dateRangeStart && record.dateRangeEnd && (
+                            <p className="text-sm text-gray-600">
+                              <span className="font-medium">Transactions:</span>{' '}
+                              {format(new Date(record.dateRangeStart), 'MMM d')} - {format(new Date(record.dateRangeEnd), 'MMM d, yyyy')}
+                            </p>
+                          )}
+
+                          {/* Bank */}
+                          {record.bank && (
+                            <p className="text-sm text-gray-600 mt-1">
+                              <span className="font-medium">Bank:</span> {record.bank}
+                            </p>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            ) : (
+              <div className="p-12 text-center">
+                <FileText className="mx-auto h-16 w-16 text-gray-400" />
+                <h3 className="mt-4 text-xl font-semibold text-gray-900">No Import History</h3>
+                <p className="mt-2 text-base text-gray-600">
+                  Your import history will appear here after your first import
+                </p>
+              </div>
+            )}
+          </div>
+
+          {/* Bank Selection - Enhanced */}
           {(!formatDetection || formatDetection.format === 'csv' || formatDetection.format === 'unknown') && (
-            <div className="bg-white rounded-lg shadow p-6">
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Select Your Bank (CSV only)
+            <div className="bg-white rounded-lg shadow-md p-6 border-l-4 border-teal-500">
+              <label htmlFor="import-bank-select" className="block text-base font-semibold text-gray-700 mb-3">
+                Select Your Bank (CSV files only)
               </label>
               <select
+                id="import-bank-select"
                 value={selectedBank}
                 onChange={(e) => setSelectedBank(e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                className="w-full min-h-[48px] px-4 py-3 text-base border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all"
                 disabled={formatDetection?.format === 'ofx' || formatDetection?.format === 'qfx'}
               >
-                <option value="auto">Auto-detect</option>
+                <option value="auto">Auto-detect (Recommended)</option>
                 <option value="bmo">BMO (Bank of Montreal)</option>
                 <option value="homeTrust">Home Trust</option>
                 <option value="td">TD Canada Trust</option>
                 <option value="chase">Chase Bank</option>
                 <option value="bofa">Bank of America</option>
               </select>
-              <p className="text-xs text-gray-500 mt-2">
-                OFX/QFX files don't need bank selection - account info is embedded in the file
-              </p>
+              <div className="mt-3 bg-blue-50 border-l-4 border-blue-400 p-3 rounded">
+                <p className="text-sm text-gray-800">
+                  <span className="font-semibold">Tip:</span> OFX/QFX files don't need bank selection - account info is already included in the file
+                </p>
+              </div>
             </div>
           )}
 
-          {/* File Upload */}
+          {/* File Upload - Enhanced */}
           <div
+            data-testid="csv-drop-zone"
             onDragOver={handleDragOver}
             onDragLeave={handleDragLeave}
             onDrop={handleDrop}
-            className={`bg-white rounded-lg shadow p-8 border-2 border-dashed transition-colors ${
+            className={`bg-white rounded-lg shadow-md p-10 border-2 border-dashed transition-all ${
               isDragging
-                ? 'border-teal-500 bg-teal-50'
-                : 'border-gray-300 hover:border-gray-400'
+                ? 'border-teal-500 bg-teal-50 shadow-lg scale-105'
+                : 'border-gray-300 hover:border-teal-400 hover:shadow-lg'
             }`}
           >
             <div className="text-center">
-              <Upload className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">
+              <Upload className={`w-20 h-20 mx-auto mb-6 transition-colors ${
+                isDragging ? 'text-teal-500' : 'text-gray-400'
+              }`} />
+              <h2 className="text-2xl font-bold text-gray-900 mb-3">
                 {file ? file.name : 'Upload Bank Statement'}
-              </h3>
-              <p className="text-gray-600 mb-4">
+              </h2>
+              <p className="text-base text-gray-700 mb-6 font-medium">
                 Drag and drop your CSV, OFX, or QFX file here, or click to browse
               </p>
               <input
@@ -556,33 +740,62 @@ export default function ImportPage() {
                 onChange={handleFileSelect}
                 className="hidden"
                 id="file-upload"
+                data-testid="csv-file-input"
+                aria-label="Upload transaction file"
               />
               <label
                 htmlFor="file-upload"
-                className="inline-flex items-center gap-2 px-6 py-2 bg-teal-600 text-white rounded-lg hover:bg-teal-700 cursor-pointer transition-colors"
+                className="inline-flex items-center gap-3 px-8 py-4 min-h-[48px] bg-teal-700 text-white text-base font-semibold rounded-lg hover:bg-teal-800 cursor-pointer transition-all shadow-md hover:shadow-lg"
               >
-                <FileText className="w-5 h-5" />
+                <FileText className="w-6 h-6" />
                 Choose File
               </label>
 
               {file && (
-                <div className="mt-4 flex items-center justify-center gap-2 text-green-600">
-                  <CheckCircle className="w-5 h-5" />
-                  <span className="font-medium">{file.name} selected</span>
+                <div className="mt-6 flex items-center justify-center gap-3 bg-green-50 border-l-4 border-green-500 p-4 rounded">
+                  <CheckCircle className="w-6 h-6 text-green-600 flex-shrink-0" />
+                  <span className="text-base font-semibold text-green-800">{file.name} selected</span>
                 </div>
               )}
             </div>
           </div>
 
-          {/* Process Button */}
+          {/* Progress Indicator */}
+          {isProcessing && processingStage && (
+            <div className="bg-blue-50 border-l-4 border-blue-500 rounded-lg p-6 shadow-md">
+              <div className="flex items-center gap-4">
+                <svg className="animate-spin h-8 w-8 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                <div className="flex-1">
+                  <h3 className="text-lg font-semibold text-blue-900 mb-1">Processing Import</h3>
+                  <p className="text-base text-blue-800">{processingStage}</p>
+                </div>
+              </div>
+              <div className="mt-4 h-2 bg-blue-200 rounded-full overflow-hidden">
+                <div className="h-full bg-blue-600 rounded-full animate-pulse w-2/3"></div>
+              </div>
+            </div>
+          )}
+
+          {/* Process Button - Enhanced */}
           {file && (
             <div className="flex justify-end">
               <button
                 onClick={processFile}
                 disabled={isProcessing}
-                className="px-6 py-2 bg-teal-600 text-white rounded-lg hover:bg-teal-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
+                className="px-8 py-4 min-h-[48px] bg-teal-700 text-white text-base font-semibold rounded-lg hover:bg-teal-800 disabled:bg-gray-400 disabled:cursor-not-allowed transition-all shadow-md hover:shadow-lg"
               >
-                {isProcessing ? 'Processing...' : 'Process File'}
+                {isProcessing ? (
+                  <span className="flex items-center gap-2">
+                    <svg className="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    Processing File...
+                  </span>
+                ) : 'Process File'}
               </button>
             </div>
           )}
@@ -592,41 +805,47 @@ export default function ImportPage() {
       {/* Preview Step */}
       {step === 'preview' && summary && (
         <>
-          {/* Summary */}
-          <div className="bg-white rounded-lg shadow p-6">
-            <h2 className="text-xl font-semibold text-gray-900 mb-4">Import Summary</h2>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              <div>
-                <p className="text-sm text-gray-600">Total Transactions</p>
-                <p className="text-2xl font-bold text-gray-900 mt-2">{summary.total}</p>
+          {/* Summary - Enhanced */}
+          <div className="bg-white rounded-lg shadow-md p-8 border-l-4 border-teal-500">
+            <h2 className="text-2xl font-bold text-gray-900 mb-6">Import Summary</h2>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+              <div className="bg-gray-50 p-4 rounded-lg">
+                <p className="text-base font-medium text-gray-700 mb-2">Total Transactions</p>
+                <p className="text-3xl font-bold text-gray-900">{summary.total}</p>
               </div>
-              <div>
-                <p className="text-sm text-gray-600">New Transactions</p>
-                <p className="text-2xl font-bold text-green-600 mt-2">{summary.new}</p>
+              <div className="bg-green-50 p-4 rounded-lg">
+                <p className="text-base font-medium text-gray-700 mb-2">New Transactions</p>
+                <p className="text-3xl font-bold text-green-600">{summary.new}</p>
+                <p className="text-xs text-gray-600 mt-1">Will be imported</p>
               </div>
-              <div>
-                <p className="text-sm text-gray-600">Duplicates</p>
-                <p className="text-2xl font-bold text-yellow-600 mt-2">{summary.duplicates}</p>
+              <div className="bg-yellow-50 p-4 rounded-lg">
+                <p className="text-base font-medium text-gray-700 mb-2">Duplicates</p>
+                <p className="text-3xl font-bold text-yellow-600">{summary.duplicates}</p>
+                <p className="text-xs text-gray-600 mt-1">Will be skipped</p>
               </div>
-              <div>
-                <p className="text-sm text-gray-600">Date Range</p>
-                <p className="text-sm font-medium text-gray-900 mt-2">
-                  {summary.dateRange.earliest.toLocaleDateString()} - {summary.dateRange.latest.toLocaleDateString()}
+              <div className="bg-gray-50 p-4 rounded-lg">
+                <p className="text-base font-medium text-gray-700 mb-2">Date Range</p>
+                <p className="text-sm font-semibold text-gray-900 mt-2">
+                  {summary.dateRange.earliest.toLocaleDateString()}
+                </p>
+                <p className="text-xs text-gray-500">to</p>
+                <p className="text-sm font-semibold text-gray-900">
+                  {summary.dateRange.latest.toLocaleDateString()}
                 </p>
               </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-4 mt-4 pt-4 border-t border-gray-200">
-              <div>
-                <p className="text-sm text-gray-600">Total Income</p>
-                <p className="text-xl font-bold text-green-600 mt-2">
-                  ${summary.income.toFixed(2)}
+            <div className="grid grid-cols-2 gap-6 mt-6 pt-6 border-t-2 border-gray-200">
+              <div className="bg-green-50 p-4 rounded-lg border-l-4 border-green-500">
+                <p className="text-base font-semibold text-gray-700 mb-2">Total Income</p>
+                <p className="text-2xl font-bold text-green-600">
+                  +${summary.income.toFixed(2)}
                 </p>
               </div>
-              <div>
-                <p className="text-sm text-gray-600">Total Expenses</p>
-                <p className="text-xl font-bold text-red-600 mt-2">
-                  ${summary.expenses.toFixed(2)}
+              <div className="bg-red-50 p-4 rounded-lg border-l-4 border-red-500">
+                <p className="text-base font-semibold text-gray-700 mb-2">Total Expenses</p>
+                <p className="text-2xl font-bold text-red-600">
+                  -${summary.expenses.toFixed(2)}
                 </p>
               </div>
             </div>
@@ -736,75 +955,83 @@ export default function ImportPage() {
             </div>
           )}
 
-          {/* Preview Table */}
-          <div className="bg-white rounded-lg shadow overflow-hidden">
-            <div className="p-6 border-b border-gray-200">
-              <h2 className="text-xl font-semibold text-gray-900">Preview Transactions</h2>
+          {/* Preview Table - Enhanced */}
+          <div className="bg-white rounded-lg shadow-md overflow-hidden">
+            <div className="p-6 border-b-2 border-gray-200 bg-gray-50">
+              <h2 className="text-2xl font-bold text-gray-900">Preview Transactions</h2>
+              <p className="text-base text-gray-600 mt-2">
+                Review {parsedTransactions.length} transactions before importing • {summary.duplicates} duplicates will be skipped
+              </p>
             </div>
-            <div className="overflow-x-auto max-h-96 overflow-y-auto">
+            <div className="overflow-x-auto max-h-[600px] overflow-y-auto">
               <table className="w-full">
-                <thead className="bg-gray-50 sticky top-0">
-                  <tr>
-                    <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Date</th>
-                    <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Description</th>
-                    <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Category</th>
-                    <th className="px-4 py-2 text-right text-xs font-medium text-gray-500 uppercase">Amount</th>
-                    <th className="px-4 py-2 text-center text-xs font-medium text-gray-500 uppercase">Status</th>
-                    <th className="px-4 py-2 text-center text-xs font-medium text-gray-500 uppercase">Actions</th>
+                <thead className="bg-gray-100 sticky top-0 shadow-sm">
+                  <tr className="border-b-2 border-gray-300">
+                    <th className="px-4 py-4 text-left text-sm font-bold text-gray-900 uppercase">Date</th>
+                    <th className="px-4 py-4 text-left text-sm font-bold text-gray-900 uppercase">Description</th>
+                    <th className="px-4 py-4 text-left text-sm font-bold text-gray-900 uppercase">Category</th>
+                    <th className="px-4 py-4 text-right text-sm font-bold text-gray-900 uppercase">Amount</th>
+                    <th className="px-4 py-4 text-center text-sm font-bold text-gray-900 uppercase">Status</th>
+                    <th className="px-4 py-4 text-center text-sm font-bold text-gray-900 uppercase">Actions</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200">
-                  {parsedTransactions.slice(0, 50).map((tx, index) => (
-                    <tr key={index} className={tx.isDuplicate ? 'bg-yellow-50' : ''}>
-                      <td className="px-4 py-2 text-sm text-gray-900">
+                  {parsedTransactions.map((tx, index) => (
+                    <tr key={index} className={`transition-colors ${
+                      tx.isDuplicate ? 'bg-yellow-50 hover:bg-yellow-100' : 'hover:bg-gray-50'
+                    }`}>
+                      <td className="px-4 py-4 text-base font-medium text-gray-900 whitespace-nowrap">
                         {tx.date.toLocaleDateString()}
                       </td>
-                      <td className="px-4 py-2 text-sm text-gray-900">
+                      <td className="px-4 py-4 text-base text-gray-900 max-w-xs truncate">
                         {tx.description}
                       </td>
-                      <td className="px-4 py-2 text-sm">
+                      <td className="px-4 py-4 text-sm">
                         {(tx as any).suggestedCategory ? (
-                          <span className="text-teal-600">
+                          <span className="font-medium text-teal-600">
                             {(tx as any).suggestedCategory}
                             {(tx as any).suggestedSubcategory && ` • ${(tx as any).suggestedSubcategory}`}
                           </span>
                         ) : (
-                          <span className="text-gray-400">Uncategorized</span>
+                          <span className="text-gray-500 italic">Uncategorized</span>
                         )}
                       </td>
-                      <td className={`px-4 py-2 text-sm text-right font-semibold ${
+                      <td className={`px-4 py-4 text-base text-right font-bold whitespace-nowrap ${
                         tx.amount > 0 ? 'text-green-600' : 'text-gray-900'
                       }`}>
                         {tx.amount > 0 ? '+' : ''}${Math.abs(tx.amount).toFixed(2)}
                       </td>
-                      <td className="px-4 py-2 text-center">
+                      <td className="px-4 py-4 text-center">
                         {tx.isDuplicate ? (
-                          <div className="flex flex-col items-center gap-1">
-                            <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
-                              Duplicate
+                          <div className="flex flex-col items-center gap-2">
+                            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-base font-bold bg-yellow-100 text-yellow-900 border-2 border-yellow-400 shadow-sm">
+                              <X className="w-5 h-5" />
+                              DUPLICATE
                             </span>
                             {tx.confidence < 1.0 && tx.confidence > 0 && (
-                              <span className="text-xs text-gray-500">
-                                {(tx.confidence * 100).toFixed(0)}%
+                              <span className="px-2 py-1 text-xs font-bold text-yellow-800 bg-yellow-50 border border-yellow-300 rounded">
+                                {(tx.confidence * 100).toFixed(0)}% MATCH
                               </span>
                             )}
                           </div>
                         ) : (
-                          <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                            New
+                          <span className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-base font-bold bg-green-100 text-green-900 border-2 border-green-400 shadow-sm">
+                            <Check className="w-5 h-5" />
+                            NEW
                           </span>
                         )}
                       </td>
-                      <td className="px-4 py-2 text-center">
+                      <td className="px-4 py-4 text-center">
                         <button
                           onClick={() => toggleDuplicateStatus(index)}
-                          className="text-xs text-teal-600 hover:text-teal-700 px-2 py-1 rounded hover:bg-teal-50"
+                          className="min-h-[40px] min-w-[40px] inline-flex items-center justify-center text-teal-600 hover:text-teal-700 p-2 rounded-lg hover:bg-teal-50 transition-colors"
                           title={tx.isDuplicate ? 'Mark as new transaction' : 'Mark as duplicate'}
+                          aria-label={tx.isDuplicate ? 'Mark as new transaction' : 'Mark as duplicate'}
                         >
                           {tx.isDuplicate ? (
-                            <Check className="w-4 h-4" />
+                            <Check className="w-5 h-5" />
                           ) : (
-                            <X className="w-4 h-4" />
+                            <X className="w-5 h-5" />
                           )}
                         </button>
                       </td>
@@ -812,23 +1039,38 @@ export default function ImportPage() {
                   ))}
                 </tbody>
               </table>
+              {parsedTransactions.length > 100 && (
+                <div className="text-center py-4 bg-gray-50 border-t-2 border-gray-200">
+                  <p className="text-base font-medium text-gray-600">
+                    Showing all {parsedTransactions.length} transactions • Scroll to view more
+                  </p>
+                </div>
+              )}
             </div>
           </div>
 
-          {/* Actions */}
-          <div className="flex justify-between">
+          {/* Actions - Enhanced */}
+          <div className="flex flex-col sm:flex-row justify-between gap-4">
             <button
               onClick={reset}
-              className="px-6 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
+              className="px-8 py-4 min-h-[48px] border-2 border-gray-300 text-gray-700 text-base font-semibold rounded-lg hover:bg-gray-50 hover:border-gray-400 transition-all shadow-sm hover:shadow"
             >
-              Cancel
+              Cancel Import
             </button>
             <button
               onClick={importTransactions}
               disabled={isProcessing || summary.new === 0}
-              className="px-6 py-2 bg-teal-600 text-white rounded-lg hover:bg-teal-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
+              className="px-8 py-4 min-h-[48px] bg-teal-700 text-white text-base font-semibold rounded-lg hover:bg-teal-800 disabled:bg-gray-400 disabled:cursor-not-allowed transition-all shadow-md hover:shadow-lg"
             >
-              {isProcessing ? 'Importing...' : `Import ${summary.new} Transactions`}
+              {isProcessing ? (
+                <span className="flex items-center justify-center gap-2">
+                  <svg className="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  </svg>
+                  Importing Transactions...
+                </span>
+              ) : `Import ${summary.new} New Transaction${summary.new !== 1 ? 's' : ''}`}
             </button>
           </div>
         </>
