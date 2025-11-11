@@ -78,6 +78,8 @@ export interface Category {
   icon: string; // Icon name
   isDefault: boolean; // Whether it's a system default or user-created
   order: number; // Display order
+  archived?: boolean; // Whether category is archived (hidden but preserved)
+  archivedAt?: Date; // When category was archived
   createdAt: Date;
 }
 
@@ -154,6 +156,18 @@ export interface ImportMapping {
   amountMultiplier: number; // -1 if expenses are positive in CSV
   hasHeader: boolean;
   createdAt: Date;
+}
+
+export interface ImportMetadata {
+  id: string; // Unique ID (e.g., "import_1699564823000")
+  fileName: string; // Original file name
+  fileFormat: 'csv' | 'ofx' | 'qfx'; // File type
+  bank?: string; // Detected bank (e.g., "BMO", "TD")
+  importDate: Date; // When import occurred
+  transactionCount: number; // Number of transactions imported
+  duplicateCount: number; // Number of duplicates skipped
+  dateRangeStart: Date | null; // Earliest transaction date
+  dateRangeEnd: Date | null; // Latest transaction date
 }
 
 export interface BudgetSummary {

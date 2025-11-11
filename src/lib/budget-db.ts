@@ -13,6 +13,7 @@ import type {
   FuturePurchase,
   RetirementPlan,
   ImportMapping,
+  ImportMetadata,
   Receipt,
   Investment,
   Portfolio,
@@ -63,6 +64,7 @@ export class BudgetDatabase extends Dexie {
   futurePurchases!: Table<FuturePurchase>;
   retirementPlans!: Table<RetirementPlan>;
   importMappings!: Table<ImportMapping>;
+  importHistory!: Table<ImportMetadata>;
   receipts!: Table<Receipt>;
   investmentAccounts!: Table<InvestmentAccount>;
   holdings!: Table<Holding>;
@@ -202,6 +204,26 @@ export class BudgetDatabase extends Dexie {
       futurePurchases: 'id, targetDate, priority, isCompleted',
       retirementPlans: 'id, name, createdAt',
       importMappings: 'id, institution, accountId',
+      receipts: 'id, transactionId, uploadedAt, mimeType, fileSize',
+      investmentAccounts: 'id, type, name, createdAt',
+      holdings: 'id, accountId, symbol, purchaseDate, [accountId+symbol]',
+      priceCache: 'id, symbol, fetchedAt, source',
+      anomalyFeedback: 'id, transactionId, merchant, category, createdAt',
+      predictionAccuracy: 'id, category, month, recordedAt',
+      loans: 'id, type, status, lender, nextPaymentDate, accountId, paymentFrequency',
+      loanPayments: 'id, loanId, date, transactionId, isScheduled'
+    });
+
+    // Version 10: Add import history tracking
+    this.version(10).stores({
+      accounts: 'id, name, institution, type',
+      transactions: 'id, accountId, date, category, amount, description, splitFromId, isSplit',
+      categories: 'id, name, type, order',
+      budgets: 'id, categoryId, period, startDate',
+      futurePurchases: 'id, targetDate, priority, isCompleted',
+      retirementPlans: 'id, name, createdAt',
+      importMappings: 'id, institution, accountId',
+      importHistory: 'id, importDate, fileFormat, bank, fileName',
       receipts: 'id, transactionId, uploadedAt, mimeType, fileSize',
       investmentAccounts: 'id, type, name, createdAt',
       holdings: 'id, accountId, symbol, purchaseDate, [accountId+symbol]',
@@ -1282,19 +1304,79 @@ export async function getEncryptedAccount(id: string): Promise<Account | undefin
 export async function getAllEncryptedAccounts(): Promise<Account[]> {
   try {
     const accounts = await db.accounts.toArray();
-    
+
     if (!isEncryptionAvailable()) {
       return accounts;
     }
-    
+
     // Decrypt all accounts in parallel
     const decrypted = await Promise.all(
       accounts.map(acc => decryptAccount(acc))
     );
-    
+
     return decrypted as Account[];
   } catch (error) {
     console.error('Error getting encrypted accounts:', error);
     return [];
+  }
+}
+
+// ========================================
+// IMPORT HISTORY OPERATIONS
+// ========================================
+
+/**
+ * Save import metadata to audit trail
+ * @param metadata The import metadata to save
+ * @returns Promise<string> The import ID
+ */
+export async function saveImportMetadata(
+  metadata: Omit<ImportMetadata, 'id'>
+): Promise<string> {
+  try {
+    const importId = `import_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+
+    const record: ImportMetadata = {
+      id: importId,
+      ...metadata,
+    };
+
+    await db.importHistory.add(record);
+    return importId;
+  } catch (error) {
+    console.error('Error saving import metadata:', error);
+    throw error;
+  }
+}
+
+/**
+ * Get import history with optional limit
+ * @param limit Maximum number of imports to retrieve (default: 10)
+ * @returns Promise<ImportMetadata[]> Array of import metadata
+ */
+export async function getImportHistory(limit: number = 10): Promise<ImportMetadata[]> {
+  try {
+    return await db.importHistory
+      .orderBy('importDate')
+      .reverse()
+      .limit(limit)
+      .toArray();
+  } catch (error) {
+    console.error('Error fetching import history:', error);
+    return [];
+  }
+}
+
+/**
+ * Get specific import metadata by ID
+ * @param importId The import ID
+ * @returns Promise<ImportMetadata | undefined>
+ */
+export async function getImportMetadata(importId: string): Promise<ImportMetadata | undefined> {
+  try {
+    return await db.importHistory.get(importId);
+  } catch (error) {
+    console.error('Error fetching import metadata:', error);
+    return undefined;
   }
 }
