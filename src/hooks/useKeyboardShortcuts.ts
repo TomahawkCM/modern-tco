@@ -13,6 +13,12 @@ interface ShortcutHandlers {
   onSearch?: () => void;
   onShowHelp?: () => void;
   onCloseModal?: () => void;
+  // Row navigation (vim-style)
+  onNextRow?: () => void;
+  onPrevRow?: () => void;
+  onToggleRow?: () => void;
+  onSelectAll?: () => void;
+  onDeleteSelected?: () => void;
 }
 
 export function useKeyboardShortcuts(handlers: ShortcutHandlers) {
@@ -79,6 +85,36 @@ export function useKeyboardShortcuts(handlers: ShortcutHandlers) {
           router.push('/budget-app/reports');
           break;
 
+        // Row navigation (vim-style)
+        case 'j':
+          e.preventDefault();
+          handlers.onNextRow?.();
+          break;
+
+        case 'k':
+          e.preventDefault();
+          handlers.onPrevRow?.();
+          break;
+
+        case 'x':
+          e.preventDefault();
+          handlers.onToggleRow?.();
+          break;
+
+        case 'a':
+          e.preventDefault();
+          handlers.onSelectAll?.();
+          break;
+
+        case 'delete':
+        case 'backspace':
+          // Only trigger delete if something is selected
+          if (e.shiftKey) {
+            e.preventDefault();
+            handlers.onDeleteSelected?.();
+          }
+          break;
+
         case '?':
           e.preventDefault();
           handlers.onShowHelp?.();
@@ -118,6 +154,16 @@ export const KEYBOARD_SHORTCUTS = [
     shortcuts: [
       { key: 'N', description: 'New Transaction', action: 'Open new transaction modal' },
       { key: '/', description: 'Search', action: 'Focus search input' },
+    ],
+  },
+  {
+    category: 'Row Navigation (Vim-style)',
+    shortcuts: [
+      { key: 'J', description: 'Next Row', action: 'Move focus to next transaction' },
+      { key: 'K', description: 'Previous Row', action: 'Move focus to previous transaction' },
+      { key: 'X', description: 'Toggle Selection', action: 'Select/deselect current row' },
+      { key: 'A', description: 'Select All', action: 'Select all visible transactions' },
+      { key: 'Shift+Del', description: 'Delete Selected', action: 'Delete all selected transactions' },
     ],
   },
   {

@@ -274,10 +274,10 @@ export default function BudgetsPage() {
         </div>
       )}
 
-      {/* Budget Categories - Enhanced for Seniors */}
-      <div className="space-y-6">
+      {/* Budget Categories - Modern responsive design */}
+      <div className="space-y-4">
         {budgetData.map((data) => (
-          <div key={data.category.id} className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow p-6 border-l-4" style={{ borderLeftColor: data.category.color }}>
+          <div key={data.category.id} className="bg-white rounded-lg shadow hover:shadow-md transition-shadow p-6 border-l-4" style={{ borderLeftColor: data.category.color }}>
             <div className="flex items-start justify-between mb-6">
               <div className="flex items-center gap-4">
                 <div

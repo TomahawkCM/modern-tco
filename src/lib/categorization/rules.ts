@@ -4,6 +4,7 @@
  */
 
 import type { CategoryRule, CategorizationResult } from '@/types/budget';
+import { getVendorLearnedCategory } from '@/lib/vendor-learning';
 
 /**
  * Clean BMO-specific formatting from description
@@ -274,6 +275,17 @@ export const CATEGORY_RULES: CategoryRule[] = [
 export function categorizeTransaction(
   description: string
 ): CategorizationResult | null {
+  // 0. Vendor-learning override (highest priority)
+  const learned = getVendorLearnedCategory(description);
+  if (learned) {
+    return {
+      category: learned.category,
+      subcategory: learned.subcategory ?? undefined,
+      confidence: 0.99,
+      method: 'ml', // Vendor learning is a machine learning approach
+    };
+  }
+
   // Clean BMO-specific formatting first
   const cleanedDesc = cleanBMODescription(description);
   const normalizedDesc = cleanedDesc.trim();

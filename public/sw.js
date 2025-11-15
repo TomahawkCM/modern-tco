@@ -9,8 +9,8 @@
  * - Background sync for transactions (future)
  */
 
-const CACHE_NAME = 'budget-app-v1';
-const RUNTIME_CACHE = 'budget-app-runtime-v1';
+const CACHE_NAME = 'budget-app-v2-dev';
+const RUNTIME_CACHE = 'budget-app-runtime-v2-dev';
 
 // App shell files to cache on install
 const APP_SHELL = [
@@ -103,6 +103,12 @@ self.addEventListener('fetch', (event) => {
  * @returns {boolean}
  */
 function shouldCacheFirst(url) {
+  // 🔥 DEVELOPMENT MODE: Skip caching for localhost to allow hot reload
+  if (url.hostname === 'localhost' || url.hostname === '127.0.0.1') {
+    console.log('[Service Worker] DEV MODE: Bypassing cache for:', url.pathname);
+    return false;
+  }
+
   // Cache-first for:
   // - App pages (routes)
   // - Static assets (icons, images)

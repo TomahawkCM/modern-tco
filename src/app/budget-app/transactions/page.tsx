@@ -10,8 +10,8 @@
  * - Pull-to-refresh on transaction list
  */
 
-import { useState, useEffect, useRef } from 'react';
-import { Plus, Search, Filter, Download, Edit, Trash2, Tag, FileImage, Split, Check, X as XIcon, RefreshCw, ArrowUp, ArrowDown, TrendingUp, TrendingDown, Receipt, Upload } from 'lucide-react';
+import { useState, useEffect, useRef, useMemo, useCallback } from 'react';
+import { Plus, Search, Filter, Download, Edit, Trash2, Tag, FileImage, Split, Check, X as XIcon, RefreshCw, ArrowUp, ArrowDown, TrendingUp, TrendingDown, Receipt, Upload, ChevronDown, ChevronUp } from 'lucide-react';
 import { motion, PanInfo } from 'framer-motion';
 import { db, splitTransaction, unsplitTransaction, getSplitChildren, type SplitData } from '@/lib/budget-db';
 import type { Transaction, Category, Account } from '@/types/budget';
@@ -23,6 +23,13 @@ import { recordCorrection, categorizeTransaction } from '@/lib/categorization/ru
 import { useToast } from '@/components/budget/Toast';
 import { HelpTooltip } from '@/components/budget/HelpTooltip';
 import { EmptyState } from '@/components/budget/EmptyState';
+import { StickyBulkActionsBar } from '@/components/budget/StickyBulkActionsBar';
+import { QuickFiltersRow } from '@/components/budget/QuickFiltersRow';
+import { QuickCategorizeDialog } from '@/components/budget/QuickCategorizeDialog';
+import { BulkCategorizeConfirmation } from '@/components/budget/BulkCategorizeConfirmation';
+import { TransactionReviewModal } from '@/components/budget/TransactionReviewModal';
+import { extractVendorName } from '@/lib/vendor-matcher';
+import { aiFindMatchingVendorTransactions } from '@/lib/ai-vendor-matcher';
 import Link from 'next/link';
 
 export default function TransactionsPage() {
@@ -59,26 +66,95 @@ export default function TransactionsPage() {
   const [unsplitConfirmOpen, setUnsplitConfirmOpen] = useState(false);
   const [unsplittingTransaction, setUnsplittingTransaction] = useState<Transaction | null>(null);
   const [bulkConfirmOpen, setBulkConfirmOpen] = useState(false);
-  const [showScrollShadow, setShowScrollShadow] = useState(false);
-  const tableContainerRef = useRef<HTMLDivElement>(null);
+
+  // Vendor matching bulk categorization state
+  const [showVendorBulkConfirm, setShowVendorBulkConfirm] = useState(false);
+  const [showReviewModal, setShowReviewModal] = useState(false);
+  const [matchingTransactions, setMatchingTransactions] = useState<Transaction[]>([]);
+  const [isMatchingVendors, setIsMatchingVendors] = useState(false);
+  const [isSavingTransaction, setIsSavingTransaction] = useState(false);
+  const [pendingCategorization, setPendingCategorization] = useState<{
+    transaction: Transaction;
+    category: string;
+    subcategory: string | null;
+  } | null>(null);
+
+  // Click-to-expand transaction descriptions state
+  const [expandedTransactionIds, setExpandedTransactionIds] = useState<Set<string>>(new Set());
+
+  // Date range state
+  const [startDate, setStartDate] = useState('');
+  const [endDate, setEndDate] = useState('');
+
   const mobileListRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     loadData();
   }, []);
 
-  // Phase 3.3.2: Scroll shadow detection for sticky headers
-  useEffect(() => {
-    const tableContainer = tableContainerRef.current;
-    if (!tableContainer) return;
+  // Pre-compute vendor names for all transactions (MEMOIZED for performance)
+  // Avoids repeated regex operations during vendor matching
+  const vendorCache = useMemo(() => {
+    const cache = new Map<string, string>();
+    transactions.forEach((tx) => {
+      cache.set(tx.id, extractVendorName(tx.description));
+    });
+    return cache;
+  }, [transactions]);
 
-    const handleScroll = () => {
-      setShowScrollShadow(tableContainer.scrollTop > 0);
-    };
+  // Filter and sort transactions (MEMOIZED for performance)
+  // NOTE: Must be defined here, before functions that depend on it
+  const filteredTransactions = useMemo(() => {
+    // Pre-compute lowercase search term once
+    const lowerSearchTerm = searchTerm.toLowerCase();
 
-    tableContainer.addEventListener('scroll', handleScroll);
-    return () => tableContainer.removeEventListener('scroll', handleScroll);
-  }, []);
+    // Pre-compute start/end dates once if they exist
+    const startDateTime = startDate ? new Date(startDate).getTime() : null;
+    const endDateTime = endDate ? new Date(endDate).getTime() : null;
+
+    return transactions
+      .filter((tx) => {
+        // Search filter
+        if (searchTerm && !tx.description.toLowerCase().includes(lowerSearchTerm)) {
+          return false;
+        }
+        // Category filter
+        if (selectedCategory !== 'all' && tx.category !== selectedCategory) {
+          return false;
+        }
+        // Date range filter
+        if (startDateTime && new Date(tx.date).getTime() < startDateTime) {
+          return false;
+        }
+        if (endDateTime && new Date(tx.date).getTime() > endDateTime) {
+          return false;
+        }
+        return true;
+      })
+      .sort((a, b) => {
+        const multiplier = sortDirection === 'asc' ? 1 : -1;
+        if (sortBy === 'date') {
+          return (new Date(a.date).getTime() - new Date(b.date).getTime()) * multiplier;
+        } else {
+          return (a.amount - b.amount) * multiplier;
+        }
+      });
+  }, [transactions, searchTerm, selectedCategory, sortBy, sortDirection, startDate, endDate]);
+
+  // Memoize total calculations
+  const totalIncome = useMemo(() => {
+    return filteredTransactions
+      .filter((tx) => tx.amount > 0)
+      .reduce((sum, tx) => sum + tx.amount, 0);
+  }, [filteredTransactions]);
+
+  const totalExpenses = useMemo(() => {
+    return Math.abs(
+      filteredTransactions
+        .filter((tx) => tx.amount < 0)
+        .reduce((sum, tx) => sum + tx.amount, 0)
+    );
+  }, [filteredTransactions]);
 
   // Phase 3.3.3: Pull-to-refresh handler
   async function handlePullToRefresh() {
@@ -116,20 +192,119 @@ export default function TransactionsPage() {
     }
   }
 
-  async function saveTransaction(transaction: Transaction) {
+  async function runVendorMatching(transaction: Transaction) {
+    if (!transaction.category) {
+      console.log('[Vendor Matching] Skipping: no category on transaction', transaction.id);
+      return;
+    }
+
     try {
-      if (editingTransaction) {
-        const { id, ...updates } = transaction;
-        await db.transactions.update(id, updates);
-      } else {
-        await db.transactions.add(transaction);
+      const currentVendor = extractVendorName(transaction.description);
+
+      if (!currentVendor) {
+        console.log('[Vendor Matching] Skipping: could not extract vendor name for', transaction.id);
+        return;
       }
-      await loadData();
+
+      // Build deterministic candidate set: exact normalized vendor match only
+      const deterministicMatches = transactions.filter((tx) => {
+        if (tx.id === transaction.id) return false;
+        const txVendor =
+          vendorCache.get(tx.id) || extractVendorName(tx.description);
+        return txVendor === currentVendor;
+      });
+
+      setIsMatchingVendors(true);
+      toast.info(`🔍 Searching for other "${currentVendor}" transactions...`, 3000);
+
+      const perfStart = performance.now();
+
+      // Start with strict deterministic matches
+      let matches = deterministicMatches;
+
+      // Optional: only if no deterministic matches, fall back to AI as a helper
+      if (matches.length === 0) {
+        matches = await aiFindMatchingVendorTransactions(
+          transaction,
+          transactions,
+          vendorCache
+        );
+      }
+
+      const perfEnd = performance.now();
+      const searchTime = ((perfEnd - perfStart) / 1000).toFixed(1);
+
+      if (matches.length >= 1) {
+        console.log('[Vendor Matching] Matches found, opening bulk dialog for', transaction.id);
+        toast.success(`✓ Found ${matches.length} matching "${currentVendor}" transactions (${searchTime}s)`);
+
+        setPendingCategorization({
+          transaction,
+          category: transaction.category,
+          subcategory: transaction.subcategory || null,
+        });
+        setMatchingTransactions(matches);
+        setShowVendorBulkConfirm(true);
+      } else {
+        toast.info(`No other "${currentVendor}" transactions found (${searchTime}s)`);
+      }
+    } catch (error) {
+      console.error('[Vendor Matching] Error during AI vendor matching:', error);
+      toast.error('Vendor matching failed. Transaction was saved, but matches could not be loaded.');
+    } finally {
+      setIsMatchingVendors(false);
+    }
+  }
+
+  async function saveTransaction(transaction: Transaction) {
+    setIsSavingTransaction(true);
+    try {
+      // 🔥 VISUAL PROOF: New code is loaded (remove after testing)
+      if (process.env.NODE_ENV === 'development' && editingTransaction) {
+        console.log('🟢 NEW CODE v2.2 - saveTransaction with vendor matching (non-blocking DB save)');
+      }
+
+      const isEdit = !!editingTransaction;
+      const shouldRunVendorMatching = isEdit && !!transaction.category;
+
+      // 🔥 CRITICAL FIX: Optimistic update BEFORE database save (like quickCategorize)
+      // This ensures vendor matching sees the UPDATED transaction in the array
+      if (isEdit) {
+        setTransactions(prev =>
+          prev.map(tx => tx.id === transaction.id ? transaction : tx)
+        );
+      }
+
+      // Save to database
+      if (isEdit) {
+        const { id, ...updates } = transaction;
+        // Fire-and-forget DB update to avoid blocking UI on IndexedDB issues
+        void db.transactions.update(id, updates).catch((error) => {
+          console.error('[Transactions] Dexie update error:', error);
+        });
+      } else {
+        void db.transactions.add(transaction).catch((error) => {
+          console.error('[Transactions] Dexie add error:', error);
+        });
+      }
+
+      // Close modal immediately after save
+      console.log('[Transactions] Save triggered, closing modal for', transaction.id);
       setShowModal(false);
       setEditingTransaction(null);
+      if (!shouldRunVendorMatching) {
+        // Refresh transactions list asynchronously
+        void loadData();
+      } else {
+        // Run vendor matching asynchronously without blocking modal close
+        void runVendorMatching(transaction);
+      }
     } catch (error) {
-      console.error('Error saving transaction:', error);
+      console.error('❌ Error saving transaction:', error);
       toast.error('Failed to save transaction');
+      void loadData(); // Reload on error to ensure consistency
+    } finally {
+      setIsSavingTransaction(false);
     }
   }
 
@@ -213,8 +388,8 @@ export default function TransactionsPage() {
     }
   }
 
-  // Bulk selection functions
-  function toggleSelectTransaction(id: string) {
+  // Bulk selection functions (MEMOIZED for performance)
+  const toggleSelectTransaction = useCallback((id: string) => {
     const newSelected = new Set(selectedTransactionIds);
     if (newSelected.has(id)) {
       newSelected.delete(id);
@@ -223,20 +398,20 @@ export default function TransactionsPage() {
     }
     setSelectedTransactionIds(newSelected);
     setShowBulkActions(newSelected.size > 0);
-  }
+  }, [selectedTransactionIds]);
 
-  function selectAllVisible() {
+  const selectAllVisible = useCallback(() => {
     const visibleIds = new Set(filteredTransactions.map(tx => tx.id));
     setSelectedTransactionIds(visibleIds);
     setShowBulkActions(visibleIds.size > 0);
-  }
+  }, [filteredTransactions]);
 
-  function clearSelection() {
+  const clearSelection = useCallback(() => {
     setSelectedTransactionIds(new Set());
     setShowBulkActions(false);
     setBulkCategory('');
     setBulkSubcategory('');
-  }
+  }, []);
 
   function initiateBulkCategorization() {
     if (!bulkCategory) {
@@ -273,7 +448,55 @@ export default function TransactionsPage() {
     }
   }
 
+  // Handle bulk categorization from sticky bar
+  async function handleBulkCategoryApply(category: string, subcategory: string) {
+    try {
+      for (const id of selectedTransactionIds) {
+        await db.transactions.update(id, {
+          category,
+          subcategory: subcategory || null,
+          updatedAt: new Date(),
+        });
+      }
+
+      await loadData();
+      clearSelection();
+      toast.success(`Successfully categorized ${selectedTransactionIds.size} transaction(s)`);
+    } catch (error) {
+      console.error('Error bulk categorizing:', error);
+      toast.error('Failed to categorize transactions');
+    }
+  }
+
+  // Handle date range filtering from quick filters
+  function handleDateRangeChange(preset: string) {
+    const now = new Date();
+    let start: Date;
+    let end: Date = now;
+
+    switch (preset) {
+      case 'this-month':
+        start = new Date(now.getFullYear(), now.getMonth(), 1);
+        break;
+      case 'last-30':
+        start = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);
+        break;
+      case 'last-90':
+        start = new Date(now.getTime() - 90 * 24 * 60 * 60 * 1000);
+        break;
+      case 'this-year':
+        start = new Date(now.getFullYear(), 0, 1);
+        break;
+      default:
+        return;
+    }
+
+    setStartDate(start.toISOString().split('T')[0]);
+    setEndDate(end.toISOString().split('T')[0]);
+  }
+
   async function quickCategorize(transaction: Transaction, categoryName: string, subcategoryName: string | null) {
+    const perfStart = performance.now();
     try {
       const updated = {
         ...transaction,
@@ -282,9 +505,17 @@ export default function TransactionsPage() {
         updatedAt: new Date(),
       };
 
-      await db.transactions.update(transaction.id, updated);
+      // Optimistic update - update UI immediately
+      setTransactions(prev =>
+        prev.map(tx => tx.id === transaction.id ? updated : tx)
+      );
 
-      // Learn from this correction
+      const dbStart = performance.now();
+      await db.transactions.update(transaction.id, updated);
+      const dbEnd = performance.now();
+      console.log(`[Performance] DB update: ${(dbEnd - dbStart).toFixed(2)}ms`);
+
+      // Learn from this correction (non-blocking)
       const autoCategorization = categorizeTransaction(transaction.description);
       recordCorrection({
         originalDescription: transaction.description,
@@ -295,56 +526,117 @@ export default function TransactionsPage() {
         timestamp: new Date(),
       });
 
-      await loadData();
-      setQuickCategorizingId(null);
+      const perfEnd = performance.now();
+      console.log(`[Performance] Total quickCategorize (optimized): ${(perfEnd - perfStart).toFixed(2)}ms`);
+
+      toast.success(`Categorized as ${categoryName}${subcategoryName ? ` - ${subcategoryName}` : ''}`);
     } catch (error) {
       console.error('Error quick categorizing:', error);
       toast.error('Failed to categorize transaction');
+      // Reload on error to ensure consistency
+      await loadData();
     }
   }
 
-  // Date range state
-  const [startDate, setStartDate] = useState('');
-  const [endDate, setEndDate] = useState('');
+  // Bulk categorize matching vendor transactions
+  function bulkCategorizeVendorTransactions(
+    transactionIds: string[],
+    category: string,
+    subcategory: string | null
+  ) {
+    const updatedAt = new Date();
 
-  // Filter and sort transactions
-  const filteredTransactions = transactions
-    .filter((tx) => {
-      // Search filter
-      if (searchTerm && !tx.description.toLowerCase().includes(searchTerm.toLowerCase())) {
-        return false;
+    // 1) Optimistic UI update – instant
+    setTransactions((prev) =>
+      prev.map((tx) =>
+        transactionIds.includes(tx.id)
+          ? { ...tx, category, subcategory, updatedAt }
+          : tx
+      )
+    );
+
+    // 2) Fire-and-forget Dexie updates in the background
+    void (async () => {
+      try {
+        const perfStart = performance.now();
+
+        await Promise.all(
+          transactionIds.map((id) =>
+            db.transactions.update(id, { category, subcategory, updatedAt })
+          )
+        );
+
+        const perfEnd = performance.now();
+        console.log(
+          `[Performance] Bulk categorize ${transactionIds.length} transactions: ${(
+            perfEnd - perfStart
+          ).toFixed(2)}ms`
+        );
+
+        toast.success(
+          `Categorized ${transactionIds.length} transactions as ${category}${
+            subcategory ? ` - ${subcategory}` : ''
+          }`
+        );
+      } catch (error) {
+        console.error('Error bulk categorizing:', error);
+        toast.error('Failed to bulk categorize transactions');
+        // Reload on error to ensure consistency
+        await loadData();
       }
-      // Category filter
-      if (selectedCategory !== 'all' && tx.category !== selectedCategory) {
-        return false;
-      }
-      // Date range filter
-      if (startDate && new Date(tx.date) < new Date(startDate)) {
-        return false;
-      }
-      if (endDate && new Date(tx.date) > new Date(endDate)) {
-        return false;
-      }
-      return true;
-    })
-    .sort((a, b) => {
-      const multiplier = sortDirection === 'asc' ? 1 : -1;
-      if (sortBy === 'date') {
-        return (new Date(a.date).getTime() - new Date(b.date).getTime()) * multiplier;
+    })();
+  }
+
+  // Handle "Apply to All" button in bulk confirmation
+  async function handleApplyToAll() {
+    if (!pendingCategorization) return;
+
+    bulkCategorizeVendorTransactions(
+      matchingTransactions.map(tx => tx.id),
+      pendingCategorization.category,
+      pendingCategorization.subcategory
+    );
+
+    // Close dialogs and clear state
+    setShowVendorBulkConfirm(false);
+    setPendingCategorization(null);
+    setMatchingTransactions([]);
+  }
+
+  // Handle "Review First" button in bulk confirmation
+  function handleReviewFirst() {
+    setShowVendorBulkConfirm(false);
+    setShowReviewModal(true);
+  }
+
+  // Handle applying to selected transactions from review modal
+  async function handleApplySelected(selectedIds: string[]) {
+    if (!pendingCategorization || selectedIds.length === 0) return;
+
+    bulkCategorizeVendorTransactions(
+      selectedIds,
+      pendingCategorization.category,
+      pendingCategorization.subcategory
+    );
+
+    // Close modal and clear state
+    setShowReviewModal(false);
+    setPendingCategorization(null);
+    setMatchingTransactions([]);
+  }
+
+  // Toggle transaction description expansion (MEMOIZED for performance)
+  const toggleExpanded = useCallback((id: string) => {
+    setExpandedTransactionIds(prev => {
+      const newSet = new Set(prev);
+      if (newSet.has(id)) {
+        newSet.delete(id);
       } else {
-        return (a.amount - b.amount) * multiplier;
+        newSet.add(id);
       }
+      return newSet;
     });
-
-  const totalIncome = filteredTransactions
-    .filter((tx) => tx.amount > 0)
-    .reduce((sum, tx) => sum + tx.amount, 0);
-
-  const totalExpenses = Math.abs(
-    filteredTransactions
-      .filter((tx) => tx.amount < 0)
-      .reduce((sum, tx) => sum + tx.amount, 0)
-  );
+  }, []);
 
   if (isLoading) {
     return (
@@ -359,11 +651,34 @@ export default function TransactionsPage() {
 
   return (
     <div className="space-y-6">
+      {/* Sticky Bulk Actions Bar */}
+      <StickyBulkActionsBar
+        selectedCount={selectedTransactionIds.size}
+        categories={categories}
+        onApplyCategory={handleBulkCategoryApply}
+        onClearSelection={clearSelection}
+      />
+
+      {/* Quick Filters Row */}
+      <QuickFiltersRow
+        categories={categories}
+        selectedCategory={selectedCategory}
+        onCategoryChange={setSelectedCategory}
+        onDateRangeChange={handleDateRangeChange}
+        onClearFilters={() => {
+          setSearchTerm('');
+          setSelectedCategory('all');
+          setStartDate('');
+          setEndDate('');
+        }}
+        hasActiveFilters={searchTerm !== '' || selectedCategory !== 'all' || startDate !== '' || endDate !== ''}
+      />
+
       {/* Header - Enhanced Typography */}
       <div className="flex items-center justify-between">
         <div>
           <div className="flex items-center gap-3">
-            <h1 className="text-4xl font-bold text-gray-900">Transactions</h1>
+            <h1 className="text-4xl font-bold text-foreground">Transactions</h1>
             <HelpTooltip
               content={
                 <>
@@ -377,7 +692,7 @@ export default function TransactionsPage() {
               iconSize="h-5 w-5"
             />
           </div>
-          <p className="text-lg text-gray-600 mt-2 font-medium">
+          <p className="text-lg text-muted-foreground mt-2 font-medium">
             {filteredTransactions.length} transaction{filteredTransactions.length !== 1 ? 's' : ''}
           </p>
         </div>
@@ -394,14 +709,14 @@ export default function TransactionsPage() {
       </div>
 
       {/* Filters and Search - Enhanced with Date Range */}
-      <div className="bg-white rounded-lg shadow p-4">
+      <div className="bg-card rounded-lg shadow p-4">
         <div className="space-y-4">
           {/* Top Row: Search and Category */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {/* Search */}
             <div>
               <div className="flex items-center gap-2 mb-2">
-                <label htmlFor="search-transactions" className="text-sm font-medium text-gray-700">
+                <label htmlFor="search-transactions" className="text-sm font-medium text-foreground">
                   Search Transactions
                 </label>
                 <HelpTooltip
@@ -411,14 +726,14 @@ export default function TransactionsPage() {
                 />
               </div>
               <div className="relative">
-                <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
                 <input
                   id="search-transactions"
                   type="text"
                   placeholder="Search transactions..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full pl-10 pr-4 py-3 text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 focus:border-transparent focus:outline-none"
+                  className="w-full pl-10 pr-4 py-3 text-base border border-input rounded-lg bg-background text-foreground focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 focus:border-transparent focus:outline-none"
                 />
               </div>
             </div>
@@ -426,7 +741,7 @@ export default function TransactionsPage() {
             {/* Category Filter */}
             <div>
               <div className="flex items-center gap-2 mb-2">
-                <label htmlFor="category-filter" className="text-sm font-medium text-gray-700">
+                <label htmlFor="category-filter" className="text-sm font-medium text-foreground">
                   Filter by Category
                 </label>
                 <HelpTooltip
@@ -439,7 +754,7 @@ export default function TransactionsPage() {
                 id="category-filter"
                 value={selectedCategory}
                 onChange={(e) => setSelectedCategory(e.target.value)}
-                className="w-full px-4 py-3 text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 focus:border-transparent focus:outline-none"
+                className="w-full px-4 py-3 text-base border border-input rounded-lg bg-background text-foreground focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 focus:border-transparent focus:outline-none"
               >
                 <option value="all">All Categories</option>
                 {categories.map((cat) => (
@@ -522,70 +837,6 @@ export default function TransactionsPage() {
         </div>
       </div>
 
-      {/* Bulk Actions Bar */}
-      {showBulkActions && (
-        <div className="bg-teal-50 border border-teal-200 rounded-lg p-4">
-          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
-            <div className="flex items-center gap-2">
-              <Check className="w-5 h-5 text-teal-600" />
-              <span className="font-semibold text-teal-900">
-                {selectedTransactionIds.size} transaction(s) selected
-              </span>
-            </div>
-            
-            <div className="flex flex-wrap items-center gap-2 flex-1">
-              <select
-                value={bulkCategory}
-                onChange={(e) => {
-                  setBulkCategory(e.target.value);
-                  setBulkSubcategory('');
-                }}
-                className="px-4 py-2 border border-teal-300 rounded-lg bg-white focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 focus:border-transparent focus:outline-none text-sm"
-              >
-                <option value="">Select category...</option>
-                {categories.map((cat) => (
-                  <option key={cat.id} value={cat.name}>
-                    {cat.name}
-                  </option>
-                ))}
-              </select>
-
-              {bulkCategory && categories.find(c => c.name === bulkCategory)?.subcategories && (
-                <select
-                  value={bulkSubcategory}
-                  onChange={(e) => setBulkSubcategory(e.target.value)}
-                  className="px-4 py-2 border border-teal-300 rounded-lg bg-white focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 focus:border-transparent focus:outline-none text-sm"
-                >
-                  <option value="">No subcategory</option>
-                  {categories
-                    .find(c => c.name === bulkCategory)
-                    ?.subcategories.map((sub) => (
-                      <option key={sub} value={sub}>
-                        {sub}
-                      </option>
-                    ))}
-                </select>
-              )}
-
-              <button
-                onClick={initiateBulkCategorization}
-                disabled={!bulkCategory}
-                className="px-4 py-2 bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-sm font-medium focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 focus:outline-none"
-              >
-                Apply to Selected
-              </button>
-            </div>
-
-            <button
-              onClick={clearSelection}
-              className="p-2 text-teal-600 hover:text-teal-700 hover:bg-teal-100 rounded-lg transition-colors"
-              title="Clear selection"
-            >
-              <XIcon className="w-5 h-5" />
-            </button>
-          </div>
-        </div>
-      )}
 
       {/* Summary Cards - Enhanced Typography */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -632,21 +883,16 @@ export default function TransactionsPage() {
         </div>
       </div>
 
-      {/* Transactions Table - Phase 3.1.4 + Phase 3.3.2: Desktop table + Sticky headers + Mobile card view */}
+      {/* Transactions Table - Modern responsive design with natural scrolling */}
       <div className="bg-white rounded-lg shadow overflow-hidden">
         {filteredTransactions.length > 0 ? (
           <>
-            {/* Desktop Table View (≥768px) - Phase 3.3.2: Sticky headers with scroll shadow */}
-            <div
-              ref={tableContainerRef}
-              className="hidden md:block overflow-x-auto overflow-y-auto max-h-[600px] scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100"
-            >
-              <table className="w-full relative">
-              <thead className={`bg-gray-50 border-b border-gray-200 sticky top-0 z-20 transition-shadow ${
-                showScrollShadow ? 'shadow-md' : ''
-              }`}>
+            {/* Desktop Table View (≥768px) - Natural page scrolling */}
+            <div className="hidden md:block">
+              <table className="w-full table-fixed">
+              <thead className="bg-gray-50 border-b border-gray-200 sticky top-0 z-20 shadow-sm">
                 <tr>
-                  <th className="sticky left-0 z-10 bg-gray-50 px-4 md:px-6 py-2 text-left">
+                  <th className="bg-gray-50 px-4 md:px-6 py-3 text-left w-12">
                     <input
                       type="checkbox"
                       checked={filteredTransactions.length > 0 && filteredTransactions.every(tx => selectedTransactionIds.has(tx.id))}
@@ -661,90 +907,100 @@ export default function TransactionsPage() {
                       title="Select all visible transactions"
                     />
                   </th>
-                  <th className="sticky left-0 z-10 bg-gray-50 px-4 md:px-6 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="bg-gray-50 px-4 md:px-6 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider w-28">
                     Date
                   </th>
-                  <th className="px-4 md:px-6 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="bg-gray-50 px-4 md:px-6 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
                     Description
                   </th>
-                  <th className="px-4 md:px-6 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden sm:table-cell">
+                  <th className="bg-gray-50 px-4 md:px-6 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider hidden sm:table-cell w-36">
                     Category
                   </th>
-                  <th className="px-4 md:px-6 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden lg:table-cell">
+                  <th className="bg-gray-50 px-4 md:px-6 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider hidden lg:table-cell w-24">
                     Receipt
                   </th>
-                  <th className="px-4 md:px-6 py-2 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="bg-gray-50 px-4 md:px-6 py-3 text-right text-xs font-semibold text-gray-700 uppercase tracking-wider w-32">
                     Amount
                   </th>
-                  <th className="px-4 md:px-6 py-2 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="bg-gray-50 px-4 md:px-6 py-3 text-right text-xs font-semibold text-gray-700 uppercase tracking-wider w-32">
                     Actions
                   </th>
                 </tr>
               </thead>
-              <tbody className="divide-y-2 divide-gray-300">
+              <tbody className="divide-y divide-gray-200 bg-white">
                 {filteredTransactions.map((tx) => (
-                  <tr key={tx.id} className={`hover:bg-gray-50 ${selectedTransactionIds.has(tx.id) ? 'bg-teal-50' : ''}`}>
-                    <td className="sticky left-0 z-10 bg-white px-4 md:px-6 py-5 whitespace-nowrap">
+                  <tr key={tx.id} className={`hover:bg-gray-50/50 transition-colors ${selectedTransactionIds.has(tx.id) ? 'bg-teal-50/50' : ''}`}>
+                    <td className="px-4 md:px-6 py-4 whitespace-nowrap">
                       <input
                         type="checkbox"
                         checked={selectedTransactionIds.has(tx.id)}
                         onChange={() => toggleSelectTransaction(tx.id)}
-                        className="w-5 h-5 text-teal-600 border-gray-300 rounded focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
+                        className="w-4 h-4 text-teal-600 border-gray-300 rounded focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
                         onClick={(e) => e.stopPropagation()}
                       />
                     </td>
-                    <td className="sticky left-0 z-10 bg-white px-4 md:px-6 py-5 whitespace-nowrap text-base font-medium text-gray-900">
+                    <td className="px-4 md:px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                       {new Date(tx.date).toLocaleDateString()}
                     </td>
-                    <td className="px-4 md:px-6 py-5 text-base text-gray-900 min-w-[200px]">
+                    <td className="px-4 md:px-6 py-4 text-sm text-gray-900 max-w-xs">
                       <div>
-                        <div className="flex items-center gap-2">
-                          <span className="font-semibold text-lg">{tx.description}</span>
+                        <div
+                          className="flex items-center gap-2 cursor-pointer hover:text-teal-600 transition-colors group"
+                          onClick={() => toggleExpanded(tx.id)}
+                        >
+                          <span className={`font-semibold ${expandedTransactionIds.has(tx.id) ? 'whitespace-normal break-words' : 'truncate'}`}>
+                            {tx.description}
+                          </span>
+                          {expandedTransactionIds.has(tx.id) ? (
+                            <ChevronUp className="w-4 h-4 flex-shrink-0 text-teal-600" />
+                          ) : (
+                            <ChevronDown className="w-4 h-4 flex-shrink-0 text-gray-400 group-hover:text-teal-600" />
+                          )}
                           {tx.splitFromId && (
-                            <span className="inline-flex items-center px-2.5 py-1 rounded text-sm font-medium bg-teal-100 text-teal-700">
+                            <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-teal-100 text-teal-700 flex-shrink-0">
                               Split
                             </span>
                           )}
                         </div>
                         {tx.notes && (
-                          <div className="text-gray-600 text-base mt-2">
+                          <div className={`text-gray-600 text-xs mt-1 ${expandedTransactionIds.has(tx.id) ? 'whitespace-normal break-words' : 'truncate'}`}>
                             {tx.notes}
                           </div>
                         )}
                       </div>
                     </td>
-                    <td className="px-4 md:px-6 py-5 whitespace-nowrap hidden sm:table-cell">
+                    <td className="px-4 md:px-6 py-4 whitespace-nowrap hidden sm:table-cell">
                       {tx.category ? (
-                        <span className="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium bg-teal-100 text-teal-800">
+                        <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-teal-100 text-teal-800">
                           {tx.category}
                           {tx.subcategory && ` • ${tx.subcategory}`}
                         </span>
                       ) : (
-                        <span className="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium bg-gray-100 text-gray-800">
+                        <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
                           Uncategorized
                         </span>
                       )}
                     </td>
-                    <td className="px-4 md:px-6 py-5 whitespace-nowrap hidden lg:table-cell">
+                    <td className="px-4 md:px-6 py-4 whitespace-nowrap hidden lg:table-cell">
                       <ReceiptThumbnail
                         transactionId={tx.id}
                         onReceiptDeleted={loadData}
                       />
                     </td>
-                    <td className="px-4 md:px-6 py-5 whitespace-nowrap text-right">
-                      <div className="flex items-center justify-end gap-2">
+                    <td className="px-4 md:px-6 py-4 whitespace-nowrap text-right">
+                      <div className="flex items-center justify-end gap-1.5">
                         {tx.amount > 0 ? (
                           <>
-                            <ArrowUp className="w-5 h-5 text-green-600" aria-hidden="true" />
-                            <span className="font-bold text-lg text-green-600">
+                            <ArrowUp className="w-4 h-4 text-green-600" aria-hidden="true" />
+                            <span className="font-semibold text-sm text-green-600">
                               <span className="sr-only">Income: </span>
                               +${Math.abs(tx.amount).toFixed(2)}
                             </span>
                           </>
                         ) : (
                           <>
-                            <ArrowDown className="w-5 h-5 text-red-600" aria-hidden="true" />
-                            <span className="font-bold text-lg text-red-600">
+                            <ArrowDown className="w-4 h-4 text-red-600" aria-hidden="true" />
+                            <span className="font-semibold text-sm text-red-600">
                               <span className="sr-only">Expense: </span>
                               -${Math.abs(tx.amount).toFixed(2)}
                             </span>
@@ -752,75 +1008,35 @@ export default function TransactionsPage() {
                         )}
                       </div>
                     </td>
-                    <td className="px-4 md:px-6 py-5 whitespace-nowrap text-right">
-                      <div className="flex items-center justify-end gap-2">
+                    <td className="px-4 md:px-6 py-4 whitespace-nowrap text-right">
+                      <div className="flex items-center justify-end gap-1">
                         {/* Quick Categorize for uncategorized transactions */}
                         {!tx.category && (
-                          <div className="relative">
-                            <button
-                              onClick={() => setQuickCategorizingId(tx.id)}
-                              className="p-2 text-green-600 hover:text-green-700 hover:bg-green-50 rounded-lg transition-colors"
-                              title="Quick Categorize"
-                            >
-                              <Tag className="w-5 h-5" />
-                            </button>
-
-                            {/* Quick Category Dropdown */}
-                            {quickCategorizingId === tx.id && (
-                              <>
-                                <div className="fixed inset-0 z-10" onClick={() => setQuickCategorizingId(null)} />
-                                <div className="absolute right-0 top-8 z-20 bg-white rounded-lg shadow-lg border border-gray-200 w-64 max-h-96 overflow-y-auto">
-                                  <div className="p-3 border-b border-gray-200 sticky top-0 bg-white">
-                                    <p className="text-sm font-semibold text-gray-700">Quick Categorize</p>
-                                  </div>
-                                  <div className="p-2">
-                                    {categories
-                                      .map(cat => (
-                                        <div key={cat.id}>
-                                          <button
-                                            onClick={() => quickCategorize(tx, cat.name, null)}
-                                            className="w-full text-left px-4 py-3 text-base hover:bg-gray-100 rounded font-medium"
-                                          >
-                                            {cat.name}
-                                          </button>
-                                          {cat.subcategories.length > 0 && (
-                                            <div className="ml-4 border-l-2 border-gray-200">
-                                              {cat.subcategories.map(sub => (
-                                                <button
-                                                  key={sub}
-                                                  onClick={() => quickCategorize(tx, cat.name, sub)}
-                                                  className="w-full text-left px-4 py-3 text-sm text-gray-600 hover:bg-gray-100 rounded"
-                                                >
-                                                  {sub}
-                                                </button>
-                                              ))}
-                                            </div>
-                                          )}
-                                        </div>
-                                      ))}
-                                  </div>
-                                </div>
-                              </>
-                            )}
-                          </div>
+                          <button
+                            onClick={() => setQuickCategorizingId(tx.id)}
+                            className="p-1.5 text-green-600 hover:text-green-700 hover:bg-green-50 rounded-md transition-colors"
+                            title="Quick Categorize"
+                          >
+                            <Tag className="w-4 h-4" />
+                          </button>
                         )}
 
                         {/* Split/Unsplit Button */}
                         {tx.splitFromId ? (
                           <button
                             onClick={() => initiateUnsplit(tx)}
-                            className="p-2 text-teal-600 hover:text-teal-700 hover:bg-teal-50 rounded-lg transition-colors"
+                            className="p-1.5 text-teal-600 hover:text-teal-700 hover:bg-teal-50 rounded-md transition-colors"
                             title="Unsplit transaction"
                           >
-                            <Split className="w-5 h-5" />
+                            <Split className="w-4 h-4" />
                           </button>
                         ) : (
                           <button
                             onClick={() => openSplitModal(tx)}
-                            className="p-2 text-teal-600 hover:text-teal-700 hover:bg-teal-50 rounded-lg transition-colors"
+                            className="p-1.5 text-teal-600 hover:text-teal-700 hover:bg-teal-50 rounded-md transition-colors"
                             title="Split transaction"
                           >
-                            <Split className="w-5 h-5" />
+                            <Split className="w-4 h-4" />
                           </button>
                         )}
 
@@ -829,17 +1045,17 @@ export default function TransactionsPage() {
                             setEditingTransaction(tx);
                             setShowModal(true);
                           }}
-                          className="p-2 text-teal-600 hover:text-teal-700 hover:bg-teal-50 rounded-lg transition-colors"
+                          className="p-1.5 text-teal-600 hover:text-teal-700 hover:bg-teal-50 rounded-md transition-colors"
                           title="Edit" aria-label="Edit transaction"
                         >
-                          <Edit className="w-5 h-5" />
+                          <Edit className="w-4 h-4" />
                         </button>
                         <button
                           onClick={() => initiateDeleteTransaction(tx)}
-                          className="p-2 text-red-600 hover:text-red-700 hover:bg-red-50 rounded-lg transition-colors"
+                          className="p-1.5 text-red-600 hover:text-red-700 hover:bg-red-50 rounded-md transition-colors"
                           title="Delete" aria-label="Delete transaction"
                         >
-                          <Trash2 className="w-5 h-5" />
+                          <Trash2 className="w-4 h-4" />
                         </button>
                       </div>
                     </td>
@@ -943,10 +1159,18 @@ export default function TransactionsPage() {
 
                     {/* Description + Split Badge */}
                     <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2 mb-2">
-                        <h3 className="font-bold text-gray-900 text-lg truncate">
+                      <div
+                        className="flex items-center gap-2 mb-2 cursor-pointer hover:text-teal-600 transition-colors group"
+                        onClick={() => toggleExpanded(tx.id)}
+                      >
+                        <h3 className={`font-bold text-gray-900 text-lg ${expandedTransactionIds.has(tx.id) ? 'whitespace-normal break-words' : 'truncate'}`}>
                           {tx.description}
                         </h3>
+                        {expandedTransactionIds.has(tx.id) ? (
+                          <ChevronUp className="w-5 h-5 flex-shrink-0 text-teal-600" />
+                        ) : (
+                          <ChevronDown className="w-5 h-5 flex-shrink-0 text-gray-400 group-hover:text-teal-600" />
+                        )}
                         {tx.splitFromId && (
                           <span className="inline-flex items-center px-2.5 py-1 rounded text-sm font-medium bg-teal-100 text-teal-700 flex-shrink-0">
                             Split
@@ -956,7 +1180,9 @@ export default function TransactionsPage() {
 
                       {/* Notes */}
                       {tx.notes && (
-                        <p className="text-base text-gray-600 mt-2">{tx.notes}</p>
+                        <p className={`text-base text-gray-600 mt-2 ${expandedTransactionIds.has(tx.id) ? 'whitespace-normal break-words' : 'truncate'}`}>
+                          {tx.notes}
+                        </p>
                       )}
                     </div>
 
@@ -1024,52 +1250,13 @@ export default function TransactionsPage() {
                   <div className="flex items-center gap-2 flex-wrap">
                     {/* Quick Categorize for uncategorized transactions */}
                     {!tx.category && (
-                      <div className="relative">
-                        <button
-                          onClick={() => setQuickCategorizingId(tx.id)}
-                          className="inline-flex items-center gap-2.5 px-4 py-2 min-h-[44px] text-sm font-medium text-green-700 bg-green-50 rounded-lg hover:bg-green-100 transition-colors"
-                        >
-                          <Tag className="w-4 h-4" />
-                          Categorize
-                        </button>
-
-                        {/* Quick Category Dropdown */}
-                        {quickCategorizingId === tx.id && (
-                          <>
-                            <div className="fixed inset-0 z-10" onClick={() => setQuickCategorizingId(null)} />
-                            <div className="absolute left-0 bottom-full mb-2 z-20 bg-white rounded-lg shadow-lg border border-gray-200 w-64 max-h-80 overflow-y-auto">
-                              <div className="p-2 border-b border-gray-200 sticky top-0 bg-white">
-                                <p className="text-xs font-medium text-gray-700">Quick Categorize</p>
-                              </div>
-                              <div className="p-2">
-                                {categories.map(cat => (
-                                  <div key={cat.id}>
-                                    <button
-                                      onClick={() => quickCategorize(tx, cat.name, null)}
-                                      className="w-full text-left px-4 py-2 text-sm hover:bg-gray-100 rounded min-h-[44px]"
-                                    >
-                                      {cat.name}
-                                    </button>
-                                    {cat.subcategories.length > 0 && (
-                                      <div className="ml-4 border-l-2 border-gray-200">
-                                        {cat.subcategories.map(sub => (
-                                          <button
-                                            key={sub}
-                                            onClick={() => quickCategorize(tx, cat.name, sub)}
-                                            className="w-full text-left px-4 py-2 text-xs text-gray-600 hover:bg-gray-100 rounded min-h-[44px]"
-                                          >
-                                            {sub}
-                                          </button>
-                                        ))}
-                                      </div>
-                                    )}
-                                  </div>
-                                ))}
-                              </div>
-                            </div>
-                          </>
-                        )}
-                      </div>
+                      <button
+                        onClick={() => setQuickCategorizingId(tx.id)}
+                        className="inline-flex items-center gap-2.5 px-4 py-2 min-h-[44px] text-sm font-medium text-green-700 bg-green-50 rounded-lg hover:bg-green-100 transition-colors"
+                      >
+                        <Tag className="w-4 h-4" />
+                        Categorize
+                      </button>
                     )}
 
                     {/* Split/Unsplit Button */}
@@ -1164,6 +1351,7 @@ export default function TransactionsPage() {
             setShowModal(false);
             setEditingTransaction(null);
           }}
+          isSaving={isSavingTransaction}
         />
       )}
 
@@ -1228,6 +1416,99 @@ export default function TransactionsPage() {
         variant="default"
         icon={<Tag className="w-5 h-5" />}
       />
+
+      {/* Quick Categorize Dialog - Command Palette */}
+      <QuickCategorizeDialog
+        open={quickCategorizingId !== null}
+        onOpenChange={(open) => {
+          if (!open) setQuickCategorizingId(null);
+        }}
+        categories={categories}
+        onSelect={async (category, subcategory) => {
+          const transaction = transactions.find(tx => tx.id === quickCategorizingId);
+          if (transaction) {
+            // Close quick categorize dialog
+            setQuickCategorizingId(null);
+
+            // Categorize the current transaction first
+            await quickCategorize(transaction, category, subcategory);
+
+            // Check for matching vendor transactions (optimized for performance)
+            const vendorName = extractVendorName(transaction.description);
+            setIsMatchingVendors(true);
+
+            // Show immediate feedback with vendor name (auto-dismiss after 3s)
+            toast.info(`🔍 Searching for ${vendorName} transactions...`, 3000);
+
+            const perfStart = performance.now();
+
+            try {
+              // 🤖 AI-POWERED MATCHING: Uses GPT-4 to understand business context
+              // Avoids false positives like HARVEYS matching CCOKIO or DOLLARAMA
+              const matches = await aiFindMatchingVendorTransactions(
+                transaction,
+                transactions,
+                vendorCache
+              );
+
+              const perfEnd = performance.now();
+              const searchTime = ((perfEnd - perfStart) / 1000).toFixed(1);
+
+              setIsMatchingVendors(false);
+
+              if (matches.length >= 2) {
+                // Show success toast with match count
+                toast.success(`✓ Found ${matches.length} matching ${vendorName} transactions (${searchTime}s)`);
+
+                // Found matches - show confirmation dialog
+                setPendingCategorization({ transaction, category, subcategory });
+                setMatchingTransactions(matches);
+                setShowVendorBulkConfirm(true);
+              } else {
+                // Show info toast - no matches
+                toast.info(`No other ${vendorName} transactions found (${searchTime}s)`);
+              }
+            } catch (error) {
+              // Ensure loading state is cleared even on error
+              setIsMatchingVendors(false);
+              
+              // Log error but don't break the UI - function should handle errors internally
+              console.error('[Transaction Page] Error during vendor matching:', error);
+              
+              // The function should have already fallen back to string matching,
+              // but if it still throws, we'll just continue without bulk categorization
+              toast.info(`Using basic matching for ${vendorName} transactions`);
+            }
+          }
+        }}
+        transaction={transactions.find(tx => tx.id === quickCategorizingId) || null}
+      />
+
+      {/* Bulk Categorize Confirmation Dialog */}
+      {pendingCategorization && (
+        <BulkCategorizeConfirmation
+          open={showVendorBulkConfirm}
+          onOpenChange={setShowVendorBulkConfirm}
+          sourceTransaction={pendingCategorization.transaction}
+          matchingTransactions={matchingTransactions}
+          category={pendingCategorization.category}
+          subcategory={pendingCategorization.subcategory}
+          onApplyAll={handleApplyToAll}
+          onReview={handleReviewFirst}
+        />
+      )}
+
+      {/* Transaction Review Modal */}
+      {pendingCategorization && (
+        <TransactionReviewModal
+          open={showReviewModal}
+          onOpenChange={setShowReviewModal}
+          transactions={matchingTransactions}
+          category={pendingCategorization.category}
+          subcategory={pendingCategorization.subcategory}
+          onApplySelected={handleApplySelected}
+        />
+      )}
     </div>
   );
 }

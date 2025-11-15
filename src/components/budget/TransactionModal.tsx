@@ -13,11 +13,12 @@ import { db, storeReceipt, getTransactionReceipts, getThumbnailBlobUrl, deleteRe
 import { CategoryCombobox } from './CategoryCombobox';
 import { ReceiptUpload } from './ReceiptUpload';
 import { ConfidenceMeter } from './ConfidenceMeter';
-import { Paperclip, FileImage, Trash2, Brain } from 'lucide-react';
+import { Paperclip, FileImage, Trash2, Brain, Loader2 } from 'lucide-react';
 import type { Receipt } from '@/types/budget';
 import type { ExtractedReceiptData } from '@/lib/receipt-ocr';
 import { useFocusTrap } from '@/hooks/useFocusTrap';
 import { trackBudgetEvent } from '@/lib/budget-analytics';
+import { useMerchantCategorization } from '@/hooks/useMerchantCategorization';
 
 interface TransactionModalProps {
   transaction: Transaction | null;
@@ -25,6 +26,7 @@ interface TransactionModalProps {
   accounts: Account[];
   onSave: (transaction: Transaction) => void;
   onClose: () => void;
+  isSaving?: boolean;
 }
 
 export function TransactionModal({
@@ -33,6 +35,7 @@ export function TransactionModal({
   accounts,
   onSave,
   onClose,
+  isSaving = false,
 }: TransactionModalProps) {
   // Smart default: Load last used category from localStorage
   const getLastUsedCategory = () => {
@@ -74,6 +77,17 @@ export function TransactionModal({
   const [autoCategorizationConfidence, setAutoCategorizationConfidence] = useState<number | null>(null);
   const [showConfidenceMeter, setShowConfidenceMeter] = useState(false);
 
+  // AI-powered merchant categorization (Phase 4: Merchant Intelligence Integration)
+  const {
+    categorization: aiCategorization,
+    isLoading: isAILoading,
+    submitFeedback
+  } = useMerchantCategorization(description, 'bmo', !transaction); // Only for new transactions
+
+  // Track AI suggestion for feedback submission
+  const [aiSuggestedCategory, setAiSuggestedCategory] = useState<string | null>(null);
+  const [aiSuggestedSubcategory, setAiSuggestedSubcategory] = useState<string | null>(null);
+
   const filteredCategories = categories; // Show all categories regardless of transaction type
   const selectedCategory = filteredCategories.find(c => c.name === category);
 
@@ -81,17 +95,41 @@ export function TransactionModal({
   const modalRef = useFocusTrap(true);
 
   // Auto-categorize on description change (for new transactions)
+  // Phase 4: AI-powered categorization with confidence-based auto-apply
   useEffect(() => {
     if (!transaction && description.trim()) {
-      const result = categorizeTransaction(description);
-      if (result && !category) {
-        setCategory(result.category);
-        setSubcategory(result.subcategory || '');
-        setAutoCategorizationConfidence(result.confidence);
-        setShowConfidenceMeter(true);
+      // Prefer AI categorization over rule-based
+      if (aiCategorization && !category) {
+        const AUTO_APPLY_THRESHOLD = 0.9; // Auto-apply if AI is 90%+ confident
+
+        // Track AI suggestion for feedback
+        setAiSuggestedCategory(aiCategorization.category);
+        setAiSuggestedSubcategory(aiCategorization.subcategory);
+
+        // Auto-apply if high confidence
+        if (aiCategorization.confidence >= AUTO_APPLY_THRESHOLD) {
+          setCategory(aiCategorization.category);
+          setSubcategory(aiCategorization.subcategory || '');
+          setAutoCategorizationConfidence(aiCategorization.confidence);
+          setShowConfidenceMeter(true);
+        } else {
+          // Low confidence - present as suggestion (don't auto-apply)
+          // User can manually accept via CategoryCombobox
+          setAutoCategorizationConfidence(aiCategorization.confidence);
+          setShowConfidenceMeter(true);
+        }
+      } else if (!aiCategorization && !isAILoading) {
+        // Fallback to rule-based categorization if AI unavailable or failed
+        const result = categorizeTransaction(description);
+        if (result && !category) {
+          setCategory(result.category);
+          setSubcategory(result.subcategory || '');
+          setAutoCategorizationConfidence(result.confidence);
+          setShowConfidenceMeter(true);
+        }
       }
     }
-  }, [description, transaction, category]);
+  }, [description, transaction, category, aiCategorization, isAILoading]);
 
   // Load existing receipts when editing a transaction
   useEffect(() => {
@@ -155,9 +193,38 @@ export function TransactionModal({
         timestamp: new Date(),
       });
 
+      // Vendor-level learning so future transactions from the same merchant are auto-categorized
+      // eslint-disable-next-line @typescript-eslint/no-var-requires
+      const { learnVendorCategory } = await import('@/lib/vendor-learning');
+      learnVendorCategory(description, category, subcategory || null);
+
       // Show brief confirmation message
       setShowLearnMessage(true);
       setTimeout(() => setShowLearnMessage(false), 3000);
+    }
+
+    // Phase 4: Submit feedback to merchant intelligence service
+    if (aiCategorization && category) {
+      const acceptedSuggestion = (
+        category === aiSuggestedCategory &&
+        (subcategory || null) === (aiSuggestedSubcategory || null)
+      );
+
+      await submitFeedback({
+        merchant_token: aiCategorization.merchant_token,
+        chosen_category: category,
+        chosen_subcategory: subcategory || null,
+        previous_category: aiSuggestedCategory,
+        previous_subcategory: aiSuggestedSubcategory,
+        accepted_suggestion: acceptedSuggestion,
+        country: 'CA', // Could be dynamic based on account settings
+      });
+
+      // Show learning message if user corrected AI suggestion
+      if (!acceptedSuggestion) {
+        setShowLearnMessage(true);
+        setTimeout(() => setShowLearnMessage(false), 3000);
+      }
     }
 
     // Remember last used category for smart defaults
@@ -278,17 +345,17 @@ export function TransactionModal({
       {/* Modal - Phase 3.1.5: Mobile-optimized with bottom sheet on mobile, centered on desktop */}
       <div
         ref={modalRef}
-        className="bg-white rounded-t-2xl sm:rounded-lg shadow-xl w-full sm:max-w-2xl sm:mx-4 max-h-[85vh] sm:max-h-[90vh] overflow-hidden flex flex-col"
+        className="bg-card rounded-t-2xl sm:rounded-lg shadow-xl w-full sm:max-w-2xl sm:mx-4 max-h-[85vh] sm:max-h-[90vh] overflow-hidden flex flex-col"
       >
-        <div className="p-5 sm:p-6 border-b border-gray-200 flex-shrink-0 bg-white">
+        <div className="p-5 sm:p-6 border-b border-border flex-shrink-0 bg-card">
           <div className="flex items-center justify-between">
-            <h2 className="text-xl sm:text-2xl font-bold text-gray-900">
+            <h2 className="text-xl sm:text-2xl font-bold text-foreground">
               {transaction ? 'Edit Transaction' : 'Add Transaction'}
             </h2>
             <button
               type="button"
               onClick={onClose}
-              className="p-2.5 rounded-lg text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-colors"
+              className="p-2.5 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
               aria-label="Close modal"
             >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -303,11 +370,11 @@ export function TransactionModal({
         <form onSubmit={handleSubmit} className="p-4 sm:p-6 space-y-4">
           {/* Learning Message */}
           {showLearnMessage && (
-            <div className="bg-green-50 border border-green-200 rounded-lg p-4 flex items-start gap-2">
-              <div className="flex-shrink-0 text-green-600">✓</div>
-              <div className="text-sm text-green-800">
+            <div className="bg-success/10 border border-success rounded-lg p-4 flex items-start gap-2">
+              <div className="flex-shrink-0 text-success-foreground">✓</div>
+              <div className="text-sm text-foreground">
                 <div className="font-medium">Learned!</div>
-                <div className="text-green-700 mt-0.5">
+                <div className="mt-0.5">
                   After 3 similar corrections, future transactions from this merchant will auto-categorize.
                 </div>
               </div>
@@ -316,7 +383,7 @@ export function TransactionModal({
 
           {/* Type Toggle - Enhanced */}
           <div>
-            <label className="block text-base font-semibold text-gray-700 mb-3">Type *</label>
+            <label className="block text-base font-semibold text-foreground mb-3">Type *</label>
             <div className="grid grid-cols-2 gap-4">
               <button
                 type="button"
@@ -328,7 +395,7 @@ export function TransactionModal({
                 className={`px-6 py-3 min-h-[48px] rounded-lg text-base font-semibold transition-colors ${
                   type === 'expense'
                     ? 'bg-red-500 text-white shadow-md'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    : 'bg-muted text-muted-foreground hover:bg-muted/80'
                 }`}
               >
                 Expense
@@ -343,7 +410,7 @@ export function TransactionModal({
                 className={`px-6 py-3 min-h-[48px] rounded-lg text-base font-semibold transition-colors ${
                   type === 'income'
                     ? 'bg-green-500 text-white shadow-md'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    : 'bg-muted text-muted-foreground hover:bg-muted/80'
                 }`}
               >
                 Income
@@ -353,7 +420,7 @@ export function TransactionModal({
 
           {/* Description - Enhanced */}
           <div>
-            <label htmlFor="transaction-description" className="block text-base font-semibold text-gray-700 mb-3">
+            <label htmlFor="transaction-description" className="block text-base font-semibold text-foreground mb-3">
               Description *
             </label>
             <input
@@ -362,7 +429,7 @@ export function TransactionModal({
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               placeholder="e.g., Grocery shopping at Sobeys"
-              className="w-full min-h-[48px] px-4 text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+              className="w-full min-h-[48px] px-4 text-base border border-input rounded-lg bg-background text-foreground focus:ring-2 focus:ring-teal-500 focus:border-transparent"
               aria-required="true"
               required
             />
@@ -371,11 +438,11 @@ export function TransactionModal({
           {/* Amount and Date - Enhanced */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label htmlFor="transaction-amount" className="block text-base font-semibold text-gray-700 mb-3">
+              <label htmlFor="transaction-amount" className="block text-base font-semibold text-foreground mb-3">
                 Amount *
               </label>
               <div className="relative">
-                <span className="absolute left-4 top-1/2 -translate-y-1/2 text-lg text-gray-500">$</span>
+                <span className="absolute left-4 top-1/2 -translate-y-1/2 text-lg text-muted-foreground">$</span>
                 <input
                   id="transaction-amount"
                   type="number"
@@ -385,7 +452,7 @@ export function TransactionModal({
                   step="0.01"
                   min="0"
                   inputMode="decimal"
-                  className="w-full min-h-[48px] pl-8 pr-4 text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                  className="w-full min-h-[48px] pl-8 pr-4 text-base border border-input rounded-lg bg-background text-foreground focus:ring-2 focus:ring-teal-500 focus:border-transparent"
                   aria-required="true"
                   required
                 />
@@ -393,7 +460,7 @@ export function TransactionModal({
             </div>
 
             <div>
-              <label htmlFor="transaction-date" className="block text-base font-semibold text-gray-700 mb-3">
+              <label htmlFor="transaction-date" className="block text-base font-semibold text-foreground mb-3">
                 Date *
               </label>
               <input
@@ -401,7 +468,7 @@ export function TransactionModal({
                 type="date"
                 value={date}
                 onChange={(e) => setDate(e.target.value)}
-                className="w-full min-h-[48px] px-4 text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                className="w-full min-h-[48px] px-4 text-base border border-input rounded-lg bg-background text-foreground focus:ring-2 focus:ring-teal-500 focus:border-transparent"
                 aria-required="true"
                 required
               />
@@ -411,8 +478,14 @@ export function TransactionModal({
           {/* Category and Subcategory - Enhanced */}
           <div className="space-y-4">
             <div>
-              <label className="block text-base font-semibold text-gray-700 mb-3">
-                Category {lastUsed.category && !transaction && <span className="text-sm font-normal text-gray-500">(Using last: {lastUsed.category})</span>}
+              <label className="block text-base font-semibold text-foreground mb-3">
+                Category {lastUsed.category && !transaction && <span className="text-sm font-normal text-muted-foreground">(Using last: {lastUsed.category})</span>}
+                {isAILoading && (
+                  <span className="ml-2 inline-flex items-center gap-1.5 px-2.5 py-1 bg-teal-50 text-teal-700 text-xs font-medium rounded-full border border-teal-200">
+                    <Brain className="w-3.5 h-3.5 animate-pulse" />
+                    AI categorizing...
+                  </span>
+                )}
               </label>
               {!showCreateCategory ? (
                 <div className="space-y-2">
@@ -444,14 +517,14 @@ export function TransactionModal({
                     value={newCategoryName}
                     onChange={(e) => setNewCategoryName(e.target.value)}
                     placeholder="Category name..."
-                    className="w-full px-4 py-2 text-sm border border-gray-300 rounded focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                    className="w-full px-4 py-2 text-sm border border-input rounded bg-background text-foreground focus:ring-2 focus:ring-teal-500 focus:border-transparent"
                   />
                   <input
                     type="text"
                     value={newCategorySubcats}
                     onChange={(e) => setNewCategorySubcats(e.target.value)}
                     placeholder="Subcategories (optional, comma-separated)"
-                    className="w-full px-4 py-2 text-sm border border-gray-300 rounded focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                    className="w-full px-4 py-2 text-sm border border-input rounded bg-background text-foreground focus:ring-2 focus:ring-teal-500 focus:border-transparent"
                   />
                   <div className="flex gap-2">
                     <button
@@ -468,7 +541,7 @@ export function TransactionModal({
                         setNewCategoryName('');
                         setNewCategorySubcats('');
                       }}
-                      className="flex-1 px-4 py-2 text-sm border border-gray-300 text-gray-700 rounded hover:bg-gray-50"
+                      className="flex-1 px-4 py-2 text-sm border border-input text-foreground rounded hover:bg-muted"
                     >
                       Cancel
                     </button>
@@ -478,7 +551,7 @@ export function TransactionModal({
             </div>
 
             <div>
-              <label className="block text-base font-semibold text-gray-700 mb-3">
+              <label className="block text-base font-semibold text-foreground mb-3">
                 Subcategory
               </label>
               <CategoryCombobox
@@ -524,7 +597,7 @@ export function TransactionModal({
           </div>
 
           {/* Advanced Options - Collapsible */}
-          <div className="border-t-2 border-gray-200 pt-4">
+          <div className="border-t-2 border-border pt-4">
             <button
               type="button"
               onClick={() => setShowAdvancedOptions(!showAdvancedOptions)}
@@ -539,7 +612,7 @@ export function TransactionModal({
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>
               <span>Advanced Options</span>
-              <span className="text-sm font-normal text-gray-500">
+              <span className="text-sm font-normal text-muted-foreground">
                 ({[notes, tags, accounts.length > 1 ? 'account' : ''].filter(Boolean).length} available)
               </span>
             </button>
@@ -549,14 +622,14 @@ export function TransactionModal({
                 {/* Account */}
                 {accounts.length > 0 && (
                   <div>
-                    <label htmlFor="transaction-account" className="block text-base font-medium text-gray-700 mb-3">
+                    <label htmlFor="transaction-account" className="block text-base font-medium text-foreground mb-3">
                       Account
                     </label>
                     <select
                       id="transaction-account"
                       value={accountId}
                       onChange={(e) => setAccountId(e.target.value)}
-                      className="w-full min-h-[48px] px-4 text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                      className="w-full min-h-[48px] px-4 text-base border border-input rounded-lg bg-background text-foreground focus:ring-2 focus:ring-teal-500 focus:border-transparent"
                     >
                       {accounts.map(acc => (
                         <option key={acc.id} value={acc.id}>
@@ -569,7 +642,7 @@ export function TransactionModal({
 
                 {/* Notes */}
                 <div>
-                  <label htmlFor="transaction-notes" className="block text-base font-medium text-gray-700 mb-3">
+                  <label htmlFor="transaction-notes" className="block text-base font-medium text-foreground mb-3">
                     Notes
                   </label>
                   <textarea
@@ -578,13 +651,13 @@ export function TransactionModal({
                     onChange={(e) => setNotes(e.target.value)}
                     placeholder="Add any additional notes..."
                     rows={3}
-                    className="w-full px-4 py-3 text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent resize-none"
+                    className="w-full px-4 py-3 text-base border border-input rounded-lg bg-background text-foreground focus:ring-2 focus:ring-teal-500 focus:border-transparent resize-none"
                   />
                 </div>
 
                 {/* Tags */}
                 <div>
-                  <label htmlFor="transaction-tags" className="block text-base font-medium text-gray-700 mb-3">
+                  <label htmlFor="transaction-tags" className="block text-base font-medium text-foreground mb-3">
                     Tags (comma-separated)
                   </label>
                   <input
@@ -593,7 +666,7 @@ export function TransactionModal({
                     value={tags}
                     onChange={(e) => setTags(e.target.value)}
                     placeholder="e.g., groceries, weekly, essential"
-                    className="w-full min-h-[48px] px-4 text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                    className="w-full min-h-[48px] px-4 text-base border border-input rounded-lg bg-background text-foreground focus:ring-2 focus:ring-teal-500 focus:border-transparent"
                   />
                 </div>
               </div>
@@ -602,14 +675,14 @@ export function TransactionModal({
 
           {/* Receipt Upload - Phase 7.1.1 & 7.2.2: Receipt storage and thumbnails */}
           <div className="space-y-4">
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-medium text-foreground">
               Receipt Attachments
             </label>
 
             {/* Existing Receipts - Phase 7.2.2: Display thumbnails */}
             {existingReceipts.length > 0 && (
               <div className="space-y-2">
-                <p className="text-xs text-gray-600">Existing receipts ({existingReceipts.length})</p>
+                <p className="text-xs text-muted-foreground">Existing receipts ({existingReceipts.length})</p>
                 <div className="grid grid-cols-3 sm:grid-cols-4 gap-2">
                   {existingReceipts.map((receipt) => {
                     const thumbnailUrl = receipt.thumbnail ? getThumbnailBlobUrl(receipt) : null;
@@ -620,7 +693,7 @@ export function TransactionModal({
                         key={receipt.id}
                         className="relative group"
                       >
-                        <div className="aspect-square bg-gray-100 rounded-lg overflow-hidden border border-gray-200 hover:border-teal-400 transition-colors">
+                        <div className="aspect-square bg-muted rounded-lg overflow-hidden border border-border hover:border-teal-400 transition-colors">
                           {thumbnailUrl && !isPdf ? (
                             <img
                               src={thumbnailUrl}
@@ -630,8 +703,8 @@ export function TransactionModal({
                             />
                           ) : (
                             <div className="w-full h-full flex flex-col items-center justify-center p-2">
-                              <FileImage className="w-8 h-8 text-gray-400 mb-2" />
-                              <span className="text-xs text-gray-500 text-center truncate w-full">
+                              <FileImage className="w-8 h-8 text-muted-foreground mb-2" />
+                              <span className="text-xs text-muted-foreground text-center truncate w-full">
                                 {isPdf ? 'PDF' : receipt.filename.split('.').pop()?.toUpperCase()}
                               </span>
                             </div>
@@ -648,7 +721,7 @@ export function TransactionModal({
                               window.open(fullUrl, '_blank');
                               setTimeout(() => URL.revokeObjectURL(fullUrl), 1000);
                             }}
-                            className="p-2.5 bg-white rounded text-gray-700 hover:bg-gray-100"
+                            className="p-2.5 bg-card rounded text-foreground hover:bg-muted"
                             title="View full receipt"
                           >
                             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -668,7 +741,7 @@ export function TransactionModal({
 
                         {/* Filename tooltip */}
                         <div className="mt-2">
-                          <p className="text-xs text-gray-600 truncate" title={receipt.filename}>
+                          <p className="text-xs text-muted-foreground truncate" title={receipt.filename}>
                             {receipt.filename}
                           </p>
                         </div>
@@ -730,9 +803,14 @@ export function TransactionModal({
             </button>
             <button
               type="submit"
-              className="flex-1 px-6 py-3 text-base bg-teal-500 text-white rounded-lg hover:bg-teal-600 transition-colors font-semibold shadow-md hover:shadow-lg min-h-[48px]"
+              disabled={isSaving}
+              className="flex-1 px-6 py-3 text-base bg-teal-500 text-white rounded-lg hover:bg-teal-600 transition-colors font-semibold shadow-md hover:shadow-lg min-h-[48px] disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
             >
-              {transaction ? 'Update' : 'Add'} Transaction
+              {isSaving && <Loader2 className="w-5 h-5 animate-spin" />}
+              {isSaving
+                ? (transaction ? 'Updating...' : 'Adding...')
+                : (transaction ? 'Update' : 'Add') + ' Transaction'
+              }
             </button>
           </div>
         </form>

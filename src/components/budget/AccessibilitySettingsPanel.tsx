@@ -196,10 +196,10 @@ export function AccessibilitySettingsPanel() {
   return (
     <div className="space-y-8">
       {/* Theme Mode Section */}
-      <div className="rounded-lg bg-white p-6 shadow">
+      <div className="rounded-lg bg-card p-6 shadow">
         <div className="mb-4">
-          <h3 className="text-lg font-semibold text-gray-900">Theme Mode</h3>
-          <p className="text-sm text-gray-600">
+          <h3 className="text-lg font-semibold text-foreground">Theme Mode</h3>
+          <p className="text-sm text-muted-foreground">
             Choose your preferred color scheme for the budget app
           </p>
         </div>
@@ -209,15 +209,15 @@ export function AccessibilitySettingsPanel() {
             onClick={() => updateThemeMode('light')}
             className={`flex items-center gap-3 rounded-lg border-2 p-4 transition-all ${
               preferences.themeMode === 'light'
-                ? 'border-teal-600 bg-teal-50'
-                : 'border-gray-200 hover:border-gray-300'
+                ? 'border-teal-600 bg-card'
+                : 'border-border hover:border-border'
             }`}
             aria-pressed={preferences.themeMode === 'light'}
           >
             <Sun className="h-6 w-6 text-yellow-500" aria-hidden="true" />
             <div className="text-left">
-              <div className="font-semibold text-gray-900">Light</div>
-              <div className="text-xs text-gray-600">Bright and clear</div>
+              <div className="font-semibold text-foreground">Light</div>
+              <div className="text-xs text-muted-foreground">Bright and clear</div>
             </div>
           </button>
 
@@ -225,15 +225,15 @@ export function AccessibilitySettingsPanel() {
             onClick={() => updateThemeMode('dark')}
             className={`flex items-center gap-3 rounded-lg border-2 p-4 transition-all ${
               preferences.themeMode === 'dark'
-                ? 'border-teal-600 bg-teal-50'
-                : 'border-gray-200 hover:border-gray-300'
+                ? 'border-teal-600 bg-card'
+                : 'border-border hover:border-border'
             }`}
             aria-pressed={preferences.themeMode === 'dark'}
           >
             <Moon className="h-6 w-6 text-indigo-500" aria-hidden="true" />
             <div className="text-left">
-              <div className="font-semibold text-gray-900">Dark</div>
-              <div className="text-xs text-gray-600">Easy on eyes</div>
+              <div className="font-semibold text-foreground">Dark</div>
+              <div className="text-xs text-muted-foreground">Easy on eyes</div>
             </div>
           </button>
 
@@ -241,15 +241,15 @@ export function AccessibilitySettingsPanel() {
             onClick={() => updateThemeMode('high-contrast')}
             className={`flex items-center gap-3 rounded-lg border-2 p-4 transition-all ${
               preferences.themeMode === 'high-contrast'
-                ? 'border-teal-600 bg-teal-50'
-                : 'border-gray-200 hover:border-gray-300'
+                ? 'border-teal-600 bg-card'
+                : 'border-border hover:border-border'
             }`}
             aria-pressed={preferences.themeMode === 'high-contrast'}
           >
             <Contrast className="h-6 w-6 text-gray-900" aria-hidden="true" />
             <div className="text-left">
-              <div className="font-semibold text-gray-900">High Contrast</div>
-              <div className="text-xs text-gray-600">Maximum visibility</div>
+              <div className="font-semibold text-foreground">High Contrast</div>
+              <div className="text-xs text-muted-foreground">Maximum visibility</div>
             </div>
           </button>
 
@@ -257,22 +257,22 @@ export function AccessibilitySettingsPanel() {
             onClick={() => updateThemeMode('auto')}
             className={`flex items-center gap-3 rounded-lg border-2 p-4 transition-all ${
               preferences.themeMode === 'auto'
-                ? 'border-teal-600 bg-teal-50'
-                : 'border-gray-200 hover:border-gray-300'
+                ? 'border-teal-600 bg-card'
+                : 'border-border hover:border-border'
             }`}
             aria-pressed={preferences.themeMode === 'auto'}
           >
             <MonitorSmartphone className="h-6 w-6 text-teal-500" aria-hidden="true" />
             <div className="text-left">
-              <div className="font-semibold text-gray-900">Auto</div>
-              <div className="text-xs text-gray-600">Match system</div>
+              <div className="font-semibold text-foreground">Auto</div>
+              <div className="text-xs text-muted-foreground">Match system</div>
             </div>
           </button>
         </div>
       </div>
 
       {/* Reduced Motion Section */}
-      <div className="rounded-lg bg-white p-6 shadow">
+      <div className="rounded-lg bg-card p-6 shadow">
         <div className="flex items-start justify-between">
           <div className="flex-1">
             <div className="flex items-center gap-2 mb-2">
@@ -281,9 +281,9 @@ export function AccessibilitySettingsPanel() {
               ) : (
                 <Zap className="h-5 w-5 text-gray-700" aria-hidden="true" />
               )}
-              <h3 className="text-lg font-semibold text-gray-900">Reduced Motion</h3>
+              <h3 className="text-lg font-semibold text-foreground">Reduced Motion</h3>
             </div>
-            <p className="text-sm text-gray-600">
+            <p className="text-sm text-muted-foreground">
               Minimize animations and transitions for a calmer experience. Helpful for users with
               vestibular disorders or motion sensitivity.
             </p>
@@ -298,13 +298,13 @@ export function AccessibilitySettingsPanel() {
       </div>
 
       {/* Font Size Section */}
-      <div className="rounded-lg bg-white p-6 shadow">
+      <div className="rounded-lg bg-card p-6 shadow">
         <div className="mb-4">
           <div className="flex items-center gap-2 mb-2">
             <Type className="h-5 w-5 text-gray-700" aria-hidden="true" />
-            <h3 className="text-lg font-semibold text-gray-900">Font Size</h3>
+            <h3 className="text-lg font-semibold text-foreground">Font Size</h3>
           </div>
-          <p className="text-sm text-gray-600">
+          <p className="text-sm text-muted-foreground">
             Adjust the base text size for better readability
           </p>
         </div>
@@ -315,12 +315,12 @@ export function AccessibilitySettingsPanel() {
             className={`rounded-lg border-2 p-4 text-center transition-all ${
               preferences.fontSize === '16'
                 ? 'border-teal-600 bg-teal-50'
-                : 'border-gray-200 hover:border-gray-300'
+                : 'border-border hover:border-border'
             }`}
             aria-pressed={preferences.fontSize === '16'}
           >
-            <div className="text-base font-semibold text-gray-900">16px</div>
-            <div className="text-xs text-gray-600">Default</div>
+            <div className="text-base font-semibold text-foreground">16px</div>
+            <div className="text-xs text-muted-foreground">Default</div>
           </button>
 
           <button
@@ -328,12 +328,12 @@ export function AccessibilitySettingsPanel() {
             className={`rounded-lg border-2 p-4 text-center transition-all ${
               preferences.fontSize === '18'
                 ? 'border-teal-600 bg-teal-50'
-                : 'border-gray-200 hover:border-gray-300'
+                : 'border-border hover:border-border'
             }`}
             aria-pressed={preferences.fontSize === '18'}
           >
-            <div className="text-lg font-semibold text-gray-900">18px</div>
-            <div className="text-xs text-gray-600">Large</div>
+            <div className="text-lg font-semibold text-foreground">18px</div>
+            <div className="text-xs text-muted-foreground">Large</div>
           </button>
 
           <button
@@ -341,20 +341,20 @@ export function AccessibilitySettingsPanel() {
             className={`rounded-lg border-2 p-4 text-center transition-all ${
               preferences.fontSize === '20'
                 ? 'border-teal-600 bg-teal-50'
-                : 'border-gray-200 hover:border-gray-300'
+                : 'border-border hover:border-border'
             }`}
             aria-pressed={preferences.fontSize === '20'}
           >
-            <div className="text-xl font-semibold text-gray-900">20px</div>
-            <div className="text-xs text-gray-600">Extra Large</div>
+            <div className="text-xl font-semibold text-foreground">20px</div>
+            <div className="text-xs text-muted-foreground">Extra Large</div>
           </button>
         </div>
       </div>
 
       {/* Info Box */}
-      <div className="rounded-lg bg-blue-50 p-4">
-        <h4 className="font-semibold text-blue-900 mb-2">ℹ️ About Accessibility Settings</h4>
-        <ul className="space-y-1 text-sm text-blue-800">
+      <div className="rounded-lg bg-muted p-4">
+        <h4 className="font-semibold text-foreground mb-2">ℹ️ About Accessibility Settings</h4>
+        <ul className="space-y-1 text-sm text-muted-foreground">
           <li>• Settings are saved automatically and persist across sessions</li>
           <li>• Changes sync across all open tabs in real-time</li>
           <li>• Your preferences are stored locally and never sent to servers</li>
