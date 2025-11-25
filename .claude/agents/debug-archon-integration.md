@@ -1,3 +1,9 @@
+---
+name: debug-archon-integration
+description: Archon integration guide for the debug-specialist agent
+version: 1.0.0
+---
+
 # 🔗 Debug Specialist - Archon Integration Guide
 
 **Agent**: debug-specialist

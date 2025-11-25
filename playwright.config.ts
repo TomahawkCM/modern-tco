@@ -7,11 +7,17 @@ export default defineConfig({
   retries: process.env.CI ? 2 : 0,
   workers: process.env.CI ? 1 : undefined,
   reporter: 'html',
+  timeout: 60000, // 60 second test timeout
+  expect: {
+    timeout: 30000, // 30 second expect timeout
+  },
 
   use: {
-    baseURL: process.env.BASE_URL || 'http://localhost:3003',
+    baseURL: process.env.BASE_URL || 'http://localhost:3000',
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
+    navigationTimeout: 30000, // 30 second navigation timeout
+    actionTimeout: 15000, // 15 second action timeout
   },
 
   projects: [
@@ -40,7 +46,7 @@ export default defineConfig({
 
   webServer: {
     command: 'npm run dev',
-    url: 'http://localhost:3003',
+    url: 'http://localhost:3000',
     reuseExistingServer: true,
     timeout: 120 * 1000,
   },

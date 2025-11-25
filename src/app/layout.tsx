@@ -1,20 +1,20 @@
-import { Suspense } from "react";
-import { Providers } from "./providers";
-import MonitoringErrorBoundary from "@/components/MonitoringErrorBoundary";
-import { Toaster } from "@/components/ui/toaster";
-import type { Metadata, Viewport } from "next";
-import Script from "next/script";
-import "./globals.css";
-import { MainLayout } from "@/components/layout/main-layout";
-import { SkipLinks } from "@/components/accessibility/skip-links";
 import { AnalyticsClient } from "@/app/analytics-client";
 import { MonitoringClient } from "@/app/monitoring-client";
 import { AccessibilityInitializer } from "@/components/AccessibilityInitializer";
+import MonitoringErrorBoundary from "@/components/MonitoringErrorBoundary";
+import { SkipLinks } from "@/components/accessibility/skip-links";
+import { MainLayout } from "@/components/layout/main-layout";
+import { Toaster } from "@/components/ui/toaster";
+import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
+import Script from "next/script";
+import { Suspense } from "react";
+import "./globals.css";
+import { Providers } from "./providers";
 
 const inter = Inter({
-  subsets: ['latin'],
-  display: 'swap',
+  subsets: ["latin"],
+  display: "swap",
   preload: true,
 });
 
@@ -24,7 +24,8 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: "Tanium Certified Operator Exam System",
-  description: "Master the Tanium Certified Operator certification with interactive practice and comprehensive study modules",
+  description:
+    "Master the Tanium Certified Operator certification with interactive practice and comprehensive study modules",
   keywords: ["Tanium", "TCO", "Certification", "Training", "Exam Preparation"],
   authors: [{ name: "TCO Study Platform" }],
 };
@@ -37,7 +38,12 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${inter.className} dark`} data-scroll-behavior="smooth">
+    <html
+      lang="en"
+      className={`${inter.className} dark`}
+      data-scroll-behavior="smooth"
+      suppressHydrationWarning
+    >
       <head>
         {/* PWA Manifest */}
         <link rel="manifest" href="/manifest.json" />
@@ -53,7 +59,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* PDF.js from CDN for OCR functionality - bypasses webpack bundling issues */}
         <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
       </head>
-      <body className="font-sans antialiased">
+      <body className="font-sans antialiased" suppressHydrationWarning>
         {/* Load PDF.js from CDN - bypasses webpack bundling issues */}
         <Script
           src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"

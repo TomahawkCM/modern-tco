@@ -392,20 +392,32 @@ export const DEFAULT_CATEGORIES: Omit<Category, 'id' | 'createdAt'>[] = [
 // Helper function to initialize default categories
 export async function initializeDefaultCategories(): Promise<void> {
   try {
+    console.log('[DB] initializeDefaultCategories: Starting...');
+    console.log('[DB] initializeDefaultCategories: Fetching existing categories...');
     const existing = await db.categories.toArray();
+    console.log('[DB] initializeDefaultCategories: Found', existing.length, 'existing categories');
+
     if (existing.length === 0) {
+      console.log('[DB] initializeDefaultCategories: No categories found, adding defaults...');
       const categories = DEFAULT_CATEGORIES.map((cat, index) => ({
         ...cat,
         id: `cat_${index + 1}`,
         createdAt: new Date(),
       }));
       await db.categories.bulkAdd(categories);
+      console.log('[DB] initializeDefaultCategories: Added', categories.length, 'default categories');
+    } else {
+      console.log('[DB] initializeDefaultCategories: Categories already exist, skipping initialization');
     }
+    console.log('[DB] initializeDefaultCategories: Complete');
   } catch (error) {
     // If categories already exist (ConstraintError), silently ignore
     // This can happen if multiple components try to initialize simultaneously
+    console.log('[DB] initializeDefaultCategories: Caught error:', error);
     if (error instanceof Error && error.name !== 'ConstraintError') {
-      console.error('Error initializing categories:', error);
+      console.error('[DB] initializeDefaultCategories: Non-constraint error:', error);
+    } else {
+      console.log('[DB] initializeDefaultCategories: ConstraintError (expected), ignoring');
     }
   }
 }

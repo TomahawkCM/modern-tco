@@ -4,88 +4,44 @@
  * Phase 3 Task 3.1.1: Implemented collapsible sidebar for screens <768px
  */
 
-'use client';
+"use client";
 
-import { useState, useRef } from 'react';
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import {
-  Home,
-  Receipt,
-  PieChart,
-  Target,
-  TrendingUp,
-  BarChart3,
-  Settings,
-  Download,
-  Upload,
-  Tags,
-  Menu,
-  Wallet,
-  Camera,
-  CreditCard
-} from 'lucide-react';
-import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-} from '@/components/ui/sheet';
-import { Button } from '@/components/ui/button';
-import { useKeyboardShortcuts } from '@/hooks/useKeyboardShortcuts';
-import { ShortcutsModal } from '@/components/budget/ShortcutsModal';
-import { OnboardingTour } from '@/components/budget/OnboardingTour';
-import { ToastProvider } from '@/components/budget/Toast';
-import { PWAInstallPrompt } from '@/components/budget/PWAInstallPrompt';
-import { usePWA } from '@/hooks/usePWA';
-import { ChatbotProvider } from '@/contexts/ChatbotContext';
-import { ChatbotWidget } from '@/components/budget/chatbot/ChatbotWidget';
-import { BudgetAccessibilityInitializer } from '@/components/budget/BudgetAccessibilityInitializer';
+import { BudgetAccessibilityInitializer } from "@/components/budget/BudgetAccessibilityInitializer";
+import { OnboardingTour } from "@/components/budget/OnboardingTour";
+import { PWAInstallPrompt } from "@/components/budget/PWAInstallPrompt";
+import { ShortcutsModal } from "@/components/budget/ShortcutsModal";
+import { ToastProvider } from "@/components/budget/Toast";
+import { ChatbotWidget } from "@/components/budget/chatbot/ChatbotWidget";
+import { MobileNav } from "@/components/budget/layout/MobileNav";
+import { Sidebar } from "@/components/budget/layout/Sidebar";
+import { Button } from "@/components/ui/button";
+import { Sheet, SheetContent } from "@/components/ui/sheet";
+import { ChatbotProvider } from "@/contexts/ChatbotContext";
+import { useKeyboardShortcuts } from "@/hooks/useKeyboardShortcuts";
+import { usePWA } from "@/hooks/usePWA";
+import { Menu, Sparkles } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
-interface NavItem {
-  name: string;
-  href: string;
-  icon: React.ComponentType<{ className?: string }>;
-}
-
-const navigation: NavItem[] = [
-  { name: 'Dashboard', href: '/budget-app', icon: Home },
-  { name: 'Transactions', href: '/budget-app/transactions', icon: Receipt },
-  { name: 'Scan Receipt', href: '/budget-app/ocr', icon: Camera },
-  { name: 'Categories', href: '/budget-app/categories', icon: Tags },
-  { name: 'Budgets', href: '/budget-app/budgets', icon: PieChart },
-  { name: 'Loans', href: '/budget-app/loans', icon: CreditCard },
-  { name: 'Investments', href: '/budget-app/investments', icon: Wallet },
-  { name: 'Future Plans', href: '/budget-app/planning/future', icon: Target },
-  { name: 'Retirement', href: '/budget-app/planning/retirement', icon: TrendingUp },
-  { name: 'Reports', href: '/budget-app/reports', icon: BarChart3 },
-];
-
-export default function BudgetAppLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function BudgetAppLayout({ children }: { children: React.ReactNode }) {
   const router = useRouter();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [showShortcutsModal, setShowShortcutsModal] = useState(false);
   const [showNewTransactionModal, setShowNewTransactionModal] = useState(false);
-  const searchInputRef = useRef<HTMLInputElement>(null);
-  
+
   // PWA functionality - Phase 3.2
   usePWA(); // Register service worker
 
   // Keyboard shortcuts
   useKeyboardShortcuts({
     onNewTransaction: () => {
-      // This will be handled by parent page if they provide the handler
-      // For now, we'll navigate to transactions page
-      void router.push('/budget-app/transactions');
+      void router.push("/budget-app/transactions");
       setShowNewTransactionModal(true);
     },
     onSearch: () => {
-      // Focus search input if it exists on the current page
-      const searchInput = document.querySelector<HTMLInputElement>('input[type="search"], input[placeholder*="Search"]');
+      const searchInput = document.querySelector<HTMLInputElement>(
+        'input[type="search"], input[placeholder*="Search"]'
+      );
       if (searchInput) {
         searchInput.focus();
       }
@@ -99,185 +55,82 @@ export default function BudgetAppLayout({
     },
   });
 
-  // Sidebar content component to reuse in both desktop and mobile views
-  const SidebarContent = () => (
-    <>
-      {/* Logo/Header */}
-      <div className="p-6 border-b border-gray-200 dark:border-border">
-        <h1 className="text-2xl font-bold text-gray-900 dark:text-foreground">Budget App</h1>
-        <p className="text-sm text-gray-500 mt-2 dark:text-muted-foreground">Household Finance Manager</p>
-      </div>
-
-      {/* Navigation */}
-      <nav className="flex-1 p-4 space-y-2" aria-label="Main navigation">
-        {navigation.map((item) => (
-          <Link
-            key={item.name}
-            href={item.href}
-            onClick={() => setMobileMenuOpen(false)}
-            className="flex items-center gap-4 px-4 py-2 min-h-[44px] text-gray-700 rounded-lg hover:bg-gray-100 hover:text-gray-900 dark:text-muted-foreground dark:hover:bg-muted dark:hover:text-foreground transition-colors focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
-          >
-            <item.icon className="w-6 h-6" />
-            <span className="font-medium">{item.name}</span>
-          </Link>
-        ))}
-      </nav>
-
-      {/* Footer Actions */}
-      <div className="p-4 border-t border-gray-200 dark:border-border space-y-2">
-        <Link
-          href="/budget-app/import"
-          onClick={() => setMobileMenuOpen(false)}
-          className="flex items-center gap-4 px-4 py-2 min-h-[44px] text-gray-700 rounded-lg hover:bg-gray-100 transition-colors w-full dark:text-muted-foreground dark:hover:bg-muted dark:hover:text-foreground focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
-        >
-          <Upload className="w-6 h-6" />
-          <span className="font-medium">Import CSV</span>
-        </Link>
-        <Link
-          href="/budget-app/export"
-          onClick={() => setMobileMenuOpen(false)}
-          className="flex items-center gap-4 px-4 py-2 min-h-[44px] text-gray-700 rounded-lg hover:bg-gray-100 transition-colors w-full dark:text-muted-foreground dark:hover:bg-muted dark:hover:text-foreground focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
-        >
-          <Download className="w-6 h-6" />
-          <span className="font-medium">Export Data</span>
-        </Link>
-        <Link
-          href="/budget-app/settings"
-          onClick={() => setMobileMenuOpen(false)}
-          className="flex items-center gap-4 px-4 py-2 min-h-[44px] text-gray-700 rounded-lg hover:bg-gray-100 transition-colors w-full dark:text-muted-foreground dark:hover:bg-muted dark:hover:text-foreground focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
-        >
-          <Settings className="w-6 h-6" />
-          <span className="font-medium">Settings</span>
-        </Link>
-
-        {/* Keyboard Shortcuts Help */}
-        <button
-          onClick={() => {
-            setShowShortcutsModal(true);
-            setMobileMenuOpen(false);
-          }}
-          className="flex items-center gap-4 px-4 py-2 min-h-[44px] text-gray-700 rounded-lg hover:bg-gray-100 transition-colors w-full text-left dark:text-muted-foreground dark:hover:bg-muted dark:hover:text-foreground focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
-        >
-          <span className="text-xs font-mono font-semibold w-6 h-6 flex items-center justify-center">?</span>
-          <span className="font-medium text-sm">Keyboard Shortcuts</span>
-        </button>
-      </div>
-    </>
-  );
-
   return (
     <ChatbotProvider>
       <BudgetAccessibilityInitializer />
-      <div className="flex min-h-screen bg-background text-foreground">
-      {/* Desktop Sidebar - hidden on mobile (<768px) */}
-      <aside className="hidden md:flex w-64 bg-card border-r border-border md:sticky md:top-0 md:h-screen">
-        <div className="flex flex-col h-full w-full">
-          <SidebarContent />
-        </div>
-      </aside>
+      {/* Global Background - Dark Mesh Gradient */}
+      <div className="fixed inset-0 -z-20 bg-slate-950" />
+      <div className="fixed inset-0 -z-10 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-slate-900 via-slate-950 to-black" />
+      <div className="fixed inset-0 -z-10 bg-[url('/grid.svg')] bg-center opacity-20 [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]" />
 
-      {/* Mobile Sidebar Sheet */}
-      <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
-        <SheetContent side="left" className="w-64 p-0 bg-card">
-          <div className="flex flex-col h-full">
-            <SidebarContent />
-          </div>
-        </SheetContent>
-      </Sheet>
-
-      {/* Main Content Area */}
-      <div className="flex-1 flex flex-col">
-        {/* Mobile Header with Hamburger Menu - visible only on mobile */}
-        <header className="md:hidden sticky top-0 z-30 bg-card border-b border-border px-4 py-2 flex items-center gap-4">
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={() => setMobileMenuOpen(true)}
-            className="md:hidden"
-            aria-label="Toggle navigation menu"
-          >
-            <Menu className="h-6 w-6" />
-          </Button>
-          <h1 className="text-lg font-bold">Budget App</h1>
-        </header>
-
-        {/* Main Content */}
-        <main className="flex-1 pb-20 md:pb-8" tabIndex={0} aria-label="Main content area">
-          <div className="max-w-7xl mx-auto p-4 md:p-8">
-            <ToastProvider>
-              {children}
-            </ToastProvider>
-          </div>
-        </main>
-
-        {/* Bottom Navigation Bar - Mobile Only */}
-        {/* Phase 3 Task 3.1.2: Bottom navigation for quick access to main features */}
-        {/* Phase 3 Task 3.1.3: Touch targets ≥44px for accessibility */}
-        <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-card border-t border-border px-2 py-2 z-40" aria-label="Mobile bottom navigation">
-          <div className="flex justify-around items-center">
-            {/* Dashboard */}
-            <Link
-              href="/budget-app"
-              className="flex flex-col items-center gap-2 px-4 py-2 text-muted-foreground hover:text-primary transition-colors min-w-[64px] min-h-[44px] rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
-            >
-              <Home className="w-6 h-6" />
-              <span className="text-xs font-medium">Home</span>
-            </Link>
-
-            {/* Transactions */}
-            <Link
-              href="/budget-app/transactions"
-              className="flex flex-col items-center gap-2 px-4 py-2 text-muted-foreground hover:text-primary transition-colors min-w-[64px] min-h-[44px] rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
-            >
-              <Receipt className="w-6 h-6" />
-              <span className="text-xs font-medium">Transactions</span>
-            </Link>
-
-            {/* Categories */}
-            <Link
-              href="/budget-app/categories"
-              className="flex flex-col items-center gap-2 px-4 py-2 text-muted-foreground hover:text-primary transition-colors min-w-[64px] min-h-[44px] rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
-            >
-              <Tags className="w-6 h-6" />
-              <span className="text-xs font-medium">Categories</span>
-            </Link>
-
-            {/* Budgets */}
-            <Link
-              href="/budget-app/budgets"
-              className="flex flex-col items-center gap-2 px-4 py-2 text-muted-foreground hover:text-primary transition-colors min-w-[64px] min-h-[44px] rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
-            >
-              <PieChart className="w-6 h-6" />
-              <span className="text-xs font-medium">Budgets</span>
-            </Link>
-
-            {/* More Menu */}
-            <Button
-              variant="ghost"
-              onClick={() => setMobileMenuOpen(true)}
-              className="flex flex-col items-center gap-2 px-4 py-2 text-muted-foreground hover:text-primary transition-colors h-auto min-w-[64px] min-h-[44px]"
-              aria-label="More options"
-            >
-              <Menu className="w-6 h-6" />
-              <span className="text-xs font-medium">More</span>
-            </Button>
-          </div>
-        </nav>
+      {/* Ambient Glows */}
+      <div className="pointer-events-none fixed left-0 top-0 -z-10 h-full w-full overflow-hidden">
+        <div className="absolute left-[-10%] top-[-10%] h-[40%] w-[40%] rounded-full bg-teal-500/10 blur-[120px]" />
+        <div className="absolute bottom-[-10%] right-[-10%] h-[40%] w-[40%] rounded-full bg-blue-600/10 blur-[120px]" />
       </div>
 
-      {/* Shortcuts Help Modal */}
-      {showShortcutsModal && (
-        <ShortcutsModal onClose={() => setShowShortcutsModal(false)} />
-      )}
+      <div className="flex min-h-screen text-slate-200">
+        {/* Desktop Sidebar */}
+        <Sidebar
+          onSearch={() => {
+            /* Implement search logic */
+          }}
+          onShowShortcuts={() => setShowShortcutsModal(true)}
+        />
 
-      {/* Onboarding Tour */}
-      <OnboardingTour />
+        {/* Mobile Sidebar Sheet */}
+        <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
+          <SheetContent side="left" className="w-72 border-r-0 bg-transparent p-0 shadow-2xl">
+            <Sidebar
+              isMobile
+              onClose={() => setMobileMenuOpen(false)}
+              onShowShortcuts={() => setShowShortcutsModal(true)}
+            />
+          </SheetContent>
+        </Sheet>
 
-      {/* PWA Install Prompt - Phase 3.2.3 */}
-      <PWAInstallPrompt />
+        {/* Main Content Area */}
+        <div className="flex min-w-0 flex-1 flex-col">
+          {/* Mobile Header */}
+          <header className="sticky top-0 z-30 flex items-center justify-between border-b border-white/10 bg-slate-950/80 px-4 py-3 backdrop-blur-md md:hidden">
+            <div className="flex items-center gap-3">
+              <div className="rounded-lg bg-gradient-to-br from-teal-400 to-blue-500 p-1.5">
+                <Sparkles className="h-5 w-5 text-white" />
+              </div>
+              <h1 className="text-lg font-bold text-white">Budget App</h1>
+            </div>
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setMobileMenuOpen(true)}
+              className="text-slate-400 hover:bg-white/10 hover:text-white"
+            >
+              <Menu className="h-6 w-6" />
+            </Button>
+          </header>
 
-      {/* AI Chatbot Widget */}
-      <ChatbotWidget />
+          {/* Main Content */}
+          <main className="flex-1 overflow-x-hidden pb-24 md:pb-8">
+            <div className="mx-auto max-w-7xl p-4 md:p-8">
+              <ToastProvider>{children}</ToastProvider>
+            </div>
+          </main>
+
+          {/* Mobile Bottom Navigation */}
+          <MobileNav onOpenMenu={() => setMobileMenuOpen(true)} />
+        </div>
+
+        {/* Shortcuts Help Modal */}
+        {showShortcutsModal && <ShortcutsModal onClose={() => setShowShortcutsModal(false)} />}
+
+        {/* Onboarding Tour */}
+        <OnboardingTour />
+
+        {/* PWA Install Prompt */}
+        <PWAInstallPrompt />
+
+        {/* AI Chatbot Widget */}
+        <ChatbotWidget />
       </div>
     </ChatbotProvider>
   );

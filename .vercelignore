@@ -47,5 +47,9 @@ nul
 *.js.map
 .chrome/
 
+# Lighthouse cache directories (Windows paths)
+CUsersrobneAppDataLocallighthouse*/
+*lighthouse*/
+
 # NOTE: src/content/modules is NOT ignored - needed for prebuild script
 # The prebuild script reads MDX files from src/content/modules/ and creates .mdx-cache/

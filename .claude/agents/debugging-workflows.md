@@ -1,3 +1,9 @@
+---
+name: debugging-workflows
+description: Comprehensive debugging workflows for the debug-specialist agent
+version: 1.0.0
+---
+
 # 🐛 Debug Specialist - Comprehensive Debugging Workflows
 
 **Agent**: debug-specialist

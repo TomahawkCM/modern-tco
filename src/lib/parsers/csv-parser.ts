@@ -798,6 +798,44 @@ function parseCSVLine(line: string): string[] {
 }
 
 /**
+ * Find best matching column in CSV row (flexible column name matching)
+ * Tries exact match first, then fuzzy matching with common variations
+ */
+function findColumn(row: CSVRow, targetColumn: string, columnType: 'date' | 'description' | 'amount'): string | null {
+  // Try exact match first
+  if (row[targetColumn] !== undefined) {
+    return row[targetColumn];
+  }
+
+  // Build list of column name variations to try
+  const keys = Object.keys(row);
+  const targetLower = targetColumn.toLowerCase();
+
+  // Define common column name patterns for each type
+  const patterns: Record<string, string[]> = {
+    date: ['date', 'trans date', 'transaction date', 'post date', 'posting date', 'posted'],
+    description: ['description', 'desc', 'details', 'detail', 'memo', 'transaction description'],
+    amount: ['amount', 'transaction amount', 'debit/credit', 'debit', 'credit', 'value'],
+  };
+
+  // Try fuzzy matching - look for columns that contain key patterns
+  for (const pattern of patterns[columnType] || []) {
+    const match = keys.find(key => key.toLowerCase().includes(pattern));
+    if (match && row[match]) {
+      return row[match];
+    }
+  }
+
+  // Last resort: exact substring match
+  const fuzzyMatch = keys.find(key => key.toLowerCase() === targetLower);
+  if (fuzzyMatch && row[fuzzyMatch]) {
+    return row[fuzzyMatch];
+  }
+
+  return null;
+}
+
+/**
  * Convert CSV rows to transactions using bank config
  */
 export function convertToTransactions(
@@ -809,9 +847,10 @@ export function convertToTransactions(
 
   for (const row of rows) {
     try {
-      const dateStr = row[bankConfig.dateColumn];
-      const description = row[bankConfig.descriptionColumn];
-      const amountStr = row[bankConfig.amountColumn];
+      // Use flexible column matching instead of exact lookups
+      const dateStr = findColumn(row, bankConfig.dateColumn, 'date');
+      const description = findColumn(row, bankConfig.descriptionColumn, 'description');
+      const amountStr = findColumn(row, bankConfig.amountColumn, 'amount');
 
       if (!dateStr || !description || !amountStr) continue;
 
@@ -869,10 +908,7 @@ export async function detectDuplicates(
   if (useSmartDetection) {
     try {
       const { detectDuplicatesEnhanced } = await import('@/lib/ai/smart-duplicate-detection');
-      await detectDuplicatesEnhanced(newTransactions, existingTransactions, {
-        enabled: true,
-        minConfidence: 0.7,
-      });
+      await detectDuplicatesEnhanced(newTransactions, existingTransactions, true);
       return; // Smart detection handles everything
     } catch (error) {
       console.warn('[CSVParser] Smart detection unavailable, falling back to basic matching:', error);

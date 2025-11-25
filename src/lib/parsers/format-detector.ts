@@ -4,7 +4,7 @@
  * Used by import wizard to route files to appropriate parsers
  */
 
-export type FileFormat = 'csv' | 'ofx' | 'qfx' | 'qbo' | 'unknown';
+export type FileFormat = 'csv' | 'ofx' | 'qfx' | 'qbo' | 'pdf' | 'unknown';
 
 export interface FormatDetectionResult {
   format: FileFormat;
@@ -43,6 +43,17 @@ export function detectFromContent(content: string): {
 } {
   const trimmed = content.trim();
   const upper = trimmed.toUpperCase();
+
+  // ========================================
+  // PDF (starts with %PDF- signature)
+  // ========================================
+  if (trimmed.startsWith('%PDF-')) {
+    return {
+      format: 'pdf',
+      confidence: 0.99,
+      signature: 'PDF',
+    };
+  }
 
   // ========================================
   // OFX 2.x (XML with <?xml declaration)
@@ -220,7 +231,7 @@ function combineSignals(
   // Low confidence - fall back to extension
   // ========================================
   if (contentAnalysis.confidence < 0.5) {
-    if (extension && ['csv', 'ofx', 'qfx', 'qbo'].includes(extension)) {
+    if (extension && ['csv', 'ofx', 'qfx', 'qbo', 'pdf'].includes(extension)) {
       result.format = extension as FileFormat;
       result.confidence = 0.5; // Extension-based detection has medium confidence
       result.suggestions?.push(
@@ -230,7 +241,7 @@ function combineSignals(
       result.format = 'unknown';
       result.confidence = 0;
       result.suggestions?.push(
-        `Unable to detect file format. Please ensure the file is a valid CSV, OFX, or QFX bank statement.`
+        `Unable to detect file format. Please ensure the file is a valid CSV, OFX, QFX, or PDF bank statement.`
       );
     }
   }
@@ -332,6 +343,7 @@ export function getFormatDisplayName(format: FileFormat): string {
     ofx: 'OFX (Open Financial Exchange)',
     qfx: 'QFX (Quicken)',
     qbo: 'QBO (QuickBooks)',
+    pdf: 'PDF (Bank Statement)',
     unknown: 'Unknown Format',
   };
   return names[format] || 'Unknown Format';
@@ -341,7 +353,7 @@ export function getFormatDisplayName(format: FileFormat): string {
  * Get supported formats list
  */
 export function getSupportedFormats(): FileFormat[] {
-  return ['csv', 'ofx', 'qfx'];
+  return ['csv', 'ofx', 'qfx', 'pdf'];
   // Note: QBO support can be added in future
 }
 

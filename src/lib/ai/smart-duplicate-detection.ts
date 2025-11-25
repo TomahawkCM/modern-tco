@@ -1,28 +1,69 @@
 /**
- * Smart Duplicate Detection using OpenAI API
- * Provides semantic similarity matching for transaction descriptions
- * Handles variants like "AMAZON PRIME" vs "AMZN MKTP CA"
+ * Enhanced Smart Duplicate Detection with Context
+ * Context-aware duplicate detection using merchant normalization, fuzzy matching
  *
- * Privacy: Only sends cleaned transaction descriptions (no account numbers, names, addresses)
- * Opt-in: Requires user consent via privacy settings
+ * Features:
+ * - Flexible amount tolerance (1% or $0.50, whichever is greater)
+ * - Wide date range (±3 days for pending transactions)
+ * - Merchant normalization integration
+ * - Refund detection (don't flag refunds as duplicates of originals)
+ * - Three-tiered confidence scoring (90%+, 70-90%, <70%)
+ * - Fuzzy description matching
+ * - Privacy-first (cleaned descriptions only)
+ *
+ * Design Principles:
+ * - Conservative: No auto-merge, always user review
+ * - Context-aware: Uses enriched merchant names
+ * - User-friendly: Clear explanations for matches
+ * - Performance: Batch processing, caching
+ *
+ * CHANGE LOG (2025-11-24):
+ * - AI semantic matching disabled by default (useAI: false)
+ * - Rule-based detection (exact, fuzzy, merchant) is primary path
+ * - AI can be enabled via settings for power users
  */
 
-import OpenAI from 'openai';
+import { chatCompletionJSON } from './openai-service';
 import type { ParsedTransaction, Transaction } from '@/types/budget';
+
+// ============================================================================
+// Types
+// ============================================================================
 
 export interface DuplicateMatch {
   newTransaction: ParsedTransaction;
   existingTransaction: Transaction;
   confidence: number; // 0-1 scale
   reason: string; // Explanation of why they match
+  matchType: 'exact' | 'fuzzy' | 'semantic' | 'merchant' | 'fitid';
 }
 
 export interface SmartDuplicateDetectionOptions {
-  apiKey?: string;
   enabled?: boolean; // Privacy opt-in flag
   minConfidence?: number; // Minimum confidence threshold (default: 0.7)
   batchSize?: number; // Number of transactions to check at once (default: 10)
+  dateToleranceDays?: number; // Date range tolerance (default: 3)
+  amountTolerancePercent?: number; // Percentage tolerance (default: 0.01 = 1%)
+  amountToleranceFixed?: number; // Fixed dollar tolerance (default: 0.50)
 }
+
+export type ConfidenceTier = 'high' | 'medium' | 'low';
+
+interface AIMatchResponse {
+  matches: Array<{
+    new_index: number;
+    existing_id: string;
+    is_duplicate: boolean;
+    confidence: number;
+    reason: string;
+    match_type: 'exact' | 'fuzzy' | 'semantic' | 'merchant';
+  }>;
+  analysis: string;
+}
+
+// ============================================================================
+// Utility Functions
+// ============================================================================
 
 /**
  * Clean transaction description for privacy
@@ -53,175 +94,140 @@ function cleanDescription(description: string): string {
 }
 
 /**
- * Check if two transaction descriptions are semantically similar using OpenAI API
+ * Calculate Levenshtein distance for fuzzy matching
  */
-async function checkSemanticSimilarity(
-  client: OpenAI,
-  desc1: string,
-  desc2: string
-): Promise<{ isDuplicate: boolean; confidence: number; reason: string }> {
-  const cleaned1 = cleanDescription(desc1);
-  const cleaned2 = cleanDescription(desc2);
+function levenshteinDistance(str1: string, str2: string): number {
+  const matrix: number[][] = [];
 
-  // If cleaned descriptions are identical, skip API call
-  if (cleaned1.toLowerCase() === cleaned2.toLowerCase()) {
-    return {
-      isDuplicate: true,
-      confidence: 1.0,
-      reason: 'Exact match after cleaning',
-    };
+  for (let i = 0; i <= str2.length; i++) {
+    matrix[i] = [i];
   }
 
-  const prompt = `You are a financial transaction duplicate detection system. Determine if these two transaction descriptions refer to the same purchase or payment.
+  for (let j = 0; j <= str1.length; j++) {
+    matrix[0][j] = j;
+  }
 
-Transaction 1: "${cleaned1}"
-Transaction 2: "${cleaned2}"
-
-Consider:
-- Same merchant/vendor (e.g., "AMAZON PRIME" = "AMZN MKTP CA")
-- Same service (e.g., "NETFLIX.COM" = "NETFLIX SUBSCRIPTION")
-- Abbreviations and variations
-- Location codes (e.g., "STARBUCKS #1234" = "STARBUCKS #5678" - same merchant)
-
-Respond with JSON:
-{
-  "isDuplicate": boolean,
-  "confidence": 0.0-1.0,
-  "reason": "Brief explanation"
-}`;
-
-  try {
-    const response = await client.chat.completions.create({
-      model: 'gpt-4o-mini', // Fast and cost-effective model
-      messages: [
-        {
-          role: 'system',
-          content: 'You are a financial transaction analysis system. Be precise and conservative - only mark as duplicates if you are confident they refer to the same transaction.'
-        },
-        {
-          role: 'user',
-          content: prompt
-        }
-      ],
-      response_format: { type: 'json_object' },
-      temperature: 0.1, // Low temperature for consistent results
-      max_tokens: 200,
-    });
-
-    const content = response.choices[0]?.message?.content;
-    if (content) {
-      const result = JSON.parse(content);
-      return {
-        isDuplicate: result.isDuplicate || false,
-        confidence: Math.max(0, Math.min(1, result.confidence || 0)),
-        reason: result.reason || 'Semantic match',
-      };
+  for (let i = 1; i <= str2.length; i++) {
+    for (let j = 1; j <= str1.length; j++) {
+      if (str2.charAt(i - 1) === str1.charAt(j - 1)) {
+        matrix[i][j] = matrix[i - 1][j - 1];
+      } else {
+        matrix[i][j] = Math.min(
+          matrix[i - 1][j - 1] + 1, // substitution
+          matrix[i][j - 1] + 1, // insertion
+          matrix[i - 1][j] + 1 // deletion
+        );
+      }
     }
-
-    // Fallback: conservative approach
-    return {
-      isDuplicate: false,
-      confidence: 0,
-      reason: 'Unable to parse API response',
-    };
-  } catch (error) {
-    console.error('[SmartDuplicate] API error:', error);
-    // Fallback: don't mark as duplicate on error
-    return {
-      isDuplicate: false,
-      confidence: 0,
-      reason: `API error: ${error instanceof Error ? error.message : 'Unknown error'}`,
-    };
   }
+
+  return matrix[str2.length][str1.length];
 }
 
 /**
- * Detect duplicates using semantic similarity with OpenAI API
- * Only checks transactions that pass basic filters (date + amount similarity)
+ * Calculate fuzzy match score (0-1)
  */
-export async function detectSmartDuplicates(
+function fuzzyMatchScore(str1: string, str2: string): number {
+  const clean1 = str1.toLowerCase().trim();
+  const clean2 = str2.toLowerCase().trim();
+
+  if (clean1 === clean2) return 1.0;
+
+  const distance = levenshteinDistance(clean1, clean2);
+  const maxLength = Math.max(clean1.length, clean2.length);
+
+  return 1 - distance / maxLength;
+}
+
+/**
+ * Get confidence tier based on confidence score
+ */
+export function getConfidenceTier(confidence: number): ConfidenceTier {
+  if (confidence >= 0.9) return 'high';
+  if (confidence >= 0.7) return 'medium';
+  return 'low';
+}
+
+/**
+ * Detect if a transaction is likely a refund of another transaction
+ */
+function isLikelyRefund(
+  newTx: ParsedTransaction,
+  existingTx: Transaction,
+  dateToleranceDays: number = 30
+): boolean {
+  // Check if amounts are opposite (one negative, one positive)
+  const amountsOpposite =
+    (newTx.amount < 0 && existingTx.amount > 0) || (newTx.amount > 0 && existingTx.amount < 0);
+
+  if (!amountsOpposite) return false;
+
+  // Check if amounts are similar in magnitude
+  const amountMatch = Math.abs(Math.abs(newTx.amount) - Math.abs(existingTx.amount)) < 0.01;
+
+  if (!amountMatch) return false;
+
+  // Check if within date range (refunds usually happen within 30 days)
+  const dateDiff = Math.abs(newTx.date.getTime() - existingTx.date.getTime());
+  const daysDiff = dateDiff / (24 * 60 * 60 * 1000);
+
+  if (daysDiff > dateToleranceDays) return false;
+
+  // Check if descriptions are similar
+  const descriptionSimilarity = fuzzyMatchScore(newTx.description, existingTx.description);
+
+  return descriptionSimilarity > 0.7;
+}
+
+// ============================================================================
+// Rule-Based Duplicate Detection
+// ============================================================================
+
+/**
+ * Detect exact matches using FITID (OFX files) or exact criteria
+ */
+function detectExactMatches(
   newTransactions: ParsedTransaction[],
-  existingTransactions: Transaction[],
-  options: SmartDuplicateDetectionOptions = {}
-): Promise<DuplicateMatch[]> {
-  const {
-    apiKey = process.env.NEXT_PUBLIC_OPENAI_API_KEY,
-    enabled = false,
-    minConfidence = 0.7,
-    batchSize = 10,
-  } = options;
-
-  // Privacy check: only proceed if enabled
-  if (!enabled) {
-    return [];
-  }
-
-  // API key check
-  if (!apiKey) {
-    console.warn('[SmartDuplicate] No API key provided. Skipping smart duplicate detection.');
-    return [];
-  }
-
-  const client = new OpenAI({ apiKey, dangerouslyAllowBrowser: true });
+  existingTransactions: Transaction[]
+): DuplicateMatch[] {
   const matches: DuplicateMatch[] = [];
-
-  // Filter candidates: same date (±1 day) and similar amount (±$0.01)
-  const candidates: Array<{
-    newTx: ParsedTransaction;
-    existingTx: Transaction;
-  }> = [];
 
   for (const newTx of newTransactions) {
     // Skip if already marked as duplicate
     if (newTx.isDuplicate) continue;
 
-    for (const existingTx of existingTransactions) {
-      // Basic filters: date and amount similarity
-      const dateDiff = Math.abs(
-        newTx.date.getTime() - existingTx.date.getTime()
-      );
-      const daysDiff = dateDiff / (1000 * 60 * 60 * 24);
-      const amountDiff = Math.abs(newTx.amount - existingTx.amount);
-
-      // Only check if date is within 1 day and amount is within $0.01
-      if (daysDiff <= 1 && amountDiff < 0.01) {
-        candidates.push({ newTx, existingTx });
+    // FITID match (perfect match for OFX files)
+    if (newTx.fitid) {
+      const exactMatch = existingTransactions.find((existing) => existing.fitid === newTx.fitid);
+      if (exactMatch) {
+        matches.push({
+          newTransaction: newTx,
+          existingTransaction: exactMatch,
+          confidence: 1.0,
+          reason: 'Exact FITID match (OFX transaction ID)',
+          matchType: 'fitid',
+        });
+        continue;
       }
     }
-  }
 
-  // Process in batches to avoid rate limits
-  for (let i = 0; i < candidates.length; i += batchSize) {
-    const batch = candidates.slice(i, i + batchSize);
+    // Exact match: same date, amount, and description
+    const exactMatch = existingTransactions.find((existing) => {
+      const sameDate = newTx.date.toISOString().split('T')[0] === existing.date.toISOString().split('T')[0];
+      const sameAmount = Math.abs(newTx.amount - existing.amount) < 0.01;
+      const sameDescription = cleanDescription(newTx.description).toLowerCase() === cleanDescription(existing.description).toLowerCase();
 
-    // Process batch concurrently
-    const batchPromises = batch.map(async ({ newTx, existingTx }) => {
-      const result = await checkSemanticSimilarity(
-        client,
-        newTx.description,
-        existingTx.description
-      );
-
-      if (result.isDuplicate && result.confidence >= minConfidence) {
-        return {
-          newTransaction: newTx,
-          existingTransaction: existingTx,
-          confidence: result.confidence,
-          reason: result.reason,
-        };
-      }
-      return null;
+      return sameDate && sameAmount && sameDescription;
     });
 
-    const batchResults = await Promise.all(batchPromises);
-    const validMatches = batchResults.filter(
-      (match): match is DuplicateMatch => match !== null
-    );
-    matches.push(...validMatches);
-
-    // Rate limiting: small delay between batches
-    if (i + batchSize < candidates.length) {
-      await new Promise((resolve) => setTimeout(resolve, 100));
+    if (exactMatch) {
+      matches.push({
+        newTransaction: newTx,
+        existingTransaction: exactMatch,
+        confidence: 1.0,
+        reason: 'Exact match (same date, amount, and description)',
+        matchType: 'exact',
+      });
     }
   }
 
@@ -229,44 +235,396 @@ export async function detectSmartDuplicates(
 }
 
 /**
- * Enhanced duplicate detection that combines basic matching with smart detection
+ * Detect fuzzy matches using flexible tolerances
  */
-export async function detectDuplicatesEnhanced(
+function detectFuzzyMatches(
   newTransactions: ParsedTransaction[],
   existingTransactions: Transaction[],
-  options: SmartDuplicateDetectionOptions = {}
-): Promise<void> {
-  // First, use FITID for perfect matches (OFX files)
+  options: SmartDuplicateDetectionOptions
+): DuplicateMatch[] {
+  const matches: DuplicateMatch[] = [];
+  const {
+    dateToleranceDays = 3,
+    amountTolerancePercent = 0.01, // 1%
+    amountToleranceFixed = 0.5, // $0.50
+  } = options;
+
   for (const newTx of newTransactions) {
-    if (newTx.fitid) {
-      const exactMatch = existingTransactions.find(
-        (existing) => existing.fitid === newTx.fitid
-      );
-      if (exactMatch) {
-        newTx.isDuplicate = true;
-        newTx.confidence = 1.0;
+    // Skip if already marked as duplicate
+    if (newTx.isDuplicate) continue;
+
+    for (const existingTx of existingTransactions) {
+      // Skip if this is a refund (don't flag refunds as duplicates)
+      if (isLikelyRefund(newTx, existingTx)) {
         continue;
+      }
+
+      // Date tolerance (±3 days by default)
+      const dateDiff = Math.abs(newTx.date.getTime() - existingTx.date.getTime());
+      const daysDiff = dateDiff / (24 * 60 * 60 * 1000);
+
+      if (daysDiff > dateToleranceDays) continue;
+
+      // Amount tolerance (1% or $0.50, whichever is greater)
+      const amountDiff = Math.abs(newTx.amount - existingTx.amount);
+      const percentTolerance = Math.abs(newTx.amount) * amountTolerancePercent;
+      const tolerance = Math.max(percentTolerance, amountToleranceFixed);
+
+      if (amountDiff > tolerance) continue;
+
+      // Fuzzy description match
+      const descriptionScore = fuzzyMatchScore(newTx.description, existingTx.description);
+
+      if (descriptionScore >= 0.85) {
+        // High similarity
+        const confidence = Math.min(1.0, descriptionScore + 0.1); // Boost confidence slightly
+
+        matches.push({
+          newTransaction: newTx,
+          existingTransaction: existingTx,
+          confidence,
+          reason: `Similar description (${(descriptionScore * 100).toFixed(0)}% match), within ${daysDiff.toFixed(0)} days and $${amountDiff.toFixed(2)}`,
+          matchType: 'fuzzy',
+        });
       }
     }
   }
 
-  // Then, use smart detection for remaining transactions
-  const smartMatches = await detectSmartDuplicates(
-    newTransactions.filter((tx) => !tx.isDuplicate),
-    existingTransactions,
-    options
-  );
+  return matches;
+}
 
-  // Apply smart matches
-  const minConfidence = options.minConfidence || 0.7;
-  for (const match of smartMatches) {
-    match.newTransaction.isDuplicate = match.confidence >= minConfidence;
+/**
+ * Detect merchant matches using normalized merchant names
+ */
+function detectMerchantMatches(
+  newTransactions: ParsedTransaction[],
+  existingTransactions: Transaction[],
+  options: SmartDuplicateDetectionOptions
+): DuplicateMatch[] {
+  const matches: DuplicateMatch[] = [];
+  const { dateToleranceDays = 3, amountTolerancePercent = 0.01, amountToleranceFixed = 0.5 } = options;
+
+  for (const newTx of newTransactions) {
+    // Skip if already marked as duplicate or no normalized merchant
+    if (newTx.isDuplicate || !(newTx as any).normalizedMerchant) continue;
+
+    const normalizedMerchant = (newTx as any).normalizedMerchant;
+
+    for (const existingTx of existingTransactions) {
+      // Skip if existing transaction has no category (can't infer merchant)
+      if (!existingTx.description) continue;
+
+      // Skip if this is a refund
+      if (isLikelyRefund(newTx, existingTx)) continue;
+
+      // Date tolerance
+      const dateDiff = Math.abs(newTx.date.getTime() - existingTx.date.getTime());
+      const daysDiff = dateDiff / (24 * 60 * 60 * 1000);
+
+      if (daysDiff > dateToleranceDays) continue;
+
+      // Amount tolerance
+      const amountDiff = Math.abs(newTx.amount - existingTx.amount);
+      const percentTolerance = Math.abs(newTx.amount) * amountTolerancePercent;
+      const tolerance = Math.max(percentTolerance, amountToleranceFixed);
+
+      if (amountDiff > tolerance) continue;
+
+      // Check if normalized merchant appears in existing description
+      const existingDescLower = existingTx.description.toLowerCase();
+      const merchantLower = normalizedMerchant.toLowerCase();
+
+      if (existingDescLower.includes(merchantLower)) {
+        const confidence = 0.85; // High but not perfect (no merchant normalization on existing)
+
+        matches.push({
+          newTransaction: newTx,
+          existingTransaction: existingTx,
+          confidence,
+          reason: `Same merchant (${normalizedMerchant}), within ${daysDiff.toFixed(0)} days and $${amountDiff.toFixed(2)}`,
+          matchType: 'merchant',
+        });
+      }
+    }
+  }
+
+  return matches;
+}
+
+// ============================================================================
+// AI-Powered Duplicate Detection
+// ============================================================================
+
+/**
+ * Detect semantic matches using AI
+ * Only checks transactions that pass basic filters
+ */
+async function detectSemanticMatches(
+  newTransactions: ParsedTransaction[],
+  existingTransactions: Transaction[],
+  options: SmartDuplicateDetectionOptions
+): Promise<DuplicateMatch[]> {
+  const { dateToleranceDays = 3, batchSize = 10 } = options;
+  const matches: DuplicateMatch[] = [];
+
+  // Filter candidates: within date range
+  const candidates: Array<{ newTx: ParsedTransaction; existingTx: Transaction; index: number }> = [];
+
+  newTransactions.forEach((newTx, index) => {
+    // Skip if already marked as duplicate
+    if (newTx.isDuplicate) return;
+
+    for (const existingTx of existingTransactions) {
+      // Date filter
+      const dateDiff = Math.abs(newTx.date.getTime() - existingTx.date.getTime());
+      const daysDiff = dateDiff / (24 * 60 * 60 * 1000);
+
+      if (daysDiff <= dateToleranceDays) {
+        candidates.push({ newTx, existingTx, index });
+      }
+    }
+  });
+
+  if (candidates.length === 0) {
+    return matches;
+  }
+
+  // Process in batches
+  for (let i = 0; i < candidates.length; i += batchSize) {
+    const batch = candidates.slice(i, i + batchSize);
+
+    try {
+      const prompt = buildSemanticMatchPrompt(batch);
+      const response = await chatCompletionJSON<AIMatchResponse>(prompt, {
+        model: 'gpt-3.5-turbo',
+        temperature: 0.1,
+        maxTokens: 800,
+        cacheKey: `dup-detect-${batch[0]?.newTx.description.slice(0, 20)}-${batch.length}`,
+        systemPrompt:
+          'You are a financial transaction duplicate detection system. Be conservative - only mark as duplicates if highly confident they represent the same transaction. Consider merchant variations, pending vs posted transactions, and partial refunds.',
+      });
+
+      if (!response.success || !response.data) {
+        console.error('[SmartDuplicate] AI detection failed for batch', i / batchSize, response.error);
+        continue;
+      }
+
+      const aiResult = response.data;
+
+      // Map AI results to matches
+      aiResult.matches.forEach((match) => {
+        if (match.is_duplicate) {
+          const candidate = batch[match.new_index];
+          if (candidate) {
+            matches.push({
+              newTransaction: candidate.newTx,
+              existingTransaction: candidate.existingTx,
+              confidence: match.confidence,
+              reason: match.reason,
+              matchType: 'semantic',
+            });
+          }
+        }
+      });
+    } catch (error) {
+      console.error('[SmartDuplicate] Error detecting semantic matches for batch', i / batchSize, error);
+    }
+  }
+
+  return matches;
+}
+
+/**
+ * Build AI semantic match prompt
+ */
+function buildSemanticMatchPrompt(
+  candidates: Array<{ newTx: ParsedTransaction; existingTx: Transaction; index: number }>
+): string {
+  const pairs = candidates.map((c, i) => ({
+    index: i,
+    new_date: c.newTx.date.toISOString().split('T')[0],
+    new_desc: cleanDescription(c.newTx.description).substring(0, 100),
+    new_amount: c.newTx.amount.toFixed(2),
+    existing_id: c.existingTx.id,
+    existing_date: c.existingTx.date.toISOString().split('T')[0],
+    existing_desc: cleanDescription(c.existingTx.description).substring(0, 100),
+    existing_amount: c.existingTx.amount.toFixed(2),
+  }));
+
+  return `Analyze these transaction pairs to detect duplicates. Consider:
+
+**What Makes a Duplicate:**
+- Same merchant (e.g., "AMAZON PRIME" = "AMZN MKTP CA")
+- Same amount (or very close)
+- Similar date (pending → posted, processing delays)
+- Same purchase/service
+
+**What's NOT a Duplicate:**
+- Refunds (negative amount) vs original purchase (positive)
+- Different merchants (even same category)
+- Recurring charges at different times
+- Partial payments vs full amount
+
+**Transaction Pairs** (${pairs.length} total):
+${pairs.map((p) => `${p.index}. NEW: ${p.new_date} | $${p.new_amount} | ${p.new_desc}\n   EXISTING: ${p.existing_date} | $${p.existing_amount} | ${p.existing_desc}`).join('\n\n')}
+
+**Response Format** (JSON only):
+{
+  "matches": [
+    {
+      "new_index": 0,
+      "existing_id": "tx_123",
+      "is_duplicate": true,
+      "confidence": 0.95,
+      "reason": "Same merchant and amount, posted after pending",
+      "match_type": "semantic"
+    }
+  ],
+  "analysis": "Brief summary of patterns detected"
+}
+
+IMPORTANT: Only return matches with confidence >= 0.7. Be conservative - false negatives are better than false positives.`;
+}
+
+// ============================================================================
+// Main Detection Function
+// ============================================================================
+
+/**
+ * Enhanced duplicate detection combining multiple strategies
+ *
+ * @param newTransactions - Transactions to check for duplicates
+ * @param existingTransactions - Existing transactions in database
+ * @param useAI - Whether to use AI for semantic matching (default: false - disabled due to connection issues)
+ * @returns Void (marks transactions in-place)
+ */
+export async function detectDuplicatesEnhanced(
+  newTransactions: ParsedTransaction[],
+  existingTransactions: Transaction[],
+  useAI: boolean = false // Disabled by default - AI semantic matching is optional
+): Promise<void> {
+  console.log('[SmartDuplicate] Detecting duplicates for', newTransactions.length, 'transactions (AI:', useAI ? 'enabled' : 'disabled', ')...');
+
+  const options: SmartDuplicateDetectionOptions = {
+    enabled: useAI,
+    minConfidence: 0.7,
+    batchSize: 10,
+    dateToleranceDays: 3,
+    amountTolerancePercent: 0.01, // 1%
+    amountToleranceFixed: 0.5, // $0.50
+  };
+
+  // Step 1: Exact matches (FITID, exact criteria)
+  const exactMatches = detectExactMatches(newTransactions, existingTransactions);
+  console.log('[SmartDuplicate] Found', exactMatches.length, 'exact matches');
+
+  // Apply exact matches
+  exactMatches.forEach((match) => {
+    match.newTransaction.isDuplicate = true;
     match.newTransaction.confidence = match.confidence;
     match.newTransaction.duplicateReason = match.reason;
     match.newTransaction.matchedTransactionId = match.existingTransaction.id;
-    // Mark for review if confidence is below threshold
-    if (match.confidence < minConfidence && match.confidence >= 0.5) {
+  });
+
+  // Step 2: Fuzzy matches (flexible tolerances)
+  const fuzzyMatches = detectFuzzyMatches(newTransactions, existingTransactions, options);
+  console.log('[SmartDuplicate] Found', fuzzyMatches.length, 'fuzzy matches');
+
+  // Apply fuzzy matches (only if confidence >= 0.9 for auto-flagging)
+  fuzzyMatches.forEach((match) => {
+    if (match.confidence >= 0.9) {
+      match.newTransaction.isDuplicate = true;
+      match.newTransaction.confidence = match.confidence;
+      match.newTransaction.duplicateReason = match.reason;
+      match.newTransaction.matchedTransactionId = match.existingTransaction.id;
+    } else if (match.confidence >= 0.7) {
+      // Medium confidence - flag for review
       match.newTransaction.requiresReview = true;
+      match.newTransaction.confidence = match.confidence;
+      match.newTransaction.duplicateReason = `Possible duplicate: ${match.reason}`;
+      match.newTransaction.matchedTransactionId = match.existingTransaction.id;
+    }
+  });
+
+  // Step 3: Merchant matches (using normalized merchants from enrichment)
+  const merchantMatches = detectMerchantMatches(newTransactions, existingTransactions, options);
+  console.log('[SmartDuplicate] Found', merchantMatches.length, 'merchant matches');
+
+  // Apply merchant matches
+  merchantMatches.forEach((match) => {
+    if (!match.newTransaction.isDuplicate) {
+      // Don't override exact/fuzzy matches
+      match.newTransaction.isDuplicate = match.confidence >= 0.9;
+      match.newTransaction.confidence = match.confidence;
+      match.newTransaction.duplicateReason = match.reason;
+      match.newTransaction.matchedTransactionId = match.existingTransaction.id;
+
+      if (match.confidence >= 0.7 && match.confidence < 0.9) {
+        match.newTransaction.requiresReview = true;
+      }
+    }
+  });
+
+  // Step 4: AI semantic matches (if enabled)
+  if (useAI) {
+    try {
+      const semanticMatches = await detectSemanticMatches(newTransactions, existingTransactions, options);
+      console.log('[SmartDuplicate] Found', semanticMatches.length, 'semantic matches');
+
+      // Apply semantic matches
+      semanticMatches.forEach((match) => {
+        if (!match.newTransaction.isDuplicate) {
+          // Don't override existing matches
+          match.newTransaction.isDuplicate = match.confidence >= 0.9;
+          match.newTransaction.confidence = match.confidence;
+          match.newTransaction.duplicateReason = `AI: ${match.reason}`;
+          match.newTransaction.matchedTransactionId = match.existingTransaction.id;
+
+          if (match.confidence >= 0.7 && match.confidence < 0.9) {
+            match.newTransaction.requiresReview = true;
+          }
+        }
+      });
+    } catch (error) {
+      console.warn('[SmartDuplicate] AI semantic matching unavailable, using rule-based detection only:', error);
+      // Gracefully degrade to rule-based detection (exact + fuzzy + merchant)
+      // No action needed - we already have matches from previous steps
     }
   }
+
+  const duplicateCount = newTransactions.filter((tx) => tx.isDuplicate).length;
+  const reviewCount = newTransactions.filter((tx) => tx.requiresReview).length;
+
+  console.log(
+    '[SmartDuplicate] Detection complete:',
+    duplicateCount,
+    'duplicates,',
+    reviewCount,
+    'for review'
+  );
+}
+
+/**
+ * Backward compatibility: Original function signature
+ */
+export async function detectSmartDuplicates(
+  newTransactions: ParsedTransaction[],
+  existingTransactions: Transaction[],
+  options: SmartDuplicateDetectionOptions = {}
+): Promise<DuplicateMatch[]> {
+  // For backward compatibility, collect all matches
+  const allMatches: DuplicateMatch[] = [];
+
+  const exactMatches = detectExactMatches(newTransactions, existingTransactions);
+  const fuzzyMatches = detectFuzzyMatches(newTransactions, existingTransactions, options);
+  const merchantMatches = detectMerchantMatches(newTransactions, existingTransactions, options);
+
+  allMatches.push(...exactMatches, ...fuzzyMatches, ...merchantMatches);
+
+  if (options.enabled) {
+    const semanticMatches = await detectSemanticMatches(newTransactions, existingTransactions, options);
+    allMatches.push(...semanticMatches);
+  }
+
+  return allMatches;
 }
