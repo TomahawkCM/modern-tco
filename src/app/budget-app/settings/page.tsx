@@ -228,19 +228,19 @@ export default function SettingsPage() {
     <div className="space-y-6">
       {/* Header */}
       <div>
-        <h1 className="text-3xl font-bold text-gray-900">Settings</h1>
-        <p className="mt-2 text-gray-600">Manage your accounts and categories</p>
+        <h1 className="text-3xl font-bold text-white">Settings</h1>
+        <p className="mt-2 text-slate-400">Manage your accounts and categories</p>
       </div>
 
       {/* Tabs */}
-      <div className="border-b border-gray-200">
+      <div className="border-b border-white/10">
         <div className="flex gap-8">
           <button
             onClick={() => setActiveTab("accounts")}
             className={`border-b-2 px-2 pb-4 font-medium transition-colors ${
               activeTab === "accounts"
-                ? "border-teal-600 text-teal-600"
-                : "border-transparent text-gray-500 hover:text-gray-700"
+                ? "border-teal-500 text-teal-400"
+                : "border-transparent text-slate-400 hover:text-slate-200"
             }`}
           >
             <div className="flex items-center gap-2">
@@ -252,8 +252,8 @@ export default function SettingsPage() {
             onClick={() => setActiveTab("categories")}
             className={`border-b-2 px-2 pb-4 font-medium transition-colors ${
               activeTab === "categories"
-                ? "border-teal-600 text-teal-600"
-                : "border-transparent text-gray-500 hover:text-gray-700"
+                ? "border-teal-500 text-teal-400"
+                : "border-transparent text-slate-400 hover:text-slate-200"
             }`}
           >
             <div className="flex items-center gap-2">
@@ -265,8 +265,8 @@ export default function SettingsPage() {
             onClick={() => setActiveTab("privacy")}
             className={`border-b-2 px-2 pb-4 font-medium transition-colors ${
               activeTab === "privacy"
-                ? "border-teal-600 text-teal-600"
-                : "border-transparent text-gray-500 hover:text-gray-700"
+                ? "border-teal-500 text-teal-400"
+                : "border-transparent text-slate-400 hover:text-slate-200"
             }`}
           >
             <div className="flex items-center gap-2">
@@ -278,8 +278,8 @@ export default function SettingsPage() {
             onClick={() => setActiveTab("accessibility")}
             className={`border-b-2 px-2 pb-4 font-medium transition-colors ${
               activeTab === "accessibility"
-                ? "border-teal-600 text-teal-600"
-                : "border-transparent text-gray-500 hover:text-gray-700"
+                ? "border-teal-500 text-teal-400"
+                : "border-transparent text-slate-400 hover:text-slate-200"
             }`}
           >
             <div className="flex items-center gap-2">
@@ -294,7 +294,7 @@ export default function SettingsPage() {
       {activeTab === "accounts" && (
         <div className="space-y-4">
           <div className="flex items-center justify-between">
-            <h2 className="text-xl font-semibold text-gray-900">Your Accounts</h2>
+            <h2 className="text-xl font-semibold text-white">Your Accounts</h2>
             <button
               onClick={() => {
                 setEditingAccount(null);
@@ -368,8 +368,8 @@ export default function SettingsPage() {
         <div className="space-y-6">
           <div className="flex items-center justify-between flex-wrap gap-4">
             <div>
-              <h2 className="text-2xl font-bold text-gray-900">Categories</h2>
-              <p className="text-base text-gray-600 mt-1">
+              <h2 className="text-2xl font-bold text-white">Categories</h2>
+              <p className="text-base text-slate-400 mt-1">
                 Organize your transactions with custom categories • Drag to reorder
               </p>
             </div>

@@ -162,8 +162,8 @@ export default function ReportsPage() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Reports & Insights</h1>
-          <p className="text-gray-600 mt-2">Visualize your financial data</p>
+          <h1 className="text-3xl font-bold text-white">Reports & Insights</h1>
+          <p className="text-slate-400 mt-2">Visualize your financial data</p>
         </div>
 
         {/* Time Range Selector */}

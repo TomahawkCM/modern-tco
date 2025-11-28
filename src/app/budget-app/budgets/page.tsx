@@ -171,7 +171,7 @@ export default function BudgetsPage() {
       <div className="flex items-center justify-between">
         <div>
           <div className="flex items-center gap-3">
-            <h1 className="text-4xl font-bold text-gray-900">Budgets</h1>
+            <h1 className="text-4xl font-bold text-white">Budgets</h1>
             <HelpTooltip
               content="Set spending limits for each category. Track your progress with color-coded alerts: Green = On Track, Yellow = Warning (80%), Red = Over Budget (100%)."
               learnMoreUrl="/docs/user-guide#budgets"
@@ -179,7 +179,7 @@ export default function BudgetsPage() {
               iconSize="h-5 w-5"
             />
           </div>
-          <p className="text-lg text-gray-600 mt-2 font-medium">
+          <p className="text-lg text-slate-400 mt-2 font-medium">
             {new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
           </p>
         </div>

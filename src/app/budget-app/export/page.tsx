@@ -222,8 +222,8 @@ export default function ExportPage() {
     <div className="max-w-4xl mx-auto space-y-6">
       {/* Header */}
       <div>
-        <h1 className="text-3xl font-bold text-gray-900">Export & Backup</h1>
-        <p className="text-gray-600 mt-2">
+        <h1 className="text-3xl font-bold text-white">Export & Backup</h1>
+        <p className="text-slate-400 mt-2">
           Backup your data or export to different formats
         </p>
       </div>

@@ -298,8 +298,8 @@ export default function RetirementPage() {
     <div className="space-y-6">
       {/* Header */}
       <div>
-        <h1 className="text-3xl font-bold text-gray-900">Retirement Calculator</h1>
-        <p className="text-gray-600 mt-2">Plan your retirement with compound interest projections</p>
+        <h1 className="text-3xl font-bold text-white">Retirement Calculator</h1>
+        <p className="text-slate-400 mt-2">Plan your retirement with compound interest projections</p>
       </div>
 
       {/* Calculator Grid */}

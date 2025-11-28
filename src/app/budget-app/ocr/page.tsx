@@ -234,7 +234,7 @@ export default function ReceiptScannerPage() {
   if (!isOCREnabled) {
     return (
       <div className="mx-auto max-w-2xl">
-        <h1 className="mb-6 text-3xl font-bold text-gray-900">Scan Receipt</h1>
+        <h1 className="mb-6 text-3xl font-bold text-white">Scan Receipt</h1>
 
         <div className="rounded-lg border border-yellow-200 bg-yellow-50 p-6">
           <div className="flex items-start gap-3">
@@ -274,8 +274,8 @@ export default function ReceiptScannerPage() {
   return (
     <div className="mx-auto max-w-4xl">
       <div className="mb-6">
-        <h1 className="text-3xl font-bold text-gray-900">Scan Receipt</h1>
-        <p className="mt-2 text-gray-600">
+        <h1 className="text-3xl font-bold text-white">Scan Receipt</h1>
+        <p className="mt-2 text-slate-400">
           Upload a receipt image or PDF (JPG, PNG, PDF) to automatically extract transaction details using OCR
         </p>
       </div>

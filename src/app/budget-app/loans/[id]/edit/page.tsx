@@ -70,8 +70,8 @@ export default function EditLoanPage({ params }: { params: Promise<{ id: string 
           </Button>
         </Link>
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Edit Loan</h1>
-          <p className="text-gray-500 mt-1">{loan.name}</p>
+          <h1 className="text-3xl font-bold text-white">Edit Loan</h1>
+          <p className="text-slate-400 mt-1">{loan.name}</p>
         </div>
       </div>
 

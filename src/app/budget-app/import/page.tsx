@@ -1209,7 +1209,7 @@ export default function ImportPage() {
       {/* Header */}
       <div>
         <div className="flex items-center gap-3">
-          <h1 className="text-3xl font-bold text-gray-900">Import Transactions</h1>
+          <h1 className="text-3xl font-bold text-white">Import Transactions</h1>
           <HelpTooltip
             content={
               <>
@@ -1222,13 +1222,13 @@ export default function ImportPage() {
             iconSize="h-5 w-5"
           />
         </div>
-        <p className="text-gray-600 mt-2">
+        <p className="text-slate-400 mt-2">
           Upload CSV, OFX, QFX, or PDF files from BMO, Home Trust, TD, Chase, and 15+ other banks
         </p>
         {formatDetection && file && (
           <div className="mt-3 space-y-1">
             <p className="text-sm font-medium flex items-center gap-2">
-              <span className="text-gray-700">Detected Format:</span>
+              <span className="text-slate-300">Detected Format:</span>
               <span className="text-teal-600">{getFormatDisplayName(formatDetection.format)}</span>
               <span className={`text-xs px-2 py-0.5 rounded-full ${
                 formatDetection.confidence >= 0.9 ? 'bg-green-100 text-green-800' :

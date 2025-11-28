@@ -678,7 +678,7 @@ export default function TransactionsPage() {
       <div className="flex items-center justify-between">
         <div>
           <div className="flex items-center gap-3">
-            <h1 className="text-4xl font-bold text-foreground">Transactions</h1>
+            <h1 className="text-4xl font-bold text-white">Transactions</h1>
             <HelpTooltip
               content={
                 <>
@@ -692,7 +692,7 @@ export default function TransactionsPage() {
               iconSize="h-5 w-5"
             />
           </div>
-          <p className="text-lg text-muted-foreground mt-2 font-medium">
+          <p className="text-lg text-slate-400 mt-2 font-medium">
             {filteredTransactions.length} transaction{filteredTransactions.length !== 1 ? 's' : ''}
           </p>
         </div>

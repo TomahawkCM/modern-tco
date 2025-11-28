@@ -120,8 +120,8 @@ export default function LoanDetailPage({ params }: { params: Promise<{ id: strin
             </Button>
           </Link>
           <div>
-            <h1 className="text-3xl sm:text-4xl font-bold text-gray-900">{loan.name}</h1>
-            <p className="text-base sm:text-lg text-gray-600 mt-1 font-medium">
+            <h1 className="text-3xl sm:text-4xl font-bold text-white">{loan.name}</h1>
+            <p className="text-base sm:text-lg text-slate-400 mt-1 font-medium">
               {getLoanTypeLabel(loan.type)} • {loan.lender}
             </p>
           </div>
