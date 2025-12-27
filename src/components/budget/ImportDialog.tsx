@@ -1,0 +1,494 @@
+'use client';
+
+/**
+ * Import Dialog Component (X-033)
+ * Dialog for importing budget data from .budget files.
+ */
+
+import { useState, useCallback } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import {
+  Upload,
+  Lock,
+  Eye,
+  EyeOff,
+  AlertCircle,
+  CheckCircle,
+  Loader2,
+  X,
+  FileUp,
+  Info,
+  AlertTriangle,
+} from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import {
+  readBudgetFile,
+  previewImport,
+  importBudgetData,
+  type BudgetFile,
+  type ImportOptions,
+  isEncryptedData,
+} from '@/lib/export';
+import { cn } from '@/lib/utils';
+import { useSeniorsMode } from '@/hooks/useSeniorsMode';
+
+interface ImportDialogProps {
+  isOpen: boolean;
+  onClose: () => void;
+  onImportComplete?: () => void;
+}
+
+type ImportStep = 'select' | 'preview' | 'importing' | 'complete';
+
+export function ImportDialog({ isOpen, onClose, onImportComplete }: ImportDialogProps) {
+  const { isSeniorsMode } = useSeniorsMode();
+  const [step, setStep] = useState<ImportStep>('select');
+  const [error, setError] = useState<string | null>(null);
+
+  // File state
+  const [file, setFile] = useState<File | null>(null);
+  const [budgetFile, setBudgetFile] = useState<BudgetFile | null>(null);
+
+  // Password state
+  const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+  const [needsPassword, setNeedsPassword] = useState(false);
+  const [passwordHint, setPasswordHint] = useState<string | null>(null);
+
+  // Preview state
+  const [preview, setPreview] = useState<Awaited<ReturnType<typeof previewImport>> | null>(null);
+
+  // Options state
+  const [conflictResolution, setConflictResolution] = useState<'skip' | 'overwrite' | 'rename'>('skip');
+
+  // Result state
+  const [importResult, setImportResult] = useState<{
+    success: boolean;
+    message: string;
+    imported: number;
+  } | null>(null);
+
+  // Handle file selection
+  const handleFileSelect = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const selectedFile = e.target.files?.[0];
+    if (!selectedFile) return;
+
+    setError(null);
+    setFile(selectedFile);
+
+    try {
+      const parsed = await readBudgetFile(selectedFile);
+      setBudgetFile(parsed);
+
+      // Check if encrypted
+      if (isEncryptedData(parsed.data)) {
+        setNeedsPassword(true);
+        // Check for password hint in metadata
+        if ((parsed.metadata as { passwordHint?: string }).passwordHint) {
+          setPasswordHint((parsed.metadata as { passwordHint?: string }).passwordHint || null);
+        }
+      } else {
+        // Load preview
+        const previewData = await previewImport(parsed);
+        setPreview(previewData);
+        setStep('preview');
+      }
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to read file');
+    }
+  };
+
+  // Handle password submit
+  const handlePasswordSubmit = async () => {
+    if (!budgetFile || !password) return;
+
+    setError(null);
+
+    try {
+      const previewData = await previewImport(budgetFile, password);
+      if (previewData.valid) {
+        setPreview(previewData);
+        setStep('preview');
+      } else {
+        setError(previewData.errors[0] || 'Invalid password');
+      }
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Decryption failed');
+    }
+  };
+
+  // Handle import
+  const handleImport = async () => {
+    if (!budgetFile) return;
+
+    setStep('importing');
+    setError(null);
+
+    try {
+      const options: ImportOptions = {
+        conflictResolution,
+        password: needsPassword ? password : undefined,
+      };
+
+      const result = await importBudgetData(budgetFile, options);
+
+      const totalImported = Object.values(result.stats).reduce((sum, s) => sum + s.imported, 0);
+
+      setImportResult({
+        success: result.success,
+        message: result.message,
+        imported: totalImported,
+      });
+
+      setStep('complete');
+
+      if (result.success && onImportComplete) {
+        onImportComplete();
+      }
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Import failed');
+      setStep('preview');
+    }
+  };
+
+  // Reset and close
+  const handleClose = () => {
+    if (step === 'importing') return;
+
+    onClose();
+    // Reset state after animation
+    setTimeout(() => {
+      setStep('select');
+      setFile(null);
+      setBudgetFile(null);
+      setPassword('');
+      setNeedsPassword(false);
+      setPasswordHint(null);
+      setPreview(null);
+      setError(null);
+      setImportResult(null);
+    }, 200);
+  };
+
+  if (!isOpen) return null;
+
+  return (
+    <AnimatePresence>
+      <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.95 }}
+          className="relative w-full max-w-lg rounded-2xl bg-slate-900 shadow-2xl border border-white/10"
+        >
+          {/* Header */}
+          <div className="flex items-center justify-between border-b border-white/10 p-6">
+            <div className="flex items-center gap-3">
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-500/20">
+                <FileUp className="h-5 w-5 text-blue-400" />
+              </div>
+              <div>
+                <h2 className={cn('font-bold text-white', isSeniorsMode ? 'text-2xl' : 'text-xl')}>
+                  Import Data
+                </h2>
+                <p className="text-sm text-slate-400">Restore from .budget file</p>
+              </div>
+            </div>
+            <button
+              onClick={handleClose}
+              disabled={step === 'importing'}
+              className="rounded-lg p-2 text-slate-400 hover:bg-white/10 hover:text-white transition-colors disabled:opacity-50"
+            >
+              <X className="h-5 w-5" />
+            </button>
+          </div>
+
+          {/* Content */}
+          <div className="p-6">
+            {/* Step: Select File */}
+            {step === 'select' && (
+              <div className="space-y-6">
+                {/* File Drop Zone */}
+                <label className="flex flex-col items-center justify-center rounded-xl border-2 border-dashed border-white/20 bg-white/5 p-8 cursor-pointer hover:border-teal-500/50 hover:bg-white/10 transition-all">
+                  <Upload className="h-12 w-12 text-slate-400 mb-4" />
+                  <p className={cn('font-medium text-white', isSeniorsMode && 'text-lg')}>
+                    {file ? file.name : 'Click to select a .budget file'}
+                  </p>
+                  <p className="text-sm text-slate-500 mt-2">
+                    or drag and drop here
+                  </p>
+                  <input
+                    type="file"
+                    accept=".budget,.json"
+                    onChange={handleFileSelect}
+                    className="hidden"
+                  />
+                </label>
+
+                {/* Password Input (if needed) */}
+                {needsPassword && (
+                  <div className="space-y-4">
+                    <div className="flex items-center gap-2 rounded-lg bg-amber-500/10 p-3 text-amber-400">
+                      <Lock className="h-5 w-5 shrink-0" />
+                      <p className="text-sm">This file is encrypted</p>
+                    </div>
+
+                    {passwordHint && (
+                      <div className="flex items-center gap-2 rounded-lg bg-blue-500/10 p-3 text-blue-400">
+                        <Info className="h-5 w-5 shrink-0" />
+                        <p className="text-sm">Hint: {passwordHint}</p>
+                      </div>
+                    )}
+
+                    <div>
+                      <label className="block text-sm font-medium text-slate-400 mb-2">
+                        Password
+                      </label>
+                      <div className="relative">
+                        <Lock className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-500" />
+                        <input
+                          type={showPassword ? 'text' : 'password'}
+                          value={password}
+                          onChange={(e) => setPassword(e.target.value)}
+                          placeholder="Enter password"
+                          className={cn(
+                            'w-full rounded-lg border border-white/10 bg-white/5 py-3 pl-10 pr-12 text-white placeholder:text-slate-500 focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500',
+                            isSeniorsMode && 'text-lg py-4'
+                          )}
+                          onKeyDown={(e) => e.key === 'Enter' && handlePasswordSubmit()}
+                        />
+                        <button
+                          type="button"
+                          onClick={() => setShowPassword(!showPassword)}
+                          className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-white"
+                        >
+                          {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                        </button>
+                      </div>
+                    </div>
+
+                    <Button
+                      onClick={handlePasswordSubmit}
+                      disabled={!password}
+                      className={cn(
+                        'w-full gap-2 bg-teal-500 hover:bg-teal-600',
+                        isSeniorsMode && 'min-h-[52px] text-lg'
+                      )}
+                    >
+                      Decrypt & Continue
+                    </Button>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* Step: Preview */}
+            {step === 'preview' && preview && (
+              <div className="space-y-6">
+                {/* File Info */}
+                <div className="rounded-xl bg-white/5 p-4">
+                  <h3 className="text-sm font-medium text-slate-400 mb-3">File Information</h3>
+                  <div className="space-y-2 text-sm">
+                    <div className="flex justify-between">
+                      <span className="text-slate-500">Version</span>
+                      <span className="text-white">{preview.metadata.version}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-slate-500">Exported</span>
+                      <span className="text-white">
+                        {new Date(preview.metadata.exportedAt).toLocaleDateString()}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Data Summary */}
+                <div className="rounded-xl bg-white/5 p-4">
+                  <h3 className="text-sm font-medium text-slate-400 mb-3">Data to Import</h3>
+                  <div className="grid grid-cols-2 gap-3 text-sm">
+                    {Object.entries(preview.counts).map(([key, count]) => (
+                      <div key={key} className="flex justify-between">
+                        <span className="text-slate-500 capitalize">{key}</span>
+                        <span className="text-white">{count}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Conflicts Warning */}
+                {Object.keys(preview.conflicts).length > 0 && (
+                  <div className="rounded-xl bg-amber-500/10 p-4">
+                    <div className="flex items-center gap-2 text-amber-400 mb-3">
+                      <AlertTriangle className="h-5 w-5" />
+                      <h3 className="font-medium">Conflicts Found</h3>
+                    </div>
+                    <div className="space-y-2 text-sm">
+                      {Object.entries(preview.conflicts).map(([key, count]) => (
+                        <div key={key} className="flex justify-between text-amber-300">
+                          <span className="capitalize">{key}</span>
+                          <span>{count} existing</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Conflict Resolution */}
+                <div>
+                  <label className="block text-sm font-medium text-slate-400 mb-3">
+                    Handle Conflicts
+                  </label>
+                  <div className="space-y-2">
+                    {[
+                      { value: 'skip', label: 'Skip existing', desc: 'Keep current data' },
+                      { value: 'overwrite', label: 'Overwrite', desc: 'Replace with imported' },
+                      { value: 'rename', label: 'Create new', desc: 'Import as new entries' },
+                    ].map((option) => (
+                      <label
+                        key={option.value}
+                        className={cn(
+                          'flex items-center gap-3 rounded-lg border p-3 cursor-pointer transition-all',
+                          conflictResolution === option.value
+                            ? 'border-teal-500 bg-teal-500/10'
+                            : 'border-white/10 bg-white/5 hover:border-white/20'
+                        )}
+                      >
+                        <input
+                          type="radio"
+                          name="conflict"
+                          value={option.value}
+                          checked={conflictResolution === option.value}
+                          onChange={(e) => setConflictResolution(e.target.value as typeof conflictResolution)}
+                          className="h-4 w-4 text-teal-500 focus:ring-teal-500"
+                        />
+                        <div>
+                          <p className={cn('font-medium text-white', isSeniorsMode && 'text-lg')}>
+                            {option.label}
+                          </p>
+                          <p className="text-sm text-slate-500">{option.desc}</p>
+                        </div>
+                      </label>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Step: Importing */}
+            {step === 'importing' && (
+              <div className="flex flex-col items-center justify-center py-12">
+                <Loader2 className="h-12 w-12 animate-spin text-teal-400 mb-4" />
+                <p className={cn('font-medium text-white', isSeniorsMode && 'text-lg')}>
+                  Importing your data...
+                </p>
+                <p className="text-sm text-slate-500 mt-2">
+                  Please wait, this may take a moment
+                </p>
+              </div>
+            )}
+
+            {/* Step: Complete */}
+            {step === 'complete' && importResult && (
+              <div className="flex flex-col items-center justify-center py-12">
+                {importResult.success ? (
+                  <>
+                    <div className="flex h-16 w-16 items-center justify-center rounded-full bg-green-500/20 mb-4">
+                      <CheckCircle className="h-8 w-8 text-green-400" />
+                    </div>
+                    <p className={cn('font-medium text-white', isSeniorsMode && 'text-lg')}>
+                      Import Complete!
+                    </p>
+                    <p className="text-sm text-slate-400 mt-2">
+                      {importResult.imported} items imported successfully
+                    </p>
+                  </>
+                ) : (
+                  <>
+                    <div className="flex h-16 w-16 items-center justify-center rounded-full bg-amber-500/20 mb-4">
+                      <AlertTriangle className="h-8 w-8 text-amber-400" />
+                    </div>
+                    <p className={cn('font-medium text-white', isSeniorsMode && 'text-lg')}>
+                      Import Completed with Issues
+                    </p>
+                    <p className="text-sm text-slate-400 mt-2">
+                      {importResult.message}
+                    </p>
+                  </>
+                )}
+              </div>
+            )}
+
+            {/* Error */}
+            {error && (
+              <div className="mt-4 flex items-center gap-2 rounded-lg bg-red-500/10 p-3 text-red-400">
+                <AlertCircle className="h-5 w-5 shrink-0" />
+                <p className="text-sm">{error}</p>
+              </div>
+            )}
+          </div>
+
+          {/* Footer */}
+          <div className="flex gap-4 border-t border-white/10 p-6">
+            {step === 'select' && !needsPassword && (
+              <Button
+                variant="outline"
+                onClick={handleClose}
+                className={cn(
+                  'flex-1 border-white/20 text-slate-300 hover:bg-white/10',
+                  isSeniorsMode && 'min-h-[52px] text-lg'
+                )}
+              >
+                Cancel
+              </Button>
+            )}
+
+            {step === 'preview' && (
+              <>
+                <Button
+                  variant="outline"
+                  onClick={() => {
+                    setStep('select');
+                    setFile(null);
+                    setBudgetFile(null);
+                    setPreview(null);
+                  }}
+                  className={cn(
+                    'flex-1 border-white/20 text-slate-300 hover:bg-white/10',
+                    isSeniorsMode && 'min-h-[52px] text-lg'
+                  )}
+                >
+                  Back
+                </Button>
+                <Button
+                  onClick={handleImport}
+                  className={cn(
+                    'flex-1 gap-2 bg-gradient-to-r from-blue-500 to-teal-500 hover:from-blue-600 hover:to-teal-600',
+                    isSeniorsMode && 'min-h-[52px] text-lg'
+                  )}
+                >
+                  <Upload className="h-4 w-4" />
+                  Import Data
+                </Button>
+              </>
+            )}
+
+            {step === 'complete' && (
+              <Button
+                onClick={handleClose}
+                className={cn(
+                  'flex-1 gap-2 bg-teal-500 hover:bg-teal-600',
+                  isSeniorsMode && 'min-h-[52px] text-lg'
+                )}
+              >
+                <CheckCircle className="h-4 w-4" />
+                Done
+              </Button>
+            )}
+          </div>
+        </motion.div>
+      </div>
+    </AnimatePresence>
+  );
+}
+
+export default ImportDialog;
