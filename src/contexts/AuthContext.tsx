@@ -1,8 +1,13 @@
 "use client";
 
-import { supabase } from "@/lib/supabase";
+import { createUserProfile } from "@/lib/profileService";
+import { createClient } from "@/utils/supabase/client";
 import type { AuthError, Session, User } from "@supabase/supabase-js";
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
+
+// Create a singleton browser client that uses cookies for session storage
+// This allows server actions to access the auth session
+const supabase = createClient();
 
 /** Minimal shape used to build payloads */
 type UsersRow = {
@@ -141,8 +146,12 @@ export function AuthProvider({ children }: AuthProviderProps) {
       }));
 
       if (event === "SIGNED_IN" && session?.user) {
-        // TODO: Implement user profile sync when users table is available
-        // await syncUserProfile(session.user);
+        // Create/sync user profile with trial initialization
+        createUserProfile(session.user).then((result) => {
+          if (!result.success) {
+            console.warn("Profile sync failed:", result.error);
+          }
+        });
       } else if (event === "SIGNED_OUT") {
         // Clear cached app data when signing out
         localStorage.removeItem("tco-progress");
@@ -157,27 +166,6 @@ export function AuthProvider({ children }: AuthProviderProps) {
       subscription.unsubscribe();
     };
   }, []);
-
-  // TODO: Implement user profile sync when users table is available
-  // const syncUserProfile = async (user: User) => {
-  //   try {
-  //     const rows: UsersRow[] = [
-  //       {
-  //         id: user.id,
-  //         email: user.email ?? null,
-  //         first_name: (user as any)?.user_metadata?.first_name ?? null,
-  //         last_name: (user as any)?.user_metadata?.last_name ?? null,
-  //         updated_at: new Date().toISOString(),
-  //       },
-  //     ];
-
-  //     const { error } = await supabase.from("users").upsert(rows, { onConflict: "id" });
-
-  //     if (error) console.error("Error syncing user profile:", error);
-  //   } catch (error) {
-  //     console.error("Unexpected error syncing user profile:", error);
-  //   }
-  // };
 
   const signIn = async (email: string, password: string) => {
     setState((prev) => ({ ...prev, loading: true, error: null }));
@@ -233,9 +221,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
   const resetPassword = async (email: string) => {
     try {
-      const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
       const { error } = await supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: `${window.location.origin}${basePath}/auth/reset-password`,
+        redirectTo: `${window.location.origin}/budget-app/auth/reset-password`,
       });
       return { error };
     } catch (error) {

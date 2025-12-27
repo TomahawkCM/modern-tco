@@ -471,7 +471,7 @@ export default function SimulatorPage() {
         </div>
 
         <div className="grid gap-4 xl:grid-cols-[2fr_1fr]">
-          <Card variant="cyberpunk">
+          <Card>
             <CardHeader className="pb-4">
               <CardTitle className="flex items-center justify-between text-lg text-cyan-100">
                 Query Editor
@@ -543,7 +543,7 @@ export default function SimulatorPage() {
           </Card>
 
           <div className="space-y-4">
-            <Card variant="cyberpunk">
+            <Card>
               <CardHeader className="pb-3">
                 <CardTitle className="text-base text-cyan-100">Examples</CardTitle>
               </CardHeader>
@@ -572,7 +572,7 @@ export default function SimulatorPage() {
               </CardContent>
             </Card>
 
-            <Card variant="cyberpunk">
+            <Card>
               <CardHeader className="pb-3">
                 <CardTitle className="text-base text-cyan-100">Saved Questions</CardTitle>
               </CardHeader>
@@ -609,7 +609,7 @@ export default function SimulatorPage() {
               </CardContent>
             </Card>
 
-            <Card variant="cyberpunk">
+            <Card>
               <CardHeader className="pb-3">
                 <CardTitle className="text-base text-cyan-100">Exam Stats</CardTitle>
               </CardHeader>
@@ -642,7 +642,7 @@ export default function SimulatorPage() {
           </div>
         </div>
 
-        <Card variant="cyberpunk">
+        <Card>
           <CardHeader className="pb-3">
             <CardTitle className="text-lg text-cyan-100">Results</CardTitle>
           </CardHeader>
@@ -713,7 +713,7 @@ export default function SimulatorPage() {
         </Card>
 
         <div className="grid gap-4 lg:grid-cols-2">
-          <Card variant="cyberpunk">
+          <Card>
             <CardHeader className="pb-3">
               <CardTitle className="text-lg text-cyan-100">Sensors Catalog</CardTitle>
             </CardHeader>
@@ -744,7 +744,7 @@ export default function SimulatorPage() {
             </CardContent>
           </Card>
 
-          <Card variant="cyberpunk">
+          <Card>
             <CardHeader className="pb-3">
               <CardTitle className="text-lg text-cyan-100">Aggregates & Tips</CardTitle>
             </CardHeader>

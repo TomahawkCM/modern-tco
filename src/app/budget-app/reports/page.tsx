@@ -5,15 +5,18 @@
  * Financial reports and visualizations
  */
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo, useRef, useCallback } from 'react';
 import dynamic from 'next/dynamic';
-import { BarChart3, PieChart as PieChartIcon, TrendingUp, Calendar } from 'lucide-react';
+import { BarChart3, PieChart as PieChartIcon, TrendingUp, Calendar, ArrowRightLeft, Download, Image, FileImage } from 'lucide-react';
+import * as htmlToImage from 'html-to-image';
 import { db } from '@/lib/budget-db';
 import type { Transaction, Category } from '@/types/budget';
 import { SpendingHeatMap } from '@/components/budget/SpendingHeatMap';
 import { LazySpendingTrendChart } from '@/components/budget/charts/LazyChartComponents';
 import { useThemeMode } from '@/hooks/useThemeMode';
 import { getChartPalette, getCategoryColor } from '@/lib/budget-chart-colors';
+import { SankeyWithAccessibility } from '@/components/charts/SankeyWithAccessibility';
+import { transformToSankeyData, type DateRange } from '@/lib/charts/sankey-utils';
 
 // Dynamic chart imports for reports page
 const DynamicReportsCharts = dynamic(
@@ -105,6 +108,10 @@ export default function ReportsPage() {
   const [categories, setCategories] = useState<Category[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [timeRange, setTimeRange] = useState<'month' | 'quarter' | 'year' | 'all'>('month');
+  const [isExporting, setIsExporting] = useState(false);
+
+  // Ref for Sankey diagram export
+  const sankeyContainerRef = useRef<HTMLDivElement>(null);
 
   // Get theme-aware chart colors
   const theme = useThemeMode();
@@ -129,6 +136,79 @@ export default function ReportsPage() {
     }
   }
 
+  // ALL HOOKS MUST BE CALLED BEFORE ANY EARLY RETURNS (Rules of Hooks)
+
+  // Compute Sankey date range for money flow visualization
+  const sankeyDateRange: DateRange | undefined = useMemo(() => {
+    if (timeRange === 'all') return undefined;
+
+    const now = new Date();
+    const start = new Date();
+
+    switch (timeRange) {
+      case 'month':
+        start.setMonth(now.getMonth() - 1);
+        break;
+      case 'quarter':
+        start.setMonth(now.getMonth() - 3);
+        break;
+      case 'year':
+        start.setFullYear(now.getFullYear() - 1);
+        break;
+    }
+
+    return { start, end: now };
+  }, [timeRange]);
+
+  const sankeyData = useMemo(() => {
+    return transformToSankeyData(transactions, categories, sankeyDateRange);
+  }, [transactions, categories, sankeyDateRange]);
+
+  // Export Sankey diagram as PNG
+  const exportAsPNG = useCallback(async () => {
+    if (!sankeyContainerRef.current || isExporting) return;
+
+    setIsExporting(true);
+    try {
+      const dataUrl = await htmlToImage.toPng(sankeyContainerRef.current, {
+        backgroundColor: '#0f172a', // slate-900
+        quality: 1.0,
+        pixelRatio: 2,
+      });
+
+      const link = document.createElement('a');
+      link.download = `money-flow-${new Date().toISOString().split('T')[0]}.png`;
+      link.href = dataUrl;
+      link.click();
+    } catch (error) {
+      console.error('Error exporting PNG:', error);
+    } finally {
+      setIsExporting(false);
+    }
+  }, [isExporting]);
+
+  // Export Sankey diagram as SVG
+  const exportAsSVG = useCallback(async () => {
+    if (!sankeyContainerRef.current || isExporting) return;
+
+    setIsExporting(true);
+    try {
+      const dataUrl = await htmlToImage.toSvg(sankeyContainerRef.current, {
+        backgroundColor: '#0f172a', // slate-900
+      });
+
+      const link = document.createElement('a');
+      link.download = `money-flow-${new Date().toISOString().split('T')[0]}.svg`;
+      link.href = dataUrl;
+      link.click();
+    } catch (error) {
+      console.error('Error exporting SVG:', error);
+    } finally {
+      setIsExporting(false);
+    }
+  }, [isExporting]);
+
+  // Early return for loading state (AFTER all hooks)
   if (isLoading) {
     return (
       <div className="flex items-center justify-center h-64">
@@ -280,6 +360,87 @@ export default function ReportsPage() {
           ) : (
             <p className="text-gray-500 text-center py-12">No trend data available</p>
           )}
+        </div>
+      </div>
+
+      {/* Money Flow - Sankey Diagram */}
+      <div ref={sankeyContainerRef} className="bg-slate-900 rounded-xl shadow-lg p-6 border border-white/10">
+        <div className="flex items-center justify-between mb-6">
+          <div className="flex items-center gap-3">
+            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-teal-500/20">
+              <ArrowRightLeft className="h-5 w-5 text-teal-400" />
+            </div>
+            <div>
+              <h2 className="text-xl font-bold text-white">Money Flow</h2>
+              <p className="text-sm text-slate-400">
+                Visualize how income flows to categories and savings
+              </p>
+            </div>
+          </div>
+
+          {/* Export Buttons */}
+          {sankeyData.nodes.length > 0 && sankeyData.links.length > 0 && (
+            <div className="flex gap-2">
+              <button
+                onClick={exportAsPNG}
+                disabled={isExporting}
+                className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-slate-300 bg-white/5 hover:bg-white/10 rounded-lg border border-white/10 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                title="Download as PNG"
+              >
+                <Image className="h-4 w-4" />
+                <span className="hidden sm:inline">PNG</span>
+              </button>
+              <button
+                onClick={exportAsSVG}
+                disabled={isExporting}
+                className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-slate-300 bg-white/5 hover:bg-white/10 rounded-lg border border-white/10 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                title="Download as SVG"
+              >
+                <FileImage className="h-4 w-4" />
+                <span className="hidden sm:inline">SVG</span>
+              </button>
+            </div>
+          )}
+        </div>
+
+        {sankeyData.nodes.length > 0 && sankeyData.links.length > 0 ? (
+          <SankeyWithAccessibility
+            data={sankeyData}
+            width={800}
+            height={500}
+            className="mx-auto"
+          />
+        ) : (
+          <div className="flex items-center justify-center h-64 rounded-xl bg-slate-800/50 border border-white/5">
+            <div className="text-center">
+              <ArrowRightLeft className="h-12 w-12 text-slate-600 mx-auto mb-3" />
+              <p className="text-slate-400">
+                Add income and expense transactions to see your money flow
+              </p>
+            </div>
+          </div>
+        )}
+
+        {/* Summary Stats */}
+        <div className="mt-6 grid grid-cols-3 gap-4">
+          <div className="rounded-lg bg-white/5 p-4 text-center">
+            <p className="text-2xl font-bold text-green-400">
+              ${sankeyData.totalIncome.toLocaleString('en-US', { maximumFractionDigits: 0 })}
+            </p>
+            <p className="text-xs text-slate-500 mt-1">Total Income</p>
+          </div>
+          <div className="rounded-lg bg-white/5 p-4 text-center">
+            <p className="text-2xl font-bold text-red-400">
+              ${sankeyData.totalExpenses.toLocaleString('en-US', { maximumFractionDigits: 0 })}
+            </p>
+            <p className="text-xs text-slate-500 mt-1">Total Expenses</p>
+          </div>
+          <div className="rounded-lg bg-white/5 p-4 text-center">
+            <p className={`text-2xl font-bold ${sankeyData.netSavings >= 0 ? 'text-teal-400' : 'text-red-400'}`}>
+              ${sankeyData.netSavings.toLocaleString('en-US', { maximumFractionDigits: 0 })}
+            </p>
+            <p className="text-xs text-slate-500 mt-1">Net Savings</p>
+          </div>
         </div>
       </div>
 

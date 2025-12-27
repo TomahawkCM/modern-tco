@@ -4,215 +4,101 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-    --primary: 210 79% 46%;
-    --primary-foreground: 210 40% 98%;
-    --secondary: 210 40% 96%;
-    --secondary-foreground: 222.2 84% 4.9%;
-    --muted: 210 40% 96%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 96%;
-    --accent-foreground: 222.2 84% 4.9%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 210 79% 46%;
+    /* Budget App Light Theme (Clean, Minimalist) */
+    --background: 0 0% 98%; /* gray-50 #fafafa */
+    --foreground: 0 0% 9%; /* gray-900 #171717 */
+
+    --card: 0 0% 100%; /* white */
+    --card-foreground: 0 0% 9%; /* gray-900 */
+
+    --popover: 0 0% 100%; /* white */
+    --popover-foreground: 0 0% 9%; /* gray-900 */
+
+    --primary: 173 80% 40%; /* teal-500 #14b8a6 */
+    --primary-foreground: 0 0% 100%; /* white */
+
+    --secondary: 0 0% 96%; /* gray-100 #f5f5f5 */
+    --secondary-foreground: 0 0% 9%; /* gray-900 */
+
+    --muted: 0 0% 96%; /* gray-100 */
+    --muted-foreground: 0 0% 45%; /* gray-500 #737373 */
+
+    --accent: 173 80% 40%; /* teal-500 */
+    --accent-foreground: 0 0% 100%; /* white */
+
+    --destructive: 0 84% 60%; /* red-500 #ef4444 */
+    --destructive-foreground: 0 0% 98%; /* white */
+
+    --border: 0 0% 90%; /* gray-200 #e5e5e5 */
+    --input: 0 0% 90%; /* gray-200 */
+    --ring: 173 80% 40%; /* teal-500 */
+
     --radius: 0.5rem;
 
-    /* Accessibility: Base font size (adjustable via settings) */
-    /* Updated to 18px for seniors-friendliness (WCAG 2.2 AA) */
-    --base-font-size: 18px;
+    /* Semantic Colors */
+    --success: 142 71% 45%; /* green-500 */
+    --warning: 38 92% 50%; /* yellow-500 */
+    --error: 0 84% 60%; /* red-500 */
 
-    /* === Motion Tokens === */
-    /* Duration Scale */
-    --duration-instant: 0ms;
-    --duration-fast: 150ms;
-    --duration-normal: 300ms;
-    --duration-slow: 500ms;
-    --duration-slower: 700ms;
+    /* Typography - Standard */
+    --base-font-size: 16px;
+    --font-size-xs: 0.75rem;    /* 12px */
+    --font-size-sm: 0.875rem;   /* 14px */
+    --font-size-base: 1rem;     /* 16px */
+    --font-size-lg: 1.125rem;   /* 18px */
+    --font-size-xl: 1.25rem;    /* 20px */
+    --font-size-2xl: 1.5rem;    /* 24px */
+    --font-size-3xl: 1.875rem;  /* 30px */
+    --font-size-4xl: 2.25rem;   /* 36px */
 
-    /* Easing Curves */
-    --easing-linear: linear;
-    --easing-default: cubic-bezier(0.4, 0.0, 0.2, 1);
-    --easing-emphasized: cubic-bezier(0.2, 0.0, 0.0, 1);
-    --easing-decelerate: cubic-bezier(0.0, 0.0, 0.2, 1);
-    --easing-accelerate: cubic-bezier(0.4, 0.0, 1, 1);
-    --easing-bounce: cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    /* Seniors Mode Multiplier (set by SeniorsModeContext) */
+    --seniors-font-multiplier: 1;
+    --seniors-touch-target: 44px; /* WCAG minimum, context sets 52px for Seniors Mode */
+    --seniors-touch-target-min: 52px; /* Target for Seniors Mode */
 
-    /* === Spacing Tokens === */
-    /* Semantic Spacing (rem-based, scales with base font size) */
-    --spacing-page-x: 1rem;        /* 18px mobile */
-    --spacing-page-y: 1.5rem;      /* 27px mobile */
-    --spacing-section: 3rem;       /* 54px - between major sections */
-    --spacing-subsection: 2rem;    /* 36px - between subsections */
-    --spacing-card-padding: 1.5rem; /* 27px - card internal padding */
-    --spacing-card-gap: 1rem;      /* 18px - gap between cards */
-    --spacing-input-padding-x: 0.75rem; /* 13.5px - input horizontal */
-    --spacing-input-padding-y: 0.5rem;  /* 9px - input vertical */
-    --spacing-button-padding-x: 1rem;   /* 18px - button horizontal */
-    --spacing-button-padding-y: 0.75rem; /* 13.5px - button vertical */
-    --spacing-icon-sm: 1rem;       /* 18px icon */
-    --spacing-icon-md: 1.25rem;    /* 22.5px icon */
-    --spacing-icon-lg: 1.5rem;     /* 27px icon */
-    --spacing-icon-button: 2.5rem; /* 45px icon button */
-    --spacing-touch-target: 3rem;  /* 54px minimum (WCAG 2.2 AA: 48px) */
+    /* Line Height Variables */
+    --line-height-tight: 1.25;
+    --line-height-normal: 1.5;
+    --line-height-relaxed: 1.625;
+    --line-height-loose: 1.75;
+    --seniors-line-height: 1.7;
 
-    /* === Shadow Tokens === */
-    --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.05);
-    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
-    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
-    --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05);
-    --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1), 0 10px 10px rgba(0, 0, 0, 0.04);
-    --shadow-2xl: 0 25px 50px rgba(0, 0, 0, 0.25);
-    --shadow-inner: inset 0 2px 4px rgba(0, 0, 0, 0.06);
-    --shadow-focus: 0 0 0 3px hsla(var(--ring), 0.5);
-
-    /* === Z-Index Scale === */
-    --z-base: 0;
-    --z-dropdown: 100;
-    --z-sticky: 200;
-    --z-fixed: 300;
-    --z-modal-backdrop: 400;
-    --z-modal: 500;
-    --z-popover: 600;
-    --z-toast: 700;
-    --z-tooltip: 800;
-
-    /* === Backdrop Blur === */
-    --blur-none: 0;
-    --blur-xs: 2px;
-    --blur-sm: 4px;
-    --blur-md: 8px;
-    --blur-lg: 16px;
-    --blur-xl: 24px;
-    --blur-2xl: 40px;
-  }
-
-  /* Apply base font size to html element */
-  html {
-    font-size: var(--base-font-size);
-  }
-
-  /* Desktop spacing overrides (≥768px) */
-  @media (min-width: 768px) {
-    :root {
-      --spacing-page-x: 2rem;      /* 36px desktop */
-      --spacing-page-y: 2.5rem;    /* 45px desktop */
-    }
+    /* Spacing */
+    --spacing-page-x: 1rem;
+    --spacing-page-y: 1.5rem;
+    --spacing-section: 3rem;
+    --spacing-card-padding: 1.5rem;
   }
 
   .dark {
-    /* Archon cyberpunk dark theme - WCAG AA compliant - Updated to archon.png palette */
-    --background: 0 0% 4%; /* #0a0a0a - Very dark neutral background */
-    --foreground: 0 0% 98%; /* #fafafa - High contrast white (18:1 ratio) */
+    /* Budget App Dark Theme (Clean, No Gradients) */
+    --background: 0 0% 4%; /* gray-950 #0a0a0a */
+    --foreground: 0 0% 98%; /* gray-50 #fafafa */
 
-    /* Card colors - Blue-gray from archon.png */
-    --card: 220 20% 15%; /* #1a1f2e - Dark blue-gray card background (KEY CHANGE) */
-    --card-foreground: 0 0% 98%; /* #fafafa - Consistent text (16:1 ratio) */
+    --card: 0 0% 7%; /* gray-900/950 mix */
+    --card-foreground: 0 0% 98%;
 
-    /* Popover colors */
-    --popover: 220 20% 15%; /* Match card for consistency */
+    --popover: 0 0% 7%;
     --popover-foreground: 0 0% 98%;
 
-    /* Primary - Standard blue accent (replaces electric cyan) */
-    --primary: 217 91% 60%; /* #3b82f6 - Standard Tailwind blue-500 */
-    --primary-foreground: 0 0% 100%; /* White text on blue (10:1 ratio) */
+    --primary: 173 80% 40%; /* teal-500 */
+    --primary-foreground: 0 0% 100%;
 
-    /* Secondary - Dark blue-gray for subtle emphasis */
-    --secondary: 220 20% 12%; /* #181d28 - Darker blue-gray */
-    --secondary-foreground: 217 91% 70%; /* #6ba3ff - Lighter blue text */
+    --secondary: 0 0% 15%; /* gray-800 */
+    --secondary-foreground: 0 0% 98%;
 
-    /* Muted - For less prominent UI elements */
-    --muted: 220 20% 12%; /* #181d28 - Match secondary */
-    --muted-foreground: 0 0% 65%; /* #a6a6a6 - Medium gray (7:1 ratio - WCAG AAA) */
+    --muted: 0 0% 15%; /* gray-800 */
+    --muted-foreground: 0 0% 64%; /* gray-400 */
 
-    /* Accent - Purple highlight maintaining cyberpunk theme */
-    --accent: 270 70% 55%; /* #8b5cf6 - Purple accent (unchanged) */
-    --accent-foreground: 0 0% 98%; /* White text on purple (8:1 ratio) */
+    --accent: 173 80% 40%; /* teal-500 */
+    --accent-foreground: 0 0% 100%;
 
-    /* Destructive - Error states */
-    --destructive: 0 72% 51%; /* #dc2626 - Red with good contrast */
-    --destructive-foreground: 0 0% 98%; /* White text on red (6:1 ratio) */
+    --destructive: 0 63% 31%; /* red-900 */
+    --destructive-foreground: 0 0% 98%;
 
-    /* Success - Green for Active/success status (NEW from archon.png) */
-    --success: 142 71% 45%; /* #22c55e - Tailwind green-500 */
-    --success-foreground: 0 0% 100%; /* White text on green */
-
-    /* Warning - Orange for stats/numbers (NEW from archon.png) */
-    --warning: 25 95% 53%; /* #f97316 - Tailwind orange-500 */
-    --warning-foreground: 0 0% 100%; /* White text on orange */
-
-    /* Borders and inputs */
-    --border: 220 20% 20%; /* #292f3d - Subtle blue-gray border */
-    --input: 220 20% 12%; /* Match muted */
-    --ring: 217 91% 60%; /* Match primary for focus rings */
-  }
-
-  .high-contrast {
-    /* High-Contrast Mode - WCAG AAA Compliant (7:1+ contrast)
-       Designed for maximum visibility and accessibility
-       Uses pure black/white with bright accent colors */
-
-    /* Base colors - Maximum contrast (21:1 ratio) */
-    --background: 0 0% 0%; /* #000000 - Pure black background */
-    --foreground: 0 0% 100%; /* #ffffff - Pure white text (21:1 ratio) */
-
-    /* Card colors - Slightly lighter than pure black for layering */
-    --card: 0 0% 10%; /* #1a1a1a - Very dark gray for cards */
-    --card-foreground: 0 0% 100%; /* #ffffff - White text (18:1 ratio) */
-
-    /* Popover colors */
-    --popover: 0 0% 10%; /* Match card */
-    --popover-foreground: 0 0% 100%;
-
-    /* Primary - Bright cyan for maximum visibility */
-    --primary: 180 100% 50%; /* #00ffff - Bright cyan */
-    --primary-foreground: 0 0% 0%; /* Black text on cyan (21:1 ratio) */
-
-    /* Secondary - Light gray for secondary actions */
-    --secondary: 0 0% 20%; /* #333333 - Dark gray background */
-    --secondary-foreground: 0 0% 100%; /* White text (15:1 ratio) */
-
-    /* Muted - For less prominent UI elements */
-    --muted: 0 0% 15%; /* #262626 - Slightly lighter dark gray */
-    --muted-foreground: 0 0% 85%; /* #d9d9d9 - Light gray text (11:1 ratio) */
-
-    /* Accent - Bright yellow for highlights */
-    --accent: 60 100% 50%; /* #ffff00 - Bright yellow */
-    --accent-foreground: 0 0% 0%; /* Black text on yellow (21:1 ratio) */
-
-    /* Destructive - Bright red for errors */
-    --destructive: 0 100% 50%; /* #ff0000 - Bright red */
-    --destructive-foreground: 0 0% 100%; /* White text on red (5.25:1 ratio) */
-
-    /* Success - Bright green for success states */
-    --success: 120 100% 40%; /* #00cc00 - Bright green (7.4:1 ratio) */
-    --success-foreground: 0 0% 100%; /* White text on green */
-
-    /* Warning - Bright orange for warnings */
-    --warning: 30 100% 50%; /* #ff9900 - Bright orange */
-    --warning-foreground: 0 0% 0%; /* Black text on orange (10:1 ratio) */
-
-    /* Borders and inputs - High visibility */
-    --border: 0 0% 100%; /* #ffffff - White borders for maximum visibility */
-    --input: 0 0% 5%; /* #0d0d0d - Very dark input background */
-    --ring: 60 100% 50%; /* Bright yellow focus rings for maximum visibility */
-
-    /* Remove shadows for clarity in high-contrast mode */
-    --shadow-xs: none;
-    --shadow-sm: none;
-    --shadow-md: none;
-    --shadow-lg: none;
-    --shadow-xl: none;
-    --shadow-2xl: none;
-    --shadow-inner: none;
-    --shadow-focus: 0 0 0 4px hsl(var(--ring)); /* Solid ring instead */
+    --border: 0 0% 15%; /* gray-800 */
+    --input: 0 0% 15%; /* gray-800 */
+    --ring: 173 80% 40%; /* teal-500 */
   }
 }
 
@@ -222,416 +108,371 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-feature-settings:
+      "rlig" 1,
+      "calt" 1;
   }
-  
-  /* Force dark mode with archon cyberpunk theme */
-html {
-    color-scheme: dark;
-    overflow-y: auto !important;
+
+  /* Smooth scrolling */
+  html {
     scroll-behavior: smooth;
-}
-  
-body {
-    @apply bg-archon-bg;
-    background-attachment: fixed;
-    overflow-y: auto !important;
-    overflow-x: hidden;
+  }
 }
 
-/* Allow natural content expansion for scrolling */
-#__next, body, html {
-  min-height: 100vh;
+/* Microinteractions */
+.btn-press {
+  @apply transition-transform duration-150 active:scale-95;
 }
 
-main#main-content {
-  overflow-y: visible;
-}
-}
-
-/* Archon cyberpunk glass morphism effects - Updated to blue palette */
+/* Glassmorphism (Clean version, used sparingly) */
 .glass {
-  @apply bg-archon-glass backdrop-blur-lg;
-  border: 1px solid rgba(59, 130, 246, 0.2);
-  box-shadow: 0 8px 32px rgba(59, 130, 246, 0.1);
+  @apply border border-white/20 bg-white/80 backdrop-blur-md dark:border-white/10 dark:bg-black/80;
 }
 
-.archon-card {
-  @apply bg-archon-card backdrop-blur-xl border border-archon-border rounded-lg;
-  box-shadow:
-    0 4px 24px rgba(59, 130, 246, 0.1),
-    0 2px 12px rgba(139, 92, 246, 0.05);
-}
-
-.archon-button {
-  @apply bg-archon-button text-archon-text-primary font-semibold rounded-lg;
-  border: 1px solid rgba(59, 130, 246, 0.3);
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.2);
-}
-
-.archon-button:hover {
-  box-shadow: 0 4px 16px rgba(59, 130, 246, 0.4);
-  transform: translateY(-1px);
-}
-
-.archon-accent-button {
-  @apply bg-archon-accent text-archon-text-primary font-semibold rounded-lg;
-  border: 1px solid rgba(139, 92, 246, 0.3);
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 8px rgba(139, 92, 246, 0.2);
-}
-
-.archon-text-glow {
-  color: #3b82f6;
-  text-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
-}
-
-/* Legacy styles preserved */
-.tanium-gradient {
-  @apply bg-tanium-gradient;
-}
-
-/* Enhanced exam-specific styles with archon theme */
-.question-card {
-  @apply archon-card p-6 shadow-xl;
-}
-
-.progress-ring {
-  transform: rotate(-90deg);
-  transform-origin: 50% 50%;
-}
-
-/* Cyberpunk animations - Updated to blue palette */
-@keyframes cyber-pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.7; }
-}
-
-.cyber-pulse {
-  animation: cyber-pulse 2s ease-in-out infinite;
-}
-
-@keyframes neon-glow {
-  0%, 100% {
-    text-shadow: 0 0 5px rgba(59, 130, 246, 0.5);
-  }
-  50% {
-    text-shadow: 0 0 20px rgba(59, 130, 246, 0.8), 0 0 30px rgba(59, 130, 246, 0.6);
-  }
-}
-
-.neon-glow {
-  animation: neon-glow 3s ease-in-out infinite;
-}
-
-/* Enhanced cyberpunk animations for study cards */
-@keyframes particle-float {
-  0%, 100% { 
-    transform: translateY(0px) translateX(0px);
-    opacity: 0.3;
-  }
-  25% { 
-    transform: translateY(-10px) translateX(5px);
-    opacity: 0.6;
-  }
-  50% { 
-    transform: translateY(-20px) translateX(-3px);
-    opacity: 0.8;
-  }
-  75% { 
-    transform: translateY(-15px) translateX(8px);
-    opacity: 0.5;
-  }
-}
-
-.particle-float {
-  animation: particle-float 6s ease-in-out infinite;
-}
-
-@keyframes cyber-border {
-  0% {
-    border-color: rgba(59, 130, 246, 0.3);
-    box-shadow: 0 0 10px rgba(59, 130, 246, 0.2);
-  }
-  50% {
-    border-color: rgba(147, 51, 234, 0.5);
-    box-shadow: 0 0 20px rgba(147, 51, 234, 0.3);
-  }
-  100% {
-    border-color: rgba(59, 130, 246, 0.3);
-    box-shadow: 0 0 10px rgba(59, 130, 246, 0.2);
-  }
-}
-
-.cyber-border {
-  animation: cyber-border 4s ease-in-out infinite;
-}
-
-@keyframes hologram-shimmer {
-  0% {
-    background-position: -200% 0;
-  }
-  100% {
-    background-position: 200% 0;
-  }
-}
-
-.hologram-shimmer {
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(59, 130, 246, 0.1),
-    transparent
-  );
-  background-size: 200% 100%;
-  animation: hologram-shimmer 3s ease-in-out infinite;
-}
-
-@keyframes progress-glow {
-  0%, 100% {
-    box-shadow: 0 0 5px rgba(59, 130, 246, 0.5);
-  }
-  50% {
-    box-shadow: 0 0 15px rgba(59, 130, 246, 0.8), 0 0 25px rgba(59, 130, 246, 0.4);
-  }
-}
-
-.progress-glow {
-  animation: progress-glow 2.5s ease-in-out infinite;
-}
-
-/* 3D transform utilities */
-.preserve-3d {
-  transform-style: preserve-3d;
-}
-
-.perspective-1000 {
-  perspective: 1000px;
-}
-
-/* Glassmorphism enhancements - Updated to blue palette */
-.glass-card {
-  background: rgba(10, 10, 15, 0.8);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(59, 130, 246, 0.2);
-  box-shadow:
-    0 8px 32px rgba(0, 0, 0, 0.3),
-    0 4px 16px rgba(59, 130, 246, 0.1),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1);
-}
-
-.glass-button {
-  background: rgba(59, 130, 246, 0.1);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(59, 130, 246, 0.3);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.glass-button:hover {
-  background: rgba(59, 130, 246, 0.2);
-  box-shadow: 0 4px 20px rgba(59, 130, 246, 0.3);
-  transform: translateY(-2px) scale(1.02);
-}
-
-/* Phase 4.1.1: Button press animations - Tactile feedback for all buttons */
-button:not(:disabled) {
-  transition: transform 0.15s ease-out;
-}
-
-button:not(:disabled):active {
-  transform: scale(0.95);
-}
-
-/* Phase 4.1.3: Shimmer loading animation for skeletons */
-@keyframes shimmer {
-  0% {
-    background-position: -200% 0;
-  }
-  100% {
-    background-position: 200% 0;
-  }
-}
-
-/* Phase 4.1.4: Smooth fade-in animation for progressive rendering */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Animation utilities with reduced motion support */
+/* Utilities */
 @layer utilities {
-  .animate-fadeIn {
-    animation: fadeIn 0.5s ease-out forwards;
+  .text-balance {
+    text-wrap: balance;
   }
+}
 
-  .animation-delay-100 {
-    animation-delay: 100ms;
-  }
+/* ===================================
+   SENIORS MODE ACCESSIBILITY STYLES
+   WCAG 2.2 AA Compliant
+   =================================== */
 
-  .animation-delay-200 {
-    animation-delay: 200ms;
-  }
+/* Seniors Mode - Font Scaling */
+.seniors-mode {
+  /* Base font size scales with multiplier */
+  font-size: calc(var(--base-font-size) * var(--seniors-font-multiplier, 1));
 
-  .animation-delay-300 {
-    animation-delay: 300ms;
-  }
+  /* Enhanced line height for readability (1.6-1.8 range) */
+  line-height: var(--seniors-line-height, 1.7);
 
-  /* Respect reduced motion preferences (system or manual toggle) */
-  @media (prefers-reduced-motion: reduce) {
-    :root {
-      /* Override duration tokens for reduced motion */
-      --duration-instant: 0ms;
-      --duration-fast: 0.01ms;
-      --duration-normal: 0.01ms;
-      --duration-slow: 0.01ms;
-      --duration-slower: 0.01ms;
-    }
+  /* Slightly increased letter spacing */
+  letter-spacing: 0.01em;
+}
 
-    .animate-fadeIn {
-      animation: none;
-      opacity: 1;
-      transform: none;
-    }
+/* Seniors Mode - Element-Specific Line Heights */
+.seniors-mode p,
+.seniors-mode li,
+.seniors-mode dd,
+.seniors-mode blockquote {
+  line-height: 1.8; /* Maximum readability for body text */
+}
 
-    .animation-delay-100,
-    .animation-delay-200,
-    .animation-delay-300 {
-      animation-delay: 0s;
-    }
+.seniors-mode h1,
+.seniors-mode h2,
+.seniors-mode h3,
+.seniors-mode h4,
+.seniors-mode h5,
+.seniors-mode h6 {
+  line-height: 1.4; /* Tighter for headings */
+  margin-bottom: 0.75em; /* Better spacing below headings */
+}
 
-    * {
-      animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
-      scroll-behavior: auto !important;
-    }
-  }
+.seniors-mode label {
+  line-height: 1.6;
+  display: inline-block; /* Ensure proper spacing */
+  margin-bottom: 0.25em;
+}
 
-  /* Manual reduced motion toggle via accessibility settings */
-  .reduce-motion {
-    --duration-instant: 0ms;
-    --duration-fast: 0.01ms;
-    --duration-normal: 0.01ms;
-    --duration-slow: 0.01ms;
-    --duration-slower: 0.01ms;
-  }
+/* Seniors Mode - Typography Scale */
+.seniors-mode .text-xs { font-size: calc(var(--font-size-xs) * var(--seniors-font-multiplier, 1)); }
+.seniors-mode .text-sm { font-size: calc(var(--font-size-sm) * var(--seniors-font-multiplier, 1)); }
+.seniors-mode .text-base { font-size: calc(var(--font-size-base) * var(--seniors-font-multiplier, 1)); }
+.seniors-mode .text-lg { font-size: calc(var(--font-size-lg) * var(--seniors-font-multiplier, 1)); }
+.seniors-mode .text-xl { font-size: calc(var(--font-size-xl) * var(--seniors-font-multiplier, 1)); }
+.seniors-mode .text-2xl { font-size: calc(var(--font-size-2xl) * var(--seniors-font-multiplier, 1)); }
+.seniors-mode .text-3xl { font-size: calc(var(--font-size-3xl) * var(--seniors-font-multiplier, 1)); }
+.seniors-mode .text-4xl { font-size: calc(var(--font-size-4xl) * var(--seniors-font-multiplier, 1)); }
 
-  .reduce-motion *,
-  .reduce-motion *::before,
-  .reduce-motion *::after {
+/* Seniors Mode - Touch Targets (52px for enhanced accessibility) */
+.seniors-mode button,
+.seniors-mode a,
+.seniors-mode [role="button"],
+.seniors-mode input[type="checkbox"],
+.seniors-mode input[type="radio"],
+.seniors-mode select {
+  min-height: var(--seniors-touch-target-min, 52px);
+  min-width: var(--seniors-touch-target-min, 52px);
+}
+
+/* Utility class for 52px touch targets */
+.touch-target-seniors {
+  min-height: 52px !important;
+  min-width: 52px !important;
+}
+
+/* Standard WCAG touch targets (44px) */
+.touch-target-wcag {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+/* Seniors Mode - Form Inputs */
+.seniors-mode input,
+.seniors-mode textarea,
+.seniors-mode select {
+  padding: 0.75rem 1rem;
+  font-size: calc(1rem * var(--seniors-font-multiplier, 1));
+}
+
+/* Seniors Mode - Button Padding */
+.seniors-mode button,
+.seniors-mode [role="button"],
+.seniors-mode .btn {
+  padding: 0.875rem 1.5rem; /* 14px 24px - larger than default */
+  font-size: calc(1rem * var(--seniors-font-multiplier, 1));
+  font-weight: 600;
+  border-radius: 0.5rem;
+}
+
+/* Seniors Mode - Icon Buttons */
+.seniors-mode button[aria-label]:not(:has(span)),
+.seniors-mode [role="button"][aria-label]:not(:has(span)) {
+  padding: 0.875rem;
+}
+
+/* Seniors Mode - Link Styles */
+.seniors-mode a {
+  padding: 0.5rem 0.25rem;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
+  font-weight: 500;
+}
+
+.seniors-mode a:hover {
+  text-decoration-thickness: 3px;
+}
+
+/* Seniors Mode - Navigation Links */
+.seniors-mode nav a {
+  padding: 0.75rem 1rem;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 0.375rem;
+}
+
+/* Seniors Mode - Increased Spacing */
+.seniors-increased-spacing {
+  --spacing-unit: 1.5;
+}
+
+.seniors-increased-spacing .gap-1 { gap: calc(0.25rem * var(--spacing-unit)); }
+.seniors-increased-spacing .gap-2 { gap: calc(0.5rem * var(--spacing-unit)); }
+.seniors-increased-spacing .gap-3 { gap: calc(0.75rem * var(--spacing-unit)); }
+.seniors-increased-spacing .gap-4 { gap: calc(1rem * var(--spacing-unit)); }
+.seniors-increased-spacing .gap-6 { gap: calc(1.5rem * var(--spacing-unit)); }
+.seniors-increased-spacing .gap-8 { gap: calc(2rem * var(--spacing-unit)); }
+
+/* Seniors Mode - Simplified UI */
+.seniors-simplified {
+  /* Hide decorative elements */
+  --decorative-opacity: 0;
+}
+
+.seniors-simplified .decorative,
+.seniors-simplified [aria-hidden="true"]:not(.essential-icon) {
+  opacity: var(--decorative-opacity, 0);
+}
+
+/* Seniors Mode - High Contrast (7:1 ratio compliant) */
+.seniors-high-contrast {
+  /* Core colors - maximum contrast */
+  --foreground: 0 0% 0%;
+  --background: 0 0% 100%;
+  --border: 0 0% 0%;
+  --muted-foreground: 0 0% 20%;
+
+  /* Card and popover - solid backgrounds */
+  --card: 0 0% 100%;
+  --card-foreground: 0 0% 0%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 0 0% 0%;
+
+  /* Primary - high contrast teal */
+  --primary: 173 100% 25%; /* Darker teal for 7:1 on white */
+  --primary-foreground: 0 0% 100%;
+
+  /* Semantic colors - AAA compliant */
+  --success: 142 100% 25%; /* Dark green */
+  --warning: 38 100% 35%; /* Dark amber */
+  --error: 0 100% 35%; /* Dark red */
+  --destructive: 0 100% 35%;
+  --destructive-foreground: 0 0% 100%;
+
+  /* Ring and input */
+  --ring: 0 0% 0%;
+  --input: 0 0% 85%;
+}
+
+.seniors-high-contrast.dark {
+  /* Core colors - maximum contrast (inverted) */
+  --foreground: 0 0% 100%;
+  --background: 0 0% 0%;
+  --border: 0 0% 100%;
+  --muted-foreground: 0 0% 80%;
+
+  /* Card and popover */
+  --card: 0 0% 0%;
+  --card-foreground: 0 0% 100%;
+  --popover: 0 0% 0%;
+  --popover-foreground: 0 0% 100%;
+
+  /* Primary - high contrast teal on dark */
+  --primary: 173 100% 70%; /* Bright teal for 7:1 on black */
+  --primary-foreground: 0 0% 0%;
+
+  /* Semantic colors - AAA compliant on dark */
+  --success: 142 100% 65%;
+  --warning: 45 100% 60%;
+  --error: 0 100% 65%;
+  --destructive: 0 100% 65%;
+  --destructive-foreground: 0 0% 0%;
+
+  /* Ring and input */
+  --ring: 0 0% 100%;
+  --input: 0 0% 20%;
+}
+
+.seniors-high-contrast a,
+.seniors-high-contrast button {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* Seniors Mode - Reduce Motion */
+.seniors-reduce-motion,
+.seniors-reduce-motion *,
+.seniors-reduce-motion *::before,
+.seniors-reduce-motion *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+  scroll-behavior: auto !important;
+}
+
+/* Respect system preference */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
+  }
+}
+
+/* Seniors Mode - Focus Styles */
+.seniors-mode :focus-visible {
+  outline: 3px solid hsl(var(--primary));
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* High Contrast Focus Styles - maximum visibility */
+.seniors-high-contrast :focus-visible {
+  outline: 4px solid hsl(var(--foreground)) !important;
+  outline-offset: 4px !important;
+  box-shadow: 0 0 0 2px hsl(var(--background)), 0 0 0 6px hsl(var(--foreground));
+}
+
+/* Seniors Mode - Enhanced Cursor */
+.seniors-mode button,
+.seniors-mode a,
+.seniors-mode [role="button"] {
+  cursor: pointer;
+}
+
+/* Seniors Mode - Data Attribute Selectors */
+[data-seniors-mode="true"] {
+  font-size: calc(var(--base-font-size) * var(--seniors-font-multiplier, 1.25));
+}
+
+[data-font-scale="1.25"] {
+  font-size: 1.25rem;
+}
+
+[data-font-scale="1.5"] {
+  font-size: 1.5rem;
+}
+
+/* ===================================
+   TEXT REFLOW - WCAG 1.4.10
+   Content reflows at 200% zoom (320px)
+   No horizontal scrolling required
+   =================================== */
+
+/* Ensure content doesn't overflow horizontally */
+body {
+  overflow-x: hidden;
+}
+
+/* Responsive text that wraps properly */
+.seniors-mode,
+[data-seniors-mode="true"] {
+  /* Prevent text from breaking layout */
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+/* Tables should scroll within their container, not break layout */
+.seniors-mode table {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+/* Images and media should scale down */
+.seniors-mode img,
+.seniors-mode video,
+.seniors-mode iframe,
+.seniors-mode svg {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Code blocks should scroll horizontally within their container */
+.seniors-mode pre,
+.seniors-mode code {
+  max-width: 100%;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* Ensure flexbox doesn't cause overflow */
+.seniors-mode .flex {
+  flex-wrap: wrap;
+}
+
+/* Prevent long URLs or text from breaking layout */
+.seniors-mode a,
+.seniors-mode span {
+  word-break: break-word;
+}
+
+/* Mobile-first reflow breakpoint (320px at 200% = 640px viewport) */
+@media (max-width: 640px) {
+  .seniors-mode .grid {
+    display: flex;
+    flex-direction: column;
   }
 
-  /* High-Contrast Mode: Enhanced UI Element Visibility */
-  .high-contrast {
-    /* Buttons - Maximum visibility with bright colors */
-    button:not(:disabled) {
-      border: 2px solid currentColor !important;
-      font-weight: 600 !important;
-    }
+  .seniors-mode .hidden-on-reflow {
+    display: none;
+  }
+}
 
-    button:focus-visible {
-      outline: 4px solid var(--ring) !important;
-      outline-offset: 2px !important;
-    }
-
-    /* Links - Bright cyan with underline */
-    a {
-      color: hsl(var(--primary)) !important;
-      text-decoration: underline !important;
-      font-weight: 500 !important;
-    }
-
-    a:hover {
-      color: hsl(var(--accent)) !important;
-      text-decoration-thickness: 2px !important;
-    }
-
-    a:focus-visible {
-      outline: 4px solid var(--ring) !important;
-      outline-offset: 2px !important;
-    }
-
-    /* Input fields - High visibility borders */
-    input,
-    textarea,
-    select {
-      border: 2px solid hsl(var(--border)) !important;
-      background: hsl(var(--input)) !important;
-      color: hsl(var(--foreground)) !important;
-    }
-
-    input:focus,
-    textarea:focus,
-    select:focus {
-      outline: 4px solid var(--ring) !important;
-      outline-offset: 0px !important;
-      border-color: var(--ring) !important;
-    }
-
-    /* Card and panel borders - High visibility */
-    [class*="card"],
-    [class*="panel"],
-    [class*="dialog"],
-    [class*="modal"] {
-      border: 2px solid hsl(var(--border)) !important;
-    }
-
-    /* Disabled state - Clear visual indication */
-    button:disabled,
-    input:disabled,
-    textarea:disabled,
-    select:disabled {
-      opacity: 0.5 !important;
-      cursor: not-allowed !important;
-      border-style: dashed !important;
-    }
-
-    /* Focus indicators - Extra prominent */
-    *:focus-visible {
-      outline: 4px solid var(--ring) !important;
-      outline-offset: 2px !important;
-    }
-
-    /* Tables - High contrast borders */
-    table,
-    th,
-    td {
-      border: 2px solid hsl(var(--border)) !important;
-    }
-
-    /* Code blocks - High visibility */
-    code,
-    pre {
-      background: hsl(var(--muted)) !important;
-      border: 2px solid hsl(var(--border)) !important;
-      color: hsl(var(--foreground)) !important;
-    }
-
-    /* Selection highlight - Bright yellow */
-    ::selection {
-      background: hsl(var(--accent)) !important;
-      color: hsl(var(--accent-foreground)) !important;
-    }
-
-    /* Icons - Ensure they're visible */
-    svg {
-      stroke-width: 2.5 !important;
-    }
-
-    /* Shadows - Remove for clarity */
-    * {
-      box-shadow: none !important;
-      text-shadow: none !important;
-    }
+/* Minimum touch targets at all zoom levels */
+@media (pointer: coarse) {
+  .seniors-mode button,
+  .seniors-mode a,
+  .seniors-mode [role="button"] {
+    min-height: 44px;
+    min-width: 44px;
   }
 }

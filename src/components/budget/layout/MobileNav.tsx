@@ -14,7 +14,7 @@ export function MobileNav({ onOpenMenu }: MobileNavProps) {
   const pathname = usePathname();
 
   return (
-    <nav className="safe-area-pb fixed bottom-6 left-4 right-4 z-40 md:hidden">
+    <nav aria-label="Mobile navigation" className="safe-area-pb fixed bottom-6 left-4 right-4 z-40 md:hidden">
       <div className="mx-auto max-w-md rounded-2xl border border-white/10 bg-slate-950/90 p-2 shadow-2xl shadow-black/50 backdrop-blur-xl">
         <div className="flex items-center justify-around">
           <Link

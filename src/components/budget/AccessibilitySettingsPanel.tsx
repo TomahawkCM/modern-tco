@@ -13,10 +13,12 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { Sun, Moon, Contrast, MonitorSmartphone, Zap, ZapOff, Type } from 'lucide-react';
+import { Sun, Moon, Contrast, MonitorSmartphone, Zap, ZapOff, Type, Users } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Switch } from '@/components/ui/switch';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { SeniorsModeToggle } from './SeniorsModeToggle';
+import { useSeniorsModePresets } from '@/hooks/useSeniorsMode';
 
 export type ThemeMode = 'light' | 'dark' | 'high-contrast' | 'auto';
 export type FontSize = '16' | '18' | '20';
@@ -195,6 +197,27 @@ export function AccessibilitySettingsPanel() {
 
   return (
     <div className="space-y-8">
+      {/* Seniors Mode Section - Featured at top */}
+      <div className="rounded-lg bg-gradient-to-r from-teal-50 to-blue-50 dark:from-teal-950 dark:to-blue-950 p-6 shadow-lg border-2 border-teal-200 dark:border-teal-800">
+        <div className="flex items-start gap-4 mb-4">
+          <div className="flex h-12 w-12 items-center justify-center rounded-full bg-teal-100 dark:bg-teal-900">
+            <Users className="h-6 w-6 text-teal-600 dark:text-teal-400" aria-hidden="true" />
+          </div>
+          <div className="flex-1">
+            <h3 className="text-xl font-bold text-foreground">Seniors Mode</h3>
+            <p className="text-sm text-muted-foreground mt-1">
+              One-click accessibility enhancement with larger text, bigger touch targets, and simplified interface
+            </p>
+          </div>
+        </div>
+
+        <div className="bg-white dark:bg-gray-900 rounded-lg p-4">
+          <SeniorsModeToggle showLabel={true} size="large" />
+        </div>
+
+        <SeniorsModePresetsSection />
+      </div>
+
       {/* Theme Mode Section */}
       <div className="rounded-lg bg-card p-6 shadow">
         <div className="mb-4">
@@ -353,12 +376,53 @@ export function AccessibilitySettingsPanel() {
 
       {/* Info Box */}
       <div className="rounded-lg bg-muted p-4">
-        <h4 className="font-semibold text-foreground mb-2">ℹ️ About Accessibility Settings</h4>
+        <h4 className="font-semibold text-foreground mb-2">About Accessibility Settings</h4>
         <ul className="space-y-1 text-sm text-muted-foreground">
           <li>• Settings are saved automatically and persist across sessions</li>
           <li>• Changes sync across all open tabs in real-time</li>
           <li>• Your preferences are stored locally and never sent to servers</li>
+          <li>• Seniors Mode provides one-click accessibility optimization</li>
         </ul>
+      </div>
+    </div>
+  );
+}
+
+/**
+ * Presets section for Seniors Mode with quick configuration options
+ */
+function SeniorsModePresetsSection() {
+  const { applyPreset, getCurrentPreset, presets } = useSeniorsModePresets();
+  const currentPreset = getCurrentPreset();
+
+  const presetInfo = {
+    off: { label: 'Off', description: 'Standard interface' },
+    mild: { label: 'Mild', description: 'Slightly enhanced' },
+    moderate: { label: 'Moderate', description: 'Recommended for most' },
+    full: { label: 'Full', description: 'Maximum accessibility' },
+  };
+
+  return (
+    <div className="mt-4 pt-4 border-t border-teal-200 dark:border-teal-800">
+      <p className="text-sm font-medium text-muted-foreground mb-3">Quick Presets:</p>
+      <div className="grid grid-cols-4 gap-2">
+        {presets.map((preset) => (
+          <button
+            key={preset}
+            onClick={() => applyPreset(preset)}
+            className={`rounded-lg p-3 text-center transition-all min-h-[52px] ${
+              currentPreset === preset
+                ? 'bg-teal-600 text-white shadow-md'
+                : 'bg-white dark:bg-gray-800 text-foreground hover:bg-teal-50 dark:hover:bg-gray-700 border border-gray-200 dark:border-gray-700'
+            }`}
+            aria-pressed={currentPreset === preset}
+          >
+            <div className="font-semibold text-sm">{presetInfo[preset].label}</div>
+            <div className={`text-xs mt-0.5 ${currentPreset === preset ? 'text-teal-100' : 'text-muted-foreground'}`}>
+              {presetInfo[preset].description}
+            </div>
+          </button>
+        ))}
       </div>
     </div>
   );

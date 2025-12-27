@@ -542,15 +542,17 @@ function PurchaseModal({
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="target-date" className="block text-sm font-medium text-gray-700 mb-2">
                 Target Date *
               </label>
               <input
+                id="target-date"
                 type="date"
                 value={targetDate}
                 onChange={(e) => setTargetDate(e.target.value)}
                 min={format(new Date(), 'yyyy-MM-dd')}
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                aria-label="Target date for savings goal"
                 required
               />
             </div>

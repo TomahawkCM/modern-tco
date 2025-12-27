@@ -1,7 +1,12 @@
 {
-  // Terminal configuration for PowerShell compatibility
-  "terminal.integrated.defaultProfile.windows": "PowerShell",
+  // Terminal configuration: Prefer WSL for this workspace since it is hosted in Linux
+  "terminal.integrated.defaultProfile.windows": "WSL",
   "terminal.integrated.profiles.windows": {
+    "WSL": {
+      "path": "C:\\Windows\\System32\\wsl.exe",
+      "args": [],
+      "icon": "terminal-linux"
+    },
     "PowerShell": {
       "source": "PowerShell",
       "icon": "terminal-powershell",
@@ -20,7 +25,8 @@
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit",
-    "source.organizeImports": "explicit"
+    "source.organizeImports": "explicit",
+    "source.removeUnusedImports": "explicit"
   },
   "eslint.enable": true,
   "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact", "mdx"],
@@ -76,12 +82,7 @@
   // Auto Save for Better Development Flow
   "files.autoSave": "onFocusChange",
 
-  // Enhanced Code Actions
-  "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": "explicit",
-    "source.organizeImports": "explicit",
-    "source.removeUnusedImports": "explicit"
-  },
+
 
   // File Explorer Enhancements
   "explorer.fileNesting.enabled": true,

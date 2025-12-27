@@ -2,27 +2,15 @@ import * as React from "react";
 
 import { cn } from "@/lib/utils";
 
-interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
-  variant?: "default" | "cyberpunk";
-}
+interface CardProps extends React.HTMLAttributes<HTMLDivElement> {}
 
-const Card = React.forwardRef<HTMLDivElement, CardProps>(
-  ({ className, variant = "cyberpunk", ...props }, ref) => {
-    const baseClasses = "rounded-xl border text-card-foreground shadow";
-    const variantClasses = {
-      default: "bg-card border-border",
-      cyberpunk: "relative bg-card/80 backdrop-blur-xl border-primary/20 shadow-[0_0_50px_hsl(var(--primary)/0.1)] transition-all duration-200 ease-out hover:shadow-[0_0_80px_hsl(var(--primary)/0.15)] hover:scale-[1.03] hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-    };
-
-    return (
-      <div
-        ref={ref}
-        className={cn(baseClasses, variantClasses[variant], className)}
-        {...props}
-      />
-    );
-  }
-);
+const Card = React.forwardRef<HTMLDivElement, CardProps>(({ className, ...props }, ref) => (
+  <div
+    ref={ref}
+    className={cn("rounded-xl border bg-card text-card-foreground shadow", className)}
+    {...props}
+  />
+));
 Card.displayName = "Card";
 
 const CardHeader = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
@@ -64,4 +52,4 @@ const CardFooter = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDiv
 );
 CardFooter.displayName = "CardFooter";
 
-export { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent };
+export { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle };

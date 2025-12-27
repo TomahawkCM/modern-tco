@@ -245,6 +245,11 @@ export interface BankConfig {
   amountMultiplier?: number;
   hasHeader?: boolean;
   skipRows?: number; // Number of header rows to skip before actual data
+  // Asian bank support - encoding and decimal separator
+  encoding?: 'UTF-8' | 'Shift-JIS' | 'GB2312' | 'EUC-KR' | 'Big5'; // Character encoding
+  decimalSeparator?: '.' | ','; // Period (most) or Comma (Indonesia, Germany)
+  thousandSeparator?: ',' | '.' | ' ' | ''; // Thousand separator
+  region?: 'NA' | 'EU' | 'UK' | 'AU' | 'ASIA'; // Region for date/number parsing hints
 }
 
 // OFX/QFX Types (Phase 2)
@@ -478,6 +483,7 @@ export interface BudgetExport {
   holdings?: Holding[]; // Phase 8 simplified
   loans?: Loan[]; // Loan tracking
   loanPayments?: LoanPayment[]; // Loan payment history
+  subscriptions?: Subscription[]; // Subscription management
 }
 
 // Filter and sort options
@@ -576,4 +582,58 @@ export interface AmortizationEntry {
   interest: number; // Interest portion
   balance: number; // Remaining balance
   cumulativeInterest: number; // Total interest paid up to this point
+}
+
+// Subscription Management Types
+export type SubscriptionStatus = 'active' | 'paused' | 'cancelled' | 'trial';
+export type BillingCycle = 'weekly' | 'bi-weekly' | 'monthly' | 'quarterly' | 'annual';
+export type SubscriptionSource = 'manual' | 'auto-detected' | 'merged';
+
+export interface Subscription {
+  id: string;
+  name: string; // "Netflix", "Spotify"
+  description?: string;
+
+  // Financial
+  amount: number;
+  currency: string;
+  billingCycle: BillingCycle;
+
+  // Dates
+  startDate: Date;
+  nextBillingDate: Date;
+  trialEndDate?: Date; // Track free trials
+  cancelledDate?: Date;
+
+  // Status
+  status: SubscriptionStatus;
+  autoRenew: boolean;
+
+  // Linking
+  category?: string;
+  linkedTransactionIds: string[]; // Auto-detected transactions
+  merchantToken?: string; // For auto-detection matching
+
+  // Reminders
+  reminderDaysBefore: number; // Days before billing to remind
+  reminderEnabled: boolean;
+
+  // Metadata
+  paymentMethod?: string; // "Visa ending 1234"
+  websiteUrl?: string;
+  notes?: string;
+  createdAt: Date;
+  updatedAt: Date;
+
+  // Source tracking
+  source: SubscriptionSource;
+}
+
+// Excluded/Dismissed auto-detected subscriptions
+export interface ExcludedSubscription {
+  id: string;
+  merchantToken: string; // The merchant token that was incorrectly detected
+  merchantName: string; // Display name for reference
+  reason?: string; // Optional reason for exclusion
+  excludedAt: Date;
 }

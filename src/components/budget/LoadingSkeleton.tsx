@@ -8,7 +8,7 @@
 export function Skeleton({ className, style }: { className?: string; style?: React.CSSProperties }) {
   return (
     <div
-      className={`animate-pulse bg-gradient-to-r from-gray-200 via-gray-300 to-gray-200 bg-[length:200%_100%] rounded ${className}`}
+      className={`animate-pulse bg-gradient-to-r from-slate-800 via-slate-700 to-slate-800 bg-[length:200%_100%] rounded ${className}`}
       style={{
         animation: 'shimmer 1.5s ease-in-out infinite',
         ...style,
@@ -44,7 +44,7 @@ export function DashboardSkeleton() {
       {/* Metric Cards - 4 cards with responsive grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {[1, 2, 3, 4].map((i) => (
-          <div key={i} className="bg-white rounded-xl shadow-sm p-6 space-y-3">
+          <div key={i} className="bg-slate-900/50 border border-white/10 backdrop-blur-sm rounded-xl p-6 space-y-3">
             <div className="flex items-center justify-between">
               <Skeleton className="h-4 w-24" />
               <Skeleton className="w-4 h-4 rounded-full" />
@@ -58,8 +58,8 @@ export function DashboardSkeleton() {
       {/* Charts Section - 2 charts side by side */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Chart 1: Category Spending */}
-        <div className="bg-white rounded-xl shadow-sm">
-          <div className="p-6 border-b border-gray-200 flex items-center gap-4">
+        <div className="bg-slate-900/50 border border-white/10 backdrop-blur-sm rounded-xl">
+          <div className="p-6 border-b border-white/10 flex items-center gap-4">
             <Skeleton className="w-8 h-8 rounded-lg" />
             <div className="flex-1 space-y-2">
               <Skeleton className="h-5 w-40" />
@@ -91,8 +91,8 @@ export function DashboardSkeleton() {
         </div>
 
         {/* Chart 2: Income vs Expenses */}
-        <div className="bg-white rounded-xl shadow-sm">
-          <div className="p-6 border-b border-gray-200 flex items-center gap-4">
+        <div className="bg-slate-900/50 border border-white/10 backdrop-blur-sm rounded-xl">
+          <div className="p-6 border-b border-white/10 flex items-center gap-4">
             <Skeleton className="w-8 h-8 rounded-lg" />
             <div className="space-y-2">
               <Skeleton className="h-5 w-40" />
@@ -138,8 +138,8 @@ export function DashboardSkeleton() {
       {/* Additional sections placeholder */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {[1, 2, 3].map((i) => (
-          <div key={i} className="bg-white rounded-xl shadow-sm">
-            <div className="p-6 border-b border-gray-200">
+          <div key={i} className="bg-slate-900/50 border border-white/10 backdrop-blur-sm rounded-xl">
+            <div className="p-6 border-b border-white/10">
               <Skeleton className="h-5 w-32" />
             </div>
             <div className="p-6 space-y-3">
@@ -159,9 +159,9 @@ export function DashboardSkeleton() {
  */
 export function TransactionListSkeleton({ count = 5 }: { count?: number }) {
   return (
-    <div className="bg-white rounded-lg shadow overflow-hidden">
+    <div className="bg-slate-900/50 border border-white/10 backdrop-blur-sm rounded-lg overflow-hidden">
       {/* Table header */}
-      <div className="bg-gray-50 border-b px-6 py-3 flex gap-4">
+      <div className="bg-slate-800/50 border-b border-white/10 px-6 py-3 flex gap-4">
         <Skeleton className="h-4 w-24" />
         <Skeleton className="h-4 w-48 flex-1" />
         <Skeleton className="h-4 w-32" />
@@ -170,7 +170,7 @@ export function TransactionListSkeleton({ count = 5 }: { count?: number }) {
 
       {/* Table rows */}
       {Array.from({ length: count }).map((_, i) => (
-        <div key={i} className="border-b px-6 py-4 flex gap-4 items-center">
+        <div key={i} className="border-b border-white/10 px-6 py-4 flex gap-4 items-center">
           <Skeleton className="h-4 w-24" />
           <div className="flex-1 space-y-2">
             <Skeleton className="h-4 w-full" />
@@ -191,7 +191,7 @@ export function TransactionCardSkeleton({ count = 3 }: { count?: number }) {
   return (
     <div className="space-y-4 p-4">
       {Array.from({ length: count }).map((_, i) => (
-        <div key={i} className="bg-white border rounded-lg p-4 space-y-4">
+        <div key={i} className="bg-slate-900/50 border border-white/10 backdrop-blur-sm rounded-lg p-4 space-y-4">
           {/* Header */}
           <div className="flex items-start gap-4">
             <Skeleton className="w-5 h-5 rounded flex-shrink-0" />
@@ -225,7 +225,7 @@ export function TransactionCardSkeleton({ count = 3 }: { count?: number }) {
  */
 export function ChartSkeleton() {
   return (
-    <div className="bg-white rounded-lg shadow p-6 space-y-4">
+    <div className="bg-slate-900/50 border border-white/10 backdrop-blur-sm rounded-lg p-6 space-y-4">
       <div className="flex items-center justify-between">
         <Skeleton className="h-6 w-40" />
         <Skeleton className="h-8 w-24 rounded-lg" />
@@ -241,7 +241,7 @@ export function ChartSkeleton() {
         ))}
       </div>
 
-      <div className="flex justify-between pt-4 border-t">
+      <div className="flex justify-between pt-4 border-t border-white/10">
         {[1, 2, 3, 4].map((i) => (
           <Skeleton key={i} className="h-3 w-16" />
         ))}
@@ -257,7 +257,7 @@ export function BudgetCardSkeleton({ count = 3 }: { count?: number }) {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
       {Array.from({ length: count }).map((_, i) => (
-        <div key={i} className="bg-white rounded-lg shadow p-6 space-y-4">
+        <div key={i} className="bg-slate-900/50 border border-white/10 backdrop-blur-sm rounded-lg p-6 space-y-4">
           <div className="flex items-center justify-between">
             <Skeleton className="h-5 w-32" />
             <Skeleton className="h-4 w-20" />
@@ -279,7 +279,7 @@ export function BudgetCardSkeleton({ count = 3 }: { count?: number }) {
  */
 export function CardSkeleton() {
   return (
-    <div className="bg-white rounded-lg shadow p-6 space-y-4">
+    <div className="bg-slate-900/50 border border-white/10 backdrop-blur-sm rounded-lg p-6 space-y-4">
       <Skeleton className="h-6 w-48" />
       <Skeleton className="h-4 w-full" />
       <Skeleton className="h-4 w-5/6" />

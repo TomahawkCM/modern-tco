@@ -26,11 +26,11 @@ echo ""
 
 # Check if Vibe Check server is configured
 echo -e "${YELLOW}[1/4]${NC} Checking Vibe Check MCP server configuration..."
-if grep -q "pv-bhat-vibe-check-mcp-server" "$CLAUDE_CONFIG" 2>/dev/null; then
+if grep -q "vibe-check" "$CLAUDE_CONFIG" 2>/dev/null; then
     echo -e "${GREEN}✓${NC} Vibe Check MCP server found in Claude config"
 else
     echo -e "${RED}✗${NC} Vibe Check MCP server not found in Claude config"
-    echo -e "${YELLOW}ℹ${NC}  Run: claude mcp add --transport http pv-bhat-vibe-check-mcp-server \"https://server.smithery.ai/@PV-Bhat/vibe-check-mcp-server/mcp\""
+    echo -e "${YELLOW}ℹ${NC}  Package: @pv-bhat/vibe-check-mcp@2.7.6"
     exit 1
 fi
 
@@ -94,16 +94,16 @@ echo ""
 echo -e "${BLUE}Quick Start Commands:${NC}"
 echo ""
 echo -e "  # Check current constitution"
-echo -e "  ${GREEN}mcp__pv-bhat-vibe-check-mcp-server__check_constitution${NC}"
+echo -e "  ${GREEN}mcp__vibe-check__check_constitution${NC}"
 echo ""
 echo -e "  # Load LMS constitution (copy from: $CONSTITUTION_FILE)"
-echo -e "  ${GREEN}mcp__pv-bhat-vibe-check-mcp-server__update_constitution${NC}"
+echo -e "  ${GREEN}mcp__vibe-check__update_constitution${NC}"
 echo ""
 echo -e "  # Use metacognitive checkpoint"
-echo -e "  ${GREEN}mcp__pv-bhat-vibe-check-mcp-server__vibe_check${NC}"
+echo -e "  ${GREEN}mcp__vibe-check__vibe_check${NC}"
 echo ""
 echo -e "  # Learn from patterns"
-echo -e "  ${GREEN}mcp__pv-bhat-vibe-check-mcp-server__vibe_learn${NC}"
+echo -e "  ${GREEN}mcp__vibe-check__vibe_learn${NC}"
 echo ""
 echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
 echo ""

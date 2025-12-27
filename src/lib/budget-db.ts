@@ -28,6 +28,8 @@ import type {
   PredictionAccuracy,
   Loan,
   LoanPayment,
+  Subscription,
+  ExcludedSubscription,
 } from '@/types/budget';
 import {
   encryptTransaction,
@@ -38,7 +40,7 @@ import {
 } from './encryption';
 
 // Re-export types for convenience
-export type { InvestmentAccount, Holding } from '@/types/budget';
+export type { InvestmentAccount, Holding, Subscription } from '@/types/budget';
 
 /**
  * Budget Database Schema
@@ -55,6 +57,9 @@ export interface PriceCache {
   fetchedAt: Date;
   source: 'yahoo' | 'fallback';
 }
+
+// Import sync types
+import type { PairedDevice } from './sync/types';
 
 export class BudgetDatabase extends Dexie {
   accounts!: Table<Account>;
@@ -73,6 +78,9 @@ export class BudgetDatabase extends Dexie {
   predictionAccuracy!: Table<PredictionAccuracy>;
   loans!: Table<Loan>;
   loanPayments!: Table<LoanPayment>;
+  subscriptions!: Table<Subscription>;
+  excludedSubscriptions!: Table<ExcludedSubscription>;
+  pairedDevices!: Table<PairedDevice>;
 
   constructor() {
     super('HouseholdBudgetApp');
@@ -232,6 +240,72 @@ export class BudgetDatabase extends Dexie {
       predictionAccuracy: 'id, category, month, recordedAt',
       loans: 'id, type, status, lender, nextPaymentDate, accountId, paymentFrequency',
       loanPayments: 'id, loanId, date, transactionId, isScheduled'
+    });
+
+    // Version 11: Add subscription management
+    this.version(11).stores({
+      accounts: 'id, name, institution, type',
+      transactions: 'id, accountId, date, category, amount, description, splitFromId, isSplit',
+      categories: 'id, name, type, order',
+      budgets: 'id, categoryId, period, startDate',
+      futurePurchases: 'id, targetDate, priority, isCompleted',
+      retirementPlans: 'id, name, createdAt',
+      importMappings: 'id, institution, accountId',
+      importHistory: 'id, importDate, fileFormat, bank, fileName',
+      receipts: 'id, transactionId, uploadedAt, mimeType, fileSize',
+      investmentAccounts: 'id, type, name, createdAt',
+      holdings: 'id, accountId, symbol, purchaseDate, [accountId+symbol]',
+      priceCache: 'id, symbol, fetchedAt, source',
+      anomalyFeedback: 'id, transactionId, merchant, category, createdAt',
+      predictionAccuracy: 'id, category, month, recordedAt',
+      loans: 'id, type, status, lender, nextPaymentDate, accountId, paymentFrequency',
+      loanPayments: 'id, loanId, date, transactionId, isScheduled',
+      subscriptions: 'id, name, status, category, nextBillingDate, billingCycle, merchantToken, source'
+    });
+
+    // Version 12: Add excluded subscriptions (dismiss false positives)
+    this.version(12).stores({
+      accounts: 'id, name, institution, type',
+      transactions: 'id, accountId, date, category, amount, description, splitFromId, isSplit',
+      categories: 'id, name, type, order',
+      budgets: 'id, categoryId, period, startDate',
+      futurePurchases: 'id, targetDate, priority, isCompleted',
+      retirementPlans: 'id, name, createdAt',
+      importMappings: 'id, institution, accountId',
+      importHistory: 'id, importDate, fileFormat, bank, fileName',
+      receipts: 'id, transactionId, uploadedAt, mimeType, fileSize',
+      investmentAccounts: 'id, type, name, createdAt',
+      holdings: 'id, accountId, symbol, purchaseDate, [accountId+symbol]',
+      priceCache: 'id, symbol, fetchedAt, source',
+      anomalyFeedback: 'id, transactionId, merchant, category, createdAt',
+      predictionAccuracy: 'id, category, month, recordedAt',
+      loans: 'id, type, status, lender, nextPaymentDate, accountId, paymentFrequency',
+      loanPayments: 'id, loanId, date, transactionId, isScheduled',
+      subscriptions: 'id, name, status, category, nextBillingDate, billingCycle, merchantToken, source',
+      excludedSubscriptions: 'id, merchantToken, excludedAt'
+    });
+
+    // Version 13: Add LAN Sync paired devices (Phase 7)
+    this.version(13).stores({
+      accounts: 'id, name, institution, type',
+      transactions: 'id, accountId, date, category, amount, description, splitFromId, isSplit',
+      categories: 'id, name, type, order',
+      budgets: 'id, categoryId, period, startDate',
+      futurePurchases: 'id, targetDate, priority, isCompleted',
+      retirementPlans: 'id, name, createdAt',
+      importMappings: 'id, institution, accountId',
+      importHistory: 'id, importDate, fileFormat, bank, fileName',
+      receipts: 'id, transactionId, uploadedAt, mimeType, fileSize',
+      investmentAccounts: 'id, type, name, createdAt',
+      holdings: 'id, accountId, symbol, purchaseDate, [accountId+symbol]',
+      priceCache: 'id, symbol, fetchedAt, source',
+      anomalyFeedback: 'id, transactionId, merchant, category, createdAt',
+      predictionAccuracy: 'id, category, month, recordedAt',
+      loans: 'id, type, status, lender, nextPaymentDate, accountId, paymentFrequency',
+      loanPayments: 'id, loanId, date, transactionId, isScheduled',
+      subscriptions: 'id, name, status, category, nextBillingDate, billingCycle, merchantToken, source',
+      excludedSubscriptions: 'id, merchantToken, excludedAt',
+      pairedDevices: 'id, deviceId, deviceName, trustLevel, lastSyncAt, createdAt'
     });
   }
 }
@@ -1390,5 +1464,343 @@ export async function getImportMetadata(importId: string): Promise<ImportMetadat
   } catch (error) {
     console.error('Error fetching import metadata:', error);
     return undefined;
+  }
+}
+
+// ========================================
+// SUBSCRIPTION CRUD OPERATIONS
+// ========================================
+
+/**
+ * Add a new subscription
+ * @param subscription The subscription to add
+ * @returns Promise<string> The subscription ID
+ */
+export async function addSubscription(subscription: Subscription): Promise<string> {
+  try {
+    await db.subscriptions.add(subscription);
+    return subscription.id;
+  } catch (error) {
+    console.error('Error adding subscription:', error);
+    throw error;
+  }
+}
+
+/**
+ * Update an existing subscription
+ * @param id The subscription ID
+ * @param updates Partial subscription data to update
+ */
+export async function updateSubscription(
+  id: string,
+  updates: Partial<Subscription>
+): Promise<void> {
+  try {
+    await db.subscriptions.update(id, {
+      ...updates,
+      updatedAt: new Date(),
+    });
+  } catch (error) {
+    console.error('Error updating subscription:', error);
+    throw error;
+  }
+}
+
+/**
+ * Delete a subscription
+ * @param id The subscription ID
+ */
+export async function deleteSubscription(id: string): Promise<void> {
+  try {
+    await db.subscriptions.delete(id);
+  } catch (error) {
+    console.error('Error deleting subscription:', error);
+    throw error;
+  }
+}
+
+/**
+ * Get a subscription by ID
+ * @param id The subscription ID
+ * @returns Promise<Subscription | undefined>
+ */
+export async function getSubscription(id: string): Promise<Subscription | undefined> {
+  try {
+    return await db.subscriptions.get(id);
+  } catch (error) {
+    console.error('Error fetching subscription:', error);
+    return undefined;
+  }
+}
+
+/**
+ * Get all subscriptions
+ * @returns Promise<Subscription[]>
+ */
+export async function getAllSubscriptions(): Promise<Subscription[]> {
+  try {
+    return await db.subscriptions.toArray();
+  } catch (error) {
+    console.error('Error fetching subscriptions:', error);
+    return [];
+  }
+}
+
+/**
+ * Get subscriptions by status
+ * @param status The subscription status to filter by
+ * @returns Promise<Subscription[]>
+ */
+export async function getSubscriptionsByStatus(
+  status: Subscription['status']
+): Promise<Subscription[]> {
+  try {
+    return await db.subscriptions.where('status').equals(status).toArray();
+  } catch (error) {
+    console.error('Error fetching subscriptions by status:', error);
+    return [];
+  }
+}
+
+/**
+ * Get subscriptions with upcoming billing dates
+ * @param daysAhead Number of days to look ahead (default: 7)
+ * @returns Promise<Subscription[]>
+ */
+export async function getUpcomingSubscriptions(daysAhead: number = 7): Promise<Subscription[]> {
+  try {
+    const now = new Date();
+    const futureDate = new Date();
+    futureDate.setDate(futureDate.getDate() + daysAhead);
+
+    const all = await db.subscriptions
+      .where('status')
+      .anyOf(['active', 'trial'])
+      .toArray();
+
+    return all.filter(sub => {
+      const nextBilling = new Date(sub.nextBillingDate);
+      return nextBilling >= now && nextBilling <= futureDate;
+    });
+  } catch (error) {
+    console.error('Error fetching upcoming subscriptions:', error);
+    return [];
+  }
+}
+
+/**
+ * Get subscription by merchant token (for matching with auto-detected)
+ * @param merchantToken The merchant token to match
+ * @returns Promise<Subscription | undefined>
+ */
+export async function getSubscriptionByMerchantToken(
+  merchantToken: string
+): Promise<Subscription | undefined> {
+  try {
+    return await db.subscriptions
+      .where('merchantToken')
+      .equals(merchantToken)
+      .first();
+  } catch (error) {
+    console.error('Error fetching subscription by merchant token:', error);
+    return undefined;
+  }
+}
+
+/**
+ * Cancel a subscription (sets status and cancelledDate)
+ * @param id The subscription ID
+ */
+export async function cancelSubscription(id: string): Promise<void> {
+  try {
+    await db.subscriptions.update(id, {
+      status: 'cancelled',
+      cancelledDate: new Date(),
+      updatedAt: new Date(),
+    });
+  } catch (error) {
+    console.error('Error cancelling subscription:', error);
+    throw error;
+  }
+}
+
+/**
+ * Pause a subscription
+ * @param id The subscription ID
+ */
+export async function pauseSubscription(id: string): Promise<void> {
+  try {
+    await db.subscriptions.update(id, {
+      status: 'paused',
+      updatedAt: new Date(),
+    });
+  } catch (error) {
+    console.error('Error pausing subscription:', error);
+    throw error;
+  }
+}
+
+/**
+ * Resume a paused subscription
+ * @param id The subscription ID
+ */
+export async function resumeSubscription(id: string): Promise<void> {
+  try {
+    await db.subscriptions.update(id, {
+      status: 'active',
+      updatedAt: new Date(),
+    });
+  } catch (error) {
+    console.error('Error resuming subscription:', error);
+    throw error;
+  }
+}
+
+/**
+ * Calculate monthly cost of all active subscriptions
+ * @returns Promise<number>
+ */
+export async function calculateTotalMonthlySubscriptionCost(): Promise<number> {
+  try {
+    const active = await db.subscriptions
+      .where('status')
+      .anyOf(['active', 'trial'])
+      .toArray();
+
+    return active.reduce((total, sub) => {
+      switch (sub.billingCycle) {
+        case 'weekly':
+          return total + sub.amount * 4.33; // avg weeks per month
+        case 'bi-weekly':
+          return total + sub.amount * 2.17; // avg bi-weekly periods per month (26/12)
+        case 'monthly':
+          return total + sub.amount;
+        case 'quarterly':
+          return total + sub.amount / 3;
+        case 'annual':
+          return total + sub.amount / 12;
+        default:
+          return total + sub.amount;
+      }
+    }, 0);
+  } catch (error) {
+    console.error('Error calculating subscription cost:', error);
+    return 0;
+  }
+}
+
+/**
+ * Link transactions to a subscription
+ * @param subscriptionId The subscription ID
+ * @param transactionIds Array of transaction IDs to link
+ */
+export async function linkTransactionsToSubscription(
+  subscriptionId: string,
+  transactionIds: string[]
+): Promise<void> {
+  try {
+    const subscription = await db.subscriptions.get(subscriptionId);
+    if (!subscription) return;
+
+    const existingIds = new Set(subscription.linkedTransactionIds);
+    transactionIds.forEach(id => existingIds.add(id));
+
+    await db.subscriptions.update(subscriptionId, {
+      linkedTransactionIds: Array.from(existingIds),
+      updatedAt: new Date(),
+    });
+  } catch (error) {
+    console.error('Error linking transactions to subscription:', error);
+    throw error;
+  }
+}
+
+// ========================================
+// EXCLUDED SUBSCRIPTION OPERATIONS
+// ========================================
+
+/**
+ * Exclude/dismiss an auto-detected subscription (mark as false positive)
+ * @param merchantToken The merchant token to exclude
+ * @param merchantName Display name for reference
+ * @param reason Optional reason for exclusion
+ */
+export async function excludeSubscription(
+  merchantToken: string,
+  merchantName: string,
+  reason?: string
+): Promise<void> {
+  try {
+    const excluded: ExcludedSubscription = {
+      id: `excluded_${Date.now()}`,
+      merchantToken: merchantToken.toLowerCase(),
+      merchantName,
+      reason,
+      excludedAt: new Date(),
+    };
+    await db.excludedSubscriptions.add(excluded);
+  } catch (error) {
+    console.error('Error excluding subscription:', error);
+    throw error;
+  }
+}
+
+/**
+ * Remove exclusion (re-allow auto-detection for a merchant)
+ * @param merchantToken The merchant token to un-exclude
+ */
+export async function unexcludeSubscription(merchantToken: string): Promise<void> {
+  try {
+    await db.excludedSubscriptions
+      .where('merchantToken')
+      .equals(merchantToken.toLowerCase())
+      .delete();
+  } catch (error) {
+    console.error('Error removing subscription exclusion:', error);
+    throw error;
+  }
+}
+
+/**
+ * Get all excluded merchant tokens
+ * @returns Promise<Set<string>> Set of excluded merchant tokens (lowercase)
+ */
+export async function getExcludedMerchantTokens(): Promise<Set<string>> {
+  try {
+    const excluded = await db.excludedSubscriptions.toArray();
+    return new Set(excluded.map(e => e.merchantToken.toLowerCase()));
+  } catch (error) {
+    console.error('Error fetching excluded subscriptions:', error);
+    return new Set();
+  }
+}
+
+/**
+ * Get all excluded subscriptions
+ * @returns Promise<ExcludedSubscription[]>
+ */
+export async function getAllExcludedSubscriptions(): Promise<ExcludedSubscription[]> {
+  try {
+    return await db.excludedSubscriptions.orderBy('excludedAt').reverse().toArray();
+  } catch (error) {
+    console.error('Error fetching excluded subscriptions:', error);
+    return [];
+  }
+}
+
+/**
+ * Check if a merchant token is excluded
+ * @param merchantToken The merchant token to check
+ */
+export async function isSubscriptionExcluded(merchantToken: string): Promise<boolean> {
+  try {
+    const excluded = await db.excludedSubscriptions
+      .where('merchantToken')
+      .equals(merchantToken.toLowerCase())
+      .first();
+    return !!excluded;
+  } catch (error) {
+    console.error('Error checking subscription exclusion:', error);
+    return false;
   }
 }

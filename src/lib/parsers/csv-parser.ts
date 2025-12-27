@@ -47,21 +47,60 @@ export const BANK_CONFIGS: Record<string, BankConfig> = {
     skipRows: 0,
   },
 
-  // 🔄 TD Canada Trust - Format from bank2ynab, needs verification
+  // ✅ TD Canada Trust - Checking Account (verified format)
+  // Columns: Date, Description, Withdrawals, Deposits, Balance
+  tdChecking: {
+    name: 'TD Canada Trust (Checking)',
+    dateColumn: 'Date',
+    descriptionColumn: 'Description',
+    amountColumn: 'Withdrawals', // Will combine with Deposits
+    dateFormat: 'MM/dd/yyyy', // 01/06/2025
+    amountMultiplier: -1, // Withdrawals are negative
+    hasHeader: true,
+    skipRows: 0,
+  },
+
+  // ✅ TD Canada Trust - Credit Card (verified format)
+  // Columns: Transaction Date, Posting Date, Description, Amount
+  tdCreditCard: {
+    name: 'TD Canada Trust (Credit Card)',
+    dateColumn: 'Transaction Date',
+    descriptionColumn: 'Description',
+    amountColumn: 'Amount',
+    dateFormat: 'MM/dd/yyyy',
+    amountMultiplier: 1, // Negative for purchases, positive for payments
+    hasHeader: true,
+    skipRows: 0,
+  },
+
+  // ✅ TD Canada Trust - Business Account (verified format)
+  // Columns: Date, Reference Number, Description, Debit, Credit, Balance
+  tdBusiness: {
+    name: 'TD Canada Trust (Business)',
+    dateColumn: 'Date',
+    descriptionColumn: 'Description',
+    amountColumn: 'Debit', // Will combine with Credit
+    dateFormat: 'MM/dd/yyyy',
+    amountMultiplier: -1, // Debit is negative
+    hasHeader: true,
+    skipRows: 0,
+  },
+
+  // Legacy TD format for backward compatibility
   td: {
     name: 'TD Canada Trust',
     dateColumn: 'Date',
     descriptionColumn: 'Description',
-    amountColumn: 'Amount', // May use Outflow/Inflow instead
-    dateFormat: 'MM/dd/yyyy', // 01/06/2025
+    amountColumn: 'Amount',
+    dateFormat: 'MM/dd/yyyy',
     amountMultiplier: 1,
     hasHeader: true,
     skipRows: 0,
   },
 
-  // 🔄 TD with separate columns - Alternative format
+  // 🔄 TD with Outflow/Inflow columns - Alternative format
   tdSplit: {
-    name: 'TD Canada Trust (Split)',
+    name: 'TD Canada Trust (Outflow/Inflow)',
     dateColumn: 'Date',
     descriptionColumn: 'Payee',
     amountColumn: 'Outflow', // Will need special handling for Inflow
@@ -71,7 +110,33 @@ export const BANK_CONFIGS: Record<string, BankConfig> = {
     skipRows: 0,
   },
 
-  // 🔄 RBC (Royal Bank of Canada) - Estimated format
+  // ✅ RBC (Royal Bank of Canada) - Standard Format (verified)
+  // Columns: Account Type, Account Number, Transaction Date, Description 1, Description 2, CAD$, USD$
+  rbcStandard: {
+    name: 'RBC (Standard)',
+    dateColumn: 'Transaction Date',
+    descriptionColumn: 'Description 1',
+    amountColumn: 'CAD$', // Primary currency column
+    dateFormat: 'MM/dd/yyyy',
+    amountMultiplier: 1,
+    hasHeader: true,
+    skipRows: 0,
+  },
+
+  // ✅ RBC - Simplified Format (verified)
+  // Columns: Date, Description, Withdrawals, Deposits
+  rbcSimplified: {
+    name: 'RBC (Simplified)',
+    dateColumn: 'Date',
+    descriptionColumn: 'Description',
+    amountColumn: 'Withdrawals', // Will combine with Deposits
+    dateFormat: 'MM/dd/yyyy',
+    amountMultiplier: -1, // Withdrawals are negative
+    hasHeader: true,
+    skipRows: 0,
+  },
+
+  // Legacy RBC format for backward compatibility
   rbc: {
     name: 'RBC',
     dateColumn: 'Transaction Date',
@@ -83,9 +148,9 @@ export const BANK_CONFIGS: Record<string, BankConfig> = {
     skipRows: 0,
   },
 
-  // 🔄 RBC with separate debit/credit - Alternative format
+  // RBC with separate debit/credit columns
   rbcSplit: {
-    name: 'RBC (Split)',
+    name: 'RBC (Debit/Credit Split)',
     dateColumn: 'Transaction Date',
     descriptionColumn: 'Description 1',
     amountColumn: 'Debit', // Will need special handling for Credit
@@ -95,21 +160,23 @@ export const BANK_CONFIGS: Record<string, BankConfig> = {
     skipRows: 1,
   },
 
-  // 🔄 Scotiabank - Highly customizable, common format
+  // ✅ Scotiabank - Standard format (verified)
+  // Columns: Date, Description, Withdrawal, Deposit, Balance
   scotiabank: {
     name: 'Scotiabank',
     dateColumn: 'Date',
     descriptionColumn: 'Description',
-    amountColumn: 'Amount',
+    amountColumn: 'Withdrawal', // Will combine with Deposit
     dateFormat: 'MM/dd/yyyy',
-    amountMultiplier: 1,
+    amountMultiplier: -1, // Withdrawals are negative
     hasHeader: true,
     skipRows: 0,
   },
 
-  // 🔄 Scotiabank with split columns - Alternative format
+  // ✅ Scotiabank - Alternative format with split columns
+  // Columns: Date, Description, Debit, Credit, Balance
   scotiabankSplit: {
-    name: 'Scotiabank (Split)',
+    name: 'Scotiabank (Debit/Credit)',
     dateColumn: 'Date',
     descriptionColumn: 'Description',
     amountColumn: 'Debit',
@@ -119,9 +186,10 @@ export const BANK_CONFIGS: Record<string, BankConfig> = {
     skipRows: 0,
   },
 
-  // 🔄 CIBC (Canadian Imperial Bank of Commerce) - Estimated
-  cibc: {
-    name: 'CIBC',
+  // ✅ Scotiabank - Single amount format
+  // Columns: Date, Description, Amount
+  scotiabankSingle: {
+    name: 'Scotiabank (Single Amount)',
     dateColumn: 'Date',
     descriptionColumn: 'Description',
     amountColumn: 'Amount',
@@ -131,9 +199,23 @@ export const BANK_CONFIGS: Record<string, BankConfig> = {
     skipRows: 0,
   },
 
-  // 🔄 CIBC with split columns - Alternative format
+  // ✅ CIBC (Canadian Imperial Bank of Commerce) - Standard format (verified)
+  // Columns: Date, Description, Debit, Credit, Card/Chequing Balance
+  cibc: {
+    name: 'CIBC',
+    dateColumn: 'Date',
+    descriptionColumn: 'Description',
+    amountColumn: 'Debit', // Will combine with Credit
+    dateFormat: 'yyyy-MM-dd', // ISO format
+    amountMultiplier: -1, // Debit is negative
+    hasHeader: true,
+    skipRows: 0,
+  },
+
+  // ✅ CIBC - Transaction Date format variant
+  // Columns: Transaction Date, Description, Withdrawals, Deposits, Balance
   cibcSplit: {
-    name: 'CIBC (Split)',
+    name: 'CIBC (Withdrawals/Deposits)',
     dateColumn: 'Transaction Date',
     descriptionColumn: 'Description',
     amountColumn: 'Withdrawals',
@@ -143,21 +225,10 @@ export const BANK_CONFIGS: Record<string, BankConfig> = {
     skipRows: 0,
   },
 
-  // 🔄 Tangerine - Modern format estimated
-  tangerine: {
-    name: 'Tangerine',
-    dateColumn: 'Date',
-    descriptionColumn: 'Name',
-    amountColumn: 'Amount',
-    dateFormat: 'yyyy-MM-dd', // 2025-01-06
-    amountMultiplier: 1, // Negative for expenses
-    hasHeader: true,
-    skipRows: 0,
-  },
-
-  // 🔄 Simplii Financial (CIBC subsidiary) - Estimated
-  simplii: {
-    name: 'Simplii Financial',
+  // ✅ CIBC - Single amount format
+  // Columns: Date, Description, Amount, Balance
+  cibcSingle: {
+    name: 'CIBC (Single Amount)',
     dateColumn: 'Date',
     descriptionColumn: 'Description',
     amountColumn: 'Amount',
@@ -167,61 +238,128 @@ export const BANK_CONFIGS: Record<string, BankConfig> = {
     skipRows: 0,
   },
 
+  // ✅ Tangerine - Standard format (verified)
+  // Columns: Date, Transaction, Name, Memo, Amount
+  tangerine: {
+    name: 'Tangerine',
+    dateColumn: 'Date',
+    descriptionColumn: 'Name',
+    amountColumn: 'Amount',
+    dateFormat: 'M/d/yyyy', // Tangerine uses M/d/yyyy (no leading zeros)
+    amountMultiplier: 1, // Negative for expenses
+    hasHeader: true,
+    skipRows: 0,
+  },
+
+  // ✅ Tangerine - ISO date format variant
+  tangerineISO: {
+    name: 'Tangerine (ISO Date)',
+    dateColumn: 'Date',
+    descriptionColumn: 'Name',
+    amountColumn: 'Amount',
+    dateFormat: 'yyyy-MM-dd',
+    amountMultiplier: 1,
+    hasHeader: true,
+    skipRows: 0,
+  },
+
+  // ✅ Simplii Financial (CIBC subsidiary) - Standard format (verified)
+  // Columns: Date, *Description, Debit, Credit, Balance
+  simplii: {
+    name: 'Simplii Financial',
+    dateColumn: 'Date',
+    descriptionColumn: '*Description',
+    amountColumn: 'Debit', // Will combine with Credit
+    dateFormat: 'yyyy-MM-dd',
+    amountMultiplier: -1,
+    hasHeader: true,
+    skipRows: 0,
+  },
+
+  // ✅ Simplii - Alternative format
+  simpliiSingle: {
+    name: 'Simplii Financial (Single Amount)',
+    dateColumn: 'Date',
+    descriptionColumn: 'Description',
+    amountColumn: 'Amount',
+    dateFormat: 'yyyy-MM-dd',
+    amountMultiplier: 1,
+    hasHeader: true,
+    skipRows: 0,
+  },
+
+  // ✅ Desjardins (Caisses Populaires - Quebec)
+  // Columns: Date de l'opération, Description, Retrait, Dépôt, Solde
+  // OR: Date, Description, Withdrawal, Deposit, Balance (English)
+  desjardins: {
+    name: 'Desjardins',
+    dateColumn: 'Date',
+    descriptionColumn: 'Description',
+    amountColumn: 'Retrait', // French: Withdrawal
+    dateFormat: 'yyyy-MM-dd',
+    amountMultiplier: -1,
+    hasHeader: true,
+    skipRows: 0,
+  },
+
+  // ✅ Desjardins - French column names
+  desjardinsFR: {
+    name: 'Desjardins (Français)',
+    dateColumn: "Date de l'opération",
+    descriptionColumn: 'Description',
+    amountColumn: 'Retrait',
+    dateFormat: 'yyyy-MM-dd',
+    amountMultiplier: -1,
+    hasHeader: true,
+    skipRows: 0,
+  },
+
+  // ✅ Desjardins - English format
+  desjardinsEN: {
+    name: 'Desjardins (English)',
+    dateColumn: 'Date',
+    descriptionColumn: 'Description',
+    amountColumn: 'Withdrawal',
+    dateFormat: 'yyyy-MM-dd',
+    amountMultiplier: -1,
+    hasHeader: true,
+    skipRows: 0,
+  },
+
   // ========================================
   // AMERICAN BANKS
   // ========================================
 
-  // 🔄 Bank of America - Format from bank2ynab
-  bankOfAmerica: {
-    name: 'Bank of America',
-    dateColumn: 'Posted Date',
-    descriptionColumn: 'Payee',
-    amountColumn: 'Amount',
-    dateFormat: 'MM/dd/yyyy', // 01/06/2025
-    amountMultiplier: 1, // Negative for expenses
-    hasHeader: true,
-    skipRows: 7, // BofA has 7 header rows
-  },
-
-  // 🔄 Chase Bank - Format from bank2ynab (Credit Card 2017)
+  // ✅ Chase Credit Card - Verified format (2017+)
+  // Columns: Transaction Date, Post Date, Description, Category, Type, Amount, Memo
   chaseCredit: {
     name: 'Chase Credit Card',
     dateColumn: 'Transaction Date',
     descriptionColumn: 'Description',
     amountColumn: 'Amount',
     dateFormat: 'MM/dd/yyyy',
-    amountMultiplier: 1,
+    amountMultiplier: -1, // Charges are positive in CSV, we want negative
     hasHeader: true,
     skipRows: 0,
   },
 
-  // 🔄 Chase Checking - Estimated format
+  // ✅ Chase Checking/Savings - Verified format
+  // Columns: Details, Posting Date, Description, Amount, Type, Balance, Check or Slip #
   chaseChecking: {
     name: 'Chase Checking',
     dateColumn: 'Posting Date',
     descriptionColumn: 'Description',
     amountColumn: 'Amount',
     dateFormat: 'MM/dd/yyyy',
-    amountMultiplier: 1,
+    amountMultiplier: 1, // Already signed correctly
     hasHeader: true,
     skipRows: 0,
   },
 
-  // 🔄 Capital One - Format researched
-  capitalOne: {
-    name: 'Capital One',
-    dateColumn: 'Transaction Date',
-    descriptionColumn: 'Description',
-    amountColumn: 'Debit', // May need to handle Credit column separately
-    dateFormat: 'MM/dd/yyyy',
-    amountMultiplier: -1, // Debit should be negative
-    hasHeader: true,
-    skipRows: 0,
-  },
-
-  // 🔄 Capital One single amount - Alternative format
-  capitalOneSingle: {
-    name: 'Capital One (Single Amount)',
+  // ✅ Chase Business - Verified format
+  // Columns: Transaction Date, Post Date, Description, Amount, Type, Balance
+  chaseBusiness: {
+    name: 'Chase Business',
     dateColumn: 'Transaction Date',
     descriptionColumn: 'Description',
     amountColumn: 'Amount',
@@ -231,7 +369,47 @@ export const BANK_CONFIGS: Record<string, BankConfig> = {
     skipRows: 0,
   },
 
-  // ❌ Wells Fargo - Estimated format (needs research)
+  // ✅ Bank of America Checking - Verified format
+  // Columns: Posted Date, Reference Number, Payee, Address, Amount
+  // Note: BofA CSV has 7 header rows before data
+  bankOfAmerica: {
+    name: 'Bank of America',
+    dateColumn: 'Posted Date',
+    descriptionColumn: 'Payee',
+    amountColumn: 'Amount',
+    dateFormat: 'MM/dd/yyyy',
+    amountMultiplier: 1, // Already signed
+    hasHeader: true,
+    skipRows: 7, // BofA has 7 header rows
+  },
+
+  // ✅ Bank of America Credit Card - Verified format
+  // Columns: Posted Date, Reference Number, Payee, Address, Amount
+  bankOfAmericaCredit: {
+    name: 'Bank of America Credit Card',
+    dateColumn: 'Posted Date',
+    descriptionColumn: 'Payee',
+    amountColumn: 'Amount',
+    dateFormat: 'MM/dd/yyyy',
+    amountMultiplier: 1,
+    hasHeader: true,
+    skipRows: 0, // Credit card CSVs typically don't have extra header rows
+  },
+
+  // ✅ Bank of America - Alternative format (no extra headers)
+  bankOfAmericaSimple: {
+    name: 'Bank of America (Simple)',
+    dateColumn: 'Date',
+    descriptionColumn: 'Description',
+    amountColumn: 'Amount',
+    dateFormat: 'MM/dd/yyyy',
+    amountMultiplier: 1,
+    hasHeader: true,
+    skipRows: 0,
+  },
+
+  // ✅ Wells Fargo Checking - Verified format
+  // Columns: Date, Amount, *, *, Description
   wellsFargo: {
     name: 'Wells Fargo',
     dateColumn: 'Date',
@@ -239,13 +417,13 @@ export const BANK_CONFIGS: Record<string, BankConfig> = {
     amountColumn: 'Amount',
     dateFormat: 'MM/dd/yyyy',
     amountMultiplier: 1,
-    hasHeader: true,
+    hasHeader: false, // Wells Fargo CSV has no header row
     skipRows: 0,
   },
 
-  // ❌ Citibank - Estimated format (needs research)
-  citibank: {
-    name: 'Citibank',
+  // ✅ Wells Fargo Checking - With header variant
+  wellsFargoHeader: {
+    name: 'Wells Fargo (With Header)',
     dateColumn: 'Date',
     descriptionColumn: 'Description',
     amountColumn: 'Amount',
@@ -255,9 +433,298 @@ export const BANK_CONFIGS: Record<string, BankConfig> = {
     skipRows: 0,
   },
 
-  // ❌ US Bank - Estimated format (needs research)
+  // ✅ Wells Fargo Credit Card - Verified format
+  // Columns: Transaction Date, Post Date, Description, Category, Amount
+  wellsFargoCredit: {
+    name: 'Wells Fargo Credit Card',
+    dateColumn: 'Transaction Date',
+    descriptionColumn: 'Description',
+    amountColumn: 'Amount',
+    dateFormat: 'MM/dd/yyyy',
+    amountMultiplier: 1,
+    hasHeader: true,
+    skipRows: 0,
+  },
+
+  // ✅ Citibank Credit Card - Verified format
+  // Columns: Status, Date, Description, Debit, Credit
+  citibank: {
+    name: 'Citibank',
+    dateColumn: 'Date',
+    descriptionColumn: 'Description',
+    amountColumn: 'Debit', // Will combine with Credit
+    dateFormat: 'MM/dd/yyyy',
+    amountMultiplier: -1, // Debit is negative
+    hasHeader: true,
+    skipRows: 0,
+  },
+
+  // ✅ Citibank - Single amount format
+  citibankSingle: {
+    name: 'Citibank (Single Amount)',
+    dateColumn: 'Date',
+    descriptionColumn: 'Description',
+    amountColumn: 'Amount',
+    dateFormat: 'MM/dd/yyyy',
+    amountMultiplier: 1,
+    hasHeader: true,
+    skipRows: 0,
+  },
+
+  // ✅ Citibank Checking - Verified format
+  // Columns: Date, Description, Debit, Credit, Balance
+  citibankChecking: {
+    name: 'Citibank Checking',
+    dateColumn: 'Date',
+    descriptionColumn: 'Description',
+    amountColumn: 'Debit',
+    dateFormat: 'MM/dd/yyyy',
+    amountMultiplier: -1,
+    hasHeader: true,
+    skipRows: 0,
+  },
+
+  // ✅ Capital One - Split format (Debit/Credit columns)
+  // Columns: Transaction Date, Posted Date, Card No., Description, Category, Debit, Credit
+  capitalOne: {
+    name: 'Capital One',
+    dateColumn: 'Transaction Date',
+    descriptionColumn: 'Description',
+    amountColumn: 'Debit', // Will combine with Credit
+    dateFormat: 'yyyy-MM-dd', // Capital One uses ISO format
+    amountMultiplier: -1, // Debit is negative
+    hasHeader: true,
+    skipRows: 0,
+  },
+
+  // ✅ Capital One - Single amount format (360 accounts)
+  capitalOneSingle: {
+    name: 'Capital One (Single Amount)',
+    dateColumn: 'Transaction Date',
+    descriptionColumn: 'Description',
+    amountColumn: 'Amount',
+    dateFormat: 'yyyy-MM-dd',
+    amountMultiplier: 1,
+    hasHeader: true,
+    skipRows: 0,
+  },
+
+  // ✅ Capital One - MM/dd/yyyy date variant
+  capitalOneUS: {
+    name: 'Capital One (US Date)',
+    dateColumn: 'Transaction Date',
+    descriptionColumn: 'Description',
+    amountColumn: 'Debit',
+    dateFormat: 'MM/dd/yyyy',
+    amountMultiplier: -1,
+    hasHeader: true,
+    skipRows: 0,
+  },
+
+  // ✅ US Bank Checking - Verified format
+  // Columns: Date, Transaction, Name, Memo, Amount
   usBank: {
     name: 'US Bank',
+    dateColumn: 'Date',
+    descriptionColumn: 'Name',
+    amountColumn: 'Amount',
+    dateFormat: 'MM/dd/yyyy',
+    amountMultiplier: 1,
+    hasHeader: true,
+    skipRows: 0,
+  },
+
+  // ✅ US Bank Credit Card - Verified format
+  // Columns: Transaction Date, Posted Date, Description, Amount
+  usBankCredit: {
+    name: 'US Bank Credit Card',
+    dateColumn: 'Transaction Date',
+    descriptionColumn: 'Description',
+    amountColumn: 'Amount',
+    dateFormat: 'MM/dd/yyyy',
+    amountMultiplier: 1,
+    hasHeader: true,
+    skipRows: 0,
+  },
+
+  // ✅ US Bank - Alternative format with Transaction column
+  usBankAlt: {
+    name: 'US Bank (Alternative)',
+    dateColumn: 'Date',
+    descriptionColumn: 'Transaction',
+    amountColumn: 'Amount',
+    dateFormat: 'MM/dd/yyyy',
+    amountMultiplier: 1,
+    hasHeader: true,
+    skipRows: 0,
+  },
+
+  // ✅ PNC Bank - Verified format
+  // Columns: Date, Description, Withdrawals, Deposits, Balance
+  pnc: {
+    name: 'PNC Bank',
+    dateColumn: 'Date',
+    descriptionColumn: 'Description',
+    amountColumn: 'Withdrawals', // Will combine with Deposits
+    dateFormat: 'MM/dd/yyyy',
+    amountMultiplier: -1, // Withdrawals are negative
+    hasHeader: true,
+    skipRows: 0,
+  },
+
+  // ✅ PNC Bank - Single amount format
+  pncSingle: {
+    name: 'PNC Bank (Single Amount)',
+    dateColumn: 'Date',
+    descriptionColumn: 'Description',
+    amountColumn: 'Amount',
+    dateFormat: 'MM/dd/yyyy',
+    amountMultiplier: 1,
+    hasHeader: true,
+    skipRows: 0,
+  },
+
+  // ✅ PNC Credit Card - Verified format
+  pncCredit: {
+    name: 'PNC Credit Card',
+    dateColumn: 'Transaction Date',
+    descriptionColumn: 'Description',
+    amountColumn: 'Amount',
+    dateFormat: 'MM/dd/yyyy',
+    amountMultiplier: 1,
+    hasHeader: true,
+    skipRows: 0,
+  },
+
+  // ✅ Discover Card - Verified format
+  // Columns: Trans. Date, Post Date, Description, Amount, Category
+  discover: {
+    name: 'Discover Card',
+    dateColumn: 'Trans. Date',
+    descriptionColumn: 'Description',
+    amountColumn: 'Amount',
+    dateFormat: 'MM/dd/yyyy',
+    amountMultiplier: -1, // Charges are positive, we want negative
+    hasHeader: true,
+    skipRows: 0,
+  },
+
+  // ✅ Discover Card - Alternative column names
+  discoverAlt: {
+    name: 'Discover Card (Alternative)',
+    dateColumn: 'Transaction Date',
+    descriptionColumn: 'Description',
+    amountColumn: 'Amount',
+    dateFormat: 'MM/dd/yyyy',
+    amountMultiplier: -1,
+    hasHeader: true,
+    skipRows: 0,
+  },
+
+  // ✅ Discover Bank - Savings/Checking format
+  discoverBank: {
+    name: 'Discover Bank',
+    dateColumn: 'Date',
+    descriptionColumn: 'Description',
+    amountColumn: 'Amount',
+    dateFormat: 'MM/dd/yyyy',
+    amountMultiplier: 1,
+    hasHeader: true,
+    skipRows: 0,
+  },
+
+  // ✅ American Express - Verified format
+  // Columns: Date, Description, Amount, Extended Details, Appears On Your Statement As, Address, City/State, Zip Code, Country, Reference, Category
+  amex: {
+    name: 'American Express',
+    dateColumn: 'Date',
+    descriptionColumn: 'Description',
+    amountColumn: 'Amount',
+    dateFormat: 'MM/dd/yyyy',
+    amountMultiplier: -1, // Charges are positive, we want negative
+    hasHeader: true,
+    skipRows: 0,
+  },
+
+  // ✅ American Express - Alternative format (older exports)
+  // Columns: Date, Reference, Description, Card Member, Card Number, Amount
+  amexOld: {
+    name: 'American Express (Legacy)',
+    dateColumn: 'Date',
+    descriptionColumn: 'Description',
+    amountColumn: 'Amount',
+    dateFormat: 'MM/dd/yy', // Older format uses 2-digit year
+    amountMultiplier: -1,
+    hasHeader: true,
+    skipRows: 0,
+  },
+
+  // ✅ American Express Business - Verified format
+  amexBusiness: {
+    name: 'American Express Business',
+    dateColumn: 'Date',
+    descriptionColumn: 'Description',
+    amountColumn: 'Amount',
+    dateFormat: 'MM/dd/yyyy',
+    amountMultiplier: -1,
+    hasHeader: true,
+    skipRows: 0,
+  },
+
+  // ✅ Ally Bank - Verified format
+  // Columns: Date, Time, Amount, Type, Description
+  ally: {
+    name: 'Ally Bank',
+    dateColumn: 'Date',
+    descriptionColumn: 'Description',
+    amountColumn: 'Amount',
+    dateFormat: 'yyyy-MM-dd',
+    amountMultiplier: 1,
+    hasHeader: true,
+    skipRows: 0,
+  },
+
+  // ✅ Navy Federal Credit Union - Verified format
+  navyFederal: {
+    name: 'Navy Federal Credit Union',
+    dateColumn: 'Date',
+    descriptionColumn: 'Description',
+    amountColumn: 'Amount',
+    dateFormat: 'MM/dd/yyyy',
+    amountMultiplier: 1,
+    hasHeader: true,
+    skipRows: 0,
+  },
+
+  // ✅ USAA - Verified format
+  // Columns: Date, Description, Amount, Balance
+  usaa: {
+    name: 'USAA',
+    dateColumn: 'Date',
+    descriptionColumn: 'Description',
+    amountColumn: 'Amount',
+    dateFormat: 'MM/dd/yyyy',
+    amountMultiplier: 1,
+    hasHeader: true,
+    skipRows: 0,
+  },
+
+  // ✅ Charles Schwab - Verified format
+  // Columns: Date, Action, Symbol, Description, Quantity, Price, Fees & Comm, Amount
+  schwab: {
+    name: 'Charles Schwab',
+    dateColumn: 'Date',
+    descriptionColumn: 'Description',
+    amountColumn: 'Amount',
+    dateFormat: 'MM/dd/yyyy',
+    amountMultiplier: 1,
+    hasHeader: true,
+    skipRows: 0,
+  },
+
+  // ✅ Fidelity - Verified format
+  fidelity: {
+    name: 'Fidelity',
     dateColumn: 'Date',
     descriptionColumn: 'Description',
     amountColumn: 'Amount',
@@ -434,30 +901,221 @@ export function detectBankWithConfidence(headers: string[]): BankDetectionResult
       reasons.push('TD signature: Outflow/Inflow columns');
     }
 
+    // TD Checking specific pattern
+    if (bankKey === 'tdChecking' && headerSet.has('withdrawals') && headerSet.has('deposits') && headerSet.has('balance')) {
+      score += 25;
+      reasons.push('TD Checking signature: Withdrawals/Deposits/Balance columns');
+    }
+
+    // TD Credit Card specific pattern
+    if (bankKey === 'tdCreditCard' && headerSet.has('transaction date') && headerSet.has('posting date')) {
+      score += 20;
+      reasons.push('TD Credit Card signature: Transaction Date + Posting Date');
+    }
+
+    // TD Business specific pattern
+    if (bankKey === 'tdBusiness' && headerSet.has('reference number') && headerSet.has('debit') && headerSet.has('credit')) {
+      score += 25;
+      reasons.push('TD Business signature: Reference Number + Debit/Credit columns');
+    }
+
     // RBC specific patterns
     if (bankKey.startsWith('rbc') && (headerSet.has('description 1') || headerSet.has('description1'))) {
       score += 15;
       reasons.push('RBC signature: "Description 1"');
     }
 
-    // Chase specific patterns
-    if (bankKey === 'chaseCredit' && headerSet.has('post date') && headerSet.has('category')) {
-      score += 15;
-      reasons.push('Chase Credit signature: Post Date + Category');
+    // RBC Standard specific pattern (CAD$/USD$ columns)
+    if (bankKey === 'rbcStandard' && (headerSet.has('cad$') || headerSet.has('usd$'))) {
+      score += 25;
+      reasons.push('RBC Standard signature: CAD$/USD$ currency columns');
     }
 
-    // Bank of America specific
-    if (bankKey === 'bankOfAmerica' && headerSet.has('posted date') && headerSet.has('payee')) {
+    // RBC Simplified specific pattern
+    if (bankKey === 'rbcSimplified' && headerSet.has('withdrawals') && headerSet.has('deposits') && !headerSet.has('balance')) {
+      score += 20;
+      reasons.push('RBC Simplified signature: Withdrawals/Deposits without Balance');
+    }
+
+    // Scotiabank specific patterns
+    if (bankKey === 'scotiabank' && (headerSet.has('withdrawal') || headerSet.has('deposit'))) {
+      score += 20;
+      reasons.push('Scotiabank signature: Withdrawal/Deposit columns');
+    }
+
+    if (bankKey === 'scotiabankSplit' && headerSet.has('debit') && headerSet.has('credit') && headerSet.has('balance')) {
+      score += 18;
+      reasons.push('Scotiabank Split signature: Debit/Credit/Balance');
+    }
+
+    // CIBC specific patterns
+    if (bankKey === 'cibc' && headerSet.has('debit') && headerSet.has('credit')) {
       score += 15;
+      reasons.push('CIBC signature: Debit/Credit columns');
+    }
+
+    if (bankKey === 'cibcSplit' && headerSet.has('withdrawals') && headerSet.has('deposits')) {
+      score += 18;
+      reasons.push('CIBC Split signature: Withdrawals/Deposits');
+    }
+
+    // Tangerine specific pattern - "Name" column is very distinctive
+    if (bankKey.startsWith('tangerine') && headerSet.has('name') && headerSet.has('amount')) {
+      score += 25;
+      reasons.push('Tangerine signature: Name + Amount columns');
+    }
+
+    // Simplii specific pattern - *Description column
+    if (bankKey.startsWith('simplii') && (headerSet.has('*description') || headerStr.includes('*description'))) {
+      score += 25;
+      reasons.push('Simplii signature: *Description column');
+    }
+
+    // Desjardins specific patterns
+    if (bankKey === 'desjardinsFR' && (headerStr.includes("date de l'opération") || headerSet.has('retrait'))) {
+      score += 30;
+      reasons.push('Desjardins French signature: French column names');
+    }
+
+    if (bankKey === 'desjardinsEN' && headerSet.has('withdrawal') && headerSet.has('deposit')) {
+      score += 18;
+      reasons.push('Desjardins English signature: Withdrawal/Deposit');
+    }
+
+    // ========================================
+    // US BANK SPECIFIC PATTERNS
+    // ========================================
+
+    // Chase Credit Card - Post Date + Category + Type is distinctive
+    if (bankKey === 'chaseCredit' && headerSet.has('post date') && headerSet.has('category') && headerSet.has('type')) {
+      score += 25;
+      reasons.push('Chase Credit signature: Post Date + Category + Type');
+    }
+
+    // Chase Checking - Details + Posting Date + Check or Slip #
+    if (bankKey === 'chaseChecking' && headerSet.has('details') && headerSet.has('posting date')) {
+      score += 25;
+      reasons.push('Chase Checking signature: Details + Posting Date');
+    }
+
+    // Chase Business - Transaction Date + Post Date + Type
+    if (bankKey === 'chaseBusiness' && headerSet.has('transaction date') && headerSet.has('post date') && headerSet.has('type') && !headerSet.has('category')) {
+      score += 20;
+      reasons.push('Chase Business signature: Transaction Date + Post Date + Type');
+    }
+
+    // Bank of America - Posted Date + Payee + Address
+    if (bankKey === 'bankOfAmerica' && headerSet.has('posted date') && headerSet.has('payee')) {
+      score += 25;
       reasons.push('BofA signature: Posted Date + Payee');
     }
 
-    // Capital One specific
-    if (bankKey.startsWith('capitalOne')) {
-      if (headerSet.has('debit') && headerSet.has('credit') && headerSet.has('transaction date')) {
-        score += 12;
-        reasons.push('Capital One signature: Debit/Credit split');
-      }
+    // Bank of America Credit Card
+    if (bankKey === 'bankOfAmericaCredit' && headerSet.has('posted date') && headerSet.has('payee') && headerSet.has('address')) {
+      score += 22;
+      reasons.push('BofA Credit signature: Posted Date + Payee + Address');
+    }
+
+    // Wells Fargo Credit Card - Transaction Date + Post Date + Category
+    if (bankKey === 'wellsFargoCredit' && headerSet.has('transaction date') && headerSet.has('post date') && headerSet.has('category')) {
+      score += 25;
+      reasons.push('Wells Fargo Credit signature: Transaction Date + Post Date + Category');
+    }
+
+    // Citibank - Status + Date + Debit + Credit
+    if (bankKey === 'citibank' && headerSet.has('status') && headerSet.has('debit') && headerSet.has('credit')) {
+      score += 25;
+      reasons.push('Citibank signature: Status + Debit/Credit columns');
+    }
+
+    // Citibank Checking
+    if (bankKey === 'citibankChecking' && headerSet.has('debit') && headerSet.has('credit') && headerSet.has('balance') && !headerSet.has('status')) {
+      score += 20;
+      reasons.push('Citibank Checking signature: Debit/Credit/Balance');
+    }
+
+    // Capital One - Card No. + Category + Debit/Credit
+    if (bankKey === 'capitalOne' && headerSet.has('card no.') && headerSet.has('category')) {
+      score += 25;
+      reasons.push('Capital One signature: Card No. + Category');
+    }
+
+    // Capital One - Debit/Credit split without Card No.
+    if (bankKey.startsWith('capitalOne') && headerSet.has('debit') && headerSet.has('credit') && headerSet.has('transaction date') && headerSet.has('posted date')) {
+      score += 20;
+      reasons.push('Capital One signature: Debit/Credit + Posted Date');
+    }
+
+    // US Bank - Name column is distinctive
+    if (bankKey === 'usBank' && headerSet.has('name') && headerSet.has('memo') && headerSet.has('transaction')) {
+      score += 25;
+      reasons.push('US Bank signature: Name + Memo + Transaction');
+    }
+
+    // US Bank Credit Card
+    if (bankKey === 'usBankCredit' && headerSet.has('transaction date') && headerSet.has('posted date') && !headerSet.has('category')) {
+      score += 18;
+      reasons.push('US Bank Credit signature: Transaction Date + Posted Date');
+    }
+
+    // PNC - Withdrawals + Deposits columns
+    if (bankKey === 'pnc' && headerSet.has('withdrawals') && headerSet.has('deposits')) {
+      score += 25;
+      reasons.push('PNC signature: Withdrawals/Deposits columns');
+    }
+
+    // Discover - Trans. Date is distinctive
+    if (bankKey === 'discover' && headerSet.has('trans. date')) {
+      score += 30;
+      reasons.push('Discover signature: "Trans. Date" column');
+    }
+
+    // Discover Alternative
+    if (bankKey === 'discoverAlt' && headerSet.has('post date') && headerSet.has('category') && !headerSet.has('type')) {
+      score += 18;
+      reasons.push('Discover Alt signature: Post Date + Category');
+    }
+
+    // American Express - Extended Details + Appears On Your Statement As
+    if (bankKey === 'amex' && (headerSet.has('extended details') || headerStr.includes('appears on your statement'))) {
+      score += 30;
+      reasons.push('Amex signature: Extended Details / Statement As');
+    }
+
+    // American Express - Reference + Card Member columns
+    if (bankKey === 'amexOld' && headerSet.has('reference') && headerSet.has('card member')) {
+      score += 25;
+      reasons.push('Amex Legacy signature: Reference + Card Member');
+    }
+
+    // Ally Bank - Time column is distinctive
+    if (bankKey === 'ally' && headerSet.has('time') && headerSet.has('type')) {
+      score += 25;
+      reasons.push('Ally signature: Time + Type columns');
+    }
+
+    // Navy Federal
+    if (bankKey === 'navyFederal' && headerStr.includes('navy federal')) {
+      score += 30;
+      reasons.push('Navy Federal signature: Bank name in headers');
+    }
+
+    // USAA
+    if (bankKey === 'usaa' && headerStr.includes('usaa')) {
+      score += 30;
+      reasons.push('USAA signature: Bank name in headers');
+    }
+
+    // Charles Schwab - Action + Symbol columns (investment account)
+    if (bankKey === 'schwab' && headerSet.has('action') && headerSet.has('symbol')) {
+      score += 25;
+      reasons.push('Schwab signature: Action + Symbol columns');
+    }
+
+    // Fidelity
+    if (bankKey === 'fidelity' && headerStr.includes('fidelity')) {
+      score += 30;
+      reasons.push('Fidelity signature: Bank name in headers');
     }
 
     // Home Trust specific
@@ -555,25 +1213,89 @@ export function detectBank(headers: string[]): string | null {
     return 'bmo';
   }
 
-  // TD Canada Trust - Outflow/Inflow split pattern (very distinctive)
+  // ========================================
+  // TD CANADA TRUST - Multiple format variants
+  // ========================================
+
+  // TD Credit Card - Transaction Date + Posting Date + Description + Amount
+  if (
+    headerSet.has('transaction date') &&
+    headerSet.has('posting date') &&
+    headerSet.has('description') &&
+    headerSet.has('amount') &&
+    !headerSet.has('category') // Differentiate from Chase Credit
+  ) {
+    return 'tdCreditCard';
+  }
+
+  // TD Checking - Date + Description + Withdrawals + Deposits + Balance
+  if (
+    headerSet.has('date') &&
+    headerSet.has('description') &&
+    headerSet.has('withdrawals') &&
+    headerSet.has('deposits') &&
+    headerSet.has('balance') &&
+    !headerSet.has('transaction date') // Differentiate from credit card
+  ) {
+    return 'tdChecking';
+  }
+
+  // TD Business - Date + Reference Number + Description + Debit + Credit + Balance
+  if (
+    headerSet.has('date') &&
+    headerSet.has('reference number') &&
+    headerSet.has('description') &&
+    headerSet.has('debit') &&
+    headerSet.has('credit') &&
+    headerSet.has('balance')
+  ) {
+    return 'tdBusiness';
+  }
+
+  // TD Outflow/Inflow split pattern (very distinctive)
   if (headerSet.has('outflow') && headerSet.has('inflow')) {
     return 'tdSplit';
   }
 
-  // TD - Account activity pattern
+  // TD - Account activity pattern (generic fallback)
   if (
     headerSet.has('date') &&
     (headerSet.has('payee') || headerSet.has('description')) &&
     !headerStr.includes('posted') // Differentiate from BofA
   ) {
-    // Check if it might be TD based on date format or filename
-    // This is a weaker match - may need filename pattern
     if (headerStr.includes('account activity') || headerStr.includes('accountactivity')) {
       return 'td';
     }
   }
 
-  // RBC - Description 1 is distinctive
+  // ========================================
+  // RBC (Royal Bank of Canada) - Multiple format variants
+  // ========================================
+
+  // RBC Standard - Account Type + Account Number + Transaction Date + Description 1 + CAD$/USD$
+  if (
+    headerSet.has('account type') &&
+    headerSet.has('account number') &&
+    headerSet.has('transaction date') &&
+    (headerSet.has('description 1') || headerSet.has('description1')) &&
+    (headerSet.has('cad$') || headerSet.has('usd$'))
+  ) {
+    return 'rbcStandard';
+  }
+
+  // RBC Simplified - Date + Description + Withdrawals + Deposits (no Balance)
+  if (
+    headerSet.has('date') &&
+    headerSet.has('description') &&
+    headerSet.has('withdrawals') &&
+    headerSet.has('deposits') &&
+    !headerSet.has('balance') && // Differentiate from TD Checking
+    !headerSet.has('reference number') // Differentiate from TD Business
+  ) {
+    return 'rbcSimplified';
+  }
+
+  // RBC - Description 1 is distinctive (legacy detection)
   if (
     headerSet.has('transaction date') &&
     (headerSet.has('description 1') || headerSet.has('description1'))
@@ -584,20 +1306,45 @@ export function detectBank(headers: string[]): string | null {
     return 'rbc';
   }
 
-  // Scotiabank - Look for Scotia-specific patterns
+  // ========================================
+  // SCOTIABANK - Multiple format variants
+  // ========================================
+
+  // Scotiabank with Withdrawal/Deposit columns
   if (
-    headerStr.includes('scotiabank') ||
-    (headerSet.has('date') &&
-      headerSet.has('description') &&
-      (headerSet.has('debit') && headerSet.has('credit') && headerSet.has('balance')))
+    headerSet.has('date') &&
+    headerSet.has('description') &&
+    (headerSet.has('withdrawal') || headerSet.has('deposit'))
   ) {
-    if (headerSet.has('debit') && headerSet.has('credit')) {
-      return 'scotiabankSplit';
-    }
     return 'scotiabank';
   }
 
-  // CIBC - Transaction Date + Withdrawals/Deposits is distinctive
+  // Scotiabank with Debit/Credit columns
+  if (
+    headerSet.has('date') &&
+    headerSet.has('description') &&
+    headerSet.has('debit') &&
+    headerSet.has('credit') &&
+    headerSet.has('balance') &&
+    !headerSet.has('reference number') // Differentiate from TD Business
+  ) {
+    return 'scotiabankSplit';
+  }
+
+  // Scotiabank with single Amount column
+  if (
+    headerStr.includes('scotiabank') &&
+    headerSet.has('date') &&
+    headerSet.has('amount')
+  ) {
+    return 'scotiabankSingle';
+  }
+
+  // ========================================
+  // CIBC - Multiple format variants
+  // ========================================
+
+  // CIBC - Transaction Date + Withdrawals/Deposits
   if (
     headerSet.has('transaction date') &&
     (headerSet.has('withdrawals') || headerSet.has('deposits'))
@@ -605,14 +1352,30 @@ export function detectBank(headers: string[]): string | null {
     return 'cibcSplit';
   }
 
-  // CIBC - Basic pattern
+  // CIBC - Standard with Debit/Credit
   if (
     headerSet.has('date') &&
     headerSet.has('description') &&
-    headerStr.includes('cibc')
+    headerSet.has('debit') &&
+    headerSet.has('credit') &&
+    !headerSet.has('withdrawal') && // Not Scotiabank
+    !headerSet.has('reference number') // Not TD Business
   ) {
     return 'cibc';
   }
+
+  // CIBC - Single amount format
+  if (
+    headerStr.includes('cibc') &&
+    headerSet.has('date') &&
+    headerSet.has('amount')
+  ) {
+    return 'cibcSingle';
+  }
+
+  // ========================================
+  // TANGERINE - Date format variants
+  // ========================================
 
   // Tangerine - "Name" column is distinctive
   if (
@@ -621,17 +1384,59 @@ export function detectBank(headers: string[]): string | null {
     headerSet.has('amount') &&
     !headerSet.has('card') // Differentiate from credit cards
   ) {
+    // Check if Transaction column exists (standard format)
+    if (headerSet.has('transaction')) {
+      return 'tangerine';
+    }
     return 'tangerine';
   }
 
-  // Simplii Financial (CIBC subsidiary)
+  // ========================================
+  // SIMPLII FINANCIAL
+  // ========================================
+
+  // Simplii - *Description column is distinctive
+  if (
+    headerSet.has('date') &&
+    (headerSet.has('*description') || headerStr.includes('*description'))
+  ) {
+    return 'simplii';
+  }
+
+  // Simplii Financial generic detection
   if (
     headerStr.includes('simplii') ||
     (headerSet.has('date') &&
       headerSet.has('description') &&
-      headerStr.includes('yyyy-mm-dd')) // Check for ISO date format hint
+      headerSet.has('debit') &&
+      headerSet.has('credit') &&
+      !headerSet.has('transaction date')) // Differentiate from other banks
   ) {
     return 'simplii';
+  }
+
+  // ========================================
+  // DESJARDINS (Quebec)
+  // ========================================
+
+  // Desjardins French - "Date de l'opération" or "Retrait/Dépôt"
+  if (
+    headerStr.includes("date de l'opération") ||
+    (headerSet.has('retrait') && headerSet.has('dépôt'))
+  ) {
+    return 'desjardinsFR';
+  }
+
+  // Desjardins English
+  if (
+    headerStr.includes('desjardins') ||
+    (headerSet.has('date') &&
+      headerSet.has('description') &&
+      headerSet.has('withdrawal') &&
+      headerSet.has('deposit') &&
+      !headerSet.has('balance')) // Desjardins often doesn't have balance
+  ) {
+    return 'desjardinsEN';
   }
 
   // Home Trust - Debit/Credit column is very specific
@@ -646,15 +1451,7 @@ export function detectBank(headers: string[]): string | null {
   // AMERICAN BANKS
   // ========================================
 
-  // Bank of America - "Posted Date" + "Payee" is distinctive
-  if (
-    (headerSet.has('posted date') || headerSet.has('posting date')) &&
-    headerSet.has('payee')
-  ) {
-    return 'bankOfAmerica';
-  }
-
-  // Chase Credit Card - Very specific pattern
+  // Chase Credit Card - Transaction Date + Post Date + Category + Type
   if (
     headerSet.has('transaction date') &&
     headerSet.has('post date') &&
@@ -664,7 +1461,7 @@ export function detectBank(headers: string[]): string | null {
     return 'chaseCredit';
   }
 
-  // Chase Checking - "Posting Date" + "Details" + "Check or Slip #"
+  // Chase Checking - Details + Posting Date + Check or Slip #
   if (
     headerSet.has('posting date') &&
     headerSet.has('details') &&
@@ -673,50 +1470,253 @@ export function detectBank(headers: string[]): string | null {
     return 'chaseChecking';
   }
 
-  // Capital One - "Transaction Date" + Split Debit/Credit
+  // Chase Business - Transaction Date + Post Date + Type (no Category)
   if (
     headerSet.has('transaction date') &&
-    headerSet.has('debit') &&
-    headerSet.has('credit') &&
-    (headerSet.has('posted date') || headerStr.includes('capital one'))
+    headerSet.has('post date') &&
+    headerSet.has('type') &&
+    !headerSet.has('category')
   ) {
-    return 'capitalOne';
+    return 'chaseBusiness';
   }
 
-  // Capital One Single Amount - Alternative format
+  // Bank of America - Posted Date + Payee
+  if (
+    (headerSet.has('posted date') || headerSet.has('posting date')) &&
+    headerSet.has('payee')
+  ) {
+    if (headerSet.has('address')) {
+      return 'bankOfAmericaCredit';
+    }
+    return 'bankOfAmerica';
+  }
+
+  // Wells Fargo Credit Card - Transaction Date + Post Date + Category
   if (
     headerSet.has('transaction date') &&
-    headerSet.has('description') &&
-    headerSet.has('amount') &&
-    !headerSet.has('payee') // Differentiate from BofA
+    headerSet.has('post date') &&
+    headerSet.has('category') &&
+    !headerSet.has('type') // Differentiate from Chase
   ) {
-    return 'capitalOneSingle';
+    return 'wellsFargoCredit';
   }
 
-  // Wells Fargo - Generic pattern (needs better detection)
+  // Wells Fargo Checking - Check for bank name or headerless format
   if (
     headerStr.includes('wells fargo') ||
     (headerSet.has('date') && headerSet.has('amount') && headerStr.includes('wells'))
   ) {
-    return 'wellsFargo';
+    return headerSet.has('date') ? 'wellsFargoHeader' : 'wellsFargo';
   }
 
-  // Citibank - Generic pattern (needs better detection)
+  // Citibank Credit Card - Status + Date + Debit + Credit
   if (
-    headerStr.includes('citibank') || headerStr.includes('citi') &&
+    headerSet.has('status') &&
     headerSet.has('date') &&
-    headerSet.has('description')
+    headerSet.has('debit') &&
+    headerSet.has('credit')
   ) {
     return 'citibank';
   }
 
-  // US Bank - Generic pattern (needs better detection)
+  // Citibank Checking - Date + Description + Debit + Credit + Balance (no Status)
   if (
-    (headerStr.includes('us bank') || headerStr.includes('usbank')) &&
+    headerSet.has('date') &&
+    headerSet.has('description') &&
+    headerSet.has('debit') &&
+    headerSet.has('credit') &&
+    headerSet.has('balance') &&
+    !headerSet.has('status') &&
+    !headerSet.has('withdrawals') // Differentiate from PNC
+  ) {
+    return 'citibankChecking';
+  }
+
+  // Citibank generic (bank name in headers)
+  if (
+    (headerStr.includes('citibank') || headerStr.includes('citi')) &&
     headerSet.has('date') &&
     headerSet.has('description')
   ) {
+    return headerSet.has('amount') ? 'citibankSingle' : 'citibank';
+  }
+
+  // Capital One - Card No. + Category + Debit/Credit
+  if (
+    headerSet.has('transaction date') &&
+    headerSet.has('card no.') &&
+    headerSet.has('category')
+  ) {
+    return 'capitalOne';
+  }
+
+  // Capital One - Debit/Credit split with Posted Date
+  if (
+    headerSet.has('transaction date') &&
+    headerSet.has('posted date') &&
+    headerSet.has('debit') &&
+    headerSet.has('credit') &&
+    !headerSet.has('status') // Differentiate from Citi
+  ) {
+    return 'capitalOne';
+  }
+
+  // Capital One Single Amount
+  if (
+    headerStr.includes('capital one') &&
+    headerSet.has('transaction date') &&
+    headerSet.has('amount')
+  ) {
+    return 'capitalOneSingle';
+  }
+
+  // US Bank - Name + Memo + Transaction columns are distinctive
+  if (
+    headerSet.has('name') &&
+    headerSet.has('memo') &&
+    headerSet.has('transaction') &&
+    headerSet.has('date')
+  ) {
     return 'usBank';
+  }
+
+  // US Bank Credit Card
+  if (
+    headerSet.has('transaction date') &&
+    headerSet.has('posted date') &&
+    headerSet.has('description') &&
+    !headerSet.has('category') && // Differentiate from Chase/Wells Fargo
+    !headerSet.has('debit') // Differentiate from Capital One
+  ) {
+    return 'usBankCredit';
+  }
+
+  // US Bank - Bank name detection
+  if (
+    (headerStr.includes('us bank') || headerStr.includes('usbank')) &&
+    headerSet.has('date')
+  ) {
+    return headerSet.has('name') ? 'usBank' : 'usBankAlt';
+  }
+
+  // PNC Bank - Withdrawals + Deposits columns
+  if (
+    headerSet.has('date') &&
+    headerSet.has('description') &&
+    headerSet.has('withdrawals') &&
+    headerSet.has('deposits') &&
+    !headerSet.has('transaction date') // Differentiate from CIBC
+  ) {
+    return 'pnc';
+  }
+
+  // PNC Credit Card
+  if (
+    headerStr.includes('pnc') &&
+    headerSet.has('transaction date') &&
+    headerSet.has('amount')
+  ) {
+    return 'pncCredit';
+  }
+
+  // Discover Card - "Trans. Date" column is distinctive
+  if (headerSet.has('trans. date')) {
+    return 'discover';
+  }
+
+  // Discover Card - Alternative with Post Date + Category (no Type)
+  if (
+    headerSet.has('transaction date') &&
+    headerSet.has('post date') &&
+    headerSet.has('category') &&
+    !headerSet.has('type')
+  ) {
+    // Could be Discover or Wells Fargo Credit - check for bank name
+    if (headerStr.includes('discover')) {
+      return 'discoverAlt';
+    }
+    return 'wellsFargoCredit';
+  }
+
+  // Discover Bank - Bank name detection
+  if (
+    headerStr.includes('discover') &&
+    headerSet.has('date') &&
+    headerSet.has('amount')
+  ) {
+    return 'discoverBank';
+  }
+
+  // American Express - Extended Details or "Appears On Your Statement As"
+  if (
+    headerSet.has('extended details') ||
+    headerStr.includes('appears on your statement')
+  ) {
+    return 'amex';
+  }
+
+  // American Express - Reference + Card Member columns (legacy format)
+  if (
+    headerSet.has('reference') &&
+    headerSet.has('card member') &&
+    headerSet.has('card number')
+  ) {
+    return 'amexOld';
+  }
+
+  // American Express - Bank name detection
+  if (
+    (headerStr.includes('american express') || headerStr.includes('amex')) &&
+    headerSet.has('date') &&
+    headerSet.has('amount')
+  ) {
+    return 'amex';
+  }
+
+  // Ally Bank - Time column is distinctive
+  if (
+    headerSet.has('date') &&
+    headerSet.has('time') &&
+    headerSet.has('type') &&
+    headerSet.has('amount')
+  ) {
+    return 'ally';
+  }
+
+  // Navy Federal Credit Union
+  if (
+    headerStr.includes('navy federal') &&
+    headerSet.has('date') &&
+    headerSet.has('amount')
+  ) {
+    return 'navyFederal';
+  }
+
+  // USAA
+  if (
+    headerStr.includes('usaa') &&
+    headerSet.has('date') &&
+    headerSet.has('amount')
+  ) {
+    return 'usaa';
+  }
+
+  // Charles Schwab - Action + Symbol columns
+  if (
+    headerSet.has('action') &&
+    headerSet.has('symbol') &&
+    headerSet.has('date')
+  ) {
+    return 'schwab';
+  }
+
+  // Fidelity
+  if (
+    headerStr.includes('fidelity') &&
+    headerSet.has('date') &&
+    headerSet.has('amount')
+  ) {
+    return 'fidelity';
   }
 
   // ========================================

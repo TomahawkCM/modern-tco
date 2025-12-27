@@ -122,9 +122,7 @@ export function OnboardingTour() {
   }
 
   function skipTour() {
-    if (confirm('Skip the tour? You can restart it anytime from Settings.')) {
-      completeTour();
-    }
+    completeTour();
   }
 
   if (!isVisible) return null;

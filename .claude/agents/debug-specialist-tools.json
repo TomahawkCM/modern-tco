@@ -1,6 +1,7 @@
 {
   "toolAccessMatrix": {
     "agentName": "debug-specialist",
+    "model": "opus",
     "version": "1.0.0",
     "description": "Complete tool access configuration for the debug-specialist agent with token budgets and usage guidelines",
 
@@ -10,7 +11,7 @@
         "tools": [
           {
             "name": "vibe-check",
-            "mcp": "mcp__pv-bhat-vibe-check-mcp-server__vibe_check",
+            "mcp": "mcp__vibe-check__vibe_check",
             "tokenCost": "~2K",
             "purpose": "Error prevention, assumption identification, tunnel vision breaking",
             "usage": "ALWAYS first step in any debugging workflow",
@@ -178,7 +179,7 @@
           },
           {
             "name": "vibe-learn",
-            "mcp": "mcp__pv-bhat-vibe-check-mcp-server__vibe_learn",
+            "mcp": "mcp__vibe-check__vibe_learn",
             "tokenCost": "~1K",
             "purpose": "Pattern recognition and learning from debugging sessions",
             "usage": "Record recurring errors, solutions, and anti-patterns",

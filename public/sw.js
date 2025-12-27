@@ -9,8 +9,8 @@
  * - Background sync for transactions (future)
  */
 
-const CACHE_NAME = 'budget-app-v2-dev';
-const RUNTIME_CACHE = 'budget-app-runtime-v2-dev';
+const CACHE_NAME = 'budget-app-v3-dev';
+const RUNTIME_CACHE = 'budget-app-runtime-v3-dev';
 
 // App shell files to cache on install
 const APP_SHELL = [
@@ -109,7 +109,20 @@ function shouldCacheFirst(url) {
     return false;
   }
 
-  // Cache-first for:
+  // External CDNs - use network-first (don't intercept with SW)
+  // This avoids CSP issues where the browser's CSP is applied before SW fetch
+  const trustedCDNs = [
+    'cdnjs.cloudflare.com',
+    'cdn.jsdelivr.net',
+    'fonts.googleapis.com',
+    'fonts.gstatic.com',
+  ];
+  if (trustedCDNs.some(cdn => url.hostname.includes(cdn))) {
+    console.log('[Service Worker] CDN request, using network-first:', url.hostname);
+    return false;
+  }
+
+  // Cache-first for same-origin requests:
   // - App pages (routes)
   // - Static assets (icons, images)
   // - Scripts and styles

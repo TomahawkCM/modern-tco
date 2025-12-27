@@ -1,6 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
+import { useSeniorsMode } from "@/hooks/useSeniorsMode";
 import { AnimatePresence, motion } from "framer-motion";
 import {
   BarChart3,
@@ -9,8 +10,10 @@ import {
   ChevronRight,
   CreditCard,
   Home,
+  MoreHorizontal,
   PieChart,
   Receipt,
+  Repeat,
   Search,
   Settings,
   Sparkles,
@@ -28,20 +31,26 @@ interface NavItem {
   name: string;
   href: string;
   icon: React.ComponentType<{ className?: string }>;
+  /** If true, this item appears in simplified (Seniors Mode) navigation */
+  essential?: boolean;
 }
 
 const navigation: NavItem[] = [
-  { name: "Dashboard", href: "/budget-app", icon: Home },
-  { name: "Transactions", href: "/budget-app/transactions", icon: Receipt },
+  { name: "Dashboard", href: "/budget-app", icon: Home, essential: true },
+  { name: "Transactions", href: "/budget-app/transactions", icon: Receipt, essential: true },
   { name: "Scan Receipt", href: "/budget-app/ocr", icon: Camera },
-  { name: "Categories", href: "/budget-app/categories", icon: Tags },
-  { name: "Budgets", href: "/budget-app/budgets", icon: PieChart },
+  { name: "Categories", href: "/budget-app/categories", icon: Tags, essential: true },
+  { name: "Budgets", href: "/budget-app/budgets", icon: PieChart, essential: true },
+  { name: "Subscriptions", href: "/budget-app/subscriptions", icon: Repeat },
   { name: "Loans", href: "/budget-app/loans", icon: CreditCard },
   { name: "Investments", href: "/budget-app/investments", icon: Wallet },
   { name: "Future Plans", href: "/budget-app/planning/future", icon: Target },
   { name: "Retirement", href: "/budget-app/planning/retirement", icon: TrendingUp },
-  { name: "Reports", href: "/budget-app/reports", icon: BarChart3 },
+  { name: "Reports", href: "/budget-app/reports", icon: BarChart3, essential: true },
 ];
+
+// Simplified navigation for Seniors Mode - only essential items
+const simplifiedNavigation = navigation.filter(item => item.essential);
 
 interface SidebarProps {
   onSearch?: () => void;
@@ -54,14 +63,21 @@ interface SidebarProps {
 export function Sidebar({ onSearch, onShowShortcuts, className, isMobile, onClose }: SidebarProps) {
   const pathname = usePathname();
   const [isCollapsed, setIsCollapsed] = useState(false);
+  const [showAllItems, setShowAllItems] = useState(false);
+  const { isSeniorsMode, settings } = useSeniorsMode();
 
-  // Always expanded on mobile
-  const width = isMobile ? "100%" : isCollapsed ? 80 : 288;
+  // Use simplified navigation in Seniors Mode (unless user wants all items)
+  const useSimplifiedNav = isSeniorsMode && settings.simplifiedMode && !showAllItems;
+  const activeNavigation = useSimplifiedNav ? simplifiedNavigation : navigation;
+
+  // Always expanded on mobile, never collapsed in Seniors Mode
+  const width = isMobile ? "100%" : (isCollapsed && !isSeniorsMode) ? 80 : 288;
 
   return (
     <motion.aside
       initial={false}
       animate={{ width }}
+      aria-label="Main sidebar"
       className={cn(
         "relative flex h-full flex-col border-r border-white/10 bg-slate-950/80 backdrop-blur-xl",
         !isMobile && "hidden md:flex",
@@ -123,9 +139,9 @@ export function Sidebar({ onSearch, onShowShortcuts, className, isMobile, onClos
         </button>
       </div>
 
-      {/* Navigation */}
-      <nav className="custom-scrollbar flex-1 space-y-1 overflow-y-auto px-3 py-2">
-        {navigation.map((item) => {
+      {/* Navigation - Uses simplified nav in Seniors Mode */}
+      <nav aria-label="Primary navigation" className="custom-scrollbar flex-1 space-y-1 overflow-y-auto px-3 py-2">
+        {activeNavigation.map((item) => {
           const isActive = pathname === item.href;
           return (
             <Link
@@ -133,11 +149,13 @@ export function Sidebar({ onSearch, onShowShortcuts, className, isMobile, onClos
               href={item.href}
               onClick={isMobile ? onClose : undefined}
               className={cn(
-                "group relative flex items-center gap-3 overflow-hidden rounded-xl px-3 py-2.5 transition-all duration-200",
+                "group relative flex items-center gap-3 overflow-hidden rounded-xl transition-all duration-200",
+                // Larger touch targets in Seniors Mode (52px min)
+                isSeniorsMode ? "px-4 py-3.5 min-h-[52px]" : "px-3 py-2.5",
                 isActive
                   ? "bg-gradient-to-r from-teal-500/10 to-blue-500/10 text-teal-300"
                   : "text-slate-400 hover:bg-white/5 hover:text-white",
-                isCollapsed && "justify-center"
+                isCollapsed && !isSeniorsMode && "justify-center"
               )}
             >
               {isActive && (
@@ -151,16 +169,22 @@ export function Sidebar({ onSearch, onShowShortcuts, className, isMobile, onClos
               )}
               <item.icon
                 className={cn(
-                  "relative z-10 h-5 w-5 transition-transform group-hover:scale-110",
+                  "relative z-10 transition-transform group-hover:scale-110",
+                  // Larger icons in Seniors Mode
+                  isSeniorsMode ? "h-6 w-6" : "h-5 w-5",
                   isActive ? "text-teal-400" : "text-slate-500 group-hover:text-slate-300"
                 )}
               />
-              {!isCollapsed && (
+              {(!isCollapsed || isSeniorsMode) && (
                 <motion.span
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
-                  className="relative z-10 truncate text-sm font-medium"
+                  className={cn(
+                    "relative z-10 truncate font-medium",
+                    // Larger text in Seniors Mode
+                    isSeniorsMode ? "text-base" : "text-sm"
+                  )}
                 >
                   {item.name}
                 </motion.span>
@@ -168,6 +192,19 @@ export function Sidebar({ onSearch, onShowShortcuts, className, isMobile, onClos
             </Link>
           );
         })}
+
+        {/* Show All Items toggle - Seniors Mode only */}
+        {isSeniorsMode && settings.simplifiedMode && !isCollapsed && (
+          <button
+            onClick={() => setShowAllItems(!showAllItems)}
+            className="mx-3 mt-2 flex items-center gap-2 rounded-lg border border-white/10 px-3 py-2 text-sm text-slate-400 transition-colors hover:bg-white/5 hover:text-white"
+            aria-expanded={showAllItems}
+            aria-label={showAllItems ? "Show simplified menu" : "Show all menu items"}
+          >
+            <MoreHorizontal className="h-4 w-4" />
+            <span>{showAllItems ? "Show Less" : "Show All Items"}</span>
+          </button>
+        )}
       </nav>
 
       {/* Footer Actions */}

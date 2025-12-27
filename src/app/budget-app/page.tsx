@@ -26,7 +26,12 @@ import {
   getAverageMonthlyIncome,
   getAverageMonthlySpending,
 } from "@/lib/analytics/spending-insights";
+import {
+  calculateHealthScore,
+  type HealthScoreResult,
+} from "@/lib/analytics/health-score";
 import { db, initializeDefaultCategories } from "@/lib/budget-db";
+import { HealthScoreWidget } from "@/components/budget/HealthScoreWidget";
 import type { Account, Budget, Category, Transaction } from "@/types/budget";
 import { motion } from "framer-motion";
 import {
@@ -347,6 +352,7 @@ export default function BudgetDashboard() {
   const [avgMonthlySpending, setAvgMonthlySpending] = useState(0);
   const [anomalyAlerts, setAnomalyAlerts] = useState<AnomalyAlert[]>([]);
   const [dismissedAnomalies, setDismissedAnomalies] = useState<Set<string>>(new Set());
+  const [healthScore, setHealthScore] = useState<HealthScoreResult | null>(null);
 
   useEffect(() => {
     async function loadData() {
@@ -426,6 +432,15 @@ export default function BudgetDashboard() {
         if (isAnomalyDetectionEnabled() && txs.length >= 5) {
           setAnomalyAlerts(detectAnomalies(txs, { zScoreThreshold: 2.5, minTransactions: 5 }));
         }
+
+        // Calculate health score
+        const futurePurchases = await db.futurePurchases.toArray();
+        const healthResult = calculateHealthScore({
+          transactions: txs,
+          budgets,
+          futurePurchases,
+        });
+        setHealthScore(healthResult);
       } catch (error) {
         console.error("Error loading dashboard data:", error);
       } finally {
@@ -540,6 +555,72 @@ export default function BudgetDashboard() {
           icon={PiggyBank}
           delay={0.4}
         />
+      </div>
+
+      {/* Health Score Section */}
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
+        <GlassCard className="lg:col-span-1 flex flex-col items-center justify-center p-6">
+          <HealthScoreWidget
+            result={healthScore}
+            size="lg"
+            showLabel={true}
+            showGrade={true}
+          />
+          {healthScore?.topRecommendation && (
+            <div className="mt-4 p-3 rounded-lg bg-teal-500/10 border border-teal-500/20 w-full">
+              <p className="text-sm text-teal-300">
+                <strong>Tip:</strong> {healthScore.topRecommendation}
+              </p>
+            </div>
+          )}
+        </GlassCard>
+
+        <GlassCard className="lg:col-span-2 p-6">
+          <div className="flex items-center gap-4 mb-6">
+            <div className="rounded-lg bg-teal-500/20 p-2">
+              <Target className="h-5 w-5 text-teal-400" />
+            </div>
+            <div>
+              <h2 className="text-lg font-semibold text-white">Score Breakdown</h2>
+              <p className="text-sm text-slate-400">How your score is calculated</p>
+            </div>
+          </div>
+          {healthScore ? (
+            <div className="grid gap-3">
+              {healthScore.factors.map((factor) => {
+                const percentage = (factor.score / factor.maxScore) * 100;
+                return (
+                  <div key={factor.type} className="space-y-1">
+                    <div className="flex justify-between text-sm">
+                      <span className="text-white capitalize">
+                        {factor.type.replace(/([A-Z])/g, ' $1').trim()}
+                      </span>
+                      <span className="text-slate-400">
+                        {factor.score.toFixed(1)} / {factor.maxScore}
+                      </span>
+                    </div>
+                    <div className="h-2 rounded-full bg-white/10 overflow-hidden">
+                      <motion.div
+                        className="h-full rounded-full"
+                        style={{
+                          backgroundColor: percentage >= 80 ? '#22c55e' : percentage >= 60 ? '#eab308' : percentage >= 40 ? '#f97316' : '#ef4444'
+                        }}
+                        initial={{ width: 0 }}
+                        animate={{ width: `${percentage}%` }}
+                        transition={{ duration: 0.5, delay: 0.1 }}
+                      />
+                    </div>
+                    <p className="text-xs text-slate-500">{factor.description}</p>
+                  </div>
+                );
+              })}
+            </div>
+          ) : (
+            <p className="text-slate-400 text-center py-8">
+              Add transactions to see your financial health breakdown
+            </p>
+          )}
+        </GlassCard>
       </div>
 
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">

@@ -1,83 +1,87 @@
-'use client';
+"use client";
 
-import { Suspense, lazy } from 'react'
-import { AuthGuard } from '@/components/auth/AuthGuard'
-import { HeroSection } from '@/components/homepage/HeroSection'
-import { QuickActions } from '@/components/homepage/QuickActions'
-import { LoadingCard, LoadingSpinner } from '@/components/ui/loading-spinner'
+import { HeroSection } from "@/components/homepage/HeroSection";
+import { QuickActions } from "@/components/homepage/QuickActions";
+import { Suspense, lazy } from "react";
 
 // Lazy load below-the-fold components for better initial load performance
-const LearningPath = lazy(() => import('@/components/homepage/LearningPath').then(mod => ({ default: mod.LearningPath })))
-const GameificationSection = lazy(() => import('@/components/homepage/GameificationSection').then(mod => ({ default: mod.GameificationSection })))
+const LearningPath = lazy(() =>
+  import("@/components/homepage/LearningPath").then((mod) => ({ default: mod.LearningPath }))
+);
+const GameificationSection = lazy(() =>
+  import("@/components/homepage/GameificationSection").then((mod) => ({
+    default: mod.GameificationSection,
+  }))
+);
 
 export default function Home() {
   return (
     <>
-        {/* Temporarily disabled for testing particle effects */}
-        {/* World-Class Homepage Sections */}
-        <Suspense fallback={<HomepageSkeleton />}>
-          {/* Hero Section with TCO Mastery Journey Welcome */}
-          <HeroSection />
-          
-          {/* Quick Actions for Immediate Engagement */}
-          <QuickActions />
-          
-          {/* Interactive Learning Path with 5 TCO Domains */}
-          <LearningPath />
-          
-          {/* Gamification - Achievements, Leaderboard, Study Streaks */}
-          <GameificationSection />
-        </Suspense>
+      {/* Temporarily disabled for testing particle effects */}
+      {/* World-Class Homepage Sections */}
+      <Suspense fallback={<HomepageSkeleton />}>
+        {/* Hero Section with TCO Mastery Journey Welcome */}
+        <HeroSection />
+
+        {/* Quick Actions for Immediate Engagement */}
+        <QuickActions />
+
+        {/* Interactive Learning Path with 5 TCO Domains */}
+        <LearningPath />
+
+        {/* Gamification - Achievements, Leaderboard, Study Streaks */}
+        <GameificationSection />
+      </Suspense>
     </>
-  )
+  );
 }
 
 function HomepageSkeleton() {
   return (
     <div className="space-y-16">
       {/* Hero Section Skeleton */}
-      <div className="min-h-[80vh] flex items-center justify-center">
-        <div className="text-center space-y-6 animate-pulse">
-          <div className="h-4 bg-primary/20 rounded w-48 mx-auto"></div>
-          <div className="h-16 bg-gradient-to-r from-primary/20 to-accent/20 rounded w-3/4 mx-auto"></div>
-          <div className="h-6 bg-muted rounded w-2/3 mx-auto"></div>
-          <div className="flex gap-4 justify-center">
-            <div className="h-12 bg-primary/30 rounded w-32"></div>
-            <div className="h-12 bg-primary/10 rounded w-32"></div>
+      <div className="flex min-h-[80vh] items-center justify-center">
+        <div className="animate-pulse space-y-6 text-center">
+          <div className="mx-auto h-4 w-48 rounded bg-primary/20"></div>
+          <div className="mx-auto h-16 w-3/4 rounded bg-secondary/50"></div>
+          <div className="mx-auto h-6 w-2/3 rounded bg-muted"></div>
+          <div className="flex justify-center gap-4">
+            <div className="h-12 w-32 rounded bg-primary/30"></div>
+            <div className="h-12 w-32 rounded bg-primary/10"></div>
           </div>
         </div>
       </div>
 
       {/* Quick Actions Skeleton */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
         {[...Array(6)].map((_, i) => (
           <div key={i} className="animate-pulse">
-            <div className="h-64 bg-card rounded-xl border border-primary/20"></div>
+            <div className="h-64 rounded-xl border border-primary/20 bg-card"></div>
           </div>
         ))}
       </div>
 
       {/* Learning Path Skeleton */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-2 xl:grid-cols-3">
         {[...Array(5)].map((_, i) => (
           <div key={i} className="animate-pulse">
-            <div className="h-80 bg-card rounded-xl border border-primary/20"></div>
+            <div className="h-80 rounded-xl border border-primary/20 bg-card"></div>
           </div>
         ))}
       </div>
 
       {/* Gamification Skeleton */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
         <div className="animate-pulse">
-          <div className="h-96 bg-card rounded-xl border border-primary/20"></div>
+          <div className="h-96 rounded-xl border border-primary/20 bg-card"></div>
         </div>
-        <div className="lg:col-span-2 animate-pulse">
-          <div className="h-96 bg-card rounded-xl border border-primary/20"></div>
+        <div className="animate-pulse lg:col-span-2">
+          <div className="h-96 rounded-xl border border-primary/20 bg-card"></div>
         </div>
-        <div className="lg:col-span-3 animate-pulse">
-          <div className="h-80 bg-card rounded-xl border border-primary/20"></div>
+        <div className="animate-pulse lg:col-span-3">
+          <div className="h-80 rounded-xl border border-primary/20 bg-card"></div>
         </div>
       </div>
     </div>
-  )
+  );
 }

@@ -1,82 +1,69 @@
-import { createClient, type SupabaseClient } from "@supabase/supabase-js";
+import { createClient as createSupabaseClient, type SupabaseClient } from "@supabase/supabase-js";
 import type { Database } from "./database.types";
+import { createClient as createBrowserClient } from "@/utils/supabase/client";
 
-// Environment variable validation - NO FALLBACK VALUES for security
+/**
+ * SINGLETON PATTERN: Reuse the browser client from utils/supabase/client.ts
+ * to avoid "Multiple GoTrueClient instances" warning.
+ *
+ * This module provides backward compatibility for code that imports from here.
+ */
+
+// For browser context, use the singleton browser client
+// This prevents multiple GoTrueClient instances
+const getBrowserClient = () => {
+  if (typeof window !== 'undefined') {
+    return createBrowserClient();
+  }
+  return null;
+};
+
+// Environment variable validation for server-side usage
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
-// Validate required environment variables
-// Be strict in production, permissive in dev/test to avoid import-time crashes in tests.
-const isProd = process.env.NODE_ENV === "production";
-if (isProd) {
-  if (!supabaseUrl) {
-    throw new Error("NEXT_PUBLIC_SUPABASE_URL is required. Check your .env.local file.");
-  }
-  if (!supabaseAnonKey) {
-    throw new Error("NEXT_PUBLIC_SUPABASE_ANON_KEY is required. Check your .env.local file.");
-  }
-}
-
-// Debug logging removed for production compliance
-
-// Create a typed client with proper error handling
-// If environment variables are missing, create a no-op client to prevent runtime errors
+// Create a typed client with proper singleton handling
 let supabaseClient: SupabaseClient<Database>;
 
-try {
-  if (supabaseUrl && supabaseAnonKey) {
-    supabaseClient = createClient<Database>(
-      supabaseUrl,
-      supabaseAnonKey,
-      {
-        auth: {
-          persistSession: true,
-          autoRefreshToken: true,
-          // Security: Enable PKCE flow for enhanced security
-          flowType: 'pkce',
-          // Storage configuration for CSRF protection via cookies
-          storage: typeof window !== 'undefined' ? window.localStorage : undefined,
-        },
-        global: {
-          headers: {
-            'X-Client-Info': 'modern-tco-lms',
-          },
-        },
-      }
-    );
-  } else {
-    // Create a mock client that won't crash but logs warnings
-    console.warn("Supabase environment variables not configured. Database features will be disabled.");
-    supabaseClient = {
+// Check if we're in browser context first
+const browserClient = getBrowserClient();
+
+if (browserClient) {
+  // Use the singleton browser client
+  supabaseClient = browserClient as SupabaseClient<Database>;
+} else if (supabaseUrl && supabaseAnonKey) {
+  // Server-side: create a new client (safe since each request is isolated)
+  supabaseClient = createSupabaseClient<Database>(
+    supabaseUrl,
+    supabaseAnonKey,
+    {
       auth: {
-        signIn: async () => ({ data: null, error: new Error("Supabase not configured") }),
-        signOut: async () => ({ error: null }),
-        getSession: async () => ({ data: null, error: null }),
+        persistSession: false, // No session persistence on server
+        autoRefreshToken: false,
       },
-      from: () => ({
-        select: () => ({ data: [], error: new Error("Supabase not configured") }),
-        insert: () => ({ data: null, error: new Error("Supabase not configured") }),
-        update: () => ({ data: null, error: new Error("Supabase not configured") }),
-        delete: () => ({ data: null, error: new Error("Supabase not configured") }),
-      }),
-    } as any;
-  }
-} catch (error) {
-  console.error("Failed to initialize Supabase client:", error);
-  // Provide fallback client
+      global: {
+        headers: {
+          'X-Client-Info': 'modern-tco-lms',
+        },
+      },
+    }
+  );
+} else {
+  // Create a mock client that won't crash but logs warnings
+  console.warn("Supabase environment variables not configured. Database features will be disabled.");
   supabaseClient = {
     auth: {
-      signIn: async () => ({ data: null, error: new Error("Supabase initialization failed") }),
+      signIn: async () => ({ data: null, error: new Error("Supabase not configured") }),
       signOut: async () => ({ error: null }),
       getSession: async () => ({ data: null, error: null }),
     },
     from: () => ({
-      select: () => ({ data: [], error: new Error("Supabase initialization failed") }),
-      insert: () => ({ data: null, error: new Error("Supabase initialization failed") }),
-      update: () => ({ data: null, error: new Error("Supabase initialization failed") }),
-      delete: () => ({ data: null, error: new Error("Supabase initialization failed") }),
+      select: () => ({ data: [], error: new Error("Supabase not configured") }),
+      insert: () => ({ data: null, error: new Error("Supabase not configured") }),
+      update: () => ({ data: null, error: new Error("Supabase not configured") }),
+      delete: () => ({ data: null, error: new Error("Supabase not configured") }),
     }),
-  } as any;
+  } as unknown as SupabaseClient<Database>;
 }
 
 export const supabase = supabaseClient;
@@ -84,7 +71,7 @@ export const supabase = supabaseClient;
 // Server-side client for admin operations
 // Only create if BOTH supabaseUrl and service role key are available
 export const supabaseAdmin = (supabaseUrl && process.env.SUPABASE_SERVICE_ROLE_KEY)
-  ? createClient<Database>(
+  ? createSupabaseClient<Database>(
       supabaseUrl,
       process.env.SUPABASE_SERVICE_ROLE_KEY,
       {

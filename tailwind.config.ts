@@ -87,51 +87,36 @@ const config: Config = {
         bounce: "var(--easing-bounce)",
       },
       colors: {
-        // Archon cyberpunk color scheme - Updated to archon.png blue palette
-        // Use sparingly - prefer semantic tokens (bg-background, text-foreground, etc.)
-        archon: {
-          // Background gradients - deep dark neutrals and blue-grays
-          "bg-start": "#0a0a0a", // Matches updated --background
-          "bg-end": "#1a1f2e", // Blue-gray gradient end
-          "bg-card": "#1a1f2e", // Matches updated --card (blue-gray)
-          "bg-panel": "#181d28", // Matches --muted
-
-          // Primary standard blue accents (replaces electric cyan)
-          "blue-primary": "#3b82f6", // Matches updated --primary (Tailwind blue-500)
-          "blue-bright": "#60a5fa", // Lighter blue for hover states
-          "blue-hover": "#2563eb", // Darker blue for hover states (blue-600)
-          "blue-electric": "#3b82f6", // Consistent with primary
-
-          // New accent colors from archon.png
-          "orange-stats": "#f97316", // Orange for stats/numbers (Tailwind orange-500)
-          "green-status": "#22c55e", // Green for Active/success (Tailwind green-500)
-
-          // Secondary purple/violet highlights (unchanged)
-          "purple-primary": "#8b5cf6", // Matches --accent
-          "purple-secondary": "#a78bfa", // Lighter variant
-          "purple-hover": "#7c3aed", // Darker for hover states
-
-          // Text colors - MAP TO SEMANTIC TOKENS
-          "text-primary": "#fafafa", // Matches --foreground
-          "text-secondary": "#d4d4d8", // 85% opacity equivalent
-          "text-muted": "#a6a6a6", // Matches --muted-foreground
-          "text-accent": "#3b82f6", // Matches updated --primary
-
-          // Border and accent colors
-          border: "#292f3d", // Matches updated --border (blue-gray)
-          "border-bright": "rgba(59, 130, 246, 0.3)", // Blue primary with transparency
-          glass: "rgba(255, 255, 255, 0.05)", // Glass morphism effect
+        // Budget App Modern Color System
+        // Primary Accent: Teal (#14b8a6)
+        teal: {
+          50: "#f0fdfa",
+          100: "#ccfbf1",
+          200: "#99f6e4",
+          300: "#5eead4",
+          400: "#2dd4bf",
+          500: "#14b8a6", // Primary Brand Color
+          600: "#0d9488",
+          700: "#0f766e",
+          800: "#115e59",
+          900: "#134e4a",
+          950: "#042f2e",
         },
-        tanium: {
-          primary: "#1a365d",
-          secondary: "#2d3748",
-          accent: "#3182ce",
-          success: "#38a169",
-          warning: "#d69e2e",
-          error: "#e53e3e",
-          dark: "#1a202c",
-          light: "#f7fafc",
+        // Semantic Colors
+        success: {
+          DEFAULT: "#10b981", // green-500
+          foreground: "#ffffff",
         },
+        warning: {
+          DEFAULT: "#f59e0b", // yellow-500
+          foreground: "#ffffff",
+        },
+        error: {
+          DEFAULT: "#ef4444", // red-500
+          foreground: "#ffffff",
+        },
+
+        // Shadcn/UI System Tokens
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -165,14 +150,6 @@ const config: Config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        success: {
-          DEFAULT: "hsl(var(--success))",
-          foreground: "hsl(var(--success-foreground))",
-        },
-        warning: {
-          DEFAULT: "hsl(var(--warning))",
-          foreground: "hsl(var(--warning-foreground))",
-        },
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -181,61 +158,30 @@ const config: Config = {
       },
       keyframes: {
         "accordion-down": {
-          from: {
-            height: "0",
-          },
-          to: {
-            height: "var(--radix-accordion-content-height)",
-          },
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
         },
         "accordion-up": {
-          from: {
-            height: "var(--radix-accordion-content-height)",
-          },
-          to: {
-            height: "0",
-          },
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
         },
-        "typing-bounce": {
-          "0%, 60%, 100%": {
-            transform: "translateY(0)",
-            opacity: "0.7",
-          },
-          "30%": {
-            transform: "translateY(-10px)",
-            opacity: "1",
-          },
+        "fade-in": {
+          from: { opacity: "0", transform: "translateY(10px)" },
+          to: { opacity: "1", transform: "translateY(0)" },
+        },
+        "scale-in": {
+          from: { transform: "scale(0.95)", opacity: "0" },
+          to: { transform: "scale(1)", opacity: "1" },
         },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        "typing-bounce": "typing-bounce 1.4s infinite ease-in-out",
+        "fade-in": "fade-in 0.3s ease-out forwards",
+        "scale-in": "scale-in 0.2s ease-out forwards",
       },
       backdropBlur: {
         xs: "2px",
-      },
-      backgroundImage: {
-        "glass-gradient":
-          "linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0))",
-        "tanium-gradient": "linear-gradient(135deg, #1a365d, #3182ce)",
-        // Archon cyberpunk gradients - Updated to archon.png blue palette
-        "archon-bg": "linear-gradient(135deg, #0a0a0a 0%, #1a1f2e 100%)",
-        "archon-card": "linear-gradient(135deg, #1a1f2e 0%, #181d28 100%)",
-        "archon-glass":
-          "linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.05))",
-        "archon-button": "linear-gradient(135deg, #3b82f6, #2563eb)",
-        "archon-accent": "linear-gradient(135deg, #8b5cf6, #a78bfa)",
-
-        // Budget App Modern Gradients
-        "budget-dark": "linear-gradient(to bottom right, #0f172a, #1e293b)",
-        "budget-card":
-          "linear-gradient(145deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%)",
-        "budget-accent": "linear-gradient(135deg, #2dd4bf 0%, #0ea5e9 100%)", // Teal to Sky Blue
-        "budget-income": "linear-gradient(135deg, #4ade80 0%, #22c55e 100%)", // Green
-        "budget-expense": "linear-gradient(135deg, #f87171 0%, #ef4444 100%)", // Red
-        "budget-mesh":
-          "radial-gradient(at 0% 0%, rgba(45, 212, 191, 0.15) 0px, transparent 50%), radial-gradient(at 100% 0%, rgba(14, 165, 233, 0.15) 0px, transparent 50%)",
       },
     },
   },

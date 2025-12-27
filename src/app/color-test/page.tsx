@@ -189,14 +189,14 @@ export default function ColorTestPage() {
       <section className="space-y-6">
         <h2 className="text-2xl font-bold text-foreground">Card Variants</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <Card variant="default">
+          <Card>
             <CardHeader>
               <CardTitle>Default Card</CardTitle>
               <CardDescription>Standard card with semantic colors</CardDescription>
             </CardHeader>
             <CardContent>
               <p className="text-card-foreground">
-                This card uses the default variant with semantic background and foreground colors.
+                This card uses the default styling with semantic background and foreground colors.
               </p>
             </CardContent>
             <CardFooter>
@@ -204,14 +204,14 @@ export default function ColorTestPage() {
             </CardFooter>
           </Card>
 
-          <Card variant="cyberpunk">
+          <Card className="backdrop-blur-sm bg-card/80 border-primary/20">
             <CardHeader>
-              <CardTitle>Cyberpunk Card</CardTitle>
+              <CardTitle>Glass Effect Card</CardTitle>
               <CardDescription>Enhanced card with glass morphism</CardDescription>
             </CardHeader>
             <CardContent>
               <p className="text-card-foreground">
-                This card uses the cyberpunk variant with backdrop blur and primary accent borders.
+                This card uses glass effect with backdrop blur and primary accent borders.
               </p>
             </CardContent>
             <CardFooter>

@@ -11,23 +11,34 @@ import { OnboardingTour } from "@/components/budget/OnboardingTour";
 import { PWAInstallPrompt } from "@/components/budget/PWAInstallPrompt";
 import { ShortcutsModal } from "@/components/budget/ShortcutsModal";
 import { ToastProvider } from "@/components/budget/Toast";
+import { TrialStatusBanner } from "@/components/budget/TrialStatusBanner";
 import { ChatbotWidget } from "@/components/budget/chatbot/ChatbotWidget";
 import { MobileNav } from "@/components/budget/layout/MobileNav";
 import { Sidebar } from "@/components/budget/layout/Sidebar";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent } from "@/components/ui/sheet";
 import { ChatbotProvider } from "@/contexts/ChatbotContext";
+import { SeniorsModeProvider } from "@/contexts/SeniorsModeContext";
 import { useKeyboardShortcuts } from "@/hooks/useKeyboardShortcuts";
 import { usePWA } from "@/hooks/usePWA";
 import { Menu, Sparkles } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
+import { usePathname } from "next/navigation";
+
 export default function BudgetAppLayout({ children }: { children: React.ReactNode }) {
   const router = useRouter();
+  const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [showShortcutsModal, setShowShortcutsModal] = useState(false);
-  const [showNewTransactionModal, setShowNewTransactionModal] = useState(false);
+  const [_showNewTransactionModal, setShowNewTransactionModal] = useState(false);
+
+  // Routes that should NOT have the sidebar/app shell
+  const isPublicRoute =
+    pathname?.startsWith("/budget-app/landing") ||
+    pathname?.startsWith("/budget-app/auth") ||
+    pathname?.startsWith("/budget-app/admin");
 
   // PWA functionality - Phase 3.2
   usePWA(); // Register service worker
@@ -55,9 +66,34 @@ export default function BudgetAppLayout({ children }: { children: React.ReactNod
     },
   });
 
+  // Render simplified layout for public/auth/admin routes
+  if (isPublicRoute) {
+    return (
+      <SeniorsModeProvider>
+        <ChatbotProvider>
+          <ToastProvider>{children}</ToastProvider>
+        </ChatbotProvider>
+      </SeniorsModeProvider>
+    );
+  }
+
   return (
+    <SeniorsModeProvider>
     <ChatbotProvider>
       <BudgetAccessibilityInitializer />
+
+      {/* Skip Link - WCAG 2.4.1 Bypass Blocks */}
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4
+                   focus:z-[100] focus:bg-white focus:px-6 focus:py-3 focus:rounded-lg
+                   focus:text-teal-700 focus:font-semibold focus:shadow-lg
+                   focus:ring-2 focus:ring-teal-500 focus:ring-offset-2
+                   focus:outline-none transition-all"
+      >
+        Skip to main content
+      </a>
+
       {/* Global Background - Dark Mesh Gradient */}
       <div className="fixed inset-0 -z-20 bg-slate-950" />
       <div className="fixed inset-0 -z-10 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-slate-900 via-slate-950 to-black" />
@@ -68,6 +104,9 @@ export default function BudgetAppLayout({ children }: { children: React.ReactNod
         <div className="absolute left-[-10%] top-[-10%] h-[40%] w-[40%] rounded-full bg-teal-500/10 blur-[120px]" />
         <div className="absolute bottom-[-10%] right-[-10%] h-[40%] w-[40%] rounded-full bg-blue-600/10 blur-[120px]" />
       </div>
+
+      {/* Trial Status Banner - shows for trial users */}
+      <TrialStatusBanner showOnlyWhenUrgent={false} />
 
       <div className="flex min-h-screen text-slate-200">
         {/* Desktop Sidebar */}
@@ -110,7 +149,13 @@ export default function BudgetAppLayout({ children }: { children: React.ReactNod
           </header>
 
           {/* Main Content */}
-          <main className="flex-1 overflow-x-hidden pb-24 md:pb-8">
+          <main
+            id="main-content"
+            className="flex-1 overflow-x-hidden pb-24 md:pb-8"
+            tabIndex={0}
+            aria-label="Main content"
+            role="main"
+          >
             <div className="mx-auto max-w-7xl p-4 md:p-8">
               <ToastProvider>{children}</ToastProvider>
             </div>
@@ -133,5 +178,6 @@ export default function BudgetAppLayout({ children }: { children: React.ReactNod
         <ChatbotWidget />
       </div>
     </ChatbotProvider>
+    </SeniorsModeProvider>
   );
 }

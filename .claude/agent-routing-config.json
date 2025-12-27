@@ -1,4 +1,10 @@
 {
+  "defaultModel": "opus",
+  "modelConfig": {
+    "opus": "claude-opus-4-5-20251101",
+    "sonnet": "claude-sonnet-4-20250514",
+    "haiku": "claude-haiku-4-5-20251101"
+  },
   "agentRouting": {
     "enabled": true,
     "autoSpawn": true,
@@ -6,6 +12,94 @@
     "intelligentSelection": true
   },
   "taskToAgentMapping": {
+    "modernUI": {
+      "keywords": [
+        "react",
+        "component",
+        "ui",
+        "ux",
+        "responsive",
+        "css",
+        "tailwind",
+        "framer-motion",
+        "animation",
+        "accessibility",
+        "a11y",
+        "wcag",
+        "aria",
+        "keyboard",
+        "layout",
+        "grid",
+        "flex",
+        "spacing",
+        "typography",
+        "color",
+        "contrast",
+        "hover",
+        "focus",
+        "transition",
+        "motion",
+        "loading",
+        "server component",
+        "client component",
+        "hydration"
+      ],
+      "primaryAgents": ["modern-ui-agent"],
+      "supportAgents": ["shadcn-frontend-agent", "typescript-pro", "accessibility-tester", "performance-engineer"],
+      "coordination": "adaptive-coordinator",
+      "toolAccess": {
+        "mandatory": ["vibe-check"],
+        "primary": ["filesystem", "shadcn", "playwright", "ide"],
+        "secondary": ["context7", "figma", "github"]
+      },
+      "autoSpawn": true,
+      "priority": "high"
+    },
+    "shadcnUI": {
+      "keywords": [
+        "shadcn", "shadcn/ui", "shadcn component", "add component",
+        "registry", "radix", "radix ui", "radix primitive",
+        "cva", "class-variance-authority", "variants",
+        "design system", "design tokens", "theme", "theming",
+        "dark mode", "light mode", "color scheme",
+        "css variables", "hsl colors", "tailwind theme",
+        "button variant", "card component", "dialog", "modal",
+        "form component", "input styling", "select dropdown",
+        "tabs component", "accordion", "alert", "badge",
+        "calendar", "carousel", "chart", "checkbox",
+        "command palette", "combobox", "autocomplete",
+        "drawer", "sheet", "popover", "tooltip",
+        "navigation menu", "sidebar", "breadcrumb",
+        "skeleton", "loading state", "spinner",
+        "sonner", "toast notification",
+        "data table", "table component",
+        "new-york style", "default style"
+      ],
+      "patterns": [
+        "Add .* component",
+        "Install .* from shadcn",
+        "Create .* variant",
+        "Customize .* component",
+        "Theme the .*",
+        "Search .* in registry"
+      ],
+      "primaryAgents": ["shadcn-frontend-agent"],
+      "supportAgents": ["modern-ui-agent", "typescript-pro"],
+      "coordination": "adaptive-coordinator",
+      "toolAccess": {
+        "mandatory": ["vibe-check"],
+        "primary": ["shadcn", "filesystem", "context7", "playwright"],
+        "secondary": ["github", "firecrawl"]
+      },
+      "autoSpawn": true,
+      "priority": "high",
+      "archonIntegration": {
+        "enabled": true,
+        "projectId": "9c56f01c-759a-42b1-bad4-06b71f2c4db9",
+        "statusFlow": ["todo", "doing", "review", "done"],
+        "mandatoryVibeCheck": true
+      }
+    },
     "frontend": {
       "keywords": [
         "react",
@@ -19,7 +113,7 @@
         "styling",
         "design"
       ],
-      "primaryAgents": ["frontend-developer", "react-specialist", "typescript-pro"],
+      "primaryAgents": ["modern-ui-agent", "frontend-developer", "react-specialist", "typescript-pro"],
       "supportAgents": ["ui-ux-designer", "accessibility-tester"],
       "coordination": "mesh-coordinator"
     },
@@ -83,6 +177,131 @@
         "statusFlow": ["todo", "doing", "review", "done"],
         "mandatoryVibeCheck": true
       }
+    },
+    "containerManagement": {
+      "keywords": [
+        "container", "docker", "health", "unhealthy", "restart", "compose",
+        "mcp container", "container failed", "container logs", "docker up",
+        "docker down", "service not running", "container status", "deploy compose",
+        "container recovery", "mcp-sqlite", "docker health"
+      ],
+      "primaryAgents": ["container-manager"],
+      "supportAgents": ["debug-specialist", "devops-engineer", "database-architect"],
+      "coordination": "adaptive-coordinator",
+      "toolAccess": {
+        "mandatory": ["vibe-check"],
+        "primary": ["docker", "bash", "filesystem"],
+        "secondary": ["sqlite-tanium", "archon"]
+      },
+      "autoSpawn": true,
+      "priority": "high",
+      "recoveryMode": "semi-automated",
+      "archonIntegration": {
+        "enabled": true,
+        "projectId": "9c56f01c-759a-42b1-bad4-06b71f2c4db9",
+        "statusFlow": ["todo", "doing", "review", "done"],
+        "mandatoryVibeCheck": true
+      }
+    },
+    "budgetApp": {
+      "keywords": [
+        "budget app", "budget-app", "transaction import", "bank import",
+        "CSV parser", "OFX parser", "PDF bank statement", "bank statement",
+        "subscription", "spending", "financial", "IndexedDB", "Dexie",
+        "transaction", "categorization", "merchant", "budget tracking",
+        "import error", "duplicate detection", "bank format",
+        "TD bank", "RBC", "BMO", "Scotiabank", "CIBC", "Chase",
+        "recurring transaction", "spending analytics", "budget management"
+      ],
+      "primaryAgents": ["budget-app-specialist"],
+      "supportAgents": ["database-architect", "modern-ui-agent", "debug-specialist"],
+      "coordination": "adaptive-coordinator",
+      "toolAccess": {
+        "mandatory": ["vibe-check"],
+        "primary": ["filesystem", "playwright"],
+        "secondary": ["context7", "firecrawl", "github"]
+      },
+      "autoSpawn": true,
+      "priority": "high",
+      "archonIntegration": {
+        "enabled": true,
+        "projectId": "9c56f01c-759a-42b1-bad4-06b71f2c4db9",
+        "statusFlow": ["todo", "doing", "review", "done"],
+        "mandatoryVibeCheck": true
+      }
+    },
+    "libraryDocumentation": {
+      "keywords": [
+        "npm docs", "package documentation", "library docs", "framework docs",
+        "react docs", "next.js docs", "nextjs docs", "typescript docs",
+        "supabase docs", "prisma docs", "drizzle docs", "tailwind docs",
+        "how to use", "api reference", "get started with", "installation guide",
+        "resolve library", "library reference", "package info", "dependencies",
+        "hooks documentation", "server components docs", "app router docs",
+        "shadcn docs", "radix docs", "framer motion docs", "zod docs",
+        "react hook form docs", "tanstack docs", "trpc docs"
+      ],
+      "primaryAgents": ["research-specialist", "technical-writer"],
+      "supportAgents": ["modern-ui-agent", "typescript-pro"],
+      "coordination": "mesh-coordinator",
+      "toolAccess": {
+        "mandatory": ["vibe-check"],
+        "primary": ["context7"],
+        "secondary": ["firecrawl", "github"]
+      },
+      "autoSpawn": true,
+      "priority": "medium",
+      "workflow": {
+        "step1": "resolve-library-id to find Context7-compatible library ID",
+        "step2": "get-library-docs with topic and mode parameters",
+        "modes": ["code (API/examples)", "info (guides/concepts)"]
+      },
+      "decisionRule": "npm/framework docs → context7 (~5K) | general web → firecrawl (~8K)"
+    },
+    "browserTroubleshooting": {
+      "keywords": [
+        "browser bug", "visual bug", "layout broken", "not rendering",
+        "css issue", "styling broken", "element missing", "wrong color",
+        "button not working", "click not working", "form broken",
+        "page not loading", "blank page", "white screen", "stuck loading",
+        "javascript error", "console error", "uncaught exception",
+        "network error", "api failed", "fetch error", "cors error",
+        "hydration error", "hydration mismatch", "server client mismatch",
+        "slow page", "performance issue", "lag", "loading slow",
+        "navigation broken", "routing error", "redirect loop",
+        "auth not working", "login broken", "session expired",
+        "mobile broken", "responsive issue"
+      ],
+      "primaryAgents": ["browser-troubleshooter"],
+      "supportAgents": ["modern-ui-agent", "typescript-pro", "performance-engineer"],
+      "coordination": "adaptive-coordinator",
+      "toolAccess": {
+        "mandatory": ["vibe-check"],
+        "primary": ["playwright", "filesystem", "bash"],
+        "secondary": ["firecrawl", "context7", "github"]
+      },
+      "autoSpawn": true,
+      "priority": "high",
+      "workflow": {
+        "step1": "vibe_check to categorize issue",
+        "step2": "browser_snapshot for visual state",
+        "step3": "browser_console_messages for JS errors",
+        "step4": "browser_network_requests for API failures",
+        "step5": "Apply targeted fix and verify"
+      },
+      "decisionTree": {
+        "visualBugs": "playwright.browser_snapshot → filesystem",
+        "jsErrors": "playwright.browser_console_messages → filesystem",
+        "networkIssues": "playwright.browser_network_requests → filesystem",
+        "hydrationErrors": "playwright.browser_console_messages → filesystem",
+        "performanceIssues": "playwright + bash.lighthouse"
+      },
+      "escalation": {
+        "reactComponent": "modern-ui-agent",
+        "typescriptError": "typescript-pro",
+        "databaseIssue": "database-architect",
+        "performanceDeep": "performance-engineer"
+      }
     }
   },
   "complexityThresholds": {
@@ -109,6 +328,7 @@
   },
   "defaultActiveAgents": {
     "taniumTCO": [
+      "modern-ui-agent",
       "react-specialist",
       "typescript-pro",
       "tco-validation-expert",

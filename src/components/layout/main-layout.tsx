@@ -1,166 +1,73 @@
 "use client";
 
-import { useState, useEffect, useCallback, useMemo, memo } from "react";
-import dynamic from "next/dynamic";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
-import { AppHeader } from "./app-header";
-import { Sidebar } from "./sidebar";
-import { BreadcrumbNav } from "./breadcrumb-nav";
-import { CyberpunkNavBar } from "../CyberpunkNavigationFixed";
-import { Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { useGlobalNavActive } from "@/contexts/GlobalNavContext";
+import { Menu } from "lucide-react";
 import { usePathname } from "next/navigation";
+import { memo, useCallback, useEffect, useMemo, useState } from "react";
+import { BreadcrumbNav } from "./breadcrumb-nav";
+import { Sidebar } from "./sidebar";
 
-interface MainLayoutProps { children: React.ReactNode; asGlobal?: boolean }
-
-// HOOKS FIX: Move dynamic import outside component to prevent inconsistent hook counts
-// Previously caused "Rendered fewer hooks than expected" error
-const AnimatedBackground = dynamic(
-  () => import("../CyberpunkNavigationFixed").then((m) => m.AnimatedBackground),
-  { ssr: false, loading: () => null }
-);
+interface MainLayoutProps {
+  children: React.ReactNode;
+  asGlobal?: boolean;
+}
 
 function MainLayoutComponent({ children, asGlobal = false }: MainLayoutProps) {
-  // ALL HOOKS MUST BE CALLED BEFORE ANY EARLY RETURNS (Rules of Hooks)
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [isDesktop, setIsDesktop] = useState(false);
-  const [showBackground, setShowBackground] = useState(false);
-  const globalNavActive = useGlobalNavActive();
   const pathname = usePathname();
 
-  // Memoize callbacks to prevent child re-renders - MOVED BEFORE EARLY RETURNS
   const handleSidebarClose = useCallback(() => setSidebarOpen(false), []);
   const handleSidebarOpen = useCallback(() => setSidebarOpen(true), []);
-  const handleTabChange = useCallback((tabName: string) => {
-    console.log(`Navigating to: ${tabName}`);
-  }, []);
 
-  // Memoize main content className - MOVED BEFORE EARLY RETURNS
-  const mainClassName = useMemo(() => cn(
-    "relative z-20 pt-24 px-4 pb-8 transition-all duration-300",
-    // Desktop: Add left margin for persistent sidebar
-    isDesktop ? "md:ml-64" : "",
-    // Mobile: Full width
-    "ml-0"
-  ), [isDesktop]);
+  const mainClassName = useMemo(
+    () =>
+      cn(
+        "relative z-20 pt-20 px-4 pb-8 transition-all duration-300",
+        isDesktop ? "md:ml-64" : "ml-0"
+      ),
+    [isDesktop]
+  );
 
-  // Detect screen size for responsive behavior
   useEffect(() => {
     const checkScreenSize = () => {
-      setIsDesktop(window.innerWidth >= 768); // md breakpoint
+      setIsDesktop(window.innerWidth >= 768);
     };
 
     checkScreenSize();
-    window.addEventListener('resize', checkScreenSize);
-    return () => window.removeEventListener('resize', checkScreenSize);
+    window.addEventListener("resize", checkScreenSize);
+    return () => window.removeEventListener("resize", checkScreenSize);
   }, []);
 
-  // Defer particle background for performance and honor reduced motion
-  useEffect(() => {
-    const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReduced) return;
-    // Only render on desktop-sized viewports
-    if (!isDesktop) return;
-    const idle = (window as any).requestIdleCallback as undefined | ((cb: any) => void);
-    const start = () => setShowBackground(true);
-    if (idle) idle(start);
-    else setTimeout(start, 200);
-  }, [isDesktop]);
-
-  // Debug mode disabled - using full layout
-  const ENABLE_DEBUG_MODE = false;
-
-  // Early return for DEBUG mode - AFTER all hooks
-  if (ENABLE_DEBUG_MODE) {
-    console.log('[MainLayout] Running in DEBUG mode - simple layout');
-    return (
-      <div className="min-h-screen bg-gray-900">
-        {/* Simple test header */}
-        <div className="fixed top-0 left-0 right-0 z-50 bg-blue-900 text-foreground p-4">
-          <h1 className="text-xl font-bold">TANIUM TCO - DEBUG MODE</h1>
-          <p className="text-sm">If you see this, the basic layout is working</p>
-        </div>
-
-        {/* Simple sidebar */}
-        <div className="fixed left-0 top-16 bottom-0 w-64 bg-card text-foreground p-4">
-          <h2 className="font-bold mb-4">Navigation</h2>
-          <ul className="space-y-2">
-            <li><a href="/" className="hover:text-primary">Dashboard</a></li>
-            <li><a href="/study" className="hover:text-primary">Study</a></li>
-            <li><a href="/practice" className="hover:text-primary">Practice</a></li>
-          </ul>
-        </div>
-
-        {/* Main content */}
-        <div className="pl-64 pt-16">
-          <div className="p-8">
-            {children}
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  // If global nav is already active elsewhere and this isn't the global shell, collapse to passthrough
-  // DEBUG: Log when this happens
-  // TEMPORARILY DISABLED TO DEBUG RENDERING ISSUE
-  // Exclude Budget App from main layout (it has its own standalone layout)
-  if (pathname?.startsWith('/budget-app')) {
+  if (pathname?.startsWith("/budget-app")) {
     return <>{children}</>;
-  }
-
-  /*
-  if (!asGlobal && globalNavActive) {
-    console.log('[MainLayout] Bypassing layout - asGlobal:', asGlobal, 'globalNavActive:', globalNavActive);
-    return <>{children}</>;
-  }
-  */
-
-  // Optimized: Only log in development mode to reduce console spam
-  if (process.env.NODE_ENV === 'development') {
-    console.log('[MainLayout] Rendering full layout - asGlobal:', asGlobal, 'globalNavActive:', globalNavActive);
   }
 
   return (
-    <div className="relative min-h-screen">
-      {/* Particle Background (deferred, desktop-only) - Set to background layer */}
-      {showBackground && <div className="fixed inset-0 z-0"><AnimatedBackground /></div>}
-
-      {/* Enhanced Cyberpunk Navigation with Mobile Menu - Higher z-index */}
-      <ErrorBoundary name="CyberpunkNavBar">
-        <div className="relative z-30">
-          <CyberpunkNavBar
-            navItems={[]}
-            brandName="TANIUM TCO"
-            onTabChange={handleTabChange}
-          />
-
-        {/* Mobile Menu Button */}
+    <div className="relative min-h-screen bg-background">
+      {/* Mobile Menu Button */}
+      <div className="fixed left-0 right-0 top-0 z-30 flex h-16 items-center border-b bg-background/80 px-4 backdrop-blur-md md:hidden">
         <Button
           variant="ghost"
           size="icon"
-          className="fixed top-4 left-4 z-40 md:hidden glass border-white/10 hover:bg-white/10"
           onClick={handleSidebarOpen}
           aria-label="Open navigation menu"
         >
-          <Menu className="h-5 w-5 text-foreground" />
+          <Menu className="h-5 w-5" />
         </Button>
-        </div>
-      </ErrorBoundary>
+        <span className="ml-4 text-lg font-semibold">Tanium TCO</span>
+      </div>
 
-      {/* Modern Responsive Sidebar - Ensure proper z-index */}
+      {/* Sidebar */}
       <ErrorBoundary name="Sidebar">
         <div className="relative z-40">
-          <Sidebar
-            isOpen={sidebarOpen || isDesktop}
-            onClose={handleSidebarClose}
-          />
+          <Sidebar isOpen={sidebarOpen || isDesktop} onClose={handleSidebarClose} />
         </div>
       </ErrorBoundary>
 
-      {/* Main content with proper responsive spacing - Higher than background */}
+      {/* Main content */}
       <main
         id="main-content"
         className={mainClassName}
@@ -168,21 +75,14 @@ function MainLayoutComponent({ children, asGlobal = false }: MainLayoutProps) {
         role="main"
         aria-label="Main content"
       >
-        <div className="container mx-auto">
-          {/* Breadcrumb navigation - transparent to show background */}
-          <BreadcrumbNav className="mb-6 p-3" />
-          
-          {/* Content wrapper - transparent to show background */}
-          <div className="p-6">
-            <ErrorBoundary name="MainContent">
-              {children}
-            </ErrorBoundary>
-          </div>
+        <div className="container mx-auto max-w-7xl">
+          <BreadcrumbNav className="mb-6" />
+
+          <ErrorBoundary name="MainContent">{children}</ErrorBoundary>
         </div>
       </main>
     </div>
   );
 }
 
-// Export memoized version to prevent unnecessary re-renders
 export const MainLayout = memo(MainLayoutComponent);

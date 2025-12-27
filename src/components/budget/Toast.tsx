@@ -111,18 +111,27 @@ export function ToastProvider({ children }: { children: ReactNode }) {
         onComplete={() => setShowSuccessAnimation(false)}
       />
 
-      {/* Toast Container */}
-      <div className="fixed top-4 right-4 z-50 space-y-2 pointer-events-none">
+      {/* Toast Container - ARIA Live Region for Screen Readers */}
+      <div
+        className="fixed top-4 right-4 z-50 space-y-2 pointer-events-none"
+        role="region"
+        aria-label="Notifications"
+      >
         {toasts.map((t) => (
           <ToastItem key={t.id} toast={t} onRemove={() => removeToast(t.id)} />
         ))}
       </div>
 
-      {/* Confirm Dialog */}
+      {/* Confirm Dialog - Accessible Modal */}
       {confirmDialog && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+        <div
+          className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="confirm-dialog-title"
+        >
           <div className="bg-white rounded-lg shadow-xl max-w-md w-full p-6">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Confirm Action</h3>
+            <h3 id="confirm-dialog-title" className="text-lg font-semibold text-gray-900 mb-4">Confirm Action</h3>
             <p className="text-gray-700 mb-6">{confirmDialog.message}</p>
             <div className="flex gap-4">
               <button
@@ -169,8 +178,14 @@ function ToastItem({ toast, onRemove }: { toast: Toast; onRemove: () => void }) 
 
   const Icon = icons[toast.type];
 
+  // Use assertive for errors (urgent), polite for others
+  const isUrgent = toast.type === 'error';
+
   return (
     <div
+      role={isUrgent ? "alert" : "status"}
+      aria-live={isUrgent ? "assertive" : "polite"}
+      aria-atomic="true"
       className={`${colors[toast.type]} border-l-4 rounded-lg shadow-lg p-4 max-w-sm w-full pointer-events-auto animate-in slide-in-from-right duration-300`}
     >
       <div className="flex items-start gap-4">

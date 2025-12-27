@@ -23,14 +23,17 @@ export function AnomalyAlerts({
 }: AnomalyAlertsProps) {
   const [feedbackMap, setFeedbackMap] = useState<Map<string, boolean>>(new Map());
 
-  // Load existing feedback
+  // Load existing feedback - use stable reference for alerts
+  // Using JSON.stringify of alert IDs to prevent infinite loop when alerts array is recreated
+  const alertIds = alerts.map(a => a.transaction.id).join(',');
+
   useEffect(() => {
     async function loadFeedback() {
       const feedbackPromises = alerts.map(async (alert) => {
         const feedback = await getAnomalyFeedback(alert.transaction.id);
         return feedback ? [alert.transaction.id, feedback.wasExpected] as const : null;
       });
-      
+
       const results = await Promise.all(feedbackPromises);
       const map = new Map<string, boolean>();
       results.forEach((result) => {
@@ -40,11 +43,11 @@ export function AnomalyAlerts({
       });
       setFeedbackMap(map);
     }
-    
+
     if (alerts.length > 0) {
       loadFeedback();
     }
-  }, [alerts]);
+  }, [alertIds]); // eslint-disable-line react-hooks/exhaustive-deps
 
   async function handleFeedback(alert: AnomalyAlert, wasExpected: boolean) {
     try {

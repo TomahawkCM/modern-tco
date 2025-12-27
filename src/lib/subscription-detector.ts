@@ -31,7 +31,7 @@ export interface SubscriptionPattern {
   currency: string;
 
   // Recurrence details
-  interval_type: 'weekly' | 'monthly' | 'annual' | 'irregular';
+  interval_type: 'weekly' | 'bi-weekly' | 'monthly' | 'quarterly' | 'annual' | 'irregular';
   interval_days: number; // Average days between charges
   confidence: number; // 0-1 confidence in subscription detection
 
@@ -166,6 +166,10 @@ function analyzeSubscriptionPattern(
     ? avgAmount
     : intervalType === 'weekly'
     ? avgAmount * 52
+    : intervalType === 'bi-weekly'
+    ? avgAmount * 26
+    : intervalType === 'quarterly'
+    ? avgAmount * 4
     : avgAmount * (365 / recurrence.average_interval);
 
   return {
@@ -234,11 +238,13 @@ function analyzeRecurrence(transactions: Transaction[]): RecurrenceAnalysis {
 }
 
 /**
- * Categorize interval into weekly/monthly/annual
+ * Categorize interval into weekly/bi-weekly/monthly/quarterly/annual
  */
-function categorizeInterval(days: number): 'weekly' | 'monthly' | 'annual' | 'irregular' {
+function categorizeInterval(days: number): 'weekly' | 'bi-weekly' | 'monthly' | 'quarterly' | 'annual' | 'irregular' {
   if (days >= 5 && days <= 9) return 'weekly'; // ~7 days ±2
+  if (days >= 12 && days <= 16) return 'bi-weekly'; // ~14 days ±2
   if (days >= 25 && days <= 35) return 'monthly'; // ~30 days ±5
+  if (days >= 85 && days <= 95) return 'quarterly'; // ~90 days ±5
   if (days >= 350 && days <= 380) return 'annual'; // ~365 days ±15
   return 'irregular';
 }
@@ -339,6 +345,10 @@ export function calculateMonthlySubscriptionCost(
         return total + (sub.average_amount / 12);
       } else if (sub.interval_type === 'weekly') {
         return total + (sub.average_amount * 4.33); // avg weeks per month
+      } else if (sub.interval_type === 'bi-weekly') {
+        return total + (sub.average_amount * 2.17); // avg bi-weekly periods per month
+      } else if (sub.interval_type === 'quarterly') {
+        return total + (sub.average_amount / 3);
       } else {
         // Irregular - estimate based on interval
         return total + (sub.average_amount * (30 / sub.interval_days));

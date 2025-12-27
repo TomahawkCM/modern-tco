@@ -1,3 +1,4 @@
+import { createServerClient } from '@supabase/ssr';
 import { type NextRequest, NextResponse } from 'next/server';
 
 /**
@@ -15,9 +16,42 @@ const ALLOWED_ORIGINS = [
 ];
 
 /**
- * Middleware: Route rewrites and security headers
+ * Supabase middleware helper to refresh auth session
  */
-export function middleware(req: NextRequest) {
+async function updateSupabaseSession(request: NextRequest) {
+  let supabaseResponse = NextResponse.next({ request });
+
+  const supabase = createServerClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    {
+      cookies: {
+        getAll() {
+          return request.cookies.getAll();
+        },
+        setAll(cookiesToSet) {
+          cookiesToSet.forEach(({ name, value }) =>
+            request.cookies.set(name, value)
+          );
+          supabaseResponse = NextResponse.next({ request });
+          cookiesToSet.forEach(({ name, value, options }) =>
+            supabaseResponse.cookies.set(name, value, options)
+          );
+        },
+      },
+    }
+  );
+
+  // Refreshes the auth session if expired
+  await supabase.auth.getUser();
+
+  return supabaseResponse;
+}
+
+/**
+ * Middleware: Route rewrites, Supabase auth, and security headers
+ */
+export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
   const origin = req.headers.get('origin') || '';
 
@@ -64,7 +98,8 @@ export function middleware(req: NextRequest) {
     return response;
   }
 
-  return NextResponse.next();
+  // Refresh Supabase auth session for all other routes
+  return await updateSupabaseSession(req);
 }
 
 export const config = {

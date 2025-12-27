@@ -13,11 +13,13 @@ import {
   type PrivacySettings,
 } from "@/lib/budget-privacy-settings";
 import type { Account, Category } from "@/types/budget";
-import { CreditCard, Edit, Plus, Shield, Tag, Trash2, Eye, GripVertical, Archive, RotateCcw } from "lucide-react";
+import { CreditCard, Edit, Plus, Shield, Tag, Trash2, Eye, GripVertical, Archive, RotateCcw, Database, Download, Upload } from "lucide-react";
 import { useEffect, useState } from "react";
 import { PrivacyControlsPanel } from "./settings-privacy-panel";
 import { AccessibilitySettingsPanel } from "@/components/budget/AccessibilitySettingsPanel";
 import { IconPicker, getIconComponent } from "@/components/budget/IconPicker";
+import { ExportDialog } from "@/components/budget/ExportDialog";
+import { ImportDialog } from "@/components/budget/ImportDialog";
 import {
   DndContext,
   closestCenter,
@@ -41,7 +43,9 @@ export default function SettingsPage() {
   const [categories, setCategories] = useState<Category[]>([]);
   const [categoryTransactionCounts, setCategoryTransactionCounts] = useState<Record<string, number>>({});
   const [isLoading, setIsLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState<"accounts" | "categories" | "privacy" | "accessibility">("accounts");
+  const [activeTab, setActiveTab] = useState<"accounts" | "categories" | "privacy" | "accessibility" | "data">("accounts");
+  const [showExportDialog, setShowExportDialog] = useState(false);
+  const [showImportDialog, setShowImportDialog] = useState(false);
   const [showAccountModal, setShowAccountModal] = useState(false);
   const [showCategoryModal, setShowCategoryModal] = useState(false);
   const [editingAccount, setEditingAccount] = useState<Account | null>(null);
@@ -287,6 +291,19 @@ export default function SettingsPage() {
               Accessibility
             </div>
           </button>
+          <button
+            onClick={() => setActiveTab("data")}
+            className={`border-b-2 px-2 pb-4 font-medium transition-colors ${
+              activeTab === "data"
+                ? "border-teal-500 text-teal-400"
+                : "border-transparent text-slate-400 hover:text-slate-200"
+            }`}
+          >
+            <div className="flex items-center gap-2">
+              <Database className="h-5 w-5" />
+              Data
+            </div>
+          </button>
         </div>
       </div>
 
@@ -489,6 +506,100 @@ export default function SettingsPage() {
 
       {/* Accessibility Tab */}
       {activeTab === "accessibility" && <AccessibilitySettingsPanel />}
+
+      {/* Data Tab */}
+      {activeTab === "data" && (
+        <div className="space-y-6">
+          <div>
+            <h2 className="text-2xl font-bold text-white">Data Management</h2>
+            <p className="text-base text-slate-400 mt-1">
+              Export and import your budget data
+            </p>
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-2">
+            {/* Export Card */}
+            <div className="rounded-xl bg-white/5 border border-white/10 p-6">
+              <div className="flex items-start gap-4">
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-teal-500/20">
+                  <Download className="h-6 w-6 text-teal-400" />
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-lg font-semibold text-white">Export Data</h3>
+                  <p className="mt-1 text-sm text-slate-400">
+                    Download all your budget data as a .budget file. Includes transactions, accounts, categories, and settings.
+                  </p>
+                  <button
+                    onClick={() => setShowExportDialog(true)}
+                    className="mt-4 inline-flex items-center gap-2 rounded-lg bg-teal-500 px-4 py-2 font-medium text-white transition-colors hover:bg-teal-600"
+                  >
+                    <Download className="h-4 w-4" />
+                    Export Data
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* Import Card */}
+            <div className="rounded-xl bg-white/5 border border-white/10 p-6">
+              <div className="flex items-start gap-4">
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-500/20">
+                  <Upload className="h-6 w-6 text-blue-400" />
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-lg font-semibold text-white">Import Data</h3>
+                  <p className="mt-1 text-sm text-slate-400">
+                    Restore your data from a .budget file. You can choose to merge with existing data or replace it.
+                  </p>
+                  <button
+                    onClick={() => setShowImportDialog(true)}
+                    className="mt-4 inline-flex items-center gap-2 rounded-lg bg-blue-500 px-4 py-2 font-medium text-white transition-colors hover:bg-blue-600"
+                  >
+                    <Upload className="h-4 w-4" />
+                    Import Data
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Info Section */}
+          <div className="rounded-xl bg-slate-800/50 border border-white/10 p-6">
+            <h3 className="text-lg font-semibold text-white mb-4">About .budget Files</h3>
+            <ul className="space-y-3 text-sm text-slate-400">
+              <li className="flex items-start gap-2">
+                <span className="mt-0.5 text-teal-400">•</span>
+                Your data is stored in a portable JSON format that can be opened by any text editor
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="mt-0.5 text-teal-400">•</span>
+                Optional password protection uses industry-standard AES-256 encryption
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="mt-0.5 text-teal-400">•</span>
+                Files include a checksum to detect corruption or tampering
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="mt-0.5 text-teal-400">•</span>
+                Receipt images can be included in the export (increases file size)
+              </li>
+            </ul>
+          </div>
+        </div>
+      )}
+
+      {/* Export Dialog */}
+      <ExportDialog
+        isOpen={showExportDialog}
+        onClose={() => setShowExportDialog(false)}
+      />
+
+      {/* Import Dialog */}
+      <ImportDialog
+        isOpen={showImportDialog}
+        onClose={() => setShowImportDialog(false)}
+        onImportComplete={loadData}
+      />
     </div>
   );
 }

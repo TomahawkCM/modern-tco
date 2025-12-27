@@ -40,7 +40,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang="en"
-      className={`${inter.className} dark`}
+      className={`${inter.className}`}
       data-scroll-behavior="smooth"
       suppressHydrationWarning
     >
@@ -59,7 +59,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* PDF.js from CDN for OCR functionality - bypasses webpack bundling issues */}
         <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
       </head>
-      <body className="font-sans antialiased" suppressHydrationWarning>
+      <body
+        className="bg-background font-sans text-foreground antialiased"
+        suppressHydrationWarning
+      >
         {/* Load PDF.js from CDN - bypasses webpack bundling issues */}
         <Script
           src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"
@@ -70,7 +73,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             Previously had inline script in <head> that caused React Error #418
             See HYDRATION_FIX_SUMMARY.md and AccessibilityInitializer.tsx for details */}
         <AccessibilityInitializer />
-        <div className="min-h-screen bg-gradient-to-br from-black via-black to-black">
+        <div className="min-h-screen bg-background">
           <Providers>
             <MainLayout asGlobal>
               <SkipLinks />
@@ -87,7 +90,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <style>{`
           html[data-large-text="1"] { font-size: 18px; }
           html[data-high-contrast="1"] body { filter: contrast(1.15) saturate(1.1); }
-          html[data-high-contrast="1"] :focus-visible { outline: 2px solid #38bdf8; outline-offset: 2px; }
+          html[data-high-contrast="1"] :focus-visible { outline: 2px solid #14b8a6; outline-offset: 2px; }
         `}</style>
       </body>
     </html>

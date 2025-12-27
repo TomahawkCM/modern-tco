@@ -104,7 +104,7 @@ MCP_SERVERS=(
   "playwright"
   "sqlite-tanium"
   "shadcn"
-  "pv-bhat-vibe-check-mcp-server"
+  "vibe-check"
 )
 
 echo "  ℹ️  Required MCP servers:"
@@ -113,6 +113,44 @@ for server in "${MCP_SERVERS[@]}"; do
 done
 
 echo "  ✅ MCP servers configured in Claude Code settings"
+
+###############################################################################
+# 4b. Docker Container Health Check
+###############################################################################
+echo ""
+echo "🐳 Docker Container Status:"
+
+# Check if Docker is available
+if command -v docker &> /dev/null; then
+  # Check MCP containers
+  MCP_CONTAINERS=("mcp-sqlite-tanium")
+  for container in "${MCP_CONTAINERS[@]}"; do
+    STATUS=$(docker inspect --format='{{.State.Status}}' "$container" 2>/dev/null || echo "not found")
+    HEALTH=$(docker inspect --format='{{if .State.Health}}{{.State.Health.Status}}{{else}}no healthcheck{{end}}' "$container" 2>/dev/null || echo "")
+
+    if [ "$STATUS" = "running" ]; then
+      if [ "$HEALTH" = "healthy" ]; then
+        echo "  ✅ $container: running (healthy)"
+      elif [ "$HEALTH" = "unhealthy" ]; then
+        echo "  ⚠️  $container: running (unhealthy - check logs with 'npm run docker:logs:mcp')"
+      else
+        echo "  ✅ $container: running"
+      fi
+    elif [ "$STATUS" = "not found" ]; then
+      echo "  ℹ️  $container: not created (start with 'npm run docker:up')"
+    else
+      echo "  ⚠️  $container: $STATUS (restart with 'npm run docker:restart:mcp')"
+    fi
+  done
+
+  # Show other running containers (Supabase, Archon)
+  OTHER_COUNT=$(docker ps --format '{{.Names}}' 2>/dev/null | grep -vE "^mcp-" | wc -l)
+  if [ "$OTHER_COUNT" -gt 0 ]; then
+    echo "  ℹ️  Other containers running: $OTHER_COUNT (supabase, archon, etc.)"
+  fi
+else
+  echo "  ⚠️  Docker not available - MCP sqlite container features disabled"
+fi
 
 ###############################################################################
 # 5. Initialize Vibe Check MCP Server (Metacognitive Guardrails)

@@ -6,17 +6,9 @@
     },
     "filesystem": {
       "command": "npx",
-      "args": ["@modelcontextprotocol/server-filesystem", "/home/robne/projects/active"],
+      "args": ["-y", "@modelcontextprotocol/server-filesystem@2025.11.25", "/home/robne/projects/active"],
       "env": {
         "ALLOWED_DIRECTORIES": "/home/robne/projects/active"
-      }
-    },
-    "claude-flow": {
-      "command": "npx",
-      "args": ["claude-flow@alpha", "mcp", "start"],
-      "env": {
-        "NODE_ENV": "development",
-        "CLAUDE_FLOW_AUTO_START": "true"
       }
     },
     "sqlite-tanium": {
@@ -31,21 +23,21 @@
     },
     "github": {
       "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-github"],
+      "args": ["-y", "@modelcontextprotocol/server-github@2025.4.8"],
       "env": {
         "GITHUB_TOKEN": "${GITHUB_TOKEN}"
       }
     },
     "firecrawl": {
       "command": "npx",
-      "args": ["-y", "firecrawl-mcp"],
+      "args": ["-y", "firecrawl-mcp@3.6.2"],
       "env": {
         "FIRECRAWL_API_KEY": "${FIRECRAWL_API_KEY}"
       }
     },
     "playwright": {
       "command": "npx",
-      "args": ["@playwright/mcp"],
+      "args": ["-y", "@playwright/mcp@0.0.49"],
       "env": {
         "PLAYWRIGHT_BROWSERS_PATH": "/home/robne/.cache/ms-playwright",
         "PLAYWRIGHT_CHROMIUM_USE_HEADLESS_NEW": "1",
@@ -67,9 +59,9 @@
         "public"
       ]
     },
-    "pv-bhat-vibe-check-mcp-server": {
+    "vibe-check": {
       "command": "npx",
-      "args": ["-y", "@pv-bhat/vibe-check-mcp-server"]
+      "args": ["-y", "@pv-bhat/vibe-check-mcp@2.7.6"]
     },
     "docker": {
       "command": "uvx",
@@ -81,7 +73,7 @@
     },
     "context7": {
       "command": "npx",
-      "args": ["-y", "@context7/mcp-server"]
+      "args": ["-y", "@upstash/context7-mcp@1.0.31"]
     },
     "serena": {
       "command": "uv",

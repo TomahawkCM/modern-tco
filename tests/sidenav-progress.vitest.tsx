@@ -47,7 +47,9 @@ describe('SideNav progress dots', () => {
     expect(filled.length).toBe(3);
 
     // Taking Action should have about 20% => ~1/5 filled
-    const taking = screen.getByRole('link', { name: /Taking Action/i });
+    // Use getAllByRole since there may be multiple nav elements (mobile + desktop)
+    const takingLinks = screen.getAllByRole('link', { name: /Taking Action/i });
+    const taking = takingLinks[0]; // Use the first matching link
     const tProgress = within(taking).getByTestId('progress');
     const tDots = within(tProgress).getAllByTestId('progress-dot');
     const tFilled = tDots.filter((d) => d.getAttribute('data-filled') === 'true');

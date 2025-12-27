@@ -2,6 +2,7 @@
   "agentProfile": {
     "name": "debug-specialist",
     "displayName": "Debug Specialist",
+    "model": "opus",
     "type": "standalone",
     "version": "1.0.0",
     "specialization": "Multi-domain debugging and troubleshooting",

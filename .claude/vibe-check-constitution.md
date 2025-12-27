@@ -341,7 +341,7 @@ vibe_learn({
 
 **Example `vibe_check` Usage:**
 ```javascript
-mcp__pv-bhat-vibe-check-mcp-server__vibe_check({
+mcp__vibe-check__vibe_check({
   context: "User wants to containerize firecrawl MCP before production launch",
   assumptions: [
     "Containerization improves security",
@@ -369,7 +369,7 @@ mcp__pv-bhat-vibe-check-mcp-server__vibe_check({
 
 **Example `vibe_learn` Usage:**
 ```javascript
-mcp__pv-bhat-vibe-check-mcp-server__vibe_learn({
+mcp__vibe-check__vibe_learn({
   error: "sqlite-tanium Docker container failed health check",
   solution: "Added DATABASE_PATH env variable and volume mount",
   pattern: "MCP Docker containers need explicit env vars and volume persistence",
@@ -462,8 +462,8 @@ cp .mcp.json .mcp.json.backup-pre-docker-$(date +%Y%m%d)
 nano .claude/vibe-check-constitution.md
 
 # Reload in next session, or use:
-mcp__pv-bhat-vibe-check-mcp-server__reset_constitution()
-mcp__pv-bhat-vibe-check-mcp-server__update_constitution({
+mcp__vibe-check__reset_constitution()
+mcp__vibe-check__update_constitution({
   rule: "Updated rule content"
 })
 ```
