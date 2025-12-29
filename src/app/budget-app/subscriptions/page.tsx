@@ -499,7 +499,7 @@ export default function SubscriptionsPage() {
           <div className="bg-card border border-border rounded-lg p-5">
             <div className="flex items-center justify-between mb-2">
               <h3 className="text-sm font-medium text-muted-foreground">Monthly</h3>
-              <DollarSign className="w-5 h-5 text-blue-500" />
+              <DollarSign className="w-5 h-5 text-teal-500" />
             </div>
             <p className="text-3xl font-bold text-foreground">
               ${stats.monthlyTotal.toFixed(2)}
@@ -511,7 +511,7 @@ export default function SubscriptionsPage() {
           <div className="bg-card border border-border rounded-lg p-5">
             <div className="flex items-center justify-between mb-2">
               <h3 className="text-sm font-medium text-muted-foreground">Annual</h3>
-              <Calendar className="w-5 h-5 text-purple-500" />
+              <Calendar className="w-5 h-5 text-teal-500" />
             </div>
             <p className="text-3xl font-bold text-foreground">
               ${stats.annualTotal.toFixed(2)}
@@ -740,12 +740,12 @@ export default function SubscriptionsPage() {
         )}
 
         {/* Help Text */}
-        <div className="mt-8 bg-blue-50 dark:bg-blue-950 border border-blue-200 dark:border-blue-800 rounded-lg p-6">
-          <h3 className="text-sm font-semibold text-blue-900 dark:text-blue-100 mb-2 flex items-center gap-2">
-            <Sparkles className="w-4 h-4" />
+        <div className="mt-8 bg-slate-800/50 border border-white/10 rounded-lg p-6">
+          <h3 className="text-sm font-semibold text-white mb-2 flex items-center gap-2">
+            <Sparkles className="w-4 h-4 text-teal-500" />
             Smart Subscription Management
           </h3>
-          <p className="text-sm text-blue-800 dark:text-blue-200">
+          <p className="text-sm text-slate-300">
             <strong>Manual:</strong> Add subscriptions you want to track precisely. {' '}
             <strong>Auto-detected:</strong> We analyze your transactions to find recurring patterns. {' '}
             <strong>Claim</strong> auto-detected subscriptions to manage them manually with reminders and more control.
