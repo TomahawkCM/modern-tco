@@ -4,9 +4,15 @@
  * Defines supported locales, default locale, and locale validation
  */
 
-export type SupportedLocale = 'en-US' | 'en-IN' | 'ko-KR';
+export type SupportedLocale = 'en-US' | 'en-IN' | 'ko-KR' | 'en-XA';
 
-export const SUPPORTED_LOCALES: SupportedLocale[] = ['en-US', 'en-IN', 'ko-KR'];
+/**
+ * Supported locales (includes dev-only pseudo-locale en-XA in development)
+ */
+export const SUPPORTED_LOCALES: SupportedLocale[] =
+  process.env.NODE_ENV === 'development'
+    ? ['en-US', 'en-IN', 'ko-KR', 'en-XA']
+    : ['en-US', 'en-IN', 'ko-KR'];
 
 export const DEFAULT_LOCALE: SupportedLocale = 'en-US';
 
@@ -30,6 +36,12 @@ export const LOCALE_METADATA = {
     label: '한국어 (Korean)',
     dir: 'ltr' as const,
     currency: 'KRW',
+    numberingSystem: 'standard' as const,
+  },
+  'en-XA': {
+    label: '[Þšéüðó-Ļóçálé ÉÑ-XÁ~~~] (Dev Only)',
+    dir: 'ltr' as const,
+    currency: 'USD',
     numberingSystem: 'standard' as const,
   },
 } as const;

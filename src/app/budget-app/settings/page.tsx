@@ -13,11 +13,12 @@ import {
   type PrivacySettings,
 } from "@/lib/budget-privacy-settings";
 import type { Account, Category } from "@/types/budget";
-import { CreditCard, Edit, Plus, Shield, Tag, Trash2, Eye, GripVertical, Archive, RotateCcw, Database, Download, Upload, Globe } from "lucide-react";
+import { CreditCard, Edit, Plus, Shield, Tag, Trash2, Eye, GripVertical, Archive, RotateCcw, Database, Download, Upload, Globe, Wrench } from "lucide-react";
 import { useEffect, useState } from "react";
 import { PrivacyControlsPanel } from "./settings-privacy-panel";
 import { AccessibilitySettingsPanel } from "@/components/budget/AccessibilitySettingsPanel";
 import { LocaleSettingsPanel } from "@/components/budget/settings/LocaleSettingsPanel";
+import { DeveloperTools } from "@/components/budget/settings/DeveloperTools";
 import { IconPicker, getIconComponent } from "@/components/budget/IconPicker";
 import { ExportDialog } from "@/components/budget/ExportDialog";
 import { ImportDialog } from "@/components/budget/ImportDialog";
@@ -44,7 +45,8 @@ export default function SettingsPage() {
   const [categories, setCategories] = useState<Category[]>([]);
   const [categoryTransactionCounts, setCategoryTransactionCounts] = useState<Record<string, number>>({});
   const [isLoading, setIsLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState<"accounts" | "categories" | "privacy" | "accessibility" | "data" | "locale">("accounts");
+  const [activeTab, setActiveTab] = useState<"accounts" | "categories" | "privacy" | "accessibility" | "data" | "locale" | "developer">("accounts");
+  const isDev = process.env.NODE_ENV === 'development';
   const [showExportDialog, setShowExportDialog] = useState(false);
   const [showImportDialog, setShowImportDialog] = useState(false);
   const [showAccountModal, setShowAccountModal] = useState(false);
@@ -318,6 +320,21 @@ export default function SettingsPage() {
               Locale & Formatting
             </div>
           </button>
+          {isDev && (
+            <button
+              onClick={() => setActiveTab("developer")}
+              className={`border-b-2 px-2 pb-4 font-medium transition-colors ${
+                activeTab === "developer"
+                  ? "border-yellow-500 text-yellow-400"
+                  : "border-transparent text-slate-400 hover:text-slate-200"
+              }`}
+            >
+              <div className="flex items-center gap-2">
+                <Wrench className="h-5 w-5" />
+                Developer Tools
+              </div>
+            </button>
+          )}
         </div>
       </div>
 
@@ -604,6 +621,9 @@ export default function SettingsPage() {
 
       {/* Locale & Formatting Tab */}
       {activeTab === "locale" && <LocaleSettingsPanel />}
+
+      {/* Developer Tools Tab (Dev Mode Only) */}
+      {isDev && activeTab === "developer" && <DeveloperTools />}
 
       {/* Export Dialog */}
       <ExportDialog
