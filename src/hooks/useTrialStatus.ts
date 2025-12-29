@@ -58,11 +58,25 @@ export function useTrialStatus(): TrialStatusResult {
 
     try {
       const profile = await getUserProfile(user.id);
+
+      // If profile is null (e.g., RLS blocked query), use trial defaults
+      if (!profile) {
+        setSubscriptionStatus({
+          isActive: true,
+          isTrial: true,
+          daysRemaining: TRIAL_DURATION_DAYS,
+          isExpired: false,
+          status: "trial",
+        });
+        setLoading(false);
+        return;
+      }
+
       const status = calculateSubscriptionStatus(profile);
       setSubscriptionStatus(status);
     } catch (error) {
-      console.error("Error fetching trial status:", error);
-      // Default to trial mode on error to avoid blocking users
+      // Silently default to trial mode on error to avoid console noise
+      // This handles cases where user exists but session isn't established
       setSubscriptionStatus({
         isActive: true,
         isTrial: true,

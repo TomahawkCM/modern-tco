@@ -38,7 +38,11 @@ export async function getUserProfile(userId: string): Promise<UserProfile | null
     .single();
 
   if (error) {
-    console.error("Error fetching user profile:", error);
+    // Only log non-RLS errors (RLS errors are empty objects {})
+    // RLS blocks are expected when session isn't established and are handled gracefully
+    if (error.message && error.message !== "") {
+      console.error("Error fetching user profile:", error);
+    }
     return null;
   }
 
