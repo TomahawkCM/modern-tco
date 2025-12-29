@@ -13,10 +13,11 @@ import {
   type PrivacySettings,
 } from "@/lib/budget-privacy-settings";
 import type { Account, Category } from "@/types/budget";
-import { CreditCard, Edit, Plus, Shield, Tag, Trash2, Eye, GripVertical, Archive, RotateCcw, Database, Download, Upload } from "lucide-react";
+import { CreditCard, Edit, Plus, Shield, Tag, Trash2, Eye, GripVertical, Archive, RotateCcw, Database, Download, Upload, Globe } from "lucide-react";
 import { useEffect, useState } from "react";
 import { PrivacyControlsPanel } from "./settings-privacy-panel";
 import { AccessibilitySettingsPanel } from "@/components/budget/AccessibilitySettingsPanel";
+import { LocaleSettingsPanel } from "@/components/budget/settings/LocaleSettingsPanel";
 import { IconPicker, getIconComponent } from "@/components/budget/IconPicker";
 import { ExportDialog } from "@/components/budget/ExportDialog";
 import { ImportDialog } from "@/components/budget/ImportDialog";
@@ -43,7 +44,7 @@ export default function SettingsPage() {
   const [categories, setCategories] = useState<Category[]>([]);
   const [categoryTransactionCounts, setCategoryTransactionCounts] = useState<Record<string, number>>({});
   const [isLoading, setIsLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState<"accounts" | "categories" | "privacy" | "accessibility" | "data">("accounts");
+  const [activeTab, setActiveTab] = useState<"accounts" | "categories" | "privacy" | "accessibility" | "data" | "locale">("accounts");
   const [showExportDialog, setShowExportDialog] = useState(false);
   const [showImportDialog, setShowImportDialog] = useState(false);
   const [showAccountModal, setShowAccountModal] = useState(false);
@@ -304,6 +305,19 @@ export default function SettingsPage() {
               Data
             </div>
           </button>
+          <button
+            onClick={() => setActiveTab("locale")}
+            className={`border-b-2 px-2 pb-4 font-medium transition-colors ${
+              activeTab === "locale"
+                ? "border-teal-500 text-teal-400"
+                : "border-transparent text-slate-400 hover:text-slate-200"
+            }`}
+          >
+            <div className="flex items-center gap-2">
+              <Globe className="h-5 w-5" />
+              Locale & Formatting
+            </div>
+          </button>
         </div>
       </div>
 
@@ -543,8 +557,8 @@ export default function SettingsPage() {
             {/* Import Card */}
             <div className="rounded-xl bg-white/5 border border-white/10 p-6">
               <div className="flex items-start gap-4">
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-500/20">
-                  <Upload className="h-6 w-6 text-blue-400" />
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gray-500/20">
+                  <Upload className="h-6 w-6 text-gray-400" />
                 </div>
                 <div className="flex-1">
                   <h3 className="text-lg font-semibold text-white">Import Data</h3>
@@ -553,7 +567,7 @@ export default function SettingsPage() {
                   </p>
                   <button
                     onClick={() => setShowImportDialog(true)}
-                    className="mt-4 inline-flex items-center gap-2 rounded-lg bg-blue-500 px-4 py-2 font-medium text-white transition-colors hover:bg-blue-600"
+                    className="mt-4 inline-flex items-center gap-2 rounded-lg bg-gray-600 px-4 py-2 font-medium text-white transition-colors hover:bg-gray-700"
                   >
                     <Upload className="h-4 w-4" />
                     Import Data
@@ -587,6 +601,9 @@ export default function SettingsPage() {
           </div>
         </div>
       )}
+
+      {/* Locale & Formatting Tab */}
+      {activeTab === "locale" && <LocaleSettingsPanel />}
 
       {/* Export Dialog */}
       <ExportDialog
@@ -1030,7 +1047,7 @@ function CategoryModal({
               placeholder="e.g., Movies, Games, Events"
               className="w-full rounded-lg border-2 border-gray-300 px-4 py-3 min-h-[48px] text-base focus:border-teal-500 focus:ring-2 focus:ring-teal-500/20 transition-all"
             />
-            <div className="mt-2 bg-blue-50 border-l-4 border-blue-400 p-3 rounded">
+            <div className="mt-2 bg-teal-50 border-l-4 border-teal-400 p-3 rounded">
               <p className="text-sm text-gray-800">
                 <span className="font-semibold">Tip:</span> Separate subcategories with commas. For example: "Movies, Streaming, Concerts"
               </p>
