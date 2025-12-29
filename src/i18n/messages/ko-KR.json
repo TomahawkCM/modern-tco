@@ -1,8 +1,22 @@
 {
   "nav": {
-    "dashboard": "대시보드"
+    "dashboard": "대시보드",
+    "transactions": "거래 내역",
+    "budgets": "예산",
+    "reports": "보고서",
+    "accounts": "계좌",
+    "categories": "카테고리",
+    "goals": "목표",
+    "import": "가져오기",
+    "export": "내보내기",
+    "settings": "설정",
+    "help": "도움말",
+    "about": "정보"
   },
   "common": {
-    "save": "저장"
+    "save": "저장",
+    "cancel": "취소",
+    "delete": "삭제",
+    "edit": "편집"
   }
 }

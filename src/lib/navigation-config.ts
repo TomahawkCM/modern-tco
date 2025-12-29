@@ -3,11 +3,14 @@
  *
  * Defines primary and secondary navigation sections for adaptive navigation
  * Used by BottomNav, NavRail, Sidebar, and MobileMenu components
+ *
+ * NOTE: label field contains translation keys (e.g., "nav.dashboard")
+ * Components should use next-intl's useTranslations hook to translate these keys
  */
 
 export interface NavigationSection {
   id: string;
-  label: string;
+  label: string; // Translation key (e.g., "nav.dashboard")
   icon: string;
   route: string;
 }
@@ -18,28 +21,28 @@ export interface NavigationSection {
  */
 export const PRIMARY_SECTIONS: NavigationSection[] = [
   {
-    id: 'dashboard',
-    label: 'Dashboard',
-    icon: 'LayoutDashboard',
-    route: '/budget-app',
+    id: "dashboard",
+    label: "nav.dashboard",
+    icon: "LayoutDashboard",
+    route: "/budget-app",
   },
   {
-    id: 'transactions',
-    label: 'Transactions',
-    icon: 'Receipt',
-    route: '/budget-app/transactions',
+    id: "transactions",
+    label: "nav.transactions",
+    icon: "Receipt",
+    route: "/budget-app/transactions",
   },
   {
-    id: 'budgets',
-    label: 'Budgets',
-    icon: 'PiggyBank',
-    route: '/budget-app/budgets',
+    id: "budgets",
+    label: "nav.budgets",
+    icon: "PiggyBank",
+    route: "/budget-app/budgets",
   },
   {
-    id: 'reports',
-    label: 'Reports',
-    icon: 'ChartBar',
-    route: '/budget-app/reports',
+    id: "reports",
+    label: "nav.reports",
+    icon: "ChartBar",
+    route: "/budget-app/reports",
   },
 ];
 
@@ -49,52 +52,52 @@ export const PRIMARY_SECTIONS: NavigationSection[] = [
  */
 export const SECONDARY_SECTIONS: NavigationSection[] = [
   {
-    id: 'accounts',
-    label: 'Accounts',
-    icon: 'Wallet',
-    route: '/budget-app/accounts',
+    id: "accounts",
+    label: "nav.accounts",
+    icon: "Wallet",
+    route: "/budget-app/accounts",
   },
   {
-    id: 'categories',
-    label: 'Categories',
-    icon: 'Tag',
-    route: '/budget-app/categories',
+    id: "categories",
+    label: "nav.categories",
+    icon: "Tag",
+    route: "/budget-app/categories",
   },
   {
-    id: 'goals',
-    label: 'Goals',
-    icon: 'Target',
-    route: '/budget-app/goals',
+    id: "goals",
+    label: "nav.goals",
+    icon: "Target",
+    route: "/budget-app/goals",
   },
   {
-    id: 'import',
-    label: 'Import',
-    icon: 'Upload',
-    route: '/budget-app/import',
+    id: "import",
+    label: "nav.import",
+    icon: "Upload",
+    route: "/budget-app/import",
   },
   {
-    id: 'export',
-    label: 'Export',
-    icon: 'Download',
-    route: '/budget-app/export',
+    id: "export",
+    label: "nav.export",
+    icon: "Download",
+    route: "/budget-app/export",
   },
   {
-    id: 'settings',
-    label: 'Settings',
-    icon: 'Settings',
-    route: '/budget-app/settings',
+    id: "settings",
+    label: "nav.settings",
+    icon: "Settings",
+    route: "/budget-app/settings",
   },
   {
-    id: 'help',
-    label: 'Help',
-    icon: 'HelpCircle',
-    route: '/budget-app/help',
+    id: "help",
+    label: "nav.help",
+    icon: "HelpCircle",
+    route: "/budget-app/help",
   },
   {
-    id: 'about',
-    label: 'About',
-    icon: 'Info',
-    route: '/budget-app/about',
+    id: "about",
+    label: "nav.about",
+    icon: "Info",
+    route: "/budget-app/about",
   },
 ];
 
@@ -116,7 +119,7 @@ export function getSectionById(id: string): NavigationSection | undefined {
  * Check if a route matches a navigation section
  */
 export function isRouteActive(currentRoute: string, sectionRoute: string): boolean {
-  if (sectionRoute === '/budget-app') {
+  if (sectionRoute === "/budget-app") {
     return currentRoute === sectionRoute;
   }
   return currentRoute.startsWith(sectionRoute);

@@ -1,8 +1,22 @@
 {
   "nav": {
-    "dashboard": "Dashboard"
+    "dashboard": "Dashboard",
+    "transactions": "Transactions",
+    "budgets": "Budgets",
+    "reports": "Reports",
+    "accounts": "Accounts",
+    "categories": "Categories",
+    "goals": "Goals",
+    "import": "Import",
+    "export": "Export",
+    "settings": "Settings",
+    "help": "Help",
+    "about": "About"
   },
   "common": {
-    "save": "Save"
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit"
   }
 }
