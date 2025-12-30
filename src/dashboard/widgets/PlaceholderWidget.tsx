@@ -35,24 +35,34 @@ export function PlaceholderWidget({ config, showBorders }: PlaceholderWidgetProp
         ? 'md:col-span-2'
         : '';
 
+  const widgetTitle = definition.title.split('.').pop()?.replace(/([A-Z])/g, ' $1').trim() || 'Widget';
+  const widgetId = `widget-${config.type}`;
+
   return (
     <div className={spanClass}>
-      <GlassCard className={`p-6 ${showBorders ? 'border border-white/10' : ''}`}>
+      <GlassCard
+        className={`p-6 ${showBorders ? 'border border-white/10' : ''}`}
+        role="region"
+        aria-labelledby={widgetId}
+      >
         <div className="flex items-center gap-3 mb-4">
-          <div className="rounded-lg bg-teal-500/20 p-2">
+          <div className="rounded-lg bg-teal-500/20 p-2" aria-hidden="true">
             {IconComponent && <IconComponent className="h-5 w-5 text-teal-400" />}
           </div>
-          <h3 className="text-lg font-semibold text-white">
+          <h3 id={widgetId} className="text-lg font-semibold text-white">
             {/* Translation key - will be translated in future */}
-            {definition.title.split('.').pop()?.replace(/([A-Z])/g, ' $1').trim()}
+            {widgetTitle}
           </h3>
         </div>
 
-        <div className="flex items-center justify-center h-48 rounded-lg bg-white/5 border border-white/10">
+        <div
+          className="flex items-center justify-center h-48 rounded-lg bg-white/5 border border-white/10"
+          role="status"
+          aria-label={`${widgetTitle} placeholder: No data available yet`}
+        >
           <div className="text-center space-y-2">
             <p className="text-sm text-slate-400">
-              {definition.title.split('.').pop()?.replace(/([A-Z])/g, ' $1').trim()} data will
-              appear here
+              {widgetTitle} data will appear here
             </p>
             <p className="text-xs text-slate-500">Connect your accounts to see real data</p>
           </div>

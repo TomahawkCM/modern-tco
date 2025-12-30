@@ -76,11 +76,17 @@ export default function DashboardPage() {
   // Welcome screen for new users
   if (!hasData) {
     return (
-      <div className="flex min-h-[70vh] items-center justify-center">
+      <main
+        id="main-content"
+        className="flex min-h-[70vh] items-center justify-center"
+        tabIndex={-1}
+        role="main"
+        aria-label="Budget app welcome screen"
+      >
         <div className="max-w-md text-center">
           <div className="mb-6 flex justify-center">
             <div className="rounded-full bg-gradient-to-br from-teal-500/20 to-purple-500/20 p-8">
-              <Sparkles className="h-16 w-16 text-teal-400" />
+              <Sparkles className="h-16 w-16 text-teal-400" aria-hidden="true" />
             </div>
           </div>
           <h2 className="mb-3 text-3xl font-bold text-white">Welcome to Budget App</h2>
@@ -92,19 +98,19 @@ export default function DashboardPage() {
               href="/budget-app/transactions"
               className="inline-flex items-center justify-center gap-2 rounded-xl bg-teal-500 px-6 py-3 text-white shadow-lg shadow-teal-500/20 transition-all hover:bg-teal-400"
             >
-              <Plus className="h-5 w-5" />
+              <Plus className="h-5 w-5" aria-hidden="true" />
               <span>Add Transaction</span>
             </Link>
             <Link
               href="/budget-app/import"
               className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/10 bg-white/5 px-6 py-3 text-slate-300 transition-all hover:bg-white/10 hover:text-white"
             >
-              <Upload className="h-5 w-5" />
+              <Upload className="h-5 w-5" aria-hidden="true" />
               <span>Import Data</span>
             </Link>
           </div>
         </div>
-      </div>
+      </main>
     );
   }
 
@@ -122,16 +128,22 @@ export default function DashboardPage() {
   };
 
   return (
-    <div className="space-y-8 pb-8">
+    <main
+      id="main-content"
+      className="space-y-8 pb-8"
+      tabIndex={-1}
+      role="main"
+      aria-label="Budget dashboard"
+    >
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <header className="flex items-center justify-between">
         <div>
           <h1 className="text-4xl font-bold tracking-tight text-white">Dashboard</h1>
           <p className="mt-2 text-lg text-slate-400">
             {new Date().toLocaleDateString("en-US", { month: "long", year: "numeric" })}
           </p>
         </div>
-        <div className="flex gap-3">
+        <nav className="flex gap-3" aria-label="Dashboard actions">
           {!isEditMode && (
             <>
               <button
@@ -139,27 +151,27 @@ export default function DashboardPage() {
                 className="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 text-slate-300 transition-all hover:bg-white/10 hover:text-white focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 focus:ring-offset-slate-900"
                 aria-label="Edit dashboard layout"
               >
-                <Settings2 className="h-4 w-4" />
+                <Settings2 className="h-4 w-4" aria-hidden="true" />
                 <span className="hidden sm:inline">Edit Dashboard</span>
               </button>
               <Link
                 href="/budget-app/import"
                 className="hidden items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 text-slate-300 transition-all hover:bg-white/10 hover:text-white sm:inline-flex"
               >
-                <Upload className="h-4 w-4" />
+                <Upload className="h-4 w-4" aria-hidden="true" />
                 <span>Import</span>
               </Link>
               <Link
                 href="/budget-app/transactions"
                 className="inline-flex items-center gap-2 rounded-xl bg-teal-500 px-4 py-2.5 text-white shadow-lg shadow-teal-500/20 transition-all hover:bg-teal-400"
               >
-                <Plus className="h-4 w-4" />
+                <Plus className="h-4 w-4" aria-hidden="true" />
                 <span className="hidden sm:inline">Add Transaction</span>
               </Link>
             </>
           )}
-        </div>
-      </div>
+        </nav>
+      </header>
 
       {/* Edit Mode */}
       {isEditMode && widgetConfig && (
@@ -185,6 +197,6 @@ export default function DashboardPage() {
           ))}
         </div>
       )}
-    </div>
+    </main>
   );
 }
