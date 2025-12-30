@@ -35,13 +35,17 @@ export async function getUserProfile(userId: string): Promise<UserProfile | null
     .from("users")
     .select("id, email, name, created_at, last_login, trial_start, subscription_status")
     .eq("id", userId)
-    .single();
+    // IMPORTANT: RLS or a not-yet-created profile can result in 0 rows.
+    // `.maybeSingle()` treats "0 rows" as `data: null` (no error), which avoids noisy console errors
+    // in places like `useTrialStatus` that intentionally fall back to trial defaults.
+    .maybeSingle();
 
   if (error) {
-    // Only log non-RLS errors (RLS errors are empty objects {})
-    // RLS blocks are expected when session isn't established and are handled gracefully
-    if (error.message && error.message !== "") {
-      console.error("Error fetching user profile:", error);
+    // Prefer a lightweight log here: callers (like `useTrialStatus`) intentionally fall back to
+    // safe defaults when profile fetch fails.
+    const message = (error as { message?: string }).message;
+    if (message) {
+      console.warn("Error fetching user profile:", message);
     }
     return null;
   }

@@ -1,5 +1,6 @@
 "use client";
 
+import { LanguageSelector } from "@/components/budget/LanguageSelector";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { ArrowRight, BarChart3, Lock, ShieldCheck, Sparkles, Zap } from "lucide-react";
@@ -22,6 +23,7 @@ export default function BudgetAppLandingPage() {
             </span>
           </div>
           <div className="flex items-center gap-4">
+            <LanguageSelector variant="minimal" />
             <Link
               href="/budget-app/auth/login"
               className="text-sm font-medium text-slate-300 transition-colors hover:text-white"

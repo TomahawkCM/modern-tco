@@ -9,23 +9,26 @@
  */
 
 import { useState, useEffect } from 'react';
-import { DEFAULT_LOCALE } from '@/i18n/config';
+import { DEFAULT_LOCALE, type SupportedLocale } from '@/i18n/config';
 import {
   getLocalePreferences,
   setLocalePreferences,
   type LocalePreferences,
 } from '@/lib/locale-storage';
 
+// Pseudo-locale for testing (not in SupportedLocale type)
+const PSEUDO_LOCALE = 'en-XA' as SupportedLocale;
+
 export function DeveloperTools() {
   const [preferences, setPreferences] = useState<LocalePreferences>(getLocalePreferences());
-  const [isPseudoLocale, setIsPseudoLocale] = useState(preferences.locale === 'en-XA');
+  const [isPseudoLocale, setIsPseudoLocale] = useState(preferences.locale === PSEUDO_LOCALE);
 
   useEffect(() => {
     // Listen for preference changes
     const handlePreferencesChanged = (event: CustomEvent) => {
       const newPrefs = event.detail as LocalePreferences;
       setPreferences(newPrefs);
-      setIsPseudoLocale(newPrefs.locale === 'en-XA');
+      setIsPseudoLocale(newPrefs.locale === PSEUDO_LOCALE);
     };
 
     window.addEventListener('localePreferencesChanged', handlePreferencesChanged as EventListener);
@@ -38,7 +41,7 @@ export function DeveloperTools() {
   }, []);
 
   const handlePseudoLocaleToggle = (enabled: boolean) => {
-    const newLocale = enabled ? 'en-XA' : DEFAULT_LOCALE;
+    const newLocale = enabled ? PSEUDO_LOCALE : DEFAULT_LOCALE;
     const updated: LocalePreferences = {
       ...preferences,
       locale: newLocale,

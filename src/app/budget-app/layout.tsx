@@ -27,6 +27,8 @@ import { useState } from "react";
 
 import { usePathname } from "next/navigation";
 
+import { ClientI18nProvider } from "@/components/budget/ClientI18nProvider";
+
 export default function BudgetAppLayout({ children }: { children: React.ReactNode }) {
   const router = useRouter();
   const pathname = usePathname();
@@ -71,7 +73,9 @@ export default function BudgetAppLayout({ children }: { children: React.ReactNod
     return (
       <SeniorsModeProvider>
         <ChatbotProvider>
-          <ToastProvider>{children}</ToastProvider>
+          <ClientI18nProvider>
+            <ToastProvider>{children}</ToastProvider>
+          </ClientI18nProvider>
         </ChatbotProvider>
       </SeniorsModeProvider>
     );
@@ -80,6 +84,7 @@ export default function BudgetAppLayout({ children }: { children: React.ReactNod
   return (
     <SeniorsModeProvider>
     <ChatbotProvider>
+      <ClientI18nProvider>
       <BudgetAccessibilityInitializer />
 
       {/* Skip Link - WCAG 2.4.1 Bypass Blocks */}
@@ -177,6 +182,7 @@ export default function BudgetAppLayout({ children }: { children: React.ReactNod
         {/* AI Chatbot Widget */}
         <ChatbotWidget />
       </div>
+      </ClientI18nProvider>
     </ChatbotProvider>
     </SeniorsModeProvider>
   );

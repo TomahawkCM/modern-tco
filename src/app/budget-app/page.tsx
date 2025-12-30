@@ -9,27 +9,24 @@
  * - Dynamic Animations: Smooth entrance and interaction animations
  */
 
+import { LanguageSelector } from "@/components/budget/LanguageSelector";
 import { DashboardSkeleton } from "@/components/budget/LoadingSkeleton";
 import { GlassCard } from "@/components/budget/ui/GlassCard";
-import { db, initializeDefaultCategories } from "@/lib/budget-db";
-import { useDeviceClass } from "@/lib/breakpoints";
+import { WidgetEditMode } from "@/dashboard/widgets/WidgetEditMode";
 import { WidgetGrid } from "@/dashboard/widgets/WidgetGrid";
-import { getWidgetConfig } from "@/dashboard/widgets/widget-storage";
 import { getGridConfig } from "@/dashboard/widgets/presets";
 import type { DashboardConfig } from "@/dashboard/widgets/types";
-import type { Account, Category, Transaction } from "@/types/budget";
-import {
-  Plus,
-  Upload,
-  TrendingUp,
-  Sparkles,
-  Settings2,
-} from "lucide-react";
+import { getWidgetConfig } from "@/dashboard/widgets/widget-storage";
+import { useDeviceClass } from "@/lib/breakpoints";
+import { db, initializeDefaultCategories } from "@/lib/budget-db";
+import { Plus, Settings2, Sparkles, Upload } from "lucide-react";
+import { useFormatter, useTranslations } from "next-intl";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { WidgetEditMode } from "@/dashboard/widgets/WidgetEditMode";
 
 export default function DashboardPage() {
+  const t = useTranslations();
+  const format = useFormatter();
   const [loading, setLoading] = useState(true);
   const [hasData, setHasData] = useState(false);
   const [widgetConfig, setWidgetConfig] = useState<DashboardConfig | null>(null);
@@ -48,9 +45,7 @@ export default function DashboardPage() {
         ]);
 
         // Check if user has any data
-        setHasData(
-          transactions.length > 0 || accounts.length > 0 || categories.length > 0
-        );
+        setHasData(transactions.length > 0 || accounts.length > 0 || categories.length > 0);
       } catch (error) {
         console.error("Error loading dashboard data:", error);
       } finally {
@@ -89,24 +84,22 @@ export default function DashboardPage() {
               <Sparkles className="h-16 w-16 text-teal-400" aria-hidden="true" />
             </div>
           </div>
-          <h2 className="mb-3 text-3xl font-bold text-white">Welcome to Budget App</h2>
-          <p className="mb-8 text-lg text-slate-400">
-            Start by adding your first transaction or importing data from your bank
-          </p>
+          <h2 className="mb-3 text-3xl font-bold text-white">{t("welcome.title")}</h2>
+          <p className="mb-8 text-lg text-slate-400">{t("welcome.subtitle")}</p>
           <div className="flex flex-col gap-3 sm:flex-row sm:justify-center">
             <Link
               href="/budget-app/transactions"
               className="inline-flex items-center justify-center gap-2 rounded-xl bg-teal-500 px-6 py-3 text-white shadow-lg shadow-teal-500/20 transition-all hover:bg-teal-400"
             >
               <Plus className="h-5 w-5" aria-hidden="true" />
-              <span>Add Transaction</span>
+              <span>{t("actions.addTransaction")}</span>
             </Link>
             <Link
               href="/budget-app/import"
               className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/10 bg-white/5 px-6 py-3 text-slate-300 transition-all hover:bg-white/10 hover:text-white"
             >
               <Upload className="h-5 w-5" aria-hidden="true" />
-              <span>Import Data</span>
+              <span>{t("actions.importData")}</span>
             </Link>
           </div>
         </div>
@@ -138,12 +131,13 @@ export default function DashboardPage() {
       {/* Header */}
       <header className="flex items-center justify-between">
         <div>
-          <h1 className="text-4xl font-bold tracking-tight text-white">Dashboard</h1>
+          <h1 className="text-4xl font-bold tracking-tight text-white">{t("nav.dashboard")}</h1>
           <p className="mt-2 text-lg text-slate-400">
-            {new Date().toLocaleDateString("en-US", { month: "long", year: "numeric" })}
+            {format.dateTime(new Date(), { month: "long", year: "numeric" })}
           </p>
         </div>
         <nav className="flex gap-3" aria-label="Dashboard actions">
+          <LanguageSelector variant="minimal" className="hidden sm:inline-flex" />
           {!isEditMode && (
             <>
               <button
@@ -152,21 +146,21 @@ export default function DashboardPage() {
                 aria-label="Edit dashboard layout"
               >
                 <Settings2 className="h-4 w-4" aria-hidden="true" />
-                <span className="hidden sm:inline">Edit Dashboard</span>
+                <span className="hidden sm:inline">{t("actions.editDashboard")}</span>
               </button>
               <Link
                 href="/budget-app/import"
                 className="hidden items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 text-slate-300 transition-all hover:bg-white/10 hover:text-white sm:inline-flex"
               >
                 <Upload className="h-4 w-4" aria-hidden="true" />
-                <span>Import</span>
+                <span>{t("actions.import")}</span>
               </Link>
               <Link
                 href="/budget-app/transactions"
                 className="inline-flex items-center gap-2 rounded-xl bg-teal-500 px-4 py-2.5 text-white shadow-lg shadow-teal-500/20 transition-all hover:bg-teal-400"
               >
                 <Plus className="h-4 w-4" aria-hidden="true" />
-                <span className="hidden sm:inline">Add Transaction</span>
+                <span className="hidden sm:inline">{t("actions.addTransaction")}</span>
               </Link>
             </>
           )}
