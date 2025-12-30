@@ -1,65 +1,65 @@
 {
   "nav": {
-    "dashboard": "Dashboard",
-    "transactions": "Transactions",
-    "budgets": "Budgets",
-    "reports": "Reports",
-    "accounts": "Accounts",
-    "categories": "Categories",
-    "goals": "Goals",
-    "import": "Import",
-    "export": "Export",
-    "settings": "Settings",
-    "help": "Help",
-    "about": "About"
+    "dashboard": "ဒက်ရှ်ဘုတ်",
+    "transactions": "ငွေလွှဲများ",
+    "budgets": "ဘတ်ဂျက်များ",
+    "reports": "အစီရင်ခံစာများ",
+    "accounts": "အကောင့်များ",
+    "categories": "အမျိုးအစားများ",
+    "goals": "ရည်မှန်းချက်များ",
+    "import": "သွင်းယူမည်",
+    "export": "ထုတ်ယူမည်",
+    "settings": "ဆက်တင်များ",
+    "help": "အကူအညီ",
+    "about": "အကြောင်း"
   },
   "actions": {
-    "addTransaction": "Add Transaction",
-    "importData": "Import Data",
-    "import": "Import",
-    "editDashboard": "Edit Dashboard",
-    "saveChanges": "Save Changes",
-    "resetDefaults": "Reset to Defaults"
+    "addTransaction": "ငွေလွှဲထည့်မည်",
+    "importData": "ဒေတာသွင်းယူမည်",
+    "import": "သွင်းယူမည်",
+    "editDashboard": "ဒက်ရှ်ဘုတ်ပြင်ဆင်မည်",
+    "saveChanges": "ပြင်ဆင်မှုများကိုသိမ်းမည်",
+    "resetDefaults": "အခြေခံများသို့ပြန်သွားမည်"
   },
   "welcome": {
-    "title": "Welcome to Budget App",
-    "subtitle": "Start by adding your first transaction or importing data from your bank"
+    "title": "ဘတ်ဂျက်အက်ပ်သို့ကြိုဆိုပါတယ်",
+    "subtitle": "သင်၏ပထမဆုံးငွေလွှဲကိုထည့်ပါ သို့မဟုတ် ဘဏ်မှဒေတာသွင်းယူပါ"
   },
   "common": {
-    "save": "Save",
-    "cancel": "Cancel",
-    "delete": "Delete",
-    "edit": "Edit",
-    "loading": "Loading..."
+    "save": "သိမ်းမည်",
+    "cancel": "မလုပ်တော့ပါ",
+    "delete": "ဖျက်မည်",
+    "edit": "ပြင်မည်",
+    "loading": "လွှင့်နေပါသည်..."
   },
   "widget": {
     "spendingByCategory": {
-      "title": "Spending by Category",
-      "description": "See where your money goes with visual breakdowns"
+      "title": "အမျိုးအစားအလိုက်အသုံးစရိတ်",
+      "description": "သင်၏ငွေဘယ်သို့သွားသည်ကိုမြင်ရမည်"
     },
     "recentTransactions": {
-      "title": "Recent Transactions",
-      "description": "Quick view of your latest financial activity"
+      "title": "နောက်ဆုံးငွေလွှဲများ",
+      "description": "သင်၏နောက်ဆုံးငွေရေးရာလှုပ်ရှားမှုကိုမြန်မြန်ကြည့်ပါ"
     },
     "budgetProgress": {
-      "title": "Budget Progress",
-      "description": "Track how you're doing against your budget goals"
+      "title": "ဘတ်ဂျက်တိုးတက်မှု",
+      "description": "သင်၏ဘတ်ဂျက်ရည်မှန်းချက်များအပေါ်တွင်ဘယ်လိုလုပ်ဆောင်နေသည်ကိုထောက်လှမ်းပါ"
     },
     "accountBalances": {
-      "title": "Account Balances",
-      "description": "Current balances across all your accounts"
+      "title": "အကောင့်လက်ကျန်",
+      "description": "သင်၏အကောင့်များတွင်လက်ရှိလက်ကျန်များ"
     },
     "incomeVsExpenses": {
-      "title": "Income vs Expenses",
-      "description": "Compare your earnings and spending over time"
+      "title": "ဝင်ငွေ နှင့် အသုံးစရိတ်",
+      "description": "သင်၏ဝင်ငွေများနှင့်အသုံးစရိတ်များကိုနှိုင်းယှဉ်ပါ"
     },
     "monthlyTrends": {
-      "title": "Monthly Trends",
-      "description": "Visualize your financial patterns month by month"
+      "title": "လစဉ်လှုပ်ရှားမှုများ",
+      "description": "လစဉ်သင်၏ငွေရေးရာပုံစံများကိုမြင်ရမည်"
     },
     "upcomingBills": {
-      "title": "Upcoming Bills",
-      "description": "Never miss a payment with bill reminders"
+      "title": "လာမည့်ဘီလ်များ",
+      "description": "ဘီလ်အမှတ်အသားများဖြင့်ပေးချေမှုကိုမမေ့ပါ"
     }
   }
 }

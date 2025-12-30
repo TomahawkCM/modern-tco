@@ -1,65 +1,65 @@
 {
   "nav": {
-    "dashboard": "Dashboard",
-    "transactions": "Transactions",
-    "budgets": "Budgets",
-    "reports": "Reports",
-    "accounts": "Accounts",
-    "categories": "Categories",
-    "goals": "Goals",
-    "import": "Import",
-    "export": "Export",
-    "settings": "Settings",
-    "help": "Help",
-    "about": "About"
+    "dashboard": "Дашборд",
+    "transactions": "Трансакции",
+    "budgets": "Буџети",
+    "reports": "Извештаи",
+    "accounts": "Сметки",
+    "categories": "Категории",
+    "goals": "Цели",
+    "import": "Импорт",
+    "export": "Експорт",
+    "settings": "Поставки",
+    "help": "Помош",
+    "about": "За нас"
   },
   "actions": {
-    "addTransaction": "Add Transaction",
-    "importData": "Import Data",
-    "import": "Import",
-    "editDashboard": "Edit Dashboard",
-    "saveChanges": "Save Changes",
-    "resetDefaults": "Reset to Defaults"
+    "addTransaction": "Додади Трансакција",
+    "importData": "Импорт на Податоци",
+    "import": "Импорт",
+    "editDashboard": "Уреди Дашборд",
+    "saveChanges": "Зачувај Промени",
+    "resetDefaults": "Врати на Подразбирања"
   },
   "welcome": {
-    "title": "Welcome to Budget App",
-    "subtitle": "Start by adding your first transaction or importing data from your bank"
+    "title": "Добредојдовте во Буџет Апликацијата",
+    "subtitle": "Започнете со додавање на вашата прва трансакција или импортирање на податоци од вашата банка"
   },
   "common": {
-    "save": "Save",
-    "cancel": "Cancel",
-    "delete": "Delete",
-    "edit": "Edit",
-    "loading": "Loading..."
+    "save": "Зачувај",
+    "cancel": "Откажи",
+    "delete": "Избриши",
+    "edit": "Уреди",
+    "loading": "Вчитување..."
   },
   "widget": {
     "spendingByCategory": {
-      "title": "Spending by Category",
-      "description": "See where your money goes with visual breakdowns"
+      "title": "Трошоци по Категорија",
+      "description": "Видете каде оди вашите пари со визуелни распоредувања"
     },
     "recentTransactions": {
-      "title": "Recent Transactions",
-      "description": "Quick view of your latest financial activity"
+      "title": "Последни Трансакции",
+      "description": "Брз преглед на вашата најнова финансиска активност"
     },
     "budgetProgress": {
-      "title": "Budget Progress",
-      "description": "Track how you're doing against your budget goals"
+      "title": "Напредок на Буџетот",
+      "description": "Следете како напредувате во однос на вашите буџетски цели"
     },
     "accountBalances": {
-      "title": "Account Balances",
-      "description": "Current balances across all your accounts"
+      "title": "Салдо на Сметки",
+      "description": "Тековни салда на сите ваши сметки"
     },
     "incomeVsExpenses": {
-      "title": "Income vs Expenses",
-      "description": "Compare your earnings and spending over time"
+      "title": "Приходи vs Трошоци",
+      "description": "Споредете ги вашите приходи и трошоци во текот на времето"
     },
     "monthlyTrends": {
-      "title": "Monthly Trends",
-      "description": "Visualize your financial patterns month by month"
+      "title": "Месечни Трендови",
+      "description": "Визуализирајте ги вашите финансиски шеми месец по месец"
     },
     "upcomingBills": {
-      "title": "Upcoming Bills",
-      "description": "Never miss a payment with bill reminders"
+      "title": "Надолежни Сметки",
+      "description": "Никогаш не пропуштајте плаќање со потсетници за сметки"
     }
   }
 }

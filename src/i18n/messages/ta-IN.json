@@ -1,65 +1,65 @@
 {
   "nav": {
-    "dashboard": "Dashboard",
-    "transactions": "Transactions",
-    "budgets": "Budgets",
-    "reports": "Reports",
-    "accounts": "Accounts",
-    "categories": "Categories",
-    "goals": "Goals",
-    "import": "Import",
-    "export": "Export",
-    "settings": "Settings",
-    "help": "Help",
-    "about": "About"
+    "dashboard": "டாஷ்போர்ட்",
+    "transactions": "பரிவர்த்தனைகள்",
+    "budgets": "பட்ஜெட்டுகள்",
+    "reports": "அறிக்கைகள்",
+    "accounts": "கணக்குகள்",
+    "categories": "வகைகள்",
+    "goals": "இலக்குகள்",
+    "import": "இறக்குமதி",
+    "export": "ஏற்றுமதி",
+    "settings": "அமைப்புகள்",
+    "help": "உதவி",
+    "about": "பற்றி"
   },
   "actions": {
-    "addTransaction": "Add Transaction",
-    "importData": "Import Data",
-    "import": "Import",
-    "editDashboard": "Edit Dashboard",
-    "saveChanges": "Save Changes",
-    "resetDefaults": "Reset to Defaults"
+    "addTransaction": "பரிவர்த்தனைச் சேர்க்கவும்",
+    "importData": "தரவை இறக்குமதி செய்யவும்",
+    "import": "இறக்குமதி",
+    "editDashboard": "டாஷ்போர்டை திருத்தவும்",
+    "saveChanges": "மாற்றங்களை சேமிக்கவும்",
+    "resetDefaults": "மூலஅமைப்புக்கு மீட்டமைக்கவும்"
   },
   "welcome": {
-    "title": "Welcome to Budget App",
-    "subtitle": "Start by adding your first transaction or importing data from your bank"
+    "title": "பட்ஜெட் செயலியில் வரவேற்கிறோம்",
+    "subtitle": "உங்கள் முதல் பரிவர்த்தனையைச் சேர்க்க அல்லது உங்கள் வங்கியில் இருந்து தரவை இறக்குமதி செய்ய ஆரம்பிக்கவும்"
   },
   "common": {
-    "save": "Save",
-    "cancel": "Cancel",
-    "delete": "Delete",
-    "edit": "Edit",
-    "loading": "Loading..."
+    "save": "சேமிக்கவும்",
+    "cancel": "ரத்து செய்யவும்",
+    "delete": "அழிக்கவும்",
+    "edit": "திருத்தவும்",
+    "loading": "ஏற்றுகிறது..."
   },
   "widget": {
     "spendingByCategory": {
-      "title": "Spending by Category",
-      "description": "See where your money goes with visual breakdowns"
+      "title": "வகைப்படி செலவுகள்",
+      "description": "உங்கள் பணம் எங்கு செலவாகிறது என்பதை பார்வையிடுங்கள்"
     },
     "recentTransactions": {
-      "title": "Recent Transactions",
-      "description": "Quick view of your latest financial activity"
+      "title": "சமீபத்திய பரிவர்த்தனைகள்",
+      "description": "உங்கள் சமீபத்திய நிதி செயல்பாட்டைப் பார்வையிடவும்"
     },
     "budgetProgress": {
-      "title": "Budget Progress",
-      "description": "Track how you're doing against your budget goals"
+      "title": "பட்ஜெட் முன்னேற்றம்",
+      "description": "உங்கள் பட்ஜெட் இலக்குகளுக்கு எதிராக நீங்கள் எப்படி இருக்கிறீர்கள் என்பதை கண்காணிக்கவும்"
     },
     "accountBalances": {
-      "title": "Account Balances",
-      "description": "Current balances across all your accounts"
+      "title": "கணக்கு இருப்புகள்",
+      "description": "உங்கள் அனைத்து கணக்குகளில் தற்போதைய இருப்புகள்"
     },
     "incomeVsExpenses": {
-      "title": "Income vs Expenses",
-      "description": "Compare your earnings and spending over time"
+      "title": "வருமானம் vs செலவுகள்",
+      "description": "நேரம் அடிப்படையில் உங்கள் வருமானம் மற்றும் செலவுகளை ஒப்பிடவும்"
     },
     "monthlyTrends": {
-      "title": "Monthly Trends",
-      "description": "Visualize your financial patterns month by month"
+      "title": "மாதாந்திர போக்கு",
+      "description": "மாதத்திற்கு மாதம் உங்கள் நிதி மாதிரிகளை காட்சி அளிக்கவும்"
     },
     "upcomingBills": {
-      "title": "Upcoming Bills",
-      "description": "Never miss a payment with bill reminders"
+      "title": "வரவிருக்கும் கட்டணங்கள்",
+      "description": "கட்டண நினைவூட்டிகளுடன் ஒரு கட்டணத்தை தவறவிடாதீர்கள்"
     }
   }
 }

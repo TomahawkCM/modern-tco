@@ -1,65 +1,65 @@
 {
   "nav": {
-    "dashboard": "Dashboard",
-    "transactions": "Transactions",
-    "budgets": "Budgets",
-    "reports": "Reports",
-    "accounts": "Accounts",
-    "categories": "Categories",
-    "goals": "Goals",
-    "import": "Import",
-    "export": "Export",
-    "settings": "Settings",
-    "help": "Help",
-    "about": "About"
+    "dashboard": "แดชบอร์ด",
+    "transactions": "รายการ",
+    "budgets": "งบประมาณ",
+    "reports": "รายงาน",
+    "accounts": "บัญชี",
+    "categories": "หมวดหมู่",
+    "goals": "เป้าหมาย",
+    "import": "นำเข้า",
+    "export": "ส่งออก",
+    "settings": "การตั้งค่า",
+    "help": "ช่วยเหลือ",
+    "about": "เกี่ยวกับ"
   },
   "actions": {
-    "addTransaction": "Add Transaction",
-    "importData": "Import Data",
-    "import": "Import",
-    "editDashboard": "Edit Dashboard",
-    "saveChanges": "Save Changes",
-    "resetDefaults": "Reset to Defaults"
+    "addTransaction": "เพิ่มรายการ",
+    "importData": "นำเข้าข้อมูล",
+    "import": "นำเข้า",
+    "editDashboard": "แก้ไขแดชบอร์ด",
+    "saveChanges": "บันทึกการเปลี่ยนแปลง",
+    "resetDefaults": "รีเซ็ตเป็นค่าเริ่มต้น"
   },
   "welcome": {
-    "title": "Welcome to Budget App",
-    "subtitle": "Start by adding your first transaction or importing data from your bank"
+    "title": "ยินดีต้อนรับสู่แอปงบประมาณ",
+    "subtitle": "เริ่มต้นด้วยการเพิ่มรายการแรกของคุณหรือนำเข้าข้อมูลจากธนาคาร"
   },
   "common": {
-    "save": "Save",
-    "cancel": "Cancel",
-    "delete": "Delete",
-    "edit": "Edit",
-    "loading": "Loading..."
+    "save": "บันทึก",
+    "cancel": "ยกเลิก",
+    "delete": "ลบ",
+    "edit": "แก้ไข",
+    "loading": "กำลังโหลด..."
   },
   "widget": {
     "spendingByCategory": {
-      "title": "Spending by Category",
-      "description": "See where your money goes with visual breakdowns"
+      "title": "การใช้จ่ายตามหมวดหมู่",
+      "description": "ดูว่าเงินของคุณไปไหนด้วยการแสดงผลแบบภาพ"
     },
     "recentTransactions": {
-      "title": "Recent Transactions",
-      "description": "Quick view of your latest financial activity"
+      "title": "รายการล่าสุด",
+      "description": "ดูภาพรวมกิจกรรมทางการเงินล่าสุดของคุณ"
     },
     "budgetProgress": {
-      "title": "Budget Progress",
-      "description": "Track how you're doing against your budget goals"
+      "title": "ความก้าวหน้าในงบประมาณ",
+      "description": "ติดตามความก้าวหน้าของคุณตามเป้าหมายงบประมาณ"
     },
     "accountBalances": {
-      "title": "Account Balances",
-      "description": "Current balances across all your accounts"
+      "title": "ยอดคงเหลือบัญชี",
+      "description": "ยอดคงเหลือปัจจุบันในทุกบัญชีของคุณ"
     },
     "incomeVsExpenses": {
-      "title": "Income vs Expenses",
-      "description": "Compare your earnings and spending over time"
+      "title": "รายได้ vs ค่าใช้จ่าย",
+      "description": "เปรียบเทียบรายได้และการใช้จ่ายของคุณตามเวลา"
     },
     "monthlyTrends": {
-      "title": "Monthly Trends",
-      "description": "Visualize your financial patterns month by month"
+      "title": "แนวโน้มรายเดือน",
+      "description": "แสดงรูปแบบทางการเงินของคุณเป็นรายเดือน"
     },
     "upcomingBills": {
-      "title": "Upcoming Bills",
-      "description": "Never miss a payment with bill reminders"
+      "title": "บิลที่กำลังจะมาถึง",
+      "description": "ไม่พลาดการชำระเงินด้วยการเตือนบิล"
     }
   }
 }

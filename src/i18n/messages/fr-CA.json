@@ -13,36 +13,49 @@
     "help": "Aide",
     "about": "À propos"
   },
+  "actions": {
+    "addTransaction": "Ajouter une transaction",
+    "importData": "Importer des données",
+    "import": "Importer",
+    "editDashboard": "Modifier le tableau de bord",
+    "saveChanges": "Enregistrer les changements",
+    "resetDefaults": "Réinitialiser par défaut"
+  },
+  "welcome": {
+    "title": "Bienvenue dans Budget App",
+    "subtitle": "Commencez par ajouter votre première transaction ou importer des données de votre banque"
+  },
   "common": {
-    "save": "Sauvegarder",
+    "save": "Enregistrer",
     "cancel": "Annuler",
     "delete": "Supprimer",
-    "edit": "Modifier"
+    "edit": "Modifier",
+    "loading": "Chargement..."
   },
   "widget": {
     "spendingByCategory": {
       "title": "Dépenses par catégorie",
-      "description": "Voyez où va votre argent avec des répartitions visuelles"
+      "description": "Voyez où va votre argent avec des visualisations"
     },
     "recentTransactions": {
       "title": "Transactions récentes",
-      "description": "Vue rapide de votre activité financière récente"
+      "description": "Aperçu rapide de votre dernière activité financière"
     },
     "budgetProgress": {
-      "title": "Progrès du budget",
-      "description": "Suivez vos progrès par rapport à vos objectifs budgétaires"
+      "title": "Progression du budget",
+      "description": "Suivez vos performances par rapport à vos objectifs budgétaires"
     },
     "accountBalances": {
-      "title": "Soldes de compte",
+      "title": "Soldes des comptes",
       "description": "Soldes actuels de tous vos comptes"
     },
     "incomeVsExpenses": {
       "title": "Revenus vs Dépenses",
-      "description": "Comparez vos revenus et dépenses au fil du temps"
+      "description": "Comparez vos gains et vos dépenses au fil du temps"
     },
     "monthlyTrends": {
       "title": "Tendances mensuelles",
-      "description": "Visualisez vos habitudes financières mois par mois"
+      "description": "Visualisez vos schémas financiers mois par mois"
     },
     "upcomingBills": {
       "title": "Factures à venir",

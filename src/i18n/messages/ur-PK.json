@@ -1,65 +1,65 @@
 {
   "nav": {
-    "dashboard": "Dashboard",
-    "transactions": "Transactions",
-    "budgets": "Budgets",
-    "reports": "Reports",
-    "accounts": "Accounts",
-    "categories": "Categories",
-    "goals": "Goals",
-    "import": "Import",
-    "export": "Export",
-    "settings": "Settings",
-    "help": "Help",
-    "about": "About"
+    "dashboard": "ڈیش بورڈ",
+    "transactions": "ٹرانزیکشنز",
+    "budgets": "بجٹ",
+    "reports": "رپورٹس",
+    "accounts": "اکاؤنٹس",
+    "categories": "زمرے",
+    "goals": "مقاصد",
+    "import": "درآمد",
+    "export": "برآمد",
+    "settings": "ترتیبات",
+    "help": "مدد",
+    "about": "بارے میں"
   },
   "actions": {
-    "addTransaction": "Add Transaction",
-    "importData": "Import Data",
-    "import": "Import",
-    "editDashboard": "Edit Dashboard",
-    "saveChanges": "Save Changes",
-    "resetDefaults": "Reset to Defaults"
+    "addTransaction": "ٹرانزیکشن شامل کریں",
+    "importData": "ڈیٹا درآمد کریں",
+    "import": "درآمد",
+    "editDashboard": "ڈیش بورڈ میں ترمیم کریں",
+    "saveChanges": "تبدیلیاں محفوظ کریں",
+    "resetDefaults": "ڈیفالٹس پر ری سیٹ کریں"
   },
   "welcome": {
-    "title": "Welcome to Budget App",
-    "subtitle": "Start by adding your first transaction or importing data from your bank"
+    "title": "بجٹ ایپ میں خوش آمدید",
+    "subtitle": "اپنی پہلی ٹرانزیکشن شامل کرنے یا اپنے بینک سے ڈیٹا درآمد کرنے سے شروع کریں"
   },
   "common": {
-    "save": "Save",
-    "cancel": "Cancel",
-    "delete": "Delete",
-    "edit": "Edit",
-    "loading": "Loading..."
+    "save": "محفوظ کریں",
+    "cancel": "کینسل کریں",
+    "delete": "حذف کریں",
+    "edit": "ترمیم کریں",
+    "loading": "لوڈ ہو رہا ہے..."
   },
   "widget": {
     "spendingByCategory": {
-      "title": "Spending by Category",
-      "description": "See where your money goes with visual breakdowns"
+      "title": "زمرے کے لحاظ سے خرچ",
+      "description": "دیکھیں کہ آپ کا پیسہ کہاں جاتا ہے بصری تقسیم کے ساتھ"
     },
     "recentTransactions": {
-      "title": "Recent Transactions",
-      "description": "Quick view of your latest financial activity"
+      "title": "حالیہ ٹرانزیکشنز",
+      "description": "آپ کی تازہ ترین مالی سرگرمی کا فوری جائزہ"
     },
     "budgetProgress": {
-      "title": "Budget Progress",
-      "description": "Track how you're doing against your budget goals"
+      "title": "بجٹ کی پیشرفت",
+      "description": "دیکھیں کہ آپ اپنے بجٹ کے مقاصد کے خلاف کیسے کر رہے ہیں"
     },
     "accountBalances": {
-      "title": "Account Balances",
-      "description": "Current balances across all your accounts"
+      "title": "اکاؤنٹ بیلنس",
+      "description": "آپ کے تمام اکاؤنٹس میں موجودہ بیلنس"
     },
     "incomeVsExpenses": {
-      "title": "Income vs Expenses",
-      "description": "Compare your earnings and spending over time"
+      "title": "آمدنی بمقابلہ اخراجات",
+      "description": "وقت کے ساتھ اپنی آمدنی اور خرچ کا موازنہ کریں"
     },
     "monthlyTrends": {
-      "title": "Monthly Trends",
-      "description": "Visualize your financial patterns month by month"
+      "title": "ماہانہ رجحانات",
+      "description": "ہر مہینے اپنے مالی پیٹرن کو بصری شکل میں دیکھیں"
     },
     "upcomingBills": {
-      "title": "Upcoming Bills",
-      "description": "Never miss a payment with bill reminders"
+      "title": "آنے والے بل",
+      "description": "بل کی یاد دہانیوں کے ساتھ کبھی بھی ادائیگی مت چھوڑیں"
     }
   }
 }

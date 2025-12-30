@@ -1,65 +1,65 @@
 {
   "nav": {
-    "dashboard": "Dashboard",
-    "transactions": "Transactions",
-    "budgets": "Budgets",
-    "reports": "Reports",
-    "accounts": "Accounts",
-    "categories": "Categories",
-    "goals": "Goals",
-    "import": "Import",
-    "export": "Export",
-    "settings": "Settings",
-    "help": "Help",
-    "about": "About"
+    "dashboard": "ਡੈਸ਼ਬੋਰਡ",
+    "transactions": "ਲੈਣ-ਦੇਣ",
+    "budgets": "ਬਜਟ",
+    "reports": "ਰਿਪੋਰਟਾਂ",
+    "accounts": "ਖਾਤੇ",
+    "categories": "ਸ਼੍ਰੇਣੀਆਂ",
+    "goals": "ਲਕਸ਼",
+    "import": "ਆਯਾਤ",
+    "export": "ਨਿਰਯਾਤ",
+    "settings": "ਸੈਟਿੰਗਜ਼",
+    "help": "ਮਦਦ",
+    "about": "ਬਾਰੇ"
   },
   "actions": {
-    "addTransaction": "Add Transaction",
-    "importData": "Import Data",
-    "import": "Import",
-    "editDashboard": "Edit Dashboard",
-    "saveChanges": "Save Changes",
-    "resetDefaults": "Reset to Defaults"
+    "addTransaction": "ਲੈਣ-ਦੇਣ ਸ਼ਾਮਲ ਕਰੋ",
+    "importData": "ਡਾਟਾ ਆਯਾਤ ਕਰੋ",
+    "import": "ਆਯਾਤ",
+    "editDashboard": "ਡੈਸ਼ਬੋਰਡ ਸੰਪਾਦਿਤ ਕਰੋ",
+    "saveChanges": "ਬਦਲਾਅ ਸੁਰੱਖਿਅਤ ਕਰੋ",
+    "resetDefaults": "ਡਿਫਾਲਟ 'ਤੇ ਰੀਸੈਟ ਕਰੋ"
   },
   "welcome": {
-    "title": "Welcome to Budget App",
-    "subtitle": "Start by adding your first transaction or importing data from your bank"
+    "title": "ਬਜਟ ਐਪ ਵਿੱਚ ਤੁਹਾਡਾ ਸੁਆਗਤ ਹੈ",
+    "subtitle": "ਆਪਣਾ ਪਹਿਲਾ ਲੈਣ-ਦੇਣ ਸ਼ਾਮਲ ਕਰਨ ਜਾਂ ਆਪਣੇ ਬੈਂਕ ਤੋਂ ਡਾਟਾ ਆਯਾਤ ਕਰਨ ਨਾਲ ਸ਼ੁਰੂ ਕਰੋ"
   },
   "common": {
-    "save": "Save",
-    "cancel": "Cancel",
-    "delete": "Delete",
-    "edit": "Edit",
-    "loading": "Loading..."
+    "save": "ਸੁਰੱਖਿਅਤ ਕਰੋ",
+    "cancel": "ਰੱਦ ਕਰੋ",
+    "delete": "ਮਿਟਾਓ",
+    "edit": "ਸੰਪਾਦਿਤ ਕਰੋ",
+    "loading": "ਲੋਡ ਹੋ ਰਿਹਾ ਹੈ..."
   },
   "widget": {
     "spendingByCategory": {
-      "title": "Spending by Category",
-      "description": "See where your money goes with visual breakdowns"
+      "title": "ਸ਼੍ਰੇਣੀ ਅਨੁਸਾਰ ਖਰਚ",
+      "description": "ਦੇਖੋ ਤੁਹਾਡਾ ਪੈਸਾ ਕਿੱਥੇ ਜਾਂਦਾ ਹੈ ਵਿਜ਼ੂਅਲ ਵਿਭਾਜਨ ਨਾਲ"
     },
     "recentTransactions": {
-      "title": "Recent Transactions",
-      "description": "Quick view of your latest financial activity"
+      "title": "ਤਾਜ਼ਾ ਲੈਣ-ਦੇਣ",
+      "description": "ਤੁਹਾਡੇ ਆਖਰੀ ਵਿੱਤੀ ਗਤੀਵਿਧੀ ਦਾ ਤੇਜ਼ ਨਜ਼ਾਰਾ"
     },
     "budgetProgress": {
-      "title": "Budget Progress",
-      "description": "Track how you're doing against your budget goals"
+      "title": "ਬਜਟ ਪ੍ਰਗਤੀ",
+      "description": "ਦੇਖੋ ਤੁਸੀਂ ਆਪਣੇ ਬਜਟ ਲਕਸ਼ਾਂ ਦੇ ਖਿਲਾਫ ਕਿਵੇਂ ਕਰ ਰਹੇ ਹੋ"
     },
     "accountBalances": {
-      "title": "Account Balances",
-      "description": "Current balances across all your accounts"
+      "title": "ਖਾਤੇ ਦੇ ਬਕਾਇਆ",
+      "description": "ਤੁਹਾਡੇ ਸਾਰੇ ਖਾਤਿਆਂ ਵਿੱਚ ਮੌਜੂਦਾ ਬਕਾਇਆ"
     },
     "incomeVsExpenses": {
-      "title": "Income vs Expenses",
-      "description": "Compare your earnings and spending over time"
+      "title": "ਆਮਦਨ ਬਨਾਮ ਖਰਚ",
+      "description": "ਸਮੇਂ ਦੇ ਨਾਲ ਤੁਹਾਡੇ ਕਮਾਈ ਅਤੇ ਖਰਚ ਦੀ ਤੁਲਨਾ ਕਰੋ"
     },
     "monthlyTrends": {
-      "title": "Monthly Trends",
-      "description": "Visualize your financial patterns month by month"
+      "title": "ਮਾਸਿਕ ਰੁਝਾਨ",
+      "description": "ਮਹੀਨੇ ਦਰ ਮਹੀਨੇ ਤੁਹਾਡੇ ਵਿੱਤੀ ਪੈਟਰਨ ਨੂੰ ਵਿਜ਼ੂਅਲਾਈਜ਼ ਕਰੋ"
     },
     "upcomingBills": {
-      "title": "Upcoming Bills",
-      "description": "Never miss a payment with bill reminders"
+      "title": "ਆਉਣ ਵਾਲੀਆਂ ਬਿਲਾਂ",
+      "description": "ਬਿਲ ਯਾਦ ਦਿਵਾਣੀਆਂ ਨਾਲ ਕਿਸੇ ਭੁਗਤਾਨ ਨੂੰ ਨਾ ਗੁਆਓ"
     }
   }
 }

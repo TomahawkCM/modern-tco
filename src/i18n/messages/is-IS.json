@@ -1,65 +1,65 @@
 {
   "nav": {
-    "dashboard": "Dashboard",
-    "transactions": "Transactions",
-    "budgets": "Budgets",
-    "reports": "Reports",
-    "accounts": "Accounts",
-    "categories": "Categories",
-    "goals": "Goals",
-    "import": "Import",
-    "export": "Export",
-    "settings": "Settings",
-    "help": "Help",
-    "about": "About"
+    "dashboard": "Stjórnborð",
+    "transactions": "Fjárhagsfærslur",
+    "budgets": "Fjármál",
+    "reports": "Skýrslur",
+    "accounts": "Reikningar",
+    "categories": "Flokkar",
+    "goals": "Markmið",
+    "import": "Innflutningur",
+    "export": "Útflutningur",
+    "settings": "Stillingar",
+    "help": "Aðstoð",
+    "about": "Um"
   },
   "actions": {
-    "addTransaction": "Add Transaction",
-    "importData": "Import Data",
-    "import": "Import",
-    "editDashboard": "Edit Dashboard",
-    "saveChanges": "Save Changes",
-    "resetDefaults": "Reset to Defaults"
+    "addTransaction": "Bæta við fjárhagsfærslu",
+    "importData": "Innflutningur gagna",
+    "import": "Innflutningur",
+    "editDashboard": "Breyta stjórnborði",
+    "saveChanges": "Vista breytingar",
+    "resetDefaults": "Endurstilla í sjálfgefið"
   },
   "welcome": {
-    "title": "Welcome to Budget App",
-    "subtitle": "Start by adding your first transaction or importing data from your bank"
+    "title": "Velkomin í Fjármálaskapp",
+    "subtitle": "Byrjaðu á því að bæta við fyrstu fjárhagsfærslunni eða innflutningi gagna frá bankanum þínum"
   },
   "common": {
-    "save": "Save",
-    "cancel": "Cancel",
-    "delete": "Delete",
-    "edit": "Edit",
-    "loading": "Loading..."
+    "save": "Vista",
+    "cancel": "Hætta við",
+    "delete": "Eyða",
+    "edit": "Breyta",
+    "loading": "Hladar..."
   },
   "widget": {
     "spendingByCategory": {
-      "title": "Spending by Category",
-      "description": "See where your money goes with visual breakdowns"
+      "title": "Útgjöld eftir flokki",
+      "description": "Sjáðu hvar peningar þínir fara með sjónrænum sundurliðunum"
     },
     "recentTransactions": {
-      "title": "Recent Transactions",
-      "description": "Quick view of your latest financial activity"
+      "title": "Nýlegar fjárhagsfærslur",
+      "description": "Fljótleg yfirlit yfir nýjustu fjárhagslegu virkni þína"
     },
     "budgetProgress": {
-      "title": "Budget Progress",
-      "description": "Track how you're doing against your budget goals"
+      "title": "Fjármálaframvinda",
+      "description": "Fylgdu hvernig þér gengur að ná fjármálamarkmiðum"
     },
     "accountBalances": {
-      "title": "Account Balances",
-      "description": "Current balances across all your accounts"
+      "title": "Reikningajafnvægi",
+      "description": "Núverandi jafnvægi á öllum reikningum þínum"
     },
     "incomeVsExpenses": {
-      "title": "Income vs Expenses",
-      "description": "Compare your earnings and spending over time"
+      "title": "Tekjur vs. útgjöld",
+      "description": "Samanburður á tekjum þínum og útgjöldum yfir tíma"
     },
     "monthlyTrends": {
-      "title": "Monthly Trends",
-      "description": "Visualize your financial patterns month by month"
+      "title": "Mánaðarlegar þróanir",
+      "description": "Sjónrænt yfirlit yfir fjárhagslegar mynstur mánaðarlega"
     },
     "upcomingBills": {
-      "title": "Upcoming Bills",
-      "description": "Never miss a payment with bill reminders"
+      "title": "Komandi reikningar",
+      "description": "Missið aldrei af greiðslu með reikningaminningum"
     }
   }
 }

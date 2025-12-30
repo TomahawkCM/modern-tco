@@ -1,65 +1,65 @@
 {
   "nav": {
-    "dashboard": "Dashboard",
-    "transactions": "Transactions",
-    "budgets": "Budgets",
-    "reports": "Reports",
-    "accounts": "Accounts",
-    "categories": "Categories",
-    "goals": "Goals",
-    "import": "Import",
-    "export": "Export",
-    "settings": "Settings",
-    "help": "Help",
-    "about": "About"
+    "dashboard": "Etxea",
+    "transactions": "Transakzioak",
+    "budgets": "Aurrekontuak",
+    "reports": "Txostenak",
+    "accounts": "Kontuak",
+    "categories": "Kategoriek",
+    "goals": "Helburuak",
+    "import": "Inportatu",
+    "export": "Esportatu",
+    "settings": "Ezarpenak",
+    "help": "Laguntza",
+    "about": "Honi buruz"
   },
   "actions": {
-    "addTransaction": "Add Transaction",
-    "importData": "Import Data",
-    "import": "Import",
-    "editDashboard": "Edit Dashboard",
-    "saveChanges": "Save Changes",
-    "resetDefaults": "Reset to Defaults"
+    "addTransaction": "Transakzioa Gehitu",
+    "importData": "Datuak Inportatu",
+    "import": "Inportatu",
+    "editDashboard": "Etxea Editatu",
+    "saveChanges": "Aldaketak Gorde",
+    "resetDefaults": "Lehenetsitakoak Berrezarri"
   },
   "welcome": {
-    "title": "Welcome to Budget App",
-    "subtitle": "Start by adding your first transaction or importing data from your bank"
+    "title": "Ongi Etorri Aurrekontu Aplikaziora",
+    "subtitle": "Hasi zure lehen transakzioa gehituz edo zure bankutik datuak inportatuz"
   },
   "common": {
-    "save": "Save",
-    "cancel": "Cancel",
-    "delete": "Delete",
-    "edit": "Edit",
-    "loading": "Loading..."
+    "save": "Gorde",
+    "cancel": "Ezeztatu",
+    "delete": "Ezabatu",
+    "edit": "Editatu",
+    "loading": "Kargatzen..."
   },
   "widget": {
     "spendingByCategory": {
-      "title": "Spending by Category",
-      "description": "See where your money goes with visual breakdowns"
+      "title": "Kategorien Araberako Gastuak",
+      "description": "Ikusi nola doan zure dirua irudikapen bisualekin"
     },
     "recentTransactions": {
-      "title": "Recent Transactions",
-      "description": "Quick view of your latest financial activity"
+      "title": "Azken Transakzioak",
+      "description": "Azken jarduera finantzarioaren ikuspegi azkarra"
     },
     "budgetProgress": {
-      "title": "Budget Progress",
-      "description": "Track how you're doing against your budget goals"
+      "title": "Aurrekontu Aurrerapena",
+      "description": "Jarri nola doazen zure aurrekontu helburuekin"
     },
     "accountBalances": {
-      "title": "Account Balances",
-      "description": "Current balances across all your accounts"
+      "title": "Kontu Balantzeak",
+      "description": "Zure kontu guztietan egungo balantzeak"
     },
     "incomeVsExpenses": {
-      "title": "Income vs Expenses",
-      "description": "Compare your earnings and spending over time"
+      "title": "Sarrerak vs Gastuak",
+      "description": "Konparatu zure irabaziak eta gastuak denboran zehar"
     },
     "monthlyTrends": {
-      "title": "Monthly Trends",
-      "description": "Visualize your financial patterns month by month"
+      "title": "Hileko Joera",
+      "description": "Irudikatu zure finantza patroiak hilabetez hilabete"
     },
     "upcomingBills": {
-      "title": "Upcoming Bills",
-      "description": "Never miss a payment with bill reminders"
+      "title": "Etorkizuneko Fakturak",
+      "description": "Ez galdu ordainketa faktura gogorarazleekin"
     }
   }
 }

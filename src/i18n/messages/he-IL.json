@@ -1,65 +1,65 @@
 {
   "nav": {
-    "dashboard": "Dashboard",
-    "transactions": "Transactions",
-    "budgets": "Budgets",
-    "reports": "Reports",
-    "accounts": "Accounts",
-    "categories": "Categories",
-    "goals": "Goals",
-    "import": "Import",
-    "export": "Export",
-    "settings": "Settings",
-    "help": "Help",
-    "about": "About"
+    "dashboard": "לוח בקרה",
+    "transactions": "עסקאות",
+    "budgets": "תקציבים",
+    "reports": "דוחות",
+    "accounts": "חשבונות",
+    "categories": "קטגוריות",
+    "goals": "מטרות",
+    "import": "ייבוא",
+    "export": "ייצוא",
+    "settings": "הגדרות",
+    "help": "עזרה",
+    "about": "אודות"
   },
   "actions": {
-    "addTransaction": "Add Transaction",
-    "importData": "Import Data",
-    "import": "Import",
-    "editDashboard": "Edit Dashboard",
-    "saveChanges": "Save Changes",
-    "resetDefaults": "Reset to Defaults"
+    "addTransaction": "הוסף עסקה",
+    "importData": "ייבא נתונים",
+    "import": "ייבוא",
+    "editDashboard": "ערוך לוח בקרה",
+    "saveChanges": "שמור שינויים",
+    "resetDefaults": "אפס לברירות מחדל"
   },
   "welcome": {
-    "title": "Welcome to Budget App",
-    "subtitle": "Start by adding your first transaction or importing data from your bank"
+    "title": "ברוך הבא לאפליקציית התקציב",
+    "subtitle": "התחל בהוספת העסקה הראשונה שלך או בייבוא נתונים מהבנק שלך"
   },
   "common": {
-    "save": "Save",
-    "cancel": "Cancel",
-    "delete": "Delete",
-    "edit": "Edit",
-    "loading": "Loading..."
+    "save": "שמור",
+    "cancel": "ביטול",
+    "delete": "מחק",
+    "edit": "ערוך",
+    "loading": "טוען..."
   },
   "widget": {
     "spendingByCategory": {
-      "title": "Spending by Category",
-      "description": "See where your money goes with visual breakdowns"
+      "title": "הוצאות לפי קטגוריה",
+      "description": "ראה לאן הולך הכסף שלך עם פיצול חזותי"
     },
     "recentTransactions": {
-      "title": "Recent Transactions",
-      "description": "Quick view of your latest financial activity"
+      "title": "עסקאות אחרונות",
+      "description": "תצוגה מהירה של הפעילות הפיננסית האחרונה שלך"
     },
     "budgetProgress": {
-      "title": "Budget Progress",
-      "description": "Track how you're doing against your budget goals"
+      "title": "התקדמות התקציב",
+      "description": "עקוב אחרי ההתקדמות שלך מול מטרות התקציב"
     },
     "accountBalances": {
-      "title": "Account Balances",
-      "description": "Current balances across all your accounts"
+      "title": "יתרות חשבון",
+      "description": "יתרות נוכחיות בכל החשבונות שלך"
     },
     "incomeVsExpenses": {
-      "title": "Income vs Expenses",
-      "description": "Compare your earnings and spending over time"
+      "title": "הכנסות מול הוצאות",
+      "description": "השווה בין ההכנסות להוצאות שלך לאורך זמן"
     },
     "monthlyTrends": {
-      "title": "Monthly Trends",
-      "description": "Visualize your financial patterns month by month"
+      "title": "מגמות חודשיות",
+      "description": "וויזואליזציה של דפוסי הכסף שלך חודש אחרי חודש"
     },
     "upcomingBills": {
-      "title": "Upcoming Bills",
-      "description": "Never miss a payment with bill reminders"
+      "title": "חשבונות קרובים",
+      "description": "אל תפספס תשלום עם תזכורות לחשבונות"
     }
   }
 }

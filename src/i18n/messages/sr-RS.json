@@ -1,65 +1,65 @@
 {
   "nav": {
-    "dashboard": "Dashboard",
-    "transactions": "Transactions",
-    "budgets": "Budgets",
-    "reports": "Reports",
-    "accounts": "Accounts",
-    "categories": "Categories",
-    "goals": "Goals",
-    "import": "Import",
-    "export": "Export",
-    "settings": "Settings",
-    "help": "Help",
-    "about": "About"
+    "dashboard": "Kontrolna tabla",
+    "transactions": "Transakcije",
+    "budgets": "Budžeti",
+    "reports": "Izveštaji",
+    "accounts": "Računi",
+    "categories": "Kategorije",
+    "goals": "Ciljevi",
+    "import": "Uvezi",
+    "export": "Izvezi",
+    "settings": "Podešavanja",
+    "help": "Pomoć",
+    "about": "O aplikaciji"
   },
   "actions": {
-    "addTransaction": "Add Transaction",
-    "importData": "Import Data",
-    "import": "Import",
-    "editDashboard": "Edit Dashboard",
-    "saveChanges": "Save Changes",
-    "resetDefaults": "Reset to Defaults"
+    "addTransaction": "Dodaj transakciju",
+    "importData": "Uvezi podatke",
+    "import": "Uvezi",
+    "editDashboard": "Uredi kontrolnu tablu",
+    "saveChanges": "Sačuvaj promene",
+    "resetDefaults": "Vrati na podrazumevano"
   },
   "welcome": {
-    "title": "Welcome to Budget App",
-    "subtitle": "Start by adding your first transaction or importing data from your bank"
+    "title": "Dobrodošli u Budžet aplikaciju",
+    "subtitle": "Počnite dodavanjem prve transakcije ili uvozom podataka iz vaše banke"
   },
   "common": {
-    "save": "Save",
-    "cancel": "Cancel",
-    "delete": "Delete",
-    "edit": "Edit",
-    "loading": "Loading..."
+    "save": "Sačuvaj",
+    "cancel": "Otkaži",
+    "delete": "Obriši",
+    "edit": "Uredi",
+    "loading": "Učitavanje..."
   },
   "widget": {
     "spendingByCategory": {
-      "title": "Spending by Category",
-      "description": "See where your money goes with visual breakdowns"
+      "title": "Troškovi po kategorijama",
+      "description": "Pogledajte gde odlazi vaš novac uz vizuelne prikaze"
     },
     "recentTransactions": {
-      "title": "Recent Transactions",
-      "description": "Quick view of your latest financial activity"
+      "title": "Nedavne transakcije",
+      "description": "Brzi pregled vaše poslednje finansijske aktivnosti"
     },
     "budgetProgress": {
-      "title": "Budget Progress",
-      "description": "Track how you're doing against your budget goals"
+      "title": "Napredak budžeta",
+      "description": "Pratite kako napredujete prema ciljevima budžeta"
     },
     "accountBalances": {
-      "title": "Account Balances",
-      "description": "Current balances across all your accounts"
+      "title": "Stanja računa",
+      "description": "Trenutna stanja na svim vašim računima"
     },
     "incomeVsExpenses": {
-      "title": "Income vs Expenses",
-      "description": "Compare your earnings and spending over time"
+      "title": "Prihodi vs Troškovi",
+      "description": "Uporedite svoje prihode i troškove tokom vremena"
     },
     "monthlyTrends": {
-      "title": "Monthly Trends",
-      "description": "Visualize your financial patterns month by month"
+      "title": "Mesečni trendovi",
+      "description": "Vizualizujte svoje finansijske obrasce mesečno"
     },
     "upcomingBills": {
-      "title": "Upcoming Bills",
-      "description": "Never miss a payment with bill reminders"
+      "title": "Nadolazeći računi",
+      "description": "Nikada ne propustite uplatu uz podsetnike za račune"
     }
   }
 }

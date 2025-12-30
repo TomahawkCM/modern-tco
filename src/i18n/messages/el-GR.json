@@ -1,65 +1,65 @@
 {
   "nav": {
-    "dashboard": "Dashboard",
-    "transactions": "Transactions",
-    "budgets": "Budgets",
-    "reports": "Reports",
-    "accounts": "Accounts",
-    "categories": "Categories",
-    "goals": "Goals",
-    "import": "Import",
-    "export": "Export",
-    "settings": "Settings",
-    "help": "Help",
-    "about": "About"
+    "dashboard": "Πίνακας Ελέγχου",
+    "transactions": "Συναλλαγές",
+    "budgets": "Προϋπολογισμοί",
+    "reports": "Αναφορές",
+    "accounts": "Λογαριασμοί",
+    "categories": "Κατηγορίες",
+    "goals": "Στόχοι",
+    "import": "Εισαγωγή",
+    "export": "Εξαγωγή",
+    "settings": "Ρυθμίσεις",
+    "help": "Βοήθεια",
+    "about": "Σχετικά"
   },
   "actions": {
-    "addTransaction": "Add Transaction",
-    "importData": "Import Data",
-    "import": "Import",
-    "editDashboard": "Edit Dashboard",
-    "saveChanges": "Save Changes",
-    "resetDefaults": "Reset to Defaults"
+    "addTransaction": "Προσθήκη Συναλλαγής",
+    "importData": "Εισαγωγή Δεδομένων",
+    "import": "Εισαγωγή",
+    "editDashboard": "Επεξεργασία Πίνακα Ελέγχου",
+    "saveChanges": "Αποθήκευση Αλλαγών",
+    "resetDefaults": "Επαναφορά στις Προεπιλογές"
   },
   "welcome": {
-    "title": "Welcome to Budget App",
-    "subtitle": "Start by adding your first transaction or importing data from your bank"
+    "title": "Καλώς ήρθατε στην Εφαρμογή Προϋπολογισμού",
+    "subtitle": "Ξεκινήστε προσθέτοντας τη πρώτη σας συναλλαγή ή εισάγοντας δεδομένα από την τράπεζά σας"
   },
   "common": {
-    "save": "Save",
-    "cancel": "Cancel",
-    "delete": "Delete",
-    "edit": "Edit",
-    "loading": "Loading..."
+    "save": "Αποθήκευση",
+    "cancel": "Ακύρωση",
+    "delete": "Διαγραφή",
+    "edit": "Επεξεργασία",
+    "loading": "Φόρτωση..."
   },
   "widget": {
     "spendingByCategory": {
-      "title": "Spending by Category",
-      "description": "See where your money goes with visual breakdowns"
+      "title": "Δαπάνες κατά Κατηγορία",
+      "description": "Δείτε πού πηγαίνουν τα χρήματά σας με οπτικές αναλύσεις"
     },
     "recentTransactions": {
-      "title": "Recent Transactions",
-      "description": "Quick view of your latest financial activity"
+      "title": "Πρόσφατες Συναλλαγές",
+      "description": "Γρήγορη επισκόπηση της τελευταίας σας χρηματοοικονομικής δραστηριότητας"
     },
     "budgetProgress": {
-      "title": "Budget Progress",
-      "description": "Track how you're doing against your budget goals"
+      "title": "Πρόοδος Προϋπολογισμού",
+      "description": "Παρακολουθήστε την πρόοδό σας σε σχέση με τους στόχους προϋπολογισμού"
     },
     "accountBalances": {
-      "title": "Account Balances",
-      "description": "Current balances across all your accounts"
+      "title": "Υπολοίπα Λογαριασμών",
+      "description": "Τρέχοντα υπόλοιπα σε όλους τους λογαριασμούς σας"
     },
     "incomeVsExpenses": {
-      "title": "Income vs Expenses",
-      "description": "Compare your earnings and spending over time"
+      "title": "Έσοδα vs Δαπάνες",
+      "description": "Συγκρίνετε τα έσοδά σας και τις δαπάνες σας με την πάροδο του χρόνου"
     },
     "monthlyTrends": {
-      "title": "Monthly Trends",
-      "description": "Visualize your financial patterns month by month"
+      "title": "Μηνιαίες Τάσεις",
+      "description": "Οπτικοποιήστε τα χρηματοοικονομικά σας μοτίβα μήνα προς μήνα"
     },
     "upcomingBills": {
-      "title": "Upcoming Bills",
-      "description": "Never miss a payment with bill reminders"
+      "title": "Επερχόμενοι Λογαριασμοί",
+      "description": "Μην χάσετε ποτέ μια πληρωμή με υπενθυμίσεις λογαριασμών"
     }
   }
 }

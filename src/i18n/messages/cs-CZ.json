@@ -1,65 +1,65 @@
 {
   "nav": {
-    "dashboard": "Dashboard",
-    "transactions": "Transactions",
-    "budgets": "Budgets",
-    "reports": "Reports",
-    "accounts": "Accounts",
-    "categories": "Categories",
-    "goals": "Goals",
-    "import": "Import",
-    "export": "Export",
-    "settings": "Settings",
-    "help": "Help",
-    "about": "About"
+    "dashboard": "Přehled",
+    "transactions": "Transakce",
+    "budgets": "Rozpočty",
+    "reports": "Reporty",
+    "accounts": "Účty",
+    "categories": "Kategorie",
+    "goals": "Cíle",
+    "import": "Importovat",
+    "export": "Exportovat",
+    "settings": "Nastavení",
+    "help": "Nápověda",
+    "about": "O aplikaci"
   },
   "actions": {
-    "addTransaction": "Add Transaction",
-    "importData": "Import Data",
-    "import": "Import",
-    "editDashboard": "Edit Dashboard",
-    "saveChanges": "Save Changes",
-    "resetDefaults": "Reset to Defaults"
+    "addTransaction": "Přidat transakci",
+    "importData": "Importovat data",
+    "import": "Importovat",
+    "editDashboard": "Upravit přehled",
+    "saveChanges": "Uložit změny",
+    "resetDefaults": "Obnovit výchozí nastavení"
   },
   "welcome": {
-    "title": "Welcome to Budget App",
-    "subtitle": "Start by adding your first transaction or importing data from your bank"
+    "title": "Vítejte v aplikaci Rozpočet",
+    "subtitle": "Začněte přidáním první transakce nebo importem dat z banky"
   },
   "common": {
-    "save": "Save",
-    "cancel": "Cancel",
-    "delete": "Delete",
-    "edit": "Edit",
-    "loading": "Loading..."
+    "save": "Uložit",
+    "cancel": "Zrušit",
+    "delete": "Smazat",
+    "edit": "Upravit",
+    "loading": "Načítání..."
   },
   "widget": {
     "spendingByCategory": {
-      "title": "Spending by Category",
-      "description": "See where your money goes with visual breakdowns"
+      "title": "Výdaje podle kategorie",
+      "description": "Zjistěte, kam vaše peníze jdou, s vizuálním rozdělením"
     },
     "recentTransactions": {
-      "title": "Recent Transactions",
-      "description": "Quick view of your latest financial activity"
+      "title": "Nedávné transakce",
+      "description": "Rychlý přehled vaší poslední finanční aktivity"
     },
     "budgetProgress": {
-      "title": "Budget Progress",
-      "description": "Track how you're doing against your budget goals"
+      "title": "Pokrok v rozpočtu",
+      "description": "Sledujte, jak si vedete vůči svým rozpočtovým cílům"
     },
     "accountBalances": {
-      "title": "Account Balances",
-      "description": "Current balances across all your accounts"
+      "title": "Zůstatky na účtech",
+      "description": "Aktuální zůstatky na všech vašich účtech"
     },
     "incomeVsExpenses": {
-      "title": "Income vs Expenses",
-      "description": "Compare your earnings and spending over time"
+      "title": "Příjmy vs Výdaje",
+      "description": "Porovnejte své příjmy a výdaje v průběhu času"
     },
     "monthlyTrends": {
-      "title": "Monthly Trends",
-      "description": "Visualize your financial patterns month by month"
+      "title": "Měsíční trendy",
+      "description": "Vizualizujte své finanční vzorce měsíc po měsíci"
     },
     "upcomingBills": {
-      "title": "Upcoming Bills",
-      "description": "Never miss a payment with bill reminders"
+      "title": "Nadcházející účty",
+      "description": "Nikdy nezapomeňte na platbu s připomínkami účtů"
     }
   }
 }

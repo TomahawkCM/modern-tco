@@ -1,65 +1,65 @@
 {
   "nav": {
-    "dashboard": "Dashboard",
-    "transactions": "Transactions",
-    "budgets": "Budgets",
-    "reports": "Reports",
-    "accounts": "Accounts",
-    "categories": "Categories",
-    "goals": "Goals",
-    "import": "Import",
-    "export": "Export",
-    "settings": "Settings",
-    "help": "Help",
-    "about": "About"
+    "dashboard": "დაშბორდი",
+    "transactions": "ტრანზაქციები",
+    "budgets": "ბიუჯეტები",
+    "reports": "რეპორტები",
+    "accounts": "ანგარიშები",
+    "categories": "კატეგორიები",
+    "goals": "მიზნები",
+    "import": "იმპორტი",
+    "export": "ექსპორტი",
+    "settings": "პარამეტრები",
+    "help": "დახმარება",
+    "about": "შესახებ"
   },
   "actions": {
-    "addTransaction": "Add Transaction",
-    "importData": "Import Data",
-    "import": "Import",
-    "editDashboard": "Edit Dashboard",
-    "saveChanges": "Save Changes",
-    "resetDefaults": "Reset to Defaults"
+    "addTransaction": "ტრანზაქციის დამატება",
+    "importData": "მონაცემების იმპორტი",
+    "import": "იმპორტი",
+    "editDashboard": "დაშბორდის რედაქტირება",
+    "saveChanges": "შეცვალების შენახვა",
+    "resetDefaults": "ნაგულისხმევზე დაბრუნება"
   },
   "welcome": {
-    "title": "Welcome to Budget App",
-    "subtitle": "Start by adding your first transaction or importing data from your bank"
+    "title": "კეთილი იყოს თქვენი მობრძანება ბიუჯეტების აპლიკაციაში",
+    "subtitle": "დაიწყეთ თქვენი პირველი ტრანზაქციის დამატებით ან ბანკიდან მონაცემების იმპორტით"
   },
   "common": {
-    "save": "Save",
-    "cancel": "Cancel",
-    "delete": "Delete",
-    "edit": "Edit",
-    "loading": "Loading..."
+    "save": "შენახვა",
+    "cancel": "გაუქმება",
+    "delete": "წაშლა",
+    "edit": "რედაქტირება",
+    "loading": "იტვირთება..."
   },
   "widget": {
     "spendingByCategory": {
-      "title": "Spending by Category",
-      "description": "See where your money goes with visual breakdowns"
+      "title": "ხარჯები კატეგორიების მიხედვით",
+      "description": "იხილეთ, სად მიდის თქვენი ფული ვიზუალური გაწვდებით"
     },
     "recentTransactions": {
-      "title": "Recent Transactions",
-      "description": "Quick view of your latest financial activity"
+      "title": "ბოლო ტრანზაქციები",
+      "description": "სწრაფი ხედი თქვენი ბოლო ფინანსური აქტივობების"
     },
     "budgetProgress": {
-      "title": "Budget Progress",
-      "description": "Track how you're doing against your budget goals"
+      "title": "ბიუჯეტის პროგრესი",
+      "description": "მოიძიეთ, როგორ მიდიხართ თქვენი ბიუჯეტის მიზნების წინააღმდეგ"
     },
     "accountBalances": {
-      "title": "Account Balances",
-      "description": "Current balances across all your accounts"
+      "title": "ანგარიშების ბალანსები",
+      "description": "მიმდინარე ბალანსები ყველა ანგარიშზე"
     },
     "incomeVsExpenses": {
-      "title": "Income vs Expenses",
-      "description": "Compare your earnings and spending over time"
+      "title": "შემოსავალი და ხარჯები",
+      "description": "შეადარეთ თქვენი შემოსავალი და ხარჯები დროში"
     },
     "monthlyTrends": {
-      "title": "Monthly Trends",
-      "description": "Visualize your financial patterns month by month"
+      "title": "თვიური ტენდენციები",
+      "description": "ვიზუალიზაცია თქვენი ფინანსური პატერნების თვეში"
     },
     "upcomingBills": {
-      "title": "Upcoming Bills",
-      "description": "Never miss a payment with bill reminders"
+      "title": "მომავალი გადასახადები",
+      "description": "არ გამოტოვოთ გადახდა გადასახადების შეხსენებებით"
     }
   }
 }

@@ -1,65 +1,65 @@
 {
   "nav": {
-    "dashboard": "Dashboard",
-    "transactions": "Transactions",
-    "budgets": "Budgets",
-    "reports": "Reports",
-    "accounts": "Accounts",
-    "categories": "Categories",
-    "goals": "Goals",
-    "import": "Import",
-    "export": "Export",
-    "settings": "Settings",
-    "help": "Help",
-    "about": "About"
+    "dashboard": "Ibhodi",
+    "transactions": "Izenzo",
+    "budgets": "Izabelomali",
+    "reports": "Imibiko",
+    "accounts": "Akhawunti",
+    "categories": "Izigaba",
+    "goals": "Izinhloso",
+    "import": "Faka",
+    "export": "Phuma",
+    "settings": "Izilungiselelo",
+    "help": "Usizo",
+    "about": "Mayelana"
   },
   "actions": {
-    "addTransaction": "Add Transaction",
-    "importData": "Import Data",
-    "import": "Import",
-    "editDashboard": "Edit Dashboard",
-    "saveChanges": "Save Changes",
-    "resetDefaults": "Reset to Defaults"
+    "addTransaction": "Engeza Izenzo",
+    "importData": "Faka Idatha",
+    "import": "Faka",
+    "editDashboard": "Hlela Ibhodi",
+    "saveChanges": "Gcina Izinguquko",
+    "resetDefaults": "Buyisela Ezizenzekelayo"
   },
   "welcome": {
-    "title": "Welcome to Budget App",
-    "subtitle": "Start by adding your first transaction or importing data from your bank"
+    "title": "Wamkelekile kuhlelo lwezabelomali",
+    "subtitle": "Qala ngokwengeza isenzo sakho sokuqala noma ukufaka idatha evela ebhange lakho"
   },
   "common": {
-    "save": "Save",
-    "cancel": "Cancel",
-    "delete": "Delete",
-    "edit": "Edit",
-    "loading": "Loading..."
+    "save": "Gcina",
+    "cancel": "Khansela",
+    "delete": "Susa",
+    "edit": "Hlela",
+    "loading": "Landa..."
   },
   "widget": {
     "spendingByCategory": {
-      "title": "Spending by Category",
-      "description": "See where your money goes with visual breakdowns"
+      "title": "Ukuchitha Ngaphakathi Kwezigaba",
+      "description": "Bona lapho imali yakho iya khona ngezithombe ezibonakalayo"
     },
     "recentTransactions": {
-      "title": "Recent Transactions",
-      "description": "Quick view of your latest financial activity"
+      "title": "Izenzo Zakamuva",
+      "description": "Umbono osheshayo wezokusebenza zakho zezimali zakamuva"
     },
     "budgetProgress": {
-      "title": "Budget Progress",
-      "description": "Track how you're doing against your budget goals"
+      "title": "Inqubekelaphambili Yezezimali",
+      "description": "Landela ukuthi uhamba kanjani ngokuhambisana nezinhloso zakho zezimali"
     },
     "accountBalances": {
-      "title": "Account Balances",
-      "description": "Current balances across all your accounts"
+      "title": "Izibalo Zeakhawunti",
+      "description": "Izibalo zamanje kuzo zonke izinkontileka zakho"
     },
     "incomeVsExpenses": {
-      "title": "Income vs Expenses",
-      "description": "Compare your earnings and spending over time"
+      "title": "Imali Engenayo vs Izindleko",
+      "description": "Qhathanisa imali oyitholayo nezindleko zakho ngokuhamba kwesikhathi"
     },
     "monthlyTrends": {
-      "title": "Monthly Trends",
-      "description": "Visualize your financial patterns month by month"
+      "title": "Iziqondiso Zenyanga",
+      "description": "Bona izimo zezimali zakho ngenyanga"
     },
     "upcomingBills": {
-      "title": "Upcoming Bills",
-      "description": "Never miss a payment with bill reminders"
+      "title": "Amabhili Azoza",
+      "description": "Ungaphuthelwa ukukhokha ngezikhumbuzo zamabhili"
     }
   }
 }

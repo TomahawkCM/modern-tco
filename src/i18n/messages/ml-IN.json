@@ -1,65 +1,65 @@
 {
   "nav": {
-    "dashboard": "Dashboard",
-    "transactions": "Transactions",
-    "budgets": "Budgets",
-    "reports": "Reports",
-    "accounts": "Accounts",
-    "categories": "Categories",
-    "goals": "Goals",
-    "import": "Import",
-    "export": "Export",
-    "settings": "Settings",
-    "help": "Help",
-    "about": "About"
+    "dashboard": "ഡാഷ്ബോർഡ്",
+    "transactions": "ലാവണ്യങ്ങൾ",
+    "budgets": "ബജറ്റുകൾ",
+    "reports": "റിപ്പോർട്ടുകൾ",
+    "accounts": "അക്കൗണ്ടുകൾ",
+    "categories": "വിഭാഗങ്ങൾ",
+    "goals": "ലക്ഷ്യങ്ങൾ",
+    "import": "ഇമ്പോർട്ട്",
+    "export": "എക്സ്പോർട്ട്",
+    "settings": "സജ്ജീകരണങ്ങൾ",
+    "help": "സഹായം",
+    "about": "വിശദീകരണം"
   },
   "actions": {
-    "addTransaction": "Add Transaction",
-    "importData": "Import Data",
-    "import": "Import",
-    "editDashboard": "Edit Dashboard",
-    "saveChanges": "Save Changes",
-    "resetDefaults": "Reset to Defaults"
+    "addTransaction": "ലാവണ്യം ചേർക്കുക",
+    "importData": "ഡാറ്റ ഇമ്പോർട്ട് ചെയ്യുക",
+    "import": "ഇമ്പോർട്ട്",
+    "editDashboard": "ഡാഷ്ബോർഡ് എഡിറ്റ് ചെയ്യുക",
+    "saveChanges": "മാറ്റങ്ങൾ സംരക്ഷിക്കുക",
+    "resetDefaults": "ഡിഫോൾട്ടുകൾക്ക് പുനഃസജ്ജീകരിക്കുക"
   },
   "welcome": {
-    "title": "Welcome to Budget App",
-    "subtitle": "Start by adding your first transaction or importing data from your bank"
+    "title": "ബജറ്റ് ആപ്പിലേക്ക് സ്വാഗതം",
+    "subtitle": "നിങ്ങളുടെ ആദ്യ ലാവണ്യം ചേർക്കുന്നതിലൂടെ അല്ലെങ്കിൽ ബാങ്കിൽ നിന്ന് ഡാറ്റ ഇമ്പോർട്ട് ചെയ്യുന്നതിലൂടെ ആരംഭിക്കുക"
   },
   "common": {
-    "save": "Save",
-    "cancel": "Cancel",
-    "delete": "Delete",
-    "edit": "Edit",
-    "loading": "Loading..."
+    "save": "സംരക്ഷിക്കുക",
+    "cancel": "റദ്ദാക്കുക",
+    "delete": "ഇല്ലാതാക്കുക",
+    "edit": "എഡിറ്റ് ചെയ്യുക",
+    "loading": "ലോഡുചെയ്യുന്നു..."
   },
   "widget": {
     "spendingByCategory": {
-      "title": "Spending by Category",
-      "description": "See where your money goes with visual breakdowns"
+      "title": "വിഭാഗം അനുസരിച്ച് ചെലവ്",
+      "description": "നിങ്ങളുടെ പണം എവിടെ പോകുന്നു എന്ന് ദൃശ്യവിവരണങ്ങളോടെ കാണുക"
     },
     "recentTransactions": {
-      "title": "Recent Transactions",
-      "description": "Quick view of your latest financial activity"
+      "title": "സമീപകാല ലാവണ്യങ്ങൾ",
+      "description": "നിങ്ങളുടെ ഏറ്റവും പുതിയ സാമ്പത്തിക പ്രവർത്തനത്തിന്റെ ത्वरിത ദൃശ്യവിവരണം"
     },
     "budgetProgress": {
-      "title": "Budget Progress",
-      "description": "Track how you're doing against your budget goals"
+      "title": "ബജറ്റ് പുരോഗതി",
+      "description": "നിങ്ങളുടെ ബജറ്റ് ലക്ഷ്യങ്ങളോട് എങ്ങനെ മുന്നോട്ട് പോകുന്നു എന്ന് ട്രാക്കുചെയ്യുക"
     },
     "accountBalances": {
-      "title": "Account Balances",
-      "description": "Current balances across all your accounts"
+      "title": "അക്കൗണ്ട് ബാലൻസുകൾ",
+      "description": "നിങ്ങളുടെ എല്ലാ അക്കൗണ്ടുകളിലെയും നിലവിലെ ബാലൻസുകൾ"
     },
     "incomeVsExpenses": {
-      "title": "Income vs Expenses",
-      "description": "Compare your earnings and spending over time"
+      "title": "വരുമാനം vs ചെലവുകൾ",
+      "description": "നിങ്ങളുടെ വരുമാനവും ചെലവുകളും കാലക്രമത്തിൽ താരതമ്യം ചെയ്യുക"
     },
     "monthlyTrends": {
-      "title": "Monthly Trends",
-      "description": "Visualize your financial patterns month by month"
+      "title": "മാസിക പ്രവണതകൾ",
+      "description": "നിങ്ങളുടെ സാമ്പത്തിക മാതൃകകൾ മാസത്തിൽ മാസമായി ദൃശ്യവൽക്കരിക്കുക"
     },
     "upcomingBills": {
-      "title": "Upcoming Bills",
-      "description": "Never miss a payment with bill reminders"
+      "title": "വരാനിരിക്കുന്ന ബില്ലുകൾ",
+      "description": "ബിൽ ഓർമ്മപ്പെടുത്തലുകളോടെ ഒരു പേയ്മെന്റ് നഷ്ടപ്പെടുത്താൻ അനുവദിക്കരുത്"
     }
   }
 }

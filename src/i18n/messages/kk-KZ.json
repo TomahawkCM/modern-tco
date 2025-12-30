@@ -1,65 +1,65 @@
 {
   "nav": {
-    "dashboard": "Dashboard",
-    "transactions": "Transactions",
-    "budgets": "Budgets",
-    "reports": "Reports",
-    "accounts": "Accounts",
-    "categories": "Categories",
-    "goals": "Goals",
-    "import": "Import",
-    "export": "Export",
-    "settings": "Settings",
-    "help": "Help",
-    "about": "About"
+    "dashboard": "Басқару панелі",
+    "transactions": "Транзакциялар",
+    "budgets": "Бюджеттер",
+    "reports": "Есептер",
+    "accounts": "Шоттар",
+    "categories": "Категориялар",
+    "goals": "Мақсаттар",
+    "import": "Импорттау",
+    "export": "Экспорттау",
+    "settings": "Параметрлер",
+    "help": "Көмек",
+    "about": "Ақпарат"
   },
   "actions": {
-    "addTransaction": "Add Transaction",
-    "importData": "Import Data",
-    "import": "Import",
-    "editDashboard": "Edit Dashboard",
-    "saveChanges": "Save Changes",
-    "resetDefaults": "Reset to Defaults"
+    "addTransaction": "Транзакция қосу",
+    "importData": "Деректерді импорттау",
+    "import": "Импорттау",
+    "editDashboard": "Басқару панелін өңдеу",
+    "saveChanges": "Өзгерістерді сақтау",
+    "resetDefaults": "Әдепкі параметрлерге қалпына келтіру"
   },
   "welcome": {
-    "title": "Welcome to Budget App",
-    "subtitle": "Start by adding your first transaction or importing data from your bank"
+    "title": "Бюджет қосымшасына қош келдіңіз",
+    "subtitle": "Алдымен транзакция қосып немесе банктен деректерді импорттауды бастаңыз"
   },
   "common": {
-    "save": "Save",
-    "cancel": "Cancel",
-    "delete": "Delete",
-    "edit": "Edit",
-    "loading": "Loading..."
+    "save": "Сақтау",
+    "cancel": "Бас тарту",
+    "delete": "Жою",
+    "edit": "Өңдеу",
+    "loading": "Жүктелуде..."
   },
   "widget": {
     "spendingByCategory": {
-      "title": "Spending by Category",
-      "description": "See where your money goes with visual breakdowns"
+      "title": "Категория бойынша шығындар",
+      "description": "Ақшаңыздың қайда кететінін визуалды түрде көріңіз"
     },
     "recentTransactions": {
-      "title": "Recent Transactions",
-      "description": "Quick view of your latest financial activity"
+      "title": "Соңғы транзакциялар",
+      "description": "Сіздің соңғы қаржылық әрекеттеріңізді жылдам қарау"
     },
     "budgetProgress": {
-      "title": "Budget Progress",
-      "description": "Track how you're doing against your budget goals"
+      "title": "Бюджет прогресі",
+      "description": "Бюджет мақсаттарыңызға қаншалықты жеткеніңізді бақылаңыз"
     },
     "accountBalances": {
-      "title": "Account Balances",
-      "description": "Current balances across all your accounts"
+      "title": "Шоттар бойынша қалдықтар",
+      "description": "Барлық шоттарыңыздағы ағымдағы қалдықтар"
     },
     "incomeVsExpenses": {
-      "title": "Income vs Expenses",
-      "description": "Compare your earnings and spending over time"
+      "title": "Кірістер мен шығыстар",
+      "description": "Уақыт бойынша табыстарыңыз бен шығындарыңызды салыстырыңыз"
     },
     "monthlyTrends": {
-      "title": "Monthly Trends",
-      "description": "Visualize your financial patterns month by month"
+      "title": "Айлық трендтер",
+      "description": "Ай сайынғы қаржылық үлгілеріңізді визуалдаңыз"
     },
     "upcomingBills": {
-      "title": "Upcoming Bills",
-      "description": "Never miss a payment with bill reminders"
+      "title": "Келетін төлемдер",
+      "description": "Төлем ескертулерімен ешбір төлемді жіберіп алмаңыз"
     }
   }
 }

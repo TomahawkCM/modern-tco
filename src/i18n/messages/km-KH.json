@@ -1,65 +1,65 @@
 {
   "nav": {
-    "dashboard": "Dashboard",
-    "transactions": "Transactions",
-    "budgets": "Budgets",
-    "reports": "Reports",
-    "accounts": "Accounts",
-    "categories": "Categories",
-    "goals": "Goals",
-    "import": "Import",
-    "export": "Export",
-    "settings": "Settings",
-    "help": "Help",
-    "about": "About"
+    "dashboard": "ផ្ទាំងគ្រប់គ្រង",
+    "transactions": "ប្រតិបត្តិការ",
+    "budgets": "ថវិកា",
+    "reports": "របាយការណ៍",
+    "accounts": "គណនី",
+    "categories": "ប្រភេទ",
+    "goals": "គោលបំណង",
+    "import": "នាំចូល",
+    "export": "នាំចេញ",
+    "settings": "ការកំណត់",
+    "help": "ជំនួយ",
+    "about": "អំពី"
   },
   "actions": {
-    "addTransaction": "Add Transaction",
-    "importData": "Import Data",
-    "import": "Import",
-    "editDashboard": "Edit Dashboard",
-    "saveChanges": "Save Changes",
-    "resetDefaults": "Reset to Defaults"
+    "addTransaction": "បន្ថែមប្រតិបត្តិការ",
+    "importData": "នាំចូលទិន្នន័យ",
+    "import": "នាំចូល",
+    "editDashboard": "កែសម្រួលផ្ទាំងគ្រប់គ្រង",
+    "saveChanges": "រក្សាទុកការផ្លាស់ប្តូរ",
+    "resetDefaults": "ត្រឡប់ទៅកាន់លំនាំដើម"
   },
   "welcome": {
-    "title": "Welcome to Budget App",
-    "subtitle": "Start by adding your first transaction or importing data from your bank"
+    "title": "សូមស្វាគមន៍មកកាន់កម្មវិធីថវិកា",
+    "subtitle": "ចាប់ផ្តើមដោយបន្ថែមប្រតិបត្តិការ​ដំបូងរបស់អ្នកឬនាំចូលទិន្នន័យពីធនាគារ"
   },
   "common": {
-    "save": "Save",
-    "cancel": "Cancel",
-    "delete": "Delete",
-    "edit": "Edit",
-    "loading": "Loading..."
+    "save": "រក្សាទុក",
+    "cancel": "បោះបង់",
+    "delete": "លុប",
+    "edit": "កែសម្រួល",
+    "loading": "កំពុងផ្ទុក..."
   },
   "widget": {
     "spendingByCategory": {
-      "title": "Spending by Category",
-      "description": "See where your money goes with visual breakdowns"
+      "title": "ការចំណាយតាមប្រភេទ",
+      "description": "មើលថាតើប្រាក់របស់អ្នកទៅណាដោយមានការបង្ហាញតាមវិជ្ជាជីវៈ"
     },
     "recentTransactions": {
-      "title": "Recent Transactions",
-      "description": "Quick view of your latest financial activity"
+      "title": "ប្រតិបត្តិការថ្មីៗ",
+      "description": "មើលឃើញយ៉ាងឆាប់រហ័សពីសកម្មភាពហិរញ្ញវត្ថុថ្មីៗរបស់អ្នក"
     },
     "budgetProgress": {
-      "title": "Budget Progress",
-      "description": "Track how you're doing against your budget goals"
+      "title": "ការរីកចម្រើនថវិកា",
+      "description": "តាមដានថាតើអ្នកកំពុងធ្វើការប្រកួតប្រជែងជាមួយគោលបំណងថវិការបស់អ្នកយ៉ាងដូចម្តេច"
     },
     "accountBalances": {
-      "title": "Account Balances",
-      "description": "Current balances across all your accounts"
+      "title": "សមតុល្យគណនី",
+      "description": "សមតុល្យបច្ចុប្បន្ននៅលើគណនីទាំងអស់របស់អ្នក"
     },
     "incomeVsExpenses": {
-      "title": "Income vs Expenses",
-      "description": "Compare your earnings and spending over time"
+      "title": "ចំណូលប្រាក់ប្រាក់ចំណាយ",
+      "description": "ប្រៀបធៀបចំណូលនិងការចំណាយរបស់អ្នកនៅពេលវេលា"
     },
     "monthlyTrends": {
-      "title": "Monthly Trends",
-      "description": "Visualize your financial patterns month by month"
+      "title": "និន្នាការប្រចាំខែ",
+      "description": "បង្ហាញនិន្នាការហិរញ្ញវត្ថុរបស់អ្នកខែៗ"
     },
     "upcomingBills": {
-      "title": "Upcoming Bills",
-      "description": "Never miss a payment with bill reminders"
+      "title": "វិក្កយបត្រនៅមុខ",
+      "description": "កុំឱ្យខកខានការទូទាត់ជាមួយការចាំបាច់វិក្កយបត្រ"
     }
   }
 }

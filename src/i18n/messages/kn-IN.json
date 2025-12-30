@@ -1,65 +1,65 @@
 {
   "nav": {
-    "dashboard": "Dashboard",
-    "transactions": "Transactions",
-    "budgets": "Budgets",
-    "reports": "Reports",
-    "accounts": "Accounts",
-    "categories": "Categories",
-    "goals": "Goals",
-    "import": "Import",
-    "export": "Export",
-    "settings": "Settings",
-    "help": "Help",
-    "about": "About"
+    "dashboard": "ಡ್ಯಾಶ್‌ಬೋರ್ಡ್",
+    "transactions": "ಲೆಕ್ಕಾಚಾರಗಳು",
+    "budgets": "ಬಜೆಟ್‌ಗಳು",
+    "reports": "ವರದಿಗಳು",
+    "accounts": "ಖಾತೆಗಳು",
+    "categories": "ವರ್ಗಗಳು",
+    "goals": "ಗೋಲುಗಳು",
+    "import": "ಆಮದು",
+    "export": "ರಫ್ತು",
+    "settings": "ಸೆಟ್ಟಿಂಗ್‌ಗಳು",
+    "help": "ಸಹಾಯ",
+    "about": "ಹೆಚ್ಚು ಮಾಹಿತಿ"
   },
   "actions": {
-    "addTransaction": "Add Transaction",
-    "importData": "Import Data",
-    "import": "Import",
-    "editDashboard": "Edit Dashboard",
-    "saveChanges": "Save Changes",
-    "resetDefaults": "Reset to Defaults"
+    "addTransaction": "ಲೆಕ್ಕಾಚಾರವನ್ನು ಸೇರಿಸಿ",
+    "importData": "ಡೇಟಾವನ್ನು ಆಮದು ಮಾಡಿ",
+    "import": "ಆಮದು",
+    "editDashboard": "ಡ್ಯಾಶ್‌ಬೋರ್ಡ್ ಸಂಪಾದಿಸಿ",
+    "saveChanges": "ಬದಲಾವಣೆಗಳನ್ನು ಉಳಿಸಿ",
+    "resetDefaults": "ಮೂಲಭೂತಗಳನ್ನು ಪುನಃ ಹೊಂದಿಸಿ"
   },
   "welcome": {
-    "title": "Welcome to Budget App",
-    "subtitle": "Start by adding your first transaction or importing data from your bank"
+    "title": "ಬಜೆಟ್ ಅಪ್ಲಿಕೇಶನ್‌ಗೆ ಸ್ವಾಗತ",
+    "subtitle": "ನಿಮ್ಮ ಮೊದಲ ಲೆಕ್ಕಾಚಾರವನ್ನು ಸೇರಿಸುವುದರಿಂದ ಅಥವಾ ನಿಮ್ಮ ಬ್ಯಾಂಕಿನಿಂದ ಡೇಟಾವನ್ನು ಆಮದು ಮಾಡುವುದರಿಂದ ಪ್ರಾರಂಭಿಸಿ"
   },
   "common": {
-    "save": "Save",
-    "cancel": "Cancel",
-    "delete": "Delete",
-    "edit": "Edit",
-    "loading": "Loading..."
+    "save": "ಉಳಿಸಿ",
+    "cancel": "ರದ್ದು ಮಾಡಿ",
+    "delete": "ಅಳಿಸಿ",
+    "edit": "ಸಂಪಾದಿಸಿ",
+    "loading": "ಲೋಡ್ ಆಗುತ್ತಿದೆ..."
   },
   "widget": {
     "spendingByCategory": {
-      "title": "Spending by Category",
-      "description": "See where your money goes with visual breakdowns"
+      "title": "ವರ್ಗದ ಪ್ರಕಾರ ಖರ್ಚು",
+      "description": "ನಿಮ್ಮ ಹಣವು ಎಲ್ಲಿ ಹೋಗುತ್ತಿದೆ ಎಂಬುದನ್ನು ದೃಶ್ಯಾತ್ಮಕವಾಗಿ ನೋಡಿ"
     },
     "recentTransactions": {
-      "title": "Recent Transactions",
-      "description": "Quick view of your latest financial activity"
+      "title": "ಇತ್ತೀಚಿನ ಲೆಕ್ಕಾಚಾರಗಳು",
+      "description": "ನಿಮ್ಮ ಇತ್ತೀಚಿನ ಹಣಕಾಸಿನ ಚಟುವಟಿಕೆಗಳ ಶೀಘ್ರ ದೃಶ್ಯ"
     },
     "budgetProgress": {
-      "title": "Budget Progress",
-      "description": "Track how you're doing against your budget goals"
+      "title": "ಬಜೆಟ್ ಪ್ರಗತಿ",
+      "description": "ನಿಮ್ಮ ಬಜೆಟ್ ಗುರಿಗಳ ವಿರುದ್ಧ ನೀವು ಹೇಗೆ ಸಾಗುತ್ತಿದ್ದೀರಿ ಎಂಬುದನ್ನು ಹಕ್ಕಿ"
     },
     "accountBalances": {
-      "title": "Account Balances",
-      "description": "Current balances across all your accounts"
+      "title": "ಖಾತೆ ಶೇಷಗಳು",
+      "description": "ನಿಮ್ಮ ಎಲ್ಲಾ ಖಾತೆಗಳಲ್ಲಿ ಪ್ರಸ್ತುತ ಶೇಷಗಳು"
     },
     "incomeVsExpenses": {
-      "title": "Income vs Expenses",
-      "description": "Compare your earnings and spending over time"
+      "title": "ಆದಾಯ ಮತ್ತು ಖರ್ಚು",
+      "description": "ನಿಮ್ಮ ಆದಾಯ ಮತ್ತು ಖರ್ಚುಗಳನ್ನು ಹೋಲಿಸಿ"
     },
     "monthlyTrends": {
-      "title": "Monthly Trends",
-      "description": "Visualize your financial patterns month by month"
+      "title": "ತಿಂಗಳ ಪ್ರವೃತ್ತಿಗಳು",
+      "description": "ಪ್ರತಿ ತಿಂಗಳ ಹಣಕಾಸಿನ ಮಾದರಿಗಳನ್ನು ದೃಶ್ಯೀಕರಿಸಿ"
     },
     "upcomingBills": {
-      "title": "Upcoming Bills",
-      "description": "Never miss a payment with bill reminders"
+      "title": "ಬಂದಿರುವ ಬಿಲ್‌ಗಳು",
+      "description": "ಬಿಲ್ ನೆನಪಿನೊಂದಿಗೆ ಪಾವತಿಯನ್ನು ಕಳೆದುಕೊಳ್ಳಬೇಡಿ"
     }
   }
 }

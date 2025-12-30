@@ -1,65 +1,65 @@
 {
   "nav": {
-    "dashboard": "Dashboard",
-    "transactions": "Transactions",
-    "budgets": "Budgets",
-    "reports": "Reports",
-    "accounts": "Accounts",
-    "categories": "Categories",
-    "goals": "Goals",
-    "import": "Import",
-    "export": "Export",
-    "settings": "Settings",
-    "help": "Help",
-    "about": "About"
+    "dashboard": "Тохиргооны самбар",
+    "transactions": "Гүйлгээ",
+    "budgets": "Төсөв",
+    "reports": "Тайлан",
+    "accounts": "Данс",
+    "categories": "Ангилал",
+    "goals": "Зорилго",
+    "import": "Импорт",
+    "export": "Экспорт",
+    "settings": "Тохиргоо",
+    "help": "Тусламж",
+    "about": "Тухай"
   },
   "actions": {
-    "addTransaction": "Add Transaction",
-    "importData": "Import Data",
-    "import": "Import",
-    "editDashboard": "Edit Dashboard",
-    "saveChanges": "Save Changes",
-    "resetDefaults": "Reset to Defaults"
+    "addTransaction": "Гүйлгээ нэмэх",
+    "importData": "Мэдээлэл импортлох",
+    "import": "Импорт",
+    "editDashboard": "Тохиргооны самбарыг засах",
+    "saveChanges": "Өөрчлөлтийг хадгалах",
+    "resetDefaults": "Анхдагч тохиргоог сэргээх"
   },
   "welcome": {
-    "title": "Welcome to Budget App",
-    "subtitle": "Start by adding your first transaction or importing data from your bank"
+    "title": "Төсвийн апп-д тавтай морил",
+    "subtitle": "Эхний гүйлгээ нэмэх эсвэл банкнаас мэдээлэл импортлохоос эхлээрэй"
   },
   "common": {
-    "save": "Save",
-    "cancel": "Cancel",
-    "delete": "Delete",
-    "edit": "Edit",
-    "loading": "Loading..."
+    "save": "Хадгалах",
+    "cancel": "Цуцлах",
+    "delete": "Устгах",
+    "edit": "Засах",
+    "loading": "Ачааллаж байна..."
   },
   "widget": {
     "spendingByCategory": {
-      "title": "Spending by Category",
-      "description": "See where your money goes with visual breakdowns"
+      "title": "Ангилаар зарлага",
+      "description": "Таны мөнгө хаашаа явж байгааг визуал байдлаар харах"
     },
     "recentTransactions": {
-      "title": "Recent Transactions",
-      "description": "Quick view of your latest financial activity"
+      "title": "Сүүлийн гүйлгээ",
+      "description": "Таны сүүлийн санхүүгийн үйл ажиллагааг хурдан харах"
     },
     "budgetProgress": {
-      "title": "Budget Progress",
-      "description": "Track how you're doing against your budget goals"
+      "title": "Төсвийн ахиц",
+      "description": "Таны төсвийн зорилгод хэрхэн хүрч байгааг хянах"
     },
     "accountBalances": {
-      "title": "Account Balances",
-      "description": "Current balances across all your accounts"
+      "title": "Дансны үлдэгдэл",
+      "description": "Таны бүх дансанд одоогийн үлдэгдэл"
     },
     "incomeVsExpenses": {
-      "title": "Income vs Expenses",
-      "description": "Compare your earnings and spending over time"
+      "title": "Орлого ба зарлага",
+      "description": "Таны орлого, зарлагыг цаг хугацааны хувьд харьцуулах"
     },
     "monthlyTrends": {
-      "title": "Monthly Trends",
-      "description": "Visualize your financial patterns month by month"
+      "title": "Сар бүрийн хандлага",
+      "description": "Сар бүрийн санхүүгийн хэв маягийг визуалчлах"
     },
     "upcomingBills": {
-      "title": "Upcoming Bills",
-      "description": "Never miss a payment with bill reminders"
+      "title": "Ирэх төлбөрүүд",
+      "description": "Төлбөрийн сануулгатайгаар төлбөрөө хэзээ ч алдахгүй"
     }
   }
 }

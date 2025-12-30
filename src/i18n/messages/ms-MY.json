@@ -1,65 +1,65 @@
 {
   "nav": {
-    "dashboard": "Dashboard",
-    "transactions": "Transactions",
-    "budgets": "Budgets",
-    "reports": "Reports",
-    "accounts": "Accounts",
-    "categories": "Categories",
-    "goals": "Goals",
+    "dashboard": "Papan Pemuka",
+    "transactions": "Transaksi",
+    "budgets": "Bajet",
+    "reports": "Laporan",
+    "accounts": "Akaun",
+    "categories": "Kategori",
+    "goals": "Matlamat",
     "import": "Import",
-    "export": "Export",
-    "settings": "Settings",
-    "help": "Help",
-    "about": "About"
+    "export": "Eksport",
+    "settings": "Tetapan",
+    "help": "Bantuan",
+    "about": "Tentang"
   },
   "actions": {
-    "addTransaction": "Add Transaction",
+    "addTransaction": "Tambah Transaksi",
     "importData": "Import Data",
     "import": "Import",
-    "editDashboard": "Edit Dashboard",
-    "saveChanges": "Save Changes",
-    "resetDefaults": "Reset to Defaults"
+    "editDashboard": "Edit Papan Pemuka",
+    "saveChanges": "Simpan Perubahan",
+    "resetDefaults": "Tetapkan Semula kepada Lalai"
   },
   "welcome": {
-    "title": "Welcome to Budget App",
-    "subtitle": "Start by adding your first transaction or importing data from your bank"
+    "title": "Selamat Datang ke Aplikasi Bajet",
+    "subtitle": "Mulakan dengan menambah transaksi pertama anda atau mengimport data dari bank anda"
   },
   "common": {
-    "save": "Save",
-    "cancel": "Cancel",
-    "delete": "Delete",
+    "save": "Simpan",
+    "cancel": "Batal",
+    "delete": "Padam",
     "edit": "Edit",
-    "loading": "Loading..."
+    "loading": "Memuatkan..."
   },
   "widget": {
     "spendingByCategory": {
-      "title": "Spending by Category",
-      "description": "See where your money goes with visual breakdowns"
+      "title": "Perbelanjaan Mengikut Kategori",
+      "description": "Lihat ke mana wang anda pergi dengan pecahan visual"
     },
     "recentTransactions": {
-      "title": "Recent Transactions",
-      "description": "Quick view of your latest financial activity"
+      "title": "Transaksi Terkini",
+      "description": "Pandangan cepat aktiviti kewangan terbaru anda"
     },
     "budgetProgress": {
-      "title": "Budget Progress",
-      "description": "Track how you're doing against your budget goals"
+      "title": "Kemajuan Bajet",
+      "description": "Jejaki prestasi anda berbanding matlamat bajet"
     },
     "accountBalances": {
-      "title": "Account Balances",
-      "description": "Current balances across all your accounts"
+      "title": "Baki Akaun",
+      "description": "Baki semasa di semua akaun anda"
     },
     "incomeVsExpenses": {
-      "title": "Income vs Expenses",
-      "description": "Compare your earnings and spending over time"
+      "title": "Pendapatan vs Perbelanjaan",
+      "description": "Bandingkan pendapatan dan perbelanjaan anda dari semasa ke semasa"
     },
     "monthlyTrends": {
-      "title": "Monthly Trends",
-      "description": "Visualize your financial patterns month by month"
+      "title": "Tren Bulanan",
+      "description": "Visualisasikan corak kewangan anda bulan demi bulan"
     },
     "upcomingBills": {
-      "title": "Upcoming Bills",
-      "description": "Never miss a payment with bill reminders"
+      "title": "Bil Akan Datang",
+      "description": "Jangan terlepas pembayaran dengan peringatan bil"
     }
   }
 }

@@ -1,65 +1,65 @@
 {
   "nav": {
     "dashboard": "Dashboard",
-    "transactions": "Transactions",
-    "budgets": "Budgets",
-    "reports": "Reports",
-    "accounts": "Accounts",
-    "categories": "Categories",
-    "goals": "Goals",
-    "import": "Import",
-    "export": "Export",
-    "settings": "Settings",
-    "help": "Help",
-    "about": "About"
+    "transactions": "Mga Transaksyon",
+    "budgets": "Mga Badyet",
+    "reports": "Mga Ulat",
+    "accounts": "Mga Account",
+    "categories": "Mga Kategorya",
+    "goals": "Mga Layunin",
+    "import": "Mag-import",
+    "export": "Mag-export",
+    "settings": "Mga Setting",
+    "help": "Tulong",
+    "about": "Tungkol"
   },
   "actions": {
-    "addTransaction": "Add Transaction",
-    "importData": "Import Data",
-    "import": "Import",
-    "editDashboard": "Edit Dashboard",
-    "saveChanges": "Save Changes",
-    "resetDefaults": "Reset to Defaults"
+    "addTransaction": "Magdagdag ng Transaksyon",
+    "importData": "Mag-import ng Data",
+    "import": "Mag-import",
+    "editDashboard": "I-edit ang Dashboard",
+    "saveChanges": "I-save ang Mga Pagbabago",
+    "resetDefaults": "I-reset sa Mga Default"
   },
   "welcome": {
-    "title": "Welcome to Budget App",
-    "subtitle": "Start by adding your first transaction or importing data from your bank"
+    "title": "Maligayang Pagdating sa Budget App",
+    "subtitle": "Simulan sa pamamagitan ng pagdagdag ng iyong unang transaksyon o pag-import ng data mula sa iyong bangko"
   },
   "common": {
-    "save": "Save",
-    "cancel": "Cancel",
-    "delete": "Delete",
-    "edit": "Edit",
-    "loading": "Loading..."
+    "save": "I-save",
+    "cancel": "Kanselahin",
+    "delete": "Tanggalin",
+    "edit": "I-edit",
+    "loading": "Naglo-load..."
   },
   "widget": {
     "spendingByCategory": {
-      "title": "Spending by Category",
-      "description": "See where your money goes with visual breakdowns"
+      "title": "Gastos sa Bawat Kategorya",
+      "description": "Tingnan kung saan napupunta ang iyong pera sa pamamagitan ng mga visual na paghahati"
     },
     "recentTransactions": {
-      "title": "Recent Transactions",
-      "description": "Quick view of your latest financial activity"
+      "title": "Mga Kamakailang Transaksyon",
+      "description": "Mabilis na pagtingin sa iyong pinakabagong aktibidad sa pananalapi"
     },
     "budgetProgress": {
-      "title": "Budget Progress",
-      "description": "Track how you're doing against your budget goals"
+      "title": "Progreso ng Badyet",
+      "description": "Subaybayan kung paano ka kumikilos laban sa iyong mga layunin sa badyet"
     },
     "accountBalances": {
-      "title": "Account Balances",
-      "description": "Current balances across all your accounts"
+      "title": "Mga Balanseng Account",
+      "description": "Kasalukuyang mga balanse sa lahat ng iyong mga account"
     },
     "incomeVsExpenses": {
-      "title": "Income vs Expenses",
-      "description": "Compare your earnings and spending over time"
+      "title": "Kita vs Gastos",
+      "description": "Ihambing ang iyong kita at gastos sa paglipas ng panahon"
     },
     "monthlyTrends": {
-      "title": "Monthly Trends",
-      "description": "Visualize your financial patterns month by month"
+      "title": "Buwanang Uso",
+      "description": "I-visualize ang iyong mga pattern sa pananalapi buwan-buwan"
     },
     "upcomingBills": {
-      "title": "Upcoming Bills",
-      "description": "Never miss a payment with bill reminders"
+      "title": "Mga Paparating na Buwanang Bayarin",
+      "description": "Huwag palampasin ang anumang bayad sa pamamagitan ng mga paalala sa bayarin"
     }
   }
 }

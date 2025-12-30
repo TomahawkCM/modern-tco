@@ -1,65 +1,65 @@
 {
   "nav": {
-    "dashboard": "Dashboard",
-    "transactions": "Transactions",
-    "budgets": "Budgets",
-    "reports": "Reports",
-    "accounts": "Accounts",
-    "categories": "Categories",
-    "goals": "Goals",
-    "import": "Import",
-    "export": "Export",
-    "settings": "Settings",
-    "help": "Help",
-    "about": "About"
+    "dashboard": "仪表板",
+    "transactions": "交易",
+    "budgets": "预算",
+    "reports": "报告",
+    "accounts": "账户",
+    "categories": "类别",
+    "goals": "目标",
+    "import": "导入",
+    "export": "导出",
+    "settings": "设置",
+    "help": "帮助",
+    "about": "关于"
   },
   "actions": {
-    "addTransaction": "Add Transaction",
-    "importData": "Import Data",
-    "import": "Import",
-    "editDashboard": "Edit Dashboard",
-    "saveChanges": "Save Changes",
-    "resetDefaults": "Reset to Defaults"
+    "addTransaction": "添加交易",
+    "importData": "导入数据",
+    "import": "导入",
+    "editDashboard": "编辑仪表板",
+    "saveChanges": "保存更改",
+    "resetDefaults": "重置为默认"
   },
   "welcome": {
-    "title": "Welcome to Budget App",
-    "subtitle": "Start by adding your first transaction or importing data from your bank"
+    "title": "欢迎使用预算应用",
+    "subtitle": "通过添加您的第一笔交易或从银行导入数据开始"
   },
   "common": {
-    "save": "Save",
-    "cancel": "Cancel",
-    "delete": "Delete",
-    "edit": "Edit",
-    "loading": "Loading..."
+    "save": "保存",
+    "cancel": "取消",
+    "delete": "删除",
+    "edit": "编辑",
+    "loading": "加载中..."
   },
   "widget": {
     "spendingByCategory": {
-      "title": "Spending by Category",
-      "description": "See where your money goes with visual breakdowns"
+      "title": "按类别支出",
+      "description": "通过可视化细分查看您的资金去向"
     },
     "recentTransactions": {
-      "title": "Recent Transactions",
-      "description": "Quick view of your latest financial activity"
+      "title": "最近交易",
+      "description": "快速查看您最新的财务活动"
     },
     "budgetProgress": {
-      "title": "Budget Progress",
-      "description": "Track how you're doing against your budget goals"
+      "title": "预算进度",
+      "description": "跟踪您在预算目标上的表现"
     },
     "accountBalances": {
-      "title": "Account Balances",
-      "description": "Current balances across all your accounts"
+      "title": "账户余额",
+      "description": "您所有账户的当前余额"
     },
     "incomeVsExpenses": {
-      "title": "Income vs Expenses",
-      "description": "Compare your earnings and spending over time"
+      "title": "收入与支出",
+      "description": "比较您的收入和支出"
     },
     "monthlyTrends": {
-      "title": "Monthly Trends",
-      "description": "Visualize your financial patterns month by month"
+      "title": "每月趋势",
+      "description": "逐月可视化您的财务模式"
     },
     "upcomingBills": {
-      "title": "Upcoming Bills",
-      "description": "Never miss a payment with bill reminders"
+      "title": "即将到期的账单",
+      "description": "通过账单提醒确保不遗漏付款"
     }
   }
 }

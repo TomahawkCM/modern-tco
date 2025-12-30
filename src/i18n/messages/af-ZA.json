@@ -1,65 +1,65 @@
 {
   "nav": {
     "dashboard": "Dashboard",
-    "transactions": "Transactions",
-    "budgets": "Budgets",
-    "reports": "Reports",
-    "accounts": "Accounts",
-    "categories": "Categories",
-    "goals": "Goals",
-    "import": "Import",
-    "export": "Export",
-    "settings": "Settings",
-    "help": "Help",
-    "about": "About"
+    "transactions": "Transaksies",
+    "budgets": "Begrotings",
+    "reports": "Verslae",
+    "accounts": "Rekeninge",
+    "categories": "Kategorieë",
+    "goals": "Doelwitte",
+    "import": "Invoer",
+    "export": "Uitvoer",
+    "settings": "Instellings",
+    "help": "Hulp",
+    "about": "Oor"
   },
   "actions": {
-    "addTransaction": "Add Transaction",
-    "importData": "Import Data",
-    "import": "Import",
-    "editDashboard": "Edit Dashboard",
-    "saveChanges": "Save Changes",
-    "resetDefaults": "Reset to Defaults"
+    "addTransaction": "Voeg Transaksie Toe",
+    "importData": "Invoer Gegewens",
+    "import": "Invoer",
+    "editDashboard": "Wysig Dashboard",
+    "saveChanges": "Stoor Veranderinge",
+    "resetDefaults": "Herstel na Standaarde"
   },
   "welcome": {
-    "title": "Welcome to Budget App",
-    "subtitle": "Start by adding your first transaction or importing data from your bank"
+    "title": "Welkom by die Begrotings App",
+    "subtitle": "Begin deur jou eerste transaksie toe te voeg of gegewens van jou bank in te voer"
   },
   "common": {
-    "save": "Save",
-    "cancel": "Cancel",
-    "delete": "Delete",
-    "edit": "Edit",
-    "loading": "Loading..."
+    "save": "Stoor",
+    "cancel": "Kanselleer",
+    "delete": "Verwyder",
+    "edit": "Wysig",
+    "loading": "Laai..."
   },
   "widget": {
     "spendingByCategory": {
-      "title": "Spending by Category",
-      "description": "See where your money goes with visual breakdowns"
+      "title": "Besteding per Kategore",
+      "description": "Sien waar jou geld gaan met visuele ontledings"
     },
     "recentTransactions": {
-      "title": "Recent Transactions",
-      "description": "Quick view of your latest financial activity"
+      "title": "Onlangse Transaksies",
+      "description": "Vinige oorsig van jou laaste finansiële aktiwiteit"
     },
     "budgetProgress": {
-      "title": "Budget Progress",
-      "description": "Track how you're doing against your budget goals"
+      "title": "Begroting Voortgang",
+      "description": "Volg hoe jy vaar teen jou begrotingsdoelwitte"
     },
     "accountBalances": {
-      "title": "Account Balances",
-      "description": "Current balances across all your accounts"
+      "title": "Rekening Balans",
+      "description": "Huidige balanse oor al jou rekeninge"
     },
     "incomeVsExpenses": {
-      "title": "Income vs Expenses",
-      "description": "Compare your earnings and spending over time"
+      "title": "Inkomste teen Uitgawes",
+      "description": "Vergelyk jou verdienste en besteding oor tyd"
     },
     "monthlyTrends": {
-      "title": "Monthly Trends",
-      "description": "Visualize your financial patterns month by month"
+      "title": "Maandelikse Tendense",
+      "description": "Visualiseer jou finansiële patrone maand vir maand"
     },
     "upcomingBills": {
-      "title": "Upcoming Bills",
-      "description": "Never miss a payment with bill reminders"
+      "title": "Toekomstige Rekeninge",
+      "description": "Mis nooit 'n betaling nie met rekeningherinneringe"
     }
   }
 }

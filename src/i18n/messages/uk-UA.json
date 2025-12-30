@@ -1,65 +1,65 @@
 {
   "nav": {
-    "dashboard": "Dashboard",
-    "transactions": "Transactions",
-    "budgets": "Budgets",
-    "reports": "Reports",
-    "accounts": "Accounts",
-    "categories": "Categories",
-    "goals": "Goals",
-    "import": "Import",
-    "export": "Export",
-    "settings": "Settings",
-    "help": "Help",
-    "about": "About"
+    "dashboard": "Панель управління",
+    "transactions": "Транзакції",
+    "budgets": "Бюджети",
+    "reports": "Звіти",
+    "accounts": "Рахунки",
+    "categories": "Категорії",
+    "goals": "Цілі",
+    "import": "Імпорт",
+    "export": "Експорт",
+    "settings": "Налаштування",
+    "help": "Допомога",
+    "about": "Про програму"
   },
   "actions": {
-    "addTransaction": "Add Transaction",
-    "importData": "Import Data",
-    "import": "Import",
-    "editDashboard": "Edit Dashboard",
-    "saveChanges": "Save Changes",
-    "resetDefaults": "Reset to Defaults"
+    "addTransaction": "Додати транзакцію",
+    "importData": "Імпортувати дані",
+    "import": "Імпорт",
+    "editDashboard": "Редагувати панель",
+    "saveChanges": "Зберегти зміни",
+    "resetDefaults": "Скинути до стандартних"
   },
   "welcome": {
-    "title": "Welcome to Budget App",
-    "subtitle": "Start by adding your first transaction or importing data from your bank"
+    "title": "Ласкаво просимо до Budget App",
+    "subtitle": "Почніть з додавання вашої першої транзакції або імпорту даних з вашого банку"
   },
   "common": {
-    "save": "Save",
-    "cancel": "Cancel",
-    "delete": "Delete",
-    "edit": "Edit",
-    "loading": "Loading..."
+    "save": "Зберегти",
+    "cancel": "Скасувати",
+    "delete": "Видалити",
+    "edit": "Редагувати",
+    "loading": "Завантаження..."
   },
   "widget": {
     "spendingByCategory": {
-      "title": "Spending by Category",
-      "description": "See where your money goes with visual breakdowns"
+      "title": "Витрати за категоріями",
+      "description": "Дивіться, куди йдуть ваші гроші з візуальними діаграмами"
     },
     "recentTransactions": {
-      "title": "Recent Transactions",
-      "description": "Quick view of your latest financial activity"
+      "title": "Останні транзакції",
+      "description": "Швидкий перегляд вашої останньої фінансової активності"
     },
     "budgetProgress": {
-      "title": "Budget Progress",
-      "description": "Track how you're doing against your budget goals"
+      "title": "Прогрес бюджету",
+      "description": "Слідкуйте за своїми досягненнями щодо бюджетних цілей"
     },
     "accountBalances": {
-      "title": "Account Balances",
-      "description": "Current balances across all your accounts"
+      "title": "Баланс рахунків",
+      "description": "Поточні залишки на всіх ваших рахунках"
     },
     "incomeVsExpenses": {
-      "title": "Income vs Expenses",
-      "description": "Compare your earnings and spending over time"
+      "title": "Доходи та витрати",
+      "description": "Порівняйте свої доходи та витрати з часом"
     },
     "monthlyTrends": {
-      "title": "Monthly Trends",
-      "description": "Visualize your financial patterns month by month"
+      "title": "Місячні тенденції",
+      "description": "Візуалізуйте свої фінансові патерни місяць за місяцем"
     },
     "upcomingBills": {
-      "title": "Upcoming Bills",
-      "description": "Never miss a payment with bill reminders"
+      "title": "Найближчі рахунки",
+      "description": "Ніколи не пропустіть платіж з нагадуваннями про рахунки"
     }
   }
 }

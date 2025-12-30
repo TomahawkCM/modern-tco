@@ -1,65 +1,65 @@
 {
   "nav": {
-    "dashboard": "Dashboard",
-    "transactions": "Transactions",
-    "budgets": "Budgets",
-    "reports": "Reports",
-    "accounts": "Accounts",
-    "categories": "Categories",
-    "goals": "Goals",
-    "import": "Import",
-    "export": "Export",
-    "settings": "Settings",
-    "help": "Help",
-    "about": "About"
+    "dashboard": "Ohjauspaneeli",
+    "transactions": "Transaktiot",
+    "budgets": "Budjetit",
+    "reports": "Raportit",
+    "accounts": "Tilith",
+    "categories": "Kategoriat",
+    "goals": "Tavoitteet",
+    "import": "Tuoda",
+    "export": "Viedä",
+    "settings": "Asetukset",
+    "help": "Apua",
+    "about": "Tietoa"
   },
   "actions": {
-    "addTransaction": "Add Transaction",
-    "importData": "Import Data",
-    "import": "Import",
-    "editDashboard": "Edit Dashboard",
-    "saveChanges": "Save Changes",
-    "resetDefaults": "Reset to Defaults"
+    "addTransaction": "Lisää transaktio",
+    "importData": "Tuo data",
+    "import": "Tuoda",
+    "editDashboard": "Muokkaa ohjauspaneelia",
+    "saveChanges": "Tallenna muutokset",
+    "resetDefaults": "Palauta oletukset"
   },
   "welcome": {
-    "title": "Welcome to Budget App",
-    "subtitle": "Start by adding your first transaction or importing data from your bank"
+    "title": "Tervetuloa Budjetti-sovellukseen",
+    "subtitle": "Aloita lisäämällä ensimmäinen transaktiosi tai tuomalla tietoja pankistasi"
   },
   "common": {
-    "save": "Save",
-    "cancel": "Cancel",
-    "delete": "Delete",
-    "edit": "Edit",
-    "loading": "Loading..."
+    "save": "Tallenna",
+    "cancel": "Peruuta",
+    "delete": "Poista",
+    "edit": "Muokkaa",
+    "loading": "Ladataan..."
   },
   "widget": {
     "spendingByCategory": {
-      "title": "Spending by Category",
-      "description": "See where your money goes with visual breakdowns"
+      "title": "Kulut kategoriittain",
+      "description": "Näe, mihin rahasi menevät visuaalisten erittelyjen avulla"
     },
     "recentTransactions": {
-      "title": "Recent Transactions",
-      "description": "Quick view of your latest financial activity"
+      "title": "Viimeisimmät transaktiot",
+      "description": "Nopea katsaus viimeisimpään taloudelliseen toimintaasi"
     },
     "budgetProgress": {
-      "title": "Budget Progress",
-      "description": "Track how you're doing against your budget goals"
+      "title": "Budjetin edistyminen",
+      "description": "Seuraa, miten edistyt budjettitavoitteidesi suhteen"
     },
     "accountBalances": {
-      "title": "Account Balances",
-      "description": "Current balances across all your accounts"
+      "title": "Tilin saldot",
+      "description": "Nykyiset saldot kaikilla tileilläsi"
     },
     "incomeVsExpenses": {
-      "title": "Income vs Expenses",
-      "description": "Compare your earnings and spending over time"
+      "title": "Tulot vs Menot",
+      "description": "Vertaile tulojasi ja menojasi ajan myötä"
     },
     "monthlyTrends": {
-      "title": "Monthly Trends",
-      "description": "Visualize your financial patterns month by month"
+      "title": "Kuukausitrendit",
+      "description": "Visualisoi taloudelliset kaavasi kuukausittain"
     },
     "upcomingBills": {
-      "title": "Upcoming Bills",
-      "description": "Never miss a payment with bill reminders"
+      "title": "Tulevat laskut",
+      "description": "Älä koskaan unohda maksua laskumuistutusten avulla"
     }
   }
 }

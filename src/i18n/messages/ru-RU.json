@@ -1,65 +1,65 @@
 {
   "nav": {
-    "dashboard": "Dashboard",
-    "transactions": "Transactions",
-    "budgets": "Budgets",
-    "reports": "Reports",
-    "accounts": "Accounts",
-    "categories": "Categories",
-    "goals": "Goals",
-    "import": "Import",
-    "export": "Export",
-    "settings": "Settings",
-    "help": "Help",
-    "about": "About"
+    "dashboard": "Панель управления",
+    "transactions": "Транзакции",
+    "budgets": "Бюджеты",
+    "reports": "Отчеты",
+    "accounts": "Счета",
+    "categories": "Категории",
+    "goals": "Цели",
+    "import": "Импорт",
+    "export": "Экспорт",
+    "settings": "Настройки",
+    "help": "Помощь",
+    "about": "О приложении"
   },
   "actions": {
-    "addTransaction": "Add Transaction",
-    "importData": "Import Data",
-    "import": "Import",
-    "editDashboard": "Edit Dashboard",
-    "saveChanges": "Save Changes",
-    "resetDefaults": "Reset to Defaults"
+    "addTransaction": "Добавить транзакцию",
+    "importData": "Импортировать данные",
+    "import": "Импорт",
+    "editDashboard": "Редактировать панель",
+    "saveChanges": "Сохранить изменения",
+    "resetDefaults": "Сбросить настройки"
   },
   "welcome": {
-    "title": "Welcome to Budget App",
-    "subtitle": "Start by adding your first transaction or importing data from your bank"
+    "title": "Добро пожаловать в Budget App",
+    "subtitle": "Начните с добавления первой транзакции или импорта данных из банка"
   },
   "common": {
-    "save": "Save",
-    "cancel": "Cancel",
-    "delete": "Delete",
-    "edit": "Edit",
-    "loading": "Loading..."
+    "save": "Сохранить",
+    "cancel": "Отмена",
+    "delete": "Удалить",
+    "edit": "Редактировать",
+    "loading": "Загрузка..."
   },
   "widget": {
     "spendingByCategory": {
-      "title": "Spending by Category",
-      "description": "See where your money goes with visual breakdowns"
+      "title": "Расходы по категориям",
+      "description": "Посмотрите, куда уходят ваши деньги с помощью визуальных разбивок"
     },
     "recentTransactions": {
-      "title": "Recent Transactions",
-      "description": "Quick view of your latest financial activity"
+      "title": "Недавние транзакции",
+      "description": "Быстрый обзор вашей последней финансовой активности"
     },
     "budgetProgress": {
-      "title": "Budget Progress",
-      "description": "Track how you're doing against your budget goals"
+      "title": "Прогресс бюджета",
+      "description": "Отслеживайте, как вы справляетесь с целями бюджета"
     },
     "accountBalances": {
-      "title": "Account Balances",
-      "description": "Current balances across all your accounts"
+      "title": "Баланс счетов",
+      "description": "Текущие балансы по всем вашим счетам"
     },
     "incomeVsExpenses": {
-      "title": "Income vs Expenses",
-      "description": "Compare your earnings and spending over time"
+      "title": "Доходы и расходы",
+      "description": "Сравните свои доходы и расходы с течением времени"
     },
     "monthlyTrends": {
-      "title": "Monthly Trends",
-      "description": "Visualize your financial patterns month by month"
+      "title": "Месячные тренды",
+      "description": "Визуализируйте свои финансовые паттерны по месяцам"
     },
     "upcomingBills": {
-      "title": "Upcoming Bills",
-      "description": "Never miss a payment with bill reminders"
+      "title": "Предстоящие счета",
+      "description": "Никогда не пропустите платеж с напоминаниями о счетах"
     }
   }
 }

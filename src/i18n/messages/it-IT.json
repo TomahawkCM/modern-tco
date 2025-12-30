@@ -1,65 +1,65 @@
 {
   "nav": {
-    "dashboard": "Dashboard",
-    "transactions": "Transactions",
-    "budgets": "Budgets",
-    "reports": "Reports",
-    "accounts": "Accounts",
-    "categories": "Categories",
-    "goals": "Goals",
-    "import": "Import",
-    "export": "Export",
-    "settings": "Settings",
-    "help": "Help",
-    "about": "About"
+    "dashboard": "Cruscotto",
+    "transactions": "Transazioni",
+    "budgets": "Budget",
+    "reports": "Report",
+    "accounts": "Conti",
+    "categories": "Categorie",
+    "goals": "Obiettivi",
+    "import": "Importa",
+    "export": "Esporta",
+    "settings": "Impostazioni",
+    "help": "Aiuto",
+    "about": "Informazioni"
   },
   "actions": {
-    "addTransaction": "Add Transaction",
-    "importData": "Import Data",
-    "import": "Import",
-    "editDashboard": "Edit Dashboard",
-    "saveChanges": "Save Changes",
-    "resetDefaults": "Reset to Defaults"
+    "addTransaction": "Aggiungi Transazione",
+    "importData": "Importa Dati",
+    "import": "Importa",
+    "editDashboard": "Modifica Cruscotto",
+    "saveChanges": "Salva Modifiche",
+    "resetDefaults": "Ripristina Impostazioni Predefinite"
   },
   "welcome": {
-    "title": "Welcome to Budget App",
-    "subtitle": "Start by adding your first transaction or importing data from your bank"
+    "title": "Benvenuto nell'App Budget",
+    "subtitle": "Inizia aggiungendo la tua prima transazione o importando dati dalla tua banca"
   },
   "common": {
-    "save": "Save",
-    "cancel": "Cancel",
-    "delete": "Delete",
-    "edit": "Edit",
-    "loading": "Loading..."
+    "save": "Salva",
+    "cancel": "Annulla",
+    "delete": "Elimina",
+    "edit": "Modifica",
+    "loading": "Caricamento..."
   },
   "widget": {
     "spendingByCategory": {
-      "title": "Spending by Category",
-      "description": "See where your money goes with visual breakdowns"
+      "title": "Spese per Categoria",
+      "description": "Scopri dove vanno i tuoi soldi con analisi visive"
     },
     "recentTransactions": {
-      "title": "Recent Transactions",
-      "description": "Quick view of your latest financial activity"
+      "title": "Transazioni Recenti",
+      "description": "Panoramica rapida della tua ultima attività finanziaria"
     },
     "budgetProgress": {
-      "title": "Budget Progress",
-      "description": "Track how you're doing against your budget goals"
+      "title": "Progresso Budget",
+      "description": "Monitora come stai andando rispetto ai tuoi obiettivi di budget"
     },
     "accountBalances": {
-      "title": "Account Balances",
-      "description": "Current balances across all your accounts"
+      "title": "Saldi Conto",
+      "description": "Saldi attuali su tutti i tuoi conti"
     },
     "incomeVsExpenses": {
-      "title": "Income vs Expenses",
-      "description": "Compare your earnings and spending over time"
+      "title": "Entrate vs Spese",
+      "description": "Confronta i tuoi guadagni e le tue spese nel tempo"
     },
     "monthlyTrends": {
-      "title": "Monthly Trends",
-      "description": "Visualize your financial patterns month by month"
+      "title": "Tendenze Mensili",
+      "description": "Visualizza i tuoi schemi finanziari mese per mese"
     },
     "upcomingBills": {
-      "title": "Upcoming Bills",
-      "description": "Never miss a payment with bill reminders"
+      "title": "Bollette in Arrivo",
+      "description": "Non perdere mai un pagamento con i promemoria delle bollette"
     }
   }
 }

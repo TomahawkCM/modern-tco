@@ -1,65 +1,65 @@
 {
   "nav": {
-    "dashboard": "Dashboard",
-    "transactions": "Transactions",
-    "budgets": "Budgets",
-    "reports": "Reports",
-    "accounts": "Accounts",
-    "categories": "Categories",
-    "goals": "Goals",
-    "import": "Import",
-    "export": "Export",
-    "settings": "Settings",
-    "help": "Help",
-    "about": "About"
+    "dashboard": "Irányítópult",
+    "transactions": "Tranzakciók",
+    "budgets": "Költségvetések",
+    "reports": "Jelentések",
+    "accounts": "Számlák",
+    "categories": "Kategóriák",
+    "goals": "Célok",
+    "import": "Importálás",
+    "export": "Exportálás",
+    "settings": "Beállítások",
+    "help": "Segítség",
+    "about": "Névjegy"
   },
   "actions": {
-    "addTransaction": "Add Transaction",
-    "importData": "Import Data",
-    "import": "Import",
-    "editDashboard": "Edit Dashboard",
-    "saveChanges": "Save Changes",
-    "resetDefaults": "Reset to Defaults"
+    "addTransaction": "Tranzakció hozzáadása",
+    "importData": "Adatok importálása",
+    "import": "Importálás",
+    "editDashboard": "Irányítópult szerkesztése",
+    "saveChanges": "Változtatások mentése",
+    "resetDefaults": "Alapértelmezett visszaállítása"
   },
   "welcome": {
-    "title": "Welcome to Budget App",
-    "subtitle": "Start by adding your first transaction or importing data from your bank"
+    "title": "Üdvözöljük a Költségvetési Alkalmazásban",
+    "subtitle": "Kezdje az első tranzakciója hozzáadásával vagy adatok importálásával a bankjától"
   },
   "common": {
-    "save": "Save",
-    "cancel": "Cancel",
-    "delete": "Delete",
-    "edit": "Edit",
-    "loading": "Loading..."
+    "save": "Mentés",
+    "cancel": "Mégse",
+    "delete": "Törlés",
+    "edit": "Szerkesztés",
+    "loading": "Betöltés..."
   },
   "widget": {
     "spendingByCategory": {
-      "title": "Spending by Category",
-      "description": "See where your money goes with visual breakdowns"
+      "title": "Kategóriák Szerinti Kiadások",
+      "description": "Nézze meg, hová megy a pénze vizuális bontásban"
     },
     "recentTransactions": {
-      "title": "Recent Transactions",
-      "description": "Quick view of your latest financial activity"
+      "title": "Legutóbbi Tranzakciók",
+      "description": "Gyors áttekintés a legfrissebb pénzügyi tevékenységéről"
     },
     "budgetProgress": {
-      "title": "Budget Progress",
-      "description": "Track how you're doing against your budget goals"
+      "title": "Költségvetés Előrehaladása",
+      "description": "Kövesse nyomon, hogyan áll a költségvetési céljaihoz képest"
     },
     "accountBalances": {
-      "title": "Account Balances",
-      "description": "Current balances across all your accounts"
+      "title": "Számlaegyenlegek",
+      "description": "Jelenlegi egyenlegek az összes számláján"
     },
     "incomeVsExpenses": {
-      "title": "Income vs Expenses",
-      "description": "Compare your earnings and spending over time"
+      "title": "Bevétel vs Kiadás",
+      "description": "Hasonlítsa össze a bevételeit és kiadásait időben"
     },
     "monthlyTrends": {
-      "title": "Monthly Trends",
-      "description": "Visualize your financial patterns month by month"
+      "title": "Havi Trendek",
+      "description": "Vizualizálja pénzügyi mintáit hónapról hónapra"
     },
     "upcomingBills": {
-      "title": "Upcoming Bills",
-      "description": "Never miss a payment with bill reminders"
+      "title": "Közelgő Számlák",
+      "description": "Soha ne késlekedjen a fizetéssel a számlamegőrzőkkel"
     }
   }
 }

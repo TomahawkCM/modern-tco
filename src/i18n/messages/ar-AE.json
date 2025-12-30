@@ -1,65 +1,65 @@
 {
   "nav": {
-    "dashboard": "Dashboard",
-    "transactions": "Transactions",
-    "budgets": "Budgets",
-    "reports": "Reports",
-    "accounts": "Accounts",
-    "categories": "Categories",
-    "goals": "Goals",
-    "import": "Import",
-    "export": "Export",
-    "settings": "Settings",
-    "help": "Help",
-    "about": "About"
+    "dashboard": "لوحة التحكم",
+    "transactions": "المعاملات",
+    "budgets": "الميزانيات",
+    "reports": "التقارير",
+    "accounts": "الحسابات",
+    "categories": "الفئات",
+    "goals": "الأهداف",
+    "import": "استيراد",
+    "export": "تصدير",
+    "settings": "الإعدادات",
+    "help": "المساعدة",
+    "about": "معلومات عنا"
   },
   "actions": {
-    "addTransaction": "Add Transaction",
-    "importData": "Import Data",
-    "import": "Import",
-    "editDashboard": "Edit Dashboard",
-    "saveChanges": "Save Changes",
-    "resetDefaults": "Reset to Defaults"
+    "addTransaction": "إضافة معاملة",
+    "importData": "استيراد البيانات",
+    "import": "استيراد",
+    "editDashboard": "تعديل لوحة التحكم",
+    "saveChanges": "حفظ التغييرات",
+    "resetDefaults": "إعادة تعيين إلى الافتراضيات"
   },
   "welcome": {
-    "title": "Welcome to Budget App",
-    "subtitle": "Start by adding your first transaction or importing data from your bank"
+    "title": "مرحبًا بك في تطبيق الميزانية",
+    "subtitle": "ابدأ بإضافة معاملتك الأولى أو استيراد البيانات من البنك"
   },
   "common": {
-    "save": "Save",
-    "cancel": "Cancel",
-    "delete": "Delete",
-    "edit": "Edit",
-    "loading": "Loading..."
+    "save": "حفظ",
+    "cancel": "إلغاء",
+    "delete": "حذف",
+    "edit": "تعديل",
+    "loading": "جارٍ التحميل..."
   },
   "widget": {
     "spendingByCategory": {
-      "title": "Spending by Category",
-      "description": "See where your money goes with visual breakdowns"
+      "title": "الإنفاق حسب الفئة",
+      "description": "شاهد أين تذهب أموالك من خلال التحليلات المرئية"
     },
     "recentTransactions": {
-      "title": "Recent Transactions",
-      "description": "Quick view of your latest financial activity"
+      "title": "المعاملات الأخيرة",
+      "description": "نظرة سريعة على أحدث أنشطتك المالية"
     },
     "budgetProgress": {
-      "title": "Budget Progress",
-      "description": "Track how you're doing against your budget goals"
+      "title": "تقدم الميزانية",
+      "description": "تتبع أدائك مقارنة بأهداف ميزانيتك"
     },
     "accountBalances": {
-      "title": "Account Balances",
-      "description": "Current balances across all your accounts"
+      "title": "أرصدة الحسابات",
+      "description": "الأرصدة الحالية عبر جميع حساباتك"
     },
     "incomeVsExpenses": {
-      "title": "Income vs Expenses",
-      "description": "Compare your earnings and spending over time"
+      "title": "الدخل مقابل النفقات",
+      "description": "قارن بين أرباحك وإنفاقك على مر الزمن"
     },
     "monthlyTrends": {
-      "title": "Monthly Trends",
-      "description": "Visualize your financial patterns month by month"
+      "title": "الاتجاهات الشهرية",
+      "description": "تصور أنماطك المالية شهرًا بشهر"
     },
     "upcomingBills": {
-      "title": "Upcoming Bills",
-      "description": "Never miss a payment with bill reminders"
+      "title": "الفواتير القادمة",
+      "description": "لا تفوت أي دفعة مع تذكيرات الفواتير"
     }
   }
 }

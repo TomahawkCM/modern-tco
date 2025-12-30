@@ -1,65 +1,65 @@
 {
   "nav": {
-    "dashboard": "Dashboard",
-    "transactions": "Transactions",
-    "budgets": "Budgets",
-    "reports": "Reports",
-    "accounts": "Accounts",
+    "dashboard": "Tauler",
+    "transactions": "Transaccions",
+    "budgets": "Pressupostos",
+    "reports": "Informes",
+    "accounts": "Comptes",
     "categories": "Categories",
-    "goals": "Goals",
-    "import": "Import",
-    "export": "Export",
-    "settings": "Settings",
-    "help": "Help",
-    "about": "About"
+    "goals": "Objectius",
+    "import": "Importar",
+    "export": "Exportar",
+    "settings": "Configuració",
+    "help": "Ajuda",
+    "about": "Sobre"
   },
   "actions": {
-    "addTransaction": "Add Transaction",
-    "importData": "Import Data",
-    "import": "Import",
-    "editDashboard": "Edit Dashboard",
-    "saveChanges": "Save Changes",
-    "resetDefaults": "Reset to Defaults"
+    "addTransaction": "Afegir Transacció",
+    "importData": "Importar Dades",
+    "import": "Importar",
+    "editDashboard": "Editar Tauler",
+    "saveChanges": "Desar Canvis",
+    "resetDefaults": "Restablir per Defecte"
   },
   "welcome": {
-    "title": "Welcome to Budget App",
-    "subtitle": "Start by adding your first transaction or importing data from your bank"
+    "title": "Benvingut a l'App de Pressupost",
+    "subtitle": "Comença afegint la teva primera transacció o importan dades del teu banc"
   },
   "common": {
-    "save": "Save",
-    "cancel": "Cancel",
-    "delete": "Delete",
-    "edit": "Edit",
-    "loading": "Loading..."
+    "save": "Desar",
+    "cancel": "Cancel·lar",
+    "delete": "Esborrar",
+    "edit": "Editar",
+    "loading": "Carregant..."
   },
   "widget": {
     "spendingByCategory": {
-      "title": "Spending by Category",
-      "description": "See where your money goes with visual breakdowns"
+      "title": "Despeses per Categoria",
+      "description": "Veure on va el teu diners amb desglossaments visuals"
     },
     "recentTransactions": {
-      "title": "Recent Transactions",
-      "description": "Quick view of your latest financial activity"
+      "title": "Transaccions Recents",
+      "description": "Visió ràpida de la teva darrera activitat financera"
     },
     "budgetProgress": {
-      "title": "Budget Progress",
-      "description": "Track how you're doing against your budget goals"
+      "title": "Progrés del Pressupost",
+      "description": "Segueix com vas amb els teus objectius de pressupost"
     },
     "accountBalances": {
-      "title": "Account Balances",
-      "description": "Current balances across all your accounts"
+      "title": "Saldos dels Comptes",
+      "description": "Saldos actuals de tots els teus comptes"
     },
     "incomeVsExpenses": {
-      "title": "Income vs Expenses",
-      "description": "Compare your earnings and spending over time"
+      "title": "Ingressos vs Despeses",
+      "description": "Compara els teus ingressos i despeses al llarg del temps"
     },
     "monthlyTrends": {
-      "title": "Monthly Trends",
-      "description": "Visualize your financial patterns month by month"
+      "title": "Tendències Mensuals",
+      "description": "Visualitza els teus patrons financers mes a mes"
     },
     "upcomingBills": {
-      "title": "Upcoming Bills",
-      "description": "Never miss a payment with bill reminders"
+      "title": "Factures Properes",
+      "description": "Mai et perdis un pagament amb recordatoris de factures"
     }
   }
 }

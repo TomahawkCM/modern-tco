@@ -13,11 +13,24 @@
     "help": "Help",
     "about": "About"
   },
+  "actions": {
+    "addTransaction": "Add Transaction",
+    "importData": "Import Data",
+    "import": "Import",
+    "editDashboard": "Edit Dashboard",
+    "saveChanges": "Save Changes",
+    "resetDefaults": "Reset to Defaults"
+  },
+  "welcome": {
+    "title": "Welcome to Budget App",
+    "subtitle": "Start by adding your first transaction or importing data from your bank"
+  },
   "common": {
     "save": "Save",
     "cancel": "Cancel",
     "delete": "Delete",
-    "edit": "Edit"
+    "edit": "Edit",
+    "loading": "Loading..."
   },
   "widget": {
     "spendingByCategory": {
@@ -42,7 +55,7 @@
     },
     "monthlyTrends": {
       "title": "Monthly Trends",
-      "description": "Visualise your financial patterns month by month"
+      "description": "Visualize your financial patterns month by month"
     },
     "upcomingBills": {
       "title": "Upcoming Bills",

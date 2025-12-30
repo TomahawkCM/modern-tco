@@ -1,65 +1,65 @@
 {
   "nav": {
-    "dashboard": "Dashboard",
-    "transactions": "Transactions",
-    "budgets": "Budgets",
-    "reports": "Reports",
-    "accounts": "Accounts",
-    "categories": "Categories",
-    "goals": "Goals",
-    "import": "Import",
-    "export": "Export",
-    "settings": "Settings",
-    "help": "Help",
-    "about": "About"
+    "dashboard": "Dangosfa",
+    "transactions": "Trafodion",
+    "budgets": "Cyllidebau",
+    "reports": "Adroddiadau",
+    "accounts": "Cyfrifon",
+    "categories": "Categori",
+    "goals": "Nodau",
+    "import": "Mewnbynnu",
+    "export": "Allforio",
+    "settings": "Gosodiadau",
+    "help": "Cymorth",
+    "about": "Ynghylch"
   },
   "actions": {
-    "addTransaction": "Add Transaction",
-    "importData": "Import Data",
-    "import": "Import",
-    "editDashboard": "Edit Dashboard",
-    "saveChanges": "Save Changes",
-    "resetDefaults": "Reset to Defaults"
+    "addTransaction": "Ychwanegu Trafodaeth",
+    "importData": "Mewnbynnu Data",
+    "import": "Mewnbynnu",
+    "editDashboard": "Golygu Dangosfa",
+    "saveChanges": "Cadw Newidiadau",
+    "resetDefaults": "Ail-osod i Ddewislen"
   },
   "welcome": {
-    "title": "Welcome to Budget App",
-    "subtitle": "Start by adding your first transaction or importing data from your bank"
+    "title": "Croeso i'r Ap Cyllideb",
+    "subtitle": "Dechreuwch trwy ychwanegu eich trafodaeth gyntaf neu fewnbynnu data o'ch banc"
   },
   "common": {
-    "save": "Save",
-    "cancel": "Cancel",
-    "delete": "Delete",
-    "edit": "Edit",
-    "loading": "Loading..."
+    "save": "Cadw",
+    "cancel": "Diddymu",
+    "delete": "Dileu",
+    "edit": "Golygu",
+    "loading": "Llwytho..."
   },
   "widget": {
     "spendingByCategory": {
-      "title": "Spending by Category",
-      "description": "See where your money goes with visual breakdowns"
+      "title": "Gwariant yn ôl Categori",
+      "description": "Gweld ble mae eich arian yn mynd gyda dadansoddiadau gweledol"
     },
     "recentTransactions": {
-      "title": "Recent Transactions",
-      "description": "Quick view of your latest financial activity"
+      "title": "Trafodion Diweddar",
+      "description": "Golwg gyflym ar eich gweithgaredd ariannol diweddar"
     },
     "budgetProgress": {
-      "title": "Budget Progress",
-      "description": "Track how you're doing against your budget goals"
+      "title": "Cynnydd Cyllideb",
+      "description": "Tracio sut rydych chi'n gwneud yn erbyn eich nodau cyllideb"
     },
     "accountBalances": {
-      "title": "Account Balances",
-      "description": "Current balances across all your accounts"
+      "title": "Balansau Cyfrif",
+      "description": "Balansau presennol ar draws eich cyfrifon i gyd"
     },
     "incomeVsExpenses": {
-      "title": "Income vs Expenses",
-      "description": "Compare your earnings and spending over time"
+      "title": "Incwm yn erbyn Gwariant",
+      "description": "Cymharu eich enillion a gwariant dros amser"
     },
     "monthlyTrends": {
-      "title": "Monthly Trends",
-      "description": "Visualize your financial patterns month by month"
+      "title": "Tuedd Misol",
+      "description": "Gweledoli eich patrymau ariannol mis wrth fis"
     },
     "upcomingBills": {
-      "title": "Upcoming Bills",
-      "description": "Never miss a payment with bill reminders"
+      "title": "Biliau yn Dod i Fynd",
+      "description": "Peidiwch â cholli talu gyda rhybuddion bil"
     }
   }
 }

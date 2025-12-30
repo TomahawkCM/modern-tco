@@ -1,65 +1,65 @@
 {
   "nav": {
-    "dashboard": "Dashboard",
-    "transactions": "Transactions",
-    "budgets": "Budgets",
-    "reports": "Reports",
-    "accounts": "Accounts",
-    "categories": "Categories",
-    "goals": "Goals",
-    "import": "Import",
-    "export": "Export",
-    "settings": "Settings",
-    "help": "Help",
-    "about": "About"
+    "dashboard": "ダッシュボード",
+    "transactions": "取引",
+    "budgets": "予算",
+    "reports": "レポート",
+    "accounts": "アカウント",
+    "categories": "カテゴリ",
+    "goals": "目標",
+    "import": "インポート",
+    "export": "エクスポート",
+    "settings": "設定",
+    "help": "ヘルプ",
+    "about": "アプリについて"
   },
   "actions": {
-    "addTransaction": "Add Transaction",
-    "importData": "Import Data",
-    "import": "Import",
-    "editDashboard": "Edit Dashboard",
-    "saveChanges": "Save Changes",
-    "resetDefaults": "Reset to Defaults"
+    "addTransaction": "取引を追加",
+    "importData": "データをインポート",
+    "import": "インポート",
+    "editDashboard": "ダッシュボードを編集",
+    "saveChanges": "変更を保存",
+    "resetDefaults": "デフォルトにリセット"
   },
   "welcome": {
-    "title": "Welcome to Budget App",
-    "subtitle": "Start by adding your first transaction or importing data from your bank"
+    "title": "予算アプリへようこそ",
+    "subtitle": "最初の取引を追加するか、銀行からデータをインポートしてください"
   },
   "common": {
-    "save": "Save",
-    "cancel": "Cancel",
-    "delete": "Delete",
-    "edit": "Edit",
-    "loading": "Loading..."
+    "save": "保存",
+    "cancel": "キャンセル",
+    "delete": "削除",
+    "edit": "編集",
+    "loading": "読み込み中..."
   },
   "widget": {
     "spendingByCategory": {
-      "title": "Spending by Category",
-      "description": "See where your money goes with visual breakdowns"
+      "title": "カテゴリ別支出",
+      "description": "お金の使い道を視覚的に把握"
     },
     "recentTransactions": {
-      "title": "Recent Transactions",
-      "description": "Quick view of your latest financial activity"
+      "title": "最近の取引",
+      "description": "最新の財務活動を簡単に確認"
     },
     "budgetProgress": {
-      "title": "Budget Progress",
-      "description": "Track how you're doing against your budget goals"
+      "title": "予算進捗",
+      "description": "予算目標に対する進捗を追跡"
     },
     "accountBalances": {
-      "title": "Account Balances",
-      "description": "Current balances across all your accounts"
+      "title": "アカウント残高",
+      "description": "すべてのアカウントの現在の残高"
     },
     "incomeVsExpenses": {
-      "title": "Income vs Expenses",
-      "description": "Compare your earnings and spending over time"
+      "title": "収入と支出",
+      "description": "時間をかけて収入と支出を比較"
     },
     "monthlyTrends": {
-      "title": "Monthly Trends",
-      "description": "Visualize your financial patterns month by month"
+      "title": "月別トレンド",
+      "description": "月ごとの財務パターンを視覚化"
     },
     "upcomingBills": {
-      "title": "Upcoming Bills",
-      "description": "Never miss a payment with bill reminders"
+      "title": "今後の請求書",
+      "description": "請求書のリマインダーで支払いを忘れない"
     }
   }
 }

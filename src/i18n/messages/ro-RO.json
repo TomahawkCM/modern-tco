@@ -1,65 +1,65 @@
 {
   "nav": {
-    "dashboard": "Dashboard",
-    "transactions": "Transactions",
-    "budgets": "Budgets",
-    "reports": "Reports",
-    "accounts": "Accounts",
-    "categories": "Categories",
-    "goals": "Goals",
+    "dashboard": "Tabloul de bord",
+    "transactions": "Tranzacții",
+    "budgets": "Bugete",
+    "reports": "Rapoarte",
+    "accounts": "Conturi",
+    "categories": "Categorii",
+    "goals": "Obiective",
     "import": "Import",
     "export": "Export",
-    "settings": "Settings",
-    "help": "Help",
-    "about": "About"
+    "settings": "Setări",
+    "help": "Ajutor",
+    "about": "Despre"
   },
   "actions": {
-    "addTransaction": "Add Transaction",
-    "importData": "Import Data",
+    "addTransaction": "Adaugă Tranzacție",
+    "importData": "Importă Date",
     "import": "Import",
-    "editDashboard": "Edit Dashboard",
-    "saveChanges": "Save Changes",
-    "resetDefaults": "Reset to Defaults"
+    "editDashboard": "Editează Tabloul de Bord",
+    "saveChanges": "Salvează Modificările",
+    "resetDefaults": "Resetează la Implicit"
   },
   "welcome": {
-    "title": "Welcome to Budget App",
-    "subtitle": "Start by adding your first transaction or importing data from your bank"
+    "title": "Bine ai venit la Aplicația de Buget",
+    "subtitle": "Începe prin a adăuga prima ta tranzacție sau importând date de la banca ta"
   },
   "common": {
-    "save": "Save",
-    "cancel": "Cancel",
-    "delete": "Delete",
-    "edit": "Edit",
-    "loading": "Loading..."
+    "save": "Salvează",
+    "cancel": "Anulează",
+    "delete": "Șterge",
+    "edit": "Editează",
+    "loading": "Se încarcă..."
   },
   "widget": {
     "spendingByCategory": {
-      "title": "Spending by Category",
-      "description": "See where your money goes with visual breakdowns"
+      "title": "Cheltuieli pe Categorii",
+      "description": "Vezi unde se duc banii tăi cu analize vizuale"
     },
     "recentTransactions": {
-      "title": "Recent Transactions",
-      "description": "Quick view of your latest financial activity"
+      "title": "Tranzacții Recente",
+      "description": "Vedere rapidă a ultimei tale activități financiare"
     },
     "budgetProgress": {
-      "title": "Budget Progress",
-      "description": "Track how you're doing against your budget goals"
+      "title": "Progres Buget",
+      "description": "Urmărește cum te descurci în raport cu obiectivele tale bugetare"
     },
     "accountBalances": {
-      "title": "Account Balances",
-      "description": "Current balances across all your accounts"
+      "title": "Solduri Conturi",
+      "description": "Solduri curente în toate conturile tale"
     },
     "incomeVsExpenses": {
-      "title": "Income vs Expenses",
-      "description": "Compare your earnings and spending over time"
+      "title": "Venituri vs Cheltuieli",
+      "description": "Compară veniturile și cheltuielile tale în timp"
     },
     "monthlyTrends": {
-      "title": "Monthly Trends",
-      "description": "Visualize your financial patterns month by month"
+      "title": "Tendințe Lunare",
+      "description": "Vizualizează modelele tale financiare lună de lună"
     },
     "upcomingBills": {
-      "title": "Upcoming Bills",
-      "description": "Never miss a payment with bill reminders"
+      "title": "Facturi Viitoare",
+      "description": "Nu rata nici o plată cu mementouri pentru facturi"
     }
   }
 }

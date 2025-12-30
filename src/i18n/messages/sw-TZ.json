@@ -1,65 +1,65 @@
 {
   "nav": {
-    "dashboard": "Dashboard",
-    "transactions": "Transactions",
-    "budgets": "Budgets",
-    "reports": "Reports",
-    "accounts": "Accounts",
-    "categories": "Categories",
-    "goals": "Goals",
-    "import": "Import",
-    "export": "Export",
-    "settings": "Settings",
-    "help": "Help",
-    "about": "About"
+    "dashboard": "Dashibodi",
+    "transactions": "Mauzo",
+    "budgets": "Bajeti",
+    "reports": "Ripoti",
+    "accounts": "Makaunti",
+    "categories": "Makundi",
+    "goals": "Malengo",
+    "import": "Ingiza",
+    "export": "Tengeza",
+    "settings": "Mipangilio",
+    "help": "Msaada",
+    "about": "Kuhusu"
   },
   "actions": {
-    "addTransaction": "Add Transaction",
-    "importData": "Import Data",
-    "import": "Import",
-    "editDashboard": "Edit Dashboard",
-    "saveChanges": "Save Changes",
-    "resetDefaults": "Reset to Defaults"
+    "addTransaction": "Ongeza Mauzo",
+    "importData": "Ingiza Takwimu",
+    "import": "Ingiza",
+    "editDashboard": "Hariri Dashibodi",
+    "saveChanges": "Hifadhi Mabadiliko",
+    "resetDefaults": "Rejesha Kwenye Mipangilio ya Kawaida"
   },
   "welcome": {
-    "title": "Welcome to Budget App",
-    "subtitle": "Start by adding your first transaction or importing data from your bank"
+    "title": "Karibu kwenye Programu ya Bajeti",
+    "subtitle": "Anza kwa kuongeza mauzo yako ya kwanza au kuingiza data kutoka benki yako"
   },
   "common": {
-    "save": "Save",
-    "cancel": "Cancel",
-    "delete": "Delete",
-    "edit": "Edit",
-    "loading": "Loading..."
+    "save": "Hifadhi",
+    "cancel": "Ghairi",
+    "delete": "Futa",
+    "edit": "Hariri",
+    "loading": "Inapakia..."
   },
   "widget": {
     "spendingByCategory": {
-      "title": "Spending by Category",
-      "description": "See where your money goes with visual breakdowns"
+      "title": "Matumizi kwa Kundi",
+      "description": "Tazama ambapo pesa zako zinaenda kwa mgawanyiko wa picha"
     },
     "recentTransactions": {
-      "title": "Recent Transactions",
-      "description": "Quick view of your latest financial activity"
+      "title": "Mauzo ya Karibuni",
+      "description": "Muonekano wa haraka wa shughuli zako za kifedha za hivi karibuni"
     },
     "budgetProgress": {
-      "title": "Budget Progress",
-      "description": "Track how you're doing against your budget goals"
+      "title": "Maendeleo ya Bajeti",
+      "description": "Fuatilia jinsi unavyofanya dhidi ya malengo yako ya bajeti"
     },
     "accountBalances": {
-      "title": "Account Balances",
-      "description": "Current balances across all your accounts"
+      "title": "Salio la Akaunti",
+      "description": "Salio la sasa katika akaunti zako zote"
     },
     "incomeVsExpenses": {
-      "title": "Income vs Expenses",
-      "description": "Compare your earnings and spending over time"
+      "title": "Mapato dhidi ya Matumizi",
+      "description": "Linganisha mapato na matumizi yako kwa muda"
     },
     "monthlyTrends": {
-      "title": "Monthly Trends",
-      "description": "Visualize your financial patterns month by month"
+      "title": "Mwelekeo wa Kila Mwezi",
+      "description": "Onyesha mifumo yako ya kifedha mwezi kwa mwezi"
     },
     "upcomingBills": {
-      "title": "Upcoming Bills",
-      "description": "Never miss a payment with bill reminders"
+      "title": "Bili Zinazokuja",
+      "description": "Usikose malipo kwa kukumbushwa kuhusu bili"
     }
   }
 }

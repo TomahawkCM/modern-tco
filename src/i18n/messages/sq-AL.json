@@ -1,65 +1,65 @@
 {
   "nav": {
-    "dashboard": "Dashboard",
-    "transactions": "Transactions",
-    "budgets": "Budgets",
-    "reports": "Reports",
-    "accounts": "Accounts",
-    "categories": "Categories",
-    "goals": "Goals",
-    "import": "Import",
-    "export": "Export",
-    "settings": "Settings",
-    "help": "Help",
-    "about": "About"
+    "dashboard": "Pult",
+    "transactions": "Transaksionet",
+    "budgets": "Buxhetet",
+    "reports": "Raportet",
+    "accounts": "Llogaritë",
+    "categories": "Kategoritë",
+    "goals": "Qëllimet",
+    "import": "Importo",
+    "export": "Eksporto",
+    "settings": "Cilësimet",
+    "help": "Ndihma",
+    "about": "Rreth"
   },
   "actions": {
-    "addTransaction": "Add Transaction",
-    "importData": "Import Data",
-    "import": "Import",
-    "editDashboard": "Edit Dashboard",
-    "saveChanges": "Save Changes",
-    "resetDefaults": "Reset to Defaults"
+    "addTransaction": "Shto Transaksion",
+    "importData": "Importo Të Dhënat",
+    "import": "Importo",
+    "editDashboard": "Redakto Pultin",
+    "saveChanges": "Ruaj Ndryshimet",
+    "resetDefaults": "Rivendos në Parazgjedhjet"
   },
   "welcome": {
-    "title": "Welcome to Budget App",
-    "subtitle": "Start by adding your first transaction or importing data from your bank"
+    "title": "Mirë se vini në Aplikacionin e Buxhetit",
+    "subtitle": "Filloni duke shtuar transaksionin tuaj të parë ose duke importuar të dhëna nga banka juaj"
   },
   "common": {
-    "save": "Save",
-    "cancel": "Cancel",
-    "delete": "Delete",
-    "edit": "Edit",
-    "loading": "Loading..."
+    "save": "Ruaj",
+    "cancel": "Anulo",
+    "delete": "Fshi",
+    "edit": "Redakto",
+    "loading": "Duke ngarkuar..."
   },
   "widget": {
     "spendingByCategory": {
-      "title": "Spending by Category",
-      "description": "See where your money goes with visual breakdowns"
+      "title": "Shpenzimet sipas Kategorive",
+      "description": "Shihni se ku shkon paratë tuaja me përmbledhje vizuale"
     },
     "recentTransactions": {
-      "title": "Recent Transactions",
-      "description": "Quick view of your latest financial activity"
+      "title": "Transaksionet e Fundit",
+      "description": "Pamje e shpejtë e aktiviteteve tuaja financiare të fundit"
     },
     "budgetProgress": {
-      "title": "Budget Progress",
-      "description": "Track how you're doing against your budget goals"
+      "title": "Progresi i Buxhetit",
+      "description": "Ndjekni se si po e menaxhoni buxhetin tuaj"
     },
     "accountBalances": {
-      "title": "Account Balances",
-      "description": "Current balances across all your accounts"
+      "title": "Bilancet e Llogarive",
+      "description": "Bilancet aktuale në të gjitha llogaritë tuaja"
     },
     "incomeVsExpenses": {
-      "title": "Income vs Expenses",
-      "description": "Compare your earnings and spending over time"
+      "title": "Të Ardhurat vs Shpenzimet",
+      "description": "Krahasoni të ardhurat dhe shpenzimet tuaja me kalimin e kohës"
     },
     "monthlyTrends": {
-      "title": "Monthly Trends",
-      "description": "Visualize your financial patterns month by month"
+      "title": "Tendencat Mënyrë Mënyre",
+      "description": "Vizualizoni modelet tuaja financiare muaj pas muaji"
     },
     "upcomingBills": {
-      "title": "Upcoming Bills",
-      "description": "Never miss a payment with bill reminders"
+      "title": "Faturat në Vijim",
+      "description": "Kurrë mos humbisni një pagesë me kujtesat për faturat"
     }
   }
 }

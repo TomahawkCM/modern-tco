@@ -1,65 +1,65 @@
 {
   "nav": {
-    "dashboard": "Dashboard",
-    "transactions": "Transactions",
-    "budgets": "Budgets",
-    "reports": "Reports",
-    "accounts": "Accounts",
-    "categories": "Categories",
-    "goals": "Goals",
-    "import": "Import",
-    "export": "Export",
-    "settings": "Settings",
-    "help": "Help",
-    "about": "About"
+    "dashboard": "ສະຖານທີ່ປ່ອນຂໍ້ມູນ",
+    "transactions": "ການເລກທີ່ຈິງ",
+    "budgets": "ງົບປະມານ",
+    "reports": "ລາຍງານ",
+    "accounts": "ບັນຊີ",
+    "categories": "ປະເພດ",
+    "goals": "ເປົ້າໝາຍ",
+    "import": "ນຳເຂອນ",
+    "export": "ນຳອອກ",
+    "settings": "ການຕັ້ງຄ່າ",
+    "help": "ຊ່ວຍເຫລືອ",
+    "about": "ກ່ຽວກັບ"
   },
   "actions": {
-    "addTransaction": "Add Transaction",
-    "importData": "Import Data",
-    "import": "Import",
-    "editDashboard": "Edit Dashboard",
-    "saveChanges": "Save Changes",
-    "resetDefaults": "Reset to Defaults"
+    "addTransaction": "ເພີ່ມການເລກທີ່ຈິງ",
+    "importData": "ນຳເຂອນຂໍ້ມູນ",
+    "import": "ນຳເຂອນ",
+    "editDashboard": "ແກ້ໄຂສະຖານທີ່ປ່ອນຂໍ້ມູນ",
+    "saveChanges": "ບັນທຶກການປ່ອນຂໍ້ມູນ",
+    "resetDefaults": "ກັບໄປສູ່ຄ່າເລັດ"
   },
   "welcome": {
-    "title": "Welcome to Budget App",
-    "subtitle": "Start by adding your first transaction or importing data from your bank"
+    "title": "ຍິນດີຕ໭ິດຕໍ່ກັບບັນດາສະຖານທີ່ປ່ອນຂໍ້ມູນ",
+    "subtitle": "ເລີ່ມເລີ່ມໂດຍການເພີ່ມການເລກທີ່ຈິງທໍາອິດຫຼືນຳເຂອນຂໍ້ມູນຈາກທະນາຄານຂອງເຈົ້າ"
   },
   "common": {
-    "save": "Save",
-    "cancel": "Cancel",
-    "delete": "Delete",
-    "edit": "Edit",
-    "loading": "Loading..."
+    "save": "ບັນທຶກ",
+    "cancel": "ຍົກເລີກ",
+    "delete": "ລົບ",
+    "edit": "ແກ້ໄຂ",
+    "loading": "ກຳລັງໂອນ..."
   },
   "widget": {
     "spendingByCategory": {
-      "title": "Spending by Category",
-      "description": "See where your money goes with visual breakdowns"
+      "title": "ຄ່າໃຊ້ຈ່າຍໂດຍປະເພດ",
+      "description": "ເບິ່ງວ່າເງິນຂອງເຈົ້າໄປໃສ່ບ່ອນໃດແດ່ດ່ວນ"
     },
     "recentTransactions": {
-      "title": "Recent Transactions",
-      "description": "Quick view of your latest financial activity"
+      "title": "ການເລກທີ່ຈິງໃນລະດັບສູງ",
+      "description": "ມອງເບິ່ງການກະທົບທາງເງິນສຸດທ້າຍ"
     },
     "budgetProgress": {
-      "title": "Budget Progress",
-      "description": "Track how you're doing against your budget goals"
+      "title": "ຄວາມຄືນສູງງົບປະມານ",
+      "description": "ຕິດຕາມວ່າເຈົ້າກຳລັງເຮັດໄດ້ດີແຄ່ໃດຕໍ່ງົບປະມານ"
     },
     "accountBalances": {
-      "title": "Account Balances",
-      "description": "Current balances across all your accounts"
+      "title": "ດຸດບັນຊີ",
+      "description": "ດຸດປະຈຸບັນສູງທັງໝົດບັນຊີຂອງເຈົ້າ"
     },
     "incomeVsExpenses": {
-      "title": "Income vs Expenses",
-      "description": "Compare your earnings and spending over time"
+      "title": "ລາຍໄດ້ບໍ່ກັບຄ່າໃຊ້ຈ່າຍ",
+      "description": "ເພີ່ມສະຖານທີ່ຂອງລາຍໄດ້ແລະຄ່າໃຊ້ຈ່າຍໃນເວລາ"
     },
     "monthlyTrends": {
-      "title": "Monthly Trends",
-      "description": "Visualize your financial patterns month by month"
+      "title": "ແນວແບບໃນເດືອນ",
+      "description": "ເບິ່ງສະຖານທີ່ຂອງເງິນໃນເດືອນ"
     },
     "upcomingBills": {
-      "title": "Upcoming Bills",
-      "description": "Never miss a payment with bill reminders"
+      "title": "ບິນທີ່ຈະມາ",
+      "description": "ບໍ່ຄໍາສັ່ງການຈ່າຍບິນດ້ວຍຄວາມຈິງ"
     }
   }
 }

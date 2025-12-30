@@ -1,65 +1,65 @@
 {
   "nav": {
-    "dashboard": "Dashboard",
-    "transactions": "Transactions",
-    "budgets": "Budgets",
-    "reports": "Reports",
-    "accounts": "Accounts",
-    "categories": "Categories",
-    "goals": "Goals",
-    "import": "Import",
-    "export": "Export",
-    "settings": "Settings",
-    "help": "Help",
-    "about": "About"
+    "dashboard": "Valdymo pultas",
+    "transactions": "Transakcijos",
+    "budgets": "Biudžetai",
+    "reports": "Ataskaitos",
+    "accounts": "Paskyros",
+    "categories": "Kategorijos",
+    "goals": "Tikslai",
+    "import": "Importuoti",
+    "export": "Eksportuoti",
+    "settings": "Nustatymai",
+    "help": "Pagalba",
+    "about": "Apie"
   },
   "actions": {
-    "addTransaction": "Add Transaction",
-    "importData": "Import Data",
-    "import": "Import",
-    "editDashboard": "Edit Dashboard",
-    "saveChanges": "Save Changes",
-    "resetDefaults": "Reset to Defaults"
+    "addTransaction": "Pridėti transakciją",
+    "importData": "Importuoti duomenis",
+    "import": "Importuoti",
+    "editDashboard": "Redaguoti valdymo pultą",
+    "saveChanges": "Išsaugoti pakeitimus",
+    "resetDefaults": "Atstatyti numatytuosius"
   },
   "welcome": {
-    "title": "Welcome to Budget App",
-    "subtitle": "Start by adding your first transaction or importing data from your bank"
+    "title": "Sveiki atvykę į Biudžeto programą",
+    "subtitle": "Pradėkite pridėdami pirmąją transakciją arba importuodami duomenis iš savo banko"
   },
   "common": {
-    "save": "Save",
-    "cancel": "Cancel",
-    "delete": "Delete",
-    "edit": "Edit",
-    "loading": "Loading..."
+    "save": "Išsaugoti",
+    "cancel": "Atšaukti",
+    "delete": "Ištrinti",
+    "edit": "Redaguoti",
+    "loading": "Kraunama..."
   },
   "widget": {
     "spendingByCategory": {
-      "title": "Spending by Category",
-      "description": "See where your money goes with visual breakdowns"
+      "title": "Išlaidos pagal kategoriją",
+      "description": "Pamatykite, kur išleidžiate pinigus su vizualiais atvaizdavimais"
     },
     "recentTransactions": {
-      "title": "Recent Transactions",
-      "description": "Quick view of your latest financial activity"
+      "title": "Naujausios transakcijos",
+      "description": "Greitas jūsų naujausios finansinės veiklos peržiūra"
     },
     "budgetProgress": {
-      "title": "Budget Progress",
-      "description": "Track how you're doing against your budget goals"
+      "title": "Biudžeto pažanga",
+      "description": "Sekite, kaip sekasi pasiekti biudžeto tikslus"
     },
     "accountBalances": {
-      "title": "Account Balances",
-      "description": "Current balances across all your accounts"
+      "title": "Paskyros likučiai",
+      "description": "Dabartiniai likučiai visose jūsų paskyrose"
     },
     "incomeVsExpenses": {
-      "title": "Income vs Expenses",
-      "description": "Compare your earnings and spending over time"
+      "title": "Pajamos vs Išlaidos",
+      "description": "Palyginkite savo uždarbį ir išlaidas laikui bėgant"
     },
     "monthlyTrends": {
-      "title": "Monthly Trends",
-      "description": "Visualize your financial patterns month by month"
+      "title": "Mėnesio tendencijos",
+      "description": "Vizualizuokite savo finansinius modelius mėnesį po mėnesio"
     },
     "upcomingBills": {
-      "title": "Upcoming Bills",
-      "description": "Never miss a payment with bill reminders"
+      "title": "Artėjantys mokėjimai",
+      "description": "Niekuomet nepraleiskite mokėjimo su sąskaitų priminimais"
     }
   }
 }

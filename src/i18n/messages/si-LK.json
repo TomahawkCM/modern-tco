@@ -1,65 +1,65 @@
 {
   "nav": {
-    "dashboard": "Dashboard",
-    "transactions": "Transactions",
-    "budgets": "Budgets",
-    "reports": "Reports",
-    "accounts": "Accounts",
-    "categories": "Categories",
-    "goals": "Goals",
-    "import": "Import",
-    "export": "Export",
-    "settings": "Settings",
-    "help": "Help",
-    "about": "About"
+    "dashboard": "ඩැෂ්බෝඩ්",
+    "transactions": "ගනුදෙනු",
+    "budgets": "බජට්",
+    "reports": "වාර්තා",
+    "accounts": "ගිණුම්",
+    "categories": "වර්ග",
+    "goals": "ඉලක්ක",
+    "import": "ආයාත කරන්න",
+    "export": "අපනයන",
+    "settings": "සැකසුම්",
+    "help": "උදව්",
+    "about": "ගැන"
   },
   "actions": {
-    "addTransaction": "Add Transaction",
-    "importData": "Import Data",
-    "import": "Import",
-    "editDashboard": "Edit Dashboard",
-    "saveChanges": "Save Changes",
-    "resetDefaults": "Reset to Defaults"
+    "addTransaction": "ගනුදෙනු එකතු කරන්න",
+    "importData": "දත්ත ආයාත කරන්න",
+    "import": "ආයාත කරන්න",
+    "editDashboard": "ඩැෂ්බෝඩ් සංස්කරණය කරන්න",
+    "saveChanges": "වෙනස්කම් සුරකින්න",
+    "resetDefaults": "මූලිකයන්ට නැවත සකසන්න"
   },
   "welcome": {
-    "title": "Welcome to Budget App",
-    "subtitle": "Start by adding your first transaction or importing data from your bank"
+    "title": "බජට් යෙදුමට සාදරයෙන් පිළිගනිමු",
+    "subtitle": "ඔබේ පළමු ගනුදෙනුව එකතු කිරීම හෝ ඔබේ බැංකුවෙන් දත්ත ආයාත කිරීමෙන් ආරම්භ කරන්න"
   },
   "common": {
-    "save": "Save",
-    "cancel": "Cancel",
-    "delete": "Delete",
-    "edit": "Edit",
-    "loading": "Loading..."
+    "save": "සුරකින්න",
+    "cancel": "අවලංගු කරන්න",
+    "delete": "මකන්න",
+    "edit": "සංස්කරණය කරන්න",
+    "loading": "ඉදිරියට යමින්..."
   },
   "widget": {
     "spendingByCategory": {
-      "title": "Spending by Category",
-      "description": "See where your money goes with visual breakdowns"
+      "title": "වර්ගය අනුව වියදම්",
+      "description": "ඔබේ මුදල් කුමන අයුරින් යනවාද යන්න දැක්කාක්"
     },
     "recentTransactions": {
-      "title": "Recent Transactions",
-      "description": "Quick view of your latest financial activity"
+      "title": "අලුත්ම ගනුදෙනු",
+      "description": "ඔබේ නවතම මූල්‍ය ක්‍රියාකාරකම් පිළිබඳ වේගවත් දෘෂ්ටිය"
     },
     "budgetProgress": {
-      "title": "Budget Progress",
-      "description": "Track how you're doing against your budget goals"
+      "title": "බජට් ප්‍රගතිය",
+      "description": "ඔබේ බජට් ඉලක්ක වලට එරෙහිව ඔබ කෙසේද යන්න අනුගමනය කරන්න"
     },
     "accountBalances": {
-      "title": "Account Balances",
-      "description": "Current balances across all your accounts"
+      "title": "ගිණුම් ශේෂ",
+      "description": "ඔබේ සියලු ගිණුම් වල වර්තමාන ශේෂ"
     },
     "incomeVsExpenses": {
-      "title": "Income vs Expenses",
-      "description": "Compare your earnings and spending over time"
+      "title": "ආදායම සහ වියදම්",
+      "description": "ඔබේ ආදායම් සහ වියදම් කාලය තුළ සැසියක්"
     },
     "monthlyTrends": {
-      "title": "Monthly Trends",
-      "description": "Visualize your financial patterns month by month"
+      "title": "මාසික ප්‍රවණතා",
+      "description": "මාසයකට මාසයක් ඔබේ මූල්‍ය රටාවන් දැක්කාක්"
     },
     "upcomingBills": {
-      "title": "Upcoming Bills",
-      "description": "Never miss a payment with bill reminders"
+      "title": "ඉදිරි බිල්පත්",
+      "description": "බිල් මතකය සමඟ ගෙවීම් කිසිදා අමතක නොකරන්න"
     }
   }
 }

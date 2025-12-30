@@ -1,65 +1,65 @@
 {
   "nav": {
-    "dashboard": "Dashboard",
-    "transactions": "Transactions",
-    "budgets": "Budgets",
-    "reports": "Reports",
-    "accounts": "Accounts",
-    "categories": "Categories",
-    "goals": "Goals",
-    "import": "Import",
-    "export": "Export",
-    "settings": "Settings",
-    "help": "Help",
-    "about": "About"
+    "dashboard": "డాష్‌బోర్డ్",
+    "transactions": "లావాదేవీలు",
+    "budgets": "బడ్జెట్లు",
+    "reports": "రిపోర్టులు",
+    "accounts": "ఖాతాలు",
+    "categories": "వర్గాలు",
+    "goals": "లక్ష్యాలు",
+    "import": "ఆమదు",
+    "export": "ఎగుమతి",
+    "settings": "సెట్టింగ్స్",
+    "help": "సహాయం",
+    "about": "గురించి"
   },
   "actions": {
-    "addTransaction": "Add Transaction",
-    "importData": "Import Data",
-    "import": "Import",
-    "editDashboard": "Edit Dashboard",
-    "saveChanges": "Save Changes",
-    "resetDefaults": "Reset to Defaults"
+    "addTransaction": "లావాదేవీ చేర్చండి",
+    "importData": "డేటా ఆమదు",
+    "import": "ఆమదు",
+    "editDashboard": "డాష్‌బోర్డ్ సవరించండి",
+    "saveChanges": "మార్పులు సేవ్ చేయండి",
+    "resetDefaults": "డిఫాల్ట్‌లకు రీసెట్ చేయండి"
   },
   "welcome": {
-    "title": "Welcome to Budget App",
-    "subtitle": "Start by adding your first transaction or importing data from your bank"
+    "title": "బడ్జెట్ యాప్‌కు స్వాగతం",
+    "subtitle": "మీ మొదటి లావాదేవీ చేర్చడం లేదా బ్యాంక్ నుండి డేటా ఆమదు చేయడం ప్రారంభించండి"
   },
   "common": {
-    "save": "Save",
-    "cancel": "Cancel",
-    "delete": "Delete",
-    "edit": "Edit",
-    "loading": "Loading..."
+    "save": "సేవ్",
+    "cancel": "రద్దు",
+    "delete": "తొలగించు",
+    "edit": "సవరించు",
+    "loading": "లోడింగ్..."
   },
   "widget": {
     "spendingByCategory": {
-      "title": "Spending by Category",
-      "description": "See where your money goes with visual breakdowns"
+      "title": "వర్గం ప్రకారం ఖర్చు",
+      "description": "మీ డబ్బు ఎక్కడ వెళ్ళుతుందో చూడండి"
     },
     "recentTransactions": {
-      "title": "Recent Transactions",
-      "description": "Quick view of your latest financial activity"
+      "title": "ఇటీవల లావాదేవీలు",
+      "description": "మీ తాజా ఆర్థిక కార్యకలాపాల తక్షణ దృశ్యం"
     },
     "budgetProgress": {
-      "title": "Budget Progress",
-      "description": "Track how you're doing against your budget goals"
+      "title": "బడ్జెట్ పురోగతి",
+      "description": "మీ బడ్జెట్ లక్ష్యాలకు మీరు ఎలా ఉన్నారో ట్రాక్ చేయండి"
     },
     "accountBalances": {
-      "title": "Account Balances",
-      "description": "Current balances across all your accounts"
+      "title": "ఖాతా బ్యాలెన్స్",
+      "description": "మీ అన్ని ఖాతాలలో ప్రస్తుత బ్యాలెన్స్"
     },
     "incomeVsExpenses": {
-      "title": "Income vs Expenses",
-      "description": "Compare your earnings and spending over time"
+      "title": "ఆదాయము vs ఖర్చులు",
+      "description": "మీ ఆదాయాలు మరియు ఖర్చులను సమీక్షించండి"
     },
     "monthlyTrends": {
-      "title": "Monthly Trends",
-      "description": "Visualize your financial patterns month by month"
+      "title": "మాసిక ధోరణులు",
+      "description": "ప్రతి నెల మీ ఆర్థిక నమూనాలను చూడండి"
     },
     "upcomingBills": {
-      "title": "Upcoming Bills",
-      "description": "Never miss a payment with bill reminders"
+      "title": "రాబోయే బిల్లులు",
+      "description": "బిల్ గుర్తింపులతో చెల్లింపులు మిస్ అవ్వకుండా ఉండండి"
     }
   }
 }

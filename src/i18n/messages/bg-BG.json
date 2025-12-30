@@ -1,65 +1,65 @@
 {
   "nav": {
-    "dashboard": "Dashboard",
-    "transactions": "Transactions",
-    "budgets": "Budgets",
-    "reports": "Reports",
-    "accounts": "Accounts",
-    "categories": "Categories",
-    "goals": "Goals",
-    "import": "Import",
-    "export": "Export",
-    "settings": "Settings",
-    "help": "Help",
-    "about": "About"
+    "dashboard": "Табло",
+    "transactions": "Транзакции",
+    "budgets": "Бюджети",
+    "reports": "Доклади",
+    "accounts": "Сметки",
+    "categories": "Категории",
+    "goals": "Цели",
+    "import": "Импорт",
+    "export": "Експорт",
+    "settings": "Настройки",
+    "help": "Помощ",
+    "about": "За нас"
   },
   "actions": {
-    "addTransaction": "Add Transaction",
-    "importData": "Import Data",
-    "import": "Import",
-    "editDashboard": "Edit Dashboard",
-    "saveChanges": "Save Changes",
-    "resetDefaults": "Reset to Defaults"
+    "addTransaction": "Добави транзакция",
+    "importData": "Импорт на данни",
+    "import": "Импорт",
+    "editDashboard": "Редактиране на таблото",
+    "saveChanges": "Запази промените",
+    "resetDefaults": "Възстанови по подразбиране"
   },
   "welcome": {
-    "title": "Welcome to Budget App",
-    "subtitle": "Start by adding your first transaction or importing data from your bank"
+    "title": "Добре дошли в Budget App",
+    "subtitle": "Започнете, като добавите първата си транзакция или импортирате данни от банката си"
   },
   "common": {
-    "save": "Save",
-    "cancel": "Cancel",
-    "delete": "Delete",
-    "edit": "Edit",
-    "loading": "Loading..."
+    "save": "Запази",
+    "cancel": "Отказ",
+    "delete": "Изтрий",
+    "edit": "Редактирай",
+    "loading": "Зареждане..."
   },
   "widget": {
     "spendingByCategory": {
-      "title": "Spending by Category",
-      "description": "See where your money goes with visual breakdowns"
+      "title": "Разходи по категории",
+      "description": "Вижте къде отиват парите ви с визуални разбивки"
     },
     "recentTransactions": {
-      "title": "Recent Transactions",
-      "description": "Quick view of your latest financial activity"
+      "title": "Наскоро извършени транзакции",
+      "description": "Бърз преглед на последната ви финансова активност"
     },
     "budgetProgress": {
-      "title": "Budget Progress",
-      "description": "Track how you're doing against your budget goals"
+      "title": "Напредък по бюджета",
+      "description": "Следете как се справяте спрямо бюджетните си цели"
     },
     "accountBalances": {
-      "title": "Account Balances",
-      "description": "Current balances across all your accounts"
+      "title": "Баланс на сметките",
+      "description": "Текущи баланси на всички ваши сметки"
     },
     "incomeVsExpenses": {
-      "title": "Income vs Expenses",
-      "description": "Compare your earnings and spending over time"
+      "title": "Приходи срещу разходи",
+      "description": "Сравнете приходите и разходите си с времето"
     },
     "monthlyTrends": {
-      "title": "Monthly Trends",
-      "description": "Visualize your financial patterns month by month"
+      "title": "Месечни тенденции",
+      "description": "Визуализирайте финансовите си модели месец по месец"
     },
     "upcomingBills": {
-      "title": "Upcoming Bills",
-      "description": "Never miss a payment with bill reminders"
+      "title": "Предстоящи сметки",
+      "description": "Никога не пропускайте плащане с напомняния за сметки"
     }
   }
 }

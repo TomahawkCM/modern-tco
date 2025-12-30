@@ -1,65 +1,65 @@
 {
   "nav": {
-    "dashboard": "Dashboard",
-    "transactions": "Transactions",
-    "budgets": "Budgets",
-    "reports": "Reports",
-    "accounts": "Accounts",
-    "categories": "Categories",
-    "goals": "Goals",
-    "import": "Import",
-    "export": "Export",
-    "settings": "Settings",
-    "help": "Help",
-    "about": "About"
+    "dashboard": "Vadības panelis",
+    "transactions": "Transakcijas",
+    "budgets": "Budžeti",
+    "reports": "Pārskati",
+    "accounts": "Konti",
+    "categories": "Kategorijas",
+    "goals": "Mērķi",
+    "import": "Importēt",
+    "export": "Eksportēt",
+    "settings": "Iestatījumi",
+    "help": "Palīdzība",
+    "about": "Par"
   },
   "actions": {
-    "addTransaction": "Add Transaction",
-    "importData": "Import Data",
-    "import": "Import",
-    "editDashboard": "Edit Dashboard",
-    "saveChanges": "Save Changes",
-    "resetDefaults": "Reset to Defaults"
+    "addTransaction": "Pievienot transakciju",
+    "importData": "Importēt datus",
+    "import": "Importēt",
+    "editDashboard": "Rediģēt vadības paneli",
+    "saveChanges": "Saglabāt izmaiņas",
+    "resetDefaults": "Atjaunot noklusējuma iestatījumus"
   },
   "welcome": {
-    "title": "Welcome to Budget App",
-    "subtitle": "Start by adding your first transaction or importing data from your bank"
+    "title": "Laipni lūdzam Budžeta lietotnē",
+    "subtitle": "Sāciet, pievienojot savu pirmo transakciju vai importējot datus no bankas"
   },
   "common": {
-    "save": "Save",
-    "cancel": "Cancel",
-    "delete": "Delete",
-    "edit": "Edit",
-    "loading": "Loading..."
+    "save": "Saglabāt",
+    "cancel": "Atcelt",
+    "delete": "Dzēst",
+    "edit": "Rediģēt",
+    "loading": "Ielādē..."
   },
   "widget": {
     "spendingByCategory": {
-      "title": "Spending by Category",
-      "description": "See where your money goes with visual breakdowns"
+      "title": "Izdevumi pēc kategorijām",
+      "description": "Redziet, kur jūsu nauda aiziet ar vizuālām analīzēm"
     },
     "recentTransactions": {
-      "title": "Recent Transactions",
-      "description": "Quick view of your latest financial activity"
+      "title": "Jaunākās transakcijas",
+      "description": "Ātrs skats uz jūsu jaunākajām finanšu aktivitātēm"
     },
     "budgetProgress": {
-      "title": "Budget Progress",
-      "description": "Track how you're doing against your budget goals"
+      "title": "Budžeta progress",
+      "description": "Sekojiet līdzi, kā jums sokas ar budžeta mērķiem"
     },
     "accountBalances": {
-      "title": "Account Balances",
-      "description": "Current balances across all your accounts"
+      "title": "Kontu atlikumi",
+      "description": "Pašreizējie atlikumi visos jūsu kontos"
     },
     "incomeVsExpenses": {
-      "title": "Income vs Expenses",
-      "description": "Compare your earnings and spending over time"
+      "title": "Ieņēmumi pret izdevumiem",
+      "description": "Salīdziniet savus ienākumus un izdevumus laika gaitā"
     },
     "monthlyTrends": {
-      "title": "Monthly Trends",
-      "description": "Visualize your financial patterns month by month"
+      "title": "Mēneša tendences",
+      "description": "Vizualizējiet savus finanšu modeļus mēnesi pa mēnesim"
     },
     "upcomingBills": {
-      "title": "Upcoming Bills",
-      "description": "Never miss a payment with bill reminders"
+      "title": "Nākamie rēķini",
+      "description": "Nekad nepalaidiet garām maksājumu ar rēķinu atgādinājumiem"
     }
   }
 }

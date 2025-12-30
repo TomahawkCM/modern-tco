@@ -1,65 +1,65 @@
 {
   "nav": {
     "dashboard": "Dashboard",
-    "transactions": "Transactions",
-    "budgets": "Budgets",
-    "reports": "Reports",
-    "accounts": "Accounts",
-    "categories": "Categories",
-    "goals": "Goals",
-    "import": "Import",
-    "export": "Export",
-    "settings": "Settings",
-    "help": "Help",
-    "about": "About"
+    "transactions": "Transacties",
+    "budgets": "Budgetten",
+    "reports": "Rapporten",
+    "accounts": "Rekeningen",
+    "categories": "Categorieën",
+    "goals": "Doelen",
+    "import": "Importeren",
+    "export": "Exporteren",
+    "settings": "Instellingen",
+    "help": "Hulp",
+    "about": "Over"
   },
   "actions": {
-    "addTransaction": "Add Transaction",
-    "importData": "Import Data",
-    "import": "Import",
-    "editDashboard": "Edit Dashboard",
-    "saveChanges": "Save Changes",
-    "resetDefaults": "Reset to Defaults"
+    "addTransaction": "Transactie Toevoegen",
+    "importData": "Gegevens Importeren",
+    "import": "Importeren",
+    "editDashboard": "Dashboard Bewerken",
+    "saveChanges": "Wijzigingen Opslaan",
+    "resetDefaults": "Herstellen naar Standaarden"
   },
   "welcome": {
-    "title": "Welcome to Budget App",
-    "subtitle": "Start by adding your first transaction or importing data from your bank"
+    "title": "Welkom bij Budget App",
+    "subtitle": "Begin met het toevoegen van uw eerste transactie of het importeren van gegevens van uw bank"
   },
   "common": {
-    "save": "Save",
-    "cancel": "Cancel",
-    "delete": "Delete",
-    "edit": "Edit",
-    "loading": "Loading..."
+    "save": "Opslaan",
+    "cancel": "Annuleren",
+    "delete": "Verwijderen",
+    "edit": "Bewerken",
+    "loading": "Laden..."
   },
   "widget": {
     "spendingByCategory": {
-      "title": "Spending by Category",
-      "description": "See where your money goes with visual breakdowns"
+      "title": "Uitgaven per Categorie",
+      "description": "Zie waar uw geld naartoe gaat met visuele overzichten"
     },
     "recentTransactions": {
-      "title": "Recent Transactions",
-      "description": "Quick view of your latest financial activity"
+      "title": "Recente Transacties",
+      "description": "Snelle weergave van uw laatste financiële activiteiten"
     },
     "budgetProgress": {
-      "title": "Budget Progress",
-      "description": "Track how you're doing against your budget goals"
+      "title": "Budget Vooruitgang",
+      "description": "Volg hoe u het doet ten opzichte van uw budgetdoelen"
     },
     "accountBalances": {
-      "title": "Account Balances",
-      "description": "Current balances across all your accounts"
+      "title": "Rekening Saldo's",
+      "description": "Huidige saldi van al uw rekeningen"
     },
     "incomeVsExpenses": {
-      "title": "Income vs Expenses",
-      "description": "Compare your earnings and spending over time"
+      "title": "Inkomsten vs Uitgaven",
+      "description": "Vergelijk uw inkomsten en uitgaven in de loop van de tijd"
     },
     "monthlyTrends": {
-      "title": "Monthly Trends",
-      "description": "Visualize your financial patterns month by month"
+      "title": "Maandelijkse Trends",
+      "description": "Visualiseer uw financiële patronen maand na maand"
     },
     "upcomingBills": {
-      "title": "Upcoming Bills",
-      "description": "Never miss a payment with bill reminders"
+      "title": "Aankomende Rekening",
+      "description": "Mis nooit een betaling met herinneringen voor rekeningen"
     }
   }
 }

@@ -1,65 +1,65 @@
 {
   "nav": {
-    "dashboard": "Dashboard",
-    "transactions": "Transactions",
-    "budgets": "Budgets",
-    "reports": "Reports",
-    "accounts": "Accounts",
-    "categories": "Categories",
-    "goals": "Goals",
-    "import": "Import",
-    "export": "Export",
-    "settings": "Settings",
-    "help": "Help",
-    "about": "About"
+    "dashboard": "መሪ ገጽ",
+    "transactions": "ግብይቶች",
+    "budgets": "በጀትዎች",
+    "reports": "ዘገኝታዎች",
+    "accounts": "አካውንቶች",
+    "categories": "የምድቦች",
+    "goals": "ዓላማዎች",
+    "import": "ወደ ውስጥ አውርድ",
+    "export": "ወደ ውጭ አውጣ",
+    "settings": "ቅንብሮች",
+    "help": "እርዳታ",
+    "about": "ስለ"
   },
   "actions": {
-    "addTransaction": "Add Transaction",
-    "importData": "Import Data",
-    "import": "Import",
-    "editDashboard": "Edit Dashboard",
-    "saveChanges": "Save Changes",
-    "resetDefaults": "Reset to Defaults"
+    "addTransaction": "ግብይት ጨምር",
+    "importData": "ውስጥ ውሂብ አውርድ",
+    "import": "ወደ ውስጥ አውርድ",
+    "editDashboard": "መሪ ገጽ አርትዕ",
+    "saveChanges": "ለውጦች ይቀርብ",
+    "resetDefaults": "ወደ መደበኛ ይመለስ"
   },
   "welcome": {
-    "title": "Welcome to Budget App",
-    "subtitle": "Start by adding your first transaction or importing data from your bank"
+    "title": "በበጀት አፕ ይቀበሉ",
+    "subtitle": "የመጀመሪያዎቹ ግብይት ይጨምሩ ወይም ከባንክዎ ውሂብ ወደ ውስጥ አውርድ"
   },
   "common": {
-    "save": "Save",
-    "cancel": "Cancel",
-    "delete": "Delete",
-    "edit": "Edit",
-    "loading": "Loading..."
+    "save": "ይቀርብ",
+    "cancel": "ይቀጥል",
+    "delete": "ይሰርዝ",
+    "edit": "አርትዕ",
+    "loading": "በመጫን..."
   },
   "widget": {
     "spendingByCategory": {
-      "title": "Spending by Category",
-      "description": "See where your money goes with visual breakdowns"
+      "title": "በምድብ የተገኘ ወጪ",
+      "description": "የገንዝ መንገድ በቀለም እንደሚታይ"
     },
     "recentTransactions": {
-      "title": "Recent Transactions",
-      "description": "Quick view of your latest financial activity"
+      "title": "ቅርብ ግብይቶች",
+      "description": "የቅርብ ገንዘብ እንቅስቃሴ ፈጣን እይታ"
     },
     "budgetProgress": {
-      "title": "Budget Progress",
-      "description": "Track how you're doing against your budget goals"
+      "title": "የበጀት እድገት",
+      "description": "ወደ በጀት ዓላማዎች የምንደርስ እንዴት ነው"
     },
     "accountBalances": {
-      "title": "Account Balances",
-      "description": "Current balances across all your accounts"
+      "title": "የአካውንት ታሪኮች",
+      "description": "በሁሉም አካውንቶች ወቅታዊ ታሪኮች"
     },
     "incomeVsExpenses": {
-      "title": "Income vs Expenses",
-      "description": "Compare your earnings and spending over time"
+      "title": "ገቢ እና ወጪ",
+      "description": "ገንዘብ እና ወጪ በጊዜ ይነጻ"
     },
     "monthlyTrends": {
-      "title": "Monthly Trends",
-      "description": "Visualize your financial patterns month by month"
+      "title": "ወርሃዊ ቅንብሮች",
+      "description": "የገንዘብ እንቅስቃሴ ወር በወር ይታይ"
     },
     "upcomingBills": {
-      "title": "Upcoming Bills",
-      "description": "Never miss a payment with bill reminders"
+      "title": "ወደ ፊት የሚመጡ ቢል",
+      "description": "ከቢል ግንዛቤ አንድ ክፍያ አይወርድ"
     }
   }
 }

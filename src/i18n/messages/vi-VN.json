@@ -1,65 +1,65 @@
 {
   "nav": {
-    "dashboard": "Dashboard",
-    "transactions": "Transactions",
-    "budgets": "Budgets",
-    "reports": "Reports",
-    "accounts": "Accounts",
-    "categories": "Categories",
-    "goals": "Goals",
-    "import": "Import",
-    "export": "Export",
-    "settings": "Settings",
-    "help": "Help",
-    "about": "About"
+    "dashboard": "Bảng điều khiển",
+    "transactions": "Giao dịch",
+    "budgets": "Ngân sách",
+    "reports": "Báo cáo",
+    "accounts": "Tài khoản",
+    "categories": "Danh mục",
+    "goals": "Mục tiêu",
+    "import": "Nhập khẩu",
+    "export": "Xuất khẩu",
+    "settings": "Cài đặt",
+    "help": "Trợ giúp",
+    "about": "Giới thiệu"
   },
   "actions": {
-    "addTransaction": "Add Transaction",
-    "importData": "Import Data",
-    "import": "Import",
-    "editDashboard": "Edit Dashboard",
-    "saveChanges": "Save Changes",
-    "resetDefaults": "Reset to Defaults"
+    "addTransaction": "Thêm giao dịch",
+    "importData": "Nhập dữ liệu",
+    "import": "Nhập",
+    "editDashboard": "Chỉnh sửa bảng điều khiển",
+    "saveChanges": "Lưu thay đổi",
+    "resetDefaults": "Đặt lại mặc định"
   },
   "welcome": {
-    "title": "Welcome to Budget App",
-    "subtitle": "Start by adding your first transaction or importing data from your bank"
+    "title": "Chào mừng đến với ứng dụng Ngân sách",
+    "subtitle": "Bắt đầu bằng cách thêm giao dịch đầu tiên hoặc nhập dữ liệu từ ngân hàng của bạn"
   },
   "common": {
-    "save": "Save",
-    "cancel": "Cancel",
-    "delete": "Delete",
-    "edit": "Edit",
-    "loading": "Loading..."
+    "save": "Lưu",
+    "cancel": "Hủy",
+    "delete": "Xóa",
+    "edit": "Chỉnh sửa",
+    "loading": "Đang tải..."
   },
   "widget": {
     "spendingByCategory": {
-      "title": "Spending by Category",
-      "description": "See where your money goes with visual breakdowns"
+      "title": "Chi tiêu theo danh mục",
+      "description": "Xem tiền của bạn đi đâu với phân tích trực quan"
     },
     "recentTransactions": {
-      "title": "Recent Transactions",
-      "description": "Quick view of your latest financial activity"
+      "title": "Giao dịch gần đây",
+      "description": "Xem nhanh hoạt động tài chính mới nhất của bạn"
     },
     "budgetProgress": {
-      "title": "Budget Progress",
-      "description": "Track how you're doing against your budget goals"
+      "title": "Tiến độ ngân sách",
+      "description": "Theo dõi tình hình của bạn so với mục tiêu ngân sách"
     },
     "accountBalances": {
-      "title": "Account Balances",
-      "description": "Current balances across all your accounts"
+      "title": "Số dư tài khoản",
+      "description": "Số dư hiện tại trên tất cả các tài khoản của bạn"
     },
     "incomeVsExpenses": {
-      "title": "Income vs Expenses",
-      "description": "Compare your earnings and spending over time"
+      "title": "Thu nhập so với Chi phí",
+      "description": "So sánh thu nhập và chi tiêu của bạn theo thời gian"
     },
     "monthlyTrends": {
-      "title": "Monthly Trends",
-      "description": "Visualize your financial patterns month by month"
+      "title": "Xu hướng hàng tháng",
+      "description": "Hình dung các mẫu tài chính của bạn theo từng tháng"
     },
     "upcomingBills": {
-      "title": "Upcoming Bills",
-      "description": "Never miss a payment with bill reminders"
+      "title": "Hóa đơn sắp tới",
+      "description": "Không bao giờ bỏ lỡ một khoản thanh toán với nhắc nhở hóa đơn"
     }
   }
 }

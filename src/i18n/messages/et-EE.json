@@ -1,65 +1,65 @@
 {
   "nav": {
-    "dashboard": "Dashboard",
-    "transactions": "Transactions",
-    "budgets": "Budgets",
-    "reports": "Reports",
-    "accounts": "Accounts",
-    "categories": "Categories",
-    "goals": "Goals",
-    "import": "Import",
-    "export": "Export",
-    "settings": "Settings",
-    "help": "Help",
-    "about": "About"
+    "dashboard": "Armatuurlaud",
+    "transactions": "Tehingud",
+    "budgets": "Eelarved",
+    "reports": "Aruanded",
+    "accounts": "Kontod",
+    "categories": "Kategooriad",
+    "goals": "Eesmärgid",
+    "import": "Impordi",
+    "export": "Ekspordi",
+    "settings": "Seaded",
+    "help": "Abi",
+    "about": "Teave"
   },
   "actions": {
-    "addTransaction": "Add Transaction",
-    "importData": "Import Data",
-    "import": "Import",
-    "editDashboard": "Edit Dashboard",
-    "saveChanges": "Save Changes",
-    "resetDefaults": "Reset to Defaults"
+    "addTransaction": "Lisa tehing",
+    "importData": "Impordi andmed",
+    "import": "Impordi",
+    "editDashboard": "Muuda armatuurlauda",
+    "saveChanges": "Salvesta muudatused",
+    "resetDefaults": "Lähtesta vaikeväärtused"
   },
   "welcome": {
-    "title": "Welcome to Budget App",
-    "subtitle": "Start by adding your first transaction or importing data from your bank"
+    "title": "Tere tulemast eelarve rakendusse",
+    "subtitle": "Alusta oma esimese tehingu lisamisega või andmete importimisega pangast"
   },
   "common": {
-    "save": "Save",
-    "cancel": "Cancel",
-    "delete": "Delete",
-    "edit": "Edit",
-    "loading": "Loading..."
+    "save": "Salvesta",
+    "cancel": "Tühista",
+    "delete": "Kustuta",
+    "edit": "Muuda",
+    "loading": "Laadimine..."
   },
   "widget": {
     "spendingByCategory": {
-      "title": "Spending by Category",
-      "description": "See where your money goes with visual breakdowns"
+      "title": "Kulud kategooriate järgi",
+      "description": "Vaata, kuhu sinu raha läheb visuaalsete jaotuste abil"
     },
     "recentTransactions": {
-      "title": "Recent Transactions",
-      "description": "Quick view of your latest financial activity"
+      "title": "Viimased tehingud",
+      "description": "Kiire ülevaade sinu viimastest finantstegevustest"
     },
     "budgetProgress": {
-      "title": "Budget Progress",
-      "description": "Track how you're doing against your budget goals"
+      "title": "Eelarve edenemine",
+      "description": "Jälgi, kuidas sul läheb sinu eelarve eesmärkide täitmisel"
     },
     "accountBalances": {
-      "title": "Account Balances",
-      "description": "Current balances across all your accounts"
+      "title": "Kontode jäägid",
+      "description": "Praegused jäägid kõigis sinu kontodes"
     },
     "incomeVsExpenses": {
-      "title": "Income vs Expenses",
-      "description": "Compare your earnings and spending over time"
+      "title": "Tulu vs kulud",
+      "description": "Võrdle oma sissetulekuid ja kulutusi ajas"
     },
     "monthlyTrends": {
-      "title": "Monthly Trends",
-      "description": "Visualize your financial patterns month by month"
+      "title": "Kuu trendid",
+      "description": "Visualiseeri oma finantsskeeme kuu kaupa"
     },
     "upcomingBills": {
-      "title": "Upcoming Bills",
-      "description": "Never miss a payment with bill reminders"
+      "title": "Tulevad arved",
+      "description": "Ära jäta makset vahele arve meeldetuletustega"
     }
   }
 }

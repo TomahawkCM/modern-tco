@@ -1,65 +1,65 @@
 {
   "nav": {
-    "dashboard": "Dashboard",
-    "transactions": "Transactions",
-    "budgets": "Budgets",
-    "reports": "Reports",
-    "accounts": "Accounts",
-    "categories": "Categories",
-    "goals": "Goals",
-    "import": "Import",
-    "export": "Export",
-    "settings": "Settings",
-    "help": "Help",
-    "about": "About"
+    "dashboard": "Dashbord",
+    "transactions": "Transaksjoner",
+    "budgets": "Budsjetter",
+    "reports": "Rapporter",
+    "accounts": "Kontoer",
+    "categories": "Kategorier",
+    "goals": "Mål",
+    "import": "Importer",
+    "export": "Eksporter",
+    "settings": "Innstillinger",
+    "help": "Hjelp",
+    "about": "Om"
   },
   "actions": {
-    "addTransaction": "Add Transaction",
-    "importData": "Import Data",
-    "import": "Import",
-    "editDashboard": "Edit Dashboard",
-    "saveChanges": "Save Changes",
-    "resetDefaults": "Reset to Defaults"
+    "addTransaction": "Legg til transaksjon",
+    "importData": "Importer data",
+    "import": "Importer",
+    "editDashboard": "Rediger dashbord",
+    "saveChanges": "Lagre endringer",
+    "resetDefaults": "Tilbakestill til standard"
   },
   "welcome": {
-    "title": "Welcome to Budget App",
-    "subtitle": "Start by adding your first transaction or importing data from your bank"
+    "title": "Velkommen til Budsjett App",
+    "subtitle": "Start med å legge til din første transaksjon eller importere data fra banken din"
   },
   "common": {
-    "save": "Save",
-    "cancel": "Cancel",
-    "delete": "Delete",
-    "edit": "Edit",
-    "loading": "Loading..."
+    "save": "Lagre",
+    "cancel": "Avbryt",
+    "delete": "Slett",
+    "edit": "Rediger",
+    "loading": "Laster..."
   },
   "widget": {
     "spendingByCategory": {
-      "title": "Spending by Category",
-      "description": "See where your money goes with visual breakdowns"
+      "title": "Utgifter etter kategori",
+      "description": "Se hvor pengene dine går med visuelle oversikter"
     },
     "recentTransactions": {
-      "title": "Recent Transactions",
-      "description": "Quick view of your latest financial activity"
+      "title": "Nylige transaksjoner",
+      "description": "Rask oversikt over din siste økonomiske aktivitet"
     },
     "budgetProgress": {
-      "title": "Budget Progress",
-      "description": "Track how you're doing against your budget goals"
+      "title": "Budsjettprogresjon",
+      "description": "Følg med på hvordan du ligger an i forhold til budsjettmålene dine"
     },
     "accountBalances": {
-      "title": "Account Balances",
-      "description": "Current balances across all your accounts"
+      "title": "Kontobalanser",
+      "description": "Nåværende saldoer på alle kontoene dine"
     },
     "incomeVsExpenses": {
-      "title": "Income vs Expenses",
-      "description": "Compare your earnings and spending over time"
+      "title": "Inntekt vs Utgifter",
+      "description": "Sammenlign inntektene og utgiftene over tid"
     },
     "monthlyTrends": {
-      "title": "Monthly Trends",
-      "description": "Visualize your financial patterns month by month"
+      "title": "Månedlige trender",
+      "description": "Visualiser dine økonomiske mønstre måned for måned"
     },
     "upcomingBills": {
-      "title": "Upcoming Bills",
-      "description": "Never miss a payment with bill reminders"
+      "title": "Kommende regninger",
+      "description": "Gå aldri glipp av en betaling med påminnelser om regninger"
     }
   }
 }

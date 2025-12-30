@@ -1,65 +1,65 @@
 {
   "nav": {
-    "dashboard": "Dashboard",
-    "transactions": "Transactions",
-    "budgets": "Budgets",
-    "reports": "Reports",
-    "accounts": "Accounts",
-    "categories": "Categories",
-    "goals": "Goals",
-    "import": "Import",
-    "export": "Export",
-    "settings": "Settings",
-    "help": "Help",
-    "about": "About"
+    "dashboard": "Վահանակ",
+    "transactions": "Գործարքներ",
+    "budgets": "Բյուջեներ",
+    "reports": "Հաշվետվություններ",
+    "accounts": "Հաշիվներ",
+    "categories": "Կատեգորիաներ",
+    "goals": "Նպատակներ",
+    "import": "Ներմուծել",
+    "export": "Արտահանել",
+    "settings": "Կարգավորումներ",
+    "help": "Օգնություն",
+    "about": "Մեր մասին"
   },
   "actions": {
-    "addTransaction": "Add Transaction",
-    "importData": "Import Data",
-    "import": "Import",
-    "editDashboard": "Edit Dashboard",
-    "saveChanges": "Save Changes",
-    "resetDefaults": "Reset to Defaults"
+    "addTransaction": "Ավելացնել գործարք",
+    "importData": "Ներմուծել տվյալներ",
+    "import": "Ներմուծել",
+    "editDashboard": "Խմբագրել վահանակը",
+    "saveChanges": "Պահպանել փոփոխությունները",
+    "resetDefaults": "Վերադարձնել նախնական կարգավորումները"
   },
   "welcome": {
-    "title": "Welcome to Budget App",
-    "subtitle": "Start by adding your first transaction or importing data from your bank"
+    "title": "Բարի գալուստ Բյուջե հավելված",
+    "subtitle": "Սկսեք ձեր առաջին գործարքը ավելացնելով կամ ձեր բանկից տվյալներ ներմուծելով"
   },
   "common": {
-    "save": "Save",
-    "cancel": "Cancel",
-    "delete": "Delete",
-    "edit": "Edit",
-    "loading": "Loading..."
+    "save": "Պահպանել",
+    "cancel": "Չեղարկել",
+    "delete": "Ջնջել",
+    "edit": "Խմբագրել",
+    "loading": "Բեռնվում է..."
   },
   "widget": {
     "spendingByCategory": {
-      "title": "Spending by Category",
-      "description": "See where your money goes with visual breakdowns"
+      "title": "Ծախսեր ըստ կատեգորիայի",
+      "description": "Տեսեք, թե որտեղ է գնում ձեր գումարը տեսողական բաժանումներով"
     },
     "recentTransactions": {
-      "title": "Recent Transactions",
-      "description": "Quick view of your latest financial activity"
+      "title": "Վերջին գործարքներ",
+      "description": "Արագ դիտում ձեր վերջին ֆինանսական գործունեության"
     },
     "budgetProgress": {
-      "title": "Budget Progress",
-      "description": "Track how you're doing against your budget goals"
+      "title": "Բյուջեի առաջընթաց",
+      "description": "Հետևեք ձեր բյուջեի նպատակների նկատմամբ առաջընթացին"
     },
     "accountBalances": {
-      "title": "Account Balances",
-      "description": "Current balances across all your accounts"
+      "title": "Հաշիվների մնացորդներ",
+      "description": "Ընդհանուր մնացորդներ բոլոր ձեր հաշիվներում"
     },
     "incomeVsExpenses": {
-      "title": "Income vs Expenses",
-      "description": "Compare your earnings and spending over time"
+      "title": "Ամենամսյա եկամուտ և ծախսեր",
+      "description": "Համեմատեք ձեր եկամուտներն ու ծախսերը ժամանակի ընթացքում"
     },
     "monthlyTrends": {
-      "title": "Monthly Trends",
-      "description": "Visualize your financial patterns month by month"
+      "title": "Ամսական միտումներ",
+      "description": "Տեսողականացրեք ձեր ֆինանսական նախասիրությունները ամիս առ ամիս"
     },
     "upcomingBills": {
-      "title": "Upcoming Bills",
-      "description": "Never miss a payment with bill reminders"
+      "title": "Մոտեցող հաշիվներ",
+      "description": "Չմոռանաք վճարումները հաշվի հիշեցումներով"
     }
   }
 }

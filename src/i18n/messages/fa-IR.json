@@ -1,65 +1,65 @@
 {
   "nav": {
-    "dashboard": "Dashboard",
-    "transactions": "Transactions",
-    "budgets": "Budgets",
-    "reports": "Reports",
-    "accounts": "Accounts",
-    "categories": "Categories",
-    "goals": "Goals",
-    "import": "Import",
-    "export": "Export",
-    "settings": "Settings",
-    "help": "Help",
-    "about": "About"
+    "dashboard": "داشبورد",
+    "transactions": "معاملات",
+    "budgets": "بودجه‌ها",
+    "reports": "گزارش‌ها",
+    "accounts": "حساب‌ها",
+    "categories": "دسته‌بندی‌ها",
+    "goals": "اهداف",
+    "import": "وارد کردن",
+    "export": "صادرات",
+    "settings": "تنظیمات",
+    "help": "راهنما",
+    "about": "درباره"
   },
   "actions": {
-    "addTransaction": "Add Transaction",
-    "importData": "Import Data",
-    "import": "Import",
-    "editDashboard": "Edit Dashboard",
-    "saveChanges": "Save Changes",
-    "resetDefaults": "Reset to Defaults"
+    "addTransaction": "اضافه کردن معامله",
+    "importData": "وارد کردن داده‌ها",
+    "import": "وارد کردن",
+    "editDashboard": "ویرایش داشبورد",
+    "saveChanges": "ذخیره تغییرات",
+    "resetDefaults": "بازنشانی به تنظیمات پیش‌فرض"
   },
   "welcome": {
-    "title": "Welcome to Budget App",
-    "subtitle": "Start by adding your first transaction or importing data from your bank"
+    "title": "به اپلیکیشن بودجه خوش آمدید",
+    "subtitle": "با اضافه کردن اولین معامله یا وارد کردن داده‌ها از بانک شروع کنید"
   },
   "common": {
-    "save": "Save",
-    "cancel": "Cancel",
-    "delete": "Delete",
-    "edit": "Edit",
-    "loading": "Loading..."
+    "save": "ذخیره",
+    "cancel": "لغو",
+    "delete": "حذف",
+    "edit": "ویرایش",
+    "loading": "در حال بارگذاری..."
   },
   "widget": {
     "spendingByCategory": {
-      "title": "Spending by Category",
-      "description": "See where your money goes with visual breakdowns"
+      "title": "هزینه‌ها بر اساس دسته‌بندی",
+      "description": "ببینید پول شما کجا می‌رود با تجزیه و تحلیل بصری"
     },
     "recentTransactions": {
-      "title": "Recent Transactions",
-      "description": "Quick view of your latest financial activity"
+      "title": "معاملات اخیر",
+      "description": "نمای سریع از آخرین فعالیت‌های مالی شما"
     },
     "budgetProgress": {
-      "title": "Budget Progress",
-      "description": "Track how you're doing against your budget goals"
+      "title": "پیشرفت بودجه",
+      "description": "پیگیری کنید که چگونه در برابر اهداف بودجه‌تان عمل می‌کنید"
     },
     "accountBalances": {
-      "title": "Account Balances",
-      "description": "Current balances across all your accounts"
+      "title": "مانده حساب‌ها",
+      "description": "مانده‌های فعلی در تمام حساب‌های شما"
     },
     "incomeVsExpenses": {
-      "title": "Income vs Expenses",
-      "description": "Compare your earnings and spending over time"
+      "title": "درآمد در مقابل هزینه‌ها",
+      "description": "مقایسه درآمد و هزینه‌های شما در طول زمان"
     },
     "monthlyTrends": {
-      "title": "Monthly Trends",
-      "description": "Visualize your financial patterns month by month"
+      "title": "روندهای ماهانه",
+      "description": "الگوهای مالی خود را ماه به ماه تجسم کنید"
     },
     "upcomingBills": {
-      "title": "Upcoming Bills",
-      "description": "Never miss a payment with bill reminders"
+      "title": "صورتحساب‌های آینده",
+      "description": "هرگز یک پرداخت را با یادآوری صورتحساب‌ها از دست ندهید"
     }
   }
 }
