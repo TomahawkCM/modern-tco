@@ -1,0 +1,52 @@
+{
+  "nav": {
+    "dashboard": "Tableau de bord",
+    "transactions": "Transactions",
+    "budgets": "Budgets",
+    "reports": "Rapports",
+    "accounts": "Comptes",
+    "categories": "Catégories",
+    "goals": "Objectifs",
+    "import": "Importer",
+    "export": "Exporter",
+    "settings": "Paramètres",
+    "help": "Aide",
+    "about": "À propos"
+  },
+  "common": {
+    "save": "Sauvegarder",
+    "cancel": "Annuler",
+    "delete": "Supprimer",
+    "edit": "Modifier"
+  },
+  "widget": {
+    "spendingByCategory": {
+      "title": "Dépenses par catégorie",
+      "description": "Voyez où va votre argent avec des répartitions visuelles"
+    },
+    "recentTransactions": {
+      "title": "Transactions récentes",
+      "description": "Vue rapide de votre activité financière récente"
+    },
+    "budgetProgress": {
+      "title": "Progrès du budget",
+      "description": "Suivez vos progrès par rapport à vos objectifs budgétaires"
+    },
+    "accountBalances": {
+      "title": "Soldes de compte",
+      "description": "Soldes actuels de tous vos comptes"
+    },
+    "incomeVsExpenses": {
+      "title": "Revenus vs Dépenses",
+      "description": "Comparez vos revenus et dépenses au fil du temps"
+    },
+    "monthlyTrends": {
+      "title": "Tendances mensuelles",
+      "description": "Visualisez vos habitudes financières mois par mois"
+    },
+    "upcomingBills": {
+      "title": "Factures à venir",
+      "description": "Ne manquez jamais un paiement avec des rappels de factures"
+    }
+  }
+}

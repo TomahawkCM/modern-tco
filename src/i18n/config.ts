@@ -4,45 +4,51 @@
  * Defines supported locales, default locale, and locale validation
  */
 
-export type SupportedLocale = 'en-US' | 'en-IN' | 'ko-KR' | 'en-XA';
+export type SupportedLocale = "en-US" | "en-IN" | "ko-KR" | "fr-CA" | "en-XA";
 
 /**
  * Supported locales (includes dev-only pseudo-locale en-XA in development)
  */
 export const SUPPORTED_LOCALES: SupportedLocale[] =
-  process.env.NODE_ENV === 'development'
-    ? ['en-US', 'en-IN', 'ko-KR', 'en-XA']
-    : ['en-US', 'en-IN', 'ko-KR'];
+  process.env.NODE_ENV === "development"
+    ? ["en-US", "en-IN", "ko-KR", "fr-CA", "en-XA"]
+    : ["en-US", "en-IN", "ko-KR", "fr-CA"];
 
-export const DEFAULT_LOCALE: SupportedLocale = 'en-US';
+export const DEFAULT_LOCALE: SupportedLocale = "en-US";
 
 /**
  * Locale metadata for display and formatting
  */
 export const LOCALE_METADATA = {
-  'en-US': {
-    label: 'English (US)',
-    dir: 'ltr' as const,
-    currency: 'USD',
-    numberingSystem: 'standard' as const,
+  "en-US": {
+    label: "English (US)",
+    dir: "ltr" as const,
+    currency: "USD",
+    numberingSystem: "standard" as const,
   },
-  'en-IN': {
-    label: 'English (India)',
-    dir: 'ltr' as const,
-    currency: 'INR',
-    numberingSystem: 'lakh-crore' as const,
+  "en-IN": {
+    label: "English (India)",
+    dir: "ltr" as const,
+    currency: "INR",
+    numberingSystem: "lakh-crore" as const,
   },
-  'ko-KR': {
-    label: '한국어 (Korean)',
-    dir: 'ltr' as const,
-    currency: 'KRW',
-    numberingSystem: 'standard' as const,
+  "ko-KR": {
+    label: "한국어 (Korean)",
+    dir: "ltr" as const,
+    currency: "KRW",
+    numberingSystem: "standard" as const,
   },
-  'en-XA': {
-    label: '[Þšéüðó-Ļóçálé ÉÑ-XÁ~~~] (Dev Only)',
-    dir: 'ltr' as const,
-    currency: 'USD',
-    numberingSystem: 'standard' as const,
+  "fr-CA": {
+    label: "Français (Canada)",
+    dir: "ltr" as const,
+    currency: "CAD",
+    numberingSystem: "standard" as const,
+  },
+  "en-XA": {
+    label: "[Þšéüðó-Ļóçálé ÉÑ-XÁ~~~] (Dev Only)",
+    dir: "ltr" as const,
+    currency: "USD",
+    numberingSystem: "standard" as const,
   },
 } as const;
 
@@ -67,7 +73,7 @@ export function getValidLocale(locale?: string | null): SupportedLocale {
  * Get browser's preferred locale from supported locales
  */
 export function getBrowserLocale(): SupportedLocale {
-  if (typeof window === 'undefined') {
+  if (typeof window === "undefined") {
     return DEFAULT_LOCALE;
   }
 
@@ -79,8 +85,8 @@ export function getBrowserLocale(): SupportedLocale {
   }
 
   // Try language prefix match (e.g., 'ko' matches 'ko-KR')
-  const langPrefix = browserLang?.split('-')[0];
-  const prefixMatch = SUPPORTED_LOCALES.find((locale) => locale.startsWith(langPrefix || ''));
+  const langPrefix = browserLang?.split("-")[0];
+  const prefixMatch = SUPPORTED_LOCALES.find((locale) => locale.startsWith(langPrefix || ""));
 
   return prefixMatch || DEFAULT_LOCALE;
 }
