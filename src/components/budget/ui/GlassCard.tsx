@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 import { ReactNode } from "react";
 
-interface GlassCardProps {
+interface GlassCardProps extends React.HTMLAttributes<HTMLDivElement> {
   children: ReactNode;
   className?: string;
   hoverEffect?: boolean;
@@ -13,9 +13,11 @@ export function GlassCard({
   className,
   hoverEffect = true,
   gradient = "none",
+  ...htmlProps
 }: GlassCardProps) {
   return (
     <div
+      {...htmlProps}
       className={cn(
         "relative overflow-hidden rounded-xl border border-white/10 shadow-xl backdrop-blur-md transition-all duration-300",
         // Base background
