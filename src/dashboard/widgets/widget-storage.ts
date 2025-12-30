@@ -2,12 +2,20 @@
  * Widget Configuration Storage
  *
  * LocalStorage utilities for persisting dashboard widget configurations
- * Supabase sync will be added in Task 11
+ *
+ * Strategy: localStorage-first with Supabase sync (Task 11)
+ * - Writes to localStorage immediately (synchronous)
+ * - Syncs to Supabase on change (debounced, 1 second)
+ * - On app init, checks Supabase for newer data and merges if needed
  */
 
 import type { DashboardConfig } from './types';
 import type { DeviceClass } from '@/lib/breakpoints';
 import { getDefaultPreset } from './presets';
+import {
+  syncWidgetConfigToSupabase,
+  loadWidgetConfigFromSupabase,
+} from '@/lib/supabase/user-preferences';
 
 const STORAGE_KEY = 'budget_app_widget_config';
 const CONFIG_VERSION = 1;
@@ -56,6 +64,7 @@ export function getWidgetConfig(deviceClass: DeviceClass): DashboardConfig {
 /**
  * Save widget configuration to localStorage
  * Dispatches custom event for cross-component synchronization
+ * Syncs to Supabase (debounced, 1 second)
  */
 export function setWidgetConfig(config: DashboardConfig): void {
   if (typeof window === 'undefined') {
@@ -72,6 +81,9 @@ export function setWidgetConfig(config: DashboardConfig): void {
 
     // Save to localStorage
     localStorage.setItem(STORAGE_KEY, JSON.stringify(updatedConfig));
+
+    // Sync to Supabase (debounced, fire-and-forget)
+    syncWidgetConfigToSupabase(updatedConfig);
 
     // Dispatch custom event for cross-component sync
     const event = new CustomEvent('widgetConfigChanged', {
@@ -190,5 +202,50 @@ export function importWidgetConfig(jsonString: string): boolean {
   } catch (error) {
     console.error('Error importing widget config:', error);
     return false;
+  }
+}
+
+/**
+ * Initialize widget configuration from Supabase on app startup
+ * Call this once during app initialization (e.g., in useEffect on mount)
+ *
+ * Conflict Resolution:
+ * - If localStorage was recently updated (last 5 minutes), keep localStorage
+ * - Otherwise, use Supabase data if it's newer
+ * - If no local config exists, use Supabase or fall back to default preset
+ *
+ * @param deviceClass - Current device class for default preset fallback
+ */
+export async function initializeWidgetConfig(
+  deviceClass: DeviceClass
+): Promise<void> {
+  if (typeof window === 'undefined') {
+    return;
+  }
+
+  try {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    const localConfig = stored ? (JSON.parse(stored) as DashboardConfig) : null;
+
+    const supabaseConfig = await loadWidgetConfigFromSupabase(localConfig);
+
+    if (supabaseConfig) {
+      // Supabase has newer data - update localStorage
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(supabaseConfig));
+
+      // Dispatch event to notify components
+      window.dispatchEvent(
+        new CustomEvent('widgetConfigChanged', {
+          detail: supabaseConfig,
+        })
+      );
+
+      console.log('Widget config initialized from Supabase');
+    } else {
+      console.log('Widget config: using local data');
+    }
+  } catch (error) {
+    console.error('Error initializing widget config:', error);
+    // Continue with localStorage data on error
   }
 }

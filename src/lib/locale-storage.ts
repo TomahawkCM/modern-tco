@@ -4,11 +4,18 @@
  * localStorage utilities for persisting locale, region, currency, and week start preferences
  * Key: budget_app_locale_prefs
  *
- * NOTE: Supabase sync will be added in Task 11
+ * Strategy: localStorage-first with Supabase sync (Task 11)
+ * - Writes to localStorage immediately (synchronous)
+ * - Syncs to Supabase on change (debounced, 1 second)
+ * - On app init, checks Supabase for newer data and merges if needed
  */
 
 import { type SupportedLocale, getValidLocale, DEFAULT_LOCALE } from '../i18n/config';
 import type { CurrencyCode } from '../i18n/utils/formatCurrency';
+import {
+  syncLocaleToSupabase,
+  loadLocaleFromSupabase,
+} from './supabase/user-preferences';
 
 const STORAGE_KEY = 'budget_app_locale_prefs';
 
@@ -71,6 +78,7 @@ export function getLocalePreferences(): LocalePreferences {
 /**
  * Save locale preferences to localStorage
  * Updates the updatedAt timestamp automatically
+ * Syncs to Supabase (debounced, 1 second)
  */
 export function setLocalePreferences(prefs: Partial<LocalePreferences>): void {
   if (typeof window === 'undefined') {
@@ -86,6 +94,9 @@ export function setLocalePreferences(prefs: Partial<LocalePreferences>): void {
     };
 
     localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
+
+    // Sync to Supabase (debounced, fire-and-forget)
+    syncLocaleToSupabase(updated);
 
     // Dispatch custom event for components to react to changes
     window.dispatchEvent(
@@ -180,4 +191,42 @@ export function wasRecentlyUpdated(prefs: LocalePreferences): boolean {
   if (!prefs.updatedAt) return false;
   const fiveMinutesAgo = Date.now() - 5 * 60 * 1000;
   return prefs.updatedAt > fiveMinutesAgo;
+}
+
+/**
+ * Initialize locale preferences from Supabase on app startup
+ * Call this once during app initialization (e.g., in useEffect on mount)
+ *
+ * Conflict Resolution:
+ * - If localStorage was recently updated (last 5 minutes), keep localStorage
+ * - Otherwise, use Supabase data if it's newer
+ */
+export async function initializeLocalePreferences(): Promise<void> {
+  if (typeof window === 'undefined') {
+    return;
+  }
+
+  try {
+    const localPrefs = getLocalePreferences();
+    const supabasePrefs = await loadLocaleFromSupabase(localPrefs);
+
+    if (supabasePrefs) {
+      // Supabase has newer data - update localStorage
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(supabasePrefs));
+
+      // Dispatch event to notify components
+      window.dispatchEvent(
+        new CustomEvent('localePreferencesChanged', {
+          detail: supabasePrefs,
+        })
+      );
+
+      console.log('Locale preferences initialized from Supabase');
+    } else {
+      console.log('Locale preferences: using local data');
+    }
+  } catch (error) {
+    console.error('Error initializing locale preferences:', error);
+    // Continue with localStorage data on error
+  }
 }
