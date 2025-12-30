@@ -18,5 +18,35 @@
     "cancel": "Cancel",
     "delete": "Delete",
     "edit": "Edit"
+  },
+  "widget": {
+    "spendingByCategory": {
+      "title": "Spending by Category",
+      "description": "See where your money goes with visual breakdowns"
+    },
+    "recentTransactions": {
+      "title": "Recent Transactions",
+      "description": "Quick view of your latest financial activity"
+    },
+    "budgetProgress": {
+      "title": "Budget Progress",
+      "description": "Track how you're doing against your budget goals"
+    },
+    "accountBalances": {
+      "title": "Account Balances",
+      "description": "Current balances across all your accounts"
+    },
+    "incomeVsExpenses": {
+      "title": "Income vs Expenses",
+      "description": "Compare your earnings and spending over time"
+    },
+    "monthlyTrends": {
+      "title": "Monthly Trends",
+      "description": "Visualize your financial patterns month by month"
+    },
+    "upcomingBills": {
+      "title": "Upcoming Bills",
+      "description": "Never miss a payment with bill reminders"
+    }
   }
 }

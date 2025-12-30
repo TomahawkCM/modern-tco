@@ -23,14 +23,17 @@ import {
   Upload,
   TrendingUp,
   Sparkles,
+  Settings2,
 } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { WidgetEditMode } from "@/dashboard/widgets/WidgetEditMode";
 
 export default function DashboardPage() {
   const [loading, setLoading] = useState(true);
   const [hasData, setHasData] = useState(false);
   const [widgetConfig, setWidgetConfig] = useState<DashboardConfig | null>(null);
+  const [isEditMode, setIsEditMode] = useState(false);
   const deviceClass = useDeviceClass();
 
   useEffect(() => {
@@ -107,6 +110,17 @@ export default function DashboardPage() {
 
   const gridConfig = deviceClass ? getGridConfig(deviceClass) : null;
 
+  // Handle edit mode save
+  const handleSaveEditMode = (newConfig: DashboardConfig) => {
+    setWidgetConfig(newConfig);
+    setIsEditMode(false);
+  };
+
+  // Handle edit mode cancel
+  const handleCancelEditMode = () => {
+    setIsEditMode(false);
+  };
+
   return (
     <div className="space-y-8 pb-8">
       {/* Header */}
@@ -118,30 +132,51 @@ export default function DashboardPage() {
           </p>
         </div>
         <div className="flex gap-3">
-          <Link
-            href="/budget-app/import"
-            className="hidden items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 text-slate-300 transition-all hover:bg-white/10 hover:text-white sm:inline-flex"
-          >
-            <Upload className="h-4 w-4" />
-            <span>Import</span>
-          </Link>
-          <Link
-            href="/budget-app/transactions"
-            className="inline-flex items-center gap-2 rounded-xl bg-teal-500 px-4 py-2.5 text-white shadow-lg shadow-teal-500/20 transition-all hover:bg-teal-400"
-          >
-            <Plus className="h-4 w-4" />
-            <span className="hidden sm:inline">Add Transaction</span>
-          </Link>
+          {!isEditMode && (
+            <>
+              <button
+                onClick={() => setIsEditMode(true)}
+                className="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 text-slate-300 transition-all hover:bg-white/10 hover:text-white focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 focus:ring-offset-slate-900"
+                aria-label="Edit dashboard layout"
+              >
+                <Settings2 className="h-4 w-4" />
+                <span className="hidden sm:inline">Edit Dashboard</span>
+              </button>
+              <Link
+                href="/budget-app/import"
+                className="hidden items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 text-slate-300 transition-all hover:bg-white/10 hover:text-white sm:inline-flex"
+              >
+                <Upload className="h-4 w-4" />
+                <span>Import</span>
+              </Link>
+              <Link
+                href="/budget-app/transactions"
+                className="inline-flex items-center gap-2 rounded-xl bg-teal-500 px-4 py-2.5 text-white shadow-lg shadow-teal-500/20 transition-all hover:bg-teal-400"
+              >
+                <Plus className="h-4 w-4" />
+                <span className="hidden sm:inline">Add Transaction</span>
+              </Link>
+            </>
+          )}
         </div>
       </div>
 
-      {/* Widget Grid */}
-      {widgetConfig && gridConfig && (
+      {/* Edit Mode */}
+      {isEditMode && widgetConfig && (
+        <WidgetEditMode
+          config={widgetConfig}
+          onSave={handleSaveEditMode}
+          onCancel={handleCancelEditMode}
+        />
+      )}
+
+      {/* Widget Grid (normal view) */}
+      {!isEditMode && widgetConfig && gridConfig && (
         <WidgetGrid widgets={widgetConfig.widgets} gridConfig={gridConfig} />
       )}
 
       {/* Loading state for widget config */}
-      {!widgetConfig && deviceClass && (
+      {!isEditMode && !widgetConfig && deviceClass && (
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
           {[1, 2, 3, 4].map((i) => (
             <GlassCard key={i} className="h-64 animate-pulse">

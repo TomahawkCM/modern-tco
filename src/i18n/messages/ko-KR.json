@@ -18,5 +18,35 @@
     "cancel": "취소",
     "delete": "삭제",
     "edit": "편집"
+  },
+  "widget": {
+    "spendingByCategory": {
+      "title": "카테고리별 지출",
+      "description": "시각적 분석으로 돈이 어디로 가는지 확인하세요"
+    },
+    "recentTransactions": {
+      "title": "최근 거래",
+      "description": "최신 금융 활동을 빠르게 확인하세요"
+    },
+    "budgetProgress": {
+      "title": "예산 진행률",
+      "description": "예산 목표 대비 현재 상태를 추적하세요"
+    },
+    "accountBalances": {
+      "title": "계좌 잔액",
+      "description": "모든 계좌의 현재 잔액을 확인하세요"
+    },
+    "incomeVsExpenses": {
+      "title": "수입 대 지출",
+      "description": "시간 경과에 따른 수입과 지출을 비교하세요"
+    },
+    "monthlyTrends": {
+      "title": "월별 추세",
+      "description": "월별 금융 패턴을 시각화하세요"
+    },
+    "upcomingBills": {
+      "title": "예정된 청구서",
+      "description": "청구서 알림으로 결제를 놓치지 마세요"
+    }
   }
 }
