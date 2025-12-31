@@ -1,11 +1,16 @@
 /**
- * Cache Manager for Translation Automation
+ * Cache Manager for Translation Automation (V1 - Legacy)
+ *
+ * NOTE: V1 is now legacy. Use CacheManagerV2 for new code.
+ * V1 caches entire locale files. V2 caches individual keys.
  *
  * Provides:
  * 1. Progress persistence (resume interrupted runs)
  * 2. Source change detection (MD5 hash)
  * 3. Error tracking (failed translations)
  * 4. Translation caching (avoid re-translating)
+ *
+ * @deprecated Use CacheManagerV2 from './cache-manager-v2' instead
  */
 
 import * as fs from 'fs';
@@ -15,6 +20,9 @@ import type { SupportedLocale } from '../../src/i18n/config';
 import { isValid } from './translation-validator';
 
 const CACHE_FILE = path.join(__dirname, '../.translation-cache.json');
+
+// Re-export V2 for convenience
+export { CacheManagerV2, loadSourceWithHash as loadSourceWithHashV2 } from './cache-manager-v2';
 
 export interface TranslationCacheEntry {
   content: object;

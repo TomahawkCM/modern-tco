@@ -5,6 +5,8 @@ import MonitoringErrorBoundary from "@/components/MonitoringErrorBoundary";
 import { SkipLinks } from "@/components/accessibility/skip-links";
 import { MainLayout } from "@/components/layout/main-layout";
 import { Toaster } from "@/components/ui/toaster";
+import { LOCALE_METADATA } from "@/i18n/config";
+import { getLocalePreferences } from "@/lib/locale-storage";
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import Script from "next/script";
@@ -37,9 +39,15 @@ export const viewport: Viewport = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  // Get locale preferences for dynamic lang and dir attributes
+  const locale = getLocalePreferences().locale || 'en-US';
+  const dir = LOCALE_METADATA[locale]?.dir || 'ltr';
+  const langCode = locale.split('-')[0]; // Extract language code (e.g., 'en' from 'en-US')
+
   return (
     <html
-      lang="en"
+      lang={langCode}
+      dir={dir}
       className={`${inter.className}`}
       data-scroll-behavior="smooth"
       suppressHydrationWarning
@@ -59,10 +67,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* PDF.js from CDN for OCR functionality - bypasses webpack bundling issues */}
         <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
       </head>
-      <body
-        className="bg-background font-sans text-foreground antialiased"
-        suppressHydrationWarning
-      >
+      <body className="bg-background text-foreground antialiased" suppressHydrationWarning>
         {/* Load PDF.js from CDN - bypasses webpack bundling issues */}
         <Script
           src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"
