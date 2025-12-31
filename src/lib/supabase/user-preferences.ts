@@ -68,6 +68,11 @@ export async function fetchUserPreferences(): Promise<UserPreferencesRow | null>
       if (error.code === 'PGRST116') {
         return null;
       }
+      // Gracefully handle missing table (migration not yet applied)
+      if (error.code === 'PGRST204' || error.message?.includes('relation') || error.message?.includes('not found')) {
+        console.debug('[User Preferences] Table not yet created - run: supabase db push');
+        return null;
+      }
       console.error('Error fetching user preferences:', error);
       return null;
     }
@@ -108,6 +113,11 @@ export function syncLocaleToSupabase(preferences: LocalePreferences): void {
         );
 
       if (error) {
+        // Gracefully handle missing table (migration not yet applied)
+        if (error.code === 'PGRST204' || error.message?.includes('relation') || error.message?.includes('not found')) {
+          console.debug('[User Preferences] Table not yet created - run: supabase db push');
+          return;
+        }
         console.error('Error syncing locale to Supabase:', error);
       } else {
         console.log('Locale preferences synced to Supabase');

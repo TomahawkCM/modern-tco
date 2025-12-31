@@ -1,5 +1,5 @@
-import { supabase, supabaseAdmin } from "./supabase";
 import type { User } from "@supabase/supabase-js";
+import { supabase, supabaseAdmin } from "./supabase";
 
 export interface UserProfile {
   id: string;
@@ -226,40 +226,33 @@ export async function updateLastLogin(userId: string): Promise<void> {
 }
 
 /**
- * Create or update user profile with trial initialization
- * Uses service role to bypass RLS for initial profile creation
+ * Wait for user profile to be created by database trigger
+ * The database has a trigger (handle_new_user) that automatically creates
+ * profiles when auth.users receives a new user. This function polls until
+ * the profile is created.
  */
-export async function createUserProfile(
-  user: User
-): Promise<{ success: boolean; error?: string }> {
-  // Use admin client to bypass RLS for profile creation
-  const client = supabaseAdmin || supabase;
+export async function createUserProfile(user: User): Promise<{ success: boolean; error?: string }> {
+  // Wait for database trigger to create the profile
+  // Retry up to 10 times with 500ms delay (5 seconds total)
+  for (let i = 0; i < 10; i++) {
+    const profile = await getUserProfile(user.id);
 
-  const now = new Date().toISOString();
-  const fullName = user.user_metadata?.full_name ||
-                   user.user_metadata?.name ||
-                   user.email?.split("@")[0] ||
-                   null;
+    if (profile) {
+      console.log("[Profile] Profile created by database trigger");
+      return { success: true };
+    }
 
-  const { error } = await client
-    .from("users")
-    .upsert({
-      id: user.id,
-      email: user.email || "",
-      name: fullName,
-      trial_start: now,
-      subscription_status: "trial",
-      created_at: now,
-      last_login: now,
-    }, {
-      onConflict: "id",
-      ignoreDuplicates: false,
-    });
-
-  if (error) {
-    console.error("Error creating user profile:", error);
-    return { success: false, error: error.message };
+    // Wait 500ms before next attempt
+    await new Promise(resolve => setTimeout(resolve, 500));
   }
 
-  return { success: true };
+  // If profile still doesn't exist after 5 seconds, log error
+  console.warn("[Profile] Timeout waiting for database trigger to create profile");
+  console.warn("[Profile] This suggests the handle_new_user() trigger may not be installed");
+  console.warn("[Profile] Run: supabase db push to apply migration 20251012000002");
+
+  return {
+    success: false,
+    error: "Profile creation timeout - database trigger may not be installed"
+  };
 }
