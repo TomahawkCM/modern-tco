@@ -12,6 +12,7 @@ node_modules/
 .next/
 *.tsbuildinfo
 .eslintcache
+next-env.d.ts
 
 # Browser binaries
 .chrome/
@@ -48,6 +49,8 @@ C:\\Users/**
 CUsers*
 **/AppData/**
 *lighthouse*/**
+*lighthouse*.json
+*lh-report*.json
 *Cache/**
 *GPUCache/**
 *DawnGraphiteCache/**
@@ -70,3 +73,9 @@ public/pdf.worker.mjs
 *.backup
 *.backup-*
 *:Zone.Identifier
+
+# Firebase debug logs
+firebase-debug.log
+
+# Translation cache
+scripts/.translation-cache.json
