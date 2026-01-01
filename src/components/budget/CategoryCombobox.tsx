@@ -9,6 +9,7 @@
 
 import { useState, useEffect } from 'react';
 import { Check, ChevronsUpDown } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import {
@@ -68,12 +69,14 @@ export function CategoryCombobox({
   options,
   value,
   onChange,
-  placeholder = 'Select...',
+  placeholder,
   disabled = false,
   className,
 }: CategoryComboboxProps) {
+  const t = useTranslations('combobox');
   const [open, setOpen] = useState(false);
   const isDesktop = useMediaQuery('(min-width: 768px)');
+  const effectivePlaceholder = placeholder || t('select');
 
   const selectedOption = options.find((option) => option.value === value);
 
@@ -88,7 +91,7 @@ export function CategoryCombobox({
             disabled={disabled}
             className={cn('w-full justify-between', className)}
           >
-            {selectedOption ? selectedOption.label : placeholder}
+            {selectedOption ? selectedOption.label : effectivePlaceholder}
             <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
           </Button>
         </PopoverTrigger>
@@ -98,6 +101,8 @@ export function CategoryCombobox({
             value={value}
             onChange={onChange}
             setOpen={setOpen}
+            searchPlaceholder={t('search')}
+            noResults={t('noResults')}
           />
         </PopoverContent>
       </Popover>
@@ -114,7 +119,7 @@ export function CategoryCombobox({
           disabled={disabled}
           className={cn('w-full justify-between', className)}
         >
-          {selectedOption ? selectedOption.label : placeholder}
+          {selectedOption ? selectedOption.label : effectivePlaceholder}
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </DrawerTrigger>
@@ -125,6 +130,8 @@ export function CategoryCombobox({
             value={value}
             onChange={onChange}
             setOpen={setOpen}
+            searchPlaceholder={t('search')}
+            noResults={t('noResults')}
           />
         </div>
       </DrawerContent>
@@ -137,14 +144,16 @@ interface OptionsListProps {
   value: string;
   onChange: (value: string) => void;
   setOpen: (open: boolean) => void;
+  searchPlaceholder: string;
+  noResults: string;
 }
 
-function OptionsList({ options, value, onChange, setOpen }: OptionsListProps) {
+function OptionsList({ options, value, onChange, setOpen, searchPlaceholder, noResults }: OptionsListProps) {
   return (
     <Command>
-      <CommandInput placeholder="Search..." className="h-9" />
+      <CommandInput placeholder={searchPlaceholder} className="h-9" />
       <CommandList>
-        <CommandEmpty>No results found.</CommandEmpty>
+        <CommandEmpty>{noResults}</CommandEmpty>
         <CommandGroup>
           {options.map((option) => (
             <CommandItem

@@ -3,10 +3,11 @@
 /**
  * Overspending Alerts Component (Phase 4)
  * Task 4.2.2: Display overspending alerts
- * 
+ *
  * Shows warnings when user is projected to exceed budget
  */
 
+import { useTranslations } from 'next-intl';
 import { AlertTriangle, TrendingUp } from 'lucide-react';
 import type { OverspendingAlert } from '@/lib/analytics/overspending-detector';
 
@@ -15,6 +16,7 @@ interface OverspendingAlertsProps {
 }
 
 export function OverspendingAlerts({ alerts }: OverspendingAlertsProps) {
+  const t = useTranslations('overspendingAlerts');
   if (alerts.length === 0) {
     return null;
   }
@@ -28,7 +30,7 @@ export function OverspendingAlerts({ alerts }: OverspendingAlertsProps) {
         return (
           <div
             key={index}
-            className={`rounded-lg border-l-4 p-4 ${
+            className={`rounded-lg border-s-4 p-4 ${
               alert.severity === 'danger'
                 ? 'bg-red-50 border-red-500'
                 : 'bg-amber-50 border-amber-500'
@@ -57,7 +59,7 @@ export function OverspendingAlerts({ alerts }: OverspendingAlertsProps) {
                       alert.severity === 'danger' ? 'text-red-700' : 'text-amber-700'
                     }`}
                   >
-                    {projectedPercentage.toFixed(0)}% of budget
+                    {t('percentOfBudget', { percent: projectedPercentage.toFixed(0) })}
                   </span>
                 </div>
 
@@ -66,28 +68,24 @@ export function OverspendingAlerts({ alerts }: OverspendingAlertsProps) {
                     alert.severity === 'danger' ? 'text-red-800' : 'text-amber-800'
                   }`}
                 >
-                  ⚠️ At this rate, you'll exceed your budget by{' '}
-                  <span className="font-bold">
-                    ${alert.projectedOverage.toFixed(2)}
-                  </span>{' '}
-                  this month.
+                  ⚠️ {t('exceededWarning', { amount: `$${alert.projectedOverage.toFixed(2)}` })}
                 </p>
 
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-xs">
                   <div>
-                    <div className="text-gray-600">Budget</div>
+                    <div className="text-gray-600">{t('stats.budget')}</div>
                     <div className="font-semibold text-gray-900">
                       ${alert.budgetAmount.toFixed(2)}
                     </div>
                   </div>
                   <div>
-                    <div className="text-gray-600">Spent So Far</div>
+                    <div className="text-gray-600">{t('stats.spentSoFar')}</div>
                     <div className="font-semibold text-gray-900">
                       ${alert.currentSpent.toFixed(2)}
                     </div>
                   </div>
                   <div>
-                    <div className="text-gray-600">Projected Total</div>
+                    <div className="text-gray-600">{t('stats.projectedTotal')}</div>
                     <div
                       className={`font-semibold ${
                         alert.severity === 'danger' ? 'text-red-700' : 'text-amber-700'
@@ -97,7 +95,7 @@ export function OverspendingAlerts({ alerts }: OverspendingAlertsProps) {
                     </div>
                   </div>
                   <div>
-                    <div className="text-gray-600">Days Left</div>
+                    <div className="text-gray-600">{t('stats.daysLeft')}</div>
                     <div className="font-semibold text-gray-900">
                       {alert.daysRemaining}
                     </div>
@@ -107,7 +105,7 @@ export function OverspendingAlerts({ alerts }: OverspendingAlertsProps) {
                 {/* Progress Bar */}
                 <div className="mt-4">
                   <div className="flex items-center justify-between text-xs mb-2">
-                    <span className="text-gray-600">Current progress</span>
+                    <span className="text-gray-600">{t('progress.label')}</span>
                     <span
                       className={
                         alert.severity === 'danger' ? 'text-red-700' : 'text-amber-700'
@@ -133,10 +131,12 @@ export function OverspendingAlerts({ alerts }: OverspendingAlertsProps) {
                   }`}
                 >
                   <TrendingUp className="w-3 h-3 inline mr-2" />
-                  <span className="font-medium">Tip:</span> Reduce daily spending to ${(
-                    alert.budgetAmount / new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0).getDate()
-                  ).toFixed(2)}{' '}
-                  to stay within budget.
+                  <span className="font-medium">{t('tip.label')}</span>{' '}
+                  {t('tip.reduceSpending', {
+                    amount: `$${(
+                      alert.budgetAmount / new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0).getDate()
+                    ).toFixed(2)}`
+                  })}
                 </div>
               </div>
             </div>

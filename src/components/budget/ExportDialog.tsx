@@ -27,6 +27,7 @@ import {
 } from '@/lib/export';
 import { cn } from '@/lib/utils';
 import { useSeniorsMode } from '@/hooks/useSeniorsMode';
+import { useTranslations } from 'next-intl';
 
 interface ExportDialogProps {
   isOpen: boolean;
@@ -35,6 +36,7 @@ interface ExportDialogProps {
 
 export function ExportDialog({ isOpen, onClose }: ExportDialogProps) {
   const { isSeniorsMode } = useSeniorsMode();
+  const t = useTranslations('exportDialog');
   const [isExporting, setIsExporting] = useState(false);
   const [exportComplete, setExportComplete] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -65,15 +67,15 @@ export function ExportDialog({ isOpen, onClose }: ExportDialogProps) {
     // Validate passwords if encryption enabled
     if (encrypt) {
       if (!password) {
-        setError('Password is required for encryption');
+        setError(t('password.required'));
         return;
       }
       if (password !== confirmPassword) {
-        setError('Passwords do not match');
+        setError(t('password.mismatch'));
         return;
       }
       if (password.length < 8) {
-        setError('Password must be at least 8 characters');
+        setError(t('password.minLength'));
         return;
       }
     }
@@ -142,9 +144,9 @@ export function ExportDialog({ isOpen, onClose }: ExportDialogProps) {
               </div>
               <div>
                 <h2 className={cn('font-bold text-white', isSeniorsMode ? 'text-2xl' : 'text-xl')}>
-                  Export Data
+                  {t('title')}
                 </h2>
-                <p className="text-sm text-slate-400">Download your budget data</p>
+                <p className="text-sm text-slate-400">{t('subtitle')}</p>
               </div>
             </div>
             <button
@@ -161,19 +163,19 @@ export function ExportDialog({ isOpen, onClose }: ExportDialogProps) {
             {/* Stats Summary */}
             {stats && (
               <div className="rounded-xl bg-white/5 p-4">
-                <h3 className="text-sm font-medium text-slate-400 mb-3">Data Summary</h3>
+                <h3 className="text-sm font-medium text-slate-400 mb-3">{t('dataSummary.title')}</h3>
                 <div className="grid grid-cols-3 gap-4 text-center">
                   <div>
                     <p className="text-2xl font-bold text-white">{stats.transactions}</p>
-                    <p className="text-xs text-slate-500">Transactions</p>
+                    <p className="text-xs text-slate-500">{t('dataSummary.transactions')}</p>
                   </div>
                   <div>
                     <p className="text-2xl font-bold text-white">{stats.accounts}</p>
-                    <p className="text-xs text-slate-500">Accounts</p>
+                    <p className="text-xs text-slate-500">{t('dataSummary.accounts')}</p>
                   </div>
                   <div>
                     <p className="text-2xl font-bold text-white">{stats.estimatedSize}</p>
-                    <p className="text-xs text-slate-500">Est. Size</p>
+                    <p className="text-xs text-slate-500">{t('dataSummary.estimatedSize')}</p>
                   </div>
                 </div>
               </div>
@@ -189,10 +191,10 @@ export function ExportDialog({ isOpen, onClose }: ExportDialogProps) {
               />
               <div>
                 <span className={cn('font-medium text-white', isSeniorsMode && 'text-lg')}>
-                  Include Receipts
+                  {t('options.includeReceipts.label')}
                 </span>
                 <p className="text-sm text-slate-400">
-                  Attach receipt images (increases file size)
+                  {t('options.includeReceipts.description')}
                 </p>
               </div>
             </label>
@@ -209,10 +211,10 @@ export function ExportDialog({ isOpen, onClose }: ExportDialogProps) {
                 <div>
                   <span className={cn('font-medium text-white flex items-center gap-2', isSeniorsMode && 'text-lg')}>
                     <Shield className="h-4 w-4 text-teal-400" />
-                    Encrypt with Password
+                    {t('options.encrypt.label')}
                   </span>
                   <p className="text-sm text-slate-400">
-                    Protect your data with AES-256 encryption
+                    {t('options.encrypt.description')}
                   </p>
                 </div>
               </label>
@@ -229,7 +231,7 @@ export function ExportDialog({ isOpen, onClose }: ExportDialogProps) {
                     {/* Password */}
                     <div>
                       <label className="block text-sm font-medium text-slate-400 mb-2">
-                        Password
+                        {t('password.label')}
                       </label>
                       <div className="relative">
                         <Lock className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-500" />
@@ -237,7 +239,7 @@ export function ExportDialog({ isOpen, onClose }: ExportDialogProps) {
                           type={showPassword ? 'text' : 'password'}
                           value={password}
                           onChange={(e) => setPassword(e.target.value)}
-                          placeholder="Enter password (min 8 characters)"
+                          placeholder={t('password.placeholder')}
                           className={cn(
                             'w-full rounded-lg border border-white/10 bg-white/5 py-3 pl-10 pr-12 text-white placeholder:text-slate-500 focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500',
                             isSeniorsMode && 'text-lg py-4'
@@ -256,7 +258,7 @@ export function ExportDialog({ isOpen, onClose }: ExportDialogProps) {
                     {/* Confirm Password */}
                     <div>
                       <label className="block text-sm font-medium text-slate-400 mb-2">
-                        Confirm Password
+                        {t('password.confirm')}
                       </label>
                       <div className="relative">
                         <Lock className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-500" />
@@ -264,7 +266,7 @@ export function ExportDialog({ isOpen, onClose }: ExportDialogProps) {
                           type={showPassword ? 'text' : 'password'}
                           value={confirmPassword}
                           onChange={(e) => setConfirmPassword(e.target.value)}
-                          placeholder="Confirm password"
+                          placeholder={t('password.confirmPlaceholder')}
                           className={cn(
                             'w-full rounded-lg border border-white/10 bg-white/5 py-3 pl-10 pr-4 text-white placeholder:text-slate-500 focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500',
                             isSeniorsMode && 'text-lg py-4'
@@ -276,20 +278,20 @@ export function ExportDialog({ isOpen, onClose }: ExportDialogProps) {
                     {/* Password Hint */}
                     <div>
                       <label className="block text-sm font-medium text-slate-400 mb-2">
-                        Password Hint (Optional)
+                        {t('password.hint')}
                       </label>
                       <input
                         type="text"
                         value={passwordHint}
                         onChange={(e) => setPasswordHint(e.target.value)}
-                        placeholder="A hint to help you remember"
+                        placeholder={t('password.hintPlaceholder')}
                         className={cn(
                           'w-full rounded-lg border border-white/10 bg-white/5 py-3 px-4 text-white placeholder:text-slate-500 focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500',
                           isSeniorsMode && 'text-lg py-4'
                         )}
                       />
                       <p className="mt-1 text-xs text-slate-500">
-                        This hint will be stored unencrypted in the file
+                        {t('password.hintNote')}
                       </p>
                     </div>
                   </motion.div>
@@ -309,7 +311,7 @@ export function ExportDialog({ isOpen, onClose }: ExportDialogProps) {
             {exportComplete && (
               <div className="flex items-center gap-2 rounded-lg bg-green-500/10 p-3 text-green-400">
                 <CheckCircle className="h-5 w-5 shrink-0" />
-                <p className="text-sm">Export complete! Check your downloads folder.</p>
+                <p className="text-sm">{t('complete.success')}</p>
               </div>
             )}
           </div>
@@ -325,7 +327,7 @@ export function ExportDialog({ isOpen, onClose }: ExportDialogProps) {
                 isSeniorsMode && 'min-h-[52px] text-lg'
               )}
             >
-              Cancel
+              {t('buttons.cancel')}
             </Button>
             <Button
               onClick={handleExport}
@@ -338,17 +340,17 @@ export function ExportDialog({ isOpen, onClose }: ExportDialogProps) {
               {isExporting ? (
                 <>
                   <Loader2 className="h-4 w-4 animate-spin" />
-                  Exporting...
+                  {t('exporting.title')}
                 </>
               ) : exportComplete ? (
                 <>
                   <CheckCircle className="h-4 w-4" />
-                  Done!
+                  {t('buttons.done')}
                 </>
               ) : (
                 <>
                   <Download className="h-4 w-4" />
-                  Export Data
+                  {t('buttons.export')}
                 </>
               )}
             </Button>

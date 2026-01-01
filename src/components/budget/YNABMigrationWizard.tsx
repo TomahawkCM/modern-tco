@@ -14,6 +14,7 @@
  */
 
 import { useState, useCallback, useMemo } from 'react';
+import { useTranslations } from 'next-intl';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Upload,
@@ -157,28 +158,6 @@ function getStepIndex(step: YNABMigrationStep): number {
   return STEP_ORDER.indexOf(step);
 }
 
-function getStepLabel(step: YNABMigrationStep): string {
-  switch (step) {
-    case 'upload': return 'Upload';
-    case 'categories': return 'Categories';
-    case 'options': return 'Options';
-    case 'preview': return 'Preview';
-    case 'importing': return 'Importing';
-    case 'complete': return 'Complete';
-  }
-}
-
-function getStepDescription(step: YNABMigrationStep): string {
-  switch (step) {
-    case 'upload': return 'Select YNAB export file';
-    case 'categories': return 'Map to existing categories';
-    case 'options': return 'Configure import settings';
-    case 'preview': return 'Review before import';
-    case 'importing': return 'Processing your data';
-    case 'complete': return 'Migration finished';
-  }
-}
-
 // ============================================================================
 // Main Component
 // ============================================================================
@@ -190,6 +169,7 @@ export function YNABMigrationWizard({
   existingCategories = [],
   existingAccounts = [],
 }: YNABMigrationWizardProps) {
+  const t = useTranslations('ynabMigrationWizard');
   const { isSeniorsMode } = useSeniorsMode();
   
   // ----------------------------------------
@@ -229,18 +209,18 @@ export function YNABMigrationWizard({
   const wizardSteps: WizardStep[] = useMemo(() => {
     // Only show first 4 steps in stepper (exclude importing/complete)
     const visibleSteps: YNABMigrationStep[] = ['upload', 'categories', 'options', 'preview'];
-    
+
     return visibleSteps.map((step, idx) => ({
       id: step,
-      title: getStepLabel(step),
-      description: getStepDescription(step),
-      status: idx < currentStepIndex 
-        ? 'complete' 
-        : idx === currentStepIndex 
-          ? 'current' 
+      title: t(`steps.${step}.title`),
+      description: t(`steps.${step}.description`),
+      status: idx < currentStepIndex
+        ? 'complete'
+        : idx === currentStepIndex
+          ? 'current'
           : 'pending',
     }));
-  }, [currentStepIndex]);
+  }, [currentStepIndex, t]);
   
   const canGoBack = useMemo(() => {
     return currentStepIndex > 0 && 
@@ -618,10 +598,10 @@ export function YNABMigrationWizard({
               </div>
               <div>
                 <h2 className={cn('font-bold text-white', isSeniorsMode ? 'text-2xl' : 'text-xl')}>
-                  Import from YNAB
+                  {t('header.title')}
                 </h2>
                 <p className="text-sm text-slate-400">
-                  Migrate your budget data seamlessly
+                  {t('header.subtitle')}
                 </p>
               </div>
             </div>
@@ -629,7 +609,7 @@ export function YNABMigrationWizard({
               onClick={handleClose}
               disabled={currentStep === 'importing'}
               className="rounded-lg p-2 text-slate-400 hover:bg-white/10 hover:text-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-              aria-label="Close wizard"
+              aria-label={t('header.closeLabel')}
             >
               <X className="h-5 w-5" />
             </button>
@@ -654,52 +634,58 @@ export function YNABMigrationWizard({
                 parsedData={parsedData}
                 isParsingFile={isParsingFile}
                 isSeniorsMode={isSeniorsMode}
+                t={t}
                 onFileDrop={handleFileDrop}
                 onFileSelect={handleFileInputChange}
               />
             )}
-            
+
             {/* Step 2: Categories */}
             {currentStep === 'categories' && (
               <CategoryMappingStep
                 mappings={categoryMappings}
                 existingCategories={existingCategories}
                 isSeniorsMode={isSeniorsMode}
+                t={t}
                 onUpdateMapping={updateCategoryMapping}
               />
             )}
-            
+
             {/* Step 3: Options */}
             {currentStep === 'options' && (
               <OptionsStep
                 options={options}
                 isSeniorsMode={isSeniorsMode}
+                t={t}
                 onUpdateOptions={setOptions}
               />
             )}
-            
+
             {/* Step 4: Preview */}
             {currentStep === 'preview' && (
               <PreviewStep
                 preview={preview}
                 isSeniorsMode={isSeniorsMode}
+                t={t}
                 onGeneratePreview={generatePreview}
               />
             )}
-            
+
             {/* Step 5: Importing */}
             {currentStep === 'importing' && (
               <ImportingStep
                 progress={importProgress}
                 isSeniorsMode={isSeniorsMode}
+                t={t}
               />
             )}
-            
+
             {/* Step 6: Complete */}
             {currentStep === 'complete' && (
               <CompleteStep
                 result={importResult}
                 isSeniorsMode={isSeniorsMode}
+                t={t}
                 onImportAnother={resetWizard}
                 onViewTransactions={() => {
                   onClose();
@@ -730,10 +716,10 @@ export function YNABMigrationWizard({
                 )}
               >
                 <ArrowLeft className="h-4 w-4" />
-                Back
+                {t('footer.back')}
               </Button>
             )}
-            
+
             {/* Next/Import button */}
             {currentStep !== 'importing' && currentStep !== 'complete' && (
               <Button
@@ -747,17 +733,17 @@ export function YNABMigrationWizard({
                 {currentStep === 'preview' ? (
                   <>
                     <Upload className="h-4 w-4" />
-                    Start Import
+                    {t('footer.startImport')}
                   </>
                 ) : (
                   <>
-                    Next
+                    {t('footer.next')}
                     <ArrowRight className="h-4 w-4" />
                   </>
                 )}
               </Button>
             )}
-            
+
             {/* Done button */}
             {currentStep === 'complete' && (
               <Button
@@ -768,7 +754,7 @@ export function YNABMigrationWizard({
                 )}
               >
                 <CheckCircle className="h-4 w-4" />
-                Done
+                {t('footer.done')}
               </Button>
             )}
           </div>
@@ -787,6 +773,7 @@ interface UploadStepProps {
   parsedData: ParsedYNABData | null;
   isParsingFile: boolean;
   isSeniorsMode: boolean;
+  t: ReturnType<typeof useTranslations<'ynabMigrationWizard'>>;
   onFileDrop: (e: React.DragEvent<HTMLLabelElement>) => void;
   onFileSelect: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
@@ -796,6 +783,7 @@ function UploadStep({
   parsedData,
   isParsingFile,
   isSeniorsMode,
+  t,
   onFileDrop,
   onFileSelect,
 }: UploadStepProps) {
@@ -805,15 +793,15 @@ function UploadStep({
       <div className="rounded-xl bg-blue-500/10 p-4 border border-blue-500/20">
         <h3 className="flex items-center gap-2 font-medium text-blue-400 mb-2">
           <Info className="h-5 w-5" />
-          Supported Formats
+          {t('uploadStep.supportedFormats')}
         </h3>
-        <ul className="text-sm text-slate-400 space-y-1 ml-7">
-          <li>• <span className="text-white">YNAB API Export</span> - JSON from nYNAB</li>
-          <li>• <span className="text-white">Budget.yfull / Budget.ynab4</span> - YNAB4 desktop export</li>
-          <li>• <span className="text-white">CSV Export</span> - From YNAB web app</li>
+        <ul className="text-sm text-slate-400 space-y-1 ms-7">
+          <li>• <span className="text-white">{t('uploadStep.formatApiExport')}</span> - {t('uploadStep.formatApiExportDesc')}</li>
+          <li>• <span className="text-white">{t('uploadStep.formatYfull')}</span> - {t('uploadStep.formatYfullDesc')}</li>
+          <li>• <span className="text-white">{t('uploadStep.formatCsv')}</span> - {t('uploadStep.formatCsvDesc')}</li>
         </ul>
       </div>
-      
+
       {/* Drop Zone */}
       <label
         className={cn(
@@ -834,19 +822,19 @@ function UploadStep({
         ) : (
           <Upload className="h-12 w-12 text-slate-400 mb-4" />
         )}
-        
+
         <p className={cn('font-medium text-white', isSeniorsMode && 'text-lg')}>
-          {isParsingFile 
-            ? 'Parsing file...' 
-            : file 
-              ? file.name 
-              : 'Click to select a file'
+          {isParsingFile
+            ? t('uploadStep.parsing')
+            : file
+              ? file.name
+              : t('uploadStep.clickToSelect')
           }
         </p>
         <p className="text-sm text-slate-500 mt-2">
-          or drag and drop here
+          {t('uploadStep.dragAndDrop')}
         </p>
-        
+
         <input
           type="file"
           accept=".json,.yfull,.ynab4,.csv,.tsv"
@@ -855,28 +843,28 @@ function UploadStep({
           disabled={isParsingFile}
         />
       </label>
-      
+
       {/* File Summary */}
       {parsedData && (
         <div className="rounded-xl bg-white/5 p-4 border border-white/10">
-          <h3 className="text-sm font-medium text-slate-400 mb-3">File Summary</h3>
+          <h3 className="text-sm font-medium text-slate-400 mb-3">{t('uploadStep.fileSummary')}</h3>
           <div className="grid grid-cols-2 gap-4 text-sm">
             <div>
-              <span className="text-slate-500">Accounts</span>
+              <span className="text-slate-500">{t('uploadStep.accounts')}</span>
               <p className="text-white font-medium">{parsedData.accounts.length}</p>
             </div>
             <div>
-              <span className="text-slate-500">Transactions</span>
+              <span className="text-slate-500">{t('uploadStep.transactions')}</span>
               <p className="text-white font-medium">{parsedData.transactions.length.toLocaleString()}</p>
             </div>
             <div>
-              <span className="text-slate-500">Categories</span>
+              <span className="text-slate-500">{t('uploadStep.categories')}</span>
               <p className="text-white font-medium">
                 {parsedData.categoryGroups.reduce((sum, g) => sum + g.categories.length, 0)}
               </p>
             </div>
             <div>
-              <span className="text-slate-500">Format</span>
+              <span className="text-slate-500">{t('uploadStep.format')}</span>
               <p className="text-white font-medium capitalize">{parsedData.version}</p>
             </div>
           </div>
@@ -890,6 +878,7 @@ interface CategoryMappingStepProps {
   mappings: CategoryMapping[];
   existingCategories: Category[];
   isSeniorsMode: boolean;
+  t: ReturnType<typeof useTranslations<'ynabMigrationWizard'>>;
   onUpdateMapping: (ynabCategoryId: string, updates: Partial<CategoryMapping>) => void;
 }
 
@@ -897,6 +886,7 @@ function CategoryMappingStep({
   mappings,
   existingCategories,
   isSeniorsMode,
+  t,
   onUpdateMapping,
 }: CategoryMappingStepProps) {
   // Group by YNAB category group
@@ -923,10 +913,10 @@ function CategoryMappingStep({
       <div className="rounded-xl bg-blue-500/10 p-4 border border-blue-500/20">
         <h3 className="flex items-center gap-2 font-medium text-blue-400 mb-2">
           <FolderTree className="h-5 w-5" />
-          Category Mapping
+          {t('categoryStep.title')}
         </h3>
         <p className="text-sm text-slate-400">
-          Map YNAB categories to your existing categories or create new ones.
+          {t('categoryStep.description')}
         </p>
       </div>
 
@@ -934,15 +924,15 @@ function CategoryMappingStep({
       <div className="grid grid-cols-3 gap-3">
         <div className="rounded-lg bg-teal-500/10 p-3 border border-teal-500/20 text-center">
           <p className="text-2xl font-bold text-teal-400">{stats.create}</p>
-          <p className="text-xs text-slate-400">Create New</p>
+          <p className="text-xs text-slate-400">{t('categoryStep.createNew')}</p>
         </div>
         <div className="rounded-lg bg-blue-500/10 p-3 border border-blue-500/20 text-center">
           <p className="text-2xl font-bold text-blue-400">{stats.map}</p>
-          <p className="text-xs text-slate-400">Map to Existing</p>
+          <p className="text-xs text-slate-400">{t('categoryStep.mapToExisting')}</p>
         </div>
         <div className="rounded-lg bg-slate-500/10 p-3 border border-slate-500/20 text-center">
           <p className="text-2xl font-bold text-slate-400">{stats.skip}</p>
-          <p className="text-xs text-slate-400">Skip</p>
+          <p className="text-xs text-slate-400">{t('categoryStep.skip')}</p>
         </div>
       </div>
 
@@ -953,7 +943,7 @@ function CategoryMappingStep({
               <FolderTree className="h-4 w-4 text-teal-400" />
               {groupName}
               <span className="text-xs text-slate-500 font-normal ml-auto">
-                {items.length} {items.length === 1 ? 'category' : 'categories'}
+                {t('categoryStep.category', { count: items.length })}
               </span>
             </h4>
             <div className="space-y-2">
@@ -980,10 +970,10 @@ function CategoryMappingStep({
                       })}
                       className="rounded-lg border border-white/10 bg-white/5 px-3 py-1.5 text-sm text-white focus:border-teal-500 focus:outline-none min-w-[130px]"
                     >
-                      <option value="create">Create New</option>
-                      <option value="skip">Skip</option>
+                      <option value="create">{t('categoryStep.createNew')}</option>
+                      <option value="skip">{t('categoryStep.skip')}</option>
                       {existingCategories.length > 0 && (
-                        <option value="map">Map to Existing</option>
+                        <option value="map">{t('categoryStep.mapToExisting')}</option>
                       )}
                     </select>
                   </div>
@@ -1003,7 +993,7 @@ function CategoryMappingStep({
                         }}
                         className="flex-1 rounded-lg border border-white/10 bg-white/5 px-3 py-1.5 text-sm text-white focus:border-teal-500 focus:outline-none"
                       >
-                        <option value="">Select category...</option>
+                        <option value="">{t('categoryStep.selectCategory')}</option>
                         {existingCategories.map(cat => (
                           <option key={cat.id} value={cat.id}>
                             {cat.name}
@@ -1017,7 +1007,7 @@ function CategoryMappingStep({
                   {mapping.action === 'create' && (
                     <div className="flex items-center gap-2 pl-4 text-xs text-teal-400">
                       <Sparkles className="h-3 w-3" />
-                      <span>Will create: <strong>{mapping.ynabGroupName}</strong> → {mapping.ynabCategoryName}</span>
+                      <span>{t('categoryStep.willCreate')} <strong>{mapping.ynabGroupName}</strong> → {mapping.ynabCategoryName}</span>
                     </div>
                   )}
                 </div>
@@ -1033,36 +1023,38 @@ function CategoryMappingStep({
 interface OptionsStepProps {
   options: YNABImportOptions;
   isSeniorsMode: boolean;
+  t: ReturnType<typeof useTranslations<'ynabMigrationWizard'>>;
   onUpdateOptions: (options: YNABImportOptions) => void;
 }
 
 function OptionsStep({
   options,
   isSeniorsMode,
+  t,
   onUpdateOptions,
 }: OptionsStepProps) {
   const updateOption = <K extends keyof YNABImportOptions>(
-    key: K, 
+    key: K,
     value: YNABImportOptions[K]
   ) => {
     onUpdateOptions({ ...options, [key]: value });
   };
-  
+
   return (
     <div className="space-y-6">
       {/* Hidden Categories */}
       <div className="rounded-xl bg-white/5 p-4 border border-white/10">
         <h3 className={cn('font-medium text-white mb-3', isSeniorsMode && 'text-lg')}>
-          Hidden Categories
+          {t('optionsStep.hiddenCategories.title')}
         </h3>
         <p className="text-sm text-slate-400 mb-4">
-          How to handle YNAB categories marked as hidden?
+          {t('optionsStep.hiddenCategories.description')}
         </p>
         <div className="space-y-2">
           {[
-            { value: 'archive', label: 'Archive', desc: 'Import as archived (recommended)' },
-            { value: 'skip', label: 'Skip', desc: 'Don\'t import hidden categories' },
-            { value: 'import', label: 'Import', desc: 'Import as active categories' },
+            { value: 'archive', labelKey: 'archive', descKey: 'archiveDesc' },
+            { value: 'skip', labelKey: 'skip', descKey: 'skipDesc' },
+            { value: 'import', labelKey: 'import', descKey: 'importDesc' },
           ].map(opt => (
             <label
               key={opt.value}
@@ -1080,19 +1072,19 @@ function OptionsStep({
                 className="h-4 w-4 text-teal-500"
               />
               <div>
-                <p className="font-medium text-white">{opt.label}</p>
-                <p className="text-sm text-slate-500">{opt.desc}</p>
+                <p className="font-medium text-white">{t(`optionsStep.hiddenCategories.${opt.labelKey}`)}</p>
+                <p className="text-sm text-slate-500">{t(`optionsStep.hiddenCategories.${opt.descKey}`)}</p>
               </div>
             </label>
           ))}
         </div>
       </div>
-      
+
       {/* Account Options */}
       <div className="rounded-xl bg-white/5 p-4 border border-white/10">
         <h3 className={cn('font-medium text-white mb-3', isSeniorsMode && 'text-lg')}>
-          <Settings className="h-4 w-4 inline mr-2" />
-          Account Options
+          <Settings className="h-4 w-4 inline me-2" />
+          {t('optionsStep.accountOptions.title')}
         </h3>
         <div className="space-y-3">
           <label className="flex items-center gap-3 cursor-pointer">
@@ -1102,7 +1094,7 @@ function OptionsStep({
               onChange={(e) => updateOption('includeClosedAccounts', e.target.checked)}
               className="h-4 w-4 rounded text-teal-500"
             />
-            <span className="text-slate-300">Include closed accounts</span>
+            <span className="text-slate-300">{t('optionsStep.accountOptions.includeClosedAccounts')}</span>
           </label>
           <label className="flex items-center gap-3 cursor-pointer">
             <input
@@ -1111,15 +1103,15 @@ function OptionsStep({
               onChange={(e) => updateOption('includeOffBudgetAccounts', e.target.checked)}
               className="h-4 w-4 rounded text-teal-500"
             />
-            <span className="text-slate-300">Include off-budget accounts</span>
+            <span className="text-slate-300">{t('optionsStep.accountOptions.includeOffBudgetAccounts')}</span>
           </label>
         </div>
       </div>
-      
+
       {/* Budget Options */}
       <div className="rounded-xl bg-white/5 p-4 border border-white/10">
         <h3 className={cn('font-medium text-white mb-3', isSeniorsMode && 'text-lg')}>
-          Budget Options
+          {t('optionsStep.budgetOptions.title')}
         </h3>
         <div className="space-y-3">
           <label className="flex items-center gap-3 cursor-pointer">
@@ -1129,7 +1121,7 @@ function OptionsStep({
               onChange={(e) => updateOption('importGoals', e.target.checked)}
               className="h-4 w-4 rounded text-teal-500"
             />
-            <span className="text-slate-300">Import savings goals as future purchases</span>
+            <span className="text-slate-300">{t('optionsStep.budgetOptions.importGoals')}</span>
           </label>
         </div>
       </div>
@@ -1140,12 +1132,14 @@ function OptionsStep({
 interface PreviewStepProps {
   preview: ImportPreview | null;
   isSeniorsMode: boolean;
+  t: ReturnType<typeof useTranslations<'ynabMigrationWizard'>>;
   onGeneratePreview: () => void;
 }
 
 function PreviewStep({
   preview,
   isSeniorsMode,
+  t,
   onGeneratePreview,
 }: PreviewStepProps) {
   // Auto-generate preview on mount
@@ -1154,64 +1148,64 @@ function PreviewStep({
     return (
       <div className="flex flex-col items-center justify-center py-12">
         <Loader2 className="h-12 w-12 animate-spin text-teal-400 mb-4" />
-        <p className="text-white font-medium">Preparing preview...</p>
+        <p className="text-white font-medium">{t('previewStep.preparingPreview')}</p>
       </div>
     );
   }
-  
+
   return (
     <div className="space-y-6">
       <div className="rounded-xl bg-blue-500/10 p-4 border border-blue-500/20">
         <h3 className="flex items-center gap-2 font-medium text-blue-400 mb-2">
           <Eye className="h-5 w-5" />
-          Import Preview
+          {t('previewStep.title')}
         </h3>
         <p className="text-sm text-slate-400">
-          Review the data that will be imported.
+          {t('previewStep.description')}
         </p>
       </div>
-      
+
       {/* Stats Grid */}
       <div className="grid grid-cols-2 gap-4">
         <StatCard
-          label="Accounts"
+          label={t('previewStep.accounts')}
           value={preview.accounts.total}
-          subtext={`${preview.accounts.new} new`}
+          subtext={t('previewStep.new', { count: preview.accounts.new })}
         />
         <StatCard
-          label="Transactions"
+          label={t('previewStep.transactions')}
           value={preview.transactions.total}
-          subtext={`${preview.transactions.duplicates} duplicates`}
+          subtext={t('previewStep.duplicates', { count: preview.transactions.duplicates })}
         />
         <StatCard
-          label="Categories"
+          label={t('previewStep.categories')}
           value={preview.categories.total}
-          subtext={`${preview.categories.created} new, ${preview.categories.mapped} mapped`}
+          subtext={t('previewStep.newMapped', { created: preview.categories.created, mapped: preview.categories.mapped })}
         />
         <StatCard
-          label="Budget Months"
+          label={t('previewStep.budgetMonths')}
           value={preview.budgets.months}
-          subtext={`${preview.budgets.total} allocations`}
+          subtext={t('previewStep.allocations', { count: preview.budgets.total })}
         />
       </div>
-      
+
       {/* Date Range */}
       <div className="rounded-xl bg-white/5 p-4 border border-white/10">
-        <h3 className="text-sm font-medium text-slate-400 mb-2">Transaction Date Range</h3>
+        <h3 className="text-sm font-medium text-slate-400 mb-2">{t('previewStep.dateRange')}</h3>
         <p className="text-white">
           {preview.transactions.dateRange.start.toLocaleDateString()} — {' '}
           {preview.transactions.dateRange.end.toLocaleDateString()}
         </p>
       </div>
-      
+
       {/* Warnings */}
       {preview.warnings.length > 0 && (
         <div className="rounded-xl bg-amber-500/10 p-4 border border-amber-500/20">
           <h3 className="flex items-center gap-2 font-medium text-amber-400 mb-2">
             <AlertTriangle className="h-5 w-5" />
-            Warnings
+            {t('previewStep.warnings')}
           </h3>
-          <ul className="text-sm text-amber-300 space-y-1 ml-7">
+          <ul className="text-sm text-amber-300 space-y-1 ms-7">
             {preview.warnings.map((warning, idx) => (
               <li key={idx}>• {warning}</li>
             ))}
@@ -1241,23 +1235,24 @@ function StatCard({ label, value, subtext }: StatCardProps) {
 interface ImportingStepProps {
   progress: number;
   isSeniorsMode: boolean;
+  t: ReturnType<typeof useTranslations<'ynabMigrationWizard'>>;
 }
 
-function ImportingStep({ progress, isSeniorsMode }: ImportingStepProps) {
-  const stage = 
-    progress < 10 ? 'Importing accounts...' :
-    progress < 30 ? 'Importing categories...' :
-    progress < 80 ? 'Importing transactions...' :
-    progress < 100 ? 'Importing budgets...' :
-    'Finishing up...';
-  
+function ImportingStep({ progress, isSeniorsMode, t }: ImportingStepProps) {
+  const stageKey =
+    progress < 10 ? 'importingAccounts' :
+    progress < 30 ? 'importingCategories' :
+    progress < 80 ? 'importingTransactions' :
+    progress < 100 ? 'importingBudgets' :
+    'finishing';
+
   return (
     <div className="flex flex-col items-center justify-center py-12">
       <Loader2 className="h-16 w-16 animate-spin text-teal-400 mb-6" />
       <p className={cn('font-medium text-white mb-4', isSeniorsMode && 'text-lg')}>
-        Importing your YNAB data...
+        {t('importingStep.title')}
       </p>
-      
+
       {/* Progress Bar */}
       <div className="w-full max-w-xs mb-4">
         <div className="h-2 rounded-full bg-white/10 overflow-hidden">
@@ -1270,8 +1265,8 @@ function ImportingStep({ progress, isSeniorsMode }: ImportingStepProps) {
         </div>
         <p className="text-center text-sm text-slate-400 mt-2">{progress}%</p>
       </div>
-      
-      <p className="text-sm text-slate-500">{stage}</p>
+
+      <p className="text-sm text-slate-500">{t(`importingStep.${stageKey}`)}</p>
     </div>
   );
 }
@@ -1279,11 +1274,12 @@ function ImportingStep({ progress, isSeniorsMode }: ImportingStepProps) {
 interface CompleteStepProps {
   result: ImportResult | null;
   isSeniorsMode: boolean;
+  t: ReturnType<typeof useTranslations<'ynabMigrationWizard'>>;
   onImportAnother?: () => void;
   onViewTransactions?: () => void;
 }
 
-function CompleteStep({ result, isSeniorsMode, onImportAnother, onViewTransactions }: CompleteStepProps) {
+function CompleteStep({ result, isSeniorsMode, t, onImportAnother, onViewTransactions }: CompleteStepProps) {
   if (!result) return null;
 
   const totalImported =
@@ -1300,10 +1296,10 @@ function CompleteStep({ result, isSeniorsMode, onImportAnother, onViewTransactio
             <CheckCircle className="h-10 w-10 text-green-400" />
           </div>
           <p className={cn('font-bold text-white mb-2', isSeniorsMode ? 'text-2xl' : 'text-xl')}>
-            Import Complete!
+            {t('completeStep.success')}
           </p>
           <p className="text-slate-400 text-center max-w-sm">
-            {totalImported.toLocaleString()} items imported successfully from YNAB.
+            {t('completeStep.successMessage', { count: totalImported })}
           </p>
         </>
       ) : (
@@ -1312,7 +1308,7 @@ function CompleteStep({ result, isSeniorsMode, onImportAnother, onViewTransactio
             <AlertTriangle className="h-10 w-10 text-amber-400" />
           </div>
           <p className={cn('font-bold text-white mb-2', isSeniorsMode ? 'text-2xl' : 'text-xl')}>
-            Import Completed with Issues
+            {t('completeStep.withIssues')}
           </p>
           <p className="text-slate-400 text-center max-w-sm mb-4">
             {result.message}
@@ -1324,19 +1320,19 @@ function CompleteStep({ result, isSeniorsMode, onImportAnother, onViewTransactio
       <div className="w-full max-w-sm mt-6 rounded-xl bg-white/5 p-4 border border-white/10">
         <div className="grid grid-cols-2 gap-3 text-sm">
           <div className="flex justify-between">
-            <span className="text-slate-500">Accounts</span>
+            <span className="text-slate-500">{t('previewStep.accounts')}</span>
             <span className="text-white">{result.stats.accounts.imported}</span>
           </div>
           <div className="flex justify-between">
-            <span className="text-slate-500">Categories</span>
+            <span className="text-slate-500">{t('previewStep.categories')}</span>
             <span className="text-white">{result.stats.categories.imported}</span>
           </div>
           <div className="flex justify-between">
-            <span className="text-slate-500">Transactions</span>
+            <span className="text-slate-500">{t('previewStep.transactions')}</span>
             <span className="text-white">{result.stats.transactions.imported.toLocaleString()}</span>
           </div>
           <div className="flex justify-between">
-            <span className="text-slate-500">Budgets</span>
+            <span className="text-slate-500">{t('previewStep.budgetMonths')}</span>
             <span className="text-white">{result.stats.budgets.imported}</span>
           </div>
         </div>
@@ -1345,7 +1341,7 @@ function CompleteStep({ result, isSeniorsMode, onImportAnother, onViewTransactio
       {/* Errors */}
       {result.errors.length > 0 && (
         <div className="w-full max-w-sm mt-4 rounded-xl bg-red-500/10 p-4 border border-red-500/20">
-          <h4 className="text-sm font-medium text-red-400 mb-2">Errors</h4>
+          <h4 className="text-sm font-medium text-red-400 mb-2">{t('completeStep.errors')}</h4>
           <ul className="text-xs text-red-300 space-y-1">
             {result.errors.map((err, idx) => (
               <li key={idx}>• {err}</li>
@@ -1356,7 +1352,7 @@ function CompleteStep({ result, isSeniorsMode, onImportAnother, onViewTransactio
 
       {/* Next Steps */}
       <div className="w-full max-w-sm mt-6 space-y-3">
-        <p className="text-sm text-slate-400 text-center mb-3">What would you like to do next?</p>
+        <p className="text-sm text-slate-400 text-center mb-3">{t('completeStep.whatNext')}</p>
         <div className="flex gap-3">
           {onViewTransactions && (
             <button
@@ -1364,7 +1360,7 @@ function CompleteStep({ result, isSeniorsMode, onImportAnother, onViewTransactio
               className="flex-1 flex items-center justify-center gap-2 rounded-lg bg-teal-500/20 border border-teal-500/30 p-3 text-sm font-medium text-teal-400 hover:bg-teal-500/30 transition-colors"
             >
               <Eye className="h-4 w-4" />
-              View Transactions
+              {t('completeStep.viewTransactions')}
             </button>
           )}
           {onImportAnother && (
@@ -1373,7 +1369,7 @@ function CompleteStep({ result, isSeniorsMode, onImportAnother, onViewTransactio
               className="flex-1 flex items-center justify-center gap-2 rounded-lg bg-white/5 border border-white/10 p-3 text-sm font-medium text-slate-300 hover:bg-white/10 transition-colors"
             >
               <Upload className="h-4 w-4" />
-              Import Another
+              {t('completeStep.importAnother')}
             </button>
           )}
         </div>

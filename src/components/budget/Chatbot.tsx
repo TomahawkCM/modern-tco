@@ -14,12 +14,14 @@
  */
 
 import React, { useState, useRef, useEffect } from 'react';
+import { useTranslations } from 'next-intl';
 import { MessageSquare, Send, Trash2, AlertCircle, X, Loader2, Download } from 'lucide-react';
 import { useChatbot } from '@/contexts/ChatbotContext';
 import { isChatbotEnabled } from '@/lib/budget-privacy-settings';
 import { ChatbotOptInDialog } from './ChatbotOptInDialog';
 
 export function Chatbot() {
+  const t = useTranslations('chatbot');
   const { messages, isTyping, error, isEnabled, sendMessage, clearHistory, exportConversation } = useChatbot();
   const [input, setInput] = useState('');
   const [showOptIn, setShowOptIn] = useState(false);
@@ -66,15 +68,15 @@ export function Chatbot() {
       <div className="flex items-center justify-center h-full p-8">
         <div className="text-center">
           <MessageSquare className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-          <h3 className="text-lg font-semibold text-gray-900 mb-2">Chatbot Disabled</h3>
+          <h3 className="text-lg font-semibold text-gray-900 mb-2">{t('disabled.title')}</h3>
           <p className="text-sm text-gray-600 mb-4">
-            Enable the chatbot in Settings → Privacy → Budget Chatbot to get started.
+            {t('disabled.description')}
           </p>
           <button
             onClick={() => setShowOptIn(true)}
             className="px-4 py-2 bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition-colors"
           >
-            Enable Chatbot
+            {t('disabled.enableButton')}
           </button>
         </div>
       </div>
@@ -90,8 +92,8 @@ export function Chatbot() {
             <MessageSquare className="w-5 h-5 text-teal-600" />
           </div>
           <div>
-            <h2 className="text-lg font-semibold text-gray-900">Budget Assistant</h2>
-            <p className="text-xs text-gray-600">Ask me about your finances</p>
+            <h2 className="text-lg font-semibold text-gray-900">{t('header.title')}</h2>
+            <p className="text-xs text-gray-600">{t('header.subtitle')}</p>
           </div>
         </div>
         {messages.length > 0 && (
@@ -99,14 +101,14 @@ export function Chatbot() {
             <button
               onClick={exportConversation}
               className="p-2 text-gray-400 hover:text-gray-600 transition-colors"
-              title="Export conversation"
+              title={t('buttons.exportConversation')}
             >
               <Download className="w-5 h-5" />
             </button>
             <button
               onClick={clearHistory}
               className="p-2 text-gray-400 hover:text-gray-600 transition-colors"
-              title="Clear chat history"
+              title={t('buttons.clearHistory')}
             >
               <Trash2 className="w-5 h-5" />
             </button>
@@ -119,23 +121,18 @@ export function Chatbot() {
         {messages.length === 0 && (
           <div className="text-center py-12">
             <MessageSquare className="w-16 h-16 text-gray-300 mx-auto mb-4" />
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">Start a Conversation</h3>
+            <h3 className="text-lg font-semibold text-gray-900 mb-2">{t('emptyState.title')}</h3>
             <p className="text-sm text-gray-600 mb-6">
-              Ask me anything about your finances. Here are some examples:
+              {t('emptyState.description')}
             </p>
             <div className="space-y-2 max-w-md mx-auto">
-              {[
-                'How much did I spend this month?',
-                'Am I over budget in any categories?',
-                'Show me my recent grocery purchases',
-                "What's my total account balance?",
-              ].map((example, index) => (
+              {(['spending', 'budget', 'groceries', 'balance'] as const).map((key) => (
                 <button
-                  key={index}
-                  onClick={() => setInput(example)}
+                  key={key}
+                  onClick={() => setInput(t(`emptyState.examples.${key}`))}
                   className="w-full p-3 bg-white border border-gray-200 rounded-lg text-left text-sm text-gray-700 hover:border-teal-500 hover:bg-teal-50 transition-colors"
                 >
-                  {example}
+                  {t(`emptyState.examples.${key}`)}
                 </button>
               ))}
             </div>
@@ -158,7 +155,7 @@ export function Chatbot() {
               {message.functionCalls && message.functionCalls.length > 0 && (
                 <div className="mt-2 pt-2 border-t border-gray-300">
                   <div className="text-xs text-gray-600">
-                    <strong>Data accessed:</strong>{' '}
+                    <strong>{t('messages.dataAccessed')}</strong>{' '}
                     {message.functionCalls.map((fc) => fc.name).join(', ')}
                   </div>
                 </div>
@@ -178,7 +175,7 @@ export function Chatbot() {
             <div className="bg-white border border-gray-200 rounded-lg p-4">
               <div className="flex items-center gap-2 text-gray-600">
                 <Loader2 className="w-4 h-4 animate-spin" />
-                <span className="text-sm">Thinking...</span>
+                <span className="text-sm">{t('messages.thinking')}</span>
               </div>
             </div>
           </div>
@@ -190,7 +187,7 @@ export function Chatbot() {
               <div className="flex items-start gap-2 text-red-800">
                 <AlertCircle className="w-5 h-5 flex-shrink-0 mt-0.5" />
                 <div>
-                  <div className="font-medium text-sm">Error</div>
+                  <div className="font-medium text-sm">{t('messages.error')}</div>
                   <div className="text-sm mt-1">{error}</div>
                 </div>
               </div>
@@ -208,7 +205,7 @@ export function Chatbot() {
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder="Ask about your finances..."
+            placeholder={t('input.placeholder')}
             disabled={isTyping}
             className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent disabled:bg-gray-100 disabled:cursor-not-allowed"
           />
@@ -218,11 +215,11 @@ export function Chatbot() {
             className="px-6 py-3 bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed flex items-center gap-2"
           >
             <Send className="w-5 h-5" />
-            <span className="hidden sm:inline">Send</span>
+            <span className="hidden sm:inline">{t('buttons.send')}</span>
           </button>
         </form>
         <p className="text-xs text-gray-500 mt-2">
-          Powered by OpenAI GPT-4. Your data is processed securely and not used for training.
+          {t('input.disclaimer')}
         </p>
       </div>
     </div>

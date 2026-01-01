@@ -48,7 +48,7 @@ export function ExtraPaymentCalculator({ loan }: ExtraPaymentCalculatorProps) {
           <CardDescription className="text-base">
             See how extra payments can save you money and time
           </CardDescription>
-          <div className="mt-3 bg-blue-50 border-l-4 border-blue-400 p-3 rounded">
+          <div className="mt-3 bg-blue-50 border-s-4 border-blue-400 p-3 rounded">
             <p className="text-sm text-gray-800">
               <span className="font-semibold">How it works:</span> Paying extra reduces your loan balance faster,
               which means less interest over time. Try different amounts to see your potential savings!
@@ -63,7 +63,7 @@ export function ExtraPaymentCalculator({ loan }: ExtraPaymentCalculatorProps) {
             </Label>
             <div className="flex items-center gap-2 mt-2">
               <div className="relative flex-1">
-                <DollarSign className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                <DollarSign className="absolute start-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
                 <Input
                   id="extraMonthly"
                   type="number"
@@ -72,7 +72,7 @@ export function ExtraPaymentCalculator({ loan }: ExtraPaymentCalculatorProps) {
                   placeholder="0.00"
                   min="0"
                   step="50"
-                  className="pl-10 min-h-[48px] text-base"
+                  className="ps-10 min-h-[48px] text-base"
                 />
               </div>
             </div>
@@ -88,7 +88,7 @@ export function ExtraPaymentCalculator({ loan }: ExtraPaymentCalculatorProps) {
                 One-Time Extra Payment (Optional)
               </Label>
               <div className="relative mt-2">
-                <DollarSign className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                <DollarSign className="absolute start-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
                 <Input
                   id="oneTimeAmount"
                   type="number"
@@ -97,7 +97,7 @@ export function ExtraPaymentCalculator({ loan }: ExtraPaymentCalculatorProps) {
                   placeholder="0.00"
                   min="0"
                   step="100"
-                  className="pl-10 min-h-[48px] text-base"
+                  className="ps-10 min-h-[48px] text-base"
                 />
               </div>
               <p className="text-xs text-gray-600 mt-1">Bonus, tax refund, etc.</p>
@@ -135,7 +135,7 @@ export function ExtraPaymentCalculator({ loan }: ExtraPaymentCalculatorProps) {
       {showResults && (extraMonthly > 0 || oneTimeAmount > 0) && (
         <div className="space-y-6">
           {/* Plain Language Summary */}
-          <Card className="bg-green-50 border-l-4 border-green-500 shadow-md">
+          <Card className="bg-green-50 border-s-4 border-green-500 shadow-md">
             <CardContent className="p-5">
               <p className="text-lg font-bold text-green-900 mb-2">
                 💰 Great news! By paying ${extraMonthly > 0 ? `$${extraMonthly.toLocaleString()} extra each month` : ''}
@@ -152,7 +152,7 @@ export function ExtraPaymentCalculator({ loan }: ExtraPaymentCalculatorProps) {
 
           {/* Summary Cards */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <Card className="border-l-4 border-green-500 shadow-md hover:shadow-lg transition-shadow">
+            <Card className="border-s-4 border-green-500 shadow-md hover:shadow-lg transition-shadow">
               <CardHeader className="pb-3">
                 <CardTitle className="text-base font-semibold text-gray-700 flex items-center gap-2">
                   <DollarSign className="w-6 h-6 text-green-600" />
@@ -169,7 +169,7 @@ export function ExtraPaymentCalculator({ loan }: ExtraPaymentCalculatorProps) {
               </CardContent>
             </Card>
 
-            <Card className="border-l-4 border-teal-500 shadow-md hover:shadow-lg transition-shadow">
+            <Card className="border-s-4 border-teal-500 shadow-md hover:shadow-lg transition-shadow">
               <CardHeader className="pb-3">
                 <CardTitle className="text-base font-semibold text-gray-700 flex items-center gap-2">
                   <Calendar className="w-6 h-6 text-teal-600" />
@@ -186,7 +186,7 @@ export function ExtraPaymentCalculator({ loan }: ExtraPaymentCalculatorProps) {
               </CardContent>
             </Card>
 
-            <Card className="border-l-4 border-teal-500 shadow-md hover:shadow-lg transition-shadow">
+            <Card className="border-s-4 border-teal-500 shadow-md hover:shadow-lg transition-shadow">
               <CardHeader className="pb-3">
                 <CardTitle className="text-base font-semibold text-gray-700 flex items-center gap-2">
                   <TrendingDown className="w-6 h-6 text-teal-600" />
@@ -264,7 +264,7 @@ export function ExtraPaymentCalculator({ loan }: ExtraPaymentCalculatorProps) {
           </Card>
 
           {/* Tips - Enhanced */}
-          <Card className="bg-amber-50 border-l-4 border-amber-400 shadow-md">
+          <Card className="bg-amber-50 border-s-4 border-amber-400 shadow-md">
             <CardContent className="p-5">
               <div className="flex gap-4">
                 <Info className="w-6 h-6 text-amber-600 flex-shrink-0 mt-1" />

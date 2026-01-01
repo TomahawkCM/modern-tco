@@ -8,6 +8,7 @@
 
 import { useState } from 'react';
 import { X as XIcon, Calendar, Tag, DollarSign } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import type { Category } from '@/types/budget';
 
 interface QuickFiltersRowProps {
@@ -26,13 +27,14 @@ export function QuickFiltersRow({
   onDateRangeChange,
   hasActiveFilters,
 }: QuickFiltersRowProps) {
+  const t = useTranslations('quickFilters');
   const [selectedPreset, setSelectedPreset] = useState('');
 
   const datePresets = [
-    { label: 'This Month', value: 'this-month' },
-    { label: 'Last 30 Days', value: 'last-30' },
-    { label: 'Last 90 Days', value: 'last-90' },
-    { label: 'This Year', value: 'this-year' },
+    { label: t('presets.thisMonth'), value: 'this-month' },
+    { label: t('presets.last30'), value: 'last-30' },
+    { label: t('presets.last90'), value: 'last-90' },
+    { label: t('presets.thisYear'), value: 'this-year' },
   ];
 
   const handlePresetClick = (preset: string) => {
@@ -48,7 +50,7 @@ export function QuickFiltersRow({
           <div className="flex items-center gap-2 mb-2">
             <Calendar className="w-4 h-4 text-gray-500" />
             <span className="text-xs font-semibold text-gray-700 uppercase tracking-wider">
-              Time Period
+              {t('timePeriod')}
             </span>
           </div>
           <div className="flex flex-wrap gap-2">
@@ -73,7 +75,7 @@ export function QuickFiltersRow({
           <div className="flex items-center gap-2 mb-2">
             <Tag className="w-4 h-4 text-gray-500" />
             <span className="text-xs font-semibold text-gray-700 uppercase tracking-wider">
-              Categories
+              {t('categories')}
             </span>
           </div>
           <div className="flex flex-wrap gap-2">
@@ -86,7 +88,7 @@ export function QuickFiltersRow({
               }`}
             >
               <DollarSign className="w-3 h-3 inline mr-1" />
-              All
+              {t('all')}
             </button>
             {categories.slice(0, 8).map((cat) => (
               <button
@@ -103,7 +105,7 @@ export function QuickFiltersRow({
             ))}
             {categories.length > 8 && (
               <span className="px-3 py-1.5 text-sm text-gray-500">
-                +{categories.length - 8} more
+                {t('moreCategories', { count: categories.length - 8 })}
               </span>
             )}
           </div>
@@ -120,7 +122,7 @@ export function QuickFiltersRow({
               className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors"
             >
               <XIcon className="w-4 h-4" />
-              Clear Filters
+              {t('clearFilters')}
             </button>
           </div>
         )}

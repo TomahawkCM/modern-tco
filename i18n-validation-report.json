@@ -1,0 +1,660 @@
+{
+  "timestamp": "2026-01-01T23:09:12.108Z",
+  "baseKeyCount": 1045,
+  "totalLocales": 114,
+  "tier1": {
+    "tier": 1,
+    "locales": [
+      {
+        "locale": "en-US",
+        "status": "PASS",
+        "completeness": "100.00",
+        "missingKeys": 0,
+        "placeholderIssues": 0,
+        "untranslatedCount": 0
+      },
+      {
+        "locale": "es-MX",
+        "status": "WARN",
+        "completeness": "100.00",
+        "missingKeys": 0,
+        "placeholderIssues": 0,
+        "untranslatedCount": 814
+      },
+      {
+        "locale": "fr-FR",
+        "status": "WARN",
+        "completeness": "100.00",
+        "missingKeys": 0,
+        "placeholderIssues": 0,
+        "untranslatedCount": 818
+      },
+      {
+        "locale": "de-DE",
+        "status": "WARN",
+        "completeness": "100.00",
+        "missingKeys": 0,
+        "placeholderIssues": 0,
+        "untranslatedCount": 822
+      },
+      {
+        "locale": "ja-JP",
+        "status": "WARN",
+        "completeness": "100.00",
+        "missingKeys": 0,
+        "placeholderIssues": 0,
+        "untranslatedCount": 809
+      },
+      {
+        "locale": "zh-CN",
+        "status": "WARN",
+        "completeness": "100.00",
+        "missingKeys": 0,
+        "placeholderIssues": 0,
+        "untranslatedCount": 808
+      },
+      {
+        "locale": "ar-SA",
+        "status": "WARN",
+        "completeness": "100.00",
+        "missingKeys": 0,
+        "placeholderIssues": 0,
+        "untranslatedCount": 809
+      },
+      {
+        "locale": "he-IL",
+        "status": "WARN",
+        "completeness": "100.00",
+        "missingKeys": 0,
+        "placeholderIssues": 0,
+        "untranslatedCount": 809
+      },
+      {
+        "locale": "ru-RU",
+        "status": "WARN",
+        "completeness": "100.00",
+        "missingKeys": 0,
+        "placeholderIssues": 0,
+        "untranslatedCount": 813
+      },
+      {
+        "locale": "hi-IN",
+        "status": "WARN",
+        "completeness": "100.00",
+        "missingKeys": 0,
+        "placeholderIssues": 0,
+        "untranslatedCount": 809
+      }
+    ],
+    "summary": {
+      "passed": 1,
+      "failed": 0,
+      "warnings": 9
+    }
+  },
+  "tier2": {
+    "tier": 2,
+    "locales": [
+      {
+        "locale": "en-GB",
+        "status": "PASS",
+        "completeness": "100.00",
+        "missingKeys": 0
+      },
+      {
+        "locale": "en-AU",
+        "status": "PASS",
+        "completeness": "100.00",
+        "missingKeys": 0
+      },
+      {
+        "locale": "en-CA",
+        "status": "PASS",
+        "completeness": "100.00",
+        "missingKeys": 0
+      },
+      {
+        "locale": "en-IN",
+        "status": "PASS",
+        "completeness": "100.00",
+        "missingKeys": 0
+      },
+      {
+        "locale": "es-ES",
+        "status": "PASS",
+        "completeness": "100.00",
+        "missingKeys": 0
+      },
+      {
+        "locale": "es-AR",
+        "status": "PASS",
+        "completeness": "100.00",
+        "missingKeys": 0
+      },
+      {
+        "locale": "es-CO",
+        "status": "PASS",
+        "completeness": "100.00",
+        "missingKeys": 0
+      },
+      {
+        "locale": "fr-CA",
+        "status": "PASS",
+        "completeness": "100.00",
+        "missingKeys": 0
+      },
+      {
+        "locale": "fr-BE",
+        "status": "PASS",
+        "completeness": "100.00",
+        "missingKeys": 0
+      },
+      {
+        "locale": "de-AT",
+        "status": "PASS",
+        "completeness": "100.00",
+        "missingKeys": 0
+      },
+      {
+        "locale": "de-CH",
+        "status": "PASS",
+        "completeness": "100.00",
+        "missingKeys": 0
+      },
+      {
+        "locale": "pt-BR",
+        "status": "PASS",
+        "completeness": "100.00",
+        "missingKeys": 0
+      },
+      {
+        "locale": "pt-PT",
+        "status": "PASS",
+        "completeness": "100.00",
+        "missingKeys": 0
+      },
+      {
+        "locale": "it-IT",
+        "status": "PASS",
+        "completeness": "100.00",
+        "missingKeys": 0
+      },
+      {
+        "locale": "nl-NL",
+        "status": "PASS",
+        "completeness": "100.00",
+        "missingKeys": 0
+      },
+      {
+        "locale": "pl-PL",
+        "status": "PASS",
+        "completeness": "100.00",
+        "missingKeys": 0
+      },
+      {
+        "locale": "ko-KR",
+        "status": "PASS",
+        "completeness": "100.00",
+        "missingKeys": 0
+      },
+      {
+        "locale": "zh-TW",
+        "status": "PASS",
+        "completeness": "100.00",
+        "missingKeys": 0
+      },
+      {
+        "locale": "zh-HK",
+        "status": "PASS",
+        "completeness": "100.00",
+        "missingKeys": 0
+      },
+      {
+        "locale": "th-TH",
+        "status": "PASS",
+        "completeness": "100.00",
+        "missingKeys": 0
+      },
+      {
+        "locale": "vi-VN",
+        "status": "PASS",
+        "completeness": "100.00",
+        "missingKeys": 0
+      },
+      {
+        "locale": "id-ID",
+        "status": "PASS",
+        "completeness": "100.00",
+        "missingKeys": 0
+      },
+      {
+        "locale": "tr-TR",
+        "status": "PASS",
+        "completeness": "100.00",
+        "missingKeys": 0
+      },
+      {
+        "locale": "uk-UA",
+        "status": "PASS",
+        "completeness": "100.00",
+        "missingKeys": 0
+      },
+      {
+        "locale": "cs-CZ",
+        "status": "PASS",
+        "completeness": "100.00",
+        "missingKeys": 0
+      }
+    ],
+    "summary": {
+      "passed": 25,
+      "failed": 0,
+      "warnings": 0
+    }
+  },
+  "tier3": {
+    "tier": 3,
+    "locales": [
+      {
+        "locale": "af-ZA",
+        "status": "PASS",
+        "completeness": "100.00"
+      },
+      {
+        "locale": "am-ET",
+        "status": "PASS",
+        "completeness": "100.00"
+      },
+      {
+        "locale": "ar-AE",
+        "status": "PASS",
+        "completeness": "100.00"
+      },
+      {
+        "locale": "az-AZ",
+        "status": "PASS",
+        "completeness": "100.00"
+      },
+      {
+        "locale": "be-BY",
+        "status": "PASS",
+        "completeness": "100.00"
+      },
+      {
+        "locale": "bg-BG",
+        "status": "PASS",
+        "completeness": "100.00"
+      },
+      {
+        "locale": "bn-BD",
+        "status": "PASS",
+        "completeness": "100.00"
+      },
+      {
+        "locale": "bn-IN",
+        "status": "PASS",
+        "completeness": "100.00"
+      },
+      {
+        "locale": "bs-BA",
+        "status": "PASS",
+        "completeness": "100.00"
+      },
+      {
+        "locale": "ca-ES",
+        "status": "PASS",
+        "completeness": "100.00"
+      },
+      {
+        "locale": "cy-GB",
+        "status": "PASS",
+        "completeness": "100.00"
+      },
+      {
+        "locale": "da-DK",
+        "status": "PASS",
+        "completeness": "100.00"
+      },
+      {
+        "locale": "el-GR",
+        "status": "PASS",
+        "completeness": "100.00"
+      },
+      {
+        "locale": "en-IE",
+        "status": "PASS",
+        "completeness": "100.00"
+      },
+      {
+        "locale": "en-NZ",
+        "status": "PASS",
+        "completeness": "100.00"
+      },
+      {
+        "locale": "en-SG",
+        "status": "PASS",
+        "completeness": "100.00"
+      },
+      {
+        "locale": "en-XA",
+        "status": "PASS",
+        "completeness": "100.00"
+      },
+      {
+        "locale": "en-ZA",
+        "status": "PASS",
+        "completeness": "100.00"
+      },
+      {
+        "locale": "es-BO",
+        "status": "PASS",
+        "completeness": "100.00"
+      },
+      {
+        "locale": "es-CL",
+        "status": "PASS",
+        "completeness": "100.00"
+      },
+      {
+        "locale": "es-CR",
+        "status": "PASS",
+        "completeness": "100.00"
+      },
+      {
+        "locale": "es-DO",
+        "status": "PASS",
+        "completeness": "100.00"
+      },
+      {
+        "locale": "es-EC",
+        "status": "PASS",
+        "completeness": "100.00"
+      },
+      {
+        "locale": "es-GT",
+        "status": "PASS",
+        "completeness": "100.00"
+      },
+      {
+        "locale": "es-HN",
+        "status": "PASS",
+        "completeness": "100.00"
+      },
+      {
+        "locale": "es-NI",
+        "status": "PASS",
+        "completeness": "100.00"
+      },
+      {
+        "locale": "es-PA",
+        "status": "PASS",
+        "completeness": "100.00"
+      },
+      {
+        "locale": "es-PE",
+        "status": "PASS",
+        "completeness": "100.00"
+      },
+      {
+        "locale": "es-PR",
+        "status": "PASS",
+        "completeness": "100.00"
+      },
+      {
+        "locale": "es-PY",
+        "status": "PASS",
+        "completeness": "100.00"
+      },
+      {
+        "locale": "es-SV",
+        "status": "PASS",
+        "completeness": "100.00"
+      },
+      {
+        "locale": "es-US",
+        "status": "PASS",
+        "completeness": "100.00"
+      },
+      {
+        "locale": "es-UY",
+        "status": "PASS",
+        "completeness": "100.00"
+      },
+      {
+        "locale": "es-VE",
+        "status": "PASS",
+        "completeness": "100.00"
+      },
+      {
+        "locale": "et-EE",
+        "status": "PASS",
+        "completeness": "100.00"
+      },
+      {
+        "locale": "eu-ES",
+        "status": "PASS",
+        "completeness": "100.00"
+      },
+      {
+        "locale": "fa-IR",
+        "status": "PASS",
+        "completeness": "100.00"
+      },
+      {
+        "locale": "fi-FI",
+        "status": "PASS",
+        "completeness": "100.00"
+      },
+      {
+        "locale": "fil-PH",
+        "status": "PASS",
+        "completeness": "100.00"
+      },
+      {
+        "locale": "fr-CH",
+        "status": "PASS",
+        "completeness": "100.00"
+      },
+      {
+        "locale": "gl-ES",
+        "status": "PASS",
+        "completeness": "100.00"
+      },
+      {
+        "locale": "gu-IN",
+        "status": "PASS",
+        "completeness": "100.00"
+      },
+      {
+        "locale": "hr-HR",
+        "status": "PASS",
+        "completeness": "100.00"
+      },
+      {
+        "locale": "hu-HU",
+        "status": "PASS",
+        "completeness": "100.00"
+      },
+      {
+        "locale": "hy-AM",
+        "status": "PASS",
+        "completeness": "100.00"
+      },
+      {
+        "locale": "is-IS",
+        "status": "PASS",
+        "completeness": "100.00"
+      },
+      {
+        "locale": "it-CH",
+        "status": "PASS",
+        "completeness": "100.00"
+      },
+      {
+        "locale": "ka-GE",
+        "status": "PASS",
+        "completeness": "100.00"
+      },
+      {
+        "locale": "kk-KZ",
+        "status": "PASS",
+        "completeness": "100.00"
+      },
+      {
+        "locale": "km-KH",
+        "status": "PASS",
+        "completeness": "100.00"
+      },
+      {
+        "locale": "kn-IN",
+        "status": "PASS",
+        "completeness": "100.00"
+      },
+      {
+        "locale": "ky-KG",
+        "status": "PASS",
+        "completeness": "100.00"
+      },
+      {
+        "locale": "lo-LA",
+        "status": "PASS",
+        "completeness": "100.00"
+      },
+      {
+        "locale": "lt-LT",
+        "status": "PASS",
+        "completeness": "100.00"
+      },
+      {
+        "locale": "lv-LV",
+        "status": "PASS",
+        "completeness": "100.00"
+      },
+      {
+        "locale": "mk-MK",
+        "status": "PASS",
+        "completeness": "100.00"
+      },
+      {
+        "locale": "ml-IN",
+        "status": "PASS",
+        "completeness": "100.00"
+      },
+      {
+        "locale": "mn-MN",
+        "status": "PASS",
+        "completeness": "100.00"
+      },
+      {
+        "locale": "mr-IN",
+        "status": "PASS",
+        "completeness": "100.00"
+      },
+      {
+        "locale": "ms-MY",
+        "status": "PASS",
+        "completeness": "100.00"
+      },
+      {
+        "locale": "my-MM",
+        "status": "PASS",
+        "completeness": "100.00"
+      },
+      {
+        "locale": "nb-NO",
+        "status": "PASS",
+        "completeness": "100.00"
+      },
+      {
+        "locale": "ne-NP",
+        "status": "PASS",
+        "completeness": "100.00"
+      },
+      {
+        "locale": "nl-BE",
+        "status": "PASS",
+        "completeness": "100.00"
+      },
+      {
+        "locale": "pa-IN",
+        "status": "PASS",
+        "completeness": "100.00"
+      },
+      {
+        "locale": "ro-RO",
+        "status": "PASS",
+        "completeness": "100.00"
+      },
+      {
+        "locale": "si-LK",
+        "status": "PASS",
+        "completeness": "100.00"
+      },
+      {
+        "locale": "sk-SK",
+        "status": "PASS",
+        "completeness": "100.00"
+      },
+      {
+        "locale": "sl-SI",
+        "status": "PASS",
+        "completeness": "100.00"
+      },
+      {
+        "locale": "sq-AL",
+        "status": "PASS",
+        "completeness": "100.00"
+      },
+      {
+        "locale": "sr-RS",
+        "status": "PASS",
+        "completeness": "100.00"
+      },
+      {
+        "locale": "sv-SE",
+        "status": "PASS",
+        "completeness": "100.00"
+      },
+      {
+        "locale": "sw-TZ",
+        "status": "PASS",
+        "completeness": "100.00"
+      },
+      {
+        "locale": "ta-IN",
+        "status": "PASS",
+        "completeness": "100.00"
+      },
+      {
+        "locale": "te-IN",
+        "status": "PASS",
+        "completeness": "100.00"
+      },
+      {
+        "locale": "ur-PK",
+        "status": "PASS",
+        "completeness": "100.00"
+      },
+      {
+        "locale": "uz-UZ",
+        "status": "PASS",
+        "completeness": "100.00"
+      },
+      {
+        "locale": "zu-ZA",
+        "status": "PASS",
+        "completeness": "100.00"
+      }
+    ],
+    "summary": {
+      "passed": 78,
+      "failed": 0,
+      "warnings": 0
+    }
+  },
+  "summary": {
+    "passed": 104,
+    "warnings": 9,
+    "failed": 0
+  }
+}

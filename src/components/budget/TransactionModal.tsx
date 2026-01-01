@@ -19,6 +19,7 @@ import type { ExtractedReceiptData } from '@/lib/receipt-ocr';
 import { useFocusTrap } from '@/hooks/useFocusTrap';
 import { trackBudgetEvent } from '@/lib/budget-analytics';
 import { useMerchantCategorization } from '@/hooks/useMerchantCategorization';
+import { useTranslations } from 'next-intl';
 
 interface TransactionModalProps {
   transaction: Transaction | null;
@@ -37,6 +38,8 @@ export function TransactionModal({
   onClose,
   isSaving = false,
 }: TransactionModalProps) {
+  const t = useTranslations('transactionModal');
+
   // Smart default: Load last used category from localStorage
   const getLastUsedCategory = () => {
     if (typeof window !== 'undefined') {
@@ -160,7 +163,7 @@ export function TransactionModal({
 
     const amountNum = parseFloat(amount);
     if (isNaN(amountNum) || amountNum <= 0) {
-      alert('Please enter a valid amount');
+      alert(t('amount.validationError'));
       return;
     }
 
@@ -258,13 +261,13 @@ export function TransactionModal({
   async function handleDeleteReceipt(receiptId: string) {
     if (!transaction?.id) return;
 
-    if (confirm('Are you sure you want to delete this receipt?')) {
+    if (confirm(t('receipts.deleteConfirm'))) {
       try {
         await deleteReceipt(receiptId, transaction.id);
         setExistingReceipts(existingReceipts.filter(r => r.id !== receiptId));
       } catch (error) {
         console.error('Failed to delete receipt:', error);
-        alert('Failed to delete receipt');
+        alert(t('receipts.deleteFailed'));
       }
     }
   }
@@ -301,7 +304,7 @@ export function TransactionModal({
 
   async function createNewCategory() {
     if (!newCategoryName.trim()) {
-      alert('Category name is required');
+      alert(t('createCategory.nameRequired'));
       return;
     }
 
@@ -333,10 +336,10 @@ export function TransactionModal({
       setNewCategoryName('');
       setNewCategorySubcats('');
 
-      alert(`Category "${newCat.name}" created!`);
+      alert(t('createCategory.created', { name: newCat.name }));
     } catch (error) {
       console.error('Error creating category:', error);
-      alert('Failed to create category');
+      alert(t('createCategory.failed'));
     }
   }
 
@@ -350,13 +353,13 @@ export function TransactionModal({
         <div className="p-5 sm:p-6 border-b border-border flex-shrink-0 bg-card">
           <div className="flex items-center justify-between">
             <h2 className="text-xl sm:text-2xl font-bold text-foreground">
-              {transaction ? 'Edit Transaction' : 'Add Transaction'}
+              {transaction ? t('title.edit') : t('title.add')}
             </h2>
             <button
               type="button"
               onClick={onClose}
               className="p-2.5 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
-              aria-label="Close modal"
+              aria-label={t('closeModal')}
             >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -373,9 +376,9 @@ export function TransactionModal({
             <div className="bg-success/10 border border-success rounded-lg p-4 flex items-start gap-2">
               <div className="flex-shrink-0 text-success-foreground">✓</div>
               <div className="text-sm text-foreground">
-                <div className="font-medium">Learned!</div>
+                <div className="font-medium">{t('learned.title')}</div>
                 <div className="mt-0.5">
-                  After 3 similar corrections, future transactions from this merchant will auto-categorize.
+                  {t('learned.description')}
                 </div>
               </div>
             </div>
@@ -383,7 +386,7 @@ export function TransactionModal({
 
           {/* Type Toggle - Enhanced */}
           <div>
-            <label className="block text-base font-semibold text-foreground mb-3">Type *</label>
+            <label className="block text-base font-semibold text-foreground mb-3">{t('type.label')} *</label>
             <div className="grid grid-cols-2 gap-4">
               <button
                 type="button"
@@ -398,7 +401,7 @@ export function TransactionModal({
                     : 'bg-muted text-muted-foreground hover:bg-muted/80'
                 }`}
               >
-                Expense
+                {t('type.expense')}
               </button>
               <button
                 type="button"
@@ -413,7 +416,7 @@ export function TransactionModal({
                     : 'bg-muted text-muted-foreground hover:bg-muted/80'
                 }`}
               >
-                Income
+                {t('type.income')}
               </button>
             </div>
           </div>
@@ -421,14 +424,14 @@ export function TransactionModal({
           {/* Description - Enhanced */}
           <div>
             <label htmlFor="transaction-description" className="block text-base font-semibold text-foreground mb-3">
-              Description *
+              {t('description.label')} *
             </label>
             <input
               id="transaction-description"
               type="text"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              placeholder="e.g., Grocery shopping at Sobeys"
+              placeholder={t('description.placeholder')}
               className="w-full min-h-[48px] px-4 text-base border border-input rounded-lg bg-background text-foreground focus:ring-2 focus:ring-teal-500 focus:border-transparent"
               aria-required="true"
               required
@@ -439,20 +442,20 @@ export function TransactionModal({
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label htmlFor="transaction-amount" className="block text-base font-semibold text-foreground mb-3">
-                Amount *
+                {t('amount.label')} *
               </label>
               <div className="relative">
-                <span className="absolute left-4 top-1/2 -translate-y-1/2 text-lg text-muted-foreground">$</span>
+                <span className="absolute start-4 top-1/2 -translate-y-1/2 text-lg text-muted-foreground">$</span>
                 <input
                   id="transaction-amount"
                   type="number"
                   value={amount}
                   onChange={(e) => setAmount(e.target.value)}
-                  placeholder="0.00"
+                  placeholder={t('amount.placeholder')}
                   step="0.01"
                   min="0"
                   inputMode="decimal"
-                  className="w-full min-h-[48px] pl-8 pr-4 text-base border border-input rounded-lg bg-background text-foreground focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                  className="w-full min-h-[48px] ps-8 pe-4 text-base border border-input rounded-lg bg-background text-foreground focus:ring-2 focus:ring-teal-500 focus:border-transparent"
                   aria-required="true"
                   required
                 />
@@ -461,7 +464,7 @@ export function TransactionModal({
 
             <div>
               <label htmlFor="transaction-date" className="block text-base font-semibold text-foreground mb-3">
-                Date *
+                {t('date.label')} *
               </label>
               <input
                 id="transaction-date"
@@ -479,11 +482,11 @@ export function TransactionModal({
           <div className="space-y-4">
             <div>
               <label className="block text-base font-semibold text-foreground mb-3">
-                Category {lastUsed.category && !transaction && <span className="text-sm font-normal text-muted-foreground">(Using last: {lastUsed.category})</span>}
+                {t('category.label')} {lastUsed.category && !transaction && <span className="text-sm font-normal text-muted-foreground">({t('category.lastUsed', { category: lastUsed.category })})</span>}
                 {isAILoading && (
                   <span className="ml-2 inline-flex items-center gap-1.5 px-2.5 py-1 bg-teal-50 text-teal-700 text-xs font-medium rounded-full border border-teal-200">
                     <Brain className="w-3.5 h-3.5 animate-pulse" />
-                    AI categorizing...
+                    {t('category.aiCategorizing')}
                   </span>
                 )}
               </label>
@@ -495,7 +498,7 @@ export function TransactionModal({
                         value: cat.name,
                         label: cat.name,
                       })),
-                      { value: '__create__', label: '+ Create New Category' }
+                      { value: '__create__', label: t('category.createNew') }
                     ]}
                     value={category}
                     onChange={(value) => {
@@ -507,7 +510,7 @@ export function TransactionModal({
                         setSubcategory('');
                       }
                     }}
-                    placeholder="Select category..."
+                    placeholder={t('category.selectPlaceholder')}
                   />
                 </div>
               ) : (
@@ -516,14 +519,14 @@ export function TransactionModal({
                     type="text"
                     value={newCategoryName}
                     onChange={(e) => setNewCategoryName(e.target.value)}
-                    placeholder="Category name..."
+                    placeholder={t('category.namePlaceholder')}
                     className="w-full px-4 py-2 text-sm border border-input rounded bg-background text-foreground focus:ring-2 focus:ring-teal-500 focus:border-transparent"
                   />
                   <input
                     type="text"
                     value={newCategorySubcats}
                     onChange={(e) => setNewCategorySubcats(e.target.value)}
-                    placeholder="Subcategories (optional, comma-separated)"
+                    placeholder={t('category.subcategoriesPlaceholder')}
                     className="w-full px-4 py-2 text-sm border border-input rounded bg-background text-foreground focus:ring-2 focus:ring-teal-500 focus:border-transparent"
                   />
                   <div className="flex gap-2">
@@ -532,7 +535,7 @@ export function TransactionModal({
                       onClick={createNewCategory}
                       className="flex-1 px-4 py-2 text-sm bg-teal-600 text-white rounded hover:bg-teal-700"
                     >
-                      Create
+                      {t('category.create')}
                     </button>
                     <button
                       type="button"
@@ -543,7 +546,7 @@ export function TransactionModal({
                       }}
                       className="flex-1 px-4 py-2 text-sm border border-input text-foreground rounded hover:bg-muted"
                     >
-                      Cancel
+                      {t('buttons.cancel')}
                     </button>
                   </div>
                 </div>
@@ -552,11 +555,11 @@ export function TransactionModal({
 
             <div>
               <label className="block text-base font-semibold text-foreground mb-3">
-                Subcategory
+                {t('subcategory.label')}
               </label>
               <CategoryCombobox
                 options={[
-                  { value: '', label: 'None' },
+                  { value: '', label: t('subcategory.none') },
                   ...(selectedCategory?.subcategories.map(sub => ({
                     value: sub,
                     label: sub,
@@ -564,7 +567,7 @@ export function TransactionModal({
                 ]}
                 value={subcategory}
                 onChange={setSubcategory}
-                placeholder="Select subcategory..."
+                placeholder={t('subcategory.selectPlaceholder')}
                 disabled={!selectedCategory || selectedCategory.subcategories.length === 0}
               />
             </div>
@@ -611,19 +614,19 @@ export function TransactionModal({
               >
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>
-              <span>Advanced Options</span>
+              <span>{t('advancedOptions.label')}</span>
               <span className="text-sm font-normal text-muted-foreground">
-                ({[notes, tags, accounts.length > 1 ? 'account' : ''].filter(Boolean).length} available)
+                ({t('advancedOptions.available', { count: [notes, tags, accounts.length > 1 ? 'account' : ''].filter(Boolean).length })})
               </span>
             </button>
 
             {showAdvancedOptions && (
-              <div className="space-y-4 pl-4 border-l-2 border-teal-200">
+              <div className="space-y-4 ps-4 border-s-2 border-teal-200">
                 {/* Account */}
                 {accounts.length > 0 && (
                   <div>
                     <label htmlFor="transaction-account" className="block text-base font-medium text-foreground mb-3">
-                      Account
+                      {t('account.label')}
                     </label>
                     <select
                       id="transaction-account"
@@ -643,13 +646,13 @@ export function TransactionModal({
                 {/* Notes */}
                 <div>
                   <label htmlFor="transaction-notes" className="block text-base font-medium text-foreground mb-3">
-                    Notes
+                    {t('notes.label')}
                   </label>
                   <textarea
                     id="transaction-notes"
                     value={notes}
                     onChange={(e) => setNotes(e.target.value)}
-                    placeholder="Add any additional notes..."
+                    placeholder={t('notes.placeholder')}
                     rows={3}
                     className="w-full px-4 py-3 text-base border border-input rounded-lg bg-background text-foreground focus:ring-2 focus:ring-teal-500 focus:border-transparent resize-none"
                   />
@@ -658,14 +661,14 @@ export function TransactionModal({
                 {/* Tags */}
                 <div>
                   <label htmlFor="transaction-tags" className="block text-base font-medium text-foreground mb-3">
-                    Tags (comma-separated)
+                    {t('tags.label')}
                   </label>
                   <input
                     id="transaction-tags"
                     type="text"
                     value={tags}
                     onChange={(e) => setTags(e.target.value)}
-                    placeholder="e.g., groceries, weekly, essential"
+                    placeholder={t('tags.placeholder')}
                     className="w-full min-h-[48px] px-4 text-base border border-input rounded-lg bg-background text-foreground focus:ring-2 focus:ring-teal-500 focus:border-transparent"
                   />
                 </div>
@@ -676,13 +679,13 @@ export function TransactionModal({
           {/* Receipt Upload - Phase 7.1.1 & 7.2.2: Receipt storage and thumbnails */}
           <div className="space-y-4">
             <label className="block text-sm font-medium text-foreground">
-              Receipt Attachments
+              {t('receipts.label')}
             </label>
 
             {/* Existing Receipts - Phase 7.2.2: Display thumbnails */}
             {existingReceipts.length > 0 && (
               <div className="space-y-2">
-                <p className="text-xs text-muted-foreground">Existing receipts ({existingReceipts.length})</p>
+                <p className="text-xs text-muted-foreground">{t('receipts.existing', { count: existingReceipts.length })}</p>
                 <div className="grid grid-cols-3 sm:grid-cols-4 gap-2">
                   {existingReceipts.map((receipt) => {
                     const thumbnailUrl = receipt.thumbnail ? getThumbnailBlobUrl(receipt) : null;
@@ -722,7 +725,7 @@ export function TransactionModal({
                               setTimeout(() => URL.revokeObjectURL(fullUrl), 1000);
                             }}
                             className="p-2.5 bg-card rounded text-foreground hover:bg-muted"
-                            title="View full receipt"
+                            title={t('receipts.viewFull')}
                           >
                             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -733,7 +736,7 @@ export function TransactionModal({
                             type="button"
                             onClick={() => handleDeleteReceipt(receipt.id)}
                             className="p-2.5 bg-red-500 rounded text-white hover:bg-red-600"
-                            title="Delete receipt"
+                            title={t('receipts.deleteReceipt')}
                           >
                             <Trash2 className="w-4 h-4" />
                           </button>
@@ -760,7 +763,7 @@ export function TransactionModal({
                 className="flex items-center gap-2 px-4 py-2.5 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors w-full justify-center min-h-[44px]"
               >
                 <Paperclip className="w-4 h-4" />
-                <span>Add New Receipt</span>
+                <span>{t('receipts.addNew')}</span>
               </button>
             )}
 
@@ -768,14 +771,14 @@ export function TransactionModal({
               <div className="flex items-center justify-between p-4 bg-green-50 border border-green-200 rounded-lg">
                 <div className="flex items-center gap-2">
                   <Paperclip className="w-4 h-4 text-green-600" />
-                  <span className="text-sm text-green-800 font-medium">New: {attachedReceipt.name}</span>
+                  <span className="text-sm text-green-800 font-medium">{t('receipts.newFile', { filename: attachedReceipt.name })}</span>
                 </div>
                 <button
                   type="button"
                   onClick={() => setAttachedReceipt(null)}
                   className="text-red-600 hover:text-red-700 text-sm font-medium"
                 >
-                  Remove
+                  {t('receipts.remove')}
                 </button>
               </div>
             )}
@@ -799,7 +802,7 @@ export function TransactionModal({
               onClick={onClose}
               className="flex-1 px-6 py-3 text-base border-2 border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors font-semibold min-h-[48px]"
             >
-              Cancel
+              {t('buttons.cancel')}
             </button>
             <button
               type="submit"
@@ -808,8 +811,8 @@ export function TransactionModal({
             >
               {isSaving && <Loader2 className="w-5 h-5 animate-spin" />}
               {isSaving
-                ? (transaction ? 'Updating...' : 'Adding...')
-                : (transaction ? 'Update' : 'Add') + ' Transaction'
+                ? (transaction ? t('buttons.updating') : t('buttons.adding'))
+                : (transaction ? t('buttons.update') : t('buttons.add'))
               }
             </button>
           </div>

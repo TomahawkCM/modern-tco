@@ -7,6 +7,7 @@
 
 import { useMemo } from 'react';
 import { motion } from 'framer-motion';
+import { useTranslations } from 'next-intl';
 import { cn } from '@/lib/utils';
 import {
   type HealthScoreResult,
@@ -32,6 +33,7 @@ export function HealthScoreWidget({
   className,
   onClick,
 }: HealthScoreWidgetProps) {
+  const t = useTranslations('healthScore');
   const { isSeniorsMode } = useSeniorsMode();
 
   // Size configurations
@@ -90,8 +92,8 @@ export function HealthScoreWidget({
         style={{ width: config.width + 32, height: config.width + (showLabel ? 48 : 32) }}
       >
         <div className="text-slate-400 text-center">
-          <p className="text-sm">Add transactions to see your</p>
-          <p className="text-sm font-medium">Financial Health Score</p>
+          <p className="text-sm">{t('emptyState.line1')}</p>
+          <p className="text-sm font-medium">{t('emptyState.line2')}</p>
         </div>
       </div>
     );
@@ -106,7 +108,7 @@ export function HealthScoreWidget({
       onClick={onClick}
       role="button"
       tabIndex={0}
-      aria-label={`Financial Health Score: ${score.toFixed(0)} out of 100. ${interpretation}`}
+      aria-label={t('ariaLabel', { score: score.toFixed(0), interpretation })}
       onKeyDown={(e) => {
         if (e.key === 'Enter' || e.key === ' ') {
           onClick?.();
@@ -191,7 +193,7 @@ export function HealthScoreWidget({
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3, delay: 0.8 }}
             >
-              Grade: {result.grade}
+              {t('grade', { grade: result.grade })}
             </motion.span>
           )}
         </div>
@@ -205,7 +207,7 @@ export function HealthScoreWidget({
           animate={{ opacity: 1 }}
           transition={{ delay: 1 }}
         >
-          <p className="text-sm font-medium text-white">Financial Health</p>
+          <p className="text-sm font-medium text-white">{t('title')}</p>
           <p className="text-xs text-slate-400">{interpretation}</p>
         </motion.div>
       )}
@@ -218,7 +220,7 @@ export function HealthScoreWidget({
           animate={{ opacity: 1 }}
           transition={{ delay: 1.2 }}
         >
-          {result.missingFactors.length} factor{result.missingFactors.length > 1 ? 's' : ''} missing
+          {t('missingFactors', { count: result.missingFactors.length })}
         </motion.p>
       )}
     </div>

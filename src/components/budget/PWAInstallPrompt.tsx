@@ -11,10 +11,12 @@
 'use client';
 
 import { useState } from 'react';
+import { useTranslations } from 'next-intl';
 import { Download, X } from 'lucide-react';
 import { usePWA } from '@/hooks/usePWA';
 
 export function PWAInstallPrompt() {
+  const t = useTranslations('pwaInstall');
   const { shouldShowPrompt, promptInstall, dismissPrompt } = usePWA();
   const [isVisible, setIsVisible] = useState(true);
 
@@ -50,10 +52,10 @@ export function PWAInstallPrompt() {
             {/* Content */}
             <div className="flex-1 min-w-0">
               <h3 className="text-sm font-semibold text-gray-900 mb-1">
-                Install Budget App
+                {t('title')}
               </h3>
               <p className="text-xs text-gray-600 mb-3">
-                Add to your home screen for quick access and offline use
+                {t('description')}
               </p>
 
               {/* Actions */}
@@ -64,7 +66,7 @@ export function PWAInstallPrompt() {
                              hover:bg-teal-700 transition-colors
                              focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
                 >
-                  Install
+                  {t('buttons.install')}
                 </button>
                 <button
                   onClick={handleDismiss}
@@ -72,7 +74,7 @@ export function PWAInstallPrompt() {
                              rounded-lg hover:bg-gray-100 transition-colors
                              focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
                 >
-                  Not now
+                  {t('buttons.notNow')}
                 </button>
               </div>
             </div>
@@ -82,7 +84,7 @@ export function PWAInstallPrompt() {
               onClick={handleDismiss}
               className="flex-shrink-0 p-1 text-gray-400 hover:text-gray-600 rounded
                          focus:outline-none focus:ring-2 focus:ring-gray-500"
-              aria-label="Close install prompt"
+              aria-label={t('close')}
             >
               <X className="w-4 h-4" />
             </button>
@@ -94,15 +96,15 @@ export function PWAInstallPrompt() {
           <div className="bg-gray-50 rounded-lg p-3 space-y-1.5">
             <div className="flex items-center gap-2 text-xs text-gray-600">
               <span className="text-green-600">✓</span>
-              <span>Works offline</span>
+              <span>{t('features.offline')}</span>
             </div>
             <div className="flex items-center gap-2 text-xs text-gray-600">
               <span className="text-green-600">✓</span>
-              <span>Fast & secure</span>
+              <span>{t('features.fastSecure')}</span>
             </div>
             <div className="flex items-center gap-2 text-xs text-gray-600">
               <span className="text-green-600">✓</span>
-              <span>No app store needed</span>
+              <span>{t('features.noAppStore')}</span>
             </div>
           </div>
         </div>

@@ -8,6 +8,7 @@
  */
 
 import { useCallback, useState, useRef } from 'react';
+import { useTranslations } from 'next-intl';
 import { useDropzone } from 'react-dropzone';
 import { Upload, FileImage, X, AlertCircle, CheckCircle, Camera, Sparkles } from 'lucide-react';
 import { extractReceiptData, type ExtractedReceiptData } from '@/lib/receipt-ocr';
@@ -25,6 +26,7 @@ export function ReceiptUpload({
   maxSize = 5 * 1024 * 1024, // 5MB default
   onDataExtracted,
 }: ReceiptUploadProps) {
+  const t = useTranslations('receiptUpload');
   const [preview, setPreview] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [uploadedFile, setUploadedFile] = useState<File | null>(null);
@@ -42,11 +44,11 @@ export function ReceiptUpload({
       if (rejectedFiles.length > 0) {
         const rejection = rejectedFiles[0];
         if (rejection.errors[0]?.code === 'file-too-large') {
-          setError(`File is too large. Maximum size is ${maxSize / 1024 / 1024}MB`);
+          setError(t('errors.tooLarge', { size: maxSize / 1024 / 1024 }));
         } else if (rejection.errors[0]?.code === 'file-invalid-type') {
-          setError('Invalid file type. Only JPG, PNG, and PDF files are allowed');
+          setError(t('errors.invalidType'));
         } else {
-          setError('File was rejected. Please try again');
+          setError(t('errors.rejected'));
         }
         return;
       }
@@ -104,7 +106,7 @@ export function ReceiptUpload({
     if (file) {
       // Validate file size
       if (file.size > maxSize) {
-        setError(`File is too large. Maximum size is ${maxSize / 1024 / 1024}MB`);
+        setError(t('errors.tooLarge', { size: maxSize / 1024 / 1024 }));
         return;
       }
 
@@ -130,7 +132,7 @@ export function ReceiptUpload({
 
     // Only process images (PDFs not supported for OCR)
     if (!uploadedFile.type.startsWith('image/')) {
-      setError('OCR is only supported for image files (JPG, PNG)');
+      setError(t('errors.ocrImagesOnly'));
       return;
     }
 
@@ -144,11 +146,11 @@ export function ReceiptUpload({
       if (data.confidence > 0) {
         onDataExtracted(data);
       } else {
-        setError('Could not extract data from receipt. Please enter manually.');
+        setError(t('errors.couldNotExtract'));
       }
     } catch (err) {
       console.error('OCR extraction error:', err);
-      setError('Failed to extract data. Please try again or enter manually.');
+      setError(t('errors.extractionFailed'));
     } finally {
       setIsExtracting(false);
     }
@@ -164,7 +166,7 @@ export function ReceiptUpload({
         capture="environment"
         onChange={handleCameraCapture}
         className="hidden"
-        aria-label="Camera capture input"
+        aria-label={t('cameraInputLabel')}
       />
 
       {/* Upload Area */}
@@ -197,13 +199,15 @@ export function ReceiptUpload({
           {/* Text */}
           <div className="space-y-2">
             <p className="text-base font-medium text-gray-900">
-              {isDragActive ? 'Drop the receipt here' : 'Drag & drop receipt here'}
+              {isDragActive ? t('dropzone.dropHere') : t('dropzone.dragDrop')}
             </p>
             <p className="text-sm text-gray-500">
-              or <span className="text-teal-600 font-medium">browse files</span>
+              {t.rich('dropzone.browseFiles', {
+                link: (chunks) => <span className="text-teal-600 font-medium">{chunks}</span>
+              })}
             </p>
             <p className="text-xs text-gray-400 mt-2">
-              Supports JPG, PNG, PDF • Max {maxSize / 1024 / 1024}MB
+              {t('dropzone.supportedFormats', { size: maxSize / 1024 / 1024 })}
             </p>
           </div>
         </div>
@@ -216,10 +220,10 @@ export function ReceiptUpload({
               className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-teal-500 text-white rounded-lg hover:bg-teal-600 transition-colors font-medium min-h-[44px]"
             >
               <Camera className="w-5 h-5" />
-              <span>Take Photo with Camera</span>
+              <span>{t('camera.takePhoto')}</span>
             </button>
             <p className="text-xs text-gray-500 text-center mt-2">
-              Use your device camera to capture receipt
+              {t('camera.useDevice')}
             </p>
           </div>
         </div>
@@ -249,7 +253,7 @@ export function ReceiptUpload({
             <button
               onClick={handleRemove}
               className="p-2 rounded hover:bg-gray-100 transition-colors"
-              aria-label="Remove file"
+              aria-label={t('removeFile')}
             >
               <X className="w-4 h-4 text-gray-500" />
             </button>
@@ -260,7 +264,7 @@ export function ReceiptUpload({
             <div className="relative w-full h-64 bg-gray-100 rounded-lg overflow-hidden">
               <img
                 src={preview}
-                alt="Receipt preview"
+                alt={t('receiptPreview')}
                 className="w-full h-full object-contain"
               />
             </div>
@@ -270,8 +274,8 @@ export function ReceiptUpload({
           {uploadedFile.type === 'application/pdf' && (
             <div className="flex flex-col items-center justify-center w-full h-64 bg-gray-50 rounded-lg">
               <FileImage className="w-16 h-16 text-gray-400 mb-2" />
-              <p className="text-sm text-gray-600">PDF Receipt</p>
-              <p className="text-xs text-gray-400 mt-2">Preview not available</p>
+              <p className="text-sm text-gray-600">{t('pdf.title')}</p>
+              <p className="text-xs text-gray-400 mt-2">{t('pdf.noPreview')}</p>
             </div>
           )}
 
@@ -281,19 +285,19 @@ export function ReceiptUpload({
               <div className="flex items-start gap-2">
                 <CheckCircle className="w-5 h-5 text-teal-600 flex-shrink-0 mt-0.5" />
                 <div className="flex-1">
-                  <p className="text-sm font-medium text-teal-900 mb-2">Data Extracted</p>
+                  <p className="text-sm font-medium text-teal-900 mb-2">{t('extracted.title')}</p>
                   <div className="space-y-2 text-xs text-teal-800">
                     {extractedData.merchant && (
-                      <p><strong>Merchant:</strong> {extractedData.merchant}</p>
+                      <p><strong>{t('extracted.merchant')}</strong> {extractedData.merchant}</p>
                     )}
                     {extractedData.amount && (
-                      <p><strong>Amount:</strong> ${extractedData.amount.toFixed(2)}</p>
+                      <p><strong>{t('extracted.amount')}</strong> ${extractedData.amount.toFixed(2)}</p>
                     )}
                     {extractedData.date && (
-                      <p><strong>Date:</strong> {extractedData.date.toLocaleDateString()}</p>
+                      <p><strong>{t('extracted.date')}</strong> {extractedData.date.toLocaleDateString()}</p>
                     )}
                     <p className="text-teal-600 mt-2">
-                      Confidence: {Math.round(extractedData.confidence * 100)}%
+                      {t('extracted.confidence', { percent: Math.round(extractedData.confidence * 100) })}
                     </p>
                   </div>
                 </div>
@@ -307,7 +311,7 @@ export function ReceiptUpload({
               onClick={handleRemove}
               className="flex-1 px-4 py-2.5 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors font-medium min-h-[44px]"
             >
-              Choose Different
+              {t('buttons.chooseDifferent')}
             </button>
 
             {/* Phase 7.3.1: Extract Data Button (Optional) */}
@@ -320,12 +324,12 @@ export function ReceiptUpload({
                 {isExtracting ? (
                   <>
                     <div className="w-4 h-4 border-2 border-teal-700 border-t-transparent rounded-full animate-spin" />
-                    <span>Extracting...</span>
+                    <span>{t('buttons.extracting')}</span>
                   </>
                 ) : (
                   <>
                     <Sparkles className="w-4 h-4" />
-                    <span>Extract Data</span>
+                    <span>{t('buttons.extractData')}</span>
                   </>
                 )}
               </button>
@@ -335,7 +339,7 @@ export function ReceiptUpload({
               onClick={handleConfirm}
               className="flex-1 px-4 py-2.5 bg-teal-500 text-white rounded-lg hover:bg-teal-600 transition-colors font-medium min-h-[44px]"
             >
-              Attach Receipt
+              {t('buttons.attachReceipt')}
             </button>
           </div>
         </div>

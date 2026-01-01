@@ -15,6 +15,7 @@
 
 import Link from 'next/link';
 import type { LucideIcon } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import { Button } from '@/components/ui/button';
 
 interface CTAButton {
@@ -105,136 +106,170 @@ import {
   PiggyBank
 } from 'lucide-react';
 
-export const EmptyStates = {
-  Transactions: ({
-    onAddClick,
-  }: {
-    onAddClick?: () => void;
-  }) => (
+// Wrapper components for section-specific empty states with translations
+function TransactionsEmptyState({ onAddClick }: { onAddClick?: () => void }) {
+  const t = useTranslations('emptyStates.transactions');
+  return (
     <EmptyState
       icon={Receipt}
-      heading="No Transactions Yet"
-      description="Start tracking your spending by adding your first transaction. You can add manually or import from a CSV file."
+      heading={t('heading')}
+      description={t('description')}
       primaryCTA={{
-        label: 'Add Transaction',
+        label: t('primaryCta'),
         href: '/budget-app/transactions',
         icon: Receipt,
       }}
       secondaryCTA={{
-        label: 'Import CSV',
+        label: t('secondaryCta'),
         href: '/budget-app/import',
       }}
     />
-  ),
+  );
+}
 
-  Budgets: () => (
+function BudgetsEmptyState() {
+  const t = useTranslations('emptyStates.budgets');
+  return (
     <EmptyState
       icon={PieChart}
-      heading="No Budgets Created"
-      description="Create budgets to track spending in different categories and achieve your financial goals."
+      heading={t('heading')}
+      description={t('description')}
       primaryCTA={{
-        label: 'Create Your First Budget',
+        label: t('primaryCta'),
         href: '/budget-app/budgets',
         icon: PieChart,
       }}
     />
-  ),
+  );
+}
 
-  Loans: () => (
+function LoansEmptyState() {
+  const t = useTranslations('emptyStates.loans');
+  return (
     <EmptyState
       icon={CreditCard}
-      heading="No Loans Tracked"
-      description="Track your loans, mortgages, and debts to visualize payoff progress and plan payments."
+      heading={t('heading')}
+      description={t('description')}
       primaryCTA={{
-        label: 'Add Your First Loan',
+        label: t('primaryCta'),
         href: '/budget-app/loans/new',
         icon: CreditCard,
       }}
     />
-  ),
+  );
+}
 
-  Investments: () => (
+function InvestmentsEmptyState() {
+  const t = useTranslations('emptyStates.investments');
+  return (
     <EmptyState
       icon={Wallet}
-      heading="No Investments Tracked"
-      description="Track your investment accounts and holdings to monitor portfolio performance and net worth."
+      heading={t('heading')}
+      description={t('description')}
       primaryCTA={{
-        label: 'Add Investment Account',
+        label: t('primaryCta'),
         href: '/budget-app/investments',
         icon: Wallet,
       }}
     />
-  ),
+  );
+}
 
-  FuturePlans: () => (
+function FuturePlansEmptyState() {
+  const t = useTranslations('emptyStates.futurePlans');
+  return (
     <EmptyState
       icon={Target}
-      heading="No Future Plans"
-      description="Set financial goals like buying a house, saving for education, or planning a vacation."
+      heading={t('heading')}
+      description={t('description')}
       primaryCTA={{
-        label: 'Create a Goal',
+        label: t('primaryCta'),
         href: '/budget-app/planning/future',
         icon: Target,
       }}
     />
-  ),
+  );
+}
 
-  Retirement: () => (
+function RetirementEmptyState() {
+  const t = useTranslations('emptyStates.retirement');
+  return (
     <EmptyState
       icon={TrendingUp}
-      heading="No Retirement Plans"
-      description="Plan for retirement by tracking accounts, estimating needs, and visualizing your retirement timeline."
+      heading={t('heading')}
+      description={t('description')}
       primaryCTA={{
-        label: 'Start Planning',
+        label: t('primaryCta'),
         href: '/budget-app/planning/retirement',
         icon: TrendingUp,
       }}
     />
-  ),
+  );
+}
 
-  Reports: () => (
+function ReportsEmptyState() {
+  const t = useTranslations('emptyStates.reports');
+  return (
     <EmptyState
       icon={BarChart3}
-      heading="No Data to Report"
-      description="Add transactions and budgets to generate insightful reports about your spending patterns and trends."
+      heading={t('heading')}
+      description={t('description')}
       primaryCTA={{
-        label: 'Add Transactions',
+        label: t('primaryCta'),
         href: '/budget-app/transactions',
         icon: Receipt,
       }}
       secondaryCTA={{
-        label: 'Import CSV',
+        label: t('secondaryCta'),
         href: '/budget-app/import',
       }}
     />
-  ),
+  );
+}
 
-  Categories: () => (
+function CategoriesEmptyState() {
+  const t = useTranslations('emptyStates.categories');
+  return (
     <EmptyState
       icon={Tags}
-      heading="No Custom Categories"
-      description="Create custom categories to organize your transactions beyond the default ones."
+      heading={t('heading')}
+      description={t('description')}
       primaryCTA={{
-        label: 'Add Category',
+        label: t('primaryCta'),
         href: '/budget-app/categories',
         icon: Tags,
       }}
     />
-  ),
+  );
+}
 
-  Dashboard: () => (
+function DashboardEmptyState() {
+  const t = useTranslations('emptyStates.dashboard');
+  return (
     <EmptyState
       icon={PiggyBank}
-      heading="Welcome to Your Budget App!"
-      description="Get started by importing your bank transactions or adding accounts manually to see your financial overview."
+      heading={t('heading')}
+      description={t('description')}
       primaryCTA={{
-        label: 'Import CSV',
+        label: t('primaryCta'),
         href: '/budget-app/import',
       }}
       secondaryCTA={{
-        label: 'Add Transaction',
+        label: t('secondaryCta'),
         href: '/budget-app/transactions',
       }}
     />
-  ),
+  );
+}
+
+export const EmptyStates = {
+  Transactions: TransactionsEmptyState,
+  Budgets: BudgetsEmptyState,
+  Loans: LoansEmptyState,
+  Investments: InvestmentsEmptyState,
+  FuturePlans: FuturePlansEmptyState,
+  Retirement: RetirementEmptyState,
+  Reports: ReportsEmptyState,
+  Categories: CategoriesEmptyState,
+  Dashboard: DashboardEmptyState,
 };

@@ -19,6 +19,7 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { Table, BarChart3, Eye, EyeOff } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import { Button } from '@/components/ui/button';
 
 export interface ChartDataPoint {
@@ -62,6 +63,7 @@ export function AccessibleChart({
   summary,
   footer,
 }: AccessibleChartProps) {
+  const t = useTranslations('accessibleChart');
   const [showTable, setShowTable] = useState(false);
   const [focusedIndex, setFocusedIndex] = useState<number | null>(null);
   const tableRef = useRef<HTMLDivElement>(null);
@@ -71,20 +73,20 @@ export function AccessibleChart({
   const generateSummary = (): string => {
     const parts: string[] = [];
     parts.push(`${title}. ${description}`);
-    parts.push(`This is a ${chartType} chart with ${data.length} data points.`);
+    parts.push(t('chartTypeDescription', { chartType, dataPoints: data.length }));
 
     if (summary) {
       if (summary.total !== undefined) {
-        parts.push(`Total: ${summary.total}.`);
+        parts.push(t('summary.total', { value: summary.total }));
       }
       if (summary.average !== undefined) {
-        parts.push(`Average: ${summary.average}.`);
+        parts.push(t('summary.average', { value: summary.average }));
       }
       if (summary.highest) {
-        parts.push(`Highest: ${summary.highest.label} at ${summary.highest.value}.`);
+        parts.push(t('summary.highest', { label: summary.highest.label, value: summary.highest.value }));
       }
       if (summary.lowest) {
-        parts.push(`Lowest: ${summary.lowest.label} at ${summary.lowest.value}.`);
+        parts.push(t('summary.lowest', { label: summary.lowest.label, value: summary.lowest.value }));
       }
     }
 
@@ -120,8 +122,8 @@ export function AccessibleChart({
     setShowTable(!showTable);
     // Announce change to screen readers
     const announcement = showTable
-      ? 'Switched to chart view'
-      : 'Switched to table view';
+      ? t('switchedToChart')
+      : t('switchedToTable');
     announceToScreenReader(announcement);
   };
 
@@ -146,19 +148,19 @@ export function AccessibleChart({
           variant="outline"
           size="sm"
           onClick={toggleView}
-          aria-label={showTable ? 'Show chart view' : 'Show data table view'}
+          aria-label={showTable ? t('buttons.showChart') : t('buttons.showTable')}
           aria-pressed={showTable}
           className="gap-2"
         >
           {showTable ? (
             <>
               <BarChart3 className="w-4 h-4" aria-hidden="true" />
-              <span className="hidden sm:inline">Chart</span>
+              <span className="hidden sm:inline">{t('buttons.chart')}</span>
             </>
           ) : (
             <>
               <Table className="w-4 h-4" aria-hidden="true" />
-              <span className="hidden sm:inline">Table</span>
+              <span className="hidden sm:inline">{t('buttons.table')}</span>
             </>
           )}
         </Button>
@@ -185,20 +187,20 @@ export function AccessibleChart({
                   scope="col"
                   className="px-4 py-3 text-left text-sm font-semibold text-gray-900"
                 >
-                  {chartType === 'pie' ? 'Category' : 'Period'}
+                  {chartType === 'pie' ? t('tableHeaders.category') : t('tableHeaders.period')}
                 </th>
                 <th
                   scope="col"
                   className="px-4 py-3 text-right text-sm font-semibold text-gray-900"
                 >
-                  Value
+                  {t('tableHeaders.value')}
                 </th>
                 {data.some((d) => d.additionalInfo) && (
                   <th
                     scope="col"
                     className="px-4 py-3 text-left text-sm font-semibold text-gray-900"
                   >
-                    Additional Info
+                    {t('tableHeaders.additionalInfo')}
                   </th>
                 )}
               </tr>
@@ -248,13 +250,13 @@ export function AccessibleChart({
                     <div className="text-sm text-gray-700 space-y-1">
                       {summary.total !== undefined && (
                         <div className="flex justify-between">
-                          <span className="font-semibold">Total:</span>
+                          <span className="font-semibold">{t('footer.total')}</span>
                           <span className="font-bold">${summary.total.toFixed(2)}</span>
                         </div>
                       )}
                       {summary.average !== undefined && (
                         <div className="flex justify-between">
-                          <span>Average:</span>
+                          <span>{t('footer.average')}</span>
                           <span>${summary.average.toFixed(2)}</span>
                         </div>
                       )}
@@ -268,11 +270,10 @@ export function AccessibleChart({
           {/* Keyboard Navigation Instructions */}
           <div className="mt-2 text-xs text-gray-600">
             <span className="sr-only">
-              Use arrow keys to navigate between rows. Press Tab to navigate to the next
-              element.
+              {t('keyboardNav.srOnly')}
             </span>
             <span aria-hidden="true">
-              Use ← → or ↑ ↓ keys to navigate • Home/End to jump to start/end
+              {t('keyboardNav.visual')}
             </span>
           </div>
         </div>
@@ -286,12 +287,11 @@ export function AccessibleChart({
         >
           {children}
           <div id={`${id}-desc`} className="sr-only">
-            {description}. {data.length} data points shown.{' '}
-            {data
-              .map((d) => `${d.label}: $${d.value.toFixed(2)}`)
-              .join(', ')}
-            . Press the Table button to view data in a table format with keyboard
-            navigation support.
+            {t('chartDescription', {
+              description,
+              dataPoints: data.length,
+              dataList: data.map((d) => `${d.label}: $${d.value.toFixed(2)}`).join(', '),
+            })}
           </div>
         </div>
       )}

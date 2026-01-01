@@ -1,433 +1,873 @@
 {
-  "nav": {
-    "dashboard": "Papan Pemuka",
-    "transactions": "Transaksi",
-    "budgets": "Bajet",
-    "reports": "Laporan",
-    "accounts": "Akaun",
-    "categories": "Kategori",
-    "goals": "Matlamat",
-    "import": "Import",
-    "export": "Eksport",
-    "settings": "Tetapan",
-    "help": "Bantuan",
-    "about": "Tentang"
+  "accessibilitySettings": {
+    "fontSize": {
+      "default": "Default",
+      "description": "Adjust the base text size for better readability",
+      "extraLarge": "Extra Large",
+      "large": "Large",
+      "title": "Font Size"
+    },
+    "infoBox": {
+      "savedAutomatically": "Settings are saved automatically and persist across sessions",
+      "seniorsOptimization": "Seniors Mode provides one-click accessibility optimization",
+      "storedLocally": "Your preferences are stored locally and never sent to servers",
+      "syncAcrossTabs": "Changes sync across all open tabs in real-time",
+      "title": "About Accessibility Settings"
+    },
+    "presets": {
+      "full": "Full",
+      "fullDesc": "Maximum accessibility",
+      "mild": "Mild",
+      "mildDesc": "Slightly enhanced",
+      "moderate": "Moderate",
+      "moderateDesc": "Recommended for most",
+      "off": "Off",
+      "offDesc": "Standard interface",
+      "title": "Quick Presets:"
+    },
+    "reducedMotion": {
+      "description": "Minimize animations and transitions for a calmer experience. Helpful for users with vestibular disorders or motion sensitivity.",
+      "title": "Reduced Motion",
+      "toggleLabel": "Toggle reduced motion mode"
+    },
+    "seniorsMode": {
+      "description": "One-click accessibility enhancement with larger text, bigger touch targets, and simplified interface",
+      "title": "Seniors Mode"
+    },
+    "themeMode": {
+      "auto": "Auto",
+      "autoDesc": "Match system",
+      "dark": "Dark",
+      "darkDesc": "Easy on eyes",
+      "description": "Choose your preferred color scheme for the budget app",
+      "highContrast": "High Contrast",
+      "highContrastDesc": "Maximum visibility",
+      "light": "Light",
+      "lightDesc": "Bright and clear",
+      "title": "Theme Mode"
+    }
+  },
+  "accessibleChart": {
+    "buttons": {
+      "chart": "Chart",
+      "showChart": "Show chart view",
+      "showTable": "Show data table view",
+      "table": "Table"
+    },
+    "chartDescription": "{description}. {dataPoints} data points shown. {dataList}. Press the Table button to view data in a table format with keyboard navigation support.",
+    "chartTypeDescription": "This is a {chartType} chart with {dataPoints} data points.",
+    "footer": {
+      "average": "Average:",
+      "total": "Total:"
+    },
+    "keyboardNav": {
+      "srOnly": "Use arrow keys to navigate between rows. Press Tab to navigate to the next element.",
+      "visual": "Use ← → or ↑ ↓ keys to navigate • Home/End to jump to start/end"
+    },
+    "summary": {
+      "average": "Average: {value}.",
+      "highest": "Highest value: {label} at {value}.",
+      "lowest": "Lowest value: {label} at {value}.",
+      "total": "Total: {value}."
+    },
+    "switchedToChart": "Switched to chart view",
+    "switchedToTable": "Switched to table view",
+    "tableHeaders": {
+      "additionalInfo": "Additional Info",
+      "category": "Category",
+      "period": "Period",
+      "value": "Value"
+    }
   },
   "actions": {
     "addTransaction": "Tambah Transaksi",
-    "importData": "Import Data",
-    "import": "Import",
     "editDashboard": "Edit Papan Pemuka",
-    "saveChanges": "Simpan Perubahan",
-    "resetDefaults": "Tetapkan Semula kepada Lalai"
+    "import": "Import",
+    "importData": "Import Data",
+    "resetDefaults": "Tetapkan Semula kepada Lalai",
+    "saveChanges": "Simpan Perubahan"
   },
-  "welcome": {
-    "title": "Selamat Datang ke Aplikasi Bajet",
-    "subtitle": "Mulakan dengan menambah transaksi pertama anda atau mengimport data dari bank anda"
+  "aiColumnMapper": {
+    "analyzing": "Analyzing CSV structure with AI...",
+    "buttons": {
+      "apply": "Apply Mappings & Import",
+      "cancel": "Cancel"
+    },
+    "closeModal": "Close modal",
+    "columnMappings": "Column Mappings",
+    "columnTypes": {
+      "amount": "Amount",
+      "balance": "Balance",
+      "credit": "Credit",
+      "date": "Date",
+      "debit": "Debit",
+      "description": "Description",
+      "ignore": "Ignore"
+    },
+    "confidence": {
+      "analyzed": "AI analyzed {columnCount} columns and {rowCount} sample rows",
+      "title": "Detection Confidence"
+    },
+    "preview": {
+      "amount": "Amount",
+      "date": "Date",
+      "description": "Description",
+      "title": "Transaction Preview"
+    },
+    "samples": "Samples:",
+    "saveConfig": {
+      "hint": "Next time you import from this bank, mappings will be automatic",
+      "label": "Save this bank configuration for future imports",
+      "placeholder": "Enter bank name (e.g., My Local Credit Union)"
+    },
+    "subtitle": "Review AI-detected columns and adjust if needed",
+    "title": "AI Column Mapping Wizard"
+  },
+  "bulkActions": {
+    "applyTo": "Apply to {count}",
+    "categorize": "Categorize",
+    "clearSelection": "Clear selection",
+    "confirmDelete": "Delete {count, plural, =1 {1 transaction} other {# transactions}}?",
+    "delete": "Delete",
+    "deleteWarning": "This action cannot be undone.",
+    "export": "Export",
+    "noSubcategory": "No subcategory",
+    "selectAll": "Select all",
+    "selectCategory": "Select category...",
+    "selected": "{count} selected"
+  },
+  "chatbot": {
+    "buttons": {
+      "clearHistory": "Clear chat history",
+      "exportConversation": "Export conversation",
+      "send": "Send"
+    },
+    "disabled": {
+      "description": "Enable the chatbot in Settings → Privacy → Budget Chatbot to get started.",
+      "enableButton": "Enable Chatbot",
+      "title": "Chatbot Disabled"
+    },
+    "emptyState": {
+      "description": "Ask me anything about your finances. Here are some examples:",
+      "examples": {
+        "balance": "What's my total account balance?",
+        "budget": "Am I over budget in any categories?",
+        "groceries": "Show me my recent grocery purchases",
+        "spending": "How much did I spend this month?"
+      },
+      "title": "Start a Conversation"
+    },
+    "header": {
+      "subtitle": "Ask me about your finances",
+      "title": "Budget Assistant"
+    },
+    "input": {
+      "disclaimer": "Powered by OpenAI GPT-4. Your data is processed securely and not used for training.",
+      "placeholder": "Ask about your finances..."
+    },
+    "messages": {
+      "dataAccessed": "Data accessed:",
+      "error": "Error",
+      "thinking": "Thinking..."
+    }
+  },
+  "chatbotHelp": {
+    "tabs": {
+      "actions": "Actions",
+      "budget": "Budget",
+      "income": "Income",
+      "spending": "Spending",
+      "trends": "Trends"
+    }
+  },
+  "chatbotOptIn": {
+    "buttons": {
+      "decline": "No Thanks",
+      "enable": "Enable Chatbot"
+    },
+    "capabilities": {
+      "actions": "Optionally perform actions like adding transactions or creating budgets",
+      "answer": "Answer questions about your transactions, budgets, and spending patterns",
+      "insights": "Provide insights and recommendations based on your data",
+      "search": "Search your financial data using natural language",
+      "title": "What the Chatbot Can Do"
+    },
+    "closeDialog": "Close chatbot opt-in dialog",
+    "controls": {
+      "dataAccess": {
+        "fullAccess": {
+          "description": "Chatbot can perform actions like adding transactions, creating budgets, and making changes to your data",
+          "title": "Full Access"
+        },
+        "label": "What can the chatbot do with your data?",
+        "readOnly": {
+          "description": "Chatbot can view your data and answer questions, but cannot add, edit, or delete transactions/budgets",
+          "title": "Read-Only (Recommended)"
+        }
+      },
+      "retention": {
+        "days30": "30 days",
+        "days7": "7 days (Recommended)",
+        "forever": "Keep forever",
+        "label": "How long should we keep your conversations?",
+        "note": "Conversations are stored locally in your browser. You can delete them anytime in Settings → Privacy."
+      },
+      "title": "Privacy Controls"
+    },
+    "gdpr": {
+      "notice": "<strong>Your Rights:</strong> By enabling the chatbot, you consent to processing your financial data via OpenAI's API. You can withdraw consent anytime by disabling the chatbot in Settings → Privacy. Your data is processed in accordance with our Privacy Policy and GDPR requirements. You have the right to access, delete, and export your conversation history at any time."
+    },
+    "privacy": {
+      "dataSent": "Financial data is sent to the API to answer your questions",
+      "disable": "You can disable the chatbot anytime in Settings → Privacy",
+      "noTraining": "OpenAI does not use API data to train models (as of their policy)",
+      "processedBy": "Your conversations are processed by OpenAI's GPT-4 API",
+      "title": "Privacy & Data Usage"
+    },
+    "subtitle": "AI-powered financial assistant",
+    "title": "Enable Budget Chatbot?"
+  },
+  "combobox": {
+    "noResults": "No results found.",
+    "search": "Search...",
+    "select": "Select..."
+  },
+  "commandPalette": {
+    "commands": {
+      "addTransaction": "Add Transaction",
+      "budgets": "Budgets",
+      "categories": "Categories",
+      "darkTheme": "Dark Theme",
+      "dashboard": "Dashboard",
+      "exportData": "Export Data",
+      "futurePlans": "Future Plans",
+      "highContrastTheme": "High-Contrast Theme",
+      "importCsv": "Import CSV",
+      "investments": "Investments",
+      "lightTheme": "Light Theme",
+      "loans": "Loans",
+      "newBudget": "New Budget",
+      "reports": "Reports",
+      "retirement": "Retirement",
+      "scanReceipt": "Scan Receipt",
+      "settings": "Settings",
+      "transactions": "Transactions"
+    },
+    "groups": {
+      "appearance": "Appearance",
+      "quickActions": "Quick Actions",
+      "tools": "Tools & Settings",
+      "tracking": "Tracking & Analysis",
+      "wealth": "Wealth & Planning"
+    },
+    "noResults": "No results found.",
+    "placeholder": "Type a command or search..."
   },
   "common": {
-    "save": "Simpan",
     "cancel": "Batal",
     "delete": "Padam",
     "edit": "Edit",
-    "loading": "Memuatkan..."
+    "loading": "Memuatkan...",
+    "save": "Simpan"
   },
-  "widget": {
-    "spendingByCategory": {
-      "title": "Perbelanjaan Mengikut Kategori",
-      "description": "Lihat ke mana wang anda pergi dengan pecahan visual"
-    },
-    "recentTransactions": {
-      "title": "Transaksi Terkini",
-      "description": "Tampilan cepat aktiviti kewangan terbaru anda"
-    },
-    "budgetProgress": {
-      "title": "Kemajuan Bajet",
-      "description": "Jejaki bagaimana anda berbanding dengan matlamat bajet anda"
-    },
-    "accountBalances": {
-      "title": "Baki Akaun",
-      "description": "Baki semasa di semua akaun anda"
-    },
-    "incomeVsExpenses": {
-      "title": "Pendapatan vs Perbelanjaan",
-      "description": "Bandingkan pendapatan dan perbelanjaan anda dari semasa ke semasa"
-    },
-    "monthlyTrends": {
-      "title": "Tren Bulanan",
-      "description": "Visualisasikan corak kewangan anda bulan demi bulan"
-    },
-    "upcomingBills": {
-      "title": "Bil Akan Datang",
-      "description": "Jangan terlepas pembayaran dengan peringatan bil"
-    }
+  "dashboardCustomizer": {
+    "alwaysVisible": "Always visible",
+    "ariaLabel": "Customize dashboard layout",
+    "button": "Customize",
+    "description": "Show or hide dashboard widgets. Drag widgets on the dashboard to reorder them.",
+    "reorderDescription": "To change widget order, drag and drop widgets directly on your dashboard. Use your mouse or touch to grab the drag handle (⋮⋮) on each widget card.",
+    "reorderTitle": "Reorder Widgets",
+    "resetButton": "Reset to Defaults",
+    "title": "Customize Dashboard",
+    "toggleVisibility": "Toggle {name} visibility",
+    "widgetVisibility": "Widget Visibility",
+    "widgetsVisible": "{visible} of {total} widgets visible"
   },
-  "tooltip": {
-    "ariaLabel": "Lebih banyak maklumat",
-    "learnMore": "Ketahui lebih lanjut →"
-  },
-  "footer": {
-    "tagline": "Bajet premium dengan peningkatan sekali sahaja.",
-    "links": {
-      "login": "Log masuk",
-      "signup": "Mulakan percubaan",
-      "upgrade": "Tingkatkan",
-      "settings": "Tetapan"
-    },
-    "copyright": "© {year} {brandName}"
-  },
-  "dialog": {
-    "confirm": "Sahkan",
-    "cancel": "Batal",
-    "processing": "Memproses...",
-    "finalConfirmation": "Sahkan Akhir:",
-    "typeToConfirm": "Taip {text} untuk mengesahkan tindakan ini."
-  },
-  "sidebar": {
-    "appTitle": "Aplikasi Bajet",
-    "appSubtitle": "Kewangan Premium",
-    "search": "Cari...",
-    "shortcuts": "Pintasan",
-    "navigation": {
-      "dashboard": "Papan Pemuka",
-      "transactions": "Transaksi",
-      "scanReceipt": "Imbas Resit",
-      "categories": "Kategori",
-      "budgets": "Bajet",
-      "subscriptions": "Langganan",
-      "loans": "Pinjaman",
-      "investments": "Pelaburan",
-      "futurePlans": "Rancangan Masa Depan",
-      "retirement": "Persaraan",
-      "reports": "Laporan"
-    },
-    "actions": {
-      "importCsv": "Import CSV",
-      "settings": "Tetapan",
-      "showLess": "Tunjukkan Kurang",
-      "showAllItems": "Tunjukkan Semua Item"
-    }
-  },
-  "onboarding": {
-    "skipTour": "Lupakan lawatan",
-    "stepCounter": "Langkah {current} daripada {total}",
-    "dontShowAgain": "Jangan tunjukkan lawatan ini lagi",
-    "quickTip": "💡 Tip Pantas",
-    "navigation": {
-      "previous": "Sebelum",
-      "next": "Seterusnya",
-      "getStarted": "Mulakan",
-      "startTour": "Mulakan Lawatan"
-    },
-    "steps": {
-      "welcome": {
-        "title": "👋 Selamat Datang ke Aplikasi Bajet!",
-        "description": "Mari kita ambil lawatan cepat untuk membantu anda memulakan pengurusan kewangan rumah anda. Ini tidak akan mengambil masa lama!"
+  "debtAnalysis": {
+    "cards": {
+      "avgRate": {
+        "subtitle": "Weighted average",
+        "title": "Avg Interest Rate"
       },
-      "import": {
-        "title": "📥 Import Transaksi Anda",
-        "description": "Mulakan dengan mengimport transaksi bank anda dari fail CSV. Kami menyokong BMO, Home Trust, dan banyak bank lain. Aplikasi akan mengkategorikan transaksi anda secara automatik!"
+      "debtFreeDate": {
+        "subtitle": "Estimated payoff",
+        "title": "Debt-Free Date"
       },
-      "categorize": {
-        "title": "🏷️ Kategorikan & Atur",
-        "description": "Semak dan sesuaikan kategori transaksi. Pengkategorian pintar kami belajar dari pembetulan anda untuk meningkatkan dari semasa ke semasa. Gunakan tindakan pukal untuk mengkategorikan banyak transaksi sekaligus!"
+      "monthlyPayment": {
+        "subtitle": "Total monthly obligations",
+        "title": "Monthly Payment"
       },
-      "budgets": {
-        "title": "🎯 Tetapkan Bajet Anda",
-        "description": "Buat bajet untuk kategori perbelanjaan yang berbeza. Jejaki kemajuan anda sepanjang bulan dan dapatkan amaran apabila anda hampir mencapai had anda."
-      },
-      "reports": {
-        "title": "📊 Lihat Laporan & Wawasan",
-        "description": "Visualisasikan corak perbelanjaan anda, jejaki nilai bersih anda, dan buat keputusan kewangan yang berinformasi. Papan pemuka anda dikemas kini secara automatik dengan setiap transaksi!"
+      "totalDebt": {
+        "subtitle": "Across {count} active loans",
+        "title": "Total Debt"
       }
     },
-    "tips": {
-      "import": "Seret & lepas fail CSV anda atau klik untuk melayari. Kami mengesan format BMO dan Home Trust secara automatik!",
-      "categorize": "Gunakan butang pengkategorian cepat atau pilih beberapa transaksi untuk pengkategorian pukal.",
-      "budgets": "Tetapkan bajet yang realistik dan kami akan memberi amaran jika anda berada di landasan untuk berbelanja lebih."
+    "charts": {
+      "byType": {
+        "description": "Distribution of debt across loan types",
+        "title": "Debt by Type"
+      },
+      "projection": {
+        "description": "Expected debt reduction over the next year",
+        "expectedReduction": "Expected reduction: {amount} over 12 months",
+        "title": "12-Month Payoff Projection"
+      }
+    },
+    "comparison": {
+      "description": "Side-by-side comparison of your active loans",
+      "headers": {
+        "balance": "Balance",
+        "interestRate": "Interest Rate",
+        "loan": "Loan",
+        "monthlyPayment": "Monthly Payment",
+        "percentOfTotal": "% of Total Debt"
+      },
+      "title": "Loan Comparison",
+      "total": "Total"
+    },
+    "empty": {
+      "addFirstLoan": "Add Your First Loan",
+      "description": "You don't have any active loans. Add a loan to see debt analytics.",
+      "title": "No Debt to Analyze"
+    },
+    "subtitle": "Comprehensive view of your loans and obligations",
+    "title": "Debt Analysis",
+    "viewAllLoans": "View All Loans"
+  },
+  "dialog": {
+    "cancel": "Batal",
+    "confirm": "Sahkan",
+    "finalConfirmation": "Sahkan Akhir:",
+    "processing": "Memproses...",
+    "typeToConfirm": "Taip {text} untuk mengesahkan tindakan ini."
+  },
+  "draggableWidget": {
+    "dragToReorder": "Drag to reorder widget"
+  },
+  "emptyStates": {
+    "budgets": {
+      "description": "Create budgets to track spending in different categories and achieve your financial goals.",
+      "heading": "No Budgets Created",
+      "primaryCta": "Create Your First Budget"
+    },
+    "categories": {
+      "description": "Create custom categories to organize your transactions beyond the default ones.",
+      "heading": "No Custom Categories",
+      "primaryCta": "Add Category"
+    },
+    "dashboard": {
+      "description": "Get started by importing your bank transactions or adding accounts manually to see your financial overview.",
+      "heading": "Welcome to Your Budget App!",
+      "primaryCta": "Import CSV",
+      "secondaryCta": "Add Transaction"
+    },
+    "futurePlans": {
+      "description": "Set financial goals like buying a house, saving for education, or planning a vacation.",
+      "heading": "No Future Plans",
+      "primaryCta": "Create a Goal"
+    },
+    "investments": {
+      "description": "Track your investment accounts and holdings to monitor portfolio performance and net worth.",
+      "heading": "No Investments Tracked",
+      "primaryCta": "Add Investment Account"
+    },
+    "loans": {
+      "description": "Track your loans, mortgages, and debts to visualize payoff progress and plan payments.",
+      "heading": "No Loans Tracked",
+      "primaryCta": "Add Your First Loan"
+    },
+    "reports": {
+      "description": "Add transactions and budgets to generate insightful reports about your spending patterns and trends.",
+      "heading": "No Data to Report",
+      "primaryCta": "Add Transactions",
+      "secondaryCta": "Import CSV"
+    },
+    "retirement": {
+      "description": "Plan for retirement by tracking accounts, estimating needs, and visualizing your retirement timeline.",
+      "heading": "No Retirement Plans",
+      "primaryCta": "Start Planning"
+    },
+    "transactions": {
+      "description": "Start tracking your spending by adding your first transaction. You can add manually or import from a CSV file.",
+      "heading": "No Transactions Yet",
+      "primaryCta": "Add Transaction",
+      "secondaryCta": "Import CSV"
     }
   },
+  "errorRecovery": {
+    "aiAnalysis": "AI Analysis:",
+    "closeModal": "Close modal",
+    "footer": {
+      "close": "Close",
+      "needHelp": "Need more help?",
+      "viewGuide": "View troubleshooting guide"
+    },
+    "recovery": {
+      "canRecover": "Good news! We found {count} {count, plural, =1 {way} other {ways}} to recover from this error.",
+      "cannotRecover": "Recovery not possible. You'll need to re-export the file from your bank or try a different format.",
+      "optionsTitle": "Recovery Options"
+    },
+    "subtitle": "Don't worry! We can help you fix this.",
+    "suggestions": {
+      "autoFix": "AUTO-FIX",
+      "autoFixButton": "Auto-Fix",
+      "confidence": "{percent}% confidence",
+      "fixing": "Fixing...",
+      "learnMore": "Learn More",
+      "technicalDetails": "Technical Details"
+    },
+    "summary": {
+      "category": "Category: {category}",
+      "title": "Error Summary"
+    },
+    "technical": {
+      "canRecover": "Can Recover:",
+      "errorCategory": "Error Category:",
+      "no": "No",
+      "severity": "Severity:",
+      "suggestions": "Suggestions:",
+      "title": "Advanced Technical Details",
+      "yes": "Yes"
+    },
+    "title": "Import Failed"
+  },
+  "exportDialog": {
+    "buttons": {
+      "cancel": "Cancel",
+      "done": "Done!",
+      "download": "Download",
+      "export": "Export Data"
+    },
+    "complete": {
+      "download": "Your file is ready to download",
+      "success": "Export complete! Check your downloads folder."
+    },
+    "dataSummary": {
+      "accounts": "Accounts",
+      "estimatedSize": "Est. Size",
+      "title": "Data Summary",
+      "transactions": "Transactions"
+    },
+    "exporting": {
+      "pleaseWait": "Please wait, this may take a moment",
+      "title": "Exporting..."
+    },
+    "format": {
+      "budget": {
+        "description": "Complete backup including all data",
+        "label": ".budget file"
+      },
+      "csv": {
+        "description": "Spreadsheet-compatible format",
+        "label": "CSV file"
+      },
+      "json": {
+        "description": "Developer-friendly format",
+        "label": "JSON file"
+      },
+      "label": "Export Format"
+    },
+    "options": {
+      "encrypt": {
+        "description": "Protect your data with AES-256 encryption",
+        "label": "Encrypt with Password"
+      },
+      "includeReceipts": {
+        "description": "Attach receipt images (increases file size)",
+        "label": "Include Receipts"
+      }
+    },
+    "password": {
+      "confirm": "Confirm Password",
+      "confirmPlaceholder": "Confirm password",
+      "hint": "Password Hint (Optional)",
+      "hintNote": "This hint will be stored unencrypted in the file",
+      "hintPlaceholder": "A hint to help you remember",
+      "label": "Password",
+      "minLength": "Password must be at least 8 characters",
+      "mismatch": "Passwords do not match",
+      "placeholder": "Enter password (min 8 characters)",
+      "required": "Password is required for encryption"
+    },
+    "subtitle": "Download your budget data",
+    "title": "Export Data"
+  },
+  "filters": {
+    "account": "Account",
+    "allAccounts": "All accounts",
+    "allCategories": "All categories",
+    "allTypes": "All types",
+    "apply": "Apply filters",
+    "category": "Category",
+    "clearFilters": "Clear filters",
+    "dateRange": "Date range",
+    "expense": "Expense",
+    "income": "Income",
+    "search": "Search transactions...",
+    "type": "Type"
+  },
+  "footer": {
+    "copyright": "© {year} {brandName}",
+    "links": {
+      "login": "Log masuk",
+      "settings": "Tetapan",
+      "signup": "Mulakan percubaan",
+      "upgrade": "Tingkatkan"
+    },
+    "tagline": "Bajet premium dengan peningkatan sekali sahaja."
+  },
+  "healthScore": {
+    "ariaLabel": "Financial Health Score: {score} out of 100. {interpretation}",
+    "emptyState": {
+      "line1": "Add transactions to see your",
+      "line2": "Financial Health Score"
+    },
+    "grade": "Grade: {grade}",
+    "missingFactors": "{count, plural, =1 {1 factor missing} other {# factors missing}}",
+    "title": "Financial Health"
+  },
+  "importDialog": {
+    "buttons": {
+      "back": "Back",
+      "cancel": "Cancel",
+      "done": "Done",
+      "import": "Import Data"
+    },
+    "complete": {
+      "itemsImported": "{count} items imported successfully",
+      "success": "Import Complete!",
+      "withIssues": "Import Completed with Issues"
+    },
+    "conflicts": {
+      "existing": "{count} existing",
+      "handleLabel": "Handle Conflicts",
+      "overwrite": {
+        "description": "Replace with imported",
+        "label": "Overwrite"
+      },
+      "rename": {
+        "description": "Import as new entries",
+        "label": "Create new"
+      },
+      "skip": {
+        "description": "Keep current data",
+        "label": "Skip existing"
+      },
+      "title": "Conflicts Found"
+    },
+    "encryption": {
+      "decrypt": "Decrypt & Continue",
+      "encrypted": "This file is encrypted",
+      "enterPassword": "Enter password",
+      "hint": "Hint: {hint}",
+      "password": "Password"
+    },
+    "importing": {
+      "pleaseWait": "Please wait, this may take a moment",
+      "title": "Importing your data..."
+    },
+    "preview": {
+      "dataToImport": "Data to Import",
+      "exported": "Exported",
+      "fileInfo": "File Information",
+      "version": "Version"
+    },
+    "selectFile": {
+      "dragDrop": "or drag and drop here",
+      "label": "Click to select a .budget file"
+    },
+    "subtitle": "Restore from .budget file",
+    "title": "Import Data"
+  },
+  "investmentAccountModal": {
+    "buttons": {
+      "cancel": "Cancel",
+      "create": "Create Account",
+      "saving": "Saving...",
+      "update": "Update Account"
+    },
+    "closeModal": "Close modal",
+    "errors": {
+      "saveFailed": "Failed to save account"
+    },
+    "fields": {
+      "accountNumber": {
+        "label": "Account Number (Optional)",
+        "placeholder": "e.g., Last 4 digits: 1234"
+      },
+      "institution": {
+        "label": "Financial Institution (Optional)",
+        "placeholder": "e.g., Questrade, Wealthsimple, TD Direct"
+      },
+      "name": {
+        "label": "Account Name",
+        "placeholder": "e.g., My RRSP, TFSA Savings, Company Stock"
+      },
+      "type": {
+        "descriptions": {
+          "Company shares": "Employee stock purchase or stock options",
+          "Non-registered": "Taxable investment account",
+          "RRSP": "Registered Retirement Savings Plan - Tax-deferred growth",
+          "TFSA": "Tax-Free Savings Account - Tax-free growth and withdrawals"
+        },
+        "label": "Account Type"
+      }
+    },
+    "title": {
+      "add": "Add Investment Account",
+      "edit": "Edit Investment Account"
+    },
+    "validation": {
+      "nameRequired": "Please enter an account name"
+    }
+  },
+  "investmentCharts": {
+    "emptyState": "No holdings to visualize. Add holdings to see charts.",
+    "legend": {
+      "gain": "Gain",
+      "loss": "Loss"
+    },
+    "tableHeaders": {
+      "allocation": "Allocation",
+      "costBasis": "Cost Basis",
+      "currentValue": "Current Value",
+      "gainLoss": "Gain/Loss",
+      "percentReturn": "% Return",
+      "symbol": "Symbol",
+      "total": "Total"
+    },
+    "titles": {
+      "accountTypeAllocation": "Allocation by Account Type",
+      "gainLoss": "Gain/Loss by Holding",
+      "performanceSummary": "Performance Summary",
+      "portfolioAllocation": "Portfolio Allocation by Holding"
+    },
+    "tooltip": {
+      "costBasis": "Cost Basis",
+      "currentValue": "Current Value",
+      "percentOfPortfolio": "{percent}% of portfolio"
+    }
+  },
+  "lanSync": {
+    "description": "Sync your budget data across devices on your local network",
+    "device": {
+      "connect": "Connect",
+      "connected": "Connected",
+      "disconnect": "Disconnect",
+      "removeDevice": "Remove Device",
+      "sync": "Sync",
+      "syncing": "Syncing..."
+    },
+    "disabled": "Disabled",
+    "enabled": "Enabled",
+    "howItWorks": {
+      "step1": {
+        "description": "Scan a QR code or enter connection details to pair devices on the same network",
+        "title": "Pair Devices"
+      },
+      "step2": {
+        "description": "Data is encrypted end-to-end and syncs directly between devices - no cloud required",
+        "title": "Sync Securely"
+      },
+      "step3": {
+        "description": "Changes sync automatically when devices are connected on the same network",
+        "title": "Automatic Updates"
+      },
+      "title": "How LAN Sync Works"
+    },
+    "pairedDevices": {
+      "addDevice": "Add Device",
+      "addFirstDevice": "Add Your First Device",
+      "deviceCount": "{count, plural, =1 {1 device paired} other {# devices paired}}",
+      "emptyDescription": "Pair a device to start syncing your budget data",
+      "emptyTitle": "No devices paired",
+      "noDevices": "No devices paired yet",
+      "title": "Paired Devices"
+    },
+    "removeDialog": {
+      "cancel": "Cancel",
+      "description": "Are you sure you want to remove \"{deviceName}\"? This will unpair the device and you'll need to pair again to sync data.",
+      "remove": "Remove",
+      "title": "Remove Device"
+    },
+    "syncAll": "Sync All",
+    "time": {
+      "daysAgo": "{count, plural, =1 {1 day ago} other {# days ago}}",
+      "hoursAgo": "{count, plural, =1 {1 hour ago} other {# hours ago}}",
+      "justNow": "Just now",
+      "lastSync": "Last sync: {time}",
+      "minutesAgo": "{count, plural, =1 {1 minute ago} other {# minutes ago}}",
+      "neverSynced": "Never synced"
+    },
+    "title": "LAN Sync"
+  },
   "landing": {
+    "accessibility": {
+      "badges": {
+        "keyboardFirst": "Papan kekunci pertama",
+        "largeTouchTargets": "Sasaran sentuh besar",
+        "seniorsMode": "Mod Warga Emas"
+      },
+      "buttons": {
+        "openApp": "Buka aplikasi",
+        "settings": "Tetapan aksesibiliti"
+      },
+      "description": "Mod Warga Emas menyediakan navigasi yang dipermudahkan dan sasaran sentuh yang lebih besar. Pintasan papan kekunci, keadaan fokus, dan kontras yang jelas membantu semua orang bergerak lebih cepat.",
+      "title": "Boleh diakses secara lalai"
+    },
     "brand": {
       "name": "BudgetPro",
       "product": "Aplikasi Bajet"
     },
-    "hero": {
-      "badge": "Privasi Pertama • Hanya Tempatan • Tiada Penjejakan",
-      "headline": "Kuasa Wang Anda tanpa Menjual Data Anda.",
-      "subhead": "Kuasa spreadsheet. Kesederhanaan aplikasi. Alami kejelasan kewangan dengan satu-satunya aplikasi bajet yang menjamin data anda tidak pernah meninggalkan peranti anda.",
-      "primaryCta": {
-        "label": "Mulakan Protokol Tempatan (Percuma)",
-        "href": "/budget-app/auth/signup"
-      },
-      "secondaryCta": {
-        "label": "Log masuk",
-        "href": "/budget-app/auth/login"
-      },
-      "finePrint": "Tiada kelayakan bank diperlukan. Tiada akaun diperlukan untuk mod tempatan."
-    },
-    "trust": {
-      "0": {
-        "title": "Peranti Anda, Data Anda",
-        "description": "Data kekal dalam IndexedDB pelayar anda. Kami secara harfiah tidak dapat melihatnya."
-      },
-      "1": {
-        "title": "Kuasa Spreadsheet",
-        "description": "Edit pukal, pivot, dan analisis seperti pro tanpa sakit kepala formula."
-      },
-      "2": {
-        "title": "Kelajuan Offline",
-        "description": "Tiada kelewatan. Berfungsi di puncak gunung atau dalam terowong subway."
-      },
-      "3": {
-        "title": "Ritual Manual",
-        "description": "Wizard import menjadikan Tinjauan Wang Jumaat satu tabiat yang memuaskan."
-      }
-    },
-    "outcomes": {
-      "0": {
-        "title": "Hentikan Pertarungan dengan Pengumpul",
-        "description": "Tiada lagi sambungan yang rosak atau gelung pengesahan semula. Anda mengawal input data."
-      },
-      "1": {
-        "title": "Privasi melalui Reka Bentuk",
-        "description": "Kami tidak menjual data anda kerana kami tidak memilikinya. Titik."
-      },
-      "2": {
-        "title": "Perancangan Masa Depan",
-        "description": "Modelkan persaraan, pembayaran pinjaman, dan matlamat simpanan dalam satu pandangan yang terintegrasi."
-      },
-      "3": {
-        "title": "Pembunuh Langganan",
-        "description": "Kenal pasti pengeluaran berulang pada dompet anda yang terlepas oleh aplikasi lain."
-      }
-    },
-    "features": {
-      "0": {
-        "title": "Papan Pemuka Tempatan",
-        "description": "Nilai bersih, aliran tunai, dan pecahan kategori. Masa muat segera.",
-        "href": "/budget-app"
-      },
-      "1": {
-        "title": "Wizard Import",
-        "description": "Pemetaan CSV pintar untuk BMO, Home Trust, dan format khusus yang boleh disesuaikan.",
-        "href": "/budget-app/import"
-      },
-      "2": {
-        "title": "OCR Resit",
-        "description": "Imbas resit secara tempatan dengan Tesseract.js. Tiada pemprosesan awan.",
-        "href": "/budget-app/ocr"
-      },
-      "3": {
-        "title": "Bajet Kategori",
-        "description": "Bajet berasaskan sifar atau rollover dengan kawalan kategori yang terperinci.",
-        "href": "/budget-app/budgets"
-      },
-      "4": {
-        "title": "Kalkulator Persaraan",
-        "description": "Ramalkan tarikh kebebasan anda dengan visualisasi faedah kompaun.",
-        "href": "/budget-app/planning/retirement"
-      },
-      "5": {
-        "title": "Perisai Privasi",
-        "description": "Penyulitan sisi klien pilihan untuk lapisan keselamatan tambahan.",
-        "href": "/budget-app/settings"
-      }
-    },
-    "howItWorks": {
-      "0": {
-        "title": "Import",
-        "description": "Seret & lepas CSV atau imbas resit. AI memetakan lajur secara tempatan."
-      },
-      "1": {
-        "title": "Semak",
-        "description": "Pengkategorian cepat dengan peraturan pintar dan tindakan pukal."
-      },
-      "2": {
-        "title": "Rancang",
-        "description": "Tetapkan setiap ringgit untuk tugas dan ramalkan nilai bersih masa depan anda."
-      }
-    },
-    "pricing": {
-      "eyebrow": "Harga Adil",
-      "title": "Tempatan adalah Percuma. Penyegerakan adalah Pro.",
-      "description": "Mulakan dengan Protokol Tempatan yang berkuasa. Tingkatkan kemudian jika anda memerlukan penyegerakan pelbagai peranti.",
-      "priceLabel": "Percuma Selamanya",
-      "cta": {
-        "label": "Mulakan Protokol Tempatan",
-        "href": "/budget-app/auth/signup"
-      },
-      "secondary": {
-        "label": "Lihat Ciri Pro",
-        "href": "#pricing"
-      },
-      "guarantee": "Tiada kad kredit diperlukan untuk Protokol Tempatan."
-    },
-    "faq": {
-      "0": {
-        "q": "Adakah data saya benar-benar peribadi?",
-        "a": "Ya. Dalam Protokol Tempatan, data tidak pernah meninggalkan peranti anda. Ia tinggal dalam IndexedDB dalam pelayar anda."
-      },
-      "1": {
-        "q": "Bagaimana saya menyandarkan data saya?",
-        "a": "Anda boleh mengeksport sandaran JSON penuh pada bila-bila masa. Kami juga mengesyorkan eksport CSV secara berkala."
-      },
-      "2": {
-        "q": "Apa itu 'Sync' Pro?",
-        "a": "Akan datang: Langganan pilihan untuk menyegerakkan data yang disulitkan antara peranti melalui Supabase."
-      },
-      "3": {
-        "q": "Adakah anda menyambung ke bank?",
-        "a": "Tidak. Kami percaya import manual adalah lebih selamat, lebih boleh dipercayai, dan membina kesedaran kewangan yang lebih baik."
-      }
-    },
-    "security": {
-      "title": "Privasi pertama melalui reka bentuk",
-      "description": "Aplikasi Bajet menyimpan data anda secara tempatan (sedia untuk offline) dan memberi anda kawalan untuk ciri AI, eksport, dan pemadaman.",
-      "buttons": {
-        "privacy": "Privasi & tetapan",
-        "offline": "Sokongan offline"
-      },
-      "cards": {
-        "localStorage": {
-          "title": "Penyimpanan Tempatan",
-          "description": "Data bajet anda disimpan dalam pelayar anda (IndexedDB) supaya aplikasi kekal pantas dan boleh digunakan secara offline."
-        },
-        "encryption": {
-          "title": "Sokongan Penyulitan",
-          "description": "Aplikasi ini termasuk lapisan penyulitan untuk melindungi rekod bajet sensitif apabila diaktifkan."
-        },
-        "aiControls": {
-          "title": "Kawalan ciri AI",
-          "description": "Togol ciri berkuasa AI (seperti pengesanan anomali) dan urus akses chatbot dari tetapan."
-        },
-        "exportDelete": {
-          "title": "Eksport & padam",
-          "description": "Eksport data dan tetapan privasi anda, atau padam data tempatan terus dari aplikasi."
-        }
-      }
-    },
     "comparison": {
-      "headers": {
-        "feature": "Ciri",
-        "local": "BudgetPro Tempatan",
-        "sync": "BudgetPro Sync (Pro)",
-        "cloud": "Aplikasi Awan Tipikal"
-      },
-      "dataPrivacy": {
-        "feature": "Privasi Data",
-        "local": "100% Peribadi (Tempatan)",
-        "sync": "Disulitkan Dari Hujung ke Hujung",
-        "cloud": "Boleh Dilihat oleh Pekerja"
+      "bankConnections": {
+        "cloud": "Pengumpulan Mandatori",
+        "feature": "Sambungan Bank",
+        "local": "CSV / Manual Sahaja",
+        "sync": "Pilihan (Disulitkan)"
       },
       "cost": {
+        "cloud": "Langganan $100+/tahun",
         "feature": "Kos",
         "local": "Percuma Selamanya",
-        "sync": "Peningkatan Sekali sahaja",
-        "cloud": "Langganan $100+/tahun"
+        "sync": "Peningkatan Sekali sahaja"
+      },
+      "dataPrivacy": {
+        "cloud": "Boleh Dilihat oleh Pekerja",
+        "feature": "Privasi Data",
+        "local": "100% Peribadi (Tempatan)",
+        "sync": "Disulitkan Dari Hujung ke Hujung"
+      },
+      "headers": {
+        "cloud": "Aplikasi Awan Tipikal",
+        "feature": "Ciri",
+        "local": "BudgetPro Tempatan",
+        "sync": "BudgetPro Sync (Pro)"
       },
       "offlineMode": {
         "feature": "Mod Offline"
       },
-      "bankConnections": {
-        "feature": "Sambungan Bank",
-        "local": "CSV / Manual Sahaja",
-        "sync": "Pilihan (Disulitkan)",
-        "cloud": "Pengumpulan Mandatori"
-      },
       "storageLocation": {
+        "cloud": "Pangkalan Data Mereka",
         "feature": "Lokasi Penyimpanan",
         "local": "Peranti Anda",
-        "sync": "Awan Tanpa Pengetahuan",
-        "cloud": "Pangkalan Data Mereka"
+        "sync": "Awan Tanpa Pengetahuan"
       }
     },
-    "socialProof": {
-      "title": "Sentuhan premium, dibina dalam",
-      "description": "Butiran yang menjadikan bajet berkesan: onboarding, pintasan, navigasi mudah alih, dan prestasi sedia untuk offline.",
-      "features": {
-        "onboarding": {
-          "title": "Lawatan onboarding",
-          "description": "Lawatan panduan membantu pengguna baru mendapatkan nilai dengan cepat."
-        },
-        "shortcuts": {
-          "title": "Pintasan papan kekunci",
-          "description": "Bergerak pantas dengan carian dan pintasan tindakan yang dibina ke dalam UI."
-        },
-        "mobileUx": {
-          "title": "UX pertama mudah alih",
-          "description": "Navigasi bawah dan susun atur responsif yang terasa asli."
-        },
-        "pwaInstall": {
-          "title": "Pemasangan PWA",
-          "description": "Pasang seperti aplikasi dan teruskan walaupun dengan internet yang tidak stabil."
-        }
+    "faq": {
+      "0": {
+        "a": "Ya. Dalam Protokol Tempatan, data tidak pernah meninggalkan peranti anda. Ia tinggal dalam IndexedDB dalam pelayar anda.",
+        "q": "Adakah data saya benar-benar peribadi?"
+      },
+      "1": {
+        "a": "Anda boleh mengeksport sandaran JSON penuh pada bila-bila masa. Kami juga mengesyorkan eksport CSV secara berkala.",
+        "q": "Bagaimana saya menyandarkan data saya?"
+      },
+      "2": {
+        "a": "Akan datang: Langganan pilihan untuk menyegerakkan data yang disulitkan antara peranti melalui Supabase.",
+        "q": "Apa itu 'Sync' Pro?"
+      },
+      "3": {
+        "a": "Tidak. Kami percaya import manual adalah lebih selamat, lebih boleh dipercayai, dan membina kesedaran kewangan yang lebih baik.",
+        "q": "Adakah anda menyambung ke bank?"
       }
     },
-    "pricingSection": {
-      "recommended": "Disyorkan",
-      "productName": "Protokol Tempatan",
-      "productDescription": "Pengalaman bajet lengkap, berjalan sepenuhnya di peranti anda.",
-      "whyChoose": "Mengapa memilih Protokol Tempatan?",
-      "whyChooseDescription": "Lihat bagaimana kami dibandingkan dengan gergasi awan.",
-      "features": "Termasuk transaksi, akaun, bajet tanpa had, dan kemampuan sandaran tempatan penuh."
+    "faqSection": {
+      "description": "Jawapan ringkas kepada soalan biasa tentang percubaan, harga, dan akses.",
+      "title": "Soalan Lazim"
+    },
+    "features": {
+      "0": {
+        "description": "Nilai bersih, aliran tunai, dan pecahan kategori. Masa muat segera.",
+        "href": "/budget-app",
+        "title": "Papan Pemuka Tempatan"
+      },
+      "1": {
+        "description": "Pemetaan CSV pintar untuk BMO, Home Trust, dan format khusus yang boleh disesuaikan.",
+        "href": "/budget-app/import",
+        "title": "Wizard Import"
+      },
+      "2": {
+        "description": "Imbas resit secara tempatan dengan Tesseract.js. Tiada pemprosesan awan.",
+        "href": "/budget-app/ocr",
+        "title": "OCR Resit"
+      },
+      "3": {
+        "description": "Bajet berasaskan sifar atau rollover dengan kawalan kategori yang terperinci.",
+        "href": "/budget-app/budgets",
+        "title": "Bajet Kategori"
+      },
+      "4": {
+        "description": "Ramalkan tarikh kebebasan anda dengan visualisasi faedah kompaun.",
+        "href": "/budget-app/planning/retirement",
+        "title": "Kalkulator Persaraan"
+      },
+      "5": {
+        "description": "Penyulitan sisi klien pilihan untuk lapisan keselamatan tambahan.",
+        "href": "/budget-app/settings",
+        "title": "Perisai Privasi"
+      }
+    },
+    "featuresDeepDive": {
+      "cta": "Mulakan percubaan percuma",
+      "description": "Hentikan pertarungan dengan formula yang rosak. Dapatkan fleksibiliti kawalan manual dengan kelajuan aplikasi moden.",
+      "explore": "Jelajahi",
+      "heading1": "Kuasa Spreadsheet.",
+      "heading2": "Kesederhanaan Aplikasi."
+    },
+    "hero": {
+      "badge": "Privasi Pertama • Hanya Tempatan • Tiada Penjejakan",
+      "finePrint": "Tiada kelayakan bank diperlukan. Tiada akaun diperlukan untuk mod tempatan.",
+      "headline": "Kuasa Wang Anda tanpa Menjual Data Anda.",
+      "primaryCta": {
+        "href": "/budget-app/auth/signup",
+        "label": "Mulakan Protokol Tempatan (Percuma)"
+      },
+      "secondaryCta": {
+        "href": "/budget-app/auth/login",
+        "label": "Log masuk"
+      },
+      "subhead": "Kuasa spreadsheet. Kesederhanaan aplikasi. Alami kejelasan kewangan dengan satu-satunya aplikasi bajet yang menjamin data anda tidak pernah meninggalkan peranti anda."
     },
     "heroSection": {
-      "cta": {
-        "heading": "Dibina untuk kejelasan, bukan kekacauan.",
-        "viewPricing": "Lihat harga"
-      },
       "badges": {
         "noSubscriptions": "Tiada langganan",
         "offlineReady": "Sedia untuk offline",
         "seniorsMode": "Mod Warga Emas"
       },
-      "preview": {
-        "livePreview": "Pratonton langsung",
-        "recentTransactions": "Transaksi terkini",
-        "categoryBudgets": "Bajet kategori",
-        "recurring": "Berulang"
+      "cta": {
+        "heading": "Dibina untuk kejelasan, bukan kekacauan.",
+        "viewPricing": "Lihat harga"
       },
       "modes": {
-        "dashboard": "Papan Pemuka",
         "budgets": "Bajet",
+        "dashboard": "Papan Pemuka",
         "subscriptions": "Langganan"
-      }
-    },
-    "featuresDeepDive": {
-      "heading1": "Kuasa Spreadsheet.",
-      "heading2": "Kesederhanaan Aplikasi.",
-      "description": "Hentikan pertarungan dengan formula yang rosak. Dapatkan fleksibiliti kawalan manual dengan kelajuan aplikasi moden.",
-      "cta": "Mulakan percubaan percuma",
-      "explore": "Jelajahi"
-    },
-    "accessibility": {
-      "title": "Boleh diakses secara lalai",
-      "description": "Mod Warga Emas menyediakan navigasi yang dipermudahkan dan sasaran sentuh yang lebih besar. Pintasan papan kekunci, keadaan fokus, dan kontras yang jelas membantu semua orang bergerak lebih cepat.",
-      "badges": {
-        "seniorsMode": "Mod Warga Emas",
-        "largeTouchTargets": "Sasaran sentuh besar",
-        "keyboardFirst": "Papan kekunci pertama"
       },
-      "buttons": {
-        "openApp": "Buka aplikasi",
-        "settings": "Tetapan aksesibiliti"
+      "preview": {
+        "categoryBudgets": "Bajet kategori",
+        "livePreview": "Pratonton langsung",
+        "recentTransactions": "Transaksi terkini",
+        "recurring": "Berulang"
       }
     },
-    "faqSection": {
-      "title": "Soalan Lazim",
-      "description": "Jawapan ringkas kepada soalan biasa tentang percubaan, harga, dan akses."
-    },
-    "outcomesSection": {
-      "title": "Dibina untuk kehidupan sebenar, bukan spreadsheet",
-      "description": "Kebanyakan aplikasi bajet membuat anda melakukan kerja. BudgetPro direka untuk mengurangkan geseran sambil memastikan anda mengawal."
+    "howItWorks": {
+      "0": {
+        "description": "Seret & lepas CSV atau imbas resit. AI memetakan lajur secara tempatan.",
+        "title": "Import"
+      },
+      "1": {
+        "description": "Pengkategorian cepat dengan peraturan pintar dan tindakan pukal.",
+        "title": "Semak"
+      },
+      "2": {
+        "description": "Tetapkan setiap ringgit untuk tugas dan ramalkan nilai bersih masa depan anda.",
+        "title": "Rancang"
+      }
     },
     "howItWorksSection": {
-      "title": "Bagaimana ia berfungsi",
-      "description": "Aliran kerja yang membawa anda kepada kejelasan dengan cepat, tanpa mengunci anda dalam sistem yang rumit."
-    },
-    "nav": {
-      "tagline": "Bajet premium"
+      "description": "Aliran kerja yang membawa anda kepada kejelasan dengan cepat, tanpa mengunci anda dalam sistem yang rumit.",
+      "title": "Bagaimana ia berfungsi"
     },
     "marquee": {
       "logos": [
@@ -440,6 +880,814 @@
         "Offline",
         "Mod Warga Emas"
       ]
+    },
+    "nav": {
+      "tagline": "Bajet premium"
+    },
+    "outcomes": {
+      "0": {
+        "description": "Tiada lagi sambungan yang rosak atau gelung pengesahan semula. Anda mengawal input data.",
+        "title": "Hentikan Pertarungan dengan Pengumpul"
+      },
+      "1": {
+        "description": "Kami tidak menjual data anda kerana kami tidak memilikinya. Titik.",
+        "title": "Privasi melalui Reka Bentuk"
+      },
+      "2": {
+        "description": "Modelkan persaraan, pembayaran pinjaman, dan matlamat simpanan dalam satu pandangan yang terintegrasi.",
+        "title": "Perancangan Masa Depan"
+      },
+      "3": {
+        "description": "Kenal pasti pengeluaran berulang pada dompet anda yang terlepas oleh aplikasi lain.",
+        "title": "Pembunuh Langganan"
+      }
+    },
+    "outcomesSection": {
+      "description": "Kebanyakan aplikasi bajet membuat anda melakukan kerja. BudgetPro direka untuk mengurangkan geseran sambil memastikan anda mengawal.",
+      "title": "Dibina untuk kehidupan sebenar, bukan spreadsheet"
+    },
+    "pricing": {
+      "cta": {
+        "href": "/budget-app/auth/signup",
+        "label": "Mulakan Protokol Tempatan"
+      },
+      "description": "Mulakan dengan Protokol Tempatan yang berkuasa. Tingkatkan kemudian jika anda memerlukan penyegerakan pelbagai peranti.",
+      "eyebrow": "Harga Adil",
+      "guarantee": "Tiada kad kredit diperlukan untuk Protokol Tempatan.",
+      "priceLabel": "Percuma Selamanya",
+      "secondary": {
+        "href": "#pricing",
+        "label": "Lihat Ciri Pro"
+      },
+      "title": "Tempatan adalah Percuma. Penyegerakan adalah Pro."
+    },
+    "pricingSection": {
+      "features": "Termasuk transaksi, akaun, bajet tanpa had, dan kemampuan sandaran tempatan penuh.",
+      "productDescription": "Pengalaman bajet lengkap, berjalan sepenuhnya di peranti anda.",
+      "productName": "Protokol Tempatan",
+      "recommended": "Disyorkan",
+      "whyChoose": "Mengapa memilih Protokol Tempatan?",
+      "whyChooseDescription": "Lihat bagaimana kami dibandingkan dengan gergasi awan."
+    },
+    "security": {
+      "buttons": {
+        "offline": "Sokongan offline",
+        "privacy": "Privasi & tetapan"
+      },
+      "cards": {
+        "aiControls": {
+          "description": "Togol ciri berkuasa AI (seperti pengesanan anomali) dan urus akses chatbot dari tetapan.",
+          "title": "Kawalan ciri AI"
+        },
+        "encryption": {
+          "description": "Aplikasi ini termasuk lapisan penyulitan untuk melindungi rekod bajet sensitif apabila diaktifkan.",
+          "title": "Sokongan Penyulitan"
+        },
+        "exportDelete": {
+          "description": "Eksport data dan tetapan privasi anda, atau padam data tempatan terus dari aplikasi.",
+          "title": "Eksport & padam"
+        },
+        "localStorage": {
+          "description": "Data bajet anda disimpan dalam pelayar anda (IndexedDB) supaya aplikasi kekal pantas dan boleh digunakan secara offline.",
+          "title": "Penyimpanan Tempatan"
+        }
+      },
+      "description": "Aplikasi Bajet menyimpan data anda secara tempatan (sedia untuk offline) dan memberi anda kawalan untuk ciri AI, eksport, dan pemadaman.",
+      "title": "Privasi pertama melalui reka bentuk"
+    },
+    "socialProof": {
+      "description": "Butiran yang menjadikan bajet berkesan: onboarding, pintasan, navigasi mudah alih, dan prestasi sedia untuk offline.",
+      "features": {
+        "mobileUx": {
+          "description": "Navigasi bawah dan susun atur responsif yang terasa asli.",
+          "title": "UX pertama mudah alih"
+        },
+        "onboarding": {
+          "description": "Lawatan panduan membantu pengguna baru mendapatkan nilai dengan cepat.",
+          "title": "Lawatan onboarding"
+        },
+        "pwaInstall": {
+          "description": "Pasang seperti aplikasi dan teruskan walaupun dengan internet yang tidak stabil.",
+          "title": "Pemasangan PWA"
+        },
+        "shortcuts": {
+          "description": "Bergerak pantas dengan carian dan pintasan tindakan yang dibina ke dalam UI.",
+          "title": "Pintasan papan kekunci"
+        }
+      },
+      "title": "Sentuhan premium, dibina dalam"
+    },
+    "trust": {
+      "0": {
+        "description": "Data kekal dalam IndexedDB pelayar anda. Kami secara harfiah tidak dapat melihatnya.",
+        "title": "Peranti Anda, Data Anda"
+      },
+      "1": {
+        "description": "Edit pukal, pivot, dan analisis seperti pro tanpa sakit kepala formula.",
+        "title": "Kuasa Spreadsheet"
+      },
+      "2": {
+        "description": "Tiada kelewatan. Berfungsi di puncak gunung atau dalam terowong subway.",
+        "title": "Kelajuan Offline"
+      },
+      "3": {
+        "description": "Wizard import menjadikan Tinjauan Wang Jumaat satu tabiat yang memuaskan.",
+        "title": "Ritual Manual"
+      }
+    }
+  },
+  "nav": {
+    "about": "Tentang",
+    "accounts": "Akaun",
+    "budgets": "Bajet",
+    "categories": "Kategori",
+    "dashboard": "Papan Pemuka",
+    "export": "Eksport",
+    "goals": "Matlamat",
+    "help": "Bantuan",
+    "import": "Import",
+    "reports": "Laporan",
+    "settings": "Tetapan",
+    "transactions": "Transaksi"
+  },
+  "onboarding": {
+    "dontShowAgain": "Jangan tunjukkan lawatan ini lagi",
+    "navigation": {
+      "getStarted": "Mulakan",
+      "next": "Seterusnya",
+      "previous": "Sebelum",
+      "startTour": "Mulakan Lawatan"
+    },
+    "quickTip": "💡 Tip Pantas",
+    "skipTour": "Lupakan lawatan",
+    "stepCounter": "Langkah {current} daripada {total}",
+    "steps": {
+      "budgets": {
+        "description": "Buat bajet untuk kategori perbelanjaan yang berbeza. Jejaki kemajuan anda sepanjang bulan dan dapatkan amaran apabila anda hampir mencapai had anda.",
+        "title": "🎯 Tetapkan Bajet Anda"
+      },
+      "categorize": {
+        "description": "Semak dan sesuaikan kategori transaksi. Pengkategorian pintar kami belajar dari pembetulan anda untuk meningkatkan dari semasa ke semasa. Gunakan tindakan pukal untuk mengkategorikan banyak transaksi sekaligus!",
+        "title": "🏷️ Kategorikan & Atur"
+      },
+      "import": {
+        "description": "Mulakan dengan mengimport transaksi bank anda dari fail CSV. Kami menyokong BMO, Home Trust, dan banyak bank lain. Aplikasi akan mengkategorikan transaksi anda secara automatik!",
+        "title": "📥 Import Transaksi Anda"
+      },
+      "reports": {
+        "description": "Visualisasikan corak perbelanjaan anda, jejaki nilai bersih anda, dan buat keputusan kewangan yang berinformasi. Papan pemuka anda dikemas kini secara automatik dengan setiap transaksi!",
+        "title": "📊 Lihat Laporan & Wawasan"
+      },
+      "welcome": {
+        "description": "Mari kita ambil lawatan cepat untuk membantu anda memulakan pengurusan kewangan rumah anda. Ini tidak akan mengambil masa lama!",
+        "title": "👋 Selamat Datang ke Aplikasi Bajet!"
+      }
+    },
+    "tips": {
+      "budgets": "Tetapkan bajet yang realistik dan kami akan memberi amaran jika anda berada di landasan untuk berbelanja lebih.",
+      "categorize": "Gunakan butang pengkategorian cepat atau pilih beberapa transaksi untuk pengkategorian pukal.",
+      "import": "Seret & lepas fail CSV anda atau klik untuk melayari. Kami mengesan format BMO dan Home Trust secara automatik!"
+    }
+  },
+  "overspendingAlerts": {
+    "exceededWarning": "At this rate, you'll exceed your budget by {amount} this month.",
+    "percentOfBudget": "{percent}% of budget",
+    "progress": {
+      "label": "Current progress"
+    },
+    "stats": {
+      "budget": "Budget",
+      "daysLeft": "Days Left",
+      "projectedTotal": "Projected Total",
+      "spentSoFar": "Spent So Far"
+    },
+    "tip": {
+      "label": "Tip:",
+      "reduceSpending": "Reduce daily spending to {amount} to stay within budget."
+    }
+  },
+  "predictiveSpendingChart": {
+    "legend": {
+      "actual": "Actual",
+      "confidenceInterval": "Confidence Interval",
+      "predicted": "Predicted"
+    },
+    "noData": "No data available for predictions",
+    "predictionUnavailable": "Prediction Unavailable",
+    "stats": {
+      "avgConfidence": "Avg Confidence",
+      "nextMonth": "Next Month",
+      "threeMonthAvg": "3-Month Avg"
+    },
+    "table": {
+      "confidence": "Confidence",
+      "month": "Month",
+      "predicted": "Predicted",
+      "range": "Range",
+      "title": "Monthly Predictions"
+    },
+    "title": "Spending Forecast: {category}",
+    "trainingModel": "Training model and generating predictions..."
+  },
+  "pwaInstall": {
+    "buttons": {
+      "install": "Install",
+      "notNow": "Not now"
+    },
+    "close": "Close install prompt",
+    "description": "Add to your home screen for quick access and offline use",
+    "features": {
+      "fastSecure": "Fast & secure",
+      "noAppStore": "No app store needed",
+      "offline": "Works offline"
+    },
+    "title": "Install Budget App"
+  },
+  "quickCategorize": {
+    "buttons": {
+      "apply": "Apply Category",
+      "cancel": "Cancel",
+      "save": "Save"
+    },
+    "clickToSelect": "Click a category to select",
+    "description": "Select a category for {count, plural, =1 {this transaction} other {# transactions}}",
+    "general": "General",
+    "noResults": "No categories found",
+    "pressEnter": "Press ↵ Enter",
+    "saving": "Saving...",
+    "searchPlaceholder": "Search categories...",
+    "title": "Quick Categorize"
+  },
+  "quickFilters": {
+    "all": "All",
+    "categories": "Categories",
+    "clearFilters": "Clear Filters",
+    "moreCategories": "+{count} more",
+    "presets": {
+      "last30": "Last 30 Days",
+      "last90": "Last 90 Days",
+      "thisMonth": "This Month",
+      "thisYear": "This Year"
+    },
+    "timePeriod": "Time Period"
+  },
+  "receiptUpload": {
+    "buttons": {
+      "attachReceipt": "Attach Receipt",
+      "chooseDifferent": "Choose Different",
+      "extractData": "Extract Data",
+      "extracting": "Extracting..."
+    },
+    "camera": {
+      "takePhoto": "Take Photo with Camera",
+      "useDevice": "Use your device camera to capture receipt"
+    },
+    "cameraInputLabel": "Camera capture input",
+    "dropzone": {
+      "browseFiles": "or <link>browse files</link>",
+      "dragDrop": "Drag & drop receipt here",
+      "dropHere": "Drop the receipt here",
+      "supportedFormats": "Supports JPG, PNG, PDF • Max {size}MB"
+    },
+    "errors": {
+      "couldNotExtract": "Could not extract data from receipt. Please enter manually.",
+      "extractionFailed": "Failed to extract data. Please try again or enter manually.",
+      "invalidType": "Invalid file type. Only JPG, PNG, and PDF files are allowed",
+      "ocrImagesOnly": "OCR is only supported for image files (JPG, PNG)",
+      "rejected": "File was rejected. Please try again",
+      "tooLarge": "File is too large. Maximum size is {size}MB"
+    },
+    "extracted": {
+      "amount": "Amount:",
+      "confidence": "Confidence: {percent}%",
+      "date": "Date:",
+      "merchant": "Merchant:",
+      "title": "Data Extracted"
+    },
+    "pdf": {
+      "noPreview": "Preview not available",
+      "title": "PDF Receipt"
+    },
+    "receiptPreview": "Receipt preview",
+    "removeFile": "Remove file"
+  },
+  "recurringTransactions": {
+    "confidence": "{percent}% confidence",
+    "estimatedMonthly": "Estimated Monthly",
+    "frequency": {
+      "biweekly": "Bi-weekly",
+      "monthly": "Monthly",
+      "quarterly": "Quarterly",
+      "weekly": "Weekly"
+    },
+    "inDays": "{count, plural, =0 {(today)} =1 {(in 1 day)} other {(in # days)}}",
+    "next": "Next: {date}",
+    "occurrences": "{count, plural, =1 {1 occurrence detected} other {# occurrences detected}}",
+    "perPeriod": {
+      "month": "per month",
+      "quarter": "per quarter",
+      "twoWeeks": "per 2 weeks",
+      "week": "per week"
+    },
+    "showingPatterns": "{count, plural, =1 {Showing 1 recurring transaction pattern} other {Showing # recurring transaction patterns}}",
+    "subtitle": "Detected subscriptions and bills",
+    "title": "Recurring Transactions"
+  },
+  "shortcutsModal": {
+    "close": "Close shortcuts help",
+    "proTip": {
+      "description": "Keyboard shortcuts work on any page except when typing in forms. Press {key} anytime to see this help.",
+      "title": "💡 Pro Tip"
+    },
+    "subtitle": "Power-user productivity tips",
+    "title": "Keyboard Shortcuts"
+  },
+  "sidebar": {
+    "actions": {
+      "importCsv": "Import CSV",
+      "settings": "Tetapan",
+      "showAllItems": "Tunjukkan Semua Item",
+      "showLess": "Tunjukkan Kurang"
+    },
+    "appSubtitle": "Kewangan Premium",
+    "appTitle": "Aplikasi Bajet",
+    "navigation": {
+      "budgets": "Bajet",
+      "categories": "Kategori",
+      "dashboard": "Papan Pemuka",
+      "futurePlans": "Rancangan Masa Depan",
+      "investments": "Pelaburan",
+      "loans": "Pinjaman",
+      "reports": "Laporan",
+      "retirement": "Persaraan",
+      "scanReceipt": "Imbas Resit",
+      "subscriptions": "Langganan",
+      "transactions": "Transaksi"
+    },
+    "search": "Cari...",
+    "shortcuts": "Pintasan"
+  },
+  "simplefinSettings": {
+    "connectedAccounts": {
+      "description": "Manage your linked bank accounts",
+      "title": "Connected Accounts"
+    },
+    "connection": {
+      "accountsLinked": "{count, plural, =1 {1 account linked} other {# accounts linked}}",
+      "connectButton": "Connect Bank Account",
+      "connected": "Connected",
+      "description": "Connect your bank accounts to automatically import transactions",
+      "notConnected": "Not Connected",
+      "notConnectedDesc": "Connect your bank accounts to start importing transactions",
+      "title": "SimpleFIN Connection"
+    },
+    "disconnect": {
+      "button": "Disconnect",
+      "cancel": "Cancel",
+      "confirm": "Disconnect",
+      "dialogDescription": "This will remove the connection to your bank accounts. Your existing transactions will not be deleted, but new transactions will no longer sync automatically.",
+      "dialogTitle": "Disconnect SimpleFIN?"
+    },
+    "help": {
+      "bridgeDashboard": "SimpleFIN Bridge Dashboard",
+      "protocolDocs": "SimpleFIN Protocol Documentation",
+      "title": "Need Help?"
+    },
+    "sync": {
+      "date": "{date}",
+      "hoursAgo": "{hours, plural, =1 {1 hour ago} other {# hours ago}}",
+      "lastSynced": "Last synced: {time}",
+      "lessThanHour": "Less than an hour ago",
+      "never": "Never",
+      "syncNow": "Sync Now",
+      "syncing": "Syncing..."
+    },
+    "syncSettings": {
+      "autoCategorize": {
+        "description": "Automatically categorize imported transactions using AI",
+        "label": "Auto-Categorize"
+      },
+      "autoSync": {
+        "description": "Automatically sync transactions on a schedule",
+        "label": "Automatic Sync"
+      },
+      "description": "Configure how and when transactions are synced",
+      "frequency": {
+        "every12Hours": "Every 12 hours",
+        "every2Days": "Every 2 days",
+        "every6Hours": "Every 6 hours",
+        "hint": "SimpleFIN allows up to 24 requests per day. Daily sync is recommended.",
+        "label": "Sync Frequency",
+        "onceDaily": "Once daily"
+      },
+      "notifications": {
+        "description": "Show notification when sync completes",
+        "label": "Sync Notifications"
+      },
+      "pendingTransactions": {
+        "description": "Include transactions that haven't posted yet",
+        "label": "Import Pending Transactions"
+      },
+      "title": "Sync Settings",
+      "transactionHistory": {
+        "days": "{count} days",
+        "hint": "How many days of transaction history to fetch (max 60 days per SimpleFIN)",
+        "label": "Transaction History"
+      }
+    }
+  },
+  "spendingTrendChart": {
+    "forecastFooter": "Forecast based on linear regression of last {months} months",
+    "legend": {
+      "actualSpending": "Actual Spending",
+      "projected": "Projected"
+    },
+    "notEnoughData": "Not enough data to generate trends. Add at least 2 months of transactions.",
+    "stats": {
+      "avgMonthly": "Avg Monthly",
+      "lastMonth": "Last Month",
+      "projected": "Projected"
+    },
+    "title": "Spending Trends & Forecast"
+  },
+  "splitTransaction": {
+    "addSplit": "Add Split ({current}/{max})",
+    "amount": "Amount",
+    "buttons": {
+      "cancel": "Cancel",
+      "save": "Save Split",
+      "saving": "Saving..."
+    },
+    "category": "Category",
+    "closeModal": "Close modal",
+    "date": "Date:",
+    "distributeEvenly": "Distribute Evenly",
+    "errors": {
+      "saveFailed": "Failed to save split transaction"
+    },
+    "help": {
+      "step1": "Enter the amount for each category (must total ${amount})",
+      "step2": "Use \"Distribute Evenly\" to split equally across all categories",
+      "step3": "Add up to 5 splits per transaction",
+      "step4": "The original transaction will be hidden and replaced with split items",
+      "title": "How to split transactions:"
+    },
+    "maxSplitsReached": "Maximum 5 splits allowed",
+    "minSplitsRequired": "Minimum 2 splits required",
+    "none": "None",
+    "notes": "Notes (Optional)",
+    "notesPlaceholder": "e.g., Business expense, Personal use",
+    "originalAmount": "Original Amount:",
+    "removeThisSplit": "Remove this split",
+    "selectCategory": "Select category...",
+    "splitsCount": "Splits ({current}/{max})",
+    "subcategory": "Subcategory",
+    "title": "Split Transaction",
+    "validation": {
+      "adjustAmounts": "Adjust split amounts to match the original transaction amount.",
+      "amountsMustMatch": "Split amounts must equal the original transaction amount",
+      "categoryRequired": "All splits must have a category",
+      "matchesOriginal": "✓ Matches original",
+      "overBy": "Over by ${amount}",
+      "readyToSave": "Split amounts match the original transaction. Ready to save!",
+      "total": "Total:",
+      "underBy": "Under by ${amount}"
+    }
+  },
+  "subscriptionCard": {
+    "badges": {
+      "aiVerified": "AI Verified",
+      "cancelled": "Cancelled",
+      "paused": "Paused",
+      "trial": "Trial"
+    },
+    "buttons": {
+      "claimManage": "Claim & Manage",
+      "edit": "Edit",
+      "transactions": "Transactions"
+    },
+    "confidence": {
+      "high": "High",
+      "label": "Detection Confidence",
+      "low": "Low",
+      "medium": "Medium"
+    },
+    "details": {
+      "charges": "{count} charges",
+      "daysBefore": "{count} days before",
+      "firstCharge": "First Charge",
+      "lastCharge": "Last Charge",
+      "occurrences": "Occurrences",
+      "payment": "Payment",
+      "reminder": "Reminder"
+    },
+    "interval": {
+      "annual": "Annual",
+      "bi-weekly": "Bi-weekly",
+      "irregular": "Irregular",
+      "monthly": "Monthly",
+      "quarterly": "Quarterly",
+      "weekly": "Weekly"
+    },
+    "lowConfidenceWarning": "This subscription was detected with low confidence. Claim it to verify and manage manually.",
+    "menu": {
+      "cancelSubscription": "Cancel Subscription",
+      "claimManage": "Claim & Manage",
+      "delete": "Delete",
+      "edit": "Edit",
+      "notSubscription": "Not a Subscription",
+      "pause": "Pause",
+      "resume": "Resume",
+      "viewTransactions": "View Transactions"
+    },
+    "source": {
+      "auto-detected": "Auto-detected",
+      "manual": "Manual",
+      "merged": "Tracked"
+    },
+    "stats": {
+      "amount": "Amount",
+      "annualCost": "Annual Cost",
+      "frequency": "Frequency",
+      "nextCharge": "Next Charge",
+      "totalSpent": "Total Spent"
+    },
+    "trial": {
+      "daysLeft": "{count, plural, =1 {1 day left in trial} other {# days left in trial}}"
+    }
+  },
+  "subscriptionCostChart": {
+    "emptyState": "No active subscriptions to analyze",
+    "loadingChart": "Loading chart...",
+    "moreCharges": "+{count} more charges",
+    "perMonth": "/month",
+    "sections": {
+      "costByCategory": "Cost by Category",
+      "potentialSavings": "Potential Savings",
+      "upcomingCharges": "Upcoming Charges (Next 30 Days)"
+    },
+    "summary": {
+      "activeSubscriptions": "{count, plural, =1 {1 active subscription} other {# active subscriptions}}",
+      "annualCost": "Annual Cost",
+      "monthlyCost": "Monthly Cost",
+      "next30Days": "Next 30 Days",
+      "projectedYearly": "Projected yearly spend",
+      "upcomingCharges": "{count, plural, =1 {1 upcoming charge} other {# upcoming charges}}"
+    }
+  },
+  "tooltip": {
+    "ariaLabel": "Lebih banyak maklumat",
+    "learnMore": "Ketahui lebih lanjut →"
+  },
+  "transactionModal": {
+    "account": {
+      "label": "Account"
+    },
+    "advancedOptions": {
+      "available": "{count} available",
+      "label": "Advanced Options"
+    },
+    "amount": {
+      "label": "Amount",
+      "placeholder": "0.00",
+      "validationError": "Please enter a valid amount"
+    },
+    "buttons": {
+      "add": "Add Transaction",
+      "adding": "Adding...",
+      "cancel": "Cancel",
+      "update": "Update Transaction",
+      "updating": "Updating..."
+    },
+    "category": {
+      "aiCategorizing": "AI categorizing...",
+      "create": "Create",
+      "createNew": "+ Create New Category",
+      "label": "Category",
+      "lastUsed": "Using last: {category}",
+      "namePlaceholder": "Category name...",
+      "selectPlaceholder": "Select category...",
+      "subcategoriesPlaceholder": "Subcategories (optional, comma-separated)"
+    },
+    "closeModal": "Close modal",
+    "createCategory": {
+      "created": "Category \"{name}\" created!",
+      "failed": "Failed to create category",
+      "nameRequired": "Category name is required"
+    },
+    "date": {
+      "label": "Date"
+    },
+    "description": {
+      "label": "Description",
+      "placeholder": "e.g., Grocery shopping at Sobeys"
+    },
+    "learned": {
+      "description": "After 3 similar corrections, future transactions from this merchant will auto-categorize.",
+      "title": "Learned!"
+    },
+    "notes": {
+      "label": "Notes",
+      "placeholder": "Add any additional notes..."
+    },
+    "receipts": {
+      "addNew": "Add New Receipt",
+      "deleteConfirm": "Are you sure you want to delete this receipt?",
+      "deleteFailed": "Failed to delete receipt",
+      "deleteReceipt": "Delete receipt",
+      "existing": "Existing receipts ({count})",
+      "label": "Receipt Attachments",
+      "newFile": "New: {filename}",
+      "remove": "Remove",
+      "viewFull": "View full receipt"
+    },
+    "subcategory": {
+      "label": "Subcategory",
+      "none": "None",
+      "selectPlaceholder": "Select subcategory..."
+    },
+    "tags": {
+      "label": "Tags (comma-separated)",
+      "placeholder": "e.g., groceries, weekly, essential"
+    },
+    "title": {
+      "add": "Add Transaction",
+      "edit": "Edit Transaction"
+    },
+    "type": {
+      "expense": "Expense",
+      "income": "Income",
+      "label": "Type"
+    }
+  },
+  "transactionTable": {
+    "actions": {
+      "attachReceipt": "Attach receipt",
+      "delete": "Delete",
+      "edit": "Edit",
+      "split": "Split"
+    },
+    "emptyState": "No transactions to display",
+    "headers": {
+      "account": "Account",
+      "actions": "Actions",
+      "amount": "Amount",
+      "category": "Category",
+      "date": "Date",
+      "description": "Description"
+    }
+  },
+  "welcome": {
+    "subtitle": "Mulakan dengan menambah transaksi pertama anda atau mengimport data dari bank anda",
+    "title": "Selamat Datang ke Aplikasi Bajet"
+  },
+  "widget": {
+    "accountBalances": {
+      "description": "Baki semasa di semua akaun anda",
+      "title": "Baki Akaun"
+    },
+    "budgetProgress": {
+      "description": "Jejaki bagaimana anda berbanding dengan matlamat bajet anda",
+      "title": "Kemajuan Bajet"
+    },
+    "incomeVsExpenses": {
+      "description": "Bandingkan pendapatan dan perbelanjaan anda dari semasa ke semasa",
+      "title": "Pendapatan vs Perbelanjaan"
+    },
+    "monthlyTrends": {
+      "description": "Visualisasikan corak kewangan anda bulan demi bulan",
+      "title": "Tren Bulanan"
+    },
+    "recentTransactions": {
+      "description": "Tampilan cepat aktiviti kewangan terbaru anda",
+      "title": "Transaksi Terkini"
+    },
+    "spendingByCategory": {
+      "description": "Lihat ke mana wang anda pergi dengan pecahan visual",
+      "title": "Perbelanjaan Mengikut Kategori"
+    },
+    "upcomingBills": {
+      "description": "Jangan terlepas pembayaran dengan peringatan bil",
+      "title": "Bil Akan Datang"
+    }
+  },
+  "ynabMigrationWizard": {
+    "categoryStep": {
+      "category": "{count, plural, =1 {1 category} other {# categories}}",
+      "createNew": "Create New",
+      "description": "Map YNAB categories to your existing categories or create new ones.",
+      "mapToExisting": "Map to Existing",
+      "selectCategory": "Select category...",
+      "skip": "Skip",
+      "title": "Category Mapping",
+      "willCreate": "Will create:"
+    },
+    "completeStep": {
+      "errors": "Errors",
+      "importAnother": "Import Another",
+      "success": "Import Complete!",
+      "successMessage": "{count, plural, =1 {1 item imported} other {# items imported}} successfully from YNAB.",
+      "viewTransactions": "View Transactions",
+      "whatNext": "What would you like to do next?",
+      "withIssues": "Import Completed with Issues"
+    },
+    "footer": {
+      "back": "Back",
+      "done": "Done",
+      "next": "Next",
+      "startImport": "Start Import"
+    },
+    "header": {
+      "closeLabel": "Close wizard",
+      "subtitle": "Migrate your budget data seamlessly",
+      "title": "Import from YNAB"
+    },
+    "importingStep": {
+      "finishing": "Finishing up...",
+      "importingAccounts": "Importing accounts...",
+      "importingBudgets": "Importing budgets...",
+      "importingCategories": "Importing categories...",
+      "importingTransactions": "Importing transactions...",
+      "title": "Importing your YNAB data..."
+    },
+    "optionsStep": {
+      "accountOptions": {
+        "includeClosedAccounts": "Include closed accounts",
+        "includeOffBudgetAccounts": "Include off-budget accounts",
+        "title": "Account Options"
+      },
+      "budgetOptions": {
+        "importGoals": "Import savings goals as future purchases",
+        "title": "Budget Options"
+      },
+      "hiddenCategories": {
+        "archive": "Archive",
+        "archiveDesc": "Import as archived (recommended)",
+        "description": "How to handle YNAB categories marked as hidden?",
+        "import": "Import",
+        "importDesc": "Import as active categories",
+        "skip": "Skip",
+        "skipDesc": "Don't import hidden categories",
+        "title": "Hidden Categories"
+      }
+    },
+    "previewStep": {
+      "accounts": "Accounts",
+      "allocations": "{count} allocations",
+      "budgetMonths": "Budget Months",
+      "categories": "Categories",
+      "dateRange": "Transaction Date Range",
+      "description": "Review the data that will be imported.",
+      "duplicates": "{count} duplicates",
+      "new": "{count} new",
+      "newMapped": "{created} new, {mapped} mapped",
+      "preparingPreview": "Preparing preview...",
+      "title": "Import Preview",
+      "transactions": "Transactions",
+      "warnings": "Warnings"
+    },
+    "steps": {
+      "categories": {
+        "description": "Map to existing categories",
+        "title": "Categories"
+      },
+      "complete": {
+        "description": "Migration finished",
+        "title": "Complete"
+      },
+      "importing": {
+        "description": "Processing your data",
+        "title": "Importing"
+      },
+      "options": {
+        "description": "Configure import settings",
+        "title": "Options"
+      },
+      "preview": {
+        "description": "Review before import",
+        "title": "Preview"
+      },
+      "upload": {
+        "description": "Select YNAB export file",
+        "title": "Upload"
+      }
+    },
+    "uploadStep": {
+      "accounts": "Accounts",
+      "categories": "Categories",
+      "clickToSelect": "Click to select a file",
+      "dragAndDrop": "or drag and drop here",
+      "fileSummary": "File Summary",
+      "format": "Format",
+      "formatApiExport": "YNAB API Export",
+      "formatApiExportDesc": "JSON from nYNAB",
+      "formatCsv": "CSV Export",
+      "formatCsvDesc": "From YNAB web app",
+      "formatYfull": "Budget.yfull / Budget.ynab4",
+      "formatYfullDesc": "YNAB4 desktop export",
+      "parsing": "Parsing file...",
+      "supportedFormats": "Supported Formats",
+      "transactions": "Transactions"
     }
   }
 }

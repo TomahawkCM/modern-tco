@@ -1,433 +1,873 @@
 {
-  "nav": {
-    "dashboard": "Painel",
-    "transactions": "Transações",
-    "budgets": "Orçamentos",
-    "reports": "Relatórios",
-    "accounts": "Contas",
-    "categories": "Categorias",
-    "goals": "Objetivos",
-    "import": "Importar",
-    "export": "Exportar",
-    "settings": "Configurações",
-    "help": "Ajuda",
-    "about": "Sobre"
+  "accessibilitySettings": {
+    "fontSize": {
+      "default": "Default",
+      "description": "Adjust the base text size for better readability",
+      "extraLarge": "Extra Large",
+      "large": "Large",
+      "title": "Font Size"
+    },
+    "infoBox": {
+      "savedAutomatically": "Settings are saved automatically and persist across sessions",
+      "seniorsOptimization": "Seniors Mode provides one-click accessibility optimization",
+      "storedLocally": "Your preferences are stored locally and never sent to servers",
+      "syncAcrossTabs": "Changes sync across all open tabs in real-time",
+      "title": "About Accessibility Settings"
+    },
+    "presets": {
+      "full": "Full",
+      "fullDesc": "Maximum accessibility",
+      "mild": "Mild",
+      "mildDesc": "Slightly enhanced",
+      "moderate": "Moderate",
+      "moderateDesc": "Recommended for most",
+      "off": "Off",
+      "offDesc": "Standard interface",
+      "title": "Quick Presets:"
+    },
+    "reducedMotion": {
+      "description": "Minimize animations and transitions for a calmer experience. Helpful for users with vestibular disorders or motion sensitivity.",
+      "title": "Reduced Motion",
+      "toggleLabel": "Toggle reduced motion mode"
+    },
+    "seniorsMode": {
+      "description": "One-click accessibility enhancement with larger text, bigger touch targets, and simplified interface",
+      "title": "Seniors Mode"
+    },
+    "themeMode": {
+      "auto": "Auto",
+      "autoDesc": "Match system",
+      "dark": "Dark",
+      "darkDesc": "Easy on eyes",
+      "description": "Choose your preferred color scheme for the budget app",
+      "highContrast": "High Contrast",
+      "highContrastDesc": "Maximum visibility",
+      "light": "Light",
+      "lightDesc": "Bright and clear",
+      "title": "Theme Mode"
+    }
+  },
+  "accessibleChart": {
+    "buttons": {
+      "chart": "Chart",
+      "showChart": "Show chart view",
+      "showTable": "Show data table view",
+      "table": "Table"
+    },
+    "chartDescription": "{description}. {dataPoints} data points shown. {dataList}. Press the Table button to view data in a table format with keyboard navigation support.",
+    "chartTypeDescription": "This is a {chartType} chart with {dataPoints} data points.",
+    "footer": {
+      "average": "Average:",
+      "total": "Total:"
+    },
+    "keyboardNav": {
+      "srOnly": "Use arrow keys to navigate between rows. Press Tab to navigate to the next element.",
+      "visual": "Use ← → or ↑ ↓ keys to navigate • Home/End to jump to start/end"
+    },
+    "summary": {
+      "average": "Average: {value}.",
+      "highest": "Highest value: {label} at {value}.",
+      "lowest": "Lowest value: {label} at {value}.",
+      "total": "Total: {value}."
+    },
+    "switchedToChart": "Switched to chart view",
+    "switchedToTable": "Switched to table view",
+    "tableHeaders": {
+      "additionalInfo": "Additional Info",
+      "category": "Category",
+      "period": "Period",
+      "value": "Value"
+    }
   },
   "actions": {
     "addTransaction": "Adicionar Transação",
-    "importData": "Importar Dados",
-    "import": "Importar",
     "editDashboard": "Editar Painel",
-    "saveChanges": "Salvar Alterações",
-    "resetDefaults": "Restaurar Padrões"
+    "import": "Importar",
+    "importData": "Importar Dados",
+    "resetDefaults": "Restaurar Padrões",
+    "saveChanges": "Salvar Alterações"
   },
-  "welcome": {
-    "title": "Bem-vindo ao Budget App",
-    "subtitle": "Comece adicionando sua primeira transação ou importando dados do seu banco"
+  "aiColumnMapper": {
+    "analyzing": "Analyzing CSV structure with AI...",
+    "buttons": {
+      "apply": "Apply Mappings & Import",
+      "cancel": "Cancel"
+    },
+    "closeModal": "Close modal",
+    "columnMappings": "Column Mappings",
+    "columnTypes": {
+      "amount": "Amount",
+      "balance": "Balance",
+      "credit": "Credit",
+      "date": "Date",
+      "debit": "Debit",
+      "description": "Description",
+      "ignore": "Ignore"
+    },
+    "confidence": {
+      "analyzed": "AI analyzed {columnCount} columns and {rowCount} sample rows",
+      "title": "Detection Confidence"
+    },
+    "preview": {
+      "amount": "Amount",
+      "date": "Date",
+      "description": "Description",
+      "title": "Transaction Preview"
+    },
+    "samples": "Samples:",
+    "saveConfig": {
+      "hint": "Next time you import from this bank, mappings will be automatic",
+      "label": "Save this bank configuration for future imports",
+      "placeholder": "Enter bank name (e.g., My Local Credit Union)"
+    },
+    "subtitle": "Review AI-detected columns and adjust if needed",
+    "title": "AI Column Mapping Wizard"
+  },
+  "bulkActions": {
+    "applyTo": "Apply to {count}",
+    "categorize": "Categorize",
+    "clearSelection": "Clear selection",
+    "confirmDelete": "Delete {count, plural, =1 {1 transaction} other {# transactions}}?",
+    "delete": "Delete",
+    "deleteWarning": "This action cannot be undone.",
+    "export": "Export",
+    "noSubcategory": "No subcategory",
+    "selectAll": "Select all",
+    "selectCategory": "Select category...",
+    "selected": "{count} selected"
+  },
+  "chatbot": {
+    "buttons": {
+      "clearHistory": "Clear chat history",
+      "exportConversation": "Export conversation",
+      "send": "Send"
+    },
+    "disabled": {
+      "description": "Enable the chatbot in Settings → Privacy → Budget Chatbot to get started.",
+      "enableButton": "Enable Chatbot",
+      "title": "Chatbot Disabled"
+    },
+    "emptyState": {
+      "description": "Ask me anything about your finances. Here are some examples:",
+      "examples": {
+        "balance": "What's my total account balance?",
+        "budget": "Am I over budget in any categories?",
+        "groceries": "Show me my recent grocery purchases",
+        "spending": "How much did I spend this month?"
+      },
+      "title": "Start a Conversation"
+    },
+    "header": {
+      "subtitle": "Ask me about your finances",
+      "title": "Budget Assistant"
+    },
+    "input": {
+      "disclaimer": "Powered by OpenAI GPT-4. Your data is processed securely and not used for training.",
+      "placeholder": "Ask about your finances..."
+    },
+    "messages": {
+      "dataAccessed": "Data accessed:",
+      "error": "Error",
+      "thinking": "Thinking..."
+    }
+  },
+  "chatbotHelp": {
+    "tabs": {
+      "actions": "Actions",
+      "budget": "Budget",
+      "income": "Income",
+      "spending": "Spending",
+      "trends": "Trends"
+    }
+  },
+  "chatbotOptIn": {
+    "buttons": {
+      "decline": "No Thanks",
+      "enable": "Enable Chatbot"
+    },
+    "capabilities": {
+      "actions": "Optionally perform actions like adding transactions or creating budgets",
+      "answer": "Answer questions about your transactions, budgets, and spending patterns",
+      "insights": "Provide insights and recommendations based on your data",
+      "search": "Search your financial data using natural language",
+      "title": "What the Chatbot Can Do"
+    },
+    "closeDialog": "Close chatbot opt-in dialog",
+    "controls": {
+      "dataAccess": {
+        "fullAccess": {
+          "description": "Chatbot can perform actions like adding transactions, creating budgets, and making changes to your data",
+          "title": "Full Access"
+        },
+        "label": "What can the chatbot do with your data?",
+        "readOnly": {
+          "description": "Chatbot can view your data and answer questions, but cannot add, edit, or delete transactions/budgets",
+          "title": "Read-Only (Recommended)"
+        }
+      },
+      "retention": {
+        "days30": "30 days",
+        "days7": "7 days (Recommended)",
+        "forever": "Keep forever",
+        "label": "How long should we keep your conversations?",
+        "note": "Conversations are stored locally in your browser. You can delete them anytime in Settings → Privacy."
+      },
+      "title": "Privacy Controls"
+    },
+    "gdpr": {
+      "notice": "<strong>Your Rights:</strong> By enabling the chatbot, you consent to processing your financial data via OpenAI's API. You can withdraw consent anytime by disabling the chatbot in Settings → Privacy. Your data is processed in accordance with our Privacy Policy and GDPR requirements. You have the right to access, delete, and export your conversation history at any time."
+    },
+    "privacy": {
+      "dataSent": "Financial data is sent to the API to answer your questions",
+      "disable": "You can disable the chatbot anytime in Settings → Privacy",
+      "noTraining": "OpenAI does not use API data to train models (as of their policy)",
+      "processedBy": "Your conversations are processed by OpenAI's GPT-4 API",
+      "title": "Privacy & Data Usage"
+    },
+    "subtitle": "AI-powered financial assistant",
+    "title": "Enable Budget Chatbot?"
+  },
+  "combobox": {
+    "noResults": "No results found.",
+    "search": "Search...",
+    "select": "Select..."
+  },
+  "commandPalette": {
+    "commands": {
+      "addTransaction": "Add Transaction",
+      "budgets": "Budgets",
+      "categories": "Categories",
+      "darkTheme": "Dark Theme",
+      "dashboard": "Dashboard",
+      "exportData": "Export Data",
+      "futurePlans": "Future Plans",
+      "highContrastTheme": "High-Contrast Theme",
+      "importCsv": "Import CSV",
+      "investments": "Investments",
+      "lightTheme": "Light Theme",
+      "loans": "Loans",
+      "newBudget": "New Budget",
+      "reports": "Reports",
+      "retirement": "Retirement",
+      "scanReceipt": "Scan Receipt",
+      "settings": "Settings",
+      "transactions": "Transactions"
+    },
+    "groups": {
+      "appearance": "Appearance",
+      "quickActions": "Quick Actions",
+      "tools": "Tools & Settings",
+      "tracking": "Tracking & Analysis",
+      "wealth": "Wealth & Planning"
+    },
+    "noResults": "No results found.",
+    "placeholder": "Type a command or search..."
   },
   "common": {
-    "save": "Salvar",
     "cancel": "Cancelar",
     "delete": "Excluir",
     "edit": "Editar",
-    "loading": "Carregando..."
+    "loading": "Carregando...",
+    "save": "Salvar"
   },
-  "widget": {
-    "spendingByCategory": {
-      "title": "Gastos por Categoria",
-      "description": "Veja para onde vai seu dinheiro com análises visuais"
-    },
-    "recentTransactions": {
-      "title": "Transações Recentes",
-      "description": "Visão rápida da sua atividade financeira mais recente"
-    },
-    "budgetProgress": {
-      "title": "Progresso do Orçamento",
-      "description": "Acompanhe como está cumprindo seus objetivos de orçamento"
-    },
-    "accountBalances": {
-      "title": "Saldos das Contas",
-      "description": "Saldos atuais em todas as suas contas"
-    },
-    "incomeVsExpenses": {
-      "title": "Rendimentos vs Despesas",
-      "description": "Compare seus ganhos e gastos ao longo do tempo"
-    },
-    "monthlyTrends": {
-      "title": "Tendências Mensais",
-      "description": "Visualize seus padrões financeiros mês a mês"
-    },
-    "upcomingBills": {
-      "title": "Contas a Vencer",
-      "description": "Nunca perca um pagamento com lembretes de contas"
-    }
+  "dashboardCustomizer": {
+    "alwaysVisible": "Always visible",
+    "ariaLabel": "Customize dashboard layout",
+    "button": "Customize",
+    "description": "Show or hide dashboard widgets. Drag widgets on the dashboard to reorder them.",
+    "reorderDescription": "To change widget order, drag and drop widgets directly on your dashboard. Use your mouse or touch to grab the drag handle (⋮⋮) on each widget card.",
+    "reorderTitle": "Reorder Widgets",
+    "resetButton": "Reset to Defaults",
+    "title": "Customize Dashboard",
+    "toggleVisibility": "Toggle {name} visibility",
+    "widgetVisibility": "Widget Visibility",
+    "widgetsVisible": "{visible} of {total} widgets visible"
   },
-  "tooltip": {
-    "ariaLabel": "Mais informações",
-    "learnMore": "Saiba mais →"
-  },
-  "footer": {
-    "tagline": "Orçamentação premium com uma atualização única.",
-    "links": {
-      "login": "Fazer login",
-      "signup": "Começar teste",
-      "upgrade": "Atualizar",
-      "settings": "Configurações"
-    },
-    "copyright": "© {year} {brandName}"
-  },
-  "dialog": {
-    "confirm": "Confirmar",
-    "cancel": "Cancelar",
-    "processing": "Processando...",
-    "finalConfirmation": "Confirmação Final:",
-    "typeToConfirm": "Digite {text} para confirmar esta ação."
-  },
-  "sidebar": {
-    "appTitle": "Budget App",
-    "appSubtitle": "Finanças Premium",
-    "search": "Pesquisar...",
-    "shortcuts": "Atalhos",
-    "navigation": {
-      "dashboard": "Painel",
-      "transactions": "Transações",
-      "scanReceipt": "Digitalizar Recibo",
-      "categories": "Categorias",
-      "budgets": "Orçamentos",
-      "subscriptions": "Assinaturas",
-      "loans": "Empréstimos",
-      "investments": "Investimentos",
-      "futurePlans": "Planos Futuros",
-      "retirement": "Aposentadoria",
-      "reports": "Relatórios"
-    },
-    "actions": {
-      "importCsv": "Importar CSV",
-      "settings": "Configurações",
-      "showLess": "Mostrar Menos",
-      "showAllItems": "Mostrar Todos os Itens"
-    }
-  },
-  "onboarding": {
-    "skipTour": "Saltar tour",
-    "stepCounter": "Passo {current} de {total}",
-    "dontShowAgain": "Não mostrar este tour novamente",
-    "quickTip": "💡 Dica Rápida",
-    "navigation": {
-      "previous": "Anterior",
-      "next": "Próximo",
-      "getStarted": "Começar",
-      "startTour": "Iniciar Tour"
-    },
-    "steps": {
-      "welcome": {
-        "title": "👋 Bem-vindo ao Budget App!",
-        "description": "Vamos fazer um tour rápido para ajudá-lo a começar a gerenciar suas finanças. Não vai demorar muito!"
+  "debtAnalysis": {
+    "cards": {
+      "avgRate": {
+        "subtitle": "Weighted average",
+        "title": "Avg Interest Rate"
       },
-      "import": {
-        "title": "📥 Importar Suas Transações",
-        "description": "Comece importando suas transações bancárias a partir de um arquivo CSV. Suportamos BMO, Home Trust e muitos outros bancos. O aplicativo irá categorizar automaticamente suas transações!"
+      "debtFreeDate": {
+        "subtitle": "Estimated payoff",
+        "title": "Debt-Free Date"
       },
-      "categorize": {
-        "title": "🏷️ Categorizar & Organizar",
-        "description": "Revise e ajuste as categorias das transações. Nossa categorização inteligente aprende com suas correções para melhorar ao longo do tempo. Utilize ações em massa para categorizar várias transações de uma vez!"
+      "monthlyPayment": {
+        "subtitle": "Total monthly obligations",
+        "title": "Monthly Payment"
       },
-      "budgets": {
-        "title": "🎯 Defina Seus Orçamentos",
-        "description": "Crie orçamentos para diferentes categorias de gastos. Acompanhe seu progresso ao longo do mês e receba alertas quando se aproximar dos seus limites."
-      },
-      "reports": {
-        "title": "📊 Veja Relatórios & Insights",
-        "description": "Visualize seus padrões de gastos, acompanhe seu patrimônio líquido e tome decisões financeiras informadas. Seu painel atualiza automaticamente com cada transação!"
+      "totalDebt": {
+        "subtitle": "Across {count} active loans",
+        "title": "Total Debt"
       }
     },
-    "tips": {
-      "import": "Arraste e solte seu arquivo CSV ou clique para procurar. Detectamos automaticamente os formatos BMO e Home Trust!",
-      "categorize": "Utilize o botão de categorização rápida ou selecione várias transações para categorização em massa.",
-      "budgets": "Defina orçamentos realistas e nós alertaremos se você estiver a caminho de gastar demais."
+    "charts": {
+      "byType": {
+        "description": "Distribution of debt across loan types",
+        "title": "Debt by Type"
+      },
+      "projection": {
+        "description": "Expected debt reduction over the next year",
+        "expectedReduction": "Expected reduction: {amount} over 12 months",
+        "title": "12-Month Payoff Projection"
+      }
+    },
+    "comparison": {
+      "description": "Side-by-side comparison of your active loans",
+      "headers": {
+        "balance": "Balance",
+        "interestRate": "Interest Rate",
+        "loan": "Loan",
+        "monthlyPayment": "Monthly Payment",
+        "percentOfTotal": "% of Total Debt"
+      },
+      "title": "Loan Comparison",
+      "total": "Total"
+    },
+    "empty": {
+      "addFirstLoan": "Add Your First Loan",
+      "description": "You don't have any active loans. Add a loan to see debt analytics.",
+      "title": "No Debt to Analyze"
+    },
+    "subtitle": "Comprehensive view of your loans and obligations",
+    "title": "Debt Analysis",
+    "viewAllLoans": "View All Loans"
+  },
+  "dialog": {
+    "cancel": "Cancelar",
+    "confirm": "Confirmar",
+    "finalConfirmation": "Confirmação Final:",
+    "processing": "Processando...",
+    "typeToConfirm": "Digite {text} para confirmar esta ação."
+  },
+  "draggableWidget": {
+    "dragToReorder": "Drag to reorder widget"
+  },
+  "emptyStates": {
+    "budgets": {
+      "description": "Create budgets to track spending in different categories and achieve your financial goals.",
+      "heading": "No Budgets Created",
+      "primaryCta": "Create Your First Budget"
+    },
+    "categories": {
+      "description": "Create custom categories to organize your transactions beyond the default ones.",
+      "heading": "No Custom Categories",
+      "primaryCta": "Add Category"
+    },
+    "dashboard": {
+      "description": "Get started by importing your bank transactions or adding accounts manually to see your financial overview.",
+      "heading": "Welcome to Your Budget App!",
+      "primaryCta": "Import CSV",
+      "secondaryCta": "Add Transaction"
+    },
+    "futurePlans": {
+      "description": "Set financial goals like buying a house, saving for education, or planning a vacation.",
+      "heading": "No Future Plans",
+      "primaryCta": "Create a Goal"
+    },
+    "investments": {
+      "description": "Track your investment accounts and holdings to monitor portfolio performance and net worth.",
+      "heading": "No Investments Tracked",
+      "primaryCta": "Add Investment Account"
+    },
+    "loans": {
+      "description": "Track your loans, mortgages, and debts to visualize payoff progress and plan payments.",
+      "heading": "No Loans Tracked",
+      "primaryCta": "Add Your First Loan"
+    },
+    "reports": {
+      "description": "Add transactions and budgets to generate insightful reports about your spending patterns and trends.",
+      "heading": "No Data to Report",
+      "primaryCta": "Add Transactions",
+      "secondaryCta": "Import CSV"
+    },
+    "retirement": {
+      "description": "Plan for retirement by tracking accounts, estimating needs, and visualizing your retirement timeline.",
+      "heading": "No Retirement Plans",
+      "primaryCta": "Start Planning"
+    },
+    "transactions": {
+      "description": "Start tracking your spending by adding your first transaction. You can add manually or import from a CSV file.",
+      "heading": "No Transactions Yet",
+      "primaryCta": "Add Transaction",
+      "secondaryCta": "Import CSV"
     }
   },
+  "errorRecovery": {
+    "aiAnalysis": "AI Analysis:",
+    "closeModal": "Close modal",
+    "footer": {
+      "close": "Close",
+      "needHelp": "Need more help?",
+      "viewGuide": "View troubleshooting guide"
+    },
+    "recovery": {
+      "canRecover": "Good news! We found {count} {count, plural, =1 {way} other {ways}} to recover from this error.",
+      "cannotRecover": "Recovery not possible. You'll need to re-export the file from your bank or try a different format.",
+      "optionsTitle": "Recovery Options"
+    },
+    "subtitle": "Don't worry! We can help you fix this.",
+    "suggestions": {
+      "autoFix": "AUTO-FIX",
+      "autoFixButton": "Auto-Fix",
+      "confidence": "{percent}% confidence",
+      "fixing": "Fixing...",
+      "learnMore": "Learn More",
+      "technicalDetails": "Technical Details"
+    },
+    "summary": {
+      "category": "Category: {category}",
+      "title": "Error Summary"
+    },
+    "technical": {
+      "canRecover": "Can Recover:",
+      "errorCategory": "Error Category:",
+      "no": "No",
+      "severity": "Severity:",
+      "suggestions": "Suggestions:",
+      "title": "Advanced Technical Details",
+      "yes": "Yes"
+    },
+    "title": "Import Failed"
+  },
+  "exportDialog": {
+    "buttons": {
+      "cancel": "Cancel",
+      "done": "Done!",
+      "download": "Download",
+      "export": "Export Data"
+    },
+    "complete": {
+      "download": "Your file is ready to download",
+      "success": "Export complete! Check your downloads folder."
+    },
+    "dataSummary": {
+      "accounts": "Accounts",
+      "estimatedSize": "Est. Size",
+      "title": "Data Summary",
+      "transactions": "Transactions"
+    },
+    "exporting": {
+      "pleaseWait": "Please wait, this may take a moment",
+      "title": "Exporting..."
+    },
+    "format": {
+      "budget": {
+        "description": "Complete backup including all data",
+        "label": ".budget file"
+      },
+      "csv": {
+        "description": "Spreadsheet-compatible format",
+        "label": "CSV file"
+      },
+      "json": {
+        "description": "Developer-friendly format",
+        "label": "JSON file"
+      },
+      "label": "Export Format"
+    },
+    "options": {
+      "encrypt": {
+        "description": "Protect your data with AES-256 encryption",
+        "label": "Encrypt with Password"
+      },
+      "includeReceipts": {
+        "description": "Attach receipt images (increases file size)",
+        "label": "Include Receipts"
+      }
+    },
+    "password": {
+      "confirm": "Confirm Password",
+      "confirmPlaceholder": "Confirm password",
+      "hint": "Password Hint (Optional)",
+      "hintNote": "This hint will be stored unencrypted in the file",
+      "hintPlaceholder": "A hint to help you remember",
+      "label": "Password",
+      "minLength": "Password must be at least 8 characters",
+      "mismatch": "Passwords do not match",
+      "placeholder": "Enter password (min 8 characters)",
+      "required": "Password is required for encryption"
+    },
+    "subtitle": "Download your budget data",
+    "title": "Export Data"
+  },
+  "filters": {
+    "account": "Account",
+    "allAccounts": "All accounts",
+    "allCategories": "All categories",
+    "allTypes": "All types",
+    "apply": "Apply filters",
+    "category": "Category",
+    "clearFilters": "Clear filters",
+    "dateRange": "Date range",
+    "expense": "Expense",
+    "income": "Income",
+    "search": "Search transactions...",
+    "type": "Type"
+  },
+  "footer": {
+    "copyright": "© {year} {brandName}",
+    "links": {
+      "login": "Fazer login",
+      "settings": "Configurações",
+      "signup": "Começar teste",
+      "upgrade": "Atualizar"
+    },
+    "tagline": "Orçamentação premium com uma atualização única."
+  },
+  "healthScore": {
+    "ariaLabel": "Financial Health Score: {score} out of 100. {interpretation}",
+    "emptyState": {
+      "line1": "Add transactions to see your",
+      "line2": "Financial Health Score"
+    },
+    "grade": "Grade: {grade}",
+    "missingFactors": "{count, plural, =1 {1 factor missing} other {# factors missing}}",
+    "title": "Financial Health"
+  },
+  "importDialog": {
+    "buttons": {
+      "back": "Back",
+      "cancel": "Cancel",
+      "done": "Done",
+      "import": "Import Data"
+    },
+    "complete": {
+      "itemsImported": "{count} items imported successfully",
+      "success": "Import Complete!",
+      "withIssues": "Import Completed with Issues"
+    },
+    "conflicts": {
+      "existing": "{count} existing",
+      "handleLabel": "Handle Conflicts",
+      "overwrite": {
+        "description": "Replace with imported",
+        "label": "Overwrite"
+      },
+      "rename": {
+        "description": "Import as new entries",
+        "label": "Create new"
+      },
+      "skip": {
+        "description": "Keep current data",
+        "label": "Skip existing"
+      },
+      "title": "Conflicts Found"
+    },
+    "encryption": {
+      "decrypt": "Decrypt & Continue",
+      "encrypted": "This file is encrypted",
+      "enterPassword": "Enter password",
+      "hint": "Hint: {hint}",
+      "password": "Password"
+    },
+    "importing": {
+      "pleaseWait": "Please wait, this may take a moment",
+      "title": "Importing your data..."
+    },
+    "preview": {
+      "dataToImport": "Data to Import",
+      "exported": "Exported",
+      "fileInfo": "File Information",
+      "version": "Version"
+    },
+    "selectFile": {
+      "dragDrop": "or drag and drop here",
+      "label": "Click to select a .budget file"
+    },
+    "subtitle": "Restore from .budget file",
+    "title": "Import Data"
+  },
+  "investmentAccountModal": {
+    "buttons": {
+      "cancel": "Cancel",
+      "create": "Create Account",
+      "saving": "Saving...",
+      "update": "Update Account"
+    },
+    "closeModal": "Close modal",
+    "errors": {
+      "saveFailed": "Failed to save account"
+    },
+    "fields": {
+      "accountNumber": {
+        "label": "Account Number (Optional)",
+        "placeholder": "e.g., Last 4 digits: 1234"
+      },
+      "institution": {
+        "label": "Financial Institution (Optional)",
+        "placeholder": "e.g., Questrade, Wealthsimple, TD Direct"
+      },
+      "name": {
+        "label": "Account Name",
+        "placeholder": "e.g., My RRSP, TFSA Savings, Company Stock"
+      },
+      "type": {
+        "descriptions": {
+          "Company shares": "Employee stock purchase or stock options",
+          "Non-registered": "Taxable investment account",
+          "RRSP": "Registered Retirement Savings Plan - Tax-deferred growth",
+          "TFSA": "Tax-Free Savings Account - Tax-free growth and withdrawals"
+        },
+        "label": "Account Type"
+      }
+    },
+    "title": {
+      "add": "Add Investment Account",
+      "edit": "Edit Investment Account"
+    },
+    "validation": {
+      "nameRequired": "Please enter an account name"
+    }
+  },
+  "investmentCharts": {
+    "emptyState": "No holdings to visualize. Add holdings to see charts.",
+    "legend": {
+      "gain": "Gain",
+      "loss": "Loss"
+    },
+    "tableHeaders": {
+      "allocation": "Allocation",
+      "costBasis": "Cost Basis",
+      "currentValue": "Current Value",
+      "gainLoss": "Gain/Loss",
+      "percentReturn": "% Return",
+      "symbol": "Symbol",
+      "total": "Total"
+    },
+    "titles": {
+      "accountTypeAllocation": "Allocation by Account Type",
+      "gainLoss": "Gain/Loss by Holding",
+      "performanceSummary": "Performance Summary",
+      "portfolioAllocation": "Portfolio Allocation by Holding"
+    },
+    "tooltip": {
+      "costBasis": "Cost Basis",
+      "currentValue": "Current Value",
+      "percentOfPortfolio": "{percent}% of portfolio"
+    }
+  },
+  "lanSync": {
+    "description": "Sync your budget data across devices on your local network",
+    "device": {
+      "connect": "Connect",
+      "connected": "Connected",
+      "disconnect": "Disconnect",
+      "removeDevice": "Remove Device",
+      "sync": "Sync",
+      "syncing": "Syncing..."
+    },
+    "disabled": "Disabled",
+    "enabled": "Enabled",
+    "howItWorks": {
+      "step1": {
+        "description": "Scan a QR code or enter connection details to pair devices on the same network",
+        "title": "Pair Devices"
+      },
+      "step2": {
+        "description": "Data is encrypted end-to-end and syncs directly between devices - no cloud required",
+        "title": "Sync Securely"
+      },
+      "step3": {
+        "description": "Changes sync automatically when devices are connected on the same network",
+        "title": "Automatic Updates"
+      },
+      "title": "How LAN Sync Works"
+    },
+    "pairedDevices": {
+      "addDevice": "Add Device",
+      "addFirstDevice": "Add Your First Device",
+      "deviceCount": "{count, plural, =1 {1 device paired} other {# devices paired}}",
+      "emptyDescription": "Pair a device to start syncing your budget data",
+      "emptyTitle": "No devices paired",
+      "noDevices": "No devices paired yet",
+      "title": "Paired Devices"
+    },
+    "removeDialog": {
+      "cancel": "Cancel",
+      "description": "Are you sure you want to remove \"{deviceName}\"? This will unpair the device and you'll need to pair again to sync data.",
+      "remove": "Remove",
+      "title": "Remove Device"
+    },
+    "syncAll": "Sync All",
+    "time": {
+      "daysAgo": "{count, plural, =1 {1 day ago} other {# days ago}}",
+      "hoursAgo": "{count, plural, =1 {1 hour ago} other {# hours ago}}",
+      "justNow": "Just now",
+      "lastSync": "Last sync: {time}",
+      "minutesAgo": "{count, plural, =1 {1 minute ago} other {# minutes ago}}",
+      "neverSynced": "Never synced"
+    },
+    "title": "LAN Sync"
+  },
   "landing": {
+    "accessibility": {
+      "badges": {
+        "keyboardFirst": "Teclado primeiro",
+        "largeTouchTargets": "Grandes alvos de toque",
+        "seniorsMode": "Modo Seniores"
+      },
+      "buttons": {
+        "openApp": "Abrir o aplicativo",
+        "settings": "Configurações de acessibilidade"
+      },
+      "description": "O Modo Seniores fornece navegação simplificada e alvos de toque maiores. Atalhos de teclado, estados de foco e contraste claro ajudam todos a se moverem mais rapidamente.",
+      "title": "Acessível por padrão"
+    },
     "brand": {
       "name": "BudgetPro",
       "product": "Budget App"
     },
-    "hero": {
-      "badge": "Privacidade em Primeiro • Apenas Local • Zero Rastreio",
-      "headline": "Domine Seu Dinheiro sem Vender Seus Dados.",
-      "subhead": "O poder de uma planilha. A simplicidade de um aplicativo. Experimente a clareza financeira com o único aplicativo de orçamento que garante que seus dados nunca saem do seu dispositivo.",
-      "primaryCta": {
-        "label": "Iniciar Protocolo Local (Gratuito)",
-        "href": "/budget-app/auth/signup"
-      },
-      "secondaryCta": {
-        "label": "Fazer login",
-        "href": "/budget-app/auth/login"
-      },
-      "finePrint": "Nenhuma credencial bancária necessária. Nenhuma conta necessária para o modo local."
-    },
-    "trust": {
-      "0": {
-        "title": "Seu Dispositivo, Seus Dados",
-        "description": "Os dados permanecem no IndexedDB do seu navegador. Nós literalmente não conseguimos vê-los."
-      },
-      "1": {
-        "title": "Poder de Planilha",
-        "description": "Edição em massa, pivotar e analisar como um profissional sem dores de cabeça com fórmulas."
-      },
-      "2": {
-        "title": "Velocidade Offline",
-        "description": "Zero latência. Funciona no topo de uma montanha ou em um túnel de metrô."
-      },
-      "3": {
-        "title": "Rituais Manuais",
-        "description": "O assistente de importação torna a Revisão Financeira de Sexta-feira um hábito satisfatório."
-      }
-    },
-    "outcomes": {
-      "0": {
-        "title": "Pare de Lutar com Agregadores",
-        "description": "Chega de conexões quebradas ou loops de re-autenticação. Você controla a entrada de dados."
-      },
-      "1": {
-        "title": "Privacidade por Design",
-        "description": "Nós não vendemos seus dados porque não os temos. Ponto final."
-      },
-      "2": {
-        "title": "Planejamento à Prova de Futuro",
-        "description": "Modele aposentadoria, pagamentos de empréstimos e objetivos de poupança em uma única visão integrada."
-      },
-      "3": {
-        "title": "Eliminador de Assinaturas",
-        "description": "Identifique drenos recorrentes na sua carteira que outros aplicativos perdem."
-      }
-    },
-    "features": {
-      "0": {
-        "title": "Painel Local",
-        "description": "Patrimônio líquido, fluxo de caixa e divisão por categorias. Tempos de carregamento instantâneos.",
-        "href": "/budget-app"
-      },
-      "1": {
-        "title": "Assistente de Importação",
-        "description": "Mapper CSV inteligente para BMO, Home Trust e formatos personalizados.",
-        "href": "/budget-app/import"
-      },
-      "2": {
-        "title": "OCR de Recibos",
-        "description": "Digitalize recibos localmente com Tesseract.js. Sem processamento na nuvem.",
-        "href": "/budget-app/ocr"
-      },
-      "3": {
-        "title": "Orçamentos por Categoria",
-        "description": "Orçamentação baseada em zero ou rollover com controle granular por categoria.",
-        "href": "/budget-app/budgets"
-      },
-      "4": {
-        "title": "Calculadora de Aposentadoria",
-        "description": "Projete sua data de liberdade com visualizações de juros compostos.",
-        "href": "/budget-app/planning/retirement"
-      },
-      "5": {
-        "title": "Escudo de Privacidade",
-        "description": "Criptografia opcional do lado do cliente para uma camada extra de segurança.",
-        "href": "/budget-app/settings"
-      }
-    },
-    "howItWorks": {
-      "0": {
-        "title": "Importar",
-        "description": "Arraste e solte CSVs ou digitalize recibos. A IA mapeia as colunas localmente."
-      },
-      "1": {
-        "title": "Rever",
-        "description": "Categorização rápida com regras inteligentes e ações em massa."
-      },
-      "2": {
-        "title": "Planejar",
-        "description": "Atribua a cada real uma função e preveja seu patrimônio líquido futuro."
-      }
-    },
-    "pricing": {
-      "eyebrow": "Preços Justos",
-      "title": "Local é Gratuito. Sincronização é Pro.",
-      "description": "Comece com o poderoso Protocolo Local. Atualize mais tarde se precisar de sincronização entre dispositivos.",
-      "priceLabel": "Gratuito Para Sempre",
-      "cta": {
-        "label": "Iniciar Protocolo Local",
-        "href": "/budget-app/auth/signup"
-      },
-      "secondary": {
-        "label": "Ver Funcionalidades Pro",
-        "href": "#pricing"
-      },
-      "guarantee": "Nenhum cartão de crédito necessário para o Protocolo Local."
-    },
-    "faq": {
-      "0": {
-        "q": "Meus dados são realmente privados?",
-        "a": "Sim. No Protocolo Local, os dados nunca saem do seu dispositivo. Eles vivem no IndexedDB dentro do seu navegador."
-      },
-      "1": {
-        "q": "Como faço backup dos meus dados?",
-        "a": "Você pode exportar um backup completo em JSON a qualquer momento. Também recomendamos exportações regulares em CSV."
-      },
-      "2": {
-        "q": "O que é 'Sync' Pro?",
-        "a": "Em breve: Uma assinatura opcional para sincronizar dados criptografados entre dispositivos via Supabase."
-      },
-      "3": {
-        "q": "Você se conecta a bancos?",
-        "a": "Não. Acreditamos que a importação manual é mais segura, mais confiável e constrói uma melhor consciência financeira."
-      }
-    },
-    "security": {
-      "title": "Privacidade em primeiro lugar por design",
-      "description": "O Budget App armazena seus dados localmente (pronto para offline) e oferece controles para funcionalidades de IA, exportação e exclusão.",
-      "buttons": {
-        "privacy": "Privacidade & configurações",
-        "offline": "Suporte offline"
-      },
-      "cards": {
-        "localStorage": {
-          "title": "Armazenamento local",
-          "description": "Seus dados orçamentários são armazenados no seu navegador (IndexedDB) para que o aplicativo permaneça rápido e utilizável offline."
-        },
-        "encryption": {
-          "title": "Suporte à criptografia",
-          "description": "O aplicativo inclui uma camada de criptografia para proteger registros orçamentários sensíveis quando ativada."
-        },
-        "aiControls": {
-          "title": "Controle de funcionalidades de IA",
-          "description": "Ative funcionalidades com IA (como detecção de anomalias) e gerencie o acesso ao chatbot nas configurações."
-        },
-        "exportDelete": {
-          "title": "Exportar & excluir",
-          "description": "Exporte seus dados e configurações de privacidade, ou exclua dados locais diretamente do aplicativo."
-        }
-      }
-    },
     "comparison": {
-      "headers": {
-        "feature": "Funcionalidade",
-        "local": "BudgetPro Local",
-        "sync": "BudgetPro Sync (Pro)",
-        "cloud": "Aplicativo Típico na Nuvem"
-      },
-      "dataPrivacy": {
-        "feature": "Privacidade dos Dados",
-        "local": "100% Privado (Local)",
-        "sync": "Criptografado de Ponta a Ponta",
-        "cloud": "Visível por Funcionários"
+      "bankConnections": {
+        "cloud": "Agregação Obrigatória",
+        "feature": "Conexões Bancárias",
+        "local": "CSV / Apenas Manual",
+        "sync": "Opcional (Criptografado)"
       },
       "cost": {
+        "cloud": "Assinatura de R$100+/ano",
         "feature": "Custo",
         "local": "Gratuito Para Sempre",
-        "sync": "Atualização Única",
-        "cloud": "Assinatura de R$100+/ano"
+        "sync": "Atualização Única"
+      },
+      "dataPrivacy": {
+        "cloud": "Visível por Funcionários",
+        "feature": "Privacidade dos Dados",
+        "local": "100% Privado (Local)",
+        "sync": "Criptografado de Ponta a Ponta"
+      },
+      "headers": {
+        "cloud": "Aplicativo Típico na Nuvem",
+        "feature": "Funcionalidade",
+        "local": "BudgetPro Local",
+        "sync": "BudgetPro Sync (Pro)"
       },
       "offlineMode": {
         "feature": "Modo Offline"
       },
-      "bankConnections": {
-        "feature": "Conexões Bancárias",
-        "local": "CSV / Apenas Manual",
-        "sync": "Opcional (Criptografado)",
-        "cloud": "Agregação Obrigatória"
-      },
       "storageLocation": {
+        "cloud": "O Banco de Dados Deles",
         "feature": "Local de Armazenamento",
         "local": "Seu Dispositivo",
-        "sync": "Nuvem Zero-Knowledge",
-        "cloud": "O Banco de Dados Deles"
+        "sync": "Nuvem Zero-Knowledge"
       }
     },
-    "socialProof": {
-      "title": "Acabamento Premium, integrado",
-      "description": "Os detalhes que fazem o orçamento funcionar: integração, atalhos, navegação móvel e desempenho pronto para offline.",
-      "features": {
-        "onboarding": {
-          "title": "Tour de integração",
-          "description": "Um tour guiado ajuda novos usuários a alcançar valor rapidamente."
-        },
-        "shortcuts": {
-          "title": "Atalhos de teclado",
-          "description": "Mova-se rapidamente com pesquisa e atalhos de ação integrados na interface."
-        },
-        "mobileUx": {
-          "title": "UX móvel em primeiro lugar",
-          "description": "Navegação inferior e layouts responsivos que parecem nativos."
-        },
-        "pwaInstall": {
-          "title": "Instalação PWA",
-          "description": "Instale como um aplicativo e continue mesmo com internet intermitente."
-        }
+    "faq": {
+      "0": {
+        "a": "Sim. No Protocolo Local, os dados nunca saem do seu dispositivo. Eles vivem no IndexedDB dentro do seu navegador.",
+        "q": "Meus dados são realmente privados?"
+      },
+      "1": {
+        "a": "Você pode exportar um backup completo em JSON a qualquer momento. Também recomendamos exportações regulares em CSV.",
+        "q": "Como faço backup dos meus dados?"
+      },
+      "2": {
+        "a": "Em breve: Uma assinatura opcional para sincronizar dados criptografados entre dispositivos via Supabase.",
+        "q": "O que é 'Sync' Pro?"
+      },
+      "3": {
+        "a": "Não. Acreditamos que a importação manual é mais segura, mais confiável e constrói uma melhor consciência financeira.",
+        "q": "Você se conecta a bancos?"
       }
     },
-    "pricingSection": {
-      "recommended": "Recomendado",
-      "productName": "Protocolo Local",
-      "productDescription": "A experiência completa de orçamento, funcionando inteiramente no seu dispositivo.",
-      "whyChoose": "Por que escolher o Protocolo Local?",
-      "whyChooseDescription": "Veja como nos comparamos com os gigantes da nuvem.",
-      "features": "Inclui transações ilimitadas, contas, orçamentos e capacidades completas de backup local."
+    "faqSection": {
+      "description": "Respostas simples a perguntas comuns sobre testes, preços e acesso.",
+      "title": "FAQ"
+    },
+    "features": {
+      "0": {
+        "description": "Patrimônio líquido, fluxo de caixa e divisão por categorias. Tempos de carregamento instantâneos.",
+        "href": "/budget-app",
+        "title": "Painel Local"
+      },
+      "1": {
+        "description": "Mapper CSV inteligente para BMO, Home Trust e formatos personalizados.",
+        "href": "/budget-app/import",
+        "title": "Assistente de Importação"
+      },
+      "2": {
+        "description": "Digitalize recibos localmente com Tesseract.js. Sem processamento na nuvem.",
+        "href": "/budget-app/ocr",
+        "title": "OCR de Recibos"
+      },
+      "3": {
+        "description": "Orçamentação baseada em zero ou rollover com controle granular por categoria.",
+        "href": "/budget-app/budgets",
+        "title": "Orçamentos por Categoria"
+      },
+      "4": {
+        "description": "Projete sua data de liberdade com visualizações de juros compostos.",
+        "href": "/budget-app/planning/retirement",
+        "title": "Calculadora de Aposentadoria"
+      },
+      "5": {
+        "description": "Criptografia opcional do lado do cliente para uma camada extra de segurança.",
+        "href": "/budget-app/settings",
+        "title": "Escudo de Privacidade"
+      }
+    },
+    "featuresDeepDive": {
+      "cta": "Iniciar teste gratuito",
+      "description": "Pare de lutar com fórmulas quebradas. Obtenha a flexibilidade do controle manual com a velocidade de um aplicativo moderno.",
+      "explore": "Explorar",
+      "heading1": "Poder de Planilha.",
+      "heading2": "Simplicidade do Aplicativo."
+    },
+    "hero": {
+      "badge": "Privacidade em Primeiro • Apenas Local • Zero Rastreio",
+      "finePrint": "Nenhuma credencial bancária necessária. Nenhuma conta necessária para o modo local.",
+      "headline": "Domine Seu Dinheiro sem Vender Seus Dados.",
+      "primaryCta": {
+        "href": "/budget-app/auth/signup",
+        "label": "Iniciar Protocolo Local (Gratuito)"
+      },
+      "secondaryCta": {
+        "href": "/budget-app/auth/login",
+        "label": "Fazer login"
+      },
+      "subhead": "O poder de uma planilha. A simplicidade de um aplicativo. Experimente a clareza financeira com o único aplicativo de orçamento que garante que seus dados nunca saem do seu dispositivo."
     },
     "heroSection": {
-      "cta": {
-        "heading": "Construído para clareza, não para caos.",
-        "viewPricing": "Ver preços"
-      },
       "badges": {
         "noSubscriptions": "Sem assinaturas",
         "offlineReady": "Pronto para offline",
         "seniorsMode": "Modo Seniores"
       },
-      "preview": {
-        "livePreview": "Pré-visualização ao vivo",
-        "recentTransactions": "Transações recentes",
-        "categoryBudgets": "Orçamentos por categoria",
-        "recurring": "Recorrente"
+      "cta": {
+        "heading": "Construído para clareza, não para caos.",
+        "viewPricing": "Ver preços"
       },
       "modes": {
-        "dashboard": "Painel",
         "budgets": "Orçamentos",
+        "dashboard": "Painel",
         "subscriptions": "Assinaturas"
-      }
-    },
-    "featuresDeepDive": {
-      "heading1": "Poder de Planilha.",
-      "heading2": "Simplicidade do Aplicativo.",
-      "description": "Pare de lutar com fórmulas quebradas. Obtenha a flexibilidade do controle manual com a velocidade de um aplicativo moderno.",
-      "cta": "Iniciar teste gratuito",
-      "explore": "Explorar"
-    },
-    "accessibility": {
-      "title": "Acessível por padrão",
-      "description": "O Modo Seniores fornece navegação simplificada e alvos de toque maiores. Atalhos de teclado, estados de foco e contraste claro ajudam todos a se moverem mais rapidamente.",
-      "badges": {
-        "seniorsMode": "Modo Seniores",
-        "largeTouchTargets": "Grandes alvos de toque",
-        "keyboardFirst": "Teclado primeiro"
       },
-      "buttons": {
-        "openApp": "Abrir o aplicativo",
-        "settings": "Configurações de acessibilidade"
+      "preview": {
+        "categoryBudgets": "Orçamentos por categoria",
+        "livePreview": "Pré-visualização ao vivo",
+        "recentTransactions": "Transações recentes",
+        "recurring": "Recorrente"
       }
     },
-    "faqSection": {
-      "title": "FAQ",
-      "description": "Respostas simples a perguntas comuns sobre testes, preços e acesso."
-    },
-    "outcomesSection": {
-      "title": "Construído para a vida real, não para planilhas",
-      "description": "A maioria das aplicações de orçamento faz você fazer o trabalho. O BudgetPro é projetado para reduzir a fricção enquanto mantém você no controle."
+    "howItWorks": {
+      "0": {
+        "description": "Arraste e solte CSVs ou digitalize recibos. A IA mapeia as colunas localmente.",
+        "title": "Importar"
+      },
+      "1": {
+        "description": "Categorização rápida com regras inteligentes e ações em massa.",
+        "title": "Rever"
+      },
+      "2": {
+        "description": "Atribua a cada real uma função e preveja seu patrimônio líquido futuro.",
+        "title": "Planejar"
+      }
     },
     "howItWorksSection": {
-      "title": "Como funciona",
-      "description": "Um fluxo de trabalho que o leva à clareza rapidamente, sem prendê-lo a um sistema complicado."
-    },
-    "nav": {
-      "tagline": "Orçamentação Premium"
+      "description": "Um fluxo de trabalho que o leva à clareza rapidamente, sem prendê-lo a um sistema complicado.",
+      "title": "Como funciona"
     },
     "marquee": {
       "logos": [
@@ -440,6 +880,814 @@
         "Offline",
         "Modo Seniores"
       ]
+    },
+    "nav": {
+      "tagline": "Orçamentação Premium"
+    },
+    "outcomes": {
+      "0": {
+        "description": "Chega de conexões quebradas ou loops de re-autenticação. Você controla a entrada de dados.",
+        "title": "Pare de Lutar com Agregadores"
+      },
+      "1": {
+        "description": "Nós não vendemos seus dados porque não os temos. Ponto final.",
+        "title": "Privacidade por Design"
+      },
+      "2": {
+        "description": "Modele aposentadoria, pagamentos de empréstimos e objetivos de poupança em uma única visão integrada.",
+        "title": "Planejamento à Prova de Futuro"
+      },
+      "3": {
+        "description": "Identifique drenos recorrentes na sua carteira que outros aplicativos perdem.",
+        "title": "Eliminador de Assinaturas"
+      }
+    },
+    "outcomesSection": {
+      "description": "A maioria das aplicações de orçamento faz você fazer o trabalho. O BudgetPro é projetado para reduzir a fricção enquanto mantém você no controle.",
+      "title": "Construído para a vida real, não para planilhas"
+    },
+    "pricing": {
+      "cta": {
+        "href": "/budget-app/auth/signup",
+        "label": "Iniciar Protocolo Local"
+      },
+      "description": "Comece com o poderoso Protocolo Local. Atualize mais tarde se precisar de sincronização entre dispositivos.",
+      "eyebrow": "Preços Justos",
+      "guarantee": "Nenhum cartão de crédito necessário para o Protocolo Local.",
+      "priceLabel": "Gratuito Para Sempre",
+      "secondary": {
+        "href": "#pricing",
+        "label": "Ver Funcionalidades Pro"
+      },
+      "title": "Local é Gratuito. Sincronização é Pro."
+    },
+    "pricingSection": {
+      "features": "Inclui transações ilimitadas, contas, orçamentos e capacidades completas de backup local.",
+      "productDescription": "A experiência completa de orçamento, funcionando inteiramente no seu dispositivo.",
+      "productName": "Protocolo Local",
+      "recommended": "Recomendado",
+      "whyChoose": "Por que escolher o Protocolo Local?",
+      "whyChooseDescription": "Veja como nos comparamos com os gigantes da nuvem."
+    },
+    "security": {
+      "buttons": {
+        "offline": "Suporte offline",
+        "privacy": "Privacidade & configurações"
+      },
+      "cards": {
+        "aiControls": {
+          "description": "Ative funcionalidades com IA (como detecção de anomalias) e gerencie o acesso ao chatbot nas configurações.",
+          "title": "Controle de funcionalidades de IA"
+        },
+        "encryption": {
+          "description": "O aplicativo inclui uma camada de criptografia para proteger registros orçamentários sensíveis quando ativada.",
+          "title": "Suporte à criptografia"
+        },
+        "exportDelete": {
+          "description": "Exporte seus dados e configurações de privacidade, ou exclua dados locais diretamente do aplicativo.",
+          "title": "Exportar & excluir"
+        },
+        "localStorage": {
+          "description": "Seus dados orçamentários são armazenados no seu navegador (IndexedDB) para que o aplicativo permaneça rápido e utilizável offline.",
+          "title": "Armazenamento local"
+        }
+      },
+      "description": "O Budget App armazena seus dados localmente (pronto para offline) e oferece controles para funcionalidades de IA, exportação e exclusão.",
+      "title": "Privacidade em primeiro lugar por design"
+    },
+    "socialProof": {
+      "description": "Os detalhes que fazem o orçamento funcionar: integração, atalhos, navegação móvel e desempenho pronto para offline.",
+      "features": {
+        "mobileUx": {
+          "description": "Navegação inferior e layouts responsivos que parecem nativos.",
+          "title": "UX móvel em primeiro lugar"
+        },
+        "onboarding": {
+          "description": "Um tour guiado ajuda novos usuários a alcançar valor rapidamente.",
+          "title": "Tour de integração"
+        },
+        "pwaInstall": {
+          "description": "Instale como um aplicativo e continue mesmo com internet intermitente.",
+          "title": "Instalação PWA"
+        },
+        "shortcuts": {
+          "description": "Mova-se rapidamente com pesquisa e atalhos de ação integrados na interface.",
+          "title": "Atalhos de teclado"
+        }
+      },
+      "title": "Acabamento Premium, integrado"
+    },
+    "trust": {
+      "0": {
+        "description": "Os dados permanecem no IndexedDB do seu navegador. Nós literalmente não conseguimos vê-los.",
+        "title": "Seu Dispositivo, Seus Dados"
+      },
+      "1": {
+        "description": "Edição em massa, pivotar e analisar como um profissional sem dores de cabeça com fórmulas.",
+        "title": "Poder de Planilha"
+      },
+      "2": {
+        "description": "Zero latência. Funciona no topo de uma montanha ou em um túnel de metrô.",
+        "title": "Velocidade Offline"
+      },
+      "3": {
+        "description": "O assistente de importação torna a Revisão Financeira de Sexta-feira um hábito satisfatório.",
+        "title": "Rituais Manuais"
+      }
+    }
+  },
+  "nav": {
+    "about": "Sobre",
+    "accounts": "Contas",
+    "budgets": "Orçamentos",
+    "categories": "Categorias",
+    "dashboard": "Painel",
+    "export": "Exportar",
+    "goals": "Objetivos",
+    "help": "Ajuda",
+    "import": "Importar",
+    "reports": "Relatórios",
+    "settings": "Configurações",
+    "transactions": "Transações"
+  },
+  "onboarding": {
+    "dontShowAgain": "Não mostrar este tour novamente",
+    "navigation": {
+      "getStarted": "Começar",
+      "next": "Próximo",
+      "previous": "Anterior",
+      "startTour": "Iniciar Tour"
+    },
+    "quickTip": "💡 Dica Rápida",
+    "skipTour": "Saltar tour",
+    "stepCounter": "Passo {current} de {total}",
+    "steps": {
+      "budgets": {
+        "description": "Crie orçamentos para diferentes categorias de gastos. Acompanhe seu progresso ao longo do mês e receba alertas quando se aproximar dos seus limites.",
+        "title": "🎯 Defina Seus Orçamentos"
+      },
+      "categorize": {
+        "description": "Revise e ajuste as categorias das transações. Nossa categorização inteligente aprende com suas correções para melhorar ao longo do tempo. Utilize ações em massa para categorizar várias transações de uma vez!",
+        "title": "🏷️ Categorizar & Organizar"
+      },
+      "import": {
+        "description": "Comece importando suas transações bancárias a partir de um arquivo CSV. Suportamos BMO, Home Trust e muitos outros bancos. O aplicativo irá categorizar automaticamente suas transações!",
+        "title": "📥 Importar Suas Transações"
+      },
+      "reports": {
+        "description": "Visualize seus padrões de gastos, acompanhe seu patrimônio líquido e tome decisões financeiras informadas. Seu painel atualiza automaticamente com cada transação!",
+        "title": "📊 Veja Relatórios & Insights"
+      },
+      "welcome": {
+        "description": "Vamos fazer um tour rápido para ajudá-lo a começar a gerenciar suas finanças. Não vai demorar muito!",
+        "title": "👋 Bem-vindo ao Budget App!"
+      }
+    },
+    "tips": {
+      "budgets": "Defina orçamentos realistas e nós alertaremos se você estiver a caminho de gastar demais.",
+      "categorize": "Utilize o botão de categorização rápida ou selecione várias transações para categorização em massa.",
+      "import": "Arraste e solte seu arquivo CSV ou clique para procurar. Detectamos automaticamente os formatos BMO e Home Trust!"
+    }
+  },
+  "overspendingAlerts": {
+    "exceededWarning": "At this rate, you'll exceed your budget by {amount} this month.",
+    "percentOfBudget": "{percent}% of budget",
+    "progress": {
+      "label": "Current progress"
+    },
+    "stats": {
+      "budget": "Budget",
+      "daysLeft": "Days Left",
+      "projectedTotal": "Projected Total",
+      "spentSoFar": "Spent So Far"
+    },
+    "tip": {
+      "label": "Tip:",
+      "reduceSpending": "Reduce daily spending to {amount} to stay within budget."
+    }
+  },
+  "predictiveSpendingChart": {
+    "legend": {
+      "actual": "Actual",
+      "confidenceInterval": "Confidence Interval",
+      "predicted": "Predicted"
+    },
+    "noData": "No data available for predictions",
+    "predictionUnavailable": "Prediction Unavailable",
+    "stats": {
+      "avgConfidence": "Avg Confidence",
+      "nextMonth": "Next Month",
+      "threeMonthAvg": "3-Month Avg"
+    },
+    "table": {
+      "confidence": "Confidence",
+      "month": "Month",
+      "predicted": "Predicted",
+      "range": "Range",
+      "title": "Monthly Predictions"
+    },
+    "title": "Spending Forecast: {category}",
+    "trainingModel": "Training model and generating predictions..."
+  },
+  "pwaInstall": {
+    "buttons": {
+      "install": "Install",
+      "notNow": "Not now"
+    },
+    "close": "Close install prompt",
+    "description": "Add to your home screen for quick access and offline use",
+    "features": {
+      "fastSecure": "Fast & secure",
+      "noAppStore": "No app store needed",
+      "offline": "Works offline"
+    },
+    "title": "Install Budget App"
+  },
+  "quickCategorize": {
+    "buttons": {
+      "apply": "Apply Category",
+      "cancel": "Cancel",
+      "save": "Save"
+    },
+    "clickToSelect": "Click a category to select",
+    "description": "Select a category for {count, plural, =1 {this transaction} other {# transactions}}",
+    "general": "General",
+    "noResults": "No categories found",
+    "pressEnter": "Press ↵ Enter",
+    "saving": "Saving...",
+    "searchPlaceholder": "Search categories...",
+    "title": "Quick Categorize"
+  },
+  "quickFilters": {
+    "all": "All",
+    "categories": "Categories",
+    "clearFilters": "Clear Filters",
+    "moreCategories": "+{count} more",
+    "presets": {
+      "last30": "Last 30 Days",
+      "last90": "Last 90 Days",
+      "thisMonth": "This Month",
+      "thisYear": "This Year"
+    },
+    "timePeriod": "Time Period"
+  },
+  "receiptUpload": {
+    "buttons": {
+      "attachReceipt": "Attach Receipt",
+      "chooseDifferent": "Choose Different",
+      "extractData": "Extract Data",
+      "extracting": "Extracting..."
+    },
+    "camera": {
+      "takePhoto": "Take Photo with Camera",
+      "useDevice": "Use your device camera to capture receipt"
+    },
+    "cameraInputLabel": "Camera capture input",
+    "dropzone": {
+      "browseFiles": "or <link>browse files</link>",
+      "dragDrop": "Drag & drop receipt here",
+      "dropHere": "Drop the receipt here",
+      "supportedFormats": "Supports JPG, PNG, PDF • Max {size}MB"
+    },
+    "errors": {
+      "couldNotExtract": "Could not extract data from receipt. Please enter manually.",
+      "extractionFailed": "Failed to extract data. Please try again or enter manually.",
+      "invalidType": "Invalid file type. Only JPG, PNG, and PDF files are allowed",
+      "ocrImagesOnly": "OCR is only supported for image files (JPG, PNG)",
+      "rejected": "File was rejected. Please try again",
+      "tooLarge": "File is too large. Maximum size is {size}MB"
+    },
+    "extracted": {
+      "amount": "Amount:",
+      "confidence": "Confidence: {percent}%",
+      "date": "Date:",
+      "merchant": "Merchant:",
+      "title": "Data Extracted"
+    },
+    "pdf": {
+      "noPreview": "Preview not available",
+      "title": "PDF Receipt"
+    },
+    "receiptPreview": "Receipt preview",
+    "removeFile": "Remove file"
+  },
+  "recurringTransactions": {
+    "confidence": "{percent}% confidence",
+    "estimatedMonthly": "Estimated Monthly",
+    "frequency": {
+      "biweekly": "Bi-weekly",
+      "monthly": "Monthly",
+      "quarterly": "Quarterly",
+      "weekly": "Weekly"
+    },
+    "inDays": "{count, plural, =0 {(today)} =1 {(in 1 day)} other {(in # days)}}",
+    "next": "Next: {date}",
+    "occurrences": "{count, plural, =1 {1 occurrence detected} other {# occurrences detected}}",
+    "perPeriod": {
+      "month": "per month",
+      "quarter": "per quarter",
+      "twoWeeks": "per 2 weeks",
+      "week": "per week"
+    },
+    "showingPatterns": "{count, plural, =1 {Showing 1 recurring transaction pattern} other {Showing # recurring transaction patterns}}",
+    "subtitle": "Detected subscriptions and bills",
+    "title": "Recurring Transactions"
+  },
+  "shortcutsModal": {
+    "close": "Close shortcuts help",
+    "proTip": {
+      "description": "Keyboard shortcuts work on any page except when typing in forms. Press {key} anytime to see this help.",
+      "title": "💡 Pro Tip"
+    },
+    "subtitle": "Power-user productivity tips",
+    "title": "Keyboard Shortcuts"
+  },
+  "sidebar": {
+    "actions": {
+      "importCsv": "Importar CSV",
+      "settings": "Configurações",
+      "showAllItems": "Mostrar Todos os Itens",
+      "showLess": "Mostrar Menos"
+    },
+    "appSubtitle": "Finanças Premium",
+    "appTitle": "Budget App",
+    "navigation": {
+      "budgets": "Orçamentos",
+      "categories": "Categorias",
+      "dashboard": "Painel",
+      "futurePlans": "Planos Futuros",
+      "investments": "Investimentos",
+      "loans": "Empréstimos",
+      "reports": "Relatórios",
+      "retirement": "Aposentadoria",
+      "scanReceipt": "Digitalizar Recibo",
+      "subscriptions": "Assinaturas",
+      "transactions": "Transações"
+    },
+    "search": "Pesquisar...",
+    "shortcuts": "Atalhos"
+  },
+  "simplefinSettings": {
+    "connectedAccounts": {
+      "description": "Manage your linked bank accounts",
+      "title": "Connected Accounts"
+    },
+    "connection": {
+      "accountsLinked": "{count, plural, =1 {1 account linked} other {# accounts linked}}",
+      "connectButton": "Connect Bank Account",
+      "connected": "Connected",
+      "description": "Connect your bank accounts to automatically import transactions",
+      "notConnected": "Not Connected",
+      "notConnectedDesc": "Connect your bank accounts to start importing transactions",
+      "title": "SimpleFIN Connection"
+    },
+    "disconnect": {
+      "button": "Disconnect",
+      "cancel": "Cancel",
+      "confirm": "Disconnect",
+      "dialogDescription": "This will remove the connection to your bank accounts. Your existing transactions will not be deleted, but new transactions will no longer sync automatically.",
+      "dialogTitle": "Disconnect SimpleFIN?"
+    },
+    "help": {
+      "bridgeDashboard": "SimpleFIN Bridge Dashboard",
+      "protocolDocs": "SimpleFIN Protocol Documentation",
+      "title": "Need Help?"
+    },
+    "sync": {
+      "date": "{date}",
+      "hoursAgo": "{hours, plural, =1 {1 hour ago} other {# hours ago}}",
+      "lastSynced": "Last synced: {time}",
+      "lessThanHour": "Less than an hour ago",
+      "never": "Never",
+      "syncNow": "Sync Now",
+      "syncing": "Syncing..."
+    },
+    "syncSettings": {
+      "autoCategorize": {
+        "description": "Automatically categorize imported transactions using AI",
+        "label": "Auto-Categorize"
+      },
+      "autoSync": {
+        "description": "Automatically sync transactions on a schedule",
+        "label": "Automatic Sync"
+      },
+      "description": "Configure how and when transactions are synced",
+      "frequency": {
+        "every12Hours": "Every 12 hours",
+        "every2Days": "Every 2 days",
+        "every6Hours": "Every 6 hours",
+        "hint": "SimpleFIN allows up to 24 requests per day. Daily sync is recommended.",
+        "label": "Sync Frequency",
+        "onceDaily": "Once daily"
+      },
+      "notifications": {
+        "description": "Show notification when sync completes",
+        "label": "Sync Notifications"
+      },
+      "pendingTransactions": {
+        "description": "Include transactions that haven't posted yet",
+        "label": "Import Pending Transactions"
+      },
+      "title": "Sync Settings",
+      "transactionHistory": {
+        "days": "{count} days",
+        "hint": "How many days of transaction history to fetch (max 60 days per SimpleFIN)",
+        "label": "Transaction History"
+      }
+    }
+  },
+  "spendingTrendChart": {
+    "forecastFooter": "Forecast based on linear regression of last {months} months",
+    "legend": {
+      "actualSpending": "Actual Spending",
+      "projected": "Projected"
+    },
+    "notEnoughData": "Not enough data to generate trends. Add at least 2 months of transactions.",
+    "stats": {
+      "avgMonthly": "Avg Monthly",
+      "lastMonth": "Last Month",
+      "projected": "Projected"
+    },
+    "title": "Spending Trends & Forecast"
+  },
+  "splitTransaction": {
+    "addSplit": "Add Split ({current}/{max})",
+    "amount": "Amount",
+    "buttons": {
+      "cancel": "Cancel",
+      "save": "Save Split",
+      "saving": "Saving..."
+    },
+    "category": "Category",
+    "closeModal": "Close modal",
+    "date": "Date:",
+    "distributeEvenly": "Distribute Evenly",
+    "errors": {
+      "saveFailed": "Failed to save split transaction"
+    },
+    "help": {
+      "step1": "Enter the amount for each category (must total ${amount})",
+      "step2": "Use \"Distribute Evenly\" to split equally across all categories",
+      "step3": "Add up to 5 splits per transaction",
+      "step4": "The original transaction will be hidden and replaced with split items",
+      "title": "How to split transactions:"
+    },
+    "maxSplitsReached": "Maximum 5 splits allowed",
+    "minSplitsRequired": "Minimum 2 splits required",
+    "none": "None",
+    "notes": "Notes (Optional)",
+    "notesPlaceholder": "e.g., Business expense, Personal use",
+    "originalAmount": "Original Amount:",
+    "removeThisSplit": "Remove this split",
+    "selectCategory": "Select category...",
+    "splitsCount": "Splits ({current}/{max})",
+    "subcategory": "Subcategory",
+    "title": "Split Transaction",
+    "validation": {
+      "adjustAmounts": "Adjust split amounts to match the original transaction amount.",
+      "amountsMustMatch": "Split amounts must equal the original transaction amount",
+      "categoryRequired": "All splits must have a category",
+      "matchesOriginal": "✓ Matches original",
+      "overBy": "Over by ${amount}",
+      "readyToSave": "Split amounts match the original transaction. Ready to save!",
+      "total": "Total:",
+      "underBy": "Under by ${amount}"
+    }
+  },
+  "subscriptionCard": {
+    "badges": {
+      "aiVerified": "AI Verified",
+      "cancelled": "Cancelled",
+      "paused": "Paused",
+      "trial": "Trial"
+    },
+    "buttons": {
+      "claimManage": "Claim & Manage",
+      "edit": "Edit",
+      "transactions": "Transactions"
+    },
+    "confidence": {
+      "high": "High",
+      "label": "Detection Confidence",
+      "low": "Low",
+      "medium": "Medium"
+    },
+    "details": {
+      "charges": "{count} charges",
+      "daysBefore": "{count} days before",
+      "firstCharge": "First Charge",
+      "lastCharge": "Last Charge",
+      "occurrences": "Occurrences",
+      "payment": "Payment",
+      "reminder": "Reminder"
+    },
+    "interval": {
+      "annual": "Annual",
+      "bi-weekly": "Bi-weekly",
+      "irregular": "Irregular",
+      "monthly": "Monthly",
+      "quarterly": "Quarterly",
+      "weekly": "Weekly"
+    },
+    "lowConfidenceWarning": "This subscription was detected with low confidence. Claim it to verify and manage manually.",
+    "menu": {
+      "cancelSubscription": "Cancel Subscription",
+      "claimManage": "Claim & Manage",
+      "delete": "Delete",
+      "edit": "Edit",
+      "notSubscription": "Not a Subscription",
+      "pause": "Pause",
+      "resume": "Resume",
+      "viewTransactions": "View Transactions"
+    },
+    "source": {
+      "auto-detected": "Auto-detected",
+      "manual": "Manual",
+      "merged": "Tracked"
+    },
+    "stats": {
+      "amount": "Amount",
+      "annualCost": "Annual Cost",
+      "frequency": "Frequency",
+      "nextCharge": "Next Charge",
+      "totalSpent": "Total Spent"
+    },
+    "trial": {
+      "daysLeft": "{count, plural, =1 {1 day left in trial} other {# days left in trial}}"
+    }
+  },
+  "subscriptionCostChart": {
+    "emptyState": "No active subscriptions to analyze",
+    "loadingChart": "Loading chart...",
+    "moreCharges": "+{count} more charges",
+    "perMonth": "/month",
+    "sections": {
+      "costByCategory": "Cost by Category",
+      "potentialSavings": "Potential Savings",
+      "upcomingCharges": "Upcoming Charges (Next 30 Days)"
+    },
+    "summary": {
+      "activeSubscriptions": "{count, plural, =1 {1 active subscription} other {# active subscriptions}}",
+      "annualCost": "Annual Cost",
+      "monthlyCost": "Monthly Cost",
+      "next30Days": "Next 30 Days",
+      "projectedYearly": "Projected yearly spend",
+      "upcomingCharges": "{count, plural, =1 {1 upcoming charge} other {# upcoming charges}}"
+    }
+  },
+  "tooltip": {
+    "ariaLabel": "Mais informações",
+    "learnMore": "Saiba mais →"
+  },
+  "transactionModal": {
+    "account": {
+      "label": "Account"
+    },
+    "advancedOptions": {
+      "available": "{count} available",
+      "label": "Advanced Options"
+    },
+    "amount": {
+      "label": "Amount",
+      "placeholder": "0.00",
+      "validationError": "Please enter a valid amount"
+    },
+    "buttons": {
+      "add": "Add Transaction",
+      "adding": "Adding...",
+      "cancel": "Cancel",
+      "update": "Update Transaction",
+      "updating": "Updating..."
+    },
+    "category": {
+      "aiCategorizing": "AI categorizing...",
+      "create": "Create",
+      "createNew": "+ Create New Category",
+      "label": "Category",
+      "lastUsed": "Using last: {category}",
+      "namePlaceholder": "Category name...",
+      "selectPlaceholder": "Select category...",
+      "subcategoriesPlaceholder": "Subcategories (optional, comma-separated)"
+    },
+    "closeModal": "Close modal",
+    "createCategory": {
+      "created": "Category \"{name}\" created!",
+      "failed": "Failed to create category",
+      "nameRequired": "Category name is required"
+    },
+    "date": {
+      "label": "Date"
+    },
+    "description": {
+      "label": "Description",
+      "placeholder": "e.g., Grocery shopping at Sobeys"
+    },
+    "learned": {
+      "description": "After 3 similar corrections, future transactions from this merchant will auto-categorize.",
+      "title": "Learned!"
+    },
+    "notes": {
+      "label": "Notes",
+      "placeholder": "Add any additional notes..."
+    },
+    "receipts": {
+      "addNew": "Add New Receipt",
+      "deleteConfirm": "Are you sure you want to delete this receipt?",
+      "deleteFailed": "Failed to delete receipt",
+      "deleteReceipt": "Delete receipt",
+      "existing": "Existing receipts ({count})",
+      "label": "Receipt Attachments",
+      "newFile": "New: {filename}",
+      "remove": "Remove",
+      "viewFull": "View full receipt"
+    },
+    "subcategory": {
+      "label": "Subcategory",
+      "none": "None",
+      "selectPlaceholder": "Select subcategory..."
+    },
+    "tags": {
+      "label": "Tags (comma-separated)",
+      "placeholder": "e.g., groceries, weekly, essential"
+    },
+    "title": {
+      "add": "Add Transaction",
+      "edit": "Edit Transaction"
+    },
+    "type": {
+      "expense": "Expense",
+      "income": "Income",
+      "label": "Type"
+    }
+  },
+  "transactionTable": {
+    "actions": {
+      "attachReceipt": "Attach receipt",
+      "delete": "Delete",
+      "edit": "Edit",
+      "split": "Split"
+    },
+    "emptyState": "No transactions to display",
+    "headers": {
+      "account": "Account",
+      "actions": "Actions",
+      "amount": "Amount",
+      "category": "Category",
+      "date": "Date",
+      "description": "Description"
+    }
+  },
+  "welcome": {
+    "subtitle": "Comece adicionando sua primeira transação ou importando dados do seu banco",
+    "title": "Bem-vindo ao Budget App"
+  },
+  "widget": {
+    "accountBalances": {
+      "description": "Saldos atuais em todas as suas contas",
+      "title": "Saldos das Contas"
+    },
+    "budgetProgress": {
+      "description": "Acompanhe como está cumprindo seus objetivos de orçamento",
+      "title": "Progresso do Orçamento"
+    },
+    "incomeVsExpenses": {
+      "description": "Compare seus ganhos e gastos ao longo do tempo",
+      "title": "Rendimentos vs Despesas"
+    },
+    "monthlyTrends": {
+      "description": "Visualize seus padrões financeiros mês a mês",
+      "title": "Tendências Mensais"
+    },
+    "recentTransactions": {
+      "description": "Visão rápida da sua atividade financeira mais recente",
+      "title": "Transações Recentes"
+    },
+    "spendingByCategory": {
+      "description": "Veja para onde vai seu dinheiro com análises visuais",
+      "title": "Gastos por Categoria"
+    },
+    "upcomingBills": {
+      "description": "Nunca perca um pagamento com lembretes de contas",
+      "title": "Contas a Vencer"
+    }
+  },
+  "ynabMigrationWizard": {
+    "categoryStep": {
+      "category": "{count, plural, =1 {1 category} other {# categories}}",
+      "createNew": "Create New",
+      "description": "Map YNAB categories to your existing categories or create new ones.",
+      "mapToExisting": "Map to Existing",
+      "selectCategory": "Select category...",
+      "skip": "Skip",
+      "title": "Category Mapping",
+      "willCreate": "Will create:"
+    },
+    "completeStep": {
+      "errors": "Errors",
+      "importAnother": "Import Another",
+      "success": "Import Complete!",
+      "successMessage": "{count, plural, =1 {1 item imported} other {# items imported}} successfully from YNAB.",
+      "viewTransactions": "View Transactions",
+      "whatNext": "What would you like to do next?",
+      "withIssues": "Import Completed with Issues"
+    },
+    "footer": {
+      "back": "Back",
+      "done": "Done",
+      "next": "Next",
+      "startImport": "Start Import"
+    },
+    "header": {
+      "closeLabel": "Close wizard",
+      "subtitle": "Migrate your budget data seamlessly",
+      "title": "Import from YNAB"
+    },
+    "importingStep": {
+      "finishing": "Finishing up...",
+      "importingAccounts": "Importing accounts...",
+      "importingBudgets": "Importing budgets...",
+      "importingCategories": "Importing categories...",
+      "importingTransactions": "Importing transactions...",
+      "title": "Importing your YNAB data..."
+    },
+    "optionsStep": {
+      "accountOptions": {
+        "includeClosedAccounts": "Include closed accounts",
+        "includeOffBudgetAccounts": "Include off-budget accounts",
+        "title": "Account Options"
+      },
+      "budgetOptions": {
+        "importGoals": "Import savings goals as future purchases",
+        "title": "Budget Options"
+      },
+      "hiddenCategories": {
+        "archive": "Archive",
+        "archiveDesc": "Import as archived (recommended)",
+        "description": "How to handle YNAB categories marked as hidden?",
+        "import": "Import",
+        "importDesc": "Import as active categories",
+        "skip": "Skip",
+        "skipDesc": "Don't import hidden categories",
+        "title": "Hidden Categories"
+      }
+    },
+    "previewStep": {
+      "accounts": "Accounts",
+      "allocations": "{count} allocations",
+      "budgetMonths": "Budget Months",
+      "categories": "Categories",
+      "dateRange": "Transaction Date Range",
+      "description": "Review the data that will be imported.",
+      "duplicates": "{count} duplicates",
+      "new": "{count} new",
+      "newMapped": "{created} new, {mapped} mapped",
+      "preparingPreview": "Preparing preview...",
+      "title": "Import Preview",
+      "transactions": "Transactions",
+      "warnings": "Warnings"
+    },
+    "steps": {
+      "categories": {
+        "description": "Map to existing categories",
+        "title": "Categories"
+      },
+      "complete": {
+        "description": "Migration finished",
+        "title": "Complete"
+      },
+      "importing": {
+        "description": "Processing your data",
+        "title": "Importing"
+      },
+      "options": {
+        "description": "Configure import settings",
+        "title": "Options"
+      },
+      "preview": {
+        "description": "Review before import",
+        "title": "Preview"
+      },
+      "upload": {
+        "description": "Select YNAB export file",
+        "title": "Upload"
+      }
+    },
+    "uploadStep": {
+      "accounts": "Accounts",
+      "categories": "Categories",
+      "clickToSelect": "Click to select a file",
+      "dragAndDrop": "or drag and drop here",
+      "fileSummary": "File Summary",
+      "format": "Format",
+      "formatApiExport": "YNAB API Export",
+      "formatApiExportDesc": "JSON from nYNAB",
+      "formatCsv": "CSV Export",
+      "formatCsvDesc": "From YNAB web app",
+      "formatYfull": "Budget.yfull / Budget.ynab4",
+      "formatYfullDesc": "YNAB4 desktop export",
+      "parsing": "Parsing file...",
+      "supportedFormats": "Supported Formats",
+      "transactions": "Transactions"
     }
   }
 }

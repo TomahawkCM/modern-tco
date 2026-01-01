@@ -12,6 +12,7 @@
 'use client';
 
 import { Settings, RotateCcw, Eye, EyeOff, GripVertical } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
@@ -37,6 +38,7 @@ export function DashboardCustomizer({
   onToggleWidget,
   onReset,
 }: DashboardCustomizerProps) {
+  const t = useTranslations('dashboardCustomizer');
   const visibleCount = widgets.filter((w) => w.visible).length;
 
   return (
@@ -46,23 +48,23 @@ export function DashboardCustomizer({
           variant="outline"
           size="sm"
           className="gap-2 min-h-[44px]"
-          aria-label="Customize dashboard layout"
+          aria-label={t('ariaLabel')}
         >
           <Settings className="w-4 h-4" />
-          <span className="hidden sm:inline">Customize</span>
+          <span className="hidden sm:inline">{t('button')}</span>
         </Button>
       </DialogTrigger>
 
       <DialogContent className="sm:max-w-[500px] max-h-[80vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle className="text-xl font-semibold">
-            Customize Dashboard
+            {t('title')}
           </DialogTitle>
           <DialogDescription>
-            Show or hide dashboard widgets. Drag widgets on the dashboard to reorder them.
+            {t('description')}
             <br />
             <span className="text-sm text-gray-600 mt-2 block">
-              {visibleCount} of {widgets.length} widgets visible
+              {t('widgetsVisible', { visible: visibleCount, total: widgets.length })}
             </span>
           </DialogDescription>
         </DialogHeader>
@@ -71,7 +73,7 @@ export function DashboardCustomizer({
           {/* Widget Visibility Toggles */}
           <div className="space-y-3">
             <h3 className="text-sm font-semibold text-gray-700 mb-3">
-              Widget Visibility
+              {t('widgetVisibility')}
             </h3>
 
             {widgets
@@ -102,7 +104,7 @@ export function DashboardCustomizer({
                         {widget.name}
                         {widget.isAlwaysVisible && (
                           <span className="ml-2 text-xs text-gray-500">
-                            (Always visible)
+                            ({t('alwaysVisible')})
                           </span>
                         )}
                       </Label>
@@ -112,7 +114,7 @@ export function DashboardCustomizer({
                         checked={widget.visible}
                         onCheckedChange={() => onToggleWidget(widget.id)}
                         disabled={widget.isAlwaysVisible}
-                        aria-label={`Toggle ${widget.name} visibility`}
+                        aria-label={t('toggleVisibility', { name: widget.name })}
                         className="flex-shrink-0"
                       />
                     </div>
@@ -131,11 +133,10 @@ export function DashboardCustomizer({
               <GripVertical className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
               <div>
                 <h4 className="text-sm font-semibold text-blue-900 mb-1">
-                  Reorder Widgets
+                  {t('reorderTitle')}
                 </h4>
                 <p className="text-xs text-blue-800 leading-relaxed">
-                  To change widget order, drag and drop widgets directly on your dashboard.
-                  Use your mouse or touch to grab the drag handle (⋮⋮) on each widget card.
+                  {t('reorderDescription')}
                 </p>
               </div>
             </div>
@@ -149,7 +150,7 @@ export function DashboardCustomizer({
             className="gap-2 min-h-[44px] w-full sm:w-auto"
           >
             <RotateCcw className="w-4 h-4" />
-            Reset to Defaults
+            {t('resetButton')}
           </Button>
         </DialogFooter>
       </DialogContent>

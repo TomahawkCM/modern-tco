@@ -5,7 +5,8 @@
  * Add or edit investment accounts (RRSP, TFSA, Non-registered, Company shares)
  */
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
+import { useTranslations } from 'next-intl';
 import { X } from 'lucide-react';
 import type { InvestmentAccount } from '@/types/budget';
 
@@ -27,6 +28,7 @@ export function InvestmentAccountModal({
   onSave,
   onClose,
 }: InvestmentAccountModalProps) {
+  const t = useTranslations('investmentAccountModal');
   const [name, setName] = useState(account?.name || '');
   const [type, setType] = useState<InvestmentAccount['type']>(account?.type || 'TFSA');
   const [institution, setInstitution] = useState(account?.institution || '');
@@ -37,7 +39,7 @@ export function InvestmentAccountModal({
     e.preventDefault();
 
     if (!name.trim()) {
-      alert('Please enter an account name');
+      alert(t('validation.nameRequired'));
       return;
     }
 
@@ -53,7 +55,7 @@ export function InvestmentAccountModal({
       onClose();
     } catch (error) {
       console.error('Error saving account:', error);
-      alert('Failed to save account');
+      alert(t('errors.saveFailed'));
     } finally {
       setIsSubmitting(false);
     }
@@ -66,12 +68,12 @@ export function InvestmentAccountModal({
         {/* Header */}
         <div className="flex items-center justify-between p-6 border-b border-gray-200">
           <h2 className="text-xl font-bold text-gray-900">
-            {account ? 'Edit Investment Account' : 'Add Investment Account'}
+            {account ? t('title.edit') : t('title.add')}
           </h2>
           <button
             onClick={onClose}
             className="text-gray-400 hover:text-gray-600 transition-colors"
-            aria-label="Close modal"
+            aria-label={t('closeModal')}
           >
             <X className="w-5 h-5" />
           </button>
@@ -82,14 +84,14 @@ export function InvestmentAccountModal({
           {/* Account Name */}
           <div>
             <label htmlFor="account-name" className="block text-sm font-medium text-gray-700 mb-2">
-              Account Name <span className="text-red-600">*</span>
+              {t('fields.name.label')} <span className="text-red-600">*</span>
             </label>
             <input
               id="account-name"
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              placeholder="e.g., My RRSP, TFSA Savings, Company Stock"
+              placeholder={t('fields.name.placeholder')}
               className="w-full h-12 px-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
               required
             />
@@ -98,7 +100,7 @@ export function InvestmentAccountModal({
           {/* Account Type */}
           <div>
             <label htmlFor="account-type" className="block text-sm font-medium text-gray-700 mb-2">
-              Account Type <span className="text-red-600">*</span>
+              {t('fields.type.label')} <span className="text-red-600">*</span>
             </label>
             <select
               id="account-type"
@@ -114,24 +116,24 @@ export function InvestmentAccountModal({
               ))}
             </select>
             <p className="mt-2 text-xs text-gray-500">
-              {type === 'RRSP' && 'Registered Retirement Savings Plan - Tax-deferred growth'}
-              {type === 'TFSA' && 'Tax-Free Savings Account - Tax-free growth and withdrawals'}
-              {type === 'Non-registered' && 'Taxable investment account'}
-              {type === 'Company shares' && 'Employee stock purchase or stock options'}
+              {type === 'RRSP' && t('fields.type.descriptions.RRSP')}
+              {type === 'TFSA' && t('fields.type.descriptions.TFSA')}
+              {type === 'Non-registered' && t('fields.type.descriptions.Non-registered')}
+              {type === 'Company shares' && t('fields.type.descriptions.Company shares')}
             </p>
           </div>
 
           {/* Institution (Optional) */}
           <div>
             <label htmlFor="institution" className="block text-sm font-medium text-gray-700 mb-2">
-              Financial Institution (Optional)
+              {t('fields.institution.label')}
             </label>
             <input
               id="institution"
               type="text"
               value={institution}
               onChange={(e) => setInstitution(e.target.value)}
-              placeholder="e.g., Questrade, Wealthsimple, TD Direct"
+              placeholder={t('fields.institution.placeholder')}
               className="w-full h-12 px-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
             />
           </div>
@@ -139,14 +141,14 @@ export function InvestmentAccountModal({
           {/* Account Number (Optional) */}
           <div>
             <label htmlFor="account-number" className="block text-sm font-medium text-gray-700 mb-2">
-              Account Number (Optional)
+              {t('fields.accountNumber.label')}
             </label>
             <input
               id="account-number"
               type="text"
               value={accountNumber}
               onChange={(e) => setAccountNumber(e.target.value)}
-              placeholder="e.g., Last 4 digits: 1234"
+              placeholder={t('fields.accountNumber.placeholder')}
               className="w-full h-12 px-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
             />
           </div>
@@ -159,14 +161,14 @@ export function InvestmentAccountModal({
               className="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
               disabled={isSubmitting}
             >
-              Cancel
+              {t('buttons.cancel')}
             </button>
             <button
               type="submit"
               className="flex-1 px-4 py-2 bg-teal-500 text-white rounded-lg hover:bg-teal-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               disabled={isSubmitting}
             >
-              {isSubmitting ? 'Saving...' : account ? 'Update Account' : 'Create Account'}
+              {isSubmitting ? t('buttons.saving') : account ? t('buttons.update') : t('buttons.create')}
             </button>
           </div>
         </form>

@@ -13,6 +13,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { useTranslations } from 'next-intl';
 import { Sun, Moon, Contrast, MonitorSmartphone, Zap, ZapOff, Type, Users } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Switch } from '@/components/ui/switch';
@@ -125,6 +126,7 @@ export function applyAccessibilityPreferences(prefs: AccessibilityPreferences) {
 }
 
 export function AccessibilitySettingsPanel() {
+  const t = useTranslations('accessibilitySettings');
   const [preferences, setPreferences] = useState<AccessibilityPreferences>(defaultPreferences);
   const [mounted, setMounted] = useState(false);
 
@@ -204,9 +206,9 @@ export function AccessibilitySettingsPanel() {
             <Users className="h-6 w-6 text-teal-600 dark:text-teal-400" aria-hidden="true" />
           </div>
           <div className="flex-1">
-            <h3 className="text-xl font-bold text-foreground">Seniors Mode</h3>
+            <h3 className="text-xl font-bold text-foreground">{t('seniorsMode.title')}</h3>
             <p className="text-sm text-muted-foreground mt-1">
-              One-click accessibility enhancement with larger text, bigger touch targets, and simplified interface
+              {t('seniorsMode.description')}
             </p>
           </div>
         </div>
@@ -215,15 +217,15 @@ export function AccessibilitySettingsPanel() {
           <SeniorsModeToggle showLabel={true} size="large" />
         </div>
 
-        <SeniorsModePresetsSection />
+        <SeniorsModePresetsSection t={t} />
       </div>
 
       {/* Theme Mode Section */}
       <div className="rounded-lg bg-card p-6 shadow">
         <div className="mb-4">
-          <h3 className="text-lg font-semibold text-foreground">Theme Mode</h3>
+          <h3 className="text-lg font-semibold text-foreground">{t('themeMode.title')}</h3>
           <p className="text-sm text-muted-foreground">
-            Choose your preferred color scheme for the budget app
+            {t('themeMode.description')}
           </p>
         </div>
 
@@ -239,8 +241,8 @@ export function AccessibilitySettingsPanel() {
           >
             <Sun className="h-6 w-6 text-yellow-500" aria-hidden="true" />
             <div className="text-left">
-              <div className="font-semibold text-foreground">Light</div>
-              <div className="text-xs text-muted-foreground">Bright and clear</div>
+              <div className="font-semibold text-foreground">{t('themeMode.light')}</div>
+              <div className="text-xs text-muted-foreground">{t('themeMode.lightDesc')}</div>
             </div>
           </button>
 
@@ -255,8 +257,8 @@ export function AccessibilitySettingsPanel() {
           >
             <Moon className="h-6 w-6 text-indigo-500" aria-hidden="true" />
             <div className="text-left">
-              <div className="font-semibold text-foreground">Dark</div>
-              <div className="text-xs text-muted-foreground">Easy on eyes</div>
+              <div className="font-semibold text-foreground">{t('themeMode.dark')}</div>
+              <div className="text-xs text-muted-foreground">{t('themeMode.darkDesc')}</div>
             </div>
           </button>
 
@@ -271,8 +273,8 @@ export function AccessibilitySettingsPanel() {
           >
             <Contrast className="h-6 w-6 text-gray-900" aria-hidden="true" />
             <div className="text-left">
-              <div className="font-semibold text-foreground">High Contrast</div>
-              <div className="text-xs text-muted-foreground">Maximum visibility</div>
+              <div className="font-semibold text-foreground">{t('themeMode.highContrast')}</div>
+              <div className="text-xs text-muted-foreground">{t('themeMode.highContrastDesc')}</div>
             </div>
           </button>
 
@@ -287,8 +289,8 @@ export function AccessibilitySettingsPanel() {
           >
             <MonitorSmartphone className="h-6 w-6 text-teal-500" aria-hidden="true" />
             <div className="text-left">
-              <div className="font-semibold text-foreground">Auto</div>
-              <div className="text-xs text-muted-foreground">Match system</div>
+              <div className="font-semibold text-foreground">{t('themeMode.auto')}</div>
+              <div className="text-xs text-muted-foreground">{t('themeMode.autoDesc')}</div>
             </div>
           </button>
         </div>
@@ -304,18 +306,17 @@ export function AccessibilitySettingsPanel() {
               ) : (
                 <Zap className="h-5 w-5 text-gray-700" aria-hidden="true" />
               )}
-              <h3 className="text-lg font-semibold text-foreground">Reduced Motion</h3>
+              <h3 className="text-lg font-semibold text-foreground">{t('reducedMotion.title')}</h3>
             </div>
             <p className="text-sm text-muted-foreground">
-              Minimize animations and transitions for a calmer experience. Helpful for users with
-              vestibular disorders or motion sensitivity.
+              {t('reducedMotion.description')}
             </p>
           </div>
           <Switch
             checked={preferences.reducedMotion}
             onCheckedChange={toggleReducedMotion}
-            aria-label="Toggle reduced motion mode"
-            className="ml-4"
+            aria-label={t('reducedMotion.toggleLabel')}
+            className="ms-4"
           />
         </div>
       </div>
@@ -325,10 +326,10 @@ export function AccessibilitySettingsPanel() {
         <div className="mb-4">
           <div className="flex items-center gap-2 mb-2">
             <Type className="h-5 w-5 text-gray-700" aria-hidden="true" />
-            <h3 className="text-lg font-semibold text-foreground">Font Size</h3>
+            <h3 className="text-lg font-semibold text-foreground">{t('fontSize.title')}</h3>
           </div>
           <p className="text-sm text-muted-foreground">
-            Adjust the base text size for better readability
+            {t('fontSize.description')}
           </p>
         </div>
 
@@ -343,7 +344,7 @@ export function AccessibilitySettingsPanel() {
             aria-pressed={preferences.fontSize === '16'}
           >
             <div className="text-base font-semibold text-foreground">16px</div>
-            <div className="text-xs text-muted-foreground">Default</div>
+            <div className="text-xs text-muted-foreground">{t('fontSize.default')}</div>
           </button>
 
           <button
@@ -356,7 +357,7 @@ export function AccessibilitySettingsPanel() {
             aria-pressed={preferences.fontSize === '18'}
           >
             <div className="text-lg font-semibold text-foreground">18px</div>
-            <div className="text-xs text-muted-foreground">Large</div>
+            <div className="text-xs text-muted-foreground">{t('fontSize.large')}</div>
           </button>
 
           <button
@@ -369,19 +370,19 @@ export function AccessibilitySettingsPanel() {
             aria-pressed={preferences.fontSize === '20'}
           >
             <div className="text-xl font-semibold text-foreground">20px</div>
-            <div className="text-xs text-muted-foreground">Extra Large</div>
+            <div className="text-xs text-muted-foreground">{t('fontSize.extraLarge')}</div>
           </button>
         </div>
       </div>
 
       {/* Info Box */}
       <div className="rounded-lg bg-muted p-4">
-        <h4 className="font-semibold text-foreground mb-2">About Accessibility Settings</h4>
+        <h4 className="font-semibold text-foreground mb-2">{t('infoBox.title')}</h4>
         <ul className="space-y-1 text-sm text-muted-foreground">
-          <li>• Settings are saved automatically and persist across sessions</li>
-          <li>• Changes sync across all open tabs in real-time</li>
-          <li>• Your preferences are stored locally and never sent to servers</li>
-          <li>• Seniors Mode provides one-click accessibility optimization</li>
+          <li>• {t('infoBox.savedAutomatically')}</li>
+          <li>• {t('infoBox.syncAcrossTabs')}</li>
+          <li>• {t('infoBox.storedLocally')}</li>
+          <li>• {t('infoBox.seniorsOptimization')}</li>
         </ul>
       </div>
     </div>
@@ -391,20 +392,24 @@ export function AccessibilitySettingsPanel() {
 /**
  * Presets section for Seniors Mode with quick configuration options
  */
-function SeniorsModePresetsSection() {
+interface SeniorsModePresetsSectionProps {
+  t: ReturnType<typeof useTranslations<'accessibilitySettings'>>;
+}
+
+function SeniorsModePresetsSection({ t }: SeniorsModePresetsSectionProps) {
   const { applyPreset, getCurrentPreset, presets } = useSeniorsModePresets();
   const currentPreset = getCurrentPreset();
 
-  const presetInfo = {
-    off: { label: 'Off', description: 'Standard interface' },
-    mild: { label: 'Mild', description: 'Slightly enhanced' },
-    moderate: { label: 'Moderate', description: 'Recommended for most' },
-    full: { label: 'Full', description: 'Maximum accessibility' },
-  };
+  const presetKeys = {
+    off: { label: 'presets.off', description: 'presets.offDesc' },
+    mild: { label: 'presets.mild', description: 'presets.mildDesc' },
+    moderate: { label: 'presets.moderate', description: 'presets.moderateDesc' },
+    full: { label: 'presets.full', description: 'presets.fullDesc' },
+  } as const;
 
   return (
     <div className="mt-4 pt-4 border-t border-teal-200 dark:border-teal-800">
-      <p className="text-sm font-medium text-muted-foreground mb-3">Quick Presets:</p>
+      <p className="text-sm font-medium text-muted-foreground mb-3">{t('presets.title')}</p>
       <div className="grid grid-cols-4 gap-2">
         {presets.map((preset) => (
           <button
@@ -417,9 +422,9 @@ function SeniorsModePresetsSection() {
             }`}
             aria-pressed={currentPreset === preset}
           >
-            <div className="font-semibold text-sm">{presetInfo[preset].label}</div>
+            <div className="font-semibold text-sm">{t(presetKeys[preset].label)}</div>
             <div className={`text-xs mt-0.5 ${currentPreset === preset ? 'text-teal-100' : 'text-muted-foreground'}`}>
-              {presetInfo[preset].description}
+              {t(presetKeys[preset].description)}
             </div>
           </button>
         ))}

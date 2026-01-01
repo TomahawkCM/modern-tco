@@ -113,7 +113,7 @@ export function ToastProvider({ children }: { children: ReactNode }) {
 
       {/* Toast Container - ARIA Live Region for Screen Readers */}
       <div
-        className="fixed top-4 right-4 z-50 space-y-2 pointer-events-none"
+        className="fixed top-4 end-4 z-50 space-y-2 pointer-events-none"
         role="region"
         aria-label="Notifications"
       >
@@ -186,7 +186,7 @@ function ToastItem({ toast, onRemove }: { toast: Toast; onRemove: () => void }) 
       role={isUrgent ? "alert" : "status"}
       aria-live={isUrgent ? "assertive" : "polite"}
       aria-atomic="true"
-      className={`${colors[toast.type]} border-l-4 rounded-lg shadow-lg p-4 max-w-sm w-full pointer-events-auto animate-in slide-in-from-right duration-300`}
+      className={`${colors[toast.type]} border-s-4 rounded-lg shadow-lg p-4 max-w-sm w-full pointer-events-auto animate-in slide-in-from-right duration-300`}
     >
       <div className="flex items-start gap-4">
         <Icon className={`w-5 h-5 flex-shrink-0 ${iconColors[toast.type]}`} />

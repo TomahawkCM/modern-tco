@@ -8,6 +8,7 @@
 import { useMemo, useState, useEffect } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Area, AreaChart } from 'recharts';
 import { TrendingUp, TrendingDown, AlertCircle, Loader2 } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import { predictSpending, isPredictiveSpendingEnabled, type SpendingPrediction } from '@/lib/analytics/lstm-predictive-spending';
 import type { Transaction } from '@/types/budget';
 import { useThemeMode } from '@/hooks/useThemeMode';
@@ -26,6 +27,7 @@ export function PredictiveSpendingChart({
   monthsAhead = 3,
   showHistorical = true,
 }: PredictiveSpendingChartProps) {
+  const t = useTranslations('predictiveSpendingChart');
   // Get theme-aware chart colors
   const theme = useThemeMode();
   const palette = getChartPalette(theme);
@@ -118,7 +120,7 @@ export function PredictiveSpendingChart({
         <div className="flex items-start gap-3">
           <AlertCircle className="w-5 h-5 text-yellow-600 flex-shrink-0 mt-0.5" />
           <div>
-            <h3 className="text-sm font-semibold text-yellow-900 mb-1">Prediction Unavailable</h3>
+            <h3 className="text-sm font-semibold text-yellow-900 mb-1">{t('predictionUnavailable')}</h3>
             <p className="text-sm text-yellow-800">{error}</p>
           </div>
         </div>
@@ -131,7 +133,7 @@ export function PredictiveSpendingChart({
       <div className="flex items-center justify-center h-64 bg-gray-50 rounded-lg">
         <div className="text-center">
           <Loader2 className="w-8 h-8 animate-spin text-teal-600 mx-auto mb-2" />
-          <p className="text-sm text-gray-600">Training model and generating predictions...</p>
+          <p className="text-sm text-gray-600">{t('trainingModel')}</p>
         </div>
       </div>
     );
@@ -140,7 +142,7 @@ export function PredictiveSpendingChart({
   if (chartData.length === 0) {
     return (
       <div className="bg-gray-50 rounded-lg p-8 text-center">
-        <p className="text-gray-600">No data available for predictions</p>
+        <p className="text-gray-600">{t('noData')}</p>
       </div>
     );
   }
@@ -154,7 +156,7 @@ export function PredictiveSpendingChart({
       {/* Summary Stats */}
       <div className="grid grid-cols-3 gap-4">
         <div className="bg-white rounded-lg p-4 shadow-sm">
-          <p className="text-xs text-gray-600 mb-1">Next Month</p>
+          <p className="text-xs text-gray-600 mb-1">{t('stats.nextMonth')}</p>
           <p className="text-2xl font-bold text-gray-900">
             ${predictions[0]?.predictedAmount.toFixed(0) || '0'}
           </p>
@@ -165,13 +167,13 @@ export function PredictiveSpendingChart({
           )}
         </div>
         <div className="bg-white rounded-lg p-4 shadow-sm">
-          <p className="text-xs text-gray-600 mb-1">Avg Confidence</p>
+          <p className="text-xs text-gray-600 mb-1">{t('stats.avgConfidence')}</p>
           <p className="text-2xl font-bold text-teal-600">
             {(avgConfidence * 100).toFixed(0)}%
           </p>
         </div>
         <div className="bg-white rounded-lg p-4 shadow-sm">
-          <p className="text-xs text-gray-600 mb-1">3-Month Avg</p>
+          <p className="text-xs text-gray-600 mb-1">{t('stats.threeMonthAvg')}</p>
           <p className="text-2xl font-bold text-gray-900">
             ${predictions.length > 0
               ? (predictions.slice(0, 3).reduce((sum, p) => sum + p.predictedAmount, 0) / Math.min(3, predictions.length)).toFixed(0)
@@ -183,7 +185,7 @@ export function PredictiveSpendingChart({
       {/* Chart */}
       <div className="bg-white rounded-lg p-6 shadow-sm">
         <h3 className="text-lg font-semibold text-gray-900 mb-4">
-          Spending Forecast: {category}
+          {t('title', { category })}
         </h3>
         <ResponsiveContainer width="100%" height={300}>
           <AreaChart data={chartData}>
@@ -221,7 +223,7 @@ export function PredictiveSpendingChart({
                 stroke="none"
                 fill={palette.data[1].hex}
                 fillOpacity={0.1}
-                name="Confidence Interval"
+                name={t('legend.confidenceInterval')}
               />
             )}
 
@@ -233,7 +235,7 @@ export function PredictiveSpendingChart({
                 stroke={palette.positive.hex}
                 strokeWidth={2}
                 dot={{ fill: palette.positive.hex, r: 4 }}
-                name="Actual"
+                name={t('legend.actual')}
               />
             )}
 
@@ -246,7 +248,7 @@ export function PredictiveSpendingChart({
                 strokeWidth={2}
                 strokeDasharray="5 5"
                 dot={{ fill: palette.data[1].hex, r: 4 }}
-                name="Predicted"
+                name={t('legend.predicted')}
               />
             )}
           </AreaChart>
@@ -257,16 +259,16 @@ export function PredictiveSpendingChart({
       {predictions.length > 0 && (
         <div className="bg-white rounded-lg shadow-sm overflow-hidden">
           <div className="p-4 border-b border-gray-200">
-            <h4 className="text-sm font-semibold text-gray-900">Monthly Predictions</h4>
+            <h4 className="text-sm font-semibold text-gray-900">{t('table.title')}</h4>
           </div>
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead className="bg-gray-50">
                 <tr>
-                  <th className="px-4 py-3 text-left text-xs font-medium text-gray-700">Month</th>
-                  <th className="px-4 py-3 text-right text-xs font-medium text-gray-700">Predicted</th>
-                  <th className="px-4 py-3 text-right text-xs font-medium text-gray-700">Range</th>
-                  <th className="px-4 py-3 text-right text-xs font-medium text-gray-700">Confidence</th>
+                  <th className="px-4 py-3 text-left text-xs font-medium text-gray-700">{t('table.month')}</th>
+                  <th className="px-4 py-3 text-right text-xs font-medium text-gray-700">{t('table.predicted')}</th>
+                  <th className="px-4 py-3 text-right text-xs font-medium text-gray-700">{t('table.range')}</th>
+                  <th className="px-4 py-3 text-right text-xs font-medium text-gray-700">{t('table.confidence')}</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200">

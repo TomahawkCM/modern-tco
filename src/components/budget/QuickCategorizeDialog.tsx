@@ -17,6 +17,7 @@ import {
 import { DialogTitle } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Tag, ChevronRight, Check, Loader2 } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import type { Category, Transaction } from '@/types/budget';
 
 interface QuickCategorizeDialogProps {
@@ -34,6 +35,7 @@ export function QuickCategorizeDialog({
   onSelect,
   transaction,
 }: QuickCategorizeDialogProps) {
+  const t = useTranslations('quickCategorize');
   const [search, setSearch] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [selectedSubcategory, setSelectedSubcategory] = useState<string | null>(null);
@@ -92,14 +94,14 @@ export function QuickCategorizeDialog({
 
   return (
     <CommandDialog open={open} onOpenChange={onOpenChange}>
-      <DialogTitle className="sr-only">Quick Categorize</DialogTitle>
+      <DialogTitle className="sr-only">{t('title')}</DialogTitle>
       <CommandInput
-        placeholder="Search categories..."
+        placeholder={t('searchPlaceholder')}
         value={search}
         onValueChange={setSearch}
       />
       <CommandList>
-        <CommandEmpty>No categories found.</CommandEmpty>
+        <CommandEmpty>{t('noResults')}</CommandEmpty>
 
         {categories.map((cat) => (
           <CommandGroup key={cat.id} heading={cat.name}>
@@ -116,7 +118,7 @@ export function QuickCategorizeDialog({
                 <Tag className="w-4 h-4 text-teal-600" />
               )}
               <span className="font-medium">{cat.name}</span>
-              <span className="ml-auto text-xs text-gray-500">General</span>
+              <span className="ml-auto text-xs text-gray-500">{t('general')}</span>
             </CommandItem>
 
             {/* Subcategories */}
@@ -149,12 +151,12 @@ export function QuickCategorizeDialog({
               {selectedSubcategory && ` - ${selectedSubcategory}`}
             </span>
           ) : (
-            <span>Click a category to select</span>
+            <span>{t('clickToSelect')}</span>
           )}
         </div>
         <div className="flex items-center gap-3">
           {selectedCategory && (
-            <span className="text-xs text-gray-400">Press ↵ Enter</span>
+            <span className="text-xs text-gray-400">{t('pressEnter')}</span>
           )}
           <div className="flex items-center gap-2">
             <Button
@@ -164,7 +166,7 @@ export function QuickCategorizeDialog({
               disabled={isSaving}
               className="h-8"
             >
-              Cancel
+              {t('buttons.cancel')}
             </Button>
             <Button
               size="sm"
@@ -175,12 +177,12 @@ export function QuickCategorizeDialog({
               {isSaving ? (
                 <>
                   <Loader2 className="w-3 h-3 mr-1.5 animate-spin" />
-                  Saving...
+                  {t('saving')}
                 </>
               ) : (
                 <>
                   <Check className="w-3 h-3 mr-1.5" />
-                  Save
+                  {t('buttons.save')}
                 </>
               )}
             </Button>

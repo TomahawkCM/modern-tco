@@ -210,7 +210,7 @@ export function SubscriptionModal({
             {/* Name */}
             <div>
               <label htmlFor="sub-name" className="block text-base font-semibold text-foreground mb-2">
-                <Tag className="w-4 h-4 inline-block mr-2" />
+                <Tag className="w-4 h-4 inline-block me-2" />
                 Subscription Name *
               </label>
               <input
@@ -228,11 +228,11 @@ export function SubscriptionModal({
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label htmlFor="sub-amount" className="block text-base font-semibold text-foreground mb-2">
-                  <DollarSign className="w-4 h-4 inline-block mr-2" />
+                  <DollarSign className="w-4 h-4 inline-block me-2" />
                   Amount *
                 </label>
                 <div className="relative">
-                  <span className="absolute left-4 top-1/2 -translate-y-1/2 text-lg text-muted-foreground">$</span>
+                  <span className="absolute start-4 top-1/2 -translate-y-1/2 text-lg text-muted-foreground">$</span>
                   <input
                     id="sub-amount"
                     type="number"
@@ -242,7 +242,7 @@ export function SubscriptionModal({
                     step="0.01"
                     min="0"
                     inputMode="decimal"
-                    className="w-full min-h-[48px] pl-8 pr-4 text-base border border-input rounded-lg bg-background text-foreground focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                    className="w-full min-h-[48px] ps-8 pe-4 text-base border border-input rounded-lg bg-background text-foreground focus:ring-2 focus:ring-teal-500 focus:border-transparent"
                     required
                   />
                 </div>
@@ -250,7 +250,7 @@ export function SubscriptionModal({
 
               <div>
                 <label htmlFor="sub-cycle" className="block text-base font-semibold text-foreground mb-2">
-                  <Calendar className="w-4 h-4 inline-block mr-2" />
+                  <Calendar className="w-4 h-4 inline-block me-2" />
                   Billing Cycle *
                 </label>
                 <select
@@ -377,7 +377,7 @@ export function SubscriptionModal({
               >
                 <span
                   className={`absolute top-1 w-5 h-5 rounded-full bg-white shadow-md transition-transform ${
-                    autoRenew ? 'left-6' : 'left-1'
+                    autoRenew ? 'start-6' : 'start-1'
                   }`}
                 />
               </button>
@@ -399,7 +399,7 @@ export function SubscriptionModal({
                 >
                   <span
                     className={`absolute top-1 w-5 h-5 rounded-full bg-white shadow-md transition-transform ${
-                      reminderEnabled ? 'left-6' : 'left-1'
+                      reminderEnabled ? 'start-6' : 'start-1'
                     }`}
                   />
                 </button>
@@ -443,11 +443,11 @@ export function SubscriptionModal({
               </button>
 
               {showAdvanced && (
-                <div className="mt-4 space-y-4 pl-4 border-l-2 border-teal-200">
+                <div className="mt-4 space-y-4 ps-4 border-s-2 border-teal-200">
                   {/* Description */}
                   <div>
                     <label htmlFor="sub-desc" className="block text-sm font-medium text-foreground mb-2">
-                      <FileText className="w-4 h-4 inline-block mr-2" />
+                      <FileText className="w-4 h-4 inline-block me-2" />
                       Description
                     </label>
                     <input
@@ -463,7 +463,7 @@ export function SubscriptionModal({
                   {/* Payment Method */}
                   <div>
                     <label htmlFor="sub-payment" className="block text-sm font-medium text-foreground mb-2">
-                      <CreditCard className="w-4 h-4 inline-block mr-2" />
+                      <CreditCard className="w-4 h-4 inline-block me-2" />
                       Payment Method
                     </label>
                     <input
@@ -479,7 +479,7 @@ export function SubscriptionModal({
                   {/* Website URL */}
                   <div>
                     <label htmlFor="sub-url" className="block text-sm font-medium text-foreground mb-2">
-                      <LinkIcon className="w-4 h-4 inline-block mr-2" />
+                      <LinkIcon className="w-4 h-4 inline-block me-2" />
                       Website / Login URL
                     </label>
                     <input

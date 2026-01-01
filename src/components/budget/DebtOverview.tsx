@@ -73,7 +73,7 @@ export function DebtOverview() {
   }
 
   return (
-    <div className="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow overflow-hidden border-l-4 border-teal-500">
+    <div className="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow overflow-hidden border-s-4 border-teal-500">
       {/* Header */}
       <div className="p-6 border-b border-gray-200">
         <div className="flex items-center justify-between">
@@ -89,7 +89,7 @@ export function DebtOverview() {
           <Link href="/budget-app/loans">
             <Button variant="ghost" size="sm">
               View All
-              <ArrowRight className="w-4 h-4 ml-2" />
+              <ArrowRight className="w-4 h-4 ms-2" />
             </Button>
           </Link>
         </div>
@@ -190,7 +190,7 @@ export function DebtOverview() {
         <div className="p-6 border-t border-gray-200">
           <Link href="/budget-app/loans/new">
             <Button variant="outline" className="w-full">
-              <Plus className="w-4 h-4 mr-2" />
+              <Plus className="w-4 h-4 me-2" />
               Add Loan
             </Button>
           </Link>

@@ -1,433 +1,873 @@
 {
-  "nav": {
-    "dashboard": "Башкы бет",
-    "transactions": "Транзакциялар",
-    "budgets": "Бюджеттер",
-    "reports": "Эсептер",
-    "accounts": "Эсептер",
-    "categories": "Категориялар",
-    "goals": "Максаттар",
-    "import": "Импорттоо",
-    "export": "Экспорттоо",
-    "settings": "Настройкалар",
-    "help": "Жардам",
-    "about": "Биз жөнүндө"
+  "accessibilitySettings": {
+    "fontSize": {
+      "default": "Default",
+      "description": "Adjust the base text size for better readability",
+      "extraLarge": "Extra Large",
+      "large": "Large",
+      "title": "Font Size"
+    },
+    "infoBox": {
+      "savedAutomatically": "Settings are saved automatically and persist across sessions",
+      "seniorsOptimization": "Seniors Mode provides one-click accessibility optimization",
+      "storedLocally": "Your preferences are stored locally and never sent to servers",
+      "syncAcrossTabs": "Changes sync across all open tabs in real-time",
+      "title": "About Accessibility Settings"
+    },
+    "presets": {
+      "full": "Full",
+      "fullDesc": "Maximum accessibility",
+      "mild": "Mild",
+      "mildDesc": "Slightly enhanced",
+      "moderate": "Moderate",
+      "moderateDesc": "Recommended for most",
+      "off": "Off",
+      "offDesc": "Standard interface",
+      "title": "Quick Presets:"
+    },
+    "reducedMotion": {
+      "description": "Minimize animations and transitions for a calmer experience. Helpful for users with vestibular disorders or motion sensitivity.",
+      "title": "Reduced Motion",
+      "toggleLabel": "Toggle reduced motion mode"
+    },
+    "seniorsMode": {
+      "description": "One-click accessibility enhancement with larger text, bigger touch targets, and simplified interface",
+      "title": "Seniors Mode"
+    },
+    "themeMode": {
+      "auto": "Auto",
+      "autoDesc": "Match system",
+      "dark": "Dark",
+      "darkDesc": "Easy on eyes",
+      "description": "Choose your preferred color scheme for the budget app",
+      "highContrast": "High Contrast",
+      "highContrastDesc": "Maximum visibility",
+      "light": "Light",
+      "lightDesc": "Bright and clear",
+      "title": "Theme Mode"
+    }
+  },
+  "accessibleChart": {
+    "buttons": {
+      "chart": "Chart",
+      "showChart": "Show chart view",
+      "showTable": "Show data table view",
+      "table": "Table"
+    },
+    "chartDescription": "{description}. {dataPoints} data points shown. {dataList}. Press the Table button to view data in a table format with keyboard navigation support.",
+    "chartTypeDescription": "This is a {chartType} chart with {dataPoints} data points.",
+    "footer": {
+      "average": "Average:",
+      "total": "Total:"
+    },
+    "keyboardNav": {
+      "srOnly": "Use arrow keys to navigate between rows. Press Tab to navigate to the next element.",
+      "visual": "Use ← → or ↑ ↓ keys to navigate • Home/End to jump to start/end"
+    },
+    "summary": {
+      "average": "Average: {value}.",
+      "highest": "Highest value: {label} at {value}.",
+      "lowest": "Lowest value: {label} at {value}.",
+      "total": "Total: {value}."
+    },
+    "switchedToChart": "Switched to chart view",
+    "switchedToTable": "Switched to table view",
+    "tableHeaders": {
+      "additionalInfo": "Additional Info",
+      "category": "Category",
+      "period": "Period",
+      "value": "Value"
+    }
   },
   "actions": {
     "addTransaction": "Транзакция кошуу",
-    "importData": "Деректерди импорттоо",
-    "import": "Импорттоо",
     "editDashboard": "Башкы бетти редакциялоо",
-    "saveChanges": "Өзгөртүүлөрдү сактоо",
-    "resetDefaults": "Стандарттык параметрлерге кайтаруу"
+    "import": "Импорттоо",
+    "importData": "Деректерди импорттоо",
+    "resetDefaults": "Стандарттык параметрлерге кайтаруу",
+    "saveChanges": "Өзгөртүүлөрдү сактоо"
   },
-  "welcome": {
-    "title": "Бюджеттик колдонууга кош келиңиз",
-    "subtitle": "Алгачкы транзакцияңызды кошуп же банктагы маалыматтарды импорттоодон баштаңыз"
+  "aiColumnMapper": {
+    "analyzing": "Analyzing CSV structure with AI...",
+    "buttons": {
+      "apply": "Apply Mappings & Import",
+      "cancel": "Cancel"
+    },
+    "closeModal": "Close modal",
+    "columnMappings": "Column Mappings",
+    "columnTypes": {
+      "amount": "Amount",
+      "balance": "Balance",
+      "credit": "Credit",
+      "date": "Date",
+      "debit": "Debit",
+      "description": "Description",
+      "ignore": "Ignore"
+    },
+    "confidence": {
+      "analyzed": "AI analyzed {columnCount} columns and {rowCount} sample rows",
+      "title": "Detection Confidence"
+    },
+    "preview": {
+      "amount": "Amount",
+      "date": "Date",
+      "description": "Description",
+      "title": "Transaction Preview"
+    },
+    "samples": "Samples:",
+    "saveConfig": {
+      "hint": "Next time you import from this bank, mappings will be automatic",
+      "label": "Save this bank configuration for future imports",
+      "placeholder": "Enter bank name (e.g., My Local Credit Union)"
+    },
+    "subtitle": "Review AI-detected columns and adjust if needed",
+    "title": "AI Column Mapping Wizard"
+  },
+  "bulkActions": {
+    "applyTo": "Apply to {count}",
+    "categorize": "Categorize",
+    "clearSelection": "Clear selection",
+    "confirmDelete": "Delete {count, plural, =1 {1 transaction} other {# transactions}}?",
+    "delete": "Delete",
+    "deleteWarning": "This action cannot be undone.",
+    "export": "Export",
+    "noSubcategory": "No subcategory",
+    "selectAll": "Select all",
+    "selectCategory": "Select category...",
+    "selected": "{count} selected"
+  },
+  "chatbot": {
+    "buttons": {
+      "clearHistory": "Clear chat history",
+      "exportConversation": "Export conversation",
+      "send": "Send"
+    },
+    "disabled": {
+      "description": "Enable the chatbot in Settings → Privacy → Budget Chatbot to get started.",
+      "enableButton": "Enable Chatbot",
+      "title": "Chatbot Disabled"
+    },
+    "emptyState": {
+      "description": "Ask me anything about your finances. Here are some examples:",
+      "examples": {
+        "balance": "What's my total account balance?",
+        "budget": "Am I over budget in any categories?",
+        "groceries": "Show me my recent grocery purchases",
+        "spending": "How much did I spend this month?"
+      },
+      "title": "Start a Conversation"
+    },
+    "header": {
+      "subtitle": "Ask me about your finances",
+      "title": "Budget Assistant"
+    },
+    "input": {
+      "disclaimer": "Powered by OpenAI GPT-4. Your data is processed securely and not used for training.",
+      "placeholder": "Ask about your finances..."
+    },
+    "messages": {
+      "dataAccessed": "Data accessed:",
+      "error": "Error",
+      "thinking": "Thinking..."
+    }
+  },
+  "chatbotHelp": {
+    "tabs": {
+      "actions": "Actions",
+      "budget": "Budget",
+      "income": "Income",
+      "spending": "Spending",
+      "trends": "Trends"
+    }
+  },
+  "chatbotOptIn": {
+    "buttons": {
+      "decline": "No Thanks",
+      "enable": "Enable Chatbot"
+    },
+    "capabilities": {
+      "actions": "Optionally perform actions like adding transactions or creating budgets",
+      "answer": "Answer questions about your transactions, budgets, and spending patterns",
+      "insights": "Provide insights and recommendations based on your data",
+      "search": "Search your financial data using natural language",
+      "title": "What the Chatbot Can Do"
+    },
+    "closeDialog": "Close chatbot opt-in dialog",
+    "controls": {
+      "dataAccess": {
+        "fullAccess": {
+          "description": "Chatbot can perform actions like adding transactions, creating budgets, and making changes to your data",
+          "title": "Full Access"
+        },
+        "label": "What can the chatbot do with your data?",
+        "readOnly": {
+          "description": "Chatbot can view your data and answer questions, but cannot add, edit, or delete transactions/budgets",
+          "title": "Read-Only (Recommended)"
+        }
+      },
+      "retention": {
+        "days30": "30 days",
+        "days7": "7 days (Recommended)",
+        "forever": "Keep forever",
+        "label": "How long should we keep your conversations?",
+        "note": "Conversations are stored locally in your browser. You can delete them anytime in Settings → Privacy."
+      },
+      "title": "Privacy Controls"
+    },
+    "gdpr": {
+      "notice": "<strong>Your Rights:</strong> By enabling the chatbot, you consent to processing your financial data via OpenAI's API. You can withdraw consent anytime by disabling the chatbot in Settings → Privacy. Your data is processed in accordance with our Privacy Policy and GDPR requirements. You have the right to access, delete, and export your conversation history at any time."
+    },
+    "privacy": {
+      "dataSent": "Financial data is sent to the API to answer your questions",
+      "disable": "You can disable the chatbot anytime in Settings → Privacy",
+      "noTraining": "OpenAI does not use API data to train models (as of their policy)",
+      "processedBy": "Your conversations are processed by OpenAI's GPT-4 API",
+      "title": "Privacy & Data Usage"
+    },
+    "subtitle": "AI-powered financial assistant",
+    "title": "Enable Budget Chatbot?"
+  },
+  "combobox": {
+    "noResults": "No results found.",
+    "search": "Search...",
+    "select": "Select..."
+  },
+  "commandPalette": {
+    "commands": {
+      "addTransaction": "Add Transaction",
+      "budgets": "Budgets",
+      "categories": "Categories",
+      "darkTheme": "Dark Theme",
+      "dashboard": "Dashboard",
+      "exportData": "Export Data",
+      "futurePlans": "Future Plans",
+      "highContrastTheme": "High-Contrast Theme",
+      "importCsv": "Import CSV",
+      "investments": "Investments",
+      "lightTheme": "Light Theme",
+      "loans": "Loans",
+      "newBudget": "New Budget",
+      "reports": "Reports",
+      "retirement": "Retirement",
+      "scanReceipt": "Scan Receipt",
+      "settings": "Settings",
+      "transactions": "Transactions"
+    },
+    "groups": {
+      "appearance": "Appearance",
+      "quickActions": "Quick Actions",
+      "tools": "Tools & Settings",
+      "tracking": "Tracking & Analysis",
+      "wealth": "Wealth & Planning"
+    },
+    "noResults": "No results found.",
+    "placeholder": "Type a command or search..."
   },
   "common": {
-    "save": "Сактоо",
     "cancel": "Жокко чыгаруу",
     "delete": "Жок кылуу",
     "edit": "Редакциялоо",
-    "loading": "Жүктөлүүдө..."
+    "loading": "Жүктөлүүдө...",
+    "save": "Сактоо"
   },
-  "widget": {
-    "spendingByCategory": {
-      "title": "Категория боюнча чыгымдар",
-      "description": "Акчаларыңыздын кайда кетип жатканын визуалдык түрдө көрүңүз"
-    },
-    "recentTransactions": {
-      "title": "Жакындагы транзакциялар",
-      "description": "Сиздин акыркы финансылык иш-аракеттериңиздин тез көрүүсү"
-    },
-    "budgetProgress": {
-      "title": "Бюджеттин прогресси",
-      "description": "Бюджет максаттарыңызга карата кандай иштеп жатканыңызды көзөмөлдөңүз"
-    },
-    "accountBalances": {
-      "title": "Эсептердин балансын",
-      "description": "Бардык эсептер боюнча учурдагы баланс"
-    },
-    "incomeVsExpenses": {
-      "title": "Киреше жана чыгымдар",
-      "description": "Убакыттын өтүшү менен кирешеңизди жана чыгымдарыңызды салыштырыңыз"
-    },
-    "monthlyTrends": {
-      "title": "Айлык тенденциялар",
-      "description": "Ар айда финансылык үлгүлөрүңүздү визуалдаштырыңыз"
-    },
-    "upcomingBills": {
-      "title": "Келечектеги төлөмдөр",
-      "description": "Төлөмдөрдү эскертип, эч качан төлөмдү өткөрүп жибербеңиз"
-    }
+  "dashboardCustomizer": {
+    "alwaysVisible": "Always visible",
+    "ariaLabel": "Customize dashboard layout",
+    "button": "Customize",
+    "description": "Show or hide dashboard widgets. Drag widgets on the dashboard to reorder them.",
+    "reorderDescription": "To change widget order, drag and drop widgets directly on your dashboard. Use your mouse or touch to grab the drag handle (⋮⋮) on each widget card.",
+    "reorderTitle": "Reorder Widgets",
+    "resetButton": "Reset to Defaults",
+    "title": "Customize Dashboard",
+    "toggleVisibility": "Toggle {name} visibility",
+    "widgetVisibility": "Widget Visibility",
+    "widgetsVisible": "{visible} of {total} widgets visible"
   },
-  "tooltip": {
-    "ariaLabel": "Кошумча маалымат",
-    "learnMore": "Көбүрөөк маалымат алуу →"
-  },
-  "footer": {
-    "tagline": "Premium бюджеттик пландоо бир жолу жаңыртуу менен.",
-    "links": {
-      "login": "Кирүү",
-      "signup": "Сынак баштоо",
-      "upgrade": "Жаңыртуу",
-      "settings": "Настройкалар"
-    },
-    "copyright": "© {year} {brandName}"
-  },
-  "dialog": {
-    "confirm": "Тастыктоо",
-    "cancel": "Жокко чыгаруу",
-    "processing": "Обработка...",
-    "finalConfirmation": "Акыркы тастыктоо:",
-    "typeToConfirm": "Бул аракетти тастыктоо үчүн {text} жазыңыз."
-  },
-  "sidebar": {
-    "appTitle": "Бюджеттик колдонуу",
-    "appSubtitle": "Premium финансылык",
-    "search": "Издөө...",
-    "shortcuts": "Тез жеткиликтүүлүктөр",
-    "navigation": {
-      "dashboard": "Башкы бет",
-      "transactions": "Транзакциялар",
-      "scanReceipt": "Чек сканерлөө",
-      "categories": "Категориялар",
-      "budgets": "Бюджеттер",
-      "subscriptions": "Жазылуулар",
-      "loans": "Кредиттер",
-      "investments": "Инвестициялар",
-      "futurePlans": "Келечектеги пландар",
-      "retirement": "Эмгекке чыгуу",
-      "reports": "Эсептер"
-    },
-    "actions": {
-      "importCsv": "CSV импорттоо",
-      "settings": "Настройкалар",
-      "showLess": "Аз көрсөтүү",
-      "showAllItems": "Бардык элементтерди көрсөтүү"
-    }
-  },
-  "onboarding": {
-    "skipTour": "Турду өткөрүп жиберүү",
-    "stepCounter": "Кадам {current} из {total}",
-    "dontShowAgain": "Бул турду кайра көрсөтпө",
-    "quickTip": "💡 Жылдам кеңеш",
-    "navigation": {
-      "previous": "Алдынкы",
-      "next": "Кийинки",
-      "getStarted": "Баштоо",
-      "startTour": "Турду баштоо"
-    },
-    "steps": {
-      "welcome": {
-        "title": "👋 Бюджеттик колдонууга кош келиңиз!",
-        "description": "Үй-бүлөлүк финансыларыңызды башкарууга жардам берүү үчүн тез тур өткөрөлү. Бул көп убакыт албайт!"
+  "debtAnalysis": {
+    "cards": {
+      "avgRate": {
+        "subtitle": "Weighted average",
+        "title": "Avg Interest Rate"
       },
-      "import": {
-        "title": "📥 Транзакцияларыңызды импорттоо",
-        "description": "Банк транзакцияларыңызды CSV файлынан импорттоодон баштаңыз. Биз BMO, Home Trust жана башка банктарды колдойбуз. Колдонмо автоматтык түрдө транзакцияларыңызды категориялайт!"
+      "debtFreeDate": {
+        "subtitle": "Estimated payoff",
+        "title": "Debt-Free Date"
       },
-      "categorize": {
-        "title": "🏷️ Категорияларга бөлүү жана уюштуруу",
-        "description": "Транзакция категорияларын карап чыгып, тууралаңыз. Биздин акылдуу категориялоо сиздин оңдолорунуздан үйрөнүп, убакыттын өтүшү менен жакшыртат. Көп транзакцияларды бир убакта категориялоого аракеттерди колдонсоңуз болот!"
+      "monthlyPayment": {
+        "subtitle": "Total monthly obligations",
+        "title": "Monthly Payment"
       },
-      "budgets": {
-        "title": "🎯 Бюджеттерди белгилөө",
-        "description": "Ар түрдүү чыгым категориялары үчүн бюджеттер түзүңүз. Айдын ичинде прогрессиңизди көзөмөлдөп, чектериңизге жакындаганда эскертүүлөрдү алыңыз."
-      },
-      "reports": {
-        "title": "📊 Эсептерди жана маалыматтарды көрүү",
-        "description": "Чыгым үлгүлөрүңүздү визуалдаштырып, таза байлыгыңызды көзөмөлдөп, финансылык чечимдерди кабыл алыңыз. Сиздин башкы бет ар транзакция менен автоматтык түрдө жаңыртылат!"
+      "totalDebt": {
+        "subtitle": "Across {count} active loans",
+        "title": "Total Debt"
       }
     },
-    "tips": {
-      "import": "CSV файлыңызды сүйрөп коюңуз же издөөгө чыксаңыз болот. Биз BMO жана Home Trust форматтарын автоматтык түрдө аныктайбыз!",
-      "categorize": "Тез категориялоо баскычын колдонуп же көп транзакцияларды категориялоо үчүн тандаңыз.",
-      "budgets": "Реалдуу бюджеттерди белгилеңиз, биз сиздин ашып кетүүңүздү көзөмөлдөп, эскертебиз."
+    "charts": {
+      "byType": {
+        "description": "Distribution of debt across loan types",
+        "title": "Debt by Type"
+      },
+      "projection": {
+        "description": "Expected debt reduction over the next year",
+        "expectedReduction": "Expected reduction: {amount} over 12 months",
+        "title": "12-Month Payoff Projection"
+      }
+    },
+    "comparison": {
+      "description": "Side-by-side comparison of your active loans",
+      "headers": {
+        "balance": "Balance",
+        "interestRate": "Interest Rate",
+        "loan": "Loan",
+        "monthlyPayment": "Monthly Payment",
+        "percentOfTotal": "% of Total Debt"
+      },
+      "title": "Loan Comparison",
+      "total": "Total"
+    },
+    "empty": {
+      "addFirstLoan": "Add Your First Loan",
+      "description": "You don't have any active loans. Add a loan to see debt analytics.",
+      "title": "No Debt to Analyze"
+    },
+    "subtitle": "Comprehensive view of your loans and obligations",
+    "title": "Debt Analysis",
+    "viewAllLoans": "View All Loans"
+  },
+  "dialog": {
+    "cancel": "Жокко чыгаруу",
+    "confirm": "Тастыктоо",
+    "finalConfirmation": "Акыркы тастыктоо:",
+    "processing": "Обработка...",
+    "typeToConfirm": "Бул аракетти тастыктоо үчүн {text} жазыңыз."
+  },
+  "draggableWidget": {
+    "dragToReorder": "Drag to reorder widget"
+  },
+  "emptyStates": {
+    "budgets": {
+      "description": "Create budgets to track spending in different categories and achieve your financial goals.",
+      "heading": "No Budgets Created",
+      "primaryCta": "Create Your First Budget"
+    },
+    "categories": {
+      "description": "Create custom categories to organize your transactions beyond the default ones.",
+      "heading": "No Custom Categories",
+      "primaryCta": "Add Category"
+    },
+    "dashboard": {
+      "description": "Get started by importing your bank transactions or adding accounts manually to see your financial overview.",
+      "heading": "Welcome to Your Budget App!",
+      "primaryCta": "Import CSV",
+      "secondaryCta": "Add Transaction"
+    },
+    "futurePlans": {
+      "description": "Set financial goals like buying a house, saving for education, or planning a vacation.",
+      "heading": "No Future Plans",
+      "primaryCta": "Create a Goal"
+    },
+    "investments": {
+      "description": "Track your investment accounts and holdings to monitor portfolio performance and net worth.",
+      "heading": "No Investments Tracked",
+      "primaryCta": "Add Investment Account"
+    },
+    "loans": {
+      "description": "Track your loans, mortgages, and debts to visualize payoff progress and plan payments.",
+      "heading": "No Loans Tracked",
+      "primaryCta": "Add Your First Loan"
+    },
+    "reports": {
+      "description": "Add transactions and budgets to generate insightful reports about your spending patterns and trends.",
+      "heading": "No Data to Report",
+      "primaryCta": "Add Transactions",
+      "secondaryCta": "Import CSV"
+    },
+    "retirement": {
+      "description": "Plan for retirement by tracking accounts, estimating needs, and visualizing your retirement timeline.",
+      "heading": "No Retirement Plans",
+      "primaryCta": "Start Planning"
+    },
+    "transactions": {
+      "description": "Start tracking your spending by adding your first transaction. You can add manually or import from a CSV file.",
+      "heading": "No Transactions Yet",
+      "primaryCta": "Add Transaction",
+      "secondaryCta": "Import CSV"
     }
   },
+  "errorRecovery": {
+    "aiAnalysis": "AI Analysis:",
+    "closeModal": "Close modal",
+    "footer": {
+      "close": "Close",
+      "needHelp": "Need more help?",
+      "viewGuide": "View troubleshooting guide"
+    },
+    "recovery": {
+      "canRecover": "Good news! We found {count} {count, plural, =1 {way} other {ways}} to recover from this error.",
+      "cannotRecover": "Recovery not possible. You'll need to re-export the file from your bank or try a different format.",
+      "optionsTitle": "Recovery Options"
+    },
+    "subtitle": "Don't worry! We can help you fix this.",
+    "suggestions": {
+      "autoFix": "AUTO-FIX",
+      "autoFixButton": "Auto-Fix",
+      "confidence": "{percent}% confidence",
+      "fixing": "Fixing...",
+      "learnMore": "Learn More",
+      "technicalDetails": "Technical Details"
+    },
+    "summary": {
+      "category": "Category: {category}",
+      "title": "Error Summary"
+    },
+    "technical": {
+      "canRecover": "Can Recover:",
+      "errorCategory": "Error Category:",
+      "no": "No",
+      "severity": "Severity:",
+      "suggestions": "Suggestions:",
+      "title": "Advanced Technical Details",
+      "yes": "Yes"
+    },
+    "title": "Import Failed"
+  },
+  "exportDialog": {
+    "buttons": {
+      "cancel": "Cancel",
+      "done": "Done!",
+      "download": "Download",
+      "export": "Export Data"
+    },
+    "complete": {
+      "download": "Your file is ready to download",
+      "success": "Export complete! Check your downloads folder."
+    },
+    "dataSummary": {
+      "accounts": "Accounts",
+      "estimatedSize": "Est. Size",
+      "title": "Data Summary",
+      "transactions": "Transactions"
+    },
+    "exporting": {
+      "pleaseWait": "Please wait, this may take a moment",
+      "title": "Exporting..."
+    },
+    "format": {
+      "budget": {
+        "description": "Complete backup including all data",
+        "label": ".budget file"
+      },
+      "csv": {
+        "description": "Spreadsheet-compatible format",
+        "label": "CSV file"
+      },
+      "json": {
+        "description": "Developer-friendly format",
+        "label": "JSON file"
+      },
+      "label": "Export Format"
+    },
+    "options": {
+      "encrypt": {
+        "description": "Protect your data with AES-256 encryption",
+        "label": "Encrypt with Password"
+      },
+      "includeReceipts": {
+        "description": "Attach receipt images (increases file size)",
+        "label": "Include Receipts"
+      }
+    },
+    "password": {
+      "confirm": "Confirm Password",
+      "confirmPlaceholder": "Confirm password",
+      "hint": "Password Hint (Optional)",
+      "hintNote": "This hint will be stored unencrypted in the file",
+      "hintPlaceholder": "A hint to help you remember",
+      "label": "Password",
+      "minLength": "Password must be at least 8 characters",
+      "mismatch": "Passwords do not match",
+      "placeholder": "Enter password (min 8 characters)",
+      "required": "Password is required for encryption"
+    },
+    "subtitle": "Download your budget data",
+    "title": "Export Data"
+  },
+  "filters": {
+    "account": "Account",
+    "allAccounts": "All accounts",
+    "allCategories": "All categories",
+    "allTypes": "All types",
+    "apply": "Apply filters",
+    "category": "Category",
+    "clearFilters": "Clear filters",
+    "dateRange": "Date range",
+    "expense": "Expense",
+    "income": "Income",
+    "search": "Search transactions...",
+    "type": "Type"
+  },
+  "footer": {
+    "copyright": "© {year} {brandName}",
+    "links": {
+      "login": "Кирүү",
+      "settings": "Настройкалар",
+      "signup": "Сынак баштоо",
+      "upgrade": "Жаңыртуу"
+    },
+    "tagline": "Premium бюджеттик пландоо бир жолу жаңыртуу менен."
+  },
+  "healthScore": {
+    "ariaLabel": "Financial Health Score: {score} out of 100. {interpretation}",
+    "emptyState": {
+      "line1": "Add transactions to see your",
+      "line2": "Financial Health Score"
+    },
+    "grade": "Grade: {grade}",
+    "missingFactors": "{count, plural, =1 {1 factor missing} other {# factors missing}}",
+    "title": "Financial Health"
+  },
+  "importDialog": {
+    "buttons": {
+      "back": "Back",
+      "cancel": "Cancel",
+      "done": "Done",
+      "import": "Import Data"
+    },
+    "complete": {
+      "itemsImported": "{count} items imported successfully",
+      "success": "Import Complete!",
+      "withIssues": "Import Completed with Issues"
+    },
+    "conflicts": {
+      "existing": "{count} existing",
+      "handleLabel": "Handle Conflicts",
+      "overwrite": {
+        "description": "Replace with imported",
+        "label": "Overwrite"
+      },
+      "rename": {
+        "description": "Import as new entries",
+        "label": "Create new"
+      },
+      "skip": {
+        "description": "Keep current data",
+        "label": "Skip existing"
+      },
+      "title": "Conflicts Found"
+    },
+    "encryption": {
+      "decrypt": "Decrypt & Continue",
+      "encrypted": "This file is encrypted",
+      "enterPassword": "Enter password",
+      "hint": "Hint: {hint}",
+      "password": "Password"
+    },
+    "importing": {
+      "pleaseWait": "Please wait, this may take a moment",
+      "title": "Importing your data..."
+    },
+    "preview": {
+      "dataToImport": "Data to Import",
+      "exported": "Exported",
+      "fileInfo": "File Information",
+      "version": "Version"
+    },
+    "selectFile": {
+      "dragDrop": "or drag and drop here",
+      "label": "Click to select a .budget file"
+    },
+    "subtitle": "Restore from .budget file",
+    "title": "Import Data"
+  },
+  "investmentAccountModal": {
+    "buttons": {
+      "cancel": "Cancel",
+      "create": "Create Account",
+      "saving": "Saving...",
+      "update": "Update Account"
+    },
+    "closeModal": "Close modal",
+    "errors": {
+      "saveFailed": "Failed to save account"
+    },
+    "fields": {
+      "accountNumber": {
+        "label": "Account Number (Optional)",
+        "placeholder": "e.g., Last 4 digits: 1234"
+      },
+      "institution": {
+        "label": "Financial Institution (Optional)",
+        "placeholder": "e.g., Questrade, Wealthsimple, TD Direct"
+      },
+      "name": {
+        "label": "Account Name",
+        "placeholder": "e.g., My RRSP, TFSA Savings, Company Stock"
+      },
+      "type": {
+        "descriptions": {
+          "Company shares": "Employee stock purchase or stock options",
+          "Non-registered": "Taxable investment account",
+          "RRSP": "Registered Retirement Savings Plan - Tax-deferred growth",
+          "TFSA": "Tax-Free Savings Account - Tax-free growth and withdrawals"
+        },
+        "label": "Account Type"
+      }
+    },
+    "title": {
+      "add": "Add Investment Account",
+      "edit": "Edit Investment Account"
+    },
+    "validation": {
+      "nameRequired": "Please enter an account name"
+    }
+  },
+  "investmentCharts": {
+    "emptyState": "No holdings to visualize. Add holdings to see charts.",
+    "legend": {
+      "gain": "Gain",
+      "loss": "Loss"
+    },
+    "tableHeaders": {
+      "allocation": "Allocation",
+      "costBasis": "Cost Basis",
+      "currentValue": "Current Value",
+      "gainLoss": "Gain/Loss",
+      "percentReturn": "% Return",
+      "symbol": "Symbol",
+      "total": "Total"
+    },
+    "titles": {
+      "accountTypeAllocation": "Allocation by Account Type",
+      "gainLoss": "Gain/Loss by Holding",
+      "performanceSummary": "Performance Summary",
+      "portfolioAllocation": "Portfolio Allocation by Holding"
+    },
+    "tooltip": {
+      "costBasis": "Cost Basis",
+      "currentValue": "Current Value",
+      "percentOfPortfolio": "{percent}% of portfolio"
+    }
+  },
+  "lanSync": {
+    "description": "Sync your budget data across devices on your local network",
+    "device": {
+      "connect": "Connect",
+      "connected": "Connected",
+      "disconnect": "Disconnect",
+      "removeDevice": "Remove Device",
+      "sync": "Sync",
+      "syncing": "Syncing..."
+    },
+    "disabled": "Disabled",
+    "enabled": "Enabled",
+    "howItWorks": {
+      "step1": {
+        "description": "Scan a QR code or enter connection details to pair devices on the same network",
+        "title": "Pair Devices"
+      },
+      "step2": {
+        "description": "Data is encrypted end-to-end and syncs directly between devices - no cloud required",
+        "title": "Sync Securely"
+      },
+      "step3": {
+        "description": "Changes sync automatically when devices are connected on the same network",
+        "title": "Automatic Updates"
+      },
+      "title": "How LAN Sync Works"
+    },
+    "pairedDevices": {
+      "addDevice": "Add Device",
+      "addFirstDevice": "Add Your First Device",
+      "deviceCount": "{count, plural, =1 {1 device paired} other {# devices paired}}",
+      "emptyDescription": "Pair a device to start syncing your budget data",
+      "emptyTitle": "No devices paired",
+      "noDevices": "No devices paired yet",
+      "title": "Paired Devices"
+    },
+    "removeDialog": {
+      "cancel": "Cancel",
+      "description": "Are you sure you want to remove \"{deviceName}\"? This will unpair the device and you'll need to pair again to sync data.",
+      "remove": "Remove",
+      "title": "Remove Device"
+    },
+    "syncAll": "Sync All",
+    "time": {
+      "daysAgo": "{count, plural, =1 {1 day ago} other {# days ago}}",
+      "hoursAgo": "{count, plural, =1 {1 hour ago} other {# hours ago}}",
+      "justNow": "Just now",
+      "lastSync": "Last sync: {time}",
+      "minutesAgo": "{count, plural, =1 {1 minute ago} other {# minutes ago}}",
+      "neverSynced": "Never synced"
+    },
+    "title": "LAN Sync"
+  },
   "landing": {
+    "accessibility": {
+      "badges": {
+        "keyboardFirst": "Клавиатура биринчи",
+        "largeTouchTargets": "Чоң тийүү максаттары",
+        "seniorsMode": "Улуулар режим"
+      },
+      "buttons": {
+        "openApp": "Колдонмону ачу",
+        "settings": "Жеткиликтүүлүк настройкалары"
+      },
+      "description": "Улуулар режим жөнөкөйлөтүлгөн навигация жана чоң тийүү максаттарын камсыз кылат. Клавиатуранын тез жеткиликтүүлүктөрү, фокус абалдары жана ачык контраст бардыгынын ылдамдыгын жогорулатат.",
+      "title": "Стандарт боюнча жеткиликтүү"
+    },
     "brand": {
       "name": "BudgetPro",
       "product": "Бюджеттик колдонуу"
     },
-    "hero": {
-      "badge": "Жеке маалыматтарга биринчи • Жергиликтүү гана • Нөл трек",
-      "headline": "Дангыңызды сатпастан акчаны башкаруу.",
-      "subhead": "Эсептегичтин күчү. Колдонмонун жөнөкөйлүгү. Сиздин маалыматтарыңыз эч качан түзүлбөй турган жалгыз бюджеттик колдонмо менен финансылык тактыкты тажрыйба кылыңыз.",
-      "primaryCta": {
-        "label": "Жергиликтүү протоколду баштоо (Тегин)",
-        "href": "/budget-app/auth/signup"
-      },
-      "secondaryCta": {
-        "label": "Кирүү",
-        "href": "/budget-app/auth/login"
-      },
-      "finePrint": "Банк реквизиттери талап кылынбайт. Жергиликтүү режим үчүн эсеп талап кылынбайт."
-    },
-    "trust": {
-      "0": {
-        "title": "Сиздин түзмөгүңүз, сиздин маалыматтарыңыз",
-        "description": "Маалыматтар браузериңиздин IndexedDB-синде сакталат. Биз аны көрө албайбыз."
-      },
-      "1": {
-        "title": "Эсептегич күчү",
-        "description": "Көптөгөн өзгөртүүлөрдү, бурулуштарды жана профессионалдардай анализдеңиз, формула баш оорууларынсыз."
-      },
-      "2": {
-        "title": "Офлайн ылдамдыгы",
-        "description": "Нөл кечигүү. Тоо жотосунда же метро туннелинде иштейт."
-      },
-      "3": {
-        "title": "Кол менен ритуалдар",
-        "description": "Импорт шебери жума күнү акча карап чыгуу адатка айланат."
-      }
-    },
-    "outcomes": {
-      "0": {
-        "title": "Агрегаторлор менен күрөшүүнү токтотуңуз",
-        "description": "Бузулган байланыштар же кайра авторизация циклдары жок. Сиз маалымат киргизүүнү көзөмөлдөсүз."
-      },
-      "1": {
-        "title": "Дизайн боюнча жеке маалымат",
-        "description": "Биз сиздин маалыматтарыңызды сатпайт, анткени бизде жок. Токтоосуз."
-      },
-      "2": {
-        "title": "Келечекке даяр пландоо",
-        "description": "Эмгекке чыгуу, кредиттерди төлөө жана сактоо максаттарын бириктирилген көрүнүштө моделдөө."
-      },
-      "3": {
-        "title": "Жазылууларды жок кылуучу",
-        "description": "Башка колдонмолор өткөрүп жиберген кайталанма чыгымдарды байкаңыз."
-      }
-    },
-    "features": {
-      "0": {
-        "title": "Жергиликтүү башкы бет",
-        "description": "Таза байлык, акча агымы жана категория боюнча бөлүштүрүү. Дароо жүктөө убактысы.",
-        "href": "/budget-app"
-      },
-      "1": {
-        "title": "Импорт шебери",
-        "description": "BMO, Home Trust жана настройкаланган форматтар үчүн акылдуу CSV картасы.",
-        "href": "/budget-app/import"
-      },
-      "2": {
-        "title": "Чек OCR",
-        "description": "Чектерди жергиликтүү Tesseract.js менен сканерлөө. Булутта иштетүү жок.",
-        "href": "/budget-app/ocr"
-      },
-      "3": {
-        "title": "Категория бюджеттери",
-        "description": "Нөлдөн башталган же ролловер бюджеттөө менен так категория контролу.",
-        "href": "/budget-app/budgets"
-      },
-      "4": {
-        "title": "Эмгекке чыгуу калькулятору",
-        "description": "Кошумча пайыздар визуалдаштыруусу менен эркиндик күнүңүздү моделдөө.",
-        "href": "/budget-app/planning/retirement"
-      },
-      "5": {
-        "title": "Жеке маалыматтарды коргоо",
-        "description": "Кошумча коопсуздук үчүн кардар тараптагы шифрлөө.",
-        "href": "/budget-app/settings"
-      }
-    },
-    "howItWorks": {
-      "0": {
-        "title": "Импорттоо",
-        "description": "CSV файлдарын сүйрөп коюңуз же чектерди сканерлеңиз. AI жергиликтүү түрдө колонкаларды карталаштырат."
-      },
-      "1": {
-        "title": "Карап чыгуу",
-        "description": "Акылдуу эрежелер жана көп аракеттер менен тез категориялоо."
-      },
-      "2": {
-        "title": "План",
-        "description": "Ар бир долларга жумуш бериңиз жана келечектеги таза байлыгыңызды болжолдоңуз."
-      }
-    },
-    "pricing": {
-      "eyebrow": "Адилеттүү баа",
-      "title": "Жергиликтүү акысыз. Синхрондоштуруу Pro.",
-      "description": "Күчтүү Жергиликтүү Протокол менен баштаңыз. Кийинчерээк көп түзмөктөрдү синхрондоштуруу үчүн жаңыртыңыз.",
-      "priceLabel": "Тегин түбөлүккө",
-      "cta": {
-        "label": "Жергиликтүү протоколду баштоо",
-        "href": "/budget-app/auth/signup"
-      },
-      "secondary": {
-        "label": "Pro функцияларын көрүү",
-        "href": "#pricing"
-      },
-      "guarantee": "Жергиликтүү протокол үчүн кредиттик карта талап кылынбайт."
-    },
-    "faq": {
-      "0": {
-        "q": "Менин маалыматтарым чындап эле жеке беле?",
-        "a": "Ооба. Жергиликтүү протоколдо маалыматтар сиздин түзмөгүңүздөн чыкпайт. Ал браузериңиздин IndexedDB-синде жашайт."
-      },
-      "1": {
-        "q": "Мен маалыматтарымды кантип резервдештирем?",
-        "a": "Сиз каалаган убакта толук JSON резервдик көчүрмөсүн экспорттой аласыз. Биз ошондой эле регулярдуу CSV экспортторун сунуштайбыз."
-      },
-      "2": {
-        "q": "'Синхрондоштуруу' Pro деген эмне?",
-        "a": "Жакында: Түзмөктөр арасында шифрленген маалыматтарды синхрондоштуруу үчүн опционалдык жазылуу."
-      },
-      "3": {
-        "q": "Сиз банктарга туташасызбы?",
-        "a": "Жок. Биз кол менен импорттоонун коопсуз, ишенимдүү жана финансылык аң-сезимди жакшырта тургандыгына ишенебиз."
-      }
-    },
-    "security": {
-      "title": "Дизайн боюнча жеке маалымат",
-      "description": "Бюджеттик колдонмо сиздин маалыматтарыңызды жергиликтүү (офлайнга даяр) сактайт жана AI функциялары, экспорттоо жана жок кылуу үчүн контролдорду берет.",
-      "buttons": {
-        "privacy": "Жеке маалымат жана настройкалар",
-        "offline": "Офлайн колдоо"
-      },
-      "cards": {
-        "localStorage": {
-          "title": "Жергиликтүү сактоо",
-          "description": "Сиздин бюджеттик маалыматтарыңыз браузериңизде (IndexedDB) сакталат, ошондуктан колдонмо ылдам жана офлайнда колдонууга ылайыктуу."
-        },
-        "encryption": {
-          "title": "Шифрлөө колдоосу",
-          "description": "Колдонмо сезгич бюджеттик жазууларды коргоо үчүн шифрлөө катмары менен камсыздалат."
-        },
-        "aiControls": {
-          "title": "AI функцияларынын контроллору",
-          "description": "AI күчү менен функцияларды (мисалы, аномалияларды аныктоо) жана чат-боттун жеткиликтүүлүгүн настройкалардан башкаруу."
-        },
-        "exportDelete": {
-          "title": "Экспорттоо жана жок кылуу",
-          "description": "Маалыматтарыңызды жана жеке маалыматтарды экспорттой аласыз же колдонмодон жергиликтүү маалыматтарды жок кыла аласыз."
-        }
-      }
-    },
     "comparison": {
-      "headers": {
-        "feature": "Функция",
-        "local": "BudgetPro Жергиликтүү",
-        "sync": "BudgetPro Синхрондоштуруу (Pro)",
-        "cloud": "Типтүү Булут Колдонмосу"
-      },
-      "dataPrivacy": {
-        "feature": "Маалыматтардын жеке жашыруундугу",
-        "local": "100% Жеке (Жергиликтүү)",
-        "sync": "Энд-ту-Энд Шифрленген",
-        "cloud": "Кызматкерлер тарабынан көрүүгө болот"
+      "bankConnections": {
+        "cloud": "Мажбурий Агрегация",
+        "feature": "Банк байланыштары",
+        "local": "CSV / Кол менен гана",
+        "sync": "Опционалдуу (Шифрленген)"
       },
       "cost": {
+        "cloud": "$100+/жылдык жазылуу",
         "feature": "Баа",
         "local": "Тегин түбөлүккө",
-        "sync": "Бир жолу жаңыртуу",
-        "cloud": "$100+/жылдык жазылуу"
+        "sync": "Бир жолу жаңыртуу"
+      },
+      "dataPrivacy": {
+        "cloud": "Кызматкерлер тарабынан көрүүгө болот",
+        "feature": "Маалыматтардын жеке жашыруундугу",
+        "local": "100% Жеке (Жергиликтүү)",
+        "sync": "Энд-ту-Энд Шифрленген"
+      },
+      "headers": {
+        "cloud": "Типтүү Булут Колдонмосу",
+        "feature": "Функция",
+        "local": "BudgetPro Жергиликтүү",
+        "sync": "BudgetPro Синхрондоштуруу (Pro)"
       },
       "offlineMode": {
         "feature": "Офлайн режим"
       },
-      "bankConnections": {
-        "feature": "Банк байланыштары",
-        "local": "CSV / Кол менен гана",
-        "sync": "Опционалдуу (Шифрленген)",
-        "cloud": "Мажбурий Агрегация"
-      },
       "storageLocation": {
+        "cloud": "Алардын Дата Базасы",
         "feature": "Сактоо жайы",
         "local": "Сиздин түзмөгүңүз",
-        "sync": "Нөл-билүү Булут",
-        "cloud": "Алардын Дата Базасы"
+        "sync": "Нөл-билүү Булут"
       }
     },
-    "socialProof": {
-      "title": "Premium полировка, курулган",
-      "description": "Бюджеттик пландоону кармап турган деталдар: onboarding, тез жеткиликтүүлүктөр, мобилдик навигация жана офлайнга даяр иштөө.",
-      "features": {
-        "onboarding": {
-          "title": "Onboarding туру",
-          "description": "Жаңы колдонуучуларга тез баалуулукка жетүүгө жардам берүү үчүн жетекчилик туру."
-        },
-        "shortcuts": {
-          "title": "Клавиатуранын тез жеткиликтүүлүктөрү",
-          "description": "UI'ге киргизилген издөөлөр жана аракеттер менен тез жылуу."
-        },
-        "mobileUx": {
-          "title": "Мобилдик биринчи UX",
-          "description": "Төмөнкү навигация жана жергиликтүү сезилген жооптуу макеттер."
-        },
-        "pwaInstall": {
-          "title": "PWA орнотуу",
-          "description": "Колдонмо сыяктуу орнотуңуз жана интернет байланышы начар болсо да улантыңыз."
-        }
+    "faq": {
+      "0": {
+        "a": "Ооба. Жергиликтүү протоколдо маалыматтар сиздин түзмөгүңүздөн чыкпайт. Ал браузериңиздин IndexedDB-синде жашайт.",
+        "q": "Менин маалыматтарым чындап эле жеке беле?"
+      },
+      "1": {
+        "a": "Сиз каалаган убакта толук JSON резервдик көчүрмөсүн экспорттой аласыз. Биз ошондой эле регулярдуу CSV экспортторун сунуштайбыз.",
+        "q": "Мен маалыматтарымды кантип резервдештирем?"
+      },
+      "2": {
+        "a": "Жакында: Түзмөктөр арасында шифрленген маалыматтарды синхрондоштуруу үчүн опционалдык жазылуу.",
+        "q": "'Синхрондоштуруу' Pro деген эмне?"
+      },
+      "3": {
+        "a": "Жок. Биз кол менен импорттоонун коопсуз, ишенимдүү жана финансылык аң-сезимди жакшырта тургандыгына ишенебиз.",
+        "q": "Сиз банктарга туташасызбы?"
       }
     },
-    "pricingSection": {
-      "recommended": "Тандалган",
-      "productName": "Жергиликтүү Протокол",
-      "productDescription": "Түзмөгүңүздө толук бюджеттик тажрыйба.",
-      "whyChoose": "Неге Жергиликтүү Протоколду тандаш керек?",
-      "whyChooseDescription": "Биздин булут гиганттарына салыштырганда кантип чогулуп жаткандыгын көрүңүз.",
-      "features": "Чексиз транзакциялар, эсептер, бюджеттер жана толук жергиликтүү резервдик мүмкүнчүлүктөрдү камтыйт."
+    "faqSection": {
+      "description": "Сынактар, баалар жана жеткиликтүүлүк жөнүндө жалпы суроолорго жөнөкөй жооптор.",
+      "title": "Чакан суроолор"
+    },
+    "features": {
+      "0": {
+        "description": "Таза байлык, акча агымы жана категория боюнча бөлүштүрүү. Дароо жүктөө убактысы.",
+        "href": "/budget-app",
+        "title": "Жергиликтүү башкы бет"
+      },
+      "1": {
+        "description": "BMO, Home Trust жана настройкаланган форматтар үчүн акылдуу CSV картасы.",
+        "href": "/budget-app/import",
+        "title": "Импорт шебери"
+      },
+      "2": {
+        "description": "Чектерди жергиликтүү Tesseract.js менен сканерлөө. Булутта иштетүү жок.",
+        "href": "/budget-app/ocr",
+        "title": "Чек OCR"
+      },
+      "3": {
+        "description": "Нөлдөн башталган же ролловер бюджеттөө менен так категория контролу.",
+        "href": "/budget-app/budgets",
+        "title": "Категория бюджеттери"
+      },
+      "4": {
+        "description": "Кошумча пайыздар визуалдаштыруусу менен эркиндик күнүңүздү моделдөө.",
+        "href": "/budget-app/planning/retirement",
+        "title": "Эмгекке чыгуу калькулятору"
+      },
+      "5": {
+        "description": "Кошумча коопсуздук үчүн кардар тараптагы шифрлөө.",
+        "href": "/budget-app/settings",
+        "title": "Жеке маалыматтарды коргоо"
+      }
+    },
+    "featuresDeepDive": {
+      "cta": "Тегин сынак баштоо",
+      "description": "Бузулган формулалар менен күрөшүүнү токтотуңуз. Заманауи колдонмодон ылдамдык менен кол менен контролдун ийкемдүүлүгүн алыңыз.",
+      "explore": "Изилдөө",
+      "heading1": "Эсептегич күчү.",
+      "heading2": "Колдонмо жөнөкөйлүгү."
+    },
+    "hero": {
+      "badge": "Жеке маалыматтарга биринчи • Жергиликтүү гана • Нөл трек",
+      "finePrint": "Банк реквизиттери талап кылынбайт. Жергиликтүү режим үчүн эсеп талап кылынбайт.",
+      "headline": "Дангыңызды сатпастан акчаны башкаруу.",
+      "primaryCta": {
+        "href": "/budget-app/auth/signup",
+        "label": "Жергиликтүү протоколду баштоо (Тегин)"
+      },
+      "secondaryCta": {
+        "href": "/budget-app/auth/login",
+        "label": "Кирүү"
+      },
+      "subhead": "Эсептегичтин күчү. Колдонмонун жөнөкөйлүгү. Сиздин маалыматтарыңыз эч качан түзүлбөй турган жалгыз бюджеттик колдонмо менен финансылык тактыкты тажрыйба кылыңыз."
     },
     "heroSection": {
-      "cta": {
-        "heading": "Тазалык үчүн курулган, каос үчүн эмес.",
-        "viewPricing": "Бааларды көрүү"
-      },
       "badges": {
         "noSubscriptions": "Жазылуулар жок",
         "offlineReady": "Офлайнга даяр",
         "seniorsMode": "Улуулар режим"
       },
-      "preview": {
-        "livePreview": "Түз эфирдеги алдын ала көрүнүш",
-        "recentTransactions": "Жакындагы транзакциялар",
-        "categoryBudgets": "Категория бюджеттери",
-        "recurring": "Кайталанма"
+      "cta": {
+        "heading": "Тазалык үчүн курулган, каос үчүн эмес.",
+        "viewPricing": "Бааларды көрүү"
       },
       "modes": {
-        "dashboard": "Башкы бет",
         "budgets": "Бюджеттер",
+        "dashboard": "Башкы бет",
         "subscriptions": "Жазылуулар"
-      }
-    },
-    "featuresDeepDive": {
-      "heading1": "Эсептегич күчү.",
-      "heading2": "Колдонмо жөнөкөйлүгү.",
-      "description": "Бузулган формулалар менен күрөшүүнү токтотуңуз. Заманауи колдонмодон ылдамдык менен кол менен контролдун ийкемдүүлүгүн алыңыз.",
-      "cta": "Тегин сынак баштоо",
-      "explore": "Изилдөө"
-    },
-    "accessibility": {
-      "title": "Стандарт боюнча жеткиликтүү",
-      "description": "Улуулар режим жөнөкөйлөтүлгөн навигация жана чоң тийүү максаттарын камсыз кылат. Клавиатуранын тез жеткиликтүүлүктөрү, фокус абалдары жана ачык контраст бардыгынын ылдамдыгын жогорулатат.",
-      "badges": {
-        "seniorsMode": "Улуулар режим",
-        "largeTouchTargets": "Чоң тийүү максаттары",
-        "keyboardFirst": "Клавиатура биринчи"
       },
-      "buttons": {
-        "openApp": "Колдонмону ачу",
-        "settings": "Жеткиликтүүлүк настройкалары"
+      "preview": {
+        "categoryBudgets": "Категория бюджеттери",
+        "livePreview": "Түз эфирдеги алдын ала көрүнүш",
+        "recentTransactions": "Жакындагы транзакциялар",
+        "recurring": "Кайталанма"
       }
     },
-    "faqSection": {
-      "title": "Чакан суроолор",
-      "description": "Сынактар, баалар жана жеткиликтүүлүк жөнүндө жалпы суроолорго жөнөкөй жооптор."
-    },
-    "outcomesSection": {
-      "title": "Чыныгы жашоого курулган, эсептегичтерге эмес",
-      "description": "Көптөгөн бюджеттик колдонмолор сизден ишти талап кылат. BudgetPro сизди көзөмөлдөп, тоскоолдуктарды азайтуу үчүн иштелип чыккан."
+    "howItWorks": {
+      "0": {
+        "description": "CSV файлдарын сүйрөп коюңуз же чектерди сканерлеңиз. AI жергиликтүү түрдө колонкаларды карталаштырат.",
+        "title": "Импорттоо"
+      },
+      "1": {
+        "description": "Акылдуу эрежелер жана көп аракеттер менен тез категориялоо.",
+        "title": "Карап чыгуу"
+      },
+      "2": {
+        "description": "Ар бир долларга жумуш бериңиз жана келечектеги таза байлыгыңызды болжолдоңуз.",
+        "title": "План"
+      }
     },
     "howItWorksSection": {
-      "title": "Кантип иштейт",
-      "description": "Сизди тактыкка тез жеткирет, татаал системага жабыштырбай."
-    },
-    "nav": {
-      "tagline": "Premium бюджеттик пландоо"
+      "description": "Сизди тактыкка тез жеткирет, татаал системага жабыштырбай.",
+      "title": "Кантип иштейт"
     },
     "marquee": {
       "logos": [
@@ -440,6 +880,814 @@
         "Офлайн",
         "Улуулар режим"
       ]
+    },
+    "nav": {
+      "tagline": "Premium бюджеттик пландоо"
+    },
+    "outcomes": {
+      "0": {
+        "description": "Бузулган байланыштар же кайра авторизация циклдары жок. Сиз маалымат киргизүүнү көзөмөлдөсүз.",
+        "title": "Агрегаторлор менен күрөшүүнү токтотуңуз"
+      },
+      "1": {
+        "description": "Биз сиздин маалыматтарыңызды сатпайт, анткени бизде жок. Токтоосуз.",
+        "title": "Дизайн боюнча жеке маалымат"
+      },
+      "2": {
+        "description": "Эмгекке чыгуу, кредиттерди төлөө жана сактоо максаттарын бириктирилген көрүнүштө моделдөө.",
+        "title": "Келечекке даяр пландоо"
+      },
+      "3": {
+        "description": "Башка колдонмолор өткөрүп жиберген кайталанма чыгымдарды байкаңыз.",
+        "title": "Жазылууларды жок кылуучу"
+      }
+    },
+    "outcomesSection": {
+      "description": "Көптөгөн бюджеттик колдонмолор сизден ишти талап кылат. BudgetPro сизди көзөмөлдөп, тоскоолдуктарды азайтуу үчүн иштелип чыккан.",
+      "title": "Чыныгы жашоого курулган, эсептегичтерге эмес"
+    },
+    "pricing": {
+      "cta": {
+        "href": "/budget-app/auth/signup",
+        "label": "Жергиликтүү протоколду баштоо"
+      },
+      "description": "Күчтүү Жергиликтүү Протокол менен баштаңыз. Кийинчерээк көп түзмөктөрдү синхрондоштуруу үчүн жаңыртыңыз.",
+      "eyebrow": "Адилеттүү баа",
+      "guarantee": "Жергиликтүү протокол үчүн кредиттик карта талап кылынбайт.",
+      "priceLabel": "Тегин түбөлүккө",
+      "secondary": {
+        "href": "#pricing",
+        "label": "Pro функцияларын көрүү"
+      },
+      "title": "Жергиликтүү акысыз. Синхрондоштуруу Pro."
+    },
+    "pricingSection": {
+      "features": "Чексиз транзакциялар, эсептер, бюджеттер жана толук жергиликтүү резервдик мүмкүнчүлүктөрдү камтыйт.",
+      "productDescription": "Түзмөгүңүздө толук бюджеттик тажрыйба.",
+      "productName": "Жергиликтүү Протокол",
+      "recommended": "Тандалган",
+      "whyChoose": "Неге Жергиликтүү Протоколду тандаш керек?",
+      "whyChooseDescription": "Биздин булут гиганттарына салыштырганда кантип чогулуп жаткандыгын көрүңүз."
+    },
+    "security": {
+      "buttons": {
+        "offline": "Офлайн колдоо",
+        "privacy": "Жеке маалымат жана настройкалар"
+      },
+      "cards": {
+        "aiControls": {
+          "description": "AI күчү менен функцияларды (мисалы, аномалияларды аныктоо) жана чат-боттун жеткиликтүүлүгүн настройкалардан башкаруу.",
+          "title": "AI функцияларынын контроллору"
+        },
+        "encryption": {
+          "description": "Колдонмо сезгич бюджеттик жазууларды коргоо үчүн шифрлөө катмары менен камсыздалат.",
+          "title": "Шифрлөө колдоосу"
+        },
+        "exportDelete": {
+          "description": "Маалыматтарыңызды жана жеке маалыматтарды экспорттой аласыз же колдонмодон жергиликтүү маалыматтарды жок кыла аласыз.",
+          "title": "Экспорттоо жана жок кылуу"
+        },
+        "localStorage": {
+          "description": "Сиздин бюджеттик маалыматтарыңыз браузериңизде (IndexedDB) сакталат, ошондуктан колдонмо ылдам жана офлайнда колдонууга ылайыктуу.",
+          "title": "Жергиликтүү сактоо"
+        }
+      },
+      "description": "Бюджеттик колдонмо сиздин маалыматтарыңызды жергиликтүү (офлайнга даяр) сактайт жана AI функциялары, экспорттоо жана жок кылуу үчүн контролдорду берет.",
+      "title": "Дизайн боюнча жеке маалымат"
+    },
+    "socialProof": {
+      "description": "Бюджеттик пландоону кармап турган деталдар: onboarding, тез жеткиликтүүлүктөр, мобилдик навигация жана офлайнга даяр иштөө.",
+      "features": {
+        "mobileUx": {
+          "description": "Төмөнкү навигация жана жергиликтүү сезилген жооптуу макеттер.",
+          "title": "Мобилдик биринчи UX"
+        },
+        "onboarding": {
+          "description": "Жаңы колдонуучуларга тез баалуулукка жетүүгө жардам берүү үчүн жетекчилик туру.",
+          "title": "Onboarding туру"
+        },
+        "pwaInstall": {
+          "description": "Колдонмо сыяктуу орнотуңуз жана интернет байланышы начар болсо да улантыңыз.",
+          "title": "PWA орнотуу"
+        },
+        "shortcuts": {
+          "description": "UI'ге киргизилген издөөлөр жана аракеттер менен тез жылуу.",
+          "title": "Клавиатуранын тез жеткиликтүүлүктөрү"
+        }
+      },
+      "title": "Premium полировка, курулган"
+    },
+    "trust": {
+      "0": {
+        "description": "Маалыматтар браузериңиздин IndexedDB-синде сакталат. Биз аны көрө албайбыз.",
+        "title": "Сиздин түзмөгүңүз, сиздин маалыматтарыңыз"
+      },
+      "1": {
+        "description": "Көптөгөн өзгөртүүлөрдү, бурулуштарды жана профессионалдардай анализдеңиз, формула баш оорууларынсыз.",
+        "title": "Эсептегич күчү"
+      },
+      "2": {
+        "description": "Нөл кечигүү. Тоо жотосунда же метро туннелинде иштейт.",
+        "title": "Офлайн ылдамдыгы"
+      },
+      "3": {
+        "description": "Импорт шебери жума күнү акча карап чыгуу адатка айланат.",
+        "title": "Кол менен ритуалдар"
+      }
+    }
+  },
+  "nav": {
+    "about": "Биз жөнүндө",
+    "accounts": "Эсептер",
+    "budgets": "Бюджеттер",
+    "categories": "Категориялар",
+    "dashboard": "Башкы бет",
+    "export": "Экспорттоо",
+    "goals": "Максаттар",
+    "help": "Жардам",
+    "import": "Импорттоо",
+    "reports": "Эсептер",
+    "settings": "Настройкалар",
+    "transactions": "Транзакциялар"
+  },
+  "onboarding": {
+    "dontShowAgain": "Бул турду кайра көрсөтпө",
+    "navigation": {
+      "getStarted": "Баштоо",
+      "next": "Кийинки",
+      "previous": "Алдынкы",
+      "startTour": "Турду баштоо"
+    },
+    "quickTip": "💡 Жылдам кеңеш",
+    "skipTour": "Турду өткөрүп жиберүү",
+    "stepCounter": "Кадам {current} из {total}",
+    "steps": {
+      "budgets": {
+        "description": "Ар түрдүү чыгым категориялары үчүн бюджеттер түзүңүз. Айдын ичинде прогрессиңизди көзөмөлдөп, чектериңизге жакындаганда эскертүүлөрдү алыңыз.",
+        "title": "🎯 Бюджеттерди белгилөө"
+      },
+      "categorize": {
+        "description": "Транзакция категорияларын карап чыгып, тууралаңыз. Биздин акылдуу категориялоо сиздин оңдолорунуздан үйрөнүп, убакыттын өтүшү менен жакшыртат. Көп транзакцияларды бир убакта категориялоого аракеттерди колдонсоңуз болот!",
+        "title": "🏷️ Категорияларга бөлүү жана уюштуруу"
+      },
+      "import": {
+        "description": "Банк транзакцияларыңызды CSV файлынан импорттоодон баштаңыз. Биз BMO, Home Trust жана башка банктарды колдойбуз. Колдонмо автоматтык түрдө транзакцияларыңызды категориялайт!",
+        "title": "📥 Транзакцияларыңызды импорттоо"
+      },
+      "reports": {
+        "description": "Чыгым үлгүлөрүңүздү визуалдаштырып, таза байлыгыңызды көзөмөлдөп, финансылык чечимдерди кабыл алыңыз. Сиздин башкы бет ар транзакция менен автоматтык түрдө жаңыртылат!",
+        "title": "📊 Эсептерди жана маалыматтарды көрүү"
+      },
+      "welcome": {
+        "description": "Үй-бүлөлүк финансыларыңызды башкарууга жардам берүү үчүн тез тур өткөрөлү. Бул көп убакыт албайт!",
+        "title": "👋 Бюджеттик колдонууга кош келиңиз!"
+      }
+    },
+    "tips": {
+      "budgets": "Реалдуу бюджеттерди белгилеңиз, биз сиздин ашып кетүүңүздү көзөмөлдөп, эскертебиз.",
+      "categorize": "Тез категориялоо баскычын колдонуп же көп транзакцияларды категориялоо үчүн тандаңыз.",
+      "import": "CSV файлыңызды сүйрөп коюңуз же издөөгө чыксаңыз болот. Биз BMO жана Home Trust форматтарын автоматтык түрдө аныктайбыз!"
+    }
+  },
+  "overspendingAlerts": {
+    "exceededWarning": "At this rate, you'll exceed your budget by {amount} this month.",
+    "percentOfBudget": "{percent}% of budget",
+    "progress": {
+      "label": "Current progress"
+    },
+    "stats": {
+      "budget": "Budget",
+      "daysLeft": "Days Left",
+      "projectedTotal": "Projected Total",
+      "spentSoFar": "Spent So Far"
+    },
+    "tip": {
+      "label": "Tip:",
+      "reduceSpending": "Reduce daily spending to {amount} to stay within budget."
+    }
+  },
+  "predictiveSpendingChart": {
+    "legend": {
+      "actual": "Actual",
+      "confidenceInterval": "Confidence Interval",
+      "predicted": "Predicted"
+    },
+    "noData": "No data available for predictions",
+    "predictionUnavailable": "Prediction Unavailable",
+    "stats": {
+      "avgConfidence": "Avg Confidence",
+      "nextMonth": "Next Month",
+      "threeMonthAvg": "3-Month Avg"
+    },
+    "table": {
+      "confidence": "Confidence",
+      "month": "Month",
+      "predicted": "Predicted",
+      "range": "Range",
+      "title": "Monthly Predictions"
+    },
+    "title": "Spending Forecast: {category}",
+    "trainingModel": "Training model and generating predictions..."
+  },
+  "pwaInstall": {
+    "buttons": {
+      "install": "Install",
+      "notNow": "Not now"
+    },
+    "close": "Close install prompt",
+    "description": "Add to your home screen for quick access and offline use",
+    "features": {
+      "fastSecure": "Fast & secure",
+      "noAppStore": "No app store needed",
+      "offline": "Works offline"
+    },
+    "title": "Install Budget App"
+  },
+  "quickCategorize": {
+    "buttons": {
+      "apply": "Apply Category",
+      "cancel": "Cancel",
+      "save": "Save"
+    },
+    "clickToSelect": "Click a category to select",
+    "description": "Select a category for {count, plural, =1 {this transaction} other {# transactions}}",
+    "general": "General",
+    "noResults": "No categories found",
+    "pressEnter": "Press ↵ Enter",
+    "saving": "Saving...",
+    "searchPlaceholder": "Search categories...",
+    "title": "Quick Categorize"
+  },
+  "quickFilters": {
+    "all": "All",
+    "categories": "Categories",
+    "clearFilters": "Clear Filters",
+    "moreCategories": "+{count} more",
+    "presets": {
+      "last30": "Last 30 Days",
+      "last90": "Last 90 Days",
+      "thisMonth": "This Month",
+      "thisYear": "This Year"
+    },
+    "timePeriod": "Time Period"
+  },
+  "receiptUpload": {
+    "buttons": {
+      "attachReceipt": "Attach Receipt",
+      "chooseDifferent": "Choose Different",
+      "extractData": "Extract Data",
+      "extracting": "Extracting..."
+    },
+    "camera": {
+      "takePhoto": "Take Photo with Camera",
+      "useDevice": "Use your device camera to capture receipt"
+    },
+    "cameraInputLabel": "Camera capture input",
+    "dropzone": {
+      "browseFiles": "or <link>browse files</link>",
+      "dragDrop": "Drag & drop receipt here",
+      "dropHere": "Drop the receipt here",
+      "supportedFormats": "Supports JPG, PNG, PDF • Max {size}MB"
+    },
+    "errors": {
+      "couldNotExtract": "Could not extract data from receipt. Please enter manually.",
+      "extractionFailed": "Failed to extract data. Please try again or enter manually.",
+      "invalidType": "Invalid file type. Only JPG, PNG, and PDF files are allowed",
+      "ocrImagesOnly": "OCR is only supported for image files (JPG, PNG)",
+      "rejected": "File was rejected. Please try again",
+      "tooLarge": "File is too large. Maximum size is {size}MB"
+    },
+    "extracted": {
+      "amount": "Amount:",
+      "confidence": "Confidence: {percent}%",
+      "date": "Date:",
+      "merchant": "Merchant:",
+      "title": "Data Extracted"
+    },
+    "pdf": {
+      "noPreview": "Preview not available",
+      "title": "PDF Receipt"
+    },
+    "receiptPreview": "Receipt preview",
+    "removeFile": "Remove file"
+  },
+  "recurringTransactions": {
+    "confidence": "{percent}% confidence",
+    "estimatedMonthly": "Estimated Monthly",
+    "frequency": {
+      "biweekly": "Bi-weekly",
+      "monthly": "Monthly",
+      "quarterly": "Quarterly",
+      "weekly": "Weekly"
+    },
+    "inDays": "{count, plural, =0 {(today)} =1 {(in 1 day)} other {(in # days)}}",
+    "next": "Next: {date}",
+    "occurrences": "{count, plural, =1 {1 occurrence detected} other {# occurrences detected}}",
+    "perPeriod": {
+      "month": "per month",
+      "quarter": "per quarter",
+      "twoWeeks": "per 2 weeks",
+      "week": "per week"
+    },
+    "showingPatterns": "{count, plural, =1 {Showing 1 recurring transaction pattern} other {Showing # recurring transaction patterns}}",
+    "subtitle": "Detected subscriptions and bills",
+    "title": "Recurring Transactions"
+  },
+  "shortcutsModal": {
+    "close": "Close shortcuts help",
+    "proTip": {
+      "description": "Keyboard shortcuts work on any page except when typing in forms. Press {key} anytime to see this help.",
+      "title": "💡 Pro Tip"
+    },
+    "subtitle": "Power-user productivity tips",
+    "title": "Keyboard Shortcuts"
+  },
+  "sidebar": {
+    "actions": {
+      "importCsv": "CSV импорттоо",
+      "settings": "Настройкалар",
+      "showAllItems": "Бардык элементтерди көрсөтүү",
+      "showLess": "Аз көрсөтүү"
+    },
+    "appSubtitle": "Premium финансылык",
+    "appTitle": "Бюджеттик колдонуу",
+    "navigation": {
+      "budgets": "Бюджеттер",
+      "categories": "Категориялар",
+      "dashboard": "Башкы бет",
+      "futurePlans": "Келечектеги пландар",
+      "investments": "Инвестициялар",
+      "loans": "Кредиттер",
+      "reports": "Эсептер",
+      "retirement": "Эмгекке чыгуу",
+      "scanReceipt": "Чек сканерлөө",
+      "subscriptions": "Жазылуулар",
+      "transactions": "Транзакциялар"
+    },
+    "search": "Издөө...",
+    "shortcuts": "Тез жеткиликтүүлүктөр"
+  },
+  "simplefinSettings": {
+    "connectedAccounts": {
+      "description": "Manage your linked bank accounts",
+      "title": "Connected Accounts"
+    },
+    "connection": {
+      "accountsLinked": "{count, plural, =1 {1 account linked} other {# accounts linked}}",
+      "connectButton": "Connect Bank Account",
+      "connected": "Connected",
+      "description": "Connect your bank accounts to automatically import transactions",
+      "notConnected": "Not Connected",
+      "notConnectedDesc": "Connect your bank accounts to start importing transactions",
+      "title": "SimpleFIN Connection"
+    },
+    "disconnect": {
+      "button": "Disconnect",
+      "cancel": "Cancel",
+      "confirm": "Disconnect",
+      "dialogDescription": "This will remove the connection to your bank accounts. Your existing transactions will not be deleted, but new transactions will no longer sync automatically.",
+      "dialogTitle": "Disconnect SimpleFIN?"
+    },
+    "help": {
+      "bridgeDashboard": "SimpleFIN Bridge Dashboard",
+      "protocolDocs": "SimpleFIN Protocol Documentation",
+      "title": "Need Help?"
+    },
+    "sync": {
+      "date": "{date}",
+      "hoursAgo": "{hours, plural, =1 {1 hour ago} other {# hours ago}}",
+      "lastSynced": "Last synced: {time}",
+      "lessThanHour": "Less than an hour ago",
+      "never": "Never",
+      "syncNow": "Sync Now",
+      "syncing": "Syncing..."
+    },
+    "syncSettings": {
+      "autoCategorize": {
+        "description": "Automatically categorize imported transactions using AI",
+        "label": "Auto-Categorize"
+      },
+      "autoSync": {
+        "description": "Automatically sync transactions on a schedule",
+        "label": "Automatic Sync"
+      },
+      "description": "Configure how and when transactions are synced",
+      "frequency": {
+        "every12Hours": "Every 12 hours",
+        "every2Days": "Every 2 days",
+        "every6Hours": "Every 6 hours",
+        "hint": "SimpleFIN allows up to 24 requests per day. Daily sync is recommended.",
+        "label": "Sync Frequency",
+        "onceDaily": "Once daily"
+      },
+      "notifications": {
+        "description": "Show notification when sync completes",
+        "label": "Sync Notifications"
+      },
+      "pendingTransactions": {
+        "description": "Include transactions that haven't posted yet",
+        "label": "Import Pending Transactions"
+      },
+      "title": "Sync Settings",
+      "transactionHistory": {
+        "days": "{count} days",
+        "hint": "How many days of transaction history to fetch (max 60 days per SimpleFIN)",
+        "label": "Transaction History"
+      }
+    }
+  },
+  "spendingTrendChart": {
+    "forecastFooter": "Forecast based on linear regression of last {months} months",
+    "legend": {
+      "actualSpending": "Actual Spending",
+      "projected": "Projected"
+    },
+    "notEnoughData": "Not enough data to generate trends. Add at least 2 months of transactions.",
+    "stats": {
+      "avgMonthly": "Avg Monthly",
+      "lastMonth": "Last Month",
+      "projected": "Projected"
+    },
+    "title": "Spending Trends & Forecast"
+  },
+  "splitTransaction": {
+    "addSplit": "Add Split ({current}/{max})",
+    "amount": "Amount",
+    "buttons": {
+      "cancel": "Cancel",
+      "save": "Save Split",
+      "saving": "Saving..."
+    },
+    "category": "Category",
+    "closeModal": "Close modal",
+    "date": "Date:",
+    "distributeEvenly": "Distribute Evenly",
+    "errors": {
+      "saveFailed": "Failed to save split transaction"
+    },
+    "help": {
+      "step1": "Enter the amount for each category (must total ${amount})",
+      "step2": "Use \"Distribute Evenly\" to split equally across all categories",
+      "step3": "Add up to 5 splits per transaction",
+      "step4": "The original transaction will be hidden and replaced with split items",
+      "title": "How to split transactions:"
+    },
+    "maxSplitsReached": "Maximum 5 splits allowed",
+    "minSplitsRequired": "Minimum 2 splits required",
+    "none": "None",
+    "notes": "Notes (Optional)",
+    "notesPlaceholder": "e.g., Business expense, Personal use",
+    "originalAmount": "Original Amount:",
+    "removeThisSplit": "Remove this split",
+    "selectCategory": "Select category...",
+    "splitsCount": "Splits ({current}/{max})",
+    "subcategory": "Subcategory",
+    "title": "Split Transaction",
+    "validation": {
+      "adjustAmounts": "Adjust split amounts to match the original transaction amount.",
+      "amountsMustMatch": "Split amounts must equal the original transaction amount",
+      "categoryRequired": "All splits must have a category",
+      "matchesOriginal": "✓ Matches original",
+      "overBy": "Over by ${amount}",
+      "readyToSave": "Split amounts match the original transaction. Ready to save!",
+      "total": "Total:",
+      "underBy": "Under by ${amount}"
+    }
+  },
+  "subscriptionCard": {
+    "badges": {
+      "aiVerified": "AI Verified",
+      "cancelled": "Cancelled",
+      "paused": "Paused",
+      "trial": "Trial"
+    },
+    "buttons": {
+      "claimManage": "Claim & Manage",
+      "edit": "Edit",
+      "transactions": "Transactions"
+    },
+    "confidence": {
+      "high": "High",
+      "label": "Detection Confidence",
+      "low": "Low",
+      "medium": "Medium"
+    },
+    "details": {
+      "charges": "{count} charges",
+      "daysBefore": "{count} days before",
+      "firstCharge": "First Charge",
+      "lastCharge": "Last Charge",
+      "occurrences": "Occurrences",
+      "payment": "Payment",
+      "reminder": "Reminder"
+    },
+    "interval": {
+      "annual": "Annual",
+      "bi-weekly": "Bi-weekly",
+      "irregular": "Irregular",
+      "monthly": "Monthly",
+      "quarterly": "Quarterly",
+      "weekly": "Weekly"
+    },
+    "lowConfidenceWarning": "This subscription was detected with low confidence. Claim it to verify and manage manually.",
+    "menu": {
+      "cancelSubscription": "Cancel Subscription",
+      "claimManage": "Claim & Manage",
+      "delete": "Delete",
+      "edit": "Edit",
+      "notSubscription": "Not a Subscription",
+      "pause": "Pause",
+      "resume": "Resume",
+      "viewTransactions": "View Transactions"
+    },
+    "source": {
+      "auto-detected": "Auto-detected",
+      "manual": "Manual",
+      "merged": "Tracked"
+    },
+    "stats": {
+      "amount": "Amount",
+      "annualCost": "Annual Cost",
+      "frequency": "Frequency",
+      "nextCharge": "Next Charge",
+      "totalSpent": "Total Spent"
+    },
+    "trial": {
+      "daysLeft": "{count, plural, =1 {1 day left in trial} other {# days left in trial}}"
+    }
+  },
+  "subscriptionCostChart": {
+    "emptyState": "No active subscriptions to analyze",
+    "loadingChart": "Loading chart...",
+    "moreCharges": "+{count} more charges",
+    "perMonth": "/month",
+    "sections": {
+      "costByCategory": "Cost by Category",
+      "potentialSavings": "Potential Savings",
+      "upcomingCharges": "Upcoming Charges (Next 30 Days)"
+    },
+    "summary": {
+      "activeSubscriptions": "{count, plural, =1 {1 active subscription} other {# active subscriptions}}",
+      "annualCost": "Annual Cost",
+      "monthlyCost": "Monthly Cost",
+      "next30Days": "Next 30 Days",
+      "projectedYearly": "Projected yearly spend",
+      "upcomingCharges": "{count, plural, =1 {1 upcoming charge} other {# upcoming charges}}"
+    }
+  },
+  "tooltip": {
+    "ariaLabel": "Кошумча маалымат",
+    "learnMore": "Көбүрөөк маалымат алуу →"
+  },
+  "transactionModal": {
+    "account": {
+      "label": "Account"
+    },
+    "advancedOptions": {
+      "available": "{count} available",
+      "label": "Advanced Options"
+    },
+    "amount": {
+      "label": "Amount",
+      "placeholder": "0.00",
+      "validationError": "Please enter a valid amount"
+    },
+    "buttons": {
+      "add": "Add Transaction",
+      "adding": "Adding...",
+      "cancel": "Cancel",
+      "update": "Update Transaction",
+      "updating": "Updating..."
+    },
+    "category": {
+      "aiCategorizing": "AI categorizing...",
+      "create": "Create",
+      "createNew": "+ Create New Category",
+      "label": "Category",
+      "lastUsed": "Using last: {category}",
+      "namePlaceholder": "Category name...",
+      "selectPlaceholder": "Select category...",
+      "subcategoriesPlaceholder": "Subcategories (optional, comma-separated)"
+    },
+    "closeModal": "Close modal",
+    "createCategory": {
+      "created": "Category \"{name}\" created!",
+      "failed": "Failed to create category",
+      "nameRequired": "Category name is required"
+    },
+    "date": {
+      "label": "Date"
+    },
+    "description": {
+      "label": "Description",
+      "placeholder": "e.g., Grocery shopping at Sobeys"
+    },
+    "learned": {
+      "description": "After 3 similar corrections, future transactions from this merchant will auto-categorize.",
+      "title": "Learned!"
+    },
+    "notes": {
+      "label": "Notes",
+      "placeholder": "Add any additional notes..."
+    },
+    "receipts": {
+      "addNew": "Add New Receipt",
+      "deleteConfirm": "Are you sure you want to delete this receipt?",
+      "deleteFailed": "Failed to delete receipt",
+      "deleteReceipt": "Delete receipt",
+      "existing": "Existing receipts ({count})",
+      "label": "Receipt Attachments",
+      "newFile": "New: {filename}",
+      "remove": "Remove",
+      "viewFull": "View full receipt"
+    },
+    "subcategory": {
+      "label": "Subcategory",
+      "none": "None",
+      "selectPlaceholder": "Select subcategory..."
+    },
+    "tags": {
+      "label": "Tags (comma-separated)",
+      "placeholder": "e.g., groceries, weekly, essential"
+    },
+    "title": {
+      "add": "Add Transaction",
+      "edit": "Edit Transaction"
+    },
+    "type": {
+      "expense": "Expense",
+      "income": "Income",
+      "label": "Type"
+    }
+  },
+  "transactionTable": {
+    "actions": {
+      "attachReceipt": "Attach receipt",
+      "delete": "Delete",
+      "edit": "Edit",
+      "split": "Split"
+    },
+    "emptyState": "No transactions to display",
+    "headers": {
+      "account": "Account",
+      "actions": "Actions",
+      "amount": "Amount",
+      "category": "Category",
+      "date": "Date",
+      "description": "Description"
+    }
+  },
+  "welcome": {
+    "subtitle": "Алгачкы транзакцияңызды кошуп же банктагы маалыматтарды импорттоодон баштаңыз",
+    "title": "Бюджеттик колдонууга кош келиңиз"
+  },
+  "widget": {
+    "accountBalances": {
+      "description": "Бардык эсептер боюнча учурдагы баланс",
+      "title": "Эсептердин балансын"
+    },
+    "budgetProgress": {
+      "description": "Бюджет максаттарыңызга карата кандай иштеп жатканыңызды көзөмөлдөңүз",
+      "title": "Бюджеттин прогресси"
+    },
+    "incomeVsExpenses": {
+      "description": "Убакыттын өтүшү менен кирешеңизди жана чыгымдарыңызды салыштырыңыз",
+      "title": "Киреше жана чыгымдар"
+    },
+    "monthlyTrends": {
+      "description": "Ар айда финансылык үлгүлөрүңүздү визуалдаштырыңыз",
+      "title": "Айлык тенденциялар"
+    },
+    "recentTransactions": {
+      "description": "Сиздин акыркы финансылык иш-аракеттериңиздин тез көрүүсү",
+      "title": "Жакындагы транзакциялар"
+    },
+    "spendingByCategory": {
+      "description": "Акчаларыңыздын кайда кетип жатканын визуалдык түрдө көрүңүз",
+      "title": "Категория боюнча чыгымдар"
+    },
+    "upcomingBills": {
+      "description": "Төлөмдөрдү эскертип, эч качан төлөмдү өткөрүп жибербеңиз",
+      "title": "Келечектеги төлөмдөр"
+    }
+  },
+  "ynabMigrationWizard": {
+    "categoryStep": {
+      "category": "{count, plural, =1 {1 category} other {# categories}}",
+      "createNew": "Create New",
+      "description": "Map YNAB categories to your existing categories or create new ones.",
+      "mapToExisting": "Map to Existing",
+      "selectCategory": "Select category...",
+      "skip": "Skip",
+      "title": "Category Mapping",
+      "willCreate": "Will create:"
+    },
+    "completeStep": {
+      "errors": "Errors",
+      "importAnother": "Import Another",
+      "success": "Import Complete!",
+      "successMessage": "{count, plural, =1 {1 item imported} other {# items imported}} successfully from YNAB.",
+      "viewTransactions": "View Transactions",
+      "whatNext": "What would you like to do next?",
+      "withIssues": "Import Completed with Issues"
+    },
+    "footer": {
+      "back": "Back",
+      "done": "Done",
+      "next": "Next",
+      "startImport": "Start Import"
+    },
+    "header": {
+      "closeLabel": "Close wizard",
+      "subtitle": "Migrate your budget data seamlessly",
+      "title": "Import from YNAB"
+    },
+    "importingStep": {
+      "finishing": "Finishing up...",
+      "importingAccounts": "Importing accounts...",
+      "importingBudgets": "Importing budgets...",
+      "importingCategories": "Importing categories...",
+      "importingTransactions": "Importing transactions...",
+      "title": "Importing your YNAB data..."
+    },
+    "optionsStep": {
+      "accountOptions": {
+        "includeClosedAccounts": "Include closed accounts",
+        "includeOffBudgetAccounts": "Include off-budget accounts",
+        "title": "Account Options"
+      },
+      "budgetOptions": {
+        "importGoals": "Import savings goals as future purchases",
+        "title": "Budget Options"
+      },
+      "hiddenCategories": {
+        "archive": "Archive",
+        "archiveDesc": "Import as archived (recommended)",
+        "description": "How to handle YNAB categories marked as hidden?",
+        "import": "Import",
+        "importDesc": "Import as active categories",
+        "skip": "Skip",
+        "skipDesc": "Don't import hidden categories",
+        "title": "Hidden Categories"
+      }
+    },
+    "previewStep": {
+      "accounts": "Accounts",
+      "allocations": "{count} allocations",
+      "budgetMonths": "Budget Months",
+      "categories": "Categories",
+      "dateRange": "Transaction Date Range",
+      "description": "Review the data that will be imported.",
+      "duplicates": "{count} duplicates",
+      "new": "{count} new",
+      "newMapped": "{created} new, {mapped} mapped",
+      "preparingPreview": "Preparing preview...",
+      "title": "Import Preview",
+      "transactions": "Transactions",
+      "warnings": "Warnings"
+    },
+    "steps": {
+      "categories": {
+        "description": "Map to existing categories",
+        "title": "Categories"
+      },
+      "complete": {
+        "description": "Migration finished",
+        "title": "Complete"
+      },
+      "importing": {
+        "description": "Processing your data",
+        "title": "Importing"
+      },
+      "options": {
+        "description": "Configure import settings",
+        "title": "Options"
+      },
+      "preview": {
+        "description": "Review before import",
+        "title": "Preview"
+      },
+      "upload": {
+        "description": "Select YNAB export file",
+        "title": "Upload"
+      }
+    },
+    "uploadStep": {
+      "accounts": "Accounts",
+      "categories": "Categories",
+      "clickToSelect": "Click to select a file",
+      "dragAndDrop": "or drag and drop here",
+      "fileSummary": "File Summary",
+      "format": "Format",
+      "formatApiExport": "YNAB API Export",
+      "formatApiExportDesc": "JSON from nYNAB",
+      "formatCsv": "CSV Export",
+      "formatCsvDesc": "From YNAB web app",
+      "formatYfull": "Budget.yfull / Budget.ynab4",
+      "formatYfullDesc": "YNAB4 desktop export",
+      "parsing": "Parsing file...",
+      "supportedFormats": "Supported Formats",
+      "transactions": "Transactions"
     }
   }
 }

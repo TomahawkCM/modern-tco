@@ -18,6 +18,7 @@
  */
 
 import { useState, useEffect } from 'react';
+import { useTranslations } from 'next-intl';
 import {
   TrendingUp,
   DollarSign,
@@ -56,6 +57,7 @@ export function ChatbotHelp({
   variant = 'welcome',
   className = ''
 }: ChatbotHelpProps) {
+  const t = useTranslations('chatbotHelp');
   const [suggestions, setSuggestions] = useState<SuggestedQuestion[]>([]);
   const [smartSuggestions, setSmartSuggestions] = useState<SuggestedQuestion[]>([]);
 
@@ -286,11 +288,11 @@ export function ChatbotHelp({
         {/* Categorized Suggestions */}
         <Tabs defaultValue="spending" className="w-full">
           <TabsList className="grid w-full grid-cols-5">
-            <TabsTrigger value="spending">Spending</TabsTrigger>
-            <TabsTrigger value="budget">Budget</TabsTrigger>
-            <TabsTrigger value="income">Income</TabsTrigger>
-            <TabsTrigger value="trends">Trends</TabsTrigger>
-            <TabsTrigger value="actions">Actions</TabsTrigger>
+            <TabsTrigger value="spending">{t('tabs.spending')}</TabsTrigger>
+            <TabsTrigger value="budget">{t('tabs.budget')}</TabsTrigger>
+            <TabsTrigger value="income">{t('tabs.income')}</TabsTrigger>
+            <TabsTrigger value="trends">{t('tabs.trends')}</TabsTrigger>
+            <TabsTrigger value="actions">{t('tabs.actions')}</TabsTrigger>
           </TabsList>
 
           <TabsContent value="spending" className="space-y-2 mt-4">

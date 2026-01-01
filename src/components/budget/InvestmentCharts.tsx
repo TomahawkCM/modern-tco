@@ -22,6 +22,7 @@ import {
   Legend,
   ResponsiveContainer,
 } from 'recharts';
+import { useTranslations } from 'next-intl';
 import type { Holding, InvestmentAccount } from '@/types/budget';
 import { useThemeMode } from '@/hooks/useThemeMode';
 import { getChartPalette } from '@/lib/budget-chart-colors';
@@ -33,6 +34,7 @@ interface InvestmentChartsProps {
 }
 
 export function InvestmentCharts({ holdings, accounts, currentPrices }: InvestmentChartsProps) {
+  const t = useTranslations('investmentCharts');
   // Get theme-aware chart colors
   const theme = useThemeMode();
   const palette = getChartPalette(theme);
@@ -113,7 +115,7 @@ export function InvestmentCharts({ holdings, accounts, currentPrices }: Investme
             ${data.value.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
           </p>
           <p className="text-sm font-medium text-teal-600">
-            {data.payload.percentage.toFixed(1)}% of portfolio
+            {t('tooltip.percentOfPortfolio', { percent: data.payload.percentage.toFixed(1) })}
           </p>
         </div>
       );
@@ -130,10 +132,10 @@ export function InvestmentCharts({ holdings, accounts, currentPrices }: Investme
           <p className="font-semibold text-gray-900 mb-2">{data.symbol}</p>
           <div className="space-y-2 text-sm">
             <p className="text-gray-600">
-              Cost Basis: ${data.costBasis.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+              {t('tooltip.costBasis')}: ${data.costBasis.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
             </p>
             <p className="text-gray-600">
-              Current Value: ${data.currentValue.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+              {t('tooltip.currentValue')}: ${data.currentValue.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
             </p>
             <p className={`font-medium ${data.gainLoss >= 0 ? 'text-green-600' : 'text-red-600'}`}>
               {data.gainLoss >= 0 ? '+' : ''}${data.gainLoss.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
@@ -158,7 +160,7 @@ export function InvestmentCharts({ holdings, accounts, currentPrices }: Investme
             ${data.value.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
           </p>
           <p className="text-sm font-medium text-teal-600">
-            {data.payload.percentage.toFixed(1)}% of portfolio
+            {t('tooltip.percentOfPortfolio', { percent: data.payload.percentage.toFixed(1) })}
           </p>
         </div>
       );
@@ -175,7 +177,7 @@ export function InvestmentCharts({ holdings, accounts, currentPrices }: Investme
   if (holdings.length === 0) {
     return (
       <div className="bg-white rounded-lg border border-gray-200 p-12 text-center">
-        <p className="text-gray-500">No holdings to visualize. Add holdings to see charts.</p>
+        <p className="text-gray-500">{t('emptyState')}</p>
       </div>
     );
   }
@@ -184,7 +186,7 @@ export function InvestmentCharts({ holdings, accounts, currentPrices }: Investme
     <div className="space-y-6">
       {/* Portfolio Allocation by Holding (Pie Chart) */}
       <div className="bg-white rounded-lg border border-gray-200 p-6">
-        <h3 className="text-lg font-bold text-gray-900 mb-4">Portfolio Allocation by Holding</h3>
+        <h3 className="text-lg font-bold text-gray-900 mb-4">{t('titles.portfolioAllocation')}</h3>
         <div className="h-80">
           <ResponsiveContainer width="100%" height="100%">
             <PieChart>
@@ -219,7 +221,7 @@ export function InvestmentCharts({ holdings, accounts, currentPrices }: Investme
       {/* Account Type Allocation (Pie Chart) */}
       {nonZeroAccountData.length > 1 && (
         <div className="bg-white rounded-lg border border-gray-200 p-6">
-          <h3 className="text-lg font-bold text-gray-900 mb-4">Allocation by Account Type</h3>
+          <h3 className="text-lg font-bold text-gray-900 mb-4">{t('titles.accountTypeAllocation')}</h3>
           <div className="h-80">
             <ResponsiveContainer width="100%" height="100%">
               <PieChart>
@@ -254,7 +256,7 @@ export function InvestmentCharts({ holdings, accounts, currentPrices }: Investme
 
       {/* Gain/Loss by Holding (Bar Chart) */}
       <div className="bg-white rounded-lg border border-gray-200 p-6">
-        <h3 className="text-lg font-bold text-gray-900 mb-4">Gain/Loss by Holding</h3>
+        <h3 className="text-lg font-bold text-gray-900 mb-4">{t('titles.gainLoss')}</h3>
         <div className="h-80">
           <ResponsiveContainer width="100%" height="100%">
             <BarChart
@@ -292,28 +294,28 @@ export function InvestmentCharts({ holdings, accounts, currentPrices }: Investme
         <div className="mt-4 flex items-center justify-center gap-6 text-sm">
           <div className="flex items-center gap-2">
             <div className="w-4 h-4 bg-green-600 rounded"></div>
-            <span className="text-gray-600">Gain</span>
+            <span className="text-gray-600">{t('legend.gain')}</span>
           </div>
           <div className="flex items-center gap-2">
             <div className="w-4 h-4 bg-red-600 rounded"></div>
-            <span className="text-gray-600">Loss</span>
+            <span className="text-gray-600">{t('legend.loss')}</span>
           </div>
         </div>
       </div>
 
       {/* Performance Summary Table */}
       <div className="bg-white rounded-lg border border-gray-200 p-6">
-        <h3 className="text-lg font-bold text-gray-900 mb-4">Performance Summary</h3>
+        <h3 className="text-lg font-bold text-gray-900 mb-4">{t('titles.performanceSummary')}</h3>
         <div className="overflow-x-auto">
           <table className="w-full">
             <thead className="bg-gray-50 border-b border-gray-200">
               <tr>
-                <th className="px-4 py-2 text-left text-xs font-medium text-gray-700 uppercase">Symbol</th>
-                <th className="px-4 py-2 text-right text-xs font-medium text-gray-700 uppercase">Cost Basis</th>
-                <th className="px-4 py-2 text-right text-xs font-medium text-gray-700 uppercase">Current Value</th>
-                <th className="px-4 py-2 text-right text-xs font-medium text-gray-700 uppercase">Gain/Loss</th>
-                <th className="px-4 py-2 text-right text-xs font-medium text-gray-700 uppercase">% Return</th>
-                <th className="px-4 py-2 text-right text-xs font-medium text-gray-700 uppercase">Allocation</th>
+                <th className="px-4 py-2 text-left text-xs font-medium text-gray-700 uppercase">{t('tableHeaders.symbol')}</th>
+                <th className="px-4 py-2 text-right text-xs font-medium text-gray-700 uppercase">{t('tableHeaders.costBasis')}</th>
+                <th className="px-4 py-2 text-right text-xs font-medium text-gray-700 uppercase">{t('tableHeaders.currentValue')}</th>
+                <th className="px-4 py-2 text-right text-xs font-medium text-gray-700 uppercase">{t('tableHeaders.gainLoss')}</th>
+                <th className="px-4 py-2 text-right text-xs font-medium text-gray-700 uppercase">{t('tableHeaders.percentReturn')}</th>
+                <th className="px-4 py-2 text-right text-xs font-medium text-gray-700 uppercase">{t('tableHeaders.allocation')}</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-200">
@@ -343,7 +345,7 @@ export function InvestmentCharts({ holdings, accounts, currentPrices }: Investme
             </tbody>
             <tfoot className="bg-gray-50 border-t-2 border-gray-300">
               <tr>
-                <td className="px-4 py-2 font-bold text-gray-900">Total</td>
+                <td className="px-4 py-2 font-bold text-gray-900">{t('tableHeaders.total')}</td>
                 <td className="px-4 py-2 text-right font-bold text-gray-900">
                   ${performanceData.reduce((sum, item) => sum + item.costBasis, 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                 </td>

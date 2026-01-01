@@ -8,6 +8,7 @@
 
 import { useEffect, useState, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 import {
   CommandDialog,
   CommandEmpty,
@@ -39,6 +40,7 @@ import {
 
 export function CommandPalette() {
   const router = useRouter();
+  const t = useTranslations('commandPalette');
   const [open, setOpen] = useState(false);
 
   // Cmd/Ctrl+K keyboard shortcut
@@ -61,108 +63,108 @@ export function CommandPalette() {
 
   return (
     <CommandDialog open={open} onOpenChange={setOpen}>
-      <CommandInput placeholder="Type a command or search..." />
+      <CommandInput placeholder={t('placeholder')} />
       <CommandList>
-        <CommandEmpty>No results found.</CommandEmpty>
+        <CommandEmpty>{t('noResults')}</CommandEmpty>
 
         {/* Navigation - Core Tracking */}
-        <CommandGroup heading="Tracking & Analysis">
+        <CommandGroup heading={t('groups.tracking')}>
           <CommandItem
             onSelect={() => runCommand(() => router.push('/budget-app'))}
           >
             <Home className="mr-2 h-4 w-4" />
-            <span>Dashboard</span>
+            <span>{t('commands.dashboard')}</span>
           </CommandItem>
           <CommandItem
             onSelect={() => runCommand(() => router.push('/budget-app/transactions'))}
           >
             <Receipt className="mr-2 h-4 w-4" />
-            <span>Transactions</span>
+            <span>{t('commands.transactions')}</span>
           </CommandItem>
           <CommandItem
             onSelect={() => runCommand(() => router.push('/budget-app/ocr'))}
           >
             <Camera className="mr-2 h-4 w-4" />
-            <span>Scan Receipt</span>
+            <span>{t('commands.scanReceipt')}</span>
           </CommandItem>
           <CommandItem
             onSelect={() => runCommand(() => router.push('/budget-app/budgets'))}
           >
             <PieChart className="mr-2 h-4 w-4" />
-            <span>Budgets</span>
+            <span>{t('commands.budgets')}</span>
           </CommandItem>
           <CommandItem
             onSelect={() => runCommand(() => router.push('/budget-app/reports'))}
           >
             <BarChart3 className="mr-2 h-4 w-4" />
-            <span>Reports</span>
+            <span>{t('commands.reports')}</span>
           </CommandItem>
         </CommandGroup>
 
         <CommandSeparator />
 
         {/* Navigation - Wealth & Planning */}
-        <CommandGroup heading="Wealth & Planning">
+        <CommandGroup heading={t('groups.wealth')}>
           <CommandItem
             onSelect={() => runCommand(() => router.push('/budget-app/loans'))}
           >
             <CreditCard className="mr-2 h-4 w-4" />
-            <span>Loans</span>
+            <span>{t('commands.loans')}</span>
           </CommandItem>
           <CommandItem
             onSelect={() => runCommand(() => router.push('/budget-app/investments'))}
           >
             <Wallet className="mr-2 h-4 w-4" />
-            <span>Investments</span>
+            <span>{t('commands.investments')}</span>
           </CommandItem>
           <CommandItem
             onSelect={() => runCommand(() => router.push('/budget-app/planning/future'))}
           >
             <Target className="mr-2 h-4 w-4" />
-            <span>Future Plans</span>
+            <span>{t('commands.futurePlans')}</span>
           </CommandItem>
           <CommandItem
             onSelect={() => runCommand(() => router.push('/budget-app/planning/retirement'))}
           >
             <TrendingUp className="mr-2 h-4 w-4" />
-            <span>Retirement</span>
+            <span>{t('commands.retirement')}</span>
           </CommandItem>
         </CommandGroup>
 
         <CommandSeparator />
 
         {/* Navigation - Tools & Settings */}
-        <CommandGroup heading="Tools & Settings">
+        <CommandGroup heading={t('groups.tools')}>
           <CommandItem
             onSelect={() => runCommand(() => router.push('/budget-app/categories'))}
           >
             <Tags className="mr-2 h-4 w-4" />
-            <span>Categories</span>
+            <span>{t('commands.categories')}</span>
           </CommandItem>
           <CommandItem
             onSelect={() => runCommand(() => router.push('/budget-app/import'))}
           >
             <Upload className="mr-2 h-4 w-4" />
-            <span>Import CSV</span>
+            <span>{t('commands.importCsv')}</span>
           </CommandItem>
           <CommandItem
             onSelect={() => runCommand(() => router.push('/budget-app/export'))}
           >
             <Download className="mr-2 h-4 w-4" />
-            <span>Export Data</span>
+            <span>{t('commands.exportData')}</span>
           </CommandItem>
           <CommandItem
             onSelect={() => runCommand(() => router.push('/budget-app/settings'))}
           >
             <Settings className="mr-2 h-4 w-4" />
-            <span>Settings</span>
+            <span>{t('commands.settings')}</span>
           </CommandItem>
         </CommandGroup>
 
         <CommandSeparator />
 
         {/* Quick Actions */}
-        <CommandGroup heading="Quick Actions">
+        <CommandGroup heading={t('groups.quickActions')}>
           <CommandItem
             onSelect={() => runCommand(() => {
               router.push('/budget-app/transactions');
@@ -174,7 +176,7 @@ export function CommandPalette() {
             })}
           >
             <Plus className="mr-2 h-4 w-4" />
-            <span>Add Transaction</span>
+            <span>{t('commands.addTransaction')}</span>
           </CommandItem>
           <CommandItem
             onSelect={() => runCommand(() => {
@@ -187,14 +189,14 @@ export function CommandPalette() {
             })}
           >
             <Plus className="mr-2 h-4 w-4" />
-            <span>New Budget</span>
+            <span>{t('commands.newBudget')}</span>
           </CommandItem>
         </CommandGroup>
 
         <CommandSeparator />
 
         {/* Theme Switching */}
-        <CommandGroup heading="Appearance">
+        <CommandGroup heading={t('groups.appearance')}>
           <CommandItem
             onSelect={() => runCommand(() => {
               // TODO: Implement theme switching when theme system is added
@@ -202,7 +204,7 @@ export function CommandPalette() {
             })}
           >
             <Sun className="mr-2 h-4 w-4" />
-            <span>Light Theme</span>
+            <span>{t('commands.lightTheme')}</span>
           </CommandItem>
           <CommandItem
             onSelect={() => runCommand(() => {
@@ -211,7 +213,7 @@ export function CommandPalette() {
             })}
           >
             <Moon className="mr-2 h-4 w-4" />
-            <span>Dark Theme</span>
+            <span>{t('commands.darkTheme')}</span>
           </CommandItem>
           <CommandItem
             onSelect={() => runCommand(() => {
@@ -220,7 +222,7 @@ export function CommandPalette() {
             })}
           >
             <MonitorSmartphone className="mr-2 h-4 w-4" />
-            <span>High-Contrast Theme</span>
+            <span>{t('commands.highContrastTheme')}</span>
           </CommandItem>
         </CommandGroup>
       </CommandList>

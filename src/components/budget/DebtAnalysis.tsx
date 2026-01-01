@@ -6,6 +6,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useTranslations } from 'next-intl';
 import { TrendingDown, DollarSign, Calendar, Percent, AlertCircle } from 'lucide-react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
@@ -38,6 +39,7 @@ import { generateAmortizationSchedule } from '@/lib/loans/calculations';
 import { format, addMonths } from 'date-fns';
 
 export function DebtAnalysis() {
+  const t = useTranslations('debtAnalysis');
   const [loans, setLoans] = useState<Loan[]>([]);
   const [totalDebt, setTotalDebt] = useState(0);
   const [monthlyPayment, setMonthlyPayment] = useState(0);
@@ -94,12 +96,12 @@ export function DebtAnalysis() {
       <Card>
         <CardContent className="flex flex-col items-center justify-center py-12">
           <DollarSign className="w-16 h-16 text-gray-300 mb-4" />
-          <h3 className="text-lg font-semibold text-gray-900 mb-2">No Debt to Analyze</h3>
+          <h3 className="text-lg font-semibold text-gray-900 mb-2">{t('empty.title')}</h3>
           <p className="text-gray-500 text-center max-w-md mb-6">
-            You don't have any active loans. Add a loan to see debt analytics.
+            {t('empty.description')}
           </p>
           <Link href="/budget-app/loans/new">
-            <Button className="bg-teal-600 hover:bg-teal-700">Add Your First Loan</Button>
+            <Button className="bg-teal-600 hover:bg-teal-700">{t('empty.addFirstLoan')}</Button>
           </Link>
         </CardContent>
       </Card>
@@ -178,11 +180,11 @@ export function DebtAnalysis() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-2xl font-bold text-gray-900">Debt Analysis</h2>
-          <p className="text-gray-500 mt-1">Comprehensive view of your loans and obligations</p>
+          <h2 className="text-2xl font-bold text-gray-900">{t('title')}</h2>
+          <p className="text-gray-500 mt-1">{t('subtitle')}</p>
         </div>
         <Link href="/budget-app/loans">
-          <Button variant="outline">View All Loans</Button>
+          <Button variant="outline">{t('viewAllLoans')}</Button>
         </Link>
       </div>
 
@@ -190,46 +192,46 @@ export function DebtAnalysis() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Total Debt</CardTitle>
+            <CardTitle className="text-sm font-medium">{t('cards.totalDebt.title')}</CardTitle>
             <DollarSign className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">${totalDebt.toLocaleString()}</div>
             <p className="text-xs text-muted-foreground mt-1">
-              Across {loans.filter(l => l.status === 'active').length} active loans
+              {t('cards.totalDebt.subtitle', { count: loans.filter(l => l.status === 'active').length })}
             </p>
           </CardContent>
         </Card>
 
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Monthly Payment</CardTitle>
+            <CardTitle className="text-sm font-medium">{t('cards.monthlyPayment.title')}</CardTitle>
             <TrendingDown className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">${monthlyPayment.toLocaleString()}</div>
             <p className="text-xs text-muted-foreground mt-1">
-              Total monthly obligations
+              {t('cards.monthlyPayment.subtitle')}
             </p>
           </CardContent>
         </Card>
 
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Avg Interest Rate</CardTitle>
+            <CardTitle className="text-sm font-medium">{t('cards.avgRate.title')}</CardTitle>
             <Percent className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{avgRate.toFixed(2)}%</div>
             <p className="text-xs text-muted-foreground mt-1">
-              Weighted average
+              {t('cards.avgRate.subtitle')}
             </p>
           </CardContent>
         </Card>
 
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Debt-Free Date</CardTitle>
+            <CardTitle className="text-sm font-medium">{t('cards.debtFreeDate.title')}</CardTitle>
             <Calendar className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
@@ -237,7 +239,7 @@ export function DebtAnalysis() {
               {debtFreeDate ? format(debtFreeDate, 'MMM yyyy') : 'N/A'}
             </div>
             <p className="text-xs text-muted-foreground mt-1">
-              Estimated payoff
+              {t('cards.debtFreeDate.subtitle')}
             </p>
           </CardContent>
         </Card>
@@ -248,8 +250,8 @@ export function DebtAnalysis() {
         {/* Debt Breakdown Pie Chart */}
         <Card>
           <CardHeader>
-            <CardTitle>Debt by Type</CardTitle>
-            <CardDescription>Distribution of debt across loan types</CardDescription>
+            <CardTitle>{t('charts.byType.title')}</CardTitle>
+            <CardDescription>{t('charts.byType.description')}</CardDescription>
           </CardHeader>
           <CardContent>
             <div className="h-[300px]">
@@ -295,8 +297,8 @@ export function DebtAnalysis() {
         {/* Payoff Projection */}
         <Card>
           <CardHeader>
-            <CardTitle>12-Month Payoff Projection</CardTitle>
-            <CardDescription>Expected debt reduction over the next year</CardDescription>
+            <CardTitle>{t('charts.projection.title')}</CardTitle>
+            <CardDescription>{t('charts.projection.description')}</CardDescription>
           </CardHeader>
           <CardContent>
             <div className="h-[300px]">
@@ -323,7 +325,7 @@ export function DebtAnalysis() {
             </div>
 
             <div className="text-sm text-gray-600 text-center mt-4">
-              Expected reduction: ${(payoffProjection[0]?.balance - payoffProjection[12]?.balance).toLocaleString()} over 12 months
+              {t('charts.projection.expectedReduction', { amount: `$${(payoffProjection[0]?.balance - payoffProjection[12]?.balance).toLocaleString()}` })}
             </div>
           </CardContent>
         </Card>
@@ -332,19 +334,19 @@ export function DebtAnalysis() {
       {/* Loan Comparison Table */}
       <Card>
         <CardHeader>
-          <CardTitle>Loan Comparison</CardTitle>
-          <CardDescription>Side-by-side comparison of your active loans</CardDescription>
+          <CardTitle>{t('comparison.title')}</CardTitle>
+          <CardDescription>{t('comparison.description')}</CardDescription>
         </CardHeader>
         <CardContent>
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
                 <tr className="border-b border-gray-200 bg-gray-50">
-                  <th className="px-4 py-3 text-left font-medium text-gray-700">Loan</th>
-                  <th className="px-4 py-3 text-right font-medium text-gray-700">Balance</th>
-                  <th className="px-4 py-3 text-right font-medium text-gray-700">Monthly Payment</th>
-                  <th className="px-4 py-3 text-right font-medium text-gray-700">Interest Rate</th>
-                  <th className="px-4 py-3 text-right font-medium text-gray-700">% of Total Debt</th>
+                  <th className="px-4 py-3 text-left font-medium text-gray-700">{t('comparison.headers.loan')}</th>
+                  <th className="px-4 py-3 text-right font-medium text-gray-700">{t('comparison.headers.balance')}</th>
+                  <th className="px-4 py-3 text-right font-medium text-gray-700">{t('comparison.headers.monthlyPayment')}</th>
+                  <th className="px-4 py-3 text-right font-medium text-gray-700">{t('comparison.headers.interestRate')}</th>
+                  <th className="px-4 py-3 text-right font-medium text-gray-700">{t('comparison.headers.percentOfTotal')}</th>
                 </tr>
               </thead>
               <tbody>
@@ -360,7 +362,7 @@ export function DebtAnalysis() {
                   </tr>
                 ))}
                 <tr className="bg-gray-50 font-semibold">
-                  <td className="px-4 py-3 text-gray-900">Total</td>
+                  <td className="px-4 py-3 text-gray-900">{t('comparison.total')}</td>
                   <td className="px-4 py-3 text-right text-gray-900">${totalDebt.toLocaleString()}</td>
                   <td className="px-4 py-3 text-right text-gray-900">${monthlyPayment.toLocaleString()}</td>
                   <td className="px-4 py-3 text-right text-gray-900">{avgRate.toFixed(2)}%</td>

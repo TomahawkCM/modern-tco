@@ -15,6 +15,7 @@
 import type { SubscriptionPattern } from '@/lib/subscription-detector';
 import type { Subscription } from '@/types/budget';
 import { format, formatDistanceToNow, differenceInDays } from 'date-fns';
+import { useTranslations } from 'next-intl';
 import {
   Calendar,
   TrendingUp,
@@ -61,16 +62,10 @@ export function SubscriptionCard({
   onClaim,
   onDismiss,
 }: SubscriptionCardProps) {
+  const t = useTranslations('subscriptionCard');
   const [showMenu, setShowMenu] = useState(false);
 
-  const intervalLabel = {
-    weekly: 'Weekly',
-    'bi-weekly': 'Bi-weekly',
-    monthly: 'Monthly',
-    quarterly: 'Quarterly',
-    annual: 'Annual',
-    irregular: 'Irregular',
-  }[subscription.interval_type] || subscription.interval_type;
+  const intervalLabel = t(`interval.${subscription.interval_type}`);
 
   const confidenceColor =
     subscription.confidence >= 0.9
@@ -79,12 +74,13 @@ export function SubscriptionCard({
       ? 'text-yellow-600 dark:text-yellow-400'
       : 'text-orange-600 dark:text-orange-400';
 
-  const confidenceLabel =
+  const confidenceLevel =
     subscription.confidence >= 0.9
-      ? 'High'
+      ? 'high'
       : subscription.confidence >= 0.7
-      ? 'Medium'
-      : 'Low';
+      ? 'medium'
+      : 'low';
+  const confidenceLabel = t(`confidence.${confidenceLevel}`);
 
   const isAiDetected = subscription.is_subscription_merchant;
   const isPaused = manualSubscription?.status === 'paused';
@@ -101,11 +97,15 @@ export function SubscriptionCard({
     ? differenceInDays(new Date(manualSubscription.trialEndDate), new Date())
     : null;
 
+  const sourceColors = {
+    manual: 'bg-teal-50 text-teal-700 border-teal-200 dark:bg-teal-950 dark:text-teal-300 dark:border-teal-800',
+    'auto-detected': 'bg-purple-50 text-purple-700 border-purple-200 dark:bg-purple-950 dark:text-purple-300 dark:border-purple-800',
+    merged: 'bg-blue-50 text-blue-700 border-blue-200 dark:bg-blue-950 dark:text-blue-300 dark:border-blue-800',
+  };
   const sourceLabel = {
-    manual: { text: 'Manual', color: 'bg-teal-50 text-teal-700 border-teal-200 dark:bg-teal-950 dark:text-teal-300 dark:border-teal-800' },
-    'auto-detected': { text: 'Auto-detected', color: 'bg-purple-50 text-purple-700 border-purple-200 dark:bg-purple-950 dark:text-purple-300 dark:border-purple-800' },
-    merged: { text: 'Tracked', color: 'bg-blue-50 text-blue-700 border-blue-200 dark:bg-blue-950 dark:text-blue-300 dark:border-blue-800' },
-  }[source];
+    text: t(`source.${source}`),
+    color: sourceColors[source],
+  };
 
   return (
     <div
@@ -138,24 +138,24 @@ export function SubscriptionCard({
             {isAiDetected && source === 'auto-detected' && (
               <span className="inline-flex items-center gap-1 px-2 py-0.5 bg-teal-50 dark:bg-teal-950 text-teal-700 dark:text-teal-300 text-xs font-medium rounded-full border border-teal-200 dark:border-teal-800">
                 <CheckCircle className="w-3 h-3" />
-                AI Verified
+                {t('badges.aiVerified')}
               </span>
             )}
 
             {/* Status Badges */}
             {isPaused && (
               <span className="px-2 py-0.5 bg-yellow-100 dark:bg-yellow-900 text-yellow-700 dark:text-yellow-300 text-xs font-medium rounded-full">
-                Paused
+                {t('badges.paused')}
               </span>
             )}
             {isCancelled && (
               <span className="px-2 py-0.5 bg-red-100 dark:bg-red-900 text-red-700 dark:text-red-300 text-xs font-medium rounded-full">
-                Cancelled
+                {t('badges.cancelled')}
               </span>
             )}
             {isTrial && (
               <span className="px-2 py-0.5 bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300 text-xs font-medium rounded-full">
-                Trial
+                {t('badges.trial')}
               </span>
             )}
           </div>
@@ -192,7 +192,7 @@ export function SubscriptionCard({
                     className="w-full px-4 py-2 text-left text-sm hover:bg-muted flex items-center gap-2"
                   >
                     <ExternalLink className="w-4 h-4" />
-                    View Transactions
+                    {t('menu.viewTransactions')}
                   </button>
                 )}
                 {onEdit && (
@@ -204,7 +204,7 @@ export function SubscriptionCard({
                     className="w-full px-4 py-2 text-left text-sm hover:bg-muted flex items-center gap-2"
                   >
                     <Edit className="w-4 h-4" />
-                    Edit
+                    {t('menu.edit')}
                   </button>
                 )}
                 {onPauseResume && (
@@ -218,12 +218,12 @@ export function SubscriptionCard({
                     {isPaused ? (
                       <>
                         <Play className="w-4 h-4" />
-                        Resume
+                        {t('menu.resume')}
                       </>
                     ) : (
                       <>
                         <Pause className="w-4 h-4" />
-                        Pause
+                        {t('menu.pause')}
                       </>
                     )}
                   </button>
@@ -237,7 +237,7 @@ export function SubscriptionCard({
                     className="w-full px-4 py-2 text-left text-sm hover:bg-muted flex items-center gap-2 text-red-600"
                   >
                     <XCircle className="w-4 h-4" />
-                    Cancel Subscription
+                    {t('menu.cancelSubscription')}
                   </button>
                 )}
                 {onClaim && (
@@ -249,7 +249,7 @@ export function SubscriptionCard({
                     className="w-full px-4 py-2 text-left text-sm hover:bg-muted flex items-center gap-2 text-teal-600"
                   >
                     <CheckCircle className="w-4 h-4" />
-                    Claim & Manage
+                    {t('menu.claimManage')}
                   </button>
                 )}
                 {onDismiss && (
@@ -261,7 +261,7 @@ export function SubscriptionCard({
                     className="w-full px-4 py-2 text-left text-sm hover:bg-orange-50 dark:hover:bg-orange-950 flex items-center gap-2 text-orange-600"
                   >
                     <XOctagon className="w-4 h-4" />
-                    Not a Subscription
+                    {t('menu.notSubscription')}
                   </button>
                 )}
                 {onDelete && (
@@ -275,7 +275,7 @@ export function SubscriptionCard({
                       className="w-full px-4 py-2 text-left text-sm hover:bg-red-50 dark:hover:bg-red-950 flex items-center gap-2 text-red-600"
                     >
                       <Trash2 className="w-4 h-4" />
-                      Delete
+                      {t('menu.delete')}
                     </button>
                   </>
                 )}
@@ -288,7 +288,7 @@ export function SubscriptionCard({
       {/* Confidence (only for auto-detected) */}
       {source === 'auto-detected' && (
         <div className="flex items-center justify-between mb-4 p-2 bg-muted/50 rounded-lg">
-          <span className="text-xs text-muted-foreground">Detection Confidence</span>
+          <span className="text-xs text-muted-foreground">{t('confidence.label')}</span>
           <div className="flex items-center gap-2">
             <span className={`text-xs font-medium ${confidenceColor}`}>
               {confidenceLabel} ({(subscription.confidence * 100).toFixed(0)}%)
@@ -315,7 +315,7 @@ export function SubscriptionCard({
           <div className="flex items-center gap-2 text-blue-800 dark:text-blue-200">
             <Clock className="w-4 h-4" />
             <span className="text-sm font-medium">
-              {trialDaysLeft} day{trialDaysLeft !== 1 ? 's' : ''} left in trial
+              {t('trial.daysLeft', { count: trialDaysLeft })}
             </span>
           </div>
         </div>
@@ -329,7 +329,7 @@ export function SubscriptionCard({
             <DollarSign className="w-5 h-5 text-green-600 dark:text-green-400" />
           </div>
           <div>
-            <p className="text-xs text-muted-foreground">Amount</p>
+            <p className="text-xs text-muted-foreground">{t('stats.amount')}</p>
             <p className="text-base font-semibold text-foreground">
               ${subscription.average_amount.toFixed(2)}
             </p>
@@ -342,7 +342,7 @@ export function SubscriptionCard({
             <Clock className="w-5 h-5 text-blue-600 dark:text-blue-400" />
           </div>
           <div>
-            <p className="text-xs text-muted-foreground">Frequency</p>
+            <p className="text-xs text-muted-foreground">{t('stats.frequency')}</p>
             <p className="text-base font-semibold text-foreground">{intervalLabel}</p>
           </div>
         </div>
@@ -366,7 +366,7 @@ export function SubscriptionCard({
               }`} />
             </div>
             <div>
-              <p className="text-xs text-muted-foreground">Next Charge</p>
+              <p className="text-xs text-muted-foreground">{t('stats.nextCharge')}</p>
               <p className="text-sm font-medium text-foreground">
                 {format(new Date(subscription.next_expected_charge), 'MMM d')}
               </p>
@@ -384,7 +384,7 @@ export function SubscriptionCard({
           </div>
           <div>
             <p className="text-xs text-muted-foreground">
-              {source === 'auto-detected' ? 'Total Spent' : 'Annual Cost'}
+              {source === 'auto-detected' ? t('stats.totalSpent') : t('stats.annualCost')}
             </p>
             <p className="text-base font-semibold text-foreground">
               ${(source === 'auto-detected' ? subscription.total_spent : subscription.annual_cost_estimate).toFixed(2)}
@@ -397,23 +397,23 @@ export function SubscriptionCard({
       <div className="pt-4 border-t border-border space-y-2">
         <div className="flex items-center justify-between text-sm">
           <span className="text-muted-foreground">
-            {source === 'auto-detected' ? 'Occurrences' : 'Annual Cost'}:
+            {source === 'auto-detected' ? t('details.occurrences') : t('stats.annualCost')}:
           </span>
           <span className="font-medium text-foreground">
             {source === 'auto-detected'
-              ? `${subscription.occurrence_count} charges`
+              ? t('details.charges', { count: subscription.occurrence_count })
               : `$${subscription.annual_cost_estimate.toFixed(2)}`}
           </span>
         </div>
         <div className="flex items-center justify-between text-sm">
-          <span className="text-muted-foreground">First Charge:</span>
+          <span className="text-muted-foreground">{t('details.firstCharge')}:</span>
           <span className="font-medium text-foreground">
             {format(new Date(subscription.first_charge), 'MMM d, yyyy')}
           </span>
         </div>
         {subscription.last_charge && (
           <div className="flex items-center justify-between text-sm">
-            <span className="text-muted-foreground">Last Charge:</span>
+            <span className="text-muted-foreground">{t('details.lastCharge')}:</span>
             <span className="font-medium text-foreground">
               {format(new Date(subscription.last_charge), 'MMM d, yyyy')}
             </span>
@@ -425,10 +425,10 @@ export function SubscriptionCard({
           <div className="flex items-center justify-between text-sm">
             <span className="text-muted-foreground flex items-center gap-1">
               <Bell className="w-3 h-3" />
-              Reminder:
+              {t('details.reminder')}:
             </span>
             <span className="font-medium text-foreground">
-              {manualSubscription.reminderDaysBefore} days before
+              {t('details.daysBefore', { count: manualSubscription.reminderDaysBefore })}
             </span>
           </div>
         )}
@@ -436,7 +436,7 @@ export function SubscriptionCard({
         {/* Payment method for manual subscriptions */}
         {manualSubscription?.paymentMethod && (
           <div className="flex items-center justify-between text-sm">
-            <span className="text-muted-foreground">Payment:</span>
+            <span className="text-muted-foreground">{t('details.payment')}:</span>
             <span className="font-medium text-foreground">
               {manualSubscription.paymentMethod}
             </span>
@@ -452,7 +452,7 @@ export function SubscriptionCard({
             className="flex-1 px-4 py-2 text-sm font-medium text-teal-600 dark:text-teal-400 border border-teal-200 dark:border-teal-800 rounded-lg hover:bg-teal-50 dark:hover:bg-teal-950 transition-colors flex items-center justify-center gap-2"
           >
             <ExternalLink className="w-4 h-4" />
-            Transactions
+            {t('buttons.transactions')}
           </button>
         )}
         {onClaim && (
@@ -461,7 +461,7 @@ export function SubscriptionCard({
             className="flex-1 px-4 py-2 text-sm font-medium text-white bg-teal-500 rounded-lg hover:bg-teal-600 transition-colors flex items-center justify-center gap-2"
           >
             <CheckCircle className="w-4 h-4" />
-            Claim & Manage
+            {t('buttons.claimManage')}
           </button>
         )}
         {onEdit && (
@@ -470,7 +470,7 @@ export function SubscriptionCard({
             className="flex-1 px-4 py-2 text-sm font-medium text-foreground border border-border rounded-lg hover:bg-muted transition-colors flex items-center justify-center gap-2"
           >
             <Edit className="w-4 h-4" />
-            Edit
+            {t('buttons.edit')}
           </button>
         )}
       </div>
@@ -480,7 +480,7 @@ export function SubscriptionCard({
         <div className="mt-4 bg-yellow-50 dark:bg-yellow-950 border border-yellow-200 dark:border-yellow-800 rounded-lg p-3 flex items-start gap-2">
           <AlertCircle className="w-4 h-4 text-yellow-600 dark:text-yellow-400 flex-shrink-0 mt-0.5" />
           <p className="text-xs text-yellow-800 dark:text-yellow-200">
-            This subscription was detected with low confidence. Claim it to verify and manage manually.
+            {t('lowConfidenceWarning')}
           </p>
         </div>
       )}

@@ -10,6 +10,7 @@
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { GripVertical } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 interface DraggableWidgetProps {
   id: string;
@@ -22,6 +23,7 @@ export function DraggableWidget({
   children,
   isDragDisabled = false,
 }: DraggableWidgetProps) {
+  const t = useTranslations('draggableWidget');
   const {
     attributes,
     listeners,
@@ -48,7 +50,7 @@ export function DraggableWidget({
           {...attributes}
           {...listeners}
           className="absolute -top-2 -right-2 z-10 bg-teal-500 text-white p-2 rounded-lg shadow-md opacity-0 group-hover:opacity-100 focus:opacity-100 transition-opacity cursor-grab active:cursor-grabbing hover:bg-teal-600 focus:ring-2 focus:ring-teal-400 focus:ring-offset-2"
-          aria-label={`Drag to reorder widget`}
+          aria-label={t('dragToReorder')}
           tabIndex={0}
         >
           <GripVertical className="w-4 h-4" />

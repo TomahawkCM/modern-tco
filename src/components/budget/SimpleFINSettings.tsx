@@ -8,6 +8,7 @@
  */
 
 import { useState } from 'react';
+import { useTranslations } from 'next-intl';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Switch } from '@/components/ui/switch';
@@ -85,18 +86,19 @@ export function SimpleFINSettingsPage({
   onToggleAccountImport,
   isSyncing = false,
 }: SimpleFINSettingsPageProps) {
+  const t = useTranslations('simplefinSettings');
   const [showDisconnectDialog, setShowDisconnectDialog] = useState(false);
   const isConnected = connectionStatus === 'connected' || connectionStatus === 'syncing';
 
   const formatLastSync = (date: Date | null) => {
-    if (!date) return 'Never';
+    if (!date) return t('sync.never');
     const now = new Date();
     const diff = now.getTime() - date.getTime();
     const hours = Math.floor(diff / (1000 * 60 * 60));
 
-    if (hours < 1) return 'Less than an hour ago';
-    if (hours < 24) return `${hours} hours ago`;
-    return date.toLocaleDateString();
+    if (hours < 1) return t('sync.lessThanHour');
+    if (hours < 24) return t('sync.hoursAgo', { hours });
+    return t('sync.date', { date: date.toLocaleDateString() });
   };
 
   return (
@@ -107,7 +109,7 @@ export function SimpleFINSettingsPage({
           <CardTitle className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <Building2 className="w-5 h-5" />
-              SimpleFIN Connection
+              {t('connection.title')}
             </div>
             <SimpleFINStatusBadge
               status={connectionStatus}
@@ -115,7 +117,7 @@ export function SimpleFINSettingsPage({
             />
           </CardTitle>
           <CardDescription>
-            Connect your bank accounts to automatically import transactions
+            {t('connection.description')}
           </CardDescription>
         </CardHeader>
 
@@ -127,10 +129,10 @@ export function SimpleFINSettingsPage({
                   <CheckCircle className="w-5 h-5 text-green-600 dark:text-green-400" />
                   <div>
                     <p className="font-medium text-green-800 dark:text-green-200">
-                      Connected
+                      {t('connection.connected')}
                     </p>
                     <p className="text-sm text-green-600 dark:text-green-400">
-                      {linkedAccounts.length} account{linkedAccounts.length !== 1 ? 's' : ''} linked
+                      {t('connection.accountsLinked', { count: linkedAccounts.length })}
                     </p>
                   </div>
                 </div>
@@ -143,13 +145,13 @@ export function SimpleFINSettingsPage({
                   >
                     {isSyncing ? (
                       <>
-                        <RefreshCw className="w-4 h-4 mr-2 animate-spin" />
-                        Syncing...
+                        <RefreshCw className="w-4 h-4 me-2 animate-spin" />
+                        {t('sync.syncing')}
                       </>
                     ) : (
                       <>
-                        <RefreshCw className="w-4 h-4 mr-2" />
-                        Sync Now
+                        <RefreshCw className="w-4 h-4 me-2" />
+                        {t('sync.syncNow')}
                       </>
                     )}
                   </Button>
@@ -157,32 +159,30 @@ export function SimpleFINSettingsPage({
               </div>
 
               <div className="text-sm text-muted-foreground">
-                Last synced: {formatLastSync(lastSyncAt)}
+                {t('sync.lastSynced', { time: formatLastSync(lastSyncAt) })}
               </div>
 
               <AlertDialog open={showDisconnectDialog} onOpenChange={setShowDisconnectDialog}>
                 <AlertDialogTrigger asChild>
                   <Button variant="outline" className="text-destructive">
-                    <Trash2 className="w-4 h-4 mr-2" />
-                    Disconnect
+                    <Trash2 className="w-4 h-4 me-2" />
+                    {t('disconnect.button')}
                   </Button>
                 </AlertDialogTrigger>
                 <AlertDialogContent>
                   <AlertDialogHeader>
-                    <AlertDialogTitle>Disconnect SimpleFIN?</AlertDialogTitle>
+                    <AlertDialogTitle>{t('disconnect.dialogTitle')}</AlertDialogTitle>
                     <AlertDialogDescription>
-                      This will remove the connection to your bank accounts.
-                      Your existing transactions will not be deleted, but new
-                      transactions will no longer sync automatically.
+                      {t('disconnect.dialogDescription')}
                     </AlertDialogDescription>
                   </AlertDialogHeader>
                   <AlertDialogFooter>
-                    <AlertDialogCancel>Cancel</AlertDialogCancel>
+                    <AlertDialogCancel>{t('disconnect.cancel')}</AlertDialogCancel>
                     <AlertDialogAction
                       onClick={onDisconnect}
                       className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
                     >
-                      Disconnect
+                      {t('disconnect.confirm')}
                     </AlertDialogAction>
                   </AlertDialogFooter>
                 </AlertDialogContent>
@@ -191,13 +191,13 @@ export function SimpleFINSettingsPage({
           ) : (
             <div className="text-center py-6">
               <AlertCircle className="w-12 h-12 mx-auto text-muted-foreground/50" />
-              <h3 className="mt-4 font-medium">Not Connected</h3>
+              <h3 className="mt-4 font-medium">{t('connection.notConnected')}</h3>
               <p className="text-sm text-muted-foreground mt-1 mb-4">
-                Connect your bank accounts to start importing transactions
+                {t('connection.notConnectedDesc')}
               </p>
               <Button onClick={onConnect}>
-                <Building2 className="w-4 h-4 mr-2" />
-                Connect Bank Account
+                <Building2 className="w-4 h-4 me-2" />
+                {t('connection.connectButton')}
               </Button>
             </div>
           )}
@@ -210,10 +210,10 @@ export function SimpleFINSettingsPage({
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Settings className="w-5 h-5" />
-              Sync Settings
+              {t('syncSettings.title')}
             </CardTitle>
             <CardDescription>
-              Configure how and when transactions are synced
+              {t('syncSettings.description')}
             </CardDescription>
           </CardHeader>
 
@@ -222,10 +222,10 @@ export function SimpleFINSettingsPage({
             <div className="flex items-center justify-between">
               <div className="space-y-0.5">
                 <Label htmlFor="auto-sync" className="text-base">
-                  Automatic Sync
+                  {t('syncSettings.autoSync.label')}
                 </Label>
                 <p className="text-sm text-muted-foreground">
-                  Automatically sync transactions on a schedule
+                  {t('syncSettings.autoSync.description')}
                 </p>
               </div>
               <Switch
@@ -243,7 +243,7 @@ export function SimpleFINSettingsPage({
 
                 {/* Sync frequency */}
                 <div className="space-y-3">
-                  <Label className="text-base">Sync Frequency</Label>
+                  <Label className="text-base">{t('syncSettings.frequency.label')}</Label>
                   <Select
                     value={settings.syncFrequencyHours.toString()}
                     onValueChange={(value) =>
@@ -254,14 +254,14 @@ export function SimpleFINSettingsPage({
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="6">Every 6 hours</SelectItem>
-                      <SelectItem value="12">Every 12 hours</SelectItem>
-                      <SelectItem value="24">Once daily</SelectItem>
-                      <SelectItem value="48">Every 2 days</SelectItem>
+                      <SelectItem value="6">{t('syncSettings.frequency.every6Hours')}</SelectItem>
+                      <SelectItem value="12">{t('syncSettings.frequency.every12Hours')}</SelectItem>
+                      <SelectItem value="24">{t('syncSettings.frequency.onceDaily')}</SelectItem>
+                      <SelectItem value="48">{t('syncSettings.frequency.every2Days')}</SelectItem>
                     </SelectContent>
                   </Select>
                   <p className="text-xs text-muted-foreground">
-                    SimpleFIN allows up to 24 requests per day. Daily sync is recommended.
+                    {t('syncSettings.frequency.hint')}
                   </p>
                 </div>
               </>
@@ -272,8 +272,8 @@ export function SimpleFINSettingsPage({
             {/* Days to sync */}
             <div className="space-y-3">
               <div className="flex items-center justify-between">
-                <Label className="text-base">Transaction History</Label>
-                <Badge variant="outline">{settings.defaultSyncDays} days</Badge>
+                <Label className="text-base">{t('syncSettings.transactionHistory.label')}</Label>
+                <Badge variant="outline">{t('syncSettings.transactionHistory.days', { count: settings.defaultSyncDays })}</Badge>
               </div>
               <Slider
                 value={[settings.defaultSyncDays]}
@@ -285,7 +285,7 @@ export function SimpleFINSettingsPage({
                 step={1}
               />
               <p className="text-xs text-muted-foreground">
-                How many days of transaction history to fetch (max 60 days per SimpleFIN)
+                {t('syncSettings.transactionHistory.hint')}
               </p>
             </div>
 
@@ -295,10 +295,10 @@ export function SimpleFINSettingsPage({
             <div className="flex items-center justify-between">
               <div className="space-y-0.5">
                 <Label htmlFor="pending" className="text-base">
-                  Import Pending Transactions
+                  {t('syncSettings.pendingTransactions.label')}
                 </Label>
                 <p className="text-sm text-muted-foreground">
-                  Include transactions that haven&apos;t posted yet
+                  {t('syncSettings.pendingTransactions.description')}
                 </p>
               </div>
               <Switch
@@ -317,10 +317,10 @@ export function SimpleFINSettingsPage({
               <div className="space-y-0.5">
                 <Label htmlFor="categorize" className="text-base flex items-center gap-2">
                   <Zap className="w-4 h-4 text-yellow-500" />
-                  Auto-Categorize
+                  {t('syncSettings.autoCategorize.label')}
                 </Label>
                 <p className="text-sm text-muted-foreground">
-                  Automatically categorize imported transactions using AI
+                  {t('syncSettings.autoCategorize.description')}
                 </p>
               </div>
               <Switch
@@ -339,10 +339,10 @@ export function SimpleFINSettingsPage({
               <div className="space-y-0.5">
                 <Label htmlFor="notifications" className="text-base flex items-center gap-2">
                   <Bell className="w-4 h-4" />
-                  Sync Notifications
+                  {t('syncSettings.notifications.label')}
                 </Label>
                 <p className="text-sm text-muted-foreground">
-                  Show notification when sync completes
+                  {t('syncSettings.notifications.description')}
                 </p>
               </div>
               <Switch
@@ -363,10 +363,10 @@ export function SimpleFINSettingsPage({
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Clock className="w-5 h-5" />
-              Connected Accounts
+              {t('connectedAccounts.title')}
             </CardTitle>
             <CardDescription>
-              Manage your linked bank accounts
+              {t('connectedAccounts.description')}
             </CardDescription>
           </CardHeader>
 
@@ -384,7 +384,7 @@ export function SimpleFINSettingsPage({
       {/* Help */}
       <Card>
         <CardHeader>
-          <CardTitle className="text-base">Need Help?</CardTitle>
+          <CardTitle className="text-base">{t('help.title')}</CardTitle>
         </CardHeader>
         <CardContent className="space-y-2">
           <a
@@ -393,7 +393,7 @@ export function SimpleFINSettingsPage({
             rel="noopener noreferrer"
             className="flex items-center gap-2 text-sm text-primary hover:underline"
           >
-            SimpleFIN Bridge Dashboard
+            {t('help.bridgeDashboard')}
             <ExternalLink className="w-3 h-3" />
           </a>
           <a
@@ -402,7 +402,7 @@ export function SimpleFINSettingsPage({
             rel="noopener noreferrer"
             className="flex items-center gap-2 text-sm text-primary hover:underline"
           >
-            SimpleFIN Protocol Documentation
+            {t('help.protocolDocs')}
             <ExternalLink className="w-3 h-3" />
           </a>
         </CardContent>

@@ -116,7 +116,7 @@ export function VirtualTransactionTable({
                 key={tx.id}
                 data-index={virtualRow.index}
                 ref={rowVirtualizer.measureElement}
-                className={`absolute top-0 left-0 w-full border-b border-gray-200 transition-colors ${
+                className={`absolute top-0 start-0 w-full border-b border-gray-200 transition-colors ${
                   isSelected ? 'bg-teal-50/50' : 'bg-white hover:bg-gray-50/50'
                 }`}
                 style={{
@@ -218,7 +218,7 @@ export function VirtualTransactionTable({
                           {quickCategorizingId === tx.id && (
                             <>
                               <div className="fixed inset-0 z-10" onClick={() => onQuickCategorize(tx)} />
-                              <div className="absolute right-0 top-8 z-20 bg-white rounded-lg shadow-lg border border-gray-200 w-64 max-h-96 overflow-y-auto">
+                              <div className="absolute end-0 top-8 z-20 bg-white rounded-lg shadow-lg border border-gray-200 w-64 max-h-96 overflow-y-auto">
                                 <div className="p-3 border-b border-gray-200 sticky top-0 bg-white">
                                   <p className="text-sm font-semibold text-gray-700">Quick Categorize</p>
                                 </div>
@@ -227,17 +227,17 @@ export function VirtualTransactionTable({
                                     <div key={cat.id}>
                                       <button
                                         onClick={() => onCategorySelect(tx, cat.name, null)}
-                                        className="w-full text-left px-4 py-3 text-base hover:bg-gray-100 rounded font-medium"
+                                        className="w-full text-start px-4 py-3 text-base hover:bg-gray-100 rounded font-medium"
                                       >
                                         {cat.name}
                                       </button>
                                       {cat.subcategories.length > 0 && (
-                                        <div className="ml-4 border-l-2 border-gray-200">
+                                        <div className="ms-4 border-s-2 border-gray-200">
                                           {cat.subcategories.map(sub => (
                                             <button
                                               key={sub}
                                               onClick={() => onCategorySelect(tx, cat.name, sub)}
-                                              className="w-full text-left px-4 py-3 text-sm text-gray-600 hover:bg-gray-100 rounded"
+                                              className="w-full text-start px-4 py-3 text-sm text-gray-600 hover:bg-gray-100 rounded"
                                             >
                                               {sub}
                                             </button>

@@ -3,7 +3,7 @@
 /**
  * Spending Trend Chart with Forecasting (Phase 4)
  * Task 4.3.1: Display trend lines with 30-day projections
- * 
+ *
  * Shows historical spending with linear regression forecast
  */
 
@@ -20,6 +20,7 @@ import {
   ReferenceLine,
 } from 'recharts';
 import { TrendingUp, TrendingDown, Minus } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import {
   prepareMonthlyTrendData,
   generateForecast,
@@ -40,6 +41,7 @@ export function SpendingTrendChart({
   monthsBack = 6,
   forecastDays = 30,
 }: SpendingTrendChartProps) {
+  const t = useTranslations('spendingTrendChart');
   // Get theme-aware chart colors
   const theme = useThemeMode();
   const palette = getChartPalette(theme);
@@ -99,9 +101,9 @@ export function SpendingTrendChart({
   if (!chartData || chartData.length === 0) {
     return (
       <div className="bg-white rounded-lg border border-gray-200 p-6">
-        <h3 className="text-lg font-bold text-gray-900 mb-2">Spending Trends & Forecast</h3>
+        <h3 className="text-lg font-bold text-gray-900 mb-2">{t('title')}</h3>
         <p className="text-gray-600">
-          Not enough data to generate trends. Add at least 2 months of transactions.
+          {t('notEnoughData')}
         </p>
       </div>
     );
@@ -119,7 +121,7 @@ export function SpendingTrendChart({
     <div className="bg-white rounded-lg border border-gray-200 p-6">
       <div className="mb-4">
         <div className="flex items-center justify-between mb-2">
-          <h3 className="text-lg font-bold text-gray-900">Spending Trends & Forecast</h3>
+          <h3 className="text-lg font-bold text-gray-900">{t('title')}</h3>
           {trendInfo && (
             <div className={`flex items-center gap-2 ${trendColor}`}>
               <TrendIcon className="w-5 h-5" />
@@ -136,19 +138,19 @@ export function SpendingTrendChart({
       {stats && (
         <div className="grid grid-cols-3 gap-4 mb-6 p-4 bg-gray-50 rounded-lg">
           <div>
-            <div className="text-xs text-gray-600 mb-2">Avg Monthly</div>
+            <div className="text-xs text-gray-600 mb-2">{t('stats.avgMonthly')}</div>
             <div className="text-lg font-bold text-gray-900">
               ${stats.avgSpending.toFixed(0)}
             </div>
           </div>
           <div>
-            <div className="text-xs text-gray-600 mb-2">Last Month</div>
+            <div className="text-xs text-gray-600 mb-2">{t('stats.lastMonth')}</div>
             <div className="text-lg font-bold text-gray-900">
               ${stats.lastMonth.toFixed(0)}
             </div>
           </div>
           <div>
-            <div className="text-xs text-gray-600 mb-2">Projected</div>
+            <div className="text-xs text-gray-600 mb-2">{t('stats.projected')}</div>
             <div className={`text-lg font-bold ${
               stats.changeFromAvg > 0 ? 'text-red-600' : 'text-green-600'
             }`}>
@@ -192,7 +194,7 @@ export function SpendingTrendChart({
             stroke={palette.data[9].hex}
             strokeWidth={2}
             dot={{ fill: palette.data[9].hex, r: 4 }}
-            name="Actual Spending"
+            name={t('legend.actualSpending')}
           />
 
           {/* Projected spending (dashed line) */}
@@ -203,13 +205,13 @@ export function SpendingTrendChart({
             strokeWidth={2}
             strokeDasharray="5 5"
             dot={{ fill: palette.data[4].hex, r: 4 }}
-            name="Projected"
+            name={t('legend.projected')}
           />
         </LineChart>
       </ResponsiveContainer>
 
       <div className="mt-4 text-xs text-gray-500 text-center">
-        Forecast based on linear regression of last {monthsBack} months
+        {t('forecastFooter', { months: monthsBack })}
       </div>
     </div>
   );

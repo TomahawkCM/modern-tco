@@ -17,6 +17,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useTranslations } from 'next-intl';
 import { X, Check, AlertCircle, Save, Sparkles } from 'lucide-react';
 import type { CSVRow } from '@/types/budget';
 import type { ColumnMapping, ColumnAnalysisResult } from '@/lib/ai/smart-column-mapper';
@@ -56,6 +57,7 @@ export default function AIColumnMapperModal({
   sampleRows,
   fileName,
 }: AIColumnMapperModalProps) {
+  const t = useTranslations('aiColumnMapper');
   const [analysisResult, setAnalysisResult] = useState<ColumnAnalysisResult | null>(null);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [customMapping, setCustomMapping] = useState<Record<string, ColumnType>>({});
@@ -194,17 +196,17 @@ export default function AIColumnMapperModal({
               <Sparkles className="w-6 h-6 text-purple-600" />
               <div>
                 <h2 className="text-2xl font-bold text-gray-900">
-                  AI Column Mapping Wizard
+                  {t('title')}
                 </h2>
                 <p className="text-sm text-gray-600 mt-1">
-                  Review AI-detected columns and adjust if needed
+                  {t('subtitle')}
                 </p>
               </div>
             </div>
             <button
               onClick={onClose}
               className="p-2 hover:bg-white rounded-lg transition-colors"
-              aria-label="Close modal"
+              aria-label={t('closeModal')}
             >
               <X className="w-6 h-6 text-gray-600" />
             </button>
@@ -238,7 +240,7 @@ export default function AIColumnMapperModal({
                   ></path>
                 </svg>
                 <span className="text-sm font-medium text-blue-800">
-                  Analyzing CSV structure with AI...
+                  {t('analyzing')}
                 </span>
               </div>
             </div>
@@ -252,11 +254,10 @@ export default function AIColumnMapperModal({
                 <div className="flex items-center justify-between">
                   <div>
                     <h3 className="text-lg font-semibold text-gray-900">
-                      Detection Confidence
+                      {t('confidence.title')}
                     </h3>
                     <p className="text-sm text-gray-600 mt-1">
-                      AI analyzed {headers.length} columns and {sampleRows.length} sample
-                      rows
+                      {t('confidence.analyzed', { columnCount: headers.length, rowCount: sampleRows.length })}
                     </p>
                   </div>
                   <div
@@ -276,7 +277,7 @@ export default function AIColumnMapperModal({
                   {analysisResult.suggestions.map((suggestion, i) => (
                     <div
                       key={`suggestion-${i}`}
-                      className="bg-blue-50 border-l-4 border-blue-400 p-3 text-sm text-blue-800"
+                      className="bg-blue-50 border-s-4 border-blue-400 p-3 text-sm text-blue-800"
                     >
                       💡 {suggestion}
                     </div>
@@ -284,7 +285,7 @@ export default function AIColumnMapperModal({
                   {analysisResult.warnings.map((warning, i) => (
                     <div
                       key={`warning-${i}`}
-                      className="bg-yellow-50 border-l-4 border-yellow-400 p-3 text-sm text-yellow-800 flex items-start gap-2"
+                      className="bg-yellow-50 border-s-4 border-yellow-400 p-3 text-sm text-yellow-800 flex items-start gap-2"
                     >
                       <AlertCircle className="w-4 h-4 flex-shrink-0 mt-0.5" />
                       <span>{warning}</span>
@@ -296,7 +297,7 @@ export default function AIColumnMapperModal({
               {/* Column Mappings */}
               <div>
                 <h3 className="text-lg font-semibold text-gray-900 mb-4">
-                  Column Mappings
+                  {t('columnMappings')}
                 </h3>
                 <div className="space-y-2">
                   {headers.map((header) => {
@@ -322,7 +323,7 @@ export default function AIColumnMapperModal({
                           </div>
                           {/* Show sample values */}
                           <div className="text-xs text-gray-600 mt-1 truncate">
-                            Samples: {sampleRows
+                            {t('samples')} {sampleRows
                               .slice(0, 3)
                               .map((row) => `"${row[header] || ''}"`)
                               .join(', ')}
@@ -335,15 +336,15 @@ export default function AIColumnMapperModal({
                           onChange={(e) =>
                             handleColumnTypeChange(header, e.target.value as ColumnType)
                           }
-                          className="ml-4 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                          className="ms-4 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                         >
-                          <option value="ignore">Ignore</option>
-                          <option value="date">Date</option>
-                          <option value="description">Description</option>
-                          <option value="amount">Amount</option>
-                          <option value="debit">Debit/Withdrawal</option>
-                          <option value="credit">Credit/Deposit</option>
-                          <option value="balance">Balance</option>
+                          <option value="ignore">{t('columnTypes.ignore')}</option>
+                          <option value="date">{t('columnTypes.date')}</option>
+                          <option value="description">{t('columnTypes.description')}</option>
+                          <option value="amount">{t('columnTypes.amount')}</option>
+                          <option value="debit">{t('columnTypes.debit')}</option>
+                          <option value="credit">{t('columnTypes.credit')}</option>
+                          <option value="balance">{t('columnTypes.balance')}</option>
                         </select>
                       </div>
                     );
@@ -355,20 +356,20 @@ export default function AIColumnMapperModal({
               {analysisResult.samplePreview.length > 0 && (
                 <div>
                   <h3 className="text-lg font-semibold text-gray-900 mb-4">
-                    Transaction Preview
+                    {t('preview.title')}
                   </h3>
                   <div className="bg-white border border-gray-200 rounded-lg overflow-hidden">
                     <table className="w-full">
                       <thead className="bg-gray-100">
                         <tr>
                           <th className="px-4 py-2 text-left text-sm font-semibold text-gray-900">
-                            Date
+                            {t('preview.date')}
                           </th>
                           <th className="px-4 py-2 text-left text-sm font-semibold text-gray-900">
-                            Description
+                            {t('preview.description')}
                           </th>
                           <th className="px-4 py-2 text-right text-sm font-semibold text-gray-900">
-                            Amount
+                            {t('preview.amount')}
                           </th>
                         </tr>
                       </thead>
@@ -413,19 +414,19 @@ export default function AIColumnMapperModal({
                       className="flex items-center gap-2 text-sm font-medium text-gray-900 cursor-pointer"
                     >
                       <Save className="w-4 h-4 text-purple-600" />
-                      Save this bank configuration for future imports
+                      {t('saveConfig.label')}
                     </label>
                     {saveForFuture && (
                       <input
                         type="text"
                         value={customBankName}
                         onChange={(e) => setCustomBankName(e.target.value)}
-                        placeholder="Enter bank name (e.g., My Local Credit Union)"
+                        placeholder={t('saveConfig.placeholder')}
                         className="mt-2 w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                       />
                     )}
                     <p className="text-xs text-gray-600 mt-1">
-                      Next time you import from this bank, mappings will be automatic
+                      {t('saveConfig.hint')}
                     </p>
                   </div>
                 </div>
@@ -440,7 +441,7 @@ export default function AIColumnMapperModal({
             onClick={onClose}
             className="px-6 py-2 border-2 border-gray-300 text-gray-700 rounded-lg hover:bg-gray-100 transition-colors"
           >
-            Cancel
+            {t('buttons.cancel')}
           </button>
           <button
             onClick={handleApply}
@@ -448,7 +449,7 @@ export default function AIColumnMapperModal({
             className="px-6 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors flex items-center gap-2"
           >
             <Check className="w-5 h-5" />
-            Apply Mappings & Import
+            {t('buttons.apply')}
           </button>
         </div>
       </div>

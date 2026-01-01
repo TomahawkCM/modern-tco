@@ -154,7 +154,7 @@ export default function ValidationWarningsModal({
 
           {/* AI Analysis */}
           {aiAnalysis && (
-            <div className="bg-purple-50 border-l-4 border-purple-400 p-4 text-sm text-purple-800">
+            <div className="bg-purple-50 border-s-4 border-purple-400 p-4 text-sm text-purple-800">
               <strong>AI Analysis:</strong> {aiAnalysis}
             </div>
           )}
@@ -234,7 +234,7 @@ export default function ValidationWarningsModal({
                         {/* Remove Button */}
                         <button
                           onClick={() => toggleRemove(issue.transactionIndex)}
-                          className={`ml-4 px-3 py-2 rounded-lg transition-colors flex items-center gap-2 ${
+                          className={`ms-4 px-3 py-2 rounded-lg transition-colors flex items-center gap-2 ${
                             isMarkedForRemoval
                               ? 'bg-gray-200 text-gray-700 hover:bg-gray-300'
                               : 'bg-red-100 text-red-700 hover:bg-red-200'
@@ -262,7 +262,7 @@ export default function ValidationWarningsModal({
 
           {/* Removal Summary */}
           {transactionsToRemove.size > 0 && (
-            <div className="bg-orange-50 border-l-4 border-orange-400 p-4 text-sm text-orange-800">
+            <div className="bg-orange-50 border-s-4 border-orange-400 p-4 text-sm text-orange-800">
               <strong>Note:</strong> {transactionsToRemove.size}{' '}
               {transactionsToRemove.size === 1 ? 'transaction' : 'transactions'} will be removed
               from the import if you proceed.

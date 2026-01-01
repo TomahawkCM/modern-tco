@@ -1,433 +1,873 @@
 {
-  "nav": {
-    "dashboard": "Панель керування",
-    "transactions": "Транзакції",
-    "budgets": "Бюджети",
-    "reports": "Звіти",
-    "accounts": "Рахунки",
-    "categories": "Категорії",
-    "goals": "Цілі",
-    "import": "Імпорт",
-    "export": "Експорт",
-    "settings": "Налаштування",
-    "help": "Допомога",
-    "about": "Про програму"
+  "accessibilitySettings": {
+    "fontSize": {
+      "default": "Default",
+      "description": "Adjust the base text size for better readability",
+      "extraLarge": "Extra Large",
+      "large": "Large",
+      "title": "Font Size"
+    },
+    "infoBox": {
+      "savedAutomatically": "Settings are saved automatically and persist across sessions",
+      "seniorsOptimization": "Seniors Mode provides one-click accessibility optimization",
+      "storedLocally": "Your preferences are stored locally and never sent to servers",
+      "syncAcrossTabs": "Changes sync across all open tabs in real-time",
+      "title": "About Accessibility Settings"
+    },
+    "presets": {
+      "full": "Full",
+      "fullDesc": "Maximum accessibility",
+      "mild": "Mild",
+      "mildDesc": "Slightly enhanced",
+      "moderate": "Moderate",
+      "moderateDesc": "Recommended for most",
+      "off": "Off",
+      "offDesc": "Standard interface",
+      "title": "Quick Presets:"
+    },
+    "reducedMotion": {
+      "description": "Minimize animations and transitions for a calmer experience. Helpful for users with vestibular disorders or motion sensitivity.",
+      "title": "Reduced Motion",
+      "toggleLabel": "Toggle reduced motion mode"
+    },
+    "seniorsMode": {
+      "description": "One-click accessibility enhancement with larger text, bigger touch targets, and simplified interface",
+      "title": "Seniors Mode"
+    },
+    "themeMode": {
+      "auto": "Auto",
+      "autoDesc": "Match system",
+      "dark": "Dark",
+      "darkDesc": "Easy on eyes",
+      "description": "Choose your preferred color scheme for the budget app",
+      "highContrast": "High Contrast",
+      "highContrastDesc": "Maximum visibility",
+      "light": "Light",
+      "lightDesc": "Bright and clear",
+      "title": "Theme Mode"
+    }
+  },
+  "accessibleChart": {
+    "buttons": {
+      "chart": "Chart",
+      "showChart": "Show chart view",
+      "showTable": "Show data table view",
+      "table": "Table"
+    },
+    "chartDescription": "{description}. {dataPoints} data points shown. {dataList}. Press the Table button to view data in a table format with keyboard navigation support.",
+    "chartTypeDescription": "This is a {chartType} chart with {dataPoints} data points.",
+    "footer": {
+      "average": "Average:",
+      "total": "Total:"
+    },
+    "keyboardNav": {
+      "srOnly": "Use arrow keys to navigate between rows. Press Tab to navigate to the next element.",
+      "visual": "Use ← → or ↑ ↓ keys to navigate • Home/End to jump to start/end"
+    },
+    "summary": {
+      "average": "Average: {value}.",
+      "highest": "Highest value: {label} at {value}.",
+      "lowest": "Lowest value: {label} at {value}.",
+      "total": "Total: {value}."
+    },
+    "switchedToChart": "Switched to chart view",
+    "switchedToTable": "Switched to table view",
+    "tableHeaders": {
+      "additionalInfo": "Additional Info",
+      "category": "Category",
+      "period": "Period",
+      "value": "Value"
+    }
   },
   "actions": {
     "addTransaction": "Додати транзакцію",
-    "importData": "Імпортувати дані",
-    "import": "Імпорт",
     "editDashboard": "Редагувати панель",
-    "saveChanges": "Зберегти зміни",
-    "resetDefaults": "Скинути до стандартних"
+    "import": "Імпорт",
+    "importData": "Імпортувати дані",
+    "resetDefaults": "Скинути до стандартних",
+    "saveChanges": "Зберегти зміни"
   },
-  "welcome": {
-    "title": "Ласкаво просимо до Budget App",
-    "subtitle": "Почніть з додавання першої транзакції або імпорту даних з вашого банку"
+  "aiColumnMapper": {
+    "analyzing": "Analyzing CSV structure with AI...",
+    "buttons": {
+      "apply": "Apply Mappings & Import",
+      "cancel": "Cancel"
+    },
+    "closeModal": "Close modal",
+    "columnMappings": "Column Mappings",
+    "columnTypes": {
+      "amount": "Amount",
+      "balance": "Balance",
+      "credit": "Credit",
+      "date": "Date",
+      "debit": "Debit",
+      "description": "Description",
+      "ignore": "Ignore"
+    },
+    "confidence": {
+      "analyzed": "AI analyzed {columnCount} columns and {rowCount} sample rows",
+      "title": "Detection Confidence"
+    },
+    "preview": {
+      "amount": "Amount",
+      "date": "Date",
+      "description": "Description",
+      "title": "Transaction Preview"
+    },
+    "samples": "Samples:",
+    "saveConfig": {
+      "hint": "Next time you import from this bank, mappings will be automatic",
+      "label": "Save this bank configuration for future imports",
+      "placeholder": "Enter bank name (e.g., My Local Credit Union)"
+    },
+    "subtitle": "Review AI-detected columns and adjust if needed",
+    "title": "AI Column Mapping Wizard"
+  },
+  "bulkActions": {
+    "applyTo": "Apply to {count}",
+    "categorize": "Categorize",
+    "clearSelection": "Clear selection",
+    "confirmDelete": "Delete {count, plural, =1 {1 transaction} other {# transactions}}?",
+    "delete": "Delete",
+    "deleteWarning": "This action cannot be undone.",
+    "export": "Export",
+    "noSubcategory": "No subcategory",
+    "selectAll": "Select all",
+    "selectCategory": "Select category...",
+    "selected": "{count} selected"
+  },
+  "chatbot": {
+    "buttons": {
+      "clearHistory": "Clear chat history",
+      "exportConversation": "Export conversation",
+      "send": "Send"
+    },
+    "disabled": {
+      "description": "Enable the chatbot in Settings → Privacy → Budget Chatbot to get started.",
+      "enableButton": "Enable Chatbot",
+      "title": "Chatbot Disabled"
+    },
+    "emptyState": {
+      "description": "Ask me anything about your finances. Here are some examples:",
+      "examples": {
+        "balance": "What's my total account balance?",
+        "budget": "Am I over budget in any categories?",
+        "groceries": "Show me my recent grocery purchases",
+        "spending": "How much did I spend this month?"
+      },
+      "title": "Start a Conversation"
+    },
+    "header": {
+      "subtitle": "Ask me about your finances",
+      "title": "Budget Assistant"
+    },
+    "input": {
+      "disclaimer": "Powered by OpenAI GPT-4. Your data is processed securely and not used for training.",
+      "placeholder": "Ask about your finances..."
+    },
+    "messages": {
+      "dataAccessed": "Data accessed:",
+      "error": "Error",
+      "thinking": "Thinking..."
+    }
+  },
+  "chatbotHelp": {
+    "tabs": {
+      "actions": "Actions",
+      "budget": "Budget",
+      "income": "Income",
+      "spending": "Spending",
+      "trends": "Trends"
+    }
+  },
+  "chatbotOptIn": {
+    "buttons": {
+      "decline": "No Thanks",
+      "enable": "Enable Chatbot"
+    },
+    "capabilities": {
+      "actions": "Optionally perform actions like adding transactions or creating budgets",
+      "answer": "Answer questions about your transactions, budgets, and spending patterns",
+      "insights": "Provide insights and recommendations based on your data",
+      "search": "Search your financial data using natural language",
+      "title": "What the Chatbot Can Do"
+    },
+    "closeDialog": "Close chatbot opt-in dialog",
+    "controls": {
+      "dataAccess": {
+        "fullAccess": {
+          "description": "Chatbot can perform actions like adding transactions, creating budgets, and making changes to your data",
+          "title": "Full Access"
+        },
+        "label": "What can the chatbot do with your data?",
+        "readOnly": {
+          "description": "Chatbot can view your data and answer questions, but cannot add, edit, or delete transactions/budgets",
+          "title": "Read-Only (Recommended)"
+        }
+      },
+      "retention": {
+        "days30": "30 days",
+        "days7": "7 days (Recommended)",
+        "forever": "Keep forever",
+        "label": "How long should we keep your conversations?",
+        "note": "Conversations are stored locally in your browser. You can delete them anytime in Settings → Privacy."
+      },
+      "title": "Privacy Controls"
+    },
+    "gdpr": {
+      "notice": "<strong>Your Rights:</strong> By enabling the chatbot, you consent to processing your financial data via OpenAI's API. You can withdraw consent anytime by disabling the chatbot in Settings → Privacy. Your data is processed in accordance with our Privacy Policy and GDPR requirements. You have the right to access, delete, and export your conversation history at any time."
+    },
+    "privacy": {
+      "dataSent": "Financial data is sent to the API to answer your questions",
+      "disable": "You can disable the chatbot anytime in Settings → Privacy",
+      "noTraining": "OpenAI does not use API data to train models (as of their policy)",
+      "processedBy": "Your conversations are processed by OpenAI's GPT-4 API",
+      "title": "Privacy & Data Usage"
+    },
+    "subtitle": "AI-powered financial assistant",
+    "title": "Enable Budget Chatbot?"
+  },
+  "combobox": {
+    "noResults": "No results found.",
+    "search": "Search...",
+    "select": "Select..."
+  },
+  "commandPalette": {
+    "commands": {
+      "addTransaction": "Add Transaction",
+      "budgets": "Budgets",
+      "categories": "Categories",
+      "darkTheme": "Dark Theme",
+      "dashboard": "Dashboard",
+      "exportData": "Export Data",
+      "futurePlans": "Future Plans",
+      "highContrastTheme": "High-Contrast Theme",
+      "importCsv": "Import CSV",
+      "investments": "Investments",
+      "lightTheme": "Light Theme",
+      "loans": "Loans",
+      "newBudget": "New Budget",
+      "reports": "Reports",
+      "retirement": "Retirement",
+      "scanReceipt": "Scan Receipt",
+      "settings": "Settings",
+      "transactions": "Transactions"
+    },
+    "groups": {
+      "appearance": "Appearance",
+      "quickActions": "Quick Actions",
+      "tools": "Tools & Settings",
+      "tracking": "Tracking & Analysis",
+      "wealth": "Wealth & Planning"
+    },
+    "noResults": "No results found.",
+    "placeholder": "Type a command or search..."
   },
   "common": {
-    "save": "Зберегти",
     "cancel": "Скасувати",
     "delete": "Видалити",
     "edit": "Редагувати",
-    "loading": "Завантаження..."
+    "loading": "Завантаження...",
+    "save": "Зберегти"
   },
-  "widget": {
-    "spendingByCategory": {
-      "title": "Витрати за категоріями",
-      "description": "Дивіться, куди йдуть ваші гроші, з візуальними розбивками"
-    },
-    "recentTransactions": {
-      "title": "Останні транзакції",
-      "description": "Швидкий перегляд вашої останньої фінансової активності"
-    },
-    "budgetProgress": {
-      "title": "Прогрес бюджету",
-      "description": "Слідкуйте за тим, як ви справляєтеся з бюджетними цілями"
-    },
-    "accountBalances": {
-      "title": "Баланс рахунків",
-      "description": "Поточні залишки на всіх ваших рахунках"
-    },
-    "incomeVsExpenses": {
-      "title": "Доходи та витрати",
-      "description": "Порівняйте ваші доходи та витрати з часом"
-    },
-    "monthlyTrends": {
-      "title": "Місячні тренди",
-      "description": "Візуалізуйте ваші фінансові патерни місяць за місяцем"
-    },
-    "upcomingBills": {
-      "title": "Найближчі рахунки",
-      "description": "Ніколи не пропустіть платіж з нагадуваннями про рахунки"
-    }
+  "dashboardCustomizer": {
+    "alwaysVisible": "Always visible",
+    "ariaLabel": "Customize dashboard layout",
+    "button": "Customize",
+    "description": "Show or hide dashboard widgets. Drag widgets on the dashboard to reorder them.",
+    "reorderDescription": "To change widget order, drag and drop widgets directly on your dashboard. Use your mouse or touch to grab the drag handle (⋮⋮) on each widget card.",
+    "reorderTitle": "Reorder Widgets",
+    "resetButton": "Reset to Defaults",
+    "title": "Customize Dashboard",
+    "toggleVisibility": "Toggle {name} visibility",
+    "widgetVisibility": "Widget Visibility",
+    "widgetsVisible": "{visible} of {total} widgets visible"
   },
-  "tooltip": {
-    "ariaLabel": "Більше інформації",
-    "learnMore": "Дізнатися більше →"
-  },
-  "footer": {
-    "tagline": "Преміум бюджетування з одноразовим оновленням.",
-    "links": {
-      "login": "Увійти",
-      "signup": "Почати пробний період",
-      "upgrade": "Оновити",
-      "settings": "Налаштування"
-    },
-    "copyright": "© {year} {brandName}"
-  },
-  "dialog": {
-    "confirm": "Підтвердити",
-    "cancel": "Скасувати",
-    "processing": "Обробка...",
-    "finalConfirmation": "Остаточне підтвердження:",
-    "typeToConfirm": "Введіть {text}, щоб підтвердити цю дію."
-  },
-  "sidebar": {
-    "appTitle": "Budget App",
-    "appSubtitle": "Преміум Фінанси",
-    "search": "Пошук...",
-    "shortcuts": "Швидкі клавіші",
-    "navigation": {
-      "dashboard": "Панель керування",
-      "transactions": "Транзакції",
-      "scanReceipt": "Сканувати чек",
-      "categories": "Категорії",
-      "budgets": "Бюджети",
-      "subscriptions": "Підписки",
-      "loans": "Позики",
-      "investments": "Інвестиції",
-      "futurePlans": "Майбутні плани",
-      "retirement": "Відставка",
-      "reports": "Звіти"
-    },
-    "actions": {
-      "importCsv": "Імпорт CSV",
-      "settings": "Налаштування",
-      "showLess": "Показати менше",
-      "showAllItems": "Показати всі елементи"
-    }
-  },
-  "onboarding": {
-    "skipTour": "Пропустити тур",
-    "stepCounter": "Крок {current} з {total}",
-    "dontShowAgain": "Не показувати цей тур знову",
-    "quickTip": "💡 Швидка порада",
-    "navigation": {
-      "previous": "Попередній",
-      "next": "Далі",
-      "getStarted": "Розпочати",
-      "startTour": "Почати тур"
-    },
-    "steps": {
-      "welcome": {
-        "title": "👋 Ласкаво просимо до Budget App!",
-        "description": "Давайте швидко пройдемо тур, щоб допомогти вам почати управляти вашими домашніми фінансами. Це не займе багато часу!"
+  "debtAnalysis": {
+    "cards": {
+      "avgRate": {
+        "subtitle": "Weighted average",
+        "title": "Avg Interest Rate"
       },
-      "import": {
-        "title": "📥 Імпортуйте свої транзакції",
-        "description": "Почніть з імпорту ваших банківських транзакцій з файлу CSV. Ми підтримуємо BMO, Home Trust та багато інших банків. Додаток автоматично категоризує ваші транзакції!"
+      "debtFreeDate": {
+        "subtitle": "Estimated payoff",
+        "title": "Debt-Free Date"
       },
-      "categorize": {
-        "title": "🏷️ Категоризуйте та організуйте",
-        "description": "Перегляньте та відкоригуйте категорії транзакцій. Наша розумна категоризація вчиться на ваших виправленнях, щоб покращуватися з часом. Використовуйте масові дії для категоризації кількох транзакцій одночасно!"
+      "monthlyPayment": {
+        "subtitle": "Total monthly obligations",
+        "title": "Monthly Payment"
       },
-      "budgets": {
-        "title": "🎯 Встановіть свої бюджети",
-        "description": "Створіть бюджети для різних категорій витрат. Слідкуйте за своїм прогресом протягом місяця та отримуйте сповіщення, коли наближаєтеся до своїх меж."
-      },
-      "reports": {
-        "title": "📊 Перегляньте звіти та аналітику",
-        "description": "Візуалізуйте свої витратні патерни, слідкуйте за своїм чистим капіталом і приймайте обґрунтовані фінансові рішення. Ваша панель оновлюється автоматично з кожною транзакцією!"
+      "totalDebt": {
+        "subtitle": "Across {count} active loans",
+        "title": "Total Debt"
       }
     },
-    "tips": {
-      "import": "Перетягніть і скиньте свій файл CSV або натисніть, щоб переглянути. Ми автоматично визначаємо формати BMO та Home Trust!",
-      "categorize": "Використовуйте кнопку швидкої категоризації або виберіть кілька транзакцій для масової категоризації.",
-      "budgets": "Встановіть реалістичні бюджети, і ми сповістимо вас, якщо ви на шляху до перевитрат."
+    "charts": {
+      "byType": {
+        "description": "Distribution of debt across loan types",
+        "title": "Debt by Type"
+      },
+      "projection": {
+        "description": "Expected debt reduction over the next year",
+        "expectedReduction": "Expected reduction: {amount} over 12 months",
+        "title": "12-Month Payoff Projection"
+      }
+    },
+    "comparison": {
+      "description": "Side-by-side comparison of your active loans",
+      "headers": {
+        "balance": "Balance",
+        "interestRate": "Interest Rate",
+        "loan": "Loan",
+        "monthlyPayment": "Monthly Payment",
+        "percentOfTotal": "% of Total Debt"
+      },
+      "title": "Loan Comparison",
+      "total": "Total"
+    },
+    "empty": {
+      "addFirstLoan": "Add Your First Loan",
+      "description": "You don't have any active loans. Add a loan to see debt analytics.",
+      "title": "No Debt to Analyze"
+    },
+    "subtitle": "Comprehensive view of your loans and obligations",
+    "title": "Debt Analysis",
+    "viewAllLoans": "View All Loans"
+  },
+  "dialog": {
+    "cancel": "Скасувати",
+    "confirm": "Підтвердити",
+    "finalConfirmation": "Остаточне підтвердження:",
+    "processing": "Обробка...",
+    "typeToConfirm": "Введіть {text}, щоб підтвердити цю дію."
+  },
+  "draggableWidget": {
+    "dragToReorder": "Drag to reorder widget"
+  },
+  "emptyStates": {
+    "budgets": {
+      "description": "Create budgets to track spending in different categories and achieve your financial goals.",
+      "heading": "No Budgets Created",
+      "primaryCta": "Create Your First Budget"
+    },
+    "categories": {
+      "description": "Create custom categories to organize your transactions beyond the default ones.",
+      "heading": "No Custom Categories",
+      "primaryCta": "Add Category"
+    },
+    "dashboard": {
+      "description": "Get started by importing your bank transactions or adding accounts manually to see your financial overview.",
+      "heading": "Welcome to Your Budget App!",
+      "primaryCta": "Import CSV",
+      "secondaryCta": "Add Transaction"
+    },
+    "futurePlans": {
+      "description": "Set financial goals like buying a house, saving for education, or planning a vacation.",
+      "heading": "No Future Plans",
+      "primaryCta": "Create a Goal"
+    },
+    "investments": {
+      "description": "Track your investment accounts and holdings to monitor portfolio performance and net worth.",
+      "heading": "No Investments Tracked",
+      "primaryCta": "Add Investment Account"
+    },
+    "loans": {
+      "description": "Track your loans, mortgages, and debts to visualize payoff progress and plan payments.",
+      "heading": "No Loans Tracked",
+      "primaryCta": "Add Your First Loan"
+    },
+    "reports": {
+      "description": "Add transactions and budgets to generate insightful reports about your spending patterns and trends.",
+      "heading": "No Data to Report",
+      "primaryCta": "Add Transactions",
+      "secondaryCta": "Import CSV"
+    },
+    "retirement": {
+      "description": "Plan for retirement by tracking accounts, estimating needs, and visualizing your retirement timeline.",
+      "heading": "No Retirement Plans",
+      "primaryCta": "Start Planning"
+    },
+    "transactions": {
+      "description": "Start tracking your spending by adding your first transaction. You can add manually or import from a CSV file.",
+      "heading": "No Transactions Yet",
+      "primaryCta": "Add Transaction",
+      "secondaryCta": "Import CSV"
     }
   },
+  "errorRecovery": {
+    "aiAnalysis": "AI Analysis:",
+    "closeModal": "Close modal",
+    "footer": {
+      "close": "Close",
+      "needHelp": "Need more help?",
+      "viewGuide": "View troubleshooting guide"
+    },
+    "recovery": {
+      "canRecover": "Good news! We found {count} {count, plural, =1 {way} other {ways}} to recover from this error.",
+      "cannotRecover": "Recovery not possible. You'll need to re-export the file from your bank or try a different format.",
+      "optionsTitle": "Recovery Options"
+    },
+    "subtitle": "Don't worry! We can help you fix this.",
+    "suggestions": {
+      "autoFix": "AUTO-FIX",
+      "autoFixButton": "Auto-Fix",
+      "confidence": "{percent}% confidence",
+      "fixing": "Fixing...",
+      "learnMore": "Learn More",
+      "technicalDetails": "Technical Details"
+    },
+    "summary": {
+      "category": "Category: {category}",
+      "title": "Error Summary"
+    },
+    "technical": {
+      "canRecover": "Can Recover:",
+      "errorCategory": "Error Category:",
+      "no": "No",
+      "severity": "Severity:",
+      "suggestions": "Suggestions:",
+      "title": "Advanced Technical Details",
+      "yes": "Yes"
+    },
+    "title": "Import Failed"
+  },
+  "exportDialog": {
+    "buttons": {
+      "cancel": "Cancel",
+      "done": "Done!",
+      "download": "Download",
+      "export": "Export Data"
+    },
+    "complete": {
+      "download": "Your file is ready to download",
+      "success": "Export complete! Check your downloads folder."
+    },
+    "dataSummary": {
+      "accounts": "Accounts",
+      "estimatedSize": "Est. Size",
+      "title": "Data Summary",
+      "transactions": "Transactions"
+    },
+    "exporting": {
+      "pleaseWait": "Please wait, this may take a moment",
+      "title": "Exporting..."
+    },
+    "format": {
+      "budget": {
+        "description": "Complete backup including all data",
+        "label": ".budget file"
+      },
+      "csv": {
+        "description": "Spreadsheet-compatible format",
+        "label": "CSV file"
+      },
+      "json": {
+        "description": "Developer-friendly format",
+        "label": "JSON file"
+      },
+      "label": "Export Format"
+    },
+    "options": {
+      "encrypt": {
+        "description": "Protect your data with AES-256 encryption",
+        "label": "Encrypt with Password"
+      },
+      "includeReceipts": {
+        "description": "Attach receipt images (increases file size)",
+        "label": "Include Receipts"
+      }
+    },
+    "password": {
+      "confirm": "Confirm Password",
+      "confirmPlaceholder": "Confirm password",
+      "hint": "Password Hint (Optional)",
+      "hintNote": "This hint will be stored unencrypted in the file",
+      "hintPlaceholder": "A hint to help you remember",
+      "label": "Password",
+      "minLength": "Password must be at least 8 characters",
+      "mismatch": "Passwords do not match",
+      "placeholder": "Enter password (min 8 characters)",
+      "required": "Password is required for encryption"
+    },
+    "subtitle": "Download your budget data",
+    "title": "Export Data"
+  },
+  "filters": {
+    "account": "Account",
+    "allAccounts": "All accounts",
+    "allCategories": "All categories",
+    "allTypes": "All types",
+    "apply": "Apply filters",
+    "category": "Category",
+    "clearFilters": "Clear filters",
+    "dateRange": "Date range",
+    "expense": "Expense",
+    "income": "Income",
+    "search": "Search transactions...",
+    "type": "Type"
+  },
+  "footer": {
+    "copyright": "© {year} {brandName}",
+    "links": {
+      "login": "Увійти",
+      "settings": "Налаштування",
+      "signup": "Почати пробний період",
+      "upgrade": "Оновити"
+    },
+    "tagline": "Преміум бюджетування з одноразовим оновленням."
+  },
+  "healthScore": {
+    "ariaLabel": "Financial Health Score: {score} out of 100. {interpretation}",
+    "emptyState": {
+      "line1": "Add transactions to see your",
+      "line2": "Financial Health Score"
+    },
+    "grade": "Grade: {grade}",
+    "missingFactors": "{count, plural, =1 {1 factor missing} other {# factors missing}}",
+    "title": "Financial Health"
+  },
+  "importDialog": {
+    "buttons": {
+      "back": "Back",
+      "cancel": "Cancel",
+      "done": "Done",
+      "import": "Import Data"
+    },
+    "complete": {
+      "itemsImported": "{count} items imported successfully",
+      "success": "Import Complete!",
+      "withIssues": "Import Completed with Issues"
+    },
+    "conflicts": {
+      "existing": "{count} existing",
+      "handleLabel": "Handle Conflicts",
+      "overwrite": {
+        "description": "Replace with imported",
+        "label": "Overwrite"
+      },
+      "rename": {
+        "description": "Import as new entries",
+        "label": "Create new"
+      },
+      "skip": {
+        "description": "Keep current data",
+        "label": "Skip existing"
+      },
+      "title": "Conflicts Found"
+    },
+    "encryption": {
+      "decrypt": "Decrypt & Continue",
+      "encrypted": "This file is encrypted",
+      "enterPassword": "Enter password",
+      "hint": "Hint: {hint}",
+      "password": "Password"
+    },
+    "importing": {
+      "pleaseWait": "Please wait, this may take a moment",
+      "title": "Importing your data..."
+    },
+    "preview": {
+      "dataToImport": "Data to Import",
+      "exported": "Exported",
+      "fileInfo": "File Information",
+      "version": "Version"
+    },
+    "selectFile": {
+      "dragDrop": "or drag and drop here",
+      "label": "Click to select a .budget file"
+    },
+    "subtitle": "Restore from .budget file",
+    "title": "Import Data"
+  },
+  "investmentAccountModal": {
+    "buttons": {
+      "cancel": "Cancel",
+      "create": "Create Account",
+      "saving": "Saving...",
+      "update": "Update Account"
+    },
+    "closeModal": "Close modal",
+    "errors": {
+      "saveFailed": "Failed to save account"
+    },
+    "fields": {
+      "accountNumber": {
+        "label": "Account Number (Optional)",
+        "placeholder": "e.g., Last 4 digits: 1234"
+      },
+      "institution": {
+        "label": "Financial Institution (Optional)",
+        "placeholder": "e.g., Questrade, Wealthsimple, TD Direct"
+      },
+      "name": {
+        "label": "Account Name",
+        "placeholder": "e.g., My RRSP, TFSA Savings, Company Stock"
+      },
+      "type": {
+        "descriptions": {
+          "Company shares": "Employee stock purchase or stock options",
+          "Non-registered": "Taxable investment account",
+          "RRSP": "Registered Retirement Savings Plan - Tax-deferred growth",
+          "TFSA": "Tax-Free Savings Account - Tax-free growth and withdrawals"
+        },
+        "label": "Account Type"
+      }
+    },
+    "title": {
+      "add": "Add Investment Account",
+      "edit": "Edit Investment Account"
+    },
+    "validation": {
+      "nameRequired": "Please enter an account name"
+    }
+  },
+  "investmentCharts": {
+    "emptyState": "No holdings to visualize. Add holdings to see charts.",
+    "legend": {
+      "gain": "Gain",
+      "loss": "Loss"
+    },
+    "tableHeaders": {
+      "allocation": "Allocation",
+      "costBasis": "Cost Basis",
+      "currentValue": "Current Value",
+      "gainLoss": "Gain/Loss",
+      "percentReturn": "% Return",
+      "symbol": "Symbol",
+      "total": "Total"
+    },
+    "titles": {
+      "accountTypeAllocation": "Allocation by Account Type",
+      "gainLoss": "Gain/Loss by Holding",
+      "performanceSummary": "Performance Summary",
+      "portfolioAllocation": "Portfolio Allocation by Holding"
+    },
+    "tooltip": {
+      "costBasis": "Cost Basis",
+      "currentValue": "Current Value",
+      "percentOfPortfolio": "{percent}% of portfolio"
+    }
+  },
+  "lanSync": {
+    "description": "Sync your budget data across devices on your local network",
+    "device": {
+      "connect": "Connect",
+      "connected": "Connected",
+      "disconnect": "Disconnect",
+      "removeDevice": "Remove Device",
+      "sync": "Sync",
+      "syncing": "Syncing..."
+    },
+    "disabled": "Disabled",
+    "enabled": "Enabled",
+    "howItWorks": {
+      "step1": {
+        "description": "Scan a QR code or enter connection details to pair devices on the same network",
+        "title": "Pair Devices"
+      },
+      "step2": {
+        "description": "Data is encrypted end-to-end and syncs directly between devices - no cloud required",
+        "title": "Sync Securely"
+      },
+      "step3": {
+        "description": "Changes sync automatically when devices are connected on the same network",
+        "title": "Automatic Updates"
+      },
+      "title": "How LAN Sync Works"
+    },
+    "pairedDevices": {
+      "addDevice": "Add Device",
+      "addFirstDevice": "Add Your First Device",
+      "deviceCount": "{count, plural, =1 {1 device paired} other {# devices paired}}",
+      "emptyDescription": "Pair a device to start syncing your budget data",
+      "emptyTitle": "No devices paired",
+      "noDevices": "No devices paired yet",
+      "title": "Paired Devices"
+    },
+    "removeDialog": {
+      "cancel": "Cancel",
+      "description": "Are you sure you want to remove \"{deviceName}\"? This will unpair the device and you'll need to pair again to sync data.",
+      "remove": "Remove",
+      "title": "Remove Device"
+    },
+    "syncAll": "Sync All",
+    "time": {
+      "daysAgo": "{count, plural, =1 {1 day ago} other {# days ago}}",
+      "hoursAgo": "{count, plural, =1 {1 hour ago} other {# hours ago}}",
+      "justNow": "Just now",
+      "lastSync": "Last sync: {time}",
+      "minutesAgo": "{count, plural, =1 {1 minute ago} other {# minutes ago}}",
+      "neverSynced": "Never synced"
+    },
+    "title": "LAN Sync"
+  },
   "landing": {
+    "accessibility": {
+      "badges": {
+        "keyboardFirst": "Спочатку клавіатура",
+        "largeTouchTargets": "Великі цілі для натискання",
+        "seniorsMode": "Режим для літніх"
+      },
+      "buttons": {
+        "openApp": "Відкрити додаток",
+        "settings": "Налаштування доступності"
+      },
+      "description": "Режим для літніх забезпечує спрощену навігацію та більші цілі для натискання. Швидкі клавіші, стани фокусу та чіткий контраст допомагають усім рухатися швидше.",
+      "title": "Доступність за замовчуванням"
+    },
     "brand": {
       "name": "BudgetPro",
       "product": "Budget App"
     },
-    "hero": {
-      "badge": "Приватність на першому місці • Локально • Нульове відстеження",
-      "headline": "Керуйте своїми фінансами без продажу своїх даних.",
-      "subhead": "Сила електронної таблиці. Простота додатка. Відчуйте фінансову ясність з єдиним бюджетним додатком, який гарантує, що ваші дані ніколи не покинуть ваш пристрій.",
-      "primaryCta": {
-        "label": "Розпочати локальний протокол (безкоштовно)",
-        "href": "/budget-app/auth/signup"
-      },
-      "secondaryCta": {
-        "label": "Увійти",
-        "href": "/budget-app/auth/login"
-      },
-      "finePrint": "Не потрібні банківські реквізити. Обліковий запис не потрібен для локального режиму."
-    },
-    "trust": {
-      "0": {
-        "title": "Ваш пристрій, ваші дані",
-        "description": "Дані залишаються у IndexedDB вашого браузера. Ми буквально не можемо їх бачити."
-      },
-      "1": {
-        "title": "Сила електронної таблиці",
-        "description": "Масове редагування, зведення та аналіз як професіонал без головного болю з формулами."
-      },
-      "2": {
-        "title": "Офлайн швидкість",
-        "description": "Нульова затримка. Працює на вершині гори або в тунелі метро."
-      },
-      "3": {
-        "title": "Ручні ритуали",
-        "description": "Майстер імпорту робить щотижневий огляд фінансів задовільною звичкою."
-      }
-    },
-    "outcomes": {
-      "0": {
-        "title": "Припиніть боротися з агрегаторами",
-        "description": "Більше ніяких зламаних з'єднань або циклів повторної авторизації. Ви контролюєте введення даних."
-      },
-      "1": {
-        "title": "Приватність за замовчуванням",
-        "description": "Ми не продаємо ваші дані, тому що не маємо їх. Крапка."
-      },
-      "2": {
-        "title": "Планування на майбутнє",
-        "description": "Моделюйте вихід на пенсію, погашення позик і цілі заощаджень в одному інтегрованому вигляді."
-      },
-      "3": {
-        "title": "Вбивця підписок",
-        "description": "Виявляйте повторювані витрати, які інші додатки пропускають."
-      }
-    },
-    "features": {
-      "0": {
-        "title": "Локальна панель",
-        "description": "Чистий капітал, грошовий потік та розподіл за категоріями. Миттєві часи завантаження.",
-        "href": "/budget-app"
-      },
-      "1": {
-        "title": "Майстер імпорту",
-        "description": "Розумний мапер CSV для BMO, Home Trust та налаштовуваних форматів.",
-        "href": "/budget-app/import"
-      },
-      "2": {
-        "title": "OCR чеків",
-        "description": "Скануйте чеки локально з Tesseract.js. Без обробки в хмарі.",
-        "href": "/budget-app/ocr"
-      },
-      "3": {
-        "title": "Бюджети за категоріями",
-        "description": "Бюджетування на основі нуля або з перенесенням з детальним контролем категорій.",
-        "href": "/budget-app/budgets"
-      },
-      "4": {
-        "title": "Калькулятор виходу на пенсію",
-        "description": "Проектуйте дату вашої свободи з візуалізаціями складних відсотків.",
-        "href": "/budget-app/planning/retirement"
-      },
-      "5": {
-        "title": "Щит приватності",
-        "description": "Додатковий рівень безпеки з опціональним шифруванням на стороні клієнта.",
-        "href": "/budget-app/settings"
-      }
-    },
-    "howItWorks": {
-      "0": {
-        "title": "Імпорт",
-        "description": "Перетягніть і скиньте CSV або скануйте чеки. ШІ локально мапує стовпці."
-      },
-      "1": {
-        "title": "Перегляд",
-        "description": "Швидка категоризація з розумними правилами та масовими діями."
-      },
-      "2": {
-        "title": "План",
-        "description": "Призначте кожному долару роботу та прогнозуйте свій майбутній чистий капітал."
-      }
-    },
-    "pricing": {
-      "eyebrow": "Справедлива ціна",
-      "title": "Локальний безкоштовно. Синхронізація - Профі.",
-      "description": "Почніть з потужного локального протоколу. Оновіть пізніше, якщо вам потрібна синхронізація на кількох пристроях.",
-      "priceLabel": "Безкоштовно назавжди",
-      "cta": {
-        "label": "Розпочати локальний протокол",
-        "href": "/budget-app/auth/signup"
-      },
-      "secondary": {
-        "label": "Переглянути професійні функції",
-        "href": "#pricing"
-      },
-      "guarantee": "Не потрібна кредитна картка для локального протоколу."
-    },
-    "faq": {
-      "0": {
-        "q": "Чи дійсно мої дані приватні?",
-        "a": "Так. У локальному протоколі дані ніколи не покидають ваш пристрій. Вони живуть у IndexedDB у вашому браузері."
-      },
-      "1": {
-        "q": "Як я можу створити резервну копію своїх даних?",
-        "a": "Ви можете експортувати повну резервну копію JSON у будь-який час. Ми також рекомендуємо регулярні експорти CSV."
-      },
-      "2": {
-        "q": "Що таке 'Синхронізація' Pro?",
-        "a": "Скоро: опціональна підписка для синхронізації зашифрованих даних між пристроями через Supabase."
-      },
-      "3": {
-        "q": "Чи підключаєтеся ви до банків?",
-        "a": "Ні. Ми вважаємо, що ручний імпорт є безпечнішим, надійнішим і сприяє кращій фінансовій обізнаності."
-      }
-    },
-    "security": {
-      "title": "Приватність на першому місці за дизайном",
-      "description": "Budget App зберігає ваші дані локально (готовий до офлайну) і надає вам контролі для функцій ШІ, експорту та видалення.",
-      "buttons": {
-        "privacy": "Приватність та налаштування",
-        "offline": "Підтримка офлайн"
-      },
-      "cards": {
-        "localStorage": {
-          "title": "Локальне зберігання",
-          "description": "Ваші бюджетні дані зберігаються у вашому браузері (IndexedDB), тому додаток залишається швидким і зручним для офлайну."
-        },
-        "encryption": {
-          "title": "Підтримка шифрування",
-          "description": "Додаток включає шар шифрування для захисту чутливих бюджетних записів, коли це увімкнено."
-        },
-        "aiControls": {
-          "title": "Контролі функцій ШІ",
-          "description": "Увімкніть функції на основі ШІ (такі як виявлення аномалій) та керуйте доступом до чат-бота з налаштувань."
-        },
-        "exportDelete": {
-          "title": "Експорт та видалення",
-          "description": "Експортуйте свої дані та налаштування конфіденційності або видаліть локальні дані безпосередньо з додатка."
-        }
-      }
-    },
     "comparison": {
-      "headers": {
-        "feature": "Функція",
-        "local": "BudgetPro Local",
-        "sync": "BudgetPro Sync (Pro)",
-        "cloud": "Типовий хмарний додаток"
-      },
-      "dataPrivacy": {
-        "feature": "Конфіденційність даних",
-        "local": "100% Приватно (Локально)",
-        "sync": "Зашифровано від кінця до кінця",
-        "cloud": "Доступно співробітникам"
+      "bankConnections": {
+        "cloud": "Обов'язкова агрегація",
+        "feature": "Банківські з'єднання",
+        "local": "Тільки CSV / вручну",
+        "sync": "Опціонально (зашифровано)"
       },
       "cost": {
+        "cloud": "$100+/рік підписка",
         "feature": "Вартість",
         "local": "Безкоштовно назавжди",
-        "sync": "Одноразове оновлення",
-        "cloud": "$100+/рік підписка"
+        "sync": "Одноразове оновлення"
+      },
+      "dataPrivacy": {
+        "cloud": "Доступно співробітникам",
+        "feature": "Конфіденційність даних",
+        "local": "100% Приватно (Локально)",
+        "sync": "Зашифровано від кінця до кінця"
+      },
+      "headers": {
+        "cloud": "Типовий хмарний додаток",
+        "feature": "Функція",
+        "local": "BudgetPro Local",
+        "sync": "BudgetPro Sync (Pro)"
       },
       "offlineMode": {
         "feature": "Офлайн режим"
       },
-      "bankConnections": {
-        "feature": "Банківські з'єднання",
-        "local": "Тільки CSV / вручну",
-        "sync": "Опціонально (зашифровано)",
-        "cloud": "Обов'язкова агрегація"
-      },
       "storageLocation": {
+        "cloud": "Їхня база даних",
         "feature": "Місце зберігання",
         "local": "Ваш пристрій",
-        "sync": "Хмара з нульовими знаннями",
-        "cloud": "Їхня база даних"
+        "sync": "Хмара з нульовими знаннями"
       }
     },
-    "socialProof": {
-      "title": "Преміум обробка, вбудована в додаток",
-      "description": "Деталі, які роблять бюджетування ефективним: навчання, швидкі клавіші, мобільна навігація та готовність до офлайну.",
-      "features": {
-        "onboarding": {
-          "title": "Тур навчання",
-          "description": "Керований тур допомагає новим користувачам швидко отримати цінність."
-        },
-        "shortcuts": {
-          "title": "Швидкі клавіші",
-          "description": "Швидко переміщуйтеся за допомогою пошуку та дій, вбудованих в інтерфейс."
-        },
-        "mobileUx": {
-          "title": "UX для мобільних пристроїв",
-          "description": "Нижня навігація та адаптивні макети, які відчуваються природно."
-        },
-        "pwaInstall": {
-          "title": "Встановлення PWA",
-          "description": "Встановіть як додаток і продовжуйте працювати навіть з нестабільним інтернетом."
-        }
+    "faq": {
+      "0": {
+        "a": "Так. У локальному протоколі дані ніколи не покидають ваш пристрій. Вони живуть у IndexedDB у вашому браузері.",
+        "q": "Чи дійсно мої дані приватні?"
+      },
+      "1": {
+        "a": "Ви можете експортувати повну резервну копію JSON у будь-який час. Ми також рекомендуємо регулярні експорти CSV.",
+        "q": "Як я можу створити резервну копію своїх даних?"
+      },
+      "2": {
+        "a": "Скоро: опціональна підписка для синхронізації зашифрованих даних між пристроями через Supabase.",
+        "q": "Що таке 'Синхронізація' Pro?"
+      },
+      "3": {
+        "a": "Ні. Ми вважаємо, що ручний імпорт є безпечнішим, надійнішим і сприяє кращій фінансовій обізнаності.",
+        "q": "Чи підключаєтеся ви до банків?"
       }
     },
-    "pricingSection": {
-      "recommended": "Рекомендується",
-      "productName": "Локальний протокол",
-      "productDescription": "Повний досвід бюджетування, що працює повністю на вашому пристрої.",
-      "whyChoose": "Чому обрати локальний протокол?",
-      "whyChooseDescription": "Дивіться, як ми виглядаємо в порівнянні з хмарними гігантами.",
-      "features": "Включає необмежену кількість транзакцій, рахунків, бюджетів та можливості повної локальної резервної копії."
+    "faqSection": {
+      "description": "Прості відповіді на поширені запитання про пробні версії, ціни та доступ.",
+      "title": "Часті питання"
+    },
+    "features": {
+      "0": {
+        "description": "Чистий капітал, грошовий потік та розподіл за категоріями. Миттєві часи завантаження.",
+        "href": "/budget-app",
+        "title": "Локальна панель"
+      },
+      "1": {
+        "description": "Розумний мапер CSV для BMO, Home Trust та налаштовуваних форматів.",
+        "href": "/budget-app/import",
+        "title": "Майстер імпорту"
+      },
+      "2": {
+        "description": "Скануйте чеки локально з Tesseract.js. Без обробки в хмарі.",
+        "href": "/budget-app/ocr",
+        "title": "OCR чеків"
+      },
+      "3": {
+        "description": "Бюджетування на основі нуля або з перенесенням з детальним контролем категорій.",
+        "href": "/budget-app/budgets",
+        "title": "Бюджети за категоріями"
+      },
+      "4": {
+        "description": "Проектуйте дату вашої свободи з візуалізаціями складних відсотків.",
+        "href": "/budget-app/planning/retirement",
+        "title": "Калькулятор виходу на пенсію"
+      },
+      "5": {
+        "description": "Додатковий рівень безпеки з опціональним шифруванням на стороні клієнта.",
+        "href": "/budget-app/settings",
+        "title": "Щит приватності"
+      }
+    },
+    "featuresDeepDive": {
+      "cta": "Розпочати безкоштовний пробний період",
+      "description": "Припиніть боротися з зламаними формулами. Отримайте гнучкість ручного контролю з швидкістю сучасного додатка.",
+      "explore": "Дослідити",
+      "heading1": "Сила електронної таблиці.",
+      "heading2": "Простота додатка."
+    },
+    "hero": {
+      "badge": "Приватність на першому місці • Локально • Нульове відстеження",
+      "finePrint": "Не потрібні банківські реквізити. Обліковий запис не потрібен для локального режиму.",
+      "headline": "Керуйте своїми фінансами без продажу своїх даних.",
+      "primaryCta": {
+        "href": "/budget-app/auth/signup",
+        "label": "Розпочати локальний протокол (безкоштовно)"
+      },
+      "secondaryCta": {
+        "href": "/budget-app/auth/login",
+        "label": "Увійти"
+      },
+      "subhead": "Сила електронної таблиці. Простота додатка. Відчуйте фінансову ясність з єдиним бюджетним додатком, який гарантує, що ваші дані ніколи не покинуть ваш пристрій."
     },
     "heroSection": {
-      "cta": {
-        "heading": "Створено для ясності, а не хаосу.",
-        "viewPricing": "Переглянути ціни"
-      },
       "badges": {
         "noSubscriptions": "Без підписок",
         "offlineReady": "Готовий до офлайну",
         "seniorsMode": "Режим для літніх"
       },
-      "preview": {
-        "livePreview": "Живий перегляд",
-        "recentTransactions": "Останні транзакції",
-        "categoryBudgets": "Бюджети за категоріями",
-        "recurring": "Повторювані"
+      "cta": {
+        "heading": "Створено для ясності, а не хаосу.",
+        "viewPricing": "Переглянути ціни"
       },
       "modes": {
-        "dashboard": "Панель керування",
         "budgets": "Бюджети",
+        "dashboard": "Панель керування",
         "subscriptions": "Підписки"
-      }
-    },
-    "featuresDeepDive": {
-      "heading1": "Сила електронної таблиці.",
-      "heading2": "Простота додатка.",
-      "description": "Припиніть боротися з зламаними формулами. Отримайте гнучкість ручного контролю з швидкістю сучасного додатка.",
-      "cta": "Розпочати безкоштовний пробний період",
-      "explore": "Дослідити"
-    },
-    "accessibility": {
-      "title": "Доступність за замовчуванням",
-      "description": "Режим для літніх забезпечує спрощену навігацію та більші цілі для натискання. Швидкі клавіші, стани фокусу та чіткий контраст допомагають усім рухатися швидше.",
-      "badges": {
-        "seniorsMode": "Режим для літніх",
-        "largeTouchTargets": "Великі цілі для натискання",
-        "keyboardFirst": "Спочатку клавіатура"
       },
-      "buttons": {
-        "openApp": "Відкрити додаток",
-        "settings": "Налаштування доступності"
+      "preview": {
+        "categoryBudgets": "Бюджети за категоріями",
+        "livePreview": "Живий перегляд",
+        "recentTransactions": "Останні транзакції",
+        "recurring": "Повторювані"
       }
     },
-    "faqSection": {
-      "title": "Часті питання",
-      "description": "Прості відповіді на поширені запитання про пробні версії, ціни та доступ."
-    },
-    "outcomesSection": {
-      "title": "Створено для реального життя, а не електронних таблиць",
-      "description": "Більшість додатків для бюджетування змушують вас працювати. BudgetPro розроблений для зменшення тертя, зберігаючи вас під контролем."
+    "howItWorks": {
+      "0": {
+        "description": "Перетягніть і скиньте CSV або скануйте чеки. ШІ локально мапує стовпці.",
+        "title": "Імпорт"
+      },
+      "1": {
+        "description": "Швидка категоризація з розумними правилами та масовими діями.",
+        "title": "Перегляд"
+      },
+      "2": {
+        "description": "Призначте кожному долару роботу та прогнозуйте свій майбутній чистий капітал.",
+        "title": "План"
+      }
     },
     "howItWorksSection": {
-      "title": "Як це працює",
-      "description": "Робочий процес, який швидко веде вас до ясності, не блокуючи вас у складній системі."
-    },
-    "nav": {
-      "tagline": "Преміум бюджетування"
+      "description": "Робочий процес, який швидко веде вас до ясності, не блокуючи вас у складній системі.",
+      "title": "Як це працює"
     },
     "marquee": {
       "logos": [
@@ -440,6 +880,814 @@
         "Офлайн",
         "Режим для літніх"
       ]
+    },
+    "nav": {
+      "tagline": "Преміум бюджетування"
+    },
+    "outcomes": {
+      "0": {
+        "description": "Більше ніяких зламаних з'єднань або циклів повторної авторизації. Ви контролюєте введення даних.",
+        "title": "Припиніть боротися з агрегаторами"
+      },
+      "1": {
+        "description": "Ми не продаємо ваші дані, тому що не маємо їх. Крапка.",
+        "title": "Приватність за замовчуванням"
+      },
+      "2": {
+        "description": "Моделюйте вихід на пенсію, погашення позик і цілі заощаджень в одному інтегрованому вигляді.",
+        "title": "Планування на майбутнє"
+      },
+      "3": {
+        "description": "Виявляйте повторювані витрати, які інші додатки пропускають.",
+        "title": "Вбивця підписок"
+      }
+    },
+    "outcomesSection": {
+      "description": "Більшість додатків для бюджетування змушують вас працювати. BudgetPro розроблений для зменшення тертя, зберігаючи вас під контролем.",
+      "title": "Створено для реального життя, а не електронних таблиць"
+    },
+    "pricing": {
+      "cta": {
+        "href": "/budget-app/auth/signup",
+        "label": "Розпочати локальний протокол"
+      },
+      "description": "Почніть з потужного локального протоколу. Оновіть пізніше, якщо вам потрібна синхронізація на кількох пристроях.",
+      "eyebrow": "Справедлива ціна",
+      "guarantee": "Не потрібна кредитна картка для локального протоколу.",
+      "priceLabel": "Безкоштовно назавжди",
+      "secondary": {
+        "href": "#pricing",
+        "label": "Переглянути професійні функції"
+      },
+      "title": "Локальний безкоштовно. Синхронізація - Профі."
+    },
+    "pricingSection": {
+      "features": "Включає необмежену кількість транзакцій, рахунків, бюджетів та можливості повної локальної резервної копії.",
+      "productDescription": "Повний досвід бюджетування, що працює повністю на вашому пристрої.",
+      "productName": "Локальний протокол",
+      "recommended": "Рекомендується",
+      "whyChoose": "Чому обрати локальний протокол?",
+      "whyChooseDescription": "Дивіться, як ми виглядаємо в порівнянні з хмарними гігантами."
+    },
+    "security": {
+      "buttons": {
+        "offline": "Підтримка офлайн",
+        "privacy": "Приватність та налаштування"
+      },
+      "cards": {
+        "aiControls": {
+          "description": "Увімкніть функції на основі ШІ (такі як виявлення аномалій) та керуйте доступом до чат-бота з налаштувань.",
+          "title": "Контролі функцій ШІ"
+        },
+        "encryption": {
+          "description": "Додаток включає шар шифрування для захисту чутливих бюджетних записів, коли це увімкнено.",
+          "title": "Підтримка шифрування"
+        },
+        "exportDelete": {
+          "description": "Експортуйте свої дані та налаштування конфіденційності або видаліть локальні дані безпосередньо з додатка.",
+          "title": "Експорт та видалення"
+        },
+        "localStorage": {
+          "description": "Ваші бюджетні дані зберігаються у вашому браузері (IndexedDB), тому додаток залишається швидким і зручним для офлайну.",
+          "title": "Локальне зберігання"
+        }
+      },
+      "description": "Budget App зберігає ваші дані локально (готовий до офлайну) і надає вам контролі для функцій ШІ, експорту та видалення.",
+      "title": "Приватність на першому місці за дизайном"
+    },
+    "socialProof": {
+      "description": "Деталі, які роблять бюджетування ефективним: навчання, швидкі клавіші, мобільна навігація та готовність до офлайну.",
+      "features": {
+        "mobileUx": {
+          "description": "Нижня навігація та адаптивні макети, які відчуваються природно.",
+          "title": "UX для мобільних пристроїв"
+        },
+        "onboarding": {
+          "description": "Керований тур допомагає новим користувачам швидко отримати цінність.",
+          "title": "Тур навчання"
+        },
+        "pwaInstall": {
+          "description": "Встановіть як додаток і продовжуйте працювати навіть з нестабільним інтернетом.",
+          "title": "Встановлення PWA"
+        },
+        "shortcuts": {
+          "description": "Швидко переміщуйтеся за допомогою пошуку та дій, вбудованих в інтерфейс.",
+          "title": "Швидкі клавіші"
+        }
+      },
+      "title": "Преміум обробка, вбудована в додаток"
+    },
+    "trust": {
+      "0": {
+        "description": "Дані залишаються у IndexedDB вашого браузера. Ми буквально не можемо їх бачити.",
+        "title": "Ваш пристрій, ваші дані"
+      },
+      "1": {
+        "description": "Масове редагування, зведення та аналіз як професіонал без головного болю з формулами.",
+        "title": "Сила електронної таблиці"
+      },
+      "2": {
+        "description": "Нульова затримка. Працює на вершині гори або в тунелі метро.",
+        "title": "Офлайн швидкість"
+      },
+      "3": {
+        "description": "Майстер імпорту робить щотижневий огляд фінансів задовільною звичкою.",
+        "title": "Ручні ритуали"
+      }
+    }
+  },
+  "nav": {
+    "about": "Про програму",
+    "accounts": "Рахунки",
+    "budgets": "Бюджети",
+    "categories": "Категорії",
+    "dashboard": "Панель керування",
+    "export": "Експорт",
+    "goals": "Цілі",
+    "help": "Допомога",
+    "import": "Імпорт",
+    "reports": "Звіти",
+    "settings": "Налаштування",
+    "transactions": "Транзакції"
+  },
+  "onboarding": {
+    "dontShowAgain": "Не показувати цей тур знову",
+    "navigation": {
+      "getStarted": "Розпочати",
+      "next": "Далі",
+      "previous": "Попередній",
+      "startTour": "Почати тур"
+    },
+    "quickTip": "💡 Швидка порада",
+    "skipTour": "Пропустити тур",
+    "stepCounter": "Крок {current} з {total}",
+    "steps": {
+      "budgets": {
+        "description": "Створіть бюджети для різних категорій витрат. Слідкуйте за своїм прогресом протягом місяця та отримуйте сповіщення, коли наближаєтеся до своїх меж.",
+        "title": "🎯 Встановіть свої бюджети"
+      },
+      "categorize": {
+        "description": "Перегляньте та відкоригуйте категорії транзакцій. Наша розумна категоризація вчиться на ваших виправленнях, щоб покращуватися з часом. Використовуйте масові дії для категоризації кількох транзакцій одночасно!",
+        "title": "🏷️ Категоризуйте та організуйте"
+      },
+      "import": {
+        "description": "Почніть з імпорту ваших банківських транзакцій з файлу CSV. Ми підтримуємо BMO, Home Trust та багато інших банків. Додаток автоматично категоризує ваші транзакції!",
+        "title": "📥 Імпортуйте свої транзакції"
+      },
+      "reports": {
+        "description": "Візуалізуйте свої витратні патерни, слідкуйте за своїм чистим капіталом і приймайте обґрунтовані фінансові рішення. Ваша панель оновлюється автоматично з кожною транзакцією!",
+        "title": "📊 Перегляньте звіти та аналітику"
+      },
+      "welcome": {
+        "description": "Давайте швидко пройдемо тур, щоб допомогти вам почати управляти вашими домашніми фінансами. Це не займе багато часу!",
+        "title": "👋 Ласкаво просимо до Budget App!"
+      }
+    },
+    "tips": {
+      "budgets": "Встановіть реалістичні бюджети, і ми сповістимо вас, якщо ви на шляху до перевитрат.",
+      "categorize": "Використовуйте кнопку швидкої категоризації або виберіть кілька транзакцій для масової категоризації.",
+      "import": "Перетягніть і скиньте свій файл CSV або натисніть, щоб переглянути. Ми автоматично визначаємо формати BMO та Home Trust!"
+    }
+  },
+  "overspendingAlerts": {
+    "exceededWarning": "At this rate, you'll exceed your budget by {amount} this month.",
+    "percentOfBudget": "{percent}% of budget",
+    "progress": {
+      "label": "Current progress"
+    },
+    "stats": {
+      "budget": "Budget",
+      "daysLeft": "Days Left",
+      "projectedTotal": "Projected Total",
+      "spentSoFar": "Spent So Far"
+    },
+    "tip": {
+      "label": "Tip:",
+      "reduceSpending": "Reduce daily spending to {amount} to stay within budget."
+    }
+  },
+  "predictiveSpendingChart": {
+    "legend": {
+      "actual": "Actual",
+      "confidenceInterval": "Confidence Interval",
+      "predicted": "Predicted"
+    },
+    "noData": "No data available for predictions",
+    "predictionUnavailable": "Prediction Unavailable",
+    "stats": {
+      "avgConfidence": "Avg Confidence",
+      "nextMonth": "Next Month",
+      "threeMonthAvg": "3-Month Avg"
+    },
+    "table": {
+      "confidence": "Confidence",
+      "month": "Month",
+      "predicted": "Predicted",
+      "range": "Range",
+      "title": "Monthly Predictions"
+    },
+    "title": "Spending Forecast: {category}",
+    "trainingModel": "Training model and generating predictions..."
+  },
+  "pwaInstall": {
+    "buttons": {
+      "install": "Install",
+      "notNow": "Not now"
+    },
+    "close": "Close install prompt",
+    "description": "Add to your home screen for quick access and offline use",
+    "features": {
+      "fastSecure": "Fast & secure",
+      "noAppStore": "No app store needed",
+      "offline": "Works offline"
+    },
+    "title": "Install Budget App"
+  },
+  "quickCategorize": {
+    "buttons": {
+      "apply": "Apply Category",
+      "cancel": "Cancel",
+      "save": "Save"
+    },
+    "clickToSelect": "Click a category to select",
+    "description": "Select a category for {count, plural, =1 {this transaction} other {# transactions}}",
+    "general": "General",
+    "noResults": "No categories found",
+    "pressEnter": "Press ↵ Enter",
+    "saving": "Saving...",
+    "searchPlaceholder": "Search categories...",
+    "title": "Quick Categorize"
+  },
+  "quickFilters": {
+    "all": "All",
+    "categories": "Categories",
+    "clearFilters": "Clear Filters",
+    "moreCategories": "+{count} more",
+    "presets": {
+      "last30": "Last 30 Days",
+      "last90": "Last 90 Days",
+      "thisMonth": "This Month",
+      "thisYear": "This Year"
+    },
+    "timePeriod": "Time Period"
+  },
+  "receiptUpload": {
+    "buttons": {
+      "attachReceipt": "Attach Receipt",
+      "chooseDifferent": "Choose Different",
+      "extractData": "Extract Data",
+      "extracting": "Extracting..."
+    },
+    "camera": {
+      "takePhoto": "Take Photo with Camera",
+      "useDevice": "Use your device camera to capture receipt"
+    },
+    "cameraInputLabel": "Camera capture input",
+    "dropzone": {
+      "browseFiles": "or <link>browse files</link>",
+      "dragDrop": "Drag & drop receipt here",
+      "dropHere": "Drop the receipt here",
+      "supportedFormats": "Supports JPG, PNG, PDF • Max {size}MB"
+    },
+    "errors": {
+      "couldNotExtract": "Could not extract data from receipt. Please enter manually.",
+      "extractionFailed": "Failed to extract data. Please try again or enter manually.",
+      "invalidType": "Invalid file type. Only JPG, PNG, and PDF files are allowed",
+      "ocrImagesOnly": "OCR is only supported for image files (JPG, PNG)",
+      "rejected": "File was rejected. Please try again",
+      "tooLarge": "File is too large. Maximum size is {size}MB"
+    },
+    "extracted": {
+      "amount": "Amount:",
+      "confidence": "Confidence: {percent}%",
+      "date": "Date:",
+      "merchant": "Merchant:",
+      "title": "Data Extracted"
+    },
+    "pdf": {
+      "noPreview": "Preview not available",
+      "title": "PDF Receipt"
+    },
+    "receiptPreview": "Receipt preview",
+    "removeFile": "Remove file"
+  },
+  "recurringTransactions": {
+    "confidence": "{percent}% confidence",
+    "estimatedMonthly": "Estimated Monthly",
+    "frequency": {
+      "biweekly": "Bi-weekly",
+      "monthly": "Monthly",
+      "quarterly": "Quarterly",
+      "weekly": "Weekly"
+    },
+    "inDays": "{count, plural, =0 {(today)} =1 {(in 1 day)} other {(in # days)}}",
+    "next": "Next: {date}",
+    "occurrences": "{count, plural, =1 {1 occurrence detected} other {# occurrences detected}}",
+    "perPeriod": {
+      "month": "per month",
+      "quarter": "per quarter",
+      "twoWeeks": "per 2 weeks",
+      "week": "per week"
+    },
+    "showingPatterns": "{count, plural, =1 {Showing 1 recurring transaction pattern} other {Showing # recurring transaction patterns}}",
+    "subtitle": "Detected subscriptions and bills",
+    "title": "Recurring Transactions"
+  },
+  "shortcutsModal": {
+    "close": "Close shortcuts help",
+    "proTip": {
+      "description": "Keyboard shortcuts work on any page except when typing in forms. Press {key} anytime to see this help.",
+      "title": "💡 Pro Tip"
+    },
+    "subtitle": "Power-user productivity tips",
+    "title": "Keyboard Shortcuts"
+  },
+  "sidebar": {
+    "actions": {
+      "importCsv": "Імпорт CSV",
+      "settings": "Налаштування",
+      "showAllItems": "Показати всі елементи",
+      "showLess": "Показати менше"
+    },
+    "appSubtitle": "Преміум Фінанси",
+    "appTitle": "Budget App",
+    "navigation": {
+      "budgets": "Бюджети",
+      "categories": "Категорії",
+      "dashboard": "Панель керування",
+      "futurePlans": "Майбутні плани",
+      "investments": "Інвестиції",
+      "loans": "Позики",
+      "reports": "Звіти",
+      "retirement": "Відставка",
+      "scanReceipt": "Сканувати чек",
+      "subscriptions": "Підписки",
+      "transactions": "Транзакції"
+    },
+    "search": "Пошук...",
+    "shortcuts": "Швидкі клавіші"
+  },
+  "simplefinSettings": {
+    "connectedAccounts": {
+      "description": "Manage your linked bank accounts",
+      "title": "Connected Accounts"
+    },
+    "connection": {
+      "accountsLinked": "{count, plural, =1 {1 account linked} other {# accounts linked}}",
+      "connectButton": "Connect Bank Account",
+      "connected": "Connected",
+      "description": "Connect your bank accounts to automatically import transactions",
+      "notConnected": "Not Connected",
+      "notConnectedDesc": "Connect your bank accounts to start importing transactions",
+      "title": "SimpleFIN Connection"
+    },
+    "disconnect": {
+      "button": "Disconnect",
+      "cancel": "Cancel",
+      "confirm": "Disconnect",
+      "dialogDescription": "This will remove the connection to your bank accounts. Your existing transactions will not be deleted, but new transactions will no longer sync automatically.",
+      "dialogTitle": "Disconnect SimpleFIN?"
+    },
+    "help": {
+      "bridgeDashboard": "SimpleFIN Bridge Dashboard",
+      "protocolDocs": "SimpleFIN Protocol Documentation",
+      "title": "Need Help?"
+    },
+    "sync": {
+      "date": "{date}",
+      "hoursAgo": "{hours, plural, =1 {1 hour ago} other {# hours ago}}",
+      "lastSynced": "Last synced: {time}",
+      "lessThanHour": "Less than an hour ago",
+      "never": "Never",
+      "syncNow": "Sync Now",
+      "syncing": "Syncing..."
+    },
+    "syncSettings": {
+      "autoCategorize": {
+        "description": "Automatically categorize imported transactions using AI",
+        "label": "Auto-Categorize"
+      },
+      "autoSync": {
+        "description": "Automatically sync transactions on a schedule",
+        "label": "Automatic Sync"
+      },
+      "description": "Configure how and when transactions are synced",
+      "frequency": {
+        "every12Hours": "Every 12 hours",
+        "every2Days": "Every 2 days",
+        "every6Hours": "Every 6 hours",
+        "hint": "SimpleFIN allows up to 24 requests per day. Daily sync is recommended.",
+        "label": "Sync Frequency",
+        "onceDaily": "Once daily"
+      },
+      "notifications": {
+        "description": "Show notification when sync completes",
+        "label": "Sync Notifications"
+      },
+      "pendingTransactions": {
+        "description": "Include transactions that haven't posted yet",
+        "label": "Import Pending Transactions"
+      },
+      "title": "Sync Settings",
+      "transactionHistory": {
+        "days": "{count} days",
+        "hint": "How many days of transaction history to fetch (max 60 days per SimpleFIN)",
+        "label": "Transaction History"
+      }
+    }
+  },
+  "spendingTrendChart": {
+    "forecastFooter": "Forecast based on linear regression of last {months} months",
+    "legend": {
+      "actualSpending": "Actual Spending",
+      "projected": "Projected"
+    },
+    "notEnoughData": "Not enough data to generate trends. Add at least 2 months of transactions.",
+    "stats": {
+      "avgMonthly": "Avg Monthly",
+      "lastMonth": "Last Month",
+      "projected": "Projected"
+    },
+    "title": "Spending Trends & Forecast"
+  },
+  "splitTransaction": {
+    "addSplit": "Add Split ({current}/{max})",
+    "amount": "Amount",
+    "buttons": {
+      "cancel": "Cancel",
+      "save": "Save Split",
+      "saving": "Saving..."
+    },
+    "category": "Category",
+    "closeModal": "Close modal",
+    "date": "Date:",
+    "distributeEvenly": "Distribute Evenly",
+    "errors": {
+      "saveFailed": "Failed to save split transaction"
+    },
+    "help": {
+      "step1": "Enter the amount for each category (must total ${amount})",
+      "step2": "Use \"Distribute Evenly\" to split equally across all categories",
+      "step3": "Add up to 5 splits per transaction",
+      "step4": "The original transaction will be hidden and replaced with split items",
+      "title": "How to split transactions:"
+    },
+    "maxSplitsReached": "Maximum 5 splits allowed",
+    "minSplitsRequired": "Minimum 2 splits required",
+    "none": "None",
+    "notes": "Notes (Optional)",
+    "notesPlaceholder": "e.g., Business expense, Personal use",
+    "originalAmount": "Original Amount:",
+    "removeThisSplit": "Remove this split",
+    "selectCategory": "Select category...",
+    "splitsCount": "Splits ({current}/{max})",
+    "subcategory": "Subcategory",
+    "title": "Split Transaction",
+    "validation": {
+      "adjustAmounts": "Adjust split amounts to match the original transaction amount.",
+      "amountsMustMatch": "Split amounts must equal the original transaction amount",
+      "categoryRequired": "All splits must have a category",
+      "matchesOriginal": "✓ Matches original",
+      "overBy": "Over by ${amount}",
+      "readyToSave": "Split amounts match the original transaction. Ready to save!",
+      "total": "Total:",
+      "underBy": "Under by ${amount}"
+    }
+  },
+  "subscriptionCard": {
+    "badges": {
+      "aiVerified": "AI Verified",
+      "cancelled": "Cancelled",
+      "paused": "Paused",
+      "trial": "Trial"
+    },
+    "buttons": {
+      "claimManage": "Claim & Manage",
+      "edit": "Edit",
+      "transactions": "Transactions"
+    },
+    "confidence": {
+      "high": "High",
+      "label": "Detection Confidence",
+      "low": "Low",
+      "medium": "Medium"
+    },
+    "details": {
+      "charges": "{count} charges",
+      "daysBefore": "{count} days before",
+      "firstCharge": "First Charge",
+      "lastCharge": "Last Charge",
+      "occurrences": "Occurrences",
+      "payment": "Payment",
+      "reminder": "Reminder"
+    },
+    "interval": {
+      "annual": "Annual",
+      "bi-weekly": "Bi-weekly",
+      "irregular": "Irregular",
+      "monthly": "Monthly",
+      "quarterly": "Quarterly",
+      "weekly": "Weekly"
+    },
+    "lowConfidenceWarning": "This subscription was detected with low confidence. Claim it to verify and manage manually.",
+    "menu": {
+      "cancelSubscription": "Cancel Subscription",
+      "claimManage": "Claim & Manage",
+      "delete": "Delete",
+      "edit": "Edit",
+      "notSubscription": "Not a Subscription",
+      "pause": "Pause",
+      "resume": "Resume",
+      "viewTransactions": "View Transactions"
+    },
+    "source": {
+      "auto-detected": "Auto-detected",
+      "manual": "Manual",
+      "merged": "Tracked"
+    },
+    "stats": {
+      "amount": "Amount",
+      "annualCost": "Annual Cost",
+      "frequency": "Frequency",
+      "nextCharge": "Next Charge",
+      "totalSpent": "Total Spent"
+    },
+    "trial": {
+      "daysLeft": "{count, plural, =1 {1 day left in trial} other {# days left in trial}}"
+    }
+  },
+  "subscriptionCostChart": {
+    "emptyState": "No active subscriptions to analyze",
+    "loadingChart": "Loading chart...",
+    "moreCharges": "+{count} more charges",
+    "perMonth": "/month",
+    "sections": {
+      "costByCategory": "Cost by Category",
+      "potentialSavings": "Potential Savings",
+      "upcomingCharges": "Upcoming Charges (Next 30 Days)"
+    },
+    "summary": {
+      "activeSubscriptions": "{count, plural, =1 {1 active subscription} other {# active subscriptions}}",
+      "annualCost": "Annual Cost",
+      "monthlyCost": "Monthly Cost",
+      "next30Days": "Next 30 Days",
+      "projectedYearly": "Projected yearly spend",
+      "upcomingCharges": "{count, plural, =1 {1 upcoming charge} other {# upcoming charges}}"
+    }
+  },
+  "tooltip": {
+    "ariaLabel": "Більше інформації",
+    "learnMore": "Дізнатися більше →"
+  },
+  "transactionModal": {
+    "account": {
+      "label": "Account"
+    },
+    "advancedOptions": {
+      "available": "{count} available",
+      "label": "Advanced Options"
+    },
+    "amount": {
+      "label": "Amount",
+      "placeholder": "0.00",
+      "validationError": "Please enter a valid amount"
+    },
+    "buttons": {
+      "add": "Add Transaction",
+      "adding": "Adding...",
+      "cancel": "Cancel",
+      "update": "Update Transaction",
+      "updating": "Updating..."
+    },
+    "category": {
+      "aiCategorizing": "AI categorizing...",
+      "create": "Create",
+      "createNew": "+ Create New Category",
+      "label": "Category",
+      "lastUsed": "Using last: {category}",
+      "namePlaceholder": "Category name...",
+      "selectPlaceholder": "Select category...",
+      "subcategoriesPlaceholder": "Subcategories (optional, comma-separated)"
+    },
+    "closeModal": "Close modal",
+    "createCategory": {
+      "created": "Category \"{name}\" created!",
+      "failed": "Failed to create category",
+      "nameRequired": "Category name is required"
+    },
+    "date": {
+      "label": "Date"
+    },
+    "description": {
+      "label": "Description",
+      "placeholder": "e.g., Grocery shopping at Sobeys"
+    },
+    "learned": {
+      "description": "After 3 similar corrections, future transactions from this merchant will auto-categorize.",
+      "title": "Learned!"
+    },
+    "notes": {
+      "label": "Notes",
+      "placeholder": "Add any additional notes..."
+    },
+    "receipts": {
+      "addNew": "Add New Receipt",
+      "deleteConfirm": "Are you sure you want to delete this receipt?",
+      "deleteFailed": "Failed to delete receipt",
+      "deleteReceipt": "Delete receipt",
+      "existing": "Existing receipts ({count})",
+      "label": "Receipt Attachments",
+      "newFile": "New: {filename}",
+      "remove": "Remove",
+      "viewFull": "View full receipt"
+    },
+    "subcategory": {
+      "label": "Subcategory",
+      "none": "None",
+      "selectPlaceholder": "Select subcategory..."
+    },
+    "tags": {
+      "label": "Tags (comma-separated)",
+      "placeholder": "e.g., groceries, weekly, essential"
+    },
+    "title": {
+      "add": "Add Transaction",
+      "edit": "Edit Transaction"
+    },
+    "type": {
+      "expense": "Expense",
+      "income": "Income",
+      "label": "Type"
+    }
+  },
+  "transactionTable": {
+    "actions": {
+      "attachReceipt": "Attach receipt",
+      "delete": "Delete",
+      "edit": "Edit",
+      "split": "Split"
+    },
+    "emptyState": "No transactions to display",
+    "headers": {
+      "account": "Account",
+      "actions": "Actions",
+      "amount": "Amount",
+      "category": "Category",
+      "date": "Date",
+      "description": "Description"
+    }
+  },
+  "welcome": {
+    "subtitle": "Почніть з додавання першої транзакції або імпорту даних з вашого банку",
+    "title": "Ласкаво просимо до Budget App"
+  },
+  "widget": {
+    "accountBalances": {
+      "description": "Поточні залишки на всіх ваших рахунках",
+      "title": "Баланс рахунків"
+    },
+    "budgetProgress": {
+      "description": "Слідкуйте за тим, як ви справляєтеся з бюджетними цілями",
+      "title": "Прогрес бюджету"
+    },
+    "incomeVsExpenses": {
+      "description": "Порівняйте ваші доходи та витрати з часом",
+      "title": "Доходи та витрати"
+    },
+    "monthlyTrends": {
+      "description": "Візуалізуйте ваші фінансові патерни місяць за місяцем",
+      "title": "Місячні тренди"
+    },
+    "recentTransactions": {
+      "description": "Швидкий перегляд вашої останньої фінансової активності",
+      "title": "Останні транзакції"
+    },
+    "spendingByCategory": {
+      "description": "Дивіться, куди йдуть ваші гроші, з візуальними розбивками",
+      "title": "Витрати за категоріями"
+    },
+    "upcomingBills": {
+      "description": "Ніколи не пропустіть платіж з нагадуваннями про рахунки",
+      "title": "Найближчі рахунки"
+    }
+  },
+  "ynabMigrationWizard": {
+    "categoryStep": {
+      "category": "{count, plural, =1 {1 category} other {# categories}}",
+      "createNew": "Create New",
+      "description": "Map YNAB categories to your existing categories or create new ones.",
+      "mapToExisting": "Map to Existing",
+      "selectCategory": "Select category...",
+      "skip": "Skip",
+      "title": "Category Mapping",
+      "willCreate": "Will create:"
+    },
+    "completeStep": {
+      "errors": "Errors",
+      "importAnother": "Import Another",
+      "success": "Import Complete!",
+      "successMessage": "{count, plural, =1 {1 item imported} other {# items imported}} successfully from YNAB.",
+      "viewTransactions": "View Transactions",
+      "whatNext": "What would you like to do next?",
+      "withIssues": "Import Completed with Issues"
+    },
+    "footer": {
+      "back": "Back",
+      "done": "Done",
+      "next": "Next",
+      "startImport": "Start Import"
+    },
+    "header": {
+      "closeLabel": "Close wizard",
+      "subtitle": "Migrate your budget data seamlessly",
+      "title": "Import from YNAB"
+    },
+    "importingStep": {
+      "finishing": "Finishing up...",
+      "importingAccounts": "Importing accounts...",
+      "importingBudgets": "Importing budgets...",
+      "importingCategories": "Importing categories...",
+      "importingTransactions": "Importing transactions...",
+      "title": "Importing your YNAB data..."
+    },
+    "optionsStep": {
+      "accountOptions": {
+        "includeClosedAccounts": "Include closed accounts",
+        "includeOffBudgetAccounts": "Include off-budget accounts",
+        "title": "Account Options"
+      },
+      "budgetOptions": {
+        "importGoals": "Import savings goals as future purchases",
+        "title": "Budget Options"
+      },
+      "hiddenCategories": {
+        "archive": "Archive",
+        "archiveDesc": "Import as archived (recommended)",
+        "description": "How to handle YNAB categories marked as hidden?",
+        "import": "Import",
+        "importDesc": "Import as active categories",
+        "skip": "Skip",
+        "skipDesc": "Don't import hidden categories",
+        "title": "Hidden Categories"
+      }
+    },
+    "previewStep": {
+      "accounts": "Accounts",
+      "allocations": "{count} allocations",
+      "budgetMonths": "Budget Months",
+      "categories": "Categories",
+      "dateRange": "Transaction Date Range",
+      "description": "Review the data that will be imported.",
+      "duplicates": "{count} duplicates",
+      "new": "{count} new",
+      "newMapped": "{created} new, {mapped} mapped",
+      "preparingPreview": "Preparing preview...",
+      "title": "Import Preview",
+      "transactions": "Transactions",
+      "warnings": "Warnings"
+    },
+    "steps": {
+      "categories": {
+        "description": "Map to existing categories",
+        "title": "Categories"
+      },
+      "complete": {
+        "description": "Migration finished",
+        "title": "Complete"
+      },
+      "importing": {
+        "description": "Processing your data",
+        "title": "Importing"
+      },
+      "options": {
+        "description": "Configure import settings",
+        "title": "Options"
+      },
+      "preview": {
+        "description": "Review before import",
+        "title": "Preview"
+      },
+      "upload": {
+        "description": "Select YNAB export file",
+        "title": "Upload"
+      }
+    },
+    "uploadStep": {
+      "accounts": "Accounts",
+      "categories": "Categories",
+      "clickToSelect": "Click to select a file",
+      "dragAndDrop": "or drag and drop here",
+      "fileSummary": "File Summary",
+      "format": "Format",
+      "formatApiExport": "YNAB API Export",
+      "formatApiExportDesc": "JSON from nYNAB",
+      "formatCsv": "CSV Export",
+      "formatCsvDesc": "From YNAB web app",
+      "formatYfull": "Budget.yfull / Budget.ynab4",
+      "formatYfullDesc": "YNAB4 desktop export",
+      "parsing": "Parsing file...",
+      "supportedFormats": "Supported Formats",
+      "transactions": "Transactions"
     }
   }
 }

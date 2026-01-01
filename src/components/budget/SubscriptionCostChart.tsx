@@ -11,6 +11,7 @@
  */
 
 import { useMemo, lazy, Suspense } from 'react';
+import { useTranslations } from 'next-intl';
 import type { Subscription } from '@/types/budget';
 import type { SubscriptionPattern } from '@/lib/subscription-detector';
 import {
@@ -61,9 +62,10 @@ const CATEGORY_COLORS = [
 ];
 
 function ChartLoadingSkeleton() {
+  const t = useTranslations('subscriptionCostChart');
   return (
     <div className="w-full h-64 bg-muted/50 rounded-lg animate-pulse flex items-center justify-center">
-      <span className="text-muted-foreground text-sm">Loading chart...</span>
+      <span className="text-muted-foreground text-sm">{t('loadingChart')}</span>
     </div>
   );
 }
@@ -72,6 +74,8 @@ export function SubscriptionCostChart({
   manualSubscriptions,
   autoDetectedPatterns,
 }: SubscriptionCostChartProps) {
+  const t = useTranslations('subscriptionCostChart');
+
   // Calculate costs by category
   const categoryBreakdown = useMemo((): CategoryCost[] => {
     const categoryMap = new Map<string, { monthly: number; count: number }>();
@@ -261,40 +265,40 @@ export function SubscriptionCostChart({
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <div className="bg-card border border-border rounded-lg p-5">
           <div className="flex items-center justify-between mb-2">
-            <h3 className="text-sm font-medium text-muted-foreground">Monthly Cost</h3>
+            <h3 className="text-sm font-medium text-muted-foreground">{t('summary.monthlyCost')}</h3>
             <DollarSign className="w-5 h-5 text-green-500" />
           </div>
           <p className="text-2xl font-bold text-foreground">
             ${totals.monthly.toFixed(2)}
           </p>
           <p className="text-xs text-muted-foreground mt-1">
-            {totals.count} active subscription{totals.count !== 1 ? 's' : ''}
+            {t('summary.activeSubscriptions', { count: totals.count })}
           </p>
         </div>
 
         <div className="bg-card border border-border rounded-lg p-5">
           <div className="flex items-center justify-between mb-2">
-            <h3 className="text-sm font-medium text-muted-foreground">Annual Cost</h3>
+            <h3 className="text-sm font-medium text-muted-foreground">{t('summary.annualCost')}</h3>
             <TrendingUp className="w-5 h-5 text-blue-500" />
           </div>
           <p className="text-2xl font-bold text-foreground">
             ${totals.annual.toFixed(2)}
           </p>
           <p className="text-xs text-muted-foreground mt-1">
-            Projected yearly spend
+            {t('summary.projectedYearly')}
           </p>
         </div>
 
         <div className="bg-card border border-border rounded-lg p-5">
           <div className="flex items-center justify-between mb-2">
-            <h3 className="text-sm font-medium text-muted-foreground">Next 30 Days</h3>
+            <h3 className="text-sm font-medium text-muted-foreground">{t('summary.next30Days')}</h3>
             <Calendar className="w-5 h-5 text-purple-500" />
           </div>
           <p className="text-2xl font-bold text-foreground">
             ${upcomingCharges.reduce((sum, c) => sum + c.amount, 0).toFixed(2)}
           </p>
           <p className="text-xs text-muted-foreground mt-1">
-            {upcomingCharges.length} upcoming charge{upcomingCharges.length !== 1 ? 's' : ''}
+            {t('summary.upcomingCharges', { count: upcomingCharges.length })}
           </p>
         </div>
       </div>
@@ -303,12 +307,12 @@ export function SubscriptionCostChart({
       <div className="bg-card border border-border rounded-lg p-6">
         <h3 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
           <PieChart className="w-5 h-5 text-teal-500" />
-          Cost by Category
+          {t('sections.costByCategory')}
         </h3>
 
         {categoryBreakdown.length === 0 ? (
           <p className="text-muted-foreground text-center py-8">
-            No active subscriptions to analyze
+            {t('emptyState')}
           </p>
         ) : (
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -355,7 +359,7 @@ export function SubscriptionCostChart({
         <div className="bg-card border border-border rounded-lg p-6">
           <h3 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
             <Lightbulb className="w-5 h-5 text-yellow-500" />
-            Potential Savings
+            {t('sections.potentialSavings')}
           </h3>
 
           <div className="space-y-4">
@@ -387,7 +391,7 @@ export function SubscriptionCostChart({
                       <p className="text-lg font-bold text-green-600">
                         ${suggestion.potentialSavings.toFixed(2)}
                       </p>
-                      <p className="text-xs text-muted-foreground">/month</p>
+                      <p className="text-xs text-muted-foreground">{t('perMonth')}</p>
                     </div>
                   )}
                 </div>
@@ -402,7 +406,7 @@ export function SubscriptionCostChart({
         <div className="bg-card border border-border rounded-lg p-6">
           <h3 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
             <BarChart2 className="w-5 h-5 text-purple-500" />
-            Upcoming Charges (Next 30 Days)
+            {t('sections.upcomingCharges')}
           </h3>
 
           <div className="space-y-3">
@@ -439,7 +443,7 @@ export function SubscriptionCostChart({
 
             {upcomingCharges.length > 10 && (
               <p className="text-sm text-muted-foreground text-center pt-2">
-                +{upcomingCharges.length - 10} more charges
+                {t('moreCharges', { count: upcomingCharges.length - 10 })}
               </p>
             )}
           </div>

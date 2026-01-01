@@ -8,6 +8,7 @@
 
 import { useState, useEffect } from 'react';
 import { Check, X as XIcon } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import type { Category } from '@/types/budget';
 
 interface StickyBulkActionsBarProps {
@@ -23,6 +24,7 @@ export function StickyBulkActionsBar({
   onApplyCategory,
   onClearSelection,
 }: StickyBulkActionsBarProps) {
+  const t = useTranslations('bulkActions');
   const [bulkCategory, setBulkCategory] = useState('');
   const [bulkSubcategory, setBulkSubcategory] = useState('');
   const [isSticky, setIsSticky] = useState(false);
@@ -55,7 +57,7 @@ export function StickyBulkActionsBar({
               {selectedCount}
             </div>
             <span className="font-semibold text-teal-900">
-              {selectedCount} selected
+              {t('selected', { count: selectedCount })}
             </span>
           </div>
 
@@ -69,7 +71,7 @@ export function StickyBulkActionsBar({
               }}
               className="px-4 py-2 border-2 border-teal-300 rounded-lg bg-white focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 focus:border-transparent focus:outline-none text-sm font-medium"
             >
-              <option value="">Select category...</option>
+              <option value="">{t('selectCategory')}</option>
               {categories.map((cat) => (
                 <option key={cat.id} value={cat.name}>
                   {cat.name}
@@ -83,7 +85,7 @@ export function StickyBulkActionsBar({
                 onChange={(e) => setBulkSubcategory(e.target.value)}
                 className="px-4 py-2 border-2 border-teal-300 rounded-lg bg-white focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 focus:border-transparent focus:outline-none text-sm font-medium"
               >
-                <option value="">No subcategory</option>
+                <option value="">{t('noSubcategory')}</option>
                 {categories
                   .find(c => c.name === bulkCategory)
                   ?.subcategories.map((sub) => (
@@ -106,7 +108,7 @@ export function StickyBulkActionsBar({
               className="inline-flex items-center gap-2 px-4 py-2 bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-sm font-semibold shadow-md hover:shadow-lg focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 focus:outline-none"
             >
               <Check className="w-4 h-4" />
-              Apply to {selectedCount}
+              {t('applyTo', { count: selectedCount })}
             </button>
           </div>
 
@@ -114,8 +116,8 @@ export function StickyBulkActionsBar({
           <button
             onClick={onClearSelection}
             className="p-2 text-teal-700 hover:text-teal-900 hover:bg-teal-200 rounded-lg transition-colors"
-            title="Clear selection"
-            aria-label="Clear selection"
+            title={t('clearSelection')}
+            aria-label={t('clearSelection')}
           >
             <XIcon className="w-5 h-5" />
           </button>

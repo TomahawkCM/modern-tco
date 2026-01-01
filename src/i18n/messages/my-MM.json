@@ -1,433 +1,873 @@
 {
-  "nav": {
-    "dashboard": "ဒက်ရှ်ဘုတ်",
-    "transactions": "ငွေလွှဲများ",
-    "budgets": "ဘတ်ဂျက်များ",
-    "reports": "အစီရင်ခံစာများ",
-    "accounts": "အကောင့်များ",
-    "categories": "အမျိုးအစားများ",
-    "goals": "ရည်မှန်းချက်များ",
-    "import": "သွင်းယူရန်",
-    "export": "ထုတ်ယူရန်",
-    "settings": "ဆက်တင်များ",
-    "help": "အကူအညီ",
-    "about": "အကြောင်း"
+  "accessibilitySettings": {
+    "fontSize": {
+      "default": "Default",
+      "description": "Adjust the base text size for better readability",
+      "extraLarge": "Extra Large",
+      "large": "Large",
+      "title": "Font Size"
+    },
+    "infoBox": {
+      "savedAutomatically": "Settings are saved automatically and persist across sessions",
+      "seniorsOptimization": "Seniors Mode provides one-click accessibility optimization",
+      "storedLocally": "Your preferences are stored locally and never sent to servers",
+      "syncAcrossTabs": "Changes sync across all open tabs in real-time",
+      "title": "About Accessibility Settings"
+    },
+    "presets": {
+      "full": "Full",
+      "fullDesc": "Maximum accessibility",
+      "mild": "Mild",
+      "mildDesc": "Slightly enhanced",
+      "moderate": "Moderate",
+      "moderateDesc": "Recommended for most",
+      "off": "Off",
+      "offDesc": "Standard interface",
+      "title": "Quick Presets:"
+    },
+    "reducedMotion": {
+      "description": "Minimize animations and transitions for a calmer experience. Helpful for users with vestibular disorders or motion sensitivity.",
+      "title": "Reduced Motion",
+      "toggleLabel": "Toggle reduced motion mode"
+    },
+    "seniorsMode": {
+      "description": "One-click accessibility enhancement with larger text, bigger touch targets, and simplified interface",
+      "title": "Seniors Mode"
+    },
+    "themeMode": {
+      "auto": "Auto",
+      "autoDesc": "Match system",
+      "dark": "Dark",
+      "darkDesc": "Easy on eyes",
+      "description": "Choose your preferred color scheme for the budget app",
+      "highContrast": "High Contrast",
+      "highContrastDesc": "Maximum visibility",
+      "light": "Light",
+      "lightDesc": "Bright and clear",
+      "title": "Theme Mode"
+    }
+  },
+  "accessibleChart": {
+    "buttons": {
+      "chart": "Chart",
+      "showChart": "Show chart view",
+      "showTable": "Show data table view",
+      "table": "Table"
+    },
+    "chartDescription": "{description}. {dataPoints} data points shown. {dataList}. Press the Table button to view data in a table format with keyboard navigation support.",
+    "chartTypeDescription": "This is a {chartType} chart with {dataPoints} data points.",
+    "footer": {
+      "average": "Average:",
+      "total": "Total:"
+    },
+    "keyboardNav": {
+      "srOnly": "Use arrow keys to navigate between rows. Press Tab to navigate to the next element.",
+      "visual": "Use ← → or ↑ ↓ keys to navigate • Home/End to jump to start/end"
+    },
+    "summary": {
+      "average": "Average: {value}.",
+      "highest": "Highest value: {label} at {value}.",
+      "lowest": "Lowest value: {label} at {value}.",
+      "total": "Total: {value}."
+    },
+    "switchedToChart": "Switched to chart view",
+    "switchedToTable": "Switched to table view",
+    "tableHeaders": {
+      "additionalInfo": "Additional Info",
+      "category": "Category",
+      "period": "Period",
+      "value": "Value"
+    }
   },
   "actions": {
     "addTransaction": "ငွေလွှဲထည့်ရန်",
-    "importData": "ဒေတာသွင်းယူရန်",
-    "import": "သွင်းယူရန်",
     "editDashboard": "ဒက်ရှ်ဘုတ်ကို ပြင်ဆင်ရန်",
-    "saveChanges": "ပြောင်းလဲမှုများကို သိမ်းရန်",
-    "resetDefaults": "မူလအခြေအနေသို့ ပြန်သွားရန်"
+    "import": "သွင်းယူရန်",
+    "importData": "ဒေတာသွင်းယူရန်",
+    "resetDefaults": "မူလအခြေအနေသို့ ပြန်သွားရန်",
+    "saveChanges": "ပြောင်းလဲမှုများကို သိမ်းရန်"
   },
-  "welcome": {
-    "title": "ဘတ်ဂျက် အက်ပ်သို့ ကြိုဆိုပါတယ်",
-    "subtitle": "သင်၏ ပထမဆုံး ငွေလွှဲကို ထည့်ရန် သို့မဟုတ် ဘဏ်မှ ဒေတာသွင်းယူရန် စတင်ပါ"
+  "aiColumnMapper": {
+    "analyzing": "Analyzing CSV structure with AI...",
+    "buttons": {
+      "apply": "Apply Mappings & Import",
+      "cancel": "Cancel"
+    },
+    "closeModal": "Close modal",
+    "columnMappings": "Column Mappings",
+    "columnTypes": {
+      "amount": "Amount",
+      "balance": "Balance",
+      "credit": "Credit",
+      "date": "Date",
+      "debit": "Debit",
+      "description": "Description",
+      "ignore": "Ignore"
+    },
+    "confidence": {
+      "analyzed": "AI analyzed {columnCount} columns and {rowCount} sample rows",
+      "title": "Detection Confidence"
+    },
+    "preview": {
+      "amount": "Amount",
+      "date": "Date",
+      "description": "Description",
+      "title": "Transaction Preview"
+    },
+    "samples": "Samples:",
+    "saveConfig": {
+      "hint": "Next time you import from this bank, mappings will be automatic",
+      "label": "Save this bank configuration for future imports",
+      "placeholder": "Enter bank name (e.g., My Local Credit Union)"
+    },
+    "subtitle": "Review AI-detected columns and adjust if needed",
+    "title": "AI Column Mapping Wizard"
+  },
+  "bulkActions": {
+    "applyTo": "Apply to {count}",
+    "categorize": "Categorize",
+    "clearSelection": "Clear selection",
+    "confirmDelete": "Delete {count, plural, =1 {1 transaction} other {# transactions}}?",
+    "delete": "Delete",
+    "deleteWarning": "This action cannot be undone.",
+    "export": "Export",
+    "noSubcategory": "No subcategory",
+    "selectAll": "Select all",
+    "selectCategory": "Select category...",
+    "selected": "{count} selected"
+  },
+  "chatbot": {
+    "buttons": {
+      "clearHistory": "Clear chat history",
+      "exportConversation": "Export conversation",
+      "send": "Send"
+    },
+    "disabled": {
+      "description": "Enable the chatbot in Settings → Privacy → Budget Chatbot to get started.",
+      "enableButton": "Enable Chatbot",
+      "title": "Chatbot Disabled"
+    },
+    "emptyState": {
+      "description": "Ask me anything about your finances. Here are some examples:",
+      "examples": {
+        "balance": "What's my total account balance?",
+        "budget": "Am I over budget in any categories?",
+        "groceries": "Show me my recent grocery purchases",
+        "spending": "How much did I spend this month?"
+      },
+      "title": "Start a Conversation"
+    },
+    "header": {
+      "subtitle": "Ask me about your finances",
+      "title": "Budget Assistant"
+    },
+    "input": {
+      "disclaimer": "Powered by OpenAI GPT-4. Your data is processed securely and not used for training.",
+      "placeholder": "Ask about your finances..."
+    },
+    "messages": {
+      "dataAccessed": "Data accessed:",
+      "error": "Error",
+      "thinking": "Thinking..."
+    }
+  },
+  "chatbotHelp": {
+    "tabs": {
+      "actions": "Actions",
+      "budget": "Budget",
+      "income": "Income",
+      "spending": "Spending",
+      "trends": "Trends"
+    }
+  },
+  "chatbotOptIn": {
+    "buttons": {
+      "decline": "No Thanks",
+      "enable": "Enable Chatbot"
+    },
+    "capabilities": {
+      "actions": "Optionally perform actions like adding transactions or creating budgets",
+      "answer": "Answer questions about your transactions, budgets, and spending patterns",
+      "insights": "Provide insights and recommendations based on your data",
+      "search": "Search your financial data using natural language",
+      "title": "What the Chatbot Can Do"
+    },
+    "closeDialog": "Close chatbot opt-in dialog",
+    "controls": {
+      "dataAccess": {
+        "fullAccess": {
+          "description": "Chatbot can perform actions like adding transactions, creating budgets, and making changes to your data",
+          "title": "Full Access"
+        },
+        "label": "What can the chatbot do with your data?",
+        "readOnly": {
+          "description": "Chatbot can view your data and answer questions, but cannot add, edit, or delete transactions/budgets",
+          "title": "Read-Only (Recommended)"
+        }
+      },
+      "retention": {
+        "days30": "30 days",
+        "days7": "7 days (Recommended)",
+        "forever": "Keep forever",
+        "label": "How long should we keep your conversations?",
+        "note": "Conversations are stored locally in your browser. You can delete them anytime in Settings → Privacy."
+      },
+      "title": "Privacy Controls"
+    },
+    "gdpr": {
+      "notice": "<strong>Your Rights:</strong> By enabling the chatbot, you consent to processing your financial data via OpenAI's API. You can withdraw consent anytime by disabling the chatbot in Settings → Privacy. Your data is processed in accordance with our Privacy Policy and GDPR requirements. You have the right to access, delete, and export your conversation history at any time."
+    },
+    "privacy": {
+      "dataSent": "Financial data is sent to the API to answer your questions",
+      "disable": "You can disable the chatbot anytime in Settings → Privacy",
+      "noTraining": "OpenAI does not use API data to train models (as of their policy)",
+      "processedBy": "Your conversations are processed by OpenAI's GPT-4 API",
+      "title": "Privacy & Data Usage"
+    },
+    "subtitle": "AI-powered financial assistant",
+    "title": "Enable Budget Chatbot?"
+  },
+  "combobox": {
+    "noResults": "No results found.",
+    "search": "Search...",
+    "select": "Select..."
+  },
+  "commandPalette": {
+    "commands": {
+      "addTransaction": "Add Transaction",
+      "budgets": "Budgets",
+      "categories": "Categories",
+      "darkTheme": "Dark Theme",
+      "dashboard": "Dashboard",
+      "exportData": "Export Data",
+      "futurePlans": "Future Plans",
+      "highContrastTheme": "High-Contrast Theme",
+      "importCsv": "Import CSV",
+      "investments": "Investments",
+      "lightTheme": "Light Theme",
+      "loans": "Loans",
+      "newBudget": "New Budget",
+      "reports": "Reports",
+      "retirement": "Retirement",
+      "scanReceipt": "Scan Receipt",
+      "settings": "Settings",
+      "transactions": "Transactions"
+    },
+    "groups": {
+      "appearance": "Appearance",
+      "quickActions": "Quick Actions",
+      "tools": "Tools & Settings",
+      "tracking": "Tracking & Analysis",
+      "wealth": "Wealth & Planning"
+    },
+    "noResults": "No results found.",
+    "placeholder": "Type a command or search..."
   },
   "common": {
-    "save": "သိမ်းမည်",
     "cancel": "မလုပ်တော့ပါ",
     "delete": "ဖျက်မည်",
     "edit": "ပြင်မည်",
-    "loading": "လွှတ်တင်နေသည်..."
+    "loading": "လွှတ်တင်နေသည်...",
+    "save": "သိမ်းမည်"
   },
-  "widget": {
-    "spendingByCategory": {
-      "title": "အမျိုးအစားအလိုက် အသုံးစရိတ်",
-      "description": "သင်၏ ငွေကြေးကို ဘယ်မှာသွားကြောင်း ကြည့်ပါ"
-    },
-    "recentTransactions": {
-      "title": "နောက်ဆုံး ငွေလွှဲများ",
-      "description": "သင်၏ နောက်ဆုံး ငွေကြေး လှုပ်ရှားမှုကို မြန်ဆန်စွာ ကြည့်ပါ"
-    },
-    "budgetProgress": {
-      "title": "ဘတ်ဂျက် တိုးတက်မှု",
-      "description": "သင်၏ ဘတ်ဂျက် ရည်မှန်းချက်များအပေါ် ဘယ်လိုလုပ်ဆောင်နေသည်ကို လိုက်လံကြည့်ပါ"
-    },
-    "accountBalances": {
-      "title": "အကောင့် ဘက်လုံးများ",
-      "description": "သင်၏ အကောင့်များအတွင်း လက်ရှိ ဘက်လုံးများ"
-    },
-    "incomeVsExpenses": {
-      "title": "ဝင်ငွေ နှင့် အသုံးစရိတ်",
-      "description": "သင်၏ ဝင်ငွေများနှင့် အသုံးစရိတ်များကို နှိုင်းယှဉ်ကြည့်ပါ"
-    },
-    "monthlyTrends": {
-      "title": "လစဉ် အထွေထွေ",
-      "description": "လစဉ် သင်၏ ငွေကြေး ပုံစံများကို ကြည့်ပါ"
-    },
-    "upcomingBills": {
-      "title": "လာမည့် ဘီလ်များ",
-      "description": "ဘီလ် အမှတ်တရများဖြင့် ငွေပေးချေမှုကို မလွတ်ပါ"
-    }
+  "dashboardCustomizer": {
+    "alwaysVisible": "Always visible",
+    "ariaLabel": "Customize dashboard layout",
+    "button": "Customize",
+    "description": "Show or hide dashboard widgets. Drag widgets on the dashboard to reorder them.",
+    "reorderDescription": "To change widget order, drag and drop widgets directly on your dashboard. Use your mouse or touch to grab the drag handle (⋮⋮) on each widget card.",
+    "reorderTitle": "Reorder Widgets",
+    "resetButton": "Reset to Defaults",
+    "title": "Customize Dashboard",
+    "toggleVisibility": "Toggle {name} visibility",
+    "widgetVisibility": "Widget Visibility",
+    "widgetsVisible": "{visible} of {total} widgets visible"
   },
-  "tooltip": {
-    "ariaLabel": "ပိုမိုသိရှိရန်",
-    "learnMore": "ပိုမိုသိရှိရန် →"
-  },
-  "footer": {
-    "tagline": "တစ်ကြိမ်တည်း အဆင့်မြှင့်တင်ခြင်းဖြင့် အထူးပြုဘတ်ဂျက်",
-    "links": {
-      "login": "ဝင်မည်",
-      "signup": "စမ်းသပ်မှုစတင်မည်",
-      "upgrade": "အဆင့်မြှင့်တင်မည်",
-      "settings": "ဆက်တင်များ"
-    },
-    "copyright": "© {year} {brandName}"
-  },
-  "dialog": {
-    "confirm": "အတည်ပြုမည်",
-    "cancel": "မလုပ်တော့ပါ",
-    "processing": "လုပ်ဆောင်နေသည်...",
-    "finalConfirmation": "နောက်ဆုံး အတည်ပြုချက်:",
-    "typeToConfirm": "ဤလုပ်ဆောင်မှုကို အတည်ပြုရန် {text} ရိုက်ထည့်ပါ။"
-  },
-  "sidebar": {
-    "appTitle": "ဘတ်ဂျက် အက်ပ်",
-    "appSubtitle": "အထူးပြု ငွေကြေး",
-    "search": "ရှာဖွေရန်...",
-    "shortcuts": "တိုက်ရိုက်လမ်းညွှန်များ",
-    "navigation": {
-      "dashboard": "ဒက်ရှ်ဘုတ်",
-      "transactions": "ငွေလွှဲများ",
-      "scanReceipt": "လက်မှတ်ကို စကန်လုပ်ရန်",
-      "categories": "အမျိုးအစားများ",
-      "budgets": "ဘတ်ဂျက်များ",
-      "subscriptions": "စာရင်းဝင်မှုများ",
-      "loans": "ချေးငွေများ",
-      "investments": "ရင်းနှီးမြှုပ်နှံမှုများ",
-      "futurePlans": "အနာဂတ်အစီအစဉ်များ",
-      "retirement": "အသက်ငြိမ်းချမ်းမှု",
-      "reports": "အစီရင်ခံစာများ"
-    },
-    "actions": {
-      "importCsv": "CSV သွင်းယူရန်",
-      "settings": "ဆက်တင်များ",
-      "showLess": "နည်းနည်းပြပါ",
-      "showAllItems": "အရာအားလုံးပြပါ"
-    }
-  },
-  "onboarding": {
-    "skipTour": "ခရီးစဉ်ကို ကျော်ဖြတ်ပါ",
-    "stepCounter": "အဆင့် {current} မှ {total} အထိ",
-    "dontShowAgain": "ဤခရီးစဉ်ကို ထပ်မပြပါ",
-    "quickTip": "💡 အမြန်အကြံပြုချက်",
-    "navigation": {
-      "previous": "မူရင်း",
-      "next": "နောက်တစ်ခု",
-      "getStarted": "စတင်ပါ",
-      "startTour": "ခရီးစဉ်စတင်ပါ"
-    },
-    "steps": {
-      "welcome": {
-        "title": "👋 ဘတ်ဂျက် အက်ပ်သို့ ကြိုဆိုပါတယ်!",
-        "description": "သင်၏ အိမ်ထောင်ရေး ငွေကြေးကို စီမံရန် အကူအညီပေးရန် အမြန်ခရီးစဉ်တစ်ခုကို လုပ်ဆောင်ပါ။ ဤသည် အချိန်မယူပါ!"
+  "debtAnalysis": {
+    "cards": {
+      "avgRate": {
+        "subtitle": "Weighted average",
+        "title": "Avg Interest Rate"
       },
-      "import": {
-        "title": "📥 သင်၏ ငွေလွှဲများကို သွင်းယူပါ",
-        "description": "CSV ဖိုင်မှ သင်၏ ဘဏ် ငွေလွှဲများကို သွင်းယူရန် စတင်ပါ။ BMO, Home Trust နှင့် အခြားဘဏ်များကို ထောက်ပံ့ပါသည်။ အက်ပ်သည် သင်၏ ငွေလွှဲများကို အလိုအလျောက် အမျိုးအစားသတ်မှတ်ပါမည်!"
+      "debtFreeDate": {
+        "subtitle": "Estimated payoff",
+        "title": "Debt-Free Date"
       },
-      "categorize": {
-        "title": "🏷️ အမျိုးအစားသတ်မှတ်ခြင်းနှင့် အစီအစဉ်",
-        "description": "ငွေလွှဲအမျိုးအစားများကို ပြန်လည်သုံးသပ်ပြီး ပြင်ဆင်ပါ။ ကျွန်ုပ်တို့၏ ဂုဏ်သတ္တိသည် သင်၏ ပြင်ဆင်မှုများမှ သင်ယူပြီး အချိန်နှင့်အမျှ တိုးတက်လာပါသည်။ အများပြားသော ငွေလွှဲများကို တစ်ပြိုင်နက် အမျိုးအစားသတ်မှတ်ရန် အများပြားလုပ်ဆောင်မှုများကို အသုံးပြုပါ!"
+      "monthlyPayment": {
+        "subtitle": "Total monthly obligations",
+        "title": "Monthly Payment"
       },
-      "budgets": {
-        "title": "🎯 သင်၏ ဘတ်ဂျက်များကို သတ်မှတ်ပါ",
-        "description": "အသုံးစရိတ်အမျိုးအစားများအတွက် ဘတ်ဂျက်များကို ဖန်တီးပါ။ လစဉ်အတွင်း သင်၏ တိုးတက်မှုကို လိုက်လံကြည့်ပါ၊ သင်၏ အကန့်အသတ်များကို ရောက်ရှိလာသောအခါ သတိပေးချက်များကို ရယူပါ။"
-      },
-      "reports": {
-        "title": "📊 အစီရင်ခံစာများနှင့် အမြင်များကို ကြည့်ပါ",
-        "description": "သင်၏ အသုံးစရိတ်ပုံစံများကို မြင်ကွင်းဖျက်ပြီး သင်၏ အမြတ်နှင့် အမြတ်ကို လိုက်လံကြည့်ပါ။ သင်၏ ဒက်ရှ်ဘုတ်သည် ငွေလွှဲတိုင်းနှင့်အတူ အလိုအလျောက် အပ်ဒိတ်လုပ်ပါသည်!"
+      "totalDebt": {
+        "subtitle": "Across {count} active loans",
+        "title": "Total Debt"
       }
     },
-    "tips": {
-      "import": "သင်၏ CSV ဖိုင်ကို ဆွဲထုတ်ပြီး သို့မဟုတ် ရွေးချယ်ရန် နှိပ်ပါ။ BMO နှင့် Home Trust ဖော်မတ်များကို အလိုအလျောက် ရှာဖွေပါ!",
-      "categorize": "အမြန်အမျိုးအစားသတ်မှတ်ခြင်းခလုတ်ကို အသုံးပြုပါ သို့မဟုတ် အများပြားသော ငွေလွှဲများကို ရွေးချယ်ပါ။",
-      "budgets": "သင်၏ ဘတ်ဂျက်များကို အမှန်တကယ် သတ်မှတ်ပါ၊ သင် အလွန်ကျော်လွှားရန် ရောက်ရှိလာပါက သတိပေးပါ။"
+    "charts": {
+      "byType": {
+        "description": "Distribution of debt across loan types",
+        "title": "Debt by Type"
+      },
+      "projection": {
+        "description": "Expected debt reduction over the next year",
+        "expectedReduction": "Expected reduction: {amount} over 12 months",
+        "title": "12-Month Payoff Projection"
+      }
+    },
+    "comparison": {
+      "description": "Side-by-side comparison of your active loans",
+      "headers": {
+        "balance": "Balance",
+        "interestRate": "Interest Rate",
+        "loan": "Loan",
+        "monthlyPayment": "Monthly Payment",
+        "percentOfTotal": "% of Total Debt"
+      },
+      "title": "Loan Comparison",
+      "total": "Total"
+    },
+    "empty": {
+      "addFirstLoan": "Add Your First Loan",
+      "description": "You don't have any active loans. Add a loan to see debt analytics.",
+      "title": "No Debt to Analyze"
+    },
+    "subtitle": "Comprehensive view of your loans and obligations",
+    "title": "Debt Analysis",
+    "viewAllLoans": "View All Loans"
+  },
+  "dialog": {
+    "cancel": "မလုပ်တော့ပါ",
+    "confirm": "အတည်ပြုမည်",
+    "finalConfirmation": "နောက်ဆုံး အတည်ပြုချက်:",
+    "processing": "လုပ်ဆောင်နေသည်...",
+    "typeToConfirm": "ဤလုပ်ဆောင်မှုကို အတည်ပြုရန် {text} ရိုက်ထည့်ပါ။"
+  },
+  "draggableWidget": {
+    "dragToReorder": "Drag to reorder widget"
+  },
+  "emptyStates": {
+    "budgets": {
+      "description": "Create budgets to track spending in different categories and achieve your financial goals.",
+      "heading": "No Budgets Created",
+      "primaryCta": "Create Your First Budget"
+    },
+    "categories": {
+      "description": "Create custom categories to organize your transactions beyond the default ones.",
+      "heading": "No Custom Categories",
+      "primaryCta": "Add Category"
+    },
+    "dashboard": {
+      "description": "Get started by importing your bank transactions or adding accounts manually to see your financial overview.",
+      "heading": "Welcome to Your Budget App!",
+      "primaryCta": "Import CSV",
+      "secondaryCta": "Add Transaction"
+    },
+    "futurePlans": {
+      "description": "Set financial goals like buying a house, saving for education, or planning a vacation.",
+      "heading": "No Future Plans",
+      "primaryCta": "Create a Goal"
+    },
+    "investments": {
+      "description": "Track your investment accounts and holdings to monitor portfolio performance and net worth.",
+      "heading": "No Investments Tracked",
+      "primaryCta": "Add Investment Account"
+    },
+    "loans": {
+      "description": "Track your loans, mortgages, and debts to visualize payoff progress and plan payments.",
+      "heading": "No Loans Tracked",
+      "primaryCta": "Add Your First Loan"
+    },
+    "reports": {
+      "description": "Add transactions and budgets to generate insightful reports about your spending patterns and trends.",
+      "heading": "No Data to Report",
+      "primaryCta": "Add Transactions",
+      "secondaryCta": "Import CSV"
+    },
+    "retirement": {
+      "description": "Plan for retirement by tracking accounts, estimating needs, and visualizing your retirement timeline.",
+      "heading": "No Retirement Plans",
+      "primaryCta": "Start Planning"
+    },
+    "transactions": {
+      "description": "Start tracking your spending by adding your first transaction. You can add manually or import from a CSV file.",
+      "heading": "No Transactions Yet",
+      "primaryCta": "Add Transaction",
+      "secondaryCta": "Import CSV"
     }
   },
+  "errorRecovery": {
+    "aiAnalysis": "AI Analysis:",
+    "closeModal": "Close modal",
+    "footer": {
+      "close": "Close",
+      "needHelp": "Need more help?",
+      "viewGuide": "View troubleshooting guide"
+    },
+    "recovery": {
+      "canRecover": "Good news! We found {count} {count, plural, =1 {way} other {ways}} to recover from this error.",
+      "cannotRecover": "Recovery not possible. You'll need to re-export the file from your bank or try a different format.",
+      "optionsTitle": "Recovery Options"
+    },
+    "subtitle": "Don't worry! We can help you fix this.",
+    "suggestions": {
+      "autoFix": "AUTO-FIX",
+      "autoFixButton": "Auto-Fix",
+      "confidence": "{percent}% confidence",
+      "fixing": "Fixing...",
+      "learnMore": "Learn More",
+      "technicalDetails": "Technical Details"
+    },
+    "summary": {
+      "category": "Category: {category}",
+      "title": "Error Summary"
+    },
+    "technical": {
+      "canRecover": "Can Recover:",
+      "errorCategory": "Error Category:",
+      "no": "No",
+      "severity": "Severity:",
+      "suggestions": "Suggestions:",
+      "title": "Advanced Technical Details",
+      "yes": "Yes"
+    },
+    "title": "Import Failed"
+  },
+  "exportDialog": {
+    "buttons": {
+      "cancel": "Cancel",
+      "done": "Done!",
+      "download": "Download",
+      "export": "Export Data"
+    },
+    "complete": {
+      "download": "Your file is ready to download",
+      "success": "Export complete! Check your downloads folder."
+    },
+    "dataSummary": {
+      "accounts": "Accounts",
+      "estimatedSize": "Est. Size",
+      "title": "Data Summary",
+      "transactions": "Transactions"
+    },
+    "exporting": {
+      "pleaseWait": "Please wait, this may take a moment",
+      "title": "Exporting..."
+    },
+    "format": {
+      "budget": {
+        "description": "Complete backup including all data",
+        "label": ".budget file"
+      },
+      "csv": {
+        "description": "Spreadsheet-compatible format",
+        "label": "CSV file"
+      },
+      "json": {
+        "description": "Developer-friendly format",
+        "label": "JSON file"
+      },
+      "label": "Export Format"
+    },
+    "options": {
+      "encrypt": {
+        "description": "Protect your data with AES-256 encryption",
+        "label": "Encrypt with Password"
+      },
+      "includeReceipts": {
+        "description": "Attach receipt images (increases file size)",
+        "label": "Include Receipts"
+      }
+    },
+    "password": {
+      "confirm": "Confirm Password",
+      "confirmPlaceholder": "Confirm password",
+      "hint": "Password Hint (Optional)",
+      "hintNote": "This hint will be stored unencrypted in the file",
+      "hintPlaceholder": "A hint to help you remember",
+      "label": "Password",
+      "minLength": "Password must be at least 8 characters",
+      "mismatch": "Passwords do not match",
+      "placeholder": "Enter password (min 8 characters)",
+      "required": "Password is required for encryption"
+    },
+    "subtitle": "Download your budget data",
+    "title": "Export Data"
+  },
+  "filters": {
+    "account": "Account",
+    "allAccounts": "All accounts",
+    "allCategories": "All categories",
+    "allTypes": "All types",
+    "apply": "Apply filters",
+    "category": "Category",
+    "clearFilters": "Clear filters",
+    "dateRange": "Date range",
+    "expense": "Expense",
+    "income": "Income",
+    "search": "Search transactions...",
+    "type": "Type"
+  },
+  "footer": {
+    "copyright": "© {year} {brandName}",
+    "links": {
+      "login": "ဝင်မည်",
+      "settings": "ဆက်တင်များ",
+      "signup": "စမ်းသပ်မှုစတင်မည်",
+      "upgrade": "အဆင့်မြှင့်တင်မည်"
+    },
+    "tagline": "တစ်ကြိမ်တည်း အဆင့်မြှင့်တင်ခြင်းဖြင့် အထူးပြုဘတ်ဂျက်"
+  },
+  "healthScore": {
+    "ariaLabel": "Financial Health Score: {score} out of 100. {interpretation}",
+    "emptyState": {
+      "line1": "Add transactions to see your",
+      "line2": "Financial Health Score"
+    },
+    "grade": "Grade: {grade}",
+    "missingFactors": "{count, plural, =1 {1 factor missing} other {# factors missing}}",
+    "title": "Financial Health"
+  },
+  "importDialog": {
+    "buttons": {
+      "back": "Back",
+      "cancel": "Cancel",
+      "done": "Done",
+      "import": "Import Data"
+    },
+    "complete": {
+      "itemsImported": "{count} items imported successfully",
+      "success": "Import Complete!",
+      "withIssues": "Import Completed with Issues"
+    },
+    "conflicts": {
+      "existing": "{count} existing",
+      "handleLabel": "Handle Conflicts",
+      "overwrite": {
+        "description": "Replace with imported",
+        "label": "Overwrite"
+      },
+      "rename": {
+        "description": "Import as new entries",
+        "label": "Create new"
+      },
+      "skip": {
+        "description": "Keep current data",
+        "label": "Skip existing"
+      },
+      "title": "Conflicts Found"
+    },
+    "encryption": {
+      "decrypt": "Decrypt & Continue",
+      "encrypted": "This file is encrypted",
+      "enterPassword": "Enter password",
+      "hint": "Hint: {hint}",
+      "password": "Password"
+    },
+    "importing": {
+      "pleaseWait": "Please wait, this may take a moment",
+      "title": "Importing your data..."
+    },
+    "preview": {
+      "dataToImport": "Data to Import",
+      "exported": "Exported",
+      "fileInfo": "File Information",
+      "version": "Version"
+    },
+    "selectFile": {
+      "dragDrop": "or drag and drop here",
+      "label": "Click to select a .budget file"
+    },
+    "subtitle": "Restore from .budget file",
+    "title": "Import Data"
+  },
+  "investmentAccountModal": {
+    "buttons": {
+      "cancel": "Cancel",
+      "create": "Create Account",
+      "saving": "Saving...",
+      "update": "Update Account"
+    },
+    "closeModal": "Close modal",
+    "errors": {
+      "saveFailed": "Failed to save account"
+    },
+    "fields": {
+      "accountNumber": {
+        "label": "Account Number (Optional)",
+        "placeholder": "e.g., Last 4 digits: 1234"
+      },
+      "institution": {
+        "label": "Financial Institution (Optional)",
+        "placeholder": "e.g., Questrade, Wealthsimple, TD Direct"
+      },
+      "name": {
+        "label": "Account Name",
+        "placeholder": "e.g., My RRSP, TFSA Savings, Company Stock"
+      },
+      "type": {
+        "descriptions": {
+          "Company shares": "Employee stock purchase or stock options",
+          "Non-registered": "Taxable investment account",
+          "RRSP": "Registered Retirement Savings Plan - Tax-deferred growth",
+          "TFSA": "Tax-Free Savings Account - Tax-free growth and withdrawals"
+        },
+        "label": "Account Type"
+      }
+    },
+    "title": {
+      "add": "Add Investment Account",
+      "edit": "Edit Investment Account"
+    },
+    "validation": {
+      "nameRequired": "Please enter an account name"
+    }
+  },
+  "investmentCharts": {
+    "emptyState": "No holdings to visualize. Add holdings to see charts.",
+    "legend": {
+      "gain": "Gain",
+      "loss": "Loss"
+    },
+    "tableHeaders": {
+      "allocation": "Allocation",
+      "costBasis": "Cost Basis",
+      "currentValue": "Current Value",
+      "gainLoss": "Gain/Loss",
+      "percentReturn": "% Return",
+      "symbol": "Symbol",
+      "total": "Total"
+    },
+    "titles": {
+      "accountTypeAllocation": "Allocation by Account Type",
+      "gainLoss": "Gain/Loss by Holding",
+      "performanceSummary": "Performance Summary",
+      "portfolioAllocation": "Portfolio Allocation by Holding"
+    },
+    "tooltip": {
+      "costBasis": "Cost Basis",
+      "currentValue": "Current Value",
+      "percentOfPortfolio": "{percent}% of portfolio"
+    }
+  },
+  "lanSync": {
+    "description": "Sync your budget data across devices on your local network",
+    "device": {
+      "connect": "Connect",
+      "connected": "Connected",
+      "disconnect": "Disconnect",
+      "removeDevice": "Remove Device",
+      "sync": "Sync",
+      "syncing": "Syncing..."
+    },
+    "disabled": "Disabled",
+    "enabled": "Enabled",
+    "howItWorks": {
+      "step1": {
+        "description": "Scan a QR code or enter connection details to pair devices on the same network",
+        "title": "Pair Devices"
+      },
+      "step2": {
+        "description": "Data is encrypted end-to-end and syncs directly between devices - no cloud required",
+        "title": "Sync Securely"
+      },
+      "step3": {
+        "description": "Changes sync automatically when devices are connected on the same network",
+        "title": "Automatic Updates"
+      },
+      "title": "How LAN Sync Works"
+    },
+    "pairedDevices": {
+      "addDevice": "Add Device",
+      "addFirstDevice": "Add Your First Device",
+      "deviceCount": "{count, plural, =1 {1 device paired} other {# devices paired}}",
+      "emptyDescription": "Pair a device to start syncing your budget data",
+      "emptyTitle": "No devices paired",
+      "noDevices": "No devices paired yet",
+      "title": "Paired Devices"
+    },
+    "removeDialog": {
+      "cancel": "Cancel",
+      "description": "Are you sure you want to remove \"{deviceName}\"? This will unpair the device and you'll need to pair again to sync data.",
+      "remove": "Remove",
+      "title": "Remove Device"
+    },
+    "syncAll": "Sync All",
+    "time": {
+      "daysAgo": "{count, plural, =1 {1 day ago} other {# days ago}}",
+      "hoursAgo": "{count, plural, =1 {1 hour ago} other {# hours ago}}",
+      "justNow": "Just now",
+      "lastSync": "Last sync: {time}",
+      "minutesAgo": "{count, plural, =1 {1 minute ago} other {# minutes ago}}",
+      "neverSynced": "Never synced"
+    },
+    "title": "LAN Sync"
+  },
   "landing": {
+    "accessibility": {
+      "badges": {
+        "keyboardFirst": "ကီးဘုတ်-ပထမ",
+        "largeTouchTargets": "ကြီးမားသော အထိတွေ့မှုများ",
+        "seniorsMode": "အထူးပြု အသက်ကြီးများ"
+      },
+      "buttons": {
+        "openApp": "အက်ပ်ကို ဖွင့်ပါ",
+        "settings": "ရောက်ရှိမှုဆက်တင်များ"
+      },
+      "description": "အထူးပြု အသက်ကြီးများသည် ရိုးရှင်းသော navigation နှင့် ကြီးမားသော အထိတွေ့မှုများကို ပေးသည်။ ကီးဘုတ်တိုက်ရိုက်လမ်းညွှန်များ၊ အာရုံစိုက်မှုအခြေအနေများနှင့် ရှင်းလင်းသော ကွန်ထရိုက်များသည် လူတိုင်းကို မြန်ဆန်စွာ လှုပ်ရှားနိုင်စေသည်။",
+      "title": "အခြေခံအားဖြင့် ရောက်ရှိနိုင်သည်"
+    },
     "brand": {
       "name": "BudgetPro",
       "product": "ဘတ်ဂျက် အက်ပ်"
     },
-    "hero": {
-      "badge": "သိမ်းဆည်းမှု-ပထမ • ဒေသခံ-သာ • အချက်အလက်မထောက်လှမ်းပါ",
-      "headline": "သင်၏ ငွေကြေးကို အချက်အလက်မရောင်းချဘဲ ထိန်းချုပ်ပါ။",
-      "subhead": "စာရင်းဇယား၏ အင်အား။ အက်ပ်၏ ရိုးရှင်းမှု။ သင်၏ ဒေတာသည် သင်၏ ကိရိယာမှ မထွက်သွားမည်မဟုတ်သော ဘတ်ဂျက် အက်ပ်တစ်ခုဖြင့် ငွေကြေးရှင်းလင်းမှုကို ခံစားပါ။",
-      "primaryCta": {
-        "label": "ဒေသခံ ပရိုတိုကော (အခမဲ့)",
-        "href": "/budget-app/auth/signup"
-      },
-      "secondaryCta": {
-        "label": "ဝင်မည်",
-        "href": "/budget-app/auth/login"
-      },
-      "finePrint": "ဘဏ်အချက်အလက်များမလိုအပ်ပါ။ ဒေသခံ အဆင့်တွင် အကောင့်မလိုအပ်ပါ။"
-    },
-    "trust": {
-      "0": {
-        "title": "သင်၏ ကိရိယာ၊ သင်၏ ဒေတာ",
-        "description": "ဒေတာသည် သင်၏ ဘရောက်ဇာ၏ IndexedDB တွင် ရှိပါသည်။ ကျွန်ုပ်တို့သည် အမှန်တကယ် မမြင်နိုင်ပါ။"
-      },
-      "1": {
-        "title": "စာရင်းဇယား အင်အား",
-        "description": "အများပြားပြင်ဆင်၊ ပြောင်းလဲပြီး ပရိုအဖြစ် အဆင်ပြေစွာ ချိန်ညှိပါ။"
-      },
-      "2": {
-        "title": "အော့ဖ်လိုင်း အမြန်နှုန်း",
-        "description": "သံလိုက်မရှိ။ တောင်ထိပ်တွင် သို့မဟုတ် စတုရန်းလမ်းကြောင်းတွင် အလုပ်လုပ်ပါ။"
-      },
-      "3": {
-        "title": "လက်မှတ် အစီအစဉ်များ",
-        "description": "သင်၏ ငွေကြေး ပြန်လည်သုံးသပ်မှုကို စိတ်ချမ်းသာစေသော အကျင့်တစ်ခုဖြစ်စေပါသည်။"
-      }
-    },
-    "outcomes": {
-      "0": {
-        "title": "စုစုပေါင်း အခြေအနေများကို ရပ်တည်ပါ",
-        "description": "ချိုးဖျက်မှုများ သို့မဟုတ် ပြန်လည်အတည်ပြုမှုများ မရှိတော့ပါ။ သင်သည် ဒေတာထည့်သွင်းမှုကို ထိန်းချုပ်ပါ။"
-      },
-      "1": {
-        "title": "ဒီဇိုင်းအရ သာမန်အချက်အလက်",
-        "description": "ကျွန်ုပ်တို့သည် သင်၏ ဒေတာကို ရောင်းချမည်မဟုတ်ပါ၊ အကြောင်းမရှိပါ။"
-      },
-      "2": {
-        "title": "အနာဂတ်-သက်သာစွာ စီမံခန့်ခွဲခြင်း",
-        "description": "အသက်ငြိမ်းချမ်းမှု၊ ချေးငွေများနှင့် စုဆောင်းမှု ရည်မှန်းချက်များကို တစ်ခုတည်းသော ပုံစံတွင် မော်ဒယ်ပြုပါ။"
-      },
-      "3": {
-        "title": "စာရင်းဝင်မှုကို ဖျက်ပါ",
-        "description": "အခြားအက်ပ်များမှ လွတ်မြောက်သော သင်၏ ငွေကြေးကို သတိပြုပါ။"
-      }
-    },
-    "features": {
-      "0": {
-        "title": "ဒေသခံ ဒက်ရှ်ဘုတ်",
-        "description": "အမြတ်၊ ငွေကြေးလှုပ်ရှားမှုနှင့် အမျိုးအစားခွဲခြမ်းစိတ်ဖြာမှု။ အမြန်လွှတ်တင်ချိန်များ။",
-        "href": "/budget-app"
-      },
-      "1": {
-        "title": "သွင်းယူမှု ဗျူဟာ",
-        "description": "BMO, Home Trust နှင့် အထူးပြု ဖော်မတ်များအတွက် အမြန် CSV မက်ပာ။",
-        "href": "/budget-app/import"
-      },
-      "2": {
-        "title": "လက်မှတ် OCR",
-        "description": "Tesseract.js ဖြင့် ဒေသခံအဆင့်တွင် လက်မှတ်များကို စကန်လုပ်ပါ။ မိုးလေဝသကို မလိုအပ်ပါ။",
-        "href": "/budget-app/ocr"
-      },
-      "3": {
-        "title": "အမျိုးအစား ဘတ်ဂျက်များ",
-        "description": "သိမ်းဆည်းခြင်း သို့မဟုတ် ပြန်လည်သုံးသပ်ခြင်းဖြင့် အမျိုးအစားထိန်းချုပ်မှု။",
-        "href": "/budget-app/budgets"
-      },
-      "4": {
-        "title": "အသက်ငြိမ်းချမ်းမှု ကိန်းဂဏန်း",
-        "description": "သင်၏ လွတ်လပ်မှုနေ့ကို အထူးပြု အမြတ်အတွက် အမြင်များဖြင့် မော်ဒယ်ပြုပါ။",
-        "href": "/budget-app/planning/retirement"
-      },
-      "5": {
-        "title": "သိမ်းဆည်းမှု ကာကွယ်မှု",
-        "description": "အပိုင်းအခြားလုံခြုံမှုအတွက် အပိုင်းအခြားလုံခြုံမှုအတွက် လိုအပ်သော ကာကွယ်မှုအဆင့်။",
-        "href": "/budget-app/settings"
-      }
-    },
-    "howItWorks": {
-      "0": {
-        "title": "သွင်းယူရန်",
-        "description": "CSV များကို ဆွဲထုတ်ပြီး သို့မဟုတ် လက်မှတ်များကို စကန်လုပ်ပါ။ AI သည် အကွက်များကို ဒေသခံအဆင့်တွင် မက်ပာလုပ်ပါ။"
-      },
-      "1": {
-        "title": "ပြန်လည်သုံးသပ်ရန်",
-        "description": "အမြန်အမျိုးအစားသတ်မှတ်ခြင်းနှင့် အများပြားလုပ်ဆောင်မှုများဖြင့် မြန်ဆန်စွာ ပြန်လည်သုံးသပ်ပါ။"
-      },
-      "2": {
-        "title": "စီမံရန်",
-        "description": "ငွေတစ်ခုချင်းစီကို အလုပ်အကိုင်သတ်မှတ်ပြီး သင်၏ အမြတ်ကို ကြိုတင်ခန့်မှန်းပါ။"
-      }
-    },
-    "pricing": {
-      "eyebrow": "သင့်လျော်သော စျေးနှုန်း",
-      "title": "ဒေသခံသည် အခမဲ့ဖြစ်သည်။ စင်ကာပူသည် ပရိုဖြစ်သည်။",
-      "description": "သင်၏ အထူးပြု ဒေသခံ ပရိုတိုကောဖြင့် စတင်ပါ။ မလိုအပ်ပါက အဆင့်မြှင့်တင်ပါ။",
-      "priceLabel": "အခမဲ့ အမြဲ",
-      "cta": {
-        "label": "ဒေသခံ ပရိုတိုကော စတင်ပါ",
-        "href": "/budget-app/auth/signup"
-      },
-      "secondary": {
-        "label": "ပရို အင်္ဂါရပ်များကို ကြည့်ပါ",
-        "href": "#pricing"
-      },
-      "guarantee": "ဒေသခံ ပရိုတိုကောအတွက် ဘဏ်ကဒ်မလိုအပ်ပါ။"
-    },
-    "faq": {
-      "0": {
-        "q": "သင့်ဒေတာသည် အမှန်တကယ် သီးသန့်ပါသလား?",
-        "a": "ဟုတ်ပါတယ်။ ဒေသခံ ပရိုတိုကောတွင် ဒေတာသည် သင်၏ ကိရိယာမှ မထွက်သွားပါ။ ၎င်းသည် သင်၏ ဘရောက်ဇာအတွင်း IndexedDB တွင် ရှိပါသည်။"
-      },
-      "1": {
-        "q": "သင့်ဒေတာကို ဘယ်လို ကူးယူမလဲ?",
-        "a": "သင်သည် အချိန်မရွေး အပြည့်အစုံ JSON ကူးယူမှုကို ထုတ်ယူနိုင်သည်။ ကျွန်ုပ်တို့သည် ပုံမှန် CSV ထုတ်ယူမှုများကိုလည်း အကြံပြုပါသည်။"
-      },
-      "2": {
-        "q": "'Sync' Pro ဆိုတာ ဘာလဲ?",
-        "a": "မကြာမီ: အခြားကိရိယာများအကြား အချက်အလက်များကို အင်္ဂါရပ်များကို ချိတ်ဆက်ရန် လိုအပ်သော စာရင်းဝင်မှု။"
-      },
-      "3": {
-        "q": "သင်သည် ဘဏ်များနှင့် ချိတ်ဆက်ပါသလား?",
-        "a": "မဟုတ်ပါ။ ကျွန်ုပ်တို့သည် လက်မှတ်သွင်းယူမှုသည် ပိုမိုလုံခြုံ၊ ယုံကြည်စိတ်ချရပြီး ငွေကြေးသိမြင်မှုကို ပိုမိုကောင်းမွန်စေသည်ဟု ယူဆပါသည်။"
-      }
-    },
-    "security": {
-      "title": "ဒီဇိုင်းအရ သီးသန့်",
-      "description": "ဘတ်ဂျက် အက်ပ်သည် သင့်ဒေတာကို ဒေသခံအဆင့်တွင် (အော့ဖ်လိုင်း-သင့်လျော်) သိမ်းဆည်းပြီး AI အင်္ဂါရပ်များ၊ ထုတ်ယူမှုနှင့် ဖျက်ခြင်းအတွက် ထိန်းချုပ်မှုများကို ပေးသည်။",
-      "buttons": {
-        "privacy": "သီးသန့်နှင့် ဆက်တင်များ",
-        "offline": "အော့ဖ်လိုင်း ထောက်ပံ့မှု"
-      },
-      "cards": {
-        "localStorage": {
-          "title": "ဒေသခံ သိမ်းဆည်းမှု",
-          "description": "သင့်ဘတ်ဂျက်ဒေတာသည် သင့်ဘရောက်ဇာ (IndexedDB) တွင် သိမ်းဆည်းထားပြီး အက်ပ်သည် အမြန်နှင့် အော့ဖ်လိုင်းတွင် အသုံးပြုနိုင်စေသည်။"
-        },
-        "encryption": {
-          "title": "ကာကွယ်မှု ထောက်ပံ့မှု",
-          "description": "အက်ပ်သည် လုံခြုံမှုအဆင့်တစ်ခုအတွက် အချက်အလက်များကို ကာကွယ်ရန် ကာကွယ်မှုအဆင့်တစ်ခုကို ထည့်သွင်းထားသည်။"
-        },
-        "aiControls": {
-          "title": "AI အင်္ဂါရပ် ထိန်းချုပ်မှုများ",
-          "description": "AI-အခြေခံ အင်္ဂါရပ်များ (အမှားသိရှိမှုကဲ့သို့) ကို အပြောင်းအလဲလုပ်ပါ၊ ဆက်တင်များမှ chatbot ဝင်ရောက်မှုကို စီမံပါ။"
-        },
-        "exportDelete": {
-          "title": "ထုတ်ယူခြင်းနှင့် ဖျက်ခြင်း",
-          "description": "သင့်ဒေတာနှင့် သီးသန့်ဆက်တင်များကို ထုတ်ယူပါ၊ သို့မဟုတ် အက်ပ်မှ ဒေသခံဒေတာကို တိုက်ရိုက် ဖျက်ပါ။"
-        }
-      }
-    },
     "comparison": {
-      "headers": {
-        "feature": "အင်္ဂါရပ်",
-        "local": "BudgetPro ဒေသခံ",
-        "sync": "BudgetPro Sync (Pro)",
-        "cloud": "ပုံမှန် Cloud အက်ပ်"
-      },
-      "dataPrivacy": {
-        "feature": "ဒေတာ သီးသန့်မှု",
-        "local": "100% သီးသန့် (ဒေသခံ)",
-        "sync": "အဆုံးမှ အဆုံး ကာကွယ်မှု",
-        "cloud": "ဝန်ထမ်းများမှ ကြည့်ရှုနိုင်သည်"
+      "bankConnections": {
+        "cloud": "အထူးသတ်မှတ်ချက်",
+        "feature": "ဘဏ် ချိတ်ဆက်မှုများ",
+        "local": "CSV / လက်မှတ်သာ",
+        "sync": "ရွေးချယ်နိုင်သော (ကာကွယ်မှု)"
       },
       "cost": {
+        "cloud": "$100+/နှစ် စာရင်းဝင်မှု",
         "feature": "စျေးနှုန်း",
         "local": "အခမဲ့ အမြဲ",
-        "sync": "တစ်ကြိမ်တည်း အဆင့်မြှင့်တင်မှု",
-        "cloud": "$100+/နှစ် စာရင်းဝင်မှု"
+        "sync": "တစ်ကြိမ်တည်း အဆင့်မြှင့်တင်မှု"
+      },
+      "dataPrivacy": {
+        "cloud": "ဝန်ထမ်းများမှ ကြည့်ရှုနိုင်သည်",
+        "feature": "ဒေတာ သီးသန့်မှု",
+        "local": "100% သီးသန့် (ဒေသခံ)",
+        "sync": "အဆုံးမှ အဆုံး ကာကွယ်မှု"
+      },
+      "headers": {
+        "cloud": "ပုံမှန် Cloud အက်ပ်",
+        "feature": "အင်္ဂါရပ်",
+        "local": "BudgetPro ဒေသခံ",
+        "sync": "BudgetPro Sync (Pro)"
       },
       "offlineMode": {
         "feature": "အော့ဖ်လိုင်း အခြေအနေ"
       },
-      "bankConnections": {
-        "feature": "ဘဏ် ချိတ်ဆက်မှုများ",
-        "local": "CSV / လက်မှတ်သာ",
-        "sync": "ရွေးချယ်နိုင်သော (ကာကွယ်မှု)",
-        "cloud": "အထူးသတ်မှတ်ချက်"
-      },
       "storageLocation": {
+        "cloud": "သူတို့၏ ဒေတာဘေ့စ်",
         "feature": "သိမ်းဆည်းမှု အနေအထား",
         "local": "သင်၏ ကိရိယာ",
-        "sync": "Zero-Knowledge Cloud",
-        "cloud": "သူတို့၏ ဒေတာဘေ့စ်"
+        "sync": "Zero-Knowledge Cloud"
       }
     },
-    "socialProof": {
-      "title": "အထူးပြု အဆင့်မြှင့်တင်မှု၊ အဆင့်မြှင့်တင်ထားသည်",
-      "description": "ဘတ်ဂျက်ကို အောင်မြင်စေသော အသေးစိတ်များ: onboarding, shortcuts, mobile navigation, နှင့် အော့ဖ်လိုင်း-သင့်လျော်မှု။",
-      "features": {
-        "onboarding": {
-          "title": "Onboarding ခရီးစဉ်",
-          "description": "Guided tour သည် အသစ်သော အသုံးပြုသူများကို အမြန်တန်ဖိုးရရှိရန် ကူညီသည်။"
-        },
-        "shortcuts": {
-          "title": "ကီးဘုတ်တိုက်ရိုက်လမ်းညွှန်များ",
-          "description": "UI တွင် ရှာဖွေရန်နှင့် လုပ်ဆောင်မှုတိုက်ရိုက်လမ်းညွှန်များဖြင့် မြန်ဆန်စွာ လှုပ်ရှားပါ။"
-        },
-        "mobileUx": {
-          "title": "မိုဘိုင်း-ပထမ UX",
-          "description": "အောက်ခြေ navigation နှင့် သဘာဝခံစားရသော တုံ့ပြန်မှုများ။"
-        },
-        "pwaInstall": {
-          "title": "PWA တပ်ဆင်ခြင်း",
-          "description": "အက်ပ်အဖြစ် တပ်ဆင်ပြီး အင်တာနက်မရှိသော အခါတွင်လည်း ဆက်လက်လုပ်ဆောင်ပါ။"
-        }
+    "faq": {
+      "0": {
+        "a": "ဟုတ်ပါတယ်။ ဒေသခံ ပရိုတိုကောတွင် ဒေတာသည် သင်၏ ကိရိယာမှ မထွက်သွားပါ။ ၎င်းသည် သင်၏ ဘရောက်ဇာအတွင်း IndexedDB တွင် ရှိပါသည်။",
+        "q": "သင့်ဒေတာသည် အမှန်တကယ် သီးသန့်ပါသလား?"
+      },
+      "1": {
+        "a": "သင်သည် အချိန်မရွေး အပြည့်အစုံ JSON ကူးယူမှုကို ထုတ်ယူနိုင်သည်။ ကျွန်ုပ်တို့သည် ပုံမှန် CSV ထုတ်ယူမှုများကိုလည်း အကြံပြုပါသည်။",
+        "q": "သင့်ဒေတာကို ဘယ်လို ကူးယူမလဲ?"
+      },
+      "2": {
+        "a": "မကြာမီ: အခြားကိရိယာများအကြား အချက်အလက်များကို အင်္ဂါရပ်များကို ချိတ်ဆက်ရန် လိုအပ်သော စာရင်းဝင်မှု။",
+        "q": "'Sync' Pro ဆိုတာ ဘာလဲ?"
+      },
+      "3": {
+        "a": "မဟုတ်ပါ။ ကျွန်ုပ်တို့သည် လက်မှတ်သွင်းယူမှုသည် ပိုမိုလုံခြုံ၊ ယုံကြည်စိတ်ချရပြီး ငွေကြေးသိမြင်မှုကို ပိုမိုကောင်းမွန်စေသည်ဟု ယူဆပါသည်။",
+        "q": "သင်သည် ဘဏ်များနှင့် ချိတ်ဆက်ပါသလား?"
       }
     },
-    "pricingSection": {
-      "recommended": "အကြံပြုထားသည်",
-      "productName": "ဒေသခံ ပရိုတိုကော",
-      "productDescription": "သင့်ကိရိယာတွင် အပြည့်အဝ ဘတ်ဂျက်အတွေ့အကြုံ။",
-      "whyChoose": "ဒေသခံ ပရိုတိုကောကို ဘာကြောင့် ရွေးချယ်မလဲ?",
-      "whyChooseDescription": "ကျွန်ုပ်တို့သည် cloud giants များနှင့် ဘယ်လို အဆင့်မြှင့်တင်ထားသည်ကို ကြည့်ပါ။",
-      "features": "အကန့်အသတ်မရှိသော ငွေလွှဲများ၊ အကောင့်များ၊ ဘတ်ဂျက်များနှင့် အပြည့်အဝ ဒေသခံ အထောက်အထားများပါဝင်သည်။"
+    "faqSection": {
+      "description": "စမ်းသပ်မှုများ၊ စျေးနှုန်းများနှင့် ဝင်ရောက်မှုအကြောင်း ရိုးရှင်းသော အဖြေများ။",
+      "title": "မေးခွန်းများ"
+    },
+    "features": {
+      "0": {
+        "description": "အမြတ်၊ ငွေကြေးလှုပ်ရှားမှုနှင့် အမျိုးအစားခွဲခြမ်းစိတ်ဖြာမှု။ အမြန်လွှတ်တင်ချိန်များ။",
+        "href": "/budget-app",
+        "title": "ဒေသခံ ဒက်ရှ်ဘုတ်"
+      },
+      "1": {
+        "description": "BMO, Home Trust နှင့် အထူးပြု ဖော်မတ်များအတွက် အမြန် CSV မက်ပာ။",
+        "href": "/budget-app/import",
+        "title": "သွင်းယူမှု ဗျူဟာ"
+      },
+      "2": {
+        "description": "Tesseract.js ဖြင့် ဒေသခံအဆင့်တွင် လက်မှတ်များကို စကန်လုပ်ပါ။ မိုးလေဝသကို မလိုအပ်ပါ။",
+        "href": "/budget-app/ocr",
+        "title": "လက်မှတ် OCR"
+      },
+      "3": {
+        "description": "သိမ်းဆည်းခြင်း သို့မဟုတ် ပြန်လည်သုံးသပ်ခြင်းဖြင့် အမျိုးအစားထိန်းချုပ်မှု။",
+        "href": "/budget-app/budgets",
+        "title": "အမျိုးအစား ဘတ်ဂျက်များ"
+      },
+      "4": {
+        "description": "သင်၏ လွတ်လပ်မှုနေ့ကို အထူးပြု အမြတ်အတွက် အမြင်များဖြင့် မော်ဒယ်ပြုပါ။",
+        "href": "/budget-app/planning/retirement",
+        "title": "အသက်ငြိမ်းချမ်းမှု ကိန်းဂဏန်း"
+      },
+      "5": {
+        "description": "အပိုင်းအခြားလုံခြုံမှုအတွက် အပိုင်းအခြားလုံခြုံမှုအတွက် လိုအပ်သော ကာကွယ်မှုအဆင့်။",
+        "href": "/budget-app/settings",
+        "title": "သိမ်းဆည်းမှု ကာကွယ်မှု"
+      }
+    },
+    "featuresDeepDive": {
+      "cta": "အခမဲ့ စမ်းသပ်မှုကို စတင်ပါ",
+      "description": "ချိုးဖျက်မှုများနှင့် အဆင်မပြေမှုများကို ရပ်တည်ပါ။ ခေတ်မီအက်ပ်၏ မြန်နှုန်းနှင့် လက်မှတ်ထိန်းချုပ်မှုကို ရယူပါ။",
+      "explore": "ရှာဖွေပါ",
+      "heading1": "စာရင်းဇယား အင်အား။",
+      "heading2": "အက်ပ် ရိုးရှင်းမှု။"
+    },
+    "hero": {
+      "badge": "သိမ်းဆည်းမှု-ပထမ • ဒေသခံ-သာ • အချက်အလက်မထောက်လှမ်းပါ",
+      "finePrint": "ဘဏ်အချက်အလက်များမလိုအပ်ပါ။ ဒေသခံ အဆင့်တွင် အကောင့်မလိုအပ်ပါ။",
+      "headline": "သင်၏ ငွေကြေးကို အချက်အလက်မရောင်းချဘဲ ထိန်းချုပ်ပါ။",
+      "primaryCta": {
+        "href": "/budget-app/auth/signup",
+        "label": "ဒေသခံ ပရိုတိုကော (အခမဲ့)"
+      },
+      "secondaryCta": {
+        "href": "/budget-app/auth/login",
+        "label": "ဝင်မည်"
+      },
+      "subhead": "စာရင်းဇယား၏ အင်အား။ အက်ပ်၏ ရိုးရှင်းမှု။ သင်၏ ဒေတာသည် သင်၏ ကိရိယာမှ မထွက်သွားမည်မဟုတ်သော ဘတ်ဂျက် အက်ပ်တစ်ခုဖြင့် ငွေကြေးရှင်းလင်းမှုကို ခံစားပါ။"
     },
     "heroSection": {
-      "cta": {
-        "heading": "ရှင်းလင်းမှုအတွက် ဖန်တီးသည်၊ အရှုပ်အရှင်းမဟုတ်ပါ။",
-        "viewPricing": "စျေးနှုန်းကို ကြည့်ပါ"
-      },
       "badges": {
         "noSubscriptions": "စာရင်းဝင်မှုမရှိ",
         "offlineReady": "အော့ဖ်လိုင်း-သင့်လျော်",
         "seniorsMode": "အထူးပြု အသက်ကြီးများ"
       },
-      "preview": {
-        "livePreview": "တိုက်ရိုက် ကြည့်ရှုမှု",
-        "recentTransactions": "နောက်ဆုံး ငွေလွှဲများ",
-        "categoryBudgets": "အမျိုးအစား ဘတ်ဂျက်များ",
-        "recurring": "အကြိမ်ကြိမ်"
+      "cta": {
+        "heading": "ရှင်းလင်းမှုအတွက် ဖန်တီးသည်၊ အရှုပ်အရှင်းမဟုတ်ပါ။",
+        "viewPricing": "စျေးနှုန်းကို ကြည့်ပါ"
       },
       "modes": {
-        "dashboard": "ဒက်ရှ်ဘုတ်",
         "budgets": "ဘတ်ဂျက်များ",
+        "dashboard": "ဒက်ရှ်ဘုတ်",
         "subscriptions": "စာရင်းဝင်မှုများ"
-      }
-    },
-    "featuresDeepDive": {
-      "heading1": "စာရင်းဇယား အင်အား။",
-      "heading2": "အက်ပ် ရိုးရှင်းမှု။",
-      "description": "ချိုးဖျက်မှုများနှင့် အဆင်မပြေမှုများကို ရပ်တည်ပါ။ ခေတ်မီအက်ပ်၏ မြန်နှုန်းနှင့် လက်မှတ်ထိန်းချုပ်မှုကို ရယူပါ။",
-      "cta": "အခမဲ့ စမ်းသပ်မှုကို စတင်ပါ",
-      "explore": "ရှာဖွေပါ"
-    },
-    "accessibility": {
-      "title": "အခြေခံအားဖြင့် ရောက်ရှိနိုင်သည်",
-      "description": "အထူးပြု အသက်ကြီးများသည် ရိုးရှင်းသော navigation နှင့် ကြီးမားသော အထိတွေ့မှုများကို ပေးသည်။ ကီးဘုတ်တိုက်ရိုက်လမ်းညွှန်များ၊ အာရုံစိုက်မှုအခြေအနေများနှင့် ရှင်းလင်းသော ကွန်ထရိုက်များသည် လူတိုင်းကို မြန်ဆန်စွာ လှုပ်ရှားနိုင်စေသည်။",
-      "badges": {
-        "seniorsMode": "အထူးပြု အသက်ကြီးများ",
-        "largeTouchTargets": "ကြီးမားသော အထိတွေ့မှုများ",
-        "keyboardFirst": "ကီးဘုတ်-ပထမ"
       },
-      "buttons": {
-        "openApp": "အက်ပ်ကို ဖွင့်ပါ",
-        "settings": "ရောက်ရှိမှုဆက်တင်များ"
+      "preview": {
+        "categoryBudgets": "အမျိုးအစား ဘတ်ဂျက်များ",
+        "livePreview": "တိုက်ရိုက် ကြည့်ရှုမှု",
+        "recentTransactions": "နောက်ဆုံး ငွေလွှဲများ",
+        "recurring": "အကြိမ်ကြိမ်"
       }
     },
-    "faqSection": {
-      "title": "မေးခွန်းများ",
-      "description": "စမ်းသပ်မှုများ၊ စျေးနှုန်းများနှင့် ဝင်ရောက်မှုအကြောင်း ရိုးရှင်းသော အဖြေများ။"
-    },
-    "outcomesSection": {
-      "title": "အမှန်တကယ် အသက်မွေးဝမ်းကျောင်းအတွက် ဖန်တီးသည်၊ စာရင်းဇယားမဟုတ်ပါ",
-      "description": "ဘတ်ဂျက်အက်ပ်များသည် သင်ကို အလုပ်လုပ်စေသည်။ BudgetPro သည် သင်ကို ထိန်းချုပ်ထားစေပြီး အဆင်ပြေစေဖို့ ဒီဇိုင်းထုတ်ထားသည်။"
+    "howItWorks": {
+      "0": {
+        "description": "CSV များကို ဆွဲထုတ်ပြီး သို့မဟုတ် လက်မှတ်များကို စကန်လုပ်ပါ။ AI သည် အကွက်များကို ဒေသခံအဆင့်တွင် မက်ပာလုပ်ပါ။",
+        "title": "သွင်းယူရန်"
+      },
+      "1": {
+        "description": "အမြန်အမျိုးအစားသတ်မှတ်ခြင်းနှင့် အများပြားလုပ်ဆောင်မှုများဖြင့် မြန်ဆန်စွာ ပြန်လည်သုံးသပ်ပါ။",
+        "title": "ပြန်လည်သုံးသပ်ရန်"
+      },
+      "2": {
+        "description": "ငွေတစ်ခုချင်းစီကို အလုပ်အကိုင်သတ်မှတ်ပြီး သင်၏ အမြတ်ကို ကြိုတင်ခန့်မှန်းပါ။",
+        "title": "စီမံရန်"
+      }
     },
     "howItWorksSection": {
-      "title": "ဒါက ဘယ်လိုလုပ်ဆောင်သလဲ",
-      "description": "ရှင်းလင်းမှုကို မြန်ဆန်စွာ ရယူနိုင်သော လုပ်ငန်းစဉ်၊ ရိုးရှင်းသော စနစ်တစ်ခုတွင် မလှုပ်ရှားပါ။"
-    },
-    "nav": {
-      "tagline": "အထူးပြု ဘတ်ဂျက်"
+      "description": "ရှင်းလင်းမှုကို မြန်ဆန်စွာ ရယူနိုင်သော လုပ်ငန်းစဉ်၊ ရိုးရှင်းသော စနစ်တစ်ခုတွင် မလှုပ်ရှားပါ။",
+      "title": "ဒါက ဘယ်လိုလုပ်ဆောင်သလဲ"
     },
     "marquee": {
       "logos": [
@@ -440,6 +880,814 @@
         "အော့ဖ်လိုင်း",
         "အထူးပြု အသက်ကြီးများ"
       ]
+    },
+    "nav": {
+      "tagline": "အထူးပြု ဘတ်ဂျက်"
+    },
+    "outcomes": {
+      "0": {
+        "description": "ချိုးဖျက်မှုများ သို့မဟုတ် ပြန်လည်အတည်ပြုမှုများ မရှိတော့ပါ။ သင်သည် ဒေတာထည့်သွင်းမှုကို ထိန်းချုပ်ပါ။",
+        "title": "စုစုပေါင်း အခြေအနေများကို ရပ်တည်ပါ"
+      },
+      "1": {
+        "description": "ကျွန်ုပ်တို့သည် သင်၏ ဒေတာကို ရောင်းချမည်မဟုတ်ပါ၊ အကြောင်းမရှိပါ။",
+        "title": "ဒီဇိုင်းအရ သာမန်အချက်အလက်"
+      },
+      "2": {
+        "description": "အသက်ငြိမ်းချမ်းမှု၊ ချေးငွေများနှင့် စုဆောင်းမှု ရည်မှန်းချက်များကို တစ်ခုတည်းသော ပုံစံတွင် မော်ဒယ်ပြုပါ။",
+        "title": "အနာဂတ်-သက်သာစွာ စီမံခန့်ခွဲခြင်း"
+      },
+      "3": {
+        "description": "အခြားအက်ပ်များမှ လွတ်မြောက်သော သင်၏ ငွေကြေးကို သတိပြုပါ။",
+        "title": "စာရင်းဝင်မှုကို ဖျက်ပါ"
+      }
+    },
+    "outcomesSection": {
+      "description": "ဘတ်ဂျက်အက်ပ်များသည် သင်ကို အလုပ်လုပ်စေသည်။ BudgetPro သည် သင်ကို ထိန်းချုပ်ထားစေပြီး အဆင်ပြေစေဖို့ ဒီဇိုင်းထုတ်ထားသည်။",
+      "title": "အမှန်တကယ် အသက်မွေးဝမ်းကျောင်းအတွက် ဖန်တီးသည်၊ စာရင်းဇယားမဟုတ်ပါ"
+    },
+    "pricing": {
+      "cta": {
+        "href": "/budget-app/auth/signup",
+        "label": "ဒေသခံ ပရိုတိုကော စတင်ပါ"
+      },
+      "description": "သင်၏ အထူးပြု ဒေသခံ ပရိုတိုကောဖြင့် စတင်ပါ။ မလိုအပ်ပါက အဆင့်မြှင့်တင်ပါ။",
+      "eyebrow": "သင့်လျော်သော စျေးနှုန်း",
+      "guarantee": "ဒေသခံ ပရိုတိုကောအတွက် ဘဏ်ကဒ်မလိုအပ်ပါ။",
+      "priceLabel": "အခမဲ့ အမြဲ",
+      "secondary": {
+        "href": "#pricing",
+        "label": "ပရို အင်္ဂါရပ်များကို ကြည့်ပါ"
+      },
+      "title": "ဒေသခံသည် အခမဲ့ဖြစ်သည်။ စင်ကာပူသည် ပရိုဖြစ်သည်။"
+    },
+    "pricingSection": {
+      "features": "အကန့်အသတ်မရှိသော ငွေလွှဲများ၊ အကောင့်များ၊ ဘတ်ဂျက်များနှင့် အပြည့်အဝ ဒေသခံ အထောက်အထားများပါဝင်သည်။",
+      "productDescription": "သင့်ကိရိယာတွင် အပြည့်အဝ ဘတ်ဂျက်အတွေ့အကြုံ။",
+      "productName": "ဒေသခံ ပရိုတိုကော",
+      "recommended": "အကြံပြုထားသည်",
+      "whyChoose": "ဒေသခံ ပရိုတိုကောကို ဘာကြောင့် ရွေးချယ်မလဲ?",
+      "whyChooseDescription": "ကျွန်ုပ်တို့သည် cloud giants များနှင့် ဘယ်လို အဆင့်မြှင့်တင်ထားသည်ကို ကြည့်ပါ။"
+    },
+    "security": {
+      "buttons": {
+        "offline": "အော့ဖ်လိုင်း ထောက်ပံ့မှု",
+        "privacy": "သီးသန့်နှင့် ဆက်တင်များ"
+      },
+      "cards": {
+        "aiControls": {
+          "description": "AI-အခြေခံ အင်္ဂါရပ်များ (အမှားသိရှိမှုကဲ့သို့) ကို အပြောင်းအလဲလုပ်ပါ၊ ဆက်တင်များမှ chatbot ဝင်ရောက်မှုကို စီမံပါ။",
+          "title": "AI အင်္ဂါရပ် ထိန်းချုပ်မှုများ"
+        },
+        "encryption": {
+          "description": "အက်ပ်သည် လုံခြုံမှုအဆင့်တစ်ခုအတွက် အချက်အလက်များကို ကာကွယ်ရန် ကာကွယ်မှုအဆင့်တစ်ခုကို ထည့်သွင်းထားသည်။",
+          "title": "ကာကွယ်မှု ထောက်ပံ့မှု"
+        },
+        "exportDelete": {
+          "description": "သင့်ဒေတာနှင့် သီးသန့်ဆက်တင်များကို ထုတ်ယူပါ၊ သို့မဟုတ် အက်ပ်မှ ဒေသခံဒေတာကို တိုက်ရိုက် ဖျက်ပါ။",
+          "title": "ထုတ်ယူခြင်းနှင့် ဖျက်ခြင်း"
+        },
+        "localStorage": {
+          "description": "သင့်ဘတ်ဂျက်ဒေတာသည် သင့်ဘရောက်ဇာ (IndexedDB) တွင် သိမ်းဆည်းထားပြီး အက်ပ်သည် အမြန်နှင့် အော့ဖ်လိုင်းတွင် အသုံးပြုနိုင်စေသည်။",
+          "title": "ဒေသခံ သိမ်းဆည်းမှု"
+        }
+      },
+      "description": "ဘတ်ဂျက် အက်ပ်သည် သင့်ဒေတာကို ဒေသခံအဆင့်တွင် (အော့ဖ်လိုင်း-သင့်လျော်) သိမ်းဆည်းပြီး AI အင်္ဂါရပ်များ၊ ထုတ်ယူမှုနှင့် ဖျက်ခြင်းအတွက် ထိန်းချုပ်မှုများကို ပေးသည်။",
+      "title": "ဒီဇိုင်းအရ သီးသန့်"
+    },
+    "socialProof": {
+      "description": "ဘတ်ဂျက်ကို အောင်မြင်စေသော အသေးစိတ်များ: onboarding, shortcuts, mobile navigation, နှင့် အော့ဖ်လိုင်း-သင့်လျော်မှု။",
+      "features": {
+        "mobileUx": {
+          "description": "အောက်ခြေ navigation နှင့် သဘာဝခံစားရသော တုံ့ပြန်မှုများ။",
+          "title": "မိုဘိုင်း-ပထမ UX"
+        },
+        "onboarding": {
+          "description": "Guided tour သည် အသစ်သော အသုံးပြုသူများကို အမြန်တန်ဖိုးရရှိရန် ကူညီသည်။",
+          "title": "Onboarding ခရီးစဉ်"
+        },
+        "pwaInstall": {
+          "description": "အက်ပ်အဖြစ် တပ်ဆင်ပြီး အင်တာနက်မရှိသော အခါတွင်လည်း ဆက်လက်လုပ်ဆောင်ပါ။",
+          "title": "PWA တပ်ဆင်ခြင်း"
+        },
+        "shortcuts": {
+          "description": "UI တွင် ရှာဖွေရန်နှင့် လုပ်ဆောင်မှုတိုက်ရိုက်လမ်းညွှန်များဖြင့် မြန်ဆန်စွာ လှုပ်ရှားပါ။",
+          "title": "ကီးဘုတ်တိုက်ရိုက်လမ်းညွှန်များ"
+        }
+      },
+      "title": "အထူးပြု အဆင့်မြှင့်တင်မှု၊ အဆင့်မြှင့်တင်ထားသည်"
+    },
+    "trust": {
+      "0": {
+        "description": "ဒေတာသည် သင်၏ ဘရောက်ဇာ၏ IndexedDB တွင် ရှိပါသည်။ ကျွန်ုပ်တို့သည် အမှန်တကယ် မမြင်နိုင်ပါ။",
+        "title": "သင်၏ ကိရိယာ၊ သင်၏ ဒေတာ"
+      },
+      "1": {
+        "description": "အများပြားပြင်ဆင်၊ ပြောင်းလဲပြီး ပရိုအဖြစ် အဆင်ပြေစွာ ချိန်ညှိပါ။",
+        "title": "စာရင်းဇယား အင်အား"
+      },
+      "2": {
+        "description": "သံလိုက်မရှိ။ တောင်ထိပ်တွင် သို့မဟုတ် စတုရန်းလမ်းကြောင်းတွင် အလုပ်လုပ်ပါ။",
+        "title": "အော့ဖ်လိုင်း အမြန်နှုန်း"
+      },
+      "3": {
+        "description": "သင်၏ ငွေကြေး ပြန်လည်သုံးသပ်မှုကို စိတ်ချမ်းသာစေသော အကျင့်တစ်ခုဖြစ်စေပါသည်။",
+        "title": "လက်မှတ် အစီအစဉ်များ"
+      }
+    }
+  },
+  "nav": {
+    "about": "အကြောင်း",
+    "accounts": "အကောင့်များ",
+    "budgets": "ဘတ်ဂျက်များ",
+    "categories": "အမျိုးအစားများ",
+    "dashboard": "ဒက်ရှ်ဘုတ်",
+    "export": "ထုတ်ယူရန်",
+    "goals": "ရည်မှန်းချက်များ",
+    "help": "အကူအညီ",
+    "import": "သွင်းယူရန်",
+    "reports": "အစီရင်ခံစာများ",
+    "settings": "ဆက်တင်များ",
+    "transactions": "ငွေလွှဲများ"
+  },
+  "onboarding": {
+    "dontShowAgain": "ဤခရီးစဉ်ကို ထပ်မပြပါ",
+    "navigation": {
+      "getStarted": "စတင်ပါ",
+      "next": "နောက်တစ်ခု",
+      "previous": "မူရင်း",
+      "startTour": "ခရီးစဉ်စတင်ပါ"
+    },
+    "quickTip": "💡 အမြန်အကြံပြုချက်",
+    "skipTour": "ခရီးစဉ်ကို ကျော်ဖြတ်ပါ",
+    "stepCounter": "အဆင့် {current} မှ {total} အထိ",
+    "steps": {
+      "budgets": {
+        "description": "အသုံးစရိတ်အမျိုးအစားများအတွက် ဘတ်ဂျက်များကို ဖန်တီးပါ။ လစဉ်အတွင်း သင်၏ တိုးတက်မှုကို လိုက်လံကြည့်ပါ၊ သင်၏ အကန့်အသတ်များကို ရောက်ရှိလာသောအခါ သတိပေးချက်များကို ရယူပါ။",
+        "title": "🎯 သင်၏ ဘတ်ဂျက်များကို သတ်မှတ်ပါ"
+      },
+      "categorize": {
+        "description": "ငွေလွှဲအမျိုးအစားများကို ပြန်လည်သုံးသပ်ပြီး ပြင်ဆင်ပါ။ ကျွန်ုပ်တို့၏ ဂုဏ်သတ္တိသည် သင်၏ ပြင်ဆင်မှုများမှ သင်ယူပြီး အချိန်နှင့်အမျှ တိုးတက်လာပါသည်။ အများပြားသော ငွေလွှဲများကို တစ်ပြိုင်နက် အမျိုးအစားသတ်မှတ်ရန် အများပြားလုပ်ဆောင်မှုများကို အသုံးပြုပါ!",
+        "title": "🏷️ အမျိုးအစားသတ်မှတ်ခြင်းနှင့် အစီအစဉ်"
+      },
+      "import": {
+        "description": "CSV ဖိုင်မှ သင်၏ ဘဏ် ငွေလွှဲများကို သွင်းယူရန် စတင်ပါ။ BMO, Home Trust နှင့် အခြားဘဏ်များကို ထောက်ပံ့ပါသည်။ အက်ပ်သည် သင်၏ ငွေလွှဲများကို အလိုအလျောက် အမျိုးအစားသတ်မှတ်ပါမည်!",
+        "title": "📥 သင်၏ ငွေလွှဲများကို သွင်းယူပါ"
+      },
+      "reports": {
+        "description": "သင်၏ အသုံးစရိတ်ပုံစံများကို မြင်ကွင်းဖျက်ပြီး သင်၏ အမြတ်နှင့် အမြတ်ကို လိုက်လံကြည့်ပါ။ သင်၏ ဒက်ရှ်ဘုတ်သည် ငွေလွှဲတိုင်းနှင့်အတူ အလိုအလျောက် အပ်ဒိတ်လုပ်ပါသည်!",
+        "title": "📊 အစီရင်ခံစာများနှင့် အမြင်များကို ကြည့်ပါ"
+      },
+      "welcome": {
+        "description": "သင်၏ အိမ်ထောင်ရေး ငွေကြေးကို စီမံရန် အကူအညီပေးရန် အမြန်ခရီးစဉ်တစ်ခုကို လုပ်ဆောင်ပါ။ ဤသည် အချိန်မယူပါ!",
+        "title": "👋 ဘတ်ဂျက် အက်ပ်သို့ ကြိုဆိုပါတယ်!"
+      }
+    },
+    "tips": {
+      "budgets": "သင်၏ ဘတ်ဂျက်များကို အမှန်တကယ် သတ်မှတ်ပါ၊ သင် အလွန်ကျော်လွှားရန် ရောက်ရှိလာပါက သတိပေးပါ။",
+      "categorize": "အမြန်အမျိုးအစားသတ်မှတ်ခြင်းခလုတ်ကို အသုံးပြုပါ သို့မဟုတ် အများပြားသော ငွေလွှဲများကို ရွေးချယ်ပါ။",
+      "import": "သင်၏ CSV ဖိုင်ကို ဆွဲထုတ်ပြီး သို့မဟုတ် ရွေးချယ်ရန် နှိပ်ပါ။ BMO နှင့် Home Trust ဖော်မတ်များကို အလိုအလျောက် ရှာဖွေပါ!"
+    }
+  },
+  "overspendingAlerts": {
+    "exceededWarning": "At this rate, you'll exceed your budget by {amount} this month.",
+    "percentOfBudget": "{percent}% of budget",
+    "progress": {
+      "label": "Current progress"
+    },
+    "stats": {
+      "budget": "Budget",
+      "daysLeft": "Days Left",
+      "projectedTotal": "Projected Total",
+      "spentSoFar": "Spent So Far"
+    },
+    "tip": {
+      "label": "Tip:",
+      "reduceSpending": "Reduce daily spending to {amount} to stay within budget."
+    }
+  },
+  "predictiveSpendingChart": {
+    "legend": {
+      "actual": "Actual",
+      "confidenceInterval": "Confidence Interval",
+      "predicted": "Predicted"
+    },
+    "noData": "No data available for predictions",
+    "predictionUnavailable": "Prediction Unavailable",
+    "stats": {
+      "avgConfidence": "Avg Confidence",
+      "nextMonth": "Next Month",
+      "threeMonthAvg": "3-Month Avg"
+    },
+    "table": {
+      "confidence": "Confidence",
+      "month": "Month",
+      "predicted": "Predicted",
+      "range": "Range",
+      "title": "Monthly Predictions"
+    },
+    "title": "Spending Forecast: {category}",
+    "trainingModel": "Training model and generating predictions..."
+  },
+  "pwaInstall": {
+    "buttons": {
+      "install": "Install",
+      "notNow": "Not now"
+    },
+    "close": "Close install prompt",
+    "description": "Add to your home screen for quick access and offline use",
+    "features": {
+      "fastSecure": "Fast & secure",
+      "noAppStore": "No app store needed",
+      "offline": "Works offline"
+    },
+    "title": "Install Budget App"
+  },
+  "quickCategorize": {
+    "buttons": {
+      "apply": "Apply Category",
+      "cancel": "Cancel",
+      "save": "Save"
+    },
+    "clickToSelect": "Click a category to select",
+    "description": "Select a category for {count, plural, =1 {this transaction} other {# transactions}}",
+    "general": "General",
+    "noResults": "No categories found",
+    "pressEnter": "Press ↵ Enter",
+    "saving": "Saving...",
+    "searchPlaceholder": "Search categories...",
+    "title": "Quick Categorize"
+  },
+  "quickFilters": {
+    "all": "All",
+    "categories": "Categories",
+    "clearFilters": "Clear Filters",
+    "moreCategories": "+{count} more",
+    "presets": {
+      "last30": "Last 30 Days",
+      "last90": "Last 90 Days",
+      "thisMonth": "This Month",
+      "thisYear": "This Year"
+    },
+    "timePeriod": "Time Period"
+  },
+  "receiptUpload": {
+    "buttons": {
+      "attachReceipt": "Attach Receipt",
+      "chooseDifferent": "Choose Different",
+      "extractData": "Extract Data",
+      "extracting": "Extracting..."
+    },
+    "camera": {
+      "takePhoto": "Take Photo with Camera",
+      "useDevice": "Use your device camera to capture receipt"
+    },
+    "cameraInputLabel": "Camera capture input",
+    "dropzone": {
+      "browseFiles": "or <link>browse files</link>",
+      "dragDrop": "Drag & drop receipt here",
+      "dropHere": "Drop the receipt here",
+      "supportedFormats": "Supports JPG, PNG, PDF • Max {size}MB"
+    },
+    "errors": {
+      "couldNotExtract": "Could not extract data from receipt. Please enter manually.",
+      "extractionFailed": "Failed to extract data. Please try again or enter manually.",
+      "invalidType": "Invalid file type. Only JPG, PNG, and PDF files are allowed",
+      "ocrImagesOnly": "OCR is only supported for image files (JPG, PNG)",
+      "rejected": "File was rejected. Please try again",
+      "tooLarge": "File is too large. Maximum size is {size}MB"
+    },
+    "extracted": {
+      "amount": "Amount:",
+      "confidence": "Confidence: {percent}%",
+      "date": "Date:",
+      "merchant": "Merchant:",
+      "title": "Data Extracted"
+    },
+    "pdf": {
+      "noPreview": "Preview not available",
+      "title": "PDF Receipt"
+    },
+    "receiptPreview": "Receipt preview",
+    "removeFile": "Remove file"
+  },
+  "recurringTransactions": {
+    "confidence": "{percent}% confidence",
+    "estimatedMonthly": "Estimated Monthly",
+    "frequency": {
+      "biweekly": "Bi-weekly",
+      "monthly": "Monthly",
+      "quarterly": "Quarterly",
+      "weekly": "Weekly"
+    },
+    "inDays": "{count, plural, =0 {(today)} =1 {(in 1 day)} other {(in # days)}}",
+    "next": "Next: {date}",
+    "occurrences": "{count, plural, =1 {1 occurrence detected} other {# occurrences detected}}",
+    "perPeriod": {
+      "month": "per month",
+      "quarter": "per quarter",
+      "twoWeeks": "per 2 weeks",
+      "week": "per week"
+    },
+    "showingPatterns": "{count, plural, =1 {Showing 1 recurring transaction pattern} other {Showing # recurring transaction patterns}}",
+    "subtitle": "Detected subscriptions and bills",
+    "title": "Recurring Transactions"
+  },
+  "shortcutsModal": {
+    "close": "Close shortcuts help",
+    "proTip": {
+      "description": "Keyboard shortcuts work on any page except when typing in forms. Press {key} anytime to see this help.",
+      "title": "💡 Pro Tip"
+    },
+    "subtitle": "Power-user productivity tips",
+    "title": "Keyboard Shortcuts"
+  },
+  "sidebar": {
+    "actions": {
+      "importCsv": "CSV သွင်းယူရန်",
+      "settings": "ဆက်တင်များ",
+      "showAllItems": "အရာအားလုံးပြပါ",
+      "showLess": "နည်းနည်းပြပါ"
+    },
+    "appSubtitle": "အထူးပြု ငွေကြေး",
+    "appTitle": "ဘတ်ဂျက် အက်ပ်",
+    "navigation": {
+      "budgets": "ဘတ်ဂျက်များ",
+      "categories": "အမျိုးအစားများ",
+      "dashboard": "ဒက်ရှ်ဘုတ်",
+      "futurePlans": "အနာဂတ်အစီအစဉ်များ",
+      "investments": "ရင်းနှီးမြှုပ်နှံမှုများ",
+      "loans": "ချေးငွေများ",
+      "reports": "အစီရင်ခံစာများ",
+      "retirement": "အသက်ငြိမ်းချမ်းမှု",
+      "scanReceipt": "လက်မှတ်ကို စကန်လုပ်ရန်",
+      "subscriptions": "စာရင်းဝင်မှုများ",
+      "transactions": "ငွေလွှဲများ"
+    },
+    "search": "ရှာဖွေရန်...",
+    "shortcuts": "တိုက်ရိုက်လမ်းညွှန်များ"
+  },
+  "simplefinSettings": {
+    "connectedAccounts": {
+      "description": "Manage your linked bank accounts",
+      "title": "Connected Accounts"
+    },
+    "connection": {
+      "accountsLinked": "{count, plural, =1 {1 account linked} other {# accounts linked}}",
+      "connectButton": "Connect Bank Account",
+      "connected": "Connected",
+      "description": "Connect your bank accounts to automatically import transactions",
+      "notConnected": "Not Connected",
+      "notConnectedDesc": "Connect your bank accounts to start importing transactions",
+      "title": "SimpleFIN Connection"
+    },
+    "disconnect": {
+      "button": "Disconnect",
+      "cancel": "Cancel",
+      "confirm": "Disconnect",
+      "dialogDescription": "This will remove the connection to your bank accounts. Your existing transactions will not be deleted, but new transactions will no longer sync automatically.",
+      "dialogTitle": "Disconnect SimpleFIN?"
+    },
+    "help": {
+      "bridgeDashboard": "SimpleFIN Bridge Dashboard",
+      "protocolDocs": "SimpleFIN Protocol Documentation",
+      "title": "Need Help?"
+    },
+    "sync": {
+      "date": "{date}",
+      "hoursAgo": "{hours, plural, =1 {1 hour ago} other {# hours ago}}",
+      "lastSynced": "Last synced: {time}",
+      "lessThanHour": "Less than an hour ago",
+      "never": "Never",
+      "syncNow": "Sync Now",
+      "syncing": "Syncing..."
+    },
+    "syncSettings": {
+      "autoCategorize": {
+        "description": "Automatically categorize imported transactions using AI",
+        "label": "Auto-Categorize"
+      },
+      "autoSync": {
+        "description": "Automatically sync transactions on a schedule",
+        "label": "Automatic Sync"
+      },
+      "description": "Configure how and when transactions are synced",
+      "frequency": {
+        "every12Hours": "Every 12 hours",
+        "every2Days": "Every 2 days",
+        "every6Hours": "Every 6 hours",
+        "hint": "SimpleFIN allows up to 24 requests per day. Daily sync is recommended.",
+        "label": "Sync Frequency",
+        "onceDaily": "Once daily"
+      },
+      "notifications": {
+        "description": "Show notification when sync completes",
+        "label": "Sync Notifications"
+      },
+      "pendingTransactions": {
+        "description": "Include transactions that haven't posted yet",
+        "label": "Import Pending Transactions"
+      },
+      "title": "Sync Settings",
+      "transactionHistory": {
+        "days": "{count} days",
+        "hint": "How many days of transaction history to fetch (max 60 days per SimpleFIN)",
+        "label": "Transaction History"
+      }
+    }
+  },
+  "spendingTrendChart": {
+    "forecastFooter": "Forecast based on linear regression of last {months} months",
+    "legend": {
+      "actualSpending": "Actual Spending",
+      "projected": "Projected"
+    },
+    "notEnoughData": "Not enough data to generate trends. Add at least 2 months of transactions.",
+    "stats": {
+      "avgMonthly": "Avg Monthly",
+      "lastMonth": "Last Month",
+      "projected": "Projected"
+    },
+    "title": "Spending Trends & Forecast"
+  },
+  "splitTransaction": {
+    "addSplit": "Add Split ({current}/{max})",
+    "amount": "Amount",
+    "buttons": {
+      "cancel": "Cancel",
+      "save": "Save Split",
+      "saving": "Saving..."
+    },
+    "category": "Category",
+    "closeModal": "Close modal",
+    "date": "Date:",
+    "distributeEvenly": "Distribute Evenly",
+    "errors": {
+      "saveFailed": "Failed to save split transaction"
+    },
+    "help": {
+      "step1": "Enter the amount for each category (must total ${amount})",
+      "step2": "Use \"Distribute Evenly\" to split equally across all categories",
+      "step3": "Add up to 5 splits per transaction",
+      "step4": "The original transaction will be hidden and replaced with split items",
+      "title": "How to split transactions:"
+    },
+    "maxSplitsReached": "Maximum 5 splits allowed",
+    "minSplitsRequired": "Minimum 2 splits required",
+    "none": "None",
+    "notes": "Notes (Optional)",
+    "notesPlaceholder": "e.g., Business expense, Personal use",
+    "originalAmount": "Original Amount:",
+    "removeThisSplit": "Remove this split",
+    "selectCategory": "Select category...",
+    "splitsCount": "Splits ({current}/{max})",
+    "subcategory": "Subcategory",
+    "title": "Split Transaction",
+    "validation": {
+      "adjustAmounts": "Adjust split amounts to match the original transaction amount.",
+      "amountsMustMatch": "Split amounts must equal the original transaction amount",
+      "categoryRequired": "All splits must have a category",
+      "matchesOriginal": "✓ Matches original",
+      "overBy": "Over by ${amount}",
+      "readyToSave": "Split amounts match the original transaction. Ready to save!",
+      "total": "Total:",
+      "underBy": "Under by ${amount}"
+    }
+  },
+  "subscriptionCard": {
+    "badges": {
+      "aiVerified": "AI Verified",
+      "cancelled": "Cancelled",
+      "paused": "Paused",
+      "trial": "Trial"
+    },
+    "buttons": {
+      "claimManage": "Claim & Manage",
+      "edit": "Edit",
+      "transactions": "Transactions"
+    },
+    "confidence": {
+      "high": "High",
+      "label": "Detection Confidence",
+      "low": "Low",
+      "medium": "Medium"
+    },
+    "details": {
+      "charges": "{count} charges",
+      "daysBefore": "{count} days before",
+      "firstCharge": "First Charge",
+      "lastCharge": "Last Charge",
+      "occurrences": "Occurrences",
+      "payment": "Payment",
+      "reminder": "Reminder"
+    },
+    "interval": {
+      "annual": "Annual",
+      "bi-weekly": "Bi-weekly",
+      "irregular": "Irregular",
+      "monthly": "Monthly",
+      "quarterly": "Quarterly",
+      "weekly": "Weekly"
+    },
+    "lowConfidenceWarning": "This subscription was detected with low confidence. Claim it to verify and manage manually.",
+    "menu": {
+      "cancelSubscription": "Cancel Subscription",
+      "claimManage": "Claim & Manage",
+      "delete": "Delete",
+      "edit": "Edit",
+      "notSubscription": "Not a Subscription",
+      "pause": "Pause",
+      "resume": "Resume",
+      "viewTransactions": "View Transactions"
+    },
+    "source": {
+      "auto-detected": "Auto-detected",
+      "manual": "Manual",
+      "merged": "Tracked"
+    },
+    "stats": {
+      "amount": "Amount",
+      "annualCost": "Annual Cost",
+      "frequency": "Frequency",
+      "nextCharge": "Next Charge",
+      "totalSpent": "Total Spent"
+    },
+    "trial": {
+      "daysLeft": "{count, plural, =1 {1 day left in trial} other {# days left in trial}}"
+    }
+  },
+  "subscriptionCostChart": {
+    "emptyState": "No active subscriptions to analyze",
+    "loadingChart": "Loading chart...",
+    "moreCharges": "+{count} more charges",
+    "perMonth": "/month",
+    "sections": {
+      "costByCategory": "Cost by Category",
+      "potentialSavings": "Potential Savings",
+      "upcomingCharges": "Upcoming Charges (Next 30 Days)"
+    },
+    "summary": {
+      "activeSubscriptions": "{count, plural, =1 {1 active subscription} other {# active subscriptions}}",
+      "annualCost": "Annual Cost",
+      "monthlyCost": "Monthly Cost",
+      "next30Days": "Next 30 Days",
+      "projectedYearly": "Projected yearly spend",
+      "upcomingCharges": "{count, plural, =1 {1 upcoming charge} other {# upcoming charges}}"
+    }
+  },
+  "tooltip": {
+    "ariaLabel": "ပိုမိုသိရှိရန်",
+    "learnMore": "ပိုမိုသိရှိရန် →"
+  },
+  "transactionModal": {
+    "account": {
+      "label": "Account"
+    },
+    "advancedOptions": {
+      "available": "{count} available",
+      "label": "Advanced Options"
+    },
+    "amount": {
+      "label": "Amount",
+      "placeholder": "0.00",
+      "validationError": "Please enter a valid amount"
+    },
+    "buttons": {
+      "add": "Add Transaction",
+      "adding": "Adding...",
+      "cancel": "Cancel",
+      "update": "Update Transaction",
+      "updating": "Updating..."
+    },
+    "category": {
+      "aiCategorizing": "AI categorizing...",
+      "create": "Create",
+      "createNew": "+ Create New Category",
+      "label": "Category",
+      "lastUsed": "Using last: {category}",
+      "namePlaceholder": "Category name...",
+      "selectPlaceholder": "Select category...",
+      "subcategoriesPlaceholder": "Subcategories (optional, comma-separated)"
+    },
+    "closeModal": "Close modal",
+    "createCategory": {
+      "created": "Category \"{name}\" created!",
+      "failed": "Failed to create category",
+      "nameRequired": "Category name is required"
+    },
+    "date": {
+      "label": "Date"
+    },
+    "description": {
+      "label": "Description",
+      "placeholder": "e.g., Grocery shopping at Sobeys"
+    },
+    "learned": {
+      "description": "After 3 similar corrections, future transactions from this merchant will auto-categorize.",
+      "title": "Learned!"
+    },
+    "notes": {
+      "label": "Notes",
+      "placeholder": "Add any additional notes..."
+    },
+    "receipts": {
+      "addNew": "Add New Receipt",
+      "deleteConfirm": "Are you sure you want to delete this receipt?",
+      "deleteFailed": "Failed to delete receipt",
+      "deleteReceipt": "Delete receipt",
+      "existing": "Existing receipts ({count})",
+      "label": "Receipt Attachments",
+      "newFile": "New: {filename}",
+      "remove": "Remove",
+      "viewFull": "View full receipt"
+    },
+    "subcategory": {
+      "label": "Subcategory",
+      "none": "None",
+      "selectPlaceholder": "Select subcategory..."
+    },
+    "tags": {
+      "label": "Tags (comma-separated)",
+      "placeholder": "e.g., groceries, weekly, essential"
+    },
+    "title": {
+      "add": "Add Transaction",
+      "edit": "Edit Transaction"
+    },
+    "type": {
+      "expense": "Expense",
+      "income": "Income",
+      "label": "Type"
+    }
+  },
+  "transactionTable": {
+    "actions": {
+      "attachReceipt": "Attach receipt",
+      "delete": "Delete",
+      "edit": "Edit",
+      "split": "Split"
+    },
+    "emptyState": "No transactions to display",
+    "headers": {
+      "account": "Account",
+      "actions": "Actions",
+      "amount": "Amount",
+      "category": "Category",
+      "date": "Date",
+      "description": "Description"
+    }
+  },
+  "welcome": {
+    "subtitle": "သင်၏ ပထမဆုံး ငွေလွှဲကို ထည့်ရန် သို့မဟုတ် ဘဏ်မှ ဒေတာသွင်းယူရန် စတင်ပါ",
+    "title": "ဘတ်ဂျက် အက်ပ်သို့ ကြိုဆိုပါတယ်"
+  },
+  "widget": {
+    "accountBalances": {
+      "description": "သင်၏ အကောင့်များအတွင်း လက်ရှိ ဘက်လုံးများ",
+      "title": "အကောင့် ဘက်လုံးများ"
+    },
+    "budgetProgress": {
+      "description": "သင်၏ ဘတ်ဂျက် ရည်မှန်းချက်များအပေါ် ဘယ်လိုလုပ်ဆောင်နေသည်ကို လိုက်လံကြည့်ပါ",
+      "title": "ဘတ်ဂျက် တိုးတက်မှု"
+    },
+    "incomeVsExpenses": {
+      "description": "သင်၏ ဝင်ငွေများနှင့် အသုံးစရိတ်များကို နှိုင်းယှဉ်ကြည့်ပါ",
+      "title": "ဝင်ငွေ နှင့် အသုံးစရိတ်"
+    },
+    "monthlyTrends": {
+      "description": "လစဉ် သင်၏ ငွေကြေး ပုံစံများကို ကြည့်ပါ",
+      "title": "လစဉ် အထွေထွေ"
+    },
+    "recentTransactions": {
+      "description": "သင်၏ နောက်ဆုံး ငွေကြေး လှုပ်ရှားမှုကို မြန်ဆန်စွာ ကြည့်ပါ",
+      "title": "နောက်ဆုံး ငွေလွှဲများ"
+    },
+    "spendingByCategory": {
+      "description": "သင်၏ ငွေကြေးကို ဘယ်မှာသွားကြောင်း ကြည့်ပါ",
+      "title": "အမျိုးအစားအလိုက် အသုံးစရိတ်"
+    },
+    "upcomingBills": {
+      "description": "ဘီလ် အမှတ်တရများဖြင့် ငွေပေးချေမှုကို မလွတ်ပါ",
+      "title": "လာမည့် ဘီလ်များ"
+    }
+  },
+  "ynabMigrationWizard": {
+    "categoryStep": {
+      "category": "{count, plural, =1 {1 category} other {# categories}}",
+      "createNew": "Create New",
+      "description": "Map YNAB categories to your existing categories or create new ones.",
+      "mapToExisting": "Map to Existing",
+      "selectCategory": "Select category...",
+      "skip": "Skip",
+      "title": "Category Mapping",
+      "willCreate": "Will create:"
+    },
+    "completeStep": {
+      "errors": "Errors",
+      "importAnother": "Import Another",
+      "success": "Import Complete!",
+      "successMessage": "{count, plural, =1 {1 item imported} other {# items imported}} successfully from YNAB.",
+      "viewTransactions": "View Transactions",
+      "whatNext": "What would you like to do next?",
+      "withIssues": "Import Completed with Issues"
+    },
+    "footer": {
+      "back": "Back",
+      "done": "Done",
+      "next": "Next",
+      "startImport": "Start Import"
+    },
+    "header": {
+      "closeLabel": "Close wizard",
+      "subtitle": "Migrate your budget data seamlessly",
+      "title": "Import from YNAB"
+    },
+    "importingStep": {
+      "finishing": "Finishing up...",
+      "importingAccounts": "Importing accounts...",
+      "importingBudgets": "Importing budgets...",
+      "importingCategories": "Importing categories...",
+      "importingTransactions": "Importing transactions...",
+      "title": "Importing your YNAB data..."
+    },
+    "optionsStep": {
+      "accountOptions": {
+        "includeClosedAccounts": "Include closed accounts",
+        "includeOffBudgetAccounts": "Include off-budget accounts",
+        "title": "Account Options"
+      },
+      "budgetOptions": {
+        "importGoals": "Import savings goals as future purchases",
+        "title": "Budget Options"
+      },
+      "hiddenCategories": {
+        "archive": "Archive",
+        "archiveDesc": "Import as archived (recommended)",
+        "description": "How to handle YNAB categories marked as hidden?",
+        "import": "Import",
+        "importDesc": "Import as active categories",
+        "skip": "Skip",
+        "skipDesc": "Don't import hidden categories",
+        "title": "Hidden Categories"
+      }
+    },
+    "previewStep": {
+      "accounts": "Accounts",
+      "allocations": "{count} allocations",
+      "budgetMonths": "Budget Months",
+      "categories": "Categories",
+      "dateRange": "Transaction Date Range",
+      "description": "Review the data that will be imported.",
+      "duplicates": "{count} duplicates",
+      "new": "{count} new",
+      "newMapped": "{created} new, {mapped} mapped",
+      "preparingPreview": "Preparing preview...",
+      "title": "Import Preview",
+      "transactions": "Transactions",
+      "warnings": "Warnings"
+    },
+    "steps": {
+      "categories": {
+        "description": "Map to existing categories",
+        "title": "Categories"
+      },
+      "complete": {
+        "description": "Migration finished",
+        "title": "Complete"
+      },
+      "importing": {
+        "description": "Processing your data",
+        "title": "Importing"
+      },
+      "options": {
+        "description": "Configure import settings",
+        "title": "Options"
+      },
+      "preview": {
+        "description": "Review before import",
+        "title": "Preview"
+      },
+      "upload": {
+        "description": "Select YNAB export file",
+        "title": "Upload"
+      }
+    },
+    "uploadStep": {
+      "accounts": "Accounts",
+      "categories": "Categories",
+      "clickToSelect": "Click to select a file",
+      "dragAndDrop": "or drag and drop here",
+      "fileSummary": "File Summary",
+      "format": "Format",
+      "formatApiExport": "YNAB API Export",
+      "formatApiExportDesc": "JSON from nYNAB",
+      "formatCsv": "CSV Export",
+      "formatCsvDesc": "From YNAB web app",
+      "formatYfull": "Budget.yfull / Budget.ynab4",
+      "formatYfullDesc": "YNAB4 desktop export",
+      "parsing": "Parsing file...",
+      "supportedFormats": "Supported Formats",
+      "transactions": "Transactions"
     }
   }
 }

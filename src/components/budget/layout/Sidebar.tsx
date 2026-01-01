@@ -90,7 +90,7 @@ export function Sidebar({ onSearch, onShowShortcuts, className, isMobile, onClos
       {!isMobile && (
         <button
           onClick={() => setIsCollapsed(!isCollapsed)}
-          className="absolute -right-3 top-8 z-50 flex h-6 w-6 items-center justify-center rounded-full border border-white/10 bg-slate-900 text-slate-400 shadow-lg transition-colors hover:text-white"
+          className="absolute -end-3 top-8 z-50 flex h-6 w-6 items-center justify-center rounded-full border border-white/10 bg-slate-900 text-slate-400 shadow-lg transition-colors hover:text-white"
         >
           {isCollapsed ? <ChevronRight className="h-3 w-3" /> : <ChevronLeft className="h-3 w-3" />}
         </button>
@@ -163,7 +163,7 @@ export function Sidebar({ onSearch, onShowShortcuts, className, isMobile, onClos
               {isActive && (
                 <motion.div
                   layoutId="activeNav"
-                  className="absolute inset-0 border-l-2 border-teal-500 bg-white/5"
+                  className="absolute inset-0 border-s-2 border-teal-500 bg-white/5"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}

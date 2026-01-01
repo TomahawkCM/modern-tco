@@ -8,6 +8,7 @@
 'use client';
 
 import React, { useState, useCallback } from 'react';
+import { useTranslations } from 'next-intl';
 import {
   Wifi,
   WifiOff,
@@ -137,6 +138,7 @@ function DeviceCard({
   onSync,
   seniorsMode,
 }: DeviceCardProps) {
+  const t = useTranslations('lanSync');
   const [showRemoveDialog, setShowRemoveDialog] = useState(false);
   const DeviceIcon = getDeviceIcon(device.name);
   const isConnected = status?.isOnline ?? false;
@@ -168,13 +170,13 @@ function DeviceCard({
             </h4>
             {isConnected && (
               <Badge variant="outline" className="text-green-500 border-green-500">
-                Connected
+                {t('device.connected')}
               </Badge>
             )}
           </div>
           <p className={cn('text-muted-foreground truncate', seniorsMode ? 'text-sm' : 'text-xs')}>
             {status?.lastSyncAt
-              ? `Last sync: ${formatLastSync(status.lastSyncAt)}`
+              ? t('time.lastSync', { time: formatLastSync(status.lastSyncAt) })
               : formatLastSync(device.lastSyncAt)}
           </p>
           {device.lastKnownIp && (
@@ -194,7 +196,7 @@ function DeviceCard({
               disabled={isSyncing}
             >
               <RefreshCw className={cn('mr-2 h-4 w-4', isSyncing && 'animate-spin')} />
-              {isSyncing ? 'Syncing...' : 'Sync'}
+              {isSyncing ? t('device.syncing') : t('device.sync')}
             </Button>
           ) : (
             <Button
@@ -203,7 +205,7 @@ function DeviceCard({
               onClick={onConnect}
             >
               <Link2 className="mr-2 h-4 w-4" />
-              Connect
+              {t('device.connect')}
             </Button>
           )}
 
@@ -217,7 +219,7 @@ function DeviceCard({
               {isConnected && (
                 <DropdownMenuItem onClick={onDisconnect}>
                   <Unplug className="mr-2 h-4 w-4" />
-                  Disconnect
+                  {t('device.disconnect')}
                 </DropdownMenuItem>
               )}
               <DropdownMenuItem
@@ -225,7 +227,7 @@ function DeviceCard({
                 className="text-red-500 focus:text-red-500"
               >
                 <Trash2 className="mr-2 h-4 w-4" />
-                Remove Device
+                {t('device.removeDevice')}
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
@@ -236,14 +238,13 @@ function DeviceCard({
       <AlertDialog open={showRemoveDialog} onOpenChange={setShowRemoveDialog}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Remove Device</AlertDialogTitle>
+            <AlertDialogTitle>{t('removeDialog.title')}</AlertDialogTitle>
             <AlertDialogDescription>
-              Are you sure you want to remove "{device.name}"? This will unpair the device
-              and you'll need to pair again to sync data.
+              {t('removeDialog.description', { deviceName: device.name })}
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogCancel>{t('removeDialog.cancel')}</AlertDialogCancel>
             <AlertDialogAction
               onClick={() => {
                 onRemove();
@@ -251,7 +252,7 @@ function DeviceCard({
               }}
               className="bg-red-500 hover:bg-red-600"
             >
-              Remove
+              {t('removeDialog.remove')}
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
@@ -265,6 +266,7 @@ function DeviceCard({
 // ============================================================================
 
 export function LANSyncSettings({ className, seniorsMode = false }: LANSyncSettingsProps) {
+  const t = useTranslations('lanSync');
   const {
     state,
     setEnabled,
@@ -314,16 +316,16 @@ export function LANSyncSettings({ className, seniorsMode = false }: LANSyncSetti
               )}
               <div>
                 <CardTitle className={seniorsMode ? 'text-2xl' : ''}>
-                  LAN Sync
+                  {t('title')}
                 </CardTitle>
                 <CardDescription className={descSize}>
-                  Sync your budget data across devices on your local network
+                  {t('description')}
                 </CardDescription>
               </div>
             </div>
             <div className="flex items-center gap-4">
               <Label htmlFor="lan-sync-toggle" className={cn('cursor-pointer', textSize)}>
-                {state.isEnabled ? 'Enabled' : 'Disabled'}
+                {state.isEnabled ? t('enabled') : t('disabled')}
               </Label>
               <Switch
                 id="lan-sync-toggle"
@@ -344,7 +346,7 @@ export function LANSyncSettings({ className, seniorsMode = false }: LANSyncSetti
                 disabled={stats.connectedDevices === 0 || state.isSyncing}
               >
                 <RefreshCw className={cn('mr-2 h-4 w-4', state.isSyncing && 'animate-spin')} />
-                Sync All
+                {t('syncAll')}
               </Button>
             </div>
           </CardContent>
@@ -358,17 +360,17 @@ export function LANSyncSettings({ className, seniorsMode = false }: LANSyncSetti
             <div className="flex items-center justify-between">
               <div>
                 <CardTitle className={seniorsMode ? 'text-xl' : ''}>
-                  Paired Devices
+                  {t('pairedDevices.title')}
                 </CardTitle>
                 <CardDescription className={descSize}>
                   {state.pairedDevices.length === 0
-                    ? 'No devices paired yet'
-                    : `${state.pairedDevices.length} device${state.pairedDevices.length !== 1 ? 's' : ''} paired`}
+                    ? t('pairedDevices.noDevices')
+                    : t('pairedDevices.deviceCount', { count: state.pairedDevices.length })}
                 </CardDescription>
               </div>
               <Button onClick={() => setShowPairingDialog(true)}>
                 <Plus className="mr-2 h-4 w-4" />
-                Add Device
+                {t('pairedDevices.addDevice')}
               </Button>
             </div>
           </CardHeader>
@@ -377,14 +379,14 @@ export function LANSyncSettings({ className, seniorsMode = false }: LANSyncSetti
               <div className="text-center py-8">
                 <Smartphone className="mx-auto h-12 w-12 text-muted-foreground mb-4" />
                 <h3 className={cn('font-medium mb-2', textSize)}>
-                  No devices paired
+                  {t('pairedDevices.emptyTitle')}
                 </h3>
                 <p className={cn('text-muted-foreground mb-4', descSize)}>
-                  Pair a device to start syncing your budget data
+                  {t('pairedDevices.emptyDescription')}
                 </p>
                 <Button onClick={() => setShowPairingDialog(true)}>
                   <Plus className="mr-2 h-4 w-4" />
-                  Add Your First Device
+                  {t('pairedDevices.addFirstDevice')}
                 </Button>
               </div>
             ) : (
@@ -411,7 +413,7 @@ export function LANSyncSettings({ className, seniorsMode = false }: LANSyncSetti
         <Card>
           <CardHeader>
             <CardTitle className={seniorsMode ? 'text-xl' : ''}>
-              How LAN Sync Works
+              {t('howItWorks.title')}
             </CardTitle>
           </CardHeader>
           <CardContent>
@@ -421,9 +423,9 @@ export function LANSyncSettings({ className, seniorsMode = false }: LANSyncSetti
                   1
                 </div>
                 <div>
-                  <h4 className={cn('font-medium', textSize)}>Pair Devices</h4>
+                  <h4 className={cn('font-medium', textSize)}>{t('howItWorks.step1.title')}</h4>
                   <p className={cn('text-muted-foreground', descSize)}>
-                    Scan a QR code or enter connection details to pair devices on the same network
+                    {t('howItWorks.step1.description')}
                   </p>
                 </div>
               </div>
@@ -432,9 +434,9 @@ export function LANSyncSettings({ className, seniorsMode = false }: LANSyncSetti
                   2
                 </div>
                 <div>
-                  <h4 className={cn('font-medium', textSize)}>Sync Securely</h4>
+                  <h4 className={cn('font-medium', textSize)}>{t('howItWorks.step2.title')}</h4>
                   <p className={cn('text-muted-foreground', descSize)}>
-                    Data is encrypted end-to-end and syncs directly between devices - no cloud required
+                    {t('howItWorks.step2.description')}
                   </p>
                 </div>
               </div>
@@ -443,9 +445,9 @@ export function LANSyncSettings({ className, seniorsMode = false }: LANSyncSetti
                   3
                 </div>
                 <div>
-                  <h4 className={cn('font-medium', textSize)}>Automatic Updates</h4>
+                  <h4 className={cn('font-medium', textSize)}>{t('howItWorks.step3.title')}</h4>
                   <p className={cn('text-muted-foreground', descSize)}>
-                    Changes sync automatically when devices are connected on the same network
+                    {t('howItWorks.step3.description')}
                   </p>
                 </div>
               </div>

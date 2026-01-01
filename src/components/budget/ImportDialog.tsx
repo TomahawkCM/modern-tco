@@ -31,6 +31,7 @@ import {
 } from '@/lib/export';
 import { cn } from '@/lib/utils';
 import { useSeniorsMode } from '@/hooks/useSeniorsMode';
+import { useTranslations } from 'next-intl';
 
 interface ImportDialogProps {
   isOpen: boolean;
@@ -42,6 +43,7 @@ type ImportStep = 'select' | 'preview' | 'importing' | 'complete';
 
 export function ImportDialog({ isOpen, onClose, onImportComplete }: ImportDialogProps) {
   const { isSeniorsMode } = useSeniorsMode();
+  const t = useTranslations('importDialog');
   const [step, setStep] = useState<ImportStep>('select');
   const [error, setError] = useState<string | null>(null);
 
@@ -189,9 +191,9 @@ export function ImportDialog({ isOpen, onClose, onImportComplete }: ImportDialog
               </div>
               <div>
                 <h2 className={cn('font-bold text-white', isSeniorsMode ? 'text-2xl' : 'text-xl')}>
-                  Import Data
+                  {t('title')}
                 </h2>
-                <p className="text-sm text-slate-400">Restore from .budget file</p>
+                <p className="text-sm text-slate-400">{t('subtitle')}</p>
               </div>
             </div>
             <button
@@ -212,10 +214,10 @@ export function ImportDialog({ isOpen, onClose, onImportComplete }: ImportDialog
                 <label className="flex flex-col items-center justify-center rounded-xl border-2 border-dashed border-white/20 bg-white/5 p-8 cursor-pointer hover:border-teal-500/50 hover:bg-white/10 transition-all">
                   <Upload className="h-12 w-12 text-slate-400 mb-4" />
                   <p className={cn('font-medium text-white', isSeniorsMode && 'text-lg')}>
-                    {file ? file.name : 'Click to select a .budget file'}
+                    {file ? file.name : t('selectFile.label')}
                   </p>
                   <p className="text-sm text-slate-500 mt-2">
-                    or drag and drop here
+                    {t('selectFile.dragDrop')}
                   </p>
                   <input
                     type="file"
@@ -230,19 +232,19 @@ export function ImportDialog({ isOpen, onClose, onImportComplete }: ImportDialog
                   <div className="space-y-4">
                     <div className="flex items-center gap-2 rounded-lg bg-amber-500/10 p-3 text-amber-400">
                       <Lock className="h-5 w-5 shrink-0" />
-                      <p className="text-sm">This file is encrypted</p>
+                      <p className="text-sm">{t('encryption.encrypted')}</p>
                     </div>
 
                     {passwordHint && (
                       <div className="flex items-center gap-2 rounded-lg bg-blue-500/10 p-3 text-blue-400">
                         <Info className="h-5 w-5 shrink-0" />
-                        <p className="text-sm">Hint: {passwordHint}</p>
+                        <p className="text-sm">{t('encryption.hint', { hint: passwordHint })}</p>
                       </div>
                     )}
 
                     <div>
                       <label className="block text-sm font-medium text-slate-400 mb-2">
-                        Password
+                        {t('encryption.password')}
                       </label>
                       <div className="relative">
                         <Lock className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-500" />
@@ -250,7 +252,7 @@ export function ImportDialog({ isOpen, onClose, onImportComplete }: ImportDialog
                           type={showPassword ? 'text' : 'password'}
                           value={password}
                           onChange={(e) => setPassword(e.target.value)}
-                          placeholder="Enter password"
+                          placeholder={t('encryption.enterPassword')}
                           className={cn(
                             'w-full rounded-lg border border-white/10 bg-white/5 py-3 pl-10 pr-12 text-white placeholder:text-slate-500 focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500',
                             isSeniorsMode && 'text-lg py-4'
@@ -275,7 +277,7 @@ export function ImportDialog({ isOpen, onClose, onImportComplete }: ImportDialog
                         isSeniorsMode && 'min-h-[52px] text-lg'
                       )}
                     >
-                      Decrypt & Continue
+                      {t('encryption.decrypt')}
                     </Button>
                   </div>
                 )}
@@ -287,14 +289,14 @@ export function ImportDialog({ isOpen, onClose, onImportComplete }: ImportDialog
               <div className="space-y-6">
                 {/* File Info */}
                 <div className="rounded-xl bg-white/5 p-4">
-                  <h3 className="text-sm font-medium text-slate-400 mb-3">File Information</h3>
+                  <h3 className="text-sm font-medium text-slate-400 mb-3">{t('preview.fileInfo')}</h3>
                   <div className="space-y-2 text-sm">
                     <div className="flex justify-between">
-                      <span className="text-slate-500">Version</span>
+                      <span className="text-slate-500">{t('preview.version')}</span>
                       <span className="text-white">{preview.metadata.version}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-slate-500">Exported</span>
+                      <span className="text-slate-500">{t('preview.exported')}</span>
                       <span className="text-white">
                         {new Date(preview.metadata.exportedAt).toLocaleDateString()}
                       </span>
@@ -304,7 +306,7 @@ export function ImportDialog({ isOpen, onClose, onImportComplete }: ImportDialog
 
                 {/* Data Summary */}
                 <div className="rounded-xl bg-white/5 p-4">
-                  <h3 className="text-sm font-medium text-slate-400 mb-3">Data to Import</h3>
+                  <h3 className="text-sm font-medium text-slate-400 mb-3">{t('preview.dataToImport')}</h3>
                   <div className="grid grid-cols-2 gap-3 text-sm">
                     {Object.entries(preview.counts).map(([key, count]) => (
                       <div key={key} className="flex justify-between">
@@ -320,13 +322,13 @@ export function ImportDialog({ isOpen, onClose, onImportComplete }: ImportDialog
                   <div className="rounded-xl bg-amber-500/10 p-4">
                     <div className="flex items-center gap-2 text-amber-400 mb-3">
                       <AlertTriangle className="h-5 w-5" />
-                      <h3 className="font-medium">Conflicts Found</h3>
+                      <h3 className="font-medium">{t('conflicts.title')}</h3>
                     </div>
                     <div className="space-y-2 text-sm">
                       {Object.entries(preview.conflicts).map(([key, count]) => (
                         <div key={key} className="flex justify-between text-amber-300">
                           <span className="capitalize">{key}</span>
-                          <span>{count} existing</span>
+                          <span>{t('conflicts.existing', { count })}</span>
                         </div>
                       ))}
                     </div>
@@ -336,13 +338,13 @@ export function ImportDialog({ isOpen, onClose, onImportComplete }: ImportDialog
                 {/* Conflict Resolution */}
                 <div>
                   <label className="block text-sm font-medium text-slate-400 mb-3">
-                    Handle Conflicts
+                    {t('conflicts.handleLabel')}
                   </label>
                   <div className="space-y-2">
                     {[
-                      { value: 'skip', label: 'Skip existing', desc: 'Keep current data' },
-                      { value: 'overwrite', label: 'Overwrite', desc: 'Replace with imported' },
-                      { value: 'rename', label: 'Create new', desc: 'Import as new entries' },
+                      { value: 'skip', label: t('conflicts.skip.label'), desc: t('conflicts.skip.description') },
+                      { value: 'overwrite', label: t('conflicts.overwrite.label'), desc: t('conflicts.overwrite.description') },
+                      { value: 'rename', label: t('conflicts.rename.label'), desc: t('conflicts.rename.description') },
                     ].map((option) => (
                       <label
                         key={option.value}
@@ -379,10 +381,10 @@ export function ImportDialog({ isOpen, onClose, onImportComplete }: ImportDialog
               <div className="flex flex-col items-center justify-center py-12">
                 <Loader2 className="h-12 w-12 animate-spin text-teal-400 mb-4" />
                 <p className={cn('font-medium text-white', isSeniorsMode && 'text-lg')}>
-                  Importing your data...
+                  {t('importing.title')}
                 </p>
                 <p className="text-sm text-slate-500 mt-2">
-                  Please wait, this may take a moment
+                  {t('importing.pleaseWait')}
                 </p>
               </div>
             )}
@@ -396,10 +398,10 @@ export function ImportDialog({ isOpen, onClose, onImportComplete }: ImportDialog
                       <CheckCircle className="h-8 w-8 text-green-400" />
                     </div>
                     <p className={cn('font-medium text-white', isSeniorsMode && 'text-lg')}>
-                      Import Complete!
+                      {t('complete.success')}
                     </p>
                     <p className="text-sm text-slate-400 mt-2">
-                      {importResult.imported} items imported successfully
+                      {t('complete.itemsImported', { count: importResult.imported })}
                     </p>
                   </>
                 ) : (
@@ -408,7 +410,7 @@ export function ImportDialog({ isOpen, onClose, onImportComplete }: ImportDialog
                       <AlertTriangle className="h-8 w-8 text-amber-400" />
                     </div>
                     <p className={cn('font-medium text-white', isSeniorsMode && 'text-lg')}>
-                      Import Completed with Issues
+                      {t('complete.withIssues')}
                     </p>
                     <p className="text-sm text-slate-400 mt-2">
                       {importResult.message}
@@ -438,7 +440,7 @@ export function ImportDialog({ isOpen, onClose, onImportComplete }: ImportDialog
                   isSeniorsMode && 'min-h-[52px] text-lg'
                 )}
               >
-                Cancel
+                {t('buttons.cancel')}
               </Button>
             )}
 
@@ -457,7 +459,7 @@ export function ImportDialog({ isOpen, onClose, onImportComplete }: ImportDialog
                     isSeniorsMode && 'min-h-[52px] text-lg'
                   )}
                 >
-                  Back
+                  {t('buttons.back')}
                 </Button>
                 <Button
                   onClick={handleImport}
@@ -467,7 +469,7 @@ export function ImportDialog({ isOpen, onClose, onImportComplete }: ImportDialog
                   )}
                 >
                   <Upload className="h-4 w-4" />
-                  Import Data
+                  {t('buttons.import')}
                 </Button>
               </>
             )}
@@ -481,7 +483,7 @@ export function ImportDialog({ isOpen, onClose, onImportComplete }: ImportDialog
                 )}
               >
                 <CheckCircle className="h-4 w-4" />
-                Done
+                {t('buttons.done')}
               </Button>
             )}
           </div>

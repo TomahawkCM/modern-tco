@@ -13,6 +13,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useTranslations } from 'next-intl';
 import { X, AlertTriangle, Zap, ChevronDown, ChevronRight, RefreshCw } from 'lucide-react';
 import type { ErrorAnalysisResult, RecoverySuggestion } from '@/lib/ai/smart-error-recovery';
 
@@ -41,6 +42,7 @@ export default function ErrorRecoveryModal({
   onManualAction,
   isFixing,
 }: ErrorRecoveryModalProps) {
+  const t = useTranslations('errorRecovery');
   const [expandedSuggestion, setExpandedSuggestion] = useState<number | null>(null);
   const [showTechnicalDetails, setShowTechnicalDetails] = useState(false);
 
@@ -72,16 +74,16 @@ export default function ErrorRecoveryModal({
             <div className="flex items-center gap-3">
               <AlertTriangle className="w-8 h-8 text-red-600" />
               <div>
-                <h2 className="text-2xl font-bold text-gray-900">Import Failed</h2>
+                <h2 className="text-2xl font-bold text-gray-900">{t('title')}</h2>
                 <p className="text-sm text-gray-600 mt-1">
-                  Don't worry! We can help you fix this.
+                  {t('subtitle')}
                 </p>
               </div>
             </div>
             <button
               onClick={onClose}
               className="p-2 hover:bg-white rounded-lg transition-colors"
-              aria-label="Close modal"
+              aria-label={t('closeModal')}
             >
               <X className="w-6 h-6 text-gray-600" />
             </button>
@@ -94,8 +96,8 @@ export default function ErrorRecoveryModal({
           <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
             <div className="flex items-center justify-between mb-3">
               <div>
-                <h3 className="text-lg font-semibold text-gray-900">Error Summary</h3>
-                <p className="text-sm text-gray-600 mt-1">Category: {categoryDisplay}</p>
+                <h3 className="text-lg font-semibold text-gray-900">{t('summary.title')}</h3>
+                <p className="text-sm text-gray-600 mt-1">{t('summary.category', { category: categoryDisplay })}</p>
               </div>
               <div className={`px-3 py-1 rounded-lg font-semibold ${severityColor}`}>
                 {severityIcon} {errorAnalysis.severity.toUpperCase()}
@@ -118,30 +120,27 @@ export default function ErrorRecoveryModal({
 
             {/* AI Explanation */}
             {errorAnalysis.aiAnalysis && (
-              <div className="mt-3 bg-blue-50 border-l-4 border-blue-400 p-3 text-sm text-blue-800">
-                <strong>AI Analysis:</strong> {errorAnalysis.aiAnalysis}
+              <div className="mt-3 bg-blue-50 border-s-4 border-blue-400 p-3 text-sm text-blue-800">
+                <strong>{t('aiAnalysis')}</strong> {errorAnalysis.aiAnalysis}
               </div>
             )}
           </div>
 
           {/* Recovery Status */}
           {errorAnalysis.canRecover ? (
-            <div className="bg-green-50 border-l-4 border-green-400 p-4 text-sm text-green-800">
-              ✅ <strong>Good news!</strong> We found {errorAnalysis.suggestions.length}{' '}
-              {errorAnalysis.suggestions.length === 1 ? 'way' : 'ways'} to recover from this
-              error.
+            <div className="bg-green-50 border-s-4 border-green-400 p-4 text-sm text-green-800">
+              ✅ {t('recovery.canRecover', { count: errorAnalysis.suggestions.length })}
             </div>
           ) : (
-            <div className="bg-red-50 border-l-4 border-red-400 p-4 text-sm text-red-800">
-              ❌ <strong>Recovery not possible.</strong> You'll need to re-export the file from
-              your bank or try a different format.
+            <div className="bg-red-50 border-s-4 border-red-400 p-4 text-sm text-red-800">
+              ❌ {t('recovery.cannotRecover')}
             </div>
           )}
 
           {/* Recovery Suggestions */}
           {errorAnalysis.suggestions.length > 0 && (
             <div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Recovery Options</h3>
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">{t('recovery.optionsTitle')}</h3>
               <div className="space-y-3">
                 {errorAnalysis.suggestions.map((suggestion, index) => (
                   <div
@@ -155,8 +154,8 @@ export default function ErrorRecoveryModal({
                             <h4 className="font-semibold text-gray-900">{suggestion.title}</h4>
                             {suggestion.autoFixable && (
                               <span className="px-2 py-0.5 bg-green-100 text-green-800 text-xs font-semibold rounded">
-                                <Zap className="w-3 h-3 inline mr-1" />
-                                AUTO-FIX
+                                <Zap className="w-3 h-3 inline me-1" />
+                                {t('suggestions.autoFix')}
                               </span>
                             )}
                             <span
@@ -168,7 +167,7 @@ export default function ErrorRecoveryModal({
                                   : 'bg-orange-100 text-orange-800'
                               }`}
                             >
-                              {(suggestion.confidence * 100).toFixed(0)}% confidence
+                              {t('suggestions.confidence', { percent: (suggestion.confidence * 100).toFixed(0) })}
                             </span>
                           </div>
                           <p className="text-sm text-gray-700">{suggestion.description}</p>
@@ -188,7 +187,7 @@ export default function ErrorRecoveryModal({
                               ) : (
                                 <ChevronRight className="w-3 h-3" />
                               )}
-                              Technical Details
+                              {t('suggestions.technicalDetails')}
                             </button>
                           )}
 
@@ -200,7 +199,7 @@ export default function ErrorRecoveryModal({
                         </div>
 
                         {/* Action Button */}
-                        <div className="ml-4">
+                        <div className="ms-4">
                           {suggestion.autoFixable ? (
                             <button
                               onClick={() => onAutoFix(suggestion)}
@@ -210,12 +209,12 @@ export default function ErrorRecoveryModal({
                               {isFixing ? (
                                 <>
                                   <RefreshCw className="w-4 h-4 animate-spin" />
-                                  Fixing...
+                                  {t('suggestions.fixing')}
                                 </>
                               ) : (
                                 <>
                                   <Zap className="w-4 h-4" />
-                                  {suggestion.actionLabel || 'Auto-Fix'}
+                                  {suggestion.actionLabel || t('suggestions.autoFixButton')}
                                 </>
                               )}
                             </button>
@@ -225,7 +224,7 @@ export default function ErrorRecoveryModal({
                               disabled={isFixing}
                               className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
                             >
-                              {suggestion.actionLabel || 'Learn More'}
+                              {suggestion.actionLabel || t('suggestions.learnMore')}
                             </button>
                           )}
                         </div>
@@ -248,22 +247,22 @@ export default function ErrorRecoveryModal({
               ) : (
                 <ChevronRight className="w-4 h-4" />
               )}
-              Advanced Technical Details
+              {t('technical.title')}
             </button>
 
             {showTechnicalDetails && (
               <div className="mt-3 bg-gray-50 border border-gray-200 rounded p-4 text-xs text-gray-700 font-mono">
                 <div>
-                  <strong>Error Category:</strong> {errorAnalysis.category}
+                  <strong>{t('technical.errorCategory')}</strong> {errorAnalysis.category}
                 </div>
                 <div className="mt-2">
-                  <strong>Severity:</strong> {errorAnalysis.severity}
+                  <strong>{t('technical.severity')}</strong> {errorAnalysis.severity}
                 </div>
                 <div className="mt-2">
-                  <strong>Can Recover:</strong> {errorAnalysis.canRecover ? 'Yes' : 'No'}
+                  <strong>{t('technical.canRecover')}</strong> {errorAnalysis.canRecover ? t('technical.yes') : t('technical.no')}
                 </div>
                 <div className="mt-2">
-                  <strong>Suggestions:</strong> {errorAnalysis.suggestions.length}
+                  <strong>{t('technical.suggestions')}</strong> {errorAnalysis.suggestions.length}
                 </div>
               </div>
             )}
@@ -276,12 +275,12 @@ export default function ErrorRecoveryModal({
             onClick={onClose}
             className="px-6 py-2 border-2 border-gray-300 text-gray-700 rounded-lg hover:bg-gray-100 transition-colors"
           >
-            Close
+            {t('footer.close')}
           </button>
           <div className="text-sm text-gray-600">
-            Need more help?{' '}
+            {t('footer.needHelp')}{' '}
             <a href="/docs/import-troubleshooting" className="text-teal-600 hover:underline">
-              View troubleshooting guide
+              {t('footer.viewGuide')}
             </a>
           </div>
         </div>
