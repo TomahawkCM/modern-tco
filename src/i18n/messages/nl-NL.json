@@ -19,11 +19,11 @@
     "import": "Importeren",
     "editDashboard": "Dashboard Bewerken",
     "saveChanges": "Wijzigingen Opslaan",
-    "resetDefaults": "Herstellen naar Standaarden"
+    "resetDefaults": "Terugzetten naar Standaarden"
   },
   "welcome": {
     "title": "Welkom bij Budget App",
-    "subtitle": "Begin met het toevoegen van uw eerste transactie of het importeren van gegevens van uw bank"
+    "subtitle": "Begin met het toevoegen van je eerste transactie of het importeren van gegevens van je bank"
   },
   "common": {
     "save": "Opslaan",
@@ -35,31 +35,411 @@
   "widget": {
     "spendingByCategory": {
       "title": "Uitgaven per Categorie",
-      "description": "Zie waar uw geld naartoe gaat met visuele overzichten"
+      "description": "Zie waar je geld naartoe gaat met visuele overzichten"
     },
     "recentTransactions": {
       "title": "Recente Transacties",
-      "description": "Snelle weergave van uw laatste financiële activiteiten"
+      "description": "Snelle weergave van je laatste financiële activiteiten"
     },
     "budgetProgress": {
-      "title": "Budget Vooruitgang",
-      "description": "Volg hoe u het doet ten opzichte van uw budgetdoelen"
+      "title": "Budgetvoortgang",
+      "description": "Volg hoe je het doet ten opzichte van je budgetdoelen"
     },
     "accountBalances": {
-      "title": "Rekening Saldo's",
-      "description": "Huidige saldi van al uw rekeningen"
+      "title": "Rekeningbalansen",
+      "description": "Huidige balansen van al je rekeningen"
     },
     "incomeVsExpenses": {
       "title": "Inkomsten vs Uitgaven",
-      "description": "Vergelijk uw inkomsten en uitgaven in de loop van de tijd"
+      "description": "Vergelijk je inkomsten en uitgaven in de tijd"
     },
     "monthlyTrends": {
       "title": "Maandelijkse Trends",
-      "description": "Visualiseer uw financiële patronen maand na maand"
+      "description": "Visualiseer je financiële patronen maand na maand"
     },
     "upcomingBills": {
       "title": "Aankomende Rekening",
       "description": "Mis nooit een betaling met herinneringen voor rekeningen"
+    }
+  },
+  "tooltip": {
+    "ariaLabel": "Meer informatie",
+    "learnMore": "Leer meer →"
+  },
+  "footer": {
+    "tagline": "Premium budgettering met een eenmalige upgrade.",
+    "links": {
+      "login": "Inloggen",
+      "signup": "Proefperiode starten",
+      "upgrade": "Upgrade",
+      "settings": "Instellingen"
+    },
+    "copyright": "© {year} {brandName}"
+  },
+  "dialog": {
+    "confirm": "Bevestigen",
+    "cancel": "Annuleren",
+    "processing": "Verwerken...",
+    "finalConfirmation": "Laatste Bevestiging:",
+    "typeToConfirm": "Typ {text} om deze actie te bevestigen."
+  },
+  "sidebar": {
+    "appTitle": "Budget App",
+    "appSubtitle": "Premium Financiën",
+    "search": "Zoeken...",
+    "shortcuts": "Sneltoetsen",
+    "navigation": {
+      "dashboard": "Dashboard",
+      "transactions": "Transacties",
+      "scanReceipt": "Bon Scannen",
+      "categories": "Categorieën",
+      "budgets": "Budgetten",
+      "subscriptions": "Abonnementen",
+      "loans": "Leningen",
+      "investments": "Investeringen",
+      "futurePlans": "Toekomstplannen",
+      "retirement": "Pensioen",
+      "reports": "Rapporten"
+    },
+    "actions": {
+      "importCsv": "CSV Importeren",
+      "settings": "Instellingen",
+      "showLess": "Minder Tonen",
+      "showAllItems": "Alle Items Tonen"
+    }
+  },
+  "onboarding": {
+    "skipTour": "Tour Overslaan",
+    "stepCounter": "Stap {current} van {total}",
+    "dontShowAgain": "Deze tour niet meer tonen",
+    "quickTip": "💡 Snelle Tip",
+    "navigation": {
+      "previous": "Vorige",
+      "next": "Volgende",
+      "getStarted": "Aan de Slag",
+      "startTour": "Start Tour"
+    },
+    "steps": {
+      "welcome": {
+        "title": "👋 Welkom bij Budget App!",
+        "description": "Laten we een korte tour maken om je te helpen met het beheren van je huishoudfinanciën. Dit duurt niet lang!"
+      },
+      "import": {
+        "title": "📥 Importeer Je Transacties",
+        "description": "Begin met het importeren van je banktransacties vanuit een CSV-bestand. We ondersteunen BMO, Home Trust en vele andere banken. De app categoriseert je transacties automatisch!"
+      },
+      "categorize": {
+        "title": "🏷️ Categoriseer & Organiseer",
+        "description": "Bekijk en pas de categorieën van transacties aan. Onze slimme categorisatie leert van je correcties om in de loop van de tijd te verbeteren. Gebruik bulkacties om meerdere transacties tegelijk te categoriseren!"
+      },
+      "budgets": {
+        "title": "🎯 Stel Je Budgetten In",
+        "description": "Maak budgetten voor verschillende uitgavencategorieën. Volg je voortgang gedurende de maand en ontvang waarschuwingen wanneer je je limieten nadert."
+      },
+      "reports": {
+        "title": "📊 Bekijk Rapporten & Inzichten",
+        "description": "Visualiseer je uitgavenpatronen, volg je nettovermogen en neem weloverwogen financiële beslissingen. Je dashboard wordt automatisch bijgewerkt met elke transactie!"
+      }
+    },
+    "tips": {
+      "import": "Sleep je CSV-bestand of klik om te bladeren. We detecteren automatisch BMO- en Home Trust-formaten!",
+      "categorize": "Gebruik de snelle categoriseerknop of selecteer meerdere transacties voor bulkcategorisatie.",
+      "budgets": "Stel realistische budgetten in en we waarschuwen je als je op het punt staat om te veel uit te geven."
+    }
+  },
+  "landing": {
+    "brand": {
+      "name": "BudgetPro",
+      "product": "Budget App"
+    },
+    "hero": {
+      "badge": "Privacy-Eerst • Alleen Lokaal • Geen Tracking",
+      "headline": "Beheer Je Geld zonder Je Gegevens Te Verkopen.",
+      "subhead": "De kracht van een spreadsheet. De eenvoud van een app. Ervaar financiële helderheid met de enige budget app die garandeert dat je gegevens nooit je apparaat verlaten.",
+      "primaryCta": {
+        "label": "Start Lokale Protocol (Gratis)",
+        "href": "/budget-app/auth/signup"
+      },
+      "secondaryCta": {
+        "label": "Inloggen",
+        "href": "/budget-app/auth/login"
+      },
+      "finePrint": "Geen bankgegevens vereist. Geen account nodig voor lokale modus."
+    },
+    "trust": {
+      "0": {
+        "title": "Jouw Apparaat, Jouw Gegevens",
+        "description": "Gegevens blijven in de IndexedDB van je browser. We kunnen het letterlijk niet zien."
+      },
+      "1": {
+        "title": "Spreadsheet Kracht",
+        "description": "Bulk bewerken, draaien en analyseren als een professional zonder de formulehoofdpijn."
+      },
+      "2": {
+        "title": "Offline Snelheid",
+        "description": "Geen vertraging. Werkt op een bergtop of in een metro-tunnel."
+      },
+      "3": {
+        "title": "Handmatige Rituelen",
+        "description": "Importwizard maakt de vrijdagse geldreview een bevredigende gewoonte."
+      }
+    },
+    "outcomes": {
+      "0": {
+        "title": "Stop Met Strijden Tegen Aggregators",
+        "description": "Geen gebroken verbindingen of her-auth loops meer. Jij controleert de gegevensinvoer."
+      },
+      "1": {
+        "title": "Privacy Door Ontwerp",
+        "description": "We verkopen je gegevens niet omdat we ze niet hebben. Punt."
+      },
+      "2": {
+        "title": "Toekomstbestendige Planning",
+        "description": "Model pensioen, leningaflossingen en spaar doelen in één geïntegreerd overzicht."
+      },
+      "3": {
+        "title": "Abonnement Killer",
+        "description": "Spot terugkerende uitgaven die andere apps missen."
+      }
+    },
+    "features": {
+      "0": {
+        "title": "Lokale Dashboard",
+        "description": "Netto waarde, cashflow en categorie-overzicht. Directe laadtijden.",
+        "href": "/budget-app"
+      },
+      "1": {
+        "title": "Import Wizard",
+        "description": "Slimme CSV-mapper voor BMO, Home Trust en aanpasbare formaten.",
+        "href": "/budget-app/import"
+      },
+      "2": {
+        "title": "Bon OCR",
+        "description": "Scan bonnen lokaal met Tesseract.js. Geen cloudverwerking.",
+        "href": "/budget-app/ocr"
+      },
+      "3": {
+        "title": "Categorie Budgetten",
+        "description": "Zero-based of rollover budgettering met gedetailleerde categoriecontrole.",
+        "href": "/budget-app/budgets"
+      },
+      "4": {
+        "title": "Pensioen Calculator",
+        "description": "Projecteer je vrijheid datum met samengestelde rente visualisaties.",
+        "href": "/budget-app/planning/retirement"
+      },
+      "5": {
+        "title": "Privacy Shield",
+        "description": "Optionele client-side encryptie voor een extra beveiligingslaag.",
+        "href": "/budget-app/settings"
+      }
+    },
+    "howItWorks": {
+      "0": {
+        "title": "Importeren",
+        "description": "Sleep & drop CSV's of scan bonnen. AI map de kolommen lokaal."
+      },
+      "1": {
+        "title": "Beoordelen",
+        "description": "Snelle categorisatie met slimme regels en bulkacties."
+      },
+      "2": {
+        "title": "Plannen",
+        "description": "Ken elke euro een taak toe en voorspel je toekomstige nettovermogen."
+      }
+    },
+    "pricing": {
+      "eyebrow": "Eerlijke Prijzen",
+      "title": "Lokaal is Gratis. Synchronisatie is Pro.",
+      "description": "Begin met het krachtige Lokale Protocol. Upgrade later als je synchronisatie tussen meerdere apparaten nodig hebt.",
+      "priceLabel": "Voor Altijd Gratis",
+      "cta": {
+        "label": "Start Lokale Protocol",
+        "href": "/budget-app/auth/signup"
+      },
+      "secondary": {
+        "label": "Bekijk Pro Kenmerken",
+        "href": "#pricing"
+      },
+      "guarantee": "Geen creditcard vereist voor Lokale Protocol."
+    },
+    "faq": {
+      "0": {
+        "q": "Is mijn data echt privé?",
+        "a": "Ja. In Lokale Protocol verlaat data nooit je apparaat. Het leeft in IndexedDB binnen je browser."
+      },
+      "1": {
+        "q": "Hoe maak ik een back-up van mijn gegevens?",
+        "a": "Je kunt op elk moment een volledige JSON-back-up exporteren. We raden ook regelmatige CSV-exporten aan."
+      },
+      "2": {
+        "q": "Wat is 'Sync' Pro?",
+        "a": "Binnenkort beschikbaar: Een optioneel abonnement om versleutelde gegevens tussen apparaten te synchroniseren via Supabase."
+      },
+      "3": {
+        "q": "Verbind je met banken?",
+        "a": "Nee. We geloven dat handmatige import veiliger, betrouwbaarder is en betere financiële bewustzijn opbouwt."
+      }
+    },
+    "security": {
+      "title": "Privacy-eerst door ontwerp",
+      "description": "De Budget App slaat je gegevens lokaal op (offline-klaar) en geeft je controle over AI-functies, exporteren en verwijderen.",
+      "buttons": {
+        "privacy": "Privacy & instellingen",
+        "offline": "Offline ondersteuning"
+      },
+      "cards": {
+        "localStorage": {
+          "title": "Lokale opslag",
+          "description": "Je budgetgegevens worden opgeslagen in je browser (IndexedDB) zodat de app snel en bruikbaar blijft offline."
+        },
+        "encryption": {
+          "title": "Encryptie ondersteuning",
+          "description": "De app bevat een encryptielaag om gevoelige budgetrecords te beschermen wanneer ingeschakeld."
+        },
+        "aiControls": {
+          "title": "AI-functiecontroles",
+          "description": "Schakel AI-gestuurde functies (zoals anomaliedetectie) in en beheer chatbottoegang vanuit instellingen."
+        },
+        "exportDelete": {
+          "title": "Exporteren & verwijderen",
+          "description": "Exporteer je gegevens en privacy-instellingen, of verwijder lokale gegevens direct vanuit de app."
+        }
+      }
+    },
+    "comparison": {
+      "headers": {
+        "feature": "Kenmerk",
+        "local": "BudgetPro Lokaal",
+        "sync": "BudgetPro Sync (Pro)",
+        "cloud": "Typische Cloud App"
+      },
+      "dataPrivacy": {
+        "feature": "Gegevensprivacy",
+        "local": "100% Privé (Lokaal)",
+        "sync": "Einde-tot-einde Versleuteld",
+        "cloud": "Inzien door Werknemers"
+      },
+      "cost": {
+        "feature": "Kosten",
+        "local": "Voor Altijd Gratis",
+        "sync": "Eenmalige Upgrade",
+        "cloud": "$100+/jaar Abonnement"
+      },
+      "offlineMode": {
+        "feature": "Offline Modus"
+      },
+      "bankConnections": {
+        "feature": "Bankverbindingen",
+        "local": "CSV / Handmatig Alleen",
+        "sync": "Optioneel (Versleuteld)",
+        "cloud": "Verplichte Aggregatie"
+      },
+      "storageLocation": {
+        "feature": "Opslaglocatie",
+        "local": "Jouw Apparaat",
+        "sync": "Zero-Knowledge Cloud",
+        "cloud": "Hun Database"
+      }
+    },
+    "socialProof": {
+      "title": "Premium afwerking, ingebouwd",
+      "description": "De details die budgetteren laten slagen: onboarding, sneltoetsen, mobiele navigatie en offline-klaar prestaties.",
+      "features": {
+        "onboarding": {
+          "title": "Onboarding tour",
+          "description": "Een begeleide tour helpt nieuwe gebruikers snel waarde te krijgen."
+        },
+        "shortcuts": {
+          "title": "Toetsenbord sneltoetsen",
+          "description": "Beweeg snel met zoek- en actie-sneltoetsen die in de UI zijn ingebouwd."
+        },
+        "mobileUx": {
+          "title": "Mobiel-eerste UX",
+          "description": "Onderste navigatie en responsieve lay-outs die natuurlijk aanvoelen."
+        },
+        "pwaInstall": {
+          "title": "PWA-installatie",
+          "description": "Installeer als een app en ga door, zelfs met onbetrouwbaar internet."
+        }
+      }
+    },
+    "pricingSection": {
+      "recommended": "Aanbevolen",
+      "productName": "Lokale Protocol",
+      "productDescription": "De complete budgeteerervaring, volledig op je apparaat draaiend.",
+      "whyChoose": "Waarom kiezen voor Lokale Protocol?",
+      "whyChooseDescription": "Zie hoe we ons verhouden tot de cloudreuzen.",
+      "features": "Inclusief onbeperkte transacties, rekeningen, budgetten en volledige lokale back-up mogelijkheden."
+    },
+    "heroSection": {
+      "cta": {
+        "heading": "Gebouwd voor helderheid, niet chaos.",
+        "viewPricing": "Bekijk prijzen"
+      },
+      "badges": {
+        "noSubscriptions": "Geen abonnementen",
+        "offlineReady": "Offline-klaar",
+        "seniorsMode": "Seniorenmodus"
+      },
+      "preview": {
+        "livePreview": "Live preview",
+        "recentTransactions": "Recente transacties",
+        "categoryBudgets": "Categorie budgetten",
+        "recurring": "Terugkerend"
+      },
+      "modes": {
+        "dashboard": "Dashboard",
+        "budgets": "Budgetten",
+        "subscriptions": "Abonnementen"
+      }
+    },
+    "featuresDeepDive": {
+      "heading1": "Spreadsheet Kracht.",
+      "heading2": "App Eenvoud.",
+      "description": "Stop met vechten met gebroken formules. Krijg de flexibiliteit van handmatige controle met de snelheid van een moderne app.",
+      "cta": "Start gratis proefperiode",
+      "explore": "Verken"
+    },
+    "accessibility": {
+      "title": "Toegankelijk als standaard",
+      "description": "Seniorenmodus biedt vereenvoudigde navigatie en grotere aanraakdoelen. Toetsenbord sneltoetsen, focusstatussen en duidelijke contrasten helpen iedereen sneller te bewegen.",
+      "badges": {
+        "seniorsMode": "Seniorenmodus",
+        "largeTouchTargets": "Grote aanraakdoelen",
+        "keyboardFirst": "Toetsenbord-eerst"
+      },
+      "buttons": {
+        "openApp": "Open de app",
+        "settings": "Toegankelijkheidsinstellingen"
+      }
+    },
+    "faqSection": {
+      "title": "FAQ",
+      "description": "Eenvoudige antwoorden op veelgestelde vragen over proefperiodes, prijzen en toegang."
+    },
+    "outcomesSection": {
+      "title": "Gebouwd voor het echte leven, niet spreadsheets",
+      "description": "De meeste budgetapps laten je het werk doen. BudgetPro is ontworpen om wrijving te verminderen terwijl je de controle houdt."
+    },
+    "howItWorksSection": {
+      "title": "Hoe het werkt",
+      "description": "Een workflow die je snel naar helderheid leidt, zonder je vast te leggen in een ingewikkeld systeem."
+    },
+    "nav": {
+      "tagline": "Premium budgettering"
+    },
+    "marquee": {
+      "logos": [
+        "Budgettering",
+        "Abonnementen",
+        "Leningen",
+        "OCR Bonnen",
+        "Rapporten",
+        "Planning",
+        "Offline",
+        "Seniorenmodus"
+      ]
     }
   }
 }

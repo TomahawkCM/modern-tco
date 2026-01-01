@@ -9,7 +9,7 @@
     "goals": "目標",
     "import": "導入",
     "export": "導出",
-    "settings": "設置",
+    "settings": "設定",
     "help": "幫助",
     "about": "關於"
   },
@@ -19,7 +19,7 @@
     "import": "導入",
     "editDashboard": "編輯儀表板",
     "saveChanges": "保存更改",
-    "resetDefaults": "重置為默認"
+    "resetDefaults": "重置為默認值"
   },
   "welcome": {
     "title": "歡迎使用預算應用",
@@ -43,7 +43,7 @@
     },
     "budgetProgress": {
       "title": "預算進度",
-      "description": "跟蹤您在預算目標上的表現"
+      "description": "跟蹤您與預算目標的進展"
     },
     "accountBalances": {
       "title": "帳戶餘額",
@@ -60,6 +60,386 @@
     "upcomingBills": {
       "title": "即將到期的賬單",
       "description": "通過賬單提醒確保不錯過付款"
+    }
+  },
+  "tooltip": {
+    "ariaLabel": "更多信息",
+    "learnMore": "了解更多 →"
+  },
+  "footer": {
+    "tagline": "高級預算管理，一次性升級。",
+    "links": {
+      "login": "登錄",
+      "signup": "開始試用",
+      "upgrade": "升級",
+      "settings": "設定"
+    },
+    "copyright": "© {year} {brandName}"
+  },
+  "dialog": {
+    "confirm": "確認",
+    "cancel": "取消",
+    "processing": "處理中...",
+    "finalConfirmation": "最終確認：",
+    "typeToConfirm": "輸入{text}以確認此操作。"
+  },
+  "sidebar": {
+    "appTitle": "預算應用",
+    "appSubtitle": "高級財務",
+    "search": "搜索...",
+    "shortcuts": "快捷方式",
+    "navigation": {
+      "dashboard": "儀表板",
+      "transactions": "交易",
+      "scanReceipt": "掃描收據",
+      "categories": "類別",
+      "budgets": "預算",
+      "subscriptions": "訂閱",
+      "loans": "貸款",
+      "investments": "投資",
+      "futurePlans": "未來計劃",
+      "retirement": "退休",
+      "reports": "報告"
+    },
+    "actions": {
+      "importCsv": "導入CSV",
+      "settings": "設定",
+      "showLess": "顯示較少",
+      "showAllItems": "顯示所有項目"
+    }
+  },
+  "onboarding": {
+    "skipTour": "跳過導覽",
+    "stepCounter": "第{current}步，共{total}步",
+    "dontShowAgain": "不再顯示此導覽",
+    "quickTip": "💡 快速提示",
+    "navigation": {
+      "previous": "上一步",
+      "next": "下一步",
+      "getStarted": "開始",
+      "startTour": "開始導覽"
+    },
+    "steps": {
+      "welcome": {
+        "title": "👋 歡迎使用預算應用！",
+        "description": "讓我們快速導覽，幫助您開始管理家庭財務。這不會花太長時間！"
+      },
+      "import": {
+        "title": "📥 導入您的交易",
+        "description": "首先從CSV文件導入您的銀行交易。我們支持BMO、Home Trust和許多其他銀行。應用會自動對您的交易進行分類！"
+      },
+      "categorize": {
+        "title": "🏷️ 分類與組織",
+        "description": "查看並調整交易類別。我們的智能分類會根據您的更正進行學習，以便不斷改進。使用批量操作一次性分類多個交易！"
+      },
+      "budgets": {
+        "title": "🎯 設置您的預算",
+        "description": "為不同的支出類別創建預算。跟蹤您在整個過程中的進展，並在接近限額時收到警報。"
+      },
+      "reports": {
+        "title": "📊 查看報告與見解",
+        "description": "可視化您的支出模式，跟蹤您的淨資產，並做出明智的財務決策。每筆交易後，您的儀表板會自動更新！"
+      }
+    },
+    "tips": {
+      "import": "拖放您的CSV文件或點擊瀏覽。我們自動檢測BMO和Home Trust格式！",
+      "categorize": "使用快速分類按鈕或選擇多個交易進行批量分類。",
+      "budgets": "設定現實的預算，如果您即將超支，我們會提醒您。"
+    }
+  },
+  "landing": {
+    "brand": {
+      "name": "預算專業",
+      "product": "預算應用"
+    },
+    "hero": {
+      "badge": "隱私優先 • 本地存儲 • 零追蹤",
+      "headline": "掌控您的財務，而不出售您的數據。",
+      "subhead": "電子表格的強大，應用的簡單。體驗唯一保證您的數據永不離開設備的預算應用。",
+      "primaryCta": {
+        "label": "開始本地協議（免費）",
+        "href": "/budget-app/auth/signup"
+      },
+      "secondaryCta": {
+        "label": "登錄",
+        "href": "/budget-app/auth/login"
+      },
+      "finePrint": "無需銀行憑證。本地模式無需帳戶。"
+    },
+    "trust": {
+      "0": {
+        "title": "您的設備，您的數據",
+        "description": "數據保留在您瀏覽器的IndexedDB中。我們根本無法看到它。"
+      },
+      "1": {
+        "title": "電子表格的強大",
+        "description": "批量編輯、透視和分析，像專業人士一樣，無需公式頭痛。"
+      },
+      "2": {
+        "title": "離線速度",
+        "description": "零延遲。在山頂或地鐵隧道中都能工作。"
+      },
+      "3": {
+        "title": "手動儀式",
+        "description": "導入向導使週五的資金審查成為一種令人滿意的習慣。"
+      }
+    },
+    "outcomes": {
+      "0": {
+        "title": "停止與聚合器鬥爭",
+        "description": "不再有斷開的連接或重新認證循環。您控制數據輸入。"
+      },
+      "1": {
+        "title": "隱私設計",
+        "description": "我們不出售您的數據，因為我們沒有它。就是這樣。"
+      },
+      "2": {
+        "title": "未來規劃",
+        "description": "在一個集成視圖中模擬退休、貸款償還和儲蓄目標。"
+      },
+      "3": {
+        "title": "訂閱殺手",
+        "description": "發現其他應用忽視的定期支出。"
+      }
+    },
+    "features": {
+      "0": {
+        "title": "本地儀表板",
+        "description": "淨資產、現金流和類別細分。即時加載時間。",
+        "href": "/budget-app"
+      },
+      "1": {
+        "title": "導入向導",
+        "description": "針對BMO、Home Trust和可自定義格式的智能CSV映射器。",
+        "href": "/budget-app/import"
+      },
+      "2": {
+        "title": "收據OCR",
+        "description": "使用Tesseract.js本地掃描收據。無需雲處理。",
+        "href": "/budget-app/ocr"
+      },
+      "3": {
+        "title": "類別預算",
+        "description": "零基礎或滾存預算，具有細緻的類別控制。",
+        "href": "/budget-app/budgets"
+      },
+      "4": {
+        "title": "退休計算器",
+        "description": "通過複利可視化預測您的自由日期。",
+        "href": "/budget-app/planning/retirement"
+      },
+      "5": {
+        "title": "隱私保護",
+        "description": "可選的客戶端加密，提供額外的安全層。",
+        "href": "/budget-app/settings"
+      }
+    },
+    "howItWorks": {
+      "0": {
+        "title": "導入",
+        "description": "拖放CSV或掃描收據。AI本地映射列。"
+      },
+      "1": {
+        "title": "審查",
+        "description": "使用智能規則和批量操作快速分類。"
+      },
+      "2": {
+        "title": "計劃",
+        "description": "為每一元分配任務，預測您的未來淨資產。"
+      }
+    },
+    "pricing": {
+      "eyebrow": "公平定價",
+      "title": "本地免費。同步為專業版。",
+      "description": "從強大的本地協議開始。如果需要多設備同步，稍後再升級。",
+      "priceLabel": "永久免费",
+      "cta": {
+        "label": "開始本地協議",
+        "href": "/budget-app/auth/signup"
+      },
+      "secondary": {
+        "label": "查看專業功能",
+        "href": "#pricing"
+      },
+      "guarantee": "本地協議無需信用卡。"
+    },
+    "faq": {
+      "0": {
+        "q": "我的數據真的隱私嗎？",
+        "a": "是的。在本地協議中，數據從未離開您的設備。它存儲在您瀏覽器的IndexedDB中。"
+      },
+      "1": {
+        "q": "我如何備份我的數據？",
+        "a": "您可以隨時導出完整的JSON備份。我們還建議定期導出CSV。"
+      },
+      "2": {
+        "q": "什麼是“同步”專業版？",
+        "a": "即將推出：可選訂閱，通過Supabase在設備之間同步加密數據。"
+      },
+      "3": {
+        "q": "你們連接銀行嗎？",
+        "a": "不。我們認為手動導入更安全、更可靠，並且能提高財務意識。"
+      }
+    },
+    "security": {
+      "title": "隱私優先設計",
+      "description": "預算應用將您的數據本地存儲（離線準備）並為AI功能、導出和刪除提供控制。",
+      "buttons": {
+        "privacy": "隱私與設定",
+        "offline": "離線支持"
+      },
+      "cards": {
+        "localStorage": {
+          "title": "本地存儲",
+          "description": "您的預算數據存儲在您的瀏覽器（IndexedDB）中，因此應用在離線時保持快速和可用。"
+        },
+        "encryption": {
+          "title": "加密支持",
+          "description": "當啟用時，應用包括一個加密層，以保護敏感預算記錄。"
+        },
+        "aiControls": {
+          "title": "AI功能控制",
+          "description": "從設定中切換AI驅動的功能（如異常檢測）並管理聊天機器人的訪問。"
+        },
+        "exportDelete": {
+          "title": "導出與刪除",
+          "description": "導出您的數據和隱私設定，或直接從應用中刪除本地數據。"
+        }
+      }
+    },
+    "comparison": {
+      "headers": {
+        "feature": "功能",
+        "local": "預算專業本地",
+        "sync": "預算專業同步（專業版）",
+        "cloud": "典型雲應用"
+      },
+      "dataPrivacy": {
+        "feature": "數據隱私",
+        "local": "100% 私密（本地）",
+        "sync": "端到端加密",
+        "cloud": "員工可查看"
+      },
+      "cost": {
+        "feature": "費用",
+        "local": "永久免费",
+        "sync": "一次性升級",
+        "cloud": "$100+/年 訂閱"
+      },
+      "offlineMode": {
+        "feature": "離線模式"
+      },
+      "bankConnections": {
+        "feature": "銀行連接",
+        "local": "僅CSV/手動",
+        "sync": "可選（加密）",
+        "cloud": "強制聚合"
+      },
+      "storageLocation": {
+        "feature": "存儲位置",
+        "local": "您的設備",
+        "sync": "零知識雲",
+        "cloud": "他們的數據庫"
+      }
+    },
+    "socialProof": {
+      "title": "內置高級設計",
+      "description": "讓預算變得持久的細節：導覽、快捷方式、移動導航和離線準備性能。",
+      "features": {
+        "onboarding": {
+          "title": "導覽",
+          "description": "引導式導覽幫助新用戶快速獲得價值。"
+        },
+        "shortcuts": {
+          "title": "鍵盤快捷方式",
+          "description": "通過內置於UI的搜索和操作快捷方式快速移動。"
+        },
+        "mobileUx": {
+          "title": "移動優先UX",
+          "description": "底部導航和響應式佈局，感覺原生。"
+        },
+        "pwaInstall": {
+          "title": "PWA安裝",
+          "description": "像應用一樣安裝，即使在網絡不穩定時也能繼續使用。"
+        }
+      }
+    },
+    "pricingSection": {
+      "recommended": "推薦",
+      "productName": "本地協議",
+      "productDescription": "完整的預算體驗，完全在您的設備上運行。",
+      "whyChoose": "為什麼選擇本地協議？",
+      "whyChooseDescription": "看看我們與雲巨頭的對比。",
+      "features": "包括無限交易、帳戶、預算和完整的本地備份功能。"
+    },
+    "heroSection": {
+      "cta": {
+        "heading": "為清晰而設計，而非混亂。",
+        "viewPricing": "查看定價"
+      },
+      "badges": {
+        "noSubscriptions": "無訂閱",
+        "offlineReady": "離線準備",
+        "seniorsMode": "老年人模式"
+      },
+      "preview": {
+        "livePreview": "實時預覽",
+        "recentTransactions": "最近交易",
+        "categoryBudgets": "類別預算",
+        "recurring": "定期"
+      },
+      "modes": {
+        "dashboard": "儀表板",
+        "budgets": "預算",
+        "subscriptions": "訂閱"
+      }
+    },
+    "featuresDeepDive": {
+      "heading1": "電子表格的強大。",
+      "heading2": "應用的簡單。",
+      "description": "停止與破碎的公式鬥爭。獲得手動控制的靈活性與現代應用的速度。",
+      "cta": "開始免費試用",
+      "explore": "探索"
+    },
+    "accessibility": {
+      "title": "默認可訪問",
+      "description": "老年人模式提供簡化的導航和更大的觸控目標。鍵盤快捷方式、焦點狀態和清晰的對比度幫助每個人更快地移動。",
+      "badges": {
+        "seniorsMode": "老年人模式",
+        "largeTouchTargets": "大觸控目標",
+        "keyboardFirst": "鍵盤優先"
+      },
+      "buttons": {
+        "openApp": "打開應用",
+        "settings": "可訪問性設定"
+      }
+    },
+    "faqSection": {
+      "title": "常見問題",
+      "description": "關於試用、定價和訪問的常見問題的簡單答案。"
+    },
+    "outcomesSection": {
+      "title": "為現實生活而設計，而非電子表格",
+      "description": "大多數預算應用讓您自己做工作。預算專業旨在減少摩擦，同時讓您保持控制。"
+    },
+    "howItWorksSection": {
+      "title": "工作原理",
+      "description": "一種快速讓您獲得清晰的工作流程，而不將您鎖定在複雜的系統中。"
+    },
+    "nav": {
+      "tagline": "高級預算管理"
+    },
+    "marquee": {
+      "logos": [
+        "預算",
+        "訂閱",
+        "貸款",
+        "OCR收據",
+        "報告",
+        "規劃",
+        "離線",
+        "老年人模式"
+      ]
     }
   }
 }

@@ -26,6 +26,7 @@ import {
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import { useTranslations } from 'next-intl';
 
 interface NavItem {
   name: string;
@@ -36,17 +37,17 @@ interface NavItem {
 }
 
 const navigation: NavItem[] = [
-  { name: "Dashboard", href: "/budget-app", icon: Home, essential: true },
-  { name: "Transactions", href: "/budget-app/transactions", icon: Receipt, essential: true },
-  { name: "Scan Receipt", href: "/budget-app/ocr", icon: Camera },
-  { name: "Categories", href: "/budget-app/categories", icon: Tags, essential: true },
-  { name: "Budgets", href: "/budget-app/budgets", icon: PieChart, essential: true },
-  { name: "Subscriptions", href: "/budget-app/subscriptions", icon: Repeat },
-  { name: "Loans", href: "/budget-app/loans", icon: CreditCard },
-  { name: "Investments", href: "/budget-app/investments", icon: Wallet },
-  { name: "Future Plans", href: "/budget-app/planning/future", icon: Target },
-  { name: "Retirement", href: "/budget-app/planning/retirement", icon: TrendingUp },
-  { name: "Reports", href: "/budget-app/reports", icon: BarChart3, essential: true },
+  { name: "dashboard", href: "/budget-app", icon: Home, essential: true },
+  { name: "transactions", href: "/budget-app/transactions", icon: Receipt, essential: true },
+  { name: "scanReceipt", href: "/budget-app/ocr", icon: Camera },
+  { name: "categories", href: "/budget-app/categories", icon: Tags, essential: true },
+  { name: "budgets", href: "/budget-app/budgets", icon: PieChart, essential: true },
+  { name: "subscriptions", href: "/budget-app/subscriptions", icon: Repeat },
+  { name: "loans", href: "/budget-app/loans", icon: CreditCard },
+  { name: "investments", href: "/budget-app/investments", icon: Wallet },
+  { name: "futurePlans", href: "/budget-app/planning/future", icon: Target },
+  { name: "retirement", href: "/budget-app/planning/retirement", icon: TrendingUp },
+  { name: "reports", href: "/budget-app/reports", icon: BarChart3, essential: true },
 ];
 
 // Simplified navigation for Seniors Mode - only essential items
@@ -61,6 +62,7 @@ interface SidebarProps {
 }
 
 export function Sidebar({ onSearch, onShowShortcuts, className, isMobile, onClose }: SidebarProps) {
+  const t = useTranslations('sidebar');
   const pathname = usePathname();
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [showAllItems, setShowAllItems] = useState(false);
@@ -109,9 +111,9 @@ export function Sidebar({ onSearch, onShowShortcuts, className, isMobile, onClos
                 className="overflow-hidden whitespace-nowrap"
               >
                 <h1 className="bg-gradient-to-r from-white to-slate-400 bg-clip-text text-lg font-bold text-transparent">
-                  Budget App
+                  {t('appTitle')}
                 </h1>
-                <p className="text-[10px] text-slate-500">Premium Finance</p>
+                <p className="text-[10px] text-slate-500">{t('appSubtitle')}</p>
               </motion.div>
             )}
           </AnimatePresence>
@@ -130,7 +132,7 @@ export function Sidebar({ onSearch, onShowShortcuts, className, isMobile, onClos
           <Search className="h-4 w-4" />
           {!isCollapsed && (
             <>
-              <span className="flex-1 text-left">Search...</span>
+              <span className="flex-1 text-left">{t('search')}</span>
               <kbd className="rounded border border-white/10 bg-black/20 px-1.5 py-0.5 font-mono text-[10px] text-slate-500">
                 ⌘K
               </kbd>
@@ -186,7 +188,7 @@ export function Sidebar({ onSearch, onShowShortcuts, className, isMobile, onClos
                     isSeniorsMode ? "text-base" : "text-sm"
                   )}
                 >
-                  {item.name}
+                  {t(`navigation.${item.name}`)}
                 </motion.span>
               )}
             </Link>
@@ -202,7 +204,7 @@ export function Sidebar({ onSearch, onShowShortcuts, className, isMobile, onClos
             aria-label={showAllItems ? "Show simplified menu" : "Show all menu items"}
           >
             <MoreHorizontal className="h-4 w-4" />
-            <span>{showAllItems ? "Show Less" : "Show All Items"}</span>
+            <span>{showAllItems ? t('actions.showLess') : t('actions.showAllItems')}</span>
           </button>
         )}
       </nav>
@@ -218,7 +220,7 @@ export function Sidebar({ onSearch, onShowShortcuts, className, isMobile, onClos
             )}
           >
             <Upload className="h-5 w-5" />
-            {!isCollapsed && <span>Import CSV</span>}
+            {!isCollapsed && <span>{t('actions.importCsv')}</span>}
           </Link>
           <Link
             href="/budget-app/settings"
@@ -228,7 +230,7 @@ export function Sidebar({ onSearch, onShowShortcuts, className, isMobile, onClos
             )}
           >
             <Settings className="h-5 w-5" />
-            {!isCollapsed && <span>Settings</span>}
+            {!isCollapsed && <span>{t('actions.settings')}</span>}
           </Link>
           <button
             onClick={onShowShortcuts}
@@ -240,7 +242,7 @@ export function Sidebar({ onSearch, onShowShortcuts, className, isMobile, onClos
             <div className="flex h-5 w-5 items-center justify-center rounded border border-slate-600 font-mono text-xs">
               ?
             </div>
-            {!isCollapsed && <span>Shortcuts</span>}
+            {!isCollapsed && <span>{t('shortcuts')}</span>}
           </button>
         </div>
       </div>

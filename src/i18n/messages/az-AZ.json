@@ -1,6 +1,6 @@
 {
   "nav": {
-    "dashboard": "İdarə Paneli",
+    "dashboard": "İdarəetmə Paneli",
     "transactions": "Əməliyyatlar",
     "budgets": "Büdcələr",
     "reports": "Hesabatlar",
@@ -14,28 +14,28 @@
     "about": "Haqqında"
   },
   "actions": {
-    "addTransaction": "Əməliyyat Əlavə Et",
-    "importData": "Məlumat İdxal Et",
+    "addTransaction": "Əməliyyat əlavə et",
+    "importData": "Məlumat idxal et",
     "import": "İdxal",
-    "editDashboard": "İdarə Panelini Dəyiş",
-    "saveChanges": "Dəyişiklikləri Saxla",
-    "resetDefaults": "Standartlara Qayıt"
+    "editDashboard": "İdarəetmə Panelini redaktə et",
+    "saveChanges": "Dəyişiklikləri saxla",
+    "resetDefaults": "Sıfırlamağa qayıt"
   },
   "welcome": {
     "title": "Büdcə Tətbiqinə Xoş Gəlmisiniz",
-    "subtitle": "İlk əməliyyatınızı əlavə edərək və ya bankdan məlumat idxal edərək başlayın"
+    "subtitle": "İlk əməliyyatınızı əlavə etməklə və ya bankınızdan məlumat idxal etməklə başlayın"
   },
   "common": {
     "save": "Saxla",
-    "cancel": "İmtina Et",
+    "cancel": "İmtina et",
     "delete": "Sil",
-    "edit": "Dəyiş",
+    "edit": "Redaktə et",
     "loading": "Yüklənir..."
   },
   "widget": {
     "spendingByCategory": {
       "title": "Kateqoriya üzrə Xərcləmə",
-      "description": "Pulunuzun haraya getdiyini vizual şəkildə görün"
+      "description": "Pulunuzun haraya getdiyini vizual olaraq görün"
     },
     "recentTransactions": {
       "title": "Son Əməliyyatlar",
@@ -50,16 +50,396 @@
       "description": "Bütün hesablarınız üzrə cari balanslar"
     },
     "incomeVsExpenses": {
-      "title": "Gəlir və Xərclər",
+      "title": "Gəlir vs Xərclər",
       "description": "Zamanla qazancınızı və xərclərinizi müqayisə edin"
     },
     "monthlyTrends": {
       "title": "Aylıq Tendensiyalar",
-      "description": "Maliyyə naxışlarınızı ay ay vizuallaşdırın"
+      "description": "Maliyyə naxışlarınızı aybaay vizuallaşdırın"
     },
     "upcomingBills": {
       "title": "Gələcək Ödənişlər",
       "description": "Ödəniş xatırlatmaları ilə heç bir ödənişi qaçırmayın"
+    }
+  },
+  "tooltip": {
+    "ariaLabel": "Daha çox məlumat",
+    "learnMore": "Daha çox öyrən →"
+  },
+  "footer": {
+    "tagline": "Bir dəfəlik yüksəlişlə premium büdcə.",
+    "links": {
+      "login": "Daxil ol",
+      "signup": "Sınağa başlayın",
+      "upgrade": "Yüksəlt",
+      "settings": "Ayarlar"
+    },
+    "copyright": "© {year} {brandName}"
+  },
+  "dialog": {
+    "confirm": "Təsdiq et",
+    "cancel": "İmtina et",
+    "processing": "İşlənir...",
+    "finalConfirmation": "Son Təsdiq:",
+    "typeToConfirm": "Bu əməliyyatı təsdiq etmək üçün {text} yazın."
+  },
+  "sidebar": {
+    "appTitle": "Büdcə Tətbiqi",
+    "appSubtitle": "Premium Maliyyə",
+    "search": "Axtar...",
+    "shortcuts": "Qısa Yollar",
+    "navigation": {
+      "dashboard": "İdarəetmə Paneli",
+      "transactions": "Əməliyyatlar",
+      "scanReceipt": "Qəbzi Skana",
+      "categories": "Kateqoriyalar",
+      "budgets": "Büdcələr",
+      "subscriptions": "Abunələr",
+      "loans": "Kreditlər",
+      "investments": "İnvestisiyalar",
+      "futurePlans": "Gələcək Planlar",
+      "retirement": "Təqaüd",
+      "reports": "Hesabatlar"
+    },
+    "actions": {
+      "importCsv": "CSV İdxal et",
+      "settings": "Ayarlar",
+      "showLess": "Daha Az Göstər",
+      "showAllItems": "Bütün Məlumatları Göstər"
+    }
+  },
+  "onboarding": {
+    "skipTour": "Turu keç",
+    "stepCounter": "Addım {current} / {total}",
+    "dontShowAgain": "Bu turu bir daha göstərmə",
+    "quickTip": "💡 Tez İpucu",
+    "navigation": {
+      "previous": "Əvvəlki",
+      "next": "Növbəti",
+      "getStarted": "Başla",
+      "startTour": "Tura Başla"
+    },
+    "steps": {
+      "welcome": {
+        "title": "👋 Büdcə Tətbiqinə Xoş Gəlmisiniz!",
+        "description": "Ev maliyyələrinizi idarə etməyə başlamaq üçün sürətli bir tur keçirək. Bu çox vaxt almayacaq!"
+      },
+      "import": {
+        "title": "📥 Əməliyyatlarınızı İdxal Edin",
+        "description": "Bank əməliyyatlarınızı CSV faylından idxal etməklə başlayın. Biz BMO, Home Trust və bir çox digər bankları dəstəkləyirik. Tətbiq avtomatik olaraq əməliyyatlarınızı kateqoriyalara ayıracaq!"
+      },
+      "categorize": {
+        "title": "🏷️ Kateqoriyalaşdırın və Təşkil Edin",
+        "description": "Əməliyyat kateqoriyalarını gözdən keçirin və düzəldin. Ağıllı kateqoriyalaşdırmamız düzəlişlərinizdən öyrənir və zamanla inkişaf edir. Eyni anda bir neçə əməliyyatı kateqoriyalaşdırmaq üçün kütləvi əməliyyatlardan istifadə edin!"
+      },
+      "budgets": {
+        "title": "🎯 Büdcələrinizi Təyin Edin",
+        "description": "Müxtəlif xərcləmə kateqoriyaları üçün büdcələr yaradın. Ay ərzində irəliləyişinizi izləyin və limitlərinizə yaxınlaşdığınızda xəbərdarlıqlar alın."
+      },
+      "reports": {
+        "title": "📊 Hesabatları və Analizləri Görün",
+        "description": "Xərcləmə naxışlarınızı vizuallaşdırın, xalis dəyərinizi izləyin və məlumatlı maliyyə qərarları verin. Hər əməliyyatdan sonra idarəetmə paneliniz avtomatik olaraq yenilənir!"
+      }
+    },
+    "tips": {
+      "import": "CSV faylınızı sürükləyin və buraxın və ya baxmaq üçün klikləyin. Biz BMO və Home Trust formatlarını avtomatik tanıyırıq!",
+      "categorize": "Tez kateqoriyalaşdırma düyməsini istifadə edin və ya kütləvi kateqoriyalaşdırma üçün bir neçə əməliyyatı seçin.",
+      "budgets": "Real büdcələr təyin edin və biz sizə aşırı xərcləmə riskiniz varsa xəbərdarlıq edəcəyik."
+    }
+  },
+  "landing": {
+    "brand": {
+      "name": "BudgetPro",
+      "product": "Büdcə Tətbiqi"
+    },
+    "hero": {
+      "badge": "Məxfilik-İlk • Yalnız Yerli • Sıfır İzləmə",
+      "headline": "Məlumatınızı Satmadan Pulunuzu İdarə Edin.",
+      "subhead": "Bir cədvəlin gücü. Bir tətbiqin sadəliyi. Məlumatlarınızın heç vaxt cihazınızdan çıxmadığını təmin edən yeganə büdcə tətbiqi ilə maliyyə aydınlığını yaşayın.",
+      "primaryCta": {
+        "label": "Yerli Protokolu Başlayın (Pulsuz)",
+        "href": "/budget-app/auth/signup"
+      },
+      "secondaryCta": {
+        "label": "Daxil ol",
+        "href": "/budget-app/auth/login"
+      },
+      "finePrint": "Bank məlumatları tələb olunmur. Yerli rejim üçün hesab lazım deyil."
+    },
+    "trust": {
+      "0": {
+        "title": "Cihazınız, Məlumatınız",
+        "description": "Məlumatlar brauzerinizin IndexedDB-də qalır. Biz onu görmək imkanına malik deyilik."
+      },
+      "1": {
+        "title": "Cədvəl Gücü",
+        "description": "Kütləvi redaktə, pivot və peşəkar kimi analiz edin, formul baş ağrıları olmadan."
+      },
+      "2": {
+        "title": "Offline Sürət",
+        "description": "Sıfır gecikmə. Dağ zirvəsində və ya metro tunelində işləyir."
+      },
+      "3": {
+        "title": "Əl Ritualları",
+        "description": "İdxal ustası cümə günü maliyyə icmalını məmnuniyyət verici bir vərdiş halına gətirir."
+      }
+    },
+    "outcomes": {
+      "0": {
+        "title": "Toplayıcılara Qarşı Mübarizəni Dayandırın",
+        "description": "Artıq qırılmış bağlantılar və yenidən təsdiq döngələri yoxdur. Məlumat girişini siz idarə edirsiniz."
+      },
+      "1": {
+        "title": "Məxfilik Dizaynı ilə",
+        "description": "Məlumatınızı satmırıq, çünki bizdə yoxdur. Bu, bitdi."
+      },
+      "2": {
+        "title": "Gələcək Planlaşdırması",
+        "description": "Təqaüd, kredit ödənişləri və qənaət məqsədlərini birləşdirilmiş görünüşdə modelləşdirin."
+      },
+      "3": {
+        "title": "Abunə Qırıcı",
+        "description": "Digər tətbiqlərin qaçırdığı cibinizdəki davamlı boşalmaları görün."
+      }
+    },
+    "features": {
+      "0": {
+        "title": "Yerli İdarəetmə Paneli",
+        "description": "Xalis dəyər, pul axını və kateqoriya bölməsi. Ani yüklənmə vaxtları.",
+        "href": "/budget-app"
+      },
+      "1": {
+        "title": "İdxal Ustası",
+        "description": "BMO, Home Trust və özelleştirilebilir formatlar üçün ağıllı CSV xəritəsi.",
+        "href": "/budget-app/import"
+      },
+      "2": {
+        "title": "Qəbz OCR",
+        "description": "Qəbzləri yerli olaraq Tesseract.js ilə skan edin. Bulud emalı yoxdur.",
+        "href": "/budget-app/ocr"
+      },
+      "3": {
+        "title": "Kateqoriya Büdcələri",
+        "description": "Sıfır əsaslı və ya dövri büdcə ilə incə kateqoriya nəzarəti.",
+        "href": "/budget-app/budgets"
+      },
+      "4": {
+        "title": "Təqaüd Hesablayıcısı",
+        "description": "Birləşmiş faiz vizuallaşdırmaları ilə azadlıq tarixini proqnozlaşdırın.",
+        "href": "/budget-app/planning/retirement"
+      },
+      "5": {
+        "title": "Məxfilik Qalxanı",
+        "description": "Əlavə təhlükəsizlik üçün müştəri tərəfində şifrələmə seçimi.",
+        "href": "/budget-app/settings"
+      }
+    },
+    "howItWorks": {
+      "0": {
+        "title": "İdxal",
+        "description": "CSV-ləri sürükləyin və buraxın və ya qəbzləri skan edin. AI sütunları yerli olaraq xəritələyir."
+      },
+      "1": {
+        "title": "Gözdən Keçirin",
+        "description": "Ağıllı qaydalar və kütləvi əməliyyatlarla sürətli kateqoriyalaşdırma."
+      },
+      "2": {
+        "title": "Planlaşdırın",
+        "description": "Hər dolları bir işə təyin edin və gələcək xalis dəyərinizi proqnozlaşdırın."
+      }
+    },
+    "pricing": {
+      "eyebrow": "Ədalətli Qiymət",
+      "title": "Yerli Pulsuzdur. Senkronizasiya Produr.",
+      "description": "Güclü Yerli Protokolla başlayın. Ehtiyacınız olduqda çox cihazlı senkronizasiya üçün yüksəldə bilərsiniz.",
+      "priceLabel": "Həmişə Pulsuz",
+      "cta": {
+        "label": "Yerli Protokolu Başlayın",
+        "href": "/budget-app/auth/signup"
+      },
+      "secondary": {
+        "label": "Pro Xüsusiyyətlərini Görün",
+        "href": "#pricing"
+      },
+      "guarantee": "Yerli Protokol üçün kredit kartı tələb olunmur."
+    },
+    "faq": {
+      "0": {
+        "q": "Məlumatım həqiqətən məxfi mi?",
+        "a": "Bəli. Yerli Protokolda, məlumatlarınız cihazınızdan çıxmır. O, brauzerinizin IndexedDB-də yaşayır."
+      },
+      "1": {
+        "q": "Məlumatımı necə yedəkləyim?",
+        "a": "İstədiyiniz zaman tam JSON yedəkləməsini ixrac edə bilərsiniz. Həmçinin müntəzəm CSV ixraclarını tövsiyə edirik."
+      },
+      "2": {
+        "q": "Sync Pro nədir?",
+        "a": "Tezliklə: Cihazlar arasında şifrələnmiş məlumatları senkronizasiya etmək üçün isteğe bağlı abunə."
+      },
+      "3": {
+        "q": "Banklarla əlaqə qurursunuz?",
+        "a": "Xeyr. Biz əllə idxalın daha təhlükəsiz, daha etibarlı olduğunu və daha yaxşı maliyyə şüuru yaratdığını düşünürük."
+      }
+    },
+    "security": {
+      "title": "Məxfilik-İlk Dizayn",
+      "description": "Büdcə Tətbiqi məlumatlarınızı yerli olaraq (offline hazır) saxlayır və AI xüsusiyyətləri, ixrac və silmə üçün sizə nəzarət verir.",
+      "buttons": {
+        "privacy": "Məxfilik və ayarlar",
+        "offline": "Offline dəstək"
+      },
+      "cards": {
+        "localStorage": {
+          "title": "Yerli yaddaş",
+          "description": "Büdcə məlumatlarınız brauzerinizdə (IndexedDB) saxlanılır ki, tətbiq sürətli və offline istifadə olunsun."
+        },
+        "encryption": {
+          "title": "Şifrələmə dəstəyi",
+          "description": "Tətbiq, aktiv edildikdə həssas büdcə qeydlərini qorumaq üçün bir şifrələmə qatını ehtiva edir."
+        },
+        "aiControls": {
+          "title": "AI xüsusiyyət nəzarətləri",
+          "description": "AI güclü xüsusiyyətləri (məsələn, anomaliya aşkar etmə) açıb bağlayın və chatbot girişini ayarlardan idarə edin."
+        },
+        "exportDelete": {
+          "title": "İxrac et və sil",
+          "description": "Məlumatlarınızı və məxfilik ayarlarınızı ixrac edin, ya da tətbiqdən birbaşa yerli məlumatları silin."
+        }
+      }
+    },
+    "comparison": {
+      "headers": {
+        "feature": "Xüsusiyyət",
+        "local": "BudgetPro Yerli",
+        "sync": "BudgetPro Senkronizasiya (Pro)",
+        "cloud": "Tipik Bulud Tətbiqi"
+      },
+      "dataPrivacy": {
+        "feature": "Məlumat Məxfilik",
+        "local": "100% Məxfi (Yerli)",
+        "sync": "Uçdan-Uça Şifrələnmiş",
+        "cloud": "İşçilər Tərəfindən Görünə Bilər"
+      },
+      "cost": {
+        "feature": "Maliyet",
+        "local": "Həmişə Pulsuz",
+        "sync": "Bir dəfəlik Yüksəliş",
+        "cloud": "$100+/il Abunə"
+      },
+      "offlineMode": {
+        "feature": "Offline Rejim"
+      },
+      "bankConnections": {
+        "feature": "Bank Bağlantıları",
+        "local": "CSV / Yalnız Əl",
+        "sync": "İsteğe bağlı (Şifrələnmiş)",
+        "cloud": "Məcburi Toplama"
+      },
+      "storageLocation": {
+        "feature": "Yaddaş Yeri",
+        "local": "Sizin Cihazınız",
+        "sync": "Sıfır-Bilgi Buludu",
+        "cloud": "Onların Veritabanı"
+      }
+    },
+    "socialProof": {
+      "title": "Premium cilalı, daxili",
+      "description": "Büdcə yaratmağı asanlaşdıran detalları: onboarding, qısa yollar, mobil naviqasiya və offline hazır performans.",
+      "features": {
+        "onboarding": {
+          "title": "Onboarding turu",
+          "description": "Yeni istifadəçilərin dəyəri tez əldə etməsinə kömək edən bir bələdçi tur."
+        },
+        "shortcuts": {
+          "title": "Klaviatura qısa yolları",
+          "description": "İstifadəçi interfeysinə daxil edilmiş axtarış və əməliyyat qısa yolları ilə sürətlə hərəkət edin."
+        },
+        "mobileUx": {
+          "title": "Mobil-İlk UX",
+          "description": "Aşağı naviqasiya və yerli hiss edən cavab verən düzənlər."
+        },
+        "pwaInstall": {
+          "title": "PWA quraşdırması",
+          "description": "Tətbiq kimi quraşdırın və internet bağlantısı zəif olsa belə davam edin."
+        }
+      }
+    },
+    "pricingSection": {
+      "recommended": "Tövsiyə Olunur",
+      "productName": "Yerli Protokol",
+      "productDescription": "Tam büdcə təcrübəsi, tamamilə cihazınızda işləyir.",
+      "whyChoose": "Niyə Yerli Protokolu seçməlisiniz?",
+      "whyChooseDescription": "Bulud nəhəngləri ilə necə müqayisə etdiyimizi görün.",
+      "features": "Limitsiz əməliyyatlar, hesablar, büdcələr və tam yerli yedəkləmə imkanlarını ehtiva edir."
+    },
+    "heroSection": {
+      "cta": {
+        "heading": "Aydınlıq üçün, xaos üçün deyil.",
+        "viewPricing": "Qiymətləri görün"
+      },
+      "badges": {
+        "noSubscriptions": "Abunə yoxdur",
+        "offlineReady": "Offline hazır",
+        "seniorsMode": "Yaşlılar Rejimi"
+      },
+      "preview": {
+        "livePreview": "Canlı önizləmə",
+        "recentTransactions": "Son əməliyyatlar",
+        "categoryBudgets": "Kateqoriya büdcələri",
+        "recurring": "Təkrarlanan"
+      },
+      "modes": {
+        "dashboard": "İdarəetmə Paneli",
+        "budgets": "Büdcələr",
+        "subscriptions": "Abunələr"
+      }
+    },
+    "featuresDeepDive": {
+      "heading1": "Cədvəl Gücü.",
+      "heading2": "Tətbiq Sadəliyi.",
+      "description": "Qırılmış formulalarla mübarizə aparmağı dayandırın. Müasir bir tətbiqin sürəti ilə əl ilə nəzarət etmənin çevikliyinizi əldə edin.",
+      "cta": "Pulsuz sınağa başlayın",
+      "explore": "Kəşf edin"
+    },
+    "accessibility": {
+      "title": "Default olaraq əlçatan",
+      "description": "Yaşlılar Rejimi sadələşdirilmiş naviqasiya və daha böyük toxunma hədəfləri təqdim edir. Klaviatura qısa yolları, fokus vəziyyətləri və aydın kontrast hər kəsi daha sürətli hərəkət etməyə kömək edir.",
+      "badges": {
+        "seniorsMode": "Yaşlılar Rejimi",
+        "largeTouchTargets": "Böyük toxunma hədəfləri",
+        "keyboardFirst": "Klaviatura-İlk"
+      },
+      "buttons": {
+        "openApp": "Tətbiqi aç",
+        "settings": "Əlçatanlıq ayarları"
+      }
+    },
+    "faqSection": {
+      "title": "Tez-tez Verilən Suallar",
+      "description": "Sınaqlar, qiymətlər və giriş haqqında ümumi suallara sadə cavablar."
+    },
+    "outcomesSection": {
+      "title": "Həqiqi həyat üçün, cədvəllər üçün deyil",
+      "description": "Əksər büdcə tətbiqləri sizə iş görməyə məcbur edir. BudgetPro, sizi nəzarətdə saxlayarkən sürtünməni azaltmaq üçün hazırlanmışdır."
+    },
+    "howItWorksSection": {
+      "title": "Necə işləyir",
+      "description": "Sizi tez bir zamanda aydınlığa aparan bir iş axını, sizi mürəkkəb bir sistemə bağlamadan."
+    },
+    "nav": {
+      "tagline": "Premium büdcə"
+    },
+    "marquee": {
+      "logos": [
+        "Büdcə",
+        "Abunələr",
+        "Kreditlər",
+        "OCR Qəbzlər",
+        "Hesabatlar",
+        "Planlaşdırma",
+        "Offline",
+        "Yaşlılar Rejimi"
+      ]
     }
   }
 }

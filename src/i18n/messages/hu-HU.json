@@ -11,7 +11,7 @@
     "export": "Exportálás",
     "settings": "Beállítások",
     "help": "Segítség",
-    "about": "Névjegy"
+    "about": "Rólunk"
   },
   "actions": {
     "addTransaction": "Tranzakció hozzáadása",
@@ -19,10 +19,10 @@
     "import": "Importálás",
     "editDashboard": "Irányítópult szerkesztése",
     "saveChanges": "Változtatások mentése",
-    "resetDefaults": "Alapértelmezett visszaállítása"
+    "resetDefaults": "Alapértelmezett értékek visszaállítása"
   },
   "welcome": {
-    "title": "Üdvözöljük a Költségvetési Alkalmazásban",
+    "title": "Üdvözöljük a Költségvetés Alkalmazásban",
     "subtitle": "Kezdje az első tranzakciója hozzáadásával vagy adatok importálásával a bankjától"
   },
   "common": {
@@ -34,7 +34,7 @@
   },
   "widget": {
     "spendingByCategory": {
-      "title": "Kategóriák Szerinti Kiadások",
+      "title": "Kiadások Kategóriák Szerint",
       "description": "Nézze meg, hová megy a pénze vizuális bontásban"
     },
     "recentTransactions": {
@@ -42,16 +42,16 @@
       "description": "Gyors áttekintés a legfrissebb pénzügyi tevékenységéről"
     },
     "budgetProgress": {
-      "title": "Költségvetés Előrehaladása",
+      "title": "Költségvetés Haladása",
       "description": "Kövesse nyomon, hogyan áll a költségvetési céljaihoz képest"
     },
     "accountBalances": {
       "title": "Számlaegyenlegek",
-      "description": "Jelenlegi egyenlegek az összes számláján"
+      "description": "Jelenlegi egyenlegek minden számláján"
     },
     "incomeVsExpenses": {
       "title": "Bevétel vs Kiadás",
-      "description": "Hasonlítsa össze a bevételeit és kiadásait időben"
+      "description": "Hasonlítsa össze a bevételeit és a kiadásait időben"
     },
     "monthlyTrends": {
       "title": "Havi Trendek",
@@ -59,7 +59,387 @@
     },
     "upcomingBills": {
       "title": "Közelgő Számlák",
-      "description": "Soha ne késlekedjen a fizetéssel a számlamegőrzőkkel"
+      "description": "Soha ne mulassza el a fizetést a számlák emlékeztetőivel"
+    }
+  },
+  "tooltip": {
+    "ariaLabel": "További információ",
+    "learnMore": "Tudjon meg többet →"
+  },
+  "footer": {
+    "tagline": "Prémium költségvetés egy egyszeri frissítéssel.",
+    "links": {
+      "login": "Bejelentkezés",
+      "signup": "Próbálja ki",
+      "upgrade": "Frissítés",
+      "settings": "Beállítások"
+    },
+    "copyright": "© {year} {brandName}"
+  },
+  "dialog": {
+    "confirm": "Megerősítés",
+    "cancel": "Mégse",
+    "processing": "Feldolgozás...",
+    "finalConfirmation": "Végső megerősítés:",
+    "typeToConfirm": "Írja be {text} a művelet megerősítéséhez."
+  },
+  "sidebar": {
+    "appTitle": "Költségvetés Alkalmazás",
+    "appSubtitle": "Prémium Pénzügy",
+    "search": "Keresés...",
+    "shortcuts": "Gyorsbillentyűk",
+    "navigation": {
+      "dashboard": "Irányítópult",
+      "transactions": "Tranzakciók",
+      "scanReceipt": "Nyugta beolvasása",
+      "categories": "Kategóriák",
+      "budgets": "Költségvetések",
+      "subscriptions": "Előfizetések",
+      "loans": "Hitelek",
+      "investments": "Befektetések",
+      "futurePlans": "Jövőbeli Tervek",
+      "retirement": "Nyugdíj",
+      "reports": "Jelentések"
+    },
+    "actions": {
+      "importCsv": "CSV Importálás",
+      "settings": "Beállítások",
+      "showLess": "Kevesebb mutatása",
+      "showAllItems": "Összes elem megjelenítése"
+    }
+  },
+  "onboarding": {
+    "skipTour": "Körút kihagyása",
+    "stepCounter": "Lépés {current} a {total}-ból",
+    "dontShowAgain": "Ne mutassa ezt a körutat újra",
+    "quickTip": "💡 Gyors Tipp",
+    "navigation": {
+      "previous": "Előző",
+      "next": "Következő",
+      "getStarted": "Kezdje el",
+      "startTour": "Körút indítása"
+    },
+    "steps": {
+      "welcome": {
+        "title": "👋 Üdvözöljük a Költségvetés Alkalmazásban!",
+        "description": "Tartsunk egy gyors körutat, hogy segítsünk Önnek a háztartási pénzügyei kezelésében. Ez nem fog sokáig tartani!"
+      },
+      "import": {
+        "title": "📥 Tranzakciók Importálása",
+        "description": "Kezdje azzal, hogy importálja banki tranzakcióit egy CSV fájlból. Támogatjuk a BMO-t, a Home Trust-ot és sok más bankot. Az alkalmazás automatikusan kategorizálja tranzakcióit!"
+      },
+      "categorize": {
+        "title": "🏷️ Kategorizálás és Szervezés",
+        "description": "Tekintse át és állítsa be a tranzakciók kategóriáit. Az okos kategorizálás tanul az Ön korrekcióiból, hogy idővel javuljon. Használjon tömeges műveleteket több tranzakció egyszerre történő kategorizálásához!"
+      },
+      "budgets": {
+        "title": "🎯 Költségvetések Beállítása",
+        "description": "Hozzon létre költségvetéseket különböző kiadási kategóriákhoz. Kövesse nyomon a hónap során a haladását, és kapjon figyelmeztetéseket, amikor közelít a határértékekhez."
+      },
+      "reports": {
+        "title": "📊 Jelentések és Elemzések Megtekintése",
+        "description": "Vizualizálja kiadási mintáit, kövesse nyomon nettó vagyonát, és hozzon megalapozott pénzügyi döntéseket. Az irányítópult automatikusan frissül minden tranzakcióval!"
+      }
+    },
+    "tips": {
+      "import": "Húzza és ejtse a CSV fájlt, vagy kattintson a böngészéshez. Automatikusan észleljük a BMO és Home Trust formátumokat!",
+      "categorize": "Használja a gyors kategorizáló gombot, vagy válasszon ki több tranzakciót a tömeges kategorizáláshoz.",
+      "budgets": "Állítson be reális költségvetéseket, és figyelmeztetjük, ha túlköltekezésre készül."
+    }
+  },
+  "landing": {
+    "brand": {
+      "name": "BudgetPro",
+      "product": "Költségvetés Alkalmazás"
+    },
+    "hero": {
+      "badge": "Adatvédelem Először • Csak Helyi • Nulla Nyomkövetés",
+      "headline": "Mesterkedjen a Pénzével anélkül, hogy Eladná Az Adatát.",
+      "subhead": "A táblázatkezelő ereje. Az alkalmazás egyszerűsége. Tapasztalja meg a pénzügyi tisztaságot az egyetlen költségvetés alkalmazásban, amely garantálja, hogy az adatai soha nem hagyják el az eszközét.",
+      "primaryCta": {
+        "label": "Helyi Protokoll Indítása (Ingyenes)",
+        "href": "/budget-app/auth/signup"
+      },
+      "secondaryCta": {
+        "label": "Bejelentkezés",
+        "href": "/budget-app/auth/login"
+      },
+      "finePrint": "Nincs szükség banki hitelesítő adatokra. Helyi módhoz nem szükséges fiók."
+    },
+    "trust": {
+      "0": {
+        "title": "Az Ön Eszköze, Az Ön Adatai",
+        "description": "Az adatok a böngészője IndexedDB-jében maradnak. Mi szó szerint nem látjuk őket."
+      },
+      "1": {
+        "title": "Táblázatkezelő Erő",
+        "description": "Tömeges szerkesztés, pivotálás és elemzés profiként, formula fejfájások nélkül."
+      },
+      "2": {
+        "title": "Offline Sebesség",
+        "description": "Nulla késleltetés. Működik hegycsúcson vagy metróalagútban."
+      },
+      "3": {
+        "title": "Manuális Rituálék",
+        "description": "Az import varázsló segít a pénteki pénzáttekintés szokásává válni."
+      }
+    },
+    "outcomes": {
+      "0": {
+        "title": "Álljon Meg Az Aggregátorokkal Való Harcban",
+        "description": "Nincs több megszakadt kapcsolat vagy újra-hitelesítési ciklus. Ön irányítja az adatbevitelt."
+      },
+      "1": {
+        "title": "Adatvédelem Tervezés Szerint",
+        "description": "Nem adjuk el az adatait, mert nincsenek. Pont."
+      },
+      "2": {
+        "title": "Jövőbiztos Tervezés",
+        "description": "Modellezze a nyugdíjat, a hiteltörlesztéseket és a megtakarítási célokat egy integrált nézetben."
+      },
+      "3": {
+        "title": "Előfizetés Gyilkos",
+        "description": "Azonosítsa a pénztárcáját folyamatosan terhelő költségeket, amelyeket más alkalmazások figyelmen kívül hagynak."
+      }
+    },
+    "features": {
+      "0": {
+        "title": "Helyi Irányítópult",
+        "description": "Nettó vagyon, készpénzáramlás és kategória bontás. Azonnali betöltési idők.",
+        "href": "/budget-app"
+      },
+      "1": {
+        "title": "Import Varázsló",
+        "description": "Okos CSV térképező a BMO, Home Trust és testreszabható formátumokhoz.",
+        "href": "/budget-app/import"
+      },
+      "2": {
+        "title": "Nyugta OCR",
+        "description": "Nyugták helyi beolvasása Tesseract.js segítségével. Nincs felhőalapú feldolgozás.",
+        "href": "/budget-app/ocr"
+      },
+      "3": {
+        "title": "Kategória Költségvetések",
+        "description": "Nulla alapú vagy gördülő költségvetés részletes kategória vezérléssel.",
+        "href": "/budget-app/budgets"
+      },
+      "4": {
+        "title": "Nyugdíj Számológép",
+        "description": "Projekció az Ön szabadsági dátumáról, kamatos kamat vizualizációkkal.",
+        "href": "/budget-app/planning/retirement"
+      },
+      "5": {
+        "title": "Adatvédelmi Pajzs",
+        "description": "Opcionális kliensoldali titkosítás egy extra biztonsági réteghez.",
+        "href": "/budget-app/settings"
+      }
+    },
+    "howItWorks": {
+      "0": {
+        "title": "Importálás",
+        "description": "Húzza és ejtse a CSV fájlokat vagy olvassa be a nyugtákat. Az AI helyben térképezi fel az oszlopokat."
+      },
+      "1": {
+        "title": "Áttekintés",
+        "description": "Gyors kategorizálás okos szabályokkal és tömeges műveletekkel."
+      },
+      "2": {
+        "title": "Tervezés",
+        "description": "Minden dollárt rendeljen el egy feladathoz, és előre jelezze a jövőbeli nettó vagyonát."
+      }
+    },
+    "pricing": {
+      "eyebrow": "Méltányos Árazás",
+      "title": "A Helyi Ingyenes. A Szinkronizálás Prémium.",
+      "description": "Kezdje a hatékony Helyi Protokollal. Később frissíthet, ha szüksége van több eszköz szinkronizálására.",
+      "priceLabel": "Ingyenes Örökre",
+      "cta": {
+        "label": "Helyi Protokoll Indítása",
+        "href": "/budget-app/auth/signup"
+      },
+      "secondary": {
+        "label": "Nézze meg a Prémium Funkciókat",
+        "href": "#pricing"
+      },
+      "guarantee": "Nincs szükség hitelkártyára a Helyi Protokollhoz."
+    },
+    "faq": {
+      "0": {
+        "q": "Valóban magán a dataim?",
+        "a": "Igen. A Helyi Protokollban az adatok soha nem hagyják el az eszközét. A böngészőjében az IndexedDB-ben élnek."
+      },
+      "1": {
+        "q": "Hogyan készíthetek biztonsági másolatot az adataimról?",
+        "a": "Bármikor exportálhat egy teljes JSON biztonsági másolatot. Javasoljuk a rendszeres CSV exportokat is."
+      },
+      "2": {
+        "q": "Mi az a 'Szinkronizálás' Prémium?",
+        "a": "Hamarosan: Opcionális előfizetés titkosított adatok szinkronizálására eszközök között a Supabase segítségével."
+      },
+      "3": {
+        "q": "Kapcsolódik a bankokhoz?",
+        "a": "Nem. Úgy véljük, hogy a manuális import biztonságosabb, megbízhatóbb, és jobb pénzügyi tudatosságot épít."
+      }
+    },
+    "security": {
+      "title": "Adatvédelem tervezés szerint",
+      "description": "A Költségvetés Alkalmazás helyben tárolja az adatait (offline-készen) és lehetőségeket ad az AI funkciók, exportálás és törlés kezelésére.",
+      "buttons": {
+        "privacy": "Adatvédelem és beállítások",
+        "offline": "Offline támogatás"
+      },
+      "cards": {
+        "localStorage": {
+          "title": "Helyi tárolás",
+          "description": "A költségvetési adatai a böngészőjében (IndexedDB) tárolódnak, így az alkalmazás gyors és használható offline."
+        },
+        "encryption": {
+          "title": "Titkosítási támogatás",
+          "description": "Az alkalmazás tartalmaz egy titkosítási réteget az érzékeny költségvetési nyilvántartások védelmére, ha engedélyezve van."
+        },
+        "aiControls": {
+          "title": "AI funkciók vezérlése",
+          "description": "Kapcsolja be vagy ki az AI-alapú funkciókat (például anomália észlelés) és kezelje a chatbot hozzáférést a beállításokból."
+        },
+        "exportDelete": {
+          "title": "Exportálás és törlés",
+          "description": "Exportálja adatait és adatvédelmi beállításait, vagy törölje a helyi adatokat közvetlenül az alkalmazásból."
+        }
+      }
+    },
+    "comparison": {
+      "headers": {
+        "feature": "Funkció",
+        "local": "BudgetPro Helyi",
+        "sync": "BudgetPro Szinkronizálás (Prémium)",
+        "cloud": "Tipikus Felhő Alkalmazás"
+      },
+      "dataPrivacy": {
+        "feature": "Adatvédelem",
+        "local": "100% Magán (Helyi)",
+        "sync": "Végpontok közötti titkosított",
+        "cloud": "Alkalmazottak által látható"
+      },
+      "cost": {
+        "feature": "Költség",
+        "local": "Ingyenes Örökre",
+        "sync": "Egyszeri Frissítés",
+        "cloud": "$100+/év Előfizetés"
+      },
+      "offlineMode": {
+        "feature": "Offline Mód"
+      },
+      "bankConnections": {
+        "feature": "Bankkapcsolatok",
+        "local": "CSV / Csak Manuális",
+        "sync": "Opcionális (Titkosított)",
+        "cloud": "Kötelező Aggregáció"
+      },
+      "storageLocation": {
+        "feature": "Tárolási Hely",
+        "local": "Az Ön Eszköze",
+        "sync": "Zero-Knowledge Felhő",
+        "cloud": "Az Ő Adatbázisuk"
+      }
+    },
+    "socialProof": {
+      "title": "Prémium csiszolás, beépítve",
+      "description": "A részletek, amelyek a költségvetést működőképessé teszik: bevezetés, gyorsbillentyűk, mobil navigáció és offline-kész teljesítmény.",
+      "features": {
+        "onboarding": {
+          "title": "Bevezető körút",
+          "description": "Egy irányított körút segít az új felhasználóknak gyorsan értéket találni."
+        },
+        "shortcuts": {
+          "title": "Gyorsbillentyűk",
+          "description": "Mozogjon gyorsan a keresés és az akció gyorsbillentyűivel, amelyek beépítve vannak a felhasználói felületbe."
+        },
+        "mobileUx": {
+          "title": "Mobil első UX",
+          "description": "Alsó navigáció és reszponzív elrendezések, amelyek natív érzést keltenek."
+        },
+        "pwaInstall": {
+          "title": "PWA telepítés",
+          "description": "Telepítse, mint egy alkalmazást, és folytassa, még ha a kapcsolat ingadozik is."
+        }
+      }
+    },
+    "pricingSection": {
+      "recommended": "Ajánlott",
+      "productName": "Helyi Protokoll",
+      "productDescription": "A teljes költségvetési élmény, amely teljesen az Ön eszközén fut.",
+      "whyChoose": "Miért válassza a Helyi Protokollt?",
+      "whyChooseDescription": "Nézze meg, hogyan állunk a felhőóriásokkal szemben.",
+      "features": "Tartalmaz korlátlan tranzakciókat, számlákat, költségvetéseket és teljes helyi biztonsági mentési képességeket."
+    },
+    "heroSection": {
+      "cta": {
+        "heading": "A világosságért, nem a káoszért építve.",
+        "viewPricing": "Nézze meg az árakat"
+      },
+      "badges": {
+        "noSubscriptions": "Nincsenek előfizetések",
+        "offlineReady": "Offline-kész",
+        "seniorsMode": "Idősek Módja"
+      },
+      "preview": {
+        "livePreview": "Élő előnézet",
+        "recentTransactions": "Legutóbbi tranzakciók",
+        "categoryBudgets": "Kategória költségvetések",
+        "recurring": "Ismétlődő"
+      },
+      "modes": {
+        "dashboard": "Irányítópult",
+        "budgets": "Költségvetések",
+        "subscriptions": "Előfizetések"
+      }
+    },
+    "featuresDeepDive": {
+      "heading1": "Táblázatkezelő Erő.",
+      "heading2": "Alkalmazás Egyszerűsége.",
+      "description": "Ne harcoljon a törött formulákkal. Szerezze meg a manuális vezérlés rugalmasságát a modern alkalmazás sebességével.",
+      "cta": "Kezdje el az ingyenes próbát",
+      "explore": "Fedezze fel"
+    },
+    "accessibility": {
+      "title": "Alapértelmezett hozzáférhetőség",
+      "description": "Az idősek módja egyszerűsített navigációt és nagyobb érintési célokat biztosít. A gyorsbillentyűk, a fókuszállapotok és a világos kontraszt segítenek mindenkinek gyorsabban haladni.",
+      "badges": {
+        "seniorsMode": "Idősek Módja",
+        "largeTouchTargets": "Nagy érintési célok",
+        "keyboardFirst": "Billentyűzet első"
+      },
+      "buttons": {
+        "openApp": "Alkalmazás megnyitása",
+        "settings": "Hozzáférhetőségi beállítások"
+      }
+    },
+    "faqSection": {
+      "title": "GYIK",
+      "description": "Egyszerű válaszok a próbákkal, árakkal és hozzáféréssel kapcsolatos gyakori kérdésekre."
+    },
+    "outcomesSection": {
+      "title": "Való életre építve, nem táblázatokra",
+      "description": "A legtöbb költségvetési alkalmazás megköveteli, hogy Ön végezze el a munkát. A BudgetPro-t úgy tervezték, hogy csökkentse a súrlódást, miközben Ön irányít."
+    },
+    "howItWorksSection": {
+      "title": "Hogyan működik",
+      "description": "Egy munkafolyamat, amely gyorsan eljuttat a világossághoz, anélkül, hogy bonyolult rendszerbe zárna."
+    },
+    "nav": {
+      "tagline": "Prémium költségvetés"
+    },
+    "marquee": {
+      "logos": [
+        "Költségvetés",
+        "Előfizetések",
+        "Hitelek",
+        "OCR Nyugták",
+        "Jelentések",
+        "Tervezés",
+        "Offline",
+        "Idősek Módja"
+      ]
     }
   }
 }

@@ -51,7 +51,7 @@ class RateLimiter {
 /**
  * OpenAI API Client
  */
-export class ClaudeAPIClient {
+export class OpenAIAPIClient {
   private client: OpenAI;
   private rateLimiter: RateLimiter;
   private totalInputTokens: number = 0;
@@ -108,7 +108,7 @@ export class ClaudeAPIClient {
       try {
         const response = await this.client.chat.completions.create({
           model: OPENAI_MODEL,
-          max_tokens: 2000,
+          max_tokens: 16000, // Increased to handle large translation batches
           temperature: 0.3, // Lower temperature for more consistent translations
           response_format: { type: 'json_object' },
           messages: [

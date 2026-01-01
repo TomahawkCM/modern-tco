@@ -35,15 +35,15 @@
   "widget": {
     "spendingByCategory": {
       "title": "Dépenses par catégorie",
-      "description": "Voyez où va votre argent avec des visualisations"
+      "description": "Voyez où va votre argent avec des analyses visuelles"
     },
     "recentTransactions": {
       "title": "Transactions récentes",
-      "description": "Aperçu rapide de votre dernière activité financière"
+      "description": "Vue rapide de votre dernière activité financière"
     },
     "budgetProgress": {
       "title": "Progression du budget",
-      "description": "Suivez vos performances par rapport à vos objectifs budgétaires"
+      "description": "Suivez vos progrès par rapport à vos objectifs budgétaires"
     },
     "accountBalances": {
       "title": "Soldes des comptes",
@@ -51,7 +51,7 @@
     },
     "incomeVsExpenses": {
       "title": "Revenus vs Dépenses",
-      "description": "Comparez vos gains et vos dépenses au fil du temps"
+      "description": "Comparez vos revenus et vos dépenses au fil du temps"
     },
     "monthlyTrends": {
       "title": "Tendances mensuelles",
@@ -60,6 +60,386 @@
     "upcomingBills": {
       "title": "Factures à venir",
       "description": "Ne manquez jamais un paiement avec des rappels de factures"
+    }
+  },
+  "tooltip": {
+    "ariaLabel": "Plus d'informations",
+    "learnMore": "En savoir plus →"
+  },
+  "footer": {
+    "tagline": "Budgétisation premium avec une mise à niveau unique.",
+    "links": {
+      "login": "Se connecter",
+      "signup": "Commencer l'essai",
+      "upgrade": "Mettre à niveau",
+      "settings": "Paramètres"
+    },
+    "copyright": "© {year} {brandName}"
+  },
+  "dialog": {
+    "confirm": "Confirmer",
+    "cancel": "Annuler",
+    "processing": "Traitement...",
+    "finalConfirmation": "Confirmation finale :",
+    "typeToConfirm": "Tapez {text} pour confirmer cette action."
+  },
+  "sidebar": {
+    "appTitle": "Budget App",
+    "appSubtitle": "Finance Premium",
+    "search": "Recherche...",
+    "shortcuts": "Raccourcis",
+    "navigation": {
+      "dashboard": "Tableau de bord",
+      "transactions": "Transactions",
+      "scanReceipt": "Scanner le reçu",
+      "categories": "Catégories",
+      "budgets": "Budgets",
+      "subscriptions": "Abonnements",
+      "loans": "Prêts",
+      "investments": "Investissements",
+      "futurePlans": "Plans futurs",
+      "retirement": "Retraite",
+      "reports": "Rapports"
+    },
+    "actions": {
+      "importCsv": "Importer CSV",
+      "settings": "Paramètres",
+      "showLess": "Montrer moins",
+      "showAllItems": "Montrer tous les éléments"
+    }
+  },
+  "onboarding": {
+    "skipTour": "Passer la visite",
+    "stepCounter": "Étape {current} sur {total}",
+    "dontShowAgain": "Ne plus montrer cette visite",
+    "quickTip": "💡 Astuce rapide",
+    "navigation": {
+      "previous": "Précédent",
+      "next": "Suivant",
+      "getStarted": "Commencer",
+      "startTour": "Commencer la visite"
+    },
+    "steps": {
+      "welcome": {
+        "title": "👋 Bienvenue dans Budget App !",
+        "description": "Faisons une visite rapide pour vous aider à commencer à gérer vos finances domestiques. Cela ne prendra pas longtemps !"
+      },
+      "import": {
+        "title": "📥 Importez vos transactions",
+        "description": "Commencez par importer vos transactions bancaires depuis un fichier CSV. Nous prenons en charge BMO, Home Trust et de nombreuses autres banques. L'application catégorisera automatiquement vos transactions !"
+      },
+      "categorize": {
+        "title": "🏷️ Catégoriser & Organiser",
+        "description": "Examinez et ajustez les catégories de transactions. Notre catégorisation intelligente apprend de vos corrections pour s'améliorer avec le temps. Utilisez des actions groupées pour catégoriser plusieurs transactions à la fois !"
+      },
+      "budgets": {
+        "title": "🎯 Définissez vos budgets",
+        "description": "Créez des budgets pour différentes catégories de dépenses. Suivez vos progrès tout au long du mois et recevez des alertes lorsque vous approchez de vos limites."
+      },
+      "reports": {
+        "title": "📊 Voir les rapports et les insights",
+        "description": "Visualisez vos schémas de dépenses, suivez votre valeur nette et prenez des décisions financières éclairées. Votre tableau de bord se met à jour automatiquement avec chaque transaction !"
+      }
+    },
+    "tips": {
+      "import": "Faites glisser et déposez votre fichier CSV ou cliquez pour parcourir. Nous détectons automatiquement les formats BMO et Home Trust !",
+      "categorize": "Utilisez le bouton de catégorisation rapide ou sélectionnez plusieurs transactions pour une catégorisation groupée.",
+      "budgets": "Fixez des budgets réalistes et nous vous alerterons si vous êtes sur le point de dépasser."
+    }
+  },
+  "landing": {
+    "brand": {
+      "name": "BudgetPro",
+      "product": "Budget App"
+    },
+    "hero": {
+      "badge": "Priorité à la vie privée • Local uniquement • Zéro suivi",
+      "headline": "Maîtrisez votre argent sans vendre vos données.",
+      "subhead": "La puissance d'un tableur. La simplicité d'une application. Découvrez la clarté financière avec la seule application de budget qui garantit que vos données ne quittent jamais votre appareil.",
+      "primaryCta": {
+        "label": "Commencer le protocole local (gratuit)",
+        "href": "/budget-app/auth/signup"
+      },
+      "secondaryCta": {
+        "label": "Se connecter",
+        "href": "/budget-app/auth/login"
+      },
+      "finePrint": "Aucune information bancaire requise. Aucun compte nécessaire pour le mode local."
+    },
+    "trust": {
+      "0": {
+        "title": "Votre appareil, vos données",
+        "description": "Les données restent dans l'IndexedDB de votre navigateur. Nous ne pouvons littéralement pas les voir."
+      },
+      "1": {
+        "title": "Puissance du tableur",
+        "description": "Éditez en masse, pivotez et analysez comme un pro sans les maux de tête des formules."
+      },
+      "2": {
+        "title": "Vitesse hors ligne",
+        "description": "Zéro latence. Fonctionne sur un sommet de montagne ou dans un tunnel de métro."
+      },
+      "3": {
+        "title": "Rituels manuels",
+        "description": "L'assistant d'importation rend la révision financière du vendredi une habitude satisfaisante."
+      }
+    },
+    "outcomes": {
+      "0": {
+        "title": "Arrêtez de lutter contre les agrégateurs",
+        "description": "Plus de connexions rompues ou de boucles de ré-authentification. Vous contrôlez l'entrée des données."
+      },
+      "1": {
+        "title": "Confidentialité par conception",
+        "description": "Nous ne vendons pas vos données car nous ne les avons pas. Point final."
+      },
+      "2": {
+        "title": "Planification à l'épreuve du temps",
+        "description": "Modélisez la retraite, le remboursement des prêts et les objectifs d'épargne dans une vue intégrée."
+      },
+      "3": {
+        "title": "Tueur d'abonnements",
+        "description": "Repérez les drains récurrents sur votre portefeuille que d'autres applications manquent."
+      }
+    },
+    "features": {
+      "0": {
+        "title": "Tableau de bord local",
+        "description": "Valeur nette, flux de trésorerie et répartition par catégorie. Temps de chargement instantanés.",
+        "href": "/budget-app"
+      },
+      "1": {
+        "title": "Assistant d'importation",
+        "description": "Mapper CSV intelligent pour BMO, Home Trust et formats personnalisables.",
+        "href": "/budget-app/import"
+      },
+      "2": {
+        "title": "OCR de reçus",
+        "description": "Scannez les reçus localement avec Tesseract.js. Pas de traitement dans le cloud.",
+        "href": "/budget-app/ocr"
+      },
+      "3": {
+        "title": "Budgets par catégorie",
+        "description": "Budgétisation à base zéro ou report avec contrôle granulaire par catégorie.",
+        "href": "/budget-app/budgets"
+      },
+      "4": {
+        "title": "Calculateur de retraite",
+        "description": "Projetez votre date de liberté avec des visualisations d'intérêts composés.",
+        "href": "/budget-app/planning/retirement"
+      },
+      "5": {
+        "title": "Bouclier de confidentialité",
+        "description": "Chiffrement côté client optionnel pour une couche de sécurité supplémentaire.",
+        "href": "/budget-app/settings"
+      }
+    },
+    "howItWorks": {
+      "0": {
+        "title": "Importer",
+        "description": "Faites glisser et déposez des CSV ou scannez des reçus. L'IA mappe les colonnes localement."
+      },
+      "1": {
+        "title": "Examiner",
+        "description": "Catégorisation rapide avec des règles intelligentes et des actions groupées."
+      },
+      "2": {
+        "title": "Planifier",
+        "description": "Assignez chaque euro à une tâche et prévoyez votre valeur nette future."
+      }
+    },
+    "pricing": {
+      "eyebrow": "Tarification équitable",
+      "title": "Local est gratuit. La synchronisation est pro.",
+      "description": "Commencez avec le puissant protocole local. Mettez à niveau plus tard si vous avez besoin de synchronisation multi-appareils.",
+      "priceLabel": "Gratuit pour toujours",
+      "cta": {
+        "label": "Commencer le protocole local",
+        "href": "/budget-app/auth/signup"
+      },
+      "secondary": {
+        "label": "Voir les fonctionnalités Pro",
+        "href": "#pricing"
+      },
+      "guarantee": "Aucune carte de crédit requise pour le protocole local."
+    },
+    "faq": {
+      "0": {
+        "q": "Mes données sont-elles vraiment privées ?",
+        "a": "Oui. Dans le protocole local, les données ne quittent jamais votre appareil. Elles vivent dans l'IndexedDB de votre navigateur."
+      },
+      "1": {
+        "q": "Comment sauvegarder mes données ?",
+        "a": "Vous pouvez exporter une sauvegarde JSON complète à tout moment. Nous recommandons également des exports CSV réguliers."
+      },
+      "2": {
+        "q": "Qu'est-ce que 'Sync' Pro ?",
+        "a": "À venir : Un abonnement optionnel pour synchroniser des données chiffrées entre appareils via Supabase."
+      },
+      "3": {
+        "q": "Vous connectez-vous aux banques ?",
+        "a": "Non. Nous croyons que l'importation manuelle est plus sûre, plus fiable et favorise une meilleure conscience financière."
+      }
+    },
+    "security": {
+      "title": "Priorité à la confidentialité par conception",
+      "description": "L'application Budget stocke vos données localement (prête pour le hors ligne) et vous donne des contrôles pour les fonctionnalités d'IA, l'exportation et la suppression.",
+      "buttons": {
+        "privacy": "Confidentialité & paramètres",
+        "offline": "Support hors ligne"
+      },
+      "cards": {
+        "localStorage": {
+          "title": "Stockage local",
+          "description": "Vos données budgétaires sont stockées dans votre navigateur (IndexedDB) afin que l'application reste rapide et utilisable hors ligne."
+        },
+        "encryption": {
+          "title": "Support de chiffrement",
+          "description": "L'application inclut une couche de chiffrement pour protéger les enregistrements budgétaires sensibles lorsqu'elle est activée."
+        },
+        "aiControls": {
+          "title": "Contrôles des fonctionnalités d'IA",
+          "description": "Activez les fonctionnalités alimentées par l'IA (comme la détection d'anomalies) et gérez l'accès au chatbot depuis les paramètres."
+        },
+        "exportDelete": {
+          "title": "Exporter & supprimer",
+          "description": "Exportez vos données et paramètres de confidentialité, ou supprimez les données locales directement depuis l'application."
+        }
+      }
+    },
+    "comparison": {
+      "headers": {
+        "feature": "Fonctionnalité",
+        "local": "BudgetPro Local",
+        "sync": "BudgetPro Sync (Pro)",
+        "cloud": "Application cloud typique"
+      },
+      "dataPrivacy": {
+        "feature": "Confidentialité des données",
+        "local": "100% Privé (Local)",
+        "sync": "Chiffrement de bout en bout",
+        "cloud": "Visible par les employés"
+      },
+      "cost": {
+        "feature": "Coût",
+        "local": "Gratuit pour toujours",
+        "sync": "Mise à niveau unique",
+        "cloud": "Abonnement de 100 €+/an"
+      },
+      "offlineMode": {
+        "feature": "Mode hors ligne"
+      },
+      "bankConnections": {
+        "feature": "Connexions bancaires",
+        "local": "CSV / Manuel uniquement",
+        "sync": "Optionnel (Chiffré)",
+        "cloud": "Agrégation obligatoire"
+      },
+      "storageLocation": {
+        "feature": "Emplacement de stockage",
+        "local": "Votre appareil",
+        "sync": "Cloud à connaissance nulle",
+        "cloud": "Leur base de données"
+      }
+    },
+    "socialProof": {
+      "title": "Finition premium, intégrée",
+      "description": "Les détails qui rendent la budgétisation efficace : onboarding, raccourcis, navigation mobile et performances prêtes pour le hors ligne.",
+      "features": {
+        "onboarding": {
+          "title": "Visite d'onboarding",
+          "description": "Une visite guidée aide les nouveaux utilisateurs à obtenir rapidement de la valeur."
+        },
+        "shortcuts": {
+          "title": "Raccourcis clavier",
+          "description": "Déplacez-vous rapidement avec des raccourcis de recherche et d'action intégrés dans l'interface."
+        },
+        "mobileUx": {
+          "title": "UX mobile d'abord",
+          "description": "Navigation par le bas et mises en page réactives qui semblent natives."
+        },
+        "pwaInstall": {
+          "title": "Installation PWA",
+          "description": "Installez comme une application et continuez même avec une connexion Internet instable."
+        }
+      }
+    },
+    "pricingSection": {
+      "recommended": "Recommandé",
+      "productName": "Protocole local",
+      "productDescription": "L'expérience budgétaire complète, fonctionnant entièrement sur votre appareil.",
+      "whyChoose": "Pourquoi choisir le protocole local ?",
+      "whyChooseDescription": "Voyez comment nous nous comparons aux géants du cloud.",
+      "features": "Comprend des transactions illimitées, des comptes, des budgets et des capacités de sauvegarde locale complètes."
+    },
+    "heroSection": {
+      "cta": {
+        "heading": "Conçu pour la clarté, pas le chaos.",
+        "viewPricing": "Voir les prix"
+      },
+      "badges": {
+        "noSubscriptions": "Pas d'abonnements",
+        "offlineReady": "Prêt pour le hors ligne",
+        "seniorsMode": "Mode seniors"
+      },
+      "preview": {
+        "livePreview": "Aperçu en direct",
+        "recentTransactions": "Transactions récentes",
+        "categoryBudgets": "Budgets par catégorie",
+        "recurring": "Récurrent"
+      },
+      "modes": {
+        "dashboard": "Tableau de bord",
+        "budgets": "Budgets",
+        "subscriptions": "Abonnements"
+      }
+    },
+    "featuresDeepDive": {
+      "heading1": "Puissance du tableur.",
+      "heading2": "Simplicité de l'application.",
+      "description": "Arrêtez de vous battre avec des formules cassées. Obtenez la flexibilité du contrôle manuel avec la vitesse d'une application moderne.",
+      "cta": "Commencer l'essai gratuit",
+      "explore": "Explorer"
+    },
+    "accessibility": {
+      "title": "Accessible par défaut",
+      "description": "Le mode seniors offre une navigation simplifiée et des cibles tactiles plus grandes. Les raccourcis clavier, les états de focus et le contraste clair aident tout le monde à avancer plus rapidement.",
+      "badges": {
+        "seniorsMode": "Mode seniors",
+        "largeTouchTargets": "Grandes cibles tactiles",
+        "keyboardFirst": "Clavier d'abord"
+      },
+      "buttons": {
+        "openApp": "Ouvrir l'application",
+        "settings": "Paramètres d'accessibilité"
+      }
+    },
+    "faqSection": {
+      "title": "FAQ",
+      "description": "Réponses simples aux questions courantes sur les essais, les prix et l'accès."
+    },
+    "outcomesSection": {
+      "title": "Conçu pour la vie réelle, pas pour les tableurs",
+      "description": "La plupart des applications de budgétisation vous obligent à faire le travail. BudgetPro est conçu pour réduire les frictions tout en vous gardant aux commandes."
+    },
+    "howItWorksSection": {
+      "title": "Comment ça fonctionne",
+      "description": "Un flux de travail qui vous amène rapidement à la clarté, sans vous enfermer dans un système compliqué."
+    },
+    "nav": {
+      "tagline": "Budgétisation premium"
+    },
+    "marquee": {
+      "logos": [
+        "Budgétisation",
+        "Abonnements",
+        "Prêts",
+        "OCR de reçus",
+        "Rapports",
+        "Planification",
+        "Hors ligne",
+        "Mode seniors"
+      ]
     }
   }
 }

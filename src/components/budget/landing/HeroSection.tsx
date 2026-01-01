@@ -1,24 +1,28 @@
+'use client';
+
 import { Button } from "@/components/ui/button";
-import { LANDING_CONTENT } from "@/components/budget/landing/content";
+import { useLandingContent } from "@/components/budget/landing/content";
 import { AuroraBackground } from "@/components/budget/landing/AuroraBackground";
 import { LogoMarquee } from "@/components/budget/landing/LogoMarquee";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { useTranslations } from 'next-intl';
 
 type PreviewMode = "insights" | "budgets" | "subscriptions";
 
 function ProductPreview() {
   const [mode, setMode] = useState<PreviewMode>("insights");
+  const t = useTranslations('landing.heroSection');
 
   const modes: Array<{ id: PreviewMode; label: string }> = [
-    { id: "insights", label: "Insights" },
-    { id: "budgets", label: "Budgets" },
-    { id: "subscriptions", label: "Subscriptions" },
+    { id: "insights", label: t('modes.insights') },
+    { id: "budgets", label: t('modes.budgets') },
+    { id: "subscriptions", label: t('modes.subscriptions') },
   ];
 
   const headerLabel =
-    mode === "insights" ? "Dashboard" : mode === "budgets" ? "Budgets" : "Subscriptions";
+    mode === "insights" ? t('modes.dashboard') : mode === "budgets" ? t('modes.budgets') : t('modes.subscriptions');
 
   return (
     <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04] shadow-2xl shadow-black/50">
@@ -31,7 +35,7 @@ function ProductPreview() {
           </div>
           <div className="space-y-1">
             <div className="text-sm font-semibold text-white">{headerLabel}</div>
-            <div className="text-xs text-slate-400">Live preview</div>
+            <div className="text-xs text-slate-400">{t('preview.livePreview')}</div>
           </div>
         </div>
         <div className="flex items-center gap-2">
@@ -79,7 +83,7 @@ function ProductPreview() {
         ) : mode === "budgets" ? (
           <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
             <div className="flex items-center justify-between">
-              <div className="text-sm font-semibold text-white">Category budgets</div>
+              <div className="text-sm font-semibold text-white">{t('preview.categoryBudgets')}</div>
               <div className="h-8 w-24 rounded-xl bg-white/5" />
             </div>
             <div className="mt-4 space-y-3">
@@ -103,7 +107,7 @@ function ProductPreview() {
         ) : (
           <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
             <div className="flex items-center justify-between">
-              <div className="text-sm font-semibold text-white">Recurring</div>
+              <div className="text-sm font-semibold text-white">{t('preview.recurring')}</div>
               <div className="h-8 w-24 rounded-xl bg-white/5" />
             </div>
             <div className="mt-4 space-y-3">
@@ -131,7 +135,7 @@ function ProductPreview() {
       <div className="px-5 pb-5">
         <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
           <div className="flex items-center justify-between">
-            <div className="text-sm font-semibold text-white">Recent transactions</div>
+            <div className="text-sm font-semibold text-white">{t('preview.recentTransactions')}</div>
             <div className="h-8 w-24 rounded-xl bg-white/5" />
           </div>
           <div className="mt-4 space-y-3">
@@ -160,6 +164,8 @@ function ProductPreview() {
 
 export function HeroSection() {
   const [mounted, setMounted] = useState(false);
+  const content = useLandingContent();
+  const t = useTranslations('landing.heroSection');
 
   useEffect(() => {
     setMounted(true);
@@ -178,39 +184,39 @@ export function HeroSection() {
         >
           <div className="inline-flex items-center rounded-full border border-white/10 bg-white/[0.06] px-3 py-1 text-xs font-medium text-slate-100">
             <span className="mr-2 inline-flex h-2 w-2 rounded-full bg-gradient-to-r from-teal-300 to-cyan-300" />
-            {LANDING_CONTENT.hero.badge}
+            {content.hero.badge}
           </div>
 
           <h1 className="mt-6 text-5xl font-extrabold tracking-tight text-white sm:text-6xl">
-            <span className="block">{LANDING_CONTENT.hero.headline}</span>
+            <span className="block">{content.hero.headline}</span>
             <span className="mt-2 block bg-gradient-to-r from-teal-200 via-cyan-200 to-indigo-200 bg-clip-text text-transparent">
-              Built for clarity, not chaos.
+              {t('cta.heading')}
             </span>
           </h1>
           <p className="mt-5 max-w-xl text-base text-slate-300 sm:text-lg">
-            {LANDING_CONTENT.hero.subhead}
+            {content.hero.subhead}
           </p>
 
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-            <Link href={LANDING_CONTENT.hero.primaryCta.href}>
+            <Link href={content.hero.primaryCta.href}>
               <Button className="h-12 w-full rounded-xl bg-gradient-to-r from-teal-300 to-cyan-300 px-6 text-base font-extrabold text-slate-900 hover:from-teal-200 hover:to-cyan-200 sm:w-auto">
-                {LANDING_CONTENT.hero.primaryCta.label}
+                {content.hero.primaryCta.label}
               </Button>
             </Link>
             <Link
-              href={LANDING_CONTENT.pricing.secondary.href}
+              href={content.pricing.secondary.href}
               className="inline-flex h-12 items-center justify-center rounded-xl border border-white/10 bg-white/[0.06] px-6 text-base font-semibold text-white transition-colors hover:bg-white/10"
             >
-              View pricing
+              {t('cta.viewPricing')}
             </Link>
           </div>
 
-          <p className="mt-4 text-sm text-slate-400">{LANDING_CONTENT.hero.finePrint}</p>
+          <p className="mt-4 text-sm text-slate-400">{content.hero.finePrint}</p>
 
           <div className="mt-8 flex items-center gap-4 text-xs text-slate-400">
-            <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1">No subscriptions</span>
-            <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1">Offline-ready</span>
-            <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1">Seniors Mode</span>
+            <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1">{t('badges.noSubscriptions')}</span>
+            <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1">{t('badges.offlineReady')}</span>
+            <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1">{t('badges.seniorsMode')}</span>
           </div>
           <div className="mt-8">
             <LogoMarquee />

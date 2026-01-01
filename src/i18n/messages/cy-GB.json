@@ -1,29 +1,29 @@
 {
   "nav": {
-    "dashboard": "Dangosfa",
-    "transactions": "Trafodion",
+    "dashboard": "Panel",
+    "transactions": "Transacsiynau",
     "budgets": "Cyllidebau",
     "reports": "Adroddiadau",
     "accounts": "Cyfrifon",
-    "categories": "Categori",
-    "goals": "Nodau",
-    "import": "Mewnbynnu",
+    "categories": "Categorïau",
+    "goals": "Cyrchfannau",
+    "import": "Mewngofnodi",
     "export": "Allforio",
     "settings": "Gosodiadau",
     "help": "Cymorth",
     "about": "Ynghylch"
   },
   "actions": {
-    "addTransaction": "Ychwanegu Trafodaeth",
-    "importData": "Mewnbynnu Data",
-    "import": "Mewnbynnu",
-    "editDashboard": "Golygu Dangosfa",
+    "addTransaction": "Ychwanegu Tranzaciwn",
+    "importData": "Mewngofnodi Data",
+    "import": "Mewngofnodi",
+    "editDashboard": "Golygu Panel",
     "saveChanges": "Cadw Newidiadau",
-    "resetDefaults": "Ail-osod i Ddewislen"
+    "resetDefaults": "Ail-osod i'r Rhagfynegiadau"
   },
   "welcome": {
     "title": "Croeso i'r Ap Cyllideb",
-    "subtitle": "Dechreuwch trwy ychwanegu eich trafodaeth gyntaf neu fewnbynnu data o'ch banc"
+    "subtitle": "Dechreuwch trwy ychwanegu eich tranzaciwn cyntaf neu fewngofnodi data o'ch banc"
   },
   "common": {
     "save": "Cadw",
@@ -34,32 +34,412 @@
   },
   "widget": {
     "spendingByCategory": {
-      "title": "Gwariant yn ôl Categori",
+      "title": "Gwariant yn ôl Categorïau",
       "description": "Gweld ble mae eich arian yn mynd gyda dadansoddiadau gweledol"
     },
     "recentTransactions": {
-      "title": "Trafodion Diweddar",
+      "title": "Transacsiynau Diweddar",
       "description": "Golwg gyflym ar eich gweithgaredd ariannol diweddar"
     },
     "budgetProgress": {
       "title": "Cynnydd Cyllideb",
-      "description": "Tracio sut rydych chi'n gwneud yn erbyn eich nodau cyllideb"
+      "description": "Olrhain sut rydych chi'n gwneud yn erbyn eich nodau cyllideb"
     },
     "accountBalances": {
       "title": "Balansau Cyfrif",
-      "description": "Balansau presennol ar draws eich cyfrifon i gyd"
+      "description": "Balansau presennol ar draws eich holl gyfrifon"
     },
     "incomeVsExpenses": {
       "title": "Incwm yn erbyn Gwariant",
-      "description": "Cymharu eich enillion a gwariant dros amser"
+      "description": "Cymharu eich enillion a'ch gwariant dros amser"
     },
     "monthlyTrends": {
       "title": "Tuedd Misol",
       "description": "Gweledoli eich patrymau ariannol mis wrth fis"
     },
     "upcomingBills": {
-      "title": "Biliau yn Dod i Fynd",
-      "description": "Peidiwch â cholli talu gyda rhybuddion bil"
+      "title": "Biliau yn Dod i Fyny",
+      "description": "Peidiwch â cholli taliad gyda rhybuddion biliau"
+    }
+  },
+  "tooltip": {
+    "ariaLabel": "Mwy o wybodaeth",
+    "learnMore": "Dysgu mwy →"
+  },
+  "footer": {
+    "tagline": "Cyllidebu premiwm gyda gwelliant unwaith.",
+    "links": {
+      "login": "Mewngofnodi",
+      "signup": "Dechrau prawf",
+      "upgrade": "Gwelliant",
+      "settings": "Gosodiadau"
+    },
+    "copyright": "© {year} {brandName}"
+  },
+  "dialog": {
+    "confirm": "Cadarnhau",
+    "cancel": "Diddymu",
+    "processing": "Prosesu...",
+    "finalConfirmation": "Cadarnhad Terfynol:",
+    "typeToConfirm": "Teipiwch {text} i gadarnhau'r weithred hon."
+  },
+  "sidebar": {
+    "appTitle": "Ap Cyllideb",
+    "appSubtitle": "Cyllid Premiwm",
+    "search": "Chwilio...",
+    "shortcuts": "Llwybrau",
+    "navigation": {
+      "dashboard": "Panel",
+      "transactions": "Transacsiynau",
+      "scanReceipt": "Sganio Derbynneb",
+      "categories": "Categorïau",
+      "budgets": "Cyllidebau",
+      "subscriptions": "Aelodaeth",
+      "loans": "Benthyciadau",
+      "investments": "Buddsoddiadau",
+      "futurePlans": "Cynlluniau yn y Dyfodol",
+      "retirement": "Ymddeoliad",
+      "reports": "Adroddiadau"
+    },
+    "actions": {
+      "importCsv": "Mewngofnodi CSV",
+      "settings": "Gosodiadau",
+      "showLess": "Dangos Llai",
+      "showAllItems": "Dangos Pob Eitem"
+    }
+  },
+  "onboarding": {
+    "skipTour": "Skipio'r daith",
+    "stepCounter": "Cam {current} o {total}",
+    "dontShowAgain": "Peidiwch â dangos y daith hon eto",
+    "quickTip": "💡 Tip Cyflym",
+    "navigation": {
+      "previous": "Blaenorol",
+      "next": "Nesaf",
+      "getStarted": "Dechrau",
+      "startTour": "Dechrau'r Daith"
+    },
+    "steps": {
+      "welcome": {
+        "title": "👋 Croeso i'r Ap Cyllideb!",
+        "description": "Gadewch i ni gymryd taith gyflym i'ch helpu i ddechrau rheoli eich cyllid cartref. Ni fydd hyn yn cymryd hir!"
+      },
+      "import": {
+        "title": "📥 Mewngofnodi Eich Transacsiynau",
+        "description": "Dechreuwch trwy fewngofnodi eich transacsiynau banc o ffeil CSV. Rydym yn cefnogi BMO, Home Trust, a llawer o fanciau eraill. Bydd yr ap yn categorïo eich transacsiynau yn awtomatig!"
+      },
+      "categorize": {
+        "title": "🏷️ Categorïo a Threfnu",
+        "description": "Adolygwch a addaswch gategorïau'r transacsiynau. Mae ein categorïo clyfar yn dysgu o'ch cywiriadau i wella dros amser. Defnyddiwch weithredoedd màs i gategoreiddio sawl transaciwn ar unwaith!"
+      },
+      "budgets": {
+        "title": "🎯 Gosod Eich Cyllidebau",
+        "description": "Creu cyllidebau ar gyfer categorïau gwariant gwahanol. Olrhain eich cynnydd trwy gydol y mis a chael rhybuddion pan fyddwch yn agos at eich terfynau."
+      },
+      "reports": {
+        "title": "📊 Gweld Adroddiadau a Gwybodaeth",
+        "description": "Gweledoli eich patrymau gwariant, olrhain eich gwerth net, a gwneud penderfyniadau ariannol gwybodus. Mae eich panel yn diweddaru'n awtomatig gyda phob transaciwn!"
+      }
+    },
+    "tips": {
+      "import": "Tynnu a gollwng eich ffeil CSV neu glicio i chwilio. Rydym yn awtomatig yn darganfod fformatau BMO a Home Trust!",
+      "categorize": "Defnyddiwch y botwm categorïo cyflym neu ddewiswch sawl transaciwn ar gyfer categorïo màs.",
+      "budgets": "Gosod cyllidebau realistig a byddwn yn rhybuddio chi os ydych ar y trywydd i wario gormod."
+    }
+  },
+  "landing": {
+    "brand": {
+      "name": "BudgetPro",
+      "product": "Ap Cyllideb"
+    },
+    "hero": {
+      "badge": "Preifatrwydd yn Gyntaf • Dim ond Lleol • Dim Olrhain",
+      "headline": "Meistrwch Eich Arian heb Werthu Eich Data.",
+      "subhead": "Pŵer taflen waith. Symlrwydd ap. Profwch eglurder ariannol gyda'r unig ap cyllideb sy'n gwarantu nad yw eich data byth yn gadael eich dyfais.",
+      "primaryCta": {
+        "label": "Dechrau Protocol Lleol (Am Ddim)",
+        "href": "/budget-app/auth/signup"
+      },
+      "secondaryCta": {
+        "label": "Mewngofnodi",
+        "href": "/budget-app/auth/login"
+      },
+      "finePrint": "Dim angen credydau banc. Dim cyfrif angen ar gyfer modd lleol."
+    },
+    "trust": {
+      "0": {
+        "title": "Eich Dyfais, Eich Data",
+        "description": "Mae data yn aros yn IndexedDB eich porwr. Ni allwn ei weld yn llythrennol."
+      },
+      "1": {
+        "title": "Pŵer Taflen Waith",
+        "description": "Golygu màs, troi, a dadansoddi fel pro heb y penblethau fformiwla."
+      },
+      "2": {
+        "title": "Cyflymder Offlin",
+        "description": "Dim oedi. Mae'n gweithio ar ben mynydd neu yn nhunell metro."
+      },
+      "3": {
+        "title": "Ritualau Llaw",
+        "description": "Mae'r wizzard mewngofnodi yn gwneud yr Adolygiad Arian Gwener yn arfer boddhaol."
+      }
+    },
+    "outcomes": {
+      "0": {
+        "title": "Peidiwch â Phwytho gyda Chasglwyr",
+        "description": "Dim mwy o gysylltiadau torri nac ail-gydweithio. Chi sy'n rheoli'r mewnbwn data."
+      },
+      "1": {
+        "title": "Preifatrwydd trwy Ddylunio",
+        "description": "Nid ydym yn gwerthu eich data oherwydd nad oes gennym hi. Pwynt."
+      },
+      "2": {
+        "title": "Cynllunio ar gyfer y Dyfodol",
+        "description": "Modelu ymddeoliad, talu benthyciadau, a nodau arbedion mewn un golwg integredig."
+      },
+      "3": {
+        "title": "Llofnod Cyllideb",
+        "description": "Darganfod draeniau ailadrodd ar eich poced y mae apiau eraill yn eu colli."
+      }
+    },
+    "features": {
+      "0": {
+        "title": "Panel Lleol",
+        "description": "Gwerth net, llif arian, a dadansoddiad categorïau. Amser llwytho ar unwaith.",
+        "href": "/budget-app"
+      },
+      "1": {
+        "title": "Wizzard Mewngofnodi",
+        "description": "Mapydd CSV clyfar ar gyfer BMO, Home Trust, a fformatau arferadwy.",
+        "href": "/budget-app/import"
+      },
+      "2": {
+        "title": "OCR Derbynneb",
+        "description": "Sganio derbynneb yn lleol gyda Tesseract.js. Dim prosesu cwmwl.",
+        "href": "/budget-app/ocr"
+      },
+      "3": {
+        "title": "Cyllidebau Categorïau",
+        "description": "Cyllidebau seiliedig ar sero neu drosglwyddo gyda rheolaeth fanwl ar gategorïau.",
+        "href": "/budget-app/budgets"
+      },
+      "4": {
+        "title": "Cyfrifiannell Ymddeoliad",
+        "description": "Proffilio eich dyddiad rhyddhad gyda gweledigaethau llog cymcompound.",
+        "href": "/budget-app/planning/retirement"
+      },
+      "5": {
+        "title": "Clo Preifatrwydd",
+        "description": "Clo cwsmer yn ddewisol ar gyfer haen ychwanegol o ddiogelwch.",
+        "href": "/budget-app/settings"
+      }
+    },
+    "howItWorks": {
+      "0": {
+        "title": "Mewngofnodi",
+        "description": "Tynnu a gollwng CSVs neu sganio derbynneb. Mae AI yn mapio'r colofnau yn lleol."
+      },
+      "1": {
+        "title": "Adolygu",
+        "description": "Categorïo cyflym gyda rheolau clyfar a gweithredoedd màs."
+      },
+      "2": {
+        "title": "Cynllunio",
+        "description": "Rhowch swydd i bob punt a rhagfynegi eich gwerth net yn y dyfodol."
+      }
+    },
+    "pricing": {
+      "eyebrow": "Prisiau Teg",
+      "title": "Lleol yw Am Ddim. Syncronize yw Pro.",
+      "description": "Dechreuwch gyda'r Protocol Lleol pwerus. Gwellwch yn ddiweddarach os bydd angen syncronize ar gyfer sawl dyfais.",
+      "priceLabel": "Am Ddim Am Byth",
+      "cta": {
+        "label": "Dechrau Protocol Lleol",
+        "href": "/budget-app/auth/signup"
+      },
+      "secondary": {
+        "label": "Gweld Nodweddion Pro",
+        "href": "#pricing"
+      },
+      "guarantee": "Dim angen cerdyn credyd ar gyfer Protocol Lleol."
+    },
+    "faq": {
+      "0": {
+        "q": "A yw fy data yn wirioneddol breifat?",
+        "a": "Ie. Yn y Protocol Lleol, ni fydd data byth yn gadael eich dyfais. Mae'n byw yn IndexedDB o fewn eich porwr."
+      },
+      "1": {
+        "q": "Sut alla i gefnogi fy data?",
+        "a": "Gallwch allforio copi llawn JSON unrhyw bryd. Rydym hefyd yn argymell allforion CSV rheolaidd."
+      },
+      "2": {
+        "q": "Beth yw 'Sync' Pro?",
+        "a": "Yn dod yn fuan: Aelodaeth ddewisol i syncronize data wedi'i ddirwyn yn ddiogel rhwng dyfeisiau trwy Supabase."
+      },
+      "3": {
+        "q": "A ydych yn cysylltu â banciau?",
+        "a": "Na. Credwn fod mewngofnodi llaw yn ddiogelach, yn fwy dibynadwy, ac yn adeiladu ymwybyddiaeth ariannol well."
+      }
+    },
+    "security": {
+      "title": "Preifatrwydd yn gyntaf trwy ddylunio",
+      "description": "Mae'r Ap Cyllideb yn storio eich data yn lleol (barod ar gyfer offlin) ac yn rhoi rheolaethau i chi ar gyfer nodweddion AI, allforio, a dileu.",
+      "buttons": {
+        "privacy": "Preifatrwydd a gosodiadau",
+        "offline": "Cymorth Offlin"
+      },
+      "cards": {
+        "localStorage": {
+          "title": "Storfa Leol",
+          "description": "Mae eich data cyllideb yn cael ei storio yn eich porwr (IndexedDB) felly mae'r ap yn aros yn gyflym ac yn ddefnyddiol yn offlin."
+        },
+        "encryption": {
+          "title": "Cymorth Ddirwyn",
+          "description": "Mae'r ap yn cynnwys haen ddirwyn i ddiogelu cofrestriadau cyllideb sensitif pan fydd yn cael ei galluogi."
+        },
+        "aiControls": {
+          "title": "Rheolaethau nodweddion AI",
+          "description": "Togglwch nodweddion pŵer AI (fel canfod anomalia) a rheoli mynediad chatbot o'r gosodiadau."
+        },
+        "exportDelete": {
+          "title": "Allforio a dileu",
+          "description": "Allforiwch eich data a gosodiadau preifatrwydd, neu dileu data lleol yn uniongyrchol o'r ap."
+        }
+      }
+    },
+    "comparison": {
+      "headers": {
+        "feature": "Nodwedd",
+        "local": "BudgetPro Lleol",
+        "sync": "BudgetPro Sync (Pro)",
+        "cloud": "Ap Cwmwl Nodweddiadol"
+      },
+      "dataPrivacy": {
+        "feature": "Preifatrwydd Data",
+        "local": "100% Preifat (Lleol)",
+        "sync": "Ddirwyn o Ddiwedd i Ddiwedd",
+        "cloud": "Gweladwy gan Weithwyr"
+      },
+      "cost": {
+        "feature": "Cost",
+        "local": "Am Ddim Am Byth",
+        "sync": "Gwelliant Unwaith",
+        "cloud": "$100+/blwyddyn Aelodaeth"
+      },
+      "offlineMode": {
+        "feature": "Modd Offlin"
+      },
+      "bankConnections": {
+        "feature": "Cysylltiadau Banc",
+        "local": "CSV / Llaw yn Unig",
+        "sync": "Dewisol (Ddirwyn)",
+        "cloud": "Cymhwyso Casglu"
+      },
+      "storageLocation": {
+        "feature": "Lleoliad Storio",
+        "local": "Eich Dyfais",
+        "sync": "Cwmwl Dim Gwybodaeth",
+        "cloud": "Eu Cronfa Ddata"
+      }
+    },
+    "socialProof": {
+      "title": "Polish Premiwm, wedi'i adeiladu i mewn",
+      "description": "Y manylion sy'n gwneud cyllidebu'n glynu: mewngofnodi, llwybrau, navigasiwn symudol, a pherfformiad parod ar gyfer offlin.",
+      "features": {
+        "onboarding": {
+          "title": "Daith mewngofnodi",
+          "description": "Mae taith arweiniol yn helpu defnyddwyr newydd i ddod i werth yn gyflym."
+        },
+        "shortcuts": {
+          "title": "Llwybrau bysellfwrdd",
+          "description": "Symud yn gyflym gyda chwilio a llwybrau gweithredu wedi'u hadeiladu i mewn i'r UI."
+        },
+        "mobileUx": {
+          "title": "UX symudol yn gyntaf",
+          "description": "Navigasiwn isaf a phatrwm ymatebol sy'n teimlo'n frodorol."
+        },
+        "pwaInstall": {
+          "title": "Gosod PWA",
+          "description": "Gosod fel ap a pharhau hyd yn oed gyda rhyngrwyd ansicr."
+        }
+      }
+    },
+    "pricingSection": {
+      "recommended": "Argymhellir",
+      "productName": "Protocol Lleol",
+      "productDescription": "Y profiad cyllidebu cyflawn, yn rhedeg yn llwyr ar eich dyfais.",
+      "whyChoose": "Pam dewis Protocol Lleol?",
+      "whyChooseDescription": "Gweld sut rydym yn cymharu â'r cewri cwmwl.",
+      "features": "Yn cynnwys transacsiynau, cyfrifon, cyllidebau, a galluoedd allforio lleol di-limit."
+    },
+    "heroSection": {
+      "cta": {
+        "heading": "Adeiladwyd ar gyfer eglurder, nid anhrefn.",
+        "viewPricing": "Gweld prisiau"
+      },
+      "badges": {
+        "noSubscriptions": "Dim aelodaeth",
+        "offlineReady": "Parod ar gyfer offlin",
+        "seniorsMode": "Modd Henoed"
+      },
+      "preview": {
+        "livePreview": "Rhagolwg byw",
+        "recentTransactions": "Transacsiynau diweddar",
+        "categoryBudgets": "Cyllidebau categorïau",
+        "recurring": "Ailadrodd"
+      },
+      "modes": {
+        "dashboard": "Panel",
+        "budgets": "Cyllidebau",
+        "subscriptions": "Aelodaeth"
+      }
+    },
+    "featuresDeepDive": {
+      "heading1": "Pŵer Taflen Waith.",
+      "heading2": "Symlrwydd Ap.",
+      "description": "Peidiwch â phwytho gyda fformiwla torri. Cael y hyblygrwydd o reolaeth law gyda chyflymder ap modern.",
+      "cta": "Dechrau prawf am ddim",
+      "explore": "Archwilio"
+    },
+    "accessibility": {
+      "title": "Hygyrch yn ddiofyn",
+      "description": "Mae Modd Henoed yn darparu navigasiwn syml a thargedau cyffwrdd mwy. Mae llwybrau bysellfwrdd, gwahanol ddiffygion, a chontrast clir yn helpu pawb i symud yn gyflym.",
+      "badges": {
+        "seniorsMode": "Modd Henoed",
+        "largeTouchTargets": "Targedau cyffwrdd mawr",
+        "keyboardFirst": "Bysellfwrdd yn gyntaf"
+      },
+      "buttons": {
+        "openApp": "Agor yr ap",
+        "settings": "Gosodiadau hygyrchedd"
+      }
+    },
+    "faqSection": {
+      "title": "Cwestiynau Cyffredin",
+      "description": "Atebion syml i gwestiynau cyffredin am brofion, prisiau, a mynediad."
+    },
+    "outcomesSection": {
+      "title": "Adeiladwyd ar gyfer bywyd go iawn, nid taflenni gwaith",
+      "description": "Mae'r rhan fwyaf o apiau cyllidebu yn eich gwneud chi i wneud y gwaith. Mae BudgetPro wedi'i ddylunio i leihau rhwystrau tra'n eich cadw chi yn rheoli."
+    },
+    "howItWorksSection": {
+      "title": "Sut mae'n gweithio",
+      "description": "Llif gwaith sy'n eich cyrraedd i eglurder yn gyflym, heb eich cloi i mewn i system gymhleth."
+    },
+    "nav": {
+      "tagline": "Cyllidebu Premiwm"
+    },
+    "marquee": {
+      "logos": [
+        "Cyllidebu",
+        "Aelodaeth",
+        "Benthyciadau",
+        "OCR Derbynneb",
+        "Adroddiadau",
+        "Cynllunio",
+        "Offlin",
+        "Modd Henoed"
+      ]
     }
   }
 }

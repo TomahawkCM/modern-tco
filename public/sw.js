@@ -1,10 +1,11 @@
 /**
  * Budget App Service Worker
  * Enables offline functionality and PWA capabilities
- * 
+ *
  * Features:
  * - Cache-first strategy for app shell
  * - Network-first for dynamic data
+ * - Locale file caching (114 locales for offline i18n)
  * - Offline fallback page
  * - Background sync for transactions (future)
  */
@@ -126,11 +127,14 @@ function shouldCacheFirst(url) {
   // - App pages (routes)
   // - Static assets (icons, images)
   // - Scripts and styles
+  // - Locale files (i18n JSON)
   return url.pathname.startsWith('/budget-app') ||
          url.pathname.startsWith('/icons/') ||
          url.pathname.startsWith('/_next/static/') ||
+         url.pathname.includes('/chunks/src_i18n_messages_') || // Locale chunks
          url.pathname.endsWith('.js') ||
          url.pathname.endsWith('.css') ||
+         url.pathname.endsWith('.json') || // Include all JSON files
          url.pathname.endsWith('.png') ||
          url.pathname.endsWith('.jpg') ||
          url.pathname.endsWith('.svg');

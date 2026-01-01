@@ -35,7 +35,7 @@
   "widget": {
     "spendingByCategory": {
       "title": "Pengeluaran Berdasarkan Kategori",
-      "description": "Lihat kemana uang Anda pergi dengan pemecahan visual"
+      "description": "Lihat ke mana uang Anda pergi dengan pemecahan visual"
     },
     "recentTransactions": {
       "title": "Transaksi Terbaru",
@@ -47,7 +47,7 @@
     },
     "accountBalances": {
       "title": "Saldo Akun",
-      "description": "Saldo saat ini di semua akun Anda"
+      "description": "Saldo terkini di semua akun Anda"
     },
     "incomeVsExpenses": {
       "title": "Pendapatan vs Pengeluaran",
@@ -60,6 +60,386 @@
     "upcomingBills": {
       "title": "Tagihan Mendatang",
       "description": "Jangan lewatkan pembayaran dengan pengingat tagihan"
+    }
+  },
+  "tooltip": {
+    "ariaLabel": "Informasi lebih lanjut",
+    "learnMore": "Pelajari lebih lanjut →"
+  },
+  "footer": {
+    "tagline": "Anggaran premium dengan peningkatan satu kali.",
+    "links": {
+      "login": "Masuk",
+      "signup": "Mulai percobaan",
+      "upgrade": "Tingkatkan",
+      "settings": "Pengaturan"
+    },
+    "copyright": "© {year} {brandName}"
+  },
+  "dialog": {
+    "confirm": "Konfirmasi",
+    "cancel": "Batal",
+    "processing": "Memproses...",
+    "finalConfirmation": "Konfirmasi Akhir:",
+    "typeToConfirm": "Ketik {text} untuk mengonfirmasi tindakan ini."
+  },
+  "sidebar": {
+    "appTitle": "Aplikasi Anggaran",
+    "appSubtitle": "Keuangan Premium",
+    "search": "Cari...",
+    "shortcuts": "Pintasan",
+    "navigation": {
+      "dashboard": "Dasbor",
+      "transactions": "Transaksi",
+      "scanReceipt": "Pindai Struk",
+      "categories": "Kategori",
+      "budgets": "Anggaran",
+      "subscriptions": "Langganan",
+      "loans": "Pinjaman",
+      "investments": "Investasi",
+      "futurePlans": "Rencana Masa Depan",
+      "retirement": "Pensiun",
+      "reports": "Laporan"
+    },
+    "actions": {
+      "importCsv": "Impor CSV",
+      "settings": "Pengaturan",
+      "showLess": "Tampilkan Lebih Sedikit",
+      "showAllItems": "Tampilkan Semua Item"
+    }
+  },
+  "onboarding": {
+    "skipTour": "Lewati tur",
+    "stepCounter": "Langkah {current} dari {total}",
+    "dontShowAgain": "Jangan tampilkan tur ini lagi",
+    "quickTip": "💡 Tip Cepat",
+    "navigation": {
+      "previous": "Sebelumnya",
+      "next": "Selanjutnya",
+      "getStarted": "Mulai",
+      "startTour": "Mulai Tur"
+    },
+    "steps": {
+      "welcome": {
+        "title": "👋 Selamat Datang di Aplikasi Anggaran!",
+        "description": "Mari kita lakukan tur cepat untuk membantu Anda memulai mengelola keuangan rumah tangga Anda. Ini tidak akan memakan waktu lama!"
+      },
+      "import": {
+        "title": "📥 Impor Transaksi Anda",
+        "description": "Mulai dengan mengimpor transaksi bank Anda dari file CSV. Kami mendukung BMO, Home Trust, dan banyak bank lainnya. Aplikasi akan secara otomatis mengkategorikan transaksi Anda!"
+      },
+      "categorize": {
+        "title": "🏷️ Kategorikan & Atur",
+        "description": "Tinjau dan sesuaikan kategori transaksi. Kategorisasi cerdas kami belajar dari koreksi Anda untuk meningkatkan seiring waktu. Gunakan tindakan massal untuk mengkategorikan beberapa transaksi sekaligus!"
+      },
+      "budgets": {
+        "title": "🎯 Tetapkan Anggaran Anda",
+        "description": "Buat anggaran untuk kategori pengeluaran yang berbeda. Lacak kemajuan Anda sepanjang bulan dan dapatkan peringatan saat Anda mendekati batas Anda."
+      },
+      "reports": {
+        "title": "📊 Lihat Laporan & Wawasan",
+        "description": "Visualisasikan pola pengeluaran Anda, lacak kekayaan bersih Anda, dan buat keputusan keuangan yang terinformasi. Dasbor Anda diperbarui secara otomatis dengan setiap transaksi!"
+      }
+    },
+    "tips": {
+      "import": "Seret & lepas file CSV Anda atau klik untuk menjelajah. Kami mendeteksi format BMO dan Home Trust secara otomatis!",
+      "categorize": "Gunakan tombol kategorisasi cepat atau pilih beberapa transaksi untuk kategorisasi massal.",
+      "budgets": "Tetapkan anggaran yang realistis dan kami akan memberi tahu Anda jika Anda berada di jalur untuk melebihi anggaran."
+    }
+  },
+  "landing": {
+    "brand": {
+      "name": "BudgetPro",
+      "product": "Aplikasi Anggaran"
+    },
+    "hero": {
+      "badge": "Privasi Pertama • Hanya Lokal • Tanpa Pelacakan",
+      "headline": "Kuasi Uang Anda tanpa Menjual Data Anda.",
+      "subhead": "Kekuatan spreadsheet. Kesederhanaan aplikasi. Rasakan kejelasan finansial dengan satu-satunya aplikasi anggaran yang menjamin data Anda tidak pernah meninggalkan perangkat Anda.",
+      "primaryCta": {
+        "label": "Mulai Protokol Lokal (Gratis)",
+        "href": "/budget-app/auth/signup"
+      },
+      "secondaryCta": {
+        "label": "Masuk",
+        "href": "/budget-app/auth/login"
+      },
+      "finePrint": "Tidak ada kredensial bank yang diperlukan. Tidak perlu akun untuk mode lokal."
+    },
+    "trust": {
+      "0": {
+        "title": "Perangkat Anda, Data Anda",
+        "description": "Data tetap di IndexedDB browser Anda. Kami benar-benar tidak dapat melihatnya."
+      },
+      "1": {
+        "title": "Kekuatan Spreadsheet",
+        "description": "Edit massal, pivot, dan analisis seperti profesional tanpa sakit kepala formula."
+      },
+      "2": {
+        "title": "Kecepatan Offline",
+        "description": "Tanpa latensi. Bekerja di puncak gunung atau di terowongan subway."
+      },
+      "3": {
+        "title": "Ritual Manual",
+        "description": "Wizard impor menjadikan Tinjauan Uang Jumat sebagai kebiasaan yang memuaskan."
+      }
+    },
+    "outcomes": {
+      "0": {
+        "title": "Hentikan Pertarungan dengan Aggregator",
+        "description": "Tidak ada lagi koneksi yang terputus atau loop otentikasi ulang. Anda mengontrol input data."
+      },
+      "1": {
+        "title": "Privasi Berdasarkan Desain",
+        "description": "Kami tidak menjual data Anda karena kami tidak memilikinya. Titik."
+      },
+      "2": {
+        "title": "Perencanaan Masa Depan",
+        "description": "Model pensiun, pelunasan pinjaman, dan tujuan tabungan dalam satu tampilan terintegrasi."
+      },
+      "3": {
+        "title": "Pembunuh Langganan",
+        "description": "Temukan pengeluaran berulang yang menguras dompet Anda yang tidak terdeteksi oleh aplikasi lain."
+      }
+    },
+    "features": {
+      "0": {
+        "title": "Dasbor Lokal",
+        "description": "Kekayaan bersih, arus kas, dan pemecahan kategori. Waktu muat instan.",
+        "href": "/budget-app"
+      },
+      "1": {
+        "title": "Wizard Impor",
+        "description": "Pemetaan CSV cerdas untuk BMO, Home Trust, dan format kustom yang dapat disesuaikan.",
+        "href": "/budget-app/import"
+      },
+      "2": {
+        "title": "OCR Struk",
+        "description": "Pindai struk secara lokal dengan Tesseract.js. Tanpa pemrosesan cloud.",
+        "href": "/budget-app/ocr"
+      },
+      "3": {
+        "title": "Anggaran Kategori",
+        "description": "Anggaran berbasis nol atau rollover dengan kontrol kategori yang mendetail.",
+        "href": "/budget-app/budgets"
+      },
+      "4": {
+        "title": "Kalkulator Pensiun",
+        "description": "Proyeksikan tanggal kebebasan Anda dengan visualisasi bunga majemuk.",
+        "href": "/budget-app/planning/retirement"
+      },
+      "5": {
+        "title": "Perisai Privasi",
+        "description": "Enkripsi sisi klien opsional untuk lapisan keamanan tambahan.",
+        "href": "/budget-app/settings"
+      }
+    },
+    "howItWorks": {
+      "0": {
+        "title": "Impor",
+        "description": "Seret & lepas CSV atau pindai struk. AI memetakan kolom secara lokal."
+      },
+      "1": {
+        "title": "Tinjau",
+        "description": "Kategorisasi cepat dengan aturan cerdas dan tindakan massal."
+      },
+      "2": {
+        "title": "Rencanakan",
+        "description": "Tetapkan setiap dolar untuk pekerjaan dan proyeksikan kekayaan bersih masa depan Anda."
+      }
+    },
+    "pricing": {
+      "eyebrow": "Harga Adil",
+      "title": "Lokal Gratis. Sinkronisasi Pro.",
+      "description": "Mulai dengan Protokol Lokal yang kuat. Tingkatkan nanti jika Anda perlu sinkronisasi multi-perangkat.",
+      "priceLabel": "Gratis Selamanya",
+      "cta": {
+        "label": "Mulai Protokol Lokal",
+        "href": "/budget-app/auth/signup"
+      },
+      "secondary": {
+        "label": "Lihat Fitur Pro",
+        "href": "#pricing"
+      },
+      "guarantee": "Tidak ada kartu kredit yang diperlukan untuk Protokol Lokal."
+    },
+    "faq": {
+      "0": {
+        "q": "Apakah data saya benar-benar pribadi?",
+        "a": "Ya. Dalam Protokol Lokal, data tidak pernah meninggalkan perangkat Anda. Itu tinggal di IndexedDB dalam browser Anda."
+      },
+      "1": {
+        "q": "Bagaimana cara mencadangkan data saya?",
+        "a": "Anda dapat mengekspor cadangan JSON penuh kapan saja. Kami juga merekomendasikan ekspor CSV secara berkala."
+      },
+      "2": {
+        "q": "Apa itu 'Sync' Pro?",
+        "a": "Segera hadir: Langganan opsional untuk menyinkronkan data terenkripsi antara perangkat melalui Supabase."
+      },
+      "3": {
+        "q": "Apakah Anda terhubung ke bank?",
+        "a": "Tidak. Kami percaya impor manual lebih aman, lebih dapat diandalkan, dan membangun kesadaran keuangan yang lebih baik."
+      }
+    },
+    "security": {
+      "title": "Privasi pertama berdasarkan desain",
+      "description": "Aplikasi Anggaran menyimpan data Anda secara lokal (siap offline) dan memberi Anda kontrol untuk fitur AI, ekspor, dan penghapusan.",
+      "buttons": {
+        "privacy": "Privasi & pengaturan",
+        "offline": "Dukungan offline"
+      },
+      "cards": {
+        "localStorage": {
+          "title": "Penyimpanan lokal",
+          "description": "Data anggaran Anda disimpan di browser Anda (IndexedDB) sehingga aplikasi tetap cepat dan dapat digunakan secara offline."
+        },
+        "encryption": {
+          "title": "Dukungan enkripsi",
+          "description": "Aplikasi ini menyertakan lapisan enkripsi untuk melindungi catatan anggaran sensitif saat diaktifkan."
+        },
+        "aiControls": {
+          "title": "Kontrol fitur AI",
+          "description": "Aktifkan fitur yang didukung AI (seperti deteksi anomali) dan kelola akses chatbot dari pengaturan."
+        },
+        "exportDelete": {
+          "title": "Ekspor & hapus",
+          "description": "Ekspor data dan pengaturan privasi Anda, atau hapus data lokal langsung dari aplikasi."
+        }
+      }
+    },
+    "comparison": {
+      "headers": {
+        "feature": "Fitur",
+        "local": "BudgetPro Lokal",
+        "sync": "BudgetPro Sinkronisasi (Pro)",
+        "cloud": "Aplikasi Cloud Tipikal"
+      },
+      "dataPrivacy": {
+        "feature": "Privasi Data",
+        "local": "100% Pribadi (Lokal)",
+        "sync": "Terenkripsi End-to-End",
+        "cloud": "Dapat Dilihat oleh Karyawan"
+      },
+      "cost": {
+        "feature": "Biaya",
+        "local": "Gratis Selamanya",
+        "sync": "Peningkatan Sekali",
+        "cloud": "$100+/tahun Langganan"
+      },
+      "offlineMode": {
+        "feature": "Mode Offline"
+      },
+      "bankConnections": {
+        "feature": "Koneksi Bank",
+        "local": "CSV / Manual Saja",
+        "sync": "Opsional (Terenkripsi)",
+        "cloud": "Agregasi Wajib"
+      },
+      "storageLocation": {
+        "feature": "Lokasi Penyimpanan",
+        "local": "Perangkat Anda",
+        "sync": "Cloud Tanpa Pengetahuan",
+        "cloud": "Database Mereka"
+      }
+    },
+    "socialProof": {
+      "title": "Polish Premium, dibangun di dalam",
+      "description": "Detail yang membuat anggaran tetap: onboarding, pintasan, navigasi mobile, dan kinerja siap offline.",
+      "features": {
+        "onboarding": {
+          "title": "Tur onboarding",
+          "description": "Tur terpandu membantu pengguna baru mendapatkan nilai dengan cepat."
+        },
+        "shortcuts": {
+          "title": "Pintasan keyboard",
+          "description": "Bersegerak cepat dengan pencarian dan pintasan tindakan yang dibangun ke dalam UI."
+        },
+        "mobileUx": {
+          "title": "UX mobile-first",
+          "description": "Navigasi bawah dan tata letak responsif yang terasa alami."
+        },
+        "pwaInstall": {
+          "title": "Instal PWA",
+          "description": "Instal seperti aplikasi dan terus berjalan meskipun dengan internet yang tidak stabil."
+        }
+      }
+    },
+    "pricingSection": {
+      "recommended": "Direkomendasikan",
+      "productName": "Protokol Lokal",
+      "productDescription": "Pengalaman anggaran lengkap, berjalan sepenuhnya di perangkat Anda.",
+      "whyChoose": "Mengapa memilih Protokol Lokal?",
+      "whyChooseDescription": "Lihat bagaimana kami dibandingkan dengan raksasa cloud.",
+      "features": "Termasuk transaksi, akun, anggaran, dan kemampuan cadangan lokal tanpa batas."
+    },
+    "heroSection": {
+      "cta": {
+        "heading": "Dibangun untuk kejelasan, bukan kekacauan.",
+        "viewPricing": "Lihat harga"
+      },
+      "badges": {
+        "noSubscriptions": "Tanpa langganan",
+        "offlineReady": "Siap offline",
+        "seniorsMode": "Mode Lansia"
+      },
+      "preview": {
+        "livePreview": "Prabaca langsung",
+        "recentTransactions": "Transaksi terbaru",
+        "categoryBudgets": "Anggaran kategori",
+        "recurring": "Berulang"
+      },
+      "modes": {
+        "dashboard": "Dasbor",
+        "budgets": "Anggaran",
+        "subscriptions": "Langganan"
+      }
+    },
+    "featuresDeepDive": {
+      "heading1": "Kekuatan Spreadsheet.",
+      "heading2": "Kesederhanaan Aplikasi.",
+      "description": "Hentikan pertarungan dengan formula yang rusak. Dapatkan fleksibilitas kontrol manual dengan kecepatan aplikasi modern.",
+      "cta": "Mulai percobaan gratis",
+      "explore": "Jelajahi"
+    },
+    "accessibility": {
+      "title": "Aksesibel secara default",
+      "description": "Mode Lansia menyediakan navigasi yang disederhanakan dan target sentuh yang lebih besar. Pintasan keyboard, status fokus, dan kontras yang jelas membantu semua orang bergerak lebih cepat.",
+      "badges": {
+        "seniorsMode": "Mode Lansia",
+        "largeTouchTargets": "Target sentuh besar",
+        "keyboardFirst": "Keyboard-first"
+      },
+      "buttons": {
+        "openApp": "Buka aplikasi",
+        "settings": "Pengaturan aksesibilitas"
+      }
+    },
+    "faqSection": {
+      "title": "FAQ",
+      "description": "Jawaban sederhana untuk pertanyaan umum tentang percobaan, harga, dan akses."
+    },
+    "outcomesSection": {
+      "title": "Dibangun untuk kehidupan nyata, bukan spreadsheet",
+      "description": "Sebagian besar aplikasi anggaran membuat Anda melakukan pekerjaan. BudgetPro dirancang untuk mengurangi gesekan sambil tetap memberi Anda kontrol."
+    },
+    "howItWorksSection": {
+      "title": "Cara kerjanya",
+      "description": "Alur kerja yang membawa Anda ke kejelasan dengan cepat, tanpa mengunci Anda dalam sistem yang rumit."
+    },
+    "nav": {
+      "tagline": "Anggaran premium"
+    },
+    "marquee": {
+      "logos": [
+        "Anggaran",
+        "Langganan",
+        "Pinjaman",
+        "OCR Struk",
+        "Laporan",
+        "Perencanaan",
+        "Offline",
+        "Mode Lansia"
+      ]
     }
   }
 }

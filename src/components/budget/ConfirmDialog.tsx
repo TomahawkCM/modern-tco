@@ -42,6 +42,7 @@
 
 import { useState } from 'react';
 import { AlertTriangle, Loader2 } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -107,14 +108,19 @@ export function ConfirmDialog({
   title,
   description,
   impact,
-  confirmLabel = 'Confirm',
-  cancelLabel = 'Cancel',
+  confirmLabel,
+  cancelLabel,
   variant = 'default',
   icon,
   requireTypedConfirmation,
 }: ConfirmDialogProps) {
+  const t = useTranslations('dialog');
   const [isLoading, setIsLoading] = useState(false);
   const [confirmText, setConfirmText] = useState('');
+
+  // Use prop if provided, otherwise use translation
+  const effectiveConfirmLabel = confirmLabel || t('confirm');
+  const effectiveCancelLabel = cancelLabel || t('cancel');
 
   // Filter out null/undefined impact items
   const validImpactItems = impact?.items.filter((item): item is string => Boolean(item)) ?? [];
@@ -194,9 +200,9 @@ export function ConfirmDialog({
             <Alert className="border-amber-200 bg-amber-50/10">
               <AlertTriangle className="h-4 w-4 text-amber-600" />
               <AlertDescription className="ml-2">
-                <strong className="block mb-2">Final Confirmation:</strong>
+                <strong className="block mb-2">{t('finalConfirmation')}</strong>
                 <p className="text-sm text-gray-700 mb-2">
-                  Type <strong className="font-mono bg-gray-100 px-1 rounded">{requireTypedConfirmation.text}</strong> to confirm this action.
+                  {t('typeToConfirm', { text: requireTypedConfirmation.text })}
                 </p>
                 <Input
                   value={confirmText}
@@ -222,7 +228,7 @@ export function ConfirmDialog({
             disabled={isLoading}
             className="sm:order-1"
           >
-            {cancelLabel}
+            {effectiveCancelLabel}
           </AlertDialogCancel>
 
           {/* Confirm Button */}
@@ -241,10 +247,10 @@ export function ConfirmDialog({
             {isLoading ? (
               <>
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                Processing...
+                {t('processing')}
               </>
             ) : (
-              confirmLabel
+              effectiveConfirmLabel
             )}
           </AlertDialogAction>
         </AlertDialogFooter>

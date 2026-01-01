@@ -19,7 +19,7 @@
     "import": "Importar",
     "editDashboard": "Editar Taboleiro",
     "saveChanges": "Gardar Cambios",
-    "resetDefaults": "Restablecer a Predeterminados"
+    "resetDefaults": "Restablecer a Valores Predeterminados"
   },
   "welcome": {
     "title": "Benvido á App de Orzamento",
@@ -35,31 +35,411 @@
   "widget": {
     "spendingByCategory": {
       "title": "Gastos por Categoría",
-      "description": "Vea onde vai o seu diñeiro con desglose visual"
+      "description": "Vé onde vai o teu diñeiro con desglose visual"
     },
     "recentTransactions": {
       "title": "Transaccións Recentes",
-      "description": "Vista rápida da súa última actividade financeira"
+      "description": "Vista rápida da túa última actividade financeira"
     },
     "budgetProgress": {
       "title": "Progreso do Orzamento",
-      "description": "Siga como vai en relación cos seus obxectivos orzamentarios"
+      "description": "Segue como vas coas túas metas de orzamento"
     },
     "accountBalances": {
       "title": "Saldos das Contas",
-      "description": "Saldos actuais en todas as súas contas"
+      "description": "Saldos actuais en todas as túas contas"
     },
     "incomeVsExpenses": {
       "title": "Ingresos vs Gastos",
-      "description": "Compare os seus ingresos e gastos ao longo do tempo"
+      "description": "Compara os teus ingresos e gastos ao longo do tempo"
     },
     "monthlyTrends": {
       "title": "Tendencias Mensuais",
-      "description": "Visualice os seus patróns financeiros mes a mes"
+      "description": "Visualiza os teus patróns financeiros mes a mes"
     },
     "upcomingBills": {
-      "title": "Facturas Próximas",
-      "description": "Nunca esqueza un pagamento con recordatorios de facturas"
+      "title": "Facturas Vindeiras",
+      "description": "Nunca perdas un pagamento con recordatorios de facturas"
+    }
+  },
+  "tooltip": {
+    "ariaLabel": "Máis información",
+    "learnMore": "Aprende máis →"
+  },
+  "footer": {
+    "tagline": "Orzamento premium cunha actualización única.",
+    "links": {
+      "login": "Iniciar sesión",
+      "signup": "Comezar proba",
+      "upgrade": "Actualizar",
+      "settings": "Configuracións"
+    },
+    "copyright": "© {year} {brandName}"
+  },
+  "dialog": {
+    "confirm": "Confirmar",
+    "cancel": "Cancelar",
+    "processing": "Procesando...",
+    "finalConfirmation": "Confirmación Final:",
+    "typeToConfirm": "Escribe {text} para confirmar esta acción."
+  },
+  "sidebar": {
+    "appTitle": "App de Orzamento",
+    "appSubtitle": "Finanzas Premium",
+    "search": "Buscar...",
+    "shortcuts": "Atallos",
+    "navigation": {
+      "dashboard": "Taboleiro",
+      "transactions": "Transaccións",
+      "scanReceipt": "Escanear Recibo",
+      "categories": "Categorías",
+      "budgets": "Orzamentos",
+      "subscriptions": "Subscripcións",
+      "loans": "Préstamos",
+      "investments": "Investimentos",
+      "futurePlans": "Plans futuros",
+      "retirement": "Xubilación",
+      "reports": "Informes"
+    },
+    "actions": {
+      "importCsv": "Importar CSV",
+      "settings": "Configuracións",
+      "showLess": "Amosar Menos",
+      "showAllItems": "Amosar Todos os Elementos"
+    }
+  },
+  "onboarding": {
+    "skipTour": "Saltar tour",
+    "stepCounter": "Paso {current} de {total}",
+    "dontShowAgain": "Non mostrar este tour de novo",
+    "quickTip": "💡 Dica Rápida",
+    "navigation": {
+      "previous": "Anterior",
+      "next": "Seguinte",
+      "getStarted": "Comezar",
+      "startTour": "Comezar Tour"
+    },
+    "steps": {
+      "welcome": {
+        "title": "👋 Benvido á App de Orzamento!",
+        "description": "Fagamos un rápido tour para axudarche a comezar a xestionar as túas finanzas familiares. Non levará moito!"
+      },
+      "import": {
+        "title": "📥 Importa as Túas Transaccións",
+        "description": "Comeza importando as túas transaccións bancarias desde un arquivo CSV. Admitimos BMO, Home Trust e moitos outros bancos. A app categorizará automaticamente as túas transaccións!"
+      },
+      "categorize": {
+        "title": "🏷️ Categoriza e Organiza",
+        "description": "Revisa e axusta as categorías das transaccións. A nosa categorización intelixente aprende das túas correccións para mellorar co tempo. Usa accións en masa para categorizar múltiples transaccións á vez!"
+      },
+      "budgets": {
+        "title": "🎯 Establece os Teus Orzamentos",
+        "description": "Crea orzamentos para diferentes categorías de gastos. Segue o teu progreso ao longo do mes e recibe alertas cando te achegues aos teus límites."
+      },
+      "reports": {
+        "title": "📊 Vexa Informes e Perspectivas",
+        "description": "Visualiza os teus patróns de gasto, segue o teu patrimonio neto e toma decisións financeiras informadas. O teu taboleiro actualízase automaticamente con cada transacción!"
+      }
+    },
+    "tips": {
+      "import": "Arrastra e solta o teu arquivo CSV ou fai clic para navegar. Detectamos automaticamente os formatos de BMO e Home Trust!",
+      "categorize": "Usa o botón de categorización rápida ou selecciona múltiples transaccións para categorización en masa.",
+      "budgets": "Establece orzamentos realistas e avisarémosche se estás a piques de sobrepasar."
+    }
+  },
+  "landing": {
+    "brand": {
+      "name": "BudgetPro",
+      "product": "App de Orzamento"
+    },
+    "hero": {
+      "badge": "Privacidade Primeiro • Só Local • Sen Seguimento",
+      "headline": "Domina o Teu Diñeiro sen Vender os Teus Datos.",
+      "subhead": "O poder dunha folla de cálculo. A simplicidade dunha app. Experimenta a claridade financeira coa única app de orzamento que garante que os teus datos nunca saen do teu dispositivo.",
+      "primaryCta": {
+        "label": "Comezar Protocolo Local (Gratuíto)",
+        "href": "/budget-app/auth/signup"
+      },
+      "secondaryCta": {
+        "label": "Iniciar sesión",
+        "href": "/budget-app/auth/login"
+      },
+      "finePrint": "Non se necesitan credenciais bancarias. Non se require conta para o modo local."
+    },
+    "trust": {
+      "0": {
+        "title": "O Teu Dispositivo, Os Teus Datos",
+        "description": "Os datos quedan no IndexedDB do teu navegador. Literalmente non podemos velo."
+      },
+      "1": {
+        "title": "Poder de Folla de Cálculo",
+        "description": "Edición en masa, pivote e análise como un profesional sen as dores de cabeza das fórmulas."
+      },
+      "2": {
+        "title": "Velocidade Sen Conexión",
+        "description": "Sen latencia. Funciona nunha montaña ou nun túnel de metro."
+      },
+      "3": {
+        "title": "Rituais Manuais",
+        "description": "O asistente de importación fai que a revisión financeira do venres sexa un hábito satisfactorio."
+      }
+    },
+    "outcomes": {
+      "0": {
+        "title": "Deixa de Loitar Contra Agregadores",
+        "description": "Non máis conexións rotas ou bucles de re-autenticación. Ti controlas a entrada de datos."
+      },
+      "1": {
+        "title": "Privacidade por Deseño",
+        "description": "Non vendemos os teus datos porque non os temos. Punto."
+      },
+      "2": {
+        "title": "Planificación a Proba de Futuro",
+        "description": "Modela a xubilación, o pago de préstamos e os obxectivos de aforro nunha vista integrada."
+      },
+      "3": {
+        "title": "Asesino de Subscripcións",
+        "description": "Detecta drenaxes recorrentes no teu peto que outras apps pasan por alto."
+      }
+    },
+    "features": {
+      "0": {
+        "title": "Taboleiro Local",
+        "description": "Patrimonio neto, fluxo de caixa e desglose por categoría. Tiempos de carga instantáneos.",
+        "href": "/budget-app"
+      },
+      "1": {
+        "title": "Asistente de Importación",
+        "description": "Mapper CSV intelixente para BMO, Home Trust e formatos personalizables.",
+        "href": "/budget-app/import"
+      },
+      "2": {
+        "title": "OCR de Recibos",
+        "description": "Escanea recibos localmente con Tesseract.js. Sen procesamento na nube.",
+        "href": "/budget-app/ocr"
+      },
+      "3": {
+        "title": "Orzamentos por Categoría",
+        "description": "Orzamento baseado en cero ou de traspaso con control granular por categoría.",
+        "href": "/budget-app/budgets"
+      },
+      "4": {
+        "title": "Calculadora de Xubilación",
+        "description": "Proxecta a túa data de liberdade con visualizacións de interese composto.",
+        "href": "/budget-app/planning/retirement"
+      },
+      "5": {
+        "title": "Escudo de Privacidade",
+        "description": "Cifrado opcional do lado do cliente para unha capa extra de seguridade.",
+        "href": "/budget-app/settings"
+      }
+    },
+    "howItWorks": {
+      "0": {
+        "title": "Importar",
+        "description": "Arrastra e solta CSVs ou escanea recibos. A IA mapeia as columnas localmente."
+      },
+      "1": {
+        "title": "Revisar",
+        "description": "Categorización rápida con regras intelixentes e accións en masa."
+      },
+      "2": {
+        "title": "Planificar",
+        "description": "Asigna a cada euro un traballo e proxecta o teu patrimonio neto futuro."
+      }
+    },
+    "pricing": {
+      "eyebrow": "Prezos Xustos",
+      "title": "Local é Gratuíto. Sincronización é Pro.",
+      "description": "Comeza co potente Protocolo Local. Actualiza máis adiante se precisas sincronización entre dispositivos.",
+      "priceLabel": "Gratuíto Para Sempre",
+      "cta": {
+        "label": "Comezar Protocolo Local",
+        "href": "/budget-app/auth/signup"
+      },
+      "secondary": {
+        "label": "Ver Funcións Pro",
+        "href": "#pricing"
+      },
+      "guarantee": "Non se require tarxeta de crédito para o Protocolo Local."
+    },
+    "faq": {
+      "0": {
+        "q": "É realmente privada a miña información?",
+        "a": "Si. No Protocolo Local, os datos nunca saen do teu dispositivo. Viven no IndexedDB dentro do teu navegador."
+      },
+      "1": {
+        "q": "Como fago unha copia de seguridade dos meus datos?",
+        "a": "Podes exportar unha copia de seguridade completa en JSON en calquera momento. Tamén recomendamos exportacións regulares en CSV."
+      },
+      "2": {
+        "q": "Que é 'Sincronización' Pro?",
+        "a": "Próximamente: unha subscrición opcional para sincronizar datos cifrados entre dispositivos a través de Supabase."
+      },
+      "3": {
+        "q": "Conectades a bancos?",
+        "a": "Non. Creemos que a importación manual é máis segura, máis fiable e constrúe unha mellor conciencia financeira."
+      }
+    },
+    "security": {
+      "title": "Privacidade primeiro por deseño",
+      "description": "A App de Orzamento almacena os teus datos localmente (preparada para traballar sen conexión) e dáche controis para funcións de IA, exportación e eliminación.",
+      "buttons": {
+        "privacy": "Privacidade e configuracións",
+        "offline": "Soporte sen conexión"
+      },
+      "cards": {
+        "localStorage": {
+          "title": "Almacenamento Local",
+          "description": "Os teus datos de orzamento están almacenados no teu navegador (IndexedDB) para que a app siga rápida e usable sen conexión."
+        },
+        "encryption": {
+          "title": "Soporte de Cifrado",
+          "description": "A app inclúe unha capa de cifrado para protexer rexistros de orzamento sensibles cando está habilitada."
+        },
+        "aiControls": {
+          "title": "Controles de funcións de IA",
+          "description": "Activa funcións impulsadas por IA (como a detección de anomalías) e xestiona o acceso ao chatbot desde as configuracións."
+        },
+        "exportDelete": {
+          "title": "Exportar e eliminar",
+          "description": "Exporta os teus datos e configuracións de privacidade ou elimina datos locais directamente desde a app."
+        }
+      }
+    },
+    "comparison": {
+      "headers": {
+        "feature": "Función",
+        "local": "BudgetPro Local",
+        "sync": "BudgetPro Sync (Pro)",
+        "cloud": "App Típica na Nube"
+      },
+      "dataPrivacy": {
+        "feature": "Privacidade dos Datos",
+        "local": "100% Privado (Local)",
+        "sync": "Cifrado de Extremo a Extremo",
+        "cloud": "Visibles para Empregados"
+      },
+      "cost": {
+        "feature": "Custos",
+        "local": "Gratuíto Para Sempre",
+        "sync": "Actualización Única",
+        "cloud": "Subscripción de $100+/ano"
+      },
+      "offlineMode": {
+        "feature": "Modo Sen Conexión"
+      },
+      "bankConnections": {
+        "feature": "Conexións Bancarias",
+        "local": "CSV / Só Manual",
+        "sync": "Opcional (Cifrado)",
+        "cloud": "Agregación Obrigatoria"
+      },
+      "storageLocation": {
+        "feature": "Localización de Almacenamento",
+        "local": "O Teu Dispositivo",
+        "sync": "Nube Sen Coñecemento",
+        "cloud": "A súa Base de Datos"
+      }
+    },
+    "socialProof": {
+      "title": "Acabado Premium, integrado",
+      "description": "Os detalles que fan que o orzamento funcione: incorporación, atallos, navegación móbil e rendemento preparado para traballar sen conexión.",
+      "features": {
+        "onboarding": {
+          "title": "Tour de incorporación",
+          "description": "Un tour guiado axuda aos novos usuarios a obter valor rapidamente."
+        },
+        "shortcuts": {
+          "title": "Atallos de teclado",
+          "description": "Móvete rápido con atallos de busca e acción integrados na UI."
+        },
+        "mobileUx": {
+          "title": "UX móbil primeiro",
+          "description": "Navegación inferior e deseños responsivos que se senten nativos."
+        },
+        "pwaInstall": {
+          "title": "Instalación PWA",
+          "description": "Instala como unha app e segue adiante mesmo con internet irregular."
+        }
+      }
+    },
+    "pricingSection": {
+      "recommended": "Recomendado",
+      "productName": "Protocolo Local",
+      "productDescription": "A experiencia completa de orzamento, funcionando completamente no teu dispositivo.",
+      "whyChoose": "Por que elixir o Protocolo Local?",
+      "whyChooseDescription": "Vé como nos comparamos cos xigantes da nube.",
+      "features": "Inclúe transaccións, contas, orzamentos e capacidades de copia de seguridade local ilimitadas."
+    },
+    "heroSection": {
+      "cta": {
+        "heading": "Construído para a claridade, non para o caos.",
+        "viewPricing": "Ver prezos"
+      },
+      "badges": {
+        "noSubscriptions": "Sen subscricións",
+        "offlineReady": "Preparado para traballar sen conexión",
+        "seniorsMode": "Modo Séniores"
+      },
+      "preview": {
+        "livePreview": "Vista previa en directo",
+        "recentTransactions": "Transaccións recentes",
+        "categoryBudgets": "Orzamentos por categoría",
+        "recurring": "Recorrentes"
+      },
+      "modes": {
+        "dashboard": "Taboleiro",
+        "budgets": "Orzamentos",
+        "subscriptions": "Subscripcións"
+      }
+    },
+    "featuresDeepDive": {
+      "heading1": "Poder de Folla de Cálculo.",
+      "heading2": "Simplicidade da App.",
+      "description": "Deixa de loitar con fórmulas rotas. Obtén a flexibilidade do control manual coa velocidade dunha app moderna.",
+      "cta": "Comezar proba gratuíta",
+      "explore": "Explorar"
+    },
+    "accessibility": {
+      "title": "Accesible por defecto",
+      "description": "O Modo Séniores proporciona navegación simplificada e obxectivos táctiles máis grandes. Atallos de teclado, estados de enfoque e contraste claro axudan a todos a moverse máis rápido.",
+      "badges": {
+        "seniorsMode": "Modo Séniores",
+        "largeTouchTargets": "Obxectivos táctiles grandes",
+        "keyboardFirst": "Teclado primeiro"
+      },
+      "buttons": {
+        "openApp": "Abrir a app",
+        "settings": "Configuracións de accesibilidade"
+      }
+    },
+    "faqSection": {
+      "title": "FAQ",
+      "description": "Respostas sinxelas a preguntas comúns sobre probas, prezos e acceso."
+    },
+    "outcomesSection": {
+      "title": "Construído para a vida real, non para follas de cálculo",
+      "description": "A maioría das apps de orzamento fan que ti fagas o traballo. BudgetPro está deseñada para reducir a fricción mentres manténche no control."
+    },
+    "howItWorksSection": {
+      "title": "Como funciona",
+      "description": "Un fluxo de traballo que che leva á claridade rapidamente, sen bloquearte nun sistema complicado."
+    },
+    "nav": {
+      "tagline": "Orzamento Premium"
+    },
+    "marquee": {
+      "logos": [
+        "Orzamento",
+        "Subscripcións",
+        "Préstamos",
+        "OCR de Recibos",
+        "Informes",
+        "Planificación",
+        "Sen Conexión",
+        "Modo Séniores"
+      ]
     }
   }
 }

@@ -11,7 +11,7 @@
     "export": "エクスポート",
     "settings": "設定",
     "help": "ヘルプ",
-    "about": "アプリについて"
+    "about": "このアプリについて"
   },
   "actions": {
     "addTransaction": "取引を追加",
@@ -23,7 +23,7 @@
   },
   "welcome": {
     "title": "予算アプリへようこそ",
-    "subtitle": "最初の取引を追加するか、銀行からデータをインポートしてください"
+    "subtitle": "最初の取引を追加するか、銀行からデータをインポートして始めましょう"
   },
   "common": {
     "save": "保存",
@@ -39,10 +39,10 @@
     },
     "recentTransactions": {
       "title": "最近の取引",
-      "description": "最新の財務活動を簡単に確認"
+      "description": "最新の財務活動を素早く確認"
     },
     "budgetProgress": {
-      "title": "予算進捗",
+      "title": "予算の進捗",
       "description": "予算目標に対する進捗を追跡"
     },
     "accountBalances": {
@@ -54,12 +54,392 @@
       "description": "時間をかけて収入と支出を比較"
     },
     "monthlyTrends": {
-      "title": "月別トレンド",
+      "title": "月次トレンド",
       "description": "月ごとの財務パターンを視覚化"
     },
     "upcomingBills": {
       "title": "今後の請求書",
-      "description": "請求書のリマインダーで支払いを忘れない"
+      "description": "請求書のリマインダーで支払いを逃さない"
+    }
+  },
+  "tooltip": {
+    "ariaLabel": "詳細情報",
+    "learnMore": "詳しくはこちら →"
+  },
+  "footer": {
+    "tagline": "一度のアップグレードでプレミアム予算管理。",
+    "links": {
+      "login": "ログイン",
+      "signup": "トライアルを開始",
+      "upgrade": "アップグレード",
+      "settings": "設定"
+    },
+    "copyright": "© {year} {brandName}"
+  },
+  "dialog": {
+    "confirm": "確認",
+    "cancel": "キャンセル",
+    "processing": "処理中...",
+    "finalConfirmation": "最終確認:",
+    "typeToConfirm": "{text} と入力してこのアクションを確認してください。"
+  },
+  "sidebar": {
+    "appTitle": "予算アプリ",
+    "appSubtitle": "プレミアムファイナンス",
+    "search": "検索...",
+    "shortcuts": "ショートカット",
+    "navigation": {
+      "dashboard": "ダッシュボード",
+      "transactions": "取引",
+      "scanReceipt": "レシートをスキャン",
+      "categories": "カテゴリ",
+      "budgets": "予算",
+      "subscriptions": "サブスクリプション",
+      "loans": "ローン",
+      "investments": "投資",
+      "futurePlans": "将来の計画",
+      "retirement": "退職",
+      "reports": "レポート"
+    },
+    "actions": {
+      "importCsv": "CSVをインポート",
+      "settings": "設定",
+      "showLess": "少なく表示",
+      "showAllItems": "すべての項目を表示"
+    }
+  },
+  "onboarding": {
+    "skipTour": "ツアーをスキップ",
+    "stepCounter": "{current} / {total} ステップ",
+    "dontShowAgain": "このツアーを再表示しない",
+    "quickTip": "💡 クイックヒント",
+    "navigation": {
+      "previous": "前へ",
+      "next": "次へ",
+      "getStarted": "始める",
+      "startTour": "ツアーを開始"
+    },
+    "steps": {
+      "welcome": {
+        "title": "👋 予算アプリへようこそ！",
+        "description": "家庭の財務管理を始めるための簡単なツアーを行いましょう。すぐに終わります！"
+      },
+      "import": {
+        "title": "📥 取引をインポート",
+        "description": "CSVファイルから銀行取引をインポートして始めましょう。BMO、Home Trust、その他多くの銀行に対応しています。アプリが自動的に取引をカテゴリ分けします！"
+      },
+      "categorize": {
+        "title": "🏷️ カテゴリ分けと整理",
+        "description": "取引のカテゴリを確認し、調整します。私たちのスマートなカテゴリ分けは、あなたの修正から学び、時間と共に改善します。複数の取引を一度にカテゴリ分けするための一括アクションを使用してください！"
+      },
+      "budgets": {
+        "title": "🎯 予算を設定",
+        "description": "異なる支出カテゴリのための予算を作成します。月の進捗を追跡し、限度に近づいたときにアラートを受け取ります。"
+      },
+      "reports": {
+        "title": "📊 レポートとインサイトを表示",
+        "description": "支出パターンを視覚化し、純資産を追跡し、情報に基づいた財務判断を行います。取引ごとにダッシュボードが自動的に更新されます！"
+      }
+    },
+    "tips": {
+      "import": "CSVファイルをドラッグ＆ドロップするか、クリックして参照してください。BMOとHome Trustの形式を自動検出します！",
+      "categorize": "クイックカテゴリボタンを使用するか、複数の取引を選択して一括カテゴリ分けを行います。",
+      "budgets": "現実的な予算を設定し、オーバースペンドのトラッキングを行います。"
+    }
+  },
+  "landing": {
+    "brand": {
+      "name": "BudgetPro",
+      "product": "予算アプリ"
+    },
+    "hero": {
+      "badge": "プライバシー優先 • ローカル専用 • ゼロトラッキング",
+      "headline": "データを売らずにお金をマスター。",
+      "subhead": "スプレッドシートの力。アプリのシンプルさ。データがデバイスから出ない唯一の予算アプリで財務の明確さを体験してください。",
+      "primaryCta": {
+        "label": "ローカルプロトコルを開始（無料）",
+        "href": "/budget-app/auth/signup"
+      },
+      "secondaryCta": {
+        "label": "ログイン",
+        "href": "/budget-app/auth/login"
+      },
+      "finePrint": "銀行の認証情報は不要。ローカルモードにはアカウントは必要ありません。"
+    },
+    "trust": {
+      "0": {
+        "title": "あなたのデバイス、あなたのデータ",
+        "description": "データはブラウザのIndexedDBに保存されます。私たちはそれを見ることができません。"
+      },
+      "1": {
+        "title": "スプレッドシートの力",
+        "description": "一括編集、ピボット、プロのように分析。面倒な数式は不要。"
+      },
+      "2": {
+        "title": "オフライン速度",
+        "description": "遅延ゼロ。山の頂上でも地下鉄のトンネルでも動作します。"
+      },
+      "3": {
+        "title": "手動の儀式",
+        "description": "インポートウィザードが金曜日のマネーレビューを満足のいく習慣にします。"
+      }
+    },
+    "outcomes": {
+      "0": {
+        "title": "集約サービスとの戦いをやめる",
+        "description": "壊れた接続や再認証ループはもうありません。データ入力をコントロールします。"
+      },
+      "1": {
+        "title": "設計によるプライバシー",
+        "description": "私たちはデータを持っていないので、売ることはありません。"
+      },
+      "2": {
+        "title": "将来を見越した計画",
+        "description": "退職、ローンの返済、貯蓄目標を統合されたビューでモデル化します。"
+      },
+      "3": {
+        "title": "サブスクリプションキラー",
+        "description": "他のアプリが見逃す定期的な支出を見つけます。"
+      }
+    },
+    "features": {
+      "0": {
+        "title": "ローカルダッシュボード",
+        "description": "純資産、キャッシュフロー、カテゴリの内訳。瞬時の読み込み時間。",
+        "href": "/budget-app"
+      },
+      "1": {
+        "title": "インポートウィザード",
+        "description": "BMO、Home Trust、カスタマイズ可能な形式のためのスマートCSVマッパー。",
+        "href": "/budget-app/import"
+      },
+      "2": {
+        "title": "レシートOCR",
+        "description": "Tesseract.jsでローカルにレシートをスキャン。クラウド処理はありません。",
+        "href": "/budget-app/ocr"
+      },
+      "3": {
+        "title": "カテゴリ予算",
+        "description": "ゼロベースまたはロールオーバー予算、細かいカテゴリ制御。",
+        "href": "/budget-app/budgets"
+      },
+      "4": {
+        "title": "退職計算機",
+        "description": "複利の視覚化で自由な日を予測。",
+        "href": "/budget-app/planning/retirement"
+      },
+      "5": {
+        "title": "プライバシーシールド",
+        "description": "追加のセキュリティ層のためのオプションのクライアントサイド暗号化。",
+        "href": "/budget-app/settings"
+      }
+    },
+    "howItWorks": {
+      "0": {
+        "title": "インポート",
+        "description": "CSVをドラッグ＆ドロップするか、レシートをスキャン。AIがローカルで列をマッピングします。"
+      },
+      "1": {
+        "title": "レビュー",
+        "description": "スマートルールと一括アクションで素早くカテゴリ分け。"
+      },
+      "2": {
+        "title": "計画",
+        "description": "すべてのドルに仕事を割り当て、将来の純資産を予測。"
+      }
+    },
+    "pricing": {
+      "eyebrow": "公正な価格設定",
+      "title": "ローカルは無料。同期はプロ。",
+      "description": "強力なローカルプロトコルで始めましょう。後でマルチデバイス同期が必要な場合はアップグレードできます。",
+      "priceLabel": "永遠に無料",
+      "cta": {
+        "label": "ローカルプロトコルを開始",
+        "href": "/budget-app/auth/signup"
+      },
+      "secondary": {
+        "label": "プロ機能を表示",
+        "href": "#pricing"
+      },
+      "guarantee": "ローカルプロトコルにはクレジットカードは不要。"
+    },
+    "faq": {
+      "0": {
+        "q": "私のデータは本当にプライベートですか？",
+        "a": "はい。ローカルプロトコルでは、データはデバイスから出ません。ブラウザのIndexedDB内に存在します。"
+      },
+      "1": {
+        "q": "データをバックアップするにはどうすればよいですか？",
+        "a": "いつでも完全なJSONバックアップをエクスポートできます。定期的なCSVエクスポートも推奨します。"
+      },
+      "2": {
+        "q": "'同期'プロとは何ですか？",
+        "a": "近日公開: デバイス間で暗号化されたデータを同期するオプションのサブスクリプション。"
+      },
+      "3": {
+        "q": "銀行に接続しますか？",
+        "a": "いいえ。手動インポートの方が安全で信頼性が高く、より良い財務意識を育てると考えています。"
+      }
+    },
+    "security": {
+      "title": "プライバシー優先の設計",
+      "description": "予算アプリはデータをローカルに保存（オフライン対応）し、AI機能、エクスポート、削除のためのコントロールを提供します。",
+      "buttons": {
+        "privacy": "プライバシーと設定",
+        "offline": "オフラインサポート"
+      },
+      "cards": {
+        "localStorage": {
+          "title": "ローカルストレージ",
+          "description": "あなたの予算データはブラウザに保存され（IndexedDB）、アプリはオフラインでも迅速に動作します。"
+        },
+        "encryption": {
+          "title": "暗号化サポート",
+          "description": "アプリには、敏感な予算記録を保護するための暗号化レイヤーが含まれています。"
+        },
+        "aiControls": {
+          "title": "AI機能のコントロール",
+          "description": "異常検出のようなAI機能を切り替え、設定からチャットボットのアクセスを管理します。"
+        },
+        "exportDelete": {
+          "title": "エクスポートと削除",
+          "description": "データとプライバシー設定をエクスポートするか、アプリから直接ローカルデータを削除します。"
+        }
+      }
+    },
+    "comparison": {
+      "headers": {
+        "feature": "機能",
+        "local": "BudgetProローカル",
+        "sync": "BudgetPro同期（プロ）",
+        "cloud": "一般的なクラウドアプリ"
+      },
+      "dataPrivacy": {
+        "feature": "データプライバシー",
+        "local": "100%プライベート（ローカル）",
+        "sync": "エンドツーエンド暗号化",
+        "cloud": "従業員が閲覧可能"
+      },
+      "cost": {
+        "feature": "コスト",
+        "local": "永遠に無料",
+        "sync": "一度のアップグレード",
+        "cloud": "$100+/年のサブスクリプション"
+      },
+      "offlineMode": {
+        "feature": "オフラインモード"
+      },
+      "bankConnections": {
+        "feature": "銀行接続",
+        "local": "CSV / 手動のみ",
+        "sync": "オプション（暗号化）",
+        "cloud": "必須の集約"
+      },
+      "storageLocation": {
+        "feature": "ストレージ場所",
+        "local": "あなたのデバイス",
+        "sync": "ゼロ知識クラウド",
+        "cloud": "彼らのデータベース"
+      }
+    },
+    "socialProof": {
+      "title": "プレミアムな仕上げ、内蔵",
+      "description": "予算管理をスムーズにする詳細: オンボーディング、ショートカット、モバイルナビゲーション、オフライン対応のパフォーマンス。",
+      "features": {
+        "onboarding": {
+          "title": "オンボーディングツアー",
+          "description": "ガイド付きツアーが新しいユーザーをすぐに価値に導きます。"
+        },
+        "shortcuts": {
+          "title": "キーボードショートカット",
+          "description": "UIに組み込まれた検索とアクションのショートカットで迅速に移動。"
+        },
+        "mobileUx": {
+          "title": "モバイルファーストUX",
+          "description": "ネイティブに感じるボトムナビゲーションとレスポンシブレイアウト。"
+        },
+        "pwaInstall": {
+          "title": "PWAインストール",
+          "description": "アプリのようにインストールし、インターネット接続が不安定でも続行。"
+        }
+      }
+    },
+    "pricingSection": {
+      "recommended": "推奨",
+      "productName": "ローカルプロトコル",
+      "productDescription": "完全な予算体験を提供し、完全にあなたのデバイス上で動作します。",
+      "whyChoose": "ローカルプロトコルを選ぶ理由は？",
+      "whyChooseDescription": "クラウドの巨人と比較してどうかを見てください。",
+      "features": "無制限の取引、アカウント、予算、完全なローカルバックアップ機能を含みます。"
+    },
+    "heroSection": {
+      "cta": {
+        "heading": "混乱ではなく明確さのために構築。",
+        "viewPricing": "価格を見る"
+      },
+      "badges": {
+        "noSubscriptions": "サブスクリプションなし",
+        "offlineReady": "オフライン対応",
+        "seniorsMode": "シニアモード"
+      },
+      "preview": {
+        "livePreview": "ライブプレビュー",
+        "recentTransactions": "最近の取引",
+        "categoryBudgets": "カテゴリ予算",
+        "recurring": "定期的"
+      },
+      "modes": {
+        "dashboard": "ダッシュボード",
+        "budgets": "予算",
+        "subscriptions": "サブスクリプション"
+      }
+    },
+    "featuresDeepDive": {
+      "heading1": "スプレッドシートの力。",
+      "heading2": "アプリのシンプルさ。",
+      "description": "壊れた数式に悩まされるのはやめましょう。手動制御の柔軟性と現代的なアプリのスピードを手に入れましょう。",
+      "cta": "無料トライアルを開始",
+      "explore": "探る"
+    },
+    "accessibility": {
+      "title": "デフォルトでアクセス可能",
+      "description": "シニアモードは簡素化されたナビゲーションと大きなタッチターゲットを提供します。キーボードショートカット、フォーカス状態、明確なコントラストが、すべての人がより速く移動できるようにします。",
+      "badges": {
+        "seniorsMode": "シニアモード",
+        "largeTouchTargets": "大きなタッチターゲット",
+        "keyboardFirst": "キーボード優先"
+      },
+      "buttons": {
+        "openApp": "アプリを開く",
+        "settings": "アクセシビリティ設定"
+      }
+    },
+    "faqSection": {
+      "title": "FAQ",
+      "description": "トライアル、価格、アクセスに関する一般的な質問へのシンプルな回答。"
+    },
+    "outcomesSection": {
+      "title": "スプレッドシートではなく、現実のために構築",
+      "description": "ほとんどの予算アプリはあなたに作業をさせます。BudgetProは、摩擦を減らしながらあなたをコントロール下に置くように設計されています。"
+    },
+    "howItWorksSection": {
+      "title": "仕組み",
+      "description": "複雑なシステムに縛られることなく、迅速に明確さを得るためのワークフロー。"
+    },
+    "nav": {
+      "tagline": "プレミアム予算管理"
+    },
+    "marquee": {
+      "logos": [
+        "予算管理",
+        "サブスクリプション",
+        "ローン",
+        "OCRレシート",
+        "レポート",
+        "計画",
+        "オフライン",
+        "シニアモード"
+      ]
     }
   }
 }

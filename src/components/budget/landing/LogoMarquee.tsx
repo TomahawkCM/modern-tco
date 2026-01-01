@@ -1,9 +1,12 @@
-import { motion } from "framer-motion";
+'use client';
 
-const LOGOS = ["Budgeting", "Subscriptions", "Loans", "OCR Receipts", "Reports", "Planning", "Offline", "Seniors Mode"];
+import { motion } from "framer-motion";
+import { useTranslations } from 'next-intl';
 
 export function LogoMarquee() {
-  const row = [...LOGOS, ...LOGOS];
+  const t = useTranslations('landing.marquee');
+  const logos = t.raw('logos') as string[];
+  const row = [...logos, ...logos];
 
   return (
     <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03]">

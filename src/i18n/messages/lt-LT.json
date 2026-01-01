@@ -23,7 +23,7 @@
   },
   "welcome": {
     "title": "Sveiki atvykę į Biudžeto programą",
-    "subtitle": "Pradėkite pridėdami pirmąją transakciją arba importuodami duomenis iš savo banko"
+    "subtitle": "Pradėkite pridėdami savo pirmąją transakciją arba importuodami duomenis iš savo banko"
   },
   "common": {
     "save": "Išsaugoti",
@@ -35,7 +35,7 @@
   "widget": {
     "spendingByCategory": {
       "title": "Išlaidos pagal kategoriją",
-      "description": "Pamatykite, kur išleidžiate pinigus su vizualiais atvaizdavimais"
+      "description": "Pamatykite, kur išleidžiate pinigus su vizualiais suskirstymais"
     },
     "recentTransactions": {
       "title": "Naujausios transakcijos",
@@ -51,15 +51,395 @@
     },
     "incomeVsExpenses": {
       "title": "Pajamos vs Išlaidos",
-      "description": "Palyginkite savo uždarbį ir išlaidas laikui bėgant"
+      "description": "Palyginkite savo uždarbius ir išlaidas laikui bėgant"
     },
     "monthlyTrends": {
       "title": "Mėnesio tendencijos",
-      "description": "Vizualizuokite savo finansinius modelius mėnesį po mėnesio"
+      "description": "Vizualizuokite savo finansinius modelius mėnesiui po mėnesio"
     },
     "upcomingBills": {
       "title": "Artėjantys mokėjimai",
       "description": "Niekuomet nepraleiskite mokėjimo su sąskaitų priminimais"
+    }
+  },
+  "tooltip": {
+    "ariaLabel": "Daugiau informacijos",
+    "learnMore": "Sužinokite daugiau →"
+  },
+  "footer": {
+    "tagline": "Premijinė biudžetų valdymo programa su vienkartiniu atnaujinimu.",
+    "links": {
+      "login": "Prisijungti",
+      "signup": "Pradėti bandomąją versiją",
+      "upgrade": "Atnaujinti",
+      "settings": "Nustatymai"
+    },
+    "copyright": "© {year} {brandName}"
+  },
+  "dialog": {
+    "confirm": "Patvirtinti",
+    "cancel": "Atšaukti",
+    "processing": "Apdorojama...",
+    "finalConfirmation": "Galutinis patvirtinimas:",
+    "typeToConfirm": "Įrašykite {text}, kad patvirtintumėte šią veiksmą."
+  },
+  "sidebar": {
+    "appTitle": "Biudžeto programa",
+    "appSubtitle": "Premijinė finansų programa",
+    "search": "Ieškoti...",
+    "shortcuts": "Sparčiosios nuorodos",
+    "navigation": {
+      "dashboard": "Valdymo pultas",
+      "transactions": "Transakcijos",
+      "scanReceipt": "Nuskenuoti kvitą",
+      "categories": "Kategorijos",
+      "budgets": "Biudžetai",
+      "subscriptions": "Prenumeratos",
+      "loans": "Paskolos",
+      "investments": "Investicijos",
+      "futurePlans": "Ateities planai",
+      "retirement": "Pensija",
+      "reports": "Ataskaitos"
+    },
+    "actions": {
+      "importCsv": "Importuoti CSV",
+      "settings": "Nustatymai",
+      "showLess": "Rodyti mažiau",
+      "showAllItems": "Rodyti visus elementus"
+    }
+  },
+  "onboarding": {
+    "skipTour": "Praleisti turą",
+    "stepCounter": "Žingsnis {current} iš {total}",
+    "dontShowAgain": "Neberodyti šio turo",
+    "quickTip": "💡 Greitas patarimas",
+    "navigation": {
+      "previous": "Ankstesnis",
+      "next": "Kitas",
+      "getStarted": "Pradėti",
+      "startTour": "Pradėti turą"
+    },
+    "steps": {
+      "welcome": {
+        "title": "👋 Sveiki atvykę į Biudžeto programą!",
+        "description": "Pasinaudokime greitu turu, kad padėtume jums pradėti valdyti savo namų finansus. Tai neužtruks ilgai!"
+      },
+      "import": {
+        "title": "📥 Importuokite savo transakcijas",
+        "description": "Pradėkite importuodami savo banko transakcijas iš CSV failo. Mes palaikome BMO, Home Trust ir daugelį kitų bankų. Programa automatiškai suklasifikuos jūsų transakcijas!"
+      },
+      "categorize": {
+        "title": "🏷️ Klasifikuokite ir organizuokite",
+        "description": "Peržiūrėkite ir koreguokite transakcijų kategorijas. Mūsų išmanus klasifikavimas mokosi iš jūsų pataisymų, kad laikui bėgant gerėtų. Naudokite masines operacijas, kad klasifikuotumėte kelias transakcijas vienu metu!"
+      },
+      "budgets": {
+        "title": "🎯 Nustatykite savo biudžetus",
+        "description": "Sukurkite biudžetus skirtingoms išlaidų kategorijoms. Sekite savo pažangą visą mėnesį ir gaukite pranešimus, kai artėjate prie savo ribų."
+      },
+      "reports": {
+        "title": "📊 Peržiūrėkite ataskaitas ir įžvalgas",
+        "description": "Vizualizuokite savo išlaidų modelius, sekite savo grynąją vertę ir priimkite informuotus finansinius sprendimus. Jūsų valdymo pultas automatiškai atnaujinamas su kiekviena transakcija!"
+      }
+    },
+    "tips": {
+      "import": "Tempkite ir numeskite savo CSV failą arba spustelėkite, kad naršytumėte. Mes automatiškai atpažįstame BMO ir Home Trust formatus!",
+      "categorize": "Naudokite greito klasifikavimo mygtuką arba pasirinkite kelias transakcijas masinei klasifikacijai.",
+      "budgets": "Nustatykite realius biudžetus ir mes jus įspėsime, jei artėjate prie perviršio."
+    }
+  },
+  "landing": {
+    "brand": {
+      "name": "BudgetPro",
+      "product": "Biudžeto programa"
+    },
+    "hero": {
+      "badge": "Privatumas pirmiausia • Vietinis • Nėra sekimo",
+      "headline": "Valdykite savo pinigus nesidalindami savo duomenimis.",
+      "subhead": "Skaičiuoklės galia. Programėlės paprastumas. Patirkite finansinį aiškumą su vienintele biudžeto programa, garantuojančia, kad jūsų duomenys niekada nepalieka jūsų įrenginio.",
+      "primaryCta": {
+        "label": "Pradėti vietinį protokolą (Nemokamai)",
+        "href": "/budget-app/auth/signup"
+      },
+      "secondaryCta": {
+        "label": "Prisijungti",
+        "href": "/budget-app/auth/login"
+      },
+      "finePrint": "Banko duomenys nereikalingi. Vietiniam režimui paskyra nereikalinga."
+    },
+    "trust": {
+      "0": {
+        "title": "Jūsų įrenginys, jūsų duomenys",
+        "description": "Duomenys lieka jūsų naršyklės IndexedDB. Mes jų tiesiog negalime matyti."
+      },
+      "1": {
+        "title": "Skaičiuoklės galia",
+        "description": "Masinis redagavimas, sukimasis ir analizė kaip profesionalui be formulės galvos skausmo."
+      },
+      "2": {
+        "title": "Offline greitis",
+        "description": "Nėra delsimo. Veikia ant kalno viršūnės arba metro tunelyje."
+      },
+      "3": {
+        "title": "Rankiniai ritualai",
+        "description": "Importo vedlys padaro penktadienio pinigų peržiūrą maloniu įpročiu."
+      }
+    },
+    "outcomes": {
+      "0": {
+        "title": "Nustokite kovoti su agregatoriais",
+        "description": "Jokių daugiau sugadintų ryšių ar pakartotinių autentifikavimo ciklų. Jūs kontroliuojate duomenų įvedimą."
+      },
+      "1": {
+        "title": "Privatumas pagal dizainą",
+        "description": "Mes nesidalijame jūsų duomenimis, nes jų neturime. Taškas."
+      },
+      "2": {
+        "title": "Ateities planavimas",
+        "description": "Modeliuokite pensiją, paskolų grąžinimą ir taupymo tikslus viename integruotame vaizde."
+      },
+      "3": {
+        "title": "Prenumeratos žudikas",
+        "description": "Pastebėkite nuolatinius pinigų nutekėjimus, kurių kitos programos nepastebi."
+      }
+    },
+    "features": {
+      "0": {
+        "title": "Vietinis valdymo pultas",
+        "description": "Grynasis turtas, pinigų srautas ir kategorijų suskirstymas. Akimirksniu įkrovimo laikai.",
+        "href": "/budget-app"
+      },
+      "1": {
+        "title": "Importo vedlys",
+        "description": "Išmanus CSV žemėlapis BMO, Home Trust ir pritaikomiems formatams.",
+        "href": "/budget-app/import"
+      },
+      "2": {
+        "title": "Kvitų OCR",
+        "description": "Nuskenuokite kvitus vietoje su Tesseract.js. Nėra debesų apdorojimo.",
+        "href": "/budget-app/ocr"
+      },
+      "3": {
+        "title": "Kategorijų biudžetai",
+        "description": "Nulinio pagrindo arba perkeliamo biudžeto su išsamiu kategorijų valdymu.",
+        "href": "/budget-app/budgets"
+      },
+      "4": {
+        "title": "Pensijų skaičiuoklė",
+        "description": "Prognozuokite savo laisvės datą su sudėtinių palūkanų vizualizacijomis.",
+        "href": "/budget-app/planning/retirement"
+      },
+      "5": {
+        "title": "Privatumo apsauga",
+        "description": "Pasirinktinė kliento pusės šifravimas papildomai saugumo lygiui.",
+        "href": "/budget-app/settings"
+      }
+    },
+    "howItWorks": {
+      "0": {
+        "title": "Importuoti",
+        "description": "Tempkite ir numeskite CSV arba nuskenuokite kvitus. AI vietoje žemėlapiuoja stulpelius."
+      },
+      "1": {
+        "title": "Peržiūrėti",
+        "description": "Greitas klasifikavimas su išmaniaisiais taisyklėmis ir masinėmis operacijomis."
+      },
+      "2": {
+        "title": "Planuoti",
+        "description": "Priskirkite kiekvienam doleriui užduotį ir prognozuokite savo būsimą grynąją vertę."
+      }
+    },
+    "pricing": {
+      "eyebrow": "Teisinga kaina",
+      "title": "Vietinis yra nemokamas. Sinchronizavimas yra profesionalus.",
+      "description": "Pradėkite su galingu Vietiniu protokolu. Atnaujinkite vėliau, jei jums reikia sinchronizavimo keliuose įrenginiuose.",
+      "priceLabel": "Nemokamai amžinai",
+      "cta": {
+        "label": "Pradėti vietinį protokolą",
+        "href": "/budget-app/auth/signup"
+      },
+      "secondary": {
+        "label": "Peržiūrėti profesionalias funkcijas",
+        "href": "#pricing"
+      },
+      "guarantee": "Vietiniam protokolui nereikalinga kredito kortelė."
+    },
+    "faq": {
+      "0": {
+        "q": "Ar mano duomenys tikrai privatūs?",
+        "a": "Taip. Vietiniame protokole duomenys niekada nepalieka jūsų įrenginio. Jie gyvena IndexedDB jūsų naršyklėje."
+      },
+      "1": {
+        "q": "Kaip galiu atsarginę kopiją savo duomenų?",
+        "a": "Bet kada galite eksportuoti visą JSON atsarginę kopiją. Taip pat rekomenduojame reguliarius CSV eksportus."
+      },
+      "2": {
+        "q": "Kas yra 'Sinchronizavimas' Pro?",
+        "a": "Greitai: Pasirinktinė prenumerata, skirta sinchronizuoti šifruotus duomenis tarp įrenginių per Supabase."
+      },
+      "3": {
+        "q": "Ar prisijungiate prie bankų?",
+        "a": "Ne. Mes manome, kad rankinis importas yra saugesnis, patikimesnis ir gerina finansinį sąmoningumą."
+      }
+    },
+    "security": {
+      "title": "Privatumas pirmiausia pagal dizainą",
+      "description": "Biudžeto programa saugo jūsų duomenis vietoje (paruošta offline) ir suteikia jums kontrolę dėl AI funkcijų, eksportavimo ir ištrynimo.",
+      "buttons": {
+        "privacy": "Privatumas ir nustatymai",
+        "offline": "Offline parama"
+      },
+      "cards": {
+        "localStorage": {
+          "title": "Vietinė saugykla",
+          "description": "Jūsų biudžeto duomenys saugomi jūsų naršyklėje (IndexedDB), todėl programa išlieka greita ir naudojama offline."
+        },
+        "encryption": {
+          "title": "Šifravimo parama",
+          "description": "Programa apima šifravimo sluoksnį, kad apsaugotų jautrius biudžeto įrašus, kai jis įjungtas."
+        },
+        "aiControls": {
+          "title": "AI funkcijų valdymas",
+          "description": "Įjunkite AI valdomas funkcijas (tokias kaip anomalijų aptikimas) ir valdykite pokalbių roboto prieigą iš nustatymų."
+        },
+        "exportDelete": {
+          "title": "Eksportuoti ir ištrinti",
+          "description": "Eksportuokite savo duomenis ir privatumo nustatymus arba ištrinkite vietinius duomenis tiesiai iš programos."
+        }
+      }
+    },
+    "comparison": {
+      "headers": {
+        "feature": "Funkcija",
+        "local": "BudgetPro Vietinis",
+        "sync": "BudgetPro Sinchronizavimas (Pro)",
+        "cloud": "Tipinė debesų programa"
+      },
+      "dataPrivacy": {
+        "feature": "Duomenų privatumas",
+        "local": "100% Privatus (Vietinis)",
+        "sync": "Galutinis šifravimas",
+        "cloud": "Matomas darbuotojams"
+      },
+      "cost": {
+        "feature": "Kaina",
+        "local": "Nemokamai amžinai",
+        "sync": "Vienkartinis atnaujinimas",
+        "cloud": "$100+/metinė prenumerata"
+      },
+      "offlineMode": {
+        "feature": "Offline režimas"
+      },
+      "bankConnections": {
+        "feature": "Banko ryšiai",
+        "local": "CSV / Tik rankinis",
+        "sync": "Pasirinktinai (šifruota)",
+        "cloud": "Privalomas agregavimas"
+      },
+      "storageLocation": {
+        "feature": "Saugojimo vieta",
+        "local": "Jūsų įrenginys",
+        "sync": "Nulinio žinojimo debesys",
+        "cloud": "Jų duomenų bazė"
+      }
+    },
+    "socialProof": {
+      "title": "Premijinė apdaila, sukurta viduje",
+      "description": "Detalės, kurios padeda biudžetui išlikti: įvedimas, sparčiosios nuorodos, mobilioji navigacija ir paruošta offline veikla.",
+      "features": {
+        "onboarding": {
+          "title": "Įvedimo turas",
+          "description": "Vadovaujantis turas padeda naujiems vartotojams greitai pasiekti vertę."
+        },
+        "shortcuts": {
+          "title": "Klaviatūros sparčiosios nuorodos",
+          "description": "Judėkite greitai su paieškos ir veiksmų sparčiosiomis nuorodomis, įmontuotomis į UI."
+        },
+        "mobileUx": {
+          "title": "Mobilus UX",
+          "description": "Apatinė navigacija ir reaguojančios išdėstymai, kurie jaučiasi natūraliai."
+        },
+        "pwaInstall": {
+          "title": "PWA diegimas",
+          "description": "Įdiekite kaip programą ir tęskite net ir esant prastam internetui."
+        }
+      }
+    },
+    "pricingSection": {
+      "recommended": "Rekomenduojama",
+      "productName": "Vietinis protokolas",
+      "productDescription": "Pilna biudžeto patirtis, veikianti visiškai jūsų įrenginyje.",
+      "whyChoose": "Kodėl pasirinkti vietinį protokolą?",
+      "whyChooseDescription": "Pamatykite, kaip mes lyginamės su debesų milžinais.",
+      "features": "Apima neribotas transakcijas, paskyras, biudžetus ir pilnas vietines atsargines galimybes."
+    },
+    "heroSection": {
+      "cta": {
+        "heading": "Sukurtas aiškumui, o ne chaosui.",
+        "viewPricing": "Peržiūrėti kainas"
+      },
+      "badges": {
+        "noSubscriptions": "Be prenumeratų",
+        "offlineReady": "Paruošta offline",
+        "seniorsMode": "Senjorų režimas"
+      },
+      "preview": {
+        "livePreview": "Gyvas peržiūra",
+        "recentTransactions": "Naujausios transakcijos",
+        "categoryBudgets": "Kategorijų biudžetai",
+        "recurring": "Pasikartojančios"
+      },
+      "modes": {
+        "dashboard": "Valdymo pultas",
+        "budgets": "Biudžetai",
+        "subscriptions": "Prenumeratos"
+      }
+    },
+    "featuresDeepDive": {
+      "heading1": "Skaičiuoklės galia.",
+      "heading2": "Programėlės paprastumas.",
+      "description": "Nustokite kovoti su sugadintomis formulėmis. Gaukite rankinio valdymo lankstumą su modernios programėlės greičiu.",
+      "cta": "Pradėti nemokamą bandomąją versiją",
+      "explore": "Tyrinėti"
+    },
+    "accessibility": {
+      "title": "Prieinama pagal numatytuosius nustatymus",
+      "description": "Senjorų režimas suteikia supaprastintą navigaciją ir didesnius paspaudimo taškus. Klaviatūros sparčiosios nuorodos, fokusavimo būsenos ir aiškus kontrastas padeda visiems judėti greičiau.",
+      "badges": {
+        "seniorsMode": "Senjorų režimas",
+        "largeTouchTargets": "Dideli paspaudimo taškai",
+        "keyboardFirst": "Pirmiausia klaviatūra"
+      },
+      "buttons": {
+        "openApp": "Atidaryti programą",
+        "settings": "Prieinamumo nustatymai"
+      }
+    },
+    "faqSection": {
+      "title": "DUK",
+      "description": "Paprasčiausi atsakymai į dažniausiai užduodamus klausimus apie bandomąsias versijas, kainas ir prieigą."
+    },
+    "outcomesSection": {
+      "title": "Sukurtas realiam gyvenimui, o ne skaičiuoklėms",
+      "description": "Dauguma biudžeto programų verčia jus dirbti. BudgetPro sukurtas sumažinti trintį, išlaikant jus kontroliuojant."
+    },
+    "howItWorksSection": {
+      "title": "Kaip tai veikia",
+      "description": "Darbo eiga, kuri greitai atveda jus prie aiškumo, nesukant į sudėtingą sistemą."
+    },
+    "nav": {
+      "tagline": "Premijinis biudžetų valdymas"
+    },
+    "marquee": {
+      "logos": [
+        "Biudžetavimas",
+        "Prenumeratos",
+        "Paskolos",
+        "OCR kvitai",
+        "Ataskaitos",
+        "Planavimas",
+        "Offline",
+        "Senjorų režimas"
+      ]
     }
   }
 }

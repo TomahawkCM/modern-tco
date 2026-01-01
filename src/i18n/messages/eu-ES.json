@@ -1,6 +1,6 @@
 {
   "nav": {
-    "dashboard": "Etxea",
+    "dashboard": "Etxeko orria",
     "transactions": "Transakzioak",
     "budgets": "Aurrekontuak",
     "reports": "Txostenak",
@@ -11,13 +11,13 @@
     "export": "Esportatu",
     "settings": "Ezarpenak",
     "help": "Laguntza",
-    "about": "Honi buruz"
+    "about": "Informazioa"
   },
   "actions": {
     "addTransaction": "Transakzioa Gehitu",
     "importData": "Datuak Inportatu",
     "import": "Inportatu",
-    "editDashboard": "Etxea Editatu",
+    "editDashboard": "Etxeko Orria Editatu",
     "saveChanges": "Aldaketak Gorde",
     "resetDefaults": "Lehenetsitakoak Berrezarri"
   },
@@ -35,31 +35,411 @@
   "widget": {
     "spendingByCategory": {
       "title": "Kategorien Araberako Gastuak",
-      "description": "Ikusi nola doan zure dirua irudikapen bisualekin"
+      "description": "Ikusi nora doan zure dirua irudizko banaketan"
     },
     "recentTransactions": {
       "title": "Azken Transakzioak",
-      "description": "Azken jarduera finantzarioaren ikuspegi azkarra"
+      "description": "Azken finantza jardueraren ikuspegi azkarra"
     },
     "budgetProgress": {
       "title": "Aurrekontu Aurrerapena",
-      "description": "Jarri nola doazen zure aurrekontu helburuekin"
+      "description": "Zure aurrekontu helburuekin nola doazen jarraitu"
     },
     "accountBalances": {
       "title": "Kontu Balantzeak",
-      "description": "Zure kontu guztietan egungo balantzeak"
+      "description": "Zure kontu guztietako balantze eguneratuak"
     },
     "incomeVsExpenses": {
-      "title": "Sarrerak vs Gastuak",
-      "description": "Konparatu zure irabaziak eta gastuak denboran zehar"
+      "title": "Sarrera vs Gastuak",
+      "description": "Zure irabaziak eta gastuak denboran zehar konparatu"
     },
     "monthlyTrends": {
       "title": "Hileko Joera",
-      "description": "Irudikatu zure finantza patroiak hilabetez hilabete"
+      "description": "Zure finantza patroiak hilean hilean irudikatu"
     },
     "upcomingBills": {
-      "title": "Etorkizuneko Fakturak",
-      "description": "Ez galdu ordainketa faktura gogorarazleekin"
+      "title": "Hurrengo Fakturak",
+      "description": "Ez galdu ordainketa bat ere faktura gogorarazleekin"
+    }
+  },
+  "tooltip": {
+    "ariaLabel": "Informazio gehiago",
+    "learnMore": "Gehiago ikasi →"
+  },
+  "footer": {
+    "tagline": "Premium aurrekontuak, aldaketa bat eginez.",
+    "links": {
+      "login": "Saioa hasi",
+      "signup": "Probatu hasi",
+      "upgrade": "Eguneratu",
+      "settings": "Ezarpenak"
+    },
+    "copyright": "© {year} {brandName}"
+  },
+  "dialog": {
+    "confirm": "Berretsi",
+    "cancel": "Ezeztatu",
+    "processing": "Prozesatzen...",
+    "finalConfirmation": "Azken Berrespena:",
+    "typeToConfirm": "Idatzi {text} ekintza hau berresteko."
+  },
+  "sidebar": {
+    "appTitle": "Aurrekontu Aplikazioa",
+    "appSubtitle": "Premium Finantzak",
+    "search": "Bilatu...",
+    "shortcuts": "Laburbideak",
+    "navigation": {
+      "dashboard": "Etxeko orria",
+      "transactions": "Transakzioak",
+      "scanReceipt": "Tiketak Eskaneatu",
+      "categories": "Kategoriek",
+      "budgets": "Aurrekontuak",
+      "subscriptions": "Harpidetzak",
+      "loans": "Maileguak",
+      "investments": "Inbertsioak",
+      "futurePlans": "Etorkizuneko Plangintza",
+      "retirement": "Erretiroa",
+      "reports": "Txostenak"
+    },
+    "actions": {
+      "importCsv": "CSV Inportatu",
+      "settings": "Ezarpenak",
+      "showLess": "Gutxiago Ikusi",
+      "showAllItems": "Elementu Guztiak Ikusi"
+    }
+  },
+  "onboarding": {
+    "skipTour": "Bisita salto",
+    "stepCounter": "Pauso {current} / {total}",
+    "dontShowAgain": "Ez erakutsi bisita hau berriro",
+    "quickTip": "💡 Azkarra Aholkua",
+    "navigation": {
+      "previous": "Aurrekoa",
+      "next": "Hurrengoa",
+      "getStarted": "Hasi",
+      "startTour": "Bisita Hasi"
+    },
+    "steps": {
+      "welcome": {
+        "title": "👋 Ongi Etorri Aurrekontu Aplikaziora!",
+        "description": "Hasteko, azkar bisita bat egingo dugu etxeko finantzak kudeatzen laguntzeko. Ez da luze iraunduko!"
+      },
+      "import": {
+        "title": "📥 Inportatu Zure Transakzioak",
+        "description": "Hasi zure banku transakzioak CSV fitxategi batetik inportatuz. BMO, Home Trust eta beste banku askoren formatuak onartzen ditugu. Aplikazioak automatikoki kategorizatuko ditu zure transakzioak!"
+      },
+      "categorize": {
+        "title": "🏷️ Kategoriza eta Antolatu",
+        "description": "Transakzioen kategorien berrikusketa eta egokitzapena. Gure adimen artifizialak zure zuzenketetatik ikasten du denboran zehar hobetzeko. Erabili ekintza masiboak transakzio anitz kategorizatzea azkartzeko!"
+      },
+      "budgets": {
+        "title": "🎯 Ezarri Zure Aurrekontuak",
+        "description": "Gastu kategorietarako aurrekontuak sortu. Hilabetean zehar zure aurrerapena jarraitu eta muga gainditzen ari zarenean ohartarazpenak jaso."
+      },
+      "reports": {
+        "title": "📊 Ikusi Txostenak eta Ikuspegiak",
+        "description": "Zure gastu patroiak irudikatu, zure net worth jarraitu eta finantza erabakiak informaturik hartu. Zure etxeko orria automatikoki eguneratzen da transakzio bakoitzarekin!"
+      }
+    },
+    "tips": {
+      "import": "Arrastatu eta utzi zure CSV fitxategia edo klikatu nabigatzeko. BMO eta Home Trust formatuak automatikoki detektatzen ditugu!",
+      "categorize": "Erabili azkar kategoriza botoia edo hautatu hainbat transakzio masiboki kategorizatzea.",
+      "budgets": "Ezarri errealistak diren aurrekontuak eta muga gainditzeko arriskuan bazaude ohartaraziko zaitugu."
+    }
+  },
+  "landing": {
+    "brand": {
+      "name": "BudgetPro",
+      "product": "Aurrekontu Aplikazioa"
+    },
+    "hero": {
+      "badge": "Pribatutasuna Lehenik • Tokiko Bakarrik • Zero Jarraipena",
+      "headline": "Kudeatu Zure Dirua Zure Datuak Saldu Barik.",
+      "subhead": "Spreadsheet baten indarra. Aplikazio baten sinpletasuna. Bizitza finantzarioa argi ikusi aurrekontu aplikazio bakarrarekin, zure datuak inoiz ez direla zure gailutik aterako bermatzen duena.",
+      "primaryCta": {
+        "label": "Hasi Tokiko Protokoloa (Doan)",
+        "href": "/budget-app/auth/signup"
+      },
+      "secondaryCta": {
+        "label": "Saioa hasi",
+        "href": "/budget-app/auth/login"
+      },
+      "finePrint": "Ez da banku kredentzialik behar. Ez da konturik behar tokiko moduan."
+    },
+    "trust": {
+      "0": {
+        "title": "Zure Gailua, Zure Datuak",
+        "description": "Datuak zure nabigatzaileko IndexedDB-n geratzen dira. Benetan ezin dugu ikusi."
+      },
+      "1": {
+        "title": "Spreadsheet Indarra",
+        "description": "Masiboki editatu, pivotatu eta analisi egin profesional baten moduan formula buruhausteak gabe."
+      },
+      "2": {
+        "title": "Offline Abiadura",
+        "description": "Zero latentziarekin. Mendi gailurrean edo metro tunel batean funtzionatzen du."
+      },
+      "3": {
+        "title": "Eskuzko Erritualak",
+        "description": "Inportazio magoak ostiraleko diru azterketa ohitura atsegin bat bihurtzen du."
+      }
+    },
+    "outcomes": {
+      "0": {
+        "title": "Gelditu Agregatzaileekin Borrokan",
+        "description": "Ez da gehiago konexio hautsi edo berriro egiaztatu beharrik. Zure datuen sarrera kontrolatzen duzu."
+      },
+      "1": {
+        "title": "Pribatutasuna Diseinuan",
+        "description": "Ez dugu zure datuak saltzen, ez dugulako. Puntua."
+      },
+      "2": {
+        "title": "Etorkizuneko Plangintza",
+        "description": "Erretiroa, maileguak ordaintzea eta aurrezki helburuak irudikatu ikuspegi integratu batean."
+      },
+      "3": {
+        "title": "Harpidetzaren Hiltzailea",
+        "description": "Beste aplikazioek galtzen dituzten zure poltsikoan eragiten duten errepikako drainak ikusi."
+      }
+    },
+    "features": {
+      "0": {
+        "title": "Tokiko Etxeko Orria",
+        "description": "Net worth, cash flow eta kategoriaren banaketa. Instant kargatzeko denbora.",
+        "href": "/budget-app"
+      },
+      "1": {
+        "title": "Inportazio Magoa",
+        "description": "BMO, Home Trust eta pertsonalizatutako formatuentzako smart CSV mapper.",
+        "href": "/budget-app/import"
+      },
+      "2": {
+        "title": "Tiketak OCR",
+        "description": "Tiketak lokalki eskaneatu Tesseract.js-rekin. Ez da hodeiko prozesamendurik.",
+        "href": "/budget-app/ocr"
+      },
+      "3": {
+        "title": "Kategoria Aurrekontuak",
+        "description": "Zero oinarritutako edo biribilketa aurrekontuak kontrol kategoria finarekin.",
+        "href": "/budget-app/budgets"
+      },
+      "4": {
+        "title": "Erretiro Kalkulagailua",
+        "description": "Zure askatasun data proiektatu interes konposatuaren irudikapenekin.",
+        "href": "/budget-app/planning/retirement"
+      },
+      "5": {
+        "title": "Pribatutasun Iragazkia",
+        "description": "Segurtasun maila gehigarri bat lortzeko aukera ematen duen bezero aldagaiaren enkriptatzea.",
+        "href": "/budget-app/settings"
+      }
+    },
+    "howItWorks": {
+      "0": {
+        "title": "Inportatu",
+        "description": "Arrastatu eta utzi CSV-ak edo eskaneatu tiketak. AI-k zutabeak lokalki mapatzen ditu."
+      },
+      "1": {
+        "title": "Berrikusi",
+        "description": "Azkar kategoriza adimen arau eta ekintza masiboekin."
+      },
+      "2": {
+        "title": "Plangintza",
+        "description": "Dolar bakoitzari lana esleitu eta zure etorkizuneko net worth-a aurreikusi."
+      }
+    },
+    "pricing": {
+      "eyebrow": "Prezio Justua",
+      "title": "Tokikoa Doan. Sinkronizazioa Pro.",
+      "description": "Hasi indartsu Tokiko Protokoloarekin. Eguneratu gero behar baduzu gailu anitzeko sinkronizaziorako.",
+      "priceLabel": "Doan Betirako",
+      "cta": {
+        "label": "Hasi Tokiko Protokoloa",
+        "href": "/budget-app/auth/signup"
+      },
+      "secondary": {
+        "label": "Ikusi Pro Ezaugarriak",
+        "href": "#pricing"
+      },
+      "guarantee": "Ez da kreditu txartelik behar Tokiko Protokoloarentzat."
+    },
+    "faq": {
+      "0": {
+        "q": "Nire datuak benetan pribatuak al dira?",
+        "a": "Bai. Tokiko Protokoloan, datuak inoiz ez dira zure gailutik ateratzen. Zure nabigatzailean IndexedDB-n bizi da."
+      },
+      "1": {
+        "q": "Nola babestu ditzaket nire datuak?",
+        "a": "Edozein unetan JSON backup osoa esportatu dezakezu. Halaber, CSV esportazioak egitea gomendatzen dugu."
+      },
+      "2": {
+        "q": "'Sinkronizatu' Pro zer da?",
+        "a": "Laster etorriko da: gailuen artean enkriptatutako datuak sinkronizatzeko aukera ematen duen harpidetza bat."
+      },
+      "3": {
+        "q": "Bankuekin konektatzen al zarete?",
+        "a": "Ez. Uste dugu eskuzko inportazioa segurua, fidagarria eta finantza kontzientzia hobea eraikitzen duela."
+      }
+    },
+    "security": {
+      "title": "Pribatutasuna lehenik diseinatuta",
+      "description": "Aurrekontu Aplikazioak zure datuak lokalmente (offline prest) gordetzen ditu eta AI ezaugarrietarako, esportatzeko eta ezabatzeko kontrolak ematen dizkizu.",
+      "buttons": {
+        "privacy": "Pribatutasuna eta ezarpenak",
+        "offline": "Offline laguntza"
+      },
+      "cards": {
+        "localStorage": {
+          "title": "Tokiko biltegiratzea",
+          "description": "Zure aurrekontu datuak zure nabigatzailean (IndexedDB) gordetzen dira, beraz aplikazioa azkar eta offline erabilgarria mantentzen da."
+        },
+        "encryption": {
+          "title": "Enkriptatze laguntza",
+          "description": "Aplikazioak aurrekontu erregistro sentikorren babesa emateko enkriptatze geruza bat du aktibatuta dagoenean."
+        },
+        "aiControls": {
+          "title": "AI ezaugarri kontrolak",
+          "description": "AI-indarrezko ezaugarriak (anomalien detekzioa bezalakoak) aktibatu edo desaktibatu eta txatboten sarbidea kudeatu ezarpenetatik."
+        },
+        "exportDelete": {
+          "title": "Esportatu eta ezabatu",
+          "description": "Zure datuak eta pribatutasun ezarpenak esportatu, edo lokaleko datuak zuzenean aplikaziotik ezabatu."
+        }
+      }
+    },
+    "comparison": {
+      "headers": {
+        "feature": "Ezaugarri",
+        "local": "BudgetPro Tokikoa",
+        "sync": "BudgetPro Sinkronizatu (Pro)",
+        "cloud": "Aplikazio Hodeiko Ohikoa"
+      },
+      "dataPrivacy": {
+        "feature": "Datu Pribatutasuna",
+        "local": "100% Pribatu (Tokikoa)",
+        "sync": "End-to-End Enkriptatua",
+        "cloud": "Langileek Ikusi Dezakete"
+      },
+      "cost": {
+        "feature": "Kostua",
+        "local": "Doan Betirako",
+        "sync": "Aldaketa Bat",
+        "cloud": "$100+/urteko Harpidetza"
+      },
+      "offlineMode": {
+        "feature": "Offline Modua"
+      },
+      "bankConnections": {
+        "feature": "Banku Konektzioak",
+        "local": "CSV / Eskuzko Bakarrik",
+        "sync": "Aukerakoa (Enkriptatua)",
+        "cloud": "Nahitaezko Agregazioa"
+      },
+      "storageLocation": {
+        "feature": "Biltegiratze Lekua",
+        "local": "Zure Gailua",
+        "sync": "Zero-Knowledge Hodeia",
+        "cloud": "Haien Datubasea"
+      }
+    },
+    "socialProof": {
+      "title": "Premium distira, barnean eraikia",
+      "description": "Aurrekontuak iraunarazteko xehetasunak: onboarding, laburbideak, mugikorreko nabigazioa eta offline prestako errendimendua.",
+      "features": {
+        "onboarding": {
+          "title": "Onboarding bisita",
+          "description": "Gidatutako bisita batek erabiltzaile berriei balioa azkar lortzen laguntzen die."
+        },
+        "shortcuts": {
+          "title": "Teklatuko laburbideak",
+          "description": "Azkar mugitu bilaketa eta ekintza laburbideekin UI-n integratuta."
+        },
+        "mobileUx": {
+          "title": "Mugikorreko UX-a lehenik",
+          "description": "Beheko nabigazioa eta erantzunkorrak diren diseinuak natiboak diruditenak."
+        },
+        "pwaInstall": {
+          "title": "PWA instalazioa",
+          "description": "Aplikazio gisa instalatu eta jarraitu, interneteko konexioa txikia denean ere."
+        }
+      }
+    },
+    "pricingSection": {
+      "recommended": "Gomendatua",
+      "productName": "Tokiko Protokoloa",
+      "productDescription": "Aurrekontu esperientzia osoa, zure gailuan bakarrik funtzionatzen duena.",
+      "whyChoose": "Zergatik aukeratu Tokiko Protokoloa?",
+      "whyChooseDescription": "Ikusi nola konparatzen garen hodeiko erraldoiekin.",
+      "features": "Mugagabeak diren transakzioak, kontuak, aurrekontuak eta tokiko backup gaitasun osoak barne."
+    },
+    "heroSection": {
+      "cta": {
+        "heading": "Argitasunerako eraikia, ez kaosa.",
+        "viewPricing": "Ikusi prezioak"
+      },
+      "badges": {
+        "noSubscriptions": "Ez da harpidetzarik",
+        "offlineReady": "Offline prest",
+        "seniorsMode": "Adinekoen Modua"
+      },
+      "preview": {
+        "livePreview": "Aurrez aurreko ikuskizuna",
+        "recentTransactions": "Azken transakzioak",
+        "categoryBudgets": "Kategoria aurrekontuak",
+        "recurring": "Errepikakorrak"
+      },
+      "modes": {
+        "dashboard": "Etxeko orria",
+        "budgets": "Aurrekontuak",
+        "subscriptions": "Harpidetzak"
+      }
+    },
+    "featuresDeepDive": {
+      "heading1": "Spreadsheet Indarra.",
+      "heading2": "Aplikazio Sinpletasuna.",
+      "description": "Gelditu hautsi formulak borrokan. Lortu eskuzko kontrolaren malgutasuna modernoa den aplikazioaren abiadurarekin.",
+      "cta": "Hasi doako probaldia",
+      "explore": "Aztertu"
+    },
+    "accessibility": {
+      "title": "Lehenik eta behin irisgarria",
+      "description": "Adinekoen Moduak nabigazioa sinplifikatu eta ukipen helburu handiagoak eskaintzen ditu. Teklatuko laburbideak, fokua eta kontraste argiak laguntzen dute denei azkarrago mugitzen.",
+      "badges": {
+        "seniorsMode": "Adinekoen Modua",
+        "largeTouchTargets": "Ukitzeko helburu handiak",
+        "keyboardFirst": "Teklatua lehenik"
+      },
+      "buttons": {
+        "openApp": "Aplikazioa ireki",
+        "settings": "Irisgarritasun ezarpenak"
+      }
+    },
+    "faqSection": {
+      "title": "FAQ",
+      "description": "Probaldien, prezioen eta sarbidearen inguruko galdera ohikoen erantzun sinpleak."
+    },
+    "outcomesSection": {
+      "title": "Erealitatearentzat eraikia, ez spreadsheetentzat",
+      "description": "Aurrekontu aplikazio gehienek lan egin behar zaituzte. BudgetPro-k frikzioa murrizteko diseinatuta dago, kontrola mantenduz."
+    },
+    "howItWorksSection": {
+      "title": "Nola funtzionatzen duen",
+      "description": "Argitasunera azkar iristen zaituen lan-fluxua, sistema konplexu batean itxita geratu gabe."
+    },
+    "nav": {
+      "tagline": "Premium aurrekontuak"
+    },
+    "marquee": {
+      "logos": [
+        "Aurrekontuak",
+        "Harpidetzak",
+        "Maileguak",
+        "OCR Tiketak",
+        "Txostenak",
+        "Plangintza",
+        "Offline",
+        "Adinekoen Modua"
+      ]
     }
   }
 }

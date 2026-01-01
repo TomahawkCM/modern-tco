@@ -39,7 +39,7 @@
     },
     "recentTransactions": {
       "title": "Senaste transaktioner",
-      "description": "Snabb översikt över din senaste ekonomiska aktivitet"
+      "description": "Snabb översikt av din senaste ekonomiska aktivitet"
     },
     "budgetProgress": {
       "title": "Budgetprogress",
@@ -47,11 +47,11 @@
     },
     "accountBalances": {
       "title": "Kontobalanser",
-      "description": "Aktuella saldon på alla dina konton"
+      "description": "Nuvarande saldon på alla dina konton"
     },
     "incomeVsExpenses": {
       "title": "Inkomster vs Utgifter",
-      "description": "Jämför dina inkomster och utgifter över tid"
+      "description": "Jämför dina intäkter och utgifter över tid"
     },
     "monthlyTrends": {
       "title": "Månatliga trender",
@@ -60,6 +60,386 @@
     "upcomingBills": {
       "title": "Kommande räkningar",
       "description": "Missar aldrig en betalning med påminnelser om räkningar"
+    }
+  },
+  "tooltip": {
+    "ariaLabel": "Mer information",
+    "learnMore": "Läs mer →"
+  },
+  "footer": {
+    "tagline": "Premiumbudgetering med en engångsupgradering.",
+    "links": {
+      "login": "Logga in",
+      "signup": "Börja provperiod",
+      "upgrade": "Uppgradera",
+      "settings": "Inställningar"
+    },
+    "copyright": "© {year} {brandName}"
+  },
+  "dialog": {
+    "confirm": "Bekräfta",
+    "cancel": "Avbryt",
+    "processing": "Bearbetar...",
+    "finalConfirmation": "Slutlig bekräftelse:",
+    "typeToConfirm": "Skriv {text} för att bekräfta denna åtgärd."
+  },
+  "sidebar": {
+    "appTitle": "Budget App",
+    "appSubtitle": "Premium Ekonomi",
+    "search": "Sök...",
+    "shortcuts": "Genvägar",
+    "navigation": {
+      "dashboard": "Instrumentpanel",
+      "transactions": "Transaktioner",
+      "scanReceipt": "Skanna kvitto",
+      "categories": "Kategorier",
+      "budgets": "Budgetar",
+      "subscriptions": "Prenumerationer",
+      "loans": "Lån",
+      "investments": "Investeringar",
+      "futurePlans": "Framtidsplaner",
+      "retirement": "Pension",
+      "reports": "Rapporter"
+    },
+    "actions": {
+      "importCsv": "Importera CSV",
+      "settings": "Inställningar",
+      "showLess": "Visa mindre",
+      "showAllItems": "Visa alla objekt"
+    }
+  },
+  "onboarding": {
+    "skipTour": "Hoppa över rundtur",
+    "stepCounter": "Steg {current} av {total}",
+    "dontShowAgain": "Visa inte denna rundtur igen",
+    "quickTip": "💡 Snabbtips",
+    "navigation": {
+      "previous": "Föregående",
+      "next": "Nästa",
+      "getStarted": "Kom igång",
+      "startTour": "Börja rundtur"
+    },
+    "steps": {
+      "welcome": {
+        "title": "👋 Välkommen till Budget App!",
+        "description": "Låt oss ta en snabb rundtur för att hjälpa dig komma igång med att hantera din hushållsekonomi. Detta tar inte lång tid!"
+      },
+      "import": {
+        "title": "📥 Importera dina transaktioner",
+        "description": "Börja med att importera dina banktransaktioner från en CSV-fil. Vi stödjer BMO, Home Trust och många andra banker. Appen kommer automatiskt att kategorisera dina transaktioner!"
+      },
+      "categorize": {
+        "title": "🏷️ Kategorisera & Organisera",
+        "description": "Granska och justera transaktionskategorier. Vår smarta kategorisering lär sig av dina korrigeringar för att förbättras över tid. Använd massåtgärder för att kategorisera flera transaktioner på en gång!"
+      },
+      "budgets": {
+        "title": "🎯 Sätt dina budgetar",
+        "description": "Skapa budgetar för olika utgiftskategorier. Följ din utveckling under månaden och få varningar när du närmar dig dina gränser."
+      },
+      "reports": {
+        "title": "📊 Visa rapporter & insikter",
+        "description": "Visualisera dina utgiftsmönster, följ ditt nettoförmögenhet och fatta informerade ekonomiska beslut. Din instrumentpanel uppdateras automatiskt med varje transaktion!"
+      }
+    },
+    "tips": {
+      "import": "Dra & släpp din CSV-fil eller klicka för att bläddra. Vi auto-detekterar BMO och Home Trust-format!",
+      "categorize": "Använd knappen för snabb kategorisering eller välj flera transaktioner för masskategorisering.",
+      "budgets": "Sätt realistiska budgetar och vi varnar dig om du är på väg att överskrida."
+    }
+  },
+  "landing": {
+    "brand": {
+      "name": "BudgetPro",
+      "product": "Budget App"
+    },
+    "hero": {
+      "badge": "Integritet-först • Endast lokalt • Ingen spårning",
+      "headline": "Hantera dina pengar utan att sälja dina data.",
+      "subhead": "Kraften i ett kalkylblad. Enkelheten i en app. Upplev ekonomisk klarhet med den enda budgetappen som garanterar att dina data aldrig lämnar din enhet.",
+      "primaryCta": {
+        "label": "Börja lokal protokoll (Gratis)",
+        "href": "/budget-app/auth/signup"
+      },
+      "secondaryCta": {
+        "label": "Logga in",
+        "href": "/budget-app/auth/login"
+      },
+      "finePrint": "Inga bankuppgifter krävs. Inget konto behövs för lokal läge."
+    },
+    "trust": {
+      "0": {
+        "title": "Din enhet, dina data",
+        "description": "Data stannar i din webbläsares IndexedDB. Vi kan bokstavligen inte se det."
+      },
+      "1": {
+        "title": "Kalkylblads kraft",
+        "description": "Massredigera, pivottabeller och analysera som ett proffs utan formelproblem."
+      },
+      "2": {
+        "title": "Offline hastighet",
+        "description": "Ingen latens. Fungerar på en bergstopp eller i en tunnelbana."
+      },
+      "3": {
+        "title": "Manuella ritualer",
+        "description": "Importguiden gör fredagsgenomgången av pengar till en tillfredsställande vana."
+      }
+    },
+    "outcomes": {
+      "0": {
+        "title": "Sluta kämpa med aggregat",
+        "description": "Inga fler brutna anslutningar eller omautentisering. Du kontrollerar datainmatningen."
+      },
+      "1": {
+        "title": "Integritet genom design",
+        "description": "Vi säljer inte dina data eftersom vi inte har dem. Punkt."
+      },
+      "2": {
+        "title": "Framtidssäker planering",
+        "description": "Modellera pension, lånebetalningar och sparmål i en integrerad vy."
+      },
+      "3": {
+        "title": "Prenumerationsdödare",
+        "description": "Upptäck återkommande utgifter som andra appar missar."
+      }
+    },
+    "features": {
+      "0": {
+        "title": "Lokal instrumentpanel",
+        "description": "Nettoförmögenhet, kassaflöde och kategoribreakdown. Omedelbara laddningstider.",
+        "href": "/budget-app"
+      },
+      "1": {
+        "title": "Importguide",
+        "description": "Smart CSV-mappare för BMO, Home Trust och anpassningsbara format.",
+        "href": "/budget-app/import"
+      },
+      "2": {
+        "title": "Kvitto OCR",
+        "description": "Skanna kvitton lokalt med Tesseract.js. Ingen molnbearbetning.",
+        "href": "/budget-app/ocr"
+      },
+      "3": {
+        "title": "Kategoribudgetar",
+        "description": "Nollbaserade eller rullande budgetar med detaljerad kategorikontroll.",
+        "href": "/budget-app/budgets"
+      },
+      "4": {
+        "title": "Pensionsberäknare",
+        "description": "Projektera ditt frihetsdatum med visualiseringar av ränta på ränta.",
+        "href": "/budget-app/planning/retirement"
+      },
+      "5": {
+        "title": "Integritetsskydd",
+        "description": "Valfri klient-sidan kryptering för ett extra lager av säkerhet.",
+        "href": "/budget-app/settings"
+      }
+    },
+    "howItWorks": {
+      "0": {
+        "title": "Importera",
+        "description": "Dra & släpp CSV:er eller skanna kvitton. AI mappar kolumnerna lokalt."
+      },
+      "1": {
+        "title": "Granska",
+        "description": "Snabb kategorisering med smarta regler och massåtgärder."
+      },
+      "2": {
+        "title": "Planera",
+        "description": "Tilldela varje krona ett jobb och prognostisera din framtida nettoförmögenhet."
+      }
+    },
+    "pricing": {
+      "eyebrow": "Rättvis prissättning",
+      "title": "Lokal är gratis. Synk är pro.",
+      "description": "Börja med det kraftfulla Lokala protokollet. Uppgradera senare om du behöver synk mellan enheter.",
+      "priceLabel": "Gratis för alltid",
+      "cta": {
+        "label": "Börja lokal protokoll",
+        "href": "/budget-app/auth/signup"
+      },
+      "secondary": {
+        "label": "Visa Pro-funktioner",
+        "href": "#pricing"
+      },
+      "guarantee": "Inga kreditkort krävs för Lokal protokoll."
+    },
+    "faq": {
+      "0": {
+        "q": "Är mina data verkligen privata?",
+        "a": "Ja. I Lokal protokoll lämnar data aldrig din enhet. Den lever i IndexedDB inom din webbläsare."
+      },
+      "1": {
+        "q": "Hur säkerhetskopierar jag mina data?",
+        "a": "Du kan exportera en fullständig JSON-säkerhetskopia när som helst. Vi rekommenderar också regelbundna CSV-exporter."
+      },
+      "2": {
+        "q": "Vad är 'Synk' Pro?",
+        "a": "Kommer snart: En valfri prenumeration för att synkronisera krypterade data mellan enheter via Supabase."
+      },
+      "3": {
+        "q": "Ansluter ni till banker?",
+        "a": "Nej. Vi tror att manuell import är säkrare, mer pålitlig och bygger bättre ekonomisk medvetenhet."
+      }
+    },
+    "security": {
+      "title": "Integritet-först genom design",
+      "description": "Budget App lagrar dina data lokalt (offline-redo) och ger dig kontroller för AI-funktioner, export och radering.",
+      "buttons": {
+        "privacy": "Integritet & inställningar",
+        "offline": "Offline-stöd"
+      },
+      "cards": {
+        "localStorage": {
+          "title": "Lokal lagring",
+          "description": "Dina budgetdata lagras i din webbläsare (IndexedDB) så att appen förblir snabb och användbar offline."
+        },
+        "encryption": {
+          "title": "Krypteringsstöd",
+          "description": "Appen inkluderar ett krypteringslager för att skydda känsliga budgetposter när det är aktiverat."
+        },
+        "aiControls": {
+          "title": "AI-funktionskontroller",
+          "description": "Aktivera AI-drivna funktioner (som anomalidetektering) och hantera chatbotåtkomst från inställningarna."
+        },
+        "exportDelete": {
+          "title": "Exportera & ta bort",
+          "description": "Exportera dina data och integritetsinställningar, eller ta bort lokala data direkt från appen."
+        }
+      }
+    },
+    "comparison": {
+      "headers": {
+        "feature": "Funktion",
+        "local": "BudgetPro Lokal",
+        "sync": "BudgetPro Synk (Pro)",
+        "cloud": "Typisk molnapp"
+      },
+      "dataPrivacy": {
+        "feature": "Dataintegritet",
+        "local": "100% Privat (Lokal)",
+        "sync": "End-to-End Krypterad",
+        "cloud": "Synlig för anställda"
+      },
+      "cost": {
+        "feature": "Kostnad",
+        "local": "Gratis för alltid",
+        "sync": "Engångsupgradering",
+        "cloud": "$100+/år Prenumeration"
+      },
+      "offlineMode": {
+        "feature": "Offline-läge"
+      },
+      "bankConnections": {
+        "feature": "Bankanslutningar",
+        "local": "CSV / Manuell endast",
+        "sync": "Valfritt (Krypterat)",
+        "cloud": "Obligatorisk aggregation"
+      },
+      "storageLocation": {
+        "feature": "Lagringsplats",
+        "local": "Din enhet",
+        "sync": "Zero-Knowledge Moln",
+        "cloud": "Deras databas"
+      }
+    },
+    "socialProof": {
+      "title": "Premiumfinish, inbyggd",
+      "description": "De detaljer som gör budgetering effektiv: onboarding, genvägar, mobilnavigering och offline-redo prestanda.",
+      "features": {
+        "onboarding": {
+          "title": "Onboarding-rundtur",
+          "description": "En guidad tur hjälper nya användare att snabbt få värde."
+        },
+        "shortcuts": {
+          "title": "Tangentbordsgenvägar",
+          "description": "Rör dig snabbt med sök- och åtgärdsgenvägar inbyggda i UI."
+        },
+        "mobileUx": {
+          "title": "Mobil-först UX",
+          "description": "Bottennavigation och responsiva layouter som känns inhemska."
+        },
+        "pwaInstall": {
+          "title": "PWA-installation",
+          "description": "Installera som en app och fortsätt även med sporadisk internetanslutning."
+        }
+      }
+    },
+    "pricingSection": {
+      "recommended": "Rekommenderad",
+      "productName": "Lokal protokoll",
+      "productDescription": "Den kompletta budgetupplevelsen, som körs helt på din enhet.",
+      "whyChoose": "Varför välja Lokal protokoll?",
+      "whyChooseDescription": "Se hur vi står oss mot molnjättarna.",
+      "features": "Inkluderar obegränsade transaktioner, konton, budgetar och fullständiga lokala säkerhetskopieringsmöjligheter."
+    },
+    "heroSection": {
+      "cta": {
+        "heading": "Byggd för klarhet, inte kaos.",
+        "viewPricing": "Visa prissättning"
+      },
+      "badges": {
+        "noSubscriptions": "Inga prenumerationer",
+        "offlineReady": "Offline-redo",
+        "seniorsMode": "Seniorläge"
+      },
+      "preview": {
+        "livePreview": "Live förhandsvisning",
+        "recentTransactions": "Senaste transaktioner",
+        "categoryBudgets": "Kategoribudgetar",
+        "recurring": "Återkommande"
+      },
+      "modes": {
+        "dashboard": "Instrumentpanel",
+        "budgets": "Budgetar",
+        "subscriptions": "Prenumerationer"
+      }
+    },
+    "featuresDeepDive": {
+      "heading1": "Kalkylblads kraft.",
+      "heading2": "Appens enkelhet.",
+      "description": "Sluta kämpa med brutna formler. Få flexibiliteten av manuell kontroll med hastigheten av en modern app.",
+      "cta": "Börja gratis provperiod",
+      "explore": "Utforska"
+    },
+    "accessibility": {
+      "title": "Tillgänglig som standard",
+      "description": "Seniorläge ger förenklad navigering och större tryckytor. Tangentbordsgenvägar, fokusstater och tydlig kontrast hjälper alla att röra sig snabbare.",
+      "badges": {
+        "seniorsMode": "Seniorläge",
+        "largeTouchTargets": "Stora tryckytor",
+        "keyboardFirst": "Tangentbord-först"
+      },
+      "buttons": {
+        "openApp": "Öppna appen",
+        "settings": "Tillgänglighetsinställningar"
+      }
+    },
+    "faqSection": {
+      "title": "FAQ",
+      "description": "Enkla svar på vanliga frågor om provperioder, prissättning och åtkomst."
+    },
+    "outcomesSection": {
+      "title": "Byggd för verkliga livet, inte kalkylblad",
+      "description": "De flesta budgetappar får dig att göra jobbet. BudgetPro är utformad för att minska friktionen samtidigt som du behåller kontrollen."
+    },
+    "howItWorksSection": {
+      "title": "Hur det fungerar",
+      "description": "Ett arbetsflöde som snabbt ger dig klarhet, utan att låsa in dig i ett komplicerat system."
+    },
+    "nav": {
+      "tagline": "Premiumbudgetering"
+    },
+    "marquee": {
+      "logos": [
+        "Budgetering",
+        "Prenumerationer",
+        "Lån",
+        "OCR Kvitton",
+        "Rapporter",
+        "Planering",
+        "Offline",
+        "Seniorläge"
+      ]
     }
   }
 }

@@ -19,7 +19,7 @@
     "import": "导入",
     "editDashboard": "编辑仪表板",
     "saveChanges": "保存更改",
-    "resetDefaults": "重置为默认"
+    "resetDefaults": "重置为默认值"
   },
   "welcome": {
     "title": "欢迎使用预算应用",
@@ -43,7 +43,7 @@
     },
     "budgetProgress": {
       "title": "预算进度",
-      "description": "跟踪您在预算目标上的表现"
+      "description": "跟踪您与预算目标的进展"
     },
     "accountBalances": {
       "title": "账户余额",
@@ -60,6 +60,386 @@
     "upcomingBills": {
       "title": "即将到期的账单",
       "description": "通过账单提醒确保不遗漏付款"
+    }
+  },
+  "tooltip": {
+    "ariaLabel": "更多信息",
+    "learnMore": "了解更多 →"
+  },
+  "footer": {
+    "tagline": "高级预算管理，一次性升级。",
+    "links": {
+      "login": "登录",
+      "signup": "开始试用",
+      "upgrade": "升级",
+      "settings": "设置"
+    },
+    "copyright": "© {year} {brandName}"
+  },
+  "dialog": {
+    "confirm": "确认",
+    "cancel": "取消",
+    "processing": "处理中...",
+    "finalConfirmation": "最终确认：",
+    "typeToConfirm": "输入{text}以确认此操作。"
+  },
+  "sidebar": {
+    "appTitle": "预算应用",
+    "appSubtitle": "高级财务",
+    "search": "搜索...",
+    "shortcuts": "快捷方式",
+    "navigation": {
+      "dashboard": "仪表板",
+      "transactions": "交易",
+      "scanReceipt": "扫描收据",
+      "categories": "类别",
+      "budgets": "预算",
+      "subscriptions": "订阅",
+      "loans": "贷款",
+      "investments": "投资",
+      "futurePlans": "未来计划",
+      "retirement": "退休",
+      "reports": "报告"
+    },
+    "actions": {
+      "importCsv": "导入CSV",
+      "settings": "设置",
+      "showLess": "显示较少",
+      "showAllItems": "显示所有项目"
+    }
+  },
+  "onboarding": {
+    "skipTour": "跳过导览",
+    "stepCounter": "第{current}步，共{total}步",
+    "dontShowAgain": "不再显示此导览",
+    "quickTip": "💡 快速提示",
+    "navigation": {
+      "previous": "上一步",
+      "next": "下一步",
+      "getStarted": "开始",
+      "startTour": "开始导览"
+    },
+    "steps": {
+      "welcome": {
+        "title": "👋 欢迎使用预算应用！",
+        "description": "让我们快速导览，帮助您开始管理家庭财务。这不会花太长时间！"
+      },
+      "import": {
+        "title": "📥 导入您的交易",
+        "description": "首先从CSV文件导入您的银行交易。我们支持BMO、Home Trust和许多其他银行。应用会自动对您的交易进行分类！"
+      },
+      "categorize": {
+        "title": "🏷️ 分类与组织",
+        "description": "查看并调整交易类别。我们的智能分类会根据您的更正进行学习，以便不断改进。使用批量操作一次性分类多个交易！"
+      },
+      "budgets": {
+        "title": "🎯 设置您的预算",
+        "description": "为不同的支出类别创建预算。跟踪您在整个过程中进展，并在接近限额时收到警报。"
+      },
+      "reports": {
+        "title": "📊 查看报告与见解",
+        "description": "可视化您的支出模式，跟踪您的净资产，并做出明智的财务决策。每笔交易后，您的仪表板会自动更新！"
+      }
+    },
+    "tips": {
+      "import": "拖放您的CSV文件或点击浏览。我们自动检测BMO和Home Trust格式！",
+      "categorize": "使用快速分类按钮或选择多个交易进行批量分类。",
+      "budgets": "设定现实的预算，如果您即将超支，我们会提醒您。"
+    }
+  },
+  "landing": {
+    "brand": {
+      "name": "预算专业",
+      "product": "预算应用"
+    },
+    "hero": {
+      "badge": "隐私优先 • 本地存储 • 零追踪",
+      "headline": "掌控您的财务，而不出售您的数据。",
+      "subhead": "电子表格的强大，应用的简单。体验唯一保证您的数据永不离开设备的预算应用。",
+      "primaryCta": {
+        "label": "开始本地协议（免费）",
+        "href": "/budget-app/auth/signup"
+      },
+      "secondaryCta": {
+        "label": "登录",
+        "href": "/budget-app/auth/login"
+      },
+      "finePrint": "无需银行凭证。本地模式无需账户。"
+    },
+    "trust": {
+      "0": {
+        "title": "您的设备，您的数据",
+        "description": "数据保留在您浏览器的IndexedDB中。我们根本无法看到它。"
+      },
+      "1": {
+        "title": "电子表格的强大",
+        "description": "批量编辑、透视和分析，像专业人士一样，无需公式头痛。"
+      },
+      "2": {
+        "title": "离线速度",
+        "description": "零延迟。在山顶或地铁隧道中都能工作。"
+      },
+      "3": {
+        "title": "手动仪式",
+        "description": "导入向导使周五的资金审查成为一种令人满意的习惯。"
+      }
+    },
+    "outcomes": {
+      "0": {
+        "title": "停止与聚合器斗争",
+        "description": "不再有断开的连接或重新认证循环。您控制数据输入。"
+      },
+      "1": {
+        "title": "隐私设计",
+        "description": "我们不出售您的数据，因为我们没有它。就是这样。"
+      },
+      "2": {
+        "title": "未来规划",
+        "description": "在一个集成视图中模拟退休、贷款偿还和储蓄目标。"
+      },
+      "3": {
+        "title": "订阅杀手",
+        "description": "发现其他应用忽视的定期支出。"
+      }
+    },
+    "features": {
+      "0": {
+        "title": "本地仪表板",
+        "description": "净资产、现金流和类别细分。即时加载时间。",
+        "href": "/budget-app"
+      },
+      "1": {
+        "title": "导入向导",
+        "description": "针对BMO、Home Trust和可自定义格式的智能CSV映射器。",
+        "href": "/budget-app/import"
+      },
+      "2": {
+        "title": "收据OCR",
+        "description": "使用Tesseract.js本地扫描收据。无需云处理。",
+        "href": "/budget-app/ocr"
+      },
+      "3": {
+        "title": "类别预算",
+        "description": "零基础或滚存预算，具有细致的类别控制。",
+        "href": "/budget-app/budgets"
+      },
+      "4": {
+        "title": "退休计算器",
+        "description": "通过复利可视化预测您的自由日期。",
+        "href": "/budget-app/planning/retirement"
+      },
+      "5": {
+        "title": "隐私保护",
+        "description": "可选的客户端加密，提供额外的安全层。",
+        "href": "/budget-app/settings"
+      }
+    },
+    "howItWorks": {
+      "0": {
+        "title": "导入",
+        "description": "拖放CSV或扫描收据。AI本地映射列。"
+      },
+      "1": {
+        "title": "审查",
+        "description": "使用智能规则和批量操作快速分类。"
+      },
+      "2": {
+        "title": "计划",
+        "description": "为每一元分配任务，预测您的未来净资产。"
+      }
+    },
+    "pricing": {
+      "eyebrow": "公平定价",
+      "title": "本地免费。同步为专业版。",
+      "description": "从强大的本地协议开始。如果需要多设备同步，稍后再升级。",
+      "priceLabel": "永久免费",
+      "cta": {
+        "label": "开始本地协议",
+        "href": "/budget-app/auth/signup"
+      },
+      "secondary": {
+        "label": "查看专业功能",
+        "href": "#pricing"
+      },
+      "guarantee": "本地协议无需信用卡。"
+    },
+    "faq": {
+      "0": {
+        "q": "我的数据真的隐私吗？",
+        "a": "是的。在本地协议中，数据从未离开您的设备。它存储在您浏览器的IndexedDB中。"
+      },
+      "1": {
+        "q": "我如何备份我的数据？",
+        "a": "您可以随时导出完整的JSON备份。我们还建议定期导出CSV。"
+      },
+      "2": {
+        "q": "什么是“同步”专业版？",
+        "a": "即将推出：可选订阅，通过Supabase在设备之间同步加密数据。"
+      },
+      "3": {
+        "q": "你们连接银行吗？",
+        "a": "不。我们认为手动导入更安全、更可靠，并且能提高财务意识。"
+      }
+    },
+    "security": {
+      "title": "隐私优先设计",
+      "description": "预算应用将您的数据本地存储（离线准备）并为AI功能、导出和删除提供控制。",
+      "buttons": {
+        "privacy": "隐私与设置",
+        "offline": "离线支持"
+      },
+      "cards": {
+        "localStorage": {
+          "title": "本地存储",
+          "description": "您的预算数据存储在您的浏览器（IndexedDB）中，因此应用在离线时保持快速和可用。"
+        },
+        "encryption": {
+          "title": "加密支持",
+          "description": "当启用时，应用包括一个加密层，以保护敏感预算记录。"
+        },
+        "aiControls": {
+          "title": "AI功能控制",
+          "description": "从设置中切换AI驱动的功能（如异常检测）并管理聊天机器人的访问。"
+        },
+        "exportDelete": {
+          "title": "导出与删除",
+          "description": "导出您的数据和隐私设置，或直接从应用中删除本地数据。"
+        }
+      }
+    },
+    "comparison": {
+      "headers": {
+        "feature": "功能",
+        "local": "预算专业本地",
+        "sync": "预算专业同步（专业版）",
+        "cloud": "典型云应用"
+      },
+      "dataPrivacy": {
+        "feature": "数据隐私",
+        "local": "100% 私密（本地）",
+        "sync": "端到端加密",
+        "cloud": "员工可查看"
+      },
+      "cost": {
+        "feature": "费用",
+        "local": "永久免费",
+        "sync": "一次性升级",
+        "cloud": "$100+/年 订阅"
+      },
+      "offlineMode": {
+        "feature": "离线模式"
+      },
+      "bankConnections": {
+        "feature": "银行连接",
+        "local": "仅CSV/手动",
+        "sync": "可选（加密）",
+        "cloud": "强制聚合"
+      },
+      "storageLocation": {
+        "feature": "存储位置",
+        "local": "您的设备",
+        "sync": "零知识云",
+        "cloud": "他们的数据库"
+      }
+    },
+    "socialProof": {
+      "title": "内置高级设计",
+      "description": "让预算变得持久的细节：导览、快捷方式、移动导航和离线准备性能。",
+      "features": {
+        "onboarding": {
+          "title": "导览",
+          "description": "引导式导览帮助新用户快速获得价值。"
+        },
+        "shortcuts": {
+          "title": "键盘快捷方式",
+          "description": "通过内置于UI的搜索和操作快捷方式快速移动。"
+        },
+        "mobileUx": {
+          "title": "移动优先UX",
+          "description": "底部导航和响应式布局，感觉原生。"
+        },
+        "pwaInstall": {
+          "title": "PWA安装",
+          "description": "像应用一样安装，即使在网络不稳定时也能继续使用。"
+        }
+      }
+    },
+    "pricingSection": {
+      "recommended": "推荐",
+      "productName": "本地协议",
+      "productDescription": "完整的预算体验，完全在您的设备上运行。",
+      "whyChoose": "为什么选择本地协议？",
+      "whyChooseDescription": "看看我们与云巨头的对比。",
+      "features": "包括无限交易、账户、预算和完整的本地备份功能。"
+    },
+    "heroSection": {
+      "cta": {
+        "heading": "为清晰而设计，而非混乱。",
+        "viewPricing": "查看定价"
+      },
+      "badges": {
+        "noSubscriptions": "无订阅",
+        "offlineReady": "离线准备",
+        "seniorsMode": "老年人模式"
+      },
+      "preview": {
+        "livePreview": "实时预览",
+        "recentTransactions": "最近交易",
+        "categoryBudgets": "类别预算",
+        "recurring": "定期"
+      },
+      "modes": {
+        "dashboard": "仪表板",
+        "budgets": "预算",
+        "subscriptions": "订阅"
+      }
+    },
+    "featuresDeepDive": {
+      "heading1": "电子表格的强大。",
+      "heading2": "应用的简单。",
+      "description": "停止与破碎的公式斗争。获得手动控制的灵活性与现代应用的速度。",
+      "cta": "开始免费试用",
+      "explore": "探索"
+    },
+    "accessibility": {
+      "title": "默认可访问",
+      "description": "老年人模式提供简化的导航和更大的触控目标。键盘快捷方式、焦点状态和清晰的对比度帮助每个人更快地移动。",
+      "badges": {
+        "seniorsMode": "老年人模式",
+        "largeTouchTargets": "大触控目标",
+        "keyboardFirst": "键盘优先"
+      },
+      "buttons": {
+        "openApp": "打开应用",
+        "settings": "可访问性设置"
+      }
+    },
+    "faqSection": {
+      "title": "常见问题",
+      "description": "关于试用、定价和访问的常见问题的简单答案。"
+    },
+    "outcomesSection": {
+      "title": "为现实生活而设计，而非电子表格",
+      "description": "大多数预算应用让您自己做工作。预算专业旨在减少摩擦，同时让您保持控制。"
+    },
+    "howItWorksSection": {
+      "title": "工作原理",
+      "description": "一种快速让您获得清晰的工作流程，而不将您锁定在复杂的系统中。"
+    },
+    "nav": {
+      "tagline": "高级预算管理"
+    },
+    "marquee": {
+      "logos": [
+        "预算",
+        "订阅",
+        "贷款",
+        "OCR收据",
+        "报告",
+        "规划",
+        "离线",
+        "老年人模式"
+      ]
     }
   }
 }

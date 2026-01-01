@@ -1,13 +1,18 @@
+'use client';
+
 import { LandingCard } from "@/components/budget/landing/LandingCard";
 import { Section } from "@/components/budget/landing/Section";
-import { LANDING_CONTENT } from "@/components/budget/landing/content";
+import { useLandingContent } from "@/components/budget/landing/content";
 import { Button } from "@/components/ui/button";
 import { Info } from "lucide-react";
 import Link from "next/link";
 import { ComparisonTable } from "./ComparisonTable";
+import { useTranslations } from 'next-intl';
 
 export function PricingSection() {
-  const p = LANDING_CONTENT.pricing;
+  const content = useLandingContent();
+  const t = useTranslations('landing.pricingSection');
+  const p = content.pricing;
 
   return (
     <Section id="pricing">
@@ -30,11 +35,11 @@ export function PricingSection() {
           <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
             <div>
               <div className="mb-4 inline-flex items-center rounded-full border border-teal-500/30 bg-teal-500/10 px-3 py-1 text-xs font-semibold text-teal-300">
-                Recommended
+                {t('recommended')}
               </div>
-              <h3 className="text-2xl font-bold text-white">Local Protocol</h3>
+              <h3 className="text-2xl font-bold text-white">{t('productName')}</h3>
               <p className="mt-2 max-w-sm text-slate-400">
-                The complete budgeting experience, running entirely on your device.
+                {t('productDescription')}
               </p>
 
               <div className="mt-6 flex items-baseline gap-2">
@@ -51,8 +56,7 @@ export function PricingSection() {
               </Link>
               <div className="rounded-lg border border-white/5 bg-slate-900/50 p-3 text-xs text-slate-400">
                 <Info className="mb-2 h-4 w-4 text-teal-400" />
-                Includes unlimited transactions, accounts, budgets, and full local backup
-                capabilities.
+                {t('features')}
               </div>
             </div>
           </div>
@@ -62,8 +66,8 @@ export function PricingSection() {
       {/* Comparison Table */}
       <div className="mx-auto mt-20 max-w-5xl">
         <div className="mb-10 text-center">
-          <h3 className="text-xl font-bold text-white">Why choose Local Protocol?</h3>
-          <p className="mt-2 text-slate-400">See how we stack up against the cloud giants.</p>
+          <h3 className="text-xl font-bold text-white">{t('whyChoose')}</h3>
+          <p className="mt-2 text-slate-400">{t('whyChooseDescription')}</p>
         </div>
         <ComparisonTable />
       </div>

@@ -1,13 +1,17 @@
+'use client';
+
 import { LandingCard } from "@/components/budget/landing/LandingCard";
 import { Section } from "@/components/budget/landing/Section";
-import { LANDING_CONTENT } from "@/components/budget/landing/content";
+import { useLandingContent } from "@/components/budget/landing/content";
 import { Calendar, Lock, TableProperties, Zap } from "lucide-react";
 
 export function TrustBar() {
+  const content = useLandingContent();
+
   return (
     <Section className="border-y border-white/10 bg-[#070A12]/30">
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-        {LANDING_CONTENT.trust.map((item) => {
+        {content.trust.map((item) => {
           const Icon =
             item.title === "Your Device, Your Data"
               ? Lock

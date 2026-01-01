@@ -39,11 +39,11 @@
     },
     "recentTransactions": {
       "title": "Transaksi Terkini",
-      "description": "Pandangan cepat aktiviti kewangan terbaru anda"
+      "description": "Tampilan cepat aktiviti kewangan terbaru anda"
     },
     "budgetProgress": {
       "title": "Kemajuan Bajet",
-      "description": "Jejaki prestasi anda berbanding matlamat bajet"
+      "description": "Jejaki bagaimana anda berbanding dengan matlamat bajet anda"
     },
     "accountBalances": {
       "title": "Baki Akaun",
@@ -60,6 +60,386 @@
     "upcomingBills": {
       "title": "Bil Akan Datang",
       "description": "Jangan terlepas pembayaran dengan peringatan bil"
+    }
+  },
+  "tooltip": {
+    "ariaLabel": "Lebih banyak maklumat",
+    "learnMore": "Ketahui lebih lanjut →"
+  },
+  "footer": {
+    "tagline": "Bajet premium dengan peningkatan sekali sahaja.",
+    "links": {
+      "login": "Log masuk",
+      "signup": "Mulakan percubaan",
+      "upgrade": "Tingkatkan",
+      "settings": "Tetapan"
+    },
+    "copyright": "© {year} {brandName}"
+  },
+  "dialog": {
+    "confirm": "Sahkan",
+    "cancel": "Batal",
+    "processing": "Memproses...",
+    "finalConfirmation": "Sahkan Akhir:",
+    "typeToConfirm": "Taip {text} untuk mengesahkan tindakan ini."
+  },
+  "sidebar": {
+    "appTitle": "Aplikasi Bajet",
+    "appSubtitle": "Kewangan Premium",
+    "search": "Cari...",
+    "shortcuts": "Pintasan",
+    "navigation": {
+      "dashboard": "Papan Pemuka",
+      "transactions": "Transaksi",
+      "scanReceipt": "Imbas Resit",
+      "categories": "Kategori",
+      "budgets": "Bajet",
+      "subscriptions": "Langganan",
+      "loans": "Pinjaman",
+      "investments": "Pelaburan",
+      "futurePlans": "Rancangan Masa Depan",
+      "retirement": "Persaraan",
+      "reports": "Laporan"
+    },
+    "actions": {
+      "importCsv": "Import CSV",
+      "settings": "Tetapan",
+      "showLess": "Tunjukkan Kurang",
+      "showAllItems": "Tunjukkan Semua Item"
+    }
+  },
+  "onboarding": {
+    "skipTour": "Lupakan lawatan",
+    "stepCounter": "Langkah {current} daripada {total}",
+    "dontShowAgain": "Jangan tunjukkan lawatan ini lagi",
+    "quickTip": "💡 Tip Pantas",
+    "navigation": {
+      "previous": "Sebelum",
+      "next": "Seterusnya",
+      "getStarted": "Mulakan",
+      "startTour": "Mulakan Lawatan"
+    },
+    "steps": {
+      "welcome": {
+        "title": "👋 Selamat Datang ke Aplikasi Bajet!",
+        "description": "Mari kita ambil lawatan cepat untuk membantu anda memulakan pengurusan kewangan rumah anda. Ini tidak akan mengambil masa lama!"
+      },
+      "import": {
+        "title": "📥 Import Transaksi Anda",
+        "description": "Mulakan dengan mengimport transaksi bank anda dari fail CSV. Kami menyokong BMO, Home Trust, dan banyak bank lain. Aplikasi akan mengkategorikan transaksi anda secara automatik!"
+      },
+      "categorize": {
+        "title": "🏷️ Kategorikan & Atur",
+        "description": "Semak dan sesuaikan kategori transaksi. Pengkategorian pintar kami belajar dari pembetulan anda untuk meningkatkan dari semasa ke semasa. Gunakan tindakan pukal untuk mengkategorikan banyak transaksi sekaligus!"
+      },
+      "budgets": {
+        "title": "🎯 Tetapkan Bajet Anda",
+        "description": "Buat bajet untuk kategori perbelanjaan yang berbeza. Jejaki kemajuan anda sepanjang bulan dan dapatkan amaran apabila anda hampir mencapai had anda."
+      },
+      "reports": {
+        "title": "📊 Lihat Laporan & Wawasan",
+        "description": "Visualisasikan corak perbelanjaan anda, jejaki nilai bersih anda, dan buat keputusan kewangan yang berinformasi. Papan pemuka anda dikemas kini secara automatik dengan setiap transaksi!"
+      }
+    },
+    "tips": {
+      "import": "Seret & lepas fail CSV anda atau klik untuk melayari. Kami mengesan format BMO dan Home Trust secara automatik!",
+      "categorize": "Gunakan butang pengkategorian cepat atau pilih beberapa transaksi untuk pengkategorian pukal.",
+      "budgets": "Tetapkan bajet yang realistik dan kami akan memberi amaran jika anda berada di landasan untuk berbelanja lebih."
+    }
+  },
+  "landing": {
+    "brand": {
+      "name": "BudgetPro",
+      "product": "Aplikasi Bajet"
+    },
+    "hero": {
+      "badge": "Privasi Pertama • Hanya Tempatan • Tiada Penjejakan",
+      "headline": "Kuasa Wang Anda tanpa Menjual Data Anda.",
+      "subhead": "Kuasa spreadsheet. Kesederhanaan aplikasi. Alami kejelasan kewangan dengan satu-satunya aplikasi bajet yang menjamin data anda tidak pernah meninggalkan peranti anda.",
+      "primaryCta": {
+        "label": "Mulakan Protokol Tempatan (Percuma)",
+        "href": "/budget-app/auth/signup"
+      },
+      "secondaryCta": {
+        "label": "Log masuk",
+        "href": "/budget-app/auth/login"
+      },
+      "finePrint": "Tiada kelayakan bank diperlukan. Tiada akaun diperlukan untuk mod tempatan."
+    },
+    "trust": {
+      "0": {
+        "title": "Peranti Anda, Data Anda",
+        "description": "Data kekal dalam IndexedDB pelayar anda. Kami secara harfiah tidak dapat melihatnya."
+      },
+      "1": {
+        "title": "Kuasa Spreadsheet",
+        "description": "Edit pukal, pivot, dan analisis seperti pro tanpa sakit kepala formula."
+      },
+      "2": {
+        "title": "Kelajuan Offline",
+        "description": "Tiada kelewatan. Berfungsi di puncak gunung atau dalam terowong subway."
+      },
+      "3": {
+        "title": "Ritual Manual",
+        "description": "Wizard import menjadikan Tinjauan Wang Jumaat satu tabiat yang memuaskan."
+      }
+    },
+    "outcomes": {
+      "0": {
+        "title": "Hentikan Pertarungan dengan Pengumpul",
+        "description": "Tiada lagi sambungan yang rosak atau gelung pengesahan semula. Anda mengawal input data."
+      },
+      "1": {
+        "title": "Privasi melalui Reka Bentuk",
+        "description": "Kami tidak menjual data anda kerana kami tidak memilikinya. Titik."
+      },
+      "2": {
+        "title": "Perancangan Masa Depan",
+        "description": "Modelkan persaraan, pembayaran pinjaman, dan matlamat simpanan dalam satu pandangan yang terintegrasi."
+      },
+      "3": {
+        "title": "Pembunuh Langganan",
+        "description": "Kenal pasti pengeluaran berulang pada dompet anda yang terlepas oleh aplikasi lain."
+      }
+    },
+    "features": {
+      "0": {
+        "title": "Papan Pemuka Tempatan",
+        "description": "Nilai bersih, aliran tunai, dan pecahan kategori. Masa muat segera.",
+        "href": "/budget-app"
+      },
+      "1": {
+        "title": "Wizard Import",
+        "description": "Pemetaan CSV pintar untuk BMO, Home Trust, dan format khusus yang boleh disesuaikan.",
+        "href": "/budget-app/import"
+      },
+      "2": {
+        "title": "OCR Resit",
+        "description": "Imbas resit secara tempatan dengan Tesseract.js. Tiada pemprosesan awan.",
+        "href": "/budget-app/ocr"
+      },
+      "3": {
+        "title": "Bajet Kategori",
+        "description": "Bajet berasaskan sifar atau rollover dengan kawalan kategori yang terperinci.",
+        "href": "/budget-app/budgets"
+      },
+      "4": {
+        "title": "Kalkulator Persaraan",
+        "description": "Ramalkan tarikh kebebasan anda dengan visualisasi faedah kompaun.",
+        "href": "/budget-app/planning/retirement"
+      },
+      "5": {
+        "title": "Perisai Privasi",
+        "description": "Penyulitan sisi klien pilihan untuk lapisan keselamatan tambahan.",
+        "href": "/budget-app/settings"
+      }
+    },
+    "howItWorks": {
+      "0": {
+        "title": "Import",
+        "description": "Seret & lepas CSV atau imbas resit. AI memetakan lajur secara tempatan."
+      },
+      "1": {
+        "title": "Semak",
+        "description": "Pengkategorian cepat dengan peraturan pintar dan tindakan pukal."
+      },
+      "2": {
+        "title": "Rancang",
+        "description": "Tetapkan setiap ringgit untuk tugas dan ramalkan nilai bersih masa depan anda."
+      }
+    },
+    "pricing": {
+      "eyebrow": "Harga Adil",
+      "title": "Tempatan adalah Percuma. Penyegerakan adalah Pro.",
+      "description": "Mulakan dengan Protokol Tempatan yang berkuasa. Tingkatkan kemudian jika anda memerlukan penyegerakan pelbagai peranti.",
+      "priceLabel": "Percuma Selamanya",
+      "cta": {
+        "label": "Mulakan Protokol Tempatan",
+        "href": "/budget-app/auth/signup"
+      },
+      "secondary": {
+        "label": "Lihat Ciri Pro",
+        "href": "#pricing"
+      },
+      "guarantee": "Tiada kad kredit diperlukan untuk Protokol Tempatan."
+    },
+    "faq": {
+      "0": {
+        "q": "Adakah data saya benar-benar peribadi?",
+        "a": "Ya. Dalam Protokol Tempatan, data tidak pernah meninggalkan peranti anda. Ia tinggal dalam IndexedDB dalam pelayar anda."
+      },
+      "1": {
+        "q": "Bagaimana saya menyandarkan data saya?",
+        "a": "Anda boleh mengeksport sandaran JSON penuh pada bila-bila masa. Kami juga mengesyorkan eksport CSV secara berkala."
+      },
+      "2": {
+        "q": "Apa itu 'Sync' Pro?",
+        "a": "Akan datang: Langganan pilihan untuk menyegerakkan data yang disulitkan antara peranti melalui Supabase."
+      },
+      "3": {
+        "q": "Adakah anda menyambung ke bank?",
+        "a": "Tidak. Kami percaya import manual adalah lebih selamat, lebih boleh dipercayai, dan membina kesedaran kewangan yang lebih baik."
+      }
+    },
+    "security": {
+      "title": "Privasi pertama melalui reka bentuk",
+      "description": "Aplikasi Bajet menyimpan data anda secara tempatan (sedia untuk offline) dan memberi anda kawalan untuk ciri AI, eksport, dan pemadaman.",
+      "buttons": {
+        "privacy": "Privasi & tetapan",
+        "offline": "Sokongan offline"
+      },
+      "cards": {
+        "localStorage": {
+          "title": "Penyimpanan Tempatan",
+          "description": "Data bajet anda disimpan dalam pelayar anda (IndexedDB) supaya aplikasi kekal pantas dan boleh digunakan secara offline."
+        },
+        "encryption": {
+          "title": "Sokongan Penyulitan",
+          "description": "Aplikasi ini termasuk lapisan penyulitan untuk melindungi rekod bajet sensitif apabila diaktifkan."
+        },
+        "aiControls": {
+          "title": "Kawalan ciri AI",
+          "description": "Togol ciri berkuasa AI (seperti pengesanan anomali) dan urus akses chatbot dari tetapan."
+        },
+        "exportDelete": {
+          "title": "Eksport & padam",
+          "description": "Eksport data dan tetapan privasi anda, atau padam data tempatan terus dari aplikasi."
+        }
+      }
+    },
+    "comparison": {
+      "headers": {
+        "feature": "Ciri",
+        "local": "BudgetPro Tempatan",
+        "sync": "BudgetPro Sync (Pro)",
+        "cloud": "Aplikasi Awan Tipikal"
+      },
+      "dataPrivacy": {
+        "feature": "Privasi Data",
+        "local": "100% Peribadi (Tempatan)",
+        "sync": "Disulitkan Dari Hujung ke Hujung",
+        "cloud": "Boleh Dilihat oleh Pekerja"
+      },
+      "cost": {
+        "feature": "Kos",
+        "local": "Percuma Selamanya",
+        "sync": "Peningkatan Sekali sahaja",
+        "cloud": "Langganan $100+/tahun"
+      },
+      "offlineMode": {
+        "feature": "Mod Offline"
+      },
+      "bankConnections": {
+        "feature": "Sambungan Bank",
+        "local": "CSV / Manual Sahaja",
+        "sync": "Pilihan (Disulitkan)",
+        "cloud": "Pengumpulan Mandatori"
+      },
+      "storageLocation": {
+        "feature": "Lokasi Penyimpanan",
+        "local": "Peranti Anda",
+        "sync": "Awan Tanpa Pengetahuan",
+        "cloud": "Pangkalan Data Mereka"
+      }
+    },
+    "socialProof": {
+      "title": "Sentuhan premium, dibina dalam",
+      "description": "Butiran yang menjadikan bajet berkesan: onboarding, pintasan, navigasi mudah alih, dan prestasi sedia untuk offline.",
+      "features": {
+        "onboarding": {
+          "title": "Lawatan onboarding",
+          "description": "Lawatan panduan membantu pengguna baru mendapatkan nilai dengan cepat."
+        },
+        "shortcuts": {
+          "title": "Pintasan papan kekunci",
+          "description": "Bergerak pantas dengan carian dan pintasan tindakan yang dibina ke dalam UI."
+        },
+        "mobileUx": {
+          "title": "UX pertama mudah alih",
+          "description": "Navigasi bawah dan susun atur responsif yang terasa asli."
+        },
+        "pwaInstall": {
+          "title": "Pemasangan PWA",
+          "description": "Pasang seperti aplikasi dan teruskan walaupun dengan internet yang tidak stabil."
+        }
+      }
+    },
+    "pricingSection": {
+      "recommended": "Disyorkan",
+      "productName": "Protokol Tempatan",
+      "productDescription": "Pengalaman bajet lengkap, berjalan sepenuhnya di peranti anda.",
+      "whyChoose": "Mengapa memilih Protokol Tempatan?",
+      "whyChooseDescription": "Lihat bagaimana kami dibandingkan dengan gergasi awan.",
+      "features": "Termasuk transaksi, akaun, bajet tanpa had, dan kemampuan sandaran tempatan penuh."
+    },
+    "heroSection": {
+      "cta": {
+        "heading": "Dibina untuk kejelasan, bukan kekacauan.",
+        "viewPricing": "Lihat harga"
+      },
+      "badges": {
+        "noSubscriptions": "Tiada langganan",
+        "offlineReady": "Sedia untuk offline",
+        "seniorsMode": "Mod Warga Emas"
+      },
+      "preview": {
+        "livePreview": "Pratonton langsung",
+        "recentTransactions": "Transaksi terkini",
+        "categoryBudgets": "Bajet kategori",
+        "recurring": "Berulang"
+      },
+      "modes": {
+        "dashboard": "Papan Pemuka",
+        "budgets": "Bajet",
+        "subscriptions": "Langganan"
+      }
+    },
+    "featuresDeepDive": {
+      "heading1": "Kuasa Spreadsheet.",
+      "heading2": "Kesederhanaan Aplikasi.",
+      "description": "Hentikan pertarungan dengan formula yang rosak. Dapatkan fleksibiliti kawalan manual dengan kelajuan aplikasi moden.",
+      "cta": "Mulakan percubaan percuma",
+      "explore": "Jelajahi"
+    },
+    "accessibility": {
+      "title": "Boleh diakses secara lalai",
+      "description": "Mod Warga Emas menyediakan navigasi yang dipermudahkan dan sasaran sentuh yang lebih besar. Pintasan papan kekunci, keadaan fokus, dan kontras yang jelas membantu semua orang bergerak lebih cepat.",
+      "badges": {
+        "seniorsMode": "Mod Warga Emas",
+        "largeTouchTargets": "Sasaran sentuh besar",
+        "keyboardFirst": "Papan kekunci pertama"
+      },
+      "buttons": {
+        "openApp": "Buka aplikasi",
+        "settings": "Tetapan aksesibiliti"
+      }
+    },
+    "faqSection": {
+      "title": "Soalan Lazim",
+      "description": "Jawapan ringkas kepada soalan biasa tentang percubaan, harga, dan akses."
+    },
+    "outcomesSection": {
+      "title": "Dibina untuk kehidupan sebenar, bukan spreadsheet",
+      "description": "Kebanyakan aplikasi bajet membuat anda melakukan kerja. BudgetPro direka untuk mengurangkan geseran sambil memastikan anda mengawal."
+    },
+    "howItWorksSection": {
+      "title": "Bagaimana ia berfungsi",
+      "description": "Aliran kerja yang membawa anda kepada kejelasan dengan cepat, tanpa mengunci anda dalam sistem yang rumit."
+    },
+    "nav": {
+      "tagline": "Bajet premium"
+    },
+    "marquee": {
+      "logos": [
+        "Bajet",
+        "Langganan",
+        "Pinjaman",
+        "Resit OCR",
+        "Laporan",
+        "Perancangan",
+        "Offline",
+        "Mod Warga Emas"
+      ]
     }
   }
 }

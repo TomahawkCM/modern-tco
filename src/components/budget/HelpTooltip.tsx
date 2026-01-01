@@ -14,6 +14,7 @@
 
 import * as React from 'react';
 import { Info } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import {
   Tooltip,
   TooltipContent,
@@ -37,10 +38,13 @@ interface HelpTooltipProps {
 export function HelpTooltip({
   content,
   learnMoreUrl,
-  ariaLabel = 'More information',
+  ariaLabel,
   side = 'top',
   iconSize = 'h-4 w-4',
 }: HelpTooltipProps) {
+  const t = useTranslations('tooltip');
+  const effectiveAriaLabel = ariaLabel || t('ariaLabel');
+
   return (
     <TooltipProvider delayDuration={300}>
       <Tooltip>
@@ -48,10 +52,10 @@ export function HelpTooltip({
           <button
             type="button"
             className={`inline-flex items-center justify-center text-gray-500 hover:text-gray-700 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 focus-visible:ring-offset-2 rounded ${iconSize === 'h-4 w-4' ? 'p-1' : 'p-1.5'}`}
-            aria-label={ariaLabel}
+            aria-label={effectiveAriaLabel}
           >
             <Info className={`${iconSize} md:h-4 md:w-4`} />
-            <span className="sr-only">{ariaLabel}</span>
+            <span className="sr-only">{effectiveAriaLabel}</span>
           </button>
         </TooltipTrigger>
         <TooltipContent
@@ -67,7 +71,7 @@ export function HelpTooltip({
                 className="inline-block text-xs text-teal-300 hover:text-teal-200 hover:underline transition-colors mt-2"
                 onClick={(e) => e.stopPropagation()}
               >
-                Learn more →
+                {t('learnMore')}
               </a>
             )}
           </div>

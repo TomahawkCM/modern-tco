@@ -1,18 +1,24 @@
+'use client';
+
 import { Section } from "@/components/budget/landing/Section";
-import { LANDING_CONTENT } from "@/components/budget/landing/content";
+import { useLandingContent } from "@/components/budget/landing/content";
 import { LandingCard } from "@/components/budget/landing/LandingCard";
+import { useTranslations } from 'next-intl';
 
 export function FAQSection() {
+  const content = useLandingContent();
+  const t = useTranslations('landing.faqSection');
+
   return (
     <Section className="bg-[#070A12]/25">
       <div className="mx-auto max-w-4xl">
-        <h2 className="text-2xl font-bold tracking-tight text-white sm:text-3xl">FAQ</h2>
+        <h2 className="text-2xl font-bold tracking-tight text-white sm:text-3xl">{t('title')}</h2>
         <p className="mt-3 text-base text-slate-400">
-          Simple answers to common questions about trials, pricing, and access.
+          {t('description')}
         </p>
 
         <div className="mt-8 space-y-3">
-          {LANDING_CONTENT.faq.map((item) => (
+          {content.faq.map((item) => (
             <LandingCard key={item.q} className="px-5 py-4">
               <details className="group open:bg-transparent">
               <summary

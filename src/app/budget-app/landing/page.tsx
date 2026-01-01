@@ -1,6 +1,5 @@
 "use client";
 
-import { FeatureCard } from "@/components/budget/FeatureCard";
 import { LanguageSelector } from "@/components/budget/LanguageSelector";
 import { ScrollReveal } from "@/components/budget/ScrollReveal";
 import { Button } from "@/components/ui/button";
@@ -25,7 +24,7 @@ export default function BudgetAppLandingPage() {
         bg: "bg-blue-500/10",
         className: "md:col-span-2 md:row-span-2",
         visual: (
-          <div className="flex h-full w-full items-end gap-2 pb-4 opacity-50">
+          <div className="absolute inset-0 flex h-full w-full items-end gap-2 p-8 pb-4 opacity-50">
             {[40, 70, 45, 90, 60, 80, 50, 95].map((h, i) => (
               <div
                 key={i}
@@ -72,12 +71,12 @@ export default function BudgetAppLandingPage() {
       {
         icon: Sparkles,
         title: "Anomaly Detection",
-        desc: "AI-powered alerts for unusual spending activity found in your account.",
+        desc: "AI-powered alerts for unusual spending activity.",
         color: "text-purple-400",
         bg: "bg-purple-500/10",
         className: "md:col-span-1 md:row-span-2",
         visual: (
-          <div className="absolute inset-x-8 top-24 flex flex-col gap-2 opacity-50">
+          <div className="absolute inset-0 flex flex-col justify-center gap-2 p-8 opacity-50">
             <div className="flex items-center gap-3 rounded-lg border border-red-500/20 bg-red-500/10 p-3">
               <div className="h-2 w-2 animate-pulse rounded-full bg-red-500" />
               <div className="h-2 w-24 rounded bg-red-500/20" />
@@ -110,7 +109,7 @@ export default function BudgetAppLandingPage() {
         bg: "bg-teal-500/10",
         className: "md:col-span-2 md:row-span-1",
         visual: (
-          <div className="absolute right-8 top-1/2 flex -translate-y-1/2 gap-4 opacity-40">
+          <div className="absolute inset-0 flex items-center justify-end gap-4 p-8 opacity-40">
             <div className="h-20 w-16 -rotate-6 rounded-lg border border-teal-500/30 bg-teal-500/10 backdrop-blur-sm" />
             <div className="h-20 w-16 rotate-3 rounded-lg border border-white/20 bg-white/5 backdrop-blur-sm" />
           </div>
@@ -402,7 +401,24 @@ export default function BudgetAppLandingPage() {
           <ScrollReveal delay={0.2}>
             <div className="grid grid-cols-1 gap-6 md:auto-rows-[300px] md:grid-cols-4">
               {features.map((feature, i) => (
-                <FeatureCard key={i} {...feature} />
+                <motion.div
+                  whileHover={{ y: -5 }}
+                  key={i}
+                  className={`group relative flex flex-col overflow-hidden rounded-3xl border border-white/5 bg-white/5 p-8 transition-all hover:border-teal-500/30 hover:bg-slate-800/50 hover:shadow-2xl hover:shadow-teal-500/10 ${feature.className || ""}`}
+                >
+                  <div className="absolute inset-0 -z-10 bg-gradient-to-br from-teal-500/0 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+
+                  {/* Visual Content for larger cards */}
+                  {feature.visual && feature.visual}
+
+                  <div className="relative z-10 mt-auto">
+                    <div className={`mb-4 inline-flex rounded-xl p-3 ${feature.bg} w-fit`}>
+                      <feature.icon className={`h-6 w-6 ${feature.color}`} />
+                    </div>
+                    <h3 className="mb-2 text-xl font-bold text-white">{feature.title}</h3>
+                    <p className="text-sm text-slate-400">{feature.desc}</p>
+                  </div>
+                </motion.div>
               ))}
             </div>
           </ScrollReveal>

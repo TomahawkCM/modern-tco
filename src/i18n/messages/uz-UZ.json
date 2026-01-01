@@ -22,8 +22,8 @@
     "resetDefaults": "Standartlarga qaytarish"
   },
   "welcome": {
-    "title": "Byudjet Ilovasiga Xush Kelibsiz",
-    "subtitle": "Birinchi transaktsiyangizni qo'shish yoki bankdan ma'lumotlarni import qilish bilan boshlang"
+    "title": "Byudjet dasturiga xush kelibsiz",
+    "subtitle": "Birinchi transaktsiyangizni qo'shish yoki bankingizdan ma'lumotlarni import qilish bilan boshlang"
   },
   "common": {
     "save": "Saqlash",
@@ -35,31 +35,411 @@
   "widget": {
     "spendingByCategory": {
       "title": "Kategoriyalarga ko'ra xarajatlar",
-      "description": "Pulingiz qayerga ketayotganini vizual tarzda ko'ring"
+      "description": "Pulingiz qayerga ketayotganini vizual ravishda ko'ring"
     },
     "recentTransactions": {
-      "title": "So'nggi Transaktsiyalar",
+      "title": "So'nggi transaktsiyalar",
       "description": "Eng so'nggi moliyaviy faoliyatingizni tez ko'rish"
     },
     "budgetProgress": {
-      "title": "Byudjetning rivoji",
-      "description": "Byudjet maqsadlaringizga nisbatan qanday qilib harakat qilayotganingizni kuzating"
+      "title": "Byudjet jarayoni",
+      "description": "Byudjet maqsadlaringizga nisbatan qanday qilib harakat qilayotganingizni kuzatib boring"
     },
     "accountBalances": {
-      "title": "Hisob Balanslari",
+      "title": "Hisob balansi",
       "description": "Barcha hisoblaringiz bo'yicha joriy balanslar"
     },
     "incomeVsExpenses": {
-      "title": "Daromad va Xarajatlar",
-      "description": "Vaqt o'tishi bilan daromad va xarajatlaringizni solishtiring"
+      "title": "Daromad va xarajatlar",
+      "description": "Vaqt o'tishi bilan daromadlaringiz va xarajatlaringizni solishtiring"
     },
     "monthlyTrends": {
-      "title": "Oylik Tendentsiyalar",
+      "title": "Oylik tendentsiyalar",
       "description": "Har oy moliyaviy naqshlaringizni vizualizatsiya qiling"
     },
     "upcomingBills": {
-      "title": "Kelib chiqayotgan To'lovlar",
+      "title": "Kelib chiqadigan to'lovlar",
       "description": "To'lovlarni eslatmalar bilan hech qachon o'tkazib yubormang"
+    }
+  },
+  "tooltip": {
+    "ariaLabel": "Qo'shimcha ma'lumot",
+    "learnMore": "Batafsil o'qish →"
+  },
+  "footer": {
+    "tagline": "Bir martalik yangilanish bilan premium byudjetlash.",
+    "links": {
+      "login": "Kirish",
+      "signup": "Sinov boshlash",
+      "upgrade": "Yangilash",
+      "settings": "Sozlamalar"
+    },
+    "copyright": "© {year} {brandName}"
+  },
+  "dialog": {
+    "confirm": "Tasdiqlash",
+    "cancel": "Bekor qilish",
+    "processing": "Jarayon...",
+    "finalConfirmation": "Oxirgi tasdiq:",
+    "typeToConfirm": "Ushbu harakatni tasdiqlash uchun {text} ni yozing."
+  },
+  "sidebar": {
+    "appTitle": "Byudjet dasturi",
+    "appSubtitle": "Premium moliya",
+    "search": "Qidirish...",
+    "shortcuts": "Tezkor kalitlar",
+    "navigation": {
+      "dashboard": "Boshqaruv paneli",
+      "transactions": "Transaktsiyalar",
+      "scanReceipt": "Chiptani skanerlash",
+      "categories": "Kategoriyalar",
+      "budgets": "Byudjetlar",
+      "subscriptions": "Obunalar",
+      "loans": "Kreditlar",
+      "investments": "Investitsiyalar",
+      "futurePlans": "Kelajak rejalari",
+      "retirement": "Pension",
+      "reports": "Hisobotlar"
+    },
+    "actions": {
+      "importCsv": "CSV import qilish",
+      "settings": "Sozlamalar",
+      "showLess": "Kamroq ko'rsatish",
+      "showAllItems": "Barcha narsalarni ko'rsatish"
+    }
+  },
+  "onboarding": {
+    "skipTour": "Sayohatni o'tkazib yuborish",
+    "stepCounter": "{current} qadam {total} dan",
+    "dontShowAgain": "Ushbu sayohatni yana ko'rsatmaslik",
+    "quickTip": "💡 Tez maslahat",
+    "navigation": {
+      "previous": "Oldingi",
+      "next": "Keyingi",
+      "getStarted": "Boshlash",
+      "startTour": "Sayohatni boshlash"
+    },
+    "steps": {
+      "welcome": {
+        "title": "👋 Byudjet dasturiga xush kelibsiz!",
+        "description": "Oilaviy moliyalaringizni boshqarishda yordam berish uchun tezkor sayohatga chiqamiz. Bu uzoq davom etmaydi!"
+      },
+      "import": {
+        "title": "📥 Transaktsiyalaringizni import qiling",
+        "description": "Bank transaktsiyalaringizni CSV faylidan import qilish bilan boshlang. Biz BMO, Home Trust va boshqa ko'plab banklarni qo'llab-quvvatlaymiz. Dastur avtomatik ravishda transaktsiyalaringizni kategoriyalarga ajratadi!"
+      },
+      "categorize": {
+        "title": "🏷️ Kategoriyalash va tartibga solish",
+        "description": "Transaktsiya kategoriyalarini ko'rib chiqing va sozlang. Bizning aqlli kategoriyalash sizning tuzatishlaringizdan o'rganadi va vaqt o'tishi bilan yaxshilanadi. Bir vaqtning o'zida bir nechta transaktsiyalarni kategoriyalash uchun ommaviy harakatlardan foydalaning!"
+      },
+      "budgets": {
+        "title": "🎯 Byudjetlaringizni belgilang",
+        "description": "Turli xarajat kategoriyalari uchun byudjetlar yarating. Oylik davomida o'zgarishlaringizni kuzatib boring va chegaralaringizga yaqinlashganingizda ogohlantirishlarni oling."
+      },
+      "reports": {
+        "title": "📊 Hisobotlar va tahlillarni ko'ring",
+        "description": "Xarajat naqshlaringizni vizualizatsiya qiling, sof boylikni kuzatib boring va moliyaviy qarorlar qabul qiling. Har bir transaktsiya bilan sizning boshqaruv panelingiz avtomatik ravishda yangilanadi!"
+      }
+    },
+    "tips": {
+      "import": "CSV faylingizni tortib olib keling yoki ko'rish uchun bosing. Biz BMO va Home Trust formatlarini avtomatik aniqlaymiz!",
+      "categorize": "Tez kategoriyalash tugmasidan foydalaning yoki ommaviy kategoriyalash uchun bir nechta transaktsiyalarni tanlang.",
+      "budgets": "Realistik byudjetlar belgilang va agar siz ortiqcha sarflashga yaqinlashayotgan bo'lsangiz, biz sizni ogohlantiramiz."
+    }
+  },
+  "landing": {
+    "brand": {
+      "name": "BudgetPro",
+      "product": "Byudjet dasturi"
+    },
+    "hero": {
+      "badge": "Maxfiylik birinchi • Faqat mahalliy • Hech qanday kuzatuv",
+      "headline": "Ma'lumotlaringizni sotmasdan pulingizni boshqaring.",
+      "subhead": "Jadval kuchi. Dastur soddaligi. Ma'lumotlaringiz hech qachon qurilmangizdan chiqmasligini kafolatlaydigan yagona byudjet dasturi bilan moliyaviy aniqlikni his eting.",
+      "primaryCta": {
+        "label": "Mahalliy protokolni boshlang (Bepul)",
+        "href": "/budget-app/auth/signup"
+      },
+      "secondaryCta": {
+        "label": "Kirish",
+        "href": "/budget-app/auth/login"
+      },
+      "finePrint": "Bank ma'lumotlari talab qilinmaydi. Mahalliy rejim uchun hisob kerak emas."
+    },
+    "trust": {
+      "0": {
+        "title": "Sizning qurilmangiz, sizning ma'lumotlaringiz",
+        "description": "Ma'lumotlar sizning brauzeringizning IndexedDB da saqlanadi. Biz uni ko'rishimiz mumkin emas."
+      },
+      "1": {
+        "title": "Jadval kuchi",
+        "description": "Ommaviy tahrirlash, pivot va professional kabi tahlil qiling, formulalar bilan bosh og'rig'isiz."
+      },
+      "2": {
+        "title": "Offline tezligi",
+        "description": "Hech qanday kechikish. Tog' cho'qqisida yoki metro tunelida ishlaydi."
+      },
+      "3": {
+        "title": "Qo'lda marosimlar",
+        "description": "Import sehrgari juma moliya tahlilini qoniqarli odatga aylantiradi."
+      }
+    },
+    "outcomes": {
+      "0": {
+        "title": "Agregatorlar bilan kurashni to'xtating",
+        "description": "Buzilgan ulanishlar yoki qayta avtorizatsiya aylanishlari yo'q. Siz ma'lumotlarni kiritishni nazorat qilasiz."
+      },
+      "1": {
+        "title": "Maxfiylik dizayni",
+        "description": "Biz sizning ma'lumotlaringizni sotmaymiz, chunki bizda yo'q. Xullas."
+      },
+      "2": {
+        "title": "Kelajakni rejalashtirish",
+        "description": "Pension, kredit to'lovlari va tejash maqsadlarini birlashtirilgan ko'rinishda modellashtiring."
+      },
+      "3": {
+        "title": "Obuna o'ldiruvchi",
+        "description": "Boshqa dasturlar e'tiborsiz qoldiradigan takroriy xarajatlarni aniqlang."
+      }
+    },
+    "features": {
+      "0": {
+        "title": "Mahalliy boshqaruv paneli",
+        "description": "Sof boylik, naqd pul oqimi va kategoriya bo'yicha taqsimot. Tez yuklanish vaqtlari.",
+        "href": "/budget-app"
+      },
+      "1": {
+        "title": "Import sehrgari",
+        "description": "BMO, Home Trust va moslashtirilgan formatlar uchun aqlli CSV xaritasi.",
+        "href": "/budget-app/import"
+      },
+      "2": {
+        "title": "Chipta OCR",
+        "description": "Chiptalarni mahalliy ravishda Tesseract.js bilan skanerlash. Hech qanday bulutli qayta ishlash.",
+        "href": "/budget-app/ocr"
+      },
+      "3": {
+        "title": "Kategoriya byudjetlari",
+        "description": "Nolga asoslangan yoki aylantiriladigan byudjetlar bilan nozik kategoriya nazorati.",
+        "href": "/budget-app/budgets"
+      },
+      "4": {
+        "title": "Pension hisoblagichi",
+        "description": "Biriktirilgan foiz vizualizatsiyalari bilan ozodlik sanangizni loyihalashtiring.",
+        "href": "/budget-app/planning/retirement"
+      },
+      "5": {
+        "title": "Maxfiylik qalqoni",
+        "description": "Qo'shimcha xavfsizlik uchun ixtiyoriy mijoz tomoni shifrlash.",
+        "href": "/budget-app/settings"
+      }
+    },
+    "howItWorks": {
+      "0": {
+        "title": "Import",
+        "description": "CSV fayllarini tortib olib keling yoki chiptalarni skanerlash. AI ustunlarni mahalliy ravishda xaritalaydi."
+      },
+      "1": {
+        "title": "Ko'rib chiqish",
+        "description": "Aqlli qoidalar va ommaviy harakatlar bilan tez kategoriyalash."
+      },
+      "2": {
+        "title": "Rejalashtirish",
+        "description": "Har bir dollarni ishga tayinlang va kelajakdagi sof boylikni oldindan ko'ring."
+      }
+    },
+    "pricing": {
+      "eyebrow": "Adolatli narxlar",
+      "title": "Mahalliy bepul. Sinxronizatsiya pro.",
+      "description": "Kuchli Mahalliy Protokoldan boshlang. Agar ko'p qurilmali sinxronizatsiya kerak bo'lsa, keyinroq yangilang.",
+      "priceLabel": "Abadiy bepul",
+      "cta": {
+        "label": "Mahalliy protokolni boshlang",
+        "href": "/budget-app/auth/signup"
+      },
+      "secondary": {
+        "label": "Pro xususiyatlarini ko'ring",
+        "href": "#pricing"
+      },
+      "guarantee": "Mahalliy protokol uchun kredit karta talab qilinmaydi."
+    },
+    "faq": {
+      "0": {
+        "q": "Ma'lumotlarim haqiqatan ham maxfiymi?",
+        "a": "Ha. Mahalliy protokolda ma'lumotlar qurilmangizdan hech qachon chiqmaydi. U brauzeringiz ichidagi IndexedDB da yashaydi."
+      },
+      "1": {
+        "q": "Ma'lumotlarimni qanday zaxiralashim mumkin?",
+        "a": "Siz har qanday vaqtda to'liq JSON zaxirasini eksport qilishingiz mumkin. Biz shuningdek, muntazam CSV eksportlarini tavsiya qilamiz."
+      },
+      "2": {
+        "q": "'Sinxronizatsiya' pro nima?",
+        "a": "Yaqin orada: Qurilmalar o'rtasida shifrlangan ma'lumotlarni sinxronizatsiya qilish uchun ixtiyoriy obuna."
+      },
+      "3": {
+        "q": "Siz banklarga ulanasizmi?",
+        "a": "Yo'q. Biz qo'lda import qilish xavfsizroq, ishonchliroq va moliyaviy xabardorlikni yaxshilaydi deb hisoblaymiz."
+      }
+    },
+    "security": {
+      "title": "Maxfiylik birinchi navbatda",
+      "description": "Byudjet dasturi ma'lumotlaringizni mahalliy ravishda (offline tayyor) saqlaydi va AI xususiyatlari, eksport va o'chirish uchun boshqaruvlarni beradi.",
+      "buttons": {
+        "privacy": "Maxfiylik va sozlamalar",
+        "offline": "Offline qo'llab-quvvatlash"
+      },
+      "cards": {
+        "localStorage": {
+          "title": "Mahalliy saqlash",
+          "description": "Sizning byudjet ma'lumotlaringiz brauzeringizda (IndexedDB) saqlanadi, shuning uchun dastur tez va offline ishlaydi."
+        },
+        "encryption": {
+          "title": "Shifrlashni qo'llab-quvvatlash",
+          "description": "Dastur faollashtirilganda sezgir byudjet yozuvlarini himoya qilish uchun shifrlash qatlamini o'z ichiga oladi."
+        },
+        "aiControls": {
+          "title": "AI xususiyatlarini boshqarish",
+          "description": "AI tomonidan boshqariladigan xususiyatlarni (masalan, anomaliya aniqlash) o'chirish va chatbot kirishini boshqarish sozlamalaridan foydalaning."
+        },
+        "exportDelete": {
+          "title": "Eksport va o'chirish",
+          "description": "Ma'lumotlaringizni va maxfiylik sozlamalaringizni eksport qiling yoki dasturdan to'g'ridan-to'g'ri mahalliy ma'lumotlarni o'chiring."
+        }
+      }
+    },
+    "comparison": {
+      "headers": {
+        "feature": "Xususiyat",
+        "local": "BudgetPro Mahalliy",
+        "sync": "BudgetPro Sinxronizatsiya (Pro)",
+        "cloud": "Tipik Bulut Dasturi"
+      },
+      "dataPrivacy": {
+        "feature": "Ma'lumot maxfiyligi",
+        "local": "100% Maxfiy (Mahalliy)",
+        "sync": "Uchdan-uchgacha shifrlangan",
+        "cloud": "Xodimlar tomonidan ko'rinadi"
+      },
+      "cost": {
+        "feature": "Narx",
+        "local": "Abadiy bepul",
+        "sync": "Bir martalik yangilanish",
+        "cloud": "$100+/yil obuna"
+      },
+      "offlineMode": {
+        "feature": "Offline rejimi"
+      },
+      "bankConnections": {
+        "feature": "Bank ulanishlari",
+        "local": "CSV / Faqat qo'lda",
+        "sync": "Ixtiyoriy (Shifrlangan)",
+        "cloud": "Majburiy agregatsiya"
+      },
+      "storageLocation": {
+        "feature": "Saqlash joyi",
+        "local": "Sizning qurilmangiz",
+        "sync": "Zero-Knowledge Bulut",
+        "cloud": "Ularning ma'lumotlar bazasi"
+      }
+    },
+    "socialProof": {
+      "title": "Premium silliqlik, ichiga o'rnatilgan",
+      "description": "Byudjetni ushlab turadigan tafsilotlar: onboarding, tezkor kalitlar, mobil navigatsiya va offline tayyor ishlash.",
+      "features": {
+        "onboarding": {
+          "title": "Onboarding sayohati",
+          "description": "Yo'naltirilgan sayohat yangi foydalanuvchilarga tezda qiymatga erishishga yordam beradi."
+        },
+        "shortcuts": {
+          "title": "Klaviatura tezkor kalitlari",
+          "description": "UI ga o'rnatilgan qidirish va harakat tezkor kalitlari bilan tez harakat qiling."
+        },
+        "mobileUx": {
+          "title": "Mobil birinchi UX",
+          "description": "Pastki navigatsiya va mahalliy his qiladigan javob beruvchi tartiblar."
+        },
+        "pwaInstall": {
+          "title": "PWA o'rnatish",
+          "description": "Dastur kabi o'rnating va internet aloqasi zaif bo'lsa ham davom eting."
+        }
+      }
+    },
+    "pricingSection": {
+      "recommended": "Tavsiya etiladi",
+      "productName": "Mahalliy Protokol",
+      "productDescription": "To'liq byudjet tajribasi, butunlay sizning qurilmangizda ishlaydi.",
+      "whyChoose": "Nima uchun Mahalliy Protokolni tanlash kerak?",
+      "whyChooseDescription": "Biz bulut gigantlari bilan qanday solishtirishimizni ko'ring.",
+      "features": "Cheksiz transaktsiyalar, hisoblar, byudjetlar va to'liq mahalliy zaxira imkoniyatlarini o'z ichiga oladi."
+    },
+    "heroSection": {
+      "cta": {
+        "heading": "Aniqlik uchun qurilgan, tartibsizlik uchun emas.",
+        "viewPricing": "Narxlarni ko'rish"
+      },
+      "badges": {
+        "noSubscriptions": "Obunalar yo'q",
+        "offlineReady": "Offline tayyor",
+        "seniorsMode": "Qariyalar rejimi"
+      },
+      "preview": {
+        "livePreview": "Jonli ko'rinish",
+        "recentTransactions": "So'nggi transaktsiyalar",
+        "categoryBudgets": "Kategoriya byudjetlari",
+        "recurring": "Takroriy"
+      },
+      "modes": {
+        "dashboard": "Boshqaruv paneli",
+        "budgets": "Byudjetlar",
+        "subscriptions": "Obunalar"
+      }
+    },
+    "featuresDeepDive": {
+      "heading1": "Jadval kuchi.",
+      "heading2": "Dastur soddaligi.",
+      "description": "Buzilgan formulalar bilan kurashni to'xtating. Zamonaviy dastur tezligi bilan qo'lda nazorat qilish imkoniyatini oling.",
+      "cta": "Bepul sinovni boshlang",
+      "explore": "O'rganing"
+    },
+    "accessibility": {
+      "title": "Standart bo'yicha mavjud",
+      "description": "Qariyalar rejimi soddalashtirilgan navigatsiya va katta teginish maqsadlarini taqdim etadi. Klaviatura tezkor kalitlari, diqqat holatlari va aniq kontrast har kimga tezroq harakat qilishga yordam beradi.",
+      "badges": {
+        "seniorsMode": "Qariyalar rejimi",
+        "largeTouchTargets": "Katta teginish maqsadlari",
+        "keyboardFirst": "Klaviatura birinchi"
+      },
+      "buttons": {
+        "openApp": "Dastur ochish",
+        "settings": "Mavjudlik sozlamalari"
+      }
+    },
+    "faqSection": {
+      "title": "FAQ",
+      "description": "Sinovlar, narxlar va kirish haqida umumiy savollarga oddiy javoblar."
+    },
+    "outcomesSection": {
+      "title": "Haqiqiy hayot uchun qurilgan, jadval uchun emas",
+      "description": "Ko'pgina byudjet dasturlari sizni ish bilan band qiladi. BudgetPro sizni nazoratda ushlab turish bilan to'siqlarni kamaytirish uchun mo'ljallangan."
+    },
+    "howItWorksSection": {
+      "title": "Qanday ishlaydi",
+      "description": "Sizni tezda aniqlikka olib boradigan ish jarayoni, murakkab tizimga bog'lanmasdan."
+    },
+    "nav": {
+      "tagline": "Premium byudjetlash"
+    },
+    "marquee": {
+      "logos": [
+        "Byudjetlash",
+        "Obunalar",
+        "Kreditlar",
+        "OCR Chiptalar",
+        "Hisobotlar",
+        "Rejalashtirish",
+        "Offline",
+        "Qariyalar rejimi"
+      ]
     }
   }
 }

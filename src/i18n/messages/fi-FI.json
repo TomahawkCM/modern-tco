@@ -1,7 +1,7 @@
 {
   "nav": {
-    "dashboard": "Ohjauspaneeli",
-    "transactions": "Transaktiot",
+    "dashboard": "Hallintapaneeli",
+    "transactions": "Tapahtumat",
     "budgets": "Budjetit",
     "reports": "Raportit",
     "accounts": "Tilith",
@@ -14,16 +14,16 @@
     "about": "Tietoa"
   },
   "actions": {
-    "addTransaction": "Lisää transaktio",
-    "importData": "Tuo data",
+    "addTransaction": "Lisää tapahtuma",
+    "importData": "Tuo tiedot",
     "import": "Tuoda",
-    "editDashboard": "Muokkaa ohjauspaneelia",
+    "editDashboard": "Muokkaa hallintapaneelia",
     "saveChanges": "Tallenna muutokset",
     "resetDefaults": "Palauta oletukset"
   },
   "welcome": {
-    "title": "Tervetuloa Budjetti-sovellukseen",
-    "subtitle": "Aloita lisäämällä ensimmäinen transaktiosi tai tuomalla tietoja pankistasi"
+    "title": "Tervetuloa Budjetti Sovellukseen",
+    "subtitle": "Aloita lisäämällä ensimmäinen tapahtumasi tai tuomalla tietoja pankistasi"
   },
   "common": {
     "save": "Tallenna",
@@ -34,32 +34,412 @@
   },
   "widget": {
     "spendingByCategory": {
-      "title": "Kulut kategoriittain",
+      "title": "Kulut Kategorioittain",
       "description": "Näe, mihin rahasi menevät visuaalisten erittelyjen avulla"
     },
     "recentTransactions": {
-      "title": "Viimeisimmät transaktiot",
-      "description": "Nopea katsaus viimeisimpään taloudelliseen toimintaasi"
+      "title": "Viimeisimmät Tapahtumat",
+      "description": "Nopea katsaus viimeisimpiin taloudellisiin aktiviteetteihisi"
     },
     "budgetProgress": {
-      "title": "Budjetin edistyminen",
-      "description": "Seuraa, miten edistyt budjettitavoitteidesi suhteen"
+      "title": "Budjetin Edistyminen",
+      "description": "Seuraa, miten edistyt budjetti tavoitteidesi suhteen"
     },
     "accountBalances": {
-      "title": "Tilin saldot",
+      "title": "Tilin Saldo",
       "description": "Nykyiset saldot kaikilla tileilläsi"
     },
     "incomeVsExpenses": {
       "title": "Tulot vs Menot",
-      "description": "Vertaile tulojasi ja menojasi ajan myötä"
+      "description": "Vertaile tuloja ja menoja ajan myötä"
     },
     "monthlyTrends": {
       "title": "Kuukausitrendit",
-      "description": "Visualisoi taloudelliset kaavasi kuukausittain"
+      "description": "Visualisoi taloudellisia kaavojasi kuukausittain"
     },
     "upcomingBills": {
-      "title": "Tulevat laskut",
+      "title": "Tulevat Laskut",
       "description": "Älä koskaan unohda maksua laskumuistutusten avulla"
+    }
+  },
+  "tooltip": {
+    "ariaLabel": "Lisätietoja",
+    "learnMore": "Lue lisää →"
+  },
+  "footer": {
+    "tagline": "Premium-budjetointi yhdellä kertamaksulla.",
+    "links": {
+      "login": "Kirjaudu sisään",
+      "signup": "Aloita kokeilu",
+      "upgrade": "Päivitä",
+      "settings": "Asetukset"
+    },
+    "copyright": "© {year} {brandName}"
+  },
+  "dialog": {
+    "confirm": "Vahvista",
+    "cancel": "Peruuta",
+    "processing": "Käsitellään...",
+    "finalConfirmation": "Lopullinen vahvistus:",
+    "typeToConfirm": "Kirjoita {text} vahvistaaksesi tämän toiminnon."
+  },
+  "sidebar": {
+    "appTitle": "Budjetti Sovellus",
+    "appSubtitle": "Premium Rahoitus",
+    "search": "Hae...",
+    "shortcuts": "Pikanäppäimet",
+    "navigation": {
+      "dashboard": "Hallintapaneeli",
+      "transactions": "Tapahtumat",
+      "scanReceipt": "Skannaa Kuitti",
+      "categories": "Kategoriat",
+      "budgets": "Budjetit",
+      "subscriptions": "Tilaukset",
+      "loans": "Lainat",
+      "investments": "Sijoitukset",
+      "futurePlans": "Tulevat Suunnitelmat",
+      "retirement": "Eläke",
+      "reports": "Raportit"
+    },
+    "actions": {
+      "importCsv": "Tuo CSV",
+      "settings": "Asetukset",
+      "showLess": "Näytä vähemmän",
+      "showAllItems": "Näytä kaikki kohteet"
+    }
+  },
+  "onboarding": {
+    "skipTour": "Ohita kierros",
+    "stepCounter": "Vaihe {current} / {total}",
+    "dontShowAgain": "Älä näytä tätä kierrosta uudelleen",
+    "quickTip": "💡 Nopeasti vinkki",
+    "navigation": {
+      "previous": "Edellinen",
+      "next": "Seuraava",
+      "getStarted": "Aloita",
+      "startTour": "Aloita kierros"
+    },
+    "steps": {
+      "welcome": {
+        "title": "👋 Tervetuloa Budjetti Sovellukseen!",
+        "description": "Tehdään nopea kierros, jotta pääset alkuun kotitalousrahoituksesi hallinnassa. Tämä ei vie kauan!"
+      },
+      "import": {
+        "title": "📥 Tuo Tapahtumasi",
+        "description": "Aloita tuomalla pankkitapahtumasi CSV-tiedostosta. Tuemme BMO:ta, Home Trustia ja monia muita pankkeja. Sovellus luokittelee tapahtumasi automaattisesti!"
+      },
+      "categorize": {
+        "title": "🏷️ Luokittele & Järjestä",
+        "description": "Tarkista ja säädä tapahtumien kategorioita. Älykäs luokittelu oppii korjauksistasi parantuakseen ajan myötä. Käytä massatoimintoja luokitellaksesi useita tapahtumia kerralla!"
+      },
+      "budgets": {
+        "title": "🎯 Aseta Budjettisi",
+        "description": "Luo budjetteja eri kulutuskategorioille. Seuraa edistymistäsi kuukauden aikana ja saa ilmoituksia, kun lähestyt rajoja."
+      },
+      "reports": {
+        "title": "📊 Katso Raportteja & Näkemyksiä",
+        "description": "Visualisoi kulutustottumuksiasi, seuraa nettovarallisuuttasi ja tee tietoon perustuvia taloudellisia päätöksiä. Hallintapaneelisi päivittyy automaattisesti jokaisen tapahtuman myötä!"
+      }
+    },
+    "tips": {
+      "import": "Vedä ja pudota CSV-tiedostosi tai napsauta selaa. Tunnistamme automaattisesti BMO- ja Home Trust -muodot!",
+      "categorize": "Käytä nopeaa luokittelupainiketta tai valitse useita tapahtumia massaluokittelua varten.",
+      "budgets": "Aseta realistiset budjetit ja ilmoitamme, jos olet menossa yli budjetin."
+    }
+  },
+  "landing": {
+    "brand": {
+      "name": "BudgetPro",
+      "product": "Budjetti Sovellus"
+    },
+    "hero": {
+      "badge": "Yksityisyys ensin • Vain paikallisesti • Ei seurantaa",
+      "headline": "Hallinnoi Rahaasi Ilman, että Myyt Tietojasi.",
+      "subhead": "Taulukkolaskennan voima. Sovelluksen yksinkertaisuus. Kokeile taloudellista selkeyttä ainoassa budjetti sovelluksessa, joka takaa, että tietosi eivät koskaan poistu laitteeltasi.",
+      "primaryCta": {
+        "label": "Aloita Paikallinen Protokolla (Ilmainen)",
+        "href": "/budget-app/auth/signup"
+      },
+      "secondaryCta": {
+        "label": "Kirjaudu sisään",
+        "href": "/budget-app/auth/login"
+      },
+      "finePrint": "Ei pankkitietoja vaadita. Ei tiliä tarvitaan paikallista tilaa varten."
+    },
+    "trust": {
+      "0": {
+        "title": "Laitteesi, Tietosi",
+        "description": "Tiedot pysyvät selaimesi IndexedDB:ssä. Emme voi nähdä niitä."
+      },
+      "1": {
+        "title": "Taulukkolaskenta Voima",
+        "description": "Massamuokkaus, pivotointi ja analysointi kuin ammattilainen ilman kaavapäänsärkyä."
+      },
+      "2": {
+        "title": "Offline Nopeus",
+        "description": "Nolla viivettä. Toimii vuoren huipulla tai metro tunnelissa."
+      },
+      "3": {
+        "title": "Manuaaliset Rituaalit",
+        "description": "Tuonti taikuri tekee perjantain rahakatsauksesta tyydyttävän tavan."
+      }
+    },
+    "outcomes": {
+      "0": {
+        "title": "Lopeta Taistelut Aggregaattoreiden Kanssa",
+        "description": "Ei enää rikkoutuneita yhteyksiä tai uudelleenautentikointikierroksia. Sinä hallitset tietojen syöttöä."
+      },
+      "1": {
+        "title": "Yksityisyys Suunnittelussa",
+        "description": "Emme myy tietojasi, koska meillä ei ole niitä. Piste."
+      },
+      "2": {
+        "title": "Tulevaisuuden Kestävä Suunnittelu",
+        "description": "Mallinna eläke, lainan maksaminen ja säästötavoitteet yhdessä integroidussa näkymässä."
+      },
+      "3": {
+        "title": "Tilauksen Tappaja",
+        "description": "Huomaa toistuvat rahankulutukset, joita muut sovellukset eivät huomaa."
+      }
+    },
+    "features": {
+      "0": {
+        "title": "Paikallinen Hallintapaneeli",
+        "description": "Nettovarallisuus, kassavirta ja kategorian erittely. Välittömät latausajat.",
+        "href": "/budget-app"
+      },
+      "1": {
+        "title": "Tuontitaikuri",
+        "description": "Älykäs CSV-kartoitin BMO:lle, Home Trustille ja mukautettaville muodoille.",
+        "href": "/budget-app/import"
+      },
+      "2": {
+        "title": "Kuittien OCR",
+        "description": "Skannaa kuitit paikallisesti Tesseract.js:llä. Ei pilviprosessointia.",
+        "href": "/budget-app/ocr"
+      },
+      "3": {
+        "title": "Kategorian Budjetit",
+        "description": "Nollapohjainen tai siirtobudjetointi yksityiskohtaisella kategorian hallinnalla.",
+        "href": "/budget-app/budgets"
+      },
+      "4": {
+        "title": "Eläkelaskin",
+        "description": "Projektoi vapautumispäiväsi korkoa korolle visualisoinnin avulla.",
+        "href": "/budget-app/planning/retirement"
+      },
+      "5": {
+        "title": "Yksityisyys Suoja",
+        "description": "Valinnainen asiakaspään salaus ylimääräisen turvallisuuden kerroksen lisäämiseksi.",
+        "href": "/budget-app/settings"
+      }
+    },
+    "howItWorks": {
+      "0": {
+        "title": "Tuo",
+        "description": "Vedä ja pudota CSV-tiedostoja tai skannaa kuitteja. AI kartoittaa sarakkeet paikallisesti."
+      },
+      "1": {
+        "title": "Tarkista",
+        "description": "Nopea luokittelu älykkäillä säännöillä ja massatoiminnoilla."
+      },
+      "2": {
+        "title": "Suunnittele",
+        "description": "Määritä jokaiselle dollarille työ ja ennusta tuleva nettovarallisuutesi."
+      }
+    },
+    "pricing": {
+      "eyebrow": "Reilu Hinnoittelu",
+      "title": "Paikallinen on Ilmainen. Synkronointi on Pro.",
+      "description": "Aloita tehokkaalla Paikallisella Protokollalla. Päivitä myöhemmin, jos tarvitset monilaitteista synkronointia.",
+      "priceLabel": "Ilmainen Ikuisesti",
+      "cta": {
+        "label": "Aloita Paikallinen Protokolla",
+        "href": "/budget-app/auth/signup"
+      },
+      "secondary": {
+        "label": "Katso Pro Ominaisuudet",
+        "href": "#pricing"
+      },
+      "guarantee": "Ei luottokorttia vaadita Paikalliselle Protokollalle."
+    },
+    "faq": {
+      "0": {
+        "q": "Onko tietoni todella yksityisiä?",
+        "a": "Kyllä. Paikallisessa Protokollassa tiedot eivät koskaan poistu laitteeltasi. Ne elävät selaimesi IndexedDB:ssä."
+      },
+      "1": {
+        "q": "Miten varmuuskopioin tietoni?",
+        "a": "Voit viedä täydellisen JSON-varmuuskopion milloin tahansa. Suosittelemme myös säännöllisiä CSV-vientejä."
+      },
+      "2": {
+        "q": "Mikä on 'Synkronointi' Pro?",
+        "a": "Tulee pian: Valinnainen tilaus salattujen tietojen synkronointiin laitteiden välillä Supabasen kautta."
+      },
+      "3": {
+        "q": "Yhdistättekö pankkeihin?",
+        "a": "Ei. Uskomme, että manuaalinen tuonti on turvallisempaa, luotettavampaa ja lisää taloudellista tietoisuutta."
+      }
+    },
+    "security": {
+      "title": "Yksityisyys ensin suunnittelussa",
+      "description": "Budjetti Sovellus tallentaa tietosi paikallisesti (offline-valmiina) ja antaa sinulle hallintaa AI-ominaisuuksien, viennin ja poistamisen suhteen.",
+      "buttons": {
+        "privacy": "Yksityisyys & asetukset",
+        "offline": "Offline-tuki"
+      },
+      "cards": {
+        "localStorage": {
+          "title": "Paikallinen tallennus",
+          "description": "Budjettitietosi tallennetaan selaimeesi (IndexedDB), jotta sovellus pysyy nopeana ja käytettävissä offline-tilassa."
+        },
+        "encryption": {
+          "title": "Salaustuki",
+          "description": "Sovellus sisältää salauskerroksen suojatakseen herkkiä budjettitietoja, kun se on käytössä."
+        },
+        "aiControls": {
+          "title": "AI-ominaisuuksien hallinta",
+          "description": "Kytke päälle AI-pohjaiset ominaisuudet (kuten poikkeavuuksien havaitseminen) ja hallitse chatbotin pääsyä asetuksista."
+        },
+        "exportDelete": {
+          "title": "Vie & poista",
+          "description": "Vie tietosi ja yksityisyysasetuksesi tai poista paikalliset tiedot suoraan sovelluksesta."
+        }
+      }
+    },
+    "comparison": {
+      "headers": {
+        "feature": "Ominaisuus",
+        "local": "BudgetPro Paikallinen",
+        "sync": "BudgetPro Synkronointi (Pro)",
+        "cloud": "Tyypillinen Pilvisovellus"
+      },
+      "dataPrivacy": {
+        "feature": "Tietosuoja",
+        "local": "100% Yksityinen (Paikallinen)",
+        "sync": "Päästä-päähän Salattu",
+        "cloud": "Työntekijöiden Nähtävissä"
+      },
+      "cost": {
+        "feature": "Kustannus",
+        "local": "Ilmainen Ikuisesti",
+        "sync": "Kertamaksu",
+        "cloud": "$100+/vuosi Tilaus"
+      },
+      "offlineMode": {
+        "feature": "Offline-tila"
+      },
+      "bankConnections": {
+        "feature": "Pankkiyhteydet",
+        "local": "CSV / Vain Manuaalinen",
+        "sync": "Valinnainen (Salattu)",
+        "cloud": "Pakollinen Aggregointi"
+      },
+      "storageLocation": {
+        "feature": "Tallennuspaikka",
+        "local": "Laitteesi",
+        "sync": "Nolla-tieto Pilvi",
+        "cloud": "Heidän Tietokannassaan"
+      }
+    },
+    "socialProof": {
+      "title": "Premium-viimeistely, rakennettu sisään",
+      "description": "Yksityiskohdat, jotka tekevät budjetoinnista toimivaa: käyttöönotto, pikanäppäimet, mobiili navigointi ja offline-valmiit suorituskyvyt.",
+      "features": {
+        "onboarding": {
+          "title": "Käyttöönotto kierros",
+          "description": "Opastettu kierros auttaa uusia käyttäjiä saamaan arvon nopeasti."
+        },
+        "shortcuts": {
+          "title": "Näppäimistön pikanäppäimet",
+          "description": "Liiku nopeasti haun ja toiminnan pikanäppäimillä, jotka on rakennettu käyttöliittymään."
+        },
+        "mobileUx": {
+          "title": "Mobiiliensimmäinen UX",
+          "description": "Alareunan navigointi ja responsiiviset asettelut, jotka tuntuvat alkuperäisiltä."
+        },
+        "pwaInstall": {
+          "title": "PWA asennus",
+          "description": "Asenna kuin sovellus ja jatka vaikka internetyhteys on heikko."
+        }
+      }
+    },
+    "pricingSection": {
+      "recommended": "Suositeltava",
+      "productName": "Paikallinen Protokolla",
+      "productDescription": "Täydellinen budjetointikokemus, joka toimii täysin laitteellasi.",
+      "whyChoose": "Miksi valita Paikallinen Protokolla?",
+      "whyChooseDescription": "Katso, miten pärjäämme pilvijättiläisille.",
+      "features": "Sisältää rajattomat tapahtumat, tilit, budjetit ja täydet paikalliset varmuuskopiointimahdollisuudet."
+    },
+    "heroSection": {
+      "cta": {
+        "heading": "Rakennettu selkeyttä varten, ei kaaosta.",
+        "viewPricing": "Katso hinnoittelu"
+      },
+      "badges": {
+        "noSubscriptions": "Ei tilauksia",
+        "offlineReady": "Offline-valmis",
+        "seniorsMode": "Senioritila"
+      },
+      "preview": {
+        "livePreview": "Reaaliaikainen esikatselu",
+        "recentTransactions": "Viimeisimmät tapahtumat",
+        "categoryBudgets": "Kategorian budjetit",
+        "recurring": "Toistuvat"
+      },
+      "modes": {
+        "dashboard": "Hallintapaneeli",
+        "budgets": "Budjetit",
+        "subscriptions": "Tilaukset"
+      }
+    },
+    "featuresDeepDive": {
+      "heading1": "Taulukkolaskennan Voima.",
+      "heading2": "Sovelluksen Yksinkertaisuus.",
+      "description": "Lopeta taistelu rikkoutuneiden kaavojen kanssa. Saat manuaalisen hallinnan joustavuuden modernin sovelluksen nopeudella.",
+      "cta": "Aloita ilmainen kokeilu",
+      "explore": "Tutki"
+    },
+    "accessibility": {
+      "title": "Saavutettavuus oletuksena",
+      "description": "Senioritila tarjoaa yksinkertaistetun navigoinnin ja suuremmat kosketuskohdat. Näppäimistön pikanäppäimet, keskittymisvaltiot ja selkeä kontrasti auttavat kaikkia liikkumaan nopeammin.",
+      "badges": {
+        "seniorsMode": "Senioritila",
+        "largeTouchTargets": "Suuret kosketuskohdat",
+        "keyboardFirst": "Näppäimistö ensin"
+      },
+      "buttons": {
+        "openApp": "Avaa sovellus",
+        "settings": "Saavutettavuusasetukset"
+      }
+    },
+    "faqSection": {
+      "title": "UKK",
+      "description": "Yksinkertaisia vastauksia yleisiin kysymyksiin kokeiluista, hinnoista ja pääsystä."
+    },
+    "outcomesSection": {
+      "title": "Rakennettu todelliseen elämään, ei taulukkolaskentaan",
+      "description": "Useimmat budjetointisovellukset pakottavat sinut tekemään työn. BudgetPro on suunniteltu vähentämään kitkaa samalla kun pidät hallinnan."
+    },
+    "howItWorksSection": {
+      "title": "Miten se toimii",
+      "description": "Työnkulku, joka vie sinut selkeyteen nopeasti, ilman että lukitset itsesi monimutkaiseen järjestelmään."
+    },
+    "nav": {
+      "tagline": "Premium-budjetointi"
+    },
+    "marquee": {
+      "logos": [
+        "Budjetointi",
+        "Tilaukset",
+        "Lainat",
+        "OCR Kuitit",
+        "Raportit",
+        "Suunnittelu",
+        "Offline",
+        "Senioritila"
+      ]
     }
   }
 }

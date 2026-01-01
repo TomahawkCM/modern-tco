@@ -23,7 +23,7 @@
   },
   "welcome": {
     "title": "Laipni lūdzam Budžeta lietotnē",
-    "subtitle": "Sāciet, pievienojot savu pirmo transakciju vai importējot datus no bankas"
+    "subtitle": "Sāciet, pievienojot savu pirmo transakciju vai importējot datus no sava bankas konta"
   },
   "common": {
     "save": "Saglabāt",
@@ -35,31 +35,411 @@
   "widget": {
     "spendingByCategory": {
       "title": "Izdevumi pēc kategorijām",
-      "description": "Redziet, kur jūsu nauda aiziet ar vizuālām analīzēm"
+      "description": "Redziet, kur jūsu nauda tiek tērēta, izmantojot vizuālus pārskatus"
     },
     "recentTransactions": {
       "title": "Jaunākās transakcijas",
-      "description": "Ātrs skats uz jūsu jaunākajām finanšu aktivitātēm"
+      "description": "Ātrs skatījums uz jūsu pēdējām finanšu aktivitātēm"
     },
     "budgetProgress": {
       "title": "Budžeta progress",
-      "description": "Sekojiet līdzi, kā jums sokas ar budžeta mērķiem"
+      "description": "Sekojiet, kā jums sokas pret jūsu budžeta mērķiem"
     },
     "accountBalances": {
-      "title": "Kontu atlikumi",
-      "description": "Pašreizējie atlikumi visos jūsu kontos"
+      "title": "Kontu bilances",
+      "description": "Pašreizējās bilances visos jūsu kontos"
     },
     "incomeVsExpenses": {
-      "title": "Ieņēmumi pret izdevumiem",
+      "title": "Ienākumi pret izdevumiem",
       "description": "Salīdziniet savus ienākumus un izdevumus laika gaitā"
     },
     "monthlyTrends": {
       "title": "Mēneša tendences",
-      "description": "Vizualizējiet savus finanšu modeļus mēnesi pa mēnesim"
+      "description": "Vizualizējiet savus finanšu modeļus mēnesi pēc mēneša"
     },
     "upcomingBills": {
       "title": "Nākamie rēķini",
       "description": "Nekad nepalaidiet garām maksājumu ar rēķinu atgādinājumiem"
+    }
+  },
+  "tooltip": {
+    "ariaLabel": "Vairāk informācijas",
+    "learnMore": "Uzzināt vairāk →"
+  },
+  "footer": {
+    "tagline": "Premium budžetēšana ar vienreizēju uzlabojumu.",
+    "links": {
+      "login": "Pieteikties",
+      "signup": "Sākt izmēģinājumu",
+      "upgrade": "Uzlabot",
+      "settings": "Iestatījumi"
+    },
+    "copyright": "© {year} {brandName}"
+  },
+  "dialog": {
+    "confirm": "Apstiprināt",
+    "cancel": "Atcelt",
+    "processing": "Apstrādā...",
+    "finalConfirmation": "Galīgā apstiprināšana:",
+    "typeToConfirm": "Ierakstiet {text}, lai apstiprinātu šo darbību."
+  },
+  "sidebar": {
+    "appTitle": "Budžeta lietotne",
+    "appSubtitle": "Premium Finanšu",
+    "search": "Meklēt...",
+    "shortcuts": "Īsinājumtaustiņi",
+    "navigation": {
+      "dashboard": "Vadības panelis",
+      "transactions": "Transakcijas",
+      "scanReceipt": "Skenēt čeku",
+      "categories": "Kategorijas",
+      "budgets": "Budžeti",
+      "subscriptions": "Abonementi",
+      "loans": "Aizdevumi",
+      "investments": "Investīcijas",
+      "futurePlans": "Nākotnes plāni",
+      "retirement": "Pensija",
+      "reports": "Pārskati"
+    },
+    "actions": {
+      "importCsv": "Importēt CSV",
+      "settings": "Iestatījumi",
+      "showLess": "Rādīt mazāk",
+      "showAllItems": "Rādīt visus vienumus"
+    }
+  },
+  "onboarding": {
+    "skipTour": "Izlaist ekskursiju",
+    "stepCounter": "Solījums {current} no {total}",
+    "dontShowAgain": "Nerādīt šo ekskursiju atkal",
+    "quickTip": "💡 Ātra padoms",
+    "navigation": {
+      "previous": "Iepriekšējais",
+      "next": "Nākamais",
+      "getStarted": "Sākt",
+      "startTour": "Sākt ekskursiju"
+    },
+    "steps": {
+      "welcome": {
+        "title": "👋 Laipni lūdzam Budžeta lietotnē!",
+        "description": "Veiksim ātru ekskursiju, lai palīdzētu jums sākt pārvaldīt savas mājsaimniecības finanses. Tas neaizņems ilgu laiku!"
+      },
+      "import": {
+        "title": "📥 Importējiet savas transakcijas",
+        "description": "Sāciet, importējot savas bankas transakcijas no CSV faila. Mēs atbalstām BMO, Home Trust un daudzus citus bankas. Lietotne automātiski kategorizēs jūsu transakcijas!"
+      },
+      "categorize": {
+        "title": "🏷️ Kategorizējiet un organizējiet",
+        "description": "Pārskatiet un pielāgojiet transakciju kategorijas. Mūsu viedā kategorizācija mācās no jūsu labojumiem, lai uzlabotos laika gaitā. Izmantojiet grupas darbības, lai vienlaikus kategorizētu vairākas transakcijas!"
+      },
+      "budgets": {
+        "title": "🎯 Iestatiet savus budžetus",
+        "description": "Izveidojiet budžetus dažādām izdevumu kategorijām. Sekojiet savai progresam visa mēneša garumā un saņemiet brīdinājumus, kad tuvojaties saviem ierobežojumiem."
+      },
+      "reports": {
+        "title": "📊 Skatīt pārskatus un ieskatus",
+        "description": "Vizualizējiet savus izdevumu modeļus, sekojiet savai tīrajai vērtībai un pieņemiet pārdomātus finanšu lēmumus. Jūsu vadības panelis automātiski atjaunojas ar katru transakciju!"
+      }
+    },
+    "tips": {
+      "import": "Velciet un nometiet savu CSV failu vai noklikšķiniet, lai pārlūkotu. Mēs automātiski atpazīstam BMO un Home Trust formātus!",
+      "categorize": "Izmantojiet ātrās kategorizācijas pogu vai izvēlieties vairākas transakcijas grupas kategorizācijai.",
+      "budgets": "Iestatiet reālus budžetus, un mēs jums paziņosim, ja tuvojaties pārtērēšanai."
+    }
+  },
+  "landing": {
+    "brand": {
+      "name": "BudgetPro",
+      "product": "Budžeta lietotne"
+    },
+    "hero": {
+      "badge": "Privātums pirmajā vietā • Vietējā lietošana • Nulles izsekošana",
+      "headline": "Pārvaldiet savu naudu, nepārdodot savus datus.",
+      "subhead": "Izklādes jauda. Lietotnes vienkāršība. Iegūstiet finanšu skaidrību ar vienīgo budžeta lietotni, kas garantē, ka jūsu dati nekad nepamet jūsu ierīci.",
+      "primaryCta": {
+        "label": "Sākt vietējo protokolu (bez maksas)",
+        "href": "/budget-app/auth/signup"
+      },
+      "secondaryCta": {
+        "label": "Pieteikties",
+        "href": "/budget-app/auth/login"
+      },
+      "finePrint": "Nav nepieciešama bankas akreditācija. Vietējā režīmā konts nav nepieciešams."
+    },
+    "trust": {
+      "0": {
+        "title": "Jūsu ierīce, jūsu dati",
+        "description": "Dati paliek jūsu pārlūkprogrammas IndexedDB. Mēs to burtiski nevaram redzēt."
+      },
+      "1": {
+        "title": "Izklādes jauda",
+        "description": "Masveida rediģēšana, pagriešana un analīze kā profesionālim bez formulas galvassāpēm."
+      },
+      "2": {
+        "title": "Darba ātrums bezsaistē",
+        "description": "Nulles latentums. Darbojas kalna virsotnē vai metro tunelī."
+      },
+      "3": {
+        "title": "Rokasgrāmatas rituāli",
+        "description": "Importēšanas vednis padara piektdienas naudas pārskatu par apmierinošu ieradumu."
+      }
+    },
+    "outcomes": {
+      "0": {
+        "title": "Pārtrauciet cīnīties ar agregatoriem",
+        "description": "Vairs nekādu salauztu savienojumu vai atkārtotu autentifikāciju. Jūs kontrolējat datu ievadi."
+      },
+      "1": {
+        "title": "Privātums pēc dizaina",
+        "description": "Mēs nepārdodam jūsu datus, jo mums to nav. Punkti."
+      },
+      "2": {
+        "title": "Nākotnes plānošana",
+        "description": "Modelējiet pensiju, aizdevumu atmaksu un uzkrājumu mērķus vienā integrētā skatā."
+      },
+      "3": {
+        "title": "Abonementu iznīcinātājs",
+        "description": "Pamaniet atkārtotus izdevumus, ko citas lietotnes palaidīs garām."
+      }
+    },
+    "features": {
+      "0": {
+        "title": "Vietējais vadības panelis",
+        "description": "Tīrā vērtība, naudas plūsma un kategoriju sadalījums. Instantā ielādes laiki.",
+        "href": "/budget-app"
+      },
+      "1": {
+        "title": "Importēšanas vednis",
+        "description": "Viedais CSV kartotājs BMO, Home Trust un pielāgojamiem formātiem.",
+        "href": "/budget-app/import"
+      },
+      "2": {
+        "title": "Čeku OCR",
+        "description": "Skenējiet čekus lokāli ar Tesseract.js. Nav mākoņu apstrādes.",
+        "href": "/budget-app/ocr"
+      },
+      "3": {
+        "title": "Kategoriju budžeti",
+        "description": "Nulles bāzes vai pārvietošanas budžetēšana ar detalizētu kategoriju kontroli.",
+        "href": "/budget-app/budgets"
+      },
+      "4": {
+        "title": "Pensiju kalkulators",
+        "description": "Prognozējiet savu brīvības datumu ar kompozīcijas procentu vizualizācijām.",
+        "href": "/budget-app/planning/retirement"
+      },
+      "5": {
+        "title": "Privātuma vairogs",
+        "description": "Papildu klienta puses šifrēšana papildu drošības slānim.",
+        "href": "/budget-app/settings"
+      }
+    },
+    "howItWorks": {
+      "0": {
+        "title": "Importēt",
+        "description": "Velciet un nometiet CSV vai skenējiet čekus. AI lokāli kartē kolonnas."
+      },
+      "1": {
+        "title": "Pārskatīt",
+        "description": "Ātra kategorizācija ar viedajiem noteikumiem un grupas darbībām."
+      },
+      "2": {
+        "title": "Plānot",
+        "description": "Piešķiriet katram dolāram darbu un prognozējiet savu nākotnes tīro vērtību."
+      }
+    },
+    "pricing": {
+      "eyebrow": "Godīga cena",
+      "title": "Vietējais ir bez maksas. Sinhronizācija ir Pro.",
+      "description": "Sāciet ar jaudīgo Vietējo protokolu. Uzlabojiet vēlāk, ja nepieciešama vairāku ierīču sinhronizācija.",
+      "priceLabel": "Bezmaksas uz visiem laikiem",
+      "cta": {
+        "label": "Sākt vietējo protokolu",
+        "href": "/budget-app/auth/signup"
+      },
+      "secondary": {
+        "label": "Skatīt Pro funkcijas",
+        "href": "#pricing"
+      },
+      "guarantee": "Nav nepieciešama kredītkartes informācija Vietējā protokolam."
+    },
+    "faq": {
+      "0": {
+        "q": "Vai mani dati ir patiešām privāti?",
+        "a": "Jā. Vietējā protokolā dati nekad nepamet jūsu ierīci. Tie dzīvo IndexedDB jūsu pārlūkprogrammā."
+      },
+      "1": {
+        "q": "Kā es varu dublēt savus datus?",
+        "a": "Jūs varat eksportēt pilnu JSON dublējumu jebkurā laikā. Mēs arī iesakām regulāras CSV eksporta."
+      },
+      "2": {
+        "q": "Kas ir 'Sinhronizācija' Pro?",
+        "a": "Drīz: Papildu abonements, lai sinhronizētu šifrētus datus starp ierīcēm, izmantojot Supabase."
+      },
+      "3": {
+        "q": "Vai jūs savienojat ar bankām?",
+        "a": "Nē. Mēs uzskatām, ka manuāla importēšana ir drošāka, uzticamāka un veicina labāku finanšu apziņu."
+      }
+    },
+    "security": {
+      "title": "Privātums pirmajā vietā pēc dizaina",
+      "description": "Budžeta lietotne glabā jūsu datus lokāli (gatavs bezsaistē) un sniedz jums kontroli par AI funkcijām, eksportēšanu un dzēšanu.",
+      "buttons": {
+        "privacy": "Privātums un iestatījumi",
+        "offline": "Bezsaistes atbalsts"
+      },
+      "cards": {
+        "localStorage": {
+          "title": "Vietējā glabāšana",
+          "description": "Jūsu budžeta dati tiek glabāti jūsu pārlūkprogrammā (IndexedDB), lai lietotne paliktu ātra un lietojama bezsaistē."
+        },
+        "encryption": {
+          "title": "Šifrēšanas atbalsts",
+          "description": "Lietotne ietver šifrēšanas slāni, lai aizsargātu sensitīvos budžeta ierakstus, kad tas ir iespējots."
+        },
+        "aiControls": {
+          "title": "AI funkciju kontrole",
+          "description": "Ieslēdziet AI vadītās funkcijas (piemēram, anomāliju noteikšanu) un pārvaldiet čatbota piekļuvi no iestatījumiem."
+        },
+        "exportDelete": {
+          "title": "Eksportēt un dzēst",
+          "description": "Eksportējiet savus datus un privātuma iestatījumus vai dzēsiet lokālos datus tieši no lietotnes."
+        }
+      }
+    },
+    "comparison": {
+      "headers": {
+        "feature": "Funkcija",
+        "local": "BudgetPro Vietējais",
+        "sync": "BudgetPro Sinhronizācija (Pro)",
+        "cloud": "Tipiska mākoņu lietotne"
+      },
+      "dataPrivacy": {
+        "feature": "Datu privātums",
+        "local": "100% Privāts (Vietējais)",
+        "sync": "Beigu līdz beigām šifrēts",
+        "cloud": "Redzams darbiniekiem"
+      },
+      "cost": {
+        "feature": "Izmaksas",
+        "local": "Bezmaksas uz visiem laikiem",
+        "sync": "Vienreizējs uzlabojums",
+        "cloud": "$100+/gads Abonements"
+      },
+      "offlineMode": {
+        "feature": "Bezsaistes režīms"
+      },
+      "bankConnections": {
+        "feature": "Banku savienojumi",
+        "local": "CSV / Tikai manuāli",
+        "sync": "Pēc izvēles (šifrēts)",
+        "cloud": "Obligāta agregācija"
+      },
+      "storageLocation": {
+        "feature": "Glabāšanas vieta",
+        "local": "Jūsu ierīce",
+        "sync": "Nulles zināšanu mākoņi",
+        "cloud": "Viņu datu bāze"
+      }
+    },
+    "socialProof": {
+      "title": "Premium apdare, iebūvēta",
+      "description": "Sīkumi, kas padara budžeta plānošanu efektīvu: apmācība, īsinājumtaustiņi, mobilā navigācija un bezsaistes gatavība.",
+      "features": {
+        "onboarding": {
+          "title": "Apmācības ekskursija",
+          "description": "Vadīta ekskursija palīdz jaunajiem lietotājiem ātri sasniegt vērtību."
+        },
+        "shortcuts": {
+          "title": "Taustiņu īsinājumtaustiņi",
+          "description": "Pārvietojieties ātri ar meklēšanas un darbību īsinājumtaustiņiem, kas iebūvēti lietotāja saskarnē."
+        },
+        "mobileUx": {
+          "title": "Mobilā pirmā UX",
+          "description": "Apakšējā navigācija un reaģējoši izkārtojumi, kas jūtas kā vietējie."
+        },
+        "pwaInstall": {
+          "title": "PWA instalācija",
+          "description": "Instalējiet kā lietotni un turpiniet pat ar nepastāvīgu internetu."
+        }
+      }
+    },
+    "pricingSection": {
+      "recommended": "Ieteicams",
+      "productName": "Vietējais protokols",
+      "productDescription": "Pilnīga budžeta pieredze, kas darbojas pilnībā jūsu ierīcē.",
+      "whyChoose": "Kāpēc izvēlēties Vietējo protokolu?",
+      "whyChooseDescription": "Skatiet, kā mēs salīdzinām ar mākoņu gigantiem.",
+      "features": "Ietver neierobežotas transakcijas, kontus, budžetus un pilnīgas vietējās dublēšanas iespējas."
+    },
+    "heroSection": {
+      "cta": {
+        "heading": "Izveidots skaidrībai, nevis haosam.",
+        "viewPricing": "Skatīt cenas"
+      },
+      "badges": {
+        "noSubscriptions": "Nav abonementu",
+        "offlineReady": "Gatavs bezsaistē",
+        "seniorsMode": "Senioru režīms"
+      },
+      "preview": {
+        "livePreview": "Tiešraides priekšskatījums",
+        "recentTransactions": "Jaunākās transakcijas",
+        "categoryBudgets": "Kategoriju budžeti",
+        "recurring": "Atkārtoti"
+      },
+      "modes": {
+        "dashboard": "Vadības panelis",
+        "budgets": "Budžeti",
+        "subscriptions": "Abonementi"
+      }
+    },
+    "featuresDeepDive": {
+      "heading1": "Izklādes jauda.",
+      "heading2": "Lietotnes vienkāršība.",
+      "description": "Pārtrauciet cīnīties ar salauztām formulām. Iegūstiet manuālās kontroles elastību ar mūsdienu lietotnes ātrumu.",
+      "cta": "Sākt bezmaksas izmēģinājumu",
+      "explore": "Izpētīt"
+    },
+    "accessibility": {
+      "title": "Piekļuve pēc noklusējuma",
+      "description": "Senioru režīms nodrošina vienkāršotu navigāciju un lielākus skārienmērķus. Taustiņu īsinājumtaustiņi, fokusa stāvokļi un skaidra kontrasta palīdz visiem pārvietoties ātrāk.",
+      "badges": {
+        "seniorsMode": "Senioru režīms",
+        "largeTouchTargets": "Lieli skārienmērķi",
+        "keyboardFirst": "Taustiņu pirmā"
+      },
+      "buttons": {
+        "openApp": "Atvērt lietotni",
+        "settings": "Piekļuves iestatījumi"
+      }
+    },
+    "faqSection": {
+      "title": "Biežāk uzdotie jautājumi",
+      "description": "Vienkāršas atbildes uz biežāk uzdotajiem jautājumiem par izmēģinājumiem, cenām un piekļuvi."
+    },
+    "outcomesSection": {
+      "title": "Izveidots reālai dzīvei, nevis izklādes",
+      "description": "Lielākā daļa budžeta lietotņu liek jums strādāt. BudgetPro ir izstrādāts, lai samazinātu berzi, vienlaikus saglabājot kontroli."
+    },
+    "howItWorksSection": {
+      "title": "Kā tas darbojas",
+      "description": "Darba plūsma, kas ātri sasniedz skaidrību, neieslēdzot jūs sarežģītā sistēmā."
+    },
+    "nav": {
+      "tagline": "Premium budžetēšana"
+    },
+    "marquee": {
+      "logos": [
+        "Budžetēšana",
+        "Abonementi",
+        "Aizdevumi",
+        "OCR Čeki",
+        "Pārskati",
+        "Plānošana",
+        "Bezsaistē",
+        "Senioru režīms"
+      ]
     }
   }
 }

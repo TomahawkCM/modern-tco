@@ -16,13 +16,13 @@
   "actions": {
     "addTransaction": "Thêm giao dịch",
     "importData": "Nhập dữ liệu",
-    "import": "Nhập",
+    "import": "Nhập khẩu",
     "editDashboard": "Chỉnh sửa bảng điều khiển",
     "saveChanges": "Lưu thay đổi",
     "resetDefaults": "Đặt lại mặc định"
   },
   "welcome": {
-    "title": "Chào mừng đến với ứng dụng Ngân sách",
+    "title": "Chào mừng đến với Budget App",
     "subtitle": "Bắt đầu bằng cách thêm giao dịch đầu tiên hoặc nhập dữ liệu từ ngân hàng của bạn"
   },
   "common": {
@@ -43,11 +43,11 @@
     },
     "budgetProgress": {
       "title": "Tiến độ ngân sách",
-      "description": "Theo dõi tình hình của bạn so với mục tiêu ngân sách"
+      "description": "Theo dõi cách bạn thực hiện so với mục tiêu ngân sách"
     },
     "accountBalances": {
       "title": "Số dư tài khoản",
-      "description": "Số dư hiện tại trên tất cả các tài khoản của bạn"
+      "description": "Số dư hiện tại trên tất cả tài khoản của bạn"
     },
     "incomeVsExpenses": {
       "title": "Thu nhập so với Chi phí",
@@ -55,11 +55,391 @@
     },
     "monthlyTrends": {
       "title": "Xu hướng hàng tháng",
-      "description": "Hình dung các mẫu tài chính của bạn theo từng tháng"
+      "description": "Hình dung các mẫu tài chính của bạn hàng tháng"
     },
     "upcomingBills": {
       "title": "Hóa đơn sắp tới",
       "description": "Không bao giờ bỏ lỡ một khoản thanh toán với nhắc nhở hóa đơn"
+    }
+  },
+  "tooltip": {
+    "ariaLabel": "Thêm thông tin",
+    "learnMore": "Tìm hiểu thêm →"
+  },
+  "footer": {
+    "tagline": "Ngân sách cao cấp với một lần nâng cấp.",
+    "links": {
+      "login": "Đăng nhập",
+      "signup": "Bắt đầu dùng thử",
+      "upgrade": "Nâng cấp",
+      "settings": "Cài đặt"
+    },
+    "copyright": "© {year} {brandName}"
+  },
+  "dialog": {
+    "confirm": "Xác nhận",
+    "cancel": "Hủy",
+    "processing": "Đang xử lý...",
+    "finalConfirmation": "Xác nhận cuối cùng:",
+    "typeToConfirm": "Gõ {text} để xác nhận hành động này."
+  },
+  "sidebar": {
+    "appTitle": "Budget App",
+    "appSubtitle": "Tài chính cao cấp",
+    "search": "Tìm kiếm...",
+    "shortcuts": "Phím tắt",
+    "navigation": {
+      "dashboard": "Bảng điều khiển",
+      "transactions": "Giao dịch",
+      "scanReceipt": "Quét hóa đơn",
+      "categories": "Danh mục",
+      "budgets": "Ngân sách",
+      "subscriptions": "Đăng ký",
+      "loans": "Khoản vay",
+      "investments": "Đầu tư",
+      "futurePlans": "Kế hoạch tương lai",
+      "retirement": "Hưu trí",
+      "reports": "Báo cáo"
+    },
+    "actions": {
+      "importCsv": "Nhập CSV",
+      "settings": "Cài đặt",
+      "showLess": "Hiển thị ít hơn",
+      "showAllItems": "Hiển thị tất cả mục"
+    }
+  },
+  "onboarding": {
+    "skipTour": "Bỏ qua tour",
+    "stepCounter": "Bước {current} của {total}",
+    "dontShowAgain": "Không hiển thị tour này nữa",
+    "quickTip": "💡 Mẹo nhanh",
+    "navigation": {
+      "previous": "Trước",
+      "next": "Tiếp theo",
+      "getStarted": "Bắt đầu",
+      "startTour": "Bắt đầu tour"
+    },
+    "steps": {
+      "welcome": {
+        "title": "👋 Chào mừng đến với Budget App!",
+        "description": "Hãy cùng tham gia một tour nhanh để giúp bạn bắt đầu quản lý tài chính gia đình. Điều này sẽ không mất nhiều thời gian!"
+      },
+      "import": {
+        "title": "📥 Nhập giao dịch của bạn",
+        "description": "Bắt đầu bằng cách nhập giao dịch ngân hàng của bạn từ tệp CSV. Chúng tôi hỗ trợ BMO, Home Trust và nhiều ngân hàng khác. Ứng dụng sẽ tự động phân loại giao dịch của bạn!"
+      },
+      "categorize": {
+        "title": "🏷️ Phân loại & Tổ chức",
+        "description": "Xem xét và điều chỉnh các danh mục giao dịch. Phân loại thông minh của chúng tôi học từ các chỉnh sửa của bạn để cải thiện theo thời gian. Sử dụng các hành động hàng loạt để phân loại nhiều giao dịch cùng một lúc!"
+      },
+      "budgets": {
+        "title": "🎯 Đặt ngân sách của bạn",
+        "description": "Tạo ngân sách cho các danh mục chi tiêu khác nhau. Theo dõi tiến độ của bạn trong suốt tháng và nhận thông báo khi bạn gần đạt giới hạn."
+      },
+      "reports": {
+        "title": "📊 Xem báo cáo & Thông tin",
+        "description": "Hình dung các mẫu chi tiêu của bạn, theo dõi giá trị tài sản ròng và đưa ra quyết định tài chính thông minh. Bảng điều khiển của bạn sẽ tự động cập nhật với mỗi giao dịch!"
+      }
+    },
+    "tips": {
+      "import": "Kéo & thả tệp CSV của bạn hoặc nhấp để duyệt. Chúng tôi tự động phát hiện định dạng BMO và Home Trust!",
+      "categorize": "Sử dụng nút phân loại nhanh hoặc chọn nhiều giao dịch để phân loại hàng loạt.",
+      "budgets": "Đặt ngân sách thực tế và chúng tôi sẽ thông báo cho bạn nếu bạn có nguy cơ vượt quá chi tiêu."
+    }
+  },
+  "landing": {
+    "brand": {
+      "name": "BudgetPro",
+      "product": "Budget App"
+    },
+    "hero": {
+      "badge": "Bảo mật trước • Chỉ địa phương • Không theo dõi",
+      "headline": "Quản lý tiền của bạn mà không phải bán dữ liệu của bạn.",
+      "subhead": "Sức mạnh của bảng tính. Sự đơn giản của một ứng dụng. Trải nghiệm sự rõ ràng tài chính với ứng dụng ngân sách duy nhất đảm bảo dữ liệu của bạn không bao giờ rời khỏi thiết bị của bạn.",
+      "primaryCta": {
+        "label": "Bắt đầu Giao thức Địa phương (Miễn phí)",
+        "href": "/budget-app/auth/signup"
+      },
+      "secondaryCta": {
+        "label": "Đăng nhập",
+        "href": "/budget-app/auth/login"
+      },
+      "finePrint": "Không cần thông tin ngân hàng. Không cần tài khoản cho chế độ địa phương."
+    },
+    "trust": {
+      "0": {
+        "title": "Thiết bị của bạn, Dữ liệu của bạn",
+        "description": "Dữ liệu ở lại trong IndexedDB của trình duyệt của bạn. Chúng tôi thực sự không thể nhìn thấy nó."
+      },
+      "1": {
+        "title": "Sức mạnh của Bảng tính",
+        "description": "Chỉnh sửa hàng loạt, xoay chuyển và phân tích như một chuyên gia mà không gặp rắc rối với công thức."
+      },
+      "2": {
+        "title": "Tốc độ Ngoại tuyến",
+        "description": "Không có độ trễ. Hoạt động trên đỉnh núi hoặc trong đường hầm tàu điện ngầm."
+      },
+      "3": {
+        "title": "Nghi thức Thủ công",
+        "description": "Trình hướng dẫn nhập khẩu giúp việc xem xét tiền vào thứ Sáu trở thành một thói quen thú vị."
+      }
+    },
+    "outcomes": {
+      "0": {
+        "title": "Ngừng chiến đấu với các Aggregator",
+        "description": "Không còn kết nối bị hỏng hoặc vòng lặp xác thực lại. Bạn kiểm soát đầu vào dữ liệu."
+      },
+      "1": {
+        "title": "Bảo mật theo thiết kế",
+        "description": "Chúng tôi không bán dữ liệu của bạn vì chúng tôi không có nó. Thế thôi."
+      },
+      "2": {
+        "title": "Kế hoạch Bền vững",
+        "description": "Mô hình hưu trí, thanh toán khoản vay và mục tiêu tiết kiệm trong một cái nhìn tích hợp."
+      },
+      "3": {
+        "title": "Giết Đăng ký",
+        "description": "Phát hiện những khoản chi tiêu định kỳ mà các ứng dụng khác bỏ lỡ."
+      }
+    },
+    "features": {
+      "0": {
+        "title": "Bảng điều khiển Địa phương",
+        "description": "Giá trị tài sản ròng, dòng tiền và phân tích danh mục. Thời gian tải tức thì.",
+        "href": "/budget-app"
+      },
+      "1": {
+        "title": "Trình hướng dẫn Nhập khẩu",
+        "description": "Bản đồ CSV thông minh cho BMO, Home Trust và các định dạng tùy chỉnh có thể tùy chỉnh.",
+        "href": "/budget-app/import"
+      },
+      "2": {
+        "title": "OCR Hóa đơn",
+        "description": "Quét hóa đơn cục bộ với Tesseract.js. Không xử lý đám mây.",
+        "href": "/budget-app/ocr"
+      },
+      "3": {
+        "title": "Ngân sách Danh mục",
+        "description": "Ngân sách dựa trên số không hoặc chuyển tiếp với kiểm soát danh mục chi tiết.",
+        "href": "/budget-app/budgets"
+      },
+      "4": {
+        "title": "Máy tính Hưu trí",
+        "description": "Dự đoán ngày tự do của bạn với hình ảnh lãi suất kép.",
+        "href": "/budget-app/planning/retirement"
+      },
+      "5": {
+        "title": "Bảo vệ Bảo mật",
+        "description": "Mã hóa phía khách hàng tùy chọn cho một lớp bảo mật bổ sung.",
+        "href": "/budget-app/settings"
+      }
+    },
+    "howItWorks": {
+      "0": {
+        "title": "Nhập khẩu",
+        "description": "Kéo & thả CSV hoặc quét hóa đơn. AI sẽ ánh xạ các cột cục bộ."
+      },
+      "1": {
+        "title": "Xem xét",
+        "description": "Phân loại nhanh với các quy tắc thông minh và hành động hàng loạt."
+      },
+      "2": {
+        "title": "Lập kế hoạch",
+        "description": "Gán mỗi đô la một công việc và dự đoán giá trị tài sản ròng tương lai của bạn."
+      }
+    },
+    "pricing": {
+      "eyebrow": "Giá cả hợp lý",
+      "title": "Địa phương là Miễn phí. Đồng bộ là Chuyên nghiệp.",
+      "description": "Bắt đầu với Giao thức Địa phương mạnh mẽ. Nâng cấp sau nếu bạn cần đồng bộ nhiều thiết bị.",
+      "priceLabel": "Miễn phí mãi mãi",
+      "cta": {
+        "label": "Bắt đầu Giao thức Địa phương",
+        "href": "/budget-app/auth/signup"
+      },
+      "secondary": {
+        "label": "Xem Tính năng Chuyên nghiệp",
+        "href": "#pricing"
+      },
+      "guarantee": "Không cần thẻ tín dụng cho Giao thức Địa phương."
+    },
+    "faq": {
+      "0": {
+        "q": "Dữ liệu của tôi có thực sự riêng tư không?",
+        "a": "Có. Trong Giao thức Địa phương, dữ liệu không bao giờ rời khỏi thiết bị của bạn. Nó sống trong IndexedDB trong trình duyệt của bạn."
+      },
+      "1": {
+        "q": "Làm thế nào để tôi sao lưu dữ liệu của mình?",
+        "a": "Bạn có thể xuất một bản sao lưu JSON đầy đủ bất cứ lúc nào. Chúng tôi cũng khuyên bạn nên xuất CSV thường xuyên."
+      },
+      "2": {
+        "q": "Gì là 'Đồng bộ' Chuyên nghiệp?",
+        "a": "Sắp ra mắt: Một đăng ký tùy chọn để đồng bộ hóa dữ liệu mã hóa giữa các thiết bị qua Supabase."
+      },
+      "3": {
+        "q": "Bạn có kết nối với ngân hàng không?",
+        "a": "Không. Chúng tôi tin rằng việc nhập thủ công an toàn hơn, đáng tin cậy hơn và xây dựng nhận thức tài chính tốt hơn."
+      }
+    },
+    "security": {
+      "title": "Bảo mật trước theo thiết kế",
+      "description": "Budget App lưu trữ dữ liệu của bạn cục bộ (sẵn sàng ngoại tuyến) và cung cấp cho bạn các điều khiển cho các tính năng AI, xuất khẩu và xóa dữ liệu.",
+      "buttons": {
+        "privacy": "Bảo mật & cài đặt",
+        "offline": "Hỗ trợ ngoại tuyến"
+      },
+      "cards": {
+        "localStorage": {
+          "title": "Lưu trữ cục bộ",
+          "description": "Dữ liệu ngân sách của bạn được lưu trữ trong trình duyệt của bạn (IndexedDB) để ứng dụng luôn nhanh và sử dụng được ngoại tuyến."
+        },
+        "encryption": {
+          "title": "Hỗ trợ mã hóa",
+          "description": "Ứng dụng bao gồm một lớp mã hóa để bảo vệ các hồ sơ ngân sách nhạy cảm khi được kích hoạt."
+        },
+        "aiControls": {
+          "title": "Điều khiển tính năng AI",
+          "description": "Bật/tắt các tính năng AI (như phát hiện bất thường) và quản lý quyền truy cập chatbot từ cài đặt."
+        },
+        "exportDelete": {
+          "title": "Xuất & xóa",
+          "description": "Xuất dữ liệu và cài đặt bảo mật của bạn, hoặc xóa dữ liệu cục bộ trực tiếp từ ứng dụng."
+        }
+      }
+    },
+    "comparison": {
+      "headers": {
+        "feature": "Tính năng",
+        "local": "BudgetPro Địa phương",
+        "sync": "BudgetPro Đồng bộ (Chuyên nghiệp)",
+        "cloud": "Ứng dụng Đám mây Thông thường"
+      },
+      "dataPrivacy": {
+        "feature": "Bảo mật Dữ liệu",
+        "local": "100% Riêng tư (Cục bộ)",
+        "sync": "Mã hóa Đầu-cuối",
+        "cloud": "Có thể xem bởi Nhân viên"
+      },
+      "cost": {
+        "feature": "Chi phí",
+        "local": "Miễn phí mãi mãi",
+        "sync": "Nâng cấp một lần",
+        "cloud": "$100+/năm Đăng ký"
+      },
+      "offlineMode": {
+        "feature": "Chế độ Ngoại tuyến"
+      },
+      "bankConnections": {
+        "feature": "Kết nối Ngân hàng",
+        "local": "CSV / Chỉ Thủ công",
+        "sync": "Tùy chọn (Mã hóa)",
+        "cloud": "Tập hợp Bắt buộc"
+      },
+      "storageLocation": {
+        "feature": "Vị trí Lưu trữ",
+        "local": "Thiết bị của bạn",
+        "sync": "Đám mây Không biết",
+        "cloud": "Cơ sở dữ liệu của họ"
+      }
+    },
+    "socialProof": {
+      "title": "Độ bóng cao cấp, được tích hợp sẵn",
+      "description": "Các chi tiết giúp ngân sách trở nên hiệu quả: hướng dẫn, phím tắt, điều hướng di động và hiệu suất sẵn sàng ngoại tuyến.",
+      "features": {
+        "onboarding": {
+          "title": "Tour hướng dẫn",
+          "description": "Một tour hướng dẫn giúp người dùng mới nhanh chóng đạt được giá trị."
+        },
+        "shortcuts": {
+          "title": "Phím tắt bàn phím",
+          "description": "Di chuyển nhanh với tìm kiếm và phím tắt hành động được tích hợp trong giao diện."
+        },
+        "mobileUx": {
+          "title": "UX ưu tiên di động",
+          "description": "Điều hướng dưới cùng và bố cục đáp ứng cảm giác tự nhiên."
+        },
+        "pwaInstall": {
+          "title": "Cài đặt PWA",
+          "description": "Cài đặt như một ứng dụng và tiếp tục ngay cả khi internet không ổn định."
+        }
+      }
+    },
+    "pricingSection": {
+      "recommended": "Được khuyến nghị",
+      "productName": "Giao thức Địa phương",
+      "productDescription": "Trải nghiệm ngân sách hoàn chỉnh, hoàn toàn chạy trên thiết bị của bạn.",
+      "whyChoose": "Tại sao chọn Giao thức Địa phương?",
+      "whyChooseDescription": "Xem cách chúng tôi so sánh với các gã khổng lồ đám mây.",
+      "features": "Bao gồm giao dịch không giới hạn, tài khoản, ngân sách và khả năng sao lưu cục bộ đầy đủ."
+    },
+    "heroSection": {
+      "cta": {
+        "heading": "Xây dựng cho sự rõ ràng, không phải hỗn loạn.",
+        "viewPricing": "Xem giá cả"
+      },
+      "badges": {
+        "noSubscriptions": "Không có đăng ký",
+        "offlineReady": "Sẵn sàng ngoại tuyến",
+        "seniorsMode": "Chế độ Người cao tuổi"
+      },
+      "preview": {
+        "livePreview": "Xem trước trực tiếp",
+        "recentTransactions": "Giao dịch gần đây",
+        "categoryBudgets": "Ngân sách danh mục",
+        "recurring": "Định kỳ"
+      },
+      "modes": {
+        "dashboard": "Bảng điều khiển",
+        "budgets": "Ngân sách",
+        "subscriptions": "Đăng ký"
+      }
+    },
+    "featuresDeepDive": {
+      "heading1": "Sức mạnh của Bảng tính.",
+      "heading2": "Sự đơn giản của Ứng dụng.",
+      "description": "Ngừng chiến đấu với các công thức bị hỏng. Nhận sự linh hoạt của kiểm soát thủ công với tốc độ của một ứng dụng hiện đại.",
+      "cta": "Bắt đầu dùng thử miễn phí",
+      "explore": "Khám phá"
+    },
+    "accessibility": {
+      "title": "Có thể truy cập theo mặc định",
+      "description": "Chế độ Người cao tuổi cung cấp điều hướng đơn giản và các mục chạm lớn hơn. Phím tắt bàn phím, trạng thái tập trung và độ tương phản rõ ràng giúp mọi người di chuyển nhanh hơn.",
+      "badges": {
+        "seniorsMode": "Chế độ Người cao tuổi",
+        "largeTouchTargets": "Mục chạm lớn",
+        "keyboardFirst": "Ưu tiên bàn phím"
+      },
+      "buttons": {
+        "openApp": "Mở ứng dụng",
+        "settings": "Cài đặt truy cập"
+      }
+    },
+    "faqSection": {
+      "title": "Câu hỏi thường gặp",
+      "description": "Các câu trả lời đơn giản cho các câu hỏi thường gặp về dùng thử, giá cả và truy cập."
+    },
+    "outcomesSection": {
+      "title": "Xây dựng cho cuộc sống thực, không phải bảng tính",
+      "description": "Hầu hết các ứng dụng ngân sách yêu cầu bạn làm việc. BudgetPro được thiết kế để giảm ma sát trong khi giữ cho bạn kiểm soát."
+    },
+    "howItWorksSection": {
+      "title": "Cách thức hoạt động",
+      "description": "Một quy trình làm việc giúp bạn nhanh chóng đạt được sự rõ ràng, mà không khóa bạn vào một hệ thống phức tạp."
+    },
+    "nav": {
+      "tagline": "Ngân sách cao cấp"
+    },
+    "marquee": {
+      "logos": [
+        "Ngân sách",
+        "Đăng ký",
+        "Khoản vay",
+        "Hóa đơn OCR",
+        "Báo cáo",
+        "Lập kế hoạch",
+        "Ngoại tuyến",
+        "Chế độ Người cao tuổi"
+      ]
     }
   }
 }

@@ -19,16 +19,16 @@
     "import": "Importar",
     "editDashboard": "Editar Tauler",
     "saveChanges": "Desar Canvis",
-    "resetDefaults": "Restablir per Defecte"
+    "resetDefaults": "Restablir a Predeterminats"
   },
   "welcome": {
     "title": "Benvingut a l'App de Pressupost",
-    "subtitle": "Comença afegint la teva primera transacció o importan dades del teu banc"
+    "subtitle": "Comença afegint la teva primera transacció o important dades del teu banc"
   },
   "common": {
     "save": "Desar",
     "cancel": "Cancel·lar",
-    "delete": "Esborrar",
+    "delete": "Eliminar",
     "edit": "Editar",
     "loading": "Carregant..."
   },
@@ -43,11 +43,11 @@
     },
     "budgetProgress": {
       "title": "Progrés del Pressupost",
-      "description": "Segueix com vas amb els teus objectius de pressupost"
+      "description": "Segueix com vas en relació als teus objectius de pressupost"
     },
     "accountBalances": {
       "title": "Saldos dels Comptes",
-      "description": "Saldos actuals de tots els teus comptes"
+      "description": "Saldos actuals a tots els teus comptes"
     },
     "incomeVsExpenses": {
       "title": "Ingressos vs Despeses",
@@ -59,7 +59,387 @@
     },
     "upcomingBills": {
       "title": "Factures Properes",
-      "description": "Mai et perdis un pagament amb recordatoris de factures"
+      "description": "Mai perdis un pagament amb recordatoris de factures"
+    }
+  },
+  "tooltip": {
+    "ariaLabel": "Més informació",
+    "learnMore": "Aprèn més →"
+  },
+  "footer": {
+    "tagline": "Pressupost premium amb una actualització única.",
+    "links": {
+      "login": "Iniciar sessió",
+      "signup": "Començar prova",
+      "upgrade": "Actualitzar",
+      "settings": "Configuració"
+    },
+    "copyright": "© {year} {brandName}"
+  },
+  "dialog": {
+    "confirm": "Confirmar",
+    "cancel": "Cancel·lar",
+    "processing": "Processant...",
+    "finalConfirmation": "Confirmació Final:",
+    "typeToConfirm": "Escriu {text} per confirmar aquesta acció."
+  },
+  "sidebar": {
+    "appTitle": "App de Pressupost",
+    "appSubtitle": "Finances Premium",
+    "search": "Cerca...",
+    "shortcuts": "Drecers",
+    "navigation": {
+      "dashboard": "Tauler",
+      "transactions": "Transaccions",
+      "scanReceipt": "Escanejar Rebuts",
+      "categories": "Categories",
+      "budgets": "Pressupostos",
+      "subscriptions": "Subscripcions",
+      "loans": "Préstecs",
+      "investments": "Inversions",
+      "futurePlans": "Plans Futurs",
+      "retirement": "Jubilació",
+      "reports": "Informes"
+    },
+    "actions": {
+      "importCsv": "Importar CSV",
+      "settings": "Configuració",
+      "showLess": "Mostrar Menys",
+      "showAllItems": "Mostrar Tots els Articles"
+    }
+  },
+  "onboarding": {
+    "skipTour": "Saltar el tour",
+    "stepCounter": "Pas {current} de {total}",
+    "dontShowAgain": "No mostrar aquest tour de nou",
+    "quickTip": "💡 Consell Ràpid",
+    "navigation": {
+      "previous": "Anterior",
+      "next": "Següent",
+      "getStarted": "Començar",
+      "startTour": "Iniciar Tour"
+    },
+    "steps": {
+      "welcome": {
+        "title": "👋 Benvingut a l'App de Pressupost!",
+        "description": "Fem un ràpid tour per ajudar-te a gestionar les teves finances domèstiques. No trigarà gaire!"
+      },
+      "import": {
+        "title": "📥 Importa les Teves Transaccions",
+        "description": "Comença importat les teves transaccions bancàries d'un fitxer CSV. Donem suport a BMO, Home Trust i molts altres bancs. L'app categoritzarà automàticament les teves transaccions!"
+      },
+      "categorize": {
+        "title": "🏷️ Classifica i Organitza",
+        "description": "Revisa i ajusta les categories de les transaccions. La nostra classificació intel·ligent aprèn de les teves correccions per millorar amb el temps. Utilitza accions en massa per classificar diverses transaccions alhora!"
+      },
+      "budgets": {
+        "title": "🎯 Estableix els Teus Pressupostos",
+        "description": "Crea pressupostos per a diferents categories de despesa. Segueix el teu progrés al llarg del mes i rep alertes quan s'acostis als teus límits."
+      },
+      "reports": {
+        "title": "📊 Visualitza Informes i Perspectives",
+        "description": "Visualitza els teus patrons de despesa, segueix el teu patrimoni net i pren decisions financeres informades. El teu tauler s'actualitza automàticament amb cada transacció!"
+      }
+    },
+    "tips": {
+      "import": "Arrossega i deixa caure el teu fitxer CSV o fes clic per cercar. Detectem automàticament els formats de BMO i Home Trust!",
+      "categorize": "Utilitza el botó de classificació ràpida o selecciona diverses transaccions per a la classificació en massa.",
+      "budgets": "Estableix pressupostos realistes i t'alertarem si estàs a punt de sobrepassar-los."
+    }
+  },
+  "landing": {
+    "brand": {
+      "name": "BudgetPro",
+      "product": "App de Pressupost"
+    },
+    "hero": {
+      "badge": "Privadesa Primer • Només Local • Zero Seguiment",
+      "headline": "Domina els Teus Diners sense Vendre les Teves Dades.",
+      "subhead": "El poder d'una fulla de càlcul. La simplicitat d'una app. Experimenta la claredat financera amb l'única app de pressupost que garanteix que les teves dades mai deixen el teu dispositiu.",
+      "primaryCta": {
+        "label": "Iniciar Protocol Local (Gratuït)",
+        "href": "/budget-app/auth/signup"
+      },
+      "secondaryCta": {
+        "label": "Iniciar sessió",
+        "href": "/budget-app/auth/login"
+      },
+      "finePrint": "No es requereixen credencials bancàries. No es necessita compte per al mode local."
+    },
+    "trust": {
+      "0": {
+        "title": "El Teu Dispositiu, Les Teves Dades",
+        "description": "Les dades es queden a l'IndexedDB del teu navegador. Literalment no podem veure-ho."
+      },
+      "1": {
+        "title": "Poder de Fulla de Càlcul",
+        "description": "Edició en massa, pivotar i analitzar com un professional sense els mals de cap de les fórmules."
+      },
+      "2": {
+        "title": "Velocitat Offline",
+        "description": "Zero latència. Funciona en un cim de muntanya o en un túnel de metro."
+      },
+      "3": {
+        "title": "Rituals Manuals",
+        "description": "L'assistent d'importació fa que la Revisió de Diners del divendres sigui un hàbit satisfactori."
+      }
+    },
+    "outcomes": {
+      "0": {
+        "title": "Deixa de lluitar amb Agregadors",
+        "description": "No més connexions trencades o bucles de reautenticació. Tu controles la introducció de dades."
+      },
+      "1": {
+        "title": "Privadesa per Disseny",
+        "description": "No venem les teves dades perquè no les tenim. Punt."
+      },
+      "2": {
+        "title": "Planificació a Prova de Futur",
+        "description": "Modela la jubilació, pagaments de préstecs i objectius d'estalvi en una vista integrada."
+      },
+      "3": {
+        "title": "Eliminador de Subscripcions",
+        "description": "Detecta drenatges recurrents a la teva cartera que altres apps perden."
+      }
+    },
+    "features": {
+      "0": {
+        "title": "Tauler Local",
+        "description": "Patrimoni net, flux de caixa i desglossament per categories. Temps de càrrega instantanis.",
+        "href": "/budget-app"
+      },
+      "1": {
+        "title": "Assistència d'Importació",
+        "description": "Mapper CSV intel·ligent per a BMO, Home Trust i formats personalitzables.",
+        "href": "/budget-app/import"
+      },
+      "2": {
+        "title": "OCR de Rebuts",
+        "description": "Escaneja rebuts localment amb Tesseract.js. Sense processament al núvol.",
+        "href": "/budget-app/ocr"
+      },
+      "3": {
+        "title": "Pressupostos per Categoria",
+        "description": "Pressupostació basada en zero o acumulativa amb control granular de categories.",
+        "href": "/budget-app/budgets"
+      },
+      "4": {
+        "title": "Calculadora de Jubilació",
+        "description": "Projecta la teva data de llibertat amb visualitzacions d'interès compost.",
+        "href": "/budget-app/planning/retirement"
+      },
+      "5": {
+        "title": "Escut de Privadesa",
+        "description": "Cifrat opcional del costat del client per una capa addicional de seguretat.",
+        "href": "/budget-app/settings"
+      }
+    },
+    "howItWorks": {
+      "0": {
+        "title": "Importar",
+        "description": "Arrossega i deixa caure CSVs o escaneja rebuts. La IA mapeja les columnes localment."
+      },
+      "1": {
+        "title": "Revisar",
+        "description": "Classificació ràpida amb regles intel·ligents i accions en massa."
+      },
+      "2": {
+        "title": "Planificar",
+        "description": "Assigna a cada euro una feina i preveu el teu patrimoni net futur."
+      }
+    },
+    "pricing": {
+      "eyebrow": "Preus Justos",
+      "title": "Local és Gratuït. Sincronització és Pro.",
+      "description": "Comença amb el potent Protocol Local. Actualitza més tard si necessites sincronització entre dispositius.",
+      "priceLabel": "Gratuït per Sempre",
+      "cta": {
+        "label": "Iniciar Protocol Local",
+        "href": "/budget-app/auth/signup"
+      },
+      "secondary": {
+        "label": "Veure Funcions Pro",
+        "href": "#pricing"
+      },
+      "guarantee": "No es requereix targeta de crèdit per al Protocol Local."
+    },
+    "faq": {
+      "0": {
+        "q": "Les meves dades són realment privades?",
+        "a": "Sí. En el Protocol Local, les dades mai deixen el teu dispositiu. Es queden a l'IndexedDB dins del teu navegador."
+      },
+      "1": {
+        "q": "Com puc fer còpia de seguretat de les meves dades?",
+        "a": "Pots exportar una còpia de seguretat completa en JSON en qualsevol moment. També recomanem exportacions regulars en CSV."
+      },
+      "2": {
+        "q": "Què és 'Sincronització' Pro?",
+        "a": "Properament: Una subscripció opcional per sincronitzar dades xifrades entre dispositius a través de Supabase."
+      },
+      "3": {
+        "q": "Us connecteu als bancs?",
+        "a": "No. Creiem que la importació manual és més segura, més fiable i construeix una millor consciència financera."
+      }
+    },
+    "security": {
+      "title": "Privadesa primer per disseny",
+      "description": "L'App de Pressupost emmagatzema les teves dades localment (preparat per offline) i et dóna controls per a funcions d'IA, exportació i eliminació.",
+      "buttons": {
+        "privacy": "Privadesa i configuració",
+        "offline": "Suport offline"
+      },
+      "cards": {
+        "localStorage": {
+          "title": "Emmagatzematge Local",
+          "description": "Les teves dades de pressupost es guarden al teu navegador (IndexedDB) perquè l'app es mantingui ràpida i usable offline."
+        },
+        "encryption": {
+          "title": "Suport de Cifrat",
+          "description": "L'app inclou una capa de xifrat per protegir registres de pressupost sensibles quan s'habilita."
+        },
+        "aiControls": {
+          "title": "Controls de funcions d'IA",
+          "description": "Activa funcions impulsades per IA (com la detecció d'anomalies) i gestiona l'accés al xatbot des de la configuració."
+        },
+        "exportDelete": {
+          "title": "Exportar i eliminar",
+          "description": "Exporta les teves dades i configuracions de privadesa, o elimina dades locals directament des de l'app."
+        }
+      }
+    },
+    "comparison": {
+      "headers": {
+        "feature": "Funció",
+        "local": "BudgetPro Local",
+        "sync": "BudgetPro Sync (Pro)",
+        "cloud": "App Típica al Núvol"
+      },
+      "dataPrivacy": {
+        "feature": "Privadesa de Dades",
+        "local": "100% Privat (Local)",
+        "sync": "Xifrat de Punt a Punt",
+        "cloud": "Visible per Empleats"
+      },
+      "cost": {
+        "feature": "Cost",
+        "local": "Gratuït per Sempre",
+        "sync": "Actualització Única",
+        "cloud": "$100+/any Subscripció"
+      },
+      "offlineMode": {
+        "feature": "Mode Offline"
+      },
+      "bankConnections": {
+        "feature": "Connexions Bancàries",
+        "local": "CSV / Només Manual",
+        "sync": "Opcional (Xifrat)",
+        "cloud": "Agregació Obligatòria"
+      },
+      "storageLocation": {
+        "feature": "Ubicació d'Emmagatzematge",
+        "local": "El Teu Dispositiu",
+        "sync": "Núvol Zero-Conèixer",
+        "cloud": "La seva Base de Dades"
+      }
+    },
+    "socialProof": {
+      "title": "Poliment Premium, integrat",
+      "description": "Els detalls que fan que el pressupost funcioni: integració, drecers, navegació mòbil i rendiment preparat per offline.",
+      "features": {
+        "onboarding": {
+          "title": "Tour d'Integració",
+          "description": "Un tour guiat ajuda els nous usuaris a obtenir valor ràpidament."
+        },
+        "shortcuts": {
+          "title": "Drecers de Teclat",
+          "description": "Mou-te ràpidament amb cerques i drecers d'acció integrats a la interfície."
+        },
+        "mobileUx": {
+          "title": "UX Mòbil Primer",
+          "description": "Navegació inferior i dissenys responsius que se senten natius."
+        },
+        "pwaInstall": {
+          "title": "Instal·lar PWA",
+          "description": "Instal·la com una app i continua fins i tot amb internet irregular."
+        }
+      }
+    },
+    "pricingSection": {
+      "recommended": "Recomanat",
+      "productName": "Protocol Local",
+      "productDescription": "L'experiència completa de pressupost, funcionant totalment al teu dispositiu.",
+      "whyChoose": "Per què triar el Protocol Local?",
+      "whyChooseDescription": "Veure com ens comparem amb els gegants del núvol.",
+      "features": "Inclou transaccions il·limitades, comptes, pressupostos i capacitats completes de còpia de seguretat local."
+    },
+    "heroSection": {
+      "cta": {
+        "heading": "Construït per a la claredat, no el caos.",
+        "viewPricing": "Veure preus"
+      },
+      "badges": {
+        "noSubscriptions": "Sense subscripcions",
+        "offlineReady": "Preparat per offline",
+        "seniorsMode": "Mode Seniors"
+      },
+      "preview": {
+        "livePreview": "Previsualització en viu",
+        "recentTransactions": "Transaccions recents",
+        "categoryBudgets": "Pressupostos per categoria",
+        "recurring": "Recurrents"
+      },
+      "modes": {
+        "dashboard": "Tauler",
+        "budgets": "Pressupostos",
+        "subscriptions": "Subscripcions"
+      }
+    },
+    "featuresDeepDive": {
+      "heading1": "Poder de Fulla de Càlcul.",
+      "heading2": "Simplicitat de l'App.",
+      "description": "Deixa de lluitar amb fórmules trencades. Obté la flexibilitat del control manual amb la velocitat d'una app moderna.",
+      "cta": "Inicia la prova gratuïta",
+      "explore": "Explora"
+    },
+    "accessibility": {
+      "title": "Accessible per defecte",
+      "description": "El Mode Seniors proporciona una navegació simplificada i objectius tàctils més grans. Drecers de teclat, estats de focus i contrast clar ajuden a tothom a moure's més ràpidament.",
+      "badges": {
+        "seniorsMode": "Mode Seniors",
+        "largeTouchTargets": "Objectius tàctils grans",
+        "keyboardFirst": "Teclat primer"
+      },
+      "buttons": {
+        "openApp": "Obrir l'app",
+        "settings": "Configuració d'accessibilitat"
+      }
+    },
+    "faqSection": {
+      "title": "FAQ",
+      "description": "Respostes simples a preguntes comunes sobre proves, preus i accés."
+    },
+    "outcomesSection": {
+      "title": "Construït per a la vida real, no per a fulles de càlcul",
+      "description": "La majoria de les apps de pressupost et fan fer la feina. BudgetPro està dissenyat per reduir la fricció mentre et manté al control."
+    },
+    "howItWorksSection": {
+      "title": "Com funciona",
+      "description": "Un flux de treball que et porta a la claredat ràpidament, sense bloquejar-te en un sistema complicat."
+    },
+    "nav": {
+      "tagline": "Pressupost Premium"
+    },
+    "marquee": {
+      "logos": [
+        "Pressupostació",
+        "Subscripcions",
+        "Préstecs",
+        "OCR de Rebuts",
+        "Informes",
+        "Planificació",
+        "Offline",
+        "Mode Seniors"
+      ]
     }
   }
 }

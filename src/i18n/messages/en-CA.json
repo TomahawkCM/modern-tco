@@ -61,5 +61,385 @@
       "title": "Upcoming Bills",
       "description": "Never miss a payment with bill reminders"
     }
+  },
+  "tooltip": {
+    "ariaLabel": "More information",
+    "learnMore": "Learn more →"
+  },
+  "footer": {
+    "tagline": "Premium budgeting with a one-time upgrade.",
+    "links": {
+      "login": "Log in",
+      "signup": "Start trial",
+      "upgrade": "Upgrade",
+      "settings": "Settings"
+    },
+    "copyright": "© {year} {brandName}"
+  },
+  "dialog": {
+    "confirm": "Confirm",
+    "cancel": "Cancel",
+    "processing": "Processing...",
+    "finalConfirmation": "Final Confirmation:",
+    "typeToConfirm": "Type {text} to confirm this action."
+  },
+  "sidebar": {
+    "appTitle": "Budget App",
+    "appSubtitle": "Premium Finance",
+    "search": "Search...",
+    "shortcuts": "Shortcuts",
+    "navigation": {
+      "dashboard": "Dashboard",
+      "transactions": "Transactions",
+      "scanReceipt": "Scan Receipt",
+      "categories": "Categories",
+      "budgets": "Budgets",
+      "subscriptions": "Subscriptions",
+      "loans": "Loans",
+      "investments": "Investments",
+      "futurePlans": "Future Plans",
+      "retirement": "Retirement",
+      "reports": "Reports"
+    },
+    "actions": {
+      "importCsv": "Import CSV",
+      "settings": "Settings",
+      "showLess": "Show Less",
+      "showAllItems": "Show All Items"
+    }
+  },
+  "onboarding": {
+    "skipTour": "Skip tour",
+    "stepCounter": "Step {current} of {total}",
+    "dontShowAgain": "Don't show this tour again",
+    "quickTip": "💡 Quick Tip",
+    "navigation": {
+      "previous": "Previous",
+      "next": "Next",
+      "getStarted": "Get Started",
+      "startTour": "Start Tour"
+    },
+    "steps": {
+      "welcome": {
+        "title": "👋 Welcome to Budget App!",
+        "description": "Let's take a quick tour to help you get started with managing your household finances. This won't take long!"
+      },
+      "import": {
+        "title": "📥 Import Your Transactions",
+        "description": "Start by importing your bank transactions from a CSV file. We support BMO, Home Trust, and many other banks. The app will automatically categorize your transactions!"
+      },
+      "categorize": {
+        "title": "🏷️ Categorize & Organize",
+        "description": "Review and adjust transaction categories. Our smart categorization learns from your corrections to improve over time. Use bulk actions to categorize multiple transactions at once!"
+      },
+      "budgets": {
+        "title": "🎯 Set Your Budgets",
+        "description": "Create budgets for different spending categories. Track your progress throughout the month and get alerts when you're approaching your limits."
+      },
+      "reports": {
+        "title": "📊 View Reports & Insights",
+        "description": "Visualize your spending patterns, track your net worth, and make informed financial decisions. Your dashboard updates automatically with every transaction!"
+      }
+    },
+    "tips": {
+      "import": "Drag & drop your CSV file or click to browse. We auto-detect BMO and Home Trust formats!",
+      "categorize": "Use the quick categorize button or select multiple transactions for bulk categorization.",
+      "budgets": "Set realistic budgets and we'll alert you if you're on track to overspend."
+    }
+  },
+  "landing": {
+    "brand": {
+      "name": "BudgetPro",
+      "product": "Budget App"
+    },
+    "hero": {
+      "badge": "Privacy-First • Local-Only • Zero Tracking",
+      "headline": "Master Your Money without Selling Your Data.",
+      "subhead": "The power of a spreadsheet. The simplicity of an app. Experience financial clarity with the only budget app that guarantees your data never leaves your device.",
+      "primaryCta": {
+        "label": "Start Local Protocol (Free)",
+        "href": "/budget-app/auth/signup"
+      },
+      "secondaryCta": {
+        "label": "Log in",
+        "href": "/budget-app/auth/login"
+      },
+      "finePrint": "No bank credentials required. No account needed for local mode."
+    },
+    "trust": {
+      "0": {
+        "title": "Your Device, Your Data",
+        "description": "Data stays in your browser's IndexedDB. We literally cannot see it."
+      },
+      "1": {
+        "title": "Spreadsheet Power",
+        "description": "Bulk edit, pivot, and analyze like a pro without the formula headaches."
+      },
+      "2": {
+        "title": "Offline Speed",
+        "description": "Zero latency. Works on a mountain top or in a subway tunnel."
+      },
+      "3": {
+        "title": "Manual Rituals",
+        "description": "Import wizard makes the Friday Money Review a satisfying habit."
+      }
+    },
+    "outcomes": {
+      "0": {
+        "title": "Stop Fighting Aggregators",
+        "description": "No more broken connections or re-auth loops. You control the data input."
+      },
+      "1": {
+        "title": "Privacy by Design",
+        "description": "We don't sell your data because we don't have it. Period."
+      },
+      "2": {
+        "title": "Future-Proof Planning",
+        "description": "Model retirement, loan payoffs, and savings goals in one integrated view."
+      },
+      "3": {
+        "title": "Subscription Killer",
+        "description": "Spot recurring drains on your wallet that other apps miss."
+      }
+    },
+    "features": {
+      "0": {
+        "title": "Local Dashboard",
+        "description": "Net worth, cash flow, and category breakdown. Instant load times.",
+        "href": "/budget-app"
+      },
+      "1": {
+        "title": "Import Wizard",
+        "description": "Smart CSV mapper for BMO, Home Trust, and customizable custom formats.",
+        "href": "/budget-app/import"
+      },
+      "2": {
+        "title": "Receipt OCR",
+        "description": "Scan receipts locally with Tesseract.js. No cloud processing.",
+        "href": "/budget-app/ocr"
+      },
+      "3": {
+        "title": "Category Budgets",
+        "description": "Zero-based or rollover budgeting with granular category control.",
+        "href": "/budget-app/budgets"
+      },
+      "4": {
+        "title": "Retirement Calculator",
+        "description": "Project your freedom date with compound interest visualizations.",
+        "href": "/budget-app/planning/retirement"
+      },
+      "5": {
+        "title": "Privacy Shield",
+        "description": "Optional client-side encryption for an extra layer of security.",
+        "href": "/budget-app/settings"
+      }
+    },
+    "howItWorks": {
+      "0": {
+        "title": "Import",
+        "description": "Drag & drop CSVs or scan receipts. AI maps the columns locally."
+      },
+      "1": {
+        "title": "Review",
+        "description": "Quick categorization with smart rules and bulk actions."
+      },
+      "2": {
+        "title": "Plan",
+        "description": "Assign every dollar a job and forecast your future net worth."
+      }
+    },
+    "pricing": {
+      "eyebrow": "Fair Pricing",
+      "title": "Local is Free. Sync is Pro.",
+      "description": "Start with the powerful Local Protocol. Upgrade later if you need multi-device sync.",
+      "priceLabel": "Free Forever",
+      "cta": {
+        "label": "Start Local Protocol",
+        "href": "/budget-app/auth/signup"
+      },
+      "secondary": {
+        "label": "View Pro Features",
+        "href": "#pricing"
+      },
+      "guarantee": "No credit card required for Local Protocol."
+    },
+    "faq": {
+      "0": {
+        "q": "Is my data really private?",
+        "a": "Yes. In Local Protocol, data never leaves your device. It lives in IndexedDB within your browser."
+      },
+      "1": {
+        "q": "How do I back up my data?",
+        "a": "You can export a full JSON backup at any time. We also recommend regular CSV exports."
+      },
+      "2": {
+        "q": "What is 'Sync' Pro?",
+        "a": "Coming soon: An optional subscription to sync encrypted data between devices via Supabase."
+      },
+      "3": {
+        "q": "Do you connect to banks?",
+        "a": "No. We believe manual import is safer, more reliable, and builds better financial awareness."
+      }
+    },
+    "security": {
+      "title": "Privacy-first by design",
+      "description": "The Budget App stores your data locally (offline-ready) and gives you controls for AI features, exporting, and deletion.",
+      "buttons": {
+        "privacy": "Privacy & settings",
+        "offline": "Offline support"
+      },
+      "cards": {
+        "localStorage": {
+          "title": "Local storage",
+          "description": "Your budget data is stored in your browser (IndexedDB) so the app stays fast and usable offline."
+        },
+        "encryption": {
+          "title": "Encryption support",
+          "description": "The app includes an encryption layer to protect sensitive budget records when enabled."
+        },
+        "aiControls": {
+          "title": "AI feature controls",
+          "description": "Toggle AI-powered features (like anomaly detection) and manage chatbot access from settings."
+        },
+        "exportDelete": {
+          "title": "Export & delete",
+          "description": "Export your data and privacy settings, or delete local data directly from the app."
+        }
+      }
+    },
+    "comparison": {
+      "headers": {
+        "feature": "Feature",
+        "local": "BudgetPro Local",
+        "sync": "BudgetPro Sync (Pro)",
+        "cloud": "Typical Cloud App"
+      },
+      "dataPrivacy": {
+        "feature": "Data Privacy",
+        "local": "100% Private (Local)",
+        "sync": "End-to-End Encrypted",
+        "cloud": "Viewable by Employees"
+      },
+      "cost": {
+        "feature": "Cost",
+        "local": "Free Forever",
+        "sync": "One-time Upgrade",
+        "cloud": "$100+/year Subscription"
+      },
+      "offlineMode": {
+        "feature": "Offline Mode"
+      },
+      "bankConnections": {
+        "feature": "Bank Connections",
+        "local": "CSV / Manual Only",
+        "sync": "Optional (Encrypted)",
+        "cloud": "Mandatory Aggregation"
+      },
+      "storageLocation": {
+        "feature": "Storage Location",
+        "local": "Your Device",
+        "sync": "Zero-Knowledge Cloud",
+        "cloud": "Their Database"
+      }
+    },
+    "socialProof": {
+      "title": "Premium polish, built in",
+      "description": "The details that make budgeting stick: onboarding, shortcuts, mobile navigation, and offline-ready performance.",
+      "features": {
+        "onboarding": {
+          "title": "Onboarding tour",
+          "description": "A guided tour helps new users get to value quickly."
+        },
+        "shortcuts": {
+          "title": "Keyboard shortcuts",
+          "description": "Move fast with search and action shortcuts built into the UI."
+        },
+        "mobileUx": {
+          "title": "Mobile-first UX",
+          "description": "Bottom navigation and responsive layouts that feel native."
+        },
+        "pwaInstall": {
+          "title": "PWA install",
+          "description": "Install like an app and keep going even with spotty internet."
+        }
+      }
+    },
+    "pricingSection": {
+      "recommended": "Recommended",
+      "productName": "Local Protocol",
+      "productDescription": "The complete budgeting experience, running entirely on your device.",
+      "whyChoose": "Why choose Local Protocol?",
+      "whyChooseDescription": "See how we stack up against the cloud giants.",
+      "features": "Includes unlimited transactions, accounts, budgets, and full local backup capabilities."
+    },
+    "heroSection": {
+      "cta": {
+        "heading": "Built for clarity, not chaos.",
+        "viewPricing": "View pricing"
+      },
+      "badges": {
+        "noSubscriptions": "No subscriptions",
+        "offlineReady": "Offline-ready",
+        "seniorsMode": "Seniors Mode"
+      },
+      "preview": {
+        "livePreview": "Live preview",
+        "recentTransactions": "Recent transactions",
+        "categoryBudgets": "Category budgets",
+        "recurring": "Recurring"
+      },
+      "modes": {
+        "dashboard": "Dashboard",
+        "budgets": "Budgets",
+        "subscriptions": "Subscriptions"
+      }
+    },
+    "featuresDeepDive": {
+      "heading1": "Spreadsheet Power.",
+      "heading2": "App Simplicity.",
+      "description": "Stop fighting with broken formulas. Get the flexibility of manual control with the speed of a modern app.",
+      "cta": "Start free trial",
+      "explore": "Explore"
+    },
+    "accessibility": {
+      "title": "Accessible by default",
+      "description": "Seniors Mode provides simplified navigation and larger touch targets. Keyboard shortcuts, focus states, and clear contrast help everyone move faster.",
+      "badges": {
+        "seniorsMode": "Seniors Mode",
+        "largeTouchTargets": "Large touch targets",
+        "keyboardFirst": "Keyboard-first"
+      },
+      "buttons": {
+        "openApp": "Open the app",
+        "settings": "Accessibility settings"
+      }
+    },
+    "faqSection": {
+      "title": "FAQ",
+      "description": "Simple answers to common questions about trials, pricing, and access."
+    },
+    "outcomesSection": {
+      "title": "Built for real life, not spreadsheets",
+      "description": "Most budgeting apps make you do the work. BudgetPro is designed to reduce friction while keeping you in control."
+    },
+    "howItWorksSection": {
+      "title": "How it works",
+      "description": "A workflow that gets you to clarity fast, without locking you into a complicated system."
+    },
+    "nav": {
+      "tagline": "Premium budgeting"
+    },
+    "marquee": {
+      "logos": [
+        "Budgeting",
+        "Subscriptions",
+        "Loans",
+        "OCR Receipts",
+        "Reports",
+        "Planning",
+        "Offline",
+        "Seniors Mode"
+      ]
+    }
   }
 }

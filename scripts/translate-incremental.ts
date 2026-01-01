@@ -20,7 +20,7 @@ import * as path from 'path';
 dotenv.config({ path: path.join(__dirname, '../.env.local') });
 
 import { SUPPORTED_LOCALES, type SupportedLocale } from '../src/i18n/config';
-import { ClaudeAPIClient } from './lib/claude-api-client';
+import { OpenAIAPIClient } from './lib/openai-api-client';
 import { CacheManager } from './lib/cache-manager';
 import { shouldUseBaseTranslation, getBaseLocale } from './lib/prompt-builder';
 import { validate, formatValidationResult } from './lib/translation-validator';
@@ -126,7 +126,7 @@ async function main() {
 
   // Initialize cache and API client
   const cache = new CacheManager();
-  const client = new ClaudeAPIClient(options.concurrency);
+  const client = new OpenAIAPIClient(options.concurrency);
 
   // Get locales to process (exclude en and en-* variants)
   const localesToProcess = SUPPORTED_LOCALES.filter(
@@ -254,7 +254,7 @@ function categorizeLocales(locales: SupportedLocale[]): {
 async function processBaseLocalesIncremental(
   locales: SupportedLocale[],
   changedKeyValues: Record<string, any>,
-  client: ClaudeAPIClient,
+  client: OpenAIAPIClient,
   options: CLIOptions
 ): Promise<void> {
   if (locales.length === 0) return;
@@ -320,7 +320,7 @@ async function processBaseLocalesIncremental(
 async function processAdaptedLocalesIncremental(
   locales: SupportedLocale[],
   changedKeyValues: Record<string, any>,
-  client: ClaudeAPIClient,
+  client: OpenAIAPIClient,
   options: CLIOptions
 ): Promise<void> {
   if (locales.length === 0) return;

@@ -1,65 +1,445 @@
 {
   "nav": {
-    "dashboard": "መሪ ገጽ",
+    "dashboard": "መዋቅር",
     "transactions": "ግብይቶች",
-    "budgets": "በጀትዎች",
-    "reports": "ዘገኝታዎች",
-    "accounts": "አካውንቶች",
-    "categories": "የምድቦች",
-    "goals": "ዓላማዎች",
-    "import": "ወደ ውስጥ አውርድ",
-    "export": "ወደ ውጭ አውጣ",
+    "budgets": "በጀት",
+    "reports": "ዘገና",
+    "accounts": "መዋቅርዎች",
+    "categories": "ክፍሎች",
+    "goals": "አላማዎች",
+    "import": "እንደገና ይውሰዱ",
+    "export": "ወደ ውስጥ ይውሰዱ",
     "settings": "ቅንብሮች",
     "help": "እርዳታ",
     "about": "ስለ"
   },
   "actions": {
-    "addTransaction": "ግብይት ጨምር",
-    "importData": "ውስጥ ውሂብ አውርድ",
-    "import": "ወደ ውስጥ አውርድ",
-    "editDashboard": "መሪ ገጽ አርትዕ",
-    "saveChanges": "ለውጦች ይቀርብ",
-    "resetDefaults": "ወደ መደበኛ ይመለስ"
+    "addTransaction": "ግብይት ይወዳድሩ",
+    "importData": "ውስጥ ይውሰዱ ውሂብ",
+    "import": "እንደገና ይውሰዱ",
+    "editDashboard": "መዋቅር ይሻሽሉ",
+    "saveChanges": "ለውጦች ይቀበሉ",
+    "resetDefaults": "ወደ መደበኛ ይመለሱ"
   },
   "welcome": {
-    "title": "በበጀት አፕ ይቀበሉ",
-    "subtitle": "የመጀመሪያዎቹ ግብይት ይጨምሩ ወይም ከባንክዎ ውሂብ ወደ ውስጥ አውርድ"
+    "title": "ወደ በጀት መተግበሪያ ይቀበሉ",
+    "subtitle": "የመጀመሪያዎቹን ግብይት ይወዳድሩ ወይም ከባንክዎ ውሂብ ይውሰዱ"
   },
   "common": {
-    "save": "ይቀርብ",
-    "cancel": "ይቀጥል",
+    "save": "ይቀበሉ",
+    "cancel": "ይቅርታ",
     "delete": "ይሰርዝ",
-    "edit": "አርትዕ",
+    "edit": "ይሻሽሉ",
     "loading": "በመጫን..."
   },
   "widget": {
     "spendingByCategory": {
-      "title": "በምድብ የተገኘ ወጪ",
-      "description": "የገንዝ መንገድ በቀለም እንደሚታይ"
+      "title": "በክፍል የተገኘ ገንዘብ",
+      "description": "የገንዘብዎ ወደ የሚሄደው ይመለከቱ በተመለከተ እንደሚያሳይ"
     },
     "recentTransactions": {
-      "title": "ቅርብ ግብይቶች",
-      "description": "የቅርብ ገንዘብ እንቅስቃሴ ፈጣን እይታ"
+      "title": "የቅርብ ግብይቶች",
+      "description": "የወቅታዊ ገንዘብ እንቅስቃሴዎች አጭር እይታ"
     },
     "budgetProgress": {
-      "title": "የበጀት እድገት",
-      "description": "ወደ በጀት ዓላማዎች የምንደርስ እንዴት ነው"
+      "title": "የበጀት ዕድገት",
+      "description": "ወደ የበጀት አላማዎች የምንዛሬ ይቀበሉ"
     },
     "accountBalances": {
-      "title": "የአካውንት ታሪኮች",
-      "description": "በሁሉም አካውንቶች ወቅታዊ ታሪኮች"
+      "title": "የመዋቅር ቅንብሮች",
+      "description": "በአንድ መዋቅር ውስጥ ወቅታዊ ቅንብሮች"
     },
     "incomeVsExpenses": {
-      "title": "ገቢ እና ወጪ",
-      "description": "ገንዘብ እና ወጪ በጊዜ ይነጻ"
+      "title": "ገቢ እና ወጪዎች",
+      "description": "በጊዜ ወቅት የምንዛሬ እና ወጪዎች ይነጻ"
     },
     "monthlyTrends": {
-      "title": "ወርሃዊ ቅንብሮች",
-      "description": "የገንዘብ እንቅስቃሴ ወር በወር ይታይ"
+      "title": "ወርሃዊ ዝንባሌዎች",
+      "description": "ወር በወር የገንዘብ አንደኛ ይመለከቱ"
     },
     "upcomingBills": {
-      "title": "ወደ ፊት የሚመጡ ቢል",
-      "description": "ከቢል ግንዛቤ አንድ ክፍያ አይወርድ"
+      "title": "ወደ መጨረሻ የሚመጡ ቢል",
+      "description": "በቢል ማስታወቂያዎች አንድ እንደሚያሳይ አይወድቁ"
+    }
+  },
+  "tooltip": {
+    "ariaLabel": "በተጨማሪ መረጃ",
+    "learnMore": "በተጨማሪ ይማሩ →"
+  },
+  "footer": {
+    "tagline": "የተለያዩ በጀት በአንድ ጊዜ ይቀበሉ.",
+    "links": {
+      "login": "ይግቡ",
+      "signup": "የሙከራ መጀመር",
+      "upgrade": "ይወዳድሩ",
+      "settings": "ቅንብሮች"
+    },
+    "copyright": "© {year} {brandName}"
+  },
+  "dialog": {
+    "confirm": "ይረጋገጡ",
+    "cancel": "ይቅርታ",
+    "processing": "በማስተካከል...",
+    "finalConfirmation": "የመጨረሻ ይረጋገጡ:",
+    "typeToConfirm": "ይህን እንደሚያሳይ ይጻፉ {text} ይረጋገጡ."
+  },
+  "sidebar": {
+    "appTitle": "በጀት መተግበሪያ",
+    "appSubtitle": "የተለያዩ ገንዘብ",
+    "search": "ፈልግ...",
+    "shortcuts": "አጭር መንገዶች",
+    "navigation": {
+      "dashboard": "መዋቅር",
+      "transactions": "ግብይቶች",
+      "scanReceipt": "የታቀደ ይወዳድሩ",
+      "categories": "ክፍሎች",
+      "budgets": "በጀት",
+      "subscriptions": "ይወዳድሩ",
+      "loans": "ብድር",
+      "investments": "ውስጥ ይወዳድሩ",
+      "futurePlans": "ወደ ወደፊት ዕቅዶች",
+      "retirement": "የወርቅ ዕቅድ",
+      "reports": "ዘገና"
+    },
+    "actions": {
+      "importCsv": "ውስጥ ይውሰዱ CSV",
+      "settings": "ቅንብሮች",
+      "showLess": "ይቀነሱ",
+      "showAllItems": "ይታይ ይወዳድሩ"
+    }
+  },
+  "onboarding": {
+    "skipTour": "የጉብኝት ይወዳድሩ",
+    "stepCounter": "እርምጃ {current} ወደ {total}",
+    "dontShowAgain": "ይህን ይቀይሩ",
+    "quickTip": "💡 አጭር ጥቅስ",
+    "navigation": {
+      "previous": "ወደ ወደፊት",
+      "next": "ወደ ቀጣይ",
+      "getStarted": "መጀመር",
+      "startTour": "የጉብኝት መጀመር"
+    },
+    "steps": {
+      "welcome": {
+        "title": "👋 ወደ በጀት መተግበሪያ ይቀበሉ!",
+        "description": "የቤት ገንዘብ ማስተካከል ይረዳል ወይም ወደ ወደፊት ይወዳድሩ ይህ አይወድቅም!"
+      },
+      "import": {
+        "title": "📥 የግብይቶችዎን ውስጥ ይውሰዱ",
+        "description": "የባንክ ግብይቶችዎን ከCSV ፋይል ይውሰዱ. የBMO, Home Trust እና ሌሎች ባንኮችን ይወዳድሩ. መተግበሪያው ግብይቶችዎን በራስ ይከፈል!"
+      },
+      "categorize": {
+        "title": "🏷️ ይከፈል እና ይወዳድሩ",
+        "description": "የግብይቶች ክፍሎችን ይገናኙ ወይም በአንድ ጊዜ ብዙ ግብይቶችን ይወዳድሩ!"
+      },
+      "budgets": {
+        "title": "🎯 በጀትዎን ይወዳድሩ",
+        "description": "ለበለጠ የገንዘብ ክፍሎች በጀት ይፍጠሩ. በወር ወቅት ይከታተሉ ወይም ወደ ወደፊት ይወዳድሩ."
+      },
+      "reports": {
+        "title": "📊 ዘገና እና እይታዎች",
+        "description": "የገንዘብ አንደኛ ይመለከቱ, የአንደኛ ወይም ወደ ወደፊት ይወዳድሩ."
+      }
+    },
+    "tips": {
+      "import": "የCSV ፋይልዎን ይወዳድሩ ወይም ይገናኙ. የBMO እና Home Trust ቅርጸ ቅርጸ ቅርጸ ይወዳድሩ!",
+      "categorize": "የአጭር ይከፈል ቁልፍ ይጠቀሙ ወይም በብዙ ግብይቶች ይወዳድሩ.",
+      "budgets": "የተመጣጣኝ በጀት ይወዳድሩ እና እንደሚያሳይ ይነጻ."
+    }
+  },
+  "landing": {
+    "brand": {
+      "name": "BudgetPro",
+      "product": "በጀት መተግበሪያ"
+    },
+    "hero": {
+      "badge": "የግል መረጃ በመጀመሪያ • በአንድ ቦታ • የማይነቃ",
+      "headline": "የገንዘብዎን ይቀበሉ ወይም ይወዳድሩ.",
+      "subhead": "የስፕሬይድስ ኃይል. የመተግበሪያ ቀላልነት. የገንዘብ አንደኛ ይመለከቱ ወይም ይወዳድሩ ይህ የበጀት መተግበሪያ የገንዘብዎን ይወዳድሩ.",
+      "primaryCta": {
+        "label": "ወደ ወደፊት ይወዳድሩ (ነፃ)",
+        "href": "/budget-app/auth/signup"
+      },
+      "secondaryCta": {
+        "label": "ይግቡ",
+        "href": "/budget-app/auth/login"
+      },
+      "finePrint": "የባንክ መረጃ ይቀበሉ. ወደ ወደፊት ይወዳድሩ."
+    },
+    "trust": {
+      "0": {
+        "title": "የመሣሪያዎ, የመረጃዎ",
+        "description": "ውሂብ በድር ውስጥ ይቀመጣል. እኛ በተመለከተ አይቀመጥም."
+      },
+      "1": {
+        "title": "የስፕሬይድስ ኃይል",
+        "description": "በብዙ ይሻሽሉ, ይቀበሉ, ወይም ይቀበሉ ወይም ይወዳድሩ."
+      },
+      "2": {
+        "title": "የበይነት ፍጥነት",
+        "description": "የተለያዩ ይሻሽሉ. ወደ ተመለከተ ይወዳድሩ."
+      },
+      "3": {
+        "title": "የእጅ ሥርዓቶች",
+        "description": "የግብይት ይሻሽሉ ወይም ይወዳድሩ."
+      }
+    },
+    "outcomes": {
+      "0": {
+        "title": "የአገናኝ ይቀበሉ",
+        "description": "የገንዘብ ይሻሽሉ ወይም ይወዳድሩ."
+      },
+      "1": {
+        "title": "የግል መረጃ በመጀመሪያ",
+        "description": "የገንዘብ ይሻሽሉ ወይም ይወዳድሩ."
+      },
+      "2": {
+        "title": "ወደ ወደፊት ዕቅድ",
+        "description": "ወደ ወደፊት ይቀበሉ."
+      },
+      "3": {
+        "title": "የእጅ ሥርዓቶች",
+        "description": "ወደ ወደፊት ይቀበሉ."
+      }
+    },
+    "features": {
+      "0": {
+        "title": "የአንድ መዋቅር",
+        "description": "ወደ ወደፊት ይቀበሉ.",
+        "href": "/budget-app"
+      },
+      "1": {
+        "title": "የእጅ የግብይት",
+        "description": "ወደ ወደፊት ይቀበሉ.",
+        "href": "/budget-app/import"
+      },
+      "2": {
+        "title": "የታቀደ ይወዳድሩ",
+        "description": "ወደ ወደፊት ይቀበሉ.",
+        "href": "/budget-app/ocr"
+      },
+      "3": {
+        "title": "የክፍል በጀት",
+        "description": "ወደ ወደፊት ይቀበሉ.",
+        "href": "/budget-app/budgets"
+      },
+      "4": {
+        "title": "የወርቅ ዕቅድ",
+        "description": "ወደ ወደፊት ይቀበሉ.",
+        "href": "/budget-app/planning/retirement"
+      },
+      "5": {
+        "title": "የግል መረጃ ይቀበሉ",
+        "description": "ወደ ወደፊት ይቀበሉ.",
+        "href": "/budget-app/settings"
+      }
+    },
+    "howItWorks": {
+      "0": {
+        "title": "ይወዳድሩ",
+        "description": "ወደ ወደፊት ይቀበሉ."
+      },
+      "1": {
+        "title": "ይገናኙ",
+        "description": "ወደ ወደፊት ይቀበሉ."
+      },
+      "2": {
+        "title": "ይወዳድሩ",
+        "description": "ወደ ወደፊት ይቀበሉ."
+      }
+    },
+    "pricing": {
+      "eyebrow": "የተለያዩ ዋጋ",
+      "title": "ወደ ወደፊት ይቀበሉ.",
+      "description": "ወደ ወደፊት ይቀበሉ.",
+      "priceLabel": "ነፃ ለወደፊት",
+      "cta": {
+        "label": "ወደ ወደፊት ይቀበሉ.",
+        "href": "/budget-app/auth/signup"
+      },
+      "secondary": {
+        "label": "ይወዳድሩ",
+        "href": "#pricing"
+      },
+      "guarantee": "ወደ ወደፊት ይቀበሉ."
+    },
+    "faq": {
+      "0": {
+        "q": "የመረጃዎ ይቀበሉ?",
+        "a": "አዎ. በወደፊት ይቀበሉ."
+      },
+      "1": {
+        "q": "የመረጃዎን ይቀበሉ?",
+        "a": "ወደ ወደፊት ይቀበሉ."
+      },
+      "2": {
+        "q": "የ'ይወዳድሩ' ይቀበሉ?",
+        "a": "ወደ ወደፊት ይቀበሉ."
+      },
+      "3": {
+        "q": "ወደ ወደፊት ይቀበሉ?",
+        "a": "አዎ. እኛ ወደ ወደፊት ይቀበሉ."
+      }
+    },
+    "security": {
+      "title": "የግል መረጃ በመጀመሪያ",
+      "description": "የበጀት መተግበሪያው ውሂብ በድር ውስጥ ይቀመጣል.",
+      "buttons": {
+        "privacy": "የግል መረጃ ይቀበሉ",
+        "offline": "ወደ ወደፊት ይቀበሉ"
+      },
+      "cards": {
+        "localStorage": {
+          "title": "የአንድ መዋቅር",
+          "description": "የበጀት ውሂብ በድር ውስጥ ይቀመጣል."
+        },
+        "encryption": {
+          "title": "የግል መረጃ ይቀበሉ",
+          "description": "የበጀት ውሂብ ይቀበሉ."
+        },
+        "aiControls": {
+          "title": "የአንድ መዋቅር",
+          "description": "ወደ ወደፊት ይቀበሉ."
+        },
+        "exportDelete": {
+          "title": "ወደ ወደፊት ይቀበሉ.",
+          "description": "ወደ ወደፊት ይቀበሉ."
+        }
+      }
+    },
+    "comparison": {
+      "headers": {
+        "feature": "ይቀበሉ",
+        "local": "በጀት መተግበሪያ",
+        "sync": "ወደ ወደፊት ይቀበሉ.",
+        "cloud": "ወደ ወደፊት ይቀበሉ."
+      },
+      "dataPrivacy": {
+        "feature": "የግል መረጃ",
+        "local": "100% ግል (ወደ ወደፊት)",
+        "sync": "ወደ ወደፊት ይቀበሉ.",
+        "cloud": "ወደ ወደፊት ይቀበሉ."
+      },
+      "cost": {
+        "feature": "ዋጋ",
+        "local": "ነፃ ለወደፊት",
+        "sync": "ወደ ወደፊት ይቀበሉ.",
+        "cloud": "$100+/ዓመት ይቀበሉ."
+      },
+      "offlineMode": {
+        "feature": "ወደ ወደፊት ይቀበሉ."
+      },
+      "bankConnections": {
+        "feature": "ወደ ወደፊት ይቀበሉ.",
+        "local": "ወደ ወደፊት ይቀበሉ.",
+        "sync": "ወደ ወደፊት ይቀበሉ.",
+        "cloud": "ወደ ወደፊት ይቀበሉ."
+      },
+      "storageLocation": {
+        "feature": "ወደ ወደፊት ይቀበሉ.",
+        "local": "ወደ ወደፊት ይቀበሉ.",
+        "sync": "ወደ ወደፊት ይቀበሉ.",
+        "cloud": "ወደ ወደፊት ይቀበሉ."
+      }
+    },
+    "socialProof": {
+      "title": "የተለያዩ ዋጋ",
+      "description": "የበጀት ይቀበሉ.",
+      "features": {
+        "onboarding": {
+          "title": "የጉብኝት ይቀበሉ.",
+          "description": "ወደ ወደፊት ይቀበሉ."
+        },
+        "shortcuts": {
+          "title": "የአጭር መንገዶች",
+          "description": "ወደ ወደፊት ይቀበሉ."
+        },
+        "mobileUx": {
+          "title": "ወደ ወደፊት ይቀበሉ.",
+          "description": "ወደ ወደፊት ይቀበሉ."
+        },
+        "pwaInstall": {
+          "title": "ወደ ወደፊት ይቀበሉ.",
+          "description": "ወደ ወደፊት ይቀበሉ."
+        }
+      }
+    },
+    "pricingSection": {
+      "recommended": "ይመርጡ",
+      "productName": "ወደ ወደፊት ይቀበሉ.",
+      "productDescription": "ወደ ወደፊት ይቀበሉ.",
+      "whyChoose": "ወደ ወደፊት ይቀበሉ.",
+      "whyChooseDescription": "ወደ ወደፊት ይቀበሉ.",
+      "features": "ወደ ወደፊት ይቀበሉ."
+    },
+    "heroSection": {
+      "cta": {
+        "heading": "ወደ ወደፊት ይቀበሉ.",
+        "viewPricing": "ወደ ወደፊት ይቀበሉ."
+      },
+      "badges": {
+        "noSubscriptions": "የማይነቃ",
+        "offlineReady": "ወደ ወደፊት ይቀበሉ.",
+        "seniorsMode": "ወደ ወደፊት ይቀበሉ."
+      },
+      "preview": {
+        "livePreview": "ወደ ወደፊት ይቀበሉ.",
+        "recentTransactions": "ወደ ወደፊት ይቀበሉ.",
+        "categoryBudgets": "ወደ ወደፊት ይቀበሉ.",
+        "recurring": "ወደ ወደፊት ይቀበሉ."
+      },
+      "modes": {
+        "dashboard": "መዋቅር",
+        "budgets": "በጀት",
+        "subscriptions": "ይወዳድሩ"
+      }
+    },
+    "featuresDeepDive": {
+      "heading1": "የስፕሬይድስ ኃይል.",
+      "heading2": "የመተግበሪያ ቀላልነት.",
+      "description": "ወደ ወደፊት ይቀበሉ.",
+      "cta": "ወደ ወደፊት ይቀበሉ.",
+      "explore": "ወደ ወደፊት ይቀበሉ."
+    },
+    "accessibility": {
+      "title": "ወደ ወደፊት ይቀበሉ.",
+      "description": "ወደ ወደፊት ይቀበሉ.",
+      "badges": {
+        "seniorsMode": "ወደ ወደፊት ይቀበሉ.",
+        "largeTouchTargets": "ወደ ወደፊት ይቀበሉ.",
+        "keyboardFirst": "ወደ ወደፊት ይቀበሉ."
+      },
+      "buttons": {
+        "openApp": "ወደ ወደፊት ይቀበሉ.",
+        "settings": "ወደ ወደፊት ይቀበሉ."
+      }
+    },
+    "faqSection": {
+      "title": "የጥያቄ ክፍል",
+      "description": "ወደ ወደፊት ይቀበሉ."
+    },
+    "outcomesSection": {
+      "title": "ወደ ወደፊት ይቀበሉ.",
+      "description": "ወደ ወደፊት ይቀበሉ."
+    },
+    "howItWorksSection": {
+      "title": "ወደ ወደፊት ይቀበሉ.",
+      "description": "ወደ ወደፊት ይቀበሉ."
+    },
+    "nav": {
+      "tagline": "የተለያዩ በጀት"
+    },
+    "marquee": {
+      "logos": [
+        "በጀት",
+        "ይወዳድሩ",
+        "ብድር",
+        "የታቀደ ይወዳድሩ",
+        "ዘገና",
+        "ወደ ወደፊት ይቀበሉ.",
+        "ወደ ወደፊት ይቀበሉ.",
+        "ወደ ወደፊት ይቀበሉ."
+      ]
     }
   }
 }

@@ -22,20 +22,20 @@
     "resetDefaults": "Vrati na zadano"
   },
   "welcome": {
-    "title": "Dobrodošli u aplikaciju za proračun",
+    "title": "Dobrodošli u Budget App",
     "subtitle": "Započnite dodavanjem svoje prve transakcije ili uvozom podataka iz vaše banke"
   },
   "common": {
     "save": "Spremi",
-    "cancel": "Otkaži",
+    "cancel": "Odustani",
     "delete": "Izbriši",
     "edit": "Uredi",
     "loading": "Učitavanje..."
   },
   "widget": {
     "spendingByCategory": {
-      "title": "Troškovi po kategorijama",
-      "description": "Pogledajte kamo ide vaš novac s vizualnim prikazima"
+      "title": "Troškovi po kategoriji",
+      "description": "Pogledajte gdje odlazi vaš novac uz vizualne prikaze"
     },
     "recentTransactions": {
       "title": "Nedavne transakcije",
@@ -60,6 +60,386 @@
     "upcomingBills": {
       "title": "Nadolazeći računi",
       "description": "Nikada ne propustite uplatu uz podsjetnike za račune"
+    }
+  },
+  "tooltip": {
+    "ariaLabel": "Više informacija",
+    "learnMore": "Saznajte više →"
+  },
+  "footer": {
+    "tagline": "Premium proračun s jednokratnim nadogradnjama.",
+    "links": {
+      "login": "Prijavi se",
+      "signup": "Započni probu",
+      "upgrade": "Nadogradi",
+      "settings": "Postavke"
+    },
+    "copyright": "© {year} {brandName}"
+  },
+  "dialog": {
+    "confirm": "Potvrdi",
+    "cancel": "Odustani",
+    "processing": "Obrada...",
+    "finalConfirmation": "Zadnja potvrda:",
+    "typeToConfirm": "Upišite {text} za potvrdu ove radnje."
+  },
+  "sidebar": {
+    "appTitle": "Budget App",
+    "appSubtitle": "Premium financije",
+    "search": "Pretraži...",
+    "shortcuts": "Prečaci",
+    "navigation": {
+      "dashboard": "Nadzorna ploča",
+      "transactions": "Transakcije",
+      "scanReceipt": "Skeniraj račun",
+      "categories": "Kategorije",
+      "budgets": "Proračuni",
+      "subscriptions": "Pretplate",
+      "loans": "Krediti",
+      "investments": "Investicije",
+      "futurePlans": "Budući planovi",
+      "retirement": "Umirovljenje",
+      "reports": "Izvještaji"
+    },
+    "actions": {
+      "importCsv": "Uvezi CSV",
+      "settings": "Postavke",
+      "showLess": "Prikaži manje",
+      "showAllItems": "Prikaži sve stavke"
+    }
+  },
+  "onboarding": {
+    "skipTour": "Preskoči obilazak",
+    "stepCounter": "Korak {current} od {total}",
+    "dontShowAgain": "Ne prikazuj ovaj obilazak ponovno",
+    "quickTip": "💡 Brzi savjet",
+    "navigation": {
+      "previous": "Prethodni",
+      "next": "Sljedeći",
+      "getStarted": "Započni",
+      "startTour": "Započni obilazak"
+    },
+    "steps": {
+      "welcome": {
+        "title": "👋 Dobrodošli u Budget App!",
+        "description": "Uzmimo brzi obilazak kako bismo vam pomogli da započnete s upravljanjem vašim kućnim financijama. Ovo neće dugo trajati!"
+      },
+      "import": {
+        "title": "📥 Uvezite svoje transakcije",
+        "description": "Započnite uvozom svojih bankovnih transakcija iz CSV datoteke. Podržavamo BMO, Home Trust i mnoge druge banke. Aplikacija će automatski kategorizirati vaše transakcije!"
+      },
+      "categorize": {
+        "title": "🏷️ Kategorizirajte i organizirajte",
+        "description": "Pregledajte i prilagodite kategorije transakcija. Naša pametna kategorizacija uči iz vaših ispravki kako bi se poboljšala tijekom vremena. Koristite grupne radnje za kategorizaciju više transakcija odjednom!"
+      },
+      "budgets": {
+        "title": "🎯 Postavite svoje proračune",
+        "description": "Kreirajte proračune za različite kategorije troškova. Pratite svoj napredak tijekom mjeseca i primajte upozorenja kada se približavate svojim granicama."
+      },
+      "reports": {
+        "title": "📊 Pregledajte izvještaje i uvide",
+        "description": "Vizualizirajte svoje obrasce trošenja, pratite svoju neto vrijednost i donosite informirane financijske odluke. Vaša nadzorna ploča se automatski ažurira s svakom transakcijom!"
+      }
+    },
+    "tips": {
+      "import": "Povucite i ispustite svoju CSV datoteku ili kliknite za pregled. Automatski prepoznajemo BMO i Home Trust formate!",
+      "categorize": "Koristite gumb za brzu kategorizaciju ili odaberite više transakcija za grupnu kategorizaciju.",
+      "budgets": "Postavite realne proračune i obavijestit ćemo vas ako ste na putu da prekoračite."
+    }
+  },
+  "landing": {
+    "brand": {
+      "name": "BudgetPro",
+      "product": "Budget App"
+    },
+    "hero": {
+      "badge": "Privatnost na prvom mjestu • Samo lokalno • Nema praćenja",
+      "headline": "Savladajte svoj novac bez prodaje svojih podataka.",
+      "subhead": "Moć proračuna. Jednostavnost aplikacije. Iskusite financijsku jasnoću s jedinom aplikacijom za proračun koja jamči da vaši podaci nikada ne napuštaju vaš uređaj.",
+      "primaryCta": {
+        "label": "Započni lokalni protokol (besplatno)",
+        "href": "/budget-app/auth/signup"
+      },
+      "secondaryCta": {
+        "label": "Prijavi se",
+        "href": "/budget-app/auth/login"
+      },
+      "finePrint": "Nema potrebnih bankovnih podataka. Nema računa potrebnog za lokalni način."
+    },
+    "trust": {
+      "0": {
+        "title": "Vaš uređaj, vaši podaci",
+        "description": "Podaci ostaju u IndexedDB vašeg preglednika. Doslovno ih ne možemo vidjeti."
+      },
+      "1": {
+        "title": "Moć proračuna",
+        "description": "Masovno uređivanje, pivotiranje i analiziranje poput profesionalca bez glavobolje s formulama."
+      },
+      "2": {
+        "title": "Offline brzina",
+        "description": "Nema latencije. Radi na vrhu planine ili u tunelu podzemne željeznice."
+      },
+      "3": {
+        "title": "Ručno rituali",
+        "description": "Čarobnjak za uvoz čini petak pregled novca zadovoljavajućom navikom."
+      }
+    },
+    "outcomes": {
+      "0": {
+        "title": "Prestanite se boriti s agregatorima",
+        "description": "Nema više pokvarenih veza ili ponovnih autorizacija. Vi kontrolirate unos podataka."
+      },
+      "1": {
+        "title": "Privatnost po dizajnu",
+        "description": "Ne prodajemo vaše podatke jer ih nemamo. Točka."
+      },
+      "2": {
+        "title": "Planiranje otporno na budućnost",
+        "description": "Modelirajte umirovljenje, otplate kredita i ciljeve štednje u jednom integriranom prikazu."
+      },
+      "3": {
+        "title": "Ubica pretplata",
+        "description": "Uočite ponavljajuće troškove na vašem novčaniku koje druge aplikacije propuštaju."
+      }
+    },
+    "features": {
+      "0": {
+        "title": "Lokalna nadzorna ploča",
+        "description": "Neto vrijednost, novčani tok i razdjeljenje po kategorijama. Trenutna vremena učitavanja.",
+        "href": "/budget-app"
+      },
+      "1": {
+        "title": "Čarobnjak za uvoz",
+        "description": "Pametan CSV mapper za BMO, Home Trust i prilagodljive formate.",
+        "href": "/budget-app/import"
+      },
+      "2": {
+        "title": "OCR računa",
+        "description": "Skenirajte račune lokalno s Tesseract.js. Nema obrade u oblaku.",
+        "href": "/budget-app/ocr"
+      },
+      "3": {
+        "title": "Kategorijski proračuni",
+        "description": "Proračuni bez temelja ili s prijenosom s granularnom kontrolom kategorija.",
+        "href": "/budget-app/budgets"
+      },
+      "4": {
+        "title": "Kalkulator za umirovljenje",
+        "description": "Projektirajte datum svoje slobode s vizualizacijama složenog interesa.",
+        "href": "/budget-app/planning/retirement"
+      },
+      "5": {
+        "title": "Zaštita privatnosti",
+        "description": "Opcionalna enkripcija na strani klijenta za dodatni sloj sigurnosti.",
+        "href": "/budget-app/settings"
+      }
+    },
+    "howItWorks": {
+      "0": {
+        "title": "Uvoz",
+        "description": "Povucite i ispustite CSV-ove ili skenirajte račune. AI lokalno mapira stupce."
+      },
+      "1": {
+        "title": "Pregled",
+        "description": "Brza kategorizacija s pametnim pravilima i grupnim radnjama."
+      },
+      "2": {
+        "title": "Plan",
+        "description": "Dodijelite svaki euro zadatku i predvidite svoju buduću neto vrijednost."
+      }
+    },
+    "pricing": {
+      "eyebrow": "Pravedno cijene",
+      "title": "Lokalno je besplatno. Sinkronizacija je Pro.",
+      "description": "Započnite s moćnim lokalnim protokolom. Nadogradite kasnije ako vam zatreba sinkronizacija na više uređaja.",
+      "priceLabel": "Besplatno zauvijek",
+      "cta": {
+        "label": "Započni lokalni protokol",
+        "href": "/budget-app/auth/signup"
+      },
+      "secondary": {
+        "label": "Pogledajte Pro značajke",
+        "href": "#pricing"
+      },
+      "guarantee": "Nema potrebne kreditne kartice za lokalni protokol."
+    },
+    "faq": {
+      "0": {
+        "q": "Je li moji podaci stvarno privatni?",
+        "a": "Da. U lokalnom protokolu, podaci nikada ne napuštaju vaš uređaj. Žive u IndexedDB unutar vašeg preglednika."
+      },
+      "1": {
+        "q": "Kako mogu napraviti sigurnosnu kopiju svojih podataka?",
+        "a": "Možete izvesti punu JSON sigurnosnu kopiju u bilo kojem trenutku. Također preporučujemo redovite CSV izvoze."
+      },
+      "2": {
+        "q": "Što je 'Sync' Pro?",
+        "a": "Uskoro: Opcionalna pretplata za sinkronizaciju enkriptiranih podataka između uređaja putem Supabase."
+      },
+      "3": {
+        "q": "Povezujete li se s bankama?",
+        "a": "Ne. Vjerujemo da je ručni uvoz sigurniji, pouzdaniji i stvara bolju financijsku svijest."
+      }
+    },
+    "security": {
+      "title": "Privatnost na prvom mjestu po dizajnu",
+      "description": "Budget App pohranjuje vaše podatke lokalno (spremno za rad bez interneta) i daje vam kontrole za AI značajke, izvoz i brisanje.",
+      "buttons": {
+        "privacy": "Privatnost i postavke",
+        "offline": "Podrška za rad bez interneta"
+      },
+      "cards": {
+        "localStorage": {
+          "title": "Lokalna pohrana",
+          "description": "Vaši podaci o proračunu pohranjuju se u vašem pregledniku (IndexedDB) tako da aplikacija ostaje brza i upotrebljiva offline."
+        },
+        "encryption": {
+          "title": "Podrška za enkripciju",
+          "description": "Aplikacija uključuje sloj enkripcije za zaštitu osjetljivih podataka o proračunu kada je omogućena."
+        },
+        "aiControls": {
+          "title": "Kontrole AI značaja",
+          "description": "Uključite AI-pokretane značajke (poput otkrivanja anomalija) i upravljajte pristupom chatbotu iz postavki."
+        },
+        "exportDelete": {
+          "title": "Izvoz i brisanje",
+          "description": "Izvezite svoje podatke i postavke privatnosti ili izravno izbrišite lokalne podatke iz aplikacije."
+        }
+      }
+    },
+    "comparison": {
+      "headers": {
+        "feature": "Značajka",
+        "local": "BudgetPro Lokalno",
+        "sync": "BudgetPro Sinkronizacija (Pro)",
+        "cloud": "Tipična Cloud aplikacija"
+      },
+      "dataPrivacy": {
+        "feature": "Privatnost podataka",
+        "local": "100% Privatno (Lokalno)",
+        "sync": "End-to-End Enkriptirano",
+        "cloud": "Vidljivo od strane zaposlenika"
+      },
+      "cost": {
+        "feature": "Cijena",
+        "local": "Besplatno zauvijek",
+        "sync": "Jednokratna nadogradnja",
+        "cloud": "$100+/godina Pretplata"
+      },
+      "offlineMode": {
+        "feature": "Način rada bez interneta"
+      },
+      "bankConnections": {
+        "feature": "Bankovne veze",
+        "local": "CSV / Samo ručno",
+        "sync": "Opcionalno (Enkriptirano)",
+        "cloud": "Obavezna agregacija"
+      },
+      "storageLocation": {
+        "feature": "Lokacija pohrane",
+        "local": "Vaš uređaj",
+        "sync": "Zero-Knowledge Cloud",
+        "cloud": "Njihova baza podataka"
+      }
+    },
+    "socialProof": {
+      "title": "Premium dorada, ugrađena",
+      "description": "Detalji koji čine proračun: onboarding, prečaci, mobilna navigacija i performanse spremne za rad bez interneta.",
+      "features": {
+        "onboarding": {
+          "title": "Obilazak onboarding-a",
+          "description": "Vođeni obilazak pomaže novim korisnicima da brzo dođu do vrijednosti."
+        },
+        "shortcuts": {
+          "title": "Prečaci na tipkovnici",
+          "description": "Brzo se krećite s pretraživanjem i akcijskim prečacima ugrađenim u UI."
+        },
+        "mobileUx": {
+          "title": "Mobilna UX",
+          "description": "Donja navigacija i responzivni rasporedi koji se osjećaju prirodno."
+        },
+        "pwaInstall": {
+          "title": "PWA instalacija",
+          "description": "Instalirajte kao aplikaciju i nastavite raditi čak i s lošim internetom."
+        }
+      }
+    },
+    "pricingSection": {
+      "recommended": "Preporučeno",
+      "productName": "Lokalni protokol",
+      "productDescription": "Potpuno iskustvo proračuna, koje radi potpuno na vašem uređaju.",
+      "whyChoose": "Zašto odabrati lokalni protokol?",
+      "whyChooseDescription": "Pogledajte kako se uspoređujemo s oblacima.",
+      "features": "Uključuje neograničene transakcije, račune, proračune i potpune mogućnosti lokalne sigurnosne kopije."
+    },
+    "heroSection": {
+      "cta": {
+        "heading": "Izgrađeno za jasnoću, a ne kaos.",
+        "viewPricing": "Pogledajte cijene"
+      },
+      "badges": {
+        "noSubscriptions": "Bez pretplata",
+        "offlineReady": "Spremno za rad bez interneta",
+        "seniorsMode": "Način za starije osobe"
+      },
+      "preview": {
+        "livePreview": "Živi pregled",
+        "recentTransactions": "Nedavne transakcije",
+        "categoryBudgets": "Kategorijski proračuni",
+        "recurring": "Ponavljajući"
+      },
+      "modes": {
+        "dashboard": "Nadzorna ploča",
+        "budgets": "Proračuni",
+        "subscriptions": "Pretplate"
+      }
+    },
+    "featuresDeepDive": {
+      "heading1": "Moć proračuna.",
+      "heading2": "Jednostavnost aplikacije.",
+      "description": "Prestanite se boriti s pokvarenim formulama. Dobijte fleksibilnost ručne kontrole s brzinom moderne aplikacije.",
+      "cta": "Započni besplatnu probu",
+      "explore": "Istraži"
+    },
+    "accessibility": {
+      "title": "Pristupačno po defaultu",
+      "description": "Način za starije osobe pruža pojednostavljenu navigaciju i veće dodirne ciljeve. Prečaci na tipkovnici, stanja fokusa i jasna kontrast pomažu svima da se brže kreću.",
+      "badges": {
+        "seniorsMode": "Način za starije osobe",
+        "largeTouchTargets": "Veliki dodirni ciljevi",
+        "keyboardFirst": "Prvo tipkovnica"
+      },
+      "buttons": {
+        "openApp": "Otvorite aplikaciju",
+        "settings": "Postavke pristupačnosti"
+      }
+    },
+    "faqSection": {
+      "title": "Često postavljana pitanja",
+      "description": "Jednostavni odgovori na uobičajena pitanja o probama, cijenama i pristupu."
+    },
+    "outcomesSection": {
+      "title": "Izgrađeno za stvarni život, a ne proračune",
+      "description": "Većina aplikacija za proračun vas tjera da radite. BudgetPro je dizajniran da smanji trenje dok vas drži pod kontrolom."
+    },
+    "howItWorksSection": {
+      "title": "Kako to funkcionira",
+      "description": "Radni tok koji vas brzo dovodi do jasnoće, bez zaključavanja u komplicirani sustav."
+    },
+    "nav": {
+      "tagline": "Premium proračun"
+    },
+    "marquee": {
+      "logos": [
+        "Proračunanje",
+        "Pretplate",
+        "Krediti",
+        "OCR Računi",
+        "Izvještaji",
+        "Planiranje",
+        "Offline",
+        "Način za starije osobe"
+      ]
     }
   }
 }

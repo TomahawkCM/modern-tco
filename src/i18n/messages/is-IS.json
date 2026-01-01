@@ -1,29 +1,29 @@
 {
   "nav": {
-    "dashboard": "Stjórnborð",
-    "transactions": "Fjárhagsfærslur",
-    "budgets": "Fjármál",
+    "dashboard": "Yfirlit",
+    "transactions": "Færslur",
+    "budgets": "Fjárhagsáætlanir",
     "reports": "Skýrslur",
     "accounts": "Reikningar",
     "categories": "Flokkar",
     "goals": "Markmið",
-    "import": "Innflutningur",
-    "export": "Útflutningur",
+    "import": "Flytja inn",
+    "export": "Flytja út",
     "settings": "Stillingar",
     "help": "Aðstoð",
     "about": "Um"
   },
   "actions": {
-    "addTransaction": "Bæta við fjárhagsfærslu",
-    "importData": "Innflutningur gagna",
-    "import": "Innflutningur",
-    "editDashboard": "Breyta stjórnborði",
+    "addTransaction": "Bæta við færslu",
+    "importData": "Flytja inn gögn",
+    "import": "Flytja inn",
+    "editDashboard": "Breyta yfirliti",
     "saveChanges": "Vista breytingar",
     "resetDefaults": "Endurstilla í sjálfgefið"
   },
   "welcome": {
-    "title": "Velkomin í Fjármálaskapp",
-    "subtitle": "Byrjaðu á því að bæta við fyrstu fjárhagsfærslunni eða innflutningi gagna frá bankanum þínum"
+    "title": "Velkomin/n í Fjárhagsforritið",
+    "subtitle": "Byrjaðu á að bæta við fyrstu færslunni eða flytja inn gögn frá bankanum þínum"
   },
   "common": {
     "save": "Vista",
@@ -38,28 +38,408 @@
       "description": "Sjáðu hvar peningar þínir fara með sjónrænum sundurliðunum"
     },
     "recentTransactions": {
-      "title": "Nýlegar fjárhagsfærslur",
-      "description": "Fljótleg yfirlit yfir nýjustu fjárhagslegu virkni þína"
+      "title": "Nýlegar færslur",
+      "description": "Fljótleg yfirlit yfir síðustu fjárhagslegu virkni"
     },
     "budgetProgress": {
-      "title": "Fjármálaframvinda",
-      "description": "Fylgdu hvernig þér gengur að ná fjármálamarkmiðum"
+      "title": "Framgangur fjárhagsáætlunar",
+      "description": "Fylgdu hvernig þér gengur að ná fjárhagsmarkmiðum"
     },
     "accountBalances": {
       "title": "Reikningajafnvægi",
       "description": "Núverandi jafnvægi á öllum reikningum þínum"
     },
     "incomeVsExpenses": {
-      "title": "Tekjur vs. útgjöld",
-      "description": "Samanburður á tekjum þínum og útgjöldum yfir tíma"
+      "title": "Tekjur vs. Útgjöld",
+      "description": "Samanburður á tekjum og útgjöldum yfir tíma"
     },
     "monthlyTrends": {
-      "title": "Mánaðarlegar þróanir",
-      "description": "Sjónrænt yfirlit yfir fjárhagslegar mynstur mánaðarlega"
+      "title": "Mánaðarlegar stefnur",
+      "description": "Sjónræna fjárhagsmynstur mánaðarlega"
     },
     "upcomingBills": {
-      "title": "Komandi reikningar",
+      "title": "Væntanlegir reikningar",
       "description": "Missið aldrei af greiðslu með reikningaminningum"
+    }
+  },
+  "tooltip": {
+    "ariaLabel": "Fleiri upplýsingar",
+    "learnMore": "Lærðu meira →"
+  },
+  "footer": {
+    "tagline": "Fyrirferðarmikil fjárhagsáætlanir með einu sinni uppfærslu.",
+    "links": {
+      "login": "Innskráning",
+      "signup": "Byrjaðu prufu",
+      "upgrade": "Uppfæra",
+      "settings": "Stillingar"
+    },
+    "copyright": "© {year} {brandName}"
+  },
+  "dialog": {
+    "confirm": "Staðfesta",
+    "cancel": "Hætta við",
+    "processing": "Vinnur...",
+    "finalConfirmation": "Loka staðfesting:",
+    "typeToConfirm": "Sláðu inn {text} til að staðfesta þessa aðgerð."
+  },
+  "sidebar": {
+    "appTitle": "Fjárhagsforritið",
+    "appSubtitle": "Fyrirferðarmikil fjármál",
+    "search": "Leita...",
+    "shortcuts": "Snöggir tenglar",
+    "navigation": {
+      "dashboard": "Yfirlit",
+      "transactions": "Færslur",
+      "scanReceipt": "Skanna kvittun",
+      "categories": "Flokkar",
+      "budgets": "Fjárhagsáætlanir",
+      "subscriptions": "Aðildir",
+      "loans": "Lán",
+      "investments": "Fjárfestingar",
+      "futurePlans": "Framtíðarplön",
+      "retirement": "Fjölskyldu- og lífeyrisáætlanir",
+      "reports": "Skýrslur"
+    },
+    "actions": {
+      "importCsv": "Flytja inn CSV",
+      "settings": "Stillingar",
+      "showLess": "Sýna minna",
+      "showAllItems": "Sýna alla hluti"
+    }
+  },
+  "onboarding": {
+    "skipTour": "Sleppa ferð",
+    "stepCounter": "Skref {current} af {total}",
+    "dontShowAgain": "Sýna ekki þessa ferð aftur",
+    "quickTip": "💡 Fljótlegur ráð",
+    "navigation": {
+      "previous": "Fyrra",
+      "next": "Næsta",
+      "getStarted": "Byrjaðu",
+      "startTour": "Byrjaðu ferð"
+    },
+    "steps": {
+      "welcome": {
+        "title": "👋 Velkomin/n í Fjárhagsforritið!",
+        "description": "Við skulum taka fljótlega ferð til að hjálpa þér að byrja að stjórna fjárhagsmálum heimilisins. Þetta mun ekki taka langan tíma!"
+      },
+      "import": {
+        "title": "📥 Flytja inn færslur þínar",
+        "description": "Byrjaðu á því að flytja inn bankafærslur þínar úr CSV skrá. Við styðjum BMO, Home Trust og marga aðra banka. Forritið mun sjálfkrafa flokka færslurnar þínar!"
+      },
+      "categorize": {
+        "title": "🏷️ Flokka og skipuleggja",
+        "description": "Skoðaðu og aðlagaðu flokka færslna. Vitræn flokkun okkar lærir af leiðréttingum þínum til að bæta sig yfir tíma. Notaðu fjölda aðgerðir til að flokka margar færslur í einu!"
+      },
+      "budgets": {
+        "title": "🎯 Settu fjárhagsáætlanir",
+        "description": "Búðu til fjárhagsáætlanir fyrir mismunandi útgjaldaflokka. Fylgdu framgangi þínum í gegnum mánaðina og fáðu tilkynningar þegar þú ert að nálgast mörkin þín."
+      },
+      "reports": {
+        "title": "📊 Skoðaðu skýrslur og innsýn",
+        "description": "Sjónræna útgjaldamynstur, fylgdu hreinu virði þínu og gerðu upplýstar fjárhagslegar ákvarðanir. Yfirlitið þitt uppfærir sjálfkrafa með hverri færslu!"
+      }
+    },
+    "tips": {
+      "import": "Dragðu og slepptu CSV skrá þinni eða smelltu til að skoða. Við greinum sjálfkrafa BMO og Home Trust snið!",
+      "categorize": "Notaðu fljótlegu flokkunartakkann eða veldu margar færslur fyrir fjölda flokkun.",
+      "budgets": "Settu raunhæfar fjárhagsáætlanir og við munum tilkynna þér ef þú ert á réttri leið til að ofauka."
+    }
+  },
+  "landing": {
+    "brand": {
+      "name": "BudgetPro",
+      "product": "Fjárhagsforritið"
+    },
+    "hero": {
+      "badge": "Privat-í-fyrsta • Aðeins-lokalt • Engin fylgni",
+      "headline": "Stjórnaðu peningum þínum án þess að selja gögnin þín.",
+      "subhead": "Máttur töflureiknis. Einfaldleiki forrits. Upplifðu fjárhagslega skýrleika með eina fjárhagsforritinu sem tryggir að gögnin þín fari aldrei af tækinu þínu.",
+      "primaryCta": {
+        "label": "Byrjaðu staðbundna ferlið (Ókeypis)",
+        "href": "/budget-app/auth/signup"
+      },
+      "secondaryCta": {
+        "label": "Innskráning",
+        "href": "/budget-app/auth/login"
+      },
+      "finePrint": "Engin bankaskilríki nauðsynleg. Engin aðgangur nauðsynlegur fyrir staðbundna stillingu."
+    },
+    "trust": {
+      "0": {
+        "title": "Tæki þitt, gögnin þín",
+        "description": "Gögnin eru í IndexedDB vafrans þíns. Við getum í raun ekki séð þau."
+      },
+      "1": {
+        "title": "Töflureikni máttur",
+        "description": "Fjölda breytir, snúðu og greindu eins og atvinnumaður án formúlu höfuðverks."
+      },
+      "2": {
+        "title": "Ónæmishraði",
+        "description": "Engin seinkun. Virkar á fjallstindi eða í neðanjarðarlest."
+      },
+      "3": {
+        "title": "Handvirkar venjur",
+        "description": "Flutningsgaldur gerir föstudagsfjárhagsendurskoðun að ánægjulegri venju."
+      }
+    },
+    "outcomes": {
+      "0": {
+        "title": "Hættu að berjast við safnara",
+        "description": "Engar brotnar tengingar eða endurheimtarslóðir. Þú stjórnar gögnum."
+      },
+      "1": {
+        "title": "Privat með hönnun",
+        "description": "Við seljum ekki gögnin þín því við eigum þau ekki. Punktur."
+      },
+      "2": {
+        "title": "Framtíðarvottun",
+        "description": "Módel lífeyris, lánagreiðslur og sparnaðarmarkmið í einu samþættu útsýni."
+      },
+      "3": {
+        "title": "Aðildardauði",
+        "description": "Sjáðu endurtekin útgjöld sem aðrar forrit missa."
+      }
+    },
+    "features": {
+      "0": {
+        "title": "Staðbundið yfirlit",
+        "description": "Hreint virði, peningaflæði, og sundurliðun flokka. Sofandi hleðslutími.",
+        "href": "/budget-app"
+      },
+      "1": {
+        "title": "Flutningsgaldur",
+        "description": "Vitræn CSV kortlagning fyrir BMO, Home Trust, og sérsniðin snið.",
+        "href": "/budget-app/import"
+      },
+      "2": {
+        "title": "Kvittun OCR",
+        "description": "Skannaðu kvittanir á staðnum með Tesseract.js. Engin skýjaflæði.",
+        "href": "/budget-app/ocr"
+      },
+      "3": {
+        "title": "Flokkar fjárhagsáætlanir",
+        "description": "Núll-bundin eða rúllandi fjárhagsáætlanir með nákvæmri flokkun.",
+        "href": "/budget-app/budgets"
+      },
+      "4": {
+        "title": "Lífeyrisreiknivél",
+        "description": "Spáðu fyrir um frelsisdaga þína með samsetningu vaxta sjónrænum.",
+        "href": "/budget-app/planning/retirement"
+      },
+      "5": {
+        "title": "Privat skjöldur",
+        "description": "Valfrjáls dulkóðun á viðskiptavinahlið fyrir auka öryggislag.",
+        "href": "/budget-app/settings"
+      }
+    },
+    "howItWorks": {
+      "0": {
+        "title": "Flytja inn",
+        "description": "Dragðu og slepptu CSV eða skannaðu kvittanir. AI kortleggur dálkana á staðnum."
+      },
+      "1": {
+        "title": "Skoða",
+        "description": "Fljótleg flokkun með vitrænum reglum og fjölda aðgerðum."
+      },
+      "2": {
+        "title": "Plana",
+        "description": "Taktu hverja krónu í vinnu og spáðu fyrir um framtíðar hreint virði."
+      }
+    },
+    "pricing": {
+      "eyebrow": "Sanngjörn verðlagning",
+      "title": "Staðbundið er ókeypis. Samþætting er Pro.",
+      "description": "Byrjaðu með öflugu staðbundnu ferli. Uppfærðu síðar ef þú þarft samþættingu á mörgum tækjum.",
+      "priceLabel": "Ókeypis að eilífu",
+      "cta": {
+        "label": "Byrjaðu staðbundna ferlið",
+        "href": "/budget-app/auth/signup"
+      },
+      "secondary": {
+        "label": "Skoða Pro eiginleika",
+        "href": "#pricing"
+      },
+      "guarantee": "Engin kreditkort nauðsynleg fyrir staðbundna ferlið."
+    },
+    "faq": {
+      "0": {
+        "q": "Eru gögnin mín raunverulega einkamál?",
+        "a": "Já. Í staðbundnu ferli fer gögnin aldrei af tækinu þínu. Það lifir í IndexedDB innan vafrans þíns."
+      },
+      "1": {
+        "q": "Hvernig á ég að afrita gögnin mín?",
+        "a": "Þú getur flutt út fullan JSON afrit hvenær sem er. Við mælum einnig með reglulegum CSV útflutningum."
+      },
+      "2": {
+        "q": "Hvað er 'Samþætting' Pro?",
+        "a": "Kemur fljótlega: Valfrjáls aðild til að samþætta dulkóðuð gögn milli tækja í gegnum Supabase."
+      },
+      "3": {
+        "q": "Tengist þú bönkum?",
+        "a": "Nei. Við teljum að handvirkur flutningur sé öruggari, áreiðanlegri, og byggir betri fjárhagsvitund."
+      }
+    },
+    "security": {
+      "title": "Privat-í-fyrsta með hönnun",
+      "description": "Fjárhagsforritið geymir gögnin þín á staðnum (undirbúið fyrir offline) og veitir þér stjórn á AI eiginleikum, útflutningi, og eyðingu.",
+      "buttons": {
+        "privacy": "Privat & stillingar",
+        "offline": "Offline stuðningur"
+      },
+      "cards": {
+        "localStorage": {
+          "title": "Staðbundin geymsla",
+          "description": "Fjárhagsgögnin þín eru geymd í vafranum þínum (IndexedDB) svo forritið haldist hratt og nothæft offline."
+        },
+        "encryption": {
+          "title": "Dulkóðunarstuðningur",
+          "description": "Forritið inniheldur dulkóðunarlag til að vernda viðkvæm fjárhagsgögn þegar það er virkjað."
+        },
+        "aiControls": {
+          "title": "AI eiginleika stjórnun",
+          "description": "Slökktu á AI-knúnum eiginleikum (eins og frávikaskynjun) og stjórnaðu aðgangi að spjallbotnum frá stillingum."
+        },
+        "exportDelete": {
+          "title": "Útflutningur & eyðing",
+          "description": "Flytja út gögnin þín og persónuverndarstillingar, eða eyða staðbundnum gögnum beint úr forritinu."
+        }
+      }
+    },
+    "comparison": {
+      "headers": {
+        "feature": "Eiginleiki",
+        "local": "BudgetPro Staðbundið",
+        "sync": "BudgetPro Samþætting (Pro)",
+        "cloud": "Venjulegt skýforrit"
+      },
+      "dataPrivacy": {
+        "feature": "Gögn einkamál",
+        "local": "100% Einkamál (Staðbundið)",
+        "sync": "Enda-til-endar dulkóðuð",
+        "cloud": "Sýnilegt af starfsmönnum"
+      },
+      "cost": {
+        "feature": "Kostnaður",
+        "local": "Ókeypis að eilífu",
+        "sync": "Einu sinni uppfærsla",
+        "cloud": "$100+/ár aðild"
+      },
+      "offlineMode": {
+        "feature": "Offline stilling"
+      },
+      "bankConnections": {
+        "feature": "Bankatengingar",
+        "local": "CSV / Handvirkt aðeins",
+        "sync": "Valfrjálst (Dulkóðað)",
+        "cloud": "Skylda safn"
+      },
+      "storageLocation": {
+        "feature": "Geymslustaður",
+        "local": "Tæki þitt",
+        "sync": "Zero-Knowledge ský",
+        "cloud": "Gagnagrunnur þeirra"
+      }
+    },
+    "socialProof": {
+      "title": "Fyrirferðarmikil útlit, innbyggt",
+      "description": "Smáatriðin sem gera fjárhagsáætlanir að virka: innleiðing, snöggir tenglar, farsíma leiðsögn, og offline-undirbúin frammistaða.",
+      "features": {
+        "onboarding": {
+          "title": "Innleiðingarferð",
+          "description": "Leiðsögn hjálpar nýjum notendum að ná fljótt gildi."
+        },
+        "shortcuts": {
+          "title": "Takkaskammta",
+          "description": "Fara hratt með leitar- og aðgerðarstuttum tenglum innbyggðum í UI."
+        },
+        "mobileUx": {
+          "title": "Farsímafyrirkomulag",
+          "description": "Neðri leiðsögn og viðbragðsform sem líður eins og innfædd."
+        },
+        "pwaInstall": {
+          "title": "PWA uppsetning",
+          "description": "Settu upp eins og forrit og haltu áfram jafnvel með óstöðugum interneti."
+        }
+      }
+    },
+    "pricingSection": {
+      "recommended": "Mælt með",
+      "productName": "Staðbundið ferli",
+      "productDescription": "Heildar fjárhagsáætlunareynsla, sem keyrir algjörlega á tækinu þínu.",
+      "whyChoose": "Af hverju velja staðbundið ferli?",
+      "whyChooseDescription": "Sjáðu hvernig við stöndum okkur gegn skýrisum.",
+      "features": "Inniheldur óendanlegar færslur, reikninga, fjárhagsáætlanir, og fullar staðbundnar afritunaraðgerðir."
+    },
+    "heroSection": {
+      "cta": {
+        "heading": "Byggt fyrir skýrleika, ekki óreiðu.",
+        "viewPricing": "Skoða verðlagningu"
+      },
+      "badges": {
+        "noSubscriptions": "Engar aðildir",
+        "offlineReady": "Offline-undirbúið",
+        "seniorsMode": "Eldri mód"
+      },
+      "preview": {
+        "livePreview": "Lifandi forsýning",
+        "recentTransactions": "Nýlegar færslur",
+        "categoryBudgets": "Flokkar fjárhagsáætlanir",
+        "recurring": "Endurtekin"
+      },
+      "modes": {
+        "dashboard": "Yfirlit",
+        "budgets": "Fjárhagsáætlanir",
+        "subscriptions": "Aðildir"
+      }
+    },
+    "featuresDeepDive": {
+      "heading1": "Töflureikni máttur.",
+      "heading2": "Forrit einfaldleiki.",
+      "description": "Hættu að berjast við brotnar formúlur. Fáðu sveigjanleika handvirkrar stjórnar með hraða nútíma forrits.",
+      "cta": "Byrjaðu ókeypis prufu",
+      "explore": "Skoða"
+    },
+    "accessibility": {
+      "title": "Aðgengilegt að sjálfsögðu",
+      "description": "Eldri mód veitir einfaldari leiðsögn og stærri snertimarkmið. Takkaskammta, fókusástand, og skýr andstæða hjálpa öllum að fara hraðar.",
+      "badges": {
+        "seniorsMode": "Eldri mód",
+        "largeTouchTargets": "Stór snertimarkmið",
+        "keyboardFirst": "Takkaskammta fyrst"
+      },
+      "buttons": {
+        "openApp": "Opna forritið",
+        "settings": "Aðgengisstillingar"
+      }
+    },
+    "faqSection": {
+      "title": "Algengar spurningar",
+      "description": "Einfallar svör við algengum spurningum um prufur, verðlagningu, og aðgang."
+    },
+    "outcomesSection": {
+      "title": "Byggt fyrir raunveruleikann, ekki töflureikni",
+      "description": "Flest fjárhagsforrit láta þig vinna verkið. BudgetPro er hannað til að draga úr þrýstingi á meðan þú heldur stjórn."
+    },
+    "howItWorksSection": {
+      "title": "Hvernig það virkar",
+      "description": "Vinnuflæði sem færir þig að skýrleika fljótt, án þess að loka þig í flóknum kerfum."
+    },
+    "nav": {
+      "tagline": "Fyrirferðarmikil fjárhagsáætlanir"
+    },
+    "marquee": {
+      "logos": [
+        "Fjárhagsáætlanir",
+        "Aðildir",
+        "Lán",
+        "OCR kvittanir",
+        "Skýrslur",
+        "Skipulag",
+        "Offline",
+        "Eldri mód"
+      ]
     }
   }
 }

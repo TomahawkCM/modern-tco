@@ -19,7 +19,7 @@ import * as path from 'path';
 // Load environment variables from .env.local
 dotenv.config({ path: path.join(__dirname, '../.env.local') });
 import { SUPPORTED_LOCALES, type SupportedLocale } from '../src/i18n/config';
-import { ClaudeAPIClient, estimateCost } from './lib/claude-api-client';
+import { OpenAIAPIClient, estimateCost } from './lib/openai-api-client';
 import { CacheManager, loadSourceWithHash } from './lib/cache-manager';
 import { shouldUseBaseTranslation, getBaseLocale } from './lib/prompt-builder';
 import { validate, formatValidationResult } from './lib/translation-validator';
@@ -102,7 +102,7 @@ async function main() {
   }
 
   // Initialize API client
-  const client = new ClaudeAPIClient(options.concurrency);
+  const client = new OpenAIAPIClient(options.concurrency);
 
   // Process translations
   console.log('🚀 Starting translations...\n');
@@ -271,7 +271,7 @@ async function processBaseLocales(
   locales: SupportedLocale[],
   sourceContent: object,
   sourceHash: string,
-  client: ClaudeAPIClient,
+  client: OpenAIAPIClient,
   cache: CacheManager,
   options: CLIOptions
 ): Promise<void> {
@@ -329,7 +329,7 @@ async function processBaseLocales(
 async function processAdaptedLocales(
   locales: SupportedLocale[],
   sourceHash: string,
-  client: ClaudeAPIClient,
+  client: OpenAIAPIClient,
   cache: CacheManager,
   options: CLIOptions
 ): Promise<void> {

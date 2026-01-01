@@ -1,37 +1,42 @@
+'use client';
+
 import { Check, X } from "lucide-react";
 import { LandingCard } from "./LandingCard";
+import { useTranslations } from 'next-intl';
 
 export function ComparisonTable() {
+  const t = useTranslations('landing.comparison');
+
   const rows = [
     {
-      feature: "Data Privacy",
-      local: "100% Private (Local)",
-      sync: "End-to-End Encrypted",
-      cloud: "Viewable by Employees",
+      feature: t('dataPrivacy.feature'),
+      local: t('dataPrivacy.local'),
+      sync: t('dataPrivacy.sync'),
+      cloud: t('dataPrivacy.cloud'),
     },
     {
-      feature: "Cost",
-      local: "Free Forever",
-      sync: "One-time Upgrade",
-      cloud: "$100+/year Subscription",
+      feature: t('cost.feature'),
+      local: t('cost.local'),
+      sync: t('cost.sync'),
+      cloud: t('cost.cloud'),
     },
     {
-      feature: "Offline Mode",
+      feature: t('offlineMode.feature'),
       local: true,
       sync: true,
       cloud: false,
     },
     {
-      feature: "Bank Connections",
-      local: "CSV / Manual Only",
-      sync: "Optional (Encrypted)",
-      cloud: "Mandatory Aggregation",
+      feature: t('bankConnections.feature'),
+      local: t('bankConnections.local'),
+      sync: t('bankConnections.sync'),
+      cloud: t('bankConnections.cloud'),
     },
     {
-      feature: "Storage Location",
-      local: "Your Device",
-      sync: "Zero-Knowledge Cloud",
-      cloud: "Their Database",
+      feature: t('storageLocation.feature'),
+      local: t('storageLocation.local'),
+      sync: t('storageLocation.sync'),
+      cloud: t('storageLocation.cloud'),
     },
   ];
 
@@ -45,10 +50,10 @@ export function ComparisonTable() {
     <div className="overflow-x-auto">
       <div className="min-w-[700px]">
         <div className="grid grid-cols-4 gap-4 border-b border-white/10 pb-4 text-center text-sm font-bold text-white">
-          <div className="pl-4 text-left">Feature</div>
-          <div className="text-teal-300">BudgetPro Local</div>
-          <div className="text-indigo-300">BudgetPro Sync (Pro)</div>
-          <div className="text-slate-500">Typical Cloud App</div>
+          <div className="pl-4 text-left">{t('headers.feature')}</div>
+          <div className="text-teal-300">{t('headers.local')}</div>
+          <div className="text-indigo-300">{t('headers.sync')}</div>
+          <div className="text-slate-500">{t('headers.cloud')}</div>
         </div>
         <div className="space-y-4 pt-4">
           {rows.map((row) => (

@@ -1,25 +1,30 @@
+'use client';
+
 import { Section } from "@/components/budget/landing/Section";
-import { LANDING_CONTENT } from "@/components/budget/landing/content";
+import { useLandingContent } from "@/components/budget/landing/content";
 import { LandingCard } from "@/components/budget/landing/LandingCard";
 import { ArrowUpRight } from "lucide-react";
+import { useTranslations } from 'next-intl';
 
 export function OutcomesSection() {
+  const content = useLandingContent();
+  const t = useTranslations('landing.outcomesSection');
+
   return (
     <Section>
       <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
         <div>
           <h2 className="text-2xl font-bold tracking-tight text-white sm:text-3xl">
-            Built for real life, not spreadsheets
+            {t('title')}
           </h2>
           <p className="mt-3 max-w-2xl text-base text-slate-400">
-            Most budgeting apps make you do the work. BudgetPro is designed to reduce friction
-            while keeping you in control.
+            {t('description')}
           </p>
         </div>
       </div>
 
       <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-        {LANDING_CONTENT.outcomes.map((o) => (
+        {content.outcomes.map((o) => (
           <LandingCard key={o.title} className="p-6">
             <div className="flex items-start justify-between gap-3">
               <div>

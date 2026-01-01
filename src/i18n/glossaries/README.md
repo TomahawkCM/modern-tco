@@ -29,16 +29,20 @@ Each glossary file is a JSON object mapping English terms to arrays of approved 
 
 | Locale | Language | Coverage |
 |--------|----------|----------|
+| `ar-SA.json` | Arabic (Saudi Arabia) | Core Budget App terms (RTL) |
+| `de-DE.json` | German (Germany) | Core Budget App terms |
 | `es-MX.json` | Spanish (Mexico) | Core Budget App terms |
 | `fr-FR.json` | French (France) | Core Budget App terms |
-| `de-DE.json` | German (Germany) | Core Budget App terms |
-| `pt-BR.json` | Portuguese (Brazil) | Core Budget App terms |
-| `ja-JP.json` | Japanese (Japan) | Core Budget App terms |
-| `zh-CN.json` | Chinese (Simplified) | Core Budget App terms |
-| `ar-SA.json` | Arabic (Saudi Arabia) | Core Budget App terms (RTL) |
 | `hi-IN.json` | Hindi (India) | Core Budget App terms |
-| `ru-RU.json` | Russian (Russia) | Core Budget App terms |
 | `it-IT.json` | Italian (Italy) | Core Budget App terms |
+| `ja-JP.json` | Japanese (Japan) | Core Budget App terms |
+| `ko-KR.json` | Korean (South Korea) | Core Budget App terms |
+| `pt-BR.json` | Portuguese (Brazil) | Core Budget App terms |
+| `ru-RU.json` | Russian (Russia) | Core Budget App terms |
+| `th-TH.json` | Thai (Thailand) | Core Budget App terms |
+| `tr-TR.json` | Turkish (Turkey) | Core Budget App terms |
+| `vi-VN.json` | Vietnamese (Vietnam) | Core Budget App terms |
+| `zh-CN.json` | Chinese (Simplified) | Core Budget App terms |
 
 ## Core Terms
 
@@ -123,13 +127,15 @@ Glossaries integrate with:
 
 ## Future Enhancements
 
-- [ ] Add glossaries for remaining 104 locales
+- [ ] Add glossaries for remaining 100 locales
 - [ ] Create industry-specific glossaries (banking, finance)
 - [ ] Add pronunciation guides for customer support
 - [ ] Implement glossary validation in CI/CD
 - [ ] Create glossary management UI
+- [ ] Add more RTL language glossaries (Hebrew, Persian)
 
 ---
 
-Last updated: 2025-12-30
+**Last updated:** 2025-12-31
+**Recent changes:** Added Korean (ko-KR), Turkish (tr-TR), Vietnamese (vi-VN), and Thai (th-TH) glossaries
 Created as part of Task 70 (i18n automation infrastructure)

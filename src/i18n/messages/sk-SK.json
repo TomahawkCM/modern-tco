@@ -23,7 +23,7 @@
   },
   "welcome": {
     "title": "Vitajte v aplikácii Rozpočet",
-    "subtitle": "Začnite pridaním prvej transakcie alebo importovaním údajov z banky"
+    "subtitle": "Začnite pridaním prvej transakcie alebo importovaním dát z vašej banky"
   },
   "common": {
     "save": "Uložiť",
@@ -35,7 +35,7 @@
   "widget": {
     "spendingByCategory": {
       "title": "Výdavky podľa kategórie",
-      "description": "Pozrite sa, kam idú vaše peniaze s vizuálnym rozdelením"
+      "description": "Zistite, kam idú vaše peniaze pomocou vizuálnych prehľadov"
     },
     "recentTransactions": {
       "title": "Nedávne transakcie",
@@ -43,7 +43,7 @@
     },
     "budgetProgress": {
       "title": "Pokrok v rozpočte",
-      "description": "Sledujte, ako sa vám darí dosahovať rozpočtové ciele"
+      "description": "Sledujte, ako sa vám darí dosahovať ciele rozpočtu"
     },
     "accountBalances": {
       "title": "Zostatky na účtoch",
@@ -60,6 +60,386 @@
     "upcomingBills": {
       "title": "Nadchádzajúce účty",
       "description": "Nikdy nezmeškajte platbu s pripomienkami účtov"
+    }
+  },
+  "tooltip": {
+    "ariaLabel": "Viac informácií",
+    "learnMore": "Zistiť viac →"
+  },
+  "footer": {
+    "tagline": "Prémiové rozpočtovanie s jednorazovým vylepšením.",
+    "links": {
+      "login": "Prihlásiť sa",
+      "signup": "Začať skúšobnú verziu",
+      "upgrade": "Vylepšiť",
+      "settings": "Nastavenia"
+    },
+    "copyright": "© {year} {brandName}"
+  },
+  "dialog": {
+    "confirm": "Potvrdiť",
+    "cancel": "Zrušiť",
+    "processing": "Spracováva sa...",
+    "finalConfirmation": "Konečné potvrdenie:",
+    "typeToConfirm": "Napíšte {text} na potvrdenie tejto akcie."
+  },
+  "sidebar": {
+    "appTitle": "Aplikácia Rozpočet",
+    "appSubtitle": "Prémiové financie",
+    "search": "Hľadať...",
+    "shortcuts": "Skratky",
+    "navigation": {
+      "dashboard": "Nástenka",
+      "transactions": "Transakcie",
+      "scanReceipt": "Naskenovať účtenku",
+      "categories": "Kategórie",
+      "budgets": "Rozpočty",
+      "subscriptions": "Predplatné",
+      "loans": "Úvery",
+      "investments": "Investície",
+      "futurePlans": "Budúce plány",
+      "retirement": "Dôchodok",
+      "reports": "Správy"
+    },
+    "actions": {
+      "importCsv": "Importovať CSV",
+      "settings": "Nastavenia",
+      "showLess": "Zobraziť menej",
+      "showAllItems": "Zobraziť všetky položky"
+    }
+  },
+  "onboarding": {
+    "skipTour": "Preskočiť prehliadku",
+    "stepCounter": "Krok {current} z {total}",
+    "dontShowAgain": "Nezobrazovať túto prehliadku znova",
+    "quickTip": "💡 Rýchly tip",
+    "navigation": {
+      "previous": "Predchádzajúci",
+      "next": "Ďalší",
+      "getStarted": "Začať",
+      "startTour": "Začať prehliadku"
+    },
+    "steps": {
+      "welcome": {
+        "title": "👋 Vitajte v aplikácii Rozpočet!",
+        "description": "Urobme si rýchlu prehliadku, aby sme vám pomohli začať spravovať vaše osobné financie. Nebude to trvať dlho!"
+      },
+      "import": {
+        "title": "📥 Importujte svoje transakcie",
+        "description": "Začnite importovaním svojich bankových transakcií z CSV súboru. Podporujeme BMO, Home Trust a mnoho ďalších bánk. Aplikácia automaticky kategorizuje vaše transakcie!"
+      },
+      "categorize": {
+        "title": "🏷️ Kategorizujte a organizujte",
+        "description": "Skontrolujte a upravte kategórie transakcií. Naša inteligentná kategorizácia sa učí z vašich opráv, aby sa časom zlepšila. Použite hromadné akcie na kategorizáciu viacerých transakcií naraz!"
+      },
+      "budgets": {
+        "title": "🎯 Nastavte si rozpočty",
+        "description": "Vytvorte rozpočty pre rôzne kategórie výdavkov. Sledujte svoj pokrok počas mesiaca a dostávajte upozornenia, keď sa blížite k svojim limitom."
+      },
+      "reports": {
+        "title": "📊 Zobraziť správy a prehľady",
+        "description": "Vizualizujte svoje vzory výdavkov, sledujte svoj čistý majetok a robte informované finančné rozhodnutia. Vaša nástenka sa automaticky aktualizuje s každou transakciou!"
+      }
+    },
+    "tips": {
+      "import": "Potiahnite a pustite svoj CSV súbor alebo kliknite na prehľadávanie. Automaticky detekujeme formáty BMO a Home Trust!",
+      "categorize": "Použite tlačidlo rýchlej kategorizácie alebo vyberte viacero transakcií na hromadnú kategorizáciu.",
+      "budgets": "Nastavte realistické rozpočty a upozorníme vás, ak sa blížite k prekročeniu."
+    }
+  },
+  "landing": {
+    "brand": {
+      "name": "BudgetPro",
+      "product": "Aplikácia Rozpočet"
+    },
+    "hero": {
+      "badge": "Ochrana súkromia • Iba lokálne • Žiadne sledovanie",
+      "headline": "Ovládajte svoje peniaze bez predaja vašich údajov.",
+      "subhead": "Sila tabuľkového procesora. Jednoduchosť aplikácie. Zažite finančnú jasnosť s jedinou aplikáciou na rozpočet, ktorá zaručuje, že vaše údaje nikdy neopustia vaše zariadenie.",
+      "primaryCta": {
+        "label": "Začať lokálny protokol (zdarma)",
+        "href": "/budget-app/auth/signup"
+      },
+      "secondaryCta": {
+        "label": "Prihlásiť sa",
+        "href": "/budget-app/auth/login"
+      },
+      "finePrint": "Nie sú potrebné bankové údaje. Pre lokálny režim nie je potrebný účet."
+    },
+    "trust": {
+      "0": {
+        "title": "Vaše zariadenie, vaše údaje",
+        "description": "Údaje zostávajú vo vašom prehliadači v IndexedDB. Doslova ich nemôžeme vidieť."
+      },
+      "1": {
+        "title": "Sila tabuľkového procesora",
+        "description": "Hromadné úpravy, pivotovanie a analýza ako profesionál bez bolestí hlavy z vzorcov."
+      },
+      "2": {
+        "title": "Offline rýchlosť",
+        "description": "Žiadna latencia. Funguje na vrchole hory alebo v podzemnej dráhe."
+      },
+      "3": {
+        "title": "Ručné rituály",
+        "description": "Importný sprievodca robí z piatkovej recenzie peňazí uspokojivý zvyk."
+      }
+    },
+    "outcomes": {
+      "0": {
+        "title": "Prestaňte bojovať s agregátormi",
+        "description": "Žiadne rozbité pripojenia ani slučky opätovného overovania. Vy ovládate vstup dát."
+      },
+      "1": {
+        "title": "Ochrana súkromia od návrhu",
+        "description": "Nepredávame vaše údaje, pretože ich nemáme. Bodka."
+      },
+      "2": {
+        "title": "Plánovanie do budúcnosti",
+        "description": "Modelujte dôchodok, splácanie úverov a ciele sporenia v jednom integrovanom pohľade."
+      },
+      "3": {
+        "title": "Zabíjač predplatného",
+        "description": "Zistite opakujúce sa výdavky, ktoré iné aplikácie prehliadajú."
+      }
+    },
+    "features": {
+      "0": {
+        "title": "Lokálna nástenka",
+        "description": "Čistý majetok, cash flow a rozdelenie podľa kategórií. Okamžité časy načítania.",
+        "href": "/budget-app"
+      },
+      "1": {
+        "title": "Importný sprievodca",
+        "description": "Inteligentný mapper CSV pre BMO, Home Trust a prispôsobiteľné formáty.",
+        "href": "/budget-app/import"
+      },
+      "2": {
+        "title": "OCR účteniek",
+        "description": "Naskenujte účtenky lokálne s Tesseract.js. Žiadne spracovanie v cloude.",
+        "href": "/budget-app/ocr"
+      },
+      "3": {
+        "title": "Kategóriové rozpočty",
+        "description": "Rozpočtovanie s nulovým základom alebo prenášaním s podrobnou kontrolou kategórií.",
+        "href": "/budget-app/budgets"
+      },
+      "4": {
+        "title": "Kalkulačka dôchodku",
+        "description": "Predpovedajte svoj dátum slobody s vizualizáciami zloženého úroku.",
+        "href": "/budget-app/planning/retirement"
+      },
+      "5": {
+        "title": "Ochrana súkromia",
+        "description": "Voliteľné šifrovanie na strane klienta pre ďalšiu vrstvu zabezpečenia.",
+        "href": "/budget-app/settings"
+      }
+    },
+    "howItWorks": {
+      "0": {
+        "title": "Import",
+        "description": "Potiahnite a pustite CSV alebo naskenujte účtenky. AI lokálne mapuje stĺpce."
+      },
+      "1": {
+        "title": "Prehľad",
+        "description": "Rýchla kategorizácia s inteligentnými pravidlami a hromadnými akciami."
+      },
+      "2": {
+        "title": "Plán",
+        "description": "Priraďte každému doláru úlohu a predpovedajte svoj budúci čistý majetok."
+      }
+    },
+    "pricing": {
+      "eyebrow": "Spravodlivé ceny",
+      "title": "Lokálne je zadarmo. Synchronizácia je Pro.",
+      "description": "Začnite s výkonným lokálnym protokolom. Neskôr sa vylepšite, ak potrebujete synchronizáciu na viacerých zariadeniach.",
+      "priceLabel": "Zadarmo navždy",
+      "cta": {
+        "label": "Začať lokálny protokol",
+        "href": "/budget-app/auth/signup"
+      },
+      "secondary": {
+        "label": "Zobraziť Pro funkcie",
+        "href": "#pricing"
+      },
+      "guarantee": "Pre lokálny protokol nie je potrebná kreditná karta."
+    },
+    "faq": {
+      "0": {
+        "q": "Je moje údaje naozaj súkromné?",
+        "a": "Áno. V lokálnom protokole údaje nikdy neopustia vaše zariadenie. Žijú v IndexedDB vo vašom prehliadači."
+      },
+      "1": {
+        "q": "Ako si zálohujem svoje údaje?",
+        "a": "Môžete kedykoľvek exportovať úplnú zálohu vo formáte JSON. Odporúčame tiež pravidelné exporty vo formáte CSV."
+      },
+      "2": {
+        "q": "Čo je 'Sync' Pro?",
+        "a": "Čoskoro: Voliteľné predplatné na synchronizáciu šifrovaných údajov medzi zariadeniami cez Supabase."
+      },
+      "3": {
+        "q": "Pripojujete sa k bankám?",
+        "a": "Nie. Veríme, že manuálny import je bezpečnejší, spoľahlivejší a buduje lepšie finančné povedomie."
+      }
+    },
+    "security": {
+      "title": "Ochrana súkromia od návrhu",
+      "description": "Aplikácia Rozpočet ukladá vaše údaje lokálne (pripravené na offline) a poskytuje vám ovládacie prvky pre funkcie AI, export a odstránenie.",
+      "buttons": {
+        "privacy": "Ochrana súkromia a nastavenia",
+        "offline": "Podpora offline"
+      },
+      "cards": {
+        "localStorage": {
+          "title": "Lokálne úložisko",
+          "description": "Vaše rozpočtové údaje sú uložené vo vašom prehliadači (IndexedDB), takže aplikácia zostáva rýchla a použiteľná offline."
+        },
+        "encryption": {
+          "title": "Podpora šifrovania",
+          "description": "Aplikácia obsahuje vrstvu šifrovania na ochranu citlivých rozpočtových záznamov, keď je povolená."
+        },
+        "aiControls": {
+          "title": "Ovládanie funkcií AI",
+          "description": "Prepínajte funkcie poháňané AI (ako detekcia anomálií) a spravujte prístup chatbotov z nastavení."
+        },
+        "exportDelete": {
+          "title": "Export a odstránenie",
+          "description": "Exportujte svoje údaje a nastavenia ochrany súkromia alebo odstráňte lokálne údaje priamo z aplikácie."
+        }
+      }
+    },
+    "comparison": {
+      "headers": {
+        "feature": "Funkcia",
+        "local": "BudgetPro Lokálne",
+        "sync": "BudgetPro Synchronizácia (Pro)",
+        "cloud": "Typická cloudová aplikácia"
+      },
+      "dataPrivacy": {
+        "feature": "Ochrana údajov",
+        "local": "100% súkromné (lokálne)",
+        "sync": "Šifrovanie end-to-end",
+        "cloud": "Viditeľné zamestnancami"
+      },
+      "cost": {
+        "feature": "Náklady",
+        "local": "Zadarmo navždy",
+        "sync": "Jednorazové vylepšenie",
+        "cloud": "$100+/rok predplatné"
+      },
+      "offlineMode": {
+        "feature": "Offline režim"
+      },
+      "bankConnections": {
+        "feature": "Bankové pripojenia",
+        "local": "Iba CSV / Manuálne",
+        "sync": "Voliteľné (šifrované)",
+        "cloud": "Povinná agregácia"
+      },
+      "storageLocation": {
+        "feature": "Miesto ukladania",
+        "local": "Vaše zariadenie",
+        "sync": "Zero-Knowledge Cloud",
+        "cloud": "Ich databáza"
+      }
+    },
+    "socialProof": {
+      "title": "Prémiová úprava, zabudovaná",
+      "description": "Detaily, ktoré robia rozpočtovanie efektívnym: onboarding, skratky, mobilná navigácia a výkon pripravený na offline.",
+      "features": {
+        "onboarding": {
+          "title": "Onboarding prehliadka",
+          "description": "Sprievodná prehliadka pomáha novým používateľom rýchlo dosiahnuť hodnotu."
+        },
+        "shortcuts": {
+          "title": "Klávesové skratky",
+          "description": "Rýchlo sa pohybujte s vyhľadávaním a akčnými skratkami zabudovanými do UI."
+        },
+        "mobileUx": {
+          "title": "Mobilná UX",
+          "description": "Spodná navigácia a responzívne rozloženia, ktoré pôsobia natívne."
+        },
+        "pwaInstall": {
+          "title": "Inštalácia PWA",
+          "description": "Inštalujte ako aplikáciu a pokračujte aj pri slabom internete."
+        }
+      }
+    },
+    "pricingSection": {
+      "recommended": "Odporúčané",
+      "productName": "Lokálny protokol",
+      "productDescription": "Kompletný zážitok z rozpočtovania, ktorý beží úplne na vašom zariadení.",
+      "whyChoose": "Prečo zvoliť lokálny protokol?",
+      "whyChooseDescription": "Pozrite sa, ako sa porovnávame s cloudovými gigantmi.",
+      "features": "Zahŕňa neobmedzené transakcie, účty, rozpočty a plné možnosti lokálnej zálohy."
+    },
+    "heroSection": {
+      "cta": {
+        "heading": "Navrhnuté pre jasnosť, nie chaos.",
+        "viewPricing": "Zobraziť ceny"
+      },
+      "badges": {
+        "noSubscriptions": "Žiadne predplatné",
+        "offlineReady": "Pripravené na offline",
+        "seniorsMode": "Režim pre seniorov"
+      },
+      "preview": {
+        "livePreview": "Živý náhľad",
+        "recentTransactions": "Nedávne transakcie",
+        "categoryBudgets": "Kategóriové rozpočty",
+        "recurring": "Opakujúce sa"
+      },
+      "modes": {
+        "dashboard": "Nástenka",
+        "budgets": "Rozpočty",
+        "subscriptions": "Predplatné"
+      }
+    },
+    "featuresDeepDive": {
+      "heading1": "Sila tabuľkového procesora.",
+      "heading2": "Jednoduchosť aplikácie.",
+      "description": "Prestaňte bojovať s rozbitými vzorcami. Získajte flexibilitu manuálnej kontroly s rýchlosťou modernej aplikácie.",
+      "cta": "Začať bezplatnú skúšobnú verziu",
+      "explore": "Preskúmať"
+    },
+    "accessibility": {
+      "title": "Prístupné od predpokladu",
+      "description": "Režim pre seniorov poskytuje zjednodušenú navigáciu a väčšie dotykové ciele. Klávesové skratky, stavy zaostrenia a jasný kontrast pomáhajú všetkým pohybovať sa rýchlejšie.",
+      "badges": {
+        "seniorsMode": "Režim pre seniorov",
+        "largeTouchTargets": "Veľké dotykové ciele",
+        "keyboardFirst": "Klávesnica na prvom mieste"
+      },
+      "buttons": {
+        "openApp": "Otvoriť aplikáciu",
+        "settings": "Nastavenia prístupnosti"
+      }
+    },
+    "faqSection": {
+      "title": "Často kladené otázky",
+      "description": "Jednoduché odpovede na bežné otázky o skúšobných verziách, cenách a prístupe."
+    },
+    "outcomesSection": {
+      "title": "Navrhnuté pre skutočný život, nie tabuľkové procesory",
+      "description": "Väčšina aplikácií na rozpočtovanie vás núti robiť prácu. BudgetPro je navrhnuté tak, aby znížilo trenie a zároveň vás udržalo pod kontrolou."
+    },
+    "howItWorksSection": {
+      "title": "Ako to funguje",
+      "description": "Pracovný postup, ktorý vás rýchlo dostane k jasnosti, bez zamknutia do zložitých systémov."
+    },
+    "nav": {
+      "tagline": "Prémiové rozpočtovanie"
+    },
+    "marquee": {
+      "logos": [
+        "Rozpočtovanie",
+        "Predplatné",
+        "Úvery",
+        "OCR účtenky",
+        "Správy",
+        "Plánovanie",
+        "Offline",
+        "Režim pre seniorov"
+      ]
     }
   }
 }

@@ -1,23 +1,23 @@
 {
   "nav": {
-    "dashboard": "Pult",
+    "dashboard": "Paneli",
     "transactions": "Transaksionet",
     "budgets": "Buxhetet",
     "reports": "Raportet",
     "accounts": "Llogaritë",
     "categories": "Kategoritë",
-    "goals": "Qëllimet",
+    "goals": "Objektivat",
     "import": "Importo",
     "export": "Eksporto",
     "settings": "Cilësimet",
-    "help": "Ndihma",
+    "help": "Ndihmë",
     "about": "Rreth"
   },
   "actions": {
     "addTransaction": "Shto Transaksion",
     "importData": "Importo Të Dhënat",
     "import": "Importo",
-    "editDashboard": "Redakto Pultin",
+    "editDashboard": "Redakto Panelin",
     "saveChanges": "Ruaj Ndryshimet",
     "resetDefaults": "Rivendos në Parazgjedhjet"
   },
@@ -34,12 +34,12 @@
   },
   "widget": {
     "spendingByCategory": {
-      "title": "Shpenzimet sipas Kategorive",
-      "description": "Shihni se ku shkon paratë tuaja me përmbledhje vizuale"
+      "title": "Shpenzimet sipas Kategorisë",
+      "description": "Shihni ku shkojnë paratë tuaja me ndarje vizuale"
     },
     "recentTransactions": {
       "title": "Transaksionet e Fundit",
-      "description": "Pamje e shpejtë e aktiviteteve tuaja financiare të fundit"
+      "description": "Pamje e shpejtë e aktivitetit tuaj financiar të fundit"
     },
     "budgetProgress": {
       "title": "Progresi i Buxhetit",
@@ -54,12 +54,392 @@
       "description": "Krahasoni të ardhurat dhe shpenzimet tuaja me kalimin e kohës"
     },
     "monthlyTrends": {
-      "title": "Tendencat Mënyrë Mënyre",
+      "title": "Tendencat Muajore",
       "description": "Vizualizoni modelet tuaja financiare muaj pas muaji"
     },
     "upcomingBills": {
       "title": "Faturat në Vijim",
       "description": "Kurrë mos humbisni një pagesë me kujtesat për faturat"
+    }
+  },
+  "tooltip": {
+    "ariaLabel": "Më shumë informacion",
+    "learnMore": "Mëso më shumë →"
+  },
+  "footer": {
+    "tagline": "Buxhetim premium me një përmirësim një herë.",
+    "links": {
+      "login": "Hyni",
+      "signup": "Filloni provën",
+      "upgrade": "Përmirëso",
+      "settings": "Cilësimet"
+    },
+    "copyright": "© {year} {brandName}"
+  },
+  "dialog": {
+    "confirm": "Konfirmo",
+    "cancel": "Anulo",
+    "processing": "Duke përpunuar...",
+    "finalConfirmation": "Konfirmimi Final:",
+    "typeToConfirm": "Shkruani {text} për të konfirmuar këtë veprim."
+  },
+  "sidebar": {
+    "appTitle": "Aplikacioni i Buxhetit",
+    "appSubtitle": "Financë Premium",
+    "search": "Kërko...",
+    "shortcuts": "Shkurtore",
+    "navigation": {
+      "dashboard": "Paneli",
+      "transactions": "Transaksionet",
+      "scanReceipt": "Skano Faturën",
+      "categories": "Kategoritë",
+      "budgets": "Buxhetet",
+      "subscriptions": "Abonimet",
+      "loans": "Kreditë",
+      "investments": "Investimet",
+      "futurePlans": "Planet e Ardhshme",
+      "retirement": "Pensioni",
+      "reports": "Raportet"
+    },
+    "actions": {
+      "importCsv": "Importo CSV",
+      "settings": "Cilësimet",
+      "showLess": "Trego Më Pak",
+      "showAllItems": "Trego Të Gjitha Artikujt"
+    }
+  },
+  "onboarding": {
+    "skipTour": "Anulo turin",
+    "stepCounter": "Hapi {current} nga {total}",
+    "dontShowAgain": "Mos e shfaq këtë tur më",
+    "quickTip": "💡 Këshill i Shpejtë",
+    "navigation": {
+      "previous": "Para",
+      "next": "Tjetër",
+      "getStarted": "Nisni",
+      "startTour": "Nisni Turin"
+    },
+    "steps": {
+      "welcome": {
+        "title": "👋 Mirë se vini në Aplikacionin e Buxhetit!",
+        "description": "Le të bëjmë një tur të shpejtë për t'ju ndihmuar të filloni me menaxhimin e financave tuaja familjare. Kjo nuk do të zgjasë gjatë!"
+      },
+      "import": {
+        "title": "📥 Importoni Transaksionet Tuaja",
+        "description": "Filloni duke importuar transaksionet tuaja nga banka nga një skedar CSV. Ne mbështesim BMO, Home Trust dhe shumë banka të tjera. Aplikacioni do të kategorizojë automatikisht transaksionet tuaja!"
+      },
+      "categorize": {
+        "title": "🏷️ Kategorizoni & Organizoni",
+        "description": "Rishikoni dhe rregulloni kategoritë e transaksioneve. Kategorizimi ynë inteligjent mëson nga korrigjimet tuaja për të përmirësuar me kalimin e kohës. Përdorni veprime masive për të kategorizuar shumë transaksione njëherësh!"
+      },
+      "budgets": {
+        "title": "🎯 Vendosni Buxhetet Tuaja",
+        "description": "Krijoni buxhete për kategori të ndryshme shpenzimesh. Ndjekni progresin tuaj gjatë muajit dhe merrni njoftime kur po i afroheni kufijve tuaj."
+      },
+      "reports": {
+        "title": "📊 Shihni Raportet & Njohuritë",
+        "description": "Vizualizoni modelet tuaja të shpenzimeve, ndjekni pasurinë tuaj neto dhe merrni vendime financiare të informuara. Paneli juaj përditësohet automatikisht me çdo transaksion!"
+      }
+    },
+    "tips": {
+      "import": "Tërhiqni dhe lëshoni skedarin tuaj CSV ose klikoni për të kërkuar. Ne auto-detectojmë formatet BMO dhe Home Trust!",
+      "categorize": "Përdorni butonin e shpejtë për kategorizim ose zgjidhni shumë transaksione për kategorizim masiv.",
+      "budgets": "Vendosni buxhete realiste dhe ne do t'ju njoftojmë nëse jeni në rrugën për të shpenzuar më shumë."
+    }
+  },
+  "landing": {
+    "brand": {
+      "name": "BudgetPro",
+      "product": "Aplikacioni i Buxhetit"
+    },
+    "hero": {
+      "badge": "Privatësia e Parë • Vetëm Lokal • Zero Ndjekje",
+      "headline": "Menaxhoni Paratë Tuaja pa Shitur të Dhënat Tuaja.",
+      "subhead": "Përparësitë e një spreadsheet. Thjeshtësia e një aplikacioni. Përjetoni qartësinë financiare me aplikacionin e vetëm të buxhetit që garanton se të dhënat tuaja nuk do të dalin kurrë nga pajisja juaj.",
+      "primaryCta": {
+        "label": "Nisni Protokollin Lokal (Falë)",
+        "href": "/budget-app/auth/signup"
+      },
+      "secondaryCta": {
+        "label": "Hyni",
+        "href": "/budget-app/auth/login"
+      },
+      "finePrint": "Nuk kërkohen kredenciale bankare. Nuk nevojitet llogari për modalitetin lokal."
+    },
+    "trust": {
+      "0": {
+        "title": "Pajisja Juaj, Të Dhënat Tuaja",
+        "description": "Të dhënat qëndrojnë në IndexedDB të shfletuesit tuaj. Ne në të vërtetë nuk mund ta shohim atë."
+      },
+      "1": {
+        "title": "Përparësitë e Spreadsheet",
+        "description": "Redaktoni masivisht, pivotoni dhe analizoni si një profesionist pa dhimbjet e kokës nga formulat."
+      },
+      "2": {
+        "title": "Shpejtësia Offline",
+        "description": "Zero vonesë. Funksionon në një majë mali ose në një tunel metro."
+      },
+      "3": {
+        "title": "Ritualet Manuale",
+        "description": "Asistenti i importit e bën Rishikimin e Parave të Premtes një zakon të këndshëm."
+      }
+    },
+    "outcomes": {
+      "0": {
+        "title": "Ndaluar Luftimin me Agregatorët",
+        "description": "Nuk ka më lidhje të prishura ose cikle ri-autentikimi. Ju kontrolloni inputin e të dhënave."
+      },
+      "1": {
+        "title": "Privatësia me Dizajn",
+        "description": "Ne nuk e shesim të dhënat tuaja sepse nuk i kemi ato. Pikë."
+      },
+      "2": {
+        "title": "Planifikimi i Ardhshëm",
+        "description": "Modeloni pensionin, shlyerjen e kredive dhe objektivat e kursimeve në një pamje të integruar."
+      },
+      "3": {
+        "title": "Vrasësi i Abonimeve",
+        "description": "Zbuloni shpenzimet e përsëritura që aplikacionet e tjera i humbasin."
+      }
+    },
+    "features": {
+      "0": {
+        "title": "Paneli Lokal",
+        "description": "Pasuria neto, fluksi i parasë dhe ndarja sipas kategorive. Koha e ngarkesës menjëherë.",
+        "href": "/budget-app"
+      },
+      "1": {
+        "title": "Asistenti i Importit",
+        "description": "Hartues i zgjuar CSV për BMO, Home Trust dhe formate të personalizueshme.",
+        "href": "/budget-app/import"
+      },
+      "2": {
+        "title": "OCR për Faturat",
+        "description": "Skano faturat lokalisht me Tesseract.js. Nuk ka përpunim në cloud.",
+        "href": "/budget-app/ocr"
+      },
+      "3": {
+        "title": "Buxhetet e Kategorive",
+        "description": "Buxhetim zero-bazuar ose me rrotullim me kontroll të hollësishëm të kategorive.",
+        "href": "/budget-app/budgets"
+      },
+      "4": {
+        "title": "Kalkulatori i Pensionit",
+        "description": "Projektoni datën tuaj të lirisë me vizualizime të interesit të përbërë.",
+        "href": "/budget-app/planning/retirement"
+      },
+      "5": {
+        "title": "Mbrojtja e Privatësisë",
+        "description": "Kriptimi opsional nga ana e klientit për një shtresë shtesë sigurie.",
+        "href": "/budget-app/settings"
+      }
+    },
+    "howItWorks": {
+      "0": {
+        "title": "Importoni",
+        "description": "Tërhiqni dhe lëshoni CSV ose skanoni faturat. AI harton kolonat lokalisht."
+      },
+      "1": {
+        "title": "Rishikoni",
+        "description": "Kategorizim i shpejtë me rregulla inteligjente dhe veprime masive."
+      },
+      "2": {
+        "title": "Planifikoni",
+        "description": "Caktoni çdo dollar një punë dhe parashikoni pasurinë tuaj neto të ardhshme."
+      }
+    },
+    "pricing": {
+      "eyebrow": "Çmimi i Drejtë",
+      "title": "Lokal është Falas. Sinkronizimi është Pro.",
+      "description": "Filloni me Protokollin Lokal të fuqishëm. Përmirësoni më vonë nëse keni nevojë për sinkronizim në shumë pajisje.",
+      "priceLabel": "Falas Përgjithmonë",
+      "cta": {
+        "label": "Nisni Protokollin Lokal",
+        "href": "/budget-app/auth/signup"
+      },
+      "secondary": {
+        "label": "Shihni Veçoritë Pro",
+        "href": "#pricing"
+      },
+      "guarantee": "Nuk kërkohet kartë krediti për Protokollin Lokal."
+    },
+    "faq": {
+      "0": {
+        "q": "A janë të dhënat e mia vërtet private?",
+        "a": "Po. Në Protokollin Lokal, të dhënat kurrë nuk dalin nga pajisja juaj. Ato jetojnë në IndexedDB brenda shfletuesit tuaj."
+      },
+      "1": {
+        "q": "Si mund të bëj kopje rezervë të të dhënave të mia?",
+        "a": "Mund të eksportoni një kopje rezervë të plotë JSON në çdo kohë. Ne gjithashtu rekomandojmë eksporte të rregullta CSV."
+      },
+      "2": {
+        "q": "Çfarë është 'Sync' Pro?",
+        "a": "Po vjen së shpejti: Një abonim opsional për të sinkronizuar të dhëna të kriptuara midis pajisjeve përmes Supabase."
+      },
+      "3": {
+        "q": "A lidhemi me bankat?",
+        "a": "Jo. Ne besojmë se importi manual është më i sigurt, më i besueshëm dhe ndihmon në ndërtimin e vetëdijes financiare më të mirë."
+      }
+    },
+    "security": {
+      "title": "Privatësia e Parë me Dizajn",
+      "description": "Aplikacioni i Buxhetit ruan të dhënat tuaja lokalisht (gatishmëri offline) dhe ju jep kontroll mbi veçoritë e AI, eksportimin dhe fshirjen.",
+      "buttons": {
+        "privacy": "Privatësia & cilësimet",
+        "offline": "Mbështetje offline"
+      },
+      "cards": {
+        "localStorage": {
+          "title": "Ruajtja Lokale",
+          "description": "Të dhënat tuaja të buxhetit ruhen në shfletuesin tuaj (IndexedDB) kështu që aplikacioni mbetet i shpejtë dhe i përdorshëm offline."
+        },
+        "encryption": {
+          "title": "Mbështetje për Kriptimin",
+          "description": "Aplikacioni përfshin një shtresë kriptimi për të mbrojtur regjistrat e ndjeshëm të buxhetit kur është e aktivizuar."
+        },
+        "aiControls": {
+          "title": "Kontrolli i veçorive të AI",
+          "description": "Ndizni veçoritë e fuqizuara nga AI (si zbulimi i anomalisë) dhe menaxhoni aksesin në chatbot nga cilësimet."
+        },
+        "exportDelete": {
+          "title": "Eksporto & fshi",
+          "description": "Eksportoni të dhënat tuaja dhe cilësimet e privatësisë, ose fshini të dhënat lokale direkt nga aplikacioni."
+        }
+      }
+    },
+    "comparison": {
+      "headers": {
+        "feature": "Veçoria",
+        "local": "BudgetPro Lokal",
+        "sync": "BudgetPro Sync (Pro)",
+        "cloud": "Aplikacioni Tipik në Cloud"
+      },
+      "dataPrivacy": {
+        "feature": "Privatësia e të Dhënave",
+        "local": "100% Private (Lokal)",
+        "sync": "Kriptim nga Fundi në Fund",
+        "cloud": "I Shikueshëm nga Punonjësit"
+      },
+      "cost": {
+        "feature": "Kosto",
+        "local": "Falas Përgjithmonë",
+        "sync": "Përmirësim një herë",
+        "cloud": "$100+/vit Abonim"
+      },
+      "offlineMode": {
+        "feature": "Modaliteti Offline"
+      },
+      "bankConnections": {
+        "feature": "Lidhjet me Bankat",
+        "local": "CSV / Vetëm Manual",
+        "sync": "Opsional (Të Kriptuara)",
+        "cloud": "Agregim i Detyrueshëm"
+      },
+      "storageLocation": {
+        "feature": "Vendi i Ruajtjes",
+        "local": "Pajisja Juaj",
+        "sync": "Cloud Zero-Dijeni",
+        "cloud": "Baza e të Dhënave të Tyre"
+      }
+    },
+    "socialProof": {
+      "title": "Polish Premium, e ndërtuar brenda",
+      "description": "Detajet që e bëjnë buxhetimin të qëndrojë: onboarding, shkurtore, navigim mobil dhe performancë të gatshme offline.",
+      "features": {
+        "onboarding": {
+          "title": "Tur i Onboarding",
+          "description": "Një tur i udhëhequr ndihmon përdoruesit e rinj të arrijnë vlerën shpejt."
+        },
+        "shortcuts": {
+          "title": "Shkurtore të Tastierës",
+          "description": "Lëvizni shpejt me kërkimin dhe shkurtoret e veprimit të ndërtuara në UI."
+        },
+        "mobileUx": {
+          "title": "UX i Parë për Mobil",
+          "description": "Navigimi në fund dhe format e përgjegjshme që ndihen natyrale."
+        },
+        "pwaInstall": {
+          "title": "Instalimi PWA",
+          "description": "Instaloni si një aplikacion dhe vazhdoni edhe me internet të dobët."
+        }
+      }
+    },
+    "pricingSection": {
+      "recommended": "Të rekomanduara",
+      "productName": "Protokolli Lokal",
+      "productDescription": "Përvoja e plotë e buxhetimit, që funksionon plotësisht në pajisjen tuaj.",
+      "whyChoose": "Pse të zgjidhni Protokollin Lokal?",
+      "whyChooseDescription": "Shihni si jemi ne në krahasim me gjigantët e cloud.",
+      "features": "Përfshin transaksione, llogari, buxhete dhe kapacitete të plota rezervë lokale pa kufizim."
+    },
+    "heroSection": {
+      "cta": {
+        "heading": "E ndërtuar për qartësi, jo kaos.",
+        "viewPricing": "Shihni çmimin"
+      },
+      "badges": {
+        "noSubscriptions": "Pa abonime",
+        "offlineReady": "Gatishmëri offline",
+        "seniorsMode": "Modaliteti për të Moshuarit"
+      },
+      "preview": {
+        "livePreview": "Parapamje e drejtpërdrejtë",
+        "recentTransactions": "Transaksionet e fundit",
+        "categoryBudgets": "Buxhetet e kategorive",
+        "recurring": "Përsëritëse"
+      },
+      "modes": {
+        "dashboard": "Paneli",
+        "budgets": "Buxhetet",
+        "subscriptions": "Abonimet"
+      }
+    },
+    "featuresDeepDive": {
+      "heading1": "Përparësitë e Spreadsheet.",
+      "heading2": "Thjeshtësia e Aplikacionit.",
+      "description": "Ndaluar luftimin me formula të prishura. Merrni fleksibilitetin e kontrollit manual me shpejtësinë e një aplikacioni modern.",
+      "cta": "Nisni provën falas",
+      "explore": "Eksploroni"
+    },
+    "accessibility": {
+      "title": "E aksesueshme nga default",
+      "description": "Modaliteti për të moshuarit ofron navigim të thjeshtuar dhe objektiva më të mëdhenj për prekjen. Shkurtoret e tastierës, shtetet e fokusit dhe kontrasti i qartë ndihmojnë të gjithë të lëvizin më shpejt.",
+      "badges": {
+        "seniorsMode": "Modaliteti për të Moshuarit",
+        "largeTouchTargets": "Objektiva të mëdhenj për prekjen",
+        "keyboardFirst": "Tastiera e parë"
+      },
+      "buttons": {
+        "openApp": "Hapni aplikacionin",
+        "settings": "Cilësimet e aksesueshmërisë"
+      }
+    },
+    "faqSection": {
+      "title": "FAQ",
+      "description": "Përgjigje të thjeshta për pyetje të zakonshme rreth provave, çmimeve dhe aksesit."
+    },
+    "outcomesSection": {
+      "title": "E ndërtuar për jetën reale, jo për spreadsheet",
+      "description": "Shumica e aplikacioneve të buxhetimit ju bëjnë të bëni punën. BudgetPro është projektuar për të reduktuar fërkimin duke ju mbajtur në kontroll."
+    },
+    "howItWorksSection": {
+      "title": "Si funksionon",
+      "description": "Një rrjedhë pune që ju çon në qartësi shpejt, pa ju bllokuar në një sistem të komplikuar."
+    },
+    "nav": {
+      "tagline": "Buxhetim Premium"
+    },
+    "marquee": {
+      "logos": [
+        "Buxhetimi",
+        "Abonimet",
+        "Kreditë",
+        "Faturat OCR",
+        "Raportet",
+        "Planifikimi",
+        "Offline",
+        "Modaliteti për të Moshuarit"
+      ]
     }
   }
 }

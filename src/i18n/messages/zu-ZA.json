@@ -1,65 +1,445 @@
 {
   "nav": {
-    "dashboard": "Ibhodi",
-    "transactions": "Izenzo",
-    "budgets": "Izabelomali",
-    "reports": "Imibiko",
-    "accounts": "Akhawunti",
-    "categories": "Izigaba",
-    "goals": "Izinhloso",
-    "import": "Faka",
-    "export": "Phuma",
-    "settings": "Izilungiselelo",
-    "help": "Usizo",
-    "about": "Mayelana"
+    "dashboard": "Dashboard",
+    "transactions": "Transaksies",
+    "budgets": "Begrotings",
+    "reports": "Verslae",
+    "accounts": "Rekeninge",
+    "categories": "Kategoriewe",
+    "goals": "Doelwitte",
+    "import": "Invoer",
+    "export": "Uitvoer",
+    "settings": "Instellings",
+    "help": "Hulp",
+    "about": "Oor"
   },
   "actions": {
-    "addTransaction": "Engeza Izenzo",
-    "importData": "Faka Idatha",
-    "import": "Faka",
-    "editDashboard": "Hlela Ibhodi",
-    "saveChanges": "Gcina Izinguquko",
-    "resetDefaults": "Buyisela Ezizenzekelayo"
+    "addTransaction": "Voeg Transaksie Toe",
+    "importData": "Invoer Gegevens",
+    "import": "Invoer",
+    "editDashboard": "Wysig Dashboard",
+    "saveChanges": "Stoor Veranderinge",
+    "resetDefaults": "Herstel na Standaarde"
   },
   "welcome": {
-    "title": "Wamkelekile kuhlelo lwezabelomali",
-    "subtitle": "Qala ngokwengeza isenzo sakho sokuqala noma ukufaka idatha evela ebhange lakho"
+    "title": "Welkom by Begrotings App",
+    "subtitle": "Begin deur jou eerste transaksie toe te voeg of data van jou bank in te voer"
   },
   "common": {
-    "save": "Gcina",
-    "cancel": "Khansela",
-    "delete": "Susa",
-    "edit": "Hlela",
-    "loading": "Landa..."
+    "save": "Stoor",
+    "cancel": "Kanselleer",
+    "delete": "Verwyder",
+    "edit": "Wysig",
+    "loading": "Laai..."
   },
   "widget": {
     "spendingByCategory": {
-      "title": "Ukuchitha Ngaphakathi Kwezigaba",
-      "description": "Bona lapho imali yakho iya khona ngezithombe ezibonakalayo"
+      "title": "Besteding per Kategori",
+      "description": "Sien waar jou geld heen gaan met visuele ontledings"
     },
     "recentTransactions": {
-      "title": "Izenzo Zakamuva",
-      "description": "Umbono osheshayo wezokusebenza zakho zezimali zakamuva"
+      "title": "Onlangse Transaksies",
+      "description": "Vinige oorsig van jou jongste finansiële aktiwiteite"
     },
     "budgetProgress": {
-      "title": "Inqubekelaphambili Yezezimali",
-      "description": "Landela ukuthi uhamba kanjani ngokuhambisana nezinhloso zakho zezimali"
+      "title": "Begroting Voortgang",
+      "description": "Volg hoe jy presteer teen jou begrotingsdoelwitte"
     },
     "accountBalances": {
-      "title": "Izibalo Zeakhawunti",
-      "description": "Izibalo zamanje kuzo zonke izinkontileka zakho"
+      "title": "Rekening Balans",
+      "description": "Huidige balanse oor al jou rekeninge"
     },
     "incomeVsExpenses": {
-      "title": "Imali Engenayo vs Izindleko",
-      "description": "Qhathanisa imali oyitholayo nezindleko zakho ngokuhamba kwesikhathi"
+      "title": "Inkomste teen Uitgawes",
+      "description": "Vergelyk jou verdienste en besteding oor tyd"
     },
     "monthlyTrends": {
-      "title": "Iziqondiso Zenyanga",
-      "description": "Bona izimo zezimali zakho ngenyanga"
+      "title": "Maandelikse Tendense",
+      "description": "Visualiseer jou finansiële patrone maand vir maand"
     },
     "upcomingBills": {
-      "title": "Amabhili Azoza",
-      "description": "Ungaphuthelwa ukukhokha ngezikhumbuzo zamabhili"
+      "title": "Komende Rekeninge",
+      "description": "Mis nooit 'n betaling nie met rekeningherinneringe"
+    }
+  },
+  "tooltip": {
+    "ariaLabel": "Meer inligting",
+    "learnMore": "Leer meer →"
+  },
+  "footer": {
+    "tagline": "Premium begroting met 'n eenmalige opgradering.",
+    "links": {
+      "login": "Teken in",
+      "signup": "Begin proef",
+      "upgrade": "Opgradeer",
+      "settings": "Instellings"
+    },
+    "copyright": "© {year} {brandName}"
+  },
+  "dialog": {
+    "confirm": "Bevestig",
+    "cancel": "Kanselleer",
+    "processing": "Verwerk...",
+    "finalConfirmation": "Finale Bevestiging:",
+    "typeToConfirm": "Tik {text} om hierdie aksie te bevestig."
+  },
+  "sidebar": {
+    "appTitle": "Begrotings App",
+    "appSubtitle": "Premium Finansies",
+    "search": "Soek...",
+    "shortcuts": "Snelkoppelinge",
+    "navigation": {
+      "dashboard": "Dashboard",
+      "transactions": "Transaksies",
+      "scanReceipt": "Skandeer Bewys",
+      "categories": "Kategoriewe",
+      "budgets": "Begrotings",
+      "subscriptions": "Subskripsies",
+      "loans": "Lenings",
+      "investments": "Beleggings",
+      "futurePlans": "Toekomstige Planne",
+      "retirement": "Aftrede",
+      "reports": "Verslae"
+    },
+    "actions": {
+      "importCsv": "Invoer CSV",
+      "settings": "Instellings",
+      "showLess": "Wys Minder",
+      "showAllItems": "Wys Alle Items"
+    }
+  },
+  "onboarding": {
+    "skipTour": "Slaan toer oor",
+    "stepCounter": "Stap {current} van {total}",
+    "dontShowAgain": "Moet nie hierdie toer weer wys nie",
+    "quickTip": "💡 Vinige Wenke",
+    "navigation": {
+      "previous": "Vorige",
+      "next": "Volgende",
+      "getStarted": "Begin",
+      "startTour": "Begin Toer"
+    },
+    "steps": {
+      "welcome": {
+        "title": "👋 Welkom by Begrotings App!",
+        "description": "Kom ons neem 'n vinnige toer om jou te help om jou huishoudelike finansies te bestuur. Dit sal nie lank neem nie!"
+      },
+      "import": {
+        "title": "📥 Invoer Jou Transaksies",
+        "description": "Begin deur jou banktransaksies van 'n CSV-lêer in te voer. Ons ondersteun BMO, Home Trust, en baie ander banke. Die app sal jou transaksies outomaties kategoriseer!"
+      },
+      "categorize": {
+        "title": "🏷️ Kategoriseer & Organiseer",
+        "description": "Hersien en pas transaksiekategoriewe aan. Ons slim kategorisering leer van jou regstellings om oor tyd te verbeter. Gebruik massa-aksies om verskeie transaksies gelyktydig te kategoriseer!"
+      },
+      "budgets": {
+        "title": "🎯 Stel Jou Begrotings",
+        "description": "Skep begrotings vir verskillende bestedingskategoriewe. Volg jou voortgang deur die maand en ontvang waarskuwings wanneer jy jou perke nader."
+      },
+      "reports": {
+        "title": "📊 Beskou Verslae & Inligting",
+        "description": "Visualiseer jou bestedingspatrone, volg jou netto waarde, en maak ingeligte finansiële besluite. Jou dashboard werk outomaties op met elke transaksie!"
+      }
+    },
+    "tips": {
+      "import": "Sleep & laat jou CSV-lêer val of klik om te blaai. Ons outomatiese opsporing werk met BMO en Home Trust formate!",
+      "categorize": "Gebruik die vinnige kategoriseer-knoppie of kies verskeie transaksies vir massa-kategorisering.",
+      "budgets": "Stel realistiese begrotings en ons sal jou waarsku as jy op pad is om te oorskry."
+    }
+  },
+  "landing": {
+    "brand": {
+      "name": "BudgetPro",
+      "product": "Begrotings App"
+    },
+    "hero": {
+      "badge": "Privaatheid- Eerstens • Plaaslik- Net • Geen Volg nie",
+      "headline": "Beheer Jou Geld sonder om Jou Data te Verkoop.",
+      "subhead": "Die krag van 'n sigblad. Die eenvoud van 'n app. Ervaar finansiële duidelikheid met die enigste begrotingsapp wat waarborg dat jou data nooit jou toestel verlaat nie.",
+      "primaryCta": {
+        "label": "Begin Plaaslike Protokol (Gratis)",
+        "href": "/budget-app/auth/signup"
+      },
+      "secondaryCta": {
+        "label": "Teken in",
+        "href": "/budget-app/auth/login"
+      },
+      "finePrint": "Geen bankbesonderhede benodig. Geen rekening nodig vir plaaslike modus nie."
+    },
+    "trust": {
+      "0": {
+        "title": "Jou Toestel, Jou Data",
+        "description": "Data bly in jou blaars IndexedDB. Ons kan dit letterlik nie sien nie."
+      },
+      "1": {
+        "title": "Sigblad Krag",
+        "description": "Massa-wysig, draai, en analiseer soos 'n pro sonder die formule kopseer."
+      },
+      "2": {
+        "title": "Aflyn Spoed",
+        "description": "Geen latensie. Werk op 'n bergtop of in 'n metro tonnel."
+      },
+      "3": {
+        "title": "Handmatige Rituele",
+        "description": "Invoer wizard maak die Vrydag Geld Hersiening 'n bevredigende gewoonte."
+      }
+    },
+    "outcomes": {
+      "0": {
+        "title": "Stop om Teen Aggregators te Veg",
+        "description": "Geen gebroke verbindings of her-auth loops meer nie. Jy beheer die data-invoer."
+      },
+      "1": {
+        "title": "Privaatheid deur Ontwerp",
+        "description": "Ons verkoop nie jou data nie omdat ons dit nie het nie. Punt."
+      },
+      "2": {
+        "title": "Toekomstige Bewys Beplanning",
+        "description": "Model aftrede, lening terugbetalings, en spaar doelwitte in een geïntegreerde uitsig."
+      },
+      "3": {
+        "title": "Subskripsie Doder",
+        "description": "Sien herhalende drains op jou beursie wat ander apps mis."
+      }
+    },
+    "features": {
+      "0": {
+        "title": "Plaaslike Dashboard",
+        "description": "Netto waarde, kontantvloei, en kategoriebreakdown. Onmiddellike laai tye.",
+        "href": "/budget-app"
+      },
+      "1": {
+        "title": "Invoer Wizard",
+        "description": "Slim CSV mapper vir BMO, Home Trust, en aanpasbare formate.",
+        "href": "/budget-app/import"
+      },
+      "2": {
+        "title": "Bewys OCR",
+        "description": "Skandeer bewysstukke plaaslik met Tesseract.js. Geen wolk verwerking nie.",
+        "href": "/budget-app/ocr"
+      },
+      "3": {
+        "title": "Kategoriebegrotings",
+        "description": "Nul-gebaseerde of rollover begroting met granulaire kategoriebeheer.",
+        "href": "/budget-app/budgets"
+      },
+      "4": {
+        "title": "Aftrede Calculator",
+        "description": "Projekteer jou vryheid datum met saamgestelde rente visualisasies.",
+        "href": "/budget-app/planning/retirement"
+      },
+      "5": {
+        "title": "Privaatheid Skild",
+        "description": "Opsionele kliënt-kant versleuteling vir 'n ekstra laag van sekuriteit.",
+        "href": "/budget-app/settings"
+      }
+    },
+    "howItWorks": {
+      "0": {
+        "title": "Invoer",
+        "description": "Sleep & laat CSV's val of skandeer bewysstukke. KI kaart die kolomme plaaslik."
+      },
+      "1": {
+        "title": "Hersien",
+        "description": "Vinige kategorisering met slim reëls en massa-aksies."
+      },
+      "2": {
+        "title": "Beplan",
+        "description": "Ken elke rand 'n werk toe en voorspel jou toekomstige netto waarde."
+      }
+    },
+    "pricing": {
+      "eyebrow": "Regverdig Prising",
+      "title": "Plaaslik is Gratis. Sinkroniseer is Pro.",
+      "description": "Begin met die kragtige Plaaslike Protokol. Opgradeer later as jy multi-toestel sinkronisasie benodig.",
+      "priceLabel": "Gratis Vir Ewig",
+      "cta": {
+        "label": "Begin Plaaslike Protokol",
+        "href": "/budget-app/auth/signup"
+      },
+      "secondary": {
+        "label": "Besoek Pro Kenmerke",
+        "href": "#pricing"
+      },
+      "guarantee": "Geen kredietkaart benodig vir Plaaslike Protokol."
+    },
+    "faq": {
+      "0": {
+        "q": "Is my data regtig privaat?",
+        "a": "Ja. In Plaaslike Protokol, data verlaat nooit jou toestel nie. Dit leef in IndexedDB binne jou blaars."
+      },
+      "1": {
+        "q": "Hoe rugsteun ek my data?",
+        "a": "Jy kan 'n volle JSON rugsteun op enige tyd uitvoer. Ons beveel ook gereelde CSV uitvoer aan."
+      },
+      "2": {
+        "q": "Wat is 'Sync' Pro?",
+        "a": "Binnekort: 'n Opsionele subskripsie om versleutelde data tussen toestelle via Supabase te sinkroniseer."
+      },
+      "3": {
+        "q": "Verbind julle met banke?",
+        "a": "Nee. Ons glo handmatige invoer is veiliger, meer betroubaar, en bou beter finansiële bewustheid."
+      }
+    },
+    "security": {
+      "title": "Privaatheid-eerstens deur ontwerp",
+      "description": "Die Begrotings App stoor jou data plaaslik (aflyn-gereed) en gee jou beheer oor KI-funksies, uitvoer, en verwydering.",
+      "buttons": {
+        "privacy": "Privaatheid & instellings",
+        "offline": "Aflyn ondersteuning"
+      },
+      "cards": {
+        "localStorage": {
+          "title": "Plaaslike stoor",
+          "description": "Jou begrotingsdata word in jou blaars (IndexedDB) gestoor sodat die app vinnig en bruikbaar bly aflyn."
+        },
+        "encryption": {
+          "title": "Versleuteling ondersteuning",
+          "description": "Die app sluit 'n versleuteling laag in om sensitiewe begrotingsrekords te beskerm wanneer geaktiveer."
+        },
+        "aiControls": {
+          "title": "KI-funksie beheer",
+          "description": "Skakel KI-gedrewe funksies (soos anomalie opsporing) aan en bestuur chatbot toegang vanuit instellings."
+        },
+        "exportDelete": {
+          "title": "Uitvoer & verwyder",
+          "description": "Voer jou data en privaatheidinstellings uit, of verwyder plaaslike data direk vanaf die app."
+        }
+      }
+    },
+    "comparison": {
+      "headers": {
+        "feature": "Kenmerk",
+        "local": "BudgetPro Plaaslik",
+        "sync": "BudgetPro Sinkroniseer (Pro)",
+        "cloud": "Tipiese Wolk App"
+      },
+      "dataPrivacy": {
+        "feature": "Data Privaatheid",
+        "local": "100% Privaat (Plaaslik)",
+        "sync": "Einde-tot-Einde Versleuteld",
+        "cloud": "Besigtigbaar deur Werknemers"
+      },
+      "cost": {
+        "feature": "Koste",
+        "local": "Gratis Vir Ewig",
+        "sync": "Eenmalige Opgradering",
+        "cloud": "$100+/jaar Subskripsie"
+      },
+      "offlineMode": {
+        "feature": "Aflyn Modus"
+      },
+      "bankConnections": {
+        "feature": "Bank Verbindinge",
+        "local": "CSV / Handmatige Slegs",
+        "sync": "Opsioneel (Versleuteld)",
+        "cloud": "Verpligte Aggregasie"
+      },
+      "storageLocation": {
+        "feature": "Stoor Ligging",
+        "local": "Jou Toestel",
+        "sync": "Nul-Kennis Wolk",
+        "cloud": "Hul Databasis"
+      }
+    },
+    "socialProof": {
+      "title": "Premium afwerking, ingebou",
+      "description": "Die besonderhede wat begroting laat hou: aanmelding, snelkoppelinge, mobiele navigasie, en aflyn-gereed prestasie.",
+      "features": {
+        "onboarding": {
+          "title": "Aanmeld toer",
+          "description": "‘n Gidstoer help nuwe gebruikers om vinnig waarde te kry."
+        },
+        "shortcuts": {
+          "title": "Toetsenbord snelkoppelinge",
+          "description": "Beweeg vinnig met soek en aksie snelkoppelinge ingebou in die UI."
+        },
+        "mobileUx": {
+          "title": "Mobiele eerste UX",
+          "description": "Lae navigasie en responsiewe lay-outs wat natuurlik voel."
+        },
+        "pwaInstall": {
+          "title": "PWA install",
+          "description": "Installeer soos 'n app en hou aan, selfs met onbetroubare internet."
+        }
+      }
+    },
+    "pricingSection": {
+      "recommended": "Aanbeveel",
+      "productName": "Plaaslike Protokol",
+      "productDescription": "Die volledige begrotingservaring, wat heeltemal op jou toestel loop.",
+      "whyChoose": "Waarom kies Plaaslike Protokol?",
+      "whyChooseDescription": "Sien hoe ons teen die wolk reuse vergelyk.",
+      "features": "Sluit onbeperkte transaksies, rekeninge, begrotings, en volle plaaslike rugsteun vermoëns in."
+    },
+    "heroSection": {
+      "cta": {
+        "heading": "Gebou vir duidelikheid, nie chaos nie.",
+        "viewPricing": "Besoek prys"
+      },
+      "badges": {
+        "noSubscriptions": "Geen subskripsies",
+        "offlineReady": "Aflyn-gereed",
+        "seniorsMode": "Seniors Modus"
+      },
+      "preview": {
+        "livePreview": "Lewe voorskou",
+        "recentTransactions": "Onlangse transaksies",
+        "categoryBudgets": "Kategoriebegrotings",
+        "recurring": "Herhalend"
+      },
+      "modes": {
+        "dashboard": "Dashboard",
+        "budgets": "Begrotings",
+        "subscriptions": "Subskripsies"
+      }
+    },
+    "featuresDeepDive": {
+      "heading1": "Sigblad Krag.",
+      "heading2": "App Eenvoud.",
+      "description": "Stop om te veg met gebroke formules. Kry die buigsaamheid van handmatige beheer met die spoed van 'n moderne app.",
+      "cta": "Begin gratis proef",
+      "explore": "Verken"
+    },
+    "accessibility": {
+      "title": "Toeganklik per standaard",
+      "description": "Seniors Modus bied vereenvoudigde navigasie en groter aanraakdoelwitte. Toetsenbord snelkoppelinge, fokusstate, en duidelike kontras help almal om vinniger te beweeg.",
+      "badges": {
+        "seniorsMode": "Seniors Modus",
+        "largeTouchTargets": "Groot aanraakdoelwitte",
+        "keyboardFirst": "Toetsenbord-eerste"
+      },
+      "buttons": {
+        "openApp": "Maak die app oop",
+        "settings": "Toeganklikheid instellings"
+      }
+    },
+    "faqSection": {
+      "title": "FAQ",
+      "description": "Eenvoudige antwoorde op algemene vrae oor proef, prys, en toegang."
+    },
+    "outcomesSection": {
+      "title": "Gebou vir werklike lewe, nie sigblaaie nie",
+      "description": "Die meeste begrotingsapps laat jou die werk doen. BudgetPro is ontwerp om wrywing te verminder terwyl jy in beheer bly."
+    },
+    "howItWorksSection": {
+      "title": "Hoe dit werk",
+      "description": "‘n Werkvloei wat jou vinnig na duidelikheid bring, sonder om jou in 'n ingewikkelde stelsel te sluit."
+    },
+    "nav": {
+      "tagline": "Premium begroting"
+    },
+    "marquee": {
+      "logos": [
+        "Begroting",
+        "Subskripsies",
+        "Lenings",
+        "OCR Bewyse",
+        "Verslae",
+        "Beplanning",
+        "Aflyn",
+        "Seniors Modus"
+      ]
     }
   }
 }

@@ -23,7 +23,7 @@
   },
   "welcome": {
     "title": "Tere tulemast eelarve rakendusse",
-    "subtitle": "Alusta oma esimese tehingu lisamisega või andmete importimisega pangast"
+    "subtitle": "Alusta, lisades oma esimese tehingu või importides andmeid oma pangast"
   },
   "common": {
     "save": "Salvesta",
@@ -34,11 +34,11 @@
   },
   "widget": {
     "spendingByCategory": {
-      "title": "Kulud kategooriate järgi",
-      "description": "Vaata, kuhu sinu raha läheb visuaalsete jaotuste abil"
+      "title": "Kulutused kategooriate kaupa",
+      "description": "Vaata, kuhu su raha läheb visuaalsete jaotuste abil"
     },
     "recentTransactions": {
-      "title": "Viimased tehingud",
+      "title": "Hiljutised tehingud",
       "description": "Kiire ülevaade sinu viimastest finantstegevustest"
     },
     "budgetProgress": {
@@ -50,16 +50,396 @@
       "description": "Praegused jäägid kõigis sinu kontodes"
     },
     "incomeVsExpenses": {
-      "title": "Tulu vs kulud",
-      "description": "Võrdle oma sissetulekuid ja kulutusi ajas"
+      "title": "Sissetulekud vs Kulud",
+      "description": "Võrdle oma teenuseid ja kulutusi ajas"
     },
     "monthlyTrends": {
       "title": "Kuu trendid",
-      "description": "Visualiseeri oma finantsskeeme kuu kaupa"
+      "description": "Visualiseeri oma finantsmustreid kuu kaupa"
     },
     "upcomingBills": {
-      "title": "Tulevad arved",
-      "description": "Ära jäta makset vahele arve meeldetuletustega"
+      "title": "Tulevased arved",
+      "description": "Ära jäta maksetest ilma arve meeldetuletustega"
+    }
+  },
+  "tooltip": {
+    "ariaLabel": "Rohkem teavet",
+    "learnMore": "Loe lähemalt →"
+  },
+  "footer": {
+    "tagline": "Premium eelarvestamine ühe korra uuendamisega.",
+    "links": {
+      "login": "Logi sisse",
+      "signup": "Alusta prooviperioodi",
+      "upgrade": "Uuenda",
+      "settings": "Seaded"
+    },
+    "copyright": "© {year} {brandName}"
+  },
+  "dialog": {
+    "confirm": "Kinnita",
+    "cancel": "Tühista",
+    "processing": "Töötlemine...",
+    "finalConfirmation": "Lõplik kinnitamine:",
+    "typeToConfirm": "Kinnita see toiming, kirjutades {text}."
+  },
+  "sidebar": {
+    "appTitle": "Eelarve rakendus",
+    "appSubtitle": "Premium Finants",
+    "search": "Otsi...",
+    "shortcuts": "Otseteed",
+    "navigation": {
+      "dashboard": "Armatuurlaud",
+      "transactions": "Tehingud",
+      "scanReceipt": "Skaneeri kviitung",
+      "categories": "Kategooriad",
+      "budgets": "Eelarved",
+      "subscriptions": "Tellimused",
+      "loans": "Laenud",
+      "investments": "Investeeringud",
+      "futurePlans": "Tuleviku plaanid",
+      "retirement": "Pension",
+      "reports": "Aruanded"
+    },
+    "actions": {
+      "importCsv": "Impordi CSV",
+      "settings": "Seaded",
+      "showLess": "Näita vähem",
+      "showAllItems": "Näita kõiki esemeid"
+    }
+  },
+  "onboarding": {
+    "skipTour": "Jäta ringkäik vahele",
+    "stepCounter": "Samm {current} / {total}",
+    "dontShowAgain": "Ära näita seda ringkäiku enam",
+    "quickTip": "💡 Kiire näpunäide",
+    "navigation": {
+      "previous": "Eelmine",
+      "next": "Järgmine",
+      "getStarted": "Alusta",
+      "startTour": "Alusta ringkäiku"
+    },
+    "steps": {
+      "welcome": {
+        "title": "👋 Tere tulemast eelarve rakendusse!",
+        "description": "Teeme kiire ringkäigu, et aidata sul alustada oma kodumajanduse haldamisega. See ei võta kaua!"
+      },
+      "import": {
+        "title": "📥 Impordi oma tehingud",
+        "description": "Alusta, importides oma pangatehingud CSV-failist. Toetame BMO, Home Trust ja paljusid teisi panku. Rakendus kategoriseerib sinu tehingud automaatselt!"
+      },
+      "categorize": {
+        "title": "🏷️ Kategoori ja korralda",
+        "description": "Vaata üle ja kohanda tehingute kategooriaid. Meie nutikas kategoriseerimine õpib sinu parandustest, et aja jooksul paraneda. Kasuta masstoiminguid, et kategooriseerida mitu tehingut korraga!"
+      },
+      "budgets": {
+        "title": "🎯 Sea oma eelarved",
+        "description": "Loo eelarved erinevate kulutuste kategooriate jaoks. Jälgi oma edenemist kuu jooksul ja saa teateid, kui oled lähenemas oma piiridele."
+      },
+      "reports": {
+        "title": "📊 Vaata aruandeid ja ülevaateid",
+        "description": "Visualiseeri oma kulutamismustreid, jälgi oma netoväärtust ja tee teadlikke finantsotsuseid. Sinu armatuurlaud uuendab end automaatselt iga tehinguga!"
+      }
+    },
+    "tips": {
+      "import": "Loobu ja lohista oma CSV-fail või kliki sirvimiseks. Me tuvastame automaatselt BMO ja Home Trust formaadid!",
+      "categorize": "Kasuta kiiret kategoriseerimise nuppu või vali mitu tehingut masskategoriseerimiseks.",
+      "budgets": "Sea realistlikud eelarved ja me anname sulle teada, kui oled ületamas oma kulutusi."
+    }
+  },
+  "landing": {
+    "brand": {
+      "name": "BudgetPro",
+      "product": "Eelarve rakendus"
+    },
+    "hero": {
+      "badge": "Privaatsus Ees • Kohalik Ainult • Null Jälgimist",
+      "headline": "Valitse oma raha ilma oma andmeid müümata.",
+      "subhead": "Tabeli jõud. Rakenduse lihtsus. Koge finantsilist selgust ainulaadse eelarve rakendusega, mis garanteerib, et sinu andmed ei lahku kunagi sinu seadmest.",
+      "primaryCta": {
+        "label": "Alusta Kohalikku Protokolli (Tasuta)",
+        "href": "/budget-app/auth/signup"
+      },
+      "secondaryCta": {
+        "label": "Logi sisse",
+        "href": "/budget-app/auth/login"
+      },
+      "finePrint": "Panga andmeid ei ole vaja. Kohalikuks režiimiks ei ole kontot vajalik."
+    },
+    "trust": {
+      "0": {
+        "title": "Sinu Seade, Sinu Andmed",
+        "description": "Andmed jäävad sinu brauseri IndexedDB-sse. Me ei saa neid sõna otseses mõttes näha."
+      },
+      "1": {
+        "title": "Tabeli Jõud",
+        "description": "Masstoimetamine, pööramine ja analüüs nagu professionaal ilma valemite peavaludeta."
+      },
+      "2": {
+        "title": "Offline Kiirus",
+        "description": "Null latentsus. Töötab mäetipul või metroo tunnelis."
+      },
+      "3": {
+        "title": "Käsitsi Rituaalid",
+        "description": "Importimise wizard muudab reede rahakontrolli rahuldavaks harjumuseks."
+      }
+    },
+    "outcomes": {
+      "0": {
+        "title": "Lõpeta Aggregaatidega Võitlemine",
+        "description": "Ei mingeid katkenud ühendusi ega uuesti autentimise silmuseid. Sina kontrollid andmete sisestamist."
+      },
+      "1": {
+        "title": "Privaatsus Disainis",
+        "description": "Me ei müü sinu andmeid, sest meil ei ole neid. Punkt."
+      },
+      "2": {
+        "title": "Tulevikukindel Planeerimine",
+        "description": "Modelleeri pensioni, laenumakseid ja säästueesmärke ühes integreeritud vaates."
+      },
+      "3": {
+        "title": "Tellimuse Tappa",
+        "description": "Tuvasta korduvad rahavood, mis muud rakendused jätavad tähelepanuta."
+      }
+    },
+    "features": {
+      "0": {
+        "title": "Kohalik Armatuurlaud",
+        "description": "Netoväärtus, rahavoog ja kategooria jaotus. Kohesed laadimisajad.",
+        "href": "/budget-app"
+      },
+      "1": {
+        "title": "Importimise Wizard",
+        "description": "Nutikas CSV kaardistaja BMO, Home Trust ja kohandatavate formaatide jaoks.",
+        "href": "/budget-app/import"
+      },
+      "2": {
+        "title": "Kviitung OCR",
+        "description": "Skaneeri kviitungeid kohapeal Tesseract.js abil. Ei mingit pilve töötlemist.",
+        "href": "/budget-app/ocr"
+      },
+      "3": {
+        "title": "Kategooria Eelarved",
+        "description": "Null-põhine või ülekandega eelarvestamine detailse kategooria kontrolliga.",
+        "href": "/budget-app/budgets"
+      },
+      "4": {
+        "title": "Pensioni Kalkulaator",
+        "description": "Projekti oma vabaduse kuupäev koos liitintressi visualiseerimisega.",
+        "href": "/budget-app/planning/retirement"
+      },
+      "5": {
+        "title": "Privaatsuse Kild",
+        "description": "Valikuline kliendi poole krüpteerimine lisakaitse kihina.",
+        "href": "/budget-app/settings"
+      }
+    },
+    "howItWorks": {
+      "0": {
+        "title": "Impordi",
+        "description": "Loobu ja lohista CSV-sid või skaneeri kviitungeid. AI kaardistab veerud kohapeal."
+      },
+      "1": {
+        "title": "Vaata Üle",
+        "description": "Kiire kategoriseerimine nutikate reeglite ja masstoimingutega."
+      },
+      "2": {
+        "title": "Plaani",
+        "description": "Määra igale dollarile ülesanne ja prognoosi oma tulevane netoväärtus."
+      }
+    },
+    "pricing": {
+      "eyebrow": "Aus Hind",
+      "title": "Kohalik on Tasuta. Sünkroniseerimine on Pro.",
+      "description": "Alusta võimsa Kohaliku Protokolliga. Uuenda hiljem, kui vajad mitme seadme sünkroniseerimist.",
+      "priceLabel": "Igavesti Tasuta",
+      "cta": {
+        "label": "Alusta Kohalikku Protokolli",
+        "href": "/budget-app/auth/signup"
+      },
+      "secondary": {
+        "label": "Vaata Pro Funktsioone",
+        "href": "#pricing"
+      },
+      "guarantee": "Kohaliku Protokolli jaoks ei ole krediitkaarti vajalik."
+    },
+    "faq": {
+      "0": {
+        "q": "Kas minu andmed on tõeliselt privaatsed?",
+        "a": "Jah. Kohaliku Protokolli puhul ei lahku andmed sinu seadmest. Need elavad sinu brauseri IndexedDB-s."
+      },
+      "1": {
+        "q": "Kuidas ma oma andmeid varundan?",
+        "a": "Sa saad igal ajal eksportida täieliku JSON varukoopia. Soovitame ka regulaarselt CSV ekspordid."
+      },
+      "2": {
+        "q": "Mis on 'Sünkroniseerimine' Pro?",
+        "a": "Peagi tulekul: Valikuline tellimus, et sünkroniseerida krüpteeritud andmeid seadmete vahel Supabase'i kaudu."
+      },
+      "3": {
+        "q": "Kas te ühendate panku?",
+        "a": "Ei. Me usume, et käsitsi import on turvalisem, usaldusväärsem ja loob paremat finantsteadlikkust."
+      }
+    },
+    "security": {
+      "title": "Privaatsus esikohal",
+      "description": "Eelarve rakendus salvestab sinu andmed kohapeal (offline-valmis) ja annab sulle kontrolli AI funktsioonide, eksportimise ja kustutamise üle.",
+      "buttons": {
+        "privacy": "Privaatsus ja seaded",
+        "offline": "Offline tugi"
+      },
+      "cards": {
+        "localStorage": {
+          "title": "Kohalik salvestamine",
+          "description": "Sinu eelarve andmed salvestatakse sinu brauseris (IndexedDB), et rakendus jääks kiireks ja kasutatavaks offline."
+        },
+        "encryption": {
+          "title": "Krüpteerimise tugi",
+          "description": "Rakendus sisaldab krüpteerimise kihti, et kaitsta tundlikke eelarve andmeid, kui see on lubatud."
+        },
+        "aiControls": {
+          "title": "AI funktsioonide kontroll",
+          "description": "Lülita sisse AI-põhised funktsioonid (nt anomaalia tuvastamine) ja halda chatbot'i ligipääsu seadetes."
+        },
+        "exportDelete": {
+          "title": "Ekspordi ja kustuta",
+          "description": "Ekspordi oma andmed ja privaatsusseaded või kustuta kohalikud andmed otse rakendusest."
+        }
+      }
+    },
+    "comparison": {
+      "headers": {
+        "feature": "Funktsioon",
+        "local": "BudgetPro Kohalik",
+        "sync": "BudgetPro Sünkroniseerimine (Pro)",
+        "cloud": "Tüüpiline Pilve Rakendus"
+      },
+      "dataPrivacy": {
+        "feature": "Andmete Privaatsus",
+        "local": "100% Privaatsed (Kohalik)",
+        "sync": "Lõpp-lõpuni Krüpteeritud",
+        "cloud": "Töötajate Nähtav"
+      },
+      "cost": {
+        "feature": "Hind",
+        "local": "Igavesti Tasuta",
+        "sync": "Ühekordne Uuendus",
+        "cloud": "$100+/aasta Tellimus"
+      },
+      "offlineMode": {
+        "feature": "Offline Režiim"
+      },
+      "bankConnections": {
+        "feature": "Panga Ühendused",
+        "local": "CSV / Ainult Käsitsi",
+        "sync": "Valikuline (Krüpteeritud)",
+        "cloud": "Kohustuslik Agregeerimine"
+      },
+      "storageLocation": {
+        "feature": "Salvestamise Asukoht",
+        "local": "Sinu Seade",
+        "sync": "Null-teadmiste Pilv",
+        "cloud": "Nende Andmebaas"
+      }
+    },
+    "socialProof": {
+      "title": "Premium viimistlus, sisse ehitatud",
+      "description": "Detailid, mis muudavad eelarvestamise tõhusaks: tutvustus, otseteed, mobiilne navigeerimine ja offline-valmis jõudlus.",
+      "features": {
+        "onboarding": {
+          "title": "Tutvustuse ringkäik",
+          "description": "Juhendatud ringkäik aitab uutelt kasutajatelt kiiresti väärtust saada."
+        },
+        "shortcuts": {
+          "title": "Klaviatuuri otseteed",
+          "description": "Liigu kiiresti otsingu ja tegevuse otseteede abil, mis on rakenduses sisse ehitatud."
+        },
+        "mobileUx": {
+          "title": "Mobiilne UX",
+          "description": "Alumine navigeerimine ja reageerivad paigutused, mis tunduvad loomulikud."
+        },
+        "pwaInstall": {
+          "title": "PWA install",
+          "description": "Installi nagu rakendus ja jätka isegi katkendliku internetiühenduse korral."
+        }
+      }
+    },
+    "pricingSection": {
+      "recommended": "Soovitatud",
+      "productName": "Kohalik Protokoll",
+      "productDescription": "Täielik eelarvestamise kogemus, mis töötab täielikult sinu seadmes.",
+      "whyChoose": "Miks valida Kohalik Protokoll?",
+      "whyChooseDescription": "Vaata, kuidas me võrreldes pilvehiidudega välja näeme.",
+      "features": "Sisaldab piiramatu tehingute, kontode, eelarvete ja täielike kohalike varukoopia võimalusi."
+    },
+    "heroSection": {
+      "cta": {
+        "heading": "Ehitatud selguse, mitte kaose jaoks.",
+        "viewPricing": "Vaata hindu"
+      },
+      "badges": {
+        "noSubscriptions": "Ilma tellimusteta",
+        "offlineReady": "Offline-valmis",
+        "seniorsMode": "Eakate režiim"
+      },
+      "preview": {
+        "livePreview": "Reaalajas eelvaade",
+        "recentTransactions": "Hiljutised tehingud",
+        "categoryBudgets": "Kategooria eelarved",
+        "recurring": "Korduvad"
+      },
+      "modes": {
+        "dashboard": "Armatuurlaud",
+        "budgets": "Eelarved",
+        "subscriptions": "Tellimused"
+      }
+    },
+    "featuresDeepDive": {
+      "heading1": "Tabeli Jõud.",
+      "heading2": "Rakenduse Lihtsus.",
+      "description": "Lõpeta katkenud valemitega võitlemine. Saa manuaalse kontrolli paindlikkus koos kaasaegse rakenduse kiirusest.",
+      "cta": "Alusta tasuta prooviperioodi",
+      "explore": "Uuri lähemalt"
+    },
+    "accessibility": {
+      "title": "Juurdepääsetav vaikimisi",
+      "description": "Eakate režiim pakub lihtsustatud navigeerimist ja suuremaid puutealasid. Klaviatuuri otseteed, fookuse olekud ja selge kontrast aitavad kõigil kiiremini liikuda.",
+      "badges": {
+        "seniorsMode": "Eakate režiim",
+        "largeTouchTargets": "Suured puutealad",
+        "keyboardFirst": "Klaviatuur ees"
+      },
+      "buttons": {
+        "openApp": "Ava rakendus",
+        "settings": "Juurdepääsetavuse seaded"
+      }
+    },
+    "faqSection": {
+      "title": "KKK",
+      "description": "Lihtsad vastused levinud küsimustele prooviperioodide, hindade ja ligipääsu kohta."
+    },
+    "outcomesSection": {
+      "title": "Ehitatud reaalse elu jaoks, mitte tabelite jaoks",
+      "description": "Enamik eelarve rakendusi paneb sind tööd tegema. BudgetPro on loodud hõõrdumise vähendamiseks, samal ajal kui sa jääd kontrolli alla."
+    },
+    "howItWorksSection": {
+      "title": "Kuidas see töötab",
+      "description": "Töövoog, mis viib sind kiiresti selgusele, ilma et sa jääksid keerulisse süsteemi kinni."
+    },
+    "nav": {
+      "tagline": "Premium eelarvestamine"
+    },
+    "marquee": {
+      "logos": [
+        "Eelarvestamine",
+        "Tellimused",
+        "Laenud",
+        "OCR Kviitungid",
+        "Aruanded",
+        "Planeerimine",
+        "Offline",
+        "Eakate režiim"
+      ]
     }
   }
 }

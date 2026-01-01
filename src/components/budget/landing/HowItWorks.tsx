@@ -1,18 +1,24 @@
+'use client';
+
 import { Section } from "@/components/budget/landing/Section";
-import { LANDING_CONTENT } from "@/components/budget/landing/content";
+import { useLandingContent } from "@/components/budget/landing/content";
+import { useTranslations } from 'next-intl';
 
 export function HowItWorks() {
+  const content = useLandingContent();
+  const t = useTranslations('landing.howItWorksSection');
+
   return (
     <Section>
       <div className="flex flex-col gap-3">
-        <h2 className="text-2xl font-bold tracking-tight text-white sm:text-3xl">How it works</h2>
+        <h2 className="text-2xl font-bold tracking-tight text-white sm:text-3xl">{t('title')}</h2>
         <p className="max-w-2xl text-base text-slate-400">
-          A workflow that gets you to clarity fast, without locking you into a complicated system.
+          {t('description')}
         </p>
       </div>
 
       <ol className="mt-10 grid gap-6 md:grid-cols-3">
-        {LANDING_CONTENT.howItWorks.map((step, idx) => (
+        {content.howItWorks.map((step, idx) => (
           <li
             key={step.title}
             className="rounded-2xl border border-white/10 bg-white/[0.03] p-6"

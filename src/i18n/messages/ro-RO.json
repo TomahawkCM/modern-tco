@@ -1,6 +1,6 @@
 {
   "nav": {
-    "dashboard": "Tabloul de bord",
+    "dashboard": "Tablou de bord",
     "transactions": "Tranzacții",
     "budgets": "Bugete",
     "reports": "Rapoarte",
@@ -39,7 +39,7 @@
     },
     "recentTransactions": {
       "title": "Tranzacții Recente",
-      "description": "Vedere rapidă a ultimei tale activități financiare"
+      "description": "Vedere rapidă a celei mai recente activități financiare"
     },
     "budgetProgress": {
       "title": "Progres Buget",
@@ -47,11 +47,11 @@
     },
     "accountBalances": {
       "title": "Solduri Conturi",
-      "description": "Solduri curente în toate conturile tale"
+      "description": "Solduri curente pentru toate conturile tale"
     },
     "incomeVsExpenses": {
       "title": "Venituri vs Cheltuieli",
-      "description": "Compară veniturile și cheltuielile tale în timp"
+      "description": "Compară câștigurile și cheltuielile tale în timp"
     },
     "monthlyTrends": {
       "title": "Tendințe Lunare",
@@ -59,7 +59,387 @@
     },
     "upcomingBills": {
       "title": "Facturi Viitoare",
-      "description": "Nu rata nici o plată cu mementouri pentru facturi"
+      "description": "Nu rata niciodată o plată cu memento-uri pentru facturi"
+    }
+  },
+  "tooltip": {
+    "ariaLabel": "Mai multe informații",
+    "learnMore": "Află mai multe →"
+  },
+  "footer": {
+    "tagline": "Bugetare premium cu o actualizare unică.",
+    "links": {
+      "login": "Conectează-te",
+      "signup": "Începe perioada de probă",
+      "upgrade": "Actualizează",
+      "settings": "Setări"
+    },
+    "copyright": "© {year} {brandName}"
+  },
+  "dialog": {
+    "confirm": "Confirmă",
+    "cancel": "Anulează",
+    "processing": "Se procesează...",
+    "finalConfirmation": "Confirmare Finală:",
+    "typeToConfirm": "Scrie {text} pentru a confirma această acțiune."
+  },
+  "sidebar": {
+    "appTitle": "Aplicația de Buget",
+    "appSubtitle": "Finanțe Premium",
+    "search": "Caută...",
+    "shortcuts": "Scurtături",
+    "navigation": {
+      "dashboard": "Tablou de bord",
+      "transactions": "Tranzacții",
+      "scanReceipt": "Scanează Chitanța",
+      "categories": "Categorii",
+      "budgets": "Bugete",
+      "subscriptions": "Abonamente",
+      "loans": "Împrumuturi",
+      "investments": "Investiții",
+      "futurePlans": "Planuri Viitoare",
+      "retirement": "Pensie",
+      "reports": "Rapoarte"
+    },
+    "actions": {
+      "importCsv": "Importă CSV",
+      "settings": "Setări",
+      "showLess": "Arată Mai Puțin",
+      "showAllItems": "Arată Toate Elementele"
+    }
+  },
+  "onboarding": {
+    "skipTour": "Sari peste tur",
+    "stepCounter": "Pasul {current} din {total}",
+    "dontShowAgain": "Nu mai arăta acest tur",
+    "quickTip": "💡 Sfaturi Rapide",
+    "navigation": {
+      "previous": "Anterior",
+      "next": "Următor",
+      "getStarted": "Începe",
+      "startTour": "Începe Turul"
+    },
+    "steps": {
+      "welcome": {
+        "title": "👋 Bine ai venit la Aplicația de Buget!",
+        "description": "Hai să facem un tur rapid pentru a te ajuta să începi să îți gestionezi finanțele personale. Nu va dura mult!"
+      },
+      "import": {
+        "title": "📥 Importă Tranzacțiile Tale",
+        "description": "Începe prin a importa tranzacțiile tale bancare dintr-un fișier CSV. Susținem BMO, Home Trust și multe alte bănci. Aplicația va categoriza automat tranzacțiile tale!"
+      },
+      "categorize": {
+        "title": "🏷️ Categorizează & Organizează",
+        "description": "Revizuiește și ajustează categoriile tranzacțiilor. Categorisirea noastră inteligentă învață din corectările tale pentru a se îmbunătăți în timp. Folosește acțiuni în masă pentru a categoriza mai multe tranzacții simultan!"
+      },
+      "budgets": {
+        "title": "🎯 Stabilește Bugetele Tale",
+        "description": "Creează bugete pentru diferite categorii de cheltuieli. Urmărește progresul tău pe parcursul lunii și primește alerte când te aproprii de limitele tale."
+      },
+      "reports": {
+        "title": "📊 Vizualizează Rapoarte & Perspective",
+        "description": "Vizualizează modelele tale de cheltuieli, urmărește-ți averea netă și ia decizii financiare informate. Tabloul tău de bord se actualizează automat cu fiecare tranzacție!"
+      }
+    },
+    "tips": {
+      "import": "Trage și lasă fișierul tău CSV sau dă clic pentru a naviga. Detectăm automat formatele BMO și Home Trust!",
+      "categorize": "Folosește butonul rapid de categorizare sau selectează mai multe tranzacții pentru categorizare în masă.",
+      "budgets": "Stabilește bugete realiste și te vom alerta dacă ești pe cale să depășești limita."
+    }
+  },
+  "landing": {
+    "brand": {
+      "name": "BudgetPro",
+      "product": "Aplicația de Buget"
+    },
+    "hero": {
+      "badge": "Privatitate-Prim • Local-Solo • Zero Urmărire",
+      "headline": "Stăpânește-ți Banii fără a Vinde Datele Tale.",
+      "subhead": "Puterea unui tabel. Simplitatea unei aplicații. Experimentează claritatea financiară cu singura aplicație de buget care garantează că datele tale nu părăsesc niciodată dispozitivul tău.",
+      "primaryCta": {
+        "label": "Începe Protocolul Local (Gratuit)",
+        "href": "/budget-app/auth/signup"
+      },
+      "secondaryCta": {
+        "label": "Conectează-te",
+        "href": "/budget-app/auth/login"
+      },
+      "finePrint": "Nu sunt necesare acreditive bancare. Nu este necesar un cont pentru modul local."
+    },
+    "trust": {
+      "0": {
+        "title": "Dispozitivul Tău, Datele Tale",
+        "description": "Datele rămân în IndexedDB-ul browserului tău. Practic nu le putem vedea."
+      },
+      "1": {
+        "title": "Puterea Tabelului",
+        "description": "Editează în masă, pivot și analizează ca un profesionist fără dureri de cap cu formule."
+      },
+      "2": {
+        "title": "Viteză Offline",
+        "description": "Zero latență. Funcționează pe un vârf de munte sau într-un tunel de metrou."
+      },
+      "3": {
+        "title": "Ritualuri Manuale",
+        "description": "Asistentul de import face ca Revizuirea Financiară de Vineri să devină un obicei satisfăcător."
+      }
+    },
+    "outcomes": {
+      "0": {
+        "title": "Oprește Lupta cu Agregatorii",
+        "description": "Fără mai multe conexiuni rupte sau bucle de re-autentificare. Tu controlezi introducerea datelor."
+      },
+      "1": {
+        "title": "Privatitate prin Design",
+        "description": "Nu vindem datele tale pentru că nu le avem. Punct."
+      },
+      "2": {
+        "title": "Planificare Viitoare",
+        "description": "Modelează pensionarea, rambursările împrumuturilor și obiectivele de economisire într-o vedere integrată."
+      },
+      "3": {
+        "title": "Ucigaș de Abonamente",
+        "description": "Identifică scurgerile recurente din portofel pe care alte aplicații le ratează."
+      }
+    },
+    "features": {
+      "0": {
+        "title": "Tablou de Bord Local",
+        "description": "Averea netă, fluxul de numerar și defalcarea pe categorii. Timp de încărcare instantaneu.",
+        "href": "/budget-app"
+      },
+      "1": {
+        "title": "Asistent de Import",
+        "description": "Mapper CSV inteligent pentru BMO, Home Trust și formate personalizabile.",
+        "href": "/budget-app/import"
+      },
+      "2": {
+        "title": "OCR pentru Chitanțe",
+        "description": "Scanează chitanțele local cu Tesseract.js. Fără procesare în cloud.",
+        "href": "/budget-app/ocr"
+      },
+      "3": {
+        "title": "Bugete pe Categorii",
+        "description": "Bugetare pe baza zero sau bugetare cu rollover cu control granular pe categorii.",
+        "href": "/budget-app/budgets"
+      },
+      "4": {
+        "title": "Calculator de Pensionare",
+        "description": "Proiectează data libertății tale cu vizualizări ale dobânzii compuse.",
+        "href": "/budget-app/planning/retirement"
+      },
+      "5": {
+        "title": "Scut de Privatitate",
+        "description": "Criptare opțională pe partea clientului pentru un plus de securitate.",
+        "href": "/budget-app/settings"
+      }
+    },
+    "howItWorks": {
+      "0": {
+        "title": "Importă",
+        "description": "Trage și lasă CSV-uri sau scanează chitanțe. AI mapează coloanele local."
+      },
+      "1": {
+        "title": "Revizuiește",
+        "description": "Categorisire rapidă cu reguli inteligente și acțiuni în masă."
+      },
+      "2": {
+        "title": "Planifică",
+        "description": "Atribuie fiecărui leu o sarcină și prezice-ți averea netă viitoare."
+      }
+    },
+    "pricing": {
+      "eyebrow": "Prețuri Corecte",
+      "title": "Local este Gratuit. Sincronizarea este Pro.",
+      "description": "Începe cu puternicul Protocol Local. Actualizează mai târziu dacă ai nevoie de sincronizare pe mai multe dispozitive.",
+      "priceLabel": "Gratuit pentru Totdeauna",
+      "cta": {
+        "label": "Începe Protocolul Local",
+        "href": "/budget-app/auth/signup"
+      },
+      "secondary": {
+        "label": "Vezi Funcțiile Pro",
+        "href": "#pricing"
+      },
+      "guarantee": "Nu este necesară o carte de credit pentru Protocolul Local."
+    },
+    "faq": {
+      "0": {
+        "q": "Datele mele sunt cu adevărat private?",
+        "a": "Da. În Protocolul Local, datele nu părăsesc niciodată dispozitivul tău. Ele trăiesc în IndexedDB în browserul tău."
+      },
+      "1": {
+        "q": "Cum îmi fac backup pentru date?",
+        "a": "Poți exporta un backup complet JSON în orice moment. De asemenea, recomandăm exporturi regulate CSV."
+      },
+      "2": {
+        "q": "Ce este 'Sync' Pro?",
+        "a": "În curând: Un abonament opțional pentru a sincroniza datele criptate între dispozitive prin Supabase."
+      },
+      "3": {
+        "q": "Te conectezi la bănci?",
+        "a": "Nu. Credem că importul manual este mai sigur, mai fiabil și dezvoltă o mai bună conștientizare financiară."
+      }
+    },
+    "security": {
+      "title": "Privatitate-prim prin design",
+      "description": "Aplicația de Buget îți stochează datele local (pregătită pentru offline) și îți oferă controale pentru funcțiile AI, exportare și ștergere.",
+      "buttons": {
+        "privacy": "Privatitate & setări",
+        "offline": "Suport offline"
+      },
+      "cards": {
+        "localStorage": {
+          "title": "Stocare locală",
+          "description": "Datele tale de buget sunt stocate în browserul tău (IndexedDB) astfel încât aplicația să rămână rapidă și utilizabilă offline."
+        },
+        "encryption": {
+          "title": "Suport pentru criptare",
+          "description": "Aplicația include un strat de criptare pentru a proteja înregistrările sensibile de buget atunci când este activat."
+        },
+        "aiControls": {
+          "title": "Controale pentru funcții AI",
+          "description": "Activează funcțiile bazate pe AI (cum ar fi detectarea anomaliilor) și gestionează accesul chatbot-ului din setări."
+        },
+        "exportDelete": {
+          "title": "Exportă & șterge",
+          "description": "Exportă datele tale și setările de confidențialitate sau șterge datele locale direct din aplicație."
+        }
+      }
+    },
+    "comparison": {
+      "headers": {
+        "feature": "Funcție",
+        "local": "BudgetPro Local",
+        "sync": "BudgetPro Sync (Pro)",
+        "cloud": "Aplicație Cloud Tipică"
+      },
+      "dataPrivacy": {
+        "feature": "Confidențialitatea Datelor",
+        "local": "100% Privat (Local)",
+        "sync": "Criptat End-to-End",
+        "cloud": "Vizibil de Angajați"
+      },
+      "cost": {
+        "feature": "Cost",
+        "local": "Gratuit pentru Totdeauna",
+        "sync": "Actualizare Unică",
+        "cloud": "$100+/an Abonament"
+      },
+      "offlineMode": {
+        "feature": "Mod Offline"
+      },
+      "bankConnections": {
+        "feature": "Conexiuni Bancare",
+        "local": "CSV / Manual Numai",
+        "sync": "Opțional (Criptat)",
+        "cloud": "Agregare Obligatorie"
+      },
+      "storageLocation": {
+        "feature": "Locația Stocării",
+        "local": "Dispozitivul Tău",
+        "sync": "Cloud Zero-Cunoștințe",
+        "cloud": "Baza de Date a Lor"
+      }
+    },
+    "socialProof": {
+      "title": "Polish Premium, construit în",
+      "description": "Detaliile care fac ca bugetarea să fie eficientă: onboarding, scurtături, navigare mobilă și performanță pregătită pentru offline.",
+      "features": {
+        "onboarding": {
+          "title": "Tur de onboarding",
+          "description": "Un tur ghidat ajută utilizatorii noi să ajungă rapid la valoare."
+        },
+        "shortcuts": {
+          "title": "Scurtături de tastatură",
+          "description": "Mergi rapid cu căutarea și scurtăturile de acțiune integrate în UI."
+        },
+        "mobileUx": {
+          "title": "UX mobil-prim",
+          "description": "Navigare de jos și layout-uri responsive care se simt native."
+        },
+        "pwaInstall": {
+          "title": "Instalare PWA",
+          "description": "Instalează ca o aplicație și continuă chiar și cu internet intermitent."
+        }
+      }
+    },
+    "pricingSection": {
+      "recommended": "Recomandat",
+      "productName": "Protocol Local",
+      "productDescription": "Experiența completă de bugetare, rulând complet pe dispozitivul tău.",
+      "whyChoose": "De ce să alegi Protocolul Local?",
+      "whyChooseDescription": "Vezi cum ne comparăm cu giganții din cloud.",
+      "features": "Include tranzacții nelimitate, conturi, bugete și capacități complete de backup local."
+    },
+    "heroSection": {
+      "cta": {
+        "heading": "Construit pentru claritate, nu haos.",
+        "viewPricing": "Vezi prețurile"
+      },
+      "badges": {
+        "noSubscriptions": "Fără abonamente",
+        "offlineReady": "Pregătit pentru offline",
+        "seniorsMode": "Mod Seniori"
+      },
+      "preview": {
+        "livePreview": "Previzualizare live",
+        "recentTransactions": "Tranzacții recente",
+        "categoryBudgets": "Bugete pe categorii",
+        "recurring": "Recurente"
+      },
+      "modes": {
+        "dashboard": "Tablou de bord",
+        "budgets": "Bugete",
+        "subscriptions": "Abonamente"
+      }
+    },
+    "featuresDeepDive": {
+      "heading1": "Puterea Tabelului.",
+      "heading2": "Simplitatea Aplicației.",
+      "description": "Oprește-te din a te lupta cu formulele rupte. Obține flexibilitatea controlului manual cu viteza unei aplicații moderne.",
+      "cta": "Începe perioada de probă gratuită",
+      "explore": "Explorează"
+    },
+    "accessibility": {
+      "title": "Accesibil prin default",
+      "description": "Modul Seniori oferă navigare simplificată și ținte tactile mai mari. Scurtăturile de tastatură, stările de focalizare și contrastul clar ajută pe toată lumea să se miște mai repede.",
+      "badges": {
+        "seniorsMode": "Mod Seniori",
+        "largeTouchTargets": "Ținte tactile mari",
+        "keyboardFirst": "Primul pe tastatură"
+      },
+      "buttons": {
+        "openApp": "Deschide aplicația",
+        "settings": "Setări de accesibilitate"
+      }
+    },
+    "faqSection": {
+      "title": "Întrebări Frecvente",
+      "description": "Răspunsuri simple la întrebările comune despre perioadele de probă, prețuri și acces."
+    },
+    "outcomesSection": {
+      "title": "Construit pentru viața reală, nu pentru tabele",
+      "description": "Cele mai multe aplicații de bugetare te fac să faci munca. BudgetPro este conceput pentru a reduce fricțiunea, păstrându-te în control."
+    },
+    "howItWorksSection": {
+      "title": "Cum funcționează",
+      "description": "Un flux de lucru care te duce rapid la claritate, fără a te bloca într-un sistem complicat."
+    },
+    "nav": {
+      "tagline": "Bugetare Premium"
+    },
+    "marquee": {
+      "logos": [
+        "Bugetare",
+        "Abonamente",
+        "Împrumuturi",
+        "Chitanțe OCR",
+        "Rapoarte",
+        "Planificare",
+        "Offline",
+        "Mod Seniori"
+      ]
     }
   }
 }

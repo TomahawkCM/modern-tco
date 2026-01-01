@@ -23,7 +23,7 @@
   },
   "welcome": {
     "title": "Maligayang Pagdating sa Budget App",
-    "subtitle": "Simulan sa pamamagitan ng pagdagdag ng iyong unang transaksyon o pag-import ng data mula sa iyong bangko"
+    "subtitle": "Magsimula sa pamamagitan ng pagdaragdag ng iyong unang transaksyon o pag-import ng data mula sa iyong bangko"
   },
   "common": {
     "save": "I-save",
@@ -34,8 +34,8 @@
   },
   "widget": {
     "spendingByCategory": {
-      "title": "Gastos sa Bawat Kategorya",
-      "description": "Tingnan kung saan napupunta ang iyong pera sa pamamagitan ng mga visual na paghahati"
+      "title": "Gastos ayon sa Kategorya",
+      "description": "Tingnan kung saan napupunta ang iyong pera gamit ang visual na paghahati"
     },
     "recentTransactions": {
       "title": "Mga Kamakailang Transaksyon",
@@ -43,7 +43,7 @@
     },
     "budgetProgress": {
       "title": "Progreso ng Badyet",
-      "description": "Subaybayan kung paano ka kumikilos laban sa iyong mga layunin sa badyet"
+      "description": "Subaybayan kung paano ka umuusad laban sa iyong mga layunin sa badyet"
     },
     "accountBalances": {
       "title": "Mga Balanseng Account",
@@ -51,15 +51,395 @@
     },
     "incomeVsExpenses": {
       "title": "Kita vs Gastos",
-      "description": "Ihambing ang iyong kita at gastos sa paglipas ng panahon"
+      "description": "Ihambing ang iyong kita at paggastos sa paglipas ng panahon"
     },
     "monthlyTrends": {
-      "title": "Buwanang Uso",
+      "title": "Mga Buwanang Uso",
       "description": "I-visualize ang iyong mga pattern sa pananalapi buwan-buwan"
     },
     "upcomingBills": {
-      "title": "Mga Paparating na Buwanang Bayarin",
-      "description": "Huwag palampasin ang anumang bayad sa pamamagitan ng mga paalala sa bayarin"
+      "title": "Mga Darating na Bayarin",
+      "description": "Huwag palampasin ang isang bayad sa pamamagitan ng mga paalala sa bayarin"
+    }
+  },
+  "tooltip": {
+    "ariaLabel": "Karagdagang impormasyon",
+    "learnMore": "Matuto pa →"
+  },
+  "footer": {
+    "tagline": "Premium na pagba-budget na may isang beses na pag-upgrade.",
+    "links": {
+      "login": "Mag-log in",
+      "signup": "Magsimula ng pagsubok",
+      "upgrade": "Mag-upgrade",
+      "settings": "Mga Setting"
+    },
+    "copyright": "© {year} {brandName}"
+  },
+  "dialog": {
+    "confirm": "Kumpirmahin",
+    "cancel": "Kanselahin",
+    "processing": "Pinoproseso...",
+    "finalConfirmation": "Pangwakas na Kumpirmasyon:",
+    "typeToConfirm": "I-type ang {text} upang kumpirmahin ang aksyon na ito."
+  },
+  "sidebar": {
+    "appTitle": "Budget App",
+    "appSubtitle": "Premium na Pananalapi",
+    "search": "Maghanap...",
+    "shortcuts": "Mga Shortcut",
+    "navigation": {
+      "dashboard": "Dashboard",
+      "transactions": "Mga Transaksyon",
+      "scanReceipt": "I-scan ang Resibo",
+      "categories": "Mga Kategorya",
+      "budgets": "Mga Badyet",
+      "subscriptions": "Mga Subskripsyon",
+      "loans": "Mga Utang",
+      "investments": "Mga Pamumuhunan",
+      "futurePlans": "Mga Hinaharap na Plano",
+      "retirement": "Pagreretiro",
+      "reports": "Mga Ulat"
+    },
+    "actions": {
+      "importCsv": "Mag-import ng CSV",
+      "settings": "Mga Setting",
+      "showLess": "Ipakita ang Mas Kaunti",
+      "showAllItems": "Ipakita ang Lahat ng Item"
+    }
+  },
+  "onboarding": {
+    "skipTour": "Laktawan ang tour",
+    "stepCounter": "Hakbang {current} ng {total}",
+    "dontShowAgain": "Huwag ipakita muli ang tour na ito",
+    "quickTip": "💡 Mabilis na Tip",
+    "navigation": {
+      "previous": "Nakaraan",
+      "next": "Susunod",
+      "getStarted": "Magsimula",
+      "startTour": "Simulan ang Tour"
+    },
+    "steps": {
+      "welcome": {
+        "title": "👋 Maligayang Pagdating sa Budget App!",
+        "description": "Tara't maglakbay nang mabilis upang matulungan kang simulan ang pamamahala ng iyong mga pananalapi sa bahay. Hindi ito aabutin ng matagal!"
+      },
+      "import": {
+        "title": "📥 Mag-import ng Iyong mga Transaksyon",
+        "description": "Magsimula sa pamamagitan ng pag-import ng iyong mga transaksyon mula sa bangko mula sa isang CSV file. Suportado namin ang BMO, Home Trust, at marami pang ibang bangko. Awtomatikong ikakategorya ng app ang iyong mga transaksyon!"
+      },
+      "categorize": {
+        "title": "🏷️ I-kategorya at I-organisa",
+        "description": "Suriin at ayusin ang mga kategorya ng transaksyon. Ang aming matalinong pag-uuri ay natututo mula sa iyong mga pagwawasto upang mapabuti sa paglipas ng panahon. Gumamit ng mga bulk action upang i-kategorya ang maraming transaksyon nang sabay-sabay!"
+      },
+      "budgets": {
+        "title": "🎯 Itakda ang Iyong mga Badyet",
+        "description": "Lumikha ng mga badyet para sa iba't ibang kategorya ng paggastos. Subaybayan ang iyong progreso sa buong buwan at makatanggap ng mga alerto kapag malapit ka nang lumampas sa iyong mga limitasyon."
+      },
+      "reports": {
+        "title": "📊 Tingnan ang mga Ulat at Mga Pagsusuri",
+        "description": "I-visualize ang iyong mga pattern sa paggastos, subaybayan ang iyong net worth, at gumawa ng mga may kaalamang desisyon sa pananalapi. Awtomatikong nag-uupdate ang iyong dashboard sa bawat transaksyon!"
+      }
+    },
+    "tips": {
+      "import": "I-drag at i-drop ang iyong CSV file o i-click upang mag-browse. Awtomatikong nadidetect ang BMO at Home Trust formats!",
+      "categorize": "Gumamit ng mabilis na button sa pag-uuri o pumili ng maraming transaksyon para sa bulk na pag-uuri.",
+      "budgets": "Mag-set ng makatotohanang mga badyet at magbibigay kami ng alerto kung malapit ka nang lumampas sa iyong badyet."
+    }
+  },
+  "landing": {
+    "brand": {
+      "name": "BudgetPro",
+      "product": "Budget App"
+    },
+    "hero": {
+      "badge": "Privacy-First • Local-Only • Zero Tracking",
+      "headline": "Masterin ang Iyong Pera nang Hindi Ibinibenta ang Iyong Data.",
+      "subhead": "Ang kapangyarihan ng isang spreadsheet. Ang pagiging simple ng isang app. Maranasan ang kalinawan sa pananalapi sa tanging budget app na ginagarantiyahan na ang iyong data ay hindi kailanman umaalis sa iyong device.",
+      "primaryCta": {
+        "label": "Simulan ang Local Protocol (Libre)",
+        "href": "/budget-app/auth/signup"
+      },
+      "secondaryCta": {
+        "label": "Mag-log in",
+        "href": "/budget-app/auth/login"
+      },
+      "finePrint": "Walang kinakailangang credentials ng bangko. Walang account na kinakailangan para sa lokal na mode."
+    },
+    "trust": {
+      "0": {
+        "title": "Iyong Device, Iyong Data",
+        "description": "Ang data ay nananatili sa IndexedDB ng iyong browser. Literal na hindi namin ito nakikita."
+      },
+      "1": {
+        "title": "Kapangyarihan ng Spreadsheet",
+        "description": "Bulk edit, pivot, at analyze tulad ng isang pro nang walang sakit ng ulo sa formula."
+      },
+      "2": {
+        "title": "Offline Speed",
+        "description": "Zero latency. Gumagana sa tuktok ng bundok o sa subway tunnel."
+      },
+      "3": {
+        "title": "Manwal na Ritwal",
+        "description": "Ginagawa ng import wizard na masaya ang Biyernes Money Review."
+      }
+    },
+    "outcomes": {
+      "0": {
+        "title": "Itigil ang Pakikipaglaban sa mga Aggregator",
+        "description": "Walang masira na koneksyon o re-auth loops. Ikaw ang may kontrol sa input ng data."
+      },
+      "1": {
+        "title": "Privacy sa Disenyo",
+        "description": "Hindi namin ibinibenta ang iyong data dahil wala kami nito. Period."
+      },
+      "2": {
+        "title": "Future-Proof Planning",
+        "description": "I-modelo ang pagreretiro, pagbabayad ng utang, at mga layunin sa pagtitipid sa isang pinagsamang view."
+      },
+      "3": {
+        "title": "Subscription Killer",
+        "description": "Tukuyin ang mga paulit-ulit na drains sa iyong wallet na hindi napapansin ng ibang apps."
+      }
+    },
+    "features": {
+      "0": {
+        "title": "Local Dashboard",
+        "description": "Net worth, cash flow, at breakdown ng kategorya. Instant load times.",
+        "href": "/budget-app"
+      },
+      "1": {
+        "title": "Import Wizard",
+        "description": "Matalinong CSV mapper para sa BMO, Home Trust, at mga nako-customize na format.",
+        "href": "/budget-app/import"
+      },
+      "2": {
+        "title": "Receipt OCR",
+        "description": "I-scan ang mga resibo nang lokal gamit ang Tesseract.js. Walang cloud processing.",
+        "href": "/budget-app/ocr"
+      },
+      "3": {
+        "title": "Category Budgets",
+        "description": "Zero-based o rollover budgeting na may granular na kontrol sa kategorya.",
+        "href": "/budget-app/budgets"
+      },
+      "4": {
+        "title": "Retirement Calculator",
+        "description": "I-project ang iyong petsa ng kalayaan gamit ang mga visualisasyon ng compound interest.",
+        "href": "/budget-app/planning/retirement"
+      },
+      "5": {
+        "title": "Privacy Shield",
+        "description": "Opsyonal na client-side encryption para sa karagdagang layer ng seguridad.",
+        "href": "/budget-app/settings"
+      }
+    },
+    "howItWorks": {
+      "0": {
+        "title": "Mag-import",
+        "description": "I-drag at i-drop ang mga CSV o i-scan ang mga resibo. Ang AI ay nagma-map ng mga column nang lokal."
+      },
+      "1": {
+        "title": "Suriin",
+        "description": "Mabilis na pag-uuri gamit ang matalinong mga patakaran at bulk actions."
+      },
+      "2": {
+        "title": "Planuhin",
+        "description": "Italaga ang bawat dolyar ng trabaho at i-forecast ang iyong hinaharap na net worth."
+      }
+    },
+    "pricing": {
+      "eyebrow": "Makatarungang Pagpepresyo",
+      "title": "Libre ang Local. Pro ang Sync.",
+      "description": "Magsimula sa makapangyarihang Local Protocol. Mag-upgrade mamaya kung kailangan mo ng multi-device sync.",
+      "priceLabel": "Libre Magpakailanman",
+      "cta": {
+        "label": "Simulan ang Local Protocol",
+        "href": "/budget-app/auth/signup"
+      },
+      "secondary": {
+        "label": "Tingnan ang Pro Features",
+        "href": "#pricing"
+      },
+      "guarantee": "Walang kinakailangang credit card para sa Local Protocol."
+    },
+    "faq": {
+      "0": {
+        "q": "Talaga bang pribado ang aking data?",
+        "a": "Oo. Sa Local Protocol, ang data ay hindi kailanman umaalis sa iyong device. Nananatili ito sa IndexedDB sa loob ng iyong browser."
+      },
+      "1": {
+        "q": "Paano ko ma-backup ang aking data?",
+        "a": "Maaari kang mag-export ng buong JSON backup anumang oras. Inirerekomenda rin namin ang regular na CSV exports."
+      },
+      "2": {
+        "q": "Ano ang 'Sync' Pro?",
+        "a": "Darating na: Isang opsyonal na subscription upang i-sync ang encrypted data sa pagitan ng mga device sa pamamagitan ng Supabase."
+      },
+      "3": {
+        "q": "Kumokonekta ba kayo sa mga bangko?",
+        "a": "Hindi. Naniniwala kami na ang manwal na import ay mas ligtas, mas maaasahan, at bumubuo ng mas mahusay na kamalayan sa pananalapi."
+      }
+    },
+    "security": {
+      "title": "Privacy-first sa disenyo",
+      "description": "Ang Budget App ay nag-iimbak ng iyong data nang lokal (offline-ready) at nagbibigay sa iyo ng mga kontrol para sa mga AI features, pag-export, at pagtanggal.",
+      "buttons": {
+        "privacy": "Privacy at mga setting",
+        "offline": "Suporta sa Offline"
+      },
+      "cards": {
+        "localStorage": {
+          "title": "Local storage",
+          "description": "Ang iyong data sa badyet ay naka-imbak sa iyong browser (IndexedDB) kaya't ang app ay nananatiling mabilis at magagamit offline."
+        },
+        "encryption": {
+          "title": "Suporta sa Encryption",
+          "description": "Kasama sa app ang isang encryption layer upang protektahan ang sensitibong mga tala ng badyet kapag pinagana."
+        },
+        "aiControls": {
+          "title": "Mga kontrol sa AI feature",
+          "description": "I-toggle ang mga AI-powered features (tulad ng anomaly detection) at pamahalaan ang access ng chatbot mula sa mga setting."
+        },
+        "exportDelete": {
+          "title": "I-export at tanggalin",
+          "description": "I-export ang iyong data at mga setting ng privacy, o tanggalin ang lokal na data nang direkta mula sa app."
+        }
+      }
+    },
+    "comparison": {
+      "headers": {
+        "feature": "Tampok",
+        "local": "BudgetPro Local",
+        "sync": "BudgetPro Sync (Pro)",
+        "cloud": "Karaniwang Cloud App"
+      },
+      "dataPrivacy": {
+        "feature": "Privacy ng Data",
+        "local": "100% Pribado (Local)",
+        "sync": "End-to-End Encrypted",
+        "cloud": "Nakikita ng mga Empleyado"
+      },
+      "cost": {
+        "feature": "Gastos",
+        "local": "Libre Magpakailanman",
+        "sync": "Isang beses na Pag-upgrade",
+        "cloud": "$100+/taon na Subscription"
+      },
+      "offlineMode": {
+        "feature": "Offline Mode"
+      },
+      "bankConnections": {
+        "feature": "Mga Koneksyon sa Bangko",
+        "local": "CSV / Manwal Lamang",
+        "sync": "Opsyonal (Encrypted)",
+        "cloud": "Mandatory Aggregation"
+      },
+      "storageLocation": {
+        "feature": "Lokasyon ng Imbakan",
+        "local": "Iyong Device",
+        "sync": "Zero-Knowledge Cloud",
+        "cloud": "Kanilang Database"
+      }
+    },
+    "socialProof": {
+      "title": "Premium polish, built in",
+      "description": "Ang mga detalye na nagpapadali sa pagba-budget: onboarding, shortcuts, mobile navigation, at offline-ready performance.",
+      "features": {
+        "onboarding": {
+          "title": "Onboarding tour",
+          "description": "Isang guided tour na tumutulong sa mga bagong gumagamit na makuha ang halaga nang mabilis."
+        },
+        "shortcuts": {
+          "title": "Mga Keyboard shortcut",
+          "description": "Mabilis na lumipat gamit ang search at action shortcuts na nakabuilt-in sa UI."
+        },
+        "mobileUx": {
+          "title": "Mobile-first UX",
+          "description": "Bottom navigation at responsive layouts na parang katutubong."
+        },
+        "pwaInstall": {
+          "title": "PWA install",
+          "description": "I-install tulad ng isang app at magpatuloy kahit na may spotty internet."
+        }
+      }
+    },
+    "pricingSection": {
+      "recommended": "Inirerekomenda",
+      "productName": "Local Protocol",
+      "productDescription": "Ang kumpletong karanasan sa pagba-budget, tumatakbo nang buo sa iyong device.",
+      "whyChoose": "Bakit pumili ng Local Protocol?",
+      "whyChooseDescription": "Tingnan kung paano kami nag-stack up laban sa mga cloud giants.",
+      "features": "Kasama ang walang limitasyong mga transaksyon, account, badyet, at buong kakayahan sa lokal na backup."
+    },
+    "heroSection": {
+      "cta": {
+        "heading": "Binuo para sa kalinawan, hindi kaguluhan.",
+        "viewPricing": "Tingnan ang pagpepresyo"
+      },
+      "badges": {
+        "noSubscriptions": "Walang subscriptions",
+        "offlineReady": "Offline-ready",
+        "seniorsMode": "Seniors Mode"
+      },
+      "preview": {
+        "livePreview": "Live preview",
+        "recentTransactions": "Kamakailang transaksyon",
+        "categoryBudgets": "Mga kategoryang badyet",
+        "recurring": "Paulit-ulit"
+      },
+      "modes": {
+        "dashboard": "Dashboard",
+        "budgets": "Mga Badyet",
+        "subscriptions": "Mga Subskripsyon"
+      }
+    },
+    "featuresDeepDive": {
+      "heading1": "Kapangyarihan ng Spreadsheet.",
+      "heading2": "Simplicity ng App.",
+      "description": "Itigil ang pakikipaglaban sa mga sirang formula. Kumuha ng flexibility ng manual control na may bilis ng modernong app.",
+      "cta": "Simulan ang libreng pagsubok",
+      "explore": "Tuklasin"
+    },
+    "accessibility": {
+      "title": "Accessible by default",
+      "description": "Ang Seniors Mode ay nagbibigay ng pinadaling nabigasyon at mas malalaking touch targets. Ang mga keyboard shortcuts, focus states, at malinaw na contrast ay tumutulong sa lahat na lumipat nang mas mabilis.",
+      "badges": {
+        "seniorsMode": "Seniors Mode",
+        "largeTouchTargets": "Malalaking touch targets",
+        "keyboardFirst": "Keyboard-first"
+      },
+      "buttons": {
+        "openApp": "Buksan ang app",
+        "settings": "Mga setting ng accessibility"
+      }
+    },
+    "faqSection": {
+      "title": "FAQ",
+      "description": "Simpleng sagot sa mga karaniwang tanong tungkol sa mga pagsubok, pagpepresyo, at access."
+    },
+    "outcomesSection": {
+      "title": "Binuo para sa tunay na buhay, hindi mga spreadsheet",
+      "description": "Karamihan sa mga budgeting app ay pinapagawa ka ng trabaho. Ang BudgetPro ay dinisenyo upang bawasan ang friction habang pinapanatili kang may kontrol."
+    },
+    "howItWorksSection": {
+      "title": "Paano ito gumagana",
+      "description": "Isang workflow na nagdadala sa iyo sa kalinawan nang mabilis, nang hindi ka nakakulong sa isang komplikadong sistema."
+    },
+    "nav": {
+      "tagline": "Premium na pagba-budget"
+    },
+    "marquee": {
+      "logos": [
+        "Pagba-budget",
+        "Mga Subskripsyon",
+        "Mga Utang",
+        "OCR Resibo",
+        "Mga Ulat",
+        "Pagpaplano",
+        "Offline",
+        "Seniors Mode"
+      ]
     }
   }
 }
