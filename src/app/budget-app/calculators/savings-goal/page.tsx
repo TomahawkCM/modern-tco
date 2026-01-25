@@ -24,7 +24,7 @@ export default function SavingsGoalCalculatorPage() {
   const t = useTranslations('calculators');
   const locale = useLocale() as SupportedLocale;
   const localeMeta = LOCALE_METADATA[locale] || LOCALE_METADATA['en-US'];
-  const currency = localeMeta.currency;
+  const currency = localeMeta.currency as string;
 
   // Mode state
   const [mode, setMode] = useState<SavingsGoalMode>('when');
