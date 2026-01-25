@@ -6,10 +6,22 @@
 export interface Account {
   id: string;
   name: string; // "BMO Checking", "Home Trust Savings"
-  type: 'checking' | 'savings' | 'credit';
+  type: "checking" | "savings" | "credit";
   institution: string; // "BMO", "Home Trust"
-  balance: number;
+  balance: number; // Opening/starting balance (set during reconciliation)
   currency: string; // "CAD"
+
+  // Balance reconciliation tracking
+  openingBalanceDate?: Date; // Date of first transaction or when balance was set
+  lastReconciledAt?: Date; // When balance was last verified by user
+  lastReconciledBalance?: number; // What user said the balance was at reconciliation
+
+  // Auto-matching fields for imports
+  bankSlug?: string; // Bank config key (e.g., 'bmo', 'homeTrust', 'td')
+  lastFourDigits?: string; // Last 4 digits of account number for OFX matching
+  bankId?: string; // Bank routing number from OFX BANKID (unique bank identifier)
+  importPatterns?: string[]; // Custom patterns to match during import
+
   createdAt: Date;
   updatedAt: Date;
 }
@@ -25,26 +37,26 @@ export interface Transaction {
   subcategory: string | null;
   notes: string;
   isRecurring: boolean;
-  recurringPattern?: 'daily' | 'weekly' | 'biweekly' | 'monthly' | 'quarterly' | 'annually';
+  recurringPattern?: "daily" | "weekly" | "biweekly" | "monthly" | "quarterly" | "annually";
   tags: string[];
   merchant?: string;
   receiptIds?: string[]; // Array of associated receipt IDs
-  
+
   // Split Transaction Fields (Phase 6)
   splitFromId?: string | null; // ID of parent transaction if this is a split
   isSplit?: boolean; // True if this transaction was split into children
-  
+
   // Encryption Fields (Phase 4: Privacy & Security)
   encryptedDescription?: string; // Encrypted description (if encryption enabled)
   encryptedAmount?: string; // Encrypted amount (if encryption enabled)
   encryptionIv?: string; // Initialization vector for decryption
   amountHash?: string; // Hash of amount for searching (one-way)
-  
+
   // Import/OFX Fields
   fitid?: string; // OFX: Financial Institution Transaction ID (for perfect duplicate detection)
   checkNum?: string; // OFX: Check number if applicable
   transactionType?: string; // OFX: TRNTYPE (DEBIT, CREDIT, CHECK, etc.)
-  
+
   createdAt: Date;
   updatedAt: Date;
 }
@@ -72,7 +84,7 @@ export interface Receipt {
 export interface Category {
   id: string;
   name: string;
-  type: 'expense' | 'income';
+  type: "expense" | "income";
   subcategories: string[];
   color: string; // Hex color
   icon: string; // Icon name
@@ -87,10 +99,17 @@ export interface Budget {
   id: string;
   categoryId: string;
   amount: number;
-  period: 'monthly' | 'annual';
+  period: "monthly" | "annual";
   startDate: Date;
   endDate: Date | null;
   rollover: boolean; // Carry unused budget to next period
+
+  // Multi-Profile Support
+  /** Profile ID that owns this budget (null = shared with all profiles) */
+  ownerId?: string | null;
+  /** Visibility: 'shared' (visible to all) or 'private' (owner-only) */
+  visibility?: "shared" | "private";
+
   createdAt: Date;
   updatedAt: Date;
 }
@@ -103,7 +122,7 @@ export interface FuturePurchase {
   currentSavings: number;
   monthlyContribution: number;
   targetDate: Date;
-  priority: 'low' | 'medium' | 'high';
+  priority: "low" | "medium" | "high";
   category?: string;
   notes: string;
   isCompleted: boolean;
@@ -161,7 +180,7 @@ export interface ImportMapping {
 export interface ImportMetadata {
   id: string; // Unique ID (e.g., "import_1699564823000")
   fileName: string; // Original file name
-  fileFormat: 'csv' | 'ofx' | 'qfx'; // File type
+  fileFormat: "csv" | "ofx" | "qfx"; // File type
   bank?: string; // Detected bank (e.g., "BMO", "TD")
   importDate: Date; // When import occurred
   transactionCount: number; // Number of transactions imported
@@ -194,7 +213,7 @@ export interface CategorySpending {
   percentage: number; // % of budget used
   transactionCount: number;
   color: string;
-  trend?: 'up' | 'down' | 'stable'; // Compared to previous period
+  trend?: "up" | "down" | "stable"; // Compared to previous period
 }
 
 export interface MonthlyTrend {
@@ -209,7 +228,7 @@ export interface RecurringTransaction {
   id: string;
   description: string;
   amount: number;
-  frequency: 'weekly' | 'biweekly' | 'monthly' | 'quarterly' | 'annually';
+  frequency: "weekly" | "biweekly" | "monthly" | "quarterly" | "annually";
   nextDueDate: Date;
   category: string;
   isAutoDetected: boolean;
@@ -246,10 +265,10 @@ export interface BankConfig {
   hasHeader?: boolean;
   skipRows?: number; // Number of header rows to skip before actual data
   // Asian bank support - encoding and decimal separator
-  encoding?: 'UTF-8' | 'Shift-JIS' | 'GB2312' | 'EUC-KR' | 'Big5'; // Character encoding
-  decimalSeparator?: '.' | ','; // Period (most) or Comma (Indonesia, Germany)
-  thousandSeparator?: ',' | '.' | ' ' | ''; // Thousand separator
-  region?: 'NA' | 'EU' | 'UK' | 'AU' | 'ASIA'; // Region for date/number parsing hints
+  encoding?: "UTF-8" | "Shift-JIS" | "GB2312" | "EUC-KR" | "Big5"; // Character encoding
+  decimalSeparator?: "." | ","; // Period (most) or Comma (Indonesia, Germany)
+  thousandSeparator?: "," | "." | " " | ""; // Thousand separator
+  region?: "NA" | "EU" | "UK" | "AU" | "ASIA"; // Region for date/number parsing hints
 }
 
 // OFX/QFX Types (Phase 2)
@@ -298,7 +317,7 @@ export interface CategorizationResult {
   category: string;
   subcategory?: string;
   confidence: number; // 0-1
-  method: 'rule' | 'ml' | 'manual';
+  method: "rule" | "ml" | "manual";
 }
 
 // Chart data types
@@ -321,7 +340,7 @@ export interface Investment {
   id: string;
   symbol: string; // Stock ticker or crypto symbol
   name: string; // Company/fund name
-  type: 'stock' | 'etf' | 'crypto' | 'mutual-fund' | 'bond' | 'other';
+  type: "stock" | "etf" | "crypto" | "mutual-fund" | "bond" | "other";
   exchange?: string; // NYSE, NASDAQ, etc.
   currency: string; // USD, CAD, etc.
   sector?: string; // Technology, Healthcare, etc.
@@ -335,7 +354,7 @@ export interface Portfolio {
   description?: string;
   accountId?: string; // Link to account if applicable
   targetAllocation?: PortfolioAllocation[]; // Target asset allocation
-  rebalanceFrequency?: 'monthly' | 'quarterly' | 'annually' | 'never';
+  rebalanceFrequency?: "monthly" | "quarterly" | "annually" | "never";
   createdAt: Date;
   updatedAt: Date;
 }
@@ -367,7 +386,7 @@ export interface InvestmentTransaction {
   id: string;
   portfolioId: string;
   investmentId: string;
-  type: 'buy' | 'sell' | 'dividend' | 'split' | 'transfer-in' | 'transfer-out';
+  type: "buy" | "sell" | "dividend" | "split" | "transfer-in" | "transfer-out";
   date: Date;
   quantity: number; // Number of shares
   pricePerShare: number; // Price per share at transaction
@@ -446,7 +465,7 @@ export interface PredictionAccuracy {
 export interface InvestmentAccount {
   id: string;
   name: string; // "My RRSP", "TFSA Account"
-  type: 'RRSP' | 'TFSA' | 'Non-registered' | 'Company shares';
+  type: "RRSP" | "TFSA" | "Non-registered" | "Company shares";
   institution?: string; // "Questrade", "Wealthsimple", etc.
   accountNumber?: string;
   createdAt: Date;
@@ -502,13 +521,13 @@ export interface TransactionFilters {
 
 export interface SortOption {
   field: keyof Transaction;
-  direction: 'asc' | 'desc';
+  direction: "asc" | "desc";
 }
 
 // Loan Types
-export type LoanType = 'mortgage' | 'auto' | 'personal' | 'student';
-export type LoanStatus = 'active' | 'paid-off' | 'refinanced' | 'defaulted';
-export type PaymentFrequency = 'weekly' | 'bi-weekly' | 'monthly';
+export type LoanType = "mortgage" | "auto" | "personal" | "student";
+export type LoanStatus = "active" | "paid-off" | "refinanced" | "defaulted";
+export type PaymentFrequency = "weekly" | "bi-weekly" | "monthly";
 
 export interface Loan {
   id: string;
@@ -585,9 +604,9 @@ export interface AmortizationEntry {
 }
 
 // Subscription Management Types
-export type SubscriptionStatus = 'active' | 'paused' | 'cancelled' | 'trial';
-export type BillingCycle = 'weekly' | 'bi-weekly' | 'monthly' | 'quarterly' | 'annual';
-export type SubscriptionSource = 'manual' | 'auto-detected' | 'merged';
+export type SubscriptionStatus = "active" | "paused" | "cancelled" | "trial";
+export type BillingCycle = "weekly" | "bi-weekly" | "monthly" | "quarterly" | "annual";
+export type SubscriptionSource = "manual" | "auto-detected" | "merged";
 
 export interface Subscription {
   id: string;
