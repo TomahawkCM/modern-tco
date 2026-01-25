@@ -10,8 +10,8 @@
  * - Background sync for transactions (future)
  */
 
-const CACHE_NAME = 'budget-app-v3-dev';
-const RUNTIME_CACHE = 'budget-app-runtime-v3-dev';
+const CACHE_NAME = 'budget-app-v4-prod';
+const RUNTIME_CACHE = 'budget-app-runtime-v4-prod';
 
 // App shell files to cache on install
 const APP_SHELL = [
@@ -90,6 +90,13 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
+  // 🔥 DEVELOPMENT MODE: Completely bypass SW for localhost
+  // This prevents FetchEvent errors with Next.js hot reload
+  if (url.hostname === 'localhost' || url.hostname === '127.0.0.1') {
+    // Don't call event.respondWith() - let browser handle it natively
+    return;
+  }
+
   // Strategy: Cache-first for app shell, Network-first for API/data
   if (shouldCacheFirst(url)) {
     event.respondWith(cacheFirstStrategy(request));
@@ -141,22 +148,41 @@ function shouldCacheFirst(url) {
 }
 
 /**
- * Cache-first strategy
- * Try cache first, fall back to network
+ * Cache-first strategy with stale-while-revalidate for CSS/JS
+ * Returns cached response immediately, fetches fresh version in background
  * @param {Request} request
  * @returns {Promise<Response>}
  */
 async function cacheFirstStrategy(request) {
   try {
+    const url = new URL(request.url);
+    const isStaticAsset = url.pathname.endsWith('.js') || url.pathname.endsWith('.css');
+
     // Try cache first
     const cachedResponse = await caches.match(request);
+
     if (cachedResponse) {
-      console.log('[Service Worker] Cache hit:', request.url);
+      // For JS/CSS, use stale-while-revalidate: return cache but update in background
+      if (isStaticAsset) {
+        // Clone request for background fetch
+        const fetchPromise = fetch(request).then(async (networkResponse) => {
+          if (networkResponse && networkResponse.status === 200) {
+            const cache = await caches.open(RUNTIME_CACHE);
+            await cache.put(request, networkResponse.clone());
+          }
+          return networkResponse;
+        }).catch((err) => {
+          console.log('[Service Worker] Background revalidation failed:', err);
+        });
+
+        // Don't await - let it update in background
+        // This ensures next page load gets fresh assets
+      }
+
       return cachedResponse;
     }
 
     // Fall back to network
-    console.log('[Service Worker] Cache miss, fetching:', request.url);
     const networkResponse = await fetch(request);
 
     // Cache successful responses
@@ -168,7 +194,7 @@ async function cacheFirstStrategy(request) {
     return networkResponse;
   } catch (error) {
     console.error('[Service Worker] Fetch failed:', error);
-    
+
     // Return offline fallback for navigation requests
     if (request.mode === 'navigate') {
       const offlinePage = await caches.match('/budget-app/offline');
@@ -176,7 +202,7 @@ async function cacheFirstStrategy(request) {
         return offlinePage;
       }
     }
-    
+
     throw error;
   }
 }
@@ -271,5 +297,28 @@ self.addEventListener('notificationclick', (event) => {
   );
 });
 
-console.log('[Service Worker] Loaded successfully');
+// Message handler for manual cache control
+self.addEventListener('message', (event) => {
+  if (event.data?.type === 'SKIP_WAITING') {
+    console.log('[Service Worker] Skip waiting requested');
+    self.skipWaiting();
+  }
 
+  if (event.data?.type === 'CLEAR_CACHES') {
+    console.log('[Service Worker] Clear caches requested');
+    caches.keys().then((names) => {
+      return Promise.all(names.map((name) => {
+        console.log('[Service Worker] Deleting cache:', name);
+        return caches.delete(name);
+      }));
+    }).then(() => {
+      console.log('[Service Worker] All caches cleared');
+      // Notify the client that caches are cleared
+      if (event.source) {
+        event.source.postMessage({ type: 'CACHES_CLEARED' });
+      }
+    });
+  }
+});
+
+console.log('[Service Worker] Loaded successfully');

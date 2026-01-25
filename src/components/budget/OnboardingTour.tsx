@@ -1,231 +1,271 @@
-'use client';
+"use client";
 
 /**
- * Onboarding Tour Component (Phase 5)
- * Task 5.1.2: Create 5-step onboarding tour
- * 
- * Custom lightweight tour without external dependencies
+ * Onboarding Tour Component
+ * Premium "World Class" Welcome Wizard
+ *
+ * Features:
+ * - Glassmorphism UI
+ * - Smooth Framer Motion animations
+ * - Seamless integration with Driver.js spotlight tour
  */
 
-import { useState, useEffect } from 'react';
-import { X, ArrowRight, ArrowLeft, Check } from 'lucide-react';
-import { useRouter } from 'next/navigation';
-import { useTranslations } from 'next-intl';
+import { useGuidedTour } from "@/hooks/useGuidedTour";
+import { AnimatePresence, motion } from "framer-motion";
+import {
+  ArrowLeft,
+  ArrowRight,
+  Check,
+  FileSpreadsheet,
+  LayoutDashboard,
+  PieChart,
+  Sparkles,
+  Wallet,
+  X,
+} from "lucide-react";
+import { useTranslations } from "next-intl";
+import { useRouter } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
 
 interface TourStepKey {
   key: string;
+  icon: React.ElementType;
   targetPage?: string;
-  highlight?: string;
 }
 
-const TOUR_STEP_KEYS: TourStepKey[] = [
+const TOUR_STEPS: TourStepKey[] = [
   {
-    key: 'welcome',
+    key: "welcome",
+    icon: Sparkles,
   },
   {
-    key: 'import',
-    targetPage: '/budget-app/import',
-    highlight: 'import-section',
+    key: "import",
+    icon: FileSpreadsheet,
+    targetPage: "/budget-app/import",
   },
   {
-    key: 'categorize',
-    targetPage: '/budget-app/transactions',
-    highlight: 'categorize-section',
+    key: "categorize",
+    icon: PieChart,
+    targetPage: "/budget-app/transactions",
   },
   {
-    key: 'budgets',
-    targetPage: '/budget-app/budgets',
-    highlight: 'budget-section',
+    key: "budgets",
+    icon: Wallet,
+    targetPage: "/budget-app/budgets",
   },
   {
-    key: 'reports',
-    targetPage: '/budget-app',
-    highlight: 'dashboard-section',
+    key: "reports",
+    icon: LayoutDashboard,
+    targetPage: "/budget-app",
   },
 ];
 
 export function OnboardingTour() {
-  const t = useTranslations('onboarding');
+  const t = useTranslations("onboarding");
   const router = useRouter();
   const [currentStep, setCurrentStep] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
+  const { startTour } = useGuidedTour();
 
   useEffect(() => {
-    // Check if user has completed the tour
-    const hasCompletedTour = localStorage.getItem('budget-app-tour-completed');
-    const visitCount = parseInt(localStorage.getItem('budget-app-visit-count') || '0');
+    // Check if user has completed the wizard
+    const hasCompletedWizard = localStorage.getItem("budget-app-wizard-completed");
+    // We strictly use a separate key for this wizard vs the driver.js tour
 
-    if (!hasCompletedTour && visitCount < 3) {
-      // Show tour on first visit
-      if (visitCount === 0) {
-        setIsVisible(true);
-      }
-      localStorage.setItem('budget-app-visit-count', (visitCount + 1).toString());
+    // Optional: Only show if we haven't seen it
+    if (!hasCompletedWizard) {
+      // Minimal delay for smooth entry without blocking navigation
+      const timer = setTimeout(() => setIsVisible(true), 100);
+      return () => clearTimeout(timer);
     }
   }, []);
 
-  // Handle Escape key to close tour (Task 2.2.3)
+  // Handle Escape key
   useEffect(() => {
     if (!isVisible) return;
 
     function handleEscapeKey(event: KeyboardEvent) {
-      if (event.key === 'Escape') {
-        localStorage.setItem('budget-app-tour-completed', 'true');
-        setIsVisible(false);
+      if (event.key === "Escape") {
+        dismissWizard();
       }
     }
 
-    document.addEventListener('keydown', handleEscapeKey);
-
-    return () => {
-      document.removeEventListener('keydown', handleEscapeKey);
-    };
+    document.addEventListener("keydown", handleEscapeKey);
+    return () => document.removeEventListener("keydown", handleEscapeKey);
   }, [isVisible]);
 
   function handleNext() {
-    if (currentStep < TOUR_STEP_KEYS.length - 1) {
-      const nextStep = currentStep + 1;
-      setCurrentStep(nextStep);
+    if (currentStep < TOUR_STEPS.length - 1) {
+      setCurrentStep((prev) => prev + 1);
 
-      // Navigate to target page if specified
-      const step = TOUR_STEP_KEYS[nextStep];
+      // Optional: Navigate to target page as we go?
+      // For a "Wizard" that sits on top, maybe we don't force navigation until the end
+      // or we just let it be a static wizard that explains things.
+      // Let's stick to the previous logic of staying put or navigating if desired.
+      // Actually, for a pure Welcome Wizard, it's often nicer if it stays on the dashboard
+      // OR navigates to show context. Let's keep navigation for context.
+      const nextStepIdx = currentStep + 1;
+      const step = TOUR_STEPS[nextStepIdx];
       if (step.targetPage) {
         void router.push(step.targetPage);
       }
     } else {
-      completeTour();
+      completeWizard();
     }
   }
 
   function handlePrevious() {
     if (currentStep > 0) {
-      const prevStep = currentStep - 1;
-      setCurrentStep(prevStep);
+      setCurrentStep((prev) => prev - 1);
 
-      // Navigate to target page if specified
-      const step = TOUR_STEP_KEYS[prevStep];
+      const prevStepIdx = currentStep - 1;
+      const step = TOUR_STEPS[prevStepIdx];
       if (step.targetPage) {
         void router.push(step.targetPage);
       }
     }
   }
 
-  function completeTour() {
-    localStorage.setItem('budget-app-tour-completed', 'true');
+  function dismissWizard() {
+    localStorage.setItem("budget-app-wizard-completed", "true");
     setIsVisible(false);
   }
 
-  function skipTour() {
-    completeTour();
+  const isCompletingRef = useRef(false);
+
+  function completeWizard() {
+    if (isCompletingRef.current) return;
+    isCompletingRef.current = true;
+
+    localStorage.setItem("budget-app-wizard-completed", "true");
+    setIsVisible(false);
+
+    // Seamlessly start the spotlight tour
+    // Give a simplified small delay for the modal to exit
+    setTimeout(() => {
+      startTour();
+      // Reset ref after tour starts
+      isCompletingRef.current = false;
+    }, 600);
   }
 
   if (!isVisible) return null;
 
-  const stepKey = TOUR_STEP_KEYS[currentStep];
+  const step = TOUR_STEPS[currentStep];
+  const Icon = step.icon;
   const isFirstStep = currentStep === 0;
-  const isLastStep = currentStep === TOUR_STEP_KEYS.length - 1;
-  const progress = ((currentStep + 1) / TOUR_STEP_KEYS.length) * 100;
+  const isLastStep = currentStep === TOUR_STEPS.length - 1;
+  const progress = ((currentStep + 1) / TOUR_STEPS.length) * 100;
 
   return (
-    <div className="fixed inset-0 bg-black/60 z-[60] flex items-center justify-center p-4">
-      <div className="bg-white rounded-xl shadow-2xl max-w-lg w-full overflow-hidden">
-        {/* Progress Bar */}
-        <div className="h-2 bg-gray-200">
-          <div
-            className="h-full bg-teal-500 transition-all duration-300"
-            style={{ width: `${progress}%` }}
-          />
-        </div>
+    <AnimatePresence>
+      {isVisible && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm"
+        >
+          <motion.div
+            initial={{ scale: 0.9, y: 20, opacity: 0 }}
+            animate={{ scale: 1, y: 0, opacity: 1 }}
+            exit={{ scale: 0.9, y: 20, opacity: 0 }}
+            transition={{ type: "spring", damping: 25, stiffness: 300 }}
+            className="relative w-full max-w-lg overflow-hidden rounded-2xl border border-white/20 bg-gray-900/90 shadow-2xl ring-1 ring-white/10 backdrop-blur-xl dark:bg-gray-950/90"
+          >
+            {/* Background decorative gradients */}
+            <div className="absolute -left-20 -top-20 h-64 w-64 rounded-full bg-teal-500/20 blur-3xl" />
+            <div className="absolute -bottom-20 -right-20 h-64 w-64 rounded-full bg-blue-500/20 blur-3xl" />
 
-        {/* Content */}
-        <div className="p-8">
-          {/* Step Counter */}
-          <div className="flex items-center justify-between mb-4">
-            <span className="text-sm font-medium text-gray-600">
-              {t('stepCounter', { current: currentStep + 1, total: TOUR_STEP_KEYS.length })}
-            </span>
-            <button
-              onClick={skipTour}
-              className="text-sm text-gray-500 hover:text-gray-700 underline"
-            >
-              {t('skipTour')}
-            </button>
-          </div>
-
-          {/* Title */}
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">
-            {t(`steps.${stepKey.key}.title`)}
-          </h2>
-
-          {/* Description */}
-          <p className="text-gray-700 leading-relaxed mb-6">
-            {t(`steps.${stepKey.key}.description`)}
-          </p>
-
-          {/* Navigation */}
-          <div className="flex items-center gap-4">
-            {!isFirstStep && (
+            {/* Content Container */}
+            <div className="relative flex flex-col items-center p-8 text-center sm:p-10">
+              {/* Close Button */}
               <button
-                onClick={handlePrevious}
-                className="flex items-center gap-2 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
+                onClick={dismissWizard}
+                className="absolute right-4 top-4 rounded-full p-2 text-gray-400 transition-colors hover:bg-white/10 hover:text-white"
+                aria-label={t("skipTour")}
               >
-                <ArrowLeft className="w-4 h-4" />
-                {t('navigation.previous')}
+                <X className="h-5 w-5" />
               </button>
-            )}
 
-            <button
-              onClick={handleNext}
-              className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-teal-700 text-white rounded-lg hover:bg-teal-800 transition-colors font-medium"
-            >
-              {isLastStep ? (
-                <>
-                  <Check className="w-4 h-4" />
-                  {t('navigation.getStarted')}
-                </>
-              ) : isFirstStep ? (
-                <>
-                  {t('navigation.startTour')}
-                  <ArrowRight className="w-4 h-4" />
-                </>
-              ) : (
-                <>
-                  {t('navigation.next')}
-                  <ArrowRight className="w-4 h-4" />
-                </>
-              )}
-            </button>
-          </div>
+              {/* Animated Icon */}
+              <motion.div
+                key={step.key + "-icon"}
+                initial={{ scale: 0.5, opacity: 0, rotate: -20 }}
+                animate={{ scale: 1, opacity: 1, rotate: 0 }}
+                transition={{ delay: 0.1, type: "spring", stiffness: 200 }}
+                className="mb-8 flex h-20 w-20 items-center justify-center rounded-2xl bg-gradient-to-br from-teal-500/20 to-teal-500/5 shadow-inner ring-1 ring-white/10"
+              >
+                <Icon className="h-10 w-10 text-teal-400" />
+              </motion.div>
 
-          {/* Don't Show Again */}
-          {isLastStep && (
-            <div className="mt-4 flex items-center gap-2">
-              <input
-                type="checkbox"
-                id="dont-show-again"
-                defaultChecked
-                className="w-4 h-4 text-teal-600 border-gray-300 rounded focus:ring-teal-500"
-              />
-              <label htmlFor="dont-show-again" className="text-sm text-gray-600">
-                {t('dontShowAgain')}
-              </label>
+              {/* Step Key for AnimatePresence Text Swapping */}
+              <div className="relative min-h-[140px] w-full">
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={step.key}
+                    initial={{ x: 20, opacity: 0 }}
+                    animate={{ x: 0, opacity: 1 }}
+                    exit={{ x: -20, opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                    className="absolute inset-0 flex flex-col items-center"
+                  >
+                    <h2 className="mb-4 text-2xl font-bold tracking-tight text-white sm:text-3xl">
+                      {t(`steps.${step.key}.title`)}
+                    </h2>
+                    <p className="max-w-md text-base leading-relaxed text-gray-300">
+                      {t(`steps.${step.key}.description`)}
+                    </p>
+                  </motion.div>
+                </AnimatePresence>
+              </div>
+
+              {/* Progress Bar */}
+              <div className="mb-8 mt-4 h-1 w-full max-w-xs overflow-hidden rounded-full bg-gray-800">
+                <motion.div
+                  className="h-full bg-teal-500"
+                  initial={{ width: 0 }}
+                  animate={{ width: `${progress}%` }}
+                  transition={{ duration: 0.5, ease: "easeInOut" }}
+                />
+              </div>
+
+              {/* Navigation Buttons */}
+              <div className="flex w-full items-center justify-between gap-4">
+                <button
+                  onClick={handlePrevious}
+                  disabled={isFirstStep}
+                  className={`flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium transition-colors ${
+                    isFirstStep
+                      ? "cursor-not-allowed text-gray-600"
+                      : "text-gray-400 hover:text-white"
+                  }`}
+                >
+                  <ArrowLeft className="h-4 w-4" />
+                  {t("navigation.previous")}
+                </button>
+
+                <button
+                  onClick={handleNext}
+                  className="group relative flex items-center justify-center gap-2 overflow-hidden rounded-lg bg-teal-500 px-6 py-2.5 text-sm font-semibold text-white shadow-lg transition-all hover:bg-teal-400 hover:shadow-teal-500/25 active:scale-95"
+                >
+                  <span className="relative z-10 flex items-center gap-2">
+                    {isLastStep ? t("navigation.getStarted") : t("navigation.next")}
+                    {isLastStep ? (
+                      <Check className="h-4 w-4" />
+                    ) : (
+                      <ArrowRight className="h-4 w-4" />
+                    )}
+                  </span>
+                  {/* Sheen effect */}
+                  <div className="group-hover:animate-shimmer absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-1000" />
+                </button>
+              </div>
             </div>
-          )}
-        </div>
-
-        {/* Feature Highlights */}
-        {!isFirstStep && !isLastStep && (
-          <div className="px-8 pb-8">
-            <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
-              <p className="text-sm text-gray-900 font-medium mb-2">{t('quickTip')}</p>
-              <p className="text-sm text-gray-700">
-                {t(`tips.${stepKey.key}`)}
-              </p>
-            </div>
-          </div>
-        )}
-      </div>
-    </div>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 }
 
@@ -233,8 +273,8 @@ export function OnboardingTour() {
  * Restart the onboarding tour
  */
 export function restartTour() {
-  localStorage.removeItem('budget-app-tour-completed');
-  localStorage.setItem('budget-app-visit-count', '0');
+  localStorage.removeItem("budget-app-wizard-completed");
+  // Also reset the driver.js tour
+  localStorage.removeItem("budget-app-tour-progress");
   window.location.reload();
 }
-

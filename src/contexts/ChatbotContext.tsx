@@ -11,6 +11,8 @@ import React, { createContext, useContext, useState, useCallback, useEffect } fr
 import { isChatbotEnabled, getChatbotConversationRetention } from '@/lib/budget-privacy-settings';
 import { trackBudgetEvent } from '@/lib/budget-analytics';
 
+const isDev = process.env.NODE_ENV === 'development';
+
 export interface ChatMessage {
   id: string;
   role: 'user' | 'assistant' | 'system';
@@ -88,7 +90,7 @@ function loadMessagesFromStorage(): ChatMessage[] {
       timestamp: new Date(msg.timestamp),
     }));
   } catch (error) {
-    console.error('[Chatbot] Failed to load messages:', error);
+    isDev && console.error('[Chatbot] Failed to load messages:', error);
     return [];
   }
 }
@@ -108,7 +110,7 @@ function saveMessagesToStorage(messages: ChatMessage[]): void {
 
     localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
   } catch (error) {
-    console.error('[Chatbot] Failed to save messages:', error);
+    isDev && console.error('[Chatbot] Failed to save messages:', error);
   }
 }
 
@@ -125,37 +127,39 @@ export function ChatbotProvider({ children }: { children: React.ReactNode }) {
 
   // Load messages on mount
   useEffect(() => {
-    console.log('[ChatbotContext] useEffect running - checking if chatbot enabled');
+    isDev && console.log('[ChatbotContext] useEffect running - checking if chatbot enabled');
     const enabled = isChatbotEnabled();
-    console.log('[ChatbotContext] isChatbotEnabled() returned:', enabled);
+    isDev && console.log('[ChatbotContext] isChatbotEnabled() returned:', enabled);
 
     // Also log the raw localStorage value for debugging
-    const rawSettings = localStorage.getItem('budget-app-privacy-settings');
-    console.log('[ChatbotContext] Raw localStorage value:', rawSettings);
+    if (isDev) {
+      const rawSettings = localStorage.getItem('budget-app-privacy-settings');
+      console.log('[ChatbotContext] Raw localStorage value:', rawSettings);
+    }
 
     setIsEnabled(enabled);
 
     if (enabled) {
       const stored = loadMessagesFromStorage();
       setMessages(stored);
-      console.log('[ChatbotContext] Loaded messages from storage:', stored.length);
+      isDev && console.log('[ChatbotContext] Loaded messages from storage:', stored.length);
     } else {
-      console.log('[ChatbotContext] Chatbot disabled - not loading messages');
+      isDev && console.log('[ChatbotContext] Chatbot disabled - not loading messages');
     }
   }, []);
 
   // Listen for localStorage changes (e.g., when settings are updated)
   useEffect(() => {
     const handleStorageChange = () => {
-      console.log('[ChatbotContext] Storage changed - rechecking chatbot enabled status');
+      isDev && console.log('[ChatbotContext] Storage changed - rechecking chatbot enabled status');
       const enabled = isChatbotEnabled();
-      console.log('[ChatbotContext] New enabled status:', enabled);
+      isDev && console.log('[ChatbotContext] New enabled status:', enabled);
       setIsEnabled(enabled);
 
       if (enabled) {
         const stored = loadMessagesFromStorage();
         setMessages(stored);
-        console.log('[ChatbotContext] Reloaded messages after settings change:', stored.length);
+        isDev && console.log('[ChatbotContext] Reloaded messages after settings change:', stored.length);
       }
     };
 
@@ -332,7 +336,7 @@ export function ChatbotProvider({ children }: { children: React.ReactNode }) {
         success: true,
       });
     } catch (err: any) {
-      console.error('[Chatbot] Error:', err);
+      isDev && console.error('[Chatbot] Error:', err);
 
       // Provide user-friendly error messages
       let errorMessage = err.message || 'Failed to get response from chatbot';
