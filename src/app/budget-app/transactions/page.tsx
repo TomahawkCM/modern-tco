@@ -10,11 +10,14 @@
  * - Pull-to-refresh on transaction list
  */
 
-import { useState, useEffect, useRef, useMemo, useCallback } from 'react';
-import { Plus, Search, Filter, Download, Edit, Trash2, Tag, FileImage, Split, Check, X as XIcon, RefreshCw, ArrowUp, ArrowDown, TrendingUp, TrendingDown, Receipt, Upload, ChevronDown, ChevronUp } from 'lucide-react';
+import { useState, useEffect, useRef, useMemo, useCallback, Suspense } from 'react';
+import { useSearchParams, useRouter } from 'next/navigation';
+import { Plus, Search, Filter, Download, Edit, Trash2, Tag, FileImage, Split, Check, X as XIcon, RefreshCw, ArrowUp, ArrowDown, TrendingUp, TrendingDown, Receipt, Upload, ChevronDown, ChevronUp, Landmark, CreditCard } from 'lucide-react';
 import { motion, PanInfo } from 'framer-motion';
 import { db, splitTransaction, unsplitTransaction, getSplitChildren, type SplitData } from '@/lib/budget-db';
 import type { Transaction, Category, Account } from '@/types/budget';
+import { sumAmounts, subtractAmounts } from '@/lib/money';
+import { calculateRunningBalancesMap } from '@/lib/utils/balanceCalculations';
 import { TransactionModal } from '@/components/budget/TransactionModal';
 import { ReceiptThumbnail } from '@/components/budget/ReceiptThumbnail';
 import { SplitTransactionModal } from '@/components/budget/SplitTransactionModal';
@@ -31,17 +34,48 @@ import { TransactionReviewModal } from '@/components/budget/TransactionReviewMod
 import { extractVendorName } from '@/lib/vendor-matcher';
 import { aiFindMatchingVendorTransactions } from '@/lib/ai-vendor-matcher';
 import Link from 'next/link';
+import { LinkToLoanButton } from '@/components/budget/loans/LinkToLoanPopover';
+import { LinkedLoanBadgeInline } from '@/components/budget/loans/LinkedLoanBadge';
+import { getPaymentByTransactionId, getAllLoans } from '@/lib/loans/loan-db';
+import type { LoanPayment, Loan } from '@/types/budget';
 
+// Wrapper component to handle Suspense boundary for useSearchParams
 export default function TransactionsPage() {
+  return (
+    <Suspense fallback={
+      <div className="flex items-center justify-center h-64">
+        <div className="text-center">
+          <div className="w-16 h-16 border-4 border-teal-600 border-t-transparent rounded-full animate-spin mx-auto"></div>
+          <p className="mt-4 text-gray-600">Loading transactions...</p>
+        </div>
+      </div>
+    }>
+      <TransactionsPageContent />
+    </Suspense>
+  );
+}
+
+function TransactionsPageContent() {
   const toast = useToast();
+  const router = useRouter();
+  const searchParams = useSearchParams();
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
   const [accounts, setAccounts] = useState<Account[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
+  const [selectedAccount, setSelectedAccount] = useState<string>('all');
   const [sortBy, setSortBy] = useState<'date' | 'amount'>('date');
   const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('desc');
+  
+  // Read account filter from URL
+  useEffect(() => {
+    const accountParam = searchParams?.get('account');
+    if (accountParam) {
+      setSelectedAccount(accountParam);
+    }
+  }, [searchParams]);
   const [showModal, setShowModal] = useState(false);
   const [editingTransaction, setEditingTransaction] = useState<Transaction | null>(null);
   const [quickCategorizingId, setQuickCategorizingId] = useState<string | null>(null);
@@ -82,6 +116,9 @@ export default function TransactionsPage() {
   // Click-to-expand transaction descriptions state
   const [expandedTransactionIds, setExpandedTransactionIds] = useState<Set<string>>(new Set());
 
+  // Loan-linked transactions cache
+  const [linkedPayments, setLinkedPayments] = useState<Map<string, { payment: LoanPayment; loanName: string; loanId: string }>>(new Map());
+
   // Date range state
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
@@ -114,6 +151,10 @@ export default function TransactionsPage() {
 
     return transactions
       .filter((tx) => {
+        // Account filter
+        if (selectedAccount !== 'all' && tx.accountId !== selectedAccount) {
+          return false;
+        }
         // Search filter
         if (searchTerm && !tx.description.toLowerCase().includes(lowerSearchTerm)) {
           return false;
@@ -139,22 +180,68 @@ export default function TransactionsPage() {
           return (a.amount - b.amount) * multiplier;
         }
       });
-  }, [transactions, searchTerm, selectedCategory, sortBy, sortDirection, startDate, endDate]);
+  }, [transactions, searchTerm, selectedCategory, selectedAccount, sortBy, sortDirection, startDate, endDate]);
+  
+  // Get the selected account name for display
+  const selectedAccountName = useMemo(() => {
+    if (selectedAccount === 'all') return null;
+    const account = accounts.find(a => a.id === selectedAccount);
+    return account?.name || null;
+  }, [selectedAccount, accounts]);
+  
+  // Function to clear account filter
+  function clearAccountFilter() {
+    setSelectedAccount('all');
+    // Update URL to remove account param
+    router.push('/budget-app/transactions');
+  }
 
-  // Memoize total calculations
+  // Memoize total calculations using precise decimal arithmetic
   const totalIncome = useMemo(() => {
-    return filteredTransactions
-      .filter((tx) => tx.amount > 0)
-      .reduce((sum, tx) => sum + tx.amount, 0);
+    return sumAmounts(
+      filteredTransactions.filter((tx) => tx.amount > 0).map((tx) => tx.amount)
+    );
   }, [filteredTransactions]);
 
   const totalExpenses = useMemo(() => {
     return Math.abs(
-      filteredTransactions
-        .filter((tx) => tx.amount < 0)
-        .reduce((sum, tx) => sum + tx.amount, 0)
+      sumAmounts(
+        filteredTransactions.filter((tx) => tx.amount < 0).map((tx) => tx.amount)
+      )
     );
   }, [filteredTransactions]);
+
+  // Calculate starting balance from all accounts
+  // This represents the balance before the first imported transaction
+  const startingBalance = useMemo(() => {
+    return sumAmounts(accounts.map((acc) => acc.balance || 0));
+  }, [accounts]);
+
+  // Current balance = starting balance + net from transactions
+  const currentBalance = useMemo(() => {
+    return subtractAmounts(startingBalance + totalIncome, totalExpenses);
+  }, [startingBalance, totalIncome, totalExpenses]);
+
+  // Calculate running balances for all filtered transactions
+  // Running balances show the account balance after each transaction
+  // Note: We need transactions sorted by date ascending to calculate running balances correctly
+  const runningBalances = useMemo(() => {
+    if (filteredTransactions.length === 0) return new Map<string, number>();
+
+    // Get account-specific opening balance based on filter
+    let openingBalance = startingBalance;
+    if (selectedAccount !== 'all') {
+      const account = accounts.find(a => a.id === selectedAccount);
+      openingBalance = account?.balance || 0;
+    }
+
+    // Sort by date ascending for running balance calculation
+    const sortedByDate = [...filteredTransactions].sort(
+      (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
+    );
+
+    return calculateRunningBalancesMap(openingBalance, sortedByDate);
+  }, [filteredTransactions, startingBalance, selectedAccount, accounts]);
 
   // Phase 3.3.3: Pull-to-refresh handler
   async function handlePullToRefresh() {
@@ -172,24 +259,58 @@ export default function TransactionsPage() {
 
   async function loadData() {
     try {
-      const [allTxs, cats, accts] = await Promise.all([
+      const [allTxs, cats, accts, loans] = await Promise.all([
         db.transactions.toArray(),
         db.categories.toArray(),
         db.accounts.toArray(),
+        getAllLoans(),
       ]);
-      
+
       // Filter out parent transactions that have been split
       // Only show child transactions (which have splitFromId) and non-split transactions
       const visibleTxs = allTxs.filter(tx => !tx.isSplit);
-      
+
       setTransactions(visibleTxs);
       setCategories(cats);
       setAccounts(accts);
+
+      // Load linked payments for expense transactions
+      const loanMap = new Map(loans.map(l => [l.id, l]));
+      const linkedPaymentsMap = new Map<string, { payment: LoanPayment; loanName: string; loanId: string }>();
+
+      // Check transactions that look like loan payments (category starts with "Loan Payment")
+      const potentialLoanPayments = visibleTxs.filter(tx =>
+        tx.amount < 0 && tx.category?.startsWith('Loan Payment')
+      );
+
+      // Batch check for linked payments
+      await Promise.all(
+        potentialLoanPayments.map(async (tx) => {
+          const payment = await getPaymentByTransactionId(tx.id);
+          if (payment) {
+            const loan = loanMap.get(payment.loanId);
+            if (loan) {
+              linkedPaymentsMap.set(tx.id, {
+                payment,
+                loanName: loan.name,
+                loanId: loan.id,
+              });
+            }
+          }
+        })
+      );
+
+      setLinkedPayments(linkedPaymentsMap);
     } catch (error) {
       console.error('Error loading transactions:', error);
     } finally {
       setIsLoading(false);
     }
+  }
+
+  // Handle new category created in TransactionModal
+  function handleCategoryCreated(newCategory: Category) {
+    setCategories(prev => [...prev, newCategory]);
   }
 
   async function runVendorMatching(transaction: Transaction) {
@@ -668,10 +789,12 @@ export default function TransactionsPage() {
         onClearFilters={() => {
           setSearchTerm('');
           setSelectedCategory('all');
+          setSelectedAccount('all');
           setStartDate('');
           setEndDate('');
+          router.push('/budget-app/transactions');
         }}
-        hasActiveFilters={searchTerm !== '' || selectedCategory !== 'all' || startDate !== '' || endDate !== ''}
+        hasActiveFilters={searchTerm !== '' || selectedCategory !== 'all' || selectedAccount !== 'all' || startDate !== '' || endDate !== ''}
       />
 
       {/* Header - Enhanced Typography */}
@@ -736,6 +859,28 @@ export default function TransactionsPage() {
                   className="w-full pl-10 pr-4 py-3 text-base border border-input rounded-lg bg-background text-foreground focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 focus:border-transparent focus:outline-none"
                 />
               </div>
+            </div>
+
+            {/* Account Filter */}
+            <div>
+              <div className="flex items-center gap-2 mb-2">
+                <label htmlFor="account-filter" className="text-sm font-medium text-foreground">
+                  Filter by Account
+                </label>
+              </div>
+              <select
+                id="account-filter"
+                value={selectedAccount}
+                onChange={(e) => setSelectedAccount(e.target.value)}
+                className="w-full px-4 py-3 text-base border border-input rounded-lg bg-background text-foreground focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 focus:border-transparent focus:outline-none"
+              >
+                <option value="all">All Accounts</option>
+                {accounts.map((acct) => (
+                  <option key={acct.id} value={acct.id}>
+                    {acct.name}
+                  </option>
+                ))}
+              </select>
             </div>
 
             {/* Category Filter */}
@@ -818,19 +963,41 @@ export default function TransactionsPage() {
           </div>
 
           {/* Clear Filters Button */}
-          {(searchTerm || selectedCategory !== 'all' || startDate || endDate) && (
+          {(searchTerm || selectedCategory !== 'all' || selectedAccount !== 'all' || startDate || endDate) && (
             <div className="flex justify-end">
               <button
                 onClick={() => {
                   setSearchTerm('');
                   setSelectedCategory('all');
+                  setSelectedAccount('all');
                   setStartDate('');
                   setEndDate('');
+                  // Clear URL params
+                  router.push('/budget-app/transactions');
                 }}
                 className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors"
               >
                 <XIcon className="w-4 h-4" />
                 Clear Filters
+              </button>
+            </div>
+          )}
+          
+          {/* Account Filter Banner */}
+          {selectedAccountName && (
+            <div className="flex items-center justify-between bg-blue-50 border border-blue-200 rounded-lg px-4 py-3">
+              <div className="flex items-center gap-2">
+                <Landmark className="w-5 h-5 text-blue-600" />
+                <span className="text-blue-800">
+                  Showing transactions for <strong>{selectedAccountName}</strong>
+                </span>
+              </div>
+              <button
+                onClick={clearAccountFilter}
+                className="text-blue-600 hover:text-blue-800 text-sm font-medium flex items-center gap-1"
+              >
+                <XIcon className="w-4 h-4" />
+                Show All
               </button>
             </div>
           )}
@@ -862,12 +1029,17 @@ export default function TransactionsPage() {
             ${totalExpenses.toFixed(2)}
           </p>
         </div>
-        <div className="bg-white rounded-lg shadow-md p-6 border-l-4 border-gray-400">
-          <p className="text-base font-medium text-gray-700 mb-3">Net Balance</p>
+        <div className="bg-white rounded-lg shadow-md p-6 border-l-4 border-blue-500">
+          <div className="flex items-center gap-2 mb-3">
+            <p className="text-base font-medium text-gray-700">Current Balance</p>
+            {startingBalance !== 0 && (
+              <HelpTooltip content={`Starting balance: $${startingBalance.toFixed(2)} + Net change: $${(totalIncome - totalExpenses).toFixed(2)}`} />
+            )}
+          </div>
           <p className={`text-3xl font-bold flex items-center gap-2 ${
-            totalIncome - totalExpenses >= 0 ? 'text-green-600' : 'text-red-600'
+            currentBalance >= 0 ? 'text-blue-600' : 'text-red-600'
           }`}>
-            {totalIncome - totalExpenses >= 0 ? (
+            {currentBalance >= 0 ? (
               <>
                 <ArrowUp className="w-6 h-6" aria-hidden="true" />
                 <span className="sr-only">Positive: </span>
@@ -878,8 +1050,15 @@ export default function TransactionsPage() {
                 <span className="sr-only">Negative: </span>
               </>
             )}
-            ${Math.abs(totalIncome - totalExpenses).toFixed(2)}
+            ${Math.abs(currentBalance).toFixed(2)}
           </p>
+          {startingBalance === 0 && (
+            <p className="text-xs text-gray-500 mt-2">
+              <Link href="/budget-app/accounts" className="text-blue-600 hover:underline">
+                Set account starting balance →
+              </Link>
+            </p>
+          )}
         </div>
       </div>
 
@@ -919,10 +1098,13 @@ export default function TransactionsPage() {
                   <th className="bg-gray-50 px-4 md:px-6 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider hidden lg:table-cell w-24">
                     Receipt
                   </th>
-                  <th className="bg-gray-50 px-4 md:px-6 py-3 text-right text-xs font-semibold text-gray-700 uppercase tracking-wider w-32">
+                  <th className="bg-gray-50 px-4 md:px-6 py-3 text-right text-xs font-semibold text-gray-700 uppercase tracking-wider w-28">
                     Amount
                   </th>
-                  <th className="bg-gray-50 px-4 md:px-6 py-3 text-right text-xs font-semibold text-gray-700 uppercase tracking-wider w-32">
+                  <th className="bg-gray-50 px-4 md:px-6 py-3 text-right text-xs font-semibold text-gray-700 uppercase tracking-wider hidden xl:table-cell w-28">
+                    Balance
+                  </th>
+                  <th className="bg-gray-50 px-4 md:px-6 py-3 text-right text-xs font-semibold text-gray-700 uppercase tracking-wider w-28">
                     Actions
                   </th>
                 </tr>
@@ -1008,6 +1190,18 @@ export default function TransactionsPage() {
                         )}
                       </div>
                     </td>
+                    <td className="px-4 md:px-6 py-4 whitespace-nowrap text-right hidden xl:table-cell">
+                      {(() => {
+                        const balance = runningBalances.get(tx.id);
+                        if (balance === undefined) return null;
+                        const isNegative = balance < 0;
+                        return (
+                          <span className={`text-sm font-medium ${isNegative ? 'text-red-600' : 'text-gray-700'}`}>
+                            ${Math.abs(balance).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                          </span>
+                        );
+                      })()}
+                    </td>
                     <td className="px-4 md:px-6 py-4 whitespace-nowrap text-right">
                       <div className="flex items-center justify-end gap-1">
                         {/* Quick Categorize for uncategorized transactions */}
@@ -1020,6 +1214,21 @@ export default function TransactionsPage() {
                             <Tag className="w-4 h-4" />
                           </button>
                         )}
+
+                        {/* Link to Loan / Linked Loan Badge */}
+                        {linkedPayments.has(tx.id) ? (
+                          <LinkedLoanBadgeInline
+                            loanName={linkedPayments.get(tx.id)!.loanName}
+                            loanId={linkedPayments.get(tx.id)!.loanId}
+                            paymentId={linkedPayments.get(tx.id)!.payment.id}
+                            onUnlink={loadData}
+                          />
+                        ) : tx.amount < 0 && !tx.category?.startsWith('Loan Payment') ? (
+                          <LinkToLoanButton
+                            transaction={tx}
+                            onLinked={loadData}
+                          />
+                        ) : null}
 
                         {/* Split/Unsplit Button */}
                         {tx.splitFromId ? (
@@ -1236,6 +1445,16 @@ export default function TransactionsPage() {
                     <div className="text-gray-600 text-base font-medium whitespace-nowrap">
                       {new Date(tx.date).toLocaleDateString()}
                     </div>
+
+                    {/* Running Balance */}
+                    {runningBalances.get(tx.id) !== undefined && (
+                      <div className="text-right">
+                        <span className="text-xs text-gray-500 uppercase">Balance</span>
+                        <p className={`text-sm font-semibold ${(runningBalances.get(tx.id) || 0) < 0 ? 'text-red-600' : 'text-gray-700'}`}>
+                          ${Math.abs(runningBalances.get(tx.id) || 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                        </p>
+                      </div>
+                    )}
                   </div>
 
                   {/* Receipt Thumbnail */}
@@ -1258,6 +1477,26 @@ export default function TransactionsPage() {
                         Categorize
                       </button>
                     )}
+
+                    {/* Link to Loan / Linked Loan Badge (Mobile) */}
+                    {linkedPayments.has(tx.id) ? (
+                      <div className="inline-flex items-center gap-2.5 px-4 py-2 min-h-[44px] text-sm font-medium text-teal-700 bg-teal-50 rounded-lg">
+                        <CreditCard className="w-4 h-4" />
+                        <LinkedLoanBadgeInline
+                          loanName={linkedPayments.get(tx.id)!.loanName}
+                          loanId={linkedPayments.get(tx.id)!.loanId}
+                          paymentId={linkedPayments.get(tx.id)!.payment.id}
+                          onUnlink={loadData}
+                        />
+                      </div>
+                    ) : tx.amount < 0 && !tx.category?.startsWith('Loan Payment') ? (
+                      <div className="relative">
+                        <LinkToLoanButton
+                          transaction={tx}
+                          onLinked={loadData}
+                        />
+                      </div>
+                    ) : null}
 
                     {/* Split/Unsplit Button */}
                     {tx.splitFromId ? (
@@ -1352,6 +1591,7 @@ export default function TransactionsPage() {
             setEditingTransaction(null);
           }}
           isSaving={isSavingTransaction}
+          onCategoryCreated={handleCategoryCreated}
         />
       )}
 

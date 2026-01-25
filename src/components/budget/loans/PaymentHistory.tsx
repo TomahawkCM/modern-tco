@@ -6,7 +6,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Calendar, DollarSign, Link as LinkIcon, Unlink, Plus, AlertCircle, CheckCircle2 } from 'lucide-react';
+import { Calendar, DollarSign, Link as LinkIcon, Unlink, Plus, AlertCircle, CheckCircle2, Eye, X as XIcon, ExternalLink } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -30,6 +30,37 @@ export function PaymentHistory({ loan, onLoanUpdate }: PaymentHistoryProps) {
   const [showLinkTransaction, setShowLinkTransaction] = useState(false);
   const [selectedPayment, setSelectedPayment] = useState<LoanPayment | null>(null);
   const [loading, setLoading] = useState(true);
+
+  // Dismissed matches (stored in localStorage to persist across sessions)
+  const [dismissedMatchIds, setDismissedMatchIds] = useState<Set<string>>(new Set());
+
+  // Load dismissed matches from localStorage
+  useEffect(() => {
+    const stored = localStorage.getItem(`dismissedLoanMatches_${loan.id}`);
+    if (stored) {
+      try {
+        setDismissedMatchIds(new Set(JSON.parse(stored)));
+      } catch {
+        // Ignore invalid JSON
+      }
+    }
+  }, [loan.id]);
+
+  // Save dismissed matches to localStorage
+  function dismissMatch(transactionId: string) {
+    const newDismissed = new Set(dismissedMatchIds);
+    newDismissed.add(transactionId);
+    setDismissedMatchIds(newDismissed);
+    localStorage.setItem(
+      `dismissedLoanMatches_${loan.id}`,
+      JSON.stringify([...newDismissed])
+    );
+  }
+
+  // Filter out dismissed matches
+  const visibleMatches = suggestedMatches.filter(
+    (match) => !dismissedMatchIds.has(match.transaction.id)
+  );
 
   // New payment form state
   const [paymentDate, setPaymentDate] = useState(format(new Date(), 'yyyy-MM-dd'));
@@ -179,58 +210,126 @@ export function PaymentHistory({ loan, onLoanUpdate }: PaymentHistoryProps) {
   return (
     <div className="space-y-6">
       {/* Suggested Matches */}
-      {suggestedMatches.length > 0 && (
+      {visibleMatches.length > 0 && (
         <Card className="border-teal-200 bg-teal-50">
           <CardHeader>
-            <CardTitle className="text-lg flex items-center gap-2">
-              <AlertCircle className="w-5 h-5 text-teal-600" />
-              Suggested Transaction Matches
-            </CardTitle>
-            <CardDescription>
-              We found {suggestedMatches.length} transaction(s) that might be loan payments
-            </CardDescription>
+            <div className="flex items-center justify-between">
+              <div>
+                <CardTitle className="text-lg flex items-center gap-2">
+                  <AlertCircle className="w-5 h-5 text-teal-600" />
+                  Suggested Transaction Matches
+                </CardTitle>
+                <CardDescription>
+                  We found {visibleMatches.length} transaction{visibleMatches.length !== 1 ? 's' : ''} that might be loan payments
+                </CardDescription>
+              </div>
+              {suggestedMatches.length > visibleMatches.length && (
+                <span className="text-xs text-gray-500">
+                  {suggestedMatches.length - visibleMatches.length} dismissed
+                </span>
+              )}
+            </div>
           </CardHeader>
           <CardContent className="space-y-3">
-            {suggestedMatches.map((match, index) => (
+            {visibleMatches.map((match, index) => (
               <div
-                key={index}
-                className="flex items-center justify-between bg-white p-4 rounded-lg border border-teal-200"
+                key={match.transaction.id}
+                className="bg-white p-4 rounded-lg border border-teal-200 hover:border-teal-300 transition-colors"
               >
-                <div className="flex-1">
-                  <div className="flex items-center gap-2 mb-1">
-                    <p className="font-medium text-gray-900">
-                      {format(new Date(match.transaction.date), 'MMM d, yyyy')}
-                    </p>
-                    <span
-                      className={`px-2 py-0.5 rounded text-xs font-medium ${
-                        match.confidence === 'high'
-                          ? 'bg-green-100 text-green-800'
+                {/* Match Header */}
+                <div className="flex items-start justify-between gap-4 mb-3">
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2 mb-1 flex-wrap">
+                      <p className="font-semibold text-gray-900">
+                        {format(new Date(match.transaction.date), 'MMM d, yyyy')}
+                      </p>
+                      <span
+                        className={`px-2 py-0.5 rounded text-xs font-medium ${
+                          match.confidence === 'high'
+                            ? 'bg-green-100 text-green-800'
+                            : match.confidence === 'medium'
+                            ? 'bg-yellow-100 text-yellow-800'
+                            : 'bg-gray-100 text-gray-800'
+                        }`}
+                      >
+                        {match.confidence === 'high'
+                          ? 'High Confidence'
                           : match.confidence === 'medium'
-                          ? 'bg-yellow-100 text-yellow-800'
-                          : 'bg-gray-100 text-gray-800'
-                      }`}
-                    >
-                      {match.confidence} confidence
-                    </span>
+                          ? 'Medium Confidence'
+                          : 'Low Confidence'}
+                      </span>
+                    </div>
+                    <p className="text-sm text-gray-700 truncate" title={match.transaction.description}>
+                      {match.transaction.description}
+                    </p>
                   </div>
-                  <p className="text-sm text-gray-600 mb-2">{match.transaction.description}</p>
-                  <div className="flex items-center gap-4 text-xs text-gray-500">
-                    <span className="font-semibold text-gray-900">
-                      ${Math.abs(match.transaction.amount).toLocaleString()}
-                    </span>
-                    {match.matchReasons.slice(0, 2).map((reason, i) => (
-                      <span key={i}>• {reason}</span>
-                    ))}
-                  </div>
+                  <p className="text-lg font-bold text-gray-900 whitespace-nowrap">
+                    ${Math.abs(match.transaction.amount).toLocaleString()}
+                  </p>
                 </div>
-                <Button
-                  onClick={() => handleLinkTransaction(match)}
-                  size="sm"
-                  className="bg-teal-600 hover:bg-teal-700"
-                >
-                  <LinkIcon className="w-4 h-4 mr-2" />
-                  Link Payment
-                </Button>
+
+                {/* Match Reasons */}
+                <div className="flex items-center gap-2 flex-wrap text-xs text-gray-500 mb-3">
+                  {match.matchReasons.map((reason, i) => (
+                    <span key={i} className="bg-gray-100 px-2 py-0.5 rounded">
+                      {reason}
+                    </span>
+                  ))}
+                </div>
+
+                {/* Payment Split Preview */}
+                <div className="grid grid-cols-3 gap-2 text-xs bg-gray-50 p-2 rounded mb-3">
+                  <div className="text-center">
+                    <span className="text-gray-500 block">Principal</span>
+                    <span className="font-semibold text-teal-600">
+                      ${match.suggestedPrincipal.toFixed(2)}
+                    </span>
+                  </div>
+                  <div className="text-center">
+                    <span className="text-gray-500 block">Interest</span>
+                    <span className="font-semibold text-red-600">
+                      ${match.suggestedInterest.toFixed(2)}
+                    </span>
+                  </div>
+                  {match.suggestedExtraPrincipal > 0 && (
+                    <div className="text-center">
+                      <span className="text-gray-500 block">Extra</span>
+                      <span className="font-semibold text-green-600">
+                        ${match.suggestedExtraPrincipal.toFixed(2)}
+                      </span>
+                    </div>
+                  )}
+                </div>
+
+                {/* Action Buttons */}
+                <div className="flex items-center justify-between gap-2">
+                  <div className="flex items-center gap-2">
+                    <a
+                      href={`/budget-app/transactions?search=${encodeURIComponent(match.transaction.description)}`}
+                      className="inline-flex items-center gap-1 px-2 py-1 text-xs text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded transition-colors"
+                      title="View transaction"
+                    >
+                      <ExternalLink className="w-3 h-3" />
+                      View
+                    </a>
+                    <button
+                      onClick={() => dismissMatch(match.transaction.id)}
+                      className="inline-flex items-center gap-1 px-2 py-1 text-xs text-gray-500 hover:text-red-600 hover:bg-red-50 rounded transition-colors"
+                      title="Dismiss this match"
+                    >
+                      <XIcon className="w-3 h-3" />
+                      Dismiss
+                    </button>
+                  </div>
+                  <Button
+                    onClick={() => handleLinkTransaction(match)}
+                    size="sm"
+                    className="bg-teal-600 hover:bg-teal-700"
+                  >
+                    <LinkIcon className="w-4 h-4 mr-2" />
+                    Link Payment
+                  </Button>
+                </div>
               </div>
             ))}
           </CardContent>

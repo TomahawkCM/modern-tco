@@ -14,12 +14,16 @@ import { CategoryCombobox } from './CategoryCombobox';
 import { ReceiptUpload } from './ReceiptUpload';
 import { ConfidenceMeter } from './ConfidenceMeter';
 import { Paperclip, FileImage, Trash2, Brain, Loader2 } from 'lucide-react';
-import type { Receipt } from '@/types/budget';
+import type { Receipt, Loan } from '@/types/budget';
 import type { ExtractedReceiptData } from '@/lib/receipt-ocr';
 import { useFocusTrap } from '@/hooks/useFocusTrap';
 import { trackBudgetEvent } from '@/lib/budget-analytics';
 import { useMerchantCategorization } from '@/hooks/useMerchantCategorization';
 import { useTranslations } from 'next-intl';
+import { LoanPaymentSelector } from './loans/LoanPaymentSelector';
+import { LinkedLoanBadge } from './loans/LinkedLoanBadge';
+import { getActiveLoans, createPaymentFromTransaction, getPaymentByTransactionId } from '@/lib/loans/loan-db';
+import { isTransactionLinked } from '@/lib/loans/transaction-link-operations';
 
 interface TransactionModalProps {
   transaction: Transaction | null;
@@ -28,6 +32,7 @@ interface TransactionModalProps {
   onSave: (transaction: Transaction) => void;
   onClose: () => void;
   isSaving?: boolean;
+  onCategoryCreated?: (category: Category) => void;
 }
 
 export function TransactionModal({
@@ -37,6 +42,7 @@ export function TransactionModal({
   onSave,
   onClose,
   isSaving = false,
+  onCategoryCreated,
 }: TransactionModalProps) {
   const t = useTranslations('transactionModal');
 
@@ -71,6 +77,11 @@ export function TransactionModal({
   const [attachedReceipt, setAttachedReceipt] = useState<File | null>(null);
   const [existingReceipts, setExistingReceipts] = useState<Receipt[]>([]);
   const [showAdvancedOptions, setShowAdvancedOptions] = useState(false);
+
+  // Loan payment linking state
+  const [activeLoans, setActiveLoans] = useState<Loan[]>([]);
+  const [selectedLoanId, setSelectedLoanId] = useState<string | null>(null);
+  const [existingLoanLink, setExistingLoanLink] = useState(false);
 
   // Track original category for learning
   const originalCategory = transaction?.category || null;
@@ -141,6 +152,26 @@ export function TransactionModal({
         setExistingReceipts(receipts);
       });
     }
+  }, [transaction?.id]);
+
+  // Load active loans and check for existing link
+  useEffect(() => {
+    async function loadLoanData() {
+      try {
+        const loans = await getActiveLoans();
+        setActiveLoans(loans);
+
+        // Check if editing a transaction that's already linked
+        if (transaction?.id) {
+          const isLinked = await isTransactionLinked(transaction.id);
+          setExistingLoanLink(isLinked);
+        }
+      } catch (error) {
+        console.error('Error loading loan data:', error);
+      }
+    }
+
+    loadLoanData();
   }, [transaction?.id]);
 
   // Handle Escape key to close modal (Task 2.2.3)
@@ -256,6 +287,24 @@ export function TransactionModal({
         // We could show an error message here if needed
       }
     }
+
+    // Create loan payment if a loan was selected (only for expenses)
+    if (selectedLoanId && type === 'expense' && !existingLoanLink) {
+      const selectedLoan = activeLoans.find(l => l.id === selectedLoanId);
+      if (selectedLoan) {
+        try {
+          await createPaymentFromTransaction(selectedLoan, {
+            id: newTransaction.id,
+            amount: newTransaction.amount,
+            date: newTransaction.date,
+            description: newTransaction.description,
+          });
+        } catch (error) {
+          console.error('Failed to create loan payment:', error);
+          // Transaction is saved, but loan payment creation failed
+        }
+      }
+    }
   }
 
   async function handleDeleteReceipt(receiptId: string) {
@@ -302,45 +351,43 @@ export function TransactionModal({
     }
   }
 
-  async function createNewCategory() {
+  function createNewCategory() {
     if (!newCategoryName.trim()) {
-      alert(t('createCategory.nameRequired'));
       return;
     }
 
-    try {
-      const subcatsArray = newCategorySubcats
-        .split(',')
-        .map(s => s.trim())
-        .filter(Boolean);
+    const subcatsArray = newCategorySubcats
+      .split(',')
+      .map(s => s.trim())
+      .filter(Boolean);
 
-      const newCat: Category = {
-        id: `cat_${Date.now()}`,
-        name: newCategoryName.trim(),
-        type,
-        subcategories: subcatsArray,
-        color: '#3b82f6',
-        icon: 'tag',
-        isDefault: false,
-        order: categories.length + 1,
-        createdAt: new Date(),
-      };
+    const newCat: Category = {
+      id: `cat_${Date.now()}`,
+      name: newCategoryName.trim(),
+      type,
+      subcategories: subcatsArray,
+      color: '#3b82f6',
+      icon: 'tag',
+      isDefault: false,
+      order: categories.length + 1,
+      createdAt: new Date(),
+    };
 
-      await db.categories.add(newCat);
+    // Update UI immediately (optimistic update)
+    setCategory(newCat.name);
+    setShowCreateCategory(false);
+    setNewCategoryName('');
+    setNewCategorySubcats('');
 
-      // Reload categories and select the new one
-      const updatedCategories = await db.categories.toArray();
-      // Update parent component's categories (would need callback)
-      setCategory(newCat.name);
-      setShowCreateCategory(false);
-      setNewCategoryName('');
-      setNewCategorySubcats('');
-
-      alert(t('createCategory.created', { name: newCat.name }));
-    } catch (error) {
-      console.error('Error creating category:', error);
-      alert(t('createCategory.failed'));
+    // Notify parent to update categories state immediately
+    if (onCategoryCreated) {
+      onCategoryCreated(newCat);
     }
+
+    // Fire-and-forget DB save (non-blocking)
+    db.categories.add(newCat).catch((error) => {
+      console.error('Error saving category to DB:', error);
+    });
   }
 
   return (
@@ -675,6 +722,38 @@ export function TransactionModal({
               </div>
             )}
           </div>
+
+          {/* Loan Payment Section - Only for expenses */}
+          {type === 'expense' && activeLoans.length > 0 && !existingLoanLink && (
+            <div className="border-t-2 border-border pt-4">
+              <LoanPaymentSelector
+                loans={activeLoans}
+                selectedLoanId={selectedLoanId}
+                onLoanSelect={setSelectedLoanId}
+                amount={parseFloat(amount) || 0}
+                date={new Date(date)}
+              />
+            </div>
+          )}
+
+          {/* Show existing loan link when editing */}
+          {existingLoanLink && transaction?.id && (
+            <div className="border-t-2 border-border pt-4">
+              <div className="flex items-center gap-2">
+                <span className="text-base font-semibold text-foreground">
+                  Linked to Loan:
+                </span>
+                <LinkedLoanBadge
+                  transactionId={transaction.id}
+                  showUnlinkButton={false}
+                  size="md"
+                />
+              </div>
+              <p className="text-sm text-muted-foreground mt-2">
+                To change the loan link, unlink from the Loans page first.
+              </p>
+            </div>
+          )}
 
           {/* Receipt Upload - Phase 7.1.1 & 7.2.2: Receipt storage and thumbnails */}
           <div className="space-y-4">

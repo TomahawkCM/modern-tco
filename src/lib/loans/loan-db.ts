@@ -437,3 +437,156 @@ export async function unlinkTransactionFromPayment(paymentId: string): Promise<v
     throw error;
   }
 }
+
+// ========================================
+// TRANSACTION LINKING OPERATIONS
+// ========================================
+
+/**
+ * Get payment by transaction ID
+ */
+export async function getPaymentByTransactionId(
+  transactionId: string
+): Promise<LoanPayment | undefined> {
+  try {
+    return await db.loanPayments
+      .where('transactionId')
+      .equals(transactionId)
+      .first();
+  } catch (error) {
+    console.error('Error getting payment by transaction ID:', error);
+    return undefined;
+  }
+}
+
+/**
+ * Create a loan payment from a transaction
+ * Auto-calculates principal/interest split based on loan terms
+ */
+export interface CreatePaymentFromTransactionOptions {
+  extraPrincipal?: number;
+  notes?: string;
+  updateTransactionCategory?: boolean;
+}
+
+export async function createPaymentFromTransaction(
+  loan: Loan,
+  transaction: { id: string; amount: number; date: Date; description: string },
+  options: CreatePaymentFromTransactionOptions = {}
+): Promise<string> {
+  try {
+    const paymentAmount = Math.abs(transaction.amount);
+    const { extraPrincipal = 0, notes, updateTransactionCategory = true } = options;
+
+    // Calculate principal/interest split
+    const monthlyRate = loan.interestRate / 100 / 12;
+    const interestAmount = loan.currentBalance * monthlyRate;
+
+    // Determine extra principal from payment exceeding monthly payment
+    const paymentExtraPrincipal = Math.max(0, paymentAmount - loan.monthlyPayment);
+    const totalExtraPrincipal = paymentExtraPrincipal + extraPrincipal;
+
+    // Principal is payment minus interest (capped at remaining balance)
+    const basePrincipal = Math.max(0, Math.min(
+      paymentAmount - interestAmount - totalExtraPrincipal,
+      loan.currentBalance
+    ));
+
+    const totalPrincipal = basePrincipal + totalExtraPrincipal;
+    const newBalance = Math.max(0, loan.currentBalance - totalPrincipal);
+
+    // Create the payment
+    const paymentId = await recordPayment({
+      loanId: loan.id,
+      date: new Date(transaction.date),
+      amount: paymentAmount,
+      principalAmount: Math.round(basePrincipal * 100) / 100,
+      interestAmount: Math.round(interestAmount * 100) / 100,
+      extraPrincipal: Math.round(totalExtraPrincipal * 100) / 100,
+      balanceAfter: Math.round(newBalance * 100) / 100,
+      transactionId: transaction.id,
+      notes: notes || `Linked from transaction: ${transaction.description}`,
+      isScheduled: false,
+    });
+
+    // Optionally update transaction category
+    if (updateTransactionCategory) {
+      await db.transactions.update(transaction.id, {
+        category: `Loan Payment - ${loan.name}`,
+        updatedAt: new Date(),
+      });
+    }
+
+    return paymentId;
+  } catch (error) {
+    console.error('Error creating payment from transaction:', error);
+    throw error;
+  }
+}
+
+/**
+ * Unlink a payment from a transaction
+ * Options for soft unlink (keep payment) or hard delete (remove payment)
+ */
+export interface UnlinkPaymentOptions {
+  deletePayment?: boolean;
+  resetTransactionCategory?: boolean;
+}
+
+export async function unlinkPayment(
+  paymentId: string,
+  options: UnlinkPaymentOptions = {}
+): Promise<void> {
+  try {
+    const { deletePayment: shouldDelete = false, resetTransactionCategory = true } = options;
+
+    const payment = await getPayment(paymentId);
+    if (!payment) {
+      throw new Error('Payment not found');
+    }
+
+    // Reset transaction category if requested
+    if (resetTransactionCategory && payment.transactionId) {
+      await db.transactions.update(payment.transactionId, {
+        category: null,
+        updatedAt: new Date(),
+      });
+    }
+
+    if (shouldDelete) {
+      // Hard delete - remove payment entirely
+      await deletePayment(paymentId);
+
+      // Recalculate loan balance
+      const loan = await getLoan(payment.loanId);
+      if (loan) {
+        const totalPrincipalRemoved = payment.principalAmount + payment.extraPrincipal;
+        await updateLoan(payment.loanId, {
+          currentBalance: loan.currentBalance + totalPrincipalRemoved,
+          totalPaid: Math.max(0, loan.totalPaid - payment.amount),
+          totalInterestPaid: Math.max(0, loan.totalInterestPaid - payment.interestAmount),
+          extraPayments: Math.max(0, loan.extraPayments - payment.extraPrincipal),
+        });
+      }
+    } else {
+      // Soft unlink - just remove transaction reference
+      await updatePayment(paymentId, { transactionId: undefined });
+    }
+  } catch (error) {
+    console.error('Error unlinking payment:', error);
+    throw error;
+  }
+}
+
+/**
+ * Get all payments with linked transactions for a loan
+ */
+export async function getLinkedPayments(loanId: string): Promise<LoanPayment[]> {
+  try {
+    const payments = await getLoanPayments(loanId);
+    return payments.filter(p => p.transactionId);
+  } catch (error) {
+    console.error('Error getting linked payments:', error);
+    return [];
+  }
+}
