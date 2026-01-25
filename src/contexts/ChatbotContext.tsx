@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 /**
  * Chatbot Context
@@ -7,15 +7,15 @@
  * Handles message history, loading states, and OpenAI communication.
  */
 
-import React, { createContext, useContext, useState, useCallback, useEffect } from 'react';
-import { isChatbotEnabled, getChatbotConversationRetention } from '@/lib/budget-privacy-settings';
-import { trackBudgetEvent } from '@/lib/budget-analytics';
+import React, { createContext, useContext, useState, useCallback, useEffect } from "react";
+import { isChatbotEnabled, getChatbotConversationRetention } from "@/lib/budget-privacy-settings";
+import { trackBudgetEvent } from "@/lib/budget-analytics";
 
-const isDev = process.env.NODE_ENV === 'development';
+const isDev = process.env.NODE_ENV === "development";
 
 export interface ChatMessage {
   id: string;
-  role: 'user' | 'assistant' | 'system';
+  role: "user" | "assistant" | "system";
   content: string;
   timestamp: Date;
   functionCalls?: Array<{ name: string; args: any; result: any }>;
@@ -42,7 +42,7 @@ interface ChatbotContextValue {
 
 const ChatbotContext = createContext<ChatbotContextValue | null>(null);
 
-const STORAGE_KEY = 'budget-chatbot-messages';
+const STORAGE_KEY = "budget-chatbot-messages";
 const MAX_CONTEXT_MESSAGES = 20; // Limit context window for performance
 
 /**
@@ -52,7 +52,7 @@ function getExpirationDate(): Date {
   const retention = getChatbotConversationRetention();
   const now = new Date();
 
-  if (retention === 'forever') {
+  if (retention === "forever") {
     // Set far future date (100 years)
     const future = new Date(now);
     future.setFullYear(future.getFullYear() + 100);
@@ -69,7 +69,7 @@ function getExpirationDate(): Date {
  * Load messages from localStorage (with expiration check)
  */
 function loadMessagesFromStorage(): ChatMessage[] {
-  if (typeof window === 'undefined') return [];
+  if (typeof window === "undefined") return [];
 
   try {
     const stored = localStorage.getItem(STORAGE_KEY);
@@ -90,7 +90,7 @@ function loadMessagesFromStorage(): ChatMessage[] {
       timestamp: new Date(msg.timestamp),
     }));
   } catch (error) {
-    isDev && console.error('[Chatbot] Failed to load messages:', error);
+    if (isDev) console.error("[Chatbot] Failed to load messages:", error);
     return [];
   }
 }
@@ -99,7 +99,7 @@ function loadMessagesFromStorage(): ChatMessage[] {
  * Save messages to localStorage (with expiration)
  */
 function saveMessagesToStorage(messages: ChatMessage[]): void {
-  if (typeof window === 'undefined') return;
+  if (typeof window === "undefined") return;
 
   try {
     const data = {
@@ -110,7 +110,7 @@ function saveMessagesToStorage(messages: ChatMessage[]): void {
 
     localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
   } catch (error) {
-    isDev && console.error('[Chatbot] Failed to save messages:', error);
+    if (isDev) console.error("[Chatbot] Failed to save messages:", error);
   }
 }
 
@@ -123,18 +123,18 @@ export function ChatbotProvider({ children }: { children: React.ReactNode }) {
   const [isTyping, setIsTyping] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [isEnabled, setIsEnabled] = useState(false);
-  const [lastUserMessage, setLastUserMessage] = useState<string>('');
+  const [lastUserMessage, setLastUserMessage] = useState<string>("");
 
   // Load messages on mount
   useEffect(() => {
-    isDev && console.log('[ChatbotContext] useEffect running - checking if chatbot enabled');
+    if (isDev) console.log("[ChatbotContext] useEffect running - checking if chatbot enabled");
     const enabled = isChatbotEnabled();
-    isDev && console.log('[ChatbotContext] isChatbotEnabled() returned:', enabled);
+    if (isDev) console.log("[ChatbotContext] isChatbotEnabled() returned:", enabled);
 
     // Also log the raw localStorage value for debugging
     if (isDev) {
-      const rawSettings = localStorage.getItem('budget-app-privacy-settings');
-      console.log('[ChatbotContext] Raw localStorage value:', rawSettings);
+      const rawSettings = localStorage.getItem("budget-app-privacy-settings");
+      console.log("[ChatbotContext] Raw localStorage value:", rawSettings);
     }
 
     setIsEnabled(enabled);
@@ -142,36 +142,38 @@ export function ChatbotProvider({ children }: { children: React.ReactNode }) {
     if (enabled) {
       const stored = loadMessagesFromStorage();
       setMessages(stored);
-      isDev && console.log('[ChatbotContext] Loaded messages from storage:', stored.length);
+      if (isDev) console.log("[ChatbotContext] Loaded messages from storage:", stored.length);
     } else {
-      isDev && console.log('[ChatbotContext] Chatbot disabled - not loading messages');
+      if (isDev) console.log("[ChatbotContext] Chatbot disabled - not loading messages");
     }
   }, []);
 
   // Listen for localStorage changes (e.g., when settings are updated)
   useEffect(() => {
     const handleStorageChange = () => {
-      isDev && console.log('[ChatbotContext] Storage changed - rechecking chatbot enabled status');
+      if (isDev)
+        console.log("[ChatbotContext] Storage changed - rechecking chatbot enabled status");
       const enabled = isChatbotEnabled();
-      isDev && console.log('[ChatbotContext] New enabled status:', enabled);
+      if (isDev) console.log("[ChatbotContext] New enabled status:", enabled);
       setIsEnabled(enabled);
 
       if (enabled) {
         const stored = loadMessagesFromStorage();
         setMessages(stored);
-        isDev && console.log('[ChatbotContext] Reloaded messages after settings change:', stored.length);
+        if (isDev)
+          console.log("[ChatbotContext] Reloaded messages after settings change:", stored.length);
       }
     };
 
     // Listen for storage events (fired when localStorage changes in other tabs/windows)
-    window.addEventListener('storage', handleStorageChange);
+    window.addEventListener("storage", handleStorageChange);
 
     // Custom event for same-tab localStorage changes
-    window.addEventListener('chatbot-settings-changed', handleStorageChange);
+    window.addEventListener("chatbot-settings-changed", handleStorageChange);
 
     return () => {
-      window.removeEventListener('storage', handleStorageChange);
-      window.removeEventListener('chatbot-settings-changed', handleStorageChange);
+      window.removeEventListener("storage", handleStorageChange);
+      window.removeEventListener("chatbot-settings-changed", handleStorageChange);
     };
   }, []);
 
@@ -180,9 +182,9 @@ export function ChatbotProvider({ children }: { children: React.ReactNode }) {
    */
   const openChatbot = useCallback(() => {
     setIsOpen(true);
-    trackBudgetEvent('chatbot_action', {
-      section: 'chatbot',
-      action: 'open',
+    trackBudgetEvent("chatbot_action", {
+      section: "chatbot",
+      action: "open",
       success: true,
     });
   }, []);
@@ -192,9 +194,9 @@ export function ChatbotProvider({ children }: { children: React.ReactNode }) {
    */
   const closeChatbot = useCallback(() => {
     setIsOpen(false);
-    trackBudgetEvent('chatbot_action', {
-      section: 'chatbot',
-      action: 'close',
+    trackBudgetEvent("chatbot_action", {
+      section: "chatbot",
+      action: "close",
       success: true,
     });
   }, []);
@@ -203,10 +205,10 @@ export function ChatbotProvider({ children }: { children: React.ReactNode }) {
    * Toggle chatbot panel
    */
   const toggleChatbot = useCallback(() => {
-    setIsOpen(prev => !prev);
-    trackBudgetEvent('chatbot_action', {
-      section: 'chatbot',
-      action: isOpen ? 'close' : 'open',
+    setIsOpen((prev) => !prev);
+    trackBudgetEvent("chatbot_action", {
+      section: "chatbot",
+      action: isOpen ? "close" : "open",
       success: true,
     });
   }, [isOpen]);
@@ -221,160 +223,169 @@ export function ChatbotProvider({ children }: { children: React.ReactNode }) {
   /**
    * Send a message to the chatbot (with streaming support)
    */
-  const sendMessage = useCallback(async (content: string) => {
-    if (!isChatbotEnabled()) {
-      setError('Chatbot is disabled. Enable it in Settings → Privacy → Budget Chatbot');
-      return;
-    }
-
-    const trimmedContent = content.trim();
-    if (!trimmedContent) return;
-
-    // Store for retry
-    setLastUserMessage(trimmedContent);
-
-    // Add user message
-    const userMessage: ChatMessage = {
-      id: `user-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
-      role: 'user',
-      content: trimmedContent,
-      timestamp: new Date(),
-    };
-
-    setMessages(prev => [...prev, userMessage]);
-    setIsTyping(true);
-    setError(null);
-
-    // Track analytics
-    trackBudgetEvent('chatbot_query', {
-      section: 'chatbot',
-      success: true,
-    });
-
-    try {
-      // Build message history for API (limit to last MAX_CONTEXT_MESSAGES)
-      const recentMessages = messages.slice(-MAX_CONTEXT_MESSAGES);
-      const apiMessages = [...recentMessages, userMessage].map(msg => ({
-        role: msg.role,
-        content: msg.content,
-      }));
-
-      // Call streaming API endpoint
-      const response = await fetch('/api/chat', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ messages: apiMessages }),
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json().catch(() => ({ error: 'Unknown error' }));
-        throw new Error(errorData.error || `API error: ${response.status}`);
+  const sendMessage = useCallback(
+    async (content: string) => {
+      if (!isChatbotEnabled()) {
+        setError("Chatbot is disabled. Enable it in Settings → Privacy → Budget Chatbot");
+        return;
       }
 
-      // Handle streaming response
-      const reader = response.body?.getReader();
-      const decoder = new TextDecoder();
-      let assistantContent = '';
+      const trimmedContent = content.trim();
+      if (!trimmedContent) return;
 
-      if (reader) {
-        while (true) {
-          const { done, value } = await reader.read();
-          if (done) break;
+      // Store for retry
+      setLastUserMessage(trimmedContent);
 
-          const chunk = decoder.decode(value);
-          const lines = chunk.split('\n');
+      // Add user message
+      const userMessage: ChatMessage = {
+        id: `user-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+        role: "user",
+        content: trimmedContent,
+        timestamp: new Date(),
+      };
 
-          for (const line of lines) {
-            if (line.startsWith('data: ')) {
-              const data = line.slice(6);
-              if (data === '[DONE]') break;
+      setMessages((prev) => [...prev, userMessage]);
+      setIsTyping(true);
+      setError(null);
 
-              try {
-                const parsed = JSON.parse(data);
-                if (parsed.content) {
-                  assistantContent += parsed.content;
+      // Track analytics
+      trackBudgetEvent("chatbot_query", {
+        section: "chatbot",
+        success: true,
+      });
 
-                  // Update assistant message in real-time
-                  setMessages(prev => {
-                    const messages = [...prev];
-                    const lastMessage = messages[messages.length - 1];
+      try {
+        // Build message history for API (limit to last MAX_CONTEXT_MESSAGES)
+        const recentMessages = messages.slice(-MAX_CONTEXT_MESSAGES);
+        const apiMessages = [...recentMessages, userMessage].map((msg) => ({
+          role: msg.role,
+          content: msg.content,
+        }));
 
-                    if (lastMessage && lastMessage.role === 'assistant') {
-                      // Update existing assistant message
-                      messages[messages.length - 1] = {
-                        ...lastMessage,
-                        content: assistantContent,
-                      };
-                    } else {
-                      // Create new assistant message
-                      messages.push({
-                        id: `assistant-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
-                        role: 'assistant',
-                        content: assistantContent,
-                        timestamp: new Date(),
-                      });
-                    }
+        // Call streaming API endpoint
+        const response = await fetch("/api/chat", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ messages: apiMessages }),
+        });
 
-                    return messages;
-                  });
-                  setIsTyping(false);
+        if (!response.ok) {
+          const errorData = await response.json().catch(() => ({ error: "Unknown error" }));
+          throw new Error(errorData.error || `API error: ${response.status}`);
+        }
+
+        // Handle streaming response
+        const reader = response.body?.getReader();
+        const decoder = new TextDecoder();
+        let assistantContent = "";
+
+        if (reader) {
+          while (true) {
+            const { done, value } = await reader.read();
+            if (done) break;
+
+            const chunk = decoder.decode(value);
+            const lines = chunk.split("\n");
+
+            for (const line of lines) {
+              if (line.startsWith("data: ")) {
+                const data = line.slice(6);
+                if (data === "[DONE]") break;
+
+                try {
+                  const parsed = JSON.parse(data);
+                  if (parsed.content) {
+                    assistantContent += parsed.content;
+
+                    // Update assistant message in real-time
+                    setMessages((prev) => {
+                      const messages = [...prev];
+                      const lastMessage = messages[messages.length - 1];
+
+                      if (lastMessage && lastMessage.role === "assistant") {
+                        // Update existing assistant message
+                        messages[messages.length - 1] = {
+                          ...lastMessage,
+                          content: assistantContent,
+                        };
+                      } else {
+                        // Create new assistant message
+                        messages.push({
+                          id: `assistant-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+                          role: "assistant",
+                          content: assistantContent,
+                          timestamp: new Date(),
+                        });
+                      }
+
+                      return messages;
+                    });
+                    setIsTyping(false);
+                  }
+                } catch (e) {
+                  // Skip invalid JSON
                 }
-              } catch (e) {
-                // Skip invalid JSON
               }
             }
           }
         }
+
+        // Ensure typing indicator is off
+        setIsTyping(false);
+
+        // Track successful query
+        trackBudgetEvent("chatbot_query", {
+          section: "chatbot",
+          success: true,
+        });
+      } catch (err: any) {
+        if (isDev) console.error("[Chatbot] Error:", err);
+
+        // Provide user-friendly error messages
+        const errorMessage = err.message || "Failed to get response from chatbot";
+        let userFriendlyMessage = errorMessage;
+
+        // Detect specific error types
+        if (
+          errorMessage.includes("OPENAI_API_KEY not configured") ||
+          errorMessage.includes("Invalid API key")
+        ) {
+          userFriendlyMessage =
+            "The chatbot is not configured yet. Please contact your administrator to add an OpenAI API key.";
+        } else if (errorMessage.includes("rate limit") || errorMessage.includes("Rate limit")) {
+          userFriendlyMessage = "Too many requests. Please wait a moment and try again.";
+        } else if (errorMessage.includes("quota") || errorMessage.includes("insufficient_quota")) {
+          userFriendlyMessage =
+            "The AI service quota has been exceeded. Please contact your administrator.";
+        } else if (errorMessage.includes("API error: 500")) {
+          userFriendlyMessage =
+            "The chatbot service is temporarily unavailable. Please try again later.";
+        }
+
+        setError(userFriendlyMessage);
+
+        // Add error message
+        const errorChatMessage: ChatMessage = {
+          id: `error-${Date.now()}`,
+          role: "assistant",
+          content: `Sorry, I encountered an error: ${userFriendlyMessage}`,
+          timestamp: new Date(),
+          isError: true,
+        };
+
+        setMessages((prev) => [...prev, errorChatMessage]);
+        setIsTyping(false);
+
+        // Track error
+        trackBudgetEvent("chatbot_query", {
+          section: "chatbot",
+          success: false,
+          errorType: "api_error",
+        });
       }
-
-      // Ensure typing indicator is off
-      setIsTyping(false);
-
-      // Track successful query
-      trackBudgetEvent('chatbot_query', {
-        section: 'chatbot',
-        success: true,
-      });
-    } catch (err: any) {
-      isDev && console.error('[Chatbot] Error:', err);
-
-      // Provide user-friendly error messages
-      let errorMessage = err.message || 'Failed to get response from chatbot';
-      let userFriendlyMessage = errorMessage;
-
-      // Detect specific error types
-      if (errorMessage.includes('OPENAI_API_KEY not configured') || errorMessage.includes('Invalid API key')) {
-        userFriendlyMessage = 'The chatbot is not configured yet. Please contact your administrator to add an OpenAI API key.';
-      } else if (errorMessage.includes('rate limit') || errorMessage.includes('Rate limit')) {
-        userFriendlyMessage = 'Too many requests. Please wait a moment and try again.';
-      } else if (errorMessage.includes('quota') || errorMessage.includes('insufficient_quota')) {
-        userFriendlyMessage = 'The AI service quota has been exceeded. Please contact your administrator.';
-      } else if (errorMessage.includes('API error: 500')) {
-        userFriendlyMessage = 'The chatbot service is temporarily unavailable. Please try again later.';
-      }
-
-      setError(userFriendlyMessage);
-
-      // Add error message
-      const errorChatMessage: ChatMessage = {
-        id: `error-${Date.now()}`,
-        role: 'assistant',
-        content: `Sorry, I encountered an error: ${userFriendlyMessage}`,
-        timestamp: new Date(),
-        isError: true,
-      };
-
-      setMessages(prev => [...prev, errorChatMessage]);
-      setIsTyping(false);
-
-      // Track error
-      trackBudgetEvent('chatbot_query', {
-        section: 'chatbot',
-        success: false,
-        errorType: 'api_error',
-      });
-    }
-  }, [messages]);
+    },
+    [messages]
+  );
 
   /**
    * Retry the last user message
@@ -394,9 +405,9 @@ export function ChatbotProvider({ children }: { children: React.ReactNode }) {
     localStorage.removeItem(STORAGE_KEY);
 
     // Track analytics
-    trackBudgetEvent('chatbot_action', {
-      section: 'chatbot',
-      action: 'clear_history',
+    trackBudgetEvent("chatbot_action", {
+      section: "chatbot",
+      action: "clear_history",
       success: true,
     });
   }, []);
@@ -413,11 +424,11 @@ export function ChatbotProvider({ children }: { children: React.ReactNode }) {
     const exportData = {
       exportedAt: new Date().toISOString(),
       messageCount: messages.length,
-      conversations: messages.map(msg => ({
+      conversations: messages.map((msg) => ({
         role: msg.role,
         content: msg.content,
         timestamp: msg.timestamp.toISOString(),
-        functionCalls: msg.functionCalls?.map(fc => ({
+        functionCalls: msg.functionCalls?.map((fc) => ({
           function: fc.name,
           summary: `Called ${fc.name}`,
         })),
@@ -426,21 +437,21 @@ export function ChatbotProvider({ children }: { children: React.ReactNode }) {
 
     // Create blob and download
     const blob = new Blob([JSON.stringify(exportData, null, 2)], {
-      type: 'application/json',
+      type: "application/json",
     });
     const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
+    const link = document.createElement("a");
     link.href = url;
-    link.download = `budget-chat-${new Date().toISOString().split('T')[0]}.json`;
+    link.download = `budget-chat-${new Date().toISOString().split("T")[0]}.json`;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
     URL.revokeObjectURL(url);
 
     // Track analytics
-    trackBudgetEvent('chatbot_action', {
-      section: 'chatbot',
-      action: 'export_conversation',
+    trackBudgetEvent("chatbot_action", {
+      section: "chatbot",
+      action: "export_conversation",
       success: true,
       count: messages.length,
     });
@@ -471,7 +482,7 @@ export function useChatbot() {
   const context = useContext(ChatbotContext);
 
   if (!context) {
-    throw new Error('useChatbot must be used within ChatbotProvider');
+    throw new Error("useChatbot must be used within ChatbotProvider");
   }
 
   return context;
