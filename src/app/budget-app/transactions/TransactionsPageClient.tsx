@@ -75,7 +75,7 @@ export default function TransactionsPageClient() {
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
   const [accounts, setAccounts] = useState<Account[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false); // Start ready - show UI immediately
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [selectedAccount, setSelectedAccount] = useState<string>("all");
@@ -278,20 +278,12 @@ export default function TransactionsPageClient() {
   }
 
   async function loadData() {
-    // 3s timeout - fail fast for world-class UX
-    const timeoutPromise = new Promise<never>((_, reject) => {
-      setTimeout(() => reject(new Error("timeout")), 3000);
-    });
-
     try {
-      const [allTxs, cats, accts, loans] = await Promise.race([
-        Promise.all([
-          db.transactions.toArray(),
-          db.categories.toArray(),
-          db.accounts.toArray(),
-          getAllLoans(),
-        ]),
-        timeoutPromise,
+      const [allTxs, cats, accts, loans] = await Promise.all([
+        db.transactions.toArray(),
+        db.categories.toArray(),
+        db.accounts.toArray(),
+        getAllLoans(),
       ]);
 
       // Filter out parent transactions that have been split
@@ -802,16 +794,7 @@ export default function TransactionsPageClient() {
     });
   }, []);
 
-  if (isLoading) {
-    return (
-      <div className="flex h-64 items-center justify-center">
-        <div className="text-center">
-          <div className="mx-auto h-16 w-16 animate-spin rounded-full border-4 border-teal-600 border-t-transparent"></div>
-          <p className="mt-4 text-gray-600">Loading transactions...</p>
-        </div>
-      </div>
-    );
-  }
+  // No blocking loading state - UI renders immediately, data loads in background
 
   return (
     <div className="space-y-6">
