@@ -1,6 +1,10 @@
 import type { User } from "@supabase/supabase-js";
 import { supabase, supabaseAdmin } from "./supabase";
 
+// Offline mode check - skip Supabase queries for local users
+const isOfflineMode = process.env.NEXT_PUBLIC_OFFLINE_MODE === "true";
+const LOCAL_USER_ID = "local-user-offline";
+
 export interface UserProfile {
   id: string;
   email: string;
@@ -29,8 +33,22 @@ export interface Achievement {
 
 /**
  * Fetch user profile from Supabase users table
+ * In offline mode, returns a mock profile for local users
  */
 export async function getUserProfile(userId: string): Promise<UserProfile | null> {
+  // In offline mode or for local user ID, return a mock profile
+  if (isOfflineMode || userId === LOCAL_USER_ID) {
+    return {
+      id: LOCAL_USER_ID,
+      email: "local@budgetapp.local",
+      name: "Local User",
+      created_at: new Date().toISOString(),
+      last_login: new Date().toISOString(),
+      trial_start: new Date().toISOString(),
+      subscription_status: "active", // Local users have full access
+    };
+  }
+
   const { data, error } = await supabase
     .from("users")
     .select("id, email, name, created_at, last_login, trial_start, subscription_status")
@@ -43,7 +61,7 @@ export async function getUserProfile(userId: string): Promise<UserProfile | null
   if (error) {
     // Prefer a lightweight log here: callers (like `useTrialStatus`) intentionally fall back to
     // safe defaults when profile fetch fails.
-    const message = (error as { message?: string }).message;
+    const { message } = error as { message?: string };
     if (message) {
       console.warn("Error fetching user profile:", message);
     }
@@ -56,8 +74,20 @@ export async function getUserProfile(userId: string): Promise<UserProfile | null
 
 /**
  * Calculate user statistics from progress and exam sessions
+ * In offline mode, returns default stats for local users
  */
 export async function getUserStats(userId: string): Promise<UserStats> {
+  // In offline mode or for local user ID, return default stats
+  if (isOfflineMode || userId === LOCAL_USER_ID) {
+    return {
+      studyStreak: 0,
+      totalScore: 0,
+      questionsCompleted: 0,
+      studyTimeHours: 0,
+      lastStudyDate: null,
+    };
+  }
+
   // Fetch user progress
   const { data: progressData, error: progressError } = await supabase
     .from("user_progress")
@@ -190,11 +220,17 @@ export async function getUserAchievements(userId: string): Promise<Achievement[]
 
 /**
  * Update user profile information
+ * In offline mode, returns success without Supabase query
  */
 export async function updateUserProfile(
   userId: string,
   updates: { name?: string; bio?: string }
 ): Promise<{ success: boolean; error?: string }> {
+  // In offline mode or for local user ID, skip Supabase
+  if (isOfflineMode || userId === LOCAL_USER_ID) {
+    return { success: true };
+  }
+
   const { error } = await supabase
     .from("users")
     .update({
@@ -213,8 +249,14 @@ export async function updateUserProfile(
 
 /**
  * Update user's last login timestamp
+ * In offline mode, does nothing
  */
 export async function updateLastLogin(userId: string): Promise<void> {
+  // In offline mode or for local user ID, skip Supabase
+  if (isOfflineMode || userId === LOCAL_USER_ID) {
+    return;
+  }
+
   const { error } = await supabase
     .from("users")
     .update({ last_login: new Date().toISOString() })
@@ -230,8 +272,14 @@ export async function updateLastLogin(userId: string): Promise<void> {
  * The database has a trigger (handle_new_user) that automatically creates
  * profiles when auth.users receives a new user. This function polls until
  * the profile is created.
+ * In offline mode, returns success immediately.
  */
 export async function createUserProfile(user: User): Promise<{ success: boolean; error?: string }> {
+  // In offline mode or for local user ID, skip Supabase
+  if (isOfflineMode || user.id === LOCAL_USER_ID) {
+    return { success: true };
+  }
+
   // Wait for database trigger to create the profile
   // Retry up to 10 times with 500ms delay (5 seconds total)
   for (let i = 0; i < 10; i++) {
@@ -243,7 +291,7 @@ export async function createUserProfile(user: User): Promise<{ success: boolean;
     }
 
     // Wait 500ms before next attempt
-    await new Promise(resolve => setTimeout(resolve, 500));
+    await new Promise((resolve) => setTimeout(resolve, 500));
   }
 
   // If profile still doesn't exist after 5 seconds, log error
@@ -253,6 +301,6 @@ export async function createUserProfile(user: User): Promise<{ success: boolean;
 
   return {
     success: false,
-    error: "Profile creation timeout - database trigger may not be installed"
+    error: "Profile creation timeout - database trigger may not be installed",
   };
 }
