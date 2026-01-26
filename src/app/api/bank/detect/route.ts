@@ -32,6 +32,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { detectBank } from '@/lib/ai/smart-bank-detection';
 import { saveBankFormat, lookupBankFormat } from '@/lib/collective-learning-service';
 import { BANK_CONFIGS } from '@/lib/parsers/csv-parser';
+import { isOnlineMode } from '@/config/features';
 
 // Types
 interface BankDetectionRequest {
@@ -86,10 +87,12 @@ export async function POST(request: NextRequest) {
     }
 
     // Server-side detection (no CORS issues!)
+    // In standalone mode, disable AI path - use pattern matching only
+    const useAI = body.useAI !== false && isOnlineMode();
     const result = await detectBank(
       body.transactionSamples,
       body.headers,
-      body.useAI !== false // Default to true
+      useAI
     );
 
     // Optional: Learn this format for collective intelligence

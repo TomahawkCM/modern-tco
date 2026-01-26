@@ -9,6 +9,7 @@ import { useState, useEffect } from 'react';
 import { Plus, Edit, Trash2, TrendingUp, TrendingDown, AlertCircle } from 'lucide-react';
 import { db } from '@/lib/budget-db';
 import type { Budget, Category, Transaction } from '@/types/budget';
+import { sumAmounts, subtractAmounts } from '@/lib/money';
 import { detectOverspending } from '@/lib/analytics/overspending-detector';
 import { OverspendingAlerts } from '@/components/budget/OverspendingAlerts';
 import { ConfirmDialog } from '@/components/budget/ConfirmDialog';
@@ -45,11 +46,16 @@ export default function BudgetsPage() {
 
   async function loadData() {
     try {
-      const [cats, buds, txs] = await Promise.all([
+      const [cats, buds, allTxs] = await Promise.all([
         db.categories.toArray(),
         db.budgets.toArray(),
         db.transactions.toArray(),
       ]);
+
+      // Filter out parent transactions that have been split
+      // Only count child transactions (which have splitFromId) and non-split transactions
+      // This prevents double-counting when a transaction is split
+      const txs = allTxs.filter(tx => !tx.isSplit);
 
       setCategories(cats);
       setBudgets(buds);
@@ -65,9 +71,11 @@ export default function BudgetsPage() {
         .map(category => {
           const budget = buds.find(b => b.categoryId === category.id);
           const categoryTxs = currentMonthTxs.filter(tx => tx.category === category.name);
-          const spent = Math.abs(categoryTxs.reduce((sum, tx) => sum + (tx.amount < 0 ? tx.amount : 0), 0));
+          const spent = Math.abs(
+            sumAmounts(categoryTxs.filter(tx => tx.amount < 0).map(tx => tx.amount))
+          );
           const budgetAmount = budget?.amount || 0;
-          const remaining = budgetAmount - spent;
+          const remaining = subtractAmounts(budgetAmount, spent);
           const percentage = budgetAmount > 0 ? (spent / budgetAmount) * 100 : 0;
 
           return {
@@ -160,9 +168,9 @@ export default function BudgetsPage() {
     );
   }
 
-  const totalBudgeted = budgetData.reduce((sum, d) => sum + (d.budget?.amount || 0), 0);
-  const totalSpent = budgetData.reduce((sum, d) => sum + d.spent, 0);
-  const totalRemaining = totalBudgeted - totalSpent;
+  const totalBudgeted = sumAmounts(budgetData.map(d => d.budget?.amount || 0));
+  const totalSpent = sumAmounts(budgetData.map(d => d.spent));
+  const totalRemaining = subtractAmounts(totalBudgeted, totalSpent);
   const overallPercentage = totalBudgeted > 0 ? (totalSpent / totalBudgeted) * 100 : 0;
 
   return (

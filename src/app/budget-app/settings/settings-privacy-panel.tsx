@@ -17,7 +17,6 @@ import {
   AlertTriangle,
   Info,
   CheckCircle2,
-  XCircle,
   MessageSquare,
   BarChart3
 } from 'lucide-react';
@@ -28,12 +27,29 @@ interface PrivacyControlsPanelProps {
   onSettingsChange: (settings: PrivacySettings) => void;
 }
 
-export function PrivacyControlsPanel({ 
-  settings, 
-  onSettingsChange 
+interface DeleteSelections {
+  transactions: boolean;
+  accounts: boolean;
+  balances: boolean;
+  categories: boolean;
+  budgets: boolean;
+  privacySettings: boolean;
+}
+
+export function PrivacyControlsPanel({
+  settings,
+  onSettingsChange
 }: PrivacyControlsPanelProps) {
-  const [showConfirmReset, setShowConfirmReset] = useState(false);
   const [showConfirmDelete, setShowConfirmDelete] = useState(false);
+  const [deleteSelections, setDeleteSelections] = useState<DeleteSelections>({
+    transactions: false,
+    accounts: false,
+    balances: false,
+    categories: false,
+    budgets: false,
+    privacySettings: false,
+  });
+  const [isDeleting, setIsDeleting] = useState(false);
 
   function handleToggle(field: keyof PrivacySettings) {
     if (field === 'updatedAt') return; // Don't allow toggling timestamp
@@ -119,43 +135,103 @@ export function PrivacyControlsPanel({
     }
   }
 
-  async function handleDeleteAllData() {
+  function toggleDeleteSelection(key: keyof DeleteSelections) {
+    setDeleteSelections(prev => ({
+      ...prev,
+      [key]: !prev[key],
+    }));
+    setShowConfirmDelete(false); // Reset confirmation when selection changes
+  }
+
+  function selectAllForDeletion() {
+    const allSelected = Object.values(deleteSelections).every(v => v);
+    setDeleteSelections({
+      transactions: !allSelected,
+      accounts: !allSelected,
+      balances: !allSelected,
+      categories: !allSelected,
+      budgets: !allSelected,
+      privacySettings: !allSelected,
+    });
+    setShowConfirmDelete(false);
+  }
+
+  const hasAnySelection = Object.values(deleteSelections).some(v => v);
+  const selectedCount = Object.values(deleteSelections).filter(v => v).length;
+
+  async function handleDeleteSelectedData() {
+    if (!hasAnySelection) return;
+
     if (!showConfirmDelete) {
       setShowConfirmDelete(true);
       return;
     }
 
+    setIsDeleting(true);
     try {
       const { db } = await import('@/lib/budget-db');
-      await Promise.all([
-        db.accounts.clear(),
-        db.categories.clear(),
-        db.transactions.clear(),
-        db.budgets.clear(),
-      ]);
-      
-      // Reset privacy settings to defaults
-      const { resetPrivacySettings } = await import('@/lib/budget-privacy-settings');
-      resetPrivacySettings();
-      
-      alert('All data has been deleted.');
-      window.location.reload(); // Reload to reflect changes
+      const deletions: Promise<void>[] = [];
+
+      if (deleteSelections.transactions) {
+        deletions.push(db.transactions.clear());
+      }
+      if (deleteSelections.accounts) {
+        deletions.push(db.accounts.clear());
+      }
+      if (deleteSelections.balances && !deleteSelections.accounts) {
+        // Only reset balances if we're not deleting accounts entirely
+        deletions.push(
+          db.accounts.toCollection().modify({ balance: 0 })
+            .then(() => undefined) // Convert number result to void
+        );
+      }
+      if (deleteSelections.categories) {
+        deletions.push(db.categories.clear());
+      }
+      if (deleteSelections.budgets) {
+        deletions.push(db.budgets.clear());
+      }
+
+      await Promise.all(deletions);
+
+      if (deleteSelections.privacySettings) {
+        const { resetPrivacySettings, getPrivacySettings } = await import('@/lib/budget-privacy-settings');
+        resetPrivacySettings();
+        onSettingsChange(getPrivacySettings());
+      }
+
+      const deletedItems = [
+        deleteSelections.transactions && 'transactions',
+        deleteSelections.accounts && 'accounts',
+        deleteSelections.balances && !deleteSelections.accounts && 'account balances',
+        deleteSelections.categories && 'categories',
+        deleteSelections.budgets && 'budgets',
+        deleteSelections.privacySettings && 'privacy settings',
+      ].filter(Boolean).join(', ');
+
+      alert(`Successfully cleared: ${deletedItems}`);
+
+      // Reset selections
+      setDeleteSelections({
+        transactions: false,
+        accounts: false,
+        balances: false,
+        categories: false,
+        budgets: false,
+        privacySettings: false,
+      });
+      setShowConfirmDelete(false);
+
+      // Reload if accounts, balances, or transactions were deleted (affects most of the app)
+      if (deleteSelections.accounts || deleteSelections.transactions || deleteSelections.balances) {
+        window.location.reload();
+      }
     } catch (error) {
       console.error('Error deleting data:', error);
       alert('Failed to delete data. Please try again.');
+    } finally {
+      setIsDeleting(false);
     }
-  }
-
-  async function handleResetSettings() {
-    if (!showConfirmReset) {
-      setShowConfirmReset(true);
-      return;
-    }
-
-    const { resetPrivacySettings, getPrivacySettings } = await import('@/lib/budget-privacy-settings');
-    resetPrivacySettings();
-    onSettingsChange(getPrivacySettings());
-    setShowConfirmReset(false);
   }
 
   const aiFeaturesEnabled = settings.enableAIFeatures;
@@ -505,54 +581,96 @@ export function PrivacyControlsPanel({
             </button>
           </div>
 
-          {/* Delete All Data */}
-          <div className="flex items-center justify-between p-4 bg-red-50 rounded-lg border border-red-200">
-            <div className="flex-1">
+          {/* Selective Data Deletion */}
+          <div className="p-4 bg-red-50 rounded-lg border border-red-200">
+            <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-2">
                 <Trash2 className="w-5 h-5 text-red-600" />
-                <h4 className="font-medium text-gray-900">Delete All Data</h4>
+                <h4 className="font-medium text-gray-900">Delete Data</h4>
               </div>
-              <p className="text-sm text-gray-600 mt-1">
-                Permanently delete all accounts, transactions, categories, budgets, and reset privacy settings
-              </p>
-              {showConfirmDelete && (
-                <div className="mt-2 flex items-center gap-2 text-sm text-red-700">
-                  <AlertTriangle className="w-4 h-4" />
-                  <span>This action cannot be undone. Click again to confirm.</span>
-                </div>
-              )}
+              <button
+                onClick={selectAllForDeletion}
+                className="text-sm text-red-600 hover:text-red-700 underline"
+              >
+                {Object.values(deleteSelections).every(v => v) ? 'Deselect All' : 'Select All'}
+              </button>
             </div>
-            <button
-              onClick={handleDeleteAllData}
-              className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
-            >
-              {showConfirmDelete ? 'Confirm Delete' : 'Delete All'}
-            </button>
-          </div>
 
-          {/* Reset Settings */}
-          <div className="flex items-center justify-between p-4 bg-yellow-50 rounded-lg border border-yellow-200">
-            <div className="flex-1">
-              <div className="flex items-center gap-2">
-                <XCircle className="w-5 h-5 text-yellow-600" />
-                <h4 className="font-medium text-gray-900">Reset Privacy Settings</h4>
-              </div>
-              <p className="text-sm text-gray-600 mt-1">
-                Reset all privacy settings to defaults (does not delete data)
-              </p>
-              {showConfirmReset && (
-                <div className="mt-2 flex items-center gap-2 text-sm text-yellow-700">
-                  <AlertTriangle className="w-4 h-4" />
-                  <span>Click again to confirm reset.</span>
-                </div>
-              )}
+            <p className="text-sm text-gray-600 mb-4">
+              Select which data you want to permanently delete:
+            </p>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
+              <DeleteCheckbox
+                label="Transactions"
+                description="All imported and manual transactions"
+                checked={deleteSelections.transactions}
+                onChange={() => toggleDeleteSelection('transactions')}
+              />
+              <DeleteCheckbox
+                label="Accounts"
+                description="Bank accounts and credit cards"
+                checked={deleteSelections.accounts}
+                onChange={() => toggleDeleteSelection('accounts')}
+              />
+              <DeleteCheckbox
+                label="Account Balances"
+                description="Reset all account balances to $0"
+                checked={deleteSelections.balances}
+                onChange={() => toggleDeleteSelection('balances')}
+                disabled={deleteSelections.accounts}
+              />
+              <DeleteCheckbox
+                label="Categories"
+                description="Custom spending categories"
+                checked={deleteSelections.categories}
+                onChange={() => toggleDeleteSelection('categories')}
+              />
+              <DeleteCheckbox
+                label="Budgets"
+                description="Monthly budget allocations"
+                checked={deleteSelections.budgets}
+                onChange={() => toggleDeleteSelection('budgets')}
+              />
+              <DeleteCheckbox
+                label="Privacy Settings"
+                description="Reset all settings to defaults"
+                checked={deleteSelections.privacySettings}
+                onChange={() => toggleDeleteSelection('privacySettings')}
+              />
             </div>
-            <button
-              onClick={handleResetSettings}
-              className="px-4 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition-colors"
-            >
-              {showConfirmReset ? 'Confirm Reset' : 'Reset'}
-            </button>
+
+            {showConfirmDelete && hasAnySelection && (
+              <div className="mb-4 p-3 bg-red-100 rounded-lg flex items-start gap-2">
+                <AlertTriangle className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
+                <div>
+                  <p className="text-sm font-medium text-red-800">
+                    This action cannot be undone!
+                  </p>
+                  <p className="text-sm text-red-700 mt-1">
+                    You are about to permanently delete {selectedCount} data type{selectedCount > 1 ? 's' : ''}.
+                    Click &quot;Confirm Delete&quot; to proceed.
+                  </p>
+                </div>
+              </div>
+            )}
+
+            <div className="flex items-center justify-between">
+              <span className="text-sm text-gray-500">
+                {hasAnySelection ? `${selectedCount} selected` : 'Nothing selected'}
+              </span>
+              <button
+                onClick={handleDeleteSelectedData}
+                disabled={!hasAnySelection || isDeleting}
+                className={`px-4 py-2 rounded-lg transition-colors ${
+                  hasAnySelection
+                    ? 'bg-red-600 text-white hover:bg-red-700'
+                    : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                } ${isDeleting ? 'opacity-50 cursor-wait' : ''}`}
+              >
+                {isDeleting ? 'Deleting...' : showConfirmDelete ? 'Confirm Delete' : 'Delete Selected'}
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -623,6 +741,41 @@ function ToggleSwitch({ checked, onChange, disabled = false }: ToggleSwitchProps
         }`}
       />
     </button>
+  );
+}
+
+interface DeleteCheckboxProps {
+  label: string;
+  description: string;
+  checked: boolean;
+  onChange: () => void;
+  disabled?: boolean;
+}
+
+function DeleteCheckbox({ label, description, checked, onChange, disabled = false }: DeleteCheckboxProps) {
+  return (
+    <label className={`flex items-start gap-3 p-3 rounded-lg border-2 transition-colors ${
+      disabled
+        ? 'opacity-50 cursor-not-allowed bg-gray-100 border-gray-200'
+        : checked
+          ? 'bg-red-100 border-red-400 cursor-pointer'
+          : 'bg-white border-gray-200 hover:border-red-300 cursor-pointer'
+    }`}>
+      <input
+        type="checkbox"
+        checked={checked}
+        onChange={onChange}
+        disabled={disabled}
+        className="mt-0.5 h-4 w-4 rounded border-gray-300 text-red-600 focus:ring-red-500 disabled:opacity-50"
+      />
+      <div className="flex-1 min-w-0">
+        <div className="font-medium text-gray-900 text-sm">{label}</div>
+        <div className="text-xs text-gray-500 mt-0.5">
+          {description}
+          {disabled && <span className="text-gray-400 italic"> (included in Accounts)</span>}
+        </div>
+      </div>
+    </label>
   );
 }
 

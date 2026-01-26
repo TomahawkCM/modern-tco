@@ -14,8 +14,12 @@ import {
 } from "@/components/ui/table";
 import { useAuth } from "@/contexts/AuthContext";
 import { Clock, LogOut, RefreshCw, Search, ShieldAlert } from "lucide-react";
+import { notFound } from "next/navigation";
 import { useEffect, useState } from "react";
 import { getAdminUsers } from "./actions";
+
+// Admin dashboard is not available in offline mode
+const isOfflineMode = process.env.NEXT_PUBLIC_OFFLINE_MODE === 'true';
 
 interface AdminUser {
   id: string;
@@ -79,6 +83,11 @@ function SessionRefreshHelper() {
 }
 
 export default function AdminDashboardPage() {
+  // Admin dashboard is cloud-only, not available in offline mode
+  if (isOfflineMode) {
+    notFound();
+  }
+
   return (
     <AdminGuard loginUrl="/budget-app/auth/login">
       <AdminDashboardContent />

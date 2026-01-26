@@ -64,7 +64,7 @@ export function VirtualTransactionTable({
     <div className="bg-white rounded-lg shadow overflow-hidden">
       {/* Table Header - Sticky */}
       <div className="sticky top-0 z-20 bg-gray-50 border-b border-gray-200 shadow-sm">
-        <div className="grid grid-cols-[40px_100px_1fr_150px_80px_150px_120px] gap-4 px-4 md:px-6 py-3">
+        <div className="grid grid-cols-[40px_100px_1fr_150px_120px] sm:grid-cols-[40px_100px_1fr_150px_150px_120px] lg:grid-cols-[40px_100px_1fr_150px_80px_150px_120px] gap-4 px-4 md:px-6 py-3">
           <div>
             <input
               type="checkbox"
@@ -123,7 +123,7 @@ export function VirtualTransactionTable({
                   transform: `translateY(${virtualRow.start}px)`,
                 }}
               >
-                <div className="grid grid-cols-[40px_100px_1fr_150px_80px_150px_120px] gap-4 px-4 md:px-6 py-4 items-center">
+                <div className="grid grid-cols-[40px_100px_1fr_150px_120px] sm:grid-cols-[40px_100px_1fr_150px_150px_120px] lg:grid-cols-[40px_100px_1fr_150px_80px_150px_120px] gap-4 px-4 md:px-6 py-4 items-center">
                   {/* Checkbox */}
                   <div>
                     <input

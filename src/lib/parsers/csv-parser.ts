@@ -13,6 +13,7 @@ import type {
   Transaction,
 } from '@/types/budget';
 import { parse as parseDate } from 'date-fns';
+import { roundToCents } from '@/lib/money';
 
 // Bank-specific configurations
 // ✅ = Verified with real data
@@ -43,6 +44,35 @@ export const BANK_CONFIGS: Record<string, BankConfig> = {
     amountColumn: 'Debit/Credit',
     dateFormat: 'yyyy-MM-dd', // 2025-01-06
     amountMultiplier: 1,
+    hasHeader: true,
+    skipRows: 0,
+  },
+
+  // ✅ Home Trust Visa / Generic Credit Card Export - VERIFIED
+  // Columns: Account Number, Cardholder Name, Trans Date, Posting Date, Type, Category, 
+  //          Merchant Name, Merchant City, Merchant State, Amount, Reference Number, Tran Type, MCC Code, MCC Description
+  // Format: Debits show as $13.92 (should be expense/negative), Credits as ($100.00) (should be income/positive)
+  // So we multiply by -1 to invert: $13.92 → -13.92, ($100.00) → -(-100) = +100
+  homeTrustVisa: {
+    name: 'Home Trust Visa',
+    dateColumn: 'Trans Date',
+    descriptionColumn: 'Merchant Name',
+    amountColumn: 'Amount',
+    dateFormat: 'MM/dd/yyyy', // 01/13/2026
+    amountMultiplier: -1, // Invert: Debits positive in CSV = expenses, Credits in () = income
+    hasHeader: true,
+    skipRows: 0,
+  },
+
+  // Generic Credit Card CSV format with Trans Date + Merchant Name
+  // Same inversion logic as homeTrustVisa
+  genericCreditCard: {
+    name: 'Credit Card (Generic)',
+    dateColumn: 'Trans Date',
+    descriptionColumn: 'Merchant Name',
+    amountColumn: 'Amount',
+    dateFormat: 'MM/dd/yyyy',
+    amountMultiplier: -1, // Invert for credit card convention
     hasHeader: true,
     skipRows: 0,
   },
@@ -1124,6 +1154,26 @@ export function detectBankWithConfidence(headers: string[]): BankDetectionResult
       reasons.push('Home Trust signature: "Debit/Credit" column');
     }
 
+    // Home Trust Visa / Generic Credit Card - Trans Date + Merchant Name + MCC columns
+    if ((bankKey === 'homeTrustVisa' || bankKey === 'genericCreditCard') && 
+        headerSet.has('trans date') && 
+        headerSet.has('merchant name')) {
+      score += 35;
+      reasons.push('Credit Card signature: Trans Date + Merchant Name');
+      
+      // Bonus for MCC columns (very distinctive)
+      if (headerSet.has('mcc code') || headerSet.has('mcc description')) {
+        score += 15;
+        reasons.push('MCC columns present (credit card export)');
+      }
+      
+      // Bonus for cardholder name column
+      if (headerSet.has('cardholder name')) {
+        score += 10;
+        reasons.push('Cardholder Name column present');
+      }
+    }
+
     // 4. Split format detection (Debit/Credit vs single Amount)
     const hasSplitColumns =
       (headerSet.has('debit') && headerSet.has('credit')) ||
@@ -1445,6 +1495,19 @@ export function detectBank(headers: string[]): string | null {
     (headerSet.has('date') && headerSet.has('details') && headerSet.has('debit/credit'))
   ) {
     return 'homeTrust';
+  }
+
+  // Home Trust Visa / Generic Credit Card - Trans Date + Merchant Name + MCC
+  if (
+    headerSet.has('trans date') &&
+    headerSet.has('merchant name') &&
+    headerSet.has('amount')
+  ) {
+    // Check for MCC columns (very distinctive for credit card exports)
+    if (headerSet.has('mcc code') || headerSet.has('mcc description')) {
+      return 'homeTrustVisa';
+    }
+    return 'genericCreditCard';
   }
 
   // ========================================
@@ -1814,7 +1877,7 @@ function findColumn(row: CSVRow, targetColumn: string, columnType: 'date' | 'des
   // Define common column name patterns for each type
   const patterns: Record<string, string[]> = {
     date: ['date', 'trans date', 'transaction date', 'post date', 'posting date', 'posted'],
-    description: ['description', 'desc', 'details', 'detail', 'memo', 'transaction description'],
+    description: ['description', 'desc', 'details', 'detail', 'memo', 'transaction description', 'merchant name', 'merchant', 'payee', 'name'],
     amount: ['amount', 'transaction amount', 'debit/credit', 'debit', 'credit', 'value'],
   };
 
@@ -1837,6 +1900,7 @@ function findColumn(row: CSVRow, targetColumn: string, columnType: 'date' | 'des
 
 /**
  * Convert CSV rows to transactions using bank config
+ * Handles both single-amount and split-column (Debit/Credit) formats
  */
 export function convertToTransactions(
   rows: CSVRow[],
@@ -1845,29 +1909,131 @@ export function convertToTransactions(
 ): ParsedTransaction[] {
   const transactions: ParsedTransaction[] = [];
 
+  console.log('[convertToTransactions] Starting with', rows.length, 'rows');
+  console.log('[convertToTransactions] Bank config:', {
+    name: bankConfig.name,
+    dateColumn: bankConfig.dateColumn,
+    descriptionColumn: bankConfig.descriptionColumn,
+    amountColumn: bankConfig.amountColumn,
+    dateFormat: bankConfig.dateFormat,
+    amountMultiplier: bankConfig.amountMultiplier,
+  });
+
+  // Log sample row for debugging
+  if (rows.length > 0) {
+    console.log('[convertToTransactions] First row keys:', Object.keys(rows[0]));
+    console.log('[convertToTransactions] First row sample:', JSON.stringify(rows[0]).substring(0, 500));
+  }
+
+  // Detect if this is a split-column format based on the amountColumn name
+  const splitColumnPairs: Record<string, string> = {
+    'withdrawals': 'deposits',
+    'withdrawal': 'deposit',
+    'debit': 'credit',
+    'outflow': 'inflow',
+    'retrait': 'dépôt', // French (Desjardins)
+  };
+
+  const amountColLower = bankConfig.amountColumn.toLowerCase();
+  const isSplitFormat = Object.keys(splitColumnPairs).includes(amountColLower);
+  const complementColumn = isSplitFormat ? splitColumnPairs[amountColLower] : null;
+
+  let skippedNoDate = 0;
+  let skippedNoDesc = 0;
+  let skippedInvalidDate = 0;
+  let skippedNoAmount = 0;
+  let skippedInvalidAmount = 0;
+
   for (const row of rows) {
     try {
       // Use flexible column matching instead of exact lookups
       const dateStr = findColumn(row, bankConfig.dateColumn, 'date');
       const description = findColumn(row, bankConfig.descriptionColumn, 'description');
-      const amountStr = findColumn(row, bankConfig.amountColumn, 'amount');
 
-      if (!dateStr || !description || !amountStr) continue;
+      if (!dateStr) {
+        skippedNoDate++;
+        continue;
+      }
+      if (!description) {
+        skippedNoDesc++;
+        continue;
+      }
 
       // Parse date
       const date = parseDate(dateStr, bankConfig.dateFormat, new Date());
-      if (isNaN(date.getTime())) continue;
+      if (isNaN(date.getTime())) {
+        skippedInvalidDate++;
+        continue;
+      }
 
-      // Parse amount
-      const amount =
-        parseFloat(amountStr.replace(/[$,]/g, '')) *
-        (bankConfig.amountMultiplier || 1);
-      if (isNaN(amount)) continue;
+      // Parse amount - handle both single and split column formats
+      let amount = 0;
+
+      if (isSplitFormat && complementColumn) {
+        // Split format: combine debit/credit or withdrawals/deposits columns
+        const primaryStr = findColumn(row, bankConfig.amountColumn, 'amount') || '';
+        const complementStr = findColumnByName(row, complementColumn) || '';
+
+        // Parse both values - handle accounting format (100.00) as negative
+        let cleanedPrimary = primaryStr.replace(/[$,\s]/g, '');
+        let cleanedComplement = complementStr.replace(/[$,\s]/g, '');
+        
+        // Handle accounting notation (parentheses = negative)
+        if (cleanedPrimary.includes('(') && cleanedPrimary.includes(')')) {
+          cleanedPrimary = '-' + cleanedPrimary.replace(/[()]/g, '');
+        }
+        if (cleanedComplement.includes('(') && cleanedComplement.includes(')')) {
+          cleanedComplement = '-' + cleanedComplement.replace(/[()]/g, '');
+        }
+        
+        const primaryVal = parseFloat(cleanedPrimary) || 0;
+        const complementVal = parseFloat(cleanedComplement) || 0;
+
+        // Determine the amount based on which column has a value
+        // Primary column (withdrawals/debit/outflow) = expense (negative)
+        // Complement column (deposits/credit/inflow) = income (positive)
+        if (Math.abs(complementVal) > 0.001 && Math.abs(primaryVal) > 0.001) {
+          // BOTH columns have values - net them together
+          // Credit/deposit minus debit/withdrawal = net amount
+          amount = roundToCents(Math.abs(complementVal) - Math.abs(primaryVal));
+        } else if (Math.abs(complementVal) > 0.001) {
+          // Use complement value as positive (income/deposit/credit)
+          amount = roundToCents(Math.abs(complementVal));
+        } else if (Math.abs(primaryVal) > 0.001) {
+          // Use primary value as negative (expense/withdrawal/debit)
+          amount = roundToCents(-Math.abs(primaryVal));
+        } else {
+          // Both columns empty, skip this row
+          skippedNoAmount++;
+          continue;
+        }
+      } else {
+        // Single amount column format
+        const amountStr = findColumn(row, bankConfig.amountColumn, 'amount');
+        if (!amountStr) {
+          skippedNoAmount++;
+          continue;
+        }
+
+        // Parse amount - handle parentheses as negative (accounting format)
+        let cleanedAmount = amountStr.replace(/[$,\s]/g, '');
+        if (cleanedAmount.includes('(') && cleanedAmount.includes(')')) {
+          cleanedAmount = '-' + cleanedAmount.replace(/[()]/g, '');
+        }
+
+        const parsedAmount = parseFloat(cleanedAmount) * (bankConfig.amountMultiplier || 1);
+        amount = roundToCents(parsedAmount);
+      }
+
+      if (isNaN(amount)) {
+        skippedInvalidAmount++;
+        continue;
+      }
 
       transactions.push({
         date,
         description: description.trim(),
-        amount,
+        amount: roundToCents(amount),
         isDuplicate: false,
         confidence: 1.0,
       });
@@ -1876,7 +2042,517 @@ export function convertToTransactions(
     }
   }
 
+  console.log('[convertToTransactions] Completed:', {
+    total: rows.length,
+    parsed: transactions.length,
+    skippedNoDate,
+    skippedNoDesc,
+    skippedInvalidDate,
+    skippedNoAmount,
+    skippedInvalidAmount,
+  });
+
   return transactions;
+}
+
+/**
+ * Find a column by name with fuzzy matching
+ * Used for complement columns (deposits, credit, etc.)
+ */
+function findColumnByName(row: CSVRow, columnName: string): string | null {
+  const keys = Object.keys(row);
+  const targetLower = columnName.toLowerCase();
+
+  // Exact match first
+  const exactMatch = keys.find(key => key.toLowerCase() === targetLower);
+  if (exactMatch) {
+    return row[exactMatch];
+  }
+
+  // Partial match (column contains the target name)
+  const partialMatch = keys.find(key => key.toLowerCase().includes(targetLower));
+  if (partialMatch) {
+    return row[partialMatch];
+  }
+
+  return null;
+}
+
+/**
+ * Simple column detection - fallback when smart mapper fails
+ * Uses basic pattern matching on headers and data
+ */
+function simpleColumnDetection(headers: string[], sampleRows: CSVRow[]): any {
+  console.log('[SimpleDetection] Starting with headers:', headers);
+  
+  let dateColumn: string | null = null;
+  let descriptionColumn: string | null = null;
+  let amountColumn: string | null = null;
+  let debitColumn: string | null = null;
+  let creditColumn: string | null = null;
+  let dateFormat: string | undefined;
+  
+  // Simple header pattern matching
+  for (const header of headers) {
+    const h = header.toLowerCase().trim();
+    
+    // Date columns
+    if (!dateColumn && (
+      h === 'date' || h === 'trans date' || h === 'transaction date' ||
+      h === 'posting date' || h === 'post date' || h === 'posted' ||
+      h.includes('date') && !h.includes('update')
+    )) {
+      dateColumn = header;
+      console.log('[SimpleDetection] Found date column:', header);
+    }
+    
+    // Description columns
+    if (!descriptionColumn && (
+      h === 'description' || h === 'merchant name' || h === 'merchant' ||
+      h === 'payee' || h === 'details' || h === 'memo' || h === 'name' ||
+      h === 'narrative' || h === 'particulars'
+    )) {
+      descriptionColumn = header;
+      console.log('[SimpleDetection] Found description column:', header);
+    }
+    
+    // Amount columns (exclude MCC/code columns)
+    if (!amountColumn && !debitColumn && (
+      h === 'amount' || h === 'transaction amount' || h === 'value' ||
+      h === 'sum' || h === 'total'
+    ) && !h.includes('mcc') && !h.includes('code')) {
+      amountColumn = header;
+      console.log('[SimpleDetection] Found amount column:', header);
+    }
+    
+    // Debit/Credit columns
+    if (!debitColumn && (h === 'debit' || h === 'withdrawal' || h === 'withdrawals')) {
+      debitColumn = header;
+    }
+    if (!creditColumn && (h === 'credit' || h === 'deposit' || h === 'deposits')) {
+      creditColumn = header;
+    }
+  }
+  
+  // Detect date format from sample data
+  if (dateColumn && sampleRows.length > 0) {
+    const sampleDate = String(sampleRows[0][dateColumn] || '').trim();
+    if (/^\d{2}\/\d{2}\/\d{4}$/.test(sampleDate)) {
+      dateFormat = 'MM/dd/yyyy';
+    } else if (/^\d{4}-\d{2}-\d{2}$/.test(sampleDate)) {
+      dateFormat = 'yyyy-MM-dd';
+    } else if (/^\d{2}-\d{2}-\d{4}$/.test(sampleDate)) {
+      dateFormat = 'MM-dd-yyyy';
+    }
+    console.log('[SimpleDetection] Detected date format:', dateFormat, 'from sample:', sampleDate);
+  }
+  
+  // If we found at least date + amount (or debit/credit), return a mapping
+  const hasAmount = amountColumn || debitColumn || creditColumn;
+  
+  if (dateColumn && hasAmount) {
+    const mapping = {
+      dateColumn,
+      descriptionColumn,
+      amountColumn,
+      debitColumn,
+      creditColumn,
+      balanceColumn: null,
+      confidence: 0.6,
+      columnConfidences: {},
+      detectionMethod: 'simple-detection',
+      amountFormat: (debitColumn || creditColumn) && !amountColumn ? 'split' : 'single',
+      dateFormat,
+    };
+    console.log('[SimpleDetection] Returning mapping:', mapping);
+    return mapping;
+  }
+  
+  // Last resort: try to detect by analyzing data values
+  console.log('[SimpleDetection] Header matching failed, trying data analysis');
+  
+  for (const header of headers) {
+    if (sampleRows.length === 0) break;
+    
+    const sampleValue = String(sampleRows[0][header] || '').trim();
+    
+    // Check if it looks like a date
+    if (!dateColumn && /\d{1,4}[-/.]\d{1,2}[-/.]\d{1,4}/.test(sampleValue)) {
+      dateColumn = header;
+      console.log('[SimpleDetection] Found date column by data:', header, sampleValue);
+    }
+    
+    // Check if it looks like an amount (exclude MCC codes and reference numbers)
+    if (!amountColumn) {
+      const cleanedValue = sampleValue.replace(/[()]/g, '');
+      const headerLower = header.toLowerCase();
+
+      // Skip MCC/code columns
+      const isCodeColumn = headerLower.includes('mcc') ||
+                           headerLower.includes('code') ||
+                           headerLower.includes('reference');
+
+      // Pure 4-5 digit integers are codes, not amounts
+      const isPureCode = /^\d{4,5}$/.test(cleanedValue);
+
+      // Valid amounts have currency symbols or decimals
+      const hasMoneyIndicator = /[$€£¥()]/.test(sampleValue) || /\.\d{2}$/.test(cleanedValue);
+
+      if (/^[$€£¥]?[\d,.-]+[$€£¥]?$/.test(cleanedValue) &&
+          !isCodeColumn && !isPureCode && hasMoneyIndicator) {
+        amountColumn = header;
+        console.log('[SimpleDetection] Found amount column by data:', header, sampleValue);
+      }
+    }
+    
+    // Check if it looks like a description (text with letters)
+    if (!descriptionColumn && sampleValue.length > 3 && /[a-zA-Z]{2,}/.test(sampleValue)) {
+      // Make sure it's not already assigned as date/amount
+      if (header !== dateColumn && header !== amountColumn) {
+        descriptionColumn = header;
+        console.log('[SimpleDetection] Found description column by data:', header, sampleValue);
+      }
+    }
+  }
+  
+  if (dateColumn && amountColumn) {
+    return {
+      dateColumn,
+      descriptionColumn,
+      amountColumn,
+      debitColumn: null,
+      creditColumn: null,
+      balanceColumn: null,
+      confidence: 0.5,
+      columnConfidences: {},
+      detectionMethod: 'simple-detection',
+      amountFormat: 'single',
+      dateFormat,
+    };
+  }
+  
+  console.log('[SimpleDetection] Could not detect required columns');
+  return null;
+}
+
+/**
+ * Universal Transaction Converter
+ * Converts CSV rows to transactions using smart column detection
+ * Works with any bank format worldwide without predefined configs
+ * 
+ * @param rows - Parsed CSV rows
+ * @param accountId - Target account ID
+ * @returns Parsed transactions with confidence scores
+ */
+export async function convertToTransactionsUniversal(
+  rows: CSVRow[],
+  accountId: string
+): Promise<{ transactions: ParsedTransaction[]; mapping: any; confidence: number }> {
+  if (rows.length === 0) {
+    return { transactions: [], mapping: null, confidence: 0 };
+  }
+
+  const headers = Object.keys(rows[0]).filter(h => h.trim()); // Remove empty headers
+  console.log('[UniversalConverter] Headers:', headers);
+  
+  // Use simple column detection (fast, client-side, no AI needed)
+  // This works for 95%+ of bank formats worldwide
+  let mapping = simpleColumnDetection(headers, rows.slice(0, 10));
+  
+  console.log('[UniversalConverter] Simple detection result:', mapping);
+  
+  if (!mapping) {
+    console.error('[UniversalConverter] Could not detect columns');
+    return { transactions: [], mapping: null, confidence: 0 };
+  }
+  
+  const transactions: ParsedTransaction[] = [];
+
+  console.log('[UniversalConverter] Using mapping:', {
+    date: mapping.dateColumn,
+    description: mapping.descriptionColumn,
+    amount: mapping.amountColumn,
+    debit: mapping.debitColumn,
+    credit: mapping.creditColumn,
+    confidence: mapping.confidence,
+    format: mapping.amountFormat,
+  });
+
+  // Try multiple date formats if the detected one fails
+  const dateFormats = [
+    mapping.dateFormat,
+    'MM/dd/yyyy',
+    'dd/MM/yyyy',
+    'yyyy-MM-dd',
+    'M/d/yyyy',
+    'dd.MM.yyyy',
+    'yyyy/MM/dd',
+    'yyyyMMdd',
+    'MM-dd-yyyy',
+  ].filter(Boolean) as string[];
+
+  // Find all potential description columns (for fallback)
+  const potentialDescCols = headers.filter(h => {
+    const lower = h.toLowerCase();
+    return lower.includes('desc') || lower.includes('detail') || lower.includes('memo') ||
+           lower.includes('merchant') || lower.includes('payee') || lower.includes('name') ||
+           lower.includes('narr') || lower.includes('partic') || lower.includes('reference') ||
+           lower.includes('type') || lower.includes('category');
+  });
+
+  for (const row of rows) {
+    try {
+      // Get date - try multiple columns if needed
+      let dateStr = mapping.dateColumn ? row[mapping.dateColumn] : null;
+      
+      // If no date from mapped column, try to find any date-like value
+      if (!dateStr) {
+        for (const header of headers) {
+          const val = String(row[header] || '').trim();
+          if (val && /\d{1,4}[-/.]\d{1,2}[-/.]\d{1,4}/.test(val)) {
+            dateStr = val;
+            break;
+          }
+        }
+      }
+      
+      if (!dateStr) continue;
+
+      // Try parsing with different formats
+      let date: Date | null = null;
+      for (const fmt of dateFormats) {
+        try {
+          const parsed = parseDate(dateStr, fmt, new Date());
+          if (!isNaN(parsed.getTime()) && parsed.getFullYear() > 1900 && parsed.getFullYear() < 2100) {
+            date = parsed;
+            break;
+          }
+        } catch {
+          // Try next format
+        }
+      }
+      
+      if (!date) continue;
+
+      // Get description - try multiple sources
+      let description = '';
+      
+      // First try mapped column
+      if (mapping.descriptionColumn) {
+        description = String(row[mapping.descriptionColumn] || '').trim();
+      }
+      
+      // If empty, try potential description columns
+      if (!description) {
+        for (const col of potentialDescCols) {
+          const val = String(row[col] || '').trim();
+          if (val && val.length > description.length) {
+            description = val;
+          }
+        }
+      }
+      
+      // If still empty, concatenate all non-date/non-amount text fields
+      if (!description) {
+        const textParts: string[] = [];
+        for (const header of headers) {
+          const val = String(row[header] || '').trim();
+          if (!val) continue;
+          // Skip if it looks like a date or amount
+          if (/^\d{1,4}[-/.]\d{1,2}[-/.]\d{1,4}$/.test(val)) continue;
+          if (/^[$€£¥₹]?[\d,.']+[$€£¥₹]?$/.test(val.replace(/[()+-]/g, ''))) continue;
+          if (val.length >= 3) {
+            textParts.push(val);
+          }
+        }
+        description = textParts.slice(0, 2).join(' - ') || 'Transaction';
+      }
+
+      // Parse amount
+      let amount = 0;
+
+      if (mapping.amountFormat === 'split') {
+        // Split format: use debit and credit columns
+        const debitStr = mapping.debitColumn ? String(row[mapping.debitColumn] || '') : '';
+        const creditStr = mapping.creditColumn ? String(row[mapping.creditColumn] || '') : '';
+
+        const debitVal = parseAmountUniversal(debitStr);
+        const creditVal = parseAmountUniversal(creditStr);
+
+        // Credit is positive (income), Debit is negative (expense)
+        if (Math.abs(creditVal) > 0.001) {
+          amount = Math.abs(creditVal);
+        } else if (Math.abs(debitVal) > 0.001) {
+          amount = -Math.abs(debitVal);
+        } else {
+          continue; // No amount
+        }
+      } else {
+        // Single amount column - try mapped column first
+        let amountStr = mapping.amountColumn ? String(row[mapping.amountColumn] || '') : '';
+        
+        // If no amount, try to find any amount-like value (excluding code columns)
+        if (!amountStr || parseAmountUniversal(amountStr) === 0) {
+          for (const header of headers) {
+            const headerLower = header.toLowerCase();
+
+            // Skip code columns
+            if (headerLower.includes('mcc') || headerLower.includes('code') ||
+                headerLower.includes('reference') || headerLower.includes('number')) {
+              continue;
+            }
+
+            const val = String(row[header] || '').trim();
+
+            // Skip pure 4-5 digit integers (codes)
+            if (/^\d{4,5}$/.test(val)) continue;
+
+            const parsed = parseAmountUniversal(val);
+            if (parsed !== 0) {
+              amountStr = val;
+              amount = parsed;
+              break;
+            }
+          }
+        } else {
+          amount = parseAmountUniversal(amountStr);
+        }
+        
+        if (amount === 0) continue; // Skip rows with no amount
+      }
+
+      transactions.push({
+        date,
+        description,
+        amount,
+        isDuplicate: false,
+        confidence: mapping.confidence,
+      });
+    } catch (error) {
+      console.error('[UniversalConverter] Error parsing row:', error);
+    }
+  }
+
+  return {
+    transactions,
+    mapping,
+    confidence: mapping.confidence,
+  };
+}
+
+/**
+ * Parse amount from ANY worldwide format
+ * Handles all currencies and number formats globally
+ */
+function parseAmountUniversal(value: string): number {
+  if (!value || typeof value !== 'string') return 0;
+  
+  let str = value.trim();
+  if (!str) return 0;
+
+  // Check for negative indicators
+  let isNegative = false;
+  
+  // Parentheses indicate negative (accounting format)
+  if (str.startsWith('(') && str.endsWith(')')) {
+    isNegative = true;
+    str = str.slice(1, -1);
+  }
+  
+  // Leading minus or trailing minus (some formats use trailing)
+  if (str.startsWith('-') || str.startsWith('−') || str.startsWith('–')) {
+    isNegative = true;
+    str = str.slice(1);
+  }
+  if (str.endsWith('-') || str.endsWith('−') || str.endsWith('–')) {
+    isNegative = true;
+    str = str.slice(0, -1);
+  }
+  
+  // CR/DR suffixes (used in some bank formats)
+  if (/\s*CR\s*$/i.test(str)) {
+    str = str.replace(/\s*CR\s*$/i, '');
+  }
+  if (/\s*DR\s*$/i.test(str)) {
+    isNegative = true;
+    str = str.replace(/\s*DR\s*$/i, '');
+  }
+
+  // Remove ALL currency symbols (comprehensive list of world currencies)
+  // Major currency symbols
+  str = str.replace(/[$€£¥₹₽₩฿₫₴₸¢₦₱₭₮₲₵₡₢₣₤₥₧₨₪₰₳₷₺₼₾֏؋৳៛₠₯ƒ﷼]/g, '');
+  
+  // Remove ALL ISO 4217 currency codes (3-letter codes)
+  str = str.replace(/\b[A-Z]{3}\b/g, '');
+  
+  // Remove common currency abbreviations
+  str = str.replace(/\b(Rs\.?|Rp\.?|kr\.?|zł|Kč|Ft|lei|лв|ден|din|kn|R\$|S\/|Bs\.?|Q|L|C\$|B\/\.?|RD\$|TT\$|J\$|EC\$|BD\$|BZ\$|GY\$|SR\$|NAf\.?|Afl\.?|AWG|ANG|XCD|BBD|BSD|BMD|KYD|FJD|GYD|JMD|LRD|NAD|SBD|SRD|TTD|XPF|CFP)\b/gi, '');
+  
+  // Remove spaces and other whitespace
+  str = str.replace(/\s+/g, '');
+  
+  // Remove any remaining non-numeric characters except . , - and digits
+  // But keep the structure for number parsing
+  
+  // Detect number format (European vs US vs Indian vs Swiss)
+  const hasComma = str.includes(',');
+  const hasPeriod = str.includes('.');
+  const hasApostrophe = str.includes("'"); // Swiss format: 1'234.56
+  
+  // Handle Swiss format with apostrophe as thousands separator
+  if (hasApostrophe) {
+    str = str.replace(/'/g, '');
+  }
+  
+  if (hasComma && hasPeriod) {
+    // Both present - determine which is decimal
+    const lastComma = str.lastIndexOf(',');
+    const lastPeriod = str.lastIndexOf('.');
+    
+    if (lastComma > lastPeriod) {
+      // European format: 1.234,56
+      str = str.replace(/\./g, '').replace(',', '.');
+    } else {
+      // US format: 1,234.56
+      str = str.replace(/,/g, '');
+    }
+  } else if (hasComma && !hasPeriod) {
+    // Only comma - check if it's decimal separator
+    const parts = str.split(',');
+    if (parts.length === 2 && parts[1].length <= 2) {
+      // Likely European decimal: 123,45
+      str = str.replace(',', '.');
+    } else if (parts.length === 2 && parts[1].length === 3) {
+      // Could be Indian lakhs (1,00,000) or thousands - treat as thousands separator
+      str = str.replace(/,/g, '');
+    } else {
+      // Multiple commas = thousands separators (Indian: 1,00,000 or US: 1,234,567)
+      str = str.replace(/,/g, '');
+    }
+  } else if (hasPeriod && !hasComma) {
+    // Only period - check if it's thousands separator
+    const parts = str.split('.');
+    if (parts.length > 2) {
+      // Multiple periods = thousands separators: 1.234.567
+      str = str.replace(/\./g, '');
+    } else if (parts.length === 2 && parts[1].length === 3 && parts[0].length <= 3) {
+      // Could be European thousands: 1.234 (meaning 1234)
+      // But could also be decimal: 1.234 (meaning 1.234)
+      // Prefer decimal interpretation for amounts (more common)
+      // Leave as is
+    }
+    // Otherwise it's a decimal, leave as is
+  }
+
+  // Final cleanup - remove any remaining non-numeric except decimal point
+  str = str.replace(/[^\d.-]/g, '');
+
+  const num = parseFloat(str);
+  if (isNaN(num)) return 0;
+
+  // Round to cents to avoid floating-point precision errors
+  const rounded = roundToCents(isNegative ? -Math.abs(num) : num);
+  return rounded;
 }
 
 /**

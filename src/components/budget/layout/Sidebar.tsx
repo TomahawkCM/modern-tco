@@ -5,11 +5,13 @@ import { useSeniorsMode } from "@/hooks/useSeniorsMode";
 import { AnimatePresence, motion } from "framer-motion";
 import {
   BarChart3,
+  Calculator,
   Camera,
   ChevronLeft,
   ChevronRight,
   CreditCard,
   Home,
+  Landmark,
   MoreHorizontal,
   PieChart,
   Receipt,
@@ -39,12 +41,14 @@ interface NavItem {
 const navigation: NavItem[] = [
   { name: "dashboard", href: "/budget-app", icon: Home, essential: true },
   { name: "transactions", href: "/budget-app/transactions", icon: Receipt, essential: true },
+  { name: "accounts", href: "/budget-app/accounts", icon: Landmark, essential: true },
   { name: "scanReceipt", href: "/budget-app/ocr", icon: Camera },
   { name: "categories", href: "/budget-app/categories", icon: Tags, essential: true },
   { name: "budgets", href: "/budget-app/budgets", icon: PieChart, essential: true },
   { name: "subscriptions", href: "/budget-app/subscriptions", icon: Repeat },
   { name: "loans", href: "/budget-app/loans", icon: CreditCard },
   { name: "investments", href: "/budget-app/investments", icon: Wallet },
+  { name: "calculators", href: "/budget-app/calculators", icon: Calculator },
   { name: "futurePlans", href: "/budget-app/planning/future", icon: Target },
   { name: "retirement", href: "/budget-app/planning/retirement", icon: TrendingUp },
   { name: "reports", href: "/budget-app/reports", icon: BarChart3, essential: true },
@@ -142,12 +146,13 @@ export function Sidebar({ onSearch, onShowShortcuts, className, isMobile, onClos
       </div>
 
       {/* Navigation - Uses simplified nav in Seniors Mode */}
-      <nav aria-label="Primary navigation" className="custom-scrollbar flex-1 space-y-1 overflow-y-auto px-3 py-2">
+      <nav id="sidebar-nav" aria-label="Primary navigation" className="custom-scrollbar flex-1 space-y-1 overflow-y-auto px-3 py-2">
         {activeNavigation.map((item) => {
           const isActive = pathname === item.href;
           return (
             <Link
               key={item.name}
+              id={`sidebar-${item.name}`}
               href={item.href}
               onClick={isMobile ? onClose : undefined}
               className={cn(
@@ -223,6 +228,7 @@ export function Sidebar({ onSearch, onShowShortcuts, className, isMobile, onClos
             {!isCollapsed && <span>{t('actions.importCsv')}</span>}
           </Link>
           <Link
+            id="sidebar-settings"
             href="/budget-app/settings"
             className={cn(
               "flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-slate-400 transition-colors hover:bg-white/5 hover:text-white",

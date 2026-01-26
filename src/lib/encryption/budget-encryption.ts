@@ -1,15 +1,102 @@
 /**
  * Budget App Encryption Layer
  * Client-side encryption for sensitive transaction data using Web Crypto API
- * 
+ *
  * Uses AES-GCM encryption for authenticated encryption
- * Generates user-specific encryption keys
- * 
+ * Generates device-derived encryption keys (no password required)
+ *
  * Privacy: All encryption/decryption happens client-side, keys never leave the device
+ *
+ * Offline Mode: Uses device fingerprint for automatic key derivation
  */
 
 const ENCRYPTION_KEY_STORAGE = 'budget-app-encryption-key';
 const KEY_DERIVATION_SALT_STORAGE = 'budget-app-key-salt';
+const DEVICE_FINGERPRINT_STORAGE = 'budget-app-device-fp';
+
+/**
+ * Generate a device fingerprint for automatic key derivation
+ * This creates a unique identifier based on browser/device properties
+ * Note: This is not a tracking fingerprint - it's only used locally for encryption
+ */
+async function generateDeviceFingerprint(): Promise<string> {
+  const components: string[] = [];
+
+  // Browser properties
+  if (typeof navigator !== 'undefined') {
+    components.push(navigator.userAgent);
+    components.push(navigator.language);
+    components.push(navigator.platform || 'unknown');
+    components.push(navigator.hardwareConcurrency?.toString() || '0');
+    components.push((navigator as any).deviceMemory?.toString() || '0');
+  }
+
+  // Screen properties
+  if (typeof screen !== 'undefined') {
+    components.push(`${screen.width}x${screen.height}`);
+    components.push(screen.colorDepth?.toString() || '24');
+    components.push(`${screen.availWidth}x${screen.availHeight}`);
+  }
+
+  // Timezone
+  try {
+    components.push(Intl.DateTimeFormat().resolvedOptions().timeZone);
+  } catch {
+    components.push('UTC');
+  }
+
+  // Canvas fingerprint (minimal, privacy-friendly)
+  try {
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    if (ctx) {
+      ctx.textBaseline = 'top';
+      ctx.font = '14px Arial';
+      ctx.fillText('BudgetApp', 2, 2);
+      components.push(canvas.toDataURL().slice(-50));
+    }
+  } catch {
+    components.push('no-canvas');
+  }
+
+  // Combine and hash
+  const combined = components.join('|');
+  const encoder = new TextEncoder();
+  const data = encoder.encode(combined);
+  const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+/**
+ * Get or create a stable device fingerprint
+ * Stored in localStorage for consistency across sessions
+ */
+async function getDeviceFingerprint(): Promise<string> {
+  try {
+    // Check for stored fingerprint first (for consistency)
+    const stored = localStorage.getItem(DEVICE_FINGERPRINT_STORAGE);
+    if (stored) {
+      return stored;
+    }
+
+    // Generate new fingerprint
+    const fingerprint = await generateDeviceFingerprint();
+    localStorage.setItem(DEVICE_FINGERPRINT_STORAGE, fingerprint);
+    return fingerprint;
+  } catch (error) {
+    console.warn('[Encryption] Failed to generate device fingerprint, using fallback');
+    // Fallback to a random but stable identifier
+    const fallback = crypto.getRandomValues(new Uint8Array(32));
+    const fallbackStr = Array.from(fallback).map(b => b.toString(16).padStart(2, '0')).join('');
+    try {
+      localStorage.setItem(DEVICE_FINGERPRINT_STORAGE, fallbackStr);
+    } catch {
+      // Storage may be unavailable
+    }
+    return fallbackStr;
+  }
+}
 
 export interface EncryptionResult {
   encrypted: string; // Base64-encoded encrypted data
@@ -22,20 +109,27 @@ export interface EncryptionKey {
 }
 
 /**
- * Generate a user-specific encryption key
- * Uses PBKDF2 for key derivation (can be upgraded to Argon2 in future)
+ * Generate a device-derived encryption key
+ * Uses PBKDF2 with device fingerprint for automatic key derivation
+ * No password required - encryption is transparent to the user
  */
 export async function generateEncryptionKey(
   password?: string
 ): Promise<EncryptionKey> {
   // Generate a random salt
   const salt = crypto.getRandomValues(new Uint8Array(16));
-  
-  // Use a default password if none provided (device-specific)
-  // In production, you might want to prompt user for a password
-  const keyMaterial = password || 'budget-app-default-key-material';
-  
-  // Import password as key material
+
+  // Use device fingerprint for automatic key derivation (offline mode)
+  // Falls back to password if provided (for future use cases)
+  let keyMaterial: string;
+  if (password) {
+    keyMaterial = password;
+  } else {
+    // Device-derived key - no password needed
+    keyMaterial = await getDeviceFingerprint();
+  }
+
+  // Import fingerprint/password as key material
   const keyMaterialBuffer = new TextEncoder().encode(keyMaterial);
   const importedKey = await crypto.subtle.importKey(
     'raw',
@@ -44,7 +138,7 @@ export async function generateEncryptionKey(
     false,
     ['deriveBits', 'deriveKey']
   );
-  
+
   // Derive key using PBKDF2
   const key = await crypto.subtle.deriveKey(
     {
@@ -61,13 +155,14 @@ export async function generateEncryptionKey(
     false, // Not extractable
     ['encrypt', 'decrypt']
   );
-  
+
   return { key, salt };
 }
 
 /**
  * Get or create encryption key
- * Stores key material in IndexedDB (encrypted) or generates new one
+ * Uses device fingerprint for automatic key derivation
+ * Stores salt in localStorage (safe to store, key is derived from fingerprint + salt)
  */
 export async function getOrCreateEncryptionKey(
   password?: string
@@ -75,13 +170,15 @@ export async function getOrCreateEncryptionKey(
   try {
     // Try to load existing key from storage
     const storedSalt = localStorage.getItem(KEY_DERIVATION_SALT_STORAGE);
-    
+
     if (storedSalt && !password) {
-      // Use stored salt to recreate key (requires same password)
+      // Use stored salt + device fingerprint to recreate key
       const saltArray = Uint8Array.from(atob(storedSalt), c => c.charCodeAt(0));
-      const keyMaterial = 'budget-app-default-key-material'; // Default
-      const keyMaterialBuffer = new TextEncoder().encode(keyMaterial);
-      
+
+      // Get device fingerprint for key derivation
+      const fingerprint = await getDeviceFingerprint();
+      const keyMaterialBuffer = new TextEncoder().encode(fingerprint);
+
       const importedKey = await crypto.subtle.importKey(
         'raw',
         keyMaterialBuffer,
@@ -89,7 +186,7 @@ export async function getOrCreateEncryptionKey(
         false,
         ['deriveBits', 'deriveKey']
       );
-      
+
       const key = await crypto.subtle.deriveKey(
         {
           name: 'PBKDF2',
@@ -105,16 +202,16 @@ export async function getOrCreateEncryptionKey(
         false,
         ['encrypt', 'decrypt']
       );
-      
+
       return key;
     } else {
-      // Generate new key
+      // Generate new key (uses device fingerprint automatically)
       const { key, salt } = await generateEncryptionKey(password);
-      
+
       // Store salt (safe to store, not the actual key)
       const saltBase64 = btoa(String.fromCharCode(...salt));
       localStorage.setItem(KEY_DERIVATION_SALT_STORAGE, saltBase64);
-      
+
       return key;
     }
   } catch (error) {

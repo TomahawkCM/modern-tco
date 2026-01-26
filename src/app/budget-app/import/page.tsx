@@ -37,7 +37,7 @@ import { categorizeTransaction } from '@/lib/categorization/rules';
 // Natural Language Import DEPRECATED (2025-11-24)
 // Disabled due to connection errors and low value - client-side AI calls are insecure
 // import { parseImportIntent, autoConfigureImport, isNaturalLanguageImportEnabled } from '@/lib/ai/natural-language-import';
-import type { ParsedTransaction, Transaction, ImportMetadata } from '@/types/budget';
+import type { ParsedTransaction, Transaction, ImportMetadata, Account } from '@/types/budget';
 import { format } from 'date-fns';
 import { HelpTooltip } from '@/components/budget/HelpTooltip';
 import ColumnMapperModal, { type ManualColumnMapping } from '@/components/budget/ColumnMapperModal';
@@ -55,6 +55,14 @@ import type { EnrichedTransaction, EnrichmentResult } from '@/lib/ai/smart-trans
 import { enrichTransactions } from '@/lib/ai/smart-transaction-enrichment';
 import { detectDuplicatesEnhanced } from '@/lib/ai/smart-duplicate-detection';
 import { learnFromImport } from '@/lib/collective-learning-service';
+import {
+  findMatchingAccount,
+  learnAccountAssociation,
+  autoCreateAccount,
+  detectAccountTypeFromBank,
+  migrateDefaultTransactions
+} from '@/lib/smart-account-matcher';
+import BalanceReconciliationModal, { clearPendingReconciliation } from '@/components/budget/BalanceReconciliationModal';
 
 export default function ImportPage() {
   const router = useRouter();
@@ -66,7 +74,11 @@ export default function ImportPage() {
   const [parsedTransactions, setParsedTransactions] = useState<ParsedTransaction[]>([]);
   const [summary, setSummary] = useState<ImportSummary | null>(null);
   const [selectedBank, setSelectedBank] = useState<string>('auto');
-  const [accountId, setAccountId] = useState('default-account');
+  const [accounts, setAccounts] = useState<Account[]>([]);
+  const [accountId, setAccountId] = useState<string>('');
+  const [matchedAccountName, setMatchedAccountName] = useState<string>('');
+  const [accountMatchConfidence, setAccountMatchConfidence] = useState<number>(0);
+  const [showAccountSelector, setShowAccountSelector] = useState(false);
   const [step, setStep] = useState<'upload' | 'preview' | 'complete'>('upload');
   const [error, setError] = useState<string | null>(null);
   const [expandedReviewIndex, setExpandedReviewIndex] = useState<number | null>(null);
@@ -114,17 +126,53 @@ export default function ImportPage() {
   const [enrichmentProgress, setEnrichmentProgress] = useState<string>('');
   const [enrichmentResult, setEnrichmentResult] = useState<EnrichmentResult | null>(null);
 
-  console.log('[ImportPage] Component mounted');
+  // Balance reconciliation state
+  const [showBalanceReconciliation, setShowBalanceReconciliation] = useState(false);
+  const [importedNetChange, setImportedNetChange] = useState<number>(0);
+  const [importedAccountId, setImportedAccountId] = useState<string>('');
+  const [importedAccountName, setImportedAccountName] = useState<string>('');
+  const [importedAccountType, setImportedAccountType] = useState<'checking' | 'savings' | 'credit'>('checking');
+  const [importedTransactionCount, setImportedTransactionCount] = useState<number>(0);
+  const [importedDateRange, setImportedDateRange] = useState<{ start: Date; end: Date } | null>(null);
+  const [readyForReconciliation, setReadyForReconciliation] = useState(false);
+
+  // Effect to show balance reconciliation modal when import completes
+  // Using useEffect is more reliable than setting state in async functions
+  useEffect(() => {
+    if (readyForReconciliation && step === 'complete' && importedAccountId && !showBalanceReconciliation) {
+      // Small delay to ensure the complete step UI renders first
+      const timer = setTimeout(() => {
+        setShowBalanceReconciliation(true);
+        setReadyForReconciliation(false);
+      }, 500);
+      return () => clearTimeout(timer);
+    }
+  }, [readyForReconciliation, step, importedAccountId, showBalanceReconciliation]);
 
   // Natural Language Import DISABLED (2025-11-24)
   // useEffect(() => {
   //   setIsNLEnabled(isNaturalLanguageImportEnabled());
   // }, []);
 
-  // Load import history on mount
+  // Load accounts and import history on mount
   useEffect(() => {
+    loadAccounts();
     loadImportHistoryData();
   }, []);
+  
+  async function loadAccounts() {
+    try {
+      const accts = await db.accounts.toArray();
+      setAccounts(accts);
+      console.log('[ImportPage] Loaded accounts:', accts.length);
+      // Auto-select if only one account exists
+      if (accts.length === 1) {
+        setAccountId(accts[0].id);
+      }
+    } catch (error) {
+      console.error('[ImportPage] Error loading accounts:', error);
+    }
+  }
 
   async function loadImportHistoryData() {
     try {
@@ -271,6 +319,13 @@ export default function ImportPage() {
     setError(null);
     setProcessingStage('Validating file format...');
 
+    // Variable to track detected bank info for smart account matching
+    let detectedBankSlug: string | null = null;
+    let detectedBankName: string | null = null;
+    let detectedAccountNumber: string | null = null;
+    let detectedAccountType: 'checking' | 'savings' | 'credit' | null = null;
+    let detectedBankId: string | null = null; // OFX BANKID (routing number)
+
     try {
       // Check if format is supported
       if (!isFormatSupported(formatDetection.format)) {
@@ -286,6 +341,7 @@ export default function ImportPage() {
       console.log('[ImportPage] File content length:', text.length);
 
       let transactions: ParsedTransaction[] = [];
+      let resolvedAccountId = accountId; // May be set by smart matching
 
       // ========================================
       // OFX/QFX Processing
@@ -302,9 +358,31 @@ export default function ImportPage() {
           return;
         }
 
-        // Parse OFX file
-        const ofxResult = await parseOFXFile(text, accountId);
+        // Parse OFX with temporary account ID - will be updated after matching
+        const ofxResult = await parseOFXFile(text, 'pending-match');
         transactions = ofxResult.transactions;
+
+        // Extract info for smart account matching
+        detectedAccountNumber = ofxResult.accountInfo.ACCTID;
+        detectedBankId = ofxResult.accountInfo.BANKID || null; // OFX BANKID (routing number)
+        // OFX files don't typically include bank name, so we'll use 'Unknown Bank' as default
+        // The bank name can be inferred later from BANKID or file name
+        detectedBankName = 'Unknown Bank';
+
+        console.log('[ImportPage] OFX account info extracted:', {
+          accountNumber: detectedAccountNumber ? `***${detectedAccountNumber.slice(-4)}` : null,
+          bankId: detectedBankId,
+          institution: detectedBankName,
+        });
+        // OFX account type mapping
+        const ofxAcctType = ofxResult.accountInfo.ACCTTYPE?.toLowerCase();
+        if (ofxAcctType?.includes('credit')) {
+          detectedAccountType = 'credit';
+        } else if (ofxAcctType?.includes('savings')) {
+          detectedAccountType = 'savings';
+        } else {
+          detectedAccountType = 'checking';
+        }
 
         console.log('[ImportPage] OFX parsing complete');
         console.log('[ImportPage] Account:', ofxResult.accountInfo.ACCTID);
@@ -329,53 +407,157 @@ export default function ImportPage() {
           console.log('[ImportPage] Detected bank:', detected);
 
           if (!detected) {
-            // Bank detection failed - trigger AI Column Mapping Wizard
-            console.log('[ImportPage] Bank detection failed, triggering AI Column Mapping Wizard...');
-            setProcessingStage('⚠️ Unknown bank format - launching AI Column Mapper...');
+            // Bank detection failed - try universal smart import first
+            console.log('[ImportPage] Bank detection failed, trying universal smart import...');
+            setProcessingStage('🔍 Analyzing CSV structure...');
+            detectedBankSlug = 'unknown';
+            detectedBankName = 'Unknown Bank';
 
-            // Parse CSV to get headers and sample rows
-            const rows = parseCSVContent(text, 0);
-            if (rows.length > 0) {
-              const headers = Object.keys(rows[0]);
-              const sampleRows = rows.slice(0, 10); // First 10 rows for AI analysis
+            // Try different skipRows levels to find valid data
+            let bestSkipRows = 0;
+            let bestRows: any[] = [];
+            let bestHeaders: string[] = [];
+            
+            for (let skipRows = 0; skipRows <= 5; skipRows++) {
+              const rows = parseCSVContent(text, skipRows);
+              if (rows.length > 0) {
+                const headers = Object.keys(rows[0]);
+                // Check if headers look valid (contain common banking terms)
+                const headerStr = headers.join(',').toLowerCase();
+                const hasDateCol = headerStr.includes('date');
+                const hasAmountCol = headerStr.includes('amount') || headerStr.includes('debit') || 
+                                     headerStr.includes('credit') || headerStr.includes('withdrawal');
+                const hasDescCol = headerStr.includes('description') || headerStr.includes('desc') || 
+                                   headerStr.includes('details') || headerStr.includes('memo') ||
+                                   headerStr.includes('payee') || headerStr.includes('name') ||
+                                   headerStr.includes('merchant');
+                
+                if (hasDateCol && (hasAmountCol || hasDescCol)) {
+                  bestSkipRows = skipRows;
+                  bestRows = rows;
+                  bestHeaders = headers;
+                  console.log(`[ImportPage] Found valid headers at skipRows=${skipRows}:`, headers);
+                  break;
+                }
+                // If no valid headers found yet, keep the first non-empty result as fallback
+                if (bestRows.length === 0) {
+                  bestSkipRows = skipRows;
+                  bestRows = rows;
+                  bestHeaders = headers;
+                }
+              }
+            }
+            
+            if (bestRows.length > 0) {
+              // Try universal smart import
+              try {
+                setProcessingStage('🤖 Smart-detecting columns...');
+                const { convertToTransactionsUniversal } = await import('@/lib/parsers/csv-parser');
+                const result = await convertToTransactionsUniversal(bestRows, accountId);
+                
+                console.log('[ImportPage] Universal import result:', {
+                  transactions: result.transactions.length,
+                  confidence: result.confidence,
+                  mapping: result.mapping,
+                });
 
-              // Store pending CSV data
-              setPendingCSVText(text);
-              setPendingCSVHeaders(headers);
-              setPendingCSVRows(sampleRows);
-
-              // Show AI Column Mapper Modal
-              setShowAIColumnMapper(true);
-              setIsProcessing(false);
-
-              // Don't continue processing - wait for user to map columns
-              return;
+                // If we found transactions, proceed automatically (user shouldn't need to verify)
+                // Even low confidence is better than asking users who don't know bank formats
+                if (result.transactions.length > 0) {
+                  setProcessingStage(`✓ Detected ${result.transactions.length} transactions`);
+                  transactions = result.transactions;
+                  console.log('[ImportPage] Universal import successful, proceeding with', transactions.length, 'transactions');
+                  // Continue to duplicate detection and preview
+                } else {
+                  // No transactions found - try harder with relaxed parsing
+                  throw new Error('No transactions could be parsed');
+                }
+              } catch (universalError) {
+                console.error('[ImportPage] Universal import failed:', universalError);
+                
+                // Fall back to AI Column Mapper
+                setProcessingStage('⚠️ Please map columns manually...');
+                
+                const sampleRows = bestRows.slice(0, 10);
+                setPendingCSVText(text);
+                setPendingCSVHeaders(bestHeaders);
+                setPendingCSVRows(sampleRows);
+                (window as any).__pendingCSVSkipRows = bestSkipRows;
+                
+                setShowAIColumnMapper(true);
+                setIsProcessing(false);
+                return;
+              }
             } else {
               const errorMsg = 'Could not parse CSV file. Please check the file format.';
               setError(errorMsg);
               return;
             }
+          } else {
+            bankKey = detected;
+            // Store detected bank info for smart account matching
+            detectedBankSlug = detected;
+            const bankConfig = BANK_CONFIGS[detected];
+            detectedBankName = bankConfig?.name || detected;
+            detectedAccountType = detectAccountTypeFromBank(detected);
           }
-          bankKey = detected;
         }
-        console.log('[ImportPage] Using bank config:', bankKey);
+        
+        // If universal import succeeded, skip bank config processing
+        if (transactions.length === 0 && bankKey) {
+          console.log('[ImportPage] Using bank config:', bankKey);
 
-        const bankConfig = BANK_CONFIGS[bankKey];
-        if (!bankConfig) {
-          setError('Invalid bank configuration. Please try selecting a different bank.');
+          const bankConfig = BANK_CONFIGS[bankKey];
+          if (!bankConfig) {
+            setError('Invalid bank configuration. Please try selecting a different bank.');
+            return;
+          }
+
+          // Parse CSV with the correct skipRows
+          const rows = parseCSVContent(text, bankConfig.skipRows || 0);
+          if (rows.length === 0) {
+            setError('No data found in CSV file. The file may be empty or incorrectly formatted.');
+            return;
+          }
+
+          // Convert to transactions
+          transactions = convertToTransactions(rows, bankConfig, accountId);
+          
+          console.log('[ImportPage] Converted transactions:', transactions.length);
+          
+          // If bank config conversion failed, try universal converter
+          if (transactions.length === 0) {
+            console.log('[ImportPage] Bank config conversion returned 0 transactions, trying universal converter...');
+            setProcessingStage('🔄 Trying alternative parsing method...');
+            
+            try {
+              const { convertToTransactionsUniversal } = await import('@/lib/parsers/csv-parser');
+              const universalResult = await convertToTransactionsUniversal(rows, accountId);
+              
+              if (universalResult.transactions.length > 0) {
+                transactions = universalResult.transactions;
+                console.log('[ImportPage] Universal converter found', transactions.length, 'transactions');
+              }
+            } catch (universalError) {
+              console.error('[ImportPage] Universal converter failed:', universalError);
+            }
+          }
+        }
+        
+        console.log('[ImportPage] CSV parsing complete, transactions:', transactions.length);
+        
+        // Check for 0 transactions
+        if (transactions.length === 0) {
+          setError(
+            'No transactions could be parsed from this file.\n\n' +
+            'Possible causes:\n' +
+            '• The file format may not be recognized\n' +
+            '• The date or amount columns may be empty\n' +
+            '• The file may contain only headers\n\n' +
+            'Try selecting a different bank format or contact support.'
+          );
           return;
         }
-
-        // Parse CSV with the correct skipRows
-        const rows = parseCSVContent(text, bankConfig.skipRows || 0);
-        if (rows.length === 0) {
-          setError('No data found in CSV file. The file may be empty or incorrectly formatted.');
-          return;
-        }
-
-        // Convert to transactions
-        transactions = convertToTransactions(rows, bankConfig, accountId);
-        console.log('[ImportPage] CSV parsing complete');
       }
 
       // ========================================
@@ -519,38 +701,14 @@ export default function ImportPage() {
       await detectDuplicatesEnhanced(transactions, existingTxs, useSmartDetection);
       console.log('[ImportPage] Duplicate detection complete');
 
-      // Transaction validation (check for anomalies, errors)
-      setProcessingStage('Validating transactions...');
-      const { isAIFeaturesEnabled } = await import('@/lib/budget-privacy-settings');
-      const useAIValidation = isAIFeaturesEnabled();
-      console.log('[ImportPage] AI validation:', useAIValidation ? 'enabled' : 'disabled');
-
-      const validation = await validateTransactions(transactions, useAIValidation);
-      console.log('[ImportPage] Validation complete:', validation.issues.length, 'issues found');
-
-      // If validation finds critical or warning issues, show modal
-      if (validation.hasIssues && (validation.criticalCount > 0 || validation.warningCount > 0)) {
-        console.log(
-          '[ImportPage] Validation issues found, showing warnings modal:',
-          validation.criticalCount,
-          'critical,',
-          validation.warningCount,
-          'warnings'
-        );
-
-        // Store transactions and validation result
-        setPendingValidatedTransactions(transactions);
-        setValidationResult(validation);
-        setShowValidationWarnings(true);
-        setIsProcessing(false);
-
-        // Don't continue processing - wait for user to review validation issues
-        return;
-      }
-
-      // Transaction enrichment (merchant normalization, enhanced categories, recurring detection)
+      // ========================================
+      // Transaction Enrichment (BEFORE validation)
+      // ========================================
+      // Enrichment must happen before validation so that when we store
+      // pendingValidatedTransactions, they already have all required fields
       setProcessingStage('Enriching transactions...');
       setIsEnriching(true);
+      const { isAIFeaturesEnabled } = await import('@/lib/budget-privacy-settings');
       const useAIEnrichment = isAIFeaturesEnabled();
       console.log('[ImportPage] AI enrichment:', useAIEnrichment ? 'enabled' : 'disabled');
 
@@ -603,9 +761,134 @@ export default function ImportPage() {
         return tx;
       });
 
-      console.log('[ImportPage] Setting parsed transactions:', enrichedParsed.length);
-      setParsedTransactions(enrichedParsed);
-      setSummary(generateImportSummary(enrichedParsed));
+      // ========================================
+      // Smart Account Matching (BEFORE validation)
+      // ========================================
+      setProcessingStage('Matching to account...');
+      console.log('[ImportPage] Smart account matching:', {
+        bankSlug: detectedBankSlug,
+        bankName: detectedBankName,
+        accountNumber: detectedAccountNumber ? `***${detectedAccountNumber.slice(-4)}` : null,
+        bankId: detectedBankId,
+        accountType: detectedAccountType,
+        fileName: file?.name,
+      });
+
+      const matchResult = await findMatchingAccount(
+        detectedBankSlug,
+        detectedBankName,
+        detectedAccountNumber,
+        file?.name || null,
+        detectedAccountType,
+        detectedBankId // Pass BANKID for composite key matching
+      );
+
+      console.log('[ImportPage] Account match result:', {
+        matched: matchResult.account?.name,
+        confidence: matchResult.confidence,
+        reason: matchResult.matchReason,
+      });
+
+      let finalAccountId: string;
+
+      if (matchResult.account && matchResult.confidence >= 0.5) {
+        // Good match - use it automatically
+        finalAccountId = matchResult.account.id;
+        setAccountId(finalAccountId);
+        setMatchedAccountName(matchResult.account.name);
+        setAccountMatchConfidence(matchResult.confidence);
+
+        // Only learn association when highly confident (0.85+) to prevent polluting future matches
+        // Low confidence matches might be wrong and could teach incorrect associations
+        if (matchResult.confidence >= 0.85) {
+          await learnAccountAssociation(finalAccountId, detectedBankSlug, detectedAccountNumber, detectedBankId);
+          console.log('[ImportPage] Learned association for high-confidence match');
+        }
+
+        console.log('[ImportPage] Auto-matched to account:', matchResult.account.name);
+      } else if (accounts.length === 0) {
+        // No accounts exist - auto-create one based on detected bank
+        console.log('[ImportPage] No accounts exist, auto-creating...');
+        const newAccount = await autoCreateAccount(
+          detectedBankSlug || 'unknown',
+          detectedBankName || 'Primary Account',
+          detectedAccountType || 'checking',
+          detectedAccountNumber,
+          detectedBankId // Pass BANKID for new account
+        );
+        finalAccountId = newAccount.id;
+        setAccountId(finalAccountId);
+        setMatchedAccountName(newAccount.name);
+        setAccountMatchConfidence(1);
+
+        // Reload accounts list
+        await loadAccounts();
+
+        console.log('[ImportPage] Auto-created account:', newAccount.name);
+      } else if (accounts.length === 1) {
+        // Only one account exists - use it
+        finalAccountId = accounts[0].id;
+        setAccountId(finalAccountId);
+        setMatchedAccountName(accounts[0].name);
+        setAccountMatchConfidence(0.9);
+
+        // Learn this association - safe since there's only one account
+        await learnAccountAssociation(finalAccountId, detectedBankSlug, detectedAccountNumber, detectedBankId);
+
+        console.log('[ImportPage] Using only account:', accounts[0].name);
+      } else {
+        // Multiple accounts but no confident match - show selector
+        console.log('[ImportPage] No confident match, showing account selector');
+        setShowAccountSelector(true);
+
+        // Store transactions temporarily and wait for user selection
+        // For now, use the first account as default but let user change
+        finalAccountId = matchResult.account?.id || accounts[0].id;
+        setAccountId(finalAccountId);
+        setMatchedAccountName(accounts.find(a => a.id === finalAccountId)?.name || '');
+        setAccountMatchConfidence(matchResult.confidence);
+      }
+
+      // Update all transactions with the matched account ID
+      const transactionsWithAccount = enrichedParsed.map(tx => ({
+        ...tx,
+        accountId: finalAccountId,
+      }));
+
+      // ========================================
+      // Transaction Validation (AFTER enrichment and account matching)
+      // ========================================
+      // Now transactions have accountId so validation proceed will work correctly
+      setProcessingStage('Validating transactions...');
+      const useAIValidation = isAIFeaturesEnabled();
+      console.log('[ImportPage] AI validation:', useAIValidation ? 'enabled' : 'disabled');
+
+      const validation = await validateTransactions(transactionsWithAccount, useAIValidation);
+      console.log('[ImportPage] Validation complete:', validation.issues.length, 'issues found');
+
+      // If validation finds critical or warning issues, show modal
+      if (validation.hasIssues && (validation.criticalCount > 0 || validation.warningCount > 0)) {
+        console.log(
+          '[ImportPage] Validation issues found, showing warnings modal:',
+          validation.criticalCount,
+          'critical,',
+          validation.warningCount,
+          'warnings'
+        );
+
+        // Store fully-processed transactions (with accountId) and validation result
+        setPendingValidatedTransactions(transactionsWithAccount);
+        setValidationResult(validation);
+        setShowValidationWarnings(true);
+        setIsProcessing(false);
+
+        // Don't continue processing - wait for user to review validation issues
+        return;
+      }
+
+      console.log('[ImportPage] Setting parsed transactions:', transactionsWithAccount.length);
+      setParsedTransactions(transactionsWithAccount);
+      setSummary(generateImportSummary(transactionsWithAccount));
       setStep('preview');
       console.log('[ImportPage] Processing complete, moving to preview step');
     } catch (error) {
@@ -646,8 +929,16 @@ export default function ImportPage() {
     setError(null);
 
     try {
+      // CRITICAL: Validate account is selected before importing
+      if (!accountId || accountId.trim() === '') {
+        console.error('[ImportPage] No account selected for import');
+        setError('Please select an account before importing transactions. Go to the Accounts page to create an account first.');
+        setIsProcessing(false);
+        return;
+      }
+
       const newTransactions = parsedTransactions.filter((tx) => !tx.isDuplicate);
-      console.log('[ImportPage] Importing', newTransactions.length, 'new transactions');
+      console.log('[ImportPage] Importing', newTransactions.length, 'new transactions to account:', accountId);
 
       // Convert to Transaction objects
       const transactions: Transaction[] = newTransactions.map((tx, index) => ({
@@ -726,8 +1017,32 @@ export default function ImportPage() {
         // Non-fatal error - don't block import completion
       }
 
+      // Calculate net change of imported transactions for balance reconciliation
+      const netChange = newTransactions.reduce((sum, tx) => sum + tx.amount, 0);
+
+      // Get account name and type for the modal
+      const accountForReconciliation = accounts.find(a => a.id === accountId);
+      const accountNameForModal = accountForReconciliation?.name || matchedAccountName || 'Account';
+      const accountTypeForModal = accountForReconciliation?.type || 'checking';
+
+      // Store values for balance reconciliation modal
+      setImportedNetChange(Math.round(netChange * 100) / 100);
+      setImportedAccountId(accountId);
+      setImportedAccountName(accountNameForModal);
+      setImportedAccountType(accountTypeForModal);
+      setImportedTransactionCount(newTransactions.length);
+      setImportedDateRange(
+        dateRangeStart && dateRangeEnd
+          ? { start: dateRangeStart, end: dateRangeEnd }
+          : null
+      );
+
       setStep('complete');
-      console.log('[ImportPage] Import complete!');
+
+      // Trigger balance reconciliation modal after import (only if transactions were imported)
+      if (newTransactions.length > 0) {
+        setReadyForReconciliation(true);
+      }
     } catch (error) {
       console.error('[ImportPage] ERROR importing:', error);
       const errorMsg = error instanceof Error
@@ -995,6 +1310,46 @@ export default function ImportPage() {
     setIsProcessing(false);
   }
 
+  // Handle balance reconciliation completion (user entered their current bank balance)
+  async function handleBalanceReconciliationComplete(startingBalance: number, currentBalance: number) {
+    console.log('[ImportPage] Balance reconciliation complete:', {
+      accountId: importedAccountId,
+      startingBalance,
+      currentBalance,
+      netChange: importedNetChange,
+    });
+
+    try {
+      const now = new Date();
+
+      // Update the account's starting balance and reconciliation tracking fields
+      await db.accounts.update(importedAccountId, {
+        balance: startingBalance,
+        openingBalanceDate: importedDateRange?.start || now,
+        lastReconciledAt: now,
+        lastReconciledBalance: currentBalance,
+        updatedAt: now,
+      });
+
+      console.log('[ImportPage] Account reconciled with starting balance:', startingBalance);
+
+      // Clear any pending reconciliation for this account
+      clearPendingReconciliation(importedAccountId);
+
+      // Refresh accounts list
+      await loadAccounts();
+    } catch (error) {
+      console.error('[ImportPage] Error updating account balance:', error);
+      // Non-fatal - import still succeeded
+    }
+  }
+
+  // Handle balance reconciliation skip (user will reconcile later)
+  function handleBalanceReconciliationSkip() {
+    console.log('[ImportPage] Balance reconciliation skipped for:', importedAccountId);
+    // The modal component already stores the pending reconciliation in localStorage
+  }
+
   function reset() {
     setFile(null);
     setFormatDetection(null);
@@ -1032,6 +1387,15 @@ export default function ImportPage() {
     setIsEnriching(false);
     setEnrichmentProgress('');
     setEnrichmentResult(null);
+    // Reset balance reconciliation state
+    setShowBalanceReconciliation(false);
+    setImportedNetChange(0);
+    setImportedAccountId('');
+    setImportedAccountName('');
+    setImportedAccountType('checking');
+    setImportedTransactionCount(0);
+    setImportedDateRange(null);
+    setReadyForReconciliation(false);
   }
 
   // Handle manual column mapping application
@@ -1072,12 +1436,27 @@ export default function ImportPage() {
 
           if (mapping.bankFormat === 'single-amount' && mapping.amountColumn !== undefined) {
             const amountStr = cols[mapping.amountColumn] || '0';
-            amount = parseFloat(amountStr.replace(/[^0-9.-]/g, '')) || 0;
+            // Handle accounting notation (100.00) as negative, preserve existing negative signs
+            let cleanedAmount = amountStr.replace(/[$,\s]/g, '');
+            if (cleanedAmount.includes('(') && cleanedAmount.includes(')')) {
+              cleanedAmount = '-' + cleanedAmount.replace(/[()]/g, '');
+            }
+            amount = parseFloat(cleanedAmount) || 0;
           } else if (mapping.bankFormat === 'debit-credit' && mapping.debitColumn !== undefined && mapping.creditColumn !== undefined) {
             const debitStr = cols[mapping.debitColumn] || '0';
             const creditStr = cols[mapping.creditColumn] || '0';
-            const debit = parseFloat(debitStr.replace(/[^0-9.]/g, '')) || 0;
-            const credit = parseFloat(creditStr.replace(/[^0-9.]/g, '')) || 0;
+            // Parse values - preserve signs and handle accounting notation
+            let cleanedDebit = debitStr.replace(/[$,\s]/g, '');
+            let cleanedCredit = creditStr.replace(/[$,\s]/g, '');
+            if (cleanedDebit.includes('(') && cleanedDebit.includes(')')) {
+              cleanedDebit = '-' + cleanedDebit.replace(/[()]/g, '');
+            }
+            if (cleanedCredit.includes('(') && cleanedCredit.includes(')')) {
+              cleanedCredit = '-' + cleanedCredit.replace(/[()]/g, '');
+            }
+            const debit = Math.abs(parseFloat(cleanedDebit) || 0);
+            const credit = Math.abs(parseFloat(cleanedCredit) || 0);
+            // Credit = income (positive), Debit = expense (negative)
             amount = credit > 0 ? credit : -debit;
           }
 
@@ -1142,6 +1521,10 @@ export default function ImportPage() {
       console.log('[ImportPage] Applying AI column mapping:', mapping);
       console.log('[ImportPage] Custom bank name:', customBankName);
 
+      // Get the skipRows that was detected during header analysis
+      const detectedSkipRows = (window as any).__pendingCSVSkipRows || 0;
+      console.log(`[ImportPage] Using skipRows=${detectedSkipRows} from detection`);
+      
       // Create a custom bank config from the AI mapping
       const customConfig = {
         name: customBankName || file?.name.replace(/\.csv$/i, '') || 'Custom Bank',
@@ -1151,8 +1534,11 @@ export default function ImportPage() {
         dateFormat: mapping.dateFormat || 'MM/dd/yyyy',
         amountMultiplier: 1,
         hasHeader: true,
-        skipRows: 0,
+        skipRows: detectedSkipRows,
       };
+      
+      // Clean up the temporary storage
+      delete (window as any).__pendingCSVSkipRows;
 
       // Parse CSV with the custom mapping
       const rows = parseCSVContent(pendingCSVText, customConfig.skipRows);
@@ -1418,6 +1804,31 @@ export default function ImportPage() {
             )}
           </div>
 
+          {/* Account Selection - Always visible for manual override */}
+          <div className="bg-white rounded-lg shadow-md p-6 border-l-4 border-blue-500">
+            <label htmlFor="import-account-select" className="block text-base font-semibold text-gray-700 mb-3">
+              Target Account
+            </label>
+            <p className="text-sm text-gray-600 mb-3">
+              The system will automatically detect the correct account based on the file.
+              {accounts.length === 0 && ' A new account will be created if none exists.'}
+              {accounts.length > 0 && ' Select manually if you want to override the auto-detection.'}
+            </p>
+            <select
+              id="import-account-select"
+              value={accountId}
+              onChange={(e) => setAccountId(e.target.value)}
+              className="w-full min-h-[48px] px-4 py-3 text-base border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+            >
+              <option value="">Auto-detect (Recommended)</option>
+              {accounts.map((acct) => (
+                <option key={acct.id} value={acct.id}>
+                  {acct.name} ({acct.institution} - {acct.type})
+                </option>
+              ))}
+            </select>
+          </div>
+
           {/* Bank Selection - Enhanced */}
           {(!formatDetection || formatDetection.format === 'csv' || formatDetection.format === 'unknown') && (
             <div className="bg-white rounded-lg shadow-md p-6 border-l-4 border-teal-500">
@@ -1531,7 +1942,7 @@ export default function ImportPage() {
 
           {/* Process Button - Enhanced */}
           {file && (
-            <div className="flex justify-end">
+            <div className="flex flex-col items-end gap-2">
               <button
                 onClick={processFile}
                 disabled={isProcessing}
@@ -1597,6 +2008,53 @@ export default function ImportPage() {
                 <p className="text-2xl font-bold text-red-600">
                   -${summary.expenses.toFixed(2)}
                 </p>
+              </div>
+            </div>
+            
+            {/* Account Assignment Info */}
+            <div className="mt-6 pt-6 border-t-2 border-gray-200">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <div className="p-2 bg-blue-100 rounded-lg">
+                    <CheckCircle className="w-5 h-5 text-blue-600" />
+                  </div>
+                  <div>
+                    <p className="text-sm font-medium text-gray-700">Importing to Account</p>
+                    <p className="text-lg font-semibold text-gray-900">{matchedAccountName || 'Unknown'}</p>
+                    {accountMatchConfidence >= 0.8 && (
+                      <p className="text-xs text-green-600">Auto-detected with high confidence</p>
+                    )}
+                    {accountMatchConfidence >= 0.5 && accountMatchConfidence < 0.8 && (
+                      <p className="text-xs text-yellow-600">Auto-detected - please verify</p>
+                    )}
+                  </div>
+                </div>
+                {accounts.length > 1 && (
+                  <div>
+                    <select
+                      value={accountId}
+                      onChange={async (e) => {
+                        const newAccountId = e.target.value;
+                        setAccountId(newAccountId);
+                        const account = accounts.find(a => a.id === newAccountId);
+                        setMatchedAccountName(account?.name || '');
+                        // Update all transactions with new account ID
+                        const updated = parsedTransactions.map(tx => ({
+                          ...tx,
+                          accountId: newAccountId,
+                        }));
+                        setParsedTransactions(updated);
+                      }}
+                      className="px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                    >
+                      {accounts.map((acct) => (
+                        <option key={acct.id} value={acct.id}>
+                          {acct.name}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                )}
               </div>
             </div>
           </div>
@@ -1970,6 +2428,21 @@ export default function ImportPage() {
         validationResult={validationResult}
         onProceed={handleValidationProceed}
         onCancel={handleValidationCancel}
+      />
+
+      {/* Balance Reconciliation Modal (post-import balance setup) */}
+      <BalanceReconciliationModal
+        open={showBalanceReconciliation}
+        onOpenChange={setShowBalanceReconciliation}
+        accountId={importedAccountId}
+        accountName={importedAccountName}
+        accountType={importedAccountType}
+        transactionNetChange={importedNetChange}
+        transactionCount={importedTransactionCount}
+        dateRangeStart={importedDateRange?.start}
+        dateRangeEnd={importedDateRange?.end}
+        onComplete={handleBalanceReconciliationComplete}
+        onSkip={handleBalanceReconciliationSkip}
       />
     </div>
   );

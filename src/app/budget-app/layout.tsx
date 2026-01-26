@@ -6,6 +6,7 @@
 
 "use client";
 
+import { AccessibilityQuickToggle } from "@/components/budget/AccessibilityQuickToggle";
 import { BudgetAccessibilityInitializer } from "@/components/budget/BudgetAccessibilityInitializer";
 import { OnboardingTour } from "@/components/budget/OnboardingTour";
 import { PWAInstallPrompt } from "@/components/budget/PWAInstallPrompt";
@@ -15,8 +16,10 @@ import { TrialStatusBanner } from "@/components/budget/TrialStatusBanner";
 import { ChatbotWidget } from "@/components/budget/chatbot/ChatbotWidget";
 import { MobileNav } from "@/components/budget/layout/MobileNav";
 import { Sidebar } from "@/components/budget/layout/Sidebar";
+import { WelcomeBanner } from "@/components/budget/onboarding";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent } from "@/components/ui/sheet";
+import { ThemeProvider } from "@/components/ui/theme-provider";
 import { ChatbotProvider } from "@/contexts/ChatbotContext";
 import { SeniorsModeProvider } from "@/contexts/SeniorsModeContext";
 import { useKeyboardShortcuts } from "@/hooks/useKeyboardShortcuts";
@@ -71,119 +74,128 @@ export default function BudgetAppLayout({ children }: { children: React.ReactNod
   // Render simplified layout for public/auth/admin routes
   if (isPublicRoute) {
     return (
-      <SeniorsModeProvider>
-        <ChatbotProvider>
-          <ClientI18nProvider>
-            <ToastProvider>{children}</ToastProvider>
-          </ClientI18nProvider>
-        </ChatbotProvider>
-      </SeniorsModeProvider>
+      <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
+        <SeniorsModeProvider>
+          <ChatbotProvider>
+            <ClientI18nProvider>
+              <ToastProvider>{children}</ToastProvider>
+            </ClientI18nProvider>
+          </ChatbotProvider>
+        </SeniorsModeProvider>
+      </ThemeProvider>
     );
   }
 
   return (
-    <SeniorsModeProvider>
-    <ChatbotProvider>
-      <ClientI18nProvider>
-      <BudgetAccessibilityInitializer />
+    <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
+      <SeniorsModeProvider>
+        <ChatbotProvider>
+          <ClientI18nProvider>
+            <BudgetAccessibilityInitializer />
 
-      {/* Skip Link - WCAG 2.4.1 Bypass Blocks */}
-      <a
-        href="#main-content"
-        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4
-                   focus:z-[100] focus:bg-white focus:px-6 focus:py-3 focus:rounded-lg
-                   focus:text-teal-700 focus:font-semibold focus:shadow-lg
-                   focus:ring-2 focus:ring-teal-500 focus:ring-offset-2
-                   focus:outline-none transition-all"
-      >
-        Skip to main content
-      </a>
-
-      {/* Global Background - Dark Mesh Gradient */}
-      <div className="fixed inset-0 -z-20 bg-slate-950" />
-      <div className="fixed inset-0 -z-10 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-slate-900 via-slate-950 to-black" />
-      <div className="fixed inset-0 -z-10 bg-[url('/grid.svg')] bg-center opacity-20 [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]" />
-
-      {/* Ambient Glows */}
-      <div className="pointer-events-none fixed left-0 top-0 -z-10 h-full w-full overflow-hidden">
-        <div className="absolute left-[-10%] top-[-10%] h-[40%] w-[40%] rounded-full bg-teal-500/10 blur-[120px]" />
-        <div className="absolute bottom-[-10%] right-[-10%] h-[40%] w-[40%] rounded-full bg-blue-600/10 blur-[120px]" />
-      </div>
-
-      {/* Trial Status Banner - shows for trial users */}
-      <TrialStatusBanner showOnlyWhenUrgent={false} />
-
-      <div className="flex min-h-screen text-slate-200">
-        {/* Desktop Sidebar */}
-        <Sidebar
-          onSearch={() => {
-            /* Implement search logic */
-          }}
-          onShowShortcuts={() => setShowShortcutsModal(true)}
-        />
-
-        {/* Mobile Sidebar Sheet */}
-        <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
-          <SheetContent side="left" className="w-72 border-r-0 bg-transparent p-0 shadow-2xl">
-            <Sidebar
-              isMobile
-              onClose={() => setMobileMenuOpen(false)}
-              onShowShortcuts={() => setShowShortcutsModal(true)}
-            />
-          </SheetContent>
-        </Sheet>
-
-        {/* Main Content Area */}
-        <div className="flex min-w-0 flex-1 flex-col">
-          {/* Mobile Header */}
-          <header className="sticky top-0 z-30 flex items-center justify-between border-b border-white/10 bg-slate-950/80 px-4 py-3 backdrop-blur-md md:hidden">
-            <div className="flex items-center gap-3">
-              <div className="rounded-lg bg-gradient-to-br from-teal-400 to-blue-500 p-1.5">
-                <Sparkles className="h-5 w-5 text-white" />
-              </div>
-              <h1 className="text-lg font-bold text-white">Budget App</h1>
-            </div>
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => setMobileMenuOpen(true)}
-              className="text-slate-400 hover:bg-white/10 hover:text-white"
+            {/* Skip Link - WCAG 2.4.1 Bypass Blocks */}
+            <a
+              href="#main-content"
+              className="sr-only transition-all focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-white focus:px-6 focus:py-3 focus:font-semibold focus:text-teal-700 focus:shadow-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
             >
-              <Menu className="h-6 w-6" />
-            </Button>
-          </header>
+              Skip to main content
+            </a>
 
-          {/* Main Content */}
-          <main
-            id="main-content"
-            className="flex-1 overflow-x-hidden pb-24 md:pb-8"
-            tabIndex={0}
-            aria-label="Main content"
-            role="main"
-          >
-            <div className="mx-auto max-w-7xl p-4 md:p-8">
-              <ToastProvider>{children}</ToastProvider>
+            {/* Global Background - Dark Mesh Gradient */}
+            <div className="fixed inset-0 -z-20 bg-slate-950" />
+            <div className="fixed inset-0 -z-10 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-slate-900 via-slate-950 to-black" />
+            <div className="fixed inset-0 -z-10 bg-[url('/grid.svg')] bg-center opacity-20 [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]" />
+
+            {/* Ambient Glows */}
+            <div className="pointer-events-none fixed left-0 top-0 -z-10 h-full w-full overflow-hidden">
+              <div className="absolute left-[-10%] top-[-10%] h-[40%] w-[40%] rounded-full bg-teal-500/10 blur-[120px]" />
+              <div className="absolute bottom-[-10%] right-[-10%] h-[40%] w-[40%] rounded-full bg-blue-600/10 blur-[120px]" />
             </div>
-          </main>
 
-          {/* Mobile Bottom Navigation */}
-          <MobileNav onOpenMenu={() => setMobileMenuOpen(true)} />
-        </div>
+            {/* Trial Status Banner - shows for trial users */}
+            <TrialStatusBanner showOnlyWhenUrgent={false} />
 
-        {/* Shortcuts Help Modal */}
-        {showShortcutsModal && <ShortcutsModal onClose={() => setShowShortcutsModal(false)} />}
+            {/* Premium Welcome Wizard (Glassmorphism) */}
+            <OnboardingTour />
 
-        {/* Onboarding Tour */}
-        <OnboardingTour />
+            <div className="flex min-h-screen text-slate-200">
+              {/* Desktop Sidebar */}
+              <Sidebar
+                onSearch={() => {
+                  /* Implement search logic */
+                }}
+                onShowShortcuts={() => setShowShortcutsModal(true)}
+              />
 
-        {/* PWA Install Prompt */}
-        <PWAInstallPrompt />
+              {/* Mobile Sidebar Sheet */}
+              <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
+                <SheetContent side="left" className="w-72 border-r-0 bg-transparent p-0 shadow-2xl">
+                  <Sidebar
+                    isMobile
+                    onClose={() => setMobileMenuOpen(false)}
+                    onShowShortcuts={() => setShowShortcutsModal(true)}
+                  />
+                </SheetContent>
+              </Sheet>
 
-        {/* AI Chatbot Widget */}
-        <ChatbotWidget />
-      </div>
-      </ClientI18nProvider>
-    </ChatbotProvider>
-    </SeniorsModeProvider>
+              {/* Main Content Area */}
+              <div className="flex min-w-0 flex-1 flex-col">
+                {/* Mobile Header */}
+                <header className="sticky top-0 z-30 flex items-center justify-between border-b border-white/10 bg-slate-950/80 px-4 py-3 backdrop-blur-md md:hidden">
+                  <div className="flex items-center gap-3">
+                    <div className="rounded-lg bg-gradient-to-br from-teal-400 to-blue-500 p-1.5">
+                      <Sparkles className="h-5 w-5 text-white" />
+                    </div>
+                    <h1 className="text-lg font-bold text-white">Budget App</h1>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    {/* Accessibility Quick Toggle - Prominent placement per plan */}
+                    <AccessibilityQuickToggle compact />
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      onClick={() => setMobileMenuOpen(true)}
+                      className="text-slate-400 hover:bg-white/10 hover:text-white"
+                    >
+                      <Menu className="h-6 w-6" />
+                    </Button>
+                  </div>
+                </header>
+
+                {/* Main Content */}
+                <main
+                  id="main-content"
+                  className="flex-1 overflow-x-hidden pb-24 md:pb-8"
+                  tabIndex={0}
+                  aria-label="Main content"
+                  role="main"
+                >
+                  {/* Non-blocking Welcome Banner - at top of content */}
+                  <WelcomeBanner />
+
+                  <div className="mx-auto max-w-7xl p-4 md:p-8">
+                    <ToastProvider>{children}</ToastProvider>
+                  </div>
+                </main>
+
+                {/* Mobile Bottom Navigation */}
+                <MobileNav onOpenMenu={() => setMobileMenuOpen(true)} />
+              </div>
+
+              {/* Shortcuts Help Modal */}
+              {showShortcutsModal && (
+                <ShortcutsModal onClose={() => setShowShortcutsModal(false)} />
+              )}
+
+              {/* PWA Install Prompt */}
+              <PWAInstallPrompt />
+
+              {/* AI Chatbot Widget */}
+              <ChatbotWidget />
+            </div>
+          </ClientI18nProvider>
+        </ChatbotProvider>
+      </SeniorsModeProvider>
+    </ThemeProvider>
   );
 }

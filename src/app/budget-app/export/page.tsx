@@ -79,7 +79,11 @@ export default function ExportPage() {
     setExportStatus('idle');
 
     try {
-      const transactions = await db.transactions.toArray();
+      const allTxs = await db.transactions.toArray();
+      
+      // Filter out parent transactions that have been split
+      // Export only visible transactions (children + non-split) to match what users see
+      const transactions = allTxs.filter(tx => !tx.isSplit);
 
       // Create CSV header
       const headers = ['Date', 'Description', 'Category', 'Subcategory', 'Amount', 'Notes'];

@@ -11,10 +11,23 @@ import { dirname, resolve } from "path";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
+// Offline Mode Feature Flag
+// When NEXT_PUBLIC_OFFLINE_MODE=true, cloud features are compiled out:
+// - Auth flows (Supabase login/signup)
+// - Admin dashboard
+// - Analytics (PostHog)
+// - AI Chatbot (shown as "Premium Feature")
+const isOfflineMode = process.env.NEXT_PUBLIC_OFFLINE_MODE === 'true';
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
   pageExtensions: ["ts", "tsx", "mdx"],
+
+  // Environment variables exposed to the browser
+  env: {
+    NEXT_PUBLIC_OFFLINE_MODE: process.env.NEXT_PUBLIC_OFFLINE_MODE || 'false',
+  },
 
   // Set output file tracing root to project directory to silence workspace warning
   outputFileTracingRoot: resolve(__dirname),
@@ -34,8 +47,17 @@ const nextConfig = {
   generateEtags: true,
   compress: true,
 
-  // Webpack configuration for code splitting
-  webpack: (config, { isServer }) => {
+  // Webpack configuration for code splitting and offline mode
+  webpack: (config, { isServer, webpack }) => {
+    // Define constants for tree-shaking cloud features in offline builds
+    config.plugins.push(
+      new webpack.DefinePlugin({
+        'process.env.ENABLE_CLOUD_AUTH': JSON.stringify(!isOfflineMode),
+        'process.env.ENABLE_ADMIN': JSON.stringify(!isOfflineMode),
+        'process.env.ENABLE_CLOUD_ANALYTICS': JSON.stringify(!isOfflineMode),
+      })
+    );
+
     if (!isServer) {
       // Split large dependencies into separate chunks
       config.optimization = {

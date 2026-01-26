@@ -236,11 +236,27 @@ function detectBankFromHeaders(headers: string[]): BankDetectionResult {
   console.warn('[SmartBankDetection] No bank match found, attempting best-fit fallback');
 
   // Check for common column name patterns
-  const hasDate = headers.some(h => h.toLowerCase().includes('date'));
-  const hasDescription = headers.some(h => h.toLowerCase().includes('desc') || h.toLowerCase().includes('detail'));
-  const hasAmount = headers.some(h => h.toLowerCase().includes('amount') || h.toLowerCase().includes('debit') || h.toLowerCase().includes('credit'));
+  const headerLower = headers.map(h => h.toLowerCase());
+  const hasDate = headerLower.some(h => h.includes('date'));
+  const hasTransDate = headerLower.some(h => h === 'trans date' || h === 'transaction date');
+  const hasDescription = headerLower.some(h => h.includes('desc') || h.includes('detail'));
+  const hasMerchant = headerLower.some(h => h.includes('merchant'));
+  const hasAmount = headerLower.some(h => h.includes('amount') || h.includes('debit') || h.includes('credit'));
+  const hasMCC = headerLower.some(h => h.includes('mcc'));
 
-  if (hasDate && hasDescription && hasAmount) {
+  // Check for credit card format: Trans Date + Merchant Name + Amount (+ MCC columns)
+  if (hasTransDate && hasMerchant && hasAmount) {
+    console.log('[SmartBankDetection] Detected credit card format: Trans Date + Merchant Name');
+    const bankKey = hasMCC ? 'homeTrustVisa' : 'genericCreditCard';
+    return {
+      bankKey,
+      bankName: BANK_CONFIGS[bankKey]?.name || 'Credit Card (Generic)',
+      confidence: hasMCC ? 0.9 : 0.8, // Higher confidence with MCC columns
+      detectionMethod: 'header-fuzzy',
+    };
+  }
+
+  if (hasDate && (hasDescription || hasMerchant) && hasAmount) {
     // Found generic pattern - use Home Trust as it has simple format
     console.log('[SmartBankDetection] Using Home Trust config as generic fallback');
     return {

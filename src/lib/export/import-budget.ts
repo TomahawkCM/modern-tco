@@ -12,6 +12,7 @@ import {
   type EncryptedDataPayload,
   type ImportOptions,
   type ImportResult,
+  type ImportProgress,
   type ValidationResult,
   isEncryptedData,
   BUDGET_FILE_VERSION,
@@ -287,13 +288,36 @@ function parseDate(dateString: string | null | undefined): Date | null {
 }
 
 /**
+ * Helper to emit progress updates
+ */
+function emitProgress(
+  onProgress: ((progress: ImportProgress) => void) | undefined,
+  progress: ImportProgress
+) {
+  if (onProgress) {
+    onProgress(progress);
+  }
+}
+
+/**
  * Import budget data into the database
  */
 export async function importBudgetData(
   file: BudgetFile,
   options: ImportOptions
 ): Promise<ImportResult> {
-  const { conflictResolution = 'skip', password } = options;
+  const { conflictResolution = 'skip', password, onProgress } = options;
+
+  // Emit validating progress
+  emitProgress(onProgress, {
+    stage: 'validating',
+    currentTable: '',
+    tableIndex: 0,
+    totalTables: 0,
+    itemsProcessed: 0,
+    totalItems: 0,
+    message: 'Validating file...',
+  });
 
   // Validate first
   const validation = await validateBudgetFile(file, password);
@@ -321,6 +345,17 @@ export async function importBudgetData(
         errors: [{ table: 'data', id: '', message: 'Password required' }],
       };
     }
+
+    emitProgress(onProgress, {
+      stage: 'decrypting',
+      currentTable: '',
+      tableIndex: 0,
+      totalTables: 0,
+      itemsProcessed: 0,
+      totalItems: 0,
+      message: 'Decrypting data...',
+    });
+
     data = await decryptData(file.data, password);
   } else {
     data = file.data;
@@ -340,36 +375,202 @@ export async function importBudgetData(
     'subscriptions',
     'investments',
     'receipts',
+    'profiles',
+    'activityLog',
   ];
 
+  // Build list of tables with their data for progress tracking
+  type TableConfig = {
+    name: string;
+    displayName: string;
+    data: unknown[];
+    importFn: () => Promise<void>;
+  };
+
+  // Profile ID mapping for updating references
+  const profileIdMap = new Map<string, string>();
+
+  const tableConfigs: TableConfig[] = [];
+
+  // Configure tables in import order
+  if (tablesToImport.includes('profiles') && data.profiles?.length) {
+    tableConfigs.push({
+      name: 'profiles',
+      displayName: 'profiles',
+      data: data.profiles,
+      importFn: async () => {
+        await importProfilesWithProgress(
+          data.profiles,
+          conflictResolution,
+          stats,
+          errors,
+          profileIdMap,
+          onProgress,
+          tableConfigs.findIndex(t => t.name === 'profiles'),
+          tableConfigs.length
+        );
+      },
+    });
+  }
+
+  if (tablesToImport.includes('accounts') && data.accounts?.length) {
+    tableConfigs.push({
+      name: 'accounts',
+      displayName: 'accounts',
+      data: data.accounts,
+      importFn: async () => {
+        await importAccountsWithProgress(
+          data.accounts,
+          conflictResolution,
+          stats,
+          errors,
+          onProgress,
+          tableConfigs.findIndex(t => t.name === 'accounts'),
+          tableConfigs.length
+        );
+      },
+    });
+  }
+
+  if (tablesToImport.includes('categories') && data.categories?.length) {
+    tableConfigs.push({
+      name: 'categories',
+      displayName: 'categories',
+      data: data.categories,
+      importFn: async () => {
+        await importCategoriesWithProgress(
+          data.categories,
+          conflictResolution,
+          stats,
+          errors,
+          onProgress,
+          tableConfigs.findIndex(t => t.name === 'categories'),
+          tableConfigs.length
+        );
+      },
+    });
+  }
+
+  if (tablesToImport.includes('transactions') && data.transactions?.length) {
+    tableConfigs.push({
+      name: 'transactions',
+      displayName: 'transactions',
+      data: data.transactions,
+      importFn: async () => {
+        await importTransactionsWithProgress(
+          data.transactions,
+          conflictResolution,
+          stats,
+          errors,
+          onProgress,
+          tableConfigs.findIndex(t => t.name === 'transactions'),
+          tableConfigs.length
+        );
+      },
+    });
+  }
+
+  if (tablesToImport.includes('budgets') && data.budgets?.length) {
+    tableConfigs.push({
+      name: 'budgets',
+      displayName: 'budgets',
+      data: data.budgets,
+      importFn: async () => {
+        await importBudgetsWithProgress(
+          data.budgets,
+          conflictResolution,
+          stats,
+          errors,
+          profileIdMap,
+          onProgress,
+          tableConfigs.findIndex(t => t.name === 'budgets'),
+          tableConfigs.length
+        );
+      },
+    });
+  }
+
+  if (tablesToImport.includes('goals') && data.goals?.length) {
+    tableConfigs.push({
+      name: 'goals',
+      displayName: 'goals',
+      data: data.goals,
+      importFn: async () => {
+        await importGoalsWithProgress(
+          data.goals,
+          conflictResolution,
+          stats,
+          errors,
+          onProgress,
+          tableConfigs.findIndex(t => t.name === 'goals'),
+          tableConfigs.length
+        );
+      },
+    });
+  }
+
+  if (tablesToImport.includes('loans') && data.loans?.length) {
+    tableConfigs.push({
+      name: 'loans',
+      displayName: 'loans',
+      data: data.loans,
+      importFn: async () => {
+        await importLoansWithProgress(
+          data.loans,
+          conflictResolution,
+          stats,
+          errors,
+          onProgress,
+          tableConfigs.findIndex(t => t.name === 'loans'),
+          tableConfigs.length
+        );
+      },
+    });
+  }
+
+  if (tablesToImport.includes('subscriptions') && data.subscriptions?.length) {
+    tableConfigs.push({
+      name: 'subscriptions',
+      displayName: 'subscriptions',
+      data: data.subscriptions,
+      importFn: async () => {
+        await importSubscriptionsWithProgress(
+          data.subscriptions,
+          conflictResolution,
+          stats,
+          errors,
+          onProgress,
+          tableConfigs.findIndex(t => t.name === 'subscriptions'),
+          tableConfigs.length
+        );
+      },
+    });
+  }
+
+  if (tablesToImport.includes('activityLog') && data.activityLog?.length) {
+    tableConfigs.push({
+      name: 'activityLog',
+      displayName: 'activity log',
+      data: data.activityLog,
+      importFn: async () => {
+        await importActivityLogWithProgress(
+          data.activityLog,
+          conflictResolution,
+          stats,
+          errors,
+          profileIdMap,
+          onProgress,
+          tableConfigs.findIndex(t => t.name === 'activityLog'),
+          tableConfigs.length
+        );
+      },
+    });
+  }
+
   try {
-    // Import in order (accounts first, then transactions, etc.)
-    if (tablesToImport.includes('accounts')) {
-      await importAccounts(data.accounts, conflictResolution, stats, errors);
-    }
-
-    if (tablesToImport.includes('categories')) {
-      await importCategories(data.categories, conflictResolution, stats, errors);
-    }
-
-    if (tablesToImport.includes('transactions')) {
-      await importTransactions(data.transactions, conflictResolution, stats, errors);
-    }
-
-    if (tablesToImport.includes('budgets')) {
-      await importBudgets(data.budgets, conflictResolution, stats, errors);
-    }
-
-    if (tablesToImport.includes('goals')) {
-      await importGoals(data.goals, conflictResolution, stats, errors);
-    }
-
-    if (tablesToImport.includes('loans') && data.loans) {
-      await importLoans(data.loans, conflictResolution, stats, errors);
-    }
-
-    if (tablesToImport.includes('subscriptions') && data.subscriptions) {
-      await importSubscriptions(data.subscriptions, conflictResolution, stats, errors);
+    // Import each table in order
+    for (const config of tableConfigs) {
+      await config.importFn();
     }
 
     // Save settings and preferences to localStorage
@@ -382,6 +583,17 @@ export async function importBudgetData(
 
     const totalImported = Object.values(stats).reduce((sum, s) => sum + s.imported, 0);
     const totalErrors = Object.values(stats).reduce((sum, s) => sum + s.errors, 0);
+
+    // Emit complete progress
+    emitProgress(onProgress, {
+      stage: 'complete',
+      currentTable: '',
+      tableIndex: tableConfigs.length,
+      totalTables: tableConfigs.length,
+      itemsProcessed: totalImported,
+      totalItems: totalImported,
+      message: 'Import complete',
+    });
 
     return {
       success: totalErrors === 0,
@@ -412,6 +624,8 @@ function createEmptyStats(): ImportResult['stats'] {
     subscriptions: { imported: 0, skipped: 0, errors: 0 },
     investments: { imported: 0, skipped: 0, errors: 0 },
     receipts: { imported: 0, skipped: 0, errors: 0 },
+    profiles: { imported: 0, skipped: 0, errors: 0 },
+    activityLog: { imported: 0, skipped: 0, errors: 0 },
   };
 }
 
@@ -520,7 +734,8 @@ async function importBudgets(
   budgets: BudgetExportData['budgets'],
   resolution: ConflictResolution,
   stats: ImportResult['stats'],
-  errors: ImportResult['errors']
+  errors: ImportResult['errors'],
+  profileIdMap: Map<string, string>
 ) {
   for (const budget of budgets) {
     try {
@@ -535,8 +750,15 @@ async function importBudgets(
         }
       }
 
+      // Map ownerId to new profile ID if it was renamed during import
+      let mappedOwnerId = budget.ownerId;
+      if (mappedOwnerId && profileIdMap.has(mappedOwnerId)) {
+        mappedOwnerId = profileIdMap.get(mappedOwnerId);
+      }
+
       await db.budgets.put({
         ...budget,
+        ownerId: mappedOwnerId,
         startDate: parseDate(budget.startDate) || new Date(),
         endDate: budget.endDate ? parseDate(budget.endDate) : null,
         createdAt: parseDate(budget.createdAt) || new Date(),
@@ -654,6 +876,677 @@ async function importSubscriptions(
   }
 }
 
+async function importProfiles(
+  profiles: BudgetExportData['profiles'],
+  resolution: ConflictResolution,
+  stats: ImportResult['stats'],
+  errors: ImportResult['errors'],
+  profileIdMap: Map<string, string>
+) {
+  for (const profile of profiles) {
+    try {
+      const existing = await db.profiles.get(profile.id);
+      const originalId = profile.id;
+
+      if (existing) {
+        if (resolution === 'skip') {
+          stats.profiles.skipped++;
+          // Map to existing profile for reference updates
+          profileIdMap.set(originalId, existing.id);
+          continue;
+        } else if (resolution === 'rename') {
+          profile.id = `${profile.id}-imported-${Date.now()}`;
+          // Track the ID mapping for updating references
+          profileIdMap.set(originalId, profile.id);
+        }
+        // overwrite: continue with put, keep same ID
+      }
+
+      // Note: We don't import pinHash/pinSalt for security
+      // Imported profiles will have no PIN protection
+      await db.profiles.put({
+        id: profile.id,
+        name: profile.name,
+        isDefault: profile.isDefault,
+        avatarColor: profile.avatarColor,
+        avatarImage: profile.avatarImage,
+        order: profile.order,
+        pinHash: null, // Security: don't import PIN data
+        pinSalt: null, // Security: don't import PIN data
+        createdAt: parseDate(profile.createdAt) || new Date(),
+        updatedAt: parseDate(profile.updatedAt) || new Date(),
+      });
+      stats.profiles.imported++;
+    } catch (error) {
+      stats.profiles.errors++;
+      errors.push({ table: 'profiles', id: profile.id, message: String(error) });
+    }
+  }
+}
+
+async function importActivityLog(
+  activityLog: BudgetExportData['activityLog'],
+  resolution: ConflictResolution,
+  stats: ImportResult['stats'],
+  errors: ImportResult['errors'],
+  profileIdMap: Map<string, string>
+) {
+  for (const entry of activityLog) {
+    try {
+      const existing = await db.activityLog.get(entry.id);
+
+      if (existing) {
+        if (resolution === 'skip') {
+          stats.activityLog.skipped++;
+          continue;
+        } else if (resolution === 'rename') {
+          entry.id = `${entry.id}-imported-${Date.now()}`;
+        }
+      }
+
+      // Map profileId to new profile ID if it was renamed during import
+      let mappedProfileId = entry.profileId;
+      if (profileIdMap.has(mappedProfileId)) {
+        mappedProfileId = profileIdMap.get(mappedProfileId)!;
+      }
+
+      await db.activityLog.put({
+        id: entry.id,
+        profileId: mappedProfileId,
+        profileName: entry.profileName,
+        action: entry.action,
+        entityType: entry.entityType,
+        entityId: entry.entityId,
+        entityName: entry.entityName,
+        details: entry.details,
+        timestamp: parseDate(entry.timestamp) || new Date(),
+      });
+      stats.activityLog.imported++;
+    } catch (error) {
+      stats.activityLog.errors++;
+      errors.push({ table: 'activityLog', id: entry.id, message: String(error) });
+    }
+  }
+}
+
+// Progress-enabled import functions
+// These wrap the original import logic but emit progress updates
+
+const PROGRESS_UPDATE_INTERVAL = 10; // Emit progress every N items for responsiveness
+
+async function importAccountsWithProgress(
+  accounts: BudgetExportData['accounts'],
+  resolution: ConflictResolution,
+  stats: ImportResult['stats'],
+  errors: ImportResult['errors'],
+  onProgress: ((progress: ImportProgress) => void) | undefined,
+  tableIndex: number,
+  totalTables: number
+) {
+  const total = accounts.length;
+  emitProgress(onProgress, {
+    stage: 'importing',
+    currentTable: 'accounts',
+    tableIndex,
+    totalTables,
+    itemsProcessed: 0,
+    totalItems: total,
+    message: `Importing accounts...`,
+  });
+
+  for (let i = 0; i < accounts.length; i++) {
+    const account = accounts[i];
+    try {
+      const existing = await db.accounts.get(account.id);
+
+      if (existing) {
+        if (resolution === 'skip') {
+          stats.accounts.skipped++;
+          continue;
+        } else if (resolution === 'rename') {
+          account.id = `${account.id}-imported-${Date.now()}`;
+        }
+      }
+
+      await db.accounts.put({
+        ...account,
+        createdAt: parseDate(account.createdAt) || new Date(),
+        updatedAt: parseDate(account.updatedAt) || new Date(),
+      });
+      stats.accounts.imported++;
+    } catch (error) {
+      stats.accounts.errors++;
+      errors.push({ table: 'accounts', id: account.id, message: String(error) });
+    }
+
+    // Emit progress periodically
+    if ((i + 1) % PROGRESS_UPDATE_INTERVAL === 0 || i === accounts.length - 1) {
+      emitProgress(onProgress, {
+        stage: 'importing',
+        currentTable: 'accounts',
+        tableIndex,
+        totalTables,
+        itemsProcessed: i + 1,
+        totalItems: total,
+        message: `Importing accounts...`,
+      });
+    }
+  }
+}
+
+async function importCategoriesWithProgress(
+  categories: BudgetExportData['categories'],
+  resolution: ConflictResolution,
+  stats: ImportResult['stats'],
+  errors: ImportResult['errors'],
+  onProgress: ((progress: ImportProgress) => void) | undefined,
+  tableIndex: number,
+  totalTables: number
+) {
+  const total = categories.length;
+  emitProgress(onProgress, {
+    stage: 'importing',
+    currentTable: 'categories',
+    tableIndex,
+    totalTables,
+    itemsProcessed: 0,
+    totalItems: total,
+    message: `Importing categories...`,
+  });
+
+  for (let i = 0; i < categories.length; i++) {
+    const category = categories[i];
+    try {
+      const existing = await db.categories.get(category.id);
+
+      if (existing) {
+        if (resolution === 'skip') {
+          stats.categories.skipped++;
+          continue;
+        } else if (resolution === 'rename') {
+          category.id = `${category.id}-imported-${Date.now()}`;
+        }
+      }
+
+      await db.categories.put({
+        ...category,
+        archivedAt: category.archivedAt ? parseDate(category.archivedAt) || undefined : undefined,
+        createdAt: parseDate(category.createdAt) || new Date(),
+      });
+      stats.categories.imported++;
+    } catch (error) {
+      stats.categories.errors++;
+      errors.push({ table: 'categories', id: category.id, message: String(error) });
+    }
+
+    if ((i + 1) % PROGRESS_UPDATE_INTERVAL === 0 || i === categories.length - 1) {
+      emitProgress(onProgress, {
+        stage: 'importing',
+        currentTable: 'categories',
+        tableIndex,
+        totalTables,
+        itemsProcessed: i + 1,
+        totalItems: total,
+        message: `Importing categories...`,
+      });
+    }
+  }
+}
+
+async function importTransactionsWithProgress(
+  transactions: BudgetExportData['transactions'],
+  resolution: ConflictResolution,
+  stats: ImportResult['stats'],
+  errors: ImportResult['errors'],
+  onProgress: ((progress: ImportProgress) => void) | undefined,
+  tableIndex: number,
+  totalTables: number
+) {
+  const total = transactions.length;
+  emitProgress(onProgress, {
+    stage: 'importing',
+    currentTable: 'transactions',
+    tableIndex,
+    totalTables,
+    itemsProcessed: 0,
+    totalItems: total,
+    message: `Importing transactions...`,
+  });
+
+  for (let i = 0; i < transactions.length; i++) {
+    const tx = transactions[i];
+    try {
+      const existing = await db.transactions.get(tx.id);
+
+      if (existing) {
+        if (resolution === 'skip') {
+          stats.transactions.skipped++;
+          continue;
+        } else if (resolution === 'rename') {
+          tx.id = `${tx.id}-imported-${Date.now()}`;
+        }
+      }
+
+      await db.transactions.put({
+        ...tx,
+        date: parseDate(tx.date) || new Date(),
+        createdAt: parseDate(tx.createdAt) || new Date(),
+        updatedAt: parseDate(tx.updatedAt) || new Date(),
+      });
+      stats.transactions.imported++;
+    } catch (error) {
+      stats.transactions.errors++;
+      errors.push({ table: 'transactions', id: tx.id, message: String(error) });
+    }
+
+    if ((i + 1) % PROGRESS_UPDATE_INTERVAL === 0 || i === transactions.length - 1) {
+      emitProgress(onProgress, {
+        stage: 'importing',
+        currentTable: 'transactions',
+        tableIndex,
+        totalTables,
+        itemsProcessed: i + 1,
+        totalItems: total,
+        message: `Importing transactions...`,
+      });
+    }
+  }
+}
+
+async function importBudgetsWithProgress(
+  budgets: BudgetExportData['budgets'],
+  resolution: ConflictResolution,
+  stats: ImportResult['stats'],
+  errors: ImportResult['errors'],
+  profileIdMap: Map<string, string>,
+  onProgress: ((progress: ImportProgress) => void) | undefined,
+  tableIndex: number,
+  totalTables: number
+) {
+  const total = budgets.length;
+  emitProgress(onProgress, {
+    stage: 'importing',
+    currentTable: 'budgets',
+    tableIndex,
+    totalTables,
+    itemsProcessed: 0,
+    totalItems: total,
+    message: `Importing budgets...`,
+  });
+
+  for (let i = 0; i < budgets.length; i++) {
+    const budget = budgets[i];
+    try {
+      const existing = await db.budgets.get(budget.id);
+
+      if (existing) {
+        if (resolution === 'skip') {
+          stats.budgets.skipped++;
+          continue;
+        } else if (resolution === 'rename') {
+          budget.id = `${budget.id}-imported-${Date.now()}`;
+        }
+      }
+
+      let mappedOwnerId = budget.ownerId;
+      if (mappedOwnerId && profileIdMap.has(mappedOwnerId)) {
+        mappedOwnerId = profileIdMap.get(mappedOwnerId);
+      }
+
+      await db.budgets.put({
+        ...budget,
+        ownerId: mappedOwnerId,
+        startDate: parseDate(budget.startDate) || new Date(),
+        endDate: budget.endDate ? parseDate(budget.endDate) : null,
+        createdAt: parseDate(budget.createdAt) || new Date(),
+        updatedAt: parseDate(budget.updatedAt) || new Date(),
+      });
+      stats.budgets.imported++;
+    } catch (error) {
+      stats.budgets.errors++;
+      errors.push({ table: 'budgets', id: budget.id, message: String(error) });
+    }
+
+    if ((i + 1) % PROGRESS_UPDATE_INTERVAL === 0 || i === budgets.length - 1) {
+      emitProgress(onProgress, {
+        stage: 'importing',
+        currentTable: 'budgets',
+        tableIndex,
+        totalTables,
+        itemsProcessed: i + 1,
+        totalItems: total,
+        message: `Importing budgets...`,
+      });
+    }
+  }
+}
+
+async function importGoalsWithProgress(
+  goals: BudgetExportData['goals'],
+  resolution: ConflictResolution,
+  stats: ImportResult['stats'],
+  errors: ImportResult['errors'],
+  onProgress: ((progress: ImportProgress) => void) | undefined,
+  tableIndex: number,
+  totalTables: number
+) {
+  const total = goals.length;
+  emitProgress(onProgress, {
+    stage: 'importing',
+    currentTable: 'goals',
+    tableIndex,
+    totalTables,
+    itemsProcessed: 0,
+    totalItems: total,
+    message: `Importing goals...`,
+  });
+
+  for (let i = 0; i < goals.length; i++) {
+    const goal = goals[i];
+    try {
+      const existing = await db.futurePurchases.get(goal.id);
+
+      if (existing) {
+        if (resolution === 'skip') {
+          stats.goals.skipped++;
+          continue;
+        } else if (resolution === 'rename') {
+          goal.id = `${goal.id}-imported-${Date.now()}`;
+        }
+      }
+
+      await db.futurePurchases.put({
+        ...goal,
+        targetDate: parseDate(goal.targetDate) || new Date(),
+        createdAt: parseDate(goal.createdAt) || new Date(),
+        updatedAt: parseDate(goal.updatedAt) || new Date(),
+      });
+      stats.goals.imported++;
+    } catch (error) {
+      stats.goals.errors++;
+      errors.push({ table: 'goals', id: goal.id, message: String(error) });
+    }
+
+    if ((i + 1) % PROGRESS_UPDATE_INTERVAL === 0 || i === goals.length - 1) {
+      emitProgress(onProgress, {
+        stage: 'importing',
+        currentTable: 'goals',
+        tableIndex,
+        totalTables,
+        itemsProcessed: i + 1,
+        totalItems: total,
+        message: `Importing goals...`,
+      });
+    }
+  }
+}
+
+async function importLoansWithProgress(
+  loans: BudgetExportData['loans'],
+  resolution: ConflictResolution,
+  stats: ImportResult['stats'],
+  errors: ImportResult['errors'],
+  onProgress: ((progress: ImportProgress) => void) | undefined,
+  tableIndex: number,
+  totalTables: number
+) {
+  const total = loans.length;
+  emitProgress(onProgress, {
+    stage: 'importing',
+    currentTable: 'loans',
+    tableIndex,
+    totalTables,
+    itemsProcessed: 0,
+    totalItems: total,
+    message: `Importing loans...`,
+  });
+
+  for (let i = 0; i < loans.length; i++) {
+    const loan = loans[i];
+    try {
+      const existing = await db.loans.get(loan.id);
+
+      if (existing) {
+        if (resolution === 'skip') {
+          stats.loans.skipped++;
+          continue;
+        } else if (resolution === 'rename') {
+          loan.id = `${loan.id}-imported-${Date.now()}`;
+        }
+      }
+
+      await db.loans.put({
+        ...loan,
+        startDate: parseDate(loan.startDate) || new Date(),
+        nextPaymentDate: parseDate(loan.nextPaymentDate) || new Date(),
+        defermentEndDate: loan.defermentEndDate ? parseDate(loan.defermentEndDate) || undefined : undefined,
+        createdAt: parseDate(loan.createdAt) || new Date(),
+        updatedAt: parseDate(loan.updatedAt) || new Date(),
+      });
+      stats.loans.imported++;
+    } catch (error) {
+      stats.loans.errors++;
+      errors.push({ table: 'loans', id: loan.id, message: String(error) });
+    }
+
+    if ((i + 1) % PROGRESS_UPDATE_INTERVAL === 0 || i === loans.length - 1) {
+      emitProgress(onProgress, {
+        stage: 'importing',
+        currentTable: 'loans',
+        tableIndex,
+        totalTables,
+        itemsProcessed: i + 1,
+        totalItems: total,
+        message: `Importing loans...`,
+      });
+    }
+  }
+}
+
+async function importSubscriptionsWithProgress(
+  subscriptions: BudgetExportData['subscriptions'],
+  resolution: ConflictResolution,
+  stats: ImportResult['stats'],
+  errors: ImportResult['errors'],
+  onProgress: ((progress: ImportProgress) => void) | undefined,
+  tableIndex: number,
+  totalTables: number
+) {
+  const total = subscriptions.length;
+  emitProgress(onProgress, {
+    stage: 'importing',
+    currentTable: 'subscriptions',
+    tableIndex,
+    totalTables,
+    itemsProcessed: 0,
+    totalItems: total,
+    message: `Importing subscriptions...`,
+  });
+
+  for (let i = 0; i < subscriptions.length; i++) {
+    const sub = subscriptions[i];
+    try {
+      const existing = await db.subscriptions.get(sub.id);
+
+      if (existing) {
+        if (resolution === 'skip') {
+          stats.subscriptions.skipped++;
+          continue;
+        } else if (resolution === 'rename') {
+          sub.id = `${sub.id}-imported-${Date.now()}`;
+        }
+      }
+
+      await db.subscriptions.put({
+        ...sub,
+        startDate: parseDate(sub.startDate) || new Date(),
+        nextBillingDate: parseDate(sub.nextBillingDate) || new Date(),
+        trialEndDate: sub.trialEndDate ? parseDate(sub.trialEndDate) || undefined : undefined,
+        cancelledDate: sub.cancelledDate ? parseDate(sub.cancelledDate) || undefined : undefined,
+        createdAt: parseDate(sub.createdAt) || new Date(),
+        updatedAt: parseDate(sub.updatedAt) || new Date(),
+      });
+      stats.subscriptions.imported++;
+    } catch (error) {
+      stats.subscriptions.errors++;
+      errors.push({ table: 'subscriptions', id: sub.id, message: String(error) });
+    }
+
+    if ((i + 1) % PROGRESS_UPDATE_INTERVAL === 0 || i === subscriptions.length - 1) {
+      emitProgress(onProgress, {
+        stage: 'importing',
+        currentTable: 'subscriptions',
+        tableIndex,
+        totalTables,
+        itemsProcessed: i + 1,
+        totalItems: total,
+        message: `Importing subscriptions...`,
+      });
+    }
+  }
+}
+
+async function importProfilesWithProgress(
+  profiles: BudgetExportData['profiles'],
+  resolution: ConflictResolution,
+  stats: ImportResult['stats'],
+  errors: ImportResult['errors'],
+  profileIdMap: Map<string, string>,
+  onProgress: ((progress: ImportProgress) => void) | undefined,
+  tableIndex: number,
+  totalTables: number
+) {
+  const total = profiles.length;
+  emitProgress(onProgress, {
+    stage: 'importing',
+    currentTable: 'profiles',
+    tableIndex,
+    totalTables,
+    itemsProcessed: 0,
+    totalItems: total,
+    message: `Importing profiles...`,
+  });
+
+  for (let i = 0; i < profiles.length; i++) {
+    const profile = profiles[i];
+    try {
+      const existing = await db.profiles.get(profile.id);
+      const originalId = profile.id;
+
+      if (existing) {
+        if (resolution === 'skip') {
+          stats.profiles.skipped++;
+          profileIdMap.set(originalId, existing.id);
+          continue;
+        } else if (resolution === 'rename') {
+          profile.id = `${profile.id}-imported-${Date.now()}`;
+          profileIdMap.set(originalId, profile.id);
+        }
+      }
+
+      await db.profiles.put({
+        id: profile.id,
+        name: profile.name,
+        isDefault: profile.isDefault,
+        avatarColor: profile.avatarColor,
+        avatarImage: profile.avatarImage,
+        order: profile.order,
+        pinHash: null,
+        pinSalt: null,
+        createdAt: parseDate(profile.createdAt) || new Date(),
+        updatedAt: parseDate(profile.updatedAt) || new Date(),
+      });
+      stats.profiles.imported++;
+    } catch (error) {
+      stats.profiles.errors++;
+      errors.push({ table: 'profiles', id: profile.id, message: String(error) });
+    }
+
+    if ((i + 1) % PROGRESS_UPDATE_INTERVAL === 0 || i === profiles.length - 1) {
+      emitProgress(onProgress, {
+        stage: 'importing',
+        currentTable: 'profiles',
+        tableIndex,
+        totalTables,
+        itemsProcessed: i + 1,
+        totalItems: total,
+        message: `Importing profiles...`,
+      });
+    }
+  }
+}
+
+async function importActivityLogWithProgress(
+  activityLog: BudgetExportData['activityLog'],
+  resolution: ConflictResolution,
+  stats: ImportResult['stats'],
+  errors: ImportResult['errors'],
+  profileIdMap: Map<string, string>,
+  onProgress: ((progress: ImportProgress) => void) | undefined,
+  tableIndex: number,
+  totalTables: number
+) {
+  const total = activityLog.length;
+  emitProgress(onProgress, {
+    stage: 'importing',
+    currentTable: 'activityLog',
+    tableIndex,
+    totalTables,
+    itemsProcessed: 0,
+    totalItems: total,
+    message: `Importing activity log...`,
+  });
+
+  for (let i = 0; i < activityLog.length; i++) {
+    const entry = activityLog[i];
+    try {
+      const existing = await db.activityLog.get(entry.id);
+
+      if (existing) {
+        if (resolution === 'skip') {
+          stats.activityLog.skipped++;
+          continue;
+        } else if (resolution === 'rename') {
+          entry.id = `${entry.id}-imported-${Date.now()}`;
+        }
+      }
+
+      let mappedProfileId = entry.profileId;
+      if (profileIdMap.has(mappedProfileId)) {
+        mappedProfileId = profileIdMap.get(mappedProfileId)!;
+      }
+
+      await db.activityLog.put({
+        id: entry.id,
+        profileId: mappedProfileId,
+        profileName: entry.profileName,
+        action: entry.action,
+        entityType: entry.entityType,
+        entityId: entry.entityId,
+        entityName: entry.entityName,
+        details: entry.details,
+        timestamp: parseDate(entry.timestamp) || new Date(),
+      });
+      stats.activityLog.imported++;
+    } catch (error) {
+      stats.activityLog.errors++;
+      errors.push({ table: 'activityLog', id: entry.id, message: String(error) });
+    }
+
+    if ((i + 1) % PROGRESS_UPDATE_INTERVAL === 0 || i === activityLog.length - 1) {
+      emitProgress(onProgress, {
+        stage: 'importing',
+        currentTable: 'activityLog',
+        tableIndex,
+        totalTables,
+        itemsProcessed: i + 1,
+        totalItems: total,
+        message: `Importing activity log...`,
+      });
+    }
+  }
+}
+
 /**
  * Preview import without actually importing
  */
@@ -705,6 +1598,8 @@ export async function previewImport(
     goals: data.goals.length,
     loans: data.loans.length,
     subscriptions: data.subscriptions.length,
+    profiles: data.profiles?.length || 0,
+    activityLog: data.activityLog?.length || 0,
   };
 
   const conflicts: Record<string, number> = {};
@@ -725,6 +1620,15 @@ export async function previewImport(
   for (const cat of data.categories) {
     if (await db.categories.get(cat.id)) {
       conflicts.categories = (conflicts.categories || 0) + 1;
+    }
+  }
+
+  // Check for profile conflicts
+  if (data.profiles) {
+    for (const profile of data.profiles) {
+      if (await db.profiles.get(profile.id)) {
+        conflicts.profiles = (conflicts.profiles || 0) + 1;
+      }
     }
   }
 

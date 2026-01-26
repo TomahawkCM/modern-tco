@@ -18,6 +18,7 @@
 
 import OpenAI from 'openai';
 import { isAIFeaturesEnabled } from '@/lib/budget-privacy-settings';
+import { isOnlineMode } from '@/config/features';
 
 // ============================================================================
 // Configuration
@@ -77,8 +78,14 @@ const responseCache = new Map<string, CachedResponse>();
 /**
  * Check if OpenAI API key is configured
  * SECURITY: Server-side only - never expose API key to browser
+ * Returns false silently in standalone mode (no logging)
  */
 export function hasOpenAIKey(): boolean {
+  // In standalone mode, AI is never available - return false silently
+  if (!isOnlineMode()) {
+    return false;
+  }
+
   // Server-side: check for server-only key (preferred)
   // This will be false on client-side which is intentional
   const serverKey = process.env.OPENAI_API_KEY;
@@ -231,6 +238,14 @@ export async function chatCompletion(
   userPrompt: string,
   options: OpenAIRequestOptions = {}
 ): Promise<OpenAIResponse<string>> {
+  // In standalone mode, return silent failure (no console errors)
+  if (!isOnlineMode()) {
+    return {
+      success: false,
+      error: 'AI features not available in standalone mode',
+    };
+  }
+
   // Check if AI features are enabled
   if (!isAIFeaturesEnabled()) {
     return {

@@ -23,6 +23,7 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 import OpenAI from 'openai';
+import { isOnlineMode } from '@/config/features';
 
 // ============================================================================
 // Types
@@ -312,9 +313,13 @@ export async function POST(request: NextRequest): Promise<NextResponse<ColumnAna
     }
 
     // Step 2: Try AI analysis (server-side, secure)
-    const apiKey = process.env.OPENAI_API_KEY;
+    // Skip AI in standalone mode - use pattern matching only
+    const apiKey = isOnlineMode() ? process.env.OPENAI_API_KEY : null;
     if (!apiKey) {
-      console.warn('[AnalyzeColumns] No OPENAI_API_KEY, using pattern matching fallback');
+      // In standalone mode, this is expected - no logging needed
+      if (isOnlineMode()) {
+        console.warn('[AnalyzeColumns] No OPENAI_API_KEY, using pattern matching fallback');
+      }
 
       // Return pattern match if available, otherwise fallback
       if (patternMatch) {

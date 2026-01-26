@@ -1,9 +1,9 @@
 # Complete Tool Matrix & Task-Based Deployment Strategy
-## Tanium TCO LMS - 184 Tools Across 11 MCP Servers
+## Tanium TCO LMS - 12 MCP Servers
 
-**Last Updated**: October 10, 2025
-**Total Tools**: 184
-**Estimated Token Cost**: 147K (Reported: 118K - 29K discrepancy to investigate)
+**Last Updated**: January 1, 2026
+**Total Tools**: ~115 MCP tools + core Claude Code tools
+**Estimated Token Cost**: ~128K tokens
 
 ---
 
@@ -169,47 +169,7 @@ Standard Workflow:
 
 ---
 
-#### **7. MULTI-AGENT ORCHESTRATION** (⚠️ High Cost)
-
-| Task | Tools | Token Cost | Rationale |
-|------|-------|------------|-----------|
-| Initialize swarm | `claude-flow.swarm_init` | ~52K | Setup topology |
-| Spawn single agent | `claude-flow.agent_spawn` | ~52K | Create specialist |
-| Spawn multiple agents | `claude-flow.agents_spawn_parallel` | ~52K | 10-20x faster parallel spawn |
-| Orchestrate complex task | `claude-flow.task_orchestrate` | ~52K | Multi-step workflows |
-| Monitor swarm | `claude-flow.swarm_status`, `agent_metrics` | ~52K | Health monitoring |
-| Load balancing | `claude-flow.load_balance` | ~52K | Distribute tasks |
-| Auto-scale | `claude-flow.swarm_scale` | ~52K | Dynamic scaling |
-
-**Primary Tool**: `claude-flow` (90 tools, ~52K tokens)
-**⚠️ WARNING**: 35-44% of entire MCP budget
-
-**Decision Rule**: Use ONLY when:
-- Explicit multi-agent request ("spawn 5 agents", "coordinate team")
-- Task requires 5+ parallel specialists
-- Complex orchestration beyond single-agent capability
-
-**Alternatives**: Use Task tool for simpler agent spawning (lower overhead)
-
----
-
-#### **8. AI-POWERED ANALYSIS** (claude-flow subsets)
-
-| Category | Tools | Use Cases |
-|----------|-------|-----------|
-| **Neural Network** | `neural_train`, `neural_predict`, `model_load/save` | ML-powered features, pattern recognition |
-| **Memory Management** | `memory_usage`, `memory_search`, `memory_persist` | Cross-session state, learning persistence |
-| **Performance Analysis** | `performance_report`, `bottleneck_analyze`, `token_usage` | System optimization, cost tracking |
-| **Workflow Automation** | `workflow_create`, `automation_setup`, `pipeline_create` | CI/CD, task automation |
-| **GitHub Integration** | `github_repo_analyze`, `github_pr_manage`, `github_code_review` | Automated code review, PR management |
-
-**All part of claude-flow** (~52K tokens)
-
-**Decision Rule**: If using any claude-flow tool, full 52K is loaded
-
----
-
-#### **9. ERROR PREVENTION & LEARNING**
+#### **7. ERROR PREVENTION & LEARNING**
 
 | Task | Tools | Token Cost | Rationale |
 |------|-------|------------|-----------|
@@ -227,7 +187,7 @@ Standard Workflow:
 
 ---
 
-#### **10. PYTHON/NOTEBOOK EXECUTION**
+#### **8. PYTHON/NOTEBOOK EXECUTION**
 
 | Task | Tools | Token Cost | Rationale |
 |------|-------|------------|-----------|
@@ -301,28 +261,7 @@ Total Cost: 19K tokens
 Performance: ⚡⚡⚡ Fast
 ```
 
-#### **Scenario 4: Complex Multi-Agent Build**
-```
-Task: "Build entire video system with 5 agents testing in parallel"
-
-Analysis:
-1. Explicit multi-agent request
-2. High complexity, parallel work
-3. Testing required
-
-Tool Selection:
-✅ vibe-check (prevent tunnel vision in complex build) - 2K
-✅ claude-flow (spawn 5 agents, orchestrate) - 52K
-✅ playwright (E2E testing) - 14K
-✅ filesystem (file operations) - 9K
-✅ github (commits, PR) - 18K
-
-Total Cost: 95K tokens
-Performance: ⚡ Slower (appropriate for complexity)
-Justification: Explicit orchestration requested
-```
-
-#### **Scenario 5: Research API Integration**
+#### **Scenario 4: Research API Integration**
 ```
 Task: "Research Tanium API and implement integration"
 
@@ -336,13 +275,12 @@ Tool Selection:
 ✅ firecrawl (scrape Tanium docs) - 8K
 ✅ filesystem (implement integration) - 9K
 ❌ context7 (not for Tanium API - use firecrawl)
-❌ claude-flow (single-agent task)
 
 Total Cost: 19K tokens
 Performance: ⚡⚡⚡ Fast
 ```
 
-#### **Scenario 6: TypeScript Error Fix**
+#### **Scenario 5: TypeScript Error Fix**
 ```
 Task: "Fix TypeScript errors in ExamInterface"
 
@@ -357,7 +295,6 @@ Tool Selection:
 ✅ filesystem (read file, fix errors) - 9K
 ❌ shadcn (not component-related)
 ❌ playwright (no browser needed)
-❌ claude-flow (overkill for simple fix)
 
 Total Cost: 14K tokens
 Performance: ⚡⚡⚡ Lightning fast
@@ -372,32 +309,27 @@ Performance: ⚡⚡⚡ Lightning fast
 - Add expensive tools only when justified
 - Question every tool addition
 
-### **Rule 2: Avoid claude-flow Unless Essential**
-- 52K tokens = 35-44% of budget
-- Only use for explicit multi-agent requests
-- Single-agent tasks? Use Task tool instead
-
-### **Rule 3: Know Your Database**
+### **Rule 2: Know Your Database**
 - Local/offline data → sqlite-tanium (~3K)
 - Production/Supabase/RLS → postgresql (~8K)
 - Never mix the two
 
-### **Rule 4: Research Tool Selection**
+### **Rule 3: Research Tool Selection**
 - npm/framework docs → context7 (~5K, faster)
 - General web scraping → firecrawl (~8K, flexible)
 - Don't default to one
 
-### **Rule 5: Visual Debugging is Valid**
+### **Rule 4: Visual Debugging is Valid**
 - playwright isn't just for E2E tests
 - Use for color bugs, layout issues, visual verification
 - Justified when code inspection insufficient
 
-### **Rule 6: Use vibe-check Proactively**
+### **Rule 5: Use vibe-check Proactively**
 - Before complex refactors (~2K overhead)
 - When stuck or making assumptions
 - Error prevention > error fixing
 
-### **Rule 7: Bash Commands When Possible**
+### **Rule 6: Bash Commands When Possible**
 - git status/diff/commit/push - Pre-approved, 0K tokens
 - npm test/build/lint - Pre-approved, 0K tokens
 - Prefer CLI over MCP when equivalent
@@ -448,7 +380,6 @@ Performance: ⚡⚡⚡ Lightning fast
 | **E2E testing** | vibe-check + playwright | ~16K | ⚡⚡ |
 | **npm docs** | vibe-check + context7 | ~7K | ⚡⚡⚡ |
 | **Web scraping** | vibe-check + firecrawl | ~10K | ⚡⚡⚡ |
-| **Multi-agent** | vibe-check + claude-flow | ~54K | ⚡ |
 
 **Legend**: ⚡⚡⚡ Fast | ⚡⚡ Moderate | ⚡ Slower
 
@@ -488,12 +419,11 @@ When selecting tools for a task:
 - [ ] 4. Calculate estimated token cost (including +2K for vibe-check)
 - [ ] 5. Verify no lower-cost alternative exists
 - [ ] 6. Check for tool overlaps (use resolution rules)
-- [ ] 7. Question if claude-flow is TRULY needed (52K cost!)
-- [ ] 8. Document tool selection rationale
-- [ ] 9. Use vibe_learn if errors occur (learn from mistakes)
+- [ ] 7. Document tool selection rationale
+- [ ] 8. Use vibe_learn if errors occur (learn from mistakes)
 
 ---
 
-**Last Updated**: October 10, 2025
+**Last Updated**: January 1, 2026
 **Maintained By**: Claude Code AI Assistant
 **Review Frequency**: After each major task or tool addition

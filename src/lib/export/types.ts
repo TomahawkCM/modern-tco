@@ -211,8 +211,41 @@ export interface BudgetExportItem {
   startDate: string;
   endDate: string | null;
   rollover: boolean;
+  // Multi-Profile Support
+  ownerId?: string | null;
+  visibility?: 'shared' | 'private';
   createdAt: string;
   updatedAt: string;
+}
+
+/**
+ * Profile export (PIN data excluded for security)
+ */
+export interface ProfileExport {
+  id: string;
+  name: string;
+  isDefault: boolean;
+  avatarColor?: string;
+  avatarImage?: string;
+  order?: number;
+  createdAt: string;
+  updatedAt: string;
+  // Note: pinHash and pinSalt are intentionally excluded for security
+}
+
+/**
+ * Activity log entry export
+ */
+export interface ActivityLogExport {
+  id: string;
+  profileId: string;
+  profileName: string;
+  action: 'create' | 'update' | 'delete' | 'login' | 'logout' | 'export' | 'import' | 'pin_change' | 'profile_switch';
+  entityType: 'profile' | 'transaction' | 'budget' | 'category' | 'account' | 'subscription' | 'loan' | 'system';
+  entityId: string | null;
+  entityName?: string;
+  details?: Record<string, unknown>;
+  timestamp: string;
 }
 
 export interface GoalExport {
@@ -470,6 +503,9 @@ export interface BudgetExportData {
   receipts: ReceiptExport[];
   settings: SettingsExport;
   preferences: PreferencesExport;
+  // Multi-Profile Support
+  profiles: ProfileExport[];
+  activityLog: ActivityLogExport[];
 }
 
 /**
@@ -508,6 +544,26 @@ export interface ExportOptions {
 }
 
 /**
+ * Import progress information
+ */
+export interface ImportProgress {
+  /** Current stage of the import process */
+  stage: 'validating' | 'decrypting' | 'importing' | 'complete';
+  /** Name of the current table being imported */
+  currentTable: string;
+  /** Index of current table (0-based) */
+  tableIndex: number;
+  /** Total number of tables to import */
+  totalTables: number;
+  /** Number of items processed in current table */
+  itemsProcessed: number;
+  /** Total items in current table */
+  totalItems: number;
+  /** Human-readable message */
+  message: string;
+}
+
+/**
  * Import options
  */
 export interface ImportOptions {
@@ -519,6 +575,8 @@ export interface ImportOptions {
   password?: string;
   /** Import specific tables only */
   includeTables?: (keyof BudgetExportData)[];
+  /** Progress callback for UI updates */
+  onProgress?: (progress: ImportProgress) => void;
 }
 
 /**
@@ -537,6 +595,8 @@ export interface ImportResult {
     subscriptions: { imported: number; skipped: number; errors: number };
     investments: { imported: number; skipped: number; errors: number };
     receipts: { imported: number; skipped: number; errors: number };
+    profiles: { imported: number; skipped: number; errors: number };
+    activityLog: { imported: number; skipped: number; errors: number };
   };
   errors: Array<{
     table: string;

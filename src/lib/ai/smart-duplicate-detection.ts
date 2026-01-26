@@ -23,7 +23,7 @@
  * - AI can be enabled via settings for power users
  */
 
-import { chatCompletionJSON } from './openai-service';
+import { chatCompletionJSON, hasOpenAIKey } from './openai-service';
 import type { ParsedTransaction, Transaction } from '@/types/budget';
 
 // ============================================================================
@@ -367,6 +367,13 @@ async function detectSemanticMatches(
   const { dateToleranceDays = 3, batchSize = 10 } = options;
   const matches: DuplicateMatch[] = [];
 
+  // Early return if AI is not available (no API key configured)
+  // This is expected in client-side code - AI features require server-side API routes
+  if (!hasOpenAIKey()) {
+    console.log('[SmartDuplicate] AI not available, skipping semantic matching (using rule-based detection only)');
+    return matches;
+  }
+
   // Filter candidates: within date range
   const candidates: Array<{ newTx: ParsedTransaction; existingTx: Transaction; index: number }> = [];
 
@@ -405,7 +412,8 @@ async function detectSemanticMatches(
       });
 
       if (!response.success || !response.data) {
-        console.error('[SmartDuplicate] AI detection failed for batch', i / batchSize, response.error);
+        // Log as warning since this is expected when AI isn't configured
+        console.warn('[SmartDuplicate] AI detection skipped for batch', i / batchSize, '- falling back to rule-based detection');
         continue;
       }
 
@@ -427,7 +435,10 @@ async function detectSemanticMatches(
         }
       });
     } catch (error) {
-      console.error('[SmartDuplicate] Error detecting semantic matches for batch', i / batchSize, error);
+      // AI not available - this is expected on client-side
+      // The caller will fall back to rule-based detection
+      console.log('[SmartDuplicate] AI not available, skipping semantic matching');
+      break; // No point trying other batches if AI isn't available
     }
   }
 
@@ -586,9 +597,9 @@ export async function detectDuplicatesEnhanced(
         }
       });
     } catch (error) {
-      console.warn('[SmartDuplicate] AI semantic matching unavailable, using rule-based detection only:', error);
+      // AI not available on client-side - this is expected
       // Gracefully degrade to rule-based detection (exact + fuzzy + merchant)
-      // No action needed - we already have matches from previous steps
+      console.log('[SmartDuplicate] Using rule-based duplicate detection (AI requires server-side)');
     }
   }
 

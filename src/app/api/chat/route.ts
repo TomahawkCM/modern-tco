@@ -14,6 +14,7 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 import OpenAI from 'openai';
+import { isOnlineMode } from '@/config/features';
 
 // Lazy initialization of OpenAI client
 let openai: OpenAI | null = null;
@@ -79,6 +80,14 @@ function checkRateLimit(ip: string): boolean {
 }
 
 export async function POST(request: NextRequest) {
+  // Check if we're in online mode (standalone mode has no AI)
+  if (!isOnlineMode()) {
+    return NextResponse.json(
+      { error: 'Chatbot not available in standalone mode' },
+      { status: 503 }
+    );
+  }
+
   try {
     // Get client IP for rate limiting
     const ip = request.headers.get('x-forwarded-for') || request.headers.get('x-real-ip') || 'unknown';

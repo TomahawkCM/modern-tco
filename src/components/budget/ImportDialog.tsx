@@ -19,14 +19,26 @@ import {
   FileUp,
   Info,
   AlertTriangle,
+  Wallet,
+  Receipt,
+  Tag,
+  PieChart,
+  Target,
+  CreditCard,
+  Repeat,
+  User,
+  Activity,
+  type LucideIcon,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Progress } from '@/components/ui/progress';
 import {
   readBudgetFile,
   previewImport,
   importBudgetData,
   type BudgetFile,
   type ImportOptions,
+  type ImportProgress,
   isEncryptedData,
 } from '@/lib/export';
 import { cn } from '@/lib/utils';
@@ -40,6 +52,32 @@ interface ImportDialogProps {
 }
 
 type ImportStep = 'select' | 'preview' | 'importing' | 'complete';
+
+// Icons for each data type
+const tableIcons: Record<string, LucideIcon> = {
+  accounts: Wallet,
+  transactions: Receipt,
+  categories: Tag,
+  budgets: PieChart,
+  goals: Target,
+  loans: CreditCard,
+  subscriptions: Repeat,
+  profiles: User,
+  activityLog: Activity,
+};
+
+// Display names for tables
+const tableDisplayNames: Record<string, string> = {
+  accounts: 'Accounts',
+  transactions: 'Transactions',
+  categories: 'Categories',
+  budgets: 'Budgets',
+  goals: 'Goals',
+  loans: 'Loans',
+  subscriptions: 'Subscriptions',
+  profiles: 'Profiles',
+  activityLog: 'Activity Log',
+};
 
 export function ImportDialog({ isOpen, onClose, onImportComplete }: ImportDialogProps) {
   const { isSeniorsMode } = useSeniorsMode();
@@ -69,6 +107,9 @@ export function ImportDialog({ isOpen, onClose, onImportComplete }: ImportDialog
     message: string;
     imported: number;
   } | null>(null);
+
+  // Import progress state
+  const [importProgress, setImportProgress] = useState<ImportProgress | null>(null);
 
   // Handle file selection
   const handleFileSelect = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -125,11 +166,13 @@ export function ImportDialog({ isOpen, onClose, onImportComplete }: ImportDialog
 
     setStep('importing');
     setError(null);
+    setImportProgress(null);
 
     try {
       const options: ImportOptions = {
         conflictResolution,
         password: needsPassword ? password : undefined,
+        onProgress: setImportProgress,
       };
 
       const result = await importBudgetData(budgetFile, options);
@@ -169,6 +212,7 @@ export function ImportDialog({ isOpen, onClose, onImportComplete }: ImportDialog
       setPreview(null);
       setError(null);
       setImportResult(null);
+      setImportProgress(null);
     }, 200);
   };
 
@@ -378,12 +422,89 @@ export function ImportDialog({ isOpen, onClose, onImportComplete }: ImportDialog
 
             {/* Step: Importing */}
             {step === 'importing' && (
-              <div className="flex flex-col items-center justify-center py-12">
-                <Loader2 className="h-12 w-12 animate-spin text-teal-400 mb-4" />
-                <p className={cn('font-medium text-white', isSeniorsMode && 'text-lg')}>
-                  {t('importing.title')}
-                </p>
-                <p className="text-sm text-slate-500 mt-2">
+              <div className="flex flex-col items-center justify-center py-8 space-y-6">
+                {/* Progress Bar */}
+                <div className="w-full space-y-2">
+                  <Progress
+                    value={
+                      importProgress
+                        ? importProgress.stage === 'complete'
+                          ? 100
+                          : importProgress.totalTables > 0
+                            ? ((importProgress.tableIndex + (importProgress.totalItems > 0 ? importProgress.itemsProcessed / importProgress.totalItems : 0)) / importProgress.totalTables) * 100
+                            : 0
+                        : 0
+                    }
+                    className="h-3"
+                    aria-label={`Import progress: ${importProgress?.stage === 'complete' ? '100' : Math.round(importProgress?.totalTables ? ((importProgress.tableIndex + (importProgress.totalItems > 0 ? importProgress.itemsProcessed / importProgress.totalItems : 0)) / importProgress.totalTables) * 100 : 0)}%`}
+                  />
+                </div>
+
+                {/* Current Stage/Table Display */}
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={importProgress?.currentTable || importProgress?.stage || 'loading'}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.2 }}
+                    className="flex flex-col items-center space-y-3"
+                  >
+                    {/* Icon and Table Name */}
+                    {importProgress?.stage === 'validating' && (
+                      <>
+                        <div className="flex h-14 w-14 items-center justify-center rounded-full bg-blue-500/20">
+                          <Loader2 className="h-7 w-7 animate-spin text-blue-400" />
+                        </div>
+                        <p className={cn('font-medium text-white', isSeniorsMode && 'text-lg')}>
+                          Validating file...
+                        </p>
+                      </>
+                    )}
+
+                    {importProgress?.stage === 'decrypting' && (
+                      <>
+                        <div className="flex h-14 w-14 items-center justify-center rounded-full bg-amber-500/20">
+                          <Lock className="h-7 w-7 text-amber-400" />
+                        </div>
+                        <p className={cn('font-medium text-white', isSeniorsMode && 'text-lg')}>
+                          Decrypting data...
+                        </p>
+                      </>
+                    )}
+
+                    {importProgress?.stage === 'importing' && importProgress.currentTable && (
+                      <>
+                        <div className="flex h-14 w-14 items-center justify-center rounded-full bg-teal-500/20">
+                          {(() => {
+                            const IconComponent = tableIcons[importProgress.currentTable] || FileUp;
+                            return <IconComponent className="h-7 w-7 text-teal-400" />;
+                          })()}
+                        </div>
+                        <p className={cn('font-medium text-white', isSeniorsMode && 'text-lg')}>
+                          Importing {tableDisplayNames[importProgress.currentTable] || importProgress.currentTable}
+                        </p>
+                        <p className="text-sm text-slate-400">
+                          {importProgress.itemsProcessed.toLocaleString()} of {importProgress.totalItems.toLocaleString()} items
+                        </p>
+                      </>
+                    )}
+
+                    {(!importProgress || (importProgress.stage === 'importing' && !importProgress.currentTable)) && (
+                      <>
+                        <div className="flex h-14 w-14 items-center justify-center rounded-full bg-teal-500/20">
+                          <Loader2 className="h-7 w-7 animate-spin text-teal-400" />
+                        </div>
+                        <p className={cn('font-medium text-white', isSeniorsMode && 'text-lg')}>
+                          {t('importing.title')}
+                        </p>
+                      </>
+                    )}
+                  </motion.div>
+                </AnimatePresence>
+
+                {/* Helper Text */}
+                <p className="text-sm text-slate-500 text-center">
                   {t('importing.pleaseWait')}
                 </p>
               </div>

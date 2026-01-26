@@ -4,6 +4,8 @@
  * Uses localStorage for client-side persistence
  */
 
+import { isOnlineMode } from '@/config/features';
+
 const STORAGE_KEY = 'budget-app-privacy-settings';
 
 export interface PrivacySettings {
@@ -37,19 +39,20 @@ export interface PrivacySettings {
   updatedAt: number;
 }
 
+// Offline-first defaults: privacy-preserving, local-only operation
 const DEFAULT_SETTINGS: PrivacySettings = {
-  enableSmartDuplicateDetection: true, // Enabled by default
-  enableAnomalyDetection: true, // Enabled by default
-  enablePredictiveSpending: true, // Enabled by default
+  enableSmartDuplicateDetection: true, // Enabled by default (local processing)
+  enableAnomalyDetection: true, // Enabled by default (local processing)
+  enablePredictiveSpending: true, // Enabled by default (local processing)
   enableNaturalLanguageImport: true, // Enabled by default
   enableAIFeatures: true, // Master switch - AI features enabled by default
   enableOCR: true, // OCR is client-side only, safe by default
-  enableChatbot: false, // Chatbot opt-in required (GDPR compliance)
+  enableChatbot: false, // Chatbot opt-in required (GDPR compliance, requires API)
   chatbotDataAccess: 'read-only', // Safe default - chatbot can only read data
   chatbotConversationRetention: 7, // 7 days default (minimum retention)
-  enableAnalytics: true, // Analytics enabled by default (privacy-safe, no PII)
-  enableErrorTracking: true, // Error tracking enabled by default (helps improve app)
-  enableEncryption: false, // Encryption opt-in (requires key generation)
+  enableAnalytics: false, // OFFLINE DEFAULT: No tracking - user must opt-in
+  enableErrorTracking: false, // OFFLINE DEFAULT: No error reporting - user must opt-in
+  enableEncryption: true, // OFFLINE DEFAULT: Encryption ON - data protected at rest
   allowDataExport: true,
   allowDataDeletion: true,
   updatedAt: Date.now(),
@@ -111,8 +114,13 @@ export function isSmartDuplicateDetectionEnabled(): boolean {
 
 /**
  * Check if AI features are enabled
+ * Returns false in standalone mode (no external API calls)
  */
 export function isAIFeaturesEnabled(): boolean {
+  // In standalone mode, AI features are always disabled
+  if (!isOnlineMode()) {
+    return false;
+  }
   const settings = getPrivacySettings();
   return settings.enableAIFeatures;
 }
@@ -166,8 +174,13 @@ export function resetPrivacySettings(): void {
 
 /**
  * Check if chatbot is enabled
+ * Returns false in standalone mode (no external API calls)
  */
 export function isChatbotEnabled(): boolean {
+  // In standalone mode, chatbot is always disabled
+  if (!isOnlineMode()) {
+    return false;
+  }
   const settings = getPrivacySettings();
   return settings.enableChatbot && settings.enableAIFeatures; // Requires both chatbot AND AI features enabled
 }

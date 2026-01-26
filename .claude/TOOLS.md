@@ -6,7 +6,7 @@
 
 ## MCP Server Configuration
 
-**12 Active Servers (~128K tokens available)** - Updated 2025-12-03
+**12 Active Servers (~128K tokens available)** - Updated January 2026
 
 | # | Server | Package | Version | Tools | Tokens |
 |---|--------|---------|---------|-------|--------|
@@ -23,7 +23,69 @@
 | 11 | **archon** | HTTP localhost:8051 | Local | 16 | ~10K |
 | 12 | **postgresql** | PostgreSQL MCP | Local | 3 | ~8K |
 
-**Note**: `serena` MCP server is installed but currently not connected.
+---
+
+## CLI Browser Automation (agent-browser)
+
+**Package**: `agent-browser` (vercel-labs) v0.7.6
+**Purpose**: AI-optimized browser automation for content scraping, visual testing, and exploration
+
+### Available Commands
+
+```bash
+# Basic operations
+npm run browser:open        # Open browser (add URL as arg)
+npm run browser:snapshot    # Get interactive page snapshot
+npm run browser:screenshot  # Capture screenshot
+npm run browser:close       # Close browser session
+
+# Workflows
+npm run browser:scrape      # Content scraping script
+npm run browser:visual-test # Visual regression testing
+```
+
+### Usage Patterns
+
+**Content Scraping (LMS population)**:
+```bash
+npm run browser:scrape -- --url "https://docs.tanium.com" --output ./scraped.json
+npm run browser:scrape -- --sitemap https://docs.example.com/sitemap.xml --max-pages 20
+```
+
+**Visual Testing (development)**:
+```bash
+npm run browser:visual-test                          # Test default pages
+npm run browser:visual-test -- --base-url http://localhost:3001
+npm run browser:visual-test -- --pages /welcome,/practice,/mock
+```
+
+**General Exploration (via npx)**:
+```bash
+npx agent-browser open "https://example.com"
+npx agent-browser snapshot -i    # Interactive element refs
+npx agent-browser click @e3      # Click by ref
+npx agent-browser fill @e5 "query"
+npx agent-browser close
+```
+
+### CI/CD Integration
+
+Visual tests run automatically on push/PR via `.github/workflows/browser-automation.yml`:
+- Builds application
+- Runs visual regression tests
+- Uploads screenshots and reports as artifacts
+- Comments results on PRs
+
+### When to Use
+
+| Use Case | Tool |
+|----------|------|
+| E2E test automation | playwright (MCP or Playwright Test) |
+| AI-assisted exploration | agent-browser |
+| Content scraping for LMS | agent-browser (browser:scrape) |
+| Visual regression in CI | agent-browser (browser:visual-test) |
+| Quick page inspection | agent-browser (interactive) |
+
 
 ---
 

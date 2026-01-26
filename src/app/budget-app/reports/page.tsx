@@ -11,6 +11,7 @@ import { BarChart3, PieChart as PieChartIcon, TrendingUp, Calendar, ArrowRightLe
 import * as htmlToImage from 'html-to-image';
 import { db } from '@/lib/budget-db';
 import type { Transaction, Category } from '@/types/budget';
+import { sumAmounts, subtractAmounts, roundToCents } from '@/lib/money';
 import { SpendingHeatMap } from '@/components/budget/SpendingHeatMap';
 import { LazySpendingTrendChart } from '@/components/budget/charts/LazyChartComponents';
 import { useThemeMode } from '@/hooks/useThemeMode';
@@ -123,11 +124,17 @@ export default function ReportsPage() {
 
   async function loadData() {
     try {
-      const [txs, cats] = await Promise.all([
+      const [allTxs, cats] = await Promise.all([
         db.transactions.toArray(),
         db.categories.toArray(),
       ]);
-      setTransactions(txs);
+      
+      // Filter out parent transactions that have been split
+      // Only count child transactions (which have splitFromId) and non-split transactions
+      // This prevents double-counting when a transaction is split
+      const visibleTxs = allTxs.filter(tx => !tx.isSplit);
+      
+      setTransactions(visibleTxs);
       setCategories(cats);
     } catch (error) {
       console.error('Error loading reports data:', error);
@@ -538,13 +545,13 @@ function calculateCategorySpending(transactions: Transaction[], categories: Cate
       const cat = categories.find(c => c.name === category);
 
       spending.set(category, {
-        value: existing.value + Math.abs(tx.amount),
+        value: roundToCents(existing.value + Math.abs(tx.amount)),
         count: existing.count + 1,
         color: cat?.color || '#64748b',
       });
     });
 
-  const total = Array.from(spending.values()).reduce((sum, cat) => sum + cat.value, 0);
+  const total = sumAmounts(Array.from(spending.values()).map(cat => cat.value));
 
   return Array.from(spending.entries()).map(([name, data]) => ({
     name,
@@ -575,9 +582,9 @@ function calculateMonthlyTrends(transactions: Transaction[]) {
     if (monthlyData.has(key)) {
       const data = monthlyData.get(key)!;
       if (tx.amount > 0) {
-        data.income += tx.amount;
+        data.income = roundToCents(data.income + tx.amount);
       } else {
-        data.expenses += Math.abs(tx.amount);
+        data.expenses = roundToCents(data.expenses + Math.abs(tx.amount));
       }
     }
   });
@@ -594,23 +601,23 @@ function calculateMonthlyTrends(transactions: Transaction[]) {
       month: monthName,
       income: data.income,
       expenses: data.expenses,
-      net: data.income - data.expenses,
+      net: subtractAmounts(data.income, data.expenses),
     };
   });
 }
 
 function calculateIncomeExpenses(transactions: Transaction[]) {
-  const income = transactions
-    .filter(tx => tx.amount > 0)
-    .reduce((sum, tx) => sum + tx.amount, 0);
-
-  const expenses = Math.abs(
-    transactions
-      .filter(tx => tx.amount < 0)
-      .reduce((sum, tx) => sum + tx.amount, 0)
+  const income = sumAmounts(
+    transactions.filter(tx => tx.amount > 0).map(tx => tx.amount)
   );
 
-  const net = income - expenses;
+  const expenses = Math.abs(
+    sumAmounts(
+      transactions.filter(tx => tx.amount < 0).map(tx => tx.amount)
+    )
+  );
+
+  const net = subtractAmounts(income, expenses);
   const savingsRate = income > 0 ? (net / income) * 100 : 0;
 
   return { income, expenses, net, savingsRate };

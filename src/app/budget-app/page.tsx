@@ -25,6 +25,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 export default function DashboardPage() {
+  // Force HMR update
   const t = useTranslations();
   const format = useFormatter();
   const [loading, setLoading] = useState(true);

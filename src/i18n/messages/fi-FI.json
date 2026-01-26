@@ -270,6 +270,66 @@
     "loading": "Ladataan...",
     "save": "Tallenna"
   },
+  "dashboard": {
+    "widgets": {
+      "accountBalances": {
+        "addAccount": "Add Account",
+        "netWorth": "Net Worth",
+        "noAccounts": "No accounts added yet",
+        "title": "Account Balances",
+        "viewAll": "View All"
+      },
+      "budgetProgress": {
+        "createBudget": "Create Budget",
+        "noBudgets": "No budgets set",
+        "overBudget": "Over budget by {amount}",
+        "remaining": "Remaining",
+        "spent": "Spent",
+        "title": "Budget Progress",
+        "viewAll": "View All Budgets"
+      },
+      "incomeVsExpenses": {
+        "addTransactions": "Add Transactions",
+        "expenses": "Expenses",
+        "income": "Income",
+        "net": "Net",
+        "noData": "No transactions yet",
+        "thisMonth": "This Month",
+        "title": "Income vs Expenses"
+      },
+      "monthlyTrends": {
+        "expenses": "Expenses",
+        "income": "Income",
+        "lastSixMonths": "Last 6 Months",
+        "needMoreData": "Add transactions for 2+ months to see trends",
+        "notEnoughData": "Not enough history",
+        "title": "Monthly Trends"
+      },
+      "recentTransactions": {
+        "addTransaction": "Add Transaction",
+        "noTransactions": "No transactions yet",
+        "title": "Recent Transactions",
+        "uncategorized": "Uncategorized",
+        "viewAll": "View All"
+      },
+      "spendingByCategory": {
+        "addTransactions": "Add Transactions",
+        "noData": "No spending tracked yet",
+        "thisMonth": "This Month",
+        "title": "Spending by Category",
+        "uncategorized": "Uncategorized"
+      },
+      "upcomingBills": {
+        "addSubscription": "Add Subscription",
+        "dueIn": "Due in {days} days",
+        "dueToday": "Due today",
+        "dueTomorrow": "Due tomorrow",
+        "noBills": "No upcoming bills",
+        "title": "Upcoming Bills",
+        "viewAll": "View All"
+      }
+    }
+  },
   "dashboardCustomizer": {
     "alwaysVisible": "Always visible",
     "ariaLabel": "Customize dashboard layout",
@@ -1222,7 +1282,9 @@
       "retirement": "Eläke",
       "scanReceipt": "Skannaa Kuitti",
       "subscriptions": "Tilaukset",
-      "transactions": "Tapahtumat"
+      "transactions": "Tapahtumat",
+      "accounts": "Accounts",
+      "calculators": "Calculators"
     },
     "search": "Hae...",
     "shortcuts": "Pikanäppäimet"
@@ -1688,6 +1750,163 @@
       "parsing": "Parsing file...",
       "supportedFormats": "Supported Formats",
       "transactions": "Transactions"
+    }
+  },
+  "calculators": {
+    "hub": {
+      "title": "Financial Calculators",
+      "subtitle": "Tools to help you plan and analyze your finances",
+      "infoTitle": "About These Calculators",
+      "privacyTitle": "100% Private",
+      "privacyDescription": "All calculations happen on your device. Your financial data never leaves your browser.",
+      "accuracyTitle": "Precise Calculations",
+      "accuracyDescription": "Using financial-grade arithmetic to avoid floating-point errors in all calculations."
+    },
+    "common": {
+      "back": "Back to calculators",
+      "calculate": "Calculate",
+      "save": "Save Plan",
+      "reset": "Reset",
+      "months": "months",
+      "years": "years"
+    },
+    "emergencyFund": {
+      "title": "Emergency Fund Calculator",
+      "description": "Calculate how much you need for financial security and track your progress",
+      "subtitle": "Build your financial safety net",
+      "inputTitle": "Your Information",
+      "monthlyExpenses": "Monthly Expenses",
+      "monthlyExpensesHelp": "Include rent, utilities, groceries, insurance, and other essential costs",
+      "targetMonths": "Target Months of Coverage",
+      "targetMonthsHelp": "Experts recommend {months} months for most situations",
+      "currentSavings": "Current Emergency Savings",
+      "monthlyContribution": "Monthly Savings Amount",
+      "monthlyContributionHelp": "How much you can save towards your emergency fund each month",
+      "resultsTitle": "Your Results",
+      "targetAmount": "Target Emergency Fund",
+      "monthsToGoal": "Months to Reach Goal",
+      "completionDate": "Estimated Completion",
+      "progress": "Current Progress",
+      "goalMet": "Goal Achieved!",
+      "goalProgress": "Building Your Safety Net",
+      "amountNeeded": "You need {amount} more to reach your goal",
+      "tipsTitle": "Tips for Building Your Emergency Fund",
+      "tip1": "Keep your emergency fund in a high-yield savings account for easy access and better returns",
+      "tip2": "Automate your contributions by setting up automatic transfers on payday",
+      "tip3": "Start small if needed - even saving a little consistently adds up over time"
+    },
+    "savingsGoal": {
+      "title": "Savings Goal Calculator",
+      "description": "Plan your savings with compound interest projections",
+      "subtitle": "Reach your financial goals faster",
+      "inputTitle": "Goal Details",
+      "modeWhen": "When will I reach my goal?",
+      "modeHowMuch": "How much should I save monthly?",
+      "goalAmount": "Goal Amount",
+      "currentSavings": "Current Savings",
+      "monthlyContribution": "Monthly Contribution",
+      "targetDate": "Target Date",
+      "expectedReturn": "Expected Annual Return (%)",
+      "expectedReturnHelp": "High-yield savings: 4-5%, Investments: 6-8%",
+      "resultWhenTitle": "You'll Reach Your Goal",
+      "resultHowMuchTitle": "Monthly Savings Needed",
+      "inMonths": "In {months} months",
+      "perMonth": "per month",
+      "projectionTitle": "Savings Projection",
+      "projectedAmount": "Projected Total",
+      "totalContributions": "Total Contributions",
+      "interestEarned": "Interest Earned",
+      "progress": "Current Progress",
+      "timelineTitle": "Growth Timeline"
+    },
+    "debtPayoff": {
+      "title": "Debt Payoff Calculator",
+      "description": "Compare snowball vs avalanche strategies to pay off debt faster",
+      "subtitle": "Find the fastest path to debt freedom",
+      "yourDebts": "Your Debts",
+      "addDebt": "Add Debt",
+      "debtName": "Name",
+      "debtNamePlaceholder": "Debt {number}",
+      "balance": "Balance",
+      "apr": "APR (%)",
+      "minimumPayment": "Min Payment",
+      "removeDebt": "Remove debt",
+      "extraMonthlyPayment": "Extra Monthly Payment",
+      "extraMonthlyPaymentHelp": "Additional amount you can pay beyond minimums each month",
+      "snowball": "Snowball Strategy",
+      "snowballDescription": "Pay smallest balance first for quick wins and motivation",
+      "avalanche": "Avalanche Strategy",
+      "avalancheDescription": "Pay highest interest first to save the most money",
+      "recommended": "Recommended",
+      "morePsychological": "Motivational wins",
+      "totalInterest": "Total Interest",
+      "payoffDate": "Payoff Time",
+      "savingsTitle": "Interest Savings with Avalanche",
+      "savingsDescription": "You'll save {amount} in interest and be debt-free {months} months sooner with the avalanche method",
+      "paymentSchedule": "Payment Schedule",
+      "month": "Month",
+      "payment": "Payment",
+      "remaining": "Remaining"
+    },
+    "subscriptionCost": {
+      "title": "Subscription Cost Calculator",
+      "description": "Track and analyze the true cost of your subscriptions",
+      "subtitle": "See where your recurring money goes",
+      "yourSubscriptions": "Your Subscriptions",
+      "addSubscription": "Add Subscription",
+      "name": "Name",
+      "namePlaceholder": "e.g., Netflix, Spotify",
+      "amount": "Amount",
+      "essential": "Essential",
+      "remove": "Remove subscription",
+      "frequency": {
+        "label": "Frequency",
+        "weekly": "Weekly",
+        "biweekly": "Bi-weekly",
+        "monthly": "Monthly",
+        "quarterly": "Quarterly",
+        "annual": "Annual"
+      },
+      "showIncomePercent": "Show percentage of income",
+      "monthlyIncome": "Monthly Income",
+      "totalCost": "Total Subscription Cost",
+      "daily": "Daily",
+      "monthly": "Monthly",
+      "yearly": "Yearly",
+      "percentOfIncome": "% of Income",
+      "breakdown": "Essential vs Non-Essential",
+      "essentialCost": "Essential",
+      "nonEssentialCost": "Non-Essential",
+      "potentialSavings": "Potential Yearly Savings",
+      "perYear": "/year",
+      "potentialSavingsHelp": "If you cancelled all non-essential subscriptions",
+      "byCategory": "By Category"
+    },
+    "budgetAnalyzer": {
+      "title": "50/30/20 Budget Analyzer",
+      "description": "Analyze your spending against the popular budgeting rule",
+      "subtitle": "See how your budget measures up",
+      "ruleExplanation": "The 50/30/20 Rule",
+      "needs": "Needs",
+      "needsDescription": "Housing, utilities, groceries, insurance, minimum debt payments",
+      "needsExamples": "rent, utilities, groceries",
+      "wants": "Wants",
+      "wantsDescription": "Dining out, entertainment, shopping, subscriptions",
+      "wantsExamples": "dining, entertainment, shopping",
+      "savings": "Savings",
+      "savingsDescription": "Emergency fund, investments, retirement, extra debt payments",
+      "savingsExamples": "savings, investments, extra debt",
+      "inputTitle": "Your Monthly Finances",
+      "monthlyIncome": "Monthly Net Income",
+      "monthlyIncomeHelp": "Your take-home pay after taxes",
+      "enterSpending": "Enter your monthly spending by category:",
+      "balanced": "Your Budget is Balanced!",
+      "needsAdjustment": "Adjustments Recommended",
+      "actual": "Actual",
+      "target": "Target",
+      "variance": "Variance",
+      "over": "Over",
+      "under": "On Track"
     }
   }
 }

@@ -27,6 +27,8 @@ import {
   type ReceiptExport,
   type SettingsExport,
   type PreferencesExport,
+  type ProfileExport,
+  type ActivityLogExport,
   BUDGET_FILE_VERSION,
   APP_VERSION,
   DEFAULT_SETTINGS,
@@ -161,6 +163,9 @@ async function exportBudgets(): Promise<BudgetExportItem[]> {
     startDate: toISOString(budget.startDate) || new Date().toISOString(),
     endDate: toISOString(budget.endDate),
     rollover: budget.rollover,
+    // Multi-Profile Support
+    ownerId: budget.ownerId ?? null,
+    visibility: budget.visibility ?? 'shared',
     createdAt: toISOString(budget.createdAt) || new Date().toISOString(),
     updatedAt: toISOString(budget.updatedAt) || new Date().toISOString(),
   }));
@@ -462,6 +467,43 @@ function getPreferences(): PreferencesExport {
 }
 
 /**
+ * Export profiles to serializable format
+ * Note: PIN hash/salt are intentionally excluded for security
+ */
+async function exportProfiles(): Promise<ProfileExport[]> {
+  const profiles = await db.profiles.toArray();
+  return profiles.map(profile => ({
+    id: profile.id,
+    name: profile.name,
+    isDefault: profile.isDefault,
+    avatarColor: profile.avatarColor,
+    avatarImage: profile.avatarImage,
+    order: profile.order,
+    createdAt: toISOString(profile.createdAt) || new Date().toISOString(),
+    updatedAt: toISOString(profile.updatedAt) || new Date().toISOString(),
+    // Note: pinHash and pinSalt are intentionally excluded for security
+  }));
+}
+
+/**
+ * Export activity log to serializable format
+ */
+async function exportActivityLog(): Promise<ActivityLogExport[]> {
+  const entries = await db.activityLog.toArray();
+  return entries.map(entry => ({
+    id: entry.id,
+    profileId: entry.profileId,
+    profileName: entry.profileName,
+    action: entry.action,
+    entityType: entry.entityType,
+    entityId: entry.entityId,
+    entityName: entry.entityName,
+    details: entry.details,
+    timestamp: toISOString(entry.timestamp) || new Date().toISOString(),
+  }));
+}
+
+/**
  * Main export function - gathers all data and creates .budget file structure
  */
 export async function exportBudgetData(
@@ -490,6 +532,8 @@ export async function exportBudgetData(
     importMappings,
     importHistory,
     receipts,
+    profiles,
+    activityLog,
   ] = await Promise.all([
     exportAccounts(),
     exportTransactions(),
@@ -506,6 +550,8 @@ export async function exportBudgetData(
     exportImportMappings(),
     includeImportHistory ? exportImportHistory() : Promise.resolve([]),
     includeReceipts ? exportReceipts() : Promise.resolve([]),
+    exportProfiles(),
+    exportActivityLog(),
   ]);
 
   // Build data object
@@ -531,6 +577,9 @@ export async function exportBudgetData(
     receipts,
     settings: getSettings(),
     preferences: getPreferences(),
+    // Multi-Profile Support
+    profiles,
+    activityLog,
   };
 
   // Calculate checksum
@@ -599,6 +648,8 @@ export async function getExportStats(): Promise<{
   loans: number;
   subscriptions: number;
   receipts: number;
+  profiles: number;
+  activityLogEntries: number;
   estimatedSize: string;
 }> {
   const [
@@ -610,6 +661,8 @@ export async function getExportStats(): Promise<{
     loanCount,
     subscriptionCount,
     receiptCount,
+    profileCount,
+    activityLogCount,
   ] = await Promise.all([
     db.accounts.count(),
     db.transactions.count(),
@@ -619,6 +672,8 @@ export async function getExportStats(): Promise<{
     db.loans.count(),
     db.subscriptions.count(),
     db.receipts.count(),
+    db.profiles.count(),
+    db.activityLog.count(),
   ]);
 
   // Estimate file size (rough calculation)
@@ -630,7 +685,9 @@ export async function getExportStats(): Promise<{
     goalCount * 200 +
     loanCount * 500 +
     subscriptionCount * 300 +
-    receiptCount * 50000; // Receipts are the largest
+    receiptCount * 50000 + // Receipts are the largest
+    profileCount * 150 +
+    activityLogCount * 250;
 
   const estimatedSize =
     estimatedBytes < 1024
@@ -648,6 +705,8 @@ export async function getExportStats(): Promise<{
     loans: loanCount,
     subscriptions: subscriptionCount,
     receipts: receiptCount,
+    profiles: profileCount,
+    activityLogEntries: activityLogCount,
     estimatedSize,
   };
 }

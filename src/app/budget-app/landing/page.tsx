@@ -8,9 +8,8 @@ import { ArrowRight, BarChart3, Lock, ShieldCheck, Sparkles, Zap } from "lucide-
 import Link from "next/link";
 import React, { useRef } from "react";
 
-// Force HMR update - Transaction Text Fix content
-
 export default function BudgetAppLandingPage() {
+  // Force hydration update - Nano Banana Theme
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollY } = useScroll();
 
@@ -18,17 +17,17 @@ export default function BudgetAppLandingPage() {
     () => [
       {
         icon: BarChart3,
-        title: "Advanced Analytics",
-        desc: "Visualize spending patterns with interactive, real-time charts.",
-        color: "text-blue-400",
-        bg: "bg-blue-500/10",
+        title: "Intelligent Bank Import",
+        desc: "Import from 18+ banks with 99% accuracy.",
+        color: "text-amber-400",
+        bg: "bg-amber-500/10",
         className: "md:col-span-2 md:row-span-2",
         visual: (
           <div className="absolute inset-0 flex h-full w-full items-end gap-2 p-8 pb-4 opacity-50">
             {[40, 70, 45, 90, 60, 80, 50, 95].map((h, i) => (
               <div
                 key={i}
-                className="w-full rounded-t-md bg-gradient-to-t from-blue-500/50 to-blue-400"
+                className="w-full rounded-t-lg bg-gradient-to-t from-amber-500/50 to-yellow-400"
                 style={{ height: `${h}%` }}
               />
             ))}
@@ -37,23 +36,23 @@ export default function BudgetAppLandingPage() {
       },
       {
         icon: Zap,
-        title: "Smart Automations",
-        desc: "Auto-categorize transactions instantly.",
-        color: "text-amber-400",
-        bg: "bg-amber-500/10",
+        title: "Instant Categorization",
+        desc: "AI learns your habits instantly.",
+        color: "text-yellow-400",
+        bg: "bg-yellow-500/10",
         className: "md:col-span-1 md:row-span-1",
         visual: (
           <div className="absolute right-2 top-2 opacity-20">
-            <Zap className="h-24 w-24 text-amber-500/20" />
+            <Zap className="h-24 w-24 text-yellow-500/20" />
           </div>
         ),
       },
       {
         icon: ShieldCheck,
-        title: "Bank-Grade Security",
-        desc: "Encrypted and protected with RLS policies.",
-        color: "text-emerald-400",
-        bg: "bg-emerald-500/10",
+        title: "Local-First Security",
+        desc: "AES-256 encryption on YOUR device.",
+        color: "text-lime-400",
+        bg: "bg-lime-500/10",
         className: "md:col-span-1 md:row-span-1",
         visual: (
           <div className="absolute inset-0 flex items-center justify-center opacity-10">
@@ -61,7 +60,7 @@ export default function BudgetAppLandingPage() {
               {Array.from({ length: 24 }).map((_, i) => (
                 <div
                   key={i}
-                  className={`h-1 w-1 rounded-full ${i % 3 === 0 ? "bg-emerald-400" : "bg-emerald-800"}`}
+                  className={`h-1 w-1 rounded-full ${i % 3 === 0 ? "bg-lime-400" : "bg-lime-800"}`}
                 />
               ))}
             </div>
@@ -70,20 +69,18 @@ export default function BudgetAppLandingPage() {
       },
       {
         icon: Sparkles,
-        title: "Anomaly Detection",
-        desc: "AI-powered alerts for unusual spending activity.",
-        color: "text-purple-400",
-        bg: "bg-purple-500/10",
+        title: "Multi-Profile Family Finance",
+        desc: "Separate spaces for personal, business, or family members.",
+        color: "text-orange-400",
+        bg: "bg-orange-500/10",
         className: "md:col-span-1 md:row-span-2",
         visual: (
           <div className="absolute inset-0 flex flex-col justify-center gap-2 p-8 opacity-50">
-            <div className="flex items-center gap-3 rounded-lg border border-red-500/20 bg-red-500/10 p-3">
-              <div className="h-2 w-2 animate-pulse rounded-full bg-red-500" />
-              <div className="h-2 w-24 rounded bg-red-500/20" />
-            </div>
-            <div className="flex items-center gap-3 rounded-lg border border-white/5 bg-white/5 p-3">
-              <div className="h-2 w-2 rounded-full bg-slate-500" />
-              <div className="h-2 w-20 rounded bg-white/10" />
+            {/* Family Profile Visual */}
+            <div className="flex items-center gap-4">
+              <div className="h-10 w-10 rounded-full border-2 border-orange-400 bg-orange-500/20" />
+              <div className="h-8 w-8 rounded-full border-2 border-yellow-400 bg-yellow-500/20" />
+              <div className="h-8 w-8 rounded-full border-2 border-white/20 bg-white/10" />
             </div>
           </div>
         ),
@@ -105,12 +102,12 @@ export default function BudgetAppLandingPage() {
         icon: ArrowRight,
         title: "Export & Report",
         desc: "Generate professional PDF reports.",
-        color: "text-teal-400",
-        bg: "bg-teal-500/10",
+        color: "text-yellow-400",
+        bg: "bg-yellow-500/10",
         className: "md:col-span-2 md:row-span-1",
         visual: (
           <div className="absolute inset-0 flex items-center justify-end gap-4 p-8 opacity-40">
-            <div className="h-20 w-16 -rotate-6 rounded-lg border border-teal-500/30 bg-teal-500/10 backdrop-blur-sm" />
+            <div className="h-20 w-16 -rotate-6 rounded-lg border border-yellow-500/30 bg-yellow-500/10 backdrop-blur-sm" />
             <div className="h-20 w-16 rotate-3 rounded-lg border border-white/20 bg-white/5 backdrop-blur-sm" />
           </div>
         ),
@@ -127,25 +124,25 @@ export default function BudgetAppLandingPage() {
   return (
     <div
       ref={containerRef}
-      className="min-h-screen bg-slate-900 text-white selection:bg-teal-500/30"
+      className="min-h-screen bg-neutral-950 text-white selection:bg-yellow-500/30"
     >
       {/* Noise Texture Overlay */}
       <div
-        className="pointer-events-none fixed inset-0 z-[100] opacity-[0.03] mix-blend-overlay"
+        className="pointer-events-none fixed inset-0 z-[100] opacity-[0.05] mix-blend-overlay"
         style={{
           backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
         }}
       />
 
       {/* Navbar */}
-      <nav className="fixed top-0 z-50 w-full border-b border-white/5 bg-slate-900/80 backdrop-blur-md">
+      <nav className="fixed top-0 z-50 w-full border-b border-white/5 bg-neutral-950/80 backdrop-blur-md">
         <div className="container mx-auto flex h-16 items-center justify-between px-4">
           <div className="flex items-center gap-2">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-teal-400 to-teal-600 shadow-lg shadow-teal-500/20">
-              <span className="text-lg font-bold text-white">$</span>
+            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-yellow-400 to-amber-500 shadow-lg shadow-yellow-500/20">
+              <span className="text-lg font-bold text-black">$</span>
             </div>
             <span className="text-xl font-bold tracking-tight text-white">
-              Budget<span className="text-teal-400">Pro</span>
+              Budget<span className="text-yellow-400">Pro</span>
             </span>
           </div>
           <div className="flex items-center gap-4">
@@ -157,7 +154,7 @@ export default function BudgetAppLandingPage() {
               Log in
             </Link>
             <Link href="/budget-app/auth/signup">
-              <Button className="rounded-full bg-teal-500 px-6 font-semibold text-white shadow-lg shadow-teal-500/25 transition-all hover:bg-teal-400 hover:shadow-teal-500/40">
+              <Button className="rounded-full bg-yellow-400 px-6 font-semibold text-neutral-950 shadow-lg shadow-yellow-500/25 transition-all hover:bg-yellow-300 hover:shadow-yellow-500/40">
                 Get Started
               </Button>
             </Link>
@@ -167,7 +164,6 @@ export default function BudgetAppLandingPage() {
 
       {/* Hero Section */}
       <section className="relative flex min-h-[120vh] flex-col items-center justify-start overflow-hidden pt-32">
-        {/* Background Effects */}
         {/* Background Effects */}
         <motion.div
           animate={{
@@ -179,7 +175,7 @@ export default function BudgetAppLandingPage() {
             repeat: Infinity,
             repeatType: "reverse",
           }}
-          className="absolute left-1/2 top-1/2 -z-10 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-teal-500/20 blur-[120px]"
+          className="absolute left-1/2 top-1/2 -z-10 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-yellow-500/20 blur-[120px]"
         />
         <motion.div
           animate={{
@@ -192,32 +188,33 @@ export default function BudgetAppLandingPage() {
             repeatType: "reverse",
             delay: 1,
           }}
-          className="absolute left-1/4 top-1/4 -z-10 h-[300px] w-[300px] rounded-full bg-blue-600/20 blur-[80px]"
+          className="absolute left-1/4 top-1/4 -z-10 h-[300px] w-[300px] rounded-full bg-amber-600/20 blur-[80px]"
         />
 
         <div className="container relative z-10 mx-auto px-4 text-center">
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-teal-500/30 bg-teal-500/10 px-4 py-1.5 text-sm font-medium text-teal-400 backdrop-blur-sm">
+          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-yellow-500/30 bg-yellow-500/10 px-4 py-1.5 text-sm font-medium text-yellow-400 backdrop-blur-sm">
             <Sparkles className="h-4 w-4" />
             <span>The Future of Personal Finance</span>
           </div>
 
           <h1 className="mb-8 text-5xl font-extrabold tracking-tight text-white sm:text-7xl">
-            Master Your Money <br />
-            <span className="bg-gradient-to-r from-teal-400 to-blue-500 bg-clip-text text-transparent">
-              With Precision
+            Your Money. <br />
+            Your Device. <br />
+            <span className="bg-gradient-to-r from-yellow-300 via-yellow-400 to-amber-500 bg-clip-text text-transparent">
+              Your Privacy.
             </span>
           </h1>
 
           <p className="mx-auto mb-10 max-w-2xl text-lg text-slate-400 sm:text-xl">
-            Experience financial clarity like never before. Real-time analytics, smart
-            categorization, and anomaly detection in one beautiful interface.
+            BudgetPro combines cutting-edge AI with bank-grade encryption—all running entirely on
+            your device. No cloud. No subscriptions. No compromises.
           </p>
 
           <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Link href="/budget-app/auth/signup">
               <Button
                 size="lg"
-                className="h-12 rounded-full bg-teal-500 px-8 text-lg font-semibold text-white shadow-xl shadow-teal-500/25 transition-all hover:scale-105 hover:bg-teal-400"
+                className="h-12 rounded-full bg-yellow-400 px-8 text-lg font-bold text-neutral-950 shadow-xl shadow-yellow-500/25 transition-all hover:scale-105 hover:bg-yellow-300"
               >
                 Start 7-Day Free Trial
                 <ArrowRight className="ml-2 h-5 w-5" />
@@ -239,7 +236,7 @@ export default function BudgetAppLandingPage() {
           transition={{ duration: 1, ease: "easeOut" }}
           className="perspective-1000 container mx-auto mt-20 max-w-6xl px-4 [perspective:2000px]"
         >
-          <div className="relative overflow-hidden rounded-xl border border-white/10 bg-slate-900/50 shadow-2xl backdrop-blur-xl">
+          <div className="relative overflow-hidden rounded-xl border border-white/10 bg-neutral-900/50 shadow-2xl backdrop-blur-xl">
             {/* Abstract UI Representation */}
             {/* CSS-only Dashboard Mockup */}
             <div className="flex flex-col p-6 md:h-[600px]">
@@ -250,11 +247,11 @@ export default function BudgetAppLandingPage() {
                   <p className="text-sm text-slate-400">Welcome back, Alex</p>
                 </div>
                 <div className="flex gap-4">
-                  <div className="flex items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-3 py-1">
-                    <div className="h-2 w-2 animate-pulse rounded-full bg-emerald-500" />
-                    <span className="text-xs font-medium text-emerald-400">Live</span>
+                  <div className="flex items-center gap-2 rounded-full border border-lime-500/20 bg-lime-500/10 px-3 py-1">
+                    <div className="h-2 w-2 animate-pulse rounded-full bg-lime-500" />
+                    <span className="text-xs font-medium text-lime-400">Live</span>
                   </div>
-                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-teal-400 to-blue-500 text-xs font-bold text-white shadow-lg">
+                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-yellow-400 to-amber-500 text-xs font-bold text-black shadow-lg">
                     AJ
                   </div>
                 </div>
@@ -263,46 +260,46 @@ export default function BudgetAppLandingPage() {
               {/* Stats Grid */}
               <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
                 {/* Total Balance */}
-                <div className="rounded-xl border border-teal-500/20 bg-gradient-to-br from-teal-500/10 to-teal-600/5 p-6">
+                <div className="rounded-xl border border-yellow-500/20 bg-gradient-to-br from-yellow-500/10 to-yellow-600/5 p-6">
                   <div className="mb-4 flex items-center gap-3">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-teal-500/20 text-teal-400">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-yellow-500/20 text-yellow-400">
                       <span className="text-xl font-bold">$</span>
                     </div>
                     <span className="text-sm font-medium text-slate-400">Total Balance</span>
                   </div>
                   <div className="mb-2 text-3xl font-bold text-white">$24,500.00</div>
-                  <div className="flex items-center gap-2 text-sm text-emerald-400">
+                  <div className="flex items-center gap-2 text-sm text-lime-400">
                     <span>+12.5%</span>
                     <span className="text-slate-500">vs last month</span>
                   </div>
                 </div>
 
                 {/* Monthly Expenses */}
-                <div className="rounded-xl border border-rose-500/20 bg-gradient-to-br from-rose-500/10 to-rose-600/5 p-6">
+                <div className="rounded-xl border border-orange-500/20 bg-gradient-to-br from-orange-500/10 to-orange-600/5 p-6">
                   <div className="mb-4 flex items-center gap-3">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-rose-500/20 text-rose-400">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-orange-500/20 text-orange-400">
                       <BarChart3 className="h-5 w-5" />
                     </div>
                     <span className="text-sm font-medium text-slate-400">Expenses</span>
                   </div>
                   <div className="mb-2 text-3xl font-bold text-white">$1,250.00</div>
-                  <div className="flex items-center gap-2 text-sm text-emerald-400">
+                  <div className="flex items-center gap-2 text-sm text-lime-400">
                     <span>-5.2%</span>
                     <span className="text-slate-500">vs last month</span>
                   </div>
                 </div>
 
                 {/* Savings Goal */}
-                <div className="rounded-xl border border-blue-500/20 bg-gradient-to-br from-blue-500/10 to-blue-600/5 p-6">
+                <div className="rounded-xl border border-amber-500/20 bg-gradient-to-br from-amber-500/10 to-amber-600/5 p-6">
                   <div className="mb-4 flex items-center gap-3">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-500/20 text-blue-400">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-amber-500/20 text-amber-400">
                       <Sparkles className="h-5 w-5" />
                     </div>
                     <span className="text-sm font-medium text-slate-400">Savings Goal</span>
                   </div>
                   <div className="mb-4 text-3xl font-bold text-white">85%</div>
                   <div className="h-2 w-full rounded-full bg-slate-700">
-                    <div className="h-2 w-[85%] rounded-full bg-blue-500" />
+                    <div className="h-2 w-[85%] rounded-full bg-amber-500" />
                   </div>
                 </div>
               </div>
@@ -348,7 +345,7 @@ export default function BudgetAppLandingPage() {
                         </div>
                       </div>
                       <div
-                        className={`font-medium ${tx.amount.startsWith("+") ? "text-emerald-400" : "text-white"}`}
+                        className={`font-medium ${tx.amount.startsWith("+") ? "text-lime-400" : "text-white"}`}
                       >
                         {tx.amount}
                       </div>
@@ -359,13 +356,13 @@ export default function BudgetAppLandingPage() {
             </div>
 
             {/* Overlay Gradient */}
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-transparent to-transparent" />
           </div>
         </motion.div>
       </section>
 
       {/* Social Proof - Trusted By */}
-      <section className="border-y border-white/5 bg-slate-900/50 py-12 backdrop-blur-sm">
+      <section className="border-y border-white/5 bg-neutral-900/50 py-12 backdrop-blur-sm">
         <ScrollReveal>
           <div className="container mx-auto px-4 text-center">
             <p className="mb-8 text-sm font-semibold uppercase tracking-wider text-slate-500">
@@ -404,9 +401,9 @@ export default function BudgetAppLandingPage() {
                 <motion.div
                   whileHover={{ y: -5 }}
                   key={i}
-                  className={`group relative flex flex-col overflow-hidden rounded-3xl border border-white/5 bg-white/5 p-8 transition-all hover:border-teal-500/30 hover:bg-slate-800/50 hover:shadow-2xl hover:shadow-teal-500/10 ${feature.className || ""}`}
+                  className={`group relative flex flex-col overflow-hidden rounded-3xl border border-white/5 bg-white/5 p-8 transition-all hover:border-yellow-500/30 hover:bg-neutral-800/50 hover:shadow-2xl hover:shadow-yellow-500/10 ${feature.className || ""}`}
                 >
-                  <div className="absolute inset-0 -z-10 bg-gradient-to-br from-teal-500/0 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                  <div className="absolute inset-0 -z-10 bg-gradient-to-br from-yellow-500/0 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
 
                   {/* Visual Content for larger cards */}
                   {feature.visual && feature.visual}
@@ -426,7 +423,7 @@ export default function BudgetAppLandingPage() {
       </section>
 
       {/* Testimonials */}
-      <section className="bg-slate-900/50 py-24">
+      <section className="bg-neutral-900/50 py-24">
         <div className="container mx-auto px-4">
           <ScrollReveal>
             <div className="mb-16 text-center">
@@ -458,7 +455,7 @@ export default function BudgetAppLandingPage() {
               },
             ].map((t, i) => (
               <ScrollReveal key={i} delay={i * 0.1}>
-                <div className="rounded-2xl border border-white/5 bg-slate-800/50 p-8 shadow-xl backdrop-blur-sm">
+                <div className="rounded-2xl border border-white/5 bg-neutral-800/50 p-8 shadow-xl backdrop-blur-sm">
                   <div className="mb-4 flex gap-1 text-amber-400">
                     {Array.from({ length: 5 }).map((_, i) => (
                       <Sparkles key={i} className="h-4 w-4 fill-current" />
@@ -476,15 +473,80 @@ export default function BudgetAppLandingPage() {
         </div>
       </section>
 
+      {/* Comparison Table */}
+      <section className="border-t border-white/5 bg-neutral-900/30 py-24">
+        <div className="container mx-auto px-4">
+          <ScrollReveal>
+            <div className="mb-16 text-center">
+              <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
+                Why Choose BudgetPro?
+              </h2>
+              <p className="mt-4 text-lg text-slate-400">
+                Stop paying subscriptions for your own data.
+              </p>
+            </div>
+          </ScrollReveal>
+
+          <ScrollReveal delay={0.2}>
+            <div className="overflow-hidden rounded-2xl border border-white/10 bg-neutral-900 shadow-2xl">
+              <div className="overflow-x-auto">
+                <table className="w-full text-left font-medium">
+                  <thead>
+                    <tr className="border-b border-white/10 bg-white/5">
+                      <th className="px-6 py-6 text-slate-400">Feature</th>
+                      <th className="px-6 py-6 text-xl font-bold text-yellow-400">BudgetPro</th>
+                      <th className="px-6 py-6 text-slate-300">YNAB</th>
+                      <th className="px-6 py-6 text-slate-300">Copilot</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-white/5 text-sm sm:text-base">
+                    <tr className="hover:bg-white/5">
+                      <td className="px-6 py-4 text-white">Pricing</td>
+                      <td className="px-6 py-4 font-bold text-lime-400">$19.99 (Lifetime)</td>
+                      <td className="px-6 py-4 text-slate-400">$99 / year</td>
+                      <td className="px-6 py-4 text-slate-400">$95 / year</td>
+                    </tr>
+                    <tr className="hover:bg-white/5">
+                      <td className="px-6 py-4 text-white">Privacy</td>
+                      <td className="px-6 py-4 font-bold text-white">100% Local (Offline)</td>
+                      <td className="px-6 py-4 text-slate-400">Cloud-Based</td>
+                      <td className="px-6 py-4 text-slate-400">Cloud-Based</td>
+                    </tr>
+                    <tr className="hover:bg-white/5">
+                      <td className="px-6 py-4 text-white">Multi-Profile Support</td>
+                      <td className="px-6 py-4 font-bold text-teal-400">✅ Included</td>
+                      <td className="px-6 py-4 text-slate-400">Extra Cost / Limited</td>
+                      <td className="px-6 py-4 text-slate-400">Limited</td>
+                    </tr>
+                    <tr className="hover:bg-white/5">
+                      <td className="px-6 py-4 text-white">Bank Import</td>
+                      <td className="px-6 py-4 font-bold text-white">18+ Banks (Direct)</td>
+                      <td className="px-6 py-4 text-slate-400">Third-Party Aggregator</td>
+                      <td className="px-6 py-4 text-slate-400">Third-Party Aggregator</td>
+                    </tr>
+                    <tr className="hover:bg-white/5">
+                      <td className="px-6 py-4 text-white">AI Insights</td>
+                      <td className="px-6 py-4 font-bold text-white">On-Device LSTM</td>
+                      <td className="px-6 py-4 text-slate-400">Basic</td>
+                      <td className="px-6 py-4 text-slate-400">Good</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </ScrollReveal>
+        </div>
+      </section>
+
       {/* Pricing / CTA */}
       <section className="relative py-24 pb-32">
         <div className="absolute inset-0 -z-10 overflow-hidden">
-          <div className="absolute left-1/2 top-1/2 h-[800px] w-[800px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-teal-900/20 blur-[120px]" />
+          <div className="absolute left-1/2 top-1/2 h-[800px] w-[800px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-yellow-900/20 blur-[120px]" />
         </div>
 
         <div className="container mx-auto px-4 text-center">
           <ScrollReveal>
-            <div className="mx-auto max-w-3xl rounded-3xl border border-teal-500/30 bg-slate-900/80 p-12 shadow-2xl backdrop-blur-xl">
+            <div className="mx-auto max-w-3xl rounded-3xl border border-yellow-500/30 bg-neutral-900/80 p-12 shadow-2xl backdrop-blur-xl">
               <h2 className="mb-6 text-4xl font-bold text-white">Start Your Journey Today</h2>
               <p className="mb-8 text-xl text-slate-400">
                 Join thousands of users mastering their finances. <br />
@@ -498,7 +560,7 @@ export default function BudgetAppLandingPage() {
               <Link href="/budget-app/auth/signup">
                 <Button
                   size="lg"
-                  className="h-14 w-full max-w-sm rounded-full bg-teal-500 text-xl font-bold text-white shadow-xl shadow-teal-500/25 transition-all hover:scale-105 hover:bg-teal-400"
+                  className="h-14 w-full max-w-sm rounded-full bg-yellow-400 text-xl font-bold text-neutral-950 shadow-xl shadow-yellow-500/25 transition-all hover:scale-105 hover:bg-yellow-300"
                 >
                   Get Started Now
                 </Button>
@@ -512,13 +574,13 @@ export default function BudgetAppLandingPage() {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-white/5 bg-slate-900 pb-8 pt-16">
+      <footer className="border-t border-white/5 bg-neutral-950 pb-8 pt-16">
         <div className="container mx-auto px-4">
           <div className="mb-12 grid grid-cols-2 gap-8 md:grid-cols-4 lg:gap-12">
             <div className="col-span-2 md:col-span-1">
               <div className="mb-4 flex items-center gap-2">
-                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-teal-400 to-teal-600">
-                  <span className="text-lg font-bold text-white">$</span>
+                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-yellow-400 to-amber-600">
+                  <span className="text-lg font-bold text-black">$</span>
                 </div>
                 <span className="text-xl font-bold text-white">BudgetPro</span>
               </div>
@@ -531,22 +593,22 @@ export default function BudgetAppLandingPage() {
               <h4 className="mb-4 font-semibold text-white">Product</h4>
               <ul className="space-y-2 text-sm text-slate-400">
                 <li>
-                  <Link href="#" className="transition-colors hover:text-teal-400">
+                  <Link href="#" className="transition-colors hover:text-yellow-400">
                     Features
                   </Link>
                 </li>
                 <li>
-                  <Link href="#" className="transition-colors hover:text-teal-400">
+                  <Link href="#" className="transition-colors hover:text-yellow-400">
                     Pricing
                   </Link>
                 </li>
                 <li>
-                  <Link href="#" className="transition-colors hover:text-teal-400">
+                  <Link href="#" className="transition-colors hover:text-yellow-400">
                     Download
                   </Link>
                 </li>
                 <li>
-                  <Link href="#" className="transition-colors hover:text-teal-400">
+                  <Link href="#" className="transition-colors hover:text-yellow-400">
                     Changelog
                   </Link>
                 </li>
@@ -557,22 +619,22 @@ export default function BudgetAppLandingPage() {
               <h4 className="mb-4 font-semibold text-white">Resources</h4>
               <ul className="space-y-2 text-sm text-slate-400">
                 <li>
-                  <Link href="#" className="transition-colors hover:text-teal-400">
+                  <Link href="#" className="transition-colors hover:text-yellow-400">
                     Documentation
                   </Link>
                 </li>
                 <li>
-                  <Link href="#" className="transition-colors hover:text-teal-400">
+                  <Link href="#" className="transition-colors hover:text-yellow-400">
                     API
                   </Link>
                 </li>
                 <li>
-                  <Link href="#" className="transition-colors hover:text-teal-400">
+                  <Link href="#" className="transition-colors hover:text-yellow-400">
                     Community
                   </Link>
                 </li>
                 <li>
-                  <Link href="#" className="transition-colors hover:text-teal-400">
+                  <Link href="#" className="transition-colors hover:text-yellow-400">
                     Help Center
                   </Link>
                 </li>
@@ -583,17 +645,17 @@ export default function BudgetAppLandingPage() {
               <h4 className="mb-4 font-semibold text-white">Legal</h4>
               <ul className="space-y-2 text-sm text-slate-400">
                 <li>
-                  <Link href="#" className="transition-colors hover:text-teal-400">
+                  <Link href="#" className="transition-colors hover:text-yellow-400">
                     Privacy Policy
                   </Link>
                 </li>
                 <li>
-                  <Link href="#" className="transition-colors hover:text-teal-400">
+                  <Link href="#" className="transition-colors hover:text-yellow-400">
                     Terms of Service
                   </Link>
                 </li>
                 <li>
-                  <Link href="#" className="transition-colors hover:text-teal-400">
+                  <Link href="#" className="transition-colors hover:text-yellow-400">
                     Cookie Policy
                   </Link>
                 </li>

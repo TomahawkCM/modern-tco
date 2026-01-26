@@ -5,9 +5,38 @@ import { createClient } from "@/utils/supabase/client";
 import type { AuthError, Session, User } from "@supabase/supabase-js";
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
 
+// Offline mode flag - when true, use local user instead of Supabase auth
+const isOfflineMode = process.env.NEXT_PUBLIC_OFFLINE_MODE === 'true';
+
 // Create a singleton browser client that uses cookies for session storage
 // This allows server actions to access the auth session
 const supabase = createClient();
+
+// Local user for offline mode - auto-created, no sign-in required
+const LOCAL_USER: User = {
+  id: 'local-user-offline',
+  aud: 'authenticated',
+  role: 'authenticated',
+  email: 'local@budgetapp.local',
+  email_confirmed_at: new Date().toISOString(),
+  phone: '',
+  confirmed_at: new Date().toISOString(),
+  last_sign_in_at: new Date().toISOString(),
+  app_metadata: { provider: 'local', providers: ['local'] },
+  user_metadata: { first_name: 'Local', last_name: 'User' },
+  identities: [],
+  created_at: new Date().toISOString(),
+  updated_at: new Date().toISOString(),
+};
+
+const LOCAL_SESSION: Session = {
+  access_token: 'offline-mode-token',
+  token_type: 'bearer',
+  expires_in: 31536000, // 1 year
+  expires_at: Math.floor(Date.now() / 1000) + 31536000,
+  refresh_token: 'offline-mode-refresh',
+  user: LOCAL_USER,
+};
 
 /** Minimal shape used to build payloads */
 type UsersRow = {
@@ -101,6 +130,17 @@ export function AuthProvider({ children }: AuthProviderProps) {
   });
 
   useEffect(() => {
+    // In offline mode, immediately set local user - no Supabase interaction
+    if (isOfflineMode) {
+      setState({
+        user: LOCAL_USER,
+        session: LOCAL_SESSION,
+        loading: false,
+        error: null,
+      });
+      return;
+    }
+
     const getInitialSession = async () => {
       try {
         const {
@@ -168,6 +208,10 @@ export function AuthProvider({ children }: AuthProviderProps) {
   }, []);
 
   const signIn = async (email: string, password: string) => {
+    // In offline mode, user is always "signed in" as local user
+    if (isOfflineMode) {
+      return { error: null };
+    }
     setState((prev) => ({ ...prev, loading: true, error: null }));
     try {
       const { error } = await supabase.auth.signInWithPassword({ email, password });
@@ -185,6 +229,10 @@ export function AuthProvider({ children }: AuthProviderProps) {
     password: string,
     options?: { firstName?: string; lastName?: string }
   ) => {
+    // In offline mode, user is always "signed in" as local user
+    if (isOfflineMode) {
+      return { error: null };
+    }
     setState((prev) => ({ ...prev, loading: true, error: null }));
     try {
       const { error } = await supabase.auth.signUp({
@@ -207,6 +255,10 @@ export function AuthProvider({ children }: AuthProviderProps) {
   };
 
   const signOut = async () => {
+    // In offline mode, can't sign out - always local user
+    if (isOfflineMode) {
+      return { error: null };
+    }
     setState((prev) => ({ ...prev, loading: true, error: null }));
     try {
       const { error } = await supabase.auth.signOut();
@@ -220,6 +272,10 @@ export function AuthProvider({ children }: AuthProviderProps) {
   };
 
   const resetPassword = async (email: string) => {
+    // In offline mode, no password to reset
+    if (isOfflineMode) {
+      return { error: null };
+    }
     try {
       const { error } = await supabase.auth.resetPasswordForEmail(email, {
         redirectTo: `${window.location.origin}/budget-app/auth/reset-password`,
@@ -231,6 +287,17 @@ export function AuthProvider({ children }: AuthProviderProps) {
   };
 
   const updateProfile = async (updates: { firstName?: string; lastName?: string }) => {
+    // In offline mode, update the local user metadata
+    if (isOfflineMode) {
+      LOCAL_USER.user_metadata = {
+        ...LOCAL_USER.user_metadata,
+        first_name: updates.firstName ?? LOCAL_USER.user_metadata.first_name,
+        last_name: updates.lastName ?? LOCAL_USER.user_metadata.last_name,
+      };
+      setState((prev) => ({ ...prev, user: { ...LOCAL_USER } }));
+      return { error: null };
+    }
+
     if (!state.user) {
       return { error: { message: "No user logged in" } as AuthError };
     }

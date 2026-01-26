@@ -74,22 +74,6 @@
     "context7": {
       "command": "npx",
       "args": ["-y", "@upstash/context7-mcp@1.0.31"]
-    },
-    "serena": {
-      "command": "uv",
-      "args": [
-        "run",
-        "serena-mcp-server",
-        "--project",
-        "..",
-        "--context",
-        "desktop-app",
-        "--mode",
-        "interactive",
-        "--mode",
-        "editing"
-      ],
-      "cwd": "/home/robne/projects/active/tanium-tco/modern-tco/serena"
     }
   }
 }

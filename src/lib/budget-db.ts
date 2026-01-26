@@ -31,6 +31,7 @@ import type {
   Subscription,
   ExcludedSubscription,
 } from '@/types/budget';
+import type { Profile, ActivityLogEntry } from '@/types/profile';
 import {
   encryptTransaction,
   decryptTransaction,
@@ -81,6 +82,9 @@ export class BudgetDatabase extends Dexie {
   subscriptions!: Table<Subscription>;
   excludedSubscriptions!: Table<ExcludedSubscription>;
   pairedDevices!: Table<PairedDevice>;
+  // Multi-Profile Support (Phase 16)
+  profiles!: Table<Profile>;
+  activityLog!: Table<ActivityLogEntry>;
 
   constructor() {
     super('HouseholdBudgetApp');
@@ -306,6 +310,195 @@ export class BudgetDatabase extends Dexie {
       subscriptions: 'id, name, status, category, nextBillingDate, billingCycle, merchantToken, source',
       excludedSubscriptions: 'id, merchantToken, excludedAt',
       pairedDevices: 'id, deviceId, deviceName, trustLevel, lastSyncAt, createdAt'
+    });
+
+    // Version 14: Round all transaction amounts to 2 decimal places
+    // Fixes floating-point precision errors in existing data
+    this.version(14).stores({
+      accounts: 'id, name, institution, type',
+      transactions: 'id, accountId, date, category, amount, description, splitFromId, isSplit',
+      categories: 'id, name, type, order',
+      budgets: 'id, categoryId, period, startDate',
+      futurePurchases: 'id, targetDate, priority, isCompleted',
+      retirementPlans: 'id, name, createdAt',
+      importMappings: 'id, institution, accountId',
+      importHistory: 'id, importDate, fileFormat, bank, fileName',
+      receipts: 'id, transactionId, uploadedAt, mimeType, fileSize',
+      investmentAccounts: 'id, type, name, createdAt',
+      holdings: 'id, accountId, symbol, purchaseDate, [accountId+symbol]',
+      priceCache: 'id, symbol, fetchedAt, source',
+      anomalyFeedback: 'id, transactionId, merchant, category, createdAt',
+      predictionAccuracy: 'id, category, month, recordedAt',
+      loans: 'id, type, status, lender, nextPaymentDate, accountId, paymentFrequency',
+      loanPayments: 'id, loanId, date, transactionId, isScheduled',
+      subscriptions: 'id, name, status, category, nextBillingDate, billingCycle, merchantToken, source',
+      excludedSubscriptions: 'id, merchantToken, excludedAt',
+      pairedDevices: 'id, deviceId, deviceName, trustLevel, lastSyncAt, createdAt'
+    }).upgrade(async tx => {
+      // Round all transaction amounts to exactly 2 decimal places
+      const transactions = await tx.table('transactions').toArray();
+      for (const trans of transactions) {
+        const rounded = Math.round(trans.amount * 100) / 100;
+        if (trans.amount !== rounded) {
+          await tx.table('transactions').update(trans.id, { amount: rounded });
+        }
+      }
+
+      // Also round account balances
+      const accounts = await tx.table('accounts').toArray();
+      for (const acc of accounts) {
+        if (acc.balance !== undefined) {
+          const rounded = Math.round(acc.balance * 100) / 100;
+          if (acc.balance !== rounded) {
+            await tx.table('accounts').update(acc.id, { balance: rounded });
+          }
+        }
+      }
+
+      // Round budget amounts
+      const budgets = await tx.table('budgets').toArray();
+      for (const budget of budgets) {
+        const rounded = Math.round(budget.amount * 100) / 100;
+        if (budget.amount !== rounded) {
+          await tx.table('budgets').update(budget.id, { amount: rounded });
+        }
+      }
+    });
+
+    // Version 15: Add bankId field to accounts for OFX BANKID (routing number) matching
+    // This enables composite key matching (BANKID + last4) per OFX specification
+    // to prevent cross-bank account confusion when multiple banks have same last-4-digits
+    this.version(15).stores({
+      accounts: 'id, name, institution, type, bankId',
+      transactions: 'id, accountId, date, category, amount, description, splitFromId, isSplit',
+      categories: 'id, name, type, order',
+      budgets: 'id, categoryId, period, startDate',
+      futurePurchases: 'id, targetDate, priority, isCompleted',
+      retirementPlans: 'id, name, createdAt',
+      importMappings: 'id, institution, accountId',
+      importHistory: 'id, importDate, fileFormat, bank, fileName',
+      receipts: 'id, transactionId, uploadedAt, mimeType, fileSize',
+      investmentAccounts: 'id, type, name, createdAt',
+      holdings: 'id, accountId, symbol, purchaseDate, [accountId+symbol]',
+      priceCache: 'id, symbol, fetchedAt, source',
+      anomalyFeedback: 'id, transactionId, merchant, category, createdAt',
+      predictionAccuracy: 'id, category, month, recordedAt',
+      loans: 'id, type, status, lender, nextPaymentDate, accountId, paymentFrequency',
+      loanPayments: 'id, loanId, date, transactionId, isScheduled',
+      subscriptions: 'id, name, status, category, nextBillingDate, billingCycle, merchantToken, source',
+      excludedSubscriptions: 'id, merchantToken, excludedAt',
+      pairedDevices: 'id, deviceId, deviceName, trustLevel, lastSyncAt, createdAt'
+    });
+
+    // Version 16: Add multi-profile support with profiles and activity log tables
+    // Enables multiple family members to have separate profiles with PIN protection
+    this.version(16).stores({
+      accounts: 'id, name, institution, type, bankId',
+      transactions: 'id, accountId, date, category, amount, description, splitFromId, isSplit',
+      categories: 'id, name, type, order',
+      budgets: 'id, categoryId, period, startDate, ownerId, visibility',
+      futurePurchases: 'id, targetDate, priority, isCompleted',
+      retirementPlans: 'id, name, createdAt',
+      importMappings: 'id, institution, accountId',
+      importHistory: 'id, importDate, fileFormat, bank, fileName',
+      receipts: 'id, transactionId, uploadedAt, mimeType, fileSize',
+      investmentAccounts: 'id, type, name, createdAt',
+      holdings: 'id, accountId, symbol, purchaseDate, [accountId+symbol]',
+      priceCache: 'id, symbol, fetchedAt, source',
+      anomalyFeedback: 'id, transactionId, merchant, category, createdAt',
+      predictionAccuracy: 'id, category, month, recordedAt',
+      loans: 'id, type, status, lender, nextPaymentDate, accountId, paymentFrequency',
+      loanPayments: 'id, loanId, date, transactionId, isScheduled',
+      subscriptions: 'id, name, status, category, nextBillingDate, billingCycle, merchantToken, source',
+      excludedSubscriptions: 'id, merchantToken, excludedAt',
+      pairedDevices: 'id, deviceId, deviceName, trustLevel, lastSyncAt, createdAt',
+      // New tables for multi-profile support
+      profiles: 'id, name, isDefault, createdAt',
+      activityLog: 'id, profileId, action, entityType, timestamp, [profileId+timestamp]'
+    }).upgrade(async tx => {
+      // Create default profile for existing users (migration)
+      const profilesTable = tx.table('profiles');
+      const existingProfiles = await profilesTable.count();
+
+      if (existingProfiles === 0) {
+        console.log('[DB Migration v16] Creating default profile for existing user...');
+        await profilesTable.add({
+          id: 'default-profile',
+          name: 'Default',
+          pinHash: null,
+          pinSalt: null,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+          isDefault: true,
+          avatarColor: '#10b981', // Emerald green
+          order: 0,
+        });
+        console.log('[DB Migration v16] Default profile created successfully');
+      }
+
+      // Set existing budgets to shared visibility (null ownerId = shared)
+      const budgetsTable = tx.table('budgets');
+      const budgets = await budgetsTable.toArray();
+      for (const budget of budgets) {
+        if (budget.visibility === undefined) {
+          await budgetsTable.update(budget.id, {
+            visibility: 'shared',
+            ownerId: null,
+          });
+        }
+      }
+      console.log('[DB Migration v16] Updated', budgets.length, 'budgets to shared visibility');
+    });
+
+    // Version 17: Add balance reconciliation tracking fields to accounts
+    // Tracks when accounts were last reconciled and what balance was confirmed
+    this.version(17).stores({
+      accounts: 'id, name, institution, type, bankId',
+      transactions: 'id, accountId, date, category, amount, description, splitFromId, isSplit',
+      categories: 'id, name, type, order',
+      budgets: 'id, categoryId, period, startDate, ownerId, visibility',
+      futurePurchases: 'id, targetDate, priority, isCompleted',
+      retirementPlans: 'id, name, createdAt',
+      importMappings: 'id, institution, accountId',
+      importHistory: 'id, importDate, fileFormat, bank, fileName',
+      receipts: 'id, transactionId, uploadedAt, mimeType, fileSize',
+      investmentAccounts: 'id, type, name, createdAt',
+      holdings: 'id, accountId, symbol, purchaseDate, [accountId+symbol]',
+      priceCache: 'id, symbol, fetchedAt, source',
+      anomalyFeedback: 'id, transactionId, merchant, category, createdAt',
+      predictionAccuracy: 'id, category, month, recordedAt',
+      loans: 'id, type, status, lender, nextPaymentDate, accountId, paymentFrequency',
+      loanPayments: 'id, loanId, date, transactionId, isScheduled',
+      subscriptions: 'id, name, status, category, nextBillingDate, billingCycle, merchantToken, source',
+      excludedSubscriptions: 'id, merchantToken, excludedAt',
+      pairedDevices: 'id, deviceId, deviceName, trustLevel, lastSyncAt, createdAt',
+      profiles: 'id, name, isDefault, createdAt',
+      activityLog: 'id, profileId, action, entityType, timestamp, [profileId+timestamp]'
+    }).upgrade(async tx => {
+      // Migrate existing accounts: set default reconciliation values
+      // Accounts with balance > 0 are marked as reconciled at creation time
+      const accountsTable = tx.table('accounts');
+      const accounts = await accountsTable.toArray();
+
+      for (const account of accounts) {
+        // Only update if these fields are not already set
+        if (account.lastReconciledAt === undefined) {
+          const updates: Record<string, unknown> = {};
+
+          // If account has a non-zero balance, assume it was reconciled at creation
+          if (account.balance && account.balance !== 0) {
+            updates.lastReconciledAt = account.createdAt || new Date();
+            updates.lastReconciledBalance = account.balance;
+            updates.openingBalanceDate = account.createdAt || new Date();
+          }
+
+          if (Object.keys(updates).length > 0) {
+            await accountsTable.update(account.id, updates);
+          }
+        }
+      }
+
+      console.log('[DB Migration v17] Updated', accounts.length, 'accounts with reconciliation tracking');
     });
   }
 }

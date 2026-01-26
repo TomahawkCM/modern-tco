@@ -113,17 +113,51 @@ export function syncLocaleToSupabase(preferences: LocalePreferences): void {
         );
 
       if (error) {
-        // Gracefully handle missing table (migration not yet applied)
-        if (error.code === 'PGRST204' || error.message?.includes('relation') || error.message?.includes('not found')) {
+        // Gracefully handle expected errors
+        const code = error.code || '';
+        const message = error.message || '';
+
+        // Missing table (migration not yet applied)
+        if (code === 'PGRST204' || code === '42P01' || message.includes('relation') || message.includes('not found')) {
           console.debug('[User Preferences] Table not yet created - run: supabase db push');
           return;
         }
-        console.error('Error syncing locale to Supabase:', error);
+
+        // User not authenticated - silent fail (expected for anonymous users)
+        if (code === 'PGRST301' || code === '401' || message.includes('JWT') || message.includes('auth')) {
+          console.debug('[User Preferences] User not authenticated - sync skipped');
+          return;
+        }
+
+        // RLS policy violation - user doesn't have permission
+        if (code === '42501' || message.includes('policy')) {
+          console.debug('[User Preferences] RLS policy - user cannot sync preferences');
+          return;
+        }
+
+        // Empty error object - likely network/offline issue
+        if (!code && !message) {
+          console.debug('[User Preferences] Sync failed - likely offline or network issue');
+          return;
+        }
+
+        // Log unexpected errors with details (only in development)
+        if (process.env.NODE_ENV === 'development') {
+          console.warn('[User Preferences] Unexpected sync error:', {
+            code,
+            message,
+            details: error.details || null,
+            hint: error.hint || null,
+          });
+        }
       } else {
-        console.log('Locale preferences synced to Supabase');
+        console.debug('[User Preferences] Locale synced to Supabase');
       }
     } catch (error) {
-      console.error('Error syncing locale to Supabase:', error);
+      // Network errors, offline mode, etc. - silent in production
+      if (process.env.NODE_ENV === 'development') {
+        console.debug('[User Preferences] Sync failed:', error);
+      }
     }
   }, SYNC_DEBOUNCE_MS);
 }
@@ -157,12 +191,31 @@ export function syncWidgetConfigToSupabase(config: DashboardConfig): void {
         );
 
       if (error) {
-        console.error('Error syncing widget config to Supabase:', error);
+        // Gracefully handle expected errors
+        const code = error.code || '';
+        const message = error.message || '';
+
+        // Missing table, auth issues, or RLS - silent fail
+        if (
+          code === 'PGRST204' || code === '42P01' || code === 'PGRST301' ||
+          code === '401' || code === '42501' ||
+          message.includes('relation') || message.includes('not found') ||
+          message.includes('JWT') || message.includes('auth') || message.includes('policy')
+        ) {
+          console.debug('[User Preferences] Widget sync skipped:', code || 'expected condition');
+          return;
+        }
+
+        console.error('Error syncing widget config to Supabase:', {
+          code,
+          message,
+          details: error.details || null,
+        });
       } else {
         console.log('Widget config synced to Supabase');
       }
     } catch (error) {
-      console.error('Error syncing widget config to Supabase:', error);
+      console.debug('[User Preferences] Widget sync failed:', error);
     }
   }, SYNC_DEBOUNCE_MS);
 }

@@ -7,6 +7,9 @@ import { AlertCircle, Clock, Sparkles, X } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 
+// Trial status banner is not shown in offline mode (no subscriptions)
+const isOfflineMode = process.env.NEXT_PUBLIC_OFFLINE_MODE === 'true';
+
 interface TrialStatusBannerProps {
   /** Only show banner when trial has 3 or fewer days remaining */
   showOnlyWhenUrgent?: boolean;
@@ -26,6 +29,11 @@ export function TrialStatusBanner({
 }: TrialStatusBannerProps) {
   const { loading, isTrial, isExpired, daysRemaining, isActive, status } = useTrialStatus();
   const [isDismissed, setIsDismissed] = useState(false);
+
+  // Don't show in offline mode - no subscription/trial system
+  if (isOfflineMode) {
+    return null;
+  }
 
   // Don't show if dismissed, loading, or user has active paid subscription
   if (isDismissed || loading) {
