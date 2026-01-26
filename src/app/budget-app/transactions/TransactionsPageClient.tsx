@@ -141,18 +141,7 @@ export default function TransactionsPageClient() {
   const mobileListRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Ensure database is ready before loading
-    const initAndLoad = async () => {
-      try {
-        // Wait for database to be ready (handles version upgrades)
-        await db.open();
-        await loadData();
-      } catch (error) {
-        console.error("[Transactions] Database initialization error:", error);
-        setIsLoading(false);
-      }
-    };
-    initAndLoad();
+    loadData();
   }, []);
 
   // Pre-compute vendor names for all transactions (MEMOIZED for performance)
@@ -289,13 +278,12 @@ export default function TransactionsPageClient() {
   }
 
   async function loadData() {
-    // Timeout wrapper to detect database hangs
+    // 3s timeout - fail fast for world-class UX
     const timeoutPromise = new Promise<never>((_, reject) => {
-      setTimeout(() => reject(new Error("Database load timeout after 10s")), 10000);
+      setTimeout(() => reject(new Error("timeout")), 3000);
     });
 
     try {
-      // Race the data load against a timeout
       const [allTxs, cats, accts, loans] = await Promise.race([
         Promise.all([
           db.transactions.toArray(),
@@ -346,10 +334,7 @@ export default function TransactionsPageClient() {
       setLinkedPayments(linkedPaymentsMap);
     } catch (error) {
       console.error("Error loading transactions:", error);
-      // Show error to user via toast if available
-      if (error instanceof Error && error.message.includes("timeout")) {
-        toast?.error("Database is taking too long to respond. Please refresh the page.");
-      }
+      // On timeout or error, show empty state - user can add transactions or refresh
     } finally {
       setIsLoading(false);
     }
