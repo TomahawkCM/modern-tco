@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 /**
  * Transactions Page Client Component
@@ -10,34 +10,63 @@
  * - Pull-to-refresh on transaction list
  */
 
-import { useState, useEffect, useRef, useMemo, useCallback } from 'react';
-import { useSearchParams, useRouter } from 'next/navigation';
-import { Plus, Search, Filter, Download, Edit, Trash2, Tag, FileImage, Split, Check, X as XIcon, RefreshCw, ArrowUp, ArrowDown, TrendingUp, TrendingDown, Receipt, Upload, ChevronDown, ChevronUp, Landmark, CreditCard } from 'lucide-react';
-import { motion, PanInfo } from 'framer-motion';
-import { db, splitTransaction, unsplitTransaction, getSplitChildren, type SplitData } from '@/lib/budget-db';
-import type { Transaction, Category, Account } from '@/types/budget';
-import { sumAmounts, subtractAmounts } from '@/lib/money';
-import { calculateRunningBalancesMap } from '@/lib/utils/balanceCalculations';
-import { TransactionModal } from '@/components/budget/TransactionModal';
-import { ReceiptThumbnail } from '@/components/budget/ReceiptThumbnail';
-import { SplitTransactionModal } from '@/components/budget/SplitTransactionModal';
-import { ConfirmDialog } from '@/components/budget/ConfirmDialog';
-import { recordCorrection, categorizeTransaction } from '@/lib/categorization/rules';
-import { useToast } from '@/components/budget/Toast';
-import { HelpTooltip } from '@/components/budget/HelpTooltip';
-import { EmptyState } from '@/components/budget/EmptyState';
-import { StickyBulkActionsBar } from '@/components/budget/StickyBulkActionsBar';
-import { QuickFiltersRow } from '@/components/budget/QuickFiltersRow';
-import { QuickCategorizeDialog } from '@/components/budget/QuickCategorizeDialog';
-import { BulkCategorizeConfirmation } from '@/components/budget/BulkCategorizeConfirmation';
-import { TransactionReviewModal } from '@/components/budget/TransactionReviewModal';
-import { extractVendorName } from '@/lib/vendor-matcher';
-import { aiFindMatchingVendorTransactions } from '@/lib/ai-vendor-matcher';
-import Link from 'next/link';
-import { LinkToLoanButton } from '@/components/budget/loans/LinkToLoanPopover';
-import { LinkedLoanBadgeInline } from '@/components/budget/loans/LinkedLoanBadge';
-import { getPaymentByTransactionId, getAllLoans } from '@/lib/loans/loan-db';
-import type { LoanPayment, Loan } from '@/types/budget';
+import { useState, useEffect, useRef, useMemo, useCallback } from "react";
+import { useSearchParams, useRouter } from "next/navigation";
+import {
+  Plus,
+  Search,
+  Filter,
+  Download,
+  Edit,
+  Trash2,
+  Tag,
+  FileImage,
+  Split,
+  Check,
+  X as XIcon,
+  RefreshCw,
+  ArrowUp,
+  ArrowDown,
+  TrendingUp,
+  TrendingDown,
+  Receipt,
+  Upload,
+  ChevronDown,
+  ChevronUp,
+  Landmark,
+  CreditCard,
+} from "lucide-react";
+import { motion, type PanInfo } from "framer-motion";
+import {
+  db,
+  splitTransaction,
+  unsplitTransaction,
+  getSplitChildren,
+  type SplitData,
+} from "@/lib/budget-db";
+import type { Transaction, Category, Account } from "@/types/budget";
+import { sumAmounts, subtractAmounts } from "@/lib/money";
+import { calculateRunningBalancesMap } from "@/lib/utils/balanceCalculations";
+import { TransactionModal } from "@/components/budget/TransactionModal";
+import { ReceiptThumbnail } from "@/components/budget/ReceiptThumbnail";
+import { SplitTransactionModal } from "@/components/budget/SplitTransactionModal";
+import { ConfirmDialog } from "@/components/budget/ConfirmDialog";
+import { recordCorrection, categorizeTransaction } from "@/lib/categorization/rules";
+import { useToast } from "@/components/budget/Toast";
+import { HelpTooltip } from "@/components/budget/HelpTooltip";
+import { EmptyState } from "@/components/budget/EmptyState";
+import { StickyBulkActionsBar } from "@/components/budget/StickyBulkActionsBar";
+import { QuickFiltersRow } from "@/components/budget/QuickFiltersRow";
+import { QuickCategorizeDialog } from "@/components/budget/QuickCategorizeDialog";
+import { BulkCategorizeConfirmation } from "@/components/budget/BulkCategorizeConfirmation";
+import { TransactionReviewModal } from "@/components/budget/TransactionReviewModal";
+import { extractVendorName } from "@/lib/vendor-matcher";
+import { aiFindMatchingVendorTransactions } from "@/lib/ai-vendor-matcher";
+import Link from "next/link";
+import { LinkToLoanButton } from "@/components/budget/loans/LinkToLoanPopover";
+import { LinkedLoanBadgeInline } from "@/components/budget/loans/LinkedLoanBadge";
+import { getPaymentByTransactionId, getAllLoans } from "@/lib/loans/loan-db";
+import type { LoanPayment, Loan } from "@/types/budget";
 
 export default function TransactionsPageClient() {
   const toast = useToast();
@@ -47,15 +76,15 @@ export default function TransactionsPageClient() {
   const [categories, setCategories] = useState<Category[]>([]);
   const [accounts, setAccounts] = useState<Account[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState<string>('all');
-  const [selectedAccount, setSelectedAccount] = useState<string>('all');
-  const [sortBy, setSortBy] = useState<'date' | 'amount'>('date');
-  const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('desc');
-  
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState<string>("all");
+  const [selectedAccount, setSelectedAccount] = useState<string>("all");
+  const [sortBy, setSortBy] = useState<"date" | "amount">("date");
+  const [sortDirection, setSortDirection] = useState<"asc" | "desc">("desc");
+
   // Read account filter from URL
   useEffect(() => {
-    const accountParam = searchParams?.get('account');
+    const accountParam = searchParams?.get("account");
     if (accountParam) {
       setSelectedAccount(accountParam);
     }
@@ -63,15 +92,15 @@ export default function TransactionsPageClient() {
   const [showModal, setShowModal] = useState(false);
   const [editingTransaction, setEditingTransaction] = useState<Transaction | null>(null);
   const [quickCategorizingId, setQuickCategorizingId] = useState<string | null>(null);
-  
+
   // Split transaction modal state
   const [showSplitModal, setShowSplitModal] = useState(false);
   const [splittingTransaction, setSplittingTransaction] = useState<Transaction | null>(null);
-  
+
   // Bulk selection state
   const [selectedTransactionIds, setSelectedTransactionIds] = useState<Set<string>>(new Set());
-  const [bulkCategory, setBulkCategory] = useState<string>('');
-  const [bulkSubcategory, setBulkSubcategory] = useState<string>('');
+  const [bulkCategory, setBulkCategory] = useState<string>("");
+  const [bulkSubcategory, setBulkSubcategory] = useState<string>("");
   const [showBulkActions, setShowBulkActions] = useState(false);
 
   // Phase 3: Mobile Enhancement State
@@ -101,16 +130,29 @@ export default function TransactionsPageClient() {
   const [expandedTransactionIds, setExpandedTransactionIds] = useState<Set<string>>(new Set());
 
   // Loan-linked transactions cache
-  const [linkedPayments, setLinkedPayments] = useState<Map<string, { payment: LoanPayment; loanName: string; loanId: string }>>(new Map());
+  const [linkedPayments, setLinkedPayments] = useState<
+    Map<string, { payment: LoanPayment; loanName: string; loanId: string }>
+  >(new Map());
 
   // Date range state
-  const [startDate, setStartDate] = useState('');
-  const [endDate, setEndDate] = useState('');
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
 
   const mobileListRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    loadData();
+    // Ensure database is ready before loading
+    const initAndLoad = async () => {
+      try {
+        // Wait for database to be ready (handles version upgrades)
+        await db.open();
+        await loadData();
+      } catch (error) {
+        console.error("[Transactions] Database initialization error:", error);
+        setIsLoading(false);
+      }
+    };
+    initAndLoad();
   }, []);
 
   // Pre-compute vendor names for all transactions (MEMOIZED for performance)
@@ -136,7 +178,7 @@ export default function TransactionsPageClient() {
     return transactions
       .filter((tx) => {
         // Account filter
-        if (selectedAccount !== 'all' && tx.accountId !== selectedAccount) {
+        if (selectedAccount !== "all" && tx.accountId !== selectedAccount) {
           return false;
         }
         // Search filter
@@ -144,7 +186,7 @@ export default function TransactionsPageClient() {
           return false;
         }
         // Category filter
-        if (selectedCategory !== 'all' && tx.category !== selectedCategory) {
+        if (selectedCategory !== "all" && tx.category !== selectedCategory) {
           return false;
         }
         // Date range filter
@@ -157,41 +199,46 @@ export default function TransactionsPageClient() {
         return true;
       })
       .sort((a, b) => {
-        const multiplier = sortDirection === 'asc' ? 1 : -1;
-        if (sortBy === 'date') {
+        const multiplier = sortDirection === "asc" ? 1 : -1;
+        if (sortBy === "date") {
           return (new Date(a.date).getTime() - new Date(b.date).getTime()) * multiplier;
         } else {
           return (a.amount - b.amount) * multiplier;
         }
       });
-  }, [transactions, searchTerm, selectedCategory, selectedAccount, sortBy, sortDirection, startDate, endDate]);
-  
+  }, [
+    transactions,
+    searchTerm,
+    selectedCategory,
+    selectedAccount,
+    sortBy,
+    sortDirection,
+    startDate,
+    endDate,
+  ]);
+
   // Get the selected account name for display
   const selectedAccountName = useMemo(() => {
-    if (selectedAccount === 'all') return null;
-    const account = accounts.find(a => a.id === selectedAccount);
+    if (selectedAccount === "all") return null;
+    const account = accounts.find((a) => a.id === selectedAccount);
     return account?.name || null;
   }, [selectedAccount, accounts]);
-  
+
   // Function to clear account filter
   function clearAccountFilter() {
-    setSelectedAccount('all');
+    setSelectedAccount("all");
     // Update URL to remove account param
-    router.push('/budget-app/transactions');
+    router.push("/budget-app/transactions");
   }
 
   // Memoize total calculations using precise decimal arithmetic
   const totalIncome = useMemo(() => {
-    return sumAmounts(
-      filteredTransactions.filter((tx) => tx.amount > 0).map((tx) => tx.amount)
-    );
+    return sumAmounts(filteredTransactions.filter((tx) => tx.amount > 0).map((tx) => tx.amount));
   }, [filteredTransactions]);
 
   const totalExpenses = useMemo(() => {
     return Math.abs(
-      sumAmounts(
-        filteredTransactions.filter((tx) => tx.amount < 0).map((tx) => tx.amount)
-      )
+      sumAmounts(filteredTransactions.filter((tx) => tx.amount < 0).map((tx) => tx.amount))
     );
   }, [filteredTransactions]);
 
@@ -214,8 +261,8 @@ export default function TransactionsPageClient() {
 
     // Get account-specific opening balance based on filter
     let openingBalance = startingBalance;
-    if (selectedAccount !== 'all') {
-      const account = accounts.find(a => a.id === selectedAccount);
+    if (selectedAccount !== "all") {
+      const account = accounts.find((a) => a.id === selectedAccount);
       openingBalance = account?.balance || 0;
     }
 
@@ -242,29 +289,41 @@ export default function TransactionsPageClient() {
   }
 
   async function loadData() {
+    // Timeout wrapper to detect database hangs
+    const timeoutPromise = new Promise<never>((_, reject) => {
+      setTimeout(() => reject(new Error("Database load timeout after 10s")), 10000);
+    });
+
     try {
-      const [allTxs, cats, accts, loans] = await Promise.all([
-        db.transactions.toArray(),
-        db.categories.toArray(),
-        db.accounts.toArray(),
-        getAllLoans(),
+      // Race the data load against a timeout
+      const [allTxs, cats, accts, loans] = await Promise.race([
+        Promise.all([
+          db.transactions.toArray(),
+          db.categories.toArray(),
+          db.accounts.toArray(),
+          getAllLoans(),
+        ]),
+        timeoutPromise,
       ]);
 
       // Filter out parent transactions that have been split
       // Only show child transactions (which have splitFromId) and non-split transactions
-      const visibleTxs = allTxs.filter(tx => !tx.isSplit);
+      const visibleTxs = allTxs.filter((tx) => !tx.isSplit);
 
       setTransactions(visibleTxs);
       setCategories(cats);
       setAccounts(accts);
 
       // Load linked payments for expense transactions
-      const loanMap = new Map(loans.map(l => [l.id, l]));
-      const linkedPaymentsMap = new Map<string, { payment: LoanPayment; loanName: string; loanId: string }>();
+      const loanMap = new Map(loans.map((l) => [l.id, l]));
+      const linkedPaymentsMap = new Map<
+        string,
+        { payment: LoanPayment; loanName: string; loanId: string }
+      >();
 
       // Check transactions that look like loan payments (category starts with "Loan Payment")
-      const potentialLoanPayments = visibleTxs.filter(tx =>
-        tx.amount < 0 && tx.category?.startsWith('Loan Payment')
+      const potentialLoanPayments = visibleTxs.filter(
+        (tx) => tx.amount < 0 && tx.category?.startsWith("Loan Payment")
       );
 
       // Batch check for linked payments
@@ -286,7 +345,11 @@ export default function TransactionsPageClient() {
 
       setLinkedPayments(linkedPaymentsMap);
     } catch (error) {
-      console.error('Error loading transactions:', error);
+      console.error("Error loading transactions:", error);
+      // Show error to user via toast if available
+      if (error instanceof Error && error.message.includes("timeout")) {
+        toast?.error("Database is taking too long to respond. Please refresh the page.");
+      }
     } finally {
       setIsLoading(false);
     }
@@ -294,12 +357,12 @@ export default function TransactionsPageClient() {
 
   // Handle new category created in TransactionModal
   function handleCategoryCreated(newCategory: Category) {
-    setCategories(prev => [...prev, newCategory]);
+    setCategories((prev) => [...prev, newCategory]);
   }
 
   async function runVendorMatching(transaction: Transaction) {
     if (!transaction.category) {
-      console.log('[Vendor Matching] Skipping: no category on transaction', transaction.id);
+      console.log("[Vendor Matching] Skipping: no category on transaction", transaction.id);
       return;
     }
 
@@ -307,15 +370,17 @@ export default function TransactionsPageClient() {
       const currentVendor = extractVendorName(transaction.description);
 
       if (!currentVendor) {
-        console.log('[Vendor Matching] Skipping: could not extract vendor name for', transaction.id);
+        console.log(
+          "[Vendor Matching] Skipping: could not extract vendor name for",
+          transaction.id
+        );
         return;
       }
 
       // Build deterministic candidate set: exact normalized vendor match only
       const deterministicMatches = transactions.filter((tx) => {
         if (tx.id === transaction.id) return false;
-        const txVendor =
-          vendorCache.get(tx.id) || extractVendorName(tx.description);
+        const txVendor = vendorCache.get(tx.id) || extractVendorName(tx.description);
         return txVendor === currentVendor;
       });
 
@@ -329,19 +394,17 @@ export default function TransactionsPageClient() {
 
       // Optional: only if no deterministic matches, fall back to AI as a helper
       if (matches.length === 0) {
-        matches = await aiFindMatchingVendorTransactions(
-          transaction,
-          transactions,
-          vendorCache
-        );
+        matches = await aiFindMatchingVendorTransactions(transaction, transactions, vendorCache);
       }
 
       const perfEnd = performance.now();
       const searchTime = ((perfEnd - perfStart) / 1000).toFixed(1);
 
       if (matches.length >= 1) {
-        console.log('[Vendor Matching] Matches found, opening bulk dialog for', transaction.id);
-        toast.success(`✓ Found ${matches.length} matching "${currentVendor}" transactions (${searchTime}s)`);
+        console.log("[Vendor Matching] Matches found, opening bulk dialog for", transaction.id);
+        toast.success(
+          `✓ Found ${matches.length} matching "${currentVendor}" transactions (${searchTime}s)`
+        );
 
         setPendingCategorization({
           transaction,
@@ -354,8 +417,10 @@ export default function TransactionsPageClient() {
         toast.info(`No other "${currentVendor}" transactions found (${searchTime}s)`);
       }
     } catch (error) {
-      console.error('[Vendor Matching] Error during AI vendor matching:', error);
-      toast.error('Vendor matching failed. Transaction was saved, but matches could not be loaded.');
+      console.error("[Vendor Matching] Error during AI vendor matching:", error);
+      toast.error(
+        "Vendor matching failed. Transaction was saved, but matches could not be loaded."
+      );
     } finally {
       setIsMatchingVendors(false);
     }
@@ -365,8 +430,10 @@ export default function TransactionsPageClient() {
     setIsSavingTransaction(true);
     try {
       // 🔥 VISUAL PROOF: New code is loaded (remove after testing)
-      if (process.env.NODE_ENV === 'development' && editingTransaction) {
-        console.log('🟢 NEW CODE v2.2 - saveTransaction with vendor matching (non-blocking DB save)');
+      if (process.env.NODE_ENV === "development" && editingTransaction) {
+        console.log(
+          "🟢 NEW CODE v2.2 - saveTransaction with vendor matching (non-blocking DB save)"
+        );
       }
 
       const isEdit = !!editingTransaction;
@@ -375,9 +442,7 @@ export default function TransactionsPageClient() {
       // 🔥 CRITICAL FIX: Optimistic update BEFORE database save (like quickCategorize)
       // This ensures vendor matching sees the UPDATED transaction in the array
       if (isEdit) {
-        setTransactions(prev =>
-          prev.map(tx => tx.id === transaction.id ? transaction : tx)
-        );
+        setTransactions((prev) => prev.map((tx) => (tx.id === transaction.id ? transaction : tx)));
       }
 
       // Save to database
@@ -385,16 +450,16 @@ export default function TransactionsPageClient() {
         const { id, ...updates } = transaction;
         // Fire-and-forget DB update to avoid blocking UI on IndexedDB issues
         void db.transactions.update(id, updates).catch((error) => {
-          console.error('[Transactions] Dexie update error:', error);
+          console.error("[Transactions] Dexie update error:", error);
         });
       } else {
         void db.transactions.add(transaction).catch((error) => {
-          console.error('[Transactions] Dexie add error:', error);
+          console.error("[Transactions] Dexie add error:", error);
         });
       }
 
       // Close modal immediately after save
-      console.log('[Transactions] Save triggered, closing modal for', transaction.id);
+      console.log("[Transactions] Save triggered, closing modal for", transaction.id);
       setShowModal(false);
       setEditingTransaction(null);
       if (!shouldRunVendorMatching) {
@@ -405,8 +470,8 @@ export default function TransactionsPageClient() {
         void runVendorMatching(transaction);
       }
     } catch (error) {
-      console.error('❌ Error saving transaction:', error);
-      toast.error('Failed to save transaction');
+      console.error("❌ Error saving transaction:", error);
+      toast.error("Failed to save transaction");
       void loadData(); // Reload on error to ensure consistency
     } finally {
       setIsSavingTransaction(false);
@@ -427,7 +492,9 @@ export default function TransactionsPageClient() {
         const siblings = await getSplitChildren(deletingTransaction.splitFromId);
         if (siblings.length === 1) {
           // Last child - ask if they want to restore original transaction
-          const shouldRestore = await toast.confirm('This is the last split item. Restore the original transaction?');
+          const shouldRestore = await toast.confirm(
+            "This is the last split item. Restore the original transaction?"
+          );
           if (shouldRestore) {
             await unsplitTransaction(deletingTransaction.splitFromId);
           } else {
@@ -442,12 +509,12 @@ export default function TransactionsPageClient() {
       }
 
       await loadData();
-      toast.success('Transaction deleted successfully');
+      toast.success("Transaction deleted successfully");
       setDeleteConfirmOpen(false);
       setDeletingTransaction(null);
     } catch (error) {
-      console.error('Error deleting transaction:', error);
-      toast.error('Failed to delete transaction');
+      console.error("Error deleting transaction:", error);
+      toast.error("Failed to delete transaction");
       // Keep dialog open on error
     }
   }
@@ -466,7 +533,7 @@ export default function TransactionsPageClient() {
       setShowSplitModal(false);
       setSplittingTransaction(null);
     } catch (error) {
-      console.error('Error saving split:', error);
+      console.error("Error saving split:", error);
       throw error;
     }
   }
@@ -483,30 +550,33 @@ export default function TransactionsPageClient() {
     try {
       await unsplitTransaction(unsplittingTransaction.splitFromId);
       await loadData();
-      toast.success('Transaction unsplit successfully');
+      toast.success("Transaction unsplit successfully");
       setUnsplitConfirmOpen(false);
       setUnsplittingTransaction(null);
     } catch (error) {
-      console.error('Error unsplitting:', error);
-      toast.error('Failed to unsplit transaction');
+      console.error("Error unsplitting:", error);
+      toast.error("Failed to unsplit transaction");
       // Keep dialog open on error
     }
   }
 
   // Bulk selection functions (MEMOIZED for performance)
-  const toggleSelectTransaction = useCallback((id: string) => {
-    const newSelected = new Set(selectedTransactionIds);
-    if (newSelected.has(id)) {
-      newSelected.delete(id);
-    } else {
-      newSelected.add(id);
-    }
-    setSelectedTransactionIds(newSelected);
-    setShowBulkActions(newSelected.size > 0);
-  }, [selectedTransactionIds]);
+  const toggleSelectTransaction = useCallback(
+    (id: string) => {
+      const newSelected = new Set(selectedTransactionIds);
+      if (newSelected.has(id)) {
+        newSelected.delete(id);
+      } else {
+        newSelected.add(id);
+      }
+      setSelectedTransactionIds(newSelected);
+      setShowBulkActions(newSelected.size > 0);
+    },
+    [selectedTransactionIds]
+  );
 
   const selectAllVisible = useCallback(() => {
-    const visibleIds = new Set(filteredTransactions.map(tx => tx.id));
+    const visibleIds = new Set(filteredTransactions.map((tx) => tx.id));
     setSelectedTransactionIds(visibleIds);
     setShowBulkActions(visibleIds.size > 0);
   }, [filteredTransactions]);
@@ -514,18 +584,18 @@ export default function TransactionsPageClient() {
   const clearSelection = useCallback(() => {
     setSelectedTransactionIds(new Set());
     setShowBulkActions(false);
-    setBulkCategory('');
-    setBulkSubcategory('');
+    setBulkCategory("");
+    setBulkSubcategory("");
   }, []);
 
   function initiateBulkCategorization() {
     if (!bulkCategory) {
-      toast.warning('Please select a category');
+      toast.warning("Please select a category");
       return;
     }
 
     if (selectedTransactionIds.size === 0) {
-      toast.warning('Please select transactions to categorize');
+      toast.warning("Please select transactions to categorize");
       return;
     }
 
@@ -547,8 +617,8 @@ export default function TransactionsPageClient() {
       toast.success(`Successfully categorized ${selectedTransactionIds.size} transaction(s)`);
       setBulkConfirmOpen(false);
     } catch (error) {
-      console.error('Error bulk categorizing:', error);
-      toast.error('Failed to categorize transactions');
+      console.error("Error bulk categorizing:", error);
+      toast.error("Failed to categorize transactions");
       // Keep dialog open on error
     }
   }
@@ -568,8 +638,8 @@ export default function TransactionsPageClient() {
       clearSelection();
       toast.success(`Successfully categorized ${selectedTransactionIds.size} transaction(s)`);
     } catch (error) {
-      console.error('Error bulk categorizing:', error);
-      toast.error('Failed to categorize transactions');
+      console.error("Error bulk categorizing:", error);
+      toast.error("Failed to categorize transactions");
     }
   }
 
@@ -577,30 +647,34 @@ export default function TransactionsPageClient() {
   function handleDateRangeChange(preset: string) {
     const now = new Date();
     let start: Date;
-    let end: Date = now;
+    const end: Date = now;
 
     switch (preset) {
-      case 'this-month':
+      case "this-month":
         start = new Date(now.getFullYear(), now.getMonth(), 1);
         break;
-      case 'last-30':
+      case "last-30":
         start = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);
         break;
-      case 'last-90':
+      case "last-90":
         start = new Date(now.getTime() - 90 * 24 * 60 * 60 * 1000);
         break;
-      case 'this-year':
+      case "this-year":
         start = new Date(now.getFullYear(), 0, 1);
         break;
       default:
         return;
     }
 
-    setStartDate(start.toISOString().split('T')[0]);
-    setEndDate(end.toISOString().split('T')[0]);
+    setStartDate(start.toISOString().split("T")[0]);
+    setEndDate(end.toISOString().split("T")[0]);
   }
 
-  async function quickCategorize(transaction: Transaction, categoryName: string, subcategoryName: string | null) {
+  async function quickCategorize(
+    transaction: Transaction,
+    categoryName: string,
+    subcategoryName: string | null
+  ) {
     const perfStart = performance.now();
     try {
       const updated = {
@@ -611,9 +685,7 @@ export default function TransactionsPageClient() {
       };
 
       // Optimistic update - update UI immediately
-      setTransactions(prev =>
-        prev.map(tx => tx.id === transaction.id ? updated : tx)
-      );
+      setTransactions((prev) => prev.map((tx) => (tx.id === transaction.id ? updated : tx)));
 
       const dbStart = performance.now();
       await db.transactions.update(transaction.id, updated);
@@ -624,7 +696,7 @@ export default function TransactionsPageClient() {
       const autoCategorization = categorizeTransaction(transaction.description);
       recordCorrection({
         originalDescription: transaction.description,
-        suggestedCategory: autoCategorization?.category || 'Uncategorized',
+        suggestedCategory: autoCategorization?.category || "Uncategorized",
         suggestedSubcategory: autoCategorization?.subcategory,
         correctedCategory: categoryName,
         correctedSubcategory: subcategoryName || undefined,
@@ -632,12 +704,16 @@ export default function TransactionsPageClient() {
       });
 
       const perfEnd = performance.now();
-      console.log(`[Performance] Total quickCategorize (optimized): ${(perfEnd - perfStart).toFixed(2)}ms`);
+      console.log(
+        `[Performance] Total quickCategorize (optimized): ${(perfEnd - perfStart).toFixed(2)}ms`
+      );
 
-      toast.success(`Categorized as ${categoryName}${subcategoryName ? ` - ${subcategoryName}` : ''}`);
+      toast.success(
+        `Categorized as ${categoryName}${subcategoryName ? ` - ${subcategoryName}` : ""}`
+      );
     } catch (error) {
-      console.error('Error quick categorizing:', error);
-      toast.error('Failed to categorize transaction');
+      console.error("Error quick categorizing:", error);
+      toast.error("Failed to categorize transaction");
       // Reload on error to ensure consistency
       await loadData();
     }
@@ -654,9 +730,7 @@ export default function TransactionsPageClient() {
     // 1) Optimistic UI update – instant
     setTransactions((prev) =>
       prev.map((tx) =>
-        transactionIds.includes(tx.id)
-          ? { ...tx, category, subcategory, updatedAt }
-          : tx
+        transactionIds.includes(tx.id) ? { ...tx, category, subcategory, updatedAt } : tx
       )
     );
 
@@ -680,12 +754,12 @@ export default function TransactionsPageClient() {
 
         toast.success(
           `Categorized ${transactionIds.length} transactions as ${category}${
-            subcategory ? ` - ${subcategory}` : ''
+            subcategory ? ` - ${subcategory}` : ""
           }`
         );
       } catch (error) {
-        console.error('Error bulk categorizing:', error);
-        toast.error('Failed to bulk categorize transactions');
+        console.error("Error bulk categorizing:", error);
+        toast.error("Failed to bulk categorize transactions");
         // Reload on error to ensure consistency
         await loadData();
       }
@@ -697,7 +771,7 @@ export default function TransactionsPageClient() {
     if (!pendingCategorization) return;
 
     bulkCategorizeVendorTransactions(
-      matchingTransactions.map(tx => tx.id),
+      matchingTransactions.map((tx) => tx.id),
       pendingCategorization.category,
       pendingCategorization.subcategory
     );
@@ -732,7 +806,7 @@ export default function TransactionsPageClient() {
 
   // Toggle transaction description expansion (MEMOIZED for performance)
   const toggleExpanded = useCallback((id: string) => {
-    setExpandedTransactionIds(prev => {
+    setExpandedTransactionIds((prev) => {
       const newSet = new Set(prev);
       if (newSet.has(id)) {
         newSet.delete(id);
@@ -745,9 +819,9 @@ export default function TransactionsPageClient() {
 
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center h-64">
+      <div className="flex h-64 items-center justify-center">
         <div className="text-center">
-          <div className="w-16 h-16 border-4 border-teal-600 border-t-transparent rounded-full animate-spin mx-auto"></div>
+          <div className="mx-auto h-16 w-16 animate-spin rounded-full border-4 border-teal-600 border-t-transparent"></div>
           <p className="mt-4 text-gray-600">Loading transactions...</p>
         </div>
       </div>
@@ -771,14 +845,20 @@ export default function TransactionsPageClient() {
         onCategoryChange={setSelectedCategory}
         onDateRangeChange={handleDateRangeChange}
         onClearFilters={() => {
-          setSearchTerm('');
-          setSelectedCategory('all');
-          setSelectedAccount('all');
-          setStartDate('');
-          setEndDate('');
-          router.push('/budget-app/transactions');
+          setSearchTerm("");
+          setSelectedCategory("all");
+          setSelectedAccount("all");
+          setStartDate("");
+          setEndDate("");
+          router.push("/budget-app/transactions");
         }}
-        hasActiveFilters={searchTerm !== '' || selectedCategory !== 'all' || selectedAccount !== 'all' || startDate !== '' || endDate !== ''}
+        hasActiveFilters={
+          searchTerm !== "" ||
+          selectedCategory !== "all" ||
+          selectedAccount !== "all" ||
+          startDate !== "" ||
+          endDate !== ""
+        }
       />
 
       {/* Header - Enhanced Typography */}
@@ -789,9 +869,9 @@ export default function TransactionsPageClient() {
             <HelpTooltip
               content={
                 <>
-                  <strong>Split Transactions:</strong> Divide a single purchase across multiple categories.
-                  Example: Grocery store visit ($100) → Groceries ($80) + Household ($20).
-                  Click the Split button on any transaction to divide it.
+                  <strong>Split Transactions:</strong> Divide a single purchase across multiple
+                  categories. Example: Grocery store visit ($100) → Groceries ($80) + Household
+                  ($20). Click the Split button on any transaction to divide it.
                 </>
               }
               learnMoreUrl="/docs/user-guide#split-transactions"
@@ -799,8 +879,8 @@ export default function TransactionsPageClient() {
               iconSize="h-5 w-5"
             />
           </div>
-          <p className="text-lg text-slate-400 mt-2 font-medium">
-            {filteredTransactions.length} transaction{filteredTransactions.length !== 1 ? 's' : ''}
+          <p className="mt-2 text-lg font-medium text-slate-400">
+            {filteredTransactions.length} transaction{filteredTransactions.length !== 1 ? "s" : ""}
           </p>
         </div>
         <button
@@ -808,22 +888,25 @@ export default function TransactionsPageClient() {
             setEditingTransaction(null);
             setShowModal(true);
           }}
-          className="inline-flex items-center gap-2 px-6 py-3 min-h-[48px] text-base font-semibold bg-teal-500 text-white rounded-lg hover:bg-teal-600 transition-colors shadow-md hover:shadow-lg focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 focus:outline-none"
+          className="inline-flex min-h-[48px] items-center gap-2 rounded-lg bg-teal-500 px-6 py-3 text-base font-semibold text-white shadow-md transition-colors hover:bg-teal-600 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
         >
-          <Plus className="w-5 h-5" />
+          <Plus className="h-5 w-5" />
           Add Transaction
         </button>
       </div>
 
       {/* Filters and Search - Enhanced with Date Range */}
-      <div className="bg-card rounded-lg shadow p-4">
+      <div className="rounded-lg bg-card p-4 shadow">
         <div className="space-y-4">
           {/* Top Row: Search and Category */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
             {/* Search */}
             <div>
-              <div className="flex items-center gap-2 mb-2">
-                <label htmlFor="search-transactions" className="text-sm font-medium text-foreground">
+              <div className="mb-2 flex items-center gap-2">
+                <label
+                  htmlFor="search-transactions"
+                  className="text-sm font-medium text-foreground"
+                >
                   Search Transactions
                 </label>
                 <HelpTooltip
@@ -833,21 +916,21 @@ export default function TransactionsPageClient() {
                 />
               </div>
               <div className="relative">
-                <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+                <Search className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-muted-foreground" />
                 <input
                   id="search-transactions"
                   type="text"
                   placeholder="Search transactions..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full pl-10 pr-4 py-3 text-base border border-input rounded-lg bg-background text-foreground focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 focus:border-transparent focus:outline-none"
+                  className="w-full rounded-lg border border-input bg-background py-3 pl-10 pr-4 text-base text-foreground focus:border-transparent focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
                 />
               </div>
             </div>
 
             {/* Account Filter */}
             <div>
-              <div className="flex items-center gap-2 mb-2">
+              <div className="mb-2 flex items-center gap-2">
                 <label htmlFor="account-filter" className="text-sm font-medium text-foreground">
                   Filter by Account
                 </label>
@@ -856,7 +939,7 @@ export default function TransactionsPageClient() {
                 id="account-filter"
                 value={selectedAccount}
                 onChange={(e) => setSelectedAccount(e.target.value)}
-                className="w-full px-4 py-3 text-base border border-input rounded-lg bg-background text-foreground focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 focus:border-transparent focus:outline-none"
+                className="w-full rounded-lg border border-input bg-background px-4 py-3 text-base text-foreground focus:border-transparent focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
               >
                 <option value="all">All Accounts</option>
                 {accounts.map((acct) => (
@@ -869,7 +952,7 @@ export default function TransactionsPageClient() {
 
             {/* Category Filter */}
             <div>
-              <div className="flex items-center gap-2 mb-2">
+              <div className="mb-2 flex items-center gap-2">
                 <label htmlFor="category-filter" className="text-sm font-medium text-foreground">
                   Filter by Category
                 </label>
@@ -883,7 +966,7 @@ export default function TransactionsPageClient() {
                 id="category-filter"
                 value={selectedCategory}
                 onChange={(e) => setSelectedCategory(e.target.value)}
-                className="w-full px-4 py-3 text-base border border-input rounded-lg bg-background text-foreground focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 focus:border-transparent focus:outline-none"
+                className="w-full rounded-lg border border-input bg-background px-4 py-3 text-base text-foreground focus:border-transparent focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
               >
                 <option value="all">All Categories</option>
                 {categories.map((cat) => (
@@ -896,10 +979,10 @@ export default function TransactionsPageClient() {
           </div>
 
           {/* Bottom Row: Date Range and Sort */}
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-4">
             {/* Start Date */}
             <div>
-              <label htmlFor="start-date" className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="start-date" className="mb-1 block text-sm font-medium text-gray-700">
                 From Date
               </label>
               <input
@@ -907,13 +990,13 @@ export default function TransactionsPageClient() {
                 type="date"
                 value={startDate}
                 onChange={(e) => setStartDate(e.target.value)}
-                className="w-full px-4 py-3 text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 focus:border-transparent focus:outline-none"
+                className="w-full rounded-lg border border-gray-300 px-4 py-3 text-base focus:border-transparent focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
               />
             </div>
 
             {/* End Date */}
             <div>
-              <label htmlFor="end-date" className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="end-date" className="mb-1 block text-sm font-medium text-gray-700">
                 To Date
               </label>
               <input
@@ -921,15 +1004,15 @@ export default function TransactionsPageClient() {
                 type="date"
                 value={endDate}
                 onChange={(e) => setEndDate(e.target.value)}
-                className="w-full px-4 py-3 text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 focus:border-transparent focus:outline-none"
+                className="w-full rounded-lg border border-gray-300 px-4 py-3 text-base focus:border-transparent focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
               />
             </div>
 
             {/* Sort By */}
             <select
               value={sortBy}
-              onChange={(e) => setSortBy(e.target.value as 'date' | 'amount')}
-              className="px-4 py-3 text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 focus:border-transparent focus:outline-none"
+              onChange={(e) => setSortBy(e.target.value as "date" | "amount")}
+              className="rounded-lg border border-gray-300 px-4 py-3 text-base focus:border-transparent focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
             >
               <option value="date">Sort by Date</option>
               <option value="amount">Sort by Amount</option>
@@ -938,8 +1021,8 @@ export default function TransactionsPageClient() {
             {/* Sort Direction */}
             <select
               value={sortDirection}
-              onChange={(e) => setSortDirection(e.target.value as 'asc' | 'desc')}
-              className="px-4 py-3 text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 focus:border-transparent focus:outline-none"
+              onChange={(e) => setSortDirection(e.target.value as "asc" | "desc")}
+              className="rounded-lg border border-gray-300 px-4 py-3 text-base focus:border-transparent focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
             >
               <option value="desc">Newest First</option>
               <option value="asc">Oldest First</option>
@@ -947,40 +1030,44 @@ export default function TransactionsPageClient() {
           </div>
 
           {/* Clear Filters Button */}
-          {(searchTerm || selectedCategory !== 'all' || selectedAccount !== 'all' || startDate || endDate) && (
+          {(searchTerm ||
+            selectedCategory !== "all" ||
+            selectedAccount !== "all" ||
+            startDate ||
+            endDate) && (
             <div className="flex justify-end">
               <button
                 onClick={() => {
-                  setSearchTerm('');
-                  setSelectedCategory('all');
-                  setSelectedAccount('all');
-                  setStartDate('');
-                  setEndDate('');
+                  setSearchTerm("");
+                  setSelectedCategory("all");
+                  setSelectedAccount("all");
+                  setStartDate("");
+                  setEndDate("");
                   // Clear URL params
-                  router.push('/budget-app/transactions');
+                  router.push("/budget-app/transactions");
                 }}
-                className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors"
+                className="inline-flex items-center gap-2 rounded-lg bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-200"
               >
-                <XIcon className="w-4 h-4" />
+                <XIcon className="h-4 w-4" />
                 Clear Filters
               </button>
             </div>
           )}
-          
+
           {/* Account Filter Banner */}
           {selectedAccountName && (
-            <div className="flex items-center justify-between bg-blue-50 border border-blue-200 rounded-lg px-4 py-3">
+            <div className="flex items-center justify-between rounded-lg border border-blue-200 bg-blue-50 px-4 py-3">
               <div className="flex items-center gap-2">
-                <Landmark className="w-5 h-5 text-blue-600" />
+                <Landmark className="h-5 w-5 text-blue-600" />
                 <span className="text-blue-800">
                   Showing transactions for <strong>{selectedAccountName}</strong>
                 </span>
               </div>
               <button
                 onClick={clearAccountFilter}
-                className="text-blue-600 hover:text-blue-800 text-sm font-medium flex items-center gap-1"
+                className="flex items-center gap-1 text-sm font-medium text-blue-600 hover:text-blue-800"
               >
-                <XIcon className="w-4 h-4" />
+                <XIcon className="h-4 w-4" />
                 Show All
               </button>
             </div>
@@ -988,56 +1075,57 @@ export default function TransactionsPageClient() {
         </div>
       </div>
 
-
       {/* Summary Cards - Enhanced Typography */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div className="bg-white rounded-lg shadow-md p-6 border-l-4 border-green-500">
-          <div className="flex items-center gap-2 mb-3">
-            <TrendingUp className="w-5 h-5 text-green-600" aria-hidden="true" />
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+        <div className="rounded-lg border-l-4 border-green-500 bg-white p-6 shadow-md">
+          <div className="mb-3 flex items-center gap-2">
+            <TrendingUp className="h-5 w-5 text-green-600" aria-hidden="true" />
             <p className="text-base font-medium text-gray-700">Total Income</p>
           </div>
-          <p className="text-3xl font-bold text-green-600 flex items-center gap-2">
-            <ArrowUp className="w-6 h-6" aria-hidden="true" />
-            <span className="sr-only">Income: </span>
-            ${totalIncome.toFixed(2)}
+          <p className="flex items-center gap-2 text-3xl font-bold text-green-600">
+            <ArrowUp className="h-6 w-6" aria-hidden="true" />
+            <span className="sr-only">Income: </span>${totalIncome.toFixed(2)}
           </p>
         </div>
-        <div className="bg-white rounded-lg shadow-md p-6 border-l-4 border-red-500">
-          <div className="flex items-center gap-2 mb-3">
-            <TrendingDown className="w-5 h-5 text-red-600" aria-hidden="true" />
+        <div className="rounded-lg border-l-4 border-red-500 bg-white p-6 shadow-md">
+          <div className="mb-3 flex items-center gap-2">
+            <TrendingDown className="h-5 w-5 text-red-600" aria-hidden="true" />
             <p className="text-base font-medium text-gray-700">Total Expenses</p>
           </div>
-          <p className="text-3xl font-bold text-red-600 flex items-center gap-2">
-            <ArrowDown className="w-6 h-6" aria-hidden="true" />
-            <span className="sr-only">Expense: </span>
-            ${totalExpenses.toFixed(2)}
+          <p className="flex items-center gap-2 text-3xl font-bold text-red-600">
+            <ArrowDown className="h-6 w-6" aria-hidden="true" />
+            <span className="sr-only">Expense: </span>${totalExpenses.toFixed(2)}
           </p>
         </div>
-        <div className="bg-white rounded-lg shadow-md p-6 border-l-4 border-blue-500">
-          <div className="flex items-center gap-2 mb-3">
+        <div className="rounded-lg border-l-4 border-blue-500 bg-white p-6 shadow-md">
+          <div className="mb-3 flex items-center gap-2">
             <p className="text-base font-medium text-gray-700">Current Balance</p>
             {startingBalance !== 0 && (
-              <HelpTooltip content={`Starting balance: $${startingBalance.toFixed(2)} + Net change: $${(totalIncome - totalExpenses).toFixed(2)}`} />
+              <HelpTooltip
+                content={`Starting balance: $${startingBalance.toFixed(2)} + Net change: $${(totalIncome - totalExpenses).toFixed(2)}`}
+              />
             )}
           </div>
-          <p className={`text-3xl font-bold flex items-center gap-2 ${
-            currentBalance >= 0 ? 'text-blue-600' : 'text-red-600'
-          }`}>
+          <p
+            className={`flex items-center gap-2 text-3xl font-bold ${
+              currentBalance >= 0 ? "text-blue-600" : "text-red-600"
+            }`}
+          >
             {currentBalance >= 0 ? (
               <>
-                <ArrowUp className="w-6 h-6" aria-hidden="true" />
+                <ArrowUp className="h-6 w-6" aria-hidden="true" />
                 <span className="sr-only">Positive: </span>
               </>
             ) : (
               <>
-                <ArrowDown className="w-6 h-6" aria-hidden="true" />
+                <ArrowDown className="h-6 w-6" aria-hidden="true" />
                 <span className="sr-only">Negative: </span>
               </>
             )}
             ${Math.abs(currentBalance).toFixed(2)}
           </p>
           {startingBalance === 0 && (
-            <p className="text-xs text-gray-500 mt-2">
+            <p className="mt-2 text-xs text-gray-500">
               <Link href="/budget-app/accounts" className="text-blue-600 hover:underline">
                 Set account starting balance →
               </Link>
@@ -1047,221 +1135,233 @@ export default function TransactionsPageClient() {
       </div>
 
       {/* Transactions Table - Modern responsive design with natural scrolling */}
-      <div className="bg-white rounded-lg shadow overflow-hidden">
+      <div className="overflow-hidden rounded-lg bg-white shadow">
         {filteredTransactions.length > 0 ? (
           <>
             {/* Desktop Table View (≥768px) - Natural page scrolling */}
             <div className="hidden md:block">
               <table className="w-full table-fixed">
-              <thead className="bg-gray-50 border-b border-gray-200 sticky top-0 z-20 shadow-sm">
-                <tr>
-                  <th className="bg-gray-50 px-4 md:px-6 py-3 text-left w-12">
-                    <input
-                      type="checkbox"
-                      checked={filteredTransactions.length > 0 && filteredTransactions.every(tx => selectedTransactionIds.has(tx.id))}
-                      onChange={(e) => {
-                        if (e.target.checked) {
-                          selectAllVisible();
-                        } else {
-                          clearSelection();
-                        }
-                      }}
-                      className="w-4 h-4 text-teal-600 border-gray-300 rounded focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
-                      title="Select all visible transactions"
-                    />
-                  </th>
-                  <th className="bg-gray-50 px-4 md:px-6 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider w-28">
-                    Date
-                  </th>
-                  <th className="bg-gray-50 px-4 md:px-6 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
-                    Description
-                  </th>
-                  <th className="bg-gray-50 px-4 md:px-6 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider hidden sm:table-cell w-36">
-                    Category
-                  </th>
-                  <th className="bg-gray-50 px-4 md:px-6 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider hidden lg:table-cell w-24">
-                    Receipt
-                  </th>
-                  <th className="bg-gray-50 px-4 md:px-6 py-3 text-right text-xs font-semibold text-gray-700 uppercase tracking-wider w-28">
-                    Amount
-                  </th>
-                  <th className="bg-gray-50 px-4 md:px-6 py-3 text-right text-xs font-semibold text-gray-700 uppercase tracking-wider hidden xl:table-cell w-28">
-                    Balance
-                  </th>
-                  <th className="bg-gray-50 px-4 md:px-6 py-3 text-right text-xs font-semibold text-gray-700 uppercase tracking-wider w-28">
-                    Actions
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-gray-200 bg-white">
-                {filteredTransactions.map((tx) => (
-                  <tr key={tx.id} className={`hover:bg-gray-50/50 transition-colors ${selectedTransactionIds.has(tx.id) ? 'bg-teal-50/50' : ''}`}>
-                    <td className="px-4 md:px-6 py-4 whitespace-nowrap">
+                <thead className="sticky top-0 z-20 border-b border-gray-200 bg-gray-50 shadow-sm">
+                  <tr>
+                    <th className="w-12 bg-gray-50 px-4 py-3 text-left md:px-6">
                       <input
                         type="checkbox"
-                        checked={selectedTransactionIds.has(tx.id)}
-                        onChange={() => toggleSelectTransaction(tx.id)}
-                        className="w-4 h-4 text-teal-600 border-gray-300 rounded focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
-                        onClick={(e) => e.stopPropagation()}
+                        checked={
+                          filteredTransactions.length > 0 &&
+                          filteredTransactions.every((tx) => selectedTransactionIds.has(tx.id))
+                        }
+                        onChange={(e) => {
+                          if (e.target.checked) {
+                            selectAllVisible();
+                          } else {
+                            clearSelection();
+                          }
+                        }}
+                        className="h-4 w-4 rounded border-gray-300 text-teal-600 focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
+                        title="Select all visible transactions"
                       />
-                    </td>
-                    <td className="px-4 md:px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                      {new Date(tx.date).toLocaleDateString()}
-                    </td>
-                    <td className="px-4 md:px-6 py-4 text-sm text-gray-900 max-w-xs">
-                      <div>
-                        <div
-                          className="flex items-center gap-2 cursor-pointer hover:text-teal-600 transition-colors group"
-                          onClick={() => toggleExpanded(tx.id)}
-                        >
-                          <span className={`font-semibold ${expandedTransactionIds.has(tx.id) ? 'whitespace-normal break-words' : 'truncate'}`}>
-                            {tx.description}
-                          </span>
-                          {expandedTransactionIds.has(tx.id) ? (
-                            <ChevronUp className="w-4 h-4 flex-shrink-0 text-teal-600" />
-                          ) : (
-                            <ChevronDown className="w-4 h-4 flex-shrink-0 text-gray-400 group-hover:text-teal-600" />
-                          )}
-                          {tx.splitFromId && (
-                            <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-teal-100 text-teal-700 flex-shrink-0">
-                              Split
+                    </th>
+                    <th className="w-28 bg-gray-50 px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-700 md:px-6">
+                      Date
+                    </th>
+                    <th className="bg-gray-50 px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-700 md:px-6">
+                      Description
+                    </th>
+                    <th className="hidden w-36 bg-gray-50 px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-700 sm:table-cell md:px-6">
+                      Category
+                    </th>
+                    <th className="hidden w-24 bg-gray-50 px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-700 md:px-6 lg:table-cell">
+                      Receipt
+                    </th>
+                    <th className="w-28 bg-gray-50 px-4 py-3 text-right text-xs font-semibold uppercase tracking-wider text-gray-700 md:px-6">
+                      Amount
+                    </th>
+                    <th className="hidden w-28 bg-gray-50 px-4 py-3 text-right text-xs font-semibold uppercase tracking-wider text-gray-700 md:px-6 xl:table-cell">
+                      Balance
+                    </th>
+                    <th className="w-28 bg-gray-50 px-4 py-3 text-right text-xs font-semibold uppercase tracking-wider text-gray-700 md:px-6">
+                      Actions
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-gray-200 bg-white">
+                  {filteredTransactions.map((tx) => (
+                    <tr
+                      key={tx.id}
+                      className={`transition-colors hover:bg-gray-50/50 ${selectedTransactionIds.has(tx.id) ? "bg-teal-50/50" : ""}`}
+                    >
+                      <td className="whitespace-nowrap px-4 py-4 md:px-6">
+                        <input
+                          type="checkbox"
+                          checked={selectedTransactionIds.has(tx.id)}
+                          onChange={() => toggleSelectTransaction(tx.id)}
+                          className="h-4 w-4 rounded border-gray-300 text-teal-600 focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
+                          onClick={(e) => e.stopPropagation()}
+                        />
+                      </td>
+                      <td className="whitespace-nowrap px-4 py-4 text-sm font-medium text-gray-900 md:px-6">
+                        {new Date(tx.date).toLocaleDateString()}
+                      </td>
+                      <td className="max-w-xs px-4 py-4 text-sm text-gray-900 md:px-6">
+                        <div>
+                          <div
+                            className="group flex cursor-pointer items-center gap-2 transition-colors hover:text-teal-600"
+                            onClick={() => toggleExpanded(tx.id)}
+                          >
+                            <span
+                              className={`font-semibold ${expandedTransactionIds.has(tx.id) ? "whitespace-normal break-words" : "truncate"}`}
+                            >
+                              {tx.description}
                             </span>
+                            {expandedTransactionIds.has(tx.id) ? (
+                              <ChevronUp className="h-4 w-4 flex-shrink-0 text-teal-600" />
+                            ) : (
+                              <ChevronDown className="h-4 w-4 flex-shrink-0 text-gray-400 group-hover:text-teal-600" />
+                            )}
+                            {tx.splitFromId && (
+                              <span className="inline-flex flex-shrink-0 items-center rounded bg-teal-100 px-2 py-0.5 text-xs font-medium text-teal-700">
+                                Split
+                              </span>
+                            )}
+                          </div>
+                          {tx.notes && (
+                            <div
+                              className={`mt-1 text-xs text-gray-600 ${expandedTransactionIds.has(tx.id) ? "whitespace-normal break-words" : "truncate"}`}
+                            >
+                              {tx.notes}
+                            </div>
                           )}
                         </div>
-                        {tx.notes && (
-                          <div className={`text-gray-600 text-xs mt-1 ${expandedTransactionIds.has(tx.id) ? 'whitespace-normal break-words' : 'truncate'}`}>
-                            {tx.notes}
-                          </div>
-                        )}
-                      </div>
-                    </td>
-                    <td className="px-4 md:px-6 py-4 whitespace-nowrap hidden sm:table-cell">
-                      {tx.category ? (
-                        <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-teal-100 text-teal-800">
-                          {tx.category}
-                          {tx.subcategory && ` • ${tx.subcategory}`}
-                        </span>
-                      ) : (
-                        <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
-                          Uncategorized
-                        </span>
-                      )}
-                    </td>
-                    <td className="px-4 md:px-6 py-4 whitespace-nowrap hidden lg:table-cell">
-                      <ReceiptThumbnail
-                        transactionId={tx.id}
-                        onReceiptDeleted={loadData}
-                      />
-                    </td>
-                    <td className="px-4 md:px-6 py-4 whitespace-nowrap text-right">
-                      <div className="flex items-center justify-end gap-1.5">
-                        {tx.amount > 0 ? (
-                          <>
-                            <ArrowUp className="w-4 h-4 text-green-600" aria-hidden="true" />
-                            <span className="font-semibold text-sm text-green-600">
-                              <span className="sr-only">Income: </span>
-                              +${Math.abs(tx.amount).toFixed(2)}
-                            </span>
-                          </>
-                        ) : (
-                          <>
-                            <ArrowDown className="w-4 h-4 text-red-600" aria-hidden="true" />
-                            <span className="font-semibold text-sm text-red-600">
-                              <span className="sr-only">Expense: </span>
-                              -${Math.abs(tx.amount).toFixed(2)}
-                            </span>
-                          </>
-                        )}
-                      </div>
-                    </td>
-                    <td className="px-4 md:px-6 py-4 whitespace-nowrap text-right hidden xl:table-cell">
-                      {(() => {
-                        const balance = runningBalances.get(tx.id);
-                        if (balance === undefined) return null;
-                        const isNegative = balance < 0;
-                        return (
-                          <span className={`text-sm font-medium ${isNegative ? 'text-red-600' : 'text-gray-700'}`}>
-                            ${Math.abs(balance).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                      </td>
+                      <td className="hidden whitespace-nowrap px-4 py-4 sm:table-cell md:px-6">
+                        {tx.category ? (
+                          <span className="inline-flex items-center rounded-full bg-teal-100 px-2.5 py-1 text-xs font-medium text-teal-800">
+                            {tx.category}
+                            {tx.subcategory && ` • ${tx.subcategory}`}
                           </span>
-                        );
-                      })()}
-                    </td>
-                    <td className="px-4 md:px-6 py-4 whitespace-nowrap text-right">
-                      <div className="flex items-center justify-end gap-1">
-                        {/* Quick Categorize for uncategorized transactions */}
-                        {!tx.category && (
-                          <button
-                            onClick={() => setQuickCategorizingId(tx.id)}
-                            className="p-1.5 text-green-600 hover:text-green-700 hover:bg-green-50 rounded-md transition-colors"
-                            title="Quick Categorize"
-                          >
-                            <Tag className="w-4 h-4" />
-                          </button>
-                        )}
-
-                        {/* Link to Loan / Linked Loan Badge */}
-                        {linkedPayments.has(tx.id) ? (
-                          <LinkedLoanBadgeInline
-                            loanName={linkedPayments.get(tx.id)!.loanName}
-                            loanId={linkedPayments.get(tx.id)!.loanId}
-                            paymentId={linkedPayments.get(tx.id)!.payment.id}
-                            onUnlink={loadData}
-                          />
-                        ) : tx.amount < 0 && !tx.category?.startsWith('Loan Payment') ? (
-                          <LinkToLoanButton
-                            transaction={tx}
-                            onLinked={loadData}
-                          />
-                        ) : null}
-
-                        {/* Split/Unsplit Button */}
-                        {tx.splitFromId ? (
-                          <button
-                            onClick={() => initiateUnsplit(tx)}
-                            className="p-1.5 text-teal-600 hover:text-teal-700 hover:bg-teal-50 rounded-md transition-colors"
-                            title="Unsplit transaction"
-                          >
-                            <Split className="w-4 h-4" />
-                          </button>
                         ) : (
-                          <button
-                            onClick={() => openSplitModal(tx)}
-                            className="p-1.5 text-teal-600 hover:text-teal-700 hover:bg-teal-50 rounded-md transition-colors"
-                            title="Split transaction"
-                          >
-                            <Split className="w-4 h-4" />
-                          </button>
+                          <span className="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-1 text-xs font-medium text-gray-800">
+                            Uncategorized
+                          </span>
                         )}
+                      </td>
+                      <td className="hidden whitespace-nowrap px-4 py-4 md:px-6 lg:table-cell">
+                        <ReceiptThumbnail transactionId={tx.id} onReceiptDeleted={loadData} />
+                      </td>
+                      <td className="whitespace-nowrap px-4 py-4 text-right md:px-6">
+                        <div className="flex items-center justify-end gap-1.5">
+                          {tx.amount > 0 ? (
+                            <>
+                              <ArrowUp className="h-4 w-4 text-green-600" aria-hidden="true" />
+                              <span className="text-sm font-semibold text-green-600">
+                                <span className="sr-only">Income: </span>
+                                +${Math.abs(tx.amount).toFixed(2)}
+                              </span>
+                            </>
+                          ) : (
+                            <>
+                              <ArrowDown className="h-4 w-4 text-red-600" aria-hidden="true" />
+                              <span className="text-sm font-semibold text-red-600">
+                                <span className="sr-only">Expense: </span>
+                                -${Math.abs(tx.amount).toFixed(2)}
+                              </span>
+                            </>
+                          )}
+                        </div>
+                      </td>
+                      <td className="hidden whitespace-nowrap px-4 py-4 text-right md:px-6 xl:table-cell">
+                        {(() => {
+                          const balance = runningBalances.get(tx.id);
+                          if (balance === undefined) return null;
+                          const isNegative = balance < 0;
+                          return (
+                            <span
+                              className={`text-sm font-medium ${isNegative ? "text-red-600" : "text-gray-700"}`}
+                            >
+                              $
+                              {Math.abs(balance).toLocaleString("en-US", {
+                                minimumFractionDigits: 2,
+                                maximumFractionDigits: 2,
+                              })}
+                            </span>
+                          );
+                        })()}
+                      </td>
+                      <td className="whitespace-nowrap px-4 py-4 text-right md:px-6">
+                        <div className="flex items-center justify-end gap-1">
+                          {/* Quick Categorize for uncategorized transactions */}
+                          {!tx.category && (
+                            <button
+                              onClick={() => setQuickCategorizingId(tx.id)}
+                              className="rounded-md p-1.5 text-green-600 transition-colors hover:bg-green-50 hover:text-green-700"
+                              title="Quick Categorize"
+                            >
+                              <Tag className="h-4 w-4" />
+                            </button>
+                          )}
 
-                        <button
-                          onClick={() => {
-                            setEditingTransaction(tx);
-                            setShowModal(true);
-                          }}
-                          className="p-1.5 text-teal-600 hover:text-teal-700 hover:bg-teal-50 rounded-md transition-colors"
-                          title="Edit" aria-label="Edit transaction"
-                        >
-                          <Edit className="w-4 h-4" />
-                        </button>
-                        <button
-                          onClick={() => initiateDeleteTransaction(tx)}
-                          className="p-1.5 text-red-600 hover:text-red-700 hover:bg-red-50 rounded-md transition-colors"
-                          title="Delete" aria-label="Delete transaction"
-                        >
-                          <Trash2 className="w-4 h-4" />
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+                          {/* Link to Loan / Linked Loan Badge */}
+                          {linkedPayments.has(tx.id) ? (
+                            <LinkedLoanBadgeInline
+                              loanName={linkedPayments.get(tx.id)!.loanName}
+                              loanId={linkedPayments.get(tx.id)!.loanId}
+                              paymentId={linkedPayments.get(tx.id)!.payment.id}
+                              onUnlink={loadData}
+                            />
+                          ) : tx.amount < 0 && !tx.category?.startsWith("Loan Payment") ? (
+                            <LinkToLoanButton transaction={tx} onLinked={loadData} />
+                          ) : null}
+
+                          {/* Split/Unsplit Button */}
+                          {tx.splitFromId ? (
+                            <button
+                              onClick={() => initiateUnsplit(tx)}
+                              className="rounded-md p-1.5 text-teal-600 transition-colors hover:bg-teal-50 hover:text-teal-700"
+                              title="Unsplit transaction"
+                            >
+                              <Split className="h-4 w-4" />
+                            </button>
+                          ) : (
+                            <button
+                              onClick={() => openSplitModal(tx)}
+                              className="rounded-md p-1.5 text-teal-600 transition-colors hover:bg-teal-50 hover:text-teal-700"
+                              title="Split transaction"
+                            >
+                              <Split className="h-4 w-4" />
+                            </button>
+                          )}
+
+                          <button
+                            onClick={() => {
+                              setEditingTransaction(tx);
+                              setShowModal(true);
+                            }}
+                            className="rounded-md p-1.5 text-teal-600 transition-colors hover:bg-teal-50 hover:text-teal-700"
+                            title="Edit"
+                            aria-label="Edit transaction"
+                          >
+                            <Edit className="h-4 w-4" />
+                          </button>
+                          <button
+                            onClick={() => initiateDeleteTransaction(tx)}
+                            className="rounded-md p-1.5 text-red-600 transition-colors hover:bg-red-50 hover:text-red-700"
+                            title="Delete"
+                            aria-label="Delete transaction"
+                          >
+                            <Trash2 className="h-4 w-4" />
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
 
             {/* Mobile Card View (<768px) - Phase 3.3.3: Pull-to-refresh + Phase 3.3.1: Swipe-to-delete */}
             <div
               ref={mobileListRef}
-              className="md:hidden relative"
+              className="relative md:hidden"
               onTouchStart={(e) => {
                 const list = mobileListRef.current;
                 if (list && list.scrollTop === 0) {
@@ -1283,31 +1383,31 @@ export default function TransactionsPageClient() {
                     } else {
                       setPullDistance(0);
                     }
-                    document.removeEventListener('touchmove', handleTouchMove);
-                    document.removeEventListener('touchend', handleTouchEnd);
+                    document.removeEventListener("touchmove", handleTouchMove);
+                    document.removeEventListener("touchend", handleTouchEnd);
                   };
 
-                  document.addEventListener('touchmove', handleTouchMove, { passive: false });
-                  document.addEventListener('touchend', handleTouchEnd);
+                  document.addEventListener("touchmove", handleTouchMove, { passive: false });
+                  document.addEventListener("touchend", handleTouchEnd);
                 }
               }}
             >
               {/* Pull-to-refresh indicator */}
               {(pullDistance > 0 || isRefreshing) && (
                 <div
-                  className="absolute top-0 left-0 right-0 flex items-center justify-center py-4 z-10 transition-opacity"
+                  className="absolute left-0 right-0 top-0 z-10 flex items-center justify-center py-4 transition-opacity"
                   style={{
                     transform: `translateY(-${isRefreshing ? 0 : Math.max(0, 50 - pullDistance)}px)`,
-                    opacity: Math.min(1, pullDistance / 80)
+                    opacity: Math.min(1, pullDistance / 80),
                   }}
                 >
                   <RefreshCw
-                    className={`w-6 h-6 text-teal-600 ${
-                      isRefreshing ? 'animate-spin' : ''
-                    }`}
+                    className={`h-6 w-6 text-teal-600 ${isRefreshing ? "animate-spin" : ""}`}
                   />
                   {!isRefreshing && pullDistance > 80 && (
-                    <span className="ml-2 text-sm text-teal-600 font-medium">Release to refresh</span>
+                    <span className="ml-2 text-sm font-medium text-teal-600">
+                      Release to refresh
+                    </span>
                   )}
                   {!isRefreshing && pullDistance > 0 && pullDistance <= 80 && (
                     <span className="ml-2 text-sm text-gray-600">Pull to refresh</span>
@@ -1315,219 +1415,230 @@ export default function TransactionsPageClient() {
                 </div>
               )}
 
-              <div className="space-y-6 p-4" style={{ marginTop: pullDistance > 0 ? `${Math.min(pullDistance, 100)}px` : 0 }}>
-              {filteredTransactions.map((tx) => (
-                <motion.div
-                  key={tx.id}
-                  drag="x"
-                  dragConstraints={{ left: -100, right: 0 }}
-                  dragElastic={0.1}
-                  onDragEnd={(event, info: PanInfo) => {
-                    // Phase 3.3.1: Swipe-to-delete gesture
-                    if (info.offset.x < -80) {
-                      initiateDeleteTransaction(tx);
-                    }
-                  }}
-                  className={`bg-white border-2 rounded-lg p-5 shadow-md transition-colors relative ${
-                    selectedTransactionIds.has(tx.id) ? 'border-teal-500 bg-teal-50' : 'border-gray-300'
-                  }`}
-                >
-                  {/* Delete indicator on swipe */}
-                  <div className="absolute inset-y-0 right-0 flex items-center justify-center w-20 bg-red-500 rounded-r-lg pointer-events-none">
-                    <Trash2 className="w-6 h-6 text-white" />
-                  </div>
-
-                  {/* Card Header: Checkbox + Description + Amount */}
-                  <div className="flex items-start gap-4 mb-5">
-                    {/* Selection Checkbox */}
-                    <div className="flex-shrink-0 pt-2">
-                      <input
-                        type="checkbox"
-                        checked={selectedTransactionIds.has(tx.id)}
-                        onChange={() => toggleSelectTransaction(tx.id)}
-                        className="w-6 h-6 text-teal-600 border-gray-300 rounded focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
-                        onClick={(e) => e.stopPropagation()}
-                      />
+              <div
+                className="space-y-6 p-4"
+                style={{ marginTop: pullDistance > 0 ? `${Math.min(pullDistance, 100)}px` : 0 }}
+              >
+                {filteredTransactions.map((tx) => (
+                  <motion.div
+                    key={tx.id}
+                    drag="x"
+                    dragConstraints={{ left: -100, right: 0 }}
+                    dragElastic={0.1}
+                    onDragEnd={(event, info: PanInfo) => {
+                      // Phase 3.3.1: Swipe-to-delete gesture
+                      if (info.offset.x < -80) {
+                        initiateDeleteTransaction(tx);
+                      }
+                    }}
+                    className={`relative rounded-lg border-2 bg-white p-5 shadow-md transition-colors ${
+                      selectedTransactionIds.has(tx.id)
+                        ? "border-teal-500 bg-teal-50"
+                        : "border-gray-300"
+                    }`}
+                  >
+                    {/* Delete indicator on swipe */}
+                    <div className="pointer-events-none absolute inset-y-0 right-0 flex w-20 items-center justify-center rounded-r-lg bg-red-500">
+                      <Trash2 className="h-6 w-6 text-white" />
                     </div>
 
-                    {/* Description + Split Badge */}
-                    <div className="flex-1 min-w-0">
-                      <div
-                        className="flex items-center gap-2 mb-2 cursor-pointer hover:text-teal-600 transition-colors group"
-                        onClick={() => toggleExpanded(tx.id)}
-                      >
-                        <h3 className={`font-bold text-gray-900 text-lg ${expandedTransactionIds.has(tx.id) ? 'whitespace-normal break-words' : 'truncate'}`}>
-                          {tx.description}
-                        </h3>
-                        {expandedTransactionIds.has(tx.id) ? (
-                          <ChevronUp className="w-5 h-5 flex-shrink-0 text-teal-600" />
-                        ) : (
-                          <ChevronDown className="w-5 h-5 flex-shrink-0 text-gray-400 group-hover:text-teal-600" />
+                    {/* Card Header: Checkbox + Description + Amount */}
+                    <div className="mb-5 flex items-start gap-4">
+                      {/* Selection Checkbox */}
+                      <div className="flex-shrink-0 pt-2">
+                        <input
+                          type="checkbox"
+                          checked={selectedTransactionIds.has(tx.id)}
+                          onChange={() => toggleSelectTransaction(tx.id)}
+                          className="h-6 w-6 rounded border-gray-300 text-teal-600 focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
+                          onClick={(e) => e.stopPropagation()}
+                        />
+                      </div>
+
+                      {/* Description + Split Badge */}
+                      <div className="min-w-0 flex-1">
+                        <div
+                          className="group mb-2 flex cursor-pointer items-center gap-2 transition-colors hover:text-teal-600"
+                          onClick={() => toggleExpanded(tx.id)}
+                        >
+                          <h3
+                            className={`text-lg font-bold text-gray-900 ${expandedTransactionIds.has(tx.id) ? "whitespace-normal break-words" : "truncate"}`}
+                          >
+                            {tx.description}
+                          </h3>
+                          {expandedTransactionIds.has(tx.id) ? (
+                            <ChevronUp className="h-5 w-5 flex-shrink-0 text-teal-600" />
+                          ) : (
+                            <ChevronDown className="h-5 w-5 flex-shrink-0 text-gray-400 group-hover:text-teal-600" />
+                          )}
+                          {tx.splitFromId && (
+                            <span className="inline-flex flex-shrink-0 items-center rounded bg-teal-100 px-2.5 py-1 text-sm font-medium text-teal-700">
+                              Split
+                            </span>
+                          )}
+                        </div>
+
+                        {/* Notes */}
+                        {tx.notes && (
+                          <p
+                            className={`mt-2 text-base text-gray-600 ${expandedTransactionIds.has(tx.id) ? "whitespace-normal break-words" : "truncate"}`}
+                          >
+                            {tx.notes}
+                          </p>
                         )}
-                        {tx.splitFromId && (
-                          <span className="inline-flex items-center px-2.5 py-1 rounded text-sm font-medium bg-teal-100 text-teal-700 flex-shrink-0">
-                            Split
+                      </div>
+
+                      {/* Amount */}
+                      <div className="flex-shrink-0 text-right">
+                        <div className="flex flex-col items-end gap-1">
+                          {tx.amount > 0 ? (
+                            <>
+                              <div className="flex items-center gap-1.5">
+                                <ArrowUp className="h-5 w-5 text-green-600" aria-hidden="true" />
+                                <span className="text-sm font-semibold text-green-600">Income</span>
+                              </div>
+                              <p className="text-2xl font-bold text-green-600">
+                                <span className="sr-only">Income: </span>
+                                +${Math.abs(tx.amount).toFixed(2)}
+                              </p>
+                            </>
+                          ) : (
+                            <>
+                              <div className="flex items-center gap-1.5">
+                                <ArrowDown className="h-5 w-5 text-red-600" aria-hidden="true" />
+                                <span className="text-sm font-semibold text-red-600">Expense</span>
+                              </div>
+                              <p className="text-2xl font-bold text-red-600">
+                                <span className="sr-only">Expense: </span>
+                                -${Math.abs(tx.amount).toFixed(2)}
+                              </p>
+                            </>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Card Body: Category + Date */}
+                    <div className="mb-5 flex items-center gap-4">
+                      {/* Category Badge */}
+                      <div className="flex-1">
+                        {tx.category ? (
+                          <span className="inline-flex items-center rounded-full bg-teal-100 px-3 py-1.5 text-sm font-medium text-teal-800">
+                            {tx.category}
+                            {tx.subcategory && ` • ${tx.subcategory}`}
+                          </span>
+                        ) : (
+                          <span className="inline-flex items-center rounded-full bg-gray-100 px-3 py-1.5 text-sm font-medium text-gray-800">
+                            Uncategorized
                           </span>
                         )}
                       </div>
 
-                      {/* Notes */}
-                      {tx.notes && (
-                        <p className={`text-base text-gray-600 mt-2 ${expandedTransactionIds.has(tx.id) ? 'whitespace-normal break-words' : 'truncate'}`}>
-                          {tx.notes}
-                        </p>
+                      {/* Date */}
+                      <div className="whitespace-nowrap text-base font-medium text-gray-600">
+                        {new Date(tx.date).toLocaleDateString()}
+                      </div>
+
+                      {/* Running Balance */}
+                      {runningBalances.get(tx.id) !== undefined && (
+                        <div className="text-right">
+                          <span className="text-xs uppercase text-gray-500">Balance</span>
+                          <p
+                            className={`text-sm font-semibold ${(runningBalances.get(tx.id) || 0) < 0 ? "text-red-600" : "text-gray-700"}`}
+                          >
+                            $
+                            {Math.abs(runningBalances.get(tx.id) || 0).toLocaleString("en-US", {
+                              minimumFractionDigits: 2,
+                              maximumFractionDigits: 2,
+                            })}
+                          </p>
+                        </div>
                       )}
                     </div>
 
-                    {/* Amount */}
-                    <div className="flex-shrink-0 text-right">
-                      <div className="flex flex-col items-end gap-1">
-                        {tx.amount > 0 ? (
-                          <>
-                            <div className="flex items-center gap-1.5">
-                              <ArrowUp className="w-5 h-5 text-green-600" aria-hidden="true" />
-                              <span className="text-sm font-semibold text-green-600">Income</span>
-                            </div>
-                            <p className="text-2xl font-bold text-green-600">
-                              <span className="sr-only">Income: </span>
-                              +${Math.abs(tx.amount).toFixed(2)}
-                            </p>
-                          </>
-                        ) : (
-                          <>
-                            <div className="flex items-center gap-1.5">
-                              <ArrowDown className="w-5 h-5 text-red-600" aria-hidden="true" />
-                              <span className="text-sm font-semibold text-red-600">Expense</span>
-                            </div>
-                            <p className="text-2xl font-bold text-red-600">
-                              <span className="sr-only">Expense: </span>
-                              -${Math.abs(tx.amount).toFixed(2)}
-                            </p>
-                          </>
-                        )}
-                      </div>
+                    {/* Receipt Thumbnail */}
+                    <div className="mb-4">
+                      <ReceiptThumbnail transactionId={tx.id} onReceiptDeleted={loadData} />
                     </div>
-                  </div>
 
-                  {/* Card Body: Category + Date */}
-                  <div className="flex items-center gap-4 mb-5">
-                    {/* Category Badge */}
-                    <div className="flex-1">
-                      {tx.category ? (
-                        <span className="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium bg-teal-100 text-teal-800">
-                          {tx.category}
-                          {tx.subcategory && ` • ${tx.subcategory}`}
-                        </span>
+                    {/* Card Footer: Action Buttons */}
+                    <div className="flex flex-wrap items-center gap-2">
+                      {/* Quick Categorize for uncategorized transactions */}
+                      {!tx.category && (
+                        <button
+                          onClick={() => setQuickCategorizingId(tx.id)}
+                          className="inline-flex min-h-[44px] items-center gap-2.5 rounded-lg bg-green-50 px-4 py-2 text-sm font-medium text-green-700 transition-colors hover:bg-green-100"
+                        >
+                          <Tag className="h-4 w-4" />
+                          Categorize
+                        </button>
+                      )}
+
+                      {/* Link to Loan / Linked Loan Badge (Mobile) */}
+                      {linkedPayments.has(tx.id) ? (
+                        <div className="inline-flex min-h-[44px] items-center gap-2.5 rounded-lg bg-teal-50 px-4 py-2 text-sm font-medium text-teal-700">
+                          <CreditCard className="h-4 w-4" />
+                          <LinkedLoanBadgeInline
+                            loanName={linkedPayments.get(tx.id)!.loanName}
+                            loanId={linkedPayments.get(tx.id)!.loanId}
+                            paymentId={linkedPayments.get(tx.id)!.payment.id}
+                            onUnlink={loadData}
+                          />
+                        </div>
+                      ) : tx.amount < 0 && !tx.category?.startsWith("Loan Payment") ? (
+                        <div className="relative">
+                          <LinkToLoanButton transaction={tx} onLinked={loadData} />
+                        </div>
+                      ) : null}
+
+                      {/* Split/Unsplit Button */}
+                      {tx.splitFromId ? (
+                        <button
+                          onClick={() => initiateUnsplit(tx)}
+                          className="inline-flex min-h-[44px] items-center gap-2.5 rounded-lg bg-teal-50 px-4 py-2 text-sm font-medium text-teal-700 transition-colors hover:bg-teal-100"
+                          title="Unsplit transaction"
+                        >
+                          <Split className="h-4 w-4" />
+                          Unsplit
+                        </button>
                       ) : (
-                        <span className="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium bg-gray-100 text-gray-800">
-                          Uncategorized
-                        </span>
+                        <button
+                          onClick={() => openSplitModal(tx)}
+                          className="inline-flex min-h-[44px] items-center gap-2.5 rounded-lg bg-teal-50 px-4 py-2 text-sm font-medium text-teal-700 transition-colors hover:bg-teal-100"
+                          title="Split transaction"
+                        >
+                          <Split className="h-4 w-4" />
+                          Split
+                        </button>
                       )}
+
+                      {/* Edit Button */}
+                      <button
+                        onClick={() => {
+                          setEditingTransaction(tx);
+                          setShowModal(true);
+                        }}
+                        className="inline-flex min-h-[44px] items-center gap-2.5 rounded-lg bg-teal-50 px-4 py-2 text-sm font-medium text-teal-700 transition-colors hover:bg-teal-100"
+                        title="Edit"
+                        aria-label="Edit transaction"
+                      >
+                        <Edit className="h-4 w-4" />
+                        Edit
+                      </button>
+
+                      {/* Delete Button */}
+                      <button
+                        onClick={() => initiateDeleteTransaction(tx)}
+                        className="inline-flex min-h-[44px] items-center gap-2.5 rounded-lg bg-red-50 px-4 py-2 text-sm font-medium text-red-700 transition-colors hover:bg-red-100"
+                        title="Delete"
+                        aria-label="Delete transaction"
+                      >
+                        <Trash2 className="h-4 w-4" />
+                        Delete
+                      </button>
                     </div>
-
-                    {/* Date */}
-                    <div className="text-gray-600 text-base font-medium whitespace-nowrap">
-                      {new Date(tx.date).toLocaleDateString()}
-                    </div>
-
-                    {/* Running Balance */}
-                    {runningBalances.get(tx.id) !== undefined && (
-                      <div className="text-right">
-                        <span className="text-xs text-gray-500 uppercase">Balance</span>
-                        <p className={`text-sm font-semibold ${(runningBalances.get(tx.id) || 0) < 0 ? 'text-red-600' : 'text-gray-700'}`}>
-                          ${Math.abs(runningBalances.get(tx.id) || 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-                        </p>
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Receipt Thumbnail */}
-                  <div className="mb-4">
-                    <ReceiptThumbnail
-                      transactionId={tx.id}
-                      onReceiptDeleted={loadData}
-                    />
-                  </div>
-
-                  {/* Card Footer: Action Buttons */}
-                  <div className="flex items-center gap-2 flex-wrap">
-                    {/* Quick Categorize for uncategorized transactions */}
-                    {!tx.category && (
-                      <button
-                        onClick={() => setQuickCategorizingId(tx.id)}
-                        className="inline-flex items-center gap-2.5 px-4 py-2 min-h-[44px] text-sm font-medium text-green-700 bg-green-50 rounded-lg hover:bg-green-100 transition-colors"
-                      >
-                        <Tag className="w-4 h-4" />
-                        Categorize
-                      </button>
-                    )}
-
-                    {/* Link to Loan / Linked Loan Badge (Mobile) */}
-                    {linkedPayments.has(tx.id) ? (
-                      <div className="inline-flex items-center gap-2.5 px-4 py-2 min-h-[44px] text-sm font-medium text-teal-700 bg-teal-50 rounded-lg">
-                        <CreditCard className="w-4 h-4" />
-                        <LinkedLoanBadgeInline
-                          loanName={linkedPayments.get(tx.id)!.loanName}
-                          loanId={linkedPayments.get(tx.id)!.loanId}
-                          paymentId={linkedPayments.get(tx.id)!.payment.id}
-                          onUnlink={loadData}
-                        />
-                      </div>
-                    ) : tx.amount < 0 && !tx.category?.startsWith('Loan Payment') ? (
-                      <div className="relative">
-                        <LinkToLoanButton
-                          transaction={tx}
-                          onLinked={loadData}
-                        />
-                      </div>
-                    ) : null}
-
-                    {/* Split/Unsplit Button */}
-                    {tx.splitFromId ? (
-                      <button
-                        onClick={() => initiateUnsplit(tx)}
-                        className="inline-flex items-center gap-2.5 px-4 py-2 min-h-[44px] text-sm font-medium text-teal-700 bg-teal-50 rounded-lg hover:bg-teal-100 transition-colors"
-                        title="Unsplit transaction"
-                      >
-                        <Split className="w-4 h-4" />
-                        Unsplit
-                      </button>
-                    ) : (
-                      <button
-                        onClick={() => openSplitModal(tx)}
-                        className="inline-flex items-center gap-2.5 px-4 py-2 min-h-[44px] text-sm font-medium text-teal-700 bg-teal-50 rounded-lg hover:bg-teal-100 transition-colors"
-                        title="Split transaction"
-                      >
-                        <Split className="w-4 h-4" />
-                        Split
-                      </button>
-                    )}
-
-                    {/* Edit Button */}
-                    <button
-                      onClick={() => {
-                        setEditingTransaction(tx);
-                        setShowModal(true);
-                      }}
-                      className="inline-flex items-center gap-2.5 px-4 py-2 min-h-[44px] text-sm font-medium text-teal-700 bg-teal-50 rounded-lg hover:bg-teal-100 transition-colors"
-                      title="Edit" aria-label="Edit transaction"
-                    >
-                      <Edit className="w-4 h-4" />
-                      Edit
-                    </button>
-
-                    {/* Delete Button */}
-                    <button
-                      onClick={() => initiateDeleteTransaction(tx)}
-                      className="inline-flex items-center gap-2.5 px-4 py-2 min-h-[44px] text-sm font-medium text-red-700 bg-red-50 rounded-lg hover:bg-red-100 transition-colors"
-                      title="Delete" aria-label="Delete transaction"
-                    >
-                      <Trash2 className="w-4 h-4" />
-                      Delete
-                    </button>
-                  </div>
-                </motion.div>
-              ))}
+                  </motion.div>
+                ))}
               </div>
             </div>
           </>
@@ -1537,13 +1648,13 @@ export default function TransactionsPageClient() {
             heading="No Transactions Yet"
             description="Start tracking your spending by adding your first transaction. You can add manually or import from a CSV file."
             primaryCTA={{
-              label: 'Add Transaction',
-              href: '/budget-app/transactions',
+              label: "Add Transaction",
+              href: "/budget-app/transactions",
               icon: Plus,
             }}
             secondaryCTA={{
-              label: 'Import CSV',
-              href: '/budget-app/import',
+              label: "Import CSV",
+              href: "/budget-app/import",
               icon: Upload,
             }}
           />
@@ -1586,19 +1697,25 @@ export default function TransactionsPageClient() {
         onConfirm={confirmDeleteTransaction}
         title="Delete Transaction"
         description="This action cannot be undone."
-        impact={deletingTransaction ? {
-          title: "You will lose:",
-          items: [
-            `$${Math.abs(deletingTransaction.amount).toFixed(2)} ${deletingTransaction.amount > 0 ? 'income' : 'expense'} from ${new Date(deletingTransaction.date).toLocaleDateString()}`,
-            `Description: "${deletingTransaction.description}"`,
-            deletingTransaction.category ? `Category: ${deletingTransaction.category}${deletingTransaction.subcategory ? ` - ${deletingTransaction.subcategory}` : ''}` : null,
-            deletingTransaction.notes ? `Notes: "${deletingTransaction.notes}"` : null,
-            deletingTransaction.splitFromId ? '(This is a split transaction)' : null,
-          ].filter(Boolean)
-        } : undefined}
+        impact={
+          deletingTransaction
+            ? {
+                title: "You will lose:",
+                items: [
+                  `$${Math.abs(deletingTransaction.amount).toFixed(2)} ${deletingTransaction.amount > 0 ? "income" : "expense"} from ${new Date(deletingTransaction.date).toLocaleDateString()}`,
+                  `Description: "${deletingTransaction.description}"`,
+                  deletingTransaction.category
+                    ? `Category: ${deletingTransaction.category}${deletingTransaction.subcategory ? ` - ${deletingTransaction.subcategory}` : ""}`
+                    : null,
+                  deletingTransaction.notes ? `Notes: "${deletingTransaction.notes}"` : null,
+                  deletingTransaction.splitFromId ? "(This is a split transaction)" : null,
+                ].filter(Boolean),
+              }
+            : undefined
+        }
         confirmLabel="Delete Transaction"
         variant="destructive"
-        icon={<Trash2 className="w-5 h-5" />}
+        icon={<Trash2 className="h-5 w-5" />}
       />
 
       {/* Unsplit Confirmation Dialog */}
@@ -1608,17 +1725,21 @@ export default function TransactionsPageClient() {
         onConfirm={confirmUnsplit}
         title="Restore Original Transaction"
         description="This will restore the original unsplit transaction and remove all split items."
-        impact={unsplittingTransaction ? {
-          title: "What will happen:",
-          items: [
-            'All split items will be removed',
-            'The original transaction will be restored',
-            'Categories and notes from splits will be lost',
-          ]
-        } : undefined}
+        impact={
+          unsplittingTransaction
+            ? {
+                title: "What will happen:",
+                items: [
+                  "All split items will be removed",
+                  "The original transaction will be restored",
+                  "Categories and notes from splits will be lost",
+                ],
+              }
+            : undefined
+        }
         confirmLabel="Restore Original"
         variant="default"
-        icon={<Split className="w-5 h-5" />}
+        icon={<Split className="h-5 w-5" />}
       />
 
       {/* Bulk Categorization Confirmation Dialog */}
@@ -1627,18 +1748,18 @@ export default function TransactionsPageClient() {
         onOpenChange={setBulkConfirmOpen}
         onConfirm={confirmBulkCategorization}
         title="Bulk Categorize Transactions"
-        description={`Apply "${bulkCategory}${bulkSubcategory ? ` - ${bulkSubcategory}` : ''}" to ${selectedTransactionIds.size} transaction(s)?`}
+        description={`Apply "${bulkCategory}${bulkSubcategory ? ` - ${bulkSubcategory}` : ""}" to ${selectedTransactionIds.size} transaction(s)?`}
         impact={{
           title: "This will update:",
           items: [
-            `${selectedTransactionIds.size} transaction${selectedTransactionIds.size === 1 ? '' : 's'}`,
-            `Category: ${bulkCategory}${bulkSubcategory ? ` - ${bulkSubcategory}` : ''}`,
-            'Any existing categories will be replaced',
-          ]
+            `${selectedTransactionIds.size} transaction${selectedTransactionIds.size === 1 ? "" : "s"}`,
+            `Category: ${bulkCategory}${bulkSubcategory ? ` - ${bulkSubcategory}` : ""}`,
+            "Any existing categories will be replaced",
+          ],
         }}
         confirmLabel="Apply to Selected"
         variant="default"
-        icon={<Tag className="w-5 h-5" />}
+        icon={<Tag className="h-5 w-5" />}
       />
 
       {/* Quick Categorize Dialog - Command Palette */}
@@ -1649,7 +1770,7 @@ export default function TransactionsPageClient() {
         }}
         categories={categories}
         onSelect={async (category, subcategory) => {
-          const transaction = transactions.find(tx => tx.id === quickCategorizingId);
+          const transaction = transactions.find((tx) => tx.id === quickCategorizingId);
           if (transaction) {
             // Close quick categorize dialog
             setQuickCategorizingId(null);
@@ -1682,7 +1803,9 @@ export default function TransactionsPageClient() {
 
               if (matches.length >= 2) {
                 // Show success toast with match count
-                toast.success(`✓ Found ${matches.length} matching ${vendorName} transactions (${searchTime}s)`);
+                toast.success(
+                  `✓ Found ${matches.length} matching ${vendorName} transactions (${searchTime}s)`
+                );
 
                 // Found matches - show confirmation dialog
                 setPendingCategorization({ transaction, category, subcategory });
@@ -1695,17 +1818,17 @@ export default function TransactionsPageClient() {
             } catch (error) {
               // Ensure loading state is cleared even on error
               setIsMatchingVendors(false);
-              
+
               // Log error but don't break the UI - function should handle errors internally
-              console.error('[Transaction Page] Error during vendor matching:', error);
-              
+              console.error("[Transaction Page] Error during vendor matching:", error);
+
               // The function should have already fallen back to string matching,
               // but if it still throws, we'll just continue without bulk categorization
               toast.info(`Using basic matching for ${vendorName} transactions`);
             }
           }
         }}
-        transaction={transactions.find(tx => tx.id === quickCategorizingId) || null}
+        transaction={transactions.find((tx) => tx.id === quickCategorizingId) || null}
       />
 
       {/* Bulk Categorize Confirmation Dialog */}
