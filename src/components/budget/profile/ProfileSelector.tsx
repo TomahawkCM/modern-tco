@@ -36,12 +36,15 @@ interface ProfileSelectorProps {
   className?: string;
   showSettings?: boolean;
   onSettingsClick?: () => void;
+  /** Compact mode - only show avatar, hide name and chevron */
+  compact?: boolean;
 }
 
 export function ProfileSelector({
   className,
   showSettings = false,
   onSettingsClick,
+  compact = false,
 }: ProfileSelectorProps) {
   const {
     profiles,
@@ -110,13 +113,20 @@ export function ProfileSelector({
                 {currentProfile ? getProfileInitials(currentProfile.name) : '?'}
               </AvatarFallback>
             </Avatar>
-            <span className="max-w-[100px] truncate text-sm font-medium">
-              {currentProfile?.name || 'Select Profile'}
-            </span>
-            {isLocked && (
-              <Lock className="h-3 w-3 text-muted-foreground" />
+            {!compact && (
+              <>
+                <span className="max-w-[100px] truncate text-sm font-medium">
+                  {currentProfile?.name || 'Select Profile'}
+                </span>
+                {isLocked && (
+                  <Lock className="h-3 w-3 text-muted-foreground" />
+                )}
+                <ChevronDown className="h-4 w-4 text-muted-foreground" />
+              </>
             )}
-            <ChevronDown className="h-4 w-4 text-muted-foreground" />
+            {compact && isLocked && (
+              <Lock className="h-3 w-3 text-muted-foreground absolute -bottom-1 -right-1" />
+            )}
           </Button>
         </DropdownMenuTrigger>
 

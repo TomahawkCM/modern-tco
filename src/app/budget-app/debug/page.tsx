@@ -6,11 +6,12 @@
  */
 
 import { useEffect, useState } from 'react';
-import { db } from '@/lib/budget-db';
+import { db, isDevEnvironment, getDatabaseName } from '@/lib/budget-db';
 
 export default function DebugPage() {
   const [dbInfo, setDbInfo] = useState<any>(null);
   const [loading, setLoading] = useState(true);
+  const isDev = isDevEnvironment();
 
   useEffect(() => {
     async function checkDatabase() {
@@ -114,6 +115,29 @@ export default function DebugPage() {
   return (
     <div className="p-8 max-w-4xl mx-auto">
       <h1 className="text-3xl font-bold mb-6">Database Debug & Recovery</h1>
+
+      {/* Environment Indicator */}
+      <div className={`mb-6 p-4 rounded-lg border-2 ${
+        isDev
+          ? 'bg-amber-50 border-amber-300 text-amber-900'
+          : 'bg-green-50 border-green-300 text-green-900'
+      }`}>
+        <div className="flex items-center gap-3">
+          <span className={`px-3 py-1 rounded-full text-sm font-bold ${
+            isDev ? 'bg-amber-200' : 'bg-green-200'
+          }`}>
+            {isDev ? 'DEVELOPMENT' : 'PRODUCTION'}
+          </span>
+          <span className="text-sm">
+            Database: <code className="font-mono bg-white/50 px-2 py-0.5 rounded">{dbInfo?.dbName || getDatabaseName()}</code>
+          </span>
+        </div>
+        {isDev && (
+          <p className="mt-2 text-sm">
+            Development data is isolated from production. Test freely without affecting real users.
+          </p>
+        )}
+      </div>
 
       {dbInfo?.error ? (
         <div className="bg-red-50 border border-red-200 rounded-lg p-4 mb-6">

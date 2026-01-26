@@ -377,7 +377,8 @@
       "importCsv": "Import CSV",
       "settings": "Settings",
       "showLess": "Show Less",
-      "showAllItems": "Show All Items"
+      "showAllItems": "Show All Items",
+      "backToHome": "Back to Home"
     }
   },
   "onboarding": {

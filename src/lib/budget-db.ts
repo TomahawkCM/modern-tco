@@ -62,6 +62,31 @@ export interface PriceCache {
 // Import sync types
 import type { PairedDevice } from './sync/types';
 
+/**
+ * Check if we're in a development environment.
+ * Used to determine database isolation and show dev indicators.
+ */
+export function isDevEnvironment(): boolean {
+  if (typeof window === 'undefined') return false;
+
+  const hostname = window.location.hostname;
+  return hostname === 'localhost' ||
+         hostname === '127.0.0.1' ||
+         hostname.includes('.local') ||
+         hostname.includes('dev.') ||
+         hostname.includes('-dev.') ||
+         hostname.includes('.vercel.app'); // Preview deployments
+}
+
+/**
+ * Get the database name based on environment.
+ * Development uses a separate database to prevent test data from appearing in production.
+ */
+export function getDatabaseName(): string {
+  const baseName = 'HouseholdBudgetApp';
+  return isDevEnvironment() ? `${baseName}_dev` : baseName;
+}
+
 export class BudgetDatabase extends Dexie {
   accounts!: Table<Account>;
   transactions!: Table<Transaction>;
@@ -87,7 +112,7 @@ export class BudgetDatabase extends Dexie {
   activityLog!: Table<ActivityLogEntry>;
 
   constructor() {
-    super('HouseholdBudgetApp');
+    super(getDatabaseName());
 
     this.version(1).stores({
       accounts: 'id, name, institution, type',

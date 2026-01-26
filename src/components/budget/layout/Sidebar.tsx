@@ -29,6 +29,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { useTranslations } from 'next-intl';
+import { ProfileSelector } from "@/components/budget/profile/ProfileSelector";
 
 interface NavItem {
   name: string;
@@ -100,9 +101,13 @@ export function Sidebar({ onSearch, onShowShortcuts, className, isMobile, onClos
         </button>
       )}
 
-      {/* Logo/Header */}
+      {/* Logo/Header - Links to landing page */}
       <div className="flex h-20 items-center border-b border-white/5 px-6">
-        <div className="flex items-center gap-3">
+        <Link
+          href="/budget-app/landing"
+          className="flex items-center gap-3 rounded-lg transition-opacity hover:opacity-80"
+          title={t('actions.backToHome')}
+        >
           <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-teal-400 to-blue-500 shadow-lg shadow-teal-500/20">
             <Sparkles className="h-5 w-5 text-white" />
           </div>
@@ -121,7 +126,25 @@ export function Sidebar({ onSearch, onShowShortcuts, className, isMobile, onClos
               </motion.div>
             )}
           </AnimatePresence>
-        </div>
+        </Link>
+      </div>
+
+      {/* Profile Selector */}
+      <div className={cn(
+        "border-b border-white/5 px-3 py-3",
+        isCollapsed && !isSeniorsMode && "flex justify-center"
+      )}>
+        <ProfileSelector
+          className={cn(
+            "w-full justify-start bg-white/5 hover:bg-white/10 text-slate-300",
+            isCollapsed && !isSeniorsMode && "w-auto px-2"
+          )}
+          compact={isCollapsed && !isSeniorsMode}
+          showSettings
+          onSettingsClick={() => {
+            if (isMobile && onClose) onClose();
+          }}
+        />
       </div>
 
       {/* Search Trigger */}

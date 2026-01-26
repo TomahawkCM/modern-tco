@@ -25,10 +25,9 @@ import { SeniorsModeProvider } from "@/contexts/SeniorsModeContext";
 import { useKeyboardShortcuts } from "@/hooks/useKeyboardShortcuts";
 import { usePWA } from "@/hooks/usePWA";
 import { Menu, Sparkles } from "lucide-react";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
-
-import { usePathname } from "next/navigation";
 
 import { ClientI18nProvider } from "@/components/budget/ClientI18nProvider";
 
@@ -142,12 +141,15 @@ export default function BudgetAppLayout({ children }: { children: React.ReactNod
               <div className="flex min-w-0 flex-1 flex-col">
                 {/* Mobile Header */}
                 <header className="sticky top-0 z-30 flex items-center justify-between border-b border-white/10 bg-slate-950/80 px-4 py-3 backdrop-blur-md md:hidden">
-                  <div className="flex items-center gap-3">
+                  <Link
+                    href="/budget-app/landing"
+                    className="flex items-center gap-3 transition-opacity hover:opacity-80"
+                  >
                     <div className="rounded-lg bg-gradient-to-br from-teal-400 to-blue-500 p-1.5">
                       <Sparkles className="h-5 w-5 text-white" />
                     </div>
                     <h1 className="text-lg font-bold text-white">Budget App</h1>
-                  </div>
+                  </Link>
                   <div className="flex items-center gap-2">
                     {/* Accessibility Quick Toggle - Prominent placement per plan */}
                     <AccessibilityQuickToggle compact />

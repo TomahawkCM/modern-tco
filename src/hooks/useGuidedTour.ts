@@ -111,6 +111,8 @@ export function useGuidedTour() {
       stagePadding: 10,
       stageRadius: 8,
       popoverClass: "tour-popover-glassmorphism",
+      overlayColor: "black",
+      overlayOpacity: 0.5,
       progressText: "{{current}} of {{total}}",
       nextBtnText: "Next",
       prevBtnText: "Back",
