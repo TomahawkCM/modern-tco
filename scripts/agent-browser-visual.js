@@ -14,9 +14,9 @@
  *   npm run browser:visual-test -- --pages /welcome,/practice,/mock
  */
 
-const { execFileSync } = require('child_process');
-const fs = require('fs');
-const path = require('path');
+const { execFileSync } = require("child_process");
+const fs = require("fs");
+const path = require("path");
 
 // Parse command line arguments
 const args = process.argv.slice(2);
@@ -25,20 +25,24 @@ const getArg = (flag) => {
   return idx !== -1 && args[idx + 1] ? args[idx + 1] : null;
 };
 
-const baseUrl = getArg('--base-url') || 'http://localhost:3000';
-const customPages = getArg('--pages');
-const outputDir = getArg('--output') || './tests/visual-reports';
-const screenshotDir = getArg('--screenshots') || './tests/screenshots';
-const verbose = args.includes('--verbose');
+const baseUrl = getArg("--base-url") || "http://localhost:3000";
+const customPages = getArg("--pages");
+const outputDir = getArg("--output") || "./tests/visual-reports";
+const screenshotDir = getArg("--screenshots") || "./tests/screenshots";
+const verbose = args.includes("--verbose");
 
-// Default pages to test (LMS critical paths)
+// Default pages to test (Budget App critical paths)
 const DEFAULT_PAGES = [
-  { path: '/', name: 'home', expectedElements: ['navigation', 'main content'] },
-  { path: '/welcome', name: 'welcome', expectedElements: ['welcome message', 'start button'] },
-  { path: '/practice', name: 'practice', expectedElements: ['quiz container', 'question'] },
-  { path: '/mock', name: 'mock-exam', expectedElements: ['exam timer', 'question navigation'] },
-  { path: '/review', name: 'review', expectedElements: ['review summary', 'performance chart'] },
-  { path: '/progress', name: 'progress', expectedElements: ['progress tracker', 'achievements'] },
+  { path: "/budget-app", name: "budget-dashboard", expectedElements: ["button", "link"] },
+  {
+    path: "/budget-app/transactions",
+    name: "budget-transactions",
+    expectedElements: ["button", "link"],
+  },
+  { path: "/budget-app/accounts", name: "budget-accounts", expectedElements: ["button", "link"] },
+  { path: "/budget-app/budgets", name: "budget-budgets", expectedElements: ["button", "link"] },
+  { path: "/budget-app/reports", name: "budget-reports", expectedElements: ["button", "link"] },
+  { path: "/budget-app/settings", name: "budget-settings", expectedElements: ["button", "link"] },
 ];
 
 /**
@@ -46,15 +50,15 @@ const DEFAULT_PAGES = [
  */
 function execBrowser(commandArgs, options = {}) {
   try {
-    const result = execFileSync('npx', ['agent-browser', ...commandArgs], {
-      encoding: 'utf-8',
-      stdio: ['pipe', 'pipe', 'pipe'],
+    const result = execFileSync("npx", ["agent-browser", ...commandArgs], {
+      encoding: "utf-8",
+      stdio: ["pipe", "pipe", "pipe"],
       timeout: options.timeout || 30000,
     });
     return result.trim();
   } catch (error) {
     if (verbose) {
-      console.error(`Browser command failed: ${commandArgs.join(' ')}`);
+      console.error(`Browser command failed: ${commandArgs.join(" ")}`);
       console.error(error.message);
     }
     return null;
@@ -65,9 +69,9 @@ function execBrowser(commandArgs, options = {}) {
  * Parse snapshot output to extract elements
  */
 function parseSnapshot(snapshotOutput) {
-  if (!snapshotOutput) return { elements: [], raw: '' };
+  if (!snapshotOutput) return { elements: [], raw: "" };
 
-  const lines = snapshotOutput.split('\n');
+  const lines = snapshotOutput.split("\n");
   const elements = [];
 
   for (const line of lines) {
@@ -91,16 +95,17 @@ function parseSnapshot(snapshotOutput) {
  */
 function verifyElements(snapshot, expectedDescriptions) {
   const results = [];
-  const elementTypes = snapshot.elements.map(e => e.type.toLowerCase());
-  const elementTexts = snapshot.elements.map(e => e.text.toLowerCase());
+  const elementTypes = snapshot.elements.map((e) => e.type.toLowerCase());
+  const elementTexts = snapshot.elements.map((e) => e.text.toLowerCase());
 
   for (const desc of expectedDescriptions) {
     const descLower = desc.toLowerCase();
 
     // Check if any element matches the description
-    const found = elementTypes.some(t => descLower.includes(t)) ||
-                  elementTexts.some(t => t.includes(descLower)) ||
-                  snapshot.raw.toLowerCase().includes(descLower);
+    const found =
+      elementTypes.some((t) => descLower.includes(t)) ||
+      elementTexts.some((t) => t.includes(descLower)) ||
+      snapshot.raw.toLowerCase().includes(descLower);
 
     results.push({
       description: desc,
@@ -123,7 +128,7 @@ async function testPage(pageConfig) {
     path: pageConfig.path,
     url: fullUrl,
     timestamp: new Date().toISOString(),
-    status: 'pending',
+    status: "pending",
     snapshot: null,
     elementChecks: [],
     screenshot: null,
@@ -132,13 +137,13 @@ async function testPage(pageConfig) {
 
   try {
     // Navigate to page
-    execBrowser(['open', fullUrl]);
+    execBrowser(["open", fullUrl]);
 
     // Wait for page load
-    await new Promise(resolve => setTimeout(resolve, 2000));
+    await new Promise((resolve) => setTimeout(resolve, 2000));
 
     // Get snapshot
-    const snapshotOutput = execBrowser(['snapshot', '-i']);
+    const snapshotOutput = execBrowser(["snapshot", "-i"]);
     result.snapshot = parseSnapshot(snapshotOutput);
 
     if (verbose) {
@@ -149,28 +154,27 @@ async function testPage(pageConfig) {
     if (pageConfig.expectedElements) {
       result.elementChecks = verifyElements(result.snapshot, pageConfig.expectedElements);
 
-      const passed = result.elementChecks.filter(c => c.found).length;
+      const passed = result.elementChecks.filter((c) => c.found).length;
       const total = result.elementChecks.length;
       console.log(`  Element checks: ${passed}/${total} passed`);
 
       for (const check of result.elementChecks) {
-        const icon = check.found ? '\x1b[32m\u2713\x1b[0m' : '\x1b[31m\u2717\x1b[0m';
+        const icon = check.found ? "\x1b[32m\u2713\x1b[0m" : "\x1b[31m\u2717\x1b[0m";
         console.log(`    ${icon} ${check.description}`);
       }
     }
 
     // Take screenshot
     const screenshotPath = path.join(screenshotDir, `${pageConfig.name}.png`);
-    execBrowser(['screenshot', screenshotPath]);
+    execBrowser(["screenshot", screenshotPath]);
     result.screenshot = screenshotPath;
     console.log(`  Screenshot: ${screenshotPath}`);
 
     // Determine status
-    const allPassed = result.elementChecks.every(c => c.found);
-    result.status = allPassed ? 'passed' : 'failed';
-
+    const allPassed = result.elementChecks.every((c) => c.found);
+    result.status = allPassed ? "passed" : "failed";
   } catch (error) {
-    result.status = 'error';
+    result.status = "error";
     result.errors.push(error.message);
     console.error(`  Error: ${error.message}`);
   }
@@ -182,9 +186,9 @@ async function testPage(pageConfig) {
  * Generate HTML report
  */
 function generateReport(results, outputPath) {
-  const passed = results.filter(r => r.status === 'passed').length;
-  const failed = results.filter(r => r.status === 'failed').length;
-  const errors = results.filter(r => r.status === 'error').length;
+  const passed = results.filter((r) => r.status === "passed").length;
+  const failed = results.filter((r) => r.status === "failed").length;
+  const errors = results.filter((r) => r.status === "error").length;
 
   const html = `<!DOCTYPE html>
 <html lang="en">
@@ -240,7 +244,9 @@ function generateReport(results, outputPath) {
       </div>
     </div>
 
-    ${results.map(r => `
+    ${results
+      .map(
+        (r) => `
     <div class="page-result">
       <div class="page-header">
         <span class="page-name">${r.name} <small>(${r.path})</small></span>
@@ -250,32 +256,50 @@ function generateReport(results, outputPath) {
         <p><strong>URL:</strong> <a href="${r.url}">${r.url}</a></p>
         <p><strong>Elements found:</strong> ${r.snapshot?.elements?.length || 0}</p>
 
-        ${r.elementChecks.length > 0 ? `
+        ${
+          r.elementChecks.length > 0
+            ? `
         <h4 style="margin-top: 1rem;">Element Checks</h4>
-        ${r.elementChecks.map(c => `
+        ${r.elementChecks
+          .map(
+            (c) => `
         <div class="check">
-          <span class="check-icon ${c.found ? 'found' : 'missing'}">${c.found ? '\u2713' : '\u2717'}</span>
+          <span class="check-icon ${c.found ? "found" : "missing"}">${c.found ? "\u2713" : "\u2717"}</span>
           <span>${c.description}</span>
         </div>
-        `).join('')}
-        ` : ''}
+        `
+          )
+          .join("")}
+        `
+            : ""
+        }
 
-        ${r.screenshot ? `
+        ${
+          r.screenshot
+            ? `
         <div class="screenshot">
           <h4>Screenshot</h4>
           <img src="${path.relative(path.dirname(outputPath), r.screenshot)}" alt="${r.name} screenshot" />
         </div>
-        ` : ''}
+        `
+            : ""
+        }
 
-        ${r.errors.length > 0 ? `
+        ${
+          r.errors.length > 0
+            ? `
         <div style="margin-top: 1rem; color: #991b1b;">
           <strong>Errors:</strong>
-          <ul>${r.errors.map(e => `<li>${e}</li>`).join('')}</ul>
+          <ul>${r.errors.map((e) => `<li>${e}</li>`).join("")}</ul>
         </div>
-        ` : ''}
+        `
+            : ""
+        }
       </div>
     </div>
-    `).join('')}
+    `
+      )
+      .join("")}
 
     <p class="timestamp">Generated: ${new Date().toISOString()}</p>
   </div>
@@ -290,8 +314,8 @@ function generateReport(results, outputPath) {
  * Main visual testing workflow
  */
 async function main() {
-  console.log('Agent-Browser Visual Testing');
-  console.log('============================');
+  console.log("Agent-Browser Visual Testing");
+  console.log("============================");
   console.log(`Base URL: ${baseUrl}\n`);
 
   // Ensure output directories exist
@@ -305,9 +329,9 @@ async function main() {
   // Determine pages to test
   let pages = DEFAULT_PAGES;
   if (customPages) {
-    pages = customPages.split(',').map(p => ({
+    pages = customPages.split(",").map((p) => ({
       path: p.trim(),
-      name: p.trim().replace(/\//g, '-').replace(/^-/, '') || 'home',
+      name: p.trim().replace(/\//g, "-").replace(/^-/, "") || "home",
       expectedElements: [],
     }));
   }
@@ -323,23 +347,23 @@ async function main() {
   }
 
   // Close browser
-  execBrowser(['close']);
+  execBrowser(["close"]);
 
   // Generate reports
-  const jsonReportPath = path.join(outputDir, 'visual-test-results.json');
+  const jsonReportPath = path.join(outputDir, "visual-test-results.json");
   fs.writeFileSync(jsonReportPath, JSON.stringify(results, null, 2));
 
-  const htmlReportPath = path.join(outputDir, 'visual-test-report.html');
+  const htmlReportPath = path.join(outputDir, "visual-test-report.html");
   generateReport(results, htmlReportPath);
 
   // Summary
-  const passed = results.filter(r => r.status === 'passed').length;
-  const failed = results.filter(r => r.status === 'failed').length;
-  const errors = results.filter(r => r.status === 'error').length;
+  const passed = results.filter((r) => r.status === "passed").length;
+  const failed = results.filter((r) => r.status === "failed").length;
+  const errors = results.filter((r) => r.status === "error").length;
 
-  console.log('\n============================');
-  console.log('Summary');
-  console.log('============================');
+  console.log("\n============================");
+  console.log("Summary");
+  console.log("============================");
   console.log(`Passed: ${passed}`);
   console.log(`Failed: ${failed}`);
   console.log(`Errors: ${errors}`);
@@ -353,7 +377,7 @@ async function main() {
   }
 }
 
-main().catch(error => {
-  console.error('Visual testing failed:', error);
+main().catch((error) => {
+  console.error("Visual testing failed:", error);
   process.exit(1);
 });
