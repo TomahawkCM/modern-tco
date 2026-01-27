@@ -16,6 +16,7 @@ import { TrialStatusBanner } from "@/components/budget/TrialStatusBanner";
 import { ChatbotWidget } from "@/components/budget/chatbot/ChatbotWidget";
 import { MobileNav } from "@/components/budget/layout/MobileNav";
 import { Sidebar } from "@/components/budget/layout/Sidebar";
+import { CommandPalette } from "@/components/budget/CommandPalette";
 import { WelcomeBanner } from "@/components/budget/onboarding";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent } from "@/components/ui/sheet";
@@ -38,6 +39,7 @@ export default function BudgetAppLayout({ children }: { children: React.ReactNod
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [showShortcutsModal, setShowShortcutsModal] = useState(false);
   const [_showNewTransactionModal, setShowNewTransactionModal] = useState(false);
+  const [commandPaletteOpen, setCommandPaletteOpen] = useState(false);
 
   // Routes that should NOT have the sidebar/app shell
   const isPublicRoute =
@@ -55,12 +57,7 @@ export default function BudgetAppLayout({ children }: { children: React.ReactNod
       setShowNewTransactionModal(true);
     },
     onSearch: () => {
-      const searchInput = document.querySelector<HTMLInputElement>(
-        'input[type="search"], input[placeholder*="Search"]'
-      );
-      if (searchInput) {
-        searchInput.focus();
-      }
+      setCommandPaletteOpen(true);
     },
     onShowHelp: () => {
       setShowShortcutsModal(true);
@@ -68,6 +65,7 @@ export default function BudgetAppLayout({ children }: { children: React.ReactNod
     onCloseModal: () => {
       setShowShortcutsModal(false);
       setMobileMenuOpen(false);
+      setCommandPaletteOpen(false);
     },
   });
 
@@ -124,9 +122,7 @@ export default function BudgetAppLayout({ children }: { children: React.ReactNod
               <div className="flex min-h-screen text-slate-200">
                 {/* Desktop Sidebar */}
                 <Sidebar
-                  onSearch={() => {
-                    /* Implement search logic */
-                  }}
+                  onSearch={() => setCommandPaletteOpen(true)}
                   onShowShortcuts={() => setShowShortcutsModal(true)}
                 />
 
@@ -139,6 +135,7 @@ export default function BudgetAppLayout({ children }: { children: React.ReactNod
                     <Sidebar
                       isMobile
                       onClose={() => setMobileMenuOpen(false)}
+                      onSearch={() => setCommandPaletteOpen(true)}
                       onShowShortcuts={() => setShowShortcutsModal(true)}
                     />
                   </SheetContent>
@@ -201,6 +198,12 @@ export default function BudgetAppLayout({ children }: { children: React.ReactNod
 
                 {/* AI Chatbot Widget */}
                 <ChatbotWidget />
+
+                {/* Command Palette */}
+                <CommandPalette
+                  open={commandPaletteOpen}
+                  onOpenChange={setCommandPaletteOpen}
+                />
               </div>
             </ClientI18nProvider>
           </ChatbotProvider>

@@ -26,7 +26,7 @@ import {
   Wallet,
 } from "lucide-react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 import { useTranslations } from 'next-intl';
 import { ProfileSelector } from "@/components/budget/profile/ProfileSelector";
@@ -69,6 +69,7 @@ interface SidebarProps {
 export function Sidebar({ onSearch, onShowShortcuts, className, isMobile, onClose }: SidebarProps) {
   const t = useTranslations('sidebar');
   const pathname = usePathname();
+  const router = useRouter();
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [showAllItems, setShowAllItems] = useState(false);
   const { isSeniorsMode, settings } = useSeniorsMode();
@@ -142,6 +143,7 @@ export function Sidebar({ onSearch, onShowShortcuts, className, isMobile, onClos
           compact={isCollapsed && !isSeniorsMode}
           showSettings
           onSettingsClick={() => {
+            router.push('/budget-app/settings?tab=profile');
             if (isMobile && onClose) onClose();
           }}
         />

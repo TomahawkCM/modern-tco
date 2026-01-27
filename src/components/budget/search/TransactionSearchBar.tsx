@@ -1,0 +1,458 @@
+/**
+ * Transaction Search Bar Component
+ * Enhanced search input with fuzzy matching, autocomplete, and search tips
+ *
+ * Features:
+ * - Instant fuzzy search as you type
+ * - Autocomplete suggestions (merchants, categories, amounts)
+ * - Recent searches and saved filters
+ * - Search tips overlay
+ * - Keyboard navigation (↑↓ to navigate, Enter to select)
+ */
+
+'use client';
+
+import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
+import { useTranslations } from 'next-intl';
+import {
+  Search,
+  X as XIcon,
+  History,
+  Bookmark,
+  Store,
+  Tag,
+  DollarSign,
+  Filter,
+  HelpCircle,
+  ChevronDown,
+  Sparkles,
+} from 'lucide-react';
+import { cn } from '@/lib/utils';
+import type { Transaction, Category } from '@/types/budget';
+import {
+  getAutocompleteSuggestions,
+  addRecentSearch,
+  getRecentSearches,
+  getSavedFilters,
+  saveFilter,
+  type AutocompleteSuggestion,
+  type SavedFilter,
+  initializeAutocompleteCache,
+} from '@/lib/search/autocomplete';
+import { getSearchExamples } from '@/lib/search/natural-language-parser';
+
+export interface TransactionSearchBarProps {
+  /** Current search value */
+  value: string;
+  /** Called when search value changes */
+  onChange: (value: string) => void;
+  /** Called when user submits search (Enter or clicking Go) */
+  onSubmit?: (value: string) => void;
+  /** Placeholder text */
+  placeholder?: string;
+  /** Whether the search is currently loading results */
+  isLoading?: boolean;
+  /** Number of results found */
+  resultCount?: number;
+  /** Transactions for autocomplete (optional) */
+  transactions?: Transaction[];
+  /** Categories for autocomplete (optional) */
+  categories?: Category[];
+  /** Show the tips button */
+  showTips?: boolean;
+  /** Custom class name */
+  className?: string;
+  /** Auto-focus on mount */
+  autoFocus?: boolean;
+}
+
+// Icon for suggestion type
+function SuggestionIcon({ type }: { type: AutocompleteSuggestion['type'] }) {
+  switch (type) {
+    case 'merchant':
+      return <Store className="h-4 w-4 text-muted-foreground" />;
+    case 'category':
+      return <Tag className="h-4 w-4 text-muted-foreground" />;
+    case 'amount':
+      return <DollarSign className="h-4 w-4 text-muted-foreground" />;
+    case 'filter':
+      return <Filter className="h-4 w-4 text-muted-foreground" />;
+    case 'recent':
+      return <History className="h-4 w-4 text-muted-foreground" />;
+    case 'saved':
+      return <Bookmark className="h-4 w-4 text-muted-foreground" />;
+    default:
+      return <Search className="h-4 w-4 text-muted-foreground" />;
+  }
+}
+
+export function TransactionSearchBar({
+  value,
+  onChange,
+  onSubmit,
+  placeholder,
+  isLoading = false,
+  resultCount,
+  transactions = [],
+  categories = [],
+  showTips = true,
+  className,
+  autoFocus = false,
+}: TransactionSearchBarProps) {
+  const t = useTranslations('transactionSearch');
+  const inputRef = useRef<HTMLInputElement>(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  // State
+  const [isFocused, setIsFocused] = useState(false);
+  const [showDropdown, setShowDropdown] = useState(false);
+  const [showTipsModal, setShowTipsModal] = useState(false);
+  const [selectedIndex, setSelectedIndex] = useState(-1);
+  const [suggestions, setSuggestions] = useState<AutocompleteSuggestion[]>([]);
+  const [saveFilterName, setSaveFilterName] = useState('');
+  const [showSaveFilter, setShowSaveFilter] = useState(false);
+
+  // Initialize autocomplete cache when transactions change
+  useEffect(() => {
+    if (transactions.length > 0) {
+      initializeAutocompleteCache(transactions, categories);
+    }
+  }, [transactions, categories]);
+
+  // Get recent searches and saved filters
+  const recentSearches = useMemo(() => getRecentSearches().slice(0, 5), []);
+  const savedFilters = useMemo(() => getSavedFilters().slice(0, 5), []);
+  const searchExamples = useMemo(() => getSearchExamples(), []);
+
+  // Update suggestions when value changes
+  useEffect(() => {
+    if (value.length >= 1) {
+      const newSuggestions = getAutocompleteSuggestions(value, 6);
+      setSuggestions(newSuggestions);
+    } else {
+      setSuggestions([]);
+    }
+    setSelectedIndex(-1);
+  }, [value]);
+
+  // Handle keyboard navigation
+  const handleKeyDown = useCallback((e: React.KeyboardEvent) => {
+    const items = suggestions.length > 0 ? suggestions : [];
+    const totalItems = items.length + (value && showSaveFilter ? 1 : 0);
+
+    switch (e.key) {
+      case 'ArrowDown':
+        e.preventDefault();
+        setSelectedIndex(prev => Math.min(prev + 1, totalItems - 1));
+        break;
+      case 'ArrowUp':
+        e.preventDefault();
+        setSelectedIndex(prev => Math.max(prev - 1, -1));
+        break;
+      case 'Enter':
+        e.preventDefault();
+        if (selectedIndex >= 0 && selectedIndex < suggestions.length) {
+          selectSuggestion(suggestions[selectedIndex]);
+        } else if (value) {
+          handleSubmit();
+        }
+        break;
+      case 'Escape':
+        setShowDropdown(false);
+        inputRef.current?.blur();
+        break;
+    }
+  }, [suggestions, selectedIndex, value, showSaveFilter]);
+
+  // Select a suggestion
+  const selectSuggestion = useCallback((suggestion: AutocompleteSuggestion) => {
+    onChange(suggestion.value);
+    setShowDropdown(false);
+    inputRef.current?.focus();
+
+    // Add to recent if it's not already a filter syntax
+    if (!suggestion.value.includes(':')) {
+      addRecentSearch(suggestion.value);
+    }
+
+    // Submit if it's a saved filter or recent search
+    if (suggestion.type === 'saved' || suggestion.type === 'recent') {
+      onSubmit?.(suggestion.value);
+    }
+  }, [onChange, onSubmit]);
+
+  // Submit search
+  const handleSubmit = useCallback(() => {
+    if (value.trim()) {
+      addRecentSearch(value.trim());
+      onSubmit?.(value);
+      setShowDropdown(false);
+    }
+  }, [value, onSubmit]);
+
+  // Save current filter
+  const handleSaveFilter = useCallback(() => {
+    if (value.trim() && saveFilterName.trim()) {
+      saveFilter(saveFilterName.trim(), value.trim());
+      setShowSaveFilter(false);
+      setSaveFilterName('');
+    }
+  }, [value, saveFilterName]);
+
+  // Clear search
+  const handleClear = useCallback(() => {
+    onChange('');
+    inputRef.current?.focus();
+  }, [onChange]);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(e.target as Node) &&
+        inputRef.current &&
+        !inputRef.current.contains(e.target as Node)
+      ) {
+        setShowDropdown(false);
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  // Determine what to show in dropdown
+  const showSuggestions = suggestions.length > 0;
+  const showRecent = !value && recentSearches.length > 0;
+  const showSaved = !value && savedFilters.length > 0;
+  const showAnything = showSuggestions || showRecent || showSaved;
+
+  return (
+    <div className={cn('relative', className)}>
+      {/* Search Input */}
+      <div className="relative">
+        <Search className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-muted-foreground" />
+        <input
+          ref={inputRef}
+          type="text"
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+          onFocus={() => {
+            setIsFocused(true);
+            setShowDropdown(true);
+          }}
+          onBlur={() => setIsFocused(false)}
+          onKeyDown={handleKeyDown}
+          placeholder={placeholder || t('placeholderExtended')}
+          autoFocus={autoFocus}
+          className={cn(
+            'w-full rounded-lg border border-input bg-background py-3 pl-10 pr-20 text-base text-foreground',
+            'focus:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-500/20',
+            'placeholder:text-muted-foreground',
+            isLoading && 'animate-pulse'
+          )}
+        />
+
+        {/* Right side buttons */}
+        <div className="absolute right-2 top-1/2 -translate-y-1/2 flex items-center gap-1">
+          {/* Result count badge */}
+          {resultCount !== undefined && value && (
+            <span className="px-2 py-0.5 text-xs font-medium text-muted-foreground bg-muted rounded-full">
+              {resultCount}
+            </span>
+          )}
+
+          {/* Clear button */}
+          {value && (
+            <button
+              onClick={handleClear}
+              className="p-1.5 rounded-md text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+              aria-label="Clear search"
+            >
+              <XIcon className="h-4 w-4" />
+            </button>
+          )}
+
+          {/* Tips button */}
+          {showTips && (
+            <button
+              onClick={() => setShowTipsModal(!showTipsModal)}
+              className="p-1.5 rounded-md text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+              aria-label="Search tips"
+            >
+              <HelpCircle className="h-4 w-4" />
+            </button>
+          )}
+        </div>
+      </div>
+
+      {/* Dropdown */}
+      {showDropdown && showAnything && (
+        <div
+          ref={dropdownRef}
+          className="absolute z-50 mt-1 w-full rounded-lg border border-border bg-popover shadow-lg overflow-hidden"
+        >
+          {/* Suggestions */}
+          {showSuggestions && (
+            <div className="p-1">
+              <div className="px-2 py-1.5 text-xs font-medium text-muted-foreground">
+                Suggestions
+              </div>
+              {suggestions.map((suggestion, idx) => (
+                <button
+                  key={`${suggestion.type}-${suggestion.value}-${idx}`}
+                  onClick={() => selectSuggestion(suggestion)}
+                  className={cn(
+                    'w-full flex items-center gap-3 px-3 py-2 rounded-md text-left transition-colors',
+                    selectedIndex === idx
+                      ? 'bg-accent text-accent-foreground'
+                      : 'hover:bg-muted'
+                  )}
+                >
+                  <SuggestionIcon type={suggestion.type} />
+                  <span className="flex-1 truncate">{suggestion.label}</span>
+                  {suggestion.description && (
+                    <span className="text-xs text-muted-foreground">{suggestion.description}</span>
+                  )}
+                </button>
+              ))}
+            </div>
+          )}
+
+          {/* Recent Searches */}
+          {showRecent && (
+            <div className="p-1 border-t border-border">
+              <div className="px-2 py-1.5 text-xs font-medium text-muted-foreground">
+                {t('recentSearches')}
+              </div>
+              {recentSearches.map((search, idx) => (
+                <button
+                  key={`recent-${idx}`}
+                  onClick={() => {
+                    onChange(search);
+                    onSubmit?.(search);
+                    setShowDropdown(false);
+                  }}
+                  className="w-full flex items-center gap-3 px-3 py-2 rounded-md text-left hover:bg-muted transition-colors"
+                >
+                  <History className="h-4 w-4 text-muted-foreground" />
+                  <span className="flex-1 truncate">{search}</span>
+                </button>
+              ))}
+            </div>
+          )}
+
+          {/* Saved Filters */}
+          {showSaved && (
+            <div className="p-1 border-t border-border">
+              <div className="px-2 py-1.5 text-xs font-medium text-muted-foreground">
+                {t('savedFilters')}
+              </div>
+              {savedFilters.map((filter) => (
+                <button
+                  key={filter.id}
+                  onClick={() => {
+                    onChange(filter.query);
+                    onSubmit?.(filter.query);
+                    setShowDropdown(false);
+                  }}
+                  className="w-full flex items-center gap-3 px-3 py-2 rounded-md text-left hover:bg-muted transition-colors"
+                >
+                  <Bookmark className="h-4 w-4 text-muted-foreground" />
+                  <span className="flex-1 truncate">{filter.name}</span>
+                  <span className="text-xs text-muted-foreground truncate max-w-[120px]">
+                    {filter.query}
+                  </span>
+                </button>
+              ))}
+            </div>
+          )}
+
+          {/* Save Filter Option */}
+          {value && value.length >= 3 && (
+            <div className="p-2 border-t border-border bg-muted/50">
+              {showSaveFilter ? (
+                <div className="flex items-center gap-2">
+                  <input
+                    type="text"
+                    value={saveFilterName}
+                    onChange={(e) => setSaveFilterName(e.target.value)}
+                    placeholder={t('filterName')}
+                    className="flex-1 px-2 py-1 text-sm rounded border border-input bg-background focus:outline-none focus:ring-1 focus:ring-teal-500"
+                    autoFocus
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter') handleSaveFilter();
+                      if (e.key === 'Escape') setShowSaveFilter(false);
+                    }}
+                  />
+                  <button
+                    onClick={handleSaveFilter}
+                    disabled={!saveFilterName.trim()}
+                    className="px-3 py-1 text-sm font-medium text-white bg-teal-600 rounded hover:bg-teal-700 disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    Save
+                  </button>
+                </div>
+              ) : (
+                <button
+                  onClick={() => setShowSaveFilter(true)}
+                  className="w-full flex items-center gap-2 px-2 py-1 text-sm text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  <Bookmark className="h-4 w-4" />
+                  <span>{t('saveFilter')}</span>
+                </button>
+              )}
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* Tips Modal */}
+      {showTipsModal && (
+        <div className="absolute z-50 mt-1 right-0 w-80 rounded-lg border border-border bg-popover shadow-lg p-4">
+          <div className="flex items-center justify-between mb-3">
+            <h3 className="font-medium flex items-center gap-2">
+              <Sparkles className="h-4 w-4 text-teal-500" />
+              {t('tips.title')}
+            </h3>
+            <button
+              onClick={() => setShowTipsModal(false)}
+              className="p-1 rounded hover:bg-muted"
+            >
+              <XIcon className="h-4 w-4" />
+            </button>
+          </div>
+
+          <div className="space-y-2 text-sm">
+            <p className="text-muted-foreground">{t('tips.fuzzy')}</p>
+            <p className="text-muted-foreground">{t('tips.amount')}</p>
+            <p className="text-muted-foreground">{t('tips.date')}</p>
+            <p className="text-muted-foreground">{t('tips.category')}</p>
+            <p className="text-muted-foreground">{t('tips.type')}</p>
+          </div>
+
+          <div className="mt-4 pt-3 border-t border-border">
+            <p className="text-xs font-medium text-muted-foreground mb-2">Examples:</p>
+            <div className="space-y-1">
+              {searchExamples.slice(0, 4).map((example, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => {
+                    onChange(example.query);
+                    setShowTipsModal(false);
+                    inputRef.current?.focus();
+                  }}
+                  className="w-full text-left text-xs py-1 px-2 rounded hover:bg-muted transition-colors"
+                >
+                  <code className="text-teal-600">{example.query}</code>
+                  <span className="text-muted-foreground ml-2">— {example.description}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}

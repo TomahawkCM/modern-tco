@@ -94,7 +94,9 @@ export function useGuidedTour() {
     }
 
     // Use mobile or desktop steps based on viewport
-    const rawSteps = isMobile ? MOBILE_TOUR_STEPS : TOUR_STEPS;
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+    const rawSteps: DriveStep[] = isMobile ? MOBILE_TOUR_STEPS : TOUR_STEPS;
+
     const steps = resolveSteps(rawSteps);
     if (steps.length === 0) {
       setIsActive(false);
@@ -126,14 +128,9 @@ export function useGuidedTour() {
           saveProgress((prev) => ({
             ...prev,
             currentStep: stepIndex,
-            startedAt: prev.startedAt || Date.now(),
+            startedAt: prev.startedAt ?? Date.now(),
           }));
         }
-      },
-      onDestroyStarted: () => {
-        // Tour is being closed (completed or dismissed)
-        setIsActive(false);
-        driverRef.current = null;
       },
       onDestroyed: () => {
         // Mark as completed only if last step was reached
@@ -206,8 +203,8 @@ export function useGuidedTour() {
       tempDriver.highlight({
         element: selector,
         popover: {
-          title: options?.title || "Feature",
-          description: options?.description || "",
+          title: options?.title ?? "Feature",
+          description: options?.description ?? "",
           side: "bottom",
           align: "center",
         },

@@ -8,7 +8,6 @@
 import { useState, useEffect } from 'react';
 import { Plus, Edit, Trash2, Target, TrendingUp, Calendar, DollarSign } from 'lucide-react';
 import { db } from '@/lib/budget-db';
-import { EmptyStates } from '@/components/budget/EmptyState';
 import type { FuturePurchase } from '@/types/budget';
 import { differenceInDays, differenceInMonths, addMonths, format } from 'date-fns';
 import { ConfirmDialog } from '@/components/budget/ConfirmDialog';
@@ -98,7 +97,42 @@ export default function FuturePurchasePage() {
   }
 
   if (purchases.length === 0) {
-    return <EmptyStates.FuturePlans />;
+    return (
+      <div className="space-y-6">
+        {/* Header */}
+        <div>
+          <h1 className="text-3xl font-bold text-white">Future Purchase Planner</h1>
+          <p className="text-slate-400 mt-2">Plan and track your savings goals</p>
+        </div>
+
+        {/* Empty State */}
+        <div className="bg-white rounded-lg shadow p-12 text-center">
+          <div className="bg-teal-500 rounded-full w-24 h-24 flex items-center justify-center mx-auto shadow-lg">
+            <Target className="w-12 h-12 text-white" />
+          </div>
+          <h2 className="mt-8 text-3xl font-bold text-gray-900">Plan Your Future Purchases</h2>
+          <p className="mt-4 text-lg text-gray-600 max-w-lg mx-auto">
+            Set savings goals for big purchases like a new car, vacation, or home renovation. Track your progress and stay motivated.
+          </p>
+          <button
+            onClick={() => setShowModal(true)}
+            className="mt-8 inline-flex items-center gap-2 px-6 py-3 bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition-colors shadow-md hover:shadow-lg"
+          >
+            <Plus className="w-5 h-5" />
+            Create Your First Goal
+          </button>
+        </div>
+
+        {/* Add Modal */}
+        {showModal && (
+          <PurchaseModal
+            purchase={null}
+            onSave={savePurchase}
+            onClose={() => setShowModal(false)}
+          />
+        )}
+      </div>
+    );
   }
 
   const activePurchases = purchases.filter(p => !p.isCompleted);

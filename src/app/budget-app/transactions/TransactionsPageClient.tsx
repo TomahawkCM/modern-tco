@@ -63,6 +63,12 @@ import { TransactionReviewModal } from "@/components/budget/TransactionReviewMod
 import { extractVendorName } from "@/lib/vendor-matcher";
 import { aiFindMatchingVendorTransactions } from "@/lib/ai-vendor-matcher";
 import Link from "next/link";
+import { TransactionSearchBar } from "@/components/budget/search";
+import {
+  initializeSearchIndex,
+  searchTransactions,
+  initializeAutocompleteCache,
+} from "@/lib/search";
 import { LinkToLoanButton } from "@/components/budget/loans/LinkToLoanPopover";
 import { LinkedLoanBadgeInline } from "@/components/budget/loans/LinkedLoanBadge";
 import { getPaymentByTransactionId, getAllLoans } from "@/lib/loans/loan-db";
@@ -87,6 +93,14 @@ export default function TransactionsPageClient() {
     const accountParam = searchParams?.get("account");
     if (accountParam) {
       setSelectedAccount(accountParam);
+    }
+  }, [searchParams]);
+
+  // Read search query from URL (from CommandPalette navigation)
+  useEffect(() => {
+    const searchParam = searchParams?.get("search");
+    if (searchParam) {
+      setSearchTerm(searchParam);
     }
   }, [searchParams]);
   const [showModal, setShowModal] = useState(false);
@@ -155,23 +169,27 @@ export default function TransactionsPageClient() {
   }, [transactions]);
 
   // Filter and sort transactions (MEMOIZED for performance)
+  // Enhanced with fuzzy search support via Fuse.js
   // NOTE: Must be defined here, before functions that depend on it
   const filteredTransactions = useMemo(() => {
-    // Pre-compute lowercase search term once
-    const lowerSearchTerm = searchTerm.toLowerCase();
-
     // Pre-compute start/end dates once if they exist
     const startDateTime = startDate ? new Date(startDate).getTime() : null;
     const endDateTime = endDate ? new Date(endDate).getTime() : null;
 
-    return transactions
+    // Start with all transactions or fuzzy search results
+    let baseTransactions = transactions;
+
+    // Use fuzzy search if search term is provided (3+ chars)
+    if (searchTerm && searchTerm.length >= 2) {
+      const searchResults = searchTransactions(searchTerm, { limit: 1000 });
+      const matchedIds = new Set(searchResults.map(r => r.item.id));
+      baseTransactions = transactions.filter(tx => matchedIds.has(tx.id));
+    }
+
+    return baseTransactions
       .filter((tx) => {
         // Account filter
         if (selectedAccount !== "all" && tx.accountId !== selectedAccount) {
-          return false;
-        }
-        // Search filter
-        if (searchTerm && !tx.description.toLowerCase().includes(lowerSearchTerm)) {
           return false;
         }
         // Category filter
@@ -293,6 +311,10 @@ export default function TransactionsPageClient() {
       setTransactions(visibleTxs);
       setCategories(cats);
       setAccounts(accts);
+
+      // Initialize search index for fuzzy search
+      initializeSearchIndex(visibleTxs, cats, accts);
+      initializeAutocompleteCache(visibleTxs, cats);
 
       // Load linked payments for expense transactions
       const loanMap = new Map(loans.map((l) => [l.id, l]));
@@ -878,22 +900,19 @@ export default function TransactionsPageClient() {
                   Search Transactions
                 </label>
                 <HelpTooltip
-                  content='Search by description, amount, or merchant name. Use quotes for exact matches: "Starbucks".'
+                  content="Fuzzy search by description, merchant, category, notes, or amount. Try 'coffee last week' or '$50-100'."
                   learnMoreUrl="/docs/user-guide#search-transactions"
                   ariaLabel="More information about searching transactions"
                 />
               </div>
-              <div className="relative">
-                <Search className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-muted-foreground" />
-                <input
-                  id="search-transactions"
-                  type="text"
-                  placeholder="Search transactions..."
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full rounded-lg border border-input bg-background py-3 pl-10 pr-4 text-base text-foreground focus:border-transparent focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
-                />
-              </div>
+              <TransactionSearchBar
+                value={searchTerm}
+                onChange={setSearchTerm}
+                transactions={transactions}
+                categories={categories}
+                resultCount={searchTerm ? filteredTransactions.length : undefined}
+                placeholder="Try 'coffee last week' or 'amount:>50'..."
+              />
             </div>
 
             {/* Account Filter */}

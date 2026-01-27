@@ -13,12 +13,14 @@ import {
   type PrivacySettings,
 } from "@/lib/budget-privacy-settings";
 import type { Account, Category } from "@/types/budget";
-import { CreditCard, Edit, Plus, Shield, Tag, Trash2, Eye, GripVertical, Archive, RotateCcw, Database, Download, Upload, Globe, Wrench } from "lucide-react";
-import { useEffect, useState } from "react";
+import { CreditCard, Edit, Plus, Shield, Tag, Trash2, Eye, GripVertical, Archive, RotateCcw, Database, Download, Upload, Globe, Wrench, Users } from "lucide-react";
+import { Suspense, useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { PrivacyControlsPanel } from "./settings-privacy-panel";
 import { AccessibilitySettingsPanel } from "@/components/budget/AccessibilitySettingsPanel";
 import { LocaleSettingsPanel } from "@/components/budget/settings/LocaleSettingsPanel";
 import { DeveloperTools } from "@/components/budget/settings/DeveloperTools";
+import { ProfileSettingsPanel } from "@/components/budget/settings/ProfileSettingsPanel";
 import { IconPicker, getIconComponent } from "@/components/budget/IconPicker";
 import { ExportDialog } from "@/components/budget/ExportDialog";
 import { ImportDialog } from "@/components/budget/ImportDialog";
@@ -40,12 +42,35 @@ import {
 } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 
+type TabType = "accounts" | "categories" | "privacy" | "accessibility" | "data" | "locale" | "developer" | "profile";
+
 export default function SettingsPage() {
+  return (
+    <Suspense fallback={<SettingsLoadingFallback />}>
+      <SettingsContent />
+    </Suspense>
+  );
+}
+
+function SettingsLoadingFallback() {
+  return (
+    <div className="flex h-64 items-center justify-center">
+      <div className="text-center">
+        <div className="mx-auto h-16 w-16 animate-spin rounded-full border-4 border-teal-600 border-t-transparent"></div>
+        <p className="mt-4 text-gray-600">Loading settings...</p>
+      </div>
+    </div>
+  );
+}
+
+function SettingsContent() {
+  const searchParams = useSearchParams();
+  const initialTab = searchParams?.get('tab') as TabType | null;
   const [accounts, setAccounts] = useState<Account[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
   const [categoryTransactionCounts, setCategoryTransactionCounts] = useState<Record<string, number>>({});
   const [isLoading, setIsLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState<"accounts" | "categories" | "privacy" | "accessibility" | "data" | "locale" | "developer">("accounts");
+  const [activeTab, setActiveTab] = useState<TabType>(initialTab || "accounts");
   const isDev = process.env.NODE_ENV === 'development';
   const [showExportDialog, setShowExportDialog] = useState(false);
   const [showImportDialog, setShowImportDialog] = useState(false);
@@ -67,6 +92,14 @@ export default function SettingsPage() {
   useEffect(() => {
     loadData();
   }, []);
+
+  // Sync tab with URL params
+  useEffect(() => {
+    const tabFromUrl = searchParams?.get('tab') as TabType | null;
+    if (tabFromUrl && tabFromUrl !== activeTab) {
+      setActiveTab(tabFromUrl);
+    }
+  }, [searchParams]);
 
   async function loadData() {
     try {
@@ -318,6 +351,19 @@ export default function SettingsPage() {
             <div className="flex items-center gap-2">
               <Globe className="h-5 w-5" />
               Locale & Formatting
+            </div>
+          </button>
+          <button
+            onClick={() => setActiveTab("profile")}
+            className={`border-b-2 px-2 pb-4 font-medium transition-colors ${
+              activeTab === "profile"
+                ? "border-teal-500 text-teal-400"
+                : "border-transparent text-slate-400 hover:text-slate-200"
+            }`}
+          >
+            <div className="flex items-center gap-2">
+              <Users className="h-5 w-5" />
+              Profiles
             </div>
           </button>
           {isDev && (
@@ -621,6 +667,9 @@ export default function SettingsPage() {
 
       {/* Locale & Formatting Tab */}
       {activeTab === "locale" && <LocaleSettingsPanel />}
+
+      {/* Profile Tab */}
+      {activeTab === "profile" && <ProfileSettingsPanel />}
 
       {/* Developer Tools Tab (Dev Mode Only) */}
       {isDev && activeTab === "developer" && <DeveloperTools />}

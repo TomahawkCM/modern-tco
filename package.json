@@ -240,6 +240,7 @@
     "embla-carousel-react": "^8.6.0",
     "fast-xml-parser": "^5.3.1",
     "framer-motion": "^12.23.22",
+    "fuse.js": "^7.1.0",
     "glob": "^11.0.3",
     "gray-matter": "^4.0.3",
     "html-to-image": "^1.11.13",

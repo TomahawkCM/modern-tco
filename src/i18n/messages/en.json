@@ -1909,5 +1909,42 @@
       "over": "Over",
       "under": "On Track"
     }
+  },
+  "amountFilter": {
+    "title": "Amount Range",
+    "clear": "Clear",
+    "minThumb": "Minimum amount",
+    "maxThumb": "Maximum amount",
+    "minLabel": "Minimum amount",
+    "maxLabel": "Maximum amount",
+    "minPlaceholder": "Min",
+    "maxPlaceholder": "Max"
+  },
+  "transactionSearch": {
+    "placeholder": "Search transactions...",
+    "placeholderExtended": "Try 'coffee last week' or 'amount:>50'",
+    "noResults": "No transactions found",
+    "noResultsDescription": "Try a different search or adjust your filters",
+    "resultCount": "{count} {count, plural, =1 {result} other {results}}",
+    "searchingFor": "Searching for: {query}",
+    "recentSearches": "Recent Searches",
+    "savedFilters": "Saved Filters",
+    "clearRecent": "Clear",
+    "saveFilter": "Save Filter",
+    "filterName": "Filter name",
+    "suggestions": {
+      "merchants": "Merchants",
+      "categories": "Categories",
+      "amounts": "Amount Ranges",
+      "recent": "Recent"
+    },
+    "tips": {
+      "title": "Search Tips",
+      "fuzzy": "Typo-tolerant: 'starbukcs' finds 'Starbucks'",
+      "amount": "Amount: '$50-100' or 'amount:>50'",
+      "date": "Date: 'last week', 'this month', 'date:last30'",
+      "category": "Category: 'groceries' or 'category:food'",
+      "type": "Type: 'type:income' or 'type:expense'"
+    }
   }
 }
