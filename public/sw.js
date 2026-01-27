@@ -10,8 +10,8 @@
  * - Background sync for transactions (future)
  */
 
-const CACHE_NAME = 'budget-app-v4-prod';
-const RUNTIME_CACHE = 'budget-app-runtime-v4-prod';
+const CACHE_NAME = 'budget-app-v5-prod';
+const RUNTIME_CACHE = 'budget-app-runtime-v5-prod';
 
 // App shell files to cache on install
 const APP_SHELL = [
@@ -94,6 +94,12 @@ self.addEventListener('fetch', (event) => {
   // This prevents FetchEvent errors with Next.js hot reload
   if (url.hostname === 'localhost' || url.hostname === '127.0.0.1') {
     // Don't call event.respondWith() - let browser handle it natively
+    return;
+  }
+
+  // 🔥 Skip Vercel Live completely - these are dev tools that shouldn't be cached
+  // Let the browser handle these natively to avoid CSP issues
+  if (url.hostname.includes('vercel.live') || url.hostname.includes('pusher.com')) {
     return;
   }
 

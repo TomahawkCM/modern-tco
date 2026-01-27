@@ -9,6 +9,9 @@ import {
 } from "@/lib/subscriptionService";
 import { useEffect, useState } from "react";
 
+// Local user ID used in offline mode - skip Supabase queries for these
+const LOCAL_USER_PREFIX = "local-user";
+
 export interface TrialStatusResult {
   /** Whether data is still loading */
   loading: boolean;
@@ -51,6 +54,19 @@ export function useTrialStatus(): TrialStatusResult {
         daysRemaining: 0,
         isExpired: false,
         status: null,
+      });
+      setLoading(false);
+      return;
+    }
+
+    // For local/offline users, treat as active (no subscription system)
+    if (user.id.startsWith(LOCAL_USER_PREFIX)) {
+      setSubscriptionStatus({
+        isActive: true,
+        isTrial: false,
+        daysRemaining: 999,
+        isExpired: false,
+        status: "active",
       });
       setLoading(false);
       return;

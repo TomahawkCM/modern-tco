@@ -125,6 +125,12 @@ export function ProfileProvider({ children }: ProfileProviderProps) {
 
   useEffect(() => {
     async function initialize() {
+      // 2s timeout - don't block app if database is slow
+      const timeoutId = setTimeout(() => {
+        console.warn('[ProfileContext] Initialization timeout - continuing without profiles');
+        setIsLoading(false);
+      }, 2000);
+
       try {
         setIsLoading(true);
         setError(null);
@@ -145,9 +151,11 @@ export function ProfileProvider({ children }: ProfileProviderProps) {
             setIsLocked(true);
           }
         }
+        clearTimeout(timeoutId);
       } catch (err) {
         console.error('[ProfileContext] Initialization error:', err);
         setError('Failed to load profiles');
+        clearTimeout(timeoutId);
       } finally {
         setIsLoading(false);
       }

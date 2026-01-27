@@ -4,6 +4,7 @@ import { supabase, supabaseAdmin } from "./supabase";
 // Offline mode check - skip Supabase queries for local users
 const isOfflineMode = process.env.NEXT_PUBLIC_OFFLINE_MODE === "true";
 const LOCAL_USER_ID = "local-user-offline";
+const LOCAL_USER_PREFIX = "local-user";
 
 export interface UserProfile {
   id: string;
@@ -37,7 +38,8 @@ export interface Achievement {
  */
 export async function getUserProfile(userId: string): Promise<UserProfile | null> {
   // In offline mode or for local user ID, return a mock profile
-  if (isOfflineMode || userId === LOCAL_USER_ID) {
+  // Use startsWith for robust matching of any local-user-* IDs
+  if (isOfflineMode || userId === LOCAL_USER_ID || userId.startsWith(LOCAL_USER_PREFIX)) {
     return {
       id: LOCAL_USER_ID,
       email: "local@budgetapp.local",
@@ -78,7 +80,7 @@ export async function getUserProfile(userId: string): Promise<UserProfile | null
  */
 export async function getUserStats(userId: string): Promise<UserStats> {
   // In offline mode or for local user ID, return default stats
-  if (isOfflineMode || userId === LOCAL_USER_ID) {
+  if (isOfflineMode || userId === LOCAL_USER_ID || userId.startsWith(LOCAL_USER_PREFIX)) {
     return {
       studyStreak: 0,
       totalScore: 0,
@@ -227,7 +229,7 @@ export async function updateUserProfile(
   updates: { name?: string; bio?: string }
 ): Promise<{ success: boolean; error?: string }> {
   // In offline mode or for local user ID, skip Supabase
-  if (isOfflineMode || userId === LOCAL_USER_ID) {
+  if (isOfflineMode || userId === LOCAL_USER_ID || userId.startsWith(LOCAL_USER_PREFIX)) {
     return { success: true };
   }
 
@@ -253,7 +255,7 @@ export async function updateUserProfile(
  */
 export async function updateLastLogin(userId: string): Promise<void> {
   // In offline mode or for local user ID, skip Supabase
-  if (isOfflineMode || userId === LOCAL_USER_ID) {
+  if (isOfflineMode || userId === LOCAL_USER_ID || userId.startsWith(LOCAL_USER_PREFIX)) {
     return;
   }
 
@@ -276,7 +278,7 @@ export async function updateLastLogin(userId: string): Promise<void> {
  */
 export async function createUserProfile(user: User): Promise<{ success: boolean; error?: string }> {
   // In offline mode or for local user ID, skip Supabase
-  if (isOfflineMode || user.id === LOCAL_USER_ID) {
+  if (isOfflineMode || user.id === LOCAL_USER_ID || user.id.startsWith(LOCAL_USER_PREFIX)) {
     return { success: true };
   }
 
