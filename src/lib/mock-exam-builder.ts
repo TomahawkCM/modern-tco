@@ -13,12 +13,12 @@
 
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import {
-  MockExamTemplate,
+  type MockExamTemplate,
   getMockExamTemplate,
   calculateDomainQuestionCounts,
   calculateDifficultyQuestionCounts,
 } from '@/data/mock-exam-configs';
-import { Question, TCODomain } from '@/types/exam';
+import type { Question, TCODomain } from '@/types/exam';
 
 // =====================================================
 // TYPES

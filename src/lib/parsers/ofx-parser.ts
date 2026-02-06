@@ -53,7 +53,7 @@ function convertOFX1ToXML(sgml: string): string {
   let xml = sgml.substring(ofxStart);
 
   // Add XML declaration
-  xml = '<?xml version="1.0" encoding="UTF-8"?>\n' + xml;
+  xml = `<?xml version="1.0" encoding="UTF-8"?>\n${  xml}`;
 
   // Convert SGML tags to proper XML by adding closing tags
   // Match patterns like <TAGNAME>VALUE where VALUE doesn't contain < or >
@@ -107,7 +107,7 @@ function extractTransactionsFromXML(xml: any): OFXTransaction[] {
   const txnArray = Array.isArray(stmttrn) ? stmttrn : [stmttrn];
 
   for (const txn of txnArray) {
-    if (!txn || !txn.FITID) continue; // Skip invalid transactions
+    if (!txn?.FITID) continue; // Skip invalid transactions
 
     transactions.push({
       TRNTYPE: txn.TRNTYPE || 'OTHER',

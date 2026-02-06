@@ -236,7 +236,7 @@ export async function validateBudgetFile(
 
   // Validate data structure
   if (!isEncryptedData(file.data)) {
-    const data = file.data;
+    const {data} = file;
 
     // Check required arrays exist
     const requiredArrays: (keyof BudgetExportData)[] = [

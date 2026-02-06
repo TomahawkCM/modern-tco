@@ -70,7 +70,7 @@ export function detectAnomalies(
             transaction: tx,
             merchant,
             category: tx.category || 'Uncategorized',
-            amount: amount,
+            amount,
             expectedRange: {
               min: stats.mean - stats.stdDev,
               max: stats.mean + stats.stdDev,
@@ -111,7 +111,7 @@ export function detectAnomalies(
             transaction: tx,
             merchant: extractMerchant(tx.description),
             category,
-            amount: amount,
+            amount,
             expectedRange: {
               min: stats.mean - stats.stdDev,
               max: stats.mean + stats.stdDev,

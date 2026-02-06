@@ -432,7 +432,7 @@ export default function ModuleRenderer({ moduleData }: ModuleRendererProps) {
       // final flush
       flush().catch(() => {});
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+     
   }, [user?.id, moduleId]);
 
   // Update HUD time spent display (client-only; simple counter since load)

@@ -28,7 +28,7 @@
  * 5. Optionally stores learned format in bank_formats table
  */
 
-import { NextRequest, NextResponse } from 'next/server';
+import { type NextRequest, NextResponse } from 'next/server';
 import { detectBank } from '@/lib/ai/smart-bank-detection';
 import { saveBankFormat, lookupBankFormat } from '@/lib/collective-learning-service';
 import { BANK_CONFIGS } from '@/lib/parsers/csv-parser';

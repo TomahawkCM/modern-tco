@@ -47,7 +47,7 @@ export function AnomalyAlerts({
     if (alerts.length > 0) {
       loadFeedback();
     }
-  }, [alertIds]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [alertIds]);  
 
   async function handleFeedback(alert: AnomalyAlert, wasExpected: boolean) {
     try {

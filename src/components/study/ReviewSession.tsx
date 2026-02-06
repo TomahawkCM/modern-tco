@@ -129,7 +129,7 @@ export function ReviewSession({ items, onComplete, onExit }: ReviewSessionProps)
       ).length > 0 ? 1 : 0; // Simplified streak calculation
 
       const difficulty = currentQuestion?.difficulty || currentItem.difficulty || "medium";
-      const retention = currentItem.retention;
+      const {retention} = currentItem;
 
       const pointsResult = calculateReviewPoints(
         correct,

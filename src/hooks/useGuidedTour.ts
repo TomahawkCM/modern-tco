@@ -94,7 +94,7 @@ export function useGuidedTour() {
     }
 
     // Use mobile or desktop steps based on viewport
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+     
     const rawSteps: DriveStep[] = isMobile ? MOBILE_TOUR_STEPS : TOUR_STEPS;
 
     const steps = resolveSteps(rawSteps);

@@ -1,10 +1,10 @@
-import { NextRequest, NextResponse } from "next/server";
+import { type NextRequest, NextResponse } from "next/server";
 import Anthropic from "@anthropic-ai/sdk";
 import OpenAI from "openai";
 import { rateLimitStrict, createRateLimitResponse } from "@/lib/rate-limit";
 import {
   FlashcardGenerateRequestSchema,
-  GeneratedFlashcard,
+  type GeneratedFlashcard,
   validateRequest,
   createValidatedResponse,
   FlashcardGenerateResponseSchema,

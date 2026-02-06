@@ -143,7 +143,7 @@ export async function generateEncryptionKey(
   const key = await crypto.subtle.deriveKey(
     {
       name: 'PBKDF2',
-      salt: salt,
+      salt,
       iterations: 100000, // High iteration count for security
       hash: 'SHA-256',
     },
@@ -240,7 +240,7 @@ export async function encryptData(
     const encryptedBuffer = await crypto.subtle.encrypt(
       {
         name: 'AES-GCM',
-        iv: iv,
+        iv,
         tagLength: 128, // 128-bit authentication tag
       },
       encryptionKey,
@@ -383,7 +383,7 @@ export function isEncryptionAvailable(): boolean {
   if (typeof window === 'undefined') return false;
   
   // Check if Web Crypto API is available
-  if (!crypto || !crypto.subtle) {
+  if (!crypto?.subtle) {
     return false;
   }
   
@@ -428,7 +428,7 @@ export async function enableEncryption(): Promise<void> {
   }
 
   // Check if Web Crypto API is available
-  if (!crypto || !crypto.subtle) {
+  if (!crypto?.subtle) {
     throw new Error('Web Crypto API is not available in this browser');
   }
 

@@ -308,7 +308,7 @@ function detectMerchantMatches(
     // Skip if already marked as duplicate or no normalized merchant
     if (newTx.isDuplicate || !(newTx as any).normalizedMerchant) continue;
 
-    const normalizedMerchant = (newTx as any).normalizedMerchant;
+    const {normalizedMerchant} = (newTx as any);
 
     for (const existingTx of existingTransactions) {
       // Skip if existing transaction has no category (can't infer merchant)

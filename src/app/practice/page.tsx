@@ -201,7 +201,7 @@ function PracticeContent() {
     if (TEST_HOOKS) {
       setAutoWrongCount(autowrongParam > 0 ? Math.min(autowrongParam, 10) : 0);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+     
   }, [search]);
 
   // For test runs: answer first N questions incorrectly
@@ -219,7 +219,7 @@ function PracticeContent() {
         answerQuestion(q.id, wrong);
       }
     } catch {}
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+     
   }, [state.currentSession, autoWrongCount]);
 
   const handleAnswerSelect = (answerId: string) => {

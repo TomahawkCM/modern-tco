@@ -134,7 +134,7 @@ export async function encryptValue(value: string): Promise<string> {
  * Decrypt a string value
  */
 export async function decryptValue(encryptedValue: string): Promise<string> {
-  if (!encryptedValue || !encryptedValue.startsWith('encrypted:')) {
+  if (!encryptedValue?.startsWith('encrypted:')) {
     return encryptedValue; // Not encrypted or empty
   }
   

@@ -286,7 +286,7 @@ export async function sendMessage(
     temperature: TEMPERATURE,
     system: contextualPrompt,
     messages: messages.map((msg) => ({
-      role: msg.role as 'user' | 'assistant',
+      role: msg.role,
       content: msg.content,
     })),
   });
@@ -433,7 +433,7 @@ function buildSystemPrompt(type: Conversation['conversationType'], context?: Tut
 function enhancePromptWithContext(basePrompt: string, context?: TutorContext): string {
   if (!context) return basePrompt;
 
-  let enhanced = basePrompt + '\n\n**Current Student Context:**\n';
+  let enhanced = `${basePrompt  }\n\n**Current Student Context:**\n`;
 
   if (context.currentModuleId || context.currentDomain) {
     enhanced += `- Currently studying: ${context.currentDomain || context.currentModuleId}\n`;

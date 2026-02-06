@@ -45,8 +45,8 @@ async function fetchYahooQuote(symbol: string): Promise<StockQuote | null> {
       return null;
     }
 
-    const meta = data.chart.result[0].meta;
-    const regularMarketPrice = meta.regularMarketPrice;
+    const {meta} = data.chart.result[0];
+    const {regularMarketPrice} = meta;
     const previousClose = meta.previousClose || meta.chartPreviousClose;
     
     if (!regularMarketPrice) {

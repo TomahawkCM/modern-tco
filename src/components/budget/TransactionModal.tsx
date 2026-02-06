@@ -228,7 +228,7 @@ export function TransactionModal({
       });
 
       // Vendor-level learning so future transactions from the same merchant are auto-categorized
-      // eslint-disable-next-line @typescript-eslint/no-var-requires
+       
       const { learnVendorCategory } = await import('@/lib/vendor-learning');
       learnVendorCategory(description, category, subcategory || null);
 

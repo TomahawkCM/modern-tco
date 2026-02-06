@@ -159,7 +159,7 @@ export function DebtAnalysis() {
   }));
 
   const CustomTooltip = ({ active, payload }: any) => {
-    if (!active || !payload || !payload.length) return null;
+    if (!active || !payload?.length) return null;
 
     return (
       <div className="bg-white p-4 rounded-lg shadow-lg border border-gray-200">

@@ -303,7 +303,7 @@ export default function BudgetsPage() {
                 {data.budget && (
                   <>
                     <button
-                      onClick={() => setEditingBudget(data.budget!)}
+                      onClick={() => setEditingBudget(data.budget)}
                       className="p-3 min-h-[48px] min-w-[48px] flex items-center justify-center text-teal-600 hover:text-teal-700 hover:bg-teal-50 rounded-lg transition-colors"
                       title="Edit budget"
                       aria-label="Edit budget"

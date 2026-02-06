@@ -366,6 +366,7 @@
       "categories": "Categories",
       "budgets": "Budgets",
       "subscriptions": "Subscriptions",
+      "reminders": "Reminders",
       "loans": "Loans",
       "investments": "Investments",
       "futurePlans": "Future Plans",
@@ -1945,6 +1946,126 @@
       "date": "Date: 'last week', 'this month', 'date:last30'",
       "category": "Category: 'groceries' or 'category:food'",
       "type": "Type: 'type:income' or 'type:expense'"
+    }
+  },
+  "notifications": {
+    "title": "Notifications",
+    "markAllRead": "Mark all read",
+    "clearAll": "Clear all",
+    "snooze": "Snooze",
+    "dismiss": "Dismiss",
+    "empty": "No notifications",
+    "emptyAll": "You're all caught up!",
+    "emptyUnread": "No unread notifications",
+    "emptySnoozed": "No snoozed notifications",
+    "snoozedUntil": "Snoozed for {time}",
+    "tabs": {
+      "all": "All",
+      "unread": "Unread",
+      "snoozed": "Snoozed"
+    },
+    "snoozeOptions": {
+      "1hour": "1 hour",
+      "3hours": "3 hours",
+      "1day": "1 day",
+      "3days": "3 days",
+      "1week": "1 week"
+    },
+    "types": {
+      "bill_reminder": "Bill Reminder",
+      "budget_alert": "Budget Alert",
+      "goal_milestone": "Goal Milestone",
+      "system": "System"
+    }
+  },
+  "notificationSettings": {
+    "title": "Notifications",
+    "notAvailable": "Notification settings are not available.",
+    "masterToggle": {
+      "title": "Enable Notifications",
+      "description": "Turn all notifications on or off"
+    },
+    "pushPermission": {
+      "title": "Push Notifications",
+      "description": "Receive notifications even when the app is closed",
+      "enable": "Enable Push Notifications",
+      "notSupported": "Not supported in this browser",
+      "deniedHint": "Enable in browser settings",
+      "states": {
+        "granted": "Enabled",
+        "denied": "Blocked",
+        "default": "Not set",
+        "unsupported": "Unsupported"
+      }
+    },
+    "notificationTypes": {
+      "title": "Notification Types",
+      "description": "Choose which notifications you want to receive",
+      "billReminders": {
+        "title": "Bill Reminders",
+        "description": "Get notified before subscriptions are due"
+      },
+      "budgetAlerts": {
+        "title": "Budget Alerts",
+        "description": "Alerts when approaching budget limits"
+      },
+      "goalMilestones": {
+        "title": "Goal Milestones",
+        "description": "Celebrate when you hit savings milestones"
+      }
+    },
+    "quietHours": {
+      "title": "Quiet Hours",
+      "description": "No notifications during this time window",
+      "start": "Start time",
+      "end": "End time"
+    },
+    "reminderDays": {
+      "title": "Default Reminder",
+      "description": "How many days before a bill is due to remind you",
+      "daysBeforeDue": "days before due date"
+    },
+    "testNotification": {
+      "title": "Test Notification",
+      "description": "Send a test notification to verify your settings",
+      "button": "Send Test"
+    },
+    "infoBox": {
+      "storedLocally": "Notification settings are stored locally on your device.",
+      "pushExplanation": "Push notifications require browser permission and work even when the app is closed.",
+      "emailExplanation": "Email notifications are sent via our secure email service and require a valid email address."
+    },
+    "emailNotifications": {
+      "title": "Email Notifications",
+      "description": "Receive notifications via email",
+      "emailAddress": "Email Address",
+      "invalidEmail": "Please enter a valid email address",
+      "types": "Email notification types",
+      "testEmail": "Test Email",
+      "testEmailDescription": "Send a test email to verify your settings",
+      "sendTest": "Send Test",
+      "testEmailSent": "Email sent!",
+      "testEmailFailed": "Failed to send"
+    }
+  },
+  "calendarExport": {
+    "addToCalendar": "Add to Calendar",
+    "exportToCalendar": "Export to Calendar",
+    "downloadICS": "Download ICS File",
+    "downloadAllICS": "Download All as ICS",
+    "selectSubscriptions": "Select Subscriptions...",
+    "googleCalendar": "Google Calendar",
+    "outlookCalendar": "Outlook Calendar",
+    "dialog": {
+      "title": "Export to Calendar",
+      "description": "Add bill reminders to your calendar",
+      "exportMethod": "Export Method",
+      "selectSubscriptions": "Select Subscriptions",
+      "selectAll": "Select all",
+      "deselectAll": "Deselect all",
+      "cancel": "Cancel",
+      "export": "Export {count} subscription(s)",
+      "exporting": "Exporting..."
     }
   }
 }

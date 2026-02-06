@@ -5,6 +5,7 @@ import { useSeniorsMode } from "@/hooks/useSeniorsMode";
 import { AnimatePresence, motion } from "framer-motion";
 import {
   BarChart3,
+  Bell,
   Calculator,
   Camera,
   ChevronLeft,
@@ -30,6 +31,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 import { useTranslations } from 'next-intl';
 import { ProfileSelector } from "@/components/budget/profile/ProfileSelector";
+import { NotificationCenter } from "@/components/budget/notifications";
 
 interface NavItem {
   name: string;
@@ -47,6 +49,7 @@ const navigation: NavItem[] = [
   { name: "categories", href: "/budget-app/categories", icon: Tags, essential: true },
   { name: "budgets", href: "/budget-app/budgets", icon: PieChart, essential: true },
   { name: "subscriptions", href: "/budget-app/subscriptions", icon: Repeat },
+  { name: "reminders", href: "/budget-app/settings?tab=notifications", icon: Bell },
   { name: "loans", href: "/budget-app/loans", icon: CreditCard },
   { name: "investments", href: "/budget-app/investments", icon: Wallet },
   { name: "calculators", href: "/budget-app/calculators", icon: Calculator },
@@ -130,23 +133,27 @@ export function Sidebar({ onSearch, onShowShortcuts, className, isMobile, onClos
         </Link>
       </div>
 
-      {/* Profile Selector */}
+      {/* Profile Selector & Notifications */}
       <div className={cn(
         "border-b border-white/5 px-3 py-3",
-        isCollapsed && !isSeniorsMode && "flex justify-center"
+        isCollapsed && !isSeniorsMode && "flex flex-col items-center gap-2"
       )}>
-        <ProfileSelector
-          className={cn(
-            "w-full justify-start bg-white/5 hover:bg-white/10 text-slate-300",
-            isCollapsed && !isSeniorsMode && "w-auto px-2"
-          )}
-          compact={isCollapsed && !isSeniorsMode}
-          showSettings
-          onSettingsClick={() => {
-            router.push('/budget-app/settings?tab=profile');
-            if (isMobile && onClose) onClose();
-          }}
-        />
+        <div className="flex items-center gap-2 w-full">
+          <ProfileSelector
+            className={cn(
+              "flex-1 justify-start bg-white/5 hover:bg-white/10 text-slate-300",
+              isCollapsed && !isSeniorsMode && "w-auto px-2 flex-none"
+            )}
+            compact={isCollapsed && !isSeniorsMode}
+            showSettings
+            onSettingsClick={() => {
+              router.push('/budget-app/settings?tab=profile');
+              if (isMobile && onClose) onClose();
+            }}
+          />
+          {!isCollapsed && <NotificationCenter compact />}
+        </div>
+        {isCollapsed && !isSeniorsMode && <NotificationCenter compact />}
       </div>
 
       {/* Search Trigger */}

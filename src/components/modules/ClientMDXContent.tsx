@@ -37,7 +37,7 @@ function createRuntimeWithDevSupport() {
   const baseRuntime = { ...MDXReact, ...ReactJsxRuntime } as Record<string, unknown>;
 
   if (typeof baseRuntime.jsxDEV !== "function") {
-    const jsx = ReactJsxRuntime.jsx as typeof ReactJsxRuntime.jsx;
+    const {jsx} = ReactJsxRuntime;
     baseRuntime.jsxDEV = function jsxDEV(type: unknown, props: unknown, key?: unknown) {
       return jsx(type as any, props as any, key as any);
     };

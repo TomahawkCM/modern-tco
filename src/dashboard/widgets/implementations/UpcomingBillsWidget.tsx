@@ -8,13 +8,13 @@
 
 import { GlassCard } from "@/components/budget/ui/GlassCard";
 import { db } from "@/lib/budget-db";
-import { Subscription } from "@/types/budget";
+import type { Subscription } from "@/types/budget";
 import { useLiveQuery } from "dexie-react-hooks";
 import { Calendar, CreditCard, Plus } from "lucide-react";
 import { useFormatter, useTranslations } from "next-intl";
 import NextLink from "next/link";
 import { useMemo } from "react";
-import { WidgetConfig } from "../types";
+import type { WidgetConfig } from "../types";
 
 interface UpcomingBillsWidgetProps {
   config: WidgetConfig;

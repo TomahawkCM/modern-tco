@@ -208,7 +208,7 @@ export default function QuestionReview({ onComplete }: QuestionReviewProps) {
       // Record attempt in history
       if (reviewId) {
         await supabase.from("question_review_attempts").insert({
-          review_id: reviewId as string,
+          review_id: reviewId,
           user_id: user.id,
           question_id: currentQuestion.id,
           is_correct: isCorrect,

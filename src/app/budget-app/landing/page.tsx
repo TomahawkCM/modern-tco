@@ -7,9 +7,10 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight, BarChart3, Lock, ShieldCheck, Sparkles, Zap } from "lucide-react";
 import Link from "next/link";
 import React, { useRef } from "react";
+import { CurrencyBackground } from "./CurrencyBackground";
 
 export default function BudgetAppLandingPage() {
-  // Force hydration update - Nano Banana Theme
+  // Force hydration update - Nano Banana Theme - Rebuild Trigger
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollY } = useScroll();
 
@@ -124,8 +125,9 @@ export default function BudgetAppLandingPage() {
   return (
     <div
       ref={containerRef}
-      className="min-h-screen bg-neutral-950 text-white selection:bg-yellow-500/30"
+      className="relative min-h-screen bg-neutral-950 text-white selection:bg-yellow-500/30"
     >
+      <CurrencyBackground />
       {/* Noise Texture Overlay */}
       <div
         className="pointer-events-none fixed inset-0 z-[100] opacity-[0.05] mix-blend-overlay"

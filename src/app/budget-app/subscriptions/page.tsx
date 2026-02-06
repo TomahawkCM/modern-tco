@@ -38,6 +38,7 @@ import { SubscriptionCard } from '@/components/budget/SubscriptionCard';
 import { SubscriptionModal } from '@/components/budget/SubscriptionModal';
 import { SubscriptionCostChart } from '@/components/budget/SubscriptionCostChart';
 import { ConfirmDialog } from '@/components/budget/ConfirmDialog';
+import { CalendarExportButton } from '@/components/budget/calendar';
 import {
   Loader2,
   TrendingUp,
@@ -415,6 +416,20 @@ export default function SubscriptionsPage() {
     setShowAddModal(true);
   }
 
+  // Toggle reminder for a subscription
+  async function handleToggleReminder(subscription: Subscription) {
+    try {
+      await updateSubscription(subscription.id, {
+        ...subscription,
+        reminderEnabled: !subscription.reminderEnabled,
+        updatedAt: new Date(),
+      });
+      await loadData();
+    } catch (error) {
+      console.error('Error toggling reminder:', error);
+    }
+  }
+
   // Dismiss auto-detected subscription (mark as not a subscription)
   async function handleDismissSubscription(pattern: SubscriptionPattern) {
     try {
@@ -465,6 +480,13 @@ export default function SubscriptionsPage() {
               >
                 <RefreshCw className={`w-5 h-5 ${isRefreshing ? 'animate-spin' : ''}`} />
               </button>
+              {manualSubscriptions.length > 0 && (
+                <CalendarExportButton
+                  subscriptions={manualSubscriptions}
+                  variant="outline"
+                  size="default"
+                />
+              )}
               <button
                 onClick={() => {
                   setEditingSubscription(null);
@@ -733,6 +755,9 @@ export default function SubscriptionsPage() {
                 } : undefined}
                 onDismiss={subscription.source === 'auto-detected' ? () => {
                   handleDismissSubscription(subscription.autoDetectedPattern!);
+                } : undefined}
+                onToggleReminder={subscription.manualSubscription ? () => {
+                  handleToggleReminder(subscription.manualSubscription!);
                 } : undefined}
               />
             ))}

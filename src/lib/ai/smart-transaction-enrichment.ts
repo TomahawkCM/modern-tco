@@ -442,7 +442,7 @@ export async function enrichTransactions(
   // Step 1: Apply collective learning + rule-based normalization + recurring detection
   for (let i = 0; i < transactions.length; i++) {
     const tx = transactions[i];
-    let enrichedTx: EnrichedTransaction = { ...tx };
+    const enrichedTx: EnrichedTransaction = { ...tx };
 
     // Step 1a: Check collective learning database first (global knowledge)
     try {

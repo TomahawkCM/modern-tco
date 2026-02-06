@@ -108,7 +108,7 @@ export function LocaleSettingsPanel() {
           <select
             id="currency"
             value={preferences.currency || LOCALE_METADATA[preferences.locale].currency}
-            onChange={(e) => handleCurrencyChange(e.target.value as CurrencyCode)}
+            onChange={(e) => handleCurrencyChange(e.target.value)}
             className="w-full px-3 py-2 border rounded-md bg-background"
           >
             <option value="USD">USD - US Dollar</option>
@@ -144,7 +144,7 @@ export function LocaleSettingsPanel() {
         <h3 className="text-sm font-medium mb-3">Format Preview</h3>
         <FormatPreview
           locale={preferences.locale}
-          currency={(preferences.currency || LOCALE_METADATA[preferences.locale].currency) as CurrencyCode}
+          currency={(preferences.currency || LOCALE_METADATA[preferences.locale].currency)}
         />
       </div>
 

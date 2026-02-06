@@ -1,11 +1,11 @@
 import { GlassCard } from "@/components/budget/ui/GlassCard";
 import { db } from "@/lib/budget-db";
-import { Account, Transaction } from "@/types/budget";
+import { type Account, Transaction } from "@/types/budget";
 import { useLiveQuery } from "dexie-react-hooks";
 import { CreditCard, Landmark, TrendingUp, Wallet } from "lucide-react";
 import { useFormatter, useTranslations } from "next-intl";
 import { useMemo } from "react";
-import { WidgetConfig } from "../types";
+import type { WidgetConfig } from "../types";
 
 // Fallback if routing not set up exactly this way, usually just next/link
 import NextLink from "next/link";

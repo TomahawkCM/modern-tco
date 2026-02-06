@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-require-imports */
+ 
 import { Difficulty, QuestionCategory, TCODomain, type Question } from "@/types/exam";
 
 /**
@@ -700,8 +700,8 @@ export function getQuestionsByCategory(category: QuestionCategory): Question[] {
  * Get random selection of questions with domain weighting based on exam percentages
  */
 export function getWeightedRandomQuestions(count: number): Question[] {
-  const { TCO_DOMAIN_WEIGHTS } = require("@/types/exam");
-  const totalWeight = (Object.values(TCO_DOMAIN_WEIGHTS) as number[]).reduce<number>(
+  const { TCO_DOMAIN_WEIGHTS } = require("@/types/exam") as { TCO_DOMAIN_WEIGHTS: Record<string, number> };
+  const totalWeight = Object.values(TCO_DOMAIN_WEIGHTS).reduce<number>(
     (sum, weight) => sum + weight,
     0
   );
@@ -833,4 +833,4 @@ export function validateQuestionDatabase(): {
     warnings,
   };
 }
-/* eslint-disable @typescript-eslint/no-require-imports */
+ 

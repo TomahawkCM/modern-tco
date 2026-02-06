@@ -1,7 +1,7 @@
 'use client';
 
-import { ReactNode } from 'react';
-import { Breadcrumb, BreadcrumbItem } from './Breadcrumb';
+import type { ReactNode } from 'react';
+import { Breadcrumb, type BreadcrumbItem } from './Breadcrumb';
 import { Button } from '@/components/ui/button';
 
 export interface PageHeaderAction {

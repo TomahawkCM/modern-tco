@@ -940,7 +940,7 @@ export function getBrowserLocale(): SupportedLocale {
     
     // Try base language match (e.g. "en" -> "en-US")
     const baseLang = locale.split('-')[0];
-    const match = SUPPORTED_LOCALES.find(l => l.startsWith(baseLang + '-'));
+    const match = SUPPORTED_LOCALES.find(l => l.startsWith(`${baseLang  }-`));
     if (match) {
       return match;
     }

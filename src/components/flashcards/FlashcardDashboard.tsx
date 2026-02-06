@@ -26,7 +26,7 @@ export default function FlashcardDashboard({ moduleId }: FlashcardDashboardProps
 
   useEffect(() => {
     loadStats();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+     
   }, [user?.id]);
 
   const loadStats = async () => {

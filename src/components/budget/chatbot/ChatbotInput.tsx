@@ -12,7 +12,7 @@
 
 'use client';
 
-import React, { useRef, useEffect, KeyboardEvent } from 'react';
+import React, { useRef, useEffect, type KeyboardEvent } from 'react';
 import { Send } from 'lucide-react';
 
 interface ChatbotInputProps {

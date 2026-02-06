@@ -380,8 +380,8 @@ function savePracticeSession(session: PracticeSession): void {
 
   // Update concept stats
   session.questions.forEach(pq => {
-    const concept = pq.question.concept;
-    const moduleId = pq.question.moduleId;
+    const {concept} = pq.question;
+    const {moduleId} = pq.question;
 
     if (!stats.byConcept[concept]) {
       stats.byConcept[concept] = {

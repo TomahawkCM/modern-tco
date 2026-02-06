@@ -206,6 +206,6 @@ export function formatDateForInput(date: Date | number | string): string {
 export function parseDateFromInput(dateString: string): Date | null {
   if (!dateString) return null;
 
-  const date = new Date(dateString + 'T00:00:00');
+  const date = new Date(`${dateString  }T00:00:00`);
   return isNaN(date.getTime()) ? null : date;
 }

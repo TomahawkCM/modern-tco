@@ -1,5 +1,5 @@
 import { addDays, differenceInDays } from "date-fns";
-import { UserProfile } from "./profileService";
+import type { UserProfile } from "./profileService";
 
 export const TRIAL_DURATION_DAYS = 7;
 export const APP_PRICE = 19.99;
@@ -67,6 +67,6 @@ export function calculateSubscriptionStatus(user: UserProfile | null): Subscript
     isTrial: false,
     daysRemaining: 0,
     isExpired: true,
-    status: status,
+    status,
   };
 }

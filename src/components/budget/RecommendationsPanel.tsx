@@ -19,7 +19,7 @@ import {
   ChevronRight,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { type HealthScoreResult, type FactorType } from '@/lib/analytics/health-score';
+import type { HealthScoreResult, FactorType } from '@/lib/analytics/health-score';
 import { useSeniorsMode } from '@/hooks/useSeniorsMode';
 
 interface RecommendationsPanelProps {

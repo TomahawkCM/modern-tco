@@ -297,7 +297,7 @@ export function parseTableRowsWithDiagnostics(rawText: string, pageNumber: numbe
   // Step 1: Detect column positions from first 5 rows (header detection)
   const headerRows = lines.slice(0, Math.min(5, lines.length));
   const columnDetection = detectColumnPositions(headerRows);
-  const mapping = columnDetection.mapping;
+  const {mapping} = columnDetection;
 
   console.log('[parseTableRows] Column detection:', {
     bankFormat: mapping.bankFormat,
@@ -393,7 +393,7 @@ export function parseTableRows(rawText: string, pageNumber: number = 1): Detecte
   // Step 1: Detect column positions from first 5 rows (header detection)
   const headerRows = lines.slice(0, Math.min(5, lines.length));
   const columnDetection = detectColumnPositions(headerRows);
-  const mapping = columnDetection.mapping;
+  const {mapping} = columnDetection;
 
   console.log('[parseTableRows] Column detection:', {
     bankFormat: mapping.bankFormat,

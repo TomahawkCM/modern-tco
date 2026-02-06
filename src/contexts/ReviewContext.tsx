@@ -167,7 +167,7 @@ export function ReviewProvider({ children }: { children: React.ReactNode }) {
   }, [user, queue.length, loadQueue]);
 
   const completeSession = useCallback(async () => {
-    if (!activeSession || !activeSession.session) return;
+    if (!activeSession?.session) return;
 
     try {
       const duration = Math.floor(

@@ -66,7 +66,7 @@ export function AmortizationChart({ loan, maxMonths = 360 }: AmortizationChartPr
   const sampledData = chartData.filter((_, index) => index % samplingRate === 0 || index === chartData.length - 1);
 
   const CustomTooltip = ({ active, payload, label }: any) => {
-    if (!active || !payload || !payload.length) return null;
+    if (!active || !payload?.length) return null;
 
     return (
       <div className="bg-white p-4 rounded-lg shadow-lg border border-gray-200">

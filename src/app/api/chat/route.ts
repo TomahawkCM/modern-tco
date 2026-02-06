@@ -12,7 +12,7 @@
  * - Budget app context awareness
  */
 
-import { NextRequest, NextResponse } from 'next/server';
+import { type NextRequest, NextResponse } from 'next/server';
 import OpenAI from 'openai';
 import { isOnlineMode } from '@/config/features';
 

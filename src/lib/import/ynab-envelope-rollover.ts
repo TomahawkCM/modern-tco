@@ -235,7 +235,7 @@ function buildEnvelopeTimelines(
   const timelines: CategoryEnvelopeTimeline[] = [];
 
   for (const [categoryId, data] of categoryData) {
-    const months = data.months;
+    const {months} = data;
     const totalBudgeted = months.reduce((sum, m) => sum + m.budgeted, 0);
     const totalActivity = months.reduce((sum, m) => sum + m.activity, 0);
 

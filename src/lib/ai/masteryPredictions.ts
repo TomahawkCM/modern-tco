@@ -329,7 +329,7 @@ async function savePrediction(prediction: MasteryPrediction): Promise<MasteryPre
 
   if (error) throw error;
 
-  return camelCaseKeys(data) as MasteryPrediction;
+  return camelCaseKeys(data);
 }
 
 /**
@@ -346,7 +346,7 @@ export async function getActivePredictions(userId: string): Promise<MasteryPredi
 
     if (error) throw error;
 
-    return (data || []).map((item) => camelCaseKeys(item)) as MasteryPrediction[];
+    return (data || []).map((item) => camelCaseKeys(item));
   } catch (error) {
     console.error('Error fetching active predictions:', error);
     throw error;
@@ -376,7 +376,7 @@ export async function getDomainPrediction(
       throw error;
     }
 
-    return camelCaseKeys(data) as MasteryPrediction;
+    return camelCaseKeys(data);
   } catch (error) {
     console.error('Error fetching domain prediction:', error);
     throw error;
@@ -402,7 +402,7 @@ export async function markPredictionAchieved(
     if (fetchError) throw fetchError;
 
     // Calculate prediction error (actual - predicted)
-    const daysPrediction = (camelCaseKeys(prediction) as MasteryPrediction).predictedDaysToMastery;
+    const daysPrediction = (camelCaseKeys(prediction)).predictedDaysToMastery;
     const predictionError = actualDaysToMastery - daysPrediction;
 
     // Update prediction with actual values

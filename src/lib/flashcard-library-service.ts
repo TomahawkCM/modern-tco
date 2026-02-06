@@ -12,7 +12,7 @@
  */
 
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
-import {
+import type {
   FlashcardLibraryCard,
   FlashcardLibraryProgress,
   FlashcardLibraryWithProgress,

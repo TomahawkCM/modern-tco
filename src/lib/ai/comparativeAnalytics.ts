@@ -116,7 +116,7 @@ export async function calculateGlobalCohortBenchmarks(): Promise<CohortBenchmark
 
     if (fetchError) throw fetchError;
 
-    return camelCaseKeys(benchmark) as CohortBenchmark;
+    return camelCaseKeys(benchmark);
   } catch (error) {
     console.error('Error in calculateGlobalCohortBenchmarks:', error);
     throw error;
@@ -141,7 +141,7 @@ export async function getGlobalCohortBenchmark(): Promise<CohortBenchmark | null
       throw error;
     }
 
-    return camelCaseKeys(data) as CohortBenchmark;
+    return camelCaseKeys(data);
   } catch (error) {
     console.error('Error fetching global cohort benchmark:', error);
     throw error;
@@ -198,7 +198,7 @@ export async function getStudentCohortAssignments(
 
     if (error) throw error;
 
-    return (data || []).map((item) => camelCaseKeys(item)) as StudentCohortAssignment[];
+    return (data || []).map((item) => camelCaseKeys(item));
   } catch (error) {
     console.error('Error fetching student cohort assignments:', error);
     throw error;
@@ -226,7 +226,7 @@ export async function generateComparativeReport(userId: string): Promise<Compara
 
     // Get student's cohort assignment
     const assignments = await getStudentCohortAssignments(userId);
-    const assignment = assignments.find((a) => a.cohortBenchmarkId === cohort!.id);
+    const assignment = assignments.find((a) => a.cohortBenchmarkId === cohort.id);
 
     if (!assignment) {
       throw new Error('Student not assigned to cohort. Please try again.');
@@ -336,7 +336,7 @@ export async function generateComparativeReport(userId: string): Promise<Compara
 export async function getDomainComparisons(userId: string): Promise<DomainComparison[]> {
   try {
     const cohort = await getGlobalCohortBenchmark();
-    if (!cohort || !cohort.domainAverages) {
+    if (!cohort?.domainAverages) {
       return [];
     }
 
@@ -483,7 +483,7 @@ export async function getCachedComparativeAnalytics(
       .update({ hit_count: (data.hit_count || 0) + 1 })
       .eq('id', data.id);
 
-    return camelCaseKeys(data.data) as ComparativeReport;
+    return camelCaseKeys(data.data);
   } catch (error) {
     console.error('Error fetching cached comparative analytics:', error);
     return null;

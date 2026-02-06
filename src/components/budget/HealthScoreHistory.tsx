@@ -10,7 +10,7 @@ import { motion } from 'framer-motion';
 import dynamic from 'next/dynamic';
 import { TrendingUp, TrendingDown, Minus } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { type HistoricalScore } from '@/lib/analytics/health-score';
+import type { HistoricalScore } from '@/lib/analytics/health-score';
 import { useSeniorsMode } from '@/hooks/useSeniorsMode';
 
 interface ChartDataPoint {
@@ -91,7 +91,7 @@ const DynamicChart = dynamic(
                   backgroundColor: '#1e293b',
                   border: '1px solid rgba(255,255,255,0.1)',
                   borderRadius: '8px',
-                  fontSize: fontSize,
+                  fontSize,
                 }}
                 labelStyle={{ color: '#fff' }}
                 formatter={(value: number, name: string) => [

@@ -51,7 +51,7 @@ export default function FlashcardReview({ moduleId, deckId, totalCards = 0, onCo
 
   useEffect(() => {
     loadCards();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+     
   }, [user?.id, moduleId, deckId, sessionLimit, selectedDomain]);
 
   const loadCards = async () => {

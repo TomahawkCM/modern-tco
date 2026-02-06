@@ -451,7 +451,7 @@ export async function migrateDefaultTransactions(): Promise<{
   console.log('[SmartAccountMatcher] Found', transactions.length, 'unassigned transactions to migrate');
 
   const accounts = await db.accounts.toArray();
-  let migrated = 0;
+  const migrated = 0;
   const unmigrated = 0;
   const createdAccounts: string[] = [];
 

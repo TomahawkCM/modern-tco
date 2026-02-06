@@ -602,7 +602,7 @@ export function LANSyncProvider({ children, autoInit = true }: LANSyncProviderPr
   const syncWithDevice = useCallback(
     async (deviceId: string) => {
       const connection = connectionPoolRef.current?.getConnection(deviceId);
-      if (!connection || !connection.isConnected) {
+      if (!connection?.isConnected) {
         throw new Error('Device not connected');
       }
 

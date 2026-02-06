@@ -10,6 +10,7 @@
 import type { Subscription } from '@/types/budget';
 import { differenceInDays, addDays, format } from 'date-fns';
 import { getAllSubscriptions } from './budget-db';
+import { sendBillReminderEmail } from './email/email-reminder-service';
 
 export interface UpcomingReminder {
   subscription: Subscription;
@@ -175,11 +176,24 @@ export async function checkAndTriggerReminders(): Promise<number> {
 
   for (const reminder of reminders) {
     const key = `${reminder.subscription.id}_${reminder.daysUntilBilling}`;
-    
+
     // Skip if already shown today
     if (alreadyShown.has(key)) continue;
 
+    // Show browser notification
     showSubscriptionNotification(reminder.subscription, reminder.daysUntilBilling);
+
+    // Also send email notification (fire and forget - don't block on email)
+    sendBillReminderEmail(reminder.subscription, reminder.daysUntilBilling)
+      .then(result => {
+        if (result.success) {
+          console.warn(`Email reminder sent for ${reminder.subscription.name}`);
+        }
+      })
+      .catch(err => {
+        console.error(`Failed to send email for ${reminder.subscription.name}:`, err);
+      });
+
     shown.push(key);
   }
 
@@ -293,22 +307,22 @@ export async function initializeReminders(): Promise<void> {
   // Request permission if not already granted
   if (isNotificationSupported() && Notification.permission === 'default') {
     // Don't auto-request, let the UI handle this
-    console.log('Notification permission not yet granted. User can enable in settings.');
+    console.warn('Notification permission not yet granted. User can enable in settings.');
   }
 
   // Check for reminders on load
   if (Notification.permission === 'granted') {
     const shown = await checkAndTriggerReminders();
     if (shown > 0) {
-      console.log(`Showed ${shown} subscription reminder(s)`);
+      console.warn(`Showed ${shown} subscription reminder(s)`);
     }
   }
 
   // Set up periodic check (every hour)
   if (typeof window !== 'undefined') {
-    setInterval(async () => {
+    setInterval(() => {
       if (Notification.permission === 'granted') {
-        await checkAndTriggerReminders();
+        void checkAndTriggerReminders();
       }
     }, 60 * 60 * 1000); // 1 hour
   }

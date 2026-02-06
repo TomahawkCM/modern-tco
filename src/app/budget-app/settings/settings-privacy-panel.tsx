@@ -6,7 +6,7 @@
  * Part of Phase 4: Privacy & Security
  */
 
-import { type PrivacySettings } from '@/lib/budget-privacy-settings';
+import type { PrivacySettings } from '@/lib/budget-privacy-settings';
 import {
   Shield,
   Brain,

@@ -1,4 +1,4 @@
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
 import { AdminGuard } from '@/components/auth/AdminGuard';
 import { BulkImporter } from '@/components/admin/questions/BulkImporter';
 import { Button } from '@/components/ui/button';

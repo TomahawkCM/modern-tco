@@ -33,6 +33,7 @@ import {
   Sparkles,
   MoreVertical,
   Bell,
+  BellOff,
   Link as LinkIcon,
 } from 'lucide-react';
 import { useState } from 'react';
@@ -48,6 +49,7 @@ interface SubscriptionCardProps {
   onCancel?: () => void;
   onClaim?: () => void; // Convert auto-detected to manual
   onDismiss?: () => void; // Dismiss auto-detected (not a subscription)
+  onToggleReminder?: () => void; // Toggle reminder on/off
 }
 
 export function SubscriptionCard({
@@ -61,6 +63,7 @@ export function SubscriptionCard({
   onCancel,
   onClaim,
   onDismiss,
+  onToggleReminder,
 }: SubscriptionCardProps) {
   const t = useTranslations('subscriptionCard');
   const [showMenu, setShowMenu] = useState(false);
@@ -420,16 +423,33 @@ export function SubscriptionCard({
           </div>
         )}
 
-        {/* Reminder indicator for manual subscriptions */}
-        {manualSubscription?.reminderEnabled && (
+        {/* Reminder toggle for manual subscriptions */}
+        {manualSubscription && (
           <div className="flex items-center justify-between text-sm">
             <span className="text-muted-foreground flex items-center gap-1">
-              <Bell className="w-3 h-3" />
+              {manualSubscription.reminderEnabled ? (
+                <Bell className="w-3 h-3" />
+              ) : (
+                <BellOff className="w-3 h-3" />
+              )}
               {t('details.reminder')}:
             </span>
-            <span className="font-medium text-foreground">
-              {t('details.daysBefore', { count: manualSubscription.reminderDaysBefore })}
-            </span>
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                onToggleReminder?.();
+              }}
+              className={`font-medium px-2 py-0.5 rounded transition-colors ${
+                manualSubscription.reminderEnabled
+                  ? 'text-teal-600 hover:bg-teal-500/10'
+                  : 'text-muted-foreground hover:bg-muted'
+              }`}
+              title={manualSubscription.reminderEnabled ? 'Disable reminder' : 'Enable reminder'}
+            >
+              {manualSubscription.reminderEnabled
+                ? t('details.daysBefore', { count: manualSubscription.reminderDaysBefore })
+                : 'Off'}
+            </button>
           </div>
         )}
 

@@ -745,7 +745,7 @@ export class SyncEngine {
 
     for (const field of dateFields) {
       if (entity[field] && typeof entity[field] === 'number') {
-        entity[field] = new Date(entity[field] as number);
+        entity[field] = new Date(entity[field]);
       }
     }
 

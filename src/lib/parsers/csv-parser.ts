@@ -1801,10 +1801,16 @@ export function detectBankLegacy(headers: string[]): string | null {
  * Parse CSV file content with improved handling
  */
 export function parseCSVContent(content: string, skipRows: number = 0): CSVRow[] {
-  const lines = content.trim().split('\n');
+  // Strip UTF-8 BOM if present
+  const cleanContent = content.replace(/^\uFEFF/, '');
+  const lines = cleanContent.trim().split('\n');
 
   // Skip header rows (e.g., BMO has 3 rows before actual headers)
-  const startLine = skipRows;
+  // Also skip any blank lines after the offset to find the actual header
+  let startLine = skipRows;
+  while (startLine < lines.length && !lines[startLine].trim()) {
+    startLine++;
+  }
 
   if (lines.length < startLine + 2) return [];
 
@@ -1846,7 +1852,7 @@ function parseCSVLine(line: string): string[] {
   for (let i = 0; i < line.length; i++) {
     const char = line[i];
 
-    if (char === "'" || char === '"') {
+    if (char === '"') {
       inQuotes = !inQuotes;
     } else if (char === ',' && !inQuotes) {
       result.push(current);
@@ -1905,12 +1911,12 @@ function findColumn(row: CSVRow, targetColumn: string, columnType: 'date' | 'des
 export function convertToTransactions(
   rows: CSVRow[],
   bankConfig: BankConfig,
-  accountId: string
+  _accountId: string
 ): ParsedTransaction[] {
   const transactions: ParsedTransaction[] = [];
 
-  console.log('[convertToTransactions] Starting with', rows.length, 'rows');
-  console.log('[convertToTransactions] Bank config:', {
+  console.warn('[convertToTransactions] Starting with', rows.length, 'rows');
+  console.warn('[convertToTransactions] Bank config:', {
     name: bankConfig.name,
     dateColumn: bankConfig.dateColumn,
     descriptionColumn: bankConfig.descriptionColumn,
@@ -1921,8 +1927,8 @@ export function convertToTransactions(
 
   // Log sample row for debugging
   if (rows.length > 0) {
-    console.log('[convertToTransactions] First row keys:', Object.keys(rows[0]));
-    console.log('[convertToTransactions] First row sample:', JSON.stringify(rows[0]).substring(0, 500));
+    console.warn('[convertToTransactions] First row keys:', Object.keys(rows[0]));
+    console.warn('[convertToTransactions] First row sample:', JSON.stringify(rows[0]).substring(0, 500));
   }
 
   // Detect if this is a split-column format based on the amountColumn name
@@ -1980,10 +1986,10 @@ export function convertToTransactions(
         
         // Handle accounting notation (parentheses = negative)
         if (cleanedPrimary.includes('(') && cleanedPrimary.includes(')')) {
-          cleanedPrimary = '-' + cleanedPrimary.replace(/[()]/g, '');
+          cleanedPrimary = `-${  cleanedPrimary.replace(/[()]/g, '')}`;
         }
         if (cleanedComplement.includes('(') && cleanedComplement.includes(')')) {
-          cleanedComplement = '-' + cleanedComplement.replace(/[()]/g, '');
+          cleanedComplement = `-${  cleanedComplement.replace(/[()]/g, '')}`;
         }
         
         const primaryVal = parseFloat(cleanedPrimary) || 0;
@@ -2018,7 +2024,7 @@ export function convertToTransactions(
         // Parse amount - handle parentheses as negative (accounting format)
         let cleanedAmount = amountStr.replace(/[$,\s]/g, '');
         if (cleanedAmount.includes('(') && cleanedAmount.includes(')')) {
-          cleanedAmount = '-' + cleanedAmount.replace(/[()]/g, '');
+          cleanedAmount = `-${  cleanedAmount.replace(/[()]/g, '')}`;
         }
 
         const parsedAmount = parseFloat(cleanedAmount) * (bankConfig.amountMultiplier || 1);
@@ -2042,7 +2048,7 @@ export function convertToTransactions(
     }
   }
 
-  console.log('[convertToTransactions] Completed:', {
+  console.warn('[convertToTransactions] Completed:', {
     total: rows.length,
     parsed: transactions.length,
     skippedNoDate,
@@ -2083,7 +2089,7 @@ function findColumnByName(row: CSVRow, columnName: string): string | null {
  * Uses basic pattern matching on headers and data
  */
 function simpleColumnDetection(headers: string[], sampleRows: CSVRow[]): any {
-  console.log('[SimpleDetection] Starting with headers:', headers);
+  console.warn('[SimpleDetection] Starting with headers:', headers);
   
   let dateColumn: string | null = null;
   let descriptionColumn: string | null = null;
@@ -2103,7 +2109,7 @@ function simpleColumnDetection(headers: string[], sampleRows: CSVRow[]): any {
       h.includes('date') && !h.includes('update')
     )) {
       dateColumn = header;
-      console.log('[SimpleDetection] Found date column:', header);
+      console.warn('[SimpleDetection] Found date column:', header);
     }
     
     // Description columns
@@ -2113,7 +2119,7 @@ function simpleColumnDetection(headers: string[], sampleRows: CSVRow[]): any {
       h === 'narrative' || h === 'particulars'
     )) {
       descriptionColumn = header;
-      console.log('[SimpleDetection] Found description column:', header);
+      console.warn('[SimpleDetection] Found description column:', header);
     }
     
     // Amount columns (exclude MCC/code columns)
@@ -2122,7 +2128,7 @@ function simpleColumnDetection(headers: string[], sampleRows: CSVRow[]): any {
       h === 'sum' || h === 'total'
     ) && !h.includes('mcc') && !h.includes('code')) {
       amountColumn = header;
-      console.log('[SimpleDetection] Found amount column:', header);
+      console.warn('[SimpleDetection] Found amount column:', header);
     }
     
     // Debit/Credit columns
@@ -2143,8 +2149,10 @@ function simpleColumnDetection(headers: string[], sampleRows: CSVRow[]): any {
       dateFormat = 'yyyy-MM-dd';
     } else if (/^\d{2}-\d{2}-\d{4}$/.test(sampleDate)) {
       dateFormat = 'MM-dd-yyyy';
+    } else if (/^\d{8}$/.test(sampleDate)) {
+      dateFormat = 'yyyyMMdd';
     }
-    console.log('[SimpleDetection] Detected date format:', dateFormat, 'from sample:', sampleDate);
+    console.warn('[SimpleDetection] Detected date format:', dateFormat, 'from sample:', sampleDate);
   }
   
   // If we found at least date + amount (or debit/credit), return a mapping
@@ -2164,12 +2172,12 @@ function simpleColumnDetection(headers: string[], sampleRows: CSVRow[]): any {
       amountFormat: (debitColumn || creditColumn) && !amountColumn ? 'split' : 'single',
       dateFormat,
     };
-    console.log('[SimpleDetection] Returning mapping:', mapping);
+    console.warn('[SimpleDetection] Returning mapping:', mapping);
     return mapping;
   }
   
   // Last resort: try to detect by analyzing data values
-  console.log('[SimpleDetection] Header matching failed, trying data analysis');
+  console.warn('[SimpleDetection] Header matching failed, trying data analysis');
   
   for (const header of headers) {
     if (sampleRows.length === 0) break;
@@ -2179,7 +2187,7 @@ function simpleColumnDetection(headers: string[], sampleRows: CSVRow[]): any {
     // Check if it looks like a date
     if (!dateColumn && /\d{1,4}[-/.]\d{1,2}[-/.]\d{1,4}/.test(sampleValue)) {
       dateColumn = header;
-      console.log('[SimpleDetection] Found date column by data:', header, sampleValue);
+      console.warn('[SimpleDetection] Found date column by data:', header, sampleValue);
     }
     
     // Check if it looks like an amount (exclude MCC codes and reference numbers)
@@ -2201,7 +2209,7 @@ function simpleColumnDetection(headers: string[], sampleRows: CSVRow[]): any {
       if (/^[$€£¥]?[\d,.-]+[$€£¥]?$/.test(cleanedValue) &&
           !isCodeColumn && !isPureCode && hasMoneyIndicator) {
         amountColumn = header;
-        console.log('[SimpleDetection] Found amount column by data:', header, sampleValue);
+        console.warn('[SimpleDetection] Found amount column by data:', header, sampleValue);
       }
     }
     
@@ -2210,7 +2218,7 @@ function simpleColumnDetection(headers: string[], sampleRows: CSVRow[]): any {
       // Make sure it's not already assigned as date/amount
       if (header !== dateColumn && header !== amountColumn) {
         descriptionColumn = header;
-        console.log('[SimpleDetection] Found description column by data:', header, sampleValue);
+        console.warn('[SimpleDetection] Found description column by data:', header, sampleValue);
       }
     }
   }
@@ -2231,7 +2239,7 @@ function simpleColumnDetection(headers: string[], sampleRows: CSVRow[]): any {
     };
   }
   
-  console.log('[SimpleDetection] Could not detect required columns');
+  console.warn('[SimpleDetection] Could not detect required columns');
   return null;
 }
 
@@ -2246,20 +2254,20 @@ function simpleColumnDetection(headers: string[], sampleRows: CSVRow[]): any {
  */
 export async function convertToTransactionsUniversal(
   rows: CSVRow[],
-  accountId: string
-): Promise<{ transactions: ParsedTransaction[]; mapping: any; confidence: number }> {
+  _accountId: string
+): Promise<{ transactions: ParsedTransaction[]; mapping: unknown; confidence: number }> {
   if (rows.length === 0) {
     return { transactions: [], mapping: null, confidence: 0 };
   }
 
   const headers = Object.keys(rows[0]).filter(h => h.trim()); // Remove empty headers
-  console.log('[UniversalConverter] Headers:', headers);
+  console.warn('[UniversalConverter] Headers:', headers);
   
   // Use simple column detection (fast, client-side, no AI needed)
   // This works for 95%+ of bank formats worldwide
-  let mapping = simpleColumnDetection(headers, rows.slice(0, 10));
+  const mapping = simpleColumnDetection(headers, rows.slice(0, 10));
   
-  console.log('[UniversalConverter] Simple detection result:', mapping);
+  console.warn('[UniversalConverter] Simple detection result:', mapping);
   
   if (!mapping) {
     console.error('[UniversalConverter] Could not detect columns');
@@ -2268,7 +2276,7 @@ export async function convertToTransactionsUniversal(
   
   const transactions: ParsedTransaction[] = [];
 
-  console.log('[UniversalConverter] Using mapping:', {
+  console.warn('[UniversalConverter] Using mapping:', {
     date: mapping.dateColumn,
     description: mapping.descriptionColumn,
     amount: mapping.amountColumn,

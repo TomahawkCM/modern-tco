@@ -153,8 +153,8 @@ export function parseAccessUrl(accessUrl: string): {
 } {
   try {
     const url = new URL(accessUrl);
-    const username = url.username;
-    const password = url.password;
+    const {username} = url;
+    const {password} = url;
 
     // Remove credentials from URL
     url.username = '';

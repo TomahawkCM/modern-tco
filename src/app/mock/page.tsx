@@ -73,7 +73,7 @@ function MockExamContent() {
   useEffect(() => {
     const v = (search?.get('variant') || '').toUpperCase();
     if (v === 'A' || v === 'B' || v === 'C') setVariant(v);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+     
   }, []);
   const reportedCompletion = useRef(false);
 

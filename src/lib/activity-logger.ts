@@ -68,7 +68,7 @@ export async function getActivityLog(
   options?: ActivityLogFilter
 ): Promise<ActivityLogEntry[]> {
   try {
-    let collection = db.activityLog.orderBy('timestamp').reverse();
+    const collection = db.activityLog.orderBy('timestamp').reverse();
 
     // Apply filters
     const entries = await collection.toArray();

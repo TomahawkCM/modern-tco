@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-require-imports */
+ 
 import { type Question, TCODomain, Difficulty, QuestionCategory } from "@/types/exam";
 
 // Temporary fallback questions for testing

@@ -216,7 +216,7 @@ function progressReducer(state: ProgressState, action: ProgressAction): Progress
       };
 
     case "UPDATE_SESSION_STATS": {
-      const domain = action.payload.domain;
+      const {domain} = action.payload;
       const questionsCount = Math.max(0, Math.round(action.payload.questionsCount));
       const score = Math.max(0, Math.min(100, action.payload.score));
       const timeSpent = Math.max(0, action.payload.timeSpent);

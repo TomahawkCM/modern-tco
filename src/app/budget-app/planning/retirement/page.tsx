@@ -193,7 +193,7 @@ export default function RetirementPage() {
       breakdown.push({
         year: new Date().getFullYear() + year,
         age: age + year,
-        balance: balance,
+        balance,
       });
 
       // Add monthly contributions for the year

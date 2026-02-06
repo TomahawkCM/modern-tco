@@ -17,9 +17,9 @@
  * Privacy: Only sends merchant token + country to OpenAI, never raw PII
  */
 
-import { NextRequest, NextResponse } from 'next/server';
+import { type NextRequest, NextResponse } from 'next/server';
 import OpenAI from 'openai';
-import { createClient, SupabaseClient } from '@supabase/supabase-js';
+import { createClient, type SupabaseClient } from '@supabase/supabase-js';
 
 // Types
 interface MerchantClassification {

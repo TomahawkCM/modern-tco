@@ -26,7 +26,7 @@ export function usePersistentState<T>(key: string, initial: T) {
       if (raw != null) setState(JSON.parse(raw) as T);
       else setState(initial);
     } catch {}
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+     
   }, [key]);
 
   return [state, setState] as const;

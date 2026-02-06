@@ -243,7 +243,7 @@ interface CategoryRolloverTracker {
 function analyzeCategoryRollover(
   tracker: CategoryRolloverTracker
 ): CategoryRolloverInfo {
-  const balances = tracker.balances;
+  const {balances} = tracker;
 
   // Calculate metrics
   const positiveBalances = balances.filter((b) => b > 0);

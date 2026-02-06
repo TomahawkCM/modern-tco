@@ -99,7 +99,7 @@ async function renderPdfPageToCanvas(
   // Render PDF page to canvas
   await page.render({
     canvasContext: context,
-    viewport: viewport,
+    viewport,
   }).promise;
 
   return canvas;
@@ -120,7 +120,7 @@ function preprocessImage(canvas: HTMLCanvasElement): HTMLCanvasElement {
   if (!ctx) return canvas;
 
   const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-  const data = imageData.data;
+  const {data} = imageData;
 
   // Convert to grayscale and apply adaptive threshold
   for (let i = 0; i < data.length; i += 4) {
@@ -152,9 +152,9 @@ function preprocessImageAdaptive(canvas: HTMLCanvasElement): HTMLCanvasElement {
   if (!ctx) return canvas;
 
   const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-  const data = imageData.data;
-  const width = canvas.width;
-  const height = canvas.height;
+  const {data} = imageData;
+  const {width} = canvas;
+  const {height} = canvas;
 
   // First pass: convert to grayscale
   const gray: number[] = [];

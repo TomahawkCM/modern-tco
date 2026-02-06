@@ -22,7 +22,7 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import { WidgetConfig } from "../types";
+import type { WidgetConfig } from "../types";
 
 interface MonthlyTrendsWidgetProps {
   config: WidgetConfig;

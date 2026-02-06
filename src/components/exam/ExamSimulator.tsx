@@ -64,7 +64,7 @@ export default function ExamSimulator() {
     } catch (error) {
       // ignore
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+     
   }, [storageKey]);
 
   // Set question start timer on index change
@@ -91,7 +91,7 @@ export default function ExamSimulator() {
     } catch (error) {
       // ignore storage errors
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+     
   }, [index, currentSession?.id]);
 
   const question = useMemo(() => currentSession?.questions?.[index], [currentSession?.questions, index]);

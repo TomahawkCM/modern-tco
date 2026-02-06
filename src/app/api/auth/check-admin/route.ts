@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from "next/server";
+import { type NextRequest, NextResponse } from "next/server";
 import { createClient } from "@/utils/supabase/server";
 
 /**
@@ -15,7 +15,7 @@ export async function GET(request: NextRequest) {
     const supabase = await createClient();
     const { data: { user }, error: authError } = await supabase.auth.getUser();
 
-    if (authError || !user || !user.email) {
+    if (authError || !user?.email) {
       return NextResponse.json({ isAdmin: false }, { status: 200 });
     }
 

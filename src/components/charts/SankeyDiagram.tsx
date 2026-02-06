@@ -7,7 +7,7 @@
 
 import { useEffect, useRef, useState, useMemo, useCallback } from 'react';
 import * as d3 from 'd3';
-import { sankey, sankeyLinkHorizontal, SankeyGraph, SankeyNode as D3SankeyNode, SankeyLink as D3SankeyLink } from 'd3-sankey';
+import { sankey, sankeyLinkHorizontal, SankeyGraph, type SankeyNode as D3SankeyNode, type SankeyLink as D3SankeyLink } from 'd3-sankey';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { useSeniorsMode } from '@/hooks/useSeniorsMode';
@@ -224,7 +224,7 @@ export function SankeyDiagram({
     [hoveredNodeId, hoveredLinkIndex, isLinkConnected]
   );
 
-  if (!sankeyLayout || !sankeyLayout.nodes.length) {
+  if (!sankeyLayout?.nodes.length) {
     return (
       <div
         className={cn(

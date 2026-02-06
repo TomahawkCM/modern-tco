@@ -172,7 +172,7 @@ export function SeniorsModeProvider({ children }: { children: ReactNode }) {
     );
 
     // CSS classes on body
-    const body = document.body;
+    const {body} = document;
     body.classList.toggle("seniors-mode", settings.enabled);
     body.classList.toggle("seniors-simplified", settings.simplifiedMode);
     body.classList.toggle("seniors-high-contrast", settings.highContrast);

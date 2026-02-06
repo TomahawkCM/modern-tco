@@ -14,7 +14,7 @@ import { useFormatter, useTranslations } from "next-intl";
 import NextLink from "next/link";
 import { useMemo } from "react";
 import { Cell, Pie, PieChart as RechartsPieChart, ResponsiveContainer, Tooltip } from "recharts";
-import { WidgetConfig } from "../types";
+import type { WidgetConfig } from "../types";
 
 interface SpendingByCategoryWidgetProps {
   config: WidgetConfig;

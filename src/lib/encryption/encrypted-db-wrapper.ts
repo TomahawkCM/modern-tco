@@ -88,7 +88,7 @@ function wrapQuery(query: any): any {
         prop === 'each'
       ) {
         return async function (...args: any[]) {
-          const result = await (original as any).call(target, ...args);
+          const result = await (original).call(target, ...args);
           return decryptResult(result);
         };
       }

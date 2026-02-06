@@ -4,7 +4,7 @@ import { useLiveQuery } from "dexie-react-hooks";
 import { ArrowRight, Receipt } from "lucide-react";
 import { useFormatter, useTranslations } from "next-intl";
 import NextLink from "next/link";
-import { WidgetConfig } from "../types";
+import type { WidgetConfig } from "../types";
 
 interface RecentTransactionsWidgetProps {
   config: WidgetConfig;

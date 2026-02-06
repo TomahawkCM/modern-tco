@@ -55,7 +55,7 @@ const DEFAULT_CONFIG: Required<LSTMModelConfig> = {
 };
 
 // Model cache to avoid retraining
-let modelCache: Map<string, tf.LayersModel> = new Map();
+const modelCache: Map<string, tf.LayersModel> = new Map();
 
 /**
  * Prepare time-series data for LSTM training

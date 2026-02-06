@@ -1,4 +1,4 @@
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
 import AdminQuestionsPage from './questions-client';
 
 export const metadata: Metadata = {

@@ -30,7 +30,7 @@ const browserClient = getBrowserClient();
 
 if (browserClient) {
   // Use the singleton browser client
-  supabaseClient = browserClient as SupabaseClient<Database>;
+  supabaseClient = browserClient;
 } else if (supabaseUrl && supabaseAnonKey) {
   // Server-side: create a new client (safe since each request is isolated)
   supabaseClient = createSupabaseClient<Database>(

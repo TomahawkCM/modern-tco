@@ -219,7 +219,7 @@ export async function encrypt(
   }
 
   // Create a copy as ArrayBuffer to avoid SharedArrayBuffer type issues
-  const dataBuffer = new Uint8Array(dataBytes).buffer as ArrayBuffer;
+  const dataBuffer = new Uint8Array(dataBytes).buffer;
 
   const encrypted = await crypto.subtle.encrypt(
     {
@@ -474,8 +474,8 @@ export async function verifyIntegrity(
     );
 
     // Create copies as ArrayBuffer to avoid SharedArrayBuffer type issues
-    const sigBuffer = new Uint8Array(signature).buffer as ArrayBuffer;
-    const dataBuffer = new Uint8Array(data).buffer as ArrayBuffer;
+    const sigBuffer = new Uint8Array(signature).buffer;
+    const dataBuffer = new Uint8Array(data).buffer;
 
     return await crypto.subtle.verify(
       'HMAC',

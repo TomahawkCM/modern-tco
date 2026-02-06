@@ -191,7 +191,7 @@ export default function ImportPage() {
       if (tx?.matchedTransactionId && !matchedTransactions.has(expandedReviewIndex)) {
         getMatchedTransaction(tx.matchedTransactionId).then(matched => {
           if (matched) {
-            setMatchedTransactions(prev => new Map(prev).set(expandedReviewIndex!, matched));
+            setMatchedTransactions(prev => new Map(prev).set(expandedReviewIndex, matched));
           }
         });
       }
@@ -256,47 +256,52 @@ export default function ImportPage() {
     console.log('[ImportPage] AI-powered bank detection starting...');
     setProcessingStage('Analyzing bank format with AI...');
 
-    // Try different skipRows levels (0, 1, 2, 3) to find valid headers
-    for (let skipRows = 0; skipRows <= 3; skipRows++) {
+    // Try different skipRows levels (0-5) to find valid headers
+    // BMO has 3 metadata rows + optional blank line before headers
+    for (let skipRows = 0; skipRows <= 5; skipRows++) {
       try {
         const rows = parseCSVContent(text, skipRows);
         if (rows.length > 0) {
           const headers = Object.keys(rows[0]);
 
-          // Extract transaction samples for AI analysis
-          const samples = extractTransactionSamples(rows, headers[1] || headers[0]);
+          // Only attempt detection if we have multiple columns (skip metadata rows)
+          if (headers.length < 2) continue;
 
-          // Call server-side API for AI-powered detection (avoids CORS!)
-          const response = await fetch('/api/bank/detect', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              headers,
-              transactionSamples: samples,
-              useAI: true,
-              learnFormat: true, // Enable collective learning
-            }),
-          });
+          // Try API-based detection first
+          try {
+            const samples = extractTransactionSamples(rows, headers[1] || headers[0]);
 
-          if (!response.ok) {
-            throw new Error(`Bank detection API error: ${response.status}`);
+            const response = await fetch('/api/bank/detect', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                headers,
+                transactionSamples: samples,
+                useAI: true,
+                learnFormat: true,
+              }),
+            });
+
+            if (!response.ok) {
+              throw new Error(`Bank detection API error: ${response.status}`);
+            }
+
+            const result = await response.json();
+
+            console.log('[ImportPage] AI detection result:', result);
+
+            if (result.success && result.bankKey) {
+              const confidenceLabel = result.confidence >= 0.7 ? '✓' : '⚠️';
+              setProcessingStage(
+                `${confidenceLabel} Detected ${result.bankName} (${(result.confidence * 100).toFixed(0)}% confidence)`
+              );
+              return result.bankKey;
+            }
+          } catch (apiError) {
+            console.warn('[ImportPage] API detection failed at skipRows', skipRows, apiError);
           }
 
-          const result = await response.json();
-
-          console.log('[ImportPage] AI detection result:', result);
-
-          // Accept any detection that returned a bankKey (even low confidence)
-          // Low confidence just means we detected a format but aren't certain
-          if (result.success && result.bankKey) {
-            const confidenceLabel = result.confidence >= 0.7 ? '✓' : '⚠️';
-            setProcessingStage(
-              `${confidenceLabel} Detected ${result.bankName} (${(result.confidence * 100).toFixed(0)}% confidence)`
-            );
-            return result.bankKey;
-          }
-
-          // If AI detection failed completely, try fallback header detection
+          // Always try header-based fallback (even if API failed)
           const headerDetected = detectBank(headers);
           if (headerDetected) {
             console.log('[ImportPage] Fallback header detection:', headerDetected);
@@ -337,11 +342,11 @@ export default function ImportPage() {
       // Read file content
       console.log('[ImportPage] Reading file content...');
       setProcessingStage('Reading file content...');
-      const text = await file.text();
+      const text = (await file.text()).replace(/^\uFEFF/, '');
       console.log('[ImportPage] File content length:', text.length);
 
       let transactions: ParsedTransaction[] = [];
-      let resolvedAccountId = accountId; // May be set by smart matching
+      const resolvedAccountId = accountId; // May be set by smart matching
 
       // ========================================
       // OFX/QFX Processing
@@ -1259,7 +1264,7 @@ export default function ImportPage() {
     console.log('[ImportPage] Validation proceed with', transactionsToRemove.length, 'removals');
 
     // Get the transactions that were validated
-    let transactions = [...pendingValidatedTransactions];
+    const transactions = [...pendingValidatedTransactions];
 
     // Remove flagged transactions (sort indices descending to avoid index shift issues)
     if (transactionsToRemove.length > 0) {
@@ -1439,7 +1444,7 @@ export default function ImportPage() {
             // Handle accounting notation (100.00) as negative, preserve existing negative signs
             let cleanedAmount = amountStr.replace(/[$,\s]/g, '');
             if (cleanedAmount.includes('(') && cleanedAmount.includes(')')) {
-              cleanedAmount = '-' + cleanedAmount.replace(/[()]/g, '');
+              cleanedAmount = `-${  cleanedAmount.replace(/[()]/g, '')}`;
             }
             amount = parseFloat(cleanedAmount) || 0;
           } else if (mapping.bankFormat === 'debit-credit' && mapping.debitColumn !== undefined && mapping.creditColumn !== undefined) {
@@ -1449,10 +1454,10 @@ export default function ImportPage() {
             let cleanedDebit = debitStr.replace(/[$,\s]/g, '');
             let cleanedCredit = creditStr.replace(/[$,\s]/g, '');
             if (cleanedDebit.includes('(') && cleanedDebit.includes(')')) {
-              cleanedDebit = '-' + cleanedDebit.replace(/[()]/g, '');
+              cleanedDebit = `-${  cleanedDebit.replace(/[()]/g, '')}`;
             }
             if (cleanedCredit.includes('(') && cleanedCredit.includes(')')) {
-              cleanedCredit = '-' + cleanedCredit.replace(/[()]/g, '');
+              cleanedCredit = `-${  cleanedCredit.replace(/[()]/g, '')}`;
             }
             const debit = Math.abs(parseFloat(cleanedDebit) || 0);
             const credit = Math.abs(parseFloat(cleanedCredit) || 0);

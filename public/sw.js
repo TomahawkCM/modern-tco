@@ -272,36 +272,276 @@ async function syncTransactions() {
   console.log('[Service Worker] Syncing transactions...');
 }
 
-// Push notifications (future enhancement)
+// ==========================================
+// PUSH NOTIFICATIONS
+// ==========================================
+
+/**
+ * IndexedDB helper for storing notifications received in SW
+ */
+const NOTIFICATION_DB_NAME = 'BudgetAppNotifications';
+const NOTIFICATION_STORE = 'pushNotifications';
+const NOTIFICATION_DB_VERSION = 1;
+
+/**
+ * Open the notification IndexedDB
+ * @returns {Promise<IDBDatabase>}
+ */
+function openNotificationDB() {
+  return new Promise((resolve, reject) => {
+    const request = indexedDB.open(NOTIFICATION_DB_NAME, NOTIFICATION_DB_VERSION);
+
+    request.onerror = () => reject(request.error);
+    request.onsuccess = () => resolve(request.result);
+
+    request.onupgradeneeded = (event) => {
+      const db = event.target.result;
+      if (!db.objectStoreNames.contains(NOTIFICATION_STORE)) {
+        const store = db.createObjectStore(NOTIFICATION_STORE, { keyPath: 'id' });
+        store.createIndex('status', 'status', { unique: false });
+        store.createIndex('createdAt', 'createdAt', { unique: false });
+      }
+    };
+  });
+}
+
+/**
+ * Store a notification in IndexedDB for in-app notification center
+ * @param {Object} notification - The notification data
+ */
+async function storeNotificationInDB(notification) {
+  try {
+    const db = await openNotificationDB();
+    const tx = db.transaction(NOTIFICATION_STORE, 'readwrite');
+    const store = tx.objectStore(NOTIFICATION_STORE);
+
+    const record = {
+      id: `push_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
+      type: notification.type || 'bill_reminder',
+      title: notification.title,
+      body: notification.body,
+      status: 'unread',
+      priority: notification.priority || 'medium',
+      sourceType: notification.sourceType,
+      sourceId: notification.sourceId,
+      actionUrl: notification.actionUrl || '/budget-app/subscriptions',
+      createdAt: new Date(),
+      receivedVia: 'push',
+    };
+
+    store.add(record);
+
+    return new Promise((resolve, reject) => {
+      tx.oncomplete = () => {
+        db.close();
+        resolve(record.id);
+      };
+      tx.onerror = () => {
+        db.close();
+        reject(tx.error);
+      };
+    });
+  } catch (error) {
+    console.error('[Service Worker] Failed to store notification:', error);
+  }
+}
+
+/**
+ * Notify active clients to refresh notifications
+ */
+async function notifyClientsToRefresh() {
+  const allClients = await clients.matchAll({ includeUncontrolled: true });
+  allClients.forEach(client => {
+    client.postMessage({
+      type: 'NOTIFICATION_RECEIVED',
+      timestamp: Date.now(),
+    });
+  });
+}
+
+// Push notification handler
 self.addEventListener('push', (event) => {
   console.log('[Service Worker] Push received:', event);
-  
-  const data = event.data ? event.data.json() : {};
+
+  let data = {};
+
+  try {
+    data = event.data ? event.data.json() : {};
+  } catch (e) {
+    // If not JSON, try as text
+    data = {
+      title: 'Budget App',
+      body: event.data ? event.data.text() : 'You have a new notification',
+    };
+  }
+
   const title = data.title || 'Budget App';
   const options = {
     body: data.body || 'You have a new notification',
     icon: '/icons/budget-app-192.png',
     badge: '/icons/budget-app-192.png',
     vibrate: [200, 100, 200],
-    tag: data.tag || 'budget-notification',
-    requireInteraction: false,
+    tag: data.tag || `budget-notification-${Date.now()}`,
+    requireInteraction: data.requireInteraction || false,
+    data: {
+      url: data.actionUrl || '/budget-app/subscriptions',
+      type: data.type || 'bill_reminder',
+      sourceType: data.sourceType,
+      sourceId: data.sourceId,
+      notificationId: data.notificationId,
+    },
+    actions: [
+      {
+        action: 'view',
+        title: 'View',
+      },
+      {
+        action: 'dismiss',
+        title: 'Dismiss',
+      },
+    ],
   };
 
+  // Add amount if present (for bill reminders)
+  if (data.amount) {
+    options.body = `${options.body}\nAmount: ${data.currency || '$'}${data.amount}`;
+  }
+
   event.waitUntil(
-    self.registration.showNotification(title, options)
+    Promise.all([
+      self.registration.showNotification(title, options),
+      storeNotificationInDB(data),
+      notifyClientsToRefresh(),
+    ])
   );
 });
 
-// Notification click handler
+// Notification click handler with action support
 self.addEventListener('notificationclick', (event) => {
-  console.log('[Service Worker] Notification clicked:', event);
-  
-  event.notification.close();
-  
+  console.log('[Service Worker] Notification clicked:', event.action);
+
+  const notification = event.notification;
+  const data = notification.data || {};
+
+  notification.close();
+
+  // Handle different actions
+  if (event.action === 'dismiss') {
+    // Just close the notification, mark as dismissed in DB if we have an ID
+    if (data.notificationId) {
+      event.waitUntil(markNotificationAsDismissed(data.notificationId));
+    }
+    return;
+  }
+
+  // Default action or 'view' action - open the app
+  const urlToOpen = data.url || '/budget-app';
+
   event.waitUntil(
-    clients.openWindow(event.notification.data?.url || '/budget-app')
+    clients.matchAll({ type: 'window', includeUncontrolled: true })
+      .then((windowClients) => {
+        // Check if there's already a window/tab open
+        for (const client of windowClients) {
+          if (client.url.includes('/budget-app') && 'focus' in client) {
+            // Navigate existing window to the target URL
+            client.postMessage({
+              type: 'NAVIGATE_TO',
+              url: urlToOpen,
+            });
+            return client.focus();
+          }
+        }
+
+        // No existing window, open a new one
+        return clients.openWindow(urlToOpen);
+      })
   );
 });
+
+/**
+ * Mark a notification as dismissed in IndexedDB
+ * @param {string} notificationId
+ */
+async function markNotificationAsDismissed(notificationId) {
+  try {
+    const db = await openNotificationDB();
+    const tx = db.transaction(NOTIFICATION_STORE, 'readwrite');
+    const store = tx.objectStore(NOTIFICATION_STORE);
+
+    const record = await new Promise((resolve, reject) => {
+      const request = store.get(notificationId);
+      request.onsuccess = () => resolve(request.result);
+      request.onerror = () => reject(request.error);
+    });
+
+    if (record) {
+      record.status = 'dismissed';
+      store.put(record);
+    }
+
+    return new Promise((resolve, reject) => {
+      tx.oncomplete = () => {
+        db.close();
+        resolve();
+      };
+      tx.onerror = () => {
+        db.close();
+        reject(tx.error);
+      };
+    });
+  } catch (error) {
+    console.error('[Service Worker] Failed to mark notification as dismissed:', error);
+  }
+}
+
+// Notification close handler (when user dismisses without clicking)
+self.addEventListener('notificationclose', (event) => {
+  console.log('[Service Worker] Notification closed:', event);
+
+  const data = event.notification.data || {};
+
+  // Mark as read (seen but not clicked)
+  if (data.notificationId) {
+    event.waitUntil(markNotificationAsRead(data.notificationId));
+  }
+});
+
+/**
+ * Mark a notification as read in IndexedDB
+ * @param {string} notificationId
+ */
+async function markNotificationAsRead(notificationId) {
+  try {
+    const db = await openNotificationDB();
+    const tx = db.transaction(NOTIFICATION_STORE, 'readwrite');
+    const store = tx.objectStore(NOTIFICATION_STORE);
+
+    const record = await new Promise((resolve, reject) => {
+      const request = store.get(notificationId);
+      request.onsuccess = () => resolve(request.result);
+      request.onerror = () => reject(request.error);
+    });
+
+    if (record && record.status === 'unread') {
+      record.status = 'read';
+      record.readAt = new Date();
+      store.put(record);
+    }
+
+    return new Promise((resolve, reject) => {
+      tx.oncomplete = () => {
+        db.close();
+        resolve();
+      };
+      tx.onerror = () => {
+        db.close();
+        reject(tx.error);
+      };
+    });
+  } catch (error) {
+    console.error('[Service Worker] Failed to mark notification as read:', error);
+  }
+}
 
 // Message handler for manual cache control
 self.addEventListener('message', (event) => {

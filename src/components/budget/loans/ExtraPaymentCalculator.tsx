@@ -35,7 +35,7 @@ export function ExtraPaymentCalculator({ loan }: ExtraPaymentCalculatorProps) {
     oneTimeAmount > 0 ? [{ month: oneTimeMonth, amount: oneTimeAmount }] : []
   );
 
-  const monthsSaved = scenario.monthsSaved;
+  const {monthsSaved} = scenario;
   const yearsSaved = Math.floor(monthsSaved / 12);
   const remainingMonths = monthsSaved % 12;
 

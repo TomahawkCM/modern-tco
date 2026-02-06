@@ -13,7 +13,7 @@ import {
   type PrivacySettings,
 } from "@/lib/budget-privacy-settings";
 import type { Account, Category } from "@/types/budget";
-import { CreditCard, Edit, Plus, Shield, Tag, Trash2, Eye, GripVertical, Archive, RotateCcw, Database, Download, Upload, Globe, Wrench, Users } from "lucide-react";
+import { CreditCard, Edit, Plus, Shield, Tag, Trash2, Eye, GripVertical, Archive, RotateCcw, Database, Download, Upload, Globe, Wrench, Users, Bell } from "lucide-react";
 import { Suspense, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { PrivacyControlsPanel } from "./settings-privacy-panel";
@@ -21,6 +21,7 @@ import { AccessibilitySettingsPanel } from "@/components/budget/AccessibilitySet
 import { LocaleSettingsPanel } from "@/components/budget/settings/LocaleSettingsPanel";
 import { DeveloperTools } from "@/components/budget/settings/DeveloperTools";
 import { ProfileSettingsPanel } from "@/components/budget/settings/ProfileSettingsPanel";
+import { NotificationSettingsPanel } from "@/components/budget/settings/NotificationSettingsPanel";
 import { IconPicker, getIconComponent } from "@/components/budget/IconPicker";
 import { ExportDialog } from "@/components/budget/ExportDialog";
 import { ImportDialog } from "@/components/budget/ImportDialog";
@@ -42,7 +43,7 @@ import {
 } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 
-type TabType = "accounts" | "categories" | "privacy" | "accessibility" | "data" | "locale" | "developer" | "profile";
+type TabType = "accounts" | "categories" | "privacy" | "accessibility" | "data" | "locale" | "developer" | "profile" | "notifications";
 
 export default function SettingsPage() {
   return (
@@ -272,112 +273,148 @@ function SettingsContent() {
         <p className="mt-2 text-slate-400">Manage your accounts and categories</p>
       </div>
 
-      {/* Tabs */}
-      <div className="border-b border-white/10">
-        <div className="flex gap-8">
+      {/* Mobile Tab Selector */}
+      <div className="md:hidden">
+        <label htmlFor="settings-tab-select" className="sr-only">Select settings section</label>
+        <select
+          id="settings-tab-select"
+          value={activeTab}
+          onChange={(e) => setActiveTab(e.target.value as TabType)}
+          className="w-full rounded-lg border border-white/10 bg-white/5 px-4 py-3 text-white focus:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-500/20"
+        >
+          <option value="accounts" className="bg-slate-900">Accounts ({accounts.length})</option>
+          <option value="categories" className="bg-slate-900">Categories ({categories.length})</option>
+          <option value="notifications" className="bg-slate-900">Notifications</option>
+          <option value="privacy" className="bg-slate-900">Privacy & AI</option>
+          <option value="accessibility" className="bg-slate-900">Accessibility</option>
+          <option value="data" className="bg-slate-900">Data</option>
+          <option value="locale" className="bg-slate-900">Locale & Formatting</option>
+          <option value="profile" className="bg-slate-900">Profiles</option>
+          {isDev && <option value="developer" className="bg-slate-900">Developer Tools</option>}
+        </select>
+      </div>
+
+      {/* Desktop Tabs - Scrollable */}
+      <div className="hidden md:block border-b border-white/10 overflow-x-auto">
+        <div className="flex gap-1 lg:gap-4 min-w-max pb-px">
           <button
             onClick={() => setActiveTab("accounts")}
-            className={`border-b-2 px-2 pb-4 font-medium transition-colors ${
+            className={`border-b-2 px-3 py-3 text-sm font-medium transition-colors whitespace-nowrap ${
               activeTab === "accounts"
                 ? "border-teal-500 text-teal-400"
                 : "border-transparent text-slate-400 hover:text-slate-200"
             }`}
           >
             <div className="flex items-center gap-2">
-              <CreditCard className="h-5 w-5" />
-              Accounts ({accounts.length})
+              <CreditCard className="h-4 w-4" />
+              <span>Accounts</span>
+              <span className="text-xs opacity-70">({accounts.length})</span>
             </div>
           </button>
           <button
             onClick={() => setActiveTab("categories")}
-            className={`border-b-2 px-2 pb-4 font-medium transition-colors ${
+            className={`border-b-2 px-3 py-3 text-sm font-medium transition-colors whitespace-nowrap ${
               activeTab === "categories"
                 ? "border-teal-500 text-teal-400"
                 : "border-transparent text-slate-400 hover:text-slate-200"
             }`}
           >
             <div className="flex items-center gap-2">
-              <Tag className="h-5 w-5" />
-              Categories ({categories.length})
+              <Tag className="h-4 w-4" />
+              <span>Categories</span>
+              <span className="text-xs opacity-70">({categories.length})</span>
+            </div>
+          </button>
+          <button
+            onClick={() => setActiveTab("notifications")}
+            className={`border-b-2 px-3 py-3 text-sm font-medium transition-colors whitespace-nowrap ${
+              activeTab === "notifications"
+                ? "border-teal-500 text-teal-400"
+                : "border-transparent text-slate-400 hover:text-slate-200"
+            }`}
+          >
+            <div className="flex items-center gap-2">
+              <Bell className="h-4 w-4" />
+              <span>Notifications</span>
             </div>
           </button>
           <button
             onClick={() => setActiveTab("privacy")}
-            className={`border-b-2 px-2 pb-4 font-medium transition-colors ${
+            className={`border-b-2 px-3 py-3 text-sm font-medium transition-colors whitespace-nowrap ${
               activeTab === "privacy"
                 ? "border-teal-500 text-teal-400"
                 : "border-transparent text-slate-400 hover:text-slate-200"
             }`}
           >
             <div className="flex items-center gap-2">
-              <Shield className="h-5 w-5" />
-              Privacy & AI
+              <Shield className="h-4 w-4" />
+              <span>Privacy</span>
             </div>
           </button>
           <button
             onClick={() => setActiveTab("accessibility")}
-            className={`border-b-2 px-2 pb-4 font-medium transition-colors ${
+            className={`border-b-2 px-3 py-3 text-sm font-medium transition-colors whitespace-nowrap ${
               activeTab === "accessibility"
                 ? "border-teal-500 text-teal-400"
                 : "border-transparent text-slate-400 hover:text-slate-200"
             }`}
           >
             <div className="flex items-center gap-2">
-              <Eye className="h-5 w-5" />
-              Accessibility
+              <Eye className="h-4 w-4" />
+              <span>Accessibility</span>
             </div>
           </button>
           <button
             onClick={() => setActiveTab("data")}
-            className={`border-b-2 px-2 pb-4 font-medium transition-colors ${
+            className={`border-b-2 px-3 py-3 text-sm font-medium transition-colors whitespace-nowrap ${
               activeTab === "data"
                 ? "border-teal-500 text-teal-400"
                 : "border-transparent text-slate-400 hover:text-slate-200"
             }`}
           >
             <div className="flex items-center gap-2">
-              <Database className="h-5 w-5" />
-              Data
+              <Database className="h-4 w-4" />
+              <span>Data</span>
             </div>
           </button>
           <button
             onClick={() => setActiveTab("locale")}
-            className={`border-b-2 px-2 pb-4 font-medium transition-colors ${
+            className={`border-b-2 px-3 py-3 text-sm font-medium transition-colors whitespace-nowrap ${
               activeTab === "locale"
                 ? "border-teal-500 text-teal-400"
                 : "border-transparent text-slate-400 hover:text-slate-200"
             }`}
           >
             <div className="flex items-center gap-2">
-              <Globe className="h-5 w-5" />
-              Locale & Formatting
+              <Globe className="h-4 w-4" />
+              <span>Locale</span>
             </div>
           </button>
           <button
             onClick={() => setActiveTab("profile")}
-            className={`border-b-2 px-2 pb-4 font-medium transition-colors ${
+            className={`border-b-2 px-3 py-3 text-sm font-medium transition-colors whitespace-nowrap ${
               activeTab === "profile"
                 ? "border-teal-500 text-teal-400"
                 : "border-transparent text-slate-400 hover:text-slate-200"
             }`}
           >
             <div className="flex items-center gap-2">
-              <Users className="h-5 w-5" />
-              Profiles
+              <Users className="h-4 w-4" />
+              <span>Profiles</span>
             </div>
           </button>
           {isDev && (
             <button
               onClick={() => setActiveTab("developer")}
-              className={`border-b-2 px-2 pb-4 font-medium transition-colors ${
+              className={`border-b-2 px-3 py-3 text-sm font-medium transition-colors whitespace-nowrap ${
                 activeTab === "developer"
                   ? "border-yellow-500 text-yellow-400"
                   : "border-transparent text-slate-400 hover:text-slate-200"
               }`}
             >
               <div className="flex items-center gap-2">
-                <Wrench className="h-5 w-5" />
-                Developer Tools
+                <Wrench className="h-4 w-4" />
+                <span>Dev Tools</span>
               </div>
             </button>
           )}
@@ -671,6 +708,9 @@ function SettingsContent() {
       {/* Profile Tab */}
       {activeTab === "profile" && <ProfileSettingsPanel />}
 
+      {/* Notifications Tab */}
+      {activeTab === "notifications" && <NotificationSettingsPanel />}
+
       {/* Developer Tools Tab (Dev Mode Only) */}
       {isDev && activeTab === "developer" && <DeveloperTools />}
 
@@ -852,15 +892,15 @@ function AccountModal({
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-      <div className="mx-4 w-full max-w-md rounded-lg bg-white shadow-xl">
-        <div className="border-b border-gray-200 p-6">
-          <h2 className="text-xl font-semibold text-gray-900">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
+      <div className="w-full max-w-md max-h-[90vh] overflow-y-auto rounded-lg bg-white shadow-xl">
+        <div className="sticky top-0 border-b border-gray-200 bg-white p-4 sm:p-6">
+          <h2 className="text-lg sm:text-xl font-semibold text-gray-900">
             {account ? "Edit Account" : "Add Account"}
           </h2>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-4 p-6">
+        <form onSubmit={handleSubmit} className="space-y-4 p-4 sm:p-6">
           <div>
             <label className="mb-2 block text-sm font-medium text-gray-700">Account Name</label>
             <input
@@ -868,7 +908,7 @@ function AccountModal({
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="e.g., BMO Checking"
-              className="w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-transparent focus:ring-2 focus:ring-teal-500"
+              className="w-full rounded-lg border border-gray-300 px-4 py-3 text-base focus:border-transparent focus:ring-2 focus:ring-teal-500"
               required
             />
           </div>
@@ -880,7 +920,7 @@ function AccountModal({
               value={institution}
               onChange={(e) => setInstitution(e.target.value)}
               placeholder="e.g., BMO, Home Trust"
-              className="w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-transparent focus:ring-2 focus:ring-teal-500"
+              className="w-full rounded-lg border border-gray-300 px-4 py-3 text-base focus:border-transparent focus:ring-2 focus:ring-teal-500"
               required
             />
           </div>
@@ -890,7 +930,7 @@ function AccountModal({
             <select
               value={type}
               onChange={(e) => setType(e.target.value as "checking" | "savings" | "credit")}
-              className="w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-transparent focus:ring-2 focus:ring-teal-500"
+              className="w-full rounded-lg border border-gray-300 px-4 py-3 text-base focus:border-transparent focus:ring-2 focus:ring-teal-500"
             >
               <option value="checking">Checking</option>
               <option value="savings">Savings</option>
@@ -898,7 +938,7 @@ function AccountModal({
             </select>
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label className="mb-2 block text-sm font-medium text-gray-700">Balance</label>
               <div className="relative">
@@ -909,7 +949,7 @@ function AccountModal({
                   onChange={(e) => setBalance(e.target.value)}
                   step="0.01"
                   inputMode="decimal"
-                  className="w-full rounded-lg border border-gray-300 py-2 pl-8 pr-4 focus:border-transparent focus:ring-2 focus:ring-teal-500"
+                  className="w-full rounded-lg border border-gray-300 py-3 pl-8 pr-4 text-base focus:border-transparent focus:ring-2 focus:ring-teal-500"
                   required
                 />
               </div>
@@ -920,7 +960,7 @@ function AccountModal({
               <select
                 value={currency}
                 onChange={(e) => setCurrency(e.target.value)}
-                className="w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-transparent focus:ring-2 focus:ring-teal-500"
+                className="w-full rounded-lg border border-gray-300 px-4 py-3 text-base focus:border-transparent focus:ring-2 focus:ring-teal-500"
               >
                 <option value="CAD">CAD</option>
                 <option value="USD">USD</option>
@@ -928,17 +968,17 @@ function AccountModal({
             </div>
           </div>
 
-          <div className="flex gap-4 pt-4">
+          <div className="flex flex-col-reverse sm:flex-row gap-3 pt-4">
             <button
               type="button"
               onClick={onClose}
-              className="flex-1 rounded-lg border border-gray-300 px-4 py-2 text-gray-700 transition-colors hover:bg-gray-50"
+              className="flex-1 rounded-lg border border-gray-300 px-4 py-3 text-base font-medium text-gray-700 transition-colors hover:bg-gray-50"
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="flex-1 rounded-lg bg-teal-600 px-4 py-2 text-white transition-colors hover:bg-teal-700"
+              className="flex-1 rounded-lg bg-teal-600 px-4 py-3 text-base font-medium text-white transition-colors hover:bg-teal-700"
             >
               {account ? "Update" : "Add"} Account
             </button>
@@ -1006,21 +1046,21 @@ function CategoryModal({
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
-      <div className="w-full max-w-lg rounded-lg bg-white shadow-xl">
-        <div className="border-b-2 border-gray-200 p-6">
-          <h2 className="text-2xl font-bold text-gray-900">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-2 sm:p-4">
+      <div className="w-full max-w-lg max-h-[95vh] overflow-y-auto rounded-lg bg-white shadow-xl">
+        <div className="sticky top-0 border-b-2 border-gray-200 bg-white p-4 sm:p-6 z-10">
+          <h2 className="text-xl sm:text-2xl font-bold text-gray-900">
             {category ? "Edit Category" : "Add Category"}
           </h2>
-          <p className="text-base text-gray-600 mt-1">
+          <p className="text-sm sm:text-base text-gray-600 mt-1">
             {category ? "Update category details" : "Create a new category for organizing transactions"}
           </p>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-6 p-6">
+        <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6 p-4 sm:p-6">
           {/* Category Name */}
           <div>
-            <label className="mb-2 block text-base font-semibold text-gray-700">Category Name</label>
+            <label className="mb-2 block text-sm sm:text-base font-semibold text-gray-700">Category Name</label>
             <input
               type="text"
               value={name}
@@ -1033,7 +1073,7 @@ function CategoryModal({
 
           {/* Type Selection */}
           <div>
-            <label className="mb-2 block text-base font-semibold text-gray-700">Type</label>
+            <label className="mb-2 block text-sm sm:text-base font-semibold text-gray-700">Type</label>
             <select
               value={type}
               onChange={(e) => setType(e.target.value as "expense" | "income")}
@@ -1046,54 +1086,54 @@ function CategoryModal({
 
           {/* Icon Picker */}
           <div>
-            <label className="mb-2 block text-base font-semibold text-gray-700">Icon</label>
+            <label className="mb-2 block text-sm sm:text-base font-semibold text-gray-700">Icon</label>
             <button
               type="button"
               onClick={() => setShowIconPicker(true)}
-              className="flex items-center gap-4 w-full rounded-lg border-2 border-gray-300 px-4 py-3 min-h-[48px] text-base hover:border-gray-400 focus:border-teal-500 focus:ring-2 focus:ring-teal-500/20 transition-all"
+              className="flex items-center gap-3 sm:gap-4 w-full rounded-lg border-2 border-gray-300 px-3 sm:px-4 py-3 min-h-[48px] text-base hover:border-gray-400 focus:border-teal-500 focus:ring-2 focus:ring-teal-500/20 transition-all"
             >
-              <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-gray-100">
+              <div className="flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-lg bg-gray-100">
                 {(() => {
                   const IconComponent = getIconComponent(icon);
-                  return <IconComponent className="h-7 w-7 text-gray-700" />;
+                  return <IconComponent className="h-5 w-5 sm:h-7 sm:w-7 text-gray-700" />;
                 })()}
               </div>
               <div className="flex-1 text-left">
-                <p className="font-medium text-gray-900">{icon}</p>
-                <p className="text-sm text-gray-600">Click to change icon</p>
+                <p className="font-medium text-gray-900 text-sm sm:text-base">{icon}</p>
+                <p className="text-xs sm:text-sm text-gray-600">Tap to change icon</p>
               </div>
             </button>
           </div>
 
           {/* Color Picker with Presets */}
           <div>
-            <label className="mb-2 block text-base font-semibold text-gray-700">Color</label>
+            <label className="mb-2 block text-sm sm:text-base font-semibold text-gray-700">Color</label>
             <div className="space-y-3">
               {/* Custom Color Input */}
-              <div className="flex items-center gap-4">
+              <div className="flex items-center gap-3 sm:gap-4">
                 <input
                   type="color"
                   value={color}
                   onChange={(e) => setColor(e.target.value)}
-                  className="h-14 w-20 cursor-pointer rounded-lg border-2 border-gray-300 shadow-sm hover:shadow-md transition-shadow"
+                  className="h-12 w-16 sm:h-14 sm:w-20 cursor-pointer rounded-lg border-2 border-gray-300 shadow-sm hover:shadow-md transition-shadow"
                 />
                 <div className="flex-1">
-                  <p className="text-base font-medium text-gray-900">{color.toUpperCase()}</p>
-                  <p className="text-sm text-gray-600">Click to choose a custom color</p>
+                  <p className="text-sm sm:text-base font-medium text-gray-900">{color.toUpperCase()}</p>
+                  <p className="text-xs sm:text-sm text-gray-600">Tap to choose a custom color</p>
                 </div>
               </div>
 
-              {/* Preset Colors */}
+              {/* Preset Colors - Responsive grid */}
               <div>
-                <p className="text-sm font-medium text-gray-700 mb-2">Quick Presets:</p>
-                <div className="grid grid-cols-7 gap-2">
+                <p className="text-xs sm:text-sm font-medium text-gray-700 mb-2">Quick Presets:</p>
+                <div className="grid grid-cols-7 gap-1.5 sm:gap-2">
                   {presetColors.map((presetColor) => (
                     <button
                       key={presetColor}
                       type="button"
                       onClick={() => setColor(presetColor)}
-                      className={`h-12 w-12 rounded-lg transition-all shadow-sm hover:shadow-md hover:scale-110 ${
-                        color === presetColor ? 'ring-4 ring-gray-400 ring-offset-2' : ''
+                      className={`aspect-square w-full max-w-[44px] rounded-lg transition-all shadow-sm active:scale-95 ${
+                        color === presetColor ? 'ring-2 sm:ring-4 ring-gray-400 ring-offset-1 sm:ring-offset-2' : ''
                       }`}
                       style={{ backgroundColor: presetColor }}
                       title={presetColor}
@@ -1106,7 +1146,7 @@ function CategoryModal({
 
           {/* Subcategories */}
           <div>
-            <label className="mb-2 block text-base font-semibold text-gray-700">
+            <label className="mb-2 block text-sm sm:text-base font-semibold text-gray-700">
               Subcategories (Optional)
             </label>
             <input
@@ -1116,25 +1156,25 @@ function CategoryModal({
               placeholder="e.g., Movies, Games, Events"
               className="w-full rounded-lg border-2 border-gray-300 px-4 py-3 min-h-[48px] text-base focus:border-teal-500 focus:ring-2 focus:ring-teal-500/20 transition-all"
             />
-            <div className="mt-2 bg-teal-50 border-l-4 border-teal-400 p-3 rounded">
-              <p className="text-sm text-gray-800">
-                <span className="font-semibold">Tip:</span> Separate subcategories with commas. For example: "Movies, Streaming, Concerts"
+            <div className="mt-2 bg-teal-50 border-l-4 border-teal-400 p-2 sm:p-3 rounded">
+              <p className="text-xs sm:text-sm text-gray-800">
+                <span className="font-semibold">Tip:</span> Separate with commas, e.g. "Movies, Streaming, Concerts"
               </p>
             </div>
           </div>
 
-          {/* Action Buttons */}
-          <div className="flex gap-4 pt-4">
+          {/* Action Buttons - Stack on mobile */}
+          <div className="flex flex-col-reverse sm:flex-row gap-3 pt-4">
             <button
               type="button"
               onClick={onClose}
-              className="flex-1 rounded-lg border-2 border-gray-300 px-6 py-3 min-h-[48px] text-base font-semibold text-gray-700 transition-all hover:bg-gray-100 hover:border-gray-400 shadow-sm hover:shadow-md"
+              className="flex-1 rounded-lg border-2 border-gray-300 px-4 sm:px-6 py-3 min-h-[48px] text-base font-semibold text-gray-700 transition-all hover:bg-gray-100 active:bg-gray-200 shadow-sm"
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="flex-1 rounded-lg bg-teal-500 px-6 py-3 min-h-[48px] text-base font-semibold text-white transition-all hover:bg-teal-600 shadow-md hover:shadow-lg"
+              className="flex-1 rounded-lg bg-teal-500 px-4 sm:px-6 py-3 min-h-[48px] text-base font-semibold text-white transition-all hover:bg-teal-600 active:bg-teal-700 shadow-md"
             >
               {category ? "Update Category" : "Add Category"}
             </button>

@@ -228,7 +228,7 @@ export async function loadLocaleFromSupabase(
   localPreferences: LocalePreferences
 ): Promise<LocalePreferences | null> {
   const supabasePrefs = await fetchUserPreferences();
-  if (!supabasePrefs || !supabasePrefs.locale_config) {
+  if (!supabasePrefs?.locale_config) {
     return null;
   }
 
@@ -265,7 +265,7 @@ export async function loadWidgetConfigFromSupabase(
   localConfig: DashboardConfig | null
 ): Promise<DashboardConfig | null> {
   const supabasePrefs = await fetchUserPreferences();
-  if (!supabasePrefs || !supabasePrefs.widget_config) {
+  if (!supabasePrefs?.widget_config) {
     return null;
   }
 

@@ -19,9 +19,10 @@ import { Sidebar } from "@/components/budget/layout/Sidebar";
 import { CommandPalette } from "@/components/budget/CommandPalette";
 import { WelcomeBanner } from "@/components/budget/onboarding";
 import { Button } from "@/components/ui/button";
-import { Sheet, SheetContent } from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetTitle, SheetDescription } from "@/components/ui/sheet";
 import { ThemeProvider } from "@/components/ui/theme-provider";
 import { ChatbotProvider } from "@/contexts/ChatbotContext";
+import { NotificationProvider } from "@/contexts/NotificationContext";
 import { ProfileProvider } from "@/contexts/ProfileContext";
 import { SeniorsModeProvider } from "@/contexts/SeniorsModeContext";
 import { useKeyboardShortcuts } from "@/hooks/useKeyboardShortcuts";
@@ -76,9 +77,11 @@ export default function BudgetAppLayout({ children }: { children: React.ReactNod
         <SeniorsModeProvider>
           <ProfileProvider>
             <ChatbotProvider>
-              <ClientI18nProvider>
-                <ToastProvider>{children}</ToastProvider>
-              </ClientI18nProvider>
+              <NotificationProvider>
+                <ClientI18nProvider>
+                  <ToastProvider>{children}</ToastProvider>
+                </ClientI18nProvider>
+              </NotificationProvider>
             </ChatbotProvider>
           </ProfileProvider>
         </SeniorsModeProvider>
@@ -91,8 +94,9 @@ export default function BudgetAppLayout({ children }: { children: React.ReactNod
       <SeniorsModeProvider>
         <ProfileProvider>
           <ChatbotProvider>
-            <ClientI18nProvider>
-              <BudgetAccessibilityInitializer />
+            <NotificationProvider>
+              <ClientI18nProvider>
+                <BudgetAccessibilityInitializer />
 
               {/* Skip Link - WCAG 2.4.1 Bypass Blocks */}
               <a
@@ -132,6 +136,10 @@ export default function BudgetAppLayout({ children }: { children: React.ReactNod
                     side="left"
                     className="w-72 border-r-0 bg-transparent p-0 shadow-2xl"
                   >
+                    <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
+                    <SheetDescription className="sr-only">
+                      Main navigation menu for the Budget App
+                    </SheetDescription>
                     <Sidebar
                       isMobile
                       onClose={() => setMobileMenuOpen(false)}
@@ -205,7 +213,8 @@ export default function BudgetAppLayout({ children }: { children: React.ReactNod
                   onOpenChange={setCommandPaletteOpen}
                 />
               </div>
-            </ClientI18nProvider>
+              </ClientI18nProvider>
+            </NotificationProvider>
           </ChatbotProvider>
         </ProfileProvider>
       </SeniorsModeProvider>

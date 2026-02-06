@@ -2,12 +2,58 @@
 
 /**
  * Export/Backup Page
- * Export data to JSON/CSV and restore from backups
+ * Export data to JSON/CSV/Excel and restore from backups
  */
 
-import { useState } from 'react';
-import { Download, Upload, Database, FileText, CheckCircle, AlertCircle } from 'lucide-react';
+import { useState, useCallback } from 'react';
+import {
+  Download,
+  Upload,
+  Database,
+  FileText,
+  CheckCircle,
+  AlertCircle,
+  FileSpreadsheet,
+  Calendar,
+  Settings2,
+  ChevronDown,
+  ChevronUp,
+  Loader2,
+} from 'lucide-react';
 import { db } from '@/lib/budget-db';
+import {
+  downloadExcelExport,
+  type ExcelExportOptions,
+  type ExportProgress,
+} from '@/lib/export/excel/workbook-generator';
+
+type DateRangeOption = ExcelExportOptions['dateRange'];
+
+const DATE_RANGE_OPTIONS: { value: DateRangeOption; label: string }[] = [
+  { value: 'all', label: 'All Time' },
+  { value: 'ytd', label: 'Year to Date' },
+  { value: 'last12months', label: 'Last 12 Months' },
+  { value: 'last6months', label: 'Last 6 Months' },
+  { value: 'last3months', label: 'Last 3 Months' },
+  { value: 'custom', label: 'Custom Range' },
+];
+
+const SHEET_OPTIONS = [
+  { key: 'includeDashboard', label: 'Dashboard', description: 'Executive summary with key metrics' },
+  { key: 'includeTransactions', label: 'Transactions', description: 'Complete transaction history' },
+  { key: 'includeMonthlySummary', label: 'Monthly Summary', description: 'Month-by-month overview' },
+  { key: 'includeCategoryAnalysis', label: 'Category Analysis', description: 'Spending by category' },
+  { key: 'includeAccounts', label: 'Accounts', description: 'All accounts with balances' },
+  { key: 'includeBudgets', label: 'Budgets', description: 'Budget vs actual comparison' },
+  { key: 'includeSubscriptions', label: 'Subscriptions', description: 'Recurring costs tracking' },
+  { key: 'includeLoans', label: 'Loans', description: 'Debt with amortization schedules' },
+  { key: 'includeInvestments', label: 'Investments', description: 'Portfolio holdings' },
+  { key: 'includeNetWorth', label: 'Net Worth', description: 'Assets vs liabilities' },
+  { key: 'includeGoals', label: 'Goals', description: 'Savings goals progress' },
+  { key: 'includeDataDictionary', label: 'Data Dictionary', description: 'Field explanations' },
+] as const;
+
+type SheetOptionKey = (typeof SHEET_OPTIONS)[number]['key'];
 
 export default function ExportPage() {
   const [isExporting, setIsExporting] = useState(false);
@@ -15,6 +61,86 @@ export default function ExportPage() {
   const [exportStatus, setExportStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [importStatus, setImportStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [statusMessage, setStatusMessage] = useState('');
+
+  // Excel export options
+  const [showExcelOptions, setShowExcelOptions] = useState(false);
+  const [dateRange, setDateRange] = useState<DateRangeOption>('last12months');
+  const [customStartDate, setCustomStartDate] = useState('');
+  const [customEndDate, setCustomEndDate] = useState('');
+  const [sheetOptions, setSheetOptions] = useState<Record<SheetOptionKey, boolean>>({
+    includeDashboard: true,
+    includeTransactions: true,
+    includeMonthlySummary: true,
+    includeCategoryAnalysis: true,
+    includeAccounts: true,
+    includeBudgets: true,
+    includeSubscriptions: true,
+    includeLoans: true,
+    includeInvestments: true,
+    includeNetWorth: true,
+    includeGoals: true,
+    includeDataDictionary: true,
+  });
+  const [exportProgress, setExportProgress] = useState<ExportProgress | null>(null);
+
+  const toggleSheet = useCallback((key: SheetOptionKey) => {
+    setSheetOptions(prev => ({ ...prev, [key]: !prev[key] }));
+  }, []);
+
+  const selectAllSheets = useCallback(() => {
+    setSheetOptions(prev => {
+      const newOptions = { ...prev };
+      SHEET_OPTIONS.forEach(opt => {
+        newOptions[opt.key] = true;
+      });
+      return newOptions;
+    });
+  }, []);
+
+  const deselectAllSheets = useCallback(() => {
+    setSheetOptions(prev => {
+      const newOptions = { ...prev };
+      SHEET_OPTIONS.forEach(opt => {
+        newOptions[opt.key] = false;
+      });
+      return newOptions;
+    });
+  }, []);
+
+  async function exportToExcel() {
+    setIsExporting(true);
+    setExportStatus('idle');
+    setExportProgress(null);
+
+    try {
+      const options: ExcelExportOptions = {
+        dateRange,
+        startDate: dateRange === 'custom' && customStartDate ? new Date(customStartDate) : undefined,
+        endDate: dateRange === 'custom' && customEndDate ? new Date(customEndDate) : undefined,
+        ...sheetOptions,
+        includeCharts: true,
+        includeFormulas: true,
+      };
+
+      const result = await downloadExcelExport(options, (progress) => {
+        setExportProgress(progress);
+      });
+
+      if (result.success) {
+        setExportStatus('success');
+        setStatusMessage(`Excel workbook exported successfully! (${result.sheetsIncluded.length} sheets, ${(result.fileSize / 1024).toFixed(1)} KB)`);
+      } else {
+        throw new Error(result.error || 'Export failed');
+      }
+    } catch (error) {
+      console.error('Excel export error:', error);
+      setExportStatus('error');
+      setStatusMessage(error instanceof Error ? error.message : 'Failed to export Excel workbook');
+    } finally {
+      setIsExporting(false);
+      setExportProgress(null);
+    }
+  }
 
   async function exportToJSON() {
     setIsExporting(true);
@@ -80,7 +206,7 @@ export default function ExportPage() {
 
     try {
       const allTxs = await db.transactions.toArray();
-      
+
       // Filter out parent transactions that have been split
       // Export only visible transactions (children + non-split) to match what users see
       const transactions = allTxs.filter(tx => !tx.isSplit);
@@ -222,6 +348,8 @@ export default function ExportPage() {
     }
   }
 
+  const selectedSheetCount = Object.values(sheetOptions).filter(Boolean).length;
+
   return (
     <div className="max-w-4xl mx-auto space-y-6">
       {/* Header */}
@@ -272,6 +400,168 @@ export default function ExportPage() {
         <h2 className="text-xl font-semibold text-gray-900 mb-4">Export Data</h2>
 
         <div className="space-y-4">
+          {/* Excel Export - Featured */}
+          <div className="border-2 border-teal-500 rounded-lg overflow-hidden">
+            <div className="flex items-start gap-4 p-4 bg-gradient-to-r from-teal-50 to-emerald-50">
+              <div className="bg-teal-100 rounded-full p-4">
+                <FileSpreadsheet className="w-6 h-6 text-teal-600" />
+              </div>
+              <div className="flex-1">
+                <div className="flex items-center gap-2">
+                  <h3 className="font-semibold text-gray-900">Financial Summary Workbook (Excel)</h3>
+                  <span className="px-2 py-0.5 bg-teal-500 text-white text-xs rounded-full font-medium">Recommended</span>
+                </div>
+                <p className="text-sm text-gray-600 mt-2">
+                  Comprehensive Excel workbook with 12 sheets: Dashboard, Transactions, Monthly Summary,
+                  Category Analysis, Accounts, Budgets, Subscriptions, Loans, Investments, Net Worth, Goals, and Data Dictionary.
+                  Includes professional formatting, formulas, and charts.
+                </p>
+              </div>
+              <div className="flex flex-col gap-2">
+                <button
+                  onClick={exportToExcel}
+                  disabled={isExporting || selectedSheetCount === 0}
+                  className="px-4 py-2 bg-teal-600 text-white rounded-lg hover:bg-teal-700 disabled:bg-gray-400 transition-colors flex items-center gap-2 whitespace-nowrap"
+                >
+                  {isExporting && exportProgress ? (
+                    <>
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                      {Math.round(exportProgress.percent)}%
+                    </>
+                  ) : (
+                    <>
+                      <Download className="w-4 h-4" />
+                      Export Excel
+                    </>
+                  )}
+                </button>
+                <button
+                  onClick={() => setShowExcelOptions(!showExcelOptions)}
+                  className="px-4 py-2 text-sm text-gray-600 hover:text-gray-800 flex items-center gap-1 justify-center"
+                >
+                  <Settings2 className="w-4 h-4" />
+                  Options
+                  {showExcelOptions ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+                </button>
+              </div>
+            </div>
+
+            {/* Export Progress */}
+            {exportProgress && (
+              <div className="px-4 py-3 bg-teal-50 border-t border-teal-200">
+                <div className="flex items-center justify-between text-sm mb-2">
+                  <span className="text-teal-700">{exportProgress.currentSheet || exportProgress.message}</span>
+                  <span className="text-teal-600">{exportProgress.sheetsCompleted} of {exportProgress.totalSheets}</span>
+                </div>
+                <div className="w-full bg-teal-200 rounded-full h-2">
+                  <div
+                    className="bg-teal-600 h-2 rounded-full transition-all duration-300"
+                    style={{ width: `${exportProgress.percent}%` }}
+                  />
+                </div>
+              </div>
+            )}
+
+            {/* Excel Options Panel */}
+            {showExcelOptions && (
+              <div className="p-4 bg-gray-50 border-t border-gray-200 space-y-4">
+                {/* Date Range */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2 flex items-center gap-2">
+                    <Calendar className="w-4 h-4" />
+                    Date Range
+                  </label>
+                  <div className="flex flex-wrap gap-2">
+                    {DATE_RANGE_OPTIONS.map(option => (
+                      <button
+                        key={option.value}
+                        onClick={() => setDateRange(option.value)}
+                        className={`px-3 py-1.5 text-sm rounded-lg border transition-colors ${
+                          dateRange === option.value
+                            ? 'bg-teal-600 text-white border-teal-600'
+                            : 'bg-white text-gray-700 border-gray-300 hover:border-teal-500'
+                        }`}
+                      >
+                        {option.label}
+                      </button>
+                    ))}
+                  </div>
+
+                  {/* Custom Date Range Inputs */}
+                  {dateRange === 'custom' && (
+                    <div className="mt-3 flex gap-4">
+                      <div>
+                        <label className="block text-xs text-gray-500 mb-1">Start Date</label>
+                        <input
+                          type="date"
+                          value={customStartDate}
+                          onChange={e => setCustomStartDate(e.target.value)}
+                          className="px-3 py-2 border border-gray-300 rounded-lg text-sm"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-xs text-gray-500 mb-1">End Date</label>
+                        <input
+                          type="date"
+                          value={customEndDate}
+                          onChange={e => setCustomEndDate(e.target.value)}
+                          className="px-3 py-2 border border-gray-300 rounded-lg text-sm"
+                        />
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                {/* Sheet Selection */}
+                <div>
+                  <div className="flex items-center justify-between mb-2">
+                    <label className="block text-sm font-medium text-gray-700">
+                      Sheets to Include ({selectedSheetCount} of {SHEET_OPTIONS.length})
+                    </label>
+                    <div className="flex gap-2">
+                      <button
+                        onClick={selectAllSheets}
+                        className="text-xs text-teal-600 hover:text-teal-700"
+                      >
+                        Select All
+                      </button>
+                      <span className="text-gray-300">|</span>
+                      <button
+                        onClick={deselectAllSheets}
+                        className="text-xs text-gray-500 hover:text-gray-700"
+                      >
+                        Deselect All
+                      </button>
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
+                    {SHEET_OPTIONS.map(option => (
+                      <label
+                        key={option.key}
+                        className={`flex items-start gap-2 p-2 rounded-lg border cursor-pointer transition-colors ${
+                          sheetOptions[option.key]
+                            ? 'bg-teal-50 border-teal-300'
+                            : 'bg-white border-gray-200 hover:border-gray-300'
+                        }`}
+                      >
+                        <input
+                          type="checkbox"
+                          checked={sheetOptions[option.key]}
+                          onChange={() => toggleSheet(option.key)}
+                          className="mt-0.5 rounded border-gray-300 text-teal-600 focus:ring-teal-500"
+                        />
+                        <div>
+                          <span className="text-sm font-medium text-gray-900">{option.label}</span>
+                          <p className="text-xs text-gray-500">{option.description}</p>
+                        </div>
+                      </label>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+
           {/* Full Backup */}
           <div className="flex items-start gap-4 p-4 border border-gray-200 rounded-lg hover:border-teal-500 transition-colors">
             <div className="bg-teal-50 rounded-full p-4">
@@ -280,13 +570,14 @@ export default function ExportPage() {
             <div className="flex-1">
               <h3 className="font-semibold text-gray-900">Full Backup (JSON)</h3>
               <p className="text-sm text-gray-600 mt-2">
-                Export all data including accounts, transactions, budgets, goals, and settings
+                Export all data including accounts, transactions, budgets, goals, and settings.
+                Use this for complete backups that can be restored later.
               </p>
             </div>
             <button
               onClick={exportToJSON}
               disabled={isExporting}
-              className="px-4 py-2 bg-teal-600 text-white rounded-lg hover:bg-teal-700 disabled:bg-gray-400 transition-colors flex items-center gap-2"
+              className="px-4 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-800 disabled:bg-gray-400 transition-colors flex items-center gap-2"
             >
               <Download className="w-4 h-4" />
               Export JSON
@@ -301,7 +592,7 @@ export default function ExportPage() {
             <div className="flex-1">
               <h3 className="font-semibold text-gray-900">Transactions (CSV)</h3>
               <p className="text-sm text-gray-600 mt-2">
-                Export transactions to CSV format for use in Excel or other tools
+                Export transactions to simple CSV format for use in other spreadsheet tools
               </p>
             </div>
             <button
@@ -330,7 +621,7 @@ export default function ExportPage() {
               Import a previously exported JSON backup file
             </p>
             <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 text-sm text-yellow-800">
-              ⚠️ Warning: This will replace ALL existing data with the backup
+              Warning: This will replace ALL existing data with the backup
             </div>
           </div>
           <div>
@@ -357,7 +648,7 @@ export default function ExportPage() {
 
       {/* Danger Zone */}
       <div className="bg-white rounded-lg shadow p-6 border-2 border-red-200">
-        <h2 className="text-xl font-semibold text-red-900 mb-4">⚠️ Danger Zone</h2>
+        <h2 className="text-xl font-semibold text-red-900 mb-4">Danger Zone</h2>
 
         <div className="flex items-start gap-4 p-4 bg-red-50 border border-red-200 rounded-lg">
           <div className="flex-1">
@@ -377,26 +668,30 @@ export default function ExportPage() {
 
       {/* Tips */}
       <div className="bg-gray-50 border border-gray-200 rounded-lg p-6">
-        <h3 className="font-semibold text-gray-900 mb-4">💡 Backup Tips</h3>
+        <h3 className="font-semibold text-gray-900 mb-4">Backup Tips</h3>
         <ul className="space-y-2 text-sm text-gray-700">
           <li className="flex items-start gap-2">
-            <span className="text-gray-500 mt-2">•</span>
+            <span className="text-teal-500 mt-0.5">•</span>
+            <span><strong>Excel export</strong> is best for analysis and sharing - it includes formatting, formulas, and multiple sheets</span>
+          </li>
+          <li className="flex items-start gap-2">
+            <span className="text-teal-500 mt-0.5">•</span>
+            <span><strong>JSON backup</strong> is best for restoring data - keep regular backups in a safe location</span>
+          </li>
+          <li className="flex items-start gap-2">
+            <span className="text-teal-500 mt-0.5">•</span>
             <span>Back up your data regularly (weekly recommended)</span>
           </li>
           <li className="flex items-start gap-2">
-            <span className="text-gray-500 mt-2">•</span>
+            <span className="text-teal-500 mt-0.5">•</span>
             <span>Store backups in a safe location (cloud storage, external drive)</span>
           </li>
           <li className="flex items-start gap-2">
-            <span className="text-gray-500 mt-2">•</span>
+            <span className="text-teal-500 mt-0.5">•</span>
             <span>Test your backups by importing them to ensure they work</span>
           </li>
           <li className="flex items-start gap-2">
-            <span className="text-gray-500 mt-2">•</span>
-            <span>Export to CSV periodically for compatibility with other tools</span>
-          </li>
-          <li className="flex items-start gap-2">
-            <span className="text-gray-500 mt-2">•</span>
+            <span className="text-teal-500 mt-0.5">•</span>
             <span>All data is stored locally in your browser's IndexedDB</span>
           </li>
         </ul>

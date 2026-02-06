@@ -7,7 +7,7 @@
  * Priority: HIGH - Run before every deployment
  */
 
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { render as _render, screen as _screen, fireEvent as _fireEvent, waitFor as _waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
 
 // Mock Next.js router
@@ -80,7 +80,7 @@ describe('Critical Component Tests', () => {
       const shuffled = [...questions].sort(() => Math.random() - 0.5);
 
       // Very unlikely to be in same order after shuffle
-      const isSameOrder = questions.every((val, idx) => val === shuffled[idx]);
+      const _isSameOrder = questions.every((val, idx) => val === shuffled[idx]);
 
       // Note: This test has small chance of false positive
       // In production, use a seeded random for deterministic tests

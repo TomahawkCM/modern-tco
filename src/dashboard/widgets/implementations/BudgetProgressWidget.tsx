@@ -13,7 +13,7 @@ import { Target, TrendingUp } from "lucide-react";
 import { useFormatter, useTranslations } from "next-intl";
 import NextLink from "next/link";
 import { useMemo } from "react";
-import { WidgetConfig } from "../types";
+import type { WidgetConfig } from "../types";
 
 interface BudgetProgressWidgetProps {
   config: WidgetConfig;

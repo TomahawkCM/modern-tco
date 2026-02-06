@@ -3,7 +3,7 @@
  * Uses Dexie.js for IndexedDB management
  */
 
-import Dexie, { Table } from 'dexie';
+import Dexie, { type Table } from 'dexie';
 
 import type {
   Account,
@@ -15,13 +15,6 @@ import type {
   ImportMapping,
   ImportMetadata,
   Receipt,
-  Investment,
-  Portfolio,
-  InvestmentHolding,
-  InvestmentTransaction,
-  MarketData,
-  WatchlistItem,
-  PortfolioSnapshot,
   InvestmentAccount,
   Holding,
   AnomalyFeedback,
@@ -31,6 +24,7 @@ import type {
   Subscription,
   ExcludedSubscription,
 } from '@/types/budget';
+import type { InAppNotification } from '@/types/notifications';
 import type { Profile, ActivityLogEntry } from '@/types/profile';
 import {
   encryptTransaction,
@@ -69,7 +63,7 @@ import type { PairedDevice } from './sync/types';
 export function isDevEnvironment(): boolean {
   if (typeof window === 'undefined') return false;
 
-  const hostname = window.location.hostname;
+  const {hostname} = window.location;
   return hostname === 'localhost' ||
          hostname === '127.0.0.1' ||
          hostname.includes('.local') ||
@@ -110,6 +104,8 @@ export class BudgetDatabase extends Dexie {
   // Multi-Profile Support (Phase 16)
   profiles!: Table<Profile>;
   activityLog!: Table<ActivityLogEntry>;
+  // Notification Center (Phase 18)
+  inAppNotifications!: Table<InAppNotification>;
 
   constructor() {
     super(getDatabaseName());
@@ -446,7 +442,7 @@ export class BudgetDatabase extends Dexie {
       const existingProfiles = await profilesTable.count();
 
       if (existingProfiles === 0) {
-        console.log('[DB Migration v16] Creating default profile for existing user...');
+        console.warn('[DB Migration v16] Creating default profile for existing user...');
         await profilesTable.add({
           id: 'default-profile',
           name: 'Default',
@@ -458,7 +454,7 @@ export class BudgetDatabase extends Dexie {
           avatarColor: '#10b981', // Emerald green
           order: 0,
         });
-        console.log('[DB Migration v16] Default profile created successfully');
+        console.warn('[DB Migration v16] Default profile created successfully');
       }
 
       // Set existing budgets to shared visibility (null ownerId = shared)
@@ -472,7 +468,7 @@ export class BudgetDatabase extends Dexie {
           });
         }
       }
-      console.log('[DB Migration v16] Updated', budgets.length, 'budgets to shared visibility');
+      console.warn('[DB Migration v16] Updated', budgets.length, 'budgets to shared visibility');
     });
 
     // Version 17: Add balance reconciliation tracking fields to accounts
@@ -523,7 +519,35 @@ export class BudgetDatabase extends Dexie {
         }
       }
 
-      console.log('[DB Migration v17] Updated', accounts.length, 'accounts with reconciliation tracking');
+      console.warn('[DB Migration v17] Updated', accounts.length, 'accounts with reconciliation tracking');
+    });
+
+    // Version 18: Add in-app notifications table for notification center
+    // Supports bill reminders, budget alerts, goal milestones, and system notifications
+    this.version(18).stores({
+      accounts: 'id, name, institution, type, bankId',
+      transactions: 'id, accountId, date, category, amount, description, splitFromId, isSplit',
+      categories: 'id, name, type, order',
+      budgets: 'id, categoryId, period, startDate, ownerId, visibility',
+      futurePurchases: 'id, targetDate, priority, isCompleted',
+      retirementPlans: 'id, name, createdAt',
+      importMappings: 'id, institution, accountId',
+      importHistory: 'id, importDate, fileFormat, bank, fileName',
+      receipts: 'id, transactionId, uploadedAt, mimeType, fileSize',
+      investmentAccounts: 'id, type, name, createdAt',
+      holdings: 'id, accountId, symbol, purchaseDate, [accountId+symbol]',
+      priceCache: 'id, symbol, fetchedAt, source',
+      anomalyFeedback: 'id, transactionId, merchant, category, createdAt',
+      predictionAccuracy: 'id, category, month, recordedAt',
+      loans: 'id, type, status, lender, nextPaymentDate, accountId, paymentFrequency',
+      loanPayments: 'id, loanId, date, transactionId, isScheduled',
+      subscriptions: 'id, name, status, category, nextBillingDate, billingCycle, merchantToken, source',
+      excludedSubscriptions: 'id, merchantToken, excludedAt',
+      pairedDevices: 'id, deviceId, deviceName, trustLevel, lastSyncAt, createdAt',
+      profiles: 'id, name, isDefault, createdAt',
+      activityLog: 'id, profileId, action, entityType, timestamp, [profileId+timestamp]',
+      // New: In-app notifications for notification center
+      inAppNotifications: 'id, type, status, priority, createdAt, snoozedUntil, sourceType, sourceId'
     });
   }
 }
@@ -684,32 +708,32 @@ export const DEFAULT_CATEGORIES: Omit<Category, 'id' | 'createdAt'>[] = [
 // Helper function to initialize default categories
 export async function initializeDefaultCategories(): Promise<void> {
   try {
-    console.log('[DB] initializeDefaultCategories: Starting...');
-    console.log('[DB] initializeDefaultCategories: Fetching existing categories...');
+    console.warn('[DB] initializeDefaultCategories: Starting...');
+    console.warn('[DB] initializeDefaultCategories: Fetching existing categories...');
     const existing = await db.categories.toArray();
-    console.log('[DB] initializeDefaultCategories: Found', existing.length, 'existing categories');
+    console.warn('[DB] initializeDefaultCategories: Found', existing.length, 'existing categories');
 
     if (existing.length === 0) {
-      console.log('[DB] initializeDefaultCategories: No categories found, adding defaults...');
+      console.warn('[DB] initializeDefaultCategories: No categories found, adding defaults...');
       const categories = DEFAULT_CATEGORIES.map((cat, index) => ({
         ...cat,
         id: `cat_${index + 1}`,
         createdAt: new Date(),
       }));
       await db.categories.bulkAdd(categories);
-      console.log('[DB] initializeDefaultCategories: Added', categories.length, 'default categories');
+      console.warn('[DB] initializeDefaultCategories: Added', categories.length, 'default categories');
     } else {
-      console.log('[DB] initializeDefaultCategories: Categories already exist, skipping initialization');
+      console.warn('[DB] initializeDefaultCategories: Categories already exist, skipping initialization');
     }
-    console.log('[DB] initializeDefaultCategories: Complete');
+    console.warn('[DB] initializeDefaultCategories: Complete');
   } catch (error) {
     // If categories already exist (ConstraintError), silently ignore
     // This can happen if multiple components try to initialize simultaneously
-    console.log('[DB] initializeDefaultCategories: Caught error:', error);
+    console.warn('[DB] initializeDefaultCategories: Caught error:', error);
     if (error instanceof Error && error.name !== 'ConstraintError') {
       console.error('[DB] initializeDefaultCategories: Non-constraint error:', error);
     } else {
-      console.log('[DB] initializeDefaultCategories: ConstraintError (expected), ignoring');
+      console.warn('[DB] initializeDefaultCategories: ConstraintError (expected), ignoring');
     }
   }
 }
@@ -746,8 +770,8 @@ export async function generateThumbnail(
         }
 
         // Calculate new dimensions while maintaining aspect ratio
-        let width = img.width;
-        let height = img.height;
+        let {width} = img;
+        let {height} = img;
 
         if (width > height) {
           if (width > maxWidth) {
@@ -859,7 +883,7 @@ export async function deleteReceipt(
 
     // Update transaction to remove receipt ID
     const transaction = await db.transactions.get(transactionId);
-    if (transaction && transaction.receiptIds) {
+    if (transaction?.receiptIds) {
       const updatedReceiptIds = transaction.receiptIds.filter(id => id !== receiptId);
       await db.transactions.update(transactionId, { receiptIds: updatedReceiptIds });
     }
@@ -2020,5 +2044,250 @@ export async function isSubscriptionExcluded(merchantToken: string): Promise<boo
   } catch (error) {
     console.error('Error checking subscription exclusion:', error);
     return false;
+  }
+}
+
+// ========================================
+// IN-APP NOTIFICATION OPERATIONS
+// ========================================
+
+/**
+ * Add a new in-app notification
+ * @param notification The notification to add
+ * @returns Promise<string> The notification ID
+ */
+export async function addNotification(
+  notification: Omit<InAppNotification, 'id' | 'createdAt'>
+): Promise<string> {
+  try {
+    const notificationId = `notif_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+
+    const newNotification: InAppNotification = {
+      id: notificationId,
+      ...notification,
+      createdAt: new Date(),
+    };
+
+    await db.inAppNotifications.add(newNotification);
+    return notificationId;
+  } catch (error) {
+    console.error('Error adding notification:', error);
+    throw error;
+  }
+}
+
+/**
+ * Get all notifications, optionally filtered by status
+ * @param status Optional status filter
+ * @returns Promise<InAppNotification[]>
+ */
+export async function getNotifications(
+  status?: InAppNotification['status']
+): Promise<InAppNotification[]> {
+  try {
+    const query = db.inAppNotifications.orderBy('createdAt').reverse();
+
+    if (status) {
+      const all = await query.toArray();
+      return all.filter(n => n.status === status);
+    }
+
+    return await query.toArray();
+  } catch (error) {
+    console.error('Error fetching notifications:', error);
+    return [];
+  }
+}
+
+/**
+ * Get unread notification count
+ * @returns Promise<number>
+ */
+export async function getUnreadNotificationCount(): Promise<number> {
+  try {
+    return await db.inAppNotifications
+      .where('status')
+      .equals('unread')
+      .count();
+  } catch (error) {
+    console.error('Error counting unread notifications:', error);
+    return 0;
+  }
+}
+
+/**
+ * Get notifications that are due (snoozed notifications whose snooze time has passed)
+ * @returns Promise<InAppNotification[]>
+ */
+export async function getDueNotifications(): Promise<InAppNotification[]> {
+  try {
+    const now = new Date();
+    const snoozed = await db.inAppNotifications
+      .where('status')
+      .equals('snoozed')
+      .toArray();
+
+    return snoozed.filter(n => n.snoozedUntil && n.snoozedUntil <= now);
+  } catch (error) {
+    console.error('Error fetching due notifications:', error);
+    return [];
+  }
+}
+
+/**
+ * Update a notification
+ * @param id The notification ID
+ * @param updates Partial notification updates
+ */
+export async function updateNotification(
+  id: string,
+  updates: Partial<Omit<InAppNotification, 'id' | 'createdAt'>>
+): Promise<void> {
+  try {
+    await db.inAppNotifications.update(id, updates);
+  } catch (error) {
+    console.error('Error updating notification:', error);
+    throw error;
+  }
+}
+
+/**
+ * Mark a notification as read
+ * @param id The notification ID
+ */
+export async function markNotificationAsRead(id: string): Promise<void> {
+  try {
+    await db.inAppNotifications.update(id, {
+      status: 'read',
+      readAt: new Date(),
+    });
+  } catch (error) {
+    console.error('Error marking notification as read:', error);
+    throw error;
+  }
+}
+
+/**
+ * Mark all unread notifications as read
+ */
+export async function markAllNotificationsAsRead(): Promise<void> {
+  try {
+    const unread = await db.inAppNotifications
+      .where('status')
+      .equals('unread')
+      .toArray();
+
+    const now = new Date();
+    await Promise.all(
+      unread.map(n =>
+        db.inAppNotifications.update(n.id, {
+          status: 'read',
+          readAt: now,
+        })
+      )
+    );
+  } catch (error) {
+    console.error('Error marking all notifications as read:', error);
+    throw error;
+  }
+}
+
+/**
+ * Snooze a notification
+ * @param id The notification ID
+ * @param snoozedUntil When to show the notification again
+ */
+export async function snoozeNotification(
+  id: string,
+  snoozedUntil: Date
+): Promise<void> {
+  try {
+    await db.inAppNotifications.update(id, {
+      status: 'snoozed',
+      snoozedUntil,
+    });
+  } catch (error) {
+    console.error('Error snoozing notification:', error);
+    throw error;
+  }
+}
+
+/**
+ * Dismiss a notification
+ * @param id The notification ID
+ */
+export async function dismissNotification(id: string): Promise<void> {
+  try {
+    await db.inAppNotifications.update(id, {
+      status: 'dismissed',
+    });
+  } catch (error) {
+    console.error('Error dismissing notification:', error);
+    throw error;
+  }
+}
+
+/**
+ * Delete a notification permanently
+ * @param id The notification ID
+ */
+export async function deleteNotification(id: string): Promise<void> {
+  try {
+    await db.inAppNotifications.delete(id);
+  } catch (error) {
+    console.error('Error deleting notification:', error);
+    throw error;
+  }
+}
+
+/**
+ * Delete all dismissed notifications
+ */
+export async function clearDismissedNotifications(): Promise<void> {
+  try {
+    await db.inAppNotifications
+      .where('status')
+      .equals('dismissed')
+      .delete();
+  } catch (error) {
+    console.error('Error clearing dismissed notifications:', error);
+    throw error;
+  }
+}
+
+/**
+ * Delete all notifications
+ */
+export async function clearAllNotifications(): Promise<void> {
+  try {
+    await db.inAppNotifications.clear();
+  } catch (error) {
+    console.error('Error clearing all notifications:', error);
+    throw error;
+  }
+}
+
+/**
+ * Un-snooze notifications that are due
+ * This should be called periodically to check for snoozed notifications
+ */
+export async function wakeUpSnoozedNotifications(): Promise<number> {
+  try {
+    const now = new Date();
+    const due = await getDueNotifications();
+
+    await Promise.all(
+      due.map(n =>
+        db.inAppNotifications.update(n.id, {
+          status: 'unread',
+          snoozedUntil: undefined,
+        })
+      )
+    );
+
+    return due.length;
+  } catch (error) {
+    console.error('Error waking up snoozed notifications:', error);
+    return 0;
   }
 }

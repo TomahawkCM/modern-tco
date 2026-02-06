@@ -299,7 +299,7 @@ export function validateQuery<T extends z.ZodTypeAny>(
   url: string,
   schema: T
 ): z.infer<T> {
-  const searchParams = new URL(url).searchParams;
+  const {searchParams} = new URL(url);
   const params = Object.fromEntries(searchParams.entries());
 
   const result = schema.safeParse(params);

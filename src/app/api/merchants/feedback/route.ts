@@ -35,8 +35,8 @@
  * Privacy: Uses hashed user keys, never stores raw PII
  */
 
-import { NextRequest, NextResponse } from 'next/server';
-import { createClient, SupabaseClient } from '@supabase/supabase-js';
+import { type NextRequest, NextResponse } from 'next/server';
+import { createClient, type SupabaseClient } from '@supabase/supabase-js';
 import crypto from 'crypto';
 
 // ============================================================================

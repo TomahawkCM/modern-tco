@@ -24,8 +24,7 @@ const KEY_LENGTH = 32;
 export function isCryptoAvailable(): boolean {
   return (
     typeof window !== 'undefined' &&
-    window.crypto &&
-    window.crypto.subtle !== undefined
+    window.crypto?.subtle !== undefined
   );
 }
 

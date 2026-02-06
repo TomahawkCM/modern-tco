@@ -1,5 +1,5 @@
 // Import generated types from production database schema
-import { Database as GeneratedDatabase, Json as GeneratedJson } from './supabase-generated';
+import type { Database as GeneratedDatabase, Json as GeneratedJson } from './supabase-generated';
 
 // Re-export the generated types
 export type Database = GeneratedDatabase;

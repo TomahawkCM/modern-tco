@@ -104,11 +104,11 @@ export function PaymentHistory({ loan, onLoanUpdate }: PaymentHistoryProps) {
         loanId: loan.id,
         date: new Date(paymentDate),
         amount: totalAmount,
-        principalAmount: principalAmount,
-        interestAmount: interestAmount,
-        extraPrincipal: extraPrincipal,
+        principalAmount,
+        interestAmount,
+        extraPrincipal,
         balanceAfter: loan.currentBalance - (principalAmount + extraPrincipal),
-        notes: notes,
+        notes,
         isScheduled: false
       });
 

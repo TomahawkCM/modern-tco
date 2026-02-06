@@ -8,7 +8,7 @@
  * Lightweight custom toast system with animated success feedback
  */
 
-import { createContext, useContext, useState, useCallback, ReactNode } from 'react';
+import { createContext, useContext, useState, useCallback, type ReactNode } from 'react';
 import { CheckCircle, XCircle, AlertCircle, Info, X } from 'lucide-react';
 import { SuccessCheckmark } from './SuccessCheckmark';
 

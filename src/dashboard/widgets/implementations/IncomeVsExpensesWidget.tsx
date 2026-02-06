@@ -13,7 +13,7 @@ import { ArrowDownRight, ArrowUpRight, BarChart3, Plus, Scale } from "lucide-rea
 import { useFormatter, useTranslations } from "next-intl";
 import NextLink from "next/link";
 import { useMemo } from "react";
-import { WidgetConfig } from "../types";
+import type { WidgetConfig } from "../types";
 
 interface IncomeVsExpensesWidgetProps {
   config: WidgetConfig;

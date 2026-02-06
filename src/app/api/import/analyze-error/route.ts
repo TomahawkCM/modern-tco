@@ -22,7 +22,7 @@
  * }
  */
 
-import { NextRequest, NextResponse } from 'next/server';
+import { type NextRequest, NextResponse } from 'next/server';
 import OpenAI from 'openai';
 
 // ============================================================================
@@ -393,7 +393,7 @@ export async function POST(request: NextRequest): Promise<NextResponse<ErrorAnal
       );
     }
 
-    if (!body.fileInfo || !body.fileInfo.name) {
+    if (!body.fileInfo?.name) {
       return NextResponse.json(
         { success: false, error: 'Missing or invalid fileInfo' },
         { status: 400 }

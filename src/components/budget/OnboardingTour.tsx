@@ -190,7 +190,7 @@ export function OnboardingTour() {
 
               {/* Animated Icon */}
               <motion.div
-                key={step.key + "-icon"}
+                key={`${step.key  }-icon`}
                 initial={{ scale: 0.5, opacity: 0, rotate: -20 }}
                 animate={{ scale: 1, opacity: 1, rotate: 0 }}
                 transition={{ delay: 0.1, type: "spring", stiffness: 200 }}

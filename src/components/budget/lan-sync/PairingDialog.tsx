@@ -29,7 +29,7 @@ import {
   X,
 } from 'lucide-react';
 import type { PairingQRData, PairedDevice } from '@/lib/lan-sync';
-import { DeviceManager, type LocalDeviceInfo } from '@/lib/lan-sync-devices';
+import type { DeviceManager, LocalDeviceInfo } from '@/lib/lan-sync-devices';
 import { QRCodeDisplay } from './QRCodeDisplay';
 import { QRScanner } from './QRScanner';
 import { ManualPairingEntry } from './ManualPairingEntry';

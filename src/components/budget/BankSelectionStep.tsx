@@ -166,7 +166,7 @@ export function BankSelectionStep({
       )}
 
       {/* Manual Bank Selection */}
-      {(!detectionResult || !detectionResult.bank || showAllBanks) && (
+      {(!detectionResult?.bank || showAllBanks) && (
         <div className="bg-white rounded-lg shadow-md border border-gray-200 p-6">
           <div className="flex items-center gap-3 mb-4">
             <Building2 className="w-6 h-6 text-gray-400" />

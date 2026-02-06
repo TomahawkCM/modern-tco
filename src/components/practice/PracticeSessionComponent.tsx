@@ -82,7 +82,7 @@ export function PracticeSessionComponent({
     if (!currentQuestion || !selectedAnswer) return;
 
     const timeSpent = Math.floor((Date.now() - questionStartTime) / 1000);
-    const questionId = session.questions[currentIndex].questionId;
+    const {questionId} = session.questions[currentIndex];
 
     const result = answerPracticeQuestion(
       session,

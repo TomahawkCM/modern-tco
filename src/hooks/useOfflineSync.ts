@@ -9,7 +9,7 @@
 
 import { useState, useEffect, useCallback, useRef } from 'react';
 import {
-  OfflineManager,
+  type OfflineManager,
   getOfflineManager,
   createOfflineStateObserver,
   type OfflineStatus,

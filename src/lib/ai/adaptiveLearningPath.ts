@@ -527,7 +527,7 @@ export async function getActiveLearningPath(userId: string): Promise<LearningPat
     .single();
 
   if (error && error.code !== 'PGRST116') throw error;
-  return data ? (camelCaseKeys(data) as any) : null;
+  return data ? (camelCaseKeys(data)) : null;
 }
 
 export async function getNextStep(pathId: string): Promise<LearningPathStep | null> {

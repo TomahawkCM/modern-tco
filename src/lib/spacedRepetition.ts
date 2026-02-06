@@ -98,7 +98,7 @@ export function calculateAdaptiveInterval(
   item: ReviewItem,
   wasCorrect: boolean
 ): number {
-  const retention = item.retention;
+  const {retention} = item;
 
   // First few reviews: Use standard progression
   if (item.totalReviews < 3) {

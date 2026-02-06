@@ -45,7 +45,7 @@ export function InvestmentCharts({ holdings, accounts, currentPrices }: Investme
     
     return {
       name: holding.symbol,
-      value: value,
+      value,
       percentage: 0, // Will be calculated after
     };
   });
@@ -69,10 +69,10 @@ export function InvestmentCharts({ holdings, accounts, currentPrices }: Investme
 
     return {
       symbol: holding.symbol,
-      gainLoss: gainLoss,
-      gainLossPercent: gainLossPercent,
-      costBasis: costBasis,
-      currentValue: currentValue,
+      gainLoss,
+      gainLossPercent,
+      costBasis,
+      currentValue,
     };
   });
 
@@ -106,7 +106,7 @@ export function InvestmentCharts({ holdings, accounts, currentPrices }: Investme
 
   // Custom tooltip for pie chart
   const PieTooltip = ({ active, payload }: any) => {
-    if (active && payload && payload.length) {
+    if (active && payload?.length) {
       const data = payload[0];
       return (
         <div className="bg-white p-4 border border-gray-300 rounded-lg shadow-lg">
@@ -125,7 +125,7 @@ export function InvestmentCharts({ holdings, accounts, currentPrices }: Investme
 
   // Custom tooltip for bar chart
   const BarTooltip = ({ active, payload }: any) => {
-    if (active && payload && payload.length) {
+    if (active && payload?.length) {
       const data = payload[0].payload;
       return (
         <div className="bg-white p-4 border border-gray-300 rounded-lg shadow-lg">
@@ -150,7 +150,7 @@ export function InvestmentCharts({ holdings, accounts, currentPrices }: Investme
 
   // Custom tooltip for account allocation pie chart
   const AccountTooltip = ({ active, payload }: any) => {
-    if (active && payload && payload.length) {
+    if (active && payload?.length) {
       const data = payload[0];
       return (
         <div className="bg-white p-4 border border-gray-300 rounded-lg shadow-lg">

@@ -46,7 +46,7 @@ export const ChatbotPanel: React.FC<ChatbotPanelProps> = ({ isOpen, onClose }) =
   useEffect(() => {
     if (isOpen) {
       // Save current scroll position
-      const scrollY = window.scrollY;
+      const {scrollY} = window;
       document.body.style.overflow = 'hidden';
       document.body.style.position = 'fixed';
       document.body.style.top = `-${scrollY}px`;

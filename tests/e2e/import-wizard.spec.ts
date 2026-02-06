@@ -28,8 +28,8 @@ test.describe('Import Wizard E2E', () => {
       buffer: Buffer.from(csvContent),
     });
 
-    // Wait for format detection
-    await expect(page.locator('text=CSV')).toBeVisible({ timeout: 5000 });
+    // Wait for file to be selected (shown in filename heading or status message)
+    await expect(page.getByRole('heading', { name: /test-statement\.csv/i })).toBeVisible({ timeout: 5000 });
   });
 
   test('should upload OFX file and detect format', async ({ page }) => {
@@ -59,7 +59,8 @@ test.describe('Import Wizard E2E', () => {
       buffer: Buffer.from(ofxContent),
     });
 
-    await expect(page.locator('text=OFX')).toBeVisible({ timeout: 5000 });
+    // Wait for file to be selected
+    await expect(page.getByRole('heading', { name: /test-statement\.ofx/i })).toBeVisible({ timeout: 5000 });
   });
 
   // ========================================
