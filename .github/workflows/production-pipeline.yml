@@ -54,13 +54,7 @@ jobs:
         continue-on-error: true
 
       - name: Run unit tests
-        run: |
-          if [ -f "vitest.config.ts" ]; then
-            npm run test || echo "Tests skipped (setup needed)"
-          else
-            echo "Vitest not configured, skipping tests"
-          fi
-        continue-on-error: true
+        run: npm test
 
       - name: Generate test coverage
         run: |
@@ -175,8 +169,7 @@ jobs:
         run: npx playwright install --with-deps chromium
 
       - name: Run E2E tests
-        run: npm run e2e || echo "E2E tests need setup"
-        continue-on-error: true
+        run: npm run e2e
         env:
           CI: true
 
@@ -255,7 +248,7 @@ jobs:
     name: Deploy to Vercel Production
     runs-on: ubuntu-latest
     timeout-minutes: 15
-    needs: [build, security]
+    needs: [build, security, e2e]
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     environment:
       name: production

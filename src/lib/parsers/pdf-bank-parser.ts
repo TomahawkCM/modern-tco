@@ -49,12 +49,240 @@ interface ColumnCandidate {
 // ============================================================================
 
 const COLUMN_KEYWORDS = {
-  date: ['date', 'trans date', 'transaction date', 'posting date', 'posted'],
-  description: ['description', 'details', 'transaction', 'merchant', 'payee', 'particulars'],
-  amount: ['amount', 'value', 'transaction amount'],
-  debit: ['debit', 'withdrawal', 'withdrawals', 'debits', 'out', 'spent'],
-  credit: ['credit', 'deposit', 'deposits', 'credits', 'in', 'received'],
-  balance: ['balance', 'running balance', 'current balance', 'closing balance'],
+  date: [
+    // English
+    'date', 'trans date', 'transaction date', 'posting date', 'posted', 'value date',
+    // Spanish
+    'fecha', 'fecha de transacción', 'fecha operación', 'fecha valor',
+    // French
+    'date', 'date opération', 'date de valeur', 'date comptable',
+    // German
+    'datum', 'buchungstag', 'wertstellung', 'valuta',
+    // Portuguese
+    'data', 'data da transação', 'data movimento',
+    // Italian
+    'data', 'data operazione', 'data valuta',
+    // Dutch
+    'datum', 'boekingsdatum',
+    // Russian
+    'дата', 'дата операции',
+    // Turkish
+    'tarih', 'işlem tarihi',
+    // Polish
+    'data', 'data operacji',
+    // Japanese
+    '日付', '取引日', '処理日',
+    // Chinese
+    '日期', '交易日期', '记账日期',
+    // Korean
+    '날짜', '거래일', '처리일',
+    // Arabic
+    'التاريخ', 'تاريخ العملية',
+    // Indonesian
+    'tanggal',
+    // Thai
+    'วันที่',
+    // Hindi
+    'तारीख', 'दिनांक',
+    // Vietnamese
+    'ngày',
+    // Malay
+    'tarikh',
+    // Swedish/Norwegian/Danish
+    'dato', 'bokföringsdatum',
+  ],
+  description: [
+    // English
+    'description', 'details', 'transaction', 'merchant', 'payee', 'particulars', 'narrative',
+    // Spanish
+    'descripción', 'concepto', 'detalle', 'movimiento',
+    // French
+    'libellé', 'description', 'détail', 'motif',
+    // German
+    'beschreibung', 'verwendungszweck', 'buchungstext', 'empfänger',
+    // Portuguese
+    'descrição', 'histórico', 'detalhe',
+    // Italian
+    'descrizione', 'causale', 'dettaglio',
+    // Dutch
+    'omschrijving', 'beschrijving',
+    // Russian
+    'описание', 'назначение', 'получатель',
+    // Turkish
+    'açıklama', 'işlem açıklaması',
+    // Polish
+    'opis', 'tytuł operacji',
+    // Japanese
+    '摘要', '内容', '取引内容', 'お取引内容',
+    // Chinese
+    '摘要', '交易说明', '描述', '备注',
+    // Korean
+    '적요', '거래내용', '내용',
+    // Arabic
+    'الوصف', 'البيان', 'تفاصيل',
+    // Indonesian
+    'keterangan', 'deskripsi',
+    // Thai
+    'รายการ', 'รายละเอียด',
+    // Hindi
+    'विवरण',
+    // Vietnamese
+    'nội dung', 'diễn giải',
+    // Malay
+    'keterangan', 'perihal',
+  ],
+  amount: [
+    // English
+    'amount', 'value', 'transaction amount', 'sum',
+    // Spanish
+    'importe', 'monto', 'cantidad', 'valor',
+    // French
+    'montant', 'somme',
+    // German
+    'betrag', 'umsatz', 'summe',
+    // Portuguese
+    'valor', 'montante', 'quantia',
+    // Italian
+    'importo', 'ammontare',
+    // Dutch
+    'bedrag',
+    // Russian
+    'сумма',
+    // Turkish
+    'tutar', 'miktar',
+    // Polish
+    'kwota',
+    // Japanese
+    '金額', '取引金額', 'お取引金額',
+    // Chinese
+    '金额', '交易金额',
+    // Korean
+    '금액', '거래금액',
+    // Arabic
+    'المبلغ', 'القيمة',
+    // Indonesian
+    'jumlah', 'nominal', 'mutasi',
+    // Thai
+    'จำนวนเงิน',
+    // Hindi
+    'राशि',
+    // Vietnamese
+    'số tiền',
+    // Malay
+    'jumlah', 'amaun',
+  ],
+  debit: [
+    // English
+    'debit', 'withdrawal', 'withdrawals', 'debits', 'out', 'spent', 'charge',
+    // Spanish
+    'débito', 'cargo', 'retiro',
+    // French
+    'débit', 'retrait',
+    // German
+    'soll', 'belastung', 'ausgabe', 'lastschrift',
+    // Portuguese
+    'débito', 'saída',
+    // Italian
+    'dare', 'addebito', 'uscita',
+    // Dutch
+    'debet', 'af',
+    // Russian
+    'дебет', 'расход', 'списание',
+    // Turkish
+    'borç', 'çıkış',
+    // Polish
+    'debet', 'obciążenie', 'wypłata',
+    // Japanese
+    '出金', '支出', '引き出し', 'お引出し',
+    // Chinese
+    '支出', '借方', '取款',
+    // Korean
+    '출금', '차변',
+    // Arabic
+    'مدين', 'سحب',
+    // Indonesian
+    'debet', 'keluar',
+    // Thai
+    'เดบิต', 'ถอน',
+    // Hindi
+    'डेबिट', 'निकासी',
+  ],
+  credit: [
+    // English
+    'credit', 'deposit', 'deposits', 'credits', 'in', 'received', 'payment',
+    // Spanish
+    'crédito', 'abono', 'depósito',
+    // French
+    'crédit', 'dépôt',
+    // German
+    'haben', 'gutschrift', 'eingang',
+    // Portuguese
+    'crédito', 'entrada',
+    // Italian
+    'avere', 'accredito', 'entrata',
+    // Dutch
+    'credit', 'bij',
+    // Russian
+    'кредит', 'приход', 'зачисление',
+    // Turkish
+    'alacak', 'giriş',
+    // Polish
+    'kredyt', 'uznanie', 'wpłata',
+    // Japanese
+    '入金', '収入', 'お預入れ',
+    // Chinese
+    '收入', '贷方', '存款',
+    // Korean
+    '입금', '대변',
+    // Arabic
+    'دائن', 'إيداع',
+    // Indonesian
+    'kredit', 'masuk',
+    // Thai
+    'เครดิต', 'ฝาก',
+    // Hindi
+    'क्रेडिट', 'जमा',
+  ],
+  balance: [
+    // English
+    'balance', 'running balance', 'current balance', 'closing balance', 'available balance',
+    // Spanish
+    'saldo', 'saldo disponible', 'saldo actual',
+    // French
+    'solde', 'solde disponible',
+    // German
+    'saldo', 'kontostand',
+    // Portuguese
+    'saldo', 'saldo disponível',
+    // Italian
+    'saldo', 'saldo disponibile',
+    // Dutch
+    'saldo',
+    // Russian
+    'баланс', 'остаток',
+    // Turkish
+    'bakiye',
+    // Polish
+    'saldo',
+    // Japanese
+    '残高', 'お残高',
+    // Chinese
+    '余额', '结余',
+    // Korean
+    '잔액', '잔고',
+    // Arabic
+    'الرصيد',
+    // Indonesian
+    'saldo',
+    // Thai
+    'ยอดคงเหลือ',
+    // Hindi
+    'शेष', 'बैलेंस',
+    // Vietnamese
+    'số dư',
+    // Malay
+    'baki',
+  ],
 };
 
 // ============================================================================
@@ -289,13 +517,35 @@ function buildColumnMapping(candidates: ColumnCandidate[], totalColumns: number)
     }
   }
 
+  // Resolve column conflicts: each column index can only be assigned to one keyword type.
+  // When multiple keyword types claim the same column, keep the highest confidence match.
+  const columnAssignments: Record<number, { keyword: string; confidence: number }> = {};
+  const resolvedMatches: Record<string, ColumnCandidate> = {};
+
+  // Sort by confidence descending so higher-confidence assignments win
+  const sortedEntries = Object.entries(bestMatches).sort(
+    (a, b) => b[1].confidence - a[1].confidence
+  );
+
+  for (const [keyword, candidate] of sortedEntries) {
+    const existing = columnAssignments[candidate.columnIndex];
+    if (!existing || candidate.confidence > existing.confidence) {
+      // Remove previous keyword assignment for this column if any
+      if (existing) {
+        delete resolvedMatches[existing.keyword];
+      }
+      columnAssignments[candidate.columnIndex] = { keyword, confidence: candidate.confidence };
+      resolvedMatches[keyword] = candidate;
+    }
+  }
+
   // Assign to mapping
-  if (bestMatches.date) mapping.dateColumn = bestMatches.date.columnIndex;
-  if (bestMatches.description) mapping.descriptionColumn = bestMatches.description.columnIndex;
-  if (bestMatches.amount) mapping.amountColumn = bestMatches.amount.columnIndex;
-  if (bestMatches.debit) mapping.debitColumn = bestMatches.debit.columnIndex;
-  if (bestMatches.credit) mapping.creditColumn = bestMatches.credit.columnIndex;
-  if (bestMatches.balance) mapping.balanceColumn = bestMatches.balance.columnIndex;
+  if (resolvedMatches.date) mapping.dateColumn = resolvedMatches.date.columnIndex;
+  if (resolvedMatches.description) mapping.descriptionColumn = resolvedMatches.description.columnIndex;
+  if (resolvedMatches.amount) mapping.amountColumn = resolvedMatches.amount.columnIndex;
+  if (resolvedMatches.debit) mapping.debitColumn = resolvedMatches.debit.columnIndex;
+  if (resolvedMatches.credit) mapping.creditColumn = resolvedMatches.credit.columnIndex;
+  if (resolvedMatches.balance) mapping.balanceColumn = resolvedMatches.balance.columnIndex;
 
   // Detect bank format
   if (mapping.debitColumn !== null && mapping.creditColumn !== null) {

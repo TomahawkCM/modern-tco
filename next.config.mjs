@@ -58,7 +58,18 @@ const nextConfig = {
       })
     );
 
+    // Fix pdfjs-dist webpack bundling: mark the worker as external to prevent
+    // __webpack_require__.r from calling Object.defineProperty on non-object
     if (!isServer) {
+      config.resolve = {
+        ...config.resolve,
+        alias: {
+          ...(config.resolve?.alias || {}),
+          // Ensure pdfjs-dist resolves to the legacy CJS build for webpack compat
+          'pdfjs-dist': resolve(__dirname, 'node_modules/pdfjs-dist/legacy/build/pdf.mjs'),
+        },
+      };
+
       // Split large dependencies into separate chunks
       config.optimization = {
         ...config.optimization,
@@ -66,6 +77,13 @@ const nextConfig = {
           ...config.optimization.splitChunks,
           cacheGroups: {
             ...(config.optimization.splitChunks?.cacheGroups || {}),
+            // PDF.js - async chunk for PDF import pages only
+            pdfjs: {
+              test: /[\\/]node_modules[\\/]pdfjs-dist[\\/]/,
+              name: 'pdfjs',
+              chunks: 'async',
+              priority: 10,
+            },
             // Recharts (2.6MB) - Only load on chart pages
             recharts: {
               test: /[\\/]node_modules[\\/]recharts[\\/]/,
