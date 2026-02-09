@@ -6,7 +6,7 @@
  * Uses Tesseract.js for client-side OCR processing
  */
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import {
   Camera,
   Upload,
@@ -17,17 +17,23 @@ import {
   Eye,
   Save,
   FileText,
+  Plus,
 } from "lucide-react";
 import { extractReceiptData, type ExtractedReceiptData } from "@/lib/receipt-ocr";
 import { getPrivacySettings } from "@/lib/budget-privacy-settings";
 import { db } from "@/lib/budget-db";
+import { CategoryCombobox } from "@/components/budget/CategoryCombobox";
+import type { Category } from "@/types/budget";
 import Link from "next/link";
 
 export default function ReceiptScannerPage() {
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
-  const [processingProgress, setProcessingProgress] = useState<{ current: number; total: number } | null>(null);
+  const [processingProgress, setProcessingProgress] = useState<{
+    current: number;
+    total: number;
+  } | null>(null);
   const [extractedData, setExtractedData] = useState<ExtractedReceiptData | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [savedTransactionId, setSavedTransactionId] = useState<string | null>(null);
@@ -38,8 +44,23 @@ export default function ReceiptScannerPage() {
   const [date, setDate] = useState("");
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState<string>("");
+  const [subcategory, setSubcategory] = useState<string>("");
+
+  // Category state
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [showCreateCategory, setShowCreateCategory] = useState(false);
+  const [newCategoryName, setNewCategoryName] = useState("");
+  const [newCategorySubcats, setNewCategorySubcats] = useState("");
 
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  // Load categories on mount
+  useEffect(() => {
+    db.categories
+      .toArray()
+      .then((cats) => setCategories(cats.filter((c) => !c.archived)))
+      .catch((err) => console.error("Failed to load categories:", err));
+  }, []);
 
   // Check if OCR is enabled in privacy settings
   const privacySettings = getPrivacySettings();
@@ -187,7 +208,7 @@ export default function ReceiptScannerPage() {
         originalDescription: extractedData?.rawText || "",
         amount: -Math.abs(parseFloat(amount)), // Negative for expense
         category: category || null,
-        subcategory: null,
+        subcategory: subcategory || null,
         notes: extractedData
           ? `OCR Confidence: ${(extractedData.confidence * 100).toFixed(1)}%`
           : "",
@@ -223,12 +244,51 @@ export default function ReceiptScannerPage() {
     setDate("");
     setDescription("");
     setCategory("");
+    setSubcategory("");
+    setShowCreateCategory(false);
+    setNewCategoryName("");
+    setNewCategorySubcats("");
     setSavedTransactionId(null);
     setError(null);
     if (fileInputRef.current) {
       fileInputRef.current.value = "";
     }
   };
+
+  const createNewCategory = () => {
+    if (!newCategoryName.trim()) return;
+
+    const subcatsArray = newCategorySubcats
+      .split(",")
+      .map((s) => s.trim())
+      .filter(Boolean);
+
+    const newCat: Category = {
+      id: `cat_${Date.now()}`,
+      name: newCategoryName.trim(),
+      type: "expense",
+      subcategories: subcatsArray,
+      color: "#3b82f6",
+      icon: "tag",
+      isDefault: false,
+      order: categories.length + 1,
+      createdAt: new Date(),
+    };
+
+    setCategories((prev) => [...prev, newCat]);
+    setCategory(newCat.name);
+    setSubcategory("");
+    setShowCreateCategory(false);
+    setNewCategoryName("");
+    setNewCategorySubcats("");
+
+    db.categories.add(newCat).catch((error) => {
+      console.error("Error saving category to DB:", error);
+    });
+  };
+
+  const expenseCategories = categories.filter((c) => c.type === "expense");
+  const selectedCategory = expenseCategories.find((c) => c.name === category);
 
   // If OCR is disabled, show message
   if (!isOCREnabled) {
@@ -276,7 +336,8 @@ export default function ReceiptScannerPage() {
       <div className="mb-6">
         <h1 className="text-3xl font-bold text-white">Scan Receipt</h1>
         <p className="mt-2 text-slate-400">
-          Upload a receipt image or PDF (JPG, PNG, PDF) to automatically extract transaction details using OCR
+          Upload a receipt image or PDF (JPG, PNG, PDF) to automatically extract transaction details
+          using OCR
         </p>
       </div>
 
@@ -381,9 +442,7 @@ export default function ReceiptScannerPage() {
               {/* Show PDF info if multi-page */}
               {extractedData.pagesProcessed && extractedData.pagesProcessed > 1 && (
                 <div className="mb-4 rounded-lg bg-slate-900/50 p-3 text-sm text-slate-300">
-                  <p className="font-medium">
-                    📄 Processed {extractedData.pagesProcessed} pages
-                  </p>
+                  <p className="font-medium">📄 Processed {extractedData.pagesProcessed} pages</p>
                   <p className="mt-1 text-xs">
                     Best result from page {extractedData.bestPageNumber}
                   </p>
@@ -408,7 +467,9 @@ export default function ReceiptScannerPage() {
 
                 <div className="flex items-center justify-between border-b border-slate-700 pb-2">
                   <span className="text-slate-400">Merchant:</span>
-                  <span className="font-medium text-white">{extractedData.merchant || "Not found"}</span>
+                  <span className="font-medium text-white">
+                    {extractedData.merchant || "Not found"}
+                  </span>
                 </div>
 
                 <div className="flex items-center justify-between border-b border-slate-700 pb-2">
@@ -480,7 +541,12 @@ export default function ReceiptScannerPage() {
 
             {/* Date */}
             <div>
-              <label htmlFor="receipt-date" className="mb-1 block text-sm font-medium text-slate-300">Date *</label>
+              <label
+                htmlFor="receipt-date"
+                className="mb-1 block text-sm font-medium text-slate-300"
+              >
+                Date *
+              </label>
               <input
                 id="receipt-date"
                 type="date"
@@ -506,14 +572,86 @@ export default function ReceiptScannerPage() {
             {/* Category */}
             <div>
               <label className="mb-1 block text-sm font-medium text-slate-300">Category</label>
-              <input
-                type="text"
-                value={category}
-                onChange={(e) => setCategory(e.target.value)}
-                placeholder="e.g., Groceries, Dining"
-                className="w-full rounded-lg border border-slate-600 bg-slate-900/50 px-3 py-2 text-white placeholder-slate-500 focus:border-transparent focus:ring-2 focus:ring-teal-500"
-              />
+              {!showCreateCategory ? (
+                <CategoryCombobox
+                  options={[
+                    ...expenseCategories.map((cat) => ({
+                      value: cat.name,
+                      label: cat.name,
+                    })),
+                    { value: "__create__", label: "+ Create New Category" },
+                  ]}
+                  value={category}
+                  onChange={(value) => {
+                    if (value === "__create__") {
+                      setShowCreateCategory(true);
+                      setCategory("");
+                    } else {
+                      setCategory(value);
+                      setSubcategory("");
+                    }
+                  }}
+                  placeholder="Select category..."
+                />
+              ) : (
+                <div className="space-y-2 rounded-lg border-2 border-teal-500 bg-slate-900/50 p-3">
+                  <input
+                    type="text"
+                    value={newCategoryName}
+                    onChange={(e) => setNewCategoryName(e.target.value)}
+                    placeholder="Category name"
+                    className="w-full rounded-lg border border-slate-600 bg-slate-900/50 px-3 py-2 text-sm text-white placeholder-slate-500 focus:border-transparent focus:ring-2 focus:ring-teal-500"
+                  />
+                  <input
+                    type="text"
+                    value={newCategorySubcats}
+                    onChange={(e) => setNewCategorySubcats(e.target.value)}
+                    placeholder="Subcategories (comma-separated, optional)"
+                    className="w-full rounded-lg border border-slate-600 bg-slate-900/50 px-3 py-2 text-sm text-white placeholder-slate-500 focus:border-transparent focus:ring-2 focus:ring-teal-500"
+                  />
+                  <div className="flex gap-2">
+                    <button
+                      type="button"
+                      onClick={createNewCategory}
+                      className="flex flex-1 items-center justify-center gap-1 rounded-lg bg-teal-600 px-3 py-2 text-sm text-white hover:bg-teal-700"
+                    >
+                      <Plus className="h-4 w-4" />
+                      Create
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setShowCreateCategory(false);
+                        setNewCategoryName("");
+                        setNewCategorySubcats("");
+                      }}
+                      className="flex-1 rounded-lg border border-slate-600 px-3 py-2 text-sm text-slate-300 hover:bg-slate-700"
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </div>
+              )}
             </div>
+
+            {/* Subcategory */}
+            {selectedCategory && selectedCategory.subcategories.length > 0 && (
+              <div>
+                <label className="mb-1 block text-sm font-medium text-slate-300">Subcategory</label>
+                <CategoryCombobox
+                  options={[
+                    { value: "", label: "None" },
+                    ...selectedCategory.subcategories.map((sub) => ({
+                      value: sub,
+                      label: sub,
+                    })),
+                  ]}
+                  value={subcategory}
+                  onChange={setSubcategory}
+                  placeholder="Select subcategory..."
+                />
+              </div>
+            )}
 
             {/* Save Button */}
             <button
