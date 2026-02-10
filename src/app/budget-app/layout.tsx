@@ -9,11 +9,13 @@
 import { AccessibilityQuickToggle } from "@/components/budget/AccessibilityQuickToggle";
 import { BudgetAccessibilityInitializer } from "@/components/budget/BudgetAccessibilityInitializer";
 import { OnboardingTour } from "@/components/budget/OnboardingTour";
+import { IOSInstallBanner } from "@/components/budget/IOSInstallBanner";
 import { PWAInstallPrompt } from "@/components/budget/PWAInstallPrompt";
 import { ShortcutsModal } from "@/components/budget/ShortcutsModal";
 import { ToastProvider } from "@/components/budget/Toast";
 import { TrialStatusBanner } from "@/components/budget/TrialStatusBanner";
 import { ChatbotWidget } from "@/components/budget/chatbot/ChatbotWidget";
+import { FloatingActionButton } from "@/components/budget/layout/FloatingActionButton";
 import { MobileNav } from "@/components/budget/layout/MobileNav";
 import { Sidebar } from "@/components/budget/layout/Sidebar";
 import { CommandPalette } from "@/components/budget/CommandPalette";
@@ -25,6 +27,7 @@ import { ChatbotProvider } from "@/contexts/ChatbotContext";
 import { NotificationProvider } from "@/contexts/NotificationContext";
 import { ProfileProvider } from "@/contexts/ProfileContext";
 import { SeniorsModeProvider } from "@/contexts/SeniorsModeContext";
+import { useIOSStatePreservation } from "@/hooks/useIOSStatePreservation";
 import { useKeyboardShortcuts } from "@/hooks/useKeyboardShortcuts";
 import { usePWA } from "@/hooks/usePWA";
 import { Menu, Sparkles } from "lucide-react";
@@ -50,6 +53,9 @@ export default function BudgetAppLayout({ children }: { children: React.ReactNod
 
   // PWA functionality - Phase 3.2
   usePWA(); // Register service worker
+
+  // iOS PWA state preservation (scroll position + route on background/resume)
+  useIOSStatePreservation();
 
   // Keyboard shortcuts
   useKeyboardShortcuts({
@@ -124,7 +130,7 @@ export default function BudgetAppLayout({ children }: { children: React.ReactNod
               <OnboardingTour />
 
               <div className="flex min-h-screen text-slate-200">
-                {/* Desktop Sidebar */}
+                {/* Desktop/Tablet Sidebar — hidden on mobile, icon-only on md, full on lg */}
                 <Sidebar
                   onSearch={() => setCommandPaletteOpen(true)}
                   onShowShortcuts={() => setShowShortcutsModal(true)}
@@ -152,7 +158,9 @@ export default function BudgetAppLayout({ children }: { children: React.ReactNod
                 {/* Main Content Area */}
                 <div className="flex min-w-0 flex-1 flex-col">
                   {/* Mobile Header */}
-                  <header className="sticky top-0 z-30 flex items-center justify-between border-b border-white/10 bg-slate-950/80 px-4 py-3 backdrop-blur-md md:hidden">
+                  <header className="sticky top-0 z-30 flex items-center justify-between border-b border-white/10 bg-slate-950/80 px-4 py-3 backdrop-blur-md md:hidden"
+                    style={{ paddingTop: "calc(env(safe-area-inset-top, 0px) + 8px)" }}
+                  >
                     <Link
                       href="/budget-app/landing"
                       className="flex items-center gap-3 transition-opacity hover:opacity-80"
@@ -179,7 +187,7 @@ export default function BudgetAppLayout({ children }: { children: React.ReactNod
                   {/* Main Content */}
                   <main
                     id="main-content"
-                    className="flex-1 overflow-x-hidden pb-24 md:pb-8"
+                    className="flex-1 overflow-x-hidden pb-16 md:pb-0"
                     tabIndex={0}
                     aria-label="Main content"
                     role="main"
@@ -187,13 +195,21 @@ export default function BudgetAppLayout({ children }: { children: React.ReactNod
                     {/* Non-blocking Welcome Banner - at top of content */}
                     <WelcomeBanner />
 
-                    <div className="mx-auto max-w-7xl p-4 md:p-8">
+                    <div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8 py-6">
                       <ToastProvider>{children}</ToastProvider>
                     </div>
                   </main>
 
-                  {/* Mobile Bottom Navigation */}
-                  <MobileNav onOpenMenu={() => setMobileMenuOpen(true)} />
+                  {/* Mobile Bottom Tab Bar — fixed at bottom, visible below md */}
+                  <MobileNav />
+
+                  {/* FAB — mobile only, for quick transaction entry */}
+                  <FloatingActionButton
+                    onClick={() => {
+                      void router.push("/budget-app/transactions");
+                      setShowNewTransactionModal(true);
+                    }}
+                  />
                 </div>
 
                 {/* Shortcuts Help Modal */}
@@ -201,8 +217,9 @@ export default function BudgetAppLayout({ children }: { children: React.ReactNod
                   <ShortcutsModal onClose={() => setShowShortcutsModal(false)} />
                 )}
 
-                {/* PWA Install Prompt */}
+                {/* PWA Install Prompts — Android/Desktop + iOS */}
                 <PWAInstallPrompt />
+                <IOSInstallBanner />
 
                 {/* AI Chatbot Widget */}
                 <ChatbotWidget />

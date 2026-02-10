@@ -24,8 +24,16 @@ const config: Config = {
       center: true,
       padding: "2rem",
       screens: {
-        "2xl": "1400px",
+        "2xl": "1440px",
       },
+    },
+    screens: {
+      xs: "320px",
+      sm: "576px",
+      md: "768px",
+      lg: "992px",
+      xl: "1200px",
+      "2xl": "1440px",
     },
     extend: {
       fontSize: {
@@ -62,6 +70,15 @@ const config: Config = {
         card: "var(--spacing-card-padding)",
         "card-gap": "var(--spacing-card-gap)",
         touch: "var(--spacing-touch-target)",
+        "18": "4.5rem", // 72px — icon sidebar width
+      },
+      minHeight: {
+        touch: "44px",
+        "touch-comfortable": "48px",
+        "touch-seniors": "56px",
+      },
+      minWidth: {
+        touch: "44px",
       },
       boxShadow: {
         xs: "var(--shadow-xs)",
@@ -184,12 +201,18 @@ const config: Config = {
           from: { transform: "scale(0.95)", opacity: "0" },
           to: { transform: "scale(1)", opacity: "1" },
         },
+        shake: {
+          "0%, 100%": { transform: "translateX(0)" },
+          "25%": { transform: "translateX(-4px)" },
+          "75%": { transform: "translateX(4px)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         "fade-in": "fade-in 0.3s ease-out forwards",
         "scale-in": "scale-in 0.2s ease-out forwards",
+        shake: "shake 0.3s ease-in-out",
       },
       backdropBlur: {
         xs: "2px",

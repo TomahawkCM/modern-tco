@@ -344,7 +344,12 @@
       "offline": "Works offline",
       "fastSecure": "Fast & secure",
       "noAppStore": "No app store needed"
-    }
+    },
+    "iosTitle": "Install Budget App",
+    "iosTap": "Tap",
+    "iosThen": "then",
+    "iosAddToHome": "\"Add to Home Screen\"",
+    "iosForFullExperience": "for the full app experience with faster loading."
   },
   "dialog": {
     "confirm": "Confirm",
@@ -379,7 +384,9 @@
       "settings": "Settings",
       "showLess": "Show Less",
       "showAllItems": "Show All Items",
-      "backToHome": "Back to Home"
+      "backToHome": "Back to Home",
+      "expandSidebar": "Expand sidebar",
+      "collapseSidebar": "Collapse sidebar"
     }
   },
   "onboarding": {
@@ -2067,5 +2074,12 @@
       "export": "Export {count} subscription(s)",
       "exporting": "Exporting..."
     }
+  },
+  "mobileNav": {
+    "home": "Home",
+    "budget": "Budget",
+    "accounts": "Accounts",
+    "activity": "Activity",
+    "more": "More"
   }
 }
