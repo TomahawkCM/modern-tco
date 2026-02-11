@@ -22,7 +22,12 @@ export type WidgetType =
   | 'account-balances'
   | 'income-vs-expenses'
   | 'monthly-trends'
-  | 'upcoming-bills';
+  | 'upcoming-bills'
+  | 'safe-to-spend'
+  | 'streaks'
+  | 'weekly-recap'
+  | 'net-worth-mini'
+  | 'event-budget';
 
 /**
  * Widget configuration instance

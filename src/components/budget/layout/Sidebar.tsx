@@ -6,14 +6,17 @@ import { motion } from "framer-motion";
 import {
   BarChart3,
   Bell,
+  Building2,
   Calculator,
   Camera,
   ChevronLeft,
   ChevronRight,
   CreditCard,
+  FlaskConical,
   Home,
   Landmark,
   MoreHorizontal,
+  PartyPopper,
   PieChart,
   Receipt,
   Repeat,
@@ -57,6 +60,10 @@ const navigation: NavItem[] = [
   { name: "futurePlans", href: "/budget-app/planning/future", icon: Target },
   { name: "retirement", href: "/budget-app/planning/retirement", icon: TrendingUp },
   { name: "reports", href: "/budget-app/reports", icon: BarChart3, essential: true },
+  { name: "netWorth", href: "/budget-app/net-worth", icon: TrendingUp },
+  { name: "properties", href: "/budget-app/properties", icon: Building2 },
+  { name: "events", href: "/budget-app/events", icon: PartyPopper },
+  { name: "scenarios", href: "/budget-app/scenarios", icon: FlaskConical },
 ];
 
 // Simplified navigation for Seniors Mode - only essential items

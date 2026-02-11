@@ -89,6 +89,44 @@
         "dueToday": "Due today",
         "dueTomorrow": "Due tomorrow",
         "viewAll": "View All"
+      },
+      "safeToSpend": {
+        "title": "Safe to Spend",
+        "noData": "No budgets set up yet",
+        "noBudgets": "No budgets set up yet",
+        "createBudget": "Create Budget",
+        "dailyBudget": "Daily budget",
+        "daysRemaining": "{days} days left",
+        "totalSafe": "Total safe to spend",
+        "perCategory": "Per category",
+        "safe": "On track",
+        "caution": "Watch spending",
+        "danger": "Over budget",
+        "remaining": "{amount} remaining",
+        "overBudget": "{amount} over budget",
+        "viewAll": "View All"
+      },
+      "streaks": {
+        "title": "Streaks & Badges",
+        "dayStreak": "day streak",
+        "points": "points",
+        "badges": "badges"
+      },
+      "weeklyRecap": {
+        "title": "Weekly Recap",
+        "viewFull": "Full Review",
+        "vsLastWeek": "vs last week"
+      },
+      "netWorthMini": {
+        "title": "Net Worth",
+        "viewDetails": "View Details",
+        "assets": "Assets",
+        "liabilities": "Liabilities"
+      },
+      "eventBudget": {
+        "title": "Event Budgets",
+        "viewAll": "View All",
+        "noEvents": "No active events"
       }
     }
   },
@@ -120,6 +158,26 @@
     "upcomingBills": {
       "title": "Upcoming Bills",
       "description": "Never miss a payment with bill reminders"
+    },
+    "safeToSpend": {
+      "title": "Safe to Spend",
+      "description": "See how much you can safely spend per category"
+    },
+    "streaks": {
+      "title": "Streaks & Badges",
+      "description": "Track your engagement streaks and achievements"
+    },
+    "weeklyRecap": {
+      "title": "Weekly Recap",
+      "description": "Summary of your weekly spending patterns"
+    },
+    "netWorthMini": {
+      "title": "Net Worth",
+      "description": "Quick view of your total net worth"
+    },
+    "eventBudget": {
+      "title": "Event Budgets",
+      "description": "Track spending for events and projects"
     }
   },
   "dashboardCustomizer": {
@@ -377,7 +435,11 @@
       "futurePlans": "Future Plans",
       "retirement": "Retirement",
       "reports": "Reports",
-      "calculators": "Calculators"
+      "calculators": "Calculators",
+      "netWorth": "Net Worth",
+      "properties": "Properties",
+      "events": "Events",
+      "scenarios": "What-If"
     },
     "actions": {
       "importCsv": "Import CSV",
@@ -2081,5 +2143,201 @@
     "accounts": "Accounts",
     "activity": "Activity",
     "more": "More"
+  },
+  "quickStats": {
+    "balance": "Total Balance",
+    "income": "Income",
+    "expenses": "Expenses",
+    "savingsRate": "Savings Rate",
+    "savingsRateDescription": "Percentage of income saved this month"
+  },
+  "bottomSheet": {
+    "close": "Close",
+    "dragToClose": "Drag down to close"
+  },
+  "budget": {
+    "privacy": {
+      "toggle": "Privacy Mode",
+      "enabled": "Financial values are hidden",
+      "disabled": "Financial values are visible",
+      "tapToReveal": "Tap to reveal",
+      "shortcut": "Cmd+Shift+P"
+    },
+    "safeToSpend": {
+      "title": "Safe to Spend",
+      "totalSafe": "Total Safe to Spend",
+      "dailyBudget": "Daily Budget",
+      "daysLeft": "{count} days left this month",
+      "perCategory": "By Category",
+      "safe": "On Track",
+      "caution": "Watch Spending",
+      "danger": "Over Budget",
+      "remaining": "remaining",
+      "noData": "Set up budgets to see safe-to-spend amounts"
+    },
+    "rollover": {
+      "title": "Budget Rollover",
+      "enabled": "Rollover enabled",
+      "disabled": "Rollover disabled",
+      "includesRollover": "Includes {amount} rollover",
+      "negativeRollover": "Overspend of {amount} carried forward",
+      "toggle": "Enable rollover for this category",
+      "effective": "Effective budget"
+    },
+    "gamification": {
+      "currentStreak": "Current streak",
+      "longestStreak": "Best: {count} days",
+      "achievementUnlocked": "Achievement Unlocked!",
+      "points": "Points",
+      "badges": "Badges",
+      "streaks": "Streaks",
+      "noAchievements": "Complete actions to earn badges",
+      "totalPoints": "Total Points"
+    },
+    "review": {
+      "title": "Review Transactions",
+      "subtitle": "Categorize your uncategorized transactions",
+      "progress": "{reviewed} of {total} reviewed",
+      "approve": "Approve",
+      "skip": "Skip",
+      "approveKey": "Approve (→/A)",
+      "skipKey": "Skip (←/F)",
+      "allDone": "All caught up!",
+      "allDoneDescription": "No more transactions to review",
+      "noDescription": "No description",
+      "swipeRight": "Swipe right to approve",
+      "swipeLeft": "Swipe left to skip"
+    },
+    "merchantRules": {
+      "title": "Merchant Rules",
+      "description": "Auto-categorize transactions by merchant",
+      "createRule": "Always categorize {merchant} as {category}?",
+      "yes": "Yes, always",
+      "no": "No, just this time",
+      "ruleCreated": "Rule created",
+      "noRules": "No merchant rules yet",
+      "noRulesDescription": "Rules are created when you re-categorize transactions",
+      "merchant": "Merchant",
+      "category": "Category",
+      "applied": "Applied {count} times",
+      "deleteRule": "Delete Rule"
+    },
+    "refunds": {
+      "title": "Refund Tracking",
+      "expecting": "Expecting refund",
+      "received": "Refund received",
+      "partial": "Partial refund",
+      "markExpecting": "Expect Refund",
+      "expectedAmount": "Expected amount",
+      "expectedDate": "Expected by",
+      "autoMatched": "Auto-matched refund",
+      "grossVsNet": "Gross vs Net",
+      "gross": "Gross",
+      "refundsTotal": "Refunds",
+      "net": "Net"
+    },
+    "weeklyRecap": {
+      "title": "Weekly Recap",
+      "thisWeek": "This week",
+      "lastWeek": "Last week",
+      "topCategories": "Top Categories",
+      "viewFullReview": "View Full Review",
+      "dismissed": "Dismissed for this week"
+    },
+    "scenarios": {
+      "title": "What-If Scenarios",
+      "subtitle": "Model financial changes and see their impact",
+      "amountLabel": "Amount",
+      "run": "Run Scenario",
+      "before": "Before",
+      "after": "After",
+      "impact": "Impact",
+      "monthlyCashFlow": "Monthly Cash Flow",
+      "annualSavings": "Annual Savings",
+      "healthScore": "Health Score",
+      "types": {
+        "cancelSubscription": {
+          "title": "Cancel Subscription",
+          "description": "See savings from canceling a recurring charge"
+        },
+        "changeIncome": {
+          "title": "Change Income",
+          "description": "Model an income increase or decrease"
+        },
+        "addExpense": {
+          "title": "Add Expense",
+          "description": "See the impact of a new recurring expense"
+        },
+        "payOffDebt": {
+          "title": "Pay Off Debt",
+          "description": "Calculate interest savings from early payoff"
+        },
+        "increaseSavings": {
+          "title": "Increase Savings",
+          "description": "See goal timeline acceleration"
+        }
+      }
+    },
+    "netWorth": {
+      "title": "Net Worth",
+      "totalNetWorth": "Total Net Worth",
+      "totalAssets": "Total Assets",
+      "totalLiabilities": "Total Liabilities",
+      "assetBreakdown": "Asset Breakdown",
+      "liabilityBreakdown": "Liability Breakdown",
+      "cashChecking": "Cash & Checking",
+      "savings": "Savings",
+      "investments": "Investments",
+      "property": "Property",
+      "creditCards": "Credit Cards",
+      "loans": "Loans",
+      "mortgage": "Mortgage",
+      "noLiabilities": "No liabilities — great job!",
+      "history": "Historical Snapshots",
+      "milestoneReached": "Milestone reached: {amount}!",
+      "trend": "Trend"
+    },
+    "property": {
+      "title": "Properties",
+      "addProperty": "Add Property",
+      "totalValue": "Total Value",
+      "totalProperties": "Total Properties",
+      "noProperties": "No properties tracked",
+      "noPropertiesDescription": "Add your first property to track equity and appreciation",
+      "currentValue": "Current Value",
+      "equity": "Equity",
+      "annualAppreciation": "Annual Appreciation",
+      "purchasePrice": "Purchase Price",
+      "mortgageBalance": "Mortgage Balance",
+      "monthlyIncome": "Monthly Income",
+      "propertyTax": "Property Tax"
+    },
+    "events": {
+      "title": "Event Budgets",
+      "createEvent": "Create Event",
+      "suggestedTemplates": "Suggested Templates",
+      "noEvents": "No active events",
+      "noEventsDescription": "Create an event budget to track spending for weddings, holidays, and more",
+      "remaining": "Remaining",
+      "daysLeft": "{count} days left",
+      "tagTransaction": "Tag to event",
+      "untagTransaction": "Remove from event",
+      "progress": "Progress",
+      "completed": "Completed",
+      "active": "Active",
+      "planning": "Planning"
+    },
+    "templates": {
+      "title": "Budget Templates",
+      "useTemplate": "Use Template",
+      "preview": "Preview",
+      "categories": "Categories",
+      "holidaySeason": "Holiday Season",
+      "taxSeason": "Tax Season",
+      "summerTravel": "Summer Travel",
+      "backToSchool": "Back to School",
+      "homeImprovement": "Home Improvement",
+      "weddingEvent": "Wedding / Event"
+    }
   }
 }
