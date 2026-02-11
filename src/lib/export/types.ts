@@ -469,7 +469,7 @@ export interface ImportMappingExport {
 export interface ImportHistoryExport {
   id: string;
   fileName: string;
-  fileFormat: 'csv' | 'ofx' | 'qfx';
+  fileFormat: 'csv' | 'ofx' | 'qfx' | 'qbo' | 'pdf' | 'qif' | 'mt940' | 'camt053';
   bank?: string;
   importDate: string;
   transactionCount: number;

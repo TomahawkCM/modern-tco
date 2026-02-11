@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { ErrorBoundary } from '@/components/ErrorBoundary';
 import { ClientScenarios } from './client';
 
 export const metadata: Metadata = {
@@ -7,5 +8,9 @@ export const metadata: Metadata = {
 };
 
 export default function ScenariosPage() {
-  return <ClientScenarios />;
+  return (
+    <ErrorBoundary name="Scenarios">
+      <ClientScenarios />
+    </ErrorBoundary>
+  );
 }

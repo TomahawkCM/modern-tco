@@ -55,14 +55,14 @@ export function ClientNetWorth() {
   return (
     <div className="space-y-6 p-4 md:p-6">
       <div className="flex items-center gap-3">
-        <Landmark className="h-7 w-7 text-cyan-400" />
+        <Landmark className="h-7 w-7 text-cyan-400" aria-hidden="true" />
         <h1 className="text-2xl font-bold text-white">{t('title')}</h1>
       </div>
 
       {milestones.length > 0 && (
         <GlassCard className="border-amber-500/30 bg-amber-500/5 p-4">
           <div className="flex items-center gap-2">
-            <Target className="h-5 w-5 text-amber-400" />
+            <Target className="h-5 w-5 text-amber-400" aria-hidden="true" />
             <p className="text-sm font-medium text-amber-300">
               {t('milestoneReached', { amount: fmtCurrency(milestones[0]) })}
             </p>
@@ -80,14 +80,14 @@ export function ClientNetWorth() {
         </GlassCard>
         <GlassCard className="p-5">
           <div className="flex items-center gap-1.5">
-            <TrendingUp className="h-4 w-4 text-emerald-400" />
+            <TrendingUp className="h-4 w-4 text-emerald-400" aria-hidden="true" />
             <p className="text-sm text-slate-400">{t('totalAssets')}</p>
           </div>
           <p className="mt-1 text-2xl font-bold text-emerald-400">{fmtCurrency(breakdown.assets.total)}</p>
         </GlassCard>
         <GlassCard className="p-5">
           <div className="flex items-center gap-1.5">
-            <TrendingDown className="h-4 w-4 text-red-400" />
+            <TrendingDown className="h-4 w-4 text-red-400" aria-hidden="true" />
             <p className="text-sm text-slate-400">{t('totalLiabilities')}</p>
           </div>
           <p className="mt-1 text-2xl font-bold text-red-400">{fmtCurrency(breakdown.liabilities.total)}</p>

@@ -7,6 +7,7 @@
  */
 
 import { db } from '@/lib/budget-db';
+import { roundToCents, sumAmounts } from '@/lib/money';
 import type { EventBudget, EventBudgetCategory } from '@/types/budget';
 
 /**
@@ -77,8 +78,8 @@ export async function calculateProgress(
     const catTxs = nonSplitTxs.filter(
       (tx) => tx.category === cat.categoryName && tx.amount < 0
     );
-    const spent = catTxs.reduce((sum, tx) => sum + Math.abs(tx.amount), 0);
-    return { ...cat, spent: Math.round(spent * 100) / 100 };
+    const spent = sumAmounts(catTxs.map(tx => Math.abs(tx.amount)));
+    return { ...cat, spent: roundToCents(spent) };
   });
 
   // Update spent amounts in DB
@@ -87,14 +88,14 @@ export async function calculateProgress(
   }
 
   const totalBudgeted = eventBudget.totalBudget;
-  const totalSpent = nonSplitTxs
-    .filter((tx) => tx.amount < 0)
-    .reduce((sum, tx) => sum + Math.abs(tx.amount), 0);
+  const totalSpent = sumAmounts(
+    nonSplitTxs.filter((tx) => tx.amount < 0).map(tx => Math.abs(tx.amount))
+  );
 
   return {
     total: totalBudgeted,
-    spent: Math.round(totalSpent * 100) / 100,
-    remaining: Math.round((totalBudgeted - totalSpent) * 100) / 100,
+    spent: roundToCents(totalSpent),
+    remaining: roundToCents(totalBudgeted - totalSpent),
     byCategory: updatedCategories,
   };
 }

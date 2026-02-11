@@ -4,6 +4,7 @@ import { GlassCard } from '@/components/budget/ui/GlassCard';
 import { getAllProperties, getTotalPropertyValue, calculateEquity, calculateAppreciation } from '@/lib/property/property-calculator';
 import { db } from '@/lib/budget-db';
 import { useDefaultCurrency } from '@/hooks/useDefaultCurrency';
+import { CardSkeleton } from '@/components/budget/LoadingSkeleton';
 import { Building2, Plus, TrendingUp } from 'lucide-react';
 import { useFormatter, useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
@@ -16,31 +17,48 @@ export function ClientProperties() {
   const [properties, setProperties] = useState<Property[]>([]);
   const [loans, setLoans] = useState<Loan[]>([]);
   const [totalValue, setTotalValue] = useState(0);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function load() {
-      const [props, allLoans] = await Promise.all([
-        getAllProperties(),
-        db.loans.toArray(),
-      ]);
-      setProperties(props);
-      setLoans(allLoans);
-      setTotalValue(await getTotalPropertyValue());
+      try {
+        const [props, allLoans] = await Promise.all([
+          getAllProperties(),
+          db.loans.toArray(),
+        ]);
+        setProperties(props);
+        setLoans(allLoans);
+        setTotalValue(await getTotalPropertyValue());
+      } finally {
+        setLoading(false);
+      }
     }
     load();
   }, []);
 
   const fmtCurrency = (v: number) => format.number(v, { style: 'currency', currency });
 
+  if (loading) {
+    return (
+      <div className="space-y-6 p-4 md:p-6">
+        <div className="h-8 w-48 animate-pulse rounded bg-slate-700" />
+        <div className="grid gap-4 sm:grid-cols-2">
+          <CardSkeleton />
+          <CardSkeleton />
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="space-y-6 p-4 md:p-6">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <Building2 className="h-7 w-7 text-teal-400" />
+          <Building2 className="h-7 w-7 text-teal-400" aria-hidden="true" />
           <h1 className="text-2xl font-bold text-white">{t('title')}</h1>
         </div>
         <button className="flex items-center gap-2 rounded-lg bg-teal-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-teal-500">
-          <Plus className="h-4 w-4" />
+          <Plus className="h-4 w-4" aria-hidden="true" />
           {t('addProperty')}
         </button>
       </div>
@@ -60,7 +78,7 @@ export function ClientProperties() {
       {/* Property Cards */}
       {properties.length === 0 ? (
         <GlassCard className="flex flex-col items-center justify-center p-12 text-center">
-          <Building2 className="mb-4 h-16 w-16 text-slate-600" />
+          <Building2 className="mb-4 h-16 w-16 text-slate-600" aria-hidden="true" />
           <h2 className="text-lg font-semibold text-slate-300">{t('noProperties')}</h2>
           <p className="mt-2 text-sm text-slate-500">{t('noPropertiesDescription')}</p>
         </GlassCard>
@@ -97,7 +115,7 @@ export function ClientProperties() {
                     <div className="flex items-center justify-between">
                       <span className="text-slate-400">{t('annualAppreciation')}</span>
                       <div className="flex items-center gap-1">
-                        <TrendingUp className="h-3 w-3 text-emerald-400" />
+                        <TrendingUp className="h-3 w-3 text-emerald-400" aria-hidden="true" />
                         <span className="text-xs text-emerald-400">
                           {appreciation.annual.toFixed(1)}%
                         </span>

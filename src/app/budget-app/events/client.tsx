@@ -4,6 +4,7 @@ import { GlassCard } from '@/components/budget/ui/GlassCard';
 import { getActiveEvents, calculateProgress } from '@/lib/event-budgets/event-budget-engine';
 import { getRelevantTemplates } from '@/lib/event-budgets/seasonal-templates';
 import { useDefaultCurrency } from '@/hooks/useDefaultCurrency';
+import { CardSkeleton } from '@/components/budget/LoadingSkeleton';
 import { PartyPopper, Plus, Calendar, Sparkles } from 'lucide-react';
 import { useFormatter, useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
@@ -23,33 +24,50 @@ export function ClientEvents() {
   const currency = useDefaultCurrency();
   const [events, setEvents] = useState<EventWithProgress[]>([]);
   const [templates, setTemplates] = useState<ReturnType<typeof getRelevantTemplates>>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function load() {
-      const active = await getActiveEvents();
-      const withProgress = await Promise.all(
-        active.map(async (event) => {
-          const progress = await calculateProgress(event.id);
-          return { event, ...progress };
-        })
-      );
-      setEvents(withProgress);
-      setTemplates(getRelevantTemplates(new Date().getMonth() + 1));
+      try {
+        const active = await getActiveEvents();
+        const withProgress = await Promise.all(
+          active.map(async (event) => {
+            const progress = await calculateProgress(event.id);
+            return { event, ...progress };
+          })
+        );
+        setEvents(withProgress);
+        setTemplates(getRelevantTemplates(new Date().getMonth() + 1));
+      } finally {
+        setLoading(false);
+      }
     }
     load();
   }, []);
 
   const fmtCurrency = (v: number) => format.number(v, { style: 'currency', currency });
 
+  if (loading) {
+    return (
+      <div className="space-y-6 p-4 md:p-6">
+        <div className="h-8 w-48 animate-pulse rounded bg-slate-700" />
+        <div className="grid gap-4 sm:grid-cols-2">
+          <CardSkeleton />
+          <CardSkeleton />
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="space-y-6 p-4 md:p-6">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <PartyPopper className="h-7 w-7 text-pink-400" />
+          <PartyPopper className="h-7 w-7 text-pink-400" aria-hidden="true" />
           <h1 className="text-2xl font-bold text-white">{t('title')}</h1>
         </div>
         <button className="flex items-center gap-2 rounded-lg bg-pink-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-pink-500">
-          <Plus className="h-4 w-4" />
+          <Plus className="h-4 w-4" aria-hidden="true" />
           {t('createEvent')}
         </button>
       </div>
@@ -58,13 +76,14 @@ export function ClientEvents() {
       {templates.length > 0 && (
         <GlassCard className="border-pink-500/20 bg-pink-500/5 p-4">
           <div className="flex items-center gap-2 mb-3">
-            <Sparkles className="h-4 w-4 text-pink-400" />
+            <Sparkles className="h-4 w-4 text-pink-400" aria-hidden="true" />
             <span className="text-sm font-medium text-pink-300">{t('suggestedTemplates')}</span>
           </div>
           <div className="flex flex-wrap gap-2">
             {templates.map(tmpl => (
               <button
                 key={tmpl.id}
+                aria-label={`${t('createEvent')}: ${tmpl.name}`}
                 className="rounded-lg border border-pink-500/20 bg-pink-500/10 px-3 py-1.5 text-xs text-pink-200 transition-colors hover:bg-pink-500/20"
               >
                 {tmpl.name}
@@ -77,7 +96,7 @@ export function ClientEvents() {
       {/* Active Events */}
       {events.length === 0 ? (
         <GlassCard className="flex flex-col items-center justify-center p-12 text-center">
-          <Calendar className="mb-4 h-16 w-16 text-slate-600" />
+          <Calendar className="mb-4 h-16 w-16 text-slate-600" aria-hidden="true" />
           <h2 className="text-lg font-semibold text-slate-300">{t('noEvents')}</h2>
           <p className="mt-2 text-sm text-slate-500">{t('noEventsDescription')}</p>
         </GlassCard>

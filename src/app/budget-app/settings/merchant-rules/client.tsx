@@ -2,6 +2,7 @@
 
 import { GlassCard } from '@/components/budget/ui/GlassCard';
 import { getAllRules, deleteRule } from '@/lib/merchant-rules';
+import { Skeleton } from '@/components/budget/LoadingSkeleton';
 import { ArrowLeft, Settings, Trash2, Tag } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import NextLink from 'next/link';
@@ -11,10 +12,15 @@ import type { MerchantRule } from '@/types/budget';
 export function ClientMerchantRules() {
   const t = useTranslations('budget.merchantRules');
   const [rules, setRules] = useState<MerchantRule[]>([]);
+  const [loading, setLoading] = useState(true);
 
   const loadRules = useCallback(async () => {
-    const allRules = await getAllRules();
-    setRules(allRules);
+    try {
+      const allRules = await getAllRules();
+      setRules(allRules);
+    } finally {
+      setLoading(false);
+    }
   }, []);
 
   useEffect(() => {
@@ -26,23 +32,41 @@ export function ClientMerchantRules() {
     await loadRules();
   };
 
+  if (loading) {
+    return (
+      <div className="space-y-6 p-4 md:p-6">
+        <div className="h-8 w-48 animate-pulse rounded bg-slate-700" />
+        <div className="space-y-2">
+          {[1, 2, 3].map(i => (
+            <div key={i} className="flex gap-4 rounded-lg bg-slate-900/50 border border-white/10 p-4">
+              <Skeleton className="h-4 w-32" />
+              <Skeleton className="h-4 w-24" />
+              <Skeleton className="h-4 w-16 ml-auto" />
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="space-y-6 p-4 md:p-6">
       <div className="flex items-center gap-3">
         <NextLink
           href="/budget-app/settings"
           className="rounded-lg p-2 text-slate-400 transition-colors hover:bg-white/5 hover:text-white"
+          aria-label="Back to settings"
         >
-          <ArrowLeft className="h-5 w-5" />
+          <ArrowLeft className="h-5 w-5" aria-hidden="true" />
         </NextLink>
-        <Settings className="h-6 w-6 text-blue-400" />
+        <Settings className="h-6 w-6 text-blue-400" aria-hidden="true" />
         <h1 className="text-2xl font-bold text-white">{t('title')}</h1>
       </div>
       <p className="text-sm text-slate-400">{t('description')}</p>
 
       {rules.length === 0 ? (
         <GlassCard className="flex flex-col items-center justify-center p-12 text-center">
-          <Tag className="mb-4 h-16 w-16 text-slate-600" />
+          <Tag className="mb-4 h-16 w-16 text-slate-600" aria-hidden="true" />
           <h2 className="text-lg font-semibold text-slate-300">{t('noRules')}</h2>
           <p className="mt-2 text-sm text-slate-500">{t('noRulesDescription')}</p>
         </GlassCard>

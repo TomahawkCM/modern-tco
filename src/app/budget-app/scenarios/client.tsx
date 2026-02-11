@@ -4,6 +4,7 @@ import { GlassCard } from '@/components/budget/ui/GlassCard';
 import { runScenario } from '@/lib/scenarios/scenario-engine';
 import type { ScenarioInput, ScenarioResult, FinancialState, ScenarioType } from '@/lib/scenarios/scenario-types';
 import { useDefaultCurrency } from '@/hooks/useDefaultCurrency';
+import { divideAmount, sumAmounts, multiplyAmount } from '@/lib/money';
 import { db } from '@/lib/budget-db';
 import { FlaskConical, ArrowRight, TrendingUp, TrendingDown } from 'lucide-react';
 import { useFormatter, useTranslations } from 'next-intl';
@@ -49,15 +50,11 @@ export function ClientScenarios() {
           tx => !tx.isSplit && new Date(tx.date) >= threeMonthsAgo
         );
         const months = Math.max(1, 3); // 3-month average
-        const totalIncome = recentTxs
-          .filter(tx => tx.amount > 0)
-          .reduce((sum, tx) => sum + tx.amount, 0);
-        const totalExpenses = recentTxs
-          .filter(tx => tx.amount < 0)
-          .reduce((sum, tx) => sum + Math.abs(tx.amount), 0);
+        const totalIncome = sumAmounts(recentTxs.filter(tx => tx.amount > 0).map(tx => tx.amount));
+        const totalExpenses = sumAmounts(recentTxs.filter(tx => tx.amount < 0).map(tx => Math.abs(tx.amount)));
 
-        const monthlyIncome = Math.round((totalIncome / months) * 100) / 100;
-        const monthlyExpenses = Math.round((totalExpenses / months) * 100) / 100;
+        const monthlyIncome = divideAmount(totalIncome, months);
+        const monthlyExpenses = divideAmount(totalExpenses, months);
 
         // Debt from active loans
         const activeLoans = loans.filter(l => l.status === 'active');
@@ -97,7 +94,7 @@ export function ClientScenarios() {
   }, [selectedPreset, amount, currentState]);
 
   const cashFlow = (state: FinancialState) => state.monthlyIncome - state.monthlyExpenses;
-  const annualSavings = (state: FinancialState) => state.monthlySavings * 12;
+  const annualSavings = (state: FinancialState) => multiplyAmount(state.monthlySavings, 12);
 
   if (loading) {
     return (
@@ -111,9 +108,9 @@ export function ClientScenarios() {
   }
 
   return (
-    <div className="space-y-6 p-4 md:p-6">
+    <div className="space-y-6 p-4 md:p-6" style={{ paddingBottom: "env(safe-area-inset-bottom, 0px)" }}>
       <div className="flex items-center gap-3">
-        <FlaskConical className="h-7 w-7 text-violet-400" />
+        <FlaskConical className="h-7 w-7 text-violet-400" aria-hidden="true" />
         <h1 className="text-2xl font-bold text-white">{t('title')}</h1>
       </div>
       <p className="text-sm text-slate-400">{t('subtitle')}</p>
@@ -126,7 +123,11 @@ export function ClientScenarios() {
             className={`cursor-pointer p-4 transition-all hover:border-violet-500/30 ${
               selectedPreset?.type === preset.type ? 'border-violet-500/50 bg-violet-500/10' : ''
             }`}
+            role="button"
+            tabIndex={0}
+            aria-pressed={selectedPreset?.type === preset.type}
             onClick={() => { setSelectedPreset(preset); setResult(null); }}
+            onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setSelectedPreset(preset); setResult(null); } }}
           >
             <div className="flex items-center gap-3">
               <span className="text-2xl">{preset.icon}</span>
@@ -142,12 +143,14 @@ export function ClientScenarios() {
       {/* Amount Input */}
       {selectedPreset && (
         <GlassCard className="p-5">
-          <label className="mb-2 block text-sm font-medium text-slate-300">{t('amountLabel')}</label>
+          <label htmlFor="scenario-amount" className="mb-2 block text-sm font-medium text-slate-300">{t('amountLabel')}</label>
           <div className="flex gap-3">
             <input
+              id="scenario-amount"
               type="number"
               value={amount}
               onChange={(e) => setAmount(e.target.value)}
+              onFocus={(e) => e.currentTarget.scrollIntoView({ behavior: 'smooth', block: 'center' })}
               className="flex-1 rounded-lg border border-slate-600 bg-slate-800 px-4 py-2 text-white placeholder-slate-500 focus:border-violet-500 focus:outline-none"
               placeholder="0.00"
             />
@@ -156,7 +159,7 @@ export function ClientScenarios() {
               disabled={!amount}
               className="flex items-center gap-2 rounded-lg bg-violet-600 px-6 py-2 text-sm font-medium text-white transition-colors hover:bg-violet-500 disabled:opacity-50"
             >
-              {t('run')} <ArrowRight className="h-4 w-4" />
+              {t('run')} <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </button>
           </div>
         </GlassCard>
@@ -212,16 +215,16 @@ export function ClientScenarios() {
             <div className="flex flex-wrap gap-4">
               <div className="flex items-center gap-2">
                 {result.impact.monthlyCashFlowChange >= 0
-                  ? <TrendingUp className="h-4 w-4 text-emerald-400" />
-                  : <TrendingDown className="h-4 w-4 text-red-400" />}
+                  ? <TrendingUp className="h-4 w-4 text-emerald-400" aria-hidden="true" />
+                  : <TrendingDown className="h-4 w-4 text-red-400" aria-hidden="true" />}
                 <span className="text-sm text-slate-300">
                   {fmtCurrency(Math.abs(result.impact.monthlyCashFlowChange))}/mo
                 </span>
               </div>
               <div className="flex items-center gap-2">
                 {result.impact.annualSavingsChange >= 0
-                  ? <TrendingUp className="h-4 w-4 text-emerald-400" />
-                  : <TrendingDown className="h-4 w-4 text-red-400" />}
+                  ? <TrendingUp className="h-4 w-4 text-emerald-400" aria-hidden="true" />
+                  : <TrendingDown className="h-4 w-4 text-red-400" aria-hidden="true" />}
                 <span className="text-sm text-slate-300">
                   {fmtCurrency(Math.abs(result.impact.annualSavingsChange))}/yr
                 </span>

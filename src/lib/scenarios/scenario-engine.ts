@@ -6,6 +6,7 @@
  */
 
 import type { ScenarioInput, FinancialState, ScenarioResult } from './scenario-types';
+import { roundToCents, multiplyAmount, divideAmount } from '@/lib/money';
 
 /**
  * Run a what-if scenario and return before/after comparison.
@@ -24,9 +25,9 @@ export function runScenario(
       after.monthlySavings += amount;
       after.savingsRate =
         after.monthlyIncome > 0
-          ? (after.monthlySavings / after.monthlyIncome) * 100
+          ? divideAmount(after.monthlySavings * 100, after.monthlyIncome)
           : 0;
-      description = `Cancelling this subscription saves $${amount.toFixed(2)}/month ($${(amount * 12).toFixed(2)}/year)`;
+      description = `Cancelling this subscription saves $${roundToCents(amount).toFixed(2)}/month ($${multiplyAmount(amount, 12).toFixed(2)}/year)`;
       break;
     }
 
@@ -37,11 +38,11 @@ export function runScenario(
       after.monthlySavings += incomeDelta;
       after.savingsRate =
         after.monthlyIncome > 0
-          ? (after.monthlySavings / after.monthlyIncome) * 100
+          ? divideAmount(after.monthlySavings * 100, after.monthlyIncome)
           : 0;
       description = incomeDelta >= 0
-        ? `Income increase of $${incomeDelta.toFixed(2)}/month adds $${(incomeDelta * 12).toFixed(2)}/year to savings`
-        : `Income decrease of $${Math.abs(incomeDelta).toFixed(2)}/month reduces savings by $${(Math.abs(incomeDelta) * 12).toFixed(2)}/year`;
+        ? `Income increase of $${roundToCents(incomeDelta).toFixed(2)}/month adds $${multiplyAmount(incomeDelta, 12).toFixed(2)}/year to savings`
+        : `Income decrease of $${roundToCents(Math.abs(incomeDelta)).toFixed(2)}/month reduces savings by $${multiplyAmount(Math.abs(incomeDelta), 12).toFixed(2)}/year`;
       break;
     }
 
@@ -51,9 +52,9 @@ export function runScenario(
       after.monthlySavings -= expense;
       after.savingsRate =
         after.monthlyIncome > 0
-          ? (after.monthlySavings / after.monthlyIncome) * 100
+          ? divideAmount(after.monthlySavings * 100, after.monthlyIncome)
           : 0;
-      description = `New expense of $${expense.toFixed(2)}/month reduces annual savings by $${(expense * 12).toFixed(2)}`;
+      description = `New expense of $${roundToCents(expense).toFixed(2)}/month reduces annual savings by $${multiplyAmount(expense, 12).toFixed(2)}`;
       break;
     }
 
@@ -63,7 +64,7 @@ export function runScenario(
       after.monthlySavings -= extra;
       after.savingsRate =
         after.monthlyIncome > 0
-          ? (after.monthlySavings / after.monthlyIncome) * 100
+          ? divideAmount(after.monthlySavings * 100, after.monthlyIncome)
           : 0;
 
       // Estimate new debt-free date
@@ -74,7 +75,7 @@ export function runScenario(
         after.debtFreeDate = newDebtFreeDate;
       }
 
-      description = `Extra $${extra.toFixed(2)}/month toward debt${after.debtFreeDate ? ` — debt-free by ${after.debtFreeDate.toLocaleDateString()}` : ''}`;
+      description = `Extra $${roundToCents(extra).toFixed(2)}/month toward debt${after.debtFreeDate ? ` — debt-free by ${after.debtFreeDate.toLocaleDateString()}` : ''}`;
       break;
     }
 
@@ -85,7 +86,7 @@ export function runScenario(
       after.monthlySavings = targetSavings;
       after.monthlyExpenses -= savingsDelta;
       after.savingsRate = newRate;
-      description = `Increasing savings rate to ${newRate.toFixed(1)}% saves an extra $${(savingsDelta * 12).toFixed(2)}/year`;
+      description = `Increasing savings rate to ${newRate.toFixed(1)}% saves an extra $${multiplyAmount(savingsDelta, 12).toFixed(2)}/year`;
       break;
     }
   }
@@ -94,7 +95,7 @@ export function runScenario(
   after.healthScore = calculateSimpleHealthScore(after);
 
   const monthlyCashFlowChange = after.monthlySavings - currentState.monthlySavings;
-  const annualSavingsChange = monthlyCashFlowChange * 12;
+  const annualSavingsChange = multiplyAmount(monthlyCashFlowChange, 12);
   const healthScoreDelta = after.healthScore - currentState.healthScore;
 
   let debtFreeDateChange: number | undefined;
@@ -109,8 +110,8 @@ export function runScenario(
     before: currentState,
     after,
     impact: {
-      monthlyCashFlowChange: Math.round(monthlyCashFlowChange * 100) / 100,
-      annualSavingsChange: Math.round(annualSavingsChange * 100) / 100,
+      monthlyCashFlowChange: roundToCents(monthlyCashFlowChange),
+      annualSavingsChange: roundToCents(annualSavingsChange),
       healthScoreDelta: Math.round(healthScoreDelta),
       debtFreeDateChange,
       description,

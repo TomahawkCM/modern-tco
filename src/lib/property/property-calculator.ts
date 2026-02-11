@@ -6,6 +6,7 @@
  */
 
 import { db } from '@/lib/budget-db';
+import { roundToCents } from '@/lib/money';
 import type { Property, Loan } from '@/types/budget';
 
 /**
@@ -21,7 +22,7 @@ export function calculateEquity(property: Property, loan?: Loan): number {
     mortgageBalance = property.manualMortgageBalance;
   }
 
-  return Math.round((property.currentValue - mortgageBalance) * 100) / 100;
+  return roundToCents(property.currentValue - mortgageBalance);
 }
 
 /**
@@ -49,8 +50,8 @@ export function calculateAppreciation(
       : totalAppreciation;
 
   return {
-    annual: Math.round(annualAppreciation * 100) / 100,
-    total: Math.round(totalAppreciation * 100) / 100,
+    annual: roundToCents(annualAppreciation),
+    total: roundToCents(totalAppreciation),
   };
 }
 
@@ -81,8 +82,8 @@ export function calculateRentalROI(
   const annualROI = monthlyROI * 12;
 
   return {
-    monthly: Math.round(monthlyROI * 100) / 100,
-    annual: Math.round(annualROI * 100) / 100,
+    monthly: roundToCents(monthlyROI),
+    annual: roundToCents(annualROI),
   };
 }
 

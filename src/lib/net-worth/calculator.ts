@@ -6,6 +6,7 @@
  */
 
 import { db } from '@/lib/budget-db';
+import { roundToCents } from '@/lib/money';
 import type { StoredNetWorthSnapshot, Account, Loan } from '@/types/budget';
 import type { Holding } from '@/lib/budget-db';
 
@@ -74,21 +75,21 @@ export async function calculateCurrentNetWorth(): Promise<NetWorthBreakdown> {
 
   return {
     assets: {
-      cashChecking: round(cashChecking),
-      savings: round(savings),
-      investments: round(investments),
-      property: round(propertyValue),
+      cashChecking: roundToCents(cashChecking),
+      savings: roundToCents(savings),
+      investments: roundToCents(investments),
+      property: roundToCents(propertyValue),
       other: 0,
-      total: round(totalAssets),
+      total: roundToCents(totalAssets),
     },
     liabilities: {
-      creditCards: round(creditCards),
-      loans: round(activeLoanBalance),
-      mortgage: round(mortgageBalance),
+      creditCards: roundToCents(creditCards),
+      loans: roundToCents(activeLoanBalance),
+      mortgage: roundToCents(mortgageBalance),
       other: 0,
-      total: round(totalLiabilities),
+      total: roundToCents(totalLiabilities),
     },
-    netWorth: round(totalAssets - totalLiabilities),
+    netWorth: roundToCents(totalAssets - totalLiabilities),
   };
 }
 
@@ -111,6 +112,3 @@ export function detectMilestones(
   );
 }
 
-function round(n: number): number {
-  return Math.round(n * 100) / 100;
-}

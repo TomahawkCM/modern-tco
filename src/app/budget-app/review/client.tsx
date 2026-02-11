@@ -4,6 +4,7 @@ import { GlassCard } from '@/components/budget/ui/GlassCard';
 import { db } from '@/lib/budget-db';
 import { useLiveQuery } from 'dexie-react-hooks';
 import { useDefaultCurrency } from '@/hooks/useDefaultCurrency';
+import { CardSkeleton } from '@/components/budget/LoadingSkeleton';
 import { CheckCircle2, XCircle, ArrowLeft, ArrowRight, Inbox } from 'lucide-react';
 import { useFormatter, useTranslations } from 'next-intl';
 import { useState, useCallback, useEffect, useMemo } from 'react';
@@ -17,14 +18,16 @@ export function ClientReview() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [reviewedIds, setReviewedIds] = useState<Set<string>>(new Set());
 
-  const allUncategorized = useLiveQuery(async () => {
+  const rawUncategorized = useLiveQuery(async () => {
     try {
       const txs = await db.transactions.toArray();
       return txs.filter(tx => !tx.isSplit && (!tx.category || tx.category === ''));
     } catch {
       return [];
     }
-  }) || [];
+  });
+
+  const allUncategorized = rawUncategorized ?? [];
 
   const pending = useMemo(
     () => allUncategorized.filter(tx => !reviewedIds.has(tx.id)),
@@ -58,8 +61,18 @@ export function ClientReview() {
 
   const fmtCurrency = (v: number) => format.number(Math.abs(v), { style: 'currency', currency });
 
+  if (rawUncategorized === undefined) {
+    return (
+      <div className="flex min-h-[60vh] flex-col items-center justify-center p-4 md:p-6">
+        <div className="w-full max-w-md">
+          <CardSkeleton />
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div className="flex min-h-[60vh] flex-col items-center justify-center space-y-6 p-4 md:p-6">
+    <div className="flex min-h-[60vh] flex-col items-center justify-center space-y-6 p-4 md:p-6" style={{ paddingBottom: "env(safe-area-inset-bottom, 0px)" }}>
       <div className="text-center">
         <h1 className="text-2xl font-bold text-white">{t('title')}</h1>
         <p className="mt-1 text-sm text-slate-400">{t('subtitle')}</p>
@@ -80,7 +93,7 @@ export function ClientReview() {
       </div>
 
       {/* Card Stack */}
-      <div className="relative h-64 w-full max-w-md">
+      <div className="relative h-64 w-full max-w-md" aria-live="polite">
         <AnimatePresence mode="popLayout">
           {currentTx ? (
             <motion.div
@@ -135,8 +148,8 @@ export function ClientReview() {
 
       {/* Keyboard shortcuts hint */}
       <div className="flex gap-4 text-xs text-slate-600">
-        <span><ArrowLeft className="inline h-3 w-3" /> {t('skipKey')}</span>
-        <span><ArrowRight className="inline h-3 w-3" /> {t('approveKey')}</span>
+        <span><ArrowLeft className="inline h-3 w-3" aria-hidden="true" /> {t('skipKey')}</span>
+        <span><ArrowRight className="inline h-3 w-3" aria-hidden="true" /> {t('approveKey')}</span>
       </div>
     </div>
   );
