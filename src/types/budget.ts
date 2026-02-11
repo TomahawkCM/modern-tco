@@ -57,6 +57,17 @@ export interface Transaction {
   checkNum?: string; // OFX: Check number if applicable
   transactionType?: string; // OFX: TRNTYPE (DEBIT, CREDIT, CHECK, etc.)
 
+  // Refund Tracking Fields
+  refundStatus?: 'expecting' | 'received' | 'partial' | null;
+  refundLinkedTransactionId?: string;
+  refundExpectedAmount?: number;
+  refundReceivedAmount?: number;
+  refundExpectedDate?: Date;
+  refundNotes?: string;
+
+  // Event/Project Budget Tagging
+  eventBudgetId?: string;
+
   createdAt: Date;
   updatedAt: Date;
 }
@@ -180,7 +191,7 @@ export interface ImportMapping {
 export interface ImportMetadata {
   id: string; // Unique ID (e.g., "import_1699564823000")
   fileName: string; // Original file name
-  fileFormat: "csv" | "ofx" | "qfx"; // File type
+  fileFormat: "csv" | "ofx" | "qfx" | "qbo" | "pdf" | "qif" | "mt940" | "camt053"; // File type
   bank?: string; // Detected bank (e.g., "BMO", "TD")
   importDate: Date; // When import occurred
   transactionCount: number; // Number of transactions imported
@@ -246,6 +257,7 @@ export interface ParsedTransaction {
   amount: number;
   isDuplicate: boolean;
   confidence: number; // 0-1 for duplicate detection
+  currency?: string; // ISO 4217 currency code (e.g., 'USD', 'EUR', 'JPY')
   fitid?: string; // OFX: Financial Institution Transaction ID (for perfect duplicate detection)
   checkNum?: string; // OFX: Check number if applicable
   transactionType?: string; // OFX: TRNTYPE (DEBIT, CREDIT, CHECK, etc.)
@@ -253,6 +265,9 @@ export interface ParsedTransaction {
   duplicateReason?: string; // Explanation from Claude API
   matchedTransactionId?: string; // ID of matched existing transaction
   requiresReview?: boolean; // True if confidence is below threshold and needs manual review
+  // Source format tracking
+  sourceFormat?: 'csv' | 'ofx' | 'qfx' | 'qbo' | 'pdf' | 'qif' | 'mt940' | 'camt053';
+  balance?: number; // Running balance if available from statement
 }
 
 export interface BankConfig {
@@ -655,4 +670,132 @@ export interface ExcludedSubscription {
   merchantName: string; // Display name for reference
   reason?: string; // Optional reason for exclusion
   excludedAt: Date;
+}
+
+// Budget Rollover Tracking
+export interface BudgetRollover {
+  id: string;
+  budgetId: string;
+  month: string; // "2026-01"
+  amount: number;
+  calculatedAt: Date;
+}
+
+// Merchant Auto-Categorization Rules
+export interface MerchantRule {
+  id: string;
+  merchantToken: string;
+  merchantDisplayName: string;
+  category: string;
+  subcategory?: string;
+  confidence: number;
+  source: 'user' | 'auto-learned';
+  applyCount: number;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+// Gamification Events
+export interface GamificationEvent {
+  id: string;
+  eventType: 'login' | 'transaction_added' | 'budget_under' | 'review_completed' | 'receipt_scanned' | 'no_spend_day';
+  timestamp: Date;
+  metadata?: Record<string, unknown>;
+}
+
+// Budget Streak Tracking
+export interface BudgetStreak {
+  currentStreak: number;
+  longestStreak: number;
+  lastActiveDate: string;
+}
+
+// Budget Achievement Definitions
+export interface BudgetAchievement {
+  id: string;
+  name: string;
+  description: string;
+  icon: string;
+  category: 'budgeting' | 'saving' | 'debt' | 'receipt' | 'streak' | 'import';
+  requirement: { type: string; value: number };
+  points: number;
+  rarity: 'common' | 'uncommon' | 'rare' | 'epic' | 'legendary';
+  unlockedAt?: Date;
+}
+
+// Net Worth Snapshot Storage
+export interface StoredNetWorthSnapshot {
+  id: string;
+  date: Date;
+  assets: {
+    cashChecking: number;
+    savings: number;
+    investments: number;
+    property: number;
+    other: number;
+    total: number;
+  };
+  liabilities: {
+    creditCards: number;
+    loans: number;
+    mortgage: number;
+    other: number;
+    total: number;
+  };
+  netWorth: number;
+  calculatedAt: Date;
+}
+
+// Real Estate / Property Tracking
+export interface Property {
+  id: string;
+  name: string;
+  address?: string;
+  type: 'primary_residence' | 'rental' | 'vacation' | 'land' | 'commercial';
+  purchasePrice: number;
+  purchaseDate: Date;
+  currentValue: number;
+  lastValuationDate: Date;
+  currency: string;
+  loanId?: string;
+  hasManualMortgage?: boolean;
+  manualMortgageBalance?: number;
+  paymentFrequency?: 'weekly' | 'bi-weekly' | 'monthly' | 'quarterly' | 'semi-annual' | 'annual';
+  annualPropertyTax?: number;
+  annualInsurance?: number;
+  monthlyHOA?: number;
+  annualMaintenance?: number;
+  propertyTaxDueMonth?: number;
+  propertyTaxReminder?: boolean;
+  monthlyRentalIncome?: number;
+  occupancyRate?: number;
+  notes?: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+// Event/Project Budget
+export interface EventBudget {
+  id: string;
+  name: string;
+  description?: string;
+  status: 'planning' | 'active' | 'completed' | 'cancelled';
+  totalBudget: number;
+  currency: string;
+  startDate: Date;
+  endDate: Date;
+  icon?: string;
+  color?: string;
+  templateId?: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+// Event Budget Category Breakdown
+export interface EventBudgetCategory {
+  id: string;
+  eventBudgetId: string;
+  categoryName: string;
+  budgeted: number;
+  spent: number;
 }
