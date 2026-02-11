@@ -30,6 +30,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 import { useTranslations } from 'next-intl';
+import { PrivacyToggle } from "@/components/budget/PrivacyToggle";
 import { ProfileSelector } from "@/components/budget/profile/ProfileSelector";
 import { NotificationCenter } from "@/components/budget/notifications";
 
@@ -308,6 +309,26 @@ export function Sidebar({ onSearch, onShowShortcuts, className, isMobile, onClos
               {t('actions.importCsv')}
             </span>
           </Link>
+          {/* Privacy Mode Toggle */}
+          {isMobile ? (
+            <PrivacyToggle compact={false} />
+          ) : (
+            <>
+              {/* Icon-only on md, full on lg (unless collapsed) */}
+              <div className={cn(
+                "md:flex md:justify-center lg:hidden",
+                isCollapsed && "lg:flex",
+              )}>
+                <PrivacyToggle compact />
+              </div>
+              <div className={cn(
+                "hidden lg:block",
+                isCollapsed && "lg:hidden",
+              )}>
+                <PrivacyToggle compact={false} />
+              </div>
+            </>
+          )}
           <Link
             id="sidebar-settings"
             href="/budget-app/settings"

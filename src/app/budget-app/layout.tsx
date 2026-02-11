@@ -26,6 +26,7 @@ import { ThemeProvider } from "@/components/ui/theme-provider";
 import { ChatbotProvider } from "@/contexts/ChatbotContext";
 import { NotificationProvider } from "@/contexts/NotificationContext";
 import { ProfileProvider } from "@/contexts/ProfileContext";
+import { PrivacyProvider } from "@/contexts/PrivacyContext";
 import { SeniorsModeProvider } from "@/contexts/SeniorsModeContext";
 import { useIOSStatePreservation } from "@/hooks/useIOSStatePreservation";
 import { useKeyboardShortcuts } from "@/hooks/useKeyboardShortcuts";
@@ -81,15 +82,17 @@ export default function BudgetAppLayout({ children }: { children: React.ReactNod
     return (
       <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
         <SeniorsModeProvider>
-          <ProfileProvider>
-            <ChatbotProvider>
-              <NotificationProvider>
-                <ClientI18nProvider>
-                  <ToastProvider>{children}</ToastProvider>
-                </ClientI18nProvider>
-              </NotificationProvider>
-            </ChatbotProvider>
-          </ProfileProvider>
+          <PrivacyProvider>
+            <ProfileProvider>
+              <ChatbotProvider>
+                <NotificationProvider>
+                  <ClientI18nProvider>
+                    <ToastProvider>{children}</ToastProvider>
+                  </ClientI18nProvider>
+                </NotificationProvider>
+              </ChatbotProvider>
+            </ProfileProvider>
+          </PrivacyProvider>
         </SeniorsModeProvider>
       </ThemeProvider>
     );
@@ -98,6 +101,7 @@ export default function BudgetAppLayout({ children }: { children: React.ReactNod
   return (
     <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
       <SeniorsModeProvider>
+        <PrivacyProvider>
         <ProfileProvider>
           <ChatbotProvider>
             <NotificationProvider>
@@ -234,6 +238,7 @@ export default function BudgetAppLayout({ children }: { children: React.ReactNod
             </NotificationProvider>
           </ChatbotProvider>
         </ProfileProvider>
+        </PrivacyProvider>
       </SeniorsModeProvider>
     </ThemeProvider>
   );
