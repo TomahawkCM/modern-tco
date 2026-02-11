@@ -2234,7 +2234,12 @@
       "grossVsNet": "Gross vs Net",
       "gross": "Gross",
       "refundsTotal": "Refunds",
-      "net": "Net"
+      "net": "Net",
+      "expectRefund": "Expect Refund",
+      "expectRefundDescription": "Mark this transaction as expecting a refund",
+      "notes": "Notes",
+      "notesPlaceholder": "Any additional details about this refund...",
+      "submitting": "Submitting..."
     },
     "weeklyRecap": {
       "title": "Weekly Recap",
@@ -2310,7 +2315,21 @@
       "purchasePrice": "Purchase Price",
       "mortgageBalance": "Mortgage Balance",
       "monthlyIncome": "Monthly Income",
-      "propertyTax": "Property Tax"
+      "propertyTax": "Property Tax",
+      "notFound": "Property not found",
+      "backToProperties": "Back to Properties",
+      "appreciation": "Appreciation",
+      "totalAppreciation": "Total Appreciation",
+      "rentalROI": "Rental ROI",
+      "monthlyROI": "Monthly ROI",
+      "annualROI": "Annual ROI",
+      "occupancyRate": "Occupancy Rate",
+      "loanDetails": "Loan Details",
+      "lender": "Lender",
+      "interestRate": "Interest Rate",
+      "currentBalance": "Current Balance",
+      "monthlyPayment": "Monthly Payment",
+      "notes": "Notes"
     },
     "events": {
       "title": "Event Budgets",

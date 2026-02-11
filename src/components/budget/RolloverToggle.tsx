@@ -32,7 +32,7 @@ export function RolloverToggle({ enabled, onToggle, className }: RolloverToggleP
         <span
           className={cn(
             'pointer-events-none block h-4 w-4 rounded-full bg-white shadow-lg transition-transform',
-            enabled ? 'translate-x-4' : 'translate-x-0'
+            enabled ? 'translate-x-4 rtl:-translate-x-4' : 'translate-x-0'
           )}
         />
       </button>

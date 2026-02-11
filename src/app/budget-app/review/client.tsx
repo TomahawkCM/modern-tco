@@ -3,6 +3,7 @@
 import { GlassCard } from '@/components/budget/ui/GlassCard';
 import { db } from '@/lib/budget-db';
 import { useLiveQuery } from 'dexie-react-hooks';
+import { useDefaultCurrency } from '@/hooks/useDefaultCurrency';
 import { CheckCircle2, XCircle, ArrowLeft, ArrowRight, Inbox } from 'lucide-react';
 import { useFormatter, useTranslations } from 'next-intl';
 import { useState, useCallback, useEffect, useMemo } from 'react';
@@ -12,6 +13,7 @@ import type { Transaction } from '@/types/budget';
 export function ClientReview() {
   const t = useTranslations('budget.review');
   const format = useFormatter();
+  const currency = useDefaultCurrency();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [reviewedIds, setReviewedIds] = useState<Set<string>>(new Set());
 
@@ -54,7 +56,7 @@ export function ClientReview() {
     return () => window.removeEventListener('keydown', handleKey);
   }, [handleApprove, handleSkip]);
 
-  const fmtCurrency = (v: number) => format.number(Math.abs(v), { style: 'currency', currency: 'USD' });
+  const fmtCurrency = (v: number) => format.number(Math.abs(v), { style: 'currency', currency });
 
   return (
     <div className="flex min-h-[60vh] flex-col items-center justify-center space-y-6 p-4 md:p-6">

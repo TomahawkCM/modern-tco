@@ -3,6 +3,7 @@
 import { GlassCard } from '@/components/budget/ui/GlassCard';
 import { calculateCurrentNetWorth, NET_WORTH_MILESTONES, detectMilestones } from '@/lib/net-worth/calculator';
 import { getHistoricalSnapshots, takeMonthlySnapshot } from '@/lib/net-worth/snapshot-store';
+import { useDefaultCurrency } from '@/hooks/useDefaultCurrency';
 import { Landmark, TrendingUp, TrendingDown, Target } from 'lucide-react';
 import { useFormatter, useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
@@ -12,6 +13,7 @@ import type { StoredNetWorthSnapshot } from '@/types/budget';
 export function ClientNetWorth() {
   const t = useTranslations('budget.netWorth');
   const format = useFormatter();
+  const currency = useDefaultCurrency();
   const [breakdown, setBreakdown] = useState<NetWorthBreakdown | null>(null);
   const [snapshots, setSnapshots] = useState<StoredNetWorthSnapshot[]>([]);
   const [milestones, setMilestones] = useState<number[]>([]);
@@ -37,7 +39,7 @@ export function ClientNetWorth() {
     load();
   }, []);
 
-  const fmtCurrency = (v: number) => format.number(v, { style: 'currency', currency: 'USD' });
+  const fmtCurrency = (v: number) => format.number(v, { style: 'currency', currency });
 
   if (!breakdown) {
     return (

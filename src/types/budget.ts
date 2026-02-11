@@ -493,6 +493,7 @@ export interface Holding {
   symbol: string; // Stock ticker (e.g., "AAPL", "MSFT", "VGRO.TO")
   quantity: number; // Number of shares/units
   purchasePrice: number; // Average purchase price per share
+  currentPrice?: number; // Current market price per share (if available)
   purchaseDate: Date; // Date of purchase (or average date for multiple buys)
   notes?: string;
   createdAt: Date;

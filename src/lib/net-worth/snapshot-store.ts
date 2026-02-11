@@ -1,5 +1,3 @@
-'use client';
-
 /**
  * Net Worth Snapshot Store
  *

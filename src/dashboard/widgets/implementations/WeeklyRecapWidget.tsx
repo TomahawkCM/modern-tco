@@ -3,6 +3,7 @@
 import { GlassCard } from '@/components/budget/ui/GlassCard';
 import { db } from '@/lib/budget-db';
 import { useLiveQuery } from 'dexie-react-hooks';
+import { useDefaultCurrency } from '@/hooks/useDefaultCurrency';
 import { CalendarDays, TrendingDown, TrendingUp } from 'lucide-react';
 import { useFormatter, useTranslations } from 'next-intl';
 import NextLink from 'next/link';
@@ -16,6 +17,7 @@ interface WeeklyRecapWidgetProps {
 export function WeeklyRecapWidget({ config }: WeeklyRecapWidgetProps) {
   const t = useTranslations('dashboard.widgets.weeklyRecap');
   const format = useFormatter();
+  const currency = useDefaultCurrency();
 
   const transactions = useLiveQuery(async () => {
     try {
@@ -88,7 +90,7 @@ export function WeeklyRecapWidget({ config }: WeeklyRecapWidgetProps) {
 
         <div className="mb-4 flex items-end gap-2">
           <span className="text-2xl font-bold text-white">
-            {format.number(stats.thisWeekTotal, { style: 'currency', currency: 'USD' })}
+            {format.number(stats.thisWeekTotal, { style: 'currency', currency })}
           </span>
           <div className={`flex items-center gap-0.5 text-xs ${isDown ? 'text-emerald-400' : 'text-red-400'}`}>
             {isDown ? <TrendingDown className="h-3 w-3" /> : <TrendingUp className="h-3 w-3" />}
@@ -105,7 +107,7 @@ export function WeeklyRecapWidget({ config }: WeeklyRecapWidgetProps) {
                   <div className="flex justify-between text-xs">
                     <span className="text-slate-300">{cat.name}</span>
                     <span className="text-slate-400">
-                      {format.number(cat.amount, { style: 'currency', currency: 'USD' })}
+                      {format.number(cat.amount, { style: 'currency', currency })}
                     </span>
                   </div>
                   <div className="h-1.5 overflow-hidden rounded-full bg-slate-700">

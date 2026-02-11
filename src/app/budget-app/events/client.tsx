@@ -3,6 +3,7 @@
 import { GlassCard } from '@/components/budget/ui/GlassCard';
 import { getActiveEvents, calculateProgress } from '@/lib/event-budgets/event-budget-engine';
 import { getRelevantTemplates } from '@/lib/event-budgets/seasonal-templates';
+import { useDefaultCurrency } from '@/hooks/useDefaultCurrency';
 import { PartyPopper, Plus, Calendar, Sparkles } from 'lucide-react';
 import { useFormatter, useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
@@ -19,6 +20,7 @@ interface EventWithProgress {
 export function ClientEvents() {
   const t = useTranslations('budget.events');
   const format = useFormatter();
+  const currency = useDefaultCurrency();
   const [events, setEvents] = useState<EventWithProgress[]>([]);
   const [templates, setTemplates] = useState<ReturnType<typeof getRelevantTemplates>>([]);
 
@@ -37,7 +39,7 @@ export function ClientEvents() {
     load();
   }, []);
 
-  const fmtCurrency = (v: number) => format.number(v, { style: 'currency', currency: 'USD' });
+  const fmtCurrency = (v: number) => format.number(v, { style: 'currency', currency });
 
   return (
     <div className="space-y-6 p-4 md:p-6">

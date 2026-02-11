@@ -13,6 +13,7 @@ import {
   type CategoryPartial,
   type SafeToSpendData,
 } from "@/lib/budget/safe-to-spend";
+import { useDefaultCurrency } from "@/hooks/useDefaultCurrency";
 import { useLiveQuery } from "dexie-react-hooks";
 import { ShieldCheck, Wallet } from "lucide-react";
 import { useFormatter, useTranslations } from "next-intl";
@@ -26,6 +27,7 @@ interface SafeToSpendWidgetProps {
 export function SafeToSpendWidget({ config }: SafeToSpendWidgetProps) {
   const t = useTranslations("dashboard.widgets.safeToSpend");
   const format = useFormatter();
+  const currency = useDefaultCurrency();
 
   // Reactively calculate safe-to-spend whenever DB data changes
   const data = useLiveQuery(
@@ -41,7 +43,7 @@ export function SafeToSpendWidget({ config }: SafeToSpendWidgetProps) {
         : "";
 
   const formatCurrency = (value: number) =>
-    format.number(value, { style: "currency", currency: "USD" });
+    format.number(value, { style: "currency", currency });
 
   return (
     <div className={spanClass}>

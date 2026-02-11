@@ -1,5 +1,3 @@
-'use client';
-
 /**
  * Refund Tracking System
  *

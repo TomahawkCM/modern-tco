@@ -3,9 +3,11 @@
 import { GlassCard } from '@/components/budget/ui/GlassCard';
 import { runScenario } from '@/lib/scenarios/scenario-engine';
 import type { ScenarioInput, ScenarioResult, FinancialState, ScenarioType } from '@/lib/scenarios/scenario-types';
+import { useDefaultCurrency } from '@/hooks/useDefaultCurrency';
+import { db } from '@/lib/budget-db';
 import { FlaskConical, ArrowRight, TrendingUp, TrendingDown } from 'lucide-react';
 import { useFormatter, useTranslations } from 'next-intl';
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect, useMemo } from 'react';
 
 const SCENARIO_PRESETS: Array<{ type: ScenarioType; icon: string; key: string; inputField: keyof ScenarioInput }> = [
   { type: 'cancel_subscription', icon: '\u{1F4B3}', key: 'cancelSubscription', inputField: 'subscriptionAmount' },
@@ -18,21 +20,71 @@ const SCENARIO_PRESETS: Array<{ type: ScenarioType; icon: string; key: string; i
 export function ClientScenarios() {
   const t = useTranslations('budget.scenarios');
   const format = useFormatter();
+  const currency = useDefaultCurrency();
   const [selectedPreset, setSelectedPreset] = useState<typeof SCENARIO_PRESETS[number] | null>(null);
   const [amount, setAmount] = useState('');
   const [result, setResult] = useState<ScenarioResult | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [financialData, setFinancialData] = useState<{
+    monthlyIncome: number;
+    monthlyExpenses: number;
+    totalDebt: number;
+    monthlyDebtPayment: number;
+  }>({ monthlyIncome: 0, monthlyExpenses: 0, totalDebt: 0, monthlyDebtPayment: 0 });
 
-  const fmtCurrency = (v: number) => format.number(v, { style: 'currency', currency: 'USD' });
+  // Load real financial data from IndexedDB
+  useEffect(() => {
+    async function loadFinancialData() {
+      try {
+        const [accounts, transactions, loans] = await Promise.all([
+          db.accounts.toArray(),
+          db.transactions.toArray(),
+          db.loans.toArray(),
+        ]);
 
-  const currentState: FinancialState = {
-    monthlyIncome: 5000,
-    monthlyExpenses: 3500,
-    totalDebt: 15000,
-    monthlyDebtPayment: 500,
-    monthlySavings: 1500,
-    savingsRate: 30,
-    healthScore: 72,
-  };
+        // Calculate monthly income/expenses from last 3 months of transactions
+        const threeMonthsAgo = new Date();
+        threeMonthsAgo.setMonth(threeMonthsAgo.getMonth() - 3);
+        const recentTxs = transactions.filter(
+          tx => !tx.isSplit && new Date(tx.date) >= threeMonthsAgo
+        );
+        const months = Math.max(1, 3); // 3-month average
+        const totalIncome = recentTxs
+          .filter(tx => tx.amount > 0)
+          .reduce((sum, tx) => sum + tx.amount, 0);
+        const totalExpenses = recentTxs
+          .filter(tx => tx.amount < 0)
+          .reduce((sum, tx) => sum + Math.abs(tx.amount), 0);
+
+        const monthlyIncome = Math.round((totalIncome / months) * 100) / 100;
+        const monthlyExpenses = Math.round((totalExpenses / months) * 100) / 100;
+
+        // Debt from active loans
+        const activeLoans = loans.filter(l => l.status === 'active');
+        const totalDebt = activeLoans.reduce((sum, l) => sum + l.currentBalance, 0);
+        const monthlyDebtPayment = activeLoans.reduce((sum, l) => sum + l.monthlyPayment, 0);
+
+        setFinancialData({ monthlyIncome, monthlyExpenses, totalDebt, monthlyDebtPayment });
+      } catch {
+        // Fallback to zeros if DB unavailable
+      } finally {
+        setLoading(false);
+      }
+    }
+    loadFinancialData();
+  }, []);
+
+  const currentState: FinancialState = useMemo(() => {
+    const { monthlyIncome, monthlyExpenses, totalDebt, monthlyDebtPayment } = financialData;
+    const monthlySavings = Math.max(0, monthlyIncome - monthlyExpenses);
+    const savingsRate = monthlyIncome > 0 ? Math.round((monthlySavings / monthlyIncome) * 100) : 0;
+    // Simple health score: 0-100 based on savings rate and debt ratio
+    const debtRatio = monthlyIncome > 0 ? totalDebt / (monthlyIncome * 12) : 0;
+    const healthScore = Math.min(100, Math.max(0, Math.round(savingsRate * 1.5 + Math.max(0, 50 - debtRatio * 50))));
+    return { monthlyIncome, monthlyExpenses, totalDebt, monthlyDebtPayment, monthlySavings, savingsRate, healthScore };
+  }, [financialData]);
+
+  const fmtCurrency = (v: number) => format.number(v, { style: 'currency', currency });
 
   const handleRun = useCallback(() => {
     if (!selectedPreset || !amount) return;
@@ -46,6 +98,17 @@ export function ClientScenarios() {
 
   const cashFlow = (state: FinancialState) => state.monthlyIncome - state.monthlyExpenses;
   const annualSavings = (state: FinancialState) => state.monthlySavings * 12;
+
+  if (loading) {
+    return (
+      <div className="space-y-6 p-4 md:p-6">
+        <div className="h-8 w-48 animate-pulse rounded bg-slate-700" />
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {[1, 2, 3].map(i => <div key={i} className="h-24 animate-pulse rounded-xl bg-slate-800/50" />)}
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-6 p-4 md:p-6">

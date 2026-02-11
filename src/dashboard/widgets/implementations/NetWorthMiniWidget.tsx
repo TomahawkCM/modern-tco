@@ -2,6 +2,7 @@
 
 import { GlassCard } from '@/components/budget/ui/GlassCard';
 import { calculateCurrentNetWorth } from '@/lib/net-worth/calculator';
+import { useDefaultCurrency } from '@/hooks/useDefaultCurrency';
 import { Landmark, TrendingDown, TrendingUp } from 'lucide-react';
 import { useFormatter, useTranslations } from 'next-intl';
 import NextLink from 'next/link';
@@ -15,6 +16,7 @@ interface NetWorthMiniWidgetProps {
 export function NetWorthMiniWidget({ config }: NetWorthMiniWidgetProps) {
   const t = useTranslations('dashboard.widgets.netWorthMini');
   const format = useFormatter();
+  const currency = useDefaultCurrency();
   const [data, setData] = useState<{ netWorth: number; assets: number; liabilities: number } | null>(null);
 
   useEffect(() => {
@@ -52,21 +54,21 @@ export function NetWorthMiniWidget({ config }: NetWorthMiniWidgetProps) {
         {data ? (
           <div className="flex flex-1 flex-col justify-center">
             <p className="text-3xl font-bold text-white">
-              {format.number(data.netWorth, { style: 'currency', currency: 'USD' })}
+              {format.number(data.netWorth, { style: 'currency', currency })}
             </p>
             <div className="mt-3 flex gap-4 text-xs">
               <div className="flex items-center gap-1">
                 <TrendingUp className="h-3 w-3 text-emerald-400" />
                 <span className="text-slate-400">{t('assets')}:</span>
                 <span className="text-emerald-400">
-                  {format.number(data.assets, { style: 'currency', currency: 'USD' })}
+                  {format.number(data.assets, { style: 'currency', currency })}
                 </span>
               </div>
               <div className="flex items-center gap-1">
                 <TrendingDown className="h-3 w-3 text-red-400" />
                 <span className="text-slate-400">{t('liabilities')}:</span>
                 <span className="text-red-400">
-                  {format.number(data.liabilities, { style: 'currency', currency: 'USD' })}
+                  {format.number(data.liabilities, { style: 'currency', currency })}
                 </span>
               </div>
             </div>

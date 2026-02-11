@@ -2,6 +2,7 @@
 
 import { GlassCard } from '@/components/budget/ui/GlassCard';
 import { getActiveEvents, calculateProgress } from '@/lib/event-budgets/event-budget-engine';
+import { useDefaultCurrency } from '@/hooks/useDefaultCurrency';
 import { PartyPopper, Calendar } from 'lucide-react';
 import { useFormatter, useTranslations } from 'next-intl';
 import NextLink from 'next/link';
@@ -23,6 +24,7 @@ interface EventWithProgress {
 export function EventBudgetWidget({ config }: EventBudgetWidgetProps) {
   const t = useTranslations('dashboard.widgets.eventBudget');
   const format = useFormatter();
+  const currency = useDefaultCurrency();
   const [events, setEvents] = useState<EventWithProgress[]>([]);
 
   useEffect(() => {
@@ -78,9 +80,9 @@ export function EventBudgetWidget({ config }: EventBudgetWidgetProps) {
                 <div className="flex justify-between text-sm">
                   <span className="font-medium text-slate-200">{event.name}</span>
                   <span className="text-slate-400">
-                    {format.number(spent, { style: 'currency', currency: 'USD' })}
+                    {format.number(spent, { style: 'currency', currency })}
                     {' / '}
-                    {format.number(event.totalBudget, { style: 'currency', currency: 'USD' })}
+                    {format.number(event.totalBudget, { style: 'currency', currency })}
                   </span>
                 </div>
                 <div className="h-1.5 overflow-hidden rounded-full bg-slate-700">

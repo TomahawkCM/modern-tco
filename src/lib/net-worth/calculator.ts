@@ -1,5 +1,3 @@
-'use client';
-
 /**
  * Net Worth Calculator
  *
@@ -50,8 +48,9 @@ export async function calculateCurrentNetWorth(): Promise<NetWorthBreakdown> {
     .filter((a: Account) => a.type === 'savings')
     .reduce((sum: number, a: Account) => sum + a.balance, 0);
 
+  // Use currentPrice (market value) when available, fall back to purchasePrice (cost basis)
   const investments = holdings.reduce(
-    (sum: number, h: Holding) => sum + h.quantity * h.purchasePrice,
+    (sum: number, h: Holding) => sum + h.quantity * (h.currentPrice ?? h.purchasePrice),
     0
   );
 

@@ -3,6 +3,7 @@
 import { GlassCard } from '@/components/budget/ui/GlassCard';
 import { getAllProperties, getTotalPropertyValue, calculateEquity, calculateAppreciation } from '@/lib/property/property-calculator';
 import { db } from '@/lib/budget-db';
+import { useDefaultCurrency } from '@/hooks/useDefaultCurrency';
 import { Building2, Plus, TrendingUp } from 'lucide-react';
 import { useFormatter, useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
@@ -11,6 +12,7 @@ import type { Property, Loan } from '@/types/budget';
 export function ClientProperties() {
   const t = useTranslations('budget.property');
   const format = useFormatter();
+  const currency = useDefaultCurrency();
   const [properties, setProperties] = useState<Property[]>([]);
   const [loans, setLoans] = useState<Loan[]>([]);
   const [totalValue, setTotalValue] = useState(0);
@@ -28,7 +30,7 @@ export function ClientProperties() {
     load();
   }, []);
 
-  const fmtCurrency = (v: number) => format.number(v, { style: 'currency', currency: 'USD' });
+  const fmtCurrency = (v: number) => format.number(v, { style: 'currency', currency });
 
   return (
     <div className="space-y-6 p-4 md:p-6">
