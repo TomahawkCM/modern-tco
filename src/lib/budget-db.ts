@@ -23,6 +23,13 @@ import type {
   LoanPayment,
   Subscription,
   ExcludedSubscription,
+  BudgetRollover,
+  GamificationEvent,
+  MerchantRule,
+  StoredNetWorthSnapshot,
+  Property,
+  EventBudget,
+  EventBudgetCategory,
 } from '@/types/budget';
 import type { InAppNotification } from '@/types/notifications';
 import type { Profile, ActivityLogEntry } from '@/types/profile';
@@ -35,7 +42,18 @@ import {
 } from './encryption';
 
 // Re-export types for convenience
-export type { InvestmentAccount, Holding, Subscription } from '@/types/budget';
+export type {
+  InvestmentAccount,
+  Holding,
+  Subscription,
+  BudgetRollover,
+  GamificationEvent,
+  MerchantRule,
+  StoredNetWorthSnapshot,
+  Property,
+  EventBudget,
+  EventBudgetCategory,
+} from '@/types/budget';
 
 /**
  * Budget Database Schema
@@ -106,6 +124,14 @@ export class BudgetDatabase extends Dexie {
   activityLog!: Table<ActivityLogEntry>;
   // Notification Center (Phase 18)
   inAppNotifications!: Table<InAppNotification>;
+  // New tables (Phase 19)
+  budgetRollovers!: Table<BudgetRollover>;
+  gamificationState!: Table<GamificationEvent>;
+  merchantRules!: Table<MerchantRule>;
+  netWorthSnapshots!: Table<StoredNetWorthSnapshot>;
+  properties!: Table<Property>;
+  eventBudgets!: Table<EventBudget>;
+  eventBudgetCategories!: Table<EventBudgetCategory>;
 
   constructor() {
     super(getDatabaseName());
@@ -548,6 +574,42 @@ export class BudgetDatabase extends Dexie {
       activityLog: 'id, profileId, action, entityType, timestamp, [profileId+timestamp]',
       // New: In-app notifications for notification center
       inAppNotifications: 'id, type, status, priority, createdAt, snoozedUntil, sourceType, sourceId'
+    });
+
+    // Version 19: Add 7 new tables for remaining budget features
+    // Budget rollovers, gamification, merchant rules, net worth snapshots,
+    // properties, event budgets, and event budget categories
+    this.version(19).stores({
+      accounts: 'id, name, institution, type, bankId',
+      transactions: 'id, accountId, date, category, amount, description, splitFromId, isSplit, refundStatus, eventBudgetId',
+      categories: 'id, name, type, order',
+      budgets: 'id, categoryId, period, startDate, ownerId, visibility',
+      futurePurchases: 'id, targetDate, priority, isCompleted',
+      retirementPlans: 'id, name, createdAt',
+      importMappings: 'id, institution, accountId',
+      importHistory: 'id, importDate, fileFormat, bank, fileName',
+      receipts: 'id, transactionId, uploadedAt, mimeType, fileSize',
+      investmentAccounts: 'id, type, name, createdAt',
+      holdings: 'id, accountId, symbol, purchaseDate, [accountId+symbol]',
+      priceCache: 'id, symbol, fetchedAt, source',
+      anomalyFeedback: 'id, transactionId, merchant, category, createdAt',
+      predictionAccuracy: 'id, category, month, recordedAt',
+      loans: 'id, type, status, lender, nextPaymentDate, accountId, paymentFrequency',
+      loanPayments: 'id, loanId, date, transactionId, isScheduled',
+      subscriptions: 'id, name, status, category, nextBillingDate, billingCycle, merchantToken, source',
+      excludedSubscriptions: 'id, merchantToken, excludedAt',
+      pairedDevices: 'id, deviceId, deviceName, trustLevel, lastSyncAt, createdAt',
+      profiles: 'id, name, isDefault, createdAt',
+      activityLog: 'id, profileId, action, entityType, timestamp, [profileId+timestamp]',
+      inAppNotifications: 'id, type, status, priority, createdAt, snoozedUntil, sourceType, sourceId',
+      // New tables
+      budgetRollovers: 'id, budgetId, month, [budgetId+month]',
+      gamificationState: 'id, eventType, timestamp',
+      merchantRules: 'id, merchantToken, category, createdAt',
+      netWorthSnapshots: 'id, date, netWorth',
+      properties: 'id, name, currency, type, createdAt',
+      eventBudgets: 'id, name, status, startDate, endDate',
+      eventBudgetCategories: 'id, eventBudgetId, [eventBudgetId+categoryName]',
     });
   }
 }

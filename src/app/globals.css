@@ -68,6 +68,59 @@
     --spacing-page-y: 1.5rem;
     --spacing-section: 3rem;
     --spacing-card-padding: 1.5rem;
+
+    /* 8px Spacing Grid */
+    --space-1: 4px;
+    --space-2: 8px;
+    --space-3: 12px;
+    --space-4: 16px;
+    --space-6: 24px;
+    --space-8: 32px;
+    --space-12: 48px;
+    --space-16: 64px;
+
+    /* Touch Target Minimums */
+    --touch-min: 44px;
+    --touch-comfortable: 48px;
+    --touch-seniors: 56px;
+    --touch-fab: 56px;
+
+    /* Financial Semantic Colors — Light Mode */
+    --color-income: #0099E6;
+    --color-expense: #E6005E;
+    --color-savings: #00CC62;
+    --color-financial-warning: #D97706;
+    --color-financial-danger: #DC2626;
+    --color-financial-accent: #0D9488;
+
+    /* Surface Colors — Light Mode */
+    --color-bg: #FAFAFA;
+    --color-surface: #FFFFFF;
+    --color-surface-hover: #F8F9FA;
+    --color-border-subtle: #DEE2E6;
+    --color-text-primary: #212529;
+    --color-text-secondary: #868E96;
+    --color-text-disabled: #ADB5BD;
+
+    /* Animation Tokens */
+    --duration-instant: 0ms;
+    --duration-fast: 100ms;
+    --duration-normal: 200ms;
+    --duration-emphasized: 300ms;
+    --duration-dramatic: 500ms;
+    --ease-out: cubic-bezier(0.0, 0.0, 0.2, 1.0);
+    --ease-in: cubic-bezier(0.4, 0.0, 1.0, 1.0);
+    --ease-standard: cubic-bezier(0.4, 0.0, 0.2, 1.0);
+
+    /* Font Stacks */
+    --font-body: system-ui, -apple-system, 'Segoe UI', sans-serif;
+    --font-mono: 'JetBrains Mono', 'SF Mono', 'Cascadia Code', monospace;
+
+    /* Safe Area Insets (env() with fallbacks) */
+    --safe-top: env(safe-area-inset-top, 0px);
+    --safe-bottom: env(safe-area-inset-bottom, 0px);
+    --safe-left: env(safe-area-inset-left, 0px);
+    --safe-right: env(safe-area-inset-right, 0px);
   }
 
   .dark {
@@ -99,6 +152,23 @@
     --border: 0 0% 15%; /* gray-800 */
     --input: 0 0% 15%; /* gray-800 */
     --ring: 173 80% 40%; /* teal-500 */
+
+    /* Financial Semantic Colors — Dark Mode */
+    --color-income: #1AB5FF;
+    --color-expense: #FF1A7A;
+    --color-savings: #1AFF88;
+    --color-financial-warning: #F59E0B;
+    --color-financial-danger: #EF4444;
+    --color-financial-accent: #14B8A6;
+
+    /* Surface Colors — Dark Mode */
+    --color-bg: #1A1B1E;
+    --color-surface: #25262B;
+    --color-surface-hover: #2C2E33;
+    --color-border-subtle: #373A40;
+    --color-text-primary: #C1C2C5;
+    --color-text-secondary: #909296;
+    --color-text-disabled: #5C5F66;
   }
 }
 
@@ -127,6 +197,27 @@
 /* Glassmorphism (Clean version, used sparingly) */
 .glass {
   @apply border border-white/20 bg-white/80 backdrop-blur-md dark:border-white/10 dark:bg-black/80;
+}
+
+/* Financial Value Typography */
+.financial-value,
+[data-financial] {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+
+/* Dark Mode Card Glow Effect */
+.dark .card-interactive:hover {
+  box-shadow: 0 0 20px rgba(20, 184, 166, 0.08);
+  border-color: rgba(20, 184, 166, 0.2);
+}
+
+/* Dark Mode Glassmorphism Surface */
+.dark .glass-surface {
+  background: rgba(37, 38, 43, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 /* Utilities */

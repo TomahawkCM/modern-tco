@@ -35,7 +35,12 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#1e40af",
+  maximumScale: 1,
+  viewportFit: "cover",
+  themeColor: [
+    { media: "(prefers-color-scheme: dark)", color: "#14B8A6" },
+    { media: "(prefers-color-scheme: light)", color: "#0D9488" },
+  ],
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -55,6 +60,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         {/* PWA Manifest */}
         <link rel="manifest" href="/manifest.json" />
+
+        {/* Apple PWA Meta Tags */}
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="apple-mobile-web-app-title" content="Budget" />
+        <link rel="apple-touch-icon" href="/icons/budget-app-192.png" />
 
         {/* Preconnect to external domains for performance */}
         <link rel="preconnect" href="https://qnwcwoutgarhqxlgsjzs.supabase.co" />
