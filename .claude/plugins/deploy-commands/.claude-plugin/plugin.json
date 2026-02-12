@@ -1,8 +1,0 @@
-{
-  "name": "deploy-commands",
-  "description": "Production deployment automation with GitHub Actions monitoring and error analysis",
-  "author": {
-    "name": "Modern TCO",
-    "email": "support@modern-tco.app"
-  }
-}
