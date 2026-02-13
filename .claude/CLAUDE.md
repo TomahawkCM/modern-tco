@@ -82,7 +82,7 @@ Dual-app monorepo:
 | context7 | Library documentation lookup |
 | docker | Container management |
 | archon | Project/task management (ID: `9c56f01c-759a-42b1-bad4-06b71f2c4db9`) |
-| vercel | Vercel deployment & project management |
+| vercel | Vercel deployments & config — use `vercel` CLI via Bash |
 
 ## Detailed Docs
 
